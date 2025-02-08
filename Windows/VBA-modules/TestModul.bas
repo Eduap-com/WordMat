@@ -1,7 +1,7 @@
 Attribute VB_Name = "TestModul"
 Option Explicit
     Private visok As Boolean
-    Private UfWait2 As UserFormWaitForMaxima
+    Private UFwait2 As UserFormWaitForMaxima
     Private ErrCount As Long
     Private TestCount As Long
     Private ContCount As Integer
@@ -36,12 +36,12 @@ Sub RunTestSequence()
     
     If MsgBox("Are you sure want to conduct a test. The document will be filled with calculations. It can take some time.", vbOKCancel, "Confirm") = vbCancel Then Exit Sub
         
-    Set UfWait2 = New UserFormWaitForMaxima
-    UfWait2.Label1.Font.Size = 12
-    UfWait2.Label_tip.Font.Size = 10
-    UfWait2.Show vbModeless
+    Set UFwait2 = New UserFormWaitForMaxima
+    UFwait2.Label1.Font.Size = 12
+    UFwait2.Label_tip.Font.Size = 10
+    UFwait2.Show vbModeless
     
-    CASengine = 0 ' 0=maxima
+    CASengineTempOnly = 0 ' 0=maxima
     MaximaExact = 1 ' 0 - auto ' 1 - exact ' 2 - num
     MaximaCifre = 7
     MaximaDecOutType = 2 ' bc
@@ -113,7 +113,9 @@ Sub RunTestSequence()
     ' Man kan indtaste flere korrekte resultater, bare adskil med @$   ----------------------------------------
     'calculation tests
     If TestBeregn("2+3", "=5") Then GoTo slut
-    TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=(-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90))+(41,89983049571472" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2@$=-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90)+(41,899830495714724" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2"
+    TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90)+(41,89983" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889) +2"
+
+'    TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=(-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90))+(41,89983049571472" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2@$=-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90)+(41,899830495714724" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2"
     If StopNow Then GoTo slut
     TestBeregn "1/5 2", "=2/5"
     If StopNow Then GoTo slut
@@ -223,7 +225,7 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     If TestSolve("e^(-x)=2", "x", "x=-ln" & VBA.ChrW(8289) & "(2)") Then GoTo slut
     If TestSolve("1=1,5" & VBA.ChrW(183) & "x^2+0,5/x^0,5 -1", "x", "x=0,06287224    " & VBA.ChrW(8744) & "    x=1") Then GoTo slut ' kræver numerisk løsning. Tidligere to_poly fejl, med kun en løsning.
-    MaximaExact = 2
+    MaximaExact = 2 ' num
     InsertTestMath "Definer: " & VBA.ChrW(963) & ">0"
     If TestSolve("0,1=" & VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^5" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "" & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((y-7)/" & VBA.ChrW(963) & ")^2 ) dy", "sigma", VBA.ChrW(963) & "=1,560608") Then GoTo slut
     InsertSletDef
@@ -424,7 +426,7 @@ Sub RunTestSequence()
 
 ggbtest:
     ' GeoGebra test
-    CASengine = 2
+    CASengineTempOnly = 2
     MaximaExact = 1 ' 1=exact
     '    Selection.TypeParagraph
     '    Selection.TypeText "GeoGebra CAS Test"
@@ -472,7 +474,7 @@ ggbtest:
     
     'Fejler
     MaximaExact = 0
-    CASengine = 0
+    CASengineTempOnly = 0
     If TestSolve("(" & VBA.ChrW(9608) & "(t^3-t@t))=(" & VBA.ChrW(9608) & "((-15)/64@ 1/4))", "t", "t=1/4") Then GoTo slut ' Denne giver 3 løsninger, men der er kun den ene. Det står direkte i 2. koordinaten. GeoGebra virker
 
     
@@ -493,15 +495,20 @@ slut:
     MaximaDecOutType = 2
     MaximaUnits = False
     MaximaExact = 0 ' Auto
-    CASengine = 0 ' Maxima
+    CASengineTempOnly = 0 ' Maxima
     
     AllR.End = Selection.End
     AllR.Select
     
-    Unload UfWait2
+    Unload UFwait2
 End Sub
 Function StopNow() As Boolean
     If omax.StopNow Then
+        StopNow = True
+        Exit Function
+    End If
+    If UFwait2.StopNow Then
+        omax.StopNow = True
         StopNow = True
         Exit Function
     End If
@@ -539,10 +546,10 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
         TypeText = "SolveDE"
     End If
     s = TestCount & ": " & TypeText & vbCrLf & "Error count: " & ErrCount
-    UfWait2.Label1.Caption = s
-    UfWait2.Label_tip.Caption = komm
+    UFwait2.Label1.Caption = s
+    UFwait2.Label_tip.Caption = komm
     If Instruk <> "" Then
-        UfWait2.Label_tip.Caption = komm & vbCrLf & Instruk
+        UFwait2.Label_tip.Caption = komm & vbCrLf & Instruk
     End If
     InsertTestMath komm, False
     DoEvents
@@ -626,7 +633,7 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
         Selection.Font.ColorIndex = wdAuto
         Selection.TypeParagraph
     End If
-    UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+    UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
     TestCount = TestCount + 1
 End Sub
 Sub CreateTestBeregn()
@@ -714,15 +721,15 @@ Sub GetTestString()
     Selection.TypeText (s)
 
 End Sub
-Function ConvertToVBAString(text As String) As String
+Function ConvertToVBAString(Text As String) As String
     Dim s As String, j As Integer, i As Integer
     s = ""
-    For j = 1 To Len(text)
-        i = AscW(Mid(text, j, 1))
+    For j = 1 To Len(Text)
+        i = AscW(Mid(Text, j, 1))
         If i > 200 Or i = 183 Then
             s = s & """ & VBA.ChrW(" & i & ") & """
         Else
-            s = s & Mid(text, j, 1)
+            s = s & Mid(Text, j, 1)
         End If
     Next
     If Left(s, 4) = """ & " Then
@@ -761,10 +768,10 @@ Function TestSolve(komm As String, Var As String, resul As String, Optional Inst
     
     Dim s As String
     s = TestCount & ": Solving equation" & vbCrLf & "Error count: " & ErrCount
-    UfWait2.Label1.Caption = s
-    UfWait2.Label_tip.Caption = komm
+    UFwait2.Label1.Caption = s
+    UFwait2.Label_tip.Caption = komm
     If Instruk <> "" Then
-        UfWait2.Label_tip.Caption = komm & vbCrLf & Instruk
+        UFwait2.Label_tip.Caption = komm & vbCrLf & Instruk
     End If
     InsertTestMath komm, False
     MaximaSolvePar (Var)
@@ -788,7 +795,7 @@ Function TestSolve(komm As String, Var As String, resul As String, Optional Inst
         Selection.Font.ColorIndex = wdAuto
         Selection.TypeParagraph
     End If
-    UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+    UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
     TestCount = TestCount + 1
 End Function
 
@@ -810,7 +817,7 @@ End Sub
 Sub testGetListItem()
 Dim ea As New ExpressionAnalyser
 
-ea.text = "dette er[ad;sdfs] en test ; hej(a;b{1;2}) ;{a;d} hallo"
+ea.Text = "dette er[ad;sdfs] en test ; hej(a;b{1;2}) ;{a;d} hallo"
 
 MsgBox ea.GetNextListItem()
 MsgBox ea.GetNextListItem()
@@ -903,7 +910,7 @@ Sub unicodevals()
     Dim s As String
     Dim i As Integer
     Dim c As Range
-    MsgBox Selection.text
+    MsgBox Selection.Text
     For Each c In Selection.Characters
         i = AscW(c)
         s = s & c & " - " & i & vbCrLf
@@ -913,20 +920,20 @@ Sub unicodevals()
 End Sub
 
 Sub unicodevals2()
-    Dim text As String
+    Dim Text As String
     Dim i As Integer
     Dim j As Integer
     Dim s As String
     Selection.OMaths.Linearize
     Selection.OMaths(1).ConvertToNormalText
-    text = Selection.text
+    Text = Selection.Text
     Selection.OMaths(1).ConvertToMathText
     Selection.OMaths(1).Range.Select
     Selection.OMaths.BuildUp
 
-    For j = 1 To Len(text)
-        i = AscW(Mid(text, j, 1))
-        s = s & Mid(text, j, 1) & " - " & i & vbCrLf
+    For j = 1 To Len(Text)
+        i = AscW(Mid(Text, j, 1))
+        s = s & Mid(Text, j, 1) & " - " & i & vbCrLf
     Next
     MsgBox s
 
@@ -934,7 +941,7 @@ End Sub
 Sub UnicodeValsToString()
 ' laver alle Omaths i selection om til en streng der kan indsættes i VBA-kode. Bruges primært til testmodul
 ' Strengene indsættes efter selection i rækkefølge. Hver på ny linje
-    Dim text As String
+    Dim Text As String
     Dim j As Integer
     Dim i As Integer
     Dim k As Integer, n As Integer
@@ -958,7 +965,7 @@ Sub UnicodeValsToString()
         Set mo = MoArr(k)
         mo.Linearize
         mo.ConvertToNormalText
-        Arr(k) = Trim(mo.Range.text)
+        Arr(k) = Trim(mo.Range.Text)
         mo.ConvertToMathText
         mo.Range.Select
         mo.BuildUp
@@ -967,14 +974,14 @@ Sub UnicodeValsToString()
     Selection.EndKey unit:=wdLine
 
     For k = 0 To UBound(Arr)
-        text = Arr(k)
+        Text = Arr(k)
         s = ""
-        For j = 1 To Len(text)
-            i = AscW(Mid(text, j, 1))
+        For j = 1 To Len(Text)
+            i = AscW(Mid(Text, j, 1))
             If i > 200 Or i = 183 Then
                 s = s & """ & VBA.ChrW(" & i & ") & """
             Else
-                s = s & Mid(text, j, 1)
+                s = s & Mid(Text, j, 1)
             End If
         Next
         If Left(s, 4) = """ & " Then

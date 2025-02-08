@@ -112,8 +112,8 @@ On Error GoTo Fejl
     Selection.Find.Font.Name = "Cambria Math"
     Selection.Find.Replacement.ClearFormatting
     With Selection.Find
-        .text = ","
-        .Replacement.text = ";"
+        .Text = ","
+        .Replacement.Text = ";"
         .Forward = True
         .Wrap = wdFindContinue
         .Format = True
@@ -130,8 +130,8 @@ On Error GoTo Fejl
     Selection.Find.Font.Name = "Cambria Math"
     Selection.Find.Replacement.ClearFormatting
     With Selection.Find
-        .text = "."
-        .Replacement.text = ","
+        .Text = "."
+        .Replacement.Text = ","
         .Forward = True
         .Wrap = wdFindContinue
         .Format = True
@@ -158,8 +158,8 @@ On Error GoTo Fejl
     Selection.Find.Font.Name = "Cambria Math"
     Selection.Find.Replacement.ClearFormatting
     With Selection.Find
-        .text = ","
-        .Replacement.text = "."
+        .Text = ","
+        .Replacement.Text = "."
         .Forward = True
         .Wrap = wdFindContinue
         .Format = True
@@ -176,8 +176,8 @@ On Error GoTo Fejl
     Selection.Find.Font.Name = "Cambria Math"
     Selection.Find.Replacement.ClearFormatting
     With Selection.Find
-        .text = ";"
-        .Replacement.text = ","
+        .Text = ";"
+        .Replacement.Text = ","
         .Forward = True
         .Wrap = wdFindContinue
         .Format = True
@@ -215,7 +215,7 @@ Sub SimpelUdregning()
         Selection.OMaths(1).Range.Select
         Selection.OMaths(1).Linearize
     End If
-    If Len(Selection.text) < 2 Then
+    If Len(Selection.Text) < 2 Then
 '        MsgBox "Marker det udtryk der skal beregnes. Udtrykket må kun indeholde tal, de fire regningsarter og ^ ."
         Set r = Selection.Range
 

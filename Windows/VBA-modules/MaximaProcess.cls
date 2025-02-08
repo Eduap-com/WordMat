@@ -110,7 +110,7 @@ On Error GoTo Fejl
 
     lastOutput = ""
     
-    ea.text = Command
+    ea.Text = Command
     nocmd = ea.CountText(";") + ea.CountText("$")
     mIndex = mIndex + nocmd
         

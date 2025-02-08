@@ -50,7 +50,7 @@ End Sub
 
 Private Sub CommandButton_ok_Click()
 Dim i As Integer
-    EquationName = Trim(TextBox1.text)
+    EquationName = Trim(TextBox1.Text)
     If InStr(EquationName, " ") > 0 Then
         EquationName = ""
         Label_error.visible = True
@@ -76,7 +76,7 @@ Private Sub Label_ok_Click()
 End Sub
 
 Private Sub ListBox1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    TextBox1.text = ListBox1.text
+    TextBox1.Text = ListBox1.Text
     TextBox1.SetFocus
 End Sub
 

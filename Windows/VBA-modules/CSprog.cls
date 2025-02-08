@@ -3409,6 +3409,14 @@ SA(698, 0) = "Anvender kvadratsætning til at faktorisere. fx til cirklens lignin
 SA(698, 1) = "Applies complete the square for all variables in expression"
 SA(698, 2) = ""
 
+SA(699, 0) = "Der er forsøgt at tage Fakultet af et negativt tal."
+SA(699, 1) = "Factorial of negative integers not defined"
+SA(699, 2) = ""
+
+SA(700, 0) = "Advarsel: Der var flere ligninger end variable i ligningssystemet. Var det meningen?"
+SA(700, 1) = "Warning: More equations than variables in the system. Was that intentional?"
+SA(700, 2) = ""
+
 'Problemet kunne ikke løses. Vil du prøve med en anden CAS motor?
 End Sub
 
@@ -4721,6 +4729,16 @@ Case 4: s = ""
 Case Else: s = "Maxima error"
 End Select
 MaximaError = s
+End Property
+Public Property Get MathError() As String
+Dim s As String
+Select Case SprogNr
+Case 1: s = "Matematikfejl"
+Case 3: s = "Error de matemáticas"
+Case 4: s = ""
+Case Else: s = "Math error"
+End Select
+MathError = s
 End Property
 Public Property Get SyntaxError() As String
 Dim s As String

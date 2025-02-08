@@ -65,8 +65,8 @@ Dim i As Integer, c As Integer
         
     MaximaCifre = ComboBox_cifre.Value
     If MaximaUnits Then
-        If OutUnits <> TextBox_outunits.text Then
-            OutUnits = TextBox_outunits.text
+        If OutUnits <> TextBox_outunits.Text Then
+            OutUnits = TextBox_outunits.Text
 '            omax.MaximaInputStreng = omax.MaximaInputStreng & "uforget(append(globalbaseunitlisting,globalderivedunitlisting))$"
 '            If TextBox_outunits.text <> "" Then omax.MaximaInputStreng = omax.MaximaInputStreng & "setunits(" & omax.ConvertUnits(TextBox_outunits.text) & ")$"
         End If
@@ -74,11 +74,11 @@ Dim i As Integer, c As Integer
     
     If NoEq <= 1 Then
         ListBox_vars.MultiSelect = fmMultiSelectSingle
-        If TextBox_variabel.text = "" Then
+        If TextBox_variabel.Text = "" Then
             SelectedVar = Svars(ListBox_vars.ListIndex)
     '        SelectedVar = ListBox_vars.value
         Else
-            SelectedVar = TextBox_variabel.text
+            SelectedVar = TextBox_variabel.Text
         End If
     Else
         For i = 0 To ListBox_vars.ListCount - 1
@@ -88,8 +88,8 @@ Dim i As Integer, c As Integer
                 c = c + 1
             End If
         Next
-        If Len(TextBox_variabel.text) > 0 Then
-            Arr = Split(TextBox_variabel.text, ",")
+        If Len(TextBox_variabel.Text) > 0 Then
+            Arr = Split(TextBox_variabel.Text, ",")
             For i = 0 To UBound(Arr)
                     SelectedVar = SelectedVar & Arr(i) & ","
                     c = c + 1
@@ -100,7 +100,7 @@ Dim i As Integer, c As Integer
         End If
     End If
     
-    TempDefs = TextBox_def.text
+    TempDefs = TextBox_def.Text
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
@@ -178,7 +178,7 @@ Private Sub UserForm_Activate()
         Label_unitwarning.visible = True
         Label_enheder.visible = True
         TextBox_outunits.visible = True
-        TextBox_outunits.text = OutUnits
+        TextBox_outunits.Text = OutUnits
     Else
         Label_unitwarning.visible = False
         Label_enheder.visible = False
@@ -207,7 +207,7 @@ Private Sub UserForm_Activate()
 
     SelectedVar = ""
     ListBox_vars.Clear
-    TextBox_variabel.text = ""
+    TextBox_variabel.Text = ""
     Svars = Split(Vars, ";")
     
     ' definitioner vises
@@ -220,7 +220,7 @@ Private Sub UserForm_Activate()
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
             ListBox_vars.AddItem (svar)
-            If UBound(Svars) > 0 Then TextBox_def.text = TextBox_def.text & svar & "=" & VbCrLfMac               ' midlertidige definitioner
+            If UBound(Svars) > 0 Then TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac               ' midlertidige definitioner
         End If
     Next
     If ListBox_vars.ListCount > 0 Then

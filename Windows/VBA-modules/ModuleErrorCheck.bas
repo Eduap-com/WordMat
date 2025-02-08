@@ -41,7 +41,7 @@ End Function
 Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) As ErrorDefinition
 ' Klassificerer og fortolker fejlen i en errordefinition.
 ' Checktext skal være output fra Maxima
-    Dim Pos As Integer, CheckText As String, CheckText2 As String
+    Dim Pos As Integer, CheckText As String, CheckText2 As String, s As String, s2 As String
     GetErrorDefinition.Stop = True
     CheckText = MaximaOutput & KommentarOutput
     CheckText2 = Replace(CheckText, " ", vbNullString) ' på mac er der mellemrum, men ikke på windows
@@ -59,6 +59,17 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     ElseIf InStr(CheckText2, "incorrectsyntax:Found") > 0 Then
         GetErrorDefinition.Title = Sprog.SyntaxError
         GetErrorDefinition.Description = GetErrorText("incorrect syntax: ", CheckText)
+    ElseIf InStr(CheckText2, "factorial:factorialofnegativeinteger") > 0 Then
+        GetErrorDefinition.Title = Sprog.MathError
+        s = ExtractText(CheckText, "factorial: ", "#0", "-- an error")
+        s2 = ExtractText(CheckText, "integer ", " not")
+        If Sprog.SprogNr = 1 Then
+            s = Sprog.A(699)
+            If InStr(CheckText, "K(") > 0 Then
+                s = s & VbCrLfMac & "Måske har  du byttet om på n og r i K(n, r)?"
+            End If
+        End If
+        GetErrorDefinition.Description = s
     ElseIf InStr(CheckText2, "isnotaprefixoperator") > 0 Then
         GetErrorDefinition.Title = Sprog.SyntaxError
         GetErrorDefinition.Description = GetErrorText("is not a prefix operator", CheckText)
@@ -118,15 +129,15 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     
 End Function
 
-Function GetErrorText(text As String, MaximaOutput As String, Optional RemoveChrS As Integer = 0) As String
+Function GetErrorText(Text As String, MaximaOutput As String, Optional RemoveChrS As Integer = 0) As String
 ' used by GetErrorDefinition()
     Dim Pos As Integer, pos2 As Integer, pos4 As Integer
     Dim t As String
     Dim L As Integer
     On Error Resume Next
-    L = Len(text) + RemoveChrS
+    L = Len(Text) + RemoveChrS
     Pos = InStr(MaximaOutput, "incorrect syntax")
-    pos2 = InStr(Pos, MaximaOutput, text)
+    pos2 = InStr(Pos, MaximaOutput, Text)
     pos4 = InStrRev(pos2 + L, MaximaOutput, "^")
     If pos4 < 1 Then
         pos4 = Len(MaximaOutput)
@@ -149,7 +160,24 @@ Function GetErrorText(text As String, MaximaOutput As String, Optional RemoveChr
 '    GetErrorText = Sprog.SyntaxError & vbCrLf & Sprog.IllegalSymbol & ":" & vbCrLf & t
 
 End Function
+Function ExtractText(ByVal Text As String, startText As String, endText As String, Optional endText2 As String) As String
+    ' returns substring from Text between startText and EndText
+    Dim p As Long, p2 As Long
 
+    If startText <> vbNullString Then
+        p = InStr(Text, startText)
+        If p > 0 Then Text = right(Text, Len(Text) - p - Len(startText) + 1)
+    End If
+    If endText <> vbNullString Then
+        p = InStr(Text, endText)
+        If p > 0 Then Text = Left(Text, p - 1)
+    End If
+    If endText2 <> vbNullString Then
+        p = InStr(Text, endText2)
+        If p > 0 Then Text = Left(Text, p - 1)
+    End If
+    ExtractText = Text
+End Function
 Function DefinitionsNice() As String
 ' Used by CheckForError
     Dim DefS As String

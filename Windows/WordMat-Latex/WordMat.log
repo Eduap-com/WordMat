@@ -1,0 +1,874 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.7.24)  4 FEB 2025 07:28
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**C:/GitHub/WordMat/Windows/WordMat-Latex/WordMat.tex
+(C:/GitHub/WordMat/Windows/WordMat-Latex/WordMat.tex
+LaTeX2e <2022-11-01> patch level 1
+L3 programming layer <2023-03-30>
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+File: size11.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/base\latin1.def
+File: latin1.def 2021/02/14 v1.3d Input encoding file
+))
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count193
+\Gm@cntv=\count194
+\c@Gm@tempcnt=\count195
+\Gm@bindingoffset=\dimen141
+\Gm@wd@mp=\dimen142
+\Gm@odd@mp=\dimen143
+\Gm@even@mp=\dimen144
+\Gm@layoutwidth=\dimen145
+\Gm@layoutheight=\dimen146
+\Gm@layouthoffset=\dimen147
+\Gm@layoutvoffset=\dimen148
+\Gm@dimlist=\toks19
+
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2023/03/28 3.87 The Babel package
+\babel@savecnt=\count196
+\U@D=\dimen149
+\l@unhyphenated=\language79
+
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count197
+
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\USenglish
+.ldf
+Language: USenglish 2017/06/06 v3.3r English support from the babel system
+
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/babel-english\english.l
+df
+Language: english 2017/06/06 v3.3r English support from the babel system
+Package babel Info: Hyphen rules for 'canadian' set to \l@english
+(babel)             (\language0). Reported on input line 102.
+Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
+(babel)             (\language73). Reported on input line 105.
+Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
+(babel)             (\language73). Reported on input line 108.
+)))
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/generic/babel/locale/en\babel
+-usenglish.tex
+Package babel Info: Importing font and identification data for USenglish
+(babel)             from babel-en-US.ini. Reported on input line 11.
+)
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2022/04/08 v2.17n AMS math features
+\@mathmargin=\skip50
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks20
+\ex@=\dimen150
+))
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen151
+)
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count198
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count199
+\leftroot@=\count266
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count267
+\DOTSCASE@=\count268
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box51
+\strutbox@=\box52
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen152
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count269
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count270
+\dotsspace@=\muskip16
+\c@parentequation=\count271
+\dspbrk@lvl=\count272
+\tag@help=\toks21
+\row@=\count273
+\column@=\count274
+\maxfields@=\count275
+\andhelp@=\toks22
+\eqnshift@=\dimen153
+\alignsep@=\dimen154
+\tagshift@=\dimen155
+\tagwidth@=\dimen156
+\totwidth@=\dimen157
+\lineht@=\dimen158
+\@envbody=\toks23
+\multlinegap=\skip51
+\multlinetaggap=\skip52
+\mathdisplay@stack=\toks24
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
+(C:\Users\mikae\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count276
+\l__pdf_internal_box=\box53
+)
+No file WordMat.aux.
+\openout1 = `WordMat.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(89.62709pt, 418.25368pt, 89.6271pt)
+* v-part:(T,H,B)=(101.40665pt, 591.5302pt, 152.11pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=418.25368pt
+* \textheight=591.5302pt
+* \oddsidemargin=17.3571pt
+* \evensidemargin=17.3571pt
+* \topmargin=-7.86334pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=59.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+[1
+
+{C:/Users/mikae/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+No file WordMat.toc.
+\tf@toc=\write3
+\openout3 = `WordMat.toc'.
+
+[2]
+Runaway argument?
+{ RunTestSequence | RunTestSequenceNonInteractive Exports all modules\ETC.
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.30 }
+      For ExportAllModules and ImportAllModules to work you need:
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+Overfull \hbox (23.90742pt too wide) in paragraph at lines 22--30
+\T1/cmr/m/it/10.95 upThis-Doc-u-ment \T1/cmr/m/n/10.95 | Ex-por-tAllMod-ules | 
+Im-por-tAllMod-ules  Gen-er-ateKey-board-Short-cutsWord-
+ []
+
+
+Overfull \hbox (9.09761pt too wide) in paragraph at lines 30--30
+[]\T1/cmr/m/it/10.95 RunTestSequence | RunTest-Se-quen-ceNon-In-ter-ac-tive Ex-
+ports all mod-ules to folder 'VBA-
+ []
+
+! Too many }'s.
+<recently read> \egroup 
+                        
+l.30 }
+      For ExportAllModules and ImportAllModules to work you need:
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+Runaway argument?
+{Do not upgrade this file to a newer Word-version. It will break menu\ETC.
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.39 }
+      \textbf{ImportAllModules
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Too many }'s.
+<recently read> \egroup 
+                        
+l.39 }
+      \textbf{ImportAllModules
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+Runaway argument?
+{ImportAllModules 
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.41 }
+      Imports all modules from subfolder 'VBA-modules' (Most recent backup f...
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Too many }'s.
+<recently read> \egroup 
+                        
+l.41 }
+      Imports all modules from subfolder 'VBA-modules' (Most recent backup f...
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+Runaway argument?
+{Word Crash 
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.45 }
+      Sometimes this document will crash when opened. Disable all macros in ...
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Too many }'s.
+<recently read> \egroup 
+                        
+l.45 }
+      Sometimes this document will crash when opened. Disable all macros in ...
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+Runaway argument?
+{Keyboard Shortcuts 
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.49 }
+      Problems often occur with keyboard shortcuts. They can be in normal.do...
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Too many }'s.
+<recently read> \egroup 
+                        
+l.49 }
+      Problems often occur with keyboard shortcuts. They can be in normal.do...
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+Runaway argument?
+{Special Character problem when editing on Mac and Windows 
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.59 }
+      The VBE-Codefiles on Mac and Windows are not compatible. ASCII-charact...
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Too many }'s.
+<recently read> \egroup 
+                        
+l.59 }
+      The VBE-Codefiles on Mac and Windows are not compatible. ASCII-charact...
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+[3]
+! Misplaced alignment tab character &.
+l.61 ASCII-characters: &
+                        %_^|\@~\newline
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.62 ...that \textit{are} compatible: £(163), ©, µ
+                                                  \newline
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+LaTeX Warning: Command \textcurrency invalid in math mode on input line 63.
+
+
+LaTeX Warning: Command \textcurrency invalid in math mode on input line 63.
+
+
+LaTeX Warning: Command \textonehalf invalid in math mode on input line 64.
+
+
+LaTeX Warning: Command \textonehalf invalid in math mode on input line 64.
+
+
+LaTeX Warning: Command \o invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \ae invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \r invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \AE invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \O invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \r invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \` invalid in math mode on input line 65.
+
+
+LaTeX Warning: Command \textcurrency invalid in math mode on input line 66.
+
+
+LaTeX Warning: Command \textcurrency invalid in math mode on input line 66.
+
+
+LaTeX Warning: Command \textonehalf invalid in math mode on input line 66.
+
+
+LaTeX Warning: Command \textonehalf invalid in math mode on input line 66.
+
+Runaway argument?
+{\bfseries  
+! Paragraph ended before \text@ was complete.
+<to be read again> 
+                   \par 
+l.79 }
+      The idea is to always end by exporting all VBA-modules to the folder '...
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.79 }
+      The idea is to always end by exporting all VBA-modules to the folder '...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no ¤ in font cmr10!
+Missing character: There is no ½ in font cmr10!
+Missing character: There is no ø in font cmr10!
+Missing character: There is no æ in font cmr10!
+Missing character: There is no å in font cmr10!
+Missing character: There is no Æ in font cmr10!
+Missing character: There is no Ø in font cmr10!
+Missing character: There is no Å in font cmr10!
+Missing character: There is no á in font cmr10!
+Missing character: There is no é in font cmr10!
+Missing character: There is no ó in font cmr10!
+Missing character: There is no À in font cmr10!
+Missing character: There is no ¤ in font cmr10!
+Missing character: There is no ½ in font cmr10!
+
+Overfull \hbox (967.31966pt too wide) in paragraph at lines 61--79
+\OML/cmm/m/it/10.95 ProblemsMactoWindows \OT1/cmr/m/n/10.95 : \OMS/cmsy/m/n/10.
+95 x\OML/cmm/m/it/10.95 TherearefewproblemsfromWindowstoMac\OT1/cmr/m/n/10.95 (
+\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 :Justdon[]tusetho
+secharactersinthecodeorcomments; oruseChrW\OT1/cmr/m/n/10.95 (164)\OML/cmm/m/it
+/10.95 andChrW\OT1/cmr/m/n/10.95 (189)\OML/cmm/m/it/10.95 :Therearemoreproblema
+ticcharactersthantheabove; buttheyarethemostcommon:Toconvertscrambledcharacters
+fromaMac \OMS/cmsy/m/n/10.95 ^^@
+ []
+
+
+Overfull \hbox (1372.84796pt too wide) in paragraph at lines 61--79
+\OML/cmm/m/it/10.95 editbacktoWindowsANSI; runthemacro \OT1/cmr/m/n/10.95 : []\
+OML/cmm/m/it/10.95 Thecharacterproblemonlyaffectscodefiles; notcharactersinthed
+ocument:[]MakeallcodechangesonWindows:WordMat:dotmcanbeopenedandtestedonMac:Jus
+tdon[]tsaveandoverwritetheoriginalandreopenonWindows:Ifthishappensusefunction[]
+:[] 
+ []
+
+
+Overfull \hbox (768.84431pt too wide) in paragraph at lines 61--79
+\OML/cmm/m/it/10.95 ThismustberuneverytimeaMac \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm
+/m/it/10.95 edithasbeendone; orelsethecharacterswillconverttorandomnewcharacter
+severyroundtriptomacandback; andthenitcannotbeundone:[]Run[]toconvertallproblem
+aticcharacterstoascii \OMS/cmsy/m/n/10.95 ^^@
+ []
+
+
+Overfull \hbox (246.93118pt too wide) in paragraph at lines 61--79
+\OML/cmm/m/it/10.95 sequences:YoucanthenopenthedocumentonWindowsandMacindepende
+ntly:Howeverthecharacterswillshowintheuiscrambledbytheascii \OMS/cmsy/m/n/10.95
+ ^^@
+ []
+
+
+Overfull \hbox (208.65254pt too wide) in paragraph at lines 61--79
+\OML/cmm/m/it/10.95 sequences:Beforebuildingtheinstallermakesuretorun[]:Prefera
+blyindependentlyonWindowsandMac:[] 
+ []
+
+
+Overfull \hbox (569.3909pt too wide) in paragraph at lines 61--79
+\OML/cmm/m/it/10.95 Alsoifyouintroducemorenon \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/
+m/it/10.95 asciicharacters; makesuretorun[]again:Run[]GenerateKeyBoardShortcuts
+[]wheneveryouhaverun[]:$ 
+ []
+
+! Too many }'s.
+\textbf  #1->\ifmmode \nfss@text {\bfseries #1}
+                                               \else \hmode@bgroup \text@com...
+l.79 }
+      The idea is to always end by exporting all VBA-modules to the folder '...
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+[4]
+! Extra }, or forgotten \endgroup.
+<recently read> \egroup 
+                        
+l.105  \item }
+              Run '\textit{ReplacetoExtendedASCII' (if using strategy 2)}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Misplaced alignment tab character &.
+l.108 1 &
+          2 must be run separately on Windows and Mac
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.111 ·??¹
+          ²³??????°? ??????????????????????????? ????? ?????????????????????...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\mathonesuperior ->{^1}
+                       
+l.111 ·??¹
+          ²³??????°? ??????????????????????????? ????? ?????????????????????...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 111.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 111.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.112 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no ° in font cmr10!
+
+Overfull \hbox (146.28387pt too wide) in paragraph at lines 111--112
+[]\TS1/cmr/bx/it/10.95 ·\T1/cmr/bx/it/10.95 ??$[][][]\OT1/cmr/m/n/10.95 ???????
+???????????????????????????????????????????????????????????????????????????????
+??????????????$ 
+ []
+
+! Misplaced alignment tab character &.
+l.118 "K" &
+            VBA.ChrW(8345)
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+Runaway argument?
+{Ligningen løses for x vha. WordMat. \begin {equation*}x=-0,2421153\end \ETC.
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.142 }
+       
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+[5] [6]
+Runaway argument?
+{Tjekket med nye version 1.31.2 (og den forrige). 
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.188 }
+       
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+                                                  \end{equation*}
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+                                                  \end{equation*}
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+                                                  \end{equation*}
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+                                                  \end{equation*}
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+                                                  \end{equation*}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\frac  #1#2->{\begingroup #1\endgroup \@@over #2}
+                                                 
+l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+                                                  \end{equation*}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+! LaTeX Error: \begin{document} ended by \end{equation*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.197 ...5|\right)+2\right)^{2}}{4}\end{equation*}
+                                                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.197 ...5|\right)+2\right)^{2}}{4}\end{equation*}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.197 ...5|\right)+2\right)^{2}}{4}\end{equation*}
+                                                  
+Things are pretty mixed up, but I think the worst is over.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.204 Integrate(sqrt(1+((2*x)/(x^
+                                 (2)+3))^(2)),x,(-5),5)
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.205 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+                                                  $^^L\newpage
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+                                                  $^^L\newpage
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+                                                  $^^L\newpage
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+                                                  $^^L\newpage
+Things are pretty mixed up, but I think the worst is over.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+                                                  $^^L\newpage
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\frac  #1#2->{\begingroup #1\endgroup \@@over #2}
+                                                 
+l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+                                                  $^^L\newpage
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+[7]
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 247.
+
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 247.
+
+Missing character: There is no ¦ in font cmr10!
+Runaway argument?
+{Beregning foretaget vha. GeoGebra 
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.252 }
+       
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Too many }'s.
+<recently read> \egroup 
+                        
+l.252 }
+       
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
+
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
+
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
+
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
+
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
+
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
+
+Missing character: There is no ¦ in font cmr10!
+Missing character: There is no ¦ in font cmr10!
+Missing character: There is no ¦ in font cmr10!
+[8]
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 260.
+
+
+LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 260.
+
+Missing character: There is no ¦ in font cmr10!
+[9] (C:\GitHub\WordMat\Windows\WordMat-Latex\WordMat.aux) ) 
+Here is how much of TeX's memory you used:
+ 3075 strings out of 476331
+ 50248 string characters out of 5787765
+ 1861660 words of memory out of 5000000
+ 23508 multiletter control sequences out of 15000+600000
+ 524194 words of font info for 59 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 57i,15n,62p,465b,195s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\mikae\App
+Data\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcbi1095.pk> <C:\Users\mik
+ae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1095.pk> <C:\Use
+rs\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk> <
+C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095
+.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ec
+rm1095.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
+600\ecbx1440.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/
+ec/dpi600\ecrm1200.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jkn
+appen/ec/dpi600\ecrm1728.pk><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/mikae/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/mikae/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/mikae/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/mikae/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/
+mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:
+/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
+/cm/cmsy6.pfb><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmsy8.pfb>
+Output written on C:\GitHub\WordMat\Windows\WordMat-Latex\WordMat.pdf (9 pages,
+ 197353 bytes).
+PDF statistics:
+ 329 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -40,7 +40,7 @@ Public Sub Plot2DGraph()
     sslut = Selection.End
     
     TempCas = CASengine
-    CASengine = 0
+    CASengineTempOnly = 0
     Set UF2Dgraph = New UserForm2DGraph
     PrepareMaxima
     Dim Sel As Selection
@@ -53,79 +53,79 @@ Public Sub Plot2DGraph()
                 ' arr(1) indeholder version. Hvis der kommer flere felter kræves nok check
                 On Error Resume Next
                 PicOpen = False
-                UF2Dgraph.TextBox_definitioner.text = Arr(2)
-                UF2Dgraph.TextBox_titel.text = Arr(3)
-                UF2Dgraph.TextBox_xaksetitel.text = Arr(4)
-                UF2Dgraph.TextBox_yaksetitel.text = Arr(5)
+                UF2Dgraph.TextBox_definitioner.Text = Arr(2)
+                UF2Dgraph.TextBox_titel.Text = Arr(3)
+                UF2Dgraph.TextBox_xaksetitel.Text = Arr(4)
+                UF2Dgraph.TextBox_yaksetitel.Text = Arr(5)
         
-                UF2Dgraph.TextBox_xmin.text = Arr(6)
-                UF2Dgraph.TextBox_xmax.text = Arr(7)
-                UF2Dgraph.TextBox_ymin.text = Arr(8)
-                UF2Dgraph.TextBox_ymax.text = Arr(9)
+                UF2Dgraph.TextBox_xmin.Text = Arr(6)
+                UF2Dgraph.TextBox_xmax.Text = Arr(7)
+                UF2Dgraph.TextBox_ymin.Text = Arr(8)
+                UF2Dgraph.TextBox_ymax.Text = Arr(9)
         
-                UF2Dgraph.TextBox_ligning1.text = Arr(10)
-                UF2Dgraph.TextBox_var1.text = Arr(11)
-                UF2Dgraph.TextBox_xmin1.text = Arr(12)
-                UF2Dgraph.TextBox_xmax1.text = Arr(13)
+                UF2Dgraph.TextBox_ligning1.Text = Arr(10)
+                UF2Dgraph.TextBox_var1.Text = Arr(11)
+                UF2Dgraph.TextBox_xmin1.Text = Arr(12)
+                UF2Dgraph.TextBox_xmax1.Text = Arr(13)
                 UF2Dgraph.ComboBox_ligning1.ListIndex = CInt(Arr(14))
         
-                UF2Dgraph.TextBox_ligning2.text = Arr(15)
-                UF2Dgraph.TextBox_var2.text = Arr(16)
-                UF2Dgraph.TextBox_xmin2.text = Arr(17)
-                UF2Dgraph.TextBox_xmax2.text = Arr(18)
+                UF2Dgraph.TextBox_ligning2.Text = Arr(15)
+                UF2Dgraph.TextBox_var2.Text = Arr(16)
+                UF2Dgraph.TextBox_xmin2.Text = Arr(17)
+                UF2Dgraph.TextBox_xmax2.Text = Arr(18)
                 UF2Dgraph.ComboBox_ligning2.ListIndex = CInt(Arr(19))
         
-                UF2Dgraph.TextBox_ligning3.text = Arr(20)
-                UF2Dgraph.TextBox_var3.text = Arr(21)
-                UF2Dgraph.TextBox_xmin3.text = Arr(22)
-                UF2Dgraph.TextBox_xmax3.text = Arr(23)
+                UF2Dgraph.TextBox_ligning3.Text = Arr(20)
+                UF2Dgraph.TextBox_var3.Text = Arr(21)
+                UF2Dgraph.TextBox_xmin3.Text = Arr(22)
+                UF2Dgraph.TextBox_xmax3.Text = Arr(23)
                 UF2Dgraph.ComboBox_ligning3.ListIndex = CInt(Arr(24))
         
-                UF2Dgraph.TextBox_ligning4.text = Arr(25)
-                UF2Dgraph.TextBox_var4.text = Arr(26)
-                UF2Dgraph.TextBox_xmin4.text = Arr(27)
-                UF2Dgraph.TextBox_xmax4.text = Arr(28)
+                UF2Dgraph.TextBox_ligning4.Text = Arr(25)
+                UF2Dgraph.TextBox_var4.Text = Arr(26)
+                UF2Dgraph.TextBox_xmin4.Text = Arr(27)
+                UF2Dgraph.TextBox_xmax4.Text = Arr(28)
                 UF2Dgraph.ComboBox_ligning4.ListIndex = CInt(Arr(29))
         
-                UF2Dgraph.TextBox_ligning5.text = Arr(30)
-                UF2Dgraph.TextBox_var5.text = Arr(31)
-                UF2Dgraph.TextBox_xmin5.text = Arr(32)
-                UF2Dgraph.TextBox_xmax5.text = Arr(33)
+                UF2Dgraph.TextBox_ligning5.Text = Arr(30)
+                UF2Dgraph.TextBox_var5.Text = Arr(31)
+                UF2Dgraph.TextBox_xmin5.Text = Arr(32)
+                UF2Dgraph.TextBox_xmax5.Text = Arr(33)
                 UF2Dgraph.ComboBox_ligning5.ListIndex = CInt(Arr(34))
         
-                UF2Dgraph.TextBox_ligning6.text = Arr(35)
-                UF2Dgraph.TextBox_var6.text = Arr(36)
-                UF2Dgraph.TextBox_xmin6.text = Arr(37)
-                UF2Dgraph.TextBox_xmax6.text = Arr(38)
+                UF2Dgraph.TextBox_ligning6.Text = Arr(35)
+                UF2Dgraph.TextBox_var6.Text = Arr(36)
+                UF2Dgraph.TextBox_xmin6.Text = Arr(37)
+                UF2Dgraph.TextBox_xmax6.Text = Arr(38)
                 UF2Dgraph.ComboBox_ligning6.ListIndex = CInt(Arr(39))
         
-                UF2Dgraph.TextBox_lig1.text = Arr(40)
-                UF2Dgraph.TextBox_lig2.text = Arr(41)
-                UF2Dgraph.TextBox_Lig3.text = Arr(42)
+                UF2Dgraph.TextBox_lig1.Text = Arr(40)
+                UF2Dgraph.TextBox_lig2.Text = Arr(41)
+                UF2Dgraph.TextBox_Lig3.Text = Arr(42)
         
-                UF2Dgraph.TextBox_parametric1x.text = Arr(43)
-                UF2Dgraph.TextBox_parametric1y.text = Arr(44)
-                UF2Dgraph.TextBox_tmin1.text = Arr(45)
-                UF2Dgraph.TextBox_tmax1.text = Arr(46)
-                UF2Dgraph.TextBox_parametric2x.text = Arr(47)
-                UF2Dgraph.TextBox_parametric2y.text = Arr(48)
-                UF2Dgraph.TextBox_tmin2.text = Arr(49)
-                UF2Dgraph.TextBox_tmax2.text = Arr(50)
-                UF2Dgraph.TextBox_parametric3x.text = Arr(51)
-                UF2Dgraph.TextBox_parametric3y.text = Arr(51)
-                UF2Dgraph.TextBox_tmin3.text = Arr(53)
-                UF2Dgraph.TextBox_tmax3.text = Arr(54)
+                UF2Dgraph.TextBox_parametric1x.Text = Arr(43)
+                UF2Dgraph.TextBox_parametric1y.Text = Arr(44)
+                UF2Dgraph.TextBox_tmin1.Text = Arr(45)
+                UF2Dgraph.TextBox_tmax1.Text = Arr(46)
+                UF2Dgraph.TextBox_parametric2x.Text = Arr(47)
+                UF2Dgraph.TextBox_parametric2y.Text = Arr(48)
+                UF2Dgraph.TextBox_tmin2.Text = Arr(49)
+                UF2Dgraph.TextBox_tmax2.Text = Arr(50)
+                UF2Dgraph.TextBox_parametric3x.Text = Arr(51)
+                UF2Dgraph.TextBox_parametric3y.Text = Arr(51)
+                UF2Dgraph.TextBox_tmin3.Text = Arr(53)
+                UF2Dgraph.TextBox_tmax3.Text = Arr(54)
         
-                UF2Dgraph.TextBox_punkter.text = Arr(55)
-                UF2Dgraph.TextBox_punkter2.text = Arr(56)
-                UF2Dgraph.TextBox_markerpunkter.text = Arr(57)
+                UF2Dgraph.TextBox_punkter.Text = Arr(55)
+                UF2Dgraph.TextBox_punkter2.Text = Arr(56)
+                UF2Dgraph.TextBox_markerpunkter.Text = Arr(57)
                 UF2Dgraph.CheckBox_pointsjoined.Value = CBool(Arr(58))
                 UF2Dgraph.CheckBox_pointsjoined2.Value = CBool(Arr(59))
-                UF2Dgraph.TextBox_pointsize.text = Arr(60)
-                UF2Dgraph.TextBox_pointsize2.text = Arr(61)
+                UF2Dgraph.TextBox_pointsize.Text = Arr(60)
+                UF2Dgraph.TextBox_pointsize2.Text = Arr(61)
         
-                UF2Dgraph.TextBox_vektorer.text = Arr(62)
-                UF2Dgraph.TextBox_labels.text = Arr(63)
+                UF2Dgraph.TextBox_vektorer.Text = Arr(62)
+                UF2Dgraph.TextBox_labels.Text = Arr(63)
         
                 UF2Dgraph.CheckBox_gitter.Value = CBool(Arr(64))
                 UF2Dgraph.CheckBox_logx.Value = CBool(Arr(65))
@@ -176,12 +176,12 @@ Public Sub Plot2DGraph()
     If Selection.Tables.Count > 0 Then
         Dim Cregr As New CRegression, xmin As Double, xmax As Double
         Cregr.GetTableData
-        If UF2Dgraph.TextBox_punkter.text <> "" Then UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & VbCrLfMac
+        If UF2Dgraph.TextBox_punkter.Text <> "" Then UF2Dgraph.TextBox_punkter.Text = UF2Dgraph.TextBox_punkter.Text & VbCrLfMac
         xmin = Cregr.XValues(1)
         xmax = Cregr.XValues(1)
         For j = 1 To UBound(Cregr.XValues)
             '            UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & CStr(Cregr.XValues(j)) & ListSeparator & CStr(Cregr.YValues(j)) & vbCrLf
-            UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & ConvertNumber(Cregr.XValues(j)) & ListSeparator & ConvertNumber(Cregr.YValues(j)) & VbCrLfMac
+            UF2Dgraph.TextBox_punkter.Text = UF2Dgraph.TextBox_punkter.Text & ConvertNumber(Cregr.XValues(j)) & ListSeparator & ConvertNumber(Cregr.YValues(j)) & VbCrLfMac
             If Cregr.XValues(j) > xmax Then xmax = Cregr.XValues(j)
             If Cregr.XValues(j) < xmin Then xmin = Cregr.XValues(j)
         Next
@@ -198,7 +198,7 @@ Public Sub Plot2DGraph()
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
-    CASengine = TempCas
+    CASengineTempOnly = TempCas
 End Sub
 Sub InsertNextEquation(Ligning As String)
 Dim Arr As Variant
@@ -215,32 +215,32 @@ Arr = Split(Ligning, "=")
 'End If
 Ligning = omax.ConvertToAscii(Trim(Replace(Replace(Replace(Replace(Arr(0), "Definer:", ""), "Define:", ""), "definer:", ""), "define:", "")))
 
-If UF2Dgraph.TextBox_ligning1.text = Ligning Then
+If UF2Dgraph.TextBox_ligning1.Text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning2.text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning2.Text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning3.text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning3.Text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning4.text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning4.Text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning5.text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning5.Text = Ligning Then
     Exit Sub
-ElseIf UF2Dgraph.TextBox_ligning6.text = Ligning Then
+ElseIf UF2Dgraph.TextBox_ligning6.Text = Ligning Then
     Exit Sub
 End If
 
-If UF2Dgraph.TextBox_ligning1.text = "" Then
-    UF2Dgraph.TextBox_ligning1.text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning2.text = "" Then
-    UF2Dgraph.TextBox_ligning2.text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning3.text = "" Then
-    UF2Dgraph.TextBox_ligning3.text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning4.text = "" Then
-    UF2Dgraph.TextBox_ligning4.text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning5.text = "" Then
-    UF2Dgraph.TextBox_ligning5.text = Ligning
-ElseIf UF2Dgraph.TextBox_ligning6.text = "" Then
-    UF2Dgraph.TextBox_ligning6.text = Ligning
+If UF2Dgraph.TextBox_ligning1.Text = "" Then
+    UF2Dgraph.TextBox_ligning1.Text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning2.Text = "" Then
+    UF2Dgraph.TextBox_ligning2.Text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning3.Text = "" Then
+    UF2Dgraph.TextBox_ligning3.Text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning4.Text = "" Then
+    UF2Dgraph.TextBox_ligning4.Text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning5.Text = "" Then
+    UF2Dgraph.TextBox_ligning5.Text = Ligning
+ElseIf UF2Dgraph.TextBox_ligning6.Text = "" Then
+    UF2Dgraph.TextBox_ligning6.Text = Ligning
 End If
 GoTo slut
 Fejl:
@@ -271,7 +271,7 @@ Sub PlotDF()
             MsgBox2 Sprog.EquationMissingError2, vbOKOnly, "Error"
             Exit Sub
         End If
-        ea.text = s
+        ea.Text = s
         v = ea.GetNextVar
         If v <> "x" And v <> "y" Then
             If v = "t" Then
@@ -282,11 +282,11 @@ Sub PlotDF()
                 ea.ReplaceVar v, "y"
             End If
         End If
-        s = ea.text
+        s = ea.Text
         s = "SlopeField(" & s & ");"
         s = s & "A=(1, 2);Xmin=-100;Xmax=100;Tic=0.1;"
-        s = s & "SolveODE(" & ea.text & ", x(A), y(A), Xmin, Tic);" ' y(A) virker ikke
-        s = s & "SolveODE(" & ea.text & ", x(A), y(A), Xmax, Tic)"
+        s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmin, Tic);" ' y(A) virker ikke
+        s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmax, Tic)"
         OpenGeoGebraWeb s, "Classic", True, True
         GoTo slut
 #If Mac Then
@@ -302,24 +302,24 @@ Sub PlotDF()
     Arr = Split(omax.Kommando, "=")
     omax.Kommando = Arr(UBound(Arr))
     End If
-    UF2Dgraph.TextBox_dfligning.text = omax.ConvertToAscii(omax.Kommando)
+    UF2Dgraph.TextBox_dfligning.Text = omax.ConvertToAscii(omax.Kommando)
     
     omax.FindVariable
     If InStr(omax.Vars, "x") > 0 Then
-        UF2Dgraph.TextBox_dfx.text = "x"
+        UF2Dgraph.TextBox_dfx.Text = "x"
     ElseIf InStr(omax.Vars, "t") > 0 Then
-        UF2Dgraph.TextBox_dfx.text = "t"
+        UF2Dgraph.TextBox_dfx.Text = "t"
     Else
-        UF2Dgraph.TextBox_dfx.text = "x"
+        UF2Dgraph.TextBox_dfx.Text = "x"
     End If
     If InStr(omax.Vars, "y") > 0 Then
-        UF2Dgraph.TextBox_dfy.text = "y"
+        UF2Dgraph.TextBox_dfy.Text = "y"
     ElseIf InStr(omax.Vars, "N") > 0 Then
-        UF2Dgraph.TextBox_dfy.text = "N"
+        UF2Dgraph.TextBox_dfy.Text = "N"
     Else
-        ea.text = omax.Vars
-        UF2Dgraph.TextBox_dfy.text = ea.GetNextVar
-        If UF2Dgraph.TextBox_dfy.text = "" Then UF2Dgraph.TextBox_dfy.text = "y"
+        ea.Text = omax.Vars
+        UF2Dgraph.TextBox_dfy.Text = ea.GetNextVar
+        If UF2Dgraph.TextBox_dfy.Text = "" Then UF2Dgraph.TextBox_dfy.Text = "y"
     End If
 
 
@@ -445,14 +445,14 @@ Dim i As Integer
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
                     RHS = Arr(1)
-                    ea.text = LHS
+                    ea.Text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     If LHS = fktnavn & "(" & varnavn & ")" Then
-                        ea.text = RHS
+                        ea.Text = RHS
                         ea.Pos = 1
                         ea.ReplaceVar varnavn, "x"
-                        fktudtryk = ea.text
+                        fktudtryk = ea.Text
                         DefinerKonstanterGraph fktudtryk, DefList, graphfil
                         graphfil.InsertFunction fktudtryk
                     Else
@@ -538,9 +538,9 @@ Sub DefinerKonstanterGraph(Expr As String, DefList As String, ByRef graphfil As 
 Dim ea As New ExpressionAnalyser
 Dim ea2 As New ExpressionAnalyser
 Dim Var As String
-    ea.text = DefList
-    If noty Then ea.text = ea.text & ",y"
-    ea2.text = Expr
+    ea.Text = DefList
+    If noty Then ea.Text = ea.Text & ",y"
+    ea2.Text = Expr
     ea2.Pos = 0
     Do
         Var = ea2.GetNextVar
@@ -559,16 +559,15 @@ Function ReplaceIndepvarX(fkt As String, Optional ByRef uvar = "") As String
 Dim ea As New ExpressionAnalyser
 Dim Var As String
 'Dim uvar As String
-ea.text = fkt
+ea.Text = fkt
 Var = ea.GetNextVar
 ReplacedVar = "x"
 If Not (ea.ContainsVar("x")) And Var <> "" And Var <> "matrix" Then
     If ea.ContainsVar("t") Then
         uvar = "t"
-    Else
-        uvar = Var
+'    Else
+'        uvar = InputBox(Sprog.A(368) & vbCrLf & vbCrLf & "   " & fkt & vbCrLf & vbCrLf, Sprog.A(369), uvar)
     End If
-    uvar = InputBox(Sprog.A(368) & vbCrLf & vbCrLf & "   " & fkt & vbCrLf & vbCrLf, Sprog.A(369), uvar)
     If uvar = "" Then uvar = "x"
     If uvar <> "x" Then
         ea.ReplaceVar uvar, "x"
@@ -576,7 +575,7 @@ If Not (ea.ContainsVar("x")) And Var <> "" And Var <> "matrix" Then
     ReplacedVar = uvar
 End If
 
-ReplaceIndepvarX = ea.text
+ReplaceIndepvarX = ea.Text
 End Function
 #If Mac Then
 Sub InsertChart()
@@ -599,10 +598,10 @@ Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
     DoEvents
     Application.ScreenUpdating = False
     
-    Dim UfWait2 As New UserFormWaitForMaxima
-    UfWait2.Show vbModeless
+    Dim UFwait2 As New UserFormWaitForMaxima
+    UFwait2.Show vbModeless
     DoEvents
-    UfWait2.Label_progress = "***"
+    UFwait2.Label_progress = "***"
     
     ' funktioner der markeres
     For i = 0 To dd.AntalMathBoxes - 1
@@ -624,7 +623,7 @@ Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
                     RHS = Arr(1)
-                    ea.text = LHS
+                    ea.Text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
 '                    If varnavn = "" And fktnavn = Y Then varnavn = X
@@ -664,7 +663,7 @@ Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
 
 slut2:
     On Error Resume Next
-    Unload UfWait2
+    Unload UFwait2
 
 End Sub
 #Else
@@ -693,15 +692,15 @@ Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
     DoEvents
 
     Application.ScreenUpdating = False
-    Dim UfWait2 As New UserFormWaitForMaxima
-    UfWait2.Show vbModeless
+    Dim UFwait2 As New UserFormWaitForMaxima
+    UFwait2.Show vbModeless
     DoEvents
-    UfWait2.Label_progress = "***"
+    UFwait2.Label_progress = "***"
 
 If Not ExcelIndlejret Then ' åben i excel
     If cxl Is Nothing Then Set cxl = New CExcel
     cxl.LoadFile ("Graphs.xltm")
-    UfWait2.Label_progress = UfWait2.Label_progress & "***"
+    UFwait2.Label_progress = UFwait2.Label_progress & "***"
     Set WB = cxl.xlwb
 '    Set ws = cxl.xlwb.worksheets(1)
     Set ws = cxl.XLapp.ActiveSheet
@@ -716,7 +715,7 @@ Else ' indlejret
     Set xlap = WB.Application
 End If
     
-    UfWait2.Label_progress = UfWait2.Label_progress & "*****"
+    UFwait2.Label_progress = UFwait2.Label_progress & "*****"
 
 ' indstillinger
 If Radians Then
@@ -745,7 +744,7 @@ End If
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
                     RHS = Arr(1)
-                    ea.text = LHS
+                    ea.Text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
 '                    If varnavn = "" And fktnavn = Y Then varnavn = X
@@ -818,11 +817,11 @@ Fejl:
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
 slut:
 On Error GoTo slut2
-    UfWait2.Label_progress = UfWait2.Label_progress & "**"
+    UFwait2.Label_progress = UFwait2.Label_progress & "**"
     xlap.Run ("Auto_open")
 xlap.Run ("UpDateAll")
 '
-UfWait2.Label_progress = UfWait2.Label_progress & "***"
+UFwait2.Label_progress = UFwait2.Label_progress & "***"
 
 'If Not wb Is Nothing Then ' start på tabel sheet, ikke graph
 '    wb.Charts(1).Activate
@@ -833,7 +832,7 @@ slut2:
 '    excel.Application.EnableEvents = True
 '    excel.Application.ScreenUpdating = True
 '    excel.Application.DisplayAlerts = True
-    Unload UfWait2
+    Unload UFwait2
     xlap.EnableEvents = True
     xlap.ScreenUpdating = True
 
@@ -878,17 +877,17 @@ End Sub
 
 Function ReadTextFile(fil As String) As String
 Dim filno As Integer
-Dim linje, text As String
+Dim linje, Text As String
 filno = FreeFile
 
 Open fil For Input As filno
 Do While Not EOF(filno) ' Loop until end of file.
   Line Input #filno, linje
-   text = text & vbCrLf & linje
+   Text = Text & vbCrLf & linje
 Loop
 Close filno
 
-ReadTextFile = text
+ReadTextFile = Text
 End Function
 Sub TestEmbed()
 Dim Path As String
@@ -908,13 +907,13 @@ Dim vers As String
 On Error GoTo Fejl
 Application.ScreenUpdating = False
     
-    Dim UfWait2 As New UserFormWaitForMaxima
-    UfWait2.Label_stop.visible = False
-    UfWait2.Label_tip.Caption = "      " & Sprog.A(372) & "..."
-    UfWait2.Label_progress.Caption = Sprog.A(373) ' "Indsætning af indlejrede objekter kan tage tid. Dobbeltklik på objektet for at redigere det."
-    UfWait2.Show vbModeless
+    Dim UFwait2 As New UserFormWaitForMaxima
+    UFwait2.Label_stop.visible = False
+    UFwait2.Label_tip.Caption = "      " & Sprog.A(372) & "..."
+    UFwait2.Label_progress.Caption = Sprog.A(373) ' "Indsætning af indlejrede objekter kan tage tid. Dobbeltklik på objektet for at redigere det."
+    UFwait2.Show vbModeless
         DoEvents
-        UfWait2.Label_progress = "***"
+        UFwait2.Label_progress = "***"
 #If Mac Then
 Path = GetWordMatDir() & "Excelfiles/" & FilNavn
 #Else
@@ -941,20 +940,20 @@ End If
 Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.SheetMacroEnabled" & vers & Application.Version, _
 fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
         
-        UfWait2.Label_progress = "***************************************"
+        UFwait2.Label_progress = "***************************************"
 
 If startark <> "" Then
     ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
     DoEvents
     Set InsertIndlejret = ils.OLEFormat.Object
 End If
-Unload UfWait2
+Unload UFwait2
 
 GoTo slut
 Fejl:
     On Error Resume Next
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-    Unload UfWait2
+    Unload UFwait2
 slut:
 End Function
 
@@ -993,44 +992,44 @@ End Sub
 Sub InsertTrappediagram()
     InsertOpenExcel "TrappeDiagram.xltm"
 End Sub
-Function ConvertDrawLabel(text As String) As String
+Function ConvertDrawLabel(Text As String) As String
 ' konverterer tegn til draw2d plot
 'text = Replace(text, "", "")
 'text = Replace(text, "", "")
 'text = Replace(text, "", "")
 
-    text = Replace(text, VBA.ChrW(916), "{/Symbol D}")
-    text = Replace(text, VBA.ChrW(948), "{/Symbol d}")
-    text = Replace(text, VBA.ChrW(945), "{/Symbol a}")
-    text = Replace(text, VBA.ChrW(946), "{/Symbol b}")
-    text = Replace(text, VBA.ChrW(947), "{/Symbol g}")
-    text = Replace(text, VBA.ChrW(952), "{/Symbol t}") 'theta
-    text = Replace(text, VBA.ChrW(920), "{/Symbol T}")
-    text = Replace(text, VBA.ChrW(955), "{/Symbol l}")
-    text = Replace(text, VBA.ChrW(923), "{/Symbol L}")
-    text = Replace(text, VBA.ChrW(956), "{/Symbol m}")
-    text = Replace(text, VBA.ChrW(961), "{/Symbol r}") ' rho
-    text = Replace(text, VBA.ChrW(963), "{/Symbol s}")
-    text = Replace(text, VBA.ChrW(931), "{/Symbol S}")
-    text = Replace(text, VBA.ChrW(981), "{/Symbol p}") ' phi
-    text = Replace(text, VBA.ChrW(934), "{/Symbol P}")
-    text = Replace(text, VBA.ChrW(949), "{/Symbol v}") 'varepsilon
-    text = Replace(text, VBA.ChrW(1013), "{/Symbol e}") 'epsilon
-    text = Replace(text, VBA.ChrW(968), "{/Symbol p}") 'psi
-    text = Replace(text, VBA.ChrW(936), "{/Symbol P}")
-    text = Replace(text, VBA.ChrW(926), "{/Symbol X}") 'xi
-    text = Replace(text, VBA.ChrW(958), "{/Symbol x}")
-    text = Replace(text, VBA.ChrW(935), "{/Symbol C}") 'chi
-    text = Replace(text, VBA.ChrW(967), "{/Symbol c}")
-    text = Replace(text, VBA.ChrW(928), "{/Symbol Pi}")
-    text = Replace(text, VBA.ChrW(964), "{/Symbol t}") 'tau
-    text = Replace(text, VBA.ChrW(957), "{/Symbol n}") 'greeknu
-    text = Replace(text, VBA.ChrW(954), "{/Symbol k}") 'kappa
-    text = Replace(text, VBA.ChrW(951), "{/Symbol e}") 'eta
-    text = Replace(text, VBA.ChrW(950), "{/Symbol z}") 'zeta
+    Text = Replace(Text, VBA.ChrW(916), "{/Symbol D}")
+    Text = Replace(Text, VBA.ChrW(948), "{/Symbol d}")
+    Text = Replace(Text, VBA.ChrW(945), "{/Symbol a}")
+    Text = Replace(Text, VBA.ChrW(946), "{/Symbol b}")
+    Text = Replace(Text, VBA.ChrW(947), "{/Symbol g}")
+    Text = Replace(Text, VBA.ChrW(952), "{/Symbol t}") 'theta
+    Text = Replace(Text, VBA.ChrW(920), "{/Symbol T}")
+    Text = Replace(Text, VBA.ChrW(955), "{/Symbol l}")
+    Text = Replace(Text, VBA.ChrW(923), "{/Symbol L}")
+    Text = Replace(Text, VBA.ChrW(956), "{/Symbol m}")
+    Text = Replace(Text, VBA.ChrW(961), "{/Symbol r}") ' rho
+    Text = Replace(Text, VBA.ChrW(963), "{/Symbol s}")
+    Text = Replace(Text, VBA.ChrW(931), "{/Symbol S}")
+    Text = Replace(Text, VBA.ChrW(981), "{/Symbol p}") ' phi
+    Text = Replace(Text, VBA.ChrW(934), "{/Symbol P}")
+    Text = Replace(Text, VBA.ChrW(949), "{/Symbol v}") 'varepsilon
+    Text = Replace(Text, VBA.ChrW(1013), "{/Symbol e}") 'epsilon
+    Text = Replace(Text, VBA.ChrW(968), "{/Symbol p}") 'psi
+    Text = Replace(Text, VBA.ChrW(936), "{/Symbol P}")
+    Text = Replace(Text, VBA.ChrW(926), "{/Symbol X}") 'xi
+    Text = Replace(Text, VBA.ChrW(958), "{/Symbol x}")
+    Text = Replace(Text, VBA.ChrW(935), "{/Symbol C}") 'chi
+    Text = Replace(Text, VBA.ChrW(967), "{/Symbol c}")
+    Text = Replace(Text, VBA.ChrW(928), "{/Symbol Pi}")
+    Text = Replace(Text, VBA.ChrW(964), "{/Symbol t}") 'tau
+    Text = Replace(Text, VBA.ChrW(957), "{/Symbol n}") 'greeknu
+    Text = Replace(Text, VBA.ChrW(954), "{/Symbol k}") 'kappa
+    Text = Replace(Text, VBA.ChrW(951), "{/Symbol e}") 'eta
+    Text = Replace(Text, VBA.ChrW(950), "{/Symbol z}") 'zeta
 
 
-ConvertDrawLabel = text
+ConvertDrawLabel = Text
 End Function
 
 

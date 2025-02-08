@@ -176,9 +176,9 @@ Sub InsertTabel()
             .ApplyStyleRowBands = True
             .ApplyStyleColumnBands = False
 #End If
-            .Cell(1, 1).Range.text = "x"
+            .Cell(1, 1).Range.Text = "x"
             .Cell(1, 1).Range.Bold = True
-            .Cell(1, 2).Range.text = "y"
+            .Cell(1, 2).Range.Text = "y"
             .Cell(1, 2).Range.Bold = True
             .Cell(2, 1).Range.Select
             .Columns(1).Width = 65

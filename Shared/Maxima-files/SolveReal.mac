@@ -13,6 +13,7 @@ define_variable(solvar,x,any)$
 define_variable(solvar2,x,any)$
 define_variable(solsysvars,[],list)$
 define_variable(NoSigFig,7,integer)$
+fpprintprec:NoSigFig$
 define_variable(DecOutType,1,integer)$ /* 0: decimals  1: decimal with significant figures,  2: scientific notation, */
 /* define_variable(iteind,0,integer)$
 define_variable(factind,0,integer)$ */  /* Nu lokalt i solvereal*/
@@ -1215,7 +1216,7 @@ nsolve([paramq]) := block(
 /*		load(mnewton),newtonepsilon: 1*10^-30,newtonmaxiter: 1000,
 		qsol:flatten(bfloat(errcatch(mnewton(qfkt(qvar), qvar, 1)))), */
 		/*Find roots of taylorapprox and use these as guess for newtons method*/
-		if errcatch(ql:ev(realroots(ev(taylor(qfkt(qvar),x,1,10),numer),qtol*10),float)) = [] then ( 
+		if errcatch(ql:ev(realroots(ev(taylor(qfkt(qvar),qvar,1,10),numer),qtol*10),float)) = [] then ( 
 			ql: makelist(10^i, i, qn, qm),
 			ql: append(ql, [-8,-6,-4,-2,2,3,4,5,6,7,8,9]),
 			NmaxIter:500
@@ -1233,7 +1234,11 @@ nsolve([paramq]) := block(
 			if qsol # [] then (
 				errcatch(qsol:qsol[1]),
 				solq: append(solq, [qsol]))
-			)
+			),
+			if (absolute_real_time() - qti) > qmaxti then (
+				print("Time out"),
+				goto(afslut)
+				)
 	), 
 	afslut,
 	errormsg: true,
@@ -1277,7 +1282,6 @@ nsolve([paramq]) := block(
 	solq: TestSolution(solq)
 /*	solq: RemoveIncorrect(makelist(qvar = zq, zq, solq)) */
 )$
-
 
 /* Removes solutions that does not comply with the rules in the current context. Ex: Assume(x>0);TestSolution([x=-3,x=3])    ->   [x=3]*/
 TestSolution(solq):=block([zq,zq2,NewSolq:[]],
@@ -1428,12 +1432,18 @@ else
 
 /* loeser foerste ligning i en liste [x+y=1,x-y=2] -> [x=1-y,x-y=2] hvis to loesninger kommer liste i liste */
 SolveFirst(eqnlq,varq):=block([eqnq,autonsolve:true],
-eqnq:first(eqnlq),
-elq:flatten(errcatch(Solve(eqnq,varq))),
-if elq=[] or elq=unknown  then return(elq),
-if elq=[all] or elq=all  then (if length(eqnlq)=1 then return([all]) else return(rest(eqnlq,1))),
-if length(elq)>0 then(
-if CheckSolvedVar(elq[1],varq) then (if length(elq)=1 then elq:first(elq),append([elq],rest(eqnlq,1))) else (false))
+    eqnq:first(eqnlq),
+    elq:flatten(errcatch(Solve(eqnq,varq))),
+    if elq=[] or elq=unknown then return(elq),
+    if elq=[all] or elq=all then (
+        if length(eqnlq)=1 then return([all]) else return(rest(eqnlq,1))
+    ),
+    if length(elq)>0 then (
+        if CheckSolvedVar(elq[1],varq) then (
+            if length(elq)=1 then elq:first(elq),
+            append([elq],rest(eqnlq,1))
+        ) else (false)
+    )
 )$
 
 /*Used to sort solutions from solvesystem*/
@@ -1441,21 +1451,21 @@ SortSolutions(solq):=block([z],makelist(sort(z),z,solq))$
 
 /* matrixeqtolist(matrix([x],[y])=matrix([1],[2]));    ->   [x=1,y=2]*/
 matrixtolist(matq):=block([],
-if op(matq)#matrix then return(matq),
-flatten(args(matq))
+    if op(matq)#matrix then return(matq),
+    flatten(args(matq))
 )$
 
 /* konverterer vektorligning til liste af ligninger*/
-matrixeqtolist(mateq):=block([lq,rq,indq,listeq],
-if op(lhs(mateq))#matrix then return(mateq),
-listeq:[],
-lq:matrixtolist(lhs(mateq)),
-rq:matrixtolist(rhs(mateq)),
-for indq:1 thru length(lq) step 1 
-do(
-listeq:append(listeq,[lq[indq]=rq[indq]])
-),
-listeq
+matrixeqtolist(mateq):=block(
+    [lq, rq, indq, listeq],
+    if op(lhs(mateq)) # matrix then return(mateq),
+    listeq: [],
+    lq: matrixtolist(lhs(mateq)),
+    rq: matrixtolist(rhs(mateq)),
+    for indq: 1 thru length(lq) step 1 do (
+        listeq: append(listeq, [lq[indq] = rq[indq]])
+    ),
+    listeq
 )$
 
 /* konverterer kombination af ligninger og vektorligninger til liste af ligninger */
@@ -1481,113 +1491,160 @@ do(
 eqnlq2
 )$
 
+/*Maxima has a permut funktion, but it requires loading of a large lib.*/
+permuts(lst) := block(
+    [result],
+    if length(lst) = 0 then return([[]]),
+    result: [],
+    for i: 1 thru length(lst) do (
+        for p in permuts(delete(lst[i], lst)) do (
+            result: cons(cons(lst[i], p), result)
+        )
+    ),
+    result
+)$
+
 /* Kan give falske loesninger, specielt ved 3+ lignigner hvor der indgaar ^2 og kvadratrod, men det forsoeges undgaaet ved at sortere ligningslisten saa de korteste ligninger loeses foerst. Maaske noget med assume og removeincorrect kan forbedre*/
-solvesystem(eqnlqsave,varlqsave):=block([noq,varpermut,eqnpermut,eqnq,eqnqsav,eqnlqtemp,indq,indq2,sollq,varq,varlq,iteq,iteql,elq,eqnlq,resq,sprq,sprqgo],
-eqnlqsave:matrixeqtolistall(eqnlqsave),
-sprqgo,
-if not(nonscalarp(varlqsave)) and (symbolp(varlqsave) or listp(varlqsave)) then varlqsave:unique(append([varlqsave],listofvars(eqnlqsave))),
-if not(nonscalarp(varlqsave)) then varlqsave=[],
-if length(varlqsave)<length(eqnlqsave) then varlqsave:unique(append(varlqsave,listofvars(eqnlqsave))),
-if length(varlqsave)>length(eqnlqsave) then 
-	(
-	print("Too many variables."),
-	sprq:read(sconcat("Which of the ",length(eqnlqsave)," variables to solve for? ",varlqsave," (state as list eq. [x,y] or end to choose automatically)")),
-	if sprq=end then 
-		varlqsave:rest(varlqsave,length(eqnlqsave)-length(varlqsave)) 
-	elseif not(nonscalarp(sprq)) then 
-		go(sprqgo) 
-	elseif length(sprq)#length(eqnlqsave) then 
-		go(sprqgo) 
-	else 
-		varlqsave:sprq
-	),
-if length(varlqsave)<length(eqnlqsave) then (print("Warning too few variables, only solving for first equation(s)."),
-eqnlqsave:rest(eqnlqsave,+length(varlqsave)-length(eqnlqsave))),
-if length(varlqsave)#length(eqnlqsave) then (print("Must be the same number of equations as variables"),return()),
-sollq:errcatch(solve(eqnlqsave,varlqsave)),
-if sollq#[] then( 
-	sollq:delete([],makelist(GetReal(z),z,sollq[1])),
-	if sollq#[] and %rnum_list=[] then return(sollq)
-),
-eqnlqsave:sortlistbysize(eqnlqsave,varlqsave),
-varpermut:permut(varlqsave),
-eqnpermut:permut(eqnlqsave),
-eqnlqsave:eqnpermut[1],
-varlqsave:varpermut[1],
-noq:factorial(length(varlqsave)),
-iteq:1, /*Bruges til at taelle ned hvor mange gange der er forsoegt med forskellige variabelraekkefoelge*/
-iteql:1, /*Bruges til at taelle hvor mange gange der er forsoegt med forskellig ligningsraekkefoelge.*/
-eqnlq:[eqnlqsave],
-sollq:[],
-eqnlqtemp:[],
-startq,
-varlq:varlqsave,
-eqnq:first(eqnlq),
-eqnlq:rest(eqnlq,1),
-eqnqsav:eqnq,
-startsolq,/* Her sendes tilbage naar den foerste variabel er elimineret/loest */
-/*print("eqnq:",eqnq,"eqnlq:",eqnlq,"varlq:",varlq,"iteq:",iteq,"iteql:",iteql),*/
-indq:1,
-/* loes foerste ligning og indsaet i andre, flyt til slutningen. Hvis loesning fejler saa forsoeges med naeste variabel indtil ikke flere*/
-resq:do
-	( 
-	varq:first(varlq), /* Foerste variable udvaelges og placeres derefter i slutningen af listen*/
-	varlq:rest(varlq,1),
-	varlq:append(varlq,[varq]),
-	elq:ev(SolveFirst(eqnq,varq),solsysvars=varlqsave), /* Den foerste ligning i listen loeses og placeres paa samme sted i listen */
-	if elq=[] then (
-		varlq:[x],
-		eqnq:[],		
-		return(true))
-	elseif elq#false and elq#unknown then /*Hvis foerste ligning blev loest*/
-		( /*Den foerste ligning indsaettes i de andre og placeres sidst. Hvis der var flere loesninger indsaettes disse ogsaa i alle ligninger som gemmes i eqnlqtemp*/
-		elq:SplitSubst([elq]),
-		eqnq:first(elq),
-		if length(elq)>1 then 
-			(eqnlqtemp:append(eqnlqtemp,rest(elq,1))),
-		return(true)
-		),
-	indq:indq+1,
-	if indq>length(varlq) then /*Alle variable forsoegt uden held*/
-		(if iteql>=noq then return(false) else return(retry))
-	),
-tryagainlabel,
-if resq=false then 
-	(
-		/*Hvis foerste ligning ikke kunne loeses for nogen af variablene og alle de andre ligninger allerede er forsoegt*/
-/*	print("Can't solve. Trying to_poly_solve"),
-	eqnlq:to_poly_solve(eqnlqsave,varlqsave),
-	eqnlq:scanmap(RemoveUnion,eqnlq),*/
-	return(eqnlq)
-	)
-elseif resq=retry then 
-	(/*Hvis foerste ligning ikke kunne loeses for nogen af variablene, saa proeves med en anden raekkefoelge af variable  */
-	iteq:iteq+1,
-	if (iteq>=noq and iteql<noq) then (
-		iteq:1,
-		iteql:iteql+1,
-		/* eqnqsav:append(rest(eqnqsav,1),[first(eqnqsav)]) */
-		eqnq:eqnpermut[iteql]
-		),
-	eqnq:eqnqsav,
-	/* varlqsave:append(rest(varlqsave,1),[first(varlqsave)]), */
-	varlq:varpermut[iteq],
-	eqnlqtemp:[],
-	go(startsolq)
-	),
-/*Hvis foerste ligning blev loest saa fortsaettes her*/
-varlq:rest(varlq,-1), /*Den variabel der blev loest for fjernes fra listen*/
-if length(varlq)>=1 then go(startsolq), /* Hvis de er flere variable der skal isoleres saa start forfra*/
-if not(IsSystemSolved(sollq,varlqsave)) and iteq<noq and iteql<noq then (resq:retry,go(tryagainlabel)),
-/*Her nulstilles og goeres klar til at loese evt gemte extra loesninger*/
-	iteq:1,
-	iteql:1,
-eqnlq:append(eqnlq,eqnlqtemp),
-eqnlqtemp:[],
-if eqnq#[] then sollq:append(sollq,[eqnq]),
-varlq:varlqsave,
-if length(eqnlq)>0 then go(startq),
-SortSolutions(sollq)
+solvesystem(eqnlqsave, varlqsave) := block(
+    [noq, varpermut, eqnpermut, eqnq, eqnqsav, eqnlqtemp, indq, indq2, sollq, varq, varlq, iteq, iteql, elq, eqnlq, resq, sprq, sprqgo, sollq2, ql, zq],
+    eqnlqsave: matrixeqtolistall(eqnlqsave),
+    sprqgo,
+    if not(nonscalarp(varlqsave)) and (symbolp(varlqsave) or listp(varlqsave)) then varlqsave: unique(append([varlqsave], listofvars(eqnlqsave))),
+    if not(nonscalarp(varlqsave)) then varlqsave: [],
+    if length(varlqsave) < length(eqnlqsave) then varlqsave: unique(append(varlqsave, listofvars(eqnlqsave))),
+    if length(varlqsave) > length(eqnlqsave) then (
+        print("Too many variables."),
+        sprq: read(sconcat("Which of the ", length(eqnlqsave), " variables to solve for? ", varlqsave, " (state as list eq. [x,y] or end to choose automatically)")),
+        if sprq = end then 
+            varlqsave: rest(varlqsave, length(eqnlqsave) - length(varlqsave)) 
+        elseif not(nonscalarp(sprq)) then 
+            go(sprqgo) 
+        elseif length(sprq) # length(eqnlqsave) then 
+            go(sprqgo) 
+        else 
+            varlqsave: sprq
+    ),
+    if length(varlqsave) < length(eqnlqsave) then (
+        print("Warning: More equations than variables."),
+        while length(varlqsave) < length(eqnlqsave) do (
+            varlqsave: append(varlqsave, [first(varlqsave)])
+        )
+/*        eqnlqsave: rest(eqnlqsave, +length(varlqsave) - length(eqnlqsave))*/
+    ), 
+    if length(varlqsave) # length(eqnlqsave) then (
+        print("Must be the same number of equations as variables"),
+        return()
+    ),
+    sollq: errcatch(solve(eqnlqsave, varlqsave)),
+    if sollq # [] then (
+        sollq: delete([], makelist(GetReal(z), z, sollq[1])),
+        if sollq # [] and %rnum_list = [] then return(sollq)
+    ),
+    eqnlqsave: sortlistbysize(eqnlqsave, varlqsave),
+    varpermut: reverse(permuts(varlqsave)),
+    eqnpermut: reverse(permuts(eqnlqsave)),
+    eqnlqsave: eqnpermut[1],
+    varlqsave: varpermut[1],
+    noq: factorial(length(varlqsave)),
+    iteq: 1, /*Bruges til at taelle ned hvor mange gange der er forsoegt med forskellige variabelraekkefoelge*/
+    iteql: 1, /*Bruges til at taelle hvor mange gange der er forsoegt med forskellig ligningsraekkefoelge.*/
+    eqnlq: [eqnlqsave],
+    sollq: [],
+    eqnlqtemp: [],
+    startq,
+    varlq: varlqsave,
+    eqnq: first(eqnlq),
+    eqnlq: rest(eqnlq, 1),
+    eqnqsav: eqnq,
+    startsolq, /* Her sendes tilbage naar den foerste variabel er elimineret/loest */
+    indq: 1,
+    /* loes foerste ligning og indsaet i andre, flyt til slutningen. Hvis loesning fejler saa forsoeges med naeste variabel indtil ikke flere*/
+    resq: do (
+        varq: first(varlq), /* Foerste variabel udvaelges og placeres derefter i slutningen af listen*/
+        varlq: rest(varlq, 1),
+        varlq: append(varlq, [varq]),
+        elq: ev(SolveFirst(eqnq, varq), solsysvars = varlqsave), /* Den foerste ligning i listen loeses og placeres paa samme sted i listen */
+        if elq = [] then (
+            varlq: [x],
+            eqnq: [],        
+            return(true)
+        ) elseif elq # false and elq # unknown then ( /*Hvis foerste ligning blev loest*/
+            /*Den foerste ligning indsaettes i de andre og placeres sidst. Hvis der var flere loesninger indsaettes disse ogsaa i alle ligninger som gemmes i eqnlqtemp*/
+            elq: SplitSubst([elq]),
+            eqnq: first(elq),
+            if length(elq) > 1 then 
+                (eqnlqtemp: append(eqnlqtemp, rest(elq, 1))),
+            return(true)
+        ),
+        indq: indq + 1,
+        if indq > length(varlq) then /*Alle variable forsoegt uden held*/
+            (if iteql >= noq then return(false) else return(retry))
+    ),
+    tryagainlabel,
+    if resq = false then (
+        /*Hvis foerste ligning ikke kunne loeses for nogen af variablene og alle de andre ligninger allerede er forsoegt*/
+        /*print("Can't solve. Trying to_poly_solve"),
+        eqnlq: to_poly_solve(eqnlqsave, varlqsave),
+        eqnlq: scanmap(RemoveUnion, eqnlq),*/
+        return(eqnlq)
+    ) elseif resq = retry then (
+        /*Hvis foerste ligning ikke kunne loeses for nogen af variablene, saa proeves med en anden raekkefoelge af variable, og derefter ligninger  */
+        iteq: iteq + 1,
+        if (iteq >= noq and iteql < noq) then (
+            iteq: 1,
+            iteql: iteql + 1,
+            /* eqnqsav:append(rest(eqnqsav,1),[first(eqnqsav)]) */
+            eqnqsav: eqnpermut[iteql]
+        ),
+        eqnq: eqnqsav,
+        /* varlqsave:append(rest(varlqsave,1),[first(varlqsave)]), */
+        varlq: varpermut[iteq],
+        eqnlqtemp: [],
+        go(startsolq)
+    ),
+    /*Hvis foerste ligning blev loest saa fortsaettes her*/
+    varlq: rest(varlq, -1), /*Den variabel der blev loest for fjernes fra listen*/
+    if length(varlq) >= 1 then go(startsolq), /* Hvis de er flere variable der skal isoleres saa start forfra*/
+    if not(IsSystemSolved(sollq, varlqsave)) and iteq < noq and iteql < noq then (resq: retry, go(tryagainlabel)),
+    /*Her nulstilles og goeres klar til at loese evt gemte extra loesninger*/
+    iteq: 1,
+    iteql: 1,
+    eqnlq: append(eqnlq, eqnlqtemp),
+    eqnlqtemp: [],
+    if eqnq # [] then sollq: append(sollq, [eqnq]),
+    varlq: varlqsave,
+    if length(eqnlq) > 0 then (
+        eqnq: first(eqnlq),
+        go(startq)
+    ),
+    SortSolutions(sollq),
+    /*forsøg med mnewton, men kun for 2 ligninger*/
+    if length(varlqsave)=2 then (
+        load(mnewton),
+        ql: [[0,0],[1,1],[10,10],[100,100],[-1,-1],[-10,-10],[-100,-100],[-10,10],[10,-10]],
+		for zq in ql do (			
+            sollq2: ev(mnewton(eqnlqsave, varlqsave,zq),numer),
+            if sollq2 # [] and not(member(sollq2[1],sollq)) then (
+                sollq:append(sollq,[sollq2[1]])
+            )
+        ),
+        /*remove duplicate values from sollq, where values are within qtol*/
+        NewSolq:[],qtol:10^-15,
+        for zq in sollq do (
+            if flatten(makelist(if (abs(rhs(zq2[1])-rhs(zq[1]))<qtol*10 and abs(rhs(zq2[2])-rhs(zq[2]))<qtol*10) then 1 else [] , zq2, NewSolq))=[] then
+                NewSolq:cons(zq,NewSolq)
+        ),
+        sollq:NewSolq
+    ),
+    /*remove solutions that are false*/
+    sollq2:[],
+    for zq in sollq do (
+        zq:makelist(if is(equal(lhs(zq2),rhs(zq2)))#false then zq2 else false,zq2,zq),
+        if freeof(false,zq) then sollq2:append(sollq2,[zq])
+    ),
+    sollq:sollq2,
+
+    SortSolutions(sollq)
 )$
 
 /*solvesystemByEliminate(eqnlq,varlq):=block([varlq1,elq,sollq,indq,varq],
@@ -1629,6 +1686,7 @@ qsolu:solve(eqnlq,varlq),
 if IsAnySolved(qsolu,varlq) then go(slutqw),
 if solverealtopoly then 
 	(
+	load(to_poly_solve),
 	qsolu:ev(errcatch(nicedummies(ev(to_poly_solve(eqnlq,varlq),realonly:false)))[1]),
 	qsolu:flatten(errcatch(args(qsolu)))
 	),

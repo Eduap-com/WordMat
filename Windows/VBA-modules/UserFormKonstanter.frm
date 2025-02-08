@@ -48,50 +48,50 @@ Private Sub Label_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-Dim text As String, mult As String
+Dim Text As String, mult As String
 
 mult = MaximaGangeTegn
 
 If Sprog.SprogNr = 1 Then
-    text = "Definer:  "
+    Text = "Definer:  "
 Else
-    text = "Define:  "
+    Text = "Define:  "
 End If
 
-If CheckBox_planck.Value = True Then text = text & "h=6" & DecSeparator & "62606896" & MaximaGangeTegn & "10^(-34) J" & MaximaGangeTegn & "s" & ListSeparator
-If CheckBox_planckev.Value = True Then text = text & "h=4" & DecSeparator & "13566733" & MaximaGangeTegn & "10^(-15) eV" & MaximaGangeTegn & "s" & ListSeparator
-If CheckBox_c.Value = True Then text = text & "c=299792458 m" & MaximaGangeTegn & "s^(-1)" & ListSeparator
-If CheckBox_G.Value = True Then text = text & "G=6" & DecSeparator & "67428" & MaximaGangeTegn & "10^(-11) N" & MaximaGangeTegn & "m^2" & MaximaGangeTegn & "kg^-2" & ListSeparator
-If CheckBox_ge.Value = True Then text = text & "g_" & Sprog.A(255) & "=9" & DecSeparator & "82m" & MaximaGangeTegn & "s^-2" & ListSeparator
-If CheckBox_e.Value = True Then text = text & "e_l=1" & DecSeparator & "602176487" & MaximaGangeTegn & "10^-19 C" & ListSeparator
-If CheckBox_NA.Value = True Then text = text & "N_A=6" & DecSeparator & "02214179" & MaximaGangeTegn & "10^23 mol^(-1) " & ListSeparator
-If CheckBox_R.Value = True Then text = text & "R=8" & DecSeparator & "314472 J" & MaximaGangeTegn & "mol^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
-If CheckBox_R2.Value = True Then text = text & "R=0" & DecSeparator & "0821 L" & MaximaGangeTegn & "atm" & MaximaGangeTegn & "mol^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
-If CheckBox_k.Value = True Then text = text & "k=1" & DecSeparator & "3806504" & MaximaGangeTegn & "10^-23 J" & MaximaGangeTegn & "K^-1" & ListSeparator
-If CheckBox_mu0.Value = True Then text = text & VBA.ChrW(956) & "_0=4" & VBA.ChrW(960) & MaximaGangeTegn & "10^-7 N" & MaximaGangeTegn & "A^-2" & ListSeparator
-If CheckBox_e0.Value = True Then text = text & VBA.ChrW(1013) & "_0=8" & DecSeparator & "854187817" & MaximaGangeTegn & "10^-12 F" & MaximaGangeTegn & "m^-1" & ListSeparator
-If CheckBox_sigma.Value = True Then text = text & VBA.ChrW(963) & "=5" & DecSeparator & "670400" & MaximaGangeTegn & "10^-8 W" & MaximaGangeTegn & "m^-2" & MaximaGangeTegn & "K^-4" & ListSeparator
-If CheckBox_coulomb.Value = True Then text = text & "k=8" & DecSeparator & "99" & MaximaGangeTegn & "10^9 N" & MaximaGangeTegn & "m^2" & MaximaGangeTegn & "C^-2" & ListSeparator
+If CheckBox_planck.Value = True Then Text = Text & "h=6" & DecSeparator & "62606896" & MaximaGangeTegn & "10^(-34) J" & MaximaGangeTegn & "s" & ListSeparator
+If CheckBox_planckev.Value = True Then Text = Text & "h=4" & DecSeparator & "13566733" & MaximaGangeTegn & "10^(-15) eV" & MaximaGangeTegn & "s" & ListSeparator
+If CheckBox_c.Value = True Then Text = Text & "c=299792458 m" & MaximaGangeTegn & "s^(-1)" & ListSeparator
+If CheckBox_G.Value = True Then Text = Text & "G=6" & DecSeparator & "67428" & MaximaGangeTegn & "10^(-11) N" & MaximaGangeTegn & "m^2" & MaximaGangeTegn & "kg^-2" & ListSeparator
+If CheckBox_ge.Value = True Then Text = Text & "g_" & Sprog.A(255) & "=9" & DecSeparator & "82m" & MaximaGangeTegn & "s^-2" & ListSeparator
+If CheckBox_e.Value = True Then Text = Text & "e_l=1" & DecSeparator & "602176487" & MaximaGangeTegn & "10^-19 C" & ListSeparator
+If CheckBox_NA.Value = True Then Text = Text & "N_A=6" & DecSeparator & "02214179" & MaximaGangeTegn & "10^23 mol^(-1) " & ListSeparator
+If CheckBox_R.Value = True Then Text = Text & "R=8" & DecSeparator & "314472 J" & MaximaGangeTegn & "mol^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
+If CheckBox_R2.Value = True Then Text = Text & "R=0" & DecSeparator & "0821 L" & MaximaGangeTegn & "atm" & MaximaGangeTegn & "mol^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
+If CheckBox_k.Value = True Then Text = Text & "k=1" & DecSeparator & "3806504" & MaximaGangeTegn & "10^-23 J" & MaximaGangeTegn & "K^-1" & ListSeparator
+If CheckBox_mu0.Value = True Then Text = Text & VBA.ChrW(956) & "_0=4" & VBA.ChrW(960) & MaximaGangeTegn & "10^-7 N" & MaximaGangeTegn & "A^-2" & ListSeparator
+If CheckBox_e0.Value = True Then Text = Text & VBA.ChrW(1013) & "_0=8" & DecSeparator & "854187817" & MaximaGangeTegn & "10^-12 F" & MaximaGangeTegn & "m^-1" & ListSeparator
+If CheckBox_sigma.Value = True Then Text = Text & VBA.ChrW(963) & "=5" & DecSeparator & "670400" & MaximaGangeTegn & "10^-8 W" & MaximaGangeTegn & "m^-2" & MaximaGangeTegn & "K^-4" & ListSeparator
+If CheckBox_coulomb.Value = True Then Text = Text & "k=8" & DecSeparator & "99" & MaximaGangeTegn & "10^9 N" & MaximaGangeTegn & "m^2" & MaximaGangeTegn & "C^-2" & ListSeparator
 
-If CheckBox_u.Value = True Then text = text & "u=1" & DecSeparator & "660538782" & MaximaGangeTegn & "10^-27 kg" & ListSeparator
-If CheckBox_uev.Value = True Then text = text & "u=931" & DecSeparator & "494028 MeV" & MaximaGangeTegn & "c^-2" & ListSeparator
+If CheckBox_u.Value = True Then Text = Text & "u=1" & DecSeparator & "660538782" & MaximaGangeTegn & "10^-27 kg" & ListSeparator
+If CheckBox_uev.Value = True Then Text = Text & "u=931" & DecSeparator & "494028 MeV" & MaximaGangeTegn & "c^-2" & ListSeparator
 
-If CheckBox_cvand.Value = True Then text = text & "c_" & Sprog.A(256) & "=4181 J" & MaximaGangeTegn & "kg^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
-If CheckBox_calu.Value = True Then text = text & "c_alu=897 J" & MaximaGangeTegn & "kg^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
-If CheckBox_ccop.Value = True Then text = text & "c_" & Sprog.A(257) & "=385 J" & MaximaGangeTegn & "kg^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
-If CheckBox_cjern.Value = True Then text = text & "c_" & Sprog.A(258) & "=450 J" & MaximaGangeTegn & "kg^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
+If CheckBox_cvand.Value = True Then Text = Text & "c_" & Sprog.A(256) & "=4181 J" & MaximaGangeTegn & "kg^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
+If CheckBox_calu.Value = True Then Text = Text & "c_alu=897 J" & MaximaGangeTegn & "kg^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
+If CheckBox_ccop.Value = True Then Text = Text & "c_" & Sprog.A(257) & "=385 J" & MaximaGangeTegn & "kg^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
+If CheckBox_cjern.Value = True Then Text = Text & "c_" & Sprog.A(258) & "=450 J" & MaximaGangeTegn & "kg^-1" & MaximaGangeTegn & "K^-1" & ListSeparator
 
-If CheckBox_me.Value = True Then text = text & "m_e=5" & DecSeparator & "4857990943" & MaximaGangeTegn & "10^-4 u" & ListSeparator
-If CheckBox_mekg.Value = True Then text = text & "m_e=9" & DecSeparator & "10938215" & MaximaGangeTegn & "10^-31 kg" & ListSeparator
-If CheckBox_mp.Value = True Then text = text & "m_p=1" & DecSeparator & "00727646677 u" & ListSeparator
-If CheckBox_mn.Value = True Then text = text & "m_n=1" & DecSeparator & "00866491597 u" & ListSeparator
+If CheckBox_me.Value = True Then Text = Text & "m_e=5" & DecSeparator & "4857990943" & MaximaGangeTegn & "10^-4 u" & ListSeparator
+If CheckBox_mekg.Value = True Then Text = Text & "m_e=9" & DecSeparator & "10938215" & MaximaGangeTegn & "10^-31 kg" & ListSeparator
+If CheckBox_mp.Value = True Then Text = Text & "m_p=1" & DecSeparator & "00727646677 u" & ListSeparator
+If CheckBox_mn.Value = True Then Text = Text & "m_n=1" & DecSeparator & "00866491597 u" & ListSeparator
 
-If CheckBox_mj.Value = True Then text = text & "m_" & Sprog.A(255) & "=5" & DecSeparator & "9737" & MaximaGangeTegn & "10^24 kg" & ListSeparator
-If CheckBox_rjord.Value = True Then text = text & "r_" & Sprog.A(255) & "=6371km" & ListSeparator
-If CheckBox_AU.Value = True Then text = text & "AU=1" & DecSeparator & "50" & MaximaGangeTegn & "10^11 m" & ListSeparator
-If CheckBox_mmoon.Value = True Then text = text & "m_" & Sprog.A(259) & "=7" & DecSeparator & "3477" & MaximaGangeTegn & "10^22 kg" & ListSeparator
-If CheckBox_rmoon.Value = True Then text = text & "r_" & Sprog.A(259) & "=1737km" & ListSeparator
-If CheckBox_msol.Value = True Then text = text & "m_" & Sprog.A(260) & "=1" & DecSeparator & "98892" & MaximaGangeTegn & "10^30 kg" & ListSeparator
+If CheckBox_mj.Value = True Then Text = Text & "m_" & Sprog.A(255) & "=5" & DecSeparator & "9737" & MaximaGangeTegn & "10^24 kg" & ListSeparator
+If CheckBox_rjord.Value = True Then Text = Text & "r_" & Sprog.A(255) & "=6371km" & ListSeparator
+If CheckBox_AU.Value = True Then Text = Text & "AU=1" & DecSeparator & "50" & MaximaGangeTegn & "10^11 m" & ListSeparator
+If CheckBox_mmoon.Value = True Then Text = Text & "m_" & Sprog.A(259) & "=7" & DecSeparator & "3477" & MaximaGangeTegn & "10^22 kg" & ListSeparator
+If CheckBox_rmoon.Value = True Then Text = Text & "r_" & Sprog.A(259) & "=1737km" & ListSeparator
+If CheckBox_msol.Value = True Then Text = Text & "m_" & Sprog.A(260) & "=1" & DecSeparator & "98892" & MaximaGangeTegn & "10^30 kg" & ListSeparator
 
 
 'If Len(text) > 12 Then
@@ -101,13 +101,13 @@ If CheckBox_msol.Value = True Then text = text & "m_" & Sprog.A(260) & "=1" & De
 '        text = Replace(text, ",", ".")
 '    End If
     
-    text = Trim(text)
+    Text = Trim(Text)
 
-    If right(text, 1) = ";" Or right(text, 1) = "," Then
-        text = Left(text, Len(text) - 1)
+    If right(Text, 1) = ";" Or right(Text, 1) = "," Then
+        Text = Left(Text, Len(Text) - 1)
     End If
 
-    insertribformel "", text
+    insertribformel "", Text
 'End If
 
 slut:

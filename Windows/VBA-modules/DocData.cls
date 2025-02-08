@@ -54,7 +54,7 @@ hop:
         startrow = 0
         startcol = Selection.Cells(1).Column.Index
         If c > 1 Then
-            cellval = Selection.Rows(1).Cells(startcol + 1).Range.text
+            cellval = Selection.Rows(1).Cells(startcol + 1).Range.Text
             cellval = Left(cellval, Len(cellval) - 1)
             cellval = Replace(cellval, "*10^", "E")
             D = CDbl(cellval)
@@ -65,7 +65,7 @@ hop:
             End If
         End If
         If r > 1 Then
-            cellval = Selection.Rows(2).Cells(startcol).Range.text
+            cellval = Selection.Rows(2).Cells(startcol).Range.Text
             cellval = Left(cellval, Len(cellval) - 1)
             cellval = Replace(cellval, "*10^", "E")
             D = CDbl(cellval)
@@ -82,7 +82,7 @@ hop:
             i = i + 1
             For k = 1 To c
                 L = L + 1
-                cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.text, ",", ".")
+                cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.Text, ",", ".")
                 cellval = Left(cellval, Len(cellval) - 1)
                 cellval = Replace(cellval, "*10^", "E")
                 Tabel(i, L) = CDbl(cellval)
@@ -146,7 +146,7 @@ End If
         i = i + 1
         For k = 1 To c
         L = L + 1
-        cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.text, ",", ".")
+        cellval = Replace(Selection.Rows(i + startrow).Cells(L + startcol - 1).Range.Text, ",", ".")
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, vbCrLf, "")
         cellval = Replace(cellval, vbCr, "")
@@ -299,7 +299,7 @@ End Function
 Public Sub GetSetData()
 ' læser mængde {(2,1),(3,4)} eller liste fra mathbox ind i tabel
 Dim p As String
-Dim text As String
+Dim Text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
 Dim r() As String
@@ -308,27 +308,27 @@ On Error GoTo slut
 
 ReDim r(1 To 1000) As String
 If Selection.OMaths.Count > 0 Then
-    text = mboxes(0)
+    Text = mboxes(0)
 '    Selection.OMaths.Linearize
 '    text = Selection.OMaths(1).Range.text
 Else
-    text = Selection.Range.text
+    Text = Selection.Range.Text
 End If
-ea.text = Replace(text, VBA.ChrW(8722), "-") ' nødvendigt
+ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' nødvendigt
 
-If InStr(text, "[") > 0 Then
+If InStr(Text, "[") > 0 Then
     ea.SetSquareBrackets
-    ea.text = ea.GetNextBracketContent()
-ElseIf InStr(text, "{") > 0 Then
+    ea.Text = ea.GetNextBracketContent()
+ElseIf InStr(Text, "{") > 0 Then
     ea.SetTuborgBrackets
-    ea.text = ea.GetNextBracketContent()
+    ea.Text = ea.GetNextBracketContent()
 Else
-    ea.text = text
+    ea.Text = Text
 End If
 ea.SetNormalBrackets
 ea.Pos = 1
 nrows = 0
-    ea.text = Replace(ea.text, ";", " , ")
+    ea.Text = Replace(ea.Text, ";", " , ")
     ea.ConvertDecSeparator
 
 
@@ -361,7 +361,7 @@ Else
 End If
 
 For i = 1 To nrows
-    ea.text = r(i)
+    ea.Text = r(i)
     ea.Pos = 1
     n = 0
     Do
@@ -372,7 +372,7 @@ For i = 1 To nrows
         End If
         If Not (MaximaSeparator) Then p = Replace(p, ".", ",")
         tabels(i, n) = omax.ConvertToAscii(p)
-    Loop While ea.Pos < Len(ea.text) And n < 1000
+    Loop While ea.Pos < Len(ea.Text) And n < 1000
 Next
     
 If nrows = 1 And ncolumns = 1 Then ' hvis kun et felt så er det formentlig kun et matematikfelt og ikke en liste eller tabel
@@ -448,7 +448,7 @@ Else
     ReDim mboxes(0 To 100)
     Set sr = Selection.Range
     
-    If Len(Selection.text) < 3 Then
+    If Len(Selection.Text) < 3 Then
         Selection.OMaths(1).Range.Select
         Set sr = Selection.Range
     End If
@@ -473,7 +473,7 @@ Else
     Set mathcol = sr.OMaths
     For j = 0 To antal - 1
         mathcol(j + 1).ConvertToNormalText
-        mboxes(j) = Replace(mathcol(j + 1).Range.text, ChrW(11), "") ' fjern shift-enter
+        mboxes(j) = Replace(mathcol(j + 1).Range.Text, ChrW(11), "") ' fjern shift-enter
     Next
     ReDim Preserve mboxes(0 To antal - 1)
     antalmboxes = antal

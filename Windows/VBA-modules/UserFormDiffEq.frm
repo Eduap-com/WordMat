@@ -58,7 +58,7 @@ Dim Arr As Variant
 Dim i As Integer
     
     luk = False
-    TempDefs = TextBox_def.text
+    TempDefs = TextBox_def.Text
     TempDefs = Trim(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
@@ -66,10 +66,10 @@ Dim i As Integer
     TempDefs = ""
     For i = 0 To UBound(Arr)
         If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> TextBox_funktion.text Then ' kan ikke definere variabel der løses for
+            If Split(Arr(i), "=")(0) <> TextBox_funktion.Text Then ' kan ikke definere variabel der løses for
                 TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
-                MsgBox Sprog.A(252) & " " & TextBox_funktion.text & " " & Sprog.A(253), vbOKOnly, Sprog.Error
+                MsgBox Sprog.A(252) & " " & TextBox_funktion.Text & " " & Sprog.A(253), vbOKOnly, Sprog.Error
                 Exit Sub
             End If
         End If
@@ -92,17 +92,17 @@ Private Sub Label_solvenum_Click()
    End If
    luk = True
    Me.hide
-   UserFormDeSolveNumeric.TextBox_varx.text = TextBox_variabel.text
-   UserFormDeSolveNumeric.TextBox_var1.text = TextBox_funktion.text
-   UserFormDeSolveNumeric.TextBox_eq1.text = F
-   If TextBox_starty.text = vbNullString Then
-      UserFormDeSolveNumeric.TextBox_init1.text = "1"
+   UserFormDeSolveNumeric.TextBox_varx.Text = TextBox_variabel.Text
+   UserFormDeSolveNumeric.TextBox_var1.Text = TextBox_funktion.Text
+   UserFormDeSolveNumeric.TextBox_eq1.Text = F
+   If TextBox_starty.Text = vbNullString Then
+      UserFormDeSolveNumeric.TextBox_init1.Text = "1"
    Else
-      UserFormDeSolveNumeric.TextBox_init1.text = TextBox_starty.text
+      UserFormDeSolveNumeric.TextBox_init1.Text = TextBox_starty.Text
    End If
-   UserFormDeSolveNumeric.TextBox_xmin.text = TextBox_startx.text
-   UserFormDeSolveNumeric.TextBox_xmax.text = TextBox_startx.text + 10
-   UserFormDeSolveNumeric.TextBox_definitioner.text = TextBox_def.text
+   UserFormDeSolveNumeric.TextBox_xmin.Text = TextBox_startx.Text
+   UserFormDeSolveNumeric.TextBox_xmax.Text = TextBox_startx.Text + 10
+   UserFormDeSolveNumeric.TextBox_definitioner.Text = TextBox_def.Text
    UserFormDeSolveNumeric.Show
 End Sub
 
@@ -152,7 +152,7 @@ Dim svar As String
     For i = 0 To UBound(Svars)
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
-            TextBox_def.text = TextBox_def.text & svar & "=" & VbCrLfMac    ' midlertidige definitioner
+            TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac    ' midlertidige definitioner
         End If
     Next
 
@@ -170,12 +170,12 @@ Sub opdaterLabels()
 Dim fkt As String
 Dim Pos As Integer
 On Error Resume Next
-    fkt = TextBox_funktion.text
+    fkt = TextBox_funktion.Text
     Pos = InStr(fkt, "(")
     If Pos > 0 Then
         fkt = Left(fkt, Pos - 1)
     End If
-    Label_diffy.Caption = fkt & "'(" & TextBox_startx.text & ")="
+    Label_diffy.Caption = fkt & "'(" & TextBox_startx.Text & ")="
     Label_y.Caption = fkt & "("
     Label_y2.Caption = fkt & "("
 End Sub

@@ -155,18 +155,18 @@ Sub InsertRelation(relation As String)
 
 End Sub
 
-Function ConvertToGraphSyntax(text As String, Optional ConvertMaxima As Boolean = True)
+Function ConvertToGraphSyntax(Text As String, Optional ConvertMaxima As Boolean = True)
 If ConvertMaxima Then
     On Error Resume Next
     omax.ConvertLnLog = False
-    text = omax.CodeForMaxima(text)
+    Text = omax.CodeForMaxima(Text)
     omax.ConvertLnLog = True
 End If
-    text = Replace(text, "%e", "e")
-    text = Replace(text, "%pi", "pi")
-    text = Replace(text, "%", "")
+    Text = Replace(Text, "%e", "e")
+    Text = Replace(Text, "%pi", "pi")
+    Text = Replace(Text, "%", "")
 
-ConvertToGraphSyntax = text
+ConvertToGraphSyntax = Text
 End Function
 #End If
 

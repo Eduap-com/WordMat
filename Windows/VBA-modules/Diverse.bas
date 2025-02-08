@@ -698,7 +698,7 @@ Sub InsertDefiner()
     If Selection.OMaths.Count > 0 Then
         If Selection.OMaths(1).Type = wdOMathInline Then
             Selection.OMaths(1).Range.Select
-            If Selection.OMaths(1).Range.text = "Type equation here." Or Selection.OMaths(1).Range.text = "Skriv ligningen her." Then
+            If Selection.OMaths(1).Range.Text = "Type equation here." Or Selection.OMaths(1).Range.Text = "Skriv ligningen her." Then
             Else
                 Selection.Collapse wdCollapseStart
                 Selection.MoveRight wdCharacter, 1
@@ -707,7 +707,7 @@ Sub InsertDefiner()
         Else
             Selection.OMaths(1).Range.Select
             Selection.Collapse wdCollapseStart
-            If Selection.OMaths(1).Range.text = "Type equation here." Or Selection.OMaths(1).Range.text = "Skriv ligningen her." Then
+            If Selection.OMaths(1).Range.Text = "Type equation here." Or Selection.OMaths(1).Range.Text = "Skriv ligningen her." Then
                 Selection.MoveRight wdCharacter, 1
             End If
             Selection.TypeText Sprog.A(62) & ": "
@@ -771,17 +771,17 @@ Sub ForrigeResultat()
     matfeltno = ra.OMaths.Count
     Do
         If ResFeltIndex >= matfeltno - 1 Then
-            If ActiveDocument.Range.OMaths(matfeltno).Range.text = Selection.Range.text Then
-                Selection.text = ""
+            If ActiveDocument.Range.OMaths(matfeltno).Range.Text = Selection.Range.Text Then
+                Selection.Text = ""
                 Selection.OMaths.Add Range:=Selection.Range
             Else
-                Selection.text = ""
+                Selection.Text = ""
             End If
             GoTo Fejl
         End If
 '        ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range.Select
         Set r = ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range
-        If Len(r.text) = 0 Then
+        If Len(r.Text) = 0 Then
             ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
             GoTo slut
@@ -813,11 +813,11 @@ Loop While hopover
     
     sr.Select
     ResPos1 = Selection.Range.start
-    If Selection.Range.text = "Skriv ligningen her." Then
+    If Selection.Range.Text = "Skriv ligningen her." Then
         ResPos1 = ResPos1 - 1 ' hvis tom i forvejen er selection af eller anden grund 1 tegn for meget
     End If
     s = Replace(s, VBA.ChrW(8289), "") ' funktionstegn  sin(x) bliver ellers til si*n(x). også problem med andre funktioner
-    Selection.text = s
+    Selection.Text = s
     
 '    Dim ml As Integer
 '    ml = Len(ActiveDocument.Range.OMaths(matfeltno).Range.text)
@@ -841,7 +841,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 
-Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
+Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
 ' returnerer sidste del af texten til første position talt fra enden for = eller ca. ligmed
 ' = i sumtegn ignoreres
     
@@ -854,12 +854,12 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     Dim i As Integer
     
     Do ' gå tilbage til nærmeste ligmed
-        posligmed = InStr(text, "=")
-        possumtegn = InStr(text, VBA.ChrW(8721))
-        posca = InStr(text, VBA.ChrW(8776))
-        poseller = InStr(text, VBA.ChrW(8744))
+        posligmed = InStr(Text, "=")
+        possumtegn = InStr(Text, VBA.ChrW(8721))
+        posca = InStr(Text, VBA.ChrW(8776))
+        poseller = InStr(Text, VBA.ChrW(8744))
         
-        Pos = Len(text)
+        Pos = Len(Text)
     '    pos = posligmed
         If posligmed > 0 And posligmed < Pos Then Pos = posligmed
         If posca > 0 And posca < Pos Then Pos = posca
@@ -868,19 +868,19 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
         If possumtegn > 0 And possumtegn < Pos Then ' hvis sumtegn er der =tegn som del deraf
             Pos = 0
         End If
-        If Pos = Len(text) Then Pos = 0
+        If Pos = Len(Text) Then Pos = 0
         If Pos > 0 Then
-            Arr(i) = Left(text, Pos - 1)
-            text = right(text, Len(text) - Pos)
+            Arr(i) = Left(Text, Pos - 1)
+            Text = right(Text, Len(Text) - Pos)
             i = i + 1
         Else
-            Arr(i) = text
+            Arr(i) = Text
         End If
     Loop While Pos > 0
     
     If indeks = i Then ResIndex = -1  ' global variabel markerer at der ikke er flere til venstre
     If i = 0 Then
-        KlipTilLigmed = text
+        KlipTilLigmed = Text
         ResIndex = -1
     Else
         KlipTilLigmed = Arr(i - indeks)
@@ -909,7 +909,7 @@ Function ReadEquationFast(Optional ir As Range) As String
     sr.OMaths.Linearize
     sr.OMaths(1).ConvertToNormalText
     
-    ReadEquationFast = sr.OMaths(1).Range.text
+    ReadEquationFast = sr.OMaths(1).Range.Text
     
     Selection.OMaths(1).ConvertToMathText
     Selection.OMaths(1).Range.Select
@@ -1134,16 +1134,16 @@ On Error Resume Next
     Exit Sub ' overtaget af maxprocunit
 #End If
 
-Dim text As String
+Dim Text As String
     
     MaxProc.Units = 1
-    text = omax.KillDef
-    If Len(text) > 0 Then
-         text = Left(text, Len(text) - 1) 'fjern sidste komma
-         text = "errcatch(kill(" & text & "))"
+    Text = omax.KillDef
+    If Len(Text) > 0 Then
+         Text = Left(Text, Len(Text) - 1) 'fjern sidste komma
+         Text = "errcatch(kill(" & Text & "))"
          omax.KillDef = ""
     Else
-        text = "" ' mærkeligt men len(text)=0 er ikke nødv ""
+        Text = "" ' mærkeligt men len(text)=0 er ikke nødv ""
     End If
     
 '    MaxProc.ExecuteMaximaCommand text, 0
@@ -1152,14 +1152,14 @@ Dim text As String
 '     MaxProc.TurnUnitsOn "", ""
 
 'Dim text As String
-   text = "[" & text & "load(WordMatUnitAddon)"
+   Text = "[" & Text & "load(WordMatUnitAddon)"
 '    text = "[" & text & "keepfloat:false,usersetunits:[N,J,W,Pa,C,V,F,Ohm,T,H,K],load(unit)"
     If OutUnits <> "" Then
-        text = text & ",setunits(" & omax.ConvertUnits(OutUnits) & ")"
+        Text = Text & ",setunits(" & omax.ConvertUnits(OutUnits) & ")"
     End If
-    text = text & "]$"
+    Text = Text & "]$"
     
-    MaxProc.ExecuteMaximaCommand text, 0
+    MaxProc.ExecuteMaximaCommand Text, 0
 
 '            MaxProc.TurnUnitsOn
 End Sub
@@ -1177,10 +1177,10 @@ Sub TurnUnitsOff()
 
 End Sub
 Sub UpdateUnits()
-    Dim text As String
-    text = "setunits(" & omax.ConvertUnits(OutUnits) & ")$"
+    Dim Text As String
+    Text = "setunits(" & omax.ConvertUnits(OutUnits) & ")$"
     
-    MaxProc.ExecuteMaximaCommand text, 0
+    MaxProc.ExecuteMaximaCommand Text, 0
 
 End Sub
 Sub ToggleNum()
@@ -1641,7 +1641,7 @@ Public Sub ClearClipBoard()
 On Error GoTo slut
     Dim oData   As New DataObject 'object to use the clipboard
      
-    oData.SetText text:=Empty 'Clear
+    oData.SetText Text:=Empty 'Clear
     oData.PutInClipboard 'take in the clipboard to empty it
     Set oData = Nothing
 slut:
@@ -1670,8 +1670,8 @@ On Error Resume Next
     Dim r As Range
     Set r = Selection.Range
     r.MoveStart wdCharacter, -1
-    If r.text = VBA.ChrW(11) Then ' hvis der er shift-enter i slutningen erstattes med alm. retur
-        r.text = VBA.ChrW(13)
+    If r.Text = VBA.ChrW(11) Then ' hvis der er shift-enter i slutningen erstattes med alm. retur
+        r.Text = VBA.ChrW(13)
     End If
 End Sub
 
@@ -1760,7 +1760,7 @@ Selection.TypeParagraph
 
 For i = 1 To dd.nrows
     For j = 1 To dd.ncolumns
-        Tabel.Cell(i, j).Range.text = dd.TabelsCelle(i, j)
+        Tabel.Cell(i, j).Range.Text = dd.TabelsCelle(i, j)
     Next
 Next
 
@@ -1811,11 +1811,11 @@ LukTempDoc
 OpretTempdoc
 End Sub
 
-Function Get2DVector(text As String) As String
+Function Get2DVector(Text As String) As String
     Dim ea As New ExpressionAnalyser
 '    Dim c As Collection
     Dim m As CMatrix
-    ea.text = text
+    ea.Text = Text
     
 '    c = ea.GetAllMatrices()
     For Each m In ea.GetAllMatrices()
@@ -1849,12 +1849,12 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Oundo.StartCustomRecord
 
     If Selection.OMaths.Count > 0 Then
-        If Not Selection.OMaths(1).Range.text = vbNullString Then
+        If Not Selection.OMaths(1).Range.Text = vbNullString Then
             Selection.OMaths(1).Range.Cut
             ccut = True
             'der kan nogen gange være en rest af et matematikfelt
             If Selection.OMaths.Count > 0 Then
-                If Selection.OMaths(1).Range.text = vbNullString Then
+                If Selection.OMaths(1).Range.Text = vbNullString Then
                     Selection.OMaths(1).Range.Delete
                 Else
                     Selection.TypeParagraph
@@ -1900,20 +1900,20 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     t.Cell(1, placement).Range.Select
     Selection.Collapse wdCollapseStart
     If Not EqNumType Then
-        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="LISTNUM ""WMeq"" ""NumberDefault"" \L 4")
+        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="LISTNUM ""WMeq"" ""NumberDefault"" \L 4")
         F.Update
         '        f.Code.Fields.ToggleShowCodes
     Else
         Selection.TypeText "("
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ chapter \c")
-        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq1 \c")
+        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1 \c")
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="STYLEREF ""Overskrift 1""")
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SECTION")
         F.Update
         '        f.Code.Fields.ToggleShowCodes
         Selection.TypeText "."
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ figure \s1") ' starter automatisk forfra ved ny overskrift 1
-        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq2 ")
+        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 ")
         F.Update
         '        f.Code.Fields.ToggleShowCodes
         Selection.TypeText ")"
@@ -2012,15 +2012,15 @@ On Error GoTo Fejl
     End If
     
     Set F = Selection.Fields(1)
-    If Selection.Fields.Count = 1 And InStr(F.Code.text, "LISTNUM") > 0 Then
+    If Selection.Fields.Count = 1 And InStr(F.Code.Text, "LISTNUM") > 0 Then
         n = InputBox(Sprog.A(346), Sprog.A(6), "1")
-        p = InStr(F.Code.text, "\S")
+        p = InStr(F.Code.Text, "\S")
         If p > 0 Then
-            F.Code.text = Left(F.Code.text, p - 1)
+            F.Code.Text = Left(F.Code.Text, p - 1)
         End If
-        F.Code.text = F.Code.text & "\S" & n
+        F.Code.Text = F.Code.Text & "\S" & n
         F.Update
-    ElseIf Selection.Fields.Count = 1 Or Selection.Fields.Count = 2 And InStr(F.Code.text, "WMeq") > 0 Then
+    ElseIf Selection.Fields.Count = 1 Or Selection.Fields.Count = 2 And InStr(F.Code.Text, "WMeq") > 0 Then
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(Sprog.A(346), Sprog.A(6), F.result & "." & f2.result)
@@ -2048,13 +2048,13 @@ End Sub
 Sub SetFieldNo(F As Field, n As String)
     Dim p As Integer, p2 As Integer
 On Error GoTo Fejl
-    p = InStr(F.Code.text, "\r")
-    p2 = InStr(F.Code.text, "\c")
+    p = InStr(F.Code.Text, "\r")
+    p2 = InStr(F.Code.Text, "\c")
     If p2 > 0 And p2 < p Then p = p2
     If p > 0 Then
-        F.Code.text = Left(F.Code.text, p - 1)
+        F.Code.Text = Left(F.Code.Text, p - 1)
     End If
-    F.Code.text = F.Code.text & "\r" & n & " \c"
+    F.Code.Text = F.Code.Text & "\r" & n & " \c"
     F.Update
     ActiveDocument.Fields.Update
     GoTo slut
@@ -2069,12 +2069,12 @@ On Error GoTo Fejl
     result = MsgBox(Sprog.A(348), vbYesNoCancel, Sprog.A(8))
     If result = vbCancel Then Exit Sub
     If result = vbYes Then
-      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq1"
+      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1"
     Else
-      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq1 \h"
+      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1 \h"
     End If
       Selection.Collapse wdCollapseEnd
-      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq2 \r0 \h"
+      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 \r0 \h"
 
     ActiveDocument.Fields.Update
     GoTo slut
@@ -2467,7 +2467,7 @@ Sub NewEquation()
     If Selection.OMaths.Count = 0 Then
         Set r = Selection.OMaths.Add(Selection.Range)
     ElseIf Selection.Tables.Count = 0 Then
-        If Selection.OMaths(1).Range.text = vbNullString Then
+        If Selection.OMaths(1).Range.Text = vbNullString Then
             Set r = Selection.OMaths.Add(Selection.Range)
         ElseIf DoubleTapM = 2 Then
             If Not Selection.Range.ListFormat.ListValue = 0 Then

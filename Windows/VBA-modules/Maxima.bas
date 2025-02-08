@@ -288,13 +288,13 @@ Sub MaximaCommand()
     omax.prevspr = ""
     If Not omax.MaximaInstalled Then GoTo slut
     
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     ElseIf Selection.OMaths.Count > 0 Then
         omax.ReadSelection
     Else
-        omax.Kommando = Selection.Range.text
+        omax.Kommando = Selection.Range.Text
         DontGoBack = True
     End If
     
@@ -422,7 +422,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
                 omax.MaximaOutput = variabel & VBA.ChrW(8712) & VBA.ChrW(8477)
             Else
                 If Left(omax.MaximaOutput, 1) = "{" Then omax.MaximaOutput = Mid(omax.MaximaOutput, 2, Len(omax.MaximaOutput) - 2)
-                ea.text = omax.MaximaOutput
+                ea.Text = omax.MaximaOutput
                 omax.MaximaOutput = ""
                 ea.Pos = 1
                 Do
@@ -540,23 +540,23 @@ Sub MaximaSolvePar(Optional variabel As String)
 
     If omax.DefFejl Then GoTo slut
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox2 Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
         GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
-    If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8805)) > 1 Then
+    If InStr(Selection.OMaths(1).Range.Text, "<") > 1 Or InStr(Selection.OMaths(1).Range.Text, ">") > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8805)) > 1 Then
         MaximaSolveInequality variabel
         GoTo slut
     End If
-    p = InStr(Selection.OMaths(1).Range.text, "=")
+    p = InStr(Selection.OMaths(1).Range.Text, "=")
     If p < 1 Then
         MsgBox Sprog.A(141), vbOKOnly, Sprog.Error
         GoTo slut
     Else
-        p2 = InStr(p + 1, Selection.OMaths(1).Range.text, "=")
+        p2 = InStr(p + 1, Selection.OMaths(1).Range.Text, "=")
         If p2 > 0 Then
             If Sprog.SprogNr = 1 Then
                 MsgBox "Der kan ikke være to ligmedtegn i en ligning", vbOKOnly, "Fejl"
@@ -575,7 +575,7 @@ Sub MaximaSolvePar(Optional variabel As String)
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
-    If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8743)) < 1 Then
+    If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8743)) < 1 Then
         ' kun 1 ligning
 
         UFSolvenumeric.Ligning = omax.Kommando
@@ -589,8 +589,8 @@ newcas:
         If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
             If Not InStr(omax.Vars, ";") > 0 Then ' metoden virker kun med 1 variabel
                 ea.SetNormalBrackets
-                ea.text = omax.Kommando
-                ea.text = Replace(ea.text, VBA.ChrW(8289), "")
+                ea.Text = omax.Kommando
+                ea.Text = Replace(ea.Text, VBA.ChrW(8289), "")
                 s = ""
                 Do
                     v = ea.GetNextVar()
@@ -614,7 +614,7 @@ newcas:
                     End If
                 End If
                 If s <> "" Then
-                    UFSelectVar.TextBox_def.text = "0<=" & omax.Vars & "<=" & s & VbCrLfMac
+                    UFSelectVar.TextBox_def.Text = "0<=" & omax.Vars & "<=" & s & VbCrLfMac
                     UFSelectVar.TempDefs = "0<=" & omax.Vars & "<=" & s
                 End If
             End If
@@ -666,7 +666,7 @@ newcas:
                 omax.MaximaOutput = variabel & VBA.ChrW(8712) & VBA.ChrW(8477)
             Else
                 If Left(omax.MaximaOutput, 1) = "{" Then omax.MaximaOutput = Mid(omax.MaximaOutput, 2, Len(omax.MaximaOutput) - 2)
-                ea.text = omax.MaximaOutput
+                ea.Text = omax.MaximaOutput
                 omax.MaximaOutput = ""
                 ea.Pos = 1
                 Do
@@ -748,26 +748,26 @@ newcas:
             End If
             UserFormChooseCAS.Show
             If UserFormChooseCAS.ChosenCAS = 2 Then ' maxima num
-                CASengine = 0
+                CASengineTempOnly = 0
                 GoTo stophop
             ElseIf UserFormChooseCAS.ChosenCAS = -1 Then
                 GoTo slut
             ElseIf UserFormChooseCAS.ChosenCAS = 1 Then ' Maxima sym
-                CASengine = 0
+                CASengineTempOnly = 0
                 GoTo newcas
             ElseIf UserFormChooseCAS.ChosenCAS = 3 Then ' geogebra sym
-                CASengine = 2
+                CASengineTempOnly = 2
                 GoTo newcas
             ElseIf UserFormChooseCAS.ChosenCAS = 4 Then ' geogebra num
-                CASengine = 2
+                CASengineTempOnly = 2
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
             ElseIf UserFormChooseCAS.ChosenCAS = 5 Then ' geogebra browser sym
-                CASengine = 1
+                CASengineTempOnly = 1
                 GoTo newcas
             Else ' grafisk geogebra
-                CASengine = 1
+                CASengineTempOnly = 1
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
@@ -916,27 +916,27 @@ newcassys:
             ElseIf UserFormChooseCAS.ChosenCAS = -1 Then
                 GoTo slut
             ElseIf UserFormChooseCAS.ChosenCAS = 1 Then ' Maxima sym
-                CASengine = 0
+                CASengineTempOnly = 0
                 GoTo newcassys
             ElseIf UserFormChooseCAS.ChosenCAS = 3 Then ' geogebra sym
-                CASengine = 2
+                CASengineTempOnly = 2
                 GoTo newcassys
             ElseIf UserFormChooseCAS.ChosenCAS = 4 Then ' geogebra num
                 TempCas = CASengine
-                CASengine = 2
+                CASengineTempOnly = 2
 '                Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
                 GoTo slut
-                CASengine = TempCas
+                CASengineTempOnly = TempCas
             ElseIf UserFormChooseCAS.ChosenCAS = 5 Then ' geogebra browser sym
-                CASengine = 1
+                CASengineTempOnly = 1
                 GoTo newcassys
             Else ' grafisk geogebra
                 TempCas = CASengine
-                CASengine = 1
+                CASengineTempOnly = 1
                 Selection.MoveLeft wdCharacter, 1
                 MaximaNsolve variabel
-                CASengine = TempCas
+                CASengineTempOnly = TempCas
                 GoTo slut
             End If
         ElseIf Len(omax.MaximaOutput) > 1 Then
@@ -1017,7 +1017,7 @@ slut:
     OutUnits = SaveSettingsOutunits
     MaximaLogOutput = SaveSettingsLog
     MaximaDecOutType = SaveSettingsDecOutType
-    CASengine = TempCas
+    CASengineTempOnly = TempCas
     Selection.End = sslut    ' slut skal være først eller går det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
@@ -1050,12 +1050,12 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
     End With
 
     If biimp Then
-        Selection.TypeText text:=vbTab
+        Selection.TypeText Text:=vbTab
         Selection.OMaths.Add Range:=Selection.Range
         Selection.InsertSymbol CharacterNumber:=8661, Unicode:=True, Bias:=0
         Selection.OMaths(1).Range.Font.Size = 16
         Selection.MoveRight unit:=wdCharacter, Count:=1
-        Selection.TypeText text:=vbTab
+        Selection.TypeText Text:=vbTab
     End If
     Selection.Font.Size = 8
     Selection.Font.ColorIndex = wdGray50
@@ -1113,20 +1113,20 @@ Sub MaximaEliminate()
 
     If omax.DefFejl Then GoTo slut
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
-    If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
+    If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
         result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
         If result = vbNo Then GoTo slut
     End If
 
-    If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8743)) < 1 Then
+    If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8743)) < 1 Then
         GoTo slut
     Else    ' ligningssystem
 
@@ -1284,18 +1284,18 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
 
     If omax.DefFejl Then GoTo slut
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
         GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
-    If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8805)) > 1 Then
+    If InStr(Selection.OMaths(1).Range.Text, "<") > 1 Or InStr(Selection.OMaths(1).Range.Text, ">") > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8805)) > 1 Then
         MaximaSolveInequality
         GoTo slut
     End If
-    If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
+    If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
         result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
         If result = vbNo Then GoTo slut
@@ -1307,7 +1307,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         GoTo slut
     End If
 
-    If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8743)) < 1 Then
+    If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8743)) < 1 Then
         ' kun 1 ligning
 
         If Not omax.FindVariable Then GoTo slut
@@ -1315,8 +1315,8 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
             If Not InStr(omax.Vars, ";") > 0 Then ' metoden virker kun med 1 variabel
                 ea.SetNormalBrackets
-                ea.text = omax.Kommando
-                ea.text = Replace(ea.text, VBA.ChrW(8289), "")
+                ea.Text = omax.Kommando
+                ea.Text = Replace(ea.Text, VBA.ChrW(8289), "")
                 s = ""
                 Do
                     v = ea.GetNextVar()
@@ -1328,7 +1328,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
                 Loop While v <> ""
                 If s <> "" And Radians Then s = "pi/2"
                 If s <> "" Then
-                    UFSelectVar.TextBox_def.text = "0<=" & omax.Vars & "<=" & s & VbCrLfMac
+                    UFSelectVar.TextBox_def.Text = "0<=" & omax.Vars & "<=" & s & VbCrLfMac
                     UFSelectVar.TempDefs = "0<=" & omax.Vars & "<=" & s
                 End If
             End If
@@ -1370,12 +1370,12 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             LHS = Arr(0)
             RHS = Arr(1)
             If variabel <> "x" Then
-                ea.text = LHS
+                ea.Text = LHS
                 ea.ReplaceVar variabel, "x"
-                LHS = ea.text
-                ea.text = RHS
+                LHS = ea.Text
+                ea.Text = RHS
                 ea.ReplaceVar variabel, "x"
-                RHS = ea.text
+                RHS = ea.Text
             End If
             OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & "," & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
             GoTo slut
@@ -1419,12 +1419,12 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             LHS = Arr(0)
             RHS = Arr(1)
             If variabel <> "x" Then
-                ea.text = LHS
+                ea.Text = LHS
                 ea.ReplaceVar variabel, "x"
-                LHS = ea.text
-                ea.text = RHS
+                LHS = ea.Text
+                ea.Text = RHS
                 ea.ReplaceVar variabel, "x"
-                RHS = ea.text
+                RHS = ea.Text
             End If
             OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & "," & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
         End If
@@ -1577,18 +1577,18 @@ Sub MaximaNsolveOld(Optional ByVal variabel As String)
 
     If omax.DefFejl Then GoTo slut
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
         GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
-    If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8805)) > 1 Then
+    If InStr(Selection.OMaths(1).Range.Text, "<") > 1 Or InStr(Selection.OMaths(1).Range.Text, ">") > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8804)) > 1 Or InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8805)) > 1 Then
         MaximaSolveInequality
         GoTo slut
     End If
-    If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
+    If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
         result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
         If result = vbNo Then GoTo slut
@@ -1600,7 +1600,7 @@ Sub MaximaNsolveOld(Optional ByVal variabel As String)
         GoTo slut
     End If
 
-    If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW(8743)) < 1 Then
+    If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.Text, VBA.ChrW(8743)) < 1 Then
         ' kun 1 ligning
 
         UFnsolve.Ligning = omax.Kommando
@@ -1609,8 +1609,8 @@ Sub MaximaNsolveOld(Optional ByVal variabel As String)
         If CASengine > 0 And Not AllTrig Then ' På geogebra skal der via vba genkendes om det er trigonometrisk ligning
             If Not InStr(omax.Vars, ";") > 0 Then ' metoden virker kun med 1 variabel
                 ea.SetNormalBrackets
-                ea.text = omax.Kommando
-                ea.text = Replace(ea.text, VBA.ChrW(8289), "")
+                ea.Text = omax.Kommando
+                ea.Text = Replace(ea.Text, VBA.ChrW(8289), "")
                 s = ""
                 Do
                     v = ea.GetNextVar()
@@ -1622,7 +1622,7 @@ Sub MaximaNsolveOld(Optional ByVal variabel As String)
                 Loop While v <> ""
                 If s <> "" And Radians Then s = "pi/2"
                 If s <> "" Then
-                    UFSelectVar.TextBox_def.text = "0<=" & omax.Vars & "<=" & s & VbCrLfMac
+                    UFSelectVar.TextBox_def.Text = "0<=" & omax.Vars & "<=" & s & VbCrLfMac
                     UFSelectVar.TempDefs = "0<=" & omax.Vars & "<=" & s
                 End If
             End If
@@ -1662,12 +1662,12 @@ Sub MaximaNsolveOld(Optional ByVal variabel As String)
             LHS = Arr(0)
             RHS = Arr(1)
             If variabel <> "x" Then
-                ea.text = LHS
+                ea.Text = LHS
                 ea.ReplaceVar variabel, "x"
-                LHS = ea.text
-                ea.text = RHS
+                LHS = ea.Text
+                ea.Text = RHS
                 ea.ReplaceVar variabel, "x"
-                RHS = ea.text
+                RHS = ea.Text
             End If
             OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & "," & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
             GoTo slut
@@ -1712,19 +1712,19 @@ Sub MaximaNsolveOld(Optional ByVal variabel As String)
             ActiveWindow.VerticalPercentScrolled = scrollpos
             Unload UFnsolve
             If CASengine = 0 Then
-                MaximaSolveNumeric UFSelectVar.ListBox_vars.text
+                MaximaSolveNumeric UFSelectVar.ListBox_vars.Text
             Else
       s = Replace(omax.Kommando, ",", ".")
             Arr = Split(s, "=")
             LHS = Arr(0)
             RHS = Arr(1)
             If variabel <> "x" Then
-                ea.text = LHS
+                ea.Text = LHS
                 ea.ReplaceVar variabel, "x"
-                LHS = ea.text
-                ea.text = RHS
+                LHS = ea.Text
+                ea.Text = RHS
                 ea.ReplaceVar variabel, "x"
-                RHS = ea.text
+                RHS = ea.Text
             End If
             OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & "," & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
             End If
@@ -1892,14 +1892,14 @@ Sub MaximaSolveNumeric(Optional Var As String)
         Sep = ";"
     End If
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
         GoTo slut
     End If
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
-    If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
+    If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
         result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
         If result = vbNo Then GoTo slut
@@ -1913,7 +1913,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
         omax.FindVariable
         If Var <> vbNullString Then
             variabel = Var
-            UFSolvenumeric.TextBox_variabel.text = Var
+            UFSolvenumeric.TextBox_variabel.Text = Var
         End If
         UFSolvenumeric.Udtryk = omax.Kommando
         UFSolvenumeric.Show
@@ -1930,7 +1930,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
         If UFSolvenumeric.Method = "newton" Then
             '        UFWait.ActionToPerform = "solvenumeric"
             '        varguess = UFSolvenumeric.SelectedVar & "=" & UFSolvenumeric.TextBox_guess.text
-            VarGuess = UFSolvenumeric.TextBox_guess.text
+            VarGuess = UFSolvenumeric.TextBox_guess.Text
             '        UFWait.VarParam = varguess
             '        arr = Split(varguess, "=")
             '        variabel = arr(0)
@@ -1938,10 +1938,10 @@ Sub MaximaSolveNumeric(Optional Var As String)
             omax.MaximaSolveNumeric variabel, VarGuess
         ElseIf UFSolvenumeric.Method = "findroot" Then
             '        UFWait.ActionToPerform = "findroot"
-            VarGuess = UFSolvenumeric.SelectedVar & ListSeparator & UFSolvenumeric.TextBox_lval.text & ListSeparator & UFSolvenumeric.TextBox_hval.text
+            VarGuess = UFSolvenumeric.SelectedVar & ListSeparator & UFSolvenumeric.TextBox_lval.Text & ListSeparator & UFSolvenumeric.TextBox_hval.Text
             '        UFWait.VarParam = varguess
             variabel = UFSolvenumeric.SelectedVar
-            omax.MaximaFindRoot variabel, UFSolvenumeric.TextBox_lval.text, UFSolvenumeric.TextBox_hval.text
+            omax.MaximaFindRoot variabel, UFSolvenumeric.TextBox_lval.Text, UFSolvenumeric.TextBox_hval.Text
         ElseIf UFSolvenumeric.Method = "poly" Then
             '        UFWait.ActionToPerform = "poly"
             '        UFWait.VarParam = UFSolvenumeric.SelectedVar
@@ -2232,7 +2232,7 @@ Sub Omskriv()
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2366,7 +2366,7 @@ Sub reducer()
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2459,7 +2459,7 @@ Sub CompareTest()
     If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2529,7 +2529,7 @@ Sub faktoriser()
     If Not omax.MaximaInstalled Then GoTo slut
     '    MsgBox WordWindowNavn
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2628,7 +2628,7 @@ Sub udvid()
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2718,7 +2718,7 @@ Sub Differentier()
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2812,7 +2812,7 @@ Sub Integrer()
     '    MsgBox WordWindowNavn
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -2931,25 +2931,25 @@ Sub SolveDENumeric()
         variabel = "x"
     End If
     If omax.Kommando <> vbNullString Or omax.KommandoArrayLength > 0 Then
-        UFdiffeq.TextBox_eq1.text = GetRHS(omax.KommandoArray(0))
-        UFdiffeq.TextBox_eq2.text = GetRHS(omax.KommandoArray(1))
-        UFdiffeq.TextBox_eq3.text = GetRHS(omax.KommandoArray(2))
-        UFdiffeq.TextBox_eq4.text = GetRHS(omax.KommandoArray(3))
-        UFdiffeq.TextBox_eq5.text = GetRHS(omax.KommandoArray(4))
-        UFdiffeq.TextBox_eq6.text = GetRHS(omax.KommandoArray(5))
-        UFdiffeq.TextBox_eq7.text = GetRHS(omax.KommandoArray(6))
-        UFdiffeq.TextBox_eq8.text = GetRHS(omax.KommandoArray(7))
-        UFdiffeq.TextBox_eq9.text = GetRHS(omax.KommandoArray(8))
+        UFdiffeq.TextBox_eq1.Text = GetRHS(omax.KommandoArray(0))
+        UFdiffeq.TextBox_eq2.Text = GetRHS(omax.KommandoArray(1))
+        UFdiffeq.TextBox_eq3.Text = GetRHS(omax.KommandoArray(2))
+        UFdiffeq.TextBox_eq4.Text = GetRHS(omax.KommandoArray(3))
+        UFdiffeq.TextBox_eq5.Text = GetRHS(omax.KommandoArray(4))
+        UFdiffeq.TextBox_eq6.Text = GetRHS(omax.KommandoArray(5))
+        UFdiffeq.TextBox_eq7.Text = GetRHS(omax.KommandoArray(6))
+        UFdiffeq.TextBox_eq8.Text = GetRHS(omax.KommandoArray(7))
+        UFdiffeq.TextBox_eq9.Text = GetRHS(omax.KommandoArray(8))
         DeVarList = ""
-        UFdiffeq.TextBox_var1.text = GetLHSvar(omax.KommandoArray(0))
-        UFdiffeq.TextBox_var2.text = GetLHSvar(omax.KommandoArray(1))
-        UFdiffeq.TextBox_var3.text = GetLHSvar(omax.KommandoArray(2))
-        UFdiffeq.TextBox_var4.text = GetLHSvar(omax.KommandoArray(3))
-        UFdiffeq.TextBox_var5.text = GetLHSvar(omax.KommandoArray(4))
-        UFdiffeq.TextBox_var6.text = GetLHSvar(omax.KommandoArray(5))
-        UFdiffeq.TextBox_var7.text = GetLHSvar(omax.KommandoArray(6))
-        UFdiffeq.TextBox_var8.text = GetLHSvar(omax.KommandoArray(7))
-        UFdiffeq.TextBox_var9.text = GetLHSvar(omax.KommandoArray(8))
+        UFdiffeq.TextBox_var1.Text = GetLHSvar(omax.KommandoArray(0))
+        UFdiffeq.TextBox_var2.Text = GetLHSvar(omax.KommandoArray(1))
+        UFdiffeq.TextBox_var3.Text = GetLHSvar(omax.KommandoArray(2))
+        UFdiffeq.TextBox_var4.Text = GetLHSvar(omax.KommandoArray(3))
+        UFdiffeq.TextBox_var5.Text = GetLHSvar(omax.KommandoArray(4))
+        UFdiffeq.TextBox_var6.Text = GetLHSvar(omax.KommandoArray(5))
+        UFdiffeq.TextBox_var7.Text = GetLHSvar(omax.KommandoArray(6))
+        UFdiffeq.TextBox_var8.Text = GetLHSvar(omax.KommandoArray(7))
+        UFdiffeq.TextBox_var9.Text = GetLHSvar(omax.KommandoArray(8))
         If InStr(DeVarList, variabel) > 0 Then
             If Not InStr(DeVarList, "x") > 0 Then
                 variabel = "x"
@@ -2962,36 +2962,36 @@ Sub SolveDENumeric()
             End If
         End If
     End If
-    If UFdiffeq.TextBox_eq1.text <> vbNullString And UFdiffeq.TextBox_init1.text = vbNullString Then
-        UFdiffeq.TextBox_init1.text = "1"
+    If UFdiffeq.TextBox_eq1.Text <> vbNullString And UFdiffeq.TextBox_init1.Text = vbNullString Then
+        UFdiffeq.TextBox_init1.Text = "1"
     End If
-    If UFdiffeq.TextBox_eq2.text <> vbNullString And UFdiffeq.TextBox_init2.text = vbNullString Then
-        UFdiffeq.TextBox_init2.text = "1"
+    If UFdiffeq.TextBox_eq2.Text <> vbNullString And UFdiffeq.TextBox_init2.Text = vbNullString Then
+        UFdiffeq.TextBox_init2.Text = "1"
     End If
-    If UFdiffeq.TextBox_eq3.text <> vbNullString And UFdiffeq.TextBox_init3.text = vbNullString Then
-        UFdiffeq.TextBox_init3.text = "1"
+    If UFdiffeq.TextBox_eq3.Text <> vbNullString And UFdiffeq.TextBox_init3.Text = vbNullString Then
+        UFdiffeq.TextBox_init3.Text = "1"
     End If
-    If UFdiffeq.TextBox_eq4.text <> vbNullString And UFdiffeq.TextBox_init4.text = vbNullString Then
-        UFdiffeq.TextBox_init4.text = "1"
+    If UFdiffeq.TextBox_eq4.Text <> vbNullString And UFdiffeq.TextBox_init4.Text = vbNullString Then
+        UFdiffeq.TextBox_init4.Text = "1"
     End If
-    If UFdiffeq.TextBox_eq5.text <> vbNullString And UFdiffeq.TextBox_init5.text = vbNullString Then
-        UFdiffeq.TextBox_init5.text = "1"
+    If UFdiffeq.TextBox_eq5.Text <> vbNullString And UFdiffeq.TextBox_init5.Text = vbNullString Then
+        UFdiffeq.TextBox_init5.Text = "1"
     End If
-    If UFdiffeq.TextBox_eq6.text <> vbNullString And UFdiffeq.TextBox_init6.text = vbNullString Then
-        UFdiffeq.TextBox_init6.text = "1"
+    If UFdiffeq.TextBox_eq6.Text <> vbNullString And UFdiffeq.TextBox_init6.Text = vbNullString Then
+        UFdiffeq.TextBox_init6.Text = "1"
     End If
-    If UFdiffeq.TextBox_eq7.text <> vbNullString And UFdiffeq.TextBox_init7.text = vbNullString Then
-        UFdiffeq.TextBox_init7.text = "1"
+    If UFdiffeq.TextBox_eq7.Text <> vbNullString And UFdiffeq.TextBox_init7.Text = vbNullString Then
+        UFdiffeq.TextBox_init7.Text = "1"
     End If
-    If UFdiffeq.TextBox_eq8.text <> vbNullString And UFdiffeq.TextBox_init8.text = vbNullString Then
-        UFdiffeq.TextBox_init8.text = "1"
+    If UFdiffeq.TextBox_eq8.Text <> vbNullString And UFdiffeq.TextBox_init8.Text = vbNullString Then
+        UFdiffeq.TextBox_init8.Text = "1"
     End If
-    If UFdiffeq.TextBox_eq9.text <> vbNullString And UFdiffeq.TextBox_init9.text = vbNullString Then
-        UFdiffeq.TextBox_init9.text = "1"
+    If UFdiffeq.TextBox_eq9.Text <> vbNullString And UFdiffeq.TextBox_init9.Text = vbNullString Then
+        UFdiffeq.TextBox_init9.Text = "1"
     End If
 
 
-    UFdiffeq.TextBox_varx.text = variabel
+    UFdiffeq.TextBox_varx.Text = variabel
 
     UFdiffeq.Show
     If UFdiffeq.luk Then GoTo slut
@@ -3038,7 +3038,7 @@ Function GetLHSvar(s As String) As String
     s = omax.ConvertToAscii(s)
     Arr = Split(s, "=")
     s = Arr(0)
-    ea.text = s
+    ea.Text = s
     Do
         Var = ea.GetNextVar()
         If InStr(DeVarList, Var) <= 0 Or DeVarList = vbNullString Then
@@ -3067,8 +3067,9 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     scrollpos = ActiveWindow.VerticalPercentScrolled
     '    MsgBox WordWindowNavn
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
-
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+    dAsDiffChrTemp = True
+    
+    If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
         MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
         GoTo slut
     End If
@@ -3131,28 +3132,28 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         ElseIf InStr(omax.Vars, "y") > 0 Then
             funktion = "y"
         Else
-            ea.text = omax.Kommando
+            ea.Text = omax.Kommando
             funktion = ea.GetNextVar(1)
         End If
         UFdiffeq.Vars = omax.Vars
         UFdiffeq.DefS = omax.DefString
-        UFdiffeq.TextBox_funktion.text = funktion
-        UFdiffeq.TextBox_variabel.text = variabel
+        UFdiffeq.TextBox_funktion.Text = funktion
+        UFdiffeq.TextBox_variabel.Text = variabel
         UFdiffeq.Label_ligning.Caption = Replace(omax.ConvertToAscii(omax.Kommando), " ", "")
         UFdiffeq.Show
         If UFdiffeq.luk Then GoTo slut
-        variabel = UFdiffeq.TextBox_variabel.text
-        funktion = UFdiffeq.TextBox_funktion.text
+        variabel = UFdiffeq.TextBox_variabel.Text
+        funktion = UFdiffeq.TextBox_funktion.Text
     Else
         Dim Arr() As String
         Arr = Split(variabel, "=")
         If UBound(Arr) > 0 Then
-            UFdiffeq.TextBox_startx.text = Arr(1)
+            UFdiffeq.TextBox_startx.Text = Arr(1)
             variabel = Arr(0)
         End If
         Arr = Split(funktion, "=")
         If UBound(Arr) > 0 Then
-            UFdiffeq.TextBox_starty.text = Arr(1)
+            UFdiffeq.TextBox_starty.Text = Arr(1)
             funktion = Arr(0)
         End If
     End If
@@ -3168,16 +3169,16 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         s = Replace(s, vbLf, "")
         s = Replace(s, ",", ".")
         t = "," & funktion & "," & variabel
-        If UFdiffeq.TextBox_startx.text <> "" And UFdiffeq.TextBox_starty.text <> "" Then
-            t = t & ",{(" & Replace(UFdiffeq.TextBox_startx.text, ",", ".") & " , " & Replace(UFdiffeq.TextBox_starty.text, ",", ".") & ")"
+        If UFdiffeq.TextBox_startx.Text <> "" And UFdiffeq.TextBox_starty.Text <> "" Then
+            t = t & ",{(" & Replace(UFdiffeq.TextBox_startx.Text, ",", ".") & " , " & Replace(UFdiffeq.TextBox_starty.Text, ",", ".") & ")"
         End If
-        If UFdiffeq.TextBox_bcx.text <> "" And UFdiffeq.TextBox_bcy.text <> "" Then
-            t = t & ",(" & Replace(UFdiffeq.TextBox_bcx.text, ",", ".") & " , " & Replace(UFdiffeq.TextBox_bcy.text, ",", ".") & ")}"
-        ElseIf UFdiffeq.TextBox_startx.text <> "" And UFdiffeq.TextBox_starty.text <> "" Then
+        If UFdiffeq.TextBox_bcx.Text <> "" And UFdiffeq.TextBox_bcy.Text <> "" Then
+            t = t & ",(" & Replace(UFdiffeq.TextBox_bcx.Text, ",", ".") & " , " & Replace(UFdiffeq.TextBox_bcy.Text, ",", ".") & ")}"
+        ElseIf UFdiffeq.TextBox_startx.Text <> "" And UFdiffeq.TextBox_starty.Text <> "" Then
             t = t & "}"
         End If
-        If UFdiffeq.TextBox_starty2.text <> "" Then
-        t = t & ",(0," & Replace(UFdiffeq.TextBox_starty2.text, ",", ".") & ")"
+        If UFdiffeq.TextBox_starty2.Text <> "" Then
+        t = t & ",(0," & Replace(UFdiffeq.TextBox_starty2.Text, ",", ".") & ")"
         End If
         s = "solveODE(" & s & t & ")"
         If MaximaDecOutType = 3 Then
@@ -3188,7 +3189,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     End If
 
     If CASengine = 0 Then
-        omax.SolveDE funktion, variabel, UFdiffeq.TextBox_startx.text, UFdiffeq.TextBox_starty.text, UFdiffeq.TextBox_starty2.text, UFdiffeq.TextBox_bcx.text, UFdiffeq.TextBox_bcy.text
+        omax.SolveDE funktion, variabel, UFdiffeq.TextBox_startx.Text, UFdiffeq.TextBox_starty.Text, UFdiffeq.TextBox_starty2.Text, UFdiffeq.TextBox_bcx.Text, UFdiffeq.TextBox_bcy.Text
     ElseIf CASengine = 1 Then
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
@@ -3231,12 +3232,12 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         If MaximaForklaring Then
             funktion = Split(funktion, "(")(0)
             t = Sprog.A(390)
-            If Len(UFdiffeq.TextBox_startx.text) > 0 And Len(UFdiffeq.TextBox_starty.text) > 0 And Len(UFdiffeq.TextBox_bcx.text) > 0 And Len(UFdiffeq.TextBox_bcy.text) > 0 Then
-                t = t & " " & Sprog.A(391) & " " & funktion & "(" & UFdiffeq.TextBox_startx.text & ")=" & UFdiffeq.TextBox_starty.text & " og " & funktion & "(" & UFdiffeq.TextBox_starty.text & ")=" & UFdiffeq.TextBox_bcy.text
-            ElseIf Len(UFdiffeq.TextBox_startx.text) > 0 And Len(UFdiffeq.TextBox_starty.text) > 0 And Len(UFdiffeq.TextBox_starty2.text) > 0 Then
-                t = t & " " & Sprog.A(392) & " " & funktion & "(" & UFdiffeq.TextBox_startx.text & ")=" & UFdiffeq.TextBox_starty.text & " og " & funktion & "'(" & UFdiffeq.TextBox_startx.text & ")=" & UFdiffeq.TextBox_starty2.text
-            ElseIf Len(UFdiffeq.TextBox_startx.text) > 0 And Len(UFdiffeq.TextBox_starty.text) > 0 Then
-                t = t & " " & Sprog.A(393) & " " & funktion & "(" & UFdiffeq.TextBox_startx.text & ")=" & UFdiffeq.TextBox_starty.text
+            If Len(UFdiffeq.TextBox_startx.Text) > 0 And Len(UFdiffeq.TextBox_starty.Text) > 0 And Len(UFdiffeq.TextBox_bcx.Text) > 0 And Len(UFdiffeq.TextBox_bcy.Text) > 0 Then
+                t = t & " " & Sprog.A(391) & " " & funktion & "(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty.Text & " og " & funktion & "(" & UFdiffeq.TextBox_starty.Text & ")=" & UFdiffeq.TextBox_bcy.Text
+            ElseIf Len(UFdiffeq.TextBox_startx.Text) > 0 And Len(UFdiffeq.TextBox_starty.Text) > 0 And Len(UFdiffeq.TextBox_starty2.Text) > 0 Then
+                t = t & " " & Sprog.A(392) & " " & funktion & "(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty.Text & " og " & funktion & "'(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty2.Text
+            ElseIf Len(UFdiffeq.TextBox_startx.Text) > 0 And Len(UFdiffeq.TextBox_starty.Text) > 0 Then
+                t = t & " " & Sprog.A(393) & " " & funktion & "(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty.Text
             End If
             InsertForklaring t, False
         End If
@@ -3257,6 +3258,7 @@ Fejl:
     RestartMaxima
 slut:
     On Error Resume Next
+    dAsDiffChrTemp = False
     Selection.End = sslut    ' slut skal være først ellers går det galt
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
@@ -3280,7 +3282,7 @@ Function TranslateReplaceOutput(comm As String) As String
 
     TranslateReplaceOutput = comm
 End Function
-Sub InsertOutput(text As String, Optional ResultAfterTable As Boolean = True)
+Sub InsertOutput(Text As String, Optional ResultAfterTable As Boolean = True)
 ' indsætter text efter den mathobj cursoren er i på sikker måde
     Dim IsBold As Boolean
     If Selection.start = Selection.End Then
@@ -3293,7 +3295,7 @@ Sub InsertOutput(text As String, Optional ResultAfterTable As Boolean = True)
         Selection.Collapse wdCollapseEnd
     Else
     End If
-    Selection.TypeText text    ' giver problemer med at =tegn kommer under brøkstreg
+    Selection.TypeText Text    ' giver problemer med at =tegn kommer under brøkstreg
     Selection.Move wdCharacter, -1
     If Selection.OMaths(1).Range.Font.Bold Then
         IsBold = True

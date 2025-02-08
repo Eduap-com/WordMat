@@ -6,12 +6,12 @@ Sub OpenWebV()
 #If Mac Then
 #Else
     Dim DN As String, FN As String
-    Set UfWait2 = New UserFormWaitForMaxima
-    UfWait2.Label_tip.Font.Size = 10
-    UfWait2.Label_tip.Font.Italic = False
-    UfWait2.Show vbModeless
-    UfWait2.Label_tip.Caption = Sprog.A(684)
-    UfWait2.Label_progress.Caption = "**"
+    Set UFwait2 = New UserFormWaitForMaxima
+    UFwait2.Label_tip.Font.Size = 10
+    UFwait2.Label_tip.Font.Italic = False
+    UFwait2.Show vbModeless
+    UFwait2.Label_tip.Caption = Sprog.A(684)
+    UFwait2.Label_progress.Caption = "**"
     
     Err.Clear
     If DllConnType = 0 Then
@@ -50,12 +50,12 @@ Sub OpenWebV()
 
     JS = "ggbApplet.initCAS();2+3;ggbApplet.evalCommandCAS('2+3');"
     '    JS = "2+3;"
-    UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+    UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
 hop:
     '    Res = WebV.ExecuteScriptWaitTime(JS, 15000)
     WebV.ExecuteScriptNonBlock (JS)
     Do Until WebV.WaitUntilScriptFinished(1000) Or j >= 5
-        UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
         If omax.StopNow Then GoTo slut
         res = WebV.GetJSReturnVal()
         If Replace(res, """", "") = "5" Then Exit Do
@@ -67,7 +67,7 @@ hop:
         i = i + 1
         If i < 2 Then
             Wait (2)
-            UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+            UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
             JS = "2+3;"
             GoTo hop
         Else
@@ -76,35 +76,35 @@ hop:
     End If
    
 slut:
-    Unload UfWait2
+    Unload UFwait2
 #End If
 End Sub
 
 Sub PrepareGeoGebraCAS()
 #If Mac Then
     Dim res As String, i As Integer
-    Dim UfWait2 As UserFormWaitForMaxima
+    Dim UFwait2 As UserFormWaitForMaxima
     
     If Not GeoGebraWindowOpen Then
-        Set UfWait2 = New UserFormWaitForMaxima
-        UfWait2.Label_tip.Font.Size = 10
-        UfWait2.Label_tip.Font.Italic = False
-        UfWait2.Show vbModeless
-        UfWait2.Label_tip.Caption = Sprog.A(684)
-        UfWait2.Label_progress.Caption = "*"
-        UfWait2.Show vbModeless
-        UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        Set UFwait2 = New UserFormWaitForMaxima
+        UFwait2.Label_tip.Font.Size = 10
+        UFwait2.Label_tip.Font.Italic = False
+        UFwait2.Show vbModeless
+        UFwait2.Label_tip.Caption = Sprog.A(684)
+        UFwait2.Label_progress.Caption = "*"
+        UFwait2.Show vbModeless
+        UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
         Do
             res = RunScript("ExecuteGeoGebraCASCommand", "ggbApplet.reset();ggbApplet.evalCommandCAS('2+3');")
             If res <> "5" Then
-                UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+                UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
                 Wait (1)
-                UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+                UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
                 Wait (1)
             End If
             i = i + 1
         Loop While res <> "5" And i < 5
-        Unload UfWait2
+        Unload UFwait2
         If res <> "5" Then GGBJSGuidance
 '        MsgBox Res
     End If
@@ -199,44 +199,44 @@ Dim FejlC As Integer
 #Else
  '   ExecuteGeogebraCmdViaJS = WebV.ExecuteScriptWaitTime(JS, 10000)
     Dim j As Integer
-    Dim UfWait2 As UserFormWaitForMaxima
+    Dim UFwait2 As UserFormWaitForMaxima
 start1:
     WebV.ExecuteScriptNonBlock JS
     Do Until WebV.WaitUntilScriptFinished(200) Or j >= 75
 '    Do Until WebV.GetJSReturnVal() <> "xQw6rT" Or j >= 75
-        If Not UfWait2 Is Nothing Then UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        If Not UFwait2 Is Nothing Then UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
         If omax.StopNow Then GoTo slut
 '        Wait (0.2)
         j = j + 1
-        If j = 10 And UfWait2 Is Nothing Then
-            Set UfWait2 = New UserFormWaitForMaxima
-            UfWait2.Label_tip.Font.Size = 10
-            UfWait2.Label_tip.Font.Italic = False
-            UfWait2.Show vbModeless
-            UfWait2.Label_tip.Caption = Sprog.A(684)
-            UfWait2.Label_progress.Caption = "*"
+        If j = 10 And UFwait2 Is Nothing Then
+            Set UFwait2 = New UserFormWaitForMaxima
+            UFwait2.Label_tip.Font.Size = 10
+            UFwait2.Label_tip.Font.Italic = False
+            UFwait2.Show vbModeless
+            UFwait2.Label_tip.Caption = Sprog.A(684)
+            UFwait2.Label_progress.Caption = "*"
         End If
     Loop
     If j >= 75 Then
         WebV.Reload
         ExecuteGeogebraCmdViaJS = ""
     ElseIf (WebV.GetJSReturnVal() = """?""" Or WebV.GetJSReturnVal() = "null") And FejlC = 0 Then
-        If UfWait2 Is Nothing Then
-            Set UfWait2 = New UserFormWaitForMaxima
-            UfWait2.Label_tip.Font.Size = 10
-            UfWait2.Label_tip.Font.Italic = False
-            UfWait2.Show vbModeless
-            UfWait2.Label_tip.Caption = Sprog.A(684)
-            UfWait2.Label_progress.Caption = "*"
+        If UFwait2 Is Nothing Then
+            Set UFwait2 = New UserFormWaitForMaxima
+            UFwait2.Label_tip.Font.Size = 10
+            UFwait2.Label_tip.Font.Italic = False
+            UFwait2.Show vbModeless
+            UFwait2.Label_tip.Caption = Sprog.A(684)
+            UFwait2.Label_progress.Caption = "*"
         End If
         WebV.Reload
         WebV.WaitWV
-        If Not UfWait2 Is Nothing Then UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        If Not UFwait2 Is Nothing Then UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
         FejlC = FejlC + 1
         Wait 1
-        If Not UfWait2 Is Nothing Then UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        If Not UFwait2 Is Nothing Then UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
         Wait 1
-        If Not UfWait2 Is Nothing Then UfWait2.Label_progress.Caption = UfWait2.Label_progress.Caption & "*"
+        If Not UFwait2 Is Nothing Then UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
         GoTo start1
 '    ElseIf (WebV.GetJSReturnVal() = """?""" Or WebV.GetJSReturnVal() = "null") And FejlC = 1 Then
 '        Wait 2
@@ -246,7 +246,7 @@ start1:
         ExecuteGeogebraCmdViaJS = WebV.GetJSReturnVal()
     End If
 slut:
-    If Not UfWait2 Is Nothing Then Unload UfWait2
+    If Not UFwait2 Is Nothing Then Unload UFwait2
 #End If
 End Function
 

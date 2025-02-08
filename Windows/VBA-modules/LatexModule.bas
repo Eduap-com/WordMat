@@ -95,7 +95,7 @@ Public Sub SaveFile(doctype As Integer)
    
    Dim footn As Footnote
    For Each footn In HiddenDoc.Footnotes
-      footn.Reference.InsertAfter "\footnote{" & footn.Range.text & "}"
+      footn.Reference.InsertAfter "\footnote{" & footn.Range.Text & "}"
       footn.Delete
    Next
    
@@ -154,7 +154,7 @@ Public Sub SaveFile(doctype As Integer)
       If t.Rows(1).Borders.Item(wdBorderTop).LineStyle <> wdLineStyleNone Then s = s & "\hline" & vbCrLf
       For Each r In t.Rows
          For Each c In r.Cells
-            s = s & Left(c.Range.text, Len(c.Range.text) - 2) & "&"
+            s = s & Left(c.Range.Text, Len(c.Range.Text) - 2) & "&"
          Next
          s = Left(s, Len(s) - 1) & "\\ "
          If r.Borders.Item(wdBorderBottom).LineStyle <> wdLineStyleNone Then s = s & "\hline"
@@ -183,29 +183,29 @@ Public Sub SaveFile(doctype As Integer)
         
       ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleTitle) Or ActiveDocument.Paragraphs(i).Range.Style = "Title" Then
          If LatexDocumentclass = 0 Then
-            latexfil.Titel = Replace(ActiveDocument.Paragraphs(i).Range.text, vbCr, "")
+            latexfil.Titel = Replace(ActiveDocument.Paragraphs(i).Range.Text, vbCr, "")
          Else
-            latexfil.InsertChapter ActiveDocument.Paragraphs(i).Range.text
+            latexfil.InsertChapter ActiveDocument.Paragraphs(i).Range.Text
          End If
       ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleHeading1) Or ActiveDocument.Paragraphs(i).Range.Style = "Heading 1" Or ActiveDocument.Paragraphs(i).Range.Style = "Overskrift 1" Then
-         latexfil.InsertSection (ActiveDocument.Paragraphs(i).Range.text)
+         latexfil.InsertSection (ActiveDocument.Paragraphs(i).Range.Text)
       ElseIf ActiveDocument.Paragraphs(i).Style = ActiveDocument.Styles(wdStyleHeading2) Or ActiveDocument.Paragraphs(i).Range.Style = "Heading 2" Then
-         latexfil.InsertSubSection (ActiveDocument.Paragraphs(i).Range.text)
+         latexfil.InsertSubSection (ActiveDocument.Paragraphs(i).Range.Text)
       ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleHeading3) Or ActiveDocument.Paragraphs(i).Range.Style = "Heading 3" Then
-         latexfil.InsertSubSubSection (ActiveDocument.Paragraphs(i).Range.text)
-      ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleNormal) And InStr(ActiveDocument.Paragraphs(i).Range.text, "\") <= 0 Then
-         latexfil.InsertParagraph (ActiveDocument.Paragraphs(i).Range.text)
+         latexfil.InsertSubSubSection (ActiveDocument.Paragraphs(i).Range.Text)
+      ElseIf ActiveDocument.Paragraphs(i).Range.Style = ActiveDocument.Styles(wdStyleNormal) And InStr(ActiveDocument.Paragraphs(i).Range.Text, "\") <= 0 Then
+         latexfil.InsertParagraph (ActiveDocument.Paragraphs(i).Range.Text)
       ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListBullet Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListMixedNumbering Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListOutlineNumbering Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListPictureBullet Then  ' Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListNoNumbering
          If HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListType <> HiddenDoc.Paragraphs(i).Range.ListFormat.ListType Then
             latexfil.InsertText "\begin{itemize}" & vbCrLf
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
          ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListLevelNumber > HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListLevelNumber Then
-            latexfil.InsertText " \begin{itemize}" & vbCrLf & " \item " & HiddenDoc.Paragraphs(i).Range.text
+            latexfil.InsertText " \begin{itemize}" & vbCrLf & " \item " & HiddenDoc.Paragraphs(i).Range.Text
          ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListLevelNumber < HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListLevelNumber Then
             latexfil.InsertText " \end{itemize}" & vbCrLf
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
          Else
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
          End If
          If HiddenDoc.Paragraphs(i + 1).Range.ListFormat.ListType <> HiddenDoc.Paragraphs(i).Range.ListFormat.ListType Then
             latexfil.InsertText "\end{itemize}"
@@ -213,21 +213,21 @@ Public Sub SaveFile(doctype As Integer)
       ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListSimpleNumbering Or HiddenDoc.Paragraphs(i).Range.ListFormat.ListType = wdListListNumOnly Then
          If HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListType <> HiddenDoc.Paragraphs(i).Range.ListFormat.ListType Then
             latexfil.InsertText "\begin{enumerate}" & vbCrLf
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
          ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListLevelNumber > HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListLevelNumber Then
-            latexfil.InsertText " \begin{enumerate}" & vbCrLf & " \item " & HiddenDoc.Paragraphs(i).Range.text
+            latexfil.InsertText " \begin{enumerate}" & vbCrLf & " \item " & HiddenDoc.Paragraphs(i).Range.Text
          ElseIf HiddenDoc.Paragraphs(i).Range.ListFormat.ListLevelNumber < HiddenDoc.Paragraphs(i - 1).Range.ListFormat.ListLevelNumber Then
             latexfil.InsertText " \end{enumerate}" & vbCrLf
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
          Else
-            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.text
+            latexfil.InsertText " \item " & HiddenDoc.Paragraphs(i).Range.Text
          End If
          If HiddenDoc.Paragraphs(i + 1).Range.ListFormat.ListType <> HiddenDoc.Paragraphs(i).Range.ListFormat.ListType Then
             latexfil.InsertText "\end{enumerate}"
          End If
       Else
          '            MsgBox ActiveDocument.Paragraphs(i).Range.Style
-         latexfil.InsertText (ActiveDocument.Paragraphs(i).Range.text)
+         latexfil.InsertText (ActiveDocument.Paragraphs(i).Range.Text)
       End If
    Next
     
@@ -305,7 +305,7 @@ Sub ConvertList(L As List)
                s = s & " \end{itemize}" & vbCrLf
             End If
          End If
-         s = s & " \item " & L.ListParagraphs(i).Range.text
+         s = s & " \item " & L.ListParagraphs(i).Range.Text
       Next
       s = s & "\end{itemize}" & vbCrLf
       L.Range.InsertAfter s
@@ -320,7 +320,7 @@ Sub ConvertList(L As List)
                s = s & " \end{enumerate}" & vbCrLf
             End If
          End If
-         s = s & " \item " & L.ListParagraphs(i).Range.text
+         s = s & " \item " & L.ListParagraphs(i).Range.Text
       Next
       s = s & "\end{enumerate}" & vbCrLf
       L.Range.InsertAfter s
@@ -470,7 +470,7 @@ Function GetShapePos(sh As Variant) As Long
 End Function
 Sub ConvertFormattingToLatex(r As Range)
     With r.Find
-        .text = ""
+        .Text = ""
         .Forward = True
         .Wrap = wdFindContinue
         .Format = False
@@ -483,7 +483,7 @@ Sub ConvertFormattingToLatex(r As Range)
         .Font.Bold = True
         With .Replacement
             .ClearFormatting
-            .text = "\textbf{^&}"
+            .Text = "\textbf{^&}"
             .Font.Bold = False
         End With
         .Execute Replace:=wdReplaceAll
@@ -491,7 +491,7 @@ Sub ConvertFormattingToLatex(r As Range)
         .Font.Italic = True
         With .Replacement
             .ClearFormatting
-            .text = "\textit{^&}"
+            .Text = "\textit{^&}"
             .Font.Italic = False
         End With
         .Execute Replace:=wdReplaceAll
@@ -499,22 +499,22 @@ Sub ConvertFormattingToLatex(r As Range)
         .Font.Underline = True
         With .Replacement
             .ClearFormatting
-            .text = "\underline{^&}"
+            .Text = "\underline{^&}"
             .Font.Underline = False
         End With
         .Execute Replace:=wdReplaceAll
         .ClearFormatting
-        .text = "^m"
+        .Text = "^m"
         With .Replacement
             .ClearFormatting
-            .text = "^&\newpage"
+            .Text = "^&\newpage"
         End With
         .Execute Replace:=wdReplaceAll
         .ClearFormatting
-        .text = "^l" ' softbreak
+        .Text = "^l" ' softbreak
         With .Replacement
             .ClearFormatting
-            .text = "\newline^10"
+            .Text = "\newline^10"
         End With
         .Execute Replace:=wdReplaceAll
     End With
@@ -614,82 +614,86 @@ Sub TestEQ()
      ConvertEquationToLatex
 End Sub
 Sub ConvertEquationToLatex(Optional KeepOriginal As Boolean = False)
-   ' til miktex
-   Dim t As Table, s As String, p As Integer, EqStart As String, EqEnd As String, eq As OMath
-   If Not UserFormLatex.EventsOn Then Exit Sub
-   If Selection.OMaths.Count = 0 Then Exit Sub
-   Set eq = Selection.OMaths(1)
-   UserFormLatex.Label_input.Caption = omax.Kommando
-   LatexCode = omax.ConvertToLatex(omax.Kommando)
-   '   If OptionButton_visstor.Value = True Then
-   '      LatexCode = "\displaystyle " & LatexCode
-   '   ElseIf OptionButton_visinline.Value = True Then
-   '      LatexCode = "\inline " & LatexCode
-   '   End If
+    ' til miktex
+    Dim t As Table, s As String, p As Integer, EqStart As String, EqEnd As String, eq As OMath
+    If Not UserFormLatex.EventsOn Then Exit Sub
+    If Selection.OMaths.Count = 0 Then Exit Sub
+    Set eq = Selection.OMaths(1)
+    UserFormLatex.Label_input.Caption = omax.Kommando
+    LatexCode = omax.ConvertToLatex(omax.Kommando)
+    '   If OptionButton_visstor.Value = True Then
+    '      LatexCode = "\displaystyle " & LatexCode
+    '   ElseIf OptionButton_visinline.Value = True Then
+    '      LatexCode = "\inline " & LatexCode
+    '   End If
    
-   If Selection.OMaths(1).Breaks.Count > 0 Then
-      p = Selection.OMaths(1).Breaks(1).Range.start
-   End If
-   If LAlign > 0 Then
-      If LAlign = 1 Then
-         EqStart = "\begin{align}"
-         EqEnd = "\\"
-         LatexCode = Replace(LatexCode, "=", "&=", 1, 1)
-      ElseIf LAlign = 2 Then
-         EqStart = " "
-         EqEnd = "\\"
-         LatexCode = Replace(LatexCode, "=", "&=", 1, 1)
-      Else
-         EqStart = " "
-         EqEnd = "\end{align}"
-         LatexCode = Replace(LatexCode, "=", "&=", 1, 1)
-      End If
-   Else
-      EqStart = "\begin{equation}"
-      EqEnd = "\end{equation}"
-   End If
+    If Selection.OMaths(1).Breaks.Count > 0 Then
+        p = Selection.OMaths(1).Breaks(1).Range.start
+    End If
+    If LAlign > 0 Then
+        If LAlign = 1 Then
+            EqStart = "\begin{align}"
+            EqEnd = "\\"
+            LatexCode = Replace(LatexCode, "=", "&=", 1, 1)
+        ElseIf LAlign = 2 Then
+            EqStart = " "
+            EqEnd = "\\"
+            LatexCode = Replace(LatexCode, "=", "&=", 1, 1)
+        Else
+            EqStart = " "
+            EqEnd = "\end{align}"
+            LatexCode = Replace(LatexCode, "=", "&=", 1, 1)
+        End If
+    Else
+        EqStart = "\begin{equation}"
+        EqEnd = "\end{equation}"
+    End If
 
-   If UserFormLatex.OptionButton_omslutauto.Value = True Then
-      If Selection.OMaths(1).Justification = wdOMathJcInline Then
-         s = "$" & LatexCode & "$"
-      Else
-         If Selection.OMaths(1).Range.Tables.Count > 0 Then
-            Set t = Selection.OMaths(1).Range.Tables(1)
-            If t.Rows.Count = 1 And t.Columns.Count = 3 And t.Cell(1, 2).Range.OMaths.Count > 0 And t.Cell(1, 3).Range.Fields.Count > 0 Then
-               If t.Range.Bookmarks.Count > 0 Then
-                   s = EqStart & "\label{" & t.Range.Bookmarks(1).Name & "}" & LatexCode & EqEnd
-               Else
-                  s = EqStart & LatexCode & EqEnd
-               End If
-               t.Delete
+    If UserFormLatex.OptionButton_omslutauto.Value = True Then
+        If Selection.OMaths(1).Justification = wdOMathJcInline Then
+            s = "$" & LatexCode & "$"
+        Else
+            If Selection.OMaths(1).Range.Tables.Count > 0 Then
+                Set t = Selection.OMaths(1).Range.Tables(1)
+                If t.Rows.Count = 1 And t.Columns.Count = 3 Then
+                    If t.Cell(1, 2).Range.OMaths.Count > 0 And t.Cell(1, 3).Range.Fields.Count > 0 Then
+                        If t.Range.Bookmarks.Count > 0 Then
+                            s = EqStart & "\label{" & t.Range.Bookmarks(1).Name & "}" & LatexCode & EqEnd
+                        Else
+                            s = EqStart & LatexCode & EqEnd
+                        End If
+                        t.Delete
+                    Else
+                        s = "$" & LatexCode & "$"
+                    End If
+                Else
+                    s = "$" & LatexCode & "$"
+                End If
             Else
-               s = "$" & LatexCode & "$"
+                If InStr(EqStart, "\begin") > 0 Then EqStart = Left(EqStart, Len(EqStart) - 1) & "*" & right(EqStart, 1)
+                If InStr(EqEnd, "\end") > 0 Then EqEnd = Left(EqEnd, Len(EqEnd) - 1) & "*" & right(EqEnd, 1)
+                s = EqStart & LatexCode & EqEnd
             End If
-         Else
-            If InStr(EqStart, "\begin") > 0 Then EqStart = Left(EqStart, Len(EqStart) - 1) & "*" & right(EqStart, 1)
-            If InStr(EqEnd, "\end") > 0 Then EqEnd = Left(EqEnd, Len(EqEnd) - 1) & "*" & right(EqEnd, 1)
-            s = EqStart & LatexCode & EqEnd
-         End If
-      End If
-   Else
-      s = LatexStart & LatexCode & LatexSlut
-   End If
+        End If
+    Else
+        s = LatexStart & LatexCode & LatexSlut
+    End If
    
-   If Not (KeepOriginal) Then
-      '            ActiveDocument.OMaths(i).Range.text = ""
-'      On Error Resume Next
-'      Selection.OMaths(1).Range.Delete
-      eq.Range.Delete
-   Else
-      omax.GoToEndOfSelectedMaths
-      Selection.TypeParagraph
-   End If
-   If Selection.OMaths.Count > 0 Then
-      Selection.MoveLeft
-      If Selection.OMaths.Count > 0 Then Selection.MoveLeft
-      Selection.TypeParagraph
-   End If
-   Selection.InsertAfter s
+    If Not (KeepOriginal) Then
+        '            ActiveDocument.OMaths(i).Range.text = ""
+        '      On Error Resume Next
+        '      Selection.OMaths(1).Range.Delete
+        eq.Range.Delete
+    Else
+        omax.GoToEndOfSelectedMaths
+        Selection.TypeParagraph
+    End If
+    If Selection.OMaths.Count > 0 Then
+        Selection.MoveLeft
+        If Selection.OMaths.Count > 0 Then Selection.MoveLeft
+        Selection.TypeParagraph
+    End If
+    Selection.InsertAfter s
 
 
 End Sub
@@ -712,12 +716,12 @@ On Error GoTo slut
     If Selection.OMaths.Count > 0 Then
         PrepareMaxima
         omax.ReadSelection
-        Selection.OMaths(1).Range.text = ""
+        Selection.OMaths(1).Range.Text = ""
         Selection.InsertAfter LatexStart & omax.ConvertToLatex(omax.Kommando) & LatexSlut
     Else
         PrepareMaxima
         
-        mtext = omax.ConvertLatexToWord(RemoveLatexOmslut(Selection.Range.text))
+        mtext = omax.ConvertLatexToWord(RemoveLatexOmslut(Selection.Range.Text))
         Selection.Range.Delete
         Selection.Collapse wdCollapseEnd
         Set r = Selection.OMaths.Add(Selection.Range)
@@ -729,10 +733,10 @@ On Error GoTo slut
 
 slut:
 End Sub
-Function RemoveLatexOmslut(text As String)
+Function RemoveLatexOmslut(Text As String)
 
-    text = TrimB(text, "$")
-    text = TrimL(text, "\[")
-    text = TrimR(text, "\]")
-    RemoveLatexOmslut = text
+    Text = TrimB(Text, "$")
+    Text = TrimL(Text, "\[")
+    Text = TrimR(Text, "\]")
+    RemoveLatexOmslut = Text
 End Function

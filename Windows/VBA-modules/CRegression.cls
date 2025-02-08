@@ -37,14 +37,14 @@ Public Property Get Datatext() As Variant
 
 End Property
 
-Public Property Let Datatext(ByVal text As Variant)
+Public Property Let Datatext(ByVal Text As Variant)
     Dim i As Integer
     Dim j As Integer
     Dim lsep As String
     Dim Arr As Variant
     Dim Arr2 As Variant
     Dim n As Integer
-    Arr = Split(text, VbCrLfMac)
+    Arr = Split(Text, VbCrLfMac)
     n = UBound(Arr)
     ReDim xval(1 To n + 1) As Double
     ReDim yval(1 To n + 1) As Double
@@ -110,7 +110,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
     On Error Resume Next
     For i = 1 To n ' bestem hvor der ligger tal
         For j = 1 To rws(1).Cells.Count
-        cellval = rws(i).Cells(j).Range.text
+        cellval = rws(i).Cells(j).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         tal = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
@@ -144,7 +144,7 @@ End If
             omax.beregn
             cellval = Replace(omax.MaximaOutput, "=", "")
         Else
-            cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
+            cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
             cellval = Left(cellval, Len(cellval) - 1)
         End If
 '        cellval = tabel.Cell(j, 1).Range.text
@@ -160,7 +160,7 @@ End If
             omax.beregn
             cellval = Replace(omax.MaximaOutput, "=", "")
         Else
-            cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
+            cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
             cellval = Left(cellval, Len(cellval) - 1)
         End If
 
@@ -244,11 +244,11 @@ End If
     For j = 1 To n
         i = i + 1
         
-        cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
+        cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         xval(i) = val(cellval)
-        cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
+        cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
 '        cellval = tabel.Cell(j, 2).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         yval(i) = val(cellval)
@@ -271,7 +271,7 @@ End Sub
 Public Sub GetSetData()
 ' læser mængde {(2,1),(3,4)} fra mathbox ind i xval og yval
 Dim p As String
-Dim text As String
+Dim Text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
 Dim Arr As Variant
@@ -281,9 +281,9 @@ Dim Arr As Variant
 ea.StartBracket = "{"
 ea.EndBracket = "}"
 Selection.OMaths.Linearize
-text = Selection.OMaths(1).Range.text
-ea.text = Replace(text, VBA.ChrW(8722), "-") ' nødvendigt
-ea.text = ea.GetNextBracketContent()
+Text = Selection.OMaths(1).Range.Text
+ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' nødvendigt
+ea.Text = ea.GetNextBracketContent()
 ea.SetNormalBrackets
 ea.Pos = 1
 Do
@@ -475,7 +475,7 @@ Sub ComputeUserRegr()
             Arr = Split(fkt, "=")
             If UBound(Arr) > 0 Then fkt = Arr(1)
         End If
-        UserFormUserRegression.TextBox_function.text = fkt
+        UserFormUserRegression.TextBox_function.Text = fkt
     End If
     
     If InStr(fkt, "x") > 0 Then
@@ -495,17 +495,17 @@ Sub ComputeUserRegr()
     Else
         Var = ""
     End If
-    UserFormUserRegression.TextBox_var.text = Var
+    UserFormUserRegression.TextBox_var.Text = Var
     
-    UserFormUserRegression.TextBox_eps.text = MaximaCifre
+    UserFormUserRegression.TextBox_eps.Text = MaximaCifre
     
     UserFormUserRegression.Show
     
-    eps = UserFormUserRegression.TextBox_eps.text
-    fkt = UserFormUserRegression.TextBox_function.text
+    eps = UserFormUserRegression.TextBox_eps.Text
+    fkt = UserFormUserRegression.TextBox_function.Text
     fkt = Replace(fkt, "*", MaximaGangeTegn)
     guess = "[" & UserFormUserRegression.TextBox_guess & "]"
-    Var = UserFormUserRegression.TextBox_var.text
+    Var = UserFormUserRegression.TextBox_var.Text
     If Var <> vbNullString And fkt <> vbNullString Then
         omax.UserRegression ConvertSep(fkt), Var, xlist, ylist, CInt(eps), ConvertSep(guess)
         p = InStr(omax.KommentarOutput, "R^2=")
@@ -521,16 +521,16 @@ Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
-Function ConvertSep(text As String) As String
+Function ConvertSep(Text As String) As String
     ' kommaer og listeseparator
     Dim ea As New ExpressionAnalyser
     If Not MaximaSeparator Then
-        ea.text = text
+        ea.Text = Text
         ea.ConvertDecSeparator
-        text = ea.text
+        Text = ea.Text
         '        text = Replace(text, ",", ".")
     End If
-    ConvertSep = Replace(text, ";", ",")
+    ConvertSep = Replace(Text, ";", ",")
 
 End Function
 Sub ComputePolRegrKvad()
@@ -828,15 +828,15 @@ Sub InsertEquation()
     Oundo.StartCustomRecord
     Selection.TypeText RegressionText
 
-    Selection.TypeText text:="R"
+    Selection.TypeText Text:="R"
     Selection.Font.Superscript = wdToggle
-    Selection.TypeText text:="2"
+    Selection.TypeText Text:="2"
     Selection.Font.Superscript = wdToggle
-    Selection.TypeText text:=" = " & ConvertNumberToString(r)
+    Selection.TypeText Text:=" = " & ConvertNumberToString(r)
     Selection.TypeParagraph
     Selection.Collapse
     Selection.OMaths.Add Range:=Selection.Range
-    Selection.TypeText text:=Ligning
+    Selection.TypeText Text:=Ligning
     Selection.OMaths.BuildUp
     Selection.TypeParagraph
 '    Call Indsæt2DPlot(ligning, xval, yval)

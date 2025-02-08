@@ -27,15 +27,15 @@ Private Sub CommandButton_ok_Click()
     On Error GoTo Fejl
     
     Label_vent.visible = True
-    Sxmin = Replace(TextBox_xmin.text, ",", ".")
-    Sxmax = Replace(TextBox_xmax.text, ",", ".")
+    Sxmin = Replace(TextBox_xmin.Text, ",", ".")
+    Sxmax = Replace(TextBox_xmax.Text, ",", ".")
     
     xmin = val(Sxmin)
     xmax = val(Sxmax)
 '    funk = InputBox("Indtast forskrift som funktion af x", "Omdrejningslegeme")
-    funk = TextBox_forskrift.text
+    funk = TextBox_forskrift.Text
     funk = omax.CodeForMaxima(funk)
-    funk2 = TextBox_forskrift2.text
+    funk2 = TextBox_forskrift2.Text
     funk2 = omax.CodeForMaxima(funk2)
     dx = (xmax - xmin) / 5
     omax.MaximaInputStreng = omax.MaximaInputStreng & "fomd(x):=" & funk & "$"

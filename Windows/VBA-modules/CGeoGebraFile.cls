@@ -423,8 +423,6 @@ Public Sub CreatePoint(pointname As String, xkoord As Double, ykoord As Double)
 
 End Sub
 Public Sub CreateList(listname As String, List As String)
-
-
     Dim expressionelement As IXMLDOMElement
     Set expressionelement = GeoXMLdom.createElement("expression")
     Constructionelement.appendChild expressionelement
@@ -562,6 +560,148 @@ Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean
     
 slut:
 End Sub
+Public Sub CreateEquation(EquationName As String, Equation As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
+    Dim Pos As Integer
+    
+    If InStr(Equation, "matrix") > 0 Then GoTo slut ' matrix/vektor ikke understøttet endnu
+        
+    Equation = ConvertToGeogebraSyntax(Equation, ConvertMaxima)
+    Equation = Replace(Equation, VBA.ChrW(8804), "<=")  ' Virker kun med geogebra app
+    Equation = Replace(Equation, VBA.ChrW(8805), ">=") ' Virker kun med geogebra app
+
+    Dim expressionelement As IXMLDOMElement
+    Set expressionelement = GeoXMLdom.createElement("expression")
+    Constructionelement.appendChild expressionelement
+    expressionelement.setAttribute "label", EquationName
+    expressionelement.setAttribute "exp", Equation
+    expressionelement.setAttribute "type", "line"
+    
+    
+    Dim pointelement As IXMLDOMElement
+    Set pointelement = GeoXMLdom.createElement("element")
+    Constructionelement.appendChild pointelement
+    pointelement.setAttribute "type", "function"
+    pointelement.setAttribute "label", EquationName
+
+    Dim showelement As IXMLDOMElement
+    Set showelement = GeoXMLdom.createElement("show")
+    pointelement.appendChild showelement
+    showelement.setAttribute "object", "true"
+    showelement.setAttribute "label", "true"
+
+    Dim objColorelement As IXMLDOMElement
+    Set objColorelement = GeoXMLdom.createElement("objColor")
+    pointelement.appendChild objColorelement
+    objColorelement.setAttribute "r", "0"
+    objColorelement.setAttribute "g", "0"
+    If ulighed Then
+        objColorelement.setAttribute "b", "255"
+        objColorelement.setAttribute "alpha", "0.25"
+    Else
+        objColorelement.setAttribute "b", "0"
+        objColorelement.setAttribute "alpha", "0.0"
+    End If
+
+    Dim layerelement As IXMLDOMElement
+    Set layerelement = GeoXMLdom.createElement("layer")
+    pointelement.appendChild layerelement
+    layerelement.setAttribute "val", "0"
+
+    Dim labelModeelement As IXMLDOMElement
+    Set labelModeelement = GeoXMLdom.createElement("labelMode")
+    pointelement.appendChild labelModeelement
+    labelModeelement.setAttribute "val", "0"
+
+    Dim animationelement As IXMLDOMElement
+    Set animationelement = GeoXMLdom.createElement("animation")
+    pointelement.appendChild animationelement
+    animationelement.setAttribute "step", "0.1"
+    animationelement.setAttribute "speed", "1"
+    animationelement.setAttribute "type", "0"
+    animationelement.setAttribute "playing", "false"
+
+    Dim pointSizeelement As IXMLDOMElement
+    Set pointSizeelement = GeoXMLdom.createElement("lineStyle")
+    pointelement.appendChild pointSizeelement
+    pointSizeelement.setAttribute "thickness", "2"
+    pointSizeelement.setAttribute "type", "0"
+    
+slut:
+End Sub
+Public Sub CreateVector(VectorName As String, VectorExpr As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
+    Dim Pos As Integer
+            
+    VectorExpr = ConvertToGeogebraSyntax(VectorExpr, ConvertMaxima)
+
+
+    Dim commandelement As IXMLDOMElement
+    Set commandelement = GeoXMLdom.createElement("command")
+    Constructionelement.appendChild commandelement
+    commandelement.setAttribute "name", "Vector"
+    
+    Dim inputelement As IXMLDOMElement
+    Set inputelement = GeoXMLdom.createElement("input")
+    inputelement.setAttribute "a0", "(0,0)"
+    inputelement.setAttribute "a1", VectorExpr
+    commandelement.appendChild inputelement
+    
+    Dim outputelement As IXMLDOMElement
+    Set outputelement = GeoXMLdom.createElement("output")
+    outputelement.setAttribute "a0", VectorName
+    commandelement.appendChild outputelement
+    
+    
+    
+    Dim pointelement As IXMLDOMElement
+    Set pointelement = GeoXMLdom.createElement("element")
+    Constructionelement.appendChild pointelement
+    pointelement.setAttribute "type", "Vector"
+    pointelement.setAttribute "label", VectorName
+
+    Dim showelement As IXMLDOMElement
+    Set showelement = GeoXMLdom.createElement("show")
+    pointelement.appendChild showelement
+    showelement.setAttribute "object", "true"
+    showelement.setAttribute "label", "true"
+
+    Dim objColorelement As IXMLDOMElement
+    Set objColorelement = GeoXMLdom.createElement("objColor")
+    pointelement.appendChild objColorelement
+    objColorelement.setAttribute "r", "0"
+    objColorelement.setAttribute "g", "0"
+    If ulighed Then
+        objColorelement.setAttribute "b", "255"
+        objColorelement.setAttribute "alpha", "0.25"
+    Else
+        objColorelement.setAttribute "b", "0"
+        objColorelement.setAttribute "alpha", "0.0"
+    End If
+
+    Dim layerelement As IXMLDOMElement
+    Set layerelement = GeoXMLdom.createElement("layer")
+    pointelement.appendChild layerelement
+    layerelement.setAttribute "val", "0"
+
+    Dim labelModeelement As IXMLDOMElement
+    Set labelModeelement = GeoXMLdom.createElement("labelMode")
+    pointelement.appendChild labelModeelement
+    labelModeelement.setAttribute "val", "0"
+
+    Dim animationelement As IXMLDOMElement
+    Set animationelement = GeoXMLdom.createElement("animation")
+    pointelement.appendChild animationelement
+    animationelement.setAttribute "step", "0.1"
+    animationelement.setAttribute "speed", "1"
+    animationelement.setAttribute "type", "0"
+    animationelement.setAttribute "playing", "false"
+
+    Dim pointSizeelement As IXMLDOMElement
+    Set pointSizeelement = GeoXMLdom.createElement("lineStyle")
+    pointelement.appendChild pointSizeelement
+    pointSizeelement.setAttribute "thickness", "2"
+    pointSizeelement.setAttribute "type", "0"
+End Sub
+
 
 'Sub CreateElement()
 '    Dim zelement As IXMLDOMElement
@@ -571,9 +711,9 @@ End Sub
 
 'End Sub
 
-Function ConvertToGeogebraSyntaxFile(ByVal text As String, Optional ConvertMaxima As Boolean = True) As String
+Function ConvertToGeogebraSyntaxFile(ByVal Text As String, Optional ConvertMaxima As Boolean = True) As String
 
-   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(text, ConvertMaxima, False)
+   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(Text, ConvertMaxima, False)
 End Function
 
 

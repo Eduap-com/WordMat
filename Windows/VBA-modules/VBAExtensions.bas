@@ -19,34 +19,34 @@ Public Function GetCountOfChar(ByVal ar_sText As String, ByVal a_sChar As String
         End If
     Next l_iIndex
 End Function
-Function TrimR(ByVal text As String, c As String)
+Function TrimR(ByVal Text As String, c As String)
 ' fjerner c fra højre side af text
-If text = "" Then GoTo slut
-Do While right(text, 1) = c
-    text = Left(text, Len(text) - 1)
+If Text = "" Then GoTo slut
+Do While right(Text, 1) = c
+    Text = Left(Text, Len(Text) - 1)
 Loop
-TrimR = text
+TrimR = Text
 slut:
 End Function
-Function TrimL(ByVal text As String, c As String)
+Function TrimL(ByVal Text As String, c As String)
 ' fjerner c fra venstre side af text
-If text = "" Then GoTo slut
-Do While Left(text, 1) = c
-    text = right(text, Len(text) - 1)
+If Text = "" Then GoTo slut
+Do While Left(Text, 1) = c
+    Text = right(Text, Len(Text) - 1)
 Loop
-TrimL = text
+TrimL = Text
 slut:
 End Function
 
-Function TrimB(ByVal text As String, c As String)
+Function TrimB(ByVal Text As String, c As String)
 ' fjerner c fra Begge sider af text
-TrimB = TrimL(text, c)
+TrimB = TrimL(Text, c)
 TrimB = TrimR(TrimB, c)
 slut:
 End Function
-Function TrimRenter(ByVal text As String)
+Function TrimRenter(ByVal Text As String)
 ' removes crlf at right end
-    TrimRenter = TrimR(TrimR(text, vbLf), vbCr)
+    TrimRenter = TrimR(TrimR(Text, vbLf), vbCr)
 End Function
 
 Sub Wait(pausetime As Variant)

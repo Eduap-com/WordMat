@@ -121,11 +121,11 @@ Private Sub GeoGebraPlot()
         Label_wait.Caption = "Too many points for GeoGebra. Decrease no of. steps."
         MsgBox "Too many points for GeoGebra. Decrease no of. steps.", vbOKOnly, "Error"
     ElseIf Len(xl) > 1 Then
-      If TextBox_ymin.text <> "" And TextBox_ymax.text <> "" Then
-         s = s & ";ZoomIn(" & Replace(TextBox_xmin.text, ",", ".") & "," & Replace(TextBox_ymin.text, ",", ".") & "," & Replace(TextBox_xmax.text, ",", ".") & "," & Replace(TextBox_ymax.text, ",", ".") & ");ZoomIn(0.9)" 'ggbApplet.setCoordinateSystem(0,1000,0,1000)
+      If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
+         s = s & ";ZoomIn(" & Replace(TextBox_xmin.Text, ",", ".") & "," & Replace(TextBox_ymin.Text, ",", ".") & "," & Replace(TextBox_xmax.Text, ",", ".") & "," & Replace(TextBox_ymax.Text, ",", ".") & ");ZoomIn(0.9)" 'ggbApplet.setCoordinateSystem(0,1000,0,1000)
       Else
          If Ymin > 0 And (Ymax - Ymin) > Ymin Then Ymin = 0
-         s = s & ";ZoomIn(" & Replace(TextBox_xmin.text, ",", ".") & "," & Replace(Ymin, ",", ".") & "," & Replace(TextBox_xmax.text, ",", ".") & "," & Replace(Ymax, ",", ".") & ");ZoomIn(0.9)" 'ggbApplet.setCoordinateSystem(0,1000,0,1000)
+         s = s & ";ZoomIn(" & Replace(TextBox_xmin.Text, ",", ".") & "," & Replace(Ymin, ",", ".") & "," & Replace(TextBox_xmax.Text, ",", ".") & "," & Replace(Ymax, ",", ".") & ");ZoomIn(0.9)" 'ggbApplet.setCoordinateSystem(0,1000,0,1000)
       End If
         OpenGeoGebraWeb s, "", False, False
         Label_wait.Caption = "GeoGebra opened"
@@ -169,9 +169,9 @@ Dim pointText2 As String
     Set ils = Selection.InlineShapes.AddPicture(GetTempDir() & "WordMatGraf.gif", False, True)
 #End If
 Sep = "|"
-s = "WordMat" & Sep & AppVersion & Sep & TextBox_definitioner.text & Sep & "" & Sep & TextBox_varx.text & Sep & TextBox_var1.text & Sep
-s = s & TextBox_xmin.text & Sep & TextBox_xmax.text & Sep & "" & Sep & "" & Sep
-s = s & "" & Sep & "" & Sep & "" & Sep & TextBox_ymin.text & Sep & TextBox_ymax.text & Sep
+s = "WordMat" & Sep & AppVersion & Sep & TextBox_definitioner.Text & Sep & "" & Sep & TextBox_varx.Text & Sep & TextBox_var1.Text & Sep
+s = s & TextBox_xmin.Text & Sep & TextBox_xmax.Text & Sep & "" & Sep & "" & Sep
+s = s & "" & Sep & "" & Sep & "" & Sep & TextBox_ymin.Text & Sep & TextBox_ymax.Text & Sep
 s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep & "" & Sep
 s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep & "" & Sep
 s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep & "" & Sep
@@ -222,60 +222,60 @@ Dim i As Long, j As Integer
         .ApplyStyleLastColumn = False
         .ApplyStyleRowBands = True
         .ApplyStyleColumnBands = False
-        .Cell(1, 1).Range.text = TextBox_varx.text
+        .Cell(1, 1).Range.Text = TextBox_varx.Text
         .Cell(1, 1).Range.Bold = True
         .Columns(1).Width = 65
         i = 2
         If CheckBox1.Value Then
-            .Cell(1, i).Range.text = TextBox_var1.text
+            .Cell(1, i).Range.Text = TextBox_var1.Text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
         If CheckBox2.Value Then
-            .Cell(1, i).Range.text = TextBox_var2.text
+            .Cell(1, i).Range.Text = TextBox_var2.Text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
         If CheckBox3.Value Then
-            .Cell(1, i).Range.text = TextBox_var3.text
+            .Cell(1, i).Range.Text = TextBox_var3.Text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
         If CheckBox4.Value Then
-            .Cell(1, i).Range.text = TextBox_var4.text
+            .Cell(1, i).Range.Text = TextBox_var4.Text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
         If CheckBox5.Value Then
-            .Cell(1, i).Range.text = TextBox_var5.text
+            .Cell(1, i).Range.Text = TextBox_var5.Text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
         If CheckBox6.Value Then
-            .Cell(1, i).Range.text = TextBox_var6.text
+            .Cell(1, i).Range.Text = TextBox_var6.Text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
         If CheckBox7.Value Then
-            .Cell(1, i).Range.text = TextBox_var7.text
+            .Cell(1, i).Range.Text = TextBox_var7.Text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
         If CheckBox8.Value Then
-            .Cell(1, i).Range.text = TextBox_var8.text
+            .Cell(1, i).Range.Text = TextBox_var8.Text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
         If CheckBox9.Value Then
-            .Cell(1, i).Range.text = TextBox_var9.text
+            .Cell(1, i).Range.Text = TextBox_var9.Text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
@@ -285,7 +285,7 @@ Dim i As Long, j As Integer
         
     For i = 0 To UBound(PointArr, 1)
         For j = 0 To UBound(PointArr, 2)
-            Tabel.Cell(i + 2, j + 1).Range.text = PointArr(i, j)
+            Tabel.Cell(i + 2, j + 1).Range.Text = PointArr(i, j)
         Next
     Next
     
@@ -336,42 +336,42 @@ XLapp.visible = True
     
     Set ws = xlwb.worksheets(1)
     
-    ws.Cells(2, 1) = TextBox_varx.text
+    ws.Cells(2, 1) = TextBox_varx.Text
     i = 2
-    If TextBox_var1.text <> vbNullString And TextBox_eq1.text <> vbNullString And TextBox_init1.text <> vbNullString Then
-        ws.Cells(2, i) = TextBox_var1.text
+    If TextBox_var1.Text <> vbNullString And TextBox_eq1.Text <> vbNullString And TextBox_init1.Text <> vbNullString Then
+        ws.Cells(2, i) = TextBox_var1.Text
         i = i + 1
     End If
-    If TextBox_var2.text <> vbNullString And TextBox_eq2.text <> vbNullString And TextBox_init2.text <> vbNullString Then
-        ws.Cells(2, i) = TextBox_var2.text
+    If TextBox_var2.Text <> vbNullString And TextBox_eq2.Text <> vbNullString And TextBox_init2.Text <> vbNullString Then
+        ws.Cells(2, i) = TextBox_var2.Text
         i = i + 1
     End If
-    If TextBox_var3.text <> vbNullString And TextBox_eq3.text <> vbNullString And TextBox_init3.text <> vbNullString Then
-        ws.Cells(2, i) = TextBox_var3.text
+    If TextBox_var3.Text <> vbNullString And TextBox_eq3.Text <> vbNullString And TextBox_init3.Text <> vbNullString Then
+        ws.Cells(2, i) = TextBox_var3.Text
         i = i + 1
     End If
-    If TextBox_var4.text <> vbNullString And TextBox_eq4.text <> vbNullString And TextBox_init4.text <> vbNullString Then
-        ws.Cells(2, i) = TextBox_var4.text
+    If TextBox_var4.Text <> vbNullString And TextBox_eq4.Text <> vbNullString And TextBox_init4.Text <> vbNullString Then
+        ws.Cells(2, i) = TextBox_var4.Text
         i = i + 1
     End If
-    If TextBox_var5.text <> vbNullString And TextBox_eq5.text <> vbNullString And TextBox_init5.text <> vbNullString Then
-        ws.Cells(2, i) = TextBox_var5.text
+    If TextBox_var5.Text <> vbNullString And TextBox_eq5.Text <> vbNullString And TextBox_init5.Text <> vbNullString Then
+        ws.Cells(2, i) = TextBox_var5.Text
         i = i + 1
     End If
-    If TextBox_var6.text <> vbNullString And TextBox_eq6.text <> vbNullString And TextBox_init6.text <> vbNullString Then
-        ws.Cells(2, i) = TextBox_var6.text
+    If TextBox_var6.Text <> vbNullString And TextBox_eq6.Text <> vbNullString And TextBox_init6.Text <> vbNullString Then
+        ws.Cells(2, i) = TextBox_var6.Text
         i = i + 1
     End If
-    If TextBox_var7.text <> vbNullString And TextBox_eq7.text <> vbNullString And TextBox_init7.text <> vbNullString Then
-        ws.Cells(2, i) = TextBox_var7.text
+    If TextBox_var7.Text <> vbNullString And TextBox_eq7.Text <> vbNullString And TextBox_init7.Text <> vbNullString Then
+        ws.Cells(2, i) = TextBox_var7.Text
         i = i + 1
     End If
-    If TextBox_var8.text <> vbNullString And TextBox_eq8.text <> vbNullString And TextBox_init8.text <> vbNullString Then
-        ws.Cells(2, i) = TextBox_var8.text
+    If TextBox_var8.Text <> vbNullString And TextBox_eq8.Text <> vbNullString And TextBox_init8.Text <> vbNullString Then
+        ws.Cells(2, i) = TextBox_var8.Text
         i = i + 1
     End If
-    If TextBox_var9.text <> vbNullString And TextBox_eq9.text <> vbNullString And TextBox_init9.text <> vbNullString Then
-        ws.Cells(2, i) = TextBox_var9.text
+    If TextBox_var9.Text <> vbNullString And TextBox_eq9.Text <> vbNullString And TextBox_init9.Text <> vbNullString Then
+        ws.Cells(2, i) = TextBox_var9.Text
         i = i + 1
     End If
     
@@ -398,57 +398,57 @@ End Sub
 
 Private Sub TextBox_eq2_AfterUpdate()
     OpdaterDefinitioner
-    If TextBox_eq2.text <> vbNullString And TextBox_init2.text = vbNullString Then
-      TextBox_init2.text = "1"
+    If TextBox_eq2.Text <> vbNullString And TextBox_init2.Text = vbNullString Then
+      TextBox_init2.Text = "1"
     End If
 End Sub
 
 Private Sub TextBox_eq3_AfterUpdate()
     OpdaterDefinitioner
-    If TextBox_eq3.text <> vbNullString And TextBox_init3.text = vbNullString Then
-      TextBox_init3.text = "1"
+    If TextBox_eq3.Text <> vbNullString And TextBox_init3.Text = vbNullString Then
+      TextBox_init3.Text = "1"
     End If
 End Sub
 
 Private Sub TextBox_eq4_AfterUpdate()
     OpdaterDefinitioner
-    If TextBox_eq4.text <> vbNullString And TextBox_init4.text = vbNullString Then
-      TextBox_init4.text = "1"
+    If TextBox_eq4.Text <> vbNullString And TextBox_init4.Text = vbNullString Then
+      TextBox_init4.Text = "1"
     End If
 End Sub
 
 Private Sub TextBox_eq5_AfterUpdate()
     OpdaterDefinitioner
-    If TextBox_eq5.text <> vbNullString And TextBox_init5.text = vbNullString Then
-      TextBox_init5.text = "1"
+    If TextBox_eq5.Text <> vbNullString And TextBox_init5.Text = vbNullString Then
+      TextBox_init5.Text = "1"
     End If
 End Sub
 
 Private Sub TextBox_eq6_AfterUpdate()
     OpdaterDefinitioner
-    If TextBox_eq6.text <> vbNullString And TextBox_init6.text = vbNullString Then
-      TextBox_init6.text = "1"
+    If TextBox_eq6.Text <> vbNullString And TextBox_init6.Text = vbNullString Then
+      TextBox_init6.Text = "1"
     End If
 End Sub
 
 Private Sub TextBox_eq7_AfterUpdate()
     OpdaterDefinitioner
-    If TextBox_eq7.text <> vbNullString And TextBox_init7.text = vbNullString Then
-      TextBox_init7.text = "1"
+    If TextBox_eq7.Text <> vbNullString And TextBox_init7.Text = vbNullString Then
+      TextBox_init7.Text = "1"
     End If
 End Sub
 
 Private Sub TextBox_eq8_AfterUpdate()
     OpdaterDefinitioner
-    If TextBox_eq8.text <> vbNullString And TextBox_init8.text = vbNullString Then
-      TextBox_init8.text = "1"
+    If TextBox_eq8.Text <> vbNullString And TextBox_init8.Text = vbNullString Then
+      TextBox_init8.Text = "1"
     End If
 End Sub
 
 Private Sub TextBox_eq9_AfterUpdate()
     OpdaterDefinitioner
-    If TextBox_eq9.text <> vbNullString And TextBox_init9.text = vbNullString Then
-      TextBox_init9.text = "1"
+    If TextBox_eq9.Text <> vbNullString And TextBox_init9.Text = vbNullString Then
+      TextBox_init9.Text = "1"
     End If
 End Sub
 
@@ -477,9 +477,9 @@ End Sub
 Private Sub UpdateStep()
 Dim st As Double
    Validate
-   If CheckBox_autostep.Value And IsNumeric(TextBox_xmin.text) And IsNumeric(TextBox_xmax.text) Then
-      st = (StrToDbl(TextBox_xmax.text) - StrToDbl(TextBox_xmin.text)) / 500
-      TextBox_step.text = st
+   If CheckBox_autostep.Value And IsNumeric(TextBox_xmin.Text) And IsNumeric(TextBox_xmax.Text) Then
+      st = (StrToDbl(TextBox_xmax.Text) - StrToDbl(TextBox_xmin.Text)) / 500
+      TextBox_step.Text = st
    End If
 End Sub
 
@@ -488,15 +488,15 @@ On Error GoTo slut
    Dim st As Double
    Label_validate.Caption = ""
    Label_validate.visible = False
-   If Not IsNumeric(TextBox_xmin.text) Then Label_validate.Caption = "xmin er ikke et tal"
-   If Not IsNumeric(TextBox_xmax.text) Then Label_validate.Caption = "xmax er ikke et tal"
-   If Not IsNumeric(TextBox_step.text) Then Label_validate.Caption = "Skridtlængde er ikke et tal"
+   If Not IsNumeric(TextBox_xmin.Text) Then Label_validate.Caption = "xmin er ikke et tal"
+   If Not IsNumeric(TextBox_xmax.Text) Then Label_validate.Caption = "xmax er ikke et tal"
+   If Not IsNumeric(TextBox_step.Text) Then Label_validate.Caption = "Skridtlængde er ikke et tal"
 #If Mac Then
 #Else
    If ComboBox_graphapp.ListIndex > 0 Then
 #End If
-      If IsNumeric(TextBox_xmin.text) And IsNumeric(TextBox_xmax.text) And IsNumeric(TextBox_step.text) Then
-         st = Round((StrToDbl(TextBox_xmax.text) - StrToDbl(TextBox_xmin.text)) / StrToDbl(TextBox_step.text), 0)
+      If IsNumeric(TextBox_xmin.Text) And IsNumeric(TextBox_xmax.Text) And IsNumeric(TextBox_step.Text) Then
+         st = Round((StrToDbl(TextBox_xmax.Text) - StrToDbl(TextBox_xmin.Text)) / StrToDbl(TextBox_step.Text), 0)
          If st > 1000 Then Label_validate.Caption = "Antal skridt er " & st & ". Det vil formentlig ikke virke med GeoGebra med så mange skridt."
       End If
 #If Mac Then
@@ -557,72 +557,72 @@ Function SolveDE() As Boolean
     Dim ea As New ExpressionAnalyser
     Dim n As Integer, Npoints As Long
     On Error GoTo Fejl
-    variabel = TextBox_varx.text
-    xmin = Replace(TextBox_xmin.text, ",", ".")
-    xmax = Replace(TextBox_xmax.text, ",", ".")
-    xstep = Replace(TextBox_step.text, ",", ".")
+    variabel = TextBox_varx.Text
+    xmin = Replace(TextBox_xmin.Text, ",", ".")
+    xmax = Replace(TextBox_xmax.Text, ",", ".")
+    xstep = Replace(TextBox_step.Text, ",", ".")
     varlist = "["
     guesslist = "["
     DElist = "["
-    If TextBox_var1.text = vbNullString Or TextBox_eq1.text = vbNullString Or TextBox_init1.text = vbNullString Then
+    If TextBox_var1.Text = vbNullString Or TextBox_eq1.Text = vbNullString Or TextBox_init1.Text = vbNullString Then
         MsgBox "Der mangler data", vbOKOnly, Sprog.Error
         GoTo slut
     Else
         n = n + 1
-        varlist = varlist & TextBox_var1.text & ","
-        guesslist = guesslist & Replace(TextBox_init1.text, ",", ".") & " ,"
-        DElist = DElist & TextBox_eq1.text & " ,"
+        varlist = varlist & TextBox_var1.Text & ","
+        guesslist = guesslist & Replace(TextBox_init1.Text, ",", ".") & " ,"
+        DElist = DElist & TextBox_eq1.Text & " ,"
     End If
-    If TextBox_var2.text <> vbNullString And TextBox_eq2.text <> vbNullString And TextBox_init2.text <> vbNullString Then
+    If TextBox_var2.Text <> vbNullString And TextBox_eq2.Text <> vbNullString And TextBox_init2.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var2.text & ","
-        guesslist = guesslist & Replace(TextBox_init2.text, ",", ".") & " ,"
-        DElist = DElist & TextBox_eq2.text & " ,"
+        varlist = varlist & TextBox_var2.Text & ","
+        guesslist = guesslist & Replace(TextBox_init2.Text, ",", ".") & " ,"
+        DElist = DElist & TextBox_eq2.Text & " ,"
     End If
-    If TextBox_var3.text <> vbNullString And TextBox_eq3.text <> vbNullString And TextBox_init3.text <> vbNullString Then
+    If TextBox_var3.Text <> vbNullString And TextBox_eq3.Text <> vbNullString And TextBox_init3.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var3.text & ","
-        guesslist = guesslist & Replace(TextBox_init3.text, ",", ".") & " ,"
-        DElist = DElist & TextBox_eq3.text & " ,"
+        varlist = varlist & TextBox_var3.Text & ","
+        guesslist = guesslist & Replace(TextBox_init3.Text, ",", ".") & " ,"
+        DElist = DElist & TextBox_eq3.Text & " ,"
     End If
-    If TextBox_var4.text <> vbNullString And TextBox_eq4.text <> vbNullString And TextBox_init4.text <> vbNullString Then
+    If TextBox_var4.Text <> vbNullString And TextBox_eq4.Text <> vbNullString And TextBox_init4.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var4.text & ","
-        guesslist = guesslist & Replace(TextBox_init4.text, ",", ".") & " ,"
-        DElist = DElist & TextBox_eq4.text & " ,"
+        varlist = varlist & TextBox_var4.Text & ","
+        guesslist = guesslist & Replace(TextBox_init4.Text, ",", ".") & " ,"
+        DElist = DElist & TextBox_eq4.Text & " ,"
     End If
-    If TextBox_var5.text <> vbNullString And TextBox_eq5.text <> vbNullString And TextBox_init5.text <> vbNullString Then
+    If TextBox_var5.Text <> vbNullString And TextBox_eq5.Text <> vbNullString And TextBox_init5.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var5.text & ","
-        guesslist = guesslist & Replace(TextBox_init5.text, ",", ".") & " ,"
-        DElist = DElist & TextBox_eq5.text & " ,"
+        varlist = varlist & TextBox_var5.Text & ","
+        guesslist = guesslist & Replace(TextBox_init5.Text, ",", ".") & " ,"
+        DElist = DElist & TextBox_eq5.Text & " ,"
     End If
-    If TextBox_var6.text <> vbNullString And TextBox_eq6.text <> vbNullString And TextBox_init6.text <> vbNullString Then
+    If TextBox_var6.Text <> vbNullString And TextBox_eq6.Text <> vbNullString And TextBox_init6.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var6.text & ","
-        guesslist = guesslist & Replace(TextBox_init6.text, ",", ".") & " ,"
-        DElist = DElist & TextBox_eq6.text & " ,"
+        varlist = varlist & TextBox_var6.Text & ","
+        guesslist = guesslist & Replace(TextBox_init6.Text, ",", ".") & " ,"
+        DElist = DElist & TextBox_eq6.Text & " ,"
     End If
-    If TextBox_var7.text <> vbNullString And TextBox_eq7.text <> vbNullString And TextBox_init7.text <> vbNullString Then
+    If TextBox_var7.Text <> vbNullString And TextBox_eq7.Text <> vbNullString And TextBox_init7.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var7.text & ","
-        guesslist = guesslist & Replace(TextBox_init7.text, ",", ".") & " ,"
-        DElist = DElist & TextBox_eq7.text & " ,"
+        varlist = varlist & TextBox_var7.Text & ","
+        guesslist = guesslist & Replace(TextBox_init7.Text, ",", ".") & " ,"
+        DElist = DElist & TextBox_eq7.Text & " ,"
     End If
-    If TextBox_var8.text <> vbNullString And TextBox_eq8.text <> vbNullString And TextBox_init8.text <> vbNullString Then
+    If TextBox_var8.Text <> vbNullString And TextBox_eq8.Text <> vbNullString And TextBox_init8.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var8.text & ","
-        guesslist = guesslist & Replace(TextBox_init8.text, ",", ".") & " ,"
-        DElist = DElist & TextBox_eq8.text & " ,"
+        varlist = varlist & TextBox_var8.Text & ","
+        guesslist = guesslist & Replace(TextBox_init8.Text, ",", ".") & " ,"
+        DElist = DElist & TextBox_eq8.Text & " ,"
     End If
-    If TextBox_var9.text <> vbNullString And TextBox_eq9.text <> vbNullString And TextBox_init9.text <> vbNullString Then
+    If TextBox_var9.Text <> vbNullString And TextBox_eq9.Text <> vbNullString And TextBox_init9.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var9.text & ","
-        guesslist = guesslist & Replace(TextBox_init9.text, ",", ".") & " ,"
-        DElist = DElist & TextBox_eq9.text & " ,"
+        varlist = varlist & TextBox_var9.Text & ","
+        guesslist = guesslist & Replace(TextBox_init9.Text, ",", ".") & " ,"
+        DElist = DElist & TextBox_eq9.Text & " ,"
     End If
     
-    Npoints = (val(Replace(TextBox_xmax.text, ",", ".")) - val(Replace(TextBox_xmin.text, ",", "."))) / val(Replace(TextBox_step.text, ",", "."))
+    Npoints = (val(Replace(TextBox_xmax.Text, ",", ".")) - val(Replace(TextBox_xmin.Text, ",", "."))) / val(Replace(TextBox_step.Text, ",", "."))
     varlist = Left(varlist, Len(varlist) - 1) & "]"
     guesslist = Left(guesslist, Len(guesslist) - 1) & "]"
     DElist = Left(DElist, Len(DElist) - 1) & "]"
@@ -635,10 +635,10 @@ Function SolveDE() As Boolean
     Dim s As String, i As Long, j As Integer
     Dim Arr As Variant
     ReDim PointArr(Npoints, n)
-    ea.text = ListOutput
+    ea.Text = ListOutput
     ea.SetSquareBrackets
     If ea.Length > 2 Then
-        ea.text = Mid(ea.text, 2, ea.Length - 2)
+        ea.Text = Mid(ea.Text, 2, ea.Length - 2)
     End If
     Do
         s = ea.GetNextBracketContent(0)
@@ -660,7 +660,7 @@ slut:
 End Function
 
 Sub PlotOutput(Optional highres As Double = 1)
-Dim text As String, yAxislabel As String
+Dim Text As String, yAxislabel As String
 On Error GoTo Fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
@@ -668,117 +668,117 @@ On Error GoTo Fejl
     omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
     
 '    text = "explicit(x^2,x,-1,1)"
-    If Len(TextBox_ymin.text) > 0 And Len(TextBox_ymax.text) > 0 Then
-        text = text & "yrange=[" & ConvertNumberToMaxima(TextBox_ymin.text) & "," & ConvertNumberToMaxima(TextBox_ymax.text) & "],"
+    If Len(TextBox_ymin.Text) > 0 And Len(TextBox_ymax.Text) > 0 Then
+        Text = Text & "yrange=[" & ConvertNumberToMaxima(TextBox_ymin.Text) & "," & ConvertNumberToMaxima(TextBox_ymax.Text) & "],"
     End If
     colindex = 0
-    text = text & "color=" & GetNextColor & ","
+    Text = Text & "color=" & GetNextColor & ","
     If Not CheckBox_pointsjoined.Value Then
-        text = text & "point_size=" & Replace(highres * 1, ",", ".") & ","
+        Text = Text & "point_size=" & Replace(highres * 1, ",", ".") & ","
     Else
 #If Mac Then
-        text = text & "point_size=0.1," ' fejler med 0 på mac
+        Text = Text & "point_size=0.1," ' fejler med 0 på mac
 #Else
-        text = text & "point_size=0,"
+        Text = Text & "point_size=0,"
 #End If
     End If
-    text = text & "point_type=filled_circle,points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ","
+    Text = Text & "point_type=filled_circle,points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ","
     If CheckBox1.Value Then
         If CheckBox_visforklaring.Value Then
-            text = text & "key=""" & omax.ConvertToAscii(TextBox_var1.text) & ""","
+            Text = Text & "key=""" & omax.ConvertToAscii(TextBox_var1.Text) & ""","
         Else
-            text = text & "key="""","
+            Text = Text & "key="""","
         End If
-        text = text & "points(makelist([pq[1],pq[2]],pq,qDElist)),"
-        yAxislabel = yAxislabel & TextBox_var1.text & ","
+        Text = Text & "points(makelist([pq[1],pq[2]],pq,qDElist)),"
+        yAxislabel = yAxislabel & TextBox_var1.Text & ","
     End If
     If CheckBox2.Value Then
         If CheckBox_visforklaring.Value Then
-            text = text & "key=""" & omax.ConvertToAscii(TextBox_var2.text) & ""","
+            Text = Text & "key=""" & omax.ConvertToAscii(TextBox_var2.Text) & ""","
         Else
-            text = text & "key="""","
+            Text = Text & "key="""","
         End If
-        text = text & "color=" & GetNextColor & ","
-        text = text & "points(makelist([pq[1],pq[3]],pq,qDElist)),"
-        yAxislabel = yAxislabel & TextBox_var2.text & ","
+        Text = Text & "color=" & GetNextColor & ","
+        Text = Text & "points(makelist([pq[1],pq[3]],pq,qDElist)),"
+        yAxislabel = yAxislabel & TextBox_var2.Text & ","
     End If
     If CheckBox3.Value Then
         If CheckBox_visforklaring.Value Then
-            text = text & "key=""" & omax.ConvertToAscii(TextBox_var3.text) & ""","
+            Text = Text & "key=""" & omax.ConvertToAscii(TextBox_var3.Text) & ""","
         Else
-            text = text & "key="""","
+            Text = Text & "key="""","
         End If
-        text = text & "color=" & GetNextColor & ","
-        text = text & "points(makelist([pq[1],pq[4]],pq,qDElist)),"
-        yAxislabel = yAxislabel & TextBox_var3.text & ","
+        Text = Text & "color=" & GetNextColor & ","
+        Text = Text & "points(makelist([pq[1],pq[4]],pq,qDElist)),"
+        yAxislabel = yAxislabel & TextBox_var3.Text & ","
     End If
     If CheckBox4.Value Then
         If CheckBox_visforklaring.Value Then
-            text = text & "key=""" & omax.ConvertToAscii(TextBox_var4.text) & ""","
+            Text = Text & "key=""" & omax.ConvertToAscii(TextBox_var4.Text) & ""","
         Else
-            text = text & "key="""","
+            Text = Text & "key="""","
         End If
-        text = text & "color=" & GetNextColor & ","
-        text = text & "points(makelist([pq[1],pq[5]],pq,qDElist)),"
-        yAxislabel = yAxislabel & TextBox_var4.text & ","
+        Text = Text & "color=" & GetNextColor & ","
+        Text = Text & "points(makelist([pq[1],pq[5]],pq,qDElist)),"
+        yAxislabel = yAxislabel & TextBox_var4.Text & ","
     End If
     If CheckBox5.Value Then
         If CheckBox_visforklaring.Value Then
-            text = text & "key=""" & omax.ConvertToAscii(TextBox_var5.text) & ""","
+            Text = Text & "key=""" & omax.ConvertToAscii(TextBox_var5.Text) & ""","
         Else
-            text = text & "key="""","
+            Text = Text & "key="""","
         End If
-        text = text & "color=" & GetNextColor & ","
-        text = text & "points(makelist([pq[1],pq[6]],pq,qDElist)),"
-        yAxislabel = yAxislabel & TextBox_var5.text & ","
+        Text = Text & "color=" & GetNextColor & ","
+        Text = Text & "points(makelist([pq[1],pq[6]],pq,qDElist)),"
+        yAxislabel = yAxislabel & TextBox_var5.Text & ","
     End If
     If CheckBox6.Value Then
         If CheckBox_visforklaring.Value Then
-            text = text & "key=""" & omax.ConvertToAscii(TextBox_var6.text) & ""","
+            Text = Text & "key=""" & omax.ConvertToAscii(TextBox_var6.Text) & ""","
         Else
-            text = text & "key="""","
+            Text = Text & "key="""","
         End If
-        text = text & "color=" & GetNextColor & ","
-        text = text & "points(makelist([pq[1],pq[7]],pq,qDElist)),"
-        yAxislabel = yAxislabel & TextBox_var6.text & ","
+        Text = Text & "color=" & GetNextColor & ","
+        Text = Text & "points(makelist([pq[1],pq[7]],pq,qDElist)),"
+        yAxislabel = yAxislabel & TextBox_var6.Text & ","
     End If
     If CheckBox7.Value Then
         If CheckBox_visforklaring.Value Then
-            text = text & "key=""" & omax.ConvertToAscii(TextBox_var7.text) & ""","
+            Text = Text & "key=""" & omax.ConvertToAscii(TextBox_var7.Text) & ""","
         Else
-            text = text & "key="""","
+            Text = Text & "key="""","
         End If
-        text = text & "color=" & GetNextColor & ","
-        text = text & "points(makelist([pq[1],pq[8]],pq,qDElist)),"
-        yAxislabel = yAxislabel & TextBox_var7.text & ","
+        Text = Text & "color=" & GetNextColor & ","
+        Text = Text & "points(makelist([pq[1],pq[8]],pq,qDElist)),"
+        yAxislabel = yAxislabel & TextBox_var7.Text & ","
     End If
     If CheckBox8.Value Then
         If CheckBox_visforklaring.Value Then
-            text = text & "key=""" & omax.ConvertToAscii(TextBox_var8.text) & ""","
+            Text = Text & "key=""" & omax.ConvertToAscii(TextBox_var8.Text) & ""","
         Else
-            text = text & "key="""","
+            Text = Text & "key="""","
         End If
-        text = text & "color=" & GetNextColor & ","
-        text = text & "points(makelist([pq[1],pq[9]],pq,qDElist)),"
-        yAxislabel = yAxislabel & TextBox_var8.text & ","
+        Text = Text & "color=" & GetNextColor & ","
+        Text = Text & "points(makelist([pq[1],pq[9]],pq,qDElist)),"
+        yAxislabel = yAxislabel & TextBox_var8.Text & ","
     End If
     If CheckBox9.Value Then
         If CheckBox_visforklaring.Value Then
-            text = text & "key=""" & omax.ConvertToAscii(TextBox_var9.text) & ""","
+            Text = Text & "key=""" & omax.ConvertToAscii(TextBox_var9.Text) & ""","
         Else
-            text = text & "key="""","
+            Text = Text & "key="""","
         End If
-        text = text & "color=" & GetNextColor & ","
-        text = text & "points(makelist([pq[1],pq[10]],pq,qDElist)),"
-        yAxislabel = yAxislabel & TextBox_var9.text & ","
+        Text = Text & "color=" & GetNextColor & ","
+        Text = Text & "points(makelist([pq[1],pq[10]],pq,qDElist)),"
+        yAxislabel = yAxislabel & TextBox_var9.Text & ","
     End If
-    text = Left(text, Len(text) - 1)
+    Text = Left(Text, Len(Text) - 1)
     yAxislabel = Left(yAxislabel, Len(yAxislabel) - 1)
 '    text = text & ",[xlabel,""" & TextBox_varx.text & """]"
 '    text = text & ",[ylabel,""" & TextBox_var1.text & """]"
     
-    If Len(text) > 0 Then
-        Call omax.Draw2D(text, "", TextBox_varx.text, yAxislabel, True, True, 1)
+    If Len(Text) > 0 Then
+        Call omax.Draw2D(Text, "", TextBox_varx.Text, yAxislabel, True, True, 1)
         If omax.MaximaOutput = "" Then
             Label_wait.Caption = "Fejl!"
             Label_wait.visible = True
@@ -830,7 +830,7 @@ End Sub
 Function GetDefString()
 Dim DefString As String
 omax.ResetDefinitions
-DefString = TextBox_definitioner.text
+DefString = TextBox_definitioner.Text
 If Len(DefString) > 0 Then
 DefString = Replace(DefString, vbCrLf, ListSeparator)
     DefString = TrimB(DefString, ListSeparator)
@@ -863,28 +863,28 @@ Sub OpdaterDefinitioner()
     
    omax.FindVariable Vars, False ' fjerner dobbelte
    Vars = omax.Vars
-   Vars = RemoveVar(Vars, TextBox_var1.text)
-   Vars = RemoveVar(Vars, TextBox_var2.text)
-   Vars = RemoveVar(Vars, TextBox_var3.text)
-   Vars = RemoveVar(Vars, TextBox_var4.text)
-   Vars = RemoveVar(Vars, TextBox_var5.text)
-   Vars = RemoveVar(Vars, TextBox_var6.text)
-   Vars = RemoveVar(Vars, TextBox_var7.text)
-   Vars = RemoveVar(Vars, TextBox_var8.text)
-   Vars = RemoveVar(Vars, TextBox_var9.text)
+   Vars = RemoveVar(Vars, TextBox_var1.Text)
+   Vars = RemoveVar(Vars, TextBox_var2.Text)
+   Vars = RemoveVar(Vars, TextBox_var3.Text)
+   Vars = RemoveVar(Vars, TextBox_var4.Text)
+   Vars = RemoveVar(Vars, TextBox_var5.Text)
+   Vars = RemoveVar(Vars, TextBox_var6.Text)
+   Vars = RemoveVar(Vars, TextBox_var7.Text)
+   Vars = RemoveVar(Vars, TextBox_var8.Text)
+   Vars = RemoveVar(Vars, TextBox_var9.Text)
     
    If Left(Vars, 1) = ";" Then Vars = right(Vars, Len(Vars) - 1)
     
-   ea.text = Vars
-   Do While right(TextBox_definitioner.text, 2) = VbCrLfMac
-      TextBox_definitioner.text = Left(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
+   ea.Text = Vars
+   Do While right(TextBox_definitioner.Text, 2) = VbCrLfMac
+      TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
    Loop
-   Arr = Split(TextBox_definitioner.text, VbCrLfMac)
+   Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
    
    For i = 0 To UBound(Arr) ' Hvis variabel indgår i def, skal den fjernes
       If Arr(i) <> "" Then
          var2 = Split(Arr(i), "=")(0)
-         If var2 = TextBox_varx.text Then
+         If var2 = TextBox_varx.Text Then
             Arr(i) = ""
          End If
          If Arr(i) <> "" Then s = s & Arr(i) & VbCrLfMac
@@ -893,9 +893,9 @@ Sub OpdaterDefinitioner()
    Do While right(s, 2) = vbCrLf
       s = Left(s, Len(s) - 2)
    Loop
-   TextBox_definitioner.text = s
+   TextBox_definitioner.Text = s
    
-   Arr = Split(TextBox_definitioner.text, VbCrLfMac)
+   Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
    Do
       Var = ea.GetNextListItem(ea.Pos)
       Var = Replace(Var, vbCrLf, "")
@@ -910,40 +910,40 @@ Sub OpdaterDefinitioner()
       Next
       If Var <> "" Then
          '        If Right(TextBox_definitioner.text, 2) <> vbCrLf Then
-         If Len(TextBox_definitioner.text) > 0 Then
-            TextBox_definitioner.text = TextBox_definitioner.text & VbCrLfMac
+         If Len(TextBox_definitioner.Text) > 0 Then
+            TextBox_definitioner.Text = TextBox_definitioner.Text & VbCrLfMac
          End If
-         TextBox_definitioner.text = TextBox_definitioner.text & Var & "=1"
+         TextBox_definitioner.Text = TextBox_definitioner.Text & Var & "=1"
       End If
-   Loop While ea.Pos <= Len(ea.text)
+   Loop While ea.Pos <= Len(ea.Text)
 
     
 End Sub
 Function GetTextboxVars(tb As TextBox, tbvar As TextBox) As String
-    If Len(tb.text) > 0 Then
+    If Len(tb.Text) > 0 Then
         omax.Vars = ""
-        omax.FindVariable tb.text, False
-        omax.Vars = RemoveVar(omax.Vars, tbvar.text)
+        omax.FindVariable tb.Text, False
+        omax.Vars = RemoveVar(omax.Vars, tbvar.Text)
         If Len(omax.Vars) > 0 Then
             GetTextboxVars = ";" & omax.Vars
         End If
     End If
 End Function
 
-Function RemoveVar(text As String, Var As String)
+Function RemoveVar(Text As String, Var As String)
 ' fjerner var fra string
 Dim ea As New ExpressionAnalyser
 If Var = vbNullString Then
-    RemoveVar = text
+    RemoveVar = Text
     Exit Function
 End If
-ea.text = text
+ea.Text = Text
 Call ea.ReplaceVar(Var, "")
-text = Replace(ea.text, ";;", ";")
-If Left(text, 1) = ";" Then text = right(text, Len(text) - 1)
-If right(text, 1) = ";" Then text = Left(text, Len(text) - 1)
+Text = Replace(ea.Text, ";;", ";")
+If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
+If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
 
-RemoveVar = text
+RemoveVar = Text
 End Function
 
 Sub SetCaptions()
