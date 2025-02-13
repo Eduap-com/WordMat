@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormMaximaSettings 
    Caption         =   "Indstillinger"
-   ClientHeight    =   5955
+   ClientHeight    =   5952
    ClientLeft      =   -15
    ClientTop       =   45
    ClientWidth     =   10410
@@ -368,7 +368,15 @@ Private Sub CommandButton_shortcuts_Click()
     If Not KSok Then
         MsgBox "Det ser ud til at genvejene ikke er sat korrekt i denne udgave af WordMat. Det kræver nok en Fejlmeldingen", vbOKOnly, "Fejl"
     Else
-        MsgBox "Keyboard shortcuts restored", vbOKOnly, "Done"
+        If Sprog.SprogNr = 1 Then
+#If Mac Then
+            MsgBox2 "Det er nu forsøgt at reparere tastaturgenveje." & vbCrLf & "Hvis det ikke virker, så slet filen 'normal.dotm' i mappen ""~/Library/Group Containers/UBF8T346G9.Office/User Content/Templates"" og genstart Word"
+#Else
+            MsgBox2 "Det er nu forsøgt at reparere tastaturgenveje." & vbCrLf & "Hvis det ikke virker, så slet filen 'normal.dotm' i mappen ""%appdata%/Microsoft/Templates"" og genstart Word"
+#End If
+        Else
+            MsgBox "Keyboard shortcuts restored", vbOKOnly, "Done"
+        End If
     End If
 
 End Sub

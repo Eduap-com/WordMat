@@ -100,9 +100,8 @@ Sub RunTestSequence()
     '    Application.ScreenRefresh
     
     'til test af enkelt
-'    GoTo slut
     
-    
+    DebugWM = False
     ' ikke den kønneste løsning, men tomme linjer bliver spist og hvis der ikke er plads som beregninger kan vokse i, så giver det problemer.
     For i = 0 To 30
     Selection.TypeParagraph

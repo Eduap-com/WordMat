@@ -1097,7 +1097,7 @@ start:
         Else
             MaximaOutput = variabel & VBA.ChrW(8712) & VBA.ChrW(8709)
         End If
-    ElseIf MaximaOutput = "all" Or MaximaOutput = "[" & variabel & "=k_1]" Then
+    ElseIf MaximaOutput = "all" Or MaximaOutput = "[all]" Or MaximaOutput = "[" & variabel & "=k_1]" Then
         If LmSet Then
             MaximaOutput = "L=" & VBA.ChrW(8477)
         Else
