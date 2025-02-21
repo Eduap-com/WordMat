@@ -152,9 +152,14 @@ Dim Arr() As String, i As Integer
     If CASengine = 0 Then
         CheckBox_rationaliser.visible = True
         Label_rationaliser.visible = True
+        CheckBox_completesquare.visible = True
+        Label_completesquare.visible = True
     Else
         CheckBox_rationaliser.visible = False
         Label_rationaliser.visible = False
+        
+        CheckBox_completesquare.visible = False
+        Label_completesquare.visible = False
     End If
     
     annuller = True

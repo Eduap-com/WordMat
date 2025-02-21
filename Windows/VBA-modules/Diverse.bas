@@ -1212,7 +1212,7 @@ Sub CheckForUpdateOld()
 '    On Error GoTo Fejl
 #If Mac Then
     MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  eduap.com"
-    OpenLink "https://www.eduap.com/da/download-wordmat/"
+    OpenLink "https://www.eduap.com/da/wordmat/"
 #Else
     Dim nyversion As String, News As String
     PrepareMaxima
@@ -1228,7 +1228,7 @@ Sub CheckForUpdateOld()
         News = MaxProc.GetVersionNews()
         result = MsgBox(Sprog.A(21) & News & vbCrLf & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
         If result = vbYes Then
-            OpenLink "https://www.eduap.com/da/download-wordmat/"
+            OpenLink "https://www.eduap.com/da/wordmat/"
         End If
     End If
 
@@ -1254,7 +1254,7 @@ End Sub
 ''   On Error GoTo fejl
 ''#If Mac Then
 ''    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  eduap.com"
-''    OpenLink "http://eduap.com/wordmat/"
+''    OpenLink "https://eduap.com/wordmat/"
 ''#Else
 '    Dim result As VbMsgBoxResult
 '    MapsClient.BaseUrl = "https://www.eduap.com/wordmat-version-history/"
@@ -1313,7 +1313,7 @@ End Sub
 '        Else
 '            result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
 '            If result = vbYes Then
-'                OpenLink "https://www.eduap.com/da/download-wordmat/"
+'                OpenLink "https://www.eduap.com/da/wordmat/"
 '            End If
 '        End If
 '    Else
@@ -1366,7 +1366,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     If PartnerShip Then
         s = GetHTML("https://www.eduap.com/download/info/wordmatversionP.txt")
     Else
-'        s = GetHTML("http://screinfo.eduap.com/wordmatversion.txt")
+'        s = GetHTML("https://screinfo.eduap.com/wordmatversion.txt")
         s = GetHTML("https://www.eduap.com/download/info/wordmatversionP.txt")
     End If
 #End If
@@ -1421,7 +1421,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     '        '      If UFreminder.Visible = True Then UFreminder.Top = 100
     '        result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
     '        If result = vbYes Then
-    '            OpenLink "https://eduap.com/da/download-wordmat/"
+    '            OpenLink "https://www.eduap.com/da/wordmat/"
     '        End If
     '    Else
     '        If Not RunSilent Then
@@ -1472,7 +1472,7 @@ Fejl:
     '   MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure CheckForUpdate, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     If Not RunSilent Then
         MsgBox "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com"
-        OpenLink "https://www.eduap.com/da/download-wordmat/"
+        OpenLink "https://www.eduap.com/da/wordmat/"
         '        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     End If
 slut:

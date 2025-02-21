@@ -273,7 +273,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
    mtpath = MikTexPath
    If mtpath = "" Then
       MsgBox Sprog.A(409)
-      OpenLink "http://miktex.org"
+      OpenLink "https://miktex.org"
       GoTo slut
    End If
 
@@ -345,7 +345,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    mtpath = MikTexPath
    If mtpath = "" Then
       MsgBox Sprog.A(409), vbOKOnly
-      OpenLink "http://miktex.org"
+      OpenLink "https://miktex.org"
       GoTo slut
    End If
 
