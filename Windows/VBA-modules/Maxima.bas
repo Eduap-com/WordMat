@@ -2015,178 +2015,191 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub beregn()
-          '    MsgBox WordWindowNavn
-          '    Dim omax As New CMaxima
-          Dim fejlm As String
-10            On Error GoTo Fejl
-         ' Application.ScreenUpdating = False
-          '   LockWindow
-          Dim tid As Single
-20        tid = Timer
+    '    MsgBox WordWindowNavn
+    '    Dim omax As New CMaxima
+    Dim fejlm As String, RemoveEqual As Boolean
+        On Error GoTo Fejl
+   ' Application.ScreenUpdating = False
+    '   LockWindow
+    Dim tid As Single
+    tid = Timer
 #If Mac Then
-          Dim D As Document
-30        Set D = ActiveDocument
+    Dim D As Document
+    Set D = ActiveDocument
 #Else
-40        system.Cursor = wdCursorWait
+    system.Cursor = wdCursorWait
 #End If
-          Dim scrollpos As Double
-          Dim sstart As Long, sslut As Long
-50        sstart = Selection.start
-60        sslut = Selection.End
-          '    TimeText = ""
-          '    Dim st As Double
-          '    st = Timer
-70        scrollpos = ActiveWindow.VerticalPercentScrolled
-          '    Set UFWait = New UserFormWaitForMaxima
-          
-80        If SettUseVBACAS And (MaximaExact = 2 And Not MaximaUnits And Not MaximaComplex) Then
-90            On Error Resume Next
-100           Err.Clear
-110           Application.Run macroname:="CASCALC"
-120           If Err.Number = 513 Then
-130               MsgBox2 Err.Description, vbOKOnly, Sprog.Error
-140               GoTo slut
-150           ElseIf Err.Number = 0 Then ' hvis ingen fejl, så er beregningen done og sat ind i Word
-160               GoTo slut
-170           End If
-180           Err.Clear
-190           On Error GoTo Fejl
-200       End If
-          
-          
-210       If Not PrepareMaxima Then
-220           If omax.DefFejl Then
-230               Exit Sub
-240           Else
-250               GoTo slut
-260           End If
-270       End If
-280       omax.prevspr = ""
+    Dim scrollpos As Double
+    Dim sstart As Long, sslut As Long
+    sstart = Selection.start
+    sslut = Selection.End
+    '    TimeText = ""
+    '    Dim st As Double
+    '    st = Timer
+    scrollpos = ActiveWindow.VerticalPercentScrolled
+    '    Set UFWait = New UserFormWaitForMaxima
+    
+    If SettUseVBACAS And (MaximaExact = 2 And Not MaximaUnits And Not MaximaComplex) Then
+        On Error Resume Next
+        Err.Clear
+        Application.Run macroname:="CASCALC"
+        If Err.Number = 513 Then
+            MsgBox2 Err.Description, vbOKOnly, Sprog.Error
+            GoTo slut
+        ElseIf Err.Number = 0 Then ' hvis ingen fejl, så er beregningen done og sat ind i Word
+            GoTo slut
+        End If
+        Err.Clear
+        On Error GoTo Fejl
+    End If
+    
+    
+    If Not PrepareMaxima Then
+        If omax.DefFejl Then
+            Exit Sub
+        Else
+            GoTo slut
+        End If
+    End If
+    omax.prevspr = ""
 
-290       If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
-300       If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
-310           MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
-320           GoTo slut
-330       End If
-340       If Selection.OMaths.Count > 1 Then
-350           MsgBox Sprog.A(149), vbOKOnly, Sprog.Error
-360           GoTo slut
-370       End If
+    If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
+    If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
+        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        GoTo slut
+    End If
+    If Selection.OMaths.Count > 1 Then
+        MsgBox Sprog.A(149), vbOKOnly, Sprog.Error
+        GoTo slut
+    End If
 
-380       omax.ReadSelection
-          
-390       If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
-400           MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
-410           GoTo slut
-420       End If
-430       If omax.Kommando = "" Then GoTo slut
-440       If Not ValidateInput(omax.Kommando) Then
-450           If omax.DefFejl Then
-460               Exit Sub
-470           Else
-480               GoTo slut
-490           End If
-500       End If
-          '    Set UFWait.omax = omax
-          '    UFWait.ActionToPerform = "beregn"
-          '    UFWait.Show
-          '    If omax.StopNow Then GoTo slut
-          
-          Dim s As String, t As String, fo As String
-          
-510       If CASengine > 0 Then
-520           s = Trim(omax.Kommando)
-              '        If Left(s, 1) = "=" Then s = Left(s, Len(s) - 1)
-530           s = GetCmdAfterEqualSign(s)
-540           If MaximaDecOutType = 3 Then
-550               s = "ScientificText(" & s & " , " & MaximaCifre & ")"
-560           ElseIf MaximaExact = 2 Then
-570               s = "numeric(" & s & " , " & MaximaCifre & ")"
-580           End If
-590       End If
-          
-600       If CASengine = 0 Then
-610           omax.beregn
-620       ElseIf CASengine = 1 Then
-630           If MaximaForklaring Then
-640               omax.GoToEndOfSelectedMaths
-650               If MaximaForklaring Then
-660                   Selection.TypeParagraph
-670                   InsertForklaring Sprog.A(682), False
-680                   Selection.TypeParagraph
-690               End If
-700           End If
-710           OpenGeoGebraWeb s, "CAS", True, True
-720           GoTo slut
-730       ElseIf CASengine = 2 Then
-740           fo = RunGeoGebraDirect(s)
-750           If MaximaExact = 0 And MaximaDecOutType < 3 Then
-760               If fo = "?" Or fo = "null" Or fo = "" Then
-770                   s = "numeric(" & s & " , " & MaximaCifre & ")"
-780               Else
-                      ' det første resultat kan ikke bare fødes ind i GeoGebra igen. Det giver problemer i særlige tilfælde. Eksempel: '\cbrt(79/138)^(2)' Her burde være parentes. Den rigtige fortolkning er cbrt((79/138)^2), som kommer frem hvis den tastes og læses i Word. Hvis den køres direkte i WordMat oversætteren indsættes ikke korrekt parentes. Normalt ikke et problem, da alt normalt læses fra Word
-                      '                fo = omax.ReadFromWord(fo) ' forsøg på at omgå problem med at føde resulkat direkte ind i geogebra igen
-                      '                s = "numeric(" & fo & " , " & MaximaCifre & ")"
-790                   s = "numeric(" & s & " , " & MaximaCifre & ")" ' Der er eksempler, hvor det er bedre at beregne numerisk videre på det eksakte resultat istedet for direkte på det originale, men pga ovenstående problematik
-800               End If
-810               MaximaExact = 2
-820               t = RunGeoGebraDirect(s)
-830               MaximaExact = 0
-840               If (fo = "?" Or fo = "null" Or fo = "") And (t = "?" Or t = "null" Or t = "") Then
-850                   omax.MaximaOutput = fo
-860               ElseIf (fo = "?" Or fo = "null" Or fo = "") Then
-870                   omax.MaximaOutput = t
-880               ElseIf (t = "?" Or t = "null" Or t = "") Or fo = t Or t = "" Then
-890                   omax.MaximaOutput = fo
-900               Else
-910                   omax.MaximaOutput = fo & VBA.ChrW(&H2248) & t
-920               End If
-930           End If
-940           omax.MaximaOutput = "=" & omax.MaximaOutput
-950       End If
-          
-960       If omax.StopNow Then GoTo slut
-970       If CheckForError Then Exit Sub ' der skal ikke scrolles ved fejl, deffejl skal markeres
-          '    TimeText = TimeText & vbCrLf & "beregn: " & Timer - st
+    omax.ReadSelection
+    
+    If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
+        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        GoTo slut
+    End If
+    
+    If right(omax.Kommando, 1) = "=" Then
+        omax.Kommando = Trim(Left(omax.Kommando, Len(omax.Kommando) - 1))
+        RemoveEqual = True
+    End If
+    
+    If omax.Kommando = "" Then GoTo slut
+    
+    If Not ValidateInput(omax.Kommando) Then
+        If omax.DefFejl Then
+            Exit Sub
+        Else
+            GoTo slut
+        End If
+    End If
+    '    Set UFWait.omax = omax
+    '    UFWait.ActionToPerform = "beregn"
+    '    UFWait.Show
+    '    If omax.StopNow Then GoTo slut
+    
+    Dim s As String, t As String, fo As String
+    
+    If CASengine > 0 Then
+        s = Trim(omax.Kommando)
+        '        If Left(s, 1) = "=" Then s = Left(s, Len(s) - 1)
+        s = GetCmdAfterEqualSign(s)
+        If MaximaDecOutType = 3 Then
+            s = "ScientificText(" & s & " , " & MaximaCifre & ")"
+        ElseIf MaximaExact = 2 Then
+            s = "numeric(" & s & " , " & MaximaCifre & ")"
+        End If
+    End If
+    
+    If CASengine = 0 Then
+        omax.beregn
+        If RemoveEqual Then
+            If Left(omax.MaximaOutput, 1) = "=" Then
+                omax.MaximaOutput = right(omax.MaximaOutput, Len(omax.MaximaOutput) - 1)
+            End If
+        End If
+    ElseIf CASengine = 1 Then
+        If MaximaForklaring Then
+            omax.GoToEndOfSelectedMaths
+            If MaximaForklaring Then
+                Selection.TypeParagraph
+                InsertForklaring Sprog.A(682), False
+                Selection.TypeParagraph
+            End If
+        End If
+        OpenGeoGebraWeb s, "CAS", True, True
+        GoTo slut
+    ElseIf CASengine = 2 Then
+        fo = RunGeoGebraDirect(s)
+        If MaximaExact = 0 And MaximaDecOutType < 3 Then
+            If fo = "?" Or fo = "null" Or fo = "" Then
+                s = "numeric(" & s & " , " & MaximaCifre & ")"
+            Else
+                ' det første resultat kan ikke bare fødes ind i GeoGebra igen. Det giver problemer i særlige tilfælde. Eksempel: '\cbrt(79/138)^(2)' Her burde være parentes. Den rigtige fortolkning er cbrt((79/138)^2), som kommer frem hvis den tastes og læses i Word. Hvis den køres direkte i WordMat oversætteren indsættes ikke korrekt parentes. Normalt ikke et problem, da alt normalt læses fra Word
+                '                fo = omax.ReadFromWord(fo) ' forsøg på at omgå problem med at føde resulkat direkte ind i geogebra igen
+                '                s = "numeric(" & fo & " , " & MaximaCifre & ")"
+                s = "numeric(" & s & " , " & MaximaCifre & ")" ' Der er eksempler, hvor det er bedre at beregne numerisk videre på det eksakte resultat istedet for direkte på det originale, men pga ovenstående problematik
+            End If
+            MaximaExact = 2
+            t = RunGeoGebraDirect(s)
+            MaximaExact = 0
+            If (fo = "?" Or fo = "null" Or fo = "") And (t = "?" Or t = "null" Or t = "") Then
+                omax.MaximaOutput = fo
+            ElseIf (fo = "?" Or fo = "null" Or fo = "") Then
+                omax.MaximaOutput = t
+            ElseIf (t = "?" Or t = "null" Or t = "") Or fo = t Or t = "" Then
+                omax.MaximaOutput = fo
+            Else
+                omax.MaximaOutput = fo & VBA.ChrW(&H2248) & t
+            End If
+        End If
+        If Not RemoveEqual Then omax.MaximaOutput = "=" & omax.MaximaOutput
+    End If
+    
+    If omax.StopNow Then GoTo slut
+    If CheckForError Then Exit Sub ' der skal ikke scrolles ved fejl, deffejl skal markeres
+    '    TimeText = TimeText & vbCrLf & "beregn: " & Timer - st
 
-          Dim Oundo As UndoRecord
-980       Set Oundo = Application.UndoRecord
-990       Oundo.StartCustomRecord
-          
-1000      If Len(omax.MaximaOutput) > 0 And Trim(omax.MaximaOutput) <> "=res1" Then
-1010          InsertOutput omax.MaximaOutput, False
-1020      ElseIf omax.KommentarOutput <> vbNullString Then
-1030          fejlm = Sprog.A(128) & vbCrLf
-1040          fejlm = fejlm & TranslateComment(omax.KommentarOutput)
-              '        If InStr(omax.KommentarOutput, "infix") > 0 Then
-              '            fejlm = fejlm & "Husk at alle gangetegn skal laves. 2*x ikke 2x" & vbCrLf
-              '        End If
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+    
+    
+    If Len(omax.MaximaOutput) > 0 And Trim(omax.MaximaOutput) <> "=res1" Then
+        InsertOutput omax.MaximaOutput, False
+    ElseIf omax.KommentarOutput <> vbNullString Then
+        fejlm = Sprog.A(128) & vbCrLf
+        fejlm = fejlm & TranslateComment(omax.KommentarOutput)
+        '        If InStr(omax.KommentarOutput, "infix") > 0 Then
+        '            fejlm = fejlm & "Husk at alle gangetegn skal laves. 2*x ikke 2x" & vbCrLf
+        '        End If
 #If Mac Then
-1050          fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf
-1060          MsgBox2 fejlm, vbOKOnly, Sprog.Error
+        fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf
+        MsgBox2 fejlm, vbOKOnly, Sprog.Error
 #Else
-1070          fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput
-1080          MsgBox2 fejlm, vbOKOnly, Sprog.Error
-1090          RestartMaxima
+        fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput
+        MsgBox2 fejlm, vbOKOnly, Sprog.Error
+        RestartMaxima
 #End If
-1100      End If
-1110      Oundo.EndCustomRecord
+    End If
+    Oundo.EndCustomRecord
 
-1120      GoTo slut
+    GoTo slut
 Fejl:
-1130      MsgBox Sprog.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, Sprog.Error
-1140      RestartMaxima
+    MsgBox Sprog.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, Sprog.Error
+    RestartMaxima
 slut:
 #If Mac Then
-1150      D.Activate
+    D.Activate
 #End If
-1160      On Error Resume Next
-1170      If ActiveWindow.VerticalPercentScrolled <> scrollpos Then ActiveWindow.VerticalPercentScrolled = scrollpos
-1180      Application.ScreenUpdating = True
-          '    UnLockWindow
-          '    TimeText = TimeText & vbCrLf & "beregn ialt: " & Timer - st
-          '    MsgBox TimeText
-      '    MsgBox Timer - tid
+    On Error Resume Next
+    If ActiveWindow.VerticalPercentScrolled <> scrollpos Then ActiveWindow.VerticalPercentScrolled = scrollpos
+    Application.ScreenUpdating = True
+    '    UnLockWindow
+    '    TimeText = TimeText & vbCrLf & "beregn ialt: " & Timer - st
+    '    MsgBox TimeText
+'    MsgBox Timer - tid
 End Sub
 
 Function GetCmdAfterEqualSign(Kommando As String) As String
@@ -2263,10 +2276,12 @@ Sub Omskriv()
         If UFomskriv.CheckBox_expand.Value Then s = "expand(" & s & ")"
         If UFomskriv.CheckBox_auto.Value Then s = "simplify(" & s & ")"
         If UFomskriv.CheckBox_completesquare.Value Then s = "completesquare(" & s & ")"
-        If MaximaDecOutType = 3 Then
-            s = "ScientificText(" & s & " , " & MaximaCifre & ")"
-        ElseIf MaximaExact = 2 Then
-            s = "numeric(" & s & " , " & MaximaCifre & ")"
+        If Not UFomskriv.CheckBox_factor.Value Then ' numeric expander faktorisede udtryk.
+            If MaximaDecOutType = 3 Then
+                s = "ScientificText(" & s & " , " & MaximaCifre & ")"
+            ElseIf MaximaExact = 2 Then
+                s = "numeric(" & s & " , " & MaximaCifre & ")"
+            End If
         End If
     End If
     

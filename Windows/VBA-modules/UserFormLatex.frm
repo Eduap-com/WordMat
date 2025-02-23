@@ -125,7 +125,7 @@ ElseIf OptionButton_omsluteqnstar.Value = True Then
     LatexStart = vbCrLf & "\begin{equation*}" & vbCrLf
     LatexSlut = vbCrLf & "\end{equation*}" & vbCrLf
 ElseIf OptionButton_omsluturl.Value = True Then
-    LatexStart = vbCrLf & "<img src=""http://latex.codecogs.com/gif.latex?"
+    LatexStart = vbCrLf & "<img src=""https://latex.codecogs.com/gif.latex?"
     LatexSlut = """ title=""LaTex"" />" & vbCrLf
 ElseIf OptionButton_omslutingen.Value = True Then
     LatexStart = ""
@@ -198,8 +198,8 @@ Private Sub CommandButton_ok_Click()
 Me.hide
 End Sub
 Private Sub CommandButton_onlinelatex_Click()
-'http://latex.codecogs.com/emf.latex?%5Cint_0%5E1%20x%5E2%20dx
-'http://www.codecogs.com/latex/eqneditor.php?latex=x^2+1
+'https://latex.codecogs.com/emf.latex?%5Cint_0%5E1%20x%5E2%20dx
+'https://www.codecogs.com/latex/eqneditor.php?latex=x^2+1
 Dim Text As String
 
 Text = LatexCode
@@ -209,7 +209,7 @@ Text = Replace(Text, "&", "%26")
 Text = Replace(Text, "\", "%5C")
 Text = Replace(Text, " ", "%20")
 Text = Replace(Text, "+", "@plus;")
-OpenLink "http://www.codecogs.com/latex/eqneditor.php?latex=" & Text  '"%5Cint_0%5E1%20x%5E2%20dx"
+OpenLink "https://www.codecogs.com/latex/eqneditor.php?latex=" & Text  '"%5Cint_0%5E1%20x%5E2%20dx"
 
 End Sub
 

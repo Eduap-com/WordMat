@@ -103,7 +103,7 @@ Public Function PGetWebView() As Object
     RK = GetReg("InstallLocation")
     If RK = "All" Then
         On Error Resume Next
-        CLRdllDir = "GetProgramFilesDir" & "\WordMat\"
+        CLRdllDir = GetProgramFilesDir & "\WordMat\"
         DllDir = CLRdllDir & "WebViewWrap\"
         On Error GoTo slut
         If Dir(DllDir & DllName) = vbNullString Then
@@ -115,7 +115,7 @@ Public Function PGetWebView() As Object
         DllDir = CLRdllDir & "WebViewWrap\"
         If Dir(DllDir & DllName) = vbNullString Then
             On Error Resume Next
-            CLRdllDir = "GetProgramFilesDir" & "\WordMat\"
+            CLRdllDir = GetProgramFilesDir & "\WordMat\"
             DllDir = CLRdllDir & "WebViewWrap\"
             On Error GoTo slut
         End If

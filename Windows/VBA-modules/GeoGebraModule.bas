@@ -341,7 +341,7 @@ Dim Arr() As String, i As Integer
     GeoGebraDefs = ""
     
     ' Tilføj definitioner og assumes der er skrevet i mat-felter
-    Arr = Split(omax.DefString, "$")
+    Arr = Split(omax.DefString, ";")
     For i = 0 To UBound(Arr) - 1
         If Left(Arr(i), 7) = "assume(" Then
             GeoGebraAssumes = GeoGebraAssumes & Mid(Arr(i), 8, Len(Arr(i)) - 8) & ChrW(8743)
@@ -846,7 +846,7 @@ Sub GeoGebra()
     appnr = Shell(geogebrasti, vbNormalFocus)   'vbNormalFocus vbMinimizedFocus ' til offline installer
 #End If
 ' til webstart:
-'    appnr = Shell("javaws -system -open """ & geogebrafilersti & "geogebra.ggb""" & " http://www.geogebra.org/webstart/geogebra.jnlp", vbNormalFocus)    'vbNormalFocus vbMinimizedFocus
+'    appnr = Shell("javaws -system -open """ & geogebrafilersti & "geogebra.ggb""" & " https://www.geogebra.org/webstart/geogebra.jnlp", vbNormalFocus)    'vbNormalFocus vbMinimizedFocus
     
     UfWait.Label_progress.Caption = "*********"
     On Error Resume Next
@@ -1317,7 +1317,7 @@ Sub CreateZipFile(zipfilnavn As Variant, FilNavn As Variant, Optional filnavn2 A
     RunScript "ZipFile", zipfilnavn & ";" & FilNavn
 #Else
 '
-' s. http://www.rondebruin.nl/windowsxpzip.htm
+' s. https://www.rondebruin.nl/windowsxpzip.htm
 
 ' Early binding, set reference to:
 '   Microsoft Shell Controls and automation (C:\WINNT\systems32\SHELL32.dll)
