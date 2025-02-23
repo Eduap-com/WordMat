@@ -41,6 +41,7 @@ Sub RunTestSequence()
     UFwait2.Label_tip.Font.Size = 10
     UFwait2.Show vbModeless
     
+    ' Testresultaterne er baseret på bestemte indstillinger. Undervejs bliver de måske ændret, men i starten skal de nulstilles
     CASengineTempOnly = 0 ' 0=maxima
     MaximaExact = 1 ' 0 - auto ' 1 - exact ' 2 - num
     MaximaCifre = 7
@@ -48,6 +49,7 @@ Sub RunTestSequence()
     Radians = False
     MaximaComplex = False
     AllTrig = False
+    MaximaLogOutput = 0
     
     PrepareMaxima
     
