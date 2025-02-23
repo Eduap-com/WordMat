@@ -14,7 +14,7 @@ On Error GoTo Fejl
     Text = ConvertToWolfram(Text)
     Text = pretext & " " & Text
     
-    OpenLink ("http://www.wolframalpha.com/input/?i=" & Text)
+    OpenLink ("https://www.wolframalpha.com/input/?i=" & Text)
 GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error

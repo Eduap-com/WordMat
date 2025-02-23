@@ -119,7 +119,7 @@ Private Sub Label_ok_Click()
 End Sub
 
 Private Sub Label1_Click()
-    OpenLink "http://physics.nist.gov/cuu/Constants/index.html"
+    OpenLink "https://physics.nist.gov/cuu/Constants/index.html"
 End Sub
 
 Private Sub UserForm_Activate()
