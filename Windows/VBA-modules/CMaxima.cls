@@ -308,22 +308,24 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         GoTo slut
     Else ' normal beregning
         If MaxProc.Finished = 0 Then
-            UFwait2.Show vbModeless
-            DoEvents
-            Do While MaxProc.Finished = 0 And i < 50
-                If Round(i / 8) = i / 8 Then
-                    UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
-                End If
-                Wait (0.1)
-                i = i + 1
-            Loop
-            UFwait2.Label_tip.Font.Size = 10
-            UFwait2.Label_tip.Font.Italic = False
-            UFwait2.Label_tip.Caption = GetRandomTip
+            RestartMaxima
+'            UFwait2.Show vbModeless
+'            DoEvents
+'            Do While MaxProc.Finished = 0 And i < 50
+'                If Round(i / 8) = i / 8 Then
+'                    UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
+'                End If
+'                Wait (0.1)
+'                i = i + 1
+'            Loop
+'            UFwait2.Label_tip.Font.Size = 10
+'            UFwait2.Label_tip.Font.Italic = False
+'            UFwait2.Label_tip.Caption = GetRandomTip
         End If
         If StopNow Then
             Unload UFwait2
             MaxProc.CloseProcess
+'            MaxProc.Finished = 1
             MaxProc.StartMaximaProcess
             Exit Sub
         End If
@@ -510,15 +512,17 @@ Sub WaitForMaximaForm(StopTime As Integer)
                 ShowDebug
                 Dim tmis As String
                 tmis = MaximaInputStreng
-                MaxProc.CloseProcess
-                MaxProc.StartMaximaProcess
+                RestartMaxima
+'                MaxProc.CloseProcess
+'                MaxProc.StartMaximaProcess
                 Exit Sub
             End If
         Loop
         If i >= StopTime Then
             StopNow = True
             Unload UFwait2
-            MaxProc.CloseProcess
+            RestartMaxima
+'            MaxProc.CloseProcess
             Exit Sub
         Else
             Unload UFwait2

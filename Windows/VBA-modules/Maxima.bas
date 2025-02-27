@@ -246,24 +246,23 @@ Sub RestartMaxima()
 #Else
     If Not CASengine = 0 Then Exit Sub
     
+    If Not MaxProc Is Nothing Then MaxProc.CloseProcess
     
-    If Not MaxProc Is Nothing Then
-        MaxProc.CloseProcess
-        MaxProc.StartMaximaProcess
-    Else
-        '        Set MaxProc = New MathMenu.MaximaProcessClass
-        On Error Resume Next
-'        Shell "cmd.exe /c taskkill /IM sbcl.exe /F" ' Denne slår alt maxima ihjel
-        Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
-        If Err.Number <> 0 Then
-            MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-            GoTo slut
-        End If
-        On Error GoTo Fejl
-        If omax Is Nothing Then
-            Set omax = New CMaxima
-        End If
+    
+    On Error Resume Next
+    Shell "cmd.exe /c taskkill /IM sbcl.exe /F" ' Denne slår alt maxima ihjel
+    Wait 1 ' der kan først oprettes en ny, når der er lukket
+    Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
+
+    If Err.Number <> 0 Then
+        MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
+        GoTo slut
     End If
+    On Error GoTo Fejl
+    If omax Is Nothing Then
+        Set omax = New CMaxima
+    End If
+    MaxProc.StartMaximaProcess
     If Not MaxProcUnit Is Nothing Then
         MaxProcUnit.CloseProcess
         MaxProcUnit.StartMaximaProcess
