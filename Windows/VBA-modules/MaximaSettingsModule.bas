@@ -1,6 +1,29 @@
 Attribute VB_Name = "MaximaSettingsModule"
 Option Explicit
 
+Enum KeybShortcut
+    NoShortcut = -1
+    InsertNewEquation = 1
+    NewNumEquation
+    beregnudtryk
+    SolveEquation
+    Define
+    sletdef
+    ShowGraph
+    Formelsamling
+    OmskrivUdtryk
+    SolveDiffEq
+    ExecuteMaximaCommand
+    PrevResult
+    SettingsForm
+    ToggleNumExact
+    ToggleUnitsOnOff
+    ConvertEquationToLatex
+    OpenLatexPDF
+    InsertRefToEqution
+End Enum
+
+
 Public UFMSettings As UserFormMaximaSettings
 Public SettingsRead As Boolean
 Private mforklaring As Boolean
@@ -51,14 +74,30 @@ Private mLastUpdateCheck As String
 Private mRegAppVersion As String
 Private mDllConnType As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
 Private mInstallLocation As String ' All AppData
-Private mDoubleTapM As Integer ' 0= intet, 1=formelsamling, 2=num ligning
 Private mDecOutType As Integer ' 1 =dec, 2=bet cif, 3=vidnot
-Private mUseVBACAS As Integer  ' 0 = not loaded  1=no  2=yes
+Private mUseVBACAS As Integer  ' 0 = not loaded  1=no  2=yes1
+Private mUseShellOnMac As Boolean ' for when applescripttask does not work
+Private mSettShortcutAltM As Integer
+Private mSettShortcutAltM2 As Integer
+Private mSettShortcutAltB As Integer
+Private mSettShortcutAltL As Integer
+Private mSettShortcutAltD As Integer
+Private mSettShortcutAltS As Integer
+Private mSettShortcutAltP As Integer
+Private mSettShortcutAltF As Integer
+Private mSettShortcutAltO As Integer
+Private mSettShortcutAltR As Integer
+Private mSettShortcutAltJ As Integer
+Private mSettShortcutAltN As Integer
+Private mSettShortcutAltE As Integer
+Private mSettShortcutAltT As Integer
+Private mSettShortcutAltQ As Integer
+Private mSettShortcutAltG As Integer
+Private mSettShortcutAltGr As Integer
 
 Public Sub ReadAllSettingsFromRegistry()
 Dim setn As Integer
 On Error Resume Next
-    
     mforklaring = CBool(GetRegSetting("Forklaring"))
     mkommando = CBool(GetRegSetting("MaximaCommand"))
     mExact = GetRegSetting("Exact")
@@ -104,10 +143,27 @@ On Error Resume Next
     mLastUpdateCheck = GetRegSettingString("LastUpdateCheck")
     mDllConnType = CInt(GetRegSetting("DllConnType"))
     mInstallLocation = GetRegSetting("InstallLocation")
-    mDoubleTapM = GetRegSetting("DoubleTapM")
     mUseVBACAS = GetRegSetting("UseVBACAS")
     mDecOutType = CInt(GetRegSetting("DecOutType"))
-    
+#If Mac Then
+    mUseShellOnMac = CBool(GetRegSetting("UseShellOnMac"))
+#End If
+
+    mSettShortcutAltM = CInt(GetRegSetting("SettShortcutAltM"))
+    mSettShortcutAltM2 = CInt(GetRegSetting("SettShortcutAltM2"))
+    mSettShortcutAltB = CInt(GetRegSetting("SettShortcutAltB"))
+    mSettShortcutAltL = CInt(GetRegSetting("SettShortcutAltL"))
+    mSettShortcutAltP = CInt(GetRegSetting("SettShortcutAltP"))
+    mSettShortcutAltD = CInt(GetRegSetting("SettShortcutAltD"))
+    mSettShortcutAltS = CInt(GetRegSetting("SettShortcutAltS"))
+    mSettShortcutAltF = CInt(GetRegSetting("SettShortcutAltF"))
+    mSettShortcutAltO = CInt(GetRegSetting("SettShortcutAltO"))
+    mSettShortcutAltR = CInt(GetRegSetting("SettShortcutAltR"))
+    mSettShortcutAltJ = CInt(GetRegSetting("SettShortcutAltJ"))
+    mSettShortcutAltN = CInt(GetRegSetting("SettShortcutAltN"))
+    mSettShortcutAltE = CInt(GetRegSetting("SettShortcutAltE"))
+    mSettShortcutAltT = CInt(GetRegSetting("SettShortcutAltT"))
+    mSettShortcutAltQ = CInt(GetRegSetting("SettShortcutAltQ"))
     
     mseparator = CBool(GetRegSetting("Separator"))
     If mseparator Then
@@ -185,9 +241,23 @@ On Error Resume Next
     LatexTitlePage = 0
     LatexTOC = 0
     CASengine = 0
-    DoubleTapM = 1
     MaximaDecOutType = 2
     SettUseVBACAS = 2
+    
+    SettShortcutAltM = KeybShortcut.InsertNewEquation
+    SettShortcutAltM2 = -1
+    SettShortcutAltB = KeybShortcut.beregnudtryk
+    SettShortcutAltL = KeybShortcut.SolveEquation
+    SettShortcutAltD = KeybShortcut.Define
+    SettShortcutAltS = KeybShortcut.sletdef
+    SettShortcutAltF = KeybShortcut.Formelsamling
+    SettShortcutAltO = KeybShortcut.OmskrivUdtryk
+    SettShortcutAltR = KeybShortcut.PrevResult
+    SettShortcutAltJ = KeybShortcut.SettingsForm
+    SettShortcutAltN = -1
+    SettShortcutAltE = -1
+    SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
+    SettShortcutAltQ = -1
     
 '    End If
     End If
@@ -360,13 +430,6 @@ End Property
 Public Property Let EqNumType(ByVal Text As Boolean)
     SetRegSetting "EqNumType", Abs(CInt(Text))
     meqnumtype = Text
-End Property
-Public Property Get DoubleTapM() As Integer
-    DoubleTapM = mDoubleTapM
-End Property
-Public Property Let DoubleTapM(ByVal iVal As Integer)
-    SetRegSetting "DoubleTapM", iVal
-    mDoubleTapM = iVal
 End Property
 Public Property Get EqAskRef() As Boolean
     EqAskRef = maskref
@@ -638,9 +701,9 @@ Public Property Get InstallLocation() As String
         mInstallLocation = InstallLocation
     End If
 End Property
-Public Property Let InstallLocation(ByVal L As String)
-    SetRegSettingString "InstallLocation", L
-    mInstallLocation = L
+Public Property Let InstallLocation(ByVal l As String)
+    SetRegSettingString "InstallLocation", l
+    mInstallLocation = l
 End Property
 Public Property Get SettUseVBACAS() As Boolean
     If QActivePartnership Then
@@ -661,6 +724,185 @@ Public Property Let SettUseVBACAS(xval As Boolean)
     mUseVBACAS = Abs(CInt(xval) + 1)
     SetRegSetting "UseVBACAS", mUseVBACAS
 End Property
+Public Property Get UseShellOnMac() As Boolean
+    UseShellOnMac = mUseShellOnMac
+End Property
+Public Property Let UseShellOnMac(xval As Boolean)
+    SetRegSetting "UseShellOnMac", Abs(CInt(xval))
+    mUseShellOnMac = xval
+End Property
+Public Property Get SettShortcutAltM() As Integer
+    If mSettShortcutAltM = 0 Then
+        mSettShortcutAltM = CInt(GetRegSetting("SettShortcutAltM"))
+    End If
+    SettShortcutAltM = mSettShortcutAltM
+End Property
+Public Property Let SettShortcutAltM(xval As Integer)
+    SetRegSetting "SettShortcutAltM", xval
+    mSettShortcutAltM = xval
+End Property
+Public Property Get SettShortcutAltM2() As Integer
+    If mSettShortcutAltM2 <= 0 Then
+        mSettShortcutAltM2 = CInt(GetRegSetting("SettShortcutAltM2"))
+    End If
+    SettShortcutAltM2 = mSettShortcutAltM2
+End Property
+Public Property Let SettShortcutAltM2(xval As Integer)
+    SetRegSetting "SettShortcutAltM2", xval
+    mSettShortcutAltM2 = xval
+End Property
+Public Property Get SettShortcutAltB() As Integer
+    If mSettShortcutAltB = 0 Then
+        mSettShortcutAltB = CInt(GetRegSetting("SettShortcutAltB"))
+    End If
+    SettShortcutAltB = mSettShortcutAltB
+End Property
+Public Property Let SettShortcutAltB(xval As Integer)
+    SetRegSetting "SettShortcutAltB", xval
+    mSettShortcutAltB = xval
+End Property
+Public Property Get SettShortcutAltL() As Integer
+    If mSettShortcutAltL = 0 Then
+        mSettShortcutAltL = CInt(GetRegSetting("SettShortcutAltL"))
+    End If
+    SettShortcutAltL = mSettShortcutAltL
+End Property
+Public Property Let SettShortcutAltL(xval As Integer)
+    SetRegSetting "SettShortcutAltL", xval
+    mSettShortcutAltL = xval
+End Property
+Public Property Get SettShortcutAltD() As Integer
+    If mSettShortcutAltD = 0 Then
+        mSettShortcutAltD = CInt(GetRegSetting("SettShortcutAltD"))
+    End If
+    SettShortcutAltD = mSettShortcutAltD
+End Property
+Public Property Let SettShortcutAltD(xval As Integer)
+    SetRegSetting "SettShortcutAltD", xval
+    mSettShortcutAltD = xval
+End Property
+Public Property Get SettShortcutAltS() As Integer
+    If mSettShortcutAltS = 0 Then
+        mSettShortcutAltS = CInt(GetRegSetting("SettShortcutAltS"))
+    End If
+    SettShortcutAltS = mSettShortcutAltS
+End Property
+Public Property Let SettShortcutAltS(xval As Integer)
+    SetRegSetting "SettShortcutAltS", xval
+    mSettShortcutAltS = xval
+End Property
+Public Property Get SettShortcutAltP() As Integer
+    If mSettShortcutAltP = 0 Then
+        mSettShortcutAltP = CInt(GetRegSetting("SettShortcutAltP"))
+    End If
+    SettShortcutAltP = mSettShortcutAltP
+End Property
+Public Property Let SettShortcutAltP(xval As Integer)
+    SetRegSetting "SettShortcutAltP", xval
+    mSettShortcutAltP = xval
+End Property
+Public Property Get SettShortcutAltF() As Integer
+    If mSettShortcutAltF = 0 Then
+        mSettShortcutAltF = CInt(GetRegSetting("SettShortcutAltF"))
+    End If
+    SettShortcutAltF = mSettShortcutAltF
+End Property
+Public Property Let SettShortcutAltF(xval As Integer)
+    SetRegSetting "SettShortcutAltF", xval
+    mSettShortcutAltF = xval
+End Property
+Public Property Get SettShortcutAltO() As Integer
+    If mSettShortcutAltO = 0 Then
+        mSettShortcutAltO = CInt(GetRegSetting("SettShortcutAltO"))
+    End If
+    SettShortcutAltO = mSettShortcutAltO
+End Property
+Public Property Let SettShortcutAltO(xval As Integer)
+    SetRegSetting "SettShortcutAltO", xval
+    mSettShortcutAltO = xval
+End Property
+Public Property Get SettShortcutAltR() As Integer
+    If mSettShortcutAltR = 0 Then
+        mSettShortcutAltR = CInt(GetRegSetting("SettShortcutAltR"))
+    End If
+    SettShortcutAltR = mSettShortcutAltR
+End Property
+Public Property Let SettShortcutAltR(xval As Integer)
+    SetRegSetting "SettShortcutAltR", xval
+    mSettShortcutAltR = xval
+End Property
+Public Property Get SettShortcutAltJ() As Integer
+    If mSettShortcutAltJ = 0 Then
+        mSettShortcutAltJ = CInt(GetRegSetting("SettShortcutAltJ"))
+    End If
+    SettShortcutAltJ = mSettShortcutAltJ
+End Property
+Public Property Let SettShortcutAltJ(xval As Integer)
+    SetRegSetting "SettShortcutAltJ", xval
+    mSettShortcutAltJ = xval
+End Property
+Public Property Get SettShortcutAltN() As Integer
+    If mSettShortcutAltN = 0 Then
+        mSettShortcutAltN = CInt(GetRegSetting("SettShortcutAltN"))
+    End If
+    SettShortcutAltN = mSettShortcutAltN
+End Property
+Public Property Let SettShortcutAltN(xval As Integer)
+    SetRegSetting "SettShortcutAltN", xval
+    mSettShortcutAltN = xval
+End Property
+Public Property Get SettShortcutAltE() As Integer
+    If mSettShortcutAltE = 0 Then
+        mSettShortcutAltE = CInt(GetRegSetting("SettShortcutAltE"))
+    End If
+    SettShortcutAltE = mSettShortcutAltE
+End Property
+Public Property Let SettShortcutAltE(xval As Integer)
+    SetRegSetting "SettShortcutAltE", xval
+    mSettShortcutAltE = xval
+End Property
+Public Property Get SettShortcutAltT() As Integer
+    If mSettShortcutAltT = 0 Then
+        mSettShortcutAltT = CInt(GetRegSetting("SettShortcutAltT"))
+    End If
+    SettShortcutAltT = mSettShortcutAltT
+End Property
+Public Property Let SettShortcutAltT(xval As Integer)
+    SetRegSetting "SettShortcutAltT", xval
+    mSettShortcutAltT = xval
+End Property
+Public Property Get SettShortcutAltQ() As Integer
+    If mSettShortcutAltQ = 0 Then
+        mSettShortcutAltQ = CInt(GetRegSetting("SettShortcutAltQ"))
+    End If
+    SettShortcutAltQ = mSettShortcutAltQ
+End Property
+Public Property Let SettShortcutAltQ(xval As Integer)
+    SetRegSetting "SettShortcutAltQ", xval
+    mSettShortcutAltQ = xval
+End Property
+Public Property Get SettShortcutAltG() As Integer
+    If mSettShortcutAltG = 0 Then
+        mSettShortcutAltG = CInt(GetRegSetting("SettShortcutAltG"))
+    End If
+    SettShortcutAltG = mSettShortcutAltG
+End Property
+Public Property Let SettShortcutAltG(xval As Integer)
+    SetRegSetting "SettShortcutAltG", xval
+    mSettShortcutAltG = xval
+End Property
+Public Property Get SettShortcutAltGr() As Integer
+    If mSettShortcutAltGr = 0 Then
+        mSettShortcutAltGr = CInt(GetRegSetting("SettShortcutAltGr"))
+    End If
+    SettShortcutAltGr = mSettShortcutAltGr
+End Property
+Public Property Let SettShortcutAltGr(xval As Integer)
+    SetRegSetting "SettShortcutAltGr", xval
+    mSettShortcutAltGr = xval
+End Property
+
+
 '------------------- registry functions --------------------
 Public Function GetReg(key As String) As String
     GetReg = GetRegSettingString(key)

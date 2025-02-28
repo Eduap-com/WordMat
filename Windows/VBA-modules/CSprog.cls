@@ -537,9 +537,9 @@ SA(67, 3) = ""
 SA(67, 2) = "Puede crear su propio atajo en Word o cambiar los existentes. Sitúe el cursor en una ecuación. Abra el menú Diseño. Ubique el grupo llamado Funciones. Pulse la flecha pequeña en la esquina derecha. Escoja Autoentradas Matemáticas"
 SA(67, 5) = ""
 
-SA(68, 0) = "Nyt Matematikfelt" & vbTab & "Alt+M" & VbCrLfMac & "Forrige resultat(er)" & vbTab & "Alt+R" & vbTab & VbCrLfMac & "Formelsamling" & vbTab & "Alt+F" & vbTab & VbCrLfMac & "Beregn" & vbTab & vbTab & vbTab & "Alt+b   eller   AltGr+Enter" & vbTab & VbCrLfMac & "Løs ligning" & vbTab & vbTab & "Alt+L" & VbCrLfMac & "Indstillinger" & vbTab & vbTab & "Alt+j" & VbCrLfMac & "Enheder til/fra" & vbTab & vbTab & "Alt+E" & VbCrLfMac & "Konverter LaTex" & vbTab & "Alt+T" & VbCrLfMac & "Definer:" & vbTab & vbTab & "Alt+D" & VbCrLfMac & "Slet definitioner:" & vbTab & "Alt+S" & VbCrLfMac & "Plot Graf" & vbTab & vbTab & "Alt+P" & VbCrLfMac & "Omskriv" & vbTab & vbTab & "Alt+O" & VbCrLfMac & "Num/eksakt/auto" & vbTab & "Alt+N" & VbCrLfMac & "Latex PDF" & vbTab & vbTab & "Alt+Q"
-SA(68, 1) = "New Math equation" & vbTab & "Alt+M" & VbCrLfMac & "Previous result(s)" & vbTab & "Alt+R" & VbCrLfMac & "Formulae" & vbTab & "Alt+F" & VbCrLfMac & "Calculate" & vbTab & vbTab & "Alt+B   or   AltGr+Enter" & vbTab & VbCrLfMac & "Solve equation" & vbTab & vbTab & "Alt+L" & vbTab & VbCrLfMac & "Settings (Options)" & vbTab & "Alt+J" & vbTab & VbCrLfMac & "Units on/off" & vbTab & vbTab & "Alt+E" & VbCrLfMac & "Convert LaTex" & vbTab & vbTab & "Alt+T" & VbCrLfMac & "Define:" & vbTab & vbTab & vbTab & "Alt+D" & VbCrLfMac & "Delete definitions:" & vbTab & "Alt+S       (clear)" & VbCrLfMac & "Plot Graph" & vbTab & vbTab & "Alt+P" & VbCrLfMac & "Simplify" & vbTab & vbTab & "Alt+O" & VbCrLfMac & "Num/exact/auto" & vbTab & "Alt+N" & VbCrLfMac & "Latex PDF" & vbTab & vbTab & "Alt+Q"
-SA(68, 2) = "Nueva ecuación" & vbTab & "Alt+M" & VbCrLfMac & "Resultado(s) anterior(es)" & vbTab & "Alt+R" & VbCrLfMac & "Signo de multiplicación " & vbTab & "Alt+G" & VbCrLfMac & "Calcular" & vbTab & vbTab & "Alt+B   or   AltGr+Enter" & vbTab & VbCrLfMac & "Resolvee ecuación" & vbTab & "Alt+E" & vbTab & VbCrLfMac & "Ajustes" & vbTab & vbTab & "Alt+j" & vbTab & VbCrLfMac & "Unidades on/off" & vbTab & "Alt+U" & VbCrLfMac & "Convertidor a LaTex" & vbTab & "Alt+T" & VbCrLfMac & "Definir:" & vbTab & vbTab & "Alt+d" & VbCrLfMac & "Eliminar definiciones:" & vbTab & "Alt+F" & VbCrLfMac & "Plot Graph" & vbTab & "Alt+P" & VbCrLfMac & "Simplificar" & vbTab & vbTab & "Alt+S" & VbCrLfMac & "Num/exacto/auto" & vbTab & "Alt+N" & VbCrLfMac & "Latex PDF" & vbTab & "Alt+Q"
+SA(68, 0) = ""
+SA(68, 1) = ""
+SA(68, 2) = ""
 
 ' Dont change this
 SA(69, 0) = "Slet definitioner"
@@ -3416,6 +3416,34 @@ SA(699, 2) = ""
 SA(700, 0) = "Advarsel: Der var flere ligninger end variable i ligningssystemet. Var det meningen?"
 SA(700, 1) = "Warning: More equations than variables in the system. Was that intentional?"
 SA(700, 2) = ""
+
+SA(701, 0) = "Nyt matematikfelt"
+SA(701, 1) = "New equation"
+SA(701, 2) = ""
+
+SA(702, 0) = "Forrige resultat(er)"
+SA(702, 1) = "Previous result(s)"
+SA(702, 2) = ""
+
+SA(703, 0) = "Skift num/eksakt"
+SA(703, 1) = "Toggle num/exact"
+SA(703, 2) = ""
+
+SA(704, 0) = "Konverter til LaTex"
+SA(704, 1) = "Convert to Latex"
+SA(704, 2) = ""
+
+SA(705, 0) = "Latex Pdf"
+SA(705, 1) = "Latex PDF"
+SA(705, 2) = ""
+
+SA(706, 0) = ""
+SA(706, 1) = ""
+SA(706, 2) = ""
+
+SA(707, 0) = ""
+SA(707, 1) = ""
+SA(707, 2) = ""
 
 'Problemet kunne ikke løses. Vil du prøve med en anden CAS motor?
 End Sub

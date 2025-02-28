@@ -27,10 +27,22 @@ ReadAllSettingsFromRegistry
 AntalB = Antalberegninger
 
 If AppVersion <> RegAppVersion Then ' hvis det er første gang WordMat startes efter en opdatering, Så her kan sættes indstillinger der skal ændres
-    If val(AppVersion) >= 1.3 Then
-'        BackupType = 2 ' spørg ikke
-'        SettCheckForUpdate = True
-        DoubleTapM = 1
+    If val(AppVersion) = 1.34 Then
+        SettShortcutAltM = KeybShortcut.InsertNewEquation
+        SettShortcutAltM2 = -1
+        SettShortcutAltB = KeybShortcut.beregnudtryk
+        SettShortcutAltL = KeybShortcut.SolveEquation
+        SettShortcutAltP = KeybShortcut.ShowGraph
+        SettShortcutAltD = KeybShortcut.Define
+        SettShortcutAltS = KeybShortcut.sletdef
+        SettShortcutAltF = KeybShortcut.Formelsamling
+        SettShortcutAltO = KeybShortcut.OmskrivUdtryk
+        SettShortcutAltR = KeybShortcut.PrevResult
+        SettShortcutAltJ = KeybShortcut.SettingsForm
+        SettShortcutAltN = -1
+        SettShortcutAltE = -1
+        SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
+        SettShortcutAltQ = -1
     End If
     RegAppVersion = AppVersion
 End If

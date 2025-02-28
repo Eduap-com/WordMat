@@ -199,7 +199,13 @@ On Error GoTo Fejl
             ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & MaximaCommand)
 '        End If
     Else
-        ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaxima", CStr(MaxWait) & "£" & MaximaCommand)
+        If UseShellOnMac Then
+            Dim ScriptPath As String
+            ScriptPath = "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima.sh"
+            ExecuteMaximaViaFile = RunShellCommand("sh """ & ScriptPath & """ " & MaxWait & " """ & MaximaCommand & ";""", 0.3)
+        Else
+            ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaxima", CStr(MaxWait) & "£" & MaximaCommand)
+        End If
     End If
 '    ExecuteMaximaViaFile = ReadMaximaOutputFile()
 'MsgBox ExecuteMaximaViaFile
@@ -210,6 +216,81 @@ Fejl:
 slut:
     
 End Function
+
+Sub TestSkrivningViaShell()
+' Det ser ikke ud til at virke andre steder end i ~/Library/containers/com.microsoft.Word/Data
+' man kan dog ikke skrive den sti med tilde. Derfor Environ("HOME") der giver stien helt fra bunden
+
+'    Shell "echo 'hello' > /tmp/test.txt"
+'    Shell "echo 'hello' > /private/tmp/test.txt", vbNormalFocus
+'    Shell "osascript -e 'do shell script ""echo hello > ~/Desktop/test.txt""'", vbNormalFocus
+'   Shell "echo 'hello' > ~/Library/containers/com.microsoft.Word/Data/WordMat/test.txt", vbNormalFocus
+   Shell "echo 'hello' > " & Environ("HOME") & "/WordMat/test.txt", vbNormalFocus
+
+'    Shell "echo 'hello' > ~/Library/Group Containers/UBF8T346G9.Office/test.txt", vbNormalFocus
+    'Environ("HOME") &
+    
+'    Shell "open /Applications/Pages.app", vbNormalFocus ' bare til test af om shell overhovedet virker
+
+End Sub
+
+Sub TestRunShell()
+    Dim ScriptPath As String
+    Dim result As String
+    '/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/
+    
+    ScriptPath = "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima.sh"
+    result = RunShellCommand("sh """ & ScriptPath & """ 5 ""2+7;""", 1.8)
+    MsgBox result
+End Sub
+Function RunShellCommand(Command As String, Optional ExtraWait As Single = 1) As String
+' takes the command and runs it with shell. The output is written to a text file. The contents of the textfile is then returned as a string
+' ExtraWait er i sekuner. Er den tid der skal gå fra outputfilen er dannet, til indholdet læses.
+    Dim tempFile As String
+    Dim fileNum As Integer
+    Dim shellOutput As String
+    Dim fileExists As Boolean
+    Dim Line As String, i As Long
+    '" & Environ("HOME") & "
+'    tempFile = "/tmp/shell_output.txt"
+'    tempFile = "/Users/mikael/Documents/shell_output.txt"
+    tempFile = Environ("HOME") & "/WordMat/shell_output.txt"
+    ' Clear any previous output file
+    Shell "rm -f " & tempFile, vbNormalFocus
+    
+    ' Run the shell command and save the output to a temporary file
+    Shell Command & " > " & tempFile, vbNormalFocus ' this crashes Word
+    
+    ' Wait until the file is created and has content
+    
+    Do
+        fileExists = (Dir(tempFile) <> "")
+        DoEvents  ' Let the system breathe
+        Wait 0.1
+        i = i + 1
+    Loop Until fileExists Or i >= ExtraWait * 10
+    
+    Wait ExtraWait
+    
+    ' Read the contents of the temporary file
+    If (Dir(tempFile)) <> "" Then
+        fileNum = FreeFile
+        Open tempFile For Input As #fileNum
+        shellOutput = ""
+        Do While Not EOF(fileNum)
+            Line Input #fileNum, Line
+            shellOutput = shellOutput & Line & vbCrLf
+        Loop
+        Close #fileNum
+    End If
+    
+    RunShellCommand = shellOutput
+End Function
+
+Sub ToggleUseShellOnMac()
+    UseShellOnMac = Not UseShellOnMac
+    MsgBox "UseShellOnMac: " & UseShellOnMac
+End Sub
 
 #Else
 Function RunScript(ScriptName As String, Param As String) As String

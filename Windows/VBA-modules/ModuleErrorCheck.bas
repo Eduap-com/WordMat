@@ -133,16 +133,16 @@ Function GetErrorText(Text As String, MaximaOutput As String, Optional RemoveChr
 ' used by GetErrorDefinition()
     Dim Pos As Integer, pos2 As Integer, pos4 As Integer
     Dim t As String
-    Dim L As Integer
+    Dim l As Integer
     On Error Resume Next
-    L = Len(Text) + RemoveChrS
+    l = Len(Text) + RemoveChrS
     Pos = InStr(MaximaOutput, "incorrect syntax")
     pos2 = InStr(Pos, MaximaOutput, Text)
-    pos4 = InStrRev(pos2 + L, MaximaOutput, "^")
+    pos4 = InStrRev(pos2 + l, MaximaOutput, "^")
     If pos4 < 1 Then
         pos4 = Len(MaximaOutput)
     End If
-    t = Mid(MaximaOutput, pos2 + L, pos4 - pos2 - L + 1)
+    t = Mid(MaximaOutput, pos2 + l, pos4 - pos2 - l + 1)
 '    t = Replace(t, "^", vbCrLf & "    ^", 1, 1)
     t = TrimL(t, vbLf)
     t = TrimL(t, vbCr)

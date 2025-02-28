@@ -341,7 +341,7 @@ Sub InsertEmptyGraphOleObject()
 Dim ils As InlineShape
 Application.ScreenUpdating = False
 
-If Not FileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
+If Not fileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
     Dim result As VbMsgBoxResult
     result = MsgBox(Sprog.A(366), vbOKCancel, Sprog.Error)
     If result = vbOK Then
@@ -385,7 +385,7 @@ ea.SetNormalBrackets
 On Error GoTo Fejl
 Application.ScreenUpdating = False
 
-If Not FileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
+If Not fileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
     Dim result As VbMsgBoxResult
     result = MsgBox(Sprog.A(366), vbOKCancel, Sprog.Error)
     If result = vbOK Then

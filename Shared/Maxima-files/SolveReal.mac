@@ -54,6 +54,7 @@ matchdeclare(aliznonnatural,lambda([z],numberp(z) and not(integerp(ToFrac(z)) an
 matchdeclare(alizirrational,lambda([z],constantp(z) and not(numberp(z))))$
 matchdeclare(alizneginteger,lambda([z],integerp(ToFrac(z) and z<0 )))$
 matchdeclare(aliznegative,lambda([z],is(z<0)))$
+matchdeclare(aliznegative0,lambda([z],is(z<=0)))$
 matchdeclare(aliznegative2,lambda([z],is(op(z)="-")))$
 matchdeclare([alizpositive,alizpositive2],lambda([z],not(is(is(z>0)=false))))$
 matchdeclare([aliznotzero,aliznotzero2],lambda([z],not(is(is(z#0)=false))))$
@@ -96,7 +97,7 @@ defrule(powruleeven,alizx^alizevennum=aliz,(assume(aliz>=0),[alizx=aliz^(1/alize
 defrule(powruleirratneg,alizx^alizirrational=aliznegative,[])$
 defrule(powruleirrat,alizx^alizirrational=aliz,(assume(aliz>=0),alizx=aliz^(1/alizirrational)))$
 defrule(powrulenotnum,alizx^aliznotnum=aliz,(print(sconcat("Solution unsure. Because taking inverse power depends on ",aliznotnum, " and the sign of ",aliz )),assume(aliz>0),alizx=aliz^(1/aliznotnum)))$
-defrule(expremoverule,%e^alizx=0,[])$ /* no solution */
+defrule(expremoverule,%e^alizx=aliznegative0,[])$ /* no solution */
 /* defrule(powrul1,(aliz^(aliz3*alizx))/(aliz2^(aliz4*alizx))=aliz5,alizx*log(aliz^aliz3/aliz2^aliz4)=log(aliz5))$ */
 /* defrule(powrul2,(aliz^(alizx))/(aliz2^(aliz4*alizx))=aliz5,alizx*log(aliz/aliz2^aliz4)=log(aliz5))$ */
 /* defrule(powrul3,(aliz^(alizx))/(aliz2^(alizx))=aliz5,alizx*log(aliz/aliz2)=log(aliz5))$ */
@@ -692,6 +693,8 @@ applydivrule3(exprq):=block([exprq2],exprq2:makelist(block([zxq2],zxq2:divrule3(
 applydivrule4(exprq):=block([exprq2],exprq2:makelist(block([zxq2],zxq2:divrule4(zxq),if zxq2=false then return(zxq),zxq2),zxq,exprq))$
 applypowrulenotnum(exprq):=block([exprq2],exprq2:makelist(block([zxq2],zxq2:powrulenotnum(zxq),if zxq2=false then return(zxq),assume(rhs(zxq)>=0),zxq2),zxq,exprq))$
 applyexprule(exprq):=block([exprq2],exprq2:makelist(block([zxq2],zxq2:exprule(zxq),if zxq2=false then return(zxq),zxq2),zxq,exprq))$
+applyexpremoverule(exprq):=block([exprq2],exprq2:makelist(block([zxq2],zxq2:expremoverule(zxq),if zxq2=false then return(zxq),zxq2),zxq,exprq))$
+
 applylnrule(exprq):=block([exprq2],exprq2:makelist(block([zxq2],zxq2:lnrule(zxq),if zxq2=false then return(zxq),zxq2),zxq,exprq))$
 applysinrule(exprq):=block([exprq2],flatten(exprq2:makelist(block([zxq2],if AllTrig then zxq2:sinsolruleall(zxq) else zxq2:sinsolrule(zxq),if zxq2=false then return(zxq),zxq2),zxq,exprq)))$
 applycosrule(exprq):=block([exprq2],flatten(exprq2:makelist(block([zxq2],if AllTrig then zxq2:cossolruleall(zxq) else zxq2:cossolrule(zxq),if zxq2=false then return(zxq),zxq2),zxq,exprq)))$

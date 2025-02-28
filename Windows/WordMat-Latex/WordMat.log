@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.7.24)  4 FEB 2025 07:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.7.24)  28 FEB 2025 13:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -591,33 +591,11 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-Runaway argument?
-{Ligningen løses for x vha. WordMat. \begin {equation*}x=-0,2421153\end \ETC.
-! Paragraph ended before \text@command was complete.
-<to be read again> 
-                   \par 
-l.142 }
-       
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
-
-[5] [6]
-Runaway argument?
-{Tjekket med nye version 1.31.2 (og den forrige). 
-! Paragraph ended before \text@command was complete.
-<to be read again> 
-                   \par 
-l.188 }
-       
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
-
+[5]
 ! Missing \endgroup inserted.
 <inserted text> 
                 \endgroup 
-l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -628,7 +606,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -639,7 +617,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -650,7 +628,7 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -658,7 +636,7 @@ So I shall assume that you typed `$$' both times.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -666,7 +644,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 \frac  #1#2->{\begingroup #1\endgroup \@@over #2}
                                                  
-l.197 ...c{\ln \left(|x+5|\right)+2\right)^{2}}{4}
+l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -681,7 +659,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.197 ...5|\right)+2\right)^{2}}{4}\end{equation*}
+l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -690,42 +668,8 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.197 ...5|\right)+2\right)^{2}}{4}\end{equation*}
+l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
                                                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.197 ...5|\right)+2\right)^{2}}{4}\end{equation*}
-                                                  
-Things are pretty mixed up, but I think the worst is over.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.204 Integrate(sqrt(1+((2*x)/(x^
-                                 (2)+3))^(2)),x,(-5),5)
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.205 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
-                                                  $^^L\newpage
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -735,19 +679,19 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
-                                                  $^^L\newpage
+l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
+                                                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-! Missing $ inserted.
+! Missing } inserted.
 <inserted text> 
-                $
-l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
-                                                  $^^L\newpage
+                }
+l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
+                                                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -757,43 +701,28 @@ my insertion and my current dilemma will both disappear.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
-                                                  $^^L\newpage
+l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
+                                                  
 Things are pretty mixed up, but I think the worst is over.
 
-! Missing $ inserted.
+[6]
+! Missing } inserted.
 <inserted text> 
-                $
-l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
-                                                  $^^L\newpage
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+                }
+l.192 ...  72<x\leq 150\end{matrix}\end{equation*}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-! Extra }, or forgotten $.
-\frac  #1#2->{\begingroup #1\endgroup \@@over #2}
-                                                 
-l.212 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
-                                                  $^^L\newpage
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-[7]
-
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 247.
-
-
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 247.
-
-Missing character: There is no ¦ in font cmr10!
 Runaway argument?
-{Beregning foretaget vha. GeoGebra 
+{\begin {equation}Skriv ligningen her.\end {equation} 
 ! Paragraph ended before \text@command was complete.
 <to be read again> 
                    \par 
-l.252 }
+l.201 }
        
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -802,46 +731,36 @@ My plan is to forget the whole thing and hope for the best.
 ! Too many }'s.
 <recently read> \egroup 
                         
-l.252 }
+l.201 }
        
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
+Runaway argument?
+{ 
+! Paragraph ended before \text@command was complete.
+<to be read again> 
+                   \par 
+l.205 }
+       
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
 
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
+! Too many }'s.
+<recently read> \egroup 
+                        
+l.205 }
+       
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
 
-
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
-
-
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
-
-
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
-
-
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
-
-
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 255.
-
-Missing character: There is no ¦ in font cmr10!
-Missing character: There is no ¦ in font cmr10!
-Missing character: There is no ¦ in font cmr10!
-[8]
-
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 260.
-
-
-LaTeX Warning: Command \textbrokenbar invalid in math mode on input line 260.
-
-Missing character: There is no ¦ in font cmr10!
-[9] (C:\GitHub\WordMat\Windows\WordMat-Latex\WordMat.aux) ) 
+[7] (C:\GitHub\WordMat\Windows\WordMat-Latex\WordMat.aux) ) 
 Here is how much of TeX's memory you used:
- 3075 strings out of 476331
- 50248 string characters out of 5787765
- 1861660 words of memory out of 5000000
- 23508 multiletter control sequences out of 15000+600000
+ 3074 strings out of 476331
+ 50232 string characters out of 5787765
+ 1860660 words of memory out of 5000000
+ 23507 multiletter control sequences out of 15000+600000
  524194 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,15n,62p,465b,195s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -865,10 +784,10 @@ mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:
 0.pfb><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
 /cm/cmsy6.pfb><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/
 amsfonts/cm/cmsy8.pfb>
-Output written on C:\GitHub\WordMat\Windows\WordMat-Latex\WordMat.pdf (9 pages,
- 197353 bytes).
+Output written on C:\GitHub\WordMat\Windows\WordMat-Latex\WordMat.pdf (7 pages,
+ 193277 bytes).
 PDF statistics:
- 329 PDF objects out of 1000 (max. 8388607)
+ 322 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

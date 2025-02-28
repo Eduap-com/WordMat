@@ -65,7 +65,7 @@ Sub CloseProcess()
 End Sub
 
 Function StartMaximaWait(WaitTime As LongPtr) As LongPtr
-    Dim L As LongPtr, i As LongPtr
+    Dim l As LongPtr, i As LongPtr
     Dim OutputBuffer As String
     Dim Startupstring As String
     Dim retval As LongPtr
@@ -101,7 +101,7 @@ Function StartMaximaWait(WaitTime As LongPtr) As LongPtr
 End Function
 
 Sub ExecuteMaximaCommand(Command As String, WaitForIt As Integer)
-Dim L As LongPtr, nocmd As LongPtr
+Dim l As LongPtr, nocmd As LongPtr
 Dim ea As New ExpressionAnalyser
 On Error GoTo Fejl
     mFinished = 0
@@ -165,7 +165,7 @@ Function WaitForMaximaUntil(Optional StopTime As Integer = 6) As Integer
 ' tid angives i hele  s
 ' -1 = error     0=timeout    1=maxima finished
 Dim i As Integer
-Dim L As LongPtr
+Dim l As LongPtr
 Dim stoptext As String
 Dim OutputBuffer As String
 Dim t As String
@@ -188,8 +188,8 @@ WaitForMaximaUntil = 1
         OutputBuffer = GetEmptyString()
 '        L = ReadOutputIfAny(OutputBuffer)
 '        l = GetLastOutputVB(OutputBuffer, 10)
-        If L > 0 Then
-            t = Left(OutputBuffer, CInt(L))
+        If l > 0 Then
+            t = Left(OutputBuffer, CInt(l))
             lastOutput = lastOutput & t
         End If
 '        msgbox stoptext & vbLf & vbLf & lastOutput

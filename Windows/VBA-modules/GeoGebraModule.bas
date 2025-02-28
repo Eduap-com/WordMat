@@ -833,7 +833,7 @@ Sub GeoGebra()
     geogebrafilersti = geogebrafilersti & "geogebra.ggb"
     
     UfWait.Label_progress.Caption = "******"
-    If FileExists(geogebrafilersti) Then ' check om geogebrafilen er lavet
+    If fileExists(geogebrafilersti) Then ' check om geogebrafilen er lavet
         geogebrasti = geogebrasti & " """ & geogebrafilersti & """"
     Else
         MsgBox "The GeoGebra.ggb file cannot be located", vbOKOnly, Sprog.Error
@@ -932,7 +932,7 @@ Dim DN As String
 On Error GoTo Fejl
 #If Mac Then
     GeoGebraPath = GetProgramFilesDir() & "GeoGebra.app"
-    If FileExists(GeoGebraPath) Then Exit Function
+    If fileExists(GeoGebraPath) Then Exit Function
 '    GeoGebraPath = GetProgramFilesDir() & "GeoGebra 5.app"
 '    If FileExists(GeoGebraPath) Then Exit Function
 ' Disse kan godt startes på Mac, men de kan ikke åbne en ggb-fil som argument
@@ -1229,19 +1229,19 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     '        geogebrafil.CreateList "punkter", dd.GetSetForm
     '    End If
 
-    If FileExists(geogebrasti & "geogebra.xml") Then
+    If fileExists(geogebrasti & "geogebra.xml") Then
         Kill geogebrasti & "geogebra.xml"
     End If
     geogebrafil.Save geogebrasti & "geogebra.xml"
     
     DoEvents
     i = 0
-    Do While i < 10 And Not (FileExists(geogebrasti & "geogebra.xml"))
+    Do While i < 10 And Not (fileExists(geogebrasti & "geogebra.xml"))
         Wait 1
         i = i + 1
     Loop
     '    CreateZipFile geogebrasti & "geogebra.zip", geogebrasti & "geogebra_thumbnail.png", geogebrasti & "geogebra.xml"
-    If FileExists(geogebrasti & "geogebra.ggb") Then
+    If fileExists(geogebrasti & "geogebra.ggb") Then
         Kill geogebrasti & "geogebra.ggb"
     End If
 #If Mac Then

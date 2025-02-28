@@ -8,7 +8,6 @@ Dim SaveTime As Single
 Dim BackupAnswer As Integer
 Private UserDir As String
 Private tmpdir As String
-Private TapTime As Single
 #If Mac Then
     Private m_tempDoc As Document
 #Else
@@ -77,11 +76,11 @@ Sub UnitImageTest()
 End Sub
 #End If
 
-Function FileExists(FullFileName As String) As Boolean
+Function fileExists(FullFileName As String) As Boolean
 ' returns TRUE if the file or folder exists
     On Error GoTo Err
-    FileExists = False
-    FileExists = Len(Dir(FullFileName)) > 0 Or Len(Dir(FullFileName, vbDirectory)) > 0
+    fileExists = False
+    fileExists = Len(Dir(FullFileName)) > 0 Or Len(Dir(FullFileName, vbDirectory)) > 0
     Exit Function
 Err:
 End Function
@@ -214,99 +213,6 @@ Sub ShowCustomizationContext()
 '    MsgBox CustomizationContext & vbCrLf & ActiveDocument.AttachedTemplate
     MsgBox Templates(4)
 End Sub
-Public Sub CheckKeyboardShortcuts()
-' til manuelt kald af om alt er ok med ks
-    CheckKeyboardShortcutsPar False
-End Sub
-Public Sub TestCheckKeyboardShortcutsNoninteractive()
-    MsgBox CheckKeyboardShortcutsPar(True)
-End Sub
-Public Function CheckKeyboardShortcutsNoninteractive() As String
-' bruges at test-modulet til at checke om ks er sat rigtigt. Det er ikke vigtigt om Normal-dotm er sat.
-    CheckKeyboardShortcutsNoninteractive = CheckKeyboardShortcutsPar(True)
-End Function
-Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) As String
-    ' Checker om Keyboard shortcuts er gemt correct i WordMat.dotm.  og om der er gemt noget i normal.dotm
-    Dim WT As Template
-    Dim KB As KeyBinding
-    Dim GemT As Template, s As String
-    Dim KeybInNormal As Boolean, KBerr As Boolean
-    On Error GoTo slut
-    Set GemT = CustomizationContext
-        
-    Set WT = GetWordMatTemplate(False)
-    If WT Is Nothing Then
-        CheckKeyboardShortcutsPar = "Der kunne ikke findes nogen skabelon, der hed wordmat*.dotm" & vbCrLf
-        If Not NonInteractive Then
-            MsgBox "Det ser ikke ud til at du har åbnet wordmat.dotm, men kører som global skabelon. Genveje vises for " & ActiveDocument.AttachedTemplate & "", vbOKOnly, "Ingen WordMat skabelon"
-            Set WT = ActiveDocument.AttachedTemplate
-        Else
-            GoTo slut
-        End If
-    End If
-    
-    CustomizationContext = NormalTemplate
-    For Each KB In KeyBindings
-        If KeyBindings.Count > 10 Then
-#If Mac Then
-            If KB.KeyString = "Option+B" Then
-                KeybInNormal = True
-                Exit For
-            End If
-#Else
-            If KB.Command = "WordMat.Maxima.Beregn" Then
-                KeybInNormal = True
-                Exit For
-            End If
-#End If
-        End If
-    Next
-    If KeybInNormal Then
-        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Advarsel: Der er sat WordMat tastaturgenveje i Normal.dotm" & vbCrLf
-        If Not NonInteractive Then
-            MsgBox "Der er sat WordMat tastaturgenveje i Normal.dotm", vbOKOnly Or vbInformation, "Advarsel"
-            DeleteNormalDotm
-        End If
-        GoTo slut
-    End If
-    
-    CustomizationContext = WT
-    
-    If Not NonInteractive Then
-        s = "CustomizationContext:  " & CustomizationContext & VbCrLfMac
-        If CustomizationContext = ActiveDocument.AttachedTemplate Then
-            s = s & "Det er aktivt dokument" & VbCrLfMac
-        Else
-            s = s & "Det er global skabelon og ikke aktivt dokument" & VbCrLfMac
-        End If
-        s = s & vbCrLf
-        s = s & "Antal keybindings: " & KeyBindings.Count & VbCrLfMac & VbCrLfMac
-        s = s & "Keybindings:" & VbCrLfMac
-    End If
-    On Error Resume Next
-    
-    For Each KB In KeyBindings
-        Err.Clear
-        s = s & "  " & KB.KeyString & " ->" & KB.Command & VbCrLfMac
-        If Err.Number > 0 Then
-            s = s & "  ??? ->" & KB.Command & VbCrLfMac
-            KBerr = True
-        End If
-    Next
-    
-    If Not NonInteractive Then
-        MsgBox s, vbOKOnly, "KeyBindings"
-    ElseIf KeyBindings.Count < 10 Then
-        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er kun " & KeyBindings.Count & " tastaturveje i WordMat*.dotm. Der skal nok køres GenerateKeyboardShortcutsWordMat." & vbCrLf
-    ElseIf KBerr Then
-        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er problemer med Genvejene i WordMat*.dotm. Der skal nok køres GenerateKeyboardShortcutsWordMat på Mac." & vbCrLf
-    End If
-    
-slut:
-    On Error Resume Next
-    CustomizationContext = GemT
-
-End Function
 Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Template
     ' Hvis det aktuelle dokument hedder wordmat*.dotm så returneres den som template
     ' Ellers søges alle globale skabeloner igennem efter om der er en der hedder wordmat*.dotm
@@ -328,111 +234,6 @@ Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Templat
 '        End If
 '    Next
 End Function
-Public Sub GenerateKeyboardShortcutsNormalDotm()
-' gemmer KeyboardShortcuts i WordMat.dotm, hvis det er selve wordMat.dotm filen der er åbnet. Hvis ikke gemmes i normal.dotm.
-' Det kan give problemer ved en opdatering at benytte denne metode
-    GenerateKeyboardShortcutsPar True
-End Sub
-Public Sub GenerateKeyboardShortcutsWordMat()
-' gemmer KeyboardShortcuts i WordMat.dotm, men kun hvis det er selve wordMat.dotm filen der er åbnet
-    GenerateKeyboardShortcutsPar False
-End Sub
-Public Sub GenerateKeyboardShortcutsPar(Optional NormalDotmOK As Boolean = False)
-    Dim Wd As WdKey, WT As Template
-    Dim WdMac As WdKey
-    Dim GemT As Template
-    
-    Set GemT = CustomizationContext
-    
-    DeleteKeyboardShortcutsInNormalDotm
-    
-    Set WT = GetWordMatTemplate(NormalDotmOK)
-    If WT Is Nothing Then
-'        If MsgBox("Der kunne ikke findes nogen skabelon der hed wordmat*.dotm. Vil du anvende " & ActiveDocument.AttachedTemplate & "?", vbYesNo, "Ingen WordMat skabelon") = vbYes Then
-'            Set WT = ActiveDocument.AttachedTemplate
-'        Else
-'            GoTo slut
-'        End If
-        MsgBox "Den åbne skabelon er ikke wordmat*.dotm", vbOKOnly, "Fejl"
-        GoTo slut
-    End If
-    
-    CustomizationContext = WT
-    
-    KeyBindings.ClearAll
-
-On Error Resume Next
-'#If Mac Then
-'    Wd = wdKeyControl
-'#Else
-    Wd = wdKeyAlt ' 1024 på windows, 2048 på mac
-'#End If
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyG, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="Gange"
-        
-If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyB, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="beregn"
-Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyC, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="beregn"
-End If
-
-#If Mac Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyReturn, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="beregn"
-#Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyReturn, Wd, wdKeyControl), KeyCategory:=wdKeyCategoryCommand, Command:="beregn"
-#End If
-
-If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyL, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="MaximaSolve"
-Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyE, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="MaximaSolve"
-End If
-    
-If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyS, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="InsertSletDef"
-Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="InsertSletDef"
-End If
-    
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyD, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="InsertDefiner"
-    
-If Sprog.SprogNr = 1 Then
-'#If Mac Then ' alt+i bruges til numerisk tegn på mac, så hellere ikke genvej til indstillinger
-'#Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyJ, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="MaximaSettings"
-'#End If
-Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyO, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="MaximaSettings"
-End If
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyP, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="StandardPlot"
-        
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyM, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="NewEquation"
-        
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyR, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ForrigeResultat"
-        
-If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyE, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ToggleUnits"
-Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyU, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ToggleUnits"
-End If
-    
-If Sprog.SprogNr = 1 Then
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyO, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="Omskriv"
-Else
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyS, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="Omskriv"
-End If
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyN, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ToggleNum"
-        
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyT, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="ToggleLatex"
-        
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyQ, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="SaveDocToLatexPdf()"
-        
-    KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyF, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="WMPShowFormler"
-    
-slut:
-    Set CustomizationContext = GemT
-
-End Sub
-
 
 Function GetProgramFilesDir() As String
     ' bruges ikke af maxima mere da det er dll-filen der står for det nu.
@@ -2173,7 +1974,7 @@ Sub SaveBackup()
     Path = GetDocumentsDir & "\WordMat-Backup\"
 #End If
     '    If Dir(path, vbDirectory) = "" Then MkDir path
-    If Not FileExists(Path) Then MkDir Path
+    If Not fileExists(Path) Then MkDir Path
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     Path = Path & "WordMatBackup" & BackupNo & ".docx"
@@ -2457,23 +2258,17 @@ Sub NewEquation()
     On Error GoTo Fejl
     On Error Resume Next
     
-    If DoubleTapM = 1 Then
-        If Timer() - TapTime < 0.8 Then
-            Application.Run macroname:="WMPShowFormler"
-        End If
-        TapTime = Timer()
-    End If
     
     If Selection.OMaths.Count = 0 Then
         Set r = Selection.OMaths.Add(Selection.Range)
     ElseIf Selection.Tables.Count = 0 Then
         If Selection.OMaths(1).Range.Text = vbNullString Then
             Set r = Selection.OMaths.Add(Selection.Range)
-        ElseIf DoubleTapM = 2 Then
-            If Not Selection.Range.ListFormat.ListValue = 0 Then
-                Selection.Range.ListFormat.RemoveNumbers
-            End If
-            InsertNumberedEquation EqAskRef
+'        ElseIf DoubleTapM = 2 Then
+'            If Not Selection.Range.ListFormat.ListValue = 0 Then
+'                Selection.Range.ListFormat.RemoveNumbers
+'            End If
+'            InsertNumberedEquation EqAskRef
         End If
     ElseIf Selection.Tables(1).Columns.Count = 3 And Selection.Tables(1).Cell(1, 3).Range.Fields.Count > 0 Then
         Selection.Tables(1).Cell(1, 2).Range.OMaths(1).Range.Cut
