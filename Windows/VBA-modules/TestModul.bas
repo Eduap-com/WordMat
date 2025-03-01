@@ -230,11 +230,16 @@ Sub RunTestSequence()
     If TestSolve("e^(-x)=2", "x", "x=-ln" & VBA.ChrW(8289) & "(2)") Then GoTo slut
     If TestSolve("1=1,5" & VBA.ChrW(183) & "x^2+0,5/x^0,5 -1", "x", "x=0,06287224    " & VBA.ChrW(8744) & "    x=1") Then GoTo slut ' kræver numerisk løsning. Tidligere to_poly fejl, med kun en løsning.
     If TestSolve("6174/(1+8652" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "0,711" & VBA.ChrW(12311) & "^x )=8000000", "x", "x" & VBA.ChrW(8712) & "" & VBA.ChrW(8709)) Then GoTo slut
-    
+    If TestSolve("x^2=e^(-x^2 )", "x", "x=-" & VBA.ChrW(8730) & "(lambert_w (1) )    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(8730) & "(lambert_w (1) )") Then GoTo slut
+
     MaximaExact = 2 ' num
     InsertTestMath "Definer: " & VBA.ChrW(963) & ">0"
     If TestSolve("0,1=" & VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^5" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "" & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((y-7)/" & VBA.ChrW(963) & ")^2 ) dy", "sigma", VBA.ChrW(963) & "=1,560608") Then GoTo slut
     InsertSletDef
+    InsertTestMath "Definer: f(x)={" & VBA.ChrW(9608) & "(100" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "1,03" & VBA.ChrW(12311) & "^x,  0" & VBA.ChrW(8804) & "x" & VBA.ChrW(8804) & "72@33743" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "0,95" & VBA.ChrW(12311) & "^x,  72<x" & VBA.ChrW(8804) & "150)" & VBA.ChrW(9508)
+    If TestSolve("f(x)=200", "x", "x=23,44977    " & VBA.ChrW(8744) & "    x=99,97819") Then GoTo slut ' stykkevis kan ikke håndteres algebraisk, så solvereal skal gå direkte til nsolve
+    InsertSletDef
+    
     MaximaExact = 1
     
     '    TestSolve "", "x", "x="

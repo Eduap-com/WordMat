@@ -1082,7 +1082,8 @@ start:
         KommentarOutput = Minput(1) & vbLf & moutput(1)
     Else
         KommentarOutput = Minput(1) & vbLf & moutput(1)
-        For i = 0 To nr - 2
+        If nr >= 2 Then KommentarOutput = KommentarOutput & vbLf & moutput(2)
+        For i = 0 To nr - 1
             KommentarOutput = KommentarOutput & Minput(nr - i)
         Next
         KommentarOutput = Replace(KommentarOutput, vbCrLf, "")

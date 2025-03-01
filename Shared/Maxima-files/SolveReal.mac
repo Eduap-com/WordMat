@@ -61,7 +61,7 @@ matchdeclare([aliznotzero,aliznotzero2],lambda([z],not(is(is(z#0)=false))))$
 matchdeclare(alizimag,lambda([z],block(if is(freeof(%i,z)) then return(false),if abs(ev(imagpart(z)/realpart(z),numer))>10^-14 then return(true),return(false) )))$
 matchdeclare(alizillinvtrig,lambda([z],is(z<-1 or z>1)))$
 matchdeclare(alizbelowone,lambda([z],is(z<1)))$
-matchdeclare(alizilllambertw,lambda([z],is(z>1/%e)))$
+matchdeclare(alizilllambertw,lambda([z],is(z<-1/%e)))$
 matchdeclare(alizlambertw2sol,lambda([z],is(z<1/%e and z>0)))$
 matchdeclare(aliznum,numberp)$
 matchdeclare(aliznotnum,lambda([z],not(numberp(z))))$
@@ -784,6 +784,7 @@ iteind:0,factind:0,solsteps:[],
 solq:[lignq],
 /* problematisk kan foere til ugyldige loesninger solq:DissolveRadicals(solq),*/
 solq:DissolveAbs(solq),
+if autonsolve and not(freeof("if",solq)) then (solu_1a:nsolve(lignq,varq),go(slutqw)), /* solver cant handle piecewiese defintions*/
 solq:solverecursive(solq,varq,condq),
 if solq=[0=0] then (solq:[all],go(finishlabel)),
 solq: ev(solq,logcontract2),addsolstep(solq,"logcontract2"),
