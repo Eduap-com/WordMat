@@ -173,13 +173,13 @@ End Function
 Private Sub Class_Terminate()
 'lukker kommandoprompt
     On Error Resume Next
-    CloseCmd
+'    CloseCmd
     '    tempDoc.Close (False)
 End Sub
 Public Sub luk()
     On Error Resume Next
-    CloseCmd
-    KillMaxima
+'    CloseCmd
+'    KillMaxima
     '    tempDoc.Close (False)
 
 End Sub
@@ -840,17 +840,17 @@ End Sub
 '        WaitForMaxima = True
 '    End If
 'End Function
-Public Sub CloseCmd()
-    On Error GoTo slut
-
-    If Not CmdTask Is Nothing Then
-        CmdTask.Close
-    End If
-    GoTo slut
-Fejl:
-    KillMaxima
-slut:
-End Sub
+'Public Sub CloseCmd()
+'    On Error GoTo slut
+'
+'    If Not CmdTask Is Nothing Then
+'        CmdTask.Close
+'    End If
+'    GoTo slut
+'Fejl:
+'    KillMaxima
+'slut:
+'End Sub
 
 Sub InsertKillDef()
     If Len(KillDef) > 0 Then

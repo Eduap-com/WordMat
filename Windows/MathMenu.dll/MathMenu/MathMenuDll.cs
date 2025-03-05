@@ -649,8 +649,14 @@ using System.Collections;
                     {
                         p.Kill();
                     }
-                }
-                catch { }
+                    Process[] localByName2 = Process.GetProcessesByName("sbcl");
+
+                    foreach (Process p in localByName2)
+                    {
+                        p.Kill();
+                    }
+        }
+        catch { }
                 try
                 {
                     maximaStreamWriter.Close();
