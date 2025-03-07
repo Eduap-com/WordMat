@@ -250,7 +250,6 @@ Sub RestartMaxima()
     
     
     On Error Resume Next
-    Shell "cmd.exe /c taskkill /IM sbcl.exe /F" ' Denne slår alt maxima ihjel
     Wait 1 ' der kan først oprettes en ny, når der er lukket
     Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
 

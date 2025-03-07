@@ -79,6 +79,14 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     ElseIf InStr(CheckText2, "Prematureterminationofinputat") > 0 Then
         GetErrorDefinition.Title = Sprog.SyntaxError
         GetErrorDefinition.LocationError = GetErrorText("Premature termination of input at", CheckText, 4)
+    ElseIf InStr(CheckText2, "Toofewargumentssuppliedto") > 0 Then
+        GetErrorDefinition.Title = Sprog.SyntaxError
+        If Sprog.SprogNr = 1 Then
+'            GetErrorDefinition.LocationError = "" GetErrorText("Premature termination of input at", CheckText, 4)
+            GetErrorDefinition.LocationError = "Du har angivet for få parametre til funktionen: " & ExtractText(CheckText2, "Toofewargumentssuppliedto", ";") & vbCrLf & "Det kan skyldes, at du har anvendt komma istedet for semikolon til at adskille parametrene. (du kan istedet tilføje et mellemrum på den ene side af kommaet.)"
+        Else
+            GetErrorDefinition.LocationError = "You have supplied too few argument to a function"
+        End If
     ElseIf InStr(CheckText2, "incorrectsyntax:") > 0 Then
         GetErrorDefinition.Title = Sprog.SyntaxError
         GetErrorDefinition.Description = Sprog.SyntaxError & "."

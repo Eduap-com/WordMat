@@ -190,7 +190,7 @@ On Error GoTo Fejl
   End If
   p = Int(Log(Abs(tal)) / Log(10))
 If rundop = 0 Then ' normal afrunding
-  betcif = Round(tal * 10 ^ (cif - 1 - p)) * 10 ^ (p - cif + 1)
+  betcif = Round(tal * 10 ^ (cif - 1 - p)) / 10 ^ -(p - cif + 1)
 ElseIf rundop = 1 Then ' rund altid op
   betcif = tal * 10 ^ (cif - 1 - p)
   If Round(betcif) < betcif Then
@@ -200,7 +200,7 @@ ElseIf rundop = 1 Then ' rund altid op
   End If
   betcif = betcif * 10 ^ (p - cif + 1)
 ElseIf rundop = 2 Then ' rund altid ned
-  betcif = Int(tal * 10 ^ (cif - 1 - p)) * 10 ^ (p - cif + 1)
+  betcif = Int(tal * 10 ^ (cif - 1 - p)) / 10 ^ -(p - cif + 1)
 Else
   betcif = tal * 10 ^ (cif - 1 - p)
   If Round(betcif) > betcif Then

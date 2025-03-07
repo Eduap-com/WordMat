@@ -651,7 +651,7 @@ start:
     DoEvents
     '  FN = DataFolder & "output.txt"
     InputString = GetMaximaSettingsString & Assume & MaximaInputStreng
-    s = ExecuteMaximaViaFile(InputString, WT, MaximaUnits)
+    s = ExecuteMaximaViaFile(InputString, WT, False)
     If Left(s, 5) = "Fejln" Then
         WT = InputBox("Kommandoen blev afbrudt efter " & WT & "s. Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.", "Afbrudt", 20)
         If Trim(WT) <> "" Then
