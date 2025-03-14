@@ -63,13 +63,13 @@ End Function
 'End Function
 
 
-Function MacDrawDims(Optional X As Long = 0, Optional Y As Long = 0) As String
+Function MacDrawDims(Optional x As Long = 0, Optional y As Long = 0) As String
 Dim xdrawdim As Long, ydrawdim As Long
-    If X > 0 Then
-        xdrawdim = X
+    If x > 0 Then
+        xdrawdim = x
     End If
-    If Y > 0 Then
-        ydrawdim = Y
+    If y > 0 Then
+        ydrawdim = y
     End If
     
     Dim dx As Long
@@ -157,13 +157,7 @@ On Error GoTo Fejl
             ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & MaximaCommand)
 '        End If
     Else
-'        If UseShellOnMac Then
-'            Dim ScriptPath As String
-'            ScriptPath = "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima.sh"
-'            ExecuteMaximaViaFile = RunShellCommand("sh """ & ScriptPath & """ " & MaxWait & " """ & MaximaCommand & ";""", 0.3)
-'        Else
             ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaxima", CStr(MaxWait) & "£" & MaximaCommand)
-'        End If
     End If
 '    ExecuteMaximaViaFile = ReadMaximaOutputFile()
 'MsgBox ExecuteMaximaViaFile
@@ -177,10 +171,6 @@ End Function
 
 
 #Else
-Function RunScript(ScriptName As String, Param As String) As String
-' lige nu en dummy shell så der ikke kommer compilefejl
-'    RunScript = Shell("WordMatScripts.scpt", ScriptName, Param)
-End Function
 
 #End If
 

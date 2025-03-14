@@ -1,0 +1,229 @@
+VERSION 5.00
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormGenveje 
+   Caption         =   "Genveje"
+   ClientHeight    =   9810.001
+   ClientLeft      =   -30
+   ClientTop       =   75
+   ClientWidth     =   16380
+   OleObjectBlob   =   "UserFormGenveje.frx":0000
+   StartUpPosition =   1  'CenterOwner
+End
+Attribute VB_Name = "UserFormGenveje"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+Private EventsCol As New Collection
+Sub SetEscEvents(ControlColl As Controls)
+' SetEscEvents Me.Controls     in Initialize
+    Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
+    On Error Resume Next
+    For Each c In ControlColl ' Me.Controls
+        TN = TypeName(c)
+        If TN = "CheckBox" Then
+            Set CE = New CEvents: Set CE.CheckBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "OptionButton" Then
+            Set CE = New CEvents: Set CE.OptionButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ComboBox" Then
+            Set CE = New CEvents: Set CE.ComboBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Label" Then
+            Set CE = New CEvents: Set CE.LabelControl = c: EventsCol.Add CE
+        ElseIf TN = "TextBox" Then
+            Set CE = New CEvents: Set CE.TextBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "CommandButton" Then
+            Set CE = New CEvents: Set CE.CommandButtonControl = c: EventsCol.Add CE
+        ElseIf TN = "ListBox" Then
+            Set CE = New CEvents: Set CE.ListBoxControl = c: EventsCol.Add CE
+        ElseIf TN = "Frame" Then
+            Set F = c
+            SetEscEvents F.Controls
+        End If
+    Next
+End Sub
+
+Private Sub CommandButton_ok_Click()
+    Label_ok_Click
+End Sub
+
+Private Sub Label_nulstil_Click()
+    SettShortcutAltM = KeybShortcut.InsertNewEquation
+    SettShortcutAltM2 = KeybShortcut.NoShortcut
+    SettShortcutAltB = KeybShortcut.beregnudtryk
+    SettShortcutAltL = KeybShortcut.SolveEquation
+    SettShortcutAltP = KeybShortcut.ShowGraph
+    SettShortcutAltD = KeybShortcut.Define
+    SettShortcutAltS = KeybShortcut.sletdef
+    SettShortcutAltF = KeybShortcut.Formelsamling
+    SettShortcutAltO = KeybShortcut.OmskrivUdtryk
+    SettShortcutAltR = KeybShortcut.PrevResult
+    SettShortcutAltJ = KeybShortcut.SettingsForm
+    SettShortcutAltN = KeybShortcut.NoShortcut
+    SettShortcutAltE = KeybShortcut.NoShortcut
+    SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
+    SettShortcutAltQ = KeybShortcut.NoShortcut
+    SettShortcutAltG = KeybShortcut.NoShortcut
+    SettShortcutAltGr = KeybShortcut.NoShortcut
+    
+    SetComboIndexs
+End Sub
+
+Private Sub UserForm_Activate()
+    SetCaptions
+    SetComboIndexs
+
+End Sub
+
+Sub SetComboIndexs()
+    On Error Resume Next
+    ComboBox_AltM.ListIndex = SettShortcutAltM
+    ComboBox_AltM2.ListIndex = SettShortcutAltM2
+    ComboBox_AltB.ListIndex = SettShortcutAltB
+    ComboBox_AltL.ListIndex = SettShortcutAltL
+    ComboBox_AltD.ListIndex = SettShortcutAltD
+    ComboBox_AltS.ListIndex = SettShortcutAltS
+    ComboBox_AltP.ListIndex = SettShortcutAltP
+    ComboBox_AltF.ListIndex = SettShortcutAltF
+    ComboBox_AltO.ListIndex = SettShortcutAltO
+    ComboBox_AltR.ListIndex = SettShortcutAltR
+    ComboBox_AltJ.ListIndex = SettShortcutAltJ
+    ComboBox_AltN.ListIndex = SettShortcutAltN
+    ComboBox_AltE.ListIndex = SettShortcutAltE
+    ComboBox_AltT.ListIndex = SettShortcutAltT
+    ComboBox_AltQ.ListIndex = SettShortcutAltQ
+    ComboBox_AltG.ListIndex = SettShortcutAltG
+    ComboBox_AltGr.ListIndex = SettShortcutAltGr
+    
+End Sub
+
+Sub SetCaptions()
+    Me.Caption = Sprog.Shortcuts
+    Label1.Caption = Sprog.A(65)
+    Label2.Caption = Sprog.A(66)
+    Label3.Caption = Sprog.A(67)
+'#If Mac Then
+'    TextBox1.Text = Replace(Sprog.A(68), "Alt", "ctrl")
+'#Else
+'#End If
+End Sub
+
+Private Sub UserForm_Initialize()
+    SetEscEvents Me.Controls
+
+#If Mac Then
+    ReplaceCaption Label_AltM
+    ReplaceCaption Label_AltM2
+    ReplaceCaption Label_AltB
+    ReplaceCaption Label_AltL
+    ReplaceCaption Label_AltD
+    ReplaceCaption Label_AltS
+    ReplaceCaption Label_AltP
+    ReplaceCaption Label_AltF
+    ReplaceCaption Label_AltO
+    ReplaceCaption Label_AltR
+    ReplaceCaption Label_AltJ
+    ReplaceCaption Label_AltN
+    ReplaceCaption Label_AltE
+    ReplaceCaption Label_AltT
+    ReplaceCaption Label_AltQ
+    ReplaceCaption Label_AltG
+    Label_AltGr.Caption = "Opt+enter"
+#End If
+    FillAllComboboxes
+End Sub
+'#If Mac Then
+Function ReplaceCaption(l As Label)
+    l.Caption = Replace(l.Caption, "Alt", "Opt")
+End Function
+'#End If
+Sub FillAllComboboxes()
+    FillComboBoxShortcuts ComboBox_AltM
+    FillComboBoxShortcuts ComboBox_AltM2
+    FillComboBoxShortcuts ComboBox_AltB
+    FillComboBoxShortcuts ComboBox_AltL
+    FillComboBoxShortcuts ComboBox_AltD
+    FillComboBoxShortcuts ComboBox_AltS
+    FillComboBoxShortcuts ComboBox_AltP
+    FillComboBoxShortcuts ComboBox_AltF
+    FillComboBoxShortcuts ComboBox_AltO
+    FillComboBoxShortcuts ComboBox_AltR
+    FillComboBoxShortcuts ComboBox_AltJ
+    FillComboBoxShortcuts ComboBox_AltN
+    FillComboBoxShortcuts ComboBox_AltE
+    FillComboBoxShortcuts ComboBox_AltT
+    FillComboBoxShortcuts ComboBox_AltQ
+    FillComboBoxShortcuts ComboBox_AltG
+    FillComboBoxShortcuts ComboBox_AltGr
+End Sub
+
+Sub FillComboBoxShortcuts(CB As ComboBox)
+
+CB.Clear
+
+CB.AddItem ""
+CB.AddItem Sprog.A(701) 'New equation
+CB.AddItem Sprog.A(1) 'New numbered equation
+CB.AddItem Sprog.RibBeregn
+CB.AddItem Sprog.SolveEquation
+CB.AddItem Sprog.A(62) ' definer
+CB.AddItem Sprog.RibDefDelete
+CB.AddItem Sprog.RibShowGraph
+CB.AddItem Sprog.RibFormulae
+CB.AddItem Sprog.RibReduce
+CB.AddItem Sprog.RibSolveDE
+CB.AddItem Sprog.A(505) ' Maxima kommando
+CB.AddItem Sprog.A(702) 'forrige resultater
+CB.AddItem Sprog.RibSettings
+CB.AddItem Sprog.A(703) 'Toggle num/exact
+CB.AddItem Sprog.Units
+CB.AddItem Sprog.A(704) ' Convert latex
+CB.AddItem Sprog.A(705) ' Latex pdf
+CB.AddItem Sprog.A(607) ' reference til ligning
+
+End Sub
+Private Sub Label_cancel_Click()
+    Me.hide
+End Sub
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorPress
+End Sub
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_cancel.BackColor = LBColorHover
+End Sub
+Private Sub Label_ok_Click()
+    SettShortcutAltM = ComboBox_AltM.ListIndex
+    SettShortcutAltM2 = ComboBox_AltM2.ListIndex
+    SettShortcutAltB = ComboBox_AltB.ListIndex
+    SettShortcutAltL = ComboBox_AltL.ListIndex
+    SettShortcutAltD = ComboBox_AltD.ListIndex
+    SettShortcutAltS = ComboBox_AltS.ListIndex
+    SettShortcutAltP = ComboBox_AltP.ListIndex
+    SettShortcutAltF = ComboBox_AltF.ListIndex
+    SettShortcutAltO = ComboBox_AltO.ListIndex
+    SettShortcutAltR = ComboBox_AltR.ListIndex
+    SettShortcutAltJ = ComboBox_AltJ.ListIndex
+    SettShortcutAltN = ComboBox_AltN.ListIndex
+    SettShortcutAltE = ComboBox_AltE.ListIndex
+    SettShortcutAltT = ComboBox_AltT.ListIndex
+    SettShortcutAltQ = ComboBox_AltQ.ListIndex
+    SettShortcutAltG = ComboBox_AltG.ListIndex
+    SettShortcutAltGr = ComboBox_AltGr.ListIndex
+    
+    Me.hide
+End Sub
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorPress
+End Sub
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorHover
+End Sub
+Private Sub Label_nulstil_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_nulstil.BackColor = LBColorPress
+End Sub
+Private Sub Label_nulstil_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_nulstil.BackColor = LBColorHover
+End Sub
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ok.BackColor = LBColorInactive
+    Label_cancel.BackColor = LBColorInactive
+    Label_nulstil.BackColor = LBColorInactive
+End Sub

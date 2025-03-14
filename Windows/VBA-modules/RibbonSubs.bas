@@ -13,6 +13,7 @@ Sub LoadRibbon(ribbon As IRibbonUI)
 #If Mac Then
     Set WoMatRibbon = ribbon
 #Else
+    SetMaxProc
     Set WoMatRibbon = ribbon
     Dim lngRibPtr As LongPtr
     lngRibPtr = ObjPtr(ribbon)
@@ -73,7 +74,7 @@ Fejl:
 slut:
 #End If
 End Sub
-' events der fyres når der trykkes på ribbon
+' events for ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
     On Error GoTo Fejl
     Dim Oundo As UndoRecord
@@ -110,16 +111,6 @@ End Sub
 Sub Rib_FSfremskriv(control As IRibbonControl)
     insertribformel "", "S=B" & VBA.ChrW(183) & "(1+r)"
 End Sub
-
-'Sub Rib_Formelsamling(control As IRibbonControl)
-'    On Error GoTo fejl
-'    Application.Run macroname:="WMPShowFormler"
-'    GoTo slut
-'fejl:
-'    MsgBox "Formelsamlingen kunne ikke findes. Måske er WordMat+ ikke installeret."
-'slut:
-'End Sub
-
 
 'Callback for menu_cifre getLabel
 Sub Rib_getLabelCiffer(control As IRibbonControl, ByRef returnedVal)
@@ -677,10 +668,6 @@ Sub Rib_sletdef(control As IRibbonControl)
 'insertribformel "", "slet definitioner:"
 End Sub
 
-'Callback for defvar onAction
-Sub Rib_defvar(control As IRibbonControl)
-    DefinerVar
-End Sub
 
 'Callback for deffunkt onAction
 Sub Rib_deffunk(control As IRibbonControl)
@@ -900,27 +887,7 @@ End Sub
 Sub Rib_LatexTemplate(control As IRibbonControl)
     OpenLatexTemplate
 End Sub
-'Callback for prik onAction
-Sub Rib_gangetegn(control As IRibbonControl)
-    Gange
-End Sub
-'Callback for tilprik onAction
-Sub Rib_Tilgangetegn(control As IRibbonControl)
-    ReplaceStarMult
-End Sub
-'Callback for Tilstjerne onAction
-Sub Rib_Tilstjerne(control As IRibbonControl)
-    ReplaceStarMultBack
-End Sub
 
-'Callback for Tilkomma onAction
-Sub Rib_Tilkomma(control As IRibbonControl)
-    ErstatKomma
-End Sub
-'Callback for Tilpunktum onAction
-Sub Rib_Tilpunktum(control As IRibbonControl)
-    ErstatPunktum
-End Sub
 'Callback for Tilkomma onAction
 Sub Rib_TilLaTex(control As IRibbonControl)
     KonverterTilLaTex
@@ -983,13 +950,6 @@ Sub Rib_trianglesolver(control As IRibbonControl)
     Dim UFtriangle As New UserFormTrekant
     UFtriangle.Show vbModeless
 End Sub
-'Callback for Wolfram onAction
-Sub Rib_WolframAlpha(control As IRibbonControl)
-    OpenWolframAlpha
-End Sub
-Sub Rib_wasolve(control As IRibbonControl)
-    OpenWolframAlpha "solve"
-End Sub
 'Callback for ButtonOm onAction
 Sub Rib_om(control As IRibbonControl)
     UserFormAbout.Show
@@ -1013,22 +973,6 @@ Sub Rib_HelpOnline(control As IRibbonControl)
 End Sub
 Sub Rib_HelpMaxima(control As IRibbonControl)
     OpenLink "https://maxima.sourceforge.io/docs/manual/maxima_toc.html#SEC_Contents"
-' Der er ikke længere lokal hjælp med i Maxima distributionen
-'#If Mac Then
-'    OpenLink "https://maxima.sourceforge.io/docs/manual/maxima_toc.html#SEC_Contents"
-'#Else
-'Dim ReturnValue
-'Dim sti As String
-'    On Error GoTo fejl
-'    OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.47.0\share\maxima\5.47.0\doc\html\index.html", True
-''    OpenLink GetProgramFilesDir & "\WordMat\Maxima-5.47.0\share\maxima\5.47.0\doc\html\index.html", True
-''    sti = "cmd /C """ & GetProgramFilesDir & "\WordMat\Maxima-5.45.1\share\maxima\5.45.1\doc\chm\maxima.chm"""
-''    ReturnValue = Shell(sti, vbHide)
-'GoTo slut
-'fejl:
-'    OpenLink "https://maxima.sourceforge.io/docs/manual/maxima_toc.html#SEC_Contents"
-'slut:
-'#End If
 End Sub
 'Callback for ButtonCheckUpdate onAction
 Sub Rib_CheckForUpdate(control As IRibbonControl)
@@ -1136,10 +1080,10 @@ Sub Rib_GetLabelPercentage(control As IRibbonControl, ByRef returnedVal)
 End Sub
 'Callback for proc1 getLabel
 Sub Rib_FSpercentage1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(435)
+    returnedVal = "S=B" & ChrW(183) & "(1+r)"
 End Sub
 Sub Rib_FSpercentage2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(436)
+    returnedVal = "K=K" & ChrW(&H2092) & ChrW(183) & "(1+r)" & ChrW(&H207F) & "     Kapitalfremskrivningsformel"
 End Sub
 Sub Rib_FSpercentage3(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "A=b" & ChrW(183) & "((1+r)" & ChrW(&H207F) & "- 1) / r" & "     Annuitetsopsparing"
@@ -1152,62 +1096,62 @@ Sub Rib_GetLabelFunctions(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.RibFunctions
 End Sub
 Sub Rib_FSlinear1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(437)
+    returnedVal = "y=a" & ChrW(183) & "x+b                Lineær ligning"
 End Sub
 Sub Rib_FSlinear2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(438)
+    returnedVal = "a=(y" & ChrW(&H2082) & "-y" & ChrW(&H2081) & ")/(x" & ChrW(&H2082) & "-x" & ChrW(&H2081) & ")     Hældningskoefficient"
 End Sub
 Sub Rib_FSlinear3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(439)
+    returnedVal = "y=a" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+y" & ChrW(&H2080) & "         Lineær ligning ud fra punkt (x" & ChrW(&H2080) & ",y" & ChrW(&H2080) & ") og a"
 End Sub
 Sub Rib_FSlinear4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(440)
+    returnedVal = "y=f'(x" & ChrW(&H2080) & ")" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+f(x" & ChrW(&H2080) & ")     Tangent til f(x) til x=x" & ChrW(&H2080)
 End Sub
 Sub Rib_FSexp1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(441)
+    returnedVal = "y=b" & ChrW(183) & "a" & ChrW(&H2E3) & "                  Eksponentiel funktion"
 End Sub
 Sub Rib_FSexp2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(442)
+    returnedVal = "y=b" & ChrW(183) & "e" & ChrW(&H1D4F) & ChrW(&H2E3) & "                  Eksponentiel funktion"
 End Sub
 Sub Rib_FSexp3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(443)
+    returnedVal = "y=b" & ChrW(183) & "2^(x/T" & ChrW(&H2082) & ")                  Eksponentiel funktion"
 End Sub
 Sub Rib_FSexp4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(444)
+    returnedVal = "y=b" & ChrW(183) & ChrW(189) & "^(x/T" & ChrW(189) & ")                  Eksponentiel funktion"
 End Sub
 Sub Rib_FSexp5(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(445)
+    returnedVal = "a=(x" & ChrW(&H2082) & "-x" & ChrW(&H2081) & ")" & ChrW(&H221A) & "(y" & ChrW(&H2082) & "/y" & ChrW(&H2081) & ")   Beregning af a ud fra to kendte punkter (x" & ChrW(&H2081) & ",y" & ChrW(&H2081) & ") og (x" & ChrW(&H2082) & ",y" & ChrW(&H2082) & ")"
 End Sub
 Sub Rib_FSexp6(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(446)
+    returnedVal = "T" & ChrW(&H2082) & "=ln(2)/ln(a)=ln(2)/k         Fordoblingskonstant"
 End Sub
 Sub Rib_FSexp7(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(447)
+    returnedVal = "T" & ChrW(189) & "=ln(" & ChrW(189) & ")/ln(a)=ln(" & ChrW(189) & ")/k             Halveringskonstant"
 End Sub
 Sub Rib_FSpow1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(448)
+    returnedVal = "y=b" & ChrW(183) & "x" & ChrW(&HAA) & "                          potensfunktion ligning"
 End Sub
 Sub Rib_FSpow2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(449)
+    returnedVal = "a=log(y" & ChrW(&H2082) & "/y" & ChrW(&H2081) & ")/log(x" & ChrW(&H2082) & "/x" & ChrW(&H2081) & ")   Beregning af a ud fra to kendte punkter (x" & ChrW(&H2081) & ",y" & ChrW(&H2081) & ") og (x" & ChrW(&H2082) & ",y" & ChrW(&H2082) & ")"
 End Sub
 Sub Rib_FSpow3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(450)
+    returnedVal = "(1+r" & ChrW(&H1D67) & ")=(1+r" & ChrW(&H2093) & ")" & ChrW(&HAA) & "    "
 End Sub
 Sub Rib_FSpol1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(451)
+    returnedVal = "x" & ChrW(&H1D7C) & "=-b/2a  ,  y" & ChrW(&H1D7C) & "=-d/4a    Toppunktets koordinater"
 End Sub
 
 Sub Rib_GetLabelGeometry(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.RibGeometry
 End Sub
 Sub Rib_FSgeo1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(452)
+    returnedVal = "a/sin(A)=b/sin(B)          Sinus-relation"
 End Sub
 Sub Rib_FSgeo2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(453)
+    returnedVal = "c" & ChrW(&HB2) & "=a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "-2" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "cos(C)    Cosinus-relation"
 End Sub
 Sub Rib_FSgeo3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(454)
+    returnedVal = "T=" & ChrW(189) & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Areal af trekant givet vinkel og to sider omkring"
 End Sub
 
 Sub Rib_GetLabelProbabilityShort(control As IRibbonControl, ByRef returnedVal)
@@ -1223,41 +1167,41 @@ Sub Rib_FSChi2dist(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(483)
 End Sub
 Sub Rib_FSprob1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(455)
+    returnedVal = "K(n,r)" & ChrW(&H2261) & "n!/(r!" & ChrW(183) & "(n-r)!)    Binomialkoefficient"
 End Sub
 Sub Rib_FSprob2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(456)
+    returnedVal = "p(r)=K(n,r)" & ChrW(183) & "p" & ChrW(&H2B3) & ChrW(183) & "(1-p)" & ChrW(&H207F) & ChrW(&H207B) & ChrW(&H2B3) & "   Frekvensfunktion"
 End Sub
 Sub Rib_FSprob3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(457)
+    returnedVal = "P(m)=" & ChrW(&H3A3) & "K(n,r)" & ChrW(183) & "p" & ChrW(&H2B3) & ChrW(183) & "(1-p)" & ChrW(&H207F) & ChrW(&H207B) & ChrW(&H2B3) & "   Kumuleret"
 End Sub
 Sub Rib_FSprob4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(458)
+    returnedVal = ChrW(&H3BC) & "=n" & ChrW(183) & "p    Middelværdi"
 End Sub
 Sub Rib_FSprob5(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(459)
+    returnedVal = ChrW(&H3C3) & "=" & ChrW(&H221A) & "(n" & ChrW(183) & "p" & ChrW(183) & "(1-p))   Spredning"
 End Sub
 Sub Rib_FSprob5a(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(687)
+    returnedVal = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221A) & "(" & ChrW(&H70) & ChrW(&H302) & ChrW(183) & "(1-" & ChrW(&H70) & ChrW(&H302) & ")/n)       Usikkerhed til 95% konfidensinterval"
 End Sub
 Sub Rib_FSprob6(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(460)
+    returnedVal = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-" & ChrW(189) & "(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frekvensfunktion"
 End Sub
 Sub Rib_FSprob7(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(461)
+    returnedVal = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-" & ChrW(189) & "(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Kumuleret frekvensfunktion"
 End Sub
 Sub Rib_FSprob8(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(462)
+    returnedVal = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "" & ChrW(189) & "" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "" & ChrW(189) & "" & ChrW(&HB2) & "  frekvensfunktion med frihedsgrad n"
 End Sub
 
 Sub Rib_FSinf1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(463)
+    returnedVal = "V=" & ChrW(&H3C0) & ChrW(&H222B) & "f(x)" & ChrW(&HB2) & "dx     Rumfang af omdrejningslegeme"
 End Sub
 Sub Rib_FSinf2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(464)
+    returnedVal = "s=" & ChrW(&H222B) & "" & ChrW(&H221A) & "1+(f'(x))" & ChrW(&HB2) & "dx     Kurvelængde af f(x) i interval a-b"
 End Sub
 Sub Rib_FSinf3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(465)
+    returnedVal = "1/(b-a)" & ChrW(&H222B) & "f(x)dx     Middelværdi af f(x) i interval a-b"
 End Sub
 
 Sub Rib_GetLabelVector(control As IRibbonControl, ByRef returnedVal)
@@ -1270,49 +1214,49 @@ Sub Rib_FS3D(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(485)
 End Sub
 Sub Rib_FSvec1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(466)
+    returnedVal = "a" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+b" & ChrW(183) & "(y-y" & ChrW(&H2080) & ")=0     Ligning for en linje"
 End Sub
 Sub Rib_FSvec2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(467)
+    returnedVal = "(x,y)=(x" & ChrW(&H2080) & ",y" & ChrW(&H2080) & ")+t" & ChrW(183) & "(r" & ChrW(&H2081) & ",r" & ChrW(&H2082) & ")     parameterfremstilling for en linje"
 End Sub
 Sub Rib_FSvec3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(468)
+    returnedVal = "cos(V)=a" & ChrW(183) & "b/(|a||b|)     Vinkel mellem vektorer"
 End Sub
 Sub Rib_FSvec4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(469)
+    returnedVal = "dist(P,l)=|a" & ChrW(183) & "x" & ChrW(&H2081) & "+b" & ChrW(183) & "y" & ChrW(&H2081) & "+c|/" & ChrW(&H221A) & "a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "     Afstand fra punkt til linje"
 End Sub
 Sub Rib_FSvec5(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(470)
+    returnedVal = "b_a=a" & ChrW(183) & "b/|a|" & ChrW(&HB2) & ChrW(183) & "a     Projektion af vektor b på vektor a"
 End Sub
 Sub Rib_FSvec6(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(471)
+    returnedVal = "(x-x" & ChrW(&H2080) & ")" & ChrW(&HB2) & "+(y-y" & ChrW(&H2080) & ")" & ChrW(&HB2) & "=r" & ChrW(&HB2) & "     Cirklens ligning"
 End Sub
 Sub Rib_FSvec7(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(472)
+    returnedVal = "(x,y,z)=(x" & ChrW(&H2080) & ",y" & ChrW(&H2080) & ",z" & ChrW(&H2080) & ")+t" & ChrW(183) & "(r" & ChrW(&H2081) & ",r" & ChrW(&H2082) & ",r" & ChrW(&H2083) & ")     parameterfremstilling for en linje"
 End Sub
 Sub Rib_FSvec8(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(473)
+    returnedVal = "cos(V)=a" & ChrW(183) & "b/(|a||b|)     Vinkel mellem vektorer"
 End Sub
 Sub Rib_FSvec9(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(474)
+    returnedVal = "b_a=a" & ChrW(183) & "b/|a|" & ChrW(&HB2) & "" & ChrW(183) & "a     Projektion af vektor b på vektor a"
 End Sub
 Sub Rib_FSvec10(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(475)
+    returnedVal = "dist(P,l)=|r x P" & ChrW(&H2080) & "P|/r     afstand fra punkt til linje"
 End Sub
 Sub Rib_FSvec11(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(476)
+    returnedVal = "n" & ChrW(183) & "(x-x" & ChrW(&H2080) & ",y-y" & ChrW(&H2080) & ",z-z" & ChrW(&H2080) & ")     ligning for plan"
 End Sub
 Sub Rib_FSvec12(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(477)
+    returnedVal = " a" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+b" & ChrW(183) & "(y-y" & ChrW(&H2080) & ")+c" & ChrW(183) & "(z-z" & ChrW(&H2080) & ")=0     ligning for plan"
 End Sub
 Sub Rib_FSvec13(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(478)
+    returnedVal = "dist(P," & ChrW(&H3B1) & ")=|n-(x" & ChrW(&H2081) & "-x" & ChrW(&H2080) & ",y" & ChrW(&H2081) & "-y" & ChrW(&H2080) & ",z" & ChrW(&H2081) & "-z" & ChrW(&H2080) & ")|/|n|     Afstand fra punkt til plan"
 End Sub
 Sub Rib_FSvec14(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(479)
+    returnedVal = "dist(P," & ChrW(&H3B1) & ")=|a" & ChrW(183) & "x" & ChrW(&H2081) & "+b" & ChrW(183) & "y" & ChrW(&H2081) & "+c" & ChrW(183) & "z" & ChrW(&H2081) & "+d)|/" & ChrW(&H221A) & "(a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "+c" & ChrW(&HB2) & ")     Afstand fra punkt til plan"
 End Sub
 Sub Rib_FSvec15(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(480)
+    returnedVal = "(x-x" & ChrW(&H2080) & ")" & ChrW(&HB2) & "+(y-y" & ChrW(&H2080) & ")" & ChrW(&HB2) & "+(z-z" & ChrW(&H2080) & ")" & ChrW(&HB2) & "=r" & ChrW(&HB2) & "     Kuglens ligning"
 End Sub
 
 Sub Rib_GetLabelMath(control As IRibbonControl, ByRef returnedVal As Variant)

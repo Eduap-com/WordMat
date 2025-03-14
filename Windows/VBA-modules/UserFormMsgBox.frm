@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 
 Public MsgBoxStyle As VbMsgBoxStyle
@@ -70,21 +71,21 @@ Private Sub Label_ok_Click()
     Me.hide
 End Sub
 
-Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_cancel.BackColor = LBColorPress
 End Sub
-Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_cancel.BackColor = LBColorHover
 End Sub
-Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_ok.BackColor = LBColorPress
 End Sub
-Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_ok.BackColor = LBColorHover
 End Sub
 
 
-Private Sub Label_prompt_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_prompt_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetButtonsInactive
 End Sub
 
@@ -92,7 +93,7 @@ Private Sub UserForm_Initialize()
     SetEscEvents Me.Controls
 End Sub
 
-Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetButtonsInactive
 End Sub
 
@@ -102,7 +103,7 @@ Sub SetButtonsInactive()
 End Sub
 
 Private Sub UserForm_Activate()
-    Dim h As Integer, w As Integer, Arr() As String, i As Integer, LC As Integer
+    Dim h As Integer, w As Integer, Arr() As String, i As Integer
     
 #If Mac Then
     prompt = Replace(prompt, vbCrLf, vbLf)

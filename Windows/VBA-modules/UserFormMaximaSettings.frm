@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 
 Private MustRestart As Boolean
@@ -68,67 +69,6 @@ Private Sub Label_cancel_Click()
     Me.hide
 End Sub
 
-Private Sub NulstilWordDoc(FilNavn As String)
-Dim appdir As String
-Dim fs As Object
-On Error GoTo Fejl
-    
-If MsgBox(Sprog.A(665) & ", " & FilNavn & " ," & Sprog.A(666), vbYesNo, Sprog.A(667)) = vbNo Then GoTo slut
-    
-#If Mac Then
-' cant
-'    FileCopy "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/" & filnavn, "~/Library/Containers/com.microsoft.Word/Data/WordMat/" & Replace(filnavn, "\", "/")
-#Else
-Set fs = CreateObject("Scripting.FileSystemObject")
-FilNavn = GetProgramFilesDir & "\WordMat\" & FilNavn
-appdir = Environ("AppData")
-If Dir(FilNavn) <> "" And appdir <> "" Then
-  fs.CopyFile FilNavn, appdir & "\WordMat\"
-  MsgBox Sprog.A(668) & " " & FilNavn & " " & Sprog.A(669), vbOKOnly, Sprog.A(670)
-Else
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Filen " & filnavn & " kunne ikke findes eller appdata mappen kunne ikke findes"
-End If
-#End If
-
-GoTo slut
-Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
-
-
-End Sub
-
-Private Sub CommandButton_annuller_Click()
-
-End Sub
-
-Private Sub CommandButton_nulstilfigurer_Click()
-
-NulstilWordDoc ("Figurer.docx")
-NulstilWordDoc ("Figurer_english.docx")
-NulstilWordDoc ("Figurer_spansk.docx")
-
-End Sub
-
-Private Sub CommandButton_nulstilfysik_Click()
-
-NulstilWordDoc ("Formulae\FysikFormler.docx")
-NulstilWordDoc ("Formulae\FysikFormler_spansk.docx")
-
-End Sub
-
-Private Sub CommandButton_nulstilkemiformler_Click()
-
-NulstilWordDoc ("Formulae\KemiFormler.docx")
-NulstilWordDoc ("Formulae\KemiFormler_spansk.docx")
-
-End Sub
-
-Private Sub CommandButton_nulstilmatformler_Click()
-NulstilWordDoc ("Formulae\MatFormler.docx")
-NulstilWordDoc ("Formulae\MatFormler_english.docx")
-NulstilWordDoc ("Formulae\MatFormler_spansk.docx")
-End Sub
 
 Private Sub CommandButton_ok_Click()
 On Error Resume Next
@@ -231,7 +171,6 @@ On Error Resume Next
     LmSet = OptionButton_lmset.Value
     ExcelIndlejret = CheckBox_indlejret.Value
     AllTrig = OptionButton_trigall.Value
-    AutoStart = CheckBox_autostart2.Value
     SettCheckForUpdate = CheckBox_checkupdate.Value
     MaximaIndex = OptionButton_indexvar.Value
     MaximaBigFloat = CheckBox_bigfloat.Value
@@ -263,6 +202,7 @@ On Error Resume Next
     
     UFMSettings.hide
     Sprog.CheckSetting
+    Sprog.LoadSprogArray
     RibbonSubs.RefreshRibbon
 '#If Mac Then
 '    If LangChange Then MsgBox Sprog.A(671)
@@ -302,7 +242,7 @@ On Error Resume Next
 #If Mac Then
     RunScript "OpenFinder", GetTempDir() & "/WordMat-backup"
 #Else
-    Shell "explorer.exe" & " " & GetDocumentsDir & "\WordMat-Backup", vbNormalFocus
+    MaxProc.OpenFolder GetDocumentsDir & "\WordMat-Backup"
 #End If
 End Sub
 
@@ -384,25 +324,25 @@ Private Sub Label_checkpartnerskab_Click()
     End If
 End Sub
 
-Private Sub Label3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label8_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label8_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
 End Sub
 
@@ -415,6 +355,9 @@ End Sub
 
 Private Sub UserForm_Activate()
     On Error Resume Next
+    
+    RunFirst
+    
     FillComboBoxCifre
     FillComboBoxDecType
     FillComboBoxLanguage
@@ -457,7 +400,6 @@ Private Sub UserForm_Activate()
     CheckBox_units.Value = MaximaUnits
     CheckBox_indlejret.Value = ExcelIndlejret
     TextBox_outunits.Text = OutUnits
-    CheckBox_autostart2.Value = AutoStart
     CheckBox_checkupdate.Value = SettCheckForUpdate
     CheckBox_bigfloat.Value = MaximaBigFloat
     CheckBox_showassum.Value = ShowAssum
@@ -714,7 +656,6 @@ Sub SetCaptions()
     FrameTrig.Caption = Sprog.TrigEquations
     OptionButton_trigall.Caption = Sprog.AllSolutions
     OptionButton_trigone.Caption = Sprog.OnlyOneSolution
-    CheckBox_autostart2.Caption = Sprog.AutoStart
     CheckBox_checkupdate.Caption = Sprog.AutoUpdate
     CommandButton_shortcuts.Caption = Sprog.GenerateShortcuts
     CommandButton_restartmaxima.Caption = Sprog.RestartWordMat
@@ -808,64 +749,64 @@ Private Sub Label_TAB7_Click()
     SetTabsInactive
     Label_TAB7.BackColor = LBColorTABPress
 End Sub
-Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_cancel.BackColor = LBColorPress
 End Sub
-Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_cancel.BackColor = LBColorHover
 End Sub
-Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_ok.BackColor = LBColorPress
 End Sub
-Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_ok.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_TAB1.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 0 Then Label_TAB1.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB2_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB2_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_TAB2.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB2_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB2_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 1 Then Label_TAB2.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB3_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB3_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_TAB3.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 2 Then Label_TAB3.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB4_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB4_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_TAB4.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 3 Then Label_TAB4.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB5_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB5_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_TAB5.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 4 Then Label_TAB5.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB6_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB6_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_TAB6.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 5 Then Label_TAB6.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB7_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB7_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_TAB7.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_TAB7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorHover
 End Sub
@@ -874,7 +815,7 @@ Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
     MsgBox KeyCode
 End Sub
 
-Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
     SetTabsInactive

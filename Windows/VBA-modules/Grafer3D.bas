@@ -29,7 +29,6 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     omax.ReadSelection
     
     
-    
         ' indsæt de markerede funktioner
     For i = 0 To omax.KommandoArrayLength
         Udtryk = omax.KommandoArray(i)

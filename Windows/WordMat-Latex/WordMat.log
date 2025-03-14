@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.7.24)  28 FEB 2025 13:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.7.24)  12 MAR 2025 10:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -581,21 +581,11 @@ Overfull \hbox (146.28387pt too wide) in paragraph at lines 111--112
 ??????????????$ 
  []
 
-! Misplaced alignment tab character &.
-l.118 "K" &
-            VBA.ChrW(8345)
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
 [5]
 ! Missing \endgroup inserted.
 <inserted text> 
                 \endgroup 
-l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+l.157 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -606,7 +596,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+l.157 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -617,7 +607,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+l.157 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -628,7 +618,7 @@ my insertion and my current dilemma will both disappear.
 ! Display math should end with $$.
 <to be read again> 
                    \endgroup 
-l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+l.157 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 The `$' that I just saw supposedly matches a previous `$$'.
 So I shall assume that you typed `$$' both times.
@@ -636,7 +626,7 @@ So I shall assume that you typed `$$' both times.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+l.157 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -644,7 +634,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 \frac  #1#2->{\begingroup #1\endgroup \@@over #2}
                                                  
-l.160 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
+l.157 ...se\cdot 1-\left(\frac{1+r\right)^{-n}}{r}
                                                   \end{equation*}
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -659,7 +649,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
+l.157 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
                                                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -668,7 +658,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
+l.157 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
                                                   
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -679,7 +669,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
+l.157 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
                                                   
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -690,7 +680,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
+l.157 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
                                                   
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -701,93 +691,49 @@ my insertion and my current dilemma will both disappear.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.160 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
+l.157 ...(\frac{1+r\right)^{-n}}{r}\end{equation*}
                                                   
 Things are pretty mixed up, but I think the worst is over.
 
-[6]
-! Missing } inserted.
-<inserted text> 
-                }
-l.192 ...  72<x\leq 150\end{matrix}\end{equation*}
-                                                  
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
 
-Runaway argument?
-{\begin {equation}Skriv ligningen her.\end {equation} 
-! Paragraph ended before \text@command was complete.
-<to be read again> 
-                   \par 
-l.201 }
-       
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
+Overfull \hbox (37.20268pt too wide) detected at line 173
+[][] []\OML/cmm/m/it/10.95 dx \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95 ^^@ [] \
+OT1/cmr/m/n/10.95 + [] + [] \OMS/cmsy/m/n/10.95 ^^@ [] \OT1/cmr/m/n/10.95 + [] 
+\OMS/cmsy/m/n/10.95 ^^@ []
+ []
 
-! Too many }'s.
-<recently read> \egroup 
-                        
-l.201 }
-       
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-Runaway argument?
-{ 
-! Paragraph ended before \text@command was complete.
-<to be read again> 
-                   \par 
-l.205 }
-       
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
-
-! Too many }'s.
-<recently read> \egroup 
-                        
-l.205 }
-       
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-[7] (C:\GitHub\WordMat\Windows\WordMat-Latex\WordMat.aux) ) 
+[6] [7] (C:\GitHub\WordMat\Windows\WordMat-Latex\WordMat.aux) ) 
 Here is how much of TeX's memory you used:
  3074 strings out of 476331
  50232 string characters out of 5787765
- 1860660 words of memory out of 5000000
+ 1861660 words of memory out of 5000000
  23507 multiletter control sequences out of 15000+600000
  524194 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,15n,62p,465b,195s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\mikae\App
-Data\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcbi1095.pk> <C:\Users\mik
-ae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1095.pk> <C:\Use
-rs\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk> <
-C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095
-.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ec
-rm1095.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi
-600\ecbx1440.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/
-ec/dpi600\ecrm1200.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jkn
-appen/ec/dpi600\ecrm1728.pk><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/mikae/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/mikae/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/mikae/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/mikae/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/
-mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:
-/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmsy6.pfb><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmsy8.pfb>
+ <C:\Users\mikae
+\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcbi1095.pk> <C:\Users
+\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1095.pk> <C:
+\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.p
+k> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti
+1095.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
+0\ecrm1095.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+/dpi600\ecbx1440.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\ecrm1200.pk> <C:\Users\mikae\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecrm1728.pk><C:/Users/mikae/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/mikae/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/mikae/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/mikae/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/mik
+ae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Us
+ers/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmsy6.pfb><C:/Users/mikae/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmsy8.pfb>
 Output written on C:\GitHub\WordMat\Windows\WordMat-Latex\WordMat.pdf (7 pages,
- 193277 bytes).
+ 181745 bytes).
 PDF statistics:
- 322 PDF objects out of 1000 (max. 8388607)
+ 311 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

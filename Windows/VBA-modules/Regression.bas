@@ -1,11 +1,5 @@
 Attribute VB_Name = "Regression"
 Option Explicit
-'Type regr
-'  a As Double
-'  b As Double
-'  c As Double
-'  r As Double
-'End Type
 
 Sub linregression()
 ' udføres fra menuen. Tabel skal være valgt
@@ -162,11 +156,6 @@ Sub InsertTabel()
             2, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
             wdAutoFitFixed
         With Selection.Tables(1)
-            '            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' på 2013 giver det ingen kanter
-            '        If .Style <> "Tabel - Gitter" And InStr(.Style, "Table") < 0 Then
-            '            On Error Resume Next
-            '            .Style = "Tabel - Gitter" ' duer ikke på udenlandsk
-            '        End If
 #If Mac Then
 #Else
             .ApplyStyleHeadingRows = True

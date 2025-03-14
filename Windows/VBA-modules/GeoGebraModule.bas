@@ -1,11 +1,5 @@
 Attribute VB_Name = "GeoGebraModule"
 Option Explicit
-' duer ikke med 64bit
-'#If VBA7 Then
-'Public Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As LongPtr)
-'#Else
-'Public Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
-'#End If
 
 Public GeoGebraDefs As String
 Public GeoGebraAssumes As String
@@ -27,7 +21,6 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
     Dim VektNArr As Variant, VNi As Integer
-    Dim UdtArr() As String
     VektNArr = Array("a", "b", "c", "v", "w")
 
     Dim ea As New ExpressionAnalyser
@@ -237,12 +230,12 @@ slut:
 End Sub
 
 Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax As Boolean = False, Optional UseDefs As Boolean = True)
-' Åbner GeoGebra i Edge.
-' Gtype="" til plotning. åbner i Calculator suite
-' Gtype="classic" til plotning. bruges af hældningsfelt
-' Gtype="CAS"  åbner GeoGebraCASapplet.html
-' Funktionen læser ikke noget i dokumentet. Preparemaxima skal være kørt inden, hvor definitioner findes, når UseDefs=true anvendes
-' cmd tilføjes i slutningen af url'en med ?command=       Definitioner tilføjes også til command
+' Opens GeoGebra in Edge.
+' Gtype="" for plotting. Opens in Calculator suite
+' Gtype="classic" for plotting. Used by haeldningsfelt
+' Gtype="CAS"  opens GeoGebraCASapplet.html
+' Function does not read in the document. Preparemaxima must be run prior, to find definitions, when UseDefs=true
+' cmd added to the end of url'en with ?command=       Definitions are also added to command
 
     Dim UrlLink As String, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
     Dim DefS As String, DN As String
@@ -309,7 +302,7 @@ Function GetGeoGebraMathAppsFolder() As String
 #If Mac Then
     GetGeoGebraMathAppsFolder = "/Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/"
 #Else
-    Dim DN As String, RK As String
+    Dim DN As String
     If InstallLocation = "All" Then
         DN = GetProgramFilesDir & "/WordMat/geogebra-math-apps/"
         If Dir(DN, vbDirectory) = vbNullString Then
@@ -780,7 +773,6 @@ Sub ReplaceSuperScriptNoAtPos(ByRef ea As ExpressionAnalyser, Pos As Integer)
     End If
 End Sub
 
-
 Sub ReplaceTrigSuperscript(ByRef ea As ExpressionAnalyser, Trig As String)
 ' erstatter fx sin & chrw(8289) & "^2" med "sin" & "^2" & chrw(8289)
 ' altså retter op på output fra converttowordsymols
@@ -805,7 +797,7 @@ Sub GeoGebra()
     On Error GoTo Fejl
     Dim geogebrasti As String
     Dim geogebrafilersti As String
-    Dim appnr As Long
+    Dim geogebracmd As String
     Dim UfWait As New UserFormWaitForMaxima
     Dim TempCas As Integer
     
@@ -834,7 +826,7 @@ Sub GeoGebra()
     
     UfWait.Label_progress.Caption = "******"
     If fileExists(geogebrafilersti) Then ' check om geogebrafilen er lavet
-        geogebrasti = geogebrasti & " """ & geogebrafilersti & """"
+        geogebracmd = geogebrasti & " """ & geogebrafilersti & """"
     Else
         MsgBox "The GeoGebra.ggb file cannot be located", vbOKOnly, Sprog.Error
         GoTo Fejl
@@ -843,10 +835,8 @@ Sub GeoGebra()
 #If Mac Then
     RunScript "OpenGeoGebra", geogebrafilersti
 #Else
-    appnr = Shell(geogebrasti, vbNormalFocus)   'vbNormalFocus vbMinimizedFocus ' til offline installer
+    MaxProc.RunFile geogebrasti, geogebrafilersti
 #End If
-' til webstart:
-'    appnr = Shell("javaws -system -open """ & geogebrafilersti & "geogebra.ggb""" & " https://www.geogebra.org/webstart/geogebra.jnlp", vbNormalFocus)    'vbNormalFocus vbMinimizedFocus
     
     UfWait.Label_progress.Caption = "*********"
     On Error Resume Next
@@ -886,34 +876,6 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
 #Else ' win
 
     If UserFormGeoGebra.ReturnVal = 1 Then
-' dette virker til at downloade installationsfilen, men efter understøttelse af både 5 og 6. Faldt valget på at brugeren selv tilgår download-siden.
-'        Set UfWait = New UserFormWaitForMaxima
-'        UfWait.Label_tip.Font.Size = 10
-'        UfWait.Label_tip.Font.Italic = False
-'        UfWait.Show vbModeless
-'        UfWait.Label_tip.Caption = "Downloader GeoGebra 5"
-'        UfWait.Label_progress.Caption = "*"
-'        '    DownloadFile "https://download.geogebra.org/package/win"
-'        OpenLink "https://download.geogebra.org/package/win" ' åbning af dette link starter automatisk download af den rigtige fil
-'
-'        DDir = GetDownloadsFolder
-'        Do While i < 12
-'            Sleep2 1
-'            FN = Dir(DDir & "\GeoGebra-Windows-Installer-5*.exe")
-'            If FN <> "" Then Exit Do
-'            UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
-'            i = i + 1
-'        Loop
-'        UfWait.Hide
-'        If i < 12 Then
-'            If Not RunApplication(DDir & "\" & FN) Then
-'                MsgBox "The GeoGebra installation file is now in the downloadsfolder. Go run it", vbOKOnly, "Run installer"
-'                shell "explorer.exe " & DDir, vbNormalFocus
-'            End If
-'        Else ' hvis der ikke er blevet hentet en fil, må brugeren selv hente
-'            MsgBox "The download page will now be shown. Download and install the 'GeoGebra Classic 5' version", vbOKOnly, "Download page"
-            OpenLink "https://www.geogebra.org/download"
-'        End If
     Else
         GeoGebraWeb
     End If
@@ -998,7 +960,7 @@ On Error GoTo Fejl
         End If
     End If
         
-    If GeoGebraPath = "" Then ' CAS Regnemaskine kan også tegnegrafer
+    If GeoGebraPath = "" Then ' CAS calculator can also plot grahs
         GeoGebraPath = Dir(Environ("USERPROFILE") & "\AppData\Local\GeoGebra_CAS\app-*", vbDirectory)
         DN = GeoGebraPath
         Do While GeoGebraPath <> ""
@@ -1012,7 +974,7 @@ On Error GoTo Fejl
         End If
     End If
     
-    ' se i program files for de lidt ældre programmer
+    ' look in program files for older installations
     
     If GeoGebraPath = "" Then
         GeoGebraPath = Dir(GetProgramFilesDir & "\GeoGebra 6*", vbDirectory)
@@ -1303,59 +1265,13 @@ Dim varval As String
     
     DefinerKonstanter = Var
 End Function
-Sub TestZipFile()
-
-'    DateiZippen "C:\TEMP\Example.xml", "C:\TEMP\Example.zip"
-    CreateZipFile "C:\WordMatGraf.zip", "C:\WordMatGraf.gif", "C:\WordMatGraf.jpg"
-
-End Sub
-
- 
 
 Sub CreateZipFile(zipfilnavn As Variant, FilNavn As Variant, Optional filnavn2 As Variant = "", Optional filnavn3 As Variant = "", Optional filnavn4 As Variant = "")
 #If Mac Then
     RunScript "ZipFile", zipfilnavn & ";" & FilNavn
 #Else
-'
-' s. https://www.rondebruin.nl/windowsxpzip.htm
-
-' Early binding, set reference to:
-'   Microsoft Shell Controls and automation (C:\WINNT\systems32\SHELL32.dll)
-        
-' a)
-    Dim oApp As Object 'Shell ' Early binding, late binding as in the example (Dim oApp As Object) didn't work. Fixed 16/4-2018. It works if the filename strings are defined as variants. zipfilnavn and filnavn
-    Dim objFolder As Variant
-'    Set oApp = New Shell
-    Set oApp = CreateObject("Shell.Application")
-    Dim i As Integer
-' or b)
-    
-    NewZip (zipfilnavn)
-    Set objFolder = oApp.Namespace(zipfilnavn)
-    
-    i = 1
-    objFolder.CopyHere FilNavn
-    If filnavn2 <> "" Then
-        objFolder.CopyHere filnavn2
-        i = i + 1
-    End If
-    If filnavn3 <> "" Then
-        objFolder.CopyHere filnavn3
-        i = i + 1
-    End If
-    If filnavn4 <> "" Then
-        objFolder.CopyHere filnavn4
-        i = i + 1
-    End If
-    
-    On Error Resume Next
-    
-    Do Until oApp.Namespace(zipfilnavn).Items.Count = i
-       Wait 1
-'        Sleep 1000 ' 64bit problemer
-    Loop
-    
-'    On Error GoTo 0
+    PrepareMaxima False
+    MaxProc.CreateZipFile zipfilnavn, FilNavn
 #End If
 GoTo slut
 Fejl:
@@ -1364,15 +1280,5 @@ slut:
 
 End Sub
  
-
-Sub NewZip(sPath)
-'Create empty Zip File
-'Changed by keepITcool Dec-12-2005
-    If Len(Dir(sPath)) > 0 Then Kill sPath
-    Open sPath For Output As #1
-    Print #1, Chr$(80) & Chr$(75) & Chr$(5) & Chr$(6) & String(18, 0)
-    Close #1
-End Sub
-
 
 

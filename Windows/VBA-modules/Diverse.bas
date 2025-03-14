@@ -4,45 +4,13 @@ Public TimeText As String
 Public cxl As CExcel
 Public ProgramFilesDir
 Public DocumentsDir
-Dim SaveTime As Single
-Dim BackupAnswer As Integer
 Private UserDir As String
 Private tmpdir As String
 #If Mac Then
-    Private m_tempDoc As Document
 #Else
 Private Declare PtrSafe Function InternetGetConnectedState Lib "wininet.dll" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 #End If
 
-'Declare Function LockWindowUpdate Lib "user32" (ByVal hWnd As Long) As Long
-
-'Private Declare Function FindWindow Lib "user32.dll" _
-'Alias "FindWindowA" ( _
-'ByVal lpClassName As String, _
-'ByVal lpWindowName As String) As Long
-
-'Sub LockWindow()
-''To turn it on just call it like this, passing it the hWnd of the window to lock.
-''Dim nHwnd As Long
-''MsgBox Application.ActiveDocument.Windows(1).Caption
-''nHwnd = FindWindow("OpusApp", Application.Caption)
-'nHwnd = FindWindow("OpusApp", Application.ActiveDocument.Windows(1).Caption)
-''nHwnd = FindWindow("OpusApp", "")
-''nHwnd = FindWindow("", Application.ActiveDocument.Windows(1).Caption)
-'LockWindowUpdate nHwnd
-'End Sub
-'Sub UnLockWindow()
-''To turn it off just call it and pass it a zero.
-'LockWindowUpdate 0
-'End Sub
-'Sub TestLock()
-'LockWindow
-'Wait (5)
-'UnLockWindow
-'End Sub
-Sub Tstmsg()
-    MsgBox2 "det er" & vbCrLf & "test" & vbCrLf & "test" & vbCrLf & "test" & vbCrLf & "test" & vbCrLf & "test" & vbCrLf & "test", vbOKCancel, "d"
-End Sub
 #If Mac Then
 #Else
 Sub UnitImageTest()
@@ -99,110 +67,6 @@ Function GetTempDir() As String
 #End If
 
 End Function
-Sub OpretTempdoc()
-' men kun hvis ikke eksisterer allerede
-'#If Mac Then
-'    Call tempDoc
-'#Else
-
-' indtil v1.30:
-
-'Dim D As Document
-'If tempDoc Is Nothing Then
-'For Each D In Application.Documents
-'    If D.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-'        Set tempDoc = D
-'        Exit For
-'    End If
-'Next
-'End If
-'
-'If tempDoc Is Nothing Then
-'    Set tempDoc = Documents.Add(, , , False)
-''    tempDoc.ActiveWindow.View.Draft = True ' giver måske en hastighedsforbedring, men har ikke kunnet måle det
-'    tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
-'End If
-'
-'If Not tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-'    tempDoc.Close SaveChanges:=wdDoNotSaveChanges
-'    Set tempDoc = Documents.Add(, , , False)
-'    tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
-'End If
-''#End If
-End Sub
-
-Sub LukTempDoc()
-'On Error GoTo slut
-'    tempDoc.Close False
-'    Set tempDoc = Nothing ' added v. 1.11
-'slut:
-End Sub
-
-'#If Mac Then ' fjernet 1.29 håndteres nu ens på mac og windows
-'Function tempDoc() As Document
-'    'Mac: User may have closed the document, so the variable tempDoc is now a function
-'    Dim farRight As Integer
-'    On Error Resume Next
-''    farRight = ScreenWidth - 1 ' just inside the screen hides most
-'    If Not m_tempDoc Is Nothing Then
-'        If Word.Application.IsObjectValid(m_tempDoc) Then
-''            If m_tempDoc.ActiveWindow.Left <> farRight Then m_tempDoc.ActiveWindow.Left = farRight
-'            Set tempDoc = m_tempDoc
-'            Exit Function
-'        Else
-'            Set m_tempDoc = Nothing
-'        End If
-'    End If
-'    Dim activeDoc As Document
-'    Set activeDoc = ActiveDocument
-'
-'' men kun hvis ikke eksisterer allerede
-'Dim d As Document
-'If m_tempDoc Is Nothing Then
-'For Each d In Application.Documents
-''    If d.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-'    If d.ActiveWindow.Caption = "WordMatTempDoc" Then
-'        Set m_tempDoc = d
-'        Exit For
-'    End If
-'Next
-'End If
-'
-'If m_tempDoc Is Nothing Then
-'    Set m_tempDoc = Documents.Add(, , , False)
-''    m_tempDoc.ActiveWindow.Left = farRight
-''    m_tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" ' på mac gav denne problemer. Der blev skiftet fokus til tempdoc nogle sekunder senere. Måske fordi den er meget langsom
-'    'Mac: Visible=False?
-'    m_tempDoc.ActiveWindow.Caption = "WordMatTempDoc"
-'
-'    m_tempDoc.Sections(1).Headers(wdHeaderFooterPrimary).Range.Text = Sprog.A(680) '"Do NOT edit this document or close or it. WordMat needs it for calculations. Anything you enter here will be deleted."
-'    'Note: Update 14.2.5 for Office 2011 allows document to be placed outside screen
-'    'm_tempDoc.ActiveWindow.WindowState = wdWindowStateMinimize
-'    m_tempDoc.Saved = True
-'End If
-'
-'' fjernet 26/1-17
-''If Not m_tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc" Then
-''    m_tempDoc.Close SaveChanges:=wdDoNotSaveChanges
-''    m_tempDoc.ActiveWindow.Left = farRight
-''    Set m_tempDoc = Documents.Add(, , , False)
-''    m_tempDoc.BuiltInDocumentProperties("Title") = "MMtempDoc"
-''
-''    'Mac: Visible=False?
-''    m_tempDoc.ActiveWindow.Caption = "WordMatTempDoc"
-''    'Note: Update 14.2.5 for Office 2011 allows document to be placed outside screen
-''    'm_tempDoc.ActiveWindow.WindowState = wdWindowStateMinimize
-''    m_tempDoc.Saved = True
-''End If
-'    'Mac:
-'    Set tempDoc = m_tempDoc
-'    If Not activeDoc Is Nothing Then activeDoc.Activate
-'End Function
-'Sub SetTempDocSaved()
-'    On Error Resume Next
-'    m_tempDoc.Saved = True
-'End Sub
-'#End If
 
 Sub ChangeAutoHyphen()
     Options.AutoFormatAsYouTypeReplaceFarEastDashes = False
@@ -246,15 +110,15 @@ Function GetProgramFilesDir() As String
     If ProgramFilesDir <> "" Then
         GetProgramFilesDir = ProgramFilesDir
     Else
-        GetProgramFilesDir = RegKeyRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir")
+        GetProgramFilesDir = RegKeyRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir")
         If Dir(GetProgramFilesDir & "\WordMat", vbDirectory) = "" Then
-            GetProgramFilesDir = RegKeyRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramW6432Dir")
+            GetProgramFilesDir = RegKeyRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramW6432Dir")
         End If
         If Dir(GetProgramFilesDir & "\WordMat", vbDirectory) = "" Then
             GetProgramFilesDir = Environ("ProgramFiles")
         End If
         If Dir(GetProgramFilesDir & "\WordMat", vbDirectory) = "" Then
-            GetProgramFilesDir = RegKeyRead("HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir (x86)")
+            GetProgramFilesDir = RegKeyRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir (x86)")
         End If
         ProgramFilesDir = GetProgramFilesDir
     End If
@@ -266,6 +130,7 @@ Fejl:
 slut:
     'MsgBox GetProgramFilesDir
 End Function
+
 Function GetDocumentsDir() As String
 On Error GoTo Fejl
   If DocumentsDir <> "" Then
@@ -274,7 +139,7 @@ On Error GoTo Fejl
 #If Mac Then
     GetDocumentsDir = MacScript("return POSIX path of (path to documents folder) as string")
 #Else
- GetDocumentsDir = RegKeyRead("HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal")
+ GetDocumentsDir = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal")
  If Dir(GetDocumentsDir, vbDirectory) = "" Then
      GetDocumentsDir = "c:\"
  End If
@@ -297,19 +162,20 @@ Function GetDownloadsFolder() As String
     GetDownloadsFolder = Replace(GetDownloadsFolder, "%USERPROFILE%", Environ$("USERPROFILE"))
 #End If
 End Function
-Function RegKeyRead(i_RegKey As String) As String
-'eks syntaks
-'"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir"
+Function RegKeyRead(i_RegKey As String) As Variant
+    'eks syntaks
+    '"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir"
 #If Mac Then
     RegKeyRead = GetSetting("com.wordmat", "defaults", i_RegKey)
 #Else
-Dim myWS As Object
-
-  On Error Resume Next
-  'access Windows scripting
-  Set myWS = CreateObject("WScript.Shell")
-  'read key from registry
-  RegKeyRead = myWS.RegRead(i_RegKey)
+    If MaxProc Is Nothing Then
+        Dim myWS As Object
+        On Error Resume Next
+        Set myWS = CreateObject("WScript.Shell")
+        RegKeyRead = myWS.RegRead(i_RegKey)
+    Else
+        RegKeyRead = MaxProc.RegKeyRead(i_RegKey)
+    End If
 #End If
 End Function
 
@@ -318,85 +184,62 @@ Function RegKeyExists(i_RegKey As String) As Boolean
     RegKeyExists = True
     If GetSetting("com.wordmat", "defaults", i_RegKey) = "" Then RegKeyExists = False
 #Else
-Dim myWS As Object
-
-  On Error GoTo ErrorHandler
-  'access Windows scripting
-  Set myWS = CreateObject("WScript.Shell")
-  'try to read the registry key
-  myWS.RegRead i_RegKey
-  'key was found
-  RegKeyExists = True
-  Exit Function
-
+    If MaxProc Is Nothing Then
+        Dim myWS As Object
+        On Error GoTo ErrorHandler
+        Set myWS = CreateObject("WScript.Shell")
+        myWS.RegRead i_RegKey
+        RegKeyExists = True
+        Exit Function
 ErrorHandler:
-  'key was not found
-  RegKeyExists = False
+        'key was not found
+        RegKeyExists = False
+    Else
+        RegKeyExists = MaxProc.RegKeyExists(i_RegKey)
+    End If
 #End If
 End Function
 
-'sets the registry key i_RegKey to the
-'value i_Value with type i_Type
-'if i_Type is omitted, the value will be saved as string
-'if i_RegKey wasn't found, a new registry key will be created
-Sub RegKeySave(ByVal i_RegKey As String, _
-               ByVal i_Value As String, _
-      Optional ByVal i_Type As String = "REG_SZ")
+Sub RegKeySave(ByVal i_RegKey As String, ByVal i_Value As String, Optional ByVal i_Type As String = "REG_SZ")
+    '
 #If Mac Then
     SaveSetting "com.wordmat", "defaults", i_RegKey, i_Value
 #Else
-Dim myWS As Object
-    On Error Resume Next
-  'access Windows scripting
-  Set myWS = CreateObject("WScript.Shell")
-  'write registry key
-  myWS.RegWrite i_RegKey, i_Value, i_Type
+    If MaxProc Is Nothing Then
+        Dim myWS As Object
+        On Error Resume Next
+        Set myWS = CreateObject("WScript.Shell")
+        myWS.RegWrite i_RegKey, i_Value, i_Type
+    Else
+        MaxProc.RegKeySave i_RegKey, i_Value 'i_value can be string or integer. can be saved to REG_SZ or REG_DWORD. If key does not exist REG_SZ type can be created, not DWORD
+    End If
 #End If
 End Sub
 
-'deletes i_RegKey from the registry
-'returns True if the deletion was successful,
-'and False if not (the key couldn't be found)
 Function RegKeyDelete(i_RegKey As String) As Boolean
 #If Mac Then
+    If MaxProc Is Nothing Then PrepareMaxima False
     DeleteSetting "com.wordmat", "defaults", i_RegKey
 #Else
-Dim myWS As Object
-
-  On Error GoTo ErrorHandler
-  'access Windows scripting
-  Set myWS = CreateObject("WScript.Shell")
-  'delete registry key
-    On Error Resume Next
-  myWS.RegDelete i_RegKey
-  'deletion was successful
-  RegKeyDelete = True
-  Exit Function
-
+    If MaxProc Is Nothing Then
+        Dim myWS As Object
+        On Error GoTo ErrorHandler
+        Set myWS = CreateObject("WScript.Shell")
+        On Error Resume Next
+        myWS.RegDelete i_RegKey
+        RegKeyDelete = True
+        Exit Function
 ErrorHandler:
-  'deletion wasn't successful
-  RegKeyDelete = False
+        RegKeyDelete = False
+    Else
+        MaxProc.RegKeyDelete i_RegKey
+    End If
 #End If
 End Function
 Sub TestLink()
     OpenLink "https://www.eduap.com"
 End Sub
-Sub TestLink2()
-' virker ikke, men det burde være sådan
-   ' ActiveDocument.FollowHyperlink Address:="file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html", Method:=msoMethodGet, NewWindow:=True, ExtraInfo:="command=f(x)=x"
-   'virker heller ikke5
-'    CreateObject("Shell.Application").Open "C:\Program Files (x86)\WordMat\geogebra-math-apps\GeoGebra\HTML5\5.0\GeoGebra.html"
-'    RunDefaultProgram "C:\Program Files (x86)\WordMat\geogebra-math-apps\GeoGebra\HTML5\5.0\GeoGebra.html?id=3"
-'    shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" ""file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x""", vbNormalFocus
-'    CreateObject("Shell.Application").Open CVar(GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe ""file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x""")
-'    CreateObject("Shell.Application").Open GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe 'file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x'"
-   Dim shellcmd As String
-'   shellcmd = "cmd /K ""C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"" ""file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x""" '/K holder cmd åben /C lukker
-   shellcmd = "cmd /S /K """"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"" ""file://C:\\Program Files (x86)\\WordMat\\geogebra-math-apps\\GeoGebra\\HTML5\\5.0\\GeoGebra.html?command=f(x)=x"""""
-'   shellcmd = "cmd /K C:\Program\\ Files\\ (x86)\Microsoft\Edge\Application\msedge.exe ""file://C:\Program Files (x86)/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html?command=f(x)=x""" '/K holder cmd åben /C lukker
-'    Debug.Print shellcmd
-'   shell shellcmd, vbNormalFocus
-End Sub
+
 Sub OpenLink(Link As String, Optional Script As Boolean = False)
 ' obs: Script er altid true på mac for at forhindre advarsel
 On Error Resume Next
@@ -411,8 +254,7 @@ On Error Resume Next
 #Else
 ' ActiveDocument.FollowHyperlink fjerner parametre som fx. ?command=...   Derfor kan det være nødvendigt at bruge script
     If Script Then
-        Shell """" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """", vbNormalFocus ' giver problemer med bitdefender
-'        shell "cmd /S /C """"" & GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe"" """ & Link & """""", vbNormalFocus ' Denne bliver ikke fanget ved install, men bitdefender blokerer den ved kørsel
+        MaxProc.RunFile GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe", """" & Link & """"
     Else
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' hvis linket ikke virker så sker der bare ingen ting
     End If
@@ -460,8 +302,7 @@ Sub InsertSletDef()
             End If
         End If
     End If
-            
-    
+
     Selection.OMaths.Add Range:=Selection.Range
     DoEvents
     On Error Resume Next
@@ -620,12 +461,6 @@ Loop While hopover
     s = Replace(s, VBA.ChrW(8289), "") ' funktionstegn  sin(x) bliver ellers til si*n(x). også problem med andre funktioner
     Selection.Text = s
     
-'    Dim ml As Integer
-'    ml = Len(ActiveDocument.Range.OMaths(matfeltno).Range.text)
-'    Selection.TypeText s
-'    ResPos2 = Selection.start
-'    ActiveDocument.Range.OMaths(ra.OMaths.Count).BuildUp
-'    ResPos2 = ResPos1 + Len(ActiveDocument.Range.OMaths(matfeltno).Range.text) - ml
 GoTo slut
 Fejl:
     ResIndex = 0
@@ -633,12 +468,6 @@ Fejl:
     ResPos2 = 0
     ResPos1 = 0
 slut:
-'    Selection.End = sslut ' slut skal være først eller går det galt
-'    Selection.start = start
-'    Call sr.Move(wdCharacter, Len(s))
-'    sr.Select
-'    ActiveDocument.Range(ResPos1, ResPos1).Select
-'    sr.Select
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 
@@ -654,7 +483,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     Dim Arr(20) As String
     Dim i As Integer
     
-    Do ' gå tilbage til nærmeste ligmed
+    Do ' go back to nearest equal sign
         posligmed = InStr(Text, "=")
         possumtegn = InStr(Text, VBA.ChrW(8721))
         posca = InStr(Text, VBA.ChrW(8776))
@@ -700,27 +529,6 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     
 End Function
 
-Function ReadEquationFast(Optional ir As Range) As String
-' Oversætter selection der er omath til streng
-    Dim sr As Range
-
-    Selection.OMaths(1).Range.Select
-    Set sr = Selection.Range
-    sr.OMaths.BuildUp
-    sr.OMaths.Linearize
-    sr.OMaths(1).ConvertToNormalText
-    
-    ReadEquationFast = sr.OMaths(1).Range.Text
-    
-    Selection.OMaths(1).ConvertToMathText
-    Selection.OMaths(1).Range.Select
-    Selection.OMaths.BuildUp
-    Selection.Collapse (wdCollapseEnd)
-
-    sr.Select
-    
-End Function
-
 Sub OpenFormulae(FilNavn As String)
 On Error GoTo Fejl
 #If Mac Then
@@ -744,20 +552,13 @@ Sub OpenWordFile(FilNavn As String)
 #Else
     Dim filnavn2 As String
     Dim appdir As String
-    Dim fs
     On Error GoTo Fejl
-    Set fs = CreateObject("Scripting.FileSystemObject")
     appdir = Environ("AppData")
     filnavn1 = appdir & "\WordMat\WordDocs\" & FilNavn
 
     If Dir(filnavn1) = vbNullString Then
         filnavn2 = GetProgramFilesDir & "\WordMat\WordDocs\" & FilNavn
 
-        If Dir(filnavn2) <> vbNullString Then
-            If Dir(appdir & "\WordMat\", vbDirectory) = vbNullString Then MkDir appdir & "\WordMat\"
-            If Dir(appdir & "\WordMat\WordDocs\", vbDirectory) = vbNullString Then MkDir appdir & "\WordMat\WordDocs\"
-            fs.CopyFile filnavn2, appdir & "\WordMat\WordDocs\"
-        End If
     End If
     
     If Dir(filnavn1) <> "" Then
@@ -902,87 +703,31 @@ Sub ToggleUnits()
         If MaxProc Is Nothing Then Exit Sub
 #End If
 chosunit:
-            OutUnits = InputBox(Sprog.A(167), Sprog.A(168), OutUnits)
-            If InStr(OutUnits, "/") > 0 Or InStr(OutUnits, "*") > 0 Or InStr(OutUnits, "^") > 0 Then
-                MsgBox2 Sprog.A(343), vbOKOnly, Sprog.Error
-                GoTo chosunit
-            End If
-            On Error Resume Next
-            TurnUnitsOn
-'            TurnUnitsOn
-'            MaxProc.OutUnits = omax.ConvertUnits(OutUnits)
-'            MaxProc.Units = 1
-'            MaxProc.CloseProcess
-'            MaxProc.StartMaximaProcess
+        OutUnits = InputBox(Sprog.A(167), Sprog.A(168), OutUnits)
+        If InStr(OutUnits, "/") > 0 Or InStr(OutUnits, "*") > 0 Or InStr(OutUnits, "^") > 0 Then
+            MsgBox2 Sprog.A(343), vbOKOnly, Sprog.Error
+            GoTo chosunit
         End If
-        RefreshRibbon
-'    UserFormQuick.Hide
-'    Unload ufq
-
+        On Error Resume Next
+        TurnUnitsOn
+    End If
+    RefreshRibbon
 End Sub
 
 Sub TurnUnitsOn()
-' det er nødvendigt at slette definitioner først da de ellers nemt får load(unit) til at fejle
-    
-On Error Resume Next
+    On Error Resume Next
     MaximaUnits = True
     Application.OMathAutoCorrect.Functions("min").Delete  ' ellers kan min ikke bruges som enhed
-    
-    Exit Sub ' resten er ikke nødv v. 1.23
-    '******************************
-#If Mac Then
-#Else
-    Exit Sub ' overtaget af maxprocunit
-#End If
-
-Dim Text As String
-    
-    MaxProc.Units = 1
-    Text = omax.KillDef
-    If Len(Text) > 0 Then
-         Text = Left(Text, Len(Text) - 1) 'fjern sidste komma
-         Text = "errcatch(kill(" & Text & "))"
-         omax.KillDef = ""
-    Else
-        Text = "" ' mærkeligt men len(text)=0 er ikke nødv ""
-    End If
-    
-'    MaxProc.ExecuteMaximaCommand text, 0
-'    MaxProc.OutUnits = omax.ConvertUnits(OutUnits)
-'     MaxProc.TurnUnitsOn text, ""
-'     MaxProc.TurnUnitsOn "", ""
-
-'Dim text As String
-   Text = "[" & Text & "load(WordMatUnitAddon)"
-'    text = "[" & text & "keepfloat:false,usersetunits:[N,J,W,Pa,C,V,F,Ohm,T,H,K],load(unit)"
-    If OutUnits <> "" Then
-        Text = Text & ",setunits(" & omax.ConvertUnits(OutUnits) & ")"
-    End If
-    Text = Text & "]$"
-    
-    MaxProc.ExecuteMaximaCommand Text, 0
-
-'            MaxProc.TurnUnitsOn
 End Sub
 Sub TurnUnitsOff()
-        MaximaUnits = False
+    MaximaUnits = False
 #If Mac Then
-        If Not MaxProc Is Nothing Then
-            MaxProc.Units = 0
-'            MaxProc.CloseProcess ' skal ikke køres efter v. 1.23
-'            MaxProc.StartMaximaProcess
-        End If
+    If Not MaxProc Is Nothing Then
+        MaxProc.Units = 0
+    End If
 #End If
-        On Error Resume Next
-        Application.OMathAutoCorrect.Functions.Add "min"
-
-End Sub
-Sub UpdateUnits()
-    Dim Text As String
-    Text = "setunits(" & omax.ConvertUnits(OutUnits) & ")$"
-    
-    MaxProc.ExecuteMaximaCommand Text, 0
-
+    On Error Resume Next
+    Application.OMathAutoCorrect.Functions.Add "min"
 End Sub
 Sub ToggleNum()
     Dim ufq As New UserFormExactNum
@@ -1006,130 +751,11 @@ Sub ToggleNum()
     
     On Error Resume Next
     WoMatRibbon.Invalidate
-    
 End Sub
-Sub CheckForUpdateOld()
-    Dim result As VbMsgBoxResult
-'    On Error GoTo Fejl
-#If Mac Then
-    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  eduap.com"
-    OpenLink "https://www.eduap.com/da/wordmat/"
-#Else
-    Dim nyversion As String, News As String
-    PrepareMaxima
-    nyversion = MaxProc.CheckForUpdate()
-    If nyversion = "" Then
-        MsgBox Sprog.A(112), vbOKOnly, Sprog.Error
-        Exit Sub
-    End If
 
-    If nyversion = AppVersion Then
-        MsgBox Sprog.A(344) & " " & AppNavn, vbOKOnly, Sprog.OK
-    Else
-        News = MaxProc.GetVersionNews()
-        result = MsgBox(Sprog.A(21) & News & vbCrLf & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
-        If result = vbYes Then
-            OpenLink "https://www.eduap.com/da/wordmat/"
-        End If
-    End If
-
-#End If
-GoTo slut
-Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
-End Sub
 Sub CheckForUpdate()
-'#If Mac Then
-'    CheckForUpdateF False
-'#Else
     CheckForUpdateWindows False
-'#End If
 End Sub
-'Sub CheckForUpdateF(Optional Silent As Boolean = False)
-'' Denne skulle virke på mac og windows via speciel webrequest klasse, men det giver fejl i dictionary klassen på mac.
-'    ' Create a WebClient for executing requests
-'    ' and set a base url that all requests will be appended to
-'    Dim p As Long, p2 As Long, p3 As Long, s As String, v As String, News As String
-'    Dim MapsClient As New WebClient
-''   On Error GoTo fejl
-''#If Mac Then
-''    MsgBox "Automatic update is not (yet) available on Mac" & vbCrLf & "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  eduap.com"
-''    OpenLink "https://eduap.com/wordmat/"
-''#Else
-'    Dim result As VbMsgBoxResult
-'    MapsClient.BaseUrl = "https://www.eduap.com/wordmat-version-history/"
-'
-'    ' Use GetJSON helper to execute simple request and work with response
-'    Dim Resource As String
-'    Dim Response As WebResponse
-'    Dim Request As New WebRequest
-'    '    Request.Resource = "index.html"
-'
-'    Request.Format = WebFormat.PlainText
-'
-'    Request.Method = WebMethod.HttpGet
-'    '    Request.ResponseFormat = PlainText
-'    '    Request.Method = WebMethod.HttpGet
-'    '    Request.Method = WebMethod.HttpPost
-''    Resource = "" '
-'    '    "directions/json?" & _
-'    '        "origin=" & Origin & _
-'    '        "&destination=" & Destination & _
-'    '        "&sensor=false"
-'
-'    '    Set Response = MapsClient.GetJson(Resource)
-'    Set Response = MapsClient.Execute(Request)
-'    ' => GET https://maps.../api/directions/json?origin=...&destination=...&sensor=false
-'    '    MsgBox Response.StatusCode & " - " & Response.StatusDescription
-'
-'    If Response.StatusCode = WebStatusCode.OK Or Response.StatusCode = 301 Then ' af ukendte årsager kommer der 301 fejl på mac, men det virker
-'        '        MsgBox Response.Content
-''        p = InStr(s, "Version history")
-'
-''        v = Trim(Mid(s, p + 16, 4))
-'        '        MsgBox Response.Content
-'        s = Response.Content
-'        p = InStr(s, "<body")
-'        p = InStr(p, s, "Version ")
-'        If p <= 0 Then GoTo fejl
-'        v = Trim(Mid(s, p + 8, 4))
-'        p2 = InStr(p + 10, s, "Version " & AppVersion)
-'        If p2 <= 0 Then p2 = InStr(p + 10, s, "Version")
-'        If p2 <= 0 Then p2 = p + 50
-''        p3 = InStr(p, s, "<p>")
-'        News = Mid(s, p, p2 - p)
-''        News = Replace(News, "- ", vbCrLf & "- ")
-'        News = Replace(News, "&#8211;", vbCr & " -") ' bindestreg
-'        News = Replace(News, "Version ", vbCrLf & "Version ") ' bindestreg
-'        News = Replace(News, "<br />", "")
-'        News = Replace(News, "<strong>", "")
-'        News = Replace(News, "</strong>", "")
-'        News = Replace(News, "<p>", "")
-'        News = Replace(News, "</p>", "")
-'        If v = AppVersion Then
-'            If Not Silent Then
-'                MsgBox Sprog.A(344) & " " & AppNavn, vbOKOnly, Sprog.OK
-'            End If
-'        Else
-'            result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
-'            If result = vbYes Then
-'                OpenLink "https://www.eduap.com/da/wordmat/"
-'            End If
-'        End If
-'    Else
-'        GoTo slut
-'    End If
-'
-'    If Response.StatusCode = WebStatusCode.OK Or Response.StatusCode = 301 Then
-'    End If
-'
-''#End If
-'    GoTo slut
-'fejl:
-'    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-'slut:
-'End Sub
 Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     ' selvom den hedder windows er det nu også mac
     On Error GoTo Fejl
@@ -1589,11 +1215,6 @@ End Sub
 Sub ToggleDebug()
     DebugWM = Not DebugWM
 End Sub
-Sub SwitchLanguage()
-    LanguageSetting = InputBox("angiv sprognr", "Sprog", "1")
-    Sprog.CheckSetting
-    RefreshRibbon
-End Sub
 
 Sub GenerateAutoCorrect()
 ' genererer matematisk autokorrektur
@@ -1604,27 +1225,8 @@ Sub GenerateAutoCorrect()
 End Sub
 
 Sub RestartWordMat()
-' genstart Maxima og genopretter doc1
-RestartMaxima
-LukTempDoc
-'tempDoc.Close (False)
-'Set tempDoc = Nothing
-OpretTempdoc
+    RestartMaxima
 End Sub
-
-Function Get2DVector(Text As String) As String
-    Dim ea As New ExpressionAnalyser
-'    Dim c As Collection
-    Dim m As CMatrix
-    ea.Text = Text
-    
-'    c = ea.GetAllMatrices()
-    For Each m In ea.GetAllMatrices()
-        
-        Get2DVector = Get2DVector & "vector(" & m
-    Next
-    
-End Function
 
 Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Dim t As Table, F As Field, ccut As Boolean
@@ -1885,10 +1487,8 @@ slut:
 End Sub
 
 Sub UpdateEquationNumbers()
-On Error GoTo Fejl
-
+    On Error GoTo Fejl
     ActiveDocument.Fields.Update
-    
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
@@ -1900,7 +1500,6 @@ Sub CreateSprogArrays()
 
 Dim startn As Integer, no As Integer, startDepth As Integer, endDepth As Integer
 Dim i As Integer, j As Integer, s As String
-'Dim obj As New DataObject
 
 startn = 181
 no = 19
@@ -1919,95 +1518,6 @@ Next
 Dim p As Long
 p = Selection.start
 Selection.Range.InsertAfter s
-'Selection.start = p
-'Selection.Cut
-'obj.PutInClipboard
-
-'Set obj = Nothing
-End Sub
-
-Sub SaveBackup()
-    On Error GoTo Fejl
-    Dim Path As String
-    Dim UFbackup As UserFormBackup
-    Dim UfWait As UserFormWaitForMaxima
-    Const lCancelled_c As Long = 0
-    Dim tempDoc2 As Document
-    
-    
-    If BackupType = 2 Or BackupAnswer = 2 Then
-        Exit Sub
-    ElseIf BackupType = 0 And BackupAnswer = 0 Then
-        Set UFbackup = New UserFormBackup
-        UFbackup.Show
-        '        If MsgBox(Sprog.A(179), vbYesNo, "Backup") = vbNo Then
-        If UFbackup.Backup = False Then
-            BackupAnswer = 2
-            Exit Sub
-        Else
-            BackupAnswer = 1
-        End If
-    End If
-        
-    If Timer - SaveTime < BackupTime * 60 Then Exit Sub
-    SaveTime = Timer
-    If ActiveDocument.Path = "" Then
-        MsgBox Sprog.A(679)
-        Exit Sub
-    End If
-    Set UfWait = New UserFormWaitForMaxima
-    UfWait.Show vbModeless
-    UfWait.Label_tip.Caption = "Saving backup" ' to " & VbCrLfMac & "documents\WordMat-Backup"
-    UfWait.Label_progress.Caption = "*"
-    DoEvents
-   
-    
-    '    Application.ScreenUpdating = False
-    If ActiveDocument.Saved = False Then ActiveDocument.Save
-    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
-    DoEvents
-    BackupNo = BackupNo + 1
-    If BackupNo > BackupMaxNo Then BackupNo = 1
-#If Mac Then
-    Path = GetTempDir & "WordMat-Backup/"
-#Else
-    Path = GetDocumentsDir & "\WordMat-Backup\"
-#End If
-    '    If Dir(path, vbDirectory) = "" Then MkDir path
-    If Not fileExists(Path) Then MkDir Path
-    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
-    DoEvents
-    Path = Path & "WordMatBackup" & BackupNo & ".docx"
-    If VBA.LenB(Path) = lCancelled_c Then Exit Sub
-    
-#If Mac Then
-    Set tempDoc2 = Application.Documents.Add(Template:=ActiveDocument.FullName, visible:=False)
-    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
-    DoEvents
-    tempDoc2.ActiveWindow.Left = 2000
-    tempDoc2.SaveAs Path
-    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
-    DoEvents
-    tempDoc2.Close
-#Else
-    Dim fso As Object
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    ActiveDocument.Save
-    fso.CopyFile ActiveDocument.FullName, Path
-    Set fso = Nothing
-    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
-    DoEvents
-    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
-    DoEvents
-#End If
-
-    GoTo slut
-Fejl:
-    MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
-slut:
-    On Error Resume Next
-    If Not UfWait Is Nothing Then Unload UfWait
-    Application.ScreenUpdating = True
 End Sub
 
 Sub OpenLatexTemplate()
@@ -2032,7 +1542,7 @@ MsgBox Sprog.A(681), vbOKOnly, ""
 #Else
     UserDir = Environ$("username")
     MsgBox "Open and delete this normal.dotm in this folder" & vbCrLf & "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates"
-'    shell "explorer.exe " & "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates", vbNormalFocus ' Bitdefender problems
+    MaxProc.OpenFolder "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates"
 #End If
 End Sub
 Sub DeleteKeyboardShortcutsInNormalDotm()
@@ -2075,76 +1585,12 @@ Sub DeleteKeyboardShortcutsInNormalDotm()
     CustomizationContext = GemT
 End Sub
 
-Function ReadTextfileToString(FilNavn As String) As String
-#If Mac Then
-   Dim filnr As Integer
-   filnr = FreeFile()
-   Open FilNavn For Input As filnr   ' Open file
-   ReadTextfileToString = Input$(LOF(1), 1)
-   Close #filnr
-   
-#Else
-   Dim fsT As Object
-   'On Error GoTo fejl
-
-   Set fsT = CreateObject("ADODB.Stream")
-   fsT.Type = 2 'Specify stream type - we want To save text/string data.
-   fsT.Charset = "iso-8859-1" 'Specify charset For the source text data. (Alternate: utf-8)
-   fsT.Open 'Open the stream
-   fsT.LoadFromFile FilNavn
-   ReadTextfileToString = fsT.ReadText()
-   fsT.Close
-   Set fsT = Nothing
-#End If
-
-   GoTo slut
-Fejl:
-   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
-slut:
-
-End Function
-
-Sub WriteTextfileToString(FilNavn As String, WriteText As String)
-#If Mac Then
-   Dim filnr As Integer
-   filnr = FreeFile()
-   Open FilNavn For Output As filnr   ' Open file for output.
-   
-   Print #filnr, WriteText  ' print skriver uden " "
-   Close #filnr    ' Close file.
-#Else
-   Dim fsT As Object
-   'On Error GoTo fejl
-
-   If FilNavn = "" Then GoTo slut
-   If WriteText = "" Then
-      If Dir(FilNavn) <> "" Then Kill FilNavn
-         GoTo slut
-   End If
-   Set fsT = CreateObject("ADODB.Stream")
-   fsT.Type = 2 'Specify stream type - we want To save text/string data.
-   fsT.Charset = "iso-8859-1" 'Specify charset For the source text data. utf-8
-   fsT.Open 'Open the stream And write binary data To the object
-   fsT.WriteText WriteText
-   fsT.SaveToFile FilNavn, 2 'Save binary data To disk
-   fsT.Close
-   Set fsT = Nothing
-#End If
-
-
-   GoTo slut
-Fejl:
-   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTexfilen"
-slut:
-
-End Sub
-
 Public Function Local_Document_Path(ByRef Doc As Document, Optional bPathOnly As Boolean = True) As String
 'returns local path or nothing if local path not found. Converts a onedrive path to local path
 #If Mac Then
    Local_Document_Path = Doc.Path
 #Else
-Dim i As Long, X As Long
+Dim i As Long, x As Long
 Dim OneDrivePath As String
 Dim ShortName As String
 Dim testWbkPath As String
@@ -2159,7 +1605,7 @@ If InStr(1, Doc.FullName, "https://", vbTextCompare) > 0 Then
         ShortName = Replace(Doc.FullName, "/", "\")
 
         'Remove the first four backslashes
-        For X = 1 To 4
+        For x = 1 To 4
             ShortName = RemoveTopFolderFromPath(ShortName)
         Next
         'Choose the version of Onedrive
@@ -2258,7 +1704,6 @@ Sub NewEquation()
     On Error GoTo Fejl
     On Error Resume Next
     
-    
     If Selection.OMaths.Count = 0 Then
         Set r = Selection.OMaths.Add(Selection.Range)
     ElseIf Selection.Tables.Count = 0 Then
@@ -2286,8 +1731,8 @@ slut:
 End Sub
 
 Function FormatDefinitions(DefS As String) As String
-' Tager en streng som kommer fra omax.definitions og laver den så pæn som mulig til visning i en textbox
-' Bruges til visning af gældende definitioner på flere Forms
+' Takes a string from omax.defintions and makes it as pretty as possible for showing in a textbox
+' used for showing present definitions on several forms
     DefS = " " & omax.ConvertToAscii(DefS)
     DefS = Replace(DefS, "$", VbCrLfMac & VbCrLfMac & " ")
     DefS = Replace(DefS, ":=", " = ")
@@ -2351,7 +1796,7 @@ Function FormatDefinitions(DefS As String) As String
     DefS = Replace(DefS, "AA", "Å")
         
     'græske bogstaver
-    DefS = Replace(DefS, "gamma", VBA.ChrW(915))    ' stort gammategn
+    DefS = Replace(DefS, "gamma", VBA.ChrW(915))    ' big gamma
     DefS = Replace(DefS, "Delta", VBA.ChrW(916))
     DefS = Replace(DefS, "delta", VBA.ChrW(948))
     DefS = Replace(DefS, "alpha", VBA.ChrW(945))
@@ -2382,7 +1827,7 @@ Function FormatDefinitions(DefS As String) As String
     DefS = Replace(DefS, "kappa", VBA.ChrW(954))
     DefS = Replace(DefS, "eta", VBA.ChrW(951))
     DefS = Replace(DefS, "zeta", VBA.ChrW(950))
-    DefS = Replace(DefS, "omega", VBA.ChrW(969))    ' lille omega
+    DefS = Replace(DefS, "omega", VBA.ChrW(969))    ' small omega
     
     DefS = Replace(DefS, "((x))", "(x)")
         
@@ -2396,9 +1841,9 @@ Function FormatDefinitions(DefS As String) As String
 End Function
 
 Function MsgBox2(prompt As String, Optional Buttons As VbMsgBoxStyle = vbOKCancel, Optional Title As String) As VbMsgBoxResult
-' erstatning for indbygget msgbox. Der bruger samme stil som resten af Userforms. Den tilpasser sig i størrelse.
-' Buttons understøttes: vbYesNo, vbOKonly, vbOKCancel
-' MsgBox2 "Dette er en lille test", vbOKOnly, "Hello"
+' Replacement for msgbox. This matches the UI of the other userforms. It can adapt in size.
+' Buttons supported: vbYesNo, vbOKonly, vbOKCancel
+' MsgBox2 "This is a test", vbOKOnly, "Hello"
 
     Dim UFMsgBox As New UserFormMsgBox
     
@@ -2424,3 +1869,9 @@ Sub TestError()
     Err.Raise 1, , "dsds"
 End Sub
 
+Sub TestSprog()
+    Dim tid As Double, n As Integer
+    tid = Timer
+    n = Sprog.SprogNr
+    MsgBox Timer - tid
+End Sub

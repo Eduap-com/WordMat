@@ -1,8 +1,8 @@
 Attribute VB_Name = "ModuleP"
 Option Private Module
 Option Explicit
-' Her kaldes funktioner, der kræves WordMat partnerskab
-' Application.run "Funktion"  kan error håndteres, overføre parametre og returnere værdier
+' Functions that require WordMat partnership
+' Application.run "Function" can handle error, parameters and return values
 
 Sub TestPP()
 
@@ -69,59 +69,3 @@ slut:
 
 End Function
 
-#If Mac Then
-#Else
-Public Function PGetMaxProc() As Object
-    Dim DllDir As String, RK As String
-    On Error GoTo slut
-    RK = GetReg("InstallLocation")
-    If RK = "All" Then
-        On Error Resume Next
-        DllDir = GetProgramFilesDir & "\WordMat\"
-        On Error GoTo slut
-        If Dir(DllDir & "MathMenu.dll") = vbNullString Then
-            DllDir = Environ("AppData") & "\WordMat\"
-        End If
-    Else
-        DllDir = Environ("AppData") & "\WordMat\"
-        If Dir(DllDir & "MathMenu.dll") = vbNullString Then
-            On Error Resume Next
-            DllDir = GetProgramFilesDir & "\WordMat\"
-            On Error GoTo 0
-        End If
-    End If
-    If Dir(DllDir & "MathMenu.dll") <> vbNullString Then
-        Set PGetMaxProc = GetObjectFromDll(DllDir, "MathMenu.dll", "MaximaProcessClass")
-    End If
-slut:
-End Function
-Public Function PGetWebView() As Object
-    Dim DllDir As String, CLRdllDir As String, RK As String, DllName As String
-    DllName = "WebViewWrap.dll"
-    On Error GoTo slut
-    
-    RK = GetReg("InstallLocation")
-    If RK = "All" Then
-        On Error Resume Next
-        CLRdllDir = GetProgramFilesDir & "\WordMat\"
-        DllDir = CLRdllDir & "WebViewWrap\"
-        On Error GoTo slut
-        If Dir(DllDir & DllName) = vbNullString Then
-            CLRdllDir = Environ("AppData") & "\WordMat\"
-            DllDir = CLRdllDir & "WebViewWrap\"
-        End If
-    Else
-        CLRdllDir = Environ("AppData") & "\WordMat\"
-        DllDir = CLRdllDir & "WebViewWrap\"
-        If Dir(DllDir & DllName) = vbNullString Then
-            On Error Resume Next
-            CLRdllDir = GetProgramFilesDir & "\WordMat\"
-            DllDir = CLRdllDir & "WebViewWrap\"
-            On Error GoTo slut
-        End If
-    End If
-    Set PGetWebView = GetObjectFromDll(DllDir, DllName, "WebViewWrap.Browser", CLRdllDir)
-slut:
-End Function
-
-#End If

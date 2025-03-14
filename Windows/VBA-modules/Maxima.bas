@@ -8,10 +8,15 @@ Public tid As Double
 Private DeVarList As String
 Private TempCas As Integer
 
-Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
+Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Boolean 'Optional Unit As Boolean = False
     '    Dim UFwait2 As UserFormWaitForMaxima
 
+    
     On Error GoTo Fejl
+
+    RunFirst
+    SetMaxProc
+    
     Dim op As Boolean
     If DebugWM Then
         UserFormDebug.Label_time.Caption = ""
@@ -23,7 +28,7 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
     
     SaveBackup
     
-'    Dim UfWait2 As UserFormWaitStartup
+    '    Dim UfWait2 As UserFormWaitStartup
     op = False
     If Not SettingsRead Then ReadAllSettingsFromRegistry
 
@@ -33,8 +38,8 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
         On Error Resume Next
         Application.Run macroname:="Popstart"
         On Error GoTo Fejl
-'        If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
-'        UfWait2.Show vbModeless
+        '        If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+        '        UfWait2.Show vbModeless
         op = True
 #If Mac Then
         Set D = ActiveDocument
@@ -44,43 +49,19 @@ Public Function PrepareMaxima() As Boolean 'Optional Unit As Boolean = False
         Set omax = New CMaxima
     End If
 
-    If MaxProc Is Nothing And CASengine = 0 Then
+    If Not MaxProc.IsMaximaStarted And CASengine = 0 Then
         If Not op Then
 #If Mac Then
             Set D = ActiveDocument
 #Else
-'            If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
- '           UfWait2.Show vbModeless
             op = True
 #End If
             DoEvents
         End If
         On Error Resume Next
-        
 #If Mac Then
 #Else
 getproc:
-        Err.Clear
-        Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
-        If Err.Number <> 0 Then
-            Err.Clear
-            If QActivePartnership(False, True) Then
-                If DllConnType = 0 Then
-                    If MsgBox2("Kan ikke forbinde til Maxima. Vil du anvende metoden 'dll direct' i stedet?" & VbCrLfMac & VbCrLfMac & "(Denne indstilling findes under avanceret i Indstillinger)", vbYesNo, Sprog.Error) = vbYes Then
-                        DllConnType = 1
-                        GoTo getproc
-                    End If
-                ElseIf DllConnType = 1 Then
-                    If MsgBox2("Kan ikke forbinde til Maxima. Vil du anvende metoden 'WSH' i stedet?" & VbCrLfMac & VbCrLfMac & "(Denne indstilling findes under avanceret i Indstillinger)", vbYesNo, Sprog.Error) = vbYes Then
-                        DllConnType = 2
-                    End If
-                Else ' wsh har ikke brug for
-                End If
-            Else
-                MsgBox2 Sprog.A(54), vbOKOnly, Sprog.Error
-            End If
-            GoTo slut
-        End If
         If DllConnType = 2 Then
             If SettCheckForUpdate Then CheckForUpdateSilent
             GoTo finish
@@ -108,8 +89,8 @@ getproc:
     If MaximaUnits Then
         If MaxProcUnit Is Nothing Then
             If Not op Then
-'                If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
-'                UfWait2.Show vbModeless
+                '                If UfWait2 Is Nothing Then Set UfWait2 = New UserFormWaitStartup
+                '                UfWait2.Show vbModeless
                 op = True
 #If Mac Then
                 Set D = ActiveDocument
@@ -132,13 +113,15 @@ getproc:
 #End If
 
 finish:
-    omax.ConvertLnLog = True ' andre funktioner kan ændre denne. den nulstilles
-    If Not omax.PrepareNewCommand Then    ' nulstiller og finder definitioner
-        GoTo Fejl
+    omax.ConvertLnLog = True ' other functions can change this setting. its reset.
+    If FindDefinitioner Then
+        If Not omax.PrepareNewCommand Then    ' resets and finds definitions
+            GoTo Fejl
+        End If
     End If
     On Error Resume Next
     If op Then
-'        Unload UfWait2
+        '        Unload UfWait2
 #If Mac Then
         D.Activate
 #End If
@@ -147,24 +130,25 @@ finish:
     GoTo slut
 Fejl:
     On Error Resume Next
-'    If Not UfWait2 Is Nothing Then Unload UfWait2
+    '    If Not UfWait2 Is Nothing Then Unload UfWait2
     PrepareMaxima = False
 slut:
     On Error Resume Next
-'    If Not UfWait2 Is Nothing Then Unload UfWait2
+    '    If Not UfWait2 Is Nothing Then Unload UfWait2
 End Function
+
 #If Mac Then
 Function GetMaxProc() As MaximaProcess
         Set GetMaxProc = New MaximaProcess
 End Function
 #Else
 Function GetMaxProc() As Object
-    If DllConnType = 0 Then
+'    If DllConnType = 0 Then
         Set GetMaxProc = CreateObject("MaximaProcessClass")
-    ElseIf DllConnType = 1 Then
-        Set GetMaxProc = PGetMaxProc()
-    End If
-    If Not GetMaxProc Is Nothing Then GetMaxProc.SetMaximaPath GetMaximaPath()
+'    ElseIf DllConnType = 1 Then
+'        Set GetMaxProc = PGetMaxProc()
+'    End If
+    DoEvents
 End Function
 #End If
 Sub WaitForMaximaUntil(Optional StopTime As Integer = 500)
@@ -197,10 +181,8 @@ Public Sub PrepareMaximaNoSplash()
     On Error GoTo slut
     If Not SettingsRead Then ReadAllSettingsFromRegistry
     If omax Is Nothing Then
-'        LavRCMenu    ' højreklikmenu på ligninger
         Set omax = New CMaxima
         If MaxProc Is Nothing Then
-            '        Set MaxProc = New MathMenu.MaximaProcessClass
             Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
                 On Error Resume Next
                 If Err.Number <> 0 Then
@@ -211,7 +193,6 @@ Public Sub PrepareMaximaNoSplash()
             MaxProc.Units = 0
             MaxProc.StartMaximaProcess
             If SettCheckForUpdate Then CheckForUpdateSilent
-            '            MsgBox "ok", vbOKOnly, ""
         End If
         
 #If Mac Then
@@ -233,7 +214,7 @@ Public Sub PrepareMaximaNoSplash()
 #End If
         
     End If
-    omax.PrepareNewCommand    ' nulstiller og finder definitioner
+    omax.PrepareNewCommand    ' resets and finds definitions
     '    WaitForMaximaUntil
 Fejl:
 slut:
@@ -250,7 +231,7 @@ Sub RestartMaxima()
     
     
     On Error Resume Next
-    Wait 1 ' der kan først oprettes en ny, når der er lukket
+    Wait 1 ' Old MaxProc must be closed, before new can be created
     Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
 
     If Err.Number <> 0 Then
@@ -281,7 +262,6 @@ Sub MaximaCommand()
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
 
-    '    Set UFWait = New UserFormWaitForMaxima
     PrepareMaxima
     omax.prevspr = ""
     If Not omax.MaximaInstalled Then GoTo slut
@@ -295,8 +275,6 @@ Sub MaximaCommand()
         omax.Kommando = Selection.Range.Text
         DontGoBack = True
     End If
-    
-    
     
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' kun se på felter med := defligmed og := symbol
         MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
@@ -337,7 +315,6 @@ slut:
 
 End Sub
 Sub MaximaSolveInequality(Optional variabel As String)
-' løser een ulighed
     On Error GoTo Fejl
     PrepareMaxima
     omax.prevspr = ""
@@ -488,7 +465,7 @@ Fejl:
     RestartMaxima
 slut:
     On Error Resume Next
-    Selection.End = sslut    ' slut skal være først eller går det galt
+    Selection.End = sslut    ' slut must be first
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 
@@ -3441,7 +3418,7 @@ Function AskSignFromForm(Udtryk As String) As Integer
 End Function
 
 Function ValiderVariable() As Boolean
-    Dim Arr() As String, i As Integer, s As String, ED As ErrorDefinition
+    Dim Arr() As String, i As Integer, ED As ErrorDefinition
 '    On Error Resume Next
     ValiderVariable = True
     If omax.AntalVars > 0 Then

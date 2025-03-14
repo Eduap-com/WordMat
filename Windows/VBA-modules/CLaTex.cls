@@ -236,181 +236,172 @@ Public Function FixedLatexPreamble2() As String
 End Function
 
 Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
-Dim filren As String, s As String
-On Error GoTo Fejl
+    Dim filren As String, s As String
+    On Error GoTo Fejl
 
-   UfWait.Label_tip.Caption = "Gemmer Tex-fil"
-LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
-filren = Split(FilNavn, ".")(0)
-On Error Resume Next
-s = Mappe & "\" & filren & ".log"
-If Dir(s) <> "" Then Kill Mappe & "\" & filren & ".*"
+    UfWait.Label_tip.Caption = "Gemmer Tex-fil"
+    LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
+    filren = Split(FilNavn, ".")(0)
+    On Error Resume Next
+    s = Mappe & "\" & filren & ".log"
+    If Dir(s) <> "" Then Kill Mappe & "\" & filren & ".*"
 
-On Error GoTo 0
+    On Error GoTo 0
 
-WriteTextfileToString Mappe & "\" & FilNavn, LaTexDoc
+    WriteTextfileToString Mappe & "\" & FilNavn, LaTexDoc
 
-GoTo slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
 slut:
 
 End Sub
 Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
-   ' skal ikke bruges. pdf er bedre. fx includegraphics skal have flere parametre med denne
-   Dim shellcmd As String
-   Dim appnr As Integer
-   Dim i As Integer, j As Integer
-   Dim mtpath As String
+    ' skal ikke bruges. pdf er bedre. fx includegraphics skal have flere parametre med denne
+    Dim i As Integer, j As Integer
+    Dim mtpath As String
 #If Mac Then
-   MsgBox Sprog.A(410), vbOKOnly, Sprog.Error
+    MsgBox Sprog.A(410), vbOKOnly, Sprog.Error
 #Else
-   Dim x64 As String
-   MikTexPath ' called to set miktex64bit
-   If MikTex64bit Then
-      x64 = "x64\"
-   End If
-   mtpath = MikTexPath
-   If mtpath = "" Then
-      MsgBox Sprog.A(409)
-      OpenLink "https://miktex.org"
-      GoTo slut
-   End If
+    Dim x64 As String
+    MikTexPath ' called to set miktex64bit
+    If MikTex64bit Then
+        x64 = "x64\"
+    End If
+    mtpath = MikTexPath
+    If mtpath = "" Then
+        MsgBox Sprog.A(409)
+        OpenLink "https://miktex.org"
+        GoTo slut
+    End If
 
-   SaveTex Mappe, FilNavn & ".tex"
+    SaveTex Mappe, FilNavn & ".tex"
 
-   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
-   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "latex.exe"" --output-directory=" & Mappe & " " & FilNavn & ".tex" '/K holder cmd åben /C lukker
-   ' x64 er for 64bit installtion af miktex
+    ' x64 er for 64bit installtion af miktex
 
-   For j = 0 To 1
-      On Error Resume Next
-      If Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Then Kill Mappe & "\" & FilNavn & ".dvi"
-      'Kill Mappe & "\" & filnavn & ".dvi"
-      On Error GoTo Fejl
+    For j = 0 To 1
+        On Error Resume Next
+        If Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Then Kill Mappe & "\" & FilNavn & ".dvi"
+        'Kill Mappe & "\" & filnavn & ".dvi"
+        On Error GoTo Fejl
 
-      appnr = Shell(shellcmd, vbNormalFocus) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
+        MaxProc.RunFile mtpath & "\bin\" & x64 & "pdflatex.exe", "--interaction=nonstopmode --output-directory=" & Mappe & " " & FilNavn & ".tex"
 
-      ' vent på maxima har genereret outputfil
-      i = 0
-      Do
-         i = i + 1
-         Wait (0.1)
-      Loop Until Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Or i > 80
-   Next
+        ' wait for outputfile
+        i = 0
+        Do
+            i = i + 1
+            Wait (0.1)
+        Loop Until Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Or i > 80
+    Next
 
-   Wait 1
-   If Dir(Mappe & "\" & FilNavn & ".dvi") > "" Then
-      RunDefaultProgram Mappe & "\" & FilNavn & ".dvi", Mappe
-   Else
-      MsgBox "Could not create dvi-file. The tex-file is now opening so you can identify the error", vbOKOnly, Sprog.Error
-      RunDefaultProgram FilNavn & ".tex", Mappe
-   End If
+    Wait 1
+    If Dir(Mappe & "\" & FilNavn & ".dvi") > "" Then
+        RunDefaultProgram Mappe & "\" & FilNavn & ".dvi", Mappe
+    Else
+        MsgBox "Could not create dvi-file. The tex-file is now opening so you can identify the error", vbOKOnly, Sprog.Error
+        RunDefaultProgram FilNavn & ".tex", Mappe
+    End If
 
-   'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
-   GoTo slut
+    'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
+    GoTo slut
 Fejl:
-   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 #End If
 End Sub
 
 Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
-   ' filnavn uden extension
-   Dim shellcmd As String
-   Dim p As Long, p2 As Long, ErrorS As String
-   Dim i As Integer, j As Integer
-   Dim mtpath As String, ReRun As Boolean
+    ' filnavn uden extension
+    Dim p As Long, p2 As Long, ErrorS As String
+    Dim i As Integer, j As Integer
+    Dim mtpath As String, ReRun As Boolean
    
-      On Error GoTo Fejl
-'      If right(Mappe, 1) <> "\" Or right(Mappe, 1) <> "/" Then
-'        Mappe = Mappe & "\"
-'      End If
+    On Error GoTo Fejl
+    '      If right(Mappe, 1) <> "\" Or right(Mappe, 1) <> "/" Then
+    '        Mappe = Mappe & "\"
+    '      End If
       
 #If Mac Then
-   MsgBox Sprog.A(410), vbOKOnly, Sprog.Error
+    MsgBox Sprog.A(410), vbOKOnly, Sprog.Error
 #Else
-   Dim x64 As String
+    Dim x64 As String
    
-   UfWait.Label_tip.Caption = "Gemmer pdf-fil"
+    UfWait.Label_tip.Caption = "Gemmer pdf-fil"
    
-   MikTexPath ' called to set miktex64bit
-   If MikTex64bit Then
-      x64 = "x64\"
-   End If
+    MikTexPath ' called to set miktex64bit
+    If MikTex64bit Then
+        x64 = "x64\"
+    End If
    
-   Set UfWait = New UserFormWaitForMaxima
+    Set UfWait = New UserFormWaitForMaxima
    
-   UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
-   mtpath = MikTexPath
-   If mtpath = "" Then
-      MsgBox Sprog.A(409), vbOKOnly
-      OpenLink "https://miktex.org"
-      GoTo slut
-   End If
+    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
+    mtpath = MikTexPath
+    If mtpath = "" Then
+        MsgBox Sprog.A(409), vbOKOnly
+        OpenLink "https://miktex.org"
+        GoTo slut
+    End If
 
-   SaveTex Mappe, FilNavn & ".tex"
+    SaveTex Mappe, FilNavn & ".tex"
    
-   'shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --output-directory=" & Mappe & " " & Mappe & "\" & filnavn '/K holder cmd åben /C lukker
-'   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --halt-on-error --output-directory=" & Mappe & " " & FilNavn & ".tex" '/K holder cmd åben /C lukker
-   shellcmd = "cmd /C """ & mtpath & "\bin\" & x64 & "pdflatex.exe"" --interaction=nonstopmode --output-directory=" & Mappe & " " & FilNavn & ".tex" '/K holder cmd åben /C lukker
-   Do
-      UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "**"
-      UfWait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
-      ReRun = False
-      On Error Resume Next
-      If Dir(Mappe & "\" & FilNavn & ".pdf") <> "" Then Kill Mappe & "\" & FilNavn & ".pdf"
-      If Dir(Mappe & "\" & FilNavn & ".log") <> "" Then Kill Mappe & "\" & FilNavn & ".log"
-      On Error GoTo 0 'Fejl
+    Do
+        UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "**"
+        UfWait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
+        ReRun = False
+        On Error Resume Next
+        If Dir(Mappe & "\" & FilNavn & ".pdf") <> "" Then Kill Mappe & "\" & FilNavn & ".pdf"
+        If Dir(Mappe & "\" & FilNavn & ".log") <> "" Then Kill Mappe & "\" & FilNavn & ".log"
+        On Error GoTo 0 'Fejl
 
-      Shell shellcmd, vbNormal
-      'appnr = Shell(shellcmd, vbNormal) 'vbhide vbNormalFocus vbMinimizedNoFocus vbhide
-      ' vent på maxima har genereret outputfil
-      i = 0
-      Do
-         i = i + 1
-         Wait (0.1)
-      Loop Until Dir(Mappe & "\" & FilNavn & ".log") > "" Or i > 80
-      Wait 1
-      If Dir(Mappe & "\" & FilNavn & ".log") > "" Then
-          Log = ReadTextFile(Mappe & "\" & FilNavn & ".log")
+        MaxProc.RunFile mtpath & "\bin\" & x64 & "pdflatex.exe", "--interaction=nonstopmode --output-directory=" & Mappe & " " & FilNavn & ".tex"
+        ' Wait for outputfile
+        i = 0
+        Do
+            i = i + 1
+            Wait (0.1)
+        Loop Until Dir(Mappe & "\" & FilNavn & ".log") > "" Or i > 80
+        Wait 1
+        If Dir(Mappe & "\" & FilNavn & ".log") > "" Then
+            Log = ReadTextFile(Mappe & "\" & FilNavn & ".log")
         Else
             Log = ""
             MsgBox2 "An error occured using pdflatex.exe", vbOKOnly, "Error"
             GoTo slut
-      End If
-      If InStr(Log, "Rerun to get cross-references right") > 0 Then ReRun = True
-      ErrorS = ""
-      p2 = 1
-      p2 = 1
-      p = InStr(p2, Log, "! ")
-      p2 = InStr(p + 1, Log, "Here is how much of TeX")
-      If p > 0 And p2 > p Then
-         ErrorS = ErrorS & Mid(Log, p, p2 - p) & vbCrLf
-      ElseIf p > 0 Then
-         ErrorS = ErrorS & Mid(Log, p, Len(Log) - p - 1) & vbCrLf
-      End If
-      j = j + 1
-   Loop While ReRun And j < 6
+        End If
+        If InStr(Log, "Rerun to get cross-references right") > 0 Then ReRun = True
+        ErrorS = ""
+        p2 = 1
+        p2 = 1
+        p = InStr(p2, Log, "! ")
+        p2 = InStr(p + 1, Log, "Here is how much of TeX")
+        If p > 0 And p2 > p Then
+            ErrorS = ErrorS & Mid(Log, p, p2 - p) & vbCrLf
+        ElseIf p > 0 Then
+            ErrorS = ErrorS & Mid(Log, p, Len(Log) - p - 1) & vbCrLf
+        End If
+        j = j + 1
+    Loop While ReRun And j < 6
    
-   If ErrorS <> "" Then
-      If MsgBox("The tex-document failed to compile with the following error:" & vbCrLf & vbCrLf & ErrorS & vbCrLf & vbCrLf & "Click OK to open the tex-file", vbOKCancel, Sprog.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
-   Else
-      Wait 1
-      If Dir(Mappe & "\" & FilNavn & ".pdf") > "" Then
-         RunDefaultProgram FilNavn & ".pdf", Mappe
-      Else
-         If MsgBox("Could not locate the pdf-file. Click OK to open the tex-file so you can identify the error", vbOKOnly, Sprog.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
-      End If
-      If Dir(Mappe & "\" & FilNavn & ".log") <> "" Then Kill Mappe & "\" & FilNavn & ".log"
-      If Dir(Mappe & "\" & FilNavn & ".aux") <> "" Then Kill Mappe & "\" & FilNavn & ".aux"
-      If Dir(Mappe & "\" & FilNavn & ".aux") <> "" Then Kill Mappe & "\" & FilNavn & ".toc"
+    If ErrorS <> "" Then
+        If MsgBox("The tex-document failed to compile with the following error:" & vbCrLf & vbCrLf & ErrorS & vbCrLf & vbCrLf & "Click OK to open the tex-file", vbOKCancel, Sprog.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
+    Else
+        Wait 1
+        If Dir(Mappe & "\" & FilNavn & ".pdf") > "" Then
+            RunDefaultProgram FilNavn & ".pdf", Mappe
+        Else
+            If MsgBox("Could not locate the pdf-file. Click OK to open the tex-file so you can identify the error", vbOKOnly, Sprog.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
+        End If
+        If Dir(Mappe & "\" & FilNavn & ".log") <> "" Then Kill Mappe & "\" & FilNavn & ".log"
+        If Dir(Mappe & "\" & FilNavn & ".aux") <> "" Then Kill Mappe & "\" & FilNavn & ".aux"
+        If Dir(Mappe & "\" & FilNavn & ".aux") <> "" Then Kill Mappe & "\" & FilNavn & ".toc"
       
-   End If
+    End If
 #End If
-   GoTo slut
+    GoTo slut
 Fejl:
-   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 

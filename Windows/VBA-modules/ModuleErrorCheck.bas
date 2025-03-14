@@ -170,7 +170,7 @@ Function GetErrorText(Text As String, MaximaOutput As String, Optional RemoveChr
 End Function
 Function ExtractText(ByVal Text As String, startText As String, endText As String, Optional endText2 As String) As String
     ' returns substring from Text between startText and EndText
-    Dim p As Long, p2 As Long
+    Dim p As Long
 
     If startText <> vbNullString Then
         p = InStr(Text, startText)

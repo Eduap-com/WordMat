@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Private gemx As Single
 Private gemy As Single
@@ -593,8 +594,6 @@ End If
 
 XLapp.Application.EnableEvents = False
 XLapp.Application.ScreenUpdating = False
-'excel.Application.EnableEvents = False
-'excel.Application.ScreenUpdating = False
 
     UFwait2.Label_progress = UFwait2.Label_progress & "*****"
 xmin = val(TextBox_xmin.Text)
@@ -641,27 +640,7 @@ Else
     ws.Range("A4").Value = "grad"
 End If
 
-'If TextBox_ligning1.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning1, 0)
-'If TextBox_ligning2.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning2, 1)
-'If TextBox_ligning3.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning3, 2)
-'If TextBox_ligning4.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning4, 3)
-'If TextBox_ligning5.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning5, 4)
-'If TextBox_ligning6.text <> "" Then Call InsertFormula(ws, wb, TextBox_ligning6, 5)
-
 On Error GoTo slut
-'If TextBox_ligning1.text <> "" Then Call SetLineStyle(ComboBox_ligning1, 1)
-'If TextBox_ligning2.text <> "" Then Call SetLineStyle(ComboBox_ligning2, 2)
-'If TextBox_ligning3.text <> "" Then Call SetLineStyle(ComboBox_ligning3, 3)
-'If TextBox_ligning4.text <> "" Then Call SetLineStyle(ComboBox_ligning4, 4)
-'If TextBox_ligning5.text <> "" Then Call SetLineStyle(ComboBox_ligning5, 5)
-'If TextBox_ligning6.text <> "" Then Call SetLineStyle(ComboBox_ligning6, 6)
-
-'ws.ChartObjects(1).SeriesCollection("f1").ChartType = xlXYScatterSmoothNoMarkers
-
-'ActiveChart.SeriesCollection("f1").Border.LineStyle = xlDashDotDot 'xlContinuous '
-
-'tb = ws.ChartObjects(1).Shapes.AddTextbox(msoTextOrientationHorizontal, 30.75, 11.25, 57.75, 21#)
-'tb.text = "hej"
 
     'datapunkter
     If TextBox_punkter.Text <> "" Then
@@ -710,13 +689,6 @@ XLapp.Application.ScreenUpdating = True
 slut2:
     Unload UFwait2
 
-'Excel.Application.ScreenUpdating = True
-
-'excel.ActiveSheet.ChartObjects(1).Copy
-'Selection.Collapse Direction:=wdCollapseStart
-'Selection.Paste
-'Selection.PasteSpecial DataType:=wdPasteOLEObject
-'Selection.PasteSpecial DataType:=wdPasteShape
 End Sub
 Sub SetLineStyle(CB As ComboBox, n As Integer)
 ' sætter linestyle efter hvad comboxen er sat til
@@ -765,11 +737,6 @@ If tb.Text <> "" Then
     Loop
     On Error Resume Next
     Do While varnavn <> ""
-'        If VBA.LCase(varnavn) = "c" Then
-'            varnavn = InputBox("Du har angivet et variabelnavn der ikke kan bruges i Excel. Angiv et andet.", "Fejl", varnavn)
-'            forskrift = Left(forskrift, ea.pos - 1) & varnavn & Right(forskrift, Len(forskrift) - ea.pos)
-'            ws.Range("b4").Offset(0, col).value = forskrift
-'        End If
 
         If varnavn <> "x" And Left(varnavn, 4) <> "matm" And Not (ea.IsFunction(varnavn)) Then
         Call ea.ReplaceVar(varnavn, "matm" & varnavn)
@@ -802,7 +769,6 @@ If tb.Text <> "" Then
     ' kopier formel ned
     ws.Activate
     ws.Range("B7").Offset(0, col).Select
-'    ws.Application.Selection.AutoFill Destination:=ws.Range("b7:b207").Offset(0, col), Type:=xlFillDefault
     ws.Application.Selection.AutoFill Destination:=ws.Range("b7:b207").Offset(0, col), Type:=0   'xlFillDefault=0
     
     ' fejl nogen steder?
@@ -966,8 +932,8 @@ Dim parx As String
 Dim pary As String
 Dim tmin As String
 Dim tmax As String
-Dim X As String
-Dim Y As String
+Dim x As String
+Dim y As String
 
 colindex = 0
 xming = ConvertNumberToMaxima(TextBox_xmin.Text)
@@ -1321,9 +1287,9 @@ If TextBox_markerpunkter.Text <> "" Then
 '        End If
         Arr2 = Split(Arr(i), ",")
         If UBound(Arr2) = 1 Then
-            X = Arr2(0)
-            Y = Arr2(1)
-            punkttekst = punkttekst & "points([[" & X & ",0],[" & X & "," & Y & "],[0," & Y & "]]),"
+            x = Arr2(0)
+            y = Arr2(1)
+            punkttekst = punkttekst & "points([[" & x & ",0],[" & x & "," & y & "],[0," & y & "]]),"
         End If
         End If
     Next
@@ -1450,7 +1416,7 @@ On Error GoTo Fejl
     Label_wait.Caption = Sprog.Wait & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
     InsertDefinitioner
     Text = GetDraw2Dtext(highres)
     If Len(TextBox_dfligning.Text) > 0 Then
@@ -1531,7 +1497,7 @@ slut:
 End Sub
 Private Sub GnuPlot()
 Dim Text As String
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
     InsertDefinitioner
 
     Text = GetDraw2Dtext()
@@ -1746,9 +1712,9 @@ Function ConvertDegreeToRad(Text As String, trigfunc As String) As String
 
 End Function
 
-Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
-    gemx = X
-    gemy = Y
+Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+    gemx = x
+    gemy = y
     If Len(etikettext) > 0 Then
         If Len(TextBox_labels.Text) > 0 Then
         TextBox_labels.Text = TextBox_labels.Text & VbCrLfMac
@@ -1756,7 +1722,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_labels.Text = TextBox_labels.Text & etikettext & ";" & ConvertPixelToCoordX(X) & ";" & ConvertPixelToCoordY(Y)
+        TextBox_labels.Text = TextBox_labels.Text & etikettext & ";" & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(y)
         etikettext = ""
         OpdaterGraf
         Me.Repaint
@@ -1769,7 +1735,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_punkter2.Text = TextBox_punkter2.Text & ConvertPixelToCoordX(X) & ";" & ConvertPixelToCoordY(Y)
+        TextBox_punkter2.Text = TextBox_punkter2.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(y)
         OpdaterGraf
         Me.Repaint
         End If
@@ -1780,7 +1746,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
             MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
         Else
-        TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & ConvertPixelToCoordX(X) & ";" & ConvertPixelToCoordY(Y)
+        TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & ConvertPixelToCoordX(x) & ";" & ConvertPixelToCoordY(y)
         nytmarkerpunkt = False
         OpdaterGraf
         Me.Repaint
@@ -1794,19 +1760,19 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
     End If
 End Sub
 
-Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
 On Error Resume Next
 'image1.Picture.Render(image1.Picture.Handle,0,0,600,600,image1.Picture.Width,image1.Picture.Height
 'hDC, 0, 0, ScaleWidth, ScaleHeight, 0, p.Height, p.Width, -p.Height, ByVal 0
     If Label_zoom.visible Then
     Label_zoom.Left = gemx + Image1.Left
     Label_zoom.Top = gemy + Image1.Top
-    Label_zoom.Width = X - gemx
-    Label_zoom.Height = Y - gemy
+    Label_zoom.Width = x - gemx
+    Label_zoom.Height = y - gemy
     End If
 End Sub
 
-Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
 Dim xmin As Single
 Dim xmax As Single
 Dim Ymin As Single
@@ -1814,7 +1780,7 @@ Dim Ymax As Single
 Dim s As String
 
 Label_zoom.visible = False
-If Abs(X - gemx) < 5 Then GoTo slut
+If Abs(x - gemx) < 5 Then GoTo slut
 
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
@@ -1822,10 +1788,10 @@ Ymin = ConvertStringToNumber(TextBox_ymin.Text)
 Ymax = ConvertStringToNumber(TextBox_ymax.Text)
 
 s = ConvertPixelToCoordX(gemx)
-TextBox_xmax.Text = ConvertPixelToCoordX(X)
+TextBox_xmax.Text = ConvertPixelToCoordX(x)
 TextBox_xmin.Text = s
 If TextBox_ymin.Text <> "" And TextBox_ymax.Text <> "" Then
-    s = ConvertPixelToCoordY(Y)
+    s = ConvertPixelToCoordY(y)
     TextBox_ymax.Text = ConvertPixelToCoordY(gemy)
     TextBox_ymin.Text = s
 End If
@@ -1873,23 +1839,23 @@ Fejl:
 slut:
     
 End Sub
-Function ConvertPixelToCoordX(X As Single) As Single
+Function ConvertPixelToCoordX(x As Single) As Single
 Dim xmin As Single, xmax As Single, cfakt As Single
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
 cfakt = (xmax - xmin) / (Image1.Width * 0.9)
-X = X - Image1.Width * 0.06
-ConvertPixelToCoordX = xmin + cfakt * X
+x = x - Image1.Width * 0.06
+ConvertPixelToCoordX = xmin + cfakt * x
 'MsgBox ConvertPixelToCoordX
 End Function
-Function ConvertPixelToCoordY(Y As Single) As Single
+Function ConvertPixelToCoordY(y As Single) As Single
 Dim Ymin As Single, Ymax As Single, cfakt As Single
 Ymin = ConvertStringToNumber(TextBox_ymin.Text)
 Ymax = ConvertStringToNumber(TextBox_ymax.Text)
 cfakt = (Ymax - Ymin) / (Image1.Height * 0.9)
-Y = Image1.Height - Y
-Y = Y - Image1.Height * 0.08
-ConvertPixelToCoordY = Ymin + cfakt * Y
+y = Image1.Height - y
+y = y - Image1.Height * 0.08
+ConvertPixelToCoordY = Ymin + cfakt * y
 End Function
 Private Sub CommandButton_zoom_Click()
 Dim dx As Single, dy As Single
@@ -2153,7 +2119,7 @@ Private Sub CommandButton_plotdf_Click()
 Dim pm As String
 Dim sl As String
     Label_vent.visible = True
-    omax.PrepareNewCommand finddef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
     InsertDefinitioner
     If Len(TextBox_skyd1k.Text) > 0 And Len(TextBox_skyd1f.Text) > 0 And Len(TextBox_skyd1t.Text) > 0 Then
         If Len(pm) > 0 Then pm = pm & ","
@@ -2310,25 +2276,25 @@ Private Sub SetCaptions()
     
 End Sub
 
-Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_cancel.BackColor = LBColorPress
 End Sub
-Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_cancel.BackColor = LBColorHover
 End Sub
-Private Sub Label_insertpic_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_insertpic_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_insertpic.BackColor = LBColorPress
 End Sub
-Private Sub Label_insertpic_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_insertpic_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_insertpic.BackColor = LBColorHover
 End Sub
-Private Sub Label_opdater_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_opdater_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_opdater.BackColor = LBColorPress
 End Sub
-Private Sub Label_opdater_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Label_opdater_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_opdater.BackColor = LBColorHover
 End Sub
-Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_insertpic.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
     Label_opdater.BackColor = LBColorInactive

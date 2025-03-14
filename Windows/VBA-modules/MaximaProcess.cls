@@ -20,7 +20,7 @@ Option Explicit
 
 'Private Declare PtrSafe Function InString Lib "Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal startpos As Integer, ByVal searchstring As String, ByVal findstring As String) As LongPtr
 'Private Declare PtrSafe Function CountInString Lib "Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/libMaximaConnection.dylib" (ByVal startpos As Integer, ByVal searchstring As String, ByVal findstring As String) As Integer
-Private Declare PtrSafe Function system Lib "/usr/lib/libc.dylib" (ByVal Command As String) As Long
+'Private Declare PtrSafe Function system Lib "/usr/lib/libc.dylib" (ByVal Command As String) As Long
 Private Declare PtrSafe Function Sleep Lib "/usr/lib/libc.dylib" Alias "sleep" (ByVal seconds As Long) As Long
 Private Declare PtrSafe Function uSleep Lib "/usr/lib/libc.dylib" Alias "usleep" (ByVal useconds As Long) As Long
 

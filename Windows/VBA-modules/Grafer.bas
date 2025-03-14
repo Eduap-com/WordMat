@@ -579,16 +579,15 @@ ReplaceIndepvarX = ea.Text
 End Function
 #If Mac Then
 Sub InsertChart()
-Dim dd As New DocData
-Dim ea As New ExpressionAnalyser
-Dim xmin As Double, xmax As Double
-Dim Arr As Variant
-Dim i As Integer
-Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String
-Dim srange As Range
-Dim ScriptDataPoints As String ' "1:2#3:4"
-Dim ScriptFunctions As String ' "2*x+1#3*t-1:t"
-Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
+    Dim dd As New DocData
+    Dim ea As New ExpressionAnalyser
+    Dim xmin As Double, xmax As Double
+    Dim Arr As Variant
+    Dim i As Integer
+    Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String
+    Dim srange As Range
+    Dim ScriptDataPoints As String ' "1:2#3:4"
+    Dim ScriptFunctions As String ' "2*x+1#3*t-1:t"
     ea.SetNormalBrackets
 
     Set srange = Selection.Range
@@ -626,7 +625,7 @@ Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
                     ea.Text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
-'                    If varnavn = "" And fktnavn = Y Then varnavn = X
+                    '                    If varnavn = "" And fktnavn = Y Then varnavn = X
                     If LHS = fktnavn & "(" & varnavn & ")" Then
                         ScriptFunctions = ScriptFunctions & RHS & ":" & varnavn & "#"
                     Else
@@ -636,7 +635,7 @@ Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
                 Else
                     Udtryk = ReplaceIndepvarX(Udtryk)
                     ScriptFunctions = ScriptFunctions & Udtryk & ":x" & "#"
-               End If
+                End If
             End If
         End If
     Next
@@ -684,8 +683,6 @@ ea.SetNormalBrackets
     sstart = Selection.start
     sslut = Selection.End
     Set srange = Selection.Range
-
-Application.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone
 
     dd.ReadSelection
 
@@ -819,30 +816,16 @@ slut:
 On Error GoTo slut2
     UFwait2.Label_progress = UFwait2.Label_progress & "**"
     xlap.Run ("Auto_open")
-xlap.Run ("UpDateAll")
-'
-UFwait2.Label_progress = UFwait2.Label_progress & "***"
+    xlap.Run ("UpDateAll")
 
-'If Not wb Is Nothing Then ' start på tabel sheet, ikke graph
-'    wb.Charts(1).Activate
-'End If
+    UFwait2.Label_progress = UFwait2.Label_progress & "***"
 
 slut2:
     On Error Resume Next
-'    excel.Application.EnableEvents = True
-'    excel.Application.ScreenUpdating = True
-'    excel.Application.DisplayAlerts = True
     Unload UFwait2
     xlap.EnableEvents = True
     xlap.ScreenUpdating = True
 
-'Excel.Application.ScreenUpdating = True
-
-'excel.ActiveSheet.ChartObjects(1).Copy
-'Selection.Collapse Direction:=wdCollapseStart
-'Selection.Paste
-'Selection.PasteSpecial DataType:=wdPasteOLEObject
-'Selection.PasteSpecial DataType:=wdPasteShape
 End Sub
 
 #End If
@@ -1028,10 +1011,6 @@ Function ConvertDrawLabel(Text As String) As String
     Text = Replace(Text, VBA.ChrW(951), "{/Symbol e}") 'eta
     Text = Replace(Text, VBA.ChrW(950), "{/Symbol z}") 'zeta
 
-
 ConvertDrawLabel = Text
 End Function
-
-
-
 

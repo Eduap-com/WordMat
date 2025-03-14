@@ -41,14 +41,13 @@ Public MaximaInputStrengSec As String    ' secondary inputstring to be run after
 Private matvekt As Boolean    ' sættes hvis der registreres matricer. Så aktiveres prik og krydsprodukt.
 Public matrixstartbracket As String
 Public matrixendbracket As String
-Private at As AutoTextEntry
 Public ConvertLnLog As Boolean    ' whether converttomaxima converts ln(x) -> log(x) and log(x)-> log(x)/log(10)
 Public prevspr As String    ' bruges til når Maxima spr. gentagne gange om det samme
 Public prevsvar As String
 Public MaximaSti As String
 
 Private Sub Class_Initialize()
-' Finder Maximastien. søger i Appdata og programfiles. Hvis der er Maxima begge steder så bruges nyeste version
+' Finds Maximapath. seeks in Appdata and programfiles. If Maxima exists both places then use newest version
 
     On Error Resume Next
     ConvertLnLog = True
@@ -71,17 +70,10 @@ Private Sub Class_Initialize()
 #End If
 
 slut:
-    OpretTempdoc
-    'If at Is Nothing Then ' giver fejl hvis køres i autoexec
-    '    Set at = NormalTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
-    'End If
 End Sub
-Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
+Public Function PrepareNewCommand(Optional FindDef As Boolean = True) As Boolean
     Dim DefS As String
     On Error Resume Next    ' der kommer fejl ved autoexec
-    '    If at Is Nothing Then    ' giver fejl hvis køres i autoexec så skal også prøves her . 19/2  bruges vel ikke mere
-    '        Set at = NormalTemplate.AutoTextEntries.Add(name:="WordMat", Range:=Selection.Range)
-    '    End If
     StopNow = False
     DefFejl = False
     DiffEqVar = vbNullString
@@ -105,7 +97,7 @@ Public Function PrepareNewCommand(Optional finddef As Boolean = True) As Boolean
     MaximaInputStrengSec = vbNullString
     ConvertErrorText = vbNullString
 
-    If finddef Then
+    If FindDef Then
         Definitions = False
         InsertKillDef
         DefS = FindDefinitions
@@ -630,7 +622,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
     ' for mac. Starts maxima, sends command, receives output. closes maxima
 #If Mac Then
 
-    Dim s As String, WT As String, p As Long, p2 As Long, Var As String
+    Dim s As String, WT As String, Var As String
     Dim Pos As Integer, pos2 As Integer, Assume As String, InputString As String
 
     '    Dim FN As String
@@ -717,140 +709,7 @@ start:
     '    Unload UfWait2
 #End If
 End Sub
-'Public Sub RunMaximaFileOld()
-'' starts maxima and sends inputfile. Then waits til Outputfile is generated.
-'    Dim maximasti As String
-'    Dim inputfil As String
-'    Dim outputfil As String
-'    Dim appnr As Integer
-'
-'    AntalKommandoer = AntalKommandoer + 2
-'    If Definitions Then AntalKommandoer = AntalKommandoer + 1
-'
-'    Dim shellcmd As String
-'    Dim i As Integer
-'
-'    'UserFormWaitForMaxima.sh
-'    shellcmd = "cmd /C " & maximasti & " < " & inputfil & " > " & outputfil   '/K holder cmd åben
-'    'shellcmd = "cmd /C " & maximasti & " maxima.bat < " & InputFil & " > " & OutputFil   '/K holder cmd åben
-'    'shellcmd = "cmd /C " & maximasti & " start /high ""maxima.bat < " & InputFil & " > " & OutputFil & """"   '/K holder cmd åben
-'    appnr = shell(shellcmd, vbHide)    'vbNormalFocus vbMinimizedNoFocus vbhide
-'
-'    ' vent på maxima har genereret outputfil
-'    i = 0
-'    Do
-'        i = i + 1
-'        Wait (0.1)
-'    Loop Until Dir(outputfil) > "" Or i > 80
-'
-'    FindCmdTask    ' find kommandoprompten mens der ventes alligevel
-'
-'    ' vent på outputfilen er skrevet færdig
-'ventmere:
-'    If WaitForMaxima(30) Then
-'        FindLastMaximaOutput
-'    Else
-'        FindLastMaximaOutput
-'        '    Dim result As VbMsgBoxResult
-'        '    result = MsgBox("Maxima tager meget lang tid om beregningen. Tryk Ok hvis du vil vente mere eller annuller for at afslutte Maxima.", vbOKCancel, "Langsom")
-'        '    If result = vbOK Then
-'        '        i = 0
-'        '        GoTo ventmere
-'        '    Else
-'        '        KommentarOutput = "Maxima tager meget lang tid om beregning. Maxima blev afsluttet"
-'        '        On Error Resume Next
-'        '    End If
-'        CloseCmd
-'
-'        '    MsgBox "Maxima tog meget lang tid om beregningen. Så den blev afsluttet inden den var færdig.", vbOKOnly, "Fejl"
-'    End If
-'
-'
-'    ' vent på maximakommandoprompt er lukket
-'    'Dim maximaopen As Boolean
-'    'maximaopen = False
-'    'Do
-'    'i = i + 1
-'    'Wait (0.1)
-'    'For Each task1 In Tasks
-'    ''    MsgBox task1.Name & " - " & task1.Application & " - " & task1.Creator
-'    '    maximaopen = False
-'    '    If InStr(task1.Name, "cmd.exe") > 0 Then '  And InStr(task1.Name, "Maxima") > 0
-'    '        MsgBox task1.Application & " - " & task1.Creator
-'    '        Set CmdTask = task1
-'    '        maximaopen = True
-'    '        Exit For
-'    '    Else
-'    '    End If
-'    'Next
-'    'Loop Until Not maximaopen Or i > 80
-'
-'End Sub
 
-'Public Function WaitForMaxima(t As Integer) As Boolean
-'' vent på outputfil er genereret færdig eller indtil der er gået t sekunder
-'' returnerer true hvis den er færdig
-'    Dim fillen As Integer
-'    Dim fillen2 As Integer
-'    Dim i As Integer
-'    Dim filtext As String
-'    Dim NoRuns As Integer
-'    Dim arr As Variant
-'    Dim MaximaInputStrengNonInteractive As String
-'    i = 0
-'    StopNow = False
-'    Do
-'        i = i + 1
-'        filtext = FilOutput
-'        fillen2 = fillen
-'        fillen = Len(filtext)
-'        Wait (0.1)    ' vent til beregnet
-'        If StopNow Then
-'            On Error Resume Next
-'            CloseCmd
-'            Exit Function
-'        End If
-'    Loop Until (fillen >= 297 And InStr(280, filtext, "(%i" & AntalKommandoer & ")") > 0) Or i > t * 10 Or fillen > 4000 Or InStr(279, filtext, "Incorrect syntax")  ' 301 er korteste mulige outputfil der er færdig
-'    'ekstra sikkerhed fjernet: fillen = fillen2 And
-'    'MsgBox Len(FilOutput)
-'
-'    If fillen > 4000 And NoRuns = 0 Then
-'        CloseCmd
-'        arr = Split(vars, ";")
-'        Dim decl As String
-'        decl = "declare(["
-'        decl = decl & Replace(vars, ";", ",")
-'        decl = decl & "],integer)"
-'
-'        decl = "[" & decl & ",assume_pos:true,load(noninteractive)]$"
-'        '    decl = decl & "[matchdeclare ([aa, bb, cc, dd], true),simp: false,tellsimpafter (if aa then bb else bb, bb),tellsimpafter (if aa then bb elseif cc then bb else bb, bb),tellsimpafter (if aa then bb elseif cc then dd else dd, if aa then bb else dd),tellsimpafter (if aa then bb elseif cc then bb else dd, if aa or cc then bb else dd),tellsimpafter ('if aa then bb else bb, bb),tellsimpafter ('if aa then bb elseif cc then bb else bb, bb),tellsimpafter ('if aa then bb elseif cc then dd else dd, 'if aa then bb else dd),tellsimpafter ('if aa then bb elseif cc then bb else dd, 'if aa or cc then bb else dd),simp: true]$"
-'        MaximaInputStrengNonInteractive = decl
-'
-'        AntalKommandoer = AntalKommandoer - 1
-'        WriteInputFile (False)
-'        WaitTilClosed
-'        '    Kill outputfil
-'        NoRuns = NoRuns + 1
-'        RunMaxima
-'    End If
-'
-'    If i > t * 10 Then
-'        WaitForMaxima = False
-'    Else
-'        WaitForMaxima = True
-'    End If
-'End Function
-'Public Sub CloseCmd()
-'    On Error GoTo slut
-'
-'    If Not CmdTask Is Nothing Then
-'        CmdTask.Close
-'    End If
-'    GoTo slut
-'Fejl:
-'    KillMaxima
-'slut:
-'End Sub
 
 Sub InsertKillDef()
     If Len(KillDef) > 0 Then
@@ -3177,16 +3036,15 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
         Text = Replace(Text, VBA.ChrW(176), "tgrader")    ' gradtegn
     End If
 
-    ' som test flyttes disse fra slutningen til starten
-    ' øæå ÆØ ' ændres ikke tilbagee
-    Text = Replace(Text, "æ", "ae")
-    Text = Replace(Text, "ø", "oe")
-    Text = Replace(Text, "å", "aa")
-    Text = Replace(Text, "Æ", "AE")
-    Text = Replace(Text, "Ø", "OE")
-    Text = Replace(Text, "Å", "AA")
+    ' not changed back
+    Text = Replace(Text, ChrW(230), "ae")
+    Text = Replace(Text, ChrW(248), "oe")
+    Text = Replace(Text, ChrW(229), "aa")
+    Text = Replace(Text, ChrW(198), "AE")
+    Text = Replace(Text, ChrW(216), "OE")
+    Text = Replace(Text, ChrW(197), "AA")
 
-    'græske bogstaver
+    'greek letters
     Text = Replace(Text, VBA.ChrW(916), "Delta")
     Text = Replace(Text, VBA.ChrW(948), "delta")
     Text = Replace(Text, VBA.ChrW(945), "alpha")
@@ -3217,7 +3075,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     Text = Replace(Text, VBA.ChrW(954), "kappa")
     Text = Replace(Text, VBA.ChrW(951), "eta")
     Text = Replace(Text, VBA.ChrW(950), "zeta")
-    Text = Replace(Text, VBA.ChrW(969), "omega")    ' lille omega
+    Text = Replace(Text, VBA.ChrW(969), "omega")    ' small omega
 
 
     ' _ symbol bliver til 1/2 eller tekst Symhalf afh. af kontekst. Symhalf hvis bogstavforan
@@ -3267,12 +3125,6 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
         matrixstartbracket = "["
         matrixendbracket = "]"
     End If
-
-    ' nu overflødig: virker ikke med (ab)\vec
-    '    text = Replace(text, VBA.ChrW(8407), "SymVecta") ' vektorpil
-    '    text = Replace(text, VBA.ChrW(8401), "SymVectb") ' vektorpil men ikke hel pil
-    '    text = Replace(text, VBA.ChrW(773), "SymVectc") ' matrixtegn
-    '    text = Replace(text, VBA.ChrW(175), "SymVectc") ' matrixtegn \overbar
 
     ' vektortegn til SymVecta
     ea.Text = Text
@@ -6451,7 +6303,7 @@ Sub ReadSelection()
     sstart = Selection.start
     sslut = Selection.End
     antal = Selection.OMaths.Count
-    Dim r As Range, sr As Range
+    Dim sr As Range
     '    With tempDoc
     '        .Content.Font.Name = "Tahoma"
     '        .SaveAs FileName:="Sample.doc"
@@ -6475,8 +6327,6 @@ genstart:
         If Kommando = "" And antalgenstart = 0 Then    ' forsøg på at rette sjældent problem hvor alt læses som "" måske skyldes det tempdoc
             '            tempDoc.Close (False)
             '            Set tempDoc = Nothing
-            LukTempDoc
-            OpretTempdoc
             antalgenstart = antalgenstart + 1
             GoTo genstart
         ElseIf Kommando = "" And antalgenstart = 1 Then
@@ -6508,7 +6358,6 @@ genstart:
 '            .OMaths.Linearize
 '        End With
 
-    Dim OM As OMath
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
@@ -6541,104 +6390,7 @@ slut:
     Selection.End = sslut
 
 End Sub
-'Function ReadEquation(Optional ir As Range) As String
-'    ' Oversætter selection der er omath til streng
-'    ' kan gøres hurtigere hvis der kopieres indenfor samme document, men virker ikke 100%
-'    ' Denne metode bruger autotextentries istedet for clipboard, og er måske hurtigere, men det er meget tvivlsomt.
-'    ' har dog oplevet at det giver problemer. Ligningssystem tan(30)=h/x og tan(25)=h/(x+34) på løsningen beregnes i enden. Det går helt galt, men virker når autotextentries ikke anvendes
-'
-'    Dim sr As Range, r As Range
-'    If ir Is Nothing Then
-'        Set ir = Selection.Range
-'    End If
-'
-'    Set sr = Selection.Range
-'    Set at = ActiveDocument.AttachedTemplate.AutoTextEntries.Add(Name:="WordMat", Range:=ir)
-'
-'    Set r = tempDoc.Range
-'    at.Insert r, True
-'
-'    With r
-'        .Font.Bold = False
-'        .OMaths.BuildUp
-'        .OMaths.Linearize
-'        .OMaths(1).ConvertToNormalText
-'    End With
-'
-'    ReadEquation = r.text
-'    r.Delete    ' dette afhjælper muligvis at word bliver langsom
-'
-'    sr.Select
-'
-'End Function
-'Function ReadEquationCopy(Optional ir As Range) As String
-'    ' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
-'    ' Oversætter selection der er omath til streng
-'    ' 22/8-2023 Har oplevet nogle win 11 computere, der fryser lige når selection.copy eksekveres. Det virker at skifte til readselectionold (men det er der også ulemper ved)
-'    Dim sr As Range, r As Range
-'
-'    Set sr = Selection.Range
-'
-'    ' dette for at undgå en meget mærkelig fejl, når bestemt udtryk var i slutningen af dokumentet
-'    ' "f_a (x)" placeret aller sidst fik ved EndCustomRecord, dokumentet til at 'virke tomt' man kunne ikke placere cursoren i det tomme dokument, men Word var ikke låst
-'    If sr.End >= ActiveDocument.End - 1 Then
-'        Selection.Collapse wdCollapseEnd
-'        Selection.TypeParagraph ' indsætter enter efter ligningen
-'        sr.Select
-'    End If
-'
-'    Dim OM As OMath
-'    Dim Oundo As UndoRecord
-'    Set Oundo = Application.UndoRecord
-'    Oundo.StartCustomRecord
-'    Set OM = Selection.OMaths(1)
-'    OM.Range.Font.Bold = False
-'    OM.BuildUp
-'    OM.Linearize
-'    OM.ConvertToNormalText
-'    ReadEquationCopy = OM.Range.text
-'    Oundo.EndCustomRecord
-'    ActiveDocument.Undo
-'    sr.Select
-'
-'
-'    Exit Function
-'    '  nedenfor v1.30 og før
-'
-'    On Error GoTo fejl
-'    '    Dim t As Variant
-'    '    t = Timer
-'    If ir Is Nothing Then
-'
-'    End If
-'
-'    '    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
-'    Set sr = Selection.Range
-'
-'    Selection.Copy
-'
-'    Set r = tempDoc.Range
-'    With r
-'        '        .Text = "x" ' for at undgå at næste linje med paste en sjælden gang giver fejl
-'        .Paste
-'        .Font.Bold = False
-'        .OMaths.BuildUp
-'        .OMaths.Linearize
-'        .OMaths(1).ConvertToNormalText
-'    End With
-'
-'    ReadEquationCopy = r.text
-'    sr.Select
-'
-'    r.Delete
-'    '    ClearClipboard
-'
-'    '    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
-'    '    MsgBox Timer - t
-'    GoTo slut
-'fejl:
-'slut:
-'End Function
+
 Function ReadEquation2(Optional ir As Range) As String
     Dim sr As Range
     Set sr = Selection.Range

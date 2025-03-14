@@ -13,6 +13,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Option Explicit
 Public Udtryk As String
 Public dispudtryk As String
@@ -225,7 +226,7 @@ Dim xmin As Single
 Dim xmax As Single
 Dim cfakt As Single
 Dim dx As Single
-Dim X As Single
+Dim x As Single
 Label_zoom.visible = False
 
 xmin = CSng(TextBox_xmin.Text)
@@ -234,10 +235,10 @@ dx = (xmax - xmin) * 0.3
 cfakt = (xmax - xmin) / (Image1.Width * 0.85)
 'MsgBox Image1.Picture.Width
 'MsgBox "xmax  -  " & xmax & "  xmin-  " & xmin & " gemx-" & gemx & "x-" & X & " cfakt " & cfakt & "cfakt*x" & cfakt * X
-X = gemx - Image1.Width * 0.1
+x = gemx - Image1.Width * 0.1
 gemx = gemx - Image1.Width * 0.1
-TextBox_xmin.Text = xmin + cfakt * X - dx
-TextBox_xmax.Text = xmin + cfakt * X + dx
+TextBox_xmin.Text = xmin + cfakt * x - dx
+TextBox_xmax.Text = xmin + cfakt * x + dx
 OpdaterGraf
 
     Me.Repaint
@@ -248,9 +249,9 @@ slut:
     
 End Sub
 
-Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
-    gemx = X
-    gemy = Y
+Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+    gemx = x
+    gemy = y
     Label_zoom.Left = gemx + Image1.Left
     Label_zoom.Top = gemy + Image1.Top
     Label_zoom.Width = 1
@@ -258,34 +259,34 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
     Label_zoom.visible = True
 End Sub
 
-Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Image1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
 On Error Resume Next
 'image1.Picture.Render(image1.Picture.Handle,0,0,600,600,image1.Picture.Width,image1.Picture.Height
 'hDC, 0, 0, ScaleWidth, ScaleHeight, 0, p.Height, p.Width, -p.Height, ByVal 0
     If Label_zoom.visible Then
     Label_zoom.Left = gemx + Image1.Left
     Label_zoom.Top = gemy + Image1.Top
-    Label_zoom.Width = X - gemx
-    Label_zoom.Height = Y - gemy
+    Label_zoom.Width = x - gemx
+    Label_zoom.Height = y - gemy
     End If
 End Sub
 
-Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
 Dim xmin As Single
 Dim xmax As Single
 Dim cfakt As Single
 
 Label_zoom.visible = False
-If Abs(X - gemx) < 5 Then GoTo slut
+If Abs(x - gemx) < 5 Then GoTo slut
 
 xmin = CSng(TextBox_xmin.Text)
 xmax = CSng(TextBox_xmax.Text)
 cfakt = (xmax - xmin) / (Image1.Width * 0.85)
 'MsgBox Image1.Picture.Width
 'MsgBox "xmax  -  " & xmax & "  xmin-  " & xmin & " gemx-" & gemx & "x-" & X & " cfakt " & cfakt & "cfakt*x" & cfakt * X
-X = X - Image1.Width * 0.1
+x = x - Image1.Width * 0.1
 gemx = gemx - Image1.Width * 0.1
-TextBox_xmax.Text = xmin + cfakt * X
+TextBox_xmax.Text = xmin + cfakt * x
 TextBox_xmin.Text = xmin + cfakt * gemx
 OpdaterGraf
 

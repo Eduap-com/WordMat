@@ -1,15 +1,13 @@
 Attribute VB_Name = "GlobalVariables"
 Option Explicit
 
-#Const AVsafe = False ' Compiler constant. AntiVirus safe. If true will not compile functions that could potentially be blocked by AntiVirus
-
 Public AppNavn As String
 
 Public Const AppVersion = "1.34"
 #If Mac Then ' WordMat shows patchVersion attached to AppVersion. if ".1" then shows as 1.24.1. or " beta" -> "1.24 beta" A new PatchVersion does not trigger autoupdate
-    Public Const PatchVersion = ".1" ' Mac  ".1"
+    Public Const PatchVersion = ".2" ' Mac  ".1"
 #Else
-    Public Const PatchVersion = ".1" ' Windows ".1"
+    Public Const PatchVersion = ".2" ' Windows ".1"
 #End If
 'Public DebugWM As Boolean = True
 Public DebugWM As Boolean ' brug toggledebug funktion
@@ -20,11 +18,6 @@ Public Const PI As Double = 3.14159265358979
 #Else
     Public Const VbCrLfMac = vbCrLf
 #End If
-
-'#If Mac Then
-'#Else
-'    Public tempDoc As Document ' dokument hvor ligning kopieres over og læses. På mac er der lavet en function . v.1.29 Mac kan nu håndteres som Windows
-'#End If
 
 'Public XLapp As Excel.Application
 Public XLapp As Object
@@ -76,7 +69,7 @@ Public ExcelVBAWarning As Integer
 
 Public colindex As Integer
 
-Public PicOpen As Boolean ' markerer at grafbillede er åbent så det skal overskrives
+Public PicOpen As Boolean ' marks a graphimage is open, It must then be overwritten
 Public Sprog As New CSprog
 
 Public latexfil As New CLaTex

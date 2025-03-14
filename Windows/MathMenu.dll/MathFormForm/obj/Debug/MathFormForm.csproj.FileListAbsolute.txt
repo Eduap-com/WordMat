@@ -21,3 +21,10 @@ C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio p
 C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\obj\Debug\MathFormForm.Form1.resources
 C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\obj\Debug\MathFormForm.Properties.Resources.resources
 C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathFormForm\obj\Debug\MathFormForm.csproj.GenerateResource.Cache
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathFormForm\obj\Debug\MathFormForm.csproj.AssemblyReference.cache
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathFormForm\obj\Debug\MathFormForm.Form1.resources
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathFormForm\obj\Debug\MathFormForm.Properties.Resources.resources
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathFormForm\obj\Debug\MathFormForm.csproj.GenerateResource.cache
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathFormForm\obj\Debug\MathFormForm.csproj.CoreCompileInputs.cache
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathFormForm\obj\Debug\MathFormForm.exe
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathFormForm\obj\Debug\MathFormForm.pdb

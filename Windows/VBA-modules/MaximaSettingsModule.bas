@@ -41,7 +41,6 @@ Private mlogout As Integer
 Private mexcelembed As Boolean
 Private malltrig As Boolean
 Private moutunits As String
-Private mautostart As Boolean
 Private mantalb As LongPtr
 Private mbigfloat As Boolean
 Private mIndex As Boolean
@@ -76,7 +75,6 @@ Private mDllConnType As Integer ' 0=reg dll  1=direct dll   2=wsh (only Maxima)
 Private mInstallLocation As String ' All AppData
 Private mDecOutType As Integer ' 1 =dec, 2=bet cif, 3=vidnot
 Private mUseVBACAS As Integer  ' 0 = not loaded  1=no  2=yes1
-Private mUseShellOnMac As Boolean ' for when applescripttask does not work
 Private mSettShortcutAltM As Integer
 Private mSettShortcutAltM2 As Integer
 Private mSettShortcutAltB As Integer
@@ -110,7 +108,6 @@ On Error Resume Next
     mexcelembed = CBool(GetRegSetting("ExcelEmbed"))
     malltrig = CBool(GetRegSetting("AllTrig"))
     moutunits = GetRegSettingString("OutUnits")
-    mautostart = CBool(GetRegSetting("AutoStart"))
     mbigfloat = CBool(GetRegSetting("BigFloat"))
     mantalb = GetRegSettingLong("AntalBeregninger")
     mIndex = CBool(GetRegSetting("Index"))
@@ -145,9 +142,6 @@ On Error Resume Next
     mInstallLocation = GetRegSetting("InstallLocation")
     mUseVBACAS = GetRegSetting("UseVBACAS")
     mDecOutType = CInt(GetRegSetting("DecOutType"))
-#If Mac Then
-    mUseShellOnMac = CBool(GetRegSetting("UseShellOnMac"))
-#End If
 
     mSettShortcutAltM = CInt(GetRegSetting("SettShortcutAltM"))
     mSettShortcutAltM2 = CInt(GetRegSetting("SettShortcutAltM2"))
@@ -195,7 +189,7 @@ End Sub
 Public Sub SetAllDefaultRegistrySettings()
 ' sætter alle indstillinger til default, men kun hvis de ikke eksisterer i forvejen
 On Error Resume Next
-    If Not RegKeyExists("HKCU\SOFTWARE\WORDMAT\Settings\Forklaring") Then
+    If Not RegKeyExists("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\Forklaring") Then
 '    If MsgBox("Indstillingerne kan ikke findes. Vil du genoprette og nulstille alle indstillinger?", vbOKCancel, Sprog.Error) Then
     MaximaForklaring = True
     MaximaKommando = False
@@ -211,7 +205,6 @@ On Error Resume Next
     ExcelIndlejret = False
     AllTrig = False
     OutUnits = ""
-    AutoStart = False
 '    Antalberegninger = 0 ' skal vel aldrig nulstilles
     SettCheckForUpdate = True
     MaximaIndex = False
@@ -261,7 +254,7 @@ On Error Resume Next
     
 '    End If
     End If
-    If Not RegKeyExists("HKCU\SOFTWARE\WORDMAT\Settings\BigFloat") Then
+    If Not RegKeyExists("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\BigFloat") Then
         mbigfloat = False
     End If
 
@@ -457,13 +450,6 @@ Public Property Let OutUnits(ByVal Text As String)
     Text = Replace(Text, "ev", "eV")
     SetRegSettingString "OutUnits", Text
     moutunits = Text
-End Property
-Public Property Get AutoStart() As Boolean
-    AutoStart = mautostart
-End Property
-Public Property Let AutoStart(xval As Boolean)
-    SetRegSetting "AutoStart", Abs(CInt(xval))
-    mautostart = xval
 End Property
 
 #If VBA7 Then
@@ -724,13 +710,6 @@ Public Property Let SettUseVBACAS(xval As Boolean)
     mUseVBACAS = Abs(CInt(xval) + 1)
     SetRegSetting "UseVBACAS", mUseVBACAS
 End Property
-Public Property Get UseShellOnMac() As Boolean
-    UseShellOnMac = mUseShellOnMac
-End Property
-Public Property Let UseShellOnMac(xval As Boolean)
-    SetRegSetting "UseShellOnMac", Abs(CInt(xval))
-    mUseShellOnMac = xval
-End Property
 Public Property Get SettShortcutAltM() As Integer
     If mSettShortcutAltM = 0 Then
         mSettShortcutAltM = CInt(GetRegSetting("SettShortcutAltM"))
@@ -904,12 +883,10 @@ End Property
 
 
 '------------------- registry functions --------------------
-Public Function GetReg(key As String) As String
-    GetReg = GetRegSettingString(key)
-End Function
+
 Public Function GetRegSetting(key As String) As Integer
     Dim s As String
-    s = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key)
+    s = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key)
     If s = vbNullString Then
         GetRegSetting = 0
     Else
@@ -918,29 +895,28 @@ Public Function GetRegSetting(key As String) As Integer
     End If
 End Function
 Private Sub SetRegSetting(ByVal key As String, ByVal val As Integer)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
+    RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
 
 #If VBA7 Then
 Public Sub SetRegSettingLong(key As String, val As LongPtr)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
+    RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
 Public Function GetRegSettingLong(key As String) As LongPtr
-    GetRegSettingLong = CLngPtr(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key))
+    GetRegSettingLong = CLngPtr(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
 End Function
 #Else
 Public Sub SetRegSettingLong(key As String, val As Long)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
+    RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
 Public Function GetRegSettingLong(key As String) As Long
-    GetRegSettingLong = CLng(RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key))
+    GetRegSettingLong = CLng(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
 End Function
 #End If
-
 Private Function GetRegSettingString(key As String) As String
-    GetRegSettingString = RegKeyRead("HKCU\SOFTWARE\WORDMAT\Settings\" & key)
+    GetRegSettingString = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key)
 End Function
 Private Sub SetRegSettingString(key As String, ByVal val As String)
-    RegKeySave "HKCU\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_SZ"
+    RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_SZ"
 End Sub
 

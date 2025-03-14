@@ -112,18 +112,7 @@ Fejl:
     RestartExcel
 slut:
 End Sub
-Public Sub Freeze()
-On Error Resume Next
-    XLapp.EnableEvents = False
-    XLapp.ScreenUpdating = False
-    XLapp.DisplayAlerts = False
-End Sub
-Public Sub UnFreeze()
-On Error Resume Next
-    XLapp.EnableEvents = True
-    XLapp.ScreenUpdating = True
-    XLapp.DisplayAlerts = True
-End Sub
+
 Function InsertIndlejret(FilNavn As String, Optional startark As String)
 'indsætter exceldokument som indlejret dokument
 Dim Path As String

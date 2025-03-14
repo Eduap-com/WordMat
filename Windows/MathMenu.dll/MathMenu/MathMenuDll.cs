@@ -6,20 +6,28 @@ using System.Data;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.IO.Compression;
 using System.Diagnostics;
 using System.Threading;
 using System.ComponentModel;
 using System.Collections;
+using System.Threading.Tasks;
+using System.Net;
+using System.Net.Http;
+using Microsoft.Win32;
+
+
 // Bemærk at visual studio skal køres som administrator ellers virker det ikke
 
 //namespace MathMenuLib  // giver vidst nok problemer med com
 //{
 
-    //interface som viser det som ses fra com i vba
-    public interface IMaximaConn
+//interface som viser det som ses fra com i vba
+public interface IMaximaConn
     {
         void StartMaximaProcess();
         void SetSettings();
+        void RunFile(string MaxSti, string Arguments);
         void SetMaximaPath(string MaxSti);
         void Reset(string extrakommando);
         void CloseProcess();
@@ -32,6 +40,12 @@ using System.Collections;
         string MaximaOutputArray(int nr);
         string CheckForUpdate();
         string GetVersionNews();
+        string RegKeyRead(string keyName);
+        void RegKeySave(string fullPath, object value);
+        bool RegKeyExists(string fullPath);
+        void RegKeyDelete(string fullPath);
+        void OpenFolder(string path);
+        void CreateZipFile(string zipPath, string filePath);
         string LastMaximaOutput
         {
             get;
@@ -60,14 +74,16 @@ using System.Collections;
         { get; set; }
         string OutUnits
         { get; set; }
+        bool IsMaximaStarted
+        { get; }
 
 
-    }/* end interface IMaximaConn */
+}/* end interface IMaximaConn */
 
 //    [GuidAttribute("CE99F51A-727A-11DF-B26D-D5FCDFD72085")]  // burde blive autogenereret men er måske ikke consistent så
 //    [ComVisible(true)] // ikke nødvendigt hvis sat i assemblyinfo
 //    [ProgId("MathMenuLib.MaximaConn")]
-    [ClassInterface(ClassInterfaceType.None)]   // AutoDispatch og AutoDual  er også muligt men giver problemer med nye versioner og virker kun med latebind
+[ClassInterface(ClassInterfaceType.None)]   // AutoDispatch og AutoDual  er også muligt men giver problemer med nye versioner og virker kun med latebind
     public class MaximaProcessClass : IMaximaConn
         {
             // Define static variables shared by class methods.
@@ -81,6 +97,7 @@ using System.Collections;
             private int numOutputLines = 0;
             private int KommandoNr = 0; //senest udførte kommandonr.
             private int mindex = 0; // index der angiver hvilket (%inr) der er i Maxima pt. 
+            private bool isMaximaStarted = false;
             private bool finish;
             private bool outputstarted; // sættes så snart der kommer det første output
             private bool outputstarted2; // sættes så snart sidste "(%onn" kommer i ouput
@@ -119,8 +136,130 @@ using System.Collections;
     {
         MaximaPath = MaxSti;
     }
-            
-            public void StartMaximaProcess()
+
+    public void RunFile(string filePath, string arguments = "")
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = filePath,
+            Arguments = arguments,
+            UseShellExecute = true
+        });
+    }
+
+    // a function to read a key from the regisry
+    public string RegKeyRead(string fullPath)
+    {
+        string value = "";
+        try
+        {
+            string keyName = Path.GetDirectoryName(fullPath);
+            string keyValue = Path.GetFileName(fullPath);
+            object regValue = Microsoft.Win32.Registry.GetValue(keyName, keyValue, null);
+            if (regValue != null)
+            {
+                value = regValue.ToString();
+            }
+            else
+            {
+                value = "";
+            }
+        }
+        catch
+        {
+            value = "";
+        }
+        return value;
+    }
+
+    // function to save a key to the registry
+    public void RegKeySave(string fullPath, object value)
+    {
+        try
+        {
+            string keyName = Path.GetDirectoryName(fullPath);
+            string keyValue = Path.GetFileName(fullPath);
+            if (value is int || value is string)
+            {
+                Microsoft.Win32.Registry.SetValue(keyName, keyValue, value);
+            }
+            else
+            {
+                throw new ArgumentException("Value must be either a string or an integer.");
+            }
+        }
+        catch
+        {
+            // do nothing
+        }
+    }
+
+    //function to delete a key from the registry
+    public void RegKeyDelete(string fullPath)
+    {
+        try
+        {
+            string keyName = Path.GetDirectoryName(fullPath);
+            string keyValue = Path.GetFileName(fullPath);
+            Microsoft.Win32.Registry.SetValue(keyName, keyValue, null);
+        }
+        catch
+        {
+            // do nothing
+        }
+    }
+
+    //function to check if a key exists in the registry
+    public bool RegKeyExists(string fullPath)
+    {
+        try
+        {
+            string keyName = Path.GetDirectoryName(fullPath);
+            string keyValue = Path.GetFileName(fullPath);
+            object regValue = Microsoft.Win32.Registry.GetValue(keyName, keyValue, null);
+            if (regValue != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    // A function that will open an explorer folder in the specied path
+    public void OpenFolder(string path)
+    {
+        Process.Start("explorer.exe", path);
+    }
+
+    // A function that will create a zipfile, containing only 1 file, in the specified path
+    public void CreateZipFile(string zipPath, string filePath)
+    {
+        using (FileStream zipToOpen = new FileStream(zipPath, FileMode.Create))
+        {
+            using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Create))
+            {
+                ZipArchiveEntry entry = archive.CreateEntry(Path.GetFileName(filePath));
+                using (FileStream fileToCompress = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    using (Stream entryStream = entry.Open())
+                    {
+                        fileToCompress.CopyTo(entryStream);
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    public void StartMaximaProcess()
             {
                 // Initialize the process and its StartInfo properties.
 
@@ -239,8 +378,8 @@ using System.Collections;
                     initialsetup.Append("]$");
 
                     ExecuteMaximaCommand(initialsetup.ToString(), 0); // settings der altid skal sættes
-//                    ExecuteMaximaCommand("solve(sin(x)=1/2,x);", 1); // for at hente vigtige funktioner ind, men har ikke rigtig nogen effekt
-                }
+            isMaximaStarted = true;
+        }
                 catch 
                 {
                     errCode = 2; // fejl ved kørsel af process  
@@ -1021,8 +1160,15 @@ using System.Collections;
                 }
             }
 
-            
-            public string MaximaInputArray(int nr)
+            public bool IsMaximaStarted
+            {
+                get
+                {
+                    return isMaximaStarted;
+                }
+            }
+
+    public string MaximaInputArray(int nr)
             {
                 if (nr < mindex)
                     return maximainput[nr];
@@ -1142,7 +1288,7 @@ using System.Collections;
                 clnt.Close();
                 return true;
             }
-            catch (System.Exception ex)
+            catch
             {
                 return false;
             }

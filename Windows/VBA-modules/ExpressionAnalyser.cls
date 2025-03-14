@@ -1457,42 +1457,6 @@ Sub RestoreBrackets()
     StartBracket = SaveStartBracket
     EndBracket = SaveEndBracket
 End Sub
-
-Function GetFirstMatrix() As CMatrix
-' finder næste matrix fra pos
-Dim p As Long
-Dim s As String
-Dim Arr As Variant
-Dim Arr2 As Variant
-Dim i As Long, j As Long
-Dim m As New CMatrix
-    
-    SetNormalBrackets
-    Text = Replace(Text, VBA.ChrW(9632), VBA.ChrW(9608))
-    p = InStr(Pos, Text, VBA.ChrW(9608)) ' vektor
-    s = GetNextBracketContent(p)
-    If Len(s) > 0 Then
-    Arr = Split(s, "@")
-    For i = 0 To UBound(Arr)
-        Arr2 = Split(Arr(i), "&")
-        For j = 0 To UBound(Arr2)
-            m.Element(i, j) = Arr2(j)
-        Next
-    Next
-    End If
-    Set GetFirstMatrix = m
-End Function
-Function GetAllMatrices() As Collection
-Dim m As CMatrix
-    Pos = 1
-    
-    m = GetFirstMatrix()
-    Do While Not m Is Nothing
-        GetAllMatrices.Add m
-        m = GetFirstMatrix()
-    Loop
-
-End Function
 Function IsSuperScriptNoC(c As Integer) As Boolean
 ' returnerer om tegn er hævet tal 0,1,2,3 eller hævet + - ( )
 ' Kan bruges som IsLetter(AscW("a"))

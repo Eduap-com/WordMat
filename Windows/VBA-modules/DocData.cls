@@ -14,10 +14,6 @@ Private mboxes() As String
 Private antalmboxes As Integer
 Public nrows As Integer
 Public ncolumns As Integer
-Private Sub Class_Initialize()
-    OpretTempdoc
-End Sub
-
 Public Function ReadSelection() As Boolean
     Dim cellval As String
     Dim r As Integer
@@ -193,21 +189,6 @@ Fejl:
 slut:
 
 End Function
-
-Public Sub ShowTabelData()
-Dim t As String
-Dim i As Integer, j As Integer
-
-For i = 1 To nrows
-For j = 1 To ncolumns
-    t = t & " ; " & Tabel(i, j)
-Next
-    t = t & vbCrLf
-Next
-
-MsgBox t
-
-End Sub
 
 Public Function GetSetForm(Optional separator As Integer = 0) As String
 ' returnerer data som mængde {(1,2),(3,4)}
@@ -386,41 +367,6 @@ End If
 slut:
 End Sub
 
-'Function ReadEquation(Optional ir As Range) As String
-'' bruger selection.copy som nok er langsommere end autotextentries og fylder clipboard
-'' Oversætter selection der er omath til streng
-'    Dim sr As Range, r As Range
-''    Dim t As Variant
-''    t = Timer
-'    If ir Is Nothing Then
-'
-'    End If
-'
-''    copytext = Selection.Range.text ' forsøg med ikke at klippe og kopiere problemet er at man er nødt til at konvertere til text for at læse ordentlig
-'    Set sr = Selection.Range
-'
-'    Selection.Copy
-'
-'    Set r = tempDoc.Range
-'
-'
-'    With r
-'    .Paste
-'    .OMaths.BuildUp
-'    .OMaths.Linearize
-'    .OMaths(1).ConvertToNormalText
-'    End With
-'
-'    ReadEquation = r.text
-'    sr.Select
-'
-'    r.Delete
-''    ClearClipboard
-'
-''    tempDoc.Range.Delete ' dette afhjælper muligvis at word bliver langsom
-''    MsgBox Timer - t
-'End Function
-
 Sub ReadMathBoxes()
 ' indsætter de markerede ligningsfelter som mboxes array
 Dim antal As Integer
@@ -435,7 +381,7 @@ Next
 'sstart = Selection.start
 'sslut = Selection.End
 antal = Selection.OMaths.Count
-Dim r As Range, sr As Range
+Dim sr As Range
 '    With tempDoc
 '        .Content.Font.Name = "Tahoma"
 '        .SaveAs FileName:="Sample.doc"
@@ -502,7 +448,6 @@ End Property
 
 Public Property Get AntalMathBoxes() As Variant
     On Error Resume Next
-'    AntalMathBoxes = UBound(AntalMathBoxes)
     AntalMathBoxes = antalmboxes
 End Property
 

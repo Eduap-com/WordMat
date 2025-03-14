@@ -24,3 +24,10 @@ C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio p
 C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathMenu\obj\Debug\MathMenu.dll
 C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathMenu\obj\Debug\MathMenu.pdb
 C:\Users\Mikael\SkyDrive\Dokumenter\Eduap\WordMat\MathMenu.dll - Visual Studio project\MathMenu\bin\Debug\MathMenu.tlb
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\obj\Debug\MathMenu.csproj.AssemblyReference.cache
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\obj\Debug\MathMenu.csproj.CoreCompileInputs.cache
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\obj\Debug\MathMenu.dll
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\obj\Debug\MathMenu.pdb
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\bin\Debug\MathMenu.dll.config
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\bin\Debug\MathMenu.dll
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\bin\Debug\MathMenu.pdb

@@ -561,7 +561,6 @@ Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean
 slut:
 End Sub
 Public Sub CreateEquation(EquationName As String, Equation As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
-    Dim Pos As Integer
     
     If InStr(Equation, "matrix") > 0 Then GoTo slut ' matrix/vektor ikke understøttet endnu
         
@@ -629,7 +628,6 @@ Public Sub CreateEquation(EquationName As String, Equation As String, ulighed As
 slut:
 End Sub
 Public Sub CreateVector(VectorName As String, VectorExpr As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
-    Dim Pos As Integer
             
     VectorExpr = ConvertToGeogebraSyntax(VectorExpr, ConvertMaxima)
 

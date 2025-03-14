@@ -7,8 +7,18 @@
       "RelativeMoniker": "D:0:0:{4479921B-5F7D-4650-B540-B01F7FA13503}|MathMenu\\MathMenu.csproj|solutionrelative:mathmenu\\mathmenudll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|MathFormForm||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C0B02F6-6AFA-4E57-9E01-0BE8D7EFA2E6}|MathFormForm\\MathFormForm.csproj|C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\mathformform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C0B02F6-6AFA-4E57-9E01-0BE8D7EFA2E6}|MathFormForm\\MathFormForm.csproj|solutionrelative:mathformform\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6C0B02F6-6AFA-4E57-9E01-0BE8D7EFA2E6}|MathFormForm\\MathFormForm.csproj|C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\mathformform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6C0B02F6-6AFA-4E57-9E01-0BE8D7EFA2E6}|MathFormForm\\MathFormForm.csproj|solutionrelative:mathformform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|MathMenu||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -28,7 +38,7 @@
               "RelativeDocumentMoniker": "MathMenu\\MathMenuDll.cs",
               "ToolTip": "C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\MathMenu\\MathMenuDll.cs",
               "RelativeToolTip": "MathMenu\\MathMenuDll.cs",
-              "ViewState": "AgIAAGICAAAAAAAAAAAAAIgCAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAGoEAAAAAAAAAAAAAI4EAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-01-22T07:00:48.459Z",
               "EditorCaption": ""
@@ -36,12 +46,50 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "MathFormForm",
+              "DocumentMoniker": "C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\MathFormForm\\MathFormForm.csproj",
+              "RelativeDocumentMoniker": "MathFormForm\\MathFormForm.csproj",
+              "ToolTip": "C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\MathFormForm\\MathFormForm.csproj",
+              "RelativeToolTip": "MathFormForm\\MathFormForm.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-10T09:16:18.171Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\MathFormForm\\Form1.cs",
+              "RelativeDocumentMoniker": "MathFormForm\\Form1.cs",
+              "ToolTip": "C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\MathFormForm\\Form1.cs*",
+              "RelativeToolTip": "MathFormForm\\Form1.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T09:08:46.72Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MathMenu",
+              "DocumentMoniker": "C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\MathMenu\\MathMenu.csproj",
+              "RelativeDocumentMoniker": "MathMenu\\MathMenu.csproj",
+              "ToolTip": "C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\MathMenu\\MathMenu.csproj",
+              "RelativeToolTip": "MathMenu\\MathMenu.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-03-10T08:49:57.1Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\MathFormForm\\Program.cs",
               "RelativeDocumentMoniker": "MathFormForm\\Program.cs",
               "ToolTip": "C:\\GitHub\\WordMat\\Windows\\MathMenu.dll\\MathFormForm\\Program.cs",
               "RelativeToolTip": "MathFormForm\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAARAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-01-22T07:00:48.587Z"
             }

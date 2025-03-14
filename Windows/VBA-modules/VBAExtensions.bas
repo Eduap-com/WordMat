@@ -1,7 +1,7 @@
 Attribute VB_Name = "VBAExtensions"
 Option Explicit
 Option Private Module
-' Small general functions that extend the build in VBA functions, or missing functions
+' Small general functions that extend the buildin VBA functions, or missing functions
 ' No functions specific to the project or dependent on other modules may appear in this module
 
 Public Function GetCountOfChar(ByVal ar_sText As String, ByVal a_sChar As String) As Integer
