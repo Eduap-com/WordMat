@@ -283,9 +283,12 @@ End Property
 Public Property Let MaximaExact(ByVal xval As Integer)
     SetRegSetting "Exact", xval
     mExact = xval
+#If Mac Then
+#Else
     If Not (MaxProc Is Nothing) Then
         MaxProc.Exact = xval
     End If
+#End If
 End Property
 Public Property Get Radians() As Boolean
     Radians = mradians

@@ -190,8 +190,7 @@ Public Sub ResetMaxima()
     KillDef = ""
     ForgetList = ""
     Exit Sub
-#End If
-    
+#Else
     If Len(KillDef) > 0 Then
         KillDef = Left(KillDef, Len(KillDef) - 1)    'fjern sidste komma
         kd = kd & "errcatch(kill(" & KillDef & "))"
@@ -204,24 +203,15 @@ Public Sub ResetMaxima()
         ForgetList = ""
     End If
     MaxProc.Reset kd
-    If MaximaUnits Then
-#If Mac Then
-#Else
-        MaxProcUnit.Reset kd
 #End If
-    End If
 End Sub
 Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = True, Optional ConvertWordSymbols As Boolean = True)
     ' starts maxima sends input and receives output
-
-    Dim i As Integer, InputStreng As String
         
 #If Mac Then
     RunMaximaFile StopTime, ConvertWordSymbols
-    Exit Sub
 #Else
-#End If
-    
+    Dim i As Integer, InputStreng As String
     If StopTime = 0 Then StopTime = 200
     AntalB = AntalB + 1
 
@@ -263,21 +253,12 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     If StopTime < -2 Then    ' ved grafer og enkelte andre nsolve
         '        MsgBox MaximaInputStreng
         MaxProc.ExecuteMaximaCommand InputStreng, 0
-#If Mac Then
-        MaxProc.WaitForMaximaUntil (-1 * StopTime)
-#Else
         WaitForMaximaUntil (-1 * StopTime)
-#End If
         '        Wait (2)
         If StopNow Then GoTo slut
         If MaxProc.Question = 1 Then
             AnswerQuestion StopTime, False ' muligvis problematisk efter ændret til at form kan vises med answerquestion
-#If Mac Then
-            MaxProc.WaitForMaximaUntil (-1 * StopTime)
-#Else
             WaitForMaximaUntil (-1 * StopTime)
-#End If
-
         End If
         If MaxProc.Finished = 0 Then
             MaxProc.CloseProcess
@@ -343,6 +324,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
+#End If
 End Sub
 Sub RunMaximaWSH(Optional StopTime As Integer)
     Dim Moutp As String, cmd As String
@@ -436,18 +418,16 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
 
 End Function
 Sub WaitForMaximaForm(StopTime As Integer)
+#If Mac Then
+#Else
     Dim i As Integer
     Dim UFwait2 As New UserFormWaitForMaxima
     
     i = 0
-#If Mac Then
-    MaxProc.WaitForMaximaUntil 1
-#Else
     Do While MaxProc.Finished = 0 And i < 11
         Wait (0.1)
         i = i + 1
     Loop
-#End If
     If MaxProc.Finished = 0 Then
         '    ufwait2.omax = omax
         On Error Resume Next
@@ -456,13 +436,8 @@ Sub WaitForMaximaForm(StopTime As Integer)
         On Error GoTo Fejl
         i = 0
         Do While MaxProc.Finished = 0 And i < StopTime
-#If Mac Then
-            MaxProc.WaitForMaximaUntil 1
-            i = i + 10
-#Else
             Wait (0.1)
             i = i + 1
-#End If
             If InStr(MaxProc.LastMaximaOutput, "Lisp error:") > 0 Then 'MaxProc.Finished virker ikke altid
                 MaxProc.CloseProcess
                 Exit Do
@@ -476,17 +451,6 @@ Sub WaitForMaximaForm(StopTime As Integer)
             ElseIf Len(UFwait2.Label_progress.Caption) > 33 Then
                 UFwait2.Label_progress.Caption = "*"
             End If
-            '        If i = 50 Then
-            '            ufwait2.Label_tip.Caption = "         Regner stadig..."
-            '        ElseIf i = 150 Then
-            '            ufwait2.Label_tip.Caption = "       Det tager sin tid..."
-            '        ElseIf i = 250 Then
-            '            ufwait2.Label_progress.Caption = "**"
-            '            ufwait2.Label_tip.Caption = " Jeg arbejder stadig på det."
-            '        ElseIf i = 350 Then
-            '            ufwait2.Label_tip.Caption = "Tryk evt. stop nu."
-            '        ElseIf stoptime > 450 Then
-            '            DoEvents
             If i = StopTime - 200 Then
                 UFwait2.Label_tip.Caption = "om 20s stoppes automatisk."
             ElseIf i = StopTime - 150 Then
@@ -499,7 +463,6 @@ Sub WaitForMaximaForm(StopTime As Integer)
                 UFwait2.Label_tip.Caption = "Det lykkedes ikke. Stopper."
             End If
             If StopNow Then
-                '            MaxProc.ConsoleInterrupt
                 Unload UFwait2
                 ShowDebug
                 Dim tmis As String
@@ -524,6 +487,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
+#End If
 End Sub
 Sub ShowDebug(Optional vis As Boolean = False, Optional MInputString As String, Optional OutputString As String)
     If DebugWM Or vis Then
@@ -544,6 +508,8 @@ Sub ShowDebug(Optional vis As Boolean = False, Optional MInputString As String, 
         UserFormDebug.Show
     End If
 End Sub
+#If Mac Then
+#Else
 Sub AnswerQuestion(StopTime As Integer, Optional ShowWaitForm As Boolean = True)
     Dim svar As String
     Dim answered As Boolean
@@ -618,6 +584,8 @@ igen:
     End If
 
 End Sub
+#End If
+
 Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbols As Boolean = True)
     ' for mac. Starts maxima, sends command, receives output. closes maxima
 #If Mac Then
@@ -2906,10 +2874,9 @@ Sub Draw3D(graphobj As String, Optional antalobj As Integer = 1)
     tid = 20 + antalobj * 10
 
 #If Mac Then
-        Text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/gnuplot/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw3d("
-        Text = Text & "terminal=pdf"
-        Text = Text & ",file_name=""" & Replace(GetTempDir(), "\", "/") & "WordMatGraf""," & MacDrawDims(500, 350) & ","
-'        waittime = -20
+'        Text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/gnuplot/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw3d("
+'        Text = Text & "terminal=pdf"
+'        Text = Text & ",file_name=""" & Replace(GetTempDir(), "\", "/") & "WordMatGraf""," & MacDrawDims(500, 350) & ","
 #Else
     Text = "draw3d("
 #End If
@@ -2919,20 +2886,20 @@ Sub Draw3D(graphobj As String, Optional antalobj As Integer = 1)
     MaximaInputStreng = MaximaInputStreng & Text
 
 #If Mac Then
-    If MaximaUnits Then
-        MaximaUnits = False
-        Call RunMaxima(-1 * tid)
-        MaximaUnits = True
-    Else
-        Call RunMaxima(-1 * tid)
-    End If
+'    If MaximaUnits Then
+'        MaximaUnits = False
+'        Call RunMaxima(-1 * tid)
+'        MaximaUnits = True
+'    Else
+'        Call RunMaxima(-1 * tid)
+'    End If
 #Else
         Call RunMaxima(-1 * tid)
+        If InStr(MaxProc.LastMaximaOutput, "no surface within these ranges") Then
+            ' hvis bare een ligning ikke eksisterer indenfor det valgte vindue er der fejl
+            MsgBox Sprog.A(420), vbOKOnly, Sprog.Error
+        End If
 #End If
-    If InStr(MaxProc.LastMaximaOutput, "no surface within these ranges") Then
-        ' hvis bare een ligning ikke eksisterer indenfor det valgte vindue er der fejl
-        MsgBox Sprog.A(420), vbOKOnly, Sprog.Error
-    End If
 
 End Sub
 Sub Wait(pausetime As Variant)
@@ -6835,7 +6802,10 @@ Sub GenerateOutputArray(Optional Text As String)
     ArrIndex = 1 'mac
 
     On Error GoTo Fejl
+#If Mac Then
+#Else
     If Text = "" Then Text = MaxProc.LastMaximaOutput
+#End If
     'text = Right(text, Len(text) - 270)
     ReDim Minput(1 To 100) As String
     ReDim moutput(1 To 100) As String
@@ -6921,6 +6891,7 @@ slut:
     ReDim Preserve Minput(1 To nr) As String
     ReDim Preserve moutput(1 To nr) As String
 End Sub
+
 Function FindNextio(StartPos As Long, Text As String) As Long
 
 On Error GoTo Fejl

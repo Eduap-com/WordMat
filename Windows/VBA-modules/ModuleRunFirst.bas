@@ -47,7 +47,9 @@ If AppVersion <> RegAppVersion Then ' hvis det er første gang WordMat startes ef
     RegAppVersion = AppVersion
 End If
 
-HasStarted = True
+    If SettCheckForUpdate Then CheckForUpdateSilent
+
+    HasStarted = True
 
 End Sub
 

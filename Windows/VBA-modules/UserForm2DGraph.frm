@@ -571,7 +571,7 @@ Set ws = cxl.xlwb.Sheets("Tabel")
 Else
 
 Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
-PrepareMaximaNoSplash
+PrepareMaxima
 omax.GoToEndOfSelectedMaths
 'Selection.Collapse wdCollapseEnd
 Selection.TypeParagraph

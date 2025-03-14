@@ -697,7 +697,7 @@ Sub ToggleUnits()
     Else
         MaximaUnits = True
         DoEvents
-        PrepareMaximaNoSplash
+        PrepareMaxima False
 #If Mac Then
 #Else
         If MaxProc Is Nothing Then Exit Sub
@@ -720,13 +720,8 @@ Sub TurnUnitsOn()
     Application.OMathAutoCorrect.Functions("min").Delete  ' ellers kan min ikke bruges som enhed
 End Sub
 Sub TurnUnitsOff()
-    MaximaUnits = False
-#If Mac Then
-    If Not MaxProc Is Nothing Then
-        MaxProc.Units = 0
-    End If
-#End If
     On Error Resume Next
+    MaximaUnits = False
     Application.OMathAutoCorrect.Functions.Add "min"
 End Sub
 Sub ToggleNum()

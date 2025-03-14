@@ -54,15 +54,20 @@ Public Sub LoadSprogArray()
     Dim FileNo As Integer
     Dim linje As String
     Dim Arr() As String
-    Dim FilePath As String
+    Dim FilePath As String, slash As String
     
+#If Mac Then
+    slash = "/"
+#Else
+    slash = "\"
+#End If
     FilePath = GetWordMatDir
     If SprogNr = 1 Then
-        FilePath = FilePath & "languages\da.csv"
+        FilePath = FilePath & "languages" & slash & "da.csv"
     ElseIf SprogNr = 2 Then
-        FilePath = FilePath & "languages\en.csv"
+        FilePath = FilePath & "languages" & slash & "en.csv"
     ElseIf SprogNr = 3 Then
-        FilePath = FilePath & "languages\sp.csv"
+        FilePath = FilePath & "languages" & slash & "sp.csv"
     End If
     FileNo = FreeFile
 

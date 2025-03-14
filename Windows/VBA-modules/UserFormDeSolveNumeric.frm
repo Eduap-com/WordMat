@@ -72,10 +72,13 @@ End Sub
 Private Sub Label_cancel_Click()
     luk = True
     On Error Resume Next
+#If Mac Then
+#Else
     If MaxProc.Finished = 0 Then
         MaxProc.CloseProcess
         MaxProc.StartMaximaProcess
     End If
+#End If
     Unload Me
 End Sub
 
