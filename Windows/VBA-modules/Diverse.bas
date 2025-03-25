@@ -607,34 +607,32 @@ Function GetRandomTip()
     
     Randomize
     i = Int(Rnd(1) * (n - mindste) + mindste) ' tilfældigt tal 0-(n-1)
-'hævet a " & VBA.ChrW(7491) & " hævet b " & VBA.ChrW(7495) & " hævet p  " & VBA.ChrW(7510) & "  hævet q " & VBA.ChrW(8319) & "
-' sænket 0 " & VBA.ChrW(8320) & " sænket 1 " & VBA.ChrW(8321) & " hævet 2 " & VBA.ChrW(8322) & "_
 
     Select Case i
     Case 0
-        tip = Sprog.A(325) '"Genvejen   Alt + M   indsætter nyt matematikfelt"
+        tip = Sprog.A(325)
     Case 1
-        tip = Sprog.A(326) '"Genvejen   Altgr + enter   beregner"
+        tip = Sprog.A(326)
     Case 2
-        tip = Sprog.A(327) '"Genvejen   Alt + L    løser ligning"
+        tip = Sprog.A(327)
     Case 3
-        tip = Sprog.A(328) '"Genvejen   Alt + i   åbner indstillinger"
+        tip = Sprog.A(328)
     Case 4
-        tip = Sprog.A(329) '"Genvejen   Alt + r   henter forrige resultater"
+        tip = Sprog.A(329)
     Case 5
-        tip = Sprog.A(330) '"Genvejen   Alt + E   slår enheder til/fra"
+        tip = Sprog.A(330)
     Case 6
         tip = Sprog.A(331) & "   x_1   ->   x" & VBA.ChrW(8321)
     Case 7
         tip = Sprog.A(332) & VBA.ChrW(955)
     Case 8
-        tip = Sprog.A(333) '"Genvejen  Alt + P  viser grafen for en forskrift"
+        tip = Sprog.A(333)
     Case 9
-        tip = Sprog.A(334) '"Du kan selv gemme ændringer i formelsamlingerne og figurdokumentet."
+        tip = Sprog.A(334)
     Case 10
-        tip = Sprog.A(335) '"Excelark kan både indsættes indlejret i dokumentet eller åbnes i Excel"
+        tip = Sprog.A(335)
     Case 11
-        tip = Sprog.A(336) '"Hurtig og bedre retning af opgaver? Prøv WordMark - www.eduap.com"
+        tip = Sprog.A(336)
     Case 12
         tip = "(a+b)" & VBA.ChrW(178) & " = a" & VBA.ChrW(178) & " + b" & VBA.ChrW(178) & " + 2ab"
     Case 13
@@ -644,7 +642,7 @@ Function GetRandomTip()
     Case 15
         tip = "(a" & VBA.ChrW(183) & "b)" & VBA.ChrW(7510) & " = a" & VBA.ChrW(7510) & VBA.ChrW(183) & "b" & VBA.ChrW(7510)
     Case 16
-        tip = Sprog.A(337) '"Du har ialt foretaget " & AntalB & " beregninger med WordMat"
+        tip = Sprog.A(337) & AntalB
     Case 17
         tip = "log(a" & VBA.ChrW(7495) & ") = b" & VBA.ChrW(183) & "log(a)"
     Case 18
@@ -654,19 +652,19 @@ Function GetRandomTip()
     Case 20
         tip = "\int      ->      " & VBA.ChrW(8747)
     Case 21
-        tip = Sprog.A(338) '"Under definitioner kan du definere fysiske konstanter og tabelværdier"
+        tip = Sprog.A(338)
     Case 22
-        tip = Sprog.A(339) '"Word kører hurtigere i kladdevisning, specielt for ligninger."
+        tip = Sprog.A(339)
     Case 23
-        tip = Sprog.A(340) '"Indsæt dine egne beskrivelser i Exceldiagrammer vha. Indsæt/tekstboks"
+        tip = Sprog.A(340)
     Case 24
         tip = "(a/b)" & VBA.ChrW(7510) & " = a" & VBA.ChrW(7510) & "/b" & VBA.ChrW(7510)
     Case 25
         tip = "a/b + c/d = (ad+bc)/bd"
     Case 26
-        tip = Sprog.A(341) '"Genvejen   Alt + N   skifter mellem auto,eksakt,num"
+        tip = Sprog.A(341)
     Case 27
-        tip = Sprog.A(342) '"En funktion med bogstav-konstanter får automatisk skydere i GeoGebra"
+        tip = Sprog.A(342)
     Case 28
         tip = "\inc  ->  delta"
     Case 29
@@ -676,11 +674,8 @@ Function GetRandomTip()
     Case Else
         tip = ""
     End Select
-    
-    
-'    GetRandomTip = tip(i)
+        
     GetRandomTip = tip
-    
 End Function
 Sub ShowTip()
     MsgBox GetRandomTip
@@ -760,7 +755,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     
    
     If GetInternetConnectedState = False Then
-        If Not RunSilent Then MsgBox "Ingen internetforbindelse", vbOKOnly, "Fejl"
+        If Not RunSilent Then MsgBox Sprog.A(63), vbOKOnly, Sprog.Error
         Exit Sub
     End If
     
@@ -794,7 +789,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
 #End If
     If Len(s) = 0 Then
         If Not RunSilent Then
-            MsgBox2 "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
+            MsgBox2 Sprog.A(112), vbOKOnly, Sprog.Error
         End If
         GoTo slut
     End If
@@ -813,7 +808,7 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
    
     If Len(NewVersion) = 0 Or Len(NewVersion) > 15 Then
         If Not RunSilent Then
-            MsgBox2 "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
+            MsgBox2 Sprog.A(112), vbOKOnly, Sprog.Error
         End If
         GoTo slut
     End If
@@ -860,12 +855,9 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     If UpdateNow Then
         If PartnerShip Then
 '            Set UFvent = New UserFormWaitForMaxima
-            If MsgBox2(Sprog.A(21) & News & vbCrLf & vbCrLf & "Klik OK for at starte opdateringen.", vbOKCancel, Sprog.A(23)) = vbOK Then
+            If MsgBox2(Sprog.A(21) & News & vbCrLf & vbCrLf & Sprog.A(64), vbOKCancel, Sprog.A(23)) = vbOK Then
                 On Error Resume Next
                 Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
-'                UFvent.Label_tip.Caption = "Downloader WordMat " & NewVersion
-'                UFvent.Label_progress.Caption = "**"
-'                UFvent.Show
                 On Error GoTo Install2
                 Application.Run macroname:="PUpdateWordMat"
                 On Error GoTo Fejl
@@ -874,7 +866,6 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
 Install2:
             On Error GoTo Fejl
             MsgBox2 Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, Sprog.A(23)
-            '        If MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbYesNo, Sprog.A(23)) = vbYes Then
             If Sprog.SprogNr = 1 Then
                 OpenLink "https://www.eduap.com/da/wordmat/"
             Else
@@ -883,23 +874,17 @@ Install2:
         End If
     Else
         If Not RunSilent Then
-            MsgBox2 "Du har allerede den nyeste version af WordMat installeret: v." & AppVersion, vbOKOnly, "Ingen opdatering"
+            MsgBox2 Sprog.A(344) & " " & AppNavn & " v." & AppVersion, vbOKOnly, "No Update"
         End If
     End If
    
-   
-   
     GoTo slut
 Fejl:
-    '   MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure CheckForUpdate, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     If Not RunSilent Then
         MsgBox "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com"
         OpenLink "https://www.eduap.com/da/wordmat/"
-        '        MsgBox "Der skete en fejl i forbindelse at checke for ny version. Det kan skyldes en fejl med internetforbindelsen eller en fejl med serveren. Prøv igen senere, eller check selv på eduap.com om der er kommet en ny version. Den nuværende version er " & AppVersion, vbOKOnly Or vbCritical Or vbSystemModal, "Fejl"
     End If
 slut:
-    On Error Resume Next
-'    Unload UFvent
 
 End Sub
 
@@ -1366,7 +1351,7 @@ Sub InsertEquationRef()
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
         Oundo.StartCustomRecord
-        Selection.TypeText Sprog.Equation & " "
+        Selection.TypeText Sprog.A(833) & " "
 #If Mac Then
         Selection.InsertCrossReference referencetype:=wdRefTypeBookmark, ReferenceKind:= _
             wdContentText, ReferenceItem:=b, InsertAsHyperlink:=False, _
@@ -1854,14 +1839,14 @@ Function MsgBox2(prompt As String, Optional Buttons As VbMsgBoxStyle = vbOKCance
 End Function
 
 Sub TestMe()
- MsgBox2 "Dette er en lille test", vbOKOnly, "Hello"
- MsgBox2 "Dette er en længere test" & vbCrLf & "Der skal være flere og længere linjer" & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej.", vbOKCancel, "Hello"
- MsgBox2 "Dette er en bred test" & vbCrLf & "Der skal være en meget lang linje med mange forskellige tegn, så boksen bliver bred. Mon den kan blive så bred som denne linje?" & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej." & vbCrLf & "hej.", vbOKCancel, "Hello"
+ MsgBox2 "This a small test", vbOKOnly, "Hello"
+ MsgBox2 "This is a longer test" & vbCrLf & "More and longer lines" & vbCrLf & "Hello" & vbCrLf & "Hello" & vbCrLf & "Hello" & vbCrLf & "Hello", vbOKCancel, "Hello"
+ MsgBox2 "This is a wide test" & vbCrLf & "Has to have a long line with different characters and some different stuff" & vbCrLf & "hello" & vbCrLf & "hello" & vbCrLf & "hello" & vbCrLf & "hello", vbOKCancel, "Hello"
 End Sub
 
 Sub TestError()
     On Error Resume Next
-    Err.Raise 1, , "dsds"
+    Err.Raise 1, , "test"
 End Sub
 
 Sub TestSprog()

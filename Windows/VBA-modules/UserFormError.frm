@@ -78,10 +78,10 @@ End Sub
 Private Sub SetCaptions()
     Me.Caption = Sprog.Error
     MultiPage1.Pages(0).Caption = Sprog.Error
-    MultiPage1.Pages(1).Caption = Sprog.MaximaError
+    MultiPage1.Pages(1).Caption = Sprog.A(749)
     Label_TAB1.Caption = Sprog.Error
-    Label_TAB2.Caption = Sprog.MaximaError
-    Label_restart.Caption = Sprog.RestartWordMat
+    Label_TAB2.Caption = Sprog.A(749)
+    Label_restart.Caption = Sprog.A(736)
 'MultiPage1.Pages("Page1").Caption
 End Sub
 Private Sub Label_restart_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)

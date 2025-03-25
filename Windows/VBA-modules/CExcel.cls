@@ -286,7 +286,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     ws.Cells(r + 5, 1).Value = Sprog.A(403) & ":"
     ws.Cells(r + 6, 1).Value = Sprog.A(350) & ":"
     ws.Cells(r + 6, 2).Value = signiv
-    ws.Cells(r + 6, 2).Style = Sprog.RibPercentage
+    ws.Cells(r + 6, 2).Style = Sprog.A(438)
     
     ws.Cells(r + 5, 4).Formula = "=if(R" & r + 5 & "C2<R" & r + 6 & "C2,""" & Sprog.A(404) & """,""" & Sprog.A(405) & """)"
     ws.Cells(r + 6, 4).Formula = "=if(COUNTIF(R3C2:R" & r + 2 & "C" & c + 1 & ",""<5"")>0,""" & Sprog.A(358) & ""","""")"

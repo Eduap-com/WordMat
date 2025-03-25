@@ -92,7 +92,7 @@ End Sub
 Sub SetCaptions()
     Me.Caption = Sprog.A(39)
     Label_function.Caption = Sprog.A(40)
-    Label_var.Caption = Sprog.IndepVar
+    Label_var.Caption = Sprog.A(746)
     Label_eps.Caption = Sprog.A(41)
     Label_guess.Caption = Sprog.A(42)
     CommandButton_ok.Caption = Sprog.OK

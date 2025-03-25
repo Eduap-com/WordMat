@@ -182,13 +182,13 @@ On Error Resume Next
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.SolveDE
-    Label1.Caption = Sprog.DifferentialEquation & ":"
-    Label3.Caption = Sprog.IndepVar
-    Label2.Caption = Sprog.DepVar
-    Label4.Caption = Sprog.StartCond & ":"
+    Me.Caption = Sprog.A(745)
+    Label1.Caption = Sprog.A(744) & ":"
+    Label3.Caption = Sprog.A(746)
+    Label2.Caption = Sprog.A(747)
+    Label4.Caption = Sprog.A(748) & ":"
     Label8.Caption = Sprog.A(297)
-    Label_temp.Caption = Sprog.TempDefs
+    Label_temp.Caption = Sprog.A(764)
     Label_cancel.Caption = Sprog.Cancel
     Label_ok.Caption = Sprog.OK
     If Sprog.SprogNr = 1 Then

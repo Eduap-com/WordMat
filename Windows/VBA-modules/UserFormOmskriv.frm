@@ -182,35 +182,31 @@ Private Sub UserForm_Initialize()
 End Sub
 
 Private Sub SetCaptions()
-    Me.Caption = Sprog.RibReduce
-    Label5.Caption = Sprog.TempDefs
-    Frame6.Caption = Sprog.Logarithm & " output"
+    Me.Caption = Sprog.A(456)
+    Label5.Caption = Sprog.A(764)
+    Frame6.Caption = Sprog.A(816) & " output"
     Label_cancel.Caption = Sprog.Cancel
-    Label_enheder.Caption = Sprog.OutputUnits
-    Frame5.Caption = Sprog.Exact & "?"
-    OptionButton_exactonly.Caption = Sprog.Exact
-    OptionButton_numonly.Caption = Sprog.Numeric
-    Label8.Caption = Sprog.TempSettings
-    CheckBox_auto.Caption = Sprog.AutoReduce
-    Label_omskriv.Caption = Sprog.AutoReduceExplain
-    CheckBox_factor.Caption = Sprog.Factor
-    Label_factor.Caption = Sprog.FactorExplain
-    CheckBox_expand.Caption = Sprog.Expand
-    Label_expand.Caption = Sprog.ExpandExplain
-    CheckBox_rationaliser.Caption = Sprog.Rationalize
-    Label_rationaliser.Caption = Sprog.RationalizeExplain
-    CheckBox_trigreduce.Caption = Sprog.TrigReduce
-    Label_trigreduce.Caption = Sprog.TrigReduceExplain
+    Label_enheder.Caption = Sprog.A(728)
+    Frame5.Caption = Sprog.A(710) & "?"
+    OptionButton_exactonly.Caption = Sprog.A(710)
+    OptionButton_numonly.Caption = Sprog.A(711)
+    Label8.Caption = Sprog.A(789)
+    CheckBox_auto.Caption = Sprog.A(790)
+    Label_omskriv.Caption = Sprog.A(791)
+    CheckBox_factor.Caption = Sprog.A(806)
+    Label_factor.Caption = Sprog.A(792)
+    CheckBox_expand.Caption = Sprog.A(807)
+    Label_expand.Caption = Sprog.A(793)
+    CheckBox_rationaliser.Caption = Sprog.A(794)
+    Label_rationaliser.Caption = Sprog.A(795)
+    CheckBox_trigreduce.Caption = Sprog.A(796)
+    Label_trigreduce.Caption = Sprog.A(797)
     CommandButton_ok.Caption = Sprog.OK
     
     CheckBox_completesquare.Caption = Sprog.A(697)
     Label_completesquare.Caption = Sprog.A(698)
     
-    If Sprog.SprogNr = 1 Then
-        CheckBox_sammelinje.Caption = "Indsæt samme linje"
-    Else
-        CheckBox_sammelinje.Caption = "Insert same line"
-    End If
+    CheckBox_sammelinje.Caption = Sprog.A(798)
     
 End Sub
 
@@ -244,7 +240,7 @@ End Sub
 Sub FillComboBoxDecType()
     ComboBox_DecType.Clear
     ComboBox_DecType.AddItem "Decimaler"
-    ComboBox_DecType.AddItem Sprog.SignificantFigures
-    ComboBox_DecType.AddItem Sprog.ScientificNotation
+    ComboBox_DecType.AddItem Sprog.A(687)
+    ComboBox_DecType.AddItem Sprog.A(669)
 End Sub
 

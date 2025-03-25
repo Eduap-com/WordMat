@@ -392,7 +392,7 @@ Sub SetCaptions()
     CommandButton_ok.Caption = Sprog.A(661)
     Label1.Caption = Sprog.A(72)
     CommandButton_copy.Caption = Sprog.A(73)
-    Label_status.Caption = Sprog.Wait
+    Label_status.Caption = Sprog.A(826)
     Frame1.Caption = Sprog.A(83)
     Frame2.Caption = Sprog.A(74)
     CheckBox_units.Caption = Sprog.A(75)

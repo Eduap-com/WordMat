@@ -108,11 +108,11 @@ Private Sub CommandButton_GeoGebraDF_Click()
 End Sub
 
 Private Sub Label_helpmarker_Click()
-MsgBox Sprog.A(195), vbOKOnly, Sprog.Help
+MsgBox Sprog.A(195), vbOKOnly, Sprog.A(808)
 End Sub
 
 Private Sub Label_punkter2_Click()
-MsgBox Sprog.A(196), vbOKOnly, Sprog.Help
+MsgBox Sprog.A(196), vbOKOnly, Sprog.A(808)
 End Sub
 
 Private Sub Label_symbol_Click()
@@ -436,7 +436,7 @@ OpdaterGraf
 End Sub
 
 Private Sub Label_punkterhelp_Click()
-    MsgBox Sprog.A(197), vbOKOnly, Sprog.Help
+    MsgBox Sprog.A(197), vbOKOnly, Sprog.A(808)
 End Sub
 
 Private Sub CommandButton_nulstil1_Click()
@@ -1413,7 +1413,7 @@ Dim Text As String
 Dim df As String
 Dim dfsol As String
 On Error GoTo Fejl
-    Label_wait.Caption = Sprog.Wait & "!"
+    Label_wait.Caption = Sprog.A(826) & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
     omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
@@ -2233,44 +2233,44 @@ Sub ShowPreviewMac()
 End Sub
 
 Private Sub SetCaptions()
-    Me.Caption = Sprog.PlotCaption
-    Label_wait.Caption = Sprog.Wait
-    Label_opdater.Caption = Sprog.Update
-    MultiPage1.Pages("Page1").Caption = Sprog.Functions
-    MultiPage1.Pages("Page2").Caption = Sprog.Equations
-    MultiPage1.Pages("Page3").Caption = Sprog.Points
-    MultiPage1.Pages("Page5").Caption = Sprog.Vectors
-    MultiPage1.Pages("Page7").Caption = Sprog.RibDirectionField
-    MultiPage1.Pages("Page4").Caption = Sprog.RibSettingsShort
-    Label29.Caption = Sprog.Definitions
-    Label45.Caption = Sprog.Title
-    Label_Ligninger.Caption = Sprog.Functions & "  f(x)=..."
+    Me.Caption = Sprog.A(799)
+    Label_wait.Caption = Sprog.A(826)
+    Label_opdater.Caption = Sprog.A(813)
+    MultiPage1.Pages("Page1").Caption = Sprog.A(832)
+    MultiPage1.Pages("Page2").Caption = Sprog.A(834)
+    MultiPage1.Pages("Page3").Caption = Sprog.A(835)
+    MultiPage1.Pages("Page5").Caption = Sprog.A(836)
+    MultiPage1.Pages("Page7").Caption = Sprog.A(462)
+    MultiPage1.Pages("Page4").Caption = Sprog.A(444)
+    Label29.Caption = Sprog.A(823)
+    Label45.Caption = Sprog.A(837)
+    Label_ligninger.Caption = Sprog.A(832) & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset
     CommandButton_nulstil4.Caption = Sprog.Reset
     CommandButton_nulstil5.Caption = Sprog.Reset
     CommandButton_nulstil6.Caption = Sprog.Reset
-    CommandButton_nulstil.Caption = Sprog.ResetAll
+    CommandButton_nulstil.Caption = Sprog.A(800)
     Label_insertpic.Caption = Sprog.A(93) 'Sprog.OK
     Label_cancel.Caption = Sprog.Cancel
-    Label2.Caption = "x-" & Sprog.AxisTitle
-    Label3.Caption = "y-" & Sprog.AxisTitle
-    Label4.Caption = Sprog.LineType
+    Label2.Caption = "x-" & Sprog.A(801)
+    Label3.Caption = "y-" & Sprog.A(801)
+    Label4.Caption = Sprog.A(802)
     CommandButton_nulstillign1.Caption = Sprog.Reset
     CommandButton_nulstilligning2.Caption = Sprog.Reset
     CommandButton_nulstillign3.Caption = Sprog.Reset
-    Label50.Caption = Sprog.Equation & " 1"
-    Label51.Caption = Sprog.Equation & " 2"
-    Label52.Caption = Sprog.Equation & " 3"
+    Label50.Caption = Sprog.A(833) & " 1"
+    Label51.Caption = Sprog.A(833) & " 2"
+    Label52.Caption = Sprog.A(833) & " 3"
     
     Label1.Caption = Sprog.A(198)
     CommandButton_kugle.Caption = Sprog.A(199) 'insert circle
     CommandButton_insertplan.Caption = Sprog.A(200) ' iinsert line
     CommandButton_parlinje.Caption = Sprog.A(200)
     CommandButton_nulstilpar1.Caption = Sprog.Reset
-    Label10.Caption = Sprog.Points
-    Label48.Caption = Sprog.Points & " 2"
+    Label10.Caption = Sprog.A(835)
+    Label48.Caption = Sprog.A(835) & " 2"
     Label53.Caption = Sprog.A(201) ' markerede punkter
     Label28.Caption = Sprog.A(202)
     

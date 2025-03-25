@@ -1,11 +1,11 @@
 Attribute VB_Name = "RibbonSubs"
 Option Explicit
+' This module contains callback functions used by the Word WordMat Ribbon menu
+' There are functions to return the text on the buttons (language sensitive), and the action to perform when the button is clicked
 Public WoMatRibbon As IRibbonUI
 #If Mac Then
-' not testet. Taken from a forum on macrumors.com. dest and source set to longptr but try any without byval. libc.dylib is a guess.
-'    Private Declare PtrSafe Function memcpy Lib "libsystem_c.dylib" Alias "CopyMemory" (Dest As Any, source As Any, ByVal length As LongPtr) As LongPtr
 #Else
-Public Declare PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As LongPtr)
+    Public Declare PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As LongPtr)
 #End If
 
 'Callback for customUI.onLoad
@@ -199,7 +199,7 @@ Sub Rib_FSford(control As IRibbonControl)
     insertribformel "", "T_2=ln" & VBA.ChrW(8289) & "(2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(2)/k"
 End Sub
 Sub Rib_GetLabelInfinitesimalShort(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibInfinitesimalShort
+    returnedVal = "Inf."
 End Sub
 'Callback for eksp4 onAction
 Sub Rib_FShalv(control As IRibbonControl)
@@ -474,7 +474,6 @@ End Sub
 Sub Rib_FSrumpunktlinje(control As IRibbonControl)
     insertribformel "", "definer: r" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(r_1@r_2@r_3)) ,  (P0P)" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0))"
     Selection.TypeParagraph
-'    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & "_(P_0 P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
     insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & VBA.ChrW(215) & "(P0P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
 End Sub
 
@@ -550,8 +549,6 @@ On Error Resume Next
     MaximaExact = 0
     RefreshRibbon
 End Sub
-
-'Callback for togglebuttonExact getPressed
 Sub Rib_GetPressedExact(control As IRibbonControl, ByRef returnedVal)
     If MaximaExact = 1 Then
         returnedVal = True
@@ -559,15 +556,11 @@ Sub Rib_GetPressedExact(control As IRibbonControl, ByRef returnedVal)
         returnedVal = False
     End If
 End Sub
-
-'Callback for togglebuttonExact onAction
 Sub Rib_Exact(control As IRibbonControl, pressed As Boolean)
 On Error Resume Next
     MaximaExact = 1
     RefreshRibbon
 End Sub
-
-'Callback for togglebuttonNum getPressed
 Sub Rib_GetPressedNum(control As IRibbonControl, ByRef returnedVal)
     If MaximaExact = 2 Then
         returnedVal = True
@@ -575,32 +568,25 @@ Sub Rib_GetPressedNum(control As IRibbonControl, ByRef returnedVal)
         returnedVal = False
     End If
 End Sub
-
-'Callback for togglebuttonNum onAction
 Sub Rib_num(control As IRibbonControl, pressed As Boolean)
 On Error Resume Next
     MaximaExact = 2
     RefreshRibbon
 End Sub
-'Callback for dcifre onAction
 Sub Rib_cifre(control As IRibbonControl, Id As String, Index As Integer)
 On Error Resume Next
     MaximaCifre = Index + 2
 End Sub
-'Callback for dcifre getSelectedItemIndex
 Sub Rib_GetSelectedItemIndexCifre(control As IRibbonControl, ByRef returnedVal)
 On Error Resume Next
     returnedVal = CInt(MaximaCifre) - 2
     RefreshRibbon
 End Sub
-'Callback for togglebuttonRad getPressed
 Sub Rib_GetPressedRad(control As IRibbonControl, ByRef returnedVal)
 On Error Resume Next
     returnedVal = Radians
     RefreshRibbon
 End Sub
-
-'Callback for togglebuttonRad onAction
 Sub Rib_rad(control As IRibbonControl, pressed As Boolean)
     Radians = pressed
 End Sub
@@ -608,68 +594,47 @@ End Sub
 Public Sub Rib_Beregn(control As IRibbonControl)
     beregn
 End Sub
-'Callback for ButtonMaxima onAction
 Sub Rib_MaximaKommando(control As IRibbonControl)
     MaximaCommand
 End Sub
-'Callback for ButtonSolve onAction
 Sub Rib_Solve(control As IRibbonControl)
     MaximaSolve
 End Sub
-'Callback for solvenum onAction
 Sub Rib_solvenum(control As IRibbonControl)
     MaximaNsolve
-    'MaximaSolveNumeric
 End Sub
-'Callback for eliminate onAction
 Sub Rib_eliminate(control As IRibbonControl)
     MaximaEliminate
 End Sub
-'Callback for test sand/falsk onAction
 Sub Rib_test(control As IRibbonControl)
     CompareTest
 End Sub
-'Callback for solvede onAction
 Sub Rib_solvede(control As IRibbonControl)
     SolveDE
 End Sub
-'Callback for solvedenum onAction
 Sub Rib_solvedenum(control As IRibbonControl)
     SolveDENumeric
 End Sub
-'Callback for ButtonOmskriv onAction
 Sub Rib_Omskriv(control As IRibbonControl)
     Omskriv
 End Sub
-'Callback for simp onAction
 Sub Rib_reducer(control As IRibbonControl)
     reducer
 End Sub
-
-'Callback for factor onAction
 Sub Rib_faktoriser(control As IRibbonControl)
     faktoriser
 End Sub
-
-'Callback for udvid onAction
 Sub Rib_udvid(control As IRibbonControl)
     udvid
 End Sub
-'Callback for ButtonDefiner onAction
 Sub Rib_Definitioner(control As IRibbonControl)
     PrepareMaxima
-
     UserFormShowDef.Show
-'    MsgBox VisDef, vbOKOnly, Sprog.Definitions
 End Sub
-'Callback for defsletdef onAction
 Sub Rib_sletdef(control As IRibbonControl)
     InsertSletDef
-'insertribformel "", "slet definitioner:"
 End Sub
 
-
-'Callback for deffunkt onAction
 Sub Rib_deffunk(control As IRibbonControl)
     DefinerFunktion
 End Sub
@@ -677,218 +642,146 @@ Sub Rib_deflign(control As IRibbonControl)
     DefinerLigning
 End Sub
 Sub Rib_defkonstanter(control As IRibbonControl)
-Dim UFkonstanter As New UserFormKonstanter
+    Dim UFkonstanter As New UserFormKonstanter
     UFkonstanter.Show vbModeless
-'    UserFormKonstanter.Show
 End Sub
-'Callback for Differentier onAction
 Sub Rib_diff(control As IRibbonControl)
     Differentier
 End Sub
-'Callback for Stamfunktion onAction
 Sub Rib_stam(control As IRibbonControl)
     Integrer
 End Sub
-'Callback for gnuplot onAction
 Sub Rib_gnuplot(control As IRibbonControl)
     Plot2DGraph
 End Sub
-'Callback for graphobj onAction
 Sub Rib_graphobj(control As IRibbonControl)
     Call InsertGraphOleObject
 End Sub
-'Callback for ButtonGeoGebra onAction
 Sub Rib_GeoGebraB(control As IRibbonControl)
     GeoGebraWeb
 End Sub
-'Callback for excelobj onAction
 Sub Rib_excelobj(control As IRibbonControl)
-'#If Mac Then
-'    InsertOpenExcel "Graphs.xltm"
-'#Else
     Call InsertChart
-'#End If
 End Sub
-'Callback for ButtonGraf onAction
 Sub Rib_graf(control As IRibbonControl)
     StandardPlot
 End Sub
-'Callback for uGrupperedeobservationer onAction
 Sub Rib_ugrupobs(control As IRibbonControl)
     InsertUGrupObs
 End Sub
-'Callback for Grupperedeobservationer onAction
 Sub Rib_grupobs(control As IRibbonControl)
     InsertGrupObs
 End Sub
-'Callback for pindediagram onAction
 Sub Rib_pindediagram(control As IRibbonControl)
     InsertPindeDiagram
 End Sub
-'Callback for boksplot onAction
 Sub Rib_boksplot(control As IRibbonControl)
     InsertBoksplot
 End Sub
-'Callback for histogram onAction
 Sub Rib_histogram(control As IRibbonControl)
     InsertHistogram
 End Sub
-'Callback for trappediagram onAction
 Sub Rib_trappediagram(control As IRibbonControl)
     InsertTrappediagram
 End Sub
-'Callback for sumkurve onAction
 Sub Rib_sumkurve(control As IRibbonControl)
     InsertSumkurve
 End Sub
-
-'Callback for ButtonGeoGebra onAction
 Sub Rib_GeoGebra(control As IRibbonControl)
     GeoGebra
 End Sub
-'Callback for geogebrainsert onAction
 Sub Rib_insertgeogebra(control As IRibbonControl)
     InsertGeoGeobraObject
 End Sub
-'Callback for ButtonStatistik onAction
 Sub Rib_Statistik(control As IRibbonControl)
     InsertOpenExcel FilNavn:="statistik.xltm", WorkBookName:=Sprog.A(563)
 End Sub
 Sub Rib_plot3D(control As IRibbonControl)
-'#If Mac Then
-'    MsgBox "This function is not avaiable on Mac. Use the 3D functions in GeoGebra", vbOKOnly, "Mac issue"
-'#Else
     Plot3DGraph
-'#End If
 End Sub
-'Callback for omdrejlegm onAction
 Sub Rib_omdrejningslegeme(control As IRibbonControl)
-'#If Mac Then
-'    MsgBox "This function is not avaiable on Mac.", vbOKOnly, "Mac issue"
-'#Else
     OmdrejningsLegeme
-'#End If
 End Sub
-'Callback for retningsfeltm onAction
 Sub Rib_retningsfelt(control As IRibbonControl)
-'#If Mac Then
-'    MsgBox "This function is not avaiable on Mac. Use GeoGebra", vbOKOnly, "Mac issue"
-'#Else
     PlotDF
-'#End If
 End Sub
-'Callback for regrtabel onAction
 Sub Rib_regrtabel(control As IRibbonControl)
     InsertTabel
 End Sub
-
-'Callback for regrlin onAction
 Sub Rib_regrlin(control As IRibbonControl)
     linregression
 End Sub
-
-'Callback for regreksp onAction
 Sub Rib_regreksp(control As IRibbonControl)
     ekspregression
 End Sub
-
-'Callback for regrpot onAction
 Sub Rib_regrpot(control As IRibbonControl)
     potregression
 End Sub
-
-'Callback for regrpol onAction
 Sub Rib_regrpol(control As IRibbonControl)
     polregression
 End Sub
-
 Sub Rib_regrexcel(control As IRibbonControl)
-'#If Mac Then
-'    InsertOpenExcel "Graphs.xltm"
-'#Else
     Call InsertChart
-'#End If
 End Sub
-
-'Callback for regruser onAction
 Sub Rib_regruser(control As IRibbonControl)
     UserRegression
 End Sub
-
-'Callback for ButtonBinomtest onAction
 Sub Rib_binomialtest(control As IRibbonControl)
     BinomialTest
 End Sub
-'Callback for ButtonChi2 onAction
 Sub Rib_chi2test(control As IRibbonControl)
     Chi2Test
 End Sub
-'Callback for ButtonGoodnessoffit onAction
 Sub Rib_goodnessoffit(control As IRibbonControl)
     GoodnessofFit
 End Sub
-'Callback for ButtonSimulering onAction
 Sub Rib_simulering(control As IRibbonControl)
     InsertOpenExcel FilNavn:="Simulering.xltm", WorkBookName:=Sprog.A(599)
 End Sub
-'Callback for Buttonbinomialfordeling onAction
 Sub Rib_binomialfordeling(control As IRibbonControl)
     BinomialFordeling
 End Sub
-'Callback for Buttonnormalfordeling onAction
 Sub Rib_normalfordelinggraf(control As IRibbonControl)
     NormalFordelingGraf
 End Sub
-'Callback for ButtonChi2fordeling onAction
 Sub Rib_chi2fordelinggraf(control As IRibbonControl)
     Chi2Graf
 End Sub
 Sub Rib_tfordelinggraf(control As IRibbonControl)
-    InsertOpenExcel FilNavn:="studenttFordeling.xltm", WorkBookName:="t" 'Sprog.A(483)
+    InsertOpenExcel FilNavn:="studenttFordeling.xltm", WorkBookName:="t"
 End Sub
 
 'Callback for ButtonNyLig onAction
 Sub Rib_nylign(control As IRibbonControl)
     On Error GoTo Fejl
-
     Application.ScreenUpdating = False
     Selection.OMaths.Add Range:=Selection.Range
-'    Selection.OMaths(1).BuildUp
-    
     GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
-'Callback for ButtonNumEq onAction
 Sub Rib_nynumlign(control As IRibbonControl)
     InsertNumberedEquation
 End Sub
-'Callback for ButtonNumEqRef onAction
 Sub Rib_nynumlignref(control As IRibbonControl)
     InsertNumberedEquation True
 End Sub
-'Callback for ButtonRefEq onAction
 Sub Rib_reflign(control As IRibbonControl)
     InsertEquationRef
 End Sub
-'Callback for ButtonSetEqNo onAction
 Sub Rib_seteqno(control As IRibbonControl)
     SetEquationNumber
 End Sub
-'Callback for ButtonInsertEquationSection onAction
 Sub Rib_inserteqsec(control As IRibbonControl)
     InsertEquationHeadingNo
 End Sub
-'Callback for ButtonUpdateEqNo onAction
 Sub Rib_updateeqno(control As IRibbonControl)
     UpdateEquationNumbers
 End Sub
 Sub Rib_LatexTemplate(control As IRibbonControl)
     OpenLatexTemplate
 End Sub
-
-'Callback for Tilkomma onAction
 Sub Rib_TilLaTex(control As IRibbonControl)
     KonverterTilLaTex
 End Sub
@@ -923,7 +816,6 @@ Sub Rib_ConvPDFLatex(control As IRibbonControl)
 #End If
 End Sub
 
-'Callback for OpenFigurer onAction
 Sub Rib_figurer(control As IRibbonControl)
     If Sprog.SprogNr = 1 Then
         OpenWordFile ("Figurer.docx")
@@ -933,35 +825,28 @@ Sub Rib_figurer(control As IRibbonControl)
         OpenWordFile ("Figurer_english.docx")
     End If
 End Sub
-'Callback for InsertExcel onAction
 Sub Rib_insertexcel(control As IRibbonControl)
     Call InsertIndlejretExcel
 End Sub
-'Callback for TabelToList onAction
 Sub Rib_TabelToList(control As IRibbonControl)
     TabelToList
 End Sub
-'Callback for TabelToList onAction
 Sub Rib_ListToTabel(control As IRibbonControl)
     ListToTabel
 End Sub
-'Callback for InsertExcel onAction
 Sub Rib_trianglesolver(control As IRibbonControl)
     Dim UFtriangle As New UserFormTrekant
     UFtriangle.Show vbModeless
 End Sub
-'Callback for ButtonOm onAction
 Sub Rib_om(control As IRibbonControl)
     UserFormAbout.Show
 End Sub
-'Callback for ButtonHelp onAction
 Sub Rib_Help(control As IRibbonControl)
     If Sprog.SprogNr = 1 Then
         OpenWordFile ("WordMatManual.docx")
     Else
         OpenWordFile ("WordMatManual_english.docx")
     End If
-'    hjælpeMenu
 End Sub
 Sub Rib_HelpOnline(control As IRibbonControl)
 '    OpenLink "https://sites.google.com/site/wordmat/"
@@ -974,15 +859,12 @@ End Sub
 Sub Rib_HelpMaxima(control As IRibbonControl)
     OpenLink "https://maxima.sourceforge.io/docs/manual/maxima_toc.html#SEC_Contents"
 End Sub
-'Callback for ButtonCheckUpdate onAction
 Sub Rib_CheckForUpdate(control As IRibbonControl)
     CheckForUpdate
 End Sub
 Sub Rib_CheckForUpdateGeoGebra(control As IRibbonControl)
     InstallGeoGebra False
 End Sub
-
-'Callback for ButtonGenveje onAction
 Sub Rib_Genveje(control As IRibbonControl)
     UserFormGenveje.Show
 End Sub
@@ -1045,7 +927,7 @@ Sub Rib_getLabelDecimaler(control As IRibbonControl, ByRef returnedVal)
         returnedVal = Sprog.A(692)
 #End If
     Else
-        returnedVal = Sprog.RibSciNot
+        returnedVal = Sprog.A(445)
     End If
 End Sub
 Sub Rib_STDecimaler1(control As IRibbonControl, ByRef returnedVal)
@@ -1073,10 +955,10 @@ End Sub
 
 
 Sub Rib_GetLabelFormulae(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibFormulae
+    returnedVal = Sprog.A(68)
 End Sub
 Sub Rib_GetLabelPercentage(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibPercentage
+    returnedVal = Sprog.A(438)
 End Sub
 'Callback for proc1 getLabel
 Sub Rib_FSpercentage1(control As IRibbonControl, ByRef returnedVal)
@@ -1093,7 +975,7 @@ Sub Rib_FSpercentage4(control As IRibbonControl, ByRef returnedVal)
 End Sub
 
 Sub Rib_GetLabelFunctions(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibFunctions
+    returnedVal = Sprog.A(439)
 End Sub
 Sub Rib_FSlinear1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "y=a" & ChrW(183) & "x+b                Lineær ligning"
@@ -1142,7 +1024,7 @@ Sub Rib_FSpol1(control As IRibbonControl, ByRef returnedVal)
 End Sub
 
 Sub Rib_GetLabelGeometry(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibGeometry
+    returnedVal = Sprog.A(440)
 End Sub
 Sub Rib_FSgeo1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "a/sin(A)=b/sin(B)          Sinus-relation"
@@ -1155,7 +1037,7 @@ Sub Rib_FSgeo3(control As IRibbonControl, ByRef returnedVal)
 End Sub
 
 Sub Rib_GetLabelProbabilityShort(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibProbabilityShort
+    returnedVal = Sprog.A(441)
 End Sub
 Sub Rib_FSBinomial(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(481)
@@ -1205,7 +1087,7 @@ Sub Rib_FSinf3(control As IRibbonControl, ByRef returnedVal)
 End Sub
 
 Sub Rib_GetLabelVector(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibVector
+    returnedVal = Sprog.A(442)
 End Sub
 Sub Rib_FS2D(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(484)
@@ -1260,90 +1142,83 @@ Sub Rib_FSvec15(control As IRibbonControl, ByRef returnedVal)
 End Sub
 
 Sub Rib_GetLabelMath(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibMath
+    returnedVal = Sprog.A(435)
 End Sub
 Sub Rib_GetLabelPhysics(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibPhysics
+    returnedVal = Sprog.A(436)
 End Sub
 Sub Rib_GetLabelChemistry(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibChemistry
+    returnedVal = Sprog.A(437)
 End Sub
 
 Sub Rib_GetLabelSettings(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibSettings
+    returnedVal = Sprog.A(443)
 End Sub
 
 Sub Rib_GetLabelSciNot(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibSciNot
+    returnedVal = Sprog.A(445)
 End Sub
 
 Sub Rib_GetLabelBeregn(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibBeregn
+    returnedVal = Sprog.A(446)
 End Sub
 Sub Rib_GetLabelMaximaCommand(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibMaximaCommand
+    returnedVal = Sprog.A(448)
 End Sub
 Sub Rib_GetLabelSolve(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibSolve
+    returnedVal = Sprog.A(447)
 End Sub
 Sub Rib_GetLabelSolveNum(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibSolveNum
+    returnedVal = Sprog.A(449)
 End Sub
 Sub Rib_GetLabelEliminate(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibEliminate
+    returnedVal = Sprog.A(450)
 End Sub
 Sub Rib_GetLabelTestTF(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.TestTF
+    returnedVal = Sprog.A(451)
 End Sub
 Sub Rib_GetLabelSolveDE(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibSolveDE
+    returnedVal = Sprog.A(452)
 End Sub
-'Callback for solvedenum getLabel
 Sub Rib_GetLabelSolveDEnum(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibSolveDEnum
+    returnedVal = Sprog.A(843)
 End Sub
 Sub Rib_GetLabelDeleteDefs(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDefDelete
-End Sub
-Sub Rib_GetLabelDefineVariable(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDefVariable
+    returnedVal = Sprog.A(453)
 End Sub
 Sub Rib_GetLabelDefineFunction(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDefFunction
-End Sub
-Sub Rib_GetLabelDefineEquation(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDefEquation
+    returnedVal = Sprog.A(454)
 End Sub
 Sub Rib_GetLabelDefineConstants(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDefConstants
+    returnedVal = Sprog.A(455)
 End Sub
 Sub Rib_GetLabelReduce(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibReduce
+    returnedVal = Sprog.A(456)
 End Sub
 Sub Rib_GetLabelSimplify(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.Simplify
+    returnedVal = Sprog.A(805)
 End Sub
 Sub Rib_GetLabelFactor(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.Factor
+    returnedVal = Sprog.A(806)
 End Sub
 Sub Rib_GetLabelExpand(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.Expand
+    returnedVal = Sprog.A(807)
 End Sub
 Sub Rib_GetLabelInfinitesimal(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibInfinitesimal
+    returnedVal = Sprog.A(457)
 End Sub
 Sub Rib_GetLabelIntegrate(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibIntegrate
+    returnedVal = Sprog.A(459)
 End Sub
 Sub Rib_GetLabelDifferentiate(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDif
+    returnedVal = Sprog.A(458)
 End Sub
 
 Sub Rib_GetLabelPlotting(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibPlotting
+    returnedVal = Sprog.A(460)
 End Sub
 Sub Rib_GetLabelShowGraph(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibShowGraph
+    returnedVal = Sprog.A(461)
 End Sub
 
 Sub Rib_getVisibleGnuPlot(control As IRibbonControl, ByRef returnedVal)
@@ -1361,11 +1236,9 @@ Sub Rib_getVisibleGraph(control As IRibbonControl, ByRef returnedVal)
 #End If
 End Sub
 Sub Rib_GetLabelDirectionField(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDirectionField
+    returnedVal = Sprog.A(462)
 End Sub
-Sub Rib_GetLabelInsertGeoGebra(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibInsertGeoGebra
-End Sub
+
 Sub Rib_getVisibleInsertGeoGebra(control As IRibbonControl, ByRef returnedVal)
 #If Mac Then
     returnedVal = False
@@ -1374,96 +1247,96 @@ Sub Rib_getVisibleInsertGeoGebra(control As IRibbonControl, ByRef returnedVal)
 #End If
 End Sub
 Sub Rib_GetLabel3DPlot(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.Rib3DPlot
+    returnedVal = Sprog.A(463)
 End Sub
 Sub Rib_GetLabel3dRotate(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.Rib3DRotate
+    returnedVal = Sprog.A(464)
 End Sub
 Sub Rib_GetLabelStatistics(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibStatistics
+    returnedVal = Sprog.A(465)
 End Sub
 
 Sub Rib_GetLabelUgrup(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibUgrup
+    returnedVal = Sprog.A(466)
 End Sub
 Sub Rib_GetLabelGrup(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibGrup
+    returnedVal = Sprog.A(467)
 End Sub
 Sub Rib_GetLabelStickChart(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibStickChart
+    returnedVal = Sprog.A(468)
 End Sub
 Sub Rib_GetLabelHistogram(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibHistogram
+    returnedVal = Sprog.A(469)
 End Sub
 Sub Rib_GetLabelStepChart(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibStepChart
+    returnedVal = Sprog.A(470)
 End Sub
 Sub Rib_GetLabelCumChart(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibCumChart
+    returnedVal = Sprog.A(471)
 End Sub
 Sub Rib_GetLabelBoxPlot(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibBoxPlot
+    returnedVal = Sprog.A(472)
 End Sub
 
 Sub Rib_GetLabelStatProb(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibStatProb
+    returnedVal = Sprog.A(473)
 End Sub
 Sub Rib_GetLabelRegression(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibRegression
+    returnedVal = Sprog.A(474)
 End Sub
 Sub Rib_GetLabelInsertTable(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibInsertTable
+    returnedVal = Sprog.A(475)
 End Sub
 Sub Rib_GetLabelLinRegr(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibLinRegr
+    returnedVal = Sprog.A(476)
 End Sub
 Sub Rib_GetLabelExpRegr(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibExpRegr
+    returnedVal = Sprog.A(477)
 End Sub
 Sub Rib_GetLabelPowRegr(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibPowRegr
+    returnedVal = Sprog.A(478)
 End Sub
 Sub Rib_GetLabelPolRegr(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibPolRegr
+    returnedVal = Sprog.A(479)
 End Sub
 
 Sub Rib_GetLabelDistributions(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDistributions
+    returnedVal = Sprog.A(480)
 End Sub
 Sub Rib_GetLabelBinomDist(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibBinomDist
+    returnedVal = Sprog.A(162)
 End Sub
 Sub Rib_GetLabelNormalDist(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibNormalDist
+    returnedVal = Sprog.A(180)
 End Sub
 Sub Rib_GetLabelChi2Dist(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibChi2Dist
+    returnedVal = Sprog.A(244)
 End Sub
 Sub Rib_GetLabeltDist(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = "t-fordeling"
 End Sub
 
 Sub Rib_GetLabelTest(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibTest
+    returnedVal = Sprog.A(246)
 End Sub
 Sub Rib_GetLabelBinomTest(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibBinomTest
+    returnedVal = Sprog.A(347)
 End Sub
 Sub Rib_GetLabelChi2Test(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibChi2Test
+    returnedVal = Sprog.A(370)
 End Sub
 Sub Rib_GetLabelSimulation(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibSimulation
+    returnedVal = Sprog.A(396)
 End Sub
 Sub Rib_GetLabelGroup(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibGroup
+    returnedVal = Sprog.A(397)
 End Sub
 
 Sub Rib_GetLabelDiverse(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibDiverse
+    returnedVal = Sprog.A(411)
 End Sub
 Sub Rib_GetLabelNewEquation(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibNewEquation
+    returnedVal = Sprog.A(412)
 End Sub
 Sub Rib_GetLabelNumEquation(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(1)
@@ -1484,58 +1357,55 @@ Sub Rib_GetLabelUpdateEqNo(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(9)
 End Sub
 Sub Rib_GetLabelSymbols(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibSymbols
+    returnedVal = Sprog.A(413)
 End Sub
 Sub Rib_GetLabelLatexTemplate(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.A(655)
 End Sub
-Sub Rib_GetLabelMultSign(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibMultsign
-End Sub
 Sub Rib_GetLabelFigurs(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibFigurs
+    returnedVal = Sprog.A(415)
 End Sub
 Sub Rib_GetLabelTable(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibTable
+    returnedVal = Sprog.A(535)
 End Sub
 Sub Rib_GetLabelInsertExcel(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibInsertExcel
+    returnedVal = Sprog.A(536)
 End Sub
 Sub Rib_GetLabelTableToList(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibTableToList
+    returnedVal = Sprog.A(631)
 End Sub
 Sub Rib_GetLabelListToTable(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibListToTable
+    returnedVal = Sprog.A(632)
 End Sub
 Sub Rib_GetLabelTriangle(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.RibTriangle
+    returnedVal = Sprog.A(665)
 End Sub
 Sub Rib_GetLabelHelp(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.Help
+    returnedVal = Sprog.A(808)
 End Sub
 Sub Rib_GetLabelManual(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.Manual
+    returnedVal = Sprog.A(809)
 End Sub
 Sub Rib_GetLabelManualDoc(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.ManualDoc
+    returnedVal = Sprog.A(810)
 End Sub
 Sub Rib_GetLabelManualOnline(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.ManualOnline
+    returnedVal = Sprog.A(811)
 End Sub
 Sub Rib_GetLabelMaximaHelp(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(0)
 End Sub
 Sub Rib_GetLabelAbout(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.About & " " & AppNavn
+    returnedVal = Sprog.A(812) & " " & AppNavn
 End Sub
 Sub Rib_GetLabelUpdate(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.Update
+    returnedVal = Sprog.A(813)
 End Sub
 Sub Rib_GetLabelShortcuts(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.Shortcuts
+    returnedVal = Sprog.A(814)
 End Sub
 Sub Rib_GetLabelUserRegr(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RegrUser
+    returnedVal = Sprog.A(842)
 End Sub
 Sub Rib_GetLabelRegrExcel(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "Excel regression"
@@ -1543,7 +1413,7 @@ End Sub
 
 ' screentips
 Sub Rib_STformelsamling(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.RibFormulae
+    returnedVal = Sprog.A(68)
 End Sub
 Sub Rib_STmathformula(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(486)
@@ -1860,7 +1730,6 @@ End Sub
 Sub Rib_STt2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "Student's t-distribution"
 End Sub
-
 Sub Rib_STtestmenu1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(591)
 End Sub
@@ -2062,5 +1931,3 @@ End Sub
 Sub Rib_STgeogebraBplot2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "Plot graphs and points using GeoGebra webapplet in a browser. Does not require internet access. Quite fast. Many functions."
 End Sub
-
-

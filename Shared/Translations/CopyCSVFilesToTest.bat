@@ -8,4 +8,4 @@ if %errorLevel% neq 0 (
     exit /b
 )
 
-xcopy "C:\GitHub\WordMat\Shared\Translations\*.csv" "C:\Program Files (x86)\WordMat\languages" /Y
+xcopy "C:\GitHub\WordMat\Shared\Translations\win\*.csv" "C:\Program Files (x86)\WordMat\languages" /Y

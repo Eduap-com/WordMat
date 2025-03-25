@@ -97,14 +97,12 @@ Sub SetComboIndexs()
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.Shortcuts
+    Me.Caption = Sprog.A(814)
     Label1.Caption = Sprog.A(65)
     Label2.Caption = Sprog.A(66)
     Label3.Caption = Sprog.A(67)
-'#If Mac Then
-'    TextBox1.Text = Replace(Sprog.A(68), "Alt", "ctrl")
-'#Else
-'#End If
+    Label_cancel.Caption = Sprog.Cancel
+    Label_nulstil.Caption = Sprog.Reset
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -163,19 +161,19 @@ CB.Clear
 CB.AddItem ""
 CB.AddItem Sprog.A(701) 'New equation
 CB.AddItem Sprog.A(1) 'New numbered equation
-CB.AddItem Sprog.RibBeregn
-CB.AddItem Sprog.SolveEquation
+CB.AddItem Sprog.A(446)
+CB.AddItem Sprog.A(760)
 CB.AddItem Sprog.A(62) ' definer
-CB.AddItem Sprog.RibDefDelete
-CB.AddItem Sprog.RibShowGraph
-CB.AddItem Sprog.RibFormulae
-CB.AddItem Sprog.RibReduce
-CB.AddItem Sprog.RibSolveDE
+CB.AddItem Sprog.A(453)
+CB.AddItem Sprog.A(461)
+CB.AddItem Sprog.A(68)
+CB.AddItem Sprog.A(456)
+CB.AddItem Sprog.A(452)
 CB.AddItem Sprog.A(505) ' Maxima kommando
 CB.AddItem Sprog.A(702) 'forrige resultater
-CB.AddItem Sprog.RibSettings
+CB.AddItem Sprog.A(443)
 CB.AddItem Sprog.A(703) 'Toggle num/exact
-CB.AddItem Sprog.Units
+CB.AddItem Sprog.A(693)
 CB.AddItem Sprog.A(704) ' Convert latex
 CB.AddItem Sprog.A(705) ' Latex pdf
 CB.AddItem Sprog.A(607) ' reference til ligning

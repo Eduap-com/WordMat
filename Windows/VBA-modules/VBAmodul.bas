@@ -649,3 +649,28 @@ Sub BackupThisDocument()
     Set fso = Nothing
 End Sub
 
+Sub FindUnUsedSprog()
+' Searches all the code for Sprog.A(...) to find any numbers not used
+    Dim VBC As Object 'VBComponent
+    Dim i As Long, j As Long, s As String, FoundIt As Boolean
+    
+    MsgBox "It takes about a minute to find all values", vbOKOnly, "Wait"
+    
+    For j = 0 To 705 ' the number range to search
+        FoundIt = False
+        For Each VBC In ActiveDocument.VBProject.VBComponents
+            If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
+                If InStr(VBC.CodeModule.Lines(1, VBC.CodeModule.CountOfLines), "Sprog.A(" & j & ")") > 0 Then
+                    FoundIt = True
+                    Exit For
+                End If
+                If FoundIt Then Exit For
+            End If
+        Next
+        If Not FoundIt Then
+            s = s & j & ","
+        End If
+    Next
+    MsgBox "Language values not used:" & vbCrLf & s, vbOKOnly, "Done"
+    Debug.Print s
+End Sub

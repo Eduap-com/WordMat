@@ -61,7 +61,7 @@ End Sub
 
 Private Sub UserForm_Activate()
     Dim i As Integer
-
+    SetCaptions
     EqName = ""
     ListBox1.Clear
     For i = 1 To ActiveDocument.Bookmarks.Count
@@ -71,10 +71,10 @@ Private Sub UserForm_Activate()
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.A(15)
+    Me.Caption = Sprog.A(14)
     Label_ok.Caption = Sprog.OK
     Label_cancel.Caption = Sprog.Cancel
-    Label_Ligninger.Caption = Sprog.Equations
+    Label_ligninger.Caption = Sprog.A(834)
     
 End Sub
 

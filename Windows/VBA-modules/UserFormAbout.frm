@@ -13,7 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
 
 Private EventsCol As New Collection
@@ -93,23 +92,14 @@ End Sub
 Private Sub UserForm_Activate()
     SetCaptions
     
+    Label_partnerskab2.Caption = Sprog.A(161)
     If QActivePartnership Then
-        If Sprog.SprogNr = 1 Then
-            Label_partnerskab.Caption = "Partnerskab registreret med " & SkoleNavn
-        Else
-            Label_partnerskab.Caption = "Partnership registered with " & SkoleNavn
-        End If
+        Label_partnerskab.Caption = Sprog.A(136) & SkoleNavn
         Label_checkpartnerskab.visible = False
     Else
-        Label_partnerskab.Caption = "Ingen Partnerskab registreret"
+        Label_partnerskab.Caption = Sprog.A(140)
         Label_checkpartnerskab.visible = True
     End If
-        If Sprog.SprogNr = 1 Then
-'            Label_partnerskab.Caption = "Partnerskab registreret med " & SkoleNavn
-        Else
-            Label_partnerskab.Caption = "Schools can sign up for a Partnership with Eduap. Partnership gets access to support, WordMat+ and much more. Click to read more"
-        End If
-
 End Sub
 
 Sub SetCaptions()
@@ -120,18 +110,16 @@ Sub SetCaptions()
         v = v & PatchVersion
     End If
     If Sprog.SprogNr = 1 Then
-        Me.Caption = Sprog.About & " WordMat"
+        Me.Caption = Sprog.A(812) & " WordMat"
         Label_title.Caption = "WordMat"
     Else
-        Me.Caption = Sprog.About & " WordMath"
+        Me.Caption = Sprog.A(812) & " WordMath"
         Label_title.Caption = "WordMath"
     End If
     Label_version.Caption = "Version: " & v
     Label_text.Caption = Sprog.A(20)
 
 End Sub
-'SA(20, 0) = AppNavn & " er lavet af Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2024." & VbCrLfMac & VbCrLfMac & "Programmet er gratis og stilles til rådighed under Gnu General public license." & VbCrLfMac & VbCrLfMac & "Med WordMat er følgende andre gratis programmer installeret: Maxima, GnuPlot, GeoGebra, Graph " & VbCrLfMac & VbCrLfMac & "www.eduap.com"
-'SA(20, 1) = AppNavn & " was made by Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2024." & VbCrLfMac & VbCrLfMac & "The program is free and open source under Gnu General public license." & VbCrLfMac & VbCrLfMac & "WordMat uses the following programs: Maxima, GnuPlot, GeoGebra, Graph " & VbCrLfMac & VbCrLfMac & "www.eduap.com"
 
 Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_ok.BackColor = LBColorPress
@@ -156,9 +144,9 @@ Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
 End Sub
 Private Sub Label_checkpartnerskab_Click()
     If QActivePartnership(True) Then
-        MsgBox "Din skole har aktivt partnerskab. Du kan nu bruge WordMat+", vbOKOnly, "Success!"
+        MsgBox Sprog.A(120), vbOKOnly, "Success!"
         UserForm_Activate
     Else
-        MsgBox "Desværre. Din skole har ikke et aktivt partnerskab.", vbOKOnly, "Ingen Partnerskab"
+        MsgBox Sprog.A(121), vbOKOnly, Sprog.A(96)
     End If
 End Sub

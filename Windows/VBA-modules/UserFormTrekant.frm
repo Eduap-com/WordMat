@@ -122,7 +122,7 @@ On Error GoTo Fejl
     Selection.Collapse wdCollapseEnd
 '    If MaximaForklaring Then
         Selection.TypeParagraph
-        Selection.TypeText Sprog.TriangleSolverExplanation3 & inputtext
+        Selection.TypeText Sprog.A(782) & inputtext
         Selection.TypeParagraph
 '    End If
     Selection.TypeParagraph
@@ -158,7 +158,7 @@ On Error GoTo Fejl
     
     'Hvis 2 løsninger
     If vA2 > 0 Then
-    MsgBox Sprog.TS2Solutions, vbOKOnly, Sprog.TS2Solutions2
+    MsgBox Sprog.A(783), vbOKOnly, Sprog.A(785)
     Set t = ActiveDocument.Tables.Add(Selection.Range, 1, 2)
     
     Set r = t.Cell(1, 1).Range
@@ -211,7 +211,7 @@ On Error GoTo Fejl
     
 GoTo slut
 Fejl:
-    MsgBox Sprog.TSNoSolution, vbOKOnly, Sprog.Error
+    MsgBox Sprog.A(786), vbOKOnly, Sprog.Error
     Exit Sub
 slut:
     SaveSettings
@@ -300,8 +300,8 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
     End If
     
     If nv + ns < 3 Then
-        statustext = Sprog.TSMissingInfo
-        If advarsler Then MsgBox Sprog.TSMissingInfo & vbCrLf & Sprog.A(210), vbOKOnly, Sprog.Error
+        statustext = Sprog.A(784)
+        If advarsler Then MsgBox Sprog.A(784) & vbCrLf & Sprog.A(210), vbOKOnly, Sprog.Error
         Exit Sub
     ElseIf nv + ns > 3 Then
         If nv = 3 And ns = 1 Then
@@ -671,7 +671,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
     End If
 GoTo slut
 Fejl:
-    statustext = Sprog.TSMissingInfo
+    statustext = Sprog.A(784)
     If advarsler Then MsgBox statustext, vbOKOnly, Sprog.Error
     Exit Sub
 slut:
@@ -679,9 +679,9 @@ slut:
         GoTo Fejl
     Else
         succes = True
-        statustext = Sprog.TSInfoOK
+        statustext = Sprog.A(787)
     End If
-    If vA2 > 0 Then statustext = statustext & vbCrLf & "(" & Sprog.TS2Solutions2 & ")."
+    If vA2 > 0 Then statustext = statustext & vbCrLf & "(" & Sprog.A(785) & ")."
 
 End Sub
 
@@ -983,8 +983,8 @@ ElseIf OptionButton_navngivsiderAB.Value = True Then
     TextBox_captionsb.Text = TextBox_captionA.Text & TextBox_captionC.Text
     TextBox_captionsc.Text = TextBox_captionA.Text & TextBox_captionB.Text
 End If
-OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.right
-OptionButton_reth.Caption = TextBox_captionC.Text & " " & Sprog.right
+OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.A(773)
+OptionButton_reth.Caption = TextBox_captionC.Text & " " & Sprog.A(773)
 End Sub
 Private Sub TextBox_captionA_Change()
 If OptionButton_navngivstorlille.Value = True Then
@@ -993,7 +993,7 @@ If OptionButton_navngivstorlille.Value = True Then
 ElseIf OptionButton_navngivsiderAB.Value = True Then
     OpdaterNavngivning
 End If
-OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.right
+OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.A(773)
 End Sub
 
 Private Sub TextBox_captionB_Change()
@@ -1012,7 +1012,7 @@ If OptionButton_navngivstorlille.Value = True Then
 ElseIf OptionButton_navngivsiderAB.Value = True Then
     OpdaterNavngivning
 End If
-OptionButton_reth.Caption = TextBox_captionC.Text & " " & Sprog.right
+OptionButton_reth.Caption = TextBox_captionC.Text & " " & Sprog.A(773)
 End Sub
 
 Private Sub TextBox_captionsa_Change()
@@ -1144,19 +1144,19 @@ End Sub
 
 
 Private Sub SetCaptions()
-    Me.Caption = Sprog.TriangleSolver
+    Me.Caption = Sprog.A(770)
     Label_ok.Caption = Sprog.OK
-    Frame1.Caption = Sprog.RightAngled & "?"
-    Frame2.Caption = Sprog.Naming
-    OptionButton_navngivmanuel.Caption = Sprog.Manuel
-    OptionButton_navngivstorlille.Caption = Sprog.AngleNaming1
-    OptionButton_navngivsiderAB.Caption = Sprog.AngleNaming2
-    CheckBox_tal.Caption = Sprog.InsertNumbers
-    CheckBox_forklaring.Caption = Sprog.ShowCalculations
-    Label1.Caption = Sprog.TriangleSolverExplanation1
-    Label2.Caption = Sprog.TriangleSolverExplanation2
-    OptionButton_vilk.Caption = Sprog.AnyTriangle
-    Label_nulstil.Caption = Sprog.Clear
+    Frame1.Caption = Sprog.A(771) & "?"
+    Frame2.Caption = Sprog.A(774)
+    OptionButton_navngivmanuel.Caption = Sprog.A(775)
+    OptionButton_navngivstorlille.Caption = Sprog.A(776)
+    OptionButton_navngivsiderAB.Caption = Sprog.A(777)
+    CheckBox_tal.Caption = Sprog.A(778)
+    CheckBox_forklaring.Caption = Sprog.A(779)
+    Label1.Caption = Sprog.A(780)
+    Label2.Caption = Sprog.A(781)
+    OptionButton_vilk.Caption = Sprog.A(772)
+    Label_nulstil.Caption = Sprog.A(815)
     
 End Sub
 

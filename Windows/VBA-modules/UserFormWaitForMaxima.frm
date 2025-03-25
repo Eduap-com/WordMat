@@ -34,9 +34,9 @@ End Sub
 Private Sub SetCaptions()
     Me.Caption = Sprog.A(673)
     Label_tip.Caption = Sprog.A(674)
-    Frame1.Caption = Sprog.Activity
-    Label_stop.Caption = Sprog.StopLabel
-    Label1.Caption = Sprog.Wait
+    Frame1.Caption = Sprog.A(827)
+    Label_stop.Caption = Sprog.A(828)
+    Label1.Caption = Sprog.A(826)
 End Sub
 
 Private Sub label_stop_Click()

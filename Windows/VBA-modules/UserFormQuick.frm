@@ -39,17 +39,17 @@ Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
 On Error GoTo slut
     If KeyCode.Value = 78 And Shift = 4 Then ' alt+n
     If MaximaExact = 0 Then
-        Me.Label_text.Caption = Sprog.Exact ' "Eksakt"
+        Me.Label_text.Caption = Sprog.A(710) ' "Eksakt"
         DoEvents
         MaximaExact = 1
         start = Timer    ' Set start time.
     ElseIf MaximaExact = 1 Then
-        Me.Label_text.Caption = Sprog.Numeric ' "Num"
+        Me.Label_text.Caption = Sprog.A(711) ' "Num"
         DoEvents
         MaximaExact = 2
         start = Timer    ' Set start time.
     Else
-        Me.Label_text.Caption = Sprog.Auto ' "Auto"
+        Me.Label_text.Caption = Sprog.A(712) ' "Auto"
         DoEvents
         MaximaExact = 0
         start = Timer    ' Set start time.

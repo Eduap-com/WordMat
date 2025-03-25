@@ -32,9 +32,9 @@ End Sub
 Private Sub UserForm_Initialize()
 '    Call RemoveCaption(Me) ' virker ikke særlig godt
     Me.Caption = ""
-    Label_auto.Caption = Sprog.Auto
-    Label_exact.Caption = Sprog.Exact
-    Label_num.Caption = Sprog.Numeric
+    Label_auto.Caption = Sprog.A(712)
+    Label_exact.Caption = Sprog.A(710)
+    Label_num.Caption = Sprog.A(711)
 #If Mac Then
 '    Me.Height = 100
 #End If

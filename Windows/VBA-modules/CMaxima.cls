@@ -871,7 +871,7 @@ start:
 
     If StopNow Then
         If MaximaExact < 2 Then
-            If MsgBox(Sprog.RetryNum, vbRetryCancel, "Stop") = vbRetry Then
+            If MsgBox(Sprog.A(839), vbRetryCancel, "Stop") = vbRetry Then
                 gemMaxExct = MaximaExact
                 MaximaExact = 2
                 StopNow = False
@@ -1533,9 +1533,7 @@ slut:
 End Sub
 Sub beregn()
     Dim inkom As String, pkommando As String, StartKommando3 As String
-    Dim posca As Integer
-    Dim posligmed As Integer
-    Dim possumtegn As Integer
+    Dim posca As Integer, posligmed As Integer, possumtegn As Integer
     Dim gemMaxExct As Integer
     gemMaxExct = -1
     Kommando = Replace(Kommando, vbLf, "")
@@ -1671,7 +1669,7 @@ start:
     '
     If StopNow Then
         If MaximaExact < 2 Then
-            If MsgBox(Sprog.RetryNum, vbRetryCancel, "Stop") = vbRetry Then
+            If MsgBox(Sprog.A(839), vbRetryCancel, "Stop") = vbRetry Then
                 gemMaxExct = MaximaExact
                 MaximaExact = 2
                 StopNow = False
@@ -6560,7 +6558,7 @@ Sub InsertMaximaOutput()
     '    mo.OMaths(1).BuildUp
 
     If Len(MaximaOutput) > 1000 Then
-        If MsgBox2("Output is " & Len(MaximaOutput) & " characters long." & VbCrLfMac & "Click YES to insert all characters in Word. (Warning: Could slow or crash Word)" & VbCrLfMac & "Click NO to only insert the first 1000 characters", vbYesNo, Sprog.Warning) = vbNo Then
+        If MsgBox2("Output is " & Len(MaximaOutput) & " characters long." & VbCrLfMac & "Click YES to insert all characters in Word. (Warning: Could slow or crash Word)" & VbCrLfMac & "Click NO to only insert the first 1000 characters", vbYesNo, Sprog.A(846)) = vbNo Then
             MaximaOutput = Left(MaximaOutput, 1000) + Sprog.A(119)
         End If
     End If
@@ -6641,7 +6639,7 @@ Function TranslateReplaceComment(comm As String) As String
     End If
 
     If InStr(comm, "More solutions may exist") > 0 Then
-        outtext = outtext & Sprog.FoundNumericSolutions
+        outtext = outtext & Sprog.A(788)
     End If
 
     If InStr(comm, "Warning: More equations than variables.") > 0 Then
@@ -7368,10 +7366,12 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
                     defenk = CodeForMaxima(defenk, CASengine)
                     If InStr(defenk, "if") <= 0 And (InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0) Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
                         AddDefinition = AddDefinition & GetAssumeText(defenk)
-                        ldefname(defindex) = defenk
-                        ldefvalue(defindex) = ""
-                        Set MathOArr(defindex) = MathObj
-                        defindex = defindex + 1
+                        If UBound(ldefname) >= defindex Then
+                            ldefname(defindex) = defenk
+                            ldefvalue(defindex) = ""
+                            Set MathOArr(defindex) = MathObj
+                            defindex = defindex + 1
+                        End If
                         GoTo hop
                     End If
                     If Not deflign Then
@@ -7408,7 +7408,7 @@ hop2:                    ' hvis setunit eller assume eller declare
                 If InStr(Split(defenk, ":")(0), "diff") > 0 Then
                     MsgBox Sprog.A(116) & s
                 ElseIf (t = "e" And InStr(defenk, "[") <= 0) Or t = "integrate" Or t = "sin" Or t = "cos" Or t = "tan" Or t = "diff" Or t = "solve" Or t = "at" Or t = "for" Or t = "in" Or t = "do" Or t = "if" Or t = "and" Or t = "or" Or t = "product" Or t = "step" Or t = "next" Or t = "from" Or t = "limit" Or t = "sum" Or t = "then" Or t = "and" Or t = "or" Or t = "else" Or t = "unless" Or t = "while" Then
-                    MsgBox Sprog.Variable & " " & t & " " & Sprog.A(434), vbOKOnly, Sprog.Error
+                    MsgBox Sprog.A(845) & " " & t & " " & Sprog.A(434), vbOKOnly, Sprog.Error
                 ElseIf t = "setunits" Or t = "assume" Or t = "declare" Then
                     '                    AddDefinition =  AddDefinition & CodeForMaxima(defenk) & "$"
                     AddDefinition = AddDefinition & defenk & ";"

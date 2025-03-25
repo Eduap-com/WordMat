@@ -13,8 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' This form allows the user to set all the different settings in WordMath. Including language
 
 Private MustRestart As Boolean
 Private LoadUnits As Boolean
@@ -88,15 +88,7 @@ On Error Resume Next
     Else
         MaximaGangeTegn = "*"
     End If
-    
-    
-    
-'    If OptionButton_punktum.value Then ' erstattet af simplere nedenfor
-'        MaximaSeparator = True
-'    Else
-'        MaximaSeparator = False
-'    End If
-    
+        
     If OptionButton_numonly.Value = True Then
         MaximaExact = 2
     ElseIf OptionButton_exactonly.Value = True Then
@@ -204,38 +196,7 @@ On Error Resume Next
     Sprog.CheckSetting
     Sprog.LoadSprogArray
     RibbonSubs.RefreshRibbon
-'#If Mac Then
-'    If LangChange Then MsgBox Sprog.A(671)
-'#End If
-
-#If Mac Then ' fjernet v. 1.23
-' håndteres nu af unitimage for windows
-''        If MustRestart Then
-''            TurnUnitsOff
-''        ElseIf LoadUnits And MaximaUnits Then
-''            TurnUnitsOn
-''        ElseIf UserUnits And MaximaUnits Then
-''            UpdateUnits
-''        End If
-'        If MustRestart Then
-'            MaxProc.CloseProcess
-'            If MaximaUnits Then
-'                MaxProc.Units = 1
-'                MaxProc.OutUnits = omax.ConvertUnits(OutUnits)
-'            Else
-'                MaxProc.Units = 0
-'            End If
-'            MaxProc.StartMaximaProcess
-'        ElseIf LoadUnits And MaximaUnits Then
-'            TurnUnitsOn
-'        ElseIf UserUnits And MaximaUnits Then
-'            MaxProc.OutUnits = omax.ConvertUnits(OutUnits)
-'            MaxProc.UpdateUnits
-'        End If
-'    End If
-#End If
 End Sub
-
 
 Private Sub CommandButton_openbackup_Click()
 On Error Resume Next
@@ -297,13 +258,13 @@ Private Sub CommandButton_shortcuts_Click()
 #End If
     
     If Not KSok Then
-        MsgBox "Det ser ud til at genvejene ikke er sat korrekt i denne udgave af WordMat. Det kræver nok en Fejlmelding", vbOKOnly, "Fejl"
+        MsgBox Sprog.A(741), vbOKOnly, Sprog.Error
     Else
         If Sprog.SprogNr = 1 Then
 #If Mac Then
-            MsgBox2 "Det er nu forsøgt at reparere tastaturgenveje." & vbCrLf & "Hvis det ikke virker, så slet filen 'normal.dotm' i mappen ""~/Library/Group Containers/UBF8T346G9.Office/User Content/Templates"" og genstart Word"
+            MsgBox2 Sprog.A(738)
 #Else
-            MsgBox2 "Det er nu forsøgt at reparere tastaturgenveje." & vbCrLf & "Hvis det ikke virker, så slet filen 'normal.dotm' i mappen ""%appdata%/Microsoft/Templates"" og genstart Word"
+            MsgBox2 Sprog.A(739)
 #End If
         Else
             MsgBox "Keyboard shortcuts restored", vbOKOnly, "Done"
@@ -318,9 +279,9 @@ End Sub
 
 Private Sub Label_checkpartnerskab_Click()
     If QActivePartnership(True) Then
-        MsgBox "Din skole har aktivt partnerskab", vbOKOnly, "Partnerskab OK"
+        MsgBox Sprog.A(120), vbOKOnly, "OK"
     Else
-        MsgBox "Der kunne ikke registreres et aktivt partnerskab", vbOKOnly, "Ingen Partnerskab"
+        MsgBox Sprog.A(121), vbOKOnly, "Sorry"
     End If
 End Sub
 
@@ -346,9 +307,6 @@ Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, By
     SetTabsInactive
 End Sub
 
-
-
-
 Private Sub OptionButton_casmaxima_Change()
     SetCasButtons
 End Sub
@@ -368,12 +326,7 @@ Private Sub UserForm_Activate()
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
     
-
-    If Sprog.SprogNr = 1 Then
-        Label_geogebraexplain.Caption = "GeoGebra Calculator Suite bliver installeret sammen med WordMat. Det kører i en browser, men kræver ikke internet. Det fungerer ens på Windows og Mac, og starter hurtigt op." & vbCrLf & "GeoGebra 5 fungerer ens på Windows og Mac, men kræver separat installation." & vbCrLf & "Windows understøtter også de andre app-versioner af GeoGebra som Geogebra 6, Graphing calculator mm. Disse vil blive anvendt, hvis GeoGebra 5 ikke er installeret."
-    Else
-        Label_geogebraexplain.Caption = "GeoGebra Calculator Suite is installed with WordMat. It runs in a browser, but doesn't require internet. It works the same on Windows and Mac, and starts quickly." & vbCrLf & "GeoGebra 5 Works the same on Windows and Mac, but requires installation." & vbCrLf & "Windows also supports the other app-versions of GeoGebra like Geogebra 6, Graphing Calculator etc. These will be used if GeoGebra 5 isn't installed."
-    End If
+    Label_geogebraexplain.Caption = Sprog.A(740)
 #If Mac Then
     OptionButton_graph.visible = False
     OptionButton_gnuplot.visible = False
@@ -559,8 +512,8 @@ End Sub
 Sub FillComboBoxDecType()
     ComboBox_DecType.Clear
     ComboBox_DecType.AddItem "Decimaler"
-    ComboBox_DecType.AddItem Sprog.SignificantFigures
-    ComboBox_DecType.AddItem Sprog.ScientificNotation
+    ComboBox_DecType.AddItem Sprog.A(687)
+    ComboBox_DecType.AddItem Sprog.A(669)
 End Sub
 Sub FillComboBoxLanguage()
     ComboBox_language.Clear
@@ -602,71 +555,67 @@ Sub FillComboBoxBackup()
 End Sub
     
 Sub SetCaptions()
-    Me.Caption = Sprog.RibSettings
+    Me.Caption = Sprog.A(443)
     
-    MultiPage1.Pages("Page1").Caption = Sprog.CASSettings
-    MultiPage1.Pages("Page2").Caption = Sprog.Notation
-    MultiPage1.Pages("Page3").Caption = Sprog.Advanced
-    MultiPage1.Pages("Page4").Caption = Sprog.Units
-    MultiPage1.Pages("Page5").Caption = Sprog.Graph
+    MultiPage1.Pages("Page1").Caption = Sprog.A(414)
+    MultiPage1.Pages("Page2").Caption = Sprog.A(666)
+    MultiPage1.Pages("Page3").Caption = Sprog.A(668)
+    MultiPage1.Pages("Page4").Caption = Sprog.A(693)
+    MultiPage1.Pages("Page5").Caption = Sprog.A(667)
     MultiPage1.Pages("Page6").Caption = Sprog.A(7)
     
     Label_TAB1.Caption = "CAS"
-    Label_TAB2.Caption = Sprog.Notation
-    Label_TAB3.Caption = Sprog.Graph
-    Label_TAB4.Caption = Sprog.Units
+    Label_TAB2.Caption = Sprog.A(666)
+    Label_TAB3.Caption = Sprog.A(667)
+    Label_TAB4.Caption = Sprog.A(693)
     Label_TAB5.Caption = Sprog.A(7)
     Label_TAB6.Caption = "Backup"
-    Label_TAB7.Caption = Sprog.Advanced
+    Label_TAB7.Caption = Sprog.A(668)
     
     Label_cancel.Caption = Sprog.Cancel
     CommandButton_ok.Caption = Sprog.OK
-    CheckBox_complex.Caption = Sprog.Complex
-    CheckBox_units.Caption = Sprog.Units
-    CheckBox_polaroutput.Caption = Sprog.PolarNotation
-    Frame1.Caption = Sprog.AngleUnit
-    OptionButton_grader.Caption = Sprog.Degrees
-    OptionButton_radianer.Caption = Sprog.Radians
-    CheckBox_showassum.Caption = Sprog.ShowSolutionConditions
+    CheckBox_complex.Caption = Sprog.A(670)
+    CheckBox_units.Caption = Sprog.A(693)
+    CheckBox_polaroutput.Caption = Sprog.A(680)
+    Frame1.Caption = Sprog.A(708)
+    OptionButton_grader.Caption = Sprog.A(706)
+    OptionButton_radianer.Caption = Sprog.A(707)
+    CheckBox_showassum.Caption = Sprog.A(709)
     
-    Frame5.Caption = Sprog.Exact & " ?"
-    OptionButton_exactandnum.Caption = Sprog.Auto & "  (x=" & ChrW(960) & "=3.14)"
-    OptionButton_exactonly.Caption = Sprog.Exact & "  (x=" & ChrW(960) & ")"
-    OptionButton_numonly.Caption = Sprog.Numeric & "  (x=3.14)"
-    CheckBox_bigfloat.Caption = Sprog.HighPrecision
-    CheckBox_Insertforklaring.Caption = Sprog.InsertExplanation
-    CheckBox_Insertmaximacommand.Caption = Sprog.InsertMaximaCommand
-    Frame3.Caption = Sprog.Separators
-    Label_list.Caption = Sprog.List
-    Frame2.Caption = Sprog.Multsign
-    OptionButton_prik.Caption = VBA.ChrW(183) & " (" & Sprog.Dot & ")"
-    Frame4.Caption = Sprog.SolutionType
-    OptionButton_lmbool.Caption = Sprog.SolutionBoolean & ": x=1 v x=2"
-    OptionButton_lmset.Caption = Sprog.SolutionSet & ": L={1,2}"
-    Frame8.Caption = Sprog.IndexSubscript
-    OptionButton_indextext.Caption = Sprog.JustText
-    OptionButton_indexvar.Caption = Sprog.IsIndex
-    Frame9.Caption = Sprog.StandardGraph
-    CheckBox_indlejret.Caption = Sprog.ExcelEmbed
-    Label_outputunits.Caption = Sprog.OutputUnits
-    CommandButton_sletenheder.Caption = Sprog.Clear
-    Label_unithelp.Caption = Sprog.UnitHelp
-    Label_unitexamples.Caption = Sprog.UnitExamples
-    FrameLog.Caption = Sprog.Logarithm & " output"
-    FrameTrig.Caption = Sprog.TrigEquations
-    OptionButton_trigall.Caption = Sprog.AllSolutions
-    OptionButton_trigone.Caption = Sprog.OnlyOneSolution
-    CheckBox_checkupdate.Caption = Sprog.AutoUpdate
-    CommandButton_shortcuts.Caption = Sprog.GenerateShortcuts
-    CommandButton_restartmaxima.Caption = Sprog.RestartWordMat
-    Label_language.Caption = Sprog.Language
-    Label_calculationcount.Caption = Sprog.CalculationCount & ":"
-    CommandButton_nulstilfigurer.Caption = Sprog.ResetFigurDoc
-    CommandButton_nulstilmatformler.Caption = Sprog.ResetMathDoc
-    CommandButton_nulstilfysik.Caption = Sprog.ResetPhysicsDoc
-    CommandButton_nulstilkemiformler.Caption = Sprog.ResetChemistryDoc
-    CheckBox_dasdiffchr.Caption = Sprog.dAsDiffChr
-    CheckBox_dasdiffchr.ControlTipText = Sprog.dAsDiffChrHelp
+    Frame5.Caption = Sprog.A(710) & " ?"
+    OptionButton_exactandnum.Caption = Sprog.A(712) & "  (x=" & ChrW(960) & "=3.14)"
+    OptionButton_exactonly.Caption = Sprog.A(710) & "  (x=" & ChrW(960) & ")"
+    OptionButton_numonly.Caption = Sprog.A(711) & "  (x=3.14)"
+    CheckBox_bigfloat.Caption = Sprog.A(713)
+    CheckBox_Insertforklaring.Caption = Sprog.A(714)
+    CheckBox_Insertmaximacommand.Caption = Sprog.A(715)
+    Frame3.Caption = Sprog.A(716)
+    Label_list.Caption = Sprog.A(717)
+    Frame2.Caption = Sprog.A(718)
+    OptionButton_prik.Caption = VBA.ChrW(183) & " (" & Sprog.A(719) & ")"
+    Frame4.Caption = Sprog.A(720)
+    OptionButton_lmbool.Caption = Sprog.A(721) & ": x=1 v x=2"
+    OptionButton_lmset.Caption = Sprog.A(722) & ": L={1,2}"
+    Frame8.Caption = Sprog.A(723)
+    OptionButton_indextext.Caption = Sprog.A(724)
+    OptionButton_indexvar.Caption = Sprog.A(725)
+    Frame9.Caption = Sprog.A(726)
+    CheckBox_indlejret.Caption = Sprog.A(727)
+    Label_outputunits.Caption = Sprog.A(728)
+    CommandButton_sletenheder.Caption = Sprog.A(815)
+    Label_unithelp.Caption = Sprog.A(729)
+    Label_unitexamples.Caption = Sprog.A(730)
+    FrameLog.Caption = Sprog.A(816) & " output"
+    FrameTrig.Caption = Sprog.A(731)
+    OptionButton_trigall.Caption = Sprog.A(732)
+    OptionButton_trigone.Caption = Sprog.A(733)
+    CheckBox_checkupdate.Caption = Sprog.A(734)
+    CommandButton_shortcuts.Caption = Sprog.A(735)
+    CommandButton_restartmaxima.Caption = Sprog.A(736)
+    Label_language.Caption = Sprog.A(817)
+    Label_calculationcount.Caption = Sprog.A(737) & ":"
+    CheckBox_dasdiffchr.Caption = Sprog.A(840)
+    CheckBox_dasdiffchr.ControlTipText = Sprog.A(841)
     Frame_side.Caption = Sprog.A(15)
     OptionButton_placementleft.Caption = Sprog.A(16)
     OptionButton_placementright.Caption = Sprog.A(17)

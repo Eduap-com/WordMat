@@ -52,7 +52,7 @@ Private Sub Label_ok_Click()
 End Sub
 
 Private Sub UserForm_Activate()
-    Me.Caption = Sprog.Definitions
+    Me.Caption = Sprog.A(823)
     Label_text.Caption = Sprog.A(113)
     Label_defs.Caption = FormatDefinitions(omax.DefString)
 End Sub

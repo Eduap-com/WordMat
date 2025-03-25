@@ -22,6 +22,6 @@ Private Sub UserForm_Initialize()
 End Sub
 
 Private Sub SetCaptions()
-    Label1.Caption = Sprog.WordMatStarting
-    Label2.Caption = Sprog.PleaseWait
+    Label1.Caption = Sprog.A(768)
+    Label2.Caption = Sprog.A(769)
 End Sub

@@ -39,6 +39,7 @@ Sub RunTestSequence()
     
     ' Testresultaterne er baseret på bestemte indstillinger. Undervejs bliver de måske ændret, men i starten skal de nulstilles
     CASengineTempOnly = 0 ' 0=maxima
+    CASengine = 0
     MaximaExact = 1 ' 0 - auto ' 1 - exact ' 2 - num
     MaximaCifre = 7
     MaximaDecOutType = 2 ' bc
@@ -66,27 +67,33 @@ Sub RunTestSequence()
     Selection.TypeParagraph
     Selection.GoToPrevious (wdGoToLine)
     Selection.GoToPrevious (wdGoToLine)
-
-    s = CheckKeyboardShortcutsNoninteractive()
-    If s = "" Then
-        Selection.Font.ColorIndex = wdGreen
-        Selection.Font.Bold = True
-        Selection.TypeText ("Keyboard Shortcuts ok")
-        Selection.Font.Bold = False
-        Selection.Font.ColorIndex = wdAuto
-        Selection.TypeParagraph
+    
+    Dim WT As Template
+    Set WT = GetWordMatTemplate(False)
+    If Not WT Is Nothing Then
+        s = CheckKeyboardShortcutsNoninteractive()
+        If s = "" Then
+            Selection.Font.ColorIndex = wdGreen
+            Selection.Font.Bold = True
+            Selection.TypeText ("Keyboard Shortcuts ok")
+            Selection.Font.Bold = False
+            Selection.Font.ColorIndex = wdAuto
+            Selection.TypeParagraph
+        Else
+            Selection.Font.ColorIndex = wdRed
+            Selection.Font.Bold = True
+            Selection.TypeText ("Keyboard shortcut problem:  " & s)
+            Selection.Font.Bold = False
+            Selection.Font.ColorIndex = wdAuto
+            Selection.TypeParagraph
+            '        Selection.TypeText ("  ")
+            ErrCount = ErrCount + 1
+        End If
+        TestCount = TestCount + 1
     Else
-        Selection.Font.ColorIndex = wdRed
-        Selection.Font.Bold = True
-        Selection.TypeText ("Keyboard shortcut problem:  " & s)
-        Selection.Font.Bold = False
-        Selection.Font.ColorIndex = wdAuto
-        Selection.TypeParagraph
-        '        Selection.TypeText ("  ")
-        ErrCount = ErrCount + 1
+            Selection.TypeText ("Could not check Keyboard shortcuts, because running as global template")
+            Selection.TypeParagraph
     End If
-    TestCount = TestCount + 1
-
     'GoTo ggbtest
     
     ' når der skal laves nye test, er det nemmest at bruge funktion 'CreateTestberegn'
@@ -99,13 +106,13 @@ Sub RunTestSequence()
     
     'til test af enkelt
     
-'    GoTo slut
+    '    GoTo slut
     
     
     DebugWM = False
     ' ikke den kønneste løsning, men tomme linjer bliver spist og hvis der ikke er plads som beregninger kan vokse i, så giver det problemer.
     For i = 0 To 30
-    Selection.TypeParagraph
+        Selection.TypeParagraph
     Next
     Selection.MoveLeft wdCharacter, 30
     
@@ -115,7 +122,7 @@ Sub RunTestSequence()
     If TestBeregn("2+3", "=5") Then GoTo slut
     TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90)+(41,89983" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889) +2"
 
-'    TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=(-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90))+(41,89983049571472" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2@$=-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90)+(41,899830495714724" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2"
+    '    TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "=(-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90))+(41,89983049571472" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2@$=-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90)+(41,899830495714724" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889)+2"
     If StopNow Then GoTo slut
     TestBeregn "1/5 2", "=2/5"
     If StopNow Then GoTo slut
@@ -297,7 +304,7 @@ Sub RunTestSequence()
     Selection.TypeParagraph
     InsertTestMath "Definer: -2<x<2"
     Selection.TypeParagraph
-'    TestSolve "sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " " & VBA.ChrW(8730) & "(cos" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " )=0", "x", "x=0    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "/2"
+    '    TestSolve "sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " " & VBA.ChrW(8730) & "(cos" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " )=0", "x", "x=0    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "/2"
     If TestSolve("sin" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " " & VBA.ChrW(8730) & "(cos" & VBA.ChrW(8289) & "" & VBA.ChrW(12310) & "(x)" & VBA.ChrW(12311) & " )=0", "x", "x=0    " & VBA.ChrW(8744) & "    x=-(" & VBA.ChrW(960) & "/2)    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(960) & "/2") Then GoTo slut
     
     InsertSletDef
@@ -332,8 +339,8 @@ Sub RunTestSequence()
     MaximaExact = 2
     ShowSettings "Numerisk test"
 
-'    TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", VBA.ChrW(8776) & "Ikke defineret indenfor " & VBA.ChrW(8477) ' med VBACAS kommer der fejlpopup
-'    If StopNow Then GoTo slut
+    '    TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", VBA.ChrW(8776) & "Ikke defineret indenfor " & VBA.ChrW(8477) ' med VBACAS kommer der fejlpopup
+    '    If StopNow Then GoTo slut
     TestBeregn VBA.ChrW(12310) & "cos" & VBA.ChrW(12311) & "^(-1) (0,5)", VBA.ChrW(8776) & "60" ' test af invers trig og indtastning via design-skrift-hævet skrift
     If StopNow Then GoTo slut
     TestBeregn "23456789123", VBA.ChrW(8776) & "2,345679" & VBA.ChrW(183) & "10^10@$23456790000"

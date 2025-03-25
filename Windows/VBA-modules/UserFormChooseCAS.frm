@@ -100,11 +100,11 @@ End If
 End Sub
 
 Sub SetCaptions()
-    Label_MaximaSym.Caption = "Maxima" & VbCrLfMac & Sprog.Exact
-    Label_MaximaNum.Caption = "Maxima" & VbCrLfMac & Sprog.Numeric
-    Label_GeoGebraSym.Caption = "GeoGebra" & VbCrLfMac & Sprog.Exact
-    Label_GeoGebraNum.Caption = "GeoGebra" & VbCrLfMac & Sprog.Numeric
-    Label_GeoGebraBrowser.Caption = "GeoGebra browser" & VbCrLfMac & Sprog.Exact
+    Label_MaximaSym.Caption = "Maxima" & VbCrLfMac & Sprog.A(710)
+    Label_MaximaNum.Caption = "Maxima" & VbCrLfMac & Sprog.A(711)
+    Label_GeoGebraSym.Caption = "GeoGebra" & VbCrLfMac & Sprog.A(710)
+    Label_GeoGebraNum.Caption = "GeoGebra" & VbCrLfMac & Sprog.A(711)
+    Label_GeoGebraBrowser.Caption = "GeoGebra browser" & VbCrLfMac & Sprog.A(710)
     Label_GeoGebraGrafisk.Caption = "GeoGebra" & VbCrLfMac & Sprog.A(241)
     Label_text.Caption = Sprog.A(685)
 End Sub

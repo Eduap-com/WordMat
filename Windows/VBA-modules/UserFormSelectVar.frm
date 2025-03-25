@@ -110,7 +110,7 @@ Dim i As Integer, c As Integer
     TempDefs = vbNullString
     For i = 0 To UBound(Arr)
         If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> SelectedVar Then ' kan ikke definere variabel der løses for
+            If Split(Arr(i), "=")(0) <> SelectedVar Then ' may not define a variable which is solved for
                 TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & SelectedVar & " " & Sprog.A(253), vbOKOnly, Sprog.Error
@@ -119,10 +119,10 @@ Dim i As Integer, c As Integer
         End If
     Next
     
-    ' Hvis units er on, så må man ikke løse for en enhed
+    ' If units are on, you may not solve for a unit
     If MaximaUnits Then
         If InStr("A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s", SelectedVar) Then
-            MsgBox Sprog.A(254), vbOKOnly, Sprog.Warning
+            MsgBox Sprog.A(254), vbOKOnly, Sprog.A(846)
         End If
     End If
     
@@ -221,7 +221,7 @@ Private Sub UserForm_Activate()
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
             ListBox_vars.AddItem (svar)
-            If UBound(Svars) > 0 Then TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac               ' midlertidige definitioner
+            If UBound(Svars) > 0 Then TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac    ' Temp definitions
         End If
     Next
     If ListBox_vars.ListCount > 0 Then
@@ -284,29 +284,29 @@ Private Sub UserForm_Initialize()
 End Sub
 Private Sub SetCaptions()
     If NoEq > 1 Then
-        Me.Caption = Sprog.SolveSystem
-        Label_choose.Caption = Sprog.ChooseVariables
+        Me.Caption = Sprog.A(766)
+        Label_choose.Caption = Sprog.A(767)
     Else
-        Me.Caption = Sprog.SolveEquation
-        Label_choose.Caption = Sprog.ChooseVariable
+        Me.Caption = Sprog.A(760)
+        Label_choose.Caption = Sprog.A(761)
     End If
 
-    Label_tast.Caption = Sprog.WriteVariable
+    Label_tast.Caption = Sprog.A(762)
     Label_ok.Caption = Sprog.OK
     Label_cancel.Caption = Sprog.Cancel
-    Label4.Caption = Sprog.PresentDefs
-    Label5.Caption = Sprog.TempDefs
-    Label8.Caption = Sprog.RibSettings
-    Frame5.Caption = Sprog.Exact & " ?"
-    OptionButton_exactandnum.Caption = Sprog.Auto
-    OptionButton_exactonly.Caption = Sprog.Exact
-    OptionButton_numonly.Caption = Sprog.Numeric
-    Label_enheder.Caption = Sprog.OutputUnits & ":"
-    Label_unitwarning.Caption = Sprog.UnitWarning
+    Label4.Caption = Sprog.A(763)
+    Label5.Caption = Sprog.A(764)
+    Label8.Caption = Sprog.A(443)
+    Frame5.Caption = Sprog.A(710) & " ?"
+    OptionButton_exactandnum.Caption = Sprog.A(712)
+    OptionButton_exactonly.Caption = Sprog.A(710)
+    OptionButton_numonly.Caption = Sprog.A(711)
+    Label_enheder.Caption = Sprog.A(728) & ":"
+    Label_unitwarning.Caption = Sprog.A(765)
 End Sub
 
 Sub ScaleForm(SF As Double)
-' SF er scalefactor. Ændrer størrelsen på en formen og justerer font og position af alle elementer på formen
+' SF is a scalefactor. Changes the size of a form, and adjusts font and position of all elements
 Dim c As control
     For Each c In Me.Controls
         c.Left = c.Left * SF
@@ -346,7 +346,7 @@ Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
 End Sub
 Sub FillComboBoxDecType()
     ComboBox_DecType.Clear
-    ComboBox_DecType.AddItem "Decimaler"
-    ComboBox_DecType.AddItem Sprog.SignificantFigures
-    ComboBox_DecType.AddItem Sprog.ScientificNotation
+    ComboBox_DecType.AddItem Sprog.A(41)
+    ComboBox_DecType.AddItem Sprog.A(687)
+    ComboBox_DecType.AddItem Sprog.A(669)
 End Sub

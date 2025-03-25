@@ -61,12 +61,12 @@
 60#£The inequality had no solutions in the domain $R for variable 
 61#£With the following assumptions/definitions:  
 62#£Define
-63#£Do you want to create keyboard shortcuts?\r\nThey are created by default, but they can be overwritten by other programs. You can restore them now.
-64#£Keyboard shortcuts
+63#£No internet connection
+64#£Click OK to start the update
 65#£WordMat keyboard shortcuts
 66#£Word equation shortcuts
 67#£You can create your own typing short cuts in Word or change the existing shortcuts. Place the cursor in an equation. Open Design menu. Locate group called functions. Click the little arrow in lower right corner. Choose 'Math autoentries'
-68#£
+68#£Formulae
 69#£Delete definitions
 70#£Constants
 71#£Find values online
@@ -94,7 +94,7 @@
 93#£Insert graph
 94#£Probably outside domain! \r\nadjust xmin/xmax
 95#£An error occured. Check the numbers by xmin and xmax
-96#£Error, cannot find the Excel file with statistic on the path: 
+96#£No partnership
 97#£An error occured trying to insert Graph. You might have a syntax error in a definition
 98#£An error occured trying to insert an Excel sheet. This can be caused by a previous crash of Excel. Close all open Excel sheets and then reopen Excel before trying with WordMat again.
 99#£An error occured trying to convert your command to Maxima syntax.
@@ -118,8 +118,8 @@
 117#£There is an error in the definition: 
 118#£It is ignored, but correct the input error to avoid this output error
 119#£ ...rest removed.
-120#£State the definition of the new variable\r\nThe definition can be used in the rest of the document, but not before.\r\nIf you insert a  'delete def:' command further down in the document it will not be known from that point.\r\nYou can define more variables at a time by separating them with " & ListSeparator\r\n ex.:  a:1 " & ListSeparator & " b:2
-121#£New variable
+120#£Your School/organization has an active partnership. You can now use WordMat+
+121#£Sorry. Your School does not have an active partnership.
 122#£State the definition of the new function\r\nThe definition can be used in the rest of the document, but not before.\r\nIf you insert a  'delete def:' command further down in the document it will not be known from that point.\r\nYou can define more variables at a time by separating them with " & ListSeparator\r\nex.: f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£New function
 124#£New equation
@@ -134,11 +134,11 @@
 133#£You have asked to solve the equation for a variable which is already defined. Insert a 'delete def:' command before the equation.
 134#£The system of equations is solved for 
 135#£ by WordMat's 'solve equation' function, 
-136#£Maxima could not solve the system of equations analytically, but has stated a rearranged result.
+136#£Partnership registered with 
 137#£The system of equations had no solutions in the domain $C for variables 
 138#£The system of equations had no solutions in the domain $R for variables 
 139#£There must be an equal sign in an equation
-140#£The system of equations could not be solved analytically. You might be able to find solutions using numerical methods
+140#£No partnership registered
 141#£This is not an equation. An equation will always have an equal sign.
 142#£The following variables are eliminated from the equation system: 
 143#£ by WordMat 's 'Eliminate variable' function, '
@@ -159,8 +159,8 @@
 158#£The expression could not be expanded
 159#£You have to disable units in order to solve differential equations
 160#£The differential equation could not be solved
-161#£Did you forget a multiplication sign?\r\nmultiplication signs are not inserted automatically between variables or between variables and start bracket\r\n xy -> x*y\r\ny(x+1)  -> y*(x+1)\r\nBecause these situations are ambiguous. Variables can be more than 1 letter and y(x) can be a function.
-162#£Limits of integration must be reel. Maybe you are missing an assumption.
+161#£Schools can sign up for a Partnership with Eduap. Partnership gets access to support, WordMath+ and much more. Click to read more
+162#£Binomial distribution
 163#£The expression is tested for truth by WordMat. 
 164#£The result is based on numerical comparison
 165#£WordMat was unable to determine whether the expression was true or false
@@ -178,7 +178,7 @@
 177#£Never
 178#£An error occured when trying to backup
 179#£Do you want to activate WordMats automatic backup-system" & vbLf & vbLf & "(For more info go to settings | Backup)
-180#£Rearrange
+180#£Normal distribution
 181#£Low
 182#£Normal
 183#£High
@@ -242,9 +242,9 @@
 241#£Graphical solution
 242#£Also zoom dy double clicking or dragging a box
 243#£Show graph in a separate window
-244#£You may choose a max of
+244#£$X^2 distribution
 245#£Variables
-246#£You must choose
+246#£Test
 247#£Choose max
 248#£Or enter manually max
 249#£variables separated by comma
@@ -345,7 +345,7 @@
 344#£You already have the most recent version of
 345#£Select an equation number
 346#£What number to set this equation to?\r\nAny following equations will be updated as well.
-347#£Set equation number
+347#£Binomial test
 348#£An equation section number will be inserted. Typically this is inserted as a chapter/section number in a heading. But it can also be inserted hidden. Do you want to show the number? (Answer No to hide it)
 349#£Enter significance level in percentage
 350#£Significance level
@@ -368,7 +368,7 @@
 367#£You can adjust it later under user defined functions in Graph
 368#£Plotting of graphs using GeoGeoGebra and Graph requires x to be the independent variable. \r\nThe following expressions are without x. You can now state a new variable to use as x.
 369#£Independent variable
-370#£This function requires GeoGebra to be installed
+370#£$X^2 test for independence
 371#£Opening Graph
 372#£Inserting embedded
 373#£Inserting embedded object can take some time. Double on embedded object to open them.
@@ -394,8 +394,8 @@
 393#£with start condition
 394#£You have to restart Word. If you dont Word will crash.
 395#£An error occurred attempting to insert a formula. Try again another place.
-396#£Calculates the selected expression, or back to the nearest equal sign.
-397#£Solves equation
+396#£Simulation
+397#£Group
 398#£No of degrees of freedom\r\nstate n for a generel expression.
 399#£Frequency distribution with
 400#£Observations
@@ -409,11 +409,11 @@
 408#£Critical Q-value
 409#£MikTex is not installed. You will now be send to the download page. The computer must be restarted after the installation. The first time you run MikTex from WordMat a series of packages will be installed.
 410#£This function is not supported on Mac
-411#£Stops automatically in 20s
-412#£Stops automatically in 15s
-413#£Stops automatically in 10s
-414#£Stops automatically in 5s
-415#£Unsuccesful. Stopping.
+411#£Others
+412#£New Equation
+413#£Symbols
+414#£CAS settings
+415#£Shapes
 416#£You have entered a vector equation which is actually a system of equations. Enter the
 417#£variables to solve for, separated by comma.
 418#£You have to enter 
@@ -433,55 +433,55 @@
 432#£not defined but limited
 433#£Not defined within
 434#£is reserved and cant be defined. The definition is skipped.
-435#£
-436#£
-437#£
-438#£
-439#£
-440#£
-441#£
-442#£
-443#£
-444#£
-445#£
-446#£
-447#£
-448#£
-449#£
-450#£
-451#£
-452#£
-453#£
-454#£
-455#£
-456#£
-457#£
-458#£
-459#£
-460#£
-461#£
-462#£
-463#£
-464#£
-465#£
-466#£
-467#£
-468#£
-469#£
-470#£
-471#£
-472#£
-473#£
-474#£
-475#£
-476#£
-477#£
-478#£
-479#£
-480#£
+435#£Math
+436#£Phys
+437#£Chem
+438#£Percentage
+439#£Functions
+440#£Geometry
+441#£Prob.
+442#£vector
+443#£Settings
+444#£Settings
+445#£sci
+446#£Calculate
+447#£Solve
+448#£Maxima command
+449#£Solve equation(s) using numerical method
+450#£Eliminate variables
+451#£Test true/false
+452#£Solve differential equation
+453#£Delete definitions
+454#£Define function
+455#£Define physical constants
+456#£Reduce
+457#£Infinites.
+458#£Differentiate
+459#£Integrate
+460#£Plotting
+461#£Show Graph
+462#£Direction field
+463#£3D Plot
+464#£Volume of revolution - 3D Rotate Graph about x-axis
+465#£Statistics
+466#£Ungrouped observations
+467#£Grouped observations
+468#£Stick chart
+469#£Histogram
+470#£Step chart
+471#£Cumulative chart
+472#£Box and whiskers plot
+473#£Statistics/prob.
+474#£Regression
+475#£Insert table
+476#£Linear
+477#£Exponential
+478#£Power
+479#£Polynomial
+480#£Distributions
 481#£Binomial
 482#£Normal distrib
-483#£-distribution
+483#£$X^2-distribution
 484#£2D Geometry
 485#£3D Geometry
 486#£Opens math formula booklet
@@ -533,8 +533,8 @@
 532#£Factorizes an expression
 533#£Expand
 534#£All parenthesis are expanded
-535#£Calculus
-536#£Functions to differentiate and integrate. You also do calculus using standard notation such as f'(x) and dy/dx - see the manual.
+535#£Table
+536#£Insert Excel
 537#£Differentiate
 538#£Select the expression to differentiate or place the cursor in the expression
 539#£Integrate
@@ -629,8 +629,8 @@
 628#£Replaces all . (dots) in math input boxeswith ,(commas) and all ,(commas) with ;(semicolons)
 629#£Math shapes, diagrams & images
 630#£Opens document with typical Math shapes, diagrams etc. These can then be copied into your document and manipulated to your desire.
-631#£Draw
-632#£Opens Paint for drawing. The result is automatically inserted into Word.
+631#£Table $ArrowRight List
+632#£List $ArrowRight Table
 633#£Table
 634#£WordMat can manipulate data in list. Example: You can easily add a number to all elements in a list. Data is often in a table in Word though. Here are functions to convert list til tables and reverse.
 635#£Insert Excel sheet
@@ -663,12 +663,12 @@
 662#£Generates a true LaTex-document using MikTex, which must be installed. Only use for simple document as not all document objects are supported.
 663#£Shows how the LaTex output is interpreted
 664#£Generates LaTex code and opens in TexWorks where you can make adjustments.
-665#£The existing Word document
-666#£is overwritten. Are you sure you wish to proceed?
-667#£Reset Word document
-668#£Your Word document
-669#£is now reset.
-670#£Completed
+665#£Triangle
+666#£Notation
+667#£Graph
+668#£Advanced
+669#£Scientific notation
+670#£Complex numbers
 671#£You must restart Word for the language change to take effect everywhere.
 672#£Cant take log of values <= 0
 673#£Calculating
@@ -678,20 +678,20 @@
 677#£Newton-Raphson method requires an inital guess at a solution. The method is not guaranteed to find a solution if there is one.Only 1 solution is found. Look at the graph to identify an initial guess.
 678#£About Newton-Raphson
 679#£You must save your document before Backup can be perfomed!
-680#£Do NOT edit this document or close or it. WordMat needs it for calculations. Anything you enter here will be deleted.
+680#£Polar notation output
 681#£Problems with the file 'normal.dotm', can cause problems with keyboard shortcuts in WordMat. The problems can be resolved by deleting the file, since a new default file is automatically generated when Word restarts. The file cannot be deleted while Word is open. You must do it manually.\r\n\r\n- Press OK to open the folder where Normal.dotm is located. \r\n- Save your Work and close Word \r\n- delete normal.dotm \r\n- Open Word and open and close WordMat settings
 682#£Calculation performed by GeoGebra
 683#£arrow
 684#£Opening Safari
 685#£The problem copuld not be solved.\r\nDo you want to try another method or CAS-engine?
 686#£CAS engine
-687#£
+687#£Significant figures
 688#£Turn units on/off
 689#£If units are turned on, WordMath kan interpret and convert units. On the SI button you can change the output units. Do not turn units on, unless you need it. It can affect the behaviour of WordMat and reserves a lot of variables.
 690#£Output units
 691#£State the units to convert to. By default output units are SI units.
 692#£sf
-693#£sci
+693#£Units
 694#£No. of figures
 695#£Rounding
 696#£Choose how numbers are fomatted and rounded. In the examples below WordMat is set to 3 figures\r\n\r\nDecimals: 12,345\r\nSignificant figures: 12,3\r\nSci. notation: 1,23*10^1
@@ -704,5 +704,144 @@
 703#£Toggle num/exact
 704#£Convert to Latex
 705#£Latex PDF
-706#£
-707#£
+706#£Degrees
+707#£Radians
+708#£Angle unit
+709#£Show solution conditions (beta)
+710#£Exact
+711#£Numeric
+712#£Automatic
+713#£Very high precision (beta)
+714#£Insert explanation
+715#£Insert Maxima command
+716#£Separators
+717#£List
+718#£Mult.sign
+719#£Dot
+720#£Solution type
+721#£Boolean
+722#£Solution Set
+723#£Subscript
+724#£Is just text part of variable name
+725#£Is list/matrix index
+726#£Standard graph program
+727#£Embed Excel sheets
+728#£Output units
+729#£State output units separated by comma\nexamples:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nIf nothing is stated units are returned in basic SI-units or SI-derived units without prefix.
+730#£Examples of supported units:\n(See manual for more)\n\nLength: cm , AU, ly, pc\nMass: u , G, mg\nFrequency: Hz , Bq\nEnergy: kWh , eV, aJ\nPressure: Bar , mmHg, atm, torr
+731#£Trigonometric equations
+732#£All solutions
+733#£Only 1 solution
+734#£Automatically check for updates
+735#£Repair Keyboard shortcuts
+736#£Restart WordMat
+737#£No. of calculations
+738#£Keyboard shortcuts repaired.\nIf it still does not work, then delete the file 'normal.dotm' in folder '~/Library/Group Containers/UBF8T346G9.Office/User Content/Templates' and restart Word
+739#£Keyboard shortcuts repaired.\nIf it still does not work, then delete the file 'normal.dotm' in folder '%appdata%/Microsoft/Templates' and restart Word
+740#£GeoGebra Calculator Suite is installed with WordMat. It runs in a browser, but doesn't require internet. It works the same on Windows and Mac, and starts quickly.\nGeoGebra 5 Works the same on Windows and Mac, but requires installation.\nWindows also supports the other app-versions of GeoGebra like Geogebra 6, Graphing Calculator etc. These will be used if GeoGebra 5 isn't installed.
+741#£Keyboard shortcuts are not set correctly
+742#£The result of the calculation depends on the sign of
+743#£State sign
+744#£Differential equation
+745#£Solving Differential equation
+746#£Indep. var
+747#£Dep. var/function
+748#£Initial condition
+749#£Maxima error
+750#£Math error
+751#£Syntax error
+752#£Syntax error. WordMat did not understand your input.
+753#£You're missing a
+754#£There is too many
+755#£An error occured in the code.
+756#£Division by zero
+757#£An errror occured. The error was probably caused by one of your definitions.\r\nMaybe you can spot the error from the info below.
+758#£There is an error in one of your definitions.\r\nThe definition will now be selected in Word.
+759#£An illegal character has been placed by
+760#£Solve equation
+761#£Variable
+762#£Or state variable:
+763#£Definitions
+764#£Temp. definitions
+765#£Warning: Units are turned on.\r\nEquation solving will be poorer\r\nWatch out for variables which are units like: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
+766#£Solve system of equations
+767#£Choose variables
+768#£WordMat is starting
+769#£Please wait
+770#£Triangle solver
+771#£Right angled
+772#£Any
+773#£Right
+774#£Naming
+775#£Manuel
+776#£Angles capital, sides lowercase letters
+777#£Sides named by corners AB
+778#£Insert numbers on the triangle in Word
+779#£Show calculations in Word
+780#£Insert the known sides and angles. The remaining sides and angles will then be calculated, and inserted in Word.\r\nIt is possible to change the names of sides and angles on the triangle. Just click the letters.
+781#£The triangle is not to size. But a correctly scaled triangle will be inserted into Word.
+782#£WordMat's trianglesolver is used with input: 
+783#£Two triangles can be constructed from your information
+784#£More information is needed to calculate the remaining sides and angles
+785#£Two triangles
+786#£More information is needed to calculate the remaining sides and angles
+787#£All sides and angles can now be calculated.
+788#£Numerical methods were applied when solving the equation. More solutions may exist.
+789#£Temp. settings
+790#£Auto reduce
+791#£Tries to reduce the expression to shortest possible form using different methods.
+792#£Tries to factor the expression
+793#£Expands the expression.
+794#£Rationalize
+795#£Converts all decimal numbers to fractions
+796#£Reduce trigonometrically
+797#£Reduce the expression using trigonometric identities.
+798#£Insert same line
+799#£2D plotting
+800#£Reset all
+801#£axis title
+802#£Line type
+803#£To solve an equation you must first insert an equation into Word. Place the cursor in the equation and press 'Solve equation(s)' again. Mark more equations to solve a system of equations
+804#£No equation selected
+805#£Simplify
+806#£Factor
+807#£Expand
+808#£Help
+809#£Manual
+810#£Manual as Word document
+811#£Online webpage Manual
+812#£About
+813#£Update
+814#£Shortcuts
+815#£Clear
+816#£Logarithm
+817#£Language
+818#£Sign
+819#£Positive
+820#£Negative
+821#£Zero
+822#£Error
+823#£Definitions
+824#£OK
+825#£Cancel
+826#£Wait
+827#£Activity
+828#£Stop
+829#£The equation is solved for 
+830#£The equation is solved numerically for 
+831#£ by WordMat. 
+832#£Functions
+833#£Equation
+834#£Equations
+835#£Points
+836#£Vectors
+837#£Title
+838#£Reset
+839#£Complex calculation done exactly can take a very long time. Do you want to retry numerically?
+840#£Use regular d as differential d
+841#£dy/dx notation can normally only be used with a special differential d (\dd) or the symbol for partial derivatives (\partial). If you dont expect d/dx to be confused with other expression, you can use this setting since it is faster to type dy/dx using regular d.
+842#£User defined regression
+843#£Solve system of differential equation(s) numerically
+844#£An error occured
+845#£Variable
+846#£Warning

@@ -325,7 +325,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
                 omax.GoToEndOfSelectedMaths
                 If MaximaForklaring Then
                     Selection.TypeParagraph
-                    InsertForklaring Sprog.EquationSolvedFor & variabel & Sprog.ByCAS, True
+                    InsertForklaring Sprog.A(829) & variabel & Sprog.A(831), True
                     Selection.TypeParagraph
                 End If
             End If
@@ -456,7 +456,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     If omax.DefFejl Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox2 Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
+        MsgBox2 Sprog.A(803), vbOKOnly, Sprog.A(804)
         GoTo slut
     End If
     If sstart = sslut Then
@@ -564,7 +564,7 @@ newcas:
                 omax.GoToEndOfSelectedMaths
                 If MaximaForklaring Then
                     Selection.TypeParagraph
-                    InsertForklaring Sprog.EquationSolvedFor & variabel & Sprog.ByCAS, True
+                    InsertForklaring Sprog.A(829) & variabel & Sprog.A(831), True
                     Selection.TypeParagraph
                 End If
             End If
@@ -612,7 +612,7 @@ newcas:
         Selection.TypeParagraph
         If Len(omax.MaximaOutput) > 250 Then
             Dim resultat As VbMsgBoxResult
-            resultat = MsgBox(Sprog.A(127) & vbCrLf & vbCrLf & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
+            resultat = MsgBox(Sprog.A(127) & vbCrLf & vbCrLf & omax.MaximaOutput, vbOKCancel, Sprog.A(846))
             If resultat = vbCancel Then GoTo slut
         End If
 
@@ -633,7 +633,7 @@ newcas:
         ' indsæt forklaring hvis ønsket
         If MaximaForklaring And (IsSolved Or InStr(omax.KommentarOutput, "solving system of equations")) Then
             '            InsertForklaring "Ligningen løses for " & variabel & " vha. CAS-værktøjet " & AppNavn & ". "
-            InsertForklaring Sprog.EquationSolvedFor & variabel & Sprog.ByCAS
+            InsertForklaring Sprog.A(829) & variabel & Sprog.A(831)
         End If
 
         If InStr(omax.MaximaOutput, VBA.ChrW(8709)) Then    ' ingen løsning
@@ -681,9 +681,10 @@ newcas:
         ElseIf False Then
 stophop:
             omax.Nsolve variabel, -15, 15, 15, 20, 30, 30, True
-            InsertForklaring Sprog.EquationSolvedNumFor & variabel & Sprog.ByCAS, False
+            InsertForklaring Sprog.A(830) & variabel & Sprog.A(831), False
             omax.InsertMaximaOutput
             Selection.TypeParagraph
+        Else    ' hvis der er løsning
             omax.InsertMaximaOutput
         End If
 
@@ -827,10 +828,10 @@ newcassys:
                     fejlm = fejlm & Sprog.A(139) & vbCrLf
                 End If
                 '                fejlm = fejlm & TranslateComment(omax.KommentarOutput)
-                    Selection.End = sslut    ' slut skal være først eller går det galt
-                    Selection.start = sstart
-                    ActiveWindow.VerticalPercentScrolled = scrollpos
-                    MaximaSolveNumeric
+                Selection.End = sslut    ' slut skal være først eller går det galt
+                Selection.start = sstart
+                ActiveWindow.VerticalPercentScrolled = scrollpos
+                MaximaSolveNumeric
             End If
         End If
         Oundo.EndCustomRecord
@@ -952,7 +953,7 @@ Sub MaximaEliminate()
     End If
     If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
-        result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
+        result = MsgBox(Sprog.A(141), vbYesNo, Sprog.A(846))
         If result = vbNo Then GoTo slut
     End If
 
@@ -1094,7 +1095,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     If omax.DefFejl Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
+        MsgBox Sprog.A(803), vbOKOnly, Sprog.A(804)
         GoTo slut
     End If
     If sstart = sslut Then
@@ -1106,7 +1107,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     End If
     If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
-        result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
+        result = MsgBox(Sprog.A(141), vbYesNo, Sprog.A(846))
         If result = vbNo Then GoTo slut
     End If
 
@@ -1242,11 +1243,11 @@ ghop:
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
 
-        InsertForklaring Sprog.EquationSolvedNumFor & variabel & Sprog.A(57), False
+        InsertForklaring Sprog.A(830) & variabel & Sprog.A(57), False
 
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
-            resultat = MsgBox(Sprog.A(127) & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
+            resultat = MsgBox(Sprog.A(127) & omax.MaximaOutput, vbOKCancel, Sprog.A(846))
             If resultat = vbCancel Then GoTo slut
         End If
 
@@ -1260,7 +1261,7 @@ ghop:
 
         ' indsæt forklaring hvis ønsket
         If MaximaForklaring And IsSolved Then
-            InsertForklaring Sprog.EquationSolvedNumFor & variabel & Sprog.A(57)
+            InsertForklaring Sprog.A(830) & variabel & Sprog.A(57)
         End If
 
         omax.InsertMaximaOutput
@@ -1339,7 +1340,6 @@ ghop:
             If InStr(omax.Kommando, "=") < 1 Then
                 fejlm = fejlm & Sprog.A(139) & "." & vbCrLf
             End If
-            fejlm = fejlm & TranslateComment(omax.KommentarOutput)
             MsgBox fejlm & Sprog.A(384) & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
         End If
     End If
@@ -1388,7 +1388,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.EquationMissingError, vbOKOnly, Sprog.EquationMissingError2
+        MsgBox Sprog.A(803), vbOKOnly, Sprog.A(804)
         GoTo slut
     End If
     If sstart = sslut Then
@@ -1396,7 +1396,7 @@ Sub MaximaSolveNumeric(Optional Var As String)
     End If
     If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
-        result = MsgBox(Sprog.A(141), vbYesNo, Sprog.Warning)
+        result = MsgBox(Sprog.A(141), vbYesNo, Sprog.A(846))
         If result = vbNo Then GoTo slut
     End If
 
@@ -1464,12 +1464,12 @@ Sub MaximaSolveNumeric(Optional Var As String)
 
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
-            resultat = MsgBox(Sprog.A(127) & omax.MaximaOutput, vbOKCancel, Sprog.Warning)
+            resultat = MsgBox(Sprog.A(127) & omax.MaximaOutput, vbOKCancel, Sprog.A(846))
             If resultat = vbCancel Then GoTo slut
         End If
 
         If Len(omax.MaximaOutput) > 1 And InStr(omax.MaximaOutput, "Lisperror") < 1 Then
-            t = Sprog.EquationSolvedNumFor & variabel & Sprog.A(147)
+            t = Sprog.A(830) & variabel & Sprog.A(147)
             If MaximaForklaring Then
                 If UFSolvenumeric.Method = "newton" Then
                     t = t & " " & Sprog.A(386) & " " & variabel & "=" & VarGuess
@@ -1484,12 +1484,10 @@ Sub MaximaSolveNumeric(Optional Var As String)
             omax.GoToEndOfSelectedMaths
             Selection.TypeParagraph
             Selection.TypeText Sprog.A(148)
-
         Else
             Dim fejlm As String
             If omax.DefFejl Then GoTo slut
             fejlm = Sprog.A(388) & "." & vbCrLf
-            fejlm = fejlm & TranslateComment(omax.KommentarOutput)
             MsgBox fejlm & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.A(389)
         End If
 
@@ -1665,10 +1663,6 @@ Sub beregn()
         InsertOutput omax.MaximaOutput, False
     ElseIf omax.KommentarOutput <> vbNullString Then
         fejlm = Sprog.A(128) & vbCrLf
-        fejlm = fejlm & TranslateComment(omax.KommentarOutput)
-        '        If InStr(omax.KommentarOutput, "infix") > 0 Then
-        '            fejlm = fejlm & "Husk at alle gangetegn skal laves. 2*x ikke 2x" & vbCrLf
-        '        End If
 #If Mac Then
         fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf
         MsgBox2 fejlm, vbOKOnly, Sprog.Error
@@ -1819,13 +1813,13 @@ Sub Omskriv()
                     s = s & Sprog.A(151)
                 End If
                 If UFomskriv.CheckBox_expand.Value Then
-                    s = s & Sprog.Expand & ", "
+                    s = s & Sprog.A(807) & ", "
                 End If
                 If UFomskriv.CheckBox_factor.Value Then
-                    s = s & Sprog.Factor & ", "
+                    s = s & Sprog.A(806) & ", "
                 End If
                 If UFomskriv.CheckBox_rationaliser.Value Then
-                    s = s & Sprog.Rationalize & ", "
+                    s = s & Sprog.A(794) & ", "
                 End If
                 If UFomskriv.CheckBox_trigreduce.Value Then
                     s = s & Sprog.A(152)
@@ -2239,7 +2233,7 @@ Sub Differentier()
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
-    variabel = InputBox(Sprog.A(51), Sprog.Variable, "x")
+    variabel = InputBox(Sprog.A(51), Sprog.A(845), "x")
     If variabel = "" Then GoTo slut
     '    omax.OpenCmd
     
@@ -2336,7 +2330,7 @@ Sub Integrer()
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
-    variabel = InputBox(Sprog.A(51), Sprog.Variable, "x")
+    variabel = InputBox(Sprog.A(51), Sprog.A(845), "x")
     If variabel = "" Then GoTo slut
     '    omax.OpenCmd
     
@@ -2704,7 +2698,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
             omax.GoToEndOfSelectedMaths
             If MaximaForklaring Then
                 Selection.TypeParagraph
-                InsertForklaring Sprog.EquationSolvedFor & variabel & Sprog.ByCAS, True
+                InsertForklaring Sprog.A(829) & variabel & Sprog.A(831), True
                 Selection.TypeParagraph
             End If
         End If
@@ -2772,25 +2766,7 @@ slut:
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
-Function TranslateComment(comm As String) As String
-    If InStr(comm, "infix") > 0 Then
-        TranslateComment = Sprog.A(161)
-    ElseIf InStr(comm, "prefix") > 0 Then
-        TranslateComment = ""
-    ElseIf InStr(comm, "function was expected") > 0 Then
-        TranslateComment = Sprog.A(161)
-    ElseIf InStr(comm, "limit of integration must be real") > 0 Then
-        TranslateComment = Sprog.A(162)
-    Else
-        TranslateComment = ""
-    End If
-End Function
-Function TranslateReplaceOutput(comm As String) As String
 
-    comm = Replace(comm, "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")", "Fejl: Du har bedt om at løse en ligning for en variabel der allerede er defineret." & vbCrLf & "Sæt en 'slet def:' kommando ind før ligningen.")
-
-    TranslateReplaceOutput = comm
-End Function
 Sub InsertOutput(Text As String, Optional ResultAfterTable As Boolean = True)
 ' indsætter text efter den mathobj cursoren er i på sikker måde
     Dim IsBold As Boolean

@@ -800,10 +800,10 @@ Sub SetCaptions()
     CommandButton_nulstilforsk1.Caption = Sprog.Reset
     CommandButton_nulstilforsk2.Caption = Sprog.Reset
     CommandButton_nulstilforsk3.Caption = Sprog.Reset
-    Label42.Caption = Sprog.Title & ":"
+    Label42.Caption = Sprog.A(837) & ":"
     Label45.Caption = Sprog.A(191)
-    CommandButton_nulstilalt.Caption = Sprog.ResetAll
-    Label_vent.Caption = Sprog.Wait & "..."
+    CommandButton_nulstilalt.Caption = Sprog.A(800)
+    Label_vent.Caption = Sprog.A(826) & "..."
     CheckBox_grid.Caption = Sprog.A(190)
     CheckBox_udtryk.Caption = Sprog.A(303)
     CheckBox_transp.Caption = Sprog.A(304)
@@ -813,9 +813,9 @@ Sub SetCaptions()
     OptionButton_kunlinjer.Caption = Sprog.A(308)
     OptionButton_kunflader.Caption = Sprog.A(309)
     OptionButton_linjerogflader.Caption = Sprog.A(310)
-    Label2.Caption = Sprog.Equation & " 1"
-    Label3.Caption = Sprog.Equation & " 2"
-    Label4.Caption = Sprog.Equation & " 3"
+    Label2.Caption = Sprog.A(833) & " 1"
+    Label3.Caption = Sprog.A(833) & " 2"
+    Label4.Caption = Sprog.A(833) & " 3"
     CommandButton_nulstillign1.Caption = Sprog.Reset
     CommandButton_nulstillign2.Caption = Sprog.Reset
     CommandButton_nulstillign3.Caption = Sprog.Reset
@@ -836,11 +836,11 @@ Sub SetCaptions()
     Label43.Caption = Sprog.A(317)
     Label16.Caption = Sprog.A(318)
     MultiPage1.Pages(0).Caption = Sprog.A(319)
-    MultiPage1.Pages(1).Caption = Sprog.Equations
-    MultiPage1.Pages(2).Caption = Sprog.Vectors
+    MultiPage1.Pages(1).Caption = Sprog.A(834)
+    MultiPage1.Pages(2).Caption = Sprog.A(836)
     MultiPage1.Pages(3).Caption = Sprog.A(320)
-    MultiPage1.Pages(4).Caption = Sprog.Points
-    MultiPage1.Pages(5).Caption = Sprog.Help
+    MultiPage1.Pages(4).Caption = Sprog.A(835)
+    MultiPage1.Pages(5).Caption = Sprog.A(808)
     
     
 End Sub

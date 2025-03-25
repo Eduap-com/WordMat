@@ -666,7 +666,7 @@ End Function
 Sub PlotOutput(Optional highres As Double = 1)
 Dim Text As String, yAxislabel As String
 On Error GoTo Fejl
-    Label_wait.Caption = Sprog.Wait & "!"
+    Label_wait.Caption = Sprog.A(826) & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
     omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
@@ -954,13 +954,13 @@ Sub SetCaptions()
     Me.Caption = Sprog.A(85)
     Label6.Caption = Sprog.A(86)
     Label7.Caption = Sprog.A(87)
-    Label_Graf.Caption = Sprog.Graph
-    Label_opdater.Caption = Sprog.RibShowGraph 'Sprog.Update
+    Label_Graf.Caption = Sprog.A(667)
+    Label_opdater.Caption = Sprog.A(461)
     Label_cancel.Caption = Sprog.A(661)
-    Label_var.Caption = Sprog.IndepVar
+    Label_var.Caption = Sprog.A(746)
     Label3.Caption = Sprog.A(88)
-    Label5.Caption = Sprog.Definitions
-    Label_wait.Caption = Sprog.Wait & "!"
+    Label5.Caption = Sprog.A(823)
+    Label_wait.Caption = Sprog.A(826) & "!"
     CheckBox_pointsjoined.Caption = Sprog.A(89)
     CheckBox_visforklaring.Caption = Sprog.A(90)
     Label_tolist.Caption = Sprog.A(91)

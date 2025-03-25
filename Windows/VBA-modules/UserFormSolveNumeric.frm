@@ -438,15 +438,15 @@ End Sub
 
 Sub SetCaptions()
     Me.Caption = Sprog.A(235)
-    Label14.Caption = Sprog.Equation
-    Label_variabel.Caption = Sprog.Variable
+    Label14.Caption = Sprog.A(833)
+    Label_variabel.Caption = Sprog.A(845)
     Label1.Caption = Sprog.A(236)
     Frame3.Caption = Sprog.A(237)
     Label9.Caption = Sprog.A(238)
     Label10.Caption = Sprog.A(239)
     Label12.Caption = Sprog.A(240)
     Label13.Caption = Sprog.A(241)
-    CommandButton_opdater.Caption = Sprog.Update
+    CommandButton_opdater.Caption = Sprog.A(813)
     Label15.Caption = Sprog.A(242)
     CommandButton_visgraf.Caption = Sprog.A(243)
     CommandButton_insertpic.Caption = Sprog.A(93)
