@@ -28,7 +28,7 @@ If Sel.InlineShapes(1).Type = wdInlineShapePicture Then
     Arr = Split(s, "|")
     PicOpen = False
     If Arr(0) = "WordMat" Then
-        ' arr(1) indeholder version. Hvis der kommer flere felter kræves nok check
+        ' arr(1) contains version. If more fields are required, enough check
         PrepareMaxima
         On Error Resume Next
         UF2Dgraph.TextBox_definitioner.Text = Arr(2)

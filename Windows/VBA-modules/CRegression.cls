@@ -8,6 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+
 Private xval() As Double
 Private yval() As Double
 Private Coeff() As Double ' coefficients for polregr Coeff(0)=a_0 ...
@@ -89,16 +90,16 @@ If Selection.Range.End > Selection.Tables(1).Range.End Then
     Selection.End = Selection.Tables(1).Range.End
 End If
 
-If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel også er valgt
+If Selection.Rows.Count >= Selection.Columns.Count Then ' fails if anything other than table is also selected
     Set rws = Selection.Rows
-    oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
+    oFS = Selection.Cells(1).Column.Index - 1 ' column where the selection starts
 Else
     Set rws = Selection.Columns
-    oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
+    oFS = Selection.Cells(1).Row.Index - 1 ' row where selection starts
 End If
 n = rws.Count
 
-If n < 2 Then ' hvis intet valgt på forhånd
+If n < 2 Then ' if nothing selected in advance
     If Selection.Tables(1).Rows.Count >= Selection.Tables(1).Columns.Count Then
         Set rws = Selection.Tables(1).Rows
         oFS = 0
@@ -108,7 +109,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
     End If
     n = rws.Count
     On Error Resume Next
-    For i = 1 To n ' bestem hvor der ligger tal
+    For i = 1 To n ' determine where numbers are located
         For j = 1 To rws(1).Cells.Count
         cellval = rws(i).Cells(j).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
@@ -150,8 +151,8 @@ End If
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Replace(cellval, "*10^", "E")
         If Not IsNumeric(cellval) Then GoTo NotNumber
-        xval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", "")) ' skal med for at melde fejl , men alene duer ikke da den er afh af sprog indstill. De to replace fjerner . og , da disse ikke genkendes af alle sprog fx norsk bruger ikke . så alle tal med . ville blive ignoreret
-        xval(i) = val(Replace(cellval, ",", ".")) 'melder ikke fejl ved bogstaver
+        xval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", "")) ' must be included to report errors, but alone is not enough as it depends on the language settings. The two replaces remove . and , as these are not recognized by all languages, e.g. Norwegian does not use . so all numbers with . would be ignored
+        xval(i) = val(Replace(cellval, ",", ".")) 'does not report errors with letters
         
         If rws(j).Cells(2 + oFS).Range.OMaths.Count > 0 Then
 '            PrepareMaxima
@@ -169,7 +170,7 @@ End If
         If Not IsNumeric(cellval) Then GoTo NotNumber
         yval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
         yval(i) = val(Replace(cellval, ",", "."))
-        If Err.Number > 0 Then ' hvis enten x -eller y-værdien ikke er et tal (fejl fra cdbl) så skal linjen ignoreres
+        If Err.Number > 0 Then ' if either the x or y value is not a number (error from cdbl) then the line should be ignored
 NotNumber:
            i = i - 1
             Err.Clear
@@ -191,21 +192,17 @@ Dim rws As Variant
 Dim cellval As String
 Dim i, j, n, oFS As Integer
 'On Error GoTo fejl
-'    If Selection.Tables.Count = 0 Then
-'        Call MsgBox("Du skal lave en tabel med to kolonner. x-værdier i venstre kolonne og y-værdier i højrekolonne")
-'        Exit Sub
-'    End If
 If Selection.Tables.Count = 0 Then Exit Sub
 
 tableonly:
 On Error GoTo heletabel
 
-If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel også er valgt
+If Selection.Rows.Count >= Selection.Columns.Count Then ' fails if anything other than table is also selected
     Set rws = Selection.Rows
-    oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
+    oFS = Selection.Cells(1).Column.Index - 1 ' column where the selection starts
 Else
     Set rws = Selection.Columns
-    oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
+    oFS = Selection.Cells(1).Row.Index - 1 ' row where selection starts
 End If
 n = rws.Count
 GoTo Prepare
@@ -225,10 +222,10 @@ Prepare:
 If n < 2 Then
     If Selection.Tables(1).Rows.Count >= Selection.Tables(1).Columns.Count Then
         Set rws = Selection.Tables(1).Rows
-        oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
+        oFS = Selection.Cells(1).Column.Index - 1 ' column where the selection starts
     Else
         Set rws = Selection.Tables(1).Columns
-        oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
+        oFS = Selection.Cells(1).Row.Index - 1 ' row where selection starts
     End If
     n = rws.Count
 End If
@@ -269,7 +266,7 @@ slut:
 
 End Sub
 Public Sub GetSetData()
-' læser mængde {(2,1),(3,4)} fra mathbox ind i xval og yval
+' reads set {(2,1),(3,4)} from mathbox into xval and yval
 Dim p As String
 Dim Text As String
 Dim n As Integer
@@ -282,7 +279,7 @@ ea.StartBracket = "{"
 ea.EndBracket = "}"
 Selection.OMaths.Linearize
 Text = Selection.OMaths(1).Range.Text
-ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' nødvendigt
+ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' required
 ea.Text = ea.GetNextBracketContent()
 ea.SetNormalBrackets
 ea.Pos = 1
@@ -308,7 +305,7 @@ Loop While Not (p = "") And n < 1000
 End Sub
 
 Private Function ComputeRegr(x() As Double, y() As Double) As Boolean
-'Udfører lineær regression på to arrays og returnerer a,b og R^2
+'Performs linear regression on two arrays and returns a,b and R^2
 
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double, sumyy As Double
 Dim n As Integer
@@ -326,7 +323,7 @@ For i = LBound(x) To UBound(x)
 Next
 
 A = (n * sumxy - sumx * sumy) / (n * sumxx - sumx ^ 2)
-A = betcif(A, 16)   ' sikrer at man ikke får små værdier for b der egentlig er 0
+A = betcif(A, 16)   ' ensures that you do not get small values ??for b that are actually 0
 b = (sumy - A * sumx) / n
 If n * sumxx - sumx ^ 2 = 0 Or (n * sumyy - sumy ^ 2) = 0 Then
     r = 1
@@ -345,7 +342,7 @@ slut:
 End Function
 
 Function Logv(val() As Double) As Variant
-'tager log af alle elementer i array
+'takes log of all elements in array
     Dim n As Integer, j As Integer, i As Integer
     
     ReDim arrlog(LBound(val) To UBound(val)) As Double
@@ -522,7 +519,7 @@ Fejl:
 slut:
 End Sub
 Function ConvertSep(Text As String) As String
-    ' kommaer og listeseparator
+' commas and list separator
     Dim ea As New ExpressionAnalyser
     If Not MaximaSeparator Then
         ea.Text = Text
@@ -628,8 +625,8 @@ slut:
 End Sub
 
 Function polregr(x() As Double, y() As Double, orden As Integer, Optional ByVal tving As Boolean = False) As Boolean
-'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2
-' tving betyder tving gennem (0,0)
+'Performs polynomial regression on two arrays and returns a,b,c and R^2
+' constraint means constraint through (0,0)
 '  ax^2+bx+c
 Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim SStotal As Double, SSregr As Double
@@ -655,36 +652,35 @@ ReDim t(orden)
 
 n = UBound(x) - LBound(x) + 1
                
-For j = 0 To orden ' T(i) sættes op (højre kolonne af matrix)
+For j = 0 To orden ' T(i) is set up (right column of matrix)
     For i = 0 To np - 1
         t(j) = t(j) + y(i + 1) * x(i + 1) ^ j
     Next
 Next
                
-For j = 0 To 2 * orden ' S(i) sættes op (elementer til det indre af matrix)
+For j = 0 To 2 * orden ' S(i) is set up (elements to the interior of the matrix)
     For i = 0 To np - 1
         s(j) = s(j) + x(i + 1) ^ j
     Next
 Next
-
-               
+     
 
 If tving = False Then
-' sæt indre af matrix op
+' set up the interior of the matrix
 For i = 1 To orden + 1
     For j = 1 To orden + 1
         m(i, j) = s(orden + i - j)
     Next
 Next
-'sæt højre kolonne i matrix op
+'set up the right column of the matrix
 For i = 0 To orden
     m(i + 1, orden + 2) = t(i)
 Next
 
-' Der udføres gaussisk eliminination
+' Gaussian elimination is performed
 For i = 1 To orden + 1
-' dividerer række i med værdien i celle (i,i)
-  For j = orden + 2 To 1 Step -1
+' divides row i by the value in cell (i,i)
+For j = orden + 2 To 1 Step -1
     If m(i, i) = 0 Then
         MsgBox "Divide by zero", vbOKOnly, Sprog.Error
         Exit Function
@@ -692,7 +688,7 @@ For i = 1 To orden + 1
         m(i, j) = m(i, j) / m(i, i)
     End If
   Next
-' laver nuller i kolonne i undtagen celle i,i hvor der skal stå et 1
+' makes zeros in column i except cell i,i where there should be a 1
   For q = 1 To orden + 1
     If q <> i Then
       For j = orden + 2 To 1 Step -1
@@ -733,9 +729,8 @@ Fejl:
 slut:
 End Function
 Function polregrkvad(x() As Double, y() As Double, Optional ByVal tving As Boolean = False) As Boolean
-'Udfører polynomisk regression på to arrays og returnerer a,b,c og R^2 via userdefined datatype
-' tving betyder tving gennem (0,0)
-'  ax^2+bx+c
+'Performs polynomial regression on two arrays and returns a,b,c and R^2 via userdefined datatype
+' tving means constraint through (0,0)'  ax^2+bx+c
 Dim sumx As Double, sumy As Double, sumxy As Double, sumxx As Double
 Dim n As Integer, i As Integer, j As Integer, q As Integer, ymean As Double
 Dim sumx2y As Double, sumx3 As Double, sumx4 As Double, SStotal As Double, SSregr As Double
@@ -770,18 +765,17 @@ m(3, 2) = sumx3
 m(3, 3) = sumxx
 m(3, 4) = sumx2y
 
-' Der udføres gaussisk eliminination
+' Gaussian elimination is performed
 For i = 1 To 3
-' dividerer række i med værdien i celle (i,i)
+' divides row i by the value in cell (i,i)
   For j = 4 To 1 Step -1
     If m(i, i) = 0 Then
-'        MsgBox "nul"
         GoTo tving
     Else
         m(i, j) = m(i, j) / m(i, i)
     End If
   Next
-' laver nuller i kolonne i undtagen celle i,i hvor der skal stå et 1
+' makes zeros in column i except cell i,i where there should be a 1
   For q = 1 To 3
     If q <> i Then
       For j = 4 To 1 Step -1
@@ -839,9 +833,7 @@ Sub InsertEquation()
     Selection.TypeText Text:=Ligning
     Selection.OMaths.BuildUp
     Selection.TypeParagraph
-'    Call Indsæt2DPlot(ligning, xval, yval)
     Oundo.EndCustomRecord
 
 End Sub
-
 

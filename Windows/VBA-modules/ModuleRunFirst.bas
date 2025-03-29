@@ -5,7 +5,7 @@ Private HasStarted As Boolean
 
 #If Mac Then
 #Else
-    Dim oAppClass As New oAppClass ' er også i P, så risiko for tabt tempdoc er mindre
+    Dim oAppClass As New oAppClass ' is also in P, so the risk of lost tempdoc is less
     Private Declare PtrSafe Function CreateMutex Lib "kernel32" Alias "CreateMutexA" (ByVal lpMutexAttributes As LongPtr, ByVal bInitialOwner As LongPtr, ByVal lpName As String) As LongPtr
 #End If
 
@@ -13,7 +13,7 @@ Sub RunFirst()
 ' Should be run on startup of WordMat
 If HasStarted Then Exit Sub
 
-ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
+ChangeAutoHyphen ' so 1-(-1) does not translate to 1--1 dash
 
 #If Mac Then
 #Else
@@ -21,12 +21,12 @@ ChangeAutoHyphen ' så 1-(-1) ikke oversættes til  1--1 tænkestreg
     CreateMutex 0&, 0&, "WordMatMutex"
 #End If
 
-SetAllDefaultRegistrySettings ' hvis ny bruger
+SetAllDefaultRegistrySettings ' if new user
 
 ReadAllSettingsFromRegistry
 AntalB = Antalberegninger
 
-If AppVersion <> RegAppVersion Then ' hvis det er første gang WordMat startes efter en opdatering, Så her kan sættes indstillinger der skal ændres
+If AppVersion <> RegAppVersion Then ' if this is the first time WordMat is started after an update, then here you can set the settings that need to be changed
     If val(AppVersion) = 1.34 Then
         SettShortcutAltM = KeybShortcut.InsertNewEquation
         SettShortcutAltM2 = -1
@@ -65,13 +65,9 @@ Sub SetMaxProc()
             Err.Clear
             If QActivePartnership(False, True) Then
                 If DllConnType = 0 Or DllConnType = 1 Then
-                    If MsgBox2("Kan ikke forbinde til Maxima. Vil du anvende metoden 'WSH' i stedet?" & VbCrLfMac & VbCrLfMac & "(Denne indstilling findes under avanceret i Indstillinger)", vbYesNo, Sprog.Error) = vbYes Then
+                    If MsgBox2(Sprog.A(885), vbYesNo, Sprog.Error) = vbYes Then
                         DllConnType = 2
                     End If
-'                    If MsgBox2("Kan ikke forbinde til Maxima. Vil du anvende metoden 'dll direct' i stedet?" & VbCrLfMac & VbCrLfMac & "(Denne indstilling findes under avanceret i Indstillinger)", vbYesNo, Sprog.Error) = vbYes Then
-'                        DllConnType = 1
-'                    End If
-'                ElseIf DllConnType = 1 Then
                 End If
             Else
                 MsgBox2 Sprog.A(54), vbOKOnly, Sprog.Error

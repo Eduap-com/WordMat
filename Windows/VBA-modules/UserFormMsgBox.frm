@@ -13,8 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' This is a replacement for msgbox. It has the same design as the other Forms, and the size can be set automatically to fit the text
 
 Public MsgBoxStyle As VbMsgBoxStyle
 Public MsgBoxResult As VbMsgBoxResult
@@ -59,6 +59,7 @@ Private Sub Label_cancel_Click()
     Else
         MsgBoxResult = vbNo
     End If
+    On Error Resume Next
     Me.hide
 End Sub
 
@@ -83,7 +84,6 @@ End Sub
 Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_ok.BackColor = LBColorHover
 End Sub
-
 
 Private Sub Label_prompt_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     SetButtonsInactive

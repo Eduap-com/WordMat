@@ -8,7 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
-' tilknyttes alle controls på forms, hvor esc skal kunne lukke
+' assign all controls on forms where esc should be able to close
 
 Public WithEvents LabelControl As MSForms.Label
 Attribute LabelControl.VB_VarHelpID = -1

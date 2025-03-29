@@ -1,20 +1,20 @@
 VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormOmdrejninglegeme 
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSolidOfRevolution 
    Caption         =   "Omdrejningslegeme"
    ClientHeight    =   3885
    ClientLeft      =   -15
    ClientTop       =   75
    ClientWidth     =   7020
-   OleObjectBlob   =   "UserFormOmdrejninglegeme.frx":0000
+   OleObjectBlob   =   "UserFormSolidOfRevolution.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
-Attribute VB_Name = "UserFormOmdrejninglegeme"
+Attribute VB_Name = "UserFormSolidOfRevolution"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' This forms provides input to GnuPlot for plotting a solid of revolution
 
 Private Sub CommandButton_ok_Click()
     Dim funk As String
@@ -33,7 +33,6 @@ Private Sub CommandButton_ok_Click()
     
     xmin = val(Sxmin)
     xmax = val(Sxmax)
-'    funk = InputBox("Indtast forskrift som funktion af x", "Omdrejningslegeme")
     funk = TextBox_forskrift.Text
     funk = omax.CodeForMaxima(funk)
     funk2 = TextBox_forskrift2.Text
@@ -54,11 +53,11 @@ If Not CheckBox_linjer.Value Then
 End If
 If ComboBox_kvalitet.ListIndex = 0 Then 'super
     grafobj = "x_voxel=18,y_voxel=18,z_voxel=18," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'meget høj
+ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'very high
     grafobj = "x_voxel=15,y_voxel=15,z_voxel=15," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' høj
+ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' high
     grafobj = "x_voxel=12,y_voxel=12,z_voxel=12," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 4 Then 'lav
+ElseIf ComboBox_kvalitet.ListIndex = 4 Then 'low
     grafobj = "x_voxel=5,y_voxel=5,z_voxel=5," & grafobj
 End If
 If CheckBox_grid.Value Then
@@ -88,27 +87,27 @@ slut:
     Label_vent.visible = False
 End Sub
 Private Sub UserForm_Initialize()
-    Me.Caption = Sprog.A(194) 'omdrejningslegeme
-    ComboBox_kvalitet.AddItem Sprog.A(185) '("Super (Langsom)")
-    ComboBox_kvalitet.AddItem Sprog.A(184) '("Meget høj")
-    ComboBox_kvalitet.AddItem Sprog.A(183) '("Høj")
-    ComboBox_kvalitet.AddItem Sprog.A(182) '("Normal")
-    ComboBox_kvalitet.AddItem Sprog.A(181) '("Lav")
+    Me.Caption = Sprog.A(194)
+    ComboBox_kvalitet.AddItem Sprog.A(185)
+    ComboBox_kvalitet.AddItem Sprog.A(184)
+    ComboBox_kvalitet.AddItem Sprog.A(183)
+    ComboBox_kvalitet.AddItem Sprog.A(182)
+    ComboBox_kvalitet.AddItem Sprog.A(181)
     ComboBox_kvalitet.ListIndex = 3
     TextBox_forskrift.SetFocus
     
-    Label1.Caption = Sprog.A(186) ' forskrift
-    Label_vent.Caption = Sprog.A(187) 'vent
-    Label5.Caption = Sprog.A(188) ' Maks
-    CheckBox_linjer.Caption = Sprog.A(189) ' kun linjer
-    CheckBox_grid.Caption = Sprog.A(190) ' vis akse
-    Label_quality.Caption = Sprog.A(191) ' quality
+    Label1.Caption = Sprog.A(186)
+    Label_vent.Caption = Sprog.A(187)
+    Label5.Caption = Sprog.A(188)
+    CheckBox_linjer.Caption = Sprog.A(189)
+    CheckBox_grid.Caption = Sprog.A(190)
+    Label_quality.Caption = Sprog.A(191)
 #If Mac Then
-    Label7.Caption = "" ' forklaring...
-    Label9.Caption = "" 'Påvirker rotationshastighed
+    Label7.Caption = ""
+    Label9.Caption = ""
 #Else
-    Label9.Caption = Sprog.A(192) 'Påvirker rotationshastighed
-    Label7.Caption = Sprog.A(193) ' forklaring...
+    Label9.Caption = Sprog.A(192)
+    Label7.Caption = Sprog.A(193)
 #End If
 
 End Sub

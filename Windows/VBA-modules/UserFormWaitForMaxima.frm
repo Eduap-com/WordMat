@@ -13,22 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+
 Public StopNow As Boolean
 
 Private Sub UserForm_Activate()
     StopNow = False
     SetCaptions
     DoEvents
-End Sub
-
-Private Sub UserForm_Initialize()
-'    Call RemoveCaption(Me)
-'#If Mac Then
-'    Me.Height = 180
-'#End If
-    
 End Sub
 
 Private Sub SetCaptions()

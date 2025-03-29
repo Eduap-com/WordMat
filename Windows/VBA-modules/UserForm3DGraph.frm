@@ -13,10 +13,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
-Private palindex As Integer
+' This form is used for 3d plots using gnuplot for GeoGebra
 
+Private palindex As Integer
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)
 ' SetEscEvents Me.Controls     in Initialize
@@ -45,16 +45,13 @@ Sub SetEscEvents(ControlColl As Controls)
     Next
 End Sub
 Private Sub CommandButton_geogebra_Click()
-Dim s As String, vekt As String, Arr() As String, i As Integer, j As Integer
-Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String, cmd As String
+    Dim s As String, vekt As String, Arr() As String, i As Integer, j As Integer
+    Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String, cmd As String
     Dim sl As New CSortList, DefList As String, Var As String, k As Integer, fktudtryk As String, UrlLink As String, p As Integer
     
     ea.SetNormalBrackets
 
-'PrepareMaxima
-'    omax.ConvertLnLog = False
-
-'definitioner
+    'definitions
     For i = 0 To omax.defindex - 1
         DefList = DefList & "," & omax.DefName(i)
         ea.Text = omax.DefValue(i)
@@ -74,7 +71,7 @@ Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As 
         End If
     Next
 
-'    ' definer variable der ikke er defineret
+    ' define variables not defined
     omax.FindVariable
     ea.Text = DefList
     For i = 0 To sl.Length - 1
@@ -92,12 +89,12 @@ Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As 
         End If
         cmd = Replace(ConvertToGeogebraSyntax(cmd), "+", "%2B") & ";"
         UrlLink = UrlLink & cmd
-   Next
+    Next
 
 
-s = UrlLink
+    s = UrlLink
 
-' forskrifter
+    ' functions
     If TextBox_forskrift1.Text <> "" Then
         s = s & ConvertToGeogebraSyntax(TextBox_forskrift1.Text) & ";"
     End If
@@ -108,7 +105,7 @@ s = UrlLink
         s = s & ConvertToGeogebraSyntax(TextBox_forskrift3.Text) & ";"
     End If
 
-'ligninger
+    'equations
     If TextBox_ligning1.Text <> "" Then
         s = s & ConvertToGeogebraSyntax(TextBox_ligning1.Text) & ";"
     End If
@@ -119,70 +116,70 @@ s = UrlLink
         s = s & ConvertToGeogebraSyntax(TextBox_ligning1.Text) & ";"
     End If
     
-'vektorer
-If TextBox_vektorer.Text <> "" Then
-    vekt = TextBox_vektorer.Text
-    Arr = Split(vekt, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-            If InStr(Arr(i), ";") > 0 Then
-                Arr(i) = Replace(Arr(i), ",", ".")
-                Arr(i) = Replace(Arr(i), ";", ",")
-            Else
-                ea.Text = Arr(i)
-                j = ea.CountText(",")
-                If Not (j = 2 Or j = 4) Then
-                    ea.ConvertDecSeparator
-                    Arr(i) = ea.Text
+    'vectors
+    If TextBox_vektorer.Text <> "" Then
+        vekt = TextBox_vektorer.Text
+        Arr = Split(vekt, VbCrLfMac)
+        For i = 0 To UBound(Arr)
+            If Arr(i) <> "" Then
+                If InStr(Arr(i), ";") > 0 Then
+                    Arr(i) = Replace(Arr(i), ",", ".")
+                    Arr(i) = Replace(Arr(i), ";", ",")
+                Else
+                    ea.Text = Arr(i)
+                    j = ea.CountText(",")
+                    If Not (j = 2 Or j = 4) Then
+                        ea.ConvertDecSeparator
+                        Arr(i) = ea.Text
+                    End If
                 End If
-            End If
-            If InStr(Arr(i), ")(") > 0 Then
-                Arr(i) = Replace(Arr(i), ")(", "),(")
-            Else
-                Arr(i) = "(0,0,0)," & Arr(i)
-            End If
-            Arr(i) = Replace(Arr(i), "(", "(")
-            Arr(i) = Replace(Arr(i), ")", ")")
+                If InStr(Arr(i), ")(") > 0 Then
+                    Arr(i) = Replace(Arr(i), ")(", "),(")
+                Else
+                    Arr(i) = "(0,0,0)," & Arr(i)
+                End If
+                Arr(i) = Replace(Arr(i), "(", "(")
+                Arr(i) = Replace(Arr(i), ")", ")")
             
-            s = s & "vector(" & Arr(i) & ");"
-        End If
-    Next
-End If
-
-'parameterfremstillinger
-If TextBox_parametric1x.Text <> "" Then
-    parx = ConvertToGeogebraSyntax(TextBox_parametric1x.Text)
-    pary = ConvertToGeogebraSyntax(TextBox_parametric1y.Text)
-    parz = ConvertToGeogebraSyntax(TextBox_parametric1z.Text)
-     s = s & "(" & parx & " , " & pary & " , " & parz & ");"
-End If
-If TextBox_parametric2x.Text <> "" Then
-    parx = ConvertToGeogebraSyntax(TextBox_parametric2x.Text)
-    pary = ConvertToGeogebraSyntax(TextBox_parametric2y.Text)
-    parz = ConvertToGeogebraSyntax(TextBox_parametric2z.Text)
-     s = s & "(" & parx & " , " & pary & " , " & parz & ");"
-End If
-If TextBox_parametric3x.Text <> "" Then
-    parx = ConvertToGeogebraSyntax(TextBox_parametric3x.Text)
-    pary = ConvertToGeogebraSyntax(TextBox_parametric3y.Text)
-    parz = ConvertToGeogebraSyntax(TextBox_parametric3z.Text)
-     s = s & "(" & parx & " , " & pary & " , " & parz & ");"
-End If
-
-'punkter
-If TextBox_punkter.Text <> "" Then
-    punkttekst = TextBox_punkter.Text
-    If InStr(punkttekst, ";") > 0 Then
-        punkttekst = Replace(punkttekst, ",", ".")
-        punkttekst = Replace(punkttekst, ";", ",")
+                s = s & "vector(" & Arr(i) & ");"
+            End If
+        Next
     End If
-    punkttekst = Replace(punkttekst, ")(", ");(")
-    punkttekst = Replace(punkttekst, vbCrLf, ";")
-    punkttekst = Replace(punkttekst, vbCr, ";")
-    punkttekst = Replace(punkttekst, " ", "")
-    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
-    s = s & punkttekst & ";"
-End If
+
+    'parametric plots
+    If TextBox_parametric1x.Text <> "" Then
+        parx = ConvertToGeogebraSyntax(TextBox_parametric1x.Text)
+        pary = ConvertToGeogebraSyntax(TextBox_parametric1y.Text)
+        parz = ConvertToGeogebraSyntax(TextBox_parametric1z.Text)
+        s = s & "(" & parx & " , " & pary & " , " & parz & ");"
+    End If
+    If TextBox_parametric2x.Text <> "" Then
+        parx = ConvertToGeogebraSyntax(TextBox_parametric2x.Text)
+        pary = ConvertToGeogebraSyntax(TextBox_parametric2y.Text)
+        parz = ConvertToGeogebraSyntax(TextBox_parametric2z.Text)
+        s = s & "(" & parx & " , " & pary & " , " & parz & ");"
+    End If
+    If TextBox_parametric3x.Text <> "" Then
+        parx = ConvertToGeogebraSyntax(TextBox_parametric3x.Text)
+        pary = ConvertToGeogebraSyntax(TextBox_parametric3y.Text)
+        parz = ConvertToGeogebraSyntax(TextBox_parametric3z.Text)
+        s = s & "(" & parx & " , " & pary & " , " & parz & ");"
+    End If
+
+    'points
+    If TextBox_punkter.Text <> "" Then
+        punkttekst = TextBox_punkter.Text
+        If InStr(punkttekst, ";") > 0 Then
+            punkttekst = Replace(punkttekst, ",", ".")
+            punkttekst = Replace(punkttekst, ";", ",")
+        End If
+        punkttekst = Replace(punkttekst, ")(", ");(")
+        punkttekst = Replace(punkttekst, vbCrLf, ";")
+        punkttekst = Replace(punkttekst, vbCr, ";")
+        punkttekst = Replace(punkttekst, " ", "")
+        If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+        s = s & punkttekst & ";"
+    End If
     s = Left(s, Len(s) - 1)
     
     OpenGeoGebraWeb s, "3d", True, False
@@ -191,7 +188,6 @@ End Sub
 
 Private Sub CommandButton_insertplan_Click()
 Dim plan As String
-'    plan = "a*(x-x0)+b*(y-y0)+c*(z-z0)=0"
     plan = "1*(x-0)+1*(y-0)+1*(z-0)=0"
     If TextBox_ligning1.Text = "" Then
         TextBox_ligning1.Text = plan
@@ -222,22 +218,22 @@ Private Sub CommandButton_nulstilalt_Click()
     TextBox_ligning2.Text = ""
     TextBox_ligning3.Text = ""
     TextBox_vektorer.Text = ""
-TextBox_parametric1x.Text = ""
-TextBox_parametric1y.Text = ""
-TextBox_parametric1z.Text = ""
-TextBox_tmin1.Text = ""
-TextBox_tmax1.Text = ""
-TextBox_parametric2x.Text = ""
-TextBox_parametric2y.Text = ""
-TextBox_parametric2z.Text = ""
-TextBox_tmin2.Text = ""
-TextBox_tmax2.Text = ""
-TextBox_parametric3x.Text = ""
-TextBox_parametric3y.Text = ""
-TextBox_parametric3z.Text = ""
-TextBox_tmin3.Text = ""
-TextBox_tmax3.Text = ""
-TextBox_punkter.Text = ""
+    TextBox_parametric1x.Text = ""
+    TextBox_parametric1y.Text = ""
+    TextBox_parametric1z.Text = ""
+    TextBox_tmin1.Text = ""
+    TextBox_tmax1.Text = ""
+    TextBox_parametric2x.Text = ""
+    TextBox_parametric2y.Text = ""
+    TextBox_parametric2z.Text = ""
+    TextBox_tmin2.Text = ""
+    TextBox_tmax2.Text = ""
+    TextBox_parametric3x.Text = ""
+    TextBox_parametric3y.Text = ""
+    TextBox_parametric3z.Text = ""
+    TextBox_tmin3.Text = ""
+    TextBox_tmax3.Text = ""
+    TextBox_punkter.Text = ""
 End Sub
 
 Private Sub CommandButton_nulstilforsk1_Click()
@@ -380,7 +376,7 @@ Ymax = TextBox_ymax.Text
 zmin = TextBox_zmin.Text
 zmax = TextBox_zmax.Text
 
-'forskrifter
+'functions
 If TextBox_forskrift1.Text <> "" Then
     lign = omax.CodeForMaxima(TextBox_forskrift1.Text)
     If CheckBox_udtryk.Value Then
@@ -406,7 +402,7 @@ If TextBox_forskrift3.Text <> "" Then
     antalobj = antalobj + 1
 End If
 
-'ligninger
+'Equations
 If TextBox_ligning1.Text <> "" Then
     lign = omax.CodeForMaxima(TextBox_ligning1.Text)
     If CheckBox_udtryk.Value Then
@@ -442,7 +438,7 @@ If TextBox_ligning3.Text <> "" Then
 End If
 
 
-'parameterfremstillinger
+'parametric plots
 If TextBox_parametric1x.Text <> "" Then
     parx = omax.CodeForMaxima(TextBox_parametric1x.Text)
     pary = omax.CodeForMaxima(TextBox_parametric1y.Text)
@@ -507,7 +503,7 @@ If TextBox_parametric3x.Text <> "" Then
     antalobj = antalobj + 1
 End If
 
-'vektorer
+'vectors
 If TextBox_vektorer.Text <> "" Then
     If antalobj = 0 Then
         grafobj = grafobj & "surface_hide = false,"
@@ -547,7 +543,7 @@ If TextBox_vektorer.Text <> "" Then
     antalobj = antalobj + 1
 End If
 
-'punkter
+'points
 If TextBox_punkter.Text <> "" Then
     punkttekst = TextBox_punkter.Text
     If InStr(punkttekst, ";") > 0 Then
@@ -587,15 +583,13 @@ If CheckBox_grid.Value Then
     grafobj = grafobj & "xaxis_width = 2,xaxis_color = orange,xaxis_type  = solid,xaxis=true,yaxis_width = 2,yaxis_color = orange,yaxis_type=solid,yaxis=true,zaxis_width = 2,zaxis_color = blue,zaxis_type=solid,zaxis=true,grid=true,user_preamble = ""set xyplane at 0"","
 End If
 
-'gridno = TextBox_gridlines.text
-'grafobj = "xu_grid=" & gridno & ",yv_grid=" & gridno & ",x_voxel=" & gridno & ",y_voxel=" & gridno & ",z_voxel=" & gridno & "," & grafobj
 If ComboBox_kvalitet.ListIndex = 0 Then 'super
     grafobj = "xu_grid=200,yv_grid=200,x_voxel=18,y_voxel=18,z_voxel=18," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'meget høj
+ElseIf ComboBox_kvalitet.ListIndex = 1 Then 'very high
     grafobj = "xu_grid=100,yv_grid=100,x_voxel=15,y_voxel=15,z_voxel=15," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' høj
+ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' high
     grafobj = "xu_grid=50,yv_grid=50,x_voxel=12,y_voxel=12,z_voxel=12," & grafobj
-ElseIf ComboBox_kvalitet.ListIndex = 4 Then 'lav
+ElseIf ComboBox_kvalitet.ListIndex = 4 Then 'low
     grafobj = "xu_grid=15,yv_grid=15,x_voxel=5,y_voxel=5,z_voxel=5," & grafobj
 End If
 
@@ -607,30 +601,23 @@ End If
 
 If ComboBox_farver.ListIndex = 0 Then ' standard
     grafobj = grafobj & "palette=color,"
-ElseIf ComboBox_farver.ListIndex = 1 Then ' blå
+ElseIf ComboBox_farver.ListIndex = 1 Then ' bluw
     grafobj = grafobj & "palette=[4,5,7],"
-ElseIf ComboBox_farver.ListIndex = 2 Then ' brun
+ElseIf ComboBox_farver.ListIndex = 2 Then ' brown
     grafobj = grafobj & "palette=[4,5,6],"
-ElseIf ComboBox_farver.ListIndex = 3 Then ' Grå
+ElseIf ComboBox_farver.ListIndex = 3 Then ' Grey
     grafobj = grafobj & "palette=gray,"
 End If
 
 grafobj = "font=""Arial"",font_size=8," & grafobj
 grafobj = grafobj & "colorbox=false"
 
-' afslut
-'If Right(grafobj, 1) = "," Then grafobj = Left(grafobj, Len(grafobj) - 1)
-
 If CheckBox_maximakommando Then
     omax.MaximaOutput = "draw3d(" & grafobj & ")"
     omax.InsertMaximaOutput
 End If
 
-
     omax.Draw3D grafobj, antalobj
-'    If Len(omax.MaximaOutput) < 3 Then
-'        MsgBox "Der skete en fejl. Der er nok en fejl i din syntaks et sted. Check alle faner.", vbOKOnly, "Fejl"
-'    End If
     omax.PrepareNewCommand
     Label_vent.visible = False
 GoTo slut
@@ -730,7 +717,6 @@ Private Sub UserForm_Activate()
     Label12.visible = False
     Label15.visible = False
     Label14.visible = False
-'    Label16.visible = False
     Label46.visible = False
     ComboBox_farver.visible = False
     TextBox_tmin1.visible = False
@@ -768,16 +754,16 @@ Private Sub UserForm_Initialize()
     colindex = 0
     palindex = 0
     ComboBox_kvalitet.AddItem Sprog.A(185)
-    ComboBox_kvalitet.AddItem Sprog.A(184) '("Meget høj")
-    ComboBox_kvalitet.AddItem Sprog.A(183) '("Høj")
-    ComboBox_kvalitet.AddItem Sprog.A(182) '("Normal")
-    ComboBox_kvalitet.AddItem Sprog.A(181) '("Lav")
+    ComboBox_kvalitet.AddItem Sprog.A(184)
+    ComboBox_kvalitet.AddItem Sprog.A(183)
+    ComboBox_kvalitet.AddItem Sprog.A(182)
+    ComboBox_kvalitet.AddItem Sprog.A(181)
     ComboBox_kvalitet.ListIndex = 3
     
-    ComboBox_farver.AddItem Sprog.A(321) '("Gul/rød/lilla")
-    ComboBox_farver.AddItem Sprog.A(322) '("Blå")
-    ComboBox_farver.AddItem Sprog.A(323) '("Brun")
-    ComboBox_farver.AddItem Sprog.A(324) '("Grå")
+    ComboBox_farver.AddItem Sprog.A(321)
+    ComboBox_farver.AddItem Sprog.A(322)
+    ComboBox_farver.AddItem Sprog.A(323)
+    ComboBox_farver.AddItem Sprog.A(324)
     ComboBox_farver.ListIndex = 0
 
     SetEscEvents Me.Controls
@@ -841,6 +827,4 @@ Sub SetCaptions()
     MultiPage1.Pages(3).Caption = Sprog.A(320)
     MultiPage1.Pages(4).Caption = Sprog.A(835)
     MultiPage1.Pages(5).Caption = Sprog.A(808)
-    
-    
 End Sub

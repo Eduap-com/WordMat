@@ -13,14 +13,15 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' This form is used to display errors from Maxima
+
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)
 ' SetEscEvents Me.Controls     in Initialize
     Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
     On Error Resume Next
-    For Each c In ControlColl ' Me.Controls
+    For Each c In ControlColl
         TN = TypeName(c)
         If TN = "CheckBox" Then
             Set CE = New CEvents: Set CE.CheckBoxControl = c: EventsCol.Add CE
@@ -54,7 +55,7 @@ Private Sub Label_ok_Click()
 End Sub
 
 Private Sub Label_restart_Click()
-' Denne funktion crasher Word. Det sker når Cmaxima lukkes. Den må ikke køres fra formen er fra Cmaxima. Den køres nu fra Checkforerror når form lukkes
+' This function crashes Word. It happens when Cmaxima is closed. It must not be run from the form is from Cmaxima. It is now run from Checkforerror when the form is closed
     RestartWordMat
     Unload Me
 End Sub
@@ -82,7 +83,6 @@ Private Sub SetCaptions()
     Label_TAB1.Caption = Sprog.Error
     Label_TAB2.Caption = Sprog.A(749)
     Label_restart.Caption = Sprog.A(736)
-'MultiPage1.Pages("Page1").Caption
 End Sub
 Private Sub Label_restart_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_restart.BackColor = LBColorPress

@@ -16,7 +16,7 @@ Private SaveEndBracket As String
 Public Pos As Long
 
 Public Function GetNextchr() As String
-' returnerer næste bogstav i strengen og fjerner denne
+' returns the next letter in the string and removes it
 GetNextchr = Left(Text, 1)
 Text = right(Text, Len(Text) - 1)
 
@@ -69,16 +69,16 @@ Loop Until c = StartBracket Or c = EndBracket Or pos1 = 1
 
 End Function
 Public Function FindEndOfBracket() As Long
-' finder næste parantes og returnerer postion efter slutparentes
+' finds next parenthesis and returns position after closing parenthesis
     GetNextBracketContent
     FindEndOfBracket = Pos
 End Function
 Public Function GetNextBracketContent(Optional ByVal StartPos As Long) As String
-' returnerer indholdet af næste parantes
-' tom hvis paranteser ikke matcher
-' pos ændres til efter parantesen
+' returns the contents of the next parenthesis
+' empty if parenthesis do not match
+' pos is changed to after the parenthesis
 
-Dim pos1 As Long ' var begge String i v. 1.09 og før
+Dim pos1 As Long
 Dim pos2 As Long
 Dim bracketlevel As Integer
 If StartPos < 1 Then
@@ -118,9 +118,9 @@ GetNextBracketContent = Mid(Text, pos1 + 1, pos2 - pos1 - 1)
 Pos = pos2 + 1
 End Function
 Public Function GetPrevBracketContent(Optional ByVal StartPos As Long) As String
-' returnerer indholdet af parantes før pos
-' tom hvis paranteser ikke matcher
-' pos ændres til første parantestegn
+' returns the contents of the parenthesis before pos
+' empty if parenthesis do not match
+' pos is changed to the first parenthesis character
 
 Dim pos1 As Long
 Dim pos2 As Long
@@ -176,14 +176,14 @@ slut:
 End Property
 
 Public Function FindNextBreak(Optional stopforbrackets As Boolean = False) As Long
-' finder næste gang hvor der burde være parantes.
-' parentesen skal være efter den returnerede position
-' dvs. finder mellemrum, +-*/^=<>):;,@?   paranteser afslutter nu før gjorde de ikke men det gav problemer med f.eks. (3+sqrt3)^2
-' startparantes(c=40) afslutter ikke da det giver problemer med funktioner f.eks. 2^log(3)
-' muligvis problemer med d/dx notation
-' komma skal med da der kan være maximafunktioner i udtrykket solve(2=9^2x,x) f.eks.
-' stopforbrackets er deaktiveret da det formodes det ikke er nødvendigt, men måske dx notation ved integraler?
-' stop for brackets reaktiveret for at virke i converttowordsymbols f_a(1) -> f_a (1)
+' finds next time where there should be a parenthesis.
+' the parenthesis must be after the returned position
+' i.e. finds spaces, +-*/^=<>):;,@? parenthesis now terminates before they didn't but it caused problems with e.g. (3+sqrt3)^2
+' startparenthesis(c=40) does not terminate as it causes problems with functions e.g. 2^log(3)
+' possibly problems with d/dx notation
+' comma must be included as there may be maxima functions in the expression solve(2=9^2x,x) e.g.
+' stopforbrackets is deactivated as it is assumed it is not necessary, but maybe dx notation for integrals?
+' stop for brackets reactivated to work in converttowordsymbols f_a(1) -> f_a (1)
     Dim c As Integer
     
     Do
@@ -220,42 +220,42 @@ Public Function FindNextBreak(Optional stopforbrackets As Boolean = False) As Lo
 
 End Function
 Public Function FindHierakiBreak(level As Integer, Optional komma As Boolean = True) As Long
-' finder næste operator afhængig af angivet hierakilevel.
+' finds the next operator depending on the specified hierarchy level.
 'Hierarki level:
-'=<>)] 0 sumtegn og produkttegn
-':;,@? mellemrum    1   kun komma hvis komma=true
+'=<>)] 0 sum and product symbols
+':;,@? space    1   only comma if komma=true
 '+-  2
 '*/  3
 '^_  4
 '({[|   5
-' den returnerede værdi er positionen for sidste tegn inden operatoren
-' level 0 stopper kun for operatorer på level 0
-' level 1 stopper for operatorer på level 0-1
-' level 2 stopper for operatorer på level 0-2
+' the returned value is the position of the last character before the operator
+' level 0 only stops for operators on level 0
+' level 1 only stops for operators on level  0-1
+' level 2 only stops for operators on level  0-2
 ' ...
-' findnextbreak svarer til level 4
+' findnextbreak corresponds to level 4
 
     
     Dim c As Integer, i As Integer
     
     Do
-    i = i + 1 ' sikkerhed for intinite loop
+    i = i + 1 ' infinite loop security
     c = AscW(ChrByIndex(Pos))
     If (c >= 60 And c <= 62) Or c = 41 Or c = 93 Or c = 125 Or c = 8776 Or c = 8719 Or c = 8721 Or c = 8594 Or c = 8592 Or c = 8596 Or c = 8651 Or c = 8652 Then Exit Do ' 41=) , 93=] , 123=} (added 1.24 geogebracas), 60=<, 61== , 62=> , 8776=cirkaligmed, 8719=produkttegn , 8721=sumtegn, 8594=-> , 8592=<-, 8596=<->, 8651,8652=kemidblpil
     
     If level > 0 Then
-        If c = 32 Or c = 58 Or c = 59 Or c = 63 Or c = 64 Or c = 38 Then Exit Do    ' 32=mellemrum, 58=: , 59=; , 44=, 63=? , 64=@ , 38=&
+        If c = 32 Or c = 58 Or c = 59 Or c = 63 Or c = 64 Or c = 38 Then Exit Do    ' 32=space, 58=: , 59=; , 44=, 63=? , 64=@ , 38=&
         If komma And c = 44 Then Exit Do
     End If
     If level > 1 Then
         If c = 43 Or c = 45 Then ' 43=+, 45=-
-            If ChrByIndex(Pos - 1) <> "E" Then Exit Do ' E- og E+ skal ikke stoppe
+            If ChrByIndex(Pos - 1) <> "E" Then Exit Do ' E- og E+ should not stop
             If Pos = 2 Then Exit Do
             If Not (IsNumber(Pos - 2)) Then Exit Do
         End If
     End If
     If level > 2 Then
-        If c = 42 Or c = 215 Or c = 47 Or c = 183 Then Exit Do ' 42=*, 47=/ , 215=\times, 183=\cdot (183 tilføjet v. 1.07 pga Latexkonv)
+        If c = 42 Or c = 215 Or c = 47 Or c = 183 Then Exit Do ' 42=*, 47=/ , 215=\times, 183=\cdot
     End If
     If level > 3 Then
         If c = 94 Or c = 95 Then Exit Do ' 94=^, 95=_
@@ -264,28 +264,28 @@ Public Function FindHierakiBreak(level As Integer, Optional komma As Boolean = T
         If c = 40 Or c = 91 Or c = 123 Or c = 124 Or c = 125 Or c = 12310 Then Exit Do ' 40=(, 91=[ , 123={ , 124=|, 125=}
     End If
     
-    If c = 40 Then ' hvis parantesstart hoppes til parantesslut
+    If c = 40 Then ' if the start of the parentheses is jumped to the end of the parentheses
         SaveBrackets
         SetNormalBrackets
         GetNextBracketContent
         RestoreBrackets
         Pos = Pos - 1
     End If
-    If c = 91 Then ' hvis [ parantesstart hoppes til parantesslut ]
+    If c = 91 Then ' if [ start of parentheses jump to end of parentheses ]
         SaveBrackets
         SetSquareBrackets
         GetNextBracketContent
         RestoreBrackets
         Pos = Pos - 1
     End If
-    If c = 123 Then ' hvis {
+    If c = 123 Then ' if {
         SaveBrackets
         SetTuborgBrackets
         GetNextBracketContent
         RestoreBrackets
         Pos = Pos - 1
     End If
-    If c = 12310 Then ' hvis {
+    If c = 12310 Then ' if {
         SaveBrackets
         SetInvisibleBrackets
         GetNextBracketContent
@@ -305,7 +305,7 @@ Public Function FindPrevHierakiBreak(level As Integer, Optional komma As Boolean
 
     Do
     c = AscW(ChrByIndex(Pos))
-    If c = 41 Or c = 93 Or c = 125 Then ' hvis parantesslut hoppes til parantesstart )]}
+    If c = 41 Or c = 93 Or c = 125 Then ' if parentheses end jump to parentheses start )]}
         SaveBrackets
         SetBrackets (c)
         GetPrevBracketContent
@@ -313,10 +313,10 @@ Public Function FindPrevHierakiBreak(level As Integer, Optional komma As Boolean
         RestoreBrackets
     End If
     
-    If (c >= 60 And c <= 62) Or c = 41 Or c = 93 Or c = 8776 Or c = 8289 Then Exit Do ' 41=) , 93=] , 60=<, 61== , 62=> , 8776=cirkaligmed, 8289=funktionstegn
+    If (c >= 60 And c <= 62) Or c = 41 Or c = 93 Or c = 8776 Or c = 8289 Then Exit Do ' 41=) , 93=] , 60=<, 61== , 62=> , 8776=cirka equal, 8289=function symbol
     
     If level > 0 Then
-        If c = 32 Or c = 58 Or c = 59 Or c = 63 Or c = 64 Or c = 38 Then Exit Do ' 32=mellemrum, 58=: , 59=; , 44=, 63=? , 64=@, 38=&
+        If c = 32 Or c = 58 Or c = 59 Or c = 63 Or c = 64 Or c = 38 Then Exit Do ' 32=space, 58=: , 59=; , 44=, 63=? , 64=@, 38=&
         If komma And c = 44 Then Exit Do
     End If
     If level > 1 Then
@@ -342,17 +342,16 @@ Public Function FindPrevHierakiBreak(level As Integer, Optional komma As Boolean
 
 End Function
 Public Function FindPrevBreak() As Long
-' finder forrige gang hvor der burde være parantes
-' dvs. finder mellemrum, +-*/=<>)]}:;,?@   paranteser afslutter nu før gjorde de ikke men det gav problemer med f.eks. (3+sqrt3)^2
-' 8289 er symbol efter funktion
-' ^ fjernet da det ellers ikke virkede for f.eks. sin(x)^2/pi
-    
+' finds last time where there should be parentheses
+' i.e. finds spaces, +-*/=<>)]}:;,?@ parentheses now end before they didn't but it caused problems with e.g. (3+sqrt3)^2
+' 8289 is symbol after function
+' ^ removed as it otherwise didn't work for e.g. sin(x)^2/pi
+
     Dim c As Integer
-    
     
     Do
     c = AscW(ChrByIndex(Pos))
-    If c = 41 Or c = 93 Or c = 125 Or c = 12311 Then ' hvis parantesslut hoppes til parantesstart )]}
+    If c = 41 Or c = 93 Or c = 125 Or c = 12311 Then ' if parentheses end jump to parentheses start )]}
         SaveBrackets
         SetBrackets (c)
         GetPrevBracketContent
@@ -361,7 +360,7 @@ Public Function FindPrevBreak() As Long
     End If
     Pos = Pos - 1
     Loop Until Pos < 0 Or c = 32 Or c = 38 Or (c >= 42 And c <= 45) Or c = 40 Or c = 47 Or (c >= 58 And c <= 64) Or c = 9618 Or c = 91 Or c = 123 Or c = 12310
-    If Pos < 0 Then ' v. 1.29 ændret til < istedet for <= pga problem hvor [1/.. blev til ([1)/...
+    If Pos < 0 Then ' v. 1.29 changed to < instead of <= due to problem where [1/.. became ([1)/...
         Pos = 1
     Else
         Pos = Pos + 2
@@ -371,11 +370,11 @@ Public Function FindPrevBreak() As Long
 End Function
 
 Public Sub InsertUnderstoodBracketPair()
-    'indsætter parantes lige foran nuværende position og finder hvor slutparantes skal være
+    'inserts parenthesis just before current position and finds where the closing parenthesis should be
     Dim c As Integer
     Text = Left(Text, Pos - 1) & StartBracket & right(Text, Len(Text) - Pos + 1)
     Pos = Pos + 1
-    c = AscW(ChrByIndex(Pos)) ' +2 istedet for +1 da det kan give () f.eks. ved x^-2 ->x^()-2
+    c = AscW(ChrByIndex(Pos)) ' +2 instead of +1 as it can give () e.g. at x^-2 ->x^()-2
     If Not (c = 40 Or c = 91 Or c = 123 Or c = 124 Or c = 12310) Then Pos = Pos + 1 ' 40=(, 91=[ , 123={ , 124=|
 
     If Pos > Length Then
@@ -383,18 +382,16 @@ Public Sub InsertUnderstoodBracketPair()
         Text = Text & EndBracket
     Else
         FindHierakiBreak 3
-        ' indsætter parantes efter nuværende pos
+        ' inserts parentheses after current position
         Text = Left(Text, Pos) & EndBracket & right(Text, Len(Text) - Pos)
     End If
-'    FindNextBreak
-    
 End Sub
 Public Sub InsertUnderstoodBracketPairBefore()
-' hvis ikke allerede er der
-Dim gpos As Long
+' if not already there
+    Dim gpos As Long
     gpos = Pos
     
-    ' fjern evt. mellemrum foran / eller ^
+' remove any spaces before / or ^
     If ChrByIndex(gpos) = " " Then
         RemoveChar (gpos)
         gpos = gpos - 1
@@ -410,8 +407,8 @@ Dim gpos As Long
     
 End Sub
 Public Sub InsertBracketAfter(s As String)
-' indsætter underfortået parantes efter symbol s i hele teksten
-' bruges til ^ og / . Hvis der allerede er parantes efter s gøres intet
+' inserts an under-quoted parenthesis after symbol s throughout the text
+' is used for ^ and / . If there is already a parenthesis after s, nothing is done
     Dim gempos As Long, t As String
     Pos = 1
     Do
@@ -421,18 +418,18 @@ Public Sub InsertBracketAfter(s As String)
         If t = "tan" Or t = "sin" Or t = "cos" Then
              Pos = Pos + 1
         ElseIf Mid(Text, Pos + 1, 1) <> "(" Then
-'            If Not (IsNumber(pos + 1) And ChrByIndex(pos + 2) = " ") Then ' indsæt kun hvis ikke simpel tal
+'            If Not (IsNumber(pos + 1) And ChrByIndex(pos + 2) = " ") Then ' insert only if not prime number
                 Pos = Pos + 1
                 gempos = Pos
                 InsertUnderstoodBracketPair
                 Pos = gempos + 1
 '            Else
-'                text = Left(text, pos + 1) & "*" & Right(text, Len(text) - pos - 2) 'løser problem med 1/5 2 bliver til 1/52 istedet for 1/5*2. Måske bedre altid at lave parantes da output ikke ses
+'                text = Left(text, pos + 1) & "*" & Right(text, Len(text) - pos - 2) 'solves problem with 1/5 2 becoming 1/52 instead of 1/5*2. Maybe better to always use parentheses as the output is not visible
 '                pos = pos + 3
 '            End If
         Else
             gempos = Pos
-            GetNextBracketContent Pos + 1 ' det skal håndteres at notationen kan være fx 2x/(x+1)(x-1)  i Word. Da divideres med begge parenteser når der ikke er angivet et gangetegn. Tilføjet i version 1.09. Problemet optræder lidt sporadisk da der ikke oversættes konsekvent på denne måde til lineær form. Samme lingning der konveretes frem og tilbage kan være med eller uden ekstra parantes
+            GetNextBracketContent Pos + 1 ' It must be handled that the notation can be e.g. 2x/(x+1)(x-1) in Word. Then divide by both parentheses when a multiplication sign is not specified. Added in version 1.09. The problem occurs a little sporadically as it is not translated consistently in this way to linear form. The same equation that is converted back and forth can be with or without extra parentheses
             If Mid(Text, Pos, 1) = "(" Then
                 Pos = gempos + 1
                 InsertUnderstoodBracketPair
@@ -446,8 +443,8 @@ Public Sub InsertBracketAfter(s As String)
 
 End Sub
 Public Sub InsertBracketBefore(s As String)
-' indsætter underfortået parantes før symbol s i hele teksten
-' bruges til ^ og / . Hvis der allerede er parantes før s gøres intet
+' inserts an under-quoted parenthesis before the symbol s in the entire text
+' is used for ^ and / . If there is already a parenthesis before s, nothing is done
     Dim gempos As Long
     gempos = 1
     Do
@@ -467,8 +464,8 @@ Public Sub InsertBracketBefore(s As String)
 
 End Sub
 Public Function FindChr(c As String, Optional ByVal StartPos As Long) As Long
-    ' finder næste forekomst af c efter pos og sætter position til denne
-    ' hvis den ikke findes ændres pos ikke og der returneres -1
+' finds next occurrence of c after pos and sets position to this
+' if it is not found pos is not changed and -1 is returned
     If StartPos < 1 Then
         StartPos = Pos
     End If
@@ -476,7 +473,7 @@ Public Function FindChr(c As String, Optional ByVal StartPos As Long) As Long
     If FindChr > 0 Then Pos = FindChr
 End Function
 Public Sub InsertBeforePos(s As String, Optional ByVal position As Long)
-    ' indsætter streng s midt i text-strengen efter pos
+' inserts string s in the middle of the text string after pos
     If position < 1 Then
         position = Pos
     End If
@@ -497,9 +494,9 @@ Public Sub InsertAfterPos(s As String, Optional ByVal position As Long = -1)
     End If
 End Sub
 Public Function GetNextVar(Optional StartPos As Long) As String
-' finder næste variabel eller funktion
-'Første tegn skal være bogstav dernæst kan der være bogstav,tal eller _ eller [
-' navnet returneres og position sættes til sidste position i variablen
+' finds next variable or function
+'First character must be letter then can be letter, number or _ or [
+' name is returned and position is set to last position in variable
 Dim posa As Long
 Dim sb As String
 Dim sb2 As String
@@ -510,14 +507,14 @@ Dim sb2 As String
     If Pos < 1 Then Pos = 1
     Dim c As Integer
     
-    Do ' find første bogstav i variabel
+    Do ' find first letter in variable
         If Pos > Len(Text) Then
             GetNextVar = ""
             Exit Function
         End If
         c = AscW(ChrByIndex(Pos))
         Pos = Pos + 1
-    Loop While Not (IsLetterC(c, False)) Or (c = 95) ' bogstav, men ikke underscore
+    Loop While Not (IsLetterC(c, False)) Or (c = 95) ' letter, but not underscore
     posa = Pos - 1
     
     Pos = Pos - 1
@@ -534,7 +531,7 @@ Dim sb2 As String
             Exit Do
         End If
     Loop While Pos <= Len(Text) And ((c >= 65 And c <= 90) Or (c >= 97 And c <= 122) Or (c >= 48 And c <= 57) Or c = 95)
-    ' her må variabel gerne indehold tal
+    ' here the variable may contain numbers
             
     Pos = Pos - 1
     
@@ -542,18 +539,18 @@ Dim sb2 As String
 
 End Function
 Public Function GetPrevVar(Optional StartPos As Long) As String
-' finder variabel eller funktion før positionen
-'Første tegn skal være bogstav eller tal dernæst kan der være bogstav,tal eller _
-' navnet returneres og position sættes til sidste position i variablen
-' sidste tegn må ikke være tal (altså første tegn i variablen)
-    
+' finds variable or function before position
+' First character must be letter or number then can be letter, number or _
+' the name is returned and position is set to the last position in the variable
+' last character must not be number (i.e. first character in the variable)
+
     If StartPos > 0 Then
         Pos = StartPos
     End If
 
     Dim c As Integer
     
-    Do ' find bogstav
+    Do ' find letter
         If Pos = 0 Then
             GetPrevVar = ""
             Exit Function
@@ -562,7 +559,7 @@ Public Function GetPrevVar(Optional StartPos As Long) As String
         Pos = Pos - 1
     Loop Until (c >= 65 And c <= 90) Or (c >= 97 And c <= 122)
     
-    Do ' find hvor variabel slutter
+    Do ' find where variable ends
         c = AscW(ChrByIndex(Pos))
         Pos = Pos - 1
     Loop While Pos > 0 And ((c >= 65 And c <= 90) Or (c >= 97 And c <= 122) Or (c >= 48 And c <= 57) Or c = 95)
@@ -573,9 +570,9 @@ Public Function GetPrevVar(Optional StartPos As Long) As String
     
 End Function
 Public Function GetNextLatexCommand(Optional StartPos As Long) As String
-' finder næste latex kommando
-'Første tegn skal være bogstav dernæst kan der være bogstav,tal eller _ eller [
-' navnet returneres og position sættes til sidste position i variablen
+' finds next latex command
+'First character must be letter then can be letter, number or _ or [
+' name is returned and position is set to last position in variable
 Dim posa As Long
 Dim sb As String
 Dim sb2 As String
@@ -586,7 +583,7 @@ Dim sb2 As String
     If Pos < 1 Then Pos = 1
     Dim c As Integer
     
-    Do ' find bogstav
+    Do ' find letter
         If Pos > Len(Text) Then
             GetNextLatexCommand = ""
             Exit Function
@@ -599,7 +596,7 @@ Dim sb2 As String
     posa = Pos - 1
     
     Pos = Pos - 1
-    Do ' find hvor variabel slutter
+    Do ' find where variable ends
         Pos = Pos + 1
         c = AscW(ChrByIndex(Pos))
         If c = 91 Then
@@ -613,7 +610,7 @@ Dim sb2 As String
         End If
 '    Loop While pos <= Len(text) And ((c >= 65 And c <= 90) Or (c >= 97 And c <= 122) Or (c >= 48 And c <= 57) Or c = 95)
     Loop While Pos <= Len(Text) And ((c >= 65 And c <= 90) Or (c >= 97 And c <= 122) Or (c >= 48 And c <= 57) Or c = 95)
-    ' her må variabel gerne indehold tal
+    ' here the variable may contain numbers
             
     Pos = Pos - 1
     
@@ -638,7 +635,7 @@ Dim Var As String
     If i = 200 Then FindVar = -1
 End Function
 Sub InsertMultSigns()
-' indsætter underforståede gangetegn
+' inserts implied multiplication signs
 Dim gempos As Long
 Dim c As String, Var As String
     On Error Resume Next
@@ -648,9 +645,9 @@ Dim c As String, Var As String
     If ChrByIndex(Pos) = "_" Then
             FindNextBreak
     ElseIf IsNumber Then  ' tal eller pi 'And c <> 960
-        If (IsLetterPos(Pos + 1)) And (Not (IsLetterPos(Pos - 1, False)) Or Pos = 1) Then  ' c=960 indført v1.24 pga geogebra laver pi2 som skal give ->pi*2
+        If (IsLetterPos(Pos + 1)) And (Not (IsLetterPos(Pos - 1, False)) Or Pos = 1) Then  ' c=960 introduced v1.24 because geogebra creates pi2 which should give ->pi*2
             gempos = Pos
-            Var = GetPrevVar(Pos) ' checker om tallet kan være en tal i slutningen af en funktion, så skal der ikke indsættes gangetegn
+            Var = GetPrevVar(Pos) ' checks whether the number can be a number at the end of a function, then no multiplication sign should be inserted
             If Not (Len(Var) > 0 And Pos = gempos) Then
                 InsertAfterPos "*", gempos
             End If
@@ -669,11 +666,10 @@ Dim c As String, Var As String
     Pos = Pos + 1
     Loop Until Pos > Len(Text)
     
-    
 End Sub
 Sub ReplaceSpaceByMult()
-' erstatter mellemrum med gangetegn, men kun i specielle tilfælde
-' bogstav mellemrum (
+' replaces spaces with multiplication signs, but only in special cases
+' letter space (
 
 Dim p As Long
 On Error GoTo slut
@@ -700,8 +696,8 @@ Loop While p > 0
 slut:
 End Sub
 Sub RemoveMultSign()
-' fjerner gangetegn
-' tal*bogstav samt )*( og 2*( eller mellemrum*alt
+' removes multiplication sign
+' number*letter and )*( and 2*( or space*all
 
 Dim p As Long
 Dim C1 As String, C2 As String, c3 As String
@@ -720,11 +716,12 @@ Dim C1 As String, C2 As String, c3 As String
     
 End Sub
 Function IsLetterPos(Optional ByVal position As Long = -100, Optional startbrack As Boolean = True) As Boolean
-' returnerer om nuværende position er bogstav (stort, småt, græsk, æøå) underscore _ eller startparantes
+' returns whether the current position is a letter (uppercase, lowercase, Greek, ae oe aa) underscore _ or opening parenthesis
+
 Dim c As Integer
 Dim cs As String
 If position = -100 Then
-    position = Pos ' position er kun optional
+    position = Pos ' position is optional
 End If
 If position < 1 Then
     IsLetterPos = False
@@ -751,7 +748,7 @@ IsLetterPos = IsLetterC(c, startbrack)
 'End If
 End Function
 Function IsLatexLetterPos(Optional ByVal position As Long = -100) As Boolean
-' returnerer om nuværende position er bogstav (stort, småt, græsk, æøå)
+' returns whether the current position is a letter (uppercase, lowercase, Greek, ae oe aa)
 Dim c As Integer
 Dim cs As String
 If position = -100 Then
@@ -772,13 +769,13 @@ IsLatexLetterPos = IsLatexLetterC(c)
 
 End Function
 Function IsLetterC(c As Integer, Optional startbrack As Boolean = True) As Boolean
-' returnerer om tegn er bogstav (stort, småt, græsk, æøå) underscore _ eller startparantes
-' Kan bruges som IsLetter(AscW("a"))
+' returns whether character is letter (uppercase, lowercase, Greek, ae oe aa) underscore _ or opening parenthesis
+' Can be used as IsLetter(AscW("a"))
 
 If (c >= 65 And c <= 90) Or (c >= 97 And c <= 122) Or (c >= &H391 And c <= &H3C9) Or c = 40 Or c = 95 Or c = 230 Or c = 197 Or c = 198 Or c = 216 Or c = 229 Or c = 248 Or c = 8289 Then
-' nedenstående var forsøg på at fjerne pi fra denne. Det blev ikke nødv, men måske viser det sig senere at være nødv
+' The following was an attempt to remove pi from this one. It wasn't necessary, but maybe it will turn out to be necessary later.
 'If (c >= 65 And c <= 90) Or (c >= 97 And c <= 122) Or (c >= 913 And c <= 959) Or (c >= 961 And c <= 969) Or c = 40 Or c = 95 Or c = 230 Or c = 197 Or c = 198 Or c = 216 Or c = 229 Or c = 248 Or c = 8289 Then
-' 95 - underscore_  8289 funktionstegn
+' 95 - underscore_  8289 function symbol
     If c = 40 And Not startbrack Then
         IsLetterC = False
     Else
@@ -790,11 +787,11 @@ End If
 
 End Function
 Function IsLatexLetterC(c As Integer) As Boolean
-' returnerer om tegn er bogstav (stort, småt, græsk, æøå) græsk og æøå kan vel fjernes
-' pi fjernet v.1.24 da fx pi2 skal være pi*2
-' Kan bruges som IsLetter(AscW("a"))
+' returns whether character is letter (uppercase, lowercase, Greek, ae oe aa) Greek and ae oe aa can probably be removed
+' pi removed v.1.24 since e.g. pi2 should be pi*2
+' Can be used as IsLetter(AscW("a"))
 If (c >= 65 And c <= 90) Or (c >= 97 And c <= 122) Or (c >= 913 And c <= 959) Or (c >= 961 And c <= 969) Or c = 230 Or c = 197 Or c = 198 Or c = 216 Or c = 229 Or c = 248 Or c = 8289 Then
-' 95 - underscore_  8289 funktionstegn
+' 95 - underscore_  8289 function symbol
     IsLatexLetterC = True
 Else
     IsLatexLetterC = False
@@ -802,12 +799,12 @@ End If
 
 End Function
 Function IsLetter(s As String, Optional startbrack As Boolean = True) As Boolean
-' som IsLetterC, men med streng
+' like IsLetterC, but with string
 
 IsLetter = IsLetterC(AscW(s), startbrack)
 End Function
 Function IsLatexLetter(s As String) As Boolean
-' som IsLatexLetterC, men med streng
+' like IsLatexLetterC, but with string
 
 IsLatexLetter = IsLatexLetterC(AscW(s))
 End Function
@@ -817,7 +814,7 @@ Function IsSquareRoot(Optional ByVal position As Long = -100) As Boolean
 Dim c As Integer
 Dim cs As String
 If position = -100 Then
-    position = Pos ' position er kun optional
+    position = Pos ' position is optional
 End If
 If position < 1 Then
     IsSquareRoot = False
@@ -830,7 +827,7 @@ Else
     c = AscW(cs)
 End If
 
-If c = 8730 Or c = 8731 Or c = 8732 Or c = 94 Then '  8730 - kvadratrodstegn ,8731 kubikrodstegn 8732 4. rod, 94 ^
+If c = 8730 Or c = 8731 Or c = 8732 Or c = 94 Then '  8730 - squareroot symbol ,8731 cubicroot symbol 8732 4. root, 94 ^
     IsSquareRoot = True
 Else
     IsSquareRoot = False
@@ -838,7 +835,7 @@ End If
 
 End Function
 Function IsNumber(Optional ByVal spos As Long) As Boolean
-' returnerer om nuværende position er tal
+' returns whether current position is number
 
 If spos = 0 Then
     spos = Pos
@@ -846,14 +843,14 @@ End If
 
 Dim c As Integer
 c = AscW(ChrByIndex(spos))
-If (c >= 48 And c <= 57) Or c = 960 Then  '960?  44 er , og 46 er .
+If (c >= 48 And c <= 57) Or c = 960 Then  '960?  44 is , and 46 is .
     IsNumber = True
 Else
     IsNumber = False
 End If
 End Function
 Function IsNumberOrSign(Optional ByVal spos As Long) As Boolean
-' returnerer om nuværende position er tal eller fortegn
+' returns whether the current position is a number or a sign
 
 If spos = 0 Then
     spos = Pos
@@ -861,7 +858,7 @@ End If
 
 Dim c As Integer
 c = AscW(ChrByIndex(spos))
-If (c >= 48 And c <= 57) Or c = 960 Or c = 45 Then '960?  44 er , og 46 er . 45=-
+If (c >= 48 And c <= 57) Or c = 960 Or c = 45 Then '960?  44 is , and 46 is . 45=-
     IsNumberOrSign = True
 Else
     IsNumberOrSign = False
@@ -877,9 +874,9 @@ End If
 
 End Function
 Function IsOperator(Text As String, Optional level As Integer = 0) As Boolean
-' bruges kun til | | bestemmelse, og hieraki er ikke helt som findhierakibreak
-'level er hieraki-level
-'Hierarki level:
+' is only used for | | determination, and hieraki is not quite like findhierakibreak
+'level is hieraki-level
+'Hierarchy level:
 '=<>| 0
 ':;,@?     1
 '+-  2
@@ -909,7 +906,7 @@ End If
 
 End Function
 Function IsAllText() As Boolean
-' checker fra pos til slut og text kun består af bogstaver _ og ( og 0-9
+' checks from pos to end and text only consists of letters _ and ( and 0-9
 IsAllText = True
 Do
     If Not (IsLetterPos(True) Or IsNumber) Then
@@ -941,7 +938,7 @@ Private Sub Class_Initialize()
     EndBracket = "]"
 End Sub
 Function GetTextInterval(ByVal p1 As Long, ByVal p2 As Long) As String
-' giver den af teksten der starter med p1 og slutter ved p2
+' returns the part of the text that starts with p1 and ends at p2
     If p2 > Len(Text) Then p2 = Len(Text)
     If p1 < 1 Then p1 = 1
     
@@ -953,7 +950,7 @@ Function GetTextInterval(ByVal p1 As Long, ByVal p2 As Long) As String
 End Function
 
 Sub ReplaceVar(ByVal Var As String, ByVal replvar As String, Optional StartPos As Long = 1, Optional Count As Long = -1)
-' finder var i text og erstatter med replvar
+' finds var in text and replaces with replvar
 
     Dim pos2 As Long
     
@@ -981,8 +978,8 @@ Sub ReplaceVar(ByVal Var As String, ByVal replvar As String, Optional StartPos A
     Loop
 End Sub
 Sub ReplaceTrigPow(ByVal Var As String, ByVal replvar As String, Optional StartPos As Long = 1, Optional Count As Long = -1)
-' finder var i text og erstatter med replvar
-' var skal være en trig funktion. tager højde for sin^2 & ChrW(8289)
+' finds var in text and replaces with replvar
+' var must be a trig function. takes into account sin^2 & ChrW(8289)
 
     Dim pos2 As Long
     
@@ -1010,9 +1007,9 @@ Sub ReplaceTrigPow(ByVal Var As String, ByVal replvar As String, Optional StartP
         Count = Count - 1
     Loop
 End Sub
-Function GetNextListItem(Optional ByVal spos As Long = 0, Optional Sep As String = "") As String ' 1.26 spos default ændret til 0
-' returnerer næste del af strengen indtil første separator som ikke er i parantes ([{
-' ikke færdig
+Function GetNextListItem(Optional ByVal spos As Long = 0, Optional Sep As String = "") As String
+' returns the next part of the string up to the first separator that is not in parentheses ([{
+' not finished
 Dim c As String
 Dim cs As String 'startbracket
 Dim CE As String 'endbracket
@@ -1050,7 +1047,7 @@ Do
         ElseIf c = "[" Then
             CE = "]"
         ElseIf c = "{" Then
-          If ChrByIndex(Pos) = VBA.ChrW(9608) Then  ' tuborgparentes uden ende til gaffelforskrifter
+          If ChrByIndex(Pos) = VBA.ChrW(9608) Then  ' curyl brackets with end bracket for piecewise defined functions
             CE = VBA.ChrW(9508)
           Else
             CE = "}"
@@ -1067,7 +1064,7 @@ Do
             bracketlevel = bracketlevel - 1
         End If
         Pos = Pos + 1
-    Loop Until bracketlevel = 0 Or Pos > Len(Text) ' ændret fra >= til > da der var eksempel på fejl med streng der slutter på )
+    Loop Until bracketlevel = 0 Or Pos > Len(Text) ' changed from >= to > as there was an example of an error with a string ending in )
 Loop Until Pos > Len(Text)
 
 slut:
@@ -1092,7 +1089,7 @@ Sub SplitNonBracket(ByRef Arr As Variant, Optional Sep As String = "")
 End Sub
 
 Sub RemoveFaultySeparator()
-' fjerner 23. -> 23  og .34 -> 0.34  og x*.34 -> x*0.34  og 34.*x -> 34*x
+' removes 23. -> 23  og .34 -> 0.34  og x*.34 -> x*0.34  og 34.*x -> 34*x
 Dim spos As Long
     If Pos < 1 Then Pos = 1
     spos = InStr(Pos, Text, ".")
@@ -1110,7 +1107,7 @@ Dim spos As Long
     Loop
 End Sub
 Sub InsertTextAt(it As String, Optional ByVal ipos As Long = -1)
-' indsætter it på position ipos
+' inserts it at position ipos
     If ipos < 0 Then ipos = Pos
 
     If ipos < 2 Then
@@ -1122,7 +1119,7 @@ Sub InsertTextAt(it As String, Optional ByVal ipos As Long = -1)
     End If
 End Sub
 Sub RemoveChar(Optional ind As Long = -1)
-' fjerner char ved posistion ind eller pos hvis ingen angivet
+' removes char at position in or pos if none specified
 
     If ind < 0 Then ind = Pos
 
@@ -1136,15 +1133,15 @@ Sub RemoveChar(Optional ind As Long = -1)
 End Sub
 
 Function ValidateBrackets() As Boolean
-' angiver om paranteser er angivet korrekt
-' dog kun simpel metode der ikke fanger alt
+' indicates whether parentheses are specified correctly
+' however only simple method that does not catch everything
 
 ValidateBrackets = CountText("(") = CountText(")")
 
 End Function
 
 Function CountText(s As String) As Integer
-' tæller hvor mange gange s optræder
+' counts how many times s appears
 Dim p As Long
 Dim i As Long
 p = 1
@@ -1157,7 +1154,7 @@ i = i - 1
 CountText = i
 End Function
 Sub ReplaceStringAt(s As String, Optional ByVal p As Long = -1)
-' overskriver text med s startende ved pos p
+' overwrites text with s starting at position p
 
 If p < 0 Then p = Pos
 
@@ -1174,7 +1171,7 @@ End If
 End Sub
 
 Sub ConvertDecSeparator()
-' konverterer , til . hvor , omgivet af tal
+' converts , to . where , surrounded by numbers
     Dim p As Long
         p = 0
         Do
@@ -1188,8 +1185,8 @@ Sub ConvertDecSeparator()
 
 End Sub
 Sub RemoveSpaceAfterSubSuperscript(tegn As String)
-' fjerner mellemrum efter f.eks. f_a (x)
-' man så ellers kan erstatte mellemrum med *
+' removes spaces after e.g. f_a (x)
+' so you can otherwise replace spaces with *
 On Error GoTo slut
 
 Do
@@ -1207,8 +1204,8 @@ Loop While Pos > 0
 slut:
 End Sub
 Sub AddSpaceAfterSubSuperscript(tegn As String)
-' tilføjer mellemrum efter f.eks. f_a (x)
-' man så ellers kan erstatte mellemrum med *
+' adds spaces after e.g. f_a (x)
+' so you can otherwise replace spaces with *
 Dim p As Long
 On Error GoTo slut
 p = Pos
@@ -1240,8 +1237,8 @@ slut:
 End Sub
 
 Sub InsertFunctionBrackets()
-' indsætter parenteser efter f.eks. log 2 -> log(2)
-'  specielt funktionssymbol 8289 fjernes ikke endnu da det skal bruges af andre funktioner
+' inserts parentheses after e.g. log 2 -> log(2)
+' special function symbol 8289 is not removed yet as it will be used by other functions
 Dim p As Long
 Dim c As String
 Dim sb As String
@@ -1254,8 +1251,8 @@ Do
         p = p + 1
         c = ChrByIndex(p)
         If c = "(" Then
-        ElseIf c = VBA.ChrW(12310) Then ' hvis usynlig parentes
-            If ChrByIndex(p + 1) <> "(" Then ' usynlige parenteser kan være uønskede. Det antages hvis parentes lige efter
+        ElseIf c = VBA.ChrW(12310) Then ' if invisible bracket
+            If ChrByIndex(p + 1) <> "(" Then ' invisible parentheses may be unwanted. It is assumed if the parentheses immediately after
                 Pos = p
                 sb = StartBracket
                 eb = EndBracket
@@ -1279,7 +1276,7 @@ Loop While p > 0
 End Sub
 
 Function ContainsVar(Var As String) As Boolean
-' afgør om variabel var er i text
+' determines if variable var is in text
 Dim ivar As String
 
 ContainsVar = False
@@ -1295,7 +1292,7 @@ Loop While ivar <> "" And Pos < Len(Text)
 End Function
 
 Sub ConvertTrigPow(Trig As String)
-' omdanner f.eks. sin^2(x) -> sin(x)^2
+' converts e.g. sin^2(x) -> sin(x)^2
 Dim ea As ExpressionAnalyser
 Dim pow As String
 Dim pos2 As Long
@@ -1322,7 +1319,7 @@ Loop While Pos > 0
 End Sub
 
 Function FindNextGreaterOrLower(Optional StartPos As Long = 0)
-' finder næste < eller >
+' finds next < or >
 Dim p1 As Long, p2 As Long
 If StartPos = 0 Then
     StartPos = Pos
@@ -1381,17 +1378,17 @@ b = WhatsNextBracket()
 End Sub
 
 Function IsUnit(ByVal E As String) As Boolean
-' checker om variabel er enhed. Kun rene enheder
-' bruges til Latex så enheder kan skrives i ikke-kursiv
-' ikke færdig
+' checks if variable is unit. Only pure units
+' used for Latex so units can be written in non-italic
+' not finished
 Dim p As String
 
-If E = "kWh" Or E = "min" Then ' godkend dem der kan forveksles med præfiks
+If E = "kWh" Or E = "min" Then ' approve those that can be confused with prefix
     IsUnit = True
     GoTo slut
 End If
 
-If Len(E) > 1 Then ' fjern evt. præfiks
+If Len(E) > 1 Then 'remove any prefix
 p = Left(E, 1)
 If p = "k" Or p = "M" Or p = "G" Or p = "T" Or p = "P" Or p = "c" Or p = "m" Or p = VBA.ChrW(956) Or p = "n" Or p = "p" Or p = "a" Or p = "" Then
     E = right(E, Len(E) - 1)
@@ -1458,8 +1455,8 @@ Sub RestoreBrackets()
     EndBracket = SaveEndBracket
 End Sub
 Function IsSuperScriptNoC(c As Integer) As Boolean
-' returnerer om tegn er hævet tal 0,1,2,3 eller hævet + - ( )
-' Kan bruges som IsLetter(AscW("a"))
+' returns whether character is superscript number 0,1,2,3 or superscript + - ( )
+' Can be used as IsLetter(AscW("a"))
 If c = 8314 Or c = 8315 Or c = 8317 Or c = 8318 Or c = 8304 Or c = 185 Or c = 178 Or c = 179 Or (c >= 8308 And c <= 8318) Then
     IsSuperScriptNoC = True
 Else
@@ -1467,28 +1464,27 @@ Else
 End If
 End Function
 Function IsSuperScriptNo(s As String) As Boolean
-' som IsLetterC, men med streng
-
-IsSuperScriptNo = IsSuperScriptNoC(AscW(s))
+' like IsLetterC, but with string
+    IsSuperScriptNo = IsSuperScriptNoC(AscW(s))
 End Function
 Function IsSuperScriptNoPos(Optional ByVal position As Long = -100) As Boolean
-' returnerer om nuværende position er bogstav (stort, småt, græsk, æøå) underscore _ eller startparantes
-Dim c As Integer
-Dim cs As String
-If position = -100 Then
-    position = Pos ' position er kun optional
-End If
-If position < 1 Then
-    IsSuperScriptNoPos = False
-    Exit Function
-End If
-cs = ChrByIndex(position)
-If cs = "" Then
-    c = 0
-Else
-    c = AscW(cs)
-End If
+' returns whether the current position is a letter (uppercase, lowercase, Greek, ae oe aa) underscore _ or opening parenthesis
+    Dim c As Integer
+    Dim cs As String
+    If position = -100 Then
+        position = Pos ' position is optional
+    End If
+    If position < 1 Then
+        IsSuperScriptNoPos = False
+        Exit Function
+    End If
+    cs = ChrByIndex(position)
+    If cs = "" Then
+        c = 0
+    Else
+        c = AscW(cs)
+    End If
 
-IsSuperScriptNoPos = IsSuperScriptNoC(c)
+    IsSuperScriptNoPos = IsSuperScriptNoC(c)
 
 End Function

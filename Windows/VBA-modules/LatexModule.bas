@@ -41,7 +41,7 @@ Public Sub SaveFile(doctype As Integer)
    
    Dim UfWait As New UserFormWaitForMaxima
    Set latexfil.UfWait = UfWait
-   UfWait.Label_tip.Caption = "konverterer"
+   UfWait.Label_tip.Caption = "Coverting"
    UfWait.Show vbModeless
    UserFormLatex.EventsOn = True
    latexfil.Reset
@@ -65,29 +65,28 @@ Public Sub SaveFile(doctype As Integer)
    '    If HiddenDoc Is Nothing Then Set HiddenDoc = Documents.Add(, , , False)
    '    HiddenDoc.BuiltInDocumentProperties("Title") = "WordMatLatexHiddenDoc"
    DoEvents
-   '    Wait (1) ' ellers fejler paste
    HiddenDoc.Activate
    HiddenDoc.Range.Select
    '    Selection.EndKey wdStory 'Move to end of document
    DoEvents
-   Selection.PasteAndFormat wdPasteDefault  ' kan fejle hvis d2 ikke er klar
+   Selection.PasteAndFormat wdPasteDefault  ' can cause error if d2 is not ready
    'Selection.Paste
 
-   UfWait.Label_tip.Caption = "Konverterer ligninger"
+   UfWait.Label_tip.Caption = "Converting equations"
    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
    ConvertAllEquations False
     
-   UfWait.Label_tip.Caption = "Konverterer formattering"
+   UfWait.Label_tip.Caption = "Converting formatting"
    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
    ConvertFormattingToLatex HiddenDoc.Range
     
    '    ConvertRangeToLatex HiddenDoc.Range
     
-   UfWait.Label_tip.Caption = "Konverterer billeder"
+   UfWait.Label_tip.Caption = "Converting images"
    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
    ConvertImagesToLatex HiddenDoc
     
-   Dim bm As Bookmark ' virker ikke
+   Dim bm As Bookmark ' does not work
    For Each bm In HiddenDoc.Bookmarks
       bm.Range.InsertAfter "\ref{" & bm.Name & "}"
       bm.Delete
@@ -105,7 +104,7 @@ Public Sub SaveFile(doctype As Integer)
       toc.Delete ' det hele bliver ikke slettet
    Next
    
-   UfWait.Label_tip.Caption = "Konverterer bibliografi"
+   UfWait.Label_tip.Caption = "Converting bibliography"
    ' Fields
    Dim F As Field, CiteName As String, CiteP As String, p2 As Integer
    For Each F In HiddenDoc.Fields
@@ -126,7 +125,7 @@ Public Sub SaveFile(doctype As Integer)
             Selection.TypeText "\cite[p.~" & CiteP & "]{" & CiteName & "}"
          End If
       ElseIf F.Type = wdFieldAuthor Then
-         latexfil.Author = F.Code ' skal justeres navnet er i code
+         latexfil.Author = F.Code ' needs to be adjusted the name is in code
       ElseIf F.Type = wdFieldBibliography Then
          F.Select
          Selection.MoveStart wdLine, -2
@@ -134,7 +133,7 @@ Public Sub SaveFile(doctype As Integer)
       End If
    Next
    
-   UfWait.Label_tip.Caption = "Konverterer tabeller"
+   UfWait.Label_tip.Caption = "Converting tables"
    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
    Dim t As Table, r As Row, c As Cell
    For Each t In HiddenDoc.Tables
@@ -173,7 +172,7 @@ Public Sub SaveFile(doctype As Integer)
    UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
    HiddenDoc.Activate
     
-   '    For Each l In HiddenDoc.Lists ' giver problemer da en liste kan deles i to, med normal paragraf imellem. De to dele er dog stadig een liste, så paragrafen imellem bliver slettet. Erstattet af anden metode
+   '    For Each l In HiddenDoc.Lists ' causes problems as a list can be split into two, with a normal paragraph in between. However, the two parts are still one list, so the paragraph in between is deleted. Replaced by another method
    '      ConvertList l
    '    Next
         
@@ -417,7 +416,7 @@ slut:
 End Sub
 
 Sub SortImagCol(coll As Collection, first As Long, last As Long)
-' Der er ikke noget indbygget funktion til at sortere en collection.
+' There is no built-in function to sort a collection.
 ' QuickSort(coll,1,coll.Count)
 
   Dim vCentreVal As Variant, vTemp As Variant
@@ -532,21 +531,8 @@ Function ContainsFormatting(r As Range) As Boolean
 
 End Function
 
-'Function ReadTextFile(f As String) As String
-'    Dim oFSO As Object 'New FileSystemObject
-'    Dim oFS
-'    Set oFSO = CreateObject("Scripting.FileSystemObject")
-'    Set oFS = oFSO.OpenTextFile(f)
-'
-'    Do Until oFS.AtEndOfStream
-'        ReadTextFile = ReadTextFile & vbCrLf & oFS.ReadLine
-'    Loop
-'End Function
-
-
-
 Sub OpretHiddendoc()
-' men kun hvis ikke eksisterer allerede
+' but only if does not already exist
 #If Mac Then
 '    Call tempDoc
 #Else
@@ -589,15 +575,15 @@ Public Sub ConvertAllEquations(Optional KeepOriginal As Boolean = False)
             LAlign = 3
          End If
       ElseIf MainDoc.OMaths(mi).AlignPoint > 0 And LAlign = 0 Then
-         LAlign = 1 ' start på align
+         LAlign = 1 ' start on align
       ElseIf MainDoc.OMaths(mi).AlignPoint > 0 And MainDoc.OMaths(mi + 1).AlignPoint > 0 Then
-         LAlign = 2 ' fortsat
+         LAlign = 2 ' continue
       ElseIf MainDoc.OMaths(mi).AlignPoint > 0 And MainDoc.OMaths(mi + 1).AlignPoint < 0 Then
-         LAlign = 3 ' afslut
+         LAlign = 3 ' stop
       Else
          LAlign = 0
       End If
-'      MainDoc.OMaths(mi).Range.Select ' ødelægger justering
+'      MainDoc.OMaths(mi).Range.Select ' destroys alignment
       HiddenDoc.OMaths(i).Range.Select
       omax.ReadSelection
       HiddenDoc.OMaths(i).Range.Select
@@ -614,7 +600,7 @@ Sub TestEQ()
      ConvertEquationToLatex
 End Sub
 Sub ConvertEquationToLatex(Optional KeepOriginal As Boolean = False)
-    ' til miktex
+    ' for miktex
     Dim t As Table, s As String, p As Integer, EqStart As String, EqEnd As String, eq As OMath
     If Not UserFormLatex.EventsOn Then Exit Sub
     If Selection.OMaths.Count = 0 Then Exit Sub
@@ -694,17 +680,12 @@ Sub ConvertEquationToLatex(Optional KeepOriginal As Boolean = False)
         Selection.TypeParagraph
     End If
     Selection.InsertAfter s
-
-
 End Sub
 
 Sub KonverterTilLaTex()
-
     PrepareMaxima
-'    omax.ReadSelection
     Dim uflatex As New UserFormLatex
     uflatex.Show
-    
 End Sub
 Sub ToggleLatex()
 Dim mtext As String
@@ -765,7 +746,7 @@ Function ReadTextfileToString(FilNavn As String) As String
 
    GoTo slut
 Fejl:
-   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
+   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 
 End Function
@@ -800,7 +781,7 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
 
    GoTo slut
 Fejl:
-   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTexfilen"
+   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 
 End Sub

@@ -13,25 +13,20 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
-Dim start
+' Form used to show quick changes of settings. Units and num/exact
+
+Private start As Single
 Private Sub UserForm_Activate()
     start = Timer    ' Set start time.
     Do While Timer < start + 2
         DoEvents    ' Yield to other processes.
     Loop
     Me.hide
-
 End Sub
 
 Private Sub UserForm_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     Me.hide
-End Sub
-
-Private Sub UserForm_Initialize()
-'    Call RemoveCaption(Me)
-
 End Sub
 
 Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)

@@ -42,7 +42,7 @@ Sub ExecuteKeyboardShortcut(ShortcutVal As KeybShortcut)
     Case KeybShortcut.InsertRefToEqution
         InsertEquationRef
     Case Else
-        UserFormGenveje.Show
+        UserFormShortcuts.Show
     End Select
 End Sub
 

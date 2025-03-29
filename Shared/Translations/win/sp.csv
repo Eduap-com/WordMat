@@ -17,7 +17,7 @@
 16#£Lado izquierdo
 17#£Lado derecho
 18#£Numeración
-19#£Inserte referencia con 2 x Alt+m
+19#£Pida el nombre de referencia al insertar
 20#£WordMath makes it possible to do math calculations in Word. The WordMath core is open source and free of charge\r\nWordMat also installs the following programs: Maxima, GeoGebra, Math fonts.\r\nOptional components: GeoGebra 5, Graph, WordMath+. See more under License\r\nWordMath was made by Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2025.
 21#£Hay una nueva versión de WordMat lista para descargar
 22#£¿Desea descargar ahora la nueva versión?
@@ -290,8 +290,8 @@
 289#£Mass of the sun
 290#£Mass of the moon
 291#£Moon mean radius
-292#£GeoGebra 5 is not installed.\r\n Do you want to install GeoGebra 5 or run 'GeoGebra Calculator Suite' in a browser?
-293#£The button will send you to the download page. WordMat supports 'GeoGebra classic 5' and 'GeoGebra Classic 6'
+292#£GeoGebra 5 is not installed.
+293#£El botón te llevará a la página de inicio donde puedes instalar GeoGebra. WordMat en Windows es compatible con 'GeoGebra classic 5', 'GeoGebra Calculator Suite', 'GeoGebra Classic 6' y la mayoría de las otras ediciones de aplicaciones de GeoGebra.
 294#£GeoGebra Calculator Suite is already installed. It runs in a browser, and does not require internet. Starts quickly.
 295#£Install GeoGebra
 296#£Run GeoGebra Calculator Suite
@@ -335,7 +335,7 @@
 334#£You can save your changes to the formulae documents
 335#£Excel sheets can be opened separately or inserted embedded
 336#£Marking of handins? Try WordMark  www.eduap.com
-337#£You have done a total of " & AntalB & " calculations with WordMat
+337#£No of calculations with WordMath: 
 338#£Under definitions you can define physical constants and table values.
 339#£Word runs faster in draft view - when equations are involved
 340#£Insert you own descriptions of Excel diagrams using insert textbox
@@ -364,7 +364,7 @@
 363#£Enter value for
 364#£You can adjust it later
 365#£Define constant
-366#£Graph is not installed. It is a small free program which is easily installed. Do you want to install it now?
+366#£Graph is not installed. It is a small free program which is easily installed. You can get it from www.padowan.dk
 367#£You can adjust it later under user defined functions in Graph
 368#£Plotting of graphs using GeoGeoGebra and Graph requires x to be the independent variable. \r\nThe following expressions are without x. You can now state a new variable to use as x.
 369#£Independent variable
@@ -473,7 +473,7 @@
 472#£Gráfico de cajas y conectores
 473#£Probabilidades y Estadística
 474#£Regresión
-475#£Insertar tabla
+475#£No se puede pegar en una tabla
 476#£Lineal
 477#£Exponencial
 478#£Potencias
@@ -579,7 +579,7 @@
 578#£Excel sheet to plot multiple box and whisker plots in one diagram.
 579#£Regression
 580#£First insert a table with the points. Then place the cursor in the table and choose regression type. The table can be vertical or horizontal. If there is only two points it is assumed to be vertical.
-581#£Insert table
+581#£Se ha producido un error al buscar una actualización. Ahora será enviado al sitio web, donde podrá ver por sí mismo si hay una nueva actualización. La versión actual es:
 582#£Inserts table with two columns for entering points for regression.
 583#£Distributions
 584#£Excel sheet with graphs of distribution. The diagrams are dynamic and can plot distributions for all parameters.
@@ -845,3 +845,59 @@
 844#£Ha ocurrido un error
 845#£Variable
 846#£Advertencia
+847#£La ecuación diferencial debe tener la forma y'=...  para que se resuelva numéricamente
+848#£El botón descarga GeoGebra 5 a 'descargas' en tu Mac. A continuación, se le guiará a través de la configuración.
+849#£GeoGebra 5 no se ha instalado completamente. Final
+850#£GeoGebra aún no se ha instalado. Espere a que finalice la descarga.
+851#£Continuar
+852#£Eliminar la versión anterior
+853#£Antes de que se pueda descargar la nueva versión, se debe eliminar la versión anterior en Descargas.\r\n 1. Se abrirá una ventana llamada 'Permitir el acceso al archivo'.\r\n2. Haga clic en 'Seleccionar...'  \r\n3. Haga clic en 'Asignar acceso' "
+854#£Descarga detenida
+855#£Debe permitir el acceso a GeoGebra.app antes de que la instalación pueda continuar
+856#£GeoGebra 5 está siendo descargado
+857#£1. Primero, espere a que GeoGebra 5 se descargue.\r\n2. Cuando se complete la descarga, debería abrirse una ventana llamada 'Permitir acceso al archivo'.\r\n3. Haga clic en 'Seleccionar...'  \r\n4. Haga clic en 'Asignar acceso'
+858#£Detenido
+859#£El proceso se ha detenido.\r\n\r\nHaga clic en Cerrar e inténtelo de nuevo por segunda vez.
+860#£No se te dio permiso para GeoGebra. Haga clic en "Reintentar" para volver a intentarlo.
+861#£La descarga tarda mucho tiempo. Comprueba en Safari si parece que hay una descarga en curso. Puede hacer clic en detener si no hay progreso.
+862#£Error al descargar GeoGebra
+863#£El archivo no se pudo encontrar en las descargas.\r\nPuede hacer clic en 'Reintentar' en la parte inferior si desea que WordMat vuelva a mirar.
+864#£Dar permiso a GeoGebra
+865#£Ahora debería abrirse una ventana llamada 'Permitir acceso al archivo'.\r\n\r\n1. Haga clic en 'Seleccionar...' \r\n2. Haga clic en 'Asignar acceso'
+866#£Traslado de GeoGebra a aplicaciones
+867#£Es posible que deba dar permiso para 'Eventos del sistema', simplemente haga clic en Aceptar.
+868#£Listo
+869#£GeoGebra 5 ya está instalado.\r\nHaga clic en 'Continuar' para abrir GeoGebra.
+870#£Hay páginas que son 0
+871#£Primero debe seleccionar una tabla
+872#£No se puede insertar una ecuación numerada en la tabla
+873#£Se ha utilizado GeoGebra para resolver el sistema de ecuaciones. No se sabe con certeza si puede haber soluciones. Se recomienda probar otro método. Por ejemplo, Maxima, o numérico/gráfico
+874#£Esta función no es compatible con GeoGebra. Pruebe el solucionador de ecuaciones
+875#£La ecuación se resolvió gráficamente con GeoGebra:
+876#£El número de paréntesis no cabe en la expresión
+877#£Errores de configuración
+878#£Tiene una configuración incorrecta en Word.\r\nEn el menú Ecuaciones, cambie de Latex a Unicode para que WordMat funcione
+879#£Error de sintaxis: matemáticas incorrectas.
+880#£Ha introducido algo que no es la notación matemática correcta.\r\nEl error está relacionado con una variable:
+881#£Por ejemplo, esto puede deberse a que ha bajado la fuente de un número. \r\nK_0 debe reemplazarse por un número y no con, por ejemplo, 5000_0. Solo tiene que decir 5000.
+882#£No puede haber dos signos iguales en una ecuación
+883#£El sistema de ecuaciones se resolvió con GeoGebra:
+884#£El cálculo se interrumpió ya que llevó mucho tiempo. A veces puede ser útil intentar el cálculo con la opción "Numérico" en lugar de Exacto o Automático
+885#£No se puede conectar a Maxima. ¿Desea utilizar el método 'WSH' en su lugar?\r\n(Esta opción se puede encontrar en avanzado en Configuración)
+886#£WordMat no puede comunicarse con GeoGebra. Esto probablemente se deba a que no ha establecido la configuración de seguridad correcta en Safari. Haga clic en Aceptar para obtener las instrucciones
+887#£Resolver números
+888#£WordMat no pudo localizar la instalación de Maxima. Intente reinstalar
+889#£Error al conectarse a Maxima con WSH
+890#£Se detiene automáticamente en
+891#£No lo consiguió. Paradas.
+892#£El comando fue interrumpido después de
+893#£¿Te gustaría volver a intentarlo y cuánto tiempo quieres esperar? (segundos) La computadora se bloqueará durante el tiempo de espera.
+894#£Error en la definición
+895#£Hay un error de sintaxis asociado a una integrale. ¿Te has acordado de dx al final?
+896#£Duración de la salida:
+897#£Haga clic en SÍ para insertar todos los caracteres en Word. (Advertencia: Puede ralentizar Word o incluso hacer que Word se bloquee). \r\n Haga clic en NO para insertar solo los primeros 1000 caracteres.
+898#£Ha establecido muy pocos parámetros para la función:
+899#£Esto puede deberse a que ha utilizado comas en lugar de punto y coma para separar los parámetros. (En su lugar, puede agregar un espacio en un lado de la coma).
+900#£Condiciones de la solución:
+901#£Primero debe seleccionar una lista, por ejemplo, [1; 2; 3]
+902#£¿Quizás has intercambiado n y r en K(n, r)?

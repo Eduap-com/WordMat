@@ -1,14 +1,14 @@
 VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormMaximaSettings 
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSettings 
    Caption         =   "Indstillinger"
    ClientHeight    =   5955
    ClientLeft      =   -15
    ClientTop       =   45
    ClientWidth     =   10410
-   OleObjectBlob   =   "UserFormMaximaSettings.frx":0000
+   OleObjectBlob   =   "UserFormSettings.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
-Attribute VB_Name = "UserFormMaximaSettings"
+Attribute VB_Name = "UserFormSettings"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -214,10 +214,10 @@ End Sub
 Private Sub CommandButton_shortcuts_Click()
     Dim WT As Template, TemplateFundet As Boolean, KSok As Boolean, KB As KeyBinding
     
-    ' Slet genveje i normal.dotm ' Det kan give fejl, specielt på mac
+    ' Delete shortcuts in normal.dotm ' This can cause errors, especially on mac
     DeleteKeyboardShortcutsInNormalDotm
     
-    ' Find den vedhæftede globale skabelon
+    ' Find the attached global template
     For Each WT In Application.Templates
         If LCase(Left(WT, 7)) = "wordmat" And LCase(right(WT, 5)) = ".dotm" Then
             CustomizationContext = WT
@@ -226,7 +226,7 @@ Private Sub CommandButton_shortcuts_Click()
         End If
     Next
         
-    ' Check om genvejene er sat i den vedhæftede skabelon. Hvis ikke så sættes de i normal.dotm
+    ' Check if the shortcuts are set in the attached template. If not, put them in normal.dotm
 #If Mac Then
     On Error Resume Next
     If TemplateFundet Then
@@ -248,7 +248,7 @@ Private Sub CommandButton_shortcuts_Click()
     If TemplateFundet Then
         If KeyBindings.Count > 10 Then
             For Each KB In KeyBindings
-                If KB.Command = "WordMat.Maxima.beregn" Then
+                If KB.Command = "WordMat.ModuleKeyboardShortcuts.PressAltB" Then
                     KSok = True
                     Exit For
                 End If
@@ -260,17 +260,14 @@ Private Sub CommandButton_shortcuts_Click()
     If Not KSok Then
         MsgBox Sprog.A(741), vbOKOnly, Sprog.Error
     Else
-        If Sprog.SprogNr = 1 Then
 #If Mac Then
-            MsgBox2 Sprog.A(738)
+        MsgBox2 Sprog.A(738)
 #Else
-            MsgBox2 Sprog.A(739)
+        MsgBox2 Sprog.A(739)
+        PrepareMaxima False
+        MaxProc.OpenFolder "C:\Users\" & Environ$("username") & "\AppData\Roaming\Microsoft\Templates"
 #End If
-        Else
-            MsgBox "Keyboard shortcuts restored", vbOKOnly, "Done"
-        End If
     End If
-
 End Sub
 
 Private Sub CommandButton_sletenheder_Click()
@@ -485,8 +482,6 @@ Private Sub UserForm_Activate()
     LangChange = False
     
     SetCasButtons
-    
-
 End Sub
 
 Sub SetCasButtons()
@@ -521,6 +516,21 @@ Sub FillComboBoxLanguage()
     ComboBox_language.AddItem "Dansk"
     ComboBox_language.AddItem "English"
     ComboBox_language.AddItem "Espaniol"
+    ComboBox_language.AddItem "Deutsch"
+    ComboBox_language.AddItem "Francais"
+    ComboBox_language.AddItem "Italiano"
+    ComboBox_language.AddItem "Svensk"
+    ComboBox_language.AddItem "Norsk"
+    ComboBox_language.AddItem "Suomeksi"
+    ComboBox_language.AddItem "Nederlands"
+    ComboBox_language.AddItem "Polski"
+    ComboBox_language.AddItem "Portugues"
+    ComboBox_language.AddItem "Foeroysk"
+    ComboBox_language.AddItem "eesti keel"
+    ComboBox_language.AddItem "latviski"
+    ComboBox_language.AddItem "lietuviu"
+    ComboBox_language.AddItem "ellinika"
+    ComboBox_language.AddItem "cestina"
 End Sub
 Sub FillComboBoxBackupNo()
     ComboBox_backupno.Clear
@@ -637,7 +647,7 @@ Sub SetCaptions()
 End Sub
 
 Sub ScaleForm(SF As Double)
-' SF er scalefactor. Ændrer størrelsen på en formen og justerer font og position af alle elementer på formen
+' SF is scalefactor. Changes the size of a shape and adjusts the font and position of all elements on the shape
 Dim c As control
     For Each c In Me.Controls
         c.Left = c.Left * SF

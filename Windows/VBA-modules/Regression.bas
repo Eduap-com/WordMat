@@ -2,7 +2,7 @@ Attribute VB_Name = "Regression"
 Option Explicit
 
 Sub linregression()
-' udføres fra menuen. Tabel skal være valgt
+' is executed from the menu. Table must be selected
     Dim Cregr As New CRegression
     Application.ScreenUpdating = False
 On Error GoTo Fejl
@@ -43,7 +43,6 @@ On Error GoTo Fejl
     End If
     Cregr.ComputeExpRegr
     Cregr.InsertEquation
-'    MsgBox cregr.Ligning
 GoTo slut
 Fejl:
     MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
@@ -178,6 +177,4 @@ Sub InsertTabel()
     Oundo.EndCustomRecord
 
 End Sub
-
-
 

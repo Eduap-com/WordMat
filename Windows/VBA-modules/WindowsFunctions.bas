@@ -6,7 +6,7 @@ Attribute VB_Name = "WindowsFunctions"
 Public Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
 
 Sub Sleep2(ByVal WaitTime As Long)
-'waittime is sekunder
+'waittime in seconds
 On Error Resume Next
     Dim i As Long
     WaitTime = WaitTime * 100

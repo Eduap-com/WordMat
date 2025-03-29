@@ -20,28 +20,28 @@ Public Function GetCountOfChar(ByVal ar_sText As String, ByVal a_sChar As String
     Next l_iIndex
 End Function
 Function TrimR(ByVal Text As String, c As String)
-' fjerner c fra højre side af text
-If Text = "" Then GoTo slut
-Do While right(Text, 1) = c
-    Text = Left(Text, Len(Text) - 1)
-Loop
-TrimR = Text
+' removes c from the right side of text
+    If Text = "" Then GoTo slut
+    Do While right(Text, 1) = c
+        Text = Left(Text, Len(Text) - 1)
+    Loop
+    TrimR = Text
 slut:
 End Function
 Function TrimL(ByVal Text As String, c As String)
-' fjerner c fra venstre side af text
-If Text = "" Then GoTo slut
-Do While Left(Text, 1) = c
-    Text = right(Text, Len(Text) - 1)
-Loop
-TrimL = Text
+' removes c from the left side of text
+    If Text = "" Then GoTo slut
+    Do While Left(Text, 1) = c
+        Text = right(Text, Len(Text) - 1)
+    Loop
+    TrimL = Text
 slut:
 End Function
 
 Function TrimB(ByVal Text As String, c As String)
-' fjerner c fra Begge sider af text
-TrimB = TrimL(Text, c)
-TrimB = TrimR(TrimB, c)
+' removes c from both sides of text
+    TrimB = TrimL(Text, c)
+    TrimB = TrimR(TrimB, c)
 slut:
 End Function
 Function TrimRenter(ByVal Text As String)

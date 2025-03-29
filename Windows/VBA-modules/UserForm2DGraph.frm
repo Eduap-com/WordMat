@@ -13,8 +13,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' only used for plotting with GnuPlot
+
 Private gemx As Single
 Private gemy As Single
 Private embed As Boolean
@@ -229,7 +230,7 @@ If Not PicOpen Then
 End If
     OpdaterDefinitioner
     CheckForAssume
-    ' indsæt xmin og xmax hvis der var definerede
+    ' insert xmin and xmax if defined
     xmin = TextBox_xmin1.Text
     If Len(TextBox_xmin2.Text) And ConvertStringToNumber(TextBox_xmin2.Text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin2.Text
     If Len(TextBox_xmin3.Text) And ConvertStringToNumber(TextBox_xmin3.Text) < ConvertStringToNumber(xmin) Then xmin = TextBox_xmin3.Text
@@ -532,117 +533,110 @@ Private Sub CommandButton_ok_Click()
 End Sub
 
 Sub ExcelPlot()
-'Dim xcl As New CExcel
-'Dim ws As Worksheet
-'Dim ws As excel.Worksheet
-'Dim ws As Worksheet
-'Dim wb As Workbook
-Dim ws As Object
-Dim WB As Object
+    'Dim xcl As New CExcel
+    'Dim ws As Worksheet
+    'Dim ws As excel.Worksheet
+    'Dim ws As Worksheet
+    'Dim wb As Workbook
+    Dim ws As Object
+    Dim WB As Object
 
-Dim Path As String
-Dim ils As InlineShape
-Dim xmin As Double, xmax As Double
-Dim plinjer As Variant
-Dim linje As Variant
-Dim i As Integer
+    Dim Path As String
+    Dim ils As InlineShape
+    Dim xmin As Double, xmax As Double
+    Dim plinjer As Variant
+    Dim linje As Variant
+    Dim i As Integer
 
-If cxl Is Nothing Then Set cxl = New CExcel
-Application.ScreenUpdating = False
-Me.hide
+    If cxl Is Nothing Then Set cxl = New CExcel
+    Application.ScreenUpdating = False
+    Me.hide
     Dim UFwait2 As New UserFormWaitForMaxima
     UFwait2.Show vbModeless
     DoEvents
     UFwait2.Label_progress = "***"
 
 
-If Not embed Then
-cxl.LoadFile ("Graphs.xltm")
-Set WB = cxl.xlwb
-Set ws = cxl.xlwb.Sheets("Tabel")
-    UFwait2.Label_progress = UFwait2.Label_progress & "***"
-
-'Dim excl As Object
-
-'Set excl = CreateObject("Excel.Application")
-'Set ws = excl.ActiveWorkbook.Sheets("Tabel")
+    If Not embed Then
+        cxl.LoadFile ("Graphs.xltm")
+        Set WB = cxl.xlwb
+        Set ws = cxl.xlwb.Sheets("Tabel")
+        UFwait2.Label_progress = UFwait2.Label_progress & "***"
 
 
-Else
+    Else
 
-Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
-PrepareMaxima
-omax.GoToEndOfSelectedMaths
-'Selection.Collapse wdCollapseEnd
-Selection.TypeParagraph
-    UFwait2.Label_progress = UFwait2.Label_progress & "**"
+        Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
+        PrepareMaxima
+        omax.GoToEndOfSelectedMaths
+        Selection.TypeParagraph
+        UFwait2.Label_progress = UFwait2.Label_progress & "**"
 
-Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, _
-DisplayAsIcon:=False, Range:=Selection.Range)
+        Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
 
-'Ils.Height = 300
-'Ils.Width = 500
-    UFwait2.Label_progress = UFwait2.Label_progress & "***********"
+        'Ils.Height = 300
+        'Ils.Width = 500
+        UFwait2.Label_progress = UFwait2.Label_progress & "***********"
 
 
-'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
-ils.OLEFormat.DoVerb (wdOLEVerbShow)
-Set WB = ils.OLEFormat.Object
-Set ws = WB.Sheets("Tabel")
-'ws.Activate
-End If
+        'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
+        ils.OLEFormat.DoVerb (wdOLEVerbShow)
+        Set WB = ils.OLEFormat.Object
+        Set ws = WB.Sheets("Tabel")
+        'ws.Activate
+    End If
 
-XLapp.Application.EnableEvents = False
-XLapp.Application.ScreenUpdating = False
+    XLapp.Application.EnableEvents = False
+    XLapp.Application.ScreenUpdating = False
 
     UFwait2.Label_progress = UFwait2.Label_progress & "*****"
-xmin = val(TextBox_xmin.Text)
-xmax = val(TextBox_xmax.Text)
-If xmin < xmax Then
-    ws.Range("n3").Value = Me.TextBox_xmin.Text
-    ws.Range("o3").Value = Me.TextBox_xmax.Text
-Else
-    ws.Range("n3").Value = -5
-    ws.Range("o3").Value = 5
-End If
+    xmin = val(TextBox_xmin.Text)
+    xmax = val(TextBox_xmax.Text)
+    If xmin < xmax Then
+        ws.Range("n3").Value = Me.TextBox_xmin.Text
+        ws.Range("o3").Value = Me.TextBox_xmax.Text
+    Else
+        ws.Range("n3").Value = -5
+        ws.Range("o3").Value = 5
+    End If
 
     
-ws.Range("b4").Value = Me.TextBox_ligning1.Text
-ws.Range("c4").Value = Me.TextBox_ligning2.Text
-ws.Range("d4").Value = Me.TextBox_ligning3.Text
-ws.Range("e4").Value = Me.TextBox_ligning4.Text
-ws.Range("f4").Value = Me.TextBox_ligning5.Text
-ws.Range("g4").Value = Me.TextBox_ligning6.Text
-'xmin og xmax kopieres over
-ws.Range("B2").Value = Me.TextBox_xmin1.Text
-ws.Range("B3").Value = Me.TextBox_xmax1.Text
-ws.Range("C2").Value = Me.TextBox_xmin2.Text
-ws.Range("C3").Value = Me.TextBox_xmax2.Text
-ws.Range("D2").Value = Me.TextBox_xmin3.Text
-ws.Range("D3").Value = Me.TextBox_xmax3.Text
-ws.Range("E2").Value = Me.TextBox_xmin4.Text
-ws.Range("E3").Value = Me.TextBox_xmax4.Text
-ws.Range("F2").Value = Me.TextBox_xmin5.Text
-ws.Range("F3").Value = Me.TextBox_xmax5.Text
-ws.Range("G2").Value = Me.TextBox_xmin6.Text
-ws.Range("G3").Value = Me.TextBox_xmax6.Text
-'variabelnavn kopieres over
-ws.Range("B1").Value = Me.TextBox_var1.Text
-ws.Range("C1").Value = Me.TextBox_var2.Text
-ws.Range("D1").Value = Me.TextBox_var3.Text
-ws.Range("E1").Value = Me.TextBox_var4.Text
-ws.Range("F1").Value = Me.TextBox_var5.Text
-ws.Range("G1").Value = Me.TextBox_var6.Text
-' indstillinger
-If Radians Then
-    ws.Range("A4").Value = "rad"
-Else
-    ws.Range("A4").Value = "grad"
-End If
+    ws.Range("b4").Value = Me.TextBox_ligning1.Text
+    ws.Range("c4").Value = Me.TextBox_ligning2.Text
+    ws.Range("d4").Value = Me.TextBox_ligning3.Text
+    ws.Range("e4").Value = Me.TextBox_ligning4.Text
+    ws.Range("f4").Value = Me.TextBox_ligning5.Text
+    ws.Range("g4").Value = Me.TextBox_ligning6.Text
+    'xmin og xmax copied over
+    ws.Range("B2").Value = Me.TextBox_xmin1.Text
+    ws.Range("B3").Value = Me.TextBox_xmax1.Text
+    ws.Range("C2").Value = Me.TextBox_xmin2.Text
+    ws.Range("C3").Value = Me.TextBox_xmax2.Text
+    ws.Range("D2").Value = Me.TextBox_xmin3.Text
+    ws.Range("D3").Value = Me.TextBox_xmax3.Text
+    ws.Range("E2").Value = Me.TextBox_xmin4.Text
+    ws.Range("E3").Value = Me.TextBox_xmax4.Text
+    ws.Range("F2").Value = Me.TextBox_xmin5.Text
+    ws.Range("F3").Value = Me.TextBox_xmax5.Text
+    ws.Range("G2").Value = Me.TextBox_xmin6.Text
+    ws.Range("G3").Value = Me.TextBox_xmax6.Text
+    'variable name copied over
+    ws.Range("B1").Value = Me.TextBox_var1.Text
+    ws.Range("C1").Value = Me.TextBox_var2.Text
+    ws.Range("D1").Value = Me.TextBox_var3.Text
+    ws.Range("E1").Value = Me.TextBox_var4.Text
+    ws.Range("F1").Value = Me.TextBox_var5.Text
+    ws.Range("G1").Value = Me.TextBox_var6.Text
+    ' iSettings
+    If Radians Then
+        ws.Range("A4").Value = "rad"
+    Else
+        ws.Range("A4").Value = "grad"
+    End If
 
-On Error GoTo slut
+    On Error GoTo slut
 
-    'datapunkter
+    'datapoints
     If TextBox_punkter.Text <> "" Then
         Dim punkttekst As String, Sep As String
         punkttekst = Me.TextBox_punkter.Text
@@ -663,35 +657,33 @@ On Error GoTo slut
 
 
 slut:
-On Error GoTo slut2
+    On Error GoTo slut2
     ws.Range("p3").Value = Me.TextBox_ymin.Text
     ws.Range("q3").Value = Me.TextBox_ymax.Text
-'wb.Charts(1).Activate
-If TextBox_xaksetitel.Text <> "" Then
-    WB.Charts(1).Axes(xlCategory, xlPrimary).AxisTitle.Text = Me.TextBox_xaksetitel.Text
-    ws.ChartObjects(1).Chart.Axes(xlCategory, xlPrimary).AxisTitle.Text = Me.TextBox_xaksetitel.Text
-End If
-If TextBox_yaksetitel.Text <> "" Then
-    WB.Charts(1).Axes(xlValue, xlPrimary).AxisTitle.Text = Me.TextBox_yaksetitel.Text
-    ws.ChartObjects(1).Chart.Axes(xlValue, xlPrimary).AxisTitle.Text = Me.TextBox_yaksetitel.Text
-End If
+    'wb.Charts(1).Activate
+    If TextBox_xaksetitel.Text <> "" Then
+        WB.Charts(1).Axes(xlCategory, xlPrimary).AxisTitle.Text = Me.TextBox_xaksetitel.Text
+        ws.ChartObjects(1).Chart.Axes(xlCategory, xlPrimary).AxisTitle.Text = Me.TextBox_xaksetitel.Text
+    End If
+    If TextBox_yaksetitel.Text <> "" Then
+        WB.Charts(1).Axes(xlValue, xlPrimary).AxisTitle.Text = Me.TextBox_yaksetitel.Text
+        ws.ChartObjects(1).Chart.Axes(xlValue, xlPrimary).AxisTitle.Text = Me.TextBox_yaksetitel.Text
+    End If
     UFwait2.Label_progress = UFwait2.Label_progress & "**"
 
-'excel.Run ("UpDateAll")
-XLapp.Run ("UpDateAll")
+    'excel.Run ("UpDateAll")
+    XLapp.Run ("UpDateAll")
     
     UFwait2.Label_progress = UFwait2.Label_progress & "***"
-WB.Charts(1).Activate
-'excel.Application.EnableEvents = True
-'excel.Application.ScreenUpdating = True
-XLapp.Application.EnableEvents = True
-XLapp.Application.ScreenUpdating = True
+    WB.Charts(1).Activate
+    XLapp.Application.EnableEvents = True
+    XLapp.Application.ScreenUpdating = True
 slut2:
     Unload UFwait2
 
 End Sub
 Sub SetLineStyle(CB As ComboBox, n As Integer)
-' sætter linestyle efter hvad comboxen er sat til
+' sets linestyle according to combobox
 
 If CB.ListIndex = 0 Then
 XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlContinuous '
@@ -708,9 +700,8 @@ XLapp.ActiveChart.SeriesCollection(n).Border.LineStyle = xlContinuous '
 End If
 
 End Sub
-'Sub InsertFormula(ws As Worksheet, wb As Workbook, tb As TextBox, col As Integer)
 Sub InsertFormula(ws As Variant, WB As Variant, tb As TextBox, col As Integer)
-' indsætter formel fra textbox i kolonne col
+' inserts formula from textbox in column col
 Dim ea As New ExpressionAnalyser
     Dim varnavn As String
     Dim i As Integer
@@ -731,7 +722,7 @@ If tb.Text <> "" Then
     ea.Pos = 1
     varnavn = ea.GetNextVar
     i = 0
-    ' find ledig variabel plads
+    ' find available variable plot
     Do While ws.Range("N6").Offset(i, 0).Value <> ""
       i = i + 1
     Loop
@@ -762,16 +753,15 @@ If tb.Text <> "" Then
     Call ea.ReplaceVar("x", "A7")
     forskrift = ea.Text
      
-     ' indsæt forskrift i regneark
-    ws.Range("b7").Offset(0, col).Formula = "=" & forskrift
-'    If TypeName(ws.Range("b7").Offset(0, col).value) = "Error" Then GoTo fejlindtast
+     ' insert function in spreadsheet
+     ws.Range("b7").Offset(0, col).Formula = "=" & forskrift
 
-    ' kopier formel ned
+    ' copy formula down
     ws.Activate
     ws.Range("B7").Offset(0, col).Select
     ws.Application.Selection.AutoFill Destination:=ws.Range("b7:b207").Offset(0, col), Type:=0   'xlFillDefault=0
     
-    ' fejl nogen steder?
+    ' Error in any cells?
     For i = 0 To 200
         If TypeName(ws.Range("b7").Offset(i, col).Value) = "Error" Then ws.Range("b7").Offset(i, col).Value = ""
     Next
@@ -781,7 +771,6 @@ GoTo slut:
 fejlindtast:
     MsgBox Sprog.A(300) & " " & col + 1
 slut:
-
 End Sub
 
 Function ConvertToExcelFormula(ByVal forskrift As String)
@@ -802,20 +791,20 @@ Dim Arr As Variant
     forskrift = Replace(forskrift, "pi", "PI()")
     forskrift = Replace(forskrift, VBA.ChrW(960), "PI()") ' pi symbol
     forskrift = Replace(forskrift, "e", "2.718281828")
-    forskrift = Replace(forskrift, VBA.ChrW(12310), "") ' specielle usynlige paranteser fjernes
-    forskrift = Replace(forskrift, VBA.ChrW(12311), "") ' specielle usynlige paranteser fjernes
-'    forskrift = Replace(forskrift, VBA.ChrW(11), "") ' en af de nedenstående?
-    forskrift = Replace(forskrift, vbLf, "") ' shift-enter og enter
+    forskrift = Replace(forskrift, VBA.ChrW(12310), "") ' speciel invisible parenthesis removed
+    forskrift = Replace(forskrift, VBA.ChrW(12311), "") ' speciel invisible parenthesis removed
+'    forskrift = Replace(forskrift, VBA.ChrW(11), "")
+    forskrift = Replace(forskrift, vbLf, "") ' shift-enter and enter
     forskrift = Replace(forskrift, vbCrLf, "")
     forskrift = Replace(forskrift, vbCr, "")
-    forskrift = Replace(forskrift, """", "") ' apostrof fjernes
-    forskrift = Replace(forskrift, VBA.ChrW(8289), "") ' symbol der definerer funktion fjernes fra word syntaks
-    forskrift = Replace(forskrift, VBA.ChrW(8212), "+") 'dobbbelt minustegn giver plus
-    forskrift = Replace(forskrift, VBA.ChrW(183), "*") ' prik erstattes med gange
-    forskrift = Replace(forskrift, VBA.ChrW(215), "*") ' kryds erstattes med gange
-    forskrift = Replace(forskrift, VBA.ChrW(8901), "*") ' prik \cdot erstattes med gange
-    forskrift = Replace(forskrift, VBA.ChrW(8226), "*") ' tyk prik erstattes med gange
-    forskrift = Replace(forskrift, "%", "/100") ' procenttegn
+    forskrift = Replace(forskrift, """", "") ' apostrof removed
+    forskrift = Replace(forskrift, VBA.ChrW(8289), "") ' symbol that defines function removed
+    forskrift = Replace(forskrift, VBA.ChrW(8212), "+") 'double minus sign equals plus
+    forskrift = Replace(forskrift, VBA.ChrW(183), "*") ' dot replaced by multiplication
+    forskrift = Replace(forskrift, VBA.ChrW(215), "*") ' cross replaced by multiplication
+    forskrift = Replace(forskrift, VBA.ChrW(8901), "*") ' \cdot replaced by multiplication
+    forskrift = Replace(forskrift, VBA.ChrW(8226), "*") ' thick dot replaced by multiplication
+    forskrift = Replace(forskrift, "%", "/100") ' percentage sign
     forskrift = Replace(forskrift, ",", ".")
     forskrift = Replace(forskrift, VBA.ChrW(178), "^2")
     forskrift = Replace(forskrift, VBA.ChrW(179), "^3")
@@ -832,7 +821,7 @@ Dim Arr As Variant
     End If
     Loop While Pos > 0
     
-    ' 3 og 4 rod
+    ' 3 og 4 root
     For rod = 3 To 4
     Do
     Pos = InStr(forskrift, VBA.ChrW(8728 + rod))
@@ -851,7 +840,7 @@ Dim Arr As Variant
     Loop While Pos > 0
     Next
     
-    'kvadratrod
+    'squareroot
     Do
     Pos = InStr(forskrift, VBA.ChrW(8730))
     If Pos > 0 Then
@@ -881,8 +870,7 @@ Dim Arr As Variant
     End If
     Loop While Pos > 0
     
-    
-    'trigfunktioner hvis 360 grader
+    'trigfunctions if 360 degrees
     If Not (Radians) Then
         forskrift = ConvertDegreeToRad(forskrift, "sin")
         forskrift = ConvertDegreeToRad(forskrift, "cos")
@@ -892,16 +880,16 @@ Dim Arr As Variant
         forskrift = ConvertDegreeToRad(forskrift, "csc")
     End If
     
-    ' find underforståede paranteser efter ^ og / ' (skal være efter diff og andre funktioner med komma)
+    ' find understood parenthesis after ^ and / ' (this line must be after diff and other functions with comma)
     ea.Text = forskrift
     ea.InsertBracketAfter ("^")
     ea.InsertBracketAfter ("/")
     forskrift = ea.Text
     
-    ' mellemrum fjernes
+    ' space removed
     forskrift = Replace(forskrift, " ", "")
 
-    ' indsæt underforståede gangetegn ' skal være efter fjern mellem
+    ' insert understood multiplication
     ea.Text = forskrift
     ea.Pos = 1
     ea.InsertMultSigns
@@ -1163,7 +1151,7 @@ If TextBox_Lig3.Text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xming & "," & xmaxg & ",y," & ymin2 & "," & ymax2 & "),"
 End If
 
-'parameterfremstillinger
+'parametric pplots
 If TextBox_parametric1x.Text <> "" Then
     parx = omax.CodeForMaxima(TextBox_parametric1x.Text)
     pary = omax.CodeForMaxima(TextBox_parametric1y.Text)
@@ -1205,7 +1193,7 @@ If TextBox_parametric3x.Text <> "" Then
 End If
 
 
-'punkter
+'points
 If TextBox_punkter.Text <> "" Then
     grafobj = grafobj & "key="""",color=black,"
     Arr = Split(TextBox_punkter.Text, VbCrLfMac)
@@ -1214,7 +1202,7 @@ If TextBox_punkter.Text <> "" Then
         Arr(i) = Replace(Arr(i), ",", ".")
         Arr(i) = Replace(Arr(i), ";", ",")
     End If
-        Arr(i) = Replace(Arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
+        Arr(i) = Replace(Arr(i), vbTab, ",") ' if tab is copied from Excel
         Arr(i) = Replace(Arr(i), " ", "")
         If Len(Arr(i)) > 0 Then
         If Left(Arr(i), 1) <> "(" Then
@@ -1235,7 +1223,7 @@ If TextBox_punkter.Text <> "" Then
     grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(highres * ConvertStringToNumber(TextBox_pointsize.Text), ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
 End If
 
-'punkter 2
+'points 2
 If TextBox_punkter2.Text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=blue,"
@@ -1245,7 +1233,7 @@ If TextBox_punkter2.Text <> "" Then
         Arr(i) = Replace(Arr(i), ",", ".")
         Arr(i) = Replace(Arr(i), ";", ",")
     End If
-        Arr(i) = Replace(Arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
+        Arr(i) = Replace(Arr(i), vbTab, ",") ' if tab is copied from Excel
         Arr(i) = Replace(Arr(i), " ", "")
         If Len(Arr(i)) > 0 Then
         If Left(Arr(i), 1) <> "(" Then
@@ -1266,7 +1254,7 @@ If TextBox_punkter2.Text <> "" Then
     grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(TextBox_pointsize2.Text, ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined2.Value) & ",points([" & punkttekst & "]),"
 End If
 
-'markerede punkter
+'selected points
 If TextBox_markerpunkter.Text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=red,"
@@ -1276,15 +1264,9 @@ If TextBox_markerpunkter.Text <> "" Then
         Arr(i) = Replace(Arr(i), ",", ".")
         Arr(i) = Replace(Arr(i), ";", ",")
     End If
-        Arr(i) = Replace(Arr(i), vbTab, ",") ' hvis tab. f.eks. hvis kopieret fra excel
+        Arr(i) = Replace(Arr(i), vbTab, ",") 'if tab is copied from Excel
         Arr(i) = Replace(Arr(i), " ", "")
         If Len(Arr(i)) > 0 Then
-'        If Left(arr(i), 1) = "(" Then
-'            arr(i) = Right(arr(i), Len(arr(i)) - 1)
-'        End If
-'        If Right(arr(i), 1) = ")" Then
-'            arr(i) = Left(arr(i), Len(arr(i)) - 1)
-'        End If
         Arr2 = Split(Arr(i), ",")
         If UBound(Arr2) = 1 Then
             x = Arr2(0)
@@ -1353,9 +1335,9 @@ End If
         End If
     End If
     
-    If Len(grafobj) = 0 Then GoTo slut ' ellers fejler når print starter op, men med denne fejler retningsfelt hvis alene
+    If Len(grafobj) = 0 Then GoTo slut
 
-' diverse
+    
     If Len(TextBox_xmin.Text) > 0 And Len(TextBox_xmax.Text) > 0 Then
         grafobj = "xrange=[" & ConvertNumberToMaxima(TextBox_xmin.Text) & "," & ConvertNumberToMaxima(TextBox_xmax.Text) & "]," & grafobj
     End If
@@ -1369,7 +1351,6 @@ End If
     grafobj = "font=""Arial"",font_size=8," & grafobj
     grafobj = "nticks=100," & grafobj
     grafobj = "ip_grid=[70,70]," & grafobj
-'    grafobj = "xu_grid=50,yv_grid=50," & grafobj ' ser ikke ud til at være nødv
     grafobj = "xtics_axis = true," & grafobj
     grafobj = "ytics_axis = true," & grafobj
     grafobj = "line_width=" & Replace(highres, ",", ".") & "," & grafobj
@@ -1379,14 +1360,14 @@ End If
         If ConvertStringToNumber(TextBox_xmin.Text) > 0 Then
             grafobj = "logx=true," & grafobj
         Else
-            MsgBox "xmin skal være >0 for at bruge logaritmisk x-akse."
+            MsgBox "xmin must be >0 to use log x-axis."
         End If
     End If
     If CheckBox_logy.Value Then
         If ConvertStringToNumber(TextBox_ymin.Text) > 0 Then
             grafobj = "logy=true," & grafobj
         Else
-            MsgBox "ymin skal være >0 for at bruge logaritmisk y-akse."
+            MsgBox "ymin must be >0 to use log y-axis."
         End If
     End If
     
@@ -1416,7 +1397,7 @@ On Error GoTo Fejl
     Label_wait.Caption = Sprog.A(826) & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
-    omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand FindDef:=False
     InsertDefinitioner
     Text = GetDraw2Dtext(highres)
     If Len(TextBox_dfligning.Text) > 0 Then
@@ -1450,7 +1431,7 @@ On Error GoTo Fejl
             dfsol = dfsol & "[" & ConvertNumberToMaxima(TextBox_dfsol5x.Text) & "," & ConvertNumberToMaxima(TextBox_dfsol5y.Text) & "]"
         End If
         If Len(dfsol) > 0 Then
-            df = df & ",duration=100,solns_at(" & dfsol & ")" ' duration defaulat er 10. ved at øge plottes længere og tættere på asymptoter
+            df = df & ",duration=100,solns_at(" & dfsol & ")" ' duration defaulat is 10. by increasing you can plot closer to asympototes
         End If
         If CheckBox_onlykurver.Value Then
             df = df & ",show_field=false"
@@ -1480,7 +1461,6 @@ On Error GoTo Fejl
 #End If
         End If
     Else
-'        Label_wait.Caption = " indtast funktion og Tryk opdater"
         Label_wait.visible = False
     End If
     Label_wait.visible = False
@@ -1497,7 +1477,7 @@ slut:
 End Sub
 Private Sub GnuPlot()
 Dim Text As String
-    omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand FindDef:=False
     InsertDefinitioner
 
     Text = GetDraw2Dtext()
@@ -1604,9 +1584,6 @@ Private Sub CommandButton_potregr_Click()
     
     Cregr.Datatext = TextBox_punkter.Text
     Cregr.ComputePowRegr
-'    Selection.Collapse
-'    Selection.TypeParagraph
-'    Cregr.InsertEquation
 
     If TextBox_ligning1.Text = "" Then
         TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
@@ -1664,12 +1641,6 @@ Private Sub CommandButton_nulstil_Click()
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
-' skjuler istedet for at lukke, så funktioner gemmes.
-'If CloseMode = vbFormControlMenu Then
-'    Cancel = 1
-'    Hide
-'End If
-'Unload Me
 PicOpen = False
 End Sub
 
@@ -1846,7 +1817,6 @@ xmax = ConvertStringToNumber(TextBox_xmax.Text)
 cfakt = (xmax - xmin) / (Image1.Width * 0.9)
 x = x - Image1.Width * 0.06
 ConvertPixelToCoordX = xmin + cfakt * x
-'MsgBox ConvertPixelToCoordX
 End Function
 Function ConvertPixelToCoordY(y As Single) As Single
 Dim Ymin As Single, Ymax As Single, cfakt As Single
@@ -1888,7 +1858,6 @@ GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
-
 
 End Sub
 
@@ -1952,7 +1921,7 @@ PicOpen = False
     Set ils = Selection.InlineShapes.AddPicture(GetTempDir() & "WordMatGraf.gif", False, True)
 #End If
 Sep = "|"
-s = "WordMat" & Sep & AppVersion & Sep & TextBox_definitioner.Text & Sep & TextBox_titel.Text & Sep & TextBox_xaksetitel.Text & Sep & TextBox_yaksetitel.Text & Sep
+s = AppNavn & Sep & AppVersion & Sep & TextBox_definitioner.Text & Sep & TextBox_titel.Text & Sep & TextBox_xaksetitel.Text & Sep & TextBox_yaksetitel.Text & Sep
 s = s & TextBox_xmin.Text & Sep & TextBox_xmax.Text & Sep & TextBox_ymin.Text & Sep & TextBox_ymax.Text & Sep
 s = s & TextBox_ligning1.Text & Sep & TextBox_var1.Text & Sep & TextBox_xmin1.Text & Sep & TextBox_xmax1.Text & Sep & ComboBox_ligning1.ListIndex & Sep
 s = s & TextBox_ligning2.Text & Sep & TextBox_var2.Text & Sep & TextBox_xmin2.Text & Sep & TextBox_xmax2.Text & Sep & ComboBox_ligning2.ListIndex & Sep
@@ -1981,22 +1950,17 @@ Application.ScreenUpdating = True
 End Sub
 
 Sub InsertDefinitioner()
-' indsætter definitioner fra textboxen i maximainputstring
-Dim DefString As String
+    ' inserts definitions from textbox in maximainputstring
+    Dim DefString As String
 
-omax.InsertKillDef
+    omax.InsertKillDef
 
-DefString = GetDefString
+    DefString = GetDefString
 
-If Len(DefString) > 0 Then
-'defstring = Replace(defstring, ",", ".")
-'defstring = Replace(defstring, ";", ",")
-'defstring = Replace(defstring, "=", ":")
-If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
-
-'omax.MaximaInputStreng = omax.MaximaInputStreng & "[" & defstring & "]$"
-omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
-End If
+    If Len(DefString) > 0 Then
+        If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
+        omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
+    End If
 End Sub
 Function GetDefString()
 Dim DefString As String
@@ -2013,7 +1977,7 @@ GetDefString = DefString
 End If
 End Function
 Sub OpdaterDefinitioner()
-' ser efter variable i textboxene og indsætter under definitioner
+' checks for variables in textboxes and inderts under definitions
 Dim Vars As String
 Dim Var As String, var2 As String
 Dim ea As New ExpressionAnalyser
@@ -2032,7 +1996,7 @@ Dim i As Integer
     Vars = Vars & GetTextboxLignVars(TextBox_Lig3)
     
     
-    omax.FindVariable Vars, False ' fjerner dobbelte
+    omax.FindVariable Vars, False ' removes doubles
     Vars = omax.Vars
     If Left(Vars, 1) = ";" Then Vars = right(Vars, Len(Vars) - 1)
     
@@ -2100,7 +2064,7 @@ Function GetTextboxLignVars(tb As TextBox) As String
     End If
 End Function
 Function RemoveVar(Text As String, Var As String)
-' fjerner var fra string
+' removes var from string
 Dim ea As New ExpressionAnalyser
 
 ea.Text = Text
@@ -2119,7 +2083,7 @@ Private Sub CommandButton_plotdf_Click()
 Dim pm As String
 Dim sl As String
     Label_vent.visible = True
-    omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand FindDef:=False
     InsertDefinitioner
     If Len(TextBox_skyd1k.Text) > 0 And Len(TextBox_skyd1f.Text) > 0 And Len(TextBox_skyd1t.Text) > 0 Then
         If Len(pm) > 0 Then pm = pm & ","
@@ -2157,7 +2121,7 @@ Private Sub TextBox_dfy_Change()
 End Sub
 
 Sub CheckForAssume()
-' checker om der er nogle antagelser i def-textboxen og bruger dem til at lave begrænsninger på xmin og xmax
+' checks if there are any defs in the the def-textbox and uses them to limit xmin and xmax
 Dim DefS As String
 Dim Pos As Integer
 Dim ea As New ExpressionAnalyser
@@ -2244,7 +2208,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.A(444)
     Label29.Caption = Sprog.A(823)
     Label45.Caption = Sprog.A(837)
-    Label_ligninger.Caption = Sprog.A(832) & "  f(x)=..."
+    Label_Ligninger.Caption = Sprog.A(832) & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset
@@ -2266,12 +2230,12 @@ Private Sub SetCaptions()
     
     Label1.Caption = Sprog.A(198)
     CommandButton_kugle.Caption = Sprog.A(199) 'insert circle
-    CommandButton_insertplan.Caption = Sprog.A(200) ' iinsert line
+    CommandButton_insertplan.Caption = Sprog.A(200) ' insert line
     CommandButton_parlinje.Caption = Sprog.A(200)
     CommandButton_nulstilpar1.Caption = Sprog.Reset
     Label10.Caption = Sprog.A(835)
     Label48.Caption = Sprog.A(835) & " 2"
-    Label53.Caption = Sprog.A(201) ' markerede punkter
+    Label53.Caption = Sprog.A(201) ' selected points
     Label28.Caption = Sprog.A(202)
     
 End Sub

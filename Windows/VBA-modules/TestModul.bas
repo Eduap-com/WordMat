@@ -7,7 +7,7 @@ Option Explicit
     Private ContCount As Integer
     Private NonInterA As Boolean
 
-' Brug CreateTestBeregn til at lave nye test
+' Use CreateTestBeregn to create new tests
 
 Sub RunTestSequenceNonInteractive()
     NonInterA = True
@@ -37,7 +37,7 @@ Sub RunTestSequence()
     UFwait2.Label_tip.Font.Size = 10
     UFwait2.Show vbModeless
     
-    ' Testresultaterne er baseret på bestemte indstillinger. Undervejs bliver de måske ændret, men i starten skal de nulstilles
+' The test results are based on certain settings. They may change along the way, but they should be reset initially.
     CASengineTempOnly = 0 ' 0=maxima
     CASengine = 0
     MaximaExact = 1 ' 0 - auto ' 1 - exact ' 2 - num
@@ -96,8 +96,8 @@ Sub RunTestSequence()
     End If
     'GoTo ggbtest
     
-    ' når der skal laves nye test, er det nemmest at bruge funktion 'CreateTestberegn'
-    ' alternativt: bare at køre testen med et tomt expected result. Der skrives hvilken teststreng der skal bruges hvis resultat er korrekt
+    ' when creating new tests, it is easiest to use the function 'CreateTestBeregn'
+    ' alternative: just running the test with an empty expected result. It is written which test string should be used if the result is correct.
     ' ellers brug GetTestString' eller UnicodeValsToString for at finde streng fra et matematikfelt for kommandoen.
     ' the result may have to be adjusted for calculations (not solve). Often brackets of exponents are different and spaces must be removed
     ' Multiple correct answers can be separated by @$
@@ -110,14 +110,14 @@ Sub RunTestSequence()
     
     
     DebugWM = False
-    ' ikke den kønneste løsning, men tomme linjer bliver spist og hvis der ikke er plads som beregninger kan vokse i, så giver det problemer.
+    ' not the prettiest solution, but empty lines are eaten and if there is no space for calculations to grow in, it causes problems.
     For i = 0 To 30
         Selection.TypeParagraph
     Next
     Selection.MoveLeft wdCharacter, 30
     
     InsertSletDef
-    ' Man kan indtaste flere korrekte resultater, bare adskil med @$   ----------------------------------------
+    ' You can enter multiple correct results, just separate with @$ ----------------------------------------
     'calculation tests
     If TestBeregn("2+3", "=5") Then GoTo slut
     TestBeregn "2+3^3,4/log" & VBA.ChrW(8289) & "(889) -sin" & VBA.ChrW(8289) & "(34)", "-sin" & VBA.ChrW(8289) & "((17" & VBA.ChrW(183) & "" & VBA.ChrW(960) & ")/90)+(41,89983" & VBA.ChrW(183) & "ln" & VBA.ChrW(8289) & "(10))/ln" & VBA.ChrW(8289) & "(889) +2"
@@ -152,14 +152,14 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestBeregn "L=100^(1/5)/" & VBA.ChrW(960) & "^(1/5)", "=100^(1/5)/" & VBA.ChrW(960) & "^(1/5)"
     If StopNow Then GoTo slut
-    TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", "=(180" & VBA.ChrW(183) & "cos^(-1)" & VBA.ChrW(8289) & "(2))/" & VBA.ChrW(960) ' burde måske give fejl
+    TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", "=(180" & VBA.ChrW(183) & "cos^(-1)" & VBA.ChrW(8289) & "(2))/" & VBA.ChrW(960)
     If StopNow Then GoTo slut
     TestBeregn "(" & VBA.ChrW(8730) & "((x+1)^2+(2" & VBA.ChrW(183) & "(x+1)/x)^2 ))^'", "=((-(8" & VBA.ChrW(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW(183) & "(x+1))/x^(2)+2" & VBA.ChrW(183) & "(x+1))/(2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "((4" & VBA.ChrW(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))@$=(-((8" & VBA.ChrW(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW(183) & "(x+1))/x^(2)+2" & VBA.ChrW(183) & "(x+1))/(2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "((4" & VBA.ChrW(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))"
     If StopNow Then GoTo slut
     
     InsertSletDef
     ' equation solving
-    InsertHeadingtext "Ligningsløsning"
+    InsertHeadingtext "Equation solving"
     TestSolve "x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3"
     If StopNow Then GoTo slut
     TestSolve "Hovedstol=Ydelse" & VBA.ChrW(8729) & "" & VBA.ChrW(12310) & "1-(1+r)" & VBA.ChrW(12311) & "^(-n)/r", "n", "n=-ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) @$n=-(ln" & VBA.ChrW(8289) & "((Ydelse-Hovedstol" & VBA.ChrW(183) & "r)/Ydelse)/ln" & VBA.ChrW(8289) & "(r+1) )"
@@ -202,7 +202,7 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestSolve "L=10" & VBA.ChrW(183) & "log" & VBA.ChrW(8289) & "(I/I_0 )", "I", "I=I_0" & VBA.ChrW(183) & "10^(L/10)"
     If StopNow Then GoTo slut
-    TestSolve "4" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(x-1)=-1/5" & VBA.ChrW(183) & "x^2+2" & VBA.ChrW(183) & "x+3", "x", "x=5" ' skal kun give denne ene løsning
+    TestSolve "4" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(x-1)=-1/5" & VBA.ChrW(183) & "x^2+2" & VBA.ChrW(183) & "x+3", "x", "x=5" ' should only provide this one solution
     If StopNow Then GoTo slut
     TestSolve "x^2" & VBA.ChrW(183) & "(x^2-1)=9" & VBA.ChrW(183) & "(x^2-1)", "x", "x=-3    " & VBA.ChrW(8744) & "    x=-1    " & VBA.ChrW(8744) & "    x=1    " & VBA.ChrW(8744) & "    x=3"
     If StopNow Then GoTo slut
@@ -231,7 +231,7 @@ Sub RunTestSequence()
     TestSolve "x^2+x-12" & VBA.ChrW(8805) & "8", "x", "x" & VBA.ChrW(8804) & "-5   " & VBA.ChrW(8744) & "   x" & VBA.ChrW(8805) & "4" ' ulighed
     If StopNow Then GoTo slut
     If TestSolve("e^(-x)=2", "x", "x=-ln" & VBA.ChrW(8289) & "(2)") Then GoTo slut
-    If TestSolve("1=1,5" & VBA.ChrW(183) & "x^2+0,5/x^0,5 -1", "x", "x=0,06287224    " & VBA.ChrW(8744) & "    x=1") Then GoTo slut ' kræver numerisk løsning. Tidligere to_poly fejl, med kun en løsning.
+    If TestSolve("1=1,5" & VBA.ChrW(183) & "x^2+0,5/x^0,5 -1", "x", "x=0,06287224    " & VBA.ChrW(8744) & "    x=1") Then GoTo slut ' requires numerical solution. Previous to_poly error, with only one solution.
     If TestSolve("6174/(1+8652" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "0,711" & VBA.ChrW(12311) & "^x )=8000000", "x", "x" & VBA.ChrW(8712) & "" & VBA.ChrW(8709)) Then GoTo slut
     If TestSolve("x^2=e^(-x^2 )", "x", "x=-" & VBA.ChrW(8730) & "(lambert_w (1) )    " & VBA.ChrW(8744) & "    x=" & VBA.ChrW(8730) & "(lambert_w (1) )") Then GoTo slut
 
@@ -240,7 +240,7 @@ Sub RunTestSequence()
     If TestSolve("0,1=" & VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^5" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(8730) & "2" & VBA.ChrW(960) & "" & VBA.ChrW(183) & "" & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((y-7)/" & VBA.ChrW(963) & ")^2 ) dy", "sigma", VBA.ChrW(963) & "=1,560608") Then GoTo slut
     InsertSletDef
     InsertTestMath "Definer: f(x)={" & VBA.ChrW(9608) & "(100" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "1,03" & VBA.ChrW(12311) & "^x,  0" & VBA.ChrW(8804) & "x" & VBA.ChrW(8804) & "72@33743" & VBA.ChrW(183) & "" & VBA.ChrW(12310) & "0,95" & VBA.ChrW(12311) & "^x,  72<x" & VBA.ChrW(8804) & "150)" & VBA.ChrW(9508)
-    If TestSolve("f(x)=200", "x", "x=23,44977    " & VBA.ChrW(8744) & "    x=99,97819") Then GoTo slut ' stykkevis kan ikke håndteres algebraisk, så solvereal skal gå direkte til nsolve
+    If TestSolve("f(x)=200", "x", "x=23,44977    " & VBA.ChrW(8744) & "    x=99,97819") Then GoTo slut ' piecewise cannot be handled algebraically, so solvereal must go directly to nsolve
     InsertSletDef
     
     MaximaExact = 1
@@ -248,8 +248,8 @@ Sub RunTestSequence()
     '    TestSolve "", "x", "x="
     '    If StopNow Then GoTo slut
     
-    'Often fails, but not always ??? then works numerically. Det er noget med en overflow fejl. Virker ikke mere numerisk
-    ' resultat er numerisk 100. Nogle gange kører denne i lykke og skal gentages numerisk. Ukendt hvorfor.
+    'Often fails, but not always ??? then works numerically. It's something with an overflow error. Doesn't seem to be working numerically anymore
+    ' result is numerical 100. Sometimes this runs in luck and needs to be repeated numerically. Unknown why.
     If Not NonInterA Then
         InsertTestMath "OBS: Denne kan tage lang tid. Vent med at trykke STOP"
         Selection.TypeParagraph
@@ -298,9 +298,9 @@ Sub RunTestSequence()
     InsertSletDef
     
     
-    ' denne fejler, men ikke hvis den byttes om med ovenstående, så er det den som fejler ????
+' this one fails, but not if it is swapped with the one above, then that is the one that fails ????
     Radians = True
-    Selection.TypeText "Den næste fejler, men ikke hvis den byttes om med ovenstående, så er det den som fejler..."
+    Selection.TypeText "The next one fails, but not if it is swapped with the one above, then that is the one that fails...."
     Selection.TypeParagraph
     InsertTestMath "Definer: -2<x<2"
     Selection.TypeParagraph
@@ -341,7 +341,7 @@ Sub RunTestSequence()
 
     '    TestBeregn "cos^(-1)" & VBA.ChrW(8289) & "(2)", VBA.ChrW(8776) & "Ikke defineret indenfor " & VBA.ChrW(8477) ' med VBACAS kommer der fejlpopup
     '    If StopNow Then GoTo slut
-    TestBeregn VBA.ChrW(12310) & "cos" & VBA.ChrW(12311) & "^(-1) (0,5)", VBA.ChrW(8776) & "60" ' test af invers trig og indtastning via design-skrift-hævet skrift
+    TestBeregn VBA.ChrW(12310) & "cos" & VBA.ChrW(12311) & "^(-1) (0,5)", VBA.ChrW(8776) & "60" ' testing inverse trig and entering via design-script-superscript
     If StopNow Then GoTo slut
     TestBeregn "23456789123", VBA.ChrW(8776) & "2,345679" & VBA.ChrW(183) & "10^10@$23456790000"
     If StopNow Then GoTo slut
@@ -385,7 +385,7 @@ Sub RunTestSequence()
     If TestBeregn(VBA.ChrW(8747) & "_1^10" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(x^(-2)+1) dx", "=-(ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2" & VBA.ChrW(8776) & "9,417202@$=-((ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)+1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(101)-1)-ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)+1)+ln" & VBA.ChrW(8289) & "(" & VBA.ChrW(8730) & "(2)-1)-2" & VBA.ChrW(183) & "" & VBA.ChrW(8730) & "(101)+2^(3/2))/2)" & VBA.ChrW(8776) & "9,417202") Then GoTo slut
     InsertTestMath "Definer: f(x)=" & VBA.ChrW(8730) & "(3x+9)  ;g(x)=x+3"
     If TestSolve(VBA.ChrW(8747) & "_0^k" & VBA.ChrW(9618) & "" & VBA.ChrW(12310) & "g(x)-f(x) " & VBA.ChrW(12311) & " dx=1,5", "k", "k=-3    " & VBA.ChrW(8744) & "    k=7/3@$k=-3    " & VBA.ChrW(8744) & "    k=2,333333") Then GoTo slut
-    ' de næste to gav før forkert resultat pga brug ldefint i integrate, så nu anvendes Nintegrate før ldefint, som åbenbart er fejlbarlig.
+    ' the next two previously gave incorrect results due to using ldefint in integrate, so now Nintegrate is used before ldefint, which is obviously fallible.
     If TestBeregn(VBA.ChrW(8747) & "_(-1)^1" & VBA.ChrW(9618) & "" & VBA.ChrW(8730) & "(1+((4" & VBA.ChrW(183) & "x-4" & VBA.ChrW(183) & "x^3 )" & VBA.ChrW(183) & "e^(2" & VBA.ChrW(183) & "x^2-x^4 ) )^2 ) dx", VBA.ChrW(8776) & "4,142057") Then GoTo slut
     InsertTestMath "Definer: f(x)=0,000003" & VBA.ChrW(183) & "x^4-0,01676" & VBA.ChrW(183) & "x^2+60"
     Selection.TypeParagraph
@@ -393,11 +393,11 @@ Sub RunTestSequence()
     InsertSletDef
 
 
-    ' Vektortest
+    ' Vectortest
     MaximaExact = 0
     ShowSettings "Vektorer"
     If TestBeregn("((" & VBA.ChrW(9608) & "(-4@3))" & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(1@7)))/|((" & VBA.ChrW(9608) & "(-4@3)))|^2 " & VBA.ChrW(183) & "(" & VBA.ChrW(9608) & "(-4@3))", "=(" & VBA.ChrW(9632) & "(-68/25@51/25))=(" & VBA.ChrW(9632) & "(-2,72@2,04))@$=(" & VBA.ChrW(9632) & "(-(68/25)@51/25))=(" & VBA.ChrW(9632) & "(-2,72@2,04))") Then GoTo slut
-    If TestBeregn("(" & VBA.ChrW(9632) & "(-400@0@320))" & VBA.ChrW(215) & "(" & VBA.ChrW(9632) & "(-120@280@0))", "=(" & VBA.ChrW(9632) & "(-89600@-38400@-112000))") Then GoTo slut 'To forskellige måde at taste vektorer på:
+    If TestBeregn("(" & VBA.ChrW(9632) & "(-400@0@320))" & VBA.ChrW(215) & "(" & VBA.ChrW(9632) & "(-120@280@0))", "=(" & VBA.ChrW(9632) & "(-89600@-38400@-112000))") Then GoTo slut 'Two different ways to enter vectors:
     If TestBeregn("(" & VBA.ChrW(9608) & "(-400@0@320))" & VBA.ChrW(215) & "(" & VBA.ChrW(9608) & "(-120@280@0))", "=(" & VBA.ChrW(9632) & "(-89600@-38400@-112000))") Then GoTo slut
     If TestSolve("(" & VBA.ChrW(9608) & "(x+y@x-y))=(" & VBA.ChrW(9608) & "(1@2))", "x", "x=3/2    " & VBA.ChrW(8743) & "    y=-(1/2)") Then GoTo slut
         
@@ -413,7 +413,7 @@ Sub RunTestSequence()
     TestBeregn "s" & VBA.ChrW(8407) & "^'(t)", "=(" & VBA.ChrW(9632) & "(1@2" & VBA.ChrW(183) & "t))"
     If StopNow Then GoTo slut
     
-    ' Differentialligning test
+    ' Differential equation test
     TestSolveDE "N^'=1/10500" & VBA.ChrW(183) & "N" & VBA.ChrW(183) & "(1000-N)", "N,x", "N=0    " & VBA.ChrW(8744) & "    N=1000    " & VBA.ChrW(8744) & "    N=1000/(c" & VBA.ChrW(183) & "e^(-((2" & VBA.ChrW(183) & "x)/21) )+1)"
     If StopNow Then GoTo slut
     TestSolveDE "N^'=(0,025-0,0004t)" & VBA.ChrW(183) & "N", "N,t", "N=c" & VBA.ChrW(183) & "e^(t/40-t^2/5000)"
@@ -432,10 +432,10 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     If TestSolveDE("y^'=b" & VBA.ChrW(183) & "y" & VBA.ChrW(183) & "(M-y)", "y,x", "y=0    " & VBA.ChrW(8744) & "    y=M    " & VBA.ChrW(8744) & "    y=M/(c" & VBA.ChrW(183) & "e^(-(M" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "x) )+1)") Then GoTo slut
     If TestSolveDE("(y^' )^2+x" & VBA.ChrW(183) & "y^'=0", "y,x", "y=c    " & VBA.ChrW(8744) & "    y=c-x^2/2") Then GoTo slut
-    ' partikulære løsninger
-    ' Denne har tidligere ikke givet en løsning. Den blev sorteret fra i ic1real, da TESTTF fandt en lille forskel i konstanterne, og så troede det var en falsk løsning. TestTF har nu fået numerisk sammenligning
+    ' particular solutions
+    ' This has not previously given a solution. It was sorted out in ic1real when TESTTF found a small difference in the constants, and then thought it was a false solution. TestTF has now got numerical comparison
     If TestSolveDE("p^'=0,015" & VBA.ChrW(183) & "p^1,2", "p=5,28;x=0", "p=-(1000000000000000/(243" & VBA.ChrW(183) & "(x-238,9747)^5 ))") Then GoTo slut
-    ' Denne har tidligere givet forkert løsning, da der kommer to løsninger, men når konstanten er sat ind, passer kun den ene.
+    ' This has previously given the wrong solution, as there are two solutions, but when the constant is inserted, only one fits.
     If TestSolveDE("(x+5)" & VBA.ChrW(183) & "y^'=" & VBA.ChrW(8730) & "y", "y=1;x=-4", "y=(ln" & VBA.ChrW(8289) & "(|x+5|)+2)^2/4") Then GoTo slut
 
 ggbtest:
@@ -465,7 +465,7 @@ ggbtest:
     TestBeregn "log" & VBA.ChrW(8289) & "(a)", "=ln(a)/ln(10)"
     If StopNow Then GoTo slut
     
-    TestBeregn "log_2" & VBA.ChrW(8289) & "(4)", "=ln(4)/ln(2)@$2" ' reducerer ikke eksakt med ggb
+    TestBeregn "log_2" & VBA.ChrW(8289) & "(4)", "=ln(4)/ln(2)@$2" ' does not reduce exactly with ggb
     If StopNow Then GoTo slut
     TestBeregn "ln" & VBA.ChrW(8289) & "(a)", "=ln(a)"
     If StopNow Then GoTo slut
@@ -478,18 +478,17 @@ ggbtest:
     TestBeregn VBA.ChrW(12310) & "sin" & VBA.ChrW(8289) & "(x)-sin" & VBA.ChrW(12311) & "" & VBA.ChrW(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW(8289) & "(1/180 x_0 " & VBA.ChrW(960) & ")-sin" & VBA.ChrW(8289) & "(1/180 " & VBA.ChrW(960) & "" & VBA.ChrW(183) & "x))/(x_0-x)"
     If StopNow Then GoTo slut
     
-    ' Ligninger
+    ' Equations
     If TestSolve("x^2=9", "x", "x=-3    " & VBA.ChrW(8744) & "    x=3") Then GoTo slut
 
-    ' Differentialligninger
+    ' Differential equations
     If TestSolveDE("y^'+2x" & VBA.ChrW(183) & "y=x", "y,x", "y=c_1 e^(-x^2 )+1/2") Then GoTo slut
     If TestSolveDE("y^'=b" & VBA.ChrW(183) & "y" & VBA.ChrW(183) & "(M-y)", "y,x", "y=-M e^(M" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "x)/(c_1-e^(M" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "x) )") Then GoTo slut
     
-    
-    'Fejler
+    'Fails
     MaximaExact = 0
     CASengineTempOnly = 0
-    If TestSolve("(" & VBA.ChrW(9608) & "(t^3-t@t))=(" & VBA.ChrW(9608) & "((-15)/64@ 1/4))", "t", "t=1/4") Then GoTo slut ' Denne giver 3 løsninger, men der er kun den ene. Det står direkte i 2. koordinaten. GeoGebra virker
+    If TestSolve("(" & VBA.ChrW(9608) & "(t^3-t@t))=(" & VBA.ChrW(9608) & "((-15)/64@ 1/4))", "t", "t=1/4") Then GoTo slut ' This gives 3 solutions, but there is only one. It is directly in the 2nd coordinate. GeoGebra works
 
     
     GoTo slut
@@ -581,7 +580,7 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
     Application.ScreenRefresh
     MoveCursorToEndOfCalculation
         
-    If TestType = 1 Then ' ved beregn skrives resultatet sammen med input, så sammenligning ryger
+    If TestType = 1 Then ' when calculating, the result is written together with the input, so comparison is eliminated
         Oresul2 = omax.MaximaOutput
         GotoPrevEq
         omax.ReadSelection
@@ -681,7 +680,7 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
    Wait 0.5
    MoveCursorToEndOfCalculation
         
-   If TestType = 1 Then ' ved beregn skrives resultatet sammen med input, så sammenligning ryger
+   If TestType = 1 Then ' when calculating, the result is written together with the input, so comparison is eliminated
       Oresul = omax.MaximaOutput
    Else
       GotoPrevEq
@@ -693,22 +692,22 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
         
    If TestType = 1 Then
       Selection.TypeParagraph
-      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeText "Insert this code string into sub 'RunTestSequence':"
       Selection.TypeParagraph
       Selection.TypeText vbTab & "If TestBeregn(" & Trim(ConvertToVBAString(komm)) & " , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
    ElseIf TestType = 2 Then
       Selection.TypeParagraph
-      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeText "Insert this code string into sub 'RunTestSequence':"
       Selection.TypeParagraph
       Selection.TypeText vbTab & "If TestSolve(" & Trim(ConvertToVBAString(komm)) & " , """ & Var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
    ElseIf TestType = 3 Then
       Selection.TypeParagraph
-      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeText "Insert this code string into sub 'RunTestSequence':"
       Selection.TypeParagraph
       Selection.TypeText "InsertTestMath " & Trim(ConvertToVBAString(komm))
    ElseIf TestType = 4 Then
       Selection.TypeParagraph
-      Selection.TypeText "Indsæt denne kode-streng i sub 'RunTestSequence':"
+      Selection.TypeText "Insert this code string into sub 'RunTestSequence':"
       Selection.TypeParagraph
       Selection.TypeText vbTab & "If TestSolveDE(" & Trim(ConvertToVBAString(komm)) & " , """ & Var & """ , " & Trim(ConvertToVBAString(Oresul)) & ") Then GoTo slut"
    End If
@@ -716,7 +715,7 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
 
 End Sub
 Sub GetTestString()
-    ' placer cursoren i resultat af en beregning, så giver denne sub det udtryk som performtest skal have som resultat
+' place the cursor in the result of a calculation, then this sub gives the expression that performtest should have as a result
     Dim Oresul As String, s As String
     omax.ReadSelection
     Oresul = TrimR(omax.Kommando, vbCr)
@@ -765,46 +764,12 @@ Dim i As Integer
     Do While Selection.OMaths.Count = 0 And i < 100
         Selection.GoToPrevious (wdGoToLine)
         Selection.EndKey unit:=wdLine
-        i = i + 1 ' der er nogle ligninger, hvor den bare sidder fast ved samme linje. Noget med vektorer
+        i = i + 1 ' there are some equations where it just gets stuck on the same line. Something with vectors
     Loop
 End Sub
 Function TestSolve(komm As String, Var As String, resul As String, Optional Instruk As String) As Boolean
     PerformTest 2, komm, resul, Var, Instruk
-    If StopNow Then TestSolve = True ' betyder stop
-    
-    Exit Function
-    
-    Dim s As String
-    s = TestCount & ": Solving equation" & vbCrLf & "Error count: " & ErrCount
-    UFwait2.Label1.Caption = s
-    UFwait2.Label_tip.Caption = komm
-    If Instruk <> "" Then
-        UFwait2.Label_tip.Caption = komm & vbCrLf & Instruk
-    End If
-    InsertTestMath komm, False
-    MaximaSolvePar (Var)
-    MoveCursorToEndOfCalculation
-    If Not omax.MaximaOutput = resul Then
-        Selection.Font.ColorIndex = wdRed
-        Selection.Font.Bold = True
-        Selection.TypeText ("Error solving equation. Expected result: ")
-        Selection.Font.Bold = False
-        Selection.Font.ColorIndex = wdAuto
-        Selection.TypeText ("  ")
-        InsertTestMath resul
-        UnicodeValsToString
-        Selection.TypeParagraph
-        ErrCount = ErrCount + 1
-    ElseIf visok Then
-        Selection.Font.ColorIndex = wdGreen
-        Selection.Font.Bold = True
-        Selection.TypeText ("Equation solved correctly")
-        Selection.Font.Bold = False
-        Selection.Font.ColorIndex = wdAuto
-        Selection.TypeParagraph
-    End If
-    UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
-    TestCount = TestCount + 1
+    If StopNow Then TestSolve = True ' means stop
 End Function
 
 Sub TestSolve2(komm As String, Var As String, resul As String)
@@ -822,20 +787,8 @@ Sub TestSolve2(komm As String, Var As String, resul As String)
 
 End Sub
 
-Sub testGetListItem()
-Dim ea As New ExpressionAnalyser
-
-ea.Text = "dette er[ad;sdfs] en test ; hej(a;b{1;2}) ;{a;d} hallo"
-
-MsgBox ea.GetNextListItem()
-MsgBox ea.GetNextListItem()
-MsgBox ea.GetNextListItem()
-MsgBox ea.GetNextListItem()
-MsgBox ea.GetNextListItem()
-
-End Sub
 Sub InsertTestMath(s As String, Optional NewLine As Boolean = True)
-' indsætter maxima output i word document
+' inserts maxima output into word document
     Dim mo As Range
 
     Selection.Range.Font.Bold = False
@@ -856,7 +809,6 @@ Sub InsertTestMath(s As String, Optional NewLine As Boolean = True)
 End Sub
 Sub MoveCursorToEndOfCalculation(Optional AddLine As Boolean = True)
     If Not Selection.Find.Execute("*^13^13", , , True) Then
-'        MsgBox "ingen ny linje"
         '    Selection.GoToNext (wdGoToLine)
         Selection.EndKey unit:=wdLine
         Selection.Collapse wdCollapseEnd
@@ -947,8 +899,8 @@ Sub unicodevals2()
 
 End Sub
 Sub UnicodeValsToString()
-' laver alle Omaths i selection om til en streng der kan indsættes i VBA-kode. Bruges primært til testmodul
-' Strengene indsættes efter selection i rækkefølge. Hver på ny linje
+' converts all Omaths in selection to a string that can be inserted into VBA code. Used primarily for test modules
+' The strings are inserted after selection in order. Each on a new line
     Dim Text As String
     Dim j As Integer
     Dim i As Integer
@@ -1008,5 +960,4 @@ Sub UnicodeValsToString()
     Next
 
 End Sub
-
 

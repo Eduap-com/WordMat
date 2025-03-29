@@ -2,11 +2,11 @@ Attribute VB_Name = "ModuleErrorCheck"
 Option Explicit
 
 Type ErrorDefinition
-    Title As String ' hvis denne er tom, så er der ingen fejl
+    Title As String ' if this is empty, then there is no error
     Description As String
     MaximaOutput As String
     DefFejl As Boolean
-    LocationError As String ' text fra Maxima der skal skrives med consolas, så der kan peges på fejlen
+    LocationError As String ' text from Maxima that should be written with consolas so that the error can be pointed out
     Stop As Boolean ' means that you must stop after the error has been shown
 End Type
 
@@ -39,12 +39,12 @@ Function CheckForError() As Boolean
 End Function
 
 Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) As ErrorDefinition
-' Klassificerer og fortolker fejlen i en errordefinition.
-' Checktext skal være output fra Maxima
+' Classifies and interprets the error in an errordefinition.
+' Checktext must be output from Maxima
     Dim Pos As Integer, CheckText As String, CheckText2 As String, s As String, s2 As String
     GetErrorDefinition.Stop = True
     CheckText = MaximaOutput & KommentarOutput
-    CheckText2 = Replace(CheckText, " ", vbNullString) ' på mac er der mellemrum, men ikke på windows
+    CheckText2 = Replace(CheckText, " ", vbNullString) ' on mac there are spaces, but not on windows
     If InStr(CheckText2, "syntaxerror") > 0 Then
         GetErrorDefinition.Title = Sprog.SyntaxError
         GetErrorDefinition.Description = Sprog.A(752)
@@ -66,7 +66,7 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
         If Sprog.SprogNr = 1 Then
             s = Sprog.A(699)
             If InStr(CheckText, "K(") > 0 Then
-                s = s & VbCrLfMac & "Måske har  du byttet om på n og r i K(n, r)?"
+                s = s & VbCrLfMac & Sprog.A(902)
             End If
         End If
         GetErrorDefinition.Description = s
@@ -81,12 +81,7 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
         GetErrorDefinition.LocationError = GetErrorText("Premature termination of input at", CheckText, 4)
     ElseIf InStr(CheckText2, "Toofewargumentssuppliedto") > 0 Then
         GetErrorDefinition.Title = Sprog.SyntaxError
-        If Sprog.SprogNr = 1 Then
-'            GetErrorDefinition.LocationError = "" GetErrorText("Premature termination of input at", CheckText, 4)
-            GetErrorDefinition.LocationError = "Du har angivet for få parametre til funktionen: " & ExtractText(CheckText2, "Toofewargumentssuppliedto", ";") & vbCrLf & "Det kan skyldes, at du har anvendt komma istedet for semikolon til at adskille parametrene. (du kan istedet tilføje et mellemrum på den ene side af kommaet.)"
-        Else
-            GetErrorDefinition.LocationError = "You have supplied too few argument to a function"
-        End If
+        GetErrorDefinition.LocationError = Sprog.A(898) & ExtractText(CheckText2, "Toofewargumentssuppliedto", ";") & vbCrLf & Sprog.A(899)
     ElseIf InStr(CheckText2, "incorrectsyntax:") > 0 Then
         GetErrorDefinition.Title = Sprog.SyntaxError
         GetErrorDefinition.Description = Sprog.SyntaxError & "."
@@ -99,13 +94,7 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     ElseIf InStr(CheckText2, "encounteredaLisperror") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
         GetErrorDefinition.Description = Sprog.A(755)
-'    ElseIf InStr(KommentarOutput, "Division by 0") > 0 Then ' maybe not relevant in SBCL
-'        fejltekst = Sprog.DivisionByZero
-'        CheckForError = True
-'    ElseIf InStr(CheckText, "expt:undefined:0toanegativeexponent") > 0 Then ' kommer ved mange alm beregninger uden fejl, flyttet ned med en anden
-'        GetErrorDefinition.Title = "Division by zero"
-'        GetErrorDefinition.Description = Sprog.DivisionByZero
-    ElseIf InStr(CheckText2, "Todebugthistry:debugmode(true)") > 0 Then ' anerror foran er ikke taget med, da på Mac er der ogspå punktum mellem
+    ElseIf InStr(CheckText2, "Todebugthistry:debugmode(true)") > 0 Then ' The leading anerror is not included, as on Mac there is also a period between
         If InStr(CheckText2, "expt:undefined:0toanegativeexponent") > 0 Then
             GetErrorDefinition.Title = "Division by zero"
             GetErrorDefinition.Description = Sprog.A(756)
@@ -115,18 +104,14 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
         End If
     ElseIf CheckText2 = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
         GetErrorDefinition.Title = "Variable error"
-        GetErrorDefinition.Description = Sprog.A(133) '"Du har bedt om at løse ligningen for en variabel der allerede er defineret. Indsæt en 'slet def:' kommando før ligningen"
+        GetErrorDefinition.Description = Sprog.A(133)
     ElseIf (omax.DefFejl = True) Then
         GetErrorDefinition.Title = "Definition error"
         GetErrorDefinition.Description = Sprog.A(757) & vbCrLf & VisDef
 #If Mac Then
     ElseIf (MaximaOutput = vbNullString) Then
         GetErrorDefinition.Title = "Timeout"
-        If Sprog.SprogNr = 1 Then
-            GetErrorDefinition.Description = "Beregningen blev afbrudt, da den tog meget lang tid. Det kan nogle gange hjælpe at prøve beregningen med indstillingen 'Numerisk' istedet for Eksakt eller Auto"
-        Else
-            GetErrorDefinition.Description = "Calculation timed out. Try again with numerical setting."
-        End If
+        GetErrorDefinition.Description = Sprog.A(884)
         GetErrorDefinition.Stop = False
 #End If
         Else

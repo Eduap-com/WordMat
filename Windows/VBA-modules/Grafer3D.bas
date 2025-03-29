@@ -1,26 +1,21 @@
 Attribute VB_Name = "Grafer3D"
 Option Explicit
 Sub OmdrejningsLegeme()
-Dim Kommando As String
+    Dim Kommando As String
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
-Dim Arr As Variant
-Dim i As Integer, UrlLink As String, cmd As String, j As Integer
+    Dim Arr As Variant
+    Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     Dim DefList As String
 
     Dim ea As New ExpressionAnalyser
-'    Dim ea2 As New ExpressionAnalyser
     
     ea.SetNormalBrackets
-'    ea2.SetNormalBrackets
 
-'On Error GoTo fejl
+    'On Error GoTo fejl
 
 #If Mac Then
-'    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra/HTML5/5.0/GeoGebra.html"
     UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra3dApplet.html"
 #Else
-'    UrlLink = "https://geogebra.org/calculator"
-'    UrlLink = "file:///C:/Program%20Files%20(x86)/WordMat/geogebra-math-apps/GeoGebraApplet.html"
     UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra3dApplet.html"
 #End If
     UrlLink = UrlLink & "?command="
@@ -29,7 +24,7 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     omax.ReadSelection
     
     
-        ' indsæt de markerede funktioner
+    ' Insert selected functions
     For i = 0 To omax.KommandoArrayLength
         Udtryk = omax.KommandoArray(i)
         Udtryk = Replace(Udtryk, "definer:", "")
@@ -37,11 +32,11 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
         Udtryk = Replace(Udtryk, "define:", "")
         Udtryk = Replace(Udtryk, "Define:", "")
         Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
-        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' tripel =
+        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' triple =
         Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
         Udtryk = Trim(Udtryk)
         If Len(Udtryk) > 0 Then
-            If InStr(Udtryk, "matrix") < 1 Then ' matricer og vektorer er ikke implementeret endnu
+            If InStr(Udtryk, "matrix") < 1 Then
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
@@ -58,24 +53,24 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         
                         cmd = "surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
-'                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        '                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & cmd
 
                     Else
                         fktudtryk = ReplaceIndepvarX(RHS)
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         cmd = "surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
-'                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        '                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & cmd
                         j = j + 1
                     End If
                 ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
-                ' kan først bruges med GeoGebra 4.0
+                    ' can only be used with GeoGebra 4.0
                     DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
                     cmd = Replace(ConvertToGeogebraSyntax(cmd), "+", "%2B") & ";"
                     cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2" & ";"
                     UrlLink = UrlLink & cmd
-'                    geogebrafil.CreateFunction "u" & j, udtryk, True
+                    '                    geogebrafil.CreateFunction "u" & j, udtryk, True
                 Else
                     Udtryk = ReplaceIndepvarX(Udtryk)
                     Udtryk = Replace(Udtryk, vbCrLf, "")
@@ -84,29 +79,18 @@ Dim i As Integer, UrlLink As String, cmd As String, j As Integer
                     DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
                     cmd = "surface(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ",2*pi);"
                     UrlLink = UrlLink & cmd
-'                    If Trim(Udtryk) = "x" Then 'lineære funktioner kan plottes implicit og bliver meget pænere
-'                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2" & ";"
-'                        UrlLink = UrlLink & cmd
-'                    Else
-'                        cmd = "z=sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
-'                        UrlLink = UrlLink & cmd
-'                        cmd = "z=-sqrt((" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2)" & ";"
-'                        UrlLink = UrlLink & cmd
-'                    End If
-
-'                    geogebrafil.CreateFunction "f" & j, udtryk, False
                     j = j + 1
                 End If
             End If
         End If
     Next
     
-'    UrlLink = UrlLink & "z^2=(" & Replace(geogebrafil.ConvertToGeoGebraSyntax(omax.Kommando), "+", "%2B") & ")^2-y^2"
+    '    UrlLink = UrlLink & "z^2=(" & Replace(geogebrafil.ConvertToGeoGebraSyntax(omax.Kommando), "+", "%2B") & ")^2-y^2"
     'omax.CodeForMaxima(omax.Kommando)
     
     OpenLink UrlLink, True
 
-Exit Sub '******************************************
+    Exit Sub '******************************************
 
     PrepareMaxima
     omax.ReadSelection
@@ -123,16 +107,16 @@ Exit Sub '******************************************
         Kommando = omax.ConvertToWordSymbols(Kommando)
         Kommando = Replace(Kommando, ";", ".")
         If Len(Kommando) > 0 And i = 0 Then
-            UserFormOmdrejninglegeme.TextBox_forskrift.Text = Kommando
+            UserFormSolidOfRevolution.TextBox_forskrift.Text = Kommando
         ElseIf Len(Kommando) > 0 And i = 1 Then
-            UserFormOmdrejninglegeme.TextBox_forskrift2.Text = Kommando
+            UserFormSolidOfRevolution.TextBox_forskrift2.Text = Kommando
         End If
         i = i + 1
     Loop
     
     Application.ScreenUpdating = True
     
-    UserFormOmdrejninglegeme.Show
+    UserFormSolidOfRevolution.Show
     
 Fejl:
 slut:
@@ -147,10 +131,9 @@ Sub Plot3DGraph()
     PrepareMaxima
     omax.ReadSelection
     
-    '   Set UF2Dgraph = New UserForm2DGraph
     forskrifter = omax.FindDefinitions
     If Len(forskrifter) > 3 Then
-'        forskrifter = Mid(forskrifter, 2, Len(forskrifter) - 3) 'fjernet 1.33
+'        forskrifter = Mid(forskrifter, 2, Len(forskrifter) - 3) 'removed 1.33
         Arr = Split(forskrifter, ListSeparator)
         forskrifter = ""
     

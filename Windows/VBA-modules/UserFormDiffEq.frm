@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDiffEq 
-   Caption         =   "Løsning af differentialligning"
+   Caption         =   "Solve differential equation"
    ClientHeight    =   4920
    ClientLeft      =   -30
    ClientTop       =   75
@@ -13,14 +13,14 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' Form to enter variables and conditions for solving differential equations
 
 Public DefS As String
 Public Vars As String
 Public TempDefs As String
 Public luk As Boolean
-Private Svars As Variant ' array der holder variabelnavne som de skal returneres dvs. uden asciikonvertering
+Private Svars As Variant ' array to hold variablenames to be returned (without asciiconvertion)
 
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)
@@ -67,7 +67,7 @@ Dim i As Integer
     TempDefs = ""
     For i = 0 To UBound(Arr)
         If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> TextBox_funktion.Text Then ' kan ikke definere variabel der løses for
+            If Split(Arr(i), "=")(0) <> TextBox_funktion.Text Then ' cant define variable to be solved for
                 TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
                 MsgBox Sprog.A(252) & " " & TextBox_funktion.Text & " " & Sprog.A(253), vbOKOnly, Sprog.Error
@@ -88,7 +88,7 @@ Private Sub Label_solvenum_Click()
    Arr = Split(Label_ligning.Caption, "=")
    If UBound(Arr) > 0 Then F = Trim(Arr(1))
    If Len(Trim(Arr(0))) > 2 Then
-      MsgBox "Differentialligningen skal være på formen y'=...  for at den kan løses numerisk" & vbCrLf & "", vbOKOnly, "Fejl"
+      MsgBox Sprog.A(847), vbOKOnly, Sprog.Error
       Exit Sub
    End If
    luk = True
@@ -127,9 +127,9 @@ Dim svar As String
     
     luk = True
     Label_ligning.Caption = FormatDefinitions(Replace(Label_ligning.Caption, "=", " = "))
-    Label_ligning.Caption = Replace(Label_ligning.Caption, ChrW(180), "'") ' converttoascii indfører 180. Der står det er nødvendigt, men ved ikke hvorfor denne ser bedre ud
+    Label_ligning.Caption = Replace(Label_ligning.Caption, ChrW(180), "'") ' converttoascii introduces 180. It may be neccesary, but this looks better
 
-    If InStr(Label_ligning.Caption, ChrW(180) & ChrW(180)) > 0 Then ' "´´" to accenter der vender opad
+    If InStr(Label_ligning.Caption, ChrW(180) & ChrW(180)) > 0 Then ' "´´" two accents goint up
         Label_diffy.visible = True
         TextBox_starty2.visible = True
         Label_y2.visible = True
@@ -153,10 +153,9 @@ Dim svar As String
     For i = 0 To UBound(Svars)
         If Svars(i) <> "" Then
             svar = omax.ConvertToWordSymbols(Svars(i))
-            TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac    ' midlertidige definitioner
+            TextBox_def.Text = TextBox_def.Text & svar & "=" & VbCrLfMac    ' temp definitions
         End If
     Next
-
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -191,11 +190,7 @@ Sub SetCaptions()
     Label_temp.Caption = Sprog.A(764)
     Label_cancel.Caption = Sprog.Cancel
     Label_ok.Caption = Sprog.OK
-    If Sprog.SprogNr = 1 Then
-        Label_solvenum.Caption = "Løs numerisk"
-    Else
-        Label_solvenum.Caption = "Solve numerical"
-    End If
+    Label_solvenum.Caption = Sprog.A(887)
 End Sub
 Private Sub Label_solvenum_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
     Label_solvenum.BackColor = LBColorPress

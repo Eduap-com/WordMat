@@ -13,11 +13,12 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' This form is used when an equation cannot be solved, and the user must choose an alternative CAS-engine
+' It is somewhat deprecated, since version 1.33, when equation solving automatically goes to numerical solver
 Public ChosenCAS As Integer
-
 Private EventsCol As New Collection
+
 Sub SetEscEvents(ControlColl As Controls)
 ' SetEscEvents Me.Controls     in Initialize
     Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
@@ -44,7 +45,6 @@ Sub SetEscEvents(ControlColl As Controls)
         End If
     Next
 End Sub
-
 
 Private Sub Label_cancel_Click()
     ChosenCAS = -1
@@ -88,13 +88,10 @@ Label_GeoGebraBrowser.Enabled = True
 SetAllInactive
 If CASengine = 0 Then
     Label_MaximaSym.Enabled = False
-'    Label_GeoGebraSym.SetFocus
 ElseIf CASengine = 1 Then
     Label_GeoGebraBrowser.Enabled = False
-'    Label_MaximaSym.SetFocus
 ElseIf CASengine = 2 Then
     Label_GeoGebraSym.Enabled = False
-'    Label_MaximaSym.SetFocus
 End If
     SetCaptions
 End Sub

@@ -21,7 +21,7 @@ Sub ReplaceToASCIIseq()
             If i > VBC.CodeModule.CountOfLines Then Exit For
             s = ReplaceLineToASCIIseq(VBC.CodeModule.Lines(i, 1))
             If s <> "" Or i > 2 Then
-                VBC.CodeModule.DeleteLines i, 1 ' der er en replaceline, måske den er bedre
+                VBC.CodeModule.DeleteLines i, 1 ' there is a replaceline, maybe it's better
                 VBC.CodeModule.InsertLines i, s
             Else
                 VBC.CodeModule.DeleteLines i, 1 ' import/export introduces a blank line at the top of the code for forms. This removes these blank lines
@@ -193,7 +193,7 @@ Public Sub ExportAllModules()
     Dim ModuleBackupFolder As String
     Dim NoOfModules As Integer
     Dim backupFolder As String, n As Integer, ns As String
-    '    Dim UfWait2 As UserFormWaitForMaxima ' det duer ikke at bruge noget der refererer uden for vbamodul, da de bliver slettet, og så fejler hele modulet og der kan ikke importeres
+    '    Dim UfWait2 As UserFormWaitForMaxima ' It is not good to use anything that references outside the VBA module, as they will be deleted, and then the entire module will fail and cannot be imported.
     '    Set UfWait2 = New UserFormWaitForMaxima
     On Error GoTo Fejl
     
@@ -237,23 +237,9 @@ Public Sub ExportAllModules()
         n = n + 1
         ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup" & n & "\"
         
-        '        If MsgBox("There is already a backup-folder. Do you want to overwrite the contents?", vbYesNo, "Confirm") = vbYes Then
-        '            Err.Clear
-        '            On Error Resume Next
-        '            Kill ModuleBackupFolder & "*.*"
-        '            RmDir ModuleBackupFolder
-        '            On Error GoTo fejl
-        '            If Err.Number > 0 Then
-        '                MsgBox "Could not delete backupfolder"
-        '                GoTo slut
-        '            End If
-        '        Else
-        '            MsgBox "Export aborted", vbOKOnly, "Aborted"
-        '            GoTo slut
-        '        End If
     End If
-    Name ModuleFolder As ModuleBackupFolder ' omdøber eksisterende folder til backup
-    ModuleFolder = FolderWithVBAProjectFiles ' genskaber ny folder
+    Name ModuleFolder As ModuleBackupFolder ' renames existing folders for backup
+    ModuleFolder = FolderWithVBAProjectFiles ' recreates new folder
     If ModuleFolder = "Error" Then
         MsgBox "Export Folder does not exist and could not be created", vbOKOnly, "Error"
         Exit Sub
@@ -270,7 +256,7 @@ Public Sub ExportAllModules()
     
     NoOfModules = wkbSource.VBProject.VBComponents.Count
     
-    '    If wkbSource.VBProject.Protection = 1 Then ' dette check kan få Word til at crashe
+    '    If wkbSource.VBProject.Protection = 1 Then ' this check can cause Word to crash
     '      MsgBox "The VBA in this workbook is protected, not possible to export the code", vbOKOnly, "Error"
     '      Exit Sub
     '    End If
@@ -282,7 +268,7 @@ Public Sub ExportAllModules()
         bExport = True
         szFileName = cmpComponent.Name
 
-        ' naar der importeres oveni VBAmodul omdoebes til VBAmodul1. Det aendres tilbage
+        ' when importing above VBA module is renamed to VBA module1. It is changed back
         If cmpComponent.Name = "VBAmodul1" Then cmpComponent.Name = "VBAmodul"
         If cmpComponent.Name = "VBAmodul11" Then cmpComponent.Name = "VBAmodul"
 
@@ -323,7 +309,7 @@ Public Sub ExportAllModules()
     A.WriteLine ("VBA-exported of Project " & wkbSource.VBProject.Name & " created " & Now())
     A.Close
     
-    C1 = CountFilesInFolder(ModuleFolder, True) ' tæl antal bas, cls og frm filer
+    C1 = CountFilesInFolder(ModuleFolder, True) ' count no of bas, cls og frm filer
     C2 = CountFilesInFolder(ModuleBackupFolder, True)
     If C1 > 2 Then
         If C1 <> NoOfModules Then
@@ -348,7 +334,7 @@ slut:
     '    MsgBox "Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Export complete"
 End Sub
 Sub ImportAllModules()
-' Hvis denne sub køres via en commandbutton, så virker det ikke, så går det galt med Userforms og VBAmodul
+' If this sub is run via a command button, it doesn't work, then something goes wrong with Userforms and VBA module
     Dim D As String, q As String
     Dim wkbSource As Document
     Dim szSourceWorkbook As String
@@ -480,8 +466,9 @@ Function CountFilesInFolder(FolderPath As String, Optional OnlyModules As Boolea
     CountFilesInFolder = FileCount
 End Function
 Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
-' Sletter alle moduler, klasser og forms, bortset fra ThisDocument
-' Hvis PromptOK=true så slettes ikke dette modul VBAmodul.
+' Deletes all modules, classes and forms, except ThisDocument
+' If PromptOK=true then this module VBAmodul is not deleted.
+
     Dim bExport As Boolean
     Dim wkbSource As Document
     Dim szSourceWorkbook As String
@@ -530,9 +517,7 @@ Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
 End Sub
 
 Function GetTimeString(ByVal D As Date) As String
-
-GetTimeString = Year(D) & Month(D) & Day(D) & AddZero(Hour(D)) & AddZero(Minute(D)) & AddZero(Second(D))
-
+    GetTimeString = Year(D) & Month(D) & Day(D) & AddZero(Hour(D)) & AddZero(Minute(D)) & AddZero(Second(D))
 End Function
 
 Function AddZero(n As Integer) As String
@@ -544,8 +529,8 @@ End If
 End Function
 
 Sub CommentOutThisDocument()
-' ThisDocument kan ikke slettes og importes. Måske dette kan bruges
-   Dim VBC As Object 'VBComponent '
+' ThisDocument cannot be deleted and imported. Maybe this can be used
+    Dim VBC As Object 'VBComponent '
    Dim i As Long, s As String
       
    For Each VBC In ActiveDocument.VBProject.VBComponents
@@ -641,7 +626,7 @@ Sub BackupThisDocument()
     destinationPath = backupFolder & fileName & fileNumber & fileExtension
     
     If Dir(BackupFilePath) <> vbNullString Then
-        Name BackupFilePath As destinationPath   ' omdøber eksisterende backup til backup med nummer
+        Name BackupFilePath As destinationPath   ' renames existing backup to backup with number
     End If
        
     Set fso = CreateObject("Scripting.FileSystemObject")

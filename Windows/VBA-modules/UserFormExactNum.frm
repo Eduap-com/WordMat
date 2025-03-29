@@ -13,8 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+
 Dim start As Single, j As Integer ' time
 Private Sub UserForm_Activate()
     start = Timer    ' Set start time.
@@ -30,7 +30,6 @@ Private Sub UserForm_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 End Sub
 
 Private Sub UserForm_Initialize()
-'    Call RemoveCaption(Me) ' virker ikke særlig godt
     Me.Caption = ""
     Label_auto.Caption = Sprog.A(712)
     Label_exact.Caption = Sprog.A(710)
@@ -38,7 +37,6 @@ Private Sub UserForm_Initialize()
 #If Mac Then
 '    Me.Height = 100
 #End If
-
 End Sub
 Public Sub SetAuto()
     Label_auto.BorderStyle = fmBorderStyleSingle

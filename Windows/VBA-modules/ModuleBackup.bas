@@ -1,5 +1,6 @@
 Attribute VB_Name = "ModuleBackup"
 Option Explicit
+
 Dim BackupAnswer As Integer
 Dim SaveTime As Single
 

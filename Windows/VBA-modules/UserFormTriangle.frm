@@ -1,20 +1,20 @@
 VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormTrekant 
-   Caption         =   "Trekantsløser"
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormTriangle 
+   Caption         =   "Triangle solver"
    ClientHeight    =   6585
    ClientLeft      =   -30
    ClientTop       =   75
    ClientWidth     =   11130
-   OleObjectBlob   =   "UserFormTrekant.frx":0000
+   OleObjectBlob   =   "UserFormTriangle.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
-Attribute VB_Name = "UserFormTrekant"
+Attribute VB_Name = "UserFormTriangle"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+    
     Dim vA As Double
     Dim vB As Double
     Dim vC As Double
@@ -100,8 +100,6 @@ On Error GoTo Fejl
     
     If Not succes Then Exit Sub
         
-        
-    '
     gemsb = Selection.ParagraphFormat.SpaceBefore
     gemsa = Selection.ParagraphFormat.SpaceAfter
             
@@ -115,7 +113,7 @@ On Error GoTo Fejl
     End With
 
     
-    ' indsæt i Word
+    ' insert into Word
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
@@ -142,7 +140,7 @@ On Error GoTo Fejl
     
 
     If CheckBox_tal.Value Then
-        bc = 3 ' antal betydende cifre på sidelængde på figur
+        bc = 3 ' number of significant digits in side length of figure
         If Log10(SA) > bc Then bc = Int(Log10(SA)) + 1
         If Log10(sb) > bc Then bc = Int(Log10(sb)) + 1
         If Log10(sc) > bc Then bc = Int(Log10(sc)) + 1
@@ -156,7 +154,7 @@ On Error GoTo Fejl
     Selection.Collapse wdCollapseEnd
     Selection.TypeParagraph
     
-    'Hvis 2 løsninger
+    'If 2 solutions
     If vA2 > 0 Then
     MsgBox Sprog.A(783), vbOKOnly, Sprog.A(785)
     Set t = ActiveDocument.Tables.Add(Selection.Range, 1, 2)
@@ -172,7 +170,7 @@ On Error GoTo Fejl
     TypeLine TextBox_captionsc.Text & " = " & ConvertNumberToStringBC(sc2), Not (CBool(ConvertStringToNumber(TextBox_sc.Text)))
         
     If CheckBox_tal.Value Then
-        bc = 3 ' antal betydende cifre på sidelængde på figur
+        bc = 3 ' number of significant digits in side length of figure
         If Log10(sa2) > bc Then bc = Int(Log10(sa2)) + 1
         If Log10(sb2) > bc Then bc = Int(Log10(sb2)) + 1
         If Log10(sc2) > bc Then bc = Int(Log10(sc2)) + 1
@@ -306,25 +304,25 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
     ElseIf nv + ns > 3 Then
         If nv = 3 And ns = 1 Then
             If vA > 0 And vB > 0 And vC > 0 And vA + vB + vC <> 180 Then
-                statustext = Sprog.A(211) ' "Vinkelsummen er ikke 180"
+                statustext = Sprog.A(211) ' "The sum of the angles is not 180"
                 If advarsler Then MsgBox Sprog.A(211), vbOKOnly, Sprog.Error
                 Exit Sub
             End If
         Else
-            statustext = Sprog.A(212) ' "Du har indtastet for mange sider/vinkler."
+            statustext = Sprog.A(212) ' "You have entered too many sides/angles."
             If advarsler Then MsgBox Sprog.A(212) & vbCrLf & Sprog.A(213), vbOKOnly, Sprog.Error
             Exit Sub
         End If
     Else
         If nv = 3 And ns = 0 Then
-        statustext = Sprog.A(214) ' "Mindst en side skal være kendt. 3 vinkler er ikke nok."
+        statustext = Sprog.A(214) ' "At least one side must be known. 3 angles are not enough."
         If advarsler Then MsgBox Sprog.A(214) & vbCrLf & Sprog.A(213), vbOKOnly, Sprog.Error
         Exit Sub
         End If
     End If
     
     
-    ' 3. vinkel beregnes hvis 2 kendes
+    ' 3. angle is calculated if 2 are known
     If nv = 2 Then
     If vA > 0 And vB > 0 And vC = 0 Then
         vC = 180 - vA - vB
@@ -338,7 +336,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
     End If
     End If
     
-    'retvinklede
+    'right angled
     If vC = 90 Then
         If ns = 2 Then
             If SA > 0 And sb > 0 Then
@@ -458,7 +456,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         GoTo slut
     End If
     
-    ' Vilkårlig trekant
+    ' Arbitrary triangle
     If ns = 3 Then
         vA = Arccos((sc ^ 2 + sb ^ 2 - SA ^ 2) / (2 * sc * sb)) * 180 / PI
         vB = Arccos((SA ^ 2 + sc ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
@@ -485,16 +483,16 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         End If
     ElseIf ns = 2 Then
         If vA > 0 Then
-            If sb > 0 And sc > 0 Then ' sider om vinkel
+            If sb > 0 And sc > 0 Then ' sides next to angle
                 SA = Sqr(sb ^ 2 + sc ^ 2 - 2 * sb * sc * Cos(vA * PI / 180))
                 vB = Arccos((SA ^ 2 + sc ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vC = 180 - vB - vA
                 AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(223), san & "=" & VBA.ChrW(8730) & "(" & sbn & "^2 + " & scn & "^2 - 2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & "))=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - 2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "))=" & ConvertNumberToStringBC(SA)
                 AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
-            ElseIf SA > 0 And sb > 0 Then ' sider ikke om vinkel
+            ElseIf SA > 0 And sb > 0 Then ' sides not next to angle
                 D = SA ^ 2 - sb ^ 2 * Sin(vA * PI / 180) ^ 2
-                If D < 0 Then ' ingen løsning
+                If D < 0 Then ' no solution
                     GoTo Fejl
                 End If
                 sc = sb * Cos(vA * PI / 180) + Sqr(D)
@@ -518,9 +516,9 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                     AddElaborate Sprog.A(215) & " " & vBn & VBA.ChrW(8322) & " findes vha. en cosinusrelation", vBn & "_2=cos^(-1) ((" & san & "^2 + " & scn & "_2^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & "" & VBA.ChrW(183) & scn & "_2))=cos^(-1) ((" & ConvertNumberToStringBC(sa2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
                     AddElaborate Sprog.A(215) & " " & vCn & VBA.ChrW(8322) & " " & Sprog.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
                 End If
-            ElseIf SA > 0 And sc > 0 Then ' sider ikke om vinkel
+            ElseIf SA > 0 And sc > 0 Then ' sides not next to angle
                 D = SA ^ 2 - sc ^ 2 * Sin(vA * PI / 180) ^ 2
-                If D < 0 Then ' ingen løsning
+                If D < 0 Then ' no solution
                     GoTo Fejl
                 End If
                 sb = sc * Cos(vA * PI / 180) + Sqr(D)
@@ -546,16 +544,16 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 End If
             End If
         ElseIf vB > 0 Then
-            If SA > 0 And sc > 0 Then ' sider om vinkel
+            If SA > 0 And sc > 0 Then ' sides next to angle
                 sb = Sqr(SA ^ 2 + sc ^ 2 - 2 * SA * sc * Cos(vB * PI / 180))
                 vA = Arccos((sb ^ 2 + sc ^ 2 - SA ^ 2) / (2 * sb * sc)) * 180 / PI
                 vC = 180 - vB - vA
                 AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(223), sbn & "=" & VBA.ChrW(8730) & "(" & san & "^2 + " & scn & "^2 - 2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vBn & "))=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - 2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "))=" & ConvertNumberToStringBC(sb)
                 AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
-            ElseIf SA > 0 And sb > 0 Then ' sider ikke om vinkel
+            ElseIf SA > 0 And sb > 0 Then ' sides not next to angle
                 D = sb ^ 2 - SA ^ 2 * Sin(vB * PI / 180) ^ 2
-                If D < 0 Then ' ingen løsning
+                If D < 0 Then ' no solution
                     GoTo Fejl
                 End If
                 sc = SA * Cos(vB * PI / 180) + Sqr(D)
@@ -579,9 +577,9 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                     AddElaborate Sprog.A(215) & " " & vAn & VBA.ChrW(8322) & " " & Sprog.A(223), vAn & "_2=cos^(-1) ((" & sbn & "^2 + " & scn & "_2^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & "" & VBA.ChrW(183) & scn & "_2))=cos^(-1) ((" & ConvertNumberToStringBC(sb2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sa2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
                     AddElaborate Sprog.A(215) & " " & vCn & VBA.ChrW(8322) & " " & Sprog.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
                 End If
-            ElseIf sb > 0 And sc > 0 Then ' sider ikke om vinkel
+            ElseIf sb > 0 And sc > 0 Then ' sides not next to angle
                 D = sb ^ 2 - sc ^ 2 * Sin(vB * PI / 180) ^ 2
-                If D < 0 Then ' ingen løsning
+                If D < 0 Then ' no solution
                     GoTo Fejl
                 End If
                 SA = sc * Cos(vB * PI / 180) + Sqr(D)
@@ -607,16 +605,16 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 End If
             End If
         Else ' vc>0
-            If sb > 0 And SA > 0 Then ' sider om vinkel
+            If sb > 0 And SA > 0 Then ' sides next to angle
                 sc = Sqr(sb ^ 2 + SA ^ 2 - 2 * sb * SA * Cos(vC * PI / 180))
                 vB = Arccos((sc ^ 2 + SA ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vA = 180 - vB - vC
                 AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(223), scn & "=" & VBA.ChrW(8730) & "(" & sbn & "^2 + " & san & "^2 - 2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & san & VBA.ChrW(183) & "cos(" & vCn & "))=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - 2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "))=" & ConvertNumberToStringBC(sc)
                 AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
                 AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
-            ElseIf sc > 0 And sb > 0 Then ' sider ikke om vinkel
+            ElseIf sc > 0 And sb > 0 Then ' sides not next to angle
                 D = sc ^ 2 - sb ^ 2 * Sin(vC * PI / 180) ^ 2
-                If D < 0 Then ' ingen løsning
+                If D < 0 Then ' no solution
                     GoTo Fejl
                 End If
                 SA = sb * Cos(vC * PI / 180) + Sqr(D)
@@ -640,9 +638,9 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                     AddElaborate Sprog.A(215) & " " & vBn & VBA.ChrW(8322) & " " & Sprog.A(223), vBn & "_2=cos^(-1) ((" & scn & "^2 + " & san & "_2^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & "" & VBA.ChrW(183) & san & "_2))=cos^(-1) ((" & ConvertNumberToStringBC(sc2) & "^2 + " & ConvertNumberToStringBC(sa2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
                     AddElaborate Sprog.A(215) & " " & vAn & VBA.ChrW(8322) & " " & Sprog.A(216), vAn & "_2=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
                 End If
-            ElseIf SA > 0 And sc > 0 Then ' sider ikke om vinkel
+            ElseIf SA > 0 And sc > 0 Then ' sides not next to angle
                 D = sc ^ 2 - SA ^ 2 * Sin(vC * PI / 180) ^ 2
-                If D < 0 Then ' ingen løsning
+                If D < 0 Then ' no solution
                     GoTo Fejl
                 End If
                 sb = SA * Cos(vC * PI / 180) + Sqr(D)
@@ -691,7 +689,7 @@ End Sub
 Sub InsertTriangle(r As Range, ByVal vA As Double, ByVal sb As Double, ByVal sc As Double, NameA As String, NameB As String, NameC As String, Namesa As String, Namesb As String, Namesc As String)
 '#End If
 
-' givet vinkel A og siderne b og c tegner trekanten skaleret
+' given angle A and sides b and c draw the triangle to scale
 Dim maxs As Double
 Dim xmin As Double
 Dim nsa As Double
@@ -707,13 +705,12 @@ Dim F As Double
 Dim SA As Double
 
 
-
 F = 200
 
 SA = Sqr(sb ^ 2 + sc ^ 2 - 2 * sb * sc * Cos(vA * PI / 180))
 
 If SA <= 0 Or sb <= 0 Or sc <= 0 Then
-    MsgBox "Der er sider der er 0", vbOKOnly, Sprog.Error
+    MsgBox Sprog.A(870), vbOKOnly, Sprog.Error
     GoTo slut
 End If
 
@@ -745,7 +742,7 @@ yc = yc + 15
     Set cv = ActiveDocument.Shapes.AddCanvas(0, 0, CSng(Maks(xb, xc) + 30), CSng(yc + 30), r)
     cv.WrapFormat.Type = wdWrapInline
 
-    AddLabel NameA, xa - 10, yc, cv  ' yc-5 fjernet for at ikke skal stå oveni figur
+    AddLabel NameA, xa - 10, yc, cv  ' yc-5 removed so it doesn't stand on top of the figure
     AddLabel NameB, xb - 4, 0, cv
     AddLabel NameC, xc + 5, yc, cv
     
@@ -987,13 +984,13 @@ OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.A(773)
 OptionButton_reth.Caption = TextBox_captionC.Text & " " & Sprog.A(773)
 End Sub
 Private Sub TextBox_captionA_Change()
-If OptionButton_navngivstorlille.Value = True Then
-    TextBox_captionA.Text = VBA.UCase(TextBox_captionA.Text)
-    TextBox_captionsa.Text = VBA.LCase(TextBox_captionA.Text)
-ElseIf OptionButton_navngivsiderAB.Value = True Then
-    OpdaterNavngivning
-End If
-OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.A(773)
+    If OptionButton_navngivstorlille.Value = True Then
+        TextBox_captionA.Text = VBA.UCase(TextBox_captionA.Text)
+        TextBox_captionsa.Text = VBA.LCase(TextBox_captionA.Text)
+    ElseIf OptionButton_navngivsiderAB.Value = True Then
+        OpdaterNavngivning
+    End If
+    OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.A(773)
 End Sub
 
 Private Sub TextBox_captionB_Change()

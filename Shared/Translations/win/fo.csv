@@ -1,0 +1,903 @@
+0#£Hjálp við Maxima-boðum
+1#£Seta talaða líkning inn
+2#£Líma tallíkningina inn til tilvísing
+3#£Seta tilvísing í líkningina
+4#£Bókamerki
+5#£Skriva navnið á líkningini
+6#£Set skattaeyðmerkingarnummar
+7#£Num.
+8#£Set/setið skattamatspart nr.
+9#£Dagføra skattasamleikanummar
+10#£Núverandi nøvn á líkningum
+11#£Skalt tú seta tilvísing inn í líkningina seinni, veljið 'Set reference to equation' í WordMat mat-valmyndini undir 'Insert equation'.
+12#£Navnið er longu til
+13#£Navnið má ikki innihalda pláss
+14#£Tilvísing til skattameting
+15#£Staðsetning
+16#£Vinstra síða
+17#£Rætt
+18#£Nummar
+19#£Bið/biðið um navnið á tilvísingini, tá ið tú setir tað inn
+20#£WordMat gevur tær møguleika at gera støddfrøðiligar útrokningar í Word. WordMat core er open source og er gjørd atgongd ókeypis.\r\nVið WordMat core eru hesi onnur forrit sett upp:\r\nMaxima, GeoGebra math-apps-bundle, Math fonts.\r\nValfrjálsir lutir: GeoGebra 5, Graph, WordMat+. Sjá meira undir loyvi\r\nWordMat er gjørt av Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2025.
+21#£Ein nýggj útgáva av WordMat er klár til niðurhal.\r\nHvat er nýtt: \r\n
+22#£Tú/verður/verða nú umdirigeraður/umdirigerað til niðurtakssíðuna
+23#£Nýggj útgáva
+24#£Skriva eitt tal av stigum, og eitt borð verður automatisk gjørt, sum kann fyllast út við stigunum. Tá tú hevur fylt tað út, virkjar tú ynsktu afturgongdina.
+25#£Tað er ikki viðmælt at gera afturgongd við meira enn 200 stigum í eini Word-töflu. Brúka Excel, um tú vilt gera afturgongd á so nógvum punktum.
+26#£Eitt mistak var gjørt. Tað er helst ein villa í innkomnu tølunum.
+27#£Tú mást gera eina töflu við tveimum dálkum. X virði í vinstra dálki og Y virði í høgra dálki. Brøv verða skúgvað til viks. Afturgongd verður framd á merktu tølunum. Um eingin er valdur, verður afturgongd gjørd á øll tølini í töfluni.
+28#£Ynskta afturgongdin kann ikki gerast í hesum punktunum.
+29#£Lineær afturgongd framd við WordMat: $Tab
+30#£Eksponentiell regression framd við WordMat: $Tab
+31#£Power regression framd við WordMat: $Tab
+32#£Styrkisafturgongd kann ikki gerast á hesum punktum. Øll eiga at vera positiv og mugu ikki vera 0.
+33#£Sérsniðin afturgongd við featurenum
+34#£Framført við at brúka WordMat
+35#£Lýs raðið á polynomial regressionini (1-
+36#£(Hægsta raðið er avgjørt av talinum av stigum)
+37#£Bílegging
+38#£Polynomisk afturgongd av stigi
+39#£Sérsniðin afturgongd
+40#£Virka
+41#£Tal av desimalum
+42#£Byrjaandi git (Skrivað í forminum a=2 ; c=10)
+43#£Neyvleikin er settur sera høgt. Roknitíðin kann vera ógvuliga long ella miseydnast. Royn/roynið aftur við lægri innstilling.
+44#£Neyvleikin er settur rættiliga høgt. Útrokningartíðin kann vera long ella skeiv. Royn/roynið aftur við lægri innstilling.
+45#£Neyvleikin kann ikki vera neiligur. Vel eitt positivt heltal
+46#£Neyvleikin er óvirkin. Vel eitt positivt heiltal.
+47#£Set bendilin í eitt støddfrøðiøki
+48#£Útrokningar kunnu ikki gerast á skilgreiningarfeltum. Tú kanst brúka tína skilgreining niðanfyri til eina útrokning.
+49#£Orðatakið er differentierað við WordMat.
+50#£Hugtakið kundi ikki skiljast ímillum
+51#£Slá inn variabel
+52#£Ein høvuðsfunktur er tøkur við at brúka "Master-funktión" í WordMat.
+53#£Heitið kundi ikki integrerast
+54#£Eitt mistak var gjørt. WordMat er helst ikki rætt uppsett. Royn at seta inn aftur, møguliga við Antivirus óvirkað. Um skúlin hjá tær hevur samstarv, kann "dll connection method" innstillingin í Stillingar/Advanced loysa trupulleikan
+55#£Ein villa kom upp, tá ið hann royndi at starta Maxima
+56#£Ójavni er loystur fyri
+57#£við at brúka WordMat.
+58#£Ójavni hevur øll tøl sum loysn.
+59#£Ójavni hevði ongar loysnir í $C fyri variabel
+60#£Ójavni hevði ongar loysnir innan $R fyri variabel
+61#£við hesum forsendum/skilgreiningum:
+62#£Lýsa
+63#£Einki internetsamband
+64#£Trýst á OK fyri at byrja dagføringina.
+65#£WordMat knappaborðsgenvejar
+66#£Snarvegir í Word Math Field
+67#£Tú kanst gera tínar egnu snarvegir til støddfrøðiøki í Word ella broyta tær verandi. Tá tú ert í einum støddfrøðiøki, finnur tú flipan Equation Function/Design. Undir funktiónum klikkar tú á lítla pílinum niðast í høgra horni. Næst velur tú "støddfrøðilig autokorrektur"
+68#£Formlar
+69#£Strika skilgreiningar
+70#£Konstantir
+71#£Finn virðir á netinu
+72#£Umset/umsetið líkningar til LaTex. (Snarvegurin alt+T umbroytir eina einstaka líkning)
+73#£Kopiera til klippiborð
+74#£Vísa oyðiblað
+75#£Kenni tól aftur og ikki skriva tey við kursiv
+76#£Brúka Maxima til LaTex umbreyting
+77#£Umvend øll
+78#£Umvend og far til næsta
+79#£Áðrenn
+80#£Eftir
+81#£Eingin
+82#£Skriva sjálvur/sjálv
+83#£Hjúpandi persónar
+84#£Tað eru ikki fleiri støddfrøðiøki í restini av hesum skjalinum.
+85#£Loys samanbundnar differentiallíkningar numeriskt
+86#£Differentiallíkningar
+87#£Byrjunarvirði
+88#£Stig
+89#£Knýt punkt
+90#£Skoða reglugerðir
+91#£Seta inn lista
+92#£Seta inn töflu
+93#£Seta graf inn
+94#£Helst uttanfyri skilgreiningarøkið! \r\nStilla xmin/xmax
+95#£Eitt mistak var gjørt. Hygg at tølunum á xmin og xmax
+96#£Einki felagsskap
+97#£Ein villa kom upp, tá ið hon royndi at seta graf inn. Tað er helst ein setningsfrøðivilla onkustaðni í eini skilgreining ella líknandi
+98#£Ein villa kom fyri í royndini at seta Excel-ark inn. Hetta kann vera, tí Excel er krasjað fyrr. Lat/latið um neyðugt opin Excel-ark aftur og lat Excel upp, áðrenn tú roynir aftur ígjøgnum WordMat.
+99#£Ein villa kom upp, tá ið tú royndi at umseta tína boð til Maxima setningafrøði.
+100#£Ein villa kom upp, tá ið royndin var at umseta Maxima-úttakið til Word syncrate.
+101#£Loysnin er óviss. Royn/roynið um neyðugt. Numerisk loysn
+102#£Av tí at tað er ein trigonometrisk líkning, eru óendaliga nógvar loysnir. Bert ein av hesum loysnunum er listað.
+103#£Ikki allar loysnir eru funnnar.
+104#£Villa: Division við null.
+105#£Setningsfrøðilig villa. Tað er ein villa í notanini.
+106#£Setningsfrøðilig villa. Ein skeivur bókstavur er brúktur. Kanska manglar multiplikationsmerki ella komma ístaðin; sum listaskiljari.
+107#£Ávaring: Tú hevur biðið um at loysa eina líkningarskipan, men specificerað færri variabler enn líkningar. Bert tær fyrstu líkningarnar eru loystar. Kanna sjálvur/sjálv, um seinasta líkningin/líkningarnar passa.
+108#£Eftirfarandi villuboð komu frá Maxima:
+109#£Maxima villuboð
+110#£WordMat fann ikki mappuna "Program files"
+111#£Ein villa kom upp, tá ið hann royndi at lata upp:
+112#£Kann ikki fáa samband við ambætaran
+113#£Á hesum staðinum í skjalinum er eftirfarandi skilgreint:
+114#£Tað eru ongar frágreiðingar í hesi løtuni í skjalinum.
+115#£Undan líkningarskilgreiningum kemur ein 'define equation:' kommando Slá inn skilgreiningina av nýggju líkningini\r\nSkilgreiningin kann nýtast í restini av skjalinum, men ikki fyrr.\r\n Um ein 'delete def:' kommando er sett longri niðri í skjalinum, kann hon ikki nýtast aftaná.\r\nFleiri líkningar kunnu lýsast við at skilja skilgreiningarnar sundur við ; \r\nf.eg. lig1: c=3*d ; Lig2: A=2*B
+116#£Tú kanst ikki lýsa eina avleidda funktion.\r\nStrika hesa skilgreiningina: \r\n
+117#£Tað er ein feilur í skilgreiningini:
+118#£Tað verður skúgvað til viks. Men rætta tað, so tú ikki fært hesa villuna við hvørjari útrokning.
+119#£... restin tikin burtur.
+120#£Tín/tykkara skúli/felagsskapur hevur eitt virkið felagsskap. Nú kanst tú brúka WordMat+
+121#£Tíverri. Skúlin hjá tær/tykkum hevur ikki eitt virkið felagsskap.
+122#£Skriva skilgreiningina av tí nýggja funktiónini\r\nSkilgreiningin kann nýtast í restini av skjalinum, men ikki fyrr.\r\n Um ein 'delete def:' kommando er sett longri niðri í skjalið, kann hon ikki nýtast eftir tað.\r\nFleiri funktiónir kunnu lýsast við at skilja skilgreiningarnar sundur við " & ListSeparator\r\ne.g. f(x)=x " & ListSeparator & " g(x)=2x+1
+123#£Nýggjur eiginleiki
+124#£Nýggj líkning
+125#£Lýs líkningina
+126#£Lýsa
+127#£Tíðarskeiðið er sera langt. Vilt tú líma tað inn í Word?\r\nWord kann gerast sera seint. Royn at loysa numeriskt ístaðin.\r\nTú kanst síggja úttakið niðanfyri:
+128#£Tíðarskeiðið kundi ikki roknast út.
+129#£Líkningin hevði ongar loysnir innan $C fyri variabel
+130#£Líkningin hevði ongar loysnir innan $R fyri variabel
+131#£Tíverri kundi WordMat ikki loysa líkningina.
+132#£Öll tøl eru loysnin til líkningina
+133#£Tú bað um at loysa líkningina fyri eina variabel, sum longu er skilgreind. Set/setið eina 'delete def:' kommando framman fyri líkningina.
+134#£Skattamatsskipanin er loyst fyri
+135#£við at brúka "Solve Equations" funktiónina hjá WordMat,
+136#£Felagsskapur skrásettur hjá
+137#£Líkningarskipanin hevði ongar loysnir innan $C fyri variablernar
+138#£Líkningarskipanin hevði ongar loysnir innan $R fyri variablernar
+139#£Tað má vera eitt javntekin í líkningini.
+140#£Eingin felagsskapur skrásettur
+141#£Hetta er ikki ein líkning. Ein líkning fer altíð at hava eitt = tekin.
+142#£Eftirfarandi variabler eru strikaðar burtur úr líkningarskipanini:
+143#£við at brúka "Eliminera variabela" virkið í WordMat,
+144#£sandur
+145#£Falskt
+146#£ókent
+147#£
+148#£Ein loysn varð funnin. Tó kunnu lættliga vera fleiri loysnir.
+149#£Vel bara eina orðatiltæki
+150#£Heitið verður umskrivað við S. WordMat við at brúka háttalagið:
+151#£Automatisk lækking,
+152#£Trigonometrisk reduksjon,
+153#£Tíðarskeiðið kundi ikki styttast
+154#£Orðatakið er minkað við WordMat.
+155#£Orðatakið er faktorað við WordMat.
+156#£Hugtakið kundi ikki teljast við
+157#£Orðatakið er víðkað við WordMat.
+158#£Heitið kundi ikki víðkast
+159#£Tú mást sløkkja eindir fyri at loysa differentiallíkningar
+160#£Differentiallíkningin kundi ikki loysast
+161#£Skúlar kunnu samstarva við Eduap um at hjálpa til við at tryggja, at WordMat verður dagført. Felagsskapur gevur atgongd til stuðul, WordMat+ og meira. Trýst fyri at síggja meira...
+162#£Binomial býting
+163#£Sannleiksvirðið av frásøgnini verður avgjørt við WordMat.
+164#£Úrslitið er grundað á talsamanburð
+165#£Tað kundi ikki staðfestast, um frásøgnin var sonn/ósann
+166#£Tól frá
+167#£Veljið úttakstól um neyðugt
+168#£Úttaks tól
+169#£Bugklombur hava ongan týdning
+170#£Automatisk backup?
+171#£Hvussu nógvar trygdarfílur skulu í mesta lagi goymast?
+172#£Tíð millum hvørt trygdaravrit
+173#£Word ger ikki eitt sjálvvirkandi trygdaravrit, men ger einans batadátur, sum kunnu brúkast til at endurheimta eina mista fílu.\n\nWordMat kann taka sjálvvirkandi trygdaravrit av øllum skjalinum, hvørja ferð tað verður roknað, og goyma tað í fleiri útgávum, soleiðis at tú altíð kanst fara aftur og finna okkurt, sum riggar. (Trygdaravritið er skjótast, um skjalið ikki er á OneDrive)\n\nTrygdarfílurnar eru goymdar í mappuni: documents/WordMat backup
+174#£Skoða trygdaravrit
+175#£Spyr/spyrjið
+176#£Altíð
+177#£Ongantíð
+178#£Ein trygdarvilla kom upp
+179#£Vilt tú virkja automatisku trygdarskipanina hjá WordMat?\n\n(Sjá meira undir stillingar | Backup)
+180#£Normalbýting
+181#£Lágt
+182#£Vanligt
+183#£Høgt
+184#£Sera høgt
+185#£Super (seint)
+186#£Reglugerð
+187#£Bíða?
+188#£Max
+189#£Bara linjur
+190#£Vís øksir
+191#£Góðsku
+192#£Ávirkar rotationsferðina
+193#£Tá myndin kemur, kanst tú broyta sjónvinklin við at halda vinstra músaknøtti niðri og draga runt. \nHøgraklikk á valmyndarbjálkan, veljið valmøguleikar og 'kopiera til klippiborð' fyri at kopiera myndina. \nTú mást lata vindeygað aftur fyri at fara aftur til Word.
+194#£Pivot kroppur
+195#£Skriva koordinatir fyri punkt, sum skulu markast við eini reyðari striku á grafinum. Brúka semikolon ella tabulator, um tú vilt brúka komma sum desimalskiljara. Tú kanst brúka skilgreiningar til at lesa punktini á grafinum. Tú kanst eisini brúka innsetingarknøttin, so kanst tú trýsta á grafið, har tú vilt velja.\r\nDømi:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)
+196#£Her kanst tú seta eitt annað datasett av punktum inn, sum hava ein annan lit á grafinum. Tú kanst ikki gera afturgongd á hesum, men við at trýsta á insert, kanst tú seta stig á grafin við at trýsta á. Tey kunnu síðan setast í samband við linjum til ein figur.
+197#£Vel borðið við tølum, áðrenn tú trýstir á plottið, og punktini her verða automatisk sett inn. eitt sett av koordinatum fyri hvørja linju. Koordinatirnar eru skildar sundur við kommu, semikolon ella tabulatorum. Um tú brúkar komma sum desimalskiljara, brúkar tú semikolon ella tabulator. Koordinatir kunnu avritast úr Excel.  Dømi um notan: \r\n1.2 , 3.4\r\n3,4 ; 4.8\r\n5.6$Tab & "7.8
+198#£Variabler skulu vera x og y
+199#£Seta sirkul inn
+200#£Seta linju inn
+201#£Merkt stig
+202#£Afturgongd
+203#£Ja, tað er
+204#£Nei
+205#£Minst/minnist til hetta valið
+206#£Tá trygdarvirkið hjá WordMat er tendrað, tekur WordMat trygdaravrit av skjalinum áðrenn hvørja útrokning. Trygdaravrit verða ikki tikin, um seinasta trygdaravritið er gjørt innan 5 minuttir. 10 trygdarútgávur verða goymdar, og eftir tað verða tær skrivaðar yvir." & vbLf & vbLf & "Tú kanst broyta hesar stillingarnar undir: stillingar | Backup. Tað er eisini her, tú kanst finna tínar trygdarfílur, um neyðugt.
+207#£Tú kanst til hvørja tíð broyta hendan møguleikan í stillingum | Trygdaravrit
+208#£Trygdaravrit
+209#£Hornsumman er yvir 180
+210#£Tú mást sláa inn 3 síður/vinklar. Tó ikki 3 vinklar. Í minsta lagi 1 síða má vera kend.
+211#£Hornsumman er ikki 180
+212#£Tú ert komin inn í ov nógvar síður/vinklar.
+213#£Tú mást skriva neyvt 3 síður/vinklar. Tó ikki 3 vinklar. Í minsta lagi 1 síða má vera kend.
+214#£Minst ein síða má vera kend. 3 vinklar eru ikki nokk.
+215#£Vinkill
+216#£funnin við at brúka vinkelsummu = 180$Degree í einum tríkanti
+217#£Lengd á síðu
+218#£funnin við at brúka Pythagoras
+219#£Longd á síðunum
+220#£funnin við tongini
+221#£Funnin av Sine
+222#£funnin við cosinus
+223#£Vera til við cosinusviðurskiftum
+224#£Vera til við sinusviðurskiftum
+225#£2. Prógvlíkningin er loyst fyri
+226#£Líkningin á 2. stigi hevur tvær loysnir:
+227#£Men hin loysnin er neilig, og vit kunnu ikki hava negativar síðulongdir.
+228#£Síðani cosinussambandið loystu vit omanfyri fyri
+229#£hevði tvær loysnir, og báðar vóru positivar, har eru tveir møguligir tríkantar. Vit fara nú at rokna hinar síðurnar grundað á aðru loysnina á sama hátt.
+230#£Seta symbol inn
+231#£Grikskir bókstavir
+232#£Onnur tekin
+233#£Seta inn
+234#£Symbol
+235#£Loysa líkningar við grafiskum og numeriskum háttaløgum
+236#£Fyrsta git
+237#£Interval háttalagið
+238#£Byrja
+239#£Endi
+240#£Høgra síða og vinstru síða plottaðu. \nVinstra síða er svørt. Høgra síða grøn. Loysnir til líkningina eru krossvegirnir.
+241#£Grafisk loysn
+242#£Zooma eisini við at tvíklikka ella draga í ferningin
+243#£Vís graf í stórum vindeyga
+244#£$X^2 útbreiðsla
+245#£Variabler
+246#£Roynd
+247#£Veljið max.
+248#£Ella slá inn max.
+249#£variabel sundurskilt við komma
+250#£Vel akkurát
+251#£Ella skriv inn teg sjálvan/sjálva
+252#£kunnu ikki bæði loysa líkningina fyri
+253#£og samstundis lýsa tað.
+254#£Tú roynir at loysa eina variabel, sum er ein eind. Tað fer helst at enda við eini villu. Hugsa um at brúka eitt annað variabelnavn ella sløkkja tól.
+255#£jørðin
+256#£vatn
+257#£kopar
+258#£jarn
+259#£Mánin
+260#£sól
+261#£Kropsligir konstantar
+262#£Tól
+263#£Borðvirði - hiti
+264#£Borðvirði - Kjarnorkualisfrøði
+265#£Stjørnufrøði
+266#£Ljósferðin í einum vakuumi
+267#£Planck er støðugur
+268#£Plancks konstanti í elektronvoltum
+269#£Tyngdarkraftskonstantin
+270#£Tyngdarkraftsakselerasjonin á jarðarskorpuni
+271#£Elementala løðingin
+272#£Avogadros støðugt
+273#£Gass konstantin
+274#£Boltzmanns støðuga
+275#£Vakuum permeabilitet
+276#£Loyvi til vakuum
+277#£Coulomb er støðugur
+278#£Stefan-Boltzmanns støðuga
+279#£Atommassa eining
+280#£atommassaeining í MeV
+281#£serlig hitakapasitet til
+282#£Massin av elektronini
+283#£í kg
+284#£Massin av protóninum
+285#£Massin av nevtronini
+286#£Jarðarmassin
+287#£Miðalradiusin á jørðini
+288#£Frástøða millum jørðina og sólina (stjørnufrøðilig eining)
+289#£Massin av sólini
+290#£Mánamassin
+291#£Miðalradiusin á mánanum
+292#£GeoGebra 5 er ikki uppsett
+293#£Knappurin tekur teg til heimasíðuna, har tú kanst leggja GeoGebra inn. WordMat í Windows stuðlar 'GeoGebra classic 5', 'GeoGebra Calculator Suite', 'GeoGebra Classic 6' og flestu aðrar appútgávur av GeoGebra.
+294#£GeoGebra Calculator Suite er longu uppsett. Tað koyrir í einum kaga og tørvar ikki internet. Byrjar skjótt.
+295#£Seta GeoGebra upp
+296#£Koyr GeoGebra Calculator Suite
+297#£ella nakrar markatreytir
+298#£Merki
+299#£Skriva tekst inn og trýst síðani á grafin, har teksturin skal sita
+300#£Tað er ein feilur í reglugerðini
+301#£Tú mást fyrst seta ymin og ymax og trýsta á update.
+302#£3D grafir
+303#£Vís máltøkur
+304#£Gjøgnumskygd
+305#£Fløtir litir
+306#£Seta Maxima kommando inn í Word
+307#£Linjur og flatir
+308#£Bara linjur
+309#£Bara flatir
+310#£Linjur og flatir
+311#£Variabler skulu vera x, y og z
+312#£Seta bólt í
+313#£Seta ætlan inn
+314#£Nýggjur vektor
+315#£Syntax\n(startpunkt)(vektor)\n(startx , starty , startz)(dx , dy , dz)\nEin vektor per linja\nUm upphafspunktur ikki er specificeraður, antar (0,0,0)\nDømi:\n(1,1,2)(1,2,3) \n teiknar vektor (1,2,3) frá punkti (1,1,2)\n\n(1,-2,3)\n teiknar vektor (1,-2,3) frá punkti (0,0,0)\n\n\n\n\nDæmi um desimaltal:\n(1,5 ; 3 ; 4,5)\n(1.5 , 3 , 4.5)
+316#£Punktstødd
+317#£Slá inn stig soleiðis\n\n(1,1; 2,5; 1,2)\n(2.1,3.4,8.8)
+318#£Í grafvindeyganum kanst tú snara koordinatskipanini við at halda vinstra músaknøtti niðri og draga runt.\n\nUm luturin sær út til at vera strekktur, kanst tú broyta grafvindeygað, so tað passar.\n\nSkalt tú seta myndina inn í Word, høgraklikka á valmyndarbjálkan, velja 'valmöguleikar' og síðani 'kopiera til klippiborð'. Síðani letst grafvindeygað aftur, og síðani kann myndin setast inn í Word.\n\nLegg til merkis, at grafvindeygað má latast aftur fyri at koma aftur til Word.\n\nTalið av punktum avger, hvussu vakur figururin verður, men ávirkar samstundis ferðina, sum hann kann snarast við.
+319#£Reglugerðir
+320#£Umboð av parametrum
+321#£Gult/reytt/korkalit
+322#£Blár
+323#£Brúnt
+324#£Grátt
+325#£Alt+M snarvegurin setur eitt nýtt støddfrøðiøki inn
+326#£Snarvegurin AltGr + Enter roknar út
+327#£Snarvegurin Alt + L loysir líkningina
+328#£Alt+ snarvegurin í opnar Stillingar
+329#£Alt+r snarvegurin tekur fram fyrri úrslit
+330#£Alt+E snarvegur tendrar/sløkkir tól
+331#£Undirskrift:
+332#£\lambda gevur lítlan grikskan bókstav
+333#£Alt+P snarvegurin vísir grafin í eini forskrift
+334#£Tú kanst goyma broytingar í formúlusavninum og formskjalinum sjálvur/sjálv.
+335#£Excel-ørk kunnu setast innfelld í skjalið ella opnast í Excel
+336#£Skjót og betri leiðing av uppgávum? Royn/roynið WordMark - www.eduap.com
+337#£Tal av útrokningum við WordMat:
+338#£Undir Skilgreiningar kanst tú lýsa likamligar konstantir og borðvirði
+339#£Orð rennur skjótari í kladdasjón, serliga fyri líkningar.
+340#£Set/setið tínar egnu lýsingar inn í Excel-diagrammer við Excel-diagrammum. Set/tekstboks
+341#£Snarvegurin Alt + N skiftir millum auto,exact,num
+342#£Ein funksjon við bókstavskonstantum fær automatisk sliders í GeoGebra
+343#£Úttakstól mugu einans vera reinar tól. Tað er, ongar samansettar eindir so sum km/t. Vilt tú t.d. hava km/tímar, skriva inn: km,tímar
+344#£Tú hevur longu seinastu útgávuna av
+345#£Vel eitt skattaálagningarnummar.
+346#£Hvat tal skal henda líkningin vera sett til?\r\nHesar líkningarnar fáa tølini dagførd, so tey passa.
+347#£Binomial roynd
+348#£Eitt skattaálagningarpartur nr. verður settur inn. Vanliga er hetta sett inn sum eitt kapittul- ella partanummar í eini yvirskrift. Tó kann nummarið eisini setast inn fjalt. Skal nummarið vísast? (Svar nei fyri at fjala tað)
+349#£Skriva týdningarstigið í prosent
+350#£Týdningarmikið stig
+351#£Ange dimensionen på crosstable\r\nrows x kolumner
+352#£Chi í aðru royndini fyri samhangi
+353#£Ein $X^2 - roynd fyri samhangi verður gjørd við S&P verkætlanini. WordMat
+354#£P-virði
+355#£Á týdningarstiginum
+356#£%, kann 0 hypotesan um, at einki samband er, vrakast. Dvs. Tað er eitt samband millum tær báðar brigdlarnar.
+357#£%, 0 hugsanarstøðið kann ikki vrakast. Tí eru eingi prógv, sum siga, at tað er eitt samband millum tær báðar breyturnar.
+358#£Tað eru kyknur við virðum minni enn 5, ella samlaða summan av øllum kyknum er minni enn 50. $X^2 býtingin er tí ein vánalig tilnærming í hesum føri, og úrslitið óálítandi. Í summum førum kann dátutilfarið gerast brúkiligt við at gera ein annan bólk.
+359#£Chi útbýting
+360#£Stig av frælsi
+361#£Lesið
+362#£Opnar GeoGebra
+363#£Slá inn virði fyri
+364#£Tað kann rættast aftaná
+365#£Lýs støðugt
+366#£Tú/hevur/hava ikki sett Graph upp. Tað er eitt lítið ókeypis forrit, sum er lætt at leggja inn. Tað ger vakrar grafir, punktpunktar o.s.fr., sum lættliga kunnu integrerast í Word. Tú kanst taka forritið niður á www.padowan.dk.
+367#£Tað kann rættast aftaná undir serligum funktiónum í grafinum. Tú kanst enntá gera eina teknifilm, har virðið broytist áhaldandi, undir Rokna/Animera.
+368#£At plotta grafir við GeoGebra og Graph krevur, at x er tann óhefta variabelin.\r\nEftirfarandi orðingar innihalda ikki x, so tú kanst nú specificera eina aðra óhefta variabel.
+369#£Óheft variabel
+370#£$X^2 roynd fyri samhangi
+371#£Opnar graf
+372#£Seta inn nestað
+373#£Tað kann taka tíð at seta inn nestaðar lutir. Tvítrýst á lutin fyri at broyta hann.
+374#£Vilt tú plotta
+375#£Seta inn
+376#£Líkningarskipanir við ójavni eru ikki stuðlaðar. Loys sum líkningar ella loys grafiskt við líkningum. Graf ella GeoGebra
+377#£Eliminera variabler
+378#£við virðunum
+379#£Slá inn byrjanandi gitingina av virðum. Standard gitið er 1
+380#£Variabler og gitingar
+381#£Skattaskipanin er loyst í tali fyri
+382#£við einum byrjanandi giti
+383#£Skattaskipanin kundi ikki loysast
+384#£Skrivaði/skrivaðu tú/røttu variabelina?
+385#£Eingin loysn varð funnin. Intervallendapunktini mugu vera báðumegin á einari loysn.
+386#£Háttalagið hjá Newton verður brúkt við fyrstu gitunum
+387#£Interval háttalagið verður brúkt í intervallinum
+388#£Miseydnað at finna eina loysn
+389#£Eingin loysn
+390#£Differentiallíkningin verður loyst við at brúka "Solve differential equation" funktiónina hjá WordMat
+391#£við marktreytunum
+392#£við byrjanarumstøðunum
+393#£við startstøðuni
+394#£Tú mást byrja Word av nýggjum nú, ella læsist Word.
+395#£Ein villa kom fyri, tá ið ein uppskrift var roynd at seta eina uppskrift inn. Royn/roynið aftur onkra aðrastaðni.
+396#£Eftirlíking
+397#£Bólkar
+398#£Talið av frælsisstigum\r\nn verður lýst í almennum orðum
+399#£Tíðnibýting við
+400#£Eygleiðingar
+401#£Væntað
+402#£Tilsamans
+403#£P-virði
+404#£Tað er eitt samband
+405#£Tað er einki samband
+406#£Samlaða summan av øllum kyknum er minni enn 50. $X^2 býtingin er tí ein vánalig tilnærming í hesum føri, og úrslitið óálítandi.
+407#£Q-virði
+408#£Kritiskt Q-virði
+409#£Tú/hevur/hava ikki sett MikTex upp. Tú verður nú umvístur til heimasíðuna, har MikTex kann taka niður. Aftaná uppsetingina er týdningarmikið, at teldan verður startað av nýggjum. Tá MikTex verður koyrt fyrstu ferð, mugu nakrir pakkar verða settir inn.
+410#£Hesin funkuleikin er ikki stuðlaður á Mac
+411#£Ymiskt
+412#£Nýggj líkning
+413#£Symboler
+414#£CAS-stillingar
+415#£Skapir
+416#£Tú ert komin inn í eina vektorlíkning, sum í veruleikanum er ein skipan av líkningum. Kom inn í
+417#£variabler, sum skulu loysast fyri sundurskildar kommur.
+418#£Hey, tú mátti koma inn
+419#£variabel sundurskilt við komma
+420#£Ein av líkningunum er ikki skilgreind innan valdu markini. Royn/roynið at víðka økið
+421#£Eitt ella fleiri plus/minus tekn eru við í orðingini. Hvussu skal hetta skiljast?
+422#£Pluss ella minus
+423#£Innskot ikki skilt. Seta pluss inn.
+424#£Tað er ein trupulleiki við tølstavunum
+425#£Merkingin fyri summuteknið er ikki røtt. Neðra markið skal skrivast, t.d. i=1
+426#£Merkingin fyri vørustavin er ikki røtt. Neðra markið skal skrivast, t.d. i=1
+427#£Tað eru trupulleikar við setningaskipanini. Ein dx (ella líknandi) má nýtast sum endi á einum integrale. Kanska hevur/hava tú/brúkt d í einum øðrum samanhangi. Use da differential d (type: \dd)
+428#£Tað eru trupulleikar við setningaskipanini. Tvey dx (ella líknandi) eru neyðug fyri at gera eitt dupult integral. Kanska hevur/hava tú/brúkt d í einum øðrum samanhangi. Use da differential d \dd
+429#£Tú kanst ikki brúka dupulta integralteknið til ávísar integralir. Nýt/nýtið tveir stakar integralir.
+430#£Villa! Tað eru trupulleikar við setningaskipanini. Merking fyri differentiering er ikki rætt.
+431#£Ikki skilgreint
+432#£Ikki definerað, men avmarkað
+433#£Ikki skilgreint innan
+434#£er afturhaldin og kann ikki greinast. Skilgreiningin er leypt um.
+435#£Ikki glansandi
+436#£Fys
+437#£Evnafrøði
+438#£Prosent
+439#£Eiginleikar
+440#£Geometri
+441#£Sandur.
+442#£vektor
+443#£Stillingar
+444#£Koma fram.
+445#£breiður
+446#£Rokna út
+447#£Leysur
+448#£Maxima kommando
+449#£Loys/loysið líkningarnar við numeriskum háttalagi
+450#£Eliminera variabler
+451#£Kanna satt/falskt
+452#£Loys differentiallíkning
+453#£Strika skilgreiningar
+454#£Lýs funktion
+455#£Lýs likamligar konstantir
+456#£Skriva um
+457#£Óendaligt.
+458#£Differentiatorar
+459#£Trunk funktion
+460#£Graf
+461#£Vís graf
+462#£Brekkuøki
+463#£3D søgugongd
+464#£Pivot kroppur
+465#£Hagtøl
+466#£Óflokkaðar eygleiðingar
+467#£Bólkaðar eygleiðingar
+468#£Pinna diagram
+469#£Histogram
+470#£Trappudiagram
+471#£Summa kurva
+472#£Plottið í kassanum
+473#£Hagtøl/útsendingar.
+474#£Afturgongd
+475#£Kann ikki líma inn í eina töflu
+476#£Lineær
+477#£Veldisvísandi
+478#£Kraftur
+479#£Polynom
+480#£Útbýting
+481#£Binomial
+482#£Vanligt
+483#£$X^2 útbreiðsla
+484#£Geometri fyri flogfar
+485#£Rúmgeometri
+486#£Opnar støddfrøðiformelsavnið
+487#£Opnar savn av alisfrøðisformúlum
+488#£Opnar evnafrøðiformelsavnið
+489#£Sjálvvirkandi val av neyvum útrokningum og talvirði.
+490#£Sjálvvirkandi val av neyvum útrokningum og talvirði. Við útrokning verða bæði úrslitini ofta uppgivin.
+491#£Neyv úrslit
+492#£Öll úrslit eru listað sum neyv úrslit. Tað vil siga, at talfrøðiligar tilnærmingar sleppast undan so langt sum gjørligt. Hetta kann tó ikki tryggjast.
+493#£Talandi úrslit
+494#£Öll úrslit eru givin sum desimaltal.
+495#£Tal av týdningarmiklum talteknum
+496#£Tilgreinir, hvussu nógv (týdningarmikil) taltøv úrslitini skulu vera merkt við.
+497#£Radianir
+498#£Tá trýstið verður roknað í radianum heldur enn stigum.
+499#£Vísindalig merking
+500#£Tá tey eru trýst, verða úrslitini lýst í vísindaligari merking, t.d. 2.3$*10^4
+501#£Stillingar (Alt+j)
+502#£Set ymiskar stillingar.
+503#£Rokna (AltGr+Enter)
+504#£Roknar merkta málið. Um bendilin er settur í eina orðatiltæki, verður øll málið roknað. Um tað er ein =bókstavur í orðingini, verður bara =bókstavurin roknaður aftur til =bókstavin.
+505#£Maxima leiðsla
+506#£Sendir boð ófiltrerað til Maxima. Úrslitið er tó formaterað.
+507#£Loys líkning(ir) (Alt+L)
+508#£Loysir eina líkning ella eina skipan av líkningum. Set bendilin í líkningina. Vel fleiri líkningar fyri at loysa líkningarskipanina.
+509#£Loys við talfrøðiligum hættum
+510#£Loys/loysið líkningar við talfrøðiligum háttaløgum. Tað eru fleiri mátar at velja ímillum.
+511#£Eliminera variabel
+512#£Strikar eina ella fleiri variabler burtur úr eini líkningarskipan.
+513#£Kanna um frásagnir eru sannar
+514#£Kanna um frásagnir eru sannar, ósannar ella ókendar
+515#£Loys differentiallíkning
+516#£Loysir differentiallíkningina. Kann skrivast inn á ymiskan hátt.  t.d.  y'=y , y''=y ella f'(x)=f(x)
+517#£Loysa samanbundnar differentiallíkningar numeriskt
+518#£Skuldi verið í forminum y'=...
+519#£Skoða skilgreiningar
+520#£Vísir, hvørjar frágreiðingar eru galdandi í hesum punktinum í skjalinum.
+521#£Strika skilgreiningar (Alt+S)
+522#£Setir kommandona 'delete definitions:' inn í skjalið. Nakrar skilgreiningar, sum eru settar framman fyri hetta punktið í skjalinum, kunnu ikki nýtast eftir hetta punktið.
+523#£Definera (Alt+D)
+524#£Setir skilgreiningina inn í skjalið, sum er galdandi fyri restina av skjalinum.
+525#£Lýs likamligar konstantir
+526#£Vel millum teir mest brúktu fysikalsku konstantirnar og fá teir skilgreindar í skjalinum, so at teir kunnu verða við í útrokningum
+527#£Skriva um
+528#£Umskrivar hugtakið á ymiskan hátt.
+529#£Minka
+530#£Um tað ber til, verður orðatakið umskrivað soleiðis, at tað verður minkað so lítið sum gjørligt. Royn/roynið at umskriva við ávísum hættum, um tað ikki riggar.
+531#£Faktorisera
+532#£Um tað ber til, set uttanfyri klombrum við vanligum reglum sum t.d.
+533#£Multiplicera bugklombur
+534#£Allir bugklombur í merktu orðingini verða margfaldaðir.
+535#£Tafla
+536#£Seta Excel inn
+537#£Differentiatorar
+538#£Vel orðatiltæki at skilja ímillum, ella set/setið bendilin í orðalagið.
+539#£Trunk funktion
+540#£Finnur stamvirki fyri valdar orðingar (óákveðin integral).
+541#£Wolfram alfa
+542#£Opnar heimasíðuna Wolfram Alpha við valda orðinum sum innskot.
+543#£Loys líkningina
+544#£Loys líkningina við at brúka wolfram alfa
+545#£Skoða graf (Alt+P)
+546#£Vísir grafin fyri valdar funktiónir/líkningar/líkningar og punkt. Grafin kann síðani setast inn í skjalið. Ymisk grafforrit eru stuðlað. Vel tín yndis í stillingunum ella veljið við at víðka henda knøttin
+547#£Seta graf inn við forritinum GnuPlot
+548#£Vís graf við GnuPlot. Gnuplot stuðlar nógvum funktiónum og kann gera eitt gott graf. Síðani kanst tú dupultklikkja á grafina í skjalinum fyri at broyta hana.
+549#£Seta graf inn við Graph forritinum
+550#£Setir graflutin inn í Word-skjalið, sum verður broytt við at tvíklikka á graflutin. Skilgreiningar, forskriftir og punktar verða fluttar úr Word til grafin. Graph er eitt sera skjótt forrit og hevur nógvar frálíkar eginleikar. Gallin er, at tað ikki er stuðlað á Mac, og grafirnar verða ikki sýndar í so høgari upplausn.
+551#£GeoGebra
+552#£Opnar GeoGebra og flytur valda funktión og skilgreiningar. GeoGebra er grafforritið, ið gevur flestar valmøguleikar, og eina sera góða graf, men har eru nakrar avmarkingar: Hon er rættiliga seint at lata upp, og myndin verður ikki automatisk flutt til Word. Tað má avritast manuelt ígjøgnum redigeringsvalmyndina og "avrita tekningina". Grafin kann ikki broytast aftur, tá ið hon er sett inn.
+553#£Seta Excel-graf inn
+554#£Setir innfellt Excel-ark inn í Word skjal, sum er sniðgivið til at vísa grafir og punktpunkt. Tú kanst dupultklikkja á excel lutin fyri at broyta hann aftur. Tað arbeiðir ikki eins skjótt og nakrar av hinum loysnunum og hevur ikki so nógvar funktioner. Fyrimunirnir eru: Stuðlar læru í Excel og er serliga sniðgivin til lætta plotting av punktum. Tí kann tað vera eitt forrit, sum er gagnligt í samstarvi við aðrar lærugreinir, serliga innan náttúruvísindi.
+555#£Retn.field
+556#£Vísir hallaøkið í differentiallíkningini av fyrsta stigi og loyvir at plotta loysingarkurvur.
+557#£Seta GeoGebra fílu inn
+558#£Setir inn nestaða tóma GeoGebra fílu, sum kann broytast og goymast beinleiðis í Word. Fílan sæst sum eitt ikon. Myndir mangla enn at verða avritaðar.
+559#£3D søgugongd
+560#£Vís forskrift, líkning, punkt, vektorar og parameterumboð í rúmdini.
+561#£Pivot kroppur
+562#£Vísir momentkroppin fyri ávísu forskriftina. T.d. grafin fyri reglugerðina verður snarað 360 stig um x-ásin, soleiðis at ein 3D lutur verður skaptur.
+563#£Hagtøl
+564#£Opnar regneark, sum kunnu innihalda lýsandi hagtøl
+565#£Óflokkaðar eygleiðingar
+566#£Excel-ark til viðgerð av óbólkaðum dátum. Roknar frekvensir, kvart leggja saman o.s.fr. og býr til stavdiagram, punktdiagram, trappudiagram og kassaplott.
+567#£Bólkaðar eygleiðingar
+568#£Excel-ark til útrokning av tíðleikum, kumulativum tíðleikum, kvartsaddi og vísing av histogrammi, kassaplotti og summukurvu.
+569#£Pinna diagram
+570#£Excel-ark við fyrireikaðum stavadiagrammi
+571#£Histogram
+572#£Excel-ørk eru ætlað at plotta fleiri histogrammir í sama diagrammi.
+573#£Trappudiagram
+574#£Excel-ark, sum kunnu teknast fleiri trappudiagrammer í sama diagram til samanburðar
+575#£Summa kurva
+576#£Excel-ark, sum kunnu teknast fleiri summukurvur í sama grafi til samanburðar
+577#£Plottið í kassanum
+578#£Excel-ark, sum kunnu plotta fleiri kassaplott í sama diagrammi
+579#£Afturgongd
+580#£Set/setið eitt vanligt borð við kúlunum. Vel stigini og veljið regressionsslagið. Borðið kann vera lárætt ella lóðrætt. Um tað bara eru tvey punkt, verður tað roknað við at vera lodrætt.
+581#£Ein villa kom upp, tá ið leitað var eftir eini dagføring. Tú verður nú sendur til heimasíðuna, har tú sjálvur/sjálv kanst síggja, um ein nýggj dagføring kemur. Núverandi útgávan er:
+582#£Setir inn töflu við tveimum dálkum, sum eru ætlaðar til at seta inn punkt, har regression kann gerast.
+583#£Útbýting
+584#£Excel-ark við myndum av valdum útbýtingum. Arkini eru dynamisk, so tey kunnu plotta grafirnar fyri allar parameterar og gera tær vanligastu útrokningarnar.
+585#£Binomial býting
+586#£Excel-ark við grafi yvir binomialbýting. Á arkinum velur tú grundsannlíkinda- og mongdarparameterin
+587#£Normalbýting
+588#£Excel-ark við grafi yvir normalbýting. Á arkinum velur tú miðal og spjøld.
+589#£-Útbýting
+590#£Excel-ark við grafi av $X^2-útbýting. Á arkinum velur tú talið av frælsisstigum, og virðir kunnu lesast.
+591#£Roynd
+592#£Ymiskar hagfrøðiligar royndir
+593#£Binomial roynd
+594#£Excel-ark, har tú kanst gera binomialroyndir. Sama ark, sum binomialbýtingin er á.
+595#£$X^2 Roynd
+596#£Ger $X^2 roynd á n x n krossborði. Vel tølini í tvørturborðinum.
+597#£Góðvild av passformi
+598#£Góðvild í passaroyndini. (Chi í aðru roynd) Tí um tvær útbýtingar eru eins.
+599#£Eftirlíking
+600#£Løk, sum kunnu permutera (røra) og goyma fleiri royndarstøddir.
+601#£Nýggj líkning (Alt+M)
+602#£Setir eitt nýtt støddfrøðiøki inn.
+603#£Nýggj tallíkning (Alt+M Alt+M)
+604#£Setir eitt nýtt støddfrøðiøki inn, sum sjálvvirkandi verður talið. Tvílykil Alt+M fyri at seta tallíkningina inn. Hetta má tó fyrst vera virkjað í stillingunum.
+605#£Nýggj tallíkning, sum kann vísast til
+606#£Setir eitt nýtt støddfrøðiøki inn, sum sjálvvirkandi verður talið og kann vísast til.
+607#£Seta tilvísing í líkningina
+608#£Setir inn tilvísing til líkning grundað á frammanundan specificerað navn
+609#£Set líkningina til ávíst nr.
+610#£Ein líkning, sum hevur fingið eitt ávíst tal, kann setast til eitt ávíst tal.
+611#£Set/setið ein nýggjan líkningarpart inn.
+612#£Hetta fer at økja um fyrsta talið í skattanummarinum. Um tað fyrra er (2.5), so er tað næsta (3.1). Kann setast inn í yvirskriftir sum partanummar. Tað kann tó eisini setast inn fjalt.
+613#£Dagføra øll skattasamleikanummarini í skjalinum.
+614#£Hendir automatiskt, tá ein nýggj líkning verður sett inn, men tað kann vera neyðugt at trýsta á endurnýggjunarknøttin, tá ein líkning er strikað.
+615#£Symboler
+616#£Ymiskir hættir at manipulera symbolir.
+617#£Skift út til punkttalsbókstavir
+618#£Skiftir øll *multiplikationstekn út við regluligum punktmultiplikationsmerkjum $*
+619#£Umseta líkningar til latex
+620#£Loyvir at umseta allar ella valdar líkningar í skjalinum til Latex. Loyvir eisini at framleiða Latex fílu sum pdf, um MikTex er uppsett. Ein einstøk líkning kann broytast til LaTex við Alt+T snarveginum.
+621#£Konvertera til latex (Alt+T)
+622#£Umbroytir eina líkning til Latex. Wraparound-bókstavirnir eru valdir á høvuðssíðuni fyri latex-umseting. Brúka eisini Alt+T snarvegin.
+623#£Skift út til stjørnumultiplikationstekin
+624#£Setir øll " & ChrW(183) & " multiplikationstekin í staðin fyri * multiplikationstekin.
+625#£Punktum sum desimalskiljari
+626#£Kemur í staðin fyri øll , (komma) í støddfrøðiøkjum við . (punktum) og øll ;(semikolon) við ,(komma)
+627#£Komma sum desimalskiljari
+628#£Kemur í staðin fyri øll . (punktum) í støddfrøðiøkjum við ,(komma) og øllum ,(komma) við ;(semikolon)
+629#£Skapir
+630#£Opnar skjal við skapum, sum kunnu avritast í hatta skjalið. Tríkantar, monotoni parløg o.s.fr.
+631#£Tafla $ArrowRight Listi
+632#£Listi $ArrowRight töflu
+633#£Tafla
+634#£WordMat kann manipulera data í listum. Til dømis kanst tú lættliga leggja eitt tal afturat nógvum tølum á einum lista. Vanliga hevur tú tó data í talvum í Word, men her eru funktiónir, sum kunnu gera listar til tabeller og øvugt.
+635#£Seta Excel-ark inn
+636#£Setir nestað Excel-ark inn í skjalið. Kann opnast við at tvíklikka.
+637#£Umseta til lista
+638#£Broytir eina töflu til ein lista í einum støddfrøðiøki, sum síðan kann manipulerast í WordMat. Dømi: [1, 2, 3]+1 = [2, 3, 4] Sjá handbókina fyri meira info
+639#£Umseta til borð
+640#£Broytir ein lista í einum støddfrøðiøki, ella bara skrivað, til eina töflu. t.d.  (1 , 2),(3 , 4),(5 , 6)
+641#£Tríkantur loysari
+642#£Slá inn 3 síður/vinklar og fá hinar síðurnar/vinklarnar roknaðar út eins og innsettan tríkant við røttu málunum.
+643#£Word handbók
+644#£Opnar skjalið við hjálp.
+645#£Vefhandbók
+646#£Opnar handbókina á heimasíðuni. Hevur betri navigatión og video enn Word handbókin, men ikki fullfíggjað enn.
+647#£Maxima handbók
+648#£Maxima er CAS-forritið, sum útfærir nógvar av støddfrøðiligu funktiónunum í WordMat. Maxima hevur bygt eina rúgvu av funktiónum inn, sum ikki beinanvegin eru sjónligar í WordMat, men tær kunnu útførast, um tú kennir funktiónøvnini. Her kanst tú opna eina samantekt av maxima-boðum.
+649#£Um
+650#£Hvør gjørdi WordMat?
+651#£Hygg eftir dagføringum
+652#£Kanna automatisk á netinum, um WordMat er dagført.
+653#£Yfirlit yvir snarvegin
+654#£Yfirlit yvir, hvørjar knappaborðsgenvejar eru tøkar í WordMat og snarvegir til støddfrøðimarkir í Word.
+655#£LaTex sniðmát
+656#£LaTex sniðmát
+657#£Opnar Word skjal, sum er eitt næstan trúgv avrit av LaTex skjalinum.
+658#£Neyvleikin er settur sera høgt. Roknitíðin kann vera ógvuliga long ella miseydnast. Royn/roynið aftur við lægri innstilling.
+659#£WordMat hevur ein frálíkan funkis at umseta til LaTex, men tað er eisini møguligt at brúka tað, sum er bygt inn í Maxima
+660#£Einingar skulu vanliga ikki skrivast við kursiv. Við hesum funkleikanum roynir WordMat at eyðmerkja eindir og seta Latex-kóða inn, sum skrivar eindir í vanligum fonti
+661#£Lat/latið vera
+662#£Býr til verulig LaTex skjal við telduposti. MikTex, sum má setast upp. Skal einans nýtast til einføld skjøl, tí ikki alt er stuðlað.
+663#£Vísir hvussu LaTex-úttakið verður skilt
+664#£Genera LaTex-kóðan og lat upp í TexWorks, so at kóðin kann kannast og møguliga rættast
+665#£Tríkantur
+666#£Notan
+667#£Graf
+668#£Framkomin
+669#£Vísindalig merking
+670#£Fløkjaslig tøl
+671#£Tú mást byrja Word av nýggjum, áðrenn málbroytingin tekur gildi allastaðni
+672#£Kann ikki skráseta virði <=0
+673#£Regn
+674#£Eg rokni út
+675#£Hendan hátturin krevur eitt tíðarskeið rundan um eina loysn. Tað kann bert vera ein loysn í millibilinum. Hygg/Hyggið at grafinum fyri at finna frástøðuna. Fyrimunurin við hesum háttinum er, at tú veitst, hvør loysn er tøk.
+676#£Um interval háttalagið
+677#£Newton-Raphson háttalagið krevur fyrstu git á eina loysn á líkningini. Tað er ikki tryggjað, at tað verður ein loysn, hóast ein er. Tað er max. 1 loysn. Kombinera háttalagið við eini grafisk loysn fyri at finna byrjanargitingina.
+678#£Um Newton-Raphson
+679#£Trygdaravrit kunnu ikki gerast, fyrr enn tú hevur goymt skjalið!
+680#£Úttak av polar notation
+681#£Trupulleikar við fíluni 'normal.dotm' kunnu bróta knappaborðsgenvejarnar í WordMat. At strika fíluna loysir trupulleikan, tí ein nýggj verður automatisk myndað, tá Word byrjar umaftur. Tó kann fílan ikki strikast, meðan Word er opið, so tú mást gera tað sjálvur/sjálv. \r\n\r\n- Tá tú trýstir á OK, opnast mappan, har fílan er. \r\n- Spara títt arbeiði og lat Word \r\n- Strika normal.dotm \r\n- Byrja Word av nýggjum og lat WordMat stillingarnar upp og lata upp og lata WordMat stillingarnar aftur
+682#£Útrokning gjørd við at brúka GeoGebra
+683#£píl
+684#£Seta Safari í gongd
+685#£Trupulleikin kundi ikki loysast.\r\nVilt tú royna ein annan máta ella CAS-motor?
+686#£CAS-motorur
+687#£Týdningarmikil taltøl
+688#£Tendra/sløkkja tól
+689#£Um eindir eru tendraðar, kann WordMat skilja og umseta eindir. Á SI-knøttinum kanst tú lýsa, hvørjar eindir tú vilt broyta til. Sum standard er úttakið í SI-eindum. Tendra/Tendrið ikki tól, uttan so at tær serliga tørvar tað. Tað kann ávirka atburðin hjá WordMat og goymir nógvar brigdlar.
+690#£Úttaks tól
+691#£Lýs hvørjar eindir tú skal umseta til til útrokningar. Sum standard er úttakið í SI-eindum
+692#£Bc
+693#£Tól
+694#£Tal av talteknum
+695#£Avrunding av tali
+696#£Vel hvussu tøl skulu skrivast og rundast av. Í dømunum niðanfyri er WordMat sett til 3 tal.\r\n\r\nTal av desimalplássum: 12,345\r\nTýdningarmikil tal: 12,3\r\nVid. Notan: 1.23*10^1
+697#£Kvadratisk fullfíggjað
+698#£Brúkar kvadratsetningin at faktorisera. t.d. til líkningina í sirkulinum
+699#£Ein roynd er gjørd at taka fakultetið av einum negativum tali.
+700#£Ávaring: Tað vóru fleiri líkningar enn variabler í líkningarskipanini. Var tað ætlanin?
+701#£Nýtt øki innan støddfrøði
+702#£Fyrra úrslit
+703#£Broyt nummar/neyvt
+704#£Umvend til LaTex
+705#£Latex Pdf
+706#£Prógv
+707#£Radianir
+708#£Vinkla eining
+709#£Skoða loysingartreytir (beta)
+710#£Neyvt
+711#£Tøl
+712#£Sjálvvirkandi
+713#£Sera høgur neyvleiki (beta)
+714#£Seta frágreiðing inn
+715#£Paste Maxima kommando
+716#£Skiljarar
+717#£Listi
+718#£Multiplikationstekin
+719#£Punktur
+720#£Fráboðan um loysn
+721#£Booleskt
+722#£Loysn mongd
+723#£Undirskrift
+724#£Er bara tekstur, sum er partur av variabelnavni
+725#£Er listi/matrix index
+726#£Standard grafforrit
+727#£Seta Excel-ark innlagt
+728#£Úttaks tól
+729#£Specificera vilka enheter som ska vara i utdata separerade med komma\nexempel:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nOm inget är specificerat, returneras allar eindir som grund-SI-eindir ella avleiddar SI-eindir uttan forskeyt.
+730#£Dømi um stuðlaðar eindir:\n(Sí handbók fyri meira)\n\nLongd: cm , AU, ly, pc\nMassi: u , G, mg\nTíð: min , Tímar, dagar, ár\nFrekvens: Hz , Bq\nOrka: kWh , eV, aJ\nTrýst: Bar , mmHg, atm, turt
+731#£Trignonometriskar líkningar
+732#£Allar loysnir
+733#£Bert 1 loysn
+734#£Kanna automatisk eftir dagføringum
+735#£Umvæla knappaborðsgenvejar
+736#£Byrja WordMat av nýggjum
+737#£Tal av útrokningum
+738#£Nú eru royndir gjørdar at umvæla knappaborðsgenvejar.\nUm hatta ikki virkar, strika fíluna 'normal.dotm' í mappuni "~/Library/Group Containers/UBF8T346G9. Office/User Content/Templates" og byrja Word av nýggjum
+739#£Nú er roynt at umvæla knappaborðsgenvejar.\nUm hatta ikki virkar, strika fíluna 'normal.dotm' í mappuni "%appdata%/Microsoft/Templates" og byrja Word av nýggjum
+740#£GeoGebra Calculator Suite er sett upp saman við WordMat. Tað koyrir í einum kaga, men krevur ikki internet. Tað virkar eins á Windows og Mac og byrjar skjótt.\nGeoGebra 5 virkar á sama hátt á Windows og Mac, men krevur hvørja uppseting.\nWindows stuðlar eisini hinum appútgávunum av GeoGebra, so sum GeoGebra 6, grafroknimaskinu og meira. Hesir verða brúktir, um GeoGebra 5 ikki verður uppsettur.
+741#£Tað sær út til, at snarvegirnir ikki eru rætt settir í hesi útgávuni av WordMat. Tað krevur helst eini villuboð
+742#£Úrslitið av útrokningini er treytað av tekninum um hetta
+743#£Set skelti
+744#£Differentiallíkning
+745#£Loysa differentiallíkningar
+746#£Uafh. vóru
+747#£Lít á. Hvar/virka
+748#£Byrjan støða
+749#£Maxima villuboð
+750#£Støddfrøðiligar villur
+751#£Setningsfrøðilig villa
+752#£Tað hevur verið ein setningsfrøðilig villa. T.d. WordMat hevur ikki skilt títt ílag.
+753#£Tað manglar ein
+754#£Tað eru ov nógvir
+755#£Ein villa er komin fram í útinningini av forritinum.
+756#£Tað hevur verið ein deild við 0.
+757#£Eitt mistak var gjørt. Tað stendst helst av einum feili í eini av tínum skilgreiningum.\r\nKanska sært tú niðanfyri, hvar tað er.
+758#£Tað er ein villa í eini av tínum skilgreiningum.\r\nSkilgreiningin verður lýst í Word.
+759#£Har er eitt ólógligt skelti, sum er sett á
+760#£Loys líkningina
+761#£Variabel
+762#£Ella skriva teg sjálvan:
+763#£Galdandi skilgreiningar
+764#£Millum skilgreiningar
+765#£Ávaring: Einingar eru tendraðar.\r\nLigningsloysing er neiliga ávirkað.\r\nAnsa eisini eftir variablem, sum eru eindir t.d. A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
+766#£Loysa líkningarskipanina
+767#£Velja variabler
+768#£WordMat byrjar
+769#£Vinarliga bíða
+770#£Tríkantur loysari
+771#£Rætt
+772#£Tilvildarligt
+773#£Rætt
+774#£Navngeving
+775#£Handbók
+776#£Vinklar stórir bókstavir, síður smáir bókstavir
+777#£Síðurnar eru uppkallaðar eftir hornum AB
+778#£Seta tøl á formin í Word
+779#£Vísa millum frágreiðingar í Word
+780#£Set/setið tær kendu síðurnar og vinklarnar inn, og hinar síðurnar og vinklarnir verða roknaðar út og settir inn á myndina í Word.\r\nTað er eisini møguligt at broyta nøvnini á figurinum. Trýst/Trýstið bara á brøvini.
+781#£Myndin vísir ikki røttu støddirnar, men tað ger hon, tá hon er sett inn í Word.
+782#£Tríkantloysarin hjá WordMat verður brúktur við input:
+783#£Gev/Gevið gætur, at tað eru tveir møguligir tríkantar grundað á tínar upplýsingar
+784#£Tað er ikki nóg mikið av upplýsingum til at rokna út hinar síðurnar og vinklarnar.
+785#£Tveir trýkantar
+786#£Tað er eingin tríkantur, sum kann gerast burtur frá tínum upplýsingum.
+787#£Allar síður og vinklar eru nú at finna.
+788#£NOTE: Numeriskar hættir vórðu nýttir til at loysa líkningina. Tað kunnu vera fleiri loysnir.
+789#£Medium stillingar
+790#£Automatisk lækking
+791#£Royn/roynið at minka málingina niður til stytst møguliga form við fleiri ymiskum hættum.
+792#£Set uttanfyri klombrum\r\nRoynir at broyta hugtakið til vørur
+793#£Multiplicera í klombrum.\r\nAllir bugklombur verða margfaldaðir út.
+794#£Umskriva til brøk
+795#£Öll desimaltøl verða umbroytt til brøk.
+796#£Minka trigonometrisk
+797#£Ein roynd verður gjørd at umskriva heitið við at brúka trigonometrisk samleika.
+798#£Set/setið somu linju inn
+799#£Graftekning o.s.frv. í ætlanini
+800#£Núllstilla alt
+801#£Heiti á aksum
+802#£Linju type
+803#£Skalt tú loysa eina líkning, mást tú fyrst skriva eina líkning við at seta inn líkning í Word. Lat/Latið bendilin vera í líkningini og trýst á loysa líkningina aftur. Vel fleiri líkningar fyri at loysa fleiri líkningar við fleiri ókendum evnum.
+804#£Eingin líkning vald
+805#£Minka
+806#£Faktorisera
+807#£Víðka
+808#£Hjálp
+809#£Handbók
+810#£Handbók sum Word skjal
+811#£Handbók um heimasíðu á netinu
+812#£Um
+813#£Dagføring
+814#£Snarvegir
+815#£Endurstilla
+816#£Logaritma
+817#£Mál
+818#£Tekna
+819#£Positivt
+820#£Negativt
+821#£Null
+822#£Villa
+823#£Skilgreiningar
+824#£ÓKEY
+825#£Avlýsa
+826#£Bíða/Bíðið
+827#£Virksemi
+828#£Steðga
+829#£Líkningin er loyst fyri
+830#£Líkningin er loyst numeriskt fyri
+831#£við at brúka WordMat.
+832#£Reglugerðir
+833#£Líkning
+834#£Líkningar
+835#£Stig
+836#£Vektorar
+837#£Heiti
+838#£Endurstilla
+839#£Fløktar útrokningar, sum verða gjørdar neyvt, kunnu taka sera langa tíð. Hevði tú heldur roynt at gjørt talfrøðiligar útrokningar?
+840#£Brúka vanligt d sum differential d
+841#£DY/DX notation kann vanliga bara nýtast við at brúka eitt serligt differential-d (\dd) ella teknið fyri partvíst avleidd (\partvíst). Um tað ikki verður væntað, at d/dx kann blandast við eitt annað orðalag, er henda innstillingin ein fyrimunur, tí tað er lættari at skriva vanliga d
+842#£Sérsniðin afturgongd
+843#£Loys samanbundnar differentiallíkningar numeriskt
+844#£Eitt mistak hendi
+845#£Variabel
+846#£Ávaring
+847#£Differentiallíkningin skal vera á forminum y'=...  fyri at tað kann loysast í tali
+848#£Knappurin tekur GeoGebra 5 niður til "downloads" á tínum Mac. Tú/verður/verða síðani leiddur/leidd ígjøgnum uppsetingina.
+849#£GeoGebra 5 er ikki fult uppsett. Endir
+850#£GeoGebra er ikki sett upp enn. Bíða/Bíðið til niðurtakið er liðugt.
+851#£Halda áfram
+852#£Strika gamla útgávu
+853#£Áðrenn tann nýggja útgávan kann verða tikin niður, má gamla útgávan í Downloads verða tikin burtur.\r\n 1. Eitt vindeyga, sum eitur 'Loyv atgongd til fílu', skuldi latist upp.\r\n2. Trýst á 'Velg...'  \r\n3. Trýst á 'Assign Access' "
+854#£Niðurtøkan steðgaði
+855#£Tú mást loyva atgongd til GeoGebra.app, áðrenn uppsetingin kann halda fram
+856#£GeoGebra 5 verður tikin niður
+857#£1. Bíða fyrst eftir at GeoGebra 5 verður tikin niður.\r\n2. Tá ið niðurhalið er liðugt, skuldi eitt vindeyga, sum eitur 'Loyv atgongd til fílu', latast upp.\r\n3. Trýst á 'Velg...'  \r\n4. Trýst á 'Assign Access'
+858#£Steðgaði
+859#£Tilgongdin varð steðgað.\r\n\r\nTrýst á Lat/latið aftur og royn aftur.
+860#£Tú fekst ikki loyvi til GeoGebra. Trýst á 'royn aftur' fyri at royna aftur.
+861#£Tað tekur langa tíð at taka niður. Hygg í Safari, um tað sær út til, at ein niðurtaka er í gongd. Tú kanst klikka á steðga, um eingin framgongd er.
+862#£Feil við at taka niður GeoGebra
+863#£Fílan varð ikki funnin í niðurhali.\r\nTú kanst trýsta á 'Royn aftur' niðast, um tú vilt hava WordMat at hyggja aftur.
+864#£Gev loyvi til GeoGebra
+865#£Eitt vindeyga, sum eitur 'Loyv atgongd til fílu', skuldi nú latist upp.\r\n\r\n1. Trýst á 'Velg...' \r\n2. Trýst á 'Assign Access'
+866#£Flyta GeoGebra til appir
+867#£Tú mást kanska geva loyvi til 'Systemhendingar', bara trýst á OK.
+868#£Til reiðar
+869#£GeoGebra 5 er nú uppsett.\r\nTrýst á 'Halda áfram' fyri at opna GeoGebra.
+870#£Tað eru síður, ið eru 0
+871#£Tú/mást/mugu velja eitt borð fyrst
+872#£Kann ikki seta talaða líkning inn í töfluna
+873#£GeoGebra hevur verið nýtt til at loysa líkningarskipanina. Tað er óvist, um loysnir finnast. Tað er viðmælt at royna ein annan máta. T.d. Maxima, ella numeriskt/grafiskt
+874#£Hesin funktiónin er ikki stuðlaður av GeoGebra. Royn ligningsloysara
+875#£Líkningin varð loyst grafiskt við GeoGebra:
+876#£Talið av klombrum passar ikki í orðalagið
+877#£Villur í innstilling
+878#£Tú hevur eina skeiva innstilling í Word.\r\nÍ valmyndini Ligningar skiftir tú frá Latex til Unicode, so WordMat skal virka
+879#£Syntaksvilla - Ikki rætt støddfrøði.
+880#£Tú hevur skrivað okkurt, sum ikki er rætt støddfrøðilig notan.\r\nVillan er sett í samband við eina variabel:
+881#£Til dømis kann hetta vera, tí tú hevur lækkað fontin á einum tali. \r\nK_0 skal verða skift út við eitt tal og ikki við t.d. 5000_0. Tað skal bara siga 5000.
+882#£Tað kunnu ikki vera tvey javntekin í eini líkning
+883#£Líkningarskipanin varð loyst við GeoGebra:
+884#£Útrokningin varð avbrotin, tí tað tók sera langa tíð. Onkuntíð kann tað hjálpa at royna útrokningina við møguleikanum "Numeric" heldur enn Exact ella Auto
+885#£Fái ikki samband við Maxima. Vilt tú heldur brúka 'WSH' háttin?\r\n(Hesin møguleikin er at finna undir víðari í Stillingum)
+886#£WordMat kann ikki samskifta við GeoGebra. Hetta er helst tí tú ikki hevur sett røttu trygdarstillingarnar í Safari. Trýst á ok fyri at fáa vegleiðingina
+887#£Loysa tøl
+888#£WordMat fann ikki Maxima innsetingina. Royn/roynið at seta inn aftur.
+889#£Feil í sambandi við Maxima við WSH
+890#£Steðgar automatisk inn
+891#£Tað eydnaðist ikki. Steðgar.
+892#£Leiðslan varð avbrotin eftir
+893#£Hevur tú hug at royna aftur, og hvussu leingi vilt tú bíða. (sekund) Teldan fer at læsa so leingi sum bíðitíð.
+894#£Villa í skilgreiningini
+895#£Ein setningsfrøðilig villa er knýtt at einum integrale. Hevur/Hava tú/minst dx í endanum?
+896#£Longd á úttaki:
+897#£Trýst á JA fyri at seta øll bókstavirnar inn í Word. (Ávaring: Kann seinka Word ella enntá fáa Word at krasja). \r\n Trýst á NEI fyri bara at seta fyrstu 1000 bókstavirnar inn.
+898#£Tú hevur sett ov fáar parameterar til funktiónina:
+899#£Hetta kann vera, tí tú hevur brúkt komma í staðin fyri semikolon til at skilja parameterarnar sundur. (Tú kanst heldur leggja eitt pláss afturat á aðrari síðuni av kommuni.)
+900#£Loysn treytir:
+901#£Tú mást velja ein lista fyrst, t.d. [1; 2; 3]
+902#£Kanska hevur tú býtt um n og r í K(n, r)?

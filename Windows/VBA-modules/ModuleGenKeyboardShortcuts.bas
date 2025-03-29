@@ -2,13 +2,8 @@ Attribute VB_Name = "ModuleGenKeyboardShortcuts"
 Option Explicit
 
 Public Sub GenerateKeyboardShortcutsWordMat()
-' gemmer KeyboardShortcuts i WordMat.dotm, men kun hvis det er selve wordMat.dotm filen der er åbnet
+' stores KeyboardShortcuts in WordMat.dotm, but only if the wordMat.dotm file itself is opened
     GenerateKeyboardShortcutsPar False
-End Sub
-Public Sub GenerateKeyboardShortcutsNormalDotm()
-' gemmer KeyboardShortcuts i WordMat.dotm, hvis det er selve wordMat.dotm filen der er åbnet. Hvis ikke gemmes i normal.dotm.
-' Det kan give problemer ved en opdatering at benytte denne metode
-    GenerateKeyboardShortcutsPar True
 End Sub
 Public Sub GenerateKeyboardShortcutsPar(Optional NormalDotmOK As Boolean = False)
     Dim Wd As WdKey, WT As Template
@@ -20,12 +15,7 @@ Public Sub GenerateKeyboardShortcutsPar(Optional NormalDotmOK As Boolean = False
     
     Set WT = GetWordMatTemplate(NormalDotmOK)
     If WT Is Nothing Then
-'        If MsgBox("Der kunne ikke findes nogen skabelon der hed wordmat*.dotm. Vil du anvende " & ActiveDocument.AttachedTemplate & "?", vbYesNo, "Ingen WordMat skabelon") = vbYes Then
-'            Set WT = ActiveDocument.AttachedTemplate
-'        Else
-'            GoTo slut
-'        End If
-        MsgBox "Den åbne skabelon er ikke wordmat*.dotm", vbOKOnly, "Fejl"
+        MsgBox "The open template is not wordmat*.dotm", vbOKOnly, Sprog.Error
         GoTo slut
     End If
     
@@ -37,7 +27,7 @@ On Error Resume Next
 '#If Mac Then
 '    Wd = wdKeyControl
 '#Else
-    Wd = wdKeyAlt ' 1024 på windows, 2048 på mac
+    Wd = wdKeyAlt ' 1024 for windows, 2048 for mac
 '#End If
     
     KeyBindings.Add KeyCode:=BuildKeyCode(wdKeyG, Wd), KeyCategory:=wdKeyCategoryCommand, Command:="PressAltG"
@@ -83,18 +73,18 @@ End Sub
 
 
 Public Sub CheckKeyboardShortcuts()
-' til manuelt kald af om alt er ok med ks
+' to manually check if everything is ok with ks
     CheckKeyboardShortcutsPar False
 End Sub
 Public Sub TestCheckKeyboardShortcutsNoninteractive()
     MsgBox CheckKeyboardShortcutsPar(True)
 End Sub
 Public Function CheckKeyboardShortcutsNoninteractive() As String
-' bruges at test-modulet til at checke om ks er sat rigtigt. Det er ikke vigtigt om Normal-dotm er sat.
+' is used by the test module to check if ks is set correctly. It is not important whether Normal-dotm is set.
     CheckKeyboardShortcutsNoninteractive = CheckKeyboardShortcutsPar(True)
 End Function
 Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) As String
-    ' Checker om Keyboard shortcuts er gemt correct i WordMat.dotm.  og om der er gemt noget i normal.dotm
+' Checks if Keyboard shortcuts are saved correctly in WordMat.dotm. and if anything is saved in normal.dotm
     Dim WT As Template
     Dim KB As KeyBinding
     Dim GemT As Template, s As String
@@ -104,9 +94,9 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
         
     Set WT = GetWordMatTemplate(False)
     If WT Is Nothing Then
-        CheckKeyboardShortcutsPar = "Der kunne ikke findes nogen skabelon, der hed wordmat*.dotm" & vbCrLf
+        CheckKeyboardShortcutsPar = "No template named wordmat*.dotm could be found." & vbCrLf
         If Not NonInteractive Then
-            MsgBox "Det ser ikke ud til at du har åbnet wordmat.dotm, men kører som global skabelon. Genveje vises for " & ActiveDocument.AttachedTemplate & "", vbOKOnly, "Ingen WordMat skabelon"
+            MsgBox "It doesn't look like you have opened wordmat.dotm, but it is running as a global template. Shortcuts are shown for" & ActiveDocument.AttachedTemplate & "", vbOKOnly, "No WordMat template"
             Set WT = ActiveDocument.AttachedTemplate
         Else
             GoTo slut
@@ -130,9 +120,9 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
         End If
     Next
     If KeybInNormal Then
-        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Advarsel: Der er sat WordMat tastaturgenveje i Normal.dotm" & vbCrLf
+        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Warning: WordMat keyboard shortcuts have been set in Normal.dotm" & vbCrLf
         If Not NonInteractive Then
-            MsgBox "Der er sat WordMat tastaturgenveje i Normal.dotm", vbOKOnly Or vbInformation, "Advarsel"
+            MsgBox "WordMat keyboard shortcuts are set in Normal.dotm", vbOKOnly Or vbInformation, "Warning"
             DeleteNormalDotm
         End If
         GoTo slut
@@ -143,12 +133,12 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     If Not NonInteractive Then
         s = "CustomizationContext:  " & CustomizationContext & VbCrLfMac
         If CustomizationContext = ActiveDocument.AttachedTemplate Then
-            s = s & "Det er aktivt dokument" & VbCrLfMac
+            s = s & "It is an active document" & VbCrLfMac
         Else
-            s = s & "Det er global skabelon og ikke aktivt dokument" & VbCrLfMac
+            s = s & "It is a global template and not an active document." & VbCrLfMac
         End If
         s = s & vbCrLf
-        s = s & "Antal keybindings: " & KeyBindings.Count & VbCrLfMac & VbCrLfMac
+        s = s & "No. of keybindings: " & KeyBindings.Count & VbCrLfMac & VbCrLfMac
         s = s & "Keybindings:" & VbCrLfMac
     End If
     On Error Resume Next
@@ -165,9 +155,9 @@ Function CheckKeyboardShortcutsPar(Optional NonInteractive As Boolean = False) A
     If Not NonInteractive Then
         MsgBox s, vbOKOnly, "KeyBindings"
     ElseIf KeyBindings.Count < 10 Then
-        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er kun " & KeyBindings.Count & " tastaturveje i WordMat*.dotm. Der skal nok køres GenerateKeyboardShortcutsWordMat." & vbCrLf
+        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "There is only " & KeyBindings.Count & " keyboard shortcuts in WordMat*.dotm. You should run GenerateKeyboardShortcutsWordMat." & vbCrLf
     ElseIf KBerr Then
-        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "Der er problemer med Genvejene i WordMat*.dotm. Der skal nok køres GenerateKeyboardShortcutsWordMat på Mac." & vbCrLf
+        CheckKeyboardShortcutsPar = CheckKeyboardShortcutsPar & "There are problems with the keyboard shortcuts in WordMat*.dotm. You should run GenerateKeyboardShortcutsWordMat on Mac." & vbCrLf
     End If
     
 slut:

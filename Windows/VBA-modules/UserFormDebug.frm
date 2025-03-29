@@ -13,17 +13,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' This form is used for debugging. It shows input and output to Maxima
 
 Private Sub CommandButton_ok_Click()
     Me.hide
 End Sub
 
-Private Sub UserForm_Activate()
-'    TextBox_output.Font.Size = 12
-'    TextBox_output.WordWrap = False
-'    TextBox_output.WordWrap = True
-'    TextBox_maximaoutput.WordWrap = False
-'    TextBox_maximaoutput.WordWrap = True
-End Sub

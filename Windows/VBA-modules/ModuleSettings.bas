@@ -1,4 +1,4 @@
-Attribute VB_Name = "MaximaSettingsModule"
+Attribute VB_Name = "ModuleSettings"
 Option Explicit
 
 Enum KeybShortcut
@@ -23,8 +23,7 @@ Enum KeybShortcut
     InsertRefToEqution
 End Enum
 
-
-Public UFMSettings As UserFormMaximaSettings
+Public UFMSettings As UserFormSettings
 Public SettingsRead As Boolean
 Private mforklaring As Boolean
 Private mkommando As Boolean
@@ -48,7 +47,7 @@ Private mshowassum As Boolean
 Private mpolaroutput As Boolean
 Private mgraphapp As Integer
 Private mlanguage As Integer
-Private mlmset As Boolean ' løsninger som løsningsmængde
+Private mlmset As Boolean ' solutions as a set
 Private mdasdiffchr As Boolean
 Private mlatexstart As String
 Private mlatexslut As String
@@ -115,7 +114,7 @@ On Error Resume Next
     mpolaroutput = CBool(GetRegSetting("PolarOutput"))
     mgraphapp = CInt(GetRegSettingLong("GraphApp"))
 #If Mac Then
-    If mgraphapp = 0 Then mgraphapp = 2 ' gnuplot er pt afskaffet, så der bruges webapp
+    If mgraphapp = 0 Then mgraphapp = 2 ' gnuplot is not available on mac
 #End If
     mlanguage = CInt(GetRegSettingLong("Language"))
     mdasdiffchr = CBool(GetRegSetting("dAsDiffChr"))
@@ -187,10 +186,9 @@ On Error Resume Next
     SettingsRead = True
 End Sub
 Public Sub SetAllDefaultRegistrySettings()
-' sætter alle indstillinger til default, men kun hvis de ikke eksisterer i forvejen
+' sets all settings to default, but only if they don't already exist
 On Error Resume Next
     If Not RegKeyExists("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\Forklaring") Then
-'    If MsgBox("Indstillingerne kan ikke findes. Vil du genoprette og nulstille alle indstillinger?", vbOKCancel, Sprog.Error) Then
     MaximaForklaring = True
     MaximaKommando = False
     MaximaExact = 2 ' numerisk
@@ -205,7 +203,6 @@ On Error Resume Next
     ExcelIndlejret = False
     AllTrig = False
     OutUnits = ""
-'    Antalberegninger = 0 ' skal vel aldrig nulstilles
     SettCheckForUpdate = True
     MaximaIndex = False
     PolarOutput = False
@@ -223,7 +220,7 @@ On Error Resume Next
     EqNumPlacement = False
     EqNumType = False
     EqAskRef = False
-    BackupType = 2 ' spørg ikke
+    BackupType = 2 ' dont ask
     BackupNo = 1
     BackupMaxNo = 20
     BackupTime = 5
@@ -252,12 +249,10 @@ On Error Resume Next
     SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
     SettShortcutAltQ = -1
     
-'    End If
     End If
     If Not RegKeyExists("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\BigFloat") Then
         mbigfloat = False
     End If
-
 End Sub
 
 Public Property Get MaximaForklaring() As Boolean
@@ -883,7 +878,6 @@ Public Property Let SettShortcutAltGr(xval As Integer)
     SetRegSetting "SettShortcutAltGr", xval
     mSettShortcutAltGr = xval
 End Property
-
 
 '------------------- registry functions --------------------
 

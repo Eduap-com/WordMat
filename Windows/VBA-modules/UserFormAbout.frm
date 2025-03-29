@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+' This form shows who made WordMat, version number, partnership info etc.
 
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)

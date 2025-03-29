@@ -55,9 +55,7 @@ End Function
 
 Function GetTempDir() As String
 #If Mac Then
-'    If startupdrive = vbNullString Then getappdir
     If UserDir = vbNullString Then UserDir = MacScript("return POSIX path of (path to home folder)")
-'    If userdir = vbNullString Then userdir = MacScript("return (path to home folder) as string")
     tmpdir = UserDir & "WordMat/"
     On Error Resume Next
     MkDir (tmpdir)
@@ -65,7 +63,6 @@ Function GetTempDir() As String
 #Else
     GetTempDir = Environ("TEMP") & "\"
 #End If
-
 End Function
 
 Sub ChangeAutoHyphen()
@@ -78,8 +75,8 @@ Sub ShowCustomizationContext()
     MsgBox Templates(4)
 End Sub
 Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Template
-    ' Hvis det aktuelle dokument hedder wordmat*.dotm så returneres den som template
-    ' Ellers søges alle globale skabeloner igennem efter om der er en der hedder wordmat*.dotm
+' If the current document is called wordmat*.dotm then it is returned as a template
+' Otherwise all global templates are searched to see if there is one called wordmat*.dotm
     If Len(ActiveDocument.AttachedTemplate) > 10 Then
         If LCase(Left(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase(right(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
             Set GetWordMatTemplate = ActiveDocument.AttachedTemplate
@@ -90,7 +87,7 @@ Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Templat
         Set GetWordMatTemplate = NormalTemplate
     End If
 
-' Det duer ikke at ændre wordmat.dotm hvis filen ikke er åbnet direkte. Den kan ikke gemmes.
+' It is not possible to modify wordmat.dotm if the file is not opened directly. It cannot be saved.
 '    For Each WT In Application.Templates
 '        If LCase(Left(WT, 7)) = "wordmat" And LCase(right(WT, 5)) = ".dotm" Then
 '            Set GetWordMatTemplate = WT
@@ -100,9 +97,9 @@ Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Templat
 End Function
 
 Function GetProgramFilesDir() As String
-    ' bruges ikke af maxima mere da det er dll-filen der står for det nu.
-    ' bruges af de Worddokumenter mm. der skal findes
-    'MsgBox GetProgFilesPath
+' is not used by maxima anymore as the dll file is responsible for it now.
+' is used by the Word documents etc. that need to be found
+'MsgBox GetProgFilesPath
     On Error GoTo Fejl
 #If Mac Then
     GetProgramFilesDir = "/Applications/"
@@ -128,30 +125,28 @@ Function GetProgramFilesDir() As String
 Fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
 slut:
-    'MsgBox GetProgramFilesDir
 End Function
 
 Function GetDocumentsDir() As String
-On Error GoTo Fejl
-  If DocumentsDir <> "" Then
-    GetDocumentsDir = DocumentsDir
-  Else
+    On Error GoTo Fejl
+    If DocumentsDir <> "" Then
+        GetDocumentsDir = DocumentsDir
+    Else
 #If Mac Then
-    GetDocumentsDir = MacScript("return POSIX path of (path to documents folder) as string")
+        GetDocumentsDir = MacScript("return POSIX path of (path to documents folder) as string")
 #Else
- GetDocumentsDir = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal")
- If Dir(GetDocumentsDir, vbDirectory) = "" Then
-     GetDocumentsDir = "c:\"
- End If
+        GetDocumentsDir = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal")
+        If Dir(GetDocumentsDir, vbDirectory) = "" Then
+            GetDocumentsDir = "c:\"
+        End If
 #End If
- DocumentsDir = GetDocumentsDir
- End If
+        DocumentsDir = GetDocumentsDir
+    End If
  
-GoTo slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
 slut:
-'MsgBox GetProgramFilesDir
 End Function
 
 Function GetDownloadsFolder() As String
@@ -163,8 +158,7 @@ Function GetDownloadsFolder() As String
 #End If
 End Function
 Function RegKeyRead(i_RegKey As String) As Variant
-    'eks syntaks
-    '"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir"
+'example syntax: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir"
 #If Mac Then
     RegKeyRead = GetSetting("com.wordmat", "defaults", i_RegKey)
 #Else
@@ -191,8 +185,7 @@ Function RegKeyExists(i_RegKey As String) As Boolean
         myWS.RegRead i_RegKey
         RegKeyExists = True
         Exit Function
-ErrorHandler:
-        'key was not found
+ErrorHandler:  'key was not found
         RegKeyExists = False
     Else
         RegKeyExists = MaxProc.RegKeyExists(i_RegKey)
@@ -236,12 +229,8 @@ ErrorHandler:
     End If
 #End If
 End Function
-Sub TestLink()
-    OpenLink "https://www.eduap.com"
-End Sub
-
 Sub OpenLink(Link As String, Optional Script As Boolean = False)
-' obs: Script er altid true på mac for at forhindre advarsel
+' note: Script is always true on mac to prevent warning
 On Error Resume Next
 
 #If Mac Then
@@ -252,11 +241,11 @@ On Error Resume Next
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True
     End If
 #Else
-' ActiveDocument.FollowHyperlink fjerner parametre som fx. ?command=...   Derfor kan det være nødvendigt at bruge script
+' ActiveDocument.FollowHyperlink removes parameters such as ?command=... Therefore it may be necessary to use script
     If Script Then
         MaxProc.RunFile GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe", """" & Link & """"
     Else
-        ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' hvis linket ikke virker så sker der bare ingen ting
+        ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' If the link doesn't work, nothing happens.
     End If
 #End If
 Fejl:
@@ -272,7 +261,7 @@ Sub InsertSletDef()
     On Error GoTo slut
     
     If Selection.Tables.Count > 0 Then
-        MsgBox2 "Can't insert in a table", vbOKOnly, "Error"
+        MsgBox2 Sprog.A(475), vbOKOnly, Sprog.Error
         Exit Sub
     End If
     
@@ -368,7 +357,6 @@ slut:
 End Sub
 
 Sub ForrigeResultat()
-
     Dim ra As Range
     Dim sr As Range
     Dim r As Range
@@ -391,7 +379,7 @@ Sub ForrigeResultat()
     End If
     
     Set sr = Selection.Range
-    If ResPos1 = Selection.Range.start Then ' hvis gentaget tryk
+    If ResPos1 = Selection.Range.start Then ' if repeated click
         If ResIndex < 0 Then
             ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
@@ -456,9 +444,9 @@ Loop While hopover
     sr.Select
     ResPos1 = Selection.Range.start
     If Selection.Range.Text = "Skriv ligningen her." Then
-        ResPos1 = ResPos1 - 1 ' hvis tom i forvejen er selection af eller anden grund 1 tegn for meget
+        ResPos1 = ResPos1 - 1 ' if already empty, selection is for some reason 1 character too many
     End If
-    s = Replace(s, VBA.ChrW(8289), "") ' funktionstegn  sin(x) bliver ellers til si*n(x). også problem med andre funktioner
+    s = Replace(s, VBA.ChrW(8289), "") ' function sign sin(x) otherwise becomes si*n(x). also problem with other functions
     Selection.Text = s
     
 GoTo slut
@@ -472,9 +460,9 @@ slut:
 End Sub
 
 Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
-' returnerer sidste del af texten til første position talt fra enden for = eller ca. ligmed
-' = i sumtegn ignoreres
-    
+' returns the last part of the text to the first position counted from the end for = or approximately equal
+' = in the sum sign is ignored
+
     Dim posligmed As Integer
     Dim possumtegn As Integer
     Dim posca As Integer
@@ -495,7 +483,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
         If posca > 0 And posca < Pos Then Pos = posca
         If poseller > 0 And poseller < Pos Then Pos = poseller
         
-        If possumtegn > 0 And possumtegn < Pos Then ' hvis sumtegn er der =tegn som del deraf
+        If possumtegn > 0 And possumtegn < Pos Then ' if there is a sum sign, there is an = sign as part of it
             Pos = 0
         End If
         If Pos = Len(Text) Then Pos = 0
@@ -508,7 +496,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
         End If
     Loop While Pos > 0
     
-    If indeks = i Then ResIndex = -1  ' global variabel markerer at der ikke er flere til venstre
+    If indeks = i Then ResIndex = -1  ' global variable marks that there are no more to the left
     If i = 0 Then
         KlipTilLigmed = Text
         ResIndex = -1
@@ -516,7 +504,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
         KlipTilLigmed = Arr(i - indeks)
     End If
     
-    ' fjern retur og mellemrum mm.
+    ' remove returns and spaces etc.
 '    s = Replace(s, vbCrLf, "")
     KlipTilLigmed = Replace(KlipTilLigmed, vbCr, "")
     KlipTilLigmed = Replace(KlipTilLigmed, VBA.ChrW(11), "")
@@ -525,7 +513,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
 '    KlipTilLigmed = Replace(KlipTilLigmed, " ", "")
     KlipTilLigmed = Trim(KlipTilLigmed)
     
-    If InStr(KlipTilLigmed, "/") > 0 Then KlipTilLigmed = "  " & KlipTilLigmed ' hvorfor?
+    If InStr(KlipTilLigmed, "/") > 0 Then KlipTilLigmed = "  " & KlipTilLigmed
     
 End Function
 
@@ -542,7 +530,7 @@ Fejl:
 slut:
 End Sub
 Sub OpenWordFile(FilNavn As String)
-    ' OpenWordFile ("Figurer.docx")
+'Example: OpenWordFile ("Figurer.docx")
 
     Dim filnavn1 As String
 #If Mac Then
@@ -558,7 +546,6 @@ Sub OpenWordFile(FilNavn As String)
 
     If Dir(filnavn1) = vbNullString Then
         filnavn2 = GetProgramFilesDir & "\WordMat\WordDocs\" & FilNavn
-
     End If
     
     If Dir(filnavn1) <> "" Then
@@ -574,7 +561,6 @@ Sub OpenWordFile(FilNavn As String)
 Fejl:
     MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
 slut:
-
 End Sub
 
 Function GetRandomTip()
@@ -582,7 +568,7 @@ Function GetRandomTip()
     Dim n As Integer
     Dim mindste As Integer
     Dim tip As String
-    n = 29 ' antal tip
+    n = 29 ' no. of tips
     mindste = 0
     
     If AntalB < 10 Then
@@ -606,7 +592,7 @@ Function GetRandomTip()
     End If
     
     Randomize
-    i = Int(Rnd(1) * (n - mindste) + mindste) ' tilfældigt tal 0-(n-1)
+    i = Int(Rnd(1) * (n - mindste) + mindste) ' random number n 0-(n-1)
 
     Select Case i
     Case 0
@@ -712,7 +698,7 @@ End Sub
 Sub TurnUnitsOn()
     On Error Resume Next
     MaximaUnits = True
-    Application.OMathAutoCorrect.Functions("min").Delete  ' ellers kan min ikke bruges som enhed
+    Application.OMathAutoCorrect.Functions("min").Delete  ' otherwise mine cannot be used as a unit
 End Sub
 Sub TurnUnitsOff()
     On Error Resume Next
@@ -744,15 +730,12 @@ Sub ToggleNum()
 End Sub
 
 Sub CheckForUpdate()
-    CheckForUpdateWindows False
+    CheckForUpdatePar False
 End Sub
-Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
-    ' selvom den hedder windows er det nu også mac
+Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     On Error GoTo Fejl
     Dim NewVersion As String, p As Integer, News As String, s As String
     Dim UpdateNow As Boolean, PartnerShip As Boolean
-'    Dim UFvent As UserFormWaitForMaxima
-    
    
     If GetInternetConnectedState = False Then
         If Not RunSilent Then MsgBox Sprog.A(63), vbOKOnly, Sprog.Error
@@ -760,18 +743,17 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     End If
     
     If RunSilent Then
-        If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo slut ' ikke automatisk opdatere i maj og juni
+        If (Month(Date) = 5 Or Month(Date) = 6) Then GoTo slut ' do not automatically update in May and June
         If IsDate(LastUpdateCheck) Then
-            If DateDiff("d", LastUpdateCheck, Date) < 7 Then GoTo slut ' hvis der er checket indenfor de sidste 7 dage så afslut
+            If DateDiff("d", LastUpdateCheck, Date) < 7 Then GoTo slut ' if checked within the last 7 days then exit
         End If
     End If
-    LastUpdateCheck = Date ' denne skal være her, og ikke i slutningen, for hvis der sker en fejl i opdateringen, skal den kun komme én gang
+    LastUpdateCheck = Date ' this should be here, and not at the end, because if an error occurs in the update, it should only come once
     
     On Error Resume Next
     PartnerShip = QActivePartnership()
     On Error GoTo Fejl
     
-    '    s = GetHTML("https://www.eduap.com/wordmat-version-history/")
 #If Mac Then
     If PartnerShip Then
         s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatversionP.txt")
@@ -783,7 +765,6 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     If PartnerShip Then
         s = GetHTML("https://www.eduap.com/download/info/wordmatversionP.txt")
     Else
-'        s = GetHTML("https://screinfo.eduap.com/wordmatversion.txt")
         s = GetHTML("https://www.eduap.com/download/info/wordmatversionP.txt")
     End If
 #End If
@@ -812,39 +793,6 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
         End If
         GoTo slut
     End If
-    
-    '        p = InStr(s, "<body")
-    '        p = InStr(p, s, "Version ")
-    '        If p <= 0 Then GoTo fejl
-    '        v = Trim(Mid(s, p + 8, 4))
-    '        p2 = InStr(p + 10, s, "Version " & AppVersion)
-    '        If p2 <= 0 Then p2 = InStr(p + 10, s, "Version")
-    '        If p2 <= 0 Then p2 = p + 50
-    '        News = Mid(s, p, p2 - p)
-    '        News = Replace(News, "&#8211;", vbCr & " -") ' bindestreg
-    '        News = Replace(News, "Version ", vbCrLf & "Version ") ' bindestreg
-    '        News = Replace(News, "<br />", "")
-    '        News = Replace(News, "<strong>", "")
-    '        News = Replace(News, "</strong>", "")
-    '        News = Replace(News, "<p>", "")
-    '        News = Replace(News, "</p>", "")
-    '    If Len(v) = 0 Then
-    '        If Not RunSilent Then
-    '            MsgBox "Serveren kan ikke kontaktes", vbOKOnly, "Fejl"
-    '            GoTo slut
-    '        End If
-    '    End If
-    '    If AppVersion <> v Then
-    '        '      If UFreminder.Visible = True Then UFreminder.Top = 100
-    '        result = MsgBox(Sprog.A(21) & News & vbCrLf & Sprog.A(22), vbYesNo, Sprog.A(23))
-    '        If result = vbYes Then
-    '            OpenLink "https://www.eduap.com/da/wordmat/"
-    '        End If
-    '    Else
-    '        If Not RunSilent Then
-    '            MsgBox "Du har allerede den nyeste version installeret", vbOKOnly, "Ingen opdatering"
-    '        End If
-    '    End If
    
     If IsNumeric(AppVersion) And IsNumeric(NewVersion) Then
         If val(AppVersion) < val(NewVersion) Then UpdateNow = True
@@ -854,7 +802,6 @@ Sub CheckForUpdateWindows(Optional RunSilent As Boolean = False)
     
     If UpdateNow Then
         If PartnerShip Then
-'            Set UFvent = New UserFormWaitForMaxima
             If MsgBox2(Sprog.A(21) & News & vbCrLf & vbCrLf & Sprog.A(64), vbOKCancel, Sprog.A(23)) = vbOK Then
                 On Error Resume Next
                 Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
@@ -881,30 +828,24 @@ Install2:
     GoTo slut
 Fejl:
     If Not RunSilent Then
-        MsgBox "Current version is: " & AppVersion & vbCrLf & vbCrLf & "Remember the version no. above. You will now be send to the download page where you can check for a newer version -  www.eduap.com"
-        OpenLink "https://www.eduap.com/da/wordmat/"
+        If MsgBox2(Sprog.A(581) & AppVersion, vbOKCancel, Sprog.Error) = vbOK Then
+            If Sprog.SprogNr = 1 Then
+                OpenLink "https://www.eduap.com/da/wordmat/"
+            Else
+                OpenLink "https://www.eduap.com/wordmat/"
+            End If
+        End If
     End If
 slut:
 
 End Sub
 
 Sub CheckForUpdateSilent()
-' maxproc skal være oprettet
-    On Error GoTo Fejl
-
-'#If Mac Then
-'    CheckForUpdateF True
-'#Else
-    CheckForUpdateWindows True
-'#End If
-GoTo slut
-Fejl:
-'    MsgBox "Der kunne ikke oprettes forbindelse til serveren", vbOKOnly, "Fejl"
-slut:
+    CheckForUpdatePar True
 End Sub
 Function GetHTML(URL As String) As String
     With CreateObject("MSXML2.XMLHTTP")
-        .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer sikrer at det ikke er cached version
+        .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer ensures that it is not a cached version
         .Send
         GetHTML = .ResponseText
     End With
@@ -976,7 +917,7 @@ Function ConvertNumberToString(ByVal n As Double) As String
 slut:
 End Function
 Function ConvertNumberToStringBC(n As Double, Optional bc As Integer) As String
-' konverter tal til streng med angivet antal betydende cifre. Hvis ingen angives anvendes maximacifre
+' convert number to string with specified number of significant digits. If none is specified, maximum digits are used
     If bc > 0 Then
         ConvertNumberToStringBC = ConvertNumberToString(betcif(n, bc))
     Else
@@ -1001,7 +942,7 @@ On Error Resume Next
 End Function
 
 Function ConvertNumberToMaxima(n As String) As String
-' tager højde for E, men ikke helt entydigt.
+' takes E into account, but not entirely uniquely.
 
     n = Replace(n, ",", ".")
     
@@ -1018,7 +959,7 @@ Function ConvertNumberToMaxima(n As String) As String
 End Function
 
 Sub LandScapePage()
-' indsætter landscape side og alm side efter
+' inserts landscape page and regular page after
     ActiveDocument.Range(start:=Selection.start, End:=Selection.start).InsertBreak Type:=wdSectionBreakNextPage
     Selection.start = Selection.start + 1
     With ActiveDocument.Range(start:=Selection.start, End:=Selection.start).PageSetup
@@ -1043,8 +984,8 @@ Sub ForceError()
 End Sub
 
 Public Sub ClearClipBoard()
-' giver desværre sjældne problemer på nogle computere
-' specielt hvis der er definitioner i dokumentet så den fyres to gange
+' unfortunately causes rare problems on some computers
+' especially if there are definitions in the document so it is fired twice
 On Error GoTo slut
     Dim oData   As New DataObject 'object to use the clipboard
      
@@ -1055,15 +996,15 @@ slut:
 End Sub
 
 Sub GoToEndOfMath()
-Dim mc As OMaths
-Dim i As Integer
+    Dim mc As OMaths
+    Dim i As Integer
     Selection.Collapse wdCollapseEnd
     Set mc = Selection.OMaths
     If mc.Count > 0 Then
-On Error Resume Next
-    mc(mc.Count).ParentOMath.Range.Select
-On Error GoTo slut
-    mc(mc.Count).Range.Select  ' virker med word 2010, parentomath giver tilgengæld problemer. Hmm problem med valgt del af udtryk og reducer
+        On Error Resume Next
+        mc(mc.Count).ParentOMath.Range.Select
+        On Error GoTo slut
+        mc(mc.Count).Range.Select  ' works with word 2010, parentomath gives problems though. Hmm problem with selected part of expression and reducer
     Else
         i = 0
         Do While Selection.OMaths.Count = 0 And i < 100
@@ -1072,18 +1013,18 @@ On Error GoTo slut
         Loop
     End If
 slut:
-On Error Resume Next
+    On Error Resume Next
     Selection.Collapse wdCollapseEnd
     Dim r As Range
     Set r = Selection.Range
     r.MoveStart wdCharacter, -1
-    If r.Text = VBA.ChrW(11) Then ' hvis der er shift-enter i slutningen erstattes med alm. retur
+    If r.Text = VBA.ChrW(11) Then ' if there is shift-enter at the end, replace with regular return
         r.Text = VBA.ChrW(13)
     End If
 End Sub
 
 Function NotZero(i As Integer) As Integer
-' hvis negativ returner nul
+' if negative return zero
     If i < 0 Then
         NotZero = 0
     Else
@@ -1096,11 +1037,7 @@ Sub TabelToList()
     Dim OM As Range
     On Error GoTo Fejl
     If Selection.Range.Tables.Count = 0 Then
-        If Sprog.SprogNr = 1 Then
-            MsgBox "Du skal markere en tabel først", vbOKOnly, "Fejl"
-        Else
-            MsgBox "Select a table first", vbOKOnly, "Error"
-        End If
+        MsgBox Sprog.A(871), vbOKOnly, Sprog.Error
         GoTo slut
     End If
     PrepareMaxima
@@ -1122,36 +1059,25 @@ Fejl:
 slut:
 End Sub
 Sub ListToTabel()
-Dim dd As New DocData
-Dim Tabel As Table
-Dim i As Integer, j As Integer
-On Error GoTo Fejl
-PrepareMaxima
+    Dim dd As New DocData
+    Dim Tabel As Table
+    Dim i As Integer, j As Integer
+    On Error GoTo Fejl
+    
+    PrepareMaxima
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
-dd.ReadSelection
-If dd.nrows = 0 Or dd.ncolumns = 0 Then
-    If Sprog.SprogNr = 1 Then
-        MsgBox "Du skal markere en liste først fx [1;2;3]", vbOKOnly, "Fejl"
-    Else
-        MsgBox "Select a list first. Example: [1;2;3]", vbOKOnly, "Error"
+    dd.ReadSelection
+    If dd.nrows = 0 Or dd.ncolumns = 0 Then
+        MsgBox Sprog.A(901), vbOKOnly, Sprog.Error
+        GoTo slut
     End If
-    GoTo slut
-End If
-GoToInsertPoint
-Selection.TypeParagraph
-'Selection.Tables.Add Selection.Range, dd.nrows, dd.ncolumns
-        Set Tabel = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=dd.nrows, NumColumns:=dd.ncolumns _
-        , DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed)
+    GoToInsertPoint
+    Selection.TypeParagraph
+    Set Tabel = ActiveDocument.Tables.Add(Range:=Selection.Range, NumRows:=dd.nrows, NumColumns:=dd.ncolumns, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed)
 
-'        ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=dd.nrows, NumColumns:=dd.ncolumns _
-'        , DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
-'        wdAutoFitFixed
-        With Selection.Tables(1)
-'        If .Style <> "Tabel - Gitter" Then
-'            .Style = "Tabel - Gitter"
-'        End If
+    With Selection.Tables(1)
         .ApplyStyleHeadingRows = True
         .ApplyStyleLastRow = False
         .ApplyStyleFirstColumn = True
@@ -1161,25 +1087,23 @@ Selection.TypeParagraph
         For i = 1 To Tabel.Columns.Count
             .Columns(i).Width = 65
         Next
-        End With
+    End With
 
-'Set tabel = Selection.Tables.Add(Selection.Range, dd.nrows, dd.ncolumns)
-
-For i = 1 To dd.nrows
-    For j = 1 To dd.ncolumns
-        Tabel.Cell(i, j).Range.Text = dd.TabelsCelle(i, j)
+    For i = 1 To dd.nrows
+        For j = 1 To dd.ncolumns
+            Tabel.Cell(i, j).Range.Text = dd.TabelsCelle(i, j)
+        Next
     Next
-Next
 
-GoTo slut
+    GoTo slut
 Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
     Oundo.EndCustomRecord
 End Sub
 Sub GoToInsertPoint()
-' finder næste punkt efter selection hvor der kan indsættes nog
-' dvs. går efter mathbokse og tabeller
+' finds the next point after selection where more can be inserted
+' i.e. goes after math boxes and tables
 
 Selection.Collapse wdCollapseEnd
 If Selection.OMaths.Count > 0 Then
@@ -1197,11 +1121,11 @@ Sub ToggleDebug()
 End Sub
 
 Sub GenerateAutoCorrect()
-' genererer matematisk autokorrektur
+' generates math autocorrect. Not used, but has potential
     Application.OMathAutoCorrect.UseOutsideOMath = True
     
-    Application.OMathAutoCorrect.Entries.Add "\bi", VBA.ChrW(8660) ' biimplikationspile
-    Application.OMathAutoCorrect.Entries.Add "\imp", VBA.ChrW(8658) ' implikationspil højre
+    Application.OMathAutoCorrect.Entries.Add "\bi", VBA.ChrW(8660) ' biimplicative arrows
+    Application.OMathAutoCorrect.Entries.Add "\imp", VBA.ChrW(8658) ' implikationarrow right
 End Sub
 
 Sub RestartWordMat()
@@ -1223,7 +1147,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Application.ScreenUpdating = False
 
     If Selection.Tables.Count > 0 Then
-        MsgBox "Cant insert numbered equation in table", vbOKOnly, Sprog.Error
+        MsgBox2 Sprog.A(872), vbOKOnly, Sprog.Error
         Exit Sub
     End If
 
@@ -1235,7 +1159,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         If Not Selection.OMaths(1).Range.Text = vbNullString Then
             Selection.OMaths(1).Range.Cut
             ccut = True
-            'der kan nogen gange være en rest af et matematikfelt
+            'there may sometimes be a remainder of a mathematical field
             If Selection.OMaths.Count > 0 Then
                 If Selection.OMaths(1).Range.Text = vbNullString Then
                     Selection.OMaths(1).Range.Delete
@@ -1274,7 +1198,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     t.Borders(wdBorderRight).LineStyle = wdLineStyleNone
     t.Borders(wdBorderVertical).LineStyle = wdLineStyleNone
 
-    'indsæt nummer
+    'Insert number
     If EqNumPlacement Then
         placement = 1
     Else
@@ -1313,7 +1237,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
         End If
     End If
 
-    ' indsæt mat-felt
+    ' insert math field
     t.Cell(1, 2).Range.Select
     Selection.Collapse wdCollapseStart
     If ccut Then
@@ -1337,7 +1261,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox2 Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 
@@ -1367,20 +1291,13 @@ Sub InsertEquationRef()
         Selection.Collapse wdCollapseEnd
     
         Oundo.EndCustomRecord
-    
     End If
     
     ActiveDocument.Fields.Update
     
-    '    Selection.InsertCrossReference referencetype:="Bogmærke", ReferenceKind:= _
-    '        wdContentText, ReferenceItem:="lign1", InsertAsHyperlink:=False, _
-    '        IncludePosition:=False, SeparateNumbers:=False, SeparatorString:=" "
-
-    '    Selection.MoveLeft Unit:=wdCharacter, count:=1
-    '    Selection.Fields.ToggleShowCodes
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox2 Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
 
@@ -1418,7 +1335,6 @@ On Error GoTo Fejl
             n = InputBox(Sprog.A(346), Sprog.A(6), F.result)
             SetFieldNo F, n
         End If
-        
     End If
     
     ActiveDocument.Fields.Update
@@ -1430,7 +1346,7 @@ End Sub
 
 Sub SetFieldNo(F As Field, n As String)
     Dim p As Integer, p2 As Integer
-On Error GoTo Fejl
+    On Error GoTo Fejl
     p = InStr(F.Code.Text, "\r")
     p2 = InStr(F.Code.Text, "\c")
     If p2 > 0 And p2 < p Then p = p2
@@ -1448,16 +1364,16 @@ End Sub
 
 Sub InsertEquationHeadingNo()
     Dim result As Long
-On Error GoTo Fejl
+    On Error GoTo Fejl
     result = MsgBox(Sprog.A(348), vbYesNoCancel, Sprog.A(8))
     If result = vbCancel Then Exit Sub
     If result = vbYes Then
-      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1"
+        Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1"
     Else
-      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1 \h"
+        Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1 \h"
     End If
-      Selection.Collapse wdCollapseEnd
-      Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 \r0 \h"
+    Selection.Collapse wdCollapseEnd
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 \r0 \h"
 
     ActiveDocument.Fields.Update
     GoTo slut
@@ -1475,31 +1391,6 @@ Fejl:
 slut:
 End Sub
 
-Sub CreateSprogArrays()
-' to create more arrays to fill in sprog
-
-Dim startn As Integer, no As Integer, startDepth As Integer, endDepth As Integer
-Dim i As Integer, j As Integer, s As String
-
-startn = 181
-no = 19
-startDepth = 0
-endDepth = 5
-
-For i = startn To startn + no
-    For j = startDepth To endDepth
-        s = s & "SA(" & i & ", " & j & ") = """ & vbCrLf
-    Next
-'    For j = endDepth + 1 To endDepth + 5
-'        s = s & "'SA(" & i & ", " & j & ") = """ & vbCrLf
-'    Next
-    s = s & vbCrLf
-Next
-Dim p As Long
-p = Selection.start
-Selection.Range.InsertAfter s
-End Sub
-
 Sub OpenLatexTemplate()
 On Error GoTo Fejl
     Documents.Add Template:=GetWordMatDir() & "WordDocs/LatexWordTemplate.dotx"
@@ -1512,7 +1403,7 @@ End Sub
 Sub DeleteNormalDotm()
     Dim UserDir As String
 
-MsgBox Sprog.A(681), vbOKOnly, ""
+    MsgBox Sprog.A(681), vbOKOnly, ""
 #If Mac Then
     Dim p As Integer
     UserDir = MacScript("return POSIX path of (path to home folder)")
@@ -1522,11 +1413,10 @@ MsgBox Sprog.A(681), vbOKOnly, ""
 #Else
     UserDir = Environ$("username")
     MsgBox "Open and delete this normal.dotm in this folder" & vbCrLf & "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates"
-    MaxProc.OpenFolder "C:\Users\" & UserDir & "\AppData\Roaming\Microsoft\Templates"
 #End If
 End Sub
 Sub DeleteKeyboardShortcutsInNormalDotm()
-' Sletter genveje til WordMat makroer der ved en fejl skulle være blevet gemt i normal.dotm
+' Deletes shortcuts to WordMat macros that were accidentally saved in normal.dotm
     Dim GemT As Template
     Dim KB As KeyBinding
     On Error Resume Next
@@ -1535,7 +1425,7 @@ Sub DeleteKeyboardShortcutsInNormalDotm()
             
     CustomizationContext = NormalTemplate
 
-#If Mac Then ' ved en elev var KB.command helt tom, så på mac anvendes kb.keystring, selvom det er lidt mere usikkert.
+#If Mac Then ' For one student, KB.command was completely empty, so on Mac, kb.keystring is used, although it is a little more insecure.
     For Each KB In KeyBindings
         If Len(KB.KeyString) = 8 And Left(KB.KeyString, 7) = "Option+" Then
             KB.Clear
@@ -1549,7 +1439,7 @@ Sub DeleteKeyboardShortcutsInNormalDotm()
     Next
 #End If
     NormalTemplate.Save
-' man kan ikke gemme WordMat.dotm som global skabelon når den er gemt for alle brugere
+' you cannot save WordMat.dotm as a global template when it is saved for all users
 '    For i = 1 To Application.Documents.Count
 '        arr(i) = Application.Documents(i).Saved
 '        Application.Documents(i).Saved = True
@@ -1644,11 +1534,10 @@ Function ExtractTag(s As String, StartTag As String, EndTag As String) As String
    End If
    
    ExtractTag = Mid(s, p + Len(StartTag), p2 - p - Len(StartTag))
-   
 End Function
 
 Sub SetMathAutoCorrect()
-' unfortunately cant be run from autoexec.
+' cant be run from automacros
     If MaximaGangeTegn = VBA.ChrW(183) Then
         Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW(183))
     ElseIf MaximaGangeTegn = VBA.ChrW(215) Then
@@ -1660,8 +1549,7 @@ Sub SetMathAutoCorrect()
 End Sub
 
 Function ConvertNumber(ByVal n As String) As String
-' sørger for at streng har maximaindstilling med separatorer
-
+' ensures that string has setting with separators
 If DecSeparator = "," Then
 '    n = Replace(n, ",", ";")
     ConvertNumber = Replace(n, ".", ",")
@@ -1671,11 +1559,28 @@ Else
 End If
 
 End Function
+
 Function GetWordMatDir() As String
 #If Mac Then
     GetWordMatDir = "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/"
 #Else
-    GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
+    If InstallLocation = "All" Then
+        GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
+        If Dir(GetWordMatDir, vbDirectory) = vbNullString Then
+            GetWordMatDir = Environ("AppData") & "\WordMat\"
+            If Dir(GetWordMatDir, vbDirectory) = vbNullString Then
+                MsgBox "WordMat folder could not be found", vbOKOnly, Sprog.Error
+            End If
+        End If
+    Else
+        GetWordMatDir = Environ("AppData") & "\WordMat\"
+        If Dir(GetWordMatDir, vbDirectory) = vbNullString Then
+            GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
+            If Dir(GetWordMatDir, vbDirectory) = vbNullString Then
+                MsgBox "WordMat folder could not be found", vbOKOnly, Sprog.Error
+            End If
+        End If
+    End If
 #End If
 End Function
 
@@ -1689,11 +1594,6 @@ Sub NewEquation()
     ElseIf Selection.Tables.Count = 0 Then
         If Selection.OMaths(1).Range.Text = vbNullString Then
             Set r = Selection.OMaths.Add(Selection.Range)
-'        ElseIf DoubleTapM = 2 Then
-'            If Not Selection.Range.ListFormat.ListValue = 0 Then
-'                Selection.Range.ListFormat.RemoveNumbers
-'            End If
-'            InsertNumberedEquation EqAskRef
         End If
     ElseIf Selection.Tables(1).Columns.Count = 3 And Selection.Tables(1).Cell(1, 3).Range.Fields.Count > 0 Then
         Selection.Tables(1).Cell(1, 2).Range.OMaths(1).Range.Cut
@@ -1725,7 +1625,6 @@ Function FormatDefinitions(DefS As String) As String
     DefS = Replace(DefS, "SymVecta", ChrW(&H20D7))
     DefS = Replace(DefS, "matrix", vbNullString)
             
-        
     DefS = Replace(DefS, "*", MaximaGangeTegn)
         
     DefS = Replace(DefS, "%pi", ChrW(&H3C0))
@@ -1768,14 +1667,14 @@ Function FormatDefinitions(DefS As String) As String
     DefS = Replace(DefS, "integrate(", ChrW(&H222B) & "(")
     DefS = Replace(DefS, "<=", VBA.ChrW(8804))
     DefS = Replace(DefS, ">=", VBA.ChrW(8805))
-    DefS = Replace(DefS, "ae", "æ")
-    DefS = Replace(DefS, "oe", "ø")
-    DefS = Replace(DefS, "aa", "å")
-    DefS = Replace(DefS, "AE", "Æ")
-    DefS = Replace(DefS, "OE", "Ø")
-    DefS = Replace(DefS, "AA", "Å")
+    DefS = Replace(DefS, "ae", ChrW(230))
+    DefS = Replace(DefS, "oe", ChrW(248))
+    DefS = Replace(DefS, "aa", ChrW(229))
+    DefS = Replace(DefS, "AE", ChrW(198))
+    DefS = Replace(DefS, "OE", ChrW(216))
+    DefS = Replace(DefS, "AA", ChrW(197))
         
-    'græske bogstaver
+    'greek letters
     DefS = Replace(DefS, "gamma", VBA.ChrW(915))    ' big gamma
     DefS = Replace(DefS, "Delta", VBA.ChrW(916))
     DefS = Replace(DefS, "delta", VBA.ChrW(948))
@@ -1811,9 +1710,7 @@ Function FormatDefinitions(DefS As String) As String
     
     DefS = Replace(DefS, "((x))", "(x)")
         
-    
     If DecSeparator = "," Then
-        '        DefS = Replace(DefS, ",", ";")
         DefS = Replace(DefS, ".", ",")
     End If
         
@@ -1823,7 +1720,7 @@ End Function
 Function MsgBox2(prompt As String, Optional Buttons As VbMsgBoxStyle = vbOKCancel, Optional Title As String) As VbMsgBoxResult
 ' Replacement for msgbox. This matches the UI of the other userforms. It can adapt in size.
 ' Buttons supported: vbYesNo, vbOKonly, vbOKCancel
-' MsgBox2 "This is a test", vbOKOnly, "Hello"
+' Example: MsgBox2 "This is a test", vbOKOnly, "Hello"
 
     Dim UFMsgBox As New UserFormMsgBox
     

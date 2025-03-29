@@ -52,7 +52,7 @@ End Sub
 Public Function FixedLatexPreamble1() As String
    Dim s As String, LID As Long, dClass As String, ps As String
    
-   s = s & "% !TEX encoding = ISO-8859-1" & vbCrLf ' kun til TexMaker?
+   s = s & "% !TEX encoding = ISO-8859-1" & vbCrLf ' only for TexMaker?
    If LatexDocumentclass = 0 Then
       dClass = "article"
    ElseIf LatexDocumentclass = 1 Then
@@ -252,12 +252,12 @@ Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error '"Der skete en fejl i forsøget på at gemme LaTex-filen"
+    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 
 End Sub
 Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
-    ' skal ikke bruges. pdf er bedre. fx includegraphics skal have flere parametre med denne
+' should not be used. pdf is better. e.g. includegraphics should have more parameters with this
     Dim i As Integer, j As Integer
     Dim mtpath As String
 #If Mac Then
@@ -277,7 +277,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
 
     SaveTex Mappe, FilNavn & ".tex"
 
-    ' x64 er for 64bit installtion af miktex
+    ' x64 is for 64bit installation of miktex
 
     For j = 0 To 1
         On Error Resume Next
@@ -312,7 +312,7 @@ slut:
 End Sub
 
 Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
-    ' filnavn uden extension
+    ' filnavn without extension
     Dim p As Long, p2 As Long, ErrorS As String
     Dim i As Integer, j As Integer
     Dim mtpath As String, ReRun As Boolean
@@ -348,7 +348,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
    
     Do
         UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "**"
-        UfWait.Label_tip = "Kører pdflatex " & j + 1 & ". gang"
+        UfWait.Label_tip = "Runs pdflatex " & j + 1 & ". time"
         ReRun = False
         On Error Resume Next
         If Dir(Mappe & "\" & FilNavn & ".pdf") <> "" Then Kill Mappe & "\" & FilNavn & ".pdf"
@@ -421,16 +421,16 @@ If Dir(Path, vbDirectory) <> "" Then
    GoTo slut
 End If
 
-Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex\bin\x64" ' hvis installeret i userprofile og 64 bit
+Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex\bin\x64" ' if installed in userprofile and 64 bit
 If Dir(Path, vbDirectory) <> "" Then
     MikTex64bit = True
-    Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' hvis installeret i userprofile
+    Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' if installed in userprofile
     GoTo slut
 End If
-Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' hvis installeret i userprofile
+Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' if installed in userprofile
 If Dir(Path, vbDirectory) <> "" Then GoTo slut
 
-Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' hvis installeret i userprofile
+Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' if installed in userprofile
 If Dir(Path, vbDirectory) <> "" Then GoTo slut
 
 'path = GetProgramFilesDir() & "\MikTex*"

@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormDeSolveNumeric 
-   Caption         =   "Løs differentialligning(er) numerisk"
+   Caption         =   "Solve differential equations numerically"
    ClientHeight    =   8130
    ClientLeft      =   45
    ClientTop       =   150
@@ -13,8 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+
 Public luk As Boolean
 Public InsertType As Integer
 Public ListOutput As String
@@ -88,7 +88,7 @@ Private Sub GeoGebraPlot()
     Ymax = -10000000
     Ymin = 10000000
     Erase PointArr
-    If Not SolveDE Then ' først beregnes punkter med Maxima
+    If Not SolveDE Then ' first calculate points with Maxima
         MsgBox Err.Description, vbOKOnly, "Error calculating points"
         Exit Sub
     End If
@@ -215,11 +215,7 @@ Dim i As Long, j As Integer
         UBound(PointArr, 2) + 1, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
         wdAutoFitFixed)
         With Tabel
-'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' på 2013 giver det ingen kanter
-'        If .Style <> "Tabel - Gitter" And InStr(.Style, "Table") < 0 Then
-'            On Error Resume Next
-'            .Style = "Tabel - Gitter" ' duer ikke på udenlandsk
-'        End If
+'            .Style = WdBuiltinStyle.WdBuiltinStyle.wdStyleNormalTable ' on 2013 no edges
         .ApplyStyleHeadingRows = True
         .ApplyStyleLastRow = False
         .ApplyStyleFirstColumn = True
@@ -324,7 +320,7 @@ Private Sub Label_toExcel_Click()
     Dim i As Long, j As Integer
     
     Erase PointArr
-    If Not SolveDE Then ' først beregnes punkter med Maxima
+    If Not SolveDE Then ' first calculate points with Maxima
         MsgBox Err.Description, vbOKOnly, "Error calculating points"
         Exit Sub
     End If
@@ -492,16 +488,16 @@ On Error GoTo slut
    Dim st As Double
    Label_validate.Caption = ""
    Label_validate.visible = False
-   If Not IsNumeric(TextBox_xmin.Text) Then Label_validate.Caption = "xmin er ikke et tal"
-   If Not IsNumeric(TextBox_xmax.Text) Then Label_validate.Caption = "xmax er ikke et tal"
-   If Not IsNumeric(TextBox_step.Text) Then Label_validate.Caption = "Skridtlængde er ikke et tal"
+   If Not IsNumeric(TextBox_xmin.Text) Then Label_validate.Caption = "xmin is not a number"
+   If Not IsNumeric(TextBox_xmax.Text) Then Label_validate.Caption = "xmax is not a number"
+   If Not IsNumeric(TextBox_step.Text) Then Label_validate.Caption = "Stepsize is not a number"
 #If Mac Then
 #Else
    If ComboBox_graphapp.ListIndex > 0 Then
 #End If
       If IsNumeric(TextBox_xmin.Text) And IsNumeric(TextBox_xmax.Text) And IsNumeric(TextBox_step.Text) Then
          st = Round((StrToDbl(TextBox_xmax.Text) - StrToDbl(TextBox_xmin.Text)) / StrToDbl(TextBox_step.Text), 0)
-         If st > 1000 Then Label_validate.Caption = "Antal skridt er " & st & ". Det vil formentlig ikke virke med GeoGebra med så mange skridt."
+         If st > 1000 Then Label_validate.Caption = "No of steps is " & st & ". It will probably not work with GeoGebra with that many steps."
       End If
 #If Mac Then
 #Else
@@ -631,7 +627,7 @@ Function SolveDE() As Boolean
     guesslist = Left(guesslist, Len(guesslist) - 1) & "]"
     DElist = Left(DElist, Len(DElist) - 1) & "]"
     
-    omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand FindDef:=False  ' without searching for definitions in document
     InsertDefinitioner
     omax.SolveDENumeric variabel, xmin, xmax, xstep, varlist, guesslist, DElist
     ListOutput = omax.MaximaOutput
@@ -669,7 +665,7 @@ On Error GoTo Fejl
     Label_wait.Caption = Sprog.A(826) & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
-    omax.PrepareNewCommand FindDef:=False  ' uden at søge efter definitioner i dokument
+    omax.PrepareNewCommand FindDef:=False
     
 '    text = "explicit(x^2,x,-1,1)"
     If Len(TextBox_ymin.Text) > 0 And Len(TextBox_ymax.Text) > 0 Then
@@ -681,7 +677,7 @@ On Error GoTo Fejl
         Text = Text & "point_size=" & Replace(highres * 1, ",", ".") & ","
     Else
 #If Mac Then
-        Text = Text & "point_size=0.1," ' fejler med 0 på mac
+        Text = Text & "point_size=0.1," ' fails with 0 on mac
 #Else
         Text = Text & "point_size=0,"
 #End If
@@ -814,22 +810,22 @@ slut:
 End Sub
 
 Sub InsertDefinitioner()
-' indsætter definitioner fra textboxen i maximainputstring
-Dim DefString As String
+    ' inserts definitions from the textbox into the maximainputstring
+    Dim DefString As String
 
-omax.InsertKillDef
+    omax.InsertKillDef
 
-DefString = GetDefString
+    DefString = GetDefString
 
-If Len(DefString) > 0 Then
-'defstring = Replace(defstring, ",", ".")
-'defstring = Replace(defstring, ";", ",")
-'defstring = Replace(defstring, "=", ":")
-If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
+    If Len(DefString) > 0 Then
+        'defstring = Replace(defstring, ",", ".")
+        'defstring = Replace(defstring, ";", ",")
+        'defstring = Replace(defstring, "=", ":")
+        If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
 
-'omax.MaximaInputStreng = omax.MaximaInputStreng & "[" & defstring & "]$"
-omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
-End If
+        'omax.MaximaInputStreng = omax.MaximaInputStreng & "[" & defstring & "]$"
+        omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
+    End If
 End Sub
 Function GetDefString()
 Dim DefString As String
@@ -839,7 +835,7 @@ If Len(DefString) > 0 Then
 DefString = Replace(DefString, vbCrLf, ListSeparator)
     DefString = TrimB(DefString, ListSeparator)
 Do While InStr(DefString, ListSeparator & ListSeparator) > 0
-    DefString = Replace(DefString, ListSeparator & ListSeparator, ListSeparator) ' dobbelt ;; fjernes
+    DefString = Replace(DefString, ListSeparator & ListSeparator, ListSeparator) ' double ;; removed
 Loop
 DefString = omax.AddDefinition("definer:" & DefString)
 GetDefString = DefString
@@ -847,8 +843,8 @@ End If
 End Function
 
 Sub OpdaterDefinitioner()
-   ' ser efter variable i textboxene og indsætter under definitioner
-   Dim Vars As String
+' looks for variables in the textboxes and inserts under definitions
+    Dim Vars As String
    Dim Var As String, var2 As String
    Dim ea As New ExpressionAnalyser
    Dim Arr As Variant
@@ -885,7 +881,7 @@ Sub OpdaterDefinitioner()
    Loop
    Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
    
-   For i = 0 To UBound(Arr) ' Hvis variabel indgår i def, skal den fjernes
+   For i = 0 To UBound(Arr) ' If variable is included in def, it must be removed
       If Arr(i) <> "" Then
          var2 = Split(Arr(i), "=")(0)
          If var2 = TextBox_varx.Text Then
@@ -935,19 +931,19 @@ Function GetTextboxVars(tb As TextBox, tbvar As TextBox) As String
 End Function
 
 Function RemoveVar(Text As String, Var As String)
-' fjerner var fra string
-Dim ea As New ExpressionAnalyser
-If Var = vbNullString Then
-    RemoveVar = Text
-    Exit Function
-End If
-ea.Text = Text
-Call ea.ReplaceVar(Var, "")
-Text = Replace(ea.Text, ";;", ";")
-If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
-If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
+    ' removes var from string
+    Dim ea As New ExpressionAnalyser
+    If Var = vbNullString Then
+        RemoveVar = Text
+        Exit Function
+    End If
+    ea.Text = Text
+    Call ea.ReplaceVar(Var, "")
+    Text = Replace(ea.Text, ";;", ";")
+    If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
+    If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
 
-RemoveVar = Text
+    RemoveVar = Text
 End Function
 
 Sub SetCaptions()

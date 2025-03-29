@@ -13,8 +13,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' This form shows math definitions at this point in the document
+
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)
 ' SetEscEvents Me.Controls     in Initialize

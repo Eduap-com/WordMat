@@ -13,7 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
+Option Explicit
+' This form can convert math equations in Word to Latex, and convert the entire document to Tex
 Public EventsOn As Boolean
 
 Private EventsCol As New Collection
@@ -89,7 +90,7 @@ End Sub
 Sub ShowFixedPreamble()
    latexfil.UseWordMargins = LatexWordMargins
 '   latexfil.ImagDir = ""
-   TextBox_FixedPreamble.Text = latexfil.FixedLatexPreamble1 & vbrlf & "... Custom ..." & vbCrLf & latexfil.FixedLatexPreamble2
+   TextBox_FixedPreamble.Text = latexfil.FixedLatexPreamble1 & vbCrLf & "... Custom ..." & vbCrLf & latexfil.FixedLatexPreamble2
 End Sub
 
 Sub SaveSet2()
@@ -188,13 +189,6 @@ End Sub
 Private Sub CommandButton_ok_Click()
    SaveSet2
    SaveSet
-'If CheckBox_alle.value Then
-'    Me.Hide
-'    ConvertAllEquations
-'ElseIf Selection.OMaths.count > 0 Then
-'    Selection.OMaths(1).Range.text = ""
-'    Selection.InsertAfter TextBox_latex.text
-'End If
 
 Me.hide
 End Sub

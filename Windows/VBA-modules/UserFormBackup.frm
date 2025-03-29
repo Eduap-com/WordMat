@@ -13,7 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
 
 Public Backup As Boolean
@@ -72,7 +71,6 @@ End Sub
 
 Private Sub UserForm_Activate()
     SetCaptions
-'    CommandButton_no.SetFocus
 End Sub
 
 Sub SetCaptions()

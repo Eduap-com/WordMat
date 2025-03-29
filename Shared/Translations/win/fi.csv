@@ -1,0 +1,903 @@
+0#£Apua Maxima-komentoihin
+1#£Lisää numeroitu yhtälö
+2#£Lukuyhtälön liittäminen viitteeksi
+3#£Lisää viittaus yhtälöön
+4#£Kirjanmerkki
+5#£Kirjoita yhtälön nimi
+6#£Verotunnistenumeron määrittäminen
+7#£Num.
+8#£Lisää verotusjakson numero.
+9#£Verotunnisteiden päivittäminen
+10#£Olemassa olevat yhtälöiden nimet
+11#£Jos haluat lisätä viittauksen yhtälöön myöhemmin, valitse "Lisää viittaus yhtälöön" WordMat-valikosta kohdasta "Lisää yhtälö".
+12#£Nimi on jo olemassa
+13#£Nimi ei saa sisältää välilyöntejä
+14#£Verotuksen viite
+15#£Paikka
+16#£Vasen puoli
+17#£Oikea
+18#£Numerointi
+19#£Kysy viitteen nimeä lisätessäsi
+20#£WordMatin avulla voit suorittaa matemaattisia laskutoimituksia Wordissa. WordMat-ydin on avoimen lähdekoodin ja se on saatavilla ilmaiseksi.\r\nWordMat coren avulla on asennettu seuraavat muut ohjelmat:\r\nMaxima, GeoGebra math-apps-bundle, Math fonts.\r\nValinnaiset komponentit: GeoGebra 5, Graph, WordMat+. Katso lisää lisenssillä\r\nWordMatin on valmistanut Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2025.
+21#£Uusi versio WordMat on valmiina ladattavaksi.\r\nUutiset: \r\n
+22#£Sinut ohjataan nyt lataussivulle
+23#£Uusi versio
+24#£Syötä pisteiden määrä ja automaattisesti luodaan taulukko, joka voidaan täyttää pisteillä. Kun olet täyttänyt sen, aktivoit halutun regression.
+25#£Ei ole suositeltavaa tehdä regressiota, jossa Word-taulukossa on yli 200 pistettä. Käytä Exceliä, jos haluat tehdä regression niin monessa kohdassa.
+26#£Virhe tehtiin. Syöttöluvuissa on todennäköisesti virhe.
+27#£Sinun on luotava taulukko, jossa on kaksi saraketta. X-arvot vasemmassa sarakkeessa ja Y-arvot oikeassa sarakkeessa. Kirjeet jätetään huomiotta. Regressio suoritetaan merkityille numeroille. Jos mitään ei ole valittu, regressio suoritetaan kaikille taulukon luvuille.
+28#£Haluttua regressiota ei voida suorittaa näissä kohdissa.
+29#£Lineaarinen regressio, joka suoritetaan komennoilla " & AppName& ": $Tab
+30#£Eksponentiaalinen regressio, joka suoritetaan käyttämällä " & AppName&": $Tab
+31#£Tehoregressio, joka suoritetaan komennoilla " & AppName&": $Tab
+32#£Potenssiregressiota ei voida suorittaa näissä kohdissa. Kaikkien pitäisi olla positiivisia, eikä se saa olla 0.
+33#£Mukautettu regressio ominaisuuden avulla
+34#£suoritettu käyttämällä " & AppName
+35#£Määritä polynomiregression järjestys (1-
+36#£(Enimmäisjärjestys määräytyy pisteiden määrän mukaan)
+37#£tilata
+38#£Asteen polynominen regressio
+39#£Mukautettu regressio
+40#£Funktio
+41#£Desimaalien määrä
+42#£Lähtöarvaus (kirjoitettu muodossa a=2 ; c=10)
+43#£Tarkkuus on asetettu erittäin korkeaksi. Laskenta-aika voi olla hyvin pitkä tai epäonnistua. Yritä uudelleen pienemmällä asetuksella.
+44#£Tarkkuus on asetettu melko korkeaksi. Laskenta-aika voi olla pitkä tai virheellinen. Yritä uudelleen pienemmällä asetuksella.
+45#£Tarkkuus ei voi olla negatiivinen. Valitse positiivinen kokonaisluku
+46#£Tarkkuus on virheellinen. Valitse positiivinen kokonaisluku.
+47#£Kohdistimen sijoittaminen matemaattiseen kenttään
+48#£Laskutoimituksia ei voi suorittaa määrityskentillä. Voit käyttää alla olevaa määritelmääsi laskelmaan.
+49#£Lauseke erotetaan toisistaan käyttämällä " & AppName & ".
+50#£Termiä ei voitu erottaa toisistaan
+51#£Syötä muuttuja
+52#£Pääfunktio tarjotaan käyttämällä " & AppName & "Master-funktio" -funktiota
+53#£Termiä ei voitu integroida
+54#£Virhe tehtiin. WordMatia ei todennäköisesti ole asennettu oikein. Yritä asentaa uudelleen, mahdollisesti virustorjunta pois käytöstä. Jos oppilaitoksessasi on kumppanuus, Asetukset/Lisäasetukset -kohdan dll-yhteystapa -asetus voi ratkaista ongelman
+55#£Virhe yritettäessä käynnistää Maximaa
+56#£Eriarvoisuus on ratkaistu
+57#£käyttämällä " & AppName & ".
+58#£Eriarvoisuuteen on ratkaisuna kaikki numerot.
+59#£Eriarvoisuuteen ei ollut ratkaisuja "& VBA:ssa. ChrW(8450)&"
+60#£Eriarvoisuuteen ei ollut ratkaisuja "& VBA:ssa. ChrW(8477)&" muuttujalle
+61#£seuraavilla oletuksilla/määritelmillä:
+62#£Määritellä
+63#£Ei Internet-yhteyttä
+64#£Aloita päivitys valitsemalla OK.
+65#£WordMat-pikanäppäimet
+66#£Wordin matematiikan kentän pikakuvakkeet
+67#£Voit luoda omia pikakuvakkeita Wordin matemaattisiin kenttiin tai muuttaa olemassa olevia. Kun olet matematiikan alalla, löydät Yhtälöfunktio/Suunnittelu-välilehden. Napsauta toimintojen alla pientä nuolta oikeassa alakulmassa. Valitse seuraavaksi "matemaattinen automaattinen korjaus"
+68#£Kaavat
+69#£Määritelmien poistaminen
+70#£Vakioita
+71#£Etsi arvoja verkosta
+72#£Muunna yhtälöt LaTex-muotoon. (Pikanäppäin alt+T muuntaa yhden yhtälön)
+73#£Kopioi leikepöydälle
+74#£Näytä lomake
+75#£Tunnista laitteet äläkä kirjoita niitä kursiivilla
+76#£Käytä Maxima-LaTex-muunnosta
+77#£Muunna kaikki
+78#£Muunna ja siirry seuraavaan
+79#£Ennen
+80#£Jälkeen
+81#£Ei kukaan
+82#£Kirjoita itse
+83#£Ympäröivät hahmot
+84#£Tämän asiakirjan muussa osassa ei ole enää matematiikan kenttiä.
+85#£Ratkaise kytketyt differentiaaliyhtälö(t) numeerisesti
+86#£Differentiaaliyhtälöiden
+87#£Lähtöarvo
+88#£Askel
+89#£Yhdistä pisteet
+90#£Näytä määräykset
+91#£Lisää luettelo
+92#£Lisää taulukko
+93#£Lisää kaavio
+94#£Luultavasti määritelmän ulkopuolella! \r\nSäädä xmin/xmax
+95#£Virhe tehtiin. Katso numeroita xmin ja xmax
+96#£Ei kumppanuutta
+97#£Virhe yritettäessä lisätä Graphia. Jossain määritelmässä tai vastaavassa on luultavasti syntaksivirhe
+98#£Excel-taulukoiden lisäämisessä tapahtui virhe. Tämä voi johtua siitä, että Excel on kaatunut aiemmin. Sulje tarvittaessa avoimet Excel-taulukot ja avaa Excel ennen kuin yrität WordMatin kautta uudelleen.
+99#£Tapahtui virhe yritettäessä kääntää komentoasi Maxima-syntaksiin.
+100#£Tapahtui virhe yritettäessä kääntää Maxima-tulostetta Word-synkronointiin.
+101#£Ratkaisu on epävarma. Kokeile tarvittaessa. Numeerinen ratkaisu
+102#£Koska kyseessä on trigonometrinen yhtälö, ratkaisuja on ääretön määrä. Vain yksi näistä ratkaisuista on luettelossa.
+103#£Kaikkia ratkaisuja ei ole löydetty.
+104#£Virhe: Jaa nollalla.
+105#£Syntaksivirhe. Nuotinnuksessa on virhe.
+106#£Syntaksivirhe. On käytetty väärää merkkiä. Ehkä sen sijaan puuttuu kertomerkkejä tai pilkkuja; luettelon erottimena.
+107#£Varoitus: Olet pyytänyt yhtälöjärjestelmän ratkaisemista, mutta määrittellyt vähemmän muuttujia kuin yhtälöitä. Vain ensimmäiset yhtälöt on ratkaistu. Tarkista itse, sopivatko viimeiset yhtälöt.
+108#£Seuraava virheilmoitus tuli Maximalta:
+109#£Maxima-virheilmoitus
+110#£WordMat ei löytänyt Ohjelmatiedostot-kansiota
+111#£Avaamisen aikana tapahtui virhe:
+112#£Yhteyden muodostaminen palvelimeen ei onnistu
+113#£Tässä vaiheessa asiakirjaa määritellään seuraava:
+114#£Asiakirjassa ei ole tässä vaiheessa määritelmiä.
+115#£Yhtälömäärittelyt alkavat komennolla 'määritä yhtälö:' Syötä uuden yhtälön määritelmä\r\nMääritelmää voidaan käyttää muualla asiakirjassa, mutta ei ennen.\r\nJos 'delete def:' -komento lisätään alempana asiakirjassa, sitä ei voi käyttää sen jälkeen.\r\nUseita yhtälöitä voidaan määritellä erottamalla määritelmät toisistaan komennoilla " & ListSeparator\r\nesim. lig1:  c=3*d " & ListSeparator & " lig2: a=2*b
+116#£Et voi määrittää johdettua funktiota.\r\nPoista seuraava määritelmä: \r\n
+117#£Määritelmässä on virhe:
+118#£Se jätetään huomiotta. Mutta korjaa se, jotta et saa tätä virhettä jokaisen laskutoimituksen yhteydessä.
+119#£... loput poistettu.
+120#£Koulullasi/organisaatiollasi on aktiivinen kumppanuus. Voit nyt käyttää WordMat+:aa
+121#£Valitettavasti. Koulullasi ei ole aktiivista kumppanuutta.
+122#£Syötä uuden funktion määritelmä\r\nMääritelmää voidaan käyttää muualla asiakirjassa, mutta ei ennen.\r\nJos 'delete def:' -komento lisätään alempana asiakirjassa, sitä ei voi käyttää sen jälkeen.\r\nLisäfunktiot voidaan määritellä erottamalla määritelmät toisistaan komennoilla " & ListSeparator\r\nesim. f(x)=x " & ListSeparator & " g(x)=2x+1
+123#£Uusi ominaisuus
+124#£Uusi yhtälö
+125#£Määrittele yhtälö
+126#£Määritellä
+127#£Toimikausi on hyvin pitkä. Haluatko liittää sen Wordiin?\r\nWord voi olla hyvin hidas. Yritä sen sijaan ratkaista numeerisesti.\r\nNäet tulosteen alla:
+128#£Termiä ei voitu laskea.
+129#£Yhtälössä ei ollut ratkaisuja "& VBA:ssa. ChrW(8450)&"
+130#£Yhtälössä ei ollut ratkaisuja "& VBA:ssa. ChrW(8477)&" muuttujalle
+131#£Valitettavasti WordMat ei pystynyt ratkaisemaan yhtälöä.
+132#£Kaikki numerot ovat ratkaisu yhtälöön
+133#£Pyysit ratkaisemaan yhtälön muuttujalle, joka on jo määritelty. Lisää 'delete def:' -komento ennen yhtälöä.
+134#£Verotusjärjestelmä on ratkaistu
+135#£käyttämällä " & AppName & "'Solve Equations' -toimintoa,
+136#£Rekisteröity kumppanuus
+137#£Yhtälöjärjestelmässä ei ollut ratkaisuja "& VBA:ssa. ChrW(8450) & " muuttujille
+138#£Yhtälöjärjestelmässä ei ollut ratkaisuja "& VBA:ssa. ChrW(8477) & " muuttujille
+139#£Yhtälössä on oltava yhtäläisyysmerkki.
+140#£Ei rekisteröityä kumppanuutta
+141#£Tämä ei ole yhtälö. Yhtälöllä on aina =-merkki.
+142#£Seuraavat muuttujat poistetaan yhtälöjärjestelmästä:
+143#£käyttämällä " & AppName & "'Poista muuttuja' -toimintoa,
+144#£hiekka
+145#£väärä
+146#£tuntematon
+147#£
+148#£Ratkaisu löytyi. Ratkaisuja voi kuitenkin helposti olla useita.
+149#£Valitse vain yksi lauseke
+150#£Lauseke kirjoitetaan uudelleen käyttämällä " & AppName& " seuraavilla tavoilla:
+151#£Automaattinen vähennys,
+152#£Trigonometrinen pelkistys,
+153#£Termiä ei voitu lyhentää
+154#£Lauseketta pienennetään käyttämällä " & AppName & ".
+155#£Lauseke lasketaan käyttämällä " & AppName& ".
+156#£Termiä ei voitu ottaa huomioon
+157#£Lauseketta laajennetaan komennolla " & AppName& ".
+158#£Termiä ei voitu laajentaa
+159#£Sinun on sammutettava yksiköt differentiaaliyhtälöiden ratkaisemiseksi
+160#£Differentiaaliyhtälöä ei voitu ratkaista
+161#£Koulut voivat tehdä yhteistyötä Eduapin kanssa varmistaakseen, että WordMat päivitetään. Kumppanuus tarjoaa pääsyn tukeen, WordMat+:aan ja muuhun. Klikkaa nähdäksesi lisää...
+162#£Binomijakauma
+163#£Lauseen totuusarvo määritetään käyttämällä " & AppName & ".
+164#£Tulos perustuu numeeriseen vertailuun
+165#£Ei voitu määrittää, oliko väite totta/tarua
+166#£Laitteet alkaen
+167#£Valitse tarvittaessa tulostuslaitteet
+168#£Lähtölaitteet
+169#£Sulkuilla ei ole väliä
+170#£Automaattinen varmuuskopiointi?
+171#£Kuinka monta varmuuskopiotiedostoa tulisi tallentaa enintään?
+172#£Varmuuskopioiden välinen aika
+173#£Word ei tee automaattista varmuuskopiota, vaan luo vain palautustiedot, joita voidaan käyttää kadonneen tiedoston palauttamiseen." (Varmuuskopiointi on nopeinta, jos asiakirja ei ole OneDrivessa)" & vbLf & vbLf & "Varmuuskopiotiedostot tallennetaan kansioon: documents/WordMat backup
+174#£Varmuuskopiotiedostojen tarkasteleminen
+175#£Kysyä
+176#£Aina
+177#£Koskaan
+178#£Tapahtui varmuuskopiointivirhe
+179#£Haluatko aktivoida WordMatin automaattisen varmuuskopiointijärjestelmän?\n(Katso lisää kohdasta Asetukset | Varmuuskopiointi)
+180#£Normaalijakauma
+181#£Matala
+182#£Normaali
+183#£Korkea
+184#£Erittäin korkea
+185#£Super (hidas)
+186#£Asetus
+187#£Odota?
+188#£Max
+189#£Vain linjat
+190#£Näytä akselit
+191#£Laatu
+192#£Vaikuttaa pyörimisnopeuteen
+193#£Kun kuva tulee näkyviin, voit muuttaa kuvakulmaa pitämällä hiiren vasenta painiketta painettuna ja vetämällä ympäriinsä. \nNapsauta hiiren kakkospainikkeella valikkoriviä, valitse vaihtoehdot ja kopioi leikepöydälle" kopioidaksesi kuvan.\nSinun täytyy sulkea ikkuna palataksesi Wordiin.
+194#£Kääntörunko
+195#£Syötä kaavioon punaisella viivalla merkittävien pisteiden koordinaatit. Käytä puolipistettä tai sarkainta, jos haluat käyttää pilkkuja desimaalierottimena. Voit käyttää määritelmiä kaavion pisteiden lukemiseen. Voit myös käyttää lisäyspainiketta, sitten voit napsauttaa kaaviota, josta haluat valita.\r\nesimerkki:\r\n1.2\r\n1.2 ; 3.4\r\n2.f(2)
+196#£Tähän voit lisätä toisen pistetietojoukon, jolla on eri väri kaaviossa. Et voi tehdä regressiota näille, mutta painamalla insertiä voit sijoittaa pisteitä kaavioon painamalla. Ne voidaan sitten yhdistää viivoilla kuvioon.
+197#£Valitse taulukko numeroineen ennen kuin painat kaaviota, ja pisteet lisätään automaattisesti. yksi koordinaattijoukko riviä kohti. Koordinaatit erotetaan toisistaan pilkuilla, puolipisteillä tai sarkaimilla. Jos käytät pilkkua desimaalierottimena, käytä puolipistettä tai sarkainta. Koordinaatit voidaan kopioida Excelistä.  Esimerkkejä notaatiosta: "&VbCrLfMac&"1.2, 3.4"&VbCrLfMac&"3.4; 4.8\r\n5.6$Tab & "7.8
+198#£Muuttujien on oltava x ja y
+199#£Lisää ympyrä
+200#£Lisää viiva
+201#£Merkityt pisteet
+202#£Regressio
+203#£Kyllä
+204#£Ei
+205#£Muista tämä valinta
+206#£Kun WordMatin varmuuskopiointitoiminto on käytössä, WordMat tekee varmuuskopion asiakirjasta ennen jokaista laskutoimitusta. Varmuuskopioita ei tehdä, jos viimeinen varmuuskopio tehdään 5 minuutin kuluessa. 10 varmuuskopioversiota tallennetaan, minkä jälkeen ne korvataan." & vbLf & vbLf & "Voit muuttaa näitä asetuksia kohdassa: asetukset | Varmuuskopio. Täältä löydät myös varmuuskopiotiedostosi tarvittaessa.
+207#£Voit muuttaa tätä vaihtoehtoa milloin tahansa kohdassa Asetukset | Varmuuskopio
+208#£Varmuuskopio
+209#£Kulmasumma on yli 180
+210#£Sinun on syötettävä 3 sivua/kulmaa. Ei kuitenkaan 3 kulmaa. Vähintään 1 sivu on tiedettävä.
+211#£Kulman summa ei ole 180
+212#£Olet syöttänyt liian monta sivua/kulmaa.
+213#£Sinun on syötettävä täsmälleen 3 sivua/kulmaa. Ei kuitenkaan 3 kulmaa. Vähintään 1 sivu on tiedettävä.
+214#£Vähintään yhden sivun on oltava tiedossa. 3 kulmaa ei riitä.
+215#£Kulma
+216#£löytyy käyttämällä kulmasummaa = 180$Degree kolmiossa
+217#£Sivun pituus
+218#£löydetty käyttämällä Pythagorasta
+219#£Sivujen pituus
+220#£löydetty pihdeillä
+221#£Löytänyt Sine
+222#£Löydetty kosinin avulla
+223#£Olemassaolo kosinisuhteiden avulla
+224#£Olemassa sinisuhteiden avulla
+225#£2. Tutkintoyhtälö on ratkaistu
+226#£2. asteen yhtälössä on kaksi ratkaisua:
+227#£Mutta toinen ratkaisu on negatiivinen, emmekä voi käyttää negatiivisia sivupituuksia.
+228#£Koska kosinisuhde, jonka ratkaisimme yllä
+229#£oli kaksi ratkaisua ja molemmat olivat positiivisia, on olemassa kaksi mahdollista kolmiota. Jatkamme nyt jäljellä olevien sivujen laskemista toisen ratkaisun perusteella samalla tavalla.
+230#£Lisää symboli
+231#£Kreikkalaiset kirjaimet
+232#£Muut merkit
+233#£Insertti
+234#£Symboli
+235#£Yhtälöiden ratkaiseminen graafisilla ja numeerisilla menetelmillä
+236#£Alustava arvaus
+237#£Intervallimenetelmä
+238#£aloittaa
+239#£Loppu
+240#£Oikea puoli ja vasen puoli piirretty. "Vasemmisto on musta. Oikea puoli vihreä. Yhtälön ratkaisuja ovat risteykset.
+241#£Graafinen ratkaisu
+242#£Zoomaa myös kaksoisnapsauttamalla tai vetämällä neliötä
+243#£Näytä kuvaaja suuressa ikkunassa
+244#£$X^2 jakelu
+245#£Muuttujat
+246#£Testi
+247#£Valitse max.
+248#£Tai syötä max.
+249#£muuttuja pilkuilla erotettuna
+250#£Valitse tarkalleen
+251#£Tai syötä itse
+252#£Ette voi molemmat ratkaista yhtälöä
+253#£ja samalla määritellä se.
+254#£Yrität ratkaista muuttujaa, joka on yksikkö. Se johtaa todennäköisesti virheeseen. Harkitse toisen muuttujan nimen käyttämistä tai laitteiden sammuttamista.
+255#£maa
+256#£Vesi
+257#£kupari
+258#£rauta
+259#£kuu
+260#£aurinko
+261#£Fysikaaliset vakiot
+262#£Laitteet
+263#£Taulukon arvot - lämpö
+264#£Taulukon arvo - ydinfysiikka
+265#£Tähtitiede
+266#£Valon nopeus tyhjiössä
+267#£Planckin vakio
+268#£Planckin vakio elektronivoltteina
+269#£Gravitaatiovakio
+270#£Gravitaatiokiihtyvyys maan pinnalla
+271#£Alkuainevaraus
+272#£Avogadros vakio
+273#£Kaasuvakio
+274#£Boltzmannin vakio
+275#£Tyhjiön läpäisevyys
+276#£Tyhjiön permittiivisyys
+277#£Coulombin vakio
+278#£Stefan-Boltzmannin vakio
+279#£Atomimassan yksikkö
+280#£atomimassayksikkö MeV:nä
+281#£ominaislämpökapasiteetti
+282#£Elektronin massa
+283#£kg
+284#£Protonin massa
+285#£Neutronin massa
+286#£Maan massa
+287#£Maapallon keskimääräinen säde
+288#£Maan ja Auringon välinen etäisyys (tähtitieteellinen yksikkö)
+289#£Auringon massa
+290#£Kuun massa
+291#£Kuun keskimääräinen säde
+292#£GeoGebra 5:tä ei ole asennettu
+293#£Painike vie sinut kotisivulle, jossa voit asentaa GeoGebran. Windowsin WordMat tukee GeoGebra classic 5:tä, GeoGebra Calculator Suitea, GeoGebra Classic 6:ta ja useimpia muita GeoGebran sovellusversioita.
+294#£GeoGebra Calculator Suite on jo asennettu. Se toimii selaimessa eikä tarvitse Internetiä. Käynnistyy nopeasti.
+295#£Asenna GeoGebra
+296#£Suorita GeoGebra-laskinsarja
+297#£tai Mahdolliset reunaehdot
+298#£Etiketti
+299#£Kirjoita teksti ja napsauta sitten kaaviota, johon teksti sijoitetaan
+300#£Asetuksessa on virhe
+301#£Sinun on ensin asetettava ymin ja ymax ja painettava päivitystä.
+302#£3D-kaaviot
+303#£Näytä lausekkeet
+304#£Läpinäkyvä
+305#£Litteät värit
+306#£Lisää Maxima-komento Wordiin
+307#£Viivat ja pinnat
+308#£Vain linjat
+309#£Vain pinnat
+310#£Viivat ja pinnat
+311#£Muuttujien on oltava x, y ja z
+312#£Aseta pallo paikalleen
+313#£Lisää suunnitelma
+314#£Uusi vektori
+315#£Syntaksi\n(aloituspiste)(vektori)\n(startx , starty , startz)(dx , dy , dz)\nYksi vektori per rivi\nJos aloituspistettä ei ole määritetty oletetaan (0,0,000 0,0)\nEsimerkkejä:\n(1,1,2)(1,2,3) \n piirtää vektorin (1,2,3) pisteestä (1,1,2)\n" & vbLf& "(1,-2,3)" & vbLf& " piirtää vektorin (1,-2,3) pisteestä (0,0,0)\nvbLf&" desimaaliesimerkit: "& vbLf&" (1.5 ; 3 ; 4.5)" & vbLf&" (1.5, 3, 4.5)
+316#£Pisteen koko
+317#£Syötä pisteitä, kuten "&vbLf&"" &vbLf&"(1.1; 2,5; 1,2)" & vbLf&" (2.1,3.4,8.8)
+318#£Kaavioikkunassa voit kiertää koordinaattijärjestelmää pitämällä hiiren vasenta painiketta painettuna ja vetämällä ympäriinsä.\n\nJos objekti näyttää venyneeltä, voit muuttaa kuvaajaikkunan sopivaksi.\n\nLiitä kuva Wordiin napsauttamalla hiiren kakkospainikkeella valikkoriviä, valitsemalla 'asetukset' ja sitten 'kopioi leikepöydälle'. Sitten kaavioikkuna sulkeutuu ja sitten kuva voidaan lisätä Wordiin.\n\nHuomaa, että kuvaajaikkuna on suljettava, jotta pääset takaisin Wordiin.\n\nPisteiden määrä määrittää, kuinka mukava kuvio tulee olemaan, mutta samalla vaikuttaa nopeuteen, jolla sitä voidaan kääntää.
+319#£Järjestyssääntö
+320#£Parametrien esitykset
+321#£Keltainen/punainen/violetti
+322#£Sininen
+323#£Ruskea
+324#£Harmaa
+325#£Alt+M-pikanäppäin lisää uuden matemaattisen kentän
+326#£AltGr + Enter -pikanäppäin laskee
+327#£Pikanäppäin Alt + L ratkaisee yhtälön
+328#£Alt+-pikanäppäin avaa Asetukset
+329#£Alt+r-pikanäppäin hakee aiemmat tulokset
+330#£Alt+E-pikanäppäin kytkee laitteet päälle/pois päältä
+331#£Alaindeksi:
+332#£\lambda antaa pienen kreikkalaisen kirjaimen
+333#£Alt+P-pikanäppäin näyttää ohjeen kaavion
+334#£Voit tallentaa muutokset kaavakokoelmiin ja muotoasiakirjaan itse.
+335#£Excel-taulukot voidaan lisätä asiakirjaan upotettuna tai avata Excelissä
+336#£Nopea ja parempi tehtävien suuntaaminen? Kokeile WordMarkia - www.eduap.com
+337#£WordMatilla tehtyjen laskutoimitusten määrä:
+338#£Määritykset-kohdassa voit määrittää fyysisiä vakioita ja taulukon arvoja
+339#£Word toimii nopeammin Luonnos-näkymässä, erityisesti yhtälöissä.
+340#£Lisää omia kuvauksiasi Excel-kaavioihin Excel-kaavioiden avulla. Lisää/tekstiruutu
+341#£Pikanäppäin Alt + N vaihtaa välillä auto,exact,num
+342#£Funktio, jossa on kirjainvakioita, saa automaattisesti liukusäätimet GeoGebraan
+343#£Tulostuslaitteiden tulee olla vain puhtaita laitteita. Toisin sanoen ei komposiittiyksiköitä, kuten km/h. Jos haluat esimerkiksi km/tunnit, syötä: km,tunnit
+344#£Sinulla on jo uusin versio
+345#£Valitse verotusnumero.
+346#£Mihin lukuun tämä yhtälö tulisi asettaa?\r\nSeuraavien yhtälöiden luvut päivitetään sopiviksi.
+347#£Binomi-testi
+348#£Verotusosio nro lisätään. Yleensä tämä lisätään otsikon luvun tai osion numerona. Numero voidaan kuitenkin lisätä myös piilotettuna. Pitäisikö numero näyttää? (Vastaa ei piilottaaksesi sen)
+349#£Merkitse merkitsevyystaso prosentteina
+350#£Merkittävyyden taso
+351#£Syötä "VbCrLfMac" -rivin x sarakkeiden ulottuvuus
+352#£Chi toisessa johdonmukaisuustestissä
+353#£Se suorittaa "& VBA. ChrW(&H3C7) & VBA. ChrW(&HB2) & " - koherenssitesti käyttäen ChrW(&HB2) WordMat
+354#£P-arvo
+355#£Merkittävyystasolla
+356#£%, 0-hypoteesi korrelaation puuttumisesta voidaan hylätä. Ts. Näiden kahden muuttujan välillä on korrelaatio.
+357#£%, 0-hypoteesia ei voida hylätä. Näin ollen ei ole näyttöä siitä, että näiden kahden muuttujan välillä olisi korrelaatiota.
+358#£On soluja, joiden arvot ovat alle 5 tai kaikkien solujen yhteissumma on alle 50. "&ChrW(&H3C7)&ChrW(&HB2)&" -jakauma on siis tässä tapauksessa huono approksimaatio ja tulos epäluotettava. Joissain tapauksissa tietoaineisto voidaan tehdä käyttökelpoiseksi tekemällä eri ryhmittely.
+359#£Chi-jakauma
+360#£Vapauden asteet
+361#£Lukea
+362#£Avaa GeoGebran
+363#£Syötä arvo
+364#£Sitä voidaan säätää jälkikäteen
+365#£Vakion määrittäminen
+366#£Et ole asentanut Graphia. Se on pieni ilmainen ohjelma, joka on helppo asentaa. Se luo mukavia kaavioita, luettelomerkkejä jne., jotka voidaan helposti integroida Wordiin. Voit ladata ohjelman www.padowan.dk.
+367#£Sitä voidaan säätää jälkikäteen kuvaajan mukautetuilla toiminnoilla. Voit jopa tehdä animaation, jossa arvo muuttuu jatkuvasti, kohdassa Laske/Animoi.
+368#£Kuvaajien piirtäminen GeoGebralla ja Graphilla edellyttää, että x on riippumaton muuttuja.\r\nSeuraava lauseke ei sisällä x:ää, joten voit nyt määrittää toisen riippumattoman muuttujan.
+369#£Riippumaton muuttuja
+370#£$X^2 -testi johdonmukaisuuden suhteen
+371#£Avaa kaavion
+372#£Sisäkkäisen lisääminen
+373#£Sisäkkäisten objektien lisääminen voi viedä aikaa. Muokkaa objektia kaksoisnapsauttamalla sitä.
+374#£Haluatko juonita
+375#£Insertti
+376#£Yhtälöjärjestelmiä ei tueta. Ratkaise yhtälöinä tai ratkaise graafisesti yhtälöiden avulla. Graph tai GeoGebra
+377#£Poista muuttujat
+378#£arvojen kanssa
+379#£Syötä arvojen aloitusarvaus. Oletusarvaus on 1
+380#£Muuttujat ja arvaukset
+381#£Verojärjestelmä on ratkaistu numeerisesti
+382#£Lähtöarvauksella
+383#£Verojärjestelmää ei voitu ratkaista
+384#£Annoitko oikean muuttujan?
+385#£Ratkaisua ei löytynyt. Välin päätepisteiden on oltava yhden ratkaisun molemmilla puolilla.
+386#£Newtonin menetelmää käytetään alkuarvauksilla
+387#£Intervallimenetelmää käytetään intervallissa
+388#£Ratkaisun löytämättä jättäminen
+389#£Ei ratkaisua
+390#£Differentiaaliyhtälö ratkaistaan käyttämällä " & AppName&" 'Ratkaise differentiaaliyhtälö' -funktiota
+391#£reunaehtojen kanssa
+392#£lähtöolosuhteiden kanssa
+393#£Käynnistysehdolla
+394#£Sinun on käynnistettävä Word uudelleen nyt tai Word lukittuu.
+395#£Kaavan lisäämisessä tapahtui virhe. Yritä uudelleen jossain muualla.
+396#£Simulointi
+397#£Group" ja VBA. ChrW(233) & "r
+398#£Vapausasteiden lukumäärä\r\nn antaa yleisen ilmaisun
+399#£Taajuusjakauma
+400#£Huomautukset
+401#£Odotettavissa
+402#£Koko
+403#£P-arvo
+404#£Yhteys on olemassa
+405#£Yhteyttä ei ole
+406#£Kaikkien solujen yhteissumma on alle 50. "&ChrW(&H3C7)&ChrW(&HB2)&" -jakauma on siis tässä tapauksessa huono approksimaatio ja tulos epäluotettava.
+407#£Q-arvo
+408#£Kriittinen Q-arvo
+409#£Et ole asentanut MikTexiä. Sinut ohjataan nyt verkkosivustolle, josta MikTex on ladattavissa. Asennuksen jälkeen on tärkeää, että tietokone käynnistetään uudelleen. Kun MikTex ajetaan ensimmäistä kertaa, osa paketeista on asennettava.
+410#£Tätä ominaisuutta ei tueta Macissa
+411#£Sekalainen
+412#£Uusi yhtälö
+413#£Symbolit
+414#£CAS-asetukset
+415#£Muotoja
+416#£Olet syöttänyt vektoriyhtälön, joka on itse asiassa yhtälöjärjestelmä. Syötä
+417#£muuttujat, jotka ratkaistaan pilkuilla erotettuina.
+418#£Hei, sinun piti osallistua
+419#£muuttuja pilkulla erotettuna
+420#£Yhtä yhtälöistä ei ole määritelty valituissa rajoissa. Yritä laajentaa aluetta
+421#£Ilmaisuun sisältyy yksi tai useampi " & ChrW(177) & " -symboli. Miten tämä pitäisi ymmärtää?
+422#£Plus tai miinus
+423#£Syötettä ei ymmärretty. Lisää plus.
+424#£Numeerisissa merkeissä on ongelma
+425#£Summamerkin merkintä ei ole oikea. Alaraja on kirjoitettava esimerkiksi i=1
+426#£Tuotemerkin merkintä ei ole oikea. Alaraja on kirjoitettava esimerkiksi i=1
+427#£Syntaksissa on ongelmia. Integraalin päänä on käytettävä dx:ää (tai vastaavaa). Ehkä olet käyttänyt d:tä toisessa yhteydessä. Käytä da differentiaali d (tyyppi: \dd)
+428#£Syntaksissa on ongelmia. Kaksoisintegraalin viimeistelyyn tarvitaan kaksi dx:ää (tai vastaavaa). Ehkä olet käyttänyt d:tä toisessa yhteydessä. Käytä da differential d \dd
+429#£Et voi käyttää kaksoisintegraalimerkkiä tietyille integraaleille. Käytä kahta yksittäistä integraalia.
+430#£Virhe! Syntaksissa on ongelmia. Erottelumerkintä ei ole oikea.
+431#£Ei määritelty
+432#£Ei määritelty, mutta rajoitettu
+433#£Ei määritelty
+434#£on varattu, eikä sitä voi määrittää. Määritelmä ohitetaan.
+435#£Ei kiiltävä
+436#£Fys
+437#£Kemia
+438#£Prosentti
+439#£Ominaisuuksia
+440#£Geometria
+441#£Sands.
+442#£vektori
+443#£Asetukset
+444#£Ilmestyä.
+445#£leveä
+446#£Laskea
+447#£Väljä
+448#£Maxima-komento
+449#£Ratkaise yhtälö(t) numeerisella menetelmällä
+450#£Poista muuttujat
+451#£Testaa tosi/epätosi
+452#£Ratkaise differentiaaliyhtälö
+453#£Määritelmien poistaminen
+454#£Määritä funktio
+455#£Fysikaalisten vakioiden määrittäminen
+456#£Kirjoittaa
+457#£Äärettömiä.
+458#£Erottavat tekijät
+459#£Tavaratilan toiminto
+460#£Graphing
+461#£Näytä kaavio
+462#£Kaltevuuskenttä
+463#£3D-juoni
+464#£Kääntörunko
+465#£Tilastotiede
+466#£Ryhmittelemättömät havainnot
+467#£Ryhmitellyt havainnot
+468#£Pin-kaavio
+469#£Histogrammi
+470#£Portaikon kaavio
+471#£Summakäyrä
+472#£Laatikon juoni
+473#£Tilastot/lähetykset.
+474#£Regressio
+475#£Ei voi liittää taulukkoon
+476#£Lineaarinen
+477#£Eksponentiaalinen
+478#£Valta
+479#£Polynomi
+480#£Jakelut
+481#£Binomi
+482#£Normaali
+483#£$X^2 jakelu
+484#£Tasogeometria
+485#£Huoneen geometria
+486#£Avaa matematiikan kaavakokoelman
+487#£Avaa fysiikan kaavakokoelman
+488#£Avaa Chemistry Formula Collectionin
+489#£Tarkan laskennan ja numeerisen arvon automaattinen valinta.
+490#£Tarkan laskennan ja numeerisen arvon automaattinen valinta. Laskennassa ilmoitetaan usein molemmat tulokset.
+491#£Tarkat tulokset
+492#£Kaikki tulokset on lueteltu tarkkoina tuloksina. Toisin sanoen numeerisia likiarvoja vältetään niin pitkälle kuin mahdollista. Tätä ei kuitenkaan voida taata.
+493#£Numeeriset tulokset
+494#£Kaikki tulokset annetaan desimaalilukuna.
+495#£Merkitsevien numeroiden lukumäärä
+496#£Määrittää, kuinka monella (merkitsevällä) numerolla tulokset ilmoitetaan.
+497#£Radiaaneina
+498#£Kun paine lasketaan radiaaneina asteiden sijaan.
+499#£Tieteellinen merkintätapa
+500#£Kun tulos painetaan sisään, ne ilmoitetaan tieteellisellä merkinnällä, eli 2.3" & ChrW(183) & "10^4
+501#£Asetukset (Alt+j)
+502#£Aseta erilaisia asetuksia.
+503#£Laske (AltGr+Enter)
+504#£Laskee merkityn lausekkeen. Jos kohdistin sijoitetaan lausekkeeseen, koko lauseke lasketaan. Jos lausekkeessa on =merkki, vain =-merkki lasketaan takaisin =merkiksi.
+505#£Maxima-komento
+506#£Lähettää komennon suodattamattomana Maximalle. Tulos on kuitenkin muotoiltu.
+507#£Ratkaise yhtälö(t) (Alt+L)
+508#£Ratkaisee yhtälön tai yhtälöjärjestelmän. Aseta kohdistin yhtälöön. Valitse useita yhtälöitä yhtälöjärjestelmän ratkaisemiseksi.
+509#£Ratkaise numeerisin menetelmin
+510#£Ratkaise yhtälöt numeerisin menetelmin. Valittavana on useita tapoja.
+511#£Poista muuttuja
+512#£Poistaa yhden tai useamman muuttujan yhtälöjärjestelmästä.
+513#£Testaa, ovatko lausekkeet totta
+514#£Testaa, ovatko väittämät totta, epätosia tai tuntemattomia
+515#£Ratkaise differentiaaliyhtälö
+516#£Ratkaisee differentiaaliyhtälön. Voidaan syöttää eri tavoin.  esim.  y'=y , y''=y tai f'(x)=f(x)
+517#£Ratkaise kytkettyjä differentiaaliyhtälöitä numeerisesti
+518#£Pitäisi olla muodossa y'=...
+519#£Määritelmien tarkasteleminen
+520#£Näyttää, mitkä määritelmät ovat voimassa asiakirjan tässä kohdassa.
+521#£Määritelmien poistaminen (Alt+S)
+522#£Lisää 'poista määritelmät:' -komennon asiakirjaan. Ennen tätä kohtaa asiakirjassa olevia määritelmiä ei voi käyttää tämän kohdan jälkeen.
+523#£Määritä (Alt+D)
+524#£Lisää asiakirjaan määritelmän, joka koskee asiakirjan muuta osaa.
+525#£Fysikaalisten vakioiden määrittäminen
+526#£Valitse yleisimmin käytetyistä fysikaalisista vakioista ja määritä ne asiakirjaan, jotta ne voidaan sisällyttää laskutoimituksiin
+527#£Kirjoittaa
+528#£Kirjoittaa termin uudelleen eri tavoin.
+529#£Supistaa
+530#£Jos mahdollista, lauseke kirjoitetaan uudelleen niin, että sitä pienennetään mahdollisimman vähän. Yritä kirjoittaa uudelleen tietyillä menetelmillä, jos se ei auta.
+531#£Faktorisoi
+532#£Jos mahdollista, laita ulkosulkeet yleisten sääntöjen, kuten neliölauseiden, avulla
+533#£Sulkeiden kertolasku
+534#£Kaikki merkityn lausekkeen sulkeet kerrotaan.
+535#£Pöytä
+536#£Lisää Excel
+537#£Erottavat tekijät
+538#£Valitse erotettavat lausekkeet tai aseta kohdistin lausekkeeseen.
+539#£Tavaratilan toiminto
+540#£Etsii vartalofunktion valituille lausekkeille (epämääräiset integraalit).
+541#£Volframi alfa
+542#£Avaa Wolfram Alpha -verkkosivuston, jossa valittu termi syötetään.
+543#£Ratkaise yhtälö
+544#£Ratkaise yhtälö volframi alfalla
+545#£Näytä kaavio (Alt+P)
+546#£Näyttää valittujen funktioiden/yhtälöiden/yhtälöiden ja pisteiden kaavion. Kaavio voidaan myöhemmin lisätä asiakirjaan. Erilaisia graafisia ohjelmia tuetaan. Valitse suosikkisi asetuksista tai valitse laajentamalla tämä painike
+547#£Lisää kaavio GnuPlot-ohjelmalla
+548#£Näytä kaavio GnuPlotin avulla. Gnuplot tukee monia funktioita ja voi tehdä mukavan kaavion. Voit sitten muokata kaaviota asiakirjassa kaksoisnapsauttamalla sitä.
+549#£Lisää kaavio Graph-ohjelmalla
+550#£Lisää Graph-objektin Word-asiakirjaan, jota muokataan kaksoisnapsauttamalla kaavio-objektia. Määritelmät, ohjeet ja kohdat siirretään Wordista Graphiin. Graph on erittäin nopea ohjelma ja siinä on monia hienoja ominaisuuksia. Haittapuoli on, että sitä ei tueta Macissa ja kaavioita ei näytetä niin korkealla resoluutiolla.
+551#£GeoGebra
+552#£Avaa GeoGebran ja siirtää valitun toiminnon ja määritelmät. GeoGebra on graafinen ohjelma, joka tarjoaa eniten vaihtoehtoja ja todella mukavan kaavion, mutta siinä on joitain rajoituksia: Se on melko hidas avautua, eikä kuva siirry automaattisesti Wordiin. Se on kopioitava manuaalisesti muokkausvalikon ja "kopioi piirustus" kautta. Kaaviota ei voi muokata uudelleen, kun se on lisätty.
+553#£Lisää Excel-kaavio
+554#£Lisää upotetun Excel-taulukon Word-asiakirjaan, joka on suunniteltu kaavioiden ja luettelomerkkien näyttämiseen. Voit muokata Excel-objektia uudelleen kaksoisnapsauttamalla sitä. Se ei toimi yhtä nopeasti kuin jotkut muut ratkaisut, eikä siinä ole niin paljon ominaisuuksia. Edut ovat: Tukee oppimista Excelissä ja on suunniteltu erityisesti pisteiden helppoon piirtämiseen. Se voi siis olla ohjelma, josta on hyötyä yhteistyössä muiden oppiaineiden, erityisesti luonnontieteiden, kanssa.
+555#£Retn.kenttä
+556#£Näyttää ensimmäisen kertaluvun differentiaaliyhtälön kaltevuuskentän ja mahdollistaa ratkaisukäyrien piirtämisen.
+557#£Lisää GeoGebra-tiedosto
+558#£Lisää sisäkkäisen tyhjän GeoGebra-tiedoston, jota voidaan muokata ja tallentaa suoraan Wordiin. Tiedosto näkyy kuvakkeena. Kuvat on vielä kopioitava.
+559#£3D-juoni
+560#£Näytä preskripti, yhtälö, pisteet, vektorit ja parametriesitykset avaruudessa.
+561#£Kääntörunko
+562#£Näyttää määritetyn määrityksen vääntömomenttirungon. Eli säädön kaaviota käännetään 360 astetta x-akselin ympäri niin, että syntyy 3D-objekti.
+563#£Tilastotiede
+564#£Avaa laskentataulukoita, jotka voivat sisältää kuvaavia tilastoja
+565#£Ryhmittelemättömät havainnot
+566#£Excel-taulukot ryhmittelemättömien tietojen käsittelyyn. Laskee taajuudet, kvartin lisäyksen jne. ja luo sauvakaavion, pistekaavion, portaikkokaavion ja laatikkokaavion.
+567#£Ryhmitellyt havainnot
+568#£Excel-taulukko taajuuksien laskemiseen, kumulatiivisiin taajuuksiin, kvarttien yhteenlaskuun ja histogrammin, laatikkokaavion ja summakäyrän näyttämiseen.
+569#£Pin-kaavio
+570#£Excel-taulukko valmiilla sauvakaaviolla
+571#£Histogrammi
+572#£Excel-taulukot on tarkoitettu piirtämään useita histogrammeja samaan kaavioon.
+573#£Portaikon kaavio
+574#£Excel-taulukot, jotka voidaan piirtää useita portaikkokaavioita samaan kaavioon vertailua varten
+575#£Summakäyrä
+576#£Excel-taulukot, joihin voidaan piirtää useita summakäyriä samaan kaavioon vertailua varten
+577#£Laatikon juoni
+578#£Excel-taulukot, jotka voivat piirtää useita laatikkokaavioita samaan kaavioon
+579#£Regressio
+580#£Aseta tavallinen taulukko luettelomerkeineen. Valitse pisteet ja valitse regressiotyyppi. Pöytä voi olla vaaka- tai pystysuora. Jos pisteitä on vain kaksi, sen oletetaan olevan pystysuora.
+581#£Virhe tarkistettaessa päivitystä. Sinut lähetetään nyt verkkosivustolle, jossa voit itse nähdä, onko uusi päivitys tulossa. Nykyinen versio on:
+582#£Lisää taulukon, jossa on kaksi saraketta, jotka on tarkoitettu pisteiden lisäämiseen, joille regressio voidaan suorittaa.
+583#£Jakelut
+584#£Excel-taulukot, joissa on kaaviot valituista jakaumista. Levyt ovat dynaamisia, joten ne voivat piirtää kaaviot kaikille parametreille ja tehdä yleisimmät laskelmat.
+585#£Binomijakauma
+586#£Excel-taulukko, jossa on binomijakauman kaavio. Valitse taulukosta perustodennäköisyys- ja määräparametri
+587#£Normaalijakauma
+588#£Excel-taulukko, jossa on normaalijakauman kaavio. Valitse taulukosta keskiarvo ja levitys.
+589#£-Jakelu
+590#£Excel-taulukko, jossa on kaavio "&ChrW(&H3C7)&ChrW(&HB2)&" jakauma. Valitse arkilta vapausasteiden lukumäärä ja arvot voidaan lukea.
+591#£Testi
+592#£Erilaisia tilastollisia testejä
+593#£Binomi-testi
+594#£Excel-taulukot, joissa voit suorittaa binomitestejä. Sama arkki, jolla on binomijakauma.
+595#£"&ChrW(&H3C7)&ChrW(&HB2)&" testi
+596#£Suorittaa "&ChrW(&H3C7)&ChrW(&HB2)&" -testin n x n ristitaulukolla. Valitse ristitaulukon numerot.
+597#£Istuvuuden hyvyys
+598#£Sopivuustestin hyvyys. (Chi toisessa testissä) Koska jos kaksi jakaumaa ovat samat.
+599#£Simulointi
+600#£Levyt, jotka voivat permuoida (sekoittaa) ja tallentaa erilaisia testikokoja.
+601#£Uusi yhtälö (Alt+M)
+602#£Lisää uuden matematiikan kentän.
+603#£Uusi lukuyhtälö (Alt+M, Alt+M)
+604#£Lisää uuden matemaattisen kentän, josta tulee automaattisesti luku. Lisää lukuyhtälö kaksoisnäppäimellä Alt+M. Tämä on kuitenkin ensin otettava käyttöön asetuksissa.
+605#£Uusi lukuyhtälö, johon voidaan viitata
+606#£Lisää uuden matemaattisen kentän, josta tulee automaattisesti luku ja johon voidaan viitata.
+607#£Lisää viittaus yhtälöön
+608#£Lisää viittauksen yhtälöön aiemmin määritetyn nimen perusteella
+609#£Aseta yhtälö tiettyyn numeroon.
+610#£Yhtälö, jolle on annettu tietty numero, voidaan asettaa tiettyyn numeroon.
+611#£Lisää uusi yhtälöosa.
+612#£Tällöin veron numeroinnin ensimmäinen numero kasvaa. Jos edellinen on (2.5), niin seuraava on (3.1). Voidaan lisätä otsikoihin osionumeroina. Se voidaan kuitenkin asettaa myös piilotettuna.
+613#£Päivitä kaikki asiakirjan verotunnistenumerot.
+614#£Tapahtuu automaattisesti, kun uusi yhtälö lisätään, mutta voi olla tarpeen painaa päivityspainiketta, kun yhtälö on poistettu.
+615#£Symbolit
+616#£Erilaisia menetelmiä symbolien manipulointiin.
+617#£Korvaa pistenumeromerkeiksi
+618#£Korvaa kaikki * kertomerkit tavallisilla pistekertomerkeillä " & ChrW(183) & "
+619#£Muunna yhtälöt lateksiksi
+620#£Mahdollistaa kaikkien tai valittujen yhtälöiden muuntamisen asiakirjassa lateksiksiksi. Mahdollistaa myös lateksitiedoston luomisen pdf-muodossa, jos MikTex on asennettu. Yksittäinen yhtälö voidaan muuntaa LaTex-muotoon Alt+T-pikanäppäimellä.
+621#£Muunna lateksiksi (Alt+T)
+622#£Muuntaa yhtälön lateksiksi. Wraparound-merkit valitaan lateksin päämuunnossivulla. Käytä myös Alt+T-pikanäppäintä.
+623#£Korvaa tähtien kertomerkki
+624#£Korvaa kaikki " & ChrW(183) & " kertomerkit * kertomerkeillä.
+625#£Piste desimaalierottimena
+626#£Korvaa kaikki , (pilkku) matematiikan kentissä . (piste) ja kaikki ;(puolipisteet) ,(pilkulla)
+627#£Pilkku desimaalierottimena
+628#£Korvaa kaikki . (piste) matematiikan aloilla ,(pilkulla) ja kaikki ,(pilkulla) ;(puolipisteellä)
+629#£Muotoja
+630#£Avaa asiakirjan, jossa on muotoja, jotka voidaan kopioida kyseiseen asiakirjaan. Kolmiot, yksitoikkoiset suhteet jne.
+631#£Taulukko$ArrowRight Luettelo
+632#£Lista$ArrowRight Taulukko
+633#£Pöytä
+634#£WordMat voi käsitellä luetteloiden tietoja. Voit esimerkiksi helposti lisätä numeron useisiin luettelon numeroihin. Yleensä sinulla on kuitenkin tietoja Wordin taulukoissa, mutta tässä on funktioita, jotka voivat muuttaa luettelot taulukoiksi ja päinvastoin.
+635#£Lisää Excel-taulukko
+636#£Lisää sisäkkäisen Excel-taulukon asiakirjaan. Voidaan avata kaksoisnapsauttamalla.
+637#£Muunna luetteloksi
+638#£Muuntaa taulukon matemaattisessa kentässä olevaksi luetteloksi, jota voidaan sitten käsitellä WordMatissa. Esimerkki: [1, 2, 3]+1 = [2, 3, 4] Katso lisätietoja käyttöoppaasta
+639#£Muunna taulukoksi
+640#£Muuntaa matemaattisen kentän tai vain kirjoitetun luettelon taulukoksi. esim.  (1 , 2),(3 , 4),(5 , 6)
+641#£Kolmion ratkaisija
+642#£Syötä 3 sivua/kulmaa ja laske loput sivut/kulmat sekä lisää kolmio oikeilla mitoilla.
+643#£Wordin käsikirja
+644#£Avaa asiakirjan apuohjeella.
+645#£Web Käsikirja
+646#£Avaa verkkosivuston käyttöoppaan. Siinä on parempi navigointi ja videot kuin Word-oppaassa, mutta se ei ole vielä valmis.
+647#£Maxima-käsikirja
+648#£Maxima on CAS-ohjelma, joka suorittaa monia WordMatin matemaattisia funktioita. Maxima on rakentanut paljon toimintoja, jotka eivät heti näy WordMatissa, mutta ne voidaan suorittaa, jos tiedät toimintojen nimet. Täältä voit avata yhteenvedon maxima-komennoista.
+649#£Noin
+650#£Kuka teki WordMatin?
+651#£Tarkista päivitykset
+652#£Tarkista automaattisesti verkossa, onko WordMatiin päivitystä.
+653#£Pikakuvakkeiden yleiskatsaus
+654#£Yleiskatsaus WordMatissa käytettävissä olevista pikanäppäimistä ja Wordin matemaattisten kenttien pikanäppäimistä.
+655#£LaTex-malli
+656#£LaTex-malli
+657#£Avaa Word-asiakirjan, joka on lähes uskollinen kopio LaTex-asiakirjasta.
+658#£Tarkkuus on asetettu erittäin korkeaksi. Laskenta-aika voi olla hyvin pitkä tai epäonnistua. Yritä uudelleen pienemmällä asetuksella.
+659#£WordMatilla on erinomainen toiminto LaTex-muotoon muuntamiseen, mutta on myös mahdollista käyttää Maximaan sisäänrakennettua toimintoa
+660#£Yksiköitä ei yleensä tule kirjoittaa kursiivilla. Tämän ominaisuuden avulla WordMat yrittää tunnistaa entiteetit ja lisää Latex-koodia, joka kirjoittaa entiteetit normaalilla fontilla
+661#£Sulkea
+662#£Luo todellisen LaTex-asiakirjan sähköpostin avulla. MikTex, joka on asennettava. Tulisi käyttää vain yksinkertaisissa asiakirjoissa, koska kaikkea ei tueta.
+663#£Näyttää, miten LaTex-lähtö ymmärretään
+664#£Luo LaTex-koodi ja avaa se TexWorksissa, jotta koodia voidaan tarkastella ja mahdollisesti säätää
+665#£Kolmio
+666#£Merkintätapa
+667#£Kuvaaja
+668#£Edistynyt
+669#£Tieteellinen merkintätapa
+670#£Kompleksiluvut
+671#£Sinun on käynnistettävä Word uudelleen, ennen kuin kielenmuutos tulee voimaan kaikkialla
+672#£Arvoja <=0 ei voi kirjata
+673#£Sateet
+674#£Lasken
+675#£Tämä menetelmä vaatii välin liuoksen ympärillä. Välissä voi olla vain yksi ratkaisu. Katso kaaviota löytääksesi alueen. Tämän menetelmän etuna on, että tiedät, mikä ratkaisu on saatavilla.
+676#£Tietoja intervallimenetelmästä
+677#£Newton-Raphson-menetelmä vaatii alustavan arvauksen yhtälön ratkaisusta. Ei ole varmaa, että ratkaisua löytyy, vaikka sellainen olisikin. On max. 1 ratkaisu. Yhdistä menetelmä graafiseen ratkaisuun löytääksesi lähtöarvauksen.
+678#£Tietoja Newton-Raphsonista
+679#£Varmuuskopioita ei voi tehdä ennen kuin olet tallentanut asiakirjasi!
+680#£Polaarisen notaation lähtö
+681#£Tiedoston "normal.dotm" ongelmat voivat rikkoa WordMatin pikanäppäimet. Tiedoston poistaminen ratkaisee ongelman, koska uusi luodaan automaattisesti, kun Word käynnistyy uudelleen. Tiedostoa ei kuitenkaan voi poistaa, kun Word on auki, joten sinun on tehtävä se itse. \r\n\r\n - Kun painat OK, kansio, jossa tiedosto sijaitsee, avautuu. \r\n - Tallenna työsi ja sulje Word \r\n - Poista normal.dotm \r\n - Käynnistä Word uudelleen ja avaa ja sulje WordMat-asetukset
+682#£Laskelma tehty käyttämällä GeoGebra
+683#£nuoli
+684#£Safarin käynnistäminen
+685#£Ongelmaa ei voitu ratkaista.\r\nHaluatko kokeilla toisella menetelmällä tai CAS-moottorilla?
+686#£CAS-moottori
+687#£Merkitsevät numerot
+688#£Laitteiden kytkeminen päälle/pois päältä
+689#£Jos yksiköt ovat käytössä, WordMat voi ymmärtää ja muuntaa yksiköitä. SI-painikkeessa voit määrittää, mihin yksiköihin haluat muuntaa. Oletusarvoisesti lähtö on SI-yksiköissä. Älä käynnistä laitteita, ellet sitä erityisesti tarvitse. Se voi vaikuttaa WordMatin käyttäytymiseen ja varaa paljon muuttujia.
+690#£Lähtölaitteet
+691#£Määritä, mihin yksiköihin laskelmia varten muunnetaan. Oletusarvoisesti lähtö on SI-yksiköissä
+692#£EKr
+693#£Laitteet
+694#£Numeroiden lukumäärä
+695#£Numeroiden pyöristys
+696#£Valitse, miten luvut kirjoitetaan ja pyöristetään. Alla olevissa esimerkeissä WordMat on asetettu 3 numeroon.\r\n\r\nDesimaalien määrä: 12.345\r\nMerkitsevät numerot: 12.3\r\nVid. merkintä: 1.23*10^1
+697#£Neliön viimeistely
+698#£Käyttää neliölausetta faktorointiin. Esimerkiksi ympyrän yhtälöä varten
+699#£Tiedekunta on yritetty poistaa negatiivisesta luvusta.
+700#£Varoitus: Yhtälöjärjestelmässä oli enemmän yhtälöitä kuin muuttujia. Oliko se tarkoitus?
+701#£Uusi matematiikan ala
+702#£Aiemmat tulokset
+703#£Muuta numeroa/tarkkaa
+704#£Muunna LaTexiksi
+705#£Lateksi Pdf
+706#£Astetta
+707#£Radiaaneina
+708#£Kulman yksikkö
+709#£Näytä ratkaisun ehdot (beta)
+710#£Tarkka
+711#£Numeerinen
+712#£Automaattinen
+713#£Erittäin tarkka (beta)
+714#£Lisää selitys
+715#£Liitä maksimit -komento
+716#£Erottimet
+717#£Lista
+718#£Kertomerkki
+719#£Piste
+720#£Ratkaisun lausunto
+721#£Boolean
+722#£Ratkaisun määrä
+723#£Alaindeksi
+724#£On vain tekstiä, joka on osa muuttujan nimeä
+725#£On luettelo-/matriisiindeksi
+726#£Tavallinen graafinen ohjelmisto
+727#£Lisää upotettu Excel-taulukko
+728#£Lähtölaitteet
+729#£Määritä, mitkä yksiköt ovat tulosteessa pilkulla erotettuina\nEsimerkkejä:\n\ncm , kJ, Ajastin\neV, nm, mV\naJ , AU, Bq\n\nJos mitään ei ole määritetty, kaikki yksiköt palautetaan SI-perusyksiköinä tai johdettuina SI-yksiköinä ilman etuliitettä.
+730#£Esimerkkejä tuetuista laitteista:\n(Katso lisätietoja käyttöoppaasta)\n\nPituus: cm, AU, ly, kpl\nMassa: u , g, mg\nAika: min , Tunnit, päivät, vuodet\nTaajuus: Hz, Bq\nEnergia: kWh, eV, aJ\nPaine: Bar, mmHg, atm, kuiva
+731#£Trignonometriset yhtälöt
+732#£Kaikki ratkaisut
+733#£Vain 1 ratkaisu
+734#£Tarkista päivitykset automaattisesti
+735#£Korjaa pikanäppäimet
+736#£Käynnistä WordMat uudelleen
+737#£Laskelmien lukumäärä
+738#£Nyt on yritetty korjata pikanäppäimiä.\nJos tämä ei auta, poista tiedosto 'normal.dotm' kansiosta "~/Library/Group Containers/UBF8T346G9. Office/User Content/Templates" ja käynnistä Word uudelleen
+739#£Nyt on yritetty korjata pikanäppäimiä.\nJos tämä ei auta, poista tiedosto "normal.dotm" kansiosta "%appdata%/Microsoft/Templates" ja käynnistä Word uudelleen
+740#£GeoGebra Calculator Suite asennetaan yhdessä WordMatin kanssa. Se toimii selaimessa, mutta ei vaadi Internetiä. Se toimii samalla tavalla Windowsissa ja Macissa ja käynnistyy nopeasti.\nGeoGebra 5 toimii samalla tavalla Windowsissa ja Macissa, mutta vaatii erillisen asennuksen.\nWindows tukee myös muita GeoGebran sovellusversioita, kuten Geogebra 6, Graafinen laskin jne. Näitä sovelletaan, jos GeoGebra 5:tä ei ole asennettu.
+741#£Näyttää siltä, että pikanäppäimiä ei ole asetettu oikein tässä WordMat-versiossa. Se vaatii luultavasti virheilmoituksen
+742#£Laskennan tulos riippuu seuraavan merkistä
+743#£Aseta merkki
+744#£Differentiaaliyhtälö
+745#£Differentiaaliyhtälöiden ratkaiseminen
+746#£Uafh. Olivat
+747#£Riippua. Missä/tehtävä
+748#£Käynnistyskunto
+749#£Maxima-virheilmoitus
+750#£Matemaattiset virheet
+751#£Syntaksivirhe
+752#£Syntaksivirhe on tapahtunut. Eli WordMat ei ole ymmärtänyt syötettäsi.
+753#£Puuttuu
+754#£Niitä on liikaa
+755#£Ohjelman suorittamisessa on tapahtunut virhe.
+756#£On ollut jako 0:lla.
+757#£Virhe tehtiin. Se johtuu luultavasti virheestä jossakin määritelmistäsi.\r\nEhkä voit nähdä alta, missä se on.
+758#£Yhdessä määritelmistäsi on virhe.\r\nMääritelmä korostetaan Wordissa.
+759#£On laiton kyltti, joka on sijoitettu
+760#£Ratkaise yhtälö
+761#£Muuttuja
+762#£Tai kirjoita itse:
+763#£Sovellettavat määritelmät
+764#£Välivaiheen määritelmät
+765#£Varoitus: Yksiköt on kytketty päälle.\r\nYhtälöiden ratkaisu vaikuttaa haitallisesti.\r\nVaro myös muuttujia, jotka ovat yksiköitä, esim. A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
+766#£Ratkaise yhtälöjärjestelmä
+767#£Valitse muuttujat
+768#£WordMat käynnistyy
+769#£Ole hyvä ja odota
+770#£Kolmion ratkaisija
+771#£Oikea
+772#£Mielivaltainen
+773#£Oikea
+774#£Nimeäminen
+775#£Manuaalinen
+776#£Kulmat isot kirjaimet, sivut pienet kirjaimet
+777#£Sivut on nimetty corners AB:n mukaan
+778#£Lisää numeroita Wordin muotoon
+779#£Välitilien näyttäminen Wordissa
+780#£Lisää tunnetut sivut ja kulmat, ja loput sivut ja kulmat lasketaan ja lisätään kuvaan Wordissa.\r\nOn myös mahdollista muuttaa kuvion nimiä. Napsauta vain kirjaimia.
+781#£Kuva ei näytä oikeita kokoja, mutta se näkyy, kun se lisätään Wordiin.
+782#£WordMatin kolmionratkaisijaa käytetään syötteen kanssa:
+783#£Huomaa, että tietojesi perusteella on kaksi mahdollista kolmiota
+784#£Jäljellä olevien sivujen ja kulmien laskemiseen ei ole tarpeeksi tietoa.
+785#£Kaksi kolmen kimppaa
+786#£Ei ole olemassa kolmiota, jota voidaan rakentaa tiedoistasi.
+787#£Kaikki sivut ja kulmat löytyvät nyt.
+788#£HUOMAUTUS: Yhtälön ratkaisemiseen käytettiin numeerisia menetelmiä. Ratkaisuja voi olla useita.
+789#£Keskitason asetukset
+790#£Automaattinen vähennys
+791#£Pyri pelkistämään lauseke mahdollisimman lyhyeen muotoon useilla eri tavoilla.
+792#£Laita sulkeiden ulkopuolelle\r\nYritetään muuttaa termi tuotteiksi
+793#£Kerro sulkeisiin.\r\nKaikki sulkeet kerrotaan.
+794#£Litteroi murtolukuihin
+795#£Kaikki desimaaliluvut muunnetaan murtoluvuiksi.
+796#£Pienennä trigonometristä
+797#£Termi yritetään kirjoittaa uudelleen käyttämällä trigonometrisiä identiteettejä.
+798#£Lisää sama rivi
+799#£Kaaviopiirustukset yms. suunnitelmassa
+800#£Nollaa kaikki
+801#£Akselin otsikko
+802#£Linjan tyyppi
+803#£Yhtälön ratkaisemiseksi sinun on ensin syötettävä yhtälö käyttämällä Lisää yhtälö Wordissa. Jätä kohdistin yhtälöön ja paina ratkaise yhtälö uudelleen. Valitse useita yhtälöitä, jos haluat ratkaista useita yhtälöitä, joissa on useita tuntemattomia.
+804#£Yhtälöä ei valittu
+805#£Supistaa
+806#£Faktorisoi
+807#£Laajentaa
+808#£Apua
+809#£Manuaalinen
+810#£Manuaalinen Word-asiakirjana
+811#£Online-verkkosivuston käsikirja
+812#£Noin
+813#£Päivittää
+814#£Pikakuvakkeet
+815#£Nollata
+816#£Logaritmi
+817#£Kieli
+818#£Merkki
+819#£Positiivinen
+820#£Negatiivinen
+821#£Nolla
+822#£Virhe
+823#£Määritelmät
+824#£OKEI
+825#£Perua
+826#£Odota
+827#£Aktiviteetti
+828#£Seis
+829#£Yhtälö on ratkaistu
+830#£Yhtälö ratkaistaan numeerisesti
+831#£käyttämällä " & AppName & ".
+832#£Järjestyssääntö
+833#£Yhtälö
+834#£Yhtälöt
+835#£Pistettä
+836#£Vektorit
+837#£Nimike
+838#£Nollata
+839#£Tarkasti suoritettavat monimutkaiset laskelmat voivat kestää hyvin kauan. Yrittäisitkö sen sijaan tehdä numeerisia laskutoimituksia?
+840#£Käytä tavallista d:tä differentiaalina d
+841#£DY/DX-merkintää voidaan yleensä käyttää vain käyttämällä erityistä differentiaalia d (\dd) tai osittaisen derivaatuksen symbolia (\osittainen). Jos d/dx:n ei odoteta sekoittavan toiseen lausekkeeseen, tämä asetus on edullinen, koska se on helpompi kirjoittaa normaalisti d
+842#£Mukautettu regressio
+843#£Ratkaise kytketyt differentiaaliyhtälö(t) numeerisesti
+844#£Tapahtui virhe
+845#£Muuttuja
+846#£Varoitus
+847#£Differentiaaliyhtälön tulee olla muodossa y'=...  jotta se voidaan ratkaista numeerisesti
+848#£Painike lataa GeoGebra 5:n Mac-tietokoneesi latauksiin. Tämän jälkeen sinut opastetaan asennuksen läpi.
+849#£GeoGebra 5:tä ei ole asennettu kokonaan. Pääte
+850#£GeoGebraa ei ole vielä asennettu. Odota, että lataus on valmis.
+851#£Jatkaa
+852#£Poista vanha versio
+853#£Ennen kuin uusi versio voidaan ladata, vanha versio on poistettava Lataukset-kohdasta.\r\n 1. Ikkunan nimeltä "Salli pääsy tiedostoon" pitäisi avautua.\r\n2. Napsauta "Valitse..."  \r\n3. Napsauta 'Määritä käyttöoikeus' "
+854#£Lataus pysäytetty
+855#£Sinun on sallittava pääsy GeoGebra.app, ennen kuin asennusta voidaan jatkaa
+856#£GeoGebra 5 ladataan
+857#£1. Odota ensin, että GeoGebra 5 latautuu.\r\n2. Kun lataus on valmis, Salli tiedoston käyttö -ikkunan pitäisi avautua.\r\n3. Napsauta "Valitse..."  \r\n4. Napsauta "Määritä käyttöoikeus"
+858#£Turhautunut
+859#£Prosessi pysäytettiin.\r\n\r\nNapsauta Sulje ja yritä uudelleen.
+860#£Sinulle ei annettu lupaa GeoGebraan. Napsauta "Yritä uudelleen" yrittääksesi uudelleen.
+861#£Lataaminen kestää kauan. Tarkista Safarista, jos näyttää siltä, että lataus on käynnissä. Voit napsauttaa Lopeta, jos edistystä ei tapahdu.
+862#£Virhe GeoGebran lataamisessa
+863#£Tiedostoa ei löytynyt latauksista.\r\nVoit napsauttaa alareunassa olevaa Yritä uudelleen, jos haluat WordMatin etsivän uudelleen.
+864#£Anna lupa GeoGebralle
+865#£Ikkunan nimeltä "Salli tiedoston käyttö" pitäisi nyt avautua.\r\n\r\n1. Napsauta "Valitse..." \r\n2. Napsauta "Määritä käyttöoikeus"
+866#£GeoGebran siirtäminen sovelluksiin
+867#£Sinun on ehkä annettava lupa "Järjestelmätapahtumiin" napsauta vain OK.
+868#£Valmis
+869#£GeoGebra 5 on nyt asennettu.\r\nNapsauta 'Jatka' avataksesi GeoGebran.
+870#£On sivuja, jotka ovat 0
+871#£Sinun on ensin valittava taulukko
+872#£Numeroitua yhtälöä ei voi lisätä taulukkoon
+873#£GeoGebraa on käytetty yhtälöjärjestelmän ratkaisemiseen. On epävarmaa, voidaanko ratkaisuja olla. On suositeltavaa kokeilla toista menetelmää. Esimerkiksi maksimi tai numeerinen/graafinen
+874#£GeoGebra ei tue tätä toimintoa. Kokeile yhtälönratkaisijaa
+875#£Yhtälö ratkaistiin graafisesti GeoGebralla:
+876#£Sulkujen määrä ei mahdu lausekkeeseen
+877#£Virheiden asettaminen
+878#£Wordissa on väärä asetus.\r\nVaihda Yhtälöt-valikossa Latexista Unicodeen, jotta WordMat toimii
+879#£Syntaksivirhe - Matematiikka ei ole oikea.
+880#£Olet syöttänyt jotain, joka ei ole oikea matemaattinen merkintä.\r\nVirhe liittyy muuttujaan:
+881#£Tämä voi johtua esimerkiksi siitä, että olet laskenut numeron fonttia. \r\nK_0 tulee korvata numerolla eikä esimerkiksi 5000_0:lla. Sen tarvitsee vain sanoa 5000.
+882#£Yhtälössä ei voi olla kahta yhtäläisyysmerkkiä
+883#£Yhtälöjärjestelmä ratkaistiin GeoGebralla:
+884#£Laskenta keskeytyi, koska se kesti hyvin kauan. Joskus voi olla hyödyllistä kokeilla laskutoimitusta "Numeerinen"-vaihtoehdolla Tarkka tai Automaattinen
+885#£Ei voi muodostaa yhteyttä Maximaan. Haluatko käyttää sen sijaan WSH-menetelmää?\r\n(Tämä vaihtoehto löytyy asetusten lisäasetukset-kohdasta)
+886#£WordMat ei voi kommunikoida GeoGebran kanssa. Tämä johtuu luultavasti siitä, että et ole asettanut oikeita suojausasetuksia Safarissa. Napsauta ok saadaksesi ohjeet
+887#£Ratkaise numeerinen
+888#£WordMat ei löytänyt Maxima-asennusta. Yritä asentaa uudelleen.
+889#£Virhe yhteyden muodostamisessa Maximaan WSH:n avulla
+890#£Pysähtyy automaattisesti
+891#£Se ei onnistunut. Pysähtyy.
+892#£Komento keskeytettiin, kun
+893#£Haluatko yrittää uudelleen ja kuinka kauan haluat odottaa. (sekuntia) Tietokone lukittuu odotusajaksi.
+894#£Virhe määrittelyssä
+895#£Integraaliin liittyy syntaksivirhe. Oletko muistanut dx:n lopussa?
+896#£Tulosteen pituus:
+897#£Klikkaus KYLLÄ lisätäksesi kaikki merkit Wordiin. (Varoitus: Voi hidastaa Wordia tai jopa aiheuttaa Wordin kaatumisen). \r\n Napsauta NO, jos haluat lisätä vain ensimmäiset 1000 merkkiä.
+898#£Olet asettanut liian vähän parametreja funktiolle:
+899#£Tämä voi johtua siitä, että olet käyttänyt pilkkuja puolipisteiden sijaan parametrien erottamiseen. (Voit sen sijaan lisätä välilyönnin pilkun toiselle puolelle.)
+900#£Ratkaisun ehdot:
+901#£Sinun on ensin valittava lista, esimerkiksi [1; 2; 3]
+902#£Ehkä olet vaihtanut n:n ja r:n K(n, r):ssä?

@@ -13,10 +13,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
-Public EquationName As String
+' This form is used when creating a new numbered equation. The equation can be given a name for easy reference
 
+Public EquationName As String
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)
 ' SetEscEvents Me.Controls     in Initialize
@@ -110,7 +110,7 @@ Sub SetCaptions()
     Label_name.Caption = Sprog.A(5)
     Label_cancel.Caption = Sprog.Cancel
     Label_ok.Caption = Sprog.OK
-    Label_ligninger.Caption = Sprog.A(10)
+    Label_Ligninger.Caption = Sprog.A(10)
     Label_help.Caption = Sprog.A(11)
     Label_error.Caption = Sprog.A(12)
 End Sub

@@ -17,7 +17,7 @@
 16#£Venstre side
 17#£Højre side
 18#£Nummerering
-19#£Indsæt reference med 2 x Alt+m
+19#£Spørg om navn på reference ved indsættelse
 20#£WordMat gør det muligt at foretage matematiske beregninger i Word. WordMat core er open source og stilles gratis til rådighed.\r\nMed WordMat core er følgende andre programmer installeret:\r\nMaxima, GeoGebra math-apps-bundle, Math fonts.\r\nValgfrie komponenter: GeoGebra 5, Graph, WordMat+. Se mere under licens\r\nWordMat er lavet af Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2025.
 21#£Der er en ny version af WordMat klar til download.\r\nNyheder: \r\n
 22#£Du sendes nu til downloadsiden
@@ -32,7 +32,7 @@
 31#£Potens regression udført vha. WordMat: $Tab
 32#£Der kan ikke udføres potensregression på de punkter. Alle skal være positive og må ikke være 0.
 33#£Brugerdefineret regression med funktionen 
-34#£ udført vha. " & AppNavn
+34#£udført vha. WordMat
 35#£Angiv orden af den polynomiske regression (1-
 36#£(Den maksimale orden bestemmes af antal punkter)
 37#£orden
@@ -55,7 +55,7 @@
 54#£Der skete en fejl. WordMat er formentlig ikke installeret korrekt. Prøv at geninstallere, evt. med Antivirus deaktiveret. Hvis din skole har Partnerskab kan indstillingen 'dll connection method' under Indstillinger/Avanceret muligvis løse problemet
 55#£Der skete en fejl i forsøget på at starte Maxima
 56#£Uligheden løses for 
-57#£ vha. WordMat. 
+57#£vha. WordMat. 
 58#£Uligheden har alle tal som løsning.
 59#£Uligheden havde ingen løsninger indenfor $C for variabel 
 60#£Uligheden havde ingen løsninger indenfor $R for variabel 
@@ -113,11 +113,11 @@
 112#£Der kunne ikke oprettes forbindelse til serveren
 113#£På dette sted i dokumentet er der defineret følgende:
 114#£Der er ingen definitioner på dette sted i dokumentet.
-115#£Lignings definitioner indledes med en 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+115#£Lignings definitioner indledes med en 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med ; \r\nf.eks. lig1: c=3*d ; lig2: a=2*b
 116#£Man kan ikke definere en afledet funktion.\r\nFjern følgende definition: \r\n
 117#£Der er en fejl i definitionen: 
 118#£Den ignoreres. Men ret det så du ikke får denne fejl ved hver beregning.
-119#£ ...resten fjernet.
+119#£...resten fjernet.
 120#£Din skole/organisation har aktivt partnerskab. Du kan nu bruge WordMat+
 121#£Desværre. Din skole har ikke et aktivt partnerskab.
 122#£Indtast definitionen på den nye funktion\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere funktioner ved at adskille definitionerne med " & ListSeparator\r\nf.eks. f(x)=x " & ListSeparator & " g(x)=2x+1
@@ -141,11 +141,11 @@
 140#£Ingen Partnerskab registreret
 141#£Dette er ikke en ligning. En ligning vil altid have et = tegn.
 142#£Følgende variable elimineres fra ligningssystemet: 
-143#£ vha. WordMat's 'Eliminer variabel' funktion, 
+143#£vha. WordMat's 'Eliminer variabel' funktion, 
 144#£sand
 145#£falsk
 146#£ukendt
-147#£ vha. WordMat's. 'Løs ligninger numerisk'.
+147#£
 148#£Der blev fundet en løsning. Der kan dog sagtens være flere løsninger.
 149#£Marker kun et udtryk
 150#£Udtrykket omskrives vha. WordMat ved brug af metoderne: 
@@ -171,13 +171,13 @@
 170#£Automatisk backup?
 171#£Hvor mange backup-filer skal der max gemmes?
 172#£Tid mellem hver backup
-173#£Word laver ikke en automatisk backup, men opretter kun gendannelsesdata som måske kan bruges til at gendanne en tabt fil." & vbLf & vbLf & " WordMat kan tage automatiske Backup af hele dokumentet hver gang der beregnes og gemme det i flere versioner, så du altid kan gå tilbage og finde noget der virker. (Backup foregår hurtigst hvis dokumentet ikke ligger på OneDrive)" & vbLf & vbLf & "Backup-filerne gemmes i mappen: dokumenter/WordMat-backup
+173#£Word laver ikke en automatisk backup, men opretter kun gendannelsesdata som måske kan bruges til at gendanne en tabt fil.\n\nWordMat kan tage automatiske Backup af hele dokumentet hver gang der beregnes og gemme det i flere versioner, så du altid kan gå tilbage og finde noget der virker. (Backup foregår hurtigst hvis dokumentet ikke ligger på OneDrive)\n\nBackup-filerne gemmes i mappen: dokumenter/WordMat-backup
 174#£Se backup-filer
 175#£Spørg
 176#£Altid
 177#£Aldrig
 178#£Der skete en fejl i forbindelse med backup
-179#£Vil du aktivere WordMats automatiske backup-system?" & vbLf & vbLf & "(Se mere under indstillinger | Backup)
+179#£Vil du aktivere WordMats automatiske backup-system?\n\n(Se mere under indstillinger | Backup)
 180#£Normalfordeling
 181#£Lav
 182#£Normal
@@ -290,8 +290,8 @@
 289#£Solens masse
 290#£Månens masse
 291#£Månens middelradius
-292#£GeoGebra 5 er ikke installeret.\r\n Vil du installere GeoGebra 5 eller vil du køre 'GeoGebra Calculator Suite' i en browser?
-293#£Knappen sender dig til hjemmesiden, hvor du kan installere GeoGebra. WordMat understøtter 'GeoGebra classic 5' og 'GeoGebra Classic 6'
+292#£GeoGebra 5 er ikke installeret
+293#£Knappen sender dig til hjemmesiden, hvor du kan installere GeoGebra. WordMat på Windows understøtter 'GeoGebra classic 5', 'GeoGebra Calculator Suite', 'GeoGebra Classic 6' samt de fleste andre App-udgaver af GeoGebra.
 294#£GeoGebra Calculator Suite er allerede installeret. Den køres i en browser, og behøver ikke internet. Starter hurtigt op.
 295#£Installer GeoGebra
 296#£Kør GeoGebra Calculator Suite
@@ -335,7 +335,7 @@
 334#£Du kan selv gemme ændringer i formelsamlingerne og figurdokumentet.
 335#£Excelark kan både indsættes indlejret i dokumentet eller åbnes i Excel
 336#£Hurtig og bedre retning af opgaver? Prøv WordMark - www.eduap.com
-337#£Du har ialt foretaget " & AntalB & " beregninger med WordMat
+337#£Antal beregninger med WordMat: 
 338#£Under definitioner kan du definere fysiske konstanter og tabelværdier
 339#£Word kører hurtigere i kladdevisning, specielt for ligninger.
 340#£Indsæt dine egne beskrivelser i Exceldiagrammer vha. Indsæt/tekstboks
@@ -364,7 +364,7 @@
 363#£Indtast værdi for
 364#£Den kan justeres efterfølgende
 365#£Definer konstant
-366#£Du har ikke installeret Graph. Det er et lille gratis program der er nemt installeret. Det laver fine grafer, punkter mm. som nemt kan integreres i Word. Vil du hente og installere Graph?
+366#£Du har ikke installeret Graph. Det er et lille gratis program der er nemt installeret. Det laver fine grafer, punkter mm. som nemt kan integreres i Word. Du kan hente programmet på www.padowan.dk.
 367#£Den kan justeres efterfølgende under brugerdefinerede funktioner i Graph. Der kan tilmed laves en animation hvor værdien ændres løbende, under Beregn/Animer.
 368#£Plotning af grafer med GeoGebra og Graph kræver at x er den uafhængige variabel.\r\nFølgende udtryk indeholder ikke x, så du kan nu angive en anden uafhængig variabel.
 369#£Uafhængig variabel
@@ -395,7 +395,7 @@
 394#£Du bliver nødt til at genstarte Word nu, ellers låser Word.
 395#£Der skete en fejl i forsøget på at indsætte en formel. Prøv igen et andet sted.
 396#£Simulering
-397#£Grupp" & VBA.ChrW(233) & "r
+397#£Grupper
 398#£Antal frihedsgrader\r\nn giver helt generelt udtryk
 399#£Frekvensfordeling med
 400#£Observationer
@@ -419,7 +419,7 @@
 418#£Hov du skulle indtaste
 419#£variable adskilt ad komma
 420#£En af ligninger er ikke defineret indenfor de valgte grænser. Prøv at udvide området
-421#£Der indgår et eller flere " & ChrW(177) & " symboler i udtrykket. Hvordan skal det forståes?
+421#£Der indgår et eller flere plus/minus symboler i udtrykket. Hvordan skal det forståes?
 422#£Plus eller minus
 423#£Input ikke forstået. Der indsættes plus.
 424#£Der er et problem med de numeriske tegn
@@ -473,7 +473,7 @@
 472#£Boksplot
 473#£Statistik/sands.
 474#£Regression
-475#£Indsæt tabel
+475#£Kan ikke indsætte i en tabel
 476#£Lineær
 477#£Eksponentiel
 478#£Potens
@@ -498,7 +498,7 @@
 497#£Radianer
 498#£Når trykket ind regnes i radianer istedet for grader.
 499#£Videnskabelig notation
-500#£Når trykket ind angives resultater i videnskabelig notation dvs. fx 2,3" & ChrW(183) & "10^4
+500#£Når trykket ind angives resultater i videnskabelig notation dvs. fx 2,3$*10^4
 501#£Indstillinger (Alt+j)
 502#£Indstil diverse indstillinger.
 503#£Beregn (AltGr+Enter)
@@ -579,7 +579,7 @@
 578#£Excelark der kan plotte flere boksplot i samme diagram
 579#£Regression
 580#£Indsæt en almindelig tabel med punkterne. Marker punkterne og vælg regressionstype. Tabellen kan både være vandret eller lodret. Hvis der kun er to punkter antages den at være lodret.
-581#£Indsæt tabel 
+581#£Der skete en fejl i forbindelse med at checke for opdatering. Du vil nu blive sendt til hjemmesiden, hvor du selv kan se om der kommet en ny opdatering. Den nuværende version er: 
 582#£Indsætter tabel med to kolonner beregnet til indsætning af punkter som der kan udføres regression på.
 583#£Fordelinger
 584#£Excelark med grafer over udvalgte fordelinger. Arkene er dynamiske så de kan plotte graferne for alle parametre og lave de mest gængse beregninger.
@@ -616,7 +616,7 @@
 615#£Symboler
 616#£Forskellige metoder til manipulation af symboler.
 617#£Erstat til prikgangetegn
-618#£Erstatter alle * gangetegn med almindelige prikgangetegn " & ChrW(183) & "
+618#£Erstatter alle * gangetegn med almindelige prikgangetegn $*
 619#£Konverter ligninger til Latex
 620#£Giver mulighed for at konvertere alle eller udvalgte ligninger i dokumentet til Latex. Giver også mulighed for at at generere Latex fil som pdf, hvis MikTex er installeret. En enkelt ligning kan konverteres til LaTex med genvejen Alt+T.
 621#£Konverter til Latex (Alt+T)
@@ -827,9 +827,9 @@
 826#£Vent
 827#£Aktivitet
 828#£Stop
-829#£Ligningen løses for 
-830#£Ligningen løses numerisk for 
-831#£ vha. WordMat. 
+829#£Ligningen løses for
+830#£Ligningen løses numerisk for
+831#£vha. WordMat. 
 832#£Forskrifter
 833#£Ligning
 834#£Ligninger
@@ -845,3 +845,59 @@
 844#£Der skete en fejl
 845#£Variabel
 846#£Advarsel
+847#£Differentialligningen skal være på formen y'=...  for at den kan løses numerisk
+848#£Knappen downloader GeoGebra 5 til 'overførsler' på din Mac. Du bliver efterfølgende guidet igennem opsætningen.
+849#£GeoGebra 5 er ikke blevet færdiginstalleret. Der afsluttes
+850#£GeoGebra er ikke blevet installeret endnu. Vent til download er færdig.
+851#£Fortsæt
+852#£Slet gamle version
+853#£Før den nye version kan hentes, skal den gamle version i Overførsler fjernes.\r\n 1. Der skulle gerne åbne et vindue, der hedder 'Giv adgang til fil'.\r\n2. Klik 'Vælg...'  \r\n3. Klik 'Tildel adgang' "
+854#£Download stoppet
+855#£Du skal give adgang til GeoGebra.app før end installationen kan fortsætte
+856#£GeoGebra 5 er ved at blive hentet
+857#£1. Vent først til GeoGebra 5 er blevet downloadet.\r\n2. Når download er gennemført skulle der gerne åbne et vindue, der hedder 'Giv adgang til fil'.\r\n3. Klik 'Vælg...'  \r\n4. Klik 'Tildel adgang' 
+858#£Stoppet
+859#£Processen blev stoppet.\r\n\r\nKlik Luk og prøv evt. igen.
+860#£Du fik ikke givet tilladelse til GeoGebra. Klik på 'Retry' for at prøve igen.
+861#£Download tager lang tid. Check i Safari om det ser ud til at der er en download igang. Du kan klikke stop hvis der ikke er fremgang.
+862#£Fejl ved download af GeoGebra
+863#£Filen kunne ikke findes i overførsler.\r\nDu kan klikke 'Retry' forneden, hvis WordMat skal lede igen.
+864#£Giv tilladelse til GeoGebra
+865#£Der skulle nu gerne åbne et vindue der hedder 'Giv adgang til fil'.\r\n\r\n1. Klik 'Vælg...' \r\n2. Klik 'Tildel adgang' 
+866#£Flytter GeoGebra til Apps
+867#£Du skal muligvis give tilladelse til 'System events' bare klik OK.
+868#£Færdig
+869#£GeoGebra 5 er nu installeret.\r\nKlik 'Fortsæt' for at åbne GeoGebra.
+870#£Der er sider der er 0
+871#£Du skal markere en tabel først
+872#£Kan ikke indsætte nummereret ligning i tabellen
+873#£GeoGebra har været anvendt til at løse ligningssystemet. Det er usikkert om der kan være løsninger. Det anbefales at forsøge med anden metode. Fx Maxima, eller numerisk/grafisk
+874#£This function is not supported by GeoGebra. Try equation solver
+875#£Ligningen blev løst grafisk med GeoGebra:
+876#£Antallet af parenteser passer ikke i udtrykket
+877#£Indstillingsfejl
+878#£Du har en forkert indstilling i Word.\r\nI Ligningsmenuen skal du skifte fra Latex til Unicode for at WordMat virker
+879#£Syntaksfejl - Ikke korrekt matematik.
+880#£Du har indtastes noget som ikke er korrekt matematisk notation.\r\nFejlen er relateret til en variabel: 
+881#£Det kan fx skyldes, at du har sænket skrift på et tal. \r\nK_0 skal erstattes med et tal og ikke med fx 5000_0. Der skal bare stå 5000.
+882#£Der kan ikke være to ligmedtegn i en ligning
+883#£Ligningsystemet blev løst med GeoGebra:
+884#£Beregningen blev afbrudt, da den tog meget lang tid. Det kan nogle gange hjælpe at prøve beregningen med indstillingen 'Numerisk' istedet for Eksakt eller Auto
+885#£Kan ikke forbinde til Maxima. Vil du anvende metoden 'WSH' i stedet?\r\n(Denne indstilling findes under avanceret i Indstillinger)
+886#£WordMat kan ikke kommunikere med GeoGebra. Det skyldes formentlig at du ikke har sat de rigtige sikkerhedsindstillinger i Safari. Klik ok for at få instruktionerne
+887#£Løs numerisk
+888#£WordMat kunne ikke finde Maxima installation. Prøv at geninstallere.
+889#£Fejl ved forbindelse til Maxima med WSH
+890#£Stopper automatisk om 
+891#£Det lykkedes ikke. Stopper.
+892#£Kommandoen blev afbrudt efter 
+893#£Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.
+894#£Fejl i definition
+895#£Der er en syntax fejl i forbindelse med et integrale. Har du husket dx i slutningen?
+896#£Længde af output: 
+897#£Klik JA for at indsætte alle tegn i Word. (Advarsel: Kan gøre Word langsom eller endda få Word til at crashe). \r\n Klik NEJ for kun at indsætte de første 1000 tegn.
+898#£Du har angivet for få parametre til funktionen: 
+899#£Det kan skyldes, at du har anvendt komma istedet for semikolon til at adskille parametrene. (du kan istedet tilføje et mellemrum på den ene side af kommaet.)
+900#£Løsningsbetingelser:
+901#£Du skal markere en liste først fx [1;2;3]
+902#£Måske har  du byttet om på n og r i K(n, r)?

@@ -9,11 +9,11 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 'Public XLapp As excel.Application
-Public XLapp As Object ' getobject metoden gav problemer med at man ikke vidste hvilken
-                        ' excel app der kom retur. Fidusen var ellers at gøre det hurtigere
-                        ' hvis Excel allerede var åben.
-                        ' men det virker ikke stabilt. WordMat skal have sin egen excel.app kørende
-                        
+Public XLapp As Object ' getobject method gave problems with not knowing which
+' excel app was returned. The trick was to make it faster
+' if Excel was already open.
+' but it doesn't seem stable. WordMat needs to have its own excel.app running
+
 'Public xlwb As Excel.Workbook
 Public xlwb As Object
 'Public ch As excel.Chart
@@ -70,8 +70,6 @@ End If
 If Dir(wordmatsti) <> "" Then
     Set xlwb = XLapp.Workbooks.Add(wordmatsti)
 End If
-
-
 End Sub
 Public Sub CloseExcel()
 On Error GoTo Fejl
@@ -114,72 +112,72 @@ slut:
 End Sub
 
 Function InsertIndlejret(FilNavn As String, Optional startark As String)
-'indsætter exceldokument som indlejret dokument
-Dim Path As String
-Dim ils As InlineShape
-Dim vers As String
-On Error Resume Next
-'Set XLapp = GetObject(, "Excel.Application")
-'If Err.Number <> 0 Then
-'    Set XLapp = CreateObject("Excel.Application")
-'    Set XLapp = New Excel.Application
-'End If
-On Error GoTo slut
-Application.ScreenUpdating = False
+    'inserts excel document as embedded document
+    Dim Path As String
+    Dim ils As InlineShape
+    Dim vers As String
+    On Error Resume Next
+    'Set XLapp = GetObject(, "Excel.Application")
+    'If Err.Number <> 0 Then
+    '    Set XLapp = CreateObject("Excel.Application")
+    '    Set XLapp = New Excel.Application
+    'End If
+    On Error GoTo slut
+    Application.ScreenUpdating = False
     
-'    Dim ufwait2 As New UserFormWaitForMaxima
-'    ufwait2.CommandButton_stop.visible = False
-'    ufwait2.Label_tip.Caption = "      Indsætter indlejret..."
-'    ufwait2.Label_progress.Caption = "Indsætning af indlejrede objekter kan tage tid. Dobbeltklik på objektet for at redigere det."
-'    ufwait2.Show vbModeless
-        DoEvents
-'        ufwait2.Label_progress = "***"
-Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
+    '    Dim ufwait2 As New UserFormWaitForMaxima
+    '    ufwait2.CommandButton_stop.visible = False
+    '    ufwait2.Label_tip.Caption = "      Inserts embedded..."
+    '    ufwait2.Label_progress.Caption = "Inserting embedded objects can take time. Double-click the object to edit it."
+    '    ufwait2.Show vbModeless
+    DoEvents
+    '        ufwait2.Label_progress = "***"
+    Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
     If Selection.Range.Tables.Count > 0 Then
-'        Selection.Copy
+        '        Selection.Copy
         Selection.Tables(Selection.Tables.Count).Select
         Selection.Collapse (wdCollapseEnd)
         Selection.TypeParagraph
-'        startark = "Data"
+        '        startark = "Data"
     End If
     If Selection.OMaths.Count > 0 Then
         Selection.OMaths(Selection.OMaths.Count).Range.Select
         Selection.Collapse (wdCollapseEnd)
         Selection.TypeParagraph
     End If
-If val(Application.Version) = 12 Then
-    vers = ".12"
-Else
-    vers = ""
-End If
+    If val(Application.Version) = 12 Then
+        vers = ".12"
+    Else
+        vers = ""
+    End If
 
-Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.Sheet" & vers & Application.Version, _
-fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
-'        ufwait2.Label_progress = "***************************************"
-'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
-'ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
-'ils.OLEFormat.DoVerb (wdOLEVerbShow)
-If startark <> "" Then
-    ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
-    DoEvents
-    Set xlwb = ils.OLEFormat.Object
+    Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.Sheet" & vers & Application.Version, _
+        fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+    '        ufwait2.Label_progress = "***************************************"
+    'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
+    'ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
+    'ils.OLEFormat.DoVerb (wdOLEVerbShow)
+    If startark <> "" Then
+        ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
+        DoEvents
+        Set xlwb = ils.OLEFormat.Object
 
-'    Dim oWS As Object ' Worksheet Object
-'    Set oWS = ils.OLEFormat.Object
-'    ils.OLEFormat.Object.Sheets(startark).Activate
-'    oWS.ActiveSheet.Cells(4, 1).Activate
-'    oWS.ActiveSheet.Application.Selection.Paste ' virker ikke
-'    oWS.Selection.Paste
-End If
-'Unload ufwait2
-'Ils.OLEFormat.DoVerb (wdOLEVerbUIActivate)
-'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
-'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
-GoTo slut
+        '    Dim oWS As Object ' Worksheet Object
+        '    Set oWS = ils.OLEFormat.Object
+        '    ils.OLEFormat.Object.Sheets(startark).Activate
+        '    oWS.ActiveSheet.Cells(4, 1).Activate
+        '    oWS.ActiveSheet.Application.Selection.Paste ' virker ikke
+        '    oWS.Selection.Paste
+    End If
+    'Unload ufwait2
+    'Ils.OLEFormat.DoVerb (wdOLEVerbUIActivate)
+    'Ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)
+    'Ils.OLEFormat.DoVerb (wdOLEVerbHide)
+    GoTo slut
 Fejl:
     On Error Resume Next
     MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
-'    Unload ufwait2
+    '    Unload ufwait2
 slut:
 End Function
 
@@ -216,13 +214,13 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
 '    Next
 '    Next
     
-    'tæl rækker sammen
+    'count rows
     For i = 1 To r
         ws.Cells(i + 2, c + 2).Formula = "=sum(R" & i + 2 & "C2:R" & i + 2 & "C" & c + 1 & ")"
         ws.Range(ws.Cells(i + 2, c + 2), ws.Cells(i + 2, c + 2)).BorderAround ColorIndex:=1, Weight:=xlThin
     Next
     
-    'tæl kolonner sammen
+    'count columns
     For i = 1 To c
         ws.Cells(r + 3, i + 1).Formula = "=sum(R3C" & i + 1 & ":R" & r + 2 & "C" & i + 1 & ")"
         ws.Range(ws.Cells(r + 3, i + 1), ws.Cells(r + 3, i + 1)).BorderAround ColorIndex:=1, Weight:=xlThin
@@ -231,7 +229,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     ws.Cells(r + 3, c + 2).Formula = "=sum(R" & r + 3 & "C2:R" & r + 3 & "C" & c + 1 & ")"
     ws.Range(ws.Cells(r + 3, c + 2), ws.Cells(r + 3, c + 2)).BorderAround ColorIndex:=1, Weight:=xlThin
     
-    ' forventede værdier
+    ' Expected values
     For i = 3 To r + 2
     For j = 2 To c + 1
 '        ws.Cells(i, c + 2 + j).Formula = ws.Cells(r + 1, j).Value * ws.Cells(i, c + 1).Value / ws.Cells(r + 1, c + 1).Value
@@ -241,13 +239,13 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     Next
     Next
     
-    'tæl rækker sammen
+    'count rows
     For i = 1 To r
         ws.Cells(i + 2, 2 * c + 4).Formula = "=sum(R" & i + 2 & "C" & c + 4 & ":R" & i + 2 & "C" & 2 * c + 3 & ")"
         ws.Range(ws.Cells(i + 2, 2 * c + 4), ws.Cells(i + 2, 2 * c + 4)).BorderAround ColorIndex:=1, Weight:=xlThin
     Next
     
-    'tæl kolonner sammen
+    'count columns
     For i = 1 To c + 1
         ws.Cells(r + 3, i + 3 + c).Formula = "=sum(R3C" & i + 3 + c & ":R" & r + 2 & "C" & i + 3 + c & ")"
         ws.Range(ws.Cells(r + 3, i + 3 + c), ws.Cells(r + 3, i + 3 + c)).BorderAround ColorIndex:=1, Weight:=xlThin
@@ -256,7 +254,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
 '    ws.Cells(r + 3, c + 2).Formula = "=sum(R" & r + 3 & "C2:R" & r + 3 & "C" & c + 1 & ")"
     
     ws.Calculate
-    ' Chi2 beregning af p-værdi
+    ' Chi2 calculation of p-value
 '    ws.Cells(2, 2 * c + 4).Formula = "=a1"
 '    ws.Cells(2, 2 * c + 4).Formula = "=CHITEST(R1C1:R2C2;R1C5:R2C6)"
 '    ws.Cells(2, 8).Formula = "=sum(A1:B2)"
@@ -354,16 +352,16 @@ If Selection.Range.End > Selection.Tables(1).Range.End Then
     Selection.End = Selection.Tables(1).Range.End
 End If
 
-If Selection.Rows.Count >= Selection.Columns.Count Then ' fejler hvis andet end tabel også er valgt
+If Selection.Rows.Count >= Selection.Columns.Count Then ' fails if anything other than table is also selected
     Set rws = Selection.Rows
-    oFS = Selection.Cells(1).Column.Index - 1 ' kolonne hvor selection starter
+    oFS = Selection.Cells(1).Column.Index - 1 ' column where the selection starts
 Else
     Set rws = Selection.Columns
-    oFS = Selection.Cells(1).Row.Index - 1 ' række hvor selection starter
+    oFS = Selection.Cells(1).Row.Index - 1 ' row where selection starts
 End If
 n = rws.Count
 
-If n < 2 Then ' hvis intet valgt på forhånd
+If n < 2 Then ' if nothing selected in advance
     If Selection.Tables(1).Rows.Count >= Selection.Tables(1).Columns.Count Then
         Set rws = Selection.Tables(1).Rows
         oFS = 0
@@ -373,7 +371,7 @@ If n < 2 Then ' hvis intet valgt på forhånd
     End If
     n = rws.Count
     On Error Resume Next
-    For i = 1 To n ' bestem hvor der ligger tal
+    For i = 1 To n ' determine where numbers are located
         For j = 1 To rws(1).Cells.Count
         cellval = rws(i).Cells(j).Range.Text
         cellval = Left(cellval, Len(cellval) - 1)
@@ -406,8 +404,8 @@ End If
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Left(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
-        Tabel(i, 1) = CDbl(cellval) ' skal med for at melde fejl , men alene duer ikke da den er afh af sprog indstill
-        Tabel(i, 1) = val(cellval) 'melder ikke fejl ved bogstaver
+        Tabel(i, 1) = CDbl(cellval) ' must be included to report errors, but alone is not enough as it depends on the language setting
+        Tabel(i, 1) = val(cellval) 'does not report errors with letters
         cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
 '        cellval = tabel.Cell(j, 2).Range.text
         cellval = Left(cellval, Len(cellval) - 1)

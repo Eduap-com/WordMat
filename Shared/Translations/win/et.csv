@@ -1,0 +1,903 @@
+0#£Spikker Maxima käskude jaoks
+1#£Nummerdatud võrrandi sisestamine
+2#£Lisada viide nummerdatud võrrand
+3#£Lisada viide võrrandile
+4#£Järjehoidja
+5#£Tippige võrrandi nimi
+6#£Määrake võrrandi number
+7#£Num. eq.
+8#£Sisestage võrrandi sektsioon nr.
+9#£Võrrandinumbrite värskendamine
+10#£Võrrandite olemasolevad nimed
+11#£Hiljem võrrandile viite lisamiseks vali WordMati menüü "Lisa võrrandi" alt "Lisa viide võrrandile"
+12#£Nimi on juba olemas
+13#£Nimi ei tohi sisaldada tühikuid
+14#£Võrrandi viide
+15#£Paigutuse
+16#£Vasakul
+17#£Parem külg
+18#£Nummerdamine
+19#£Küsige sisestamisel viite nime
+20#£WordMath võimaldab Wordis matemaatilisi arvutusi teha. WordMathi tuum on avatud lähtekoodiga ja tasuta\r\nWordMat installib ka järgmised programmid: Maxima, GeoGebra, Math fondid.\r\nValikulised komponendid: GeoGebra 5, Graph, WordMath+. Vaata lähemalt Litsents\r\nWordMathi on teinud Mikael Samsøe Sørensen, Nyborgi Gümnaasium, EDUAP 2009-2025.
+21#£WordMathi uus versioon on allalaadimiseks valmis.\r\nUudised: \r\n
+22#£Nüüd suunatakse teid allalaadimislehele
+23#£Uus versioon
+24#£Sisestage punktide arv, millele soovite regressiooni teha. Seejärel luuakse tabel, kuhu saate oma punktid panna. Kui soovite regressiooni teha, valige lihtsalt tabel ja valige menüüst soovitud regressioon.
+25#£Wordi tabelis ei soovitata teha regressiooni rohkem kui 200 punkti kohta. Kasutage Excelit, kui soovite teha regressiooni nii paljude punktide kohta
+26#£Ilmnes tõrge. Tõenäoliselt on sisendnumbrites viga
+27#£Peate looma kahe veeruga tabeli. x-väärtused vasakpoolses veerus ja y-väärtused paremas veerus. Tähti ignoreeritakse. Valitud numbritele tehakse regressioon. Kui ühtegi pole valitud, tehakse regressioon kõigi tabeli arvude puhul
+28#£Nendes punktides ei saa regresssiooni läbi viia
+29#£WordMati lineaarne regressioon: $Tab
+30#£WordMati eksponentsiaalne regressioon: $Tab
+31#£WordMati teostatud võimsuse regressioon: $Tab
+32#£Võimsuse regressiooni ei saa nendes punktides läbi viia. Kõik numbrid peavad olema positiivsed (ja mitte null).
+33#£Kasutaja määratletud regressioon funktsiooniga
+34#£esitab WordMath
+35#£Märkige polünoomse regressiooni järjekord (1-
+36#£(Maksimaalne järjekord määratakse punktide arvu järgi)
+37#£tellimus
+38#£Astme polünoomne regressioon
+39#£Kasutaja määratletud regressioon
+40#£Funktsioon
+41#£Kümnendkohta
+42#£Alustage arvamist (nt: a=2, c=10)
+43#£Täpsus on seatud väga kõrgele. Arvutusaeg võib olla väga pikk või põhjustada vea. Kui see ei õnnestu, proovige madalamat seadistust.
+44#£Täpsus on seatud üsna kõrgeks. Arvutusaeg võib olla üsna pikk või põhjustada vea. Kui see ei õnnestu, proovige madalamat seadistust.
+45#£Täpsus ei saa olla negatiivne. Valige positiivne täisarv
+46#£Täpsus ei kehti. Valige positiivne täisarv.
+47#£Kursori paigutamine võrrandisse
+48#£Definitsioonide arvutamine ei ole võimalik
+49#£Väljendit eristab WordMat.
+50#£Väljendit ei saanud eristada
+51#£Oleku muutuja
+52#£WordMat leiab antiderivaadi
+53#£Väljendit ei saanud integreerida
+54#£Ilmnes tõrge. WordMat pole tõenäoliselt õigesti installitud. Proovige uuesti installida, võib-olla siis, kui viirusetõrje on deaktiveeritud. Kui teie koolil on partnerlus, võib probleemi lahendada seadete / täpsema asetuse "dll-ühenduse meetod"
+55#£Maxima käivitamisel ilmnes viga
+56#£Ebavõrdsus on lahendatud
+57#£poolt WordMat.
+58#£Kõik numbrid lahendavad selle ebavõrdsuse
+59#£Ebavõrdsusel ei olnud muutujate $C valdkonnas lahendusi
+60#£Ebavõrdsusel ei olnud muutujate $R valdkonnas lahendusi
+61#£Järgmiste eelduste/määratlustega:
+62#£Määratleda
+63#£Interneti-ühendus puudub
+64#£Värskenduse alustamiseks klõpsake nuppu OK
+65#£WordMati kiirklahvid
+66#£Wordi võrrandi otseteed
+67#£Saate Wordis luua oma tippimise otseteid või muuta olemasolevaid otseteid. Asetage kursor võrrandisse. Menüü Kujundus avamine. Leidke rühm nimega funktsioonid. Klõpsake paremas alanurgas olevat väikest noolt. Valige "Matemaatika automaatsed kirjed"
+68#£Piimasegude
+69#£Definitsioonide kustutamine
+70#£Konstandid
+71#£Otsige väärtusi veebist
+72#£Teisendage võrrandid LaTex-iks. (Otsetee alt+T teisendab ühe võrrandi)
+73#£Kopeeri lõikelauale
+74#£Kuvamise stiil
+75#£Ärge kirjutage ühikuid kaldkirjas
+76#£Kasutage LaTexi teisendamiseks Maximat
+77#£Teisenda kõik
+78#£Teisendage ja minge järgmise juurde
+79#£Enne
+80#£Pärast
+81#£Ükski
+82#£Komme
+83#£Manusta kood
+84#£Ülejäänud dokumendis pole teisendatavaid võrrandeid.
+85#£Lahendada diferentsiaalvõrrandite süsteem numbriliselt
+86#£Diferentsiaalvõrrandid
+87#£Algväärtus
+88#£Sammu suurus
+89#£Ühendage punktid
+90#£Näita võrrandeid
+91#£Lisa nimekiri
+92#£Lisa tabel
+93#£Sisestage graafik
+94#£Tõenäoliselt väljaspool domeeni! \r\nReguleerige xmin/xmax
+95#£Ilmnes tõrge. Kontrollige numbreid xmin ja xmax järgi
+96#£Partnerlus puudub
+97#£Graafiku sisestamisel ilmnes tõrge. Definitsioonis võib esineda süntaksiviga
+98#£Exceli lehe sisestamisel ilmnes tõrge. Selle põhjuseks võib olla Exceli eelmine krahh. Sulgege kõik avatud Exceli lehed ja seejärel avage Excel uuesti, enne kui proovite uuesti WordMatiga kasutada.
+99#£Käsu teisendamisel Maxima süntaksiks ilmnes tõrge.
+100#£Maxima väljundi Wordi süntaksiks teisendamisel ilmnes tõrge.
+101#£Lahendus on ebakindel. Võib-olla soovite proovida ka numbriliste meetodite kasutamist
+102#£Kuna tegemist on trigonomeetrilise võrrandiga, on lahendusi lõpmatult palju. Ainult üks neist on välja toodud
+103#£Kõiki lahendusi pole leitud.
+104#£Viga: jagamine nulliga.
+105#£Süntaksi viga.
+106#£Süntaksi viga. Kasutati vale sümbolit. Võib olla puuduv korrutusmärk või , . Küsimus
+107#£Hoiatus: Olete palunud lahendada võrrandisüsteemi, kuid märkisite vähem muutujaid kui võrrandeid. Lahendatakse ainult esimesed võrrandid. Kontrollige käsitsi viimast võrrandit (viimaseid võrrandeid).
+108#£Maxima teatas järgmisest veast:
+109#£Maksimumi viga
+110#£WordMat ei leidnud kausta "Programmifailid"
+111#£Avamisel ilmnes tõrge:
+112#£Serveriga ei saa ühendust luua
+113#£Selles dokumendi kohas on määratletud järgmine
+114#£Selles kohas dokumendis pole definitsioone.
+115#£Võrrandi definitsioonid on defineeritud 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+116#£Tuletist ei saa defineerida\r\nEemalda definitsioon: \r\n
+117#£Definitsioonis on viga:
+118#£Seda ignoreeritakse, kuid selle väljundvea vältimiseks parandage sisendviga
+119#£... ülejäänud eemaldatud.
+120#£Teie koolil/organisatsioonil on aktiivne partnerlus. Nüüd saate kasutada WordMat+
+121#£Kahju. Teie koolil ei ole aktiivset partnerlust.
+122#£Märkige uue funktsiooni definitsioon\r\nDefinitsiooni saab kasutada ülejäänud dokumendis, kuid mitte varem.\r\nKui sisestate käsu "delete def:" dokumendis allapoole, ei ole see sellest punktist edasi teada.\r\nSaate määratleda korraga rohkem muutujaid, eraldades need klahviga " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
+123#£Uus funktsioon
+124#£Uus võrrand
+125#£Määratle võrrand
+126#£Määratleda
+127#£Väljend on väga pikk. Kas soovite selle Wordi sisestada?\r\nSee võib mõjutada Wordi kiirust. Pikad võrrandid võivad Wordi aeglastes arvutites peatada. Kaaluge lahendamist numbriliste meetodite abil\r\nVäljundit näete allpool:
+128#£Avaldist ei olnud võimalik arvutada.
+129#£Võrrandil ei olnud muutuja jaoks $C valdkonnas lahendusi
+130#£Võrrandil ei olnud muutuja jaoks $R valdkonnas lahendusi
+131#£WordMat ei suutnud võrrandit lahendada
+132#£Kõik numbrid on võrrandi lahendused
+133#£Olete palunud lahendada juba defineeritud muutuja võrrandi. Sisestage võrrandi ette käsk "delete def:".
+134#£Võrrandisüsteem on lahendatud
+135#£WordMati funktsiooni "lahenda võrrand" abil,
+136#£Registreeritud partnerlus
+137#£Võrrandisüsteemil ei olnud muutujate $C valdkonnas lahendusi
+138#£Võrrandisüsteemil ei olnud muutujate $R valdkonnas lahendusi
+139#£Võrrandis peab olema võrdusmärk
+140#£Partnerlust ei registreeritud
+141#£See ei ole võrrand. Võrrandil on alati võrdusmärk.
+142#£Võrrandisüsteemist eemaldatakse järgmised muutujad:
+143#£WordMati funktsiooni "Kõrvalda muutuja", "
+144#£Tõsi
+145#£vale
+146#£tundmatu
+147#£
+148#£Leiti lahendus. Lahendusi võib olla rohkem.
+149#£Valige ainult 1 avaldis
+150#£WordMat lihtsustab avaldist järgmiste meetodite abil:
+151#£Automaatne lihtsustamine,
+152#£Trigonomeetrilised identiteedid
+153#£Väljendit ei saanud lihtsustada
+154#£Väljendit lihtsustab WordMat.
+155#£Avaldise faktoorib WordMat.
+156#£Avaldist ei saanud faktoreerida
+157#£Väljendit laiendab WordMat.
+158#£Väljendit ei saanud laiendada
+159#£Diferentsiaalvõrrandite lahendamiseks peate ühikud keelama
+160#£Diferentsiaalvõrrandit ei õnnestunud lahendada
+161#£Koolid saavad registreeruda partnerlusele Eduapiga. Partnerlus saab juurdepääsu toele, WordMath+-le ja paljule muule. Klõpsake, et lugeda rohkem
+162#£Binoomjaotus
+163#£Väljendi tõesust kontrollib WordMat.
+164#£Tulemus põhineb numbrilisel võrdlusel
+165#£WordMat ei suutnud kindlaks teha, kas avaldis oli tõene või vale
+166#£Ühikud välja lülitatud
+167#£Valige väljundühikud
+168#£Väljundi ühikud
+169#£Sobimatud sulud
+170#£Automaatne varundamine?
+171#£Mitu varukoopiat salvestada?
+172#£Varukoopiate vaheline aeg
+173#£Word ei tee automaatset varundamist, vaid salvestab andmed, mida saab kasutada kadunud faili taasloomiseks\n\nWordMat saab teha täieliku varukoopia, kui teete arvutuse ja salvestate dokumendi mitmes versioonis. (Varukoopiad on palju kiiremad, kui dokumenti pole OneDrive'is) . Varukoopiad salvestatakse kausta: minu dokumendid/WordMat-backup
+174#£Avage varukaust
+175#£Küsima
+176#£Alati
+177#£Iial
+178#£Varundamisel ilmnes viga
+179#£Kas soovite aktiveerida WordMatsi automaatse varundussüsteemi\n\n(Lisateabe saamiseks minge seadetesse | Varundamine)
+180#£Normaaljaotus
+181#£Madal
+182#£Tavaline
+183#£Kõrge
+184#£Väga kõrge
+185#£Super (aeglane)
+186#£Võrrand
+187#£Oota?
+188#£Max
+189#£Ainult jooned
+190#£Näita telgesid
+191#£Kvaliteet
+192#£Mõjutab pöörlemiskiirust
+193#£Kui pilt ilmub, saate vaatenurka muuta, vajutades ja hoides lohistamise ajal all hiire vasakut nuppu. Paremklõpsake menüüreal, valige valikud ja pildi kopeerimiseks kopeerige lõikelauale. Wordi naasmiseks sulgege aken.
+194#£Revolutsiooniline tahke
+195#£Sisestage graafikul punaste punktiirjoontega tähistatavate punktide koordinaadid. Näited \r\neksempel:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)\r\n Koordinaadi saamiseks on võimalik klõpsata ka graafikul, kui kasutate lisamisnuppu.
+196#£Samuti punktiirjoonte sisestamiseks, mis tähistavad punkte graafikul, kuid muu värviga kui veeru 1 punktid. Nendes punktides ei saa regressiooni teostada. Punkte ühendades saate luua igasuguseid kujundeid.
+197#£Valige koordinaatide andmetega tabel enne graafiku vajutamist, et need automaatselt sellesse tekstikasti täita. Üks koordinaatide komplekt pr. rida. Üks koordinaatide komplekt pr. rida. Koordinaadid tuleb eraldada koma, semikooloni või tabeldusmärgiga. Koordinaate saab kopeerida Excelist. Näited: \r\n1.2 , 3.4\r\n3,4 ; 4,8\r\n5,6$Tab & "7.8
+198#£Muutujad peavad olema x ja y
+199#£Sisesta ring
+200#£Lisa rida
+201#£Märgitud punktid
+202#£Regressiooni
+203#£Jah
+204#£Ei
+205#£Pidage seda valikut meeles
+206#£Kui WordMatsi varundusfunktsioon on lubatud, tehakse arvutuse tegemisel varundamine. Varukoopia tehakse ainult iga 5 minuti järel. 10 varukoopiat tehakse enne nende ülekirjutamist." & vbLf & vbLf & " Neid sätteid saate muuta jaotises seaded | Backup.
+207#£Seda valikut saate alati muuta jaotises Seaded | Backup
+208#£Backup
+209#£nurkade summa on üle 180
+210#£Peate sisestama 3 külge/nurka. Mitte 3 nurka küll. Vähemalt 1 külg peab olema teada.
+211#£nurkade summa ei ole 180
+212#£Sisestasite liiga palju nurki/külgi
+213#£Peate sisestama TÄPSELT 3 külge/nurka. Mitte 3 nurka küll. Vähemalt 1 külg peab olema teada.
+214#£
+215#£Nurk
+216#£leitud nurkade summa = 180 $Degree kolmnurgas
+217#£Külje pikkus
+218#£Leitud Pythagorase abil
+219#£Külgede pikkus
+220#£Leitud Tani abil
+221#£leitud siinuse abil
+222#£leitud koosinuse abil
+223#£leitud koosinuse seaduse abil
+224#£leitud siinuse seaduse abil
+225#£Ruutvõrrand lahendatakse
+226#£Sellel ruutvõrrandil on kaks lahendust:
+227#£Kuid teine lahendus on negatiivne ja pikkus ei saa olla negatiivne.
+228#£Kuna lahendus
+229#£oli kaks lahendust ja mõlemad lahendused olid positiivsed, see tähendab, et on kaks võimalikku kolmnurka. Nüüd jätkame ülejäänud külgede arvutamist 2. lahenduse põhjal, kasutades sama meetodit.
+230#£Sisesta sümbol
+231#£Kreeka tähed
+232#£Muud sümbolid
+233#£Lisa
+234#£Sümbol
+235#£Võrrandi lahendamine graafiliste ja numbriliste meetodite abil
+236#£Esialgne oletus
+237#£Intervalli meetod
+238#£alustama
+239#£lõpp
+240#£Parempoolne ja vasak külg plottet. \nVasak pool on must. Parem külg on roheline.
+241#£Graafiline lahendus
+242#£Samuti suumimine topeltklõps või kasti lohistamine
+243#£Näita graafikut eraldi aknas
+244#£$X^2 jaotus
+245#£Muutujad
+246#£Katse
+247#£Vali max
+248#£Või sisestage käsitsi max
+249#£komaga eraldatud muutujad
+250#£Vali täpselt
+251#£Või sisestage käsitsi
+252#£Võrrandit ei saa lahendada
+253#£ja määratlege see samal ajal
+254#£Sa üritad lahendada muutujat, mis on ühik. See põhjustab suure tõenäosusega vea. Kaaluge mõne muu muutuja nime kasutamist või ühikute keelamist.
+255#£Maa
+256#£Vesi
+257#£vask
+258#£raud
+259#£kuu
+260#£päike
+261#£Füüsika konstandid
+262#£Ühikut
+263#£Tabeli väärtused - soojus
+264#£Tabeli väärtused - tuumafüüsika
+265#£Astronoomia
+266#£Valguse kiirus vaakumis
+267#£Plancksi konstant
+268#£Plancki konstant elektronvoltides
+269#£Gravitatsiooniline konstant
+270#£Kiirenduse vabalangemine maapinnal
+271#£Elementaarne tasu
+272#£Avogadrose arv
+273#£Gaasi konstant
+274#£Boltzmanni konstant
+275#£Vaakumi läbilaskvus
+276#£Vaakumi lubavus
+277#£Coulombsi konstant
+278#£Stefan-Boltzmanni konstant
+279#£Aatommassi ühik
+280#£aatommassi ühik MeV-des
+281#£Erisoojusmahtuvus
+282#£elektronide mass
+283#£kilogrammides
+284#£Prootoni mass
+285#£neutronite mass
+286#£Maa mass
+287#£Maa keskmine raadius
+288#£Maa ja päikese vaheline kaugus (astronoomiline ühik)
+289#£Päikese mass
+290#£Kuu mass
+291#£Kuu keskmine raadius
+292#£GeoGebra 5 pole installitud.
+293#£Nupp viib teid avalehele, kus saate installida GeoGebra. WordMat Windowsis toetab 'GeoGebra classic 5', 'GeoGebra Calculator Suite', 'GeoGebra Classic 6' ja enamikku teisi GeoGebra rakenduste väljaandeid.
+294#£GeoGebra kalkulaatorite komplekt on juba installitud. See töötab brauseris ja ei vaja Internetti. Käivitub kiiresti.
+295#£Paigaldage GeoGebra
+296#£Käivitage GeoGebra kalkulaatorite komplekt
+297#£või piirtingimused
+298#£Etikett
+299#£Sisestage tekst ja seejärel klõpsake selle paigutamiseks graafikul
+300#£Võrrandis on viga
+301#£Kõigepealt peate määrama ymin ja ymax - seejärel vajutage nuppu uuenda
+302#£3D graafikud
+303#£Näita väljendit
+304#£Läbipaistev
+305#£Pindade värv
+306#£Sisestage käsk Maxima Wordi
+307#£Jooned ja pinnad
+308#£Ainult jooned
+309#£Ainult pinnad
+310#£Jooned ja pinnad
+311#£Muutujad peavad olema x, y ja z
+312#£Sisestage sfäär
+313#£Lisage tasapind
+314#£Uus vektor
+315#£Süntaks\n(startx , starty , startz)(dx , dy , dz)\nÜks vektor pr. rida\nNäited:\n(1,1,2)(1,2,3) \n joonistab vektori (1,2,3) punktist (1,1,2)\n\n(1,-2,3)\n joonistab vektori (1,-2,3) punktist (0,0,0)\n\nnäide kümnendkohtadega:\n(1,5 , 3 , 4,5)
+316#£Punkti suurus
+317#£Punktide sisestamise süntaks\n\n(1,2,1)\n(2.5,3.6,8.7)
+318#£Graafikuaknas saate koordinaatsüsteemi pöörata, vajutades lohistamise ajal hiire vasakut nuppu.\n\nKui objekt tundub venitatud, saate graafikuakna suurust paremaks sobivuseks muuta.\n\nPildi Wordi sisestamiseks paremklõpsake menüüreal, valige "valikud" ja seejärel "kopeeri lõikelauale". Seejärel suletakse graafiku aken ja pildi saab Wordi lisada.\n\nPange tähele, et graafiku aken peab olema suletud, et Wordi naasta.\n\nMida kõrgem pildi kvaliteet, seda aeglasem on pöörlemiskiirus.
+319#£Eeskirjad
+320#£Parameetriline graafik
+321#£Kollane/punane/lilla
+322#£Sinine
+323#£Pruun
+324#£Hall
+325#£Otsetee Alt + M lisab uue matemaatika
+326#£Otsetee AltGr + Enter arvutab
+327#£Otsetee Alt + E Lahendab võrrandi
+328#£Otsetee Alt + S avab seaded
+329#£Otsetee Alt + R Lisab eelmise tulemuse
+330#£Otsetee Alt + U Lülitab sisse seadme toe
+331#£Allindeks:
+332#£\lambda on lühend väikesest kreeka tähest lambda
+333#£Otsetee Alt + P Joonistab graafiku
+334#£Valemidokumentides saate muudatused salvestada
+335#£Exceli lehti saab avada eraldi või sisestada manustatuna
+336#£Käte märgistamine? Proovige WordMarki www.eduap.com
+337#£WordMathiga tehtud arvutuste arv:
+338#£Definitsioonide all saate määratleda füüsikalisi konstante ja tabeli väärtusi.
+339#£Word töötab mustandvaates kiiremini - kui tegemist on võrranditega
+340#£Exceli diagrammide kirjelduste lisamine tekstikasti lisamise abil
+341#£Otsetee Alt + N Lülitub automaatse,täpse,num vahel
+342#£Funktsioon, mille tähed on konstantsed, saab GeoGebras liugurid
+343#£Väljundühikud ei tohi olla kombineeritud ühikud.  km/s ei ole lubatud. Seejärel märkida: km,s
+344#£Teil on juba uusimad versioonid
+345#£Võrrandi numbri valimine
+346#£Millisele numbrile see võrrand seada?\r\nVärskendatakse ka järgmisi võrrandeid.
+347#£Binoomtest
+348#£Lisatakse võrrandi sektsiooni number. Tavaliselt lisatakse see pealkirja peatüki/jaotise numbrina. Kuid seda saab sisestada ka peidetuna. Kas soovite numbrit näidata? (Vastake ei, et seda varjata)
+349#£Märkige olulisuse tase protsentides
+350#£Olulisuse tase
+351#£Tabeli mõõtmete sisestamine\r\nread x veerud
+352#£Iseseisvuse hii-ruudu test
+353#£$X^2 - WordMati abil teostatav sõltumatuse test
+354#£P-väärtus
+355#£Olulisuse taseme kasutamine
+356#£% 0-hüpoteesi võib tagasi lükata. Seega on kahe muutuja vahel sõltuvus.
+357#£% 0-hüpoteesi ei saa tagasi lükata. Seega puuduvad tõendid, mis toetaksid nende kahe muutuja vahelist sõltuvust.
+358#£On lahtreid, mille väärtus on väiksem kui 5 või kõigi lahtrite summa on väiksem kui 50. $X^2-jaotus on sel juhul halb lähendus ja tulemus ebausaldusväärne. Mõnel juhul saab andmeid kasulikuks muuta, rühmitades numbreid erinevalt.
+359#£Chidistribution
+360#£Vabaduse astmed
+361#£Lugema
+362#£GeoGebra avamine
+363#£Sisestage väärtus
+364#£Saate seda hiljem reguleerida
+365#£Määratlege konstant
+366#£Graph pole installitud. See on väike tasuta programm, mida on lihtne installida. Saate selle www.padowan.dk
+367#£Saate seda hiljem kohandada Graphi kasutaja määratletud funktsioonide all
+368#£Graafikute joonistamine GeoGeoGebra ja Graphi abil nõuab, et x oleks sõltumatu muutuja. \r\nJärgmised avaldised on ilma x-ita. Nüüd saate määrata uue muutuja, mida kasutada x-na.
+369#£Sõltumatu muutuja
+370#£$X^2 iseseisvuse test
+371#£Avagraafik
+372#£Manustatud lisamine
+373#£Manustatud objekti lisamine võib võtta aega. Nende avamiseks kahekordistage manustatud objekt.
+374#£Kas sa tahad süzeed teha
+375#£Lisa
+376#£Ebavõrdsuse võrrandite süsteeme veel ei toetata. Lahendage võrrandina või lahendage graafiliselt, kasutades Graphi või GeoGebrat.
+377#£Kõrvaldage muutujad
+378#£väärtustega
+379#£Sisestage startguess. Standardne oletusväärtus on 1
+380#£Muutujad ja oletus
+381#£Võrrandisüsteem on lahendatud
+382#£algusega
+383#£Võrrandisüsteemi ei õnnestunud lahendada
+384#£Kas märkisite õige muutuja?
+385#£Lahendust ei leitud. Intervalli algus- ja lõpp-punkt peavad olema lahuse mõlemal küljel
+386#£Newtonite meetodit, mida rakendatakse algusarvamisega
+387#£Intervalli meetodit rakendatakse intervallis
+388#£Lahendust ei leitud
+389#£Lahendust pole
+390#£Diferentsiaalvõrrandi lahendab WordMati funktsioon "Diferentsiaalvõrrandi lahendamine"
+391#£piirtingimustega
+392#£starditingimustega
+393#£starditingimusega
+394#£Peate Wordi taaskäivitama. Kui te seda ei tee, jookseb Word kokku.
+395#£Valemi sisestamisel ilmnes tõrge. Proovige uuesti teises kohas.
+396#£Simulatsioon
+397#£Rühm
+398#£Vabadusastmete arv\r\nriik n üldise väljendi jaoks.
+399#£Sageduse jaotus
+400#£Tähelepanekud
+401#£Oodata
+402#£Kokku
+403#£P-väärtus
+404#£Korrelatsioon on olemas
+405#£Korrelatsioon puudub
+406#£Kõigi lahtrite summa on väiksem kui 50. $X^2-jaotus on siis halb lähendus ja tulemus ebausaldusväärne.
+407#£Q-väärtus
+408#£Kriitiline Q-väärtus
+409#£MikTex ei ole paigaldatud. Nüüd saadetakse teid allalaadimislehele. Pärast installimist tuleb arvuti taaskäivitada. Esmakordsel käivitamisel MikTexi WordMatist installitakse rida pakette.
+410#£Seda funktsiooni Macis ei toetata
+411#£Teised
+412#£Uus võrrand
+413#£Sümbolid
+414#£CAS-i sätted
+415#£Kujundid
+416#£Olete sisestanud vektorvõrrandi, mis on tegelikult võrrandite süsteem. Sisestage
+417#£muutujad, mida lahendada, eraldatud komaga.
+418#£Peate sisestama
+419#£komaga eraldatud muutujad
+420#£Üks võrranditest ei ole proovitüki pindala piires määratletud. Proovige krundi pindala laiendada
+421#£Avaldises kuvatakse üks või mitu pluss-/miinusmärki. Kuidas tõlgendada?
+422#£Pluss või miinus
+423#£Sisendist ei saa aru. Lisatakse pluss.
+424#£Numbrimärkidega on probleem
+425#£Summa tähis ei ole õige. Alumise piiri süntaks on: i=1 (või sarnane)
+426#£Toote tähis ei ole õige. Alumise piiri süntaks on: i=1 (või sarnane)
+427#£On süntaksiprobleeme. Integraali tuleb lõpetada dx-ga (kui x on muutuja). Võib-olla olete kasutanud d-d mõnes teises kontekstis. Seejärel kasutage diferentsiaali d (tüüp: \dd)
+428#£On süntaksiprobleeme. Topeltintegraal peab lõppema kahe dx-iga (sõltuvalt muutujatest, mida integreerida). Võib-olla olete kasutanud d-d mõnes teises kontekstis. Seejärel kasutage diferentsiaali d (tüüp: \dd)
+429#£Kaksikintegraalmärki ei saa kasutada kindlate integraalide jaoks. Kasutage kahte integraalmärki
+430#£Viga! On süntaksiprobleeme. Diferentseerimise tähistus ei ole õige.
+431#£määratlemata
+432#£määratlemata, kuid piiratud
+433#£Ei ole määratletud
+434#£on reserveeritud ja seda ei saa määratleda. Definitsioon jäetakse vahele.
+435#£Matemaatika
+436#£Füüsika
+437#£Keemiliselt
+438#£Protsent
+439#£Funktsioone
+440#£Geomeetria
+441#£Prob.
+442#£Vektor
+443#£Seaded
+444#£Seaded
+445#£Sci
+446#£Arvutama
+447#£Lahendada
+448#£Käsk Maxima
+449#£Lahendage võrrandi(d) numbrilise meetodi abil
+450#£Kõrvaldage muutujad
+451#£Test tõene/väär
+452#£Lahendage diferentsiaalvõrrand
+453#£Definitsioonide kustutamine
+454#£Funktsiooni määratlemine
+455#£Füüsikaliste konstantide määratlemine
+456#£Vähendada
+457#£Lõpmatu.
+458#£Eristada
+459#£Integreerida
+460#£Joonestamist
+461#£Näita graafikut
+462#£Väli Suund
+463#£3D süzee
+464#£Pöörete maht - 3D Pööra graafik x-telje ümber
+465#£Statistika
+466#£Rühmitamata tähelepanekud
+467#£Rühmitatud tähelepanekud
+468#£Pulga diagramm
+469#£Histogramm
+470#£Sammude tabel
+471#£Kumulatiivne graafik
+472#£Kasti ja vurrude süzee
+473#£Statistika / prob.
+474#£Regressiooni
+475#£Tabelisse ei saa lisada
+476#£Lineaarne
+477#£Eksponentsiaalse
+478#£Võimsus
+479#£Polünoom
+480#£Väljamaksed
+481#£Binoom
+482#£Tavaline jaotus
+483#£$X^2-jaotus
+484#£2D-geomeetria
+485#£3D-geomeetria
+486#£Avab matemaatikavalemi brosüüri
+487#£Avab füüsika valemi brosüüri
+488#£Avab keemiavalemi brosüüri
+489#£Automaatne täpne või numbriline tulemus
+490#£WordMat määrab automaatselt, kas tagastada täpne või arvuline tulem või mõlemad.
+491#£Täpsed tulemused
+492#£Kõik tulemused tagastati täpse tulemusena. Mõnikord ei saa numbrilist lähendust siiski vältida.
+493#£Numbrilised tulemused
+494#£Kõik tulemid tagastatakse kümnendarvudena
+495#£Olulised arvud
+496#£Määrab tulemuste (oluliste) arvude arvu
+497#£Radiaanid
+498#£Kui see on alla surutud, on kõik trigonomeetrilised arvutused radiaanides, muidu kraadides.
+499#£Teaduslik tähistus
+500#£Kui see on allasurutud, tagastatakse kõik tulemused teaduslikus tähistuses. Näide: 2.3$*10^4
+501#£Seaded
+502#£Muutke igasuguseid seadeid.
+503#£Arvuta (AltGr+Enter)
+504#£Arvutab valitud avaldise või tagasi lähima võrdusmärgini.
+505#£Käsk Maxima
+506#£Saadab käsu filtreerimata maksimumini. Tulemus on siiski vormindatud.
+507#£Lahendab võrrandi(d) (Alt+E)
+508#£Lahendab võrrandi või võrrandisüsteemi. Asetage kursor võrrandisse. Võrrandisüsteemi lahendamiseks vali rohkem võrrandeid
+509#£Lahendage numbriliselt
+510#£Lahendage võrrand numbriliste meetodite abil.
+511#£Kõrvaldage muutujad
+512#£Kõrvaldage võrrandisüsteemist üks või mitu muutujat.
+513#£Testige, kas see vastab tõele
+514#£Testige, kas võrrand on tõene
+515#£Lahendage diferentsiaalvõrrand
+516#£Lahendage diferentsiaalvõrrand. Sisestage sisestatakse erineva tähistusega. Näited: y'=y , y''=y või f'(x)=f(x)
+517#£Lahendada diferentsiaalvõrrandite süsteem numbriliselt
+518#£Peab olema kujul y'=?
+519#£Kuva definitsioonid
+520#£Näitab dokumendis selles kohas aktiivseid definitsioone
+521#£Definitsioonide kustutamine (Alt+F)
+522#£Lisab dokumenti käsu 'Delete def:'. Kõik selle käsu ette asetatud definitsioonid ei kehti ülejäänud dokumendis.
+523#£Määratle (Alt+D)
+524#£Lisab definitsiooni, mis kehtib ülejäänud dokumendis
+525#£Füüsikaliste konstantide määratlemine
+526#£Valige enimkasutatud konstantide hulgast ja laske need dokumendis arvutustes kasutamiseks määratleda.
+527#£Vähendada
+528#£Avaldise vähendamine erinevate meetodite abil
+529#£Lihtsustada
+530#£Automaatne katse väljendust lihtsustada. Kasutage vähendamist ja valige konkreetsed meetodid, kui see ebaõnnestub.
+531#£Faktoriseerima
+532#£Faktoriseerib avaldise
+533#£Laiendada
+534#£Kõik sulud on laiendatud
+535#£Laud
+536#£Exceli lisamine
+537#£Eristada
+538#£Eristatava avaldise valimine või kursori avaldisse paigutamine
+539#£Integreerida
+540#£Määrab funktsiooni määramatu integraali
+541#£Wolfram Alfa
+542#£Avab Wolfram Alpha, mille sisendiks on valitud avaldis
+543#£Lahenda võrrand
+544#£Lahendage võrrand Wolffram Alpha abil
+545#£Graafiku graafik (Alt+P)
+546#£Näitab valitud funktsiooni(de)/võrrandi(te) ja punktide graafikut. Seejärel saab graafiku dokumenti sisestada. Toetatud on mitmed graafikaprogrammid. Valige seadete alt oma lemmik.
+547#£Joonistage GnuPloti abil
+548#£Graafiku kuvamine GnuPloti abil. GnuPlot toetab paljusid funktsioone ja loob kena välimusega graafiku. Dokumendis oleval graafikul saate selle uuesti redigeerimiseks topeltklõpsata.
+549#£Joonistage graafiku abil
+550#£Lisab Wordi manustatud Graph-objekti, mida saab redigeerida graafikul topeltklõpsates. Definitsioonid, funktsioonid, võrrandid ja punktid kantakse Wordist Graphi. Graph on väga kiire programm, millel on palju funktsioone. Negatiivne külg on see, et seda Macis ei toetata ja graafikud on näidatud madala eraldusvõimega.
+551#£GeoGebra
+552#£Avab GeoGebra ja edastab valitud funktsiooni(d)/võrrandi(d) GeoGebrasse ja kõik definitsioonid. GeoGebra on kõige funktsioonirikkam graafikaprogramm. Samuti loob see kvaliteetse graafiku. Miinused on järgmised: Selle avamine on aeglane ja graafikut ei kanta automaatselt Wordi. See tuleb kopeerida käsitsi Wordi, kasutades redigeerimismenüüd/"Kopeeri graafika vaade lõikelauale". Graafikut ei saa pärast sisestamist uuesti redigeerida.
+553#£Exceli graafik
+554#£Lisab manustatud Exceli lehe, mis on mõeldud graafikute ja punktide kuvamiseks. Topeltklõpsake Excelsheetsi selle uuesti redigeerimiseks. See ei ole nii kiire ja funktsioonirikas kui mõned teised graafikulahendused. Eelised on järgmised: Toetab Exceli õppimist ja on mõeldud punktide hõlpsaks joonistamiseks. See on hea valik koostööks teiste ainetega, näiteks loodusteadustega.
+555#£Väli Suund
+556#£Näitab suunavälja ja joonistab esimest järku diferentsiaalvõrrandi lahenduskõverad.
+557#£Sisesta GeoGebra fail
+558#£Lisab tühja GeoGebra faili, mida saab Wordist redigeerida ja salvestada. Fail kuvatakse ikoonina. Graafikupildid tuleb dokumenti kopeerida.
+559#£3D süzee
+560#£Joonistage võrrandid, punktid, vektorid ja parameetrilised graafikud 3D-vormingus.
+561#£Revolutsiooniline tahke
+562#£Näitab funktsiooni pöörde tahke. Funktsiooni graafikut pööratakse 360 kraadi ümber x-telje, luues 3D-objekti.
+563#£Statistika
+564#£Avab Exceli töövihiku, mis on mõeldud ühe muutuja statistika jaoks. Vaadake lehti, et näha kõiki funktsioone.
+565#£Rühmitatud tähelepanekud
+566#£Exceli leht rühmitamata andmete jaoks. Arvutab sagedused, keskmised, kvartiilid jne ja genereerib asjakohased diagrammid, nagu kasti ja vurrude diagramm
+567#£Rühmitatud tähelepanekud
+568#£Exceli leht rühmitatud andmete jaoks. Arvutab sagedused, keskmised jne ja genereerib asjakohased diagrammid, nagu histogramm ning kasti ja vurrude diagramm
+569#£Tulpdiagramm
+570#£Exceli leht tulpdiagrammide loomiseks
+571#£Histogramm
+572#£Exceli leht mitme histogrammi joonistamiseks ühele diagrammile.
+573#£Trepi korpuse skeem
+574#£
+575#£Kumulatiivse sageduse diagramm
+576#£
+577#£Kasti ja vurrude süzee
+578#£Exceli leht mitme kasti ja vurru graafiku joonistamiseks ühele diagrammile.
+579#£Regressiooni
+580#£Kõigepealt sisestage tabel punktidega. Seejärel asetage kursor tabelisse ja valige regressiooni tüüp. Tabel võib olla vertikaalne või horisontaalne. Kui punkte on ainult kaks, eeldatakse, et see on vertikaalne.
+581#£Värskenduse kontrollimisel ilmnes tõrge. Nüüd suunatakse teid veebisaidile, kus saate ise veenduda, kas on olemas uus värskendus. Praegune versioon on järgmine:
+582#£Lisab tabeli kahe veeruga regressioonipunktide sisestamiseks.
+583#£Väljamaksed
+584#£Exceli leht jaotusgraafikutega. Diagrammid on dünaamilised ja võivad joonistada kõigi parameetrite jaotusi.
+585#£Binoomjaotus
+586#£Exceli leht, mis joonistab binoomjaotuse. Valige lehel p ja n
+587#£Normaaljaotus
+588#£Exceli leht, mis joonistab normaaljaotuse. Valige lehtedel keskmine ja standardhälve
+589#£-jaotus
+590#£Exceli leht, mis joonistab $X^2-jaotuse. Valige lehel vabadusastmed.
+591#£Katse
+592#£Statistilised testid
+593#£Binoomtest
+594#£Exceli leht binoomtesti jaoks. Sama Exceli töövihik nagu binoomjaotus, kuid teine leht.
+595#£$X^2-test
+596#£Teeb $X^2-testi n x n tabelis. Valige tabelis olevad numbrid.
+597#£Sobivuse headus
+598#£Teostab sobivuse testi. (Chi ruudu test), et näha, kas kaks jaotust on samad.
+599#£Statistiline simulatsioon
+600#£Exceli leht koos lisatud funktsioonidega, mis võivad tulemust permuteerida ja salvestada. Sisaldab kasutusnäidet.
+601#£Uus võrrand (Alt+M)
+602#£Matemaatika sisestusvälja lisamine
+603#£Uus nummerdatud võrrand (Alt+M, Alt+M)
+604#£Lisab uue automaatselt nummerdatud võrrandi. Nummerdatud võrrandi sisestamiseks topeltpuudutage klahvikombinatsiooni Alt+M. See tuleb aktiveerida jaotises seaded | nummerdatud võrrandid.
+605#£Uus nimega nummerdatud võrrand, millele saab viidata.
+606#£Lisab uue nummerdatud võrrandi, millele saate hiljem hõlpsaks viitamiseks nime anda. Kui võrrandi number hiljem muutub, muutub ka viide.
+607#£Sisestage viide võrrandile.
+608#£Sisestage eelnevalt nimetatud võrrandi võrrandi number. Kui võrrandi number hiljem muutub, muutub ka viide.
+609#£Määrake võrrand fikseeritud arvule
+610#£Juba nummerdatud võrrandi saab määrata kindlale arvule
+611#£Lisab uue võrrandiosa.
+612#£Edastab võrrandi nummerdamise esimese numbri. kui eelmine on (2,5), siis järgmine on (3,1). Saab sisestada pealkirjadesse pealkirja numbrina või sisestada peidetuna.
+613#£Värskendage kõik dokumendis olevad võrrandinumbrid
+614#£Tavaliselt tuleb käivitada, kui võrrandid on kustutatud. Uute nummerdatud võrrandite sisestamine sunnib siiski värskendust.
+615#£Sümbolid
+616#£Erinevad meetodid sümbolitega manipuleerimiseks
+617#£Asendage korrutusmärgid
+618#£Asendage kõik * korrutusmärgid $*
+619#£Teisendage võrrandid LaTex-iks. (Otsetee alt+T teisendab ühe võrrandi)
+620#£Teisendage dokumendis mõned või kõik võrrandid LaTex-iks. Saab kasutada ka MikTexi täieliku LaTexi dokumendi genereerimiseks.
+621#£Teisenda LaTex-iks (Alt+T)
+622#£Teisendab ühe võrrandi LaTexiks. Manustamismärke saab valida LaTexi vormil. Alt+T otsetee teisendab ka ühe ekvaatuuri.
+623#£Korrutamise alustamiseks asenda
+624#£Asendab kõik " & ChrW(183) & " korrutusmärgid * korrutusmärkidega.
+625#£Punkt kümnendkoha eraldajana
+626#£Asendab kõik , (komad) matemaatika sisestuskastides . (punkt) ja kõik ;(semikoolon) koos ,(komadega)
+627#£Koma kümnendkoha eraldajana
+628#£Asendab kõik . (punktid) matemaatika sisestuskastides, millel on ,(komad) ja kõik ,(komad) ;(semikooloniga)
+629#£Matemaatilised kujundid, diagrammid ja pildid
+630#£Avab dokumendi tüüpiliste matemaatikakujundite, diagrammidega jne. Seejärel saab need oma dokumenti kopeerida ja teie soovi järgi manipuleerida.
+631#£Tabel $ArrowRight Nimekiri
+632#£Nimekiri $ArrowRight tabel
+633#£Laud
+634#£WordMat saab loendis olevate andmetega manipuleerida. Näide: saate hõlpsalt lisada arvu kõigile loendi elementidele. Andmed on sageli Wordi tabelis. Siin on funktsioonid loendi teisendamiseks tabeliteks ja vastupidiseks.
+635#£Exceli lehe lisamine
+636#£Lisab tühja manustatud Exceli lehe. Avamiseks ja redigeerimiseks topeltklõpsake.
+637#£Teisenda loendiks
+638#£Tabeli teisendamine loendiks. Seda loendit saab seejärel WordMati abil manipuleerida. Näide: [1, 2, 3]+1 = [2, 3, 4] Lisateabe saamiseks vaata juhendit
+639#£Teisenda tabeliks
+640#£Teisendab loendi tabeliks. Loend võib olla matemaatikakastis või kirjutatud dokumenti ja valitud näiteks (1, 2), (3, 4), (5, 6)
+641#£Kolmnurga lahendaja
+642#£Sisestage 3 külge/nurka. Kolmnurga lahendaja arvutab ülejäänud küljed/nurgad ja genereerib kolmnurgast pildi.
+643#£Wordi käsiraamat
+644#£Avab käsitsi Wordi dokumendina
+645#£Veebi kasutusjuhend
+646#£Avab veebipõhise web juhend. Sellel on parem navigeerimine ja videod kui Wordi käsiraamatul, kuid töö on pooleli.
+647#£Maxima käsiraamat
+648#£Maxima on CAS-programm, mis teeb suurema osa matemaatilistest arvutustest WordMatis. Maximal on palju sisseehitatud funktsioone, mis ei ole WordMati kasutajaliidesest kohe nähtavad, kuid mida saab käivitada, kui teate funktsioonide nimesid. See näitab Maxima spikrit, kus näete kõigi maxima funktsioonide dokumentatsiooni.
+649#£Umbes
+650#£Kes tegi WordMati?
+651#£Värskenduste otsimine
+652#£Värskenduste automaatne otsimine.
+653#£Kiirklahve
+654#£Kuvab WordMati käskude aktiveerimiseks vajalike kiirklahvide loendi ja matemaatika sisestamise otseteed Wordi matemaatika sisestusväljadele.
+655#£LaTexi mall
+656#£LaTexi mall
+657#£Avab Wordi dokumendi, mis on kujundatud nagu LaTexi dokument, kuid mida on sama lihtne kirjutada kui Wordi dokumenti.
+658#£Täpsus on seatud väga kõrgele. Arvutusaeg võib olla väga pikk või ebaõnnestunud. Kui jah, proovige uuesti madalama seadistusega.
+659#£WordMat teisendab LaTex-iks väga hästi, kuid LaTex-iks teisendamiseks on ka võimalus kasutada Maximat.
+660#£Ühikuid ei kirjutata tavaliselt muutujatena kaldkirjas. Selle funktsiooniga püüab WordMat tuvastada ühikuid ja sisestada LaTex-koodi, et kirjutada ühikuid tavalises kirjas.
+661#£Sulgema
+662#£Genereerib MikTexi abil tõelise LaTex-dokumendi, mis tuleb installida. Kasutage ainult lihtsa dokumendi jaoks, kuna kõiki dokumendiobjekte ei toetata.
+663#£Näitab, kuidas LaTexi väljundit tõlgendatakse
+664#£Genereerib LaTex-koodi ja avaneb TexWorksis, kus saate teha muudatusi.
+665#£Kolmnurk
+666#£Märke
+667#£Graafik
+668#£Täpsem
+669#£Teaduslik tähistus
+670#£Kompleksarvud
+671#£Keelemuudatuse jõustumiseks kõikjal peate Wordi taaskäivitama.
+672#£Ei saa võtta väärtuste logi <= 0
+673#£Arvutamine
+674#£Ma arvutan
+675#£See meetod nõuab intervalli, kus lahus on intervalli sees. Intervallis peab olema ainult üks lahendus. Lahenduste tuvastamiseks vaadake graafikut.
+676#£Intervallmeetodi kohta
+677#£Newton-Raphsoni meetod nõuab lahenduse esialgset äraarvamist. Meetodi lahendus ei ole garanteeritud, kui see on olemas. Leitakse ainult 1 lahendus. Esialgse oletuse tuvastamiseks vaadake graafikut.
+678#£Newton-Raphsoni kohta
+679#£Enne varundamist peate oma dokumendi salvestama!
+680#£Polaarse tähise väljund
+681#£Probleemid failiga 'normal.dotm' võivad põhjustada probleeme WordMati klaviatuuri otseteedega. Probleeme saab lahendada faili kustutamisega, kuna Wordi taaskäivitamisel luuakse automaatselt uus vaikefail. Faili ei saa kustutada, kui Word on avatud. Peate seda tegema käsitsi.\r\n\r\n- Vajutage OK, et avada kaust, kus asub Normal.dotm. \r\n- Salvestage oma töö ja sulgege Word \r\n- kustutage normal.dotm \r\n- avage Word ning avage ja sulgege WordMati sätted
+682#£GeoGebra poolt teostatud arvutus
+683#£nool
+684#£Safari avamine
+685#£Probleem ei ole lahendatud.\r\nKas soovite proovida mõnda muud meetodit või CAS-mootorit?
+686#£CAS-mootor
+687#£Olulised arvud
+688#£Lülitage seadmed sisse/välja
+689#£Kui ühikud on sisse lülitatud, saab WordMath ühikuid tõlgendada ja teisendada. SI nupul saate muuta väljundühikuid. Ärge lülitage seadmeid sisse, kui te seda ei vaja. See võib mõjutada WordMati käitumist ja reserveerida palju muutujaid.
+690#£Väljundi ühikud
+691#£Märkige ühikud, milleks teisendada. Vaikimisi on väljundühikud SI-ühikud.
+692#£Sf
+693#£Ühikut
+694#£Ei. arvude arv
+695#£Ümardamise
+696#£Valige, kuidas arvud fomateeritakse ja ümardatakse. Allolevates näidetes on WordMat seatud 3 numbrile\r\n\r\nKümnendkohad: 12 345\r\nOlulised arvud: 12,3\r\nSci. Tähis: 1,23*10^1
+697#£Täitke ruut
+698#£Rakendab avaldise kõigi muutujate ruudu täitmine
+699#£Määratlemata negatiivsete täisarvude faktoriaal
+700#£Hoiatus: süsteemis on rohkem võrrandeid kui muutujaid. Kas see oli tahtlik?
+701#£Uus võrrand
+702#£Eelmine tulemus(ed)
+703#£Lülita number / täpne
+704#£Teisenda lateksiks
+705#£Lateks PDF
+706#£Kraadi
+707#£Radiaanid
+708#£Nurga ühik
+709#£Lahenduse tingimuste kuvamine (beetaversioon)
+710#£Täpne
+711#£Numbriline
+712#£Automaatne
+713#£Väga kõrge täpsus (beeta)
+714#£Sisesta selgitus
+715#£Käsu Lisa Maxima
+716#£Eraldajad
+717#£Loend
+718#£Mult.sign
+719#£Dot
+720#£Lahenduse tüüp
+721#£Boole'i
+722#£Lahenduste komplekt
+723#£Allindeks
+724#£Kas lihtsalt tekst on muutuja nime osa
+725#£On loendi/maatriksi indeks
+726#£Standardne graafikuprogramm
+727#£Exceli lehtede manustamine
+728#£Väljundi ühikud
+729#£Oleku väljundühikud, mis on eraldatud komaga\nnäited:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nKui midagi ei ole öeldud, tagastatakse ühikud SI-põhiühikutes või SI-tuletatud ühikutes ilma eesliiteta.
+730#£Näited toetatud ühikutest:\n(Lisateabe saamiseks vaadake juhendit)\n\nPikkus: cm , AU, ly, pc\nMass: u , G, mg\nSagedus: Hz , Bq\nEnergia: kWh , eV, aJ\nRõhk: Bar , mmHg, atm, torr
+731#£Trigonomeetrilised võrrandid
+732#£Kõik lahendused
+733#£Ainult 1 lahendus
+734#£Värskenduste automaatne otsimine
+735#£Parandage klaviatuuri otseteed
+736#£WordMati taaskäivitamine
+737#£Ei. arvutuste arv
+738#£Klaviatuuri otseteed parandatud.\nKui see ikka ei tööta, kustutage fail 'normal.dotm' kaustast '~/Library/Group Containers/UBF8T346G9. Office/User Content/Templates" ja taaskäivitage Word
+739#£Kiirklahvid parandatud.\nKui see ikka ei tööta, kustutage fail "normal.dotm" kaustast "%appdata%/Microsoft/Templates" ja taaskäivitage Word
+740#£GeoGebra kalkulaatorite komplekt paigaldatakse koos WordMatiga. See töötab brauseris, kuid ei vaja Internetti. See töötab samamoodi Windowsis ja Macis ning käivitub kiiresti.\nGeoGebra 5 Töötab samamoodi Windowsis ja Macis, kuid nõuab installimist.\nWindows toetab ka teisi GeoGebra rakenduste versioone, nagu Geogebra 6, graafikakalkulaator jne. Neid kasutatakse siis, kui GeoGebra 5 pole installitud.
+741#£Klaviatuuri otseteed pole õigesti seadistatud
+742#£Arvutuse tulemus sõltub märgist
+743#£Osariigi märk
+744#£Diferentsiaalvõrrand
+745#£Diferentsiaalvõrrandi lahendamine
+746#£Indep. var
+747#£Dep. var/function
+748#£Esialgne seisund
+749#£Maksimumi viga
+750#£Matemaatiline viga
+751#£Süntaksi viga
+752#£Süntaksi viga. WordMat ei saanud teie sisendist aru.
+753#£Sul puudub
+754#£Neid on liiga palju
+755#£Koodis ilmnes viga.
+756#£Jagamine nulliga
+757#£Tekkis viga. Vea põhjustas tõenäoliselt üks teie definitsioonidest.\r\nVõib-olla märkate viga allolevast teabest.
+758#£Ühes teie definitsioonis on viga.\r\nDefinitsioon valitakse nüüd Wordis.
+759#£Ebaseadusliku märgi on paigutanud
+760#£Lahenda võrrand
+761#£Muutuja
+762#£Või oleku muutuja:
+763#£Mõisted
+764#£Ajutised mõisted
+765#£Hoiatus: Ühikud on sisse lülitatud.\r\nVõrrandite lahendamine on kehvem\r\nJälgige muutujaid, mis on sellised ühikud nagu: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
+766#£Lahendage võrrandisüsteem
+767#£Muutujate valimine
+768#£WordMat käivitub
+769#£Oota
+770#£Kolmnurga lahendaja
+771#£Täisnurga all
+772#£Mistahes
+773#£Parem
+774#£Nimede
+775#£Manuel
+776#£Nurgad suurtähed, küljed väiketähed
+777#£Küljed on nimetatud nurkade järgi AB
+778#£Sisestage numbrid Wordi kolmnurgale
+779#£Arvutuste kuvamine Wordis
+780#£Sisestage teadaolevad küljed ja nurgad. Seejärel arvutatakse ülejäänud küljed ja nurgad ning sisestatakse Wordi.\r\nKolmnurga külgede ja nurkade nimesid on võimalik muuta. Klõpsake lihtsalt tähtedel.
+781#£Kolmnurk ei ole suuruse järgi. Kuid õigesti skaleeritud kolmnurk sisestatakse Wordi.
+782#£WordMati kolmnurga lahendajat kasutatakse koos sisendiga:
+783#£Teie teabe põhjal saab konstrueerida kaks kolmnurka
+784#£Ülejäänud külgede ja nurkade arvutamiseks on vaja rohkem teavet
+785#£Kaks kolmnurka
+786#£Ülejäänud külgede ja nurkade arvutamiseks on vaja rohkem teavet
+787#£Nüüd saab arvutada kõiki külgi ja nurki.
+788#£Võrrandi lahendamisel kasutati numbrilisi meetodeid. Lahendusi võib olla rohkem.
+789#£Temp. seaded
+790#£Automaatne vähendamine
+791#£Püüab erinevate meetodite abil taandada avaldist võimalikult lühikesele kujule.
+792#£Proovib avaldist faktoreerida.
+793#£Laiendab avaldist.
+794#£Ratsionaliseerida
+795#£Teisendab kõik kümnendarvud murdudeks.
+796#£Vähendage trigonomeetriliselt
+797#£Vähendage avaldist trigonomeetriliste identiteetide abil.
+798#£Sama rea lisamine
+799#£2D joonistamine
+800#£Lähtesta kõik
+801#£telje pealkiri
+802#£Joone tüüp
+803#£Võrrandi lahendamiseks peate esmalt sisestama võrrandi Wordi. Asetage kursor võrrandisse ja vajutage uuesti nuppu "Lahenda võrrandi(d)". Võrrandisüsteemi lahendamiseks märkige rohkem võrrandeid
+804#£Võrrandit pole valitud
+805#£Lihtsustada
+806#£Tegur
+807#£Laiendada
+808#£Abi
+809#£Käsiraamat
+810#£Käsiraamat Wordi dokumendina
+811#£Veebisaidi käsiraamat
+812#£Umbes
+813#£Uuendama
+814#£Otseteed
+815#£Selge
+816#£Logaritm
+817#£Keel
+818#£Märk
+819#£Positiivne
+820#£Negatiivne
+821#£Null
+822#£Viga
+823#£Mõisted
+824#£OK
+825#£Tühistama
+826#£Oota
+827#£Aktiivsus
+828#£Stopp
+829#£Võrrand on lahendatud
+830#£Võrrand lahendatakse numbriliselt
+831#£poolt WordMat.
+832#£Funktsioone
+833#£Võrrand
+834#£Võrrandid
+835#£Punktid
+836#£Vektorid
+837#£Pealkiri
+838#£Lähtesta
+839#£Täpselt tehtud keeruline arvutus võib võtta väga kaua aega. Kas soovite numbriliselt uuesti proovida?
+840#£Kasutage tavalist d diferentsiaalina d
+841#£dy/dx tähistust saab tavaliselt kasutada ainult spetsiaalse diferentsiaaliga d (\dd) või osaliste tuletiste sümboliga (\osaline). Kui te ei eelda, et d/dx aetakse segi teiste avaldistega, võite kasutada seda sätet, kuna tavalise d-ga on kiirem sisestada dy/dx.
+842#£Kasutaja määratletud regressioon
+843#£Lahendage diferentsiaalvõrrandi(te) süsteem numbriliselt
+844#£Ilmnes viga
+845#£Muutuja
+846#£Hoiatus
+847#£Diferentsiaalvõrrand peaks olema kujul y'=...  selleks, et seda saaks numbriliselt lahendada
+848#£Nupp laadib GeoGebra 5 alla teie Maci allalaadimiseks. Seejärel juhendatakse teid seadistamisel.
+849#£GeoGebra 5 ei ole täielikult paigaldatud. Lõpp
+850#£GeoGebra pole veel paigaldatud. Oodake, kuni allalaadimine lõpeb.
+851#£Jätkama
+852#£Kustuta vana versioon
+853#£Enne uue versiooni allalaadimist tuleb jaotises Allalaadimised olev vana versioon eemaldada.\r\n 1. Avaneb aken nimega "Luba juurdepääs failile".\r\n2. Klõpsake "Vali..." \r\n3. Klõpsake nuppu "Määra juurdepääs" "
+854#£Allalaadimine peatati
+855#£Enne installimise jätkamist peate lubama juurdepääsu GeoGebra.app
+856#£GeoGebra 5 on allalaadimisel
+857#£1. Kõigepealt oodake, kuni GeoGebra 5 alla laaditakse.\r\n2. Kui allalaadimine on lõppenud, peaks avanema aken nimega "Luba juurdepääs failile".\r\n3. Klõpsake nuppu "Vali..." \r\n4. Klõpsake nuppu "Määra juurdepääs"
+858#£Lõpetas
+859#£Protsess peatati.\r\n\r\nKlõpsake nuppu Sule ja proovige uuesti.
+860#£Te ei andnud juurdepääsu GeGebrale. Uuesti proovimiseks klõpsake nuppu "Proovi uuesti".
+861#£Allalaadimine on aeglane. Kontrollige Safaris, kui tundub, et allalaadimine on pooleli. Kui edusamme ei ole, võite klõpsata nuppu Stopp.
+862#£Viga GeoGebra allalaadimisel
+863#£Faili ei leitud allalaadimistest.\r\nVõite klõpsata allosas nuppu "Proovi uuesti", kui soovite, et WordMat uuesti vaataks.
+864#£Andke GeoGebrale luba
+865#£Nüüd peaks avanema aken nimega "Luba juurdepääs failile".\r\n\r\n1. Klõpsake nuppu "Vali..." \r\n2. Klõpsake nuppu "Määra juurdepääs"
+866#£GeoGebra teisaldamine rakendustesse
+867#£Võimalik, et peate andma loa "Süsteemisündmuste" jaoks, klõpsake lihtsalt nuppu OK.
+868#£Valmis
+869#£GeoGebra 5 on nüüd installitud.\r\nGeoGebra avamiseks klõpsake nuppu "Jätka".
+870#£On lehekülgi, mis on 0
+871#£Kõigepealt peate valima tabeli
+872#£Nummerdatud võrrandi sisestamine tabelisse ei saa sisestada
+873#£Võrrandisüsteemi lahendamiseks on kasutatud GeoGebrat. Pole kindel, kas lahendusi on võimalik leida. Soovitatav on proovida mõnda muud meetodit. Nt maksimumid või numbrilised/graafilised
+874#£GeoGebra seda funktsiooni ei toeta. Proovige võrrandilahendajat
+875#£Võrrand lahendati graafiliselt GeoGebraga:
+876#£Sulgude arv ei ühti avaldises
+877#£Vigade seadistamine
+878#£Teil on Wordis vale säte.\r\nLülituge menüüs Võrrandid Latexilt Unicode'ile.
+879#£Süntaksiviga - matemaatika pole õige.
+880#£Olete sisestanud midagi, mis ei ole õige matemaatiline tähistus.\r\nViga on seotud muutujaga:
+881#£Näiteks võib see olla tingitud sellest, et teil on arvul alaindeks. \r\nK_0 tuleks asendada numbriga, mitte näiteks 5000_0-ga. See peab lihtsalt ütlema 5000.
+882#£Võrrandis ei saa olla kahte võrdusmärki
+883#£Võrrandisüsteem lahendati GeoGebraga:
+884#£Arvutamine katkestati, kuna see võttis väga kaua aega. Mõnikord võib aidata proovida arvutust valikuga "Numbriline", mitte täpse või automaatse valikuga
+885#£Maximaga ei saa ühendust luua. Kas soovite selle asemel kasutada meetodit "WSH"?\r\n(Selle valiku leiate seadete jaotise täpsemalt)
+886#£WordMath ei saa GeoGebraga suhelda. Tõenäoliselt on see tingitud sellest, et te pole Safaris nõutavaid turvaseadeid määranud. Juhiste saamiseks klõpsake nuppu OK
+887#£Lahenda numbriline
+888#£WordMat ei leidnud Maxima installi. Proovige uuesti installida
+889#£Viga Maximaga ühendamisel WSH abil
+890#£Peatub automaatselt
+891#£See ei õnnestunud. Peatub.
+892#£Käsk katkestati pärast
+893#£Kas soovite uuesti proovida ja kui kaua soovite oodata. (sekundites) Arvuti lukustub ooteajaks.
+894#£Viga määratluses
+895#£Integraaliga on seotud süntaksiviga. Kas olete mäletanud dx-i lõpus?
+896#£Väljundi pikkus:
+897#£Klõpsake nuppu JAH, et lisada kõik märgid Wordi. (Hoiatus: võib Wordi aeglustada või isegi Wordi krahhi põhjustada). \r\n Klõpsake nuppu NO, et sisestada ainult esimesed 1000 märki.
+898#£Olete funktsiooni jaoks määranud liiga vähe parameetreid:
+899#£Selle põhjuseks võib olla asjaolu, et olete parameetrite eraldamiseks kasutanud semikoolonite asemel komasid. (Selle asemel saate lisada tühiku koma ühele küljele.)
+900#£Lahuse tingimused:
+901#£Kõigepealt tuleb valida nimekiri, nt [1; 2; 3]
+902#£Võib-olla olete K(n, r) n-i ja r-i vahetanud?

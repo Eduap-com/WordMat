@@ -249,7 +249,7 @@ Sub Rib_FSbinfrekvens(control As IRibbonControl)
     PrepareMaxima
     omax.FindDefinitions
     If Not InStr(omax.DefString, "K(n,r):=") > 0 Then
-        insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)" ' chrw8801 er 3 streget =
+        insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)" ' chrw8801 is 3 dash =
         Selection.TypeParagraph
     End If
     
@@ -262,7 +262,7 @@ Sub Rib_FSbinfrekvens(control As IRibbonControl)
     s = Trim(s)
     If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
-        s = InputBox("Indtast nødvendige definitioner", "Definitioner", s)
+        s = InputBox("Enter required definitions", "Definitions", s)
         s = Replace(s, ";", " , ")
         s = Replace(s, "  ", " ")
     
@@ -279,7 +279,7 @@ Sub Rib_FSbinkum(control As IRibbonControl)
     PrepareMaxima
     omax.FindDefinitions
     If Not InStr(omax.DefString, "K(n,r):=") > 0 Then
-        insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)" ' chrw8801 er 3 streget =
+        insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)"
         Selection.TypeParagraph
     End If
     
@@ -292,7 +292,7 @@ Sub Rib_FSbinkum(control As IRibbonControl)
     s = Trim(s)
     If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
-        s = InputBox("Indtast nødvendige definitioner", "Definitioner", s)
+        s = InputBox("Enter required definitions", "Definitions", s)
         s = Replace(s, ";", " , ")
         s = Replace(s, "  ", " ")
     
@@ -305,7 +305,7 @@ End Sub
 
 'Callback for sandbin2 onAction
 Sub Rib_FSbinkoeff(control As IRibbonControl)
-    insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)" ' chrw8801 er 3 streget =
+    insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)"
 End Sub
 
 'Callback for sandbin3 onAction
@@ -337,7 +337,7 @@ Sub Rib_FSnormfrekvens(control As IRibbonControl)
     s = Trim(s)
     If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
-        s = InputBox("Indtast nødvendige definitioner", "Definitioner", s)
+        s = InputBox("Enter required definitions", "Definitions", s)
         #If Mac Then
         #Else
             s = Replace(s, VBA.ChrW(181) & "=", VBA.ChrW(956) & "=")
@@ -369,7 +369,7 @@ Sub Rib_FSnormkum(control As IRibbonControl)
     s = Trim(s)
     If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
-        s = InputBox("Indtast nødvendige definitioner", "Definitioner", s)
+        s = InputBox("Enter required definitions", "Definitions", s)
         s = Replace(s, "s=", VBA.ChrW(963) & "=")
         s = Replace(s, VBA.ChrW(181) & "=", VBA.ChrW(956) & "=")
         s = Replace(s, ";", " , ")
@@ -642,8 +642,8 @@ Sub Rib_deflign(control As IRibbonControl)
     DefinerLigning
 End Sub
 Sub Rib_defkonstanter(control As IRibbonControl)
-    Dim UFkonstanter As New UserFormKonstanter
-    UFkonstanter.Show vbModeless
+    Dim UFConstants As New UserFormConstants
+    UFConstants.Show vbModeless
 End Sub
 Sub Rib_diff(control As IRibbonControl)
     Differentier
@@ -751,7 +751,6 @@ Sub Rib_tfordelinggraf(control As IRibbonControl)
     InsertOpenExcel FilNavn:="studenttFordeling.xltm", WorkBookName:="t"
 End Sub
 
-'Callback for ButtonNyLig onAction
 Sub Rib_nylign(control As IRibbonControl)
     On Error GoTo Fejl
     Application.ScreenUpdating = False
@@ -835,7 +834,7 @@ Sub Rib_ListToTabel(control As IRibbonControl)
     ListToTabel
 End Sub
 Sub Rib_trianglesolver(control As IRibbonControl)
-    Dim UFtriangle As New UserFormTrekant
+    Dim UFtriangle As New UserFormTriangle
     UFtriangle.Show vbModeless
 End Sub
 Sub Rib_om(control As IRibbonControl)
@@ -866,7 +865,7 @@ Sub Rib_CheckForUpdateGeoGebra(control As IRibbonControl)
     InstallGeoGebra False
 End Sub
 Sub Rib_Genveje(control As IRibbonControl)
-    UserFormGenveje.Show
+    UserFormShortcuts.Show
 End Sub
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -952,8 +951,6 @@ Sub Rib_decimaler(control As IRibbonControl)
 '    If Not WoMatRibbon Is Nothing Then WoMatRibbon.InvalidateControl ("menu_cifre")
 End Sub
 
-
-
 Sub Rib_GetLabelFormulae(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(68)
 End Sub
@@ -971,20 +968,20 @@ Sub Rib_FSpercentage3(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "A=b" & ChrW(183) & "((1+r)" & ChrW(&H207F) & "- 1) / r" & "     Annuitetsopsparing"
 End Sub
 Sub Rib_FSpercentage4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=G" & ChrW(183) & "r/(1-(1+r)" & ChrW(&H207B) & ChrW(&H207F) & ")     Annuitetslån"
+    returnedVal = "y=G" & ChrW(183) & "r/(1-(1+r)" & ChrW(&H207B) & ChrW(&H207F) & ")     Annuitetslaan"
 End Sub
 
 Sub Rib_GetLabelFunctions(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(439)
 End Sub
 Sub Rib_FSlinear1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=a" & ChrW(183) & "x+b                Lineær ligning"
+    returnedVal = "y=a" & ChrW(183) & "x+b                Lineaer ligning"
 End Sub
 Sub Rib_FSlinear2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "a=(y" & ChrW(&H2082) & "-y" & ChrW(&H2081) & ")/(x" & ChrW(&H2082) & "-x" & ChrW(&H2081) & ")     Hældningskoefficient"
+    returnedVal = "a=(y" & ChrW(&H2082) & "-y" & ChrW(&H2081) & ")/(x" & ChrW(&H2082) & "-x" & ChrW(&H2081) & ")     Haeldningskoefficient"
 End Sub
 Sub Rib_FSlinear3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=a" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+y" & ChrW(&H2080) & "         Lineær ligning ud fra punkt (x" & ChrW(&H2080) & ",y" & ChrW(&H2080) & ") og a"
+    returnedVal = "y=a" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+y" & ChrW(&H2080) & "         Lineaer ligning ud fra punkt (x" & ChrW(&H2080) & ",y" & ChrW(&H2080) & ") og a"
 End Sub
 Sub Rib_FSlinear4(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "y=f'(x" & ChrW(&H2080) & ")" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+f(x" & ChrW(&H2080) & ")     Tangent til f(x) til x=x" & ChrW(&H2080)
@@ -1058,7 +1055,7 @@ Sub Rib_FSprob3(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "P(m)=" & ChrW(&H3A3) & "K(n,r)" & ChrW(183) & "p" & ChrW(&H2B3) & ChrW(183) & "(1-p)" & ChrW(&H207F) & ChrW(&H207B) & ChrW(&H2B3) & "   Kumuleret"
 End Sub
 Sub Rib_FSprob4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = ChrW(&H3BC) & "=n" & ChrW(183) & "p    Middelværdi"
+    returnedVal = ChrW(&H3BC) & "=n" & ChrW(183) & "p    Middelvaerdi"
 End Sub
 Sub Rib_FSprob5(control As IRibbonControl, ByRef returnedVal)
     returnedVal = ChrW(&H3C3) & "=" & ChrW(&H221A) & "(n" & ChrW(183) & "p" & ChrW(183) & "(1-p))   Spredning"
@@ -1080,10 +1077,10 @@ Sub Rib_FSinf1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "V=" & ChrW(&H3C0) & ChrW(&H222B) & "f(x)" & ChrW(&HB2) & "dx     Rumfang af omdrejningslegeme"
 End Sub
 Sub Rib_FSinf2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "s=" & ChrW(&H222B) & "" & ChrW(&H221A) & "1+(f'(x))" & ChrW(&HB2) & "dx     Kurvelængde af f(x) i interval a-b"
+    returnedVal = "s=" & ChrW(&H222B) & "" & ChrW(&H221A) & "1+(f'(x))" & ChrW(&HB2) & "dx     Kurvelaengde af f(x) i interval a-b"
 End Sub
 Sub Rib_FSinf3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "1/(b-a)" & ChrW(&H222B) & "f(x)dx     Middelværdi af f(x) i interval a-b"
+    returnedVal = "1/(b-a)" & ChrW(&H222B) & "f(x)dx     Middelvaerdi af f(x) i interval a-b"
 End Sub
 
 Sub Rib_GetLabelVector(control As IRibbonControl, ByRef returnedVal)
@@ -1108,7 +1105,7 @@ Sub Rib_FSvec4(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "dist(P,l)=|a" & ChrW(183) & "x" & ChrW(&H2081) & "+b" & ChrW(183) & "y" & ChrW(&H2081) & "+c|/" & ChrW(&H221A) & "a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "     Afstand fra punkt til linje"
 End Sub
 Sub Rib_FSvec5(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "b_a=a" & ChrW(183) & "b/|a|" & ChrW(&HB2) & ChrW(183) & "a     Projektion af vektor b på vektor a"
+    returnedVal = "b_a=a" & ChrW(183) & "b/|a|" & ChrW(&HB2) & ChrW(183) & "a     Projektion af vektor b paa vektor a"
 End Sub
 Sub Rib_FSvec6(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "(x-x" & ChrW(&H2080) & ")" & ChrW(&HB2) & "+(y-y" & ChrW(&H2080) & ")" & ChrW(&HB2) & "=r" & ChrW(&HB2) & "     Cirklens ligning"
@@ -1120,7 +1117,7 @@ Sub Rib_FSvec8(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "cos(V)=a" & ChrW(183) & "b/(|a||b|)     Vinkel mellem vektorer"
 End Sub
 Sub Rib_FSvec9(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "b_a=a" & ChrW(183) & "b/|a|" & ChrW(&HB2) & "" & ChrW(183) & "a     Projektion af vektor b på vektor a"
+    returnedVal = "b_a=a" & ChrW(183) & "b/|a|" & ChrW(&HB2) & "" & ChrW(183) & "a     Projektion af vektor b paa vektor a"
 End Sub
 Sub Rib_FSvec10(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "dist(P,l)=|r x P" & ChrW(&H2080) & "P|/r     afstand fra punkt til linje"
@@ -1285,7 +1282,7 @@ Sub Rib_GetLabelRegression(control As IRibbonControl, ByRef returnedVal As Varia
     returnedVal = Sprog.A(474)
 End Sub
 Sub Rib_GetLabelInsertTable(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.A(475)
+    returnedVal = Sprog.A(92)
 End Sub
 Sub Rib_GetLabelLinRegr(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.A(476)
@@ -1695,7 +1692,7 @@ Sub Rib_STregr2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(580)
 End Sub
 Sub Rib_STtable1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(581)
+    returnedVal = Sprog.A(92)
 End Sub
 Sub Rib_STtable2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(582)

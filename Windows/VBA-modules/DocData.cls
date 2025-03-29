@@ -96,17 +96,16 @@ hop:
         Selection.Tables(1).Select
         Selection.Collapse (wdCollapseEnd)
         Selection.TypeParagraph
-        ReadSelection = True ' ingen fejl
+        ReadSelection = True
     End If
     GoTo slut
 Fejl:
-    '    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelection = False
 slut:
 
 End Function
 Public Function ReadSelectionS() As Boolean
-' læser som strenge
+' reads as strings
 Dim cellval As String
 Dim r As Integer
 Dim i As Integer, j As Integer, k As Integer, l As Integer, c As Integer
@@ -161,7 +160,6 @@ End If
 End If
 GoTo slut
 Fejl:
-'    Call MsgBox("Du skal vælge en tabel. Bogstaver ignoreres.")
     ReadSelectionS = False
 slut:
 
@@ -191,9 +189,9 @@ slut:
 End Function
 
 Public Function GetSetForm(Optional separator As Integer = 0) As String
-' returnerer data som mængde {(1,2),(3,4)}
-' 0 punktum decseparator
-' 1 komma decseparator
+' returns data as set {(1,2),(3,4)}
+' 0 period decseparator
+' 1 comma decseparator
 
 Dim t As String
 Dim i As Integer, j As Integer
@@ -215,9 +213,9 @@ GetSetForm = t
 
 End Function
 Public Function GetSetFormS(Optional separator As Integer = 0) As String
-' returnerer data som mængde {(1,2),(3,4)}
-' 0 punktum decseparator
-' 1 komma decseparator
+' returns data as set {(1,2),(3,4)}
+' 0 period decseparator
+' 1 comma decseparator
 
 Dim t As String
 Dim i As Integer, j As Integer
@@ -239,9 +237,9 @@ GetSetFormS = t
 
 End Function
 Public Function GetListFormS(Optional separator As Integer = 0) As String
-' returnerer data som mængde {(1,2),(3,4)}
-' 0 punktum decseparator
-' 1 komma decseparator
+' returns data as set {(1,2),(3,4)}
+' 0 period decseparator
+' 1 comma decseparator
 
 Dim t As String
 Dim i As Integer, j As Integer
@@ -278,7 +276,7 @@ Function ConvertToKomma(ByVal t As String) As String
 End Function
 
 Public Sub GetSetData()
-' læser mængde {(2,1),(3,4)} eller liste fra mathbox ind i tabel
+' reads set {(2,1),(3,4)} or list from mathbox into table
 Dim p As String
 Dim Text As String
 Dim n As Integer
@@ -295,7 +293,7 @@ If Selection.OMaths.Count > 0 Then
 Else
     Text = Selection.Range.Text
 End If
-ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' nødvendigt
+ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' required
 
 If InStr(Text, "[") > 0 Then
     ea.SetSquareBrackets
@@ -356,7 +354,7 @@ For i = 1 To nrows
     Loop While ea.Pos < Len(ea.Text) And n < 1000
 Next
     
-If nrows = 1 And ncolumns = 1 Then ' hvis kun et felt så er det formentlig kun et matematikfelt og ikke en liste eller tabel
+If nrows = 1 And ncolumns = 1 Then ' if only one field then it is probably just a math field and not a list or table
     ReDim Preserve tabels(1 To 1, 1 To 1) As String
     nrows = 0
     ncolumns = 0
@@ -368,12 +366,12 @@ slut:
 End Sub
 
 Sub ReadMathBoxes()
-' indsætter de markerede ligningsfelter som mboxes array
+' inserts the selected equation boxes as mboxes array
 Dim antal As Integer
 Dim j As Integer
 On Error GoTo slut
 
-' hvis bold giver det buildup problemer
+' if ball gives it buildup problems
 For j = 1 To Selection.OMaths.Count
     Selection.OMaths(j).Range.Font.Bold = False
 Next
@@ -419,7 +417,7 @@ Else
     Set mathcol = sr.OMaths
     For j = 0 To antal - 1
         mathcol(j + 1).ConvertToNormalText
-        mboxes(j) = Replace(mathcol(j + 1).Range.Text, ChrW(11), "") ' fjern shift-enter
+        mboxes(j) = Replace(mathcol(j + 1).Range.Text, ChrW(11), "") ' remove shift-enter
     Next
     ReDim Preserve mboxes(0 To antal - 1)
     antalmboxes = antal

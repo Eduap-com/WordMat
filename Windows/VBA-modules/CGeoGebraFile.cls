@@ -214,11 +214,9 @@ Sub CreateEuclidianViewElement()
     axis2element.setAttribute "tickStyle", "1"
     axis2element.setAttribute "showNumbers", "true"
 
-
 End Sub
 Sub CreateEuclidianView3DElement()
     Dim euclidianview3delement As IXMLDOMElement
-    
     
     Set euclidianview3delement = GeoXMLdom.createElement("euclidianView3D")
     GeoGebraelement.appendChild euclidianview3delement
@@ -318,7 +316,6 @@ Sub CreateEuclidianView3DElement()
     axis3element.setAttribute "unitLabel", ""
     axis3element.setAttribute "tickStyle", "1"
     axis3element.setAttribute "showNumbers", "true"
-
 
 End Sub
 Sub CreateKernelElement()
@@ -420,7 +417,6 @@ Public Sub CreatePoint(pointname As String, xkoord As Double, ykoord As Double)
     pointelement.appendChild pointSizeelement
     pointSizeelement.setAttribute "val", "3"
 
-
 End Sub
 Public Sub CreateList(listname As String, List As String)
     Dim expressionelement As IXMLDOMElement
@@ -483,12 +479,11 @@ Public Sub CreateList(listname As String, List As String)
     listelement.appendChild pointStyleelement
     pointStyleelement.setAttribute "val", "-1"
 
-
 End Sub
 Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
     Dim Pos As Integer
     
-    If InStr(Expr, "matrix") > 0 Then GoTo slut ' matrix/vektor ikke understøttet endnu
+    If InStr(Expr, "matrix") > 0 Then GoTo slut ' matrix/vektor not supported yet
     
     Pos = InStr(funkname, "(")
     If Pos > 1 Then
@@ -496,8 +491,8 @@ Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean
     End If
     
     Expr = ConvertToGeogebraSyntax(Expr, ConvertMaxima)
-    Expr = Replace(Expr, VBA.ChrW(8804), "<=")  ' Virker kun med geogebra app
-    Expr = Replace(Expr, VBA.ChrW(8805), ">=") ' Virker kun med geogebra app
+    Expr = Replace(Expr, VBA.ChrW(8804), "<=")  ' only works with geogebra app
+    Expr = Replace(Expr, VBA.ChrW(8805), ">=") ' only works with geogebra app
 
     Dim expressionelement As IXMLDOMElement
     Set expressionelement = GeoXMLdom.createElement("expression")
@@ -562,11 +557,11 @@ slut:
 End Sub
 Public Sub CreateEquation(EquationName As String, Equation As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
     
-    If InStr(Equation, "matrix") > 0 Then GoTo slut ' matrix/vektor ikke understøttet endnu
+    If InStr(Equation, "matrix") > 0 Then GoTo slut ' matrix/vektor not supported yet
         
     Equation = ConvertToGeogebraSyntax(Equation, ConvertMaxima)
-    Equation = Replace(Equation, VBA.ChrW(8804), "<=")  ' Virker kun med geogebra app
-    Equation = Replace(Equation, VBA.ChrW(8805), ">=") ' Virker kun med geogebra app
+    Equation = Replace(Equation, VBA.ChrW(8804), "<=")  ' only works with geogebra app
+    Equation = Replace(Equation, VBA.ChrW(8805), ">=") ' only works with geogebra app
 
     Dim expressionelement As IXMLDOMElement
     Set expressionelement = GeoXMLdom.createElement("expression")
@@ -710,7 +705,6 @@ End Sub
 'End Sub
 
 Function ConvertToGeogebraSyntaxFile(ByVal Text As String, Optional ConvertMaxima As Boolean = True) As String
-
    ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(Text, ConvertMaxima, False)
 End Function
 

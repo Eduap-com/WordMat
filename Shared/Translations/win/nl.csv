@@ -1,0 +1,903 @@
+0#£Hulp voor Maxima-commando's
+1#£Genummerde vergelijking invoegen
+2#£Voeg genummerde vergelijking in ter referentie
+3#£Verwijzing naar vergelijking invoegen
+4#£Bladwijzer
+5#£Typ de naam van de vergelijking
+6#£Stel het getal van de vergelijking in
+7#£Num. eq.
+8#£Vergelijking sectie nr. invoegen.
+9#£Vergelijkingsnummers bijwerken
+10#£Bestaande namen van vergelijkingen
+11#£Om later een verwijzing naar de vergelijking in te voegen, kiest u 'Verwijzing naar vergelijking invoegen' in het WordMat-menu onder 'Vergelijking invoegen'
+12#£De naam bestaat al
+13#£De naam mag geen spaties bevatten
+14#£Vergelijking referentie
+15#£Plaatsing
+16#£Linkerkant
+17#£Rechterzijde
+18#£Nummering
+19#£Vraag bij het invoegen naar de naam van het kenmerk
+20#£WordMath maakt het mogelijk om wiskundige berekeningen uit te voeren in Word. De WordMath-kern is open source en gratis\r\nWordMat installeert ook de volgende programma's: Maxima, GeoGebra, Math-lettertypen.\r\nOptionele componenten: GeoGebra 5, Graph, WordMath+. Zie meer onder Licentie\r\nWordMath is gemaakt door Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2025.
+21#£Er is een nieuwe versie van WordMath klaar om te downloaden.\r\nNieuws: \r\n
+22#£U wordt nu doorgestuurd naar de downloadpagina
+23#£Nieuwe versie
+24#£Typ het aantal punten waarop u regressie wilt uitvoeren. Dan wordt er een tafel aangemaakt, waar je je punten in kunt zetten. Als u de regressie wilt doen, selecteert u gewoon de tabel en kiest u de gewenste regressie in het menu.
+25#£Het is niet aan te raden om regressie te doen op meer dan 200 punten in een Word-tabel. Gebruik Excel als je op zoveel punten regressie wilt doen
+26#£Er is een fout opgetreden. Er zit waarschijnlijk een fout in de invoernummers
+27#£U moet een tabel met twee kolommen maken. x-waarden in de linkerkolom en y-waarden in de rechterkolom. Brieven worden genegeerd. Regressie wordt uitgevoerd op de geselecteerde getallen. Als er geen is geselecteerd, wordt regressie uitgevoerd op alle getallen in de tabel
+28#£Op die punten kan geen regressie worden uitgevoerd
+29#£Lineaire regressie uitgevoerd door WordMat: $Tab
+30#£Exponentiële regressie uitgevoerd door WordMat: $Tab
+31#£Vermogensregressie uitgevoerd door WordMat: $Tab
+32#£Vermogensregressie kan op die punten niet worden uitgevoerd. Alle getallen moeten positief zijn (en niet nul).
+33#£Door de gebruiker gedefinieerde regressie met de functie
+34#£uitgevoerd door WordMath
+35#£Geef de volgorde van de polynomiale regressie (1-
+36#£(De maximale volgorde wordt bepaald door het aantal punten)
+37#£bevelen
+38#£Polynomiale regressie van graad
+39#£Door de gebruiker gedefinieerde regressie
+40#£Functie
+41#£Decimalen
+42#£Start gok (bijv.: a=2 , c=10)
+43#£De precisie is zeer hoog ingesteld. De rekentijd kan erg lang zijn of een fout veroorzaken. Als het niet lukt, probeer dan een lagere instelling.
+44#£De precisie is vrij hoog ingesteld. De rekentijd kan vrij lang zijn of een fout veroorzaken. Als het niet lukt, probeer dan een lagere instelling.
+45#£De precisie kan niet negatief zijn. Kies een positief geheel getal
+46#£De precisie is niet geldig. Kies een positief geheel getal.
+47#£Plaats de cursor in een vergelijking
+48#£Het is niet mogelijk om berekeningen uit te voeren op definities
+49#£De uitdrukking wordt gedifferentieerd door WordMat.
+50#£De uitdrukking kon niet worden onderscheiden
+51#£Toestand variabele
+52#£Een antiderivaat wordt gevonden door WordMat
+53#£De expressie kon niet worden geïntegreerd
+54#£Er is een fout opgetreden. WordMat is waarschijnlijk niet correct geïnstalleerd. Probeer opnieuw te installeren, eventueel met antivirus gedeactiveerd. Als uw school een partnerschap heeft, kan de instelling 'dll connection method' onder Instellingen/Geavanceerd het probleem mogelijk oplossen
+55#£Er is een fout opgetreden bij het opstarten van Maxima
+56#£De ongelijkheid is opgelost voor
+57#£door WordMat.
+58#£Alle getallen lossen deze ongelijkheid op
+59#£De ongelijkheid had geen oplossingen op het gebied $C voor variabele
+60#£De ongelijkheid had geen oplossingen op het gebied $R voor variabele
+61#£Met de volgende aannames/definities:
+62#£Definiëren
+63#£Geen internetverbinding
+64#£Klik op OK om de update te starten
+65#£Sneltoetsen voor WordMat
+66#£Sneltoetsen voor woordvergelijkingen
+67#£U kunt uw eigen typesnelkoppelingen maken in Word of de bestaande snelkoppelingen wijzigen. Plaats de cursor in een vergelijking. Open het menu Ontwerp. Zoek de functies met de groepsnaam. Klik op het pijltje in de rechterbenedenhoek. Kies voor 'Wiskundige auto-invoer'
+68#£Formules
+69#£Definities verwijderen
+70#£Constanten
+71#£Vind waarden online
+72#£Converteer vergelijkingen naar LaTex. (Snelkoppeling alt+T converteert een enkele vergelijking)
+73#£Naar klembord kopiëren
+74#£Stijl van het scherm
+75#£Schrijf geen eenheden cursief
+76#£Gebruik Maxima om LaTex om te zetten
+77#£Alles omzetten
+78#£Converteren en naar de volgende gaan
+79#£Voor
+80#£Na
+81#£Geen
+82#£Gewoonte
+83#£Code insluiten
+84#£Er zijn geen vergelijkingen in de rest van dit document om te converteren.
+85#£Los het stelsel van differentiaalvergelijkingen numeriek op
+86#£Differentiaalvergelijkingen
+87#£Beginwaarde
+88#£Stap grootte
+89#£Punten verbinden
+90#£Vergelijkingen weergeven
+91#£Lijst invoegen
+92#£Tabel invoegen
+93#£Grafiek invoegen
+94#£Waarschijnlijk buiten het domein! \r\nXmin/xmax aanpassen
+95#£Er is een fout opgetreden. Controleer de cijfers met xmin en xmax
+96#£Geen partnerschap
+97#£Er is een fout opgetreden bij het invoegen van Grafiek. Mogelijk heeft u een syntaxisfout in een definitie
+98#£Er is een fout opgetreden bij het invoegen van een Excel-blad. Dit kan worden veroorzaakt door een eerdere crash van Excel. Sluit alle geopende Excel-bladen en open Excel opnieuw voordat u het opnieuw probeert met WordMat.
+99#£Er is een fout opgetreden bij het converteren van uw opdracht naar de Maxima-syntaxis.
+100#£Er is een fout opgetreden bij het converteren van Maxima-uitvoer naar Word-syntaxis.
+101#£De oplossing is onzeker. Misschien wilt u ook numerieke methoden proberen
+102#£Aangezien dit een goniometrische vergelijking is, zijn er oneindig veel oplossingen. Slechts één van deze wordt vermeld
+103#£Alle oplossingen zijn niet gevonden.
+104#£Fout: delen door nul.
+105#£Syntaxisfout.
+106#£Syntaxisfout. Er is een onjuist symbool gebruikt. Kan een ontbrekend vermenigvuldigingsteken zijn of een , . uitgeven
+107#£Waarschuwing: Je hebt gevraagd om een vergelijkingssysteem op te lossen, maar je hebt minder variabelen dan vergelijkingen genoemd. Alleen de eerste vergelijkingen worden opgelost. Controleer handmatig de laatste vergelijking(en).
+108#£Maxima meldde de volgende fout:
+109#£Maxima-fout
+110#£WordMat kon de map 'Programmabestanden' niet vinden
+111#£Er is een fout opgetreden bij het openen:
+112#£Kan geen verbinding maken met de server
+113#£Op deze plaats in het document wordt het volgende gedefinieerd
+114#£Er zijn geen definities op deze plaats in het document.
+115#£Equation definitions worden gedefinieerd door 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+116#£Je kunt geen afgeleide definiëren\r\nVerwijder de definitie: \r\n
+117#£Er zit een fout in de definitie:
+118#£Het wordt genegeerd, maar corrigeer de invoerfout om deze uitvoerfout te voorkomen
+119#£... Rest verwijderd.
+120#£Uw school/organisatie heeft een actief partnerschap. U kunt nu WordMat+ gebruiken
+121#£Sorry. Uw school heeft geen actief partnerschap.
+122#£Vermeld de definitie van de nieuwe functie\r\nDe definitie kan in de rest van het document worden gebruikt, maar niet eerder.\r\nAls je verderop in het document een 'delete def:' commando invoegt, is het vanaf dat moment niet meer bekend.\r\nJe kunt meer variabelen tegelijk definiëren door ze te scheiden met " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
+123#£Nieuwe functie
+124#£Nieuwe vergelijking
+125#£Vergelijking definiëren
+126#£Definiëren
+127#£De uitdrukking is erg lang. Wil je het in Word invoegen?\r\nDit kan de snelheid van Word beïnvloeden. Lange vergelijkingen kunnen Word tot stilstand brengen op trage computers. Overweeg om op te lossen met behulp van numerieke methoden\r\nU kunt de uitvoer hieronder zien:
+128#£De expressie kon niet worden berekend.
+129#£De vergelijking had geen oplossingen in het domein $C voor variabele
+130#£De vergelijking had geen oplossingen in het domein $R voor variabele
+131#£WordMat kon de vergelijking niet oplossen
+132#£Alle getallen zijn oplossingen voor de vergelijking
+133#£U hebt gevraagd om de vergelijking op te lossen voor een variabele die al is gedefinieerd. Voeg een 'delete def:' commando in voor de vergelijking.
+134#£Het stelsel van vergelijkingen is opgelost voor
+135#£door de 'vergelijking oplossen'-functie van WordMat,
+136#£Partnerschap geregistreerd bij
+137#£Het stelsel van vergelijkingen had geen oplossingen in het domein $C voor variabelen
+138#£Het stelsel van vergelijkingen had geen oplossingen in het domein $R voor variabelen
+139#£Er moet een gelijkteken in een vergelijking staan
+140#£Geen geregistreerd partnerschap
+141#£Dit is geen vergelijking. Een vergelijking heeft altijd een gelijkteken.
+142#£De volgende variabelen worden uit het vergelijkingssysteem geëlimineerd:
+143#£door de functie 'Variabele elimineren' van WordMat, '
+144#£waar
+145#£vals
+146#£onbekend
+147#£
+148#£Er werd een oplossing gevonden. Er kunnen meer oplossingen bestaan.
+149#£Selecteer slechts 1 expressie
+150#£De expressie wordt vereenvoudigd door WordMat met behulp van de volgende methoden:
+151#£Automatisch vereenvoudigen,
+152#£Trigonometrische identiteiten
+153#£De uitdrukking kan niet worden vereenvoudigd
+154#£De uitdrukking wordt vereenvoudigd door WordMat.
+155#£De expressie wordt ontbonden door WordMat.
+156#£De expressie kan niet worden ontbonden
+157#£De expressie wordt uitgebreid met WordMat.
+158#£De expressie kan niet worden uitgebreid
+159#£Je moet eenheden uitschakelen om differentiaalvergelijkingen op te lossen
+160#£De differentiaalvergelijking kon niet worden opgelost
+161#£Scholen kunnen zich aanmelden voor een Partnership met Eduap. Partnerschap krijgt toegang tot ondersteuning, WordMath+ en nog veel meer. Klik om meer te lezen
+162#£Binomiale verdeling
+163#£De uitdrukking wordt op waarheid getest door WordMat.
+164#£Het resultaat is gebaseerd op een numerieke vergelijking
+165#£WordMat kon niet bepalen of de uitdrukking waar of onwaar was
+166#£Eenheden uitgeschakeld
+167#£Uitvoereenheden kiezen
+168#£Output eenheden
+169#£Niet-overeenkomende beugels
+170#£Automatische back-up?
+171#£Hoeveel back-upbestanden moet ik opslaan?
+172#£Tijd tussen back-ups
+173#£Word maakt geen automatische back-up, maar slaat gegevens op die mogelijk kunnen worden gebruikt om een verloren bestand opnieuw te maken\n\nWordMat kan volledige back-ups maken wanneer u een berekening uitvoert en het document in meerdere versies opslaat. (Back-ups zijn veel sneller als het document niet in OneDrive staat). De back-upbestanden worden opgeslagen in de map: mijn documenten/WordMat-backup
+174#£Open de back-upmap
+175#£Vragen
+176#£Altijd
+177#£Nooit
+178#£Er is een fout opgetreden bij het maken van een back-up
+179#£Wil je het automatische back-upsysteem van WordMats activeren\n\n(Voor meer info ga naar instellingen | Back-up)
+180#£Normaalverdeling
+181#£Laag
+182#£Normaal
+183#£Hoog
+184#£Zeer hoog
+185#£Super (traag)
+186#£Vergelijking
+187#£Wachten?
+188#£Max
+189#£Alleen lijnen
+190#£Toon assen
+191#£Kwaliteit
+192#£Beïnvloedt de rotatiesnelheid
+193#£Wanneer de afbeelding verschijnt, kunt u de beeldhoek wijzigen door de linkermuisknop ingedrukt te houden tijdens het slepen. Klik met de rechtermuisknop op de menuregel, kies opties en 'kopiëren naar klembord' om de afbeelding te kopiëren. Sluit het venster om terug te keren naar Word.
+194#£Solide van revolutie
+195#£Voer coördinaten in voor punten die in de grafiek moeten worden gemarkeerd met rode stippellijnen. Voorbeelden \r\neksempel:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)\r\n Het is ook mogelijk om op de grafiek te klikken om de coördinaat te krijgen als je de invoegknop gebruikt.
+196#£Ook voor het invoegen van stippellijnen die punten op de grafiek markeren, maar met een andere kleur dan de punten in kolom 1. Op dit punt kun je geen regressie uitvoeren. Je kunt allerlei vormen maken door de punten met elkaar te verbinden.
+197#£Selecteer een tabel met coördinatengegevens voordat u op plot drukt om deze automatisch in dit tekstvak in te vullen. Een set coördinaten per lijn. Een set coördinaten per lijn. Coördinaten moeten worden gescheiden door een komma, puntkomma of tab. Coördinaten kunnen worden gekopieerd uit Excel. Voorbeelden: \r\n1.2 , 3.4\r\n3,4 ; 4,8\r\n5,6$Tab & "7.8
+198#£Variabelen moeten x en y zijn
+199#£Cirkel invoegen
+200#£Lijn invoegen
+201#£Gemarkeerde punten
+202#£Regressie
+203#£Ja
+204#£Nee
+205#£Onthoud deze keuze
+206#£Wanneer de back-upfunctie van WordMats is ingeschakeld, wordt er een back-up gemaakt wanneer een berekening wordt uitgevoerd. Slechts om de 5 minuten wordt er een back-up gemaakt. Er worden 10 back-up kopieën gemaakt voordat ze worden overschreven." & vbLf & vbLf & " U kunt deze instellingen wijzigen onder instellingen | Backup.
+207#£Je kunt deze keuze altijd wijzigen onder instellingen | Backup
+208#£Backup
+209#£De som van de hoeken ligt boven de 180
+210#£U moet 3 zijden/hoeken invoeren. Maar geen 3 hoeken. Er moet minimaal 1 kant bekend zijn.
+211#£De som van de hoeken is niet 180
+212#£Je hebt te veel hoeken/zijkanten ingevoerd
+213#£U moet PRECIES 3 zijden/hoeken invoeren. Maar geen 3 hoeken. Er moet minimaal 1 kant bekend zijn.
+214#£
+215#£Hoek
+216#£gevonden met behulp van de som van hoeken = 180 $Degree in een driehoek
+217#£De lengte van de zijde
+218#£Gevonden met behulp van Pythagoras
+219#£De lengte van de zijkanten
+220#£Gevonden met behulp van tan
+221#£gevonden met sinus
+222#£gevonden met behulp van cosinus
+223#£gevonden met behulp van de wet van cosinus
+224#£gevonden met behulp van de wet van sinus
+225#£De kwadratische vergelijking wordt opgelost voor
+226#£Deze kwadratische vergelijking heeft twee oplossingen:
+227#£Maar de andere oplossing is negatief, en een lengte kan niet negatief zijn.
+228#£Aangezien de oplossing voor
+229#£Had twee oplossingen en beide oplossingen waren positief, dit betekent dat er twee mogelijke driehoeken zijn. We gaan nu verder met het berekenen van de resterende zijden op basis van de 2e oplossing met behulp van dezelfde methode.
+230#£Symbool invoegen
+231#£Griekse letters
+232#£Andere symbolen
+233#£Invoegen
+234#£Symbool
+235#£Oplossing van de vergelijking met behulp van grafische en numerieke methoden
+236#£Eerste gok
+237#£Interval methode
+238#£beginnen
+239#£einde
+240#£Rechterkant en linkerkant plottet. \nLinkerkant is zwart. De rechterkant is groen.
+241#£Grafische oplossing
+242#£Zoom ook in door te dubbelklikken of een vak te slepen
+243#£Toon grafiek in een apart venster
+244#£$X^2 verdeling
+245#£Variabelen
+246#£Test
+247#£Kies max
+248#£Of voer handmatig in max
+249#£Variabelen gescheiden door komma's
+250#£Kies precies
+251#£Of voer handmatig in
+252#£Je kunt de vergelijking niet oplossen voor
+253#£en definieer het tegelijkertijd
+254#£Je probeert een variabele op te lossen die een eenheid is. Dit zal hoogstwaarschijnlijk een fout veroorzaken. Overweeg om een andere variabelenaam te gebruiken of eenheden uit te schakelen.
+255#£aarde
+256#£Water
+257#£koper
+258#£ijzer
+259#£maan
+260#£zon
+261#£Natuurkundige constanten
+262#£Eenheden
+263#£Tabelwaarden - warmte
+264#£Tabelwaarden - kernfysica
+265#£Sterrenkunde
+266#£Snelheid van het licht in vacuüm
+267#£Plancks constante
+268#£Plancks constante in elektronvolt
+269#£Zwaartekracht constante
+270#£Vrije val van versnelling aan het aardoppervlak
+271#£Elementaire lading
+272#£Avogadros nummer
+273#£Gas constante
+274#£Boltzmanns constante
+275#£Vacuümpermeabiliteit
+276#£Vacuüm permittiviteit
+277#£Coulombs constante
+278#£De constante van Stefan-Boltzmann
+279#£Atomaire massa-eenheid
+280#£atomaire massa-eenheid in MeV
+281#£specifieke warmtecapaciteit van
+282#£elektron massa
+283#£in kg
+284#£proton massa
+285#£neutronenmassa
+286#£Massa van de aarde
+287#£Gemiddelde straal van de aarde
+288#£Afstand tussen de aarde en de zon (astronomische eenheid)
+289#£Massa van de zon
+290#£Massa van de maan
+291#£Maan gemiddelde straal
+292#£GeoGebra 5 is niet geïnstalleerd.
+293#£De knop brengt u naar de homepage waar u GeoGebra kunt installeren. WordMat op Windows ondersteunt 'GeoGebra classic 5', 'GeoGebra Calculator Suite', 'GeoGebra Classic 6' en de meeste andere app-edities van GeoGebra.
+294#£GeoGebra Calculator Suite is al geïnstalleerd. Het draait in een browser en vereist geen internet. Start snel.
+295#£Installeer GeoGebra
+296#£Voer GeoGebra Calculator Suite uit
+297#£of randvoorwaarden
+298#£Etiket
+299#£Voer tekst in en klik vervolgens op de grafiek om deze te plaatsen
+300#£Er is een fout in de vergelijking
+301#£U moet eerst ymin en ymax instellen - druk vervolgens op update
+302#£3D-grafieken
+303#£Toon expressie
+304#£Doorzichtig
+305#£Kleur van de oppervlakken
+306#£Maxima-opdracht invoegen in Word
+307#£Lijnen en oppervlakken
+308#£Alleen lijnen
+309#£Alleen oppervlakken
+310#£Lijnen en oppervlakken
+311#£Variabelen moeten x, y en z zijn
+312#£Bol invoegen
+313#£Vlak invoegen
+314#£Nieuwe vector
+315#£Syntaxis\n(startx , starty , startz)(dx , dy , dz)\nEén vector pr. lijn\nVoorbeelden:\n(1,1,2)(1,2,3) \n tekent vector (1,2,3) vanuit punt (1,1,2)\n\n(1,-2,3)\n tekent vector (1,-2,3) vanuit punt (0,0,0)\n\nvoorbeeld met decimalen:\n(1,5 , 3 , 4,5)
+316#£Puntgrootte
+317#£Syntaxis voor het invoeren van punten\n\n(1,2,1)\n(2,5,3.6,8.7)
+318#£In het grafiekvenster kunt u het coördinatensysteem draaien door tijdens het slepen op de linkermuisknop te drukken.\n\nAls het object er uitgerekt uitziet, kunt u de grootte van het grafiekvenster wijzigen om het beter te laten passen.\n\nOm de afbeelding in Word in te voegen, klikt u met de rechtermuisknop op de menuregel, kiest u 'opties' en vervolgens 'kopiëren naar klembord'. Vervolgens wordt het grafiekvenster gesloten en kan de afbeelding in Word worden ingevoegd.\n\nMerk op dat het grafiekvenster gesloten moet zijn om terug te kunnen keren naar Word.\n\nHoe hoger de kwaliteit van de afbeelding, hoe langzamer de rotatiesnelheid.
+319#£Reglement
+320#£Parametrische grafiek
+321#£Geel/rood/paars
+322#£Blauw
+323#£Bruin
+324#£Grijs
+325#£Snelkoppeling Alt + M voegt nieuwe wiskunde in
+326#£Snelkoppeling AltGr + Enter berekent
+327#£Snelkoppeling Alt + E lost vergelijking op
+328#£Snelkoppeling Alt + S opent instellingen
+329#£Snelkoppeling Alt + R Voegt vorig resultaat in
+330#£Sneltoets Alt + U Schakelt de ondersteuning van het apparaat in
+331#£Subscript:
+332#£Lambda is een afkorting van de kleine Griekse letter Lambda
+333#£Snelkoppeling Alt + P Tekent een grafiek
+334#£U kunt uw wijzigingen in de formuledocumenten opslaan
+335#£Excel-sheets kunnen afzonderlijk worden geopend of ingesloten worden ingevoegd
+336#£Markeren van inleveracties? Probeer WordMark www.eduap.com
+337#£Aantal berekeningen met WordMath:
+338#£Onder definities kun je natuurkundige constanten en tabelwaarden definiëren.
+339#£Word wordt sneller uitgevoerd in de conceptweergave - wanneer er vergelijkingen bij betrokken zijn
+340#£Voeg uw eigen beschrijvingen van Excel-diagrammen in met behulp van het tekstvak invoegen
+341#£Sneltoets Alt + N Schakelt tussen auto, exact, num
+342#£Een functie met letters als constante krijgt sliders in GeoGebra
+343#£Uitvoereenheden mogen geen gecombineerde eenheden zijn.  km/s is niet toegestaan. Geef dan aan: km,s
+344#£U beschikt al over de meest recente versie van
+345#£Selecteer een vergelijkingsnummer
+346#£Op welk getal moet deze vergelijking worden ingesteld?\r\nAlle volgende vergelijkingen worden ook bijgewerkt.
+347#£Binomiale test
+348#£Er wordt een sectienummer van de vergelijking ingevoegd. Meestal wordt dit ingevoegd als een hoofdstuk-/sectienummer in een kop. Maar het kan ook verborgen worden ingevoegd. Wil je het nummer laten zien? (Antwoord Nee om het te verbergen)
+349#£Voer het significantieniveau in procenten in
+350#£Significantie niveau
+351#£Voer de afmetingen van de tabel in\r\nrijen x kolommen
+352#£Chi-kwadraattest voor onafhankelijkheid
+353#£$X^2 - test van zelfstandigheid uitgevoerd met behulp van WordMat
+354#£P-waarde
+355#£Gebruikmakend van significantieniveau van
+356#£% de 0-hypothese kan worden verworpen. Er is dus een afhankelijkheid tussen de twee variabelen.
+357#£% de 0-hypothese kan niet worden verworpen. Er is dus geen bewijs voor de afhankelijkheid tussen de twee variabelen.
+358#£Er zijn cellen met een waarde kleiner dan 5 of de som van alle cellen is kleiner dan 50. De $X^2-verdeling is dan in dit geval een slechte benadering en het resultaat onbetrouwbaar. In sommige gevallen kunnen de gegevens nuttig worden gemaakt door de getallen anders te groeperen.
+359#£Chidistributie
+360#£Vrijheidsgraden
+361#£Lezen
+362#£Opening GeoGebra
+363#£Voer waarde in voor
+364#£Je kunt het later aanpassen
+365#£Definieer constante
+366#£Graph is niet geïnstalleerd. Het is een klein gratis programma dat eenvoudig te installeren is. Je kunt het krijgen van www.padowan.dk
+367#£U kunt het later aanpassen onder door de gebruiker gedefinieerde functies in Grafiek
+368#£Voor het plotten van grafieken met behulp van GeoGeoGebra en Graph moet x de onafhankelijke variabele zijn. \r\nDe volgende uitdrukkingen zijn zonder x. U kunt nu een nieuwe variabele opgeven om als x te gebruiken.
+369#£Onafhankelijke variabele
+370#£$X^2 test voor onafhankelijkheid
+371#£Openingsgrafiek
+372#£Invoegen ingebed
+373#£Het invoegen van een ingesloten object kan enige tijd duren. Verdubbel het ingesloten object om ze te openen.
+374#£Wil je plotten
+375#£Invoegen
+376#£Systemen van vergelijkingen van ongelijkheden worden nog niet ondersteund. Los op als een vergelijking of los grafisch op met behulp van Graph of GeoGebra.
+377#£Elimineer variabelen
+378#£met de waarden
+379#£Voer startguess in. De standaard gokwaarde is 1
+380#£Variabelen en gokken
+381#£Het stelsel van vergelijkingen is opgelost voor
+382#£met start gokken
+383#£Het stelsel van vergelijkingen kon niet worden opgelost
+384#£Heb je de juiste variabele opgegeven?
+385#£Een oplossing werd niet gevonden. Het begin- en eindpunt van het interval moeten zich aan beide zijden van een oplossing bevinden
+386#£Newtons-methode toegepast met startgok
+387#£Intervalmethode toegepast in het interval
+388#£Er is geen oplossing gevonden
+389#£Geen oplossing
+390#£De differentiaalvergelijking wordt opgelost door de functie 'Differentiaalvergelijking oplossen' van WordMat
+391#£met randvoorwaarden
+392#£met startvoorwaarden
+393#£met startvoorwaarde
+394#£U moet Word opnieuw opstarten. Als je dat niet doet, zal Word crashen.
+395#£Er is een fout opgetreden bij het invoegen van een formule. Probeer het op een andere plaats opnieuw.
+396#£Simulatie
+397#£Groep
+398#£Nee van vrijheidsgraden\r\nstel n voor een algemene uitdrukking.
+399#£Frequentieverdeling met
+400#£Observaties
+401#£Verwacht
+402#£Totaal
+403#£P-waarde
+404#£Er is een verband
+405#£Er is geen correlatie
+406#£De som van alle cellen is minder dan 50. $X^2-verdeling is dan een slechte benadering en het resultaat onbetrouwbaar.
+407#£Q-waarde
+408#£Kritische Q-waarde
+409#£MikTex is niet geïnstalleerd. U wordt nu doorgestuurd naar de downloadpagina. De computer moet na de installatie opnieuw worden opgestart. De eerste keer dat u MikTex van WordMat uitvoert, wordt er een reeks pakketten geïnstalleerd.
+410#£Deze functie wordt niet ondersteund op Mac
+411#£Anderen
+412#£Nieuwe vergelijking
+413#£Symbolen
+414#£CAS-instellingen
+415#£Shapes
+416#£Je hebt een vectorvergelijking ingevoerd die eigenlijk een stelsel van vergelijkingen is. Voer de
+417#£variabelen om op te lossen, gescheiden door komma's.
+418#£Je moet invoeren
+419#£Variabelen gescheiden door komma's
+420#£Een van de vergelijkingen is niet gedefinieerd binnen de grenzen van het plotgebied. Probeer het plotgebied uit te breiden
+421#£Een of meer plus-/mintekens worden weergegeven in de expressie. Hoe te interpreteren?
+422#£Plus of min
+423#£Input niet begrepen. Er is een plus ingevoegd.
+424#£Er is een probleem met de numerieke tekens
+425#£De notatie voor de som is niet correct. De syntaxis voor de ondergrens is: i=1 (of vergelijkbaar)
+426#£De notatie voor het product is niet correct. De syntaxis voor de ondergrens is: i=1 (of vergelijkbaar)
+427#£Er zijn syntaxisproblemen. Je moet een integraal eindigen met dx (als x de variabele is). Misschien heb je d in een andere context gebruikt. Gebruik dan een differentiaal d (type: \dd)
+428#£Er zijn syntaxisproblemen. Een dubbele integraal moet eindigen met twee dx'en (afhankelijk van de variabelen waarvoor moet worden geïntegreerd). Misschien heb je d in een andere context gebruikt. Gebruik dan een differentiaal d (type: \dd)
+429#£Je kunt het dubbele integralteken niet gebruiken voor bepaalde integralen. Gebruik twee integrale tekens
+430#£Fout! Er zijn syntaxisproblemen. Notatie voor differentiatie is niet correct.
+431#£Niet gedefinieerd
+432#£Niet gedefinieerd, maar beperkt
+433#£Niet gedefinieerd in
+434#£is gereserveerd en kan niet worden gedefinieerd. De definitie wordt overgeslagen.
+435#£Wiskunde
+436#£Fysica
+437#£Chem
+438#£Percentage
+439#£Functies
+440#£Meetkunde
+441#£Prob.
+442#£vector
+443#£Instellingen
+444#£Instellingen
+445#£Sci
+446#£Berekenen
+447#£Oplossen
+448#£Maxima commando
+449#£Los vergelijking(en) op met behulp van een numerieke methode
+450#£Elimineer variabelen
+451#£Test waar/niet waar
+452#£Differentiaalvergelijking oplossen
+453#£Definities verwijderen
+454#£Functie definiëren
+455#£Definieer fysische constanten
+456#£Reduceren
+457#£Oneindig.
+458#£Onderscheiden
+459#£Integreren
+460#£Plotten
+461#£Toon grafiek
+462#£Richting veld
+463#£3D Verhaal
+464#£Volume van omwenteling - 3D Roteren Grafiek over x-as
+465#£Statistiek
+466#£Niet-gegroepeerde waarnemingen
+467#£Gegroepeerde waarnemingen
+468#£Stok grafiek
+469#£Histogram
+470#£Stappenschema
+471#£Cumulatieve grafiek
+472#£Doos en snorharen plot
+473#£Statistieken/prob.
+474#£Regressie
+475#£Kan niet invoegen in een tabel
+476#£Lineair
+477#£Exponentieel
+478#£Macht
+479#£Polynoom
+480#£Distributies
+481#£Binomiale
+482#£Normale distributie
+483#£$X^2-verdeling
+484#£2D-geometrie
+485#£3D-geometrie
+486#£Opent boekje met wiskundige formule
+487#£Opent boekje met natuurkundeformules
+488#£Opent boekje scheikundeformule
+489#£Automatisch exact of numeriek resultaat
+490#£WordMat bepaalt automatisch of het exacte of numerieke resultaat of beide moet worden geretourneerd.
+491#£Exacte resultaten
+492#£Alle resultaten werden geretourneerd als exact resultaat. Soms kan een numerieke benadering echter niet worden vermeden.
+493#£Numerieke resultaten
+494#£Alle resultaten worden geretourneerd als decimale getallen
+495#£Belangrijke cijfers
+496#£Bepaalt het aantal (significante) cijfers op de resultaten
+497#£Radialen
+498#£Wanneer ingedrukt, zijn alle goniometrische berekeningen in radialen, anders graden.
+499#£Wetenschappelijke notatie
+500#£Bij depressie worden alle resultaten geretourneerd in wetenschappelijke notatie. Voorbeeld: 2.3$*10^4
+501#£Instellingen
+502#£Wijzig allerlei instellingen.
+503#£Bereken (AltGr+Enter)
+504#£Berekent de geselecteerde expressie, of terug naar het dichtstbijzijnde gelijkteken.
+505#£Maxima commando
+506#£Stuurt ongefilterd commando naar maxima. Het resultaat is echter geformatteerd.
+507#£Lost vergelijking(en) op (Alt+E)
+508#£Lost een vergelijking of stelsel van vergelijkingen op. Plaats de cursor in de vergelijking. Selecteer meer vergelijkingen om een stelsel van vergelijkingen op te lossen
+509#£Numeriek oplossen
+510#£Los de vergelijking op met behulp van numerieke methoden.
+511#£Elimineer variabelen
+512#£Elimineer een of meer variabelen uit een stelsel van vergelijkingen.
+513#£Test indien waar
+514#£Test of de vergelijking waar is
+515#£Differentiaalvergelijking oplossen
+516#£Differentiaalvergelijking oplossen. Voer in met een andere notatie. Voorbeelden: y'=y , y''=y of f'(x)=f(x)
+517#£Los het stelsel van differentiaalvergelijkingen numeriek op
+518#£Moet in de vorm y'= zijn?
+519#£Definities weergeven
+520#£Toont definities die op deze positie in het document actief zijn
+521#£Definities verwijderen (Alt+F)
+522#£Voegt de opdracht 'Delete def:' in het document in. Alle definities die voor deze opdracht zijn geplaatst, zijn niet geldig in de rest van het document.
+523#£Definiëren (Alt+D)
+524#£Voegt een definitie in die geldig is in de rest van het document
+525#£Definieer fysische constanten
+526#£Kies uit de meest gebruikte constanten en laat ze in het document definiëren voor gebruik in berekeningen.
+527#£Reduceren
+528#£Een expressie verkleinen met behulp van verschillende methoden
+529#£Vereenvoudigen
+530#£Automatische poging tot vereenvoudiging van expressie. Gebruik verminderen en kies specifieke methoden als het niet lukt.
+531#£Factoriseren
+532#£Factoriseert een expressie
+533#£Uitbreiden
+534#£Alle haakjes zijn uitgevouwen
+535#£Tafel
+536#£Excel invoegen
+537#£Onderscheiden
+538#£Selecteer de expressie om onderscheid te maken of plaats de cursor in de expressie
+539#£Integreren
+540#£Bepaalt de onbepaalde integraal van de functie
+541#£Wolfram Alpha
+542#£Opent Wolfram Alpha met de geselecteerde expressie als invoer
+543#£Vergelijking oplossen
+544#£Los vergelijking op met Wolffram Alpha
+545#£Grafiek grafiek (Alt+P)
+546#£Toont de grafiek voor de geselecteerde functie(s)/vergelijking(en) en punten. De grafiek kan vervolgens in het document worden ingevoegd. Verschillende graafprogramma's worden ondersteund. Kies je favoriet onder instellingen.
+547#£Plot met behulp van GnuPlot
+548#£Toon grafiek met behulp van GnuPlot. GnuPlot ondersteunt veel functies en maakt een mooi uitziende grafiek. U kunt dubbelklikken op de grafiek in het document om deze opnieuw te bewerken.
+549#£Grafiek met behulp van grafiek
+550#£Voegt een ingesloten grafiek-object in Word in, dat kan worden bewerkt door te dubbelklikken op de grafiek. Definities, functies, vergelijkingen en punten worden overgebracht van Word naar Graph. Graph is een zeer snel programma met veel functies. Het nadeel is dat het niet wordt ondersteund op Mac en dat de grafieken in lage resolutie worden weergegeven.
+551#£GeoGebra
+552#£Opent GeoGebra en brengt de geselecteerde functie(s)/vergelijking(en) over naar GeoGebra, evenals eventuele definities. GeoGebra is het meest veelzijdige graafprogramma. Het creëert ook een grafiek van hoge kwaliteit. Nadelen zijn: Het is traag om te openen en de grafiek wordt niet automatisch overgezet naar Word. Het moet handmatig naar Word worden gekopieerd met behulp van het bewerkingsmenu/'Kopieer grafische weergave naar klembord'. De grafiek kan niet opnieuw worden bewerkt nadat deze is ingevoegd.
+553#£Excel-grafiek
+554#£Voegt een ingesloten Excel-sheet in die is ontworpen om grafieken en punten weer te geven. Dubbelklik op de Excelsheets om deze opnieuw te bewerken. Het is niet zo snel en rijk aan functies als sommige van de andere graph-oplossingen. Voordelen zijn: Ondersteunt het leren van Excel en is ontworpen voor het eenvoudig plotten van punten. Het is een goede keuze voor samenwerking met andere vakken, zoals bètavakken.
+555#£Richting veld
+556#£Toont het richtingsveld en zet oplossingscurven uit voor de differentiaalvergelijking van de eerste orde.
+557#£GeoGebra-bestand invoegen
+558#£Voegt een leeg GeoGebra-bestand in, dat kan worden bewerkt en opgeslagen vanuit Word. Het bestand wordt weergegeven als een pictogram. Grafiekafbeeldingen moeten naar het document worden gekopieerd.
+559#£3D plot
+560#£Plot vergelijkingen, punten, vectoren en parametrische plots, in 3D.
+561#£Solide van revolutie
+562#£Toont solide van revolutie voor een functie. De grafiek van de functie wordt 360 graden rond de x-as gedraaid, waardoor een 3D-object ontstaat.
+563#£Statistiek
+564#£Hiermee opent u een Excel-werkmap die is ontworpen voor één variabele: statistieken. Kijk naar de bladen om alle functies te zien.
+565#£Gegroepeerde waarnemingen
+566#£Excel-blad voor niet-gegroepeerde gegevens. Berekent frequenties, gemiddelden, kwartielen enz. en genereert relevante diagrammen zoals een doos- en snorharendiagram
+567#£Gegroepeerde waarnemingen
+568#£Excel-blad voor gegroepeerde gegevens. Berekent frequenties, gemiddelden enz. en genereert relevante diagrammen zoals histogram en doos- en snorharendiagram
+569#£Staafdiagram
+570#£Excel-blad voor het maken van staafdiagrammen
+571#£Histogram
+572#£Excel-blad om meerdere histogrammen in één diagram te plotten.
+573#£Diagram van het trapgeval
+574#£
+575#£Cumulatief frequentiediagram
+576#£
+577#£Doos en snorharen plot
+578#£Excel-blad om meerdere doos- en snorhaarplots in één diagram te plotten.
+579#£Regressie
+580#£Voeg eerst een tabel met de punten in. Plaats vervolgens de cursor in de tabel en kies regressietype. De tafel kan verticaal of horizontaal zijn. Als er slechts twee punten zijn, wordt aangenomen dat deze verticaal is.
+581#£Er is een fout opgetreden tijdens het controleren op een update. Je wordt nu naar de website gestuurd, waar je zelf kunt zien of er een nieuwe update is. De huidige versie is:
+582#£Voegt een tabel in met twee kolommen voor het invoeren van punten voor regressie.
+583#£Distributies
+584#£Excel-blad met grafieken van de verdeling. De diagrammen zijn dynamisch en kunnen verdelingen voor alle parameters uitzetten.
+585#£Binomiale verdeling
+586#£Excel-blad dat de binomiale verdeling uitzet. Kies op het blad p en n
+587#£Normaalverdeling
+588#£Excel-blad dat de normale verdeling uitzet. Kies het gemiddelde en de standaarddeviatie op de vellen
+589#£-distributie
+590#£Excel-sheet die $X^2-verdeling uitzet. Kies op het blad vrijheidsgraden.
+591#£Test
+592#£Statistische tests
+593#£Binomiale test
+594#£Excel-blad voor binomiale toets. Zelfde Excel-werkmap als Binomiale verdeling, maar een ander blad.
+595#£$X^2-toets
+596#£Voert $X^2-test uit op n x n tafel. Selecteer de getallen in de tabel.
+597#£Goede pasvorm
+598#£Voert een test uit op de geschiktheid van de pasvorm. (Chi-kwadraattoets) om te zien of twee verdelingen hetzelfde zijn.
+599#£Statistische simulatie
+600#£Excel-blad met toegevoegde functionaliteit die kan permuteren en resultaten kan opslaan. Inclusief voorbeeld van gebruik.
+601#£Nieuwe vergelijking (Alt+M)
+602#£Het invoervak voor wiskunde invoegen
+603#£Nieuwe genummerde vergelijking (Alt+M Alt+M)
+604#£Voegt een nieuwe automatisch genummerde vergelijking in. Dubbeltik op Alt+M om een genummerde vergelijking in te voegen. Dit moet worden geactiveerd onder instellingen | genummerde vergelijkingen.
+605#£Nieuwe benoemde genummerde vergelijking waarnaar kan worden verwezen.
+606#£Voegt een nieuwe genummerde vergelijking in die u een naam kunt geven zodat u er later gemakkelijk naar kunt verwijzen. Als het getal van de vergelijking later verandert, verandert de referentie ook.
+607#£Verwijzing naar vergelijking invoegen.
+608#£Voeg het vergelijkingsnummer van een eerder genoemde vergelijking in. Als het getal van de vergelijking later verandert, verandert de referentie ook.
+609#£Stel de vergelijking in op een vast getal
+610#£Een reeds genummerde vergelijking kan worden ingesteld op een specifiek getal
+611#£Voegt een nieuwe vergelijkingssectie in.
+612#£Stuurt het eerste getal door in de nummering van de vergelijking. Als Vorige (2,5) is, dan is de volgende (3,1). Kan in koppen worden ingevoegd als kopnummer of verborgen worden ingevoegd.
+613#£Werk alle vergelijkingsgetallen in het document bij
+614#£Moet meestal worden uitgevoerd wanneer vergelijkingen zijn verwijderd. Het invoegen van nieuwe genummerde vergelijkingen zal echter een update forceren.
+615#£Symbolen
+616#£Verschillende methoden voor het manipuleren van symbolen
+617#£Vervang vermenigvuldigingstekens
+618#£Vervang alle * vermenigvuldigingstekens door $*
+619#£Converteer vergelijkingen naar LaTex. (Snelkoppeling alt+T converteert een enkele vergelijking)
+620#£Converteer sommige of alle vergelijkingen naar LaTex in een document. Kan MikTex ook gebruiken om een compleet LaTex-document te genereren.
+621#£Converteren naar LaTex (Alt+T)
+622#£Converteert één vergelijking naar LaTex. Ingesloten karakters kunnen worden gekozen op het LaTex-formulier. Alt+T snelkoppeling ook converteren een eqaution.
+623#£Vervangen om de vermenigvuldiging te starten
+624#£Vervangt alle " & ChrW(183) & " vermenigvuldigingstekens door * vermenigvuldigingstekens.
+625#£Punt als decimaalscheidingsteken
+626#£Vervangt alle , (komma's) in wiskundige invoervakken door . (punt) en alle ;(puntkomma) met ,(komma's)
+627#£Komma als decimaal scheidingsteken
+628#£Vervangt alle . (punten) in invoervakken voor wiskunde met ,(komma's) en alle ,(komma's) met ;(puntkomma's)
+629#£Wiskundige vormen, diagrammen en afbeeldingen
+630#£Opent een document met typische wiskundige vormen, diagrammen enz. Deze kunnen vervolgens in uw document worden gekopieerd en naar wens worden gemanipuleerd.
+631#£Tabel $ArrowRight lijst
+632#£Lijst $ArrowRight Tabel
+633#£Tafel
+634#£WordMat kan gegevens in de lijst manipuleren. Voorbeeld: U kunt eenvoudig een nummer toevoegen aan alle elementen in een lijst. Gegevens staan echter vaak in een tabel in Word. Hier zijn functies om lijst te converteren til tabellen en omgekeerd.
+635#£Excel-blad invoegen
+636#£Voegt een leeg ingesloten Excel-blad in. Dubbelklik om te openen en te bewerken.
+637#£Converteren naar lijst
+638#£Een tabel converteren naar een lijst. Deze lijst kan vervolgens worden gemanipuleerd met behulp van WordMat. Voorbeeld: [1, 2, 3]+1 = [2, 3, 4] Zie handleiding voor meer info
+639#£Converteren naar tafel
+640#£Converteert een lijst naar een tabel. De lijst kan in een wiskundevak staan of in het document worden geschreven en worden geselecteerd, zoals (1 , 2), (3 , 4), (5 , 6)
+641#£De oplosser van de driehoek
+642#£Voer 3 zijden/hoeken in. De driehoekoplosser berekent de resterende zijden/hoeken en genereert een afbeelding van de driehoek.
+643#£Handleiding van Word
+644#£Opent handleiding als Word-document
+645#£Webhandleiding
+646#£Hiermee opent u de online webhandleiding. Heeft betere navigatie en video's dan de Word-handleiding, maar een werk in uitvoering.
+647#£Maxima handleiding
+648#£Maxima is het CAS-programma dat de meeste rekenkundige berekeningen in WordMat uitvoert. Maxima heeft veel ingebouwde functies die niet direct zichtbaar zijn vanuit de WordMat gebruikersinterface, maar wel kunnen worden uitgevoerd als je de functienamen kent. Dit toont de Maxima help waar u documentatie kunt zien voor alle maxima functies.
+649#£Over
+650#£Wie heeft WordMat gemaakt?
+651#£Controleren op updates
+652#£Automatisch controleren op updates.
+653#£Sneltoetsen
+654#£Toont een lijst met sneltoetsen om WordMat-opdrachten te activeren en sneltoetsen voor het invoeren van wiskunde in de invoervakken voor wiskunde in Word.
+655#£LaTex-sjabloon
+656#£LaTex-sjabloon
+657#£Hiermee opent u een Word-document dat is opgemaakt als een LaTex-document, maar net zo eenvoudig te schrijven is als een Word-document.
+658#£Precisionen is erg hoog ingesteld. De rekentijd kan erg lang zijn of mislukken. Probeer dan opnieuw met een lagere stand.
+659#£WordMat converteert zeer goed naar LaTex, maar er is ook de mogelijkheid om Maxima te gebruiken om te converteren naar LaTex.
+660#£Eenheden worden normaal gesproken niet cursief geschreven als variabelen. Met deze functie probeert WordMat eenheden te identificeren en LaTex-code in te voegen om eenheden in een normaal lettertype te schrijven.
+661#£Sluiten
+662#£Genereert met behulp van MikTex een echt LaTex-document, dat geïnstalleerd moet worden. Alleen gebruiken voor eenvoudige documenten, omdat niet alle documentobjecten worden ondersteund.
+663#£Laat zien hoe de LaTex-output wordt geïnterpreteerd
+664#£Genereert LaTex-code en opent in TexWorks waar u aanpassingen kunt maken.
+665#£Driehoek
+666#£Notatie
+667#£Grafiek
+668#£Geavanceerd
+669#£Wetenschappelijke notatie
+670#£Complexe getallen
+671#£U moet Word opnieuw opstarten om de taalwijziging overal van kracht te laten worden.
+672#£Kan geen logboek van waarden <= 0 nemen
+673#£Berekenen
+674#£Ik ben aan het rekenen
+675#£Deze methode vereist een interval waarbij een oplossing binnen het interval valt. Er mag slechts één oplossing in het interval liggen. Kijk naar de grafiek om de oplossingen te identificeren.
+676#£Over de intervalmethode
+677#£De Newton-Raphson-methode vereist een eerste gok naar een oplossing. Het is niet gegarandeerd dat de methode een oplossing vindt als die er is. Er wordt slechts 1 oplossing gevonden. Kijk naar de grafiek om een eerste gok te identificeren.
+678#£Over Newton-Raphson
+679#£U moet uw document opslaan voordat de back-up kan worden uitgevoerd!
+680#£Polaire notatie uitvoer
+681#£Problemen met het bestand 'normal.dotm', kunnen problemen veroorzaken met sneltoetsen in WordMat. De problemen kunnen worden opgelost door het bestand te verwijderen, aangezien er automatisch een nieuw standaardbestand wordt gegenereerd wanneer Word opnieuw wordt opgestart. Het bestand kan niet worden verwijderd terwijl Word is geopend. U moet dit handmatig doen.\r\n\r\n- Druk op OK om de map te openen waarin Normal.dotm zich bevindt. \r\n- Sla je werk op en sluit Word \r\n- verwijder normaal.dotm \r\n- Open Word en open en sluit de WordMat-instellingen
+682#£Berekening uitgevoerd door GeoGebra
+683#£pijl
+684#£Safari openen
+685#£Het probleem is niet opgelost.\r\nWil je een andere methode of CAS-engine proberen?
+686#£CAS-motor
+687#£Belangrijke cijfers
+688#£Units aan/uit zetten
+689#£Als eenheden zijn ingeschakeld, kan WordMath eenheden interpreteren en converteren. Op de SI-knop kunt u de uitvoereenheden wijzigen. Schakel apparaten niet in, tenzij u het nodig heeft. Het kan het gedrag van WordMat beïnvloeden en reserveert veel variabelen.
+690#£Output eenheden
+691#£Vermeld de eenheden waarnaar u wilt converteren. Uitvoereenheden zijn standaard SI-eenheden.
+692#£Sf
+693#£Eenheden
+694#£Nee. van cijfers
+695#£Afronding
+696#£Kies hoe getallen worden gefoumatteerd en afgerond. In de onderstaande voorbeelden is WordMat ingesteld op 3 cijfers\r\n\r\nDecimalen: 12,345\r\nSignificante cijfers: 12,3\r\nSci. Notatie: 1,23*10^1
+697#£Maak het vierkant compleet
+698#£Past het vierkant toe voor alle variabelen in expressie
+699#£Faculteit van negatieve gehele getallen niet gedefinieerd
+700#£Waarschuwing: Meer vergelijkingen dan variabelen in het systeem. Was dat opzettelijk?
+701#£Nieuwe vergelijking
+702#£Vorige resultaat(en)
+703#£Schakel num/exact in
+704#£Ombouwen naar latex
+705#£Latex PDF
+706#£Graden
+707#£Radialen
+708#£Hoek eenheid
+709#£Toon de voorwaarden van de oplossing (bèta)
+710#£Nauwkeurig
+711#£Numeriek
+712#£Automatisch
+713#£Zeer hoge precisie (bèta)
+714#£Uitleg invoegen
+715#£Maxima-opdracht invoegen
+716#£Scheidingstekens
+717#£Lijst
+718#£Mult.teken
+719#£Punt
+720#£Type oplossing
+721#£Booleaans
+722#£Oplossing Set
+723#£Subscript
+724#£Maakt alleen tekst deel uit van de naam van de variabele
+725#£Is lijst/matrix index
+726#£Standaard grafiek programma
+727#£Excel-sheets insluiten
+728#£Output eenheden
+729#£Toestandsuitvoereenheden gescheiden door komma\nvoorbeelden:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nAls er niets wordt vermeld, worden eenheden geretourneerd in eenvoudige SI-eenheden of SI-afgeleide eenheden zonder voorvoegsel.
+730#£Voorbeelden van ondersteunde eenheden:\n(Zie handleiding voor meer)\n\nLengte: cm , AU, ly, pc\nMassa: u , G, mg\nFrequentie: Hz , Bq\nEnergie: kWh , eV, aJ\nDruk: Bar , mmHg, atm, torr
+731#£Trigonometrische vergelijkingen
+732#£Alle oplossingen
+733#£Slechts 1 oplossing
+734#£Automatisch controleren op updates
+735#£Sneltoetsen repareren
+736#£WordMat opnieuw opstarten
+737#£Nee. van berekeningen
+738#£Sneltoetsen gerepareerd.\nAls het nog steeds niet werkt, verwijder dan het bestand 'normal.dotm' in map '~/Bibliotheek/Groepscontainers/UBF8T346G9. Office/Gebruikersinhoud/Sjablonen' en start Word opnieuw
+739#£Sneltoetsen gerepareerd.\nAls het nog steeds niet werkt, verwijder dan het bestand 'normal.dotm' in de map '%appdata%/Microsoft/Templates' en start Word opnieuw
+740#£GeoGebra Calculator Suite is geïnstalleerd met WordMat. Het draait in een browser, maar vereist geen internet. Het werkt hetzelfde op Windows en Mac, en start snel.\nGeoGebra 5 Werkt hetzelfde op Windows en Mac, maar vereist installatie.\nWindows ondersteunt ook de andere app-versies van GeoGebra zoals Geogebra 6, Graphing Calculator etc. Deze worden gebruikt als GeoGebra 5 niet is geïnstalleerd.
+741#£Sneltoetsen zijn niet correct ingesteld
+742#£Het resultaat van de berekening is afhankelijk van het teken van
+743#£Het teken van de staat
+744#£Differentiaalvergelijking
+745#£Differentiaalvergelijking oplossen
+746#£Indep. var
+747#£Dep. var/functie
+748#£Begintoestand
+749#£Maxima-fout
+750#£Wiskundige fout
+751#£Syntaxisfout
+752#£Syntaxisfout. WordMat heeft uw input niet begrepen.
+753#£U mist een
+754#£Er is te veel
+755#£Er is een fout opgetreden in de code.
+756#£Delen door nul
+757#£Er heeft zich een vergissing voorgedaan. De fout is waarschijnlijk veroorzaakt door een van je definities.\r\nMisschien kun je de fout herkennen aan de hand van de onderstaande informatie.
+758#£Er zit een fout in een van uw definities.\r\nDe definitie wordt nu geselecteerd in Word.
+759#£Er is een illegaal personage geplaatst door
+760#£Vergelijking oplossen
+761#£Veranderlijk
+762#£Of toestandsvariabele:
+763#£Definities
+764#£Tijdelijke definities
+765#£Waarschuwing: Eenheden zijn ingeschakeld.\r\nHet oplossen van vergelijkingen zal slechter zijn\r\nPas op voor variabelen die eenheden zijn zoals: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
+766#£Stelsel van vergelijkingen oplossen
+767#£Variabelen kiezen
+768#£WordMat gaat van start
+769#£Een ogenblik geduld
+770#£De oplosser van de driehoek
+771#£Haaks
+772#£Enig
+773#£Rechts
+774#£Naamgeving
+775#£Manuel
+776#£Hoeken hoofdletter, zijkanten kleine letters
+777#£Zijkanten genoemd door hoeken AB
+778#£Getallen invoegen op de driehoek in Word
+779#£Berekeningen weergeven in Word
+780#£Voeg de bekende zijden en hoeken in. De overige zijden en hoeken worden dan berekend en ingevoegd in Word.\r\nHet is mogelijk om de namen van zijden en hoeken op de driehoek te wijzigen. Klik gewoon op de letters.
+781#£De driehoek is niet op maat. Maar een driehoek met de juiste schaal wordt ingevoegd in Word.
+782#£De trianglesolver van WordMat wordt gebruikt met invoer:
+783#£Op basis van uw gegevens kunnen twee driehoeken worden geconstrueerd
+784#£Er is meer informatie nodig om de resterende zijden en hoeken te berekenen
+785#£Twee driehoeken
+786#£Er is meer informatie nodig om de resterende zijden en hoeken te berekenen
+787#£Alle zijden en hoeken kunnen nu worden berekend.
+788#£Bij het oplossen van de vergelijking werden numerieke methoden toegepast. Er kunnen meer oplossingen zijn.
+789#£Temp. instellingen
+790#£Automatisch verminderen
+791#£Probeert de expressie met behulp van verschillende methoden terug te brengen tot de kortst mogelijke vorm.
+792#£Probeert de expressie te ontbinden
+793#£Breidt de expressie uit.
+794#£Rationaliseren
+795#£Converteert alle decimale getallen naar breuken
+796#£Trigonometrisch verminderen
+797#£Verminder de expressie met behulp van goniometrische identiteiten.
+798#£Dezelfde regel invoegen
+799#£2D plotten
+800#£Alles resetten
+801#£Titel van de as
+802#£Type lijn
+803#£Om een vergelijking op te lossen, moet u eerst een vergelijking invoegen in Word. Plaats de cursor in de vergelijking en druk nogmaals op 'Vergelijking(en) oplossen'. Markeer meer vergelijkingen om een stelsel van vergelijkingen op te lossen
+804#£Geen vergelijking geselecteerd
+805#£Vereenvoudigen
+806#£Factor
+807#£Uitbreiden
+808#£Help
+809#£Handmatig
+810#£Handleiding als Word-document
+811#£Handleiding online webpagina
+812#£Over
+813#£Update
+814#£Snelkoppelingen
+815#£Duidelijk
+816#£Logaritme
+817#£Taal
+818#£Teken
+819#£Positief
+820#£Negatief
+821#£Nul
+822#£Fout
+823#£Definities
+824#£OK
+825#£Annuleren
+826#£Wachten
+827#£Activiteit
+828#£Stoppen
+829#£De vergelijking is opgelost voor
+830#£De vergelijking wordt numeriek opgelost voor
+831#£door WordMat.
+832#£Functies
+833#£Vergelijking
+834#£Vergelijkingen
+835#£Punten
+836#£Vectoren
+837#£Titel
+838#£Terugstellen
+839#£Complexe berekeningen die precies worden uitgevoerd, kunnen erg lang duren. Wilt u het numeriek opnieuw proberen?
+840#£Gebruik gewone d als differentiaal d
+841#£De DY/DX-notatie kan normaal gesproken alleen worden gebruikt met een speciaal differentiaal d (\dd) of het symbool voor partiële afgeleiden (\partial). Als u niet verwacht dat d/dx wordt verward met andere expressies, kunt u deze instelling gebruiken, omdat het sneller is om dy/dx te typen met de gewone d.
+842#£Door de gebruiker gedefinieerde regressie
+843#£Los het systeem van differentiaalvergelijking(en) numeriek op
+844#£Er is een fout opgetreden
+845#£Veranderlijk
+846#£Waarschuwing
+847#£De differentiaalvergelijking moet de vorm y'= hebben.  om het numeriek op te lossen
+848#£De knop downloadt GeoGebra 5 om te 'downloaden' op je Mac. Je wordt dan door de installatie geleid.
+849#£GeoGebra 5 is niet volledig geïnstalleerd. Afloop
+850#£GeoGebra is nog niet geïnstalleerd. Wacht tot het downloaden is voltooid.
+851#£Voortzetten
+852#£Oude versie verwijderen
+853#£Voordat de nieuwe versie kan worden gedownload, moet de oude versie in Downloads worden verwijderd.\r\n 1. Een venster met de naam 'Toegang tot bestand toestaan' zou moeten openen.\r\n2. Klik op 'Selecteren...' \r\n3. Klik op 'Toegang toewijzen' "
+854#£Downloaden gestopt
+855#£U moet toegang verlenen tot GeoGebra.app voordat de installatie kan worden voortgezet
+856#£GeoGebra 5 wordt gedownload
+857#£1. Wacht eerst tot GeoGebra 5 is gedownload.\r\n2. Wanneer het downloaden is voltooid, zou een venster met de naam 'Toegang tot bestand toestaan' moeten openen.\r\n3. Klik op 'Selecteren...' \r\n4. Klik op 'Toegang toewijzen'
+858#£Gestopt
+859#£Het proces is gestopt.\r\n\r\nKlik op Sluiten en probeer het opnieuw.
+860#£U hebt geen toegang verleend tot GeGebra. Klik op 'Opnieuw' om het opnieuw te proberen.
+861#£Het downloaden gaat traag. Controleer in Safari of het erop lijkt dat er een download bezig is. U kunt op stop klikken als er geen voortgang is.
+862#£Fout bij het downloaden van GeoGebra
+863#£Het bestand kon niet worden gevonden in downloads.\r\nU kunt onderaan op 'Opnieuw' klikken als u wilt dat WordMat opnieuw kijkt.
+864#£Geef toestemming aan GeoGebra
+865#£Een venster met de naam 'Toegang tot bestand toestaan' zou nu moeten openen.\r\n\r\n1. Klik op 'Selecteren...' \r\n2. Klik op 'Toegang toewijzen'
+866#£GeoGebra verplaatsen naar apps
+867#£Mogelijk moet u toestemming geven voor 'Systeemgebeurtenissen', klik gewoon op OK.
+868#£Klaar
+869#£GeoGebra 5 is nu geïnstalleerd.\r\nKlik op 'Doorgaan' om GeoGebra te openen.
+870#£Er zijn pagina's die 0 zijn
+871#£U moet eerst een tafel selecteren
+872#£Kan genummerde vergelijking niet in de tabel invoegen
+873#£GeoGebra is gebruikt om het vergelijkingssysteem op te lossen. Het is onzeker of er oplossingen kunnen zijn. Het wordt aanbevolen om een andere methode te proberen. Bijv. Maxima, of numeriek/grafisch
+874#£Deze functie wordt niet ondersteund door GeoGebra. Probeer de vergelijkingsoplosser
+875#£De vergelijking werd grafisch opgelost met GeoGebra:
+876#£Het aantal haakjes komt niet overeen in de expressie
+877#£Fouten instellen
+878#£U hebt een onjuiste instelling in Word.\r\nSchakel in het menu Vergelijkingen over van Latex naar Unicode.
+879#£Syntaxisfout - Niet correcte wiskunde.
+880#£Je hebt iets ingevoerd dat niet de juiste wiskundige notatie is.\r\nDe fout heeft te maken met een variabele:
+881#£Dit kan bijvoorbeeld zijn omdat je een subscript op een getal hebt staan. \r\nK_0 moet worden vervangen door een nummer en niet door bijvoorbeeld 5000_0. Er hoeft alleen maar 5000 te staan.
+882#£Er kunnen geen twee gelijktekens in een vergelijking zijn
+883#£Het vergelijkingssysteem werd opgelost met GeoGebra:
+884#£De berekening werd onderbroken omdat het erg lang duurde. Het kan soms helpen om de berekening te proberen met de optie 'Numeriek' in plaats van Exact of Auto
+885#£Kan geen verbinding maken met Maxima. Wil je in plaats daarvan de 'WSH'-methode gebruiken?\r\n(Deze optie is te vinden onder geavanceerd in Instellingen)
+886#£WordMath kan niet communiceren met GeoGebra. Dit komt waarschijnlijk omdat u de vereiste beveiligingsinstellingen niet hebt ingesteld in Safari. Klik op ok om de instructies te krijgen
+887#£Numeriek oplossen
+888#£WordMat kon de Maxima-installatie niet vinden. Probeer opnieuw te installeren
+889#£Fout bij het verbinden met Maxima via WSH
+890#£Stopt automatisch in
+891#£Dat is niet gelukt. Stopt.
+892#£Het commando werd onderbroken na
+893#£Wil je het nog een keer proberen en hoe lang wil je nog wachten. (seconden) De computer wordt vergrendeld voor de wachttijd.
+894#£Fout in definitie
+895#£Er is een syntaxisfout gekoppeld aan een integraal. Heb je je dx aan het einde herinnerd?
+896#£Lengte van de output:
+897#£Klik op JA om alle tekens in Word in te voegen. (Waarschuwing: kan Word vertragen of er zelfs voor zorgen dat Word crasht). \r\n Klik op NEE om alleen de eerste 1000 tekens in te voegen.
+898#£Je hebt te weinig parameters ingesteld voor de functie:
+899#£Dit kan zijn omdat u komma's hebt gebruikt in plaats van puntkomma's om de parameters te scheiden. (U kunt in plaats daarvan een spatie aan één kant van de komma toevoegen.)
+900#£Voorwaarden voor de oplossing:
+901#£U moet eerst een lijst selecteren, bijvoorbeeld [1; 2; 3]
+902#£Misschien heb je n en r verwisseld in K(n, r)?

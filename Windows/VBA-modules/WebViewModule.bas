@@ -177,14 +177,8 @@ Dim res As String
 '    MsgBox Res
 End Function
 Sub GGBJSGuidance()
-    If Sprog.SprogNr = 1 Then
-        If MsgBox("WordMat kan ikke kommunikere med GeoGebra. Det skyldes formentlig at du ikke har sat de rigtige sikkerhedsindstillinger i Safari. Klik ok for at få instruktionerne", vbOKCancel, "Error") = vbOK Then
-            OpenLink "https://eduap.com/geogebra-som-cas-motor-pa-mac/"
-        End If
-    Else
-        If MsgBox("WordMath cannot communicate with GeoGebra. This is probably because you have not set the required security settings in Safari. Click ok to get the instructions.", vbOKCancel, "Error") = vbOK Then
-            OpenLink "https://eduap.com/geogebra-as-cas-engine-on-mac/"
-        End If
+    If MsgBox(Sprog.A(886), vbOKCancel, Sprog.Error) = vbOK Then
+        OpenLink "https://eduap.com/geogebra-som-cas-motor-pa-mac/"
     End If
 End Sub
 

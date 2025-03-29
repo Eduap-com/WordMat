@@ -1,4 +1,4 @@
-Attribute VB_Name = "Statistik"
+Attribute VB_Name = "ModuleStatistics"
 Option Explicit
 
 Sub Chi2Fordeling()
@@ -21,7 +21,6 @@ Sub Chi2Fordeling()
     Selection.TypeParagraph
     
     Selection.InsertAfter ut
-'    Selection.InsertAfter ("p(x)=1/(2^(" & k & "/2)á" & G & ")áx^(" & k & "/2-1)áe^(-x/2)")
     Selection.OMaths.Add Range:=Selection.Range
     Selection.OMaths(1).BuildUp
     Selection.MoveRight unit:=wdCharacter, Count:=2
@@ -29,10 +28,10 @@ Sub Chi2Fordeling()
 End Sub
 
 Function Gamma(z As Variant) As Variant
-' begrænset implementation af gammafunktion
-    If z = Int(z) Then ' hvis z er heltal er det bare fakultet
+' limited implementation of gamma function
+    If z = Int(z) Then ' if z is integer it is just factorial
         Gamma = Factorial(z - 1)
-    ElseIf z = 0.5 Then ' for specielle halvtallige er løsningen kendt
+    ElseIf z = 0.5 Then ' for special half integers the solution is known
         Gamma = 1.77245384774943
     ElseIf z = 1.5 Then
         Gamma = 0.88622692387471
@@ -52,7 +51,7 @@ Function Gamma(z As Variant) As Variant
         Gamma = 14034.4074074074
     ElseIf z = 9.5 Then
         Gamma = 119292.461538462
-    Else ' Andre kan jeg ikke
+    Else ' I can't do others
         Gamma = 0
     End If
     
@@ -67,10 +66,10 @@ Function Factorial(n)
 End Function
 
 Function Lgamma(z As Variant) As Variant
-' begrænset implementation af Lower gammafunktion
-    If z = Int(z) Then ' hvis z er heltal er det bare faktor
+' limited implementation of Lower gamma function
+    If z = Int(z) Then ' if z is integer it is just factorial
         Lgamma = Factorial(z)
-    ElseIf z = 0.5 Then ' for specielle halvtallige er løsningen kendt
+    ElseIf z = 0.5 Then ' for special half integers the solution is known
         Lgamma = 1.77245384774943
     ElseIf z = 1.5 Then
         Lgamma = 0.88622692387471
@@ -90,7 +89,7 @@ Function Lgamma(z As Variant) As Variant
         Lgamma = 14034.4074074074
     ElseIf z = 9.5 Then
         Lgamma = 119292.461538462
-    Else ' Andre kan jeg ikke
+    Else ' I can't do others
         Lgamma = 0
     End If
     

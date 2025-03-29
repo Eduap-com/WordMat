@@ -13,10 +13,10 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
-Public EqName As String
+' This form is used to insert a reference to a named equation
 
+Public EqName As String
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)
 ' SetEscEvents Me.Controls     in Initialize
@@ -67,15 +67,13 @@ Private Sub UserForm_Activate()
     For i = 1 To ActiveDocument.Bookmarks.Count
         ListBox1.AddItem ActiveDocument.Bookmarks(i).Name
     Next
-
 End Sub
 
 Sub SetCaptions()
     Me.Caption = Sprog.A(14)
     Label_ok.Caption = Sprog.OK
     Label_cancel.Caption = Sprog.Cancel
-    Label_ligninger.Caption = Sprog.A(834)
-    
+    Label_Ligninger.Caption = Sprog.A(834)
 End Sub
 
 Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)

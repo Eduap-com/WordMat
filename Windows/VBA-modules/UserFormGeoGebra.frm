@@ -13,10 +13,9 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
-Public ReturnVal As Integer ' 1=Install, 2=browser
 
+Public ReturnVal As Integer ' 1=Install, 2=browser
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)
 ' SetEscEvents Me.Controls     in Initialize
@@ -64,21 +63,14 @@ Private Sub UserForm_Activate()
 #Else
 #End If
     
-    If Sprog.SprogNr = 1 Then
-        Label_title.Caption = "GeoGebra 5 er ikke installeret"
+    Label_title.Caption = Sprog.A(292)
 #If Mac Then
-        Label2.Caption = "Knappen downloader GeoGebra 5 til 'overførsler' på din Mac. Du bliver efterfølgende guidet igennem opsætningen."
+        Label2.Caption = Sprog.A(848)
 #Else
-        Label2.Caption = "Knappen sender dig til hjemmesiden, hvor du kan installere GeoGebra. WordMat på Windows understøtter 'GeoGebra classic 5', 'GeoGebra Calculator Suite', 'GeoGebra Classic 6' samt de fleste andre App-udgaver af GeoGebra."
+        Label2.Caption = Sprog.A(293)
 #End If
-    Else
-        Label_title.Caption = "GeoGebra 5 is not installed"
-    End If
     
-'    Label1.Caption = Sprog.A(292)
-'    Label2.Caption = Sprog.A(293)
     Label3.Caption = Sprog.A(294)
-    
     Label_webstart.Caption = Sprog.A(296)
     
 #If Mac Then

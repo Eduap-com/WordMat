@@ -1,20 +1,20 @@
 VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormOmskriv 
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormReduce 
    Caption         =   "Omskriv"
    ClientHeight    =   6195
    ClientLeft      =   -30
    ClientTop       =   75
    ClientWidth     =   10845
-   OleObjectBlob   =   "UserFormOmskriv.frx":0000
+   OleObjectBlob   =   "UserFormReduce.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
-Attribute VB_Name = "UserFormOmskriv"
+Attribute VB_Name = "UserFormReduce"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
+' This form shows different methods to reduce a mathematical expression
 
 Public annuller As Boolean
 Public TempDefs As String
@@ -146,7 +146,7 @@ Dim Arr() As String, i As Integer
     
     For i = 0 To UBound(Arr)
         If Arr(i) <> "" Then
-            TextBox_def.Text = TextBox_def.Text & Arr(i) & "=" & VbCrLfMac    ' midlertidige definitioner
+            TextBox_def.Text = TextBox_def.Text & Arr(i) & "=" & VbCrLfMac    ' Temp definitions
         End If
     Next
     
@@ -172,7 +172,6 @@ Dim i As Integer
     For i = 2 To 16
         ComboBox_cifre.AddItem i
     Next
-
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -207,7 +206,6 @@ Private Sub SetCaptions()
     Label_completesquare.Caption = Sprog.A(698)
     
     CheckBox_sammelinje.Caption = Sprog.A(798)
-    
 End Sub
 
 Private Sub Label_ok_Click()

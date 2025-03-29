@@ -14,54 +14,6 @@ Function ScreenWidth() As Integer
 '        ScreenWidth = RunScript("getscreenwidth", "")
     End If
 End Function
-'Mac: LoadPicture
-'
-'Function LoadPictureMac(pathPict) As IPictureDisp
-'    On Error GoTo Err
-'    Dim pathBmp As String
-'    Const sIID_IPicture As String = "{7BF80980-BF32-101A-8BBB-00AA00300CAB}" ' der var fejl om manglende def af denne. Er fundet på nettet så ikke sikker på om den er korrekt
-'
-'    If (LCase(Right(pathPict, 4)) = ".bmp") Then
-'        pathBmp = pathPict
-'    Else
-'        pathBmp = GetTempDir() & "WordMatGraf.bmp"
-'
-'        On Error Resume Next
-'        Kill pathBmp
-'        On Error GoTo Err
-'
-'        Application.ScreenUpdating = False
-'        Dim ishp As InlineShape
-'        Set ishp = Application.ActiveDocument.InlineShapes.AddPicture(pathPict)
-'        ishp.ScaleHeight = 100
-'        ishp.ScaleWidth = 100
-'        ishp.SaveAsPicture msoPictureTypeBMP, pathBmp
-'        ishp.Delete
-'        Application.ScreenUpdating = True
-'    End If
-'
-'    Exit Function
-'
-'    Dim num As Integer
-'    num = FreeFile
-'    Open pathBmp For Binary Access Read As num
-'    Dim siz As Long
-'    siz = LOF(num)
-'    Dim buf() As Byte
-'    ReDim buf(0 To siz - 1)
-'    Get #num, 1, buf
-'    Close #num
-'
-'    Dim hr As LongPtr
-'    Dim ipic As IPicture
-'    hr = bits2pict(buf(0), StrPtr(sIID_IPicture), ipic)
-'    Set LoadPictureMac = ipic
-'    Exit Function
-'
-'Err:
-'    MsgBox Err.Description, , "LoadPicture"
-'End Function
-
 
 Function MacDrawDims(Optional x As Long = 0, Optional y As Long = 0) As String
 Dim xdrawdim As Long, ydrawdim As Long
@@ -80,7 +32,6 @@ Dim xdrawdim As Long, ydrawdim As Long
     
     MacDrawDims = "dimensions=[" & dx & "," & dy & "]"
 End Function
-
 
 Sub OpenExcelMac(fileName As String, Optional ParamS As String)
     RunScript "OpenExcel", GetWordMatDir & "Excelfiles/" & fileName & ";" & ParamS
@@ -151,7 +102,7 @@ On Error GoTo Fejl
 '    SaveCommandFile MaximaCommand
     If UnitCore Then
 '        AppleScriptTask "WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait)
-'        If OutUnits <> "" Then ' fjernet da units nu håndteres af RunMaximaFile via GetSettingString
+'        If OutUnits <> "" Then ' removed as units are now handled by RunMaximaFile via GetSettingString
 '            ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & "setunits(" & omax.ConvertUnits(OutUnits) & ")$" & MaximaCommand)
 '        Else
             ExecuteMaximaViaFile = AppleScriptTask("WordMatScripts.scpt", "RunMaximaUnit", CStr(MaxWait) & "£" & MaximaCommand)
@@ -169,9 +120,5 @@ slut:
     
 End Function
 
-
 #Else
-
 #End If
-
-

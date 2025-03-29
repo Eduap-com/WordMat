@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVar 
-   Caption         =   "Løs ligning"
+   Caption         =   "Solve equation"
    ClientHeight    =   4695
    ClientLeft      =   -30
    ClientTop       =   75
@@ -13,16 +13,15 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
 
-Public Vars As String ' semikolon separeret liste over de variable som der skal vælges mellem. Sættes inden show kaldes
-Public DefS As String ' definitioner der er i dokumentet. Sættes inden show kaldes
-Public TempDefs As String ' Kan både sættes før show kaldes og på formen
-Public SelectedVar As String ' Den variabel der er blevet valgt
+Public Vars As String ' semicolon separated list of variables to choose from. Placed before show is called
+Public DefS As String ' definitions that are in the document. Set before show is called
+Public TempDefs As String ' Can be set both before show is called and on the form
+Public SelectedVar As String ' The variable that has been selected
 Public NoEq As Integer ' no of equations to solve for
 Public Eliminate As Boolean
-Private Svars As Variant ' array der holder variabelnavne.  som de skal returneres dvs. uden asciikonvertering
+Private Svars As Variant ' array that holds variable names as they are to be returned, i.e. without ascii conversion
 
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)

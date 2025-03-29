@@ -1,18 +1,20 @@
 VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormGenveje 
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormShortcuts 
    Caption         =   "Genveje"
    ClientHeight    =   9810.001
    ClientLeft      =   -30
    ClientTop       =   75
    ClientWidth     =   16380
-   OleObjectBlob   =   "UserFormGenveje.frx":0000
+   OleObjectBlob   =   "UserFormShortcuts.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
-Attribute VB_Name = "UserFormGenveje"
+Attribute VB_Name = "UserFormShortcuts"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Option Explicit
+' This form can be used to customize the keyboard shortcuts, and shows commonly used shortcuts for math symbols
 
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)
@@ -163,20 +165,20 @@ CB.AddItem Sprog.A(701) 'New equation
 CB.AddItem Sprog.A(1) 'New numbered equation
 CB.AddItem Sprog.A(446)
 CB.AddItem Sprog.A(760)
-CB.AddItem Sprog.A(62) ' definer
+CB.AddItem Sprog.A(62) ' define
 CB.AddItem Sprog.A(453)
 CB.AddItem Sprog.A(461)
 CB.AddItem Sprog.A(68)
 CB.AddItem Sprog.A(456)
 CB.AddItem Sprog.A(452)
-CB.AddItem Sprog.A(505) ' Maxima kommando
-CB.AddItem Sprog.A(702) 'forrige resultater
+CB.AddItem Sprog.A(505) ' Maxima command
+CB.AddItem Sprog.A(702) 'prev resultat
 CB.AddItem Sprog.A(443)
 CB.AddItem Sprog.A(703) 'Toggle num/exact
 CB.AddItem Sprog.A(693)
 CB.AddItem Sprog.A(704) ' Convert latex
 CB.AddItem Sprog.A(705) ' Latex pdf
-CB.AddItem Sprog.A(607) ' reference til ligning
+CB.AddItem Sprog.A(607) ' reference to equation
 
 End Sub
 Private Sub Label_cancel_Click()

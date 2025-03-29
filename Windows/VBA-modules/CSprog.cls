@@ -31,10 +31,74 @@ End Sub
 Function GetOfficeLanguage() As Integer
 'Reads the UI-language for Word
 Select Case Application.International(wdProductLanguageID)
-Case 1030 ' Dansk
+Case 1030 ' Danish
     GetOfficeLanguage = 1
+Case 1033 ' English
+    GetOfficeLanguage = 2
 Case 1034 ' Spanish
     GetOfficeLanguage = 3
+Case 3082 ' Spanish international
+    GetOfficeLanguage = 3
+Case 2058 ' Spanish mexican
+    GetOfficeLanguage = 3
+Case 11274 ' Spanish Argentina
+    GetOfficeLanguage = 3
+Case 9226 ' Spanish Columbia
+    GetOfficeLanguage = 3
+Case 14346 ' Spanish Uruguay
+    GetOfficeLanguage = 3
+Case 1031 ' German
+    GetOfficeLanguage = 4
+Case 2055 ' German Switzerland
+    GetOfficeLanguage = 4
+Case 3079 ' German Austria
+    GetOfficeLanguage = 4
+Case 1036 ' French
+    GetOfficeLanguage = 5
+Case 3084 ' French Canada
+    GetOfficeLanguage = 5
+Case 4108 ' French Switzerland
+    GetOfficeLanguage = 5
+Case 2060 ' French Belgium
+    GetOfficeLanguage = 5
+Case 5132 ' French Luxemburg
+    GetOfficeLanguage = 5
+Case 1040 ' Italian
+    GetOfficeLanguage = 6
+Case 2064 ' Italian Switzerland
+    GetOfficeLanguage = 6
+Case 1053 ' Swedish
+    GetOfficeLanguage = 7
+Case 2077 ' Swedish finnish
+    GetOfficeLanguage = 7
+Case 1044 ' Norwegian
+    GetOfficeLanguage = 8
+Case 2067 ' Norwegian Nynorsk
+    GetOfficeLanguage = 8
+Case 1035 ' Finnish
+    GetOfficeLanguage = 9
+Case 1043 ' Dutch
+    GetOfficeLanguage = 10
+Case 1045 ' Polish
+    GetOfficeLanguage = 11
+Case 1046 ' Portuguese Brazil
+    GetOfficeLanguage = 12
+Case 2070 ' Portuguese Portugal
+    GetOfficeLanguage = 12
+Case 1080 ' Faroese
+    GetOfficeLanguage = 13
+Case 1061 ' estonian
+    GetOfficeLanguage = 14
+Case 1062 ' latvian
+    GetOfficeLanguage = 15
+Case 1063 ' lithuanian
+    GetOfficeLanguage = 16
+Case 1032 ' Greek
+    GetOfficeLanguage = 17
+Case 1029 ' Check
+    GetOfficeLanguage = 18
+Case 1039 ' Icelandic - not supported in Excel
+    GetOfficeLanguage = 1
 Case Else ' 1033 is english
     GetOfficeLanguage = 2
 End Select
@@ -65,6 +129,36 @@ Public Sub LoadSprogArray()
         FilePath = FilePath & "languages" & slash & "en.csv"
     ElseIf SprogNr = 3 Then
         FilePath = FilePath & "languages" & slash & "sp.csv"
+    ElseIf SprogNr = 4 Then
+        FilePath = FilePath & "languages" & slash & "de.csv"
+    ElseIf SprogNr = 5 Then
+        FilePath = FilePath & "languages" & slash & "fr.csv"
+    ElseIf SprogNr = 6 Then
+        FilePath = FilePath & "languages" & slash & "it.csv"
+    ElseIf SprogNr = 7 Then
+        FilePath = FilePath & "languages" & slash & "sv.csv"
+    ElseIf SprogNr = 8 Then
+        FilePath = FilePath & "languages" & slash & "nb.csv"
+    ElseIf SprogNr = 9 Then
+        FilePath = FilePath & "languages" & slash & "fi.csv"
+    ElseIf SprogNr = 10 Then
+        FilePath = FilePath & "languages" & slash & "nl.csv"
+    ElseIf SprogNr = 11 Then
+        FilePath = FilePath & "languages" & slash & "pl.csv"
+    ElseIf SprogNr = 12 Then
+        FilePath = FilePath & "languages" & slash & "pt-pt.csv"
+    ElseIf SprogNr = 13 Then
+        FilePath = FilePath & "languages" & slash & "fo.csv"
+    ElseIf SprogNr = 14 Then
+        FilePath = FilePath & "languages" & slash & "et.csv"
+    ElseIf SprogNr = 15 Then
+        FilePath = FilePath & "languages" & slash & "lv.csv"
+    ElseIf SprogNr = 16 Then
+        FilePath = FilePath & "languages" & slash & "lt.csv"
+    ElseIf SprogNr = 17 Then
+        FilePath = FilePath & "languages" & slash & "el.csv"
+    ElseIf SprogNr = 18 Then
+        FilePath = FilePath & "languages" & slash & "cs.csv"
     End If
     FileNo = FreeFile
 

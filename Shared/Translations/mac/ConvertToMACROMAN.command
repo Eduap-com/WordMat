@@ -24,10 +24,17 @@ Echo "**************************************************************"
 Langfolder=${0:a:h}
 cd $Langfolder
 
+
+# Process all .csv files in the ../win folder
+for file in ../win/*.csv; do
+  output_file=$(basename "$file") # Extract the filename
+  iconv -f iso-8859-1 -t MACROMAN "$file" > "$output_file"
+done
+
 #iconv -f UTF-8 -t MACROMAN da.csv > da.csv
-iconv -f iso-8859-1 -t MACROMAN ../win/da.csv > da.csv
-iconv -f iso-8859-1 -t MACROMAN ../win/en.csv > en.csv
-iconv -f iso-8859-1 -t MACROMAN ../win/sp.csv > sp.csv
+#iconv -f iso-8859-1 -t MACROMAN ../win/da.csv > da.csv
+#iconv -f iso-8859-1 -t MACROMAN ../win/en.csv > en.csv
+#iconv -f iso-8859-1 -t MACROMAN ../win/sp.csv > sp.csv
 
 Echo
 Echo "Done"
