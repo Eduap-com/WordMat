@@ -445,7 +445,7 @@ Sub ShowDebug(Optional vis As Boolean = False, Optional MInputString As String, 
             UserFormDebug.TextBox_maximaoutput = OutputString
         End If
         
-        UserFormDebug.Label_time.Caption = UserFormDebug.Label_time.Caption & "Samlet tid: " & Timer - tid & vbCrLf
+        UserFormDebug.Label_time.Caption = UserFormDebug.Label_time.Caption & "Samlet tid: " & timer - tid & vbCrLf
         UserFormDebug.Show
     End If
 End Sub
@@ -1363,21 +1363,6 @@ Sub beregn()
     If right(Kommando, 1) = "=" Then
         Kommando = Left(Kommando, Len(Kommando) - 1)
     End If
-
-    Do    ' go back to the nearest equal symbol
-        posligmed = InStr(Kommando, "=")
-        possumtegn = InStr(Kommando, VBA.ChrW(8721))
-        '    posprodtegn = InStr(Kommando, VBA.ChrW(8719))
-        If possumtegn = 0 Then possumtegn = InStr(Kommando, VBA.ChrW(8719))    ' product symbol
-        If possumtegn > 0 And possumtegn < posligmed Then    ' if there is a sum sign, there is an = sign as part of it
-            posligmed = 0
-        End If
-        posca = InStr(Kommando, VBA.ChrW(8776))
-        If posca > posligmed Then posligmed = posca
-        If posligmed > 0 Then
-            Kommando = right(Kommando, Len(Kommando) - posligmed)
-        End If
-    Loop While posligmed > 0
 
 start:
     StartKommando = Kommando    ' command before it is tampered with
@@ -2519,8 +2504,8 @@ Sub Draw3D(graphobj As String, Optional antalobj As Integer = 1)
 End Sub
 Sub Wait(pausetime As Variant)
     Dim start
-    start = Timer    ' Set start time.
-    Do While Timer < start + pausetime
+    start = timer    ' Set start time.
+    Do While timer < start + pausetime
         DoEvents    ' Yield to other processes.
     Loop
 End Sub
@@ -5772,7 +5757,7 @@ Sub InsertMaximaOutput()
 
     If Len(MaximaOutput) > 1000 Then
         If MsgBox2(Sprog.A(896) & Len(MaximaOutput) & VbCrLfMac & Sprog.A(897), vbYesNo, Sprog.A(846)) = vbNo Then
-            MaximaOutput = Left(MaximaOutput, 1000) + Sprog.A(119)
+            MaximaOutput = Left(MaximaOutput, 1000) & " " & Sprog.A(119)
         End If
     End If
     Set mo = Selection.OMaths.Add(Selection.Range)
@@ -6377,7 +6362,7 @@ slut:
     '    Selection.Collapse (wdCollapseStart)
 End Function
 Function AddDefinition(s As String, Optional MathObj As OMath) As String
-    Dim t As String
+    Dim t As String, slc As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     Dim defenk As String
@@ -6389,8 +6374,9 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
     s = Replace(s, VBA.ChrW(12311), "")    ' special invisible brackets are removed
     s = Replace(s, vbCrLf, "")    ' enter can accur
     s = Replace(s, vbCr, "")
-
-    If InStr(s, VBA.ChrW(8788)) > 0 Or InStr(s, VBA.ChrW(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(VBA.LCase(s), "definer:") > 0 Or InStr(VBA.LCase(s), "define:") > 0 Or InStr(VBA.LCase(s), "ligning:") > 0 Or InStr(VBA.LCase(s), "equation:") > 0 Or InStr(VBA.LCase(s), "slet def") > 0 Or InStr(VBA.LCase(s), "delete def") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Then
+    slc = LCase(s)
+ 
+    If InStr(s, ChrW(8788)) > 0 Or InStr(s, ChrW(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(slc, "definer:") > 0 Or InStr(slc, "define:") > 0 Or InStr(slc, "ligning:") > 0 Or InStr(slc, "equation:") > 0 Or InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Or InStr(slc, LCase(Sprog.A(69))) > 0 Then
         If VBA.LCase(Left(s, 8)) = "definer:" Then
             s = right(s, Len(s) - 8)
         ElseIf VBA.LCase(Left(s, 7)) = "define:" Then
@@ -6407,7 +6393,8 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
         s = Replace(s, VBA.ChrW(8801), ":=")    ' speciel := symbol
 
         s = Replace(s, VBA.ChrW(11), "")
-
+       slc = LCase(s)
+ 
         '        If InStr(s, "block") < 1 Then
         '            s = Replace(s, VBA.ChrW(34), "") ' apostrophe
         '            s = Replace(s, "=", ":")
@@ -6416,9 +6403,7 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
         '        End If
 
         '        s = Replace(s, "):=:", "):=")
-
-        If InStr(VBA.LCase(s), "slet def") > 0 Or InStr(VBA.LCase(s), "delete def") > 0 Then
-            '            FindDefinitions = ""
+        If InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(slc, LCase(Sprog.A(69))) Then
             s = Replace(Trim(Split(s, ":")(1)), vbCr, "")
             If s = "" Then
                 AddDefinition = "STOP"

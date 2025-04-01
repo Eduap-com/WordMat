@@ -113,7 +113,7 @@
 112#£Nepavyksta prisijungti prie serverio
 113#£Sioje dokumento vietoje apibreziama:
 114#£Sioje dokumento vietoje nera jokiu apibrezimu.
-115#£Equation definitions are defined by 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+115#£
 116#£Negalite apibrezti isvestines priemones\r\nPasalinkite apibrezima: \r\n
 117#£Apibrezime yra klaida:
 118#£Jo nepaisoma, taciau istaisykite ivesties klaida, kad isvengtumete sios isvesties klaidos
@@ -533,16 +533,16 @@
 532#£Faktorizuoja israiska
 533#£Isplesti
 534#£Visi skliaustai yra isplesti
-535#£Stalas
+535#£tabula
 536#£"Excel" iterpimas
 537#£Atskirti
 538#£Pazymeti israiska, kad atskirtumete arba perkeltumete zymikli i israiska
 539#£Integruoti
 540#£Nustato neapibrezta funkcijos integrala
-541#£Wolframas Alfa
-542#£Atidaro "Wolfram Alpha" su pasirinkta israiska kaip ivesti
-543#£Isspreskite lygti
-544#£Isspreskite lygti naudodami Wolffram Alpha
+541#£
+542#£
+543#£
+544#£
 545#£Braizymo grafikas (Alt + P)
 546#£Rodomas pasirinktos (-u) funkcijos (-u) / lygties (-ciu) ir tasku grafikas. Tada grafika galima iterpti i dokumenta. Palaikomos kelios grafiku programos. Nustatymuose pasirinkite savo megstamiausia.
 547#£Sklypas naudojant GnuPlot

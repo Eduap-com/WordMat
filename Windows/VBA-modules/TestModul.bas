@@ -795,7 +795,7 @@ Sub InsertTestMath(s As String, Optional NewLine As Boolean = True)
 
     If Len(s) > 500 Then
 '        If MsgBox("Output is " & Len(s) & " characters long. Click OK to insert all characters in Word. Cancel to insert the first 500", vbOKCancel, Sprog.Warning) = vbCancel Then
-        s = Left(s, 500) + Sprog.A(119)
+        s = Left(s, 500) & " " & Sprog.A(119)
     End If
     Set mo = Selection.OMaths.Add(Selection.Range)
     Selection.TypeText s

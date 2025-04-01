@@ -15,13 +15,13 @@ Function ScreenWidth() As Integer
     End If
 End Function
 
-Function MacDrawDims(Optional x As Long = 0, Optional y As Long = 0) As String
+Function MacDrawDims(Optional X As Long = 0, Optional Y As Long = 0) As String
 Dim xdrawdim As Long, ydrawdim As Long
-    If x > 0 Then
-        xdrawdim = x
+    If X > 0 Then
+        xdrawdim = X
     End If
-    If y > 0 Then
-        ydrawdim = y
+    If Y > 0 Then
+        ydrawdim = Y
     End If
     
     Dim dx As Long
@@ -57,8 +57,7 @@ Function CheckAppleScriptTaskWordScriptFile(ScriptFileName As String) As Boolean
     Dim TestStr As String
 
     AppleScriptTaskFolder = MacScript("return POSIX path of (path to desktop folder) as string")
-    AppleScriptTaskFolder = Replace(AppleScriptTaskFolder, "/Desktop", "") & _
-        "Library/Application Scripts/com.microsoft.Word/"
+    AppleScriptTaskFolder = Replace(AppleScriptTaskFolder, "/Desktop", "") & "Library/Application Scripts/com.microsoft.Word/"
 
     On Error Resume Next
     TestStr = Dir(AppleScriptTaskFolder & ScriptFileName, vbDirectory)

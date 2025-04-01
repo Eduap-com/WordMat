@@ -729,7 +729,6 @@ Function ReadTextfileToString(FilNavn As String) As String
    Open FilNavn For Input As filnr   ' Open file
    ReadTextfileToString = Input$(LOF(1), 1)
    Close #filnr
-   
 #Else
    Dim fsT As Object
    'On Error GoTo fejl
@@ -777,7 +776,6 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
    fsT.Close
    Set fsT = Nothing
 #End If
-
 
    GoTo slut
 Fejl:

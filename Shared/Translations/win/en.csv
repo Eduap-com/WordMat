@@ -113,7 +113,7 @@
 112#£Unable to connect to server
 113#£At this place in the document the following is defined
 114#£There aren't any definitions at this place in the document.
-115#£Equation definitions are defined by 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+115#£
 116#£You can't define a derivative\r\nRemove the definition: \r\n
 117#£There is an error in the definition: 
 118#£It is ignored, but correct the input error to avoid this output error
@@ -539,10 +539,10 @@
 538#£Select the expression to differentiate or place the cursor in the expression
 539#£Integrate
 540#£Determines the indefinite integral of function
-541#£Wolfram Alpha
-542#£Opens Wolfram Alpha with the selected expression as input
-543#£Solve Equation
-544#£Solve equation using Wolffram Alpha
+541#£
+542#£
+543#£
+544#£
 545#£Plot graph (Alt+P)
 546#£Shows the graph for the selected function(s)/equation(s) and points. The graph can then be inserted into the document. Several graph programs are supported. Choose your favorite under settings.
 547#£Plot using GnuPlot

@@ -638,9 +638,7 @@ End Sub
 Sub Rib_deffunk(control As IRibbonControl)
     DefinerFunktion
 End Sub
-Sub Rib_deflign(control As IRibbonControl)
-    DefinerLigning
-End Sub
+
 Sub Rib_defkonstanter(control As IRibbonControl)
     Dim UFConstants As New UserFormConstants
     UFConstants.Show vbModeless
@@ -1570,18 +1568,6 @@ Sub Rib_STint1(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_STint2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(540)
-End Sub
-Sub Rib_STwolfram1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(541)
-End Sub
-Sub Rib_STwolfram2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(542)
-End Sub
-Sub Rib_STwasolve1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(543)
-End Sub
-Sub Rib_STwasolve2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(544)
 End Sub
 Sub Rib_STplot1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(545)

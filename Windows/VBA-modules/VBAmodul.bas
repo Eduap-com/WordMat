@@ -141,13 +141,13 @@ Private Function ReplaceLineToANSI(s As String) As String
     '   s = Replace(s, "*._.*", ChrW(8230)) ' tre prikker
     ReplaceLineToANSI = s
 End Function
-Function FolderExists(FolderPath As String) As Boolean
+Function FolderExists(folderPath As String) As Boolean
 
-    If right(FolderPath, 1) <> "\" Then
-        FolderPath = FolderPath & "\"
+    If right(folderPath, 1) <> "\" Then
+        folderPath = folderPath & "\"
     End If
     
-    If Dir(FolderPath, vbDirectory) <> vbNullString Then
+    If Dir(folderPath, vbDirectory) <> vbNullString Then
         FolderExists = True
     Else
         FolderExists = False
@@ -447,13 +447,13 @@ End Sub
 Public Sub RemoveAllModules()
     DeleteAllModules True
 End Sub
-Function CountFilesInFolder(FolderPath As String, Optional OnlyModules As Boolean = False) As Long
+Function CountFilesInFolder(folderPath As String, Optional OnlyModules As Boolean = False) As Long
     Dim fileName As String
     Dim FileCount As Long
-    If right(FolderPath, 1) = "\" Then
-        fileName = Dir(FolderPath & "*")
+    If right(folderPath, 1) = "\" Then
+        fileName = Dir(folderPath & "*")
     Else
-        fileName = Dir(FolderPath & "\*")
+        fileName = Dir(folderPath & "\*")
     End If
     Do While fileName <> ""
         If OnlyModules Then

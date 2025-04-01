@@ -113,7 +113,7 @@
 112#£Der kunne ikke oprettes forbindelse til serveren
 113#£På dette sted i dokumentet er der defineret følgende:
 114#£Der er ingen definitioner på dette sted i dokumentet.
-115#£Lignings definitioner indledes med en 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med ; \r\nf.eks. lig1: c=3*d ; lig2: a=2*b
+115#£
 116#£Man kan ikke definere en afledet funktion.\r\nFjern følgende definition: \r\n
 117#£Der er en fejl i definitionen: 
 118#£Den ignoreres. Men ret det så du ikke får denne fejl ved hver beregning.
@@ -539,10 +539,10 @@
 538#£Marker udtryk der skal differentieres, eller placer cursoren i udtrykket.
 539#£Stamfunktion
 540#£Finder stamfunktion til markerede udtryk (ubestemte integrale).
-541#£Wolfram Alpha
-542#£Åbner hjemmesiden Wolfram Alpha, med det valgte udtryk som input.
-543#£Løs ligning
-544#£Løs ligning vha. Wolfram Alpha
+541#£
+542#£
+543#£
+544#£
 545#£Vis graf (Alt+P)
 546#£Viser grafen for de(t) valgte funktioner/ligninger og punker. Grafen kan efterfølgende indsættes i dokumentet. Der understøttes forskellige grafprogrammer. Vælg din favorit i indstillinger, eller vælg ved at udvide denne knap
 547#£Indsæt graf vha. programmet GnuPlot

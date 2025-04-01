@@ -113,7 +113,7 @@
 112#£No se puede conectar con el servidor
 113#£Aquí, en ésta parte del documento, está definido lo siguiente:
 114#£No hay ninguna definición en este lugar del documento
-115#£Las definiciones de la ecuación se realizan mediante un 'Definir la ecuación :' comandos para definir la nueva ecuación\r\nLa definición se puede utilizar en el resto del documento, pero no antes.\r\n Si inserta un comando 'borrar def: ', más abajo, en el documento, no se puede utilizar, ésta definición, a partir de éste punto.\r\nPuede definir varias ecuaciones, al mismo tiempo, mediante la separación de las definiciones con" & ListSeparator\r\npor.ej. ec1: c=3*d " & ListSeparator & " ec2: a=2*b
+115#£
 116#£No puede definir una derivada\r\nRemover la definición: \r\n
 117#£Hay un error en la definición: 
 118#£Se ignora, pero debe corregir el error de entrada para evitar el error de salida
@@ -539,10 +539,10 @@
 538#£Seleccione las expresiones que desea diferenciar o coloque el cursor en la expresión.
 539#£Función de maletero
 540#£Encuentra la función de raíz para las expresiones seleccionadas (integrales indefinidas).
-541#£Alfa de tungsteno
-542#£Abre el sitio web de Wolfram Alpha, con el término seleccionado como entrada.
-543#£Resolver ecuación
-544#£Resuelva la ecuación usando tungsteno alfa
+541#£
+542#£
+543#£
+544#£
 545#£Ver gráfico (Alt+P)
 546#£Muestra el gráfico de las funciones/ecuaciones/ecuaciones y puntos seleccionados. El gráfico se puede insertar posteriormente en el documento. Se admiten varios programas de gráficos. Seleccione su favorito en la configuración o seleccione expandiendo este botón
 547#£Insertar gráfico usando el programa GnuPlot

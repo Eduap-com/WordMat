@@ -113,7 +113,7 @@
 112#£Kan ikke koble til serveren
 113#£På dette punktet i dokumentet er følgende definert:
 114#£Det er ingen definisjoner på dette punktet i dokumentet.
-115#£Ligningsdefinisjoner innledes med en 'definer ligning:'-kommando Skriv inn definisjonen av den nye ligningen\r\nDefinisjonen kan brukes i resten av dokumentet, men ikke før.\r\n Hvis en 'slett def:'-kommando settes inn lenger ned i dokumentet, kan den ikke brukes deretter.\r\nFlere ligninger kan defineres ved å skille definisjonene med ; \r\nf.eg. lig1: c=3*d ; lig2: a=2*b
+115#£
 116#£Du kan ikke definere en avledet funksjon.\r\nFjern følgende definisjon: \r\n
 117#£Det er en feil i definisjonen:
 118#£Det blir ignorert. Men fiks det slik at du ikke får denne feilen med hver beregning.
@@ -533,16 +533,16 @@
 532#£Hvis mulig, sett utenfor parenteser ved å bruke vanlige regler som firkantede setninger
 533#£Multiplisere parenteser
 534#£Alle parenteser i det markerte uttrykket multipliseres.
-535#£Bord
+535#£Tabel
 536#£Sett inn Excel
 537#£Differensiatorer
 538#£Velg uttrykk for å differensiere, eller plasser markøren i uttrykket.
 539#£Trunk funksjon
 540#£Finner stamfunksjon for valgte uttrykk (ubestemte integraler).
-541#£Wolfram alfa
-542#£Åpner Wolfram Alpha-nettstedet, med det valgte begrepet som inndata.
-543#£Løs ligning
-544#£Løs ligning ved hjelp av wolframalfa
+541#£
+542#£
+543#£
+544#£
 545#£Vis graf (Alt+P)
 546#£Viser grafen for de valgte funksjonene/ligningene/ligningene og punktene. Grafen kan deretter settes inn i dokumentet. Ulike grafiske programmer støttes. Velg din favoritt i innstillingene eller velg ved å utvide denne knappen
 547#£Sett inn graf ved hjelp av programmet GnuPlot

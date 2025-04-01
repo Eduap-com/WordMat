@@ -6,23 +6,19 @@ Public tid As Double
 Private DeVarList As String
 Private TempCas As Integer
 
-Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Boolean 'Optional Unit As Boolean = False
+Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Boolean
     On Error GoTo Fejl
 
     RunFirst
     SetMaxProc
     
-    Dim op As Boolean
     If DebugWM Then
         UserFormDebug.Label_time.Caption = ""
-        tid = Timer
+        tid = timer
     End If
     
     SaveBackup
     
-    op = False
-    If Not SettingsRead Then ReadAllSettingsFromRegistry
-
     If omax Is Nothing Then
         SetMathAutoCorrect
         On Error Resume Next
@@ -34,32 +30,31 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
     
 #If Mac Then
 #Else
-    If Not MaxProc.IsMaximaStarted And CASengine = 0 Then
-        MaxProc.Units = 0
-        MaxProc.StartMaximaProcess
-        WaitForMaximaUntil
-        If MaxProc.ErrCode > 0 Then
-            MsgBox Sprog.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
-            GoTo Fejl
+    If Not MaxProc Is Nothing Then ' on Windows Maxima must be started first, if using api. Skip if using wsh
+        If Not MaxProc.IsMaximaStarted And CASengine = 0 Then
+            MaxProc.Units = 0
+            MaxProc.StartMaximaProcess
+            WaitForMaximaUntil
+            If MaxProc.ErrCode > 0 Then
+                MsgBox Sprog.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
+                GoTo Fejl
+            End If
         End If
-    End If
-    If MaximaUnits Then
-        If MaxProcUnit Is Nothing Then
-            If Not op Then
-                op = True
+        If MaximaUnits Then
+            If MaxProcUnit Is Nothing Then
                 DoEvents
+                On Error Resume Next
+                Set MaxProcUnit = GetMaxProc() 'CreateObject("MaximaProcessClass")
+                If Err.Number <> 0 Then
+                    MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
+                    GoTo slut
+                End If
+                On Error GoTo Fejl
+                MaxProcUnit.Units = 1
+                MaxProcUnit.OutUnits = omax.ConvertUnits(OutUnits)
+                MaxProcUnit.StartMaximaProcess
+                WaitForMaximaUnitUntil
             End If
-            On Error Resume Next
-            Set MaxProcUnit = GetMaxProc() 'CreateObject("MaximaProcessClass")
-            If Err.Number <> 0 Then
-                MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
-                GoTo slut
-            End If
-            On Error GoTo Fejl
-            MaxProcUnit.Units = 1
-            MaxProcUnit.OutUnits = omax.ConvertUnits(OutUnits)
-            MaxProcUnit.StartMaximaProcess
-            WaitForMaximaUnitUntil
         End If
     End If
 #End If
@@ -88,6 +83,7 @@ End Function
 #Else
 Function GetMaxProc() As Object
 '    If DllConnType = 0 Then
+        On Error Resume Next
         Set GetMaxProc = CreateObject("MaximaProcessClass")
 '    ElseIf DllConnType = 1 Then
 '        Set GetMaxProc = PGetMaxProc()
@@ -275,7 +271,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
                 omax.GoToEndOfSelectedMaths
                 If MaximaForklaring Then
                     Selection.TypeParagraph
-                    InsertForklaring Sprog.A(829) & variabel & Sprog.A(831), True
+                    InsertForklaring Sprog.A(829) & " " & variabel & " " & Sprog.A(831), True
                     Selection.TypeParagraph
                 End If
             End If
@@ -321,7 +317,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
         End If
 
         If MaximaForklaring And omax.MaximaOutput <> "" Then
-            InsertForklaring vbTab & Sprog.A(56) & variabel & Sprog.A(57)
+            InsertForklaring vbTab & Sprog.A(56) & " " & variabel & " " & Sprog.A(57)
         End If
 
         If omax.MaximaOutput = "universalset" Then
@@ -505,7 +501,7 @@ newcas:
                 omax.GoToEndOfSelectedMaths
                 If MaximaForklaring Then
                     Selection.TypeParagraph
-                    InsertForklaring Sprog.A(829) & variabel & Sprog.A(831), True
+                    InsertForklaring Sprog.A(829) & " " & variabel & " " & Sprog.A(831), True
                     Selection.TypeParagraph
                 End If
             End If
@@ -573,7 +569,7 @@ newcas:
 
         ' insert explanation if desired
         If MaximaForklaring And (IsSolved Or InStr(omax.KommentarOutput, "solving system of equations")) Then
-            InsertForklaring Sprog.A(829) & variabel & Sprog.A(831)
+            InsertForklaring Sprog.A(829) & " " & variabel & " " & Sprog.A(831)
         End If
 
         If InStr(omax.MaximaOutput, VBA.ChrW(8709)) Then    ' no solution
@@ -621,7 +617,7 @@ newcas:
         ElseIf False Then
 stophop:
             omax.Nsolve variabel, -15, 15, 15, 20, 30, 30, True
-            InsertForklaring Sprog.A(830) & variabel & Sprog.A(831), False
+            InsertForklaring Sprog.A(830) & " " & variabel & " " & Sprog.A(831), False
             omax.InsertMaximaOutput
             Selection.TypeParagraph
         Else    ' if there is a solution
@@ -933,7 +929,7 @@ Sub MaximaEliminate()
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
 
         If MaximaForklaring Then
-            ForklarTekst = Sprog.A(142) & variabel & Sprog.A(143)
+            ForklarTekst = Sprog.A(142) & " " & variabel & " " & Sprog.A(143)
             InsertForklaring ForklarTekst, False
             If omax.TempDefs <> "" Then
                 If Not MaximaSeparator Then
@@ -1137,7 +1133,7 @@ ghop:
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
 
-        InsertForklaring Sprog.A(830) & variabel & Sprog.A(57), False
+        InsertForklaring Sprog.A(830) & " " & variabel & " " & Sprog.A(57), False
 
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
@@ -1154,7 +1150,7 @@ ghop:
         End If
 
         If MaximaForklaring And IsSolved Then
-            InsertForklaring Sprog.A(830) & variabel & Sprog.A(57)
+            InsertForklaring Sprog.A(830) & " " & variabel & " " & Sprog.A(57)
         End If
 
         omax.InsertMaximaOutput
@@ -1254,7 +1250,7 @@ Sub beregn()
         On Error GoTo Fejl
    ' Application.ScreenUpdating = False
     Dim tid As Single
-    tid = Timer
+    tid = timer
 #If Mac Then
     Dim D As Document
     Set D = ActiveDocument
@@ -1269,6 +1265,8 @@ Sub beregn()
     '    Dim st As Double
     '    st = Timer
     scrollpos = ActiveWindow.VerticalPercentScrolled
+    
+    RunFirst
     
     If SettUseVBACAS And (MaximaExact = 2 And Not MaximaUnits And Not MaximaComplex) Then
         On Error Resume Next
@@ -1327,9 +1325,9 @@ Sub beregn()
     
     Dim s As String, t As String, fo As String
     
+    omax.Kommando = GetCmdAfterEqualSign(Trim(omax.Kommando))
     If CASengine > 0 Then
-        s = Trim(omax.Kommando)
-        s = GetCmdAfterEqualSign(s)
+        s = omax.Kommando
         If MaximaDecOutType = 3 Then
             s = "ScientificText(" & s & " , " & MaximaCifre & ")"
         ElseIf MaximaExact = 2 Then
@@ -1422,23 +1420,50 @@ slut:
 End Sub
 
 Function GetCmdAfterEqualSign(Kommando As String) As String
-    Dim posligmed As Integer, possumtegn As Integer, posca As Integer
-    Do    ' go back to the nearest equal
-        posligmed = InStr(Kommando, "=")
-        possumtegn = InStr(Kommando, VBA.ChrW(8721))
-        '    posprodtegn = InStr(Kommando, VBA.ChrW(8719))
-        If possumtegn = 0 Then possumtegn = InStr(Kommando, VBA.ChrW(8719))    ' produkt symbol
-        If possumtegn > 0 And possumtegn < posligmed Then    ' if there is a sum sign, there is an = sign as part of it
-            posligmed = 0
-        End If
-        posca = InStr(Kommando, VBA.ChrW(8776))
-        If posca > posligmed Then posligmed = posca
-        If posligmed > 0 Then
-            Kommando = right(Kommando, Len(Kommando) - posligmed)
-        End If
-    Loop While posligmed > 0
+' This function returns the expression to the right of the rightmost equal sign in the expression. If the equal sign is in a bracket, it is ignored
+    Dim posligmed As Integer, possumtegn As Integer, posca As Integer, i As Integer, c As String
+    
+    posligmed = InStrRev(Kommando, "=") ' go back to the nearest equal
+    If posligmed > 0 Then ' only cut the string if it has at least one equal sign
+        Dim BracketStack As New Collection
+        For i = Len(Kommando) To 1 Step -1 ' loop through all characters in the string
+            c = Mid$(Kommando, i, 1)
+            If (c = "=" Or c = ChrW(8776)) And BracketStack.Count = 0 Then ' we found the equal sign, now cut and stop
+                GetCmdAfterEqualSign = right(Kommando, Len(Kommando) - i)
+                Exit Function
+            ElseIf c = ")" Or c = "]" Or c = "}" Then
+                BracketStack.Add c
+            ElseIf c = "(" Then
+                If BracketStack.Count = 0 Then ' Bracketproblem stop and return full string
+                    GoTo TheEnd
+                ElseIf BracketStack.Item(BracketStack.Count) <> ")" Then ' brackets dont match. Stop and return full string
+                    GoTo TheEnd
+                Else ' pop the bracket from the stack
+                    BracketStack.Remove (BracketStack.Count)
+                End If
+            ElseIf c = "[" Then
+                If BracketStack.Count = 0 Then ' Bracketproblem stop and return full string
+                    GoTo TheEnd
+                ElseIf BracketStack.Item(BracketStack.Count) <> "]" Then ' brackets dont match. Stop and return full string
+                    GoTo TheEnd
+                Else ' pop the bracket from the stack
+                    BracketStack.Remove (BracketStack.Count)
+                End If
+            ElseIf c = "{" Then
+                If BracketStack.Count = 0 Then ' Bracketproblem stop and return full string
+                    GoTo TheEnd
+                ElseIf BracketStack.Item(BracketStack.Count) <> "}" Then ' brackets dont match. Stop and return full string
+                    GoTo TheEnd
+                Else ' pop the bracket from the stack
+                    BracketStack.Remove (BracketStack.Count)
+                End If
+            End If
+        Next
+    End If
+TheEnd:
     GetCmdAfterEqualSign = Kommando
 End Function
+
 Sub Omskriv()
     On Error GoTo Fejl
     Dim s As String
@@ -2382,7 +2407,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
             omax.GoToEndOfSelectedMaths
             If MaximaForklaring Then
                 Selection.TypeParagraph
-                InsertForklaring Sprog.A(829) & variabel & Sprog.A(831), True
+                InsertForklaring Sprog.A(829) & " " & variabel & " " & Sprog.A(831), True
                 Selection.TypeParagraph
             End If
         End If

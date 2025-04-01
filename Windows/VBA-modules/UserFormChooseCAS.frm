@@ -106,53 +106,53 @@ Sub SetCaptions()
     Label_text.Caption = Sprog.A(685)
 End Sub
 
-Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_cancel.BackColor = LBColorPress
 End Sub
-Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetAllInactive
     Label_cancel.BackColor = LBColorHover
 End Sub
-Private Sub Label_MaximaSym_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_MaximaSym_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_MaximaSym.BackColor = LBColorPress
 End Sub
-Private Sub Label_MaximaSym_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_MaximaSym_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetAllInactive
     Label_MaximaSym.BackColor = LBColorHover
 End Sub
-Private Sub Label_MaximaNum_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_MaximaNum_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetAllInactive
     Label_MaximaNum.BackColor = LBColorHover
 End Sub
-Private Sub Label_MaximaNum_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_MaximaNum_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_MaximaNum.BackColor = LBColorPress
 End Sub
-Private Sub Label_GeoGebraSym_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_GeoGebraSym_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetAllInactive
     Label_GeoGebraSym.BackColor = LBColorHover
 End Sub
-Private Sub Label_GeoGebraSym_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_GeoGebraSym_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_GeoGebraSym.BackColor = LBColorPress
 End Sub
-Private Sub Label_GeoGebraNum_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_GeoGebraNum_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetAllInactive
     Label_GeoGebraNum.BackColor = LBColorHover
 End Sub
-Private Sub Label_GeoGebraNum_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_GeoGebraNum_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_GeoGebraNum.BackColor = LBColorPress
 End Sub
-Private Sub Label_GeoGebraBrowser_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_GeoGebraBrowser_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetAllInactive
     Label_GeoGebraBrowser.BackColor = LBColorHover
 End Sub
-Private Sub Label_GeoGebraBrowser_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_GeoGebraBrowser_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_GeoGebraBrowser.BackColor = LBColorPress
 End Sub
-Private Sub Label_GeoGebraGrafisk_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_GeoGebraGrafisk_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetAllInactive
     Label_GeoGebraGrafisk.BackColor = LBColorHover
 End Sub
-Private Sub Label_GeoGebraGrafisk_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_GeoGebraGrafisk_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_GeoGebraGrafisk.BackColor = LBColorPress
 End Sub
 
@@ -160,7 +160,7 @@ Private Sub UserForm_Initialize()
     SetEscEvents Me.Controls
 End Sub
 
-Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetAllInactive
 End Sub
 

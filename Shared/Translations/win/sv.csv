@@ -113,7 +113,7 @@
 112#£Det går inte att ansluta till servern
 113#£I det här läget i dokumentet definieras följande:
 114#£Det finns inga definitioner i det här avsnittet i dokumentet.
-115#£Ekvationsdefinitioner föregås av kommandot 'definiera ekvation:' Ange definitionen av den nya ekvationen\r\nDefinitionen kan användas i resten av dokumentet, men inte tidigare.\r\n Om kommandot 'delete def:' infogas längre ner i dokumentet kan det inte användas därefter.\r\nFlera ekvationer kan definieras genom att separera definitionerna med ; \r\nf.eg. lig1: c=3*d ; LIG2: A=2*B
+115#£
 116#£Du kan inte definiera en härledd funktion.\r\nTa bort följande definition: \r\n
 117#£Det finns ett fel i definitionen:
 118#£Det ignoreras. Men fixa det så att du inte får det här felet med varje beräkning.
@@ -533,16 +533,16 @@
 532#£Om möjligt kan du placera utanför parenteser med hjälp av vanliga regler, till exempel fyrkantiga meningar
 533#£Multiplicera parenteser
 534#£Alla parenteser i det markerade uttrycket multipliceras.
-535#£Bord
+535#£Tabell
 536#£Infoga Excel
 537#£Differentiators
 538#£Välj uttryck som du vill särskilja eller placera markören i uttrycket.
 539#£Trunk-funktion
 540#£Hittar stamfunktion för valda uttryck (obestämda integraler).
-541#£Volfram Alfa
-542#£Öppnar Wolfram Alpha-webbplatsen med den valda termen som indata.
-543#£Lös ekvation
-544#£Lös ekvation med volfram alfa
+541#£
+542#£
+543#£
+544#£
 545#£Visa graf (Alt+P)
 546#£Visar grafen för de valda funktionerna/ekvationerna/ekvationerna och punkterna. Grafen kan sedan infogas i dokumentet. Olika grafprogram stöds. Välj din favorit i inställningarna eller välj genom att expandera den här knappen
 547#£Infoga graf med programmet GnuPlot

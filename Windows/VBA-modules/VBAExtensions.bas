@@ -52,8 +52,8 @@ End Function
 Sub Wait(pausetime As Variant)
 'pausetime in senconds
 Dim start
-    start = Timer    ' Set start time.
-    Do While Timer < start + pausetime
+    start = timer    ' Set start time.
+    Do While timer < start + pausetime
         DoEvents    ' Yield to other processes.
     Loop
 End Sub

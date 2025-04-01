@@ -35,7 +35,7 @@
 34#£Ausgeführt mit dem WordMat
 35#£Geben Sie die Reihenfolge der polynomialen Regression an (1-
 36#£(Die maximale Reihenfolge wird durch die Anzahl der Punkte bestimmt)
-37#£Bestellung
+37#£order
 38#£Polynomiale Regression des Grades
 39#£Benutzerdefinierte Regression
 40#£Funktion
@@ -113,7 +113,7 @@
 112#£Es kann keine Verbindung zum Server hergestellt werden
 113#£An dieser Stelle des Dokuments wird Folgendes definiert:
 114#£An dieser Stelle des Dokuments gibt es keine Definitionen.
-115#£Gleichungsdefinitionen wird ein 'define equation:'-Befehl vorangestellt Geben Sie die Definition der neuen Gleichung ein\r\nDie Definition kann im Rest des Dokuments verwendet werden, aber nicht vorher.\r\n Wenn ein 'delete def:'-Befehl weiter unten im Dokument eingefügt wird, kann er danach nicht mehr verwendet werden.\r\nMehrere Gleichungen können definiert werden, indem die Definitionen durch getrennt werden. \r\nf.eg. lig1: c=3*d ; lig2: a=2*b
+115#£
 116#£Sie können keine abgeleitete Funktion definieren.\r\nEntfernen Sie die folgende Definition: \r\n
 117#£Es gibt einen Fehler in der Definition:
 118#£Es wird ignoriert. Aber beheben Sie es, damit Sie diesen Fehler nicht bei jeder Berechnung erhalten.
@@ -533,16 +533,16 @@
 532#£Wenn möglich, setzen Sie äußere Klammern mit gängigen Regeln wie den quadratischen Sätzen
 533#£Multiplizieren von Klammern
 534#£Alle Klammern im markierten Ausdruck werden multipliziert.
-535#£Tisch
+535#£Tabelle
 536#£Excel einfügen
 537#£Unterscheidungsmerkmale
 538#£Wählen Sie die zu unterscheidenden Ausdrücke aus, oder platzieren Sie den Cursor im Ausdruck.
 539#£Trunk-Funktion
 540#£Sucht die Stammfunktion für ausgewählte Ausdrücke (unbestimmte Integrale).
-541#£Wolfram Alpha
-542#£Öffnet die Wolfram Alpha-Website mit dem ausgewählten Begriff als Eingabe.
-543#£Gleichung lösen
-544#£Gleichung mit Wolfram-Alpha lösen
+541#£
+542#£
+543#£
+544#£
 545#£Diagramm anzeigen (ALT+P)
 546#£Zeigt das Diagramm für die ausgewählten Funktionen/Gleichungen/Gleichungen und Punkte an. Das Diagramm kann anschließend in das Dokument eingefügt werden. Es werden verschiedene Grafikprogramme unterstützt. Wählen Sie Ihren Favoriten in den Einstellungen aus oder wählen Sie aus, indem Sie diese Schaltfläche erweitern
 547#£Einfügen eines Diagramms mit dem Programm GnuPlot

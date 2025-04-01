@@ -113,7 +113,7 @@
 112#£Nelze se pripojit k serveru
 113#£Na tomto míste dokumentu je definováno následující
 114#£Na tomto míste dokumentu nejsou zádné definice.
-115#£Definice rovnic jsou definovány pomocí 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+115#£
 116#£Odvozeninu nelze definovat\r\nOdstrante definici: \r\n
 117#£V definici je chyba:
 118#£Ignoruje se, ale opraví chybu vstupu, aby se zabránilo této chybe výstupu
@@ -533,16 +533,16 @@
 532#£Faktorizuje výraz
 533#£Expandovat
 534#£Vsechny závorky jsou rozsíreny
-535#£Stul
+535#£Tabulka
 536#£Vlozit Excel
 537#£Rozlisovat
 538#£Vyberte výraz, který chcete odlisit, nebo umístete kurzor do výrazu
 539#£Integrovat
 540#£Urcuje neurcitý integrál funkce
-541#£Wolfram Alpha
-542#£Otevre Wolfram Alpha s vybraným výrazem jako vstupem
-543#£Vyresit rovnici
-544#£Vyreste rovnici pomocí Wolffram Alpha
+541#£
+542#£
+543#£
+544#£
 545#£Vykreslovací graf (Alt+P)
 546#£Zobrazuje graf pro vybranou funkci/rovnici a body. Graf je pak mozné vlozit do dokumentu. Podporováno je nekolik grafických programu. V nastavení vyberte svou oblíbenou polozku.
 547#£Vykreslení pomocí GnuPlot

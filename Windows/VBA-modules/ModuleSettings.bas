@@ -678,7 +678,7 @@ Public Property Let DllConnType(xval As Integer)
     mDllConnType = xval
 End Property
 Public Property Get InstallLocation() As String
-    If mInstallLocation <> vbNullString Then
+    If mInstallLocation <> vbNullString And mInstallLocation <> "0" Then
         InstallLocation = mInstallLocation
     Else
         InstallLocation = GetRegSettingString("InstallLocation")
@@ -879,6 +879,16 @@ Public Property Let SettShortcutAltGr(xval As Integer)
     mSettShortcutAltGr = xval
 End Property
 
+Public Property Get ReadSettingsFromFile() As Integer ' 0= not set, 1=dont read settings from file, 2=read from appdata, 3=read from program files, 4= first try appdata then program files, 5= first try program files, then appdata
+    ReadSettingsFromFile = CInt(GetRegSetting("ReadSettingsFromFile"))
+    If ReadSettingsFromFile <= 0 Then ' If a computer is run as a shared pc from intune. You can set this global key to look for the registry file
+        ReadSettingsFromFile = val(RegKeyRead("HKEY_LOCAL_MACHINE\SOFTWARE\WORDMAT\Settings\ReadSettingsFromFile"))
+    End If
+End Property
+Public Property Let ReadSettingsFromFile(xval As Integer)
+    SetRegSetting "ReadSettingsFromFile", xval
+End Property
+
 '------------------- registry functions --------------------
 
 Public Function GetRegSetting(key As String) As Integer
@@ -917,3 +927,343 @@ Private Sub SetRegSettingString(key As String, ByVal val As String)
     RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_SZ"
 End Sub
 
+Sub SaveSettingsToData()
+    SaveSettingsToFile GetSettingsFilePath
+End Sub
+Function LoadSettingsFromData() As Boolean
+    LoadSettingsFromData = LoadSettingsFromFile(GetSettingsFilePath, True)
+End Function
+Sub LoadSettingsFromWMfolder()
+    LoadSettingsFromFile GetWordMatDir & "settings.txt", True
+End Sub
+
+Private Function GetSettingsFilePath() As String
+#If Mac Then
+    GetSettingsFilePath = DataFolder & "settings.txt"
+#Else
+    GetSettingsFilePath = Environ("AppData") & "\WordMat\"
+    If Dir(GetSettingsFilePath) = vbNullString Then
+        MkDir GetSettingsFilePath
+    End If
+    GetSettingsFilePath = GetSettingsFilePath & "settings.txt"
+#End If
+
+End Function
+Sub SaveSettingsToFile(Optional SettingsFileName As String)
+    Dim s As String
+    
+    s = "# WordMat Settings" & vbCrLf
+    
+    If SettingsFileName = vbNullString Then
+        SettingsFileName = SaveAsFilePath(GetDocumentsDir & "\settings.txt", "Text files,*.txt")
+    End If
+    
+#If Mac Then
+    s = s & "# Mac" & vbCrLf
+#Else
+    s = s & "# Win" & vbCrLf
+#End If
+    AddSetting s, "Version", AppVersion & PatchVersion
+    
+    AddSetting s, "Language", LanguageSetting
+    AddSetting s, "GraphApp", GraphApp
+    AddSetting s, "UseVBACAS", SettUseVBACAS
+    AddSetting s, "CASengine", CASengine
+    AddSetting s, "DllConnType", DllConnType
+    AddSetting s, "InstallLocation", InstallLocation
+    AddSetting s, "DecOutType", MaximaDecOutType
+    AddSetting s, "SigFig", MaximaCifre
+    AddSetting s, "Exact", MaximaExact
+    AddSetting s, "Radians", Radians
+    AddSetting s, "Complex", MaximaComplex
+    AddSetting s, "PolarOutput", PolarOutput
+    AddSetting s, "AllTrig", AllTrig
+    AddSetting s, "LogOutput", MaximaLogOutput
+    AddSetting s, "BigFloat", MaximaBigFloat
+    AddSetting s, "Units", MaximaUnits
+    AddSetting s, "OutUnits", OutUnits
+    AddSetting s, "Separator", MaximaSeparator
+    AddSetting s, "Index", MaximaIndex
+    AddSetting s, "ShowAssum", ShowAssum
+    AddSetting s, "dAsDiffChr", dAsDiffChr
+    AddSetting s, "LastUpdateCheck", LastUpdateCheck
+    AddSetting s, "GangeTegn", MaximaGangeTegn
+    
+    AddSetting s, "Forklaring", MaximaForklaring
+    AddSetting s, "MaximaCommand", MaximaKommando
+    AddSetting s, "EqNumPlacement", EqNumPlacement
+    AddSetting s, "EqNumType", EqNumType
+    AddSetting s, "EqAskRef", EqAskRef
+    AddSetting s, "ExcelEmbed", ExcelIndlejret
+    
+    AddSetting s, "SettShortcutAltB", SettShortcutAltB
+    AddSetting s, "SettShortcutAltD", SettShortcutAltD
+    AddSetting s, "SettShortcutAltE", SettShortcutAltE
+    AddSetting s, "SettShortcutAltF", SettShortcutAltF
+    AddSetting s, "SettShortcutAltG", SettShortcutAltG
+    AddSetting s, "SettShortcutAltGr", SettShortcutAltGr
+    AddSetting s, "SettShortcutAltJ", SettShortcutAltJ
+    AddSetting s, "SettShortcutAltL", SettShortcutAltL
+    AddSetting s, "SettShortcutAltM2", SettShortcutAltM2
+    AddSetting s, "SettShortcutAltN", SettShortcutAltN
+    AddSetting s, "SettShortcutAltO", SettShortcutAltO
+    AddSetting s, "SettShortcutAltP", SettShortcutAltP
+    AddSetting s, "SettShortcutAltQ", SettShortcutAltQ
+    AddSetting s, "SettShortcutAltR", SettShortcutAltR
+    AddSetting s, "SettShortcutAltS", SettShortcutAltS
+    AddSetting s, "SettShortcutAltT", SettShortcutAltT
+    
+    AddSetting s, "BackupType", BackupType
+    AddSetting s, "BackupNo", BackupNo
+    AddSetting s, "BackupMaxNo", BackupMaxNo
+    AddSetting s, "BackupTime", BackupTime
+    AddSetting s, "LatexStart", LatexStart
+    AddSetting s, "LatexSlut", LatexSlut
+    AddSetting s, "LatexUnits", LatexUnits
+    AddSetting s, "ConvertTexWithMaxima", ConvertTexWithMaxima
+    AddSetting s, "LatexSectionNumbering", LatexSectionNumbering
+    AddSetting s, "LatexDocumentclass", LatexDocumentclass
+    AddSetting s, "LatexFontsize", LatexFontsize
+    AddSetting s, "LatexWordMargins", LatexWordMargins
+    AddSetting s, "LatexTitlePage", LatexTitlePage
+    AddSetting s, "LatexToc", LatexTOC
+    
+    AddSetting s, "AntalBeregninger", Antalberegninger
+'    AddSetting s, "",
+    
+    WriteTextfileToString SettingsFileName, s
+End Sub
+Function LoadSettingsFromFile(FilePath As String, Optional Silent As Boolean = False) As Boolean
+    Dim s As String, Arr() As String, Arr2() As String, i As Integer
+    On Error GoTo Fejl
+    If FilePath = vbNullString Then
+        FilePath = GetFilePath
+    End If
+    
+    If Dir(FilePath) = vbNullString Then
+        If Not Silent Then
+            MsgBox2 "Could not load settingsfile", vbOKOnly, Sprog.Error
+        End If
+        Exit Function
+    End If
+    s = ReadTextfileToString(FilePath)
+    
+    Arr = Split(s, vbCrLf)
+    
+    For i = 0 To UBound(Arr)
+        If Left$(Trim(Arr(i)), 1) <> "#" Then
+            Arr2 = Split(Arr(i), "=")
+            If UBound(Arr2) > 0 Then
+                SetSetting Arr2(0), Arr2(1)
+            End If
+        End If
+    Next
+'    ReadAllSettingsFromRegistry
+    LoadSettingsFromFile = True
+    GoTo TheEnd
+Fejl:
+
+TheEnd:
+End Function
+Private Sub AddSetting(ByRef s As String, Sett As String, SettVal As String)
+    s = s & Sett & "=" & SettVal & vbCrLf
+End Sub
+Private Sub SetSetting(Sett As String, SettVal As String)
+'    SetRegSetting Sett, SettVal ' registry approach is slower 0,04s to load or set all in 2025
+    
+    If Sett = "Forklaring" Then
+        mforklaring = CBool(SettVal)
+    ElseIf Sett = "MaximaCommand" Then
+        mkommando = CBool(SettVal)
+    ElseIf Sett = "Exact" Then
+        mExact = CInt(SettVal)
+    ElseIf Sett = "Radians" Then
+        mradians = CBool(SettVal)
+    ElseIf Sett = "SigFig" Then
+        mcifre = CInt(SettVal)
+    ElseIf Sett = "Complex" Then
+        mComplex = CBool(SettVal)
+    ElseIf Sett = "SolveBoolOrSet" Then
+        mlmset = CBool(SettVal)
+    ElseIf Sett = "Units" Then
+        mUnits = CBool(SettVal)
+    ElseIf Sett = "LogOutput" Then
+        mlogout = CBool(SettVal)
+    ElseIf Sett = "ExcelEmbed" Then
+        mexcelembed = CBool(SettVal)
+    ElseIf Sett = "AllTrig" Then
+        malltrig = CBool(SettVal)
+    ElseIf Sett = "OutUnits" Then
+        moutunits = SettVal
+    ElseIf Sett = "BigFloat" Then
+        mbigfloat = SettVal
+    ElseIf Sett = "AntalBeregninger" Then
+        mantalb = CInt(SettVal)
+    ElseIf Sett = "Index" Then
+        mIndex = CBool(SettVal)
+    ElseIf Sett = "ShowAssum" Then
+        mshowassum = CBool(SettVal)
+    ElseIf Sett = "PolarOutput" Then
+        mpolaroutput = CBool(SettVal)
+    ElseIf Sett = "GraphApp" Then
+        mgraphapp = CInt(SettVal)
+#If Mac Then
+        If mgraphapp = 0 Then mgraphapp = 2 ' gnuplot is not available on mac
+#End If
+    ElseIf Sett = "Language" Then
+        mlanguage = CInt(SettVal)
+    ElseIf Sett = "dAsDiffChr" Then
+        mdasdiffchr = CBool(SettVal)
+    ElseIf Sett = "LatexStart" Then
+        mlatexstart = SettVal
+    ElseIf Sett = "LatexSlut" Then
+        mlatexslut = SettVal
+    ElseIf Sett = "LatexUnits" Then
+        mlatexunits = CBool(SettVal)
+    ElseIf Sett = "ConvertTexWithMaxima" Then
+        mConvertTexWithMaxima = CBool(SettVal)
+    ElseIf Sett = "EqNumPlacement" Then
+        meqnumplacement = CBool(SettVal)
+    ElseIf Sett = "EqNumType" Then
+        meqnumtype = CBool(SettVal)
+    ElseIf Sett = "EqAskRef" Then
+        maskref = CBool(SettVal)
+    ElseIf Sett = "BackupType" Then
+        mBackupType = CInt(SettVal)
+    ElseIf Sett = "BackupNo" Then
+        mbackupno = CInt(SettVal)
+    ElseIf Sett = "BackupMaxNo" Then
+        mbackupmaxno = CInt(SettVal)
+    ElseIf Sett = "BackupTime" Then
+        mbackuptime = CInt(SettVal)
+    ElseIf Sett = "LatexSectionNumbering" Then
+        mLatexSectionNumbering = CBool(SettVal)
+    ElseIf Sett = "LatexDocumentclass" Then
+        mLatexDocumentclass = CInt(SettVal)
+    ElseIf Sett = "LatexFontsize" Then
+        mLatexFontsize = SettVal
+    ElseIf Sett = "LatexWordMargins" Then
+        mLatexWordMargins = CBool(SettVal)
+    ElseIf Sett = "LatexTitlePage" Then
+        mLatexTitlePage = CInt(SettVal)
+    ElseIf Sett = "LatexToc" Then
+        mLatexTOC = CInt(SettVal)
+    ElseIf Sett = "CASengine" Then
+        mCASengine = CInt(SettVal)
+    ElseIf Sett = "LastUpdateCheck" Then
+        mLastUpdateCheck = SettVal
+    ElseIf Sett = "DllConnType" Then
+        mDllConnType = CInt(SettVal)
+    ElseIf Sett = "InstallLocation" Then
+        mInstallLocation = SettVal
+    ElseIf Sett = "UseVBACAS" Then
+        mUseVBACAS = SettVal
+    ElseIf Sett = "DecOutType" Then
+        mDecOutType = CInt(SettVal)
+    End If
+
+'    mSettShortcutAltM = CInt(GetRegSetting("SettShortcutAltM"))
+'    mSettShortcutAltM2 = CInt(GetRegSetting("SettShortcutAltM2"))
+'    mSettShortcutAltB = CInt(GetRegSetting("SettShortcutAltB"))
+'    mSettShortcutAltL = CInt(GetRegSetting("SettShortcutAltL"))
+'    mSettShortcutAltP = CInt(GetRegSetting("SettShortcutAltP"))
+'    mSettShortcutAltD = CInt(GetRegSetting("SettShortcutAltD"))
+'    mSettShortcutAltS = CInt(GetRegSetting("SettShortcutAltS"))
+'    mSettShortcutAltF = CInt(GetRegSetting("SettShortcutAltF"))
+'    mSettShortcutAltO = CInt(GetRegSetting("SettShortcutAltO"))
+'    mSettShortcutAltR = CInt(GetRegSetting("SettShortcutAltR"))
+'    mSettShortcutAltJ = CInt(GetRegSetting("SettShortcutAltJ"))
+'    mSettShortcutAltN = CInt(GetRegSetting("SettShortcutAltN"))
+'    mSettShortcutAltE = CInt(GetRegSetting("SettShortcutAltE"))
+'    mSettShortcutAltT = CInt(GetRegSetting("SettShortcutAltT"))
+'    mSettShortcutAltQ = CInt(GetRegSetting("SettShortcutAltQ"))
+'
+'    mseparator = CBool(GetRegSetting("Separator"))
+'    If mseparator Then
+'        mdecseparator = "."
+'        mlistseparator = ","
+'    Else
+'        mdecseparator = ","
+'        mlistseparator = ";"
+'    End If
+'
+'    setn = GetRegSetting("Gangetegn")
+'    If setn = 0 Then
+'        mgangetegn = VBA.ChrW(183)
+'    ElseIf setn = 1 Then
+'        mgangetegn = VBA.ChrW(215)
+'    Else
+'        mgangetegn = "*"
+'    End If
+'
+'    If mlatexstart = vbNullString Then
+'        LatexStart = "$"
+'    End If
+'    If mlatexslut = vbNullString Then
+'        LatexSlut = "$"
+'    End If
+
+
+
+End Sub
+
+Function GetFilePath(Optional Filter As String = "All Files,*.*") As String
+
+    Dim fd As FileDialog
+    Dim filterParts() As String
+    
+    Set fd = Application.FileDialog(msoFileDialogFilePicker)
+    
+    ' Set the dialog properties
+    With fd
+        .Title = "Select a Folder"
+        .AllowMultiSelect = False ' Only allow selecting one folder
+        
+        ' Apply filter (format: "Description,*.ext")
+        .Filters.Clear ' Clear existing filters
+        filterParts = Split(Filter, ",")
+        If UBound(filterParts) = 1 Then
+            .Filters.Add filterParts(0), filterParts(1)
+        End If
+        
+        If .Show = -1 Then ' User clicked OK
+            GetFilePath = .SelectedItems(1)
+        Else
+            GetFilePath = ""
+        End If
+    End With
+    
+    Set fd = Nothing
+End Function
+Function SaveAsFilePath(DefaultFileName As String, Optional Filter As String = "All Files,*.*") As String
+
+    Dim fd As FileDialog
+    Dim filterParts() As String
+    
+    Set fd = Application.FileDialog(msoFileDialogSaveAs)
+    
+    ' Set the dialog properties
+    With fd
+        .Title = "Save As"
+        .InitialFileName = DefaultFileName
+        .AllowMultiSelect = False ' Only allow selecting one folder
+        
+        .FilterIndex = 13
+        If .Show = -1 Then ' User clicked OK
+            SaveAsFilePath = .SelectedItems(1)
+        Else
+            SaveAsFilePath = ""
+        End If
+    End With
+    
+    Set fd = Nothing
+End Function
+
+Sub TestReadSett()
+Dim tid As Single
+
+    tid = timer
+'    ReadAllSettingsFromRegistry
+    LoadSettingsFromData
+    MsgBox timer - tid
+End Sub

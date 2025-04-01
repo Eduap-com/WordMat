@@ -8,7 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Public SprogNr As Integer
-Private SA(900) As String
+Private SA(999) As String
 '0=WordLanguage, 1=Dansk, 2=English, 3=Spanish
 
 Private Sub Class_Initialize()
@@ -93,13 +93,13 @@ Case 1062 ' latvian
     GetOfficeLanguage = 15
 Case 1063 ' lithuanian
     GetOfficeLanguage = 16
-Case 1032 ' Greek
-    GetOfficeLanguage = 17
 Case 1029 ' Check
-    GetOfficeLanguage = 18
+    GetOfficeLanguage = 17
+Case 1032 ' Greek
+    GetOfficeLanguage = 2 ' there are charset problems with greek letters
 Case 1039 ' Icelandic - not supported in Excel
     GetOfficeLanguage = 1
-Case Else ' 1033 is english
+Case Else
     GetOfficeLanguage = 2
 End Select
 
@@ -156,9 +156,9 @@ Public Sub LoadSprogArray()
     ElseIf SprogNr = 16 Then
         FilePath = FilePath & "languages" & slash & "lt.csv"
     ElseIf SprogNr = 17 Then
-        FilePath = FilePath & "languages" & slash & "el.csv"
-    ElseIf SprogNr = 18 Then
         FilePath = FilePath & "languages" & slash & "cs.csv"
+    ElseIf SprogNr = 18 Then
+        FilePath = FilePath & "languages" & slash & "el.csv"
     End If
     FileNo = FreeFile
 

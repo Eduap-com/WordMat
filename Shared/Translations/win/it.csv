@@ -113,7 +113,7 @@
 112#£Impossibile connettersi al server
 113#£In questo punto del documento viene definito quanto segue
 114#£Non ci sono definizioni in questo punto del documento.
-115#£Le definizioni delle equazioni sono definite da 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+115#£
 116#£Non è possibile definire una derivata\r\nRimuovere la definizione: \r\n
 117#£C'è un errore nella definizione:
 118#£Viene ignorato, ma correggere l'errore di input per evitare questo errore di output
@@ -539,10 +539,10 @@
 538#£Selezionare l'espressione per differenziarla o posizionare il cursore nell'espressione
 539#£Integrare
 540#£Determina l'integrale indefinito della funzione
-541#£Wolfram Alfa
-542#£Apre Wolfram Alpha con l'espressione selezionata come input
-543#£Risolvi equazione
-544#£Risolvi l'equazione usando Wolffram Alpha
+541#£
+542#£
+543#£
+544#£
 545#£Grafico grafico (Alt+P)
 546#£Mostra il grafico per le funzioni/equazioni e i punti selezionati. Il grafico può quindi essere inserito nel documento. Sono supportati diversi programmi grafici. Scegli il tuo preferito nelle impostazioni.
 547#£Tracciare con GnuPlot

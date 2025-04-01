@@ -769,9 +769,9 @@ v12:
 slut:
 End Sub
 
-Function AddLabel(Text As String, x As Double, y As Double, s As Shape) As Shape
+Function AddLabel(Text As String, X As Double, Y As Double, s As Shape) As Shape
     Dim lbl As Shape
-    Set lbl = s.CanvasItems.AddLabel(msoTextOrientationHorizontal, CSng(x), CSng(y), 8, 14)
+    Set lbl = s.CanvasItems.AddLabel(msoTextOrientationHorizontal, CSng(X), CSng(Y), 8, 14)
     lbl.TextFrame.AutoSize = msoTrue
     lbl.TextFrame.WordWrap = False
     lbl.TextFrame.TextRange.Text = Text
@@ -915,27 +915,27 @@ TextBox_captionsc.Top = 90
 Me.Repaint
 
 End Sub
-Static Function Log10(x)
-    Log10 = Log(x) / Log(10#)
+Static Function Log10(X)
+    Log10 = Log(X) / Log(10#)
 End Function
-Function Arcsin(x As Double)
+Function Arcsin(X As Double)
 'Arcsin(X) = Atn(X / Sqr(-X * X + 1))
-    If x = 1 Then
+    If X = 1 Then
         Arcsin = PI / 2
-    ElseIf x = -1 Then
+    ElseIf X = -1 Then
         Arcsin = 3 / 2 * PI
     Else
-        Arcsin = Atn(x / Sqr(-x * x + 1))
+        Arcsin = Atn(X / Sqr(-X * X + 1))
     End If
 End Function
-Function Arccos(x As Double)
+Function Arccos(X As Double)
 'Arccos(X) = Atn(-X / Sqr(-X * X + 1)) + 2 * Atn(1)
-    If x = 1 Then
+    If X = 1 Then
         Arccos = 0
-    ElseIf x = -1 Then
+    ElseIf X = -1 Then
         Arccos = PI
     Else
-        Arccos = Atn(-x / Sqr(-x * x + 1)) + 2 * Atn(1)
+        Arccos = Atn(-X / Sqr(-X * X + 1)) + 2 * Atn(1)
     End If
 End Function
 
@@ -1165,11 +1165,11 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
     SaveSettings
 End Sub
 
-Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_ok.BackColor = LBColorPress
 End Sub
 
-Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_ok.BackColor = LBColorHover
 End Sub
 Private Sub Label_cancel_Click()
@@ -1177,21 +1177,21 @@ Private Sub Label_cancel_Click()
     Application.ScreenUpdating = False
 End Sub
 
-Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_cancel.BackColor = LBColorPress
 End Sub
 
-Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_cancel.BackColor = LBColorHover
 End Sub
-Private Sub Label_nulstil_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_nulstil_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_nulstil.BackColor = LBColorPress
 End Sub
 
-Private Sub Label_nulstil_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_nulstil_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_nulstil.BackColor = LBColorHover
 End Sub
-Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
     Label_nulstil.BackColor = LBColorInactive

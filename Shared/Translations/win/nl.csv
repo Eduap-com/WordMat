@@ -113,7 +113,7 @@
 112#£Kan geen verbinding maken met de server
 113#£Op deze plaats in het document wordt het volgende gedefinieerd
 114#£Er zijn geen definities op deze plaats in het document.
-115#£Equation definitions worden gedefinieerd door 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+115#£
 116#£Je kunt geen afgeleide definiëren\r\nVerwijder de definitie: \r\n
 117#£Er zit een fout in de definitie:
 118#£Het wordt genegeerd, maar corrigeer de invoerfout om deze uitvoerfout te voorkomen
@@ -533,16 +533,16 @@
 532#£Factoriseert een expressie
 533#£Uitbreiden
 534#£Alle haakjes zijn uitgevouwen
-535#£Tafel
+535#£Tabel
 536#£Excel invoegen
 537#£Onderscheiden
 538#£Selecteer de expressie om onderscheid te maken of plaats de cursor in de expressie
 539#£Integreren
 540#£Bepaalt de onbepaalde integraal van de functie
-541#£Wolfram Alpha
-542#£Opent Wolfram Alpha met de geselecteerde expressie als invoer
-543#£Vergelijking oplossen
-544#£Los vergelijking op met Wolffram Alpha
+541#£
+542#£
+543#£
+544#£
 545#£Grafiek grafiek (Alt+P)
 546#£Toont de grafiek voor de geselecteerde functie(s)/vergelijking(en) en punten. De grafiek kan vervolgens in het document worden ingevoegd. Verschillende graafprogramma's worden ondersteund. Kies je favoriet onder instellingen.
 547#£Plot met behulp van GnuPlot

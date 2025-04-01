@@ -162,9 +162,9 @@ Function RegKeyRead(i_RegKey As String) As Variant
 #If Mac Then
     RegKeyRead = GetSetting("com.wordmat", "defaults", i_RegKey)
 #Else
+    On Error Resume Next
     If MaxProc Is Nothing Then
         Dim myWS As Object
-        On Error Resume Next
         Set myWS = CreateObject("WScript.Shell")
         RegKeyRead = myWS.RegRead(i_RegKey)
     Else
@@ -845,7 +845,7 @@ Sub CheckForUpdateSilent()
 End Sub
 Function GetHTML(URL As String) As String
     With CreateObject("MSXML2.XMLHTTP")
-        .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer ensures that it is not a cached version
+        .Open "GET", URL & "?cb=" & timer() * 100, False  ' timer ensures that it is not a cached version
         .Send
         GetHTML = .ResponseText
     End With
@@ -1460,7 +1460,7 @@ Public Function Local_Document_Path(ByRef Doc As Document, Optional bPathOnly As
 #If Mac Then
    Local_Document_Path = Doc.Path
 #Else
-Dim i As Long, x As Long
+Dim i As Long, X As Long
 Dim OneDrivePath As String
 Dim ShortName As String
 Dim testWbkPath As String
@@ -1475,7 +1475,7 @@ If InStr(1, Doc.FullName, "https://", vbTextCompare) > 0 Then
         ShortName = Replace(Doc.FullName, "/", "\")
 
         'Remove the first four backslashes
-        For x = 1 To 4
+        For X = 1 To 4
             ShortName = RemoveTopFolderFromPath(ShortName)
         Next
         'Choose the version of Onedrive
@@ -1748,7 +1748,7 @@ End Sub
 
 Sub TestSprog()
     Dim tid As Double, n As Integer
-    tid = Timer
+    tid = timer
     n = Sprog.SprogNr
-    MsgBox Timer - tid
+    MsgBox timer - tid
 End Sub

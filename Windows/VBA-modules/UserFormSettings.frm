@@ -145,8 +145,6 @@ On Error Resume Next
 
     If OptionButton_regdll.Value Then
         DllConnType = 0
-    ElseIf OptionButton_directdll.Value Then
-        DllConnType = 1
     ElseIf OptionButton_WSH.Value Then
         DllConnType = 2
     End If
@@ -282,26 +280,48 @@ Private Sub Label_checkpartnerskab_Click()
     End If
 End Sub
 
-Private Sub Label3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_checkpartnerskab_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_checkpartnerskab.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_checkpartnerskab_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_checkpartnerskab.BackColor = LBColorHover
+End Sub
+
+Private Sub Label_ExportSettingsFile_Click()
+    SaveSettingsToFile
+End Sub
+
+Private Sub Label_ExportSettingsFile_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ExportSettingsFile.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_ExportSettingsFile_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ExportSettingsFile.BackColor = LBColorHover
+End Sub
+
+Private Sub Label3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label8_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label8_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub
-Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
+    Label_ExportSettingsFile.BackColor = LBColorInactive
+    Label_checkpartnerskab.BackColor = LBColorInactive
 End Sub
 
 Private Sub OptionButton_casmaxima_Change()
@@ -468,10 +488,8 @@ Private Sub UserForm_Activate()
         OptionButton_casmaxima.Value = True
     End If
     
-    If DllConnType = 0 Then
+    If DllConnType <= 1 Then
         OptionButton_regdll.Value = True
-    ElseIf DllConnType = 1 Then
-        OptionButton_directdll.Value = True
     Else
         OptionButton_WSH.Value = True
     End If
@@ -529,8 +547,8 @@ Sub FillComboBoxLanguage()
     ComboBox_language.AddItem "eesti keel"
     ComboBox_language.AddItem "latviski"
     ComboBox_language.AddItem "lietuviu"
-    ComboBox_language.AddItem "ellinika"
-    ComboBox_language.AddItem "cestina"
+    ComboBox_language.AddItem "cestina" ' chec
+    ComboBox_language.AddItem "ellinika" ' greek
 End Sub
 Sub FillComboBoxBackupNo()
     ComboBox_backupno.Clear
@@ -708,64 +726,64 @@ Private Sub Label_TAB7_Click()
     SetTabsInactive
     Label_TAB7.BackColor = LBColorTABPress
 End Sub
-Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_cancel.BackColor = LBColorPress
 End Sub
-Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_cancel.BackColor = LBColorHover
 End Sub
-Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_ok_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_ok.BackColor = LBColorPress
 End Sub
-Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_ok_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_ok.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB1.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 0 Then Label_TAB1.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB2_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB2_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB2.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB2_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB2_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 1 Then Label_TAB2.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB3_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB3_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB3.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 2 Then Label_TAB3.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB4_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB4_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB4.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 3 Then Label_TAB4.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB5_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB5_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB5.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 4 Then Label_TAB5.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB6_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB6_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB6.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 5 Then Label_TAB6.BackColor = LBColorHover
 End Sub
-Private Sub Label_TAB7_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB7_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB7.BackColor = LBColorPress
 End Sub
-Private Sub Label_TAB7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_TAB7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
     If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorHover
 End Sub
@@ -774,7 +792,7 @@ Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
     MsgBox KeyCode
 End Sub
 
-Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
     SetTabsInactive

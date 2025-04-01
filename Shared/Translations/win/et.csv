@@ -113,7 +113,7 @@
 112#£Serveriga ei saa ühendust luua
 113#£Selles dokumendi kohas on määratletud järgmine
 114#£Selles kohas dokumendis pole definitsioone.
-115#£Võrrandi definitsioonid on defineeritud 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+115#£
 116#£Tuletist ei saa defineerida\r\nEemalda definitsioon: \r\n
 117#£Definitsioonis on viga:
 118#£Seda ignoreeritakse, kuid selle väljundvea vältimiseks parandage sisendviga
@@ -533,16 +533,16 @@
 532#£Faktoriseerib avaldise
 533#£Laiendada
 534#£Kõik sulud on laiendatud
-535#£Laud
+535#£Tabeli
 536#£Exceli lisamine
 537#£Eristada
 538#£Eristatava avaldise valimine või kursori avaldisse paigutamine
 539#£Integreerida
 540#£Määrab funktsiooni määramatu integraali
-541#£Wolfram Alfa
-542#£Avab Wolfram Alpha, mille sisendiks on valitud avaldis
-543#£Lahenda võrrand
-544#£Lahendage võrrand Wolffram Alpha abil
+541#£
+542#£
+543#£
+544#£
 545#£Graafiku graafik (Alt+P)
 546#£Näitab valitud funktsiooni(de)/võrrandi(te) ja punktide graafikut. Seejärel saab graafiku dokumenti sisestada. Toetatud on mitmed graafikaprogrammid. Valige seadete alt oma lemmik.
 547#£Joonistage GnuPloti abil

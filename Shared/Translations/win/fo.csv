@@ -113,7 +113,7 @@
 112#£Kann ikki fáa samband við ambætaran
 113#£Á hesum staðinum í skjalinum er eftirfarandi skilgreint:
 114#£Tað eru ongar frágreiðingar í hesi løtuni í skjalinum.
-115#£Undan líkningarskilgreiningum kemur ein 'define equation:' kommando Slá inn skilgreiningina av nýggju líkningini\r\nSkilgreiningin kann nýtast í restini av skjalinum, men ikki fyrr.\r\n Um ein 'delete def:' kommando er sett longri niðri í skjalinum, kann hon ikki nýtast aftaná.\r\nFleiri líkningar kunnu lýsast við at skilja skilgreiningarnar sundur við ; \r\nf.eg. lig1: c=3*d ; Lig2: A=2*B
+115#£
 116#£Tú kanst ikki lýsa eina avleidda funktion.\r\nStrika hesa skilgreiningina: \r\n
 117#£Tað er ein feilur í skilgreiningini:
 118#£Tað verður skúgvað til viks. Men rætta tað, so tú ikki fært hesa villuna við hvørjari útrokning.
@@ -539,10 +539,10 @@
 538#£Vel orðatiltæki at skilja ímillum, ella set/setið bendilin í orðalagið.
 539#£Trunk funktion
 540#£Finnur stamvirki fyri valdar orðingar (óákveðin integral).
-541#£Wolfram alfa
-542#£Opnar heimasíðuna Wolfram Alpha við valda orðinum sum innskot.
-543#£Loys líkningina
-544#£Loys líkningina við at brúka wolfram alfa
+541#£
+542#£
+543#£
+544#£
 545#£Skoða graf (Alt+P)
 546#£Vísir grafin fyri valdar funktiónir/líkningar/líkningar og punkt. Grafin kann síðani setast inn í skjalið. Ymisk grafforrit eru stuðlað. Vel tín yndis í stillingunum ella veljið við at víðka henda knøttin
 547#£Seta graf inn við forritinum GnuPlot

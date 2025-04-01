@@ -39,23 +39,7 @@ Fejl:
     MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
 slut:
 End Sub
-Sub DefinerLigning()
-    Dim Var As String
-    On Error GoTo Fejl
-    Var = InputBox(Sprog.A(115), Sprog.A(124), Sprog.A(125) & ":     Area:A=1/2*h*b")
-    '    var = Replace(var, "=", VBA.ChrW(&H2261))
-    
-    If Var <> "" Then
-        Selection.InsertAfter (Var)
-        Selection.OMaths.Add Range:=Selection.Range
-        Selection.OMaths(1).BuildUp
-        Selection.MoveRight unit:=wdCharacter, Count:=2
-    End If
-    GoTo slut
-Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
-slut:
-End Sub
+
 
 Sub MaximaSettings()
     On Error GoTo Fejl

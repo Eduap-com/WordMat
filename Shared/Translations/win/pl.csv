@@ -113,7 +113,7 @@
 112#£Nie mozna polaczyc sie z serwerem
 113#£W tym miejscu dokumentu okresla sie, co nastepuje
 114#£W tym miejscu w dokumencie nie ma zadnych definicji.
-115#£Definicje równan sa definiowane przez 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+115#£
 116#£Nie mozna zdefiniowac pochodnej\r\nUsun definicje: \r\n
 117#£W definicji wystapil blad:
 118#£Jest ignorowany, ale popraw blad wejsciowy, aby uniknac tego bledu wyjsciowego
@@ -533,16 +533,16 @@
 532#£Rozkladanie wyrazenia na czynniki pierwsze
 533#£Rozszerzac
 534#£Wszystkie nawiasy sa interpretowane
-535#£Stól
+535#£Tabela
 536#£Wstawianie Excela
 537#£Odrózniac
 538#£Zaznacz wyrazenie, aby je odróznic, lub umiesc kursor w wyrazeniu
 539#£Integrowac
 540#£Okresla calke nieoznaczona funkcji
-541#£Wolfram Alpha
-542#£Otwiera Wolfram Alpha z wybranym wyrazeniem jako danymi wejsciowymi
-543#£Rozwiaz równanie
-544#£Rozwiaz równanie za pomoca Wolffram Alpha
+541#£
+542#£
+543#£
+544#£
 545#£Wykres wykresu (Alt+P)
 546#£Pokazuje wykres dla wybranych funkcji/równan i punktów. Wykres mozna nastepnie wstawic do dokumentu. Obslugiwanych jest kilka programów wykresów. Wybierz swoja ulubiona w ustawieniach.
 547#£Wykres za pomoca GnuPlot

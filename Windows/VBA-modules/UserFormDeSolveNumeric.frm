@@ -84,7 +84,7 @@ End Sub
 
 Private Sub GeoGebraPlot()
     Dim s As String, i As Long, xl As String, yl As String, j As Long
-    Dim y As Double, Ymax As Double, Ymin As Double
+    Dim Y As Double, Ymax As Double, Ymin As Double
     Ymax = -10000000
     Ymin = 10000000
     Erase PointArr
@@ -107,14 +107,14 @@ Private Sub GeoGebraPlot()
         yl = ""
         If (j = 1 And CheckBox1.Value) Or (j = 2 And CheckBox2.Value) Or (j = 3 And CheckBox3.Value) Then
         For i = 0 To UBound(PointArr)
-            y = val(Trim(Replace(Replace(PointArr(i, j), ",", "."), ChrW(183), "*")))
-            If y > Ymax Then
-               Ymax = y
+            Y = val(Trim(Replace(Replace(PointArr(i, j), ",", "."), ChrW(183), "*")))
+            If Y > Ymax Then
+               Ymax = Y
             End If
-            If y < Ymin Then
-               Ymin = y
+            If Y < Ymin Then
+               Ymin = Y
             End If
-            yl = yl & Replace(y, ",", ".") & ","
+            yl = yl & Replace(Y, ",", ".") & ","
         Next
         yl = Left(yl, Len(yl) - 1)
         s = s & "LineGraph({" & xl & "},{" & yl & "});"
@@ -983,49 +983,49 @@ Sub ShowPreviewMac()
 #End If
 End Sub
 
-Private Sub Label_opdater_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_opdater_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_opdater.BackColor = LBColorPress
 End Sub
-Private Sub Label_opdater_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_opdater_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetLabelsInactive
     Label_opdater.BackColor = LBColorHover
 End Sub
-Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_cancel.BackColor = LBColorPress
 End Sub
-Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_cancel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetLabelsInactive
     Label_cancel.BackColor = LBColorHover
 End Sub
-Private Sub Label_insertgraph_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_insertgraph_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_insertgraph.BackColor = LBColorPress
 End Sub
-Private Sub Label_insertgraph_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_insertgraph_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetLabelsInactive
     Label_insertgraph.BackColor = LBColorHover
 End Sub
-Private Sub Label_tolist_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_tolist_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_tolist.BackColor = LBColorPress
 End Sub
-Private Sub Label_tolist_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_tolist_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetLabelsInactive
     Label_tolist.BackColor = LBColorHover
 End Sub
-Private Sub Label_toExcel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_toExcel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_toExcel.BackColor = LBColorPress
 End Sub
-Private Sub Label_toExcel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_toExcel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetLabelsInactive
     Label_toExcel.BackColor = LBColorHover
 End Sub
-Private Sub Label_inserttabel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_inserttabel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_inserttabel.BackColor = LBColorPress
 End Sub
-Private Sub Label_inserttabel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_inserttabel_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetLabelsInactive
     Label_inserttabel.BackColor = LBColorHover
 End Sub
-Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetLabelsInactive
 End Sub
 

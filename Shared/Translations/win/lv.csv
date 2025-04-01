@@ -113,7 +113,7 @@
 112#£Nevar izveidot savienojumu ar serveri
 113#£Saja dokumenta vieta ir definets:
 114#£Saja dokumenta nav definiciju.
-115#£Vienadojumu definicijas define ar 'definer ligning:' kommando Indtast definitionen på den nye ligning\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere ligninger ved at adskille definitionerne med " & ListSeparator\r\nf.eks. lig1: c=3*d " & ListSeparator & " lig2: a=2*b
+115#£
 116#£Nevar definet atvasinajumu\r\nNonemiet definiciju: \r\n
 117#£Definicija ir kluda:
 118#£Tas tiek ignorets, bet izlabojiet ievades kludu, lai izvairitos no sis izvades kludas
@@ -533,16 +533,16 @@
 532#£Faktorize izteiksmi
 533#£Izverst
 534#£Visas iekavas ir paplasinatas
-535#£Galds
+535#£lenteles
 536#£Excel ievietosana
 537#£Atskirtu
 538#£Atlasiet izteiksmi, lai atskirtu vai novietotu kursoru izteiksme
 539#£Integret
 540#£Nosaka funkcijas nenoteikto integrali
-541#£Volframs Alfa
-542#£Atver Wolfram Alpha ar atlasito izteiksmi ka ievadi
-543#£Atrisinat vienadojumu
-544#£Atrisiniet vienadojumu, izmantojot Wolffram Alpha
+541#£
+542#£
+543#£
+544#£
 545#£Diagrammas diagramma (Alt+P)
 546#£Parada atlasitas(-o) funkcijas(-u)/vienadojuma(-u) un punktu grafiku. Pec tam grafiku var ievietot dokumenta. Tiek atbalstitas vairakas grafiku programmas. Sadala Iestatijumi izvelieties savu izlasi.
 547#£Sizets, izmantojot GnuPlot

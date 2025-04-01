@@ -82,19 +82,19 @@ Private Sub UserForm_Activate()
     ReturnVal = 0
 End Sub
 
-Private Sub Label_Installer_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_Installer_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_Installer.BackColor = LBColorPress
 End Sub
 
-Private Sub Label_Installer_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_Installer_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_Installer.BackColor = LBColorHover
 End Sub
 
-Private Sub Label_webstart_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_webstart_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_webstart.BackColor = LBColorPress
 End Sub
 
-Private Sub Label_webstart_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub Label_webstart_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_webstart.BackColor = LBColorHover
 End Sub
 
@@ -102,7 +102,7 @@ Private Sub UserForm_Initialize()
     SetEscEvents Me.Controls
 End Sub
 
-Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_Installer.BackColor = LBColorInactive
     Label_webstart.BackColor = LBColorInactive
 End Sub
