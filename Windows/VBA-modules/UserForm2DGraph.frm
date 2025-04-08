@@ -2208,7 +2208,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = Sprog.A(444)
     Label29.Caption = Sprog.A(823)
     Label45.Caption = Sprog.A(837)
-    Label_ligninger.Caption = Sprog.A(832) & "  f(x)=..."
+    Label_Ligninger.Caption = Sprog.A(832) & "  f(x)=..."
     CommandButton_nulstil1.Caption = Sprog.Reset
     CommandButton_nulstil2.Caption = Sprog.Reset
     CommandButton_nulstil3.Caption = Sprog.Reset

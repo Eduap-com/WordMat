@@ -145,33 +145,57 @@ Sub InsertTabel()
         MsgBox Sprog.A(25)
     ElseIf antalp > 0 Then
         Selection.Collapse wdCollapseEnd
-                
+        
+        If Selection.OMaths.Count > 0 Then
+            Selection.OMaths(1).Range.Select
+            Selection.Collapse wdCollapseEnd
+            Selection.TypeParagraph
+        End If
         
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
         Oundo.StartCustomRecord
         
-        ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=antalp + 1, NumColumns:= _
-            2, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:= _
-            wdAutoFitFixed
-        With Selection.Tables(1)
+        If antalp <= 10 Then
+            ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=2, NumColumns:=antalp + 1, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed
+            With Selection.Tables(1)
 #If Mac Then
 #Else
-            .ApplyStyleHeadingRows = True
-            .ApplyStyleLastRow = False
-            .ApplyStyleFirstColumn = True
-            .ApplyStyleLastColumn = False
-            .ApplyStyleRowBands = True
-            .ApplyStyleColumnBands = False
+                .ApplyStyleHeadingRows = True
+                .ApplyStyleLastRow = False
+                .ApplyStyleFirstColumn = True
+                .ApplyStyleLastColumn = False
+                .ApplyStyleRowBands = True
+                .ApplyStyleColumnBands = False
 #End If
-            .Cell(1, 1).Range.Text = "x"
-            .Cell(1, 1).Range.Bold = True
-            .Cell(1, 2).Range.Text = "y"
-            .Cell(1, 2).Range.Bold = True
-            .Cell(2, 1).Range.Select
-            .Columns(1).Width = 65
-            .Columns(2).Width = 65
-        End With
+                .Cell(1, 1).Range.Text = "x"
+                .Cell(1, 1).Range.Bold = True
+                .Cell(2, 1).Range.Text = "y"
+                .Cell(2, 1).Range.Bold = True
+                .Cell(1, 2).Range.Select
+                .Columns(1).Width = 30
+            End With
+        Else
+            ActiveDocument.Tables.Add Range:=Selection.Range, NumRows:=antalp + 1, NumColumns:=2, DefaultTableBehavior:=wdWord9TableBehavior, AutoFitBehavior:=wdAutoFitFixed
+            With Selection.Tables(1)
+#If Mac Then
+#Else
+                .ApplyStyleHeadingRows = True
+                .ApplyStyleLastRow = False
+                .ApplyStyleFirstColumn = True
+                .ApplyStyleLastColumn = False
+                .ApplyStyleRowBands = True
+                .ApplyStyleColumnBands = False
+#End If
+                .Cell(1, 1).Range.Text = "x"
+                .Cell(1, 1).Range.Bold = True
+                .Cell(1, 2).Range.Text = "y"
+                .Cell(1, 2).Range.Bold = True
+                .Cell(2, 1).Range.Select
+                .Columns(1).Width = 65
+                .Columns(2).Width = 65
+            End With
+        End If
     End If
         
     Oundo.EndCustomRecord

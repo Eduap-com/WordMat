@@ -356,11 +356,13 @@ Private Sub UserForm_Activate()
     OptionButton_geogebra.Caption = "GeoGebra 5"
 #Else
     OptionButton_geogebra.Caption = "GeoGebra 5"
-'    OptionButton_geogebra.Caption = "GeoGebra 5 (6, App-versions ...)"
-'    OptionButton_casgeogebradirect.visible = False
+    '    OptionButton_geogebra.Caption = "GeoGebra 5 (6, App-versions ...)"
+    '    OptionButton_casgeogebradirect.visible = False
 #End If
-
-    ReadAllSettingsFromRegistry
+    
+    If ReadSettingsFromFile <= 1 Then
+        ReadAllSettingsFromRegistry
+    End If
     
     CheckBox_Insertforklaring.Value = MaximaForklaring
     CheckBox_Insertmaximacommand.Value = MaximaKommando
@@ -478,14 +480,26 @@ Private Sub UserForm_Activate()
         CheckBox_VBACAS.Value = False
     End If
 
-    If CASengineRegOnly = 0 Then
-        OptionButton_casmaxima.Value = True
-    ElseIf CASengineRegOnly = 1 Then
-        OptionButton_casgeogebra.Value = True
-    ElseIf CASengineRegOnly = 2 Then
-        OptionButton_casgeogebradirect.Value = True
+    If ReadSettingsFromFile <= 1 Then
+        If CASengineRegOnly = 0 Then
+            OptionButton_casmaxima.Value = True
+        ElseIf CASengineRegOnly = 1 Then
+            OptionButton_casgeogebra.Value = True
+        ElseIf CASengineRegOnly = 2 Then
+            OptionButton_casgeogebradirect.Value = True
+        Else
+            OptionButton_casmaxima.Value = True
+        End If
     Else
-        OptionButton_casmaxima.Value = True
+        If CASengine = 0 Then
+            OptionButton_casmaxima.Value = True
+        ElseIf CASengine = 1 Then
+            OptionButton_casgeogebra.Value = True
+        ElseIf CASengine = 2 Then
+            OptionButton_casgeogebradirect.Value = True
+        Else
+            OptionButton_casmaxima.Value = True
+        End If
     End If
     
     If DllConnType <= 1 Then

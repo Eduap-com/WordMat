@@ -110,8 +110,8 @@ Public Function A(i As Long) As String
     A = SA(i)
 End Function
 Public Sub LoadSprogArray()
-' method from ReadTextFile
-' also check ReadTextfileToString
+    ' method from ReadTextFile
+    ' also check ReadTextfileToString
     Dim FileNo As Integer
     Dim linje As String
     Dim Arr() As String
@@ -122,7 +122,7 @@ Public Sub LoadSprogArray()
 #Else
     slash = "\"
 #End If
-    FilePath = GetWordMatDir
+    FilePath = GetWordMatDir("languages")
     If SprogNr = 1 Then
         FilePath = FilePath & "languages" & slash & "da.csv"
     ElseIf SprogNr = 2 Then
@@ -160,19 +160,24 @@ Public Sub LoadSprogArray()
     ElseIf SprogNr = 18 Then
         FilePath = FilePath & "languages" & slash & "el.csv"
     End If
-    FileNo = FreeFile
-
-    Open FilePath For Input As FileNo
-    Do While Not EOF(FileNo) ' Loop until end of file.
-        Line Input #FileNo, linje
-        Arr = Split(linje, "#£")
-        If UBound(Arr) > 0 Then
-            If IsNumeric(Arr(0)) Then
-                SA(CInt(Arr(0))) = FormatText(Arr(1))
+    
+    If Dir(FilePath) = vbNullString Then
+        MsgBox2 "Language file could not be located", vbOKOnly Or vbCritical, Sprog.Error
+    Else
+        FileNo = FreeFile
+        Open FilePath For Input As FileNo
+        Do While Not EOF(FileNo) ' Loop until end of file.
+            Line Input #FileNo, linje
+            Arr = Split(linje, "#£")
+            If UBound(Arr) > 0 Then
+                If IsNumeric(Arr(0)) Then
+                    SA(CInt(Arr(0))) = FormatText(Arr(1))
+                End If
             End If
-        End If
-    Loop
-    Close FileNo
+        Loop
+        Close FileNo
+    End If
+
 End Sub
 
 Function FormatText(ByVal t As String) As String

@@ -1560,23 +1560,29 @@ End If
 
 End Function
 
-Function GetWordMatDir() As String
+Function GetWordMatDir(Optional SubDir As String) As String
+' if a subdir to WordMat folder is stated. That particular folder will be looked for
+' GetWordMatDir(
 #If Mac Then
     GetWordMatDir = "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/"
 #Else
+    If SubDir <> vbNullString Then
+        SubDir = Trim(SubDir)
+        If right(SubDir, 1) <> "\" Then SubDir = SubDir & "\"
+    End If
     If InstallLocation = "All" Then
         GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
-        If Dir(GetWordMatDir, vbDirectory) = vbNullString Then
+        If Dir(GetWordMatDir & SubDir, vbDirectory) = vbNullString Then
             GetWordMatDir = Environ("AppData") & "\WordMat\"
-            If Dir(GetWordMatDir, vbDirectory) = vbNullString Then
+            If Dir(GetWordMatDir & SubDir, vbDirectory) = vbNullString Then
                 MsgBox "WordMat folder could not be found", vbOKOnly, Sprog.Error
             End If
         End If
     Else
         GetWordMatDir = Environ("AppData") & "\WordMat\"
-        If Dir(GetWordMatDir, vbDirectory) = vbNullString Then
+        If Dir(GetWordMatDir & SubDir, vbDirectory) = vbNullString Then
             GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
-            If Dir(GetWordMatDir, vbDirectory) = vbNullString Then
+            If Dir(GetWordMatDir & SubDir, vbDirectory) = vbNullString Then
                 MsgBox "WordMat folder could not be found", vbOKOnly, Sprog.Error
             End If
         End If

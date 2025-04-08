@@ -933,16 +933,16 @@ End Sub
 Function LoadSettingsFromData() As Boolean
     LoadSettingsFromData = LoadSettingsFromFile(GetSettingsFilePath, True)
 End Function
-Sub LoadSettingsFromWMfolder()
-    LoadSettingsFromFile GetWordMatDir & "settings.txt", True
-End Sub
+Function LoadSettingsFromWMfolder() As Boolean
+    LoadSettingsFromWMfolder = LoadSettingsFromFile(GetWordMatDir & "settings.txt", True)
+End Function
 
 Private Function GetSettingsFilePath() As String
 #If Mac Then
     GetSettingsFilePath = DataFolder & "settings.txt"
 #Else
     GetSettingsFilePath = Environ("AppData") & "\WordMat\"
-    If Dir(GetSettingsFilePath) = vbNullString Then
+    If Dir(GetSettingsFilePath, vbDirectory) = vbNullString Then
         MkDir GetSettingsFilePath
     End If
     GetSettingsFilePath = GetSettingsFilePath & "settings.txt"
@@ -1157,7 +1157,7 @@ Private Sub SetSetting(Sett As String, SettVal As String)
     ElseIf Sett = "InstallLocation" Then
         mInstallLocation = SettVal
     ElseIf Sett = "UseVBACAS" Then
-        mUseVBACAS = SettVal
+        SettUseVBACAS = SettVal ' mUseVBACAS
     ElseIf Sett = "DecOutType" Then
         mDecOutType = CInt(SettVal)
     End If

@@ -23,6 +23,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
         SetMathAutoCorrect
         On Error Resume Next
         Application.Run macroname:="Popstart"
+        Err.Clear
         On Error GoTo Fejl
         DoEvents
         Set omax = New CMaxima
@@ -30,7 +31,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
     
 #If Mac Then
 #Else
-    If Not MaxProc Is Nothing Then ' on Windows Maxima must be started first, if using api. Skip if using wsh
+    If Not MaxProc Is Nothing And DllConnType <= 1 Then ' on Windows Maxima must be started first, if using api. Skip if using wsh
         If Not MaxProc.IsMaximaStarted And CASengine = 0 Then
             MaxProc.Units = 0
             MaxProc.StartMaximaProcess

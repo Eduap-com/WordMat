@@ -20,19 +20,21 @@ Sub RunFirst()
     Set oAppClass.oApp = Word.Application
     CreateMutex 0&, 0&, "WordMatMutex"
 #End If
-    Dim RSF As Integer
+    Dim RSF As Integer, SettingsLoadedOK As Boolean
     RSF = ReadSettingsFromFile
     If RSF > 0 Then
         If RSF = 2 Then
-            LoadSettingsFromData
+            SettingsLoadedOK = LoadSettingsFromData
         ElseIf RSF = 3 Then
-            LoadSettingsFromWMfolder
+            SettingsLoadedOK = LoadSettingsFromWMfolder
         End If
     End If
-
-    SetAllDefaultRegistrySettings ' if new user
-
-    ReadAllSettingsFromRegistry
+    
+    If Not SettingsLoadedOK Then
+        SetAllDefaultRegistrySettings ' if new user
+        ReadAllSettingsFromRegistry
+    End If
+    
     AntalB = Antalberegninger
 
     If AppVersion <> RegAppVersion Then ' if this is the first time WordMat is started after an update, then here you can set the settings that need to be changed
@@ -66,6 +68,8 @@ End Sub
 Sub SetMaxProc()
 #If Mac Then
 #Else
+    If DllConnType > 1 Then Exit Sub ' not when using wsh
+    
     If MaxProc Is Nothing Then
 '        On Error Resume Next
         Err.Clear
