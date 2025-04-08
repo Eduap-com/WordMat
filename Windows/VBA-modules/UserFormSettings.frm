@@ -150,7 +150,6 @@ On Error Resume Next
     End If
     
     LanguageSetting = ComboBox_language.ListIndex
-    Sprog.LoadSprogArray
     
     MaximaForklaring = CheckBox_Insertforklaring.Value
     MaximaKommando = CheckBox_Insertmaximacommand.Value
@@ -347,10 +346,6 @@ Private Sub UserForm_Activate()
 #If Mac Then
     OptionButton_graph.visible = False
     OptionButton_gnuplot.visible = False
-    CommandButton_nulstilfigurer.visible = False
-    CommandButton_nulstilfysik.visible = False
-    CommandButton_nulstilkemiformler.visible = False
-    CommandButton_nulstilmatformler.visible = False
     OptionButton_casgeogebradirect.visible = True
     Frame_conntype.visible = False
     OptionButton_geogebra.Caption = "GeoGebra 5"

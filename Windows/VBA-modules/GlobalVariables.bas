@@ -19,12 +19,11 @@ Public Const PI As Double = 3.14159265358979
     Public Const VbCrLfMac = vbCrLf
 #End If
 
-'Public XLapp As Excel.Application
-Public XLapp As Object
+Public Sprog As New CSprog
 
-'Public MaxProc As MaximaProcessClass
+Public XLapp As Object ' XLapp As Excel.Application
+
 #If Mac Then
-Public MaxProc As MaximaProcess
 #Else
 Public MaxProc As Object
 Public MaxProcUnit As Object
@@ -70,7 +69,6 @@ Public ExcelVBAWarning As Integer
 Public colindex As Integer
 
 Public PicOpen As Boolean ' marks a graphimage is open, It must then be overwritten
-Public Sprog As New CSprog
 
 Public latexfil As New CLaTex
 

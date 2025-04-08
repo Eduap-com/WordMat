@@ -211,7 +211,6 @@ End Sub
 
 Function RegKeyDelete(i_RegKey As String) As Boolean
 #If Mac Then
-    If MaxProc Is Nothing Then PrepareMaxima False
     DeleteSetting "com.wordmat", "defaults", i_RegKey
 #Else
     If MaxProc Is Nothing Then

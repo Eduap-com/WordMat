@@ -125,12 +125,7 @@ Private Sub Class_Terminate()
 'Closes commandprompt
     On Error Resume Next
 End Sub
-Sub OpretMaximaProcess()
-' but only if does not already exist
-    If MaxProc Is Nothing Then
-        Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
-    End If
-End Sub
+
 Public Sub ResetMaxima()
     Dim kd As String
     

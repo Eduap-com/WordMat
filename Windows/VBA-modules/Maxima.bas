@@ -78,9 +78,6 @@ slut:
 End Function
 
 #If Mac Then
-Function GetMaxProc() As MaximaProcess
-        Set GetMaxProc = New MaximaProcess
-End Function
 #Else
 Function GetMaxProc() As Object
 '    If DllConnType = 0 Then
