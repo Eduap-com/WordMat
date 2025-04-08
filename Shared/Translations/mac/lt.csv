@@ -1,0 +1,903 @@
+0#£Pagalba "Maxima" komandoms
+1#£Iterpti sunumeruota lygti
+2#£Iterpti sunumeruota lygti nuorodai
+3#£Iterpti nuoroda i lygti
+4#£Zymele
+5#£Lygties tipo pavadinimas
+6#£Lygties numerio nustatymas
+7#£Nr. eq.
+8#£Iterpti lygties sekcijos nr.
+9#£Lygciu numeriu naujinimas
+10#£Esami lygciu pavadinimai
+11#£Noredami iterpti nuoroda i lygti veliau, pasirinkite "Iterpti nuoroda i lygti" is "WordMat" meniu, esancio skiltyje "Iterpti lygti"
+12#£Pavadinimas jau egzistuoja
+13#£Pavadinime negali buti tarpu
+14#£Lygties nuoroda
+15#£Vieta
+16#£Kaire puse
+17#£Desine puse
+18#£Numeravimas
+19#£Iterpdami paprasykite nuorodos pavadinimo
+20#£"WordMath" leidzia atlikti matematinius skaiciavimus programoje "Word". WordMath branduolys yra atvirojo kodo ir nemokamas\r\nWordMat taip pat idiegia sias programas: Maxima, GeoGebra, Math fonts.\r\nOptionalus komponentai: GeoGebra 5, Graph, WordMath+. Daugiau ziurekite skiltyje License\r\nWordMath sukure Mikael Sams¿e S¿rensen, Niborgo gimnazija, EDUAP 2009-2025.
+21#£Yra nauja WordMath versija, paruosta atsisiusti.\r\nNews: \r\n
+22#£Dabar busite nukreipti i atsisiuntimo puslapi
+23#£Nauja versija
+24#£Iveskite tasku, kuriuose norite atlikti regresija, skaiciu. Tada bus sukurta lentele, kurioje galesite sudeti savo taskus. Jei norite atlikti regresija, tiesiog pasirinkite lentele ir meniu pasirinkite norima regresija.
+25#£Nerekomenduojama daryti regresijos daugiau nei 200 tasku "Word" lenteleje. Naudokite "Excel", jei norite atlikti tiek tasku regresija
+26#£Ivyko klaida. Tikriausiai ivesties numeriuose yra klaida
+27#£Turite sukurti lentele su dviem stulpeliais. x reiksmes kairiajame stulpelyje ir y reiksmes desiniajame stulpelyje. Laiskai ignoruojami. Regresija atliekama pasirinktiems skaiciams. Jei nepasirinkta ne vieno, regresija atliekama su visais lenteles skaiciais
+28#£Regresijos negalima atlikti tuose taskuose
+29#£Tiesine regresija, kuria atlieka WordMat: $Tab
+30#£Eksponentine regresija, kuria atlieka WordMat: $Tab
+31#£Galios regresija, kuria atlieka WordMat: $Tab
+32#£Tuose taskuose galios regresijos atlikti negalima. Visi skaiciai turi buti teigiami (o ne nulis).
+33#£Vartotojo apibrezta regresija su funkcija
+34#£atliko WordMath
+35#£Nurodykite polinomines regresijos tvarka (1-
+36#£(Maksimali tvarka nustatoma pagal tasku skaiciu)
+37#£isakymas
+38#£Polinomine laipsnio regresija
+39#£Vartotojo apibrezta regresija
+40#£Funkcija
+41#£Desimtaines trupmenos
+42#£Pradeti spejima (pvz.: a=2 , c=10)
+43#£Tikslumas nustatytas labai aukstai. Skaiciavimo laikas gali buti labai ilgas arba sukelti klaida. Jei tai nepadeda, isbandykite zemesni nustatyma.
+44#£Tikslumas nustatytas gana didelis. Skaiciavimo laikas gali buti gana ilgas arba sukelti klaida. Jei tai nepadeda, isbandykite zemesni nustatyma.
+45#£Tikslumas negali buti neigiamas. Teigiamo sveikojo skaiciaus pasirinkimas
+46#£Tikslumas negalioja. Pasirinkite teigiama sveikaji skaiciu.
+47#£Perkelkite zymekli i lygti
+48#£Neimanoma apskaiciuoti apibrezimu
+49#£Israiska diferencijuojama pagal WordMat.
+50#£Israiska negalejo buti skirtinga
+51#£Valstybes kintamasis
+52#£Antiderybini randa WordMat
+53#£Israiska negalejo buti integruota
+54#£Ivyko klaida. "WordMat" tikriausiai idiegta netinkamai. Pabandykite is naujo idiegti, galbut isjunge antivirusine programa. Jei jusu mokykloje yra partneryste, nustatymas "dll rysio metodas" skiltyje "Nustatymai / isplestine" gali isspresti problema
+55#£Klaida ivyko bandant paleisti "Maxima"
+56#£Nelygybe isspresta
+57#£pagal WordMat.
+58#£Visi skaiciai issprendzia sia nelygybe
+59#£Nelygybe neturejo sprendimu kintamuju $C srityje
+60#£Nelygybe neturejo sprendimu kintamuju $R srityje
+61#£Remiantis siomis prielaidomis ir (arba) apibreztimis:
+62#£Apibrezti
+63#£Nera interneto rysio
+64#£Spustelekite Gerai, kad pradetumete naujinima
+65#£"WordMat" spartieji klavisai
+66#£Word lygciu spartieji klavisai
+67#£Galite sukurti savo spausdinimo trumpus pjuvius programoje "Word" arba pakeisti esamus sparciuosius klavisus. Perkelkite zymekli i lygti. Atidarykite meniu Dizainas. Raskite grupe, vadinama funkcijomis. Spustelekite maza rodykle apatiniame desiniajame kampe. Pasirinkite varianta 'Matematiniai automatiniai irasai'
+68#£Formules
+69#£Apibrezimu naikinimas
+70#£Konstantos
+71#£Raskite vertybes internete
+72#£Konvertuokite lygtis i LaTex. (Spartusis klavisas alt + T konvertuoja viena lygti)
+73#£Kopijuoti i mainu sriti
+74#£Rodymo stilius
+75#£Nerasykite vienetu kursyvu
+76#£Naudokite "Maxima", kad konvertuotumete "LaTex"
+77#£Konvertuoti viska
+78#£Konvertuoti ir eiti i kita
+79#£Be
+80#£Po
+81#£Joks
+82#£Paprotys
+83#£Ideti koda
+84#£Likusioje sio dokumento dalyje nera lygciu, kurias butu galima konvertuoti.
+85#£Isspreskite diferencialiniu lygciu sistema skaitmeniniu budu
+86#£Diferencialines lygtys
+87#£Pradine verte
+88#£Zingsnio dydis
+89#£Sujunkite taskus
+90#£Lygciu rodymas
+91#£Iterpti sarasa
+92#£Iterpti lentele
+93#£Iterpti diagrama
+94#£Tikriausiai uz domeno ribu! \r\nadjust xmin/xmax
+95#£Ivyko klaida. Patikrinkite skaicius pagal xmin ir xmax
+96#£Nera partnerystes
+97#£Bandant iterpti diagrama ivyko klaida. Apibrezime gali buti sintakses klaida
+98#£Bandant iterpti "Excel" lapa ivyko klaida. Tai gali sukelti ankstesnis "Excel" gedimas. Uzdarykite visus atidarytus "Excel" lapus ir is naujo atidarykite "Excel" pries bandydami dar karta naudoti "WordMat".
+99#£Bandant konvertuoti komanda i "Maxima" sintakse ivyko klaida.
+100#£Bandant konvertuoti "Maxima" isvesti i "Word" sintakse ivyko klaida.
+101#£Sprendimas neaiskus. Galbut noresite pabandyti naudoti ir skaitinius metodus
+102#£Kadangi tai yra trigonometrine lygtis, yra be galo daug sprendimu. Tik vienas is ju yra nurodytas
+103#£Visi sprendimai nerasti.
+104#£Klaida: dalijimasis is nulio.
+105#£Sintakses klaida.
+106#£Sintakses klaida. Buvo naudojamas neteisingas simbolis. Gali buti trukstamas daugybos zenklas arba , . isduoti
+107#£Ispejimas: Jus paprasete isspresti lygciu sistema, bet nurodete maziau kintamuju nei lygtys. Issprendziamos tik pirmosios lygtys. Rankiniu budu patikrinkite paskutine (-ias) lygti (-tis).
+108#£"Maxima" pranese apie sia klaida:
+109#£"Maxima" klaida
+110#£"WordMat" nepavyko rasti aplanko "Programos failai"
+111#£Bandant atidaryti ivyko klaida:
+112#£Nepavyksta prisijungti prie serverio
+113#£Sioje dokumento vietoje apibreziama:
+114#£Sioje dokumento vietoje nera jokiu apibrezimu.
+115#£
+116#£Negalite apibrezti isvestines priemones\r\nPasalinkite apibrezima: \r\n
+117#£Apibrezime yra klaida:
+118#£Jo nepaisoma, taciau istaisykite ivesties klaida, kad isvengtumete sios isvesties klaidos
+119#£... poilsis pasalintas.
+120#£Jusu mokykla ar organizacija palaiko aktyvia partneryste. Dabar galite naudoti "WordMat+"
+121#£Atleisk. Jusu mokykla neturi aktyvios partnerystes.
+122#£Nurodykite naujos funkcijos apibrezima\r\nApibrezimas gali buti naudojamas likusioje dokumento dalyje, bet ne anksciau.\r\nJei toliau dokumente iterpsite komanda 'delete def:', ji nebus zinoma nuo to tasko.\r\nGalite apibrezti daugiau kintamuju vienu metu, atskirdami juos " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
+123#£Nauja funkcija
+124#£Nauja lygtis
+125#£apibrezti lygti
+126#£Apibrezti
+127#£Israiska yra labai ilga. Ar norite ji iterpti i "Word"?\r\nTai gali tureti itakos "Word" greiciui. Ilgos lygtys gali sustabdyti "Word" letuose kompiuteriuose. Apsvarstykite galimybe isspresti naudodami skaitinius metodus\r\nGalite pamatyti toliau pateikta isvesti:
+128#£Israiskos apskaiciuoti nepavyko.
+129#£Lygtis neturejo sprendiniu kintamojo $C srityje
+130#£Lygtis neturejo sprendiniu kintamojo $R srityje
+131#£"WordMat" nepavyko isspresti lygties
+132#£Visi skaiciai yra lygties sprendimai
+133#£Jus paprasete isspresti kintamojo, kuris jau yra apibreztas, lygti. Pries lygti iterpkite komanda "istrinti def:".
+134#£Lygciu sistema isspresta
+135#£pagal WordMat funkcija "isspresti lygti",
+136#£Partneryste registruota
+137#£Lygciu sistema neturejo sprendiniu kintamuju $C srityje
+138#£Lygciu sistema neturejo sprendiniu kintamuju $R srityje
+139#£Lygtyje turi buti lygybes zenklas
+140#£Partneryste neregistruota
+141#£Tai nera lygtis. Lygtis visada tures lygybes zenkla.
+142#£Is lygciu sistemos pasalinami sie kintamieji:
+143#£pagal WordMat 's 'Pasalinti kintamaji' funkcija, '
+144#£Tiesa
+145#£klaidinga
+146#£nezinomas
+147#£
+148#£Buvo rastas sprendimas. Sprendimu gali buti ir daugiau.
+149#£Pazymeti tik 1 israiska
+150#£Israiska supaprastina WordMat, naudojant metodus:
+151#£Automatinis supaprastinimas,
+152#£Trigonometrines tapatybes
+153#£Posakis negalejo buti supaprastintas
+154#£Israiska supaprastina "WordMat".
+155#£Israiska atspindi WordMat.
+156#£Si israiska negalejo buti faktorizuota
+157#£Israiska isplecia "WordMat".
+158#£Israiska negalejo buti isplesta
+159#£Noredami isspresti diferencialines lygtis, turite isjungti vienetus
+160#£Diferencialine lygtis negalejo buti isspresta
+161#£Mokyklos gali uzsiregistruoti partnerystei su "Eduap". Partneryste gauna prieiga prie palaikymo, "WordMath+" ir daug daugiau. Spustelekite, jei norite suzinoti daugiau
+162#£Binominis skirstinys
+163#£Israiska del tiesos isbando WordMat.
+164#£Rezultatas pagristas skaitiniu palyginimu
+165#£"WordMat" negalejo nustatyti, ar israiska buvo teisinga, ar klaidinga
+166#£Vienetai isjungti
+167#£Pasirinkite isvesties vienetus
+168#£Isvesties vienetai
+169#£Nesutampantys skliausteliai
+170#£Automatinis atsarginis kopijavimas?
+171#£Kiek atsarginiu failu saugoti?
+172#£Laikas tarp atsarginiu kopiju kurimo
+173#£"Word" nedaro automatinio atsarginiu kopiju kurimo, bet iraso duomenis, kuriuos galima naudoti norint atkurti prarasta faila\n\nWordMat gali sukurti visas atsargines kopijas, kai atliekate skaiciavimus ir irasote dokumenta keliomis versijomis. (Atsargines kopijos kuriamos daug greiciau, jei dokumento nera "OneDrive") . Atsargines kopijos failai saugomi aplanke: mano dokumentai / WordMat atsargine kopija
+174#£Atidarykite atsargines kopijos aplanka
+175#£Klausti
+176#£Visada
+177#£Niekada
+178#£Bandant sukurti atsargine kopija ivyko klaida
+179#£Ar norite suaktyvinti WordMats automatine atsargine kopija-system\n\n(Noredami gauti daugiau informacijos, eikite i nustatymus | Atsargine kopija)
+180#£Normalusis skirstinys
+181#£Zemas
+182#£Iprastas
+183#£Aukstas
+184#£Labai didelis
+185#£Super (letas)
+186#£Lygtis
+187#£Palaukti, palauk?
+188#£Maks
+189#£Tik eilutes
+190#£Rodyti asis
+191#£Kokybe
+192#£Poveikis sukimosi greiciui
+193#£Kai paveikslelis pasirodo, galite pakeisti ziurejimo kampa vilkdami paspausdami ir laikydami kairiji peles mygtuka. Desiniuoju peles mygtuku spustelekite meniu eilute, pasirinkite parinktis ir "kopijuoti i mainu sriti", kad nukopijuotumete vaizda. Uzdarykite langa, kad griztumete i "Word".
+194#£Revoliucijos tvirtumas
+195#£Iveskite tasku, kurie turi buti pazymeti raudonomis punktyrinemis linijomis diagramoje, koordinates. Pavyzdziai \r\neksempel:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)\r\n Taip pat galima spusteleti grafika, kad gautumete koordinate, jei naudojate iterpimo mygtuka.
+196#£Taip pat iterpiant punktyrines linijas, zymincias taskus grafike, bet su kita spalva nei taskai 1 stulpelyje. Jus negalite atlikti regresijos siuose taskuose. Galite sukurti visu rusiu figuras, sujungdami taskus.
+197#£Pries paspausdami braizykite, pasirinkite lentele su koordinaciu duomenimis, kad automatiskai uzpildytumete juos i si teksto laukeli. Vienas koordinaciu rinkinys pr. linija. Vienas koordinaciu rinkinys pr. linija. Koordinates turi buti atskirtos kableliu, kabliataskiu arba skirtuku. Koordinates galima nukopijuoti is "Excel". Pavyzdziai: \r\n1.2 , 3.4\r\n3,4 ; 4,8\r\n5,6$Tab & "7.8
+198#£Kintamieji turi buti x ir y
+199#£Iterpti apskritima
+200#£Iterpti eilute
+201#£Pazymeti taskai
+202#£Regresijos
+203#£Taip
+204#£Ne
+205#£Prisiminkite si pasirinkima
+206#£Kai ijungta "WordMats" atsargines kopijos kurimo funkcija, atlikus skaiciavima bus atlikta atsargine kopija. Atsargine kopija daroma tik kas 5 minutes. Pries perrasant padaroma 10 atsarginiu kopiju." & vbLf & vbLf > " Siuos nustatymus galite pakeisti nustatymuose | Atsargine kopija.
+207#£Si pasirinkima visada galite pakeisti nustatymuose | Atsargine kopija
+208#£Atsargine kopija
+209#£kampu suma yra didesne nei 180
+210#£Turite ivesti 3 puses / kampus. Taciau ne 3 kampai. Turi buti zinoma bent 1 puse.
+211#£Kampu suma nera 180
+212#£Ivedete per daug kampu / sonu
+213#£Turite ivesti TIKSLIAI 3 puses / kampus. Taciau ne 3 kampai. Turi buti zinoma bent 1 puse.
+214#£
+215#£Kampas
+216#£rastas naudojant kampu suma = 180 $Degree trikampyje
+217#£Sono ilgis
+218#£Rasta naudojant Pitagora
+219#£Sonu ilgis
+220#£rastas naudojant idegi
+221#£Rasta naudojant sinusa
+222#£rastas naudojant kosinusa
+223#£rastas naudojant kosinuso desni
+224#£rastas naudojant sinuso desni
+225#£Kvadratine lygtis isspresta
+226#£Si kvadratine lygtis turi du sprendimus:
+227#£Taciau kitas sprendimas yra neigiamas, o ilgis negali buti neigiamas.
+228#£Kadangi sprendimas del
+229#£turejo du sprendimus ir abu sprendimai buvo teigiami, tai reiskia, kad yra du galimi trikampiai. Dabar mes ketiname apskaiciuoti likusias puses pagal 2-aji tirpala, naudodami ta pati metoda.
+230#£Iterpti simboli
+231#£Graiku raides
+232#£Kiti simboliai
+233#£Iterpti
+234#£Simbolis
+235#£Lygties sprendimas naudojant grafinius ir skaitmeninius metodus
+236#£Pradinis spejimas
+237#£Intervalo metodas
+238#£imti
+239#£baigtis
+240#£Desines ir kaires puses braizas. \nLeft puse yra juoda. Desine puse yra zalia.
+241#£Grafinis sprendimas
+242#£Taip pat priartinkite du kartus spusteledami arba vilkdami laukeli
+243#£Rodyti diagrama atskirame lange
+244#£$X^2 paskirstymas
+245#£Kintamuju
+246#£Bandymo
+247#£Pasirinkite maks.
+248#£Arba iveskite rankiniu budu maks.
+249#£kintamieji, atskirti kableliu
+250#£Pasirinkite tiksliai
+251#£Arba iveskite rankiniu budu
+252#£Jus negalite isspresti lygties
+253#£ir apibrezkite ji tuo paciu metu
+254#£Jus bandote isspresti kintamaji, kuris yra vienetas. Tai greiciausiai sukels klaida. Apsvarstykite galimybe naudoti kita kintamojo pavadinima arba isjungti vienetus.
+255#£zeme
+256#£Vanduo
+257#£varis
+258#£gelezis
+259#£Menulis
+260#£saule
+261#£Fizikos konstantos
+262#£Vienetu
+263#£Lenteles vertes - siluma
+264#£Lenteles vertes - branduoline fizika
+265#£Astronomija
+266#£Sviesos greitis vakuume
+267#£Plancks konstanta
+268#£Planko konstanta elektronu voltais
+269#£Gravitacine konstanta
+270#£Laisvas pagreicio kritimas zemes pavirsiuje
+271#£Elementarus mokestis
+272#£Avogadros numeris
+273#£Duju konstanta
+274#£Boltzmanns konstanta
+275#£Vakuuminis pralaidumas
+276#£Vakuumas
+277#£Coulombs pastovus
+278#£Stefano-Boltzmanno konstanta
+279#£atomines mases vienetas
+280#£atomines mases vienetas MeV
+281#£savitoji silumine galia
+282#£elektronu mase
+283#£kg
+284#£Protonu mase
+285#£neutronu mase
+286#£zemes mase
+287#£zemes vidutinis spindulys
+288#£Atstumas tarp zemes ir saules (astronominis vienetas)
+289#£Saules mase
+290#£Menulio mase
+291#£Menulio vidutinis spindulys
+292#£GeoGebra 5 neidiegta.
+293#£Mygtukas nuves jus i pagrindini puslapi, kuriame galesite idiegti "GeoGebra". "WordMat" sistemoje "Windows" palaiko "GeoGebra classic 5", "GeoGebra Calculator Suite", "GeoGebra Classic 6" ir dauguma kitu "GeoGebra" programu leidimu.
+294#£"GeoGebra Calculator Suite" jau idiegtas. Jis veikia narsykleje ir nereikalauja interneto. Pradeda greitai.
+295#£Idiekite "GeoGebra"
+296#£Paleiskite "GeoGebra Calculator Suite"
+297#£arba ribines salygos
+298#£Etikete
+299#£Iveskite teksta ir spustelekite diagrama, kad ja idetumete
+300#£Lygtyje yra klaida
+301#£Pirmiausia turite nustatyti ymin ir ymax - tada paspauskite atnaujinti
+302#£3D grafikai
+303#£Rodyti israiska
+304#£Skaidrus
+305#£Pavirsiu spalva
+306#£Iterpkite "Maxima" komanda i "Word"
+307#£Linijos ir pavirsiai
+308#£Tik eilutes
+309#£Tik pavirsiai
+310#£Linijos ir pavirsiai
+311#£Kintamieji turi buti x, y ir z
+312#£Iterpti sfera
+313#£Iterpti plokstuma
+314#£Naujas vektorius
+315#£Sintakse\n(startx , starty , startz)(dx , dy , dz)\nVienas vektorius pr. line\nExamples:\n(1,1,2)(1,2,3) \n brezia vektoriu (1,2,3) is tasko (1,1,2)\n\n(1,-2,3)\n brezia vektoriu (1,-2,3) is tasko (0,0,0)\n\npavyzdys su desimtainemis trupmenomis:\n(1,5 , 3 , 4,5)
+316#£Tasko dydis
+317#£Tasku ivedimo sintakse\n\n(1,2,1)\n(2.5,3.6,8.7)
+318#£Diagramos lange galite pasukti koordinaciu sistema paspausdami kairiji peles mygtuka vilkdami.\n\nJei objektas atrodo istemptas, galite pakeisti diagramos lango dydi, kad jis geriau tilptu.\n\nNoredami iterpti vaizda i "Word", desiniuoju peles mygtuku spustelekite meniu eilute, pasirinkite "parinktys" ir tada "kopijuoti i mainu sriti". Tada diagramos langas uzdaromas ir vaizda galima iterpti i "Word".\n\nPazymeti, kad diagramos langas turi buti uzdarytas, kad butu galima grizti i "Word".\n\nAukstesne vaizdo kokybe, letesni pasukimo greiti.
+319#£Taisykles
+320#£Parametrinis grafikas
+321#£Geltona/raudona/violetine
+322#£Melynas
+323#£Rudas
+324#£Pilka
+325#£Spartusis klavisas Alt + M iterpia nauja matematika
+326#£Spartusis klavisas AltGr + Enter apskaiciuoja
+327#£Spartusis klavisas Alt + E Issprendzia lygti
+328#£Spartusis klavisas Alt + S atidaro nustatymus
+329#£Spartusis klavisas Alt + R Iterpia ankstesni rezultata
+330#£Spartusis klavisas Alt + U Ijungia irenginio palaikyma
+331#£apatinis indeksas:
+332#£\lambda yra trumpinys is mazos graikiskos raides lambda
+333#£Spartusis klavisas Alt + P Nubraizo grafika
+334#£Galite irasyti formuliu dokumentu pakeitimus
+335#£"Excel" lapus galima atidaryti atskirai arba iterpti
+336#£Ranku zymejimas? Isbandykite WordMark www.eduap.com
+337#£Skaiciavimu su "WordMath" skaicius:
+338#£Dalyje apibrezimai galite apibrezti fizines konstantas ir lenteles reiksmes.
+339#£"Word" veikia greiciau juodrascio rodinyje - kai itraukiamos lygtys
+340#£Savo "Excel" diagramu aprasu iterpimas naudojant iterpimo teksto lauka
+341#£Spartusis klavisas Alt + N Perjungia automatini, tikslu, skaiciu
+342#£Funkcija su raidemis kaip konstanta gauna slankiklius GeoGebra
+343#£Produkcijos vienetai negali buti sudetiniai vienetai.  km/s neleidziama. Tada nurodykite: km,s
+344#£Jau turite naujausia
+345#£Pasirinkite lygties numeri
+346#£Kokiam skaiciui nustatyti sia lygti?\r\nBet kurios sios lygtys taip pat bus atnaujintos.
+347#£Binominis testas
+348#£Bus iterptas lygties sekcijos numeris. Paprastai antrasteje jis iterpiamas kaip skyriaus / skirsnio numeris. Bet jis taip pat gali buti idetas pasleptas. Ar norite parodyti numeri? (Atsakymas Ne, kad ji pasleptumete)
+349#£Reiksmingumo lygio ivedimas procentais
+350#£Reiksmingumo lygis
+351#£Lenteles matmenu ivedimas\r\nrows x stulpeliai
+352#£Ci kvadrato testas nepriklausomybei
+353#£$X^2 - nepakankamumo testas, atliktas naudojant WordMat
+354#£P reiksme
+355#£Naudojant reiksmingumo lygi
+356#£% 0 hipoteze gali buti atmesta. Taigi tarp siu dvieju kintamuju yra priklausomybe.
+357#£% 0 hipoteze negali buti atmesta. Taigi nera jokiu irodymu, patvirtinanciu priklausomybe tarp siu dvieju kintamuju.
+358#£Yra langeliu, kuriu reiksme mazesne nei 5 arba visu langeliu suma yra mazesne nei 50. Tada $X^2 pasiskirstymas siuo atveju yra blogas apytikslis, o rezultatas nepatikimas. Kai kuriais atvejais duomenys gali buti naudingi grupuojant skaicius skirtingai.
+359#£Chidistribution
+360#£Laisves laipsniai
+361#£Skaityti
+362#£"GeoGebra" atidarymas
+363#£Iveskite reiksme
+364#£Veliau galesite ji koreguoti
+365#£Apibrezkite konstanta
+366#£Diagrama neidiegta. Tai maza nemokama programa, kuria lengva idiegti. Ji galite gauti is www.padowan.dk
+367#£Veliau galesite ji koreguoti "Graph" dalyje vartotojo apibreztos funkcijos
+368#£Grafiku braizymui naudojant GeoGeoGebra ir Graph reikia, kad x butu nepriklausomas kintamasis. \r\nSios israiskos yra be x. Dabar galite nurodyti nauja kintamaji, kuri naudosite kaip x.
+369#£Nepriklausomas kintamasis
+370#£$X^2 nepriklausomumo testas
+371#£Atidarymo grafikas
+372#£Iterptas iterpimas
+373#£Idetojo objekto iterpimas gali siek tiek uztrukti. Padvigubinkite idetaji objekta, kad juos atidarytumete.
+374#£Ar norite braizyti
+375#£Iterpti
+376#£Nelygybes lygciu sistemos dar nepalaikomos. Isspreskite kaip lygti arba isspreskite grafiskai naudodami Graph arba GeoGebra.
+377#£Pasalinkite kintamuosius
+378#£su vertybemis
+379#£Iveskite startguess. Standartine spejimo verte yra 1
+380#£Kintamieji ir spejimas
+381#£Lygciu sistema isspresta
+382#£su "Start Guess"
+383#£Lygciu sistema negalejo buti isspresta
+384#£Ar nurodete teisinga kintamaji?
+385#£Sprendimo nerasta. Intervalo pradzios ir pabaigos taskas turi buti abiejose tirpalo pusese
+386#£Niutono metodas, taikomas su pradzios spejimu
+387#£Intervale taikomas intervalo metodas
+388#£Sprendimas nerastas
+389#£Nera sprendimo
+390#£Diferencialine lygti issprendzia WordMat funkcija "Solve differential equation"
+391#£su ribinemis salygomis
+392#£su starto salygomis
+393#£su starto salyga
+394#£Turite is naujo paleisti "Word". Jei to nepadarysite, "Word" suges.
+395#£Bandant iterpti formule ivyko klaida. Pabandykite dar karta kitoje vietoje.
+396#£Modeliavimas
+397#£Grupe
+398#£Laisves laipsniu nebuvimas\r\nstate n generelio israiskai.
+399#£Daznio pasiskirstymas su
+400#£Pastabas
+401#£Tiketasi
+402#£Bendras
+403#£P reiksme
+404#£Yra koreliacija
+405#£Koreliacijos nera
+406#£Visu langeliu suma yra mazesne nei 50. $X^2 pasiskirstymas tada yra prastas apytikslis ir rezultatas nepatikimas.
+407#£Q reiksme
+408#£Kritine Q reiksme
+409#£"MikTex" neidiegtas. Dabar busite nusiusti i atsisiuntimo puslapi. Po idiegimo kompiuteris turi buti paleistas is naujo. Pirma karta paleidus "MikTex" is "WordMat", bus idiegta paketu serija.
+410#£Si funkcija nepalaikoma "Mac"
+411#£Kiti
+412#£Nauja lygtis
+413#£Simboliai
+414#£CAS nustatymai
+415#£Figuras
+416#£Jus ivedete vektorine lygti, kuri is tikruju yra lygciu sistema. Iveskite mygtuka
+417#£kintamieji, kuriuos reikia isspresti, atskirti kableliu.
+418#£Turite ivesti
+419#£kintamieji, atskirti kableliu
+420#£Viena is lygciu nera apibrezta apskaitos barelio ploto ribose. Pabandykite isplesti sklypo plota
+421#£Israiskoje atsiranda vienas ar daugiau pliuso / minuso simboliu. Kaip interpretuoti?
+422#£Pliusas arba minusas
+423#£Ivestis nesuprantama. Iterpiamas pliusas.
+424#£Yra problema su skaitmeniniais zenklais
+425#£Sumos zymejimas neteisingas. Apatines ribos sintakse yra: i=1 (ar panasus)
+426#£Produkto zymejimas neteisingas. Apatines ribos sintakse yra: i=1 (ar panasus)
+427#£Yra sintakses problemu. Turite baigti integrala su dx (jei x yra kintamasis). Galbut jus naudojote d kitame kontekste. Tada naudokite diferenciala d (tipas: \dd)
+428#£Yra sintakses problemu. Dvigubas integralas turi baigtis dviem dx (priklausomai nuo kintamuju, kuriuos reikia integruoti). Galbut jus naudojote d kitame kontekste. Tada naudokite diferenciala d (tipas: \dd)
+429#£Jus negalite naudoti dvigubo integralo zenklo tam tikriems integralams. Naudokite du integruotus zenklus
+430#£Klaida! Yra sintakses problemu. Diferenciacijos zymejimas nera teisingas.
+431#£neapibrezta
+432#£neapibreztas, bet ribotas
+433#£Neapibrezta
+434#£yra rezervuotas ir negali buti apibreztas. Apibrezimas praleidziamas.
+435#£Matematika
+436#£Phys
+437#£Chem
+438#£Procentas
+439#£Funkcijas
+440#£Geometrija
+441#£Problemoms.
+442#£vektorius
+443#£Parametrai
+444#£Parametrai
+445#£Sci
+446#£Apskaiciuoti
+447#£Isspresti
+448#£"Maxima" komanda
+449#£Isspreskite lygti (-is) naudodami skaitmenini metoda
+450#£Pasalinkite kintamuosius
+451#£Testas true/false
+452#£Isspreskite diferencialine lygti
+453#£Apibrezimu naikinimas
+454#£Apibrezti funkcija
+455#£Fiziniu konstantu apibrezimas
+456#£Sumazinti
+457#£Begalybes.
+458#£Atskirti
+459#£Integruoti
+460#£Braizymo
+461#£Rodyti diagrama
+462#£Krypties laukas
+463#£3D sklypas
+464#£Apsisukimo turis - 3D pasukimo grafikas apie x asi
+465#£Statistika
+466#£Nesugrupuotos pastabos
+467#£Sugrupuotos pastabos
+468#£Klijuoti diagrama
+469#£Histograma
+470#£Zingsniu diagrama
+471#£Kaupiamoji diagrama
+472#£Dezutes ir usu sklypas
+473#£Statistika/zondas.
+474#£Regresijos
+475#£Nepavyksta iterpti i lentele
+476#£Linijinis
+477#£Eksponentinio
+478#£Galia
+479#£Polinominis
+480#£Distribucijos
+481#£Binominis
+482#£Normalus distribas
+483#£$X^2-skirstinys
+484#£2D geometrija
+485#£3D geometrija
+486#£Atidaro matematikos formuliu knygele
+487#£Atidaro fizikos formuliu knygele
+488#£Atidaro chemijos formuliu knygele
+489#£Automatinis tikslus arba skaitinis rezultatas
+490#£"WordMat" automatiskai nustato, kad pateikia tikslu arba skaitini rezultata, arba abu.
+491#£Tikslus rezultatai
+492#£Visi rezultatai pateikti kaip tikslus rezultatas. Taciau kartais negalima isvengti skaitines aproksimacijos.
+493#£Skaitiniai rezultatai
+494#£Visi rezultatai pateikiami kaip desimtainiai skaiciai
+495#£Reiksmingi skaiciai
+496#£Nustato rezultatu (reiksmingu) skaiciu
+497#£Radianus
+498#£Kai depresija, visi trigonometriniai skaiciavimai yra radianais, kitaip laipsniais.
+499#£Mokslinis zymejimas
+500#£Kai depresija, visi rezultatai grazinami moksliniu zymejimu. Pavyzdys: 2,3$*10^4
+501#£Parametrai
+502#£Pakeiskite visu rusiu nustatymus.
+503#£Skaiciuoti (AltGr+Enter)
+504#£Apskaiciuoja pazymeta israiska arba atgal i artimiausia lygybes zenkla.
+505#£"Maxima" komanda
+506#£Siuncia komanda nefiltruota i "Maxima". Taciau rezultatas yra suformatuotas.
+507#£Issprendzia lygti (-tis) (Alt + E)
+508#£Issprendzia lygti arba lygciu sistema. Perkelkite zymekli i lygti. Pasirinkite daugiau lygciu, kad issprestumete lygciu sistema
+509#£Spreskite skaitlingai
+510#£Isspreskite lygti naudodami skaitmeninius metodus.
+511#£Pasalinkite kintamuosius
+512#£Pasalinkite viena ar daugiau kintamuju is lygciu sistemos.
+513#£Tikrinimas, ar teisinga
+514#£Tikrinimas, ar lygtis teisinga
+515#£Isspreskite diferencialine lygti
+516#£Isspreskite diferencialine lygti. Iveskite iveskite naudodami kita zymejima. Pavyzdziai: y'=y , y''=y arba f'(x)=f(x)
+517#£Isspreskite diferencialiniu lygciu sistema skaitmeniniu budu
+518#£Turi buti y'=?
+519#£Rodyti apibrezimus
+520#£Rodo sioje dokumento vietoje aktyvius apibrezimus
+521#£Apibrezimu naikinimas (Alt + F)
+522#£I dokumenta iterpia komanda "Istrinti def:". Visi apibrezimai, pateikti pries sia komanda, likusioje dokumento dalyje negalios.
+523#£Apibrezti (Alt + D)
+524#£Iterpia apibrezima, kuris galioja likusioje dokumento dalyje
+525#£Fiziniu konstantu apibrezimas
+526#£Pasirinkite is dazniausiai naudojamu konstantu ir apibrezkite jas dokumente, kad galetumete naudoti skaiciavimuose.
+527#£Sumazinti
+528#£Israiskos sumazinimas naudojant skirtingus metodus
+529#£Supaprastinti
+530#£Automatinis bandymas supaprastinti israiska. Naudokite sumazinima ir pasirinkite konkrecius metodus, jei tai nepavyksta.
+531#£Faktorizuokite
+532#£Faktorizuoja israiska
+533#£Isplesti
+534#£Visi skliaustai yra isplesti
+535#£tabula
+536#£"Excel" iterpimas
+537#£Atskirti
+538#£Pazymeti israiska, kad atskirtumete arba perkeltumete zymikli i israiska
+539#£Integruoti
+540#£Nustato neapibrezta funkcijos integrala
+541#£
+542#£
+543#£
+544#£
+545#£Braizymo grafikas (Alt + P)
+546#£Rodomas pasirinktos (-u) funkcijos (-u) / lygties (-ciu) ir tasku grafikas. Tada grafika galima iterpti i dokumenta. Palaikomos kelios grafiku programos. Nustatymuose pasirinkite savo megstamiausia.
+547#£Sklypas naudojant GnuPlot
+548#£Rodyti diagrama naudojant GnuPlot. GnuPlot palaiko daugybe funkciju ir sukuria graziai atrodanti grafika. Galite dukart spusteleti diagrama dokumente, kad ja vel redaguotumete.
+549#£Braizykite naudodami grafika
+550#£Iterpia idetaji diagramos objekta programoje "Word", kuri galima redaguoti dukart spustelejus diagrama. Apibrezimai, funkcijos, lygtys ir taskai perkeliami is "Word" i "Graph". Graph yra labai greita programa, turinti daug funkciju. Neigiama yra tai, kad "Mac" nepalaikoma, o grafikai rodomi maza raiska.
+551#£GeoGebra
+552#£Atidaro "GeoGebra" ir perkelia pasirinkta (-as) funkcija (-as) / lygti (-is) i "GeoGebra", taip pat visus apibrezimus. "GeoGebra" yra daugiausiai funkciju turinti grafiku programa. Tai taip pat sukuria aukstos kokybes grafika. Trukumai yra sie: Jis letai atidaromas, o grafikas nera automatiskai perkeliamas i "Word". Jis turi rankiniu budu nukopijuoti i "Word" naudodamas redagavimo meniu / "Kopijuoti grafikos rodini i mainu sriti". Iterpus grafika, jo dar karta redaguoti negalima.
+553#£"Excel" diagrama
+554#£Iterpia idetaji "Excel" lapa, skirta grafikoms ir taskams rodyti. Dukart spustelekite "Excelsheets", kad ji vel redaguotumete. Jis nera toks greitas ir turtingas funkciju kaip kai kurie kiti grafiku sprendimai. Privalumai: Palaiko "Excel" mokymasi ir yra skirtas lengvam tasku braizymui. Tai geras pasirinkimas bendradarbiavimui su kitais dalykais, pavyzdziui, mokslo dalykais.
+555#£Krypties laukas
+556#£Rodo krypties lauka ir brezia pirmosios eiles diferencialines lygties sprendimo kreives.
+557#£Iterpti GeoGebra faila
+558#£Iterpia tuscia "GeoGebra" faila, kuri galima redaguoti ir issaugoti is "Word". Failas rodomas kaip piktograma. Grafiko vaizdai turi buti nukopijuoti i dokumenta.
+559#£3D sklypas
+560#£Nubraizykite lygtis, taskus, vektorius ir parametrinius grafikus 3D formatu.
+561#£Revoliucijos tvirtumas
+562#£Rodo stipria funkcijos revoliucija. Funkcijos grafikas pasukamas 360 laipsniu aplink x asi, sukuriant 3D objekta.
+563#£Statistika
+564#£Atidaro "Excel" darbaknyge, skirta vienai kintamajai statistikai. Pazvelkite i lapus, kad pamatytumete visas funkcijas.
+565#£Sugrupuotos pastabos
+566#£"Excel" lapas sugrupuotiems duomenims. Apskaiciuoja daznius, vidurki, kvartilius ir kt. ir sukuria atitinkamas diagramas, pvz., dezutes ir usu diagrama
+567#£Sugrupuotos pastabos
+568#£"Excel" lapas sugrupuotiems duomenims. Apskaiciuoja daznius, vidurki ir kt. ir sukuria atitinkamas diagramas, pvz., histograma ir dezutes bei usu diagrama
+569#£Juostine diagrama
+570#£"Excel" lapas juostinems diagramoms kurti
+571#£Histograma
+572#£"Excel" lapas, skirtas kelioms histogramoms pavaizduoti vienoje diagramoje.
+573#£Laiptu korpuso schema
+574#£
+575#£Kaupiamojo daznio diagrama
+576#£
+577#£Dezutes ir sluoteles sklypas
+578#£"Excel" lapas, skirtas pavaizduoti kelis lauko ir linijos brezinius vienoje diagramoje.
+579#£Regresijos
+580#£Pirmiausia iterpkite lentele su taskais. Tada perkelkite zymekli i lentele ir pasirinkite regresijos tipa. Lentele gali buti vertikali arba horizontali. Jei yra tik du taskai, laikoma, kad jis yra vertikalus.
+581#£Tikrinant, ar yra naujinimas, ivyko klaida. Dabar busite nusiusti i svetaine, kur galesite patys pamatyti, ar yra naujas naujinimas. Dabartine versija yra:
+582#£Iterpia lentele su dviem stulpeliais, kad ivestu regresijos taskus.
+583#£Distribucijos
+584#£"Excel" lapas su platinimo grafikais. Diagramos yra dinamines ir gali nubraizyti visu parametru pasiskirstymus.
+585#£Binominis skirstinys
+586#£"Excel" lapas, kuriame vaizduojamas binominis pasiskirstymas. Lape pasirinkite p ir n
+587#£Normalusis skirstinys
+588#£"Excel" lapas, kuriame pavaizduotas normalusis skirstinys. Pasirinkite vidurki ir standartini nuokrypi lapuose
+589#£-isdalijimas
+590#£"Excel" lapas, kuriame pavaizduotas $X^2 paskirstymas. Ant lapo pasirinkite laisves laipsnius.
+591#£Bandymo
+592#£Statistiniai testai
+593#£Binominis testas
+594#£"Excel" lapas binominiam testui. Ta pati "Excel" darbaknyge kaip binominis paskirstymas, bet kitas lapas.
+595#£$X^2-testas
+596#£Atlieka $X^2-testa n x n lenteleje. Pasirinkite skaicius lenteleje.
+597#£Tinkamumo gerumas
+598#£Atlieka tinkamumo testa. (Chi kvadrato testas), kad suzinotumete, ar du paskirstymai yra vienodi.
+599#£Statistinis modeliavimas
+600#£"Excel" lapas su papildomomis funkcijomis, kurios gali nutildyti ir issaugoti rezultata. Pateikiamas naudojimo pavyzdys.
+601#£Nauja lygtis (Alt + M)
+602#£Iterpti matematikos ivesties lauka
+603#£Nauja sunumeruota lygtis (Alt + M Alt + M)
+604#£Iterpia nauja automatiskai sunumeruota lygti. Dukart bakstelekite Alt + M, kad iterptumete sunumeruota lygti. Tai turi buti suaktyvinta nustatymuose | sunumeruotos lygtys.
+605#£Nauja pavadinta sunumeruota lygtis, kuria galima nurodyti.
+606#£Iterpia nauja sunumeruota lygti, kuria galesite pavadinti, kad veliau butu lengviau nurodyti. Jei lygties numeris veliau pasikeicia, keiciasi ir nuoroda.
+607#£Iterpti nuoroda i lygti.
+608#£Iterpkite anksciau pavadintos lygties lygties numeri. Jei lygties numeris veliau pasikeicia, keiciasi ir nuoroda.
+609#£Lygties nustatymas i fiksuota skaiciu
+610#£Jau sunumeruota lygti galima nustatyti i konkretu skaiciu
+611#£Iterpia nauja lygties sekcija.
+612#£Persius pirmaji skaiciu lygciu numeracijoje. jei ankstesnis yra (2.5), tada kitas bus (3.1). Galima iterpti i antrastes kaip antrastes numeri arba iterpti paslepta.
+613#£Visu lygciu numeriu naujinimas dokumente
+614#£Paprastai reikia paleisti, kai lygtys buvo panaikintos. Vis delto iterpus naujas sunumeruotas lygtis bus priversta atnaujinti.
+615#£Simboliai
+616#£Ivairus manipuliavimo simboliais metodai
+617#£Pakeiskite daugybos zenklus
+618#£pakeiskite visus * daugybos zenklus $*
+619#£Konvertuokite lygtis i LaTex. (Spartusis klavisas alt + T konvertuoja viena lygti)
+620#£Konvertuokite kai kurias arba visas lygtis i LaTex dokumente. Taip pat gali naudoti MikTex, kad sugeneruotumete visa LaTex dokumenta.
+621#£Konvertuoti i LaTex (Alt + T)
+622#£Konvertuoja viena lygti i LaTex. Iterpti simbolius galima pasirinkti LaTex formoje. Alt + T spartusis klavisas taip pat konvertuoja viena eqaution.
+623#£Pakeisti, kad pradetumete dauginti
+624#£Pakeicia visus " & ChrW(183) & " daugybos zenklus i * daugybos zenklus.
+625#£Taskas kaip desimtainis separatorius
+626#£Pakeicia visus , (kablelius) matematikos ivesties laukeliuose i . (taskas) ir visi ;(kabliataskiai) su ,(kableliais)
+627#£Kablelis kaip desimtainis skyriklis
+628#£Pakeicia visus . (taskai) matematikos ivesties laukeliuose su ,(kableliais) ir visais ,(kableliais) su ;(kabliataskiais)
+629#£Matematines figuros, diagramos ir vaizdai
+630#£Atidaro dokumenta su iprastomis matematinemis figuromis, diagramomis ir kt. Tada juos galima nukopijuoti i jusu dokumenta ir manipuliuoti pagal jusu nora.
+631#£$ArrowRight lenteles sarasas
+632#£Sarasas $ArrowRight lentele
+633#£Stalas
+634#£"WordMat" gali manipuliuoti saraso duomenimis. Pavyzdys: galite lengvai prideti skaiciu prie visu saraso elementu. Taciau duomenys daznai yra "Word" lenteleje. Cia yra funkcijos, skirtos konvertuoti saraso til lenteles ir atvirksciai.
+635#£"Excel" lapo iterpimas
+636#£Iterpia tuscia idetaji "Excel" lapa. Dukart spustelekite, kad atidarytumete ir redaguotumete.
+637#£Konvertuoti i sarasa
+638#£Konvertuoti lentele i sarasa. Tada siuo sarasu galima manipuliuoti naudojant "WordMat". Pavyzdys: [1, 2, 3]+1 = [2, 3, 4] Se vadovas, jei norite gauti daugiau informacijos
+639#£Konvertuoti i lentele
+640#£Konvertuoja sarasa i lentele. Sarasas gali buti matematikos laukelyje arba parasytas dokumente ir pazymetas, pvz., (1 , 2), (3 , 4), (5 , 6)
+641#£Trikampio sprendejas
+642#£Iveskite 3 puses / kampus. Trikampio sprendejas apskaiciuoja likusias puses / kampus ir sukuria trikampio vaizda.
+643#£"Word" vadovas
+644#£Atidaro neautomatini kaip "Word" dokumenta
+645#£Ziniatinklio vadovas
+646#£Atidaromas internetinis ziniatinklio vadovas. Turi geresni narsyma ir vaizdo irasus nei "Word" vadovas, bet nebaigtas darbas.
+647#£"Maxima" vadovas
+648#£"Maxima" yra CAS programa, kuri atlieka dauguma matematiniu skaiciavimu "WordMat". "Maxima" turi daug integruotu funkciju, kurios nera is karto matomos is "WordMat" vartotojo sasajos, taciau gali buti vykdomos, jei zinote funkciju pavadinimus. Tai rodo "Maxima" pagalba, kurioje galite pamatyti visu "Maxima" funkciju dokumentacija.
+649#£Apie
+650#£Kas sukure "WordMat"?
+651#£Patikrinkite, ar yra naujinimu
+652#£Automatiskai tikrinkite, ar yra naujinimu.
+653#£Spartieji klavisai
+654#£Rodomas sparciuju klavisu, skirtu suaktyvinti "WordMat" komandas ir sparciuosius klavisus, skirtus ivesti matematika "Word" matematikos ivesties laukuose, sarasas.
+655#£LaTex sablonas
+656#£LaTex sablonas
+657#£Atidaro "Word" dokumenta, kurio stilius panasus i "LaTex" dokumenta, bet kuri taip pat lengva rasyti kaip "Word" dokumenta.
+658#£Precisionen yra labai aukstas. Skaiciavimo laikas gali buti labai ilgas arba nepavykti. Jei taip, bandykite dar karta naudodami zemesni nustatyma.
+659#£WordMat labai gerai konvertuoja i LaTex, taciau taip pat yra galimybe naudoti Maxima konvertuoti i LaTex.
+660#£Vienetas paprastai nera rasomas kursyvu kaip kintamieji. Su sia funkcija WordMat bando identifikuoti vienetus ir iterpti LaTex koda, kad butu galima rasyti vienetus iprastu sriftu.
+661#£Uzdaryti
+662#£Sugeneruoja tikra LaTex dokumenta naudodamas MikTex, kuris turi buti idiegtas. Naudokite tik paprastam dokumentui, nes palaikomi ne visi dokumento objektai.
+663#£Parodo, kaip interpretuojama LaTex isvestis
+664#£Generuoja "LaTex" koda ir atsidaro "TexWorks", kur galite atlikti koregavimus.
+665#£Trikampis
+666#£Zymejimas
+667#£Grafikas
+668#£Isplestine
+669#£Mokslinis zymejimas
+670#£Kompleksiniai skaiciai
+671#£Turite is naujo paleisti "Word", kad kalbos pakeitimas isigaliotu visur.
+672#£Negalima paimti reiksmiu zurnalo <= 0
+673#£Apskaiciuoti
+674#£As skaiciuoju
+675#£Sis metodas reikalauja intervalo, kai tirpalas yra intervale. Intervale turi buti tik vienas tirpalas. Pazvelkite i grafika, kad nustatytumete sprendimus.
+676#£Apie intervalo metoda
+677#£Niutono-Raphsono metodas reikalauja pradinio spejimo i sprendima. Sis metodas negarantuoja, kad bus rastas sprendimas, jei toks yra. Rastas tik 1 sprendimas. Pazvelkite i grafika, kad nustatytumete pradini spejima.
+678#£Apie Niutona-Raphsona
+679#£Turite issaugoti savo dokumenta, kad butu galima sukurti atsargine kopija!
+680#£Poliarinio zymejimo isvestis
+681#£Problemos su failu "normal.dotm" gali sukelti problemu del "WordMat" sparciuju klavisu. Problemas galima isspresti istrynus faila, nes naujas numatytasis failas automatiskai sugeneruojamas, kai "Word" paleidziama is naujo. Failo negalima panaikinti, kol programa Word atidaryta. Turite tai padaryti rankiniu budu.\r\n\r\n- Paspauskite OK, kad atidarytumete aplanka, kuriame yra Normal.dotm. \r\n- Irasykite savo darba ir uzdarykite "Word" \r\n- panaikinkite normal.dotm \r\n- atidarykite "Word", atidarykite ir uzdarykite "WordMat" parametrus
+682#£GeoGebra atliktas skaiciavimas
+683#£strele
+684#£"Safari" atidarymas
+685#£Problema neisspresta.\r\nAr norite isbandyti kita metoda ar CAS varikli?
+686#£CAS variklis
+687#£Reiksmingi skaiciai
+688#£Vienetu ijungimas / isjungimas
+689#£Jei vienetai ijungti, WordMath kan interpretuoja ir konvertuoja vienetus. SI mygtuke galite pakeisti isvesties vienetus. Neijunkite irenginiu, nebent jums to reikia. Tai gali tureti itakos WordMat elgesiui ir pasilieka daug kintamuju.
+690#£Isvesties vienetai
+691#£Nurodykite vienetus, i kuriuos norite konvertuoti. Pagal numatytuosius nustatymus isvesties vienetai yra SI vienetai.
+692#£SF
+693#£Vienetu
+694#£Ne. skaiciu
+695#£Apvalinimo
+696#£Pasirinkite, kaip skaiciai bus fomatuojami ir apvalinami. Toliau pateiktuose pavyzdziuose WordMat nustatyta i 3 paveikslus\r\n\r\nDecimals: 12,345\r\nReiksmingi skaiciai: 12,3\r\nSci. zymejimas: 1,23*10^1
+697#£Uzbaikite aikste
+698#£Taiko visa kvadrata visiems israiskos kintamiesiems
+699#£Neapibreztu neigiamu sveikuju skaiciu faktorialas
+700#£Ispejimas: Sistemoje daugiau lygciu nei kintamuju. Ar tai buvo tycia?
+701#£Nauja lygtis
+702#£Ankstesnis (-i) rezultatas (-ai)
+703#£Perjungti skaiciu / tikslu
+704#£Konvertuoti i lateksa
+705#£Latekso PDF
+706#£Laipsniu
+707#£Radianus
+708#£Kampinis vienetas
+709#£Rodyti tirpalo salygas (beta versija)
+710#£Tikslus
+711#£Skaiciu
+712#£Automatinis
+713#£Labai didelis tikslumas (beta)
+714#£Iterpti paaiskinima
+715#£Iterpti "Maxima" komanda
+716#£Skyriklius
+717#£Sarasas
+718#£Mult.zenklas
+719#£Taskas
+720#£Sprendimo tipas
+721#£Bulio logikos
+722#£Sprendimu rinkinys
+723#£Apatinis indeksas
+724#£Ar tik kintamojo pavadinimo teksto dalis
+725#£Is list/matrix indeksas
+726#£Standartine grafiku programa
+727#£"Excel" lapu idejimas
+728#£Isvesties vienetai
+729#£Valstybes isvesties vienetai, atskirti kableliais\npavyzdziais:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJei nieko nenurodyta, vienetai grazinami pagrindiniais SI vienetais arba SI isvestiniais vienetais be priesdelio.
+730#£Palaikomu vienetu pavyzdziai:\n(Daugiau zr. vadova)\n\nIlgis: cm , AU, ly, pc\nMass: u , G, mg\nFrequency: Hz , Bq\nEnergy: kWh , eV, aJ\nPressure: Bar , mmHg, atm, torr
+731#£Trigonometrines lygtys
+732#£Visi sprendimai
+733#£Tik 1 sprendimas
+734#£Automatiskai tikrinti, ar yra naujinimu
+735#£Pataisykite sparciuosius klavisus
+736#£Is naujo paleiskite "WordMat".
+737#£Ne. skaiciavimu
+738#£Spartieji klavisai pataisyti.\nJei jis vis tiek neveikia, istrinkite faila "normal.dotm" aplanke "~/Library/Group Containers/UBF8T346G9. "Office" / vartotojo turinys / sablonai" ir is naujo paleiskite "Word"
+739#£Spartieji klavisai pataisyti.\nJei jis vis tiek neveikia, istrinkite faila "normal.dotm" aplanke "%appdata%/Microsoft/Templates" ir is naujo paleiskite "Word"
+740#£"GeoGebra Calculator Suite" idiegtas su "WordMat". Jis veikia narsykleje, bet jam nereikia interneto. Jis veikia vienodai "Windows" ir "Mac" ir greitai paleidziamas.\nGeoGebra 5 Veikia vienodai "Windows" ir "Mac", taciau reikia idiegti.\nWindows taip pat palaiko kitas "GeoGebra" programu versijas, tokias kaip "Geogebra 6", "Graphing Calculator" ir kt. Jie bus naudojami, jei "GeoGebra 5" nebus idiegta.
+741#£Spartieji klavisai nustatyti netinkamai
+742#£Skaiciavimo rezultatas priklauso nuo zenklo
+743#£Valstybes zenklas
+744#£Diferencialine lygtis
+745#£Diferencialines lygties sprendimas
+746#£Indep. var
+747#£Dep. var/funkcija
+748#£Pradine salyga
+749#£"Maxima" klaida
+750#£Matematikos klaida
+751#£Sintakses klaida
+752#£Sintakses klaida. "WordMat" nesuprato jusu ivesties.
+753#£Jums truksta
+754#£Ju yra per daug
+755#£Kode ivyko klaida.
+756#£Dalijimas is nulio
+757#£Ivyko klaida. Klaida tikriausiai sukele vienas is jusu apibrezimu.\r\nGalbut klaida galite pastebeti is toliau pateiktos informacijos.
+758#£Viename is jusu apibrezimu yra klaida.\r\nDabar apibrezimas bus pasirinktas programoje "Word".
+759#£Neteisetas pobudis buvo patalpintas
+760#£Isspreskite lygti
+761#£Kintamojo
+762#£Arba valstybes kintamasis:
+763#£Apibreztys
+764#£Laikinieji apibrezimai
+765#£Ispejimas: Vienetai ijungti.\r\nLygties sprendimas bus prastesnis\r\nStebekite kintamuosius, kurie yra tokie vienetai kaip: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
+766#£Isspreskite lygciu sistema
+767#£Pasirinkite kintamuosius
+768#£"WordMat" pradeda veikti
+769#£Palauk
+770#£Trikampio sprendejas
+771#£Desiniuoju kampu
+772#£Betkuris
+773#£I desine
+774#£Pavadinimu
+775#£Manuel
+776#£Kampai didziosios, sonines mazosios raides
+777#£Sonai, pavadinti kampais AB
+778#£Iterpkite skaicius i trikampi programoje "Word"
+779#£Skaiciavimu rodymas programoje "Word"
+780#£Idekite zinomas puses ir kampus. Tada bus apskaiciuotos likusios puses ir kampai ir iterpti i Word.\r\nGalima keisti trikampio krastu ir kampu pavadinimus. Tiesiog spustelekite raides.
+781#£Trikampis nera dydzio. Taciau teisingai pakeistas trikampis bus iterptas i "Word".
+782#£"WordMat" trikampis sprendimas naudojamas su ivestimi:
+783#£Is jusu informacijos galima sudaryti du trikampius
+784#£Norint apskaiciuoti likusias puses ir kampus, reikia daugiau informacijos
+785#£Du trikampiai
+786#£Norint apskaiciuoti likusias puses ir kampus, reikia daugiau informacijos
+787#£Dabar galima apskaiciuoti visas puses ir kampus.
+788#£Sprendziant lygti buvo taikomi skaitmeniniai metodai. Sprendimu gali buti ir daugiau.
+789#£Temp. nustatymai
+790#£Automatinis sumazinimas
+791#£Bando sumazinti israiska iki kuo trumpesnes formos, naudodamas skirtingus metodus.
+792#£Bando atsizvelgti i israiska
+793#£Isplecia israiska.
+794#£Racionalizuoti
+795#£Konvertuoja visus desimtainius skaicius i trupmenas
+796#£Trigonometriskai sumazinkite
+797#£Sumazinkite israiska naudodami trigonometrines tapatybes.
+798#£Iterpti ta pacia eilute
+799#£2D braizymas
+800#£Is naujo nustatyti viska
+801#£asies pavadinimas
+802#£Gelezinkelio linijos tipas
+803#£Noredami isspresti lygti, pirmiausia turite iterpti lygti i "Word". Idekite zymekli i lygti ir dar karta paspauskite "Solve equation(-as)". Pazymekite daugiau lygciu, kad issprestumete lygciu sistema
+804#£Nepasirinkta lygtis
+805#£Supaprastinti
+806#£Veiksnys
+807#£Isplesti
+808#£Pagalba
+809#£Vadovas
+810#£Vadovas kaip "Word" dokumentas
+811#£Internetinio tinklalapio vadovas
+812#£Apie
+813#£Naujinti
+814#£Nuorodos
+815#£Aiskus
+816#£Logaritmas
+817#£Kalba
+818#£Zenklas
+819#£Teigiama
+820#£Neigiama
+821#£Nulis
+822#£Klaida
+823#£Apibreztys
+824#£GERAI
+825#£Atsaukti
+826#£Palaukti, palauk
+827#£Veikla
+828#£Sustoti, sustok
+829#£Lygtis isspresta
+830#£Lygtis issprendziama skaiciais
+831#£pagal WordMat.
+832#£Funkcijas
+833#£Lygtis
+834#£Lygtis
+835#£Tasku
+836#£Vektoriai
+837#£Titulinis
+838#£Atstatyti
+839#£Tiksliai atliktas sudetingas skaiciavimas gali uztrukti labai ilgai. Ar norite pakartoti skaiciu is naujo?
+840#£Naudokite iprasta d kaip diferenciala d
+841#£dy/dx zymejimas paprastai gali buti naudojamas tik su specialiu diferencialu d (\dd) arba daliniu dariniu simboliu (\dalinis). Jei nesitikite, kad d/dx bus supainiotas su kita israiska, galite naudoti si nustatyma, nes greiciau ivesti dy/dx naudojant iprasta d.
+842#£Vartotojo apibrezta regresija
+843#£Isspreskite diferencialines lygties (-ciu) sistema skaitmeniniu budu
+844#£Ivyko klaida
+845#£Kintamojo
+846#£Ispejimas
+847#£Diferencialine lygtis turetu buti tokia forma y'=...  kad jis butu issprestas skaitmeniniu budu
+848#£Mygtukas atsisiuncia "GeoGebra 5" i "atsisiuntimus" jusu "Mac". Tada busite nukreipti per saranka.
+849#£"GeoGebra 5" nebuvo visiskai idiegtas. Baigiasi
+850#£"GeoGebra" dar neidiegta. Palaukite, kol atsisiuntimas bus baigtas.
+851#£Testi
+852#£Istrinkite sena versija
+853#£Pries atsisiunciant nauja versija, senoji atsisiuntimu versija turi buti pasalinta.\r\n 1. Turetu atsidaryti langas pavadinimu "Leisti prieiga prie failo".\r\n2. Spustelekite "Pasirinkti..." \r\n3. Spustelekite "Priskirti prieiga" "
+854#£Atsisiuntimas sustabdytas
+855#£Turite suteikti prieiga prie GeoGebra.app, kad diegimas butu tesiamas
+856#£Atsisiunciama "GeoGebra 5"
+857#£1. Pirmiausia palaukite, kol GeoGebra 5 atsisius.\r\n2. Kai atsisiuntimas bus baigtas, turetu atsidaryti langas pavadinimu "Leisti prieiga prie failo".\r\n3. Spustelekite "Pasirinkti..." \r\n4. Spustelekite "Priskirti prieiga"
+858#£Sustabdytas
+859#£Procesas buvo sustabdytas.\r\n\r\nSpustelekite Uzdaryti ir bandykite dar karta.
+860#£Jus nesuteikete prieigos prie GeGebra. Spustelekite "Bandyti dar karta", kad bandytumete dar karta.
+861#£Atsisiuntimas yra letas. Patikrinkite "Safari", jei atrodo, kad vyksta atsisiuntimas. Galite spusteleti stabdyti, jei nera pazangos.
+862#£Klaida atsisiunciant "GeoGebra"
+863#£Failo nepavyko rasti atsisiuntimuose.\r\nGalite spusteleti "Pakartoti" apacioje, jei norite, kad "WordMat" vel atrodytu.
+864#£Suteikite leidima "GeoGebra"
+865#£Dabar turetu atsidaryti langas pavadinimu "Leisti prieiga prie failo".\r\n\r\n1. Spustelekite "Pasirinkti..." \r\n2. Spustelekite "Priskirti prieiga"
+866#£"GeoGebra" perkelimas i programas
+867#£Gali tekti suteikti leidima "Sistemos ivykiai", tiesiog spustelekite Gerai.
+868#£Pasirenge
+869#£"GeoGebra 5" dabar idiegta.\r\nSpustelekite "Testi", kad atidarytumete "GeoGebra".
+870#£Yra puslapiu, kurie yra 0
+871#£Pirmiausia turite pasirinkti lentele
+872#£Negalima iterpti sunumeruotos lygties i lentele
+873#£GeoGebra buvo naudojama lygciu sistemai isspresti. Neaisku, ar gali buti sprendimu. Rekomenduojama isbandyti kita metoda. Pvz., "Maxima" arba skaitmeninis / grafinis
+874#£GeoGebra nepalaiko sios funkcijos. Isbandykite lygciu sprendikli
+875#£Lygtis buvo isspresta grafiskai su GeoGebra:
+876#£Skliaustu skaicius israiskoje nesutampa
+877#£Klaidu nustatymas
+878#£Programoje Word.\r\n(Lygtys) nustatytas neteisingas parametrasMeniu Lygtys perjunkite is Latekso i Unicode.
+879#£Sintakses klaida - neteisinga matematika.
+880#£Ivedete kazka, kas nera teisinga matematine notacija.\r\nKlaida yra susijusi su kintamuoju:
+881#£Pavyzdziui, taip gali buti del to, kad ant skaiciaus yra apatinis indeksas. \r\nK_0 turetu buti pakeistas skaiciumi, o ne pvz., 5000_0. Tereikia pasakyti 5000.
+882#£Lygtyje negali buti dvieju lygiu zenklu
+883#£Lygciu sistema buvo isspresta naudojant GeoGebra:
+884#£Skaiciavimas buvo nutrauktas, nes uztruko labai ilgai. Kartais gali buti naudinga isbandyti skaiciavima naudojant parinkti "Skaitinis", o ne "Tikslus" arba "Automatinis"
+885#£Nepavyksta prisijungti prie "Maximos". Ar norite vietoj to naudoti "WSH" metoda?\r\n(sia parinkti galite rasti skiltyje Isplestiniai nustatymuose)
+886#£"WordMath" negali susisiekti su "GeoGebra". Tikriausiai taip yra todel, kad "Safari" nenustatete reikiamu saugos nustatymu. Spustelekite gerai, kad gautumete instrukcijas
+887#£Isspreskite skaitini
+888#£"WordMat" nepavyko rasti "Maxima" diegimo. Pabandykite idiegti is naujo
+889#£Klaida jungiantis prie "Maxima" naudojant WSH
+890#£Automatiskai sustoja
+891#£Tai nepavyko. Sustoja.
+892#£Komanda buvo nutraukta po to, kai
+893#£Ar noretumete pabandyti dar karta ir kiek laiko norite laukti. (sekundes) Kompiuteris uzrakins laukimo laika.
+894#£Apibrezimo klaida
+895#£Yra sintakses klaida, susijusi su integrale. Ar prisiminete dx pabaigoje?
+896#£Isvesties trukme:
+897#£Spustelekite TAIP, kad iterptumete visus simbolius i "Word". (Ispejimas: gali suletinti "Word" ar net sukelti "Word" gedima). \r\n Spustelekite NE, kad iterptumete tik pirmuosius 1000 simboliu.
+898#£Nustatete per mazai funkcijos parametru:
+899#£Taip gali buti del to, kad parametrams atskirti naudojote kablelius, o ne kabliataskius. (Vietoj to galite prideti tarpa vienoje kablelio puseje.)
+900#£Sprendimo salygos:
+901#£Pirmiausia turite pasirinkti sarasa, pvz., [1; 2; 3]
+902#£Gal sukeitete n ir r i K(n, r)?
