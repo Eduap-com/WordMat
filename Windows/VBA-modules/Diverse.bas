@@ -133,7 +133,10 @@ Function GetDocumentsDir() As String
         GetDocumentsDir = DocumentsDir
     Else
 #If Mac Then
+        Dim p As Integer
         GetDocumentsDir = MacScript("return POSIX path of (path to documents folder) as string")
+        p = InStr(GetDocumentsDir, "/Library")
+        GetDocumentsDir = Left(GetDocumentsDir, p) & "Documents"
 #Else
         GetDocumentsDir = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal")
         If Dir(GetDocumentsDir, vbDirectory) = "" Then

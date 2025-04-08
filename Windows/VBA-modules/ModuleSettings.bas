@@ -954,13 +954,14 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
     
     s = "# WordMat Settings" & vbCrLf
     
+    
+#If Mac Then
+    SettingsFileName = GetDocumentsDir & "/settings.txt"
+    s = s & "# Mac" & vbCrLf
+#Else
     If SettingsFileName = vbNullString Then
         SettingsFileName = SaveAsFilePath(GetDocumentsDir & "\settings.txt", "Text files,*.txt")
     End If
-    
-#If Mac Then
-    s = s & "# Mac" & vbCrLf
-#Else
     s = s & "# Win" & vbCrLf
 #End If
     AddSetting s, "Version", AppVersion & PatchVersion

@@ -153,12 +153,12 @@ End Sub
 Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = True, Optional ConvertWordSymbols As Boolean = True)
 ' starts maxima sends input and receives output
 
+    IncreaseCalcCounter
 #If Mac Then
     RunMaximaFile StopTime, ConvertWordSymbols
 #Else
     Dim i As Integer, InputStreng As String
     If StopTime = 0 Then StopTime = 200
-    AntalB = AntalB + 1
 
     '    MaximaInputStreng = "mu:2;sigma:1;Integrate(1/(sqrt(2*%pi)*sigma)*%e^(-1/2*((y-mu)/sigma)^2),y,minf,1000);"
     '     MsgBox (MaximaInputStreng)

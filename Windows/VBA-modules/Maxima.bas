@@ -1274,6 +1274,7 @@ Sub beregn()
             MsgBox2 Err.Description, vbOKOnly, Sprog.Error
             GoTo slut
         ElseIf Err.Number = 0 Then ' if no errors, then the calculation is done and inserted into Word
+            IncreaseCalcCounter
             GoTo slut
         End If
         Err.Clear
@@ -2613,3 +2614,11 @@ Function ValiderVariable() As Boolean
         Next
     End If
 End Function
+Public Sub IncreaseCalcCounter()
+#If Mac Then
+    Antalberegninger = Antalberegninger + 1
+    AntalB = Antalberegninger
+#Else
+    AntalB = AntalB + 1
+#End If
+End Sub
