@@ -1,0 +1,903 @@
+0#£Pomoc dotyczaca polecen Maxima
+1#£Wstaw r—wnanie numerowane
+2#£Wstaw r—wnanie numerowane w celach informacyjnych
+3#£Wstaw odniesienie do r—wnania
+4#£Zakladka
+5#£Wpisz nazwe r—wnania
+6#£Ustaw numer r—wnania
+7#£R—wnanie liczbowe
+8#£Wstaw sekcje r—wnania nr.
+9#£Aktualizowanie numer—w r—wnan
+10#£Istniejace nazwy r—wnan
+11#£Aby p—zniej wstawic odniesienie do r—wnania, wybierz opcje "Wstaw odniesienie do r—wnania" z menu WordMat w sekcji "Wstaw r—wnanie"
+12#£Nazwa juz istnieje
+13#£Nazwa nie moze zawierac spacji
+14#£Odniesienie do r—wnania
+15#£Umieszczenie
+16#£Lewa strona
+17#£Prawa strona
+18#£Numerowanie
+19#£Zapytaj o nazwe referencji podczas wstawiania
+20#£WordMath umozliwia wykonywanie obliczen matematycznych w programie Word. Rdzen WordMath jest open source i darmowy\r\nWordMat instaluje r—wniez nastepujace programy: Maxima, GeoGebra, czcionki matematyczne.\r\nOpcjonalne komponenty: GeoGebra 5, Graph, WordMath+. Zobacz wiecej na licencji\r\nWordMath zostal stworzony przez Mikaela Sams¿e S¿rensena, Nyborg Gymnasium, EDUAP 2009-2025.
+21#£Jest nowa wersja WordMath gotowa do pobrania.\r\nAktualnosci: \r\n
+22#£Zostaniesz teraz przekierowany na strone pobierania
+23#£Nowa wersja
+24#£Wpisz liczbe punkt—w, dla kt—rych chcesz przeprowadzic regresje. Nastepnie zostanie utworzona tabela, w kt—rej mozesz umiescic swoje punkty. Jesli chcesz wykonac regresje, po prostu wybierz tabele i wybierz zadana regresje z menu.
+25#£Nie zaleca sie wykonywania regresji na wiecej niz 200 punktach w tabeli Worda. Uzyj programu Excel, jesli chcesz wykonac regresje w tej liczbie punkt—w
+26#£Wystapil blad. Prawdopodobnie wystapil blad w liczbach wejsciowych
+27#£Musisz utworzyc tabele z dwiema kolumnami. wartosci x w lewej kolumnie i wartosci y w prawej kolumnie. Litery sa ignorowane. Regresja jest wykonywana na wybranych liczbach. Jesli zadna z nich nie zostanie wybrana, regresja jest wykonywana dla wszystkich liczb w tabeli
+28#£Nie mozna przeprowadzic regresji w tych punktach
+29#£Regresja liniowa wykonywana przez WordMat: $Tab
+30#£Regresja wykladnicza wykonywana przez WordMat: $Tab
+31#£Regresja mocy wykonywana przez WordMat: $Tab
+32#£W tych punktach nie mozna przeprowadzic regresji mocy. Wszystkie liczby musza byc dodatnie (a nie zerowe).
+33#£Regresja zdefiniowana przez uzytkownika z funkcja
+34#£w wykonaniu WordMath
+35#£Okresl porzadek regresji wielomianowej (1-
+36#£(Maksymalna liczba zam—wien zalezy od liczby punkt—w)
+37#£porzadek
+38#£Regresja wielomianowa stopnia
+39#£Regresja zdefiniowana przez uzytkownika
+40#£Funkcja
+41#£Miejsc dziesietnych
+42#£Rozpocznij zgadywanie (np.: a=2 , c=10)
+43#£Precyzja jest ustawiona na bardzo wysoka wysokosc. Czas obliczen moze byc bardzo dlugi lub powodowac blad. Jesli to nie zadziala, wypr—buj nizsze ustawienie.
+44#£Precyzja jest ustawiona dosc wysoko. Czas obliczen moze byc dosc dlugi lub powodowac blad. Jesli to nie zadziala, wypr—buj nizsze ustawienie.
+45#£Precyzja nie moze byc ujemna. Wybieranie dodatniej liczby calkowitej
+46#£Precyzja jest nieprawidlowa. Wybierz dodatnia liczbe calkowita.
+47#£Umieszczanie kursora w r—wnaniu
+48#£Nie jest mozliwe wykonanie obliczen na definicjach
+49#£Wyrazenie jest rozr—zniane przez WordMat.
+50#£Wyrazenie to nie moglo byc zr—znicowane
+51#£Zmienna stanu
+52#£Pierwotna jest znaleziona przez WordMat
+53#£Nie mozna zintegrowac wyrazenia
+54#£Wystapil blad. WordMat prawdopodobnie nie jest poprawnie zainstalowany. Spr—buj zainstalowac ponownie, byc moze z wylaczonym programem antywirusowym. Jesli Twoja szkola ma program partnerski, ustawienie "metoda polaczenia dll" w Ustawieniach/Zaawansowane moze rozwiazac problem
+55#£Wystapil blad podczas pr—by uruchomienia Maxima
+56#£Nier—wnosc zostala zazegnana,
+57#£przez WordMat.
+58#£Wszystkie liczby rozwiazuja te nier—wnosc
+59#£Nier—wnosc nie miala rozwiazania w dziedzinie $C dla zmiennej
+60#£Nier—wnosc nie miala rozwiazania w dziedzinie $R dla zmiennych
+61#£Przy nastepujacych zalozeniach/definicjach:
+62#£Definiowac
+63#£Brak polaczenia z Internetem
+64#£Kliknij przycisk OK, aby rozpoczac aktualizacje
+65#£Skr—ty klawiaturowe programu WordMat
+66#£Skr—ty r—wnan programu Word
+67#£Mozesz tworzyc wlasne skr—ty do pisania w programie Word lub zmieniac istniejace skr—ty. Umiesc kursor w r—wnaniu. Otw—rz menu Projekt. Zlokalizuj grupe o nazwie funkcje. Kliknij mala strzalke w prawym dolnym rogu. Wybierz "Automatyczne wprowadzanie matematyki"
+68#£Formuly
+69#£Usuwanie definicji
+70#£Stale
+71#£Znajdowanie wartosci w Internecie
+72#£Konwertuj r—wnania na LaTex. (Skr—t alt+T konwertuje pojedyncze r—wnanie)
+73#£Kopiuj do schowka
+74#£Styl wyswietlania
+75#£Nie pisz jednostek kursywa
+76#£Uzyj Maxima do konwersji LaTex
+77#£Konwertuj wszystko
+78#£Konwertuj i przejdz do nastepnego
+79#£Przed
+80#£Po
+81#£Zaden
+82#£Zwyczaj
+83#£Umiesc kod do umieszczenia na stronie
+84#£W pozostalej czesci tego dokumentu nie ma r—wnan do konwersji.
+85#£Rozwiaz numerycznie uklad r—wnan r—zniczkowych
+86#£R—wnania r—zniczkowe
+87#£Wartosc poczatkowa
+88#£Rozmiar kroku
+89#£Laczenie kropek
+90#£Pokazywanie r—wnan
+91#£Wstaw liste
+92#£Wstaw tabele
+93#£Wstawianie wykresu
+94#£Prawdopodobnie poza domena! \r\nadjust xmin/xmax
+95#£Wystapil blad. Sprawdz liczby wedlug xmin i xmax
+96#£Brak partnerstwa
+97#£Wystapil blad podczas pr—by wstawienia wykresu. W definicji moze wystapic blad skladni
+98#£Wystapil blad podczas pr—by wstawienia arkusza programu Excel. Moze to byc spowodowane poprzednia awaria programu Excel. Zamknij wszystkie otwarte arkusze programu Excel, a nastepnie ponownie otw—rz program Excel przed ponowna pr—ba uzycia programu WordMat.
+99#£Wystapil blad podczas pr—by przekonwertowania polecenia na skladnie Maxima.
+100#£Wystapil blad podczas pr—by przekonwertowania danych wyjsciowych Maxima na skladnie programu Word.
+101#£Rozwiazanie nie jest pewne. Mozesz r—wniez spr—bowac uzyc metod numerycznych
+102#£Poniewaz jest to r—wnanie trygonometryczne, rozwiazan jest nieskonczenie wiele. Tylko jeden z nich jest okreslony
+103#£Nie znaleziono wszystkich rozwiazan.
+104#£Blad: Dzielenie przez zero.
+105#£Blad skladniowy.
+106#£Blad skladniowy. Uzyto nieprawidlowego symbolu. Moze to byc brakujacy znak mnozenia lub , . problem
+107#£Ostrzezenie: Poprosiles o rozwiazanie ukladu r—wnan, ale podales mniej zmiennych niz r—wnan. Rozwiazywane sa tylko pierwsze r—wnania. Sprawdz recznie ostatnie r—wnanie.
+108#£Firma Maxima zglosila nastepujacy blad:
+109#£Blad maksimum
+110#£Program WordMat nie byl w stanie zlokalizowac folderu "Pliki program—w"
+111#£Wystapil blad podczas pr—by otwarcia:
+112#£Nie mozna polaczyc sie z serwerem
+113#£W tym miejscu dokumentu okresla sie, co nastepuje
+114#£W tym miejscu w dokumencie nie ma zadnych definicji.
+115#£
+116#£Nie mozna zdefiniowac pochodnej\r\nUsun definicje: \r\n
+117#£W definicji wystapil blad:
+118#£Jest ignorowany, ale popraw blad wejsciowy, aby uniknac tego bledu wyjsciowego
+119#£... reszta usunieta.
+120#£Twoja szkola/organizacja aktywnie wsp—lpracuje z partnerami. Mozesz teraz korzystac z WordMat+
+121#£Przepraszam. Twoja szkola nie ma aktywnego partnerstwa.
+122#£Podaj definicje nowej funkcji\r\nDefinicja moze byc uzyta w pozostalej czesci dokumentu, ale nie wczesniej.\r\nJesli wstawisz polecenie 'usun def:' dalej w dokumencie, nie bedzie ono znane od tego momentu.\r\nMozesz zdefiniowac wiecej zmiennych na raz, oddzielajac je za pomoca " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
+123#£Nowa funkcja
+124#£Nowe r—wnanie
+125#£Zdefiniuj r—wnanie
+126#£Definiowac
+127#£Wyrazenie jest bardzo dlugie. Czy chcesz go wstawic do Worda?\r\nMoze to wplynac na szybkosc Worda. Dlugie r—wnania moga spowodowac zatrzymanie programu Word na wolnych komputerach. Rozwaz rozwiazanie za pomoca metod numerycznych\r\nMozesz zobaczyc wyniki ponizej:
+128#£Nie mozna obliczyc wyrazenia.
+129#£R—wnanie nie mialo rozwiazan w dziedzinie $C dla zmiennej
+130#£R—wnanie nie mialo rozwiazan w dziedzinie $R dla zmiennej
+131#£WordMat nie m—gl rozwiazac r—wnania
+132#£Wszystkie liczby sa rozwiazaniami r—wnania
+133#£Poprosiles o rozwiazanie r—wnania dla zmiennej, kt—ra jest juz zdefiniowana. Wstaw polecenie 'delete def:' przed r—wnaniem.
+134#£Uklad r—wnan jest rozwiazywany dla
+135#£za pomoca funkcji "rozwiaz r—wnanie" programu WordMat,
+136#£Sp—lka partnerska zarejestrowana w
+137#£Uklad r—wnan nie posiadal rozwiazan w dziedzinie $C dla zmiennych
+138#£Uklad r—wnan nie posiadal rozwiazan w dziedzinie $R dla zmiennych
+139#£W r—wnaniu musi znajdowac sie znak r—wnosci
+140#£Brak zarejestrowanego zwiazku partnerskiego
+141#£To nie jest r—wnanie. R—wnanie zawsze bedzie mialo znak r—wnosci.
+142#£Z ukladu r—wnan eliminowane sa nastepujace zmienne:
+143#£za pomoca funkcji "Wyeliminuj zmienna" programu WordMat, "
+144#£prawdziwy
+145#£falszywy
+146#£nieznany
+147#£
+148#£Znaleziono rozwiazanie. Rozwiazan moze byc wiecej.
+149#£Wybierz tylko 1 wyrazenie
+150#£Wyrazenie jest upraszczane przez WordMat za pomoca metod:
+151#£Automatyczne upraszczanie,
+152#£Tozsamosci trygonometryczne
+153#£Wyrazenia nie mozna uproscic
+154#£Wyrazenie jest upraszczane przez WordMat.
+155#£Wyrazenie jest rozkladane na czynniki przez program WordMat.
+156#£Nie mozna rozlozyc wyrazenia na czynniki pierwsze
+157#£Wyrazenie jest rozwijane przez program WordMat.
+158#£Nie mozna rozwinac wyrazenia
+159#£Musisz wylaczyc jednostki, aby rozwiazac r—wnania r—zniczkowe
+160#£Nie udalo sie rozwiazac r—wnania r—zniczkowego
+161#£Szkoly moga zarejestrowac sie w programie partnerskim z Eduap. Partnerstwo zapewnia dostep do wsparcia, WordMath+ i wielu innych. Kliknij aby przeczytac wiecej
+162#£Rozklad dwumianowy
+163#£Wyrazenie jest testowane pod katem prawdziwosci przez program WordMat.
+164#£Wynik oparty jest na por—wnaniu numerycznym
+165#£Program WordMat nie byl w stanie okreslic, czy wyrazenie jest prawdziwe, czy falszywe
+166#£Jednostki wylaczone
+167#£Wybieranie jednostek wyjsciowych
+168#£Jednostki wyjsciowe
+169#£Niedopasowane nawiasy kwadratowe
+170#£Automatyczna kopia zapasowa?
+171#£Ile plik—w kopii zapasowych nalezy przechowywac?
+172#£Czas miedzy kopiami zapasowymi
+173#£Word nie wykonuje automatycznego tworzenia kopii zapasowych, ale zapisuje dane, kt—re moga byc uzyte do odtworzenia utraconego pliku\n\nWordMat moze wykonac pelne kopie zapasowe, gdy wykonasz obliczenia i zapiszesz dokument w wielu wersjach. (Kopie zapasowe sa znacznie szybsze, jesli dokument nie znajduje sie w usludze OneDrive) . Pliki kopii zapasowej sa przechowywane w folderze: moje dokumenty/WordMat-backup
+174#£Otw—rz folder kopii zapasowej
+175#£Pytac
+176#£Zawsze
+177#£Nigdy
+178#£Wystapil blad podczas pr—by wykonania kopii zapasowej
+179#£Czy chcesz aktywowac system automatycznego tworzenia kopii zapasowych WordMats\n\n(Aby uzyskac wiecej informacji, przejdz do ustawien | Kopia zapasowa)
+180#£Rozklad normalny
+181#£Niski
+182#£Normalny
+183#£Wysoki
+184#£Bardzo wysoka
+185#£Super (powolny)
+186#£R—wnanie
+187#£Czekac?
+188#£Max
+189#£Tylko linie
+190#£Pokaz osie
+191#£Jakosc
+192#£Wplywa na predkosc obrotowa
+193#£Gdy pojawi sie obraz, mozesz zmienic kat widzenia, naciskajac i przytrzymujac lewy przycisk myszy podczas przeciagania. Kliknij prawym przyciskiem myszy wiersz menu, wybierz opcje i "kopiuj do schowka", aby skopiowac obraz. Zamknij okno, aby powr—cic do programu Word.
+194#£Bryla obrotu
+195#£Wprowadz wsp—lrzedne punkt—w, kt—re maja byc oznaczone czerwonymi liniami przerywanymi na wykresie. Przyklady \r\neksempel:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)\r\n Mozliwe jest r—wniez klikniecie na wykres, aby uzyskac wsp—lrzedne, jesli uzyjesz przycisku wstawiania.
+196#£R—wniez do wstawiania linii przerywanych oznaczajacych punkty na wykresie, ale innym kolorem niz punkty w kolumnie 1. Nie mozna przeprowadzic regresji w tych punktach. Mozesz tworzyc r—znego rodzaju ksztalty, laczac kropki.
+197#£Wybierz tabele z danymi wsp—lrzednych przed nacisnieciem przycisku Kresl, aby automatycznie wypelnic je w tym polu tekstowym. Jeden zestaw wsp—lrzednych pr. linia. Jeden zestaw wsp—lrzednych pr. linia. Wsp—lrzedne musza byc oddzielone przecinkiem, srednikiem lub tabulatorem. Wsp—lrzedne mozna kopiowac z programu Excel. Przyklady: \r\n1.2 , 3.4\r\n3,4 ; 4,8\r\n5,6$Tab & "7.8
+198#£Zmienne musza byc x i y
+199#£Wstaw okrag
+200#£Wstaw linie
+201#£Oznaczone punkty
+202#£Regresja
+203#£Tak
+204#£Nie
+205#£Zapamietaj ten wyb—r
+206#£Gdy funkcja tworzenia kopii zapasowych WordMats jest wlaczona, kopia zapasowa zostanie wykonana po wykonaniu obliczen. Kopia zapasowa jest wykonywana tylko co 5 minut. Wykonywanych jest 10 kopii zapasowych, zanim zostana nadpisane." & vbLf & vbLf & " Mozesz zmienic te ustawienia w ustawieniach | Kopia zapasowa.
+207#£Zawsze mozesz zmienic ten wyb—r w ustawieniach | Kopia zapasowa
+208#£Kopia zapasowa
+209#£Suma kat—w jest wyzsza niz 180
+210#£Musisz wprowadzic 3 boki/katy. Nie 3 katy, ale nie 3. Musi byc znana co najmniej 1 strona.
+211#£Suma kat—w nie wynosi 180
+212#£Wprowadziles zbyt wiele kat—w/bok—w
+213#£Musisz wprowadzic DOKLADNIE 3 boki/katy. Nie 3 katy, ale nie 3. Musi byc znana co najmniej 1 strona.
+214#£
+215#£Kat
+216#£Znaleziono przy uzyciu sumy kat—w = 180 $Degree w tr—jkacie
+217#£Dlugosc boku
+218#£Znalezione za pomoca Pitagorasa
+219#£Dlugosc bok—w
+220#£Znaleziono przy uzyciu opalenizny
+221#£Znaleziono za pomoca sinusa
+222#£Znaleziono przy uzyciu cosinusa
+223#£Znaleziono przy uzyciu prawa cosinusa
+224#£Znaleziono przy uzyciu prawa sinusa
+225#£R—wnanie kwadratowe jest rozwiazywane dla
+226#£To r—wnanie kwadratowe ma dwa rozwiazania:
+227#£Ale drugie rozwiazanie jest ujemne, a dlugosc nie moze byc ujemna.
+228#£Z uwagi na fakt, ze rozwiazanie problemu
+229#£mial dwa rozwiazania i oba rozwiazania byly pozytywne, co oznacza, ze istnieja dwa mozliwe tr—jkaty. Teraz mozemy obliczyc pozostale boki na podstawie 2. rozwiazania przy uzyciu tej samej metody.
+230#£Wstaw symbol
+231#£Litery greckie
+232#£Inne symbole
+233#£Wstawiac
+234#£Symbol
+235#£Rozwiazanie r—wnania za pomoca metod graficznych i numerycznych
+236#£Wstepne przypuszczenie
+237#£Metoda interwalowa
+238#£poczatek
+239#£koniec
+240#£Dzialka po prawej i lewej stronie. \nLewa strona jest. Prawa strona jest zielona.
+241#£Rozwiazanie graficzne
+242#£Powieksz takze dwukrotne klikniecie lub przeciagniecie pola
+243#£Pokaz wykres w osobnym oknie
+244#£Rozklad $X^2
+245#£Zmiennych
+246#£Test
+247#£Wybierz maksimum
+248#£Lub wprowadz recznie max
+249#£zmienne oddzielone przecinkami
+250#£Wybierz dokladnie
+251#£Lub wprowadz recznie
+252#£Nie mozesz rozwiazac r—wnania dla
+253#£i zdefiniuj go w tym samym czasie
+254#£Pr—bujesz rozwiazac zmienna, kt—ra jest jednostka. Najprawdopodobniej spowoduje to blad. Rozwaz uzycie innej nazwy zmiennej lub wylacz jednostki.
+255#£ziemia
+256#£Woda
+257#£miedz
+258#£zelazo
+259#£ksiezyc
+260#£slonce
+261#£Stale fizyczne
+262#£Jednostek
+263#£Wartosci tabelaryczne - cieplo
+264#£Wartosci tabel - fizyka jadrowa
+265#£Astronomia
+266#£Predkosc swiatla w pr—zni
+267#£Stala Plancksa
+268#£Stala Plancka w elektronowoltach
+269#£Stala grawitacyjna
+270#£Swobodny spadek przyspieszenia na powierzchni ziemi
+271#£Ladunek elementarny
+272#£Liczba Avogadros
+273#£Stala gazowa
+274#£Stala Boltzmanna
+275#£Odkurzalnosc
+276#£Przenikalnosc pr—zni
+277#£Stala kulombowska
+278#£Stala Stefana-Boltzmanna
+279#£jednostka masy atomowej
+280#£jednostka masy atomowej w MeV
+281#£Pojemnosc cieplna wlasciwa
+282#£masa elektronowa
+283#£w kg
+284#£masa protonu
+285#£masa neutron—w
+286#£Masa ziemska
+287#£Sredni promien Ziemi
+288#£Odleglosc miedzy Ziemia a Sloncem (jednostka astronomiczna)
+289#£Masa Slonca
+290#£Masa Ksiezyca
+291#£Sredni promien ksiezyca
+292#£GeoGebra 5 nie jest zainstalowana.
+293#£Przycisk przeniesie Cie na strone gl—wna, na kt—rej mozesz zainstalowac GeoGebra. WordMat w systemie Windows obsluguje "GeoGebra classic 5", "GeoGebra Calculator Suite", "GeoGebra Classic 6" i wiekszosc innych wersji aplikacji GeoGebra.
+294#£Pakiet kalkulator—w GeoGebra jest juz zainstalowany. Dziala w przegladarce i nie wymaga dostepu do Internetu. Uruchamia sie szybko.
+295#£Zainstaluj GeoGebre
+296#£Uruchom pakiet kalkulator—w GeoGebra
+297#£lub warunki brzegowe
+298#£Etykieta
+299#£Wprowadz tekst, a nastepnie kliknij wykres, aby go umiescic
+300#£Wystapil blad w r—wnaniu
+301#£Musisz najpierw ustawic ymin i ymax - a nastepnie nacisnac update
+302#£Wykresy 3D
+303#£Pokaz wyrazenie
+304#£Przejrzysty
+305#£Kolor powierzchni
+306#£Wstaw polecenie Maxima do programu Word
+307#£Linie i powierzchnie
+308#£Tylko linie
+309#£Tylko powierzchnie
+310#£Linie i powierzchnie
+311#£Zmienne musza byc x, y i z
+312#£Wstawianie kuli
+313#£Wstaw plaszczyzne
+314#£Nowy wektor
+315#£Skladnia\n(startx , starty , startz)(dx , dy , dz)\nJeden wektor pr. linia\nPrzyklady:\n(1,1,2)(1,2,3) \n rysuje wektor (1,2,3) z punktu (1,1,2)\n\n(1,-2,3)\n rysuje wektor (1,-2,3) z punktu (0,0,0)\n\nprzyklad z ulamkami dziesietnymi:\n(1.5 , 3 , 4.5)
+316#£Rozmiar w punktach
+317#£Skladnia wprowadzania punkt—w\n\n(1,2,1)\n(2.5,3.6,8.7)
+318#£W oknie wykresu mozesz obr—cic uklad wsp—lrzednych, naciskajac lewy przycisk myszy podczas przeciagania.\n\nJesli obiekt wyglada na rozciagniety, mozesz zmienic rozmiar okna wykresu dla lepszego dopasowania.\n\nAby wstawic obraz do Worda, kliknij prawym przyciskiem myszy na linie menu, wybierz 'opcje', a nastepnie 'kopiuj do schowka'. Nastepnie okno wykresu jest zamykane i obraz moze byc wstawiony do Worda.\n\nZauwaz, ze okno wykresu musi byc zamkniete, aby m—c powr—cic do Worda.\n\nIm wyzsza jakosc obrazu, tym wolniejsza predkosc obracania.
+319#£Zasady
+320#£Wykres parametryczny
+321#£Z—lty/czerwony/fioletowy
+322#£Niebieski
+323#£Brazowy
+324#£Szary
+325#£Skr—t Alt + M wstawia nowa matematyke
+326#£Skr—t AltGr + Enter oblicza
+327#£Skr—t Alt + E rozwiazuje r—wnanie
+328#£Skr—t Alt + S otwiera ustawienia
+329#£Skr—t Alt + R Wstawia poprzedni wynik
+330#£Skr—t Alt + U Wlacza obsluge jednostek
+331#£Indeks dolny:
+332#£\lambda to skr—t od malej greckiej litery lambda
+333#£Skr—t Alt + P Wykresla wykres
+334#£Zmiany mozna zapisac w dokumentach formul
+335#£Arkusze Excela mozna otwierac osobno lub wstawiac osadzone
+336#£Znakowanie rak? Wypr—buj www.eduap.com WordMark
+337#£Liczba obliczen za pomoca WordMath:
+338#£W obszarze Definicje mozna zdefiniowac stale fizyczne i wartosci tabeli.
+339#£Program Word dziala szybciej w widoku roboczym - gdy w gre wchodza r—wnania
+340#£Wstawianie wlasnych opis—w diagram—w programu Excel za pomoca pola tekstowego wstawiania
+341#£Skr—t Alt + N Przelacza miedzy auto, exact, num
+342#£Funkcja z literami jako stala pobiera suwaki w GeoGebrze
+343#£Jednostki wyjsciowe nie moga byc jednostkami laczonymi.  km/s jest niedozwolone. Nastepnie podaj: km,s
+344#£Masz juz najnowsza wersje
+345#£Wybieranie numeru r—wnania
+346#£Na jaka liczbe ustawic to r—wnanie?\r\nKazde nastepne r—wnania r—wniez zostana zaktualizowane.
+347#£Test dwumianowy
+348#£Zostanie wstawiony numer sekcji r—wnania. Zazwyczaj jest on wstawiany jako numer rozdzialu/sekcji w nagl—wku. Ale mozna go r—wniez wstawic w ukryciu. Czy chcesz pokazac numer? (Odpowiedz Nie, aby to ukryc)
+349#£Wprowadz poziom istotnosci w procentach
+350#£Poziom istotnosci
+351#£Podaj wymiary tabeli\r\nwiersze x kolumny
+352#£Test chi-kwadrat na niezaleznosc
+353#£$X^2 - test niezaleznosci wykonany za pomoca WordMat
+354#£Wartosc P
+355#£Korzystanie z poziomu istotnosci
+356#£% hipoteza 0 moze zostac odrzucona. Stad istnieje zaleznosc miedzy tymi dwiema zmiennymi.
+357#£% hipotezy 0 nie mozna odrzucic. W zwiazku z tym nie ma dowod—w na poparcie zaleznosci miedzy tymi dwiema zmiennymi.
+358#£Istnieja kom—rki o wartosci mniejszej niz 5 lub suma wszystkich kom—rek jest mniejsza niz 50. Rozklad $X^2 jest wiec w tym przypadku zlym przyblizeniem, a wynik niewiarygodny. W niekt—rych przypadkach dane moga byc uzyteczne poprzez r—zne grupowanie liczb.
+359#£Chidystrybucja
+360#£Stopnie swobody
+361#£Czytac
+362#£Otwarcie GeoGebry
+363#£Wprowadz wartosc dla opcji
+364#£Mozesz go dostosowac p—zniej
+365#£Definiowanie stalej
+366#£Program Graph nie jest zainstalowany. Jest to maly darmowy program, kt—ry mozna latwo zainstalowac. Mozesz go pobrac od www.padowan.dk
+367#£Mozesz go p—zniej dostosowac w funkcjach zdefiniowanych przez uzytkownika w Graph
+368#£Kreslenie wykres—w za pomoca GeoGeoGebra i Graph wymaga, aby x bylo zmienna niezalezna. \r\nNastepujace wyrazenia sa bez x. Teraz mozesz okreslic nowa zmienna, kt—ra ma byc uzywana jako x.
+369#£Zmienna niezalezna
+370#£Test $X^2 na niezaleznosc
+371#£Wykres otwarcia
+372#£Wstawianie osadzonych
+373#£Wstawianie osadzonego obiektu moze zajac troche czasu. Podw—jnie na osadzonym obiekcie, aby je otworzyc.
+374#£Czy chcesz spiskowac
+375#£Wstawiac
+376#£Uklady r—wnan nier—wnosci nie sa jeszcze obslugiwane. Rozwiaz jako r—wnanie lub rozwiaz graficznie za pomoca Graph lub GeoGebra.
+377#£Wyeliminuj zmienne
+378#£z wartosciami
+379#£Wpisz startguess. Standardowa wartosc przypuszczenia to 1
+380#£Zmienne i zgadywanie
+381#£Uklad r—wnan jest rozwiazywany dla
+382#£z funkcja Start Guess
+383#£Ukladu r—wnan nie mozna bylo rozwiazac
+384#£Czy podales poprawna zmienna?
+385#£Nie znaleziono rozwiazania. Punkt poczatkowy i koncowy interwalu musi znajdowac sie po obu stronach rozwiazania
+386#£Metoda niuton—w zastosowana z odgadnieciem poczatkowym
+387#£Metoda interwalowa zastosowana w interwale
+388#£Nie znaleziono rozwiazania
+389#£Brak rozwiazania
+390#£R—wnanie r—zniczkowe jest rozwiazywane przez funkcje "Rozwiaz r—wnanie r—zniczkowe" programu WordMat
+391#£z warunkami brzegowymi
+392#£z warunkami poczatkowymi
+393#£z warunkiem poczatkowym
+394#£Musisz ponownie uruchomic program Word. Jesli tego nie zrobisz, program Word ulegnie awarii.
+395#£Wystapil blad podczas pr—by wstawienia formuly. Spr—buj ponownie w innym miejscu.
+396#£Symulacja
+397#£Grupa
+398#£Liczba stopni swobody\r\nokresl n dla wyrazenia og—lnego.
+399#£Rozklad czestotliwosci z
+400#£Obserwacje
+401#£Oczekiwany
+402#£Laczny
+403#£Wartosc P
+404#£Istnieje pewna korelacja
+405#£Nie ma zadnej korelacji
+406#£Suma wszystkich kom—rek jest mniejsza niz 50. Rozklad $X^2 jest wiec slabym przyblizeniem, a wynik niewiarygodny.
+407#£Wartosc Q
+408#£Krytyczna wartosc Q
+409#£MikTex nie jest zainstalowany. Zostaniesz teraz przekierowany na strone pobierania. Po instalacji komputer musi zostac ponownie uruchomiony. Przy pierwszym uruchomieniu MikTex z WordMat zostanie zainstalowana seria pakiet—w.
+410#£Ta funkcja nie jest obslugiwana na komputerach Mac
+411#£Inni
+412#£Nowe r—wnanie
+413#£Symbole
+414#£Ustawienia CAS
+415#£Ksztalty
+416#£Wprowadziles r—wnanie wektorowe, kt—re w rzeczywistosci jest ukladem r—wnan. Wprowadz plik
+417#£zmienne do rozwiazania, oddzielone przecinkami.
+418#£Musisz wejsc
+419#£zmienne oddzielone przecinkami
+420#£Jedno z r—wnan nie jest zdefiniowane w granicach obszaru dzialki. Spr—buj rozszerzyc obszar kreslenia
+421#£W wyrazeniu pojawia sie co najmniej jeden symbol plus/minus. Jak interpretowac?
+422#£Plus lub minus
+423#£Dane wejsciowe nie zostaly zrozumiane. Wstawiany jest plus.
+424#£Wystapil problem ze znakami numerycznymi
+425#£Notacja sumy jest niepoprawna. Skladnia dolnego limitu jest nastepujaca: i=1 (lub podobnie)
+426#£Oznaczenie produktu jest nieprawidlowe. Skladnia dolnego limitu jest nastepujaca: i=1 (lub podobnie)
+427#£Wystepuja problemy ze skladnia. Calke nalezy konczyc znakiem dx (jesli x jest zmienna). Byc moze uzyles d w innym kontekscie. Nastepnie uzyj r—zniczki d (typ: \dd)
+428#£Wystepuja problemy ze skladnia. Calka podw—jna musi konczyc sie dwoma dx (w zaleznosci od zmiennych, dla kt—rych ma byc calkowany). Byc moze uzyles d w innym kontekscie. Nastepnie uzyj r—zniczki d (typ: \dd)
+429#£Nie mozna uzyc znaku podw—jnej calki dla calek oznaczonych. Uzywaj dw—ch znak—w calkowych
+430#£Blad! Wystepuja problemy ze skladnia. Notacja r—zniczkowania nie jest poprawna.
+431#£Nie zdefiniowano
+432#£nieokreslone, ale ograniczone
+433#£Nie zdefiniowano w
+434#£jest zarezerwowany i nie mozna go zdefiniowac. Definicja jest pomijana.
+435#£Matematyka
+436#£Phys
+437#£Chem
+438#£Procent
+439#£Funkcje
+440#£Geometria
+441#£Prob.
+442#£wektor
+443#£Ustawienia
+444#£Ustawienia
+445#£Sci
+446#£Wyliczac
+447#£Rozwiazac
+448#£Maxima, polecenie
+449#£Rozwiaz r—wnanie (r—wnania) za pomoca metody numerycznej
+450#£Wyeliminuj zmienne
+451#£Testowanie prawdy/falszu
+452#£Rozwiaz r—wnanie r—zniczkowe
+453#£Usuwanie definicji
+454#£Zdefiniuj funkcje
+455#£Definiowanie stalych fizycznych
+456#£Zmniejszyc
+457#£Nieskonczonosci.
+458#£Odr—zniac
+459#£Integrowac
+460#£Drukowania
+461#£Pokaz wykres
+462#£Pole kierunkowe
+463#£Wykres 3D
+464#£Objetosc obrotu - wykres obrotu 3D wok—l osi x
+465#£Statystyka
+466#£Obserwacje niezgrupowane
+467#£Zgrupowane obserwacje
+468#£Wykres kija
+469#£Histogram
+470#£Wykres krokowy
+471#£Wykres skumulowany
+472#£Wykres pudelka i was—w
+473#£Statystyki/prawd.
+474#£Regresja
+475#£Nie mozna wstawic do tabeli
+476#£Liniowy
+477#£Wykladniczy
+478#£Moc
+479#£Wielomian
+480#£Dystrybucji
+481#£Dwumian
+482#£Rozklad normalny
+483#£Rozklad $X^2
+484#£Geometria 2D
+485#£Geometria 3D
+486#£Otwiera broszure z formulami matematycznymi
+487#£Otwiera ksiazeczke z formulami fizycznymi
+488#£Otwiera ksiazeczke z formulami chemicznymi
+489#£Automatyczny dokladny lub numeryczny wynik
+490#£WordMat automatycznie okresla, czy zwr—cic wynik dokladny, numeryczny, czy oba te elementy.
+491#£Dokladne wyniki
+492#£Wszystkie wyniki zostaly zwr—cone jako dokladny wynik. Czasami jednak nie da sie uniknac przyblizenia liczbowego.
+493#£Wyniki liczbowe
+494#£Wszystkie wyniki sa zwracane jako liczby dziesietne
+495#£Znaczace liczby
+496#£Okresla liczbe (znaczacych) cyfr w wynikach
+497#£Radianach
+498#£W przypadku wcisniecia wszystkie obliczenia trygonometryczne sa w radianach, w przeciwnym razie w stopniach.
+499#£Notacja naukowa
+500#£W przypadku depresji wszystkie wyniki sa zwracane w notacji naukowej. Przyklad: 2.3$*10^4
+501#£Ustawienia
+502#£Zmien wszelkiego rodzaju ustawienia.
+503#£Oblicz (AltGr+Enter)
+504#£Oblicza wybrane wyrazenie lub z powrotem do najblizszego znaku r—wnosci.
+505#£Maxima, polecenie
+506#£Wysyla niefiltrowane polecenie do maksim—w. Wynik jest jednak sformatowany.
+507#£Rozwiazuje r—wnanie(a) (Alt+E)
+508#£Rozwiazuje r—wnanie lub uklad r—wnan. Umiesc kursor w r—wnaniu. Wybierz wiecej r—wnan, aby rozwiazac uklad r—wnan
+509#£Rozwiazuj numerycznie
+510#£Rozwiaz r—wnanie za pomoca metod numerycznych.
+511#£Wyeliminuj zmienne
+512#£Wyeliminuj jedna lub wiecej zmiennych z ukladu r—wnan.
+513#£Sprawdz, czy prawda
+514#£Sprawdz, czy r—wnanie jest prawdziwe
+515#£Rozwiaz r—wnanie r—zniczkowe
+516#£Rozwiaz r—wnanie r—zniczkowe. Wprowadz wprowadz przy uzyciu innej notacji. Przyklady: y'=y , y''=y lub f'(x)=f(x)
+517#£Rozwiaz numerycznie uklad r—wnan r—zniczkowych
+518#£Musi byc w formie y'=?
+519#£Pokaz definicje
+520#£Pokazuje definicje aktywne w tym miejscu w dokumencie.
+521#£Usuwanie definicji (Alt+F)
+522#£Wstawia polecenie 'Usun def:' do dokumentu. Wszystkie definicje umieszczone przed tym poleceniem nie beda poprawne w pozostalej czesci dokumentu.
+523#£Definiowanie (Alt+D)
+524#£Wstawia definicje, kt—ra jest prawidlowa w pozostalej czesci dokumentu
+525#£Definiowanie stalych fizycznych
+526#£Wybierz jedna z najczesciej uzywanych stalych i zdefiniowaj je w dokumencie do wykorzystania w obliczeniach.
+527#£Zmniejszyc
+528#£Zmniejszanie wyrazenia przy uzyciu r—znych metod
+529#£Uproscic
+530#£Automatyczna pr—ba uproszczenia wyrazenia. Uzyj redukcji i wybierz okreslone metody, jesli to sie nie powiedzie.
+531#£Rozklad na czynniki pierwsze
+532#£Rozkladanie wyrazenia na czynniki pierwsze
+533#£Rozszerzac
+534#£Wszystkie nawiasy sa interpretowane
+535#£Tabela
+536#£Wstawianie Excela
+537#£Odr—zniac
+538#£Zaznacz wyrazenie, aby je odr—znic, lub umiesc kursor w wyrazeniu
+539#£Integrowac
+540#£Okresla calke nieoznaczona funkcji
+541#£
+542#£
+543#£
+544#£
+545#£Wykres wykresu (Alt+P)
+546#£Pokazuje wykres dla wybranych funkcji/r—wnan i punkt—w. Wykres mozna nastepnie wstawic do dokumentu. Obslugiwanych jest kilka program—w wykres—w. Wybierz swoja ulubiona w ustawieniach.
+547#£Wykres za pomoca GnuPlot
+548#£Pokaz wykres za pomoca GnuPlot. GnuPlot obsluguje wiele funkcji i tworzy ladnie wygladajacy wykres. Mozesz kliknac dwukrotnie wykres w dokumencie, aby go ponownie edytowac.
+549#£Wykres przy uzyciu wykresu
+550#£Wstawia osadzony obiekt Graph w programie Word, kt—ry mozna edytowac, klikajac dwukrotnie wykres. Definicje, funkcje, r—wnania i punkty sa przenoszone z programu Word do programu Graph. Graph to bardzo szybki program z wieloma funkcjami. Minusem jest to, ze nie jest obslugiwany na komputerach Mac, a wykresy sa wyswietlane w niskiej rozdzielczosci.
+551#£GeoGebra
+552#£Otwiera GeoGebre i przenosi wybrane funkcje/r—wnania do GeoGebry, a takze wszelkie definicje. GeoGebra to najbardziej bogaty w funkcje program grafowy. Tworzy r—wniez wykres wysokiej jakosci. Wady to: Otwieranie jest powolne, a wykres nie jest automatycznie przenoszony do programu Word. Musi zostac skopiowany recznie do Worda za pomoca menu edycji/'Kopiuj widok grafiki do schowka'. Po wstawieniu wykresu nie mozna go ponownie edytowac.
+553#£Wykres programu Excel
+554#£Wstawia osadzony arkusz Excela przeznaczony do pokazywania wykres—w i punkt—w. Kliknij dwukrotnie arkusze Excela, aby je ponownie edytowac. Nie jest tak szybki i bogaty w funkcje, jak niekt—re inne rozwiazania graficzne. Zalety to: Obsluguje nauke Excela i jest przeznaczony do latwego kreslenia punkt—w. Jest to dobry wyb—r do wsp—lpracy z innymi przedmiotami, takimi jak przedmioty scisle.
+555#£Pole kierunkowe
+556#£Pokazuje pole kierunkowe i wykresla krzywe rozwiazania dla r—wnania r—zniczkowego pierwszego rzedu.
+557#£Wstaw plik GeoGebra
+558#£Wstawia pusty plik GeoGebra, kt—ry mozna edytowac i zapisywac z poziomu programu Word. Plik jest wyswietlany jako ikona. Obrazy wykres—w musza zostac skopiowane do dokumentu.
+559#£Wykres 3D
+560#£Kresl r—wnania, punkty, wektory i wykresy parametryczne w 3D.
+561#£Bryla obrotu
+562#£Pokazuje bryle obrotu dla funkcji. Wykres funkcji jest obracany o 360 stopni wok—l osi x, tworzac obiekt 3D.
+563#£Statystyka
+564#£Otwiera skoroszyt programu Excel przeznaczony dla statystyk jednej zmiennej. Sp—jrz na arkusze, aby zobaczyc wszystkie funkcje.
+565#£Zgrupowane obserwacje
+566#£Arkusz Excela dla niezgrupowanych danych. Oblicza czestotliwosci, srednia, kwartyle itp. i generuje odpowiednie diagramy, takie jak diagram pudelkowy i was—w
+567#£Zgrupowane obserwacje
+568#£Arkusz Excela dla pogrupowanych danych. Oblicza czestotliwosci, srednia itp. i generuje odpowiednie diagramy, takie jak histogram oraz diagram pudelkowy i was—w
+569#£Wykres slupkowy
+570#£Arkusz Excela do tworzenia wykres—w slupkowych
+571#£Histogram
+572#£Arkusz Excela do wykreslania wielu histogram—w na jednym diagramie.
+573#£Schemat klatki schodowej
+574#£
+575#£Wykres skumulowanej czestotliwosci
+576#£
+577#£Wykres pudelkowy i wasowy
+578#£Arkusz Excela do wykreslania wielu wykres—w pudelkowych i was—w na jednym diagramie.
+579#£Regresja
+580#£Najpierw wstaw tabele z punktami. Nastepnie umiesc kursor w tabeli i wybierz typ regresji. St—l moze byc pionowy lub poziomy. Jesli sa tylko dwa punkty, zaklada sie, ze jest pionowy.
+581#£Wystapil blad podczas sprawdzania dostepnosci aktualizacji. Zostaniesz teraz przekierowany na strone internetowa, gdzie mozesz sam sprawdzic, czy jest nowa aktualizacja. Aktualna wersja to:
+582#£Wstawia tabele z dwiema kolumnami do wprowadzania punkt—w regresji.
+583#£Dystrybucji
+584#£Arkusz Excela z wykresami rozkladu. Diagramy sa dynamiczne i moga wykreslac rozklady dla wszystkich parametr—w.
+585#£Rozklad dwumianowy
+586#£Arkusz Excela, kt—ry kresli rozklad dwumianowy. Na arkuszu wybierz p i n
+587#£Rozklad normalny
+588#£Arkusz programu Excel, kt—ry przedstawia rozklad normalny. Wybierz srednia i odchylenie standardowe na arkuszach
+589#£-dystrybucja
+590#£Arkusz Excela, kt—ry wykresla rozklad $X^2. Na arkuszu wybierz stopnie swobody.
+591#£Test
+592#£Testy statystyczne
+593#£Test dwumianowy
+594#£Arkusz Excela do testu dwumianowego. Ten sam skoroszyt programu Excel co rozklad dwumianowy, ale inny arkusz.
+595#£$X^2-test
+596#£Wykonuje test $X^2 na tabeli n x n. Zaznacz liczby w tabeli.
+597#£Dobroc dopasowania
+598#£Przeprowadza test dobroci dopasowania. (test chi-kwadrat), aby sprawdzic, czy dwa rozklady sa takie same.
+599#£Symulacja statystyczna
+600#£Arkusz Excela z dodatkowa funkcjonalnoscia, kt—ra moze permutowac i zapisywac wynik. Zawiera przyklad uzycia.
+601#£Nowe r—wnanie (Alt+M)
+602#£Wstawianie pola wprowadzania matematyki
+603#£Nowe r—wnanie numerowane (Alt+M, Alt+M)
+604#£Wstawia nowe r—wnanie numerowane automatycznie. Nacisnij dwukrotnie Alt+M, aby wstawic r—wnanie numerowane. Nalezy to aktywowac w ustawieniach | ponumerowane r—wnania.
+605#£Nowe nazwane r—wnanie numerowane, do kt—rego mozna sie odwolywac.
+606#£Wstawia nowe r—wnanie numerowane, kt—remu mozna nadac nazwe w celu latwego odwolywania sie do niego p—zniej. Jesli numer r—wnania zmieni sie p—zniej, odniesienie r—wniez sie zmieni.
+607#£Wstaw odniesienie do r—wnania.
+608#£Wstaw numer r—wnania poprzednio nazwanego r—wnania. Jesli numer r—wnania zmieni sie p—zniej, odniesienie r—wniez sie zmieni.
+609#£Ustaw r—wnanie na stala liczbe
+610#£R—wnanie, kt—re jest juz ponumerowane, mozna ustawic na okreslona liczbe
+611#£Wstawia nowa sekcje r—wnania.
+612#£Przekaze pierwsza liczbe w numeracji r—wnan. Jesli poprzedni to (2.5), to nastepny bedzie (3.1). Moze byc wstawiany do nagl—wk—w jako numer nagl—wka lub wstawiany w ukryciu.
+613#£Zaktualizuj wszystkie numery r—wnan w dokumencie
+614#£Zazwyczaj nalezy go uruchomic, gdy r—wnania zostaly usuniete. Wstawianie nowych r—wnan ponumerowanych wymusi jednak aktualizacje.
+615#£Symbole
+616#£R—zne metody manipulowania symbolami
+617#£Zamien znaki mnozenia
+618#£Zamien wszystkie * znaki mnozenia na $*
+619#£Konwertuj r—wnania na LaTex. (Skr—t alt+T konwertuje pojedyncze r—wnanie)
+620#£Konwertowanie niekt—rych lub wszystkich r—wnan na jezyk LaTex w dokumencie. Moze r—wniez uzyc MikTex do wygenerowania kompletnego dokumentu LaTex.
+621#£Konwersja na LaTex (Alt+T)
+622#£Konwertuje jedno r—wnanie na LaTex. Osadzanie znak—w mozna wybrac w formularzu LaTex. Skr—t Alt + T konwertuje r—wniez jedno r—wnanie.
+623#£Zamien, aby rozpoczac mnozenie
+624#£Zamienia wszystkie znaki mnozenia " & ChrW(183) & " na znaki mnozenia *.
+625#£Kropka jako separator dziesietny
+626#£Zamienia wszystkie , (przecinki) w polach wprowadzania matematyki na . (kropka) i wszystkie ;(sredniki) z ,(przecinkami)
+627#£Przecinek jako separator dziesietny
+628#£Zastepuje wszystkie pliki . (kropki) w polach wprowadzania matematyki z ,(przecinkami) i wszystkimi ,(przecinkami) z ;(srednikami)
+629#£Ksztalty matematyczne, diagramy i obrazy
+630#£Otwiera dokument z typowymi ksztaltami matematycznymi, diagramami itp. Mozna je nastepnie skopiowac do dokumentu i manipulowac nimi wedlug wlasnego uznania.
+631#£Tabela $ArrowRight Lista
+632#£Lista $ArrowRight tabeli
+633#£St—l
+634#£WordMat moze manipulowac danymi na liscie. Przyklad: Mozesz latwo dodac liczbe do wszystkich element—w na liscie. Jednak dane czesto znajduja sie w tabeli w programie Word. Oto funkcje do konwersji list til tabel i odwracania.
+635#£Wstaw arkusz Excela
+636#£Wstawia pusty osadzony arkusz programu Excel. Kliknij dwukrotnie, aby otworzyc i edytowac.
+637#£Konwertuj na liste
+638#£Konwertowanie tabeli na liste. Ta lista mozna nastepnie manipulowac za pomoca programu WordMat. Przyklad: [1, 2, 3]+1 = [2, 3, 4] Zobacz instrukcje, aby uzyskac wiecej informacji
+639#£Konwertuj na tabele
+640#£Konwertuje liste na tabele. Lista moze znajdowac sie w polu matematycznym lub byc zapisana w dokumencie i wybrana, na przyklad (1 , 2), (3 , 4), (5 , 6)
+641#£Solwer tr—jkat—w
+642#£Wprowadz 3 boki/katy. Solwer tr—jkat—w oblicza pozostale boki/katy i generuje obraz tr—jkata.
+643#£Podrecznik programu Word
+644#£Otwiera podrecznik jako dokument programu Word
+645#£Podrecznik internetowy
+646#£Otwiera internetowa instrukcje obslugi. Ma lepsza nawigacje i filmy niz podrecznik Word, ale praca w toku.
+647#£Instrukcja obslugi Maxima
+648#£Maxima to program CAS, kt—ry wykonuje wiekszosc obliczen matematycznych w WordMat. Maxima ma wiele wbudowanych funkcji, kt—re nie sa natychmiast widoczne z interfejsu uzytkownika WordMat, ale mozna je wykonac, jesli znasz nazwy funkcji. Spowoduje to wyswietlenie pomocy programu Maxima, w kt—rej mozna zapoznac sie z dokumentacja dotyczaca wszystkich funkcji programu Maxima.
+649#£Okolo
+650#£Kto stworzyl WordMat?
+651#£Sprawdz dostepnosc aktualizacji
+652#£Automatycznie sprawdzaj dostepnosc aktualizacji.
+653#£Skr—ty klawiaturowe
+654#£Przedstawia liste skr—t—w klawiaturowych sluzacych do aktywowania polecen programu WordMat oraz skr—t—w sluzacych do wprowadzania danych matematycznych w polach wprowadzania danych matematycznych w programie Word.
+655#£Szablon LaTex
+656#£Szablon LaTex
+657#£Otwiera dokument programu Word, kt—ry jest stylizowany na dokument LaTex, ale jest tak latwy do napisania jak dokument programu Word.
+658#£Precisionen jest ustawiony bardzo wysoko. Czas obliczen moze byc bardzo dlugi lub zakonczyc sie niepowodzeniem. Jesli tak, spr—buj ponownie z nizszym ustawieniem.
+659#£WordMat bardzo dobrze konwertuje na LaTex, ale istnieje r—wniez mozliwosc uzycia Maxima do konwersji na LaTex.
+660#£Jednostki zwykle nie sa zapisywane kursywa jako zmienne. Za pomoca tej funkcji WordMat pr—buje zidentyfikowac jednostki i wstawic kod LaTex, aby zapisac jednostki normalna czcionka.
+661#£Zamykac
+662#£Generuje prawdziwy dokument LaTex za pomoca MikTex, kt—ry musi byc zainstalowany. Uzywaj tylko dla prostego dokumentu, poniewaz nie wszystkie obiekty dokumentu sa obslugiwane.
+663#£Pokazuje, jak interpretowane sa dane wyjsciowe LaTex
+664#£Generuje kod LaTex i otwiera sie w TexWorks, gdzie mozna wprowadzic poprawki.
+665#£Tr—jkat
+666#£Notacja
+667#£Wykres
+668#£Zaawansowany
+669#£Notacja naukowa
+670#£Liczby zespolone
+671#£Musisz ponownie uruchomic program Word, aby zmiana jezyka zostala zastosowana wszedzie.
+672#£Nie mozna wziac logarytmu wartosci <= 0
+673#£Obliczania
+674#£Obliczam
+675#£Ta metoda wymaga interwalu, w kt—rym rozwiazanie znajduje sie w przedziale. W interwale musi znajdowac sie tylko jedno rozwiazanie. Sp—jrz na wykres, aby zidentyfikowac rozwiazania.
+676#£Informacje o metodzie interwalowej
+677#£Metoda Newtona-Raphsona wymaga wstepnego zgadniecia rozwiazania. Nie ma gwarancji, ze metoda znajdzie rozwiazanie, jesli takie istnieje. Znaleziono tylko 1 rozwiazanie. Sp—jrz na wykres, aby zidentyfikowac poczatkowe przypuszczenie.
+678#£O firmie Newton-Raphson
+679#£Musisz zapisac sw—j dokument, zanim bedzie mozna wykonac kopie zapasowa!
+680#£Wyjscie notacji biegunowej
+681#£Problemy z plikiem "normal.dotm" moga powodowac problemy ze skr—tami klawiaturowymi w programie WordMat. Problemy mozna rozwiazac, usuwajac plik, poniewaz nowy plik domyslny jest generowany automatycznie po ponownym uruchomieniu programu Word. Pliku nie mozna usunac, gdy program Word jest otwarty. Musisz to zrobic recznie.\r\n\r\n- Nacisnij OK, aby otworzyc folder, w kt—rym znajduje sie Normal.dotm. \r\n- Zapisz swoja prace i zamknij Worda \r\n- usun normal.dotm \r\n- Otw—rz Worda oraz otw—rz i zamknij ustawienia WordMat
+682#£Obliczenia wykonane przez GeoGebra
+683#£strzala
+684#£Otwieranie przegladarki Safari
+685#£Problem prawdopodobnie nie zostanie rozwiazany.\r\nCzy chcesz spr—bowac innej metody lub silnika CAS?
+686#£Silnik CAS
+687#£Znaczace liczby
+688#£Wlaczanie/wylaczanie jednostek
+689#£Jesli jednostki sa wlaczone, program WordMath moze interpretowac i konwertowac jednostki. Na przycisku SI mozna zmienic jednostki wyjsciowe. Nie wlaczaj jednostek, chyba ze jest to konieczne. Moze wplywac na zachowanie WordMat i rezerwuje wiele zmiennych.
+690#£Jednostki wyjsciowe
+691#£Podaj jednostki, na kt—re chcesz przekonwertowac. Domyslnie jednostkami wyjsciowymi sa jednostki SI.
+692#£Sf
+693#£Jednostek
+694#£Nie. liczb
+695#£Zaokraglanie
+696#£Wybierz, w jaki spos—b liczby maja byc mapowane i zaokraglane. W ponizszych przykladach WordMat jest ustawiony na 3 cyfry\r\n\r\nUlamki dziesietne: 12,345\r\nCyfry znaczace: 12,3\r\nSci. Notacja: 1,23*10^1
+697#£Ukoncz kwadrat
+698#£Stosuje uzupelnienie kwadratu dla wszystkich zmiennych w wyrazeniu
+699#£Silnia ujemnych liczb calkowitych niezdefiniowana
+700#£Ostrzezenie: Wiecej r—wnan niz zmiennych w systemie. Czy bylo to zamierzone?
+701#£Nowe r—wnanie
+702#£Poprzedni wynik(i)
+703#£Przelacz liczbe/dokladny
+704#£Konwertuj na lateks
+705#£Lateks PDF
+706#£Stopni
+707#£Radianach
+708#£Jednostka kata
+709#£Pokaz warunki rozwiazania (beta)
+710#£Dokladny
+711#£Numeryczny
+712#£Automatyczne
+713#£Bardzo wysoka precyzja (beta)
+714#£Wstaw wyjasnienie
+715#£Wstaw maksimum, polecenie
+716#£Separatory
+717#£Lista
+718#£Mult.sign
+719#£Kropka
+720#£Typ rozwiazania
+721#£Boolowski
+722#£Zestaw rozwiazan
+723#£Indeks dolny
+724#£Jest tylko tekstowa czescia nazwy zmiennej
+725#£Jest indeksem listy/macierzy
+726#£Standardowy program do tworzenia wykres—w
+727#£Osadzanie arkuszy programu Excel
+728#£Jednostki wyjsciowe
+729#£Jednostki wyjsciowe stanu oddzielone przecinkami\nprzyklady:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJesli nic nie jest podane, jednostki sa zwracane w podstawowych jednostkach SI lub jednostkach pochodnych SI bez prefiksu.
+730#£Przyklady obslugiwanych jednostek:\n(Zobacz instrukcje, aby dowiedziec sie wiecej)\n\nDlugosc: cm , AU, ly, pc\nMasa: u , G, mg\nCzestotliwosc: Hz , Bq\nEnergia: kWh , eV, aJ\nCisnienie: Bar , mmHg, atm, torr
+731#£R—wnania trygonometryczne
+732#£Wszystkie rozwiazania
+733#£Tylko 1 rozwiazanie
+734#£Automatyczne sprawdzanie dostepnosci aktualizacji
+735#£Napraw skr—ty klawiaturowe
+736#£Uruchom ponownie WordMat
+737#£Nie. obliczen
+738#£Skr—ty klawiaturowe naprawione.\nJesli nadal nie dziala, usun plik 'normal.dotm' w folderze '~/Library/Group Containers/UBF8T346G9. Office/Zawartosc uzytkownika/Szablony" i uruchom ponownie program Word
+739#£Skr—ty klawiaturowe zostaly naprawione.\nJesli nadal nie dziala, usun plik 'normal.dotm' w folderze '%appdata%/Microsoft/Templates' i uruchom ponownie Worda
+740#£Pakiet GeoGebra Calculator Suite jest instalowany z programem WordMat. Dziala w przegladarce, ale nie wymaga internetu. Dziala tak samo na Windows i Mac, i uruchamia sie szybko.\nGeoGebra 5 Dziala tak samo na Windows i Mac, ale wymaga instalacji.\nWindows obsluguje r—wniez inne wersje aplikacji GeoGebra, takie jak Geogebra 6, Graphing Calculator itp. Beda one uzywane, jesli GeoGebra 5 nie jest zainstalowana.
+741#£Skr—ty klawiaturowe nie sa ustawione poprawnie
+742#£Wynik obliczen zalezy od znaku
+743#£Znak stanu
+744#£R—wnanie r—zniczkowe
+745#£Rozwiazywanie r—wnan r—zniczkowych
+746#£Indep. var
+747#£Dep. var/function
+748#£Warunek poczatkowy
+749#£Blad maksimum
+750#£Blad matematyczny
+751#£Blad skladniowy
+752#£Blad skladniowy. WordMat nie zrozumial Twoich danych wejsciowych.
+753#£Brakuje Ci
+754#£Jest ich za duzo
+755#£Wystapil blad w kodzie.
+756#£Dzielenie przez zero
+757#£Zdarzyla sie pomylka. Blad zostal prawdopodobnie spowodowany przez jedna z twoich definicji.\r\nMoze uda Ci sie dostrzec blad z ponizszych informacji.
+758#£Wystapil blad w jednej z twoich definicji.\r\nDefinicja zostanie teraz wybrana w Wordzie.
+759#£Nielegalna postac zostala umieszczona przez
+760#£Rozwiaz r—wnanie
+761#£Zmienna
+762#£Lub zmienna stanu:
+763#£Definicje
+764#£Definicje temp.
+765#£Ostrzezenie: Jednostki sa wlaczone.\r\nRozwiazywanie r—wnan bedzie ubozsze\r\nUwazaj na zmienne, kt—re sa jednostkami takimi jak: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
+766#£Rozwiaz uklad r—wnan
+767#£Wybieranie zmiennych
+768#£Uruchamia sie WordMat
+769#£Czekaj
+770#£Solwer tr—jkat—w
+771#£Kat prosty
+772#£Jakikolwiek
+773#£Prawy
+774#£Nazewnictwa
+775#£Manuel
+776#£Katy wielkie litery, boki male litery
+777#£Boki oznaczone naroznikami AB
+778#£Wstawianie liczb na tr—jkacie w programie Word
+779#£Pokazywanie obliczen w programie Word
+780#£Wstaw znane boki i katy. Pozostale boki i katy zostana nastepnie obliczone i wstawione do Worda.\r\nMozliwa jest zmiana nazw bok—w i kat—w tr—jkata. Po prostu kliknij litery.
+781#£Tr—jkat nie jest za duzy. Ale poprawnie przeskalowany tr—jkat zostanie wstawiony do programu Word.
+782#£Tr—jkat WordMata jest uzywany z danymi wejsciowymi:
+783#£Na podstawie Twoich informacji mozna skonstruowac dwa tr—jkaty
+784#£Do obliczenia pozostalych bok—w i kat—w potrzeba wiecej informacji
+785#£Dwa tr—jkaty
+786#£Do obliczenia pozostalych bok—w i kat—w potrzeba wiecej informacji
+787#£Mozna teraz obliczyc wszystkie boki i katy.
+788#£Podczas rozwiazywania r—wnania zastosowano metody numeryczne. Byc moze istnieje wiecej rozwiazan.
+789#£Ustawienia temp.
+790#£Automatyczne zmniejszanie
+791#£Stara sie sprowadzic wyrazenie do mozliwie najkr—tszej postaci przy uzyciu r—znych metod.
+792#£Pr—buje rozlozyc wyrazenie na czynniki pierwsze
+793#£Rozwija wyrazenie.
+794#£Zracjonalizowac
+795#£Konwertuje wszystkie liczby dziesietne na ulamki zwykle
+796#£Redukcja trygonometryczna
+797#£Zmniejsz wyrazenie przy uzyciu tozsamosci trygonometrycznych.
+798#£Wstaw ten sam wiersz
+799#£Drukowanie 2D
+800#£Zresetuj wszystko
+801#£Tytul osi
+802#£Rodzaj linii
+803#£Aby rozwiazac r—wnanie, musisz najpierw wstawic r—wnanie do programu Word. Umiesc kursor w r—wnaniu i ponownie nacisnij "Rozwiaz r—wnanie(a)". Zaznacz wiecej r—wnan, aby rozwiazac uklad r—wnan
+804#£Nie wybrano r—wnania
+805#£Uproscic
+806#£Czynnik
+807#£Rozszerzac
+808#£Pomoc
+809#£Recznie
+810#£Podrecznik jako dokument Word
+811#£Instrukcja obslugi strony internetowej online
+812#£Okolo
+813#£Aktualizacja
+814#£Skr—ty
+815#£Jasny
+816#£Logarytm
+817#£Jezyk
+818#£Znak
+819#£Plus
+820#£Minus
+821#£Zero
+822#£Blad
+823#£Definicje
+824#£OK
+825#£Anuluj
+826#£Czekac
+827#£Aktywnosc
+828#£Zatrzymac
+829#£R—wnanie jest rozwiazywane dla
+830#£R—wnanie jest rozwiazywane numerycznie dla
+831#£przez WordMat.
+832#£Funkcje
+833#£R—wnanie
+834#£R—wnania
+835#£Punkt—w
+836#£Wektory
+837#£Tytul
+838#£Resetowac
+839#£Skomplikowane obliczenia wykonane dokladnie moga zajac bardzo duzo czasu. Czy chcesz ponowic pr—be numeryczna?
+840#£Uzyj regularnego d jako r—zniczkowego d
+841#£Notacja dy/dx moze byc zwykle uzywana tylko ze specjalnym dyferencjalem d (\dd) lub symbolem pochodnych czastkowych (\partial). Jesli nie spodziewasz sie, ze d/dx zostanie pomylone z innym wyrazeniem, mozesz uzyc tego ustawienia, poniewaz szybciej jest wpisac dy/dx przy uzyciu zwyklego d.
+842#£Regresja zdefiniowana przez uzytkownika
+843#£Rozwiaz numerycznie uklad r—wnan r—zniczkowych
+844#£Wystapil blad
+845#£Zmienna
+846#£Ostrzezenie
+847#£R—wnanie r—zniczkowe powinno miec postac y'=...  aby mozna go bylo rozwiazac numerycznie
+848#£Przycisk pobiera GeoGebra 5 do "pobrania" na komputer Mac. Nastepnie zostaniesz poprowadzony przez konfiguracje.
+849#£GeoGebra 5 nie zostala w pelni zainstalowana. Konc—wka
+850#£GeoGebra nie zostala jeszcze zainstalowana. Poczekaj na zakonczenie pobierania.
+851#£Kontynuowac
+852#£Usun stara wersje
+853#£Zanim nowa wersja bedzie mogla zostac pobrana, stara wersja z Pobranych musi zostac usunieta.\r\n 1. Powinno otworzyc sie okno o nazwie 'Zezw—l na dostep do pliku'.\r\n2. Kliknij 'Wybierz...' \r\n3. Kliknij "Przypisz dostep" "
+854#£Pobieranie zostalo zatrzymane
+855#£Aby mozna bylo kontynuowac instalacje, nalezy zezwolic na dostep do GeoGebra.app
+856#£GeoGebra 5 jest w trakcie pobierania
+857#£1. Najpierw poczekaj na pobranie GeoGebry 5.\r\n2. Gdy pobieranie zostanie zakonczone, powinno otworzyc sie okno o nazwie 'Zezw—l na dostep do pliku'.\r\n3. Kliknij 'Wybierz...' \r\n4. Kliknij "Przypisz dostep"
+858#£Zatrzymany
+859#£Proces zostal zatrzymany.\r\n\r\nKliknij Zamknij i spr—buj ponownie.
+860#£Nie udzieliles dostepu do GeGebry. Kliknij "Pon—w pr—be", aby spr—bowac ponownie.
+861#£Pobieranie jest powolne. Sprawdz w przegladarce Safari, czy wyglada na to, ze trwa pobieranie. Mozesz kliknac przycisk Zatrzymaj, jesli nie ma postepu.
+862#£Blad podczas pobierania GeoGebry
+863#£Nie udalo sie odnalezc pliku w pobranych plikach.\r\nMozesz kliknac 'Pon—w' na dole, jesli chcesz, aby WordMat wygladal ponownie.
+864#£Udzielanie uprawnien GeoGebrze
+865#£Okno o nazwie 'Zezw—l na dostep do pliku' powinno sie teraz otworzyc.\r\n\r\n1. Kliknij 'Wybierz...' \r\n2. Kliknij "Przypisz dostep"
+866#£Przenoszenie GeoGebry do aplikacji
+867#£Moze byc konieczne udzielenie pozwolenia na "Zdarzenia systemowe", po prostu kliknij OK.
+868#£Gotowy
+869#£GeoGebra 5 jest teraz zainstalowana.\r\nKliknij 'Kontynuuj', aby otworzyc GeoGebra.
+870#£Sa strony, kt—re maja wartosc 0
+871#£Najpierw musisz wybrac tabele
+872#£Nie mozna wstawic ponumerowanego r—wnania w tabeli
+873#£Do rozwiazania ukladu r—wnan wykorzystano GeoGebra. Nie ma pewnosci, czy uda sie znalezc rozwiazania. Zaleca sie wypr—bowanie innej metody. Np. Maxima lub numeryczne/graficzne
+874#£Ta funkcja nie jest obslugiwana przez GeoGebra. Wypr—buj rozwiazywanie r—wnan
+875#£R—wnanie zostalo rozwiazane graficznie za pomoca GeoGebry:
+876#£Liczba nawias—w w wyrazeniu nie jest zgodna
+877#£Bledy ustawien
+878#£Masz niepoprawne ustawienie w Wordzie.\r\nW menu R—wnania przelacz sie z Latex na Unicode.
+879#£Blad skladni - niepoprawna matematyka.
+880#£Wprowadziles cos, co nie jest poprawna notacja matematyczna.\r\nBlad jest zwiazany ze zmienna:
+881#£Na przyklad moze to byc spowodowane tym, ze masz indeks dolny liczby. \r\nK_0 nalezy zastapic liczba, a nie np. 5000_0. Wystarczy, ze powie 5000.
+882#£W r—wnaniu nie moga byc dw—ch znak—w r—wnosci
+883#£System r—wnan zostal rozwiazany za pomoca GeoGebry:
+884#£Obliczenia zostaly przerwane, poniewaz trwaly bardzo dlugo. Czasami pomocne moze byc wypr—bowanie obliczen za pomoca opcji "Numeryczne" zamiast Dokladnej lub Automatycznej
+885#£Nie mozna polaczyc sie z Maxima. Czy zamiast tego chcesz uzyc metody 'WSH'?\r\n(Ta opcja znajduje sie w sekcji Zaawansowane w Ustawieniach)
+886#£WordMath nie moze komunikowac sie z GeoGebra. Dzieje sie tak prawdopodobnie dlatego, ze nie ustawiles wymaganych ustawien zabezpieczen w Safari. Kliknij przycisk OK, aby wyswietlic instrukcje
+887#£Rozwiaz obliczenia numeryczne
+888#£WordMat nie m—gl zlokalizowac instalacji Maxima. Spr—buj zainstalowac ponownie
+889#£Blad podczas nawiazywania polaczenia z Maxima za pomoca WSH
+890#£Zatrzymuje sie automatycznie za
+891#£Nie udalo sie. Zatrzymuje.
+892#£Polecenie zostalo przerwane po
+893#£Czy chcesz spr—bowac ponownie i jak dlugo chcesz czekac. (sekundy) Komputer zostanie zablokowany na czas oczekiwania.
+894#£Blad w definicji
+895#£Wystapil blad skladni zwiazany z integra. Czy pamietasz dx na koncu?
+896#£Dlugosc wyjscia:
+897#£Kliknij przycisk TAK, aby wstawic wszystkie znaki w programie Word. (Ostrzezenie: moze spowolnic dzialanie programu Word, a nawet spowodowac awarie programu Word). \r\n Kliknij NIE, aby wstawic tylko pierwsze 1000 znak—w.
+898#£Ustawiles zbyt malo parametr—w dla funkcji:
+899#£Moze to byc spowodowane tym, ze uzyles przecink—w zamiast srednik—w do oddzielenia parametr—w. (Zamiast tego mozesz dodac spacje po jednej stronie przecinka).
+900#£Warunki rozwiazania:
+901#£Najpierw musisz wybrac liste, np. [1; 2; 3]
+902#£Moze zamieniles n i r w K(n, r)?

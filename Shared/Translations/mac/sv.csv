@@ -1,0 +1,903 @@
+0#£Hjälp med Maxima-kommandon
+1#£Infoga numrerad ekvation
+2#£Klistra in talekvationen som referens
+3#£Infoga referens till ekvation
+4#£Bokmärke
+5#£Ange namnet på ekvationen
+6#£Ange skatteidentifikationsnummer
+7#£Num.
+8#£Infoga taxering Avsnitt nr.
+9#£Uppdatera skatteregistreringsnummer
+10#£Befintliga namn på ekvationer
+11#£För att infoga referens till ekvationen senare, välj "Infoga referens till ekvation" från WordMat-menyn under "Infoga ekvation".
+12#£Namnet finns redan
+13#£Namnet får inte innehålla blanksteg
+14#£Referens för taxering
+15#£Plats
+16#£Vänster
+17#£Höger
+18#£Numrering
+19#£Fråga efter namnet på referensen när du infogar
+20#£Med WordMat kan du utföra matematiska beräkningar i Word. WordMat-kärnan är öppen källkod och finns tillgänglig utan kostnad.\r\nMed WordMat-kärnan installeras följande andra program:\r\nMaxima, GeoGebra math-apps-bundle, Math fonts.\r\nValfria komponenter: GeoGebra 5, Graph, WordMat+. Se mer under licens\r\nWordMat är gjord av Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-2025.
+21#£Det finns en ny version av WordMat redo för nedladdning.\r\nNyheter: \r\n
+22#£Du kommer nu att omdirigeras till nedladdningssidan
+23#£Ny version
+24#£Ange ett antal punkter och en tabell skapas automatiskt som kan fyllas i med punkterna. När du har fyllt i den aktiverar du den önskade regressionen.
+25#£Det rekommenderas inte att göra regression med mer än 200 punkter i en Word-tabell. Använd Excel om du vill göra regression på så många punkter.
+26#£Ett misstag har begåtts. Det finns förmodligen ett fel i de inmatade siffrorna.
+27#£Du måste skapa en tabell med två kolumner. X-värden i den vänstra kolumnen och Y-värden i den högra kolumnen. Bokstäver ignoreras. Regression utförs på de markerade siffrorna. Om ingen är markerad utförs regression på alla tal i tabellen.
+28#£Den önskade regressionen kan inte utföras på dessa punkter.
+29#£Linjär regression utförd med WordMat: $Tab
+30#£Exponentiell regression utförd med WordMat: $Tab
+31#£Effektregression utförd med WordMat: $Tab
+32#£Potensregression kan inte utföras på dessa punkter. Alla ska vara positiva och får inte vara 0.
+33#£Anpassad regression med funktionen
+34#£Utförs med hjälp av WordMat (på engelska)
+35#£Ange ordningen för polynomregressionen (1-
+36#£(Den maximala ordningen bestäms av antalet poäng)
+37#£ordning
+38#£Polynom regression av grad
+39#£Anpassad regression
+40#£Funktion
+41#£Antal decimaler
+42#£Startgissning (Skriven i formen a=2 ; c=10)
+43#£Precisionen är mycket högt satt. Beräkningstiden kan vara mycket lång eller misslyckas. Försök igen med en lägre inställning.
+44#£Precisionen är ganska högt satt. Beräkningstiden kan vara lång eller felaktig. Försök igen med en lägre inställning.
+45#£Precisionen kan inte vara negativ. Välj ett positivt heltal
+46#£Precisionen är ogiltig. Välj ett positivt heltal.
+47#£Placera markören i ett matematiskt fält
+48#£Beräkningar kan inte utföras på definitionsfält. Du kan använda din definition nedan för en beräkning.
+49#£Uttrycket särskiljs med hjälp av WordMat.
+50#£Termen kunde inte särskiljas
+51#£Ange variabel
+52#£En huvudfunktion är tillgänglig med hjälp av WordMat:s "Master-funktion"-funktion
+53#£Termen kunde inte integreras
+54#£Ett misstag har begåtts. WordMat är förmodligen inte korrekt installerat. Försök att installera om, eventuellt med antivirusprogrammet inaktiverat. Om din skola har partnerskap kan problemet lösas genom att använda inställningen "dll-anslutningsmetod" i Inställningar/Avancerat
+55#£Ett fel uppstod när Maxima skulle startas
+56#£Ojämlikhet är löst för
+57#£med hjälp av WordMat.
+58#£Ojämlikhet har alla siffror som en lösning.
+59#£Ojämlikhet hade inga lösningar i $C för variabel
+60#£Ojämlikhet hade inga lösningar inom $R för variabel
+61#£med följande antaganden/definitioner:
+62#£Definiera
+63#£Ingen internetuppkoppling
+64#£Klicka på OK för att starta uppdateringen.
+65#£Kortkommandon för WordMat
+66#£Genvägar för matematiska fält i Word
+67#£Du kan skapa dina egna genvägar till matematiska fält i Word eller ändra de befintliga. När du är i ett matematiskt område hittar du fliken Ekvationsfunktion/Design. Under funktioner klickar du på den lilla pilen i det nedre högra hörnet. Välj sedan "matematisk autokorrigering"
+68#£Formler
+69#£Ta bort definitioner
+70#£Konstanter
+71#£Hitta värden online
+72#£Konvertera ekvationer till LaTex. (Kortkommandot alt+T konverterar en enda ekvation)
+73#£Kopiera till urklipp
+74#£Visa formulär
+75#£Känn igen enheter och skriv dem inte i kursiv stil
+76#£Använd konvertering från Maxima till LaTex
+77#£Konvertera alla
+78#£Konvertera och gå till nästa
+79#£Före
+80#£Efter
+81#£Ingen
+82#£Skriv själv
+83#£Omslutande tecken
+84#£Det finns inga fler matematiska fält i resten av det här dokumentet.
+85#£Lösa kopplade differentialekvation(er) numeriskt
+86#£Differentialekvationer
+87#£Startvärde
+88#£Steg
+89#£Kopplingspunkter
+90#£Visa regler
+91#£Infoga lista
+92#£Infoga tabell
+93#£Infoga graf
+94#£Förmodligen utanför definitionens räckvidd! \r\nJustera xmin/xmax
+95#£Ett misstag har begåtts. Titta på siffrorna vid xmin och xmax
+96#£Inget partnerskap
+97#£Ett fel uppstod när Graph skulle infogas. Det finns förmodligen ett syntaxfel någonstans i en definition eller liknande
+98#£Ett fel uppstod vid försöket att infoga Excel-ark. Det kan bero på att Excel har kraschat tidigare. Om det behövs, stäng öppna Excel-ark och öppna Excel innan du försöker via WordMat igen.
+99#£Ett fel uppstod när kommandot skulle översättas till Maxima-syntax.
+100#£Ett fel uppstod när Maxima-utdata skulle översättas till Word-synkronisering.
+101#£Lösningen är osäker. Prova om det behövs. Numerisk lösning
+102#£Eftersom det är en trigonometrisk ekvation finns det ett oändligt antal lösningar. Endast en av dessa lösningar finns med i listan.
+103#£Alla lösningar har inte hittats.
+104#£Fel: Division med noll.
+105#£Syntaxfel. Det finns ett fel i notationen.
+106#£Syntaxfel. Ett felaktigt tecken har använts. Kanske saknar multiplikationstecken eller kommatecken istället ; som en listavgränsare.
+107#£Varning: Du har bett om att lösa ett ekvationssystem, men angett färre variabler än ekvationer. Endast de första ekvationerna har lösts. Kontrollera själv om de sista ekvationerna passar.
+108#£Följande felmeddelande kom från Maxima:
+109#£Felmeddelande för Maxima
+110#£WordMat kunde inte hitta mappen "Programfiler"
+111#£Ett fel uppstod när du försökte öppna:
+112#£Det går inte att ansluta till servern
+113#£I det här läget i dokumentet definieras följande:
+114#£Det finns inga definitioner i det här avsnittet i dokumentet.
+115#£
+116#£Du kan inte definiera en härledd funktion.\r\nTa bort följande definition: \r\n
+117#£Det finns ett fel i definitionen:
+118#£Det ignoreras. Men fixa det så att du inte får det här felet med varje beräkning.
+119#£... Resten borttagna.
+120#£Din skola/organisation har ett aktivt samarbete. Nu kan du använda WordMat+
+121#£Tyvärr. Din skola har inget aktivt partnerskap.
+122#£Ange definitionen av den nya funktionen\r\nDefinitionen kan användas i resten av dokumentet, men inte tidigare.\r\n Om kommandot 'delete def:' infogas längre ner i dokumentet kan det inte användas därefter.\r\nFler funktioner kan definieras genom att separera definitionerna med " & ListSeparator\r\ne.g. f(x)=x " & ListSeparator & " g(x)=2x+1
+123#£Ny funktion
+124#£Ny ekvation
+125#£Definiera ekvation
+126#£Definiera
+127#£Mandatperioden är mycket lång. Vill du klistra in det i Word?\r\nWord kan bli väldigt långsamt. Försök att lösa numeriskt istället.\r\nDu kan se resultatet nedan:
+128#£Termen kunde inte beräknas.
+129#£Ekvationen hade inga lösningar inom $C för variabel
+130#£Ekvationen hade inga lösningar inom $R för variabel
+131#£Tyvärr kunde WordMat inte lösa ekvationen.
+132#£Alla siffror är lösningen på ekvationen
+133#£Du bad att lösa ekvationen för en variabel som redan har definierats. Infoga kommandot "delete def:" före ekvationen.
+134#£Taxeringssystemet är löst för
+135#£med hjälp av WordMat's 'Solve Equations'-funktion,
+136#£Partnerskap registrerat hos
+137#£Ekvationssystemet hade inga lösningar inom $C för variablerna
+138#£Ekvationssystemet hade inga lösningar inom $R för variablerna
+139#£Det måste finnas ett likhetstecken i en ekvation.
+140#£Inget partnerskap registrerat
+141#£Detta är inte en ekvation. En ekvation kommer alltid att ha ett =-tecken.
+142#£Följande variabler elimineras från ekvationssystemet:
+143#£med hjälp av WordMat's 'Eliminera variabel'-funktion,
+144#£sand
+145#£falsk
+146#£okänd
+147#£
+148#£En lösning hittades. Det kan dock lätt finnas flera lösningar.
+149#£Välj endast ett uttryck
+150#£Termen parafraseras med hjälp av S. WordMat med hjälp av metoderna:
+151#£Automatisk minskning,
+152#£Trigonometrisk reduktion,
+153#£Löptiden kunde inte förkortas
+154#£Uttrycket reduceras med hjälp av WordMat.
+155#£Uttrycket faktoriseras med hjälp av WordMat.
+156#£Termen kunde inte faktoriseras
+157#£Uttrycket utökas med hjälp av WordMat.
+158#£Termen kunde inte utvidgas
+159#£Du måste stänga av enheter för att lösa differentialekvationer
+160#£Differentialekvationen kunde inte lösas
+161#£Skolor kan samarbeta med Eduap för att se till att WordMat uppdateras. Partnerskap ger tillgång till support, WordMat+ och mer. Klicka för att se mer...
+162#£Binomial fördelning
+163#£Sanningsvärdet för påståendet bestäms med hjälp av WordMat.
+164#£Resultatet är baserat på numerisk jämförelse
+165#£Det gick inte att avgöra om påståendet var sant/falskt
+166#£Enheter från
+167#£Välj utmatningsenheter vid behov
+168#£Utmatningsenheter
+169#£Parenteserna spelar ingen roll
+170#£Automatisk säkerhetskopiering?
+171#£Hur många säkerhetskopior ska lagras max?
+172#£Tid mellan varje säkerhetskopiering
+173#£Word gör inte en automatisk säkerhetskopiering, utan skapar endast återställningsdata som kan användas för att återställa en förlorad fil.\n\nWordMat kan ta automatiska säkerhetskopior av hela dokumentet varje gång det beräknas och spara det i flera versioner, så att du alltid kan gå tillbaka och hitta något som fungerar. (Säkerhetskopieringen går snabbast om dokumentet inte finns på OneDrive)\n\nSäkerhetskopian lagras i mappen: documents/WordMat backup
+174#£Visa säkerhetskopior
+175#£Fråga
+176#£Alltid
+177#£Aldrig
+178#£Ett säkerhetskopieringsfel uppstod
+179#£Vill du aktivera WordMat's automatiska backup-system?\n\n(Se mer under inställningar | Säkerhetskopiering)
+180#£Normalfördelning
+181#£Låg
+182#£Normal
+183#£Hög
+184#£Mycket hög
+185#£Super (långsam)
+186#£Förordning
+187#£Vänta?
+188#£Max
+189#£Endast rader
+190#£Visa axlar
+191#£Kvalitet
+192#£Påverkar rotationshastigheten
+193#£När figuren visas kan du ändra bildvinkeln genom att hålla ned vänster musknapp och dra runt. \nHögerklicka på menyraden, välj alternativ och "kopiera till urklipp" för att kopiera bilden. \nDu måste stänga fönstret för att komma tillbaka till Word.
+194#£Pivot kropp
+195#£Ange koordinater för punkter som ska markeras med en röd linje i diagrammet. Använd semikolon eller tabb om du vill använda kommatecken som decimaltecken. Du kan använda definitioner för att läsa punkter i diagrammet. Du kan också använda knappen Infoga, sedan kan du klicka på grafen där du vill markera.\r\nExempel:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)
+196#£Här kan du infoga en annan datauppsättning med punkter som kommer att ha en annan färg på diagrammet. Du kan inte göra regression på dessa, men genom att trycka på infoga kan du placera punkter på grafen genom att trycka på. De kan sedan kopplas ihop med linjer till en figur.
+197#£Välj tabellen med siffror innan du trycker på diagrammet, så infogas punkterna här automatiskt. En uppsättning koordinater per linje. Koordinaterna avgränsas med kommatecken, semikolon eller tabbar. Om du använder ett kommatecken som decimaltecken använder du ett semikolon eller en tabb. Koordinater kan kopieras in från Excel.  Exempel på notation: \r\n1.2 , 3.4\r\n3,4 ; 4.8\r\n5.6$Tab & "7.8
+198#£Variabler måste vara x och y
+199#£Infoga cirkel
+200#£Infoga rad
+201#£Markerade punkter
+202#£Regression
+203#£Ja
+204#£Nej
+205#£Kom ihåg det här valet
+206#£När WordMat:s säkerhetskopieringsfunktion är aktiverad kommer WordMat att göra en säkerhetskopia av dokumentet före varje beräkning. Säkerhetskopior tas inte om den senaste säkerhetskopieringen görs inom 5 minuter. 10 backupversioner lagras, varefter de skrivs över." & vbLf & vbLf & "Du kan ändra dessa inställningar under: inställningar | Säkerhetskopia. Det är också här du kan hitta dina säkerhetskopior om det behövs.
+207#£Du kan ändra det här alternativet när som helst i inställningarna | Säkerhetskopia
+208#£Säkerhetskopia
+209#£Vinkelsumman är över 180
+210#£Du måste ange 3 sidor/vinklar. Dock inte 3 vinklar. Minst 1 sida måste vara känd.
+211#£Vinkelsumman är inte 180
+212#£Du har angett för många sidor/vinklar.
+213#£Du måste ange exakt 3 sidor/vinklar. Dock inte 3 vinklar. Minst 1 sida måste vara känd.
+214#£Minst en sida måste vara känd. 3 vinklar räcker inte.
+215#£Vinkel
+216#£hittas med hjälp av vinkelsumma = 180$Degree i en triangel
+217#£Sidans längd
+218#£hittades med hjälp av Pythagoras
+219#£Sidornas längd
+220#£hittas med hjälp av tången
+221#£Hittad av sinus
+222#£Hittas med cosinus
+223#£Existera med hjälp av cosinusrelationer
+224#£Existera med sinusrelationer
+225#£2. Gradekvationen är löst för
+226#£2:a gradens ekvation har två lösningar:
+227#£Men den andra lösningen är negativ, och vi kan inte ha negativa sidlängder.
+228#£Eftersom cosinusrelationen vi löste ovan för
+229#£hade två lösningar och båda var positiva, det finns två möjliga trianglar. Vi kommer nu att fortsätta att beräkna de återstående sidorna baserat på den andra lösningen på samma sätt.
+230#£Infoga symbol
+231#£Grekiska bokstäver
+232#£Andra skyltar
+233#£Infoga
+234#£Symbol
+235#£Lösning av ekvationer med grafiska och numeriska metoder
+236#£Inledande gissning
+237#£Intervallmetoden
+238#£starta
+239#£Ände
+240#£Den högra sidan och den vänstra sidan ritade. \nDen vänstra sidan är svart. Höger sida grön. Lösningar till ekvationen är skärningspunkterna.
+241#£Grafisk lösning
+242#£Zooma också genom att dubbelklicka eller dra i fyrkanten
+243#£Visa graf i stort fönster
+244#£$X^2 fördelning
+245#£Variabler
+246#£Test
+247#£Välj max.
+248#£Eller ange max.
+249#£variabel avgränsad med kommatecken
+250#£Välj exakt
+251#£Eller ange själv
+252#£Du kan inte både lösa ekvationen för
+253#£och samtidigt definiera den.
+254#£Du försöker lösa för en variabel som är en enhet. Det kommer förmodligen att resultera i ett fel. Överväg att använda ett annat variabelnamn eller stänga av enheter.
+255#£jord
+256#£Vatten
+257#£koppar
+258#£järn
+259#£måne
+260#£sol
+261#£Fysikaliska konstanter
+262#£Enheter
+263#£Tabellvärden - värme
+264#£Tabellvärde - Kärnfysik
+265#£Astronomi
+266#£Ljusets hastighet i vakuum
+267#£Plancks konstant
+268#£Plancks konstant i elektronvolt
+269#£Gravitationskonstanten
+270#£Gravitationsacceleration vid jordytan
+271#£Den elementära laddningen
+272#£Avogadros konstant
+273#£Gaskonstanten
+274#£Boltzmanns konstant
+275#£Vakuum permeabilitet
+276#£Vakuum permittivitet
+277#£Coulombs konstant
+278#£Stefan-Boltzmanns konstant
+279#£Enhet för atommassa
+280#£atommassenhet i MeV
+281#£specifik värmekapacitet för
+282#£Elektronens massa
+283#£i kg
+284#£Protonens massa
+285#£Neutronens massa
+286#£Jordens massa
+287#£Jordens genomsnittliga radie
+288#£Avstånd mellan jorden och solen (astronomisk enhet)
+289#£Solens massa
+290#£Månens massa
+291#£Månens medelradie
+292#£GeoGebra 5 är inte installerat
+293#£Knappen tar dig till hemsidan där du kan installera GeoGebra. WordMat på Windows har stöd för GeoGebra classic 5, GeoGebra Calculator Suite, GeoGebra Classic 6 och de flesta andra appversioner av GeoGebra.
+294#£GeoGebra Calculator Suite är redan installerat. Den körs i en webbläsare och behöver inte internet. Startar snabbt.
+295#£Installera GeoGebra
+296#£Kör GeoGebra Calculator Suite
+297#£eller Eventuella randvillkor
+298#£Etikett
+299#£Skriv in text och klicka sedan på grafen där texten ska placeras
+300#£Det finns ett fel i förordningen
+301#£Du måste först ställa in ymin och ymax och trycka på uppdatera.
+302#£3D-grafer
+303#£Visa uttryck
+304#£Genomskinlig
+305#£Platta färger
+306#£Infoga Maxima-kommando i Word
+307#£Linjer och ytor
+308#£Endast rader
+309#£Endast ytor
+310#£Linjer och ytor
+311#£Variabler måste vara x, y och z
+312#£Sätt in boll
+313#£Infoga plan
+314#£Ny vektor
+315#£Syntax\n(startpunkt)(vektor)\n(startx, starty, startz)(dx, dy, dz)\nEn vektor per rad\nOm startpunkt inte anges, antar (0,0,0)\nExempel:\n(1,1,2)(1,2,3) \n ritar vektor (1,2,3) från punkt (1,1,2)\n\n(1,-2,3)\n ritar vektor (1,-2,3) från punkt (0,0,0)\n\n\n\nDecimaltalsexempel:\n(1,5 ; 3 ; 4,5)\n(1,5, 3, 4,5)
+316#£Punktstorlek
+317#£Ange punkter så här\n\n(1,1; 2,5; 1,2)\n(2.1,3.4,8.8)
+318#£I graffönstret kan du rotera koordinatsystemet genom att hålla nere vänster musknapp och dra runt.\n\nOm objektet ser utsträckt ut kan du ändra graffönstret så att det passar.\n\nFör att infoga bilden i Word, högerklicka på menyraden, välj 'alternativ' och sedan 'kopiera till urklipp'. Då stängs graffönstret och då kan bilden infogas i Word.\n\nObservera att graffönstret måste vara stängt för att komma tillbaka till Word.\n\nAntalet punkter avgör hur fin siffran blir, men påverkar samtidigt hastigheten med vilken den kan roteras.
+319#£Reglemente
+320#£Representationer av parametrar
+321#£Gul/Röd/Lila
+322#£Blå
+323#£Brun
+324#£Grå
+325#£Genvägen Alt+M infogar ett nytt matematiskt fält
+326#£AltGr + Enter-genvägen beräknar
+327#£Genvägen Alt + L löser ekvationen
+328#£Alt+-genvägen i öppnar Inställningar
+329#£Alt+r-genvägen hämtar tidigare resultat
+330#£Alt+E-genväg slår på/av enheter
+331#£Nedsänkt:
+332#£\lambda ger den grekiska bokstaven med små bokstäver
+333#£Alt+P-genvägen visar grafen för en levnadsregel
+334#£Du kan själv spara ändringar i formelsamlingarna och formdokumentet.
+335#£Excel-ark kan infogas inbäddade i dokumentet eller öppnas i Excel
+336#£Snabbare och bättre riktning av uppgifter? Prova WordMark - www.eduap.com
+337#£Antal beräkningar med WordMat:
+338#£Under Definitioner kan du definiera fysiska konstanter och tabellvärden
+339#£Word körs snabbare i utkastvyn, särskilt för ekvationer.
+340#£Infoga dina egna beskrivningar i Excel-diagram med hjälp av Excel-diagram. Infoga/textruta
+341#£Genvägen Alt + N växlar mellan auto, exakt, num
+342#£En funktion med bokstavskonstanter får automatiskt skjutreglage i GeoGebra
+343#£Utmatningsenheter får endast vara rena enheter. Det vill säga inga sammansatta enheter som km/h. Om du vill ha t.ex. km/timmar, ange: km, timmar
+344#£Du har redan den senaste versionen av
+345#£Välj ett taxeringsnummer.
+346#£Vilket tal ska denna ekvation sättas till?\r\nFöljande ekvationer kommer att få sina nummer uppdaterade för att passa.
+347#£Binomialt test
+348#£Ett taxeringsnummer kommer att införas. Vanligtvis infogas detta som ett kapitel- eller avsnittsnummer i en rubrik. Numret kan dock också infogas dolt. Ska numret visas? (Svara nej för att dölja det)
+349#£Ange signifikansnivån i procent
+350#£Signifikansnivå
+351#£Ange dimensionen för korstabellen\r\nrader x kolumner
+352#£Chi i det andra testet för koherens
+353#£Ett $X^2 - test för koherens utförs med hjälp av S&P-projektet. WordMat (på engelska)
+354#£P-värde
+355#£På signifikansnivå
+356#£%, kan 0-hypotesen att det inte finns någon korrelation förkastas. Dvs. Det finns ett samband mellan de två variablerna.
+357#£% kan 0-hypotesen inte förkastas. Det finns därför inget som tyder på att det finns ett samband mellan de två variablerna.
+358#£Det finns celler med värden som är mindre än 5 eller så är den totala summan av alla celler mindre än 50. $X^2-fördelningen är därför en dålig approximation i detta fall och resultatet är otillförlitligt. I vissa fall kan datamaterialet göras användbart genom att göra en annan gruppering.
+359#£Chi-distribution
+360#£Frihetsgrader
+361#£Läsa
+362#£Öppnar GeoGebra
+363#£Ange värde för
+364#£Den kan justeras i efterhand
+365#£Definiera konstant
+366#£Du har inte installerat Graph. Det är ett litet gratisprogram som enkelt kan installeras. Det skapar snygga grafer, punktlistor etc. som enkelt kan integreras i Word. Du kan ladda ner programmet på www.padowan.dk.
+367#£Den kan justeras i efterhand under egna funktioner i Grafen. Du kan till och med göra en animering där värdet ändras kontinuerligt, under Beräkna/Animera.
+368#£Att rita grafer med GeoGebra och Graph kräver att x är den oberoende variabeln.\r\nFöljande uttryck innehåller inte x, så du kan nu ange en annan oberoende variabel.
+369#£Oberoende variabel
+370#£$X^2 test för samstämmighet
+371#£Öppnar graf
+372#£Infoga kapslade
+373#£Det kan ta tid att infoga kapslade objekt. Dubbelklicka på objektet för att redigera det.
+374#£Vill du plotta
+375#£Infoga
+376#£Ekvationssystem av olikheter stöds inte. Lös som ekvationer eller lös grafiskt med hjälp av ekvationer. Graf eller GeoGebra
+377#£Eliminera variabler
+378#£med de värden
+379#£Ange den inledande gissningen av värdena. Standardgissningen är 1
+380#£Variabler och gissningar
+381#£Skattesystemet löses numeriskt för
+382#£med en startgissning
+383#£Skattesystemet gick inte att lösa
+384#£Har du angett rätt variabel?
+385#£Ingen lösning hittades. Intervallslutpunkterna måste finnas på vardera sidan av en lösning.
+386#£Newtons metod används med initiala gissningar
+387#£Intervallmetoden används i intervallmetoden
+388#£Misslyckande med att hitta en lösning
+389#£Ingen lösning
+390#£Differentialekvationen löses med hjälp av WordMat's funktion 'Solve differential equation'
+391#£med randvillkoren
+392#£med utgångspunkterna
+393#£med startvillkoret
+394#£Du måste starta om Word nu, annars låses Word.
+395#£Ett fel uppstod när en formel skulle infogas. Försök igen någon annanstans.
+396#£Simulering
+397#£Grupper
+398#£Antalet frihetsgrader uttrycks i allmänna termer
+399#£Frekvensfördelning med
+400#£Observationer
+401#£Förväntad
+402#£Total
+403#£P-värde
+404#£Det finns ett samband
+405#£Det finns inget samband
+406#£Den totala summan av alla celler är mindre än 50. $X^2-fördelningen är därför en dålig approximation i detta fall och resultatet är otillförlitligt.
+407#£Q-värde
+408#£Kritiskt Q-värde
+409#£Du har inte installerat MikTex. Du kommer nu att omdirigeras till webbplatsen där MikTex kan laddas ner. Efter installationen är det viktigt att datorn startas om. När MikTex körs för första gången måste vissa paket installeras.
+410#£Den här funktionen stöds inte på Mac
+411#£Diverse
+412#£Ny ekvation
+413#£Symboler
+414#£CAS-inställningar
+415#£Former
+416#£Du har matat in en vektorekvation som egentligen är ett ekvationssystem. Gå in i
+417#£Variabler som ska lösas för separerade kommatecken.
+418#£Hej, du var tvungen att gå in
+419#£variabel avgränsad med kommatecken
+420#£En av ekvationerna är inte definierad inom de valda gränserna. Försök att utöka området
+421#£Ett eller flera plus/minus-symboler ingår i uttrycket. Hur ska detta förstås?
+422#£Plus eller minus
+423#£Inmatningen har inte förståtts. Infoga plus.
+424#£Det finns ett problem med de numeriska tecknen
+425#£Notationen för summatecknet är inte korrekt. Den undre gränsen måste skrivas t.ex. i=1
+426#£Beteckningen för produkttecknet är inte korrekt. Den undre gränsen måste skrivas t.ex. i=1
+427#£Det finns problem med syntaxen. En dx (eller liknande) måste användas som ände av en integrale. Kanske har du använt d i ett annat sammanhang. Använd da differential d (typ: \dd)
+428#£Det finns problem med syntaxen. Två dx (eller liknande) behövs för att avsluta en dubbelintegral. Kanske har du använt d i ett annat sammanhang. Använd da differential d \dd
+429#£Du kan inte använda det dubbla integraltecknet för specifika integraler. Använd två enkelintegraler.
+430#£Fel! Det finns problem med syntaxen. Notation för differentiering är inte korrekt.
+431#£Inte definierad
+432#£Inte definierad, men begränsad
+433#£Inte definierad inom
+434#£är reserverad och kan inte definieras. Definitionen hoppas över.
+435#£Inte glänsande
+436#£Fys
+437#£Kemi
+438#£Procent
+439#£Funktioner
+440#£Geometri
+441#£Sands.
+442#£vektor
+443#£Inställningar
+444#£Framträda.
+445#£bred
+446#£Beräkna
+447#£Lös
+448#£Maxima, kommando
+449#£Lösa ekvation(er) med numerisk metod
+450#£Eliminera variabler
+451#£Testa sant/falskt
+452#£Lös differentialekvation
+453#£Ta bort definitioner
+454#£Definiera funktion
+455#£Definiera fysiska konstanter
+456#£Skriva
+457#£Oändligheter.
+458#£Differentiators
+459#£Trunk-funktion
+460#£Diagram
+461#£Visa graf
+462#£Fält för sluttning
+463#£3D-plot
+464#£Pivot kropp
+465#£Statistik
+466#£Ej grupperade observationer
+467#£Grupperade iakttagelser
+468#£Fäst diagram
+469#£Histogram
+470#£Diagram över trappor
+471#£Summa kurva
+472#£Lådagram
+473#£Statistik/sändningar.
+474#£Regression
+475#£Det går inte att klistra in i en tabell
+476#£Linjär
+477#£Exponentiell
+478#£Kraft
+479#£Polynom
+480#£Distributioner
+481#£Binomial
+482#£Normal
+483#£$X^2 fördelning
+484#£Plan geometri
+485#£Rummets geometri
+486#£Öppnar formelsamlingen för matematik
+487#£Öppnar formelsamlingen för fysik
+488#£Öppnar Chemistry Formula Collection
+489#£Automatiskt val av exakt beräkning och numeriskt värde.
+490#£Automatiskt val av exakt beräkning och numeriskt värde. Vid beräkning anges ofta båda resultaten.
+491#£Exakta resultat
+492#£Alla resultat listas som exakta resultat. Det vill säga, numeriska approximationer undviks så långt det är möjligt. Detta kan dock inte garanteras.
+493#£Numeriska resultat
+494#£Alla resultat anges som ett decimaltal.
+495#£Antal signifikanta siffror
+496#£Anger hur många (signifikanta) siffror som resultaten ska anges med.
+497#£Radianer
+498#£När trycket beräknas i radianer istället för grader.
+499#£Vetenskaplig notation
+500#£När du trycker på dem anges resultaten i matematisk notation, dvs. t.ex. 2.3$*10^4
+501#£Inställningar (Alt+j)
+502#£Ställ in olika inställningar.
+503#£Beräkna (AltGr+Retur)
+504#£Beräknar det markerade uttrycket. Om markören placeras i ett uttryck beräknas hela uttrycket. Om det finns ett =-tecken i uttrycket beräknas endast =-tecknet tillbaka till =-tecknet.
+505#£Maxima, kommando
+506#£Skickar kommandot ofiltrerat till Maxima. Resultatet är dock formaterat.
+507#£Lösa ekvation(er) (Alt+L)
+508#£Löser en ekvation eller ett ekvationssystem. Placera markören i ekvationen. Välj flera ekvationer för att lösa ekvationssystemet.
+509#£Lösa med numeriska metoder
+510#£Lösa ekvationer med hjälp av numeriska metoder. Det finns flera metoder att välja mellan.
+511#£Eliminera variabel
+512#£Eliminerar en eller flera variabler från ett ekvationssystem.
+513#£Testa om påståenden är sanna
+514#£Testa om påståenden är sanna, falska eller okända
+515#£Lös differentialekvation
+516#£Löser differentialekvationen. Kan matas in på olika sätt.  t.ex.  y'=y, y''=y eller f'(x)=f(x)
+517#£Lösa kopplade differentialekvationer numeriskt
+518#£Ska vara i formen y'=...
+519#£Visa definitioner
+520#£Visar vilka definitioner som gäller vid denna punkt i dokumentet.
+521#£Ta bort definitioner (Alt+S)
+522#£Infogar kommandot "ta bort definitioner:" i dokumentet. Definitioner som placerats före denna punkt i dokumentet kan inte användas efter denna punkt.
+523#£Definiera (Alt+D)
+524#£Infogar den definition i dokumentet som gäller för resten av dokumentet.
+525#£Definiera fysiska konstanter
+526#£Välj bland de vanligaste fysikaliska konstanterna och få dem definierade i dokumentet så att de kan tas med i beräkningarna
+527#£Skriva
+528#£Skriver om termen på olika sätt.
+529#£Reducera
+530#£Om det är möjligt skrivs uttrycket om så att det minskas så lite som möjligt. Försök att skriva om med specifika metoder om det inte fungerar.
+531#£Faktorisera
+532#£Om möjligt kan du placera utanför parenteser med hjälp av vanliga regler, till exempel fyrkantiga meningar
+533#£Multiplicera parenteser
+534#£Alla parenteser i det markerade uttrycket multipliceras.
+535#£Tabell
+536#£Infoga Excel
+537#£Differentiators
+538#£Välj uttryck som du vill särskilja eller placera markören i uttrycket.
+539#£Trunk-funktion
+540#£Hittar stamfunktion för valda uttryck (obestämda integraler).
+541#£
+542#£
+543#£
+544#£
+545#£Visa graf (Alt+P)
+546#£Visar grafen för de valda funktionerna/ekvationerna/ekvationerna och punkterna. Grafen kan sedan infogas i dokumentet. Olika grafprogram stöds. Välj din favorit i inställningarna eller välj genom att expandera den här knappen
+547#£Infoga graf med programmet GnuPlot
+548#£Visa graf med GnuPlot. Gnuplot stöder många funktioner och kan göra en snygg graf. Du kan sedan dubbelklicka på diagrammet i dokumentet för att redigera det.
+549#£Infoga diagram med hjälp av programmet Graph
+550#£Infogar diagramobjektet i Word-dokumentet, som redigeras genom att dubbelklicka på diagramobjektet. Definitioner, levnadsregler och punkter överförs från Word till diagrammet. Graph är ett mycket snabbt program och har många fantastiska funktioner. Nackdelen är att det inte stöds på Mac och graferna visas inte i så hög upplösning.
+551#£GeoGebra
+552#£Öppnar GeoGebra och överför den valda funktionen och definitionerna. GeoGebra är det grafprogram som ger flest alternativ, och en riktigt snygg graf, men det finns vissa begränsningar: Det är ganska långsamt att öppna och bilden överförs inte automatiskt till Word. Den måste kopieras in manuellt, via redigeringsmenyn och "kopiera ritningen". Diagrammet kan inte redigeras igen när det väl har infogats.
+553#£Infoga Excel-diagram
+554#£Infogar inbäddat Excel-ark i Word-dokument, som är utformat för att visa diagram och punktlistor. Du kan dubbelklicka på excel-objektet för att redigera det igen. Det fungerar inte lika snabbt som några av de andra lösningarna och har inte så många funktioner. Fördelarna är: Stöder inlärning i Excel och är speciellt utformad för enkel plottning av punkter. Det kan därför vara ett program som gör nytta i samverkan med andra ämnen, inte minst inom naturvetenskap.
+555#£Retn.fält
+556#£Visar lutningsfältet för första ordningens differentialekvation och gör det möjligt att rita lösningskurvor.
+557#£Infoga GeoGebra-fil
+558#£Infogar en kapslad tom GeoGebra-fil som kan redigeras och sparas direkt i Word. Filen visas som en ikon. Bilderna måste fortfarande kopieras över.
+559#£Plot 3D
+560#£Visa preskriptioner, ekvationer, punkter, vektorer och parameterrepresentationer i rymden.
+561#£Pivot kropp
+562#£Visar momentkroppen för den angivna specifikationen. D.v.s. grafen för regleringen roteras 360 grader runt x-axeln, så att ett 3D-objekt skapas.
+563#£Statistik
+564#£Öppnar kalkylblad som kan innehålla beskrivande statistik
+565#£Ej grupperade observationer
+566#£Excel-ark för bearbetning av uppdelade data. Beräknar frekvenser, kvartsaddition m.m. och genererar stickdiagram, punktdiagram, trappdiagram och lådagram.
+567#£Grupperade iakttagelser
+568#£Excel-ark för beräkning av frekvenser, kumulativa frekvenser, kvartaddition och visning av histogram, låda diagram och summakurva.
+569#£Fäst diagram
+570#£Excel-ark med förberett stickdiagram
+571#£Histogram
+572#£Excel-ark är avsedda att rita flera histogram i samma diagram.
+573#£Diagram över trappor
+574#£Excel-ark som kan ritas flera trappdiagram i samma diagram för jämförelse
+575#£Summa kurva
+576#£Excel-ark som kan ritas flera summakurvor i samma diagram för jämförelse
+577#£Lådagram
+578#£Excel-ark som kan rita flera låddiagram i samma diagram
+579#£Regression
+580#£Infoga en vanlig tabell med kulorna. Markera punkterna och välj regressionstyp. Tabellen kan vara horisontell eller vertikal. Om det bara finns två punkter antas den vara vertikal.
+581#£Ett fel uppstod när du sökte efter en uppdatering. Du kommer nu att skickas till webbplatsen, där du själv kan se om det finns en ny uppdatering. Den aktuella versionen är:
+582#£Infogar en tabell med två kolumner som är avsedda för att infoga punkter som regression kan utföras på.
+583#£Distributioner
+584#£Excel-ark med grafer över valda fördelningar. Bladen är dynamiska så att de kan rita graferna för alla parametrar och göra de vanligaste beräkningarna.
+585#£Binomial fördelning
+586#£Excel-ark med graf över binomialfördelning. På bladet väljer du den grundläggande parametern för sannolikhet och kvantitet
+587#£Normalfördelning
+588#£Excel-ark med graf över normalfördelning. Välj medelvärde och spridning på bladet.
+589#£-Fördelning
+590#£Excel-ark med graf över $X^2-fördelning. På arket väljer du hur många frihetsgrader och värden som kan avläsas.
+591#£Test
+592#£Olika statistiska tester
+593#£Binomialt test
+594#£Excel-ark där du kan utföra binomiala tester. Samma ark som det finns en binomialfördelning.
+595#£$X^2 Test
+596#£Utför $X^2 test på n x n korstabell. Markera numren i korstabellen.
+597#£Bra passform
+598#£Godhet av passform test. (Chi i andra testet) För om två distributioner är desamma.
+599#£Simulering
+600#£Ark som kan permutera (röra om) och lagra en rad olika teststorlekar.
+601#£Ny ekvation (Alt+M)
+602#£Infogar ett nytt matematiskt fält.
+603#£Ny talekvation (Alt+M, Alt+M)
+604#£Infogar ett nytt matematiskt fält som automatiskt blir talet. Dubbeltangent Alt+M för att infoga talekvationen. Detta måste dock först aktiveras i inställningarna.
+605#£Ny talekvation som kan refereras till
+606#£Infogar ett nytt matematiskt fält som automatiskt blir talet och kan refereras till.
+607#£Infoga referens till ekvation
+608#£Infogar referens till ekvation baserat på tidigare angivet namn
+609#£Ställ in ekvationen på specifikt nr.
+610#£En ekvation som har fått ett specifikt nummer kan sättas till ett specifikt nummer.
+611#£Infoga ett nytt ekvationsavsnitt.
+612#£Detta kommer att öka den första siffran i skattenumreringen. Om det föregående är (2.5) så är nästa (3.1). Kan infogas i rubriker som avsnittsnummer. Den kan dock också infogas dold.
+613#£Uppdatera alla skatteregistreringsnummer i dokumentet.
+614#£Sker automatiskt när en ny ekvation infogas, men det kan vara nödvändigt att trycka på uppdateringsknappen när en ekvation har tagits bort.
+615#£Symboler
+616#£Olika metoder för att manipulera symboler.
+617#£Ersätt med punktnummer
+618#£Ersätter alla *multiplikationstecken med vanliga punktmultiplikationstecken $*
+619#£Konvertera ekvationer till latex
+620#£Gör det möjligt att konvertera alla eller valda ekvationer i dokumentet till Latex. Gör det också möjligt att generera Latex-fil som pdf om MikTex är installerat. En enda ekvation kan konverteras till LaTex med genvägen Alt+T.
+621#£Konvertera till latex (Alt+T)
+622#£Konverterar en ekvation till Latex. Omslutningstecknen väljs på huvudsidan för latexkonvertering. Använd också genvägen Alt+T.
+623#£Byt ut till stjärnmultiplikationstecken
+624#£Ersätter alla " & ChrW(183) & " multiplikationstecken till * multiplikationstecken.
+625#£Punkt som decimaltecken
+626#£Ersätter alla , (kommatecken) i matematiska fält med . (punkt) och alla ;(semikolon) med ,(kommatecken)
+627#£Komma som decimaltecken
+628#£Ersätter alla . (period) i matematikområden med ,(komma) och alla ,(komma) med ;(semikolon)
+629#£Former
+630#£Öppnar ett dokument med former som kan kopieras till dokumentet. Trianglar, monotona relationer, etc.
+631#£Tabell $ArrowRight Lista
+632#£Lista $ArrowRight Tabell
+633#£Bord
+634#£WordMat kan manipulera data i listor. Du kan till exempel enkelt lägga till ett nummer till många nummer i en lista. Vanligtvis har du dock data i tabeller i Word, men här finns funktioner som kan förvandla listor till tabeller och vice versa.
+635#£Infoga Excel-ark
+636#£Infogar kapslade Excel-ark i dokumentet. Kan öppnas genom att dubbelklicka.
+637#£Konvertera till lista
+638#£Konverterar en tabell till en lista i ett matematiskt fält, som sedan kan manipuleras i WordMat. Exempel: [1, 2, 3]+1 = [2, 3, 4] Se manual för mer info
+639#£Konvertera till tabell
+640#£Konverterar en lista i ett matematiskt fält, eller just skriven, till en tabell. t.ex.  (1 , 2),(3 , 4),(5 , 6)
+641#£Lösare av triangel
+642#£Ange 3 sidor/vinklar och få resterande sidor/vinklar beräknade samt infogad triangel med rätt mått.
+643#£Handbok för Word
+644#£Öppnar dokumentet med hjälp.
+645#£Handbok för webben
+646#£Öppnar webbhandboken. Har bättre navigering och videor än Word-manualen, men är inte klar ännu.
+647#£Maxima manuell
+648#£Maxima är CAS-programmet som utför många av de matematiska funktionerna i WordMat. Maxima har byggt in en hel del funktioner som inte syns direkt i WordMat, men de kan utföras om du känner till funktionsnamnen. Här kan du öppna en sammanfattning av maxima-kommandon.
+649#£Om
+650#£Vem skapade WordMat?
+651#£Sök efter uppdateringar
+652#£Kontrollera automatiskt online om det finns en uppdatering av WordMat.
+653#£Översikt över genvägar
+654#£Översikt över vilka kortkommandon som är tillgängliga i WordMat och genvägar till matematiska fält i Word.
+655#£LaTex-mall
+656#£LaTex-mall
+657#£Öppnar Word-dokument som är en nästan trogen kopia av LaTex-dokumentet.
+658#£Precisionen är mycket högt satt. Beräkningstiden kan vara mycket lång eller misslyckas. Försök igen med en lägre inställning.
+659#£WordMat har en utmärkt funktion för att konvertera till LaTex, men det går även att använda den som är inbyggd i Maxima
+660#£Enheter ska normalt inte skrivas i kursiv stil. Med den här funktionen försöker WordMat identifiera enheter och infogar Latex-kod som skriver enheter i normalt teckensnitt
+661#£Stänga
+662#£Genererar riktiga LaTex-dokument med hjälp av e-post. MikTex, som måste installeras. Bör endast användas för enkla dokument eftersom inte allt stöds.
+663#£Visar hur LaTex-utdata kommer att förstås
+664#£Generera LaTex-koden och öppna i TexWorks så att koden kan granskas och eventuellt justeras
+665#£Triangel
+666#£Notation
+667#£Graf
+668#£Avancerad
+669#£Vetenskaplig notation
+670#£Komplexa tal
+671#£Du måste starta om Word innan språkändringen träder i kraft överallt
+672#£Det går inte att logga värden <=0
+673#£Regnar
+674#£Jag beräknar
+675#£Den här metoden kräver ett intervall runt en lösning. Det kan bara finnas en lösning i intervallet. Titta på diagrammet för att hitta intervallet. Fördelen med denna metod är att du vet vilken lösning som finns tillgänglig.
+676#£Om intervallmetoden
+677#£Newton-Raphsons metod kräver en första gissning på en lösning till ekvationen. Det är inte säkert att det kommer att finnas en lösning, även om det finns en. Det finns max. 1 lösning. Kombinera metoden med en grafisk lösning för att hitta startgissningen.
+678#£Om Newton-Raphson
+679#£Säkerhetskopior kan inte göras förrän du har sparat ditt dokument!
+680#£Polära notationsutdata
+681#£Problem med filen 'normal.dotm' kan bryta kortkommandona i WordMat. Om du tar bort filen löser du problemet, eftersom en ny genereras automatiskt när Word startas om. Filen kan dock inte raderas medan Word är öppet, så du måste göra det själv. \r\n\r\n- När du trycker på OK öppnas mappen där filen finns. \r\n- Spara ditt arbete och stäng Word \r\n- Ta bort normal.dotm \r\n- Starta om Word och öppna och stäng WordMat-inställningarna
+682#£Beräkning gjord med hjälp av GeoGebra
+683#£pil
+684#£Startar Safari
+685#£Problemet kunde inte lösas.\r\nVill du prova en annan metod eller CAS-motor?
+686#£CAS-motor
+687#£Signifikanta siffror
+688#£Slå på/av enheter
+689#£Om enheter är aktiverade kan WordMat förstå och konvertera enheter. På SI-knappen kan du ange vilka enheter du vill konvertera till. Som standard är utdata i SI-enheter. Slå inte på enheter om du inte specifikt behöver det. Det kan påverka WordMats beteende och reserverar många variabler.
+690#£Utmatningsenheter
+691#£Ange vilka enheter som ska konverteras till för beräkningar. Som standard är utdata i SI-enheter
+692#£Fvt
+693#£Enheter
+694#£Antal siffror
+695#£Nummeravrundning
+696#£Välj hur tal ska skrivas och avrundas. I exemplen nedan är WordMat satt till 3 siffror.\r\n\r\nAntal decimaler: 12,345\r\nSignifikanta siffror: 12,3\r\nVid. Notation: 1.23*10^1
+697#£Kvadratisk komplettering
+698#£Använder kvadratsatsen för att faktorisera. t.ex. för cirkelns ekvation
+699#£Ett försök har gjorts att ta bort fakulteten från ett negativt tal.
+700#£Varning: Det fanns fler ekvationer än variabler i ekvationssystemet. Var det meningen?
+701#£Nytt område inom matematiken
+702#£Tidigare resultat
+703#£Ändra nummer/Exakt
+704#£Konvertera till LaTex
+705#£Latex Pdf
+706#£Gradtal
+707#£Radianer
+708#£Vinkel enhet
+709#£Visa lösningsvillkor (beta)
+710#£Exakt
+711#£Numerisk
+712#£Automatisk
+713#£Mycket hög precision (beta)
+714#£Infoga förklaring
+715#£Klistra in Maxima, kommando
+716#£Avgränsare
+717#£Lista
+718#£Multiplikationstecken
+719#£Punkt
+720#£Uttalande om lösning
+721#£Boolesk
+722#£Lösning mängd
+723#£Nedsänkt
+724#£Är bara text som är en del av variabelnamnet
+725#£Är lista/matrisindex
+726#£Standard programvara för grafer
+727#£Infoga Excel-ark inbäddat
+728#£Utmatningsenheter
+729#£Ange vilka enheter som ska vara i utdata separerade med kommatecken:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nOm inget anges kommer alla enheter att returneras som bas-SI-enheter eller härledda SI-enheter utan prefix.
+730#£Exempel på enheter som stöds:\n(Se manualen för mer information)\n\nLängd: cm, AU, ly, pc\nMassa: u , G, mg\nTid: min, timmar, dagar, år\nFrekvens: Hz , Bq\nEnergi: kWh, eV, aJ\nTryck: Bar, mmHg, uttagsautomat, torr
+731#£Trignonometriska ekvationer
+732#£Alla lösningar
+733#£Endast 1 lösning
+734#£Sök automatiskt efter uppdateringar
+735#£Reparera kortkommandon
+736#£Starta om WordMat
+737#£Antal beräkningar
+738#£Försök har nu gjorts att reparera kortkommandon.\nOm det inte fungerar, ta bort filen 'normal.dotm' i mappen "~/Library/Group Containers/UBF8T346G9. Office/User Content/Templates" och starta om Word
+739#£Det görs nu ett försök att reparera kortkommandon.\nOm det inte fungerar, ta bort filen 'normal.dotm' i mappen "%appdata%/Microsoft/Templates" och starta om Word
+740#£GeoGebra Calculator Suite installeras tillsammans med WordMat. Den körs i en webbläsare, men kräver inte internet. Det fungerar på samma sätt på Windows och Mac, och startar snabbt.\nGeoGebra 5 fungerar likadant på Windows och Mac, men kräver separat installation.\nWindows stöder också andra appversioner av GeoGebra såsom GeoGebra 6, Graphing calculator med flera. Dessa kommer att tillämpas om GeoGebra 5 inte är installerat.
+741#£Det verkar som om genvägarna inte är korrekt inställda i den här versionen av WordMat. Det kräver förmodligen ett felmeddelande
+742#£Resultatet av beräkningen beror på tecknet för följande
+743#£Ställ in tecken
+744#£Differentialekvation
+745#£Lösa differentialekvationer
+746#£Uafh. vore
+747#£Bero. Var/funktion
+748#£Villkor för start
+749#£Felmeddelande för Maxima
+750#£Matematiska fel
+751#£Syntaxfel
+752#£Det har uppstått ett syntaxfel. Dvs WordMat har inte förstått vad du har sagt.
+753#£Det saknas en
+754#£Det finns för många
+755#£Ett fel har inträffat i körningen av programmet.
+756#£Det har varit en division med 0.
+757#£Ett misstag har begåtts. Det beror förmodligen på ett fel i en av dina definitioner.\r\nKanske kan du se nedanför var det är.
+758#£Det finns ett fel i en av dina definitioner.\r\nDefinitionen kommer att markeras i Word.
+759#£Det finns en olaglig skylt som är placerad på
+760#£Lös ekvation
+761#£Variabel
+762#£Eller skriv själv:
+763#£Tillämpliga definitioner
+764#£Mellanliggande definitioner
+765#£Varning: Enheter är påslagna.\r\nEkvationslösning påverkas negativt.\r\nSe också upp för variabler som är enheter, t.ex. A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
+766#£Lösa ekvationssystem
+767#£Välj variabler
+768#£WordMat startar upp
+769#£Snälla vänta
+770#£Lösare av triangel
+771#£Höger
+772#£Godtycklig
+773#£Höger
+774#£Namnge
+775#£Handbok
+776#£Vinklar versaler, sidor gemener
+777#£Sidorna är uppkallade efter hörn AB
+778#£Infoga siffror på formen i Word
+779#£Visa mellanliggande konton i Word
+780#£Infoga de kända sidorna och vinklarna, så kommer de återstående sidorna och vinklarna att beräknas, och infogas på figuren i Word.\r\nDet är också möjligt att ändra namnen på figuren. Klicka bara på bokstäverna.
+781#£Figuren visar inte rätt storlekar, men det gör den när den infogas i Word.
+782#£WordMat's triangellösare används med indata:
+783#£Observera att det finns två möjliga trianglar baserat på din information
+784#£Det finns inte tillräckligt med information för att beräkna de återstående sidorna och vinklarna.
+785#£Två trekanter
+786#£Det finns ingen triangel som kan konstrueras av din information.
+787#£Alla sidor och vinklar kan nu hittas.
+788#£OBS: Numeriska metoder användes för att lösa ekvationen. Det kan finnas flera lösningar.
+789#£Medelhöga inställningar
+790#£Automatisk förminskning
+791#£Försök att reducera uttrycket till kortast möjliga form med hjälp av flera olika metoder.
+792#£Sätt externa parenteser\r\nFörsöker omvandla termen till produkter
+793#£Multiplicera inom parentes.\r\nAlla parenteser multipliceras ut.
+794#£Transkribera till bråk
+795#£Alla decimaltal konverteras till bråk.
+796#£Minska trigonometriska
+797#£Ett försök görs att skriva om termen med hjälp av trigonometriska identiteter.
+798#£Infoga samma rad
+799#£Grafritning m.m. i planen
+800#£Återställ allt
+801#£Axelns titel
+802#£Typ av linje
+803#£För att lösa en ekvation måste du först ange en ekvation med Infoga ekvation i Word. Lämna markören i ekvationen och tryck på lös ekvation igen. Välj flera ekvationer för att lösa flera ekvationer med flera okända.
+804#£Ingen ekvation vald
+805#£Reducera
+806#£Faktorisera
+807#£Expandera
+808#£Hjälp
+809#£Handbok
+810#£Manual som Word-dokument
+811#£Handbok för webbplatsen på nätet
+812#£Om
+813#£Uppdatera
+814#£Genvägar
+815#£Nollställa
+816#£Logaritm
+817#£Språk
+818#£Tecken
+819#£Positiv
+820#£Negativ
+821#£Noll
+822#£Fel
+823#£Definitioner
+824#£OK
+825#£Annullera
+826#£Vänta
+827#£Aktivitet
+828#£Stanna
+829#£Ekvationen är löst för
+830#£Ekvationen löses numeriskt för
+831#£med hjälp av WordMat.
+832#£Reglemente
+833#£Ekvation
+834#£Ekvationer
+835#£Poäng
+836#£Vektorer
+837#£Titel
+838#£Nollställa
+839#£Komplicerade beräkningar som utförs exakt kan ta mycket lång tid. Skulle du istället försöka göra numeriska beräkningar?
+840#£Använd vanlig d som differential d
+841#£DY/DX-notation kan vanligtvis endast användas med hjälp av en speciell differens d (\dd) eller symbolen för partiell derivata (\partial). Om det inte förväntas att d/dx kan förväxlas med ett annat uttryck är denna inställning en fördel eftersom det är lättare att skriva normalt d
+842#£Anpassad regression
+843#£Lösa kopplade differentialekvation(er) numeriskt
+844#£Ett misstag inträffade
+845#£Variabel
+846#£Varning
+847#£Differentialekvationen ska vara på formen y'=...  för att det ska kunna lösas numeriskt
+848#£Knappen laddar ner GeoGebra 5 för att "ladda ner" på din Mac. Du kommer sedan att guidas genom installationen.
+849#£GeoGebra 5 har inte installerats fullständigt. Ändelse
+850#£GeoGebra har inte installerats ännu. Vänta tills nedladdningen är klar.
+851#£Fortsätta
+852#£Ta bort gammal version
+853#£Innan den nya versionen kan laddas ner måste den gamla versionen i Nedladdningar tas bort.\r\n 1. Ett fönster med namnet "Tillåt åtkomst till fil" bör öppnas.\r\n2. Klicka på "Välj..."  \r\n3. Klicka på "Tilldela åtkomst"
+854#£Nedladdningen stoppades
+855#£Du måste tillåta åtkomst till GeoGebra.app innan installationen kan fortsätta
+856#£GeoGebra 5 laddas ner
+857#£1. Vänta först på att GeoGebra 5 ska laddas ner.\r\n2. När nedladdningen är klar ska ett fönster som heter "Tillåt åtkomst till filen" öppnas.\r\n3. Klicka på "Välj..."  \r\n4. Klicka på "Tilldela åtkomst"
+858#£Stoppat
+859#£Processen stoppades.\r\n\r\nKlicka på Stäng och försök igen.
+860#£Du har inte fått tillstånd för GeoGebra. Klicka på "Försök igen" för att försöka igen.
+861#£Nedladdningen tar lång tid. Kontrollera i Safari om det ser ut som att det pågår en nedladdning. Du kan klicka på stopp om det inte finns några framsteg.
+862#£Fel vid nedladdning av GeoGebra
+863#£Filen kunde inte hittas i nedladdningar.\r\nDu kan klicka på "Försök igen" längst ner om du vill att WordMat ska leta igen.
+864#£Ge tillstånd till GeoGebra
+865#£Ett fönster som heter 'Tillåt åtkomst till fil' bör nu öppnas.\r\n\r\n1. Klicka på "Välj..." \r\n2. Klicka på "Tilldela åtkomst"
+866#£Flytta GeoGebra till appar
+867#£Du kan behöva ge behörighet för "Systemhändelser" genom att bara klicka på OK.
+868#£Redo
+869#£GeoGebra 5 är nu installerat.\r\nKlicka på "Fortsätt" för att öppna GeoGebra.
+870#£Det finns sidor som är 0
+871#£Du måste välja en tabell först
+872#£Det går inte att infoga numrerad ekvation i tabellen
+873#£GeoGebra har använts för att lösa ekvationssystemet. Det är osäkert om det kan finnas lösningar. Det rekommenderas att prova en annan metod. T.ex. Maxima, eller numerisk/grafisk
+874#£Denna funktion stöds inte av GeoGebra. Prova ekvationslösare
+875#£Ekvationen löstes grafiskt med GeoGebra:
+876#£Antalet parenteser får inte plats i uttrycket
+877#£Fel vid inställning
+878#£Du har en felaktig inställning i Word.\r\nI menyn Ekvationer, byt från Latex till Unicode för att WordMat ska fungera
+879#£Syntaxfel - Inte korrekt matematik.
+880#£Du har matat in något som inte är korrekt matematisk notation.\r\nFelet är relaterat till en variabel:
+881#£Det kan till exempel bero på att du har sänkt typsnittet på en siffra. \r\nK_0 ska ersättas med ett nummer och inte med t.ex. 5000_0. Det behöver bara stå 5000.
+882#£Det kan inte finnas två likhetstecken i en ekvation
+883#£Ekvationssystemet löstes med GeoGebra:
+884#£Beräkningen avbröts eftersom det tog mycket lång tid. Det kan ibland hjälpa att prova beräkningen med alternativet "Numerisk" istället för Exakt eller Auto
+885#£Det går inte att ansluta till Maxima. Vill du använda 'WSH'-metoden istället?\r\n(Flaggan kan hittas under avancerat i Inställningar)
+886#£WordMat kan inte kommunicera med GeoGebra. Det beror förmodligen på att du inte har ställt in rätt säkerhetsinställningar i Safari. Klicka på ok för att få instruktionerna
+887#£Lösa numeriska
+888#£WordMat kunde inte hitta Maxima-installationen. Prova att installera om.
+889#£Fel vid anslutning till Maxima med WSH
+890#£Stannar automatiskt i
+891#£Det lyckades inte. Stannar.
+892#£Kommandot avbröts efter
+893#£Vill du försöka igen och hur länge vill du vänta. (sekunder) Datorn låses under väntetiden.
+894#£Fel i definitionen
+895#£Det finns ett syntaxfel som är associerat med en integrale. Har du kommit ihåg DX i slutet?
+896#£Längd på utdata:
+897#£Klicka på JA för att infoga alla tecken i Word. (Varning: Kan göra Word långsammare eller till och med få Word att krascha). \r\n Klicka på NEJ om du bara vill infoga de första 1000 tecknen.
+898#£Du har ställt in för få parametrar för funktionen:
+899#£Det kan bero på att du har använt kommatecken istället för semikolon för att avgränsa parametrarna. (Du kan i stället lägga till ett mellanslag på ena sidan av kommatecknet.)
+900#£Villkor för lösning:
+901#£Du måste först välja en lista, t.ex. [1; 2; 3]
+902#£Kanske har du bytt ut n och r mot K(n, r)?
