@@ -113,7 +113,7 @@
 112#£Kann ikki fáa samband við ambætaran
 113#£Á hesum staðinum í skjalinum er eftirfarandi skilgreint:
 114#£Tað eru ongar frágreiðingar í hesi løtuni í skjalinum.
-115#£
+115#£hevur fleiri ódefineraðar brigdlar. Tann óhefta variabelin kann ikki eyðmerkjast. Nýt/nýtið x ella t sum óheftu variabelina.
 116#£Tú kanst ikki lýsa eina avleidda funktion.\r\nStrika hesa skilgreiningina: \r\n
 117#£Tað er ein feilur í skilgreiningini:
 118#£Tað verður skúgvað til viks. Men rætta tað, so tú ikki fært hesa villuna við hvørjari útrokning.
@@ -326,9 +326,9 @@
 325#£Alt+M snarvegurin setur eitt nýtt støddfrøðiøki inn
 326#£Snarvegurin AltGr + Enter roknar út
 327#£Snarvegurin Alt + L loysir líkningina
-328#£Alt+ snarvegurin í opnar Stillingar
+328#£Alt+j snarvegurin í opnar Stillingar
 329#£Alt+r snarvegurin tekur fram fyrri úrslit
-330#£Alt+E snarvegur tendrar/sløkkir tól
+330#£
 331#£Undirskrift:
 332#£\lambda gevur lítlan grikskan bókstav
 333#£Alt+P snarvegurin vísir grafin í eini forskrift
@@ -455,7 +455,7 @@
 454#£Lýs funktion
 455#£Lýs likamligar konstantir
 456#£Skriva um
-457#£Óendaligt.
+457#£
 458#£Differentiatorar
 459#£Trunk funktion
 460#£Graf
@@ -688,10 +688,10 @@
 687#£Týdningarmikil taltøl
 688#£Tendra/sløkkja tól
 689#£Um eindir eru tendraðar, kann WordMat skilja og umseta eindir. Á SI-knøttinum kanst tú lýsa, hvørjar eindir tú vilt broyta til. Sum standard er úttakið í SI-eindum. Tendra/Tendrið ikki tól, uttan so at tær serliga tørvar tað. Tað kann ávirka atburðin hjá WordMat og goymir nógvar brigdlar.
-690#£Úttaks tól
+690#£
 691#£Lýs hvørjar eindir tú skal umseta til til útrokningar. Sum standard er úttakið í SI-eindum
-692#£Bc
-693#£Tól
+692#£tt
+693#£
 694#£Tal av talteknum
 695#£Avrunding av tali
 696#£Vel hvussu tøl skulu skrivast og rundast av. Í dømunum niðanfyri er WordMat sett til 3 tal.\r\n\r\nTal av desimalplássum: 12,345\r\nTýdningarmikil tal: 12,3\r\nVid. Notan: 1.23*10^1
@@ -726,7 +726,7 @@
 725#£Er listi/matrix index
 726#£Standard grafforrit
 727#£Seta Excel-ark innlagt
-728#£Úttaks tól
+728#£
 729#£Specificera vilka enheter som ska vara i utdata separerade med komma\nexempel:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nOm inget är specificerat, returneras allar eindir som grund-SI-eindir ella avleiddar SI-eindir uttan forskeyt.
 730#£Dømi um stuðlaðar eindir:\n(Sí handbók fyri meira)\n\nLongd: cm , AU, ly, pc\nMassi: u , G, mg\nTíð: min , Tímar, dagar, ár\nFrekvens: Hz , Bq\nOrka: kWh , eV, aJ\nTrýst: Bar , mmHg, atm, turt
 731#£Trignonometriskar líkningar

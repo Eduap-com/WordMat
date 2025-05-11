@@ -113,7 +113,7 @@
 112#£Kan ikke koble til serveren
 113#£På dette punktet i dokumentet er følgende definert:
 114#£Det er ingen definisjoner på dette punktet i dokumentet.
-115#£
+115#£har flere udefinerte variabler. Den uavhengige variabelen kan ikke identifiseres. Bruk x eller t som den uavhengige variabelen.
 116#£Du kan ikke definere en avledet funksjon.\r\nFjern følgende definisjon: \r\n
 117#£Det er en feil i definisjonen:
 118#£Det blir ignorert. Men fiks det slik at du ikke får denne feilen med hver beregning.
@@ -326,9 +326,9 @@
 325#£Alt+M-snarveien setter inn et nytt matematisk felt
 326#£AltGr + Enter-snarveien beregner
 327#£Snarveien Alt + L løser ligningen
-328#£Alt+-snarveien åpner Innstillinger
+328#£Alt+j-snarveien åpner Innstillinger
 329#£Alt+r-snarveien henter tidligere resultater
-330#£Alt+E-snarvei slår enheter på/av
+330#£
 331#£Senket skrift:
 332#£\lambda gir liten gresk bokstav
 333#£Alt+P-snarveien viser grafen til en forskrift
@@ -455,7 +455,7 @@
 454#£Definer funksjon
 455#£Definere fysiske konstanter
 456#£Omskrivning
-457#£Uendelig.
+457#£
 458#£Differensiatorer
 459#£Trunk funksjon
 460#£Grafisk
@@ -688,10 +688,10 @@
 687#£Viktige sifre
 688#£Slå enheter på/av
 689#£Hvis enheter er aktivert, kan WordMat forstå og konvertere enheter. På SI-knappen kan du spesifisere hvilke enheter du vil konvertere til. Som standard er utgangen i SI-enheter. Ikke slå på enheter med mindre du spesifikt trenger det. Det kan påvirke WordMats oppførsel og reserverer mange variabler.
-690#£Utgang enheter
+690#£
 691#£Angi hvilke enheter som skal konverteres til for beregninger. Som standard er utgangen i SI-enheter
-692#£F.Kr
-693#£Enheter
+692#£vs
+693#£
 694#£Antall sifre
 695#£Avrunding av tall
 696#£Velg hvordan tall skrives og avrundes. I eksemplene nedenfor er WordMat satt til 3 sifre.\r\n\r\nAntall desimaler: 12,345\r\nSignifikante sifre: 12,3\r\nVid. Notasjon: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Er liste-/matriseindeks
 726#£Standard programvare for graftegning
 727#£Sett inn innebygd Excel-ark
-728#£Utgang enheter
+728#£
 729#£Spesifiser hvilke enheter som skal være i utdata atskilt med komma\neksempler:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nHvis ingenting er spesifisert, vil alle enheter bli returnert som grunnleggende SI-enheter eller avledede SI-enheter uten prefiks.
 730#£Eksempler på støttede enheter:\n(Se bruksanvisningen for mer)\n\nLengde: cm , AU, ly, pc\nMasse: u , G, mg\nTid: min , Timer, dager, år\nFrekvens: Hz , Bq\nEnergi: kWh , eV, aJ\nTrykk: Bar , mmHg, atm, tørr
 731#£Trignonometriske ligninger

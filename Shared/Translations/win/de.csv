@@ -73,7 +73,7 @@
 72#£Konvertieren Sie Gleichungen in LaTex. (Die Tastenkombination Alt+T konvertiert eine einzelne Gleichung)
 73#£In Zwischenablage kopieren
 74#£Formular anzeigen
-75#£Erkennen Sie Geräte und schreiben Sie sie nicht kursiv
+75#£Erkennen Sie einheiten und schreiben Sie sie nicht kursiv
 76#£Verwenden Sie die Umwandlung von Maxima in LaTex
 77#£Alle konvertieren
 78#£Konvertieren und zum nächsten Mal wechseln
@@ -113,7 +113,7 @@
 112#£Es kann keine Verbindung zum Server hergestellt werden
 113#£An dieser Stelle des Dokuments wird Folgendes definiert:
 114#£An dieser Stelle des Dokuments gibt es keine Definitionen.
-115#£
+115#£hat mehrere undefinierte Variablen. Die unabhängige Variable kann nicht identifiziert werden. Verwenden Sie x oder t als unabhängige Variable.
 116#£Sie können keine abgeleitete Funktion definieren.\r\nEntfernen Sie die folgende Definition: \r\n
 117#£Es gibt einen Fehler in der Definition:
 118#£Es wird ignoriert. Aber beheben Sie es, damit Sie diesen Fehler nicht bei jeder Berechnung erhalten.
@@ -164,9 +164,9 @@
 163#£Der Wahrheitswert der Aussage wird mit WordMat bestimmt.
 164#£Das Ergebnis basiert auf einem numerischen Vergleich
 165#£Es konnte nicht festgestellt werden, ob die Aussage wahr/falsch war
-166#£Geräte von
-167#£Wählen Sie bei Bedarf Ausgabegeräte aus
-168#£Ausgabegeräte
+166#£Einheiten aus
+167#£Wählen Sie Ausgabeeinheiten
+168#£Ausgabeeinheiten
 169#£Die Klammern spielen keine Rolle
 170#£Automatisches Backup?
 171#£Wie viele Sicherungsdateien sollten maximal gespeichert werden?
@@ -252,7 +252,7 @@
 251#£Oder geben Sie selbst ein
 252#£Sie können nicht beide die Gleichung für
 253#£und sie gleichzeitig zu definieren.
-254#£Sie versuchen, nach einer Variablen zu lösen, die eine Einheit ist. Dies wird wahrscheinlich zu einem Fehler führen. Erwägen Sie, einen anderen Variablennamen zu verwenden oder Geräte zu deaktivieren.
+254#£Sie versuchen, nach einer Variablen zu lösen, die eine Einheit ist. Dies wird wahrscheinlich zu einem Fehler führen. Erwägen Sie, einen anderen Variablennamen zu verwenden oder einheiten zu deaktivieren.
 255#£Erde
 256#£Wasser
 257#£Kupfer
@@ -260,7 +260,7 @@
 259#£Mond
 260#£Sonne
 261#£Physikalische Konstanten
-262#£Geräte
+262#£Einheiten
 263#£Tabellenwerte - Wärme
 264#£Tabellenwert - Kernphysik
 265#£Astronomie
@@ -326,9 +326,9 @@
 325#£Mit der Tastenkombination Alt+M wird ein neues mathematisches Feld eingefügt
 326#£Die Tastenkombination AltGr + Eingabetaste berechnet
 327#£Die Tastenkombination Alt + L löst die Gleichung
-328#£Die Tastenkombination Alt+ in öffnet die Einstellungen
+328#£Die Tastenkombination Alt+j in öffnet die Einstellungen
 329#£Die Tastenkombination Alt+R ruft vorherige Ergebnisse ab
-330#£Tastenkombination Alt+E schaltet Geräte ein/aus
+330#£
 331#£Subskript:
 332#£\lambda gibt den griechischen Kleinbuchstaben an
 333#£Die Tastenkombination Alt+P zeigt das Diagramm einer Regel an
@@ -341,7 +341,7 @@
 340#£Fügen Sie Ihre eigenen Beschreibungen mithilfe von Excel-Diagrammen in Excel-Diagramme ein. Einfügen/Textfeld
 341#£Die Tastenkombination Alt + N wechselt zwischen Auto, Exact, Num
 342#£Eine Funktion mit Buchstabenkonstanten erhält automatisch Schieberegler in GeoGebra
-343#£Bei den Ausgabegeräten darf es sich nur um saubere Geräte handeln. Das heißt, keine zusammengesetzten Einheiten wie km/h. Wenn Sie z.B. km/Stunden wünschen, geben Sie ein: km,Stunden
+343#£Bei den Ausgabeeinheiten darf es sich nur um saubere einheiten handeln. Das heißt, keine zusammengesetzten Einheiten wie km/h. Wenn Sie z.B. km/Stunden wünschen, geben Sie ein: km,Stunden
 344#£Sie haben bereits die neueste Version von
 345#£Wählen Sie eine Steuerbescheidnummer aus.
 346#£Auf welche Zahl sollte diese Gleichung gesetzt werden?\r\nDie Zahlen der folgenden Gleichungen werden entsprechend aktualisiert.
@@ -445,7 +445,7 @@
 444#£Erscheinen.
 445#£breit
 446#£Berechnen
-447#£Locker
+447#£Lösen
 448#£Maxima-Befehl
 449#£Gleichung(en) mit numerischer Methode lösen
 450#£Variablen eliminieren
@@ -455,7 +455,7 @@
 454#£Funktion definieren
 455#£Physikalische Konstanten definieren
 456#£Umschreiben
-457#£Unendlich.
+457#£
 458#£Unterscheidungsmerkmale
 459#£Trunk-Funktion
 460#£Grafik
@@ -686,12 +686,12 @@
 685#£Das Problem konnte nicht gelöst werden.\r\nMöchten Sie eine andere Methode oder CAS-Engine ausprobieren?
 686#£CAS-Motor
 687#£Signifikante Ziffern
-688#£Ein-/Ausschalten von Geräten
+688#£Ein-/Ausschalten von einheiten
 689#£Wenn Einheiten aktiviert sind, kann WordMat Einheiten verstehen und umrechnen. Auf der Schaltfläche SI können Sie angeben, in welche Einheiten Sie umrechnen möchten. Standardmäßig erfolgt die Ausgabe in SI-Einheiten. Schalten Sie Geräte nur ein, wenn Sie sie speziell benötigen. Es kann das Verhalten der WordMat beeinflussen und reserviert viele Variablen.
-690#£Ausgabegeräte
+690#£
 691#£Geben Sie an, in welche Einheiten für Berechnungen umgerechnet werden soll. Standardmäßig erfolgt die Ausgabe in SI-Einheiten
-692#£V. Chr
-693#£Geräte
+692#£sz
+693#£
 694#£Anzahl der Ziffern
 695#£Rundung von Zahlen
 696#£Wählen Sie aus, wie Zahlen geschrieben und gerundet werden. In den folgenden Beispielen ist WordMat auf 3 Ziffern eingestellt.\r\n\r\nAnzahl der Dezimalstellen: 12.345\r\nWichtige Stellen: 12,3\r\nVid. Notation: 1,23*10^1
@@ -713,7 +713,7 @@
 712#£Automatisch
 713#£Sehr hohe Präzision (beta)
 714#£Erklärung einfügen
-715#£Befehl "Maxima einfügen"
+715#£Befehl von Maxima einfügen
 716#£Trennzeichen
 717#£Liste
 718#£Multiplikationszeichen
@@ -726,7 +726,7 @@
 725#£Ist Liste/Matrixindex
 726#£Standard-Grafiksoftware
 727#£Eingebettete Excel-Tabelle einfügen
-728#£Ausgabegeräte
+728#£
 729#£Geben Sie an, welche Einheiten in der Ausgabe durch Komma\nBeispiele getrennt sein sollen:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nWenn nichts angegeben ist, werden alle Einheiten als Basis-SI-Einheiten oder abgeleitete SI-Einheiten ohne Präfix zurückgegeben.
 730#£Beispiele für unterstützte Einheiten:\n(Weitere Informationen finden Sie im Handbuch)\n\nLänge: cm, AU, ly, pc\nMasse: u, G, mg\nZeit: min, Stunden, Tage, Jahre\nFrequenz: Hz, Bq\nEnergie: kWh, eV, aJ\nDruck: Bar, mmHg, atm, trocken
 731#£Trignonometrische Gleichungen

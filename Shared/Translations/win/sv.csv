@@ -113,7 +113,7 @@
 112#£Det går inte att ansluta till servern
 113#£I det här läget i dokumentet definieras följande:
 114#£Det finns inga definitioner i det här avsnittet i dokumentet.
-115#£
+115#£har flera odefinierade variabler. Den oberoende variabeln kan inte identifieras. Använd x eller t som den oberoende variabeln.
 116#£Du kan inte definiera en härledd funktion.\r\nTa bort följande definition: \r\n
 117#£Det finns ett fel i definitionen:
 118#£Det ignoreras. Men fixa det så att du inte får det här felet med varje beräkning.
@@ -326,9 +326,9 @@
 325#£Genvägen Alt+M infogar ett nytt matematiskt fält
 326#£AltGr + Enter-genvägen beräknar
 327#£Genvägen Alt + L löser ekvationen
-328#£Alt+-genvägen i öppnar Inställningar
+328#£Alt+j-genvägen i öppnar Inställningar
 329#£Alt+r-genvägen hämtar tidigare resultat
-330#£Alt+E-genväg slår på/av enheter
+330#£
 331#£Nedsänkt:
 332#£\lambda ger den grekiska bokstaven med små bokstäver
 333#£Alt+P-genvägen visar grafen för en levnadsregel
@@ -455,7 +455,7 @@
 454#£Definiera funktion
 455#£Definiera fysiska konstanter
 456#£Skriva
-457#£Oändligheter.
+457#£
 458#£Differentiators
 459#£Trunk-funktion
 460#£Diagram
@@ -688,10 +688,10 @@
 687#£Signifikanta siffror
 688#£Slå på/av enheter
 689#£Om enheter är aktiverade kan WordMat förstå och konvertera enheter. På SI-knappen kan du ange vilka enheter du vill konvertera till. Som standard är utdata i SI-enheter. Slå inte på enheter om du inte specifikt behöver det. Det kan påverka WordMats beteende och reserverar många variabler.
-690#£Utmatningsenheter
+690#£
 691#£Ange vilka enheter som ska konverteras till för beräkningar. Som standard är utdata i SI-enheter
-692#£Fvt
-693#£Enheter
+692#£s.s.
+693#£
 694#£Antal siffror
 695#£Nummeravrundning
 696#£Välj hur tal ska skrivas och avrundas. I exemplen nedan är WordMat satt till 3 siffror.\r\n\r\nAntal decimaler: 12,345\r\nSignifikanta siffror: 12,3\r\nVid. Notation: 1.23*10^1
@@ -726,7 +726,7 @@
 725#£Är lista/matrisindex
 726#£Standard programvara för grafer
 727#£Infoga Excel-ark inbäddat
-728#£Utmatningsenheter
+728#£
 729#£Ange vilka enheter som ska vara i utdata separerade med kommatecken:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nOm inget anges kommer alla enheter att returneras som bas-SI-enheter eller härledda SI-enheter utan prefix.
 730#£Exempel på enheter som stöds:\n(Se manualen för mer information)\n\nLängd: cm, AU, ly, pc\nMassa: u , G, mg\nTid: min, timmar, dagar, år\nFrekvens: Hz , Bq\nEnergi: kWh, eV, aJ\nTryck: Bar, mmHg, uttagsautomat, torr
 731#£Trignonometriska ekvationer

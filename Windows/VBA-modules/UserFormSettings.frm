@@ -69,7 +69,6 @@ Private Sub Label_cancel_Click()
     Me.hide
 End Sub
 
-
 Private Sub CommandButton_ok_Click()
 On Error Resume Next
     Dim UnitChanged As Boolean
@@ -329,6 +328,7 @@ End Sub
 
 Private Sub UserForm_Activate()
     On Error Resume Next
+    DoEvents
     
     RunFirst
     
@@ -509,6 +509,9 @@ Private Sub UserForm_Activate()
     LangChange = False
     
     SetCasButtons
+
+    DoEvents
+
 End Sub
 
 Sub SetCasButtons()
@@ -557,7 +560,7 @@ Sub FillComboBoxLanguage()
     ComboBox_language.AddItem "latviski"
     ComboBox_language.AddItem "lietuviu"
     ComboBox_language.AddItem "cestina" ' chec
-    ComboBox_language.AddItem "ellinika" ' greek
+'    ComboBox_language.AddItem "ellinika" ' greek
 End Sub
 Sub FillComboBoxBackupNo()
     ComboBox_backupno.Clear
@@ -597,14 +600,14 @@ Sub SetCaptions()
     MultiPage1.Pages("Page1").Caption = Sprog.A(414)
     MultiPage1.Pages("Page2").Caption = Sprog.A(666)
     MultiPage1.Pages("Page3").Caption = Sprog.A(668)
-    MultiPage1.Pages("Page4").Caption = Sprog.A(693)
+    MultiPage1.Pages("Page4").Caption = Sprog.A(262)
     MultiPage1.Pages("Page5").Caption = Sprog.A(667)
     MultiPage1.Pages("Page6").Caption = Sprog.A(7)
     
     Label_TAB1.Caption = "CAS"
     Label_TAB2.Caption = Sprog.A(666)
     Label_TAB3.Caption = Sprog.A(667)
-    Label_TAB4.Caption = Sprog.A(693)
+    Label_TAB4.Caption = Sprog.A(262)
     Label_TAB5.Caption = Sprog.A(7)
     Label_TAB6.Caption = "Backup"
     Label_TAB7.Caption = Sprog.A(668)
@@ -612,7 +615,7 @@ Sub SetCaptions()
     Label_cancel.Caption = Sprog.Cancel
     CommandButton_ok.Caption = Sprog.OK
     CheckBox_complex.Caption = Sprog.A(670)
-    CheckBox_units.Caption = Sprog.A(693)
+    CheckBox_units.Caption = Sprog.A(262)
     CheckBox_polaroutput.Caption = Sprog.A(680)
     Frame1.Caption = Sprog.A(708)
     OptionButton_grader.Caption = Sprog.A(706)
@@ -638,7 +641,7 @@ Sub SetCaptions()
     OptionButton_indexvar.Caption = Sprog.A(725)
     Frame9.Caption = Sprog.A(726)
     CheckBox_indlejret.Caption = Sprog.A(727)
-    Label_outputunits.Caption = Sprog.A(728)
+    Label_outputunits.Caption = Sprog.A(168)
     CommandButton_sletenheder.Caption = Sprog.A(815)
     Label_unithelp.Caption = Sprog.A(729)
     Label_unitexamples.Caption = Sprog.A(730)

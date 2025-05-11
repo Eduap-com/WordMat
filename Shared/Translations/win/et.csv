@@ -113,7 +113,7 @@
 112#£Serveriga ei saa ühendust luua
 113#£Selles dokumendi kohas on määratletud järgmine
 114#£Selles kohas dokumendis pole definitsioone.
-115#£
+115#£on mitu määratlemata muutujat. Sõltumatut muutujat ei saa tuvastada. Kasutage sõltumatu muutujana x või t.
 116#£Tuletist ei saa defineerida\r\nEemalda definitsioon: \r\n
 117#£Definitsioonis on viga:
 118#£Seda ignoreeritakse, kuid selle väljundvea vältimiseks parandage sisendviga
@@ -326,9 +326,9 @@
 325#£Otsetee Alt + M lisab uue matemaatika
 326#£Otsetee AltGr + Enter arvutab
 327#£Otsetee Alt + E Lahendab võrrandi
-328#£Otsetee Alt + S avab seaded
+328#£Otsetee Alt + j avab seaded
 329#£Otsetee Alt + R Lisab eelmise tulemuse
-330#£Otsetee Alt + U Lülitab sisse seadme toe
+330#£
 331#£Allindeks:
 332#£\lambda on lühend väikesest kreeka tähest lambda
 333#£Otsetee Alt + P Joonistab graafiku
@@ -455,7 +455,7 @@
 454#£Funktsiooni määratlemine
 455#£Füüsikaliste konstantide määratlemine
 456#£Vähendada
-457#£Lõpmatu.
+457#£
 458#£Eristada
 459#£Integreerida
 460#£Joonestamist
@@ -688,10 +688,10 @@
 687#£Olulised arvud
 688#£Lülitage seadmed sisse/välja
 689#£Kui ühikud on sisse lülitatud, saab WordMath ühikuid tõlgendada ja teisendada. SI nupul saate muuta väljundühikuid. Ärge lülitage seadmeid sisse, kui te seda ei vaja. See võib mõjutada WordMati käitumist ja reserveerida palju muutujaid.
-690#£Väljundi ühikud
+690#£
 691#£Märkige ühikud, milleks teisendada. Vaikimisi on väljundühikud SI-ühikud.
-692#£Sf
-693#£Ühikut
+692#£oa
+693#£
 694#£Ei. arvude arv
 695#£Ümardamise
 696#£Valige, kuidas arvud fomateeritakse ja ümardatakse. Allolevates näidetes on WordMat seatud 3 numbrile\r\n\r\nKümnendkohad: 12 345\r\nOlulised arvud: 12,3\r\nSci. Tähis: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£On loendi/maatriksi indeks
 726#£Standardne graafikuprogramm
 727#£Exceli lehtede manustamine
-728#£Väljundi ühikud
+728#£
 729#£Oleku väljundühikud, mis on eraldatud komaga\nnäited:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nKui midagi ei ole öeldud, tagastatakse ühikud SI-põhiühikutes või SI-tuletatud ühikutes ilma eesliiteta.
 730#£Näited toetatud ühikutest:\n(Lisateabe saamiseks vaadake juhendit)\n\nPikkus: cm , AU, ly, pc\nMass: u , G, mg\nSagedus: Hz , Bq\nEnergia: kWh , eV, aJ\nRõhk: Bar , mmHg, atm, torr
 731#£Trigonomeetrilised võrrandid

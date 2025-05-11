@@ -162,7 +162,7 @@ Public Sub LoadSprogArray()
     End If
     
     If Dir(FilePath) = vbNullString Then
-        MsgBox2 "Language file could not be located", vbOKOnly Or vbCritical, Sprog.Error
+        MsgBox2 "Language file could not be located", vbOKOnly, Sprog.Error
     Else
         FileNo = FreeFile
         Open FilePath For Input As FileNo
@@ -178,6 +178,10 @@ Public Sub LoadSprogArray()
         Close FileNo
     End If
 
+    GoTo TheEnd
+ErrorL:
+        MsgBox2 "An error occured parsing the languge file", vbOKOnly, Sprog.Error
+TheEnd:
 End Sub
 
 Function FormatText(ByVal t As String) As String

@@ -113,7 +113,7 @@
 112#£Unable to connect to server
 113#£At this place in the document the following is defined
 114#£There aren't any definitions at this place in the document.
-115#£
+115#£has several undefined variables. The independent variable cannot be identified. Please use x or t as the independent variable.
 116#£You can't define a derivative\r\nRemove the definition: \r\n
 117#£There is an error in the definition: 
 118#£It is ignored, but correct the input error to avoid this output error
@@ -134,7 +134,7 @@
 133#£You have asked to solve the equation for a variable which is already defined. Insert a 'delete def:' command before the equation.
 134#£The system of equations is solved for 
 135#£ by WordMat's 'solve equation' function, 
-136#£Partnership registered with 
+136#£Partnership registered with
 137#£The system of equations had no solutions in the domain $C for variables 
 138#£The system of equations had no solutions in the domain $R for variables 
 139#£There must be an equal sign in an equation
@@ -326,9 +326,9 @@
 325#£Shortcut          Alt + M         inserts new math 
 326#£Shortcut        AltGr + Enter       calculates 
 327#£Shortcut          Alt + E         Solves equation 
-328#£Shortcut          Alt + S         opens settings
+328#£Shortcut          Alt + J         opens settings
 329#£Shortcut          Alt + R         Inserts previous result
-330#£Shortcut          Alt + U         Turns on unit support
+330#£
 331#£subscript: 
 332#£\lambda is short for the small greek letter lambda
 333#£Shortcut          Alt + P         Plots a graph
@@ -455,7 +455,7 @@
 454#£Define function
 455#£Define physical constants
 456#£Reduce
-457#£Infinites.
+457#£
 458#£Differentiate
 459#£Integrate
 460#£Plotting
@@ -688,10 +688,10 @@
 687#£Significant figures
 688#£Turn units on/off
 689#£If units are turned on, WordMath kan interpret and convert units. On the SI button you can change the output units. Do not turn units on, unless you need it. It can affect the behaviour of WordMat and reserves a lot of variables.
-690#£Output units
+690#£
 691#£State the units to convert to. By default output units are SI units.
 692#£sf
-693#£Units
+693#£
 694#£No. of figures
 695#£Rounding
 696#£Choose how numbers are fomatted and rounded. In the examples below WordMat is set to 3 figures\r\n\r\nDecimals: 12,345\r\nSignificant figures: 12,3\r\nSci. notation: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Is list/matrix index
 726#£Standard graph program
 727#£Embed Excel sheets
-728#£Output units
+728#£
 729#£State output units separated by comma\nexamples:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nIf nothing is stated units are returned in basic SI-units or SI-derived units without prefix.
 730#£Examples of supported units:\n(See manual for more)\n\nLength: cm , AU, ly, pc\nMass: u , G, mg\nFrequency: Hz , Bq\nEnergy: kWh , eV, aJ\nPressure: Bar , mmHg, atm, torr
 731#£Trigonometric equations

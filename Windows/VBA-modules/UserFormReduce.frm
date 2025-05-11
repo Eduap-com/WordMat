@@ -185,7 +185,7 @@ Private Sub SetCaptions()
     Label5.Caption = Sprog.A(764)
     Frame6.Caption = Sprog.A(816) & " output"
     Label_cancel.Caption = Sprog.Cancel
-    Label_enheder.Caption = Sprog.A(728)
+    Label_enheder.Caption = Sprog.A(168)
     Frame5.Caption = Sprog.A(710) & "?"
     OptionButton_exactonly.Caption = Sprog.A(710)
     OptionButton_numonly.Caption = Sprog.A(711)

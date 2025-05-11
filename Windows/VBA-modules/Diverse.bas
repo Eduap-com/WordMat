@@ -608,7 +608,7 @@ Function GetRandomTip()
     Case 4
         tip = Sprog.A(329)
     Case 5
-        tip = Sprog.A(330)
+        tip = Sprog.A(329)
     Case 6
         tip = Sprog.A(331) & "   x_1   ->   x" & VBA.ChrW(8321)
     Case 7

@@ -126,13 +126,13 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                                 cmd = Replace(cmd, "+", "%2B") & ";"
                                 UrlLink = UrlLink & cmd
                             ElseIf LHS = "y" Then
-                                fktudtryk = ReplaceIndepvarX(RHS, uvar)
+                                fktudtryk = ReplaceIndepvarX(RHS, uvar, DefList)
                                 If Not (uvar = "" Or uvar = "x") Then  'Or uvar = "t"
-                                    DefList = DefList & uvar & ","
+                                    DefList = DefList & "," & uvar
                                 End If
                                 DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                                 If fktnavn = "y" Then
-                                    cmd = fktnavn & "=" & fktudtryk
+                                    cmd = "f" & j & ":" & fktnavn & "=" & fktudtryk
                                 Else
                                     cmd = fktnavn & "(x)=" & fktudtryk
                                 End If
@@ -155,6 +155,18 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                                 DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                                 cmd = Replace(cmd, "+", "%2B") & ";"
                                 UrlLink = UrlLink & cmd
+                            ElseIf fktnavn = LHS Then
+                                fktudtryk = ReplaceIndepvarX(RHS, uvar, DefList)
+                                If fktudtryk <> vbNullString Then
+                                    If Not (uvar = "" Or uvar = "x") Then  'Or uvar = "t"
+                                        DefList = DefList & "," & uvar
+                                    End If
+                                    DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
+                                    cmd = fktnavn & j & ":" & "y=" & fktudtryk
+                                    cmd = Replace(cmd, "+", "%2B") & ";"
+                                    UrlLink = UrlLink & cmd
+                                    j = j + 1
+                                End If
                             Else ' ligning
                                 cmd = LHS & "=" & RHS
                                 DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
@@ -180,14 +192,25 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                             cmd = Replace(cmd, "+", "%2B") & ";"
                             UrlLink = UrlLink & cmd
                             '                    geogebrafil.CreateFunction "u" & j, udtryk, True
+                        ElseIf LHS = "" Then
+                            Udtryk = ReplaceIndepvarX(Udtryk, , DefList)
+                            If Udtryk <> vbNullString Then
+                                DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
+                                cmd = "f" & j & "=" & Udtryk
+                                cmd = Replace(cmd, "+", "%2B") & ";"
+                                UrlLink = UrlLink & cmd
+                                j = j + 1
+                            End If
                         Else
-                            Udtryk = ReplaceIndepvarX(Udtryk)
-                            DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
-                            cmd = "f" & j & "=" & Udtryk
-                            cmd = Replace(cmd, "+", "%2B") & ";"
-                            UrlLink = UrlLink & cmd
-                            '                    geogebrafil.CreateFunction "f" & j, udtryk, False
-                            j = j + 1
+                            Udtryk = ReplaceIndepvarX(Udtryk, , DefList)
+                            If Udtryk <> vbNullString Then
+                                DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
+                                cmd = "f" & j & "=" & Udtryk
+                                cmd = Replace(cmd, "+", "%2B") & ";"
+                                UrlLink = UrlLink & cmd
+                                '                    geogebrafil.CreateFunction "f" & j, udtryk, False
+                                j = j + 1
+                            End If
                         End If
                     End If
                 End If
@@ -1012,10 +1035,12 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                             DefinerKonstanter fktudtryk, DefList, geogebrafil
                             geogebrafil.CreateFunction fktnavn, fktudtryk, False, True
                         ElseIf LHS = "y" Then
-                            fktudtryk = ReplaceIndepvarX(RHS)
-                            DefinerKonstanter fktudtryk, DefList, geogebrafil
-                            geogebrafil.CreateFunction "f" & j, fktudtryk, False
-                            j = j + 1
+                            fktudtryk = ReplaceIndepvarX(RHS, , DefList)
+                            If fktudtryk <> vbNullString Then
+                                DefinerKonstanter fktudtryk, DefList, geogebrafil
+                                geogebrafil.CreateFunction "f" & j, fktudtryk, False
+                                j = j + 1
+                            End If
                         ElseIf InStr(LHS, VBA.ChrW(8407)) > 0 Then ' arrow -> vector
                             If InStr(RHS, "¦") > 0 Then ' vector inserted using template from equation menu
                                 RHS = Replace(RHS, "¦", ";")
@@ -1046,6 +1071,13 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                             fktudtryk = "param1: X = " & RHS
                             geogebrafil.CreateEquation "param" & j, fktudtryk, False, True
                             j = j + 1
+                        ElseIf fktnavn = LHS Then
+                            fktudtryk = ReplaceIndepvarX(RHS, , DefList)
+                            If fktudtryk <> vbNullString Then
+                                DefinerKonstanter fktudtryk, DefList, geogebrafil
+                                geogebrafil.CreateEquation LHS & j, RHS, False, True
+                                j = j + 1
+                            End If
                         Else 'ligning
                             DefinerKonstanter fktudtryk, DefList, geogebrafil
                             geogebrafil.CreateEquation "eq" & j, LHS & "=" & RHS, False, True
@@ -1067,10 +1099,12 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                         DefinerKonstanter Udtryk, DefList, geogebrafil
                         geogebrafil.CreateFunction "u" & j, Udtryk, True
                     Else
-                        Udtryk = ReplaceIndepvarX(Udtryk)
-                        DefinerKonstanter Udtryk, DefList, geogebrafil
-                        geogebrafil.CreateFunction "f" & j, Udtryk, False
-                        j = j + 1
+                        Udtryk = ReplaceIndepvarX(Udtryk, , DefList)
+                        If Udtryk <> vbNullString Then
+                            DefinerKonstanter Udtryk, DefList, geogebrafil
+                            geogebrafil.CreateFunction "f" & j, Udtryk, False
+                            j = j + 1
+                        End If
                     End If
                 End If
             End If

@@ -113,7 +113,7 @@
 112#£Yhteyden muodostaminen palvelimeen ei onnistu
 113#£Tässä kohdassa asiakirjassa määritellään seuraava
 114#£Tässä kohdassa asiakirjassa ei ole määritelmiä.
-115#£
+115#£on useita määrittelemättömiä muuttujia. Riippumatonta muuttujaa ei voida tunnistaa. Käytä x:ää tai t:tä riippumattomana muuttujana.
 116#£Et voi määrittää derivaatta\r\nPoista määritelmä: \r\n
 117#£Määritelmässä on virhe:
 118#£Se ohitetaan, mutta korjaa syöttövirhe tämän tulostusvirheen välttämiseksi
@@ -326,9 +326,9 @@
 325#£Pikanäppäin Alt + M lisää uuden matematiikan
 326#£Pikanäppäin AltGr + Enter laskee
 327#£Pikanäppäin Alt + E Ratkaisee yhtälön
-328#£Pikanäppäin Alt + S avaa asetukset
+328#£Pikanäppäin Alt + j avaa asetukset
 329#£Pikanäppäin Alt + R Lisää edellisen tuloksen
-330#£Pikanäppäin Alt + U Ottaa yksikkötuen käyttöön
+330#£
 331#£alaindeksi:
 332#£\lambda on lyhenne pienestä kreikkalaisesta lambda-kirjaimesta
 333#£Pikanäppäin Alt + P Piirtää kaavion
@@ -455,7 +455,7 @@
 454#£Määritä funktio
 455#£Fysikaalisten vakioiden määrittäminen
 456#£Supistaa
-457#£Äärettömiä.
+457#£
 458#£Erottaa
 459#£Yhdentää
 460#£Vehkeily
@@ -688,10 +688,10 @@
 687#£Merkittävät luvut
 688#£Kytke yksiköt päälle/pois päältä
 689#£Jos yksiköt ovat käytössä, WordMath voi tulkita ja muuntaa yksiköitä. SI-painikkeella voit muuttaa lähtöyksiköitä. Älä kytke laitteita päälle, ellet tarvitse sitä. Se voi vaikuttaa WordMatin toimintaan ja varaa paljon muuttujia.
-690#£Lähtöyksiköt
+690#£
 691#£Ilmoita yksiköt, joihin muunnetaan. Oletusarvoisesti lähtöyksiköt ovat SI-yksiköitä.
-692#£Sf
-693#£Yksiköt
+692#£ml
+693#£
 694#£Ei. lukujen määrä
 695#£Pyöristys
 696#£Valitse, miten luvut fomatoidaan ja pyöristetään. Alla olevissa esimerkeissä WordMat on asetettu 3 numeroon\r\n\r\nDesimaalit: 12 345\r\nMerkitsevät luvut: 12,3\r\nSci. merkintä: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£On luettelo-/matriisiindeksi
 726#£Vakiokaavio-ohjelma
 727#£Upota Excel-taulukot
-728#£Lähtöyksiköt
+728#£
 729#£Tilan lähtöyksiköt erotettu pilkulla\nesimerkkejä :\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJos mitään ei ole ilmoitettu, yksiköt palautetaan SI-perusyksiköissä tai SI-johdetuissa yksiköissä ilman etuliitettä.
 730#£Esimerkkejä tuetuista yksiköistä:\n(Katso lisätietoja käsikirjasta)\n\nPituus: cm , AU, ly, pc\nMassa: u , G, mg\nTaajuus: Hz , Bq\nEnergia: kWh , eV, aJ\nPaine: Bar , mmHg, atm, torr
 731#£Trigonometriset yhtälöt

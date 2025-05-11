@@ -412,8 +412,11 @@ Sub MaximaSolvePar(Optional variabel As String)
     Else
         p2 = InStr(p + 1, Selection.OMaths(1).Range.Text, "=")
         If p2 > 0 Then
-            MsgBox Sprog.A(882), vbOKOnly, Sprog.Error
-            GoTo slut
+            p = InStr(Selection.OMaths(1).Range.Text, ChrW(8743))
+            If p < 1 Then
+                MsgBox Sprog.A(882), vbOKOnly, Sprog.Error
+                GoTo slut
+            End If
         End If
     End If
 

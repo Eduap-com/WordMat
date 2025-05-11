@@ -3,10 +3,6 @@ Option Explicit
 ' This module contains callback functions used by the Word WordMat Ribbon menu
 ' There are functions to return the text on the buttons (language sensitive), and the action to perform when the button is clicked
 Public WoMatRibbon As IRibbonUI
-#If Mac Then
-#Else
-    Public Declare PtrSafe Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As LongPtr)
-#End If
 
 'Callback for customUI.onLoad
 Sub LoadRibbon(ribbon As IRibbonUI)
@@ -15,25 +11,12 @@ Sub LoadRibbon(ribbon As IRibbonUI)
 #Else
     SetMaxProc
     Set WoMatRibbon = ribbon
-    Dim lngRibPtr As LongPtr
-    lngRibPtr = ObjPtr(ribbon)
-    
-    SetRegSettingLong "RibbonPointer", lngRibPtr
 #End If
 End Sub
 
 Public Sub ribbonLoaded(ribbon As IRibbonUI)
 
 End Sub
-Function GetRibbon(lngRibPtr As LongPtr) As Object
-#If Mac Then
-#Else
-   Dim objRibbon As Object
-   CopyMemory objRibbon, lngRibPtr, 4
-   Set GetRibbon = objRibbon
-   Set objRibbon = Nothing
-#End If
-End Function
 Sub RefreshRibbon()
 #If Mac Then
     If Not (WoMatRibbon Is Nothing) Then
@@ -41,36 +24,14 @@ Sub RefreshRibbon()
     End If
 #Else
     On Error GoTo Fejl
-   Dim lngRibPtr As LongPtr
-   Dim lngRibPtrBackup As LongPtr
    
-  If Not (WoMatRibbon Is Nothing) Then
+    If Not (WoMatRibbon Is Nothing) Then
         WoMatRibbon.Invalidate
-    Else
-        lngRibPtrBackup = ObjPtr(WoMatRibbon)
-        On Error Resume Next
-        lngRibPtr = CLng(GetRegSettingLong("RibbonPointer"))
-        On Error GoTo Fejl
-        If lngRibPtr > 0 Then
-          Set WoMatRibbon = GetRibbon(lngRibPtr)
-          WoMatRibbon.Invalidate
-        End If
-        ' The static guiRibbon-variable was meanwhile lost
-'        MsgBox "Due to a design flaw in the architecture of the MS ribbon UI you have to close " & _
-'            "and reopen this workbook." & vbNewLine & vbNewLine & _
-'            "Very sorry about that.", vbExclamation + vbOKOnly
-        ' Note: In the help we can find
-        ' guiRibbon.Refresh
-        ' but unfortunately this is not implemented.
-        ' It is exactly what we should have instead of that brute force reload mechanism.
     End If
 
-GoTo slut
+    GoTo slut
 Fejl:
-'    MsgBox Sprog.A(394), vbOKOnly, Sprog.Error ' oplever ikke at WordMat crasher af den grund mere
     MsgBox Err.Description
-    Set WoMatRibbon = GetRibbon(lngRibPtrBackup)
-    lngRibPtr = 0
 slut:
 #End If
 End Sub
@@ -891,7 +852,7 @@ Sub Rib_unit(control As IRibbonControl, ByRef returnedVal)
 End Sub
 
 Sub Rib_STunit3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = Sprog.A(690)
+    returnedVal = Sprog.A(168)
 End Sub
 Sub Rib_STunit4(control As IRibbonControl, ByRef returnedVal)
     returnedVal = Sprog.A(691)
@@ -1198,9 +1159,6 @@ Sub Rib_GetLabelFactor(control As IRibbonControl, ByRef returnedVal As Variant)
 End Sub
 Sub Rib_GetLabelExpand(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.A(807)
-End Sub
-Sub Rib_GetLabelInfinitesimal(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = Sprog.A(457)
 End Sub
 Sub Rib_GetLabelIntegrate(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = Sprog.A(459)

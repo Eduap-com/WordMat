@@ -1515,19 +1515,22 @@ start:
         End If
     Else    ' vid not, num, exact
         Dim eqsg As String
-        eql = MaximaOutput
-        If MaximaExact = 1 Then
+        If MaximaExact <> 1 Then
+            eql = MaximaOutput
+            nr = nr - 1 ' if auto or num, then last output is just true/false
+        End If
+        If MaximaExact = 1 Then ' exact
             eqsg = "="
         ElseIf eql = "true" Then
             eqsg = "="
         Else
             eqsg = VBA.ChrW(&H2248)
         End If
-        If moutput(nr - 1) <> "" Then
-            MaximaOutput = eqsg & ConvertToWordSymbols(moutput(nr - 1))
+        If moutput(nr) <> "" Then
+            MaximaOutput = eqsg & ConvertToWordSymbols(moutput(nr))
             KommentarOutput = ""
             If MaximaOutput = "=fejl" Then
-                KommentarOutput = moutput(nr - 3) & moutput(nr - 2)
+                KommentarOutput = moutput(nr - 2) & moutput(nr - 1)
             End If
             For i = 0 To nr - 1
                 KommentarOutput = KommentarOutput & Minput(nr - i)
@@ -3401,7 +3404,9 @@ msat:
                     i = i + 1
                 End If
             Else
-                MsgBox Sprog.A(895), vbOKOnly, Sprog.Error
+'                MsgBox2 Sprog.A(895), vbOKOnly, Sprog.Error
+                ConvertErrorText = Sprog.A(895)
+                GoTo slut
             End If
         Loop While i < 100 And InStr(ea.Text, VBA.ChrW(8747)) > 0 'Len(integrand) > 0
         ea.Text = Replace(ea.Text, "qiff", "diff")

@@ -113,7 +113,7 @@
 112#£Nevar izveidot savienojumu ar serveri
 113#£Saja dokumenta vieta ir definets:
 114#£Saja dokumenta nav definiciju.
-115#£
+115#£ir vairaki nedefineti mainigie. Neatkarigo mainigo nevar identificet. Izmantojiet x vai t ka neatkarigo mainigo.
 116#£Nevar definet atvasinajumu\r\nNonemiet definiciju: \r\n
 117#£Definicija ir kluda:
 118#£Tas tiek ignorets, bet izlabojiet ievades kludu, lai izvairitos no sis izvades kludas
@@ -326,9 +326,9 @@
 325#£Saisne Alt + M ievieto jaunu matematiku
 326#£Saisne AltGr + Enter aprekina
 327#£Saisne Alt + E atrisina vienadojumu
-328#£Saisne Alt + S atver iestatijumus
+328#£Saisne Alt + j atver iestatijumus
 329#£Saisne Alt + R Ievieto ieprieksejo rezultatu
-330#£Saisne Alt + U Iesledz ierices atbalstu
+330#£
 331#£Apaksraksts:
 332#£\lambda ir saisinajums no maza grieku burta lambda
 333#£Saisne Alt + P Attelo grafiku
@@ -455,7 +455,7 @@
 454#£Definet funkciju
 455#£Fizisko konstantu definesana
 456#£Mazinat
-457#£Bezgaliba.
+457#£
 458#£Atskirtu
 459#£Integret
 460#£Skicesanu
@@ -688,10 +688,10 @@
 687#£Nozimigi skaitli
 688#£Ieslegt/izslegt ierices
 689#£Ja vienibas ir ieslegtas, WordMath var interpretet un konvertet vienibas. Poga SI varat mainit izejas vienibas. Neiesledziet ierices, ja vien tas nav nepieciesams. Tas var ietekmet WordMat uzvedibu un rezerve daudz mainigo.
-690#£Izejas vienibas
+690#£
 691#£Noradiet vienibas, uz kuram konvertet. Pec noklusejuma izejas vienibas ir SI vienibas.
-692#£Sf
-693#£Vienibas
+692#£ns
+693#£
 694#£Ne. skaitli
 695#£Noapalosanas
 696#£Izvelieties, ka skaitli tiek noapaloti un noapaloti. Talak minetajos piemeros WordMat ir iestatits uz 3 skaitliem\r\n\r\nDecimaldalas: 12,345\r\nNozimigi skaitli: 12,3\r\nSci. Apzimejums: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Ir saraksta/matricas indekss
 726#£Standarta grafiku programma
 727#£Excel lapu iegulsana
-728#£Izejas vienibas
+728#£
 729#£Stavokla izejas vienibas, kas atdalitas ar komatiem\npiemeriem:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJa nekas nav noradits, vienibas tiek atgrieztas pamata SI vienibas vai no SI atvasinatas vienibas bez prefiksa.
 730#£Atbalstito vienibu piemeri:\n(Plasaku informaciju skatit rokasgramata)\n\nGarums: cm , AU, ly, pc\nMasa: u , G, mg\nFrekvence: Hz , Bq\nEnergija: kWh , eV, aJ\nSpiediens: Bar , mmHg, atm, torr
 731#£Trigonometriskie vienadojumi

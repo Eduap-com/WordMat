@@ -113,7 +113,7 @@
 112#£Der kunne ikke oprettes forbindelse til serveren
 113#£På dette sted i dokumentet er der defineret følgende:
 114#£Der er ingen definitioner på dette sted i dokumentet.
-115#£
+115#£har flere udefinerede variable. Den uafhængige variabel kan ikke identificeres. Brug x eller t som uafhængig variabel.
 116#£Man kan ikke definere en afledet funktion.\r\nFjern følgende definition: \r\n
 117#£Der er en fejl i definitionen: 
 118#£Den ignoreres. Men ret det så du ikke får denne fejl ved hver beregning.
@@ -134,7 +134,7 @@
 133#£Du har bedt om at løse ligningen for en variabel der allerede er defineret. Indsæt en 'slet def:' kommando før ligningen.
 134#£Ligningssystemet løses for 
 135#£ vha. WordMat's 'Løs Ligninger' funktion, 
-136#£Partnerskab registreret med 
+136#£Partnerskab registreret med
 137#£Ligningssystemet havde ingen løsninger indenfor $C for variablene 
 138#£Ligningssystemet havde ingen løsninger indenfor $R for variablene 
 139#£Der skal være et ligmed tegn i en ligning.
@@ -145,7 +145,7 @@
 144#£sand
 145#£falsk
 146#£ukendt
-147#£
+147#£WordMat
 148#£Der blev fundet en løsning. Der kan dog sagtens være flere løsninger.
 149#£Marker kun et udtryk
 150#£Udtrykket omskrives vha. WordMat ved brug af metoderne: 
@@ -326,9 +326,9 @@
 325#£Genvejen   Alt + M   indsætter nyt matematikfelt
 326#£Genvejen   AltGr + Enter   beregner
 327#£Genvejen   Alt + L    løser ligning
-328#£Genvejen   Alt + i   åbner indstillinger
+328#£Genvejen   Alt + j   åbner indstillinger
 329#£Genvejen   Alt + r   henter forrige resultater
-330#£Genvejen   Alt + E   slår enheder til/fra
+330#£
 331#£sænket skrift: 
 332#£\lambda giver det lille græske bogstav 
 333#£Genvejen  Alt + P  viser grafen for en forskrift
@@ -455,7 +455,7 @@
 454#£Definer funktion
 455#£Definer fysiske konstanter
 456#£Omskriv
-457#£Infinites.
+457#£
 458#£Differentier
 459#£Stamfunktion
 460#£Graftegning
@@ -688,10 +688,10 @@
 687#£Betydende cifre
 688#£Slå enheder til/fra
 689#£Hvis enheder er slået til kan WordMat forstå og omregne enheder. På knappen SI kan du angive hvilke enheder du vil have omregnet til. Som standard er output i SI-enheder. Slå ikke enheder til hvis du ikke specifikt skal bruge det. Det kan påvirke WordMats virkemåde, og reserverer en masse variable.
-690#£Outputenheder
+690#£
 691#£Angiv hvilke enheder, der skal konverteres til ved beregninger. Som standard er output i SI-enheder
 692#£bc
-693#£Enheder
+693#£
 694#£Antal cifre
 695#£Tal afrunding
 696#£Vælg hvordan tal skal skrives og afrundes. I eksemplerne nedenfor er WordMat sat til 3 cifre.\r\n\r\nAntal decimaler: 12,345\r\nBetydende cifre: 12,3\r\nVid. notation: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Er liste/matrix indeks
 726#£Standard grafprogram
 727#£Indsæt Excelark indlejret
-728#£Outputenheder
+728#£
 729#£Angiv hvilke enheder som skal være i output adskilt ad komma\neksempler:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nHvis intet angives returneres alle enheder som base SI-enheder eller afledte SI-enheder uden præfiks.
 730#£Eksempler på understøttede enheder:\n(Se manual for flere)\n\nLængde: cm , AU, ly, pc\nMasse: u , G, mg\nTid: min , Timer, dage, år\nFrekvens: Hz , Bq\nEnergi: kWh , eV, aJ\nTryk: Bar , mmHg, atm, torr
 731#£Trignonometriske ligninger
@@ -893,7 +893,7 @@
 892#£Kommandoen blev afbrudt efter 
 893#£Vil du prøve igen, og hvor lang tid vil du vente. (sekunder) Computeren låses i ventetiden.
 894#£Fejl i definition
-895#£Der er en syntax fejl i forbindelse med et integrale. Har du husket dx i slutningen?
+895#£Der er en syntaxfejl i forbindelse med et integrale. Har du husket dx i slutningen?
 896#£Længde af output: 
 897#£Klik JA for at indsætte alle tegn i Word. (Advarsel: Kan gøre Word langsom eller endda få Word til at crashe). \r\n Klik NEJ for kun at indsætte de første 1000 tegn.
 898#£Du har angivet for få parametre til funktionen: 

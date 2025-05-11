@@ -113,7 +113,7 @@
 112#£Impossible de se connecter au serveur
 113#£À cet endroit du document, on définit ce qui suit
 114#£Il n'y a pas de définitions à cet endroit dans le document.
-115#£
+115#£comporte plusieurs variables indéfinies. La variable indépendante ne peut pas être identifiée. Utilisez x ou t comme variable indépendante.
 116#£Vous ne pouvez pas définir une dérivée\r\nSupprimez la définition : \r\n
 117#£Il y a une erreur dans la définition :
 118#£Elle est ignorée, mais corrigez l'erreur d'entrée pour éviter cette erreur de sortie
@@ -326,9 +326,9 @@
 325#£Raccourci Alt + M insère de nouvelles mathématiques
 326#£Raccourci AltGr + Entrée calcule
 327#£Raccourci Alt + E Résout l'équation
-328#£Le raccourci Alt + S ouvre les paramètres
+328#£Le raccourci Alt + j ouvre les paramètres
 329#£Raccourci Alt + R Inserts résultat précédent
-330#£Raccourci Alt + U Permet d'activer la prise en charge de l'unité
+330#£
 331#£indice:
 332#£\lambda est l'abréviation de la petite lettre grecque lambda
 333#£Raccourci Alt + P Trace un graphique
@@ -455,7 +455,7 @@
 454#£Définir la fonction
 455#£Définir des constantes physiques
 456#£Réduire
-457#£Infinis.
+457#£
 458#£Différencier
 459#£Intégrer
 460#£Tracé
@@ -688,10 +688,10 @@
 687#£Des chiffres significatifs
 688#£Allumer/éteindre les unités
 689#£Si les unités sont activées, WordMath peut interpréter et convertir les unités. Sur le bouton SI, vous pouvez changer les unités de sortie. N'allumez pas les appareils, sauf si vous en avez besoin. Il peut affecter le comportement de WordMat et réserve beaucoup de variables.
-690#£Unités de sortie
+690#£
 691#£Indiquez les unités à convertir. Par défaut, les unités de sortie sont des unités SI.
-692#£Sf
-693#£Unités
+692#£cs
+693#£
 694#£Non. de chiffres
 695#£Arrondi
 696#£Choisissez comment les nombres sont affinés et arrondis. Dans les exemples ci-dessous, WordMat est défini sur 3 chiffres\r\n\r\nDécimales : 12 345\r\nChiffres significatifs : 12,3\r\nSci. Notation : 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Est un index de liste/matrice
 726#£Programme graphique standard
 727#£Intégrer des feuilles Excel
-728#£Unités de sortie
+728#£
 729#£Unités de sortie d'état séparées par des virgules\nexemples :\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nSi rien n'est indiqué, les unités sont renvoyées en unités SI de base ou en unités dérivées de SI sans préfixe.
 730#£Exemples d'unités prises en charge :\n(Voir le manuel pour plus d'informations)\n\nLongueur : cm , AU, ly, pc\nMasse : u , G, mg\nFréquence : Hz , Bq\nÉnergie : kWh , eV, aJ\nPression : Bar , mmHg, atm, torr
 731#£Équations trigonométriques

@@ -113,7 +113,7 @@
 112#£Nepavyksta prisijungti prie serverio
 113#£Sioje dokumento vietoje apibreziama:
 114#£Sioje dokumento vietoje nera jokiu apibrezimu.
-115#£
+115#£turi keleta neapibreztu kintamuju. Nepriklausomo kintamojo nustatyti negalima. Naudokite x arba t kaip nepriklausoma kintamaji.
 116#£Negalite apibrezti isvestines priemones\r\nPasalinkite apibrezima: \r\n
 117#£Apibrezime yra klaida:
 118#£Jo nepaisoma, taciau istaisykite ivesties klaida, kad isvengtumete sios isvesties klaidos
@@ -326,9 +326,9 @@
 325#£Spartusis klavisas Alt + M iterpia nauja matematika
 326#£Spartusis klavisas AltGr + Enter apskaiciuoja
 327#£Spartusis klavisas Alt + E Issprendzia lygti
-328#£Spartusis klavisas Alt + S atidaro nustatymus
+328#£Spartusis klavisas Alt + j atidaro nustatymus
 329#£Spartusis klavisas Alt + R Iterpia ankstesni rezultata
-330#£Spartusis klavisas Alt + U Ijungia irenginio palaikyma
+330#£
 331#£apatinis indeksas:
 332#£\lambda yra trumpinys is mazos graikiskos raides lambda
 333#£Spartusis klavisas Alt + P Nubraizo grafika
@@ -455,7 +455,7 @@
 454#£Apibrezti funkcija
 455#£Fiziniu konstantu apibrezimas
 456#£Sumazinti
-457#£Begalybes.
+457#£
 458#£Atskirti
 459#£Integruoti
 460#£Braizymo
@@ -688,10 +688,10 @@
 687#£Reiksmingi skaiciai
 688#£Vienetu ijungimas / isjungimas
 689#£Jei vienetai ijungti, WordMath kan interpretuoja ir konvertuoja vienetus. SI mygtuke galite pakeisti isvesties vienetus. Neijunkite irenginiu, nebent jums to reikia. Tai gali tureti itakos WordMat elgesiui ir pasilieka daug kintamuju.
-690#£Isvesties vienetai
+690#£
 691#£Nurodykite vienetus, i kuriuos norite konvertuoti. Pagal numatytuosius nustatymus isvesties vienetai yra SI vienetai.
-692#£SF
-693#£Vienetu
+692#£rs
+693#£
 694#£Ne. skaiciu
 695#£Apvalinimo
 696#£Pasirinkite, kaip skaiciai bus fomatuojami ir apvalinami. Toliau pateiktuose pavyzdziuose WordMat nustatyta i 3 paveikslus\r\n\r\nDecimals: 12,345\r\nReiksmingi skaiciai: 12,3\r\nSci. zymejimas: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Is list/matrix indeksas
 726#£Standartine grafiku programa
 727#£"Excel" lapu idejimas
-728#£Isvesties vienetai
+728#£
 729#£Valstybes isvesties vienetai, atskirti kableliais\npavyzdziais:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJei nieko nenurodyta, vienetai grazinami pagrindiniais SI vienetais arba SI isvestiniais vienetais be priesdelio.
 730#£Palaikomu vienetu pavyzdziai:\n(Daugiau zr. vadova)\n\nIlgis: cm , AU, ly, pc\nMass: u , G, mg\nFrequency: Hz , Bq\nEnergy: kWh , eV, aJ\nPressure: Bar , mmHg, atm, torr
 731#£Trigonometrines lygtys

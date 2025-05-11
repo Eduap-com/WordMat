@@ -467,7 +467,6 @@ Public Property Let Antalberegninger(xval As Long)
     mantalb = xval
 End Property
 #End If
-
 Public Property Get MaximaBigFloat() As Boolean
     MaximaBigFloat = mbigfloat
 End Property

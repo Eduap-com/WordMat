@@ -195,34 +195,35 @@ Fejl:
 slut:
 End Function
 Function OpenExcelWB(FilNavn As String, Optional startark As String, Optional WorkBookName As String) As Object
-On Error Resume Next
+    On Error Resume Next
 #If Mac Then
     OpenExcelMac FilNavn & ";" & startark
 #Else
-Dim xclapp As Object 'Excel.Application
-Set xclapp = GetObject(, "Excel.Application")
-If Err.Number <> 0 Then
-    Set xclapp = CreateObject("Excel.Application")
-End If
-Dim wordmatsti As String
-xclapp.visible = True
-wordmatsti = GetProgramFilesDir & "\WordMat\Excelfiles\" & FilNavn
-If Dir(wordmatsti) = "" Then
-    wordmatsti = Environ("AppData") & "\WordMat\Excelfiles\" & FilNavn
-End If
+    Dim xclapp As Object 'Excel.Application
+    Set xclapp = GetObject(, "Excel.Application")
+    If Err.Number <> 0 Then
+        Set xclapp = CreateObject("Excel.Application")
+    End If
+    Dim wordmatsti As String
+    xclapp.visible = True
+    wordmatsti = GetProgramFilesDir & "\WordMat\Excelfiles\" & FilNavn
+    If Dir(wordmatsti) = "" Then
+        wordmatsti = Environ("AppData") & "\WordMat\Excelfiles\" & FilNavn
+    End If
 
-If Dir(wordmatsti) <> "" Then
-    Set OpenExcelWB = xclapp.Workbooks.Add(wordmatsti)
-    If WorkBookName <> "" Then
-        OpenExcelWB.Windows(1).Caption = WorkBookName
+    If Dir(wordmatsti) <> "" Then
+        Set OpenExcelWB = xclapp.Workbooks.Add(wordmatsti)
+        If WorkBookName <> "" Then
+            OpenExcelWB.Windows(1).Caption = WorkBookName
+        End If
+        '    OpenExcelWB.Windows(1).WindowState = xlMaximized
+        OpenExcelWB.Windows(1).WindowState = -4137 'xlMaximized
+        xclapp.Run ("Auto_open")
+        If startark <> "" Then
+            OpenExcelWB.Sheets(startark).Activate
+        End If
+        SetExcelForeground
     End If
-'    OpenExcelWB.Windows(1).WindowState = xlMaximized
-    OpenExcelWB.Windows(1).WindowState = -4137 'xlMaximized
-    xclapp.Run ("Auto_open")
-    If startark <> "" Then
-        OpenExcelWB.Sheets(startark).Activate
-    End If
-End If
 #End If
 End Function
 Function GetExcelSti() As String

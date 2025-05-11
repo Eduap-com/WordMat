@@ -553,7 +553,7 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 End Sub
 
 Function SolveDE() As Boolean
-    Dim variabel As String, xmin As String, xmax As String, xstep As String, DElist As String, varlist As String, guesslist As String
+    Dim variabel As String, xmin As String, xmax As String, xstep As String, DElist As String, VarList As String, guesslist As String
     Dim ea As New ExpressionAnalyser
     Dim n As Integer, Npoints As Long
     On Error GoTo Fejl
@@ -561,7 +561,7 @@ Function SolveDE() As Boolean
     xmin = Replace(TextBox_xmin.Text, ",", ".")
     xmax = Replace(TextBox_xmax.Text, ",", ".")
     xstep = Replace(TextBox_step.Text, ",", ".")
-    varlist = "["
+    VarList = "["
     guesslist = "["
     DElist = "["
     If TextBox_var1.Text = vbNullString Or TextBox_eq1.Text = vbNullString Or TextBox_init1.Text = vbNullString Then
@@ -569,67 +569,67 @@ Function SolveDE() As Boolean
         GoTo slut
     Else
         n = n + 1
-        varlist = varlist & TextBox_var1.Text & ","
+        VarList = VarList & TextBox_var1.Text & ","
         guesslist = guesslist & Replace(TextBox_init1.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq1.Text & " ,"
     End If
     If TextBox_var2.Text <> vbNullString And TextBox_eq2.Text <> vbNullString And TextBox_init2.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var2.Text & ","
+        VarList = VarList & TextBox_var2.Text & ","
         guesslist = guesslist & Replace(TextBox_init2.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq2.Text & " ,"
     End If
     If TextBox_var3.Text <> vbNullString And TextBox_eq3.Text <> vbNullString And TextBox_init3.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var3.Text & ","
+        VarList = VarList & TextBox_var3.Text & ","
         guesslist = guesslist & Replace(TextBox_init3.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq3.Text & " ,"
     End If
     If TextBox_var4.Text <> vbNullString And TextBox_eq4.Text <> vbNullString And TextBox_init4.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var4.Text & ","
+        VarList = VarList & TextBox_var4.Text & ","
         guesslist = guesslist & Replace(TextBox_init4.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq4.Text & " ,"
     End If
     If TextBox_var5.Text <> vbNullString And TextBox_eq5.Text <> vbNullString And TextBox_init5.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var5.Text & ","
+        VarList = VarList & TextBox_var5.Text & ","
         guesslist = guesslist & Replace(TextBox_init5.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq5.Text & " ,"
     End If
     If TextBox_var6.Text <> vbNullString And TextBox_eq6.Text <> vbNullString And TextBox_init6.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var6.Text & ","
+        VarList = VarList & TextBox_var6.Text & ","
         guesslist = guesslist & Replace(TextBox_init6.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq6.Text & " ,"
     End If
     If TextBox_var7.Text <> vbNullString And TextBox_eq7.Text <> vbNullString And TextBox_init7.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var7.Text & ","
+        VarList = VarList & TextBox_var7.Text & ","
         guesslist = guesslist & Replace(TextBox_init7.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq7.Text & " ,"
     End If
     If TextBox_var8.Text <> vbNullString And TextBox_eq8.Text <> vbNullString And TextBox_init8.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var8.Text & ","
+        VarList = VarList & TextBox_var8.Text & ","
         guesslist = guesslist & Replace(TextBox_init8.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq8.Text & " ,"
     End If
     If TextBox_var9.Text <> vbNullString And TextBox_eq9.Text <> vbNullString And TextBox_init9.Text <> vbNullString Then
         n = n + 1
-        varlist = varlist & TextBox_var9.Text & ","
+        VarList = VarList & TextBox_var9.Text & ","
         guesslist = guesslist & Replace(TextBox_init9.Text, ",", ".") & " ,"
         DElist = DElist & TextBox_eq9.Text & " ,"
     End If
     
     Npoints = (val(Replace(TextBox_xmax.Text, ",", ".")) - val(Replace(TextBox_xmin.Text, ",", "."))) / val(Replace(TextBox_step.Text, ",", "."))
-    varlist = Left(varlist, Len(varlist) - 1) & "]"
+    VarList = Left(VarList, Len(VarList) - 1) & "]"
     guesslist = Left(guesslist, Len(guesslist) - 1) & "]"
     DElist = Left(DElist, Len(DElist) - 1) & "]"
     
     omax.PrepareNewCommand FindDef:=False  ' without searching for definitions in document
     InsertDefinitioner
-    omax.SolveDENumeric variabel, xmin, xmax, xstep, varlist, guesslist, DElist
+    omax.SolveDENumeric variabel, xmin, xmax, xstep, VarList, guesslist, DElist
     ListOutput = omax.MaximaOutput
     
     Dim s As String, i As Long, j As Integer

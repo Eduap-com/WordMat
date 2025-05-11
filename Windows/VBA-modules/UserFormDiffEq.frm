@@ -129,7 +129,7 @@ Dim svar As String
     Label_ligning.Caption = FormatDefinitions(Replace(Label_ligning.Caption, "=", " = "))
     Label_ligning.Caption = Replace(Label_ligning.Caption, ChrW(180), "'") ' converttoascii introduces 180. It may be neccesary, but this looks better
 
-    If InStr(Label_ligning.Caption, ChrW(180) & ChrW(180)) > 0 Then ' "´´" two accents goint up
+    If InStr(Label_ligning.Caption, "''") > 0 Then ' "´´" two accents goint up
         Label_diffy.visible = True
         TextBox_starty2.visible = True
         Label_y2.visible = True

@@ -46,30 +46,23 @@ XLapp.visible = vis
 Set xlwb = XLapp.Workbooks.Add
 End Sub
 Sub LoadFile(FilNavn As String)
-Dim wordmatsti As String
-On Error Resume Next
-If XLapp Is Nothing Then
-'    Set XLapp = New excel.Application
-    Set XLapp = CreateObject("Excel.Application")
-End If
-XLapp.visible = vis
-
-'If XLapp Is Nothing Then
-'    Set XLapp = CreateObject("Excel.Application")
-'End If
-'Set XLapp = GetObject(, "Excel.Application")
-'If Err.Number <> 0 Then
-'    Set XLapp = CreateObject("Excel.Application")
-'End If
+    Dim wordmatsti As String
+    On Error Resume Next
+    If XLapp Is Nothing Then
+        Set XLapp = GetObject(, "Excel.Application")
+        If Err.Number <> 0 Then
+            Set XLapp = CreateObject("Excel.Application")
+        End If
+    End If
     XLapp.visible = True
-    GetWordMatDir
-wordmatsti = GetWordMatDir & "ExcelFiles\" & FilNavn & ""
-If Dir(wordmatsti) = "" Then
-    wordmatsti = Environ("AppData") & "\WordMat\Excelfiles\" & FilNavn
-End If
-If Dir(wordmatsti) <> "" Then
-    Set xlwb = XLapp.Workbooks.Add(wordmatsti)
-End If
+    wordmatsti = GetWordMatDir & "ExcelFiles\" & FilNavn & ""
+    If Dir(wordmatsti) = "" Then
+        wordmatsti = Environ("AppData") & "\WordMat\Excelfiles\" & FilNavn
+    End If
+    If Dir(wordmatsti) <> "" Then
+        Set xlwb = XLapp.Workbooks.Add(wordmatsti)
+        SetExcelForeground
+    End If
 End Sub
 Public Sub CloseExcel()
 On Error GoTo Fejl

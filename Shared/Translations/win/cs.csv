@@ -113,7 +113,7 @@
 112#£Nelze se pripojit k serveru
 113#£Na tomto míste dokumentu je definováno následující
 114#£Na tomto míste dokumentu nejsou zádné definice.
-115#£
+115#£má nekolik nedefinovaných promenných. Nezávislou promennou nelze identifikovat. Jako nezávislou promennou pouzijte x nebo t.
 116#£Odvozeninu nelze definovat\r\nOdstrante definici: \r\n
 117#£V definici je chyba:
 118#£Ignoruje se, ale opraví chybu vstupu, aby se zabránilo této chybe výstupu
@@ -326,9 +326,9 @@
 325#£Klávesová zkratka Alt + M vlozí novou matematiku
 326#£Klávesová zkratka AltGr + Enter vypocítá
 327#£Klávesová zkratka Alt + E Vyresí rovnici
-328#£Klávesová zkratka Alt + S otevre nastavení
+328#£Klávesová zkratka Alt + j otevre nastavení
 329#£Klávesová zkratka Alt + R Vlozí predchozí výsledek
-330#£Klávesová zkratka Alt + U Zapne podporu jednotek
+330#£
 331#£dolní index:
 332#£\lambda je zkratka pro malé recké písmeno lambda
 333#£Klávesová zkratka Alt + P Vykreslí graf
@@ -455,7 +455,7 @@
 454#£Definovat funkci
 455#£Definování fyzikálních konstant
 456#£Zmensit
-457#£Nekonecna.
+457#£
 458#£Rozlisovat
 459#£Integrovat
 460#£Parcelování
@@ -688,10 +688,10 @@
 687#£Významné údaje
 688#£Zapnutí/vypnutí jednotek
 689#£Pokud jsou zapnuty jednotky, muze aplikace WordMath interpretovat a prevádet jednotky. Na tlacítku SI muzete menit výstupní jednotky. Nezapínejte jednotky, pokud to nepotrebujete. To muze ovlivnit chování WordMat a vyhrazuje si mnoho promenných.
-690#£Výstupní jednotky
+690#£
 691#£Uvedte jednotky, na které chcete prevést. Ve výchozím nastavení jsou výstupní jednotky jednotky SI.
-692#£Sf
-693#£Jednotky
+692#£vú
+693#£
 694#£Ne. císel
 695#£Zaokrouhlení
 696#£Vyberte, jak se mají císla zaokrouhlovat a zaokrouhlovat. V níze uvedených príkladech je WordMat nastaven na 3 císla\r\n\r\nDesetinná císla: 12,345\r\nVýznamná císla: 12,3\r\nSci. Zápis: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Je index seznamu/matice
 726#£Standardní grafický program
 727#£Vlození listu aplikace Excel
-728#£Výstupní jednotky
+728#£
 729#£Stavové výstupní jednotky oddelené cárkou\npríklady:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nPokud není nic uvedeno, jednotky jsou vráceny v základních jednotkách SI nebo jednotkách odvozených od SI bez predpony.
 730#£Príklady podporovaných jednotek:\n(Více viz manuál)\n\nDélka: cm , AU, ly, pc\nHmotnost: u , G, mg\nFrekvence: Hz , Bq\nEnergie: kWh , eV, aJ\nTlak: Bar , mmHg, atm, torr
 731#£Goniometrické rovnice

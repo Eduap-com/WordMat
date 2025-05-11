@@ -278,6 +278,7 @@ Private Sub UserForm_Initialize()
     FillComboBoxCAS
     FillComboBoxDecType
     
+    DoEvents
 '    ScaleForm 1.5
     SetEscEvents Me.Controls
 End Sub
@@ -300,7 +301,7 @@ Private Sub SetCaptions()
     OptionButton_exactandnum.Caption = Sprog.A(712)
     OptionButton_exactonly.Caption = Sprog.A(710)
     OptionButton_numonly.Caption = Sprog.A(711)
-    Label_enheder.Caption = Sprog.A(728) & ":"
+    Label_enheder.Caption = Sprog.A(168) & ":"
     Label_unitwarning.Caption = Sprog.A(765)
 End Sub
 

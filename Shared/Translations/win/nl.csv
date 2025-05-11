@@ -113,7 +113,7 @@
 112#£Kan geen verbinding maken met de server
 113#£Op deze plaats in het document wordt het volgende gedefinieerd
 114#£Er zijn geen definities op deze plaats in het document.
-115#£
+115#£heeft verschillende ongedefinieerde variabelen. De onafhankelijke variabele kan niet worden geïdentificeerd. Gebruik x of t als onafhankelijke variabele.
 116#£Je kunt geen afgeleide definiëren\r\nVerwijder de definitie: \r\n
 117#£Er zit een fout in de definitie:
 118#£Het wordt genegeerd, maar corrigeer de invoerfout om deze uitvoerfout te voorkomen
@@ -326,9 +326,9 @@
 325#£Snelkoppeling Alt + M voegt nieuwe wiskunde in
 326#£Snelkoppeling AltGr + Enter berekent
 327#£Snelkoppeling Alt + E lost vergelijking op
-328#£Snelkoppeling Alt + S opent instellingen
+328#£Snelkoppeling Alt + j opent instellingen
 329#£Snelkoppeling Alt + R Voegt vorig resultaat in
-330#£Sneltoets Alt + U Schakelt de ondersteuning van het apparaat in
+330#£
 331#£Subscript:
 332#£Lambda is een afkorting van de kleine Griekse letter Lambda
 333#£Snelkoppeling Alt + P Tekent een grafiek
@@ -455,7 +455,7 @@
 454#£Functie definiëren
 455#£Definieer fysische constanten
 456#£Reduceren
-457#£Oneindig.
+457#£
 458#£Onderscheiden
 459#£Integreren
 460#£Plotten
@@ -688,10 +688,10 @@
 687#£Belangrijke cijfers
 688#£Units aan/uit zetten
 689#£Als eenheden zijn ingeschakeld, kan WordMath eenheden interpreteren en converteren. Op de SI-knop kunt u de uitvoereenheden wijzigen. Schakel apparaten niet in, tenzij u het nodig heeft. Het kan het gedrag van WordMat beïnvloeden en reserveert veel variabelen.
-690#£Output eenheden
+690#£
 691#£Vermeld de eenheden waarnaar u wilt converteren. Uitvoereenheden zijn standaard SI-eenheden.
-692#£Sf
-693#£Eenheden
+692#£Når du angiver et resultat i fysik skal antallet af betydende cifre passe med den præcision vi kender resultatet med.
+693#£
 694#£Nee. van cijfers
 695#£Afronding
 696#£Kies hoe getallen worden gefoumatteerd en afgerond. In de onderstaande voorbeelden is WordMat ingesteld op 3 cijfers\r\n\r\nDecimalen: 12,345\r\nSignificante cijfers: 12,3\r\nSci. Notatie: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Is lijst/matrix index
 726#£Standaard grafiek programma
 727#£Excel-sheets insluiten
-728#£Output eenheden
+728#£
 729#£Toestandsuitvoereenheden gescheiden door komma\nvoorbeelden:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nAls er niets wordt vermeld, worden eenheden geretourneerd in eenvoudige SI-eenheden of SI-afgeleide eenheden zonder voorvoegsel.
 730#£Voorbeelden van ondersteunde eenheden:\n(Zie handleiding voor meer)\n\nLengte: cm , AU, ly, pc\nMassa: u , G, mg\nFrequentie: Hz , Bq\nEnergie: kWh , eV, aJ\nDruk: Bar , mmHg, atm, torr
 731#£Trigonometrische vergelijkingen

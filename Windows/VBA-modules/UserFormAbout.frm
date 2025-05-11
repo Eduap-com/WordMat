@@ -95,7 +95,7 @@ Private Sub UserForm_Activate()
     
     Label_partnerskab2.Caption = Sprog.A(161)
     If QActivePartnership Then
-        Label_partnerskab.Caption = Sprog.A(136) & SkoleNavn
+        Label_partnerskab.Caption = Sprog.A(136) & " " & SkoleNavn
         Label_checkpartnerskab.visible = False
     Else
         Label_partnerskab.Caption = Sprog.A(140)

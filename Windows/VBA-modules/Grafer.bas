@@ -427,9 +427,11 @@ Sub InsertGraphOleObject()
                     DefinerKonstanterGraph Udtryk, DefList, graphfil, True
                     graphfil.InsertRelation Udtryk
                 Else
-                    Udtryk = ReplaceIndepvarX(Udtryk)
-                    DefinerKonstanterGraph Udtryk, DefList, graphfil
-                    graphfil.InsertFunction Udtryk
+                    Udtryk = ReplaceIndepvarX(Udtryk, , DefList)
+                    If Udtryk <> vbNullString Then
+                        DefinerKonstanterGraph Udtryk, DefList, graphfil
+                        graphfil.InsertFunction Udtryk
+                    End If
                 End If
             End If
         End If
@@ -514,26 +516,61 @@ Dim Var As String
 
 End Sub
 #End If
-Function ReplaceIndepvarX(fkt As String, Optional ByRef uvar = "") As String
-' makes sure to insert x as an independent variable
-Dim ea As New ExpressionAnalyser
-Dim Var As String
-'Dim uvar As String
-ea.Text = fkt
-Var = ea.GetNextVar
-ReplacedVar = "x"
-If Not (ea.ContainsVar("x")) And Var <> "" And Var <> "matrix" Then
-    If ea.ContainsVar("t") Then
-        uvar = "t"
-    End If
-    If uvar = "" Then uvar = "x"
-    If uvar <> "x" Then
-        ea.ReplaceVar uvar, "x"
-    End If
-    ReplacedVar = uvar
-End If
+Function ReplaceIndepvarX(fkt As String, Optional ByRef uvar = "", Optional DefList As String) As String
+    ' makes sure to insert x as independent variable
+    ' uvar and global var "ReplacedVar" will after hold the variable which was replaced
+    ' Deflist is a list of variables that are defined, and may not be the independent variable
 
-ReplaceIndepvarX = ea.Text
+    Dim ea As New ExpressionAnalyser
+    Dim Var As String, VarColl As Collection, v As String
+    Dim DefArr() As String, i As Integer, DefFound As Boolean
+    
+    ea.Text = fkt
+    If ea.ContainsVar("x") Then
+        ReplacedVar = "x"
+        uvar = "x"
+        GoTo slut
+    End If
+
+    DefArr = Split(DefList, ",")
+    
+    If ea.ContainsVar("t") Then
+        ReplacedVar = "t"
+        uvar = "t"
+        ea.ReplaceVar uvar, "x"
+        GoTo slut
+    End If
+
+    ' create a collection of all variables in expression, that are not already defined
+    Set VarColl = New Collection
+    ea.Pos = -1
+    Do
+        v = ea.GetNextVar(ea.Pos + 1)
+        If v <> vbNullString And v <> "matrix" Then
+            DefFound = False
+            For i = 0 To UBound(DefArr)
+                If DefArr(i) = v Then
+                    DefFound = True
+                    Exit For
+                End If
+            Next
+            If Not DefFound Then VarColl.Add v
+        End If
+    Loop While v <> vbNullString
+
+    ' if only 1 variable, that variable is assumed to be the independent variable
+    If VarColl.Count = 1 Then
+        ReplacedVar = VarColl(1)
+        uvar = VarColl(1)
+        ea.ReplaceVar uvar, "x"
+    ElseIf VarColl.Count > 1 Then
+        MsgBox2 fkt & " " & Sprog.A(115), vbOKOnly, Sprog.Error
+        ReplaceIndepvarX = ""
+        Exit Function
+    End If
+
+slut:
+    ReplaceIndepvarX = ea.Text
 End Function
 #If Mac Then
 Sub InsertChart()

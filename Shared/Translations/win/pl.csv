@@ -113,7 +113,7 @@
 112#£Nie mozna polaczyc sie z serwerem
 113#£W tym miejscu dokumentu okresla sie, co nastepuje
 114#£W tym miejscu w dokumencie nie ma zadnych definicji.
-115#£
+115#£ma kilka niezdefiniowanych zmiennych. Nie mozna zidentyfikowac zmiennej niezaleznej. Uzyj x lub t jako zmiennej niezaleznej.
 116#£Nie mozna zdefiniowac pochodnej\r\nUsun definicje: \r\n
 117#£W definicji wystapil blad:
 118#£Jest ignorowany, ale popraw blad wejsciowy, aby uniknac tego bledu wyjsciowego
@@ -326,9 +326,9 @@
 325#£Skrót Alt + M wstawia nowa matematyke
 326#£Skrót AltGr + Enter oblicza
 327#£Skrót Alt + E rozwiazuje równanie
-328#£Skrót Alt + S otwiera ustawienia
+328#£Skrót Alt + j otwiera ustawienia
 329#£Skrót Alt + R Wstawia poprzedni wynik
-330#£Skrót Alt + U Wlacza obsluge jednostek
+330#£
 331#£Indeks dolny:
 332#£\lambda to skrót od malej greckiej litery lambda
 333#£Skrót Alt + P Wykresla wykres
@@ -455,7 +455,7 @@
 454#£Zdefiniuj funkcje
 455#£Definiowanie stalych fizycznych
 456#£Zmniejszyc
-457#£Nieskonczonosci.
+457#£
 458#£Odrózniac
 459#£Integrowac
 460#£Drukowania
@@ -688,10 +688,10 @@
 687#£Znaczace liczby
 688#£Wlaczanie/wylaczanie jednostek
 689#£Jesli jednostki sa wlaczone, program WordMath moze interpretowac i konwertowac jednostki. Na przycisku SI mozna zmienic jednostki wyjsciowe. Nie wlaczaj jednostek, chyba ze jest to konieczne. Moze wplywac na zachowanie WordMat i rezerwuje wiele zmiennych.
-690#£Jednostki wyjsciowe
+690#£
 691#£Podaj jednostki, na które chcesz przekonwertowac. Domyslnie jednostkami wyjsciowymi sa jednostki SI.
-692#£Sf
-693#£Jednostek
+692#£zl
+693#£
 694#£Nie. liczb
 695#£Zaokraglanie
 696#£Wybierz, w jaki sposób liczby maja byc mapowane i zaokraglane. W ponizszych przykladach WordMat jest ustawiony na 3 cyfry\r\n\r\nUlamki dziesietne: 12,345\r\nCyfry znaczace: 12,3\r\nSci. Notacja: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Jest indeksem listy/macierzy
 726#£Standardowy program do tworzenia wykresów
 727#£Osadzanie arkuszy programu Excel
-728#£Jednostki wyjsciowe
+728#£
 729#£Jednostki wyjsciowe stanu oddzielone przecinkami\nprzyklady:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJesli nic nie jest podane, jednostki sa zwracane w podstawowych jednostkach SI lub jednostkach pochodnych SI bez prefiksu.
 730#£Przyklady obslugiwanych jednostek:\n(Zobacz instrukcje, aby dowiedziec sie wiecej)\n\nDlugosc: cm , AU, ly, pc\nMasa: u , G, mg\nCzestotliwosc: Hz , Bq\nEnergia: kWh , eV, aJ\nCisnienie: Bar , mmHg, atm, torr
 731#£Równania trygonometryczne

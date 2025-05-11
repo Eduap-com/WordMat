@@ -3,6 +3,7 @@ Option Explicit
 Private TapTime As Single
 
 Sub ExecuteKeyboardShortcut(ShortcutVal As KeybShortcut)
+    RunFirst
     Select Case ShortcutVal
     Case KeybShortcut.InsertNewEquation
         NewEquation
@@ -47,7 +48,6 @@ Sub ExecuteKeyboardShortcut(ShortcutVal As KeybShortcut)
 End Sub
 
 Sub PressAltM()
-    
     If SettShortcutAltM2 <> KeybShortcut.NoShortcut Then
         If timer() - TapTime < 0.8 Then
             ExecuteKeyboardShortcut SettShortcutAltM2

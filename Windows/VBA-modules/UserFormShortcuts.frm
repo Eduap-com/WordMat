@@ -175,7 +175,7 @@ CB.AddItem Sprog.A(505) ' Maxima command
 CB.AddItem Sprog.A(702) 'prev resultat
 CB.AddItem Sprog.A(443)
 CB.AddItem Sprog.A(703) 'Toggle num/exact
-CB.AddItem Sprog.A(693)
+CB.AddItem Sprog.A(262)
 CB.AddItem Sprog.A(704) ' Convert latex
 CB.AddItem Sprog.A(705) ' Latex pdf
 CB.AddItem Sprog.A(607) ' reference to equation

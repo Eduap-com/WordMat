@@ -113,7 +113,7 @@
 112#£No se puede conectar con el servidor
 113#£Aquí, en ésta parte del documento, está definido lo siguiente:
 114#£No hay ninguna definición en este lugar del documento
-115#£
+115#£tiene varias variables indefinidas. La variable independiente no puede ser identificada. Utilice x o t como variable independiente.
 116#£No puede definir una derivada\r\nRemover la definición: \r\n
 117#£Hay un error en la definición: 
 118#£Se ignora, pero debe corregir el error de entrada para evitar el error de salida
@@ -166,7 +166,7 @@
 165#£WordMat no pudo determinar si la expresión era verdadera o falsa
 166#£Dispositivos de
 167#£Seleccione los dispositivos de salida si es necesario
-168#£Dispositivos de salida
+168#£unidades de salida
 169#£Los paréntesis no importan
 170#£¿Copia de seguridad automática?
 171#£¿Cuántos archivos de copia de seguridad se deben almacenar como máximo?
@@ -260,7 +260,7 @@
 259#£luna
 260#£sol
 261#£Constantes físicas
-262#£Dispositivos
+262#£Unidades
 263#£Valores de la tabla - calor
 264#£Valor de la tabla - Física nuclear
 265#£Astronomía
@@ -326,9 +326,9 @@
 325#£El método abreviado Alt+M inserta un nuevo campo matemático
 326#£El atajo AltGr + Intro calcula
 327#£El atajo Alt + L resuelve la ecuación
-328#£El atajo Alt+ en abre Configuración
+328#£El atajo Alt+j en abre Configuración
 329#£El atajo Alt+r recupera los resultados anteriores
-330#£El atajo Alt+E enciende o apaga los dispositivos
+330#£
 331#£Subíndice:
 332#£\lambda da la letra griega minúscula
 333#£El atajo Alt+P muestra el gráfico de un precepto
@@ -455,7 +455,7 @@
 454#£Definir función
 455#£Definir constantes físicas
 456#£Reducir
-457#£Infinitos
+457#£
 458#£Diferenciar
 459#£Integrar
 460#£Graficar
@@ -688,10 +688,10 @@
 687#£Cifras significativas
 688#£Encender/apagar dispositivos
 689#£Si las unidades están activadas, WordMat puede entender y convertir las unidades. En el botón SI, puede especificar a qué unidades desea convertir. De forma predeterminada, la salida se expresa en unidades SI. No enciendas dispositivos a menos que lo necesites específicamente. Puede afectar el comportamiento del WordMat y reserva muchas variables.
-690#£Dispositivos de salida
+690#£
 691#£Especifique las unidades a las que se va a convertir para los cálculos. De forma predeterminada, la salida se expresa en unidades SI
-692#£sf
-693#£Unidades
+692#£cf
+693#£
 694#£Número de dígitos
 695#£Redondeo de números
 696#£Elige cómo se escriben y redondean los números. En los siguientes ejemplos, WordMat se establece en 3 dígitos.\r\n\r\nNúmero de decimales: 12,345\r\nDígitos significativos: 12,3\r\nVid. Notación: 1.23*10^1
@@ -726,7 +726,7 @@
 725#£Indice de lista / matriz
 726#£Programa de gráficos
 727#£Insertar hoja Excel
-728#£Unidades de salida
+728#£
 729#£Establece unidades de salida \n separadas por coma ejemplos:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nSi no se indican las unidades se devuelve en unidades básicas del SI o unidades del SI derivadas sin prefijo.
 730#£Ejemplos de unidades compatibles:\n(Para mayor información consulte el manual)\n\nLongitud: cm , AU, ly, pc\nMasa: u , G, mg\nFrecuencia: Hz , Bq\nEnergía: kWh , eV, aJ\nPresión: Bar , mmHg, atm, torr
 731#£Ecuaciones trigonométricas
