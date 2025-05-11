@@ -433,7 +433,7 @@
 432#£Inte definierad, men begränsad
 433#£Inte definierad inom
 434#£är reserverad och kan inte definieras. Definitionen hoppas över.
-435#£Inte glänsande
+435#£Mat
 436#£Fys
 437#£Kemi
 438#£Procent
@@ -446,7 +446,7 @@
 445#£bred
 446#£Beräkna
 447#£Lös
-448#£Maxima, kommando
+448#£Maxima kommando
 449#£Lösa ekvation(er) med numerisk metod
 450#£Eliminera variabler
 451#£Testa sant/falskt

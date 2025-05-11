@@ -28,7 +28,7 @@ cd $Langfolder
 # Process all .csv files in the ../win folder
 for file in ../win/*.csv; do
   output_file=$(basename "$file") # Extract the filename
-  iconv -f iso-8859-1 -t MACROMAN "$file" > "$output_file"
+  iconv -c -f iso-8859-1 -t MACROMAN//TRANSLIT "$file" > "$output_file"
 done
 
 #iconv -f UTF-8 -t MACROMAN da.csv > da.csv
