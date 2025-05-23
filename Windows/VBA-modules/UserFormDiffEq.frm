@@ -84,7 +84,7 @@ Dim i As Integer
 End Sub
 
 Private Sub Label_solvenum_Click()
-   Dim F As String, Arr() As String
+   Dim F As String, Arr() As String, sx As String, sy As String
    Arr = Split(Label_ligning.Caption, "=")
    If UBound(Arr) > 0 Then F = Trim(Arr(1))
    If Len(Trim(Arr(0))) > 2 Then
@@ -93,6 +93,22 @@ Private Sub Label_solvenum_Click()
    End If
    luk = True
    Me.hide
+   
+   If TextBox_startx.Text = vbNullString Then
+      sx = "1"
+   Else
+      sx = TextBox_startx.Text
+   End If
+   If TextBox_starty.Text = vbNullString Then
+      sy = "1"
+   Else
+      sy = TextBox_starty.Text
+   End If
+   
+   PlotDF F, TextBox_variabel.Text, TextBox_funktion.Text, "(" & sx & ", " & sy & ")"
+   
+Exit Sub
+    ' this was previously used
    UserFormDeSolveNumeric.TextBox_varx.Text = TextBox_variabel.Text
    UserFormDeSolveNumeric.TextBox_var1.Text = TextBox_funktion.Text
    UserFormDeSolveNumeric.TextBox_eq1.Text = F

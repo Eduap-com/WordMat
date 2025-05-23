@@ -110,10 +110,10 @@ Private Sub CommandButton_geogebra_Click()
         s = s & ConvertToGeogebraSyntax(TextBox_ligning1.Text) & ";"
     End If
     If TextBox_ligning2.Text <> "" Then
-        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.Text) & ";"
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning2.Text) & ";"
     End If
     If TextBox_ligning3.Text <> "" Then
-        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.Text) & ";"
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning3.Text) & ";"
     End If
     
     'vectors
@@ -341,7 +341,7 @@ Private Sub CommandButton_nyvektor_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-Dim grafobj As String
+Dim grafobj As String, s As String
 Dim vekt As String
 Dim lign As String
 Dim parx As String
@@ -616,7 +616,18 @@ If CheckBox_maximakommando Then
     omax.MaximaOutput = "draw3d(" & grafobj & ")"
     omax.InsertMaximaOutput
 End If
-
+    s = "set_draw_defaults("
+    If TextBox_xmin.Text <> vbNullString And TextBox_xmax.Text <> vbNullString Then
+        s = s & "xrange=[" & xmin & "," & xmax & "],"
+    End If
+    If TextBox_ymin.Text <> vbNullString And TextBox_ymax.Text <> vbNullString Then
+        s = s & "yrange=[" & Ymin & "," & Ymax & "],"
+    End If
+    If TextBox_zmin.Text <> vbNullString And TextBox_zmax.Text <> vbNullString Then
+        s = s & "zrange=[" & zmin & "," & zmax & "],"
+    End If
+    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    grafobj = s & ")," & grafobj
     omax.Draw3D grafobj, antalobj
     omax.PrepareNewCommand
     Label_vent.visible = False
@@ -688,6 +699,87 @@ End Sub
 Private Sub OptionButton_linjerogflader_Click()
     ComboBox_farver.Enabled = True
     CheckBox_transp.Enabled = False
+End Sub
+
+Private Sub TextBox_forskrift1_Change()
+    UpdateBoldTabs
+End Sub
+
+Sub UpdateBoldTabs()
+    If TextBox_forskrift1.Text <> vbNullString Or TextBox_forskrift2.Text <> vbNullString Or TextBox_forskrift3.Text <> vbNullString Then
+        MultiPage1.Pages(0).Caption = Sprog.A(319) & "*"
+    Else
+        MultiPage1.Pages(0).Caption = Sprog.A(319)
+    End If
+    If TextBox_ligning1.Text <> vbNullString Or TextBox_ligning2.Text <> vbNullString Or TextBox_ligning3.Text <> vbNullString Then
+        MultiPage1.Pages(1).Caption = Sprog.A(834) & "*"
+    Else
+        MultiPage1.Pages(1).Caption = Sprog.A(834)
+    End If
+    If TextBox_vektorer.Text <> vbNullString Then ' vectors
+        MultiPage1.Pages(2).Caption = Sprog.A(836) & "*"
+    Else
+        MultiPage1.Pages(2).Caption = Sprog.A(836)
+    End If
+    If (TextBox_parametric1x.Text <> vbNullString And TextBox_parametric1y.Text <> vbNullString And TextBox_parametric1z.Text <> vbNullString) Or TextBox_parametric2x.Text <> vbNullString Or TextBox_parametric3x.Text <> vbNullString Then
+        MultiPage1.Pages(3).Caption = Sprog.A(320) & "*"
+    Else
+        MultiPage1.Pages(3).Caption = Sprog.A(320)
+    End If
+    If TextBox_punkter.Text <> vbNullString Then
+        MultiPage1.Pages(4).Caption = Sprog.A(835) & "*"
+    Else
+        MultiPage1.Pages(4).Caption = Sprog.A(835)
+    End If
+    
+End Sub
+
+Private Sub TextBox_forskrift2_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_forskrift3_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_ligning1_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_ligning2_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_ligning3_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_parametric1x_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_parametric1y_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_parametric1z_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_parametric2x_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_parametric3x_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_punkter_Change()
+    UpdateBoldTabs
+End Sub
+
+Private Sub TextBox_vektorer_Change()
+    UpdateBoldTabs
 End Sub
 
 Private Sub UserForm_Activate()
@@ -773,6 +865,7 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
   If CloseMode = 0 Then
     Cancel = 1
     Me.hide
+    CommandButton_nulstilalt_Click
   End If
 End Sub
 
@@ -821,10 +914,10 @@ Sub SetCaptions()
     CheckBox_pointsjoined.Caption = Sprog.A(89)
     Label43.Caption = Sprog.A(317)
     Label16.Caption = Sprog.A(318)
-    MultiPage1.Pages(0).Caption = Sprog.A(319)
-    MultiPage1.Pages(1).Caption = Sprog.A(834)
-    MultiPage1.Pages(2).Caption = Sprog.A(836)
-    MultiPage1.Pages(3).Caption = Sprog.A(320)
-    MultiPage1.Pages(4).Caption = Sprog.A(835)
+'    MultiPage1.Pages(0).Caption = Sprog.A(319)
+'    MultiPage1.Pages(1).Caption = Sprog.A(834)
+'    MultiPage1.Pages(2).Caption = Sprog.A(836)
+'    MultiPage1.Pages(3).Caption = Sprog.A(320)
+'    MultiPage1.Pages(4).Caption = Sprog.A(835)
     MultiPage1.Pages(5).Caption = Sprog.A(808)
 End Sub

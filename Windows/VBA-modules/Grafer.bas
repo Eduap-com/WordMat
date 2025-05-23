@@ -227,7 +227,7 @@ Fejl:
 slut:
 End Sub
 
-Sub PlotDF()
+Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional DepVar As String = "y", Optional DePoint As String = "(1, 2)")
 ' plot direction field
     Dim s As String, v As String
     Dim Arr As Variant
@@ -237,12 +237,17 @@ Sub PlotDF()
     sstart = Selection.start
     sslut = Selection.End
         
-    PrepareMaxima
-    omax.ReadSelection
+    If DE = vbNullString Then
+        PrepareMaxima
+        omax.ReadSelection
+    Else
+        omax.Kommando = DE
+    End If
 #If Mac Then
 #Else
    If GraphApp > 0 Then
 #End If
+                
         s = Trim(omax.Kommando)
         s = GetCmdAfterEqualSign(s)
         If s = "" Then
@@ -262,7 +267,7 @@ Sub PlotDF()
         End If
         s = ea.Text
         s = "SlopeField(" & s & ");"
-        s = s & "A=(1, 2);Xmin=-100;Xmax=100;Tic=0.1;"
+        s = s & "A=" & DePoint & ";Xmin=-100;Xmax=100;Tic=0.1;"
         s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmin, Tic);" ' y(A) does not work
         s = s & "SolveODE(" & ea.Text & ", x(A), y(A), Xmax, Tic)"
         OpenGeoGebraWeb s, "Classic", True, True
