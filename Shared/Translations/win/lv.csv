@@ -40,7 +40,7 @@
 39#£Lietotaja defineta regresija
 40#£Funkcija
 41#£Decimaldalas
-42#£Sakuma minesana (piemeram: a = 2 , c = 10)
+42#£Sakuma minesana
 43#£Precizitate ir iestatita loti augsta. Aprekina laiks var but loti gars vai izraisit kludu. Ja tas neizdodas, izmeginiet zemaku iestatijumu.
 44#£Precizitate ir iestatita diezgan augsta. Aprekina laiks var but diezgan ilgs vai izraisit kludu. Ja tas neizdodas, izmeginiet zemaku iestatijumu.
 45#£Precizitate nevar but negativa. Pozitiva vesela skaitla izvele
@@ -809,7 +809,7 @@
 808#£Paliga
 809#£Pamaciba
 810#£Rokasgramata ka Word dokuments
-811#£Tiessaistes timekla lapas rokasgramata
+811#£Majas lapas dokumentacija
 812#£Par
 813#£Aktualizet
 814#£Saisnes

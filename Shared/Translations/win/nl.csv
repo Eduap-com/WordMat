@@ -40,7 +40,7 @@
 39#£Door de gebruiker gedefinieerde regressie
 40#£Functie
 41#£Decimalen
-42#£Start gok (bijv.: a=2 , c=10)
+42#£Start gok
 43#£De precisie is zeer hoog ingesteld. De rekentijd kan erg lang zijn of een fout veroorzaken. Als het niet lukt, probeer dan een lagere instelling.
 44#£De precisie is vrij hoog ingesteld. De rekentijd kan vrij lang zijn of een fout veroorzaken. Als het niet lukt, probeer dan een lagere instelling.
 45#£De precisie kan niet negatief zijn. Kies een positief geheel getal
@@ -809,7 +809,7 @@
 808#£Help
 809#£Handmatig
 810#£Handleiding als Word-document
-811#£Handleiding online webpagina
+811#£Documentatie op de website
 812#£Over
 813#£Update
 814#£Snelkoppelingen

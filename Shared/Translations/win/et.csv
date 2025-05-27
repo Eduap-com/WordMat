@@ -40,7 +40,7 @@
 39#£Kasutaja määratletud regressioon
 40#£Funktsioon
 41#£Kümnendkohta
-42#£Alustage arvamist (nt: a=2, c=10)
+42#£Alustage arvamist
 43#£Täpsus on seatud väga kõrgele. Arvutusaeg võib olla väga pikk või põhjustada vea. Kui see ei õnnestu, proovige madalamat seadistust.
 44#£Täpsus on seatud üsna kõrgeks. Arvutusaeg võib olla üsna pikk või põhjustada vea. Kui see ei õnnestu, proovige madalamat seadistust.
 45#£Täpsus ei saa olla negatiivne. Valige positiivne täisarv
@@ -809,7 +809,7 @@
 808#£Abi
 809#£Käsiraamat
 810#£Käsiraamat Wordi dokumendina
-811#£Veebisaidi käsiraamat
+811#£Veebisaidi dokumentatsioon
 812#£Umbes
 813#£Uuendama
 814#£Otseteed

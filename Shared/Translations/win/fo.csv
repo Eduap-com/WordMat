@@ -40,7 +40,7 @@
 39#£Sérsniðin afturgongd
 40#£Virka
 41#£Tal av desimalum
-42#£Byrjaandi git (Skrivað í forminum a=2 ; c=10)
+42#£Byrjaandi git
 43#£Neyvleikin er settur sera høgt. Roknitíðin kann vera ógvuliga long ella miseydnast. Royn/roynið aftur við lægri innstilling.
 44#£Neyvleikin er settur rættiliga høgt. Útrokningartíðin kann vera long ella skeiv. Royn/roynið aftur við lægri innstilling.
 45#£Neyvleikin kann ikki vera neiligur. Vel eitt positivt heltal
@@ -809,7 +809,7 @@
 808#£Hjálp
 809#£Handbók
 810#£Handbók sum Word skjal
-811#£Handbók um heimasíðu á netinu
+811#£Skjalfesting á heimasíðu
 812#£Um
 813#£Dagføring
 814#£Snarvegir

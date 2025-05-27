@@ -40,7 +40,7 @@
 39#£Uzivatelsky definovaná regrese
 40#£Funkce
 41#£Desetinná císla
-42#£Pocátecní odhad (napr.: a=2, c=10)
+42#£Pocátecní odhad
 43#£Presnost je nastavena velmi vysoko. Doba výpoctu muze být velmi dlouhá nebo muze zpusobit chybu. Pokud to nevyjde, zkuste nizsí nastavení.
 44#£Presnost je nastavena pomerne vysoko. Doba výpoctu muze být pomerne dlouhá nebo muze zpusobit chybu. Pokud to nevyjde, zkuste nizsí nastavení.
 45#£Presnost nemuze být záporná. Volba kladného celého císla
@@ -809,7 +809,7 @@
 808#£Pomoc
 809#£Manuál
 810#£Manuál jako dokument aplikace Word
-811#£Online webová stránka Manuál
+811#£Dokumentace webových stránek
 812#£Asi
 813#£Aktualizace
 814#£Zkratky

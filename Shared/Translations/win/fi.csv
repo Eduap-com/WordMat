@@ -40,7 +40,7 @@
 39#£K‰ytt‰j‰n m‰‰ritt‰m‰ regressio
 40#£Funktio
 41#£Desimaaleja
-42#£Aloita arvaus (esim. a=2, c=10)
+42#£Aloita arvaus
 43#£Tarkkuus on asetettu eritt‰in korkeaksi. Laskenta-aika voi olla hyvin pitk‰ tai aiheuttaa virheen. Jos se ei toimi, kokeile pienemp‰‰ asetusta.
 44#£Tarkkuus on asetettu melko korkeaksi. Laskenta-aika voi olla melko pitk‰ tai aiheuttaa virheen. Jos se ei toimi, kokeile pienemp‰‰ asetusta.
 45#£Tarkkuus ei voi olla negatiivinen. Valitse positiivinen kokonaisluku
@@ -809,7 +809,7 @@
 808#£Apua
 809#£Manuaalinen
 810#£Manuaalinen Word-asiakirjana
-811#£Online websivu K‰sikirja
+811#£Verkkosivuston dokumentaatio
 812#£Noin
 813#£P‰ivitt‰‰
 814#£Pikakuvakkeet

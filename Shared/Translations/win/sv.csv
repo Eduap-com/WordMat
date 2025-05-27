@@ -40,7 +40,7 @@
 39#£Anpassad regression
 40#£Funktion
 41#£Antal decimaler
-42#£Startgissning (Skriven i formen a=2 ; c=10)
+42#£Startgissning
 43#£Precisionen är mycket högt satt. Beräkningstiden kan vara mycket lång eller misslyckas. Försök igen med en lägre inställning.
 44#£Precisionen är ganska högt satt. Beräkningstiden kan vara lång eller felaktig. Försök igen med en lägre inställning.
 45#£Precisionen kan inte vara negativ. Välj ett positivt heltal
@@ -809,7 +809,7 @@
 808#£Hjälp
 809#£Handbok
 810#£Manual som Word-dokument
-811#£Handbok för webbplatsen på nätet
+811#£Dokumentation av webbplatsen
 812#£Om
 813#£Uppdatera
 814#£Genvägar

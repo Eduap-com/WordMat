@@ -40,7 +40,7 @@
 39#£Régression définie par l'utilisateur
 40#£Fonction
 41#£Décimales
-42#£Commencer à deviner (ex. : a=2 , c=10)
+42#£Commencer à deviner
 43#£La précision est réglée très haut. Le temps de calcul peut être très long ou provoquer une erreur. Si cela ne fonctionne pas, essayez un réglage inférieur.
 44#£La précision est assez élevée. Le temps de calcul peut être assez long ou provoquer une erreur. Si cela ne fonctionne pas, essayez un réglage inférieur.
 45#£La précision ne peut pas être négative. Choisissez un entier positif
@@ -809,7 +809,7 @@
 808#£Aide
 809#£Manuelle
 810#£Manuel sous forme de document Word
-811#£Manuel de la page Web en ligne
+811#£Documentation du site web
 812#£Environ
 813#£Mettre à jour
 814#£Raccourcis

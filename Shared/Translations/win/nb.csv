@@ -40,7 +40,7 @@
 39#£Egendefinert regresjon
 40#£Funksjon
 41#£Antall desimaler
-42#£Startgjetning (Skrevet i formen a=2 ; c=10)
+42#£Startgjetning
 43#£Presisjonen er satt veldig høyt. Beregningstiden kan være veldig lang eller mislykkes. Prøv igjen med en lavere innstilling.
 44#£Presisjonen er satt ganske høyt. Beregningstiden kan være lang eller feil. Prøv igjen med en lavere innstilling.
 45#£Presisjonen kan ikke være negativ. Velg et positivt heltall
@@ -809,7 +809,7 @@
 808#£Hjelp
 809#£Håndbok
 810#£Håndbok som Word-dokument
-811#£Håndbok for nettbasert nettsted
+811#£Dokumentasjon av nettstedet
 812#£Om
 813#£Oppdatering
 814#£Snarveier

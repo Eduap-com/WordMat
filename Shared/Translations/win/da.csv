@@ -22,7 +22,7 @@
 21#£Der er en ny version af WordMat klar til download.\r\nNyheder: \r\n
 22#£Du sendes nu til downloadsiden
 23#£Ny version
-24#£Indtast et antal punkter, så oprettes automatisk en tabel som kan udfyldes med punterne. Når du har udfyldt den aktiverer du den ønskede regression.
+24#£Indtast et antal punkter, så oprettes en tabel hvor du kan indtaste punkterne.\r\n Når du har udfyldt tabellen, vælger du den ønskede regression fra menuen.
 25#£Det anbefales ikke at lave regression med mere end 200 punkter i en Word-tabel. Brug Excel hvis du vil lave regression på så mange punkter.
 26#£Der skete en fejl. Der er formentlig en fejl i inputtallene.
 27#£Du skal lave en tabel med to kolonner. x-værdier i venstre kolonne og y-værdier i højrekolonne. Bogstaver ignoreres. Der udføres regression på de markerede tal. Hvis ingen er markerede udføres regression på alle tal i tabellen.
@@ -31,7 +31,7 @@
 30#£Eksponentiel regression udført vha. WordMat: $Tab
 31#£Potens regression udført vha. WordMat: $Tab
 32#£Der kan ikke udføres potensregression på de punkter. Alle skal være positive og må ikke være 0.
-33#£Brugerdefineret regression med funktionen 
+33#£Brugerdefineret regression med funktionen
 34#£udført vha. WordMat
 35#£Angiv orden af den polynomiske regression (1-
 36#£(Den maksimale orden bestemmes af antal punkter)
@@ -40,7 +40,7 @@
 39#£Brugerdefineret regression
 40#£Funktion
 41#£Antal decimaler
-42#£Startgæt (Skrives på formen a=2 ; c=10)
+42#£Startgæt
 43#£Præcisionen er sat meget højt. Beregningstiden kan blive meget lang eller fejle. Prøv evt. igen med en lavere indstilling.
 44#£Præcisionen er sat ret højt. Beregningstiden kan blive lang eller fejle. Prøv evt. igen med en lavere indstilling.
 45#£Præcisionen kan ikke være negativ. Vælg et positivt heltal
@@ -808,8 +808,8 @@
 807#£Udvid
 808#£Hjælp
 809#£Manual
-810#£Manual som Worddokument
-811#£Online hjemmeside-Manual
+810#£Dokumentation i Worddokument
+811#£Dokumentation på hjemmeside
 812#£Om
 813#£Opdater
 814#£Genveje

@@ -40,7 +40,7 @@
 39#£Benutzerdefinierte Regression
 40#£Funktion
 41#£Anzahl der Dezimalstellen
-42#£Anfangsvermutung (Geschrieben in der Form a=2 ; c=10)
+42#£Anfangsvermutung
 43#£Die Präzision ist sehr hoch angesetzt. Die Berechnungszeit kann sehr lang sein oder fehlschlagen. Versuchen Sie es erneut mit einer niedrigeren Einstellung.
 44#£Die Präzision ist recht hoch angesetzt. Die Berechnungszeit kann lang oder fehlerhaft sein. Versuchen Sie es erneut mit einer niedrigeren Einstellung.
 45#£Die Genauigkeit darf nicht negativ sein. Wählen Sie eine positive Ganzzahl aus
@@ -809,7 +809,7 @@
 808#£Hilfe
 809#£Manuell
 810#£Handbuch als Word-Dokument
-811#£Handbuch für die Online-Website
+811#£Dokumentation der Website
 812#£Über
 813#£Aktualisieren
 814#£Abkürzungen

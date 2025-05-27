@@ -40,7 +40,7 @@
 39#£Regresja zdefiniowana przez uzytkownika
 40#£Funkcja
 41#£Miejsc dziesietnych
-42#£Rozpocznij zgadywanie (np.: a=2 , c=10)
+42#£Rozpocznij zgadywanie
 43#£Precyzja jest ustawiona na bardzo wysoka wysokosc. Czas obliczen moze byc bardzo dlugi lub powodowac blad. Jesli to nie zadziala, wypróbuj nizsze ustawienie.
 44#£Precyzja jest ustawiona dosc wysoko. Czas obliczen moze byc dosc dlugi lub powodowac blad. Jesli to nie zadziala, wypróbuj nizsze ustawienie.
 45#£Precyzja nie moze byc ujemna. Wybieranie dodatniej liczby calkowitej
@@ -809,7 +809,7 @@
 808#£Pomoc
 809#£Recznie
 810#£Podrecznik jako dokument Word
-811#£Instrukcja obslugi strony internetowej online
+811#£Dokumentacja strony internetowej
 812#£Okolo
 813#£Aktualizacja
 814#£Skróty

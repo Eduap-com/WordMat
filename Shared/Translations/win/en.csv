@@ -22,7 +22,7 @@
 21#£There is a new version of WordMath ready for download.\r\nNews: \r\n
 22#£You will now be redirected to the download page
 23#£New version
-24#£Type the number of points you want to do regression on. Then a table will be created, where you can put your points. When you want to do the regression just select the table and choose your desired regression from the menu.
+24#£Type the number of points you want to do regression on. Then a table will be created, where you can put your points. \r\nWhen you want to do the regression just select the table and choose your desired regression from the menu.
 25#£It is not recommened to do regression on more than 200 points in a Word-table. Use Excel if you want to do regression on that many points
 26#£An error occured. There is probably an error in the input numbers
 27#£You must create a table with two columns. x-values in the left column and y-values in the right column. Letters are ignored. Regression is performed on the numbers selected. If none are selected, regression is performed on all numbers in the table
@@ -31,7 +31,7 @@
 30#£Exponential regression performed by WordMat: $Tab
 31#£Power regression performed by WordMat: $Tab
 32#£Power regression cannot be performed on those points. All numbers must be positive (and not zero).
-33#£User defined regression with the function 
+33#£User defined regression with the function
 34#£performed by WordMath
 35#£State the order of the polynomial regression (1-
 36#£(The max order is determined by the number of points)
@@ -40,7 +40,7 @@
 39#£User defined regression
 40#£Function
 41#£Decimals
-42#£Start guess (ex.: a=2 , c=10)
+42#£Start guess
 43#£The precision is set very high. The calculation time can be very long or cause an error. If it doesn't work out, try a lower setting.
 44#£The precision is set quite high. The calculation time can be quite long or cause an error. If it doesn't work out, try a lower setting.
 45#£The precision cant be negative. Choose a positive integer
@@ -808,8 +808,8 @@
 807#£Expand
 808#£Help
 809#£Manual
-810#£Manual as Word document
-811#£Online webpage Manual
+810#£Documentation as Word document
+811#£Website documentation
 812#£About
 813#£Update
 814#£Shortcuts

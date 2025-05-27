@@ -40,7 +40,7 @@
 39#£Vartotojo apibrezta regresija
 40#£Funkcija
 41#£Desimtaines trupmenos
-42#£Pradeti spejima (pvz.: a=2 , c=10)
+42#£Pradeti spejima
 43#£Tikslumas nustatytas labai aukstai. Skaiciavimo laikas gali buti labai ilgas arba sukelti klaida. Jei tai nepadeda, isbandykite zemesni nustatyma.
 44#£Tikslumas nustatytas gana didelis. Skaiciavimo laikas gali buti gana ilgas arba sukelti klaida. Jei tai nepadeda, isbandykite zemesni nustatyma.
 45#£Tikslumas negali buti neigiamas. Teigiamo sveikojo skaiciaus pasirinkimas
@@ -809,7 +809,7 @@
 808#£Pagalba
 809#£Vadovas
 810#£Vadovas kaip "Word" dokumentas
-811#£Internetinio tinklalapio vadovas
+811#£Svetaines dokumentacija
 812#£Apie
 813#£Naujinti
 814#£Nuorodos

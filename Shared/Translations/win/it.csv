@@ -40,7 +40,7 @@
 39#£Regressione definita dall'utente
 40#£Funzione
 41#£Decimali
-42#£Ipotesi iniziale (es.: a=2 , c=10)
+42#£Ipotesi iniziale
 43#£La precisione è impostata su un valore molto alto. Il tempo di calcolo può essere molto lungo o causare un errore. Se non funziona, prova un'impostazione più bassa.
 44#£La precisione è piuttosto alta. Il tempo di calcolo può essere piuttosto lungo o causare un errore. Se non funziona, prova un'impostazione più bassa.
 45#£La precisione non può essere negativa. Scegliere un numero intero positivo
@@ -809,7 +809,7 @@
 808#£Guida
 809#£Manuale
 810#£Manuale come documento Word
-811#£Pagina web online Manuale
+811#£Documentazione del sito web
 812#£Circa
 813#£Aggiornare
 814#£Collegamenti

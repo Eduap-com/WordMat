@@ -40,7 +40,7 @@
 39#£Regresión definida por el usuario
 40#£Función
 41#£Decimales
-42#£Comience inferencia (ej.: a=2 , c=10)
+42#£Comience inferencia
 43#£La precisión está ajustada muy alta. El tiempo de cálculo puede ser muy largo o cusar un error. Si no funciona intente un ajuste más bajo.
 44#£La precisión está ajustada bastante alta. El tiempo de cálculo puede ser muy largo o cusar un error. Si no funciona intente un ajuste más bajo.
 45#£La precisión puede ser negativa. Escoja un entero positivo
@@ -809,7 +809,7 @@
 808#£Ayuda
 809#£Manual
 810#£Manual como documento Word
-811#£Manual como página web on-line
+811#£Documentación del sitio web
 812#£Acerca de
 813#£Actualizar
 814#£Atajos
