@@ -72,8 +72,10 @@ finish:
             s = TrimR(s, vbCrLf)
             s = TrimR(s, vbCr)
             s = TrimR(s, vbLf)
-            If Right(s, 1) <> ";" And Right(s, 1) <> "$" Then s = s & "$"
-            omax.MaximaInputStreng = s & omax.MaximaInputStreng
+            If s <> vbNullString Then
+                If Right(s, 1) <> ";" And Right(s, 1) <> "$" Then s = s & "$"
+                omax.MaximaInputStreng = s & omax.MaximaInputStreng
+            End If
         End If
         If UseCodeFile Then
             omax.MaximaInputStreng = "load(""" & Replace(GetCodeFileName, "\", "/") & """)$" & omax.MaximaInputStreng  '' Maxima only accepts forward slashes
