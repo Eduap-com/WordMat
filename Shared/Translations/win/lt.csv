@@ -906,3 +906,5 @@
 905#£Leisti kodo laukus
 906#£Kodo failo tekstas "Maximoje" paleidziamas kiekvieno paleidimo metu. Pavyzdziui, galite ji naudoti noredami apibrezti funkcijas, kurias visada norite tureti "WordMat", arba pakeisti nustatymus "Maxima". Naudojant kodo faila, skaiciavimai bus siek tiek letesni. \nKodo laukus galima iterpti per apibrezimo meniu ir tai yra "Word" dokumento laukai, kuriuose galite iterpti maksimalu koda, kuris vykdomas kiekvieno skaiciavimo metu. Kodas kodo faile ir kodo laukuose siunciamas tiesiai i "Maxima" neperdirbtas. Del bet kokios kodo klaidos "WordMat" nepavyks atlikti visu skaiciavimu, todel saugokites. Noredami rasti teisinga "Maxima" sintakse, ziurekite meniu, esanciame skiltyje "Zinynas > Vadovas > pagalba su "Maxima" komandomis.
 907#£Iveskite "Maxima" koda cia
+908#£Neijungete kodo lauku skiltyje "Nustatymai > kodas". Kodo laukas iterpiamas, bet nebus naudojamas skaiciavimuose, kol jis nebus ijungtas.
+909#£Kodas

@@ -906,3 +906,5 @@
 905#£Pole kódu povolení
 906#£Text v souboru kódu se spoustí v Maxime pri kazdém spustení. Muzete jej pouzít napríklad k definování funkcí, které chcete mít vzdy k dispozici ve WordMatu, nebo ke zmene nastavení v Maxima. Pouzití souboru s kódem trochu zpomalí výpocty. \nPole kódu lze vlozit pomocí nabídky definice a jsou to pole v dokumentu aplikace Word, do kterých muzete vlozit maximální kód, který se spoustí pri kazdém výpoctu. Kód v souboru kódu a polích kódu se odesílá prímo do spolecnosti Maxima nezpracovaný. Jakákoli chyba kódu zpusobí, ze WordMat selze ve vsech výpoctech, takze si dejte pozor. Podívejte se do nabídky v Nápovede > Manuál > Nápoveda k príkazum Maxima, kde najdete správnou syntaxi Maxima.
 907#£Zde zadejte kód Maxima
+908#£Nezapnuli jste pole kódu v Nastavení > kódu. Pole kódu je vlozeno, ale nebude pouzito ve výpoctech, dokud nebude zapnuto.
+909#£Kód

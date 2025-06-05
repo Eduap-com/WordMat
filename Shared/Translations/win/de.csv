@@ -906,3 +906,5 @@
 905#£Codefelder zulassen
 906#£Der Text in der Codedatei wird bei jedem Start in Maxima ausgeführt. Sie können es zum Beispiel verwenden, um Funktionen zu definieren, die Sie immer in WordMat zur Verfügung haben möchten, oder um Einstellungen in Maxima zu ändern. Die Verwendung der Codedatei macht die Berechnungen etwas langsamer. \nCodefelder können über das Definitionsmenü eingefügt werden und sind Felder im Word-Dokument, in die Sie den maximalen Code einfügen können, der bei jeder Berechnung ausgeführt wird. Der Code in der Codedatei und in den Codefeldern wird unverarbeitet direkt an Maxima gesendet. Jeder Codefehler führt dazu, dass WordMat alle Berechnungen nicht bestehen kann, also seien Sie vorsichtig. Schauen Sie im Menü unter Hilfe > Manuell > Hilfe mit Maxima-Befehlen nach der korrekten Maxima-Syntax.
 907#£Geben Sie hier den Maxima-Code ein
+908#£Sie haben die Codefelder in "Einstellungen > Code" nicht aktiviert. Das Codefeld wird eingefügt, aber erst dann in Berechnungen verwendet, wenn es aktiviert ist.
+909#£Code

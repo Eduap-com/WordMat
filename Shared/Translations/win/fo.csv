@@ -906,3 +906,5 @@
 905#£Loyva kóðafeltum
 906#£Teksturin í kóðafíluni verður koyrdur í Maxima við hvørja byrjan. Til dømis kanst tú brúka tað til at lýsa funktiónir, tú altíð vilt hava tøkar í WordMat, ella til at broyta stillingar í Maxima. Um tú nýtir kóðafíluna, verður útrokningin eitt sindur spakuligari. \nKóðareitir kunnu setast inn ígjøgnum skilgreiningarvalmyndina og eru reitir í Word-skjalinum, har tú kanst seta hámarkskóðan, sum verður koyrdur við hvørja útrokning. Kóði í kóðafíluni og kóðafeltunum verða send beinleiðis til Maxima óviðgjørd. Ein og hvør kodevilla fer at gera, at WordMat dumpar allar útrokningar, so ansa eftir. Hygg í matskrána undir Hjálp > Handbók > Hjálp við maksima-kommandoum, eftir rættari maksima-setningaskipan.
 907#£Skriva Maxima kóða her
+908#£Tú hevur ikki tendrað kóðafeltir í 'Stillingar > kóða'. Kodumarkið er sett inn, men verður ikki brúkt í útrokningum, fyrr enn tað er tendrað.
+909#£Kóði

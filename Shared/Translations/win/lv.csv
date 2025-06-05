@@ -906,3 +906,5 @@
 905#£Atlaut koda laukus
 906#£Koda faila teksts tiek palaists Maxima katra startesanas laika. Piemeram, to var izmantot, lai definetu funkcijas, kuras vienmer velaties, lai tas vienmer butu pieejamas programma WordMat, vai mainitu iestatijumus programma Maxima. Izmantojot koda failu, aprekini bus nedaudz lenaki. \nKoda laukus var ievietot, izmantojot definicijas izvelni, un tie ir Word dokumenta lauki, kuros var ievietot maksimalo kodu, kas tiek izpildits katra aprekina. Kods koda faila un koda laukos tiek nosutits tiesi uz Maxima neapstradats. Jebkura koda kluda izraisis WordMat neveiksmi visus aprekinus, tapec uzmanieties. Meklejiet izvelne sadala Palidziba > rokasgramata > palidziba ar Maxima komandam, lai atrastu pareizu Maxima sintaksi.
 907#£Ievadiet Maxima kodu seit
+908#£Jus neesat iesledzis koda laukus sadala "Iestatijumi > kods". Koda lauks tiek ievietots, bet tas netiks izmantots aprekinos, kamer tas nav ieslegts.
+909#£Kods

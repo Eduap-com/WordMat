@@ -906,3 +906,5 @@
 905#£Salli koodikentät
 906#£Kooditiedoston teksti suoritetaan Maximassa jokaisen käynnistyksen yhteydessä. Sen avulla voit esimerkiksi määrittää funktioita, joiden haluat aina olevan käytettävissä WordMatissa, tai muuttaa asetuksia Maximassa. Kooditiedoston käyttö hidastaa laskelmia hieman. \nKoodikentät voidaan lisätä määrittelyvalikon kautta, ja ne ovat Word-asiakirjan kenttiä, joihin voit lisätä enimmäiskoodin, joka suoritetaan jokaisessa laskutoimituksessa. Kooditiedoston ja koodikenttien koodi lähetetään suoraan Maximalle käsittelemättömänä. Mikä tahansa koodivirhe aiheuttaa sen, että WordMat epäonnistuu kaikissa laskutoimituksissa, joten ole varovainen. Katso valikosta Ohje > Käsikirja > Ohje maksimikomentoihin oikean Maxima-syntaksin.
 907#£Syötä Maxima-koodi tähän
+908#£Et ole laittanut koodikenttiä päälle Asetukset > Koodi -kohdassa. Koodikenttä lisätään, mutta sitä ei käytetä laskutoimituksissa, ennen kuin se on otettu käyttöön.
+909#£Koodi

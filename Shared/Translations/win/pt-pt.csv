@@ -906,3 +906,5 @@
 905#£Permitir campos de código
 906#£O texto no ficheiro de código é executado no Maxima em cada arranque. Por exemplo, pode utilizá-lo para definir funções que pretende sempre ter disponíveis no WordMat ou para alterar definições no Maxima. Usar o arquivo de código tornará os cálculos um pouco mais lentos. \nOs campos de código podem ser inseridos através do menu de definição, e são campos no documento do Word onde você pode inserir o Código Máximo, que é executado em cada cálculo. O código no ficheiro de código e os campos de código são enviados diretamente para o Maxima sem serem processados. Qualquer erro de código fará com que o WordMat falhe em todos os cálculos, portanto, cuidado. Procure no menu em Ajuda > Manual > Ajuda com os Comandos do Maxima a sintaxe correta do Maxima.
 907#£Introduza aqui o código do Maxima
+908#£Você não ativou os campos de código em 'Configurações > Código'. O campo de código é inserido, mas não será usado em cálculos até que seja ativado.
+909#£Código

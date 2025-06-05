@@ -906,3 +906,5 @@
 905#£Tillåt kodfält
 906#£Texten i kodfilen körs i Maxima vid varje uppstart. Du kan till exempel använda den för att definiera funktioner som du alltid vill ha tillgängliga i WordMat, eller för att ändra inställningar i Maxima. Om du använder kodfilen blir beräkningarna lite långsammare. \nKodfält kan infogas via definitionsmenyn och är fält i Word-dokumentet där du kan infoga den maximala koden, som körs vid varje beräkning. Kod i kodfilen och kodfälten skickas direkt till Maxima obearbetad. Alla kodfel kommer att göra att WordMat misslyckas med alla beräkningar, så se upp. Titta i menyn under Hjälp > Manuell > Hjälp med Maxima-kommandon för korrekt Maxima-syntax.
 907#£Ange Maxima-koden här
+908#£Du har inte aktiverat kodfält i Inställningar > kod. Kodfältet infogas, men kommer inte att användas i beräkningar förrän det är aktiverat.
+909#£Kod

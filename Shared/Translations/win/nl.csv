@@ -906,3 +906,5 @@
 905#£Codevelden toestaan
 906#£De tekst in het codebestand wordt bij elke startup in Maxima gedraaid. Je kunt het bijvoorbeeld gebruiken om functies te definiëren die je altijd beschikbaar wilt hebben in WordMat, of om instellingen in Maxima te wijzigen. Het gebruik van het codebestand zal de berekeningen iets langzamer maken. \nCodevelden kunnen worden ingevoegd via het definitiemenu en zijn velden in het Word-document waar u de maximale code kunt invoegen, die bij elke berekening wordt uitgevoerd. Code in het codebestand en de codevelden worden onbewerkt direct naar Maxima gestuurd. Elke codefout zorgt ervoor dat WordMat niet in alle berekeningen werkt, dus pas op. Kijk in het menu onder Hulp > Handleiding > Hulp bij Maxima Commando's, voor de juiste Maxima syntaxis.
 907#£Vul hier de Maxima code in
+908#£U heeft geen codevelden ingeschakeld in 'Instellingen > code'. Het codeveld wordt ingevoegd, maar wordt pas gebruikt in berekeningen als het wordt ingeschakeld.
+909#£Code

@@ -906,3 +906,5 @@
 905#£Luba koodiväljad
 906#£Koodifailis olev tekst käivitatakse Maximas igal käivitamisel. Näiteks saate seda kasutada funktsioonide määratlemiseks, mida soovite WordMatis alati kättesaadavaks teha, või Maxima sätete muutmiseks. Koodifaili kasutamine muudab arvutused veidi aeglasemaks. \nKoodivälju saab sisestada definitsioonimenüü kaudu ja need on Wordi dokumendi väljad, kuhu saate sisestada maksimaalse koodi, mis käivitatakse iga arvutuse juures. Koodifailis ja koodiväljades olev kood saadetakse töötlemata kujul otse Maximale. Iga koodiviga põhjustab WordMati kõigi arvutuste nurjumise, seega olge ettevaatlik. Vaadake menüüst Spikker > Käsiraamat > Spikker Maksimumi käskudega õiget Maxima süntaksit.
 907#£Sisestage siia Maxima kood
+908#£Te ei ole jaotises "Seaded > kood" koodivälju sisse lülitanud. Koodiväli lisatakse, kuid seda ei kasutata arvutustes enne, kui see on sisse lülitatud.
+909#£Kood

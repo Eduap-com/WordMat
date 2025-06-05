@@ -906,3 +906,5 @@
 905#£Zezwalaj na pola kodu
 906#£Tekst w pliku kodu jest uruchamiany w Maxima przy kazdym uruchomieniu. Na przyklad mozesz go uzyc do zdefiniowania funkcji, które zawsze chcesz miec dostepne w programie WordMat, lub do zmiany ustawien w programie Maxima. Uzycie pliku kodu sprawi, ze obliczenia beda nieco wolniejsze. \nPola kodu mozna wstawiac za pomoca menu definicji i sa to pola w dokumencie programu Word, w których mozna wstawic kod maksymalny, który jest uruchamiany przy kazdym obliczeniu. Kod w pliku kodu i pola kodu sa wysylane bezposrednio do Maxima w postaci nieprzetworzonej. Kazdy blad w kodzie spowoduje, ze WordMat nie wykona wszystkich obliczen, wiec uwazaj. Zajrzyj do menu w sekcji Pomoc > Podrecznik > Pomoc z poleceniami Maxima, aby uzyskac poprawna skladnie Maxima.
 907#£Wpisz tutaj kod Maxima
+908#£Nie masz wlaczonych pól kodu w "Ustawieniach > Kod". Pole kodu zostanie wstawione, ale nie bedzie uzywane w obliczeniach, dopóki nie zostanie wlaczone.
+909#£Kod

@@ -906,3 +906,5 @@
 905#£Tillat kodefelt
 906#£Teksten i kodefilen kjøres i Maxima ved hver oppstart. Du kan for eksempel bruke den til å definere funksjoner du alltid vil ha tilgjengelig i WordMat, eller til å endre innstillinger i Maxima. Bruk av kodefilen vil gjøre beregningene litt tregere. \nKodefelt kan settes inn via definisjonsmenyen, og er felt i Word-dokumentet hvor du kan sette inn maksimumskoden, som kjøres ved hver beregning. Kode i kodefilen og kodefeltene sendes direkte til Maxima ubehandlet. Enhver kodefeil vil føre til at WordMat mislykkes i alle beregninger, så pass på. Se i menyen under Hjelp > Manuell > Hjelp med maksimakommandoer, for riktig maksimasyntaks.
 907#£Skriv inn Maxima-kode her
+908#£Du har ikke slått på kodefelt i «Innstillinger > kode». Kodefeltet settes inn, men vil ikke bli brukt i beregninger før det er aktivert.
+909#£Kode

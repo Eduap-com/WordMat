@@ -906,3 +906,5 @@
 905#£Autoriser les champs de code
 906#£Le texte du fichier de code est exécuté dans Maxima à chaque démarrage. Par exemple, vous pouvez l'utiliser pour définir des fonctions que vous souhaitez toujours avoir à disposition dans WordMat, ou pour modifier les paramètres dans Maxima. L'utilisation du fichier de code rendra les calculs un peu plus lents. \nLes champs de code peuvent être insérés via le menu de définition et sont des champs dans le document Word où vous pouvez insérer le code maximum, qui est exécuté à chaque calcul. Le code dans le fichier de code et les champs de code sont envoyés directement à Maxima sans être traités. Toute erreur de code entraînera l'échec de tous les calculs de WordMat, alors méfiez-vous. Pour connaître la syntaxe correcte de Maxima dans le menu sous Aide > Manuel > Aide avec les commandes Maxima.
 907#£Entrez le code Maxima ici
+908#£Vous n'avez pas activé les champs de code dans > Paramètres  Code. Le champ de code est inséré, mais ne sera pas utilisé dans les calculs tant qu'il n'est pas activé.
+909#£Code

@@ -906,3 +906,5 @@
 905#£Allow code fields
 906#£The text in the code file is run in Maxima at every startup. For example, you can use it to define functions you always want to have available in WordMat, or to change settings in Maxima. Using the code file will make calculations a bit slower. \nCode fields can be inserted via the definition menu, and are fields in the Word document where you can insert the Maximum Code, which is run at each calculation. Code in the code file and code fields are sent directly to Maxima unprocessed. Any code error will cause WordMat to fail all calculations, so beware. Look in the menu under Help > Manual > Help with Maxima Commands, for correct Maxima syntax.
 907#£Enter Maxima code here
+908#£You haven't turned on code fields in 'Settings > Code'. The code field is inserted, but will not be used in calculations until it is turned on.
+909#£Code
