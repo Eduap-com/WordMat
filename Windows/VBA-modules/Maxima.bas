@@ -37,7 +37,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
             MaxProc.StartMaximaProcess
             WaitForMaximaUntil
             If MaxProc.ErrCode > 0 Then
-                MsgBox Sprog.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
+                MsgBox TT.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, TT.Error
                 GoTo Fejl
             End If
         End If
@@ -47,7 +47,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
                 On Error Resume Next
                 Set MaxProcUnit = GetMaxProc() 'CreateObject("MaximaProcessClass")
                 If Err.Number <> 0 Then
-                    MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
+                    MsgBox TT.A(54), vbOKOnly, TT.Error
                     GoTo slut
                 End If
                 On Error GoTo Fejl
@@ -65,6 +65,9 @@ finish:
     If FindDefinitioner Then
         If Not omax.PrepareNewCommand Then    ' resets and finds definitions
             GoTo Fejl
+        End If
+        If UseCodeFile Then
+            omax.MaximaInputStreng = "load(""" & Replace(GetCodeFileName, "\", "/") & """)$" & omax.MaximaInputStreng  '' Maxima only accepts forward slashes
         End If
     End If
     On Error Resume Next
@@ -126,7 +129,7 @@ Sub RestartMaxima()
     Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
 
     If Err.Number <> 0 Then
-        MsgBox Sprog.A(54), vbOKOnly, Sprog.Error
+        MsgBox TT.A(54), vbOKOnly, TT.Error
         GoTo slut
     End If
     On Error GoTo Fejl
@@ -140,7 +143,7 @@ Sub RestartMaxima()
     End If
     GoTo slut
 Fejl:
-     MsgBox Sprog.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, Sprog.Error
+     MsgBox TT.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, TT.Error
 slut:
 #End If
 End Sub
@@ -157,7 +160,7 @@ Sub MaximaCommand()
     If Not omax.MaximaInstalled Then GoTo slut
     
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     ElseIf Selection.OMaths.Count > 0 Then
         omax.ReadSelection
@@ -167,7 +170,7 @@ Sub MaximaCommand()
     End If
     
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -193,7 +196,7 @@ Sub MaximaCommand()
     '   UFWait.Hide
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -223,7 +226,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
 
         omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
         eqs = False
@@ -269,7 +272,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
                 omax.GoToEndOfSelectedMaths
                 If MaximaForklaring Then
                     Selection.TypeParagraph
-                    InsertForklaring Sprog.A(829) & " " & variabel & " " & Sprog.A(831), True
+                    InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831), True
                     Selection.TypeParagraph
                 End If
             End If
@@ -315,36 +318,36 @@ Sub MaximaSolveInequality(Optional variabel As String)
         End If
 
         If MaximaForklaring And omax.MaximaOutput <> "" Then
-            InsertForklaring vbTab & Sprog.A(56) & " " & variabel & " " & Sprog.A(57)
+            InsertForklaring vbTab & TT.A(56) & " " & variabel & " " & TT.A(57)
         End If
 
         If omax.MaximaOutput = "universalset" Then
             omax.MaximaOutput = "x" & VBA.ChrW(8712) & VBA.ChrW(8477)
             omax.InsertMaximaOutput
             Selection.TypeParagraph
-            Selection.TypeText Sprog.A(58)
+            Selection.TypeText TT.A(58)
         ElseIf omax.MaximaOutput = "emptyset" Then
             omax.MaximaOutput = "L=" & VBA.ChrW(8709)
             omax.InsertMaximaOutput
             Selection.TypeParagraph
             If MaximaComplex Then
-                Selection.TypeText Sprog.A(59) & variabel
+                Selection.TypeText TT.A(59) & variabel
             Else
-                Selection.TypeText Sprog.A(60) & variabel
+                Selection.TypeText TT.A(60) & variabel
             End If
         Else
             omax.InsertMaximaOutput
         End If
 
     Else    ' system of equations
-        MsgBox2 Sprog.A(376), vbOKOnly, ""
+        MsgBox2 TT.A(376), vbOKOnly, ""
     End If
     
     Oundo.EndCustomRecord
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -395,7 +398,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     If omax.DefFejl Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox2 Sprog.A(803), vbOKOnly, Sprog.A(804)
+        MsgBox2 TT.A(803), vbOKOnly, TT.A(804)
         GoTo slut
     End If
     If sstart = sslut Then
@@ -407,14 +410,14 @@ Sub MaximaSolvePar(Optional variabel As String)
     End If
     p = InStr(Selection.OMaths(1).Range.Text, "=")
     If p < 1 Then
-        MsgBox Sprog.A(141), vbOKOnly, Sprog.Error
+        MsgBox TT.A(141), vbOKOnly, TT.Error
         GoTo slut
     Else
         p2 = InStr(p + 1, Selection.OMaths(1).Range.Text, "=")
         If p2 > 0 Then
             p = InStr(Selection.OMaths(1).Range.Text, ChrW(8743))
             If p < 1 Then
-                MsgBox Sprog.A(882), vbOKOnly, Sprog.Error
+                MsgBox TT.A(882), vbOKOnly, TT.Error
                 GoTo slut
             End If
         End If
@@ -422,7 +425,7 @@ Sub MaximaSolvePar(Optional variabel As String)
 
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -502,7 +505,7 @@ newcas:
                 omax.GoToEndOfSelectedMaths
                 If MaximaForklaring Then
                     Selection.TypeParagraph
-                    InsertForklaring Sprog.A(829) & " " & variabel & " " & Sprog.A(831), True
+                    InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831), True
                     Selection.TypeParagraph
                 End If
             End If
@@ -550,7 +553,7 @@ newcas:
         Selection.TypeParagraph
         If Len(omax.MaximaOutput) > 250 Then
             Dim resultat As VbMsgBoxResult
-            resultat = MsgBox(Sprog.A(127) & vbCrLf & vbCrLf & omax.MaximaOutput, vbOKCancel, Sprog.A(846))
+            resultat = MsgBox(TT.A(127) & vbCrLf & vbCrLf & omax.MaximaOutput, vbOKCancel, TT.A(846))
             If resultat = vbCancel Then GoTo slut
         End If
 
@@ -570,21 +573,21 @@ newcas:
 
         ' insert explanation if desired
         If MaximaForklaring And (IsSolved Or InStr(omax.KommentarOutput, "solving system of equations")) Then
-            InsertForklaring Sprog.A(829) & " " & variabel & " " & Sprog.A(831)
+            InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831)
         End If
 
         If InStr(omax.MaximaOutput, VBA.ChrW(8709)) Then    ' no solution
             omax.InsertMaximaOutput
             Selection.TypeParagraph
             If MaximaComplex Then
-                Selection.TypeText Sprog.A(129) & variabel
+                Selection.TypeText TT.A(129) & variabel
             Else
-                Selection.TypeText Sprog.A(130) & variabel
+                Selection.TypeText TT.A(130) & variabel
             End If
         ElseIf InStr(omax.MaximaOutput, VBA.ChrW(8477)) > 0 Then  ' all are solution
             omax.InsertMaximaOutput
             Selection.TypeParagraph
-            Selection.TypeText Sprog.A(132)
+            Selection.TypeText TT.A(132)
         ElseIf omax.MaximaOutput = "?" Or omax.MaximaOutput = "" Or InStr(omax.KommentarOutput, "Lisp error") > 0 Or (Not LmSet And Not IsSolved) Then
             If CASengine = 0 Then
                 GoTo stophop
@@ -618,7 +621,7 @@ newcas:
         ElseIf False Then
 stophop:
             omax.Nsolve variabel, -15, 15, 15, 20, 30, 30, True
-            InsertForklaring Sprog.A(830) & " " & variabel & " " & Sprog.A(831), False
+            InsertForklaring TT.A(830) & " " & variabel & " " & TT.A(831), False
             omax.InsertMaximaOutput
             Selection.TypeParagraph
         Else    ' if there is a solution
@@ -661,7 +664,7 @@ newcassys:
                 omax.GoToEndOfSelectedMaths
                 If MaximaForklaring Then
                     Selection.TypeParagraph
-                    InsertForklaring Sprog.A(134) & variabel & Sprog.A(135), False
+                    InsertForklaring TT.A(134) & variabel & TT.A(135), False
                     Selection.TypeParagraph
                 End If
             End If
@@ -693,7 +696,7 @@ newcassys:
         Oundo.StartCustomRecord
         
         If omax.MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
-            MsgBox Sprog.A(133), vbOKOnly, Sprog.Error
+            MsgBox TT.A(133), vbOKOnly, TT.Error
             GoTo slut
         End If
 
@@ -735,12 +738,12 @@ newcassys:
             omax.GoToEndOfSelectedMaths
             Selection.TypeParagraph
             If MaximaForklaring Then
-                InsertForklaring Sprog.A(134) & variabel & Sprog.A(135)
+                InsertForklaring TT.A(134) & variabel & TT.A(135)
             End If
             omax.InsertMaximaOutput
             If InStr(omax.MaximaOutput, VBA.ChrW(8709)) > 0 And CASengine > 0 Then
                 Selection.TypeParagraph
-                Selection.TypeText Sprog.A(873)
+                Selection.TypeText TT.A(873)
             End If
         Else    ' no solutions
             omax.GoToEndOfSelectedMaths
@@ -750,16 +753,16 @@ newcassys:
                 omax.InsertMaximaOutput
                 Selection.TypeParagraph
                 If MaximaComplex Then
-                    Selection.TypeText Sprog.A(137) & variabel
+                    Selection.TypeText TT.A(137) & variabel
                 Else
-                    Selection.TypeText Sprog.A(138) & variabel
+                    Selection.TypeText TT.A(138) & variabel
                 End If
             Else
                 If omax.DefFejl Then GoTo slut
-                fejlm = Sprog.A(131) & vbCrLf
+                fejlm = TT.A(131) & vbCrLf
                 '                End If
                 If InStr(omax.Kommando, "=") < 1 Then
-                    fejlm = fejlm & Sprog.A(139) & vbCrLf
+                    fejlm = fejlm & TT.A(139) & vbCrLf
                 End If
                 Selection.End = sslut  ' end must be first
                 Selection.start = sstart
@@ -770,7 +773,7 @@ newcassys:
     End If
     GoTo slut
 Fejl:
-    MsgBox2 Sprog.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, Sprog.Error
+    MsgBox2 TT.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -827,7 +830,7 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
         tdefs = omax.TempDefs
         tdefs = Replace(tdefs, "pi", ChrW(960))
         '                End If
-        Selection.TypeText Sprog.A(61)
+        Selection.TypeText TT.A(61)
         Set mo = Selection.OMaths.Add(Selection.Range)
         Selection.TypeText omax.ConvertToWordSymbols(tdefs)
         mo.OMaths.BuildUp
@@ -867,7 +870,7 @@ Sub MaximaEliminate()
     If omax.DefFejl Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     If sstart = sslut Then
@@ -875,7 +878,7 @@ Sub MaximaEliminate()
     End If
     If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
-        result = MsgBox(Sprog.A(141), vbYesNo, Sprog.A(846))
+        result = MsgBox(TT.A(141), vbYesNo, TT.A(846))
         If result = vbNo Then GoTo slut
     End If
 
@@ -890,7 +893,7 @@ Sub MaximaEliminate()
         UFSelectVar.NoEq = omax.AntalKom
         UFSelectVar.Vars = omax.Vars
         UFSelectVar.DefS = omax.DefString
-        UFSelectVar.Caption = Sprog.A(377)
+        UFSelectVar.Caption = TT.A(377)
         UFSelectVar.Show
         variabel = UFSelectVar.SelectedVar
         If variabel = "" Then GoTo slut
@@ -899,7 +902,7 @@ Sub MaximaEliminate()
         If CASengine = 0 Then
             omax.Eliminate (variabel)
         Else
-            MsgBox Sprog.A(874), vbOKOnly, "No support"
+            MsgBox TT.A(874), vbOKOnly, "No support"
             GoTo slut
         End If
         
@@ -921,7 +924,7 @@ Sub MaximaEliminate()
         Application.ScreenUpdating = False
 
         If omax.MaximaOutput = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
-            MsgBox Sprog.A(133), vbOKOnly, Sprog.Error
+            MsgBox TT.A(133), vbOKOnly, TT.Error
             GoTo slut
         End If
 
@@ -930,7 +933,7 @@ Sub MaximaEliminate()
         variabel = Replace(omax.ConvertToWordSymbols(variabel), ";", ",")
 
         If MaximaForklaring Then
-            ForklarTekst = Sprog.A(142) & " " & variabel & " " & Sprog.A(143)
+            ForklarTekst = TT.A(142) & " " & variabel & " " & TT.A(143)
             InsertForklaring ForklarTekst, False
             If omax.TempDefs <> "" Then
                 If Not MaximaSeparator Then
@@ -939,7 +942,7 @@ Sub MaximaEliminate()
                 Else
                     tdefs = omax.TempDefs
                 End If
-                Selection.TypeText Sprog.A(378) & ": "
+                Selection.TypeText TT.A(378) & ": "
                 Set mo = Selection.OMaths.Add(Selection.Range)
                 Selection.TypeText tdefs
                 mo.OMaths.BuildUp
@@ -954,9 +957,9 @@ Sub MaximaEliminate()
             omax.InsertMaximaOutput
             Selection.TypeParagraph
             If MaximaComplex Then
-                Selection.TypeText Sprog.A(137) & variabel
+                Selection.TypeText TT.A(137) & variabel
             Else
-                Selection.TypeText Sprog.A(138) & variabel
+                Selection.TypeText TT.A(138) & variabel
             End If
         End If
     End If
@@ -965,7 +968,7 @@ Sub MaximaEliminate()
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -995,7 +998,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     If omax.DefFejl Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(803), vbOKOnly, Sprog.A(804)
+        MsgBox TT.A(803), vbOKOnly, TT.A(804)
         GoTo slut
     End If
     If sstart = sslut Then
@@ -1007,13 +1010,13 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     End If
     If InStr(Selection.OMaths(1).Range.Text, "=") < 1 Then
         Dim result As VbMsgBoxResult
-        result = MsgBox(Sprog.A(141), vbYesNo, Sprog.A(846))
+        result = MsgBox(TT.A(141), vbYesNo, TT.A(846))
         If result = vbNo Then GoTo slut
     End If
 
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -1068,7 +1071,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             If MaximaForklaring Then
                 omax.GoToEndOfSelectedMaths
                 Selection.TypeParagraph
-                InsertForklaring Sprog.A(875), False
+                InsertForklaring TT.A(875), False
                 Selection.TypeParagraph
             End If
             s = Replace(omax.Kommando, ",", ".")
@@ -1134,11 +1137,11 @@ ghop:
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
 
-        InsertForklaring Sprog.A(830) & " " & variabel & " " & Sprog.A(57), False
+        InsertForklaring TT.A(830) & " " & variabel & " " & TT.A(57), False
 
         If Len(omax.MaximaOutput) > 150 Then
             Dim resultat As VbMsgBoxResult
-            resultat = MsgBox(Sprog.A(127) & omax.MaximaOutput, vbOKCancel, Sprog.A(846))
+            resultat = MsgBox(TT.A(127) & omax.MaximaOutput, vbOKCancel, TT.A(846))
             If resultat = vbCancel Then GoTo slut
         End If
 
@@ -1151,7 +1154,7 @@ ghop:
         End If
 
         If MaximaForklaring And IsSolved Then
-            InsertForklaring Sprog.A(830) & " " & variabel & " " & Sprog.A(57)
+            InsertForklaring TT.A(830) & " " & variabel & " " & TT.A(57)
         End If
 
         omax.InsertMaximaOutput
@@ -1167,7 +1170,7 @@ ghop:
         Variable = UFSelectVar.SelectedVar
         Variable = Replace(Variable, ",", "=1" & ListSeparator)
         Variable = Variable & "=1"
-        inp = InputBox(Sprog.A(379), Sprog.A(380), Variable)
+        inp = InputBox(TT.A(379), TT.A(380), Variable)
         If inp = "" Then GoTo slut    ' trykket cancel
         Arr = Split(inp, ListSeparator)
 
@@ -1196,7 +1199,7 @@ ghop:
             If MaximaForklaring Then
                 omax.GoToEndOfSelectedMaths
                 Selection.TypeParagraph
-                InsertForklaring Sprog.A(883), False
+                InsertForklaring TT.A(883), False
                 Selection.TypeParagraph
             End If
             If InStr(Variable, "x") > 0 And InStr(Variable, "y") > 0 Then s = omax.KommandoerStreng & ";intersect(" & Replace(omax.KommandoerStreng, ";", " , ") & ");" & s
@@ -1220,16 +1223,16 @@ ghop:
         If Len(omax.MaximaOutput) > 1 Then
             If MaximaForklaring Then
                 If Not MaximaSeparator Then guess = Replace(guess, ",", ";")
-                InsertForklaring Sprog.A(381) & " " & Variable & " " & Sprog.A(382) & " " & guess & " " & Sprog.A(34) & ". ", False
+                InsertForklaring TT.A(381) & " " & Variable & " " & TT.A(382) & " " & guess & " " & TT.A(34) & ". ", False
             End If
             omax.InsertMaximaOutput
         Else
             If omax.DefFejl Then GoTo slut
-            fejlm = Sprog.A(383) & "." & vbCrLf
+            fejlm = TT.A(383) & "." & vbCrLf
             If InStr(omax.Kommando, "=") < 1 Then
-                fejlm = fejlm & Sprog.A(139) & "." & vbCrLf
+                fejlm = fejlm & TT.A(139) & "." & vbCrLf
             End If
-            MsgBox fejlm & Sprog.A(384) & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+            MsgBox fejlm & TT.A(384) & vbCrLf & vbCrLf & omax.KommentarOutput, vbOKOnly, TT.Error
         End If
     End If
     
@@ -1237,7 +1240,7 @@ ghop:
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -1274,7 +1277,7 @@ Sub beregn()
         Err.Clear
         Application.Run macroname:="CASCALC"
         If Err.Number = 513 Then
-            MsgBox2 Err.Description, vbOKOnly, Sprog.Error
+            MsgBox2 Err.Description, vbOKOnly, TT.Error
             GoTo slut
         ElseIf Err.Number = 0 Then ' if no errors, then the calculation is done and inserted into Word
             IncreaseCalcCounter
@@ -1295,22 +1298,22 @@ Sub beregn()
 
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     If Selection.OMaths.Count > 1 Then
-        MsgBox Sprog.A(149), vbOKOnly, Sprog.Error
+        MsgBox TT.A(149), vbOKOnly, TT.Error
         GoTo slut
     End If
 
     omax.ReadSelection
     
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
     
-    If right(omax.Kommando, 1) = "=" Then
+    If Right(omax.Kommando, 1) = "=" Then
         omax.Kommando = Trim(Left(omax.Kommando, Len(omax.Kommando) - 1))
         RemoveEqual = True
     End If
@@ -1341,7 +1344,7 @@ Sub beregn()
         omax.beregn
         If RemoveEqual Then
             If Left(omax.MaximaOutput, 1) = "=" Then
-                omax.MaximaOutput = right(omax.MaximaOutput, Len(omax.MaximaOutput) - 1)
+                omax.MaximaOutput = Right(omax.MaximaOutput, Len(omax.MaximaOutput) - 1)
             End If
         End If
     ElseIf CASengine = 1 Then
@@ -1349,7 +1352,7 @@ Sub beregn()
             omax.GoToEndOfSelectedMaths
             If MaximaForklaring Then
                 Selection.TypeParagraph
-                InsertForklaring Sprog.A(682), False
+                InsertForklaring TT.A(682), False
                 Selection.TypeParagraph
             End If
         End If
@@ -1393,13 +1396,13 @@ Sub beregn()
     If Len(omax.MaximaOutput) > 0 And Trim(omax.MaximaOutput) <> "=res1" Then
         InsertOutput omax.MaximaOutput, False
     ElseIf omax.KommentarOutput <> vbNullString Then
-        fejlm = Sprog.A(128) & vbCrLf
+        fejlm = TT.A(128) & vbCrLf
 #If Mac Then
         fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf
-        MsgBox2 fejlm, vbOKOnly, Sprog.Error
+        MsgBox2 fejlm, vbOKOnly, TT.Error
 #Else
         fejlm = fejlm & vbCrLf & vbCrLf & omax.KommentarOutput & vbCrLf & MaxProc.LastMaximaOutput
-        MsgBox2 fejlm, vbOKOnly, Sprog.Error
+        MsgBox2 fejlm, vbOKOnly, TT.Error
         RestartMaxima
 #End If
     End If
@@ -1407,7 +1410,7 @@ Sub beregn()
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, TT.Error
     RestartMaxima
 slut:
 #If Mac Then
@@ -1431,7 +1434,7 @@ Function GetCmdAfterEqualSign(Kommando As String) As String
         For i = Len(Kommando) To 1 Step -1 ' loop through all characters in the string
             c = Mid$(Kommando, i, 1)
             If (c = "=" Or c = ChrW(8776)) And BracketStack.Count = 0 Then ' we found the equal sign, now cut and stop
-                GetCmdAfterEqualSign = right(Kommando, Len(Kommando) - i)
+                GetCmdAfterEqualSign = Right(Kommando, Len(Kommando) - i)
                 Exit Function
             ElseIf c = ")" Or c = "]" Or c = "}" Then
                 BracketStack.Add c
@@ -1491,7 +1494,7 @@ Sub Omskriv()
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     If sstart = sslut Then    ' ensures that gotoendofselectedmaths works
@@ -1499,7 +1502,7 @@ Sub Omskriv()
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -1534,7 +1537,7 @@ Sub Omskriv()
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
             Selection.TypeParagraph
-            InsertForklaring Sprog.A(50), False
+            InsertForklaring TT.A(50), False
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
@@ -1561,32 +1564,32 @@ Sub Omskriv()
 
         If Len(omax.MaximaOutput) > 0 Then
             If MaximaForklaring Then
-                s = Sprog.A(150)
+                s = TT.A(150)
                 If UFomskriv.CheckBox_auto.Value Then
-                    s = s & Sprog.A(151)
+                    s = s & TT.A(151)
                 End If
                 If UFomskriv.CheckBox_expand.Value Then
-                    s = s & Sprog.A(807) & ", "
+                    s = s & TT.A(807) & ", "
                 End If
                 If UFomskriv.CheckBox_factor.Value Then
-                    s = s & Sprog.A(806) & ", "
+                    s = s & TT.A(806) & ", "
                 End If
                 If UFomskriv.CheckBox_rationaliser.Value Then
-                    s = s & Sprog.A(794) & ", "
+                    s = s & TT.A(794) & ", "
                 End If
                 If UFomskriv.CheckBox_trigreduce.Value Then
-                    s = s & Sprog.A(152)
+                    s = s & TT.A(152)
                 End If
                 If UFomskriv.CheckBox_completesquare.Value Then
-                    s = s & Sprog.A(697)
+                    s = s & TT.A(697)
                 End If
                 InsertForklaring s, False
             End If
             omax.InsertMaximaOutput
         Else
             Dim fejlm As String
-            fejlm = Sprog.A(153) & vbCrLf
-            MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+            fejlm = TT.A(153) & vbCrLf
+            MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, TT.Error
         End If
     Else    ' not newline
         InsertOutput "=" & omax.MaximaOutput
@@ -1596,7 +1599,7 @@ Sub Omskriv()
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     MaximaCifre = SaveSettingsCifre
@@ -1622,7 +1625,7 @@ Sub reducer()
     '    MsgBox WordWindowNavn
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     If sstart = sslut Then    ' ensures that gotoendofselectedmaths works
@@ -1630,7 +1633,7 @@ Sub reducer()
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -1651,7 +1654,7 @@ Sub reducer()
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
             Selection.TypeParagraph
-            InsertForklaring Sprog.A(50), False
+            InsertForklaring TT.A(50), False
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
@@ -1677,21 +1680,21 @@ Sub reducer()
 
     If Len(omax.MaximaOutput) > 0 Then
         If MaximaForklaring Then
-            InsertForklaring Sprog.A(154), False
+            InsertForklaring TT.A(154), False
         End If
         omax.InsertMaximaOutput
     Else
         Dim fejlm As String
-        fejlm = Sprog.A(153) & vbCrLf
+        fejlm = TT.A(153) & vbCrLf
 
-        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, TT.Error
     End If
 
     Oundo.EndCustomRecord
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -1711,7 +1714,7 @@ Sub CompareTest()
     If Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     If sstart = sslut Then    ' ensures that gotoendofselectedmaths works
@@ -1719,7 +1722,7 @@ Sub CompareTest()
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -1735,29 +1738,29 @@ Sub CompareTest()
     End If
     omax.GoToEndOfSelectedMaths
     Selection.TypeParagraph
-    omax.MaximaOutput = Replace(omax.MaximaOutput, "true", Sprog.A(144))
-    omax.MaximaOutput = Replace(omax.MaximaOutput, "false", Sprog.A(145))
-    omax.MaximaOutput = Replace(omax.MaximaOutput, "unknown", Sprog.A(146))
-    omax.MaximaOutput = Replace(omax.MaximaOutput, "dontknow", Sprog.A(146))
+    omax.MaximaOutput = Replace(omax.MaximaOutput, "true", TT.A(144))
+    omax.MaximaOutput = Replace(omax.MaximaOutput, "false", TT.A(145))
+    omax.MaximaOutput = Replace(omax.MaximaOutput, "unknown", TT.A(146))
+    omax.MaximaOutput = Replace(omax.MaximaOutput, "dontknow", TT.A(146))
     If Len(omax.MaximaOutput) > 0 Then
         If MaximaForklaring Then
-            InsertForklaring Sprog.A(163), False
+            InsertForklaring TT.A(163), False
         End If
         omax.InsertMaximaOutput
         If InStr(omax.KommentarOutput, "Numerically tested") > 0 And InStr(omax.MaximaOutput, "sand") > 0 Then
-            Selection.TypeText Sprog.A(164)
+            Selection.TypeText TT.A(164)
             Selection.TypeParagraph
         End If
     Else
         Dim fejlm As String
-        fejlm = Sprog.A(165) & vbCrLf
+        fejlm = TT.A(165) & vbCrLf
 
-        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, TT.Error
     End If
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -1777,7 +1780,7 @@ Sub faktoriser()
     If Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     If sstart = sslut Then    ' ensures that gotoendofselectedmaths works
@@ -1785,7 +1788,7 @@ Sub faktoriser()
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -1806,7 +1809,7 @@ Sub faktoriser()
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
             Selection.TypeParagraph
-            InsertForklaring Sprog.A(155), False
+            InsertForklaring TT.A(155), False
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
@@ -1831,20 +1834,20 @@ Sub faktoriser()
     Selection.TypeParagraph
     If Len(omax.MaximaOutput) > 0 Then
         If MaximaForklaring Then
-            InsertForklaring Sprog.A(155), False
+            InsertForklaring TT.A(155), False
         End If
         omax.InsertMaximaOutput
     Else
         Dim fejlm As String
-        fejlm = Sprog.A(156) & vbCrLf
+        fejlm = TT.A(156) & vbCrLf
 
-        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, TT.Error
     End If
     
     Oundo.EndCustomRecord
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -1867,12 +1870,12 @@ Sub udvid()
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' only look at fields with := defligmed and := symbol
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -1893,7 +1896,7 @@ Sub udvid()
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
             Selection.TypeParagraph
-            InsertForklaring Sprog.A(50), False
+            InsertForklaring TT.A(50), False
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
@@ -1919,20 +1922,20 @@ Sub udvid()
     
     If Len(omax.MaximaOutput) > 0 Then
         If MaximaForklaring Then
-            InsertForklaring Sprog.A(157), False
+            InsertForklaring TT.A(157), False
         End If
         omax.InsertMaximaOutput
     Else
         Dim fejlm As String
-        fejlm = Sprog.A(158) & vbCrLf
+        fejlm = TT.A(158) & vbCrLf
 
-        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, TT.Error
     End If
     
     Oundo.EndCustomRecord
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -1956,18 +1959,18 @@ Sub Differentier()
     End If
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
-    variabel = InputBox(Sprog.A(51), Sprog.A(845), "x")
+    variabel = InputBox(TT.A(51), TT.A(845), "x")
     If variabel = "" Then GoTo slut
     
     If CASengine > 0 Then
@@ -1985,7 +1988,7 @@ Sub Differentier()
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
             Selection.TypeParagraph
-            InsertForklaring Sprog.A(50), False
+            InsertForklaring TT.A(50), False
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
@@ -2010,20 +2013,20 @@ Sub Differentier()
     Selection.TypeParagraph
     If Trim(Len(omax.MaximaOutput)) > 0 Then
         If MaximaForklaring Then
-            InsertForklaring Sprog.A(49), False
+            InsertForklaring TT.A(49), False
         End If
         omax.InsertMaximaOutput
     Else
         Dim fejlm As String
-        fejlm = Sprog.A(50) & vbCrLf
+        fejlm = TT.A(50) & vbCrLf
 
-        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, TT.Error
     End If
     
     Oundo.EndCustomRecord
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -2044,7 +2047,7 @@ Sub Integrer()
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
 
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     If sstart = sslut Then    ' ensures that gotoendofselectedmaths works
@@ -2052,13 +2055,13 @@ Sub Integrer()
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' only look at fields with := defligmed and := symbol
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
-    variabel = InputBox(Sprog.A(51), Sprog.A(845), "x")
+    variabel = InputBox(TT.A(51), TT.A(845), "x")
     If variabel = "" Then GoTo slut
     
     If CASengine > 0 Then
@@ -2076,7 +2079,7 @@ Sub Integrer()
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
             Selection.TypeParagraph
-            InsertForklaring Sprog.A(50), False
+            InsertForklaring TT.A(50), False
             Selection.TypeParagraph
         End If
         OpenGeoGebraWeb s, "CAS", True, True
@@ -2101,20 +2104,20 @@ Sub Integrer()
     If Trim(Len(omax.MaximaOutput)) > 0 Then
 
         If MaximaForklaring Then
-            InsertForklaring Sprog.A(52), False
+            InsertForklaring TT.A(52), False
         End If
         omax.InsertMaximaOutput
     Else
         Dim fejlm As String
-        fejlm = Sprog.A(53) & vbCrLf
+        fejlm = TT.A(53) & vbCrLf
 
-        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, TT.Error
     End If
     
     Oundo.EndCustomRecord
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -2145,7 +2148,7 @@ Sub SolveDENumeric()
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' only look at fields with := defligmed and := symbol
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -2231,7 +2234,7 @@ Sub SolveDENumeric()
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -2291,7 +2294,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     dAsDiffChrTemp = True
     
     If Selection.OMaths.Count = 0 And Len(Selection.Range.Text) < 2 Then
-        MsgBox Sprog.A(47), vbOKOnly, Sprog.Error
+        MsgBox TT.A(47), vbOKOnly, TT.Error
         GoTo slut
     End If
     If sstart = sslut Then
@@ -2299,7 +2302,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     End If
     omax.ReadSelection
     If InStr(omax.Kommando, VBA.ChrW(8788)) > 0 Or InStr(VBA.LCase(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW(8801)) > 0 Then  ' only look at fields with := defligmed and := symbol
-        MsgBox Sprog.A(48), vbOKOnly, Sprog.Error
+        MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
 
@@ -2409,7 +2412,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
             omax.GoToEndOfSelectedMaths
             If MaximaForklaring Then
                 Selection.TypeParagraph
-                InsertForklaring Sprog.A(829) & " " & variabel & " " & Sprog.A(831), True
+                InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831), True
                 Selection.TypeParagraph
             End If
         End If
@@ -2442,29 +2445,29 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     If Len(omax.MaximaOutput) > 1 Then
         If MaximaForklaring Then
             funktion = Split(funktion, "(")(0)
-            t = Sprog.A(390)
+            t = TT.A(390)
             If Len(UFdiffeq.TextBox_startx.Text) > 0 And Len(UFdiffeq.TextBox_starty.Text) > 0 And Len(UFdiffeq.TextBox_bcx.Text) > 0 And Len(UFdiffeq.TextBox_bcy.Text) > 0 Then
-                t = t & " " & Sprog.A(391) & " " & funktion & "(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty.Text & " og " & funktion & "(" & UFdiffeq.TextBox_starty.Text & ")=" & UFdiffeq.TextBox_bcy.Text
+                t = t & " " & TT.A(391) & " " & funktion & "(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty.Text & " og " & funktion & "(" & UFdiffeq.TextBox_starty.Text & ")=" & UFdiffeq.TextBox_bcy.Text
             ElseIf Len(UFdiffeq.TextBox_startx.Text) > 0 And Len(UFdiffeq.TextBox_starty.Text) > 0 And Len(UFdiffeq.TextBox_starty2.Text) > 0 Then
-                t = t & " " & Sprog.A(392) & " " & funktion & "(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty.Text & " og " & funktion & "'(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty2.Text
+                t = t & " " & TT.A(392) & " " & funktion & "(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty.Text & " og " & funktion & "'(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty2.Text
             ElseIf Len(UFdiffeq.TextBox_startx.Text) > 0 And Len(UFdiffeq.TextBox_starty.Text) > 0 Then
-                t = t & " " & Sprog.A(393) & " " & funktion & "(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty.Text
+                t = t & " " & TT.A(393) & " " & funktion & "(" & UFdiffeq.TextBox_startx.Text & ")=" & UFdiffeq.TextBox_starty.Text
             End If
             InsertForklaring t, False
         End If
         omax.InsertMaximaOutput
     Else
         Dim fejlm As String
-        fejlm = Sprog.A(160) & vbCrLf
+        fejlm = TT.A(160) & vbCrLf
 
-        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, Sprog.Error
+        MsgBox fejlm & vbCrLf & omax.KommentarOutput, vbOKOnly, TT.Error
     End If
 
     Oundo.EndCustomRecord
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
@@ -2505,18 +2508,18 @@ Function ValidateInput(Expr, Optional MathObj As OMath) As Boolean
     
     'validate brackets
     If GetCountOfChar(Expr, "(") <> GetCountOfChar(Expr, ")") Then
-        ED.Title = Sprog.SyntaxError
+        ED.Title = TT.SyntaxError
         ED.MaximaOutput = Expr
-        ED.Description = Sprog.A(876) & vbCrLf & Expr
+        ED.Description = TT.A(876) & vbCrLf & Expr
     ElseIf InStr(Expr, "\left(") > 0 Or InStr(Expr, "\ast") > 0 Then
-        ED.Title = Sprog.A(877)
-        ED.Description = Sprog.A(878)
+        ED.Title = TT.A(877)
+        ED.Description = TT.A(878)
     End If
    
     If ED.Title <> vbNullString Then
         If Not MathObj Is Nothing Then
             ED.Description = ED.Title & vbCrLf & ED.Description
-            ED.Title = Sprog.A(894)
+            ED.Title = TT.A(894)
             Application.ScreenUpdating = True
             MathObj.Range.Select
             omax.DefFejl = True
@@ -2534,7 +2537,7 @@ Public Function GetVersion(n As String) As Single
 Dim v As String, p As Integer
     p = InStr(n, "-")
     If p > 0 Then
-        v = right(n, Len(n) - p)
+        v = Right(n, Len(n) - p)
     End If
     GetVersion = val(v)
 End Function
@@ -2607,9 +2610,9 @@ Function ValiderVariable() As Boolean
         For i = 0 To UBound(Arr)
             If Left(Arr(i), 1) = "_" Then
                 ValiderVariable = False
-                ED.Title = Sprog.A(879)
+                ED.Title = TT.A(879)
                 ED.DefFejl = False
-                ED.Description = Sprog.A(880) & Arr(i) & vbCrLf & vbCrLf & Sprog.A(881)
+                ED.Description = TT.A(880) & Arr(i) & vbCrLf & vbCrLf & TT.A(881)
                 UserFormError.SetErrorDefinition ED
                 UserFormError.Show
                 Exit Function

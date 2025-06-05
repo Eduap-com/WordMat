@@ -70,10 +70,10 @@ Private Sub UserForm_Activate()
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.A(14)
-    Label_ok.Caption = Sprog.OK
-    Label_cancel.Caption = Sprog.Cancel
-    Label_ligninger.Caption = Sprog.A(834)
+    Me.Caption = TT.A(14)
+    Label_ok.Caption = TT.OK
+    Label_cancel.Caption = TT.Cancel
+    Label_Ligninger.Caption = TT.A(834)
 End Sub
 
 Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)

@@ -539,9 +539,9 @@
 538#£Pazymeti israiska, kad atskirtumete arba perkeltumete zymikli i israiska
 539#£Integruoti
 540#£Nustato neapibrezta funkcijos integrala
-541#£
-542#£
-543#£
+541#£Importavimo parametrai
+542#£Eksportuoti parametrus
+543#£Tinkinimo meniu
 544#£
 545#£Braizymo grafikas (Alt + P)
 546#£Rodomas pasirinktos (-u) funkcijos (-u) / lygties (-ciu) ir tasku grafikas. Tada grafika galima iterpti i dokumenta. Palaikomos kelios grafiku programos. Nustatymuose pasirinkite savo megstamiausia.
@@ -688,10 +688,10 @@
 687#£Reiksmingi skaiciai
 688#£Vienetu ijungimas / isjungimas
 689#£Jei vienetai ijungti, WordMath kan interpretuoja ir konvertuoja vienetus. SI mygtuke galite pakeisti isvesties vienetus. Neijunkite irenginiu, nebent jums to reikia. Tai gali tureti itakos WordMat elgesiui ir pasilieka daug kintamuju.
-690#£
+690#£Iterpti kodo bloka
 691#£Nurodykite vienetus, i kuriuos norite konvertuoti. Pagal numatytuosius nustatymus isvesties vienetai yra SI vienetai.
 692#£rs
-693#£
+693#£Kodu blokas yra sritis, kurioje galite tiesiogiai programuoti "Maxima". Pavyzdziui, galite apibrezti sudetingesnes funkcijas, kurios veliau gali buti naudojamos toliau dokumente. Daugiau informacijos rasite vadove.
 694#£Ne. skaiciu
 695#£Apvalinimo
 696#£Pasirinkite, kaip skaiciai bus fomatuojami ir apvalinami. Toliau pateiktuose pavyzdziuose WordMat nustatyta i 3 paveikslus\r\n\r\nDecimals: 12,345\r\nReiksmingi skaiciai: 12,3\r\nSci. zymejimas: 1,23*10^1

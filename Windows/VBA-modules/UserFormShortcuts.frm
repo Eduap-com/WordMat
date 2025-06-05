@@ -99,12 +99,12 @@ Sub SetComboIndexs()
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.A(814)
-    Label1.Caption = Sprog.A(65)
-    Label2.Caption = Sprog.A(66)
-    Label3.Caption = Sprog.A(67)
-    Label_cancel.Caption = Sprog.Cancel
-    Label_nulstil.Caption = Sprog.Reset
+    Me.Caption = TT.A(814)
+    Label1.Caption = TT.A(65)
+    Label2.Caption = TT.A(66)
+    Label3.Caption = TT.A(67)
+    Label_cancel.Caption = TT.Cancel
+    Label_nulstil.Caption = TT.Reset
 End Sub
 
 Private Sub UserForm_Initialize()
@@ -161,24 +161,24 @@ Sub FillComboBoxShortcuts(CB As ComboBox)
 CB.Clear
 
 CB.AddItem ""
-CB.AddItem Sprog.A(701) 'New equation
-CB.AddItem Sprog.A(1) 'New numbered equation
-CB.AddItem Sprog.A(446)
-CB.AddItem Sprog.A(760)
-CB.AddItem Sprog.A(62) ' define
-CB.AddItem Sprog.A(453)
-CB.AddItem Sprog.A(461)
-CB.AddItem Sprog.A(68)
-CB.AddItem Sprog.A(456)
-CB.AddItem Sprog.A(452)
-CB.AddItem Sprog.A(505) ' Maxima command
-CB.AddItem Sprog.A(702) 'prev resultat
-CB.AddItem Sprog.A(443)
-CB.AddItem Sprog.A(703) 'Toggle num/exact
-CB.AddItem Sprog.A(262)
-CB.AddItem Sprog.A(704) ' Convert latex
-CB.AddItem Sprog.A(705) ' Latex pdf
-CB.AddItem Sprog.A(607) ' reference to equation
+CB.AddItem TT.A(701) 'New equation
+CB.AddItem TT.A(1) 'New numbered equation
+CB.AddItem TT.A(446)
+CB.AddItem TT.A(760)
+CB.AddItem TT.A(62) ' define
+CB.AddItem TT.A(453)
+CB.AddItem TT.A(461)
+CB.AddItem TT.A(68)
+CB.AddItem TT.A(456)
+CB.AddItem TT.A(452)
+CB.AddItem TT.A(505) ' Maxima command
+CB.AddItem TT.A(702) 'prev resultat
+CB.AddItem TT.A(443)
+CB.AddItem TT.A(703) 'Toggle num/exact
+CB.AddItem TT.A(262)
+CB.AddItem TT.A(704) ' Convert latex
+CB.AddItem TT.A(705) ' Latex pdf
+CB.AddItem TT.A(607) ' reference to equation
 
 End Sub
 Private Sub Label_cancel_Click()

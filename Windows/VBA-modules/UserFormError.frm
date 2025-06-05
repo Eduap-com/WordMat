@@ -77,12 +77,12 @@ Sub SetErrorDefinition(ED As ErrorDefinition)
 End Sub
 
 Private Sub SetCaptions()
-    Me.Caption = Sprog.Error
-    MultiPage1.Pages(0).Caption = Sprog.Error
-    MultiPage1.Pages(1).Caption = Sprog.A(749)
-    Label_TAB1.Caption = Sprog.Error
-    Label_TAB2.Caption = Sprog.A(749)
-    Label_restart.Caption = Sprog.A(736)
+    Me.Caption = TT.Error
+    MultiPage1.Pages(0).Caption = TT.Error
+    MultiPage1.Pages(1).Caption = TT.A(749)
+    Label_TAB1.Caption = TT.Error
+    Label_TAB2.Caption = TT.A(749)
+    Label_restart.Caption = TT.A(736)
 End Sub
 Private Sub Label_restart_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_restart.BackColor = LBColorPress

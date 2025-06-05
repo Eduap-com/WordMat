@@ -539,9 +539,9 @@
 538#£Selecione a expressão para diferenciar ou coloque o cursor na expressão
 539#£Integrar
 540#£Determina a integral indefinida da função
-541#£
-542#£
-543#£
+541#£Importar configurações
+542#£Configurações de exportação
+543#£Personalizar menu
 544#£
 545#£Gráfico de gráfico (Alt+P)
 546#£Mostra o gráfico para a(s) função(ões)/equação(ões) selecionada(s) e pontos. O gráfico pode então ser inserido no documento. Vários programas gráficos são suportados. Escolha o seu favorito em configurações.
@@ -688,10 +688,10 @@
 687#£Números significativos
 688#£Ligar/desligar unidades
 689#£Se as unidades estiverem ativadas, o WordMath kan interpretará e converterá unidades. No botão SI você pode alterar as unidades de saída. Não ligue as unidades, a menos que necessite. Pode afetar o comportamento do WordMat e reserva muitas variáveis.
-690#£
+690#£Inserir bloco de código
 691#£Indique as unidades para as quais converter. Por padrão, as unidades de saída são unidades SI.
 692#£ns
-693#£
+693#£Um bloco de código é uma área onde pode programar o Maxima diretamente. Por exemplo, você pode definir funções mais avançadas que podem ser usadas mais abaixo no documento. Veja mais no manual.
 694#£Não. Número de números
 695#£Arredondamento
 696#£Escolha como os números são mapeados e arredondados. Nos exemplos abaixo, o WordMat é definido como 3 figuras\r\n\r\nDecimals: 12.345\r\nFiguras significativas: 12,3\r\nSci. Notação: 1,23*10^1

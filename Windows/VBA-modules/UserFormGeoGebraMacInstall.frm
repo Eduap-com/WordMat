@@ -23,7 +23,7 @@ Private Sub CommandButton_cancel_Click()
     FilePath = GetProgramFilesDir & "GeoGebra.app"
     
     If Dir(FilePath, vbDirectory) = vbNullString Then
-        MsgBox Sprog.A(849), vbYesNo, ""
+        MsgBox TT.A(849), vbYesNo, ""
         Me.hide
     End If
     Unload Me
@@ -43,7 +43,7 @@ Private Sub CommandButton_test_Click()
     FilePath = GetProgramFilesDir & "GeoGebra.app"
     
     If Dir(FilePath, vbDirectory) = vbNullString Then
-        MsgBox Sprog.A(850), vbOKOnly, Sprog.A(769)
+        MsgBox TT.A(850), vbOKOnly, TT.A(769)
         GoTo slut
     End If
     
@@ -59,8 +59,8 @@ Public Sub DownloadNow()
     CommandButton_test.visible = False
     CommandButton_stop.visible = True
     Label_progress.Caption = "*"
-    Label1.Caption = Sprog.A(852)
-    Label2.Caption = Sprog.A(853)
+    Label1.Caption = TT.A(852)
+    Label2.Caption = TT.A(853)
     i = 0
     
     FN = GetDownloadsFolder & "GeoGebra.app"
@@ -69,12 +69,12 @@ Public Sub DownloadNow()
             RunScript "RemoveApp", FN
         End If
     Else
-        Label1.Caption = Sprog.A(854)
-        Label2.Caption = Sprog.A(855)
+        Label1.Caption = TT.A(854)
+        Label2.Caption = TT.A(855)
         GoTo slut
     End If
-    Label1.Caption = Sprog.A(856)
-    Label2.Caption = Sprog.A(857)
+    Label1.Caption = TT.A(856)
+    Label2.Caption = TT.A(857)
     OpenLink "https://download.geogebra.org/package/mac", True
     AppActivate "Microsoft Word"
         
@@ -83,8 +83,8 @@ Public Sub DownloadNow()
     Do While Dir(FilePath, vbDirectory) = vbNullString And i < 60 * 10
         DoEvents
         If StopNow Then
-            Label1.Caption = Sprog.A(858)
-            Label2.Caption = Sprog.A(859)
+            Label1.Caption = TT.A(858)
+            Label2.Caption = TT.A(859)
             Label_progress.Caption = ""
             CommandButton_stop.visible = False
             CommandButton_test.visible = False
@@ -92,8 +92,8 @@ Public Sub DownloadNow()
             GoTo slut
         End If
         If GrantAccessToMultipleFiles(Array(FilePath)) = "false" Then
-            Label1.Caption = Sprog.Error
-            Label2.Caption = Sprog.A(860)
+            Label1.Caption = TT.Error
+            Label2.Caption = TT.A(860)
             CommandButton_stop.visible = False
             CommandButton_test.visible = False
             CommandButton_retry.visible = True
@@ -102,35 +102,35 @@ Public Sub DownloadNow()
         Wait 1
         Label_progress.Caption = Label_progress.Caption & "*"
         If i = 60 Then
-            Label2.Caption = Label2.Caption & vbCrLf & Sprog.A(861)
+            Label2.Caption = Label2.Caption & vbCrLf & TT.A(861)
         End If
         i = i + 1
     Loop
     If i >= 600 Then
-        Label1.Caption = Sprog.A(862)
-        Label2.Caption = Sprog.A(863)
+        Label1.Caption = TT.A(862)
+        Label2.Caption = TT.A(863)
         CommandButton_test.visible = False
         CommandButton_stop.visible = False
         GoTo slut
     Else
         CommandButton_stop.visible = False
-        Label1.Caption = Sprog.A(864)
-        Label2.Caption = Sprog.A(865)
+        Label1.Caption = TT.A(864)
+        Label2.Caption = TT.A(865)
         Label_progress.Caption = ""
         DoEvents
         If GrantAccessToMultipleFiles(Array(GetDownloadsFolder & "GeoGebra.app")) = "true" Then ' Even if there is only one file, it is an advantage to ask permission first, as you will then get a response back.
-            Label1.Caption = Sprog.A(866)
-            Label2.Caption = Sprog.A(867)
+            Label1.Caption = TT.A(866)
+            Label2.Caption = TT.A(867)
             s = RunScript("MoveGeoGebraToApplications", "") ' moves GeoGebra til Apps and removes quarantine
             If s = "ok" Then
                 CommandButton_test.visible = True
-                Label1.Caption = Sprog.A(868)
-                Label2.Caption = Sprog.A(869)
+                Label1.Caption = TT.A(868)
+                Label2.Caption = TT.A(869)
             Else
             End If
         Else
-            Label1.Caption = Sprog.Error
-            Label2.Caption = Sprog.A(860)
+            Label1.Caption = TT.Error
+            Label2.Caption = TT.A(860)
             CommandButton_test.visible = False
             CommandButton_retry.visible = True
         End If
@@ -140,8 +140,8 @@ slut:
 End Sub
 
 Private Sub UserForm_Activate()
-        CommandButton_cancel.Caption = Sprog.A(661)
-        CommandButton_test.Caption = Sprog.A(851)
+        CommandButton_cancel.Caption = TT.A(661)
+        CommandButton_test.Caption = TT.A(851)
 End Sub
 
 #End If

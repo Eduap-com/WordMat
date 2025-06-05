@@ -539,9 +539,9 @@
 538#£Vyberte výraz, který chcete odlisit, nebo umístete kurzor do výrazu
 539#£Integrovat
 540#£Urcuje neurcitý integrál funkce
-541#£
-542#£
-543#£
+541#£Importovat nastavení
+542#£Nastavení exportu
+543#£Prizpusobit menu
 544#£
 545#£Vykreslovací graf (Alt+P)
 546#£Zobrazuje graf pro vybranou funkci/rovnici a body. Graf je pak mozné vlozit do dokumentu. Podporováno je nekolik grafických programu. V nastavení vyberte svou oblíbenou polozku.
@@ -688,10 +688,10 @@
 687#£Významné údaje
 688#£Zapnutí/vypnutí jednotek
 689#£Pokud jsou zapnuty jednotky, muze aplikace WordMath interpretovat a prevádet jednotky. Na tlacítku SI muzete menit výstupní jednotky. Nezapínejte jednotky, pokud to nepotrebujete. To muze ovlivnit chování WordMat a vyhrazuje si mnoho promenných.
-690#£
+690#£Vlození bloku kódu
 691#£Uvedte jednotky, na které chcete prevést. Ve výchozím nastavení jsou výstupní jednotky jednotky SI.
 692#£vú
-693#£
+693#£Blok kódu je oblast, ve které muzete prímo programovat Maxima. Muzete napríklad definovat pokrocilejsí funkce, které pak muzete pouzít níze v dokumentu. Více v manuálu.
 694#£Ne. císel
 695#£Zaokrouhlení
 696#£Vyberte, jak se mají císla zaokrouhlovat a zaokrouhlovat. V níze uvedených príkladech je WordMat nastaven na 3 císla\r\n\r\nDesetinná císla: 12,345\r\nVýznamná císla: 12,3\r\nSci. Zápis: 1,23*10^1

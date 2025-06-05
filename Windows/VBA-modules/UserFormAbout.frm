@@ -93,12 +93,12 @@ End Sub
 Private Sub UserForm_Activate()
     SetCaptions
     
-    Label_partnerskab2.Caption = Sprog.A(161)
+    Label_partnerskab2.Caption = TT.A(161)
     If QActivePartnership Then
-        Label_partnerskab.Caption = Sprog.A(136) & " " & SkoleNavn
+        Label_partnerskab.Caption = TT.A(136) & " " & SkoleNavn
         Label_checkpartnerskab.visible = False
     Else
-        Label_partnerskab.Caption = Sprog.A(140)
+        Label_partnerskab.Caption = TT.A(140)
         Label_checkpartnerskab.visible = True
     End If
 End Sub
@@ -110,15 +110,15 @@ Sub SetCaptions()
     If PatchVersion <> "" Then
         v = v & PatchVersion
     End If
-    If Sprog.SprogNr = 1 Then
-        Me.Caption = Sprog.A(812) & " WordMat"
+    If TT.LangNo = 1 Then
+        Me.Caption = TT.A(812) & " WordMat"
         Label_title.Caption = "WordMat"
     Else
-        Me.Caption = Sprog.A(812) & " WordMath"
+        Me.Caption = TT.A(812) & " WordMath"
         Label_title.Caption = "WordMath"
     End If
     Label_version.Caption = "Version: " & v
-    Label_text.Caption = Sprog.A(20)
+    Label_text.Caption = TT.A(20)
 
 End Sub
 
@@ -145,9 +145,9 @@ Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
 End Sub
 Private Sub Label_checkpartnerskab_Click()
     If QActivePartnership(True) Then
-        MsgBox Sprog.A(120), vbOKOnly, "Success!"
+        MsgBox TT.A(120), vbOKOnly, "Success!"
         UserForm_Activate
     Else
-        MsgBox Sprog.A(121), vbOKOnly, Sprog.A(96)
+        MsgBox TT.A(121), vbOKOnly, TT.A(96)
     End If
 End Sub

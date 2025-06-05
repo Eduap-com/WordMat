@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSettings
    ClientHeight    =   5955
    ClientLeft      =   -15
    ClientTop       =   45
-   ClientWidth     =   10410
+   ClientWidth     =   10575
    OleObjectBlob   =   "UserFormSettings.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -74,7 +74,7 @@ On Error Resume Next
     Dim UnitChanged As Boolean
     
     If InStr(TextBox_outunits.Text, "/") > 0 Or InStr(TextBox_outunits.Text, "*") > 0 Or InStr(TextBox_outunits.Text, "^") > 0 Then
-        MsgBox Sprog.A(343)
+        MsgBox TT.A(343)
         MultiPage1.Value = 2
         TextBox_outunits.SetFocus
         Exit Sub
@@ -185,12 +185,16 @@ On Error Resume Next
         OutUnits = TextBox_outunits.Text
         UserUnits = True
     End If
-        
+    
+    UseCodeFile = CheckBox_UseCodeFile.Value
+    UseCodeBlocks = CheckBox_UseCodeBlocks.Value
+    SaveCodeFileText TextBox_code.Text
+    
     SetMathAutoCorrect
     
     UFMSettings.hide
-    Sprog.CheckSetting
-    Sprog.LoadSprogArray
+    TT.CheckSetting
+    TT.LoadSprogArray
     RibbonSubs.RefreshRibbon
 End Sub
 
@@ -215,7 +219,7 @@ Private Sub CommandButton_shortcuts_Click()
     
     ' Find the attached global template
     For Each WT In Application.Templates
-        If LCase(Left(WT, 7)) = "wordmat" And LCase(right(WT, 5)) = ".dotm" Then
+        If LCase(Left(WT, 7)) = "wordmat" And LCase(Right(WT, 5)) = ".dotm" Then
             CustomizationContext = WT
             TemplateFundet = True
             Exit For
@@ -254,12 +258,12 @@ Private Sub CommandButton_shortcuts_Click()
 #End If
     
     If Not KSok Then
-        MsgBox Sprog.A(741), vbOKOnly, Sprog.Error
+        MsgBox TT.A(741), vbOKOnly, TT.Error
     Else
 #If Mac Then
-        MsgBox2 Sprog.A(738)
+        MsgBox2 TT.A(738)
 #Else
-        MsgBox2 Sprog.A(739)
+        MsgBox2 TT.A(739)
         PrepareMaxima False
         MaxProc.OpenFolder "C:\Users\" & Environ$("username") & "\AppData\Roaming\Microsoft\Templates"
 #End If
@@ -272,9 +276,9 @@ End Sub
 
 Private Sub Label_checkpartnerskab_Click()
     If QActivePartnership(True) Then
-        MsgBox Sprog.A(120), vbOKOnly, "OK"
+        MsgBox TT.A(120), vbOKOnly, "OK"
     Else
-        MsgBox Sprog.A(121), vbOKOnly, "Sorry"
+        MsgBox TT.A(121), vbOKOnly, "Sorry"
     End If
 End Sub
 
@@ -298,6 +302,27 @@ Private Sub Label_ExportSettingsFile_MouseMove(ByVal Button As Integer, ByVal Sh
     Label_ExportSettingsFile.BackColor = LBColorHover
 End Sub
 
+Private Sub Label_ImportSettingsFile_Click()
+    LoadSettingsFromFile "", False, True
+    SetButtonsAccordingToSettings
+End Sub
+
+Private Sub Label_ImportSettingsFile_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ImportSettingsFile.BackColor = LBColorHover
+End Sub
+
+Private Sub Label_ShowMenus_Click()
+    If QActivePartnership Then
+        Application.Run macroname:="PQShowUFMenus"
+    Else
+        MsgBox2 "This feature requires WordMat+", vbOKOnly, "WordMat+"
+    End If
+End Sub
+
+Private Sub Label_ShowMenus_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ShowMenus.BackColor = LBColorHover
+End Sub
+
 Private Sub Label3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
 End Sub
@@ -319,7 +344,9 @@ End Sub
 Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
     Label_ExportSettingsFile.BackColor = LBColorInactive
+    Label_ImportSettingsFile.BackColor = LBColorInactive
     Label_checkpartnerskab.BackColor = LBColorInactive
+    Label_ShowMenus.BackColor = LBColorInactive
 End Sub
 
 Private Sub OptionButton_casmaxima_Change()
@@ -342,7 +369,7 @@ Private Sub UserForm_Activate()
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
     
-    Label_geogebraexplain.Caption = Sprog.A(740)
+    Label_geogebraexplain.Caption = TT.A(740)
 #If Mac Then
     OptionButton_graph.visible = False
     OptionButton_gnuplot.visible = False
@@ -359,6 +386,22 @@ Private Sub UserForm_Activate()
         ReadAllSettingsFromRegistry
     End If
     
+    SetButtonsAccordingToSettings
+        
+    MustRestart = False
+    LoadUnits = False
+    UserUnits = False
+    LangChange = False
+    
+    SetCasButtons
+
+    TextBox_code.Text = GetCodeFileText()
+
+    DoEvents
+
+End Sub
+
+Sub SetButtonsAccordingToSettings()
     CheckBox_Insertforklaring.Value = MaximaForklaring
     CheckBox_Insertmaximacommand.Value = MaximaKommando
     ComboBox_cifre.Value = MaximaCifre
@@ -373,6 +416,9 @@ Private Sub UserForm_Activate()
     CheckBox_polaroutput.Value = PolarOutput
     CheckBox_dasdiffchr.Value = dAsDiffChr
     CheckBox_askref.Value = EqAskRef
+    
+    CheckBox_UseCodeFile.Value = UseCodeFile
+    CheckBox_UseCodeBlocks.Value = UseCodeBlocks
     
     Label_antalb.Caption = AntalB
     
@@ -502,15 +548,6 @@ Private Sub UserForm_Activate()
     Else
         OptionButton_WSH.Value = True
     End If
-        
-    MustRestart = False
-    LoadUnits = False
-    UserUnits = False
-    LangChange = False
-    
-    SetCasButtons
-
-    DoEvents
 
 End Sub
 
@@ -537,8 +574,8 @@ End Sub
 Sub FillComboBoxDecType()
     ComboBox_DecType.Clear
     ComboBox_DecType.AddItem "Decimaler"
-    ComboBox_DecType.AddItem Sprog.A(687)
-    ComboBox_DecType.AddItem Sprog.A(669)
+    ComboBox_DecType.AddItem TT.A(687)
+    ComboBox_DecType.AddItem TT.A(669)
 End Sub
 Sub FillComboBoxLanguage()
     ComboBox_language.Clear
@@ -589,84 +626,89 @@ Sub FillComboBoxBackupTime()
 End Sub
 Sub FillComboBoxBackup()
     ComboBox_backup.Clear
-    ComboBox_backup.AddItem Sprog.A(175)
-    ComboBox_backup.AddItem Sprog.A(176)
-    ComboBox_backup.AddItem Sprog.A(177)
+    ComboBox_backup.AddItem TT.A(175)
+    ComboBox_backup.AddItem TT.A(176)
+    ComboBox_backup.AddItem TT.A(177)
 End Sub
     
 Sub SetCaptions()
-    Me.Caption = Sprog.A(443)
+    Me.Caption = TT.A(443)
     
-    MultiPage1.Pages("Page1").Caption = Sprog.A(414)
-    MultiPage1.Pages("Page2").Caption = Sprog.A(666)
-    MultiPage1.Pages("Page3").Caption = Sprog.A(668)
-    MultiPage1.Pages("Page4").Caption = Sprog.A(262)
-    MultiPage1.Pages("Page5").Caption = Sprog.A(667)
-    MultiPage1.Pages("Page6").Caption = Sprog.A(7)
+    MultiPage1.Pages("Page1").Caption = TT.A(414)
+    MultiPage1.Pages("Page2").Caption = TT.A(666)
+    MultiPage1.Pages("Page3").Caption = TT.A(668)
+    MultiPage1.Pages("Page4").Caption = TT.A(262)
+    MultiPage1.Pages("Page5").Caption = TT.A(667)
+    MultiPage1.Pages("Page6").Caption = TT.A(7)
     
     Label_TAB1.Caption = "CAS"
-    Label_TAB2.Caption = Sprog.A(666)
-    Label_TAB3.Caption = Sprog.A(667)
-    Label_TAB4.Caption = Sprog.A(262)
-    Label_TAB5.Caption = Sprog.A(7)
+    Label_TAB2.Caption = TT.A(666)
+    Label_TAB3.Caption = TT.A(667)
+    Label_TAB4.Caption = TT.A(262)
+    Label_TAB5.Caption = TT.A(7)
     Label_TAB6.Caption = "Backup"
-    Label_TAB7.Caption = Sprog.A(668)
+    Label_TAB7.Caption = "Code" 'TT.A()
+    Label_TAB8.Caption = TT.A(668)
     
-    Label_cancel.Caption = Sprog.Cancel
-    CommandButton_ok.Caption = Sprog.OK
-    CheckBox_complex.Caption = Sprog.A(670)
-    CheckBox_units.Caption = Sprog.A(262)
-    CheckBox_polaroutput.Caption = Sprog.A(680)
-    Frame1.Caption = Sprog.A(708)
-    OptionButton_grader.Caption = Sprog.A(706)
-    OptionButton_radianer.Caption = Sprog.A(707)
-    CheckBox_showassum.Caption = Sprog.A(709)
+    Label_cancel.Caption = TT.Cancel
+    CommandButton_ok.Caption = TT.OK
+    CheckBox_complex.Caption = TT.A(670)
+    CheckBox_units.Caption = TT.A(262)
+    CheckBox_polaroutput.Caption = TT.A(680)
+    Frame1.Caption = TT.A(708)
+    OptionButton_grader.Caption = TT.A(706)
+    OptionButton_radianer.Caption = TT.A(707)
+    CheckBox_showassum.Caption = TT.A(709)
     
-    Frame5.Caption = Sprog.A(710) & " ?"
-    OptionButton_exactandnum.Caption = Sprog.A(712) & "  (x=" & ChrW(960) & "=3.14)"
-    OptionButton_exactonly.Caption = Sprog.A(710) & "  (x=" & ChrW(960) & ")"
-    OptionButton_numonly.Caption = Sprog.A(711) & "  (x=3.14)"
-    CheckBox_bigfloat.Caption = Sprog.A(713)
-    CheckBox_Insertforklaring.Caption = Sprog.A(714)
-    CheckBox_Insertmaximacommand.Caption = Sprog.A(715)
-    Frame3.Caption = Sprog.A(716)
-    Label_list.Caption = Sprog.A(717)
-    Frame2.Caption = Sprog.A(718)
-    OptionButton_prik.Caption = VBA.ChrW(183) & " (" & Sprog.A(719) & ")"
-    Frame4.Caption = Sprog.A(720)
-    OptionButton_lmbool.Caption = Sprog.A(721) & ": x=1 v x=2"
-    OptionButton_lmset.Caption = Sprog.A(722) & ": L={1,2}"
-    Frame8.Caption = Sprog.A(723)
-    OptionButton_indextext.Caption = Sprog.A(724)
-    OptionButton_indexvar.Caption = Sprog.A(725)
-    Frame9.Caption = Sprog.A(726)
-    CheckBox_indlejret.Caption = Sprog.A(727)
-    Label_outputunits.Caption = Sprog.A(168)
-    CommandButton_sletenheder.Caption = Sprog.A(815)
-    Label_unithelp.Caption = Sprog.A(729)
-    Label_unitexamples.Caption = Sprog.A(730)
-    FrameLog.Caption = Sprog.A(816) & " output"
-    FrameTrig.Caption = Sprog.A(731)
-    OptionButton_trigall.Caption = Sprog.A(732)
-    OptionButton_trigone.Caption = Sprog.A(733)
-    CheckBox_checkupdate.Caption = Sprog.A(734)
-    CommandButton_shortcuts.Caption = Sprog.A(735)
-    CommandButton_restartmaxima.Caption = Sprog.A(736)
-    Label_language.Caption = Sprog.A(817)
-    Label_calculationcount.Caption = Sprog.A(737) & ":"
-    CheckBox_dasdiffchr.Caption = Sprog.A(840)
-    CheckBox_dasdiffchr.ControlTipText = Sprog.A(841)
-    Frame_side.Caption = Sprog.A(15)
-    OptionButton_placementleft.Caption = Sprog.A(16)
-    OptionButton_placementright.Caption = Sprog.A(17)
-    Frame_eqnumtype.Caption = Sprog.A(18)
-    CheckBox_askref.Caption = Sprog.A(19)
-    Label_Backupexplain.Caption = Sprog.A(173)
-    Label_backuptime.Caption = Sprog.A(172)
-    Label_savebackup.Caption = Sprog.A(170)
-    Label_backupmaxno.Caption = Sprog.A(171)
-    CommandButton_openbackup.Caption = Sprog.A(174)
-    Frame_casengine.Caption = Sprog.A(686)
+    Frame5.Caption = TT.A(710) & " ?"
+    OptionButton_exactandnum.Caption = TT.A(712) & "  (x=" & ChrW(960) & "=3.14)"
+    OptionButton_exactonly.Caption = TT.A(710) & "  (x=" & ChrW(960) & ")"
+    OptionButton_numonly.Caption = TT.A(711) & "  (x=3.14)"
+    CheckBox_bigfloat.Caption = TT.A(713)
+    CheckBox_Insertforklaring.Caption = TT.A(714)
+    CheckBox_Insertmaximacommand.Caption = TT.A(715)
+    Frame3.Caption = TT.A(716)
+    Label_list.Caption = TT.A(717)
+    Frame2.Caption = TT.A(718)
+    OptionButton_prik.Caption = VBA.ChrW(183) & " (" & TT.A(719) & ")"
+    Frame4.Caption = TT.A(720)
+    OptionButton_lmbool.Caption = TT.A(721) & ": x=1 v x=2"
+    OptionButton_lmset.Caption = TT.A(722) & ": L={1,2}"
+    Frame8.Caption = TT.A(723)
+    OptionButton_indextext.Caption = TT.A(724)
+    OptionButton_indexvar.Caption = TT.A(725)
+    Frame9.Caption = TT.A(726)
+    CheckBox_indlejret.Caption = TT.A(727)
+    Label_outputunits.Caption = TT.A(168)
+    CommandButton_sletenheder.Caption = TT.A(815)
+    Label_unithelp.Caption = TT.A(729)
+    Label_unitexamples.Caption = TT.A(730)
+    FrameLog.Caption = TT.A(816) & " output"
+    FrameTrig.Caption = TT.A(731)
+    OptionButton_trigall.Caption = TT.A(732)
+    OptionButton_trigone.Caption = TT.A(733)
+    CheckBox_checkupdate.Caption = TT.A(734)
+    CommandButton_shortcuts.Caption = TT.A(735)
+    CommandButton_restartmaxima.Caption = TT.A(736)
+    Label_language.Caption = TT.A(817)
+    Label_calculationcount.Caption = TT.A(737) & ":"
+    CheckBox_dasdiffchr.Caption = TT.A(840)
+    CheckBox_dasdiffchr.ControlTipText = TT.A(841)
+    Frame_side.Caption = TT.A(15)
+    OptionButton_placementleft.Caption = TT.A(16)
+    OptionButton_placementright.Caption = TT.A(17)
+    Frame_eqnumtype.Caption = TT.A(18)
+    CheckBox_askref.Caption = TT.A(19)
+    Label_Backupexplain.Caption = TT.A(173)
+    Label_backuptime.Caption = TT.A(172)
+    Label_savebackup.Caption = TT.A(170)
+    Label_backupmaxno.Caption = TT.A(171)
+    CommandButton_openbackup.Caption = TT.A(174)
+    Frame_casengine.Caption = TT.A(686)
+    Label_ImportSettingsFile.Caption = TT.A(541)
+    Label_ExportSettingsFile.Caption = TT.A(542)
+    Label_ShowMenus.Caption = TT.A(543)
+    
 #If Mac Then
     Label_casexplain.visible = True
 #Else
@@ -738,6 +780,11 @@ Private Sub Label_TAB7_Click()
     SetTabsInactive
     Label_TAB7.BackColor = LBColorTABPress
 End Sub
+Private Sub Label_TAB8_Click()
+    MultiPage1.Value = 7
+    SetTabsInactive
+    Label_TAB8.BackColor = LBColorTABPress
+End Sub
 Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_cancel.BackColor = LBColorPress
 End Sub
@@ -799,6 +846,13 @@ Private Sub Label_TAB7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer
     SetTabsInactive
     If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorHover
 End Sub
+Private Sub Label_TAB8_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_TAB8.BackColor = LBColorPress
+End Sub
+Private Sub Label_TAB8_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    SetTabsInactive
+    If MultiPage1.Value <> 7 Then Label_TAB8.BackColor = LBColorHover
+End Sub
 
 Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
     MsgBox KeyCode
@@ -819,6 +873,7 @@ Sub SetTabsInactive()
     If MultiPage1.Value <> 4 Then Label_TAB5.BackColor = LBColorInactive
     If MultiPage1.Value <> 5 Then Label_TAB6.BackColor = LBColorInactive
     If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorInactive
+    If MultiPage1.Value <> 7 Then Label_TAB8.BackColor = LBColorInactive
     
 End Sub
 

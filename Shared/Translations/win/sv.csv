@@ -539,9 +539,9 @@
 538#£Välj uttryck som du vill särskilja eller placera markören i uttrycket.
 539#£Trunk-funktion
 540#£Hittar stamfunktion för valda uttryck (obestämda integraler).
-541#£
-542#£
-543#£
+541#£Importera inställningar
+542#£Exportera inställningar
+543#£Anpassa menyn
 544#£
 545#£Visa graf (Alt+P)
 546#£Visar grafen för de valda funktionerna/ekvationerna/ekvationerna och punkterna. Grafen kan sedan infogas i dokumentet. Olika grafprogram stöds. Välj din favorit i inställningarna eller välj genom att expandera den här knappen
@@ -688,10 +688,10 @@
 687#£Signifikanta siffror
 688#£Slå på/av enheter
 689#£Om enheter är aktiverade kan WordMat förstå och konvertera enheter. På SI-knappen kan du ange vilka enheter du vill konvertera till. Som standard är utdata i SI-enheter. Slå inte på enheter om du inte specifikt behöver det. Det kan påverka WordMats beteende och reserverar många variabler.
-690#£
+690#£Infoga kodblock
 691#£Ange vilka enheter som ska konverteras till för beräkningar. Som standard är utdata i SI-enheter
 692#£s.s.
-693#£
+693#£Ett kodblock är ett område där du kan programmera Maxima direkt. Du kan till exempel definiera mer avancerade funktioner som sedan kan användas längre ner i dokumentet. Se mer i manualen.
 694#£Antal siffror
 695#£Nummeravrundning
 696#£Välj hur tal ska skrivas och avrundas. I exemplen nedan är WordMat satt till 3 siffror.\r\n\r\nAntal decimaler: 12,345\r\nSignifikanta siffror: 12,3\r\nVid. Notation: 1.23*10^1

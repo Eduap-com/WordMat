@@ -539,9 +539,9 @@
 538#£Seleccione las expresiones que desea diferenciar o coloque el cursor en la expresión.
 539#£Función de maletero
 540#£Encuentra la función de raíz para las expresiones seleccionadas (integrales indefinidas).
-541#£
-542#£
-543#£
+541#£Configuración de importación
+542#£Configuración de exportación
+543#£Personalizar menú
 544#£
 545#£Ver gráfico (Alt+P)
 546#£Muestra el gráfico de las funciones/ecuaciones/ecuaciones y puntos seleccionados. El gráfico se puede insertar posteriormente en el documento. Se admiten varios programas de gráficos. Seleccione su favorito en la configuración o seleccione expandiendo este botón
@@ -688,10 +688,10 @@
 687#£Cifras significativas
 688#£Encender/apagar dispositivos
 689#£Si las unidades están activadas, WordMat puede entender y convertir las unidades. En el botón SI, puede especificar a qué unidades desea convertir. De forma predeterminada, la salida se expresa en unidades SI. No enciendas dispositivos a menos que lo necesites específicamente. Puede afectar el comportamiento del WordMat y reserva muchas variables.
-690#£
+690#£Bloque de código de inserción
 691#£Especifique las unidades a las que se va a convertir para los cálculos. De forma predeterminada, la salida se expresa en unidades SI
 692#£cf
-693#£
+693#£Un bloque de código es un área en la que se puede programar Maxima directamente. Por ejemplo, puede definir funciones más avanzadas que luego se pueden utilizar más adelante en el documento. Más información en el manual.
 694#£Número de dígitos
 695#£Redondeo de números
 696#£Elige cómo se escriben y redondean los números. En los siguientes ejemplos, WordMat se establece en 3 dígitos.\r\n\r\nNúmero de decimales: 12,345\r\nDígitos significativos: 12,3\r\nVid. Notación: 1.23*10^1

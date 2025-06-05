@@ -120,7 +120,7 @@ On Error GoTo Fejl
     Selection.Collapse wdCollapseEnd
 '    If MaximaForklaring Then
         Selection.TypeParagraph
-        Selection.TypeText Sprog.A(782) & inputtext
+        Selection.TypeText TT.A(782) & inputtext
         Selection.TypeParagraph
 '    End If
     Selection.TypeParagraph
@@ -156,7 +156,7 @@ On Error GoTo Fejl
     
     'If 2 solutions
     If vA2 > 0 Then
-    MsgBox Sprog.A(783), vbOKOnly, Sprog.A(785)
+    MsgBox TT.A(783), vbOKOnly, TT.A(785)
     Set t = ActiveDocument.Tables.Add(Selection.Range, 1, 2)
     
     Set r = t.Cell(1, 1).Range
@@ -209,7 +209,7 @@ On Error GoTo Fejl
     
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(786), vbOKOnly, Sprog.Error
+    MsgBox TT.A(786), vbOKOnly, TT.Error
     Exit Sub
 slut:
     SaveSettings
@@ -292,31 +292,31 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         
     ' vinkelsum over 180
     If vA + vB + vC > 180 Then
-        statustext = Sprog.A(209) ' "Vinkelsummen er over 180"
-        If advarsler Then MsgBox Sprog.A(209), vbOKOnly, Sprog.Error
+        statustext = TT.A(209) ' "Vinkelsummen er over 180"
+        If advarsler Then MsgBox TT.A(209), vbOKOnly, TT.Error
         Exit Sub
     End If
     
     If nv + ns < 3 Then
-        statustext = Sprog.A(784)
-        If advarsler Then MsgBox Sprog.A(784) & vbCrLf & Sprog.A(210), vbOKOnly, Sprog.Error
+        statustext = TT.A(784)
+        If advarsler Then MsgBox TT.A(784) & vbCrLf & TT.A(210), vbOKOnly, TT.Error
         Exit Sub
     ElseIf nv + ns > 3 Then
         If nv = 3 And ns = 1 Then
             If vA > 0 And vB > 0 And vC > 0 And vA + vB + vC <> 180 Then
-                statustext = Sprog.A(211) ' "The sum of the angles is not 180"
-                If advarsler Then MsgBox Sprog.A(211), vbOKOnly, Sprog.Error
+                statustext = TT.A(211) ' "The sum of the angles is not 180"
+                If advarsler Then MsgBox TT.A(211), vbOKOnly, TT.Error
                 Exit Sub
             End If
         Else
-            statustext = Sprog.A(212) ' "You have entered too many sides/angles."
-            If advarsler Then MsgBox Sprog.A(212) & vbCrLf & Sprog.A(213), vbOKOnly, Sprog.Error
+            statustext = TT.A(212) ' "You have entered too many sides/angles."
+            If advarsler Then MsgBox TT.A(212) & vbCrLf & TT.A(213), vbOKOnly, TT.Error
             Exit Sub
         End If
     Else
         If nv = 3 And ns = 0 Then
-        statustext = Sprog.A(214) ' "At least one side must be known. 3 angles are not enough."
-        If advarsler Then MsgBox Sprog.A(214) & vbCrLf & Sprog.A(213), vbOKOnly, Sprog.Error
+        statustext = TT.A(214) ' "At least one side must be known. 3 angles are not enough."
+        If advarsler Then MsgBox TT.A(214) & vbCrLf & TT.A(213), vbOKOnly, TT.Error
         Exit Sub
         End If
     End If
@@ -326,13 +326,13 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
     If nv = 2 Then
     If vA > 0 And vB > 0 And vC = 0 Then
         vC = 180 - vA - vB
-        AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+        AddElaborate TT.A(215) & " " & vCn & " " & TT.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
     ElseIf vA > 0 And vB = 0 And vC > 0 Then
         vB = 180 - vA - vC
-        AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(216), vBn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vCn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
+        AddElaborate TT.A(215) & " " & vBn & " " & TT.A(216), vBn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vCn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
     ElseIf vA = 0 And vB > 0 And vC > 0 Then
         vA = 180 - vB - vC
-        AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vBn & "-" & vCn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+        AddElaborate TT.A(215) & " " & vAn & " " & TT.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vBn & "-" & vCn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
     End If
     End If
     
@@ -341,38 +341,38 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         If ns = 2 Then
             If SA > 0 And sb > 0 Then
                 sc = Sqr(SA ^ 2 + sb ^ 2)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(218), scn & "=" & VBA.ChrW(8730) & "(" & san & "^2+" & sbn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(SA) & "^2+" & ConvertNumberToStringBC(sb) & "^2)=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(218), scn & "=" & VBA.ChrW(8730) & "(" & san & "^2+" & sbn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(SA) & "^2+" & ConvertNumberToStringBC(sb) & "^2)=" & ConvertNumberToStringBC(sc)
                 vA = Atn(SA / sb) * 180 / PI
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(220), vAn & "=tan^-1 (" & san & "/" & sbn & ")=tan^-1 (" & ConvertNumberToStringBC(SA) & "/" & ConvertNumberToStringBC(sb) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(220), vAn & "=tan^-1 (" & san & "/" & sbn & ")=tan^-1 (" & ConvertNumberToStringBC(SA) & "/" & ConvertNumberToStringBC(sb) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
             ElseIf SA > 0 And sc > 0 Then
                 sb = Sqr(sc ^ 2 - SA ^ 2)
-                AddElaborate Sprog.A(217) & sbn & " " & Sprog.A(218), sbn & "=" & VBA.ChrW(8730) & "(" & scn & "^2-" & san & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sc) & "^2-" & ConvertNumberToStringBC(SA) & "^2)=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(217) & sbn & " " & TT.A(218), sbn & "=" & VBA.ChrW(8730) & "(" & scn & "^2-" & san & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sc) & "^2-" & ConvertNumberToStringBC(SA) & "^2)=" & ConvertNumberToStringBC(sb)
                 vA = Arcsin(SA / sc) * 180 / PI
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(221), vAn & "=sin^-1 (" & san & "/" & scn & ")=sin^-1 (" & ConvertNumberToStringBC(SA) & "/" & ConvertNumberToStringBC(sc) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(221), vAn & "=sin^-1 (" & san & "/" & scn & ")=sin^-1 (" & ConvertNumberToStringBC(SA) & "/" & ConvertNumberToStringBC(sc) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
             ElseIf sb > 0 And sc > 0 Then
                 SA = Sqr(sc ^ 2 - sb ^ 2)
-                AddElaborate Sprog.A(217) & san & " " & Sprog.A(218), san & "=" & VBA.ChrW(8730) & "(" & scn & "^2-" & sbn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sc) & "^2-" & ConvertNumberToStringBC(sb) & "^2)=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(217) & san & " " & TT.A(218), san & "=" & VBA.ChrW(8730) & "(" & scn & "^2-" & sbn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sc) & "^2-" & ConvertNumberToStringBC(sb) & "^2)=" & ConvertNumberToStringBC(SA)
                 vA = Arccos(sb / sc) * 180 / PI
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(222), vAn & "=cos^-1 (" & sbn & "/" & scn & ")=cos^-1 (" & ConvertNumberToStringBC(sb) & "/" & ConvertNumberToStringBC(sc) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(222), vAn & "=cos^-1 (" & sbn & "/" & scn & ")=cos^-1 (" & ConvertNumberToStringBC(sb) & "/" & ConvertNumberToStringBC(sc) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
             End If
             vB = 90 - vA
-            AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(216), vBn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vAn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
+            AddElaborate TT.A(215) & " " & vBn & " " & TT.A(216), vBn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vAn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
         ElseIf ns = 1 Then
             If SA > 0 Then
                 sb = SA / Tan(vA * PI / 180)
                 sc = SA / Sin(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(220), sbn & "=" & san & "/tan(" & vAn & ")=" & ConvertNumberToStringBC(SA) & "/tan(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sb)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(221), scn & "=" & san & "/sin(" & vAn & ")=" & ConvertNumberToStringBC(SA) & "/sin(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(220), sbn & "=" & san & "/tan(" & vAn & ")=" & ConvertNumberToStringBC(SA) & "/tan(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(221), scn & "=" & san & "/sin(" & vAn & ")=" & ConvertNumberToStringBC(SA) & "/sin(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sc)
             ElseIf sb > 0 Then
                 SA = sb * Tan(vA * PI / 180)
                 sc = sb / Cos(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(220), san & "=" & sbn & VBA.ChrW(183) & "tan(" & vAn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "tan(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(SA)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(222), scn & "=" & sbn & "/cos(" & vAn & ")=" & ConvertNumberToStringBC(sb) & "/cos(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(220), san & "=" & sbn & VBA.ChrW(183) & "tan(" & vAn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "tan(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(222), scn & "=" & sbn & "/cos(" & vAn & ")=" & ConvertNumberToStringBC(sb) & "/cos(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sc)
             ElseIf sc > 0 Then
                 SA = sc * Sin(vA * PI / 180)
                 sb = sc * Cos(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(221), san & "=" & scn & VBA.ChrW(183) & "sin(" & vAn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(SA)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(222), sbn & "=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(221), san & "=" & scn & VBA.ChrW(183) & "sin(" & vAn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(222), sbn & "=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sb)
             End If
         End If
         GoTo slut
@@ -380,38 +380,38 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         If ns = 2 Then
             If SA > 0 And sb > 0 Then
                 sc = Sqr(SA ^ 2 - sb ^ 2)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(218), scn & "=" & VBA.ChrW(8730) & "(" & san & "^2-" & sbn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(SA) & "^2-" & ConvertNumberToStringBC(sb) & "^2)=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(218), scn & "=" & VBA.ChrW(8730) & "(" & san & "^2-" & sbn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(SA) & "^2-" & ConvertNumberToStringBC(sb) & "^2)=" & ConvertNumberToStringBC(sc)
                 vC = Arccos(sb / SA) * 180 / PI
-                AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(222), vCn & "=cos^-1 (" & sbn & "/" & san & ")=cos^-1 (" & ConvertNumberToStringBC(sb) & "/" & ConvertNumberToStringBC(SA) & ")=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vCn & " " & TT.A(222), vCn & "=cos^-1 (" & sbn & "/" & san & ")=cos^-1 (" & ConvertNumberToStringBC(sb) & "/" & ConvertNumberToStringBC(SA) & ")=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
             ElseIf SA > 0 And sc > 0 Then
                 sb = Sqr(SA ^ 2 - sc ^ 2)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(218), sbn & "=" & VBA.ChrW(8730) & "(" & san & "^2-" & scn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(SA) & "^2-" & ConvertNumberToStringBC(sc) & "^2)=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(218), sbn & "=" & VBA.ChrW(8730) & "(" & san & "^2-" & scn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(SA) & "^2-" & ConvertNumberToStringBC(sc) & "^2)=" & ConvertNumberToStringBC(sb)
                 vC = Arcsin(sc / SA) * 180 / PI
-                AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(221), vCn & "=sin^-1 (" & scn & "/" & san & ")=sin^-1 (" & ConvertNumberToStringBC(sc) & "/" & ConvertNumberToStringBC(SA) & ")=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vCn & " " & TT.A(221), vCn & "=sin^-1 (" & scn & "/" & san & ")=sin^-1 (" & ConvertNumberToStringBC(sc) & "/" & ConvertNumberToStringBC(SA) & ")=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
             ElseIf sb > 0 And sc > 0 Then
                 SA = Sqr(sc ^ 2 + sb ^ 2)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(218), san & "=" & VBA.ChrW(8730) & "(" & scn & "^2+" & sbn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sc) & "^2+" & ConvertNumberToStringBC(sb) & "^2)=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(218), san & "=" & VBA.ChrW(8730) & "(" & scn & "^2+" & sbn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sc) & "^2+" & ConvertNumberToStringBC(sb) & "^2)=" & ConvertNumberToStringBC(SA)
                 vC = Atn(sc / sb) * 180 / PI
-                AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(220), vCn & "=tan^-1 (" & scn & "/" & sbn & ")=tan^-1 (" & ConvertNumberToStringBC(sc) & "/" & ConvertNumberToStringBC(sb) & ")=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vCn & " " & TT.A(220), vCn & "=tan^-1 (" & scn & "/" & sbn & ")=tan^-1 (" & ConvertNumberToStringBC(sc) & "/" & ConvertNumberToStringBC(sb) & ")=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
             End If
             vB = 90 - vC
-            AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(216), vBn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vCn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
+            AddElaborate TT.A(215) & " " & vBn & " " & TT.A(216), vBn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vCn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
         ElseIf ns = 1 Then
             If sc > 0 Then
                 SA = sc / Sin(vC * PI / 180)
                 sb = sc / Tan(vC * PI / 180)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(221), san & "=" & scn & "/sin(" & vCn & ")=" & ConvertNumberToStringBC(sc) & "/sin(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(SA)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(220), sbn & "=" & scn & "/tan(" & vCn & ")=" & ConvertNumberToStringBC(sc) & "/tan(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(221), san & "=" & scn & "/sin(" & vCn & ")=" & ConvertNumberToStringBC(sc) & "/sin(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(220), sbn & "=" & scn & "/tan(" & vCn & ")=" & ConvertNumberToStringBC(sc) & "/tan(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sb)
             ElseIf sb > 0 Then
                 SA = sb / Cos(vC * PI / 180)
                 sc = sb * Tan(vC * PI / 180)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(222), san & "=" & sbn & "/cos(" & vCn & ")=" & ConvertNumberToStringBC(sb) & "/cos(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(SA)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(220), scn & "=" & sbn & VBA.ChrW(183) & "tan(" & vCn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "tan(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(222), san & "=" & sbn & "/cos(" & vCn & ")=" & ConvertNumberToStringBC(sb) & "/cos(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(220), scn & "=" & sbn & VBA.ChrW(183) & "tan(" & vCn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "tan(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sc)
             ElseIf SA > 0 Then
                 sb = SA * Cos(vC * PI / 180)
                 sc = SA * Sin(vC * PI / 180)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(222), sbn & "=" & san & VBA.ChrW(183) & "cos(" & vCn & ")=" & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sb)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(221), scn & "=" & san & VBA.ChrW(183) & "sin(" & vCn & ")=" & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(222), sbn & "=" & san & VBA.ChrW(183) & "cos(" & vCn & ")=" & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(221), scn & "=" & san & VBA.ChrW(183) & "sin(" & vCn & ")=" & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sc)
             End If
         End If
         GoTo slut
@@ -419,38 +419,38 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         If ns = 2 Then
             If SA > 0 And sb > 0 Then
                 sc = Sqr(sb ^ 2 - SA ^ 2)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(218), scn & "=" & VBA.ChrW(8730) & "(" & sbn & "^2-" & san & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2-" & ConvertNumberToStringBC(SA) & "^2)=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(218), scn & "=" & VBA.ChrW(8730) & "(" & sbn & "^2-" & san & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2-" & ConvertNumberToStringBC(SA) & "^2)=" & ConvertNumberToStringBC(sc)
                 vA = Arcsin(SA / sb) * 180 / PI
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(221), vAn & "=sin^-1 (" & san & "/" & sbn & ")=sin^-1 (" & ConvertNumberToStringBC(SA) & "/" & ConvertNumberToStringBC(sb) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(221), vAn & "=sin^-1 (" & san & "/" & sbn & ")=sin^-1 (" & ConvertNumberToStringBC(SA) & "/" & ConvertNumberToStringBC(sb) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
             ElseIf SA > 0 And sc > 0 Then
                 sb = Sqr(sc ^ 2 + SA ^ 2)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(218), sbn & "=" & VBA.ChrW(8730) & "(" & scn & "^2+" & san & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sc) & "^2+" & ConvertNumberToStringBC(SA) & "^2)=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(218), sbn & "=" & VBA.ChrW(8730) & "(" & scn & "^2+" & san & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sc) & "^2+" & ConvertNumberToStringBC(SA) & "^2)=" & ConvertNumberToStringBC(sb)
                 vA = Atn(SA / sc) * 180 / PI
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(220), vAn & "=tan^-1 (" & san & "/" & scn & ")=tan^-1 (" & ConvertNumberToStringBC(SA) & "/" & ConvertNumberToStringBC(sc) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(220), vAn & "=tan^-1 (" & san & "/" & scn & ")=tan^-1 (" & ConvertNumberToStringBC(SA) & "/" & ConvertNumberToStringBC(sc) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
             ElseIf sb > 0 And sc > 0 Then
                 SA = Sqr(sb ^ 2 - sc ^ 2)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(218), san & "=" & VBA.ChrW(8730) & "(" & sbn & "^2-" & scn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2-" & ConvertNumberToStringBC(sc) & "^2)=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(218), san & "=" & VBA.ChrW(8730) & "(" & sbn & "^2-" & scn & "^2)=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2-" & ConvertNumberToStringBC(sc) & "^2)=" & ConvertNumberToStringBC(SA)
                 vA = Arccos(sc / sb) * 180 / PI
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(222), vAn & "=cos^-1 (" & scn & "/" & sbn & ")=cos^-1 (" & ConvertNumberToStringBC(sc) & "/" & ConvertNumberToStringBC(sb) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(222), vAn & "=cos^-1 (" & scn & "/" & sbn & ")=cos^-1 (" & ConvertNumberToStringBC(sc) & "/" & ConvertNumberToStringBC(sb) & ")=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
             End If
             vC = 90 - vA
-            AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vBn & "-" & vAn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+            AddElaborate TT.A(215) & " " & vCn & " " & TT.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vBn & "-" & vAn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
         ElseIf ns = 1 Then
             If SA > 0 Then
                 sb = SA / Sin(vA * PI / 180)
                 sc = SA / Tan(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(221), sbn & "=" & san & "/sin(" & vAn & ")=" & ConvertNumberToStringBC(SA) & "/sin(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sb)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(220), scn & "=" & san & "/tan(" & vAn & ")=" & ConvertNumberToStringBC(SA) & "/tan(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(221), sbn & "=" & san & "/sin(" & vAn & ")=" & ConvertNumberToStringBC(SA) & "/sin(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(220), scn & "=" & san & "/tan(" & vAn & ")=" & ConvertNumberToStringBC(SA) & "/tan(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sc)
             ElseIf sc > 0 Then
                 SA = sc * Tan(vA * PI / 180)
                 sb = sc / Cos(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(220), san & "=" & scn & VBA.ChrW(183) & "tan(" & vAn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "tan(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(SA)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(222), sbn & "=" & scn & "/cos(" & vAn & ")=" & ConvertNumberToStringBC(sc) & "/cos(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(220), san & "=" & scn & VBA.ChrW(183) & "tan(" & vAn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "tan(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(222), sbn & "=" & scn & "/cos(" & vAn & ")=" & ConvertNumberToStringBC(sc) & "/cos(" & ConvertNumberToStringBC(vA) & ")=" & ConvertNumberToStringBC(sb)
             ElseIf sb > 0 Then
                 SA = sb * Cos(vC * PI / 180)
                 sc = sb * Sin(vC * PI / 180)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(222), san & "=" & sbn & VBA.ChrW(183) & "cos(" & vCn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(SA)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(221), scn & "=" & sbn & VBA.ChrW(183) & "sin(" & vCn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(222), san & "=" & sbn & VBA.ChrW(183) & "cos(" & vCn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(221), scn & "=" & sbn & VBA.ChrW(183) & "sin(" & vCn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vC) & ")=" & ConvertNumberToStringBC(sc)
             End If
         End If
         GoTo slut
@@ -461,24 +461,24 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         vA = Arccos((sc ^ 2 + sb ^ 2 - SA ^ 2) / (2 * sc * sb)) * 180 / PI
         vB = Arccos((SA ^ 2 + sc ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
         vC = 180 - vB - vA
-        AddElaborate Sprog.A(215) & " " & vAn & " og " & vBn & " " & Sprog.A(223), vAn & "=cos^(-1) ((" & scn & "^2 + " & sbn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(sb) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+        AddElaborate TT.A(215) & " " & vAn & " og " & vBn & " " & TT.A(223), vAn & "=cos^(-1) ((" & scn & "^2 + " & sbn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(sb) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
         AddElaborate "", vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
-        AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+        AddElaborate TT.A(215) & " " & vCn & " " & TT.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
     ElseIf ns = 1 Then
         If SA > 0 Then
             sb = SA * Sin(vB * PI / 180) / Sin(vA * PI / 180)
             sc = SA * Sin(vC * PI / 180) / Sin(vA * PI / 180)
-            AddElaborate Sprog.A(219) & " " & sbn & " og " & scn & " " & Sprog.A(224), sbn & "=" & san & VBA.ChrW(183) & "sin(" & vBn & ")/sin(" & vAn & ")=" & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & ")/sin(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & ")=" & ConvertNumberToStringBC(sb)
+            AddElaborate TT.A(219) & " " & sbn & " og " & scn & " " & TT.A(224), sbn & "=" & san & VBA.ChrW(183) & "sin(" & vBn & ")/sin(" & vAn & ")=" & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & ")/sin(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & ")=" & ConvertNumberToStringBC(sb)
             AddElaborate "", scn & "=" & san & VBA.ChrW(183) & "sin(" & vCn & ")/sin(" & vAn & ")=" & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & ")/sin(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & ")=" & ConvertNumberToStringBC(sc)
         ElseIf sb > 0 Then
             SA = sb * Sin(vA * PI / 180) / Sin(vB * PI / 180)
             sc = sb * Sin(vC * PI / 180) / Sin(vB * PI / 180)
-            AddElaborate Sprog.A(219) & " " & san & " og " & scn & " " & Sprog.A(224), san & "=" & sbn & VBA.ChrW(183) & "sin(" & vAn & ")/sin(" & vBn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & ")/sin(" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & ")=" & ConvertNumberToStringBC(SA)
+            AddElaborate TT.A(219) & " " & san & " og " & scn & " " & TT.A(224), san & "=" & sbn & VBA.ChrW(183) & "sin(" & vAn & ")/sin(" & vBn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & ")/sin(" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & ")=" & ConvertNumberToStringBC(SA)
             AddElaborate "", scn & "=" & sbn & VBA.ChrW(183) & "sin(" & vCn & ")/sin(" & vBn & ")=" & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & ")/sin(" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & ")=" & ConvertNumberToStringBC(sc)
         Else ' sc>0
             SA = sc * Sin(vA * PI / 180) / Sin(vC * PI / 180)
             sb = sc * Sin(vB * PI / 180) / Sin(vC * PI / 180)
-            AddElaborate Sprog.A(219) & " " & san & " og " & sbn & " " & Sprog.A(224), san & "=" & scn & VBA.ChrW(183) & "sin(" & vAn & ")/sin(" & vCn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & ")/sin(" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & ")=" & ConvertNumberToStringBC(SA)
+            AddElaborate TT.A(219) & " " & san & " og " & sbn & " " & TT.A(224), san & "=" & scn & VBA.ChrW(183) & "sin(" & vAn & ")/sin(" & vCn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & ")/sin(" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & ")=" & ConvertNumberToStringBC(SA)
             AddElaborate "", sbn & "=" & scn & VBA.ChrW(183) & "sin(" & vBn & ")/sin(" & vCn & ")=" & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "sin(" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & ")/sin(" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & ")=" & ConvertNumberToStringBC(sb)
         End If
     ElseIf ns = 2 Then
@@ -487,9 +487,9 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 SA = Sqr(sb ^ 2 + sc ^ 2 - 2 * sb * sc * Cos(vA * PI / 180))
                 vB = Arccos((SA ^ 2 + sc ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vC = 180 - vB - vA
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(223), san & "=" & VBA.ChrW(8730) & "(" & sbn & "^2 + " & scn & "^2 - 2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & "))=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - 2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "))=" & ConvertNumberToStringBC(SA)
-                AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
-                AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(223), san & "=" & VBA.ChrW(8730) & "(" & sbn & "^2 + " & scn & "^2 - 2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & "))=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - 2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "))=" & ConvertNumberToStringBC(SA)
+                AddElaborate TT.A(215) & " " & vBn & " " & TT.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vCn & " " & TT.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
             ElseIf SA > 0 And sb > 0 Then ' sides not next to angle
                 D = SA ^ 2 - sb ^ 2 * Sin(vA * PI / 180) ^ 2
                 If D < 0 Then ' no solution
@@ -500,21 +500,21 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 vB = Arccos((SA ^ 2 + sc ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vC = 180 - vB - vA
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(223), san & "^2=" & sbn & "^2+" & scn & "^2-2" & sbn & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & ")"
-                AddElaborate Sprog.A(225) & " " & scn, scn & "=" & sbn & VBA.ChrW(183) & "cos(" & vAn & ")+" & VBA.ChrW(8730) & "(" & san & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sc)
-                If D > 0 Then AddElaborate Sprog.A(226), scn & "_2=" & sbn & VBA.ChrW(183) & "cos(" & vAn & ")-" & VBA.ChrW(8730) & "(" & san & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sc2)
-                If sc2 < 0 Then AddElaborate Sprog.A(227), ""
-                AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
-                AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(223), san & "^2=" & sbn & "^2+" & scn & "^2-2" & sbn & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & ")"
+                AddElaborate TT.A(225) & " " & scn, scn & "=" & sbn & VBA.ChrW(183) & "cos(" & vAn & ")+" & VBA.ChrW(8730) & "(" & san & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sc)
+                If D > 0 Then AddElaborate TT.A(226), scn & "_2=" & sbn & VBA.ChrW(183) & "cos(" & vAn & ")-" & VBA.ChrW(8730) & "(" & san & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sc2)
+                If sc2 < 0 Then AddElaborate TT.A(227), ""
+                AddElaborate TT.A(215) & " " & vBn & " " & TT.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vCn & " " & TT.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
                 If D > 0 And sc2 > 0.000000000000001 Then
                     vA2 = vA
                     sb2 = sb
                     sa2 = SA
                     vB2 = Arccos((sa2 ^ 2 + sc2 ^ 2 - sb2 ^ 2) / (2 * sa2 * sc2)) * 180 / PI
                     vC2 = 180 - vB2 - vA2
-                    AddElaborate vbCrLf & Sprog.A(228) & " " & scn & " " & Sprog.A(229), ""
-                    AddElaborate Sprog.A(215) & " " & vBn & VBA.ChrW(8322) & " findes vha. en cosinusrelation", vBn & "_2=cos^(-1) ((" & san & "^2 + " & scn & "_2^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & "" & VBA.ChrW(183) & scn & "_2))=cos^(-1) ((" & ConvertNumberToStringBC(sa2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
-                    AddElaborate Sprog.A(215) & " " & vCn & VBA.ChrW(8322) & " " & Sprog.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
+                    AddElaborate vbCrLf & TT.A(228) & " " & scn & " " & TT.A(229), ""
+                    AddElaborate TT.A(215) & " " & vBn & VBA.ChrW(8322) & " findes vha. en cosinusrelation", vBn & "_2=cos^(-1) ((" & san & "^2 + " & scn & "_2^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & "" & VBA.ChrW(183) & scn & "_2))=cos^(-1) ((" & ConvertNumberToStringBC(sa2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
+                    AddElaborate TT.A(215) & " " & vCn & VBA.ChrW(8322) & " " & TT.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
                 End If
             ElseIf SA > 0 And sc > 0 Then ' sides not next to angle
                 D = SA ^ 2 - sc ^ 2 * Sin(vA * PI / 180) ^ 2
@@ -526,21 +526,21 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 vB = Arccos((SA ^ 2 + sc ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vC = 180 - vB - vA
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(223), san & "^2=" & sbn & "^2+" & scn & "^2-2" & sbn & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & ")"
-                AddElaborate Sprog.A(225) & " " & sbn, sbn & "=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")+" & VBA.ChrW(8730) & "(" & san & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sb)
-                If D > 0 Then AddElaborate Sprog.A(226), sbn & "_2=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")-" & VBA.ChrW(8730) & "(" & san & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sb2)
-                If sb2 < 0 Then AddElaborate Sprog.A(227), ""
-                AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
-                AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(223), san & "^2=" & sbn & "^2+" & scn & "^2-2" & sbn & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & ")"
+                AddElaborate TT.A(225) & " " & sbn, sbn & "=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")+" & VBA.ChrW(8730) & "(" & san & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sb)
+                If D > 0 Then AddElaborate TT.A(226), sbn & "_2=" & scn & VBA.ChrW(183) & "cos(" & vAn & ")-" & VBA.ChrW(8730) & "(" & san & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vAn & ")^2)=" & ConvertNumberToStringBC(sb2)
+                If sb2 < 0 Then AddElaborate TT.A(227), ""
+                AddElaborate TT.A(215) & " " & vBn & " " & TT.A(223), vBn & "=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vCn & " " & TT.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
                 If D > 0 And sb2 > 0.000000000000001 Then
                     vA2 = vA
                     sc2 = sc
                     sa2 = SA
                     vB2 = Arccos((sa2 ^ 2 + sc2 ^ 2 - sb2 ^ 2) / (2 * sa2 * sc2)) * 180 / PI
                     vC2 = 180 - vB2 - vA2
-                    AddElaborate vbCrLf & Sprog.A(228) & " " & sbn & " " & Sprog.A(229), ""
-                    AddElaborate Sprog.A(215) & " " & vBn & VBA.ChrW(8322) & " " & Sprog.A(223), vBn & "_2=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "_2^2)/(2" & VBA.ChrW(183) & san & "" & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sa2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
-                    AddElaborate Sprog.A(215) & " " & vCn & VBA.ChrW(8322) & " " & Sprog.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
+                    AddElaborate vbCrLf & TT.A(228) & " " & sbn & " " & TT.A(229), ""
+                    AddElaborate TT.A(215) & " " & vBn & VBA.ChrW(8322) & " " & TT.A(223), vBn & "_2=cos^(-1) ((" & san & "^2 + " & scn & "^2 - " & sbn & "_2^2)/(2" & VBA.ChrW(183) & san & "" & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sa2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
+                    AddElaborate TT.A(215) & " " & vCn & VBA.ChrW(8322) & " " & TT.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
                 End If
             End If
         ElseIf vB > 0 Then
@@ -548,9 +548,9 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 sb = Sqr(SA ^ 2 + sc ^ 2 - 2 * SA * sc * Cos(vB * PI / 180))
                 vA = Arccos((sb ^ 2 + sc ^ 2 - SA ^ 2) / (2 * sb * sc)) * 180 / PI
                 vC = 180 - vB - vA
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(223), sbn & "=" & VBA.ChrW(8730) & "(" & san & "^2 + " & scn & "^2 - 2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vBn & "))=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - 2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "))=" & ConvertNumberToStringBC(sb)
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
-                AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(223), sbn & "=" & VBA.ChrW(8730) & "(" & san & "^2 + " & scn & "^2 - 2" & VBA.ChrW(183) & san & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vBn & "))=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(SA) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - 2" & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "))=" & ConvertNumberToStringBC(sb)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vCn & " " & TT.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
             ElseIf SA > 0 And sb > 0 Then ' sides not next to angle
                 D = sb ^ 2 - SA ^ 2 * Sin(vB * PI / 180) ^ 2
                 If D < 0 Then ' no solution
@@ -561,21 +561,21 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 vA = Arccos((sb ^ 2 + sc ^ 2 - SA ^ 2) / (2 * sb * sc)) * 180 / PI
                 vC = 180 - vB - vA
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(223), sbn & "^2=" & san & "^2+" & scn & "^2-2" & san & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & ")"
-                AddElaborate Sprog.A(225) & " " & scn, scn & "=" & san & VBA.ChrW(183) & "cos(" & vBn & ")+" & VBA.ChrW(8730) & "(" & sbn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sc)
-                If D > 0 Then AddElaborate Sprog.A(226), scn & "_2=" & san & VBA.ChrW(183) & "cos(" & vBn & ")-" & VBA.ChrW(8730) & "(" & sbn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sc2)
-                If sc2 < 0 Then AddElaborate Sprog.A(227), ""
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
-                AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(223), sbn & "^2=" & san & "^2+" & scn & "^2-2" & san & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vAn & ")"
+                AddElaborate TT.A(225) & " " & scn, scn & "=" & san & VBA.ChrW(183) & "cos(" & vBn & ")+" & VBA.ChrW(8730) & "(" & sbn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sc)
+                If D > 0 Then AddElaborate TT.A(226), scn & "_2=" & san & VBA.ChrW(183) & "cos(" & vBn & ")-" & VBA.ChrW(8730) & "(" & sbn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sc2)
+                If sc2 < 0 Then AddElaborate TT.A(227), ""
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vCn & " " & TT.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
                 If D > 0 And sc2 > 0.000000000000001 Then
                     vB2 = vB
                     sb2 = sb
                     sa2 = SA
                     vA2 = Arccos((sb2 ^ 2 + sc2 ^ 2 - sa2 ^ 2) / (2 * sb2 * sc2)) * 180 / PI
                     vC2 = 180 - vB2 - vA2
-                    AddElaborate vbCrLf & Sprog.A(228) & " " & scn & " " & Sprog.A(229), ""
-                    AddElaborate Sprog.A(215) & " " & vAn & VBA.ChrW(8322) & " " & Sprog.A(223), vAn & "_2=cos^(-1) ((" & sbn & "^2 + " & scn & "_2^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & "" & VBA.ChrW(183) & scn & "_2))=cos^(-1) ((" & ConvertNumberToStringBC(sb2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sa2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
-                    AddElaborate Sprog.A(215) & " " & vCn & VBA.ChrW(8322) & " " & Sprog.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
+                    AddElaborate vbCrLf & TT.A(228) & " " & scn & " " & TT.A(229), ""
+                    AddElaborate TT.A(215) & " " & vAn & VBA.ChrW(8322) & " " & TT.A(223), vAn & "_2=cos^(-1) ((" & sbn & "^2 + " & scn & "_2^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & "" & VBA.ChrW(183) & scn & "_2))=cos^(-1) ((" & ConvertNumberToStringBC(sb2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sa2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
+                    AddElaborate TT.A(215) & " " & vCn & VBA.ChrW(8322) & " " & TT.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
                 End If
             ElseIf sb > 0 And sc > 0 Then ' sides not next to angle
                 D = sb ^ 2 - sc ^ 2 * Sin(vB * PI / 180) ^ 2
@@ -587,21 +587,21 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 vA = Arccos((sb ^ 2 + sc ^ 2 - SA ^ 2) / (2 * sb * sc)) * 180 / PI
                 vC = 180 - vB - vA
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(223), sbn & "^2=" & san & "^2+" & scn & "^2-2" & san & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vBn & ")"
-                AddElaborate Sprog.A(225) & " " & san, san & "=" & scn & VBA.ChrW(183) & "cos(" & vBn & ")+" & VBA.ChrW(8730) & "(" & sbn & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(SA)
-                If D > 0 Then AddElaborate Sprog.A(226), san & "_2=" & scn & VBA.ChrW(183) & "cos(" & vBn & ")-" & VBA.ChrW(8730) & "(" & sbn & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sa2)
-                If sa2 < 0 Then AddElaborate Sprog.A(227), ""
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
-                AddElaborate Sprog.A(215) & " " & vCn & " " & Sprog.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(223), sbn & "^2=" & san & "^2+" & scn & "^2-2" & san & VBA.ChrW(183) & scn & VBA.ChrW(183) & "cos(" & vBn & ")"
+                AddElaborate TT.A(225) & " " & san, san & "=" & scn & VBA.ChrW(183) & "cos(" & vBn & ")+" & VBA.ChrW(8730) & "(" & sbn & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(SA)
+                If D > 0 Then AddElaborate TT.A(226), san & "_2=" & scn & VBA.ChrW(183) & "cos(" & vBn & ")-" & VBA.ChrW(8730) & "(" & sbn & "^2-" & scn & "^2" & VBA.ChrW(183) & "sin(" & vBn & ")^2)=" & ConvertNumberToStringBC(sa2)
+                If sa2 < 0 Then AddElaborate TT.A(227), ""
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(223), vAn & "=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "^2)/(2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(sc) & "^2 - " & ConvertNumberToStringBC(SA) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & "))=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vCn & " " & TT.A(216), vCn & "=180" & VBA.ChrW(176) & "-" & vAn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC) & VBA.ChrW(176)
                 If D > 0 And sa2 > 0.000000000000001 Then
                     vB2 = vB
                     sc2 = sc
                     sb2 = sb
                     vA2 = Arccos((sb2 ^ 2 + sc2 ^ 2 - sa2 ^ 2) / (2 * sb2 * sc2)) * 180 / PI
                     vC2 = 180 - vB2 - vA2
-                    AddElaborate vbCrLf & Sprog.A(228) & " " & san & " " & Sprog.A(229), ""
-                    AddElaborate Sprog.A(215) & " " & vAn & VBA.ChrW(8322) & " " & Sprog.A(223), vAn & "_2=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "_2^2)/(2" & VBA.ChrW(183) & sbn & "" & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sa2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
-                    AddElaborate Sprog.A(215) & " " & vCn & VBA.ChrW(8322) & " " & Sprog.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "_2-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
+                    AddElaborate vbCrLf & TT.A(228) & " " & san & " " & TT.A(229), ""
+                    AddElaborate TT.A(215) & " " & vAn & VBA.ChrW(8322) & " " & TT.A(223), vAn & "_2=cos^(-1) ((" & sbn & "^2 + " & scn & "^2 - " & san & "_2^2)/(2" & VBA.ChrW(183) & sbn & "" & VBA.ChrW(183) & scn & "))=cos^(-1) ((" & ConvertNumberToStringBC(sb2) & "^2 + " & ConvertNumberToStringBC(sc2) & "^2 - " & ConvertNumberToStringBC(sa2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb2) & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & "))=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
+                    AddElaborate TT.A(215) & " " & vCn & VBA.ChrW(8322) & " " & TT.A(216), vCn & "_2=180" & VBA.ChrW(176) & "-" & vAn & "_2-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176)
                 End If
             End If
         Else ' vc>0
@@ -609,9 +609,9 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 sc = Sqr(sb ^ 2 + SA ^ 2 - 2 * sb * SA * Cos(vC * PI / 180))
                 vB = Arccos((sc ^ 2 + SA ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vA = 180 - vB - vC
-                AddElaborate Sprog.A(217) & " " & scn & " " & Sprog.A(223), scn & "=" & VBA.ChrW(8730) & "(" & sbn & "^2 + " & san & "^2 - 2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & san & VBA.ChrW(183) & "cos(" & vCn & "))=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - 2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "))=" & ConvertNumberToStringBC(sc)
-                AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(217) & " " & scn & " " & TT.A(223), scn & "=" & VBA.ChrW(8730) & "(" & sbn & "^2 + " & san & "^2 - 2" & VBA.ChrW(183) & sbn & VBA.ChrW(183) & san & VBA.ChrW(183) & "cos(" & vCn & "))=" & VBA.ChrW(8730) & "(" & ConvertNumberToStringBC(sb) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - 2" & VBA.ChrW(183) & ConvertNumberToStringBC(sb) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & VBA.ChrW(183) & "cos(" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "))=" & ConvertNumberToStringBC(sc)
+                AddElaborate TT.A(215) & " " & vBn & " " & TT.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
             ElseIf sc > 0 And sb > 0 Then ' sides not next to angle
                 D = sc ^ 2 - sb ^ 2 * Sin(vC * PI / 180) ^ 2
                 If D < 0 Then ' no solution
@@ -622,21 +622,21 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 vB = Arccos((sc ^ 2 + SA ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vA = 180 - vB - vC
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & san & " " & Sprog.A(223), scn & "^2=" & sbn & "^2+" & san & "^2-2" & sbn & VBA.ChrW(183) & san & VBA.ChrW(183) & "cos(" & vCn & ")"
-                AddElaborate Sprog.A(225) & " " & san, san & "=" & sbn & VBA.ChrW(183) & "cos(" & vCn & ")+" & VBA.ChrW(8730) & "(" & scn & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(SA)
-                If D > 0 Then AddElaborate Sprog.A(226), san & "_2=" & sbn & VBA.ChrW(183) & "cos(" & vCn & ")-" & VBA.ChrW(8730) & "(" & scn & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sa2)
-                If sa2 < 0 Then AddElaborate Sprog.A(227), ""
-                AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(217) & " " & san & " " & TT.A(223), scn & "^2=" & sbn & "^2+" & san & "^2-2" & sbn & VBA.ChrW(183) & san & VBA.ChrW(183) & "cos(" & vCn & ")"
+                AddElaborate TT.A(225) & " " & san, san & "=" & sbn & VBA.ChrW(183) & "cos(" & vCn & ")+" & VBA.ChrW(8730) & "(" & scn & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(SA)
+                If D > 0 Then AddElaborate TT.A(226), san & "_2=" & sbn & VBA.ChrW(183) & "cos(" & vCn & ")-" & VBA.ChrW(8730) & "(" & scn & "^2-" & sbn & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sa2)
+                If sa2 < 0 Then AddElaborate TT.A(227), ""
+                AddElaborate TT.A(215) & " " & vBn & " " & TT.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
                 If D > 0 And sa2 > 0.000000000000001 Then
                     vC2 = vC
                     sb2 = sb
                     sc2 = sc
                     vB2 = Arccos((sc2 ^ 2 + sa2 ^ 2 - sb2 ^ 2) / (2 * sa2 * sc2)) * 180 / PI
                     vA2 = 180 - vB2 - vC2
-                    AddElaborate vbCrLf & Sprog.A(228) & " " & san & " " & Sprog.A(229), ""
-                    AddElaborate Sprog.A(215) & " " & vBn & VBA.ChrW(8322) & " " & Sprog.A(223), vBn & "_2=cos^(-1) ((" & scn & "^2 + " & san & "_2^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & "" & VBA.ChrW(183) & san & "_2))=cos^(-1) ((" & ConvertNumberToStringBC(sc2) & "^2 + " & ConvertNumberToStringBC(sa2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
-                    AddElaborate Sprog.A(215) & " " & vAn & VBA.ChrW(8322) & " " & Sprog.A(216), vAn & "_2=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
+                    AddElaborate vbCrLf & TT.A(228) & " " & san & " " & TT.A(229), ""
+                    AddElaborate TT.A(215) & " " & vBn & VBA.ChrW(8322) & " " & TT.A(223), vBn & "_2=cos^(-1) ((" & scn & "^2 + " & san & "_2^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & "" & VBA.ChrW(183) & san & "_2))=cos^(-1) ((" & ConvertNumberToStringBC(sc2) & "^2 + " & ConvertNumberToStringBC(sa2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
+                    AddElaborate TT.A(215) & " " & vAn & VBA.ChrW(8322) & " " & TT.A(216), vAn & "_2=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
                 End If
             ElseIf SA > 0 And sc > 0 Then ' sides not next to angle
                 D = sc ^ 2 - SA ^ 2 * Sin(vC * PI / 180) ^ 2
@@ -648,38 +648,38 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
                 vB = Arccos((sc ^ 2 + SA ^ 2 - sb ^ 2) / (2 * SA * sc)) * 180 / PI
                 vA = 180 - vB - vC
 '                sc = sa * Sin(vC * PI / 180) / Sin(vA * PI / 180)
-                AddElaborate Sprog.A(217) & " " & sbn & " " & Sprog.A(223), scn & "^2=" & sbn & "^2+" & san & "^2-2" & sbn & VBA.ChrW(183) & san & VBA.ChrW(183) & "cos(" & vCn & ")"
-                AddElaborate Sprog.A(225) & " " & sbn, sbn & "=" & san & VBA.ChrW(183) & "cos(" & vCn & ")+" & VBA.ChrW(8730) & "(" & scn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sb)
-                If D > 0 Then AddElaborate Sprog.A(226), sbn & "_2=" & san & VBA.ChrW(183) & "cos(" & vCn & ")-" & VBA.ChrW(8730) & "(" & scn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sb2)
-                If sb2 < 0 Then AddElaborate Sprog.A(227), ""
-                AddElaborate Sprog.A(215) & " " & vBn & " " & Sprog.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
-                AddElaborate Sprog.A(215) & " " & vAn & " " & Sprog.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
+                AddElaborate TT.A(217) & " " & sbn & " " & TT.A(223), scn & "^2=" & sbn & "^2+" & san & "^2-2" & sbn & VBA.ChrW(183) & san & VBA.ChrW(183) & "cos(" & vCn & ")"
+                AddElaborate TT.A(225) & " " & sbn, sbn & "=" & san & VBA.ChrW(183) & "cos(" & vCn & ")+" & VBA.ChrW(8730) & "(" & scn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sb)
+                If D > 0 Then AddElaborate TT.A(226), sbn & "_2=" & san & VBA.ChrW(183) & "cos(" & vCn & ")-" & VBA.ChrW(8730) & "(" & scn & "^2-" & san & "^2" & VBA.ChrW(183) & "sin(" & vCn & ")^2)=" & ConvertNumberToStringBC(sb2)
+                If sb2 < 0 Then AddElaborate TT.A(227), ""
+                AddElaborate TT.A(215) & " " & vBn & " " & TT.A(223), vBn & "=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "^2)/(2" & VBA.ChrW(183) & scn & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc) & "^2 + " & ConvertNumberToStringBC(SA) & "^2 - " & ConvertNumberToStringBC(sb) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc) & VBA.ChrW(183) & ConvertNumberToStringBC(SA) & "))=" & ConvertNumberToStringBC(vB) & VBA.ChrW(176)
+                AddElaborate TT.A(215) & " " & vAn & " " & TT.A(216), vAn & "=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA) & VBA.ChrW(176)
                 If D > 0 And sb2 > 0.000000000000001 Then
                     vC2 = vC
                     sa2 = SA
                     sc2 = sc
                     vB2 = Arccos((sc2 ^ 2 + sa2 ^ 2 - sb2 ^ 2) / (2 * sa2 * sc2)) * 180 / PI
                     vA2 = 180 - vB2 - vC2
-                    AddElaborate vbCrLf & Sprog.A(228) & " " & sbn & " " & Sprog.A(229), ""
-                    AddElaborate Sprog.A(215) & " " & vBn & VBA.ChrW(8322) & " " & Sprog.A(223), vBn & "_2=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "_2^2)/(2" & VBA.ChrW(183) & scn & "" & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc2) & "^2 + " & ConvertNumberToStringBC(sa2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
-                    AddElaborate Sprog.A(215) & " " & vAn & VBA.ChrW(8322) & " " & Sprog.A(216), vAn & "_2=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
+                    AddElaborate vbCrLf & TT.A(228) & " " & sbn & " " & TT.A(229), ""
+                    AddElaborate TT.A(215) & " " & vBn & VBA.ChrW(8322) & " " & TT.A(223), vBn & "_2=cos^(-1) ((" & scn & "^2 + " & san & "^2 - " & sbn & "_2^2)/(2" & VBA.ChrW(183) & scn & "" & VBA.ChrW(183) & san & "))=cos^(-1) ((" & ConvertNumberToStringBC(sc2) & "^2 + " & ConvertNumberToStringBC(sa2) & "^2 - " & ConvertNumberToStringBC(sb2) & "^2)/(2" & VBA.ChrW(183) & ConvertNumberToStringBC(sc2) & VBA.ChrW(183) & ConvertNumberToStringBC(sa2) & "))=" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176)
+                    AddElaborate TT.A(215) & " " & vAn & VBA.ChrW(8322) & " " & TT.A(216), vAn & "_2=180" & VBA.ChrW(176) & "-" & vCn & "-" & vBn & "_2=180" & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vC2) & VBA.ChrW(176) & "-" & ConvertNumberToStringBC(vB2) & VBA.ChrW(176) & "=" & ConvertNumberToStringBC(vA2) & VBA.ChrW(176)
                 End If
             End If
         End If
     End If
 GoTo slut
 Fejl:
-    statustext = Sprog.A(784)
-    If advarsler Then MsgBox statustext, vbOKOnly, Sprog.Error
+    statustext = TT.A(784)
+    If advarsler Then MsgBox statustext, vbOKOnly, TT.Error
     Exit Sub
 slut:
     If SA <= 0 Or sb <= 0 Or sc <= 0 Or vA <= 0 Or vB <= 0 Or vC <= 0 Then
         GoTo Fejl
     Else
         succes = True
-        statustext = Sprog.A(787)
+        statustext = TT.A(787)
     End If
-    If vA2 > 0 Then statustext = statustext & vbCrLf & "(" & Sprog.A(785) & ")."
+    If vA2 > 0 Then statustext = statustext & vbCrLf & "(" & TT.A(785) & ")."
 
 End Sub
 
@@ -710,7 +710,7 @@ F = 200
 SA = Sqr(sb ^ 2 + sc ^ 2 - 2 * sb * sc * Cos(vA * PI / 180))
 
 If SA <= 0 Or sb <= 0 Or sc <= 0 Then
-    MsgBox Sprog.A(870), vbOKOnly, Sprog.Error
+    MsgBox TT.A(870), vbOKOnly, TT.Error
     GoTo slut
 End If
 
@@ -980,8 +980,8 @@ ElseIf OptionButton_navngivsiderAB.Value = True Then
     TextBox_captionsb.Text = TextBox_captionA.Text & TextBox_captionC.Text
     TextBox_captionsc.Text = TextBox_captionA.Text & TextBox_captionB.Text
 End If
-OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.A(773)
-OptionButton_reth.Caption = TextBox_captionC.Text & " " & Sprog.A(773)
+OptionButton_retv.Caption = TextBox_captionA.Text & " " & TT.A(773)
+OptionButton_reth.Caption = TextBox_captionC.Text & " " & TT.A(773)
 End Sub
 Private Sub TextBox_captionA_Change()
     If OptionButton_navngivstorlille.Value = True Then
@@ -990,7 +990,7 @@ Private Sub TextBox_captionA_Change()
     ElseIf OptionButton_navngivsiderAB.Value = True Then
         OpdaterNavngivning
     End If
-    OptionButton_retv.Caption = TextBox_captionA.Text & " " & Sprog.A(773)
+    OptionButton_retv.Caption = TextBox_captionA.Text & " " & TT.A(773)
 End Sub
 
 Private Sub TextBox_captionB_Change()
@@ -1009,7 +1009,7 @@ If OptionButton_navngivstorlille.Value = True Then
 ElseIf OptionButton_navngivsiderAB.Value = True Then
     OpdaterNavngivning
 End If
-OptionButton_reth.Caption = TextBox_captionC.Text & " " & Sprog.A(773)
+OptionButton_reth.Caption = TextBox_captionC.Text & " " & TT.A(773)
 End Sub
 
 Private Sub TextBox_captionsa_Change()
@@ -1141,19 +1141,19 @@ End Sub
 
 
 Private Sub SetCaptions()
-    Me.Caption = Sprog.A(770)
-    Label_ok.Caption = Sprog.OK
-    Frame1.Caption = Sprog.A(771) & "?"
-    Frame2.Caption = Sprog.A(774)
-    OptionButton_navngivmanuel.Caption = Sprog.A(775)
-    OptionButton_navngivstorlille.Caption = Sprog.A(776)
-    OptionButton_navngivsiderAB.Caption = Sprog.A(777)
-    CheckBox_tal.Caption = Sprog.A(778)
-    CheckBox_forklaring.Caption = Sprog.A(779)
-    Label1.Caption = Sprog.A(780)
-    Label2.Caption = Sprog.A(781)
-    OptionButton_vilk.Caption = Sprog.A(772)
-    Label_nulstil.Caption = Sprog.A(815)
+    Me.Caption = TT.A(770)
+    Label_ok.Caption = TT.OK
+    Frame1.Caption = TT.A(771) & "?"
+    Frame2.Caption = TT.A(774)
+    OptionButton_navngivmanuel.Caption = TT.A(775)
+    OptionButton_navngivstorlille.Caption = TT.A(776)
+    OptionButton_navngivsiderAB.Caption = TT.A(777)
+    CheckBox_tal.Caption = TT.A(778)
+    CheckBox_forklaring.Caption = TT.A(779)
+    Label1.Caption = TT.A(780)
+    Label2.Caption = TT.A(781)
+    OptionButton_vilk.Caption = TT.A(772)
+    Label_nulstil.Caption = TT.A(815)
     
 End Sub
 

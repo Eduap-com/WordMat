@@ -109,11 +109,11 @@ Private Sub CommandButton_GeoGebraDF_Click()
 End Sub
 
 Private Sub Label_helpmarker_Click()
-MsgBox Sprog.A(195), vbOKOnly, Sprog.A(808)
+MsgBox TT.A(195), vbOKOnly, TT.A(808)
 End Sub
 
 Private Sub Label_punkter2_Click()
-MsgBox Sprog.A(196), vbOKOnly, Sprog.A(808)
+MsgBox TT.A(196), vbOKOnly, TT.A(808)
 End Sub
 
 Private Sub Label_symbol_Click()
@@ -344,7 +344,7 @@ End Sub
 
 Private Sub CommandButton_nyetiket_Click()
 
-    etikettext = InputBox(Sprog.A(299), Sprog.A(298), "")
+    etikettext = InputBox(TT.A(299), TT.A(298), "")
     
 End Sub
 
@@ -437,7 +437,7 @@ OpdaterGraf
 End Sub
 
 Private Sub Label_punkterhelp_Click()
-    MsgBox Sprog.A(197), vbOKOnly, Sprog.A(808)
+    MsgBox TT.A(197), vbOKOnly, TT.A(808)
 End Sub
 
 Private Sub CommandButton_nulstil1_Click()
@@ -769,7 +769,7 @@ If tb.Text <> "" Then
 End If
 GoTo slut:
 fejlindtast:
-    MsgBox Sprog.A(300) & " " & col + 1
+    MsgBox TT.A(300) & " " & col + 1
 slut:
 End Sub
 
@@ -817,7 +817,7 @@ Dim Arr As Variant
     Pos = InStr(forskrift, VBA.ChrW(124))
     If Pos > 0 Then
         posb = InStr(Pos + 1, forskrift, VBA.ChrW(124))
-        forskrift = Left(forskrift, Pos - 1) & "abs(" & Mid(forskrift, Pos + 1, posb - Pos - 1) & ")" & right(forskrift, Len(forskrift) - posb)
+        forskrift = Left(forskrift, Pos - 1) & "abs(" & Mid(forskrift, Pos + 1, posb - Pos - 1) & ")" & Right(forskrift, Len(forskrift) - posb)
     End If
     Loop While Pos > 0
     
@@ -863,7 +863,7 @@ Dim Arr As Variant
                 Call ea.InsertBeforePos("^(1/(" & rod & "))")
                 ea.Text = Replace(ea.Text, VBA.ChrW(8730), "", 1, 1)
                 posog = ea.FindChr("&", 1)
-                forskrift = Left(ea.Text, Pos) & right(ea.Text, Len(ea.Text) - posog)
+                forskrift = Left(ea.Text, Pos) & Right(ea.Text, Len(ea.Text) - posog)
                
             End If
         End If
@@ -1208,7 +1208,7 @@ If TextBox_punkter.Text <> "" Then
         If Left(Arr(i), 1) <> "(" Then
             Arr(i) = "(" & Arr(i)
         End If
-        If right(Arr(i), 1) <> ")" Then
+        If Right(Arr(i), 1) <> ")" Then
             Arr(i) = Arr(i) & ")"
         End If
         Arr(i) = Replace(Arr(i), "),(", "],[")
@@ -1218,7 +1218,7 @@ If TextBox_punkter.Text <> "" Then
         punkttekst = punkttekst & Arr(i) & ","
         End If
     Next
-    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+    If Right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
     
     grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(highres * ConvertStringToNumber(TextBox_pointsize.Text), ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
 End If
@@ -1239,7 +1239,7 @@ If TextBox_punkter2.Text <> "" Then
         If Left(Arr(i), 1) <> "(" Then
             Arr(i) = "(" & Arr(i)
         End If
-        If right(Arr(i), 1) <> ")" Then
+        If Right(Arr(i), 1) <> ")" Then
             Arr(i) = Arr(i) & ")"
         End If
         Arr(i) = Replace(Arr(i), "),(", "],[")
@@ -1249,7 +1249,7 @@ If TextBox_punkter2.Text <> "" Then
         punkttekst = punkttekst & Arr(i) & ","
         End If
     Next
-    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+    If Right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
     
     grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(TextBox_pointsize2.Text, ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined2.Value) & ",points([" & punkttekst & "]),"
 End If
@@ -1386,7 +1386,7 @@ End If
     GetDraw2Dtext = grafobj
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Function
 Private Sub OpdaterGraf(Optional highres As Double = 1)
@@ -1394,7 +1394,7 @@ Dim Text As String
 Dim df As String
 Dim dfsol As String
 On Error GoTo Fejl
-    Label_wait.Caption = Sprog.A(826) & "!"
+    Label_wait.Caption = TT.A(826) & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
     omax.PrepareNewCommand FindDef:=False
@@ -1467,7 +1467,7 @@ On Error GoTo Fejl
 GoTo slut
 Fejl:
     On Error Resume Next
-    Label_wait.Caption = Sprog.A(94)
+    Label_wait.Caption = TT.A(94)
     Label_wait.Font.Size = 12
     Label_wait.Width = 150
     Label_wait.visible = True
@@ -1489,7 +1489,7 @@ Dim Text As String
 
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -1503,17 +1503,17 @@ Private Sub CommandButton_linregr_Click()
 '    Cregr.InsertEquation
 
     If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning1.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning2.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning3.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning4.Text = "" Then
-        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning4.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning5.Text = "" Then
-        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning5.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning6.Text = "" Then
-        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning6.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
 
     OpdaterGraf
@@ -1532,17 +1532,17 @@ Private Sub CommandButton_polregr_Click()
 '    Cregr.InsertEquation
 
     If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning1.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning2.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning3.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning4.Text = "" Then
-        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning4.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning5.Text = "" Then
-        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning5.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning6.Text = "" Then
-        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning6.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
     
     OpdaterGraf
@@ -1560,17 +1560,17 @@ Private Sub CommandButton_ekspregr_Click()
 '    Cregr.InsertEquation
 
     If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning1.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning2.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning3.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning4.Text = "" Then
-        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning4.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning5.Text = "" Then
-        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning5.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning6.Text = "" Then
-        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning6.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
     
     OpdaterGraf
@@ -1586,17 +1586,17 @@ Private Sub CommandButton_potregr_Click()
     Cregr.ComputePowRegr
 
     If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning1.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning2.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning3.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning4.Text = "" Then
-        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning4.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning5.Text = "" Then
-        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning5.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning6.Text = "" Then
-        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning6.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
 
     OpdaterGraf
@@ -1691,7 +1691,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         TextBox_labels.Text = TextBox_labels.Text & VbCrLfMac
         End If
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
-            MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
+            MsgBox TT.A(301), vbOKOnly, TT.Error
         Else
         TextBox_labels.Text = TextBox_labels.Text & etikettext & ";" & ConvertPixelToCoordX(X) & ";" & ConvertPixelToCoordY(Y)
         etikettext = ""
@@ -1704,7 +1704,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         TextBox_punkter2.Text = TextBox_punkter2.Text & VbCrLfMac
         End If
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
-            MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
+            MsgBox TT.A(301), vbOKOnly, TT.Error
         Else
         TextBox_punkter2.Text = TextBox_punkter2.Text & ConvertPixelToCoordX(X) & ";" & ConvertPixelToCoordY(Y)
         OpdaterGraf
@@ -1715,7 +1715,7 @@ Private Sub Image1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, By
         TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & VbCrLfMac
         End If
         If Len(TextBox_ymin.Text) = 0 Or Len(TextBox_ymax.Text) = 0 Then
-            MsgBox Sprog.A(301), vbOKOnly, Sprog.Error
+            MsgBox TT.A(301), vbOKOnly, TT.Error
         Else
         TextBox_markerpunkter.Text = TextBox_markerpunkter.Text & ConvertPixelToCoordX(X) & ";" & ConvertPixelToCoordY(Y)
         nytmarkerpunkt = False
@@ -1806,7 +1806,7 @@ OpdaterGraf
     Me.Repaint
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(95), vbOKOnly, Sprog.Error
+    MsgBox TT.A(95), vbOKOnly, TT.Error
 slut:
     
 End Sub
@@ -1856,7 +1856,7 @@ OpdaterGraf
 Me.Repaint
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 
 End Sub
@@ -1890,7 +1890,7 @@ OpdaterGraf
 Me.Repaint
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 
 End Sub
@@ -1944,7 +1944,7 @@ PicOpen = False
 Unload Me
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 Application.ScreenUpdating = True
 End Sub
@@ -1958,7 +1958,7 @@ Sub InsertDefinitioner()
     DefString = GetDefString
 
     If Len(DefString) > 0 Then
-        If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
+        If Right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
         omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
     End If
 End Sub
@@ -1998,10 +1998,10 @@ Dim i As Integer
     
     omax.FindVariable Vars, False ' removes doubles
     Vars = omax.Vars
-    If Left(Vars, 1) = ";" Then Vars = right(Vars, Len(Vars) - 1)
+    If Left(Vars, 1) = ";" Then Vars = Right(Vars, Len(Vars) - 1)
     
     ea.Text = Vars
-    Do While right(TextBox_definitioner.Text, 2) = VbCrLfMac
+    Do While Right(TextBox_definitioner.Text, 2) = VbCrLfMac
         TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
     Loop
     Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
@@ -2070,8 +2070,8 @@ Dim ea As New ExpressionAnalyser
 ea.Text = Text
 Call ea.ReplaceVar(Var, "")
 Text = Replace(ea.Text, ";;", ";")
-If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
-If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
+If Left(Text, 1) = ";" Then Text = Right(Text, Len(Text) - 1)
+If Right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
 
 RemoveVar = Text
 End Function
@@ -2197,46 +2197,46 @@ Sub ShowPreviewMac()
 End Sub
 
 Private Sub SetCaptions()
-    Me.Caption = Sprog.A(799)
-    Label_wait.Caption = Sprog.A(826)
-    Label_opdater.Caption = Sprog.A(813)
-    MultiPage1.Pages("Page1").Caption = Sprog.A(832)
-    MultiPage1.Pages("Page2").Caption = Sprog.A(834)
-    MultiPage1.Pages("Page3").Caption = Sprog.A(835)
-    MultiPage1.Pages("Page5").Caption = Sprog.A(836)
-    MultiPage1.Pages("Page7").Caption = Sprog.A(462)
-    MultiPage1.Pages("Page4").Caption = Sprog.A(444)
-    Label29.Caption = Sprog.A(823)
-    Label45.Caption = Sprog.A(837)
-    Label_ligninger.Caption = Sprog.A(832) & "  f(x)=..."
-    CommandButton_nulstil1.Caption = Sprog.Reset
-    CommandButton_nulstil2.Caption = Sprog.Reset
-    CommandButton_nulstil3.Caption = Sprog.Reset
-    CommandButton_nulstil4.Caption = Sprog.Reset
-    CommandButton_nulstil5.Caption = Sprog.Reset
-    CommandButton_nulstil6.Caption = Sprog.Reset
-    CommandButton_nulstil.Caption = Sprog.A(800)
-    Label_insertpic.Caption = Sprog.A(93) 'Sprog.OK
-    Label_cancel.Caption = Sprog.Cancel
-    Label2.Caption = "x-" & Sprog.A(801)
-    Label3.Caption = "y-" & Sprog.A(801)
-    Label4.Caption = Sprog.A(802)
-    CommandButton_nulstillign1.Caption = Sprog.Reset
-    CommandButton_nulstilligning2.Caption = Sprog.Reset
-    CommandButton_nulstillign3.Caption = Sprog.Reset
-    Label50.Caption = Sprog.A(833) & " 1"
-    Label51.Caption = Sprog.A(833) & " 2"
-    Label52.Caption = Sprog.A(833) & " 3"
+    Me.Caption = TT.A(799)
+    Label_wait.Caption = TT.A(826)
+    Label_opdater.Caption = TT.A(813)
+    MultiPage1.Pages("Page1").Caption = TT.A(832)
+    MultiPage1.Pages("Page2").Caption = TT.A(834)
+    MultiPage1.Pages("Page3").Caption = TT.A(835)
+    MultiPage1.Pages("Page5").Caption = TT.A(836)
+    MultiPage1.Pages("Page7").Caption = TT.A(462)
+    MultiPage1.Pages("Page4").Caption = TT.A(444)
+    Label29.Caption = TT.A(823)
+    Label45.Caption = TT.A(837)
+    Label_Ligninger.Caption = TT.A(832) & "  f(x)=..."
+    CommandButton_nulstil1.Caption = TT.Reset
+    CommandButton_nulstil2.Caption = TT.Reset
+    CommandButton_nulstil3.Caption = TT.Reset
+    CommandButton_nulstil4.Caption = TT.Reset
+    CommandButton_nulstil5.Caption = TT.Reset
+    CommandButton_nulstil6.Caption = TT.Reset
+    CommandButton_nulstil.Caption = TT.A(800)
+    Label_insertpic.Caption = TT.A(93) 'TT.OK
+    Label_cancel.Caption = TT.Cancel
+    Label2.Caption = "x-" & TT.A(801)
+    Label3.Caption = "y-" & TT.A(801)
+    Label4.Caption = TT.A(802)
+    CommandButton_nulstillign1.Caption = TT.Reset
+    CommandButton_nulstilligning2.Caption = TT.Reset
+    CommandButton_nulstillign3.Caption = TT.Reset
+    Label50.Caption = TT.A(833) & " 1"
+    Label51.Caption = TT.A(833) & " 2"
+    Label52.Caption = TT.A(833) & " 3"
     
-    Label1.Caption = Sprog.A(198)
-    CommandButton_kugle.Caption = Sprog.A(199) 'insert circle
-    CommandButton_insertplan.Caption = Sprog.A(200) ' insert line
-    CommandButton_parlinje.Caption = Sprog.A(200)
-    CommandButton_nulstilpar1.Caption = Sprog.Reset
-    Label10.Caption = Sprog.A(835)
-    Label48.Caption = Sprog.A(835) & " 2"
-    Label53.Caption = Sprog.A(201) ' selected points
-    Label28.Caption = Sprog.A(202)
+    Label1.Caption = TT.A(198)
+    CommandButton_kugle.Caption = TT.A(199) 'insert circle
+    CommandButton_insertplan.Caption = TT.A(200) ' insert line
+    CommandButton_parlinje.Caption = TT.A(200)
+    CommandButton_nulstilpar1.Caption = TT.Reset
+    Label10.Caption = TT.A(835)
+    Label48.Caption = TT.A(835) & " 2"
+    Label53.Caption = TT.A(201) ' selected points
+    Label28.Caption = TT.A(202)
     
 End Sub
 

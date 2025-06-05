@@ -91,11 +91,11 @@ Sub ExecuteOK()
     Arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
     For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
+        If Len(Arr(i)) > 2 And Not Right(Arr(i), 1) = "=" Then
             TempDefs = TempDefs & Arr(i) & ListSeparator
         End If
     Next
-    If right(TempDefs, 1) = ListSeparator Then
+    If Right(TempDefs, 1) = ListSeparator Then
         TempDefs = Left(TempDefs, Len(TempDefs) - 1)
     End If
     End If
@@ -181,31 +181,31 @@ Private Sub UserForm_Initialize()
 End Sub
 
 Private Sub SetCaptions()
-    Me.Caption = Sprog.A(456)
-    Label5.Caption = Sprog.A(764)
-    Frame6.Caption = Sprog.A(816) & " output"
-    Label_cancel.Caption = Sprog.Cancel
-    Label_enheder.Caption = Sprog.A(168)
-    Frame5.Caption = Sprog.A(710) & "?"
-    OptionButton_exactonly.Caption = Sprog.A(710)
-    OptionButton_numonly.Caption = Sprog.A(711)
-    Label8.Caption = Sprog.A(789)
-    CheckBox_auto.Caption = Sprog.A(790)
-    Label_omskriv.Caption = Sprog.A(791)
-    CheckBox_factor.Caption = Sprog.A(806)
-    Label_factor.Caption = Sprog.A(792)
-    CheckBox_expand.Caption = Sprog.A(807)
-    Label_expand.Caption = Sprog.A(793)
-    CheckBox_rationaliser.Caption = Sprog.A(794)
-    Label_rationaliser.Caption = Sprog.A(795)
-    CheckBox_trigreduce.Caption = Sprog.A(796)
-    Label_trigreduce.Caption = Sprog.A(797)
-    CommandButton_ok.Caption = Sprog.OK
+    Me.Caption = TT.A(456)
+    Label5.Caption = TT.A(764)
+    Frame6.Caption = TT.A(816) & " output"
+    Label_cancel.Caption = TT.Cancel
+    Label_enheder.Caption = TT.A(168)
+    Frame5.Caption = TT.A(710) & "?"
+    OptionButton_exactonly.Caption = TT.A(710)
+    OptionButton_numonly.Caption = TT.A(711)
+    Label8.Caption = TT.A(789)
+    CheckBox_auto.Caption = TT.A(790)
+    Label_omskriv.Caption = TT.A(791)
+    CheckBox_factor.Caption = TT.A(806)
+    Label_factor.Caption = TT.A(792)
+    CheckBox_expand.Caption = TT.A(807)
+    Label_expand.Caption = TT.A(793)
+    CheckBox_rationaliser.Caption = TT.A(794)
+    Label_rationaliser.Caption = TT.A(795)
+    CheckBox_trigreduce.Caption = TT.A(796)
+    Label_trigreduce.Caption = TT.A(797)
+    CommandButton_ok.Caption = TT.OK
     
-    CheckBox_completesquare.Caption = Sprog.A(697)
-    Label_completesquare.Caption = Sprog.A(698)
+    CheckBox_completesquare.Caption = TT.A(697)
+    Label_completesquare.Caption = TT.A(698)
     
-    CheckBox_sammelinje.Caption = Sprog.A(798)
+    CheckBox_sammelinje.Caption = TT.A(798)
 End Sub
 
 Private Sub Label_ok_Click()
@@ -238,7 +238,7 @@ End Sub
 Sub FillComboBoxDecType()
     ComboBox_DecType.Clear
     ComboBox_DecType.AddItem "Decimaler"
-    ComboBox_DecType.AddItem Sprog.A(687)
-    ComboBox_DecType.AddItem Sprog.A(669)
+    ComboBox_DecType.AddItem TT.A(687)
+    ComboBox_DecType.AddItem TT.A(669)
 End Sub
 

@@ -539,9 +539,9 @@
 538#£Valitse lauseke, jonka haluat erottaa toisistaan tai sijoittaa kohdistimen lausekkeeseen
 539#£Yhdentää
 540#£Määrittää funktion määrittelemättömän integraalin
-541#£
-542#£
-543#£
+541#£Tuo asetukset
+542#£Vie asetukset
+543#£Mukauta valikkoa
 544#£
 545#£Kaavio (Alt+P)
 546#£Näyttää valittujen funktioiden/yhtälöiden ja pisteiden kaavion. Kaavio voidaan sitten lisätä asiakirjaan. Useita kaavio-ohjelmia tuetaan. Valitse suosikkisi asetuksista.
@@ -688,10 +688,10 @@
 687#£Merkittävät luvut
 688#£Kytke yksiköt päälle/pois päältä
 689#£Jos yksiköt ovat käytössä, WordMath voi tulkita ja muuntaa yksiköitä. SI-painikkeella voit muuttaa lähtöyksiköitä. Älä kytke laitteita päälle, ellet tarvitse sitä. Se voi vaikuttaa WordMatin toimintaan ja varaa paljon muuttujia.
-690#£
+690#£Lisää koodilohko
 691#£Ilmoita yksiköt, joihin muunnetaan. Oletusarvoisesti lähtöyksiköt ovat SI-yksiköitä.
 692#£ml
-693#£
+693#£Koodilohko on alue, jossa voit ohjelmoida Maximan suoraan. Voit esimerkiksi määrittää edistyneempiä funktioita, joita voidaan sitten käyttää alempana asiakirjassa. Katso lisää käsikirjasta.
 694#£Ei. lukujen määrä
 695#£Pyöristys
 696#£Valitse, miten luvut fomatoidaan ja pyöristetään. Alla olevissa esimerkeissä WordMat on asetettu 3 numeroon\r\n\r\nDesimaalit: 12 345\r\nMerkitsevät luvut: 12,3\r\nSci. merkintä: 1,23*10^1

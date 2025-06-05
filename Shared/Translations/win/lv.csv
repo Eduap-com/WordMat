@@ -539,9 +539,9 @@
 538#£Atlasiet izteiksmi, lai atskirtu vai novietotu kursoru izteiksme
 539#£Integret
 540#£Nosaka funkcijas nenoteikto integrali
-541#£
-542#£
-543#£
+541#£Importesanas iestatijumi
+542#£Eksportesanas iestatijumi
+543#£Pielagot izvelni
 544#£
 545#£Diagrammas diagramma (Alt+P)
 546#£Parada atlasitas(-o) funkcijas(-u)/vienadojuma(-u) un punktu grafiku. Pec tam grafiku var ievietot dokumenta. Tiek atbalstitas vairakas grafiku programmas. Sadala Iestatijumi izvelieties savu izlasi.
@@ -688,10 +688,10 @@
 687#£Nozimigi skaitli
 688#£Ieslegt/izslegt ierices
 689#£Ja vienibas ir ieslegtas, WordMath var interpretet un konvertet vienibas. Poga SI varat mainit izejas vienibas. Neiesledziet ierices, ja vien tas nav nepieciesams. Tas var ietekmet WordMat uzvedibu un rezerve daudz mainigo.
-690#£
+690#£Ievietojiet kodu bloku
 691#£Noradiet vienibas, uz kuram konvertet. Pec noklusejuma izejas vienibas ir SI vienibas.
 692#£ns
-693#£
+693#£Koda bloks ir joma, kura varat tiesi programmet Maxima. Piemeram, varat definet uzlabotakas funkcijas, kuras pec tam var izmantot talak dokumenta. Vairak skatiet rokasgramata.
 694#£Ne. skaitli
 695#£Noapalosanas
 696#£Izvelieties, ka skaitli tiek noapaloti un noapaloti. Talak minetajos piemeros WordMat ir iestatits uz 3 skaitliem\r\n\r\nDecimaldalas: 12,345\r\nNozimigi skaitli: 12,3\r\nSci. Apzimejums: 1,23*10^1

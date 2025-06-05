@@ -31,9 +31,9 @@ Sub Chi2Test()
 On Error GoTo Fejl
 
 Dim signiv As Integer
-signiv = InputBox(Sprog.A(349), Sprog.A(350), "5")
+signiv = InputBox(TT.A(349), TT.A(350), "5")
 If Selection.Tables.Count = 0 Then
-    s = InputBox(Sprog.A(351), Sprog.A(352), "2x2")
+    s = InputBox(TT.A(351), TT.A(352), "2x2")
     Arr = Split(s, "x")
     If UBound(Arr) < 1 Then Arr = Split(s, ",")
     r = Arr(0)
@@ -55,21 +55,21 @@ End If
 If r > 0 And c > 0 Then GoTo slut
 
 Selection.Collapse
-Selection.InsertAfter Sprog.A(353) & vbCrLf
-Selection.InsertAfter Sprog.A(354) & ": " & vbTab & cxl.p & " = " & cxl.p * 100 & "%" & vbCrLf
+Selection.InsertAfter TT.A(353) & vbCrLf
+Selection.InsertAfter TT.A(354) & ": " & vbTab & cxl.p & " = " & cxl.p * 100 & "%" & vbCrLf
 
 If cxl.p * 100 < signiv Then
-    Selection.InsertAfter Sprog.A(355) & " " & signiv & Sprog.A(356) & vbCrLf
+    Selection.InsertAfter TT.A(355) & " " & signiv & TT.A(356) & vbCrLf
 Else
-    Selection.InsertAfter Sprog.A(355) & " " & signiv & Sprog.A(357) & vbCrLf
+    Selection.InsertAfter TT.A(355) & " " & signiv & TT.A(357) & vbCrLf
 End If
 If cxl.Below5 Or cxl.sum < 50 Then
-    Selection.InsertAfter Sprog.A(358) & vbCrLf
+    Selection.InsertAfter TT.A(358) & vbCrLf
 End If
 
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 Application.ScreenUpdating = True
 #End If
@@ -97,13 +97,13 @@ Sub Chi2GrafNoLoad()
     xlsh.Cells(2, 1).Formula = "=G$3/100+A1"
     xlsh.Cells(1, 2).Formula = "=CHIDIST(A1,G$2)"
 
-    xlsh.Range("F1").Value = Sprog.A(359) '"Chifordeling"
-    xlsh.Range("F2").Value = Sprog.A(360) & ":"
+    xlsh.Range("F1").Value = TT.A(359) '"Chifordeling"
+    xlsh.Range("F2").Value = TT.A(360) & ":"
     xlsh.Range("G2").Value = 7
     xlsh.Range("F3").Value = "Xmax:"
     xlsh.Range("G3").Value = 15
 
-    xlsh.Range("F5").Value = Sprog.A(361) & ":"
+    xlsh.Range("F5").Value = TT.A(361) & ":"
     xlsh.Range("G5").Value = 0.05
 
     xlsh.Range("H5").Formula = "=CHIINV(G5,G2)"
@@ -150,7 +150,7 @@ Sub Chi2GrafNoLoad()
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     XLapp.ScreenUpdating = True
     XLapp.EnableEvents = True
@@ -191,7 +191,7 @@ Function betcif(Optional ByVal tal As Double = 1, Optional ByVal cif As Integer 
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Function
 Function OpenExcelWB(FilNavn As String, Optional startark As String, Optional WorkBookName As String) As Object
@@ -249,22 +249,22 @@ On Error GoTo Fejl
 Fejl:
 End Function
 Sub Chi2Graf()
-    InsertOpenExcel FilNavn:="Chi2Fordeling.xltm", WorkBookName:=Sprog.A(483)
+    InsertOpenExcel FilNavn:="Chi2Fordeling.xltm", WorkBookName:=TT.A(483)
 End Sub
 Sub NormalFordelingGraf()
-    InsertOpenExcel FilNavn:="NormalFordeling.xltm", WorkBookName:=Sprog.A(482)
+    InsertOpenExcel FilNavn:="NormalFordeling.xltm", WorkBookName:=TT.A(482)
 End Sub
 Sub BinomialFordeling()
-    InsertOpenExcel FilNavn:="BinomialFordeling.xltm", WorkBookName:=Sprog.A(585)
+    InsertOpenExcel FilNavn:="BinomialFordeling.xltm", WorkBookName:=TT.A(585)
 End Sub
 Sub GoodnessofFit()
     InsertOpenExcel "statistik.xltm", "GOF", "Goodness of fit"
 End Sub
 Sub BinomialTest()
-    If Sprog.SprogNr = 1 Then
-        InsertOpenExcel "BinomialFordeling.xltm", "Binomialtest", Sprog.A(593)
+    If TT.LangNo = 1 Then
+        InsertOpenExcel "BinomialFordeling.xltm", "Binomialtest", TT.A(593)
     Else
-        InsertOpenExcel "BinomialFordeling.xltm", "Binomial test", Sprog.A(593)
+        InsertOpenExcel "BinomialFordeling.xltm", "Binomial test", TT.A(593)
     End If
 End Sub
 

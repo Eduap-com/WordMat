@@ -177,7 +177,7 @@ Private Sub CommandButton_geogebra_Click()
         punkttekst = Replace(punkttekst, vbCrLf, ";")
         punkttekst = Replace(punkttekst, vbCr, ";")
         punkttekst = Replace(punkttekst, " ", "")
-        If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+        If Right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
         s = s & punkttekst & ";"
     End If
     s = Left(s, Len(s) - 1)
@@ -333,7 +333,7 @@ End Sub
 
 Private Sub CommandButton_nyvektor_Click()
     If TextBox_vektorer.Text <> "" Then
-        If right(TextBox_vektorer.Text, 1) = ")" Then
+        If Right(TextBox_vektorer.Text, 1) = ")" Then
             TextBox_vektorer.Text = TextBox_vektorer.Text & vbCr
         End If
     End If
@@ -557,7 +557,7 @@ If TextBox_punkter.Text <> "" Then
     punkttekst = Replace(punkttekst, vbCrLf, ",")
     punkttekst = Replace(punkttekst, vbCr, ",")
     punkttekst = Replace(punkttekst, " ", "")
-    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+    If Right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
     grafobj = grafobj & "key="""","
     
     grafobj = grafobj & "point_type=filled_circle,point_size=" & TextBox_pointsize.Text & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
@@ -626,14 +626,14 @@ End If
     If TextBox_zmin.Text <> vbNullString And TextBox_zmax.Text <> vbNullString Then
         s = s & "zrange=[" & zmin & "," & zmax & "],"
     End If
-    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    If Right(s, 1) = "," Then s = Left(s, Len(s) - 1)
     grafobj = s & ")," & grafobj
     omax.Draw3D grafobj, antalobj
     omax.PrepareNewCommand
     Label_vent.visible = False
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 
 End Sub
@@ -707,29 +707,29 @@ End Sub
 
 Sub UpdateBoldTabs()
     If TextBox_forskrift1.Text <> vbNullString Or TextBox_forskrift2.Text <> vbNullString Or TextBox_forskrift3.Text <> vbNullString Then
-        MultiPage1.Pages(0).Caption = Sprog.A(319) & "*"
+        MultiPage1.Pages(0).Caption = TT.A(319) & "*"
     Else
-        MultiPage1.Pages(0).Caption = Sprog.A(319)
+        MultiPage1.Pages(0).Caption = TT.A(319)
     End If
     If TextBox_ligning1.Text <> vbNullString Or TextBox_ligning2.Text <> vbNullString Or TextBox_ligning3.Text <> vbNullString Then
-        MultiPage1.Pages(1).Caption = Sprog.A(834) & "*"
+        MultiPage1.Pages(1).Caption = TT.A(834) & "*"
     Else
-        MultiPage1.Pages(1).Caption = Sprog.A(834)
+        MultiPage1.Pages(1).Caption = TT.A(834)
     End If
     If TextBox_vektorer.Text <> vbNullString Then ' vectors
-        MultiPage1.Pages(2).Caption = Sprog.A(836) & "*"
+        MultiPage1.Pages(2).Caption = TT.A(836) & "*"
     Else
-        MultiPage1.Pages(2).Caption = Sprog.A(836)
+        MultiPage1.Pages(2).Caption = TT.A(836)
     End If
     If (TextBox_parametric1x.Text <> vbNullString And TextBox_parametric1y.Text <> vbNullString And TextBox_parametric1z.Text <> vbNullString) Or TextBox_parametric2x.Text <> vbNullString Or TextBox_parametric3x.Text <> vbNullString Then
-        MultiPage1.Pages(3).Caption = Sprog.A(320) & "*"
+        MultiPage1.Pages(3).Caption = TT.A(320) & "*"
     Else
-        MultiPage1.Pages(3).Caption = Sprog.A(320)
+        MultiPage1.Pages(3).Caption = TT.A(320)
     End If
     If TextBox_punkter.Text <> vbNullString Then
-        MultiPage1.Pages(4).Caption = Sprog.A(835) & "*"
+        MultiPage1.Pages(4).Caption = TT.A(835) & "*"
     Else
-        MultiPage1.Pages(4).Caption = Sprog.A(835)
+        MultiPage1.Pages(4).Caption = TT.A(835)
     End If
     
 End Sub
@@ -845,17 +845,17 @@ End Sub
 Private Sub UserForm_Initialize()
     colindex = 0
     palindex = 0
-    ComboBox_kvalitet.AddItem Sprog.A(185)
-    ComboBox_kvalitet.AddItem Sprog.A(184)
-    ComboBox_kvalitet.AddItem Sprog.A(183)
-    ComboBox_kvalitet.AddItem Sprog.A(182)
-    ComboBox_kvalitet.AddItem Sprog.A(181)
+    ComboBox_kvalitet.AddItem TT.A(185)
+    ComboBox_kvalitet.AddItem TT.A(184)
+    ComboBox_kvalitet.AddItem TT.A(183)
+    ComboBox_kvalitet.AddItem TT.A(182)
+    ComboBox_kvalitet.AddItem TT.A(181)
     ComboBox_kvalitet.ListIndex = 3
     
-    ComboBox_farver.AddItem Sprog.A(321)
-    ComboBox_farver.AddItem Sprog.A(322)
-    ComboBox_farver.AddItem Sprog.A(323)
-    ComboBox_farver.AddItem Sprog.A(324)
+    ComboBox_farver.AddItem TT.A(321)
+    ComboBox_farver.AddItem TT.A(322)
+    ComboBox_farver.AddItem TT.A(323)
+    ComboBox_farver.AddItem TT.A(324)
     ComboBox_farver.ListIndex = 0
 
     SetEscEvents Me.Controls
@@ -870,54 +870,54 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.A(302)
-'    CommandButton_ok.Caption = Sprog.OK ' gnuplot not ok
-    Label6.Caption = Sprog.A(186) & " 1"
-    Label7.Caption = Sprog.A(186) & " 2"
-    Label8.Caption = Sprog.A(186) & " 3"
-    Label9.Caption = Sprog.A(198)
-    CommandButton_nulstilforsk1.Caption = Sprog.Reset
-    CommandButton_nulstilforsk2.Caption = Sprog.Reset
-    CommandButton_nulstilforsk3.Caption = Sprog.Reset
-    Label42.Caption = Sprog.A(837) & ":"
-    Label45.Caption = Sprog.A(191)
-    CommandButton_nulstilalt.Caption = Sprog.A(800)
-    Label_vent.Caption = Sprog.A(826) & "..."
-    CheckBox_grid.Caption = Sprog.A(190)
-    CheckBox_udtryk.Caption = Sprog.A(303)
-    CheckBox_transp.Caption = Sprog.A(304)
-    Label46.Caption = Sprog.A(305)
-    CheckBox_maximakommando.Caption = Sprog.A(306)
-    Frame1.Caption = Sprog.A(307)
-    OptionButton_kunlinjer.Caption = Sprog.A(308)
-    OptionButton_kunflader.Caption = Sprog.A(309)
-    OptionButton_linjerogflader.Caption = Sprog.A(310)
-    Label2.Caption = Sprog.A(833) & " 1"
-    Label3.Caption = Sprog.A(833) & " 2"
-    Label4.Caption = Sprog.A(833) & " 3"
-    CommandButton_nulstillign1.Caption = Sprog.Reset
-    CommandButton_nulstillign2.Caption = Sprog.Reset
-    CommandButton_nulstillign3.Caption = Sprog.Reset
-    Label1.Caption = Sprog.A(311)
-    CommandButton_kugle.Caption = Sprog.A(312)
-    CommandButton_insertplan.Caption = Sprog.A(313)
-    CommandButton_nulstilvektorer.Caption = Sprog.Reset
-    CommandButton_nyvektor.Caption = Sprog.A(314)
-    Label5.Caption = Sprog.A(315)
-    CommandButton_nulstilpar1.Caption = Sprog.Reset
-    CommandButton_nulstilpar2.Caption = Sprog.Reset
-    CommandButton_nulstilpar3.Caption = Sprog.Reset
-    CommandButton_parlinje.Caption = Sprog.A(200)
-    CommandButton_nyparplan.Caption = Sprog.A(313)
-    CommandButton_nulstilpunkter.Caption = Sprog.Reset
-    Label44.Caption = Sprog.A(316) & ":"
-    CheckBox_pointsjoined.Caption = Sprog.A(89)
-    Label43.Caption = Sprog.A(317)
-    Label16.Caption = Sprog.A(318)
-'    MultiPage1.Pages(0).Caption = Sprog.A(319)
-'    MultiPage1.Pages(1).Caption = Sprog.A(834)
-'    MultiPage1.Pages(2).Caption = Sprog.A(836)
-'    MultiPage1.Pages(3).Caption = Sprog.A(320)
-'    MultiPage1.Pages(4).Caption = Sprog.A(835)
-    MultiPage1.Pages(5).Caption = Sprog.A(808)
+    Me.Caption = TT.A(302)
+'    CommandButton_ok.Caption = TT.OK ' gnuplot not ok
+    Label6.Caption = TT.A(186) & " 1"
+    Label7.Caption = TT.A(186) & " 2"
+    Label8.Caption = TT.A(186) & " 3"
+    Label9.Caption = TT.A(198)
+    CommandButton_nulstilforsk1.Caption = TT.Reset
+    CommandButton_nulstilforsk2.Caption = TT.Reset
+    CommandButton_nulstilforsk3.Caption = TT.Reset
+    Label42.Caption = TT.A(837) & ":"
+    Label45.Caption = TT.A(191)
+    CommandButton_nulstilalt.Caption = TT.A(800)
+    Label_vent.Caption = TT.A(826) & "..."
+    CheckBox_grid.Caption = TT.A(190)
+    CheckBox_udtryk.Caption = TT.A(303)
+    CheckBox_transp.Caption = TT.A(304)
+    Label46.Caption = TT.A(305)
+    CheckBox_maximakommando.Caption = TT.A(306)
+    Frame1.Caption = TT.A(307)
+    OptionButton_kunlinjer.Caption = TT.A(308)
+    OptionButton_kunflader.Caption = TT.A(309)
+    OptionButton_linjerogflader.Caption = TT.A(310)
+    Label2.Caption = TT.A(833) & " 1"
+    Label3.Caption = TT.A(833) & " 2"
+    Label4.Caption = TT.A(833) & " 3"
+    CommandButton_nulstillign1.Caption = TT.Reset
+    CommandButton_nulstillign2.Caption = TT.Reset
+    CommandButton_nulstillign3.Caption = TT.Reset
+    Label1.Caption = TT.A(311)
+    CommandButton_kugle.Caption = TT.A(312)
+    CommandButton_insertplan.Caption = TT.A(313)
+    CommandButton_nulstilvektorer.Caption = TT.Reset
+    CommandButton_nyvektor.Caption = TT.A(314)
+    Label5.Caption = TT.A(315)
+    CommandButton_nulstilpar1.Caption = TT.Reset
+    CommandButton_nulstilpar2.Caption = TT.Reset
+    CommandButton_nulstilpar3.Caption = TT.Reset
+    CommandButton_parlinje.Caption = TT.A(200)
+    CommandButton_nyparplan.Caption = TT.A(313)
+    CommandButton_nulstilpunkter.Caption = TT.Reset
+    Label44.Caption = TT.A(316) & ":"
+    CheckBox_pointsjoined.Caption = TT.A(89)
+    Label43.Caption = TT.A(317)
+    Label16.Caption = TT.A(318)
+'    MultiPage1.Pages(0).Caption = TT.A(319)
+'    MultiPage1.Pages(1).Caption = TT.A(834)
+'    MultiPage1.Pages(2).Caption = TT.A(836)
+'    MultiPage1.Pages(3).Caption = TT.A(320)
+'    MultiPage1.Pages(4).Caption = TT.A(835)
+    MultiPage1.Pages(5).Caption = TT.A(808)
 End Sub

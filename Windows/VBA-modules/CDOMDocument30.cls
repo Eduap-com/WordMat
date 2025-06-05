@@ -49,7 +49,7 @@ Public Sub Save(Destination)
     Exit Sub
     
 Err:
-    MsgBox "Error saving DOM documet " & Destination & " " & Err.Description, vbOKOnly, Sprog.Error
+    MsgBox "Error saving DOM documet " & Destination & " " & Err.Description, vbOKOnly, TT.Error
     On Error Resume Next
     Close fh
 End Sub

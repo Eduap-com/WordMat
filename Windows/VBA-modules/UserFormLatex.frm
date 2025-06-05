@@ -302,7 +302,7 @@ Private Sub UserForm_Activate()
     TextBox_for.Text = ""
     TextBox_efter.Text = ""
     If Selection.OMaths.Count = 0 Then
-'        MsgBox Sprog.A(84), vbOKOnly, Sprog.Error
+'        MsgBox TT.A(84), vbOKOnly, TT.Error
     Else
         Selection.OMaths(1).Range.Select
         omax.ReadSelection
@@ -383,25 +383,25 @@ Sub SetCaptions()
     CommandButton_pdflatex.Caption = ChrW(&H2192) & " PDF"
 '    CommandButton_dvi.Caption = ChrW(&H2192) & " dvi (YAP)"
     CommandButton_latex.Caption = ChrW(&H2192) & " Tex"
-    CommandButton_ok.Caption = Sprog.A(661)
-    Label1.Caption = Sprog.A(72)
-    CommandButton_copy.Caption = Sprog.A(73)
-    Label_status.Caption = Sprog.A(826)
-    Frame1.Caption = Sprog.A(83)
-    Frame2.Caption = Sprog.A(74)
-    CheckBox_units.Caption = Sprog.A(75)
-    CheckBox_convertwithmaxima.Caption = Sprog.A(76)
-    CommandButton_convertall.Caption = Sprog.A(77)
-    CommandButton_next.Caption = Sprog.A(78)
-    Label_for.Caption = Sprog.A(79)
-    Label_efter.Caption = Sprog.A(80)
-    OptionButton_omslutingen.Caption = Sprog.A(81)
-    OptionButton_omslutuser.Caption = Sprog.A(82)
-    CheckBox_convertwithmaxima.ControlTipText = Sprog.A(659)
-    CheckBox_units.ControlTipText = Sprog.A(660)
-    Frame3.ControlTipText = Sprog.A(662)
-    CommandButton_onlinelatex.ControlTipText = Sprog.A(663)
-    CommandButton_latex.ControlTipText = Sprog.A(664)
+    CommandButton_ok.Caption = TT.A(661)
+    Label1.Caption = TT.A(72)
+    CommandButton_copy.Caption = TT.A(73)
+    Label_status.Caption = TT.A(826)
+    Frame1.Caption = TT.A(83)
+    Frame2.Caption = TT.A(74)
+    CheckBox_units.Caption = TT.A(75)
+    CheckBox_convertwithmaxima.Caption = TT.A(76)
+    CommandButton_convertall.Caption = TT.A(77)
+    CommandButton_next.Caption = TT.A(78)
+    Label_for.Caption = TT.A(79)
+    Label_efter.Caption = TT.A(80)
+    OptionButton_omslutingen.Caption = TT.A(81)
+    OptionButton_omslutuser.Caption = TT.A(82)
+    CheckBox_convertwithmaxima.ControlTipText = TT.A(659)
+    CheckBox_units.ControlTipText = TT.A(660)
+    Frame3.ControlTipText = TT.A(662)
+    CommandButton_onlinelatex.ControlTipText = TT.A(663)
+    CommandButton_latex.ControlTipText = TT.A(664)
 End Sub
 
 Sub FillComboboxDocumentclass()
@@ -426,7 +426,7 @@ Private Sub CommandButton_resetpreamble_Click()
 '   s = s & "\usepackage{geometry}" & vbCrLf
 '   s = s & "\geometry{a4paper}" & vbCrLf
 '   s = s & "\usepackage{graphicx}" & vbCrLf
-'   If Sprog.SprogNr = 1 Then
+'   If TT.LangNo = 1 Then
 '      s = s & "\graphicspath{{" & Replace(ActiveDocument.path, "\", "/") & "/" & Split(ActiveDocument.Name, ".")(0) & "Images-filer/}}" & vbCrLf
 '   Else
 '      s = s & "\graphicspath{{" & Replace(ActiveDocument.path, "\", "/") & "/" & Split(ActiveDocument.Name, ".")(0) & "Images-files/}}" & vbCrLf

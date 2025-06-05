@@ -15,7 +15,7 @@ Sub ReplaceToASCIIseq()
    
    For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
-'      If VBC.Name = "CSprog" Then
+'      If VBC.Name = "CLang" Then
 '        If MsgBox(VBC.Name, vbOKCancel, "Continue") = vbCancel Then Exit Sub
          For i = 1 To VBC.CodeModule.CountOfLines
             If i > VBC.CodeModule.CountOfLines Then Exit For
@@ -41,7 +41,7 @@ Sub ReplaceToExtendedASCII()
    
     For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
-            '      If VBC.Name = "CSprog" Then
+            '      If VBC.Name = "CLang" Then
         
             For i = 1 To VBC.CodeModule.CountOfLines
                 If i > VBC.CodeModule.CountOfLines Then Exit For
@@ -108,7 +108,7 @@ Sub ReplaceToANSI()
    
    For Each VBC In ActiveDocument.VBProject.VBComponents
         If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
-'      If VBC.Name = "CSprog" Then
+'      If VBC.Name = "CLang" Then
          For i = 2 To VBC.CodeModule.CountOfLines
             s = ReplaceLineToANSI(VBC.CodeModule.Lines(i, 1))
             VBC.CodeModule.DeleteLines i, 1
@@ -143,7 +143,7 @@ Private Function ReplaceLineToANSI(s As String) As String
 End Function
 Function FolderExists(folderPath As String) As Boolean
 
-    If right(folderPath, 1) <> "\" Then
+    If Right(folderPath, 1) <> "\" Then
         folderPath = folderPath & "\"
     End If
     
@@ -159,7 +159,7 @@ Function FolderWithVBAProjectFiles() As String
 
     SpecialPath = ActiveDocument.Path
     
-    If right(SpecialPath, 1) <> "\" Then
+    If Right(SpecialPath, 1) <> "\" Then
         SpecialPath = SpecialPath & "\"
     End If
     SpecialPath = SpecialPath & VBAModulesFolder ' "VBAProjectFiles"
@@ -221,14 +221,14 @@ Public Sub ExportAllModules()
     ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup\"
     If Dir(ModuleBackupFolder, vbDirectory) <> "" Then
         backupFolder = Dir(Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup*", vbDirectory)
-        ns = right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
+        ns = Right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
         If IsNumeric(ns) Then
             If CInt(ns) > n Then n = CInt(ns)
         End If
         Do
             backupFolder = Dir()
             If backupFolder <> vbNullString Then
-                ns = right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
+                ns = Right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
                 If IsNumeric(ns) Then
                     If CInt(ns) > n Then n = CInt(ns)
                 End If
@@ -378,11 +378,11 @@ Sub ImportAllModules()
     
     szExportPath = FolderWithVBAProjectFiles
     
-    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
+    If Right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     StrFile = Dir(szExportPath & "A-ExportCreated*")
     If StrFile <> "" Then D = Mid(StrFile, 17, Len(StrFile) - 20)
-    D = Left(D, 13) & ":" & Mid(D, 14, 2) & ":" & right(D, 2)
+    D = Left(D, 13) & ":" & Mid(D, 14, 2) & ":" & Right(D, 2)
     
     
     StrFile = Dir(szExportPath & "*")
@@ -450,7 +450,7 @@ End Sub
 Function CountFilesInFolder(folderPath As String, Optional OnlyModules As Boolean = False) As Long
     Dim fileName As String
     Dim FileCount As Long
-    If right(folderPath, 1) = "\" Then
+    If Right(folderPath, 1) = "\" Then
         fileName = Dir(folderPath & "*")
     Else
         fileName = Dir(folderPath & "\*")
@@ -489,7 +489,7 @@ Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
     End If
     
     szExportPath = FolderWithVBAProjectFiles
-    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
+    If Right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     For Each cmpComponent In wkbSource.VBProject.VBComponents
         bExport = True
@@ -557,9 +557,9 @@ Sub RemoveCommentOutThisDocument()
             If i > VBC.CodeModule.CountOfLines Then Exit For
             s = VBC.CodeModule.Lines(i, 1)
             If Left(s, 2) = "' " Then
-                s = right(s, Len(s) - 2)
+                s = Right(s, Len(s) - 2)
             ElseIf Left(s, 1) = "'" Then
-                s = right(s, Len(s) - 1)
+                s = Right(s, Len(s) - 1)
             End If
             If s <> "" Or i > 2 Then
                 VBC.CodeModule.ReplaceLine i, s
@@ -635,7 +635,7 @@ Sub BackupThisDocument()
 End Sub
 
 Sub FindUnUsedSprog()
-' Searches all the code for Sprog.A(...) to find any numbers not used
+' Searches all the code for TT.A(...) to find any numbers not used
     Dim VBC As Object 'VBComponent
     Dim i As Long, j As Long, s As String, FoundIt As Boolean
     
@@ -645,7 +645,7 @@ Sub FindUnUsedSprog()
         FoundIt = False
         For Each VBC In ActiveDocument.VBProject.VBComponents
             If VBC.Name <> "VBAmodul" And VBC.Name <> "VBAmodul1" Then
-                If InStr(VBC.CodeModule.Lines(1, VBC.CodeModule.CountOfLines), "Sprog.A(" & j & ")") > 0 Then
+                If InStr(VBC.CodeModule.Lines(1, VBC.CodeModule.CountOfLines), "TT.A(" & j & ")") > 0 Then
                     FoundIt = True
                     Exit For
                 End If

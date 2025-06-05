@@ -82,32 +82,32 @@ grafobj = grafobj & "user_preamble = ""set xyplane at 0"",colorbox=false,surface
 #End If
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     Label_vent.visible = False
 End Sub
 Private Sub UserForm_Initialize()
-    Me.Caption = Sprog.A(194)
-    ComboBox_kvalitet.AddItem Sprog.A(185)
-    ComboBox_kvalitet.AddItem Sprog.A(184)
-    ComboBox_kvalitet.AddItem Sprog.A(183)
-    ComboBox_kvalitet.AddItem Sprog.A(182)
-    ComboBox_kvalitet.AddItem Sprog.A(181)
+    Me.Caption = TT.A(194)
+    ComboBox_kvalitet.AddItem TT.A(185)
+    ComboBox_kvalitet.AddItem TT.A(184)
+    ComboBox_kvalitet.AddItem TT.A(183)
+    ComboBox_kvalitet.AddItem TT.A(182)
+    ComboBox_kvalitet.AddItem TT.A(181)
     ComboBox_kvalitet.ListIndex = 3
     TextBox_forskrift.SetFocus
     
-    Label1.Caption = Sprog.A(186)
-    Label_vent.Caption = Sprog.A(187)
-    Label5.Caption = Sprog.A(188)
-    CheckBox_linjer.Caption = Sprog.A(189)
-    CheckBox_grid.Caption = Sprog.A(190)
-    Label_quality.Caption = Sprog.A(191)
+    Label1.Caption = TT.A(186)
+    Label_vent.Caption = TT.A(187)
+    Label5.Caption = TT.A(188)
+    CheckBox_linjer.Caption = TT.A(189)
+    CheckBox_grid.Caption = TT.A(190)
+    Label_quality.Caption = TT.A(191)
 #If Mac Then
     Label7.Caption = ""
     Label9.Caption = ""
 #Else
-    Label9.Caption = Sprog.A(192)
-    Label7.Caption = Sprog.A(193)
+    Label9.Caption = TT.A(192)
+    Label7.Caption = TT.A(193)
 #End If
 
 End Sub

@@ -175,7 +175,7 @@ Public Sub Plot2DGraph()
     
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     CASengineTempOnly = TempCas
 End Sub
@@ -223,7 +223,7 @@ Sub InsertNextEquation(Ligning As String)
     End If
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -251,7 +251,7 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
         s = Trim(omax.Kommando)
         s = GetCmdAfterEqualSign(s)
         If s = "" Then
-            MsgBox2 Sprog.A(804), vbOKOnly, "Error"
+            MsgBox2 TT.A(804), vbOKOnly, "Error"
             Exit Sub
         End If
         ea.Text = s
@@ -310,7 +310,7 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -321,7 +321,7 @@ Application.ScreenUpdating = False
 
 If Not fileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
     Dim result As VbMsgBoxResult
-    result = MsgBox(Sprog.A(366), vbOKCancel, Sprog.Error)
+    result = MsgBox(TT.A(366), vbOKCancel, TT.Error)
     If result = vbOK Then
         OpenLink ("https://www.google.dk/search?q=padowan+graph")
     End If
@@ -337,7 +337,7 @@ End Sub
 Sub InsertGraphOleObject()
     ' inserts graph object padowan
 #If Mac Then
-    MsgBox "Sorry. Graph is not supported on Mac.", vbOKOnly, Sprog.Error
+    MsgBox "Sorry. Graph is not supported on Mac.", vbOKOnly, TT.Error
 #Else
     Dim Path As String
     Dim ils As InlineShape
@@ -350,7 +350,7 @@ Sub InsertGraphOleObject()
 
     ea.SetNormalBrackets
     Dim UfWait As New UserFormWaitForMaxima
-    UfWait.Label_tip.Caption = Sprog.A(371)
+    UfWait.Label_tip.Caption = TT.A(371)
     UfWait.Label_progress.Caption = "***"
     UfWait.Label_stop.visible = False
     UfWait.Show vbModeless
@@ -359,7 +359,7 @@ Sub InsertGraphOleObject()
 
     If Not fileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
         Dim result As VbMsgBoxResult
-        result = MsgBox(Sprog.A(366), vbOKCancel, Sprog.Error)
+        result = MsgBox(TT.A(366), vbOKCancel, TT.Error)
         Exit Sub
     End If
 
@@ -491,7 +491,7 @@ hop:
     Application.ScreenUpdating = True
     GoTo slut
 Fejl:
-    MsgBox Sprog.A(97), vbOKOnly, Sprog.Error
+    MsgBox TT.A(97), vbOKOnly, TT.Error
     omax.ConvertLnLog = True
     Unload UfWait
 slut:
@@ -514,7 +514,7 @@ Dim Var As String
         Var = ea2.GetNextVar
         ea2.Pos = ea2.Pos + 1
         If Not (ea2.ChrByIndex(ea2.Pos) = "(") And Not (ea.IsFunction(Var)) And Not (ea.ContainsVar(Var)) And Var <> "" And Var <> "x" And Var <> "y" And Var <> "e" And Var <> "pi" And Var <> "matrix" Then ' maybe not y? copied from geogebra
-            graphfil.AddCustomFunction Var & "=" & InputBox(Sprog.A(363) & " " & Var & vbCrLf & vbCrLf & Sprog.A(367), Sprog.A(365), "1")
+            graphfil.AddCustomFunction Var & "=" & InputBox(TT.A(363) & " " & Var & vbCrLf & vbCrLf & TT.A(367), TT.A(365), "1")
             DefList = DefList & "," & Var
         End If
     Loop While Var <> ""
@@ -569,7 +569,7 @@ Function ReplaceIndepvarX(fkt As String, Optional ByRef uvar = "", Optional DefL
         uvar = VarColl(1)
         ea.ReplaceVar uvar, "x"
     ElseIf VarColl.Count > 1 Then
-        MsgBox2 fkt & " " & Sprog.A(115), vbOKOnly, Sprog.Error
+        MsgBox2 fkt & " " & TT.A(115), vbOKOnly, TT.Error
         ReplaceIndepvarX = ""
         Exit Function
     End If
@@ -638,7 +638,7 @@ Sub InsertChart()
             End If
         End If
     Next
-    If right(ScriptFunctions, 1) = "#" Then ScriptFunctions = Left(ScriptFunctions, Len(ScriptFunctions) - 1)
+    If Right(ScriptFunctions, 1) = "#" Then ScriptFunctions = Left(ScriptFunctions, Len(ScriptFunctions) - 1)
     
     srange.Select
     'datapoints
@@ -653,7 +653,7 @@ Sub InsertChart()
             If Cregr.XValues(i) > xmax Then xmax = Cregr.XValues(i)
             If Cregr.XValues(i) < xmin Then xmin = Cregr.XValues(i)
         Next
-        If right(ScriptDataPoints, 1) = "#" Then ScriptDataPoints = Left(ScriptDataPoints, Len(ScriptDataPoints) - 1)
+        If Right(ScriptDataPoints, 1) = "#" Then ScriptDataPoints = Left(ScriptDataPoints, Len(ScriptDataPoints) - 1)
         ScriptDataPoints = ScriptDataPoints & ";" & xmin & ":" & xmax
     End If
     
@@ -706,7 +706,7 @@ Else ' indlejret
     GoToInsertPoint
     Selection.TypeParagraph
 '    Set xlap = New Excel.Application
-    Set WB = InsertIndlejret("Graphs.xltm", Sprog.A(633))
+    Set WB = InsertIndlejret("Graphs.xltm", TT.A(633))
     Set ws = WB.Sheets(1)
     Set xlap = WB.Application
 End If
@@ -790,7 +790,7 @@ End If
 
 GoTo slut:
 Fejl:
-    MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
+    MsgBox TT.A(98), vbOKOnly, TT.Error
 slut:
 On Error GoTo slut2
     UFwait2.Label_progress = UFwait2.Label_progress & "**"
@@ -867,8 +867,8 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String) As Obje
     
     Dim UFwait2 As New UserFormWaitForMaxima
     UFwait2.Label_stop.visible = False
-    UFwait2.Label_tip.Caption = "      " & Sprog.A(372) & "..."
-    UFwait2.Label_progress.Caption = Sprog.A(373)
+    UFwait2.Label_tip.Caption = "      " & TT.A(372) & "..."
+    UFwait2.Label_progress.Caption = TT.A(373)
     UFwait2.Show vbModeless
     DoEvents
     UFwait2.Label_progress = "***"
@@ -908,7 +908,7 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String) As Obje
     GoTo slut
 Fejl:
     On Error Resume Next
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     Unload UFwait2
 slut:
 End Function
@@ -927,7 +927,7 @@ Sub InsertSumkurve()
 End Sub
 Sub InsertUGrupObs()
 Dim s As String
-If Sprog.SprogNr = 1 Then
+If TT.LangNo = 1 Then
     s = "Ugrup"
 Else
     s = "Ungroup"
@@ -936,7 +936,7 @@ End If
 End Sub
 Sub InsertGrupObs()
 Dim s As String
-If Sprog.SprogNr = 1 Then
+If TT.LangNo = 1 Then
     s = "Grup"
 Else
     s = "Group"

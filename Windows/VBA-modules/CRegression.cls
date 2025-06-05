@@ -19,6 +19,11 @@ Public r As Double
 Public Ligning As String
 Private RegressionText As String
 Private regrtype As Integer
+Public ShowR As Boolean
+
+Private Sub Class_Initialize()
+    ShowR = True
+End Sub
 
 Public Property Get XValues() As Variant
     XValues = xval
@@ -183,7 +188,7 @@ NotNumber:
     Selection.TypeParagraph
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
+    MsgBox TT.A(27), vbOKOnly, TT.Error
 slut:
 
 End Sub
@@ -261,7 +266,7 @@ End If
     Selection.TypeParagraph
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
+    MsgBox TT.A(27), vbOKOnly, TT.Error
 slut:
 
 End Sub
@@ -337,7 +342,7 @@ ComputeRegr = True
 GoTo slut
 Fejl:
     ComputeRegr = False
-    MsgBox Sprog.A(28), vbOKOnly, Sprog.Error
+    MsgBox TT.A(28), vbOKOnly, TT.Error
 slut:
 End Function
 
@@ -353,7 +358,7 @@ Function Logv(val() As Double) As Variant
             j = j + 1
             arrlog(j) = Log(val(i))
         Else
-            MsgBox Sprog.A(672), vbOKOnly, Sprog.Error
+            MsgBox TT.A(672), vbOKOnly, TT.Error
             GoTo slut
         End If
     Next
@@ -378,7 +383,7 @@ Sub ComputeLinRegr()
         End If
         Ligning = Ligning & ConvertNumberToString(betcif(b, MaximaCifre))
     End If
-    RegressionText = Sprog.A(29)
+    RegressionText = TT.A(29)
 '    regrtype = 1
     Else
         Ligning = ""
@@ -407,7 +412,7 @@ Sub ComputeExpRegr()
         Ligning = Ligning & astr & "^x"
     End If
 
-    RegressionText = Sprog.A(30)
+    RegressionText = TT.A(30)
 '    regrtype = 2
     Else
         Ligning = ""
@@ -433,7 +438,7 @@ On Error GoTo Fejl
         Ligning = Ligning & VBA.ChrW(183) & "x^(" & ConvertNumberToString(betcif(A, MaximaCifre)) & ")"
     End If
     
-    RegressionText = Sprog.A(31)
+    RegressionText = TT.A(31)
 '    regrtype = 3
     Else
         Ligning = ""
@@ -444,14 +449,15 @@ On Error GoTo Fejl
     End If
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(32), vbOKOnly, Sprog.Error
+    MsgBox TT.A(32), vbOKOnly, TT.Error
 slut:
 End Sub
-Sub ComputeUserRegr()
+Function ComputeUserRegr() As Boolean
     Dim fkt As String
     Dim Arr As Variant
     Dim xlist As String, ylist As String
     Dim i As Long, guess As String, Var As String, p As Integer, eps As String
+    Dim ea As New ExpressionAnalyser, s As String
     On Error GoTo Fejl
     xlist = "["
     For i = LBound(xval) To UBound(xval)
@@ -496,28 +502,51 @@ Sub ComputeUserRegr()
     
     UserFormUserRegression.TextBox_eps.Text = MaximaCifre
     
+    ea.Text = fkt
+    omax.FindVariable (fkt)
+    Arr = Split(omax.Vars, ";")
+    For i = 0 To UBound(Arr)
+        If Arr(i) <> Var Then s = s & Arr(i) & "=" & vbCrLf
+    Next
+    UserFormUserRegression.TextBox_guess.Text = s
     UserFormUserRegression.Show
-    
+    If UserFormUserRegression.TextBox_function.Text = vbNullString Then
+        ComputeUserRegr = False
+        GoTo slut
+    End If
     eps = UserFormUserRegression.TextBox_eps.Text
     fkt = UserFormUserRegression.TextBox_function.Text
     fkt = Replace(fkt, "*", MaximaGangeTegn)
-    guess = "[" & UserFormUserRegression.TextBox_guess & "]"
+    s = UserFormUserRegression.TextBox_guess.Text
+    Do While Right(s, 1) = vbCrLf Or Right(s, 1) = vbCr Or Right(s, 1) = vbLf
+        s = Left(s, Len(s) - 1)
+    Loop
+    s = Replace(s, vbCrLf, ";")
+    s = Replace(s, vbCr, ";")
+    s = Replace(s, vbLf, ";")
+    Arr = Split(s, ";")
+    guess = "["
+    For i = 0 To UBound(Arr)
+        If Right(Arr(i), 1) <> "=" Then guess = guess & Arr(i) & ";"
+    Next
+    If Len(guess) > 1 Then guess = Left(guess, Len(guess) - 1)
+    guess = guess & "]"
     Var = UserFormUserRegression.TextBox_var.Text
     If Var <> vbNullString And fkt <> vbNullString Then
         omax.UserRegression ConvertSep(fkt), Var, xlist, ylist, CInt(eps), ConvertSep(guess)
         p = InStr(omax.KommentarOutput, "R^2=")
         If p > 0 Then
-            r = ConvertStringToNumber(right(omax.KommentarOutput, Len(omax.KommentarOutput) - p - 3))
+            r = ConvertStringToNumber(Right(omax.KommentarOutput, Len(omax.KommentarOutput) - p - 3))
         End If
-        RegressionText = Sprog.A(33) & fkt & " " & Sprog.A(34) & ": "
+'        RegressionText = TT.A(33) & fkt & " " & TT.A(34) & ": " ' now handled directly
         Ligning = omax.MaximaOutput
     End If
-    
+    ComputeUserRegr = True
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
-End Sub
+End Function
 Function ConvertSep(Text As String) As String
 ' commas and list separator
     Dim ea As New ExpressionAnalyser
@@ -562,10 +591,10 @@ Sub ComputePolRegr()
     Dim i As Integer, orden As Integer, n As Integer
     On Error Resume Next
     n = UBound(xval) - LBound(xval)
-    orden = InputBox(Sprog.A(35) & n & ")" & vbCrLf & vbCrLf & Sprog.A(36), Sprog.A(37), "2")
+    orden = InputBox(TT.A(35) & n & ")" & vbCrLf & vbCrLf & TT.A(36), TT.A(37), "2")
     On Error GoTo Fejl
     If orden < 1 Or orden > n Then
-        MsgBox "You have stated an invalid order. it must be between 1 and " & n, vbOKOnly, Sprog.Error
+        MsgBox "You have stated an invalid order. it must be between 1 and " & n, vbOKOnly, TT.Error
         Exit Sub
     End If
     
@@ -608,7 +637,7 @@ Sub ComputePolRegr()
         End If
     Next
     
-    RegressionText = Sprog.A(38) & orden & Sprog.A(34) & ": " & vbTab
+    RegressionText = TT.A(38) & orden & TT.A(34) & ": " & vbTab
 '    regrtype = 4
     Else
         Ligning = ""
@@ -620,7 +649,7 @@ Sub ComputePolRegr()
     End If
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -682,7 +711,7 @@ For i = 1 To orden + 1
 ' divides row i by the value in cell (i,i)
 For j = orden + 2 To 1 Step -1
     If m(i, i) = 0 Then
-        MsgBox "Divide by zero", vbOKOnly, Sprog.Error
+        MsgBox "Divide by zero", vbOKOnly, TT.Error
         Exit Function
     Else
         m(i, j) = m(i, j) / m(i, i)
@@ -822,11 +851,13 @@ Sub InsertEquation()
     Oundo.StartCustomRecord
     Selection.TypeText RegressionText
 
-    Selection.TypeText Text:="R"
-    Selection.Font.Superscript = wdToggle
-    Selection.TypeText Text:="2"
-    Selection.Font.Superscript = wdToggle
-    Selection.TypeText Text:=" = " & ConvertNumberToString(r)
+    If ShowR Then
+        Selection.TypeText Text:="R"
+        Selection.Font.Superscript = wdToggle
+        Selection.TypeText Text:="2"
+        Selection.Font.Superscript = wdToggle
+        Selection.TypeText Text:=" = " & ConvertNumberToString(r)
+    End If
     Selection.TypeParagraph
     Selection.Collapse
     Selection.OMaths.Add Range:=Selection.Range
@@ -836,4 +867,5 @@ Sub InsertEquation()
     Oundo.EndCustomRecord
 
 End Sub
+
 

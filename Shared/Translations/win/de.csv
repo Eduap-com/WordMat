@@ -539,9 +539,9 @@
 538#£Wählen Sie die zu unterscheidenden Ausdrücke aus, oder platzieren Sie den Cursor im Ausdruck.
 539#£Trunk-Funktion
 540#£Sucht die Stammfunktion für ausgewählte Ausdrücke (unbestimmte Integrale).
-541#£
-542#£
-543#£
+541#£Einstellungen importieren
+542#£Export-Einstellungen
+543#£Menü "Anpassen"
 544#£
 545#£Diagramm anzeigen (ALT+P)
 546#£Zeigt das Diagramm für die ausgewählten Funktionen/Gleichungen/Gleichungen und Punkte an. Das Diagramm kann anschließend in das Dokument eingefügt werden. Es werden verschiedene Grafikprogramme unterstützt. Wählen Sie Ihren Favoriten in den Einstellungen aus oder wählen Sie aus, indem Sie diese Schaltfläche erweitern
@@ -688,10 +688,10 @@
 687#£Signifikante Ziffern
 688#£Ein-/Ausschalten von einheiten
 689#£Wenn Einheiten aktiviert sind, kann WordMat Einheiten verstehen und umrechnen. Auf der Schaltfläche SI können Sie angeben, in welche Einheiten Sie umrechnen möchten. Standardmäßig erfolgt die Ausgabe in SI-Einheiten. Schalten Sie Geräte nur ein, wenn Sie sie speziell benötigen. Es kann das Verhalten der WordMat beeinflussen und reserviert viele Variablen.
-690#£
+690#£Codeblock einfügen
 691#£Geben Sie an, in welche Einheiten für Berechnungen umgerechnet werden soll. Standardmäßig erfolgt die Ausgabe in SI-Einheiten
 692#£sz
-693#£
+693#£Ein Codeblock ist ein Bereich, in dem Sie Maxima direkt programmieren können. So können Sie z.B. weitergehende Funktionen definieren, die dann weiter unten im Dokument verwendet werden können. Weitere Informationen finden Sie im Handbuch.
 694#£Anzahl der Ziffern
 695#£Rundung von Zahlen
 696#£Wählen Sie aus, wie Zahlen geschrieben und gerundet werden. In den folgenden Beispielen ist WordMat auf 3 Ziffern eingestellt.\r\n\r\nAnzahl der Dezimalstellen: 12.345\r\nWichtige Stellen: 12,3\r\nVid. Notation: 1,23*10^1

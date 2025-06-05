@@ -10,7 +10,7 @@ Sub OpenWebV()
     UFwait2.Label_tip.Font.Size = 10
     UFwait2.Label_tip.Font.Italic = False
     UFwait2.Show vbModeless
-    UFwait2.Label_tip.Caption = Sprog.A(684)
+    UFwait2.Label_tip.Caption = TT.A(684)
     UFwait2.Label_progress.Caption = "**"
     
     Err.Clear
@@ -86,7 +86,7 @@ Sub PrepareGeoGebraCAS()
         UFwait2.Label_tip.Font.Size = 10
         UFwait2.Label_tip.Font.Italic = False
         UFwait2.Show vbModeless
-        UFwait2.Label_tip.Caption = Sprog.A(684)
+        UFwait2.Label_tip.Caption = TT.A(684)
         UFwait2.Label_progress.Caption = "*"
         UFwait2.Show vbModeless
         UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
@@ -177,7 +177,7 @@ Dim res As String
 '    MsgBox Res
 End Function
 Sub GGBJSGuidance()
-    If MsgBox(Sprog.A(886), vbOKCancel, Sprog.Error) = vbOK Then
+    If MsgBox(TT.A(886), vbOKCancel, TT.Error) = vbOK Then
         OpenLink "https://eduap.com/geogebra-som-cas-motor-pa-mac/"
     End If
 End Sub
@@ -203,7 +203,7 @@ start1:
             UFwait2.Label_tip.Font.Size = 10
             UFwait2.Label_tip.Font.Italic = False
             UFwait2.Show vbModeless
-            UFwait2.Label_tip.Caption = Sprog.A(684)
+            UFwait2.Label_tip.Caption = TT.A(684)
             UFwait2.Label_progress.Caption = "*"
         End If
     Loop
@@ -216,7 +216,7 @@ start1:
             UFwait2.Label_tip.Font.Size = 10
             UFwait2.Label_tip.Font.Italic = False
             UFwait2.Show vbModeless
-            UFwait2.Label_tip.Caption = Sprog.A(684)
+            UFwait2.Label_tip.Caption = TT.A(684)
             UFwait2.Label_progress.Caption = "*"
         End If
         WebV.Reload

@@ -539,9 +539,9 @@
 538#£Selezionare l'espressione per differenziarla o posizionare il cursore nell'espressione
 539#£Integrare
 540#£Determina l'integrale indefinito della funzione
-541#£
-542#£
-543#£
+541#£Impostazioni di importazione
+542#£Impostazioni di esportazione
+543#£Personalizza il menu
 544#£
 545#£Grafico grafico (Alt+P)
 546#£Mostra il grafico per le funzioni/equazioni e i punti selezionati. Il grafico può quindi essere inserito nel documento. Sono supportati diversi programmi grafici. Scegli il tuo preferito nelle impostazioni.
@@ -688,10 +688,10 @@
 687#£Cifre significative
 688#£Accendere/spegnere le unità
 689#£Se le unità sono attivate, WordMath può interpretare e convertire le unità. Sul pulsante SI è possibile modificare le unità di uscita. Non accendere le unità, a meno che non ne sia necessario. Può influenzare il comportamento di WordMat e riserva molte variabili.
-690#£
+690#£Inserisci blocco di codice
 691#£Indicare le unità in cui eseguire la conversione. Per impostazione predefinita, le unità di output sono unità SI.
 692#£cs
-693#£
+693#£Un blocco di codice è un'area in cui è possibile programmare direttamente Maxima. Ad esempio, è possibile definire funzioni più avanzate che possono essere utilizzate più in basso nel documento. Per saperne di più, consultare il manuale.
 694#£No. di cifre
 695#£Arrotondamento
 696#£Scegli la modalità di formattazione e arrotondamento dei numeri. Negli esempi seguenti, WordMat è impostato su 3 cifre\r\n\r\nDecimali: 12.345\r\nCifre significative: 12,3\r\nSci. Notazione: 1,23*10^1

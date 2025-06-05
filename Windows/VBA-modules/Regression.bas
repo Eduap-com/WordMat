@@ -22,7 +22,7 @@ On Error GoTo Fejl
     Cregr.InsertEquation
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
+    MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
 End Sub
 Sub ekspregression()
@@ -45,7 +45,7 @@ On Error GoTo Fejl
     Cregr.InsertEquation
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
+    MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
 End Sub
 Sub potregression()
@@ -71,7 +71,7 @@ On Error GoTo Fejl
 
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
+    MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
 End Sub
 Sub polregression()
@@ -96,31 +96,39 @@ On Error GoTo Fejl
     Cregr.InsertEquation
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
+    MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
 End Sub
 Sub UserRegression()
 On Error GoTo Fejl
     Dim Cregr As New CRegression
-    Dim sslut As Long
+    Dim sslut As Long, fkt As String, r As Range
     Application.ScreenUpdating = False
+        
     sslut = Selection.End
-    
+    Set r = Selection.Range
     PrepareMaxima
+    
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+    
     If Selection.Tables.Count > 0 Then
         If Selection.OMaths.Count > 0 Then
-'            Selection.OMaths(Selection.OMaths.count).Range.Select
             omax.ReadSelection
-            omax.Kommando = omax.ConvertToAscii(omax.Kommando)
+            fkt = omax.ConvertToAscii(omax.Kommando)
         End If
         Cregr.GetTableData
+        r.Select
         Selection.Collapse wdCollapseEnd
         Selection.TypeParagraph
     Else
         InsertTabel
         GoTo slut
     End If
-    Cregr.ComputeUserRegr
+    omax.Kommando = fkt
+    If Not Cregr.ComputeUserRegr Then GoTo slut
+    
     If Selection.OMaths.Count > 0 Then
         Selection.End = sslut
         Selection.start = sslut
@@ -128,21 +136,44 @@ On Error GoTo Fejl
         Selection.Collapse wdCollapseEnd
         Selection.TypeParagraph
     End If
+    Selection.TypeText TT.A(33) & ":  "
+    Selection.OMaths.Add Selection.Range
+    Selection.OMaths(1).Range.Text = Replace(fkt, "*", MaximaGangeTegn)
+    Selection.OMaths(1).BuildUp
+    Selection.OMaths(1).Range.Select
+    Selection.Collapse wdCollapseEnd
+    Selection.MoveRight wdCharacter, 1
+    Selection.TypeText "  " & TT.A(34) & ": "
+    Oundo.EndCustomRecord
     Cregr.InsertEquation
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(26), vbOKOnly, Sprog.Error
+    Oundo.EndCustomRecord
+    MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
+    Oundo.EndCustomRecord
 End Sub
 Sub InsertTabel()
-    Dim antalp As Integer
+    Dim antalp As Integer, s As String
     Application.ScreenUpdating = False
     SaveBackup
-    antalp = val(InputBox(Sprog.A(24), Sprog.A(202), ""))
-    If antalp = 0 Then Exit Sub
+'    antalp = val(InputBox(TT.A(24), TT.A(202), ""))
+
+    UserFormInputBox.MsgBoxStyle = vbOKCancel
+    UserFormInputBox.prompt = TT.A(24)
+    UserFormInputBox.Title = TT.A(202)
+    UserFormInputBox.MultiLine = False
+    UserFormInputBox.SetDefaultInput 10
+    UserFormInputBox.Show
+    If UserFormInputBox.MsgBoxResult = vbCancel Then Exit Sub
+    s = UserFormInputBox.InputString
+    If IsNumeric(s) Then
+        antalp = CInt(s)
+    End If
+    If antalp <= 0 Then Exit Sub
         
     If antalp > 200 Then
-        MsgBox Sprog.A(25)
+        MsgBox2 TT.A(25)
     ElseIf antalp > 0 Then
         Selection.Collapse wdCollapseEnd
         

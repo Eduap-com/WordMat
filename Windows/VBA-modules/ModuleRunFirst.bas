@@ -79,15 +79,16 @@ Sub SetMaxProc()
             Err.Clear
             If QActivePartnership(False, True) Then
                 If DllConnType = 0 Or DllConnType = 1 Then
-                    If MsgBox2(Sprog.A(885), vbYesNo, Sprog.Error) = vbYes Then
+                    If MsgBox2(TT.A(885), vbYesNo, TT.Error) = vbYes Then
                         DllConnType = 2
                     End If
                 End If
             Else
-                MsgBox2 Sprog.A(54), vbOKOnly, Sprog.Error
+                MsgBox2 TT.A(54), vbOKOnly, TT.Error
             End If
         End If
     End If
+    
 #End If
 
 End Sub

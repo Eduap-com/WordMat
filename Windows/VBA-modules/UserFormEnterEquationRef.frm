@@ -55,7 +55,7 @@ Dim i As Integer
     If InStr(EquationName, " ") > 0 Then
         EquationName = ""
         Label_error.visible = True
-        Label_error.Caption = Sprog.A(13)
+        Label_error.Caption = TT.A(13)
         TextBox1.SetFocus
         Exit Sub
     End If
@@ -63,7 +63,7 @@ For i = 1 To ActiveDocument.Bookmarks.Count
     If ActiveDocument.Bookmarks(i).Name = EquationName Then
         EquationName = ""
         Label_error.visible = True
-        Label_error.Caption = Sprog.A(12)
+        Label_error.Caption = TT.A(12)
         TextBox1.SetFocus
         Exit Sub
     End If
@@ -106,13 +106,13 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.A(5)
-    Label_name.Caption = Sprog.A(5)
-    Label_cancel.Caption = Sprog.Cancel
-    Label_ok.Caption = Sprog.OK
-    Label_ligninger.Caption = Sprog.A(10)
-    Label_help.Caption = Sprog.A(11)
-    Label_error.Caption = Sprog.A(12)
+    Me.Caption = TT.A(5)
+    Label_name.Caption = TT.A(5)
+    Label_cancel.Caption = TT.Cancel
+    Label_ok.Caption = TT.OK
+    Label_Ligninger.Caption = TT.A(10)
+    Label_help.Caption = TT.A(11)
+    Label_error.Caption = TT.A(12)
 End Sub
 
 Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)

@@ -66,16 +66,16 @@ Dim i As Integer
     Arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
     For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
+        If Len(Arr(i)) > 2 And Not Right(Arr(i), 1) = "=" Then
             If Split(Arr(i), "=")(0) <> TextBox_funktion.Text Then ' cant define variable to be solved for
                 TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
-                MsgBox Sprog.A(252) & " " & TextBox_funktion.Text & " " & Sprog.A(253), vbOKOnly, Sprog.Error
+                MsgBox TT.A(252) & " " & TextBox_funktion.Text & " " & TT.A(253), vbOKOnly, TT.Error
                 Exit Sub
             End If
         End If
     Next
-    If right(TempDefs, 1) = ListSeparator Then
+    If Right(TempDefs, 1) = ListSeparator Then
         TempDefs = Left(TempDefs, Len(TempDefs) - 1)
     End If
     End If
@@ -88,7 +88,7 @@ Private Sub Label_solvenum_Click()
    Arr = Split(Label_ligning.Caption, "=")
    If UBound(Arr) > 0 Then F = Trim(Arr(1))
    If Len(Trim(Arr(0))) > 2 Then
-      MsgBox Sprog.A(847), vbOKOnly, Sprog.Error
+      MsgBox TT.A(847), vbOKOnly, TT.Error
       Exit Sub
    End If
    luk = True
@@ -197,16 +197,16 @@ On Error Resume Next
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.A(745)
-    Label1.Caption = Sprog.A(744) & ":"
-    Label3.Caption = Sprog.A(746)
-    Label2.Caption = Sprog.A(747)
-    Label4.Caption = Sprog.A(748) & ":"
-    Label8.Caption = Sprog.A(297)
-    Label_temp.Caption = Sprog.A(764)
-    Label_cancel.Caption = Sprog.Cancel
-    Label_ok.Caption = Sprog.OK
-    Label_solvenum.Caption = Sprog.A(887)
+    Me.Caption = TT.A(745)
+    Label1.Caption = TT.A(744) & ":"
+    Label3.Caption = TT.A(746)
+    Label2.Caption = TT.A(747)
+    Label4.Caption = TT.A(748) & ":"
+    Label8.Caption = TT.A(297)
+    Label_temp.Caption = TT.A(764)
+    Label_cancel.Caption = TT.Cancel
+    Label_ok.Caption = TT.OK
+    Label_solvenum.Caption = TT.A(887)
 End Sub
 Private Sub Label_solvenum_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_solvenum.BackColor = LBColorPress

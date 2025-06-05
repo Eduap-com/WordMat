@@ -539,9 +539,9 @@
 538#£Zaznacz wyrazenie, aby je odróznic, lub umiesc kursor w wyrazeniu
 539#£Integrowac
 540#£Okresla calke nieoznaczona funkcji
-541#£
-542#£
-543#£
+541#£Importowanie ustawien
+542#£Eksportowanie ustawien
+543#£Dostosuj menu
 544#£
 545#£Wykres wykresu (Alt+P)
 546#£Pokazuje wykres dla wybranych funkcji/równan i punktów. Wykres mozna nastepnie wstawic do dokumentu. Obslugiwanych jest kilka programów wykresów. Wybierz swoja ulubiona w ustawieniach.
@@ -688,10 +688,10 @@
 687#£Znaczace liczby
 688#£Wlaczanie/wylaczanie jednostek
 689#£Jesli jednostki sa wlaczone, program WordMath moze interpretowac i konwertowac jednostki. Na przycisku SI mozna zmienic jednostki wyjsciowe. Nie wlaczaj jednostek, chyba ze jest to konieczne. Moze wplywac na zachowanie WordMat i rezerwuje wiele zmiennych.
-690#£
+690#£Wstawianie bloku kodu
 691#£Podaj jednostki, na które chcesz przekonwertowac. Domyslnie jednostkami wyjsciowymi sa jednostki SI.
 692#£zl
-693#£
+693#£Blok kodu to obszar, w którym mozna bezposrednio zaprogramowac Maxima. Na przyklad mozna zdefiniowac bardziej zaawansowane funkcje, które moga byc nastepnie uzywane w dalszej czesci dokumentu. Zobacz wiecej w instrukcji.
 694#£Nie. liczb
 695#£Zaokraglanie
 696#£Wybierz, w jaki sposób liczby maja byc mapowane i zaokraglane. W ponizszych przykladach WordMat jest ustawiony na 3 cyfry\r\n\r\nUlamki dziesietne: 12,345\r\nCyfry znaczace: 12,3\r\nSci. Notacja: 1,23*10^1

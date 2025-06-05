@@ -7,7 +7,7 @@ Sub Chi2Fordeling()
     Dim ut As String
     Dim kstring As String
     
-    kstring = InputBox(Sprog.A(398), Sprog.A(360), "n")
+    kstring = InputBox(TT.A(398), TT.A(360), "n")
     k = val(kstring)
     If (k > 0 And k <= 20) Or (k > 20 And Int(k / 2) = k / 2) Then
         g = Gamma(k / 2)
@@ -16,7 +16,7 @@ Sub Chi2Fordeling()
     Else
         ut = "f(x)" & VBA.ChrW(8801) & "1/(2^(n/2)" & ChrW(183) & VBA.ChrW(915) & "(n/2) )" & ChrW(183) & "x^(n/2-1)" & ChrW(183) & "e^(-x/2)"
     End If
-    Selection.InsertAfter (VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & " - " & Sprog.A(399) & " " & kstring & " " & Sprog.A(360))
+    Selection.InsertAfter (VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & " - " & TT.A(399) & " " & kstring & " " & TT.A(360))
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
     

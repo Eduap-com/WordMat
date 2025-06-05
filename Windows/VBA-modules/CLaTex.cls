@@ -252,7 +252,7 @@ Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 
 End Sub
@@ -261,7 +261,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
     Dim i As Integer, j As Integer
     Dim mtpath As String
 #If Mac Then
-    MsgBox Sprog.A(410), vbOKOnly, Sprog.Error
+    MsgBox TT.A(410), vbOKOnly, TT.Error
 #Else
     Dim x64 As String
     MikTexPath ' called to set miktex64bit
@@ -270,7 +270,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
     End If
     mtpath = MikTexPath
     If mtpath = "" Then
-        MsgBox Sprog.A(409)
+        MsgBox TT.A(409)
         OpenLink "https://miktex.org"
         GoTo slut
     End If
@@ -299,14 +299,14 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
     If Dir(Mappe & "\" & FilNavn & ".dvi") > "" Then
         RunDefaultProgram Mappe & "\" & FilNavn & ".dvi", Mappe
     Else
-        MsgBox "Could not create dvi-file. The tex-file is now opening so you can identify the error", vbOKOnly, Sprog.Error
+        MsgBox "Could not create dvi-file. The tex-file is now opening so you can identify the error", vbOKOnly, TT.Error
         RunDefaultProgram FilNavn & ".tex", Mappe
     End If
 
     'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 #End If
 End Sub
@@ -323,7 +323,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
     '      End If
       
 #If Mac Then
-    MsgBox Sprog.A(410), vbOKOnly, Sprog.Error
+    MsgBox TT.A(410), vbOKOnly, TT.Error
 #Else
     Dim x64 As String
    
@@ -339,7 +339,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     mtpath = MikTexPath
     If mtpath = "" Then
-        MsgBox Sprog.A(409), vbOKOnly
+        MsgBox TT.A(409), vbOKOnly
         OpenLink "https://miktex.org"
         GoTo slut
     End If
@@ -385,13 +385,13 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
     Loop While ReRun And j < 6
    
     If ErrorS <> "" Then
-        If MsgBox("The tex-document failed to compile with the following error:" & vbCrLf & vbCrLf & ErrorS & vbCrLf & vbCrLf & "Click OK to open the tex-file", vbOKCancel, Sprog.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
+        If MsgBox("The tex-document failed to compile with the following error:" & vbCrLf & vbCrLf & ErrorS & vbCrLf & vbCrLf & "Click OK to open the tex-file", vbOKCancel, TT.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
     Else
         Wait 1
         If Dir(Mappe & "\" & FilNavn & ".pdf") > "" Then
             RunDefaultProgram FilNavn & ".pdf", Mappe
         Else
-            If MsgBox("Could not locate the pdf-file. Click OK to open the tex-file so you can identify the error", vbOKOnly, Sprog.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
+            If MsgBox("Could not locate the pdf-file. Click OK to open the tex-file so you can identify the error", vbOKOnly, TT.Error) = vbOK Then RunDefaultProgram FilNavn & ".tex", Mappe
         End If
         If Dir(Mappe & "\" & FilNavn & ".log") <> "" Then Kill Mappe & "\" & FilNavn & ".log"
         If Dir(Mappe & "\" & FilNavn & ".aux") <> "" Then Kill Mappe & "\" & FilNavn & ".aux"
@@ -401,7 +401,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
 #End If
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -459,7 +459,7 @@ Sub InsertParagraph(Text As String)
    End If
 End Sub
 Sub InsertChapter(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+   If Right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If InStr(Text, "*") > 0 Then
       LaTexDoc = LaTexDoc & "\chapter*{" & Replace(Text, "*", "") & "}" & vbCrLf
@@ -468,7 +468,7 @@ Sub InsertChapter(Text As String)
    End If
 End Sub
 Sub InsertSection(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+   If Right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If LatexSectionNumbering Then
       If InStr(Text, "*") > 0 Then
@@ -481,7 +481,7 @@ Sub InsertSection(Text As String)
    End If
 End Sub
 Sub InsertSubSection(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+   If Right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If LatexSectionNumbering Then
       If InStr(Text, "*") > 0 Then
@@ -494,7 +494,7 @@ Sub InsertSubSection(Text As String)
    End If
 End Sub
 Sub InsertSubSubSection(Text As String)
-   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+   If Right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If LatexSectionNumbering Then
       If InStr(Text, "*") > 0 Then

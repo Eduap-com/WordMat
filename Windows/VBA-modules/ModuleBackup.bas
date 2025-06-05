@@ -18,7 +18,7 @@ Sub SaveBackup()
     ElseIf BackupType = 0 And BackupAnswer = 0 Then
         Set UFbackup = New UserFormBackup
         UFbackup.Show
-        '        If MsgBox(Sprog.A(179), vbYesNo, "Backup") = vbNo Then
+        '        If MsgBox(TT.A(179), vbYesNo, "Backup") = vbNo Then
         If UFbackup.Backup = False Then
             BackupAnswer = 2
             Exit Sub
@@ -30,7 +30,7 @@ Sub SaveBackup()
     If timer - SaveTime < BackupTime * 60 Then Exit Sub
     SaveTime = timer
     If ActiveDocument.Path = "" Then
-        MsgBox Sprog.A(679)
+        MsgBox TT.A(679)
         Exit Sub
     End If
     Set UfWait = New UserFormWaitForMaxima
@@ -81,7 +81,7 @@ Sub SaveBackup()
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.A(178), vbOKOnly, Sprog.A(208)
+    MsgBox TT.A(178), vbOKOnly, TT.A(208)
 slut:
     On Error Resume Next
     If Not UfWait Is Nothing Then Unload UfWait

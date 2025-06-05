@@ -539,9 +539,9 @@
 538#£Vel orðatiltæki at skilja ímillum, ella set/setið bendilin í orðalagið.
 539#£Trunk funktion
 540#£Finnur stamvirki fyri valdar orðingar (óákveðin integral).
-541#£
-542#£
-543#£
+541#£Flyt inn stillingar
+542#£Flyt út stillingar
+543#£Tillaga matseðilin
 544#£
 545#£Skoða graf (Alt+P)
 546#£Vísir grafin fyri valdar funktiónir/líkningar/líkningar og punkt. Grafin kann síðani setast inn í skjalið. Ymisk grafforrit eru stuðlað. Vel tín yndis í stillingunum ella veljið við at víðka henda knøttin
@@ -688,10 +688,10 @@
 687#£Týdningarmikil taltøl
 688#£Tendra/sløkkja tól
 689#£Um eindir eru tendraðar, kann WordMat skilja og umseta eindir. Á SI-knøttinum kanst tú lýsa, hvørjar eindir tú vilt broyta til. Sum standard er úttakið í SI-eindum. Tendra/Tendrið ikki tól, uttan so at tær serliga tørvar tað. Tað kann ávirka atburðin hjá WordMat og goymir nógvar brigdlar.
-690#£
+690#£Seta kodeblokk inn
 691#£Lýs hvørjar eindir tú skal umseta til til útrokningar. Sum standard er úttakið í SI-eindum
 692#£tt
-693#£
+693#£Ein kodeblokk er eitt øki, har tú kanst forrita Maxima beinleiðis. Til dømis kanst tú lýsa meira framkomnar funktiónir, sum síðan kunnu nýtast longri niðri í skjalinum. Sjá meira í handbókini.
 694#£Tal av talteknum
 695#£Avrunding av tali
 696#£Vel hvussu tøl skulu skrivast og rundast av. Í dømunum niðanfyri er WordMat sett til 3 tal.\r\n\r\nTal av desimalplássum: 12,345\r\nTýdningarmikil tal: 12,3\r\nVid. Notan: 1.23*10^1

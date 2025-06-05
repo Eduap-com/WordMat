@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormUserRegression 
    Caption         =   "Regression"
-   ClientHeight    =   3135
+   ClientHeight    =   4500
    ClientLeft      =   30
    ClientTop       =   165
-   ClientWidth     =   9345.001
+   ClientWidth     =   9195.001
    OleObjectBlob   =   "UserFormUserRegression.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -53,23 +53,27 @@ Private Sub CommandButton_ok_Click()
     Me.hide
 End Sub
 
-Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+Private Sub TextBox_eps_Change()
+    UpdateWarning
+End Sub
+
+Sub UpdateWarning()
     Dim n As Long
     On Error GoTo Fejl
     If Not EventsOn Then Exit Sub
     EventsOn = False
     n = val(TextBox_eps.Text)
-    If n > 0 And n < 5 Then
+    If n > 0 And n <= 7 Then
         Label_epswarning.Caption = ""
 '        Label_epswarning.visible = False
-    ElseIf n > 4 And n < 7 Then
-        Label_epswarning.Caption = Sprog.A(44)
+    ElseIf n > 7 And n <= 8 Then
+        Label_epswarning.Caption = TT.A(44)
         Label_eps.visible = True
-    ElseIf n > 6 Then
-        Label_epswarning.Caption = Sprog.A(43)
+    ElseIf n > 8 Then
+        Label_epswarning.Caption = TT.A(43)
         Label_eps.visible = True
     ElseIf n < 0 Then
-        Label_epswarning.Caption = Sprog.A(45)
+        Label_epswarning.Caption = TT.A(45)
         Label_eps.visible = True
     Else
 '        Label_epswarning.visible = False
@@ -77,28 +81,27 @@ Private Sub TextBox_eps_KeyUp(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shif
 
 GoTo slut
 Fejl:
-        Label_epswarning.Caption = Sprog.A(46)
+        Label_epswarning.Caption = TT.A(46)
         Label_eps.visible = True
 slut:
     EventsOn = True
-
 End Sub
-
 Private Sub UserForm_Activate()
-EventsOn = True
+    EventsOn = True
     SetCaptions
+    UpdateWarning
+'    TextBox_eps.Text = MaximaCifre
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.A(39)
-    Label_function.Caption = Sprog.A(40)
-    Label_var.Caption = Sprog.A(746)
-    Label_eps.Caption = Sprog.A(41)
-    Label_guess.Caption = Sprog.A(42)
-    CommandButton_ok.Caption = Sprog.OK
-    CommandButton_cancel.Caption = Sprog.Cancel
-    Label_epswarning.Caption = Sprog.A(658)
-    
+    Me.Caption = TT.A(39)
+    Label_function.Caption = TT.A(40)
+    Label_var.Caption = TT.A(746)
+    Label_eps.Caption = TT.A(41)
+    Label_guess.Caption = TT.A(42)
+    CommandButton_ok.Caption = TT.OK
+    CommandButton_cancel.Caption = TT.Cancel
+    Label_epswarning.Caption = TT.A(658)
 End Sub
 
 Private Sub UserForm_Initialize()

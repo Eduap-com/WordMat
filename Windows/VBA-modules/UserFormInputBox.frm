@@ -1,19 +1,18 @@
 VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormMsgBox 
-   Caption         =   "MsgBox"
+Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormInputBox 
+   Caption         =   "InputBox"
    ClientHeight    =   3750
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   7260
-   OleObjectBlob   =   "UserFormMsgBox.frx":0000
+   OleObjectBlob   =   "UserFormInputBox.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
-Attribute VB_Name = "UserFormMsgBox"
+Attribute VB_Name = "UserFormInputBox"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
 Option Explicit
 ' This is a replacement for msgbox. It has the same design as the other Forms, and the size can be set automatically to fit the text
 
@@ -21,8 +20,10 @@ Public MsgBoxStyle As VbMsgBoxStyle
 Public MsgBoxResult As VbMsgBoxResult
 Public Title As String
 Public prompt As String
+Public InputString As String
 
 Private EventsCol As New Collection
+
 Sub SetEscEvents(ControlColl As Controls)
 ' SetEscEvents Me.Controls     in Initialize
     Dim CE As CEvents, c As control, TN As String, F As MSForms.Frame
@@ -55,21 +56,14 @@ Private Sub CommandButton_ok_Click()
 End Sub
 
 Private Sub Label_cancel_Click()
-    If MsgBoxStyle = vbOKOnly Or MsgBoxStyle = vbOKCancel Then
-        MsgBoxResult = vbCancel
-    Else
-        MsgBoxResult = vbNo
-    End If
+    MsgBoxResult = vbCancel
     On Error Resume Next
     Me.hide
 End Sub
 
 Private Sub Label_ok_Click()
-    If MsgBoxStyle = vbOKOnly Or MsgBoxStyle = vbOKCancel Then
-        MsgBoxResult = vbOK
-    Else
-        MsgBoxResult = vbYes
-    End If
+    MsgBoxResult = vbOK
+    InputString = TextBox_input.Text
     Me.hide
 End Sub
 
@@ -111,10 +105,17 @@ Private Sub UserForm_Activate()
     prompt = Replace(prompt, vbCr, vbLf)
 #Else
 #End If
+    InputString = vbNullString
 '    prompt = Replace(prompt, vbCr, vbLf)
     Arr = Split(prompt, vbLf)
 '    h = 120 + 16 * GetCountOfChar(prompt, VbCrLfMac)
-    h = 120 + 16 * UBound(Arr)
+    If TextBox_input.MultiLine Then
+        TextBox_input.Height = 90
+    Else
+        TextBox_input.Height = 20
+    End If
+    
+    h = 120 + 16 * UBound(Arr) + TextBox_input.Height
     If h > 1000 Then h = 1000
     
     For i = 0 To UBound(Arr)
@@ -128,7 +129,10 @@ Private Sub UserForm_Activate()
     Me.Height = h
     Me.Width = w
     Label_prompt.Width = w - 30
-    Label_prompt.Height = h - 80
+    
+    TextBox_input.Top = Label_prompt.Top + Label_prompt.Height + 5
+    TextBox_input.Width = w - 30
+    Label_prompt.Height = h - TextBox_input.Height - 80
     
 
     If MsgBoxStyle = vbOKOnly Then
@@ -152,9 +156,28 @@ Private Sub UserForm_Activate()
     
     Me.Caption = Title
     Label_prompt.Caption = prompt
-    
+    TextBox_input.selStart = 0
+    TextBox_input.SelLength = Len(TextBox_input.Text)
+    TextBox_input.SetFocus
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
     Label_cancel_Click
 End Sub
+
+Public Function SetDefaultInput(Dinput As String)
+    TextBox_input.Text = Dinput
+End Function
+
+Public Property Get MultiLine() As Boolean
+    MultiLine = TextBox_input.MultiLine
+End Property
+
+Public Property Let MultiLine(ByVal bNewValue As Boolean)
+    TextBox_input.MultiLine = bNewValue
+    If bNewValue Then
+        TextBox_input.Height = 90
+    Else
+        TextBox_input.Height = 20
+    End If
+End Property

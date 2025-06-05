@@ -539,9 +539,9 @@
 538#£Eristatava avaldise valimine või kursori avaldisse paigutamine
 539#£Integreerida
 540#£Määrab funktsiooni määramatu integraali
-541#£
-542#£
-543#£
+541#£Sätete importimine
+542#£Sätete eksportimine
+543#£Kohanda menüüd
 544#£
 545#£Graafiku graafik (Alt+P)
 546#£Näitab valitud funktsiooni(de)/võrrandi(te) ja punktide graafikut. Seejärel saab graafiku dokumenti sisestada. Toetatud on mitmed graafikaprogrammid. Valige seadete alt oma lemmik.
@@ -688,10 +688,10 @@
 687#£Olulised arvud
 688#£Lülitage seadmed sisse/välja
 689#£Kui ühikud on sisse lülitatud, saab WordMath ühikuid tõlgendada ja teisendada. SI nupul saate muuta väljundühikuid. Ärge lülitage seadmeid sisse, kui te seda ei vaja. See võib mõjutada WordMati käitumist ja reserveerida palju muutujaid.
-690#£
+690#£Koodiploki lisamine
 691#£Märkige ühikud, milleks teisendada. Vaikimisi on väljundühikud SI-ühikud.
 692#£oa
-693#£
+693#£Koodiplokk on ala, kus saate Maximat otse programmeerida. Näiteks saate määratleda täpsemaid funktsioone, mida saab seejärel dokumendis allosas kasutada. Vaata lähemalt juhendist.
 694#£Ei. arvude arv
 695#£Ümardamise
 696#£Valige, kuidas arvud fomateeritakse ja ümardatakse. Allolevates näidetes on WordMat seatud 3 numbrile\r\n\r\nKümnendkohad: 12 345\r\nOlulised arvud: 12,3\r\nSci. Tähis: 1,23*10^1

@@ -27,7 +27,7 @@ Public Sub SaveFile(doctype As Integer)
    
    ' check if miktex installed
    If Not latexfil.IsMikTexInstalled Then
-      MsgBox "MikTex is not installed. You will now be sent to miktex.org where you can download. After the download you will also be prompted to download some packages the first time you run the converter. Just click ok.", vbOKOnly, Sprog.Error
+      MsgBox "MikTex is not installed. You will now be sent to miktex.org where you can download. After the download you will also be prompted to download some packages the first time you run the converter. Just click ok.", vbOKOnly, TT.Error
       OpenLink "https://miktex.org/download"
       GoTo slut
    End If
@@ -252,7 +252,7 @@ Public Sub SaveFile(doctype As Integer)
                If FN <> "" Or ln <> "" Then
                   SrcAuthor = SrcAuthor & FN & " " & ln & ", "
                   p = InStr(nl, "</b:Person>")
-                  nl = right(nl, Len(nl) - p - 10)
+                  nl = Right(nl, Len(nl) - p - 10)
                End If
             Loop While FN <> "" And ln <> "" And nl <> ""
             
@@ -656,8 +656,8 @@ Sub ConvertEquationToLatex(Optional KeepOriginal As Boolean = False)
                     s = "$" & LatexCode & "$"
                 End If
             Else
-                If InStr(EqStart, "\begin") > 0 Then EqStart = Left(EqStart, Len(EqStart) - 1) & "*" & right(EqStart, 1)
-                If InStr(EqEnd, "\end") > 0 Then EqEnd = Left(EqEnd, Len(EqEnd) - 1) & "*" & right(EqEnd, 1)
+                If InStr(EqStart, "\begin") > 0 Then EqStart = Left(EqStart, Len(EqStart) - 1) & "*" & Right(EqStart, 1)
+                If InStr(EqEnd, "\end") > 0 Then EqEnd = Left(EqEnd, Len(EqEnd) - 1) & "*" & Right(EqEnd, 1)
                 s = EqStart & LatexCode & EqEnd
             End If
         End If
@@ -745,7 +745,7 @@ Function ReadTextfileToString(FilNavn As String) As String
 
    GoTo slut
 Fejl:
-   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+   MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 
 End Function
@@ -772,6 +772,7 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
    fsT.Charset = "iso-8859-1" 'Specify charset For the source text data. utf-8
    fsT.Open 'Open the stream And write binary data To the object
    fsT.WriteText WriteText
+   On Error GoTo 0
    fsT.SaveToFile FilNavn, 2 'Save binary data To disk
    fsT.Close
    Set fsT = Nothing
@@ -779,7 +780,7 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
 
    GoTo slut
 Fejl:
-   MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+   MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 
 End Sub

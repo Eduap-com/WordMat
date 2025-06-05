@@ -18,7 +18,7 @@ Public Pos As Long
 Public Function GetNextchr() As String
 ' returns the next letter in the string and removes it
 GetNextchr = Left(Text, 1)
-Text = right(Text, Len(Text) - 1)
+Text = Right(Text, Len(Text) - 1)
 
 End Function
 
@@ -372,7 +372,7 @@ End Function
 Public Sub InsertUnderstoodBracketPair()
     'inserts parenthesis just before current position and finds where the closing parenthesis should be
     Dim c As Integer
-    Text = Left(Text, Pos - 1) & StartBracket & right(Text, Len(Text) - Pos + 1)
+    Text = Left(Text, Pos - 1) & StartBracket & Right(Text, Len(Text) - Pos + 1)
     Pos = Pos + 1
     c = AscW(ChrByIndex(Pos)) ' +2 instead of +1 as it can give () e.g. at x^-2 ->x^()-2
     If Not (c = 40 Or c = 91 Or c = 123 Or c = 124 Or c = 12310) Then Pos = Pos + 1 ' 40=(, 91=[ , 123={ , 124=|
@@ -383,7 +383,7 @@ Public Sub InsertUnderstoodBracketPair()
     Else
         FindHierakiBreak 3
         ' inserts parentheses after current position
-        Text = Left(Text, Pos) & EndBracket & right(Text, Len(Text) - Pos)
+        Text = Left(Text, Pos) & EndBracket & Right(Text, Len(Text) - Pos)
     End If
 End Sub
 Public Sub InsertUnderstoodBracketPairBefore()
@@ -401,8 +401,8 @@ Public Sub InsertUnderstoodBracketPairBefore()
     FindPrevBreak
     
     If (ChrByIndex(gpos) <> ")" Or ChrByIndex(Pos) <> "(") Then
-        Text = Left(Text, Pos - 1) & StartBracket & right(Text, Len(Text) - Pos + 1)
-        Text = Left(Text, gpos + 1) & EndBracket & right(Text, Len(Text) - gpos - 1)
+        Text = Left(Text, Pos - 1) & StartBracket & Right(Text, Len(Text) - Pos + 1)
+        Text = Left(Text, gpos + 1) & EndBracket & Right(Text, Len(Text) - gpos - 1)
     End If
     
 End Sub
@@ -480,7 +480,7 @@ Public Sub InsertBeforePos(s As String, Optional ByVal position As Long)
     If position = 1 Then
         Text = s & Text
     Else
-        Text = Left(Text, position - 1) & s & right(Text, Len(Text) - position + 1)
+        Text = Left(Text, position - 1) & s & Right(Text, Len(Text) - position + 1)
     End If
 End Sub
 Public Sub InsertAfterPos(s As String, Optional ByVal position As Long = -1)
@@ -490,7 +490,7 @@ Public Sub InsertAfterPos(s As String, Optional ByVal position As Long = -1)
     If position = Len(Text) Then
         Text = Text & s
     Else
-        Text = Left(Text, position) & s & right(Text, Len(Text) - position)
+        Text = Left(Text, position) & s & Right(Text, Len(Text) - position)
     End If
 End Sub
 Public Function GetNextVar(Optional StartPos As Long) As String
@@ -677,17 +677,17 @@ p = 0
 Do
     p = InStr(p + 1, Text, " ")
     If p = 1 Then
-        Text = right(Text, Len(Text) - 1)
+        Text = Right(Text, Len(Text) - 1)
     ElseIf p = Len(Text) Then
         Text = Left(Text, Len(Text) - 1)
     ElseIf p > 0 Then
         If IsLetterPos(p - 1, False) Then
             If IsLetterPos(p + 1, True) Or IsNumber(p + 1) Then
-                Text = Left(Text, p - 1) & "*" & right(Text, Len(Text) - p)
+                Text = Left(Text, p - 1) & "*" & Right(Text, Len(Text) - p)
             End If
         ElseIf IsNumber(p - 1) Then
             If IsLetterPos(p + 1, True) Then
-                Text = Left(Text, p - 1) & "*" & right(Text, Len(Text) - p)
+                Text = Left(Text, p - 1) & "*" & Right(Text, Len(Text) - p)
             End If
         End If
     End If
@@ -708,7 +708,7 @@ Dim C1 As String, C2 As String, c3 As String
             C1 = ChrByIndex(p - 1)
             c3 = ChrByIndex(p + 1)
             If (IsNumber(p - 1) And IsLetterPos(p + 1)) Or (C1 = ")" And C2 = "(") Or C1 = " " Then
-                Text = Left(Text, p - 1) & " " & right(Text, Len(Text) - p)
+                Text = Left(Text, p - 1) & " " & Right(Text, Len(Text) - p)
             End If
             p = p + 2
         End If
@@ -1069,7 +1069,7 @@ Loop Until Pos > Len(Text)
 
 slut:
 GetNextListItem = Mid(Text, spos, Pos - spos)
-If right(GetNextListItem, 1) = Sep Then
+If Right(GetNextListItem, 1) = Sep Then
     GetNextListItem = Left(GetNextListItem, Len(GetNextListItem) - 1)
 End If
 
@@ -1099,9 +1099,9 @@ Dim spos As Long
         ElseIf spos = Len(Text) Then
             Text = Left(Text, Len(Text) - 1)
         ElseIf Not (IsNumber(spos + 1)) Then
-            Text = Left(Text, spos - 1) & right(Text, Len(Text) - spos)
+            Text = Left(Text, spos - 1) & Right(Text, Len(Text) - spos)
         ElseIf Not (IsNumber(spos - 1)) Then
-            Text = Left(Text, spos - 1) & "0" & right(Text, Len(Text) - spos + 1)
+            Text = Left(Text, spos - 1) & "0" & Right(Text, Len(Text) - spos + 1)
         End If
         spos = InStr(spos + 1, Text, ".")
     Loop
@@ -1115,7 +1115,7 @@ Sub InsertTextAt(it As String, Optional ByVal ipos As Long = -1)
     ElseIf ipos >= Len(Text) + 1 Then
         Text = Text & it
     Else
-        Text = Left(Text, ipos - 1) & it & right(Text, Len(Text) - ipos + 1)
+        Text = Left(Text, ipos - 1) & it & Right(Text, Len(Text) - ipos + 1)
     End If
 End Sub
 Sub RemoveChar(Optional ind As Long = -1)
@@ -1124,11 +1124,11 @@ Sub RemoveChar(Optional ind As Long = -1)
     If ind < 0 Then ind = Pos
 
     If ind < 2 Then
-        Text = right(Text, Len(Text) - 1)
+        Text = Right(Text, Len(Text) - 1)
     ElseIf ind = Len(Text) Then
         Text = Left(Text, Len(Text) - 1)
     Else
-        Text = Left(Text, ind - 1) & right(Text, Len(Text) - ind)
+        Text = Left(Text, ind - 1) & Right(Text, Len(Text) - ind)
     End If
 End Sub
 
@@ -1159,13 +1159,13 @@ Sub ReplaceStringAt(s As String, Optional ByVal p As Long = -1)
 If p < 0 Then p = Pos
 
 If p < 2 Then
-    Text = s & right(Text, Len(Text) - Len(s))
+    Text = s & Right(Text, Len(Text) - Len(s))
 ElseIf p > Len(Text) Then
     Text = Text & s
 ElseIf p > Len(Text) - Len(s) Then
     Text = Left(Text, p - 1) & s
 Else
-    Text = Left(Text, p - 1) & s & right(Text, Len(Text) - Len(s) - p + 1)
+    Text = Left(Text, p - 1) & s & Right(Text, Len(Text) - Len(s) - p + 1)
 End If
 
 End Sub
@@ -1196,7 +1196,7 @@ Do
 '        pos = pos + 1
         FindNextBreak (False)
         If ChrByIndex(Pos + 1) = " " And ChrByIndex(Pos + 2) = "(" Then
-             Text = Left(Text, Pos) & right(Text, Len(Text) - Pos - 1)
+             Text = Left(Text, Pos) & Right(Text, Len(Text) - Pos - 1)
         End If
     End If
 Loop While Pos > 0
@@ -1228,7 +1228,7 @@ Do
         
 '        FindNextBreak (True)
         If ChrByIndex(Pos + 1) = "(" Then
-             Text = Left(Text, Pos) & " " & right(Text, Len(Text) - Pos)
+             Text = Left(Text, Pos) & " " & Right(Text, Len(Text) - Pos)
         End If
     End If
 Loop While Pos > 0
@@ -1310,7 +1310,7 @@ Do
             pos2 = ea.FindEndOfBracket
         End If
         pow = Mid(Text, Pos, pos2 - Pos)
-        Text = Left(Text, Pos - 2) & right(Text, Len(Text) - pos2 + 1)
+        Text = Left(Text, Pos - 2) & Right(Text, Len(Text) - pos2 + 1)
         InsertTextAt "^" & pow, FindEndOfBracket
         
     End If
@@ -1391,7 +1391,7 @@ End If
 If Len(E) > 1 Then 'remove any prefix
 p = Left(E, 1)
 If p = "k" Or p = "M" Or p = "G" Or p = "T" Or p = "P" Or p = "c" Or p = "m" Or p = VBA.ChrW(956) Or p = "n" Or p = "p" Or p = "a" Or p = "" Then
-    E = right(E, Len(E) - 1)
+    E = Right(E, Len(E) - 1)
 End If
 End If
 

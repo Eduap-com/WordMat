@@ -9,26 +9,26 @@ Dim deftext As String
     
     If Len(deftext) > 3 Then
         deftext = FormatDefinitions(deftext)
-        deftext = Sprog.A(113) & vbCrLf & vbCrLf & deftext
+        deftext = TT.A(113) & vbCrLf & vbCrLf & deftext
     Else
-        deftext = Sprog.A(114)
+        deftext = TT.A(114)
     End If
     VisDef = deftext
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Function
 
 Sub DefinerFunktion()
     Dim Var As String
     On Error GoTo Fejl
-    Var = InputBox(Sprog.A(122), Sprog.A(123), "f(x)=x+1")
+    Var = InputBox(TT.A(122), TT.A(123), "f(x)=x+1")
     Var = Replace(Var, ":=", "=")
     '    var = Replace(var, "=", VBA.ChrW(&H2261))
     
     If Var <> "" Then
-        Var = Sprog.A(126) & ": " & Var
+        Var = TT.A(126) & ": " & Var
         Selection.InsertAfter (Var)
         Selection.OMaths.Add Range:=Selection.Range
         Selection.OMaths(1).BuildUp
@@ -36,7 +36,7 @@ Sub DefinerFunktion()
     End If
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 

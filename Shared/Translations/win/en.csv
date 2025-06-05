@@ -539,9 +539,9 @@
 538#£Select the expression to differentiate or place the cursor in the expression
 539#£Integrate
 540#£Determines the indefinite integral of function
-541#£
-542#£
-543#£
+541#£Import settings
+542#£Export settings
+543#£Customize menu
 544#£
 545#£Plot graph (Alt+P)
 546#£Shows the graph for the selected function(s)/equation(s) and points. The graph can then be inserted into the document. Several graph programs are supported. Choose your favorite under settings.
@@ -688,10 +688,10 @@
 687#£Significant figures
 688#£Turn units on/off
 689#£If units are turned on, WordMath kan interpret and convert units. On the SI button you can change the output units. Do not turn units on, unless you need it. It can affect the behaviour of WordMat and reserves a lot of variables.
-690#£
+690#£Insert code block
 691#£State the units to convert to. By default output units are SI units.
 692#£sf
-693#£
+693#£A code block is an area where you can program Maxima directly. For example, you can define more advanced functions that can then be used further down in the document. See more in the manual.
 694#£No. of figures
 695#£Rounding
 696#£Choose how numbers are fomatted and rounded. In the examples below WordMat is set to 3 figures\r\n\r\nDecimals: 12,345\r\nSignificant figures: 12,3\r\nSci. notation: 1,23*10^1

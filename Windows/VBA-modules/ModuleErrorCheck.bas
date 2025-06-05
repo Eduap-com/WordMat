@@ -29,7 +29,7 @@ Function CheckForError() As Boolean
     If ED.Title <> vbNullString Then ' Show the error in userform
         UserFormError.Label_maximaoutput.Caption = ED.MaximaOutput    ' eller maxproc.lastmaximaoutput
         If ED.DefFejl Then
-            ED.Description = Sprog.A(758) & vbCrLf & vbCrLf & ED.Description
+            ED.Description = TT.A(758) & vbCrLf & vbCrLf & ED.Description
 '            UserFormError.TextBox_definitioner.text = FormatDefinitions(omax.DefString) 'DefinitionsNice
         End If
         UserFormError.SetErrorDefinition ED
@@ -46,72 +46,72 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     CheckText = MaximaOutput & KommentarOutput
     CheckText2 = Replace(CheckText, " ", vbNullString) ' on mac there are spaces, but not on windows
     If InStr(CheckText2, "syntaxerror") > 0 Then
-        GetErrorDefinition.Title = Sprog.SyntaxError
-        GetErrorDefinition.Description = Sprog.A(752)
+        GetErrorDefinition.Title = TT.SyntaxError
+        GetErrorDefinition.Description = TT.A(752)
     ElseIf InStr(CheckText2, "incorrectsyntax:Missing") > 0 Then
-        GetErrorDefinition.Title = Sprog.SyntaxError
+        GetErrorDefinition.Title = TT.SyntaxError
         Pos = InStr(CheckText, "incorrectsyntax:Missing")
-        GetErrorDefinition.Description = Sprog.A(753) & " " & Mid(CheckText, Pos + 26, 1)
+        GetErrorDefinition.Description = TT.A(753) & " " & Mid(CheckText, Pos + 26, 1)
     ElseIf InStr(CheckText2, "incorrectsyntax:Toomany") > 0 Then
-        GetErrorDefinition.Title = Sprog.SyntaxError
+        GetErrorDefinition.Title = TT.SyntaxError
         Pos = InStr(CheckText, "incorrect syntax: Too many")
-        GetErrorDefinition.Description = Sprog.SyntaxError & ". " & vbCrLf & Sprog.A(754) & " " & Mid(CheckText, Pos + 29, 1)
+        GetErrorDefinition.Description = TT.SyntaxError & ". " & vbCrLf & TT.A(754) & " " & Mid(CheckText, Pos + 29, 1)
     ElseIf InStr(CheckText2, "incorrectsyntax:Found") > 0 Then
-        GetErrorDefinition.Title = Sprog.SyntaxError
+        GetErrorDefinition.Title = TT.SyntaxError
         GetErrorDefinition.Description = GetErrorText("incorrect syntax: ", CheckText)
     ElseIf InStr(CheckText2, "factorial:factorialofnegativeinteger") > 0 Then
-        GetErrorDefinition.Title = Sprog.A(750)
+        GetErrorDefinition.Title = TT.A(750)
         s = ExtractText(CheckText, "factorial: ", "#0", "-- an error")
         s2 = ExtractText(CheckText, "integer ", " not")
-        If Sprog.SprogNr = 1 Then
-            s = Sprog.A(699)
+        If TT.LangNo = 1 Then
+            s = TT.A(699)
             If InStr(CheckText, "K(") > 0 Then
-                s = s & VbCrLfMac & Sprog.A(902)
+                s = s & VbCrLfMac & TT.A(902)
             End If
         End If
         GetErrorDefinition.Description = s
     ElseIf InStr(CheckText2, "isnotaprefixoperator") > 0 Then
-        GetErrorDefinition.Title = Sprog.SyntaxError
+        GetErrorDefinition.Title = TT.SyntaxError
         GetErrorDefinition.Description = GetErrorText("is not a prefix operator", CheckText)
     ElseIf InStr(CheckText2, "isnotaninfixoperator") > 0 Then
-        GetErrorDefinition.Title = Sprog.SyntaxError
+        GetErrorDefinition.Title = TT.SyntaxError
         GetErrorDefinition.Description = GetErrorText("is not an infix operator", CheckText)
     ElseIf InStr(CheckText2, "Prematureterminationofinputat") > 0 Then
-        GetErrorDefinition.Title = Sprog.SyntaxError
+        GetErrorDefinition.Title = TT.SyntaxError
         GetErrorDefinition.LocationError = GetErrorText("Premature termination of input at", CheckText, 4)
     ElseIf InStr(CheckText2, "Toofewargumentssuppliedto") > 0 Then
-        GetErrorDefinition.Title = Sprog.SyntaxError
-        GetErrorDefinition.LocationError = Sprog.A(898) & ExtractText(CheckText2, "Toofewargumentssuppliedto", ";") & vbCrLf & Sprog.A(899)
+        GetErrorDefinition.Title = TT.SyntaxError
+        GetErrorDefinition.LocationError = TT.A(898) & ExtractText(CheckText2, "Toofewargumentssuppliedto", ";") & vbCrLf & TT.A(899)
     ElseIf InStr(CheckText2, "incorrectsyntax:") > 0 Then
-        GetErrorDefinition.Title = Sprog.SyntaxError
-        GetErrorDefinition.Description = Sprog.SyntaxError & "."
+        GetErrorDefinition.Title = TT.SyntaxError
+        GetErrorDefinition.Description = TT.SyntaxError & "."
     ElseIf InStr(CheckText2, "toomanycolonsin") > 0 Then
-        GetErrorDefinition.Title = Sprog.A(755)
+        GetErrorDefinition.Title = TT.A(755)
         GetErrorDefinition.Description = "Der er for mange kolonner"
     ElseIf InStr(CheckText2, "lisperror") And InStr(CheckText, "[") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
-        GetErrorDefinition.Description = Sprog.A(755)
+        GetErrorDefinition.Description = TT.A(755)
     ElseIf InStr(CheckText2, "encounteredaLisperror") > 0 Then
         GetErrorDefinition.Title = "Lisp error"
-        GetErrorDefinition.Description = Sprog.A(755)
+        GetErrorDefinition.Description = TT.A(755)
     ElseIf InStr(CheckText2, "Todebugthistry:debugmode(true)") > 0 Then ' The leading anerror is not included, as on Mac there is also a period between
         If InStr(CheckText2, "expt:undefined:0toanegativeexponent") > 0 Then
             GetErrorDefinition.Title = "Division by zero"
-            GetErrorDefinition.Description = Sprog.A(756)
+            GetErrorDefinition.Description = TT.A(756)
         Else
             GetErrorDefinition.Title = "Lisp error"
-            GetErrorDefinition.Description = Sprog.A(755)
+            GetErrorDefinition.Description = TT.A(755)
         End If
     ElseIf CheckText2 = "?merror(""Anumberwasfoundwhereavariablewasexpected-`solve'"")" Then
         GetErrorDefinition.Title = "Variable error"
-        GetErrorDefinition.Description = Sprog.A(133)
+        GetErrorDefinition.Description = TT.A(133)
     ElseIf (omax.DefFejl = True) Then
         GetErrorDefinition.Title = "Definition error"
-        GetErrorDefinition.Description = Sprog.A(757) & vbCrLf & VisDef
+        GetErrorDefinition.Description = TT.A(757) & vbCrLf & VisDef
 #If Mac Then
     ElseIf (MaximaOutput = vbNullString) Then
         GetErrorDefinition.Title = "Timeout"
-        GetErrorDefinition.Description = Sprog.A(884)
+        GetErrorDefinition.Description = TT.A(884)
         GetErrorDefinition.Stop = False
 #End If
         Else
@@ -145,12 +145,12 @@ Function GetErrorText(Text As String, MaximaOutput As String, Optional RemoveChr
     t = Trim(t)
     Pos = InStrRev(t, ";")
     If Pos > 0 Then
-        t = Left(t, Pos - 1) & right(t, Len(t) - Pos)
+        t = Left(t, Pos - 1) & Right(t, Len(t) - Pos)
     End If
     t = Replace(t, ":=", "= ")
     
-    GetErrorText = Sprog.A(759) & ":" & vbCrLf & t
-'    GetErrorText = Sprog.SyntaxError & vbCrLf & Sprog.IllegalSymbol & ":" & vbCrLf & t
+    GetErrorText = TT.A(759) & ":" & vbCrLf & t
+'    GetErrorText = TT.SyntaxError & vbCrLf & TT.IllegalSymbol & ":" & vbCrLf & t
 
 End Function
 Function ExtractText(ByVal Text As String, startText As String, endText As String, Optional endText2 As String) As String
@@ -159,7 +159,7 @@ Function ExtractText(ByVal Text As String, startText As String, endText As Strin
 
     If startText <> vbNullString Then
         p = InStr(Text, startText)
-        If p > 0 Then Text = right(Text, Len(Text) - p - Len(startText) + 1)
+        If p > 0 Then Text = Right(Text, Len(Text) - p - Len(startText) + 1)
     End If
     If endText <> vbNullString Then
         p = InStr(Text, endText)

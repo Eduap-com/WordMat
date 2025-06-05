@@ -47,7 +47,7 @@ Private Sub CommandButton_no_Click()
     Backup = False
     If CheckBox1.Value = True Then
         BackupType = 2
-        MsgBox Sprog.A(207), vbOKOnly
+        MsgBox TT.A(207), vbOKOnly
     End If
     Unload Me
 End Sub
@@ -60,13 +60,13 @@ Private Sub Label_ok_Click()
     Backup = True
     If CheckBox1.Value = True Then
         BackupType = 1
-        MsgBox Sprog.A(207), vbOKOnly
+        MsgBox TT.A(207), vbOKOnly
     End If
     Unload Me
 End Sub
 
 Private Sub Label_punkterhelp_Click()
-    MsgBox Sprog.A(206), vbOKOnly, Sprog.A(170)
+    MsgBox TT.A(206), vbOKOnly, TT.A(170)
 End Sub
 
 Private Sub UserForm_Activate()
@@ -74,11 +74,11 @@ Private Sub UserForm_Activate()
 End Sub
 
 Sub SetCaptions()
-    Label_startbackup.Caption = Sprog.A(179)
-    Label_cancel.Caption = Sprog.A(204)
-    Label_ok.Caption = Sprog.A(203)
-    Me.Caption = Sprog.A(170)
-    CheckBox1.Caption = Sprog.A(205)
+    Label_startbackup.Caption = TT.A(179)
+    Label_cancel.Caption = TT.A(204)
+    Label_ok.Caption = TT.A(203)
+    Me.Caption = TT.A(170)
+    CheckBox1.Caption = TT.A(205)
 End Sub
 
 Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)

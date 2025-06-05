@@ -195,7 +195,7 @@ ils.AlternativeText = s
 Unload Me
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 Application.ScreenUpdating = True
 End Sub
@@ -292,7 +292,7 @@ Dim i As Long, j As Integer
     Unload Me
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 Application.ScreenUpdating = True
 End Sub
@@ -565,7 +565,7 @@ Function SolveDE() As Boolean
     guesslist = "["
     DElist = "["
     If TextBox_var1.Text = vbNullString Or TextBox_eq1.Text = vbNullString Or TextBox_init1.Text = vbNullString Then
-        MsgBox "Der mangler data", vbOKOnly, Sprog.Error
+        MsgBox "Der mangler data", vbOKOnly, TT.Error
         GoTo slut
     Else
         n = n + 1
@@ -662,7 +662,7 @@ End Function
 Sub PlotOutput(Optional highres As Double = 1)
 Dim Text As String, yAxislabel As String
 On Error GoTo Fejl
-    Label_wait.Caption = Sprog.A(826) & "!"
+    Label_wait.Caption = TT.A(826) & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
     omax.PrepareNewCommand FindDef:=False
@@ -800,7 +800,7 @@ On Error GoTo Fejl
 GoTo slut
 Fejl:
     On Error Resume Next
-    Label_wait.Caption = Sprog.A(94)
+    Label_wait.Caption = TT.A(94)
     Label_wait.Font.Size = 12
     Label_wait.Width = 150
     Label_wait.visible = True
@@ -821,7 +821,7 @@ Sub InsertDefinitioner()
         'defstring = Replace(defstring, ",", ".")
         'defstring = Replace(defstring, ";", ",")
         'defstring = Replace(defstring, "=", ":")
-        If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
+        If Right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
 
         'omax.MaximaInputStreng = omax.MaximaInputStreng & "[" & defstring & "]$"
         omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
@@ -873,10 +873,10 @@ Sub OpdaterDefinitioner()
    Vars = RemoveVar(Vars, TextBox_var8.Text)
    Vars = RemoveVar(Vars, TextBox_var9.Text)
     
-   If Left(Vars, 1) = ";" Then Vars = right(Vars, Len(Vars) - 1)
+   If Left(Vars, 1) = ";" Then Vars = Right(Vars, Len(Vars) - 1)
     
    ea.Text = Vars
-   Do While right(TextBox_definitioner.Text, 2) = VbCrLfMac
+   Do While Right(TextBox_definitioner.Text, 2) = VbCrLfMac
       TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
    Loop
    Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
@@ -890,7 +890,7 @@ Sub OpdaterDefinitioner()
          If Arr(i) <> "" Then s = s & Arr(i) & VbCrLfMac
       End If
    Next
-   Do While right(s, 2) = vbCrLf
+   Do While Right(s, 2) = vbCrLf
       s = Left(s, Len(s) - 2)
    Loop
    TextBox_definitioner.Text = s
@@ -940,28 +940,28 @@ Function RemoveVar(Text As String, Var As String)
     ea.Text = Text
     Call ea.ReplaceVar(Var, "")
     Text = Replace(ea.Text, ";;", ";")
-    If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
-    If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
+    If Left(Text, 1) = ";" Then Text = Right(Text, Len(Text) - 1)
+    If Right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
 
     RemoveVar = Text
 End Function
 
 Sub SetCaptions()
-    Me.Caption = Sprog.A(85)
-    Label6.Caption = Sprog.A(86)
-    Label7.Caption = Sprog.A(87)
-    Label_Graf.Caption = Sprog.A(667)
-    Label_opdater.Caption = Sprog.A(461)
-    Label_cancel.Caption = Sprog.A(661)
-    Label_var.Caption = Sprog.A(746)
-    Label3.Caption = Sprog.A(88)
-    Label5.Caption = Sprog.A(823)
-    Label_wait.Caption = Sprog.A(826) & "!"
-    CheckBox_pointsjoined.Caption = Sprog.A(89)
-    CheckBox_visforklaring.Caption = Sprog.A(90)
-    Label_tolist.Caption = Sprog.A(91)
-    Label_inserttabel.Caption = Sprog.A(92)
-    Label_insertgraph.Caption = Sprog.A(93)
+    Me.Caption = TT.A(85)
+    Label6.Caption = TT.A(86)
+    Label7.Caption = TT.A(87)
+    Label_Graf.Caption = TT.A(667)
+    Label_opdater.Caption = TT.A(461)
+    Label_cancel.Caption = TT.A(661)
+    Label_var.Caption = TT.A(746)
+    Label3.Caption = TT.A(88)
+    Label5.Caption = TT.A(823)
+    Label_wait.Caption = TT.A(826) & "!"
+    CheckBox_pointsjoined.Caption = TT.A(89)
+    CheckBox_visforklaring.Caption = TT.A(90)
+    Label_tolist.Caption = TT.A(91)
+    Label_inserttabel.Caption = TT.A(92)
+    Label_insertgraph.Caption = TT.A(93)
     Label_toExcel.Caption = ChrW(&H2192) & " Excel"
     
 #If Mac Then

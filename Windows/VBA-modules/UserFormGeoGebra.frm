@@ -63,20 +63,20 @@ Private Sub UserForm_Activate()
 #Else
 #End If
     
-    Label_title.Caption = Sprog.A(292)
+    Label_title.Caption = TT.A(292)
 #If Mac Then
-        Label2.Caption = Sprog.A(848)
+        Label2.Caption = TT.A(848)
 #Else
-        Label2.Caption = Sprog.A(293)
+        Label2.Caption = TT.A(293)
 #End If
     
-    Label3.Caption = Sprog.A(294)
-    Label_webstart.Caption = Sprog.A(296)
+    Label3.Caption = TT.A(294)
+    Label_webstart.Caption = TT.A(296)
     
 #If Mac Then
-    Label_Installer.Caption = Sprog.A(295) & " 5"
+    Label_Installer.Caption = TT.A(295) & " 5"
 #Else
-    Label_Installer.Caption = Sprog.A(295)
+    Label_Installer.Caption = TT.A(295)
 #End If
     
     ReturnVal = 0

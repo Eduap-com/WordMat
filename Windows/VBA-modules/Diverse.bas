@@ -78,7 +78,7 @@ Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Templat
 ' If the current document is called wordmat*.dotm then it is returned as a template
 ' Otherwise all global templates are searched to see if there is one called wordmat*.dotm
     If Len(ActiveDocument.AttachedTemplate) > 10 Then
-        If LCase(Left(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase(right(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
+        If LCase(Left(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase(Right(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
             Set GetWordMatTemplate = ActiveDocument.AttachedTemplate
             Exit Function
         End If
@@ -123,7 +123,7 @@ Function GetProgramFilesDir() As String
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
+    MsgBox TT.A(110), vbOKOnly, TT.Error
 slut:
 End Function
 
@@ -148,7 +148,7 @@ Function GetDocumentsDir() As String
  
     GoTo slut
 Fejl:
-    MsgBox Sprog.A(110), vbOKOnly, Sprog.Error
+    MsgBox TT.A(110), vbOKOnly, TT.Error
 slut:
 End Function
 
@@ -263,7 +263,7 @@ Sub InsertSletDef()
     On Error GoTo slut
     
     If Selection.Tables.Count > 0 Then
-        MsgBox2 Sprog.A(475), vbOKOnly, Sprog.Error
+        MsgBox2 TT.A(475), vbOKOnly, TT.Error
         Exit Sub
     End If
     
@@ -300,7 +300,7 @@ Sub InsertSletDef()
     Selection.OMaths(1).Range.Font.Size = 8
     Selection.OMaths(1).Range.Font.ColorIndex = wdGray50
     On Error GoTo slut
-    Selection.TypeText Sprog.A(69) & ":"
+    Selection.TypeText TT.A(69) & ":"
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
     Selection.Font.Bold = False
@@ -336,24 +336,24 @@ Sub InsertDefiner()
                 Selection.Collapse wdCollapseStart
                 Selection.MoveRight wdCharacter, 1
             End If
-            Selection.TypeText Sprog.A(62) & ": "
+            Selection.TypeText TT.A(62) & ": "
         Else
             Selection.OMaths(1).Range.Select
             Selection.Collapse wdCollapseStart
             If Selection.OMaths(1).Range.Text = "Type equation here." Or Selection.OMaths(1).Range.Text = "Skriv ligningen her." Then
                 Selection.MoveRight wdCharacter, 1
             End If
-            Selection.TypeText Sprog.A(62) & ": "
+            Selection.TypeText TT.A(62) & ": "
         End If
     Else
         Selection.OMaths.Add Selection.Range
-        Selection.TypeText Sprog.A(62) & ": "
+        Selection.TypeText TT.A(62) & ": "
     End If
     Selection.Collapse wdCollapseEnd
         
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     Oundo.EndCustomRecord
 End Sub
@@ -491,7 +491,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
         If Pos = Len(Text) Then Pos = 0
         If Pos > 0 Then
             Arr(i) = Left(Text, Pos - 1)
-            Text = right(Text, Len(Text) - Pos)
+            Text = Right(Text, Len(Text) - Pos)
             i = i + 1
         Else
             Arr(i) = Text
@@ -528,7 +528,7 @@ On Error GoTo Fejl
 #End If
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 Sub OpenWordFile(FilNavn As String)
@@ -555,13 +555,13 @@ Sub OpenWordFile(FilNavn As String)
     ElseIf Dir(filnavn2) <> "" Then
         Documents.Open fileName:=filnavn2, ReadOnly:=True
     Else
-        MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
+        MsgBox TT.A(111) & FilNavn, vbOKOnly, TT.Error
     End If
 #End If
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.A(111) & FilNavn, vbOKOnly, Sprog.Error
+    MsgBox TT.A(111) & FilNavn, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -598,29 +598,29 @@ Function GetRandomTip()
 
     Select Case i
     Case 0
-        tip = Sprog.A(325)
+        tip = TT.A(325)
     Case 1
-        tip = Sprog.A(326)
+        tip = TT.A(326)
     Case 2
-        tip = Sprog.A(327)
+        tip = TT.A(327)
     Case 3
-        tip = Sprog.A(328)
+        tip = TT.A(328)
     Case 4
-        tip = Sprog.A(329)
+        tip = TT.A(329)
     Case 5
-        tip = Sprog.A(329)
+        tip = TT.A(329)
     Case 6
-        tip = Sprog.A(331) & "   x_1   ->   x" & VBA.ChrW(8321)
+        tip = TT.A(331) & "   x_1   ->   x" & VBA.ChrW(8321)
     Case 7
-        tip = Sprog.A(332) & VBA.ChrW(955)
+        tip = TT.A(332) & VBA.ChrW(955)
     Case 8
-        tip = Sprog.A(333)
+        tip = TT.A(333)
     Case 9
-        tip = Sprog.A(334)
+        tip = TT.A(334)
     Case 10
-        tip = Sprog.A(335)
+        tip = TT.A(335)
     Case 11
-        tip = Sprog.A(336)
+        tip = TT.A(336)
     Case 12
         tip = "(a+b)" & VBA.ChrW(178) & " = a" & VBA.ChrW(178) & " + b" & VBA.ChrW(178) & " + 2ab"
     Case 13
@@ -630,7 +630,7 @@ Function GetRandomTip()
     Case 15
         tip = "(a" & VBA.ChrW(183) & "b)" & VBA.ChrW(7510) & " = a" & VBA.ChrW(7510) & VBA.ChrW(183) & "b" & VBA.ChrW(7510)
     Case 16
-        tip = Sprog.A(337) & AntalB
+        tip = TT.A(337) & AntalB
     Case 17
         tip = "log(a" & VBA.ChrW(7495) & ") = b" & VBA.ChrW(183) & "log(a)"
     Case 18
@@ -640,19 +640,19 @@ Function GetRandomTip()
     Case 20
         tip = "\int      ->      " & VBA.ChrW(8747)
     Case 21
-        tip = Sprog.A(338)
+        tip = TT.A(338)
     Case 22
-        tip = Sprog.A(339)
+        tip = TT.A(339)
     Case 23
-        tip = Sprog.A(340)
+        tip = TT.A(340)
     Case 24
         tip = "(a/b)" & VBA.ChrW(7510) & " = a" & VBA.ChrW(7510) & "/b" & VBA.ChrW(7510)
     Case 25
         tip = "a/b + c/d = (ad+bc)/bd"
     Case 26
-        tip = Sprog.A(341)
+        tip = TT.A(341)
     Case 27
-        tip = Sprog.A(342)
+        tip = TT.A(342)
     Case 28
         tip = "\inc  ->  delta"
     Case 29
@@ -673,7 +673,7 @@ Sub ToggleUnits()
     
     If MaximaUnits Then
         Set ufq = New UserFormQuick
-        ufq.Label_text.Caption = Sprog.A(166) 'unit off
+        ufq.Label_text.Caption = TT.A(166) 'unit off
         DoEvents
         ufq.Show vbModeless
         TurnUnitsOff
@@ -686,9 +686,9 @@ Sub ToggleUnits()
         If MaxProc Is Nothing Then Exit Sub
 #End If
 chosunit:
-        OutUnits = InputBox(Sprog.A(167), Sprog.A(168), OutUnits)
+        OutUnits = InputBox(TT.A(167), TT.A(168), OutUnits)
         If InStr(OutUnits, "/") > 0 Or InStr(OutUnits, "*") > 0 Or InStr(OutUnits, "^") > 0 Then
-            MsgBox2 Sprog.A(343), vbOKOnly, Sprog.Error
+            MsgBox2 TT.A(343), vbOKOnly, TT.Error
             GoTo chosunit
         End If
         On Error Resume Next
@@ -740,7 +740,7 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     Dim UpdateNow As Boolean, PartnerShip As Boolean
    
     If GetInternetConnectedState = False Then
-        If Not RunSilent Then MsgBox Sprog.A(63), vbOKOnly, Sprog.Error
+        If Not RunSilent Then MsgBox TT.A(63), vbOKOnly, TT.Error
         Exit Sub
     End If
     
@@ -772,26 +772,26 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
 #End If
     If Len(s) = 0 Then
         If Not RunSilent Then
-            MsgBox2 Sprog.A(112), vbOKOnly, Sprog.Error
+            MsgBox2 TT.A(112), vbOKOnly, TT.Error
         End If
         GoTo slut
     End If
     NewVersion = s
     p = InStr(NewVersion, vbLf)
     If p > 0 Then
-        News = right(NewVersion, Len(NewVersion) - p)
+        News = Right(NewVersion, Len(NewVersion) - p)
         NewVersion = Trim(Left(NewVersion, p - 1))
     Else ' mac
         p = InStr(NewVersion, vbCr)
         If p > 0 Then
-            News = right(NewVersion, Len(NewVersion) - p)
+            News = Right(NewVersion, Len(NewVersion) - p)
             NewVersion = Trim(Left(NewVersion, p - 1))
         End If
     End If
    
     If Len(NewVersion) = 0 Or Len(NewVersion) > 15 Then
         If Not RunSilent Then
-            MsgBox2 Sprog.A(112), vbOKOnly, Sprog.Error
+            MsgBox2 TT.A(112), vbOKOnly, TT.Error
         End If
         GoTo slut
     End If
@@ -804,7 +804,7 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     
     If UpdateNow Then
         If PartnerShip Then
-            If MsgBox2(Sprog.A(21) & News & vbCrLf & vbCrLf & Sprog.A(64), vbOKCancel, Sprog.A(23)) = vbOK Then
+            If MsgBox2(TT.A(21) & News & vbCrLf & vbCrLf & TT.A(64), vbOKCancel, TT.A(23)) = vbOK Then
                 On Error Resume Next
                 Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
                 On Error GoTo Install2
@@ -814,8 +814,8 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
         Else
 Install2:
             On Error GoTo Fejl
-            MsgBox2 Sprog.A(21) & News & vbCrLf & Sprog.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, Sprog.A(23)
-            If Sprog.SprogNr = 1 Then
+            MsgBox2 TT.A(21) & News & vbCrLf & TT.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, TT.A(23)
+            If TT.LangNo = 1 Then
                 OpenLink "https://www.eduap.com/da/wordmat/"
             Else
                 OpenLink "https://www.eduap.com/wordmat/"
@@ -823,15 +823,15 @@ Install2:
         End If
     Else
         If Not RunSilent Then
-            MsgBox2 Sprog.A(344) & " " & AppNavn & " v." & AppVersion, vbOKOnly, "No Update"
+            MsgBox2 TT.A(344) & " " & AppNavn & " v." & AppVersion, vbOKOnly, "No Update"
         End If
     End If
    
     GoTo slut
 Fejl:
     If Not RunSilent Then
-        If MsgBox2(Sprog.A(581) & AppVersion, vbOKCancel, Sprog.Error) = vbOK Then
-            If Sprog.SprogNr = 1 Then
+        If MsgBox2(TT.A(581) & AppVersion, vbOKCancel, TT.Error) = vbOK Then
+            If TT.LangNo = 1 Then
                 OpenLink "https://www.eduap.com/da/wordmat/"
             Else
                 OpenLink "https://www.eduap.com/wordmat/"
@@ -898,9 +898,9 @@ Function ConvertNumberToString(ByVal n As Double) As String
         ConvertNumberToString = VBA.Format(n, "#################0.0####################")
 #End If
         If Len(ConvertNumberToString) > 1 Then
-            If right(ConvertNumberToString, 2) = ".0" Then
+            If Right(ConvertNumberToString, 2) = ".0" Then
                 ConvertNumberToString = Left(ConvertNumberToString, Len(ConvertNumberToString) - 2)
-            ElseIf right(ConvertNumberToString, 2) = ",0" Then
+            ElseIf Right(ConvertNumberToString, 2) = ",0" Then
                 ConvertNumberToString = Left(ConvertNumberToString, Len(ConvertNumberToString) - 2)
             End If
         End If
@@ -1039,7 +1039,7 @@ Sub TabelToList()
     Dim OM As Range
     On Error GoTo Fejl
     If Selection.Range.Tables.Count = 0 Then
-        MsgBox Sprog.A(871), vbOKOnly, Sprog.Error
+        MsgBox TT.A(871), vbOKOnly, TT.Error
         GoTo slut
     End If
     PrepareMaxima
@@ -1057,7 +1057,7 @@ Sub TabelToList()
     Selection.TypeParagraph
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 Sub ListToTabel()
@@ -1072,7 +1072,7 @@ Sub ListToTabel()
     Oundo.StartCustomRecord
     dd.ReadSelection
     If dd.nrows = 0 Or dd.ncolumns = 0 Then
-        MsgBox Sprog.A(901), vbOKOnly, Sprog.Error
+        MsgBox TT.A(901), vbOKOnly, TT.Error
         GoTo slut
     End If
     GoToInsertPoint
@@ -1099,7 +1099,7 @@ Sub ListToTabel()
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     Oundo.EndCustomRecord
 End Sub
@@ -1142,14 +1142,14 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     If AskRef Then
         Dim EqName As String
         UserFormEnterEquationRef.Show
-        EqName = UserFormEnterEquationRef.EquationName    'Replace(InputBox(Sprog.A(5), Sprog.A(4), "Eq"), " ", "")
+        EqName = UserFormEnterEquationRef.EquationName    'Replace(InputBox(TT.A(5), TT.A(4), "Eq"), " ", "")
         If EqName = vbNullString Then GoTo slut
     End If
     
     Application.ScreenUpdating = False
 
     If Selection.Tables.Count > 0 Then
-        MsgBox2 Sprog.A(872), vbOKOnly, Sprog.Error
+        MsgBox2 TT.A(872), vbOKOnly, TT.Error
         Exit Sub
     End If
 
@@ -1263,7 +1263,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
 
     GoTo slut
 Fejl:
-    MsgBox2 Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox2 TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -1277,7 +1277,7 @@ Sub InsertEquationRef()
         Dim Oundo As UndoRecord
         Set Oundo = Application.UndoRecord
         Oundo.StartCustomRecord
-        Selection.TypeText Sprog.A(833) & " "
+        Selection.TypeText TT.A(833) & " "
 #If Mac Then
         Selection.InsertCrossReference referencetype:=wdRefTypeBookmark, ReferenceKind:= _
             wdContentText, ReferenceItem:=b, InsertAsHyperlink:=False, _
@@ -1299,7 +1299,7 @@ Sub InsertEquationRef()
     
     GoTo slut
 Fejl:
-    MsgBox2 Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox2 TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -1309,13 +1309,13 @@ On Error GoTo Fejl
     Dim F As Field, f2 As Field, n As String, p As Integer, Arr As Variant
     
     If Selection.Fields.Count = 0 Then
-        MsgBox Sprog.A(345), vbOKOnly, Sprog.Error
+        MsgBox TT.A(345), vbOKOnly, TT.Error
         Exit Sub
     End If
     
     Set F = Selection.Fields(1)
     If Selection.Fields.Count = 1 And InStr(F.Code.Text, "LISTNUM") > 0 Then
-        n = InputBox(Sprog.A(346), Sprog.A(6), "1")
+        n = InputBox(TT.A(346), TT.A(6), "1")
         p = InStr(F.Code.Text, "\S")
         If p > 0 Then
             F.Code.Text = Left(F.Code.Text, p - 1)
@@ -1325,7 +1325,7 @@ On Error GoTo Fejl
     ElseIf Selection.Fields.Count = 1 Or Selection.Fields.Count = 2 And InStr(F.Code.Text, "WMeq") > 0 Then
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
-            n = InputBox(Sprog.A(346), Sprog.A(6), F.result & "." & f2.result)
+            n = InputBox(TT.A(346), TT.A(6), F.result & "." & f2.result)
             Arr = Split(n, ".")
             If UBound(Arr) > 0 Then
                 SetFieldNo F, CStr(Arr(0))
@@ -1334,7 +1334,7 @@ On Error GoTo Fejl
                 SetFieldNo F, CStr(Arr(0))
             End If
         Else
-            n = InputBox(Sprog.A(346), Sprog.A(6), F.result)
+            n = InputBox(TT.A(346), TT.A(6), F.result)
             SetFieldNo F, n
         End If
     End If
@@ -1342,7 +1342,7 @@ On Error GoTo Fejl
     ActiveDocument.Fields.Update
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -1360,14 +1360,14 @@ Sub SetFieldNo(F As Field, n As String)
     ActiveDocument.Fields.Update
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
 Sub InsertEquationHeadingNo()
     Dim result As Long
     On Error GoTo Fejl
-    result = MsgBox(Sprog.A(348), vbYesNoCancel, Sprog.A(8))
+    result = MsgBox(TT.A(348), vbYesNoCancel, TT.A(8))
     If result = vbCancel Then Exit Sub
     If result = vbYes Then
         Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1"
@@ -1380,7 +1380,7 @@ Sub InsertEquationHeadingNo()
     ActiveDocument.Fields.Update
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -1389,7 +1389,7 @@ Sub UpdateEquationNumbers()
     ActiveDocument.Fields.Update
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -1398,14 +1398,14 @@ On Error GoTo Fejl
     Documents.Add Template:=GetWordMatDir() & "WordDocs/LatexWordTemplate.dotx"
 GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
 Sub DeleteNormalDotm()
     Dim UserDir As String
 
-    MsgBox Sprog.A(681), vbOKOnly, ""
+    MsgBox TT.A(681), vbOKOnly, ""
 #If Mac Then
     Dim p As Integer
     UserDir = MacScript("return POSIX path of (path to home folder)")
@@ -1570,14 +1570,14 @@ Function GetWordMatDir(Optional SubDir As String) As String
 #Else
     If SubDir <> vbNullString Then
         SubDir = Trim(SubDir)
-        If right(SubDir, 1) <> "\" Then SubDir = SubDir & "\"
+        If Right(SubDir, 1) <> "\" Then SubDir = SubDir & "\"
     End If
     If InstallLocation = "All" Then
         GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
         If Dir(GetWordMatDir & SubDir, vbDirectory) = vbNullString Then
             GetWordMatDir = Environ("AppData") & "\WordMat\"
             If Dir(GetWordMatDir & SubDir, vbDirectory) = vbNullString Then
-                MsgBox "WordMat folder could not be found", vbOKOnly, Sprog.Error
+                MsgBox "WordMat folder could not be found", vbOKOnly, TT.Error
             End If
         End If
     Else
@@ -1585,7 +1585,7 @@ Function GetWordMatDir(Optional SubDir As String) As String
         If Dir(GetWordMatDir & SubDir, vbDirectory) = vbNullString Then
             GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
             If Dir(GetWordMatDir & SubDir, vbDirectory) = vbNullString Then
-                MsgBox "WordMat folder could not be found", vbOKOnly, Sprog.Error
+                MsgBox "WordMat folder could not be found", vbOKOnly, TT.Error
             End If
         End If
     End If
@@ -1614,7 +1614,7 @@ Sub NewEquation()
     End If
 GoTo slut
 Fejl:
-    MsgBox2 Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox2 TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -1757,6 +1757,6 @@ End Sub
 Sub TestSprog()
     Dim tid As Double, n As Integer
     tid = timer
-    n = Sprog.SprogNr
+    n = TT.LangNo
     MsgBox timer - tid
 End Sub

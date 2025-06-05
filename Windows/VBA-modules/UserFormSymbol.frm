@@ -78,9 +78,9 @@ Private Sub UserForm_Activate()
 End Sub
 
 Sub SetCaptions()
-    Me.Caption = Sprog.A(234)
-    Label1.Caption = Sprog.A(230)
-    Label2.Caption = Sprog.A(231)
-    Label3.Caption = Sprog.A(232)
-    CommandButton1.Caption = Sprog.A(233)
+    Me.Caption = TT.A(234)
+    Label1.Caption = TT.A(230)
+    Label2.Caption = TT.A(231)
+    Label3.Caption = TT.A(232)
+    CommandButton1.Caption = TT.A(233)
 End Sub

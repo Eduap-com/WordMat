@@ -59,7 +59,7 @@ Private Sub Class_Initialize()
     
     If MaximaSti = vbNullString Then
         MaximaInstalled = False
-        MsgBox Sprog.A(888), vbOKOnly, Sprog.Error
+        MsgBox TT.A(888), vbOKOnly, TT.Error
         GoTo slut
     Else
         MaximaInstalled = True
@@ -116,7 +116,7 @@ Public Function PrepareNewCommand(Optional FindDef As Boolean = True) As Boolean
     GoTo slut
 
 Fejl:
-    MsgBox Sprog.ErrorGeneral & vbCrLf & " preparing maxima", vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral & vbCrLf & " preparing maxima", vbOKOnly, TT.Error
     PrepareNewCommand = False
 slut:
 
@@ -259,7 +259,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     Unload UFwait2
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 #End If
 End Sub
@@ -292,7 +292,7 @@ Sub RunMaximaWSH(Optional StopTime As Integer)
         FindLastMaximaOutput True, Moutp
         ShowDebug False, cmd, Moutp
     Else
-        MsgBox2 Sprog.A(889), vbOKOnly, Sprog.Error
+        MsgBox2 TT.A(889), vbOKOnly, TT.Error
     End If
     Err.Clear
 End Sub
@@ -388,15 +388,15 @@ Sub WaitForMaximaForm(StopTime As Integer)
                 UFwait2.Label_progress.Caption = "*"
             End If
             If i = StopTime - 200 Then
-                UFwait2.Label_tip.Caption = Sprog.A(890) & " 20s"
+                UFwait2.Label_tip.Caption = TT.A(890) & " 20s"
             ElseIf i = StopTime - 150 Then
-                UFwait2.Label_tip.Caption = Sprog.A(890) & " 15s"
+                UFwait2.Label_tip.Caption = TT.A(890) & " 15s"
             ElseIf i = StopTime - 100 Then
-                UFwait2.Label_tip.Caption = Sprog.A(890) & " 10s"
+                UFwait2.Label_tip.Caption = TT.A(890) & " 10s"
             ElseIf i = StopTime - 50 Then
-                UFwait2.Label_tip.Caption = Sprog.A(890) & " 5s"
+                UFwait2.Label_tip.Caption = TT.A(890) & " 5s"
             ElseIf i = StopTime Then
-                UFwait2.Label_tip.Caption = Sprog.A(891)
+                UFwait2.Label_tip.Caption = TT.A(891)
             End If
             If StopNow Then
                 Unload UFwait2
@@ -421,7 +421,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
     End If
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 #End If
 End Sub
@@ -482,8 +482,8 @@ Sub AnswerQuestion(StopTime As Integer, Optional ShowWaitForm As Boolean = True)
             Dim antalvar As Integer, Var As String, ea As New ExpressionAnalyser, sprtext As String
             Pos = InStr(MaxProc.LastMaximaOutput, " variables to solve for?")
             antalvar = val(Mid(MaxProc.LastMaximaOutput, Pos - 2, 2))
-            sprtext = Sprog.A(416) & " " & antalvar & " " & Sprog.A(417)
-            ea.Text = right(MaxProc.LastMaximaOutput, Len(MaxProc.LastMaximaOutput) - Pos - 24)
+            sprtext = TT.A(416) & " " & antalvar & " " & TT.A(417)
+            ea.Text = Right(MaxProc.LastMaximaOutput, Len(MaxProc.LastMaximaOutput) - Pos - 24)
             ea.SetSquareBrackets
             ea.Pos = 0
             Var = ea.GetNextBracketContent
@@ -495,7 +495,7 @@ igen:
                 If UBound(Split(svar, ",")) = antalvar - 1 Then
                     svar = "[" & svar & "];%;%;%"
                 Else
-                    sprtext = Sprog.A(418) & " " & antalvar & " " & Sprog.A(419)
+                    sprtext = TT.A(418) & " " & antalvar & " " & TT.A(419)
                     GoTo igen
                 End If
             End If
@@ -512,7 +512,7 @@ igen:
 
     If answered And MaximaInputStrengSec <> "" Then
         MaximaInputStrengSec = "%th(2);" & MaximaInputStrengSec    ' because of slutprut must be skipped.
-        If right(MaximaInputStrengSec, 1) = ";" Then    ' at answerquestion is set automatically;
+        If Right(MaximaInputStrengSec, 1) = ";" Then    ' at answerquestion is set automatically;
             MaximaInputStrengSec = Left(MaximaInputStrengSec, Len(MaximaInputStrengSec) - 1)
         End If
         MaxProc.AnswerQuestion (MaximaInputStrengSec)
@@ -549,7 +549,7 @@ start:
     InputString = GetMaximaSettingsString & Assume & MaximaInputStreng
     s = ExecuteMaximaViaFile(InputString, WT, False)
     If Left(s, 5) = "Fejln" Then
-        WT = InputBox(Sprog.A(892) & WT & "s." & Sprog.A(893), "Stopped", 20)
+        WT = InputBox(TT.A(892) & WT & "s." & TT.A(893), "Stopped", 20)
         If Trim(WT) <> "" Then
             WT = Trim(WT)
             GoTo start
@@ -791,7 +791,7 @@ start:
 
     If StopNow Then
         If MaximaExact < 2 Then
-            If MsgBox(Sprog.A(839), vbRetryCancel, "Stop") = vbRetry Then
+            If MsgBox(TT.A(839), vbRetryCancel, "Stop") = vbRetry Then
                 gemMaxExct = MaximaExact
                 MaximaExact = 2
                 StopNow = False
@@ -1112,7 +1112,7 @@ Sub SolveSystem(Variable As String)
 
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
-        Kommentar = Sprog.A(139)
+        Kommentar = TT.A(139)
         MaximaOutput = ""
         Exit Sub
     End If
@@ -1219,7 +1219,7 @@ Sub Eliminate(Variable As String)
     Dim Arr As Variant
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
-        Kommentar = Sprog.A(139)
+        Kommentar = TT.A(139)
         MaximaOutput = ""
         Exit Sub
     End If
@@ -1291,7 +1291,7 @@ Sub SolveSystemNumeric(ByVal Variable As String, ByVal guess As String, Optional
     Dim i As Integer
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
-        Kommentar = Sprog.A(139)
+        Kommentar = TT.A(139)
         MaximaOutput = ""
         Exit Sub
     End If
@@ -1355,7 +1355,7 @@ Sub beregn()
     Kommando = Replace(Kommando, vbCr, "")
     Kommando = Trim(Kommando)
 
-    If right(Kommando, 1) = "=" Then
+    If Right(Kommando, 1) = "=" Then
         Kommando = Left(Kommando, Len(Kommando) - 1)
     End If
 
@@ -1444,7 +1444,7 @@ start:
     '
     If StopNow Then
         If MaximaExact < 2 Then
-            If MsgBox(Sprog.A(839), vbRetryCancel, "Stop") = vbRetry Then
+            If MsgBox(TT.A(839), vbRetryCancel, "Stop") = vbRetry Then
                 gemMaxExct = MaximaExact
                 MaximaExact = 2
                 StopNow = False
@@ -2109,6 +2109,27 @@ Sub UserRegression(fkt As String, Var As String, xlist As String, ylist As Strin
     Call RunMaxima
     If StopNow Then GoTo slut
 
+    Dim nr As Integer, i As Integer
+    nr = UBound(Minput)
+
+    If defindex > 0 And nr <= 1 + defindex Then ' error in definition
+        MaximaOutput = vbNullString
+        KommentarOutput = vbNullString
+        For i = 1 To nr
+            KommentarOutput = KommentarOutput & Minput(i) & vbLf & moutput(i) & vbLf '
+        Next
+        If nr = 1 And Len(moutput(1)) < 2 Then
+            If Not MathOArr(defindex - nr) Is Nothing Then MathOArr(defindex - nr).Range.Select
+        ElseIf defindex - nr - 1 >= 0 Then
+            If Not MathOArr(defindex - nr - 1) Is Nothing Then MathOArr(defindex - nr - 1).Range.Select
+        End If
+        DefFejl = True
+    ElseIf nr <= 1 Then
+        MaximaOutput = ""
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+    End If
 slut:
 End Sub
 Sub Integrer(variabel As String)
@@ -2495,7 +2516,7 @@ Sub Draw3D(graphobj As String, Optional antalobj As Integer = 1)
         Call RunMaxima(-1 * tid)
         If InStr(MaxProc.LastMaximaOutput, "no surface within these ranges") Then
             ' if even one equation does not exist within the selected window there is an error
-            MsgBox Sprog.A(420), vbOKOnly, Sprog.Error
+            MsgBox TT.A(420), vbOKOnly, TT.Error
         End If
 #End If
 
@@ -2667,7 +2688,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
         Pos = InStr(Text, "W_0")
         If Pos > 0 Then
             ea.Text = Text
-            Text = Left(Text, Pos - 1) & "generalized_lambert_w(0," & right(Text, Len(Text) - Pos - 4)
+            Text = Left(Text, Pos - 1) & "generalized_lambert_w(0," & Right(Text, Len(Text) - Pos - 4)
         End If
     Loop While Pos > 0
     'lambertW-1
@@ -2675,7 +2696,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
         Pos = InStr(Text, "W_(-1)")
         If Pos > 0 Then
             ea.Text = Text
-            Text = Left(Text, Pos - 1) & "generalized_lambert_w(-1," & right(Text, Len(Text) - Pos - 7)
+            Text = Left(Text, Pos - 1) & "generalized_lambert_w(-1," & Right(Text, Len(Text) - Pos - 7)
         End If
     Loop While Pos > 0
 
@@ -2698,13 +2719,13 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                 MaximaInputStreng = MaximaInputStreng & "declare(" & s & "SymVecta,nonscalar)$"
                 KillDef = KillDef & s & "SymVecta,"
                 'AddDefinition ("definer: declare(" & s & "SymVecta,nonscalar)")
-                ea.Text = Left(ea.Text, ea.Pos - 2) & s & "SymVecta" & right(ea.Text, Len(ea.Text) - Pos)
+                ea.Text = Left(ea.Text, ea.Pos - 2) & s & "SymVecta" & Right(ea.Text, Len(ea.Text) - Pos)
             Else
                 '            AddDefinition ("definer: declare(" & ea.ChrByIndex(pos - 1) & "SymVecta,nonscalar)")
                 s = ea.ChrByIndex(Pos - 1)
                 MaximaInputStreng = MaximaInputStreng & "declare(" & s & "SymVecta,nonscalar)$"
                 KillDef = KillDef & s & "SymVecta,"
-                ea.Text = Left(ea.Text, Pos - 1) & "SymVecta" & right(ea.Text, Len(ea.Text) - Pos)
+                ea.Text = Left(ea.Text, Pos - 1) & "SymVecta" & Right(ea.Text, Len(ea.Text) - Pos)
             End If
             Pos = Pos + 7
         End If
@@ -2718,9 +2739,9 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
             matvekt = True
             If ea.ChrByIndex(Pos - 1) = ")" Then
                 s = ea.GetPrevBracketContent(Pos)
-                ea.Text = Left(ea.Text, ea.Pos - 2) & s & "SymVectb" & right(ea.Text, Len(ea.Text) - Pos)
+                ea.Text = Left(ea.Text, ea.Pos - 2) & s & "SymVectb" & Right(ea.Text, Len(ea.Text) - Pos)
             Else
-                ea.Text = Left(ea.Text, Pos - 1) & "SymVectb" & right(ea.Text, Len(ea.Text) - Pos)
+                ea.Text = Left(ea.Text, Pos - 1) & "SymVectb" & Right(ea.Text, Len(ea.Text) - Pos)
             End If
             Pos = Pos + 7
         End If
@@ -2734,9 +2755,9 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
             matvekt = True
             If ea.ChrByIndex(Pos - 1) = ")" Then
                 s = ea.GetPrevBracketContent(Pos)
-                ea.Text = Left(ea.Text, ea.Pos - 2) & s & "SymVectc" & right(ea.Text, Len(ea.Text) - Pos)
+                ea.Text = Left(ea.Text, ea.Pos - 2) & s & "SymVectc" & Right(ea.Text, Len(ea.Text) - Pos)
             Else
-                ea.Text = Left(ea.Text, Pos - 1) & "SymVectc" & right(ea.Text, Len(ea.Text) - Pos)
+                ea.Text = Left(ea.Text, Pos - 1) & "SymVectc" & Right(ea.Text, Len(ea.Text) - Pos)
             End If
             Pos = Pos + 7
         End If
@@ -2754,7 +2775,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
             If Len(ea.Text) = ea.Pos Then
                 ea.Text = Left(ea.Text, Pos - 1) & " " & s & "SymVectc"
             Else
-                ea.Text = Left(ea.Text, Pos - 1) & " " & s & "SymVectc" & right(ea.Text, Len(ea.Text) - ea.Pos)
+                ea.Text = Left(ea.Text, Pos - 1) & " " & s & "SymVectc" & Right(ea.Text, Len(ea.Text) - ea.Pos)
             End If
             Pos = Pos + 7
         End If
@@ -2782,7 +2803,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
             ea.Text = Text
             If ea.ChrByIndex(Pos - 1) = ")" Then
                 s = ea.GetPrevBracketContent(Pos)
-                Text = Left(Text, ea.Pos - 2) & "tvvec(" & s & ")" & right(Text, Len(Text) - Pos)
+                Text = Left(Text, ea.Pos - 2) & "tvvec(" & s & ")" & Right(Text, Len(Text) - Pos)
                 Pos = Pos + 4
             Else
                 s = ea.GetPrevVar(Pos)
@@ -2790,7 +2811,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                   MsgBox "An error orrcured with hat operator. "
                   GoTo Fejl
                 Else
-                   Text = Left(Text, Pos - Len(s) - 2) & "tvvec(" & Mid(Text, Pos - Len(s) - 1, Len(s)) & ")" & right(Text, Len(Text) - Pos)
+                   Text = Left(Text, Pos - Len(s) - 2) & "tvvec(" & Mid(Text, Pos - Len(s) - 1, Len(s)) & ")" & Right(Text, Len(Text) - Pos)
                 End If
                 Pos = Pos + 5
             End If
@@ -2827,13 +2848,13 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     ' remove +- symbol
     Pos = InStr(Text, VBA.ChrW(177))
     If Pos > 0 Then
-        pm = InputBox(Sprog.A(421), Sprog.A(422), "-")
+        pm = InputBox(TT.A(421), TT.A(422), "-")
         If pm = "+" Or VBA.LCase(pm) = "plus" Then
             Text = Replace(Text, VBA.ChrW(177), "+")
         ElseIf pm = "-" Or VBA.LCase(pm) = "minus" Then
             Text = Replace(Text, VBA.ChrW(177), "-")
         Else
-            MsgBox2 Sprog.A(423)
+            MsgBox2 TT.A(423)
             Text = Replace(Text, VBA.ChrW(177), "+")
         End If
     End If
@@ -2914,7 +2935,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                 End If
                 If j < UBound(Arr2) Then s = s & "&&elseif&&"
             Next
-            ea.Text = Left(ea.Text, Pos - 1) & s & ")" & right(ea.Text, Len(ea.Text) - Pos - Len(Expr) - 3)
+            ea.Text = Left(ea.Text, Pos - 1) & s & ")" & Right(ea.Text, Len(ea.Text) - Pos - Len(Expr) - 3)
             i = i + 1
         End If
     Loop While Pos > 0 And i < 1000
@@ -2938,12 +2959,12 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                     If Not (ea.IsOperator(ea.ChrByIndex(posb - 1), 4)) Then
                         If matvekt Or InStr(ea.Text, VBA.ChrW(9632)) > 0 Then
                             If CasType = 0 Then
-                                ea.Text = Left(ea.Text, Pos - 1) & "vecmag(" & Mid(ea.Text, Pos + 1, posb - Pos - 1) & ")" & right(ea.Text, Len(ea.Text) - posb)
+                                ea.Text = Left(ea.Text, Pos - 1) & "vecmag(" & Mid(ea.Text, Pos + 1, posb - Pos - 1) & ")" & Right(ea.Text, Len(ea.Text) - posb)
                             Else
-                                ea.Text = Left(ea.Text, Pos - 1) & "length(" & Mid(ea.Text, Pos + 1, posb - Pos - 1) & ")" & right(ea.Text, Len(ea.Text) - posb)
+                                ea.Text = Left(ea.Text, Pos - 1) & "length(" & Mid(ea.Text, Pos + 1, posb - Pos - 1) & ")" & Right(ea.Text, Len(ea.Text) - posb)
                             End If
                         Else
-                            ea.Text = Left(ea.Text, Pos - 1) & "abs(" & Mid(ea.Text, Pos + 1, posb - Pos - 1) & ")" & right(ea.Text, Len(ea.Text) - posb)
+                            ea.Text = Left(ea.Text, Pos - 1) & "abs(" & Mid(ea.Text, Pos + 1, posb - Pos - 1) & ")" & Right(ea.Text, Len(ea.Text) - posb)
                         End If
                         Exit Do
                     Else
@@ -2960,7 +2981,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
         End If
     Loop While Pos > 0 And i < 1000
     If i = 1000 Then
-        MsgBox Sprog.A(424), vbOKOnly, Sprog.A(105)
+        MsgBox TT.A(424), vbOKOnly, TT.A(105)
     End If
     i = 0
     Text = ea.Text
@@ -3025,11 +3046,11 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
             pos2 = InStr(Pos + 2, ea.Text, VBA.ChrW(8289))
             If Not pos2 > 0 Then
                 base = ea.GetNextVar(Pos)
-                base = right(base, Len(base) - 4)
+                base = Right(base, Len(base) - 4)
             Else
                 base = Mid(ea.Text, Pos + 4, pos2 - Pos - 4)
             End If
-            ea.Text = Left(ea.Text, Pos + 2) & "base" & right(ea.Text, Len(ea.Text) - Pos - Len(base) - 4)
+            ea.Text = Left(ea.Text, Pos + 2) & "base" & Right(ea.Text, Len(ea.Text) - Pos - Len(base) - 4)
             ea.Pos = Pos + 7
             '        ea.InsertBeforePos ("(")
             '        ea.pos = ea.pos + 3
@@ -3092,9 +3113,9 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                     Call ea.InsertBeforePos("^(1/(" & Arr(0) & ")))")
                     ea.Text = Replace(ea.Text, VBA.ChrW(8730), "(", 1, 1)
                     posog = ea.FindChr("&", 1)
-                    Text = Left(ea.Text, Pos + 1) & right(ea.Text, Len(ea.Text) - posog)
+                    Text = Left(ea.Text, Pos + 1) & Right(ea.Text, Len(ea.Text) - posog)
                 ElseIf UBound(Arr) = -1 Then
-                    MsgBox2 Sprog.A(169), vbOKOnly, Sprog.Error
+                    MsgBox2 TT.A(169), vbOKOnly, TT.Error
                     GoTo Fejl
                 End If
             End If
@@ -3115,7 +3136,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                 Arr = Split(Mid(Text, subs + 2, sups - subs - 3), ":")
             End If
             If UBound(Arr) < 1 Then
-                MsgBox2 Sprog.A(425), vbOKOnly, Sprog.Error
+                MsgBox2 TT.A(425), vbOKOnly, TT.Error
                 GoTo videre
             End If
             Var = Arr(0)
@@ -3124,7 +3145,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
             sluts = ea.FindHierakiBreak(1)
             If ea.ChrByIndex(ea.Pos) = "+" Or ea.ChrByIndex(ea.Pos) = "-" Or ea.ChrByIndex(ea.Pos) = "*" Or ea.ChrByIndex(ea.Pos) = "/" Then sluts = sluts - 1
             Expr = Mid(Text, ends + 1, sluts - ends)
-            Text = Left(Text, Pos - 1) & "sum(" & Expr & "," & Var & "," & startn & "," & slutn & ")" & right(Text, Len(Text) - sluts)
+            Text = Left(Text, Pos - 1) & "sum(" & Expr & "," & Var & "," & startn & "," & slutn & ")" & Right(Text, Len(Text) - sluts)
         End If
     Loop While Pos > 0
 
@@ -3142,7 +3163,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                 Arr = Split(Mid(Text, subs + 2, sups - subs - 3), ":")
             End If
             If UBound(Arr) < 1 Then
-                MsgBox2 Sprog.A(426), vbOKOnly, Sprog.Error
+                MsgBox2 TT.A(426), vbOKOnly, TT.Error
                 GoTo videre
             End If
             Var = Arr(0)
@@ -3150,7 +3171,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
             slutn = Mid(Text, sups + 1, ends - sups - 1)
             sluts = ea.FindHierakiBreak(1)
             Expr = Mid(Text, ends + 1, sluts - ends)
-            Text = Left(Text, Pos - 1) & "product(" & Expr & "," & Var & "," & startn & "," & slutn & ")" & right(Text, Len(Text) - sluts)
+            Text = Left(Text, Pos - 1) & "product(" & Expr & "," & Var & "," & startn & "," & slutn & ")" & Right(Text, Len(Text) - sluts)
         End If
     Loop While Pos > 0
 
@@ -3173,12 +3194,12 @@ videre:
                 Var = Trim(Arr(0))
                 DiffEqVar = Var
                 app = Trim(Arr(1))
-                If right(app, 2) = "^+" Then
+                If Right(app, 2) = "^+" Then
                     app = Left(app, Len(app) - 2) & ",plus"
-                ElseIf right(app, 2) = "^-" Then
+                ElseIf Right(app, 2) = "^-" Then
                     app = Left(app, Len(app) - 2) & ",minus"
                 End If
-                Text = Left(Text, Pos - 1) & "limit(" & Expr & "," & Var & "," & app & ")" & right(Text, Len(Text) - sluts)
+                Text = Left(Text, Pos - 1) & "limit(" & Expr & "," & Var & "," & app & ")" & Right(Text, Len(Text) - sluts)
             Else
                 Pos = Pos + 3
             End If
@@ -3211,7 +3232,7 @@ videre:
                 antalmS = CStr(antalm)
             End If
             If ea.ChrByIndex(Pos + antalm + 1) = " " Then    ' remove any spaces after '
-                Text = Left(Text, Pos + 1) & right(Text, Len(Text) - Pos - 2)
+                Text = Left(Text, Pos + 1) & Right(Text, Len(Text) - Pos - 2)
                 ea.Text = Text
             End If
 
@@ -3231,7 +3252,7 @@ videre:
             pos2 = InStr(F, "_")
             subt = ""
             If pos2 > 0 Then
-               subt = right(F, Len(F) - pos2)
+               subt = Right(F, Len(F) - pos2)
                For i = 1 To Len(subt)
                   If Not ea.IsLetter(Mid(subt, i, 1)) Then
                      subt = ""
@@ -3248,17 +3269,17 @@ videre:
                     GoTo msat
                 ElseIf ea.IsLetterPos(ea.Pos - 2) Then    ' sin(x)'
                     F = ea.GetPrevVar(ea.Pos - 1)
-                    Text = Left(Text, ea.Pos - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(Text, Len(Text) - Pos - varl - antalm)
+                    Text = Left(Text, ea.Pos - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right(Text, Len(Text) - Pos - varl - antalm)
                     di = di + 1
                 Else    ' (x^2)'
-                    Text = Left(ea.Text, ea.Pos - 2) & "diff(" & Udtryk & "," & Var & "," & antalmS & ")" & right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
+                    Text = Left(ea.Text, ea.Pos - 2) & "diff(" & Udtryk & "," & Var & "," & antalmS & ")" & Right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
                 End If
             ElseIf ea.ChrByIndex(Pos - 2 - Len(subt)) = ")" And Len(subt) > 0 And Len(subt) = antalm Then ' partiel (...)_xy''
                   s = ea.GetPrevBracketContent(Pos - 2)
                   For i = 1 To antalm
                      s = "diff(" & s & "," & Mid(subt, i, 1) & ",1)"
                   Next
-                 Text = Left(ea.Text, ea.Pos - 2) & s & right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
+                 Text = Left(ea.Text, ea.Pos - 2) & s & Right(ea.Text, Len(ea.Text) - Pos - varl - antalm)
             
             ElseIf Not ea.ChrByIndex(Pos + antalm + 1) = "(" Then    ' is y'  variable not function
                 If Len(subt) > 0 And Len(subt) = antalm Then ' if partiel y'
@@ -3266,17 +3287,17 @@ videre:
                   For i = 1 To antalm
                      s = "diff(" & s & "," & Mid(subt, i, 1) & ",1)"
                   Next
-                 Text = Left(Text, Pos - 1 - Len(F)) & s & right(Text, Len(Text) - Pos - varl - antalm)
+                 Text = Left(Text, Pos - 1 - Len(F)) & s & Right(Text, Len(Text) - Pos - varl - antalm)
                Else
-                Text = Left(Text, Pos - 1 - Len(F)) & "diff(" & F & "," & Var & "," & antalmS & ")" & right(Text, Len(Text) - Pos - varl - antalm)
+                Text = Left(Text, Pos - 1 - Len(F)) & "diff(" & F & "," & Var & "," & antalmS & ")" & Right(Text, Len(Text) - Pos - varl - antalm)
                End If
             ElseIf ea.ChrByIndex(Pos + antalm + 1) = "(" Then    ' if f'(x)
 msat:
                 If DiffEqVar = Var Or CasType = 1 Or CasType = 2 Then  'if diffligning then no subst
                   If Len(subt) > 0 And Len(subt) = antalm Then ' if partiel
-                        Text = Left(Text, Pos - 1 - Len(F)) & "diff(" & F & "(" & Var & ")," & Var & "," & antalmS & ")" & right(Text, Len(Text) - Pos - varl - antalm)
+                        Text = Left(Text, Pos - 1 - Len(F)) & "diff(" & F & "(" & Var & ")," & Var & "," & antalmS & ")" & Right(Text, Len(Text) - Pos - varl - antalm)
                     Else
-                        Text = Left(Text, Pos - 1 - Len(F)) & "substitute(diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & Var & ")" & right(Text, Len(Text) - Pos - varl - antalm)
+                        Text = Left(Text, Pos - 1 - Len(F)) & "substitute(diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & Var & ")" & Right(Text, Len(Text) - Pos - varl - antalm)
                         di = di + 1
                     End If
                 Else    ' ikke diff ligning
@@ -3294,9 +3315,9 @@ msat:
                         s2 = s2 & "part(first(fundef(" & f2 & "))," & i + 1 & ")=" & vararr(i) & ","
                      Next
                      s = Left(s2, Len(s2) - 1) & "]," & s & ")"
-                    Text = Left(Text, Pos - 1 - Len(F)) & s & right(Text, Len(Text) - Pos - varl - antalm)
+                    Text = Left(Text, Pos - 1 - Len(F)) & s & Right(Text, Len(Text) - Pos - varl - antalm)
                   Else ' normal not partiel f'(x)
-                    Text = Left(Text, Pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & right(Text, Len(Text) - Pos - varl - antalm)
+                    Text = Left(Text, Pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right(Text, Len(Text) - Pos - varl - antalm)
                     di = di + 1
                   End If
                 End If
@@ -3339,7 +3360,7 @@ msat:
                         integrand = Mid(ea.Text, Pos + 1, pos3 - Pos - 1)
                         pos2 = ea.Pos
                     Else ' inden d fundet
-                        ConvertErrorText = Sprog.A(895)
+                        ConvertErrorText = TT.A(895)
                         GoTo slut
                     End If
                 End If
@@ -3355,10 +3376,10 @@ msat:
                     pos2 = ea.Pos - 1
                 End If
                 If Len(Var) < 2 Then
-                    ConvertErrorText = Sprog.A(427)
+                    ConvertErrorText = TT.A(427)
                     GoTo slut
                 End If
-                Var = right(Var, Len(Var) - 1)
+                Var = Right(Var, Len(Var) - 1)
                 integrand = Trim(integrand)
                 pos2 = pos2 + Len(Var)
                 If Len(integrand) > 0 And Len(Var) > 0 Then
@@ -3378,34 +3399,34 @@ msat:
                         upper = Mid(integrand, poso + 1, poss - poso - 1)
                         '        text = Left(text, posn - 1) & Mid(text, poss + 1, pos2 - poss - 1) & "," & Mid(text, pos2 + 1, 1) & "," & nedre & "," & upper & ")" & Mid(text, pos2 + 2, Len(text) - pos2 - 1)
                         If CasType = 0 Then
-                           integrand = right(integrand, Len(integrand) - poss) & "," & Var & "," & nedre & "," & upper & ")"
+                           integrand = Right(integrand, Len(integrand) - poss) & "," & Var & "," & nedre & "," & upper & ")"
                         Else ' geogebra only supports variable x
-                           ea2.Text = right(integrand, Len(integrand) - poss)
+                           ea2.Text = Right(integrand, Len(integrand) - poss)
                            If Var <> "x" Then ea2.ReplaceVar Var, "x", 1
                            integrand = ea2.Text & "," & nedre & "," & upper & ")"
                         End If
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'remove function symbol
-                            integrand = right(integrand, Len(integrand) - 1)
+                            integrand = Right(integrand, Len(integrand) - 1)
                         End If
                         If MaximaExact = 2 Then
                             '                        ea.text = Replace(ea.text, VBA.ChrW(8747), "NIntegrate(", 1, 1)
-                            ea.Text = Left(ea.Text, Pos - 1) & "NIntegrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) + 2)
+                            ea.Text = Left(ea.Text, Pos - 1) & "NIntegrate(" & integrand & Right(ea.Text, ea.Length - pos2 - Len(Var) + 2)
                         Else
-                            ea.Text = Left(ea.Text, Pos - 1) & "Integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) + 2)
+                            ea.Text = Left(ea.Text, Pos - 1) & "Integrate(" & integrand & Right(ea.Text, ea.Length - pos2 - Len(Var) + 2)
                             '                        ea.text = Replace(ea.text, VBA.ChrW(8747), "Integrate(", 1, 1)
                         End If
                     Else    ' indefinite integral
                         integrand = integrand & "," & Var & ")"
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'remove function symbol
-                            integrand = right(integrand, Len(integrand) - 1)
+                            integrand = Right(integrand, Len(integrand) - 1)
                         End If
-                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) + 2)
+                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(" & integrand & Right(ea.Text, ea.Length - pos2 - Len(Var) + 2)
                     End If
                     i = i + 1
                 End If
             Else
-'                MsgBox2 Sprog.A(895), vbOKOnly, Sprog.Error
-                ConvertErrorText = Sprog.A(895)
+'                MsgBox2 TT.A(895), vbOKOnly, TT.Error
+                ConvertErrorText = TT.A(895)
                 GoTo slut
             End If
         Loop While i < 100 And InStr(ea.Text, VBA.ChrW(8747)) > 0 'Len(integrand) > 0
@@ -3438,16 +3459,16 @@ msat:
             If Len(integrand) > 0 Then
                 Var = ea.GetNextVar(ea.Pos - 1)
                 If Len(Var) < 2 Then
-                    ConvertErrorText = Sprog.A(427)
+                    ConvertErrorText = TT.A(427)
                     GoTo slut
                 End If
-                Var = right(Var, Len(Var) - 1)
+                Var = Right(Var, Len(Var) - 1)
                 var2 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var2) < 2 Or (Left(var2, 1) <> "d" And Left(var2, 1) <> VBA.ChrW(8518)) Then
-                    ConvertErrorText = Sprog.A(428)
+                    ConvertErrorText = TT.A(428)
                     GoTo slut
                 End If
-                var2 = right(var2, Len(var2) - 1)
+                var2 = Right(var2, Len(var2) - 1)
                 integrand = Trim(integrand)
                 pos2 = pos2 + Len(Var)
                 If Len(integrand) > 0 And Len(Var) > 0 And Len(var2) > 0 Then
@@ -3463,14 +3484,14 @@ msat:
                         poso = InStr(integrand, "^")
                     End If
                     If posn > 0 And poso > 0 And posn < poss And poso < poss Then
-                        ConvertErrorText = Sprog.A(429)
+                        ConvertErrorText = TT.A(429)
                         GoTo slut
                     Else    ' ubestemt integrale
                         integrand = integrand & "," & Var & ")," & var2 & ")"
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'remove function symbol
-                            integrand = right(integrand, Len(integrand) - 1)
+                            integrand = Right(integrand, Len(integrand) - 1)
                         End If
-                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) - Len(var2))
+                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(" & integrand & Right(ea.Text, ea.Length - pos2 - Len(Var) - Len(var2))
                     End If
                     i = i + 1
                 End If
@@ -3504,22 +3525,22 @@ msat:
             If Len(integrand) > 0 Then
                 Var = ea.GetNextVar(ea.Pos - 1)
                 If Len(Var) < 2 Then
-                    ConvertErrorText = Sprog.A(427)
+                    ConvertErrorText = TT.A(427)
                     GoTo slut
                 End If
-                Var = right(Var, Len(Var) - 1)
+                Var = Right(Var, Len(Var) - 1)
                 var2 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var2) < 2 Or (Left(var2, 1) <> "d" And Left(var2, 1) <> VBA.ChrW(8518)) Then
-                    ConvertErrorText = Sprog.A(428)
+                    ConvertErrorText = TT.A(428)
                     GoTo slut
                 End If
-                var2 = right(var2, Len(var2) - 1)
+                var2 = Right(var2, Len(var2) - 1)
                 var3 = ea.GetNextVar(ea.Pos + 1)
                 If Len(var3) < 2 Or (Left(var3, 1) <> "d" And Left(var3, 1) <> VBA.ChrW(8518)) Then
-                    ConvertErrorText = Sprog.A(428)
+                    ConvertErrorText = TT.A(428)
                     GoTo slut
                 End If
-                var3 = right(var3, Len(var3) - 1)
+                var3 = Right(var3, Len(var3) - 1)
                 integrand = Trim(integrand)
                 pos2 = pos2 + Len(Var)
                 If Len(integrand) > 0 And Len(Var) > 0 And Len(var2) > 0 Then
@@ -3535,14 +3556,14 @@ msat:
                         poso = InStr(integrand, "^")
                     End If
                     If posn > 0 And poso > 0 And posn < poss And poso < poss Then
-                        ConvertErrorText = Sprog.A(429)
+                        ConvertErrorText = TT.A(429)
                         GoTo slut
                     Else    ' ubestemt integrale
                         integrand = integrand & "," & Var & ")," & var2 & ")," & var3 & ")"
                         If Left(integrand, 1) = VBA.ChrW(9618) Then    'remove function symbol
-                            integrand = right(integrand, Len(integrand) - 1)
+                            integrand = Right(integrand, Len(integrand) - 1)
                         End If
-                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(integrate(" & integrand & right(ea.Text, ea.Length - pos2 - Len(Var) - Len(var2) - Len(var3) - 2)
+                        ea.Text = Left(ea.Text, Pos - 1) & "integrate(integrate(integrate(" & integrand & Right(ea.Text, ea.Length - pos2 - Len(Var) - Len(var2) - Len(var3) - 2)
                     End If
                     i = i + 1
                 End If
@@ -3571,11 +3592,11 @@ msat:
                     ea.Pos = Pos
                     If ea.ChrByIndex(Pos) = "(" Then
                         Expr = ea.GetNextBracketContent()
-                        ea.Text = Left(ea.Text, Pos - 1) & "[" & Expr & "]" & right(ea.Text, Len(ea.Text) - Pos - Len(Expr) - 1)
+                        ea.Text = Left(ea.Text, Pos - 1) & "[" & Expr & "]" & Right(ea.Text, Len(ea.Text) - Pos - Len(Expr) - 1)
                     Else
                         posb = ea.FindHierakiBreak(5)    ' changed 5 because f_1^'(x)
                         Expr = ea.GetTextInterval(Pos, posb)
-                        ea.Text = Left(ea.Text, Pos - 1) & "[" & Expr & "]" & right(ea.Text, Len(ea.Text) - Pos - Len(Expr) + 1)
+                        ea.Text = Left(ea.Text, Pos - 1) & "[" & Expr & "]" & Right(ea.Text, Len(ea.Text) - Pos - Len(Expr) + 1)
                     End If
                 Else
                     Pos = Pos + 1
@@ -3608,7 +3629,7 @@ spring:
             matrix = ea.GetNextBracketContent
             slpos = ea.Pos
             If ea.ChrByIndex(slpos + 1) = "*" Then
-                Text = Left(Text, slpos) & " ## " & right(Text, Len(Text) - slpos - 1)
+                Text = Left(Text, slpos) & " ## " & Right(Text, Len(Text) - slpos - 1)
             End If
             Arr = Split(matrix, "@")
             If CasType = 1 Or CasType = 2 Then
@@ -3624,7 +3645,7 @@ spring:
                 Next
                 mtext = Left(mtext, Len(mtext) - 1) & ")"
             End If
-            Text = Left(Text, stpos - 1) & mtext & right(Text, Len(Text) - slpos)
+            Text = Left(Text, stpos - 1) & mtext & Right(Text, Len(Text) - slpos)
         End If
     Loop While Pos > 0
 
@@ -3655,9 +3676,9 @@ spring:
             
             If Len(Text) - slpos >= 0 Then
                 If ea.ChrByIndex(stpos) = "[" Then
-                    Text = Left(Text, stpos - 1) & mtext & right(Text, Len(Text) - slpos) ' remove wrapping characters if [
+                    Text = Left(Text, stpos - 1) & mtext & Right(Text, Len(Text) - slpos) ' remove wrapping characters if [
                 Else
-                    Text = Left(Text, stpos) & mtext & right(Text, Len(Text) - slpos + 1) ' preserve wraparound if ( or |
+                    Text = Left(Text, stpos) & mtext & Right(Text, Len(Text) - slpos + 1) ' preserve wraparound if ( or |
                 End If
 '                text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos) ' changed 1.31 due to vector with || where brackets disappear
             Else
@@ -3739,7 +3760,7 @@ hopBracket:
             
             If Len(Text) - slpos >= 0 Then
 '                text = Left(text, stpos - 1) & mtext & right(text, Len(text) - slpos)
-                Text = Left(Text, stpos) & mtext & right(Text, Len(Text) - slpos + 1)
+                Text = Left(Text, stpos) & mtext & Right(Text, Len(Text) - slpos + 1)
             Else
                 Text = Left(Text, stpos - 1) & mtext
             End If
@@ -3844,10 +3865,10 @@ hopBracket:
 
     GoTo slut:
 Fejl:
-    MsgBox Sprog.A(99), vbOKOnly, Sprog.Error
+    MsgBox TT.A(99), vbOKOnly, TT.Error
 slut:
     If Len(ConvertErrorText) > 0 Then
-        MsgBox2 ConvertErrorText, vbOKOnly, Sprog.Error
+        MsgBox2 ConvertErrorText, vbOKOnly, TT.Error
         CodeForMaxima = ""
     Else
       CodeForMaxima = Text
@@ -3893,14 +3914,14 @@ Function ConvertDifferentials(Text As String, DiffChr As String) As String
                     pos2 = InStr(pos2 + 1, dem, DiffChr)
                 Loop While pos2 > 0
                 If antalm <> varind Then
-                    Text = Sprog.A(430)
+                    Text = TT.A(430)
                     GoTo slut
                 End If
                 ElseIf Left(num, 1) = DiffChr Then
                     antalm = 1
                     vararr(0) = Mid(dem, 2, 1)
                 Else
-                    Text = Sprog.A(430)
+                    Text = TT.A(430)
                     GoTo slut
             End If
 
@@ -3909,21 +3930,21 @@ Function ConvertDifferentials(Text As String, DiffChr As String) As String
                 udtryk2 = udtryk2 & "," & vararr(i) & ",1)"
             Next
             If Len(num) > 1 And Mid(num, 2, 1) <> "^" Then ' dy/dx or df(x)/dx
-                Udtryk = right(num, Len(num) - 1)
+                Udtryk = Right(num, Len(num) - 1)
                 If Left(Udtryk, 1) = "^" Then
-                    Udtryk = right(Udtryk, Len(Udtryk) - 1)
+                    Udtryk = Right(Udtryk, Len(Udtryk) - 1)
                 End If
-                Text = Left(Text, Pos - 2) & udtryk1 & Udtryk & udtryk2 & right(Text, Len(Text) - pos3 + 1)
+                Text = Left(Text, Pos - 2) & udtryk1 & Udtryk & udtryk2 & Right(Text, Len(Text) - pos3 + 1)
             ElseIf Mid(Text, pos3 + 1, 1) = "(" Then ' parentheses right after d/dx operator
                 Udtryk = ea.GetNextBracketContent(pos3)
-                Text = Left(Text, Pos - 2) & udtryk1 & Udtryk & udtryk2 & right(Text, Len(Text) - ea.Pos + 1)
+                Text = Left(Text, Pos - 2) & udtryk1 & Udtryk & udtryk2 & Right(Text, Len(Text) - ea.Pos + 1)
                 ' Notation for df(x)/dx is missing here
             Else ' no parentheses after d/dx operator so the expression must be found via hierarchy
                 posstart = pos3
                 ea.Pos = pos3 + 1
                 posslut = ea.FindHierakiBreak(2)
                 Udtryk = Trim(Mid(Text, pos3, posslut - posstart + 1))
-                Text = Left(Text, Pos - 2) & udtryk1 & Udtryk & udtryk2 & right(Text, Len(Text) - posslut)
+                Text = Left(Text, Pos - 2) & udtryk1 & Udtryk & udtryk2 & Right(Text, Len(Text) - posslut)
             End If
         End If
     Loop While Pos > 0
@@ -4037,7 +4058,7 @@ Function CodeConstantPercentSign(Text As String, tegn As String) As String
         Pos = InStr(Pos, ea.Text, tegn)
         If Pos > 0 Then
             If Not (ea.IsLetterPos(Pos + 1, False) Or ea.ChrByIndex(Pos + 1) = "[" Or ea.IsLetterPos(Pos - 1, False)) Then
-                ea.Text = Left(ea.Text, Pos - 1) & "%" & right(ea.Text, Len(ea.Text) - Pos + 1)
+                ea.Text = Left(ea.Text, Pos - 1) & "%" & Right(ea.Text, Len(ea.Text) - Pos + 1)
                 Pos = Pos + 2
             Else
                 Pos = Pos + 1
@@ -4133,7 +4154,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
                     ea.Pos = ea.Pos + 1
                 Loop While ea.IsNumber(ea.Pos)
                 ' space removed to make insert bracket work
-                ea.Text = Left(ea.Text, Pos - 1) & gtegn & "10^" & Mid(ea.Text, Pos + 2, ea.Pos - Pos - 2) & " " & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+                ea.Text = Left(ea.Text, Pos - 1) & gtegn & "10^" & Mid(ea.Text, Pos + 2, ea.Pos - Pos - 2) & " " & Right(ea.Text, Len(ea.Text) - ea.Pos + 1)
                 'ea.text = Left(ea.text, pos - 1) & gtegn & "10^" & Mid(ea.text, pos + 2, ea.pos - pos - 2) & Right(text, Len(ea.text) - ea.pos + 1)
             End If
         End If
@@ -4149,7 +4170,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
                 Do
                     ea.Pos = ea.Pos + 1
                 Loop While ea.IsNumber(ea.Pos)
-                ea.Text = Left(ea.Text, Pos - 1) & gtegn & "10^" & Mid(ea.Text, Pos + 1, ea.Pos - Pos - 1) & " " & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+                ea.Text = Left(ea.Text, Pos - 1) & gtegn & "10^" & Mid(ea.Text, Pos + 1, ea.Pos - Pos - 1) & " " & Right(ea.Text, Len(ea.Text) - ea.Pos + 1)
                 '    ea.text = Left(ea.text, pos - 1) & gtegn & "10^" & Mid(ea.text, pos + 1, ea.pos - pos - 1) & Right(ea.text, Len(ea.text) - ea.pos + 1)
             End If
         End If
@@ -4165,7 +4186,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
                 Do
                     ea.Pos = ea.Pos + 1
                 Loop While ea.IsNumber(ea.Pos)
-                ea.Text = Left(ea.Text, Pos - 1) & gtegn & "10^" & Mid(ea.Text, Pos + 1, ea.Pos - Pos - 1) & " " & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+                ea.Text = Left(ea.Text, Pos - 1) & gtegn & "10^" & Mid(ea.Text, Pos + 1, ea.Pos - Pos - 1) & " " & Right(ea.Text, Len(ea.Text) - ea.Pos + 1)
                 '    ea.text = Left(ea.text, pos - 1) & gtegn & "10^" & Mid(ea.text, pos + 1, ea.pos - pos - 1) & Right(ea.text, Len(ea.text) - ea.pos + 1)
             End If
         End If
@@ -4176,17 +4197,17 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Pos = InStr(ea.Text, "1*")
     Do While Pos > 0
         If Pos = 1 Then
-            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
+            ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
         ElseIf Mid(ea.Text, Pos - 1, 1) = "*" Then  ' times in front so always remove
-            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
+            ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
         ElseIf Mid(ea.Text, Pos - 1, 1) = "(" Then  ' parentheses in front so always remove
-            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
+            ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
         ElseIf Mid(ea.Text, Pos - 1, 1) = ")" Then  ' parentheses in front so always remove
-            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
+            ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
         ElseIf Mid(ea.Text, Pos - 1, 1) = "=" Then  ' equal in front so always remove
-            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
+            ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
         ElseIf Mid(ea.Text, Pos - 1, 1) = VBA.ChrW(8776) Then  ' cirka equal in front so always remove
-            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
+            ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
         ElseIf ea.IsNumber(Pos - 1) Then    ' number in front so do nothing
 
         ElseIf ea.IsLetterPos(Pos - 1, True) Then    ' letter in front so do nothing
@@ -4196,10 +4217,10 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         ElseIf Pos > 2 Then
             If Mid(ea.Text, Pos - 2, 2) = "^-" Then    ' ^-1 dont remove
             Else
-                ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
+                ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
             End If
         Else
-            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
+            ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ' remove 1*
         End If
         Pos = InStr(Pos + 1, ea.Text, "1*")
     Loop
@@ -4209,12 +4230,12 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Do While Pos > 0
         If ea.ChrByIndex(Pos - 1) = "1" Then
             If Not (ea.IsNumber(Pos - 2)) Or Pos = 2 Then
-                ea.Text = Left(ea.Text, Pos - 2) & right(ea.Text, Len(ea.Text) - Pos - 2)
+                ea.Text = Left(ea.Text, Pos - 2) & Right(ea.Text, Len(ea.Text) - Pos - 2)
             Else
-                ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ',0* ->*
+                ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ',0* ->*
             End If
         Else
-            ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)    ',0* ->*
+            ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)    ',0* ->*
         End If
         Pos = InStr(Pos + 1, ea.Text, ".0*")
     Loop
@@ -4225,7 +4246,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Pos = InStr(ea.Text, ".0")
     Do While Pos > 0
             If Not (ea.IsNumber(Pos + 2)) Then
-                ea.Text = Left(ea.Text, Pos - 1) & right(ea.Text, Len(ea.Text) - Pos - 1)
+                ea.Text = Left(ea.Text, Pos - 1) & Right(ea.Text, Len(ea.Text) - Pos - 1)
             End If
         Pos = InStr(Pos + 1, ea.Text, ".0")
     Loop
@@ -4241,7 +4262,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
                 ea.SetSquareBrackets
                 Udtryk = ea.GetNextBracketContent(Pos)
                 '       if ea.ChrByIndex(ea.pos)=
-                ea.Text = Left(ea.Text, Pos - 1) & "_(" & Udtryk & ")" & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+                ea.Text = Left(ea.Text, Pos - 1) & "_(" & Udtryk & ")" & Right(ea.Text, Len(ea.Text) - ea.Pos + 1)
 
             End If
         Loop While Pos > 1
@@ -4314,7 +4335,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
             ea.Text = Udtryk
             ea.SplitNonBracket Arr, ";"
             If UBound(Arr) > 0 Then
-                Text = Left(Text, Pos - 1) & "" & VBA.ChrW(8730) & "(" & Arr(1) & "&" & Arr(0) & ")" & right(Text, Len(Text) - pos2 + 1)
+                Text = Left(Text, Pos - 1) & "" & VBA.ChrW(8730) & "(" & Arr(1) & "&" & Arr(0) & ")" & Right(Text, Len(Text) - pos2 + 1)
             Else
                 GoTo Fejl
             End If
@@ -4328,7 +4349,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         If Pos > 0 Then
             ea.Text = Text
             Udtryk = ea.GetNextBracketContent(Pos + 7)
-            Text = Left(Text, Pos - 1) & " " & Replace(Udtryk, ListSeparator, VBA.ChrW(8800)) & " " & right(Text, Len(Text) - ea.Pos + 1)
+            Text = Left(Text, Pos - 1) & " " & Replace(Udtryk, ListSeparator, VBA.ChrW(8800)) & " " & Right(Text, Len(Text) - ea.Pos + 1)
         End If
     Loop While Pos > 0
 
@@ -4338,7 +4359,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         If Pos > 0 Then
             ea.Text = Text
             Udtryk = ea.GetNextBracketContent(Pos + 4)
-            Text = Left(Text, Pos - 1) & " " & Replace(Udtryk, ListSeparator, "=") & " " & right(Text, Len(Text) - ea.Pos + 1)
+            Text = Left(Text, Pos - 1) & " " & Replace(Udtryk, ListSeparator, "=") & " " & Right(Text, Len(Text) - ea.Pos + 1)
         End If
     Loop While Pos > 0
 
@@ -4348,7 +4369,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         If Pos > 0 Then
             ea.Text = Text
             Udtryk = ea.GetNextBracketContent(Pos)
-            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & Udtryk & VBA.ChrW(124) & right(Text, Len(Text) - ea.Pos + 1)
+            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & Udtryk & VBA.ChrW(124) & Right(Text, Len(Text) - ea.Pos + 1)
         End If
     Loop While Pos > 0
 
@@ -4358,7 +4379,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         If Pos > 0 Then
             ea.Text = Text
             Udtryk = ea.GetNextBracketContent(Pos + 6)
-            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & Udtryk & VBA.ChrW(124) & right(Text, Len(Text) - ea.Pos + 1)
+            Text = Left(Text, Pos - 1) & VBA.ChrW(124) & Udtryk & VBA.ChrW(124) & Right(Text, Len(Text) - ea.Pos + 1)
         End If
     Loop While Pos > 0
 
@@ -4367,10 +4388,10 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Do While Pos > 0
         ea.Text = Text
         ea.GetNextBracketContent (Pos)
-        Text = Left(Text, ea.Pos - 1) & ")" & right(Text, Len(Text) - ea.Pos + 1)    'closing parenthesis in denominator
-        Text = Left(Text, Pos + 3) & "(" & right(Text, Len(Text) - Pos - 4)    ' , atan2 to atan(
+        Text = Left(Text, ea.Pos - 1) & ")" & Right(Text, Len(Text) - ea.Pos + 1)    'closing parenthesis in denominator
+        Text = Left(Text, Pos + 3) & "(" & Right(Text, Len(Text) - Pos - 4)    ' , atan2 to atan(
         possep = InStr(Pos + 4, Text, ListSeparator)
-        Text = Left(Text, possep - 1) & ")/(" & right(Text, Len(Text) - possep)    ' , to /
+        Text = Left(Text, possep - 1) & ")/(" & Right(Text, Len(Text) - possep)    ' , to /
 
         Pos = InStr(Pos, Text, "atan2")
     Loop
@@ -4379,7 +4400,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Pos = InStr(Text, "integrate")
     Do While Pos > 0
         If Mid(Text, Pos - 1, 1) = "'" Then
-            Text = Left(Text, Pos - 2) & right(Text, Len(Text) - Pos + 1)
+            Text = Left(Text, Pos - 2) & Right(Text, Len(Text) - Pos + 1)
             Pos = Pos - 1
         End If
         Dim udt As String
@@ -4388,9 +4409,9 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         udt = ea.GetNextBracketContent()
         Arr = Split(udt, ListSeparator)
         If UBound(Arr) > 1 Then
-            Text = Left(Text, Pos - 1) & VBA.ChrW(8747) & "_" & Arr(2) & "^" & Arr(3) & VBA.ChrW(9618) & Arr(0) & "  d" & Arr(1) & " " & right(Text, Len(Text) - Pos - Len(udt) - 10)
+            Text = Left(Text, Pos - 1) & VBA.ChrW(8747) & "_" & Arr(2) & "^" & Arr(3) & VBA.ChrW(9618) & Arr(0) & "  d" & Arr(1) & " " & Right(Text, Len(Text) - Pos - Len(udt) - 10)
         Else
-            Text = Left(Text, Pos - 1) & VBA.ChrW(8747) & VBA.ChrW(9618) & Arr(0) & "  d" & Arr(1) & " " & right(Text, Len(Text) - Pos - Len(udt) - 10)
+            Text = Left(Text, Pos - 1) & VBA.ChrW(8747) & VBA.ChrW(9618) & Arr(0) & "  d" & Arr(1) & " " & Right(Text, Len(Text) - Pos - Len(udt) - 10)
         End If
         Pos = InStr(Pos, Text, "integrate")
     Loop
@@ -4399,7 +4420,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Pos = InStr(Text, "diff")
     Do While Pos > 0
         If Mid(Text, Pos - 1, 1) = "'" Then
-            Text = Left(Text, Pos - 2) & right(Text, Len(Text) - Pos + 1)
+            Text = Left(Text, Pos - 2) & Right(Text, Len(Text) - Pos + 1)
             Pos = Pos - 1
         End If
         ea.Text = Text
@@ -4408,9 +4429,9 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         Arr = Split(udt, ListSeparator)
         If UBound(Arr) > 1 Then
             If Arr(2) = "1" Then
-                Text = Left(Text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & Arr(1) & ") (" & Arr(0) & ")" & " " & right(Text, Len(Text) - Len(udt) - 5 - Pos)
+                Text = Left(Text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & Arr(1) & ") (" & Arr(0) & ")" & " " & Right(Text, Len(Text) - Len(udt) - 5 - Pos)
             Else
-                Text = Left(Text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & "^" & Arr(2) & " " & Arr(1) & ") (" & Arr(0) & ")" & " " & right(Text, Len(Text) - Len(udt) - 6)
+                Text = Left(Text, Pos - 1) & VBA.ChrW(8518) & "/(" & VBA.ChrW(8518) & "^" & Arr(2) & " " & Arr(1) & ") (" & Arr(0) & ")" & " " & Right(Text, Len(Text) - Len(udt) - 6)
             End If
         Else
             Pos = Pos + 4
@@ -4422,7 +4443,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Pos = InStr(Text, "limit")
     Do While Pos > 0
         If Mid(Text, Pos - 1, 1) = "'" Then
-            Text = Left(Text, Pos - 2) & right(Text, Len(Text) - Pos + 1)
+            Text = Left(Text, Pos - 2) & Right(Text, Len(Text) - Pos + 1)
             Pos = Pos - 1
         End If
         ea.Text = Text
@@ -4430,7 +4451,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         udt = ea.GetNextBracketContent()
         Arr = Split(udt, ListSeparator)
         'lim" & VBA.ChrW(9516) & "(x" & VBA.ChrW(8594) & "1)" & VBA.ChrW(8289) & "(x+1)
-        Text = Left(Text, Pos - 1) & "lim" & VBA.ChrW(9516) & "(" & Arr(1) & VBA.ChrW(8594) & Arr(2) & ")" & VBA.ChrW(8289) & "(" & Arr(0) & ") " & right(Text, Len(Text) - Pos - Len(udt) - 6)
+        Text = Left(Text, Pos - 1) & "lim" & VBA.ChrW(9516) & "(" & Arr(1) & VBA.ChrW(8594) & Arr(2) & ")" & VBA.ChrW(8289) & "(" & Arr(0) & ") " & Right(Text, Len(Text) - Pos - Len(udt) - 6)
         Pos = InStr(Pos, Text, "limit")
     Loop
 
@@ -4478,7 +4499,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         mtext = Replace(mtext, ListSeparator, "&")
 
         mtext = matrixstartbracket & VBA.ChrW(9632) & "(" & Mid(mtext, 2, Len(mtext) - 2) & ")" & matrixendbracket
-        Text = Left(Text, Pos - 1) & mtext & right(Text, Len(Text) - ea.Pos + 1)
+        Text = Left(Text, Pos - 1) & mtext & Right(Text, Len(Text) - ea.Pos + 1)
 
         Pos = InStr(Pos + 1, Text, "matrix")
     Loop
@@ -4490,7 +4511,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         ea.Pos = Pos + 3
         udt = ea.GetNextBracketContent()
         udt = Replace(udt, ListSeparator, "  " & VBA.ChrW(8743) & "  ")
-        Text = Left(Text, Pos - 1) & udt & right(Text, Len(Text) - ea.Pos + 1)
+        Text = Left(Text, Pos - 1) & udt & Right(Text, Len(Text) - ea.Pos + 1)
     End If
 
     ' %if
@@ -4500,7 +4521,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         mtext = ea.GetNextBracketContent(Pos + 2)
         slutp = ea.Pos
         Arr = Split(mtext, ListSeparator)
-        Text = Left(Text, Pos - 1) & Arr(1) & "   for   " & Arr(0) & right(Text, Len(Text) - slutp + 1)
+        Text = Left(Text, Pos - 1) & Arr(1) & "   for   " & Arr(0) & Right(Text, Len(Text) - slutp + 1)
         Pos = InStr(Text, "%if")
     Loop
 
@@ -4509,7 +4530,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Do While Pos > 0
         ea.Text = Text
         s = ea.GetNextVar(Pos + 6)
-        Text = Left(Text, Pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(8407) & right(Text, Len(Text) - ea.Pos)
+        Text = Left(Text, Pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(8407) & Right(Text, Len(Text) - ea.Pos)
         Pos = InStr(Text, "vecta_")
     Loop
     'vectb_ -> semi vector arrow
@@ -4517,7 +4538,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Do While Pos > 0
         ea.Text = Text
         s = ea.GetNextVar(Pos + 6)
-        Text = Left(Text, Pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(8401) & right(Text, Len(Text) - ea.Pos)
+        Text = Left(Text, Pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(8401) & Right(Text, Len(Text) - ea.Pos)
         Pos = InStr(Text, "vectb_")
     Loop
     'vectc_ -> matrix line
@@ -4525,7 +4546,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     Do While Pos > 0
         ea.Text = Text
         s = ea.GetNextVar(Pos + 6)
-        Text = Left(Text, Pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(773) & right(Text, Len(Text) - ea.Pos)
+        Text = Left(Text, Pos - 1) & "(" & s & ")" & VBA.ChrW(160) & VBA.ChrW(773) & Right(Text, Len(Text) - ea.Pos)
         Pos = InStr(Text, "vectc_")
     Loop
 
@@ -4586,7 +4607,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
             If Pos + 7 = Len(ea.Text) Then
                 ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8407)
             Else
-                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8407) & right(ea.Text, Len(ea.Text) - Pos - 7)
+                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8407) & Right(ea.Text, Len(ea.Text) - Pos - 7)
             End If
             Pos = Pos + 1
         End If
@@ -4603,7 +4624,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
             If Pos + 7 = Len(ea.Text) Then
                 ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8401)
             Else
-                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8401) & right(ea.Text, Len(ea.Text) - Pos - 7)
+                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(8401) & Right(ea.Text, Len(ea.Text) - Pos - 7)
             End If
             Pos = Pos + 1
         End If
@@ -4620,7 +4641,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
             If Pos + 7 = Len(ea.Text) Then
                 ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(773)
             Else
-                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(773) & right(ea.Text, Len(ea.Text) - Pos - 7)
+                ea.Text = Left(ea.Text, Pos - 1 - Len(s)) & "(" & s & ")" & VBA.ChrW(773) & Right(ea.Text, Len(ea.Text) - Pos - 7)
             End If
             Pos = Pos + 1
         End If
@@ -4637,7 +4658,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
         End If
         s2 = Trim(Arr(0))
         If (s2 = "0" Or s2 = "-1") And UBound(Arr) = 1 Then
-            ea.Text = Left(ea.Text, Pos - 1) & "W_(" & s2 & ") (" & Arr(1) & ")" & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+            ea.Text = Left(ea.Text, Pos - 1) & "W_(" & s2 & ") (" & Arr(1) & ")" & Right(ea.Text, Len(ea.Text) - ea.Pos + 1)
         End If
         End If
     Loop While Pos > 0
@@ -4646,8 +4667,8 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     ea.ReplaceVar "inf", VBA.ChrW(8734)
     ea.ReplaceVar "minf", "-" & VBA.ChrW(8734)
     ea.ReplaceVar "infinity", VBA.ChrW(8734)
-    ea.ReplaceVar "und", Sprog.A(431)
-    ea.ReplaceVar "ind", Sprog.A(432)
+    ea.ReplaceVar "und", TT.A(431)
+    ea.ReplaceVar "ind", TT.A(432)
     ea.ReplaceVar "tgrader", VBA.ChrW(176)
     Text = ea.Text
 
@@ -4656,7 +4677,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     'no complex expressions
     If Not MaximaComplex Then
         If InStr(Text, "%i") > 0 Or InStr(Text, VBA.ChrW(943)) > 0 Then
-            Text = Sprog.A(433) & " " & VBA.ChrW(8477)
+            Text = TT.A(433) & " " & VBA.ChrW(8477)
             GoTo slut
         End If
     Else
@@ -4665,7 +4686,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.A(100) & vbCrLf & vbCrLf & Text, vbOKOnly, Sprog.Error
+    MsgBox TT.A(100) & vbCrLf & vbCrLf & Text, vbOKOnly, TT.Error
 slut:
     ConvertToWordSymbols = Text
 End Function
@@ -4899,7 +4920,7 @@ Function ConvertToLatex(Text As String) As String
             End If
             ends = ea.FindChr(VBA.ChrW(8289))
             If ends > 0 Then ea.ReplaceStringAt " ", ends
-            ea.Text = Left(ea.Text, Pos - 1) & "\lim " & right(ea.Text, Len(ea.Text) - Pos - 2)
+            ea.Text = Left(ea.Text, Pos - 1) & "\lim " & Right(ea.Text, Len(ea.Text) - Pos - 2)
         End If
     Loop While Pos > 0
 
@@ -4990,7 +5011,7 @@ Function ConvertToLatex(Text As String) As String
                 t = ea.GetPrevVar(Pos)
                 pos1 = ea.Pos - Len(t)
             End If
-            ea.Text = Left(ea.Text, pos1) & "\underset{" & t & "}{" & s & "}" & right(ea.Text, Len(ea.Text) - pos2)
+            ea.Text = Left(ea.Text, pos1) & "\underset{" & t & "}{" & s & "}" & Right(ea.Text, Len(ea.Text) - pos2)
         End If
     Loop While Pos > 0
 
@@ -5016,7 +5037,7 @@ Function ConvertToLatex(Text As String) As String
             End If
             ends = ea.FindChr(VBA.ChrW(9618))
             If ends > 0 Then ea.ReplaceStringAt " ", ends
-            ea.Text = Left(ea.Text, Pos - 1) & "\sum " & right(ea.Text, Len(ea.Text) - Pos)
+            ea.Text = Left(ea.Text, Pos - 1) & "\sum " & Right(ea.Text, Len(ea.Text) - Pos)
         End If
     Loop While Pos > 0
 
@@ -5042,7 +5063,7 @@ Function ConvertToLatex(Text As String) As String
             End If
             ends = ea.FindChr(VBA.ChrW(9618))
             If ends > 0 Then ea.ReplaceStringAt " ", ends
-            ea.Text = Left(ea.Text, Pos - 1) & "\prod " & right(ea.Text, Len(ea.Text) - Pos)
+            ea.Text = Left(ea.Text, Pos - 1) & "\prod " & Right(ea.Text, Len(ea.Text) - Pos)
         End If
     Loop While Pos > 0
 
@@ -5057,11 +5078,11 @@ Function ConvertToLatex(Text As String) As String
             Dim ul As String, ll As String
             ll = Mid(ea.Text, pos1 + 1, pos2 - pos1 - 1)
             ul = Mid(ea.Text, pos2 + 1, pos3 - pos2 - 1)
-            If Left(ll, 1) = "(" And right(ll, 1) = ")" Then ll = Mid(ll, 2, Len(ll) - 2) ' Word usually inserts brackets that should not be seen. If there should be brackets, there is a double
-            If Left(ul, 1) = "(" And right(ul, 1) = ")" Then ul = Mid(ul, 2, Len(ul) - 2)
-            ea.Text = Left(ea.Text, Pos - 1) & "\int_{" & ll & "}^{" & ul & "} " & right(ea.Text, Len(ea.Text) - pos3)
+            If Left(ll, 1) = "(" And Right(ll, 1) = ")" Then ll = Mid(ll, 2, Len(ll) - 2) ' Word usually inserts brackets that should not be seen. If there should be brackets, there is a double
+            If Left(ul, 1) = "(" And Right(ul, 1) = ")" Then ul = Mid(ul, 2, Len(ul) - 2)
+            ea.Text = Left(ea.Text, Pos - 1) & "\int_{" & ll & "}^{" & ul & "} " & Right(ea.Text, Len(ea.Text) - pos3)
         Else    ' indefinite
-            ea.Text = Left(ea.Text, Pos - 1) & "\int " & right(ea.Text, Len(ea.Text) - pos3)
+            ea.Text = Left(ea.Text, Pos - 1) & "\int " & Right(ea.Text, Len(ea.Text) - pos3)
         End If
         Pos = InStr(ea.Text, VBA.ChrW(8747))
     Loop
@@ -5071,15 +5092,15 @@ Function ConvertToLatex(Text As String) As String
     Do While Pos > 0
         If ea.ChrByIndex(Pos + 1) = "(" Then
             s = Trim(ea.GetNextBracketContent(Pos))
-            If Not (Left(s, 1) = "{" And right(s, 1) = "}") Then s = "{" & s & "}"
-            ea.Text = Left(ea.Text, Pos) & s & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+            If Not (Left(s, 1) = "{" And Right(s, 1) = "}") Then s = "{" & s & "}"
+            ea.Text = Left(ea.Text, Pos) & s & Right(ea.Text, Len(ea.Text) - ea.Pos + 1)
         ElseIf ea.ChrByIndex(Pos + 1) = "{" Then ' if already converted
         Else
             ea.Pos = Pos + 1
             ea.FindHierakiBreak 4, False
             s = ea.SubString(Pos + 1, ea.Pos)
-            If Not (Left(s, 1) = "{" And right(s, 1) = "}") Then s = "{" & s & "}"
-            ea.Text = Left(ea.Text, Pos) & s & right(ea.Text, NotZero(ea.Length - ea.Pos))
+            If Not (Left(s, 1) = "{" And Right(s, 1) = "}") Then s = "{" & s & "}"
+            ea.Text = Left(ea.Text, Pos) & s & Right(ea.Text, NotZero(ea.Length - ea.Pos))
         End If
         Pos = InStr(Pos + 1, ea.Text, "^")
     Loop
@@ -5089,14 +5110,14 @@ Function ConvertToLatex(Text As String) As String
     Do While Pos > 0
         If ea.ChrByIndex(Pos + 1) = "(" Then
             s = ea.GetNextBracketContent
-            If Not (Left(s, 1) = "{" And right(s, 1) = "}") Then s = "{" & s & "}"
-            ea.Text = Left(ea.Text, Pos) & s & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+            If Not (Left(s, 1) = "{" And Right(s, 1) = "}") Then s = "{" & s & "}"
+            ea.Text = Left(ea.Text, Pos) & s & Right(ea.Text, Len(ea.Text) - ea.Pos + 1)
         Else
             ea.Pos = Pos + 1
             ea.FindHierakiBreak 4, False
             s = ea.SubString(Pos + 1, ea.Pos)
-            If Not (Left(s, 1) = "{" And right(s, 1) = "}") Then s = "{" & s & "}"
-            ea.Text = Left(ea.Text, Pos) & s & right(ea.Text, NotZero(ea.Length - ea.Pos))
+            If Not (Left(s, 1) = "{" And Right(s, 1) = "}") Then s = "{" & s & "}"
+            ea.Text = Left(ea.Text, Pos) & s & Right(ea.Text, NotZero(ea.Length - ea.Pos))
         End If
         Pos = InStr(Pos + 1, ea.Text, "_")
     Loop
@@ -5143,12 +5164,12 @@ Function ConvertToLatex(Text As String) As String
         pos2 = ea.FindHierakiBreak(3, False)
         
         n = Mid(ea.Text, Pos + 1, pos2 - Pos)
-        If Left(n, 1) = "(" And right(n, 1) = ")" Then
+        If Left(n, 1) = "(" And Right(n, 1) = ")" Then
             n = Mid(n, 2, Len(n) - 2)
         End If
         pos2 = pos2 + 1
         '        End If
-        ea.Text = Left(ea.Text, pos1 - 1) & "\frac{" & t & "}{" & n & "}" & right(ea.Text, NotZero(Len(ea.Text) - pos2 + 1))
+        ea.Text = Left(ea.Text, pos1 - 1) & "\frac{" & t & "}{" & n & "}" & Right(ea.Text, NotZero(Len(ea.Text) - pos2 + 1))
         Pos = InStr(ea.Text, "/")
     Loop
 
@@ -5165,7 +5186,7 @@ Function ConvertToLatex(Text As String) As String
                 Else
                     ea.SetNormalBrackets
                     s = ea.GetNextBracketContent()
-                    ea.Text = Left(ea.Text, Pos - 1) & "\sqrt[" & rod & "]{" & s & "}" & right(ea.Text, NotZero(ea.Length - ea.Pos + 1))
+                    ea.Text = Left(ea.Text, Pos - 1) & "\sqrt[" & rod & "]{" & s & "}" & Right(ea.Text, NotZero(ea.Length - ea.Pos + 1))
                 End If
                 ea.Pos = Pos
             End If
@@ -5188,9 +5209,9 @@ Function ConvertToLatex(Text As String) As String
                 pos2 = ea.Pos
                 If UBound(Arr) = 0 Then
 '                    ea.text = Replace(ea.text, VBA.ChrW(8730), "\sqrt ", 1, 1)
-                    ea.Text = Left(ea.Text, Pos - 1) & "\sqrt{" & Arr(0) & "}" & right(ea.Text, NotZero(ea.Length - ea.Pos + 1))
+                    ea.Text = Left(ea.Text, Pos - 1) & "\sqrt{" & Arr(0) & "}" & Right(ea.Text, NotZero(ea.Length - ea.Pos + 1))
                 ElseIf UBound(Arr) = 1 Then
-                    ea.Text = Left(ea.Text, Pos - 1) & "\sqrt[" & Arr(0) & "]{" & Arr(1) & "}" & right(ea.Text, NotZero(ea.Length - ea.Pos + 1))
+                    ea.Text = Left(ea.Text, Pos - 1) & "\sqrt[" & Arr(0) & "]{" & Arr(1) & "}" & Right(ea.Text, NotZero(ea.Length - ea.Pos + 1))
                 End If
             End If
         End If
@@ -5202,7 +5223,7 @@ Function ConvertToLatex(Text As String) As String
     Do While Pos > 0
         ea.SetNormalBrackets
         s = ea.GetNextBracketContent(Pos)
-        ea.Text = Left(ea.Text, Pos - 1) & "\begin{matrix}" & Replace(s, "@", "\\") & "\end{matrix}" & right(ea.Text, NotZero(ea.Length - Pos - Len(s) - 2))
+        ea.Text = Left(ea.Text, Pos - 1) & "\begin{matrix}" & Replace(s, "@", "\\") & "\end{matrix}" & Right(ea.Text, NotZero(ea.Length - Pos - Len(s) - 2))
         Pos = InStr(ea.Text, VBA.ChrW(9632))
     Loop
 
@@ -5298,8 +5319,8 @@ Function ConvertToLatex(Text As String) As String
             ea.GetNextBracketContent Pos - 1
             pos3 = ea.Pos
             If Not ea.ChrByIndex(pos3) = "{" Then
-                ea.Text = Left(ea.Text, pos2 - 1) & "\left" & right(ea.Text, Len(ea.Text) - pos2 + 1)
-                ea.Text = Left(ea.Text, pos3 + 3) & "\right" & right(ea.Text, Len(ea.Text) - pos3 - 3)
+                ea.Text = Left(ea.Text, pos2 - 1) & "\left" & Right(ea.Text, Len(ea.Text) - pos2 + 1)
+                ea.Text = Left(ea.Text, pos3 + 3) & "\right" & Right(ea.Text, Len(ea.Text) - pos3 - 3)
             End If
         Else
             pos1 = Pos + 1
@@ -5328,7 +5349,7 @@ Do
         End If
         pow = Mid(Text, Pos, pos2 - Pos)
         If pow = "(-1)" Then pow = "-1"
-        Text = Left(Text, Pos - 1) & "{" & pow & "}" & right(Text, Len(Text) - pos2)
+        Text = Left(Text, Pos - 1) & "{" & pow & "}" & Right(Text, Len(Text) - pos2)
 '        InsertTextAt "^" & pow, FindEndOfBracket
         
     End If
@@ -5345,7 +5366,7 @@ Dim ea As New ExpressionAnalyser, Pos As Integer, pos1 As Integer, s As String
         If Mid(ea.Text, Pos - 1, 1) = ")" Then
             ea.SetNormalBrackets
             s = ea.GetPrevBracketContent(Pos)
-            ea.Text = Left(ea.Text, Pos - Len(s) - 3) & aString & s & bString & right(ea.Text, Len(ea.Text) - Pos)
+            ea.Text = Left(ea.Text, Pos - Len(s) - 3) & aString & s & bString & Right(ea.Text, Len(ea.Text) - Pos)
         ElseIf Mid(ea.Text, Pos - 1, 1) = "}" Then
             ea.SetTuborgBrackets
             s = ea.GetPrevBracketContent(Pos)
@@ -5354,10 +5375,10 @@ Dim ea As New ExpressionAnalyser, Pos As Integer, pos1 As Integer, s As String
                 pos1 = pos1 - 1
             Loop
             If ea.ChrByIndex(pos1) = "\" Then
-                ea.Text = Left(ea.Text, pos1 - 1) & aString & Mid(ea.Text, pos1, Pos - pos1) & bString & right(ea.Text, Len(ea.Text) - Pos - Len(Accent) + 1)
+                ea.Text = Left(ea.Text, pos1 - 1) & aString & Mid(ea.Text, pos1, Pos - pos1) & bString & Right(ea.Text, Len(ea.Text) - Pos - Len(Accent) + 1)
             End If
         Else
-            ea.Text = Left(ea.Text, Pos - 2) & aString & Mid(ea.Text, Pos - 1, 1) & bString & right(ea.Text, Len(ea.Text) - Pos - Len(Accent) + 1)
+            ea.Text = Left(ea.Text, Pos - 2) & aString & Mid(ea.Text, Pos - 1, 1) & bString & Right(ea.Text, Len(ea.Text) - Pos - Len(Accent) + 1)
         End If
         Pos = InStr(Pos + 1, ea.Text, Accent)
     Loop
@@ -5373,10 +5394,10 @@ Function ConvertPreAccent(Text As String, Accent As String, aString, bString) As
             If ea.ChrByIndex(Pos + 1) = "(" Then
                 ea.SetNormalBrackets
                 s = ea.GetNextBracketContent(Pos)
-                ea.Text = Left(ea.Text, Pos - 1) & aString & s & bString & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+                ea.Text = Left(ea.Text, Pos - 1) & aString & s & bString & Right(ea.Text, Len(ea.Text) - ea.Pos + 1)
             Else
                 s = ea.GetNextVar(Pos)
-                ea.Text = Left(ea.Text, Pos - 1) & aString & s & bString & right(ea.Text, Len(ea.Text) - ea.Pos)
+                ea.Text = Left(ea.Text, Pos - 1) & aString & s & bString & Right(ea.Text, Len(ea.Text) - ea.Pos)
             End If
         End If
     Loop While Pos > 0
@@ -5468,7 +5489,7 @@ Function ConvertLatexToWord(Text As String) As String
     Do While p > 0
         t = ea.GetNextBracketContent
         n = ea.GetNextBracketContent
-        ea.Text = Left(ea.Text, p - 1) & "(" & t & ")/(" & n & ")" & right(ea.Text, ea.Length - ea.Pos + 1)
+        ea.Text = Left(ea.Text, p - 1) & "(" & t & ")/(" & n & ")" & Right(ea.Text, ea.Length - ea.Pos + 1)
         p = InStr(ea.Text, "\frac")
     Loop
 
@@ -5524,7 +5545,7 @@ genstart:
             antalgenstart = antalgenstart + 1
             GoTo genstart
         ElseIf Kommando = "" Then
-            MsgBox "WordMat cant read the command. This can be caused by error which can be corrected by restarting Word (Close all Word documents).", vbOKOnly, Sprog.Error
+            MsgBox "WordMat cant read the command. This can be caused by error which can be corrected by restarting Word (Close all Word documents).", vbOKOnly, TT.Error
         End If
 
         If InStr(Kommando, VBA.ChrW(8743)) Then
@@ -5756,8 +5777,8 @@ Sub InsertMaximaOutput()
     '    mo.OMaths(1).BuildUp
 
     If Len(MaximaOutput) > 1000 Then
-        If MsgBox2(Sprog.A(896) & Len(MaximaOutput) & VbCrLfMac & Sprog.A(897), vbYesNo, Sprog.A(846)) = vbNo Then
-            MaximaOutput = Left(MaximaOutput, 1000) & " " & Sprog.A(119)
+        If MsgBox2(TT.A(896) & Len(MaximaOutput) & VbCrLfMac & TT.A(897), vbYesNo, TT.A(846)) = vbNo Then
+            MaximaOutput = Left(MaximaOutput, 1000) & " " & TT.A(119)
         End If
     End If
     Set mo = Selection.OMaths.Add(Selection.Range)
@@ -5797,15 +5818,15 @@ Function TranslateReplaceComment(comm As String) As String
     'Loop
 
     If InStr(comm, "Solution unsure") > 0 Then
-        outtext = outtext & Sprog.A(101)
+        outtext = outtext & TT.A(101)
     End If
 
     If InStr(comm, "solve: using arc-trig functions to get a solution.") > 0 Then
-        outtext = outtext & Sprog.A(102)
+        outtext = outtext & TT.A(102)
     End If
 
     If InStr(comm, "Some solutions will be lost.") > 0 Then
-        outtext = outtext & Sprog.A(103)
+        outtext = outtext & TT.A(103)
     End If
 
     If InStr(comm, "A number was found where a variable was expected -`solve'") > 0 Then
@@ -5813,19 +5834,19 @@ Function TranslateReplaceComment(comm As String) As String
     End If
 
     If InStr(comm, "A number was found where a variable was expected -`solve'") > 0 Then
-        outtext = outtext & Sprog.ErrorGeneral
+        outtext = outtext & TT.ErrorGeneral
     End If
 
     If InStr(comm, "Division by 0") > 0 Then
-        outtext = outtext & Sprog.A(104)
+        outtext = outtext & TT.A(104)
     End If
 
     If InStr(comm, "syntax error") > 0 Then
-        outtext = outtext & Sprog.A(105)
+        outtext = outtext & TT.A(105)
     End If
 
     If InStr(comm, "infix operator") > 0 Then
-        outtext = outtext & Sprog.A(106)
+        outtext = outtext & TT.A(106)
     End If
 
     If InStr(comm, "solving system of equations") > 0 Then
@@ -5833,15 +5854,15 @@ Function TranslateReplaceComment(comm As String) As String
     End If
 
     If InStr(comm, "Warning too few variables, only") > 0 Then
-        outtext = outtext & Sprog.A(107)
+        outtext = outtext & TT.A(107)
     End If
 
     If InStr(comm, "More solutions may exist") > 0 Then
-        outtext = outtext & Sprog.A(788)
+        outtext = outtext & TT.A(788)
     End If
 
     If InStr(comm, "Warning: More equations than variables.") > 0 Then
-        outtext = outtext & Sprog.A(700)
+        outtext = outtext & TT.A(700)
     End If
 
     TranslateReplaceComment = outtext
@@ -5887,7 +5908,7 @@ Sub InsertAssumptions()
     Selection.Font.Italic = True
 
     Selection.TypeParagraph
-    Selection.TypeText Sprog.A(900) & "  "
+    Selection.TypeText TT.A(900) & "  "
     '            Selection.TypeText text:=vbTab
     Set mo = Selection.OMaths.Add(Selection.Range)
     Selection.TypeText assum
@@ -5929,10 +5950,10 @@ Function FindMaximaOutput(Text As String) As String
     GoTo slut
 Fejl:
     opos = InStr(Text, "(%i2)")
-    text2 = right(Text, Len(Text) - opos - 4)
+    text2 = Right(Text, Len(Text) - opos - 4)
     text2 = Replace(text2, "(%i2)", "")
-    text2 = Sprog.A(108) & vbCrLf & vbCrLf & text2
-    MsgBox text2, vbOKOnly, Sprog.A(109)
+    text2 = TT.A(108) & vbCrLf & vbCrLf & text2
+    MsgBox text2, vbOKOnly, TT.A(109)
     FindMaximaOutput = ""
 slut:
 
@@ -6075,7 +6096,7 @@ Loop While StartPos < Len(Text)
 GoTo slut
 Fejl:
    FindNextio = 0
-'    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure FindNextio, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, sprog.error
+'    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure FindNextio, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, TT.error
 slut:
 End Function
 '#If Mac Then
@@ -6104,7 +6125,7 @@ End If
     End If
 GoTo slut
 Fejl:
-    MsgBox2 "removeprintetbool error", vbOKOnly, Sprog.Error
+    MsgBox2 "removeprintetbool error", vbOKOnly, TT.Error
 slut:
     RemovePrintetBool = s
 End Function
@@ -6376,16 +6397,16 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
     s = Replace(s, vbCr, "")
     slc = LCase(s)
  
-    If InStr(s, ChrW(8788)) > 0 Or InStr(s, ChrW(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(slc, "definer:") > 0 Or InStr(slc, "define:") > 0 Or InStr(slc, "ligning:") > 0 Or InStr(slc, "equation:") > 0 Or InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Or InStr(slc, LCase(Sprog.A(69))) > 0 Then
+    If InStr(s, ChrW(8788)) > 0 Or InStr(s, ChrW(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(slc, "definer:") > 0 Or InStr(slc, "define:") > 0 Or InStr(slc, "ligning:") > 0 Or InStr(slc, "equation:") > 0 Or InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(s, VBA.ChrW(8801)) > 0 Or InStr(slc, LCase(TT.A(69))) > 0 Then
         If VBA.LCase(Left(s, 8)) = "definer:" Then
-            s = right(s, Len(s) - 8)
+            s = Right(s, Len(s) - 8)
         ElseIf VBA.LCase(Left(s, 7)) = "define:" Then
-            s = right(s, Len(s) - 7)
+            s = Right(s, Len(s) - 7)
         ElseIf VBA.LCase(Left(s, 16)) = "definer ligning:" Then
-            s = right(s, Len(s) - 16)
+            s = Right(s, Len(s) - 16)
             deflign = True
         ElseIf VBA.LCase(Left(s, 16)) = "define equation:" Then
-            s = right(s, Len(s) - 16)
+            s = Right(s, Len(s) - 16)
             deflign = True
         End If
         s = Replace(s, VBA.ChrW(8788), ":=")    ' \equiv and
@@ -6403,7 +6424,7 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
         '        End If
 
         '        s = Replace(s, "):=:", "):=")
-        If InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(slc, LCase(Sprog.A(69))) Then
+        If InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(slc, LCase(TT.A(69))) Then
             s = Replace(Trim(Split(s, ":")(1)), vbCr, "")
             If s = "" Then
                 AddDefinition = "STOP"
@@ -6469,7 +6490,7 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
                 End If
                 If Not ValidateDef(Arr(0), Arr(1)) Then GoTo hop
 
-                If Left(Arr(1), 1) = "=" Then Arr(1) = right(Arr(1), Len(Arr(1)) - 1)
+                If Left(Arr(1), 1) = "=" Then Arr(1) = Right(Arr(1), Len(Arr(1)) - 1)
                 If Arr(1) = "" Then GoTo hop
             
                 If UBound(ldefname) < defindex Then
@@ -6487,9 +6508,9 @@ hop2:                    ' if setunit or assume or declare
                 t = ea2.GetNextVar
 
                 If InStr(Split(defenk, ":")(0), "diff") > 0 Then
-                    MsgBox Sprog.A(116) & s
+                    MsgBox TT.A(116) & s
                 ElseIf (t = "e" And InStr(defenk, "[") <= 0) Or t = "integrate" Or t = "sin" Or t = "cos" Or t = "tan" Or t = "diff" Or t = "solve" Or t = "at" Or t = "for" Or t = "in" Or t = "do" Or t = "if" Or t = "and" Or t = "or" Or t = "product" Or t = "step" Or t = "next" Or t = "from" Or t = "limit" Or t = "sum" Or t = "then" Or t = "and" Or t = "or" Or t = "else" Or t = "unless" Or t = "while" Then
-                    MsgBox Sprog.A(845) & " " & t & " " & Sprog.A(434), vbOKOnly, Sprog.Error
+                    MsgBox TT.A(845) & " " & t & " " & TT.A(434), vbOKOnly, TT.Error
                 ElseIf t = "setunits" Or t = "assume" Or t = "declare" Then
                     '                    AddDefinition =  AddDefinition & CodeForMaxima(defenk) & "$"
                     AddDefinition = AddDefinition & defenk & ";"
@@ -6525,7 +6546,7 @@ Function SplitAssump(s As String) As String
    p = InStr(s, "<=" & v & "<=")
    If p > 0 Then
       pre = Left(s, p - 1)
-      pst = right(s, Len(s) - p - 4)
+      pst = Right(s, Len(s) - p - 4)
       SplitAssump = v & ">=" & pre & "&&and&&" & v & "<=" & pst
 '      SplitAssump = pre & "<=" & v & " and " & v & "<=" & pst
       Exit Function
@@ -6533,21 +6554,21 @@ Function SplitAssump(s As String) As String
    p = InStr(s, "<=" & v & "<")
    If p > 0 Then
       pre = Left(s, p - 1)
-      pst = right(s, Len(s) - p - 3)
+      pst = Right(s, Len(s) - p - 3)
       SplitAssump = pre & "<=" & v & "&&and&&" & v & "<" & pst
       Exit Function
    End If
    p = InStr(s, "<" & v & "<=")
    If p > 0 Then
       pre = Left(s, p - 1)
-      pst = right(s, Len(s) - p - 3)
+      pst = Right(s, Len(s) - p - 3)
       SplitAssump = pre & "<" & v & "&&and&&" & v & "<=" & pst
       Exit Function
    End If
    p = InStr(s, "<" & v & "<")
    If p > 0 Then
       pre = Left(s, p - 1)
-      pst = right(s, Len(s) - p - 2)
+      pst = Right(s, Len(s) - p - 2)
       SplitAssump = pre & "<" & v & "&&and&&" & v & "<" & pst
       Exit Function
    End If
@@ -6571,7 +6592,7 @@ Function sqbrAssump(s As String) As String
       Exit Function
    End If
    ea.Pos = p
-   s = right(s, Len(s) - p)
+   s = Right(s, Len(s) - p)
    ea.Text = s
    ea.StartBracket = ea.ChrByIndex(1)
    ea.EndBracket = ea.ChrByIndex(ea.Length)
@@ -6630,12 +6651,12 @@ Function ValidateDef(ByVal LHS As String, ByVal RHS As String) As Boolean
 
     ' If Not ea.IsAllText Then   not good enough then, and; not taken into account
     If InStr(LHS, "+") > 0 Or InStr(LHS, "-") > 0 Or InStr(LHS, "*") > 0 Or InStr(LHS, "/") > 0 Then
-        MsgBox Sprog.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & RHS) & vbCrLf & Sprog.A(118), vbOKOnly, Sprog.Error
+        MsgBox TT.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & RHS) & vbCrLf & TT.A(118), vbOKOnly, TT.Error
         Exit Function
     End If
 
-    If right(RHS, 1) = "+" > 0 Then
-        MsgBox Sprog.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & RHS) & vbCrLf & Sprog.A(118), vbOKOnly, Sprog.Error
+    If Right(RHS, 1) = "+" > 0 Then
+        MsgBox TT.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & RHS) & vbCrLf & TT.A(118), vbOKOnly, TT.Error
         Exit Function
     End If
 
@@ -6676,9 +6697,9 @@ Function GetAssumeText(defenk) As String
                     If p2 > 0 Then    ' 2<=x<=3
                         If CASengine = 0 Then
                             If ea.ChrByIndex(p1 + 1) = "=" Then
-                                s = Left(s, p2 - 1) & "," & right(s, Len(s) - p1 - 1)
+                                s = Left(s, p2 - 1) & "," & Right(s, Len(s) - p1 - 1)
                             Else
-                                s = Left(s, p2 - 1) & "," & right(s, Len(s) - p1)
+                                s = Left(s, p2 - 1) & "," & Right(s, Len(s) - p1)
                             End If
                         End If
                     End If
@@ -6899,7 +6920,7 @@ Function GetMaximaSettingsString() As String
     SettingsString = SettingsString & "NoSigFig:" & MaximaCifre & ","
     SettingsString = SettingsString & "fpprintprec:" & MaximaCifre & ","
             
-    If right(SettingsString, 1) = "," Then SettingsString = Left(SettingsString, Len(SettingsString) - 1)
+    If Right(SettingsString, 1) = "," Then SettingsString = Left(SettingsString, Len(SettingsString) - 1)
     SettingsString = SettingsString & "]$"
      
     GetMaximaSettingsString = SettingsString

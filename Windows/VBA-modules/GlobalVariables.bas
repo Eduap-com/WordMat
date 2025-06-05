@@ -19,7 +19,7 @@ Public Const PI As Double = 3.14159265358979
     Public Const VbCrLfMac = vbCrLf
 #End If
 
-Public Sprog As New CSprog
+Public TT As New CLang ' Text Translation
 
 Public XLapp As Object ' XLapp As Excel.Application
 

@@ -14,6 +14,13 @@ Public Function QActivePartnership(Optional Force As Boolean = False, Optional S
     Err.Clear
     On Error Resume Next
     
+    QActivePartnership = Application.Run("PQActivePartnership", Force, False, ShowForm)
+    
+    If QActivePartnership Then
+        If mSkoleNavn = vbNullString Then mSkoleNavn = GetRegSetting("Skolenavn")
+    End If
+    Exit Function
+    
     Application.Run macroname:="PQActivePartnership", varg1:=Force, varg2:=True, varg3:=ShowForm
     If Err.Number = 513 Then
         QActivePartnership = True
@@ -40,7 +47,7 @@ Function SkoleNavn() As String
     ElseIf mPartnerSkab = 0 Then
         If QActivePartnership Then
             mPartnerSkab = 1
-            SkoleNavn = mSkoleNavn
+            mSkoleNavn = GetRegSetting("Skolenavn")
         Else
             mPartnerSkab = 2
             SkoleNavn = vbNullString

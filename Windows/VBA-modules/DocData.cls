@@ -204,7 +204,7 @@ For i = 1 To nrows
     t = t & "),"
 Next
 
-If right(t, 1) = "," Then
+If Right(t, 1) = "," Then
     t = Left(t, Len(t) - 1)
 End If
 t = t & " }"
@@ -228,7 +228,7 @@ For i = 1 To nrows
     t = t & "),"
 Next
 
-If right(t, 1) = "," Then
+If Right(t, 1) = "," Then
     t = Left(t, Len(t) - 1)
 End If
 t = t & " }"
@@ -252,7 +252,7 @@ For i = 1 To nrows
     t = t & "],"
 Next
 
-If right(t, 1) = "," Then
+If Right(t, 1) = "," Then
     t = Left(t, Len(t) - 1)
 End If
 t = t & " ]"
@@ -319,7 +319,7 @@ Do
 '        p = ea.GetNextBracketContent()
 '    End If
     p = Trim(ea.GetNextListItem(ea.Pos, ","))
-    If Left(p, 1) = "[" And right(p, 1) = "]" Then
+    If Left(p, 1) = "[" And Right(p, 1) = "]" Then
         If Len(p) > 2 Then p = Mid(p, 2, Len(p) - 2)
     End If
 '    ea2.text = Replace(p, ";", " , ")

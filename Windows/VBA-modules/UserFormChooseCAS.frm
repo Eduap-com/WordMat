@@ -97,13 +97,13 @@ End If
 End Sub
 
 Sub SetCaptions()
-    Label_MaximaSym.Caption = "Maxima" & VbCrLfMac & Sprog.A(710)
-    Label_MaximaNum.Caption = "Maxima" & VbCrLfMac & Sprog.A(711)
-    Label_GeoGebraSym.Caption = "GeoGebra" & VbCrLfMac & Sprog.A(710)
-    Label_GeoGebraNum.Caption = "GeoGebra" & VbCrLfMac & Sprog.A(711)
-    Label_GeoGebraBrowser.Caption = "GeoGebra browser" & VbCrLfMac & Sprog.A(710)
-    Label_GeoGebraGrafisk.Caption = "GeoGebra" & VbCrLfMac & Sprog.A(241)
-    Label_text.Caption = Sprog.A(685)
+    Label_MaximaSym.Caption = "Maxima" & VbCrLfMac & TT.A(710)
+    Label_MaximaNum.Caption = "Maxima" & VbCrLfMac & TT.A(711)
+    Label_GeoGebraSym.Caption = "GeoGebra" & VbCrLfMac & TT.A(710)
+    Label_GeoGebraNum.Caption = "GeoGebra" & VbCrLfMac & TT.A(711)
+    Label_GeoGebraBrowser.Caption = "GeoGebra browser" & VbCrLfMac & TT.A(710)
+    Label_GeoGebraGrafisk.Caption = "GeoGebra" & VbCrLfMac & TT.A(241)
+    Label_text.Caption = TT.A(685)
 End Sub
 
 Private Sub Label_cancel_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)

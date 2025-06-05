@@ -539,9 +539,9 @@
 538#£Marker udtryk der skal differentieres, eller placer cursoren i udtrykket.
 539#£Stamfunktion
 540#£Finder stamfunktion til markerede udtryk (ubestemte integrale).
-541#£
-542#£
-543#£
+541#£Importer indstillinger
+542#£Eksporter indstillinger
+543#£Tilpas menu
 544#£
 545#£Vis graf (Alt+P)
 546#£Viser grafen for de(t) valgte funktioner/ligninger og punker. Grafen kan efterfølgende indsættes i dokumentet. Der understøttes forskellige grafprogrammer. Vælg din favorit i indstillinger, eller vælg ved at udvide denne knap
@@ -688,10 +688,10 @@
 687#£Betydende cifre
 688#£Slå enheder til/fra
 689#£Hvis enheder er slået til kan WordMat forstå og omregne enheder. På knappen SI kan du angive hvilke enheder du vil have omregnet til. Som standard er output i SI-enheder. Slå ikke enheder til hvis du ikke specifikt skal bruge det. Det kan påvirke WordMats virkemåde, og reserverer en masse variable.
-690#£
+690#£Indsæt kodeblok
 691#£Angiv hvilke enheder, der skal konverteres til ved beregninger. Som standard er output i SI-enheder
 692#£bc
-693#£
+693#£En kodeblok er et område, hvor man kan programmere Maxima direkte. Man kan fx definere mere avancerede funktioner som så kan anvendes længere nede i dokumentet. Se mere i manualen.
 694#£Antal cifre
 695#£Tal afrunding
 696#£Vælg hvordan tal skal skrives og afrundes. I eksemplerne nedenfor er WordMat sat til 3 cifre.\r\n\r\nAntal decimaler: 12,345\r\nBetydende cifre: 12,3\r\nVid. notation: 1,23*10^1

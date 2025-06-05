@@ -53,8 +53,8 @@ Private Sub Label_ok_Click()
 End Sub
 
 Private Sub UserForm_Activate()
-    Me.Caption = Sprog.A(823)
-    Label_text.Caption = Sprog.A(113)
+    Me.Caption = TT.A(823)
+    Label_text.Caption = TT.A(113)
     Label_defs.Caption = FormatDefinitions(omax.DefString)
 End Sub
 

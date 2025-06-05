@@ -108,11 +108,11 @@ Dim i As Integer, c As Integer
 
     TempDefs = vbNullString
     For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
+        If Len(Arr(i)) > 2 And Not Right(Arr(i), 1) = "=" Then
             If Split(Arr(i), "=")(0) <> SelectedVar Then ' may not define a variable which is solved for
                 TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
-                MsgBox Sprog.A(252) & " " & SelectedVar & " " & Sprog.A(253), vbOKOnly, Sprog.Error
+                MsgBox TT.A(252) & " " & SelectedVar & " " & TT.A(253), vbOKOnly, TT.Error
                 Exit Sub
             End If
         End If
@@ -121,11 +121,11 @@ Dim i As Integer, c As Integer
     ' If units are on, you may not solve for a unit
     If MaximaUnits Then
         If InStr("A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s", SelectedVar) Then
-            MsgBox Sprog.A(254), vbOKOnly, Sprog.A(846)
+            MsgBox TT.A(254), vbOKOnly, TT.A(846)
         End If
     End If
     
-    If right(TempDefs, 1) = ListSeparator Then
+    If Right(TempDefs, 1) = ListSeparator Then
         TempDefs = Left(TempDefs, Len(TempDefs) - 1)
     End If
     End If
@@ -238,8 +238,8 @@ Private Sub UserForm_Activate()
                 ListBox_vars.Selected(i) = True
             Next
         End If
-        Label_choose.Caption = Sprog.A(247) & " " & NoEq - 1 & " " & Sprog.A(245)
-        Label_tast.Caption = Sprog.A(248) & " " & NoEq - 1 & " " & Sprog.A(249)
+        Label_choose.Caption = TT.A(247) & " " & NoEq - 1 & " " & TT.A(245)
+        Label_tast.Caption = TT.A(248) & " " & NoEq - 1 & " " & TT.A(249)
     ElseIf NoEq > 1 Then
         ListBox_vars.MultiSelect = fmMultiSelectMulti
         If ListBox_vars.ListCount >= NoEq Then
@@ -251,8 +251,8 @@ Private Sub UserForm_Activate()
                 ListBox_vars.Selected(i) = True
             Next
         End If
-        Label_choose.Caption = Sprog.A(250) & " " & NoEq & " " & Sprog.A(245)
-        Label_tast.Caption = Sprog.A(251) & " " & NoEq & " " & Sprog.A(249)
+        Label_choose.Caption = TT.A(250) & " " & NoEq & " " & TT.A(245)
+        Label_tast.Caption = TT.A(251) & " " & NoEq & " " & TT.A(249)
     Else
         ListBox_vars.MultiSelect = fmMultiSelectSingle
     End If
@@ -284,25 +284,25 @@ Private Sub UserForm_Initialize()
 End Sub
 Private Sub SetCaptions()
     If NoEq > 1 Then
-        Me.Caption = Sprog.A(766)
-        Label_choose.Caption = Sprog.A(767)
+        Me.Caption = TT.A(766)
+        Label_choose.Caption = TT.A(767)
     Else
-        Me.Caption = Sprog.A(760)
-        Label_choose.Caption = Sprog.A(761)
+        Me.Caption = TT.A(760)
+        Label_choose.Caption = TT.A(761)
     End If
 
-    Label_tast.Caption = Sprog.A(762)
-    Label_ok.Caption = Sprog.OK
-    Label_cancel.Caption = Sprog.Cancel
-    Label4.Caption = Sprog.A(763)
-    Label5.Caption = Sprog.A(764)
-    Label8.Caption = Sprog.A(443)
-    Frame5.Caption = Sprog.A(710) & " ?"
-    OptionButton_exactandnum.Caption = Sprog.A(712)
-    OptionButton_exactonly.Caption = Sprog.A(710)
-    OptionButton_numonly.Caption = Sprog.A(711)
-    Label_enheder.Caption = Sprog.A(168) & ":"
-    Label_unitwarning.Caption = Sprog.A(765)
+    Label_tast.Caption = TT.A(762)
+    Label_ok.Caption = TT.OK
+    Label_cancel.Caption = TT.Cancel
+    Label4.Caption = TT.A(763)
+    Label5.Caption = TT.A(764)
+    Label8.Caption = TT.A(443)
+    Frame5.Caption = TT.A(710) & " ?"
+    OptionButton_exactandnum.Caption = TT.A(712)
+    OptionButton_exactonly.Caption = TT.A(710)
+    OptionButton_numonly.Caption = TT.A(711)
+    Label_enheder.Caption = TT.A(168) & ":"
+    Label_unitwarning.Caption = TT.A(765)
 End Sub
 
 Sub ScaleForm(SF As Double)
@@ -346,7 +346,7 @@ Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
 End Sub
 Sub FillComboBoxDecType()
     ComboBox_DecType.Clear
-    ComboBox_DecType.AddItem Sprog.A(41)
-    ComboBox_DecType.AddItem Sprog.A(687)
-    ComboBox_DecType.AddItem Sprog.A(669)
+    ComboBox_DecType.AddItem TT.A(41)
+    ComboBox_DecType.AddItem TT.A(687)
+    ComboBox_DecType.AddItem TT.A(669)
 End Sub

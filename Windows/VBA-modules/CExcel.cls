@@ -169,7 +169,7 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String)
     GoTo slut
 Fejl:
     On Error Resume Next
-    MsgBox Sprog.A(98), vbOKOnly, Sprog.Error
+    MsgBox TT.A(98), vbOKOnly, TT.Error
     '    Unload ufwait2
 slut:
 End Function
@@ -266,22 +266,22 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     
     
     ws.Cells(1, 1).Value = VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & "-test"
-    ws.Cells(2, 2).Value = Sprog.A(400)
-    ws.Cells(2, c + 4).Value = Sprog.A(401)
-    ws.Cells(r + 3, 1).Value = Sprog.A(402)
+    ws.Cells(2, 2).Value = TT.A(400)
+    ws.Cells(2, c + 4).Value = TT.A(401)
+    ws.Cells(r + 3, 1).Value = TT.A(402)
     ws.Cells(r + 3, 1).HorizontalAlignment = xlRight
     
-    ws.Cells(2, c + 2).Value = Sprog.A(402)
-    ws.Cells(2, 2 * c + 4).Value = Sprog.A(402)
+    ws.Cells(2, c + 2).Value = TT.A(402)
+    ws.Cells(2, 2 * c + 4).Value = TT.A(402)
     
-    ws.Cells(r + 5, 1).Value = Sprog.A(403) & ":"
-    ws.Cells(r + 6, 1).Value = Sprog.A(350) & ":"
+    ws.Cells(r + 5, 1).Value = TT.A(403) & ":"
+    ws.Cells(r + 6, 1).Value = TT.A(350) & ":"
     ws.Cells(r + 6, 2).Value = signiv
-    ws.Cells(r + 6, 2).Style = Sprog.A(438)
+    ws.Cells(r + 6, 2).Style = TT.A(438)
     
-    ws.Cells(r + 5, 4).Formula = "=if(R" & r + 5 & "C2<R" & r + 6 & "C2,""" & Sprog.A(404) & """,""" & Sprog.A(405) & """)"
-    ws.Cells(r + 6, 4).Formula = "=if(COUNTIF(R3C2:R" & r + 2 & "C" & c + 1 & ",""<5"")>0,""" & Sprog.A(358) & ""","""")"
-    ws.Cells(r + 7, 4).Formula = "=if(sum(R3C2:R" & r + 2 & "C" & c + 1 & ")<50,""" & Sprog.A(406) & ""","""")"
+    ws.Cells(r + 5, 4).Formula = "=if(R" & r + 5 & "C2<R" & r + 6 & "C2,""" & TT.A(404) & """,""" & TT.A(405) & """)"
+    ws.Cells(r + 6, 4).Formula = "=if(COUNTIF(R3C2:R" & r + 2 & "C" & c + 1 & ",""<5"")>0,""" & TT.A(358) & ""","""")"
+    ws.Cells(r + 7, 4).Formula = "=if(sum(R3C2:R" & r + 2 & "C" & c + 1 & ")<50,""" & TT.A(406) & ""","""")"
     ws.Cells(r + 5, 4).Font.Bold = True
     ws.Range("A1").Font.Size = 18
     ws.Range("A1").Font.Bold = True
@@ -298,9 +298,9 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     
     ws.Columns("A:A").ColumnWidth = 15
     
-    ws.Cells(r + 8, 1).Value = Sprog.A(360) & ":"
+    ws.Cells(r + 8, 1).Value = TT.A(360) & ":"
     ws.Cells(r + 8, 2).Value = (r - 1) * (c - 1)
-    ws.Cells(r + 9, 1).Value = Sprog.A(407) & ":"
+    ws.Cells(r + 9, 1).Value = TT.A(407) & ":"
     ws.Cells(r + 9, 2).Formula = "=sum(R" & r + 9 & "C3:R" & r + 9 & "C" & r * c + 2 & ")"
     
     Dim k As Integer
@@ -319,7 +319,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     End With
     
     
-    ws.Cells(r + 10, 1).Value = Sprog.A(408) & ":"
+    ws.Cells(r + 10, 1).Value = TT.A(408) & ":"
     ws.Cells(r + 10, 2).Formula = "=chiinv(R" & r + 6 & "C2,R" & r + 8 & "C2)"
     XLapp.ScreenUpdating = True
 
@@ -417,7 +417,7 @@ End If
     Selection.TypeParagraph
 GoTo slut
 Fejl:
-    MsgBox Sprog.A(27), vbOKOnly, Sprog.Error
+    MsgBox TT.A(27), vbOKOnly, TT.Error
 slut:
 
 End Sub

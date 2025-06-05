@@ -2,19 +2,20 @@ VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
-Attribute VB_Name = "CSprog"
+Attribute VB_Name = "CLang"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
-Public SprogNr As Integer
+Public LangNo As Integer
 Private SA(999) As String
 '0=WordLanguage, 1=Dansk, 2=English, 3=Spanish
+Private LanguageFileMissing As Boolean
 
 Private Sub Class_Initialize()
     RunFirst
     CheckSetting
-    If Sprog.SprogNr = 1 Then
+    If TT.LangNo = 1 Then
         AppNavn = "WordMat"
     Else
         AppNavn = "WordMath"
@@ -23,9 +24,9 @@ Private Sub Class_Initialize()
 End Sub
 Public Sub CheckSetting()
     If LanguageSetting = 0 Then
-        SprogNr = GetOfficeLanguage
+        LangNo = GetOfficeLanguage
     Else
-        SprogNr = LanguageSetting
+        LangNo = LanguageSetting
     End If
 End Sub
 Function GetOfficeLanguage() As Integer
@@ -117,52 +118,54 @@ Public Sub LoadSprogArray()
     Dim Arr() As String
     Dim FilePath As String, slash As String
     
+    If LanguageFileMissing Then Exit Sub
 #If Mac Then
     slash = "/"
 #Else
     slash = "\"
 #End If
     FilePath = GetWordMatDir("languages")
-    If SprogNr = 1 Then
+    If LangNo = 1 Then
         FilePath = FilePath & "languages" & slash & "da.csv"
-    ElseIf SprogNr = 2 Then
+    ElseIf LangNo = 2 Then
         FilePath = FilePath & "languages" & slash & "en.csv"
-    ElseIf SprogNr = 3 Then
+    ElseIf LangNo = 3 Then
         FilePath = FilePath & "languages" & slash & "sp.csv"
-    ElseIf SprogNr = 4 Then
+    ElseIf LangNo = 4 Then
         FilePath = FilePath & "languages" & slash & "de.csv"
-    ElseIf SprogNr = 5 Then
+    ElseIf LangNo = 5 Then
         FilePath = FilePath & "languages" & slash & "fr.csv"
-    ElseIf SprogNr = 6 Then
+    ElseIf LangNo = 6 Then
         FilePath = FilePath & "languages" & slash & "it.csv"
-    ElseIf SprogNr = 7 Then
+    ElseIf LangNo = 7 Then
         FilePath = FilePath & "languages" & slash & "sv.csv"
-    ElseIf SprogNr = 8 Then
+    ElseIf LangNo = 8 Then
         FilePath = FilePath & "languages" & slash & "nb.csv"
-    ElseIf SprogNr = 9 Then
+    ElseIf LangNo = 9 Then
         FilePath = FilePath & "languages" & slash & "fi.csv"
-    ElseIf SprogNr = 10 Then
+    ElseIf LangNo = 10 Then
         FilePath = FilePath & "languages" & slash & "nl.csv"
-    ElseIf SprogNr = 11 Then
+    ElseIf LangNo = 11 Then
         FilePath = FilePath & "languages" & slash & "pl.csv"
-    ElseIf SprogNr = 12 Then
+    ElseIf LangNo = 12 Then
         FilePath = FilePath & "languages" & slash & "pt-pt.csv"
-    ElseIf SprogNr = 13 Then
+    ElseIf LangNo = 13 Then
         FilePath = FilePath & "languages" & slash & "fo.csv"
-    ElseIf SprogNr = 14 Then
+    ElseIf LangNo = 14 Then
         FilePath = FilePath & "languages" & slash & "et.csv"
-    ElseIf SprogNr = 15 Then
+    ElseIf LangNo = 15 Then
         FilePath = FilePath & "languages" & slash & "lv.csv"
-    ElseIf SprogNr = 16 Then
+    ElseIf LangNo = 16 Then
         FilePath = FilePath & "languages" & slash & "lt.csv"
-    ElseIf SprogNr = 17 Then
+    ElseIf LangNo = 17 Then
         FilePath = FilePath & "languages" & slash & "cs.csv"
-    ElseIf SprogNr = 18 Then
+    ElseIf LangNo = 18 Then
         FilePath = FilePath & "languages" & slash & "el.csv"
     End If
     
     If Dir(FilePath) = vbNullString Then
-        MsgBox2 "Language file could not be located", vbOKOnly, Sprog.Error
+        MsgBox2 "Language file could not be located", vbOKOnly, TT.Error
+        LanguageFileMissing = True
     Else
         FileNo = FreeFile
         Open FilePath For Input As FileNo
@@ -180,7 +183,8 @@ Public Sub LoadSprogArray()
 
     GoTo TheEnd
 ErrorL:
-        MsgBox2 "An error occured parsing the languge file", vbOKOnly, Sprog.Error
+        MsgBox2 "An error occured parsing the language file", vbOKOnly, Error
+        LanguageFileMissing = True
 TheEnd:
 End Sub
 

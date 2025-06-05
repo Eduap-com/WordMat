@@ -20,6 +20,6 @@ Private Sub UserForm_Initialize()
 End Sub
 
 Private Sub SetCaptions()
-    Label1.Caption = Sprog.A(768)
-    Label2.Caption = Sprog.A(769)
+    Label1.Caption = TT.A(768)
+    Label2.Caption = TT.A(769)
 End Sub

@@ -47,12 +47,12 @@ Private Sub CommandButton_ok_Click()
 End Sub
 
 Private Sub UserForm_Activate()
-    Me.Caption = Sprog.A(818)
-    Label1.Caption = Sprog.A(742)
-    Label_statesign.Caption = Sprog.A(743)
-    OptionButton_positiv.Caption = "+ " & Sprog.A(819)
-    OptionButton_nul.Caption = "0 " & Sprog.A(821)
-    OptionButton_negativ.Caption = "- " & Sprog.A(820)
+    Me.Caption = TT.A(818)
+    Label1.Caption = TT.A(742)
+    Label_statesign.Caption = TT.A(743)
+    OptionButton_positiv.Caption = "+ " & TT.A(819)
+    OptionButton_nul.Caption = "0 " & TT.A(821)
+    OptionButton_negativ.Caption = "- " & TT.A(820)
 End Sub
 
 Private Sub UserForm_Initialize()

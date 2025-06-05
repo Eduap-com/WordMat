@@ -588,7 +588,7 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
         p = InStrRev(Oresul, "=")
         p2 = InStrRev(Oresul, ChrW(8776))
         If p2 > p Then p = p2
-        If p > 0 Then Oresul = right(Oresul, Len(Oresul) - p)
+        If p > 0 Then Oresul = Right(Oresul, Len(Oresul) - p)
         MoveCursorToEndOfCalculation False
     Else
         GotoPrevEq
@@ -597,12 +597,12 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
         MoveCursorToEndOfCalculation False
     End If
     Oresul = Trim(Oresul)
-    If Left(Oresul, 1) = "=" Or Left(Oresul, 1) = ChrW(8776) Then Oresul = right(Oresul, Len(Oresul) - 1)
+    If Left(Oresul, 1) = "=" Or Left(Oresul, 1) = ChrW(8776) Then Oresul = Right(Oresul, Len(Oresul) - 1)
     ResultOK = False
     Arr = Split(resul, "@$")
     For i = 0 To UBound(Arr)
         res = Trim(Arr(i))
-        If Left(res, 1) = "=" Or Left(res, 1) = ChrW(8776) Then res = right(res, Len(res) - 1)
+        If Left(res, 1) = "=" Or Left(res, 1) = ChrW(8776) Then res = Right(res, Len(res) - 1)
         If res = Oresul Or Trim(Arr(i)) = Oresul2 Then
             ResultOK = True
             Exit For
@@ -740,13 +740,13 @@ Function ConvertToVBAString(Text As String) As String
         End If
     Next
     If Left(s, 4) = """ & " Then
-        s = right(s, Len(s) - 4)
+        s = Right(s, Len(s) - 4)
     ElseIf Left(s, 1) <> """" Then
         s = """" & s
     End If
-    If right(s, 4) = " & """ Then
+    If Right(s, 4) = " & """ Then
         s = Left(s, Len(s) - 4)
-    ElseIf right(s, 1) <> """" Then
+    ElseIf Right(s, 1) <> """" Then
         s = s & """"
     End If
     ConvertToVBAString = s
@@ -794,8 +794,8 @@ Sub InsertTestMath(s As String, Optional NewLine As Boolean = True)
     Selection.Range.Font.Bold = False
 
     If Len(s) > 500 Then
-'        If MsgBox("Output is " & Len(s) & " characters long. Click OK to insert all characters in Word. Cancel to insert the first 500", vbOKCancel, Sprog.Warning) = vbCancel Then
-        s = Left(s, 500) & " " & Sprog.A(119)
+'        If MsgBox("Output is " & Len(s) & " characters long. Click OK to insert all characters in Word. Cancel to insert the first 500", vbOKCancel, TT.Warning) = vbCancel Then
+        s = Left(s, 500) & " " & TT.A(119)
     End If
     Set mo = Selection.OMaths.Add(Selection.Range)
     Selection.TypeText s
@@ -945,13 +945,13 @@ Sub UnicodeValsToString()
             End If
         Next
         If Left(s, 4) = """ & " Then
-            s = right(s, Len(s) - 4)
+            s = Right(s, Len(s) - 4)
         ElseIf Left(s, 1) <> """" Then
             s = """" & s
         End If
-        If right(s, 4) = " & """ Then
+        If Right(s, 4) = " & """ Then
             s = Left(s, Len(s) - 4)
-        ElseIf right(s, 1) <> """" Then
+        ElseIf Right(s, 1) <> """" Then
             s = s & """"
         End If
         Selection.Collapse wdCollapseEnd

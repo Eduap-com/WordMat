@@ -91,7 +91,7 @@ Public Sub Save(FilNavn As String)
 
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     Close #filnr    ' Close file.
 

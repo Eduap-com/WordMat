@@ -160,7 +160,7 @@ Sub Plot3DGraph()
         For i = 0 To UBound(Arr)
             Arr(i) = Replace(Arr(i), " ", "")
             If Arr(i) <> "" Then
-'                If MsgBox2(Sprog.A(374) & ": " & Arr(i) & " ?", vbYesNo, Sprog.A(375) & "?") = vbYes Then
+'                If MsgBox2(TT.A(374) & ": " & Arr(i) & " ?", vbYesNo, TT.A(375) & "?") = vbYes Then
                     Insert3DEquation (Arr(i))
 '                End If
             End If
@@ -170,7 +170,7 @@ Sub Plot3DGraph()
     UserForm3DGraph.Show
     GoTo slut
 Fejl:
-    MsgBox Sprog.ErrorGeneral, vbOKOnly, Sprog.Error
+    MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
@@ -254,7 +254,7 @@ Sub Insert3DEquation(Equation As String)
         Else ' vector
             Equation = "(0" & ListSeparator & "0" & ListSeparator & "0)(" & px & ListSeparator & " " & py & ListSeparator & " " & pz & ")"
             If UserForm3DGraph.TextBox_vektorer.Text <> "" Then
-                If right(UserForm3DGraph.TextBox_vektorer.Text, 1) = ")" Then
+                If Right(UserForm3DGraph.TextBox_vektorer.Text, 1) = ")" Then
                     UserForm3DGraph.TextBox_vektorer.Text = UserForm3DGraph.TextBox_vektorer.Text & vbCr
                 End If
             End If

@@ -31,9 +31,9 @@ End Sub
 
 Private Sub UserForm_Initialize()
     Me.Caption = ""
-    Label_auto.Caption = Sprog.A(712)
-    Label_exact.Caption = Sprog.A(710)
-    Label_num.Caption = Sprog.A(711)
+    Label_auto.Caption = TT.A(712)
+    Label_exact.Caption = TT.A(710)
+    Label_num.Caption = TT.A(711)
 #If Mac Then
 '    Me.Height = 100
 #End If

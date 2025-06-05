@@ -15,7 +15,7 @@ Public Sub GenerateKeyboardShortcutsPar(Optional NormalDotmOK As Boolean = False
     
     Set WT = GetWordMatTemplate(NormalDotmOK)
     If WT Is Nothing Then
-        MsgBox "The open template is not wordmat*.dotm", vbOKOnly, Sprog.Error
+        MsgBox "The open template is not wordmat*.dotm", vbOKOnly, TT.Error
         GoTo slut
     End If
     

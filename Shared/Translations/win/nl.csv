@@ -539,9 +539,9 @@
 538#£Selecteer de expressie om onderscheid te maken of plaats de cursor in de expressie
 539#£Integreren
 540#£Bepaalt de onbepaalde integraal van de functie
-541#£
-542#£
-543#£
+541#£Instellingen voor importeren
+542#£Instellingen exporteren
+543#£Menu aanpassen
 544#£
 545#£Grafiek grafiek (Alt+P)
 546#£Toont de grafiek voor de geselecteerde functie(s)/vergelijking(en) en punten. De grafiek kan vervolgens in het document worden ingevoegd. Verschillende graafprogramma's worden ondersteund. Kies je favoriet onder instellingen.
@@ -688,10 +688,10 @@
 687#£Belangrijke cijfers
 688#£Units aan/uit zetten
 689#£Als eenheden zijn ingeschakeld, kan WordMath eenheden interpreteren en converteren. Op de SI-knop kunt u de uitvoereenheden wijzigen. Schakel apparaten niet in, tenzij u het nodig heeft. Het kan het gedrag van WordMat beïnvloeden en reserveert veel variabelen.
-690#£
+690#£Codeblok invoegen
 691#£Vermeld de eenheden waarnaar u wilt converteren. Uitvoereenheden zijn standaard SI-eenheden.
 692#£Når du angiver et resultat i fysik skal antallet af betydende cifre passe med den præcision vi kender resultatet med.
-693#£
+693#£Een codeblok is een gebied waar je Maxima direct kunt programmeren. U kunt bijvoorbeeld meer geavanceerde functies definiëren die vervolgens verderop in het document kunnen worden gebruikt. Zie meer in de handleiding.
 694#£Nee. van cijfers
 695#£Afronding
 696#£Kies hoe getallen worden gefoumatteerd en afgerond. In de onderstaande voorbeelden is WordMat ingesteld op 3 cijfers\r\n\r\nDecimalen: 12,345\r\nSignificante cijfers: 12,3\r\nSci. Notatie: 1,23*10^1
