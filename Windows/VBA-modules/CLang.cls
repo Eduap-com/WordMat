@@ -164,8 +164,8 @@ Public Sub LoadSprogArray()
     End If
     
     If Dir(FilePath) = vbNullString Then
-        MsgBox2 "Language file could not be located", vbOKOnly, TT.Error
         LanguageFileMissing = True
+        MsgBox2 "Language file could not be located", vbOKOnly, "Error"
     Else
         FileNo = FreeFile
         Open FilePath For Input As FileNo

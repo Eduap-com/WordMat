@@ -688,10 +688,10 @@
 687#£Betydende cifre
 688#£Slå enheder til/fra
 689#£Hvis enheder er slået til kan WordMat forstå og omregne enheder. På knappen SI kan du angive hvilke enheder du vil have omregnet til. Som standard er output i SI-enheder. Slå ikke enheder til hvis du ikke specifikt skal bruge det. Det kan påvirke WordMats virkemåde, og reserverer en masse variable.
-690#£Indsæt kodeblok
+690#£Indsæt kodefelt
 691#£Angiv hvilke enheder, der skal konverteres til ved beregninger. Som standard er output i SI-enheder
 692#£bc
-693#£En kodeblok er et område, hvor man kan programmere Maxima direkte. Man kan fx definere mere avancerede funktioner som så kan anvendes længere nede i dokumentet. Se mere i manualen.
+693#£Et kodefelt er et område, hvor man kan programmere Maxima direkte. Man kan fx definere mere avancerede funktioner, som så kan anvendes længere nede i dokumentet. Se mere i manualen.
 694#£Antal cifre
 695#£Tal afrunding
 696#£Vælg hvordan tal skal skrives og afrundes. I eksemplerne nedenfor er WordMat sat til 3 cifre.\r\n\r\nAntal decimaler: 12,345\r\nBetydende cifre: 12,3\r\nVid. notation: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Løsningsbetingelser:
 901#£Du skal markere en liste først fx [1;2;3]
 902#£Måske har  du byttet om på n og r i K(n, r)?
+903#£Kodefil
+904#£Anvend kodefil
+905#£Tillad kodefelter
+906#£Teksten i kodefilen bliver kørt i Maxima ved hver opstart. Du kan fx bruge det til definition af funktioner du altid vil have tilgængelig i WordMat, eller til ændring af indstillinger i Maxima. Anvendelse af kodefilen vil gøre beregninger en smule langsommere. \nKodefelter kan indsættes via definitionsmenuen, og er felter i Worddokumentet hvor du kan indsætte Maximakode, som køres ved hver beregning. Kode i kodefil og kodefelter sendes ubehandlet direkte til Maxima. Enhver kodefejl vil få WordMat til at fejle alle beregninger, så pas på. Se i menuen under hjælp > Manual > Hjælp til maximakommandoer, for korrekt Maxima syntaks.
+907#£Indtast Maxima kode her

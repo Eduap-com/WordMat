@@ -688,10 +688,10 @@
 687#£Olulised arvud
 688#£Lülitage seadmed sisse/välja
 689#£Kui ühikud on sisse lülitatud, saab WordMath ühikuid tõlgendada ja teisendada. SI nupul saate muuta väljundühikuid. Ärge lülitage seadmeid sisse, kui te seda ei vaja. See võib mõjutada WordMati käitumist ja reserveerida palju muutujaid.
-690#£Koodiploki lisamine
+690#£Koodi välja lisamine
 691#£Märkige ühikud, milleks teisendada. Vaikimisi on väljundühikud SI-ühikud.
 692#£oa
-693#£Koodiplokk on ala, kus saate Maximat otse programmeerida. Näiteks saate määratleda täpsemaid funktsioone, mida saab seejärel dokumendis allosas kasutada. Vaata lähemalt juhendist.
+693#£Koodiväli on ala, kus saate Maxima otse programmeerida. Näiteks saate määratleda täpsemaid funktsioone, mida saab seejärel kasutada dokumendis allpool. Vaata lähemalt juhendist.
 694#£Ei. arvude arv
 695#£Ümardamise
 696#£Valige, kuidas arvud fomateeritakse ja ümardatakse. Allolevates näidetes on WordMat seatud 3 numbrile\r\n\r\nKümnendkohad: 12 345\r\nOlulised arvud: 12,3\r\nSci. Tähis: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Lahuse tingimused:
 901#£Kõigepealt tuleb valida nimekiri, nt [1; 2; 3]
 902#£Võib-olla olete K(n, r) n-i ja r-i vahetanud?
+903#£Koodifail
+904#£Rakenda koodifail
+905#£Luba koodiväljad
+906#£Koodifailis olev tekst käivitatakse Maximas igal käivitamisel. Näiteks saate seda kasutada funktsioonide määratlemiseks, mida soovite WordMatis alati kättesaadavaks teha, või Maxima sätete muutmiseks. Koodifaili kasutamine muudab arvutused veidi aeglasemaks. \nKoodivälju saab sisestada definitsioonimenüü kaudu ja need on Wordi dokumendi väljad, kuhu saate sisestada maksimaalse koodi, mis käivitatakse iga arvutuse juures. Koodifailis ja koodiväljades olev kood saadetakse töötlemata kujul otse Maximale. Iga koodiviga põhjustab WordMati kõigi arvutuste nurjumise, seega olge ettevaatlik. Vaadake menüüst Spikker > Käsiraamat > Spikker Maksimumi käskudega õiget Maxima süntaksit.
+907#£Sisestage siia Maxima kood

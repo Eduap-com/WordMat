@@ -425,17 +425,6 @@ Sub ReadSM(Optional ForceRead As Boolean = False)
         ShowMenuDone = True
     End If
 End Sub
-Sub CreateCode()
-    Dim s As String, Arr() As String, outp As String, i As Integer
-    s = Selection.Text
-    
-    Arr = Split(s, vbCr)
-    For i = 0 To UBound(Arr)
-        If Trim(Arr(i)) <> vbNullString Then outp = outp & "m" & Arr(i) & " = CBool(Mid$(s, " & i + 1 & ", 1))" & vbCrLf
-    Next
-    Debug.Print outp
-'    MsgBox outp
-End Sub
 
 Public Property Get SMformula() As Boolean
     ReadSM
@@ -532,6 +521,10 @@ End Property
 Public Property Get SMDefConstants() As Boolean
     ReadSM
     SMDefConstants = mSMDefConstants
+End Property
+Public Property Get SMCodeBlock() As Boolean
+    ReadSM
+    SMCodeBlock = mSMCodeBlock
 End Property
 Public Property Get SMGraphs() As Boolean
     ReadSM
@@ -1518,17 +1511,24 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
 '    AddSetting s, "",
     
     WriteTextfileToString SettingsFileName, s
+#If Mac Then
+    MsgBox2 "Settingsfile saved to " & vbCrLf & SettingsFileName, vbOKOnly, "Saved"
+#End If
 End Sub
 Function LoadSettingsFromFile(FilePath As String, Optional Silent As Boolean = False, Optional SaveToReg As Boolean = False) As Boolean
     Dim s As String, Arr() As String, Arr2() As String, i As Integer
     On Error GoTo Fejl
     If FilePath = vbNullString Then
+#If Mac Then
+        FilePath = GetDocumentsDir & "/settings.txt"
+#Else
         FilePath = GetFilePath
+#End If
     End If
     
     If Dir(FilePath) = vbNullString Then
         If Not Silent Then
-            MsgBox2 "Could not load settingsfile", vbOKOnly, TT.Error
+            MsgBox2 "Could not load settingsfile:" & vbCrLf & FilePath, vbOKOnly, TT.Error
         End If
         Exit Function
     End If

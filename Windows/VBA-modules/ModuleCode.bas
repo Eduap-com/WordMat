@@ -20,7 +20,7 @@ Sub InsertCodeBlock()
     Dim cc As ContentControl
     Dim codeText As String
     
-    codeText = "" & vbCrLf & "    MsgBox ""Hello, World!""" & vbCrLf & "End Sub"
+    codeText = TT.A(907) & vbLf & " "
 
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -28,7 +28,7 @@ Sub InsertCodeBlock()
 
     ' Add a rich text content control at the current selection
     Set cc = ActiveDocument.ContentControls.Add(wdContentControlRichText)
-    
+        
     ' Set tag and title for identification
     cc.Title = "CodeBlock"
     cc.Tag = "CodeBlock"
@@ -39,8 +39,11 @@ Sub InsertCodeBlock()
     ' Apply Consolas font and optional styling
     With cc.Range.Font
         .Name = "Consolas"
+        .Bold = False
         .Size = 10
     End With
+    
+    cc.Range.ParagraphFormat.SpaceAfter = 0
     
     cc.Range.Shading.BackgroundPatternColor = RGB(240, 240, 240)
     
@@ -64,7 +67,8 @@ Sub InsertCodeBlock()
         .LineWidth = wdLineWidth050pt
         .Color = wdColorGray25
     End With
-    
+
+    cc.Range.Select
     Oundo.EndCustomRecord
 
 End Sub

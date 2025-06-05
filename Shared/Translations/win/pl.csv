@@ -688,10 +688,10 @@
 687#£Znaczace liczby
 688#£Wlaczanie/wylaczanie jednostek
 689#£Jesli jednostki sa wlaczone, program WordMath moze interpretowac i konwertowac jednostki. Na przycisku SI mozna zmienic jednostki wyjsciowe. Nie wlaczaj jednostek, chyba ze jest to konieczne. Moze wplywac na zachowanie WordMat i rezerwuje wiele zmiennych.
-690#£Wstawianie bloku kodu
+690#£Wstaw pole kodu
 691#£Podaj jednostki, na które chcesz przekonwertowac. Domyslnie jednostkami wyjsciowymi sa jednostki SI.
 692#£zl
-693#£Blok kodu to obszar, w którym mozna bezposrednio zaprogramowac Maxima. Na przyklad mozna zdefiniowac bardziej zaawansowane funkcje, które moga byc nastepnie uzywane w dalszej czesci dokumentu. Zobacz wiecej w instrukcji.
+693#£Pole kodu to obszar, w którym mozna bezposrednio zaprogramowac Maxima. Na przyklad mozna zdefiniowac bardziej zaawansowane funkcje, które moga byc nastepnie uzywane w dalszej czesci dokumentu. Zobacz wiecej w instrukcji.
 694#£Nie. liczb
 695#£Zaokraglanie
 696#£Wybierz, w jaki sposób liczby maja byc mapowane i zaokraglane. W ponizszych przykladach WordMat jest ustawiony na 3 cyfry\r\n\r\nUlamki dziesietne: 12,345\r\nCyfry znaczace: 12,3\r\nSci. Notacja: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Warunki rozwiazania:
 901#£Najpierw musisz wybrac liste, np. [1; 2; 3]
 902#£Moze zamieniles n i r w K(n, r)?
+903#£Plik kodu
+904#£Stosowanie pliku kodu
+905#£Zezwalaj na pola kodu
+906#£Tekst w pliku kodu jest uruchamiany w Maxima przy kazdym uruchomieniu. Na przyklad mozesz go uzyc do zdefiniowania funkcji, które zawsze chcesz miec dostepne w programie WordMat, lub do zmiany ustawien w programie Maxima. Uzycie pliku kodu sprawi, ze obliczenia beda nieco wolniejsze. \nPola kodu mozna wstawiac za pomoca menu definicji i sa to pola w dokumencie programu Word, w których mozna wstawic kod maksymalny, który jest uruchamiany przy kazdym obliczeniu. Kod w pliku kodu i pola kodu sa wysylane bezposrednio do Maxima w postaci nieprzetworzonej. Kazdy blad w kodzie spowoduje, ze WordMat nie wykona wszystkich obliczen, wiec uwazaj. Zajrzyj do menu w sekcji Pomoc > Podrecznik > Pomoc z poleceniami Maxima, aby uzyskac poprawna skladnie Maxima.
+907#£Wpisz tutaj kod Maxima

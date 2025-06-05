@@ -688,10 +688,10 @@
 687#£Nozimigi skaitli
 688#£Ieslegt/izslegt ierices
 689#£Ja vienibas ir ieslegtas, WordMath var interpretet un konvertet vienibas. Poga SI varat mainit izejas vienibas. Neiesledziet ierices, ja vien tas nav nepieciesams. Tas var ietekmet WordMat uzvedibu un rezerve daudz mainigo.
-690#£Ievietojiet kodu bloku
+690#£Koda lauka ievietosana
 691#£Noradiet vienibas, uz kuram konvertet. Pec noklusejuma izejas vienibas ir SI vienibas.
 692#£ns
-693#£Koda bloks ir joma, kura varat tiesi programmet Maxima. Piemeram, varat definet uzlabotakas funkcijas, kuras pec tam var izmantot talak dokumenta. Vairak skatiet rokasgramata.
+693#£Koda lauks ir apgabals, kura varat tiesi programmet Maxima. Piemeram, varat definet uzlabotakas funkcijas, kuras pec tam var izmantot talak dokumenta. Vairak skatiet rokasgramata.
 694#£Ne. skaitli
 695#£Noapalosanas
 696#£Izvelieties, ka skaitli tiek noapaloti un noapaloti. Talak minetajos piemeros WordMat ir iestatits uz 3 skaitliem\r\n\r\nDecimaldalas: 12,345\r\nNozimigi skaitli: 12,3\r\nSci. Apzimejums: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Risinajuma nosacijumi:
 901#£Vispirms jaizvelas saraksts, piemeram, [1; 2; 3]
 902#£Varbut jus esat nomainijis n un r K(n, r)?
+903#£Koda fails
+904#£Koda faila lietosana
+905#£Atlaut koda laukus
+906#£Koda faila teksts tiek palaists Maxima katra startesanas laika. Piemeram, to var izmantot, lai definetu funkcijas, kuras vienmer velaties, lai tas vienmer butu pieejamas programma WordMat, vai mainitu iestatijumus programma Maxima. Izmantojot koda failu, aprekini bus nedaudz lenaki. \nKoda laukus var ievietot, izmantojot definicijas izvelni, un tie ir Word dokumenta lauki, kuros var ievietot maksimalo kodu, kas tiek izpildits katra aprekina. Kods koda faila un koda laukos tiek nosutits tiesi uz Maxima neapstradats. Jebkura koda kluda izraisis WordMat neveiksmi visus aprekinus, tapec uzmanieties. Meklejiet izvelne sadala Palidziba > rokasgramata > palidziba ar Maxima komandam, lai atrastu pareizu Maxima sintaksi.
+907#£Ievadiet Maxima kodu seit

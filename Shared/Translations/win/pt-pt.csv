@@ -688,10 +688,10 @@
 687#£Números significativos
 688#£Ligar/desligar unidades
 689#£Se as unidades estiverem ativadas, o WordMath kan interpretará e converterá unidades. No botão SI você pode alterar as unidades de saída. Não ligue as unidades, a menos que necessite. Pode afetar o comportamento do WordMat e reserva muitas variáveis.
-690#£Inserir bloco de código
+690#£Inserir campo de código
 691#£Indique as unidades para as quais converter. Por padrão, as unidades de saída são unidades SI.
 692#£ns
-693#£Um bloco de código é uma área onde pode programar o Maxima diretamente. Por exemplo, você pode definir funções mais avançadas que podem ser usadas mais abaixo no documento. Veja mais no manual.
+693#£Um campo de código é uma área onde pode programar o Maxima diretamente. Por exemplo, você pode definir funções mais avançadas, que podem ser usadas mais abaixo no documento. Veja mais no manual.
 694#£Não. Número de números
 695#£Arredondamento
 696#£Escolha como os números são mapeados e arredondados. Nos exemplos abaixo, o WordMat é definido como 3 figuras\r\n\r\nDecimals: 12.345\r\nFiguras significativas: 12,3\r\nSci. Notação: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Condições da solução:
 901#£Você deve selecionar uma lista primeiro, por exemplo, [1; 2; 3]
 902#£Talvez você tenha trocado n e r em K(n, r)?
+903#£Arquivo de código
+904#£Aplicar arquivo de código
+905#£Permitir campos de código
+906#£O texto no ficheiro de código é executado no Maxima em cada arranque. Por exemplo, pode utilizá-lo para definir funções que pretende sempre ter disponíveis no WordMat ou para alterar definições no Maxima. Usar o arquivo de código tornará os cálculos um pouco mais lentos. \nOs campos de código podem ser inseridos através do menu de definição, e são campos no documento do Word onde você pode inserir o Código Máximo, que é executado em cada cálculo. O código no ficheiro de código e os campos de código são enviados diretamente para o Maxima sem serem processados. Qualquer erro de código fará com que o WordMat falhe em todos os cálculos, portanto, cuidado. Procure no menu em Ajuda > Manual > Ajuda com os Comandos do Maxima a sintaxe correta do Maxima.
+907#£Introduza aqui o código do Maxima

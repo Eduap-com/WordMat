@@ -688,10 +688,10 @@
 687#£Cifre significative
 688#£Accendere/spegnere le unità
 689#£Se le unità sono attivate, WordMath può interpretare e convertire le unità. Sul pulsante SI è possibile modificare le unità di uscita. Non accendere le unità, a meno che non ne sia necessario. Può influenzare il comportamento di WordMat e riserva molte variabili.
-690#£Inserisci blocco di codice
+690#£Inserisci campo codice
 691#£Indicare le unità in cui eseguire la conversione. Per impostazione predefinita, le unità di output sono unità SI.
 692#£cs
-693#£Un blocco di codice è un'area in cui è possibile programmare direttamente Maxima. Ad esempio, è possibile definire funzioni più avanzate che possono essere utilizzate più in basso nel documento. Per saperne di più, consultare il manuale.
+693#£Un campo di codice è un'area in cui è possibile programmare direttamente Maxima. Ad esempio, è possibile definire funzioni più avanzate, che possono essere utilizzate più in basso nel documento. Per saperne di più, consultare il manuale.
 694#£No. di cifre
 695#£Arrotondamento
 696#£Scegli la modalità di formattazione e arrotondamento dei numeri. Negli esempi seguenti, WordMat è impostato su 3 cifre\r\n\r\nDecimali: 12.345\r\nCifre significative: 12,3\r\nSci. Notazione: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Condizioni della soluzione:
 901#£È necessario selezionare prima un elenco, ad esempio [1; 2; 3]
 902#£Forse hai scambiato n e r in K(n, r)?
+903#£File di codice
+904#£Applicare il file di codice
+905#£Consenti campi codice
+906#£Il testo nel file di codice viene eseguito in Maxima ad ogni avvio. Ad esempio, è possibile utilizzarlo per definire le funzioni che si desidera avere sempre a disposizione in WordMat o per modificare le impostazioni in Maxima. L'uso del file di codice renderà i calcoli un po' più lenti. \nI campi Codice possono essere inseriti tramite il menu di definizione e sono campi nel documento Word in cui è possibile inserire il Codice massimo, che viene eseguito ad ogni calcolo. Il codice nel file di codice e nei campi di codice viene inviato direttamente a Maxima senza essere elaborato. Qualsiasi errore di codice farà sì che WordMat fallisca tutti i calcoli, quindi fai attenzione. Cerca nel menu sotto Aiuto > Manuale > Aiuto con i comandi Maxima, per la sintassi Maxima corretta.
+907#£Inserisci qui il codice Maxima

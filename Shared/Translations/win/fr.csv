@@ -688,10 +688,10 @@
 687#£Des chiffres significatifs
 688#£Allumer/éteindre les unités
 689#£Si les unités sont activées, WordMath peut interpréter et convertir les unités. Sur le bouton SI, vous pouvez changer les unités de sortie. N'allumez pas les appareils, sauf si vous en avez besoin. Il peut affecter le comportement de WordMat et réserve beaucoup de variables.
-690#£Insérer un bloc de code
+690#£Insérer le champ de code
 691#£Indiquez les unités à convertir. Par défaut, les unités de sortie sont des unités SI.
 692#£cs
-693#£Un bloc de code est une zone où vous pouvez programmer Maxima directement. Par exemple, vous pouvez définir des fonctions plus avancées qui peuvent ensuite être utilisées plus bas dans le document. Voir plus dans le manuel.
+693#£Un champ de code est une zone où vous pouvez programmer Maxima directement. Par exemple, vous pouvez définir des fonctions plus avancées, qui peuvent ensuite être utilisées plus bas dans le document. Voir plus dans le manuel.
 694#£Non. de chiffres
 695#£Arrondi
 696#£Choisissez comment les nombres sont affinés et arrondis. Dans les exemples ci-dessous, WordMat est défini sur 3 chiffres\r\n\r\nDécimales : 12 345\r\nChiffres significatifs : 12,3\r\nSci. Notation : 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Conditions de la solution :
 901#£Vous devez d'abord sélectionner une liste, par exemple [1 ; 2 ; 3]
 902#£Peut-être avez-vous échangé n et r dans K(n, r) ?
+903#£Fichier de code
+904#£Appliquer le fichier de code
+905#£Autoriser les champs de code
+906#£Le texte du fichier de code est exécuté dans Maxima à chaque démarrage. Par exemple, vous pouvez l'utiliser pour définir des fonctions que vous souhaitez toujours avoir à disposition dans WordMat, ou pour modifier les paramètres dans Maxima. L'utilisation du fichier de code rendra les calculs un peu plus lents. \nLes champs de code peuvent être insérés via le menu de définition et sont des champs dans le document Word où vous pouvez insérer le code maximum, qui est exécuté à chaque calcul. Le code dans le fichier de code et les champs de code sont envoyés directement à Maxima sans être traités. Toute erreur de code entraînera l'échec de tous les calculs de WordMat, alors méfiez-vous. Pour connaître la syntaxe correcte de Maxima dans le menu sous Aide > Manuel > Aide avec les commandes Maxima.
+907#£Entrez le code Maxima ici

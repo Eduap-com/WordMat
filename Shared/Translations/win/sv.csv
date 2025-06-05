@@ -688,10 +688,10 @@
 687#£Signifikanta siffror
 688#£Slå på/av enheter
 689#£Om enheter är aktiverade kan WordMat förstå och konvertera enheter. På SI-knappen kan du ange vilka enheter du vill konvertera till. Som standard är utdata i SI-enheter. Slå inte på enheter om du inte specifikt behöver det. Det kan påverka WordMats beteende och reserverar många variabler.
-690#£Infoga kodblock
+690#£Infoga kodfält
 691#£Ange vilka enheter som ska konverteras till för beräkningar. Som standard är utdata i SI-enheter
 692#£s.s.
-693#£Ett kodblock är ett område där du kan programmera Maxima direkt. Du kan till exempel definiera mer avancerade funktioner som sedan kan användas längre ner i dokumentet. Se mer i manualen.
+693#£Ett kodfält är ett område där du kan programmera Maxima direkt. Du kan till exempel definiera mer avancerade funktioner, som sedan kan användas längre ner i dokumentet. Se mer i manualen.
 694#£Antal siffror
 695#£Nummeravrundning
 696#£Välj hur tal ska skrivas och avrundas. I exemplen nedan är WordMat satt till 3 siffror.\r\n\r\nAntal decimaler: 12,345\r\nSignifikanta siffror: 12,3\r\nVid. Notation: 1.23*10^1
@@ -901,3 +901,8 @@
 900#£Villkor för lösning:
 901#£Du måste först välja en lista, t.ex. [1; 2; 3]
 902#£Kanske har du bytt ut n och r mot K(n, r)?
+903#£Kodfil
+904#£Tillämpa kodfil
+905#£Tillåt kodfält
+906#£Texten i kodfilen körs i Maxima vid varje uppstart. Du kan till exempel använda den för att definiera funktioner som du alltid vill ha tillgängliga i WordMat, eller för att ändra inställningar i Maxima. Om du använder kodfilen blir beräkningarna lite långsammare. \nKodfält kan infogas via definitionsmenyn och är fält i Word-dokumentet där du kan infoga den maximala koden, som körs vid varje beräkning. Kod i kodfilen och kodfälten skickas direkt till Maxima obearbetad. Alla kodfel kommer att göra att WordMat misslyckas med alla beräkningar, så se upp. Titta i menyn under Hjälp > Manuell > Hjälp med Maxima-kommandon för korrekt Maxima-syntax.
+907#£Ange Maxima-koden här

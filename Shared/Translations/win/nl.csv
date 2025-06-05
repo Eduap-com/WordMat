@@ -688,10 +688,10 @@
 687#£Belangrijke cijfers
 688#£Units aan/uit zetten
 689#£Als eenheden zijn ingeschakeld, kan WordMath eenheden interpreteren en converteren. Op de SI-knop kunt u de uitvoereenheden wijzigen. Schakel apparaten niet in, tenzij u het nodig heeft. Het kan het gedrag van WordMat beïnvloeden en reserveert veel variabelen.
-690#£Codeblok invoegen
+690#£Codeveld invoegen
 691#£Vermeld de eenheden waarnaar u wilt converteren. Uitvoereenheden zijn standaard SI-eenheden.
 692#£Når du angiver et resultat i fysik skal antallet af betydende cifre passe med den præcision vi kender resultatet med.
-693#£Een codeblok is een gebied waar je Maxima direct kunt programmeren. U kunt bijvoorbeeld meer geavanceerde functies definiëren die vervolgens verderop in het document kunnen worden gebruikt. Zie meer in de handleiding.
+693#£Een codeveld is een gebied waar je Maxima direct kunt programmeren. U kunt bijvoorbeeld meer geavanceerde functies definiëren, die vervolgens verderop in het document kunnen worden gebruikt. Zie meer in de handleiding.
 694#£Nee. van cijfers
 695#£Afronding
 696#£Kies hoe getallen worden gefoumatteerd en afgerond. In de onderstaande voorbeelden is WordMat ingesteld op 3 cijfers\r\n\r\nDecimalen: 12,345\r\nSignificante cijfers: 12,3\r\nSci. Notatie: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Voorwaarden voor de oplossing:
 901#£U moet eerst een lijst selecteren, bijvoorbeeld [1; 2; 3]
 902#£Misschien heb je n en r verwisseld in K(n, r)?
+903#£Code bestand
+904#£Codebestand toepassen
+905#£Codevelden toestaan
+906#£De tekst in het codebestand wordt bij elke startup in Maxima gedraaid. Je kunt het bijvoorbeeld gebruiken om functies te definiëren die je altijd beschikbaar wilt hebben in WordMat, of om instellingen in Maxima te wijzigen. Het gebruik van het codebestand zal de berekeningen iets langzamer maken. \nCodevelden kunnen worden ingevoegd via het definitiemenu en zijn velden in het Word-document waar u de maximale code kunt invoegen, die bij elke berekening wordt uitgevoerd. Code in het codebestand en de codevelden worden onbewerkt direct naar Maxima gestuurd. Elke codefout zorgt ervoor dat WordMat niet in alle berekeningen werkt, dus pas op. Kijk in het menu onder Hulp > Handleiding > Hulp bij Maxima Commando's, voor de juiste Maxima syntaxis.
+907#£Vul hier de Maxima code in

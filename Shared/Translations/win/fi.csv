@@ -688,10 +688,10 @@
 687#£Merkittävät luvut
 688#£Kytke yksiköt päälle/pois päältä
 689#£Jos yksiköt ovat käytössä, WordMath voi tulkita ja muuntaa yksiköitä. SI-painikkeella voit muuttaa lähtöyksiköitä. Älä kytke laitteita päälle, ellet tarvitse sitä. Se voi vaikuttaa WordMatin toimintaan ja varaa paljon muuttujia.
-690#£Lisää koodilohko
+690#£Lisää koodikenttä
 691#£Ilmoita yksiköt, joihin muunnetaan. Oletusarvoisesti lähtöyksiköt ovat SI-yksiköitä.
 692#£ml
-693#£Koodilohko on alue, jossa voit ohjelmoida Maximan suoraan. Voit esimerkiksi määrittää edistyneempiä funktioita, joita voidaan sitten käyttää alempana asiakirjassa. Katso lisää käsikirjasta.
+693#£Koodikenttä on alue, jossa voit ohjelmoida Maximan suoraan. Voit esimerkiksi määrittää edistyneempiä funktioita, joita voidaan sitten käyttää alempana asiakirjassa. Katso lisää käsikirjasta.
 694#£Ei. lukujen määrä
 695#£Pyöristys
 696#£Valitse, miten luvut fomatoidaan ja pyöristetään. Alla olevissa esimerkeissä WordMat on asetettu 3 numeroon\r\n\r\nDesimaalit: 12 345\r\nMerkitsevät luvut: 12,3\r\nSci. merkintä: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Ratkaisun ehdot:
 901#£Sinun on ensin valittava lista, esimerkiksi [1; 2; 3]
 902#£Ehkä olet vaihtanut n:n ja r:n K(n, r):ssä?
+903#£Kooditiedosto
+904#£Käytä kooditiedostoa
+905#£Salli koodikentät
+906#£Kooditiedoston teksti suoritetaan Maximassa jokaisen käynnistyksen yhteydessä. Sen avulla voit esimerkiksi määrittää funktioita, joiden haluat aina olevan käytettävissä WordMatissa, tai muuttaa asetuksia Maximassa. Kooditiedoston käyttö hidastaa laskelmia hieman. \nKoodikentät voidaan lisätä määrittelyvalikon kautta, ja ne ovat Word-asiakirjan kenttiä, joihin voit lisätä enimmäiskoodin, joka suoritetaan jokaisessa laskutoimituksessa. Kooditiedoston ja koodikenttien koodi lähetetään suoraan Maximalle käsittelemättömänä. Mikä tahansa koodivirhe aiheuttaa sen, että WordMat epäonnistuu kaikissa laskutoimituksissa, joten ole varovainen. Katso valikosta Ohje > Käsikirja > Ohje maksimikomentoihin oikean Maxima-syntaksin.
+907#£Syötä Maxima-koodi tähän

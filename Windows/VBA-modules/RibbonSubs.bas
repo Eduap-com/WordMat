@@ -1121,9 +1121,8 @@ Sub Rib_GetVisible_SMDefConstants(control As IRibbonControl, ByRef returnedVal)
     returnedVal = SMDefConstants
 End Sub
 Sub Rib_GetVisible_SMDefCodeBlock(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = SMDefConstants
+    returnedVal = SMCodeBlock
 End Sub
-
 Sub Rib_GetVisible_SMGraphs(control As IRibbonControl, ByRef returnedVal)
     returnedVal = SMGraphs
 End Sub

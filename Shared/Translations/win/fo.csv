@@ -688,10 +688,10 @@
 687#£Týdningarmikil taltøl
 688#£Tendra/sløkkja tól
 689#£Um eindir eru tendraðar, kann WordMat skilja og umseta eindir. Á SI-knøttinum kanst tú lýsa, hvørjar eindir tú vilt broyta til. Sum standard er úttakið í SI-eindum. Tendra/Tendrið ikki tól, uttan so at tær serliga tørvar tað. Tað kann ávirka atburðin hjá WordMat og goymir nógvar brigdlar.
-690#£Seta kodeblokk inn
+690#£Seta kóðafelt inn
 691#£Lýs hvørjar eindir tú skal umseta til til útrokningar. Sum standard er úttakið í SI-eindum
 692#£tt
-693#£Ein kodeblokk er eitt øki, har tú kanst forrita Maxima beinleiðis. Til dømis kanst tú lýsa meira framkomnar funktiónir, sum síðan kunnu nýtast longri niðri í skjalinum. Sjá meira í handbókini.
+693#£Eitt kóðafelt er eitt øki, har tú kanst forrita Maxima beinleiðis. Til dømis kanst tú lýsa meira framkomnar funktiónir, sum síðan kunnu nýtast longri niðri í skjalinum. Sjá meira í handbókini.
 694#£Tal av talteknum
 695#£Avrunding av tali
 696#£Vel hvussu tøl skulu skrivast og rundast av. Í dømunum niðanfyri er WordMat sett til 3 tal.\r\n\r\nTal av desimalplássum: 12,345\r\nTýdningarmikil tal: 12,3\r\nVid. Notan: 1.23*10^1
@@ -901,3 +901,8 @@
 900#£Loysn treytir:
 901#£Tú mást velja ein lista fyrst, t.d. [1; 2; 3]
 902#£Kanska hevur tú býtt um n og r í K(n, r)?
+903#£Kóða fíla
+904#£Brúka kóðafílu
+905#£Loyva kóðafeltum
+906#£Teksturin í kóðafíluni verður koyrdur í Maxima við hvørja byrjan. Til dømis kanst tú brúka tað til at lýsa funktiónir, tú altíð vilt hava tøkar í WordMat, ella til at broyta stillingar í Maxima. Um tú nýtir kóðafíluna, verður útrokningin eitt sindur spakuligari. \nKóðareitir kunnu setast inn ígjøgnum skilgreiningarvalmyndina og eru reitir í Word-skjalinum, har tú kanst seta hámarkskóðan, sum verður koyrdur við hvørja útrokning. Kóði í kóðafíluni og kóðafeltunum verða send beinleiðis til Maxima óviðgjørd. Ein og hvør kodevilla fer at gera, at WordMat dumpar allar útrokningar, so ansa eftir. Hygg í matskrána undir Hjálp > Handbók > Hjálp við maksima-kommandoum, eftir rættari maksima-setningaskipan.
+907#£Skriva Maxima kóða her

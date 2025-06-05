@@ -708,6 +708,10 @@ Sub SetCaptions()
     Label_ImportSettingsFile.Caption = TT.A(541)
     Label_ExportSettingsFile.Caption = TT.A(542)
     Label_ShowMenus.Caption = TT.A(543)
+    Label_CodeFile.Caption = TT.A(903) & ":"
+    CheckBox_UseCodeFile.Caption = TT.A(904)
+    CheckBox_UseCodeBlocks.Caption = TT.A(905)
+    Label_explainCode.Caption = TT.A(906)
     
 #If Mac Then
     Label_casexplain.visible = True

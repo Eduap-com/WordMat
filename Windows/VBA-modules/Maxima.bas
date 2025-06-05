@@ -66,6 +66,15 @@ finish:
         If Not omax.PrepareNewCommand Then    ' resets and finds definitions
             GoTo Fejl
         End If
+        Dim s As String
+        If UseCodeBlocks Then
+            s = Trim(GetAllPreviousCodeBlocks)
+            s = TrimR(s, vbCrLf)
+            s = TrimR(s, vbCr)
+            s = TrimR(s, vbLf)
+            If Right(s, 1) <> ";" And Right(s, 1) <> "$" Then s = s & "$"
+            omax.MaximaInputStreng = s & omax.MaximaInputStreng
+        End If
         If UseCodeFile Then
             omax.MaximaInputStreng = "load(""" & Replace(GetCodeFileName, "\", "/") & """)$" & omax.MaximaInputStreng  '' Maxima only accepts forward slashes
         End If

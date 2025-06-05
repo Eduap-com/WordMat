@@ -688,10 +688,10 @@
 687#£Reiksmingi skaiciai
 688#£Vienetu ijungimas / isjungimas
 689#£Jei vienetai ijungti, WordMath kan interpretuoja ir konvertuoja vienetus. SI mygtuke galite pakeisti isvesties vienetus. Neijunkite irenginiu, nebent jums to reikia. Tai gali tureti itakos WordMat elgesiui ir pasilieka daug kintamuju.
-690#£Iterpti kodo bloka
+690#£Iterpti kodo lauka
 691#£Nurodykite vienetus, i kuriuos norite konvertuoti. Pagal numatytuosius nustatymus isvesties vienetai yra SI vienetai.
 692#£rs
-693#£Kodu blokas yra sritis, kurioje galite tiesiogiai programuoti "Maxima". Pavyzdziui, galite apibrezti sudetingesnes funkcijas, kurios veliau gali buti naudojamos toliau dokumente. Daugiau informacijos rasite vadove.
+693#£Kodo laukas yra sritis, kurioje galite tiesiogiai programuoti "Maxima". Pavyzdziui, galite apibrezti isplestines funkcijas, kurias veliau galima naudoti toliau dokumente. Daugiau informacijos rasite vadove.
 694#£Ne. skaiciu
 695#£Apvalinimo
 696#£Pasirinkite, kaip skaiciai bus fomatuojami ir apvalinami. Toliau pateiktuose pavyzdziuose WordMat nustatyta i 3 paveikslus\r\n\r\nDecimals: 12,345\r\nReiksmingi skaiciai: 12,3\r\nSci. zymejimas: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Sprendimo salygos:
 901#£Pirmiausia turite pasirinkti sarasa, pvz., [1; 2; 3]
 902#£Gal sukeitete n ir r i K(n, r)?
+903#£Kodo failas
+904#£Taikyti kodo faila
+905#£Leisti kodo laukus
+906#£Kodo failo tekstas "Maximoje" paleidziamas kiekvieno paleidimo metu. Pavyzdziui, galite ji naudoti noredami apibrezti funkcijas, kurias visada norite tureti "WordMat", arba pakeisti nustatymus "Maxima". Naudojant kodo faila, skaiciavimai bus siek tiek letesni. \nKodo laukus galima iterpti per apibrezimo meniu ir tai yra "Word" dokumento laukai, kuriuose galite iterpti maksimalu koda, kuris vykdomas kiekvieno skaiciavimo metu. Kodas kodo faile ir kodo laukuose siunciamas tiesiai i "Maxima" neperdirbtas. Del bet kokios kodo klaidos "WordMat" nepavyks atlikti visu skaiciavimu, todel saugokites. Noredami rasti teisinga "Maxima" sintakse, ziurekite meniu, esanciame skiltyje "Zinynas > Vadovas > pagalba su "Maxima" komandomis.
+907#£Iveskite "Maxima" koda cia

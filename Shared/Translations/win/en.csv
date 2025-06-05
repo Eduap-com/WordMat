@@ -688,10 +688,10 @@
 687#£Significant figures
 688#£Turn units on/off
 689#£If units are turned on, WordMath kan interpret and convert units. On the SI button you can change the output units. Do not turn units on, unless you need it. It can affect the behaviour of WordMat and reserves a lot of variables.
-690#£Insert code block
+690#£Insert code field
 691#£State the units to convert to. By default output units are SI units.
 692#£sf
-693#£A code block is an area where you can program Maxima directly. For example, you can define more advanced functions that can then be used further down in the document. See more in the manual.
+693#£A code field is an area where you can program Maxima directly. For example, you can define more advanced functions, which can then be used further down in the document. See more in the manual.
 694#£No. of figures
 695#£Rounding
 696#£Choose how numbers are fomatted and rounded. In the examples below WordMat is set to 3 figures\r\n\r\nDecimals: 12,345\r\nSignificant figures: 12,3\r\nSci. notation: 1,23*10^1
@@ -901,3 +901,8 @@
 900#£Solution conditions:
 901#£You must select a list first, e.g. [1; 2; 3]
 902#£Maybe you have swapped n and r in K(n, r)?
+903#£Code file
+904#£Apply code file
+905#£Allow code fields
+906#£The text in the code file is run in Maxima at every startup. For example, you can use it to define functions you always want to have available in WordMat, or to change settings in Maxima. Using the code file will make calculations a bit slower. \nCode fields can be inserted via the definition menu, and are fields in the Word document where you can insert the Maximum Code, which is run at each calculation. Code in the code file and code fields are sent directly to Maxima unprocessed. Any code error will cause WordMat to fail all calculations, so beware. Look in the menu under Help > Manual > Help with Maxima Commands, for correct Maxima syntax.
+907#£Enter Maxima code here
