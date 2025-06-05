@@ -5,7 +5,7 @@ Dim BackupAnswer As Integer
 Dim SaveTime As Single
 
 Sub SaveBackup()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim Path As String
     Dim UFbackup As UserFormBackup
     Dim UfWait As UserFormWaitForMaxima
@@ -80,7 +80,7 @@ Sub SaveBackup()
 #End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(178), vbOKOnly, TT.A(208)
 slut:
     On Error Resume Next

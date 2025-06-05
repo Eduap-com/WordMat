@@ -34,14 +34,14 @@ Public Function QActivePartnership(Optional Force As Boolean = False, Optional S
     Err.Clear
     
     GoTo slut
-Fejl:
+fejl:
     QActivePartnership = False
     mSkoleNavn = vbNullString
 slut:
 End Function
 
 Function SkoleNavn() As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If mSkoleNavn <> vbNullString Then
         SkoleNavn = mSkoleNavn
     ElseIf mPartnerSkab = 0 Then
@@ -55,7 +55,7 @@ Function SkoleNavn() As String
     End If
         
     GoTo slut
-Fejl:
+fejl:
     SkoleNavn = vbNullString
 slut:
 

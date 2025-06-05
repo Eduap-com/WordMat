@@ -25,7 +25,7 @@ Private Sub CommandButton_ok_Click()
     Dim Sxmin As String
     Dim Sxmax As String
     Dim grafobj As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     Label_vent.visible = True
     Sxmin = Replace(TextBox_xmin.Text, ",", ".")
@@ -81,7 +81,7 @@ grafobj = grafobj & "user_preamble = ""set xyplane at 0"",colorbox=false,surface
     Me.hide
 #End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     Label_vent.visible = False

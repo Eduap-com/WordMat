@@ -59,7 +59,7 @@ End Sub
 
 Sub UpdateWarning()
     Dim n As Long
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If Not EventsOn Then Exit Sub
     EventsOn = False
     n = val(TextBox_eps.Text)
@@ -80,7 +80,7 @@ Sub UpdateWarning()
     End If
 
 GoTo slut
-Fejl:
+fejl:
         Label_epswarning.Caption = TT.A(46)
         Label_eps.visible = True
 slut:

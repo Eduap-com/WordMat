@@ -163,14 +163,14 @@ Pos = pos2 + 1
 End Function
 
 Public Property Get ChrByIndex(ByVal Pos As Long) As String
-On Error GoTo Fejl
+On Error GoTo fejl
     If Pos <= Len(Text) And Pos > 0 Then
         ChrByIndex = Mid(Text, Pos, 1)
     Else
         ChrByIndex = VBA.ChrW(0)
     End If
 GoTo slut
-Fejl:
+fejl:
         ChrByIndex = VBA.ChrW(0)
 slut:
 End Property

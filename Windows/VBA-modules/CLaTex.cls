@@ -237,7 +237,7 @@ End Function
 
 Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
     Dim filren As String, s As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     UfWait.Label_tip.Caption = "Gemmer Tex-fil"
     LaTexDoc = LaTexDoc & "\end{document}" & vbCrLf
@@ -251,7 +251,7 @@ Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
     WriteTextfileToString Mappe & "\" & FilNavn, LaTexDoc
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 
@@ -283,7 +283,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
         On Error Resume Next
         If Dir(Mappe & "\" & FilNavn & ".dvi") <> "" Then Kill Mappe & "\" & FilNavn & ".dvi"
         'Kill Mappe & "\" & filnavn & ".dvi"
-        On Error GoTo Fejl
+        On Error GoTo fejl
 
         MaxProc.RunFile mtpath & "\bin\" & x64 & "pdflatex.exe", "--interaction=nonstopmode --output-directory=" & Mappe & " " & FilNavn & ".tex"
 
@@ -305,7 +305,7 @@ Sub Savedvi(ByVal Mappe As String, ByVal FilNavn As String)
 
     'RunDefaultProgram Mappe & "\" & filnavn & ".dvi", Mappe
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 #End If
@@ -317,7 +317,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
     Dim i As Integer, j As Integer
     Dim mtpath As String, ReRun As Boolean
    
-    On Error GoTo Fejl
+    On Error GoTo fejl
     '      If right(Mappe, 1) <> "\" Or right(Mappe, 1) <> "/" Then
     '        Mappe = Mappe & "\"
     '      End If
@@ -400,7 +400,7 @@ Sub SavePdf(ByVal Mappe As String, ByVal FilNavn As String)
     End If
 #End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub

@@ -1517,7 +1517,7 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
 End Sub
 Function LoadSettingsFromFile(FilePath As String, Optional Silent As Boolean = False, Optional SaveToReg As Boolean = False) As Boolean
     Dim s As String, Arr() As String, Arr2() As String, i As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If FilePath = vbNullString Then
 #If Mac Then
         FilePath = GetDocumentsDir & "/settings.txt"
@@ -1547,7 +1547,7 @@ Function LoadSettingsFromFile(FilePath As String, Optional Silent As Boolean = F
 '    ReadAllSettingsFromRegistry
     LoadSettingsFromFile = True
     GoTo TheEnd
-Fejl:
+fejl:
 
 TheEnd:
 End Function

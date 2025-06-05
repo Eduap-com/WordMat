@@ -7,7 +7,7 @@ Private DeVarList As String
 Private TempCas As Integer
 
 Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Boolean
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     RunFirst
     SetMaxProc
@@ -24,7 +24,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
         On Error Resume Next
         Application.Run macroname:="Popstart"
         Err.Clear
-        On Error GoTo Fejl
+        On Error GoTo fejl
         DoEvents
         Set omax = New CMaxima
     End If
@@ -38,7 +38,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
             WaitForMaximaUntil
             If MaxProc.ErrCode > 0 Then
                 MsgBox TT.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, TT.Error
-                GoTo Fejl
+                GoTo fejl
             End If
         End If
         If MaximaUnits Then
@@ -50,7 +50,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
                     MsgBox TT.A(54), vbOKOnly, TT.Error
                     GoTo slut
                 End If
-                On Error GoTo Fejl
+                On Error GoTo fejl
                 MaxProcUnit.Units = 1
                 MaxProcUnit.OutUnits = omax.ConvertUnits(OutUnits)
                 MaxProcUnit.StartMaximaProcess
@@ -64,7 +64,7 @@ finish:
     omax.ConvertLnLog = True ' other functions can change this setting. its reset.
     If FindDefinitioner Then
         If Not omax.PrepareNewCommand Then    ' resets and finds definitions
-            GoTo Fejl
+            GoTo fejl
         End If
         Dim s As String
         If UseCodeBlocks Then
@@ -82,7 +82,7 @@ finish:
     On Error Resume Next
     PrepareMaxima = True
     GoTo slut
-Fejl:
+fejl:
     On Error Resume Next
     PrepareMaxima = False
 slut:
@@ -141,7 +141,7 @@ Sub RestartMaxima()
         MsgBox TT.A(54), vbOKOnly, TT.Error
         GoTo slut
     End If
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If omax Is Nothing Then
         Set omax = New CMaxima
     End If
@@ -151,7 +151,7 @@ Sub RestartMaxima()
         MaxProcUnit.StartMaximaProcess
     End If
     GoTo slut
-Fejl:
+fejl:
      MsgBox TT.A(55) & vbCrLf & "ErrCode: " & MaxProc.ErrCode & vbCrLf & vbCrLf & MaxProc.LastMaximaOutput, vbOKOnly, TT.Error
 slut:
 #End If
@@ -159,7 +159,7 @@ End Sub
 Sub MaximaCommand()
     Dim scrollpos As Double
     Dim sstart As Long, sslut As Long, DontGoBack As Boolean
-    On Error GoTo Fejl
+    On Error GoTo fejl
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -204,7 +204,7 @@ Sub MaximaCommand()
     omax.InsertMaximaOutput
     '   UFWait.Hide
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -215,7 +215,7 @@ slut:
 
 End Sub
 Sub MaximaSolveInequality(Optional variabel As String)
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim eqs As Boolean
@@ -355,7 +355,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
     Oundo.EndCustomRecord
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -373,7 +373,7 @@ End Sub
 Sub MaximaSolvePar(Optional variabel As String)
     Dim Arr As Variant, s As String, t As String, v As String
     Dim fejlm As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
     Dim IsSolved As Boolean
     Dim scrollpos As Double
@@ -781,7 +781,7 @@ newcassys:
         Oundo.EndCustomRecord
     End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox2 TT.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -862,7 +862,7 @@ Sub MaximaEliminate()
     Dim tdefs As String
     Dim mo As Range
     Dim fejlm As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
     Dim scrollpos As Double
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -976,7 +976,7 @@ Sub MaximaEliminate()
     Oundo.EndCustomRecord
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -988,7 +988,7 @@ End Sub
 Sub MaximaNsolve(Optional ByVal variabel As String)
     Dim Arr As Variant
     Dim fejlm As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
     Dim IsSolved As Boolean
     Dim scrollpos As Double
@@ -1248,7 +1248,7 @@ ghop:
     Oundo.EndCustomRecord
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -1260,7 +1260,7 @@ End Sub
 
 Sub beregn()
     Dim fejlm As String, RemoveEqual As Boolean
-        On Error GoTo Fejl
+        On Error GoTo fejl
    ' Application.ScreenUpdating = False
     Dim tid As Single
     tid = timer
@@ -1293,7 +1293,7 @@ Sub beregn()
             GoTo slut
         End If
         Err.Clear
-        On Error GoTo Fejl
+        On Error GoTo fejl
     End If
     
     If Not PrepareMaxima Then
@@ -1418,7 +1418,7 @@ Sub beregn()
     Oundo.EndCustomRecord
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -1479,7 +1479,7 @@ TheEnd:
 End Function
 
 Sub Omskriv()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim s As String
     Dim UFomskriv As New UserFormReduce
     PrepareMaxima
@@ -1607,7 +1607,7 @@ Sub Omskriv()
     Oundo.EndCustomRecord
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -1622,7 +1622,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub reducer()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim scrollpos As Double, s As String
@@ -1702,7 +1702,7 @@ Sub reducer()
     Oundo.EndCustomRecord
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -1712,7 +1712,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub CompareTest()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim scrollpos As Double
@@ -1768,7 +1768,7 @@ Sub CompareTest()
     End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -1778,7 +1778,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub faktoriser()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim scrollpos As Double, s As String
@@ -1855,7 +1855,7 @@ Sub faktoriser()
     
     Oundo.EndCustomRecord
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -1865,7 +1865,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub udvid()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim sstart As Long, sslut As Long
@@ -1943,7 +1943,7 @@ Sub udvid()
     
     Oundo.EndCustomRecord
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -1953,7 +1953,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub Differentier()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim variabel As String, s As String
@@ -2034,7 +2034,7 @@ Sub Differentier()
     
     Oundo.EndCustomRecord
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -2044,7 +2044,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub Integrer()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim variabel As String, s As String
@@ -2125,7 +2125,7 @@ Sub Integrer()
     
     Oundo.EndCustomRecord
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -2140,7 +2140,7 @@ Sub SolveDENumeric()
     Dim variabel As String
     Dim ea As New ExpressionAnalyser
     Dim UFdiffeq As New UserFormDeSolveNumeric
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     ea.SetNormalBrackets
 
@@ -2242,7 +2242,7 @@ Sub SolveDENumeric()
     End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -2287,7 +2287,7 @@ Sub SolveDE()
     SolveDEpar
 End Sub
 Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     omax.prevspr = ""
     Dim scrollpos As Double
@@ -2475,7 +2475,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     Oundo.EndCustomRecord
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:

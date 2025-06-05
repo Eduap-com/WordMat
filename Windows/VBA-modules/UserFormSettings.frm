@@ -647,7 +647,7 @@ Sub SetCaptions()
     Label_TAB4.Caption = TT.A(262)
     Label_TAB5.Caption = TT.A(7)
     Label_TAB6.Caption = "Backup"
-    Label_TAB7.Caption = "Code" 'TT.A()
+    Label_TAB7.Caption = TT.A(909)
     Label_TAB8.Caption = TT.A(668)
     
     Label_cancel.Caption = TT.Cancel

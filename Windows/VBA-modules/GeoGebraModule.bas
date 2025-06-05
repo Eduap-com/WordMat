@@ -28,7 +28,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     ea.SetNormalBrackets
     ea2.SetNormalBrackets
 
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     TempCas = CASengine
     CASengineTempOnly = 1
@@ -245,7 +245,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     '    OpenLink UrlLink, True
     
     OpenGeoGebraWeb UrlLink, Gtype, False, False
-Fejl:
+fejl:
 
 slut:
     CASengineTempOnly = TempCas
@@ -743,7 +743,7 @@ End Sub
 
 Sub GeoGebra()
 ' sends the selected equation and definitions to GeoGebra 5
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim geogebrasti As String
     Dim geogebrafilersti As String
     Dim geogebracmd As String
@@ -778,7 +778,7 @@ Sub GeoGebra()
         geogebracmd = geogebrasti & " """ & geogebrafilersti & """"
     Else
         MsgBox "The GeoGebra.ggb file cannot be located", vbOKOnly, TT.Error
-        GoTo Fejl
+        GoTo fejl
     End If
     
 #If Mac Then
@@ -794,7 +794,7 @@ Sub GeoGebra()
     Set UfWait = Nothing
     
     GoTo slut
-Fejl:
+fejl:
 '    UserFormGeoGebra.Show
 slut:
     CASengineTempOnly = TempCas
@@ -827,7 +827,7 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
 #End If
     
     GoTo slut
-Fejl:
+fejl:
 
 slut:
 End Sub
@@ -835,7 +835,7 @@ Function GeoGebraPath() As String
 ' path to the geogebra executable. Returns "" if not found. NOTE: On Mac the path is not used. There is an applescript for that, but the function is used to determine if there is a GeoGebra installation.
 ' Downloading to the latest version if possible
 Dim DN As String
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
     GeoGebraPath = GetProgramFilesDir() & "GeoGebra.app"
     If fileExists(GeoGebraPath) Then Exit Function
@@ -929,7 +929,7 @@ On Error GoTo Fejl
     
 #End If
     GoTo slut
-Fejl:
+fejl:
     GeoGebraPath = ""
 slut:
 End Function
@@ -940,7 +940,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
-    On Error GoTo Fejl
+    On Error GoTo fejl
     ea.SetNormalBrackets
     ea2.SetNormalBrackets
     geogebrafil.Show3D = False
@@ -1146,7 +1146,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Name geogebrasti & "geogebra.zip" As geogebrasti & "geogebra.ggb"
 #End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     On Error Resume Next
@@ -1194,7 +1194,7 @@ Sub CreateZipFile(zipfilnavn As Variant, FilNavn As Variant, Optional filnavn2 A
     MaxProc.CreateZipFile zipfilnavn, FilNavn
 #End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 

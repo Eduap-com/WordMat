@@ -24,7 +24,7 @@ Sub RunTestSequence()
     Dim s As String, i As Integer
     Dim AllR As Range
     
-    On Error GoTo Fejl
+    On Error GoTo fejl
     ErrCount = 0
     TestCount = 0
     ContCount = 0
@@ -492,7 +492,7 @@ ggbtest:
 
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox Err.Description & vbCrLf & vbCrLf & "Error at test no.:" & TestCount + 1, vbOKOnly, "Error during test"
 slut:
     Selection.TypeParagraph

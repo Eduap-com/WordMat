@@ -28,7 +28,7 @@ Sub Chi2Test()
     Dim r As Integer
     Dim c As Integer
     
-On Error GoTo Fejl
+On Error GoTo fejl
 
 Dim signiv As Integer
 signiv = InputBox(TT.A(349), TT.A(350), "5")
@@ -68,7 +68,7 @@ If cxl.Below5 Or cxl.sum < 50 Then
 End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 Application.ScreenUpdating = True
@@ -149,7 +149,7 @@ Sub Chi2GrafNoLoad()
     'xlapp.EnableEvents = False
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     XLapp.ScreenUpdating = True
@@ -160,7 +160,7 @@ Function betcif(Optional ByVal tal As Double = 1, Optional ByVal cif As Integer 
 ' Returns numbers with cif significant digits.
 ' if no number of significant digits is specified, 5 is used
     Dim p As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
   
     If tal = 0 Then
         betcif = 0
@@ -190,7 +190,7 @@ Function betcif(Optional ByVal tal As Double = 1, Optional ByVal cif As Integer 
     End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Function
@@ -239,14 +239,14 @@ Function GetExcelSti() As String
 End Function
 Function InsertOpenExcel(FilNavn As String, Optional startark As String = "", Optional WorkBookName As String) As Object
 ' inserts embedded or opens depending on setting
-On Error GoTo Fejl
+On Error GoTo fejl
     If ExcelIndlejret Then
         Set InsertOpenExcel = InsertIndlejret(FilNavn, startark)
     Else
         Set InsertOpenExcel = OpenExcelWB(FilNavn, startark, WorkBookName)
     End If
 
-Fejl:
+fejl:
 End Function
 Sub Chi2Graf()
     InsertOpenExcel FilNavn:="Chi2Fordeling.xltm", WorkBookName:=TT.A(483)

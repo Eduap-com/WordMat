@@ -52,7 +52,7 @@ Sub SetEscEvents(ControlColl As Controls)
 End Sub
 
 Private Sub CommandButton_ok_Click()
-On Error GoTo Fejl
+On Error GoTo fejl
 Dim Arr As Variant
 Dim i As Integer, c As Integer
     If OptionButton_numonly.Value = True Then
@@ -145,7 +145,7 @@ Dim i As Integer, c As Integer
     
     
     GoTo slut
-Fejl:
+fejl:
     SelectedVar = vbNullString
 slut:
     Me.hide
@@ -166,7 +166,7 @@ End Sub
 
 Private Sub UserForm_Activate()
     Dim i As Integer, svar As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     SetCaptions
     TextBox_def.WordWrap = True
     TextBox_def.WordWrap = False
@@ -257,7 +257,7 @@ Private Sub UserForm_Activate()
         ListBox_vars.MultiSelect = fmMultiSelectSingle
     End If
 
-Fejl:
+fejl:
     On Error Resume Next
     ListBox_vars.SetFocus
 End Sub

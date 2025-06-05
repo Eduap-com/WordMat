@@ -115,7 +115,7 @@ Public Function PrepareNewCommand(Optional FindDef As Boolean = True) As Boolean
     PrepareNewCommand = True
     GoTo slut
 
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral & vbCrLf & " preparing maxima", vbOKOnly, TT.Error
     PrepareNewCommand = False
 slut:
@@ -258,7 +258,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     On Error Resume Next
     Unload UFwait2
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 #End If
@@ -369,7 +369,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
         On Error Resume Next
         UFwait2.Show vbModeless
         DoEvents
-        On Error GoTo Fejl
+        On Error GoTo fejl
         i = 0
         Do While MaxProc.Finished = 0 And i < StopTime
             Wait (0.1)
@@ -420,7 +420,7 @@ Sub WaitForMaximaForm(StopTime As Integer)
         End If
     End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 #End If
@@ -2566,7 +2566,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
     Dim subs As Integer, sups As Integer, ends As Integer
     Dim antalm As Integer, varl As Integer, di As Integer, antalmS As String
 
-    On Error GoTo Fejl
+    On Error GoTo fejl
     ea.SetNormalBrackets
     ea2.StartBracket = VBA.ChrW(12310)
     ea2.EndBracket = VBA.ChrW(12311)
@@ -2809,7 +2809,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                 s = ea.GetPrevVar(Pos)
                 If Pos - Len(s) - 2 < 0 Then
                   MsgBox "An error orrcured with hat operator. "
-                  GoTo Fejl
+                  GoTo fejl
                 Else
                    Text = Left(Text, Pos - Len(s) - 2) & "tvvec(" & Mid(Text, Pos - Len(s) - 1, Len(s)) & ")" & Right(Text, Len(Text) - Pos)
                 End If
@@ -3116,7 +3116,7 @@ Function CodeForMaxima(ByVal Text As String, Optional CasType As Integer = 0) As
                     Text = Left(ea.Text, Pos + 1) & Right(ea.Text, Len(ea.Text) - posog)
                 ElseIf UBound(Arr) = -1 Then
                     MsgBox2 TT.A(169), vbOKOnly, TT.Error
-                    GoTo Fejl
+                    GoTo fejl
                 End If
             End If
         End If
@@ -3322,7 +3322,7 @@ msat:
                   End If
                 End If
             Else
-                GoTo Fejl
+                GoTo fejl
             End If
         End If
     Loop While Pos > 0
@@ -3864,7 +3864,7 @@ hopBracket:
     '    text = Replace(text, VBA.ChrW(8743), ",") or
 
     GoTo slut:
-Fejl:
+fejl:
     MsgBox TT.A(99), vbOKOnly, TT.Error
 slut:
     If Len(ConvertErrorText) > 0 Then
@@ -4096,7 +4096,7 @@ Function ConvertToAscii(ByVal Text As String) As String
     ConvertToAscii = Text
 End Function
 Function ConvertToWordSymbols(ByVal Text As String) As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim gtegn As String
     Dim ea As New ExpressionAnalyser
     Dim Pos As Long, pos2 As Long
@@ -4337,7 +4337,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
             If UBound(Arr) > 0 Then
                 Text = Left(Text, Pos - 1) & "" & VBA.ChrW(8730) & "(" & Arr(1) & "&" & Arr(0) & ")" & Right(Text, Len(Text) - pos2 + 1)
             Else
-                GoTo Fejl
+                GoTo fejl
             End If
         End If
     Loop While Pos > 0
@@ -4685,7 +4685,7 @@ Function ConvertToWordSymbols(ByVal Text As String) As String
     End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(100) & vbCrLf & vbCrLf & Text, vbOKOnly, TT.Error
 slut:
     ConvertToWordSymbols = Text
@@ -5505,7 +5505,7 @@ Sub ReadSelection()
     Dim sstart As Long
     Dim sslut As Long
     Dim j As Integer, antalgenstart As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
 'if bold gives buildup problems' in v. 1.24.1 it is attempted to be handled without changing the original
 '        For j = 1 To Selection.OMaths.Count
@@ -5592,7 +5592,7 @@ hop:
         sr.Select
     End If
     GoTo slut
-Fejl:
+fejl:
     On Error GoTo slut
     ReadSelectionOld
 slut:
@@ -5926,7 +5926,7 @@ Sub InsertAssumptions()
     End With
 
     GoTo slut
-Fejl:
+fejl:
 slut:
 End Sub
 
@@ -5934,12 +5934,12 @@ Function FindMaximaOutput(Text As String) As String
 ' picks output2 from the entire maxima output
     Dim opos, ipos As Integer
     Dim text2 As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     opos = InStr(Text, "(%o2)")
     ipos = InStr(Text, "(%i3)")
     'MsgBox text
-    If opos < 1 Then GoTo Fejl
+    If opos < 1 Then GoTo fejl
 
     text2 = Trim(Mid(Text, opos + 5, ipos - opos - 5))
     text2 = Replace(text2, "[", "")
@@ -5948,7 +5948,7 @@ Function FindMaximaOutput(Text As String) As String
     FindMaximaOutput = text2
 
     GoTo slut
-Fejl:
+fejl:
     opos = InStr(Text, "(%i2)")
     text2 = Right(Text, Len(Text) - opos - 4)
     text2 = Replace(text2, "(%i2)", "")
@@ -5990,7 +5990,7 @@ Sub FindLastMaximaOutput(Optional ConvertToWord As Boolean = True, Optional Mcom
     End If
     
     GoTo slut
-Fejl:
+fejl:
 slut:
 End Sub
 Sub GenerateOutputArray(Optional Text As String)
@@ -6003,7 +6003,7 @@ Sub GenerateOutputArray(Optional Text As String)
     Dim ArrIndex As Integer 'mac
     ArrIndex = 1 'mac
 
-    On Error GoTo Fejl
+    On Error GoTo fejl
 #If Mac Then
 #Else
     If Text = "" Then Text = MaxProc.LastMaximaOutput
@@ -6066,7 +6066,7 @@ Sub GenerateOutputArray(Optional Text As String)
     '    ShowOutputArray ' for test
 
     GoTo slut
-Fejl:
+fejl:
 slut:
    If nr < 1 Then nr = 1
     ReDim Preserve Minput(1 To nr) As String
@@ -6074,7 +6074,7 @@ slut:
 End Sub
 
 Function FindNextio(StartPos As Long, Text As String) As Long
-On Error GoTo Fejl
+On Error GoTo fejl
 Dim Pos As Long, io As String
 Dim ea As New ExpressionAnalyser
 
@@ -6094,7 +6094,7 @@ Do
 Loop While StartPos < Len(Text)
    
 GoTo slut
-Fejl:
+fejl:
    FindNextio = 0
 '    MsgBox "Fejl " & Err.Number & " (" & Err.Description & ") i procedure FindNextio, linje " & Erl & ".", vbOKOnly Or vbCritical Or vbSystemModal, TT.error
 slut:
@@ -6105,7 +6105,7 @@ Function RemovePrintetBool(s As String) As String
 ' mac auto. A true or false may be printed at the end.
     Dim Arr As Variant
     Dim t As String, ant As Integer, i As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     s = TrimR(Trim(s), vbLf)
     s = TrimR(Trim(s), vbCr)
 If DllConnType = 2 Then
@@ -6124,7 +6124,7 @@ End If
         End If
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox2 "removeprintetbool error", vbOKOnly, TT.Error
 slut:
     RemovePrintetBool = s
@@ -6141,7 +6141,7 @@ Function GetMaximaUnitOutput(Optional Text As String) As String
     Dim MinputU() As String
     Dim moutputU() As String
     
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
 #If Mac Then
 '    Text = MaxProc.LastMaximaOutput
@@ -6200,7 +6200,7 @@ Function GetMaximaUnitOutput(Optional Text As String) As String
     GetMaximaUnitOutput = moutputU(nr)
 
     GoTo slut
-Fejl:
+fejl:
     '    MsgBox text
 slut:
 End Function
@@ -6263,7 +6263,7 @@ Function FindVariable(Optional Text As String, Optional MaximaCode As Boolean = 
     If Text = vbNullString Then
         Text = Kommando
         If Text = "" Then
-            On Error GoTo Fejl
+            On Error GoTo fejl
             For j = 0 To UBound(Kommandoer)
                 Text = Text & "+" & Kommandoer(j)    ' there must only be characters between that cannot be included in the variable
             Next
@@ -6276,7 +6276,7 @@ Function FindVariable(Optional Text As String, Optional MaximaCode As Boolean = 
         ea.Text = Text
     End If
     If ea.Text = vbNullString Then ' fejl
-        GoTo Fejl
+        GoTo fejl
     End If
     ea.Pos = 1
     Dim vararr(30) As String    ' stores the variables for comparison only
@@ -6319,7 +6319,7 @@ Function FindVariable(Optional Text As String, Optional MaximaCode As Boolean = 
     
     FindVariable = True
     GoTo slut
-Fejl:
+fejl:
     FindVariable = False
 slut:
 End Function
@@ -6330,7 +6330,7 @@ Function FindDefinitions() As String
     Dim start As Long, sslut As Long
     Dim ra As Range
 
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     Application.ScreenUpdating = False
     Definitions = False
@@ -6368,7 +6368,7 @@ Function FindDefinitions() As String
     End If
 
     GoTo slut
-Fejl:
+fejl:
     DefFejl = True
     '    DefString = ""
     FindDefinitions = ""
@@ -6641,7 +6641,7 @@ End Sub
 Function ValidateDef(ByVal LHS As String, ByVal RHS As String) As Boolean
 ' returnerer false hvis der er fejl
     Dim Pos As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     ValidateDef = False
 
     Pos = InStr(LHS, "[")    ' You can write anything in subscript/index
@@ -6662,7 +6662,7 @@ Function ValidateDef(ByVal LHS As String, ByVal RHS As String) As Boolean
 
 
     ValidateDef = True
-Fejl:
+fejl:
 End Function
 Function GetAssumeText(defenk) As String
 ' takes text from word and converts to assume and inserts into forget
@@ -6767,7 +6767,7 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
     End If
 
     GoTo slut
-Fejl:
+fejl:
     IsSolved = False
 slut:
 End Function
@@ -6825,7 +6825,7 @@ End Function
 
 Public Property Get KommandoerStreng() As Variant
     Dim i As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     If Kommando <> "" Then
         KommandoerStreng = Replace(Kommando, vbCr, "")
@@ -6837,17 +6837,17 @@ Public Property Get KommandoerStreng() As Variant
     End If
 
     GoTo slut
-Fejl:
+fejl:
     KommandoerStreng = ""
 slut:
 End Property
 
 Public Property Get AntalKom() As Integer
 ' number of equations/expressions
-    On Error GoTo Fejl
+    On Error GoTo fejl
     AntalKom = UBound(Kommandoer) + 1
     GoTo slut
-Fejl:
+fejl:
     If Kommando <> "" Then
         AntalKom = 1
     Else

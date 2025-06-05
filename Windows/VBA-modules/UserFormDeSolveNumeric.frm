@@ -143,7 +143,7 @@ Dim ils As InlineShape
 Dim Sep As String, s As String
 Dim pointText As String, i As Long
 Dim pointText2 As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     InsertType = 1
     If ListOutput = vbNullString Then SolveDE
     PlotOutput 3
@@ -194,7 +194,7 @@ s = s & "true" & Sep & "false" & Sep & "false" & Sep & "false" & Sep
 ils.AlternativeText = s
 Unload Me
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 Application.ScreenUpdating = True
@@ -291,7 +291,7 @@ Dim i As Long, j As Integer
     
     Unload Me
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 Application.ScreenUpdating = True
@@ -556,7 +556,7 @@ Function SolveDE() As Boolean
     Dim variabel As String, xmin As String, xmax As String, xstep As String, DElist As String, VarList As String, guesslist As String
     Dim ea As New ExpressionAnalyser
     Dim n As Integer, Npoints As Long
-    On Error GoTo Fejl
+    On Error GoTo fejl
     variabel = TextBox_varx.Text
     xmin = Replace(TextBox_xmin.Text, ",", ".")
     xmax = Replace(TextBox_xmax.Text, ",", ".")
@@ -650,7 +650,7 @@ Function SolveDE() As Boolean
     Loop While ea.Pos < ea.Length - 1 And i < 10000
 SolveDE = True
 GoTo slut
-Fejl:
+fejl:
    If i >= Npoints Then
     SolveDE = True
    Else
@@ -661,7 +661,7 @@ End Function
 
 Sub PlotOutput(Optional highres As Double = 1)
 Dim Text As String, yAxislabel As String
-On Error GoTo Fejl
+On Error GoTo fejl
     Label_wait.Caption = TT.A(826) & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
@@ -798,7 +798,7 @@ On Error GoTo Fejl
     End If
     Label_wait.visible = False
 GoTo slut
-Fejl:
+fejl:
     On Error Resume Next
     Label_wait.Caption = TT.A(94)
     Label_wait.Font.Size = 12

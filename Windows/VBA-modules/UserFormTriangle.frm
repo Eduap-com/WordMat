@@ -86,7 +86,7 @@ End Sub
 
 Private Sub Label_ok_Click()
 
-On Error GoTo Fejl
+On Error GoTo fejl
 
     Dim t As Table
     Dim r As Range
@@ -208,7 +208,7 @@ On Error GoTo Fejl
     Oundo.EndCustomRecord
     
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(786), vbOKOnly, TT.Error
     Exit Sub
 slut:
@@ -243,7 +243,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
     Dim vBn As String
     Dim vCn As String
     
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     san = TextBox_captionsa.Text
     sbn = TextBox_captionsb.Text
@@ -493,7 +493,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf SA > 0 And sb > 0 Then ' sides not next to angle
                 D = SA ^ 2 - sb ^ 2 * Sin(vA * PI / 180) ^ 2
                 If D < 0 Then ' no solution
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 sc = sb * Cos(vA * PI / 180) + Sqr(D)
                 sc2 = sb * Cos(vA * PI / 180) - Sqr(D)
@@ -519,7 +519,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf SA > 0 And sc > 0 Then ' sides not next to angle
                 D = SA ^ 2 - sc ^ 2 * Sin(vA * PI / 180) ^ 2
                 If D < 0 Then ' no solution
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 sb = sc * Cos(vA * PI / 180) + Sqr(D)
                 sb2 = sc * Cos(vA * PI / 180) - Sqr(D)
@@ -554,7 +554,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf SA > 0 And sb > 0 Then ' sides not next to angle
                 D = sb ^ 2 - SA ^ 2 * Sin(vB * PI / 180) ^ 2
                 If D < 0 Then ' no solution
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 sc = SA * Cos(vB * PI / 180) + Sqr(D)
                 sc2 = SA * Cos(vB * PI / 180) - Sqr(D)
@@ -580,7 +580,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf sb > 0 And sc > 0 Then ' sides not next to angle
                 D = sb ^ 2 - sc ^ 2 * Sin(vB * PI / 180) ^ 2
                 If D < 0 Then ' no solution
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 SA = sc * Cos(vB * PI / 180) + Sqr(D)
                 sa2 = sc * Cos(vB * PI / 180) - Sqr(D)
@@ -615,7 +615,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf sc > 0 And sb > 0 Then ' sides not next to angle
                 D = sc ^ 2 - sb ^ 2 * Sin(vC * PI / 180) ^ 2
                 If D < 0 Then ' no solution
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 SA = sb * Cos(vC * PI / 180) + Sqr(D)
                 sa2 = sb * Cos(vC * PI / 180) - Sqr(D)
@@ -641,7 +641,7 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
             ElseIf SA > 0 And sc > 0 Then ' sides not next to angle
                 D = sc ^ 2 - SA ^ 2 * Sin(vC * PI / 180) ^ 2
                 If D < 0 Then ' no solution
-                    GoTo Fejl
+                    GoTo fejl
                 End If
                 sb = SA * Cos(vC * PI / 180) + Sqr(D)
                 sb2 = SA * Cos(vC * PI / 180) - Sqr(D)
@@ -668,13 +668,13 @@ Sub FindSolutions(Optional advarsler As Boolean = False)
         End If
     End If
 GoTo slut
-Fejl:
+fejl:
     statustext = TT.A(784)
     If advarsler Then MsgBox statustext, vbOKOnly, TT.Error
     Exit Sub
 slut:
     If SA <= 0 Or sb <= 0 Or sc <= 0 Or vA <= 0 Or vB <= 0 Or vC <= 0 Then
-        GoTo Fejl
+        GoTo fejl
     Else
         succes = True
         statustext = TT.A(787)

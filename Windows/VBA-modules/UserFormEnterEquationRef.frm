@@ -83,7 +83,7 @@ End Sub
 
 Private Sub UserForm_Activate()
 Dim i As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     SetCaptions
     EquationName = ""
     Label_error.visible = False
@@ -94,7 +94,7 @@ For i = 1 To ActiveDocument.Bookmarks.Count
 Next
 TextBox1.SetFocus
 
-Fejl:
+fejl:
 End Sub
 
 Private Sub UserForm_Initialize()

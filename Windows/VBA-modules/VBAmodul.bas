@@ -195,7 +195,7 @@ Public Sub ExportAllModules()
     Dim backupFolder As String, n As Integer, ns As String
     '    Dim UfWait2 As UserFormWaitForMaxima ' It is not good to use anything that references outside the VBA module, as they will be deleted, and then the entire module will fail and cannot be imported.
     '    Set UfWait2 = New UserFormWaitForMaxima
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
 
 #If Mac Then
@@ -320,7 +320,7 @@ Public Sub ExportAllModules()
             On Error Resume Next
 '            Kill ModuleBackupFolder & "*.*"
 '            RmDir ModuleBackupFolder
-            On Error GoTo Fejl
+            On Error GoTo fejl
         End If
     Else
         MsgBox "An error occurred during Export. The module folder only contains " & C1 & " files. " & vbCrLf & "Your previous Export is saved to a backup folder: " & vbCrLf & ModuleBackupFolder, vbOKOnly, "Error"
@@ -328,7 +328,7 @@ Public Sub ExportAllModules()
     
     ExportDatetime = Now
     GoTo slut
-Fejl:
+fejl:
     MsgBox "An error occurred during Export. Your previous Export is saved to a backup folder: " & VBAModulesFolder & "-Backup", vbOKOnly, "Error"
 slut:
     '    MsgBox "Files exported to folder '" & VBAModulesFolder & "':" & vbCrLf & vbCrLf & FileList, vbOKOnly, "Export complete"
@@ -441,7 +441,7 @@ Sub ImportAllModules()
         MsgBox ImportCount & " files successfully imported from folder '" & VBAModulesFolder & "'", vbOKOnly, "Import complete"
     End If
     GoTo slut
-Fejl:
+fejl:
 slut:
 End Sub
 Public Sub RemoveAllModules()

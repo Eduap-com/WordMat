@@ -3,7 +3,7 @@ Option Explicit
 
 Function VisDef() As String
 Dim deftext As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     PrepareMaxima
     deftext = omax.DefString
     
@@ -15,14 +15,14 @@ Dim deftext As String
     End If
     VisDef = deftext
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Function
 
 Sub DefinerFunktion()
     Dim Var As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Var = InputBox(TT.A(122), TT.A(123), "f(x)=x+1")
     Var = Replace(Var, ":=", "=")
     '    var = Replace(var, "=", VBA.ChrW(&H2261))
@@ -35,18 +35,18 @@ Sub DefinerFunktion()
         Selection.MoveRight unit:=wdCharacter, Count:=2
     End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
 
 Sub MaximaSettings()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If UFMSettings Is Nothing Then Set UFMSettings = New UserFormSettings
     UFMSettings.Show
     GoTo slut
-Fejl:
+fejl:
     Set UFMSettings = New UserFormSettings
     UFMSettings.Show
 slut:

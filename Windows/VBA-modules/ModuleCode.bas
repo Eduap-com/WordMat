@@ -19,13 +19,15 @@ End Sub
 Sub InsertCodeBlock()
     Dim cc As ContentControl
     Dim codeText As String
+    On Error GoTo fejl
     
-    codeText = TT.A(907) & vbLf & " "
+    codeText = TT.A(907) & vbCrLf & vbCrLf & " "
 
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
 
+    Selection.TypeParagraph
     ' Add a rich text content control at the current selection
     Set cc = ActiveDocument.ContentControls.Add(wdContentControlRichText)
         
@@ -70,6 +72,16 @@ Sub InsertCodeBlock()
 
     cc.Range.Select
     Oundo.EndCustomRecord
+    
+    If Not UseCodeBlocks Then
+        MsgBox2 TT.A(908), vbOKOnly
+    End If
+    
+    GoTo slut
+fejl:
+    ActiveDocument.Undo
+    MsgBox2 TT.A(910), vbOKOnly, TT.Error
+slut:
 
 End Sub
 

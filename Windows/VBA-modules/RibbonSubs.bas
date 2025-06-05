@@ -24,21 +24,21 @@ Sub RefreshRibbon()
         WoMatRibbon.Invalidate
     End If
 #Else
-    On Error GoTo Fejl
+    On Error GoTo fejl
    
     If Not (WoMatRibbon Is Nothing) Then
         WoMatRibbon.Invalidate
     End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox Err.Description
 slut:
 #End If
 End Sub
 ' events for ribbon
 Sub insertribformel(Kommentar As String, ByVal formel As String)
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
@@ -60,7 +60,7 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
     Oundo.EndCustomRecord
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(395), vbOKOnly, TT.Error
 slut:
 End Sub
@@ -714,11 +714,11 @@ Sub Rib_tfordelinggraf(control As IRibbonControl)
 End Sub
 
 Sub Rib_nylign(control As IRibbonControl)
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
     Selection.OMaths.Add Range:=Selection.Range
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub

@@ -23,7 +23,7 @@ Public Sub Plot2DGraph()
     Dim i As Integer
     Dim j As Integer
     Dim s As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim sstart As Long, sslut As Long
     Dim TempCas As Integer
     
@@ -174,14 +174,14 @@ Public Sub Plot2DGraph()
     UF2Dgraph.Show vbModeless
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     CASengineTempOnly = TempCas
 End Sub
 Sub InsertNextEquation(Ligning As String)
     Dim Arr As Variant
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Ligning = Replace(Ligning, VBA.ChrW(8788), "=") ' :=
     Ligning = Replace(Ligning, VBA.ChrW(8797), "=") ' tripel =
     Ligning = Replace(Ligning, VBA.ChrW(8801), "=") ' def =
@@ -222,7 +222,7 @@ Sub InsertNextEquation(Ligning As String)
         UF2Dgraph.TextBox_ligning6.Text = Ligning
     End If
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
@@ -309,7 +309,7 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
     UF2Dgraph.Show vbModeless
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
@@ -354,7 +354,7 @@ Sub InsertGraphOleObject()
     UfWait.Label_progress.Caption = "***"
     UfWait.Label_stop.visible = False
     UfWait.Show vbModeless
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
 
     If Not fileExists(GetProgramFilesDir & "\Graph\graph.exe") Then
@@ -476,7 +476,7 @@ Sub InsertGraphOleObject()
 'insert using empty graph file. A little slower, but could be used for communication at some point
         On Error GoTo hop
         Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
-        On Error GoTo Fejl
+        On Error GoTo fejl
         ils.OLEFormat.DoVerb (wdOLEVerbShow)
 
     Else
@@ -490,7 +490,7 @@ hop:
 
     Application.ScreenUpdating = True
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(97), vbOKOnly, TT.Error
     omax.ConvertLnLog = True
     Unload UfWait
@@ -676,7 +676,7 @@ Dim Arr As Variant
 Dim dd As New DocData
 Dim ea As New ExpressionAnalyser
 Dim srange As Range
-On Error GoTo Fejl
+On Error GoTo fejl
 ea.SetNormalBrackets
     Dim sstart As Long, sslut As Long
     sstart = Selection.start
@@ -789,7 +789,7 @@ End If
     Selection.Collapse wdCollapseEnd
 
 GoTo slut:
-Fejl:
+fejl:
     MsgBox TT.A(98), vbOKOnly, TT.Error
 slut:
 On Error GoTo slut2
@@ -862,7 +862,7 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String) As Obje
     Dim Path As String
     Dim ils As InlineShape
     Dim vers As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Application.ScreenUpdating = False
     
     Dim UFwait2 As New UserFormWaitForMaxima
@@ -906,7 +906,7 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String) As Obje
     Unload UFwait2
 
     GoTo slut
-Fejl:
+fejl:
     On Error Resume Next
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     Unload UFwait2

@@ -118,12 +118,12 @@ End Sub
 
 Private Sub Label_symbol_Click()
 Dim Ctrl As control
-On Error GoTo Fejl
+On Error GoTo fejl
 Set Ctrl = Me.ActiveControl
 If Left(Ctrl.Name, 7) <> "TextBox" Then Set Ctrl = TextBox_titel
 UserFormSymbol.Show
 Ctrl.Text = Ctrl.Text & UserFormSymbol.tegn
-Fejl:
+fejl:
 End Sub
 
 
@@ -899,7 +899,7 @@ Dim Arr As Variant
 
 End Function
 Function GetDraw2Dtext(Optional highres As Double = 1) As String
-On Error GoTo Fejl
+On Error GoTo fejl
 Dim grafobj As String
 Dim xmin As String
 Dim xmax As String
@@ -1385,7 +1385,7 @@ End If
 
     GetDraw2Dtext = grafobj
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Function
@@ -1393,7 +1393,7 @@ Private Sub OpdaterGraf(Optional highres As Double = 1)
 Dim Text As String
 Dim df As String
 Dim dfsol As String
-On Error GoTo Fejl
+On Error GoTo fejl
     Label_wait.Caption = TT.A(826) & "!"
     Label_wait.Font.Size = 36
     Label_wait.visible = True
@@ -1465,7 +1465,7 @@ On Error GoTo Fejl
     End If
     Label_wait.visible = False
 GoTo slut
-Fejl:
+fejl:
     On Error Resume Next
     Label_wait.Caption = TT.A(94)
     Label_wait.Font.Size = 12
@@ -1488,7 +1488,7 @@ Dim Text As String
     End If
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
@@ -1805,7 +1805,7 @@ OpdaterGraf
 
     Me.Repaint
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(95), vbOKOnly, TT.Error
 slut:
     
@@ -1834,7 +1834,7 @@ Dim xmin As Single
 Dim xmax As Single
 Dim Ymin As Single
 Dim Ymax As Single
-On Error GoTo Fejl
+On Error GoTo fejl
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
 Ymin = ConvertStringToNumber(TextBox_ymin.Text)
@@ -1855,7 +1855,7 @@ OpdaterGraf
 
 Me.Repaint
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 
@@ -1868,7 +1868,7 @@ Dim xmin As Single
 Dim xmax As Single
 Dim Ymin As Single
 Dim Ymax As Single
-On Error GoTo Fejl
+On Error GoTo fejl
 xmin = ConvertStringToNumber(TextBox_xmin.Text)
 xmax = ConvertStringToNumber(TextBox_xmax.Text)
 Ymin = ConvertStringToNumber(TextBox_ymin.Text)
@@ -1889,7 +1889,7 @@ OpdaterGraf
  
 Me.Repaint
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 
@@ -1898,7 +1898,7 @@ Private Sub Label_insertpic_Click()
 Dim ils As InlineShape
 Dim s As String
 Dim Sep As String
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
 #Else
     OpdaterGraf 3
@@ -1943,7 +1943,7 @@ ils.AlternativeText = s
 PicOpen = False
 Unload Me
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 Application.ScreenUpdating = True

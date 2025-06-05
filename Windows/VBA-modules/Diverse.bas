@@ -100,7 +100,7 @@ Function GetProgramFilesDir() As String
 ' is not used by maxima anymore as the dll file is responsible for it now.
 ' is used by the Word documents etc. that need to be found
 'MsgBox GetProgFilesPath
-    On Error GoTo Fejl
+    On Error GoTo fejl
 #If Mac Then
     GetProgramFilesDir = "/Applications/"
 #Else
@@ -122,13 +122,13 @@ Function GetProgramFilesDir() As String
 #End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(110), vbOKOnly, TT.Error
 slut:
 End Function
 
 Function GetDocumentsDir() As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If DocumentsDir <> "" Then
         GetDocumentsDir = DocumentsDir
     Else
@@ -147,7 +147,7 @@ Function GetDocumentsDir() As String
     End If
  
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(110), vbOKOnly, TT.Error
 slut:
 End Function
@@ -250,7 +250,7 @@ On Error Resume Next
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' If the link doesn't work, nothing happens.
     End If
 #End If
-Fejl:
+fejl:
 End Sub
 
 Sub InsertSletDef()
@@ -321,7 +321,7 @@ slut:
 End Sub
 
 Sub InsertDefiner()
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -352,7 +352,7 @@ Sub InsertDefiner()
     Selection.Collapse wdCollapseEnd
         
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     Oundo.EndCustomRecord
@@ -395,7 +395,7 @@ Sub ForrigeResultat()
     End If
     
     If ResIndex < 0 Then ResIndex = 0
-    On Error GoTo Fejl
+    On Error GoTo fejl
     start = Selection.Range.start
     sslut = Selection.Range.End
     Set ra = ActiveDocument.Range
@@ -409,7 +409,7 @@ Sub ForrigeResultat()
             Else
                 Selection.Text = ""
             End If
-            GoTo Fejl
+            GoTo fejl
         End If
 '        ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range.Select
         Set r = ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range
@@ -452,7 +452,7 @@ Loop While hopover
     Selection.Text = s
     
 GoTo slut
-Fejl:
+fejl:
     ResIndex = 0
     ResFeltIndex = 0
     ResPos2 = 0
@@ -520,14 +520,14 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
 End Function
 
 Sub OpenFormulae(FilNavn As String)
-On Error GoTo Fejl
+On Error GoTo fejl
 #If Mac Then
     Documents.Open "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/WordDocs/" & FilNavn
 #Else
     OpenWordFile "" & FilNavn
 #End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
@@ -542,7 +542,7 @@ Sub OpenWordFile(FilNavn As String)
 #Else
     Dim filnavn2 As String
     Dim appdir As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     appdir = Environ("AppData")
     filnavn1 = appdir & "\WordMat\WordDocs\" & FilNavn
 
@@ -560,7 +560,7 @@ Sub OpenWordFile(FilNavn As String)
 #End If
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(111) & FilNavn, vbOKOnly, TT.Error
 slut:
 End Sub
@@ -735,7 +735,7 @@ Sub CheckForUpdate()
     CheckForUpdatePar False
 End Sub
 Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
-    On Error GoTo Fejl
+    On Error GoTo fejl
     Dim NewVersion As String, p As Integer, News As String, s As String
     Dim UpdateNow As Boolean, PartnerShip As Boolean
    
@@ -754,7 +754,7 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     
     On Error Resume Next
     PartnerShip = QActivePartnership()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
 #If Mac Then
     If PartnerShip Then
@@ -809,11 +809,11 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
                 Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
                 On Error GoTo Install2
                 Application.Run macroname:="PUpdateWordMat"
-                On Error GoTo Fejl
+                On Error GoTo fejl
             End If
         Else
 Install2:
-            On Error GoTo Fejl
+            On Error GoTo fejl
             MsgBox2 TT.A(21) & News & vbCrLf & TT.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, TT.A(23)
             If TT.LangNo = 1 Then
                 OpenLink "https://www.eduap.com/da/wordmat/"
@@ -828,7 +828,7 @@ Install2:
     End If
    
     GoTo slut
-Fejl:
+fejl:
     If Not RunSilent Then
         If MsgBox2(TT.A(581) & AppVersion, vbOKCancel, TT.Error) = vbOK Then
             If TT.LangNo = 1 Then
@@ -1037,7 +1037,7 @@ End Function
 Sub TabelToList()
     Dim dd As New DocData
     Dim OM As Range
-    On Error GoTo Fejl
+    On Error GoTo fejl
     If Selection.Range.Tables.Count = 0 Then
         MsgBox TT.A(871), vbOKOnly, TT.Error
         GoTo slut
@@ -1056,7 +1056,7 @@ Sub TabelToList()
     OM.OMaths(1).BuildUp
     Selection.TypeParagraph
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
@@ -1064,7 +1064,7 @@ Sub ListToTabel()
     Dim dd As New DocData
     Dim Tabel As Table
     Dim i As Integer, j As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     PrepareMaxima
     Dim Oundo As UndoRecord
@@ -1098,7 +1098,7 @@ Sub ListToTabel()
     Next
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     Oundo.EndCustomRecord
@@ -1137,7 +1137,7 @@ End Sub
 Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Dim t As Table, F As Field, ccut As Boolean
     Dim placement As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     
     If AskRef Then
         Dim EqName As String
@@ -1262,14 +1262,14 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Oundo.EndCustomRecord
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox2 TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
 Sub InsertEquationRef()
     Dim b As String
-    On Error GoTo Fejl
+    On Error GoTo fejl
     UserFormEquationReference.Show
     b = UserFormEquationReference.EqName
     
@@ -1298,13 +1298,13 @@ Sub InsertEquationRef()
     ActiveDocument.Fields.Update
     
     GoTo slut
-Fejl:
+fejl:
     MsgBox2 TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
 Sub SetEquationNumber()
-On Error GoTo Fejl
+On Error GoTo fejl
     Application.ScreenUpdating = False
     Dim F As Field, f2 As Field, n As String, p As Integer, Arr As Variant
     
@@ -1341,14 +1341,14 @@ On Error GoTo Fejl
     
     ActiveDocument.Fields.Update
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
 Sub SetFieldNo(F As Field, n As String)
     Dim p As Integer, p2 As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
     p = InStr(F.Code.Text, "\r")
     p2 = InStr(F.Code.Text, "\c")
     If p2 > 0 And p2 < p Then p = p2
@@ -1359,14 +1359,14 @@ Sub SetFieldNo(F As Field, n As String)
     F.Update
     ActiveDocument.Fields.Update
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
 Sub InsertEquationHeadingNo()
     Dim result As Long
-    On Error GoTo Fejl
+    On Error GoTo fejl
     result = MsgBox(TT.A(348), vbYesNoCancel, TT.A(8))
     If result = vbCancel Then Exit Sub
     If result = vbYes Then
@@ -1379,25 +1379,25 @@ Sub InsertEquationHeadingNo()
 
     ActiveDocument.Fields.Update
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
 Sub UpdateEquationNumbers()
-    On Error GoTo Fejl
+    On Error GoTo fejl
     ActiveDocument.Fields.Update
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
 
 Sub OpenLatexTemplate()
-On Error GoTo Fejl
+On Error GoTo fejl
     Documents.Add Template:=GetWordMatDir() & "WordDocs/LatexWordTemplate.dotx"
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub
@@ -1594,7 +1594,7 @@ End Function
 
 Sub NewEquation()
     Dim r As Range
-    On Error GoTo Fejl
+    On Error GoTo fejl
     On Error Resume Next
     
     If Selection.OMaths.Count = 0 Then
@@ -1613,7 +1613,7 @@ Sub NewEquation()
         Selection.MoveLeft unit:=wdCharacter, Count:=2
     End If
 GoTo slut
-Fejl:
+fejl:
     MsgBox2 TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Sub

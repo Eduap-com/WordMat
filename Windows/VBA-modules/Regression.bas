@@ -5,7 +5,7 @@ Sub linregression()
 ' is executed from the menu. Table must be selected
     Dim Cregr As New CRegression
     Application.ScreenUpdating = False
-On Error GoTo Fejl
+On Error GoTo fejl
     SaveBackup
     If Selection.OMaths.Count > 0 And Selection.Tables.Count = 0 Then
         Cregr.GetSetData
@@ -21,14 +21,14 @@ On Error GoTo Fejl
     Cregr.ComputeLinRegr
     Cregr.InsertEquation
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
 End Sub
 Sub ekspregression()
     Dim Cregr As New CRegression
     Application.ScreenUpdating = False
-On Error GoTo Fejl
+On Error GoTo fejl
     SaveBackup
     If Selection.OMaths.Count > 0 And Selection.Tables.Count = 0 Then
         Cregr.GetSetData
@@ -44,13 +44,13 @@ On Error GoTo Fejl
     Cregr.ComputeExpRegr
     Cregr.InsertEquation
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
 End Sub
 Sub potregression()
 
-On Error GoTo Fejl
+On Error GoTo fejl
     Dim Cregr As New CRegression
     SaveBackup
     Application.ScreenUpdating = False
@@ -70,13 +70,13 @@ On Error GoTo Fejl
     Cregr.InsertEquation
 
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
 End Sub
 Sub polregression()
 
-On Error GoTo Fejl
+On Error GoTo fejl
     Dim Cregr As New CRegression
     SaveBackup
     Application.ScreenUpdating = False
@@ -95,12 +95,12 @@ On Error GoTo Fejl
     Cregr.ComputePolRegr
     Cregr.InsertEquation
 GoTo slut
-Fejl:
+fejl:
     MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
 End Sub
 Sub UserRegression()
-On Error GoTo Fejl
+On Error GoTo fejl
     Dim Cregr As New CRegression
     Dim sslut As Long, fkt As String, r As Range
     Application.ScreenUpdating = False
@@ -147,7 +147,7 @@ On Error GoTo Fejl
     Oundo.EndCustomRecord
     Cregr.InsertEquation
 GoTo slut
-Fejl:
+fejl:
     Oundo.EndCustomRecord
     MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:

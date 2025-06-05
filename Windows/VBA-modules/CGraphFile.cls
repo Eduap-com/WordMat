@@ -74,7 +74,7 @@ End Sub
 
 Public Sub Save(FilNavn As String)
     Dim filnr As Integer
-    On Error GoTo Fejl
+    On Error GoTo fejl
 
     InsertDataSection
     InsertCustomFunctions
@@ -90,7 +90,7 @@ Public Sub Save(FilNavn As String)
     'Write #filnr, MyError; " is an error value"
 
     GoTo slut
-Fejl:
+fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
     Close #filnr    ' Close file.
