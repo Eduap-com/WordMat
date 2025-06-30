@@ -40,7 +40,7 @@
 39#£Regressão definida pelo usuário
 40#£Função
 41#£Decimais
-42#£Iniciar palpite (ex.: a=2 , c=10)
+42#£Iniciar palpite
 43#£A precisão é muito alta. O tempo de cálculo pode ser muito longo ou causar um erro. Se não der certo, tente uma configuração mais baixa.
 44#£A precisão é bastante alta. O tempo de cálculo pode ser bastante longo ou causar um erro. Se não der certo, tente uma configuração mais baixa.
 45#£A precisão não pode ser negativa. Escolha um número inteiro positivo
@@ -113,7 +113,7 @@
 112#£Não é possível conectar-se ao servidor
 113#£Neste local do documento define-se o seguinte:
 114#£Não há nenhuma definição neste local no documento.
-115#£
+115#£tem várias variáveis indefinidas. A variável independente não pode ser identificada. Use x ou t como variável independente.
 116#£Não é possível definir um derivado\r\nRemova a definição: \r\n
 117#£Existe um erro na definição:
 118#£Ele é ignorado, mas corrija o erro de entrada para evitar esse erro de saída
@@ -326,9 +326,9 @@
 325#£Atalho Alt + M insere nova matemática
 326#£Atalho AltGr + Enter calcula
 327#£Atalho Alt + E Resolve equação
-328#£Atalho Alt + S abre configurações
+328#£Atalho Alt + j abre configurações
 329#£Atalho Alt + R Insere o resultado anterior
-330#£Atalho Alt + U Ativa o suporte da unidade
+330#£Cor da saída
 331#£subscrito:
 332#£\lambda é a abreviação da pequena letra grega lambda
 333#£Atalho Alt + P Plota um gráfico
@@ -455,7 +455,7 @@
 454#£Definir função
 455#£Definir constantes físicas
 456#£Reduzir
-457#£Infinitos.
+457#£
 458#£Diferenciar
 459#£Integrar
 460#£Plotagem
@@ -539,9 +539,9 @@
 538#£Selecione a expressão para diferenciar ou coloque o cursor na expressão
 539#£Integrar
 540#£Determina a integral indefinida da função
-541#£
-542#£
-543#£
+541#£Importar configurações
+542#£Configurações de exportação
+543#£Personalizar menu
 544#£
 545#£Gráfico de gráfico (Alt+P)
 546#£Mostra o gráfico para a(s) função(ões)/equação(ões) selecionada(s) e pontos. O gráfico pode então ser inserido no documento. Vários programas gráficos são suportados. Escolha o seu favorito em configurações.
@@ -688,10 +688,10 @@
 687#£Números significativos
 688#£Ligar/desligar unidades
 689#£Se as unidades estiverem ativadas, o WordMath kan interpretará e converterá unidades. No botão SI você pode alterar as unidades de saída. Não ligue as unidades, a menos que necessite. Pode afetar o comportamento do WordMat e reserva muitas variáveis.
-690#£Unidades de saída
+690#£Inserir campo de código
 691#£Indique as unidades para as quais converter. Por padrão, as unidades de saída são unidades SI.
-692#£SF
-693#£Unidades
+692#£ns
+693#£Um campo de código é uma área onde pode programar o Maxima diretamente. Por exemplo, você pode definir funções mais avançadas, que podem ser usadas mais abaixo no documento. Veja mais no manual.
 694#£Não. Número de números
 695#£Arredondamento
 696#£Escolha como os números são mapeados e arredondados. Nos exemplos abaixo, o WordMat é definido como 3 figuras\r\n\r\nDecimals: 12.345\r\nFiguras significativas: 12,3\r\nSci. Notação: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£É índice de lista/matriz
 726#£Programa gráfico padrão
 727#£Incorporar folhas do Excel
-728#£Unidades de saída
+728#£
 729#£Unidades de saída de estado separadas por vírgula\nexemplos:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nSe nada for declarado, as unidades são retornadas em unidades SI básicas ou unidades derivadas de SI sem prefixo.
 730#£Exemplos de unidades suportadas:\n(Consulte o manual para mais informações)\n\nComprimento: cm , AU, ly, pc\nMassa: u , G, mg\nFrequência: Hz , Bq\nEnergia: kWh , eV, aJ\nPressão: Bar , mmHg, atm, torr
 731#£Equações trigonométricas
@@ -809,7 +809,7 @@
 808#£Ajuda
 809#£Manual
 810#£Manual como documento do Word
-811#£Manual da página Web online
+811#£Documentação do site
 812#£Sobre nós
 813#£Atualizar
 814#£Atalhos
@@ -901,3 +901,11 @@
 900#£Condições da solução:
 901#£Você deve selecionar uma lista primeiro, por exemplo, [1; 2; 3]
 902#£Talvez você tenha trocado n e r em K(n, r)?
+903#£Arquivo de código
+904#£Aplicar arquivo de código
+905#£Permitir campos de código
+906#£O texto no ficheiro de código é executado no Maxima em cada arranque. Por exemplo, pode utilizá-lo para definir funções que pretende sempre ter disponíveis no WordMat ou para alterar definições no Maxima. Usar o arquivo de código tornará os cálculos um pouco mais lentos. \nOs campos de código podem ser inseridos através do menu de definição, e são campos no documento do Word onde você pode inserir o Código Máximo, que é executado em cada cálculo. O código no ficheiro de código e os campos de código são enviados diretamente para o Maxima sem serem processados. Qualquer erro de código fará com que o WordMat falhe em todos os cálculos, portanto, cuidado. Procure no menu em Ajuda > Manual > Ajuda com os Comandos do Maxima a sintaxe correta do Maxima.
+907#£Introduza aqui o código do Maxima
+908#£Você não ativou os campos de código em 'Configurações > Código'. O campo de código é inserido, mas não será usado em cálculos até que seja ativado.
+909#£Código
+910#£Não foi possível inserir um campo de código aqui.

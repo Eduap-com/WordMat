@@ -40,7 +40,7 @@
 39#£Benutzerdefinierte Regression
 40#£Funktion
 41#£Anzahl der Dezimalstellen
-42#£Anfangsvermutung (Geschrieben in der Form a=2 ; c=10)
+42#£Anfangsvermutung
 43#£Die PrŠzision ist sehr hoch angesetzt. Die Berechnungszeit kann sehr lang sein oder fehlschlagen. Versuchen Sie es erneut mit einer niedrigeren Einstellung.
 44#£Die PrŠzision ist recht hoch angesetzt. Die Berechnungszeit kann lang oder fehlerhaft sein. Versuchen Sie es erneut mit einer niedrigeren Einstellung.
 45#£Die Genauigkeit darf nicht negativ sein. WŠhlen Sie eine positive Ganzzahl aus
@@ -73,7 +73,7 @@
 72#£Konvertieren Sie Gleichungen in LaTex. (Die Tastenkombination Alt+T konvertiert eine einzelne Gleichung)
 73#£In Zwischenablage kopieren
 74#£Formular anzeigen
-75#£Erkennen Sie GerŠte und schreiben Sie sie nicht kursiv
+75#£Erkennen Sie einheiten und schreiben Sie sie nicht kursiv
 76#£Verwenden Sie die Umwandlung von Maxima in LaTex
 77#£Alle konvertieren
 78#£Konvertieren und zum nŠchsten Mal wechseln
@@ -113,7 +113,7 @@
 112#£Es kann keine Verbindung zum Server hergestellt werden
 113#£An dieser Stelle des Dokuments wird Folgendes definiert:
 114#£An dieser Stelle des Dokuments gibt es keine Definitionen.
-115#£
+115#£hat mehrere undefinierte Variablen. Die unabhŠngige Variable kann nicht identifiziert werden. Verwenden Sie x oder t als unabhŠngige Variable.
 116#£Sie kšnnen keine abgeleitete Funktion definieren.\r\nEntfernen Sie die folgende Definition: \r\n
 117#£Es gibt einen Fehler in der Definition:
 118#£Es wird ignoriert. Aber beheben Sie es, damit Sie diesen Fehler nicht bei jeder Berechnung erhalten.
@@ -164,9 +164,9 @@
 163#£Der Wahrheitswert der Aussage wird mit WordMat bestimmt.
 164#£Das Ergebnis basiert auf einem numerischen Vergleich
 165#£Es konnte nicht festgestellt werden, ob die Aussage wahr/falsch war
-166#£GerŠte von
-167#£WŠhlen Sie bei Bedarf AusgabegerŠte aus
-168#£AusgabegerŠte
+166#£Einheiten aus
+167#£WŠhlen Sie Ausgabeeinheiten
+168#£Ausgabeeinheiten
 169#£Die Klammern spielen keine Rolle
 170#£Automatisches Backup?
 171#£Wie viele Sicherungsdateien sollten maximal gespeichert werden?
@@ -252,7 +252,7 @@
 251#£Oder geben Sie selbst ein
 252#£Sie kšnnen nicht beide die Gleichung fŸr
 253#£und sie gleichzeitig zu definieren.
-254#£Sie versuchen, nach einer Variablen zu lšsen, die eine Einheit ist. Dies wird wahrscheinlich zu einem Fehler fŸhren. ErwŠgen Sie, einen anderen Variablennamen zu verwenden oder GerŠte zu deaktivieren.
+254#£Sie versuchen, nach einer Variablen zu lšsen, die eine Einheit ist. Dies wird wahrscheinlich zu einem Fehler fŸhren. ErwŠgen Sie, einen anderen Variablennamen zu verwenden oder einheiten zu deaktivieren.
 255#£Erde
 256#£Wasser
 257#£Kupfer
@@ -260,7 +260,7 @@
 259#£Mond
 260#£Sonne
 261#£Physikalische Konstanten
-262#£GerŠte
+262#£Einheiten
 263#£Tabellenwerte - WŠrme
 264#£Tabellenwert - Kernphysik
 265#£Astronomie
@@ -326,9 +326,9 @@
 325#£Mit der Tastenkombination Alt+M wird ein neues mathematisches Feld eingefŸgt
 326#£Die Tastenkombination AltGr + Eingabetaste berechnet
 327#£Die Tastenkombination Alt + L lšst die Gleichung
-328#£Die Tastenkombination Alt+ in šffnet die Einstellungen
+328#£Die Tastenkombination Alt+j in šffnet die Einstellungen
 329#£Die Tastenkombination Alt+R ruft vorherige Ergebnisse ab
-330#£Tastenkombination Alt+E schaltet GerŠte ein/aus
+330#£Farbe der Ausgabe
 331#£Subskript:
 332#£\lambda gibt den griechischen Kleinbuchstaben an
 333#£Die Tastenkombination Alt+P zeigt das Diagramm einer Regel an
@@ -341,7 +341,7 @@
 340#£FŸgen Sie Ihre eigenen Beschreibungen mithilfe von Excel-Diagrammen in Excel-Diagramme ein. EinfŸgen/Textfeld
 341#£Die Tastenkombination Alt + N wechselt zwischen Auto, Exact, Num
 342#£Eine Funktion mit Buchstabenkonstanten erhŠlt automatisch Schieberegler in GeoGebra
-343#£Bei den AusgabegerŠten darf es sich nur um saubere GerŠte handeln. Das hei§t, keine zusammengesetzten Einheiten wie km/h. Wenn Sie z.B. km/Stunden wŸnschen, geben Sie ein: km,Stunden
+343#£Bei den Ausgabeeinheiten darf es sich nur um saubere einheiten handeln. Das hei§t, keine zusammengesetzten Einheiten wie km/h. Wenn Sie z.B. km/Stunden wŸnschen, geben Sie ein: km,Stunden
 344#£Sie haben bereits die neueste Version von
 345#£WŠhlen Sie eine Steuerbescheidnummer aus.
 346#£Auf welche Zahl sollte diese Gleichung gesetzt werden?\r\nDie Zahlen der folgenden Gleichungen werden entsprechend aktualisiert.
@@ -445,7 +445,7 @@
 444#£Erscheinen.
 445#£breit
 446#£Berechnen
-447#£Locker
+447#£Lšsen
 448#£Maxima-Befehl
 449#£Gleichung(en) mit numerischer Methode lšsen
 450#£Variablen eliminieren
@@ -455,7 +455,7 @@
 454#£Funktion definieren
 455#£Physikalische Konstanten definieren
 456#£Umschreiben
-457#£Unendlich.
+457#£
 458#£Unterscheidungsmerkmale
 459#£Trunk-Funktion
 460#£Grafik
@@ -539,9 +539,9 @@
 538#£WŠhlen Sie die zu unterscheidenden AusdrŸcke aus, oder platzieren Sie den Cursor im Ausdruck.
 539#£Trunk-Funktion
 540#£Sucht die Stammfunktion fŸr ausgewŠhlte AusdrŸcke (unbestimmte Integrale).
-541#£
-542#£
-543#£
+541#£Einstellungen importieren
+542#£Export-Einstellungen
+543#£MenŸ "Anpassen"
 544#£
 545#£Diagramm anzeigen (ALT+P)
 546#£Zeigt das Diagramm fŸr die ausgewŠhlten Funktionen/Gleichungen/Gleichungen und Punkte an. Das Diagramm kann anschlie§end in das Dokument eingefŸgt werden. Es werden verschiedene Grafikprogramme unterstŸtzt. WŠhlen Sie Ihren Favoriten in den Einstellungen aus oder wŠhlen Sie aus, indem Sie diese SchaltflŠche erweitern
@@ -686,12 +686,12 @@
 685#£Das Problem konnte nicht gelšst werden.\r\nMšchten Sie eine andere Methode oder CAS-Engine ausprobieren?
 686#£CAS-Motor
 687#£Signifikante Ziffern
-688#£Ein-/Ausschalten von GerŠten
+688#£Ein-/Ausschalten von einheiten
 689#£Wenn Einheiten aktiviert sind, kann WordMat Einheiten verstehen und umrechnen. Auf der SchaltflŠche SI kšnnen Sie angeben, in welche Einheiten Sie umrechnen mšchten. StandardmŠ§ig erfolgt die Ausgabe in SI-Einheiten. Schalten Sie GerŠte nur ein, wenn Sie sie speziell benštigen. Es kann das Verhalten der WordMat beeinflussen und reserviert viele Variablen.
-690#£AusgabegerŠte
+690#£Codefeld einfŸgen
 691#£Geben Sie an, in welche Einheiten fŸr Berechnungen umgerechnet werden soll. StandardmŠ§ig erfolgt die Ausgabe in SI-Einheiten
-692#£V. Chr
-693#£GerŠte
+692#£sz
+693#£Ein Codefeld ist ein Bereich, in dem Sie Maxima direkt programmieren kšnnen. So kšnnen Sie z.B. weitergehende Funktionen definieren, die dann weiter unten im Dokument verwendet werden kšnnen. Weitere Informationen finden Sie im Handbuch.
 694#£Anzahl der Ziffern
 695#£Rundung von Zahlen
 696#£WŠhlen Sie aus, wie Zahlen geschrieben und gerundet werden. In den folgenden Beispielen ist WordMat auf 3 Ziffern eingestellt.\r\n\r\nAnzahl der Dezimalstellen: 12.345\r\nWichtige Stellen: 12,3\r\nVid. Notation: 1,23*10^1
@@ -713,7 +713,7 @@
 712#£Automatisch
 713#£Sehr hohe PrŠzision (beta)
 714#£ErklŠrung einfŸgen
-715#£Befehl "Maxima einfŸgen"
+715#£Befehl von Maxima einfŸgen
 716#£Trennzeichen
 717#£Liste
 718#£Multiplikationszeichen
@@ -726,7 +726,7 @@
 725#£Ist Liste/Matrixindex
 726#£Standard-Grafiksoftware
 727#£Eingebettete Excel-Tabelle einfŸgen
-728#£AusgabegerŠte
+728#£
 729#£Geben Sie an, welche Einheiten in der Ausgabe durch Komma\nBeispiele getrennt sein sollen:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nWenn nichts angegeben ist, werden alle Einheiten als Basis-SI-Einheiten oder abgeleitete SI-Einheiten ohne PrŠfix zurŸckgegeben.
 730#£Beispiele fŸr unterstŸtzte Einheiten:\n(Weitere Informationen finden Sie im Handbuch)\n\nLŠnge: cm, AU, ly, pc\nMasse: u, G, mg\nZeit: min, Stunden, Tage, Jahre\nFrequenz: Hz, Bq\nEnergie: kWh, eV, aJ\nDruck: Bar, mmHg, atm, trocken
 731#£Trignonometrische Gleichungen
@@ -809,7 +809,7 @@
 808#£Hilfe
 809#£Manuell
 810#£Handbuch als Word-Dokument
-811#£Handbuch fŸr die Online-Website
+811#£Dokumentation der Website
 812#£†ber
 813#£Aktualisieren
 814#£AbkŸrzungen
@@ -901,3 +901,11 @@
 900#£Bedingungen fŸr die Lšsung:
 901#£Sie mŸssen zuerst eine Liste auswŠhlen, z.B. [1; 2; 3]
 902#£Vielleicht hast du n und r in K(n, r) vertauscht?
+903#£Code-Datei
+904#£Codedatei anwenden
+905#£Codefelder zulassen
+906#£Der Text in der Codedatei wird bei jedem Start in Maxima ausgefŸhrt. Sie kšnnen es zum Beispiel verwenden, um Funktionen zu definieren, die Sie immer in WordMat zur VerfŸgung haben mšchten, oder um Einstellungen in Maxima zu Šndern. Die Verwendung der Codedatei macht die Berechnungen etwas langsamer. \nCodefelder kšnnen Ÿber das DefinitionsmenŸ eingefŸgt werden und sind Felder im Word-Dokument, in die Sie den maximalen Code einfŸgen kšnnen, der bei jeder Berechnung ausgefŸhrt wird. Der Code in der Codedatei und in den Codefeldern wird unverarbeitet direkt an Maxima gesendet. Jeder Codefehler fŸhrt dazu, dass WordMat alle Berechnungen nicht bestehen kann, also seien Sie vorsichtig. Schauen Sie im MenŸ unter Hilfe > Manuell > Hilfe mit Maxima-Befehlen nach der korrekten Maxima-Syntax.
+907#£Geben Sie hier den Maxima-Code ein
+908#£Sie haben die Codefelder in "Einstellungen > Code" nicht aktiviert. Das Codefeld wird eingefŸgt, aber erst dann in Berechnungen verwendet, wenn es aktiviert ist.
+909#£Code
+910#£Hier konnte kein Codefeld eingefŸgt werden.

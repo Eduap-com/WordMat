@@ -40,7 +40,7 @@
 39#£Vartotojo apibrezta regresija
 40#£Funkcija
 41#£Desimtaines trupmenos
-42#£Pradeti spejima (pvz.: a=2 , c=10)
+42#£Pradeti spejima
 43#£Tikslumas nustatytas labai aukstai. Skaiciavimo laikas gali buti labai ilgas arba sukelti klaida. Jei tai nepadeda, isbandykite zemesni nustatyma.
 44#£Tikslumas nustatytas gana didelis. Skaiciavimo laikas gali buti gana ilgas arba sukelti klaida. Jei tai nepadeda, isbandykite zemesni nustatyma.
 45#£Tikslumas negali buti neigiamas. Teigiamo sveikojo skaiciaus pasirinkimas
@@ -113,7 +113,7 @@
 112#£Nepavyksta prisijungti prie serverio
 113#£Sioje dokumento vietoje apibreziama:
 114#£Sioje dokumento vietoje nera jokiu apibrezimu.
-115#£
+115#£turi keleta neapibreztu kintamuju. Nepriklausomo kintamojo nustatyti negalima. Naudokite x arba t kaip nepriklausoma kintamaji.
 116#£Negalite apibrezti isvestines priemones\r\nPasalinkite apibrezima: \r\n
 117#£Apibrezime yra klaida:
 118#£Jo nepaisoma, taciau istaisykite ivesties klaida, kad isvengtumete sios isvesties klaidos
@@ -326,9 +326,9 @@
 325#£Spartusis klavisas Alt + M iterpia nauja matematika
 326#£Spartusis klavisas AltGr + Enter apskaiciuoja
 327#£Spartusis klavisas Alt + E Issprendzia lygti
-328#£Spartusis klavisas Alt + S atidaro nustatymus
+328#£Spartusis klavisas Alt + j atidaro nustatymus
 329#£Spartusis klavisas Alt + R Iterpia ankstesni rezultata
-330#£Spartusis klavisas Alt + U Ijungia irenginio palaikyma
+330#£Isvesties spalva
 331#£apatinis indeksas:
 332#£\lambda yra trumpinys is mazos graikiskos raides lambda
 333#£Spartusis klavisas Alt + P Nubraizo grafika
@@ -455,7 +455,7 @@
 454#£Apibrezti funkcija
 455#£Fiziniu konstantu apibrezimas
 456#£Sumazinti
-457#£Begalybes.
+457#£
 458#£Atskirti
 459#£Integruoti
 460#£Braizymo
@@ -539,9 +539,9 @@
 538#£Pazymeti israiska, kad atskirtumete arba perkeltumete zymikli i israiska
 539#£Integruoti
 540#£Nustato neapibrezta funkcijos integrala
-541#£
-542#£
-543#£
+541#£Importavimo parametrai
+542#£Eksportuoti parametrus
+543#£Tinkinimo meniu
 544#£
 545#£Braizymo grafikas (Alt + P)
 546#£Rodomas pasirinktos (-u) funkcijos (-u) / lygties (-ciu) ir tasku grafikas. Tada grafika galima iterpti i dokumenta. Palaikomos kelios grafiku programos. Nustatymuose pasirinkite savo megstamiausia.
@@ -688,10 +688,10 @@
 687#£Reiksmingi skaiciai
 688#£Vienetu ijungimas / isjungimas
 689#£Jei vienetai ijungti, WordMath kan interpretuoja ir konvertuoja vienetus. SI mygtuke galite pakeisti isvesties vienetus. Neijunkite irenginiu, nebent jums to reikia. Tai gali tureti itakos WordMat elgesiui ir pasilieka daug kintamuju.
-690#£Isvesties vienetai
+690#£Iterpti kodo lauka
 691#£Nurodykite vienetus, i kuriuos norite konvertuoti. Pagal numatytuosius nustatymus isvesties vienetai yra SI vienetai.
-692#£SF
-693#£Vienetu
+692#£rs
+693#£Kodo laukas yra sritis, kurioje galite tiesiogiai programuoti "Maxima". Pavyzdziui, galite apibrezti isplestines funkcijas, kurias veliau galima naudoti toliau dokumente. Daugiau informacijos rasite vadove.
 694#£Ne. skaiciu
 695#£Apvalinimo
 696#£Pasirinkite, kaip skaiciai bus fomatuojami ir apvalinami. Toliau pateiktuose pavyzdziuose WordMat nustatyta i 3 paveikslus\r\n\r\nDecimals: 12,345\r\nReiksmingi skaiciai: 12,3\r\nSci. zymejimas: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Is list/matrix indeksas
 726#£Standartine grafiku programa
 727#£"Excel" lapu idejimas
-728#£Isvesties vienetai
+728#£
 729#£Valstybes isvesties vienetai, atskirti kableliais\npavyzdziais:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJei nieko nenurodyta, vienetai grazinami pagrindiniais SI vienetais arba SI isvestiniais vienetais be priesdelio.
 730#£Palaikomu vienetu pavyzdziai:\n(Daugiau zr. vadova)\n\nIlgis: cm , AU, ly, pc\nMass: u , G, mg\nFrequency: Hz , Bq\nEnergy: kWh , eV, aJ\nPressure: Bar , mmHg, atm, torr
 731#£Trigonometrines lygtys
@@ -809,7 +809,7 @@
 808#£Pagalba
 809#£Vadovas
 810#£Vadovas kaip "Word" dokumentas
-811#£Internetinio tinklalapio vadovas
+811#£Svetaines dokumentacija
 812#£Apie
 813#£Naujinti
 814#£Nuorodos
@@ -901,3 +901,11 @@
 900#£Sprendimo salygos:
 901#£Pirmiausia turite pasirinkti sarasa, pvz., [1; 2; 3]
 902#£Gal sukeitete n ir r i K(n, r)?
+903#£Kodo failas
+904#£Taikyti kodo faila
+905#£Leisti kodo laukus
+906#£Kodo failo tekstas "Maximoje" paleidziamas kiekvieno paleidimo metu. Pavyzdziui, galite ji naudoti noredami apibrezti funkcijas, kurias visada norite tureti "WordMat", arba pakeisti nustatymus "Maxima". Naudojant kodo faila, skaiciavimai bus siek tiek letesni. \nKodo laukus galima iterpti per apibrezimo meniu ir tai yra "Word" dokumento laukai, kuriuose galite iterpti maksimalu koda, kuris vykdomas kiekvieno skaiciavimo metu. Kodas kodo faile ir kodo laukuose siunciamas tiesiai i "Maxima" neperdirbtas. Del bet kokios kodo klaidos "WordMat" nepavyks atlikti visu skaiciavimu, todel saugokites. Noredami rasti teisinga "Maxima" sintakse, ziurekite meniu, esanciame skiltyje "Zinynas > Vadovas > pagalba su "Maxima" komandomis.
+907#£Iveskite "Maxima" koda cia
+908#£Neijungete kodo lauku skiltyje "Nustatymai > kodas". Kodo laukas iterpiamas, bet nebus naudojamas skaiciavimuose, kol jis nebus ijungtas.
+909#£Kodas
+910#£Cia nepavyko iterpti kodo lauko.

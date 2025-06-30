@@ -40,7 +40,7 @@
 39#£Régression définie par l'utilisateur
 40#£Fonction
 41#£Décimales
-42#£Commencer à deviner (ex. : a=2 , c=10)
+42#£Commencer à deviner
 43#£La précision est réglée très haut. Le temps de calcul peut être très long ou provoquer une erreur. Si cela ne fonctionne pas, essayez un réglage inférieur.
 44#£La précision est assez élevée. Le temps de calcul peut être assez long ou provoquer une erreur. Si cela ne fonctionne pas, essayez un réglage inférieur.
 45#£La précision ne peut pas être négative. Choisissez un entier positif
@@ -113,7 +113,7 @@
 112#£Impossible de se connecter au serveur
 113#£À cet endroit du document, on définit ce qui suit
 114#£Il n'y a pas de définitions à cet endroit dans le document.
-115#£
+115#£comporte plusieurs variables indéfinies. La variable indépendante ne peut pas être identifiée. Utilisez x ou t comme variable indépendante.
 116#£Vous ne pouvez pas définir une dérivée\r\nSupprimez la définition : \r\n
 117#£Il y a une erreur dans la définition :
 118#£Elle est ignorée, mais corrigez l'erreur d'entrée pour éviter cette erreur de sortie
@@ -326,9 +326,9 @@
 325#£Raccourci Alt + M insère de nouvelles mathématiques
 326#£Raccourci AltGr + Entrée calcule
 327#£Raccourci Alt + E Résout l'équation
-328#£Le raccourci Alt + S ouvre les paramètres
+328#£Le raccourci Alt + j ouvre les paramètres
 329#£Raccourci Alt + R Inserts résultat précédent
-330#£Raccourci Alt + U Permet d'activer la prise en charge de l'unité
+330#£Couleur de la sortie
 331#£indice:
 332#£\lambda est l'abréviation de la petite lettre grecque lambda
 333#£Raccourci Alt + P Trace un graphique
@@ -455,7 +455,7 @@
 454#£Définir la fonction
 455#£Définir des constantes physiques
 456#£Réduire
-457#£Infinis.
+457#£
 458#£Différencier
 459#£Intégrer
 460#£Tracé
@@ -539,9 +539,9 @@
 538#£Sélectionnez l'expression à différencier ou placez le curseur dans l'expression
 539#£Intégrer
 540#£Détermine l'intégrale indéfinie de la fonction
-541#£
-542#£
-543#£
+541#£Paramètres d'importation
+542#£Paramètres d'exportation
+543#£Personnaliser le menu
 544#£
 545#£Graphique de tracé (Alt+P)
 546#£Affiche le graphique de la ou des fonctions/équations sélectionnées et des points. Le graphique peut ensuite être inséré dans le document. Plusieurs programmes graphiques sont pris en charge. Choisissez votre favori sous les paramètres.
@@ -688,10 +688,10 @@
 687#£Des chiffres significatifs
 688#£Allumer/éteindre les unités
 689#£Si les unités sont activées, WordMath peut interpréter et convertir les unités. Sur le bouton SI, vous pouvez changer les unités de sortie. N'allumez pas les appareils, sauf si vous en avez besoin. Il peut affecter le comportement de WordMat et réserve beaucoup de variables.
-690#£Unités de sortie
+690#£Insérer le champ de code
 691#£Indiquez les unités à convertir. Par défaut, les unités de sortie sont des unités SI.
-692#£Sf
-693#£Unités
+692#£cs
+693#£Un champ de code est une zone où vous pouvez programmer Maxima directement. Par exemple, vous pouvez définir des fonctions plus avancées, qui peuvent ensuite être utilisées plus bas dans le document. Voir plus dans le manuel.
 694#£Non. de chiffres
 695#£Arrondi
 696#£Choisissez comment les nombres sont affinés et arrondis. Dans les exemples ci-dessous, WordMat est défini sur 3 chiffres\r\n\r\nDécimales : 12 345\r\nChiffres significatifs : 12,3\r\nSci. Notation : 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Est un index de liste/matrice
 726#£Programme graphique standard
 727#£Intégrer des feuilles Excel
-728#£Unités de sortie
+728#£
 729#£Unités de sortie d'état séparées par des virgules\nexemples :\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nSi rien n'est indiqué, les unités sont renvoyées en unités SI de base ou en unités dérivées de SI sans préfixe.
 730#£Exemples d'unités prises en charge :\n(Voir le manuel pour plus d'informations)\n\nLongueur : cm , AU, ly, pc\nMasse : u , G, mg\nFréquence : Hz , Bq\nÉnergie : kWh , eV, aJ\nPression : Bar , mmHg, atm, torr
 731#£Équations trigonométriques
@@ -809,7 +809,7 @@
 808#£Aide
 809#£Manuelle
 810#£Manuel sous forme de document Word
-811#£Manuel de la page Web en ligne
+811#£Documentation du site web
 812#£Environ
 813#£Mettre à jour
 814#£Raccourcis
@@ -901,3 +901,11 @@
 900#£Conditions de la solution :
 901#£Vous devez d'abord sélectionner une liste, par exemple [1 ; 2 ; 3]
 902#£Peut-être avez-vous échangé n et r dans K(n, r) ?
+903#£Fichier de code
+904#£Appliquer le fichier de code
+905#£Autoriser les champs de code
+906#£Le texte du fichier de code est exécuté dans Maxima à chaque démarrage. Par exemple, vous pouvez l'utiliser pour définir des fonctions que vous souhaitez toujours avoir à disposition dans WordMat, ou pour modifier les paramètres dans Maxima. L'utilisation du fichier de code rendra les calculs un peu plus lents. \nLes champs de code peuvent être insérés via le menu de définition et sont des champs dans le document Word où vous pouvez insérer le code maximum, qui est exécuté à chaque calcul. Le code dans le fichier de code et les champs de code sont envoyés directement à Maxima sans être traités. Toute erreur de code entraînera l'échec de tous les calculs de WordMat, alors méfiez-vous. Pour connaître la syntaxe correcte de Maxima dans le menu sous Aide > Manuel > Aide avec les commandes Maxima.
+907#£Entrez le code Maxima ici
+908#£Vous n'avez pas activé les champs de code dans > Paramètres  Code. Le champ de code est inséré, mais ne sera pas utilisé dans les calculs tant qu'il n'est pas activé.
+909#£Code
+910#£Il n'a pas été possible d'insérer un champ de code ici.

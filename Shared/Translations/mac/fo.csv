@@ -40,7 +40,7 @@
 39#£Srsniin afturgongd
 40#£Virka
 41#£Tal av desimalum
-42#£Byrjaandi git (Skriva ’ forminum a=2 ; c=10)
+42#£Byrjaandi git
 43#£Neyvleikin er settur sera h¿gt. Roknit’in kann vera —gvuliga long ella miseydnast. Royn/royni aftur vi l¾gri innstilling.
 44#£Neyvleikin er settur r¾ttiliga h¿gt. òtrokningart’in kann vera long ella skeiv. Royn/royni aftur vi l¾gri innstilling.
 45#£Neyvleikin kann ikki vera neiligur. Vel eitt positivt heltal
@@ -113,7 +113,7 @@
 112#£Kann ikki f‡a samband vi amb¾taran
 113#£ç hesum stainum ’ skjalinum er eftirfarandi skilgreint:
 114#£Ta eru ongar fr‡greiingar ’ hesi l¿tuni ’ skjalinum.
-115#£
+115#£hevur fleiri —defineraar brigdlar. Tann —hefta variabelin kann ikki eymerkjast. Nt/nti x ella t sum —heftu variabelina.
 116#£Tœ kanst ikki lsa eina avleidda funktion.\r\nStrika hesa skilgreiningina: \r\n
 117#£Ta er ein feilur ’ skilgreiningini:
 118#£Ta verur skœgva til viks. Men r¾tta ta, so tœ ikki f¾rt hesa villuna vi hv¿rjari œtrokning.
@@ -326,9 +326,9 @@
 325#£Alt+M snarvegurin setur eitt ntt st¿ddfr¿i¿ki inn
 326#£Snarvegurin AltGr + Enter roknar œt
 327#£Snarvegurin Alt + L loysir l’kningina
-328#£Alt+ snarvegurin ’ opnar Stillingar
+328#£Alt+j snarvegurin ’ opnar Stillingar
 329#£Alt+r snarvegurin tekur fram fyrri œrslit
-330#£Alt+E snarvegur tendrar/sl¿kkir t—l
+330#£Litur ‡ œttaki
 331#£Undirskrift:
 332#£\lambda gevur l’tlan grikskan b—kstav
 333#£Alt+P snarvegurin v’sir grafin ’ eini forskrift
@@ -455,7 +455,7 @@
 454#£Ls funktion
 455#£Ls likamligar konstantir
 456#£Skriva um
-457#£îendaligt.
+457#£
 458#£Differentiatorar
 459#£Trunk funktion
 460#£Graf
@@ -539,9 +539,9 @@
 538#£Vel oratilt¾ki at skilja ’millum, ella set/seti bendilin ’ oralagi.
 539#£Trunk funktion
 540#£Finnur stamvirki fyri valdar oringar (—‡kvein integral).
-541#£
-542#£
-543#£
+541#£Flyt inn stillingar
+542#£Flyt œt stillingar
+543#£Tillaga matseilin
 544#£
 545#£Skoa graf (Alt+P)
 546#£V’sir grafin fyri valdar funkti—nir/l’kningar/l’kningar og punkt. Grafin kann s’ani setast inn ’ skjali. Ymisk grafforrit eru stula. Vel t’n yndis ’ stillingunum ella velji vi at v’ka henda kn¿ttin
@@ -688,10 +688,10 @@
 687#£Tdningarmikil talt¿l
 688#£Tendra/sl¿kkja t—l
 689#£Um eindir eru tendraar, kann WordMat skilja og umseta eindir. ç SI-kn¿ttinum kanst tœ lsa, hv¿rjar eindir tœ vilt broyta til. Sum standard er œttaki ’ SI-eindum. Tendra/Tendri ikki t—l, uttan so at t¾r serliga t¿rvar ta. Ta kann ‡virka atburin hj‡ WordMat og goymir n—gvar brigdlar.
-690#£òttaks t—l
+690#£Seta k—afelt inn
 691#£Ls hv¿rjar eindir tœ skal umseta til til œtrokningar. Sum standard er œttaki ’ SI-eindum
-692#£Bc
-693#£T—l
+692#£tt
+693#£Eitt k—afelt er eitt ¿ki, har tœ kanst forrita Maxima beinleiis. Til d¿mis kanst tœ lsa meira framkomnar funkti—nir, sum s’an kunnu ntast longri niri ’ skjalinum. Sj‡ meira ’ handb—kini.
 694#£Tal av talteknum
 695#£Avrunding av tali
 696#£Vel hvussu t¿l skulu skrivast og rundast av. ê d¿munum nianfyri er WordMat sett til 3 tal.\r\n\r\nTal av desimalpl‡ssum: 12,345\r\nTdningarmikil tal: 12,3\r\nVid. Notan: 1.23*10^1
@@ -726,7 +726,7 @@
 725#£Er listi/matrix index
 726#£Standard grafforrit
 727#£Seta Excel-ark innlagt
-728#£òttaks t—l
+728#£
 729#£Specificera vilka enheter som ska vara i utdata separerade med komma\nexempel:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nOm inget Šr specificerat, returneras allar eindir som grund-SI-eindir ella avleiddar SI-eindir uttan forskeyt.
 730#£D¿mi um stulaar eindir:\n(S’ handb—k fyri meira)\n\nLongd: cm , AU, ly, pc\nMassi: u , G, mg\nT’: min , T’mar, dagar, ‡r\nFrekvens: Hz , Bq\nOrka: kWh , eV, aJ\nTrst: Bar , mmHg, atm, turt
 731#£Trignonometriskar l’kningar
@@ -809,7 +809,7 @@
 808#£Hj‡lp
 809#£Handb—k
 810#£Handb—k sum Word skjal
-811#£Handb—k um heimas’u ‡ netinu
+811#£Skjalfesting ‡ heimas’u
 812#£Um
 813#£Dagf¿ring
 814#£Snarvegir
@@ -901,3 +901,11 @@
 900#£Loysn treytir:
 901#£Tœ m‡st velja ein lista fyrst, t.d. [1; 2; 3]
 902#£Kanska hevur tœ btt um n og r ’ K(n, r)?
+903#£K—a f’la
+904#£Brœka k—af’lu
+905#£Loyva k—afeltum
+906#£Teksturin ’ k—af’luni verur koyrdur ’ Maxima vi hv¿rja byrjan. Til d¿mis kanst tœ brœka ta til at lsa funkti—nir, tœ alt’ vilt hava t¿kar ’ WordMat, ella til at broyta stillingar ’ Maxima. Um tœ ntir k—af’luna, verur œtrokningin eitt sindur spakuligari. \nK—areitir kunnu setast inn ’gj¿gnum skilgreiningarvalmyndina og eru reitir ’ Word-skjalinum, har tœ kanst seta h‡marksk—an, sum verur koyrdur vi hv¿rja œtrokning. K—i ’ k—af’luni og k—afeltunum vera send beinleiis til Maxima —vigj¿rd. Ein og hv¿r kodevilla fer at gera, at WordMat dumpar allar œtrokningar, so ansa eftir. Hygg ’ matskr‡na undir Hj‡lp > Handb—k > Hj‡lp vi maksima-kommandoum, eftir r¾ttari maksima-setningaskipan.
+907#£Skriva Maxima k—a her
+908#£Tœ hevur ikki tendra k—afeltir ’ 'Stillingar > k—a'. Kodumarki er sett inn, men verur ikki brœkt ’ œtrokningum, fyrr enn ta er tendra.
+909#£K—i
+910#£Eitt kodefelt kundi ikki setast inn her.

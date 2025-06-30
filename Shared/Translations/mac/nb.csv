@@ -40,7 +40,7 @@
 39#£Egendefinert regresjon
 40#£Funksjon
 41#£Antall desimaler
-42#£Startgjetning (Skrevet i formen a=2 ; c=10)
+42#£Startgjetning
 43#£Presisjonen er satt veldig h¿yt. Beregningstiden kan v¾re veldig lang eller mislykkes. Pr¿v igjen med en lavere innstilling.
 44#£Presisjonen er satt ganske h¿yt. Beregningstiden kan v¾re lang eller feil. Pr¿v igjen med en lavere innstilling.
 45#£Presisjonen kan ikke v¾re negativ. Velg et positivt heltall
@@ -113,7 +113,7 @@
 112#£Kan ikke koble til serveren
 113#£PŒ dette punktet i dokumentet er f¿lgende definert:
 114#£Det er ingen definisjoner pŒ dette punktet i dokumentet.
-115#£
+115#£har flere udefinerte variabler. Den uavhengige variabelen kan ikke identifiseres. Bruk x eller t som den uavhengige variabelen.
 116#£Du kan ikke definere en avledet funksjon.\r\nFjern f¿lgende definisjon: \r\n
 117#£Det er en feil i definisjonen:
 118#£Det blir ignorert. Men fiks det slik at du ikke fŒr denne feilen med hver beregning.
@@ -326,9 +326,9 @@
 325#£Alt+M-snarveien setter inn et nytt matematisk felt
 326#£AltGr + Enter-snarveien beregner
 327#£Snarveien Alt + L l¿ser ligningen
-328#£Alt+-snarveien Œpner Innstillinger
+328#£Alt+j-snarveien Œpner Innstillinger
 329#£Alt+r-snarveien henter tidligere resultater
-330#£Alt+E-snarvei slŒr enheter pŒ/av
+330#£Farge pŒ utgang
 331#£Senket skrift:
 332#£\lambda gir liten gresk bokstav
 333#£Alt+P-snarveien viser grafen til en forskrift
@@ -455,7 +455,7 @@
 454#£Definer funksjon
 455#£Definere fysiske konstanter
 456#£Omskrivning
-457#£Uendelig.
+457#£
 458#£Differensiatorer
 459#£Trunk funksjon
 460#£Grafisk
@@ -539,9 +539,9 @@
 538#£Velg uttrykk for Œ differensiere, eller plasser mark¿ren i uttrykket.
 539#£Trunk funksjon
 540#£Finner stamfunksjon for valgte uttrykk (ubestemte integraler).
-541#£
-542#£
-543#£
+541#£Importer innstillinger
+542#£Eksporter innstillinger
+543#£Tilpass meny
 544#£
 545#£Vis graf (Alt+P)
 546#£Viser grafen for de valgte funksjonene/ligningene/ligningene og punktene. Grafen kan deretter settes inn i dokumentet. Ulike grafiske programmer st¿ttes. Velg din favoritt i innstillingene eller velg ved Œ utvide denne knappen
@@ -688,10 +688,10 @@
 687#£Viktige sifre
 688#£SlŒ enheter pŒ/av
 689#£Hvis enheter er aktivert, kan WordMat forstŒ og konvertere enheter. PŒ SI-knappen kan du spesifisere hvilke enheter du vil konvertere til. Som standard er utgangen i SI-enheter. Ikke slŒ pŒ enheter med mindre du spesifikt trenger det. Det kan pŒvirke WordMats oppf¿rsel og reserverer mange variabler.
-690#£Utgang enheter
+690#£Sett inn kodefelt
 691#£Angi hvilke enheter som skal konverteres til for beregninger. Som standard er utgangen i SI-enheter
-692#£F.Kr
-693#£Enheter
+692#£vs
+693#£Et kodefelt er et omrŒde hvor du kan programmere Maxima direkte. Du kan for eksempel definere mer avanserte funksjoner, som deretter kan brukes lenger ned i dokumentet. Se mer i hŒndboken.
 694#£Antall sifre
 695#£Avrunding av tall
 696#£Velg hvordan tall skrives og avrundes. I eksemplene nedenfor er WordMat satt til 3 sifre.\r\n\r\nAntall desimaler: 12,345\r\nSignifikante sifre: 12,3\r\nVid. Notasjon: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Er liste-/matriseindeks
 726#£Standard programvare for graftegning
 727#£Sett inn innebygd Excel-ark
-728#£Utgang enheter
+728#£
 729#£Spesifiser hvilke enheter som skal v¾re i utdata atskilt med komma\neksempler:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nHvis ingenting er spesifisert, vil alle enheter bli returnert som grunnleggende SI-enheter eller avledede SI-enheter uten prefiks.
 730#£Eksempler pŒ st¿ttede enheter:\n(Se bruksanvisningen for mer)\n\nLengde: cm , AU, ly, pc\nMasse: u , G, mg\nTid: min , Timer, dager, Œr\nFrekvens: Hz , Bq\nEnergi: kWh , eV, aJ\nTrykk: Bar , mmHg, atm, t¿rr
 731#£Trignonometriske ligninger
@@ -809,7 +809,7 @@
 808#£Hjelp
 809#£HŒndbok
 810#£HŒndbok som Word-dokument
-811#£HŒndbok for nettbasert nettsted
+811#£Dokumentasjon av nettstedet
 812#£Om
 813#£Oppdatering
 814#£Snarveier
@@ -901,3 +901,11 @@
 900#£L¿sningens betingelser:
 901#£Du mŒ velge en liste f¿rst, for eksempel [1; 2; 3]
 902#£Kanskje du har byttet n og r i K(n, r)?
+903#£Kodefil
+904#£Bruk kodefil
+905#£Tillat kodefelt
+906#£Teksten i kodefilen kj¿res i Maxima ved hver oppstart. Du kan for eksempel bruke den til Œ definere funksjoner du alltid vil ha tilgjengelig i WordMat, eller til Œ endre innstillinger i Maxima. Bruk av kodefilen vil gj¿re beregningene litt tregere. \nKodefelt kan settes inn via definisjonsmenyen, og er felt i Word-dokumentet hvor du kan sette inn maksimumskoden, som kj¿res ved hver beregning. Kode i kodefilen og kodefeltene sendes direkte til Maxima ubehandlet. Enhver kodefeil vil f¿re til at WordMat mislykkes i alle beregninger, sŒ pass pŒ. Se i menyen under Hjelp > Manuell > Hjelp med maksimakommandoer, for riktig maksimasyntaks.
+907#£Skriv inn Maxima-kode her
+908#£Du har ikke slŒtt pŒ kodefelt i ÇInnstillinger > kodeÈ. Kodefeltet settes inn, men vil ikke bli brukt i beregninger f¿r det er aktivert.
+909#£Kode
+910#£Et kodefelt kan ikke settes inn her.

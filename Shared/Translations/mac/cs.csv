@@ -40,7 +40,7 @@
 39#£Uzivatelsky definovan‡ regrese
 40#£Funkce
 41#£Desetinn‡ c’sla
-42#£Poc‡tecn’ odhad (napr.: a=2, c=10)
+42#£Poc‡tecn’ odhad
 43#£Presnost je nastavena velmi vysoko. Doba vpoctu muze bt velmi dlouh‡ nebo muze zpusobit chybu. Pokud to nevyjde, zkuste nizs’ nastaven’.
 44#£Presnost je nastavena pomerne vysoko. Doba vpoctu muze bt pomerne dlouh‡ nebo muze zpusobit chybu. Pokud to nevyjde, zkuste nizs’ nastaven’.
 45#£Presnost nemuze bt z‡porn‡. Volba kladnŽho celŽho c’sla
@@ -113,7 +113,7 @@
 112#£Nelze se pripojit k serveru
 113#£Na tomto m’ste dokumentu je definov‡no n‡sleduj’c’
 114#£Na tomto m’ste dokumentu nejsou z‡dnŽ definice.
-115#£
+115#£m‡ nekolik nedefinovanch promennch. Nez‡vislou promennou nelze identifikovat. Jako nez‡vislou promennou pouzijte x nebo t.
 116#£Odvozeninu nelze definovat\r\nOdstrante definici: \r\n
 117#£V definici je chyba:
 118#£Ignoruje se, ale oprav’ chybu vstupu, aby se zabr‡nilo tŽto chybe vstupu
@@ -326,9 +326,9 @@
 325#£Kl‡vesov‡ zkratka Alt + M vloz’ novou matematiku
 326#£Kl‡vesov‡ zkratka AltGr + Enter vypoc’t‡
 327#£Kl‡vesov‡ zkratka Alt + E Vyres’ rovnici
-328#£Kl‡vesov‡ zkratka Alt + S otevre nastaven’
+328#£Kl‡vesov‡ zkratka Alt + j otevre nastaven’
 329#£Kl‡vesov‡ zkratka Alt + R Vloz’ predchoz’ vsledek
-330#£Kl‡vesov‡ zkratka Alt + U Zapne podporu jednotek
+330#£Barva vstupu
 331#£doln’ index:
 332#£\lambda je zkratka pro malŽ reckŽ p’smeno lambda
 333#£Kl‡vesov‡ zkratka Alt + P Vykresl’ graf
@@ -455,7 +455,7 @@
 454#£Definovat funkci
 455#£Definov‡n’ fyzik‡ln’ch konstant
 456#£Zmensit
-457#£Nekonecna.
+457#£
 458#£Rozlisovat
 459#£Integrovat
 460#£Parcelov‡n’
@@ -539,9 +539,9 @@
 538#£Vyberte vraz, kter chcete odlisit, nebo um’stete kurzor do vrazu
 539#£Integrovat
 540#£Urcuje neurcit integr‡l funkce
-541#£
-542#£
-543#£
+541#£Importovat nastaven’
+542#£Nastaven’ exportu
+543#£Prizpusobit menu
 544#£
 545#£Vykreslovac’ graf (Alt+P)
 546#£Zobrazuje graf pro vybranou funkci/rovnici a body. Graf je pak moznŽ vlozit do dokumentu. Podporov‡no je nekolik grafickch programu. V nastaven’ vyberte svou obl’benou polozku.
@@ -688,10 +688,10 @@
 687#£VznamnŽ œdaje
 688#£Zapnut’/vypnut’ jednotek
 689#£Pokud jsou zapnuty jednotky, muze aplikace WordMath interpretovat a prev‡det jednotky. Na tlac’tku SI muzete menit vstupn’ jednotky. Nezap’nejte jednotky, pokud to nepotrebujete. To muze ovlivnit chov‡n’ WordMat a vyhrazuje si mnoho promennch.
-690#£Vstupn’ jednotky
+690#£Vlozit pole s k—dem
 691#£Uvedte jednotky, na kterŽ chcete prevŽst. Ve vchoz’m nastaven’ jsou vstupn’ jednotky jednotky SI.
-692#£Sf
-693#£Jednotky
+692#£vœ
+693#£Pole k—du je oblast, ve kterŽ muzete pr’mo programovat Maxima. Muzete napr’klad definovat pokrocilejs’ funkce, kterŽ pak muzete pouz’t n’ze v dokumentu. V’ce v manu‡lu.
 694#£Ne. c’sel
 695#£Zaokrouhlen’
 696#£Vyberte, jak se maj’ c’sla zaokrouhlovat a zaokrouhlovat. V n’ze uvedench pr’kladech je WordMat nastaven na 3 c’sla\r\n\r\nDesetinn‡ c’sla: 12,345\r\nVznamn‡ c’sla: 12,3\r\nSci. Z‡pis: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Je index seznamu/matice
 726#£Standardn’ grafick program
 727#£Vlozen’ listu aplikace Excel
-728#£Vstupn’ jednotky
+728#£
 729#£StavovŽ vstupn’ jednotky oddelenŽ c‡rkou\npr’klady:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nPokud nen’ nic uvedeno, jednotky jsou vr‡ceny v z‡kladn’ch jednotk‡ch SI nebo jednotk‡ch odvozench od SI bez predpony.
 730#£Pr’klady podporovanch jednotek:\n(V’ce viz manu‡l)\n\nDŽlka: cm , AU, ly, pc\nHmotnost: u , G, mg\nFrekvence: Hz , Bq\nEnergie: kWh , eV, aJ\nTlak: Bar , mmHg, atm, torr
 731#£GoniometrickŽ rovnice
@@ -809,7 +809,7 @@
 808#£Pomoc
 809#£Manu‡l
 810#£Manu‡l jako dokument aplikace Word
-811#£Online webov‡ str‡nka Manu‡l
+811#£Dokumentace webovch str‡nek
 812#£Asi
 813#£Aktualizace
 814#£Zkratky
@@ -901,3 +901,11 @@
 900#£Podm’nky resen’:
 901#£Nejprve mus’te vybrat seznam, napr. [1; 2; 3]
 902#£Mozn‡ jste zamenili n a r v K(n, r)?
+903#£Soubor k—du
+904#£Pouzit’ souboru k—du
+905#£Pole k—du povolen’
+906#£Text v souboru k—du se spoust’ v Maxime pri kazdŽm spusten’. Muzete jej pouz’t napr’klad k definov‡n’ funkc’, kterŽ chcete m’t vzdy k dispozici ve WordMatu, nebo ke zmene nastaven’ v Maxima. Pouzit’ souboru s k—dem trochu zpomal’ vpocty. \nPole k—du lze vlozit pomoc’ nab’dky definice a jsou to pole v dokumentu aplikace Word, do kterch muzete vlozit maxim‡ln’ k—d, kter se spoust’ pri kazdŽm vpoctu. K—d v souboru k—du a pol’ch k—du se odes’l‡ pr’mo do spolecnosti Maxima nezpracovan. Jak‡koli chyba k—du zpusob’, ze WordMat selze ve vsech vpoctech, takze si dejte pozor. Pod’vejte se do nab’dky v N‡povede > Manu‡l > N‡poveda k pr’kazum Maxima, kde najdete spr‡vnou syntaxi Maxima.
+907#£Zde zadejte k—d Maxima
+908#£Nezapnuli jste pole k—du v Nastaven’ > k—du. Pole k—du je vlozeno, ale nebude pouzito ve vpoctech, dokud nebude zapnuto.
+909#£K—d
+910#£Sem nelze vlozit pole k—du.

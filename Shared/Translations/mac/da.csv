@@ -22,7 +22,7 @@
 21#£Der er en ny version af WordMat klar til download.\r\nNyheder: \r\n
 22#£Du sendes nu til downloadsiden
 23#£Ny version
-24#£Indtast et antal punkter, sŒ oprettes automatisk en tabel som kan udfyldes med punterne. NŒr du har udfyldt den aktiverer du den ¿nskede regression.
+24#£Indtast et antal punkter, sŒ oprettes en tabel hvor du kan indtaste punkterne.\r\n NŒr du har udfyldt tabellen, v¾lger du den ¿nskede regression fra menuen.
 25#£Det anbefales ikke at lave regression med mere end 200 punkter i en Word-tabel. Brug Excel hvis du vil lave regression pŒ sŒ mange punkter.
 26#£Der skete en fejl. Der er formentlig en fejl i inputtallene.
 27#£Du skal lave en tabel med to kolonner. x-v¾rdier i venstre kolonne og y-v¾rdier i h¿jrekolonne. Bogstaver ignoreres. Der udf¿res regression pŒ de markerede tal. Hvis ingen er markerede udf¿res regression pŒ alle tal i tabellen.
@@ -31,7 +31,7 @@
 30#£Eksponentiel regression udf¿rt vha. WordMat: $Tab
 31#£Potens regression udf¿rt vha. WordMat: $Tab
 32#£Der kan ikke udf¿res potensregression pŒ de punkter. Alle skal v¾re positive og mŒ ikke v¾re 0.
-33#£Brugerdefineret regression med funktionen 
+33#£Brugerdefineret regression med funktionen
 34#£udf¿rt vha. WordMat
 35#£Angiv orden af den polynomiske regression (1-
 36#£(Den maksimale orden bestemmes af antal punkter)
@@ -40,7 +40,7 @@
 39#£Brugerdefineret regression
 40#£Funktion
 41#£Antal decimaler
-42#£Startg¾t (Skrives pŒ formen a=2 ; c=10)
+42#£Startg¾t
 43#£Pr¾cisionen er sat meget h¿jt. Beregningstiden kan blive meget lang eller fejle. Pr¿v evt. igen med en lavere indstilling.
 44#£Pr¾cisionen er sat ret h¿jt. Beregningstiden kan blive lang eller fejle. Pr¿v evt. igen med en lavere indstilling.
 45#£Pr¾cisionen kan ikke v¾re negativ. V¾lg et positivt heltal
@@ -113,7 +113,7 @@
 112#£Der kunne ikke oprettes forbindelse til serveren
 113#£PŒ dette sted i dokumentet er der defineret f¿lgende:
 114#£Der er ingen definitioner pŒ dette sted i dokumentet.
-115#£
+115#£har flere udefinerede variable. Den uafh¾ngige variabel kan ikke identificeres. Brug x eller t som uafh¾ngig variabel.
 116#£Man kan ikke definere en afledet funktion.\r\nFjern f¿lgende definition: \r\n
 117#£Der er en fejl i definitionen: 
 118#£Den ignoreres. Men ret det sŒ du ikke fŒr denne fejl ved hver beregning.
@@ -134,7 +134,7 @@
 133#£Du har bedt om at l¿se ligningen for en variabel der allerede er defineret. Inds¾t en 'slet def:' kommando f¿r ligningen.
 134#£Ligningssystemet l¿ses for 
 135#£ vha. WordMat's 'L¿s Ligninger' funktion, 
-136#£Partnerskab registreret med 
+136#£Partnerskab registreret med
 137#£Ligningssystemet havde ingen l¿sninger indenfor $C for variablene 
 138#£Ligningssystemet havde ingen l¿sninger indenfor $R for variablene 
 139#£Der skal v¾re et ligmed tegn i en ligning.
@@ -145,7 +145,7 @@
 144#£sand
 145#£falsk
 146#£ukendt
-147#£
+147#£WordMat
 148#£Der blev fundet en l¿sning. Der kan dog sagtens v¾re flere l¿sninger.
 149#£Marker kun et udtryk
 150#£Udtrykket omskrives vha. WordMat ved brug af metoderne: 
@@ -326,9 +326,9 @@
 325#£Genvejen   Alt + M   inds¾tter nyt matematikfelt
 326#£Genvejen   AltGr + Enter   beregner
 327#£Genvejen   Alt + L    l¿ser ligning
-328#£Genvejen   Alt + i   Œbner indstillinger
+328#£Genvejen   Alt + j   Œbner indstillinger
 329#£Genvejen   Alt + r   henter forrige resultater
-330#£Genvejen   Alt + E   slŒr enheder til/fra
+330#£Farve pŒ output
 331#£s¾nket skrift: 
 332#£\lambda giver det lille gr¾ske bogstav 
 333#£Genvejen  Alt + P  viser grafen for en forskrift
@@ -455,7 +455,7 @@
 454#£Definer funktion
 455#£Definer fysiske konstanter
 456#£Omskriv
-457#£Infinites.
+457#£
 458#£Differentier
 459#£Stamfunktion
 460#£Graftegning
@@ -539,9 +539,9 @@
 538#£Marker udtryk der skal differentieres, eller placer cursoren i udtrykket.
 539#£Stamfunktion
 540#£Finder stamfunktion til markerede udtryk (ubestemte integrale).
-541#£
-542#£
-543#£
+541#£Importer indstillinger
+542#£Eksporter indstillinger
+543#£Tilpas menu
 544#£
 545#£Vis graf (Alt+P)
 546#£Viser grafen for de(t) valgte funktioner/ligninger og punker. Grafen kan efterf¿lgende inds¾ttes i dokumentet. Der underst¿ttes forskellige grafprogrammer. V¾lg din favorit i indstillinger, eller v¾lg ved at udvide denne knap
@@ -688,10 +688,10 @@
 687#£Betydende cifre
 688#£SlŒ enheder til/fra
 689#£Hvis enheder er slŒet til kan WordMat forstŒ og omregne enheder. PŒ knappen SI kan du angive hvilke enheder du vil have omregnet til. Som standard er output i SI-enheder. SlŒ ikke enheder til hvis du ikke specifikt skal bruge det. Det kan pŒvirke WordMats virkemŒde, og reserverer en masse variable.
-690#£Outputenheder
+690#£Inds¾t kodefelt
 691#£Angiv hvilke enheder, der skal konverteres til ved beregninger. Som standard er output i SI-enheder
 692#£bc
-693#£Enheder
+693#£Et kodefelt er et omrŒde, hvor man kan programmere Maxima direkte. Man kan fx definere mere avancerede funktioner, som sŒ kan anvendes l¾ngere nede i dokumentet. Se mere i manualen.
 694#£Antal cifre
 695#£Tal afrunding
 696#£V¾lg hvordan tal skal skrives og afrundes. I eksemplerne nedenfor er WordMat sat til 3 cifre.\r\n\r\nAntal decimaler: 12,345\r\nBetydende cifre: 12,3\r\nVid. notation: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Er liste/matrix indeks
 726#£Standard grafprogram
 727#£Inds¾t Excelark indlejret
-728#£Outputenheder
+728#£
 729#£Angiv hvilke enheder som skal v¾re i output adskilt ad komma\neksempler:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nHvis intet angives returneres alle enheder som base SI-enheder eller afledte SI-enheder uden pr¾fiks.
 730#£Eksempler pŒ underst¿ttede enheder:\n(Se manual for flere)\n\nL¾ngde: cm , AU, ly, pc\nMasse: u , G, mg\nTid: min , Timer, dage, Œr\nFrekvens: Hz , Bq\nEnergi: kWh , eV, aJ\nTryk: Bar , mmHg, atm, torr
 731#£Trignonometriske ligninger
@@ -808,8 +808,8 @@
 807#£Udvid
 808#£Hj¾lp
 809#£Manual
-810#£Manual som Worddokument
-811#£Online hjemmeside-Manual
+810#£Dokumentation i Worddokument
+811#£Dokumentation pŒ hjemmeside
 812#£Om
 813#£Opdater
 814#£Genveje
@@ -893,7 +893,7 @@
 892#£Kommandoen blev afbrudt efter 
 893#£Vil du pr¿ve igen, og hvor lang tid vil du vente. (sekunder) Computeren lŒses i ventetiden.
 894#£Fejl i definition
-895#£Der er en syntax fejl i forbindelse med et integrale. Har du husket dx i slutningen?
+895#£Der er en syntaxfejl i forbindelse med et integrale. Har du husket dx i slutningen?
 896#£L¾ngde af output: 
 897#£Klik JA for at inds¾tte alle tegn i Word. (Advarsel: Kan g¿re Word langsom eller endda fŒ Word til at crashe). \r\n Klik NEJ for kun at inds¾tte de f¿rste 1000 tegn.
 898#£Du har angivet for fŒ parametre til funktionen: 
@@ -901,3 +901,11 @@
 900#£L¿sningsbetingelser:
 901#£Du skal markere en liste f¿rst fx [1;2;3]
 902#£MŒske har  du byttet om pŒ n og r i K(n, r)?
+903#£Kodefil
+904#£Anvend kodefil
+905#£Tillad kodefelter
+906#£Teksten i kodefilen bliver k¿rt i Maxima ved hver opstart. Du kan fx bruge det til definition af funktioner du altid vil have tilg¾ngelig i WordMat, eller til ¾ndring af indstillinger i Maxima. Anvendelse af kodefilen vil g¿re beregninger en smule langsommere. \nKodefelter kan inds¾ttes via definitionsmenuen, og er felter i Worddokumentet hvor du kan inds¾tte Maximakode, som k¿res ved hver beregning. Kode i kodefil og kodefelter sendes ubehandlet direkte til Maxima. Enhver kodefejl vil fŒ WordMat til at fejle alle beregninger, sŒ pas pŒ. Se i menuen under hj¾lp > Manual > Hj¾lp til maximakommandoer, for korrekt Maxima syntaks.
+907#£Indtast Maxima kode her
+908#£Du har ikke slŒet kodefelter til i 'Indstillinger > Kode'. Kodefeltet inds¾ttes, men vil ikke blive anvendt i beregninger f¿r det slŒs til.
+909#£Kode
+910#£Der kunne ikke inds¾ttes et kodefelt her.
