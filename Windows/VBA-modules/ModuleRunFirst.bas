@@ -10,7 +10,7 @@ Private HasStarted As Boolean
 #End If
 
 Sub RunFirst()
-    ' Should be run on startup of WordMat
+' Should be run on startup of WordMat
     If HasStarted Then Exit Sub
 
     ChangeAutoHyphen ' so 1-(-1) does not translate to 1--1 dash
@@ -38,23 +38,25 @@ Sub RunFirst()
     AntalB = Antalberegninger
 
     If AppVersion <> RegAppVersion Then ' if this is the first time WordMat is started after an update, then here you can set the settings that need to be changed
-        If val(AppVersion) = 1.35 Then
-            OutputColor = wdDarkBlue
-'            SettShortcutAltM = KeybShortcut.InsertNewEquation
-'            SettShortcutAltM2 = -1
-'            SettShortcutAltB = KeybShortcut.beregnudtryk
-'            SettShortcutAltL = KeybShortcut.SolveEquation
-'            SettShortcutAltP = KeybShortcut.ShowGraph
-'            SettShortcutAltD = KeybShortcut.Define
-'            SettShortcutAltS = KeybShortcut.sletdef
-'            SettShortcutAltF = KeybShortcut.Formelsamling
-'            SettShortcutAltO = KeybShortcut.OmskrivUdtryk
-'            SettShortcutAltR = KeybShortcut.PrevResult
-'            SettShortcutAltJ = KeybShortcut.SettingsForm
-'            SettShortcutAltN = -1
-'            SettShortcutAltE = -1
-'            SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
-'            SettShortcutAltQ = -1
+        If val(RegAppVersion) <= 1.33 Then
+            SettShortcutAltM = KeybShortcut.InsertNewEquation
+            SettShortcutAltM2 = -1
+            SettShortcutAltB = KeybShortcut.beregnudtryk
+            SettShortcutAltL = KeybShortcut.SolveEquation
+            SettShortcutAltP = KeybShortcut.ShowGraph
+            SettShortcutAltD = KeybShortcut.Define
+            SettShortcutAltS = KeybShortcut.sletdef
+            SettShortcutAltF = KeybShortcut.Formelsamling
+            SettShortcutAltO = KeybShortcut.OmskrivUdtryk
+            SettShortcutAltR = KeybShortcut.PrevResult
+            SettShortcutAltJ = KeybShortcut.SettingsForm
+            SettShortcutAltN = -1
+            SettShortcutAltE = -1
+            SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
+            SettShortcutAltQ = -1
+        End If
+        If val(RegAppVersion) <= 1.34 Then
+            OutputColor = wdGreen
         End If
         RegAppVersion = AppVersion
     End If

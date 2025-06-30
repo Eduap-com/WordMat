@@ -311,7 +311,7 @@ On Error Resume Next
     CASengine = 0
     MaximaDecOutType = 2
     SettUseVBACAS = 2
-    OutputColor = wdDarkBlue
+    OutputColor = wdGreen
     
     
     SettShortcutAltM = KeybShortcut.InsertNewEquation
@@ -1398,10 +1398,10 @@ Public Function GetRegSettingLong(key As String) As Long
     GetRegSettingLong = CLng(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
 End Function
 #End If
-Private Function GetRegSettingString(key As String) As String
+Public Function GetRegSettingString(key As String) As String
     GetRegSettingString = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key)
 End Function
-Private Sub SetRegSettingString(key As String, ByVal val As String)
+Public Sub SetRegSettingString(key As String, ByVal val As String)
     RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_SZ"
 End Sub
 

@@ -17,7 +17,7 @@ Public Function QActivePartnership(Optional Force As Boolean = False, Optional S
     QActivePartnership = Application.Run("PQActivePartnership", Force, False, ShowForm)
     
     If QActivePartnership Then
-        If mSkoleNavn = vbNullString Then mSkoleNavn = GetRegSetting("Skolenavn")
+        If mSkoleNavn = vbNullString Then mSkoleNavn = GetRegSettingString("Skolenavn")
     End If
     Exit Function
     
