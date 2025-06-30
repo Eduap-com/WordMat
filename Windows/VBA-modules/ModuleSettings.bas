@@ -76,6 +76,7 @@ Private mDecOutType As Integer ' 1 =dec, 2=bet cif, 3=vidnot
 Private mUseVBACAS As Integer  ' 0 = not loaded  1=no  2=yes1
 Private mUseCodeFile As Boolean
 Private mUseCodeBlocks As Boolean
+Private mOutputColor As Integer  ' 0 = wdauto ellers WdColorIndex enumeration (Word) 1= black, 2= blue
 
 Private mSettShortcutAltM As Integer
 Private mSettShortcutAltM2 As Integer
@@ -217,7 +218,8 @@ On Error Resume Next
     mDecOutType = CInt(GetRegSetting("DecOutType"))
     mUseCodeFile = CBool(GetRegSetting("UseCodeFile"))
     mUseCodeBlocks = CBool(GetRegSetting("UseCodeBlocks"))
-
+    mOutputColor = CInt(GetRegSetting("OutputColor"))
+    
     mSettShortcutAltM = CInt(GetRegSetting("SettShortcutAltM"))
     mSettShortcutAltM2 = CInt(GetRegSetting("SettShortcutAltM2"))
     mSettShortcutAltB = CInt(GetRegSetting("SettShortcutAltB"))
@@ -309,6 +311,8 @@ On Error Resume Next
     CASengine = 0
     MaximaDecOutType = 2
     SettUseVBACAS = 2
+    OutputColor = wdDarkBlue
+    
     
     SettShortcutAltM = KeybShortcut.InsertNewEquation
     SettShortcutAltM2 = -1
@@ -1344,7 +1348,13 @@ Public Property Let UseCodeBlocks(xval As Boolean)
     SetRegSetting "UseCodeBlocks", Abs(CInt(xval))
     mUseCodeBlocks = xval
 End Property
-
+Public Property Get OutputColor() As Integer
+    OutputColor = mOutputColor
+End Property
+Public Property Let OutputColor(ByVal xval As Integer)
+    SetRegSetting "OutputColor", xval
+    mOutputColor = xval
+End Property
 
 
 Public Property Get ReadSettingsFromFile() As Integer ' 0= not set, 1=dont read settings from file, 2=read from appdata, 3=read from program files, 4= first try appdata then program files, 5= first try program files, then appdata

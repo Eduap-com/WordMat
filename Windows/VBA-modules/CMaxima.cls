@@ -678,7 +678,7 @@ Public Sub ExecuteMaximaCommand(Optional MaxCmd As String, Optional TranslateToM
         Kommando = Replace(Kommando, VBA.ChrW(8289), "")
         MaximaInputStreng = MaximaInputStreng & Kommando & ";"
     End If
-    Call RunMaxima
+    Call RunMaxima(200, True, False)
     If StopNow Then GoTo slut
     
     Dim nr As Integer, i As Integer

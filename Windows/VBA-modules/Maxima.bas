@@ -69,11 +69,7 @@ finish:
         Dim s As String
         If UseCodeBlocks Then
             s = Trim(GetAllPreviousCodeBlocks)
-            s = TrimR(s, vbCrLf)
-            s = TrimR(s, vbCr)
-            s = TrimR(s, vbLf)
             If s <> vbNullString Then
-                If Right(s, 1) <> ";" And Right(s, 1) <> "$" Then s = s & "$"
                 omax.MaximaInputStreng = s & omax.MaximaInputStreng
             End If
         End If
@@ -836,7 +832,9 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
     Selection.Font.ColorIndex = wdGray50
     Selection.Font.Italic = True
 
+    Selection.NoProofing = True
     Selection.TypeText ForklarTekst
+    Selection.NoProofing = False
     If omax.TempDefs <> "" Then
         tdefs = omax.TempDefs
         tdefs = Replace(tdefs, "pi", ChrW(960))
@@ -2501,6 +2499,8 @@ Sub InsertOutput(Text As String, Optional ResultAfterTable As Boolean = True)
         Selection.Collapse wdCollapseEnd
     Else
     End If
+    
+    Selection.Font.ColorIndex = OutputColor
     Selection.TypeText Text    ' causes problems with = sign coming under fraction line
     Selection.Move wdCharacter, -1
     If Selection.OMaths(1).Range.Font.Bold Then
@@ -2510,6 +2510,7 @@ Sub InsertOutput(Text As String, Optional ResultAfterTable As Boolean = True)
     Selection.OMaths.BuildUp
     If IsBold Then Selection.OMaths(1).Range.Font.Bold = True
     omax.GoToEndOfSelectedMaths
+    Selection.Font.ColorIndex = wdAuto
 End Sub
 
 Function ValidateInput(Expr, Optional MathObj As OMath) As Boolean

@@ -48,6 +48,7 @@ Sub RunTestSequence()
     AllTrig = False
     MaximaLogOutput = 0
     
+    
     PrepareMaxima
     
     Selection.Collapse wdCollapseEnd

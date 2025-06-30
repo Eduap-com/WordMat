@@ -170,6 +170,7 @@ On Error Resume Next
     BackupMaxNo = ComboBox_backupno.Text
     BackupTime = ComboBox_backuptime.Text
     MaximaDecOutType = ComboBox_DecType.ListIndex + 1
+    OutputColor = ComboBox_color.ListIndex
     
     If MaximaUnits <> CheckBox_units.Value Then
         MaximaUnits = CheckBox_units.Value
@@ -365,6 +366,7 @@ Private Sub UserForm_Activate()
     FillComboBoxBackup
     FillComboBoxBackupNo
     FillComboBoxBackupTime
+    FillComboBoxColor
     SetCaptions
     Label_ok.BackColor = LBColorInactive
     Label_cancel.BackColor = LBColorInactive
@@ -427,6 +429,7 @@ Sub SetButtonsAccordingToSettings()
     ComboBox_backup.ListIndex = BackupType
     ComboBox_backupno.Text = BackupMaxNo
     ComboBox_backuptime.Text = BackupTime
+    ComboBox_color.ListIndex = OutputColor
 
     If CheckBox_complex.Value Then
         CheckBox_polaroutput.visible = True
@@ -630,7 +633,28 @@ Sub FillComboBoxBackup()
     ComboBox_backup.AddItem TT.A(176)
     ComboBox_backup.AddItem TT.A(177)
 End Sub
-    
+Sub FillComboBoxColor()
+    ComboBox_color.Clear
+    ComboBox_color.AddItem "Auto"
+    ComboBox_color.AddItem "Black"
+    ComboBox_color.AddItem "Blue"
+    ComboBox_color.AddItem "Turquoise"
+    ComboBox_color.AddItem "Bright green"
+    ComboBox_color.AddItem "Pink"
+    ComboBox_color.AddItem "Red"
+    ComboBox_color.AddItem "Yellow"
+    ComboBox_color.AddItem "White"
+    ComboBox_color.AddItem "Dark blue"
+    ComboBox_color.AddItem "Teal"
+    ComboBox_color.AddItem "Green"
+    ComboBox_color.AddItem "Violet"
+    ComboBox_color.AddItem "Dark Red"
+    ComboBox_color.AddItem "Dark Yellow" '14
+    ComboBox_color.AddItem "Gray 50%"
+    ComboBox_color.AddItem "Gray 25%"
+End Sub
+
+
 Sub SetCaptions()
     Me.Caption = TT.A(443)
     
@@ -712,6 +736,7 @@ Sub SetCaptions()
     CheckBox_UseCodeFile.Caption = TT.A(904)
     CheckBox_UseCodeBlocks.Caption = TT.A(905)
     Label_explainCode.Caption = TT.A(906)
+    Label_color.Caption = TT.A(330) & ":"
     
 #If Mac Then
     Label_casexplain.visible = True

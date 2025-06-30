@@ -42,6 +42,7 @@ Sub InsertCodeBlock()
     With cc.Range.Font
         .Name = "Consolas"
         .Bold = False
+        .ColorIndex = wdAuto
         .Size = 10
     End With
     
@@ -69,7 +70,7 @@ Sub InsertCodeBlock()
         .LineWidth = wdLineWidth050pt
         .Color = wdColorGray25
     End With
-
+    cc.Range.NoProofing = True
     cc.Range.Select
     Oundo.EndCustomRecord
     
@@ -89,7 +90,7 @@ Function GetAllPreviousCodeBlocks() As String
     Dim selStart As Long
     Dim cc As ContentControl
     Dim i As Long
-    Dim result As String
+    Dim result As String, s As String
 
     selStart = Selection.Range.start
     result = ""
@@ -101,10 +102,18 @@ Function GetAllPreviousCodeBlocks() As String
         ' Check if it's a code block and before the cursor
         If cc.Tag = "CodeBlock" And cc.Range.End < selStart Then
             ' Prepend the code block text to maintain order from nearest to farthest
-            If result = "" Then
-                result = cc.Range.Text
-            Else
-                result = cc.Range.Text & vbCrLf & result
+            
+            s = cc.Range.Text
+            s = TrimR(Trim(s), vbCrLf)
+            s = TrimR(Trim(s), vbCr)
+            s = TrimR(Trim(s), vbLf)
+            If s <> vbNullString Then
+                If Right(s, 1) <> ";" And Right(s, 1) <> "$" Then s = s & "$"
+                If result = "" Then
+                    result = s
+                Else
+                    result = s & vbCrLf & result
+                End If
             End If
         End If
     Next i
