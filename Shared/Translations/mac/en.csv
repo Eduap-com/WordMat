@@ -22,7 +22,7 @@
 21#£There is a new version of WordMath ready for download.\r\nNews: \r\n
 22#£You will now be redirected to the download page
 23#£New version
-24#£Type the number of points you want to do regression on. Then a table will be created, where you can put your points. When you want to do the regression just select the table and choose your desired regression from the menu.
+24#£Type the number of points you want to do regression on. Then a table will be created, where you can put your points. \r\nWhen you want to do the regression just select the table and choose your desired regression from the menu.
 25#£It is not recommened to do regression on more than 200 points in a Word-table. Use Excel if you want to do regression on that many points
 26#£An error occured. There is probably an error in the input numbers
 27#£You must create a table with two columns. x-values in the left column and y-values in the right column. Letters are ignored. Regression is performed on the numbers selected. If none are selected, regression is performed on all numbers in the table
@@ -31,7 +31,7 @@
 30#£Exponential regression performed by WordMat: $Tab
 31#£Power regression performed by WordMat: $Tab
 32#£Power regression cannot be performed on those points. All numbers must be positive (and not zero).
-33#£User defined regression with the function 
+33#£User defined regression with the function
 34#£performed by WordMath
 35#£State the order of the polynomial regression (1-
 36#£(The max order is determined by the number of points)
@@ -40,7 +40,7 @@
 39#£User defined regression
 40#£Function
 41#£Decimals
-42#£Start guess (ex.: a=2 , c=10)
+42#£Start guess
 43#£The precision is set very high. The calculation time can be very long or cause an error. If it doesn't work out, try a lower setting.
 44#£The precision is set quite high. The calculation time can be quite long or cause an error. If it doesn't work out, try a lower setting.
 45#£The precision cant be negative. Choose a positive integer
@@ -113,7 +113,7 @@
 112#£Unable to connect to server
 113#£At this place in the document the following is defined
 114#£There aren't any definitions at this place in the document.
-115#£
+115#£has several undefined variables. The independent variable cannot be identified. Please use x or t as the independent variable.
 116#£You can't define a derivative\r\nRemove the definition: \r\n
 117#£There is an error in the definition: 
 118#£It is ignored, but correct the input error to avoid this output error
@@ -134,7 +134,7 @@
 133#£You have asked to solve the equation for a variable which is already defined. Insert a 'delete def:' command before the equation.
 134#£The system of equations is solved for 
 135#£ by WordMat's 'solve equation' function, 
-136#£Partnership registered with 
+136#£Partnership registered with
 137#£The system of equations had no solutions in the domain $C for variables 
 138#£The system of equations had no solutions in the domain $R for variables 
 139#£There must be an equal sign in an equation
@@ -326,9 +326,9 @@
 325#£Shortcut          Alt + M         inserts new math 
 326#£Shortcut        AltGr + Enter       calculates 
 327#£Shortcut          Alt + E         Solves equation 
-328#£Shortcut          Alt + S         opens settings
+328#£Shortcut          Alt + J         opens settings
 329#£Shortcut          Alt + R         Inserts previous result
-330#£Shortcut          Alt + U         Turns on unit support
+330#£Color of output
 331#£subscript: 
 332#£\lambda is short for the small greek letter lambda
 333#£Shortcut          Alt + P         Plots a graph
@@ -455,7 +455,7 @@
 454#£Define function
 455#£Define physical constants
 456#£Reduce
-457#£Infinites.
+457#£
 458#£Differentiate
 459#£Integrate
 460#£Plotting
@@ -539,9 +539,9 @@
 538#£Select the expression to differentiate or place the cursor in the expression
 539#£Integrate
 540#£Determines the indefinite integral of function
-541#£
-542#£
-543#£
+541#£Import settings
+542#£Export settings
+543#£Customize menu
 544#£
 545#£Plot graph (Alt+P)
 546#£Shows the graph for the selected function(s)/equation(s) and points. The graph can then be inserted into the document. Several graph programs are supported. Choose your favorite under settings.
@@ -688,10 +688,10 @@
 687#£Significant figures
 688#£Turn units on/off
 689#£If units are turned on, WordMath kan interpret and convert units. On the SI button you can change the output units. Do not turn units on, unless you need it. It can affect the behaviour of WordMat and reserves a lot of variables.
-690#£Output units
+690#£Insert code field
 691#£State the units to convert to. By default output units are SI units.
 692#£sf
-693#£Units
+693#£A code field is an area where you can program Maxima directly. For example, you can define more advanced functions, which can then be used further down in the document. See more in the manual.
 694#£No. of figures
 695#£Rounding
 696#£Choose how numbers are fomatted and rounded. In the examples below WordMat is set to 3 figures\r\n\r\nDecimals: 12,345\r\nSignificant figures: 12,3\r\nSci. notation: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Is list/matrix index
 726#£Standard graph program
 727#£Embed Excel sheets
-728#£Output units
+728#£
 729#£State output units separated by comma\nexamples:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nIf nothing is stated units are returned in basic SI-units or SI-derived units without prefix.
 730#£Examples of supported units:\n(See manual for more)\n\nLength: cm , AU, ly, pc\nMass: u , G, mg\nFrequency: Hz , Bq\nEnergy: kWh , eV, aJ\nPressure: Bar , mmHg, atm, torr
 731#£Trigonometric equations
@@ -808,8 +808,8 @@
 807#£Expand
 808#£Help
 809#£Manual
-810#£Manual as Word document
-811#£Online webpage Manual
+810#£Documentation as Word document
+811#£Website documentation
 812#£About
 813#£Update
 814#£Shortcuts
@@ -901,3 +901,11 @@
 900#£Solution conditions:
 901#£You must select a list first, e.g. [1; 2; 3]
 902#£Maybe you have swapped n and r in K(n, r)?
+903#£Code file
+904#£Apply code file
+905#£Allow code fields
+906#£The text in the code file is run in Maxima at every startup. For example, you can use it to define functions you always want to have available in WordMat, or to change settings in Maxima. Using the code file will make calculations a bit slower. \nCode fields can be inserted via the definition menu, and are fields in the Word document where you can insert the Maximum Code, which is run at each calculation. Code in the code file and code fields are sent directly to Maxima unprocessed. Any code error will cause WordMat to fail all calculations, so beware. Look in the menu under Help > Manual > Help with Maxima Commands, for correct Maxima syntax.
+907#£Enter Maxima code here
+908#£You haven't turned on code fields in 'Settings > Code'. The code field is inserted, but will not be used in calculations until it is turned on.
+909#£Code
+910#£A code field could not be inserted here.

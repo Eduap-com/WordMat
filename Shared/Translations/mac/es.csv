@@ -40,7 +40,7 @@
 39#£Regresi—n definida por el usuario
 40#£Funci—n
 41#£Decimales
-42#£Comience inferencia (ej.: a=2 , c=10)
+42#£Comience inferencia
 43#£La precisi—n est‡ ajustada muy alta. El tiempo de c‡lculo puede ser muy largo o cusar un error. Si no funciona intente un ajuste m‡s bajo.
 44#£La precisi—n est‡ ajustada bastante alta. El tiempo de c‡lculo puede ser muy largo o cusar un error. Si no funciona intente un ajuste m‡s bajo.
 45#£La precisi—n puede ser negativa. Escoja un entero positivo
@@ -113,7 +113,7 @@
 112#£No se puede conectar con el servidor
 113#£Aqu’, en Žsta parte del documento, est‡ definido lo siguiente:
 114#£No hay ninguna definici—n en este lugar del documento
-115#£
+115#£tiene varias variables indefinidas. La variable independiente no puede ser identificada. Utilice x o t como variable independiente.
 116#£No puede definir una derivada\r\nRemover la definici—n: \r\n
 117#£Hay un error en la definici—n: 
 118#£Se ignora, pero debe corregir el error de entrada para evitar el error de salida
@@ -166,7 +166,7 @@
 165#£WordMat no pudo determinar si la expresi—n era verdadera o falsa
 166#£Dispositivos de
 167#£Seleccione los dispositivos de salida si es necesario
-168#£Dispositivos de salida
+168#£unidades de salida
 169#£Los parŽntesis no importan
 170#£ÀCopia de seguridad autom‡tica?
 171#£ÀCu‡ntos archivos de copia de seguridad se deben almacenar como m‡ximo?
@@ -260,7 +260,7 @@
 259#£luna
 260#£sol
 261#£Constantes f’sicas
-262#£Dispositivos
+262#£Unidades
 263#£Valores de la tabla - calor
 264#£Valor de la tabla - F’sica nuclear
 265#£Astronom’a
@@ -326,9 +326,9 @@
 325#£El mŽtodo abreviado Alt+M inserta un nuevo campo matem‡tico
 326#£El atajo AltGr + Intro calcula
 327#£El atajo Alt + L resuelve la ecuaci—n
-328#£El atajo Alt+ en abre Configuraci—n
+328#£El atajo Alt+j en abre Configuraci—n
 329#£El atajo Alt+r recupera los resultados anteriores
-330#£El atajo Alt+E enciende o apaga los dispositivos
+330#£Color de salida
 331#£Sub’ndice:
 332#£\lambda da la letra griega minœscula
 333#£El atajo Alt+P muestra el gr‡fico de un precepto
@@ -455,7 +455,7 @@
 454#£Definir funci—n
 455#£Definir constantes f’sicas
 456#£Reducir
-457#£Infinitos
+457#£
 458#£Diferenciar
 459#£Integrar
 460#£Graficar
@@ -539,9 +539,9 @@
 538#£Seleccione las expresiones que desea diferenciar o coloque el cursor en la expresi—n.
 539#£Funci—n de maletero
 540#£Encuentra la funci—n de ra’z para las expresiones seleccionadas (integrales indefinidas).
-541#£
-542#£
-543#£
+541#£Configuraci—n de importaci—n
+542#£Configuraci—n de exportaci—n
+543#£Personalizar menœ
 544#£
 545#£Ver gr‡fico (Alt+P)
 546#£Muestra el gr‡fico de las funciones/ecuaciones/ecuaciones y puntos seleccionados. El gr‡fico se puede insertar posteriormente en el documento. Se admiten varios programas de gr‡ficos. Seleccione su favorito en la configuraci—n o seleccione expandiendo este bot—n
@@ -688,10 +688,10 @@
 687#£Cifras significativas
 688#£Encender/apagar dispositivos
 689#£Si las unidades est‡n activadas, WordMat puede entender y convertir las unidades. En el bot—n SI, puede especificar a quŽ unidades desea convertir. De forma predeterminada, la salida se expresa en unidades SI. No enciendas dispositivos a menos que lo necesites espec’ficamente. Puede afectar el comportamiento del WordMat y reserva muchas variables.
-690#£Dispositivos de salida
+690#£Campo de inserci—n de c—digo
 691#£Especifique las unidades a las que se va a convertir para los c‡lculos. De forma predeterminada, la salida se expresa en unidades SI
-692#£sf
-693#£Unidades
+692#£cf
+693#£Un campo de c—digo es un ‡rea en la que se puede programar Maxima directamente. Por ejemplo, puede definir funciones m‡s avanzadas, que luego se pueden utilizar m‡s abajo en el documento. M‡s informaci—n en el manual.
 694#£Nœmero de d’gitos
 695#£Redondeo de nœmeros
 696#£Elige c—mo se escriben y redondean los nœmeros. En los siguientes ejemplos, WordMat se establece en 3 d’gitos.\r\n\r\nNœmero de decimales: 12,345\r\nD’gitos significativos: 12,3\r\nVid. Notaci—n: 1.23*10^1
@@ -726,7 +726,7 @@
 725#£Indice de lista / matriz
 726#£Programa de gr‡ficos
 727#£Insertar hoja Excel
-728#£Unidades de salida
+728#£
 729#£Establece unidades de salida \n separadas por coma ejemplos:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nSi no se indican las unidades se devuelve en unidades b‡sicas del SI o unidades del SI derivadas sin prefijo.
 730#£Ejemplos de unidades compatibles:\n(Para mayor informaci—n consulte el manual)\n\nLongitud: cm , AU, ly, pc\nMasa: u , G, mg\nFrecuencia: Hz , Bq\nEnerg’a: kWh , eV, aJ\nPresi—n: Bar , mmHg, atm, torr
 731#£Ecuaciones trigonomŽtricas
@@ -809,7 +809,7 @@
 808#£Ayuda
 809#£Manual
 810#£Manual como documento Word
-811#£Manual como p‡gina web on-line
+811#£Documentaci—n del sitio web
 812#£Acerca de
 813#£Actualizar
 814#£Atajos
@@ -901,3 +901,11 @@
 900#£Condiciones de la soluci—n:
 901#£Primero debe seleccionar una lista, por ejemplo, [1; 2; 3]
 902#£ÀQuiz‡s has intercambiado n y r en K(n, r)?
+903#£Archivo de c—digo
+904#£Aplicar archivo de c—digo
+905#£Permitir campos de c—digo
+906#£El texto del archivo de c—digo se ejecuta en Maxima en cada inicio. Por ejemplo, puede usarlo para definir funciones que siempre desea tener disponibles en WordMat o para cambiar la configuraci—n en Maxima. El uso del archivo de c—digo har‡ que los c‡lculos sean un poco m‡s lentos. \nLos campos de c—digo se pueden insertar a travŽs del menœ de definici—n y son campos en el documento de Word donde se puede insertar el c—digo m‡ximo, que se ejecuta en cada c‡lculo. El c—digo en el archivo de c—digo y los campos de c—digo se env’an directamente a Maxima sin procesar. Cualquier error de c—digo har‡ que WordMat falle todos los c‡lculos, as’ que tenga cuidado. Busque en el menœ de Ayuda > Manual > Ayuda con los comandos de Maxima, para obtener la sintaxis correcta de Maxima.
+907#£Ingresa el c—digo Maxima aqu’
+908#£No has activado los campos de c—digo en "Configuraci—n > c—digo". Se inserta el campo de c—digo, pero no se utilizar‡ en los c‡lculos hasta que se active.
+909#£C—digo
+910#£No se ha podido insertar un campo de c—digo aqu’.

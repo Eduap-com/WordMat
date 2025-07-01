@@ -40,7 +40,7 @@
 39#£Kasutaja mŠŠratletud regressioon
 40#£Funktsioon
 41#£KŸmnendkohta
-42#£Alustage arvamist (nt: a=2, c=10)
+42#£Alustage arvamist
 43#£TŠpsus on seatud vŠga k›rgele. Arvutusaeg v›ib olla vŠga pikk v›i p›hjustada vea. Kui see ei ›nnestu, proovige madalamat seadistust.
 44#£TŠpsus on seatud Ÿsna k›rgeks. Arvutusaeg v›ib olla Ÿsna pikk v›i p›hjustada vea. Kui see ei ›nnestu, proovige madalamat seadistust.
 45#£TŠpsus ei saa olla negatiivne. Valige positiivne tŠisarv
@@ -113,7 +113,7 @@
 112#£Serveriga ei saa Ÿhendust luua
 113#£Selles dokumendi kohas on mŠŠratletud jŠrgmine
 114#£Selles kohas dokumendis pole definitsioone.
-115#£
+115#£on mitu mŠŠratlemata muutujat. S›ltumatut muutujat ei saa tuvastada. Kasutage s›ltumatu muutujana x v›i t.
 116#£Tuletist ei saa defineerida\r\nEemalda definitsioon: \r\n
 117#£Definitsioonis on viga:
 118#£Seda ignoreeritakse, kuid selle vŠljundvea vŠltimiseks parandage sisendviga
@@ -326,9 +326,9 @@
 325#£Otsetee Alt + M lisab uue matemaatika
 326#£Otsetee AltGr + Enter arvutab
 327#£Otsetee Alt + E Lahendab v›rrandi
-328#£Otsetee Alt + S avab seaded
+328#£Otsetee Alt + j avab seaded
 329#£Otsetee Alt + R Lisab eelmise tulemuse
-330#£Otsetee Alt + U LŸlitab sisse seadme toe
+330#£VŠljundi vŠrv
 331#£Allindeks:
 332#£\lambda on lŸhend vŠikesest kreeka tŠhest lambda
 333#£Otsetee Alt + P Joonistab graafiku
@@ -455,7 +455,7 @@
 454#£Funktsiooni mŠŠratlemine
 455#£FŸŸsikaliste konstantide mŠŠratlemine
 456#£VŠhendada
-457#£L›pmatu.
+457#£
 458#£Eristada
 459#£Integreerida
 460#£Joonestamist
@@ -539,9 +539,9 @@
 538#£Eristatava avaldise valimine v›i kursori avaldisse paigutamine
 539#£Integreerida
 540#£MŠŠrab funktsiooni mŠŠramatu integraali
-541#£
-542#£
-543#£
+541#£SŠtete importimine
+542#£SŠtete eksportimine
+543#£Kohanda menŸŸd
 544#£
 545#£Graafiku graafik (Alt+P)
 546#£NŠitab valitud funktsiooni(de)/v›rrandi(te) ja punktide graafikut. SeejŠrel saab graafiku dokumenti sisestada. Toetatud on mitmed graafikaprogrammid. Valige seadete alt oma lemmik.
@@ -688,10 +688,10 @@
 687#£Olulised arvud
 688#£LŸlitage seadmed sisse/vŠlja
 689#£Kui Ÿhikud on sisse lŸlitatud, saab WordMath Ÿhikuid t›lgendada ja teisendada. SI nupul saate muuta vŠljundŸhikuid. €rge lŸlitage seadmeid sisse, kui te seda ei vaja. See v›ib m›jutada WordMati kŠitumist ja reserveerida palju muutujaid.
-690#£VŠljundi Ÿhikud
+690#£Koodi vŠlja lisamine
 691#£MŠrkige Ÿhikud, milleks teisendada. Vaikimisi on vŠljundŸhikud SI-Ÿhikud.
-692#£Sf
-693#£†hikut
+692#£oa
+693#£KoodivŠli on ala, kus saate Maxima otse programmeerida. NŠiteks saate mŠŠratleda tŠpsemaid funktsioone, mida saab seejŠrel kasutada dokumendis allpool. Vaata lŠhemalt juhendist.
 694#£Ei. arvude arv
 695#£†mardamise
 696#£Valige, kuidas arvud fomateeritakse ja Ÿmardatakse. Allolevates nŠidetes on WordMat seatud 3 numbrile\r\n\r\nKŸmnendkohad: 12 345\r\nOlulised arvud: 12,3\r\nSci. TŠhis: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£On loendi/maatriksi indeks
 726#£Standardne graafikuprogramm
 727#£Exceli lehtede manustamine
-728#£VŠljundi Ÿhikud
+728#£
 729#£Oleku vŠljundŸhikud, mis on eraldatud komaga\nnŠited:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nKui midagi ei ole šeldud, tagastatakse Ÿhikud SI-p›hiŸhikutes v›i SI-tuletatud Ÿhikutes ilma eesliiteta.
 730#£NŠited toetatud Ÿhikutest:\n(Lisateabe saamiseks vaadake juhendit)\n\nPikkus: cm , AU, ly, pc\nMass: u , G, mg\nSagedus: Hz , Bq\nEnergia: kWh , eV, aJ\nR›hk: Bar , mmHg, atm, torr
 731#£Trigonomeetrilised v›rrandid
@@ -809,7 +809,7 @@
 808#£Abi
 809#£KŠsiraamat
 810#£KŠsiraamat Wordi dokumendina
-811#£Veebisaidi kŠsiraamat
+811#£Veebisaidi dokumentatsioon
 812#£Umbes
 813#£Uuendama
 814#£Otseteed
@@ -901,3 +901,11 @@
 900#£Lahuse tingimused:
 901#£K›igepealt tuleb valida nimekiri, nt [1; 2; 3]
 902#£V›ib-olla olete K(n, r) n-i ja r-i vahetanud?
+903#£Koodifail
+904#£Rakenda koodifail
+905#£Luba koodivŠljad
+906#£Koodifailis olev tekst kŠivitatakse Maximas igal kŠivitamisel. NŠiteks saate seda kasutada funktsioonide mŠŠratlemiseks, mida soovite WordMatis alati kŠttesaadavaks teha, v›i Maxima sŠtete muutmiseks. Koodifaili kasutamine muudab arvutused veidi aeglasemaks. \nKoodivŠlju saab sisestada definitsioonimenŸŸ kaudu ja need on Wordi dokumendi vŠljad, kuhu saate sisestada maksimaalse koodi, mis kŠivitatakse iga arvutuse juures. Koodifailis ja koodivŠljades olev kood saadetakse tšštlemata kujul otse Maximale. Iga koodiviga p›hjustab WordMati k›igi arvutuste nurjumise, seega olge ettevaatlik. Vaadake menŸŸst Spikker > KŠsiraamat > Spikker Maksimumi kŠskudega ›iget Maxima sŸntaksit.
+907#£Sisestage siia Maxima kood
+908#£Te ei ole jaotises "Seaded > kood" koodivŠlju sisse lŸlitanud. KoodivŠli lisatakse, kuid seda ei kasutata arvutustes enne, kui see on sisse lŸlitatud.
+909#£Kood
+910#£KoodivŠlja ei saanud siia sisestada.

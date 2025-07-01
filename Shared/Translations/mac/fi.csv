@@ -40,7 +40,7 @@
 39#£KŠyttŠjŠn mŠŠrittŠmŠ regressio
 40#£Funktio
 41#£Desimaaleja
-42#£Aloita arvaus (esim. a=2, c=10)
+42#£Aloita arvaus
 43#£Tarkkuus on asetettu erittŠin korkeaksi. Laskenta-aika voi olla hyvin pitkŠ tai aiheuttaa virheen. Jos se ei toimi, kokeile pienempŠŠ asetusta.
 44#£Tarkkuus on asetettu melko korkeaksi. Laskenta-aika voi olla melko pitkŠ tai aiheuttaa virheen. Jos se ei toimi, kokeile pienempŠŠ asetusta.
 45#£Tarkkuus ei voi olla negatiivinen. Valitse positiivinen kokonaisluku
@@ -113,7 +113,7 @@
 112#£Yhteyden muodostaminen palvelimeen ei onnistu
 113#£TŠssŠ kohdassa asiakirjassa mŠŠritellŠŠn seuraava
 114#£TŠssŠ kohdassa asiakirjassa ei ole mŠŠritelmiŠ.
-115#£
+115#£on useita mŠŠrittelemŠttšmiŠ muuttujia. Riippumatonta muuttujaa ei voida tunnistaa. KŠytŠ x:ŠŠ tai t:tŠ riippumattomana muuttujana.
 116#£Et voi mŠŠrittŠŠ derivaatta\r\nPoista mŠŠritelmŠ: \r\n
 117#£MŠŠritelmŠssŠ on virhe:
 118#£Se ohitetaan, mutta korjaa syšttšvirhe tŠmŠn tulostusvirheen vŠlttŠmiseksi
@@ -326,9 +326,9 @@
 325#£PikanŠppŠin Alt + M lisŠŠ uuden matematiikan
 326#£PikanŠppŠin AltGr + Enter laskee
 327#£PikanŠppŠin Alt + E Ratkaisee yhtŠlšn
-328#£PikanŠppŠin Alt + S avaa asetukset
+328#£PikanŠppŠin Alt + j avaa asetukset
 329#£PikanŠppŠin Alt + R LisŠŠ edellisen tuloksen
-330#£PikanŠppŠin Alt + U Ottaa yksikkštuen kŠyttššn
+330#£Tulosteen vŠri
 331#£alaindeksi:
 332#£\lambda on lyhenne pienestŠ kreikkalaisesta lambda-kirjaimesta
 333#£PikanŠppŠin Alt + P PiirtŠŠ kaavion
@@ -455,7 +455,7 @@
 454#£MŠŠritŠ funktio
 455#£Fysikaalisten vakioiden mŠŠrittŠminen
 456#£Supistaa
-457#£€ŠrettšmiŠ.
+457#£
 458#£Erottaa
 459#£YhdentŠŠ
 460#£Vehkeily
@@ -539,9 +539,9 @@
 538#£Valitse lauseke, jonka haluat erottaa toisistaan tai sijoittaa kohdistimen lausekkeeseen
 539#£YhdentŠŠ
 540#£MŠŠrittŠŠ funktion mŠŠrittelemŠttšmŠn integraalin
-541#£
-542#£
-543#£
+541#£Tuo asetukset
+542#£Vie asetukset
+543#£Mukauta valikkoa
 544#£
 545#£Kaavio (Alt+P)
 546#£NŠyttŠŠ valittujen funktioiden/yhtŠlšiden ja pisteiden kaavion. Kaavio voidaan sitten lisŠtŠ asiakirjaan. Useita kaavio-ohjelmia tuetaan. Valitse suosikkisi asetuksista.
@@ -688,10 +688,10 @@
 687#£MerkittŠvŠt luvut
 688#£Kytke yksikšt pŠŠlle/pois pŠŠltŠ
 689#£Jos yksikšt ovat kŠytšssŠ, WordMath voi tulkita ja muuntaa yksikšitŠ. SI-painikkeella voit muuttaa lŠhtšyksikšitŠ. €lŠ kytke laitteita pŠŠlle, ellet tarvitse sitŠ. Se voi vaikuttaa WordMatin toimintaan ja varaa paljon muuttujia.
-690#£LŠhtšyksikšt
+690#£LisŠŠ koodikenttŠ
 691#£Ilmoita yksikšt, joihin muunnetaan. Oletusarvoisesti lŠhtšyksikšt ovat SI-yksikšitŠ.
-692#£Sf
-693#£Yksikšt
+692#£ml
+693#£KoodikenttŠ on alue, jossa voit ohjelmoida Maximan suoraan. Voit esimerkiksi mŠŠrittŠŠ edistyneempiŠ funktioita, joita voidaan sitten kŠyttŠŠ alempana asiakirjassa. Katso lisŠŠ kŠsikirjasta.
 694#£Ei. lukujen mŠŠrŠ
 695#£Pyšristys
 696#£Valitse, miten luvut fomatoidaan ja pyšristetŠŠn. Alla olevissa esimerkeissŠ WordMat on asetettu 3 numeroon\r\n\r\nDesimaalit: 12 345\r\nMerkitsevŠt luvut: 12,3\r\nSci. merkintŠ: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£On luettelo-/matriisiindeksi
 726#£Vakiokaavio-ohjelma
 727#£Upota Excel-taulukot
-728#£LŠhtšyksikšt
+728#£
 729#£Tilan lŠhtšyksikšt erotettu pilkulla\nesimerkkejŠ :\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJos mitŠŠn ei ole ilmoitettu, yksikšt palautetaan SI-perusyksikšissŠ tai SI-johdetuissa yksikšissŠ ilman etuliitettŠ.
 730#£EsimerkkejŠ tuetuista yksikšistŠ:\n(Katso lisŠtietoja kŠsikirjasta)\n\nPituus: cm , AU, ly, pc\nMassa: u , G, mg\nTaajuus: Hz , Bq\nEnergia: kWh , eV, aJ\nPaine: Bar , mmHg, atm, torr
 731#£Trigonometriset yhtŠlšt
@@ -809,7 +809,7 @@
 808#£Apua
 809#£Manuaalinen
 810#£Manuaalinen Word-asiakirjana
-811#£Online websivu KŠsikirja
+811#£Verkkosivuston dokumentaatio
 812#£Noin
 813#£PŠivittŠŠ
 814#£Pikakuvakkeet
@@ -901,3 +901,11 @@
 900#£Ratkaisun ehdot:
 901#£Sinun on ensin valittava lista, esimerkiksi [1; 2; 3]
 902#£EhkŠ olet vaihtanut n:n ja r:n K(n, r):ssŠ?
+903#£Kooditiedosto
+904#£KŠytŠ kooditiedostoa
+905#£Salli koodikentŠt
+906#£Kooditiedoston teksti suoritetaan Maximassa jokaisen kŠynnistyksen yhteydessŠ. Sen avulla voit esimerkiksi mŠŠrittŠŠ funktioita, joiden haluat aina olevan kŠytettŠvissŠ WordMatissa, tai muuttaa asetuksia Maximassa. Kooditiedoston kŠyttš hidastaa laskelmia hieman. \nKoodikentŠt voidaan lisŠtŠ mŠŠrittelyvalikon kautta, ja ne ovat Word-asiakirjan kenttiŠ, joihin voit lisŠtŠ enimmŠiskoodin, joka suoritetaan jokaisessa laskutoimituksessa. Kooditiedoston ja koodikenttien koodi lŠhetetŠŠn suoraan Maximalle kŠsittelemŠttšmŠnŠ. MikŠ tahansa koodivirhe aiheuttaa sen, ettŠ WordMat epŠonnistuu kaikissa laskutoimituksissa, joten ole varovainen. Katso valikosta Ohje > KŠsikirja > Ohje maksimikomentoihin oikean Maxima-syntaksin.
+907#£SyštŠ Maxima-koodi tŠhŠn
+908#£Et ole laittanut koodikenttiŠ pŠŠlle Asetukset > Koodi -kohdassa. KoodikenttŠ lisŠtŠŠn, mutta sitŠ ei kŠytetŠ laskutoimituksissa, ennen kuin se on otettu kŠyttššn.
+909#£Koodi
+910#£KoodikenttŠŠ ei voitu lisŠtŠ tŠhŠn.

@@ -40,7 +40,7 @@
 39#£Lietotaja defineta regresija
 40#£Funkcija
 41#£Decimaldalas
-42#£Sakuma minesana (piemeram: a = 2 , c = 10)
+42#£Sakuma minesana
 43#£Precizitate ir iestatita loti augsta. Aprekina laiks var but loti gars vai izraisit kludu. Ja tas neizdodas, izmeginiet zemaku iestatijumu.
 44#£Precizitate ir iestatita diezgan augsta. Aprekina laiks var but diezgan ilgs vai izraisit kludu. Ja tas neizdodas, izmeginiet zemaku iestatijumu.
 45#£Precizitate nevar but negativa. Pozitiva vesela skaitla izvele
@@ -113,7 +113,7 @@
 112#£Nevar izveidot savienojumu ar serveri
 113#£Saja dokumenta vieta ir definets:
 114#£Saja dokumenta nav definiciju.
-115#£
+115#£ir vairaki nedefineti mainigie. Neatkarigo mainigo nevar identificet. Izmantojiet x vai t ka neatkarigo mainigo.
 116#£Nevar definet atvasinajumu\r\nNonemiet definiciju: \r\n
 117#£Definicija ir kluda:
 118#£Tas tiek ignorets, bet izlabojiet ievades kludu, lai izvairitos no sis izvades kludas
@@ -326,9 +326,9 @@
 325#£Saisne Alt + M ievieto jaunu matematiku
 326#£Saisne AltGr + Enter aprekina
 327#£Saisne Alt + E atrisina vienadojumu
-328#£Saisne Alt + S atver iestatijumus
+328#£Saisne Alt + j atver iestatijumus
 329#£Saisne Alt + R Ievieto ieprieksejo rezultatu
-330#£Saisne Alt + U Iesledz ierices atbalstu
+330#£Izvades krasa
 331#£Apaksraksts:
 332#£\lambda ir saisinajums no maza grieku burta lambda
 333#£Saisne Alt + P Attelo grafiku
@@ -455,7 +455,7 @@
 454#£Definet funkciju
 455#£Fizisko konstantu definesana
 456#£Mazinat
-457#£Bezgaliba.
+457#£
 458#£Atskirtu
 459#£Integret
 460#£Skicesanu
@@ -539,9 +539,9 @@
 538#£Atlasiet izteiksmi, lai atskirtu vai novietotu kursoru izteiksme
 539#£Integret
 540#£Nosaka funkcijas nenoteikto integrali
-541#£
-542#£
-543#£
+541#£Importesanas iestatijumi
+542#£Eksportesanas iestatijumi
+543#£Pielagot izvelni
 544#£
 545#£Diagrammas diagramma (Alt+P)
 546#£Parada atlasitas(-o) funkcijas(-u)/vienadojuma(-u) un punktu grafiku. Pec tam grafiku var ievietot dokumenta. Tiek atbalstitas vairakas grafiku programmas. Sadala Iestatijumi izvelieties savu izlasi.
@@ -688,10 +688,10 @@
 687#£Nozimigi skaitli
 688#£Ieslegt/izslegt ierices
 689#£Ja vienibas ir ieslegtas, WordMath var interpretet un konvertet vienibas. Poga SI varat mainit izejas vienibas. Neiesledziet ierices, ja vien tas nav nepieciesams. Tas var ietekmet WordMat uzvedibu un rezerve daudz mainigo.
-690#£Izejas vienibas
+690#£Koda lauka ievietosana
 691#£Noradiet vienibas, uz kuram konvertet. Pec noklusejuma izejas vienibas ir SI vienibas.
-692#£Sf
-693#£Vienibas
+692#£ns
+693#£Koda lauks ir apgabals, kura varat tiesi programmet Maxima. Piemeram, varat definet uzlabotakas funkcijas, kuras pec tam var izmantot talak dokumenta. Vairak skatiet rokasgramata.
 694#£Ne. skaitli
 695#£Noapalosanas
 696#£Izvelieties, ka skaitli tiek noapaloti un noapaloti. Talak minetajos piemeros WordMat ir iestatits uz 3 skaitliem\r\n\r\nDecimaldalas: 12,345\r\nNozimigi skaitli: 12,3\r\nSci. Apzimejums: 1,23*10^1
@@ -726,7 +726,7 @@
 725#£Ir saraksta/matricas indekss
 726#£Standarta grafiku programma
 727#£Excel lapu iegulsana
-728#£Izejas vienibas
+728#£
 729#£Stavokla izejas vienibas, kas atdalitas ar komatiem\npiemeriem:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJa nekas nav noradits, vienibas tiek atgrieztas pamata SI vienibas vai no SI atvasinatas vienibas bez prefiksa.
 730#£Atbalstito vienibu piemeri:\n(Plasaku informaciju skatit rokasgramata)\n\nGarums: cm , AU, ly, pc\nMasa: u , G, mg\nFrekvence: Hz , Bq\nEnergija: kWh , eV, aJ\nSpiediens: Bar , mmHg, atm, torr
 731#£Trigonometriskie vienadojumi
@@ -809,7 +809,7 @@
 808#£Paliga
 809#£Pamaciba
 810#£Rokasgramata ka Word dokuments
-811#£Tiessaistes timekla lapas rokasgramata
+811#£Majas lapas dokumentacija
 812#£Par
 813#£Aktualizet
 814#£Saisnes
@@ -901,3 +901,11 @@
 900#£Risinajuma nosacijumi:
 901#£Vispirms jaizvelas saraksts, piemeram, [1; 2; 3]
 902#£Varbut jus esat nomainijis n un r K(n, r)?
+903#£Koda fails
+904#£Koda faila lietosana
+905#£Atlaut koda laukus
+906#£Koda faila teksts tiek palaists Maxima katra startesanas laika. Piemeram, to var izmantot, lai definetu funkcijas, kuras vienmer velaties, lai tas vienmer butu pieejamas programma WordMat, vai mainitu iestatijumus programma Maxima. Izmantojot koda failu, aprekini bus nedaudz lenaki. \nKoda laukus var ievietot, izmantojot definicijas izvelni, un tie ir Word dokumenta lauki, kuros var ievietot maksimalo kodu, kas tiek izpildits katra aprekina. Kods koda faila un koda laukos tiek nosutits tiesi uz Maxima neapstradats. Jebkura koda kluda izraisis WordMat neveiksmi visus aprekinus, tapec uzmanieties. Meklejiet izvelne sadala Palidziba > rokasgramata > palidziba ar Maxima komandam, lai atrastu pareizu Maxima sintaksi.
+907#£Ievadiet Maxima kodu seit
+908#£Jus neesat iesledzis koda laukus sadala "Iestatijumi > kods". Koda lauks tiek ievietots, bet tas netiks izmantots aprekinos, kamer tas nav ieslegts.
+909#£Kods
+910#£Seit nevareja ievietot koda lauku.
