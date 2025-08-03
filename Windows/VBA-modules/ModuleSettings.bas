@@ -345,7 +345,7 @@ Sub ReadSM(Optional ForceRead As Boolean = False)
             Else
                 s = "11" ' formula
                 s = s & "1111" ' Settings
-                s = s & "11111111111001" ' CAS
+                s = s & "11111111111111" ' CAS
                 s = s & "1111" ' def
                 s = s & "11111111111111111" ' graphs
                 s = s & "1111111111" ' regression
@@ -1792,3 +1792,29 @@ Dim tid As Single
     LoadSettingsFromData
     MsgBox timer - tid
 End Sub
+Public Function GetHardwareUUID() As String
+
+#If Mac Then
+    Dim scriptToRun As String
+        
+    On Error Resume Next
+    scriptToRun = "do shell script ""system_profiler SPHardwareDataType | awk '/Hardware UUID/{print $3}'"""
+    GetHardwareUUID = MacScript(scriptToRun)
+    If Err.Number <> 0 Then
+        GetHardwareUUID = "" ' Clear in case of error
+    End If
+    On Error GoTo 0
+        
+#Else
+    On Error Resume Next
+            
+    GetHardwareUUID = RegKeyRead("HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\IDConfigDB\Hardware Profiles\0001\HwProfileGuid")
+    GetHardwareUUID = Trim(GetHardwareUUID)
+    If Left(GetHardwareUUID, 1) = "{" Then GetHardwareUUID = Right(GetHardwareUUID, Len(GetHardwareUUID) - 1)
+    If Right(GetHardwareUUID, 1) = "}" Then GetHardwareUUID = Left(GetHardwareUUID, Len(GetHardwareUUID) - 1)
+    
+    On Error GoTo 0
+        
+#End If
+
+End Function

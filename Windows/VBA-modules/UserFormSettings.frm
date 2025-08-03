@@ -65,6 +65,10 @@ Private Sub ComboBox_language_Change()
     LangChange = True
 End Sub
 
+Private Sub CommandButton_HardwareUUID_Click()
+    ShowComputerID
+End Sub
+
 Private Sub Label_cancel_Click()
     Me.hide
 End Sub
