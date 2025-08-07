@@ -1371,7 +1371,11 @@ End Property
 
 Public Function GetRegSetting(key As String) As Integer
     Dim s As String
+#If Mac Then
     s = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key)
+#Else
+    s = GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key)
+#End If
     If s = vbNullString Then
         GetRegSetting = 0
     Else
@@ -1380,29 +1384,53 @@ Public Function GetRegSetting(key As String) As Integer
     End If
 End Function
 Private Sub SetRegSetting(ByVal key As String, ByVal val As Integer)
+#If Mac Then
     RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
+#Else
+    SetRegistryValue "HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_SZ, val
+#End If
 End Sub
 
 #If VBA7 Then
 Public Sub SetRegSettingLong(key As String, val As LongPtr)
+#If Mac Then
     RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
+#Else
+    SetRegistryValue "HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_DWORD, val
+#End If
 End Sub
 Public Function GetRegSettingLong(key As String) As LongPtr
+#If Mac Then
     GetRegSettingLong = CLngPtr(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
+#Else
+    GetRegSettingLong = CLngPtr(GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key))
+#End If
 End Function
 #Else
 Public Sub SetRegSettingLong(key As String, val As Long)
     RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 End Sub
 Public Function GetRegSettingLong(key As String) As Long
+#If Mac Then
     GetRegSettingLong = CLng(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
+#Else
+    GetRegSettingLong = CLng(GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key))
+#End If
 End Function
 #End If
 Public Function GetRegSettingString(key As String) As String
+#If Mac Then
     GetRegSettingString = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key)
+#Else
+    GetRegSettingString = GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key)
+#End If
 End Function
 Public Sub SetRegSettingString(key As String, ByVal val As String)
+#If Mac Then
     RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_SZ"
+#Else
+    SetRegistryValue "HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_SZ, val
+#End If
 End Sub
 
 Sub SaveSettingsToData()
@@ -1810,8 +1838,8 @@ Public Function GetHardwareUUID() As String
             
     GetHardwareUUID = RegKeyRead("HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\IDConfigDB\Hardware Profiles\0001\HwProfileGuid")
     GetHardwareUUID = Trim(GetHardwareUUID)
-    If Left(GetHardwareUUID, 1) = "{" Then GetHardwareUUID = Right(GetHardwareUUID, Len(GetHardwareUUID) - 1)
-    If Right(GetHardwareUUID, 1) = "}" Then GetHardwareUUID = Left(GetHardwareUUID, Len(GetHardwareUUID) - 1)
+    If Left(GetHardwareUUID, 1) = "{" Then GetHardwareUUID = right(GetHardwareUUID, Len(GetHardwareUUID) - 1)
+    If right(GetHardwareUUID, 1) = "}" Then GetHardwareUUID = Left(GetHardwareUUID, Len(GetHardwareUUID) - 1)
     
     On Error GoTo 0
         

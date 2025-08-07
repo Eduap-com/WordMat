@@ -145,7 +145,7 @@ Function GetErrorText(Text As String, MaximaOutput As String, Optional RemoveChr
     t = Trim(t)
     Pos = InStrRev(t, ";")
     If Pos > 0 Then
-        t = Left(t, Pos - 1) & Right(t, Len(t) - Pos)
+        t = Left(t, Pos - 1) & right(t, Len(t) - Pos)
     End If
     t = Replace(t, ":=", "= ")
     
@@ -159,7 +159,7 @@ Function ExtractText(ByVal Text As String, startText As String, endText As Strin
 
     If startText <> vbNullString Then
         p = InStr(Text, startText)
-        If p > 0 Then Text = Right(Text, Len(Text) - p - Len(startText) + 1)
+        If p > 0 Then Text = right(Text, Len(Text) - p - Len(startText) + 1)
     End If
     If endText <> vbNullString Then
         p = InStr(Text, endText)

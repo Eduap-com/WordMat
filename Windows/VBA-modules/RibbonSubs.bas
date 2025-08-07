@@ -222,7 +222,7 @@ Sub Rib_FSbinfrekvens(control As IRibbonControl)
         s = s & "n=20"
     End If
     s = Trim(s)
-    If Right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
         s = InputBox("Enter required definitions", "Definitions", s)
         s = Replace(s, ";", " , ")
@@ -252,7 +252,7 @@ Sub Rib_FSbinkum(control As IRibbonControl)
         s = s & "n=20"
     End If
     s = Trim(s)
-    If Right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
         s = InputBox("Enter required definitions", "Definitions", s)
         s = Replace(s, ";", " , ")
@@ -297,7 +297,7 @@ Sub Rib_FSnormfrekvens(control As IRibbonControl)
         s = s & "s=1"
     End If
     s = Trim(s)
-    If Right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
         s = InputBox("Enter required definitions", "Definitions", s)
         #If Mac Then
@@ -329,7 +329,7 @@ Sub Rib_FSnormkum(control As IRibbonControl)
         s = s & "s=1"
     End If
     s = Trim(s)
-    If Right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
         s = InputBox("Enter required definitions", "Definitions", s)
         s = Replace(s, "s=", VBA.ChrW(963) & "=")
@@ -382,7 +382,7 @@ Sub Rib_FSvektorvinkel(control As IRibbonControl)
         s = s & "b" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2))"
     End If
     s = Trim(s)
-    If Right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
         insertribformel "", "Definer: " & s
         Selection.TypeParagraph
@@ -406,7 +406,7 @@ Sub Rib_FSvektorproj(control As IRibbonControl)
         s = s & "b" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2))"
     End If
     s = Trim(s)
-    If Right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
     If s <> vbNullString Then
         insertribformel "", "Definer: " & s
         Selection.TypeParagraph

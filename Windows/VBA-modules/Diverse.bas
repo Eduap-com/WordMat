@@ -78,7 +78,7 @@ Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Templat
 ' If the current document is called wordmat*.dotm then it is returned as a template
 ' Otherwise all global templates are searched to see if there is one called wordmat*.dotm
     If Len(ActiveDocument.AttachedTemplate) > 10 Then
-        If LCase(Left(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase(Right(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
+        If LCase(Left(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase(right(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
             Set GetWordMatTemplate = ActiveDocument.AttachedTemplate
             Exit Function
         End If
@@ -158,77 +158,6 @@ Function GetDownloadsFolder() As String
 #Else
     GetDownloadsFolder = RegKeyRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\{374DE290-123F-4565-9164-39C4925E467B}")
     GetDownloadsFolder = Replace(GetDownloadsFolder, "%USERPROFILE%", Environ$("USERPROFILE"))
-#End If
-End Function
-Function RegKeyRead(i_RegKey As String) As Variant
-'example syntax: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ProgramFilesDir"
-#If Mac Then
-    RegKeyRead = GetSetting("com.wordmat", "defaults", i_RegKey)
-#Else
-    On Error Resume Next
-    If MaxProc Is Nothing Then
-        Dim myWS As Object
-        Set myWS = CreateObject("WScript.Shell")
-        RegKeyRead = myWS.RegRead(i_RegKey)
-    Else
-        RegKeyRead = MaxProc.RegKeyRead(i_RegKey)
-    End If
-#End If
-End Function
-
-Function RegKeyExists(i_RegKey As String) As Boolean
-#If Mac Then
-    RegKeyExists = True
-    If GetSetting("com.wordmat", "defaults", i_RegKey) = "" Then RegKeyExists = False
-#Else
-    If MaxProc Is Nothing Then
-        Dim myWS As Object
-        On Error GoTo ErrorHandler
-        Set myWS = CreateObject("WScript.Shell")
-        myWS.RegRead i_RegKey
-        RegKeyExists = True
-        Exit Function
-ErrorHandler:  'key was not found
-        RegKeyExists = False
-    Else
-        RegKeyExists = MaxProc.RegKeyExists(i_RegKey)
-    End If
-#End If
-End Function
-
-Sub RegKeySave(ByVal i_RegKey As String, ByVal i_Value As String, Optional ByVal i_Type As String = "REG_SZ")
-    '
-#If Mac Then
-    SaveSetting "com.wordmat", "defaults", i_RegKey, i_Value
-#Else
-    If MaxProc Is Nothing Then
-        Dim myWS As Object
-        On Error Resume Next
-        Set myWS = CreateObject("WScript.Shell")
-        myWS.RegWrite i_RegKey, i_Value, i_Type
-    Else
-        MaxProc.RegKeySave i_RegKey, i_Value 'i_value can be string or integer. can be saved to REG_SZ or REG_DWORD. If key does not exist REG_SZ type can be created, not DWORD
-    End If
-#End If
-End Sub
-
-Function RegKeyDelete(i_RegKey As String) As Boolean
-#If Mac Then
-    DeleteSetting "com.wordmat", "defaults", i_RegKey
-#Else
-    If MaxProc Is Nothing Then
-        Dim myWS As Object
-        On Error GoTo ErrorHandler
-        Set myWS = CreateObject("WScript.Shell")
-        On Error Resume Next
-        myWS.RegDelete i_RegKey
-        RegKeyDelete = True
-        Exit Function
-ErrorHandler:
-        RegKeyDelete = False
-    Else
-        MaxProc.RegKeyDelete i_RegKey
-    End If
 #End If
 End Function
 Sub OpenLink(Link As String, Optional Script As Boolean = False)
@@ -491,7 +420,7 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
         If Pos = Len(Text) Then Pos = 0
         If Pos > 0 Then
             Arr(i) = Left(Text, Pos - 1)
-            Text = Right(Text, Len(Text) - Pos)
+            Text = right(Text, Len(Text) - Pos)
             i = i + 1
         Else
             Arr(i) = Text
@@ -779,12 +708,12 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     NewVersion = s
     p = InStr(NewVersion, vbLf)
     If p > 0 Then
-        News = Right(NewVersion, Len(NewVersion) - p)
+        News = right(NewVersion, Len(NewVersion) - p)
         NewVersion = Trim(Left(NewVersion, p - 1))
     Else ' mac
         p = InStr(NewVersion, vbCr)
         If p > 0 Then
-            News = Right(NewVersion, Len(NewVersion) - p)
+            News = right(NewVersion, Len(NewVersion) - p)
             NewVersion = Trim(Left(NewVersion, p - 1))
         End If
     End If
@@ -898,9 +827,9 @@ Function ConvertNumberToString(ByVal n As Double) As String
         ConvertNumberToString = VBA.Format(n, "#################0.0####################")
 #End If
         If Len(ConvertNumberToString) > 1 Then
-            If Right(ConvertNumberToString, 2) = ".0" Then
+            If right(ConvertNumberToString, 2) = ".0" Then
                 ConvertNumberToString = Left(ConvertNumberToString, Len(ConvertNumberToString) - 2)
-            ElseIf Right(ConvertNumberToString, 2) = ",0" Then
+            ElseIf right(ConvertNumberToString, 2) = ",0" Then
                 ConvertNumberToString = Left(ConvertNumberToString, Len(ConvertNumberToString) - 2)
             End If
         End If
@@ -1460,7 +1389,7 @@ End Sub
 Public Function Local_Document_Path(ByRef Doc As Document, Optional bPathOnly As Boolean = True) As String
 'returns local path or nothing if local path not found. Converts a onedrive path to local path
 #If Mac Then
-   Local_Document_Path = Doc.Path
+   Local_Document_Path = Doc.path
 #Else
 Dim i As Long, X As Long
 Dim OneDrivePath As String
@@ -1570,7 +1499,7 @@ Function GetWordMatDir(Optional SubDir As String) As String
 #Else
     If SubDir <> vbNullString Then
         SubDir = Trim(SubDir)
-        If Right(SubDir, 1) <> "\" Then SubDir = SubDir & "\"
+        If right(SubDir, 1) <> "\" Then SubDir = SubDir & "\"
     End If
     If InstallLocation = "All" Then
         GetWordMatDir = GetProgramFilesDir() & "\WordMat\"

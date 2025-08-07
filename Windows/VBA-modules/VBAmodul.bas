@@ -143,7 +143,7 @@ Private Function ReplaceLineToANSI(s As String) As String
 End Function
 Function FolderExists(folderPath As String) As Boolean
 
-    If Right(folderPath, 1) <> "\" Then
+    If right(folderPath, 1) <> "\" Then
         folderPath = folderPath & "\"
     End If
     
@@ -157,9 +157,9 @@ End Function
 Function FolderWithVBAProjectFiles() As String
     Dim SpecialPath As String
 
-    SpecialPath = ActiveDocument.Path
+    SpecialPath = ActiveDocument.path
     
-    If Right(SpecialPath, 1) <> "\" Then
+    If right(SpecialPath, 1) <> "\" Then
         SpecialPath = SpecialPath & "\"
     End If
     SpecialPath = SpecialPath & VBAModulesFolder ' "VBAProjectFiles"
@@ -221,14 +221,14 @@ Public Sub ExportAllModules()
     ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup\"
     If Dir(ModuleBackupFolder, vbDirectory) <> "" Then
         backupFolder = Dir(Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup*", vbDirectory)
-        ns = Right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
+        ns = right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
         If IsNumeric(ns) Then
             If CInt(ns) > n Then n = CInt(ns)
         End If
         Do
             backupFolder = Dir()
             If backupFolder <> vbNullString Then
-                ns = Right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
+                ns = right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
                 If IsNumeric(ns) Then
                     If CInt(ns) > n Then n = CInt(ns)
                 End If
@@ -378,11 +378,11 @@ Sub ImportAllModules()
     
     szExportPath = FolderWithVBAProjectFiles
     
-    If Right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
+    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     StrFile = Dir(szExportPath & "A-ExportCreated*")
     If StrFile <> "" Then D = Mid(StrFile, 17, Len(StrFile) - 20)
-    D = Left(D, 13) & ":" & Mid(D, 14, 2) & ":" & Right(D, 2)
+    D = Left(D, 13) & ":" & Mid(D, 14, 2) & ":" & right(D, 2)
     
     
     StrFile = Dir(szExportPath & "*")
@@ -450,7 +450,7 @@ End Sub
 Function CountFilesInFolder(folderPath As String, Optional OnlyModules As Boolean = False) As Long
     Dim fileName As String
     Dim FileCount As Long
-    If Right(folderPath, 1) = "\" Then
+    If right(folderPath, 1) = "\" Then
         fileName = Dir(folderPath & "*")
     Else
         fileName = Dir(folderPath & "\*")
@@ -489,7 +489,7 @@ Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
     End If
     
     szExportPath = FolderWithVBAProjectFiles
-    If Right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
+    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     For Each cmpComponent In wkbSource.VBProject.VBComponents
         bExport = True
@@ -557,9 +557,9 @@ Sub RemoveCommentOutThisDocument()
             If i > VBC.CodeModule.CountOfLines Then Exit For
             s = VBC.CodeModule.Lines(i, 1)
             If Left(s, 2) = "' " Then
-                s = Right(s, Len(s) - 2)
+                s = right(s, Len(s) - 2)
             ElseIf Left(s, 1) = "'" Then
-                s = Right(s, Len(s) - 1)
+                s = right(s, Len(s) - 1)
             End If
             If s <> "" Or i > 2 Then
                 VBC.CodeModule.ReplaceLine i, s

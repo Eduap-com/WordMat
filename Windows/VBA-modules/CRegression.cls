@@ -518,7 +518,7 @@ Function ComputeUserRegr() As Boolean
     fkt = UserFormUserRegression.TextBox_function.Text
     fkt = Replace(fkt, "*", MaximaGangeTegn)
     s = UserFormUserRegression.TextBox_guess.Text
-    Do While Right(s, 1) = vbCrLf Or Right(s, 1) = vbCr Or Right(s, 1) = vbLf
+    Do While right(s, 1) = vbCrLf Or right(s, 1) = vbCr Or right(s, 1) = vbLf
         s = Left(s, Len(s) - 1)
     Loop
     s = Replace(s, vbCrLf, ";")
@@ -527,7 +527,7 @@ Function ComputeUserRegr() As Boolean
     Arr = Split(s, ";")
     guess = "["
     For i = 0 To UBound(Arr)
-        If Right(Arr(i), 1) <> "=" Then guess = guess & Arr(i) & ";"
+        If right(Arr(i), 1) <> "=" Then guess = guess & Arr(i) & ";"
     Next
     If Len(guess) > 1 Then guess = Left(guess, Len(guess) - 1)
     guess = guess & "]"
@@ -536,7 +536,7 @@ Function ComputeUserRegr() As Boolean
         omax.UserRegression ConvertSep(fkt), Var, xlist, ylist, CInt(eps), ConvertSep(guess)
         p = InStr(omax.KommentarOutput, "R^2=")
         If p > 0 Then
-            r = ConvertStringToNumber(Right(omax.KommentarOutput, Len(omax.KommentarOutput) - p - 3))
+            r = ConvertStringToNumber(right(omax.KommentarOutput, Len(omax.KommentarOutput) - p - 3))
         End If
 '        RegressionText = TT.A(33) & fkt & " " & TT.A(34) & ": " ' now handled directly
         Ligning = omax.MaximaOutput

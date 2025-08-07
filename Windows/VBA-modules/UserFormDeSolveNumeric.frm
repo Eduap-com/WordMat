@@ -821,7 +821,7 @@ Sub InsertDefinitioner()
         'defstring = Replace(defstring, ",", ".")
         'defstring = Replace(defstring, ";", ",")
         'defstring = Replace(defstring, "=", ":")
-        If Right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
+        If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
 
         'omax.MaximaInputStreng = omax.MaximaInputStreng & "[" & defstring & "]$"
         omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
@@ -873,10 +873,10 @@ Sub OpdaterDefinitioner()
    Vars = RemoveVar(Vars, TextBox_var8.Text)
    Vars = RemoveVar(Vars, TextBox_var9.Text)
     
-   If Left(Vars, 1) = ";" Then Vars = Right(Vars, Len(Vars) - 1)
+   If Left(Vars, 1) = ";" Then Vars = right(Vars, Len(Vars) - 1)
     
    ea.Text = Vars
-   Do While Right(TextBox_definitioner.Text, 2) = VbCrLfMac
+   Do While right(TextBox_definitioner.Text, 2) = VbCrLfMac
       TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
    Loop
    Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
@@ -890,7 +890,7 @@ Sub OpdaterDefinitioner()
          If Arr(i) <> "" Then s = s & Arr(i) & VbCrLfMac
       End If
    Next
-   Do While Right(s, 2) = vbCrLf
+   Do While right(s, 2) = vbCrLf
       s = Left(s, Len(s) - 2)
    Loop
    TextBox_definitioner.Text = s
@@ -940,8 +940,8 @@ Function RemoveVar(Text As String, Var As String)
     ea.Text = Text
     Call ea.ReplaceVar(Var, "")
     Text = Replace(ea.Text, ";;", ";")
-    If Left(Text, 1) = ";" Then Text = Right(Text, Len(Text) - 1)
-    If Right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
+    If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
+    If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
 
     RemoveVar = Text
 End Function

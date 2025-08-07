@@ -6,7 +6,7 @@ Dim SaveTime As Single
 
 Sub SaveBackup()
     On Error GoTo fejl
-    Dim Path As String
+    Dim path As String
     Dim UFbackup As UserFormBackup
     Dim UfWait As UserFormWaitForMaxima
     Const lCancelled_c As Long = 0
@@ -29,7 +29,7 @@ Sub SaveBackup()
         
     If timer - SaveTime < BackupTime * 60 Then Exit Sub
     SaveTime = timer
-    If ActiveDocument.Path = "" Then
+    If ActiveDocument.path = "" Then
         MsgBox TT.A(679)
         Exit Sub
     End If
@@ -47,23 +47,23 @@ Sub SaveBackup()
     BackupNo = BackupNo + 1
     If BackupNo > BackupMaxNo Then BackupNo = 1
 #If Mac Then
-    Path = GetTempDir & "WordMat-Backup/"
+    path = GetTempDir & "WordMat-Backup/"
 #Else
-    Path = GetDocumentsDir & "\WordMat-Backup\"
+    path = GetDocumentsDir & "\WordMat-Backup\"
 #End If
     '    If Dir(path, vbDirectory) = "" Then MkDir path
-    If Not fileExists(Path) Then MkDir Path
+    If Not fileExists(path) Then MkDir path
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
-    Path = Path & "WordMatBackup" & BackupNo & ".docx"
-    If VBA.LenB(Path) = lCancelled_c Then Exit Sub
+    path = path & "WordMatBackup" & BackupNo & ".docx"
+    If VBA.LenB(path) = lCancelled_c Then Exit Sub
     
 #If Mac Then
     Set tempDoc2 = Application.Documents.Add(Template:=ActiveDocument.FullName, visible:=False)
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     tempDoc2.ActiveWindow.Left = 2000
-    tempDoc2.SaveAs Path
+    tempDoc2.SaveAs path
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents
     tempDoc2.Close
@@ -71,7 +71,7 @@ Sub SaveBackup()
     Dim fso As Object
     Set fso = CreateObject("Scripting.FileSystemObject")
     ActiveDocument.Save
-    fso.CopyFile ActiveDocument.FullName, Path
+    fso.CopyFile ActiveDocument.FullName, path
     Set fso = Nothing
     UfWait.Label_progress.Caption = UfWait.Label_progress.Caption & "*"
     DoEvents

@@ -106,7 +106,7 @@ End Sub
 
 Function InsertIndlejret(FilNavn As String, Optional startark As String)
     'inserts excel document as embedded document
-    Dim Path As String
+    Dim path As String
     Dim ils As InlineShape
     Dim vers As String
     On Error Resume Next
@@ -125,7 +125,7 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String)
     '    ufwait2.Show vbModeless
     DoEvents
     '        ufwait2.Label_progress = "***"
-    Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
+    path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
     If Selection.Range.Tables.Count > 0 Then
         '        Selection.Copy
         Selection.Tables(Selection.Tables.Count).Select
@@ -145,7 +145,7 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String)
     End If
 
     Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.Sheet" & vers & Application.Version, _
-        fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+        fileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
     '        ufwait2.Label_progress = "***************************************"
     'Ils.OLEFormat.DoVerb (wdOLEVerbOpen)
     'ils.OLEFormat.DoVerb (wdOLEVerbInPlaceActivate)

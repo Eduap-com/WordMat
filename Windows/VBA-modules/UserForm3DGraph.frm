@@ -177,7 +177,7 @@ Private Sub CommandButton_geogebra_Click()
         punkttekst = Replace(punkttekst, vbCrLf, ";")
         punkttekst = Replace(punkttekst, vbCr, ";")
         punkttekst = Replace(punkttekst, " ", "")
-        If Right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+        If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
         s = s & punkttekst & ";"
     End If
     s = Left(s, Len(s) - 1)
@@ -333,7 +333,7 @@ End Sub
 
 Private Sub CommandButton_nyvektor_Click()
     If TextBox_vektorer.Text <> "" Then
-        If Right(TextBox_vektorer.Text, 1) = ")" Then
+        If right(TextBox_vektorer.Text, 1) = ")" Then
             TextBox_vektorer.Text = TextBox_vektorer.Text & vbCr
         End If
     End If
@@ -557,7 +557,7 @@ If TextBox_punkter.Text <> "" Then
     punkttekst = Replace(punkttekst, vbCrLf, ",")
     punkttekst = Replace(punkttekst, vbCr, ",")
     punkttekst = Replace(punkttekst, " ", "")
-    If Right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
     grafobj = grafobj & "key="""","
     
     grafobj = grafobj & "point_type=filled_circle,point_size=" & TextBox_pointsize.Text & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
@@ -626,7 +626,7 @@ End If
     If TextBox_zmin.Text <> vbNullString And TextBox_zmax.Text <> vbNullString Then
         s = s & "zrange=[" & zmin & "," & zmax & "],"
     End If
-    If Right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
     grafobj = s & ")," & grafobj
     omax.Draw3D grafobj, antalobj
     omax.PrepareNewCommand

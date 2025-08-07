@@ -541,7 +541,7 @@ Sub ExcelPlot()
     Dim ws As Object
     Dim WB As Object
 
-    Dim Path As String
+    Dim path As String
     Dim ils As InlineShape
     Dim xmin As Double, xmax As Double
     Dim plinjer As Variant
@@ -566,13 +566,13 @@ Sub ExcelPlot()
 
     Else
 
-        Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
+        path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
         PrepareMaxima
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
         UFwait2.Label_progress = UFwait2.Label_progress & "**"
 
-        Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+        Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
 
         'Ils.Height = 300
         'Ils.Width = 500
@@ -817,7 +817,7 @@ Dim Arr As Variant
     Pos = InStr(forskrift, VBA.ChrW(124))
     If Pos > 0 Then
         posb = InStr(Pos + 1, forskrift, VBA.ChrW(124))
-        forskrift = Left(forskrift, Pos - 1) & "abs(" & Mid(forskrift, Pos + 1, posb - Pos - 1) & ")" & Right(forskrift, Len(forskrift) - posb)
+        forskrift = Left(forskrift, Pos - 1) & "abs(" & Mid(forskrift, Pos + 1, posb - Pos - 1) & ")" & right(forskrift, Len(forskrift) - posb)
     End If
     Loop While Pos > 0
     
@@ -863,7 +863,7 @@ Dim Arr As Variant
                 Call ea.InsertBeforePos("^(1/(" & rod & "))")
                 ea.Text = Replace(ea.Text, VBA.ChrW(8730), "", 1, 1)
                 posog = ea.FindChr("&", 1)
-                forskrift = Left(ea.Text, Pos) & Right(ea.Text, Len(ea.Text) - posog)
+                forskrift = Left(ea.Text, Pos) & right(ea.Text, Len(ea.Text) - posog)
                
             End If
         End If
@@ -1208,7 +1208,7 @@ If TextBox_punkter.Text <> "" Then
         If Left(Arr(i), 1) <> "(" Then
             Arr(i) = "(" & Arr(i)
         End If
-        If Right(Arr(i), 1) <> ")" Then
+        If right(Arr(i), 1) <> ")" Then
             Arr(i) = Arr(i) & ")"
         End If
         Arr(i) = Replace(Arr(i), "),(", "],[")
@@ -1218,7 +1218,7 @@ If TextBox_punkter.Text <> "" Then
         punkttekst = punkttekst & Arr(i) & ","
         End If
     Next
-    If Right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
     
     grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(highres * ConvertStringToNumber(TextBox_pointsize.Text), ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
 End If
@@ -1239,7 +1239,7 @@ If TextBox_punkter2.Text <> "" Then
         If Left(Arr(i), 1) <> "(" Then
             Arr(i) = "(" & Arr(i)
         End If
-        If Right(Arr(i), 1) <> ")" Then
+        If right(Arr(i), 1) <> ")" Then
             Arr(i) = Arr(i) & ")"
         End If
         Arr(i) = Replace(Arr(i), "),(", "],[")
@@ -1249,7 +1249,7 @@ If TextBox_punkter2.Text <> "" Then
         punkttekst = punkttekst & Arr(i) & ","
         End If
     Next
-    If Right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
     
     grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(TextBox_pointsize2.Text, ",", ".") & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined2.Value) & ",points([" & punkttekst & "]),"
 End If
@@ -1503,17 +1503,17 @@ Private Sub CommandButton_linregr_Click()
 '    Cregr.InsertEquation
 
     If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning4.Text = "" Then
-        TextBox_ligning4.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning5.Text = "" Then
-        TextBox_ligning5.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning6.Text = "" Then
-        TextBox_ligning6.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
 
     OpdaterGraf
@@ -1532,17 +1532,17 @@ Private Sub CommandButton_polregr_Click()
 '    Cregr.InsertEquation
 
     If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning4.Text = "" Then
-        TextBox_ligning4.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning5.Text = "" Then
-        TextBox_ligning5.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning6.Text = "" Then
-        TextBox_ligning6.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
     
     OpdaterGraf
@@ -1560,17 +1560,17 @@ Private Sub CommandButton_ekspregr_Click()
 '    Cregr.InsertEquation
 
     If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning4.Text = "" Then
-        TextBox_ligning4.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning5.Text = "" Then
-        TextBox_ligning5.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning6.Text = "" Then
-        TextBox_ligning6.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
     
     OpdaterGraf
@@ -1586,17 +1586,17 @@ Private Sub CommandButton_potregr_Click()
     Cregr.ComputePowRegr
 
     If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning1.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning2.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning3.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning4.Text = "" Then
-        TextBox_ligning4.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning4.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning5.Text = "" Then
-        TextBox_ligning5.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning5.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     ElseIf TextBox_ligning6.Text = "" Then
-        TextBox_ligning6.Text = Right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
+        TextBox_ligning6.Text = right(Cregr.Ligning, Len(Cregr.Ligning) - 2)
     End If
 
     OpdaterGraf
@@ -1958,7 +1958,7 @@ Sub InsertDefinitioner()
     DefString = GetDefString
 
     If Len(DefString) > 0 Then
-        If Right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
+        If right(DefString, 1) = "," Then DefString = Left(DefString, Len(DefString) - 1)
         omax.MaximaInputStreng = omax.MaximaInputStreng & DefString
     End If
 End Sub
@@ -1998,10 +1998,10 @@ Dim i As Integer
     
     omax.FindVariable Vars, False ' removes doubles
     Vars = omax.Vars
-    If Left(Vars, 1) = ";" Then Vars = Right(Vars, Len(Vars) - 1)
+    If Left(Vars, 1) = ";" Then Vars = right(Vars, Len(Vars) - 1)
     
     ea.Text = Vars
-    Do While Right(TextBox_definitioner.Text, 2) = VbCrLfMac
+    Do While right(TextBox_definitioner.Text, 2) = VbCrLfMac
         TextBox_definitioner.Text = Left(TextBox_definitioner.Text, Len(TextBox_definitioner.Text) - 2)
     Loop
     Arr = Split(TextBox_definitioner.Text, VbCrLfMac)
@@ -2070,8 +2070,8 @@ Dim ea As New ExpressionAnalyser
 ea.Text = Text
 Call ea.ReplaceVar(Var, "")
 Text = Replace(ea.Text, ";;", ";")
-If Left(Text, 1) = ";" Then Text = Right(Text, Len(Text) - 1)
-If Right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
+If Left(Text, 1) = ";" Then Text = right(Text, Len(Text) - 1)
+If right(Text, 1) = ";" Then Text = Left(Text, Len(Text) - 1)
 
 RemoveVar = Text
 End Function
@@ -2208,7 +2208,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = TT.A(444)
     Label29.Caption = TT.A(823)
     Label45.Caption = TT.A(837)
-    Label_ligninger.Caption = TT.A(832) & "  f(x)=..."
+    Label_Ligninger.Caption = TT.A(832) & "  f(x)=..."
     CommandButton_nulstil1.Caption = TT.Reset
     CommandButton_nulstil2.Caption = TT.Reset
     CommandButton_nulstil3.Caption = TT.Reset

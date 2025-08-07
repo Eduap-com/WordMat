@@ -147,7 +147,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                                 cmd = "Param:X=" & RHS
                                 cmd = Replace(cmd, "+", "%2B") & ";"
                                 UrlLink = UrlLink & cmd
-                            ElseIf Right(LHS, 3) = "pil" Then ' vector
+                            ElseIf right(LHS, 3) = "pil" Then ' vector
                                 LHS = Left(LHS, Len(LHS) - 3)
                                 RHS = Replace(RHS, "{", "(")
                                 RHS = Replace(RHS, "}", ")")
@@ -288,7 +288,7 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
         Next
     End If
     
-    If Len(cmd) > 0 Then If Right(cmd, 1) = ";" Then cmd = Left(cmd, Len(cmd) - 1)
+    If Len(cmd) > 0 Then If right(cmd, 1) = ";" Then cmd = Left(cmd, Len(cmd) - 1)
     '    If ConvertSyntax Then Cmd = ConvertToGeogebraSyntax(Cmd, True)
     cmd = DefS & cmd
     cmd = Replace(cmd, "+", "%2B")
@@ -554,7 +554,7 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
           ea.Text = Text
           s = ea.GetNextBracketContent(p + 7)
           Arr = Split(s, ",")
-          If UBound(Arr) > 0 Then Text = Left(Text, p - 1) & "log(" & Arr(1) & "," & Arr(0) & Right(Text, Len(Text) - p - Len(s) - 7)
+          If UBound(Arr) > 0 Then Text = Left(Text, p - 1) & "log(" & Arr(1) & "," & Arr(0) & right(Text, Len(Text) - p - Len(s) - 7)
         End If
         p = InStr(Text, "logbase(")
       Loop
@@ -580,12 +580,12 @@ Function ConvertToGeogebraSyntax(ByVal Text As String, Optional ConvertMaxima As
             If p3 = Len(s) + 1 Then Exit Do
             p3 = p3 + 1
          Loop While p3 < Len(s)
-         If Right(gexpr, 1) = "," Then gexpr = Left(gexpr, Len(gexpr) - 1)
+         If right(gexpr, 1) = "," Then gexpr = Left(gexpr, Len(gexpr) - 1)
          For i = 1 To n
 '            gexpr = gexpr & "]"
             gexpr = gexpr & ")"
          Next
-         Text = Left(Text, sp - 1) & gexpr & Right(Text, Len(Text) - ep + 2)
+         Text = Left(Text, sp - 1) & gexpr & right(Text, Len(Text) - ep + 2)
          
          Text = Replace(Text, " and ", " &amp;&amp; ") '&&
          Text = Replace(Text, " or ", " || ") '||
@@ -648,7 +648,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal Text As String) As String
         mtext = Replace(mtext, ListSeparator, "&")
 
         mtext = omax.matrixstartbracket & VBA.ChrW(9632) & "(" & Mid(mtext, 2, Len(mtext) - 2) & ")" & omax.matrixendbracket
-        ea.Text = Left(ea.Text, p - 1) & mtext & Right(ea.Text, Len(ea.Text) - ea.Pos + 1)
+        ea.Text = Left(ea.Text, p - 1) & mtext & right(ea.Text, Len(ea.Text) - ea.Pos + 1)
 
         p = InStr(p + 1, ea.Text, "{{")
     Loop
@@ -656,7 +656,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal Text As String) As String
     p = InStr(ea.Text, "_{")
     Do While p > 0
         s = ea.GetNextBracketContent(p)
-        ea.Text = Left(ea.Text, p) & s & Right(ea.Text, Len(ea.Text) - Len(s) - p - 2)
+        ea.Text = Left(ea.Text, p) & s & right(ea.Text, Len(ea.Text) - Len(s) - p - 2)
         p = InStr(p + 1, ea.Text, "_{")
     Loop
     Text = ea.Text
@@ -1045,7 +1045,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                             If InStr(RHS, "¦") > 0 Then ' vector inserted using template from equation menu
                                 RHS = Replace(RHS, "¦", ";")
                                 geogebrafil.CreateVector fktnavn, RHS, False, True
-                            ElseIf Right(LHS, 1) = VBA.ChrW(8407) Then ' vector
+                            ElseIf right(LHS, 1) = VBA.ChrW(8407) Then ' vector
                                 RHS = Replace(RHS, VBA.ChrW(9608), "")
                                 RHS = Replace(RHS, VBA.ChrW(183), "*")
                                 RHS = Replace(RHS, ",", ".")

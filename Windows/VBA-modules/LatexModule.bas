@@ -34,7 +34,7 @@ Public Sub SaveFile(doctype As Integer)
    '***
    
    'Check if document saved
-   If ActiveDocument.Path = "" Then
+   If ActiveDocument.path = "" Then
       MsgBox "Save your document before attempting to convert to Latex. The Latex files will be placed in a folder next to your document-file.", vbOKOnly, "File not saved"
       GoTo slut
    End If
@@ -252,7 +252,7 @@ Public Sub SaveFile(doctype As Integer)
                If FN <> "" Or ln <> "" Then
                   SrcAuthor = SrcAuthor & FN & " " & ln & ", "
                   p = InStr(nl, "</b:Person>")
-                  nl = Right(nl, Len(nl) - p - 10)
+                  nl = right(nl, Len(nl) - p - 10)
                End If
             Loop While FN <> "" And ln <> "" And nl <> ""
             
@@ -656,8 +656,8 @@ Sub ConvertEquationToLatex(Optional KeepOriginal As Boolean = False)
                     s = "$" & LatexCode & "$"
                 End If
             Else
-                If InStr(EqStart, "\begin") > 0 Then EqStart = Left(EqStart, Len(EqStart) - 1) & "*" & Right(EqStart, 1)
-                If InStr(EqEnd, "\end") > 0 Then EqEnd = Left(EqEnd, Len(EqEnd) - 1) & "*" & Right(EqEnd, 1)
+                If InStr(EqStart, "\begin") > 0 Then EqStart = Left(EqStart, Len(EqStart) - 1) & "*" & right(EqStart, 1)
+                If InStr(EqEnd, "\end") > 0 Then EqEnd = Left(EqEnd, Len(EqEnd) - 1) & "*" & right(EqEnd, 1)
                 s = EqStart & LatexCode & EqEnd
             End If
         End If

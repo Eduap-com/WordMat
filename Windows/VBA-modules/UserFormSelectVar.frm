@@ -108,7 +108,7 @@ Dim i As Integer, c As Integer
 
     TempDefs = vbNullString
     For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not Right(Arr(i), 1) = "=" Then
+        If Len(Arr(i)) > 2 And Not right(Arr(i), 1) = "=" Then
             If Split(Arr(i), "=")(0) <> SelectedVar Then ' may not define a variable which is solved for
                 TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
@@ -125,7 +125,7 @@ Dim i As Integer, c As Integer
         End If
     End If
     
-    If Right(TempDefs, 1) = ListSeparator Then
+    If right(TempDefs, 1) = ListSeparator Then
         TempDefs = Left(TempDefs, Len(TempDefs) - 1)
     End If
     End If

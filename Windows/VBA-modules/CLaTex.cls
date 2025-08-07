@@ -406,39 +406,39 @@ slut:
 End Sub
 
 Function MikTexPath() As String
-Dim Path As String
+Dim path As String
      
-Path = Environ("ProgramW6432") & "\MikTex*"
-If Dir(Path, vbDirectory) <> "" Then
+path = Environ("ProgramW6432") & "\MikTex*"
+If Dir(path, vbDirectory) <> "" Then
    MikTex64bit = True
-   Path = Environ("ProgramW6432") & "\" & Dir(Path, vbDirectory) & "\miktex"
+   path = Environ("ProgramW6432") & "\" & Dir(path, vbDirectory) & "\miktex"
    GoTo slut
 End If
-Path = Environ("ProgramFiles") & "\MikTex*"
-If Dir(Path, vbDirectory) <> "" Then
+path = Environ("ProgramFiles") & "\MikTex*"
+If Dir(path, vbDirectory) <> "" Then
     MikTex64bit = False
-   Path = Environ("ProgramFiles") & "\" & Dir(Path, vbDirectory) & "\miktex"
+   path = Environ("ProgramFiles") & "\" & Dir(path, vbDirectory) & "\miktex"
    GoTo slut
 End If
 
-Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex\bin\x64" ' if installed in userprofile and 64 bit
-If Dir(Path, vbDirectory) <> "" Then
+path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex\bin\x64" ' if installed in userprofile and 64 bit
+If Dir(path, vbDirectory) <> "" Then
     MikTex64bit = True
-    Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' if installed in userprofile
+    path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' if installed in userprofile
     GoTo slut
 End If
-Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' if installed in userprofile
-If Dir(Path, vbDirectory) <> "" Then GoTo slut
+path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX\miktex" ' if installed in userprofile
+If Dir(path, vbDirectory) <> "" Then GoTo slut
 
-Path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' if installed in userprofile
-If Dir(Path, vbDirectory) <> "" Then GoTo slut
+path = Environ("USERPROFILE") & "\AppData\Local\Programs\MiKTeX*\miktex" ' if installed in userprofile
+If Dir(path, vbDirectory) <> "" Then GoTo slut
 
 'path = GetProgramFilesDir() & "\MikTex*"
 'If Dir(path, vbDirectory) <> "" Then GoTo Slut
 
-Path = ""
+path = ""
 slut:
-MikTexPath = Path
+MikTexPath = path
 End Function
 Function IsMikTexInstalled() As Boolean
 If MikTexPath = "" Then
@@ -459,7 +459,7 @@ Sub InsertParagraph(Text As String)
    End If
 End Sub
 Sub InsertChapter(Text As String)
-   If Right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If InStr(Text, "*") > 0 Then
       LaTexDoc = LaTexDoc & "\chapter*{" & Replace(Text, "*", "") & "}" & vbCrLf
@@ -468,7 +468,7 @@ Sub InsertChapter(Text As String)
    End If
 End Sub
 Sub InsertSection(Text As String)
-   If Right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If LatexSectionNumbering Then
       If InStr(Text, "*") > 0 Then
@@ -481,7 +481,7 @@ Sub InsertSection(Text As String)
    End If
 End Sub
 Sub InsertSubSection(Text As String)
-   If Right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If LatexSectionNumbering Then
       If InStr(Text, "*") > 0 Then
@@ -494,7 +494,7 @@ Sub InsertSubSection(Text As String)
    End If
 End Sub
 Sub InsertSubSubSection(Text As String)
-   If Right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
+   If right(Text, 1) = vbCr Then Text = Left(Text, Len(Text) - 1)
     
    If LatexSectionNumbering Then
       If InStr(Text, "*") > 0 Then

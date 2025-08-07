@@ -339,7 +339,7 @@ Sub InsertGraphOleObject()
 #If Mac Then
     MsgBox "Sorry. Graph is not supported on Mac.", vbOKOnly, TT.Error
 #Else
-    Dim Path As String
+    Dim path As String
     Dim ils As InlineShape
     Dim Arr As Variant
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
@@ -364,7 +364,7 @@ Sub InsertGraphOleObject()
     End If
 
     'path = """" & GetProgramFilesDir & "\WordMat\graphtemplate.grf"""
-    Path = Environ("TEMP") & "\" & "wordmatgraph.grf"
+    path = Environ("TEMP") & "\" & "wordmatgraph.grf"
     'path = "c:\wordmatgraph.grf" ' til test
 
     Dim graphfil As New CGraphFile
@@ -471,11 +471,11 @@ Sub InsertGraphOleObject()
     UfWait.Label_progress.Caption = "******"
 
     If graphfil.funkno > 0 Or Len(graphfil.CustomFunctions) > 0 Or graphfil.relationno > 0 Or graphfil.pointno > 0 Then
-        graphfil.Save Path
+        graphfil.Save path
 
 'insert using empty graph file. A little slower, but could be used for communication at some point
         On Error GoTo hop
-        Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+        Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
         On Error GoTo fejl
         ils.OLEFormat.DoVerb (wdOLEVerbShow)
 
@@ -638,7 +638,7 @@ Sub InsertChart()
             End If
         End If
     Next
-    If Right(ScriptFunctions, 1) = "#" Then ScriptFunctions = Left(ScriptFunctions, Len(ScriptFunctions) - 1)
+    If right(ScriptFunctions, 1) = "#" Then ScriptFunctions = Left(ScriptFunctions, Len(ScriptFunctions) - 1)
     
     srange.Select
     'datapoints
@@ -653,7 +653,7 @@ Sub InsertChart()
             If Cregr.XValues(i) > xmax Then xmax = Cregr.XValues(i)
             If Cregr.XValues(i) < xmin Then xmin = Cregr.XValues(i)
         Next
-        If Right(ScriptDataPoints, 1) = "#" Then ScriptDataPoints = Left(ScriptDataPoints, Len(ScriptDataPoints) - 1)
+        If right(ScriptDataPoints, 1) = "#" Then ScriptDataPoints = Left(ScriptDataPoints, Len(ScriptDataPoints) - 1)
         ScriptDataPoints = ScriptDataPoints & ";" & xmin & ":" & xmax
     End If
     
@@ -850,16 +850,16 @@ Close filno
 ReadTextFile = Text
 End Function
 Sub TestEmbed()
-Dim Path As String
+Dim path As String
 Dim ils As InlineShape
-Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
+path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\Graphs.xltm"""
 
-Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+Set ils = ActiveDocument.InlineShapes.AddOLEObject(fileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
 End Sub
 Function InsertIndlejret(FilNavn As String, Optional startark As String) As Object
 ' insert excel document as embedded document
 ' note fails if google cloud connect installed
-    Dim Path As String
+    Dim path As String
     Dim ils As InlineShape
     Dim vers As String
     On Error GoTo fejl
@@ -873,9 +873,9 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String) As Obje
     DoEvents
     UFwait2.Label_progress = "***"
 #If Mac Then
-    Path = GetWordMatDir() & "Excelfiles/" & FilNavn
+    path = GetWordMatDir() & "Excelfiles/" & FilNavn
 #Else
-    Path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
+    path = """" & GetProgramFilesDir & "\WordMat\ExcelFiles\" & FilNavn & """"
 #End If
     If Selection.Range.Tables.Count > 0 Then
         Selection.Tables(Selection.Tables.Count).Select
@@ -894,7 +894,7 @@ Function InsertIndlejret(FilNavn As String, Optional startark As String) As Obje
     End If
 
     Set ils = ActiveDocument.InlineShapes.AddOLEObject(ClassType:="Excel.SheetMacroEnabled" & vers & Application.Version, _
-        fileName:=Path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
+        fileName:=path, LinkToFile:=False, DisplayAsIcon:=False, Range:=Selection.Range)
         
     UFwait2.Label_progress = "***************************************"
 
