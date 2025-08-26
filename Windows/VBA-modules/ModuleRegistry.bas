@@ -30,15 +30,31 @@ Public Const REG_DWORD As Long = 4
 
 Private myWS As Object
 
-Public Function GetRegistryValue(hive As String, path As String, valueName As String) As Variant
-'Example: GetRegistryValue("HKCU", "Software\Microsoft\Windows\CurrentVersion\Explorer", "ShellState")
-'Example: GetRegistryValue("HKLM", "SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName")
-'?GetRegistryValue("HKCU", "Software\WordMat\Settings", "AntalBeregninger")
+Sub Testspeed()
+Dim i As Integer
+Dim s As String
+Dim t As Single
+    t = timer
+    For i = 0 To 1000
+'        s = GetRegistryValue("HKCU", "Software\WordMat\Settings", "AntalBeregninger", REG_DWORD)
+'        s = GetRegistryValue("HKCU", "Software\WordMat\Settings", "Skolenavn", 0)
+        s = GetRegistryValue("HKCU", "Software\WordMat\Settings", "Formelfag", 0)
+        's = RegKeyRead("HKCU\Software\WordMat\Settings\AntalBeregninger")
+        's = RegKeyRead("HKCU\Software\WordMat\Settings\FormelFag")
+    Next
+    MsgBox timer - t & vbCrLf & s
+End Sub
+
+Public Function GetRegistryValue(hive As String, path As String, valueName As String, Optional valueType As Long = 0) As Variant
+    'Example: GetRegistryValue("HKCU", "Software\Microsoft\Windows\CurrentVersion\Explorer", "ShellState")
+    'Example: GetRegistryValue("HKLM", "SOFTWARE\Microsoft\Windows NT\CurrentVersion", "ProductName")
+    '?GetRegistryValue("HKCU", "Software\WordMat\Settings", "AntalBeregninger")
+    ' If valuetype is stated it will be a bit faster
 
     Dim hRoot As LongPtr
     Dim hKey As LongPtr
     Dim result As Long
-    Dim valueType As Long
+    '    Dim valueType As Long
     Dim dataSize As Long
     Dim dataBuffer() As Byte '0 To 1023
     Dim strData As String
@@ -63,32 +79,35 @@ Public Function GetRegistryValue(hive As String, path As String, valueName As St
         GetRegistryValue = vbNullString 'CVErr(91) ' Object variable or With block variable not set
         Exit Function
     End If
-        
-    ' Query value size first
-    result = RegQueryValueEx(hKey, valueName, 0, valueType, ByVal 0&, dataSize)
-    If result <> ERROR_SUCCESS Then
-        RegCloseKey hKey
-        GetRegistryValue = vbNullString ' CVErr(94) ' Invalid use of Null
-        Exit Function
+    
+    If valueType <> REG_DWORD Then ' Dword's size is already known
+        ' Query value size first
+        result = RegQueryValueEx(hKey, valueName, 0, valueType, ByVal 0&, dataSize)
+        If result <> ERROR_SUCCESS Then
+            RegCloseKey hKey
+            GetRegistryValue = vbNullString ' CVErr(94) ' Invalid use of Null
+            Exit Function
+        End If
+
+        ReDim dataBuffer(0 To dataSize - 1) As Byte
     End If
-
-    ReDim dataBuffer(0 To dataSize - 1) As Byte
-
-    ' Query actual data
-    result = RegQueryValueEx(hKey, valueName, 0, valueType, dataBuffer(0), dataSize)
+    
+    
     If result = ERROR_SUCCESS Then
         Select Case valueType
             Case REG_SZ
+                result = RegQueryValueEx(hKey, valueName, 0, valueType, dataBuffer(0), dataSize)
                 strData = Left$(StrConv(dataBuffer, vbUnicode), InStr(1, StrConv(dataBuffer, vbUnicode), vbNullChar) - 1)
                 GetRegistryValue = strData
             Case REG_DWORD
-                CopyMemory dwordData, dataBuffer(0), 4
+                result = RegQueryValueEx(hKey, valueName, 0, valueType, dwordData, 4)
                 GetRegistryValue = dwordData
             Case REG_BINARY
+                result = RegQueryValueEx(hKey, valueName, 0, valueType, dataBuffer(0), dataSize)
                 For i = 0 To dataSize - 1
                     hexStr = hexStr & right$("0" & Hex(dataBuffer(i)), 2) & " "
                 Next i
-                GetRegistryValue = Trim(hexStr)
+                GetRegistryValue = Trim$(hexStr)
             Case Else
                 GetRegistryValue = vbNullString 'CVErr(13) ' Type mismatch
         End Select
@@ -169,9 +188,9 @@ Dim myWS As Object
         Set myWS = CreateObject("WScript.Shell")
     End If
   'read key from registry
-  If RegKeyExists(i_RegKey) Then
+'  If RegKeyExists(i_RegKey) Then
       RegKeyRead = myWS.regread(i_RegKey)
-  End If
+'  End If
   Err.Clear
   Set myWS = Nothing
 #End If

@@ -31,25 +31,25 @@ Sub OmdrejningsLegeme()
         Udtryk = Replace(Udtryk, "Definer:", "")
         Udtryk = Replace(Udtryk, "define:", "")
         Udtryk = Replace(Udtryk, "Define:", "")
-        Udtryk = Replace(Udtryk, VBA.ChrW(8788), "=") ' :=
-        Udtryk = Replace(Udtryk, VBA.ChrW(8797), "=") ' triple =
-        Udtryk = Replace(Udtryk, VBA.ChrW(8801), "=") ' def =
-        Udtryk = Trim(Udtryk)
+        Udtryk = Replace(Udtryk, VBA.ChrW$(8788), "=") ' :=
+        Udtryk = Replace(Udtryk, VBA.ChrW$(8797), "=") ' triple =
+        Udtryk = Replace(Udtryk, VBA.ChrW$(8801), "=") ' def =
+        Udtryk = Trim$(Udtryk)
         If Len(Udtryk) > 0 Then
             If InStr(Udtryk, "matrix") < 1 Then
                 If InStr(Udtryk, "=") > 0 Then
                     Arr = Split(Udtryk, "=")
                     LHS = Arr(0)
                     RHS = Arr(1)
-                    ea.Text = LHS
+                    ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     
                     If LHS = fktnavn & "(" & varnavn & ")" Then
-                        ea.Text = RHS
-                        ea.Pos = 1
+                        ea.text = RHS
+                        ea.pos = 1
                         ea.ReplaceVar varnavn, "x"
-                        fktudtryk = ea.Text
+                        fktudtryk = ea.text
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                         
                         cmd = "surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
@@ -64,7 +64,7 @@ Sub OmdrejningsLegeme()
                         UrlLink = UrlLink & cmd
                         j = j + 1
                     End If
-                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW(8804)) > 0 Or InStr(Udtryk, VBA.ChrW(8805)) > 0 Then
+                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW$(8804)) > 0 Or InStr(Udtryk, VBA.ChrW$(8805)) > 0 Then
                     ' can only be used with GeoGebra 4.0
                     DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
                     cmd = Replace(ConvertToGeogebraSyntax(cmd), "+", "%2B") & ";"
@@ -107,9 +107,9 @@ Sub OmdrejningsLegeme()
         Kommando = omax.ConvertToWordSymbols(Kommando)
         Kommando = Replace(Kommando, ";", ".")
         If Len(Kommando) > 0 And i = 0 Then
-            UserFormSolidOfRevolution.TextBox_forskrift.Text = Kommando
+            UserFormSolidOfRevolution.TextBox_forskrift.text = Kommando
         ElseIf Len(Kommando) > 0 And i = 1 Then
-            UserFormSolidOfRevolution.TextBox_forskrift2.Text = Kommando
+            UserFormSolidOfRevolution.TextBox_forskrift2.text = Kommando
         End If
         i = i + 1
     Loop
@@ -133,7 +133,7 @@ Sub Plot3DGraph()
     
     forskrifter = omax.FindDefinitions
     If Len(forskrifter) > 3 Then
-'        forskrifter = Mid(forskrifter, 2, Len(forskrifter) - 3) 'removed 1.33
+'        forskrifter = mid$(forskrifter, 2, Len(forskrifter) - 3) 'removed 1.33
         Arr = Split(forskrifter, ListSeparator)
         forskrifter = ""
     
@@ -146,11 +146,11 @@ Sub Plot3DGraph()
     End If
     
     If forskrifter <> "" Then
-        forskrifter = Left(forskrifter, Len(forskrifter) - 2)
+        forskrifter = Left$(forskrifter, Len(forskrifter) - 2)
     End If
     
     For i = 0 To omax.KommandoArrayLength
-        forskrifter = Trim(LCase(omax.KommandoArray(i))) & "#$" & forskrifter 'omax.KommandoerStreng
+        forskrifter = Trim$(LCase$(omax.KommandoArray(i))) & "#$" & forskrifter 'omax.KommandoerStreng
     Next
     
     
@@ -182,19 +182,19 @@ Sub Insert3DEquation(Equation As String)
     ea.SetNormalBrackets
     If Equation = vbNullString Then Exit Sub
     
-    Equation = Replace(Equation, ChrW(9632), ChrW(9608)) ' two different symbols used for vectors. Otherwise syntax is the same
+    Equation = Replace(Equation, ChrW$(9632), ChrW$(9608)) ' two different symbols used for vectors. Otherwise syntax is the same
     Arr = Split(Equation, "=")
-    LHS = LCase(Replace(Replace(Trim(Arr(0)), " ", ""), ";", ","))
+    LHS = LCase$(Replace(Replace(Trim$(Arr(0)), " ", ""), ";", ","))
     If UBound(Arr) > 0 Then RHS = Arr(1)
 
-    p = InStr(LHS, ChrW(9608)) ' vector symbol
+    p = InStr(LHS, ChrW$(9608)) ' vector symbol
 
     If p > 0 Then  ' vector or parametric plot
         If RHS <> vbNullString Then ' if RHS exist only RHS is used
             LHS = RHS
         End If
-        If InStr(LHS, ChrW(166)) > 0 Then ' vector input by template stacks. cannot be used for 3d plot, but can be combined with normal for problematic input
-            ea.Text = LHS
+        If InStr(LHS, ChrW$(166)) > 0 Then ' vector input by template stacks. cannot be used for 3d plot, but can be combined with normal for problematic input
+            ea.text = LHS
             s = ea.GetNextBracketContent
             If InStr(s, "¦") > 0 Then
                 Arr = Split(s, "¦")
@@ -205,7 +205,7 @@ Sub Insert3DEquation(Equation As String)
                 End If
             End If
         Else ' Normal vector input
-            ea.Text = LHS
+            ea.text = LHS
             s = ea.GetNextBracketContent(p)
             Arr = Split(s, "@")
             If UBound(Arr) = 2 Then
@@ -241,46 +241,46 @@ Sub Insert3DEquation(Equation As String)
                 Set tbsmax = UserForm3DGraph.TextBox_smax3
             End If
             If Not tbx Is Nothing Then
-                tbx.Text = px
-                tby.Text = py
-                tbz.Text = pz
+                tbx.text = px
+                tby.text = py
+                tbz.text = pz
             End If
-            If tbtmin.Text = vbNullString Then
+            If tbtmin.text = vbNullString Then
                 If InStr(px, "t") > 0 Or InStr(py, "t") > 0 Or InStr(pz, "t") > 0 Then
-                    tbtmin.Text = "0"
-                    tbtmax.Text = "1"
+                    tbtmin.text = "0"
+                    tbtmax.text = "1"
                 End If
             End If
         Else ' vector
             Equation = "(0" & ListSeparator & "0" & ListSeparator & "0)(" & px & ListSeparator & " " & py & ListSeparator & " " & pz & ")"
-            If UserForm3DGraph.TextBox_vektorer.Text <> "" Then
-                If right(UserForm3DGraph.TextBox_vektorer.Text, 1) = ")" Then
-                    UserForm3DGraph.TextBox_vektorer.Text = UserForm3DGraph.TextBox_vektorer.Text & vbCr
+            If UserForm3DGraph.TextBox_vektorer.text <> "" Then
+                If right$(UserForm3DGraph.TextBox_vektorer.text, 1) = ")" Then
+                    UserForm3DGraph.TextBox_vektorer.text = UserForm3DGraph.TextBox_vektorer.text & vbCr
                 End If
             End If
-            UserForm3DGraph.TextBox_vektorer.Text = UserForm3DGraph.TextBox_vektorer.Text & Equation
+            UserForm3DGraph.TextBox_vektorer.text = UserForm3DGraph.TextBox_vektorer.text & Equation
         End If
     ElseIf InStr(Equation, "=") > 0 And LHS <> "z" And LHS <> "f(x,y)" Then
-        If UserForm3DGraph.TextBox_ligning1.Text = Equation Then Exit Sub
-        If UserForm3DGraph.TextBox_ligning2.Text = Equation Then Exit Sub
-        If UserForm3DGraph.TextBox_ligning3.Text = Equation Then Exit Sub
-        If UserForm3DGraph.TextBox_ligning1.Text = "" Then
-            UserForm3DGraph.TextBox_ligning1.Text = Equation
-        ElseIf UserForm3DGraph.TextBox_ligning2.Text = "" Then
-            UserForm3DGraph.TextBox_ligning2.Text = Equation
-        ElseIf UserForm3DGraph.TextBox_ligning3.Text = "" Then
-            UserForm3DGraph.TextBox_ligning3.Text = Equation
+        If UserForm3DGraph.TextBox_ligning1.text = Equation Then Exit Sub
+        If UserForm3DGraph.TextBox_ligning2.text = Equation Then Exit Sub
+        If UserForm3DGraph.TextBox_ligning3.text = Equation Then Exit Sub
+        If UserForm3DGraph.TextBox_ligning1.text = "" Then
+            UserForm3DGraph.TextBox_ligning1.text = Equation
+        ElseIf UserForm3DGraph.TextBox_ligning2.text = "" Then
+            UserForm3DGraph.TextBox_ligning2.text = Equation
+        ElseIf UserForm3DGraph.TextBox_ligning3.text = "" Then
+            UserForm3DGraph.TextBox_ligning3.text = Equation
         End If
     Else
-        If UserForm3DGraph.TextBox_forskrift1.Text = RHS Then Exit Sub
-        If UserForm3DGraph.TextBox_forskrift2.Text = RHS Then Exit Sub
-        If UserForm3DGraph.TextBox_forskrift3.Text = RHS Then Exit Sub
-        If UserForm3DGraph.TextBox_forskrift1.Text = "" Then
-            UserForm3DGraph.TextBox_forskrift1.Text = RHS
-        ElseIf UserForm3DGraph.TextBox_forskrift2.Text = "" Then
-            UserForm3DGraph.TextBox_forskrift2.Text = RHS
-        ElseIf UserForm3DGraph.TextBox_forskrift3.Text = "" Then
-            UserForm3DGraph.TextBox_forskrift3.Text = RHS
+        If UserForm3DGraph.TextBox_forskrift1.text = RHS Then Exit Sub
+        If UserForm3DGraph.TextBox_forskrift2.text = RHS Then Exit Sub
+        If UserForm3DGraph.TextBox_forskrift3.text = RHS Then Exit Sub
+        If UserForm3DGraph.TextBox_forskrift1.text = "" Then
+            UserForm3DGraph.TextBox_forskrift1.text = RHS
+        ElseIf UserForm3DGraph.TextBox_forskrift2.text = "" Then
+            UserForm3DGraph.TextBox_forskrift2.text = RHS
+        ElseIf UserForm3DGraph.TextBox_forskrift3.text = "" Then
+            UserForm3DGraph.TextBox_forskrift3.text = RHS
         End If
     End If
 

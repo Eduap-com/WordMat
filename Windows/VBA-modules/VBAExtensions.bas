@@ -13,40 +13,40 @@ Public Function GetCountOfChar(ByVal ar_sText As String, ByVal a_sChar As String
     l_iMax = Len(ar_sText)
     l_iLen = Len(a_sChar)
     For l_iIndex = 1 To l_iMax
-        If (Mid(ar_sText, l_iIndex, l_iLen) = a_sChar) Then 'found occurrence
+        If (Mid$(ar_sText, l_iIndex, l_iLen) = a_sChar) Then 'found occurrence
             GetCountOfChar = GetCountOfChar + 1
             If (l_iLen > 1) Then l_iIndex = l_iIndex + (l_iLen - 1) 'if matching more than 1 char, need to move more than one char ahead to continue searching
         End If
     Next l_iIndex
 End Function
-Function TrimR(ByVal Text As String, c As String)
+Function TrimR(ByVal text As String, c As String)
 ' removes c from the right side of text
-    If Text = "" Then GoTo slut
-    Do While right(Text, 1) = c
-        Text = Left(Text, Len(Text) - 1)
+    If text = "" Then GoTo slut
+    Do While right$(text, 1) = c
+        text = Left$(text, Len(text) - 1)
     Loop
-    TrimR = Text
+    TrimR = text
 slut:
 End Function
-Function TrimL(ByVal Text As String, c As String)
+Function TrimL(ByVal text As String, c As String)
 ' removes c from the left side of text
-    If Text = "" Then GoTo slut
-    Do While Left(Text, 1) = c
-        Text = right(Text, Len(Text) - 1)
+    If text = "" Then GoTo slut
+    Do While Left$(text, 1) = c
+        text = right$(text, Len(text) - 1)
     Loop
-    TrimL = Text
+    TrimL = text
 slut:
 End Function
 
-Function TrimB(ByVal Text As String, c As String)
+Function TrimB(ByVal text As String, c As String)
 ' removes c from both sides of text
-    TrimB = TrimL(Text, c)
+    TrimB = TrimL(text, c)
     TrimB = TrimR(TrimB, c)
 slut:
 End Function
-Function TrimRenter(ByVal Text As String)
+Function TrimRenter(ByVal text As String)
 ' removes crlf at right end
-    TrimRenter = TrimR(TrimR(Text, vbLf), vbCr)
+    TrimRenter = TrimR(TrimR(text, vbLf), vbCr)
 End Function
 
 Sub Wait(pausetime As Variant)

@@ -62,7 +62,7 @@ Public Function IXMLDOMNode_myAttValues() As Collection
     Set IXMLDOMNode_myAttValues = m_attvalues
 End Function
 '
-Public Sub IXMLDOMNode_Save(dest)
+Public Sub IXMLDOMNode_Save(dest As Variant)
     Dim s As String
     
     s = "<" & m_tagname
@@ -76,17 +76,17 @@ Public Sub IXMLDOMNode_Save(dest)
     Next
     
     n = m_children.Count
+    
     If n < 1 Then
-        Print #dest, s & " />"
+        Put #dest, , StringToUTF8Bytes(s & " />")
     Else
-        Print #dest, s & ">"
+        Put #dest, , StringToUTF8Bytes(s & ">")
         For i = 1 To n
             Dim node As IXMLDOMNode
             Set node = m_children(i)
             node.Save (dest)
         Next
-        Print #dest, "</" & m_tagname & ">"
+        Put #dest, , StringToUTF8Bytes("</" & m_tagname & ">")
     End If
-    
 End Sub
 

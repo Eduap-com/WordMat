@@ -59,6 +59,10 @@ Sub LoadFile(FilNavn As String)
     If Dir(wordmatsti) = "" Then
         wordmatsti = Environ("AppData") & "\WordMat\Excelfiles\" & FilNavn
     End If
+    If Dir(wordmatsti) = "" Then
+        wordmatsti = GetProgramFilesDir & "\WordMat\Excelfiles\" & FilNavn
+    End If
+    
     If Dir(wordmatsti) <> "" Then
         Set xlwb = XLapp.Workbooks.Add(wordmatsti)
         SetExcelForeground
@@ -265,7 +269,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     ws.Cells(r + 5, 2).Font.Bold = True
     
     
-    ws.Cells(1, 1).Value = VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & "-test"
+    ws.Cells(1, 1).Value = VBA.ChrW$(&H3C7) & VBA.ChrW$(&HB2) & "-test"
     ws.Cells(2, 2).Value = TT.A(400)
     ws.Cells(2, c + 4).Value = TT.A(401)
     ws.Cells(r + 3, 1).Value = TT.A(402)
@@ -366,8 +370,8 @@ If n < 2 Then ' if nothing selected in advance
     On Error Resume Next
     For i = 1 To n ' determine where numbers are located
         For j = 1 To rws(1).Cells.Count
-        cellval = rws(i).Cells(j).Range.Text
-        cellval = Left(cellval, Len(cellval) - 1)
+        cellval = rws(i).Cells(j).Range.text
+        cellval = Left$(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         tal = CDbl(cellval)
         If Err.Number = 0 Then
@@ -393,15 +397,15 @@ End If
     For j = 1 To n
         i = i + 1
 
-        cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
+        cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
 '        cellval = tabel.Cell(j, 1).Range.text
-        cellval = Left(cellval, Len(cellval) - 1)
+        cellval = Left$(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         Tabel(i, 1) = CDbl(cellval) ' must be included to report errors, but alone is not enough as it depends on the language setting
         Tabel(i, 1) = val(cellval) 'does not report errors with letters
-        cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
+        cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
 '        cellval = tabel.Cell(j, 2).Range.text
-        cellval = Left(cellval, Len(cellval) - 1)
+        cellval = Left$(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         Tabel(i, 2) = CDbl(cellval)
         Tabel(i, 2) = val(cellval)

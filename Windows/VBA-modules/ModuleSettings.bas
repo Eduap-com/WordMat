@@ -183,15 +183,15 @@ On Error Resume Next
     malltrig = CBool(GetRegSetting("AllTrig"))
     moutunits = GetRegSettingString("OutUnits")
     mbigfloat = CBool(GetRegSetting("BigFloat"))
-    mantalb = GetRegSettingLong("AntalBeregninger")
+    mantalb = CInt(GetRegSetting("AntalBeregninger"))
     mIndex = CBool(GetRegSetting("Index"))
     mshowassum = CBool(GetRegSetting("ShowAssum"))
     mpolaroutput = CBool(GetRegSetting("PolarOutput"))
-    mgraphapp = CInt(GetRegSettingLong("GraphApp"))
+    mgraphapp = CInt(GetRegSetting("GraphApp"))
 #If Mac Then
     If mgraphapp = 0 Then mgraphapp = 2 ' gnuplot is not available on mac
 #End If
-    mlanguage = CInt(GetRegSettingLong("Language"))
+    mlanguage = CInt(GetRegSetting("Language"))
     mdasdiffchr = CBool(GetRegSetting("dAsDiffChr"))
     mlatexstart = GetRegSettingString("LatexStart")
     mlatexslut = GetRegSettingString("LatexSlut")
@@ -200,17 +200,17 @@ On Error Resume Next
     meqnumplacement = CBool(GetRegSetting("EqNumPlacement"))
     meqnumtype = CBool(GetRegSetting("EqNumType"))
     maskref = CBool(GetRegSetting("EqAskRef"))
-    mBackupType = CInt(GetRegSettingLong("BackupType"))
-    mbackupno = CInt(GetRegSettingLong("BackupNo"))
-    mbackupmaxno = CInt(GetRegSettingLong("BackupMaxNo"))
-    mbackuptime = CInt(GetRegSettingLong("BackupTime"))
+    mBackupType = CInt(GetRegSetting("BackupType"))
+    mbackupno = CInt(GetRegSetting("BackupNo"))
+    mbackupmaxno = CInt(GetRegSetting("BackupMaxNo"))
+    mbackuptime = CInt(GetRegSetting("BackupTime"))
     mLatexSectionNumbering = CBool(GetRegSetting("LatexSectionNumbering"))
     mLatexDocumentclass = CInt(GetRegSettingLong("LatexDocumentclass"))
     mLatexFontsize = GetRegSettingString("LatexFontsize")
     mLatexWordMargins = CBool(GetRegSetting("LatexWordMargins"))
     mLatexTitlePage = CInt(GetRegSettingLong("LatexTitlePage"))
     mLatexTOC = CInt(GetRegSettingLong("LatexToc"))
-    mCASengine = CInt(GetRegSettingLong("CASengine"))
+    mCASengine = CInt(GetRegSetting("CASengine"))
     mLastUpdateCheck = GetRegSettingString("LastUpdateCheck")
     mDllConnType = CInt(GetRegSetting("DllConnType"))
     mInstallLocation = GetRegSetting("InstallLocation")
@@ -247,9 +247,9 @@ On Error Resume Next
 
     setn = GetRegSetting("Gangetegn")
     If setn = 0 Then
-        mgangetegn = VBA.ChrW(183)
+        mgangetegn = VBA.ChrW$(183)
     ElseIf setn = 1 Then
-        mgangetegn = VBA.ChrW(215)
+        mgangetegn = VBA.ChrW$(215)
     Else
         mgangetegn = "*"
     End If
@@ -341,7 +341,7 @@ Sub ReadSM(Optional ForceRead As Boolean = False)
         s = GetRegSettingString("ShowMenus")
         If Len(s) < 70 Then
             If IsNumeric(s) Then
-                s = Trim(s) & String$(70 - Len(s), "1")
+                s = Trim$(s) & String$(70 - Len(s), "1")
             Else
                 s = "11" ' formula
                 s = s & "1111" ' Settings
@@ -745,9 +745,9 @@ End Property
 Public Property Get Radians() As Boolean
     Radians = mradians
 End Property
-Public Property Let Radians(ByVal Text As Boolean)
-    SetRegSetting "Radians", Abs(CInt(Text))
-    mradians = Text
+Public Property Let Radians(ByVal text As Boolean)
+    SetRegSetting "Radians", Abs(CInt(text))
+    mradians = text
 End Property
 Public Property Get MaximaCifre() As Integer
     If mcifre > 1 Then
@@ -800,10 +800,10 @@ End Property
 Public Property Let MaximaGangeTegn(ByVal nygtegn As String)
     If nygtegn = "prik" Then
         SetRegSetting "Gangetegn", 0
-        mgangetegn = VBA.ChrW(183)
+        mgangetegn = VBA.ChrW$(183)
     ElseIf nygtegn = "x" Then
         SetRegSetting "Gangetegn", 1
-        mgangetegn = VBA.ChrW(215)
+        mgangetegn = VBA.ChrW$(215)
     Else '*
         SetRegSetting "Gangetegn", 2
         mgangetegn = "*"
@@ -868,43 +868,43 @@ End Property
 Public Property Get EqNumPlacement() As Boolean
     EqNumPlacement = meqnumplacement
 End Property
-Public Property Let EqNumPlacement(ByVal Text As Boolean)
-    SetRegSetting "EqNumPlacement", Abs(CInt(Text))
-    meqnumplacement = Text
+Public Property Let EqNumPlacement(ByVal text As Boolean)
+    SetRegSetting "EqNumPlacement", Abs(CInt(text))
+    meqnumplacement = text
 End Property
 Public Property Get EqNumType() As Boolean
     EqNumType = meqnumtype
 End Property
-Public Property Let EqNumType(ByVal Text As Boolean)
-    SetRegSetting "EqNumType", Abs(CInt(Text))
-    meqnumtype = Text
+Public Property Let EqNumType(ByVal text As Boolean)
+    SetRegSetting "EqNumType", Abs(CInt(text))
+    meqnumtype = text
 End Property
 Public Property Get EqAskRef() As Boolean
     EqAskRef = maskref
 End Property
-Public Property Let EqAskRef(ByVal Text As Boolean)
-    SetRegSetting "EqAskRef", Abs(CInt(Text))
-    maskref = Text
+Public Property Let EqAskRef(ByVal text As Boolean)
+    SetRegSetting "EqAskRef", Abs(CInt(text))
+    maskref = text
 End Property
 Public Property Get LastUpdateCheck() As String
     LastUpdateCheck = mLastUpdateCheck
 End Property
-Public Property Let LastUpdateCheck(ByVal Text As String)
-    SetRegSettingString "LastUpdateCheck", Text
-    mLastUpdateCheck = Text
+Public Property Let LastUpdateCheck(ByVal text As String)
+    SetRegSettingString "LastUpdateCheck", text
+    mLastUpdateCheck = text
 End Property
 
 Public Property Get OutUnits() As String
     OutUnits = moutunits
 End Property
-Public Property Let OutUnits(ByVal Text As String)
-    Text = Replace(Text, "kwh", "kWh")
-    Text = Replace(Text, "hz", "Hz")
-    Text = Replace(Text, "HZ", "Hz")
-    Text = Replace(Text, "bq", "Bq")
-    Text = Replace(Text, "ev", "eV")
-    SetRegSettingString "OutUnits", Text
-    moutunits = Text
+Public Property Let OutUnits(ByVal text As String)
+    text = Replace(text, "kwh", "kWh")
+    text = Replace(text, "hz", "Hz")
+    text = Replace(text, "HZ", "Hz")
+    text = Replace(text, "bq", "Bq")
+    text = Replace(text, "ev", "eV")
+    SetRegSettingString "OutUnits", text
+    moutunits = text
 End Property
 
 #If VBA7 Then
@@ -969,12 +969,12 @@ End Property
 Public Property Get dAsDiffChr() As Boolean
     dAsDiffChr = mdasdiffchr
 End Property
-Public Property Let dAsDiffChr(ByVal Text As Boolean)
-    SetRegSetting "dAsDiffChr", Abs(CInt(Text))
-    mdasdiffchr = Text
+Public Property Let dAsDiffChr(ByVal text As Boolean)
+    SetRegSetting "dAsDiffChr", Abs(CInt(text))
+    mdasdiffchr = text
 End Property
-Public Property Let dAsDiffChrTemp(ByVal Text As Boolean)
-    mdasdiffchr = Text
+Public Property Let dAsDiffChrTemp(ByVal text As Boolean)
+    mdasdiffchr = text
 End Property
 Public Property Get LatexStart() As String
     LatexStart = mlatexstart
@@ -993,16 +993,16 @@ End Property
 Public Property Get LatexUnits() As Boolean
     LatexUnits = mlatexunits
 End Property
-Public Property Let LatexUnits(ByVal Text As Boolean)
-    SetRegSetting "LatexUnits", Abs(CInt(Text))
-    mlatexunits = Text
+Public Property Let LatexUnits(ByVal text As Boolean)
+    SetRegSetting "LatexUnits", Abs(CInt(text))
+    mlatexunits = text
 End Property
 Public Property Get ConvertTexWithMaxima() As Boolean
     ConvertTexWithMaxima = mConvertTexWithMaxima
 End Property
-Public Property Let ConvertTexWithMaxima(ByVal Text As Boolean)
-    SetRegSetting "ConvertTexWithMaxima", Abs(CInt(Text))
-    mConvertTexWithMaxima = Text
+Public Property Let ConvertTexWithMaxima(ByVal text As Boolean)
+    SetRegSetting "ConvertTexWithMaxima", Abs(CInt(text))
+    mConvertTexWithMaxima = text
 End Property
 Public Property Get LatexWordMargins() As Boolean
     LatexWordMargins = mLatexWordMargins
@@ -1111,7 +1111,7 @@ Public Property Let CASengineTempOnly(xval As Integer)
     mCASengine = xval
 End Property
 Public Property Get CASengineRegOnly() As Integer
-    mCASengine = CInt(GetRegSettingLong("CASengine"))
+    mCASengine = CInt(GetRegSetting("CASengine"))
     CASengineRegOnly = mCASengine
 End Property
 Public Property Get RegAppVersion() As String
@@ -1399,22 +1399,22 @@ Public Sub SetRegSettingLong(key As String, val As LongPtr)
     SetRegistryValue "HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_DWORD, val
 #End If
 End Sub
-Public Function GetRegSettingLong(key As String) As LongPtr
-#If Mac Then
-    GetRegSettingLong = CLngPtr(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
-#Else
-    GetRegSettingLong = CLngPtr(GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key))
-#End If
-End Function
-#Else
-Public Sub SetRegSettingLong(key As String, val As Long)
-    RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
-End Sub
+'Public Function GetRegSettingLong(key As String) As LongPtr
+'#If Mac Then
+'    GetRegSettingLong = CLngPtr(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
+'#Else
+'    GetRegSettingLong = CLngPtr(GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_DWORD))
+'#End If
+'End Function
+'#Else
+'Public Sub SetRegSettingLong(key As String, val As Long)
+'    RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
+'End Sub
 Public Function GetRegSettingLong(key As String) As Long
 #If Mac Then
     GetRegSettingLong = CLng(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
 #Else
-    GetRegSettingLong = CLng(GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key))
+    GetRegSettingLong = CLng(GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_DWORD))
 #End If
 End Function
 #End If
@@ -1422,7 +1422,7 @@ Public Function GetRegSettingString(key As String) As String
 #If Mac Then
     GetRegSettingString = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key)
 #Else
-    GetRegSettingString = GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key)
+    GetRegSettingString = GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_SZ)
 #End If
 End Function
 Public Sub SetRegSettingString(key As String, ByVal val As String)
@@ -1553,29 +1553,29 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
     MsgBox2 "Settingsfile saved to " & vbCrLf & SettingsFileName, vbOKOnly, "Saved"
 #End If
 End Sub
-Function LoadSettingsFromFile(FilePath As String, Optional Silent As Boolean = False, Optional SaveToReg As Boolean = False) As Boolean
+Function LoadSettingsFromFile(filePath As String, Optional Silent As Boolean = False, Optional SaveToReg As Boolean = False) As Boolean
     Dim s As String, Arr() As String, Arr2() As String, i As Integer
     On Error GoTo fejl
-    If FilePath = vbNullString Then
+    If filePath = vbNullString Then
 #If Mac Then
-        FilePath = GetDocumentsDir & "/settings.txt"
+        filePath = GetDocumentsDir & "/settings.txt"
 #Else
-        FilePath = GetFilePath
+        filePath = GetFilePath
 #End If
     End If
     
-    If Dir(FilePath) = vbNullString Then
+    If Dir(filePath) = vbNullString Then
         If Not Silent Then
-            MsgBox2 "Could not load settingsfile:" & vbCrLf & FilePath, vbOKOnly, TT.Error
+            MsgBox2 "Could not load settingsfile:" & vbCrLf & filePath, vbOKOnly, TT.Error
         End If
         Exit Function
     End If
-    s = ReadTextfileToString(FilePath)
+    s = ReadTextfileToString(filePath)
     
     Arr = Split(s, vbCrLf)
     
     For i = 0 To UBound(Arr)
-        If Left$(Trim(Arr(i)), 1) <> "#" Then
+        If Left$(Trim$(Arr(i)), 1) <> "#" Then
             Arr2 = Split(Arr(i), "=")
             If UBound(Arr2) > 0 Then
                 SetSetting Arr2(0), Arr2(1), SaveToReg
@@ -1837,9 +1837,9 @@ Public Function GetHardwareUUID() As String
     On Error Resume Next
             
     GetHardwareUUID = RegKeyRead("HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\IDConfigDB\Hardware Profiles\0001\HwProfileGuid")
-    GetHardwareUUID = Trim(GetHardwareUUID)
-    If Left(GetHardwareUUID, 1) = "{" Then GetHardwareUUID = right(GetHardwareUUID, Len(GetHardwareUUID) - 1)
-    If right(GetHardwareUUID, 1) = "}" Then GetHardwareUUID = Left(GetHardwareUUID, Len(GetHardwareUUID) - 1)
+    GetHardwareUUID = Trim$(GetHardwareUUID)
+    If Left$(GetHardwareUUID, 1) = "{" Then GetHardwareUUID = right$(GetHardwareUUID, Len(GetHardwareUUID) - 1)
+    If right$(GetHardwareUUID, 1) = "}" Then GetHardwareUUID = Left$(GetHardwareUUID, Len(GetHardwareUUID) - 1)
     
     On Error GoTo 0
         

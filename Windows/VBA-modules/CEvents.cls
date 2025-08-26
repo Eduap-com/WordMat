@@ -60,15 +60,15 @@ End Sub
 Sub CloseForm(Ctrl As MSForms.control, ByVal KeyCode As Integer)
 On Error GoTo slut
     If KeyCode = 27 Then
-        If Left(TypeName(Ctrl.Parent), 8) = "UserForm" Then
+        If Left$(TypeName(Ctrl.Parent), 8) = "UserForm" Then
             Ctrl.Parent.hide
-        ElseIf Left(TypeName(Ctrl.Parent.Parent), 8) = "UserForm" Then
+        ElseIf Left$(TypeName(Ctrl.Parent.Parent), 8) = "UserForm" Then
             Ctrl.Parent.Parent.hide
-        ElseIf Left(TypeName(Ctrl.Parent.Parent.Parent), 8) = "UserForm" Then
+        ElseIf Left$(TypeName(Ctrl.Parent.Parent.Parent), 8) = "UserForm" Then
             Ctrl.Parent.Parent.Parent.hide
-        ElseIf Left(TypeName(Ctrl.Parent.Parent.Parent.Parent), 8) = "UserForm" Then
+        ElseIf Left$(TypeName(Ctrl.Parent.Parent.Parent.Parent), 8) = "UserForm" Then
             Ctrl.Parent.Parent.Parent.Parent.hide
-        ElseIf Left(TypeName(Ctrl.Parent.Parent.Parent.Parent.Parent), 8) = "UserForm" Then
+        ElseIf Left$(TypeName(Ctrl.Parent.Parent.Parent.Parent.Parent), 8) = "UserForm" Then
             Ctrl.Parent.Parent.Parent.Parent.Parent.hide
         End If
     End If

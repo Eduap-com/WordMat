@@ -43,14 +43,14 @@ Public Property Get Datatext() As Variant
 
 End Property
 
-Public Property Let Datatext(ByVal Text As Variant)
+Public Property Let Datatext(ByVal text As Variant)
     Dim i As Integer
     Dim j As Integer
     Dim lsep As String
     Dim Arr As Variant
     Dim Arr2 As Variant
     Dim n As Integer
-    Arr = Split(Text, VbCrLfMac)
+    Arr = Split(text, VbCrLfMac)
     n = UBound(Arr)
     ReDim xval(1 To n + 1) As Double
     ReDim yval(1 To n + 1) As Double
@@ -116,8 +116,8 @@ If n < 2 Then ' if nothing selected in advance
     On Error Resume Next
     For i = 1 To n ' determine where numbers are located
         For j = 1 To rws(1).Cells.Count
-        cellval = rws(i).Cells(j).Range.Text
-        cellval = Left(cellval, Len(cellval) - 1)
+        cellval = rws(i).Cells(j).Range.text
+        cellval = Left$(cellval, Len(cellval) - 1)
         cellval = Replace(cellval, "*10^", "E")
         tal = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
 '        tal = val(Replace(cellval, ",", "."))
@@ -150,8 +150,8 @@ End If
             omax.beregn
             cellval = Replace(omax.MaximaOutput, "=", "")
         Else
-            cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
-            cellval = Left(cellval, Len(cellval) - 1)
+            cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
+            cellval = Left$(cellval, Len(cellval) - 1)
         End If
 '        cellval = tabel.Cell(j, 1).Range.text
         cellval = Replace(cellval, "*10^", "E")
@@ -166,8 +166,8 @@ End If
             omax.beregn
             cellval = Replace(omax.MaximaOutput, "=", "")
         Else
-            cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
-            cellval = Left(cellval, Len(cellval) - 1)
+            cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
+            cellval = Left$(cellval, Len(cellval) - 1)
         End If
 
 '        cellval = tabel.Cell(j, 2).Range.text
@@ -246,13 +246,13 @@ End If
     For j = 1 To n
         i = i + 1
         
-        cellval = Replace(rws(j).Cells(1 + oFS).Range.Text, ",", ".")
+        cellval = Replace(rws(j).Cells(1 + oFS).Range.text, ",", ".")
 '        cellval = tabel.Cell(j, 1).Range.text
-        cellval = Left(cellval, Len(cellval) - 1)
+        cellval = Left$(cellval, Len(cellval) - 1)
         xval(i) = val(cellval)
-        cellval = Replace(rws(j).Cells(2 + oFS).Range.Text, ",", ".")
+        cellval = Replace(rws(j).Cells(2 + oFS).Range.text, ",", ".")
 '        cellval = tabel.Cell(j, 2).Range.text
-        cellval = Left(cellval, Len(cellval) - 1)
+        cellval = Left$(cellval, Len(cellval) - 1)
         yval(i) = val(cellval)
         If Err.Number > 0 Then
            i = i - 1
@@ -273,7 +273,7 @@ End Sub
 Public Sub GetSetData()
 ' reads set {(2,1),(3,4)} from mathbox into xval and yval
 Dim p As String
-Dim Text As String
+Dim text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
 Dim Arr As Variant
@@ -283,11 +283,11 @@ Dim Arr As Variant
 ea.StartBracket = "{"
 ea.EndBracket = "}"
 Selection.OMaths.Linearize
-Text = Selection.OMaths(1).Range.Text
-ea.Text = Replace(Text, VBA.ChrW(8722), "-") ' required
-ea.Text = ea.GetNextBracketContent()
+text = Selection.OMaths(1).Range.text
+ea.text = Replace(text, VBA.ChrW$(8722), "-") ' required
+ea.text = ea.GetNextBracketContent()
 ea.SetNormalBrackets
-ea.Pos = 1
+ea.pos = 1
 Do
 p = ea.GetNextBracketContent()
 If InStr(p, ";") Then
@@ -378,7 +378,7 @@ Sub ComputeLinRegr()
         Ligning = Ligning & ConvertNumberToString(betcif(A, MaximaCifre)) & "x"
     End If
     If b <> 0 Then
-        If Left(b, 1) <> "-" Then
+        If Left$(b, 1) <> "-" Then
             Ligning = Ligning & "+"
         End If
         Ligning = Ligning & ConvertNumberToString(betcif(b, MaximaCifre))
@@ -403,12 +403,12 @@ Sub ComputeExpRegr()
         
     Ligning = "y="
     If b <> 1 Then
-        Ligning = Ligning & ConvertNumberToString(betcif(Exp(b), MaximaCifre)) & VBA.ChrW(183)
+        Ligning = Ligning & ConvertNumberToString(betcif(Exp(b), MaximaCifre)) & VBA.ChrW$(183)
     End If
     If A <> 1 Then
         astr = ConvertNumberToString(betcif(Exp(A), MaximaCifre))
         If InStr(astr, "10^(") Then astr = "(" & astr & ")"
-'        ligning = ligning & VBA.ChrW(12310) & astr & VBA.ChrW(12311) & "^x" ' usynlige paranteser
+'        ligning = ligning & VBA.chrw$(12310) & astr & VBA.chrw$(12311) & "^x" ' usynlige paranteser
         Ligning = Ligning & astr & "^x"
     End If
 
@@ -435,7 +435,7 @@ On Error GoTo fejl
     
     Ligning = "y=" & ConvertNumberToString(betcif(Exp(b), MaximaCifre))
     If A <> 0 Then
-        Ligning = Ligning & VBA.ChrW(183) & "x^(" & ConvertNumberToString(betcif(A, MaximaCifre)) & ")"
+        Ligning = Ligning & VBA.ChrW$(183) & "x^(" & ConvertNumberToString(betcif(A, MaximaCifre)) & ")"
     End If
     
     RegressionText = TT.A(31)
@@ -463,13 +463,13 @@ Function ComputeUserRegr() As Boolean
     For i = LBound(xval) To UBound(xval)
         xlist = xlist & Replace((xval(i)), ",", ".") & ","
     Next
-    xlist = Left(xlist, Len(xlist) - 1) & "]"
+    xlist = Left$(xlist, Len(xlist) - 1) & "]"
     
     ylist = "["
     For i = LBound(yval) To UBound(yval)
         ylist = ylist & Replace(yval(i), ",", ".") & ","
     Next
-    ylist = Left(ylist, Len(ylist) - 1) & "]"
+    ylist = Left$(ylist, Len(ylist) - 1) & "]"
     
     
     fkt = Replace(omax.Kommando, vbCrLf, "")
@@ -478,7 +478,7 @@ Function ComputeUserRegr() As Boolean
             Arr = Split(fkt, "=")
             If UBound(Arr) > 0 Then fkt = Arr(1)
         End If
-        UserFormUserRegression.TextBox_function.Text = fkt
+        UserFormUserRegression.TextBox_function.text = fkt
     End If
     
     If InStr(fkt, "x") > 0 Then
@@ -498,28 +498,28 @@ Function ComputeUserRegr() As Boolean
     Else
         Var = ""
     End If
-    UserFormUserRegression.TextBox_var.Text = Var
+    UserFormUserRegression.TextBox_var.text = Var
     
-    UserFormUserRegression.TextBox_eps.Text = MaximaCifre
+    UserFormUserRegression.TextBox_eps.text = MaximaCifre
     
-    ea.Text = fkt
+    ea.text = fkt
     omax.FindVariable (fkt)
     Arr = Split(omax.Vars, ";")
     For i = 0 To UBound(Arr)
         If Arr(i) <> Var Then s = s & Arr(i) & "=" & vbCrLf
     Next
-    UserFormUserRegression.TextBox_guess.Text = s
+    UserFormUserRegression.TextBox_guess.text = s
     UserFormUserRegression.Show
-    If UserFormUserRegression.TextBox_function.Text = vbNullString Then
+    If UserFormUserRegression.TextBox_function.text = vbNullString Then
         ComputeUserRegr = False
         GoTo slut
     End If
-    eps = UserFormUserRegression.TextBox_eps.Text
-    fkt = UserFormUserRegression.TextBox_function.Text
+    eps = UserFormUserRegression.TextBox_eps.text
+    fkt = UserFormUserRegression.TextBox_function.text
     fkt = Replace(fkt, "*", MaximaGangeTegn)
-    s = UserFormUserRegression.TextBox_guess.Text
-    Do While right(s, 1) = vbCrLf Or right(s, 1) = vbCr Or right(s, 1) = vbLf
-        s = Left(s, Len(s) - 1)
+    s = UserFormUserRegression.TextBox_guess.text
+    Do While right$(s, 1) = vbCrLf Or right$(s, 1) = vbCr Or right$(s, 1) = vbLf
+        s = Left$(s, Len(s) - 1)
     Loop
     s = Replace(s, vbCrLf, ";")
     s = Replace(s, vbCr, ";")
@@ -527,16 +527,16 @@ Function ComputeUserRegr() As Boolean
     Arr = Split(s, ";")
     guess = "["
     For i = 0 To UBound(Arr)
-        If right(Arr(i), 1) <> "=" Then guess = guess & Arr(i) & ";"
+        If right$(Arr(i), 1) <> "=" Then guess = guess & Arr(i) & ";"
     Next
-    If Len(guess) > 1 Then guess = Left(guess, Len(guess) - 1)
+    If Len(guess) > 1 Then guess = Left$(guess, Len(guess) - 1)
     guess = guess & "]"
-    Var = UserFormUserRegression.TextBox_var.Text
+    Var = UserFormUserRegression.TextBox_var.text
     If Var <> vbNullString And fkt <> vbNullString Then
         omax.UserRegression ConvertSep(fkt), Var, xlist, ylist, CInt(eps), ConvertSep(guess)
         p = InStr(omax.KommentarOutput, "R^2=")
         If p > 0 Then
-            r = ConvertStringToNumber(right(omax.KommentarOutput, Len(omax.KommentarOutput) - p - 3))
+            r = ConvertStringToNumber(right$(omax.KommentarOutput, Len(omax.KommentarOutput) - p - 3))
         End If
 '        RegressionText = TT.A(33) & fkt & " " & TT.A(34) & ": " ' now handled directly
         Ligning = omax.MaximaOutput
@@ -547,16 +547,16 @@ fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
 End Function
-Function ConvertSep(Text As String) As String
+Function ConvertSep(text As String) As String
 ' commas and list separator
     Dim ea As New ExpressionAnalyser
     If Not MaximaSeparator Then
-        ea.Text = Text
+        ea.text = text
         ea.ConvertDecSeparator
-        Text = ea.Text
+        text = ea.text
         '        text = Replace(text, ",", ".")
     End If
-    ConvertSep = Replace(Text, ";", ",")
+    ConvertSep = Replace(text, ";", ",")
 
 End Function
 Sub ComputePolRegrKvad()
@@ -565,11 +565,11 @@ Sub ComputePolRegrKvad()
     b = betcif(b, MaximaCifre)
     c = betcif(c, MaximaCifre)
     r = betcif(r, MaximaCifre)
-    Ligning = "y=" & ConvertNumberToString(A) & VBA.ChrW(183) & "x^2"
+    Ligning = "y=" & ConvertNumberToString(A) & VBA.ChrW$(183) & "x^2"
     If b > 0 Then
-        Ligning = Ligning & "+" & ConvertNumberToString(b) & VBA.ChrW(183) & "x"
+        Ligning = Ligning & "+" & ConvertNumberToString(b) & VBA.ChrW$(183) & "x"
     ElseIf b < 0 Then
-        Ligning = Ligning & ConvertNumberToString(b) & VBA.ChrW(183) & "x"
+        Ligning = Ligning & ConvertNumberToString(b) & VBA.ChrW$(183) & "x"
     End If
     
     If c > 0 Then
@@ -607,7 +607,7 @@ Sub ComputePolRegr()
     ElseIf Coeff(UBound(Coeff)) = 0 Then
         Ligning = "y="
     Else
-        Ligning = "y=" & ConvertNumberToString(betcif(Coeff(UBound(Coeff)), MaximaCifre)) & VBA.ChrW(183) & "x^" & UBound(Coeff)
+        Ligning = "y=" & ConvertNumberToString(betcif(Coeff(UBound(Coeff)), MaximaCifre)) & VBA.ChrW$(183) & "x^" & UBound(Coeff)
     End If
     
     For i = UBound(Coeff) - 1 To 0 Step -1
@@ -623,7 +623,7 @@ Sub ComputePolRegr()
                ElseIf Coeff(i) = -1 Then
                    Ligning = Ligning & "-x"
                Else
-                   Ligning = Ligning & ConvertNumberToString(betcif(Coeff(i), MaximaCifre)) & VBA.ChrW(183) & "x"
+                   Ligning = Ligning & ConvertNumberToString(betcif(Coeff(i), MaximaCifre)) & VBA.ChrW$(183) & "x"
                End If
            Else
                If Coeff(i) = 1 Then
@@ -631,7 +631,7 @@ Sub ComputePolRegr()
                ElseIf Coeff(i) = -1 Then
                    Ligning = Ligning & "-x^" & i
                Else
-                   Ligning = Ligning & ConvertNumberToString(betcif(Coeff(i), MaximaCifre)) & VBA.ChrW(183) & "x^" & i
+                   Ligning = Ligning & ConvertNumberToString(betcif(Coeff(i), MaximaCifre)) & VBA.ChrW$(183) & "x^" & i
                End If
            End If
         End If
@@ -852,16 +852,16 @@ Sub InsertEquation()
     Selection.TypeText RegressionText
 
     If ShowR Then
-        Selection.TypeText Text:="R"
+        Selection.TypeText text:="R"
         Selection.Font.Superscript = wdToggle
-        Selection.TypeText Text:="2"
+        Selection.TypeText text:="2"
         Selection.Font.Superscript = wdToggle
-        Selection.TypeText Text:=" = " & ConvertNumberToString(r)
+        Selection.TypeText text:=" = " & ConvertNumberToString(r)
     End If
     Selection.TypeParagraph
     Selection.Collapse
     Selection.OMaths.Add Range:=Selection.Range
-    Selection.TypeText Text:=Ligning
+    Selection.TypeText text:=Ligning
     Selection.OMaths.BuildUp
     Selection.TypeParagraph
     Oundo.EndCustomRecord

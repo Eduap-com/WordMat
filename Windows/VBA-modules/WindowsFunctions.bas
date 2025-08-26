@@ -26,10 +26,10 @@ On Error Resume Next
     Loop
 End Sub
 
-Sub RunDefaultProgram(FilePath As String, Optional Mappe As String = "c:\")
+Sub RunDefaultProgram(filePath As String, Optional Mappe As String = "c:\")
     On Error Resume Next
     PrepareMaxima False
-    MaxProc.RunFile Mappe & "\" & FilePath, ""
+    MaxProc.RunFile Mappe & "\" & filePath, ""
 End Sub
 
 #End If

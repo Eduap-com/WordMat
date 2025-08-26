@@ -138,7 +138,7 @@ On Error GoTo fejl
     End If
     Selection.TypeText TT.A(33) & ":  "
     Selection.OMaths.Add Selection.Range
-    Selection.OMaths(1).Range.Text = Replace(fkt, "*", MaximaGangeTegn)
+    Selection.OMaths(1).Range.text = Replace(fkt, "*", MaximaGangeTegn)
     Selection.OMaths(1).BuildUp
     Selection.OMaths(1).Range.Select
     Selection.Collapse wdCollapseEnd
@@ -199,9 +199,9 @@ Sub InsertTabel()
                 .ApplyStyleRowBands = True
                 .ApplyStyleColumnBands = False
 #End If
-                .Cell(1, 1).Range.Text = "x"
+                .Cell(1, 1).Range.text = "x"
                 .Cell(1, 1).Range.Bold = True
-                .Cell(2, 1).Range.Text = "y"
+                .Cell(2, 1).Range.text = "y"
                 .Cell(2, 1).Range.Bold = True
                 .Cell(1, 2).Range.Select
                 .Columns(1).Width = 30
@@ -218,9 +218,9 @@ Sub InsertTabel()
                 .ApplyStyleRowBands = True
                 .ApplyStyleColumnBands = False
 #End If
-                .Cell(1, 1).Range.Text = "x"
+                .Cell(1, 1).Range.text = "x"
                 .Cell(1, 1).Range.Bold = True
-                .Cell(1, 2).Range.Text = "y"
+                .Cell(1, 2).Range.text = "y"
                 .Cell(1, 2).Range.Bold = True
                 .Cell(2, 1).Range.Select
                 .Columns(1).Width = 65

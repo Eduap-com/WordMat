@@ -56,46 +56,46 @@ Sub ReplaceToExtendedASCII()
 End Sub
 
 Private Function ReplaceLineToASCIIseq(s As String) As String
-   s = Replace(s, ChrW(230), "*ae*") ' ae
-   s = Replace(s, ChrW(248), "*oe*") ' oe
-   s = Replace(s, ChrW(229), "*aa*") ' aa
-   s = Replace(s, ChrW(198), "*AE*") ' AE
-   s = Replace(s, ChrW(216), "*OE*") ' OE
-   s = Replace(s, ChrW(197), "*AA*") ' AAA
-   s = Replace(s, ChrW(225), "*a-*") ' a'
-   s = Replace(s, ChrW(233), "*e-*") ' e'
-   s = Replace(s, ChrW(243), "*o-*") ' o'
-   s = Replace(s, ChrW(192), "*A~*") ' A~
-   s = Replace(s, ChrW(191), "*?-*") ' (omvendt ?)
-   s = Replace(s, ChrW(241), "*n-*") ' (n~)
-   s = Replace(s, ChrW(237), "*i-*") ' (i')
-   s = Replace(s, ChrW(250), "*u-*") ' (u')
-   s = Replace(s, ChrW(176), "*gr*") ' (gradtegn)
-   s = Replace(s, ChrW(167), "*pa*") ' (paragraf)
-   s = Replace(s, ChrW(8364), "*eu*") ' (euro)
-   s = Replace(s, ChrW(8230), "*._.*") ' ...
+   s = Replace(s, ChrW$(230), "*ae*") ' ae
+   s = Replace(s, ChrW$(248), "*oe*") ' oe
+   s = Replace(s, ChrW$(229), "*aa*") ' aa
+   s = Replace(s, ChrW$(198), "*AE*") ' AE
+   s = Replace(s, ChrW$(216), "*OE*") ' OE
+   s = Replace(s, ChrW$(197), "*AA*") ' AAA
+   s = Replace(s, ChrW$(225), "*a-*") ' a'
+   s = Replace(s, ChrW$(233), "*e-*") ' e'
+   s = Replace(s, ChrW$(243), "*o-*") ' o'
+   s = Replace(s, ChrW$(192), "*A~*") ' A~
+   s = Replace(s, ChrW$(191), "*?-*") ' (omvendt ?)
+   s = Replace(s, ChrW$(241), "*n-*") ' (n~)
+   s = Replace(s, ChrW$(237), "*i-*") ' (i')
+   s = Replace(s, ChrW$(250), "*u-*") ' (u')
+   s = Replace(s, ChrW$(176), "*gr*") ' (gradtegn)
+   s = Replace(s, ChrW$(167), "*pa*") ' (paragraf)
+   s = Replace(s, ChrW$(8364), "*eu*") ' (euro)
+   s = Replace(s, ChrW$(8230), "*._.*") ' ...
    '
    ReplaceLineToASCIIseq = s
 End Function
 Private Function ReplaceLineToExtendedASCII(s As String) As String
-   s = Replace(s, "*ae*", ChrW(230)) ' ae
-   s = Replace(s, "*oe*", ChrW(248)) ' oe
-   s = Replace(s, "*aa*", ChrW(229)) ' aa
-   s = Replace(s, "*AE*", ChrW(198)) ' AE
-   s = Replace(s, "*OE*", ChrW(216)) ' OE
-   s = Replace(s, "*AA*", ChrW(197)) ' AA
-   s = Replace(s, "*a-*", ChrW(225)) ' a'
-   s = Replace(s, "*e-*", ChrW(233)) ' e'
-   s = Replace(s, "*o-*", ChrW(243)) ' o'
-   s = Replace(s, "*A~*", ChrW(192)) ' A~
-   s = Replace(s, "*?-*", ChrW(191)) ' (omvendt ?)
-   s = Replace(s, "*n-*", ChrW(241)) ' (n~)
-   s = Replace(s, "*i-*", ChrW(237)) ' (i')
-   s = Replace(s, "*u-*", ChrW(250)) ' (u')
-   s = Replace(s, "*gr*", ChrW(176)) ' (gradtegn)
-   s = Replace(s, "*pa*", ChrW(167)) ' (paragraf)
-   s = Replace(s, "*eu*", ChrW(8364)) ' (euro)
-   s = Replace(s, "*._.*", ChrW(8230)) ' ...
+   s = Replace(s, "*ae*", ChrW$(230)) ' ae
+   s = Replace(s, "*oe*", ChrW$(248)) ' oe
+   s = Replace(s, "*aa*", ChrW$(229)) ' aa
+   s = Replace(s, "*AE*", ChrW$(198)) ' AE
+   s = Replace(s, "*OE*", ChrW$(216)) ' OE
+   s = Replace(s, "*AA*", ChrW$(197)) ' AA
+   s = Replace(s, "*a-*", ChrW$(225)) ' a'
+   s = Replace(s, "*e-*", ChrW$(233)) ' e'
+   s = Replace(s, "*o-*", ChrW$(243)) ' o'
+   s = Replace(s, "*A~*", ChrW$(192)) ' A~
+   s = Replace(s, "*?-*", ChrW$(191)) ' (omvendt ?)
+   s = Replace(s, "*n-*", ChrW$(241)) ' (n~)
+   s = Replace(s, "*i-*", ChrW$(237)) ' (i')
+   s = Replace(s, "*u-*", ChrW$(250)) ' (u')
+   s = Replace(s, "*gr*", ChrW$(176)) ' (gradtegn)
+   s = Replace(s, "*pa*", ChrW$(167)) ' (paragraf)
+   s = Replace(s, "*eu*", ChrW$(8364)) ' (euro)
+   s = Replace(s, "*._.*", ChrW$(8230)) ' ...
    ReplaceLineToExtendedASCII = s
 End Function
 Sub ReplaceToANSI()
@@ -120,30 +120,30 @@ Sub ReplaceToANSI()
     MsgBox "Conversion Done", vbOKOnly, "Done"
 End Sub
 Private Function ReplaceLineToANSI(s As String) As String
-    s = Replace(s, ChrW(190), ChrW(230)) ' ae
-    s = Replace(s, ChrW(191), ChrW(248)) ' oe
-    s = Replace(s, ChrW(338), ChrW(229)) ' aa
-    s = Replace(s, ChrW(174), ChrW(198)) ' AE
-    s = Replace(s, ChrW(175), ChrW(216)) ' OE
-    s = Replace(s, ChrW(129), ChrW(197)) ' AA
-    s = Replace(s, ChrW(8225), ChrW(225)) '(a')
-    s = Replace(s, ChrW(381), ChrW(233)) '(e')
-    s = Replace(s, ChrW(8212), ChrW(243)) '(o')
-    s = Replace(s, ChrW(191), ChrW(192)) '(A') (Fra omvendt ?)
-    s = Replace(s, ChrW(203), ChrW(192)) '(A')
-    '   s = Replace(s, ChrW(192), ChrW(191)) '(omvendt ?) karambolerer med A' ovenfor
-    s = Replace(s, ChrW(8211), ChrW(241)) '(n~)
-    s = Replace(s, ChrW(8217), ChrW(237)) '(i')
-    s = Replace(s, ChrW(339), ChrW(250)) '(u')
-    s = Replace(s, ChrW(161), ChrW(176)) '(gradtegn)
-    s = Replace(s, ChrW(164), ChrW(167)) ' paragraf (fra sol)
-    s = Replace(s, ChrW(219), ChrW(8364)) ' Euro
-    '   s = Replace(s, "*._.*", ChrW(8230)) ' tre prikker
+    s = Replace(s, ChrW$(190), ChrW$(230)) ' ae
+    s = Replace(s, ChrW$(191), ChrW$(248)) ' oe
+    s = Replace(s, ChrW$(338), ChrW$(229)) ' aa
+    s = Replace(s, ChrW$(174), ChrW$(198)) ' AE
+    s = Replace(s, ChrW$(175), ChrW$(216)) ' OE
+    s = Replace(s, ChrW$(129), ChrW$(197)) ' AA
+    s = Replace(s, ChrW$(8225), ChrW$(225)) '(a')
+    s = Replace(s, ChrW$(381), ChrW$(233)) '(e')
+    s = Replace(s, ChrW$(8212), ChrW$(243)) '(o')
+    s = Replace(s, ChrW$(191), ChrW$(192)) '(A') (Fra omvendt ?)
+    s = Replace(s, ChrW$(203), ChrW$(192)) '(A')
+    '   s = Replace(s, chrw$(192), chrw$(191)) '(omvendt ?) karambolerer med A' ovenfor
+    s = Replace(s, ChrW$(8211), ChrW$(241)) '(n~)
+    s = Replace(s, ChrW$(8217), ChrW$(237)) '(i')
+    s = Replace(s, ChrW$(339), ChrW$(250)) '(u')
+    s = Replace(s, ChrW$(161), ChrW$(176)) '(gradtegn)
+    s = Replace(s, ChrW$(164), ChrW$(167)) ' paragraf (fra sol)
+    s = Replace(s, ChrW$(219), ChrW$(8364)) ' Euro
+    '   s = Replace(s, "*._.*", chrw$(8230)) ' tre prikker
     ReplaceLineToANSI = s
 End Function
 Function FolderExists(folderPath As String) As Boolean
 
-    If right(folderPath, 1) <> "\" Then
+    If right$(folderPath, 1) <> "\" Then
         folderPath = folderPath & "\"
     End If
     
@@ -159,7 +159,7 @@ Function FolderWithVBAProjectFiles() As String
 
     SpecialPath = ActiveDocument.path
     
-    If right(SpecialPath, 1) <> "\" Then
+    If right$(SpecialPath, 1) <> "\" Then
         SpecialPath = SpecialPath & "\"
     End If
     SpecialPath = SpecialPath & VBAModulesFolder ' "VBAProjectFiles"
@@ -218,24 +218,24 @@ Public Sub ExportAllModules()
         MsgBox "Export Folder does not exist and could not be created", vbOKOnly, "Error"
         Exit Sub
     End If
-    ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup\"
+    ModuleBackupFolder = Left$(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup\"
     If Dir(ModuleBackupFolder, vbDirectory) <> "" Then
-        backupFolder = Dir(Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup*", vbDirectory)
-        ns = right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
+        backupFolder = Dir(Left$(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup*", vbDirectory)
+        ns = right$(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
         If IsNumeric(ns) Then
             If CInt(ns) > n Then n = CInt(ns)
         End If
         Do
             backupFolder = Dir()
             If backupFolder <> vbNullString Then
-                ns = right(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
+                ns = right$(backupFolder, Len(backupFolder) - Len(VBAModulesFolder) - 7)
                 If IsNumeric(ns) Then
                     If CInt(ns) > n Then n = CInt(ns)
                 End If
             End If
         Loop While backupFolder <> vbNullString
         n = n + 1
-        ModuleBackupFolder = Left(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup" & n & "\"
+        ModuleBackupFolder = Left$(ModuleFolder, Len(ModuleFolder) - 1) & "-Backup" & n & "\"
         
     End If
     Name ModuleFolder As ModuleBackupFolder ' renames existing folders for backup
@@ -378,16 +378,16 @@ Sub ImportAllModules()
     
     szExportPath = FolderWithVBAProjectFiles
     
-    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
+    If right$(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     StrFile = Dir(szExportPath & "A-ExportCreated*")
-    If StrFile <> "" Then D = Mid(StrFile, 17, Len(StrFile) - 20)
-    D = Left(D, 13) & ":" & Mid(D, 14, 2) & ":" & right(D, 2)
+    If StrFile <> "" Then D = Mid$(StrFile, 17, Len(StrFile) - 20)
+    D = Left$(D, 13) & ":" & Mid$(D, 14, 2) & ":" & right$(D, 2)
     
     
     StrFile = Dir(szExportPath & "*")
     Do While Len(StrFile) > 0
-        If Left(StrFile, 15) <> "A-ExportCreated" And (InStr(StrFile, ".bas") > 0 Or InStr(StrFile, ".cls") > 0 Or InStr(StrFile, ".frm") > 0) And StrFile <> "ThisDocument.cls" Then 'StrFile <> "VBAmodul.bas"
+        If Left$(StrFile, 15) <> "A-ExportCreated" And (InStr(StrFile, ".bas") > 0 Or InStr(StrFile, ".cls") > 0 Or InStr(StrFile, ".frm") > 0) And StrFile <> "ThisDocument.cls" Then 'StrFile <> "VBAmodul.bas"
             FileList = FileList & StrFile & vbCrLf
             ImportCount = ImportCount + 1
         End If
@@ -450,7 +450,7 @@ End Sub
 Function CountFilesInFolder(folderPath As String, Optional OnlyModules As Boolean = False) As Long
     Dim fileName As String
     Dim FileCount As Long
-    If right(folderPath, 1) = "\" Then
+    If right$(folderPath, 1) = "\" Then
         fileName = Dir(folderPath & "*")
     Else
         fileName = Dir(folderPath & "\*")
@@ -489,7 +489,7 @@ Public Sub DeleteAllModules(Optional PromptOk As Boolean = True)
     End If
     
     szExportPath = FolderWithVBAProjectFiles
-    If right(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
+    If right$(szExportPath, 1) <> "\" Then szExportPath = szExportPath & "\"
     
     For Each cmpComponent In wkbSource.VBProject.VBComponents
         bExport = True
@@ -556,10 +556,10 @@ Sub RemoveCommentOutThisDocument()
          For i = 1 To VBC.CodeModule.CountOfLines
             If i > VBC.CodeModule.CountOfLines Then Exit For
             s = VBC.CodeModule.Lines(i, 1)
-            If Left(s, 2) = "' " Then
-                s = right(s, Len(s) - 2)
-            ElseIf Left(s, 1) = "'" Then
-                s = right(s, Len(s) - 1)
+            If Left$(s, 2) = "' " Then
+                s = right$(s, Len(s) - 2)
+            ElseIf Left$(s, 1) = "'" Then
+                s = right$(s, Len(s) - 1)
             End If
             If s <> "" Or i > 2 Then
                 VBC.CodeModule.ReplaceLine i, s
@@ -589,11 +589,11 @@ Sub BackupThisDocument()
     sourcePath = ActiveDocument.FullName
     
     ' Extract the file name and extension from the source path
-    fileName = Mid(sourcePath, InStrRev(sourcePath, "\") + 1, InStrRev(sourcePath, ".") - InStrRev(sourcePath, "\") - 1)
-    fileExtension = Mid(sourcePath, InStrRev(sourcePath, "."))
+    fileName = Mid$(sourcePath, InStrRev(sourcePath, "\") + 1, InStrRev(sourcePath, ".") - InStrRev(sourcePath, "\") - 1)
+    fileExtension = Mid$(sourcePath, InStrRev(sourcePath, "."))
     
     ' Define the backup folder
-    backupFolder = Left(sourcePath, InStrRev(sourcePath, "\")) & "Backup\"
+    backupFolder = Left$(sourcePath, InStrRev(sourcePath, "\")) & "Backup\"
     
     ' Create the backup folder if it doesn't exist
     If Dir(backupFolder, vbDirectory) = "" Then
@@ -608,7 +608,7 @@ Sub BackupThisDocument()
     Do While currentFile <> ""
         ' Extract the number from the current file name
         Dim currentNumber As Integer, currentNumberS As String
-        currentNumberS = Mid(currentFile, Len(fileName) + 1, Len(currentFile) - Len(fileName) - Len(fileExtension))
+        currentNumberS = Mid$(currentFile, Len(fileName) + 1, Len(currentFile) - Len(fileName) - Len(fileExtension))
         If IsNumeric(currentNumberS) Then
             currentNumber = val(currentNumberS)
             ' Update the file number if the current number is larger

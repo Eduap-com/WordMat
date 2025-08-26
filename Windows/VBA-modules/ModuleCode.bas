@@ -36,7 +36,7 @@ Sub InsertCodeBlock()
     cc.Tag = "CodeBlock"
     
     ' Insert code text
-    cc.Range.Text = codeText
+    cc.Range.text = codeText
 
     ' Apply Consolas font and optional styling
     With cc.Range.Font
@@ -103,12 +103,12 @@ Function GetAllPreviousCodeBlocks() As String
         If cc.Tag = "CodeBlock" And cc.Range.End < selStart Then
             ' Prepend the code block text to maintain order from nearest to farthest
             
-            s = cc.Range.Text
-            s = TrimR(Trim(s), vbCrLf)
-            s = TrimR(Trim(s), vbCr)
-            s = TrimR(Trim(s), vbLf)
+            s = cc.Range.text
+            s = TrimR(Trim$(s), vbCrLf)
+            s = TrimR(Trim$(s), vbCr)
+            s = TrimR(Trim$(s), vbLf)
             If s <> vbNullString Then
-                If right(s, 1) <> ";" And right(s, 1) <> "$" Then s = s & "$"
+                If right$(s, 1) <> ";" And right$(s, 1) <> "$" Then s = s & "$"
                 If result = "" Then
                     result = s
                 Else

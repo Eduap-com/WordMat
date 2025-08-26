@@ -78,7 +78,7 @@ Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Templat
 ' If the current document is called wordmat*.dotm then it is returned as a template
 ' Otherwise all global templates are searched to see if there is one called wordmat*.dotm
     If Len(ActiveDocument.AttachedTemplate) > 10 Then
-        If LCase(Left(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase(right(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
+        If LCase$(Left$(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase$(right$(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
             Set GetWordMatTemplate = ActiveDocument.AttachedTemplate
             Exit Function
         End If
@@ -89,7 +89,7 @@ Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Templat
 
 ' It is not possible to modify wordmat.dotm if the file is not opened directly. It cannot be saved.
 '    For Each WT In Application.Templates
-'        If LCase(Left(WT, 7)) = "wordmat" And LCase(right(WT, 5)) = ".dotm" Then
+'        If lcase$(left$(WT, 7)) = "wordmat" And lcase$(right$(WT, 5)) = ".dotm" Then
 '            Set GetWordMatTemplate = WT
 '            Exit Function
 '        End If
@@ -136,7 +136,7 @@ Function GetDocumentsDir() As String
         Dim p As Integer
         GetDocumentsDir = MacScript("return POSIX path of (path to documents folder) as string")
         p = InStr(GetDocumentsDir, "/Library")
-        GetDocumentsDir = Left(GetDocumentsDir, p) & "Documents"
+        GetDocumentsDir = Left$(GetDocumentsDir, p) & "Documents"
 #Else
         GetDocumentsDir = RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Personal")
         If Dir(GetDocumentsDir, vbDirectory) = "" Then
@@ -260,7 +260,7 @@ Sub InsertDefiner()
     If Selection.OMaths.Count > 0 Then
         If Selection.OMaths(1).Type = wdOMathInline Then
             Selection.OMaths(1).Range.Select
-            If Selection.OMaths(1).Range.Text = "Type equation here." Or Selection.OMaths(1).Range.Text = "Skriv ligningen her." Then
+            If Selection.OMaths(1).Range.text = "Type equation here." Or Selection.OMaths(1).Range.text = "Skriv ligningen her." Then
             Else
                 Selection.Collapse wdCollapseStart
                 Selection.MoveRight wdCharacter, 1
@@ -269,7 +269,7 @@ Sub InsertDefiner()
         Else
             Selection.OMaths(1).Range.Select
             Selection.Collapse wdCollapseStart
-            If Selection.OMaths(1).Range.Text = "Type equation here." Or Selection.OMaths(1).Range.Text = "Skriv ligningen her." Then
+            If Selection.OMaths(1).Range.text = "Type equation here." Or Selection.OMaths(1).Range.text = "Skriv ligningen her." Then
                 Selection.MoveRight wdCharacter, 1
             End If
             Selection.TypeText TT.A(62) & ": "
@@ -332,17 +332,17 @@ Sub ForrigeResultat()
     matfeltno = ra.OMaths.Count
     Do
         If ResFeltIndex >= matfeltno - 1 Then
-            If ActiveDocument.Range.OMaths(matfeltno).Range.Text = Selection.Range.Text Then
-                Selection.Text = ""
+            If ActiveDocument.Range.OMaths(matfeltno).Range.text = Selection.Range.text Then
+                Selection.text = ""
                 Selection.OMaths.Add Range:=Selection.Range
             Else
-                Selection.Text = ""
+                Selection.text = ""
             End If
             GoTo fejl
         End If
 '        ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range.Select
         Set r = ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range
-        If Len(r.Text) = 0 Then
+        If Len(r.text) = 0 Then
             ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
             GoTo slut
@@ -350,7 +350,7 @@ Sub ForrigeResultat()
         s = omax.ReadEquation2(r)
 '        s = omax.ReadEquation(r)
         hopover = False
-        If InStr(VBA.LCase(s), "defin") > 0 Then
+        If InStr(VBA.LCase$(s), "defin") > 0 Then
             ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
             hopover = True
@@ -364,7 +364,7 @@ Sub ForrigeResultat()
                     ResIndex = ResIndex + 1
                 End If
                 hopover = True
-            ElseIf s = VBA.ChrW(8661) Then
+            ElseIf s = VBA.ChrW$(8661) Then
                 ResFeltIndex = ResFeltIndex + 1
                 ResIndex = 0
                 hopover = True
@@ -374,11 +374,11 @@ Loop While hopover
     
     sr.Select
     ResPos1 = Selection.Range.start
-    If Selection.Range.Text = "Skriv ligningen her." Then
+    If Selection.Range.text = "Skriv ligningen her." Then
         ResPos1 = ResPos1 - 1 ' if already empty, selection is for some reason 1 character too many
     End If
-    s = Replace(s, VBA.ChrW(8289), "") ' function sign sin(x) otherwise becomes si*n(x). also problem with other functions
-    Selection.Text = s
+    s = Replace(s, VBA.ChrW$(8289), "") ' function sign sin(x) otherwise becomes si*n(x). also problem with other functions
+    Selection.text = s
     
 GoTo slut
 fejl:
@@ -390,7 +390,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 
-Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
+Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
 ' returns the last part of the text to the first position counted from the end for = or approximately equal
 ' = in the sum sign is ignored
 
@@ -398,38 +398,38 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     Dim possumtegn As Integer
     Dim posca As Integer
     Dim poseller As Integer
-    Dim Pos As Integer
+    Dim pos As Integer
     Dim Arr(20) As String
     Dim i As Integer
     
     Do ' go back to nearest equal sign
-        posligmed = InStr(Text, "=")
-        possumtegn = InStr(Text, VBA.ChrW(8721))
-        posca = InStr(Text, VBA.ChrW(8776))
-        poseller = InStr(Text, VBA.ChrW(8744))
+        posligmed = InStr(text, "=")
+        possumtegn = InStr(text, VBA.ChrW$(8721))
+        posca = InStr(text, VBA.ChrW$(8776))
+        poseller = InStr(text, VBA.ChrW$(8744))
         
-        Pos = Len(Text)
+        pos = Len(text)
     '    pos = posligmed
-        If posligmed > 0 And posligmed < Pos Then Pos = posligmed
-        If posca > 0 And posca < Pos Then Pos = posca
-        If poseller > 0 And poseller < Pos Then Pos = poseller
+        If posligmed > 0 And posligmed < pos Then pos = posligmed
+        If posca > 0 And posca < pos Then pos = posca
+        If poseller > 0 And poseller < pos Then pos = poseller
         
-        If possumtegn > 0 And possumtegn < Pos Then ' if there is a sum sign, there is an = sign as part of it
-            Pos = 0
+        If possumtegn > 0 And possumtegn < pos Then ' if there is a sum sign, there is an = sign as part of it
+            pos = 0
         End If
-        If Pos = Len(Text) Then Pos = 0
-        If Pos > 0 Then
-            Arr(i) = Left(Text, Pos - 1)
-            Text = right(Text, Len(Text) - Pos)
+        If pos = Len(text) Then pos = 0
+        If pos > 0 Then
+            Arr(i) = Left$(text, pos - 1)
+            text = right$(text, Len(text) - pos)
             i = i + 1
         Else
-            Arr(i) = Text
+            Arr(i) = text
         End If
-    Loop While Pos > 0
+    Loop While pos > 0
     
     If indeks = i Then ResIndex = -1  ' global variable marks that there are no more to the left
     If i = 0 Then
-        KlipTilLigmed = Text
+        KlipTilLigmed = text
         ResIndex = -1
     Else
         KlipTilLigmed = Arr(i - indeks)
@@ -438,11 +438,11 @@ Function KlipTilLigmed(Text As String, ByVal indeks As Integer) As String
     ' remove returns and spaces etc.
 '    s = Replace(s, vbCrLf, "")
     KlipTilLigmed = Replace(KlipTilLigmed, vbCr, "")
-    KlipTilLigmed = Replace(KlipTilLigmed, VBA.ChrW(11), "")
+    KlipTilLigmed = Replace(KlipTilLigmed, VBA.ChrW$(11), "")
 '    s = Replace(s, vbLf, "")
-    KlipTilLigmed = Replace(KlipTilLigmed, VBA.ChrW(8744), "") 'eller tegn
+    KlipTilLigmed = Replace(KlipTilLigmed, VBA.ChrW$(8744), "") 'eller tegn
 '    KlipTilLigmed = Replace(KlipTilLigmed, " ", "")
-    KlipTilLigmed = Trim(KlipTilLigmed)
+    KlipTilLigmed = Trim$(KlipTilLigmed)
     
     If InStr(KlipTilLigmed, "/") > 0 Then KlipTilLigmed = "  " & KlipTilLigmed
     
@@ -539,9 +539,9 @@ Function GetRandomTip()
     Case 5
         tip = TT.A(329)
     Case 6
-        tip = TT.A(331) & "   x_1   ->   x" & VBA.ChrW(8321)
+        tip = TT.A(331) & "   x_1   ->   x" & VBA.ChrW$(8321)
     Case 7
-        tip = TT.A(332) & VBA.ChrW(955)
+        tip = TT.A(332) & VBA.ChrW$(955)
     Case 8
         tip = TT.A(333)
     Case 9
@@ -551,23 +551,23 @@ Function GetRandomTip()
     Case 11
         tip = TT.A(336)
     Case 12
-        tip = "(a+b)" & VBA.ChrW(178) & " = a" & VBA.ChrW(178) & " + b" & VBA.ChrW(178) & " + 2ab"
+        tip = "(a+b)" & VBA.ChrW$(178) & " = a" & VBA.ChrW$(178) & " + b" & VBA.ChrW$(178) & " + 2ab"
     Case 13
-        tip = "(a+b)(a-b) = a" & VBA.ChrW(178) & " - b" & VBA.ChrW(178)
+        tip = "(a+b)(a-b) = a" & VBA.ChrW$(178) & " - b" & VBA.ChrW$(178)
     Case 14
-        tip = "(a-b)" & VBA.ChrW(178) & " = a" & VBA.ChrW(178) & " + b" & VBA.ChrW(178) & " - 2ab"
+        tip = "(a-b)" & VBA.ChrW$(178) & " = a" & VBA.ChrW$(178) & " + b" & VBA.ChrW$(178) & " - 2ab"
     Case 15
-        tip = "(a" & VBA.ChrW(183) & "b)" & VBA.ChrW(7510) & " = a" & VBA.ChrW(7510) & VBA.ChrW(183) & "b" & VBA.ChrW(7510)
+        tip = "(a" & VBA.ChrW$(183) & "b)" & VBA.ChrW$(7510) & " = a" & VBA.ChrW$(7510) & VBA.ChrW$(183) & "b" & VBA.ChrW$(7510)
     Case 16
         tip = TT.A(337) & AntalB
     Case 17
-        tip = "log(a" & VBA.ChrW(7495) & ") = b" & VBA.ChrW(183) & "log(a)"
+        tip = "log(a" & VBA.ChrW$(7495) & ") = b" & VBA.ChrW$(183) & "log(a)"
     Case 18
         tip = "log(a/b) = log(a) - log(b)"
     Case 19
-        tip = "log(a" & VBA.ChrW(183) & "b) = log(a) + log(b)"
+        tip = "log(a" & VBA.ChrW$(183) & "b) = log(a) + log(b)"
     Case 20
-        tip = "\int      ->      " & VBA.ChrW(8747)
+        tip = "\int      ->      " & VBA.ChrW$(8747)
     Case 21
         tip = TT.A(338)
     Case 22
@@ -575,7 +575,7 @@ Function GetRandomTip()
     Case 23
         tip = TT.A(340)
     Case 24
-        tip = "(a/b)" & VBA.ChrW(7510) & " = a" & VBA.ChrW(7510) & "/b" & VBA.ChrW(7510)
+        tip = "(a/b)" & VBA.ChrW$(7510) & " = a" & VBA.ChrW$(7510) & "/b" & VBA.ChrW$(7510)
     Case 25
         tip = "a/b + c/d = (ad+bc)/bd"
     Case 26
@@ -687,9 +687,9 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     
 #If Mac Then
     If PartnerShip Then
-        s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatversionP.txt")
+        s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacversionP.txt")
     Else
-        s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatversion.txt")
+        s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacversion.txt")
     End If
     If InStr(s, "404 Not Found") > 0 Then s = vbNullString
 #Else
@@ -708,13 +708,13 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     NewVersion = s
     p = InStr(NewVersion, vbLf)
     If p > 0 Then
-        News = right(NewVersion, Len(NewVersion) - p)
-        NewVersion = Trim(Left(NewVersion, p - 1))
+        News = right$(NewVersion, Len(NewVersion) - p)
+        NewVersion = Trim$(Left$(NewVersion, p - 1))
     Else ' mac
         p = InStr(NewVersion, vbCr)
         If p > 0 Then
-            News = right(NewVersion, Len(NewVersion) - p)
-            NewVersion = Trim(Left(NewVersion, p - 1))
+            News = right$(NewVersion, Len(NewVersion) - p)
+            NewVersion = Trim$(Left$(NewVersion, p - 1))
         End If
     End If
    
@@ -725,11 +725,31 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
         GoTo slut
     End If
    
-    If IsNumeric(AppVersion) And IsNumeric(NewVersion) Then
-        If val(AppVersion) < val(NewVersion) Then UpdateNow = True
-    Else
-        If AppVersion <> NewVersion Then UpdateNow = True
-    End If
+   Dim MajorVersion As Integer, MinorVersion As Integer, AppPatchVersion As Integer, Arr() As String
+   Dim NewMajorVersion As Integer, NewMinorVersion As Integer, NewPatchVersion As Integer, NewEkstraInfoVersion As Integer
+   Arr = Split(AppVersion & PatchVersion, ".")
+   MajorVersion = CInt(Arr(0))
+   If UBound(Arr) > 0 Then MinorVersion = CInt(Arr(1))
+   If UBound(Arr) > 1 Then AppPatchVersion = CInt(Arr(2))
+   Arr = Split(NewVersion, ".")
+   NewMajorVersion = CInt(Arr(0))
+   If UBound(Arr) > 0 Then NewMinorVersion = CInt(Arr(1))
+   If UBound(Arr) > 1 Then NewPatchVersion = CInt(Arr(2))
+   
+   If NewMajorVersion > MajorVersion Then
+        UpdateNow = True
+    ElseIf NewMajorVersion = MajorVersion And NewMinorVersion > MinorVersion Then
+        UpdateNow = True
+   ElseIf (Not RunSilent) And NewPatchVersion > AppPatchVersion Then ' if updatebutton was pressed, then also look for patch version
+        UpdateNow = True
+   End If
+   
+   ' deprecated
+'    If IsNumeric(AppVersion) And IsNumeric(NewVersion) Then
+'        If val(AppVersion) < val(NewVersion) Then UpdateNow = True
+'    Else
+'        If AppVersion <> NewVersion Then UpdateNow = True
+'    End If
     
     If UpdateNow Then
         If PartnerShip Then
@@ -827,10 +847,10 @@ Function ConvertNumberToString(ByVal n As Double) As String
         ConvertNumberToString = VBA.Format(n, "#################0.0####################")
 #End If
         If Len(ConvertNumberToString) > 1 Then
-            If right(ConvertNumberToString, 2) = ".0" Then
-                ConvertNumberToString = Left(ConvertNumberToString, Len(ConvertNumberToString) - 2)
-            ElseIf right(ConvertNumberToString, 2) = ",0" Then
-                ConvertNumberToString = Left(ConvertNumberToString, Len(ConvertNumberToString) - 2)
+            If right$(ConvertNumberToString, 2) = ".0" Then
+                ConvertNumberToString = Left$(ConvertNumberToString, Len(ConvertNumberToString) - 2)
+            ElseIf right$(ConvertNumberToString, 2) = ",0" Then
+                ConvertNumberToString = Left$(ConvertNumberToString, Len(ConvertNumberToString) - 2)
             End If
         End If
     End If
@@ -839,8 +859,8 @@ Function ConvertNumberToString(ByVal n As Double) As String
     Else
         ConvertNumberToString = Replace(ConvertNumberToString, ",", ".")
     End If
-'    ConvertNumberToString = Replace(Replace(n, ",", "."), "E", VBA.ChrW(183) & "10^(")
-    ConvertNumberToString = Replace(ConvertNumberToString, "E", VBA.ChrW(183) & "10^(")
+'    ConvertNumberToString = Replace(Replace(n, ",", "."), "E", VBA.chrw$(183) & "10^(")
+    ConvertNumberToString = Replace(ConvertNumberToString, "E", VBA.ChrW$(183) & "10^(")
     If InStr(ConvertNumberToString, "10^(") Then
         ConvertNumberToString = ConvertNumberToString & ") "
     End If
@@ -920,7 +940,7 @@ Public Sub ClearClipBoard()
 On Error GoTo slut
     Dim oData   As New DataObject 'object to use the clipboard
      
-    oData.SetText Text:=Empty 'Clear
+    oData.SetText text:=Empty 'Clear
     oData.PutInClipboard 'take in the clipboard to empty it
     Set oData = Nothing
 slut:
@@ -949,8 +969,8 @@ slut:
     Dim r As Range
     Set r = Selection.Range
     r.MoveStart wdCharacter, -1
-    If r.Text = VBA.ChrW(11) Then ' if there is shift-enter at the end, replace with regular return
-        r.Text = VBA.ChrW(13)
+    If r.text = VBA.ChrW$(11) Then ' if there is shift-enter at the end, replace with regular return
+        r.text = VBA.ChrW$(13)
     End If
 End Sub
 
@@ -1022,7 +1042,7 @@ Sub ListToTabel()
 
     For i = 1 To dd.nrows
         For j = 1 To dd.ncolumns
-            Tabel.Cell(i, j).Range.Text = dd.TabelsCelle(i, j)
+            Tabel.Cell(i, j).Range.text = dd.TabelsCelle(i, j)
         Next
     Next
 
@@ -1055,8 +1075,8 @@ Sub GenerateAutoCorrect()
 ' generates math autocorrect. Not used, but has potential
     Application.OMathAutoCorrect.UseOutsideOMath = True
     
-    Application.OMathAutoCorrect.Entries.Add "\bi", VBA.ChrW(8660) ' biimplicative arrows
-    Application.OMathAutoCorrect.Entries.Add "\imp", VBA.ChrW(8658) ' implikationarrow right
+    Application.OMathAutoCorrect.Entries.Add "\bi", VBA.ChrW$(8660) ' biimplicative arrows
+    Application.OMathAutoCorrect.Entries.Add "\imp", VBA.ChrW$(8658) ' implikationarrow right
 End Sub
 
 Sub RestartWordMat()
@@ -1087,12 +1107,12 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     Oundo.StartCustomRecord
 
     If Selection.OMaths.Count > 0 Then
-        If Not Selection.OMaths(1).Range.Text = vbNullString Then
+        If Not Selection.OMaths(1).Range.text = vbNullString Then
             Selection.OMaths(1).Range.Cut
             ccut = True
             'there may sometimes be a remainder of a mathematical field
             If Selection.OMaths.Count > 0 Then
-                If Selection.OMaths(1).Range.Text = vbNullString Then
+                If Selection.OMaths(1).Range.text = vbNullString Then
                     Selection.OMaths(1).Range.Delete
                 Else
                     Selection.TypeParagraph
@@ -1138,20 +1158,20 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
     t.Cell(1, placement).Range.Select
     Selection.Collapse wdCollapseStart
     If Not EqNumType Then
-        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="LISTNUM ""WMeq"" ""NumberDefault"" \L 4")
+        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="LISTNUM ""WMeq"" ""NumberDefault"" \L 4")
         F.Update
         '        f.Code.Fields.ToggleShowCodes
     Else
         Selection.TypeText "("
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ chapter \c")
-        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1 \c")
+        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq1 \c")
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="STYLEREF ""Overskrift 1""")
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SECTION")
         F.Update
         '        f.Code.Fields.ToggleShowCodes
         Selection.TypeText "."
         '        Set f = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ figure \s1") ' starter automatisk forfra ved ny overskrift 1
-        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 ")
+        Set F = Selection.Fields.Add(Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq2 ")
         F.Update
         '        f.Code.Fields.ToggleShowCodes
         Selection.TypeText ")"
@@ -1243,15 +1263,15 @@ On Error GoTo fejl
     End If
     
     Set F = Selection.Fields(1)
-    If Selection.Fields.Count = 1 And InStr(F.Code.Text, "LISTNUM") > 0 Then
+    If Selection.Fields.Count = 1 And InStr(F.Code.text, "LISTNUM") > 0 Then
         n = InputBox(TT.A(346), TT.A(6), "1")
-        p = InStr(F.Code.Text, "\S")
+        p = InStr(F.Code.text, "\S")
         If p > 0 Then
-            F.Code.Text = Left(F.Code.Text, p - 1)
+            F.Code.text = Left$(F.Code.text, p - 1)
         End If
-        F.Code.Text = F.Code.Text & "\S" & n
+        F.Code.text = F.Code.text & "\S" & n
         F.Update
-    ElseIf Selection.Fields.Count = 1 Or Selection.Fields.Count = 2 And InStr(F.Code.Text, "WMeq") > 0 Then
+    ElseIf Selection.Fields.Count = 1 Or Selection.Fields.Count = 2 And InStr(F.Code.text, "WMeq") > 0 Then
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(TT.A(346), TT.A(6), F.result & "." & f2.result)
@@ -1278,13 +1298,13 @@ End Sub
 Sub SetFieldNo(F As Field, n As String)
     Dim p As Integer, p2 As Integer
     On Error GoTo fejl
-    p = InStr(F.Code.Text, "\r")
-    p2 = InStr(F.Code.Text, "\c")
+    p = InStr(F.Code.text, "\r")
+    p2 = InStr(F.Code.text, "\c")
     If p2 > 0 And p2 < p Then p = p2
     If p > 0 Then
-        F.Code.Text = Left(F.Code.Text, p - 1)
+        F.Code.text = Left$(F.Code.text, p - 1)
     End If
-    F.Code.Text = F.Code.Text & "\r" & n & " \c"
+    F.Code.text = F.Code.text & "\r" & n & " \c"
     F.Update
     ActiveDocument.Fields.Update
     GoTo slut
@@ -1299,12 +1319,12 @@ Sub InsertEquationHeadingNo()
     result = MsgBox(TT.A(348), vbYesNoCancel, TT.A(8))
     If result = vbCancel Then Exit Sub
     If result = vbYes Then
-        Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1"
+        Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq1"
     Else
-        Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq1 \h"
+        Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq1 \h"
     End If
     Selection.Collapse wdCollapseEnd
-    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, Text:="SEQ WMeq2 \r0 \h"
+    Selection.Fields.Add Range:=Selection.Range, Type:=wdFieldEmpty, PreserveFormatting:=False, text:="SEQ WMeq2 \r0 \h"
 
     ActiveDocument.Fields.Update
     GoTo slut
@@ -1339,7 +1359,7 @@ Sub DeleteNormalDotm()
     Dim p As Integer
     UserDir = MacScript("return POSIX path of (path to home folder)")
     p = InStr(UserDir, "/Containers")
-    UserDir = Left(UserDir, p) & "Group Containers/UBF8T346G9.Office/User Content.localized/Templates.localized"
+    UserDir = Left$(UserDir, p) & "Group Containers/UBF8T346G9.Office/User Content.localized/Templates.localized"
     RunScript "OpenFinder", UserDir
 #Else
     UserDir = Environ$("username")
@@ -1358,13 +1378,13 @@ Sub DeleteKeyboardShortcutsInNormalDotm()
 
 #If Mac Then ' For one student, KB.command was completely empty, so on Mac, kb.keystring is used, although it is a little more insecure.
     For Each KB In KeyBindings
-        If Len(KB.KeyString) = 8 And Left(KB.KeyString, 7) = "Option+" Then
+        If Len(KB.KeyString) = 8 And Left$(KB.KeyString, 7) = "Option+" Then
             KB.Clear
         End If
     Next
 #Else
     For Each KB In KeyBindings
-        If LCase(Left(KB.Command, 8)) = "wordmat." Then
+        If LCase$(Left$(KB.Command, 8)) = "wordmat." Then
             KB.Clear
         End If
     Next
@@ -1443,11 +1463,11 @@ End If
 End Function
 
 Function RemoveTopFolderFromPath(ByVal ShortName As String) As String
-   RemoveTopFolderFromPath = Mid(ShortName, InStr(ShortName, "\") + 1)
+   RemoveTopFolderFromPath = Mid$(ShortName, InStr(ShortName, "\") + 1)
 End Function
 
 Function RemoveFileNameFromPath(ByVal ShortName As String) As String
-   RemoveFileNameFromPath = Mid(ShortName, 1, Len(ShortName) - InStr(StrReverse(ShortName), "\"))
+   RemoveFileNameFromPath = Mid$(ShortName, 1, Len(ShortName) - InStr(StrReverse(ShortName), "\"))
 End Function
 
 Function ExtractTag(s As String, StartTag As String, EndTag As String) As String
@@ -1464,15 +1484,15 @@ Function ExtractTag(s As String, StartTag As String, EndTag As String) As String
       Exit Function
    End If
    
-   ExtractTag = Mid(s, p + Len(StartTag), p2 - p - Len(StartTag))
+   ExtractTag = Mid$(s, p + Len(StartTag), p2 - p - Len(StartTag))
 End Function
 
 Sub SetMathAutoCorrect()
 ' cant be run from automacros
-    If MaximaGangeTegn = VBA.ChrW(183) Then
-        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW(183))
-    ElseIf MaximaGangeTegn = VBA.ChrW(215) Then
-        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW(215))
+    If MaximaGangeTegn = VBA.ChrW$(183) Then
+        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW$(183))
+    ElseIf MaximaGangeTegn = VBA.ChrW$(215) Then
+        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW$(215))
     Else
         On Error Resume Next
         Call Application.OMathAutoCorrect.Entries("*").Delete
@@ -1498,8 +1518,8 @@ Function GetWordMatDir(Optional SubDir As String) As String
     GetWordMatDir = "/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/"
 #Else
     If SubDir <> vbNullString Then
-        SubDir = Trim(SubDir)
-        If right(SubDir, 1) <> "\" Then SubDir = SubDir & "\"
+        SubDir = Trim$(SubDir)
+        If right$(SubDir, 1) <> "\" Then SubDir = SubDir & "\"
     End If
     If InstallLocation = "All" Then
         GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
@@ -1529,7 +1549,7 @@ Sub NewEquation()
     If Selection.OMaths.Count = 0 Then
         Set r = Selection.OMaths.Add(Selection.Range)
     ElseIf Selection.Tables.Count = 0 Then
-        If Selection.OMaths(1).Range.Text = vbNullString Then
+        If Selection.OMaths(1).Range.text = vbNullString Then
             Set r = Selection.OMaths.Add(Selection.Range)
         End If
     ElseIf Selection.Tables(1).Columns.Count = 3 And Selection.Tables(1).Cell(1, 3).Range.Fields.Count > 0 Then
@@ -1559,91 +1579,91 @@ Function FormatDefinitions(DefS As String) As String
         
     DefS = Replace(DefS, " ## ", MaximaGangeTegn)
     DefS = Replace(DefS, "^^", "^")
-    DefS = Replace(DefS, "SymVecta", ChrW(&H20D7))
+    DefS = Replace(DefS, "SymVecta", ChrW$(&H20D7))
     DefS = Replace(DefS, "matrix", vbNullString)
             
     DefS = Replace(DefS, "*", MaximaGangeTegn)
         
-    DefS = Replace(DefS, "%pi", ChrW(&H3C0))
+    DefS = Replace(DefS, "%pi", ChrW$(&H3C0))
     DefS = Replace(DefS, "%i", "i")
     DefS = Replace(DefS, "log(", "ln(")
     DefS = Replace(DefS, "log10(", "log(")
-    DefS = Replace(DefS, "^(x)", ChrW(&H2E3))
-    DefS = Replace(DefS, "^(2)", ChrW(&HB2))
-    DefS = Replace(DefS, "^(3)", ChrW(&HB3))
-    DefS = Replace(DefS, "^(4)", ChrW(&H2074))
-    DefS = Replace(DefS, "^(5)", ChrW(&H2075))
-    DefS = Replace(DefS, "^(6)", ChrW(&H2076))
-    DefS = Replace(DefS, "^(7)", ChrW(&H2077))
-    DefS = Replace(DefS, "^(8)", ChrW(&H2078))
-    DefS = Replace(DefS, "^(9)", ChrW(&H2079))
-    DefS = Replace(DefS, "^(-1)", ChrW(&H207B) & ChrW(&HB9))
-    DefS = Replace(DefS, "^(-2)", ChrW(&H207B) & ChrW(&HB2))
-    DefS = Replace(DefS, "^(-3)", ChrW(&H207B) & ChrW(&HB3))
+    DefS = Replace(DefS, "^(x)", ChrW$(&H2E3))
+    DefS = Replace(DefS, "^(2)", ChrW$(&HB2))
+    DefS = Replace(DefS, "^(3)", ChrW$(&HB3))
+    DefS = Replace(DefS, "^(4)", ChrW$(&H2074))
+    DefS = Replace(DefS, "^(5)", ChrW$(&H2075))
+    DefS = Replace(DefS, "^(6)", ChrW$(&H2076))
+    DefS = Replace(DefS, "^(7)", ChrW$(&H2077))
+    DefS = Replace(DefS, "^(8)", ChrW$(&H2078))
+    DefS = Replace(DefS, "^(9)", ChrW$(&H2079))
+    DefS = Replace(DefS, "^(-1)", ChrW$(&H207B) & ChrW$(&HB9))
+    DefS = Replace(DefS, "^(-2)", ChrW$(&H207B) & ChrW$(&HB2))
+    DefS = Replace(DefS, "^(-3)", ChrW$(&H207B) & ChrW$(&HB3))
         
-    DefS = Replace(DefS, "_0(", ChrW(&H2080) & "(")
-    DefS = Replace(DefS, "_1(", ChrW(&H2081) & "(")
-    DefS = Replace(DefS, "_2(", ChrW(&H2082) & "(")
-    DefS = Replace(DefS, "_3(", ChrW(&H2083) & "(")
-    DefS = Replace(DefS, "_4(", ChrW(&H2084) & "(")
-    DefS = Replace(DefS, "_5(", ChrW(&H2085) & "(")
-    DefS = Replace(DefS, "_6(", ChrW(&H2086) & "(")
-    DefS = Replace(DefS, "_7(", ChrW(&H2087) & "(")
-    DefS = Replace(DefS, "_8(", ChrW(&H2088) & "(")
-    DefS = Replace(DefS, "_9(", ChrW(&H2089) & "(")
-    DefS = Replace(DefS, "_a(", ChrW(&H2090) & "(")
-    DefS = Replace(DefS, "_x(", ChrW(&H2093) & "(")
-    DefS = Replace(DefS, "_n(", ChrW(&H2099) & "(")
+    DefS = Replace(DefS, "_0(", ChrW$(&H2080) & "(")
+    DefS = Replace(DefS, "_1(", ChrW$(&H2081) & "(")
+    DefS = Replace(DefS, "_2(", ChrW$(&H2082) & "(")
+    DefS = Replace(DefS, "_3(", ChrW$(&H2083) & "(")
+    DefS = Replace(DefS, "_4(", ChrW$(&H2084) & "(")
+    DefS = Replace(DefS, "_5(", ChrW$(&H2085) & "(")
+    DefS = Replace(DefS, "_6(", ChrW$(&H2086) & "(")
+    DefS = Replace(DefS, "_7(", ChrW$(&H2087) & "(")
+    DefS = Replace(DefS, "_8(", ChrW$(&H2088) & "(")
+    DefS = Replace(DefS, "_9(", ChrW$(&H2089) & "(")
+    DefS = Replace(DefS, "_a(", ChrW$(&H2090) & "(")
+    DefS = Replace(DefS, "_x(", ChrW$(&H2093) & "(")
+    DefS = Replace(DefS, "_n(", ChrW$(&H2099) & "(")
         
-    DefS = Replace(DefS, "minf", "-" & ChrW(&H221E))
-    DefS = Replace(DefS, "inf", ChrW(&H221E))
+    DefS = Replace(DefS, "minf", "-" & ChrW$(&H221E))
+    DefS = Replace(DefS, "inf", ChrW$(&H221E))
         
-    DefS = Replace(DefS, "sqrt(", ChrW(&H221A) & "(")
-    DefS = Replace(DefS, "NIntegrate(", ChrW(&H222B) & "(")
-    DefS = Replace(DefS, "Integrate(", ChrW(&H222B) & "(")
-    DefS = Replace(DefS, "integrate(", ChrW(&H222B) & "(")
-    DefS = Replace(DefS, "<=", VBA.ChrW(8804))
-    DefS = Replace(DefS, ">=", VBA.ChrW(8805))
-    DefS = Replace(DefS, "ae", ChrW(230))
-    DefS = Replace(DefS, "oe", ChrW(248))
-    DefS = Replace(DefS, "aa", ChrW(229))
-    DefS = Replace(DefS, "AE", ChrW(198))
-    DefS = Replace(DefS, "OE", ChrW(216))
-    DefS = Replace(DefS, "AA", ChrW(197))
+    DefS = Replace(DefS, "sqrt(", ChrW$(&H221A) & "(")
+    DefS = Replace(DefS, "NIntegrate(", ChrW$(&H222B) & "(")
+    DefS = Replace(DefS, "Integrate(", ChrW$(&H222B) & "(")
+    DefS = Replace(DefS, "integrate(", ChrW$(&H222B) & "(")
+    DefS = Replace(DefS, "<=", VBA.ChrW$(8804))
+    DefS = Replace(DefS, ">=", VBA.ChrW$(8805))
+    DefS = Replace(DefS, "ae", ChrW$(230))
+    DefS = Replace(DefS, "oe", ChrW$(248))
+    DefS = Replace(DefS, "aa", ChrW$(229))
+    DefS = Replace(DefS, "AE", ChrW$(198))
+    DefS = Replace(DefS, "OE", ChrW$(216))
+    DefS = Replace(DefS, "AA", ChrW$(197))
         
     'greek letters
-    DefS = Replace(DefS, "gamma", VBA.ChrW(915))    ' big gamma
-    DefS = Replace(DefS, "Delta", VBA.ChrW(916))
-    DefS = Replace(DefS, "delta", VBA.ChrW(948))
-    DefS = Replace(DefS, "alpha", VBA.ChrW(945))
-    DefS = Replace(DefS, "beta", VBA.ChrW(946))
-    DefS = Replace(DefS, "gammaLB", VBA.ChrW(947))
-    DefS = Replace(DefS, "theta", VBA.ChrW(952))
-    DefS = Replace(DefS, "Theta", VBA.ChrW(920))
-    DefS = Replace(DefS, "lambda", VBA.ChrW(955))
-    DefS = Replace(DefS, "Lambda", VBA.ChrW(923))
-    DefS = Replace(DefS, "mu", VBA.ChrW(956))
-    DefS = Replace(DefS, "rho", VBA.ChrW(961))
-    DefS = Replace(DefS, "sigma", VBA.ChrW(963))
-    DefS = Replace(DefS, "Sigma", VBA.ChrW(931))
-    DefS = Replace(DefS, "varphi", VBA.ChrW(966))
-    DefS = Replace(DefS, "phi", VBA.ChrW(981))
-    DefS = Replace(DefS, "Phi", VBA.ChrW(934))
-    DefS = Replace(DefS, "varepsilon", VBA.ChrW(949))
-    DefS = Replace(DefS, "epsilon", VBA.ChrW(1013))
-    DefS = Replace(DefS, "psi", VBA.ChrW(968))
-    DefS = Replace(DefS, "Psi", VBA.ChrW(936))
-    DefS = Replace(DefS, "Xi", VBA.ChrW(926))
-    DefS = Replace(DefS, "xi", VBA.ChrW(958))
-    DefS = Replace(DefS, "Chi", VBA.ChrW(935))
-    DefS = Replace(DefS, "chi", VBA.ChrW(967))
-    DefS = Replace(DefS, "Pi", VBA.ChrW(928))
-    DefS = Replace(DefS, "tau", VBA.ChrW(964))
-    DefS = Replace(DefS, "greek-nu", VBA.ChrW(957))
-    DefS = Replace(DefS, "kappa", VBA.ChrW(954))
-    DefS = Replace(DefS, "eta", VBA.ChrW(951))
-    DefS = Replace(DefS, "zeta", VBA.ChrW(950))
-    DefS = Replace(DefS, "omega", VBA.ChrW(969))    ' small omega
+    DefS = Replace(DefS, "gamma", VBA.ChrW$(915))    ' big gamma
+    DefS = Replace(DefS, "Delta", VBA.ChrW$(916))
+    DefS = Replace(DefS, "delta", VBA.ChrW$(948))
+    DefS = Replace(DefS, "alpha", VBA.ChrW$(945))
+    DefS = Replace(DefS, "beta", VBA.ChrW$(946))
+    DefS = Replace(DefS, "gammaLB", VBA.ChrW$(947))
+    DefS = Replace(DefS, "theta", VBA.ChrW$(952))
+    DefS = Replace(DefS, "Theta", VBA.ChrW$(920))
+    DefS = Replace(DefS, "lambda", VBA.ChrW$(955))
+    DefS = Replace(DefS, "Lambda", VBA.ChrW$(923))
+    DefS = Replace(DefS, "mu", VBA.ChrW$(956))
+    DefS = Replace(DefS, "rho", VBA.ChrW$(961))
+    DefS = Replace(DefS, "sigma", VBA.ChrW$(963))
+    DefS = Replace(DefS, "Sigma", VBA.ChrW$(931))
+    DefS = Replace(DefS, "varphi", VBA.ChrW$(966))
+    DefS = Replace(DefS, "phi", VBA.ChrW$(981))
+    DefS = Replace(DefS, "Phi", VBA.ChrW$(934))
+    DefS = Replace(DefS, "varepsilon", VBA.ChrW$(949))
+    DefS = Replace(DefS, "epsilon", VBA.ChrW$(1013))
+    DefS = Replace(DefS, "psi", VBA.ChrW$(968))
+    DefS = Replace(DefS, "Psi", VBA.ChrW$(936))
+    DefS = Replace(DefS, "Xi", VBA.ChrW$(926))
+    DefS = Replace(DefS, "xi", VBA.ChrW$(958))
+    DefS = Replace(DefS, "Chi", VBA.ChrW$(935))
+    DefS = Replace(DefS, "chi", VBA.ChrW$(967))
+    DefS = Replace(DefS, "Pi", VBA.ChrW$(928))
+    DefS = Replace(DefS, "tau", VBA.ChrW$(964))
+    DefS = Replace(DefS, "greek-nu", VBA.ChrW$(957))
+    DefS = Replace(DefS, "kappa", VBA.ChrW$(954))
+    DefS = Replace(DefS, "eta", VBA.ChrW$(951))
+    DefS = Replace(DefS, "zeta", VBA.ChrW$(950))
+    DefS = Replace(DefS, "omega", VBA.ChrW$(969))    ' small omega
     
     DefS = Replace(DefS, "((x))", "(x)")
         
@@ -1704,3 +1724,76 @@ fejl:
     MsgBox "Error" & vbCrLf & Err.Description, vbOKOnly, "Error"
 slut:
 End Sub
+
+Function StringToUTF8Bytes(s As String) As Byte()
+' Convert a VBA string (UTF-16) to a UTF-8 byte array
+' saving a string to a text file using print #fh,text   saves the file in ANSI encoding (Windows 1252 on Windows) which is single byte encoding
+' This does not support special characters like greek letters. On windows this can be circumvented using adodb.stream, but it is not Mac compatible
+' This function can be used with WriteUTF8File to write a string to a text file in UTF-8 encoding which is variable length (1-4 bytes pr. character)
+' (encoding to several bytes is not straight forward, every byte has a special bit signature.)
+
+    Dim bytes() As Byte
+    Dim i As Long, ch As Long
+    Dim pos As Long
+    
+    ' Allocate maximum space (worst case: 4 bytes per char)
+    ReDim bytes(1 To Len(s) * 4)
+    pos = 1
+    
+    For i = 1 To Len(s)
+        ch = AscW(Mid$(s, i, 1))
+        
+        If ch < &H80 Then
+            ' 1-byte ASCII
+            bytes(pos) = ch
+            pos = pos + 1
+        ElseIf ch < &H800 Then
+            ' 2-byte UTF-8
+            bytes(pos) = &HC0 Or ((ch And &H7C0) \ &H40)
+            bytes(pos + 1) = &H80 Or (ch And &H3F)
+            pos = pos + 2
+        ElseIf ch < &H10000 Then
+            ' 3-byte UTF-8
+            bytes(pos) = &HE0 Or ((ch And &HF000) \ &H1000)
+            bytes(pos + 1) = &H80 Or ((ch And &HFC0) \ &H40)
+            bytes(pos + 2) = &H80 Or (ch And &H3F)
+            pos = pos + 3
+        Else
+            ' 4-byte UTF-8 (surrogate pair / supplementary plane)
+            ' Not handled in this simple example
+            bytes(pos) = &H3F ' ?
+            pos = pos + 1
+        End If
+    Next i
+    
+    ' Trim the array
+    ReDim Preserve bytes(1 To pos - 1)
+    StringToUTF8Bytes = bytes
+End Function
+
+' Write a UTF-8 file
+Sub WriteUTF8File(filePath As String, text As String)
+' Writes a string to a text file in UTF-8 encoding. Which supports special characters on Windows and Mac. The normal print #fh, text   creates ANSI encoded files
+' The trick is to use the function StringToUTF8Bytes to create a bytearray of the UTF-file, and then open file for binary write,
+
+    Dim b() As Byte
+    Dim fnum As Integer
+    
+    ' Convert string to UTF-8 byte array
+    b = StringToUTF8Bytes(text)
+    
+    ' Write bytes to file
+    fnum = FreeFile
+    Open filePath For Binary As #fnum
+    Put #fnum, , b
+    Close #fnum
+End Sub
+
+' Example usage
+Sub TestUTF8Write()
+    Dim s As String
+    s = "Hello µ world €"
+    
+    WriteUTF8File "/Users/yourname/Desktop/test_utf8.txt", s
+End Sub
+

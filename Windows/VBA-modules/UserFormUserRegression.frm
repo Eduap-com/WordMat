@@ -45,7 +45,7 @@ Sub SetEscEvents(ControlColl As Controls)
     Next
 End Sub
 Private Sub CommandButton_cancel_Click()
-    TextBox_function.Text = ""
+    TextBox_function.text = ""
     Me.hide
 End Sub
 
@@ -62,7 +62,7 @@ Sub UpdateWarning()
     On Error GoTo fejl
     If Not EventsOn Then Exit Sub
     EventsOn = False
-    n = val(TextBox_eps.Text)
+    n = val(TextBox_eps.text)
     If n > 0 And n <= 7 Then
         Label_epswarning.Caption = ""
 '        Label_epswarning.visible = False

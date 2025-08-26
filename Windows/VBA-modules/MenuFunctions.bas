@@ -25,7 +25,7 @@ Sub DefinerFunktion()
     On Error GoTo fejl
     Var = InputBox(TT.A(122), TT.A(123), "f(x)=x+1")
     Var = Replace(Var, ":=", "=")
-    '    var = Replace(var, "=", VBA.ChrW(&H2261))
+    '    var = Replace(var, "=", VBA.chrw$(&H2261))
     
     If Var <> "" Then
         Var = TT.A(126) & ": " & Var

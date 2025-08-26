@@ -41,7 +41,7 @@ End Function
 Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) As ErrorDefinition
 ' Classifies and interprets the error in an errordefinition.
 ' Checktext must be output from Maxima
-    Dim Pos As Integer, CheckText As String, CheckText2 As String, s As String, s2 As String
+    Dim pos As Integer, CheckText As String, CheckText2 As String, s As String, s2 As String
     GetErrorDefinition.Stop = True
     CheckText = MaximaOutput & KommentarOutput
     CheckText2 = Replace(CheckText, " ", vbNullString) ' on mac there are spaces, but not on windows
@@ -50,12 +50,12 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
         GetErrorDefinition.Description = TT.A(752)
     ElseIf InStr(CheckText2, "incorrectsyntax:Missing") > 0 Then
         GetErrorDefinition.Title = TT.SyntaxError
-        Pos = InStr(CheckText, "incorrectsyntax:Missing")
-        GetErrorDefinition.Description = TT.A(753) & " " & Mid(CheckText, Pos + 26, 1)
+        pos = InStr(CheckText, "incorrectsyntax:Missing")
+        GetErrorDefinition.Description = TT.A(753) & " " & Mid$(CheckText, pos + 26, 1)
     ElseIf InStr(CheckText2, "incorrectsyntax:Toomany") > 0 Then
         GetErrorDefinition.Title = TT.SyntaxError
-        Pos = InStr(CheckText, "incorrect syntax: Too many")
-        GetErrorDefinition.Description = TT.SyntaxError & ". " & vbCrLf & TT.A(754) & " " & Mid(CheckText, Pos + 29, 1)
+        pos = InStr(CheckText, "incorrect syntax: Too many")
+        GetErrorDefinition.Description = TT.SyntaxError & ". " & vbCrLf & TT.A(754) & " " & Mid$(CheckText, pos + 29, 1)
     ElseIf InStr(CheckText2, "incorrectsyntax:Found") > 0 Then
         GetErrorDefinition.Title = TT.SyntaxError
         GetErrorDefinition.Description = GetErrorText("incorrect syntax: ", CheckText)
@@ -122,30 +122,30 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     
 End Function
 
-Function GetErrorText(Text As String, MaximaOutput As String, Optional RemoveChrS As Integer = 0) As String
+Function GetErrorText(text As String, MaximaOutput As String, Optional RemoveChrS As Integer = 0) As String
 ' used by GetErrorDefinition()
-    Dim Pos As Integer, pos2 As Integer, pos4 As Integer
+    Dim pos As Integer, pos2 As Integer, pos4 As Integer
     Dim t As String
     Dim l As Integer
     On Error Resume Next
-    l = Len(Text) + RemoveChrS
-    Pos = InStr(MaximaOutput, "incorrect syntax")
-    pos2 = InStr(Pos, MaximaOutput, Text)
+    l = Len(text) + RemoveChrS
+    pos = InStr(MaximaOutput, "incorrect syntax")
+    pos2 = InStr(pos, MaximaOutput, text)
     pos4 = InStrRev(pos2 + l, MaximaOutput, "^")
     If pos4 < 1 Then
         pos4 = Len(MaximaOutput)
     End If
-    t = Mid(MaximaOutput, pos2 + l, pos4 - pos2 - l + 1)
+    t = Mid$(MaximaOutput, pos2 + l, pos4 - pos2 - l + 1)
 '    t = Replace(t, "^", vbCrLf & "    ^", 1, 1)
     t = TrimL(t, vbLf)
     t = TrimL(t, vbCr)
     t = TrimR(t, vbLf)
     t = TrimR(t, vbCr)
     t = TrimR(t, vbCrLf)
-    t = Trim(t)
-    Pos = InStrRev(t, ";")
-    If Pos > 0 Then
-        t = Left(t, Pos - 1) & right(t, Len(t) - Pos)
+    t = Trim$(t)
+    pos = InStrRev(t, ";")
+    If pos > 0 Then
+        t = Left$(t, pos - 1) & right$(t, Len(t) - pos)
     End If
     t = Replace(t, ":=", "= ")
     
@@ -153,30 +153,30 @@ Function GetErrorText(Text As String, MaximaOutput As String, Optional RemoveChr
 '    GetErrorText = TT.SyntaxError & vbCrLf & TT.IllegalSymbol & ":" & vbCrLf & t
 
 End Function
-Function ExtractText(ByVal Text As String, startText As String, endText As String, Optional endText2 As String) As String
+Function ExtractText(ByVal text As String, startText As String, endText As String, Optional endText2 As String) As String
     ' returns substring from Text between startText and EndText
     Dim p As Long
 
     If startText <> vbNullString Then
-        p = InStr(Text, startText)
-        If p > 0 Then Text = right(Text, Len(Text) - p - Len(startText) + 1)
+        p = InStr(text, startText)
+        If p > 0 Then text = right$(text, Len(text) - p - Len(startText) + 1)
     End If
     If endText <> vbNullString Then
-        p = InStr(Text, endText)
-        If p > 0 Then Text = Left(Text, p - 1)
+        p = InStr(text, endText)
+        If p > 0 Then text = Left$(text, p - 1)
     End If
     If endText2 <> vbNullString Then
-        p = InStr(Text, endText2)
-        If p > 0 Then Text = Left(Text, p - 1)
+        p = InStr(text, endText2)
+        If p > 0 Then text = Left$(text, p - 1)
     End If
-    ExtractText = Text
+    ExtractText = text
 End Function
 Function DefinitionsNice() As String
 ' Used by CheckForError
     Dim DefS As String
     DefS = omax.DefString
     If Len(DefS) > 3 Then
-        '    defs = Mid(defs, 2, Len(defs) - 3)
+        '    defs = mid$(defs, 2, Len(defs) - 3)
         DefS = omax.ConvertToAscii(DefS)
         DefS = Replace(DefS, "$", vbCrLf)
         DefS = Replace(DefS, ":=", " = ")

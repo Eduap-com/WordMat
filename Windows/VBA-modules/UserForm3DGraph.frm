@@ -54,14 +54,14 @@ Private Sub CommandButton_geogebra_Click()
     'definitions
     For i = 0 To omax.defindex - 1
         DefList = DefList & "," & omax.DefName(i)
-        ea.Text = omax.DefValue(i)
+        ea.text = omax.DefValue(i)
         Var = ea.GetNextVar
         If Var = "" Then
             sl.Add omax.DefName(i), omax.DefValue(i), 0
         Else
             k = 0
             For j = 0 To sl.Length - 1
-                ea.Text = sl.GetVal(j)
+                ea.text = sl.GetVal(j)
                 If ea.ContainsVar(omax.DefName(i)) Then
                     Exit For
                 End If
@@ -73,14 +73,14 @@ Private Sub CommandButton_geogebra_Click()
 
     ' define variables not defined
     omax.FindVariable
-    ea.Text = DefList
+    ea.text = DefList
     For i = 0 To sl.Length - 1
         fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
         If sl.GetVal(i) <> ReplacedVar Then
             DefinerKonstanter sl.GetVal(i), DefList, Nothing, UrlLink
             p = InStr(sl.GetName(i), "(")
             If p > 0 Then
-                cmd = Left(sl.GetName(i), p) & Replace(sl.GetName(i), ReplacedVar, "x", p + 1) & "=" & fktudtryk
+                cmd = Left$(sl.GetName(i), p) & Replace(sl.GetName(i), ReplacedVar, "x", p + 1) & "=" & fktudtryk
             Else
                 cmd = sl.GetName(i) & "=" & fktudtryk
             End If
@@ -95,30 +95,30 @@ Private Sub CommandButton_geogebra_Click()
     s = UrlLink
 
     ' functions
-    If TextBox_forskrift1.Text <> "" Then
-        s = s & ConvertToGeogebraSyntax(TextBox_forskrift1.Text) & ";"
+    If TextBox_forskrift1.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_forskrift1.text) & ";"
     End If
-    If TextBox_forskrift2.Text <> "" Then
-        s = s & ConvertToGeogebraSyntax(TextBox_forskrift2.Text) & ";"
+    If TextBox_forskrift2.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_forskrift2.text) & ";"
     End If
-    If TextBox_forskrift3.Text <> "" Then
-        s = s & ConvertToGeogebraSyntax(TextBox_forskrift3.Text) & ";"
+    If TextBox_forskrift3.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_forskrift3.text) & ";"
     End If
 
     'equations
-    If TextBox_ligning1.Text <> "" Then
-        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.Text) & ";"
+    If TextBox_ligning1.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning1.text) & ";"
     End If
-    If TextBox_ligning2.Text <> "" Then
-        s = s & ConvertToGeogebraSyntax(TextBox_ligning2.Text) & ";"
+    If TextBox_ligning2.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning2.text) & ";"
     End If
-    If TextBox_ligning3.Text <> "" Then
-        s = s & ConvertToGeogebraSyntax(TextBox_ligning3.Text) & ";"
+    If TextBox_ligning3.text <> "" Then
+        s = s & ConvertToGeogebraSyntax(TextBox_ligning3.text) & ";"
     End If
     
     'vectors
-    If TextBox_vektorer.Text <> "" Then
-        vekt = TextBox_vektorer.Text
+    If TextBox_vektorer.text <> "" Then
+        vekt = TextBox_vektorer.text
         Arr = Split(vekt, VbCrLfMac)
         For i = 0 To UBound(Arr)
             If Arr(i) <> "" Then
@@ -126,11 +126,11 @@ Private Sub CommandButton_geogebra_Click()
                     Arr(i) = Replace(Arr(i), ",", ".")
                     Arr(i) = Replace(Arr(i), ";", ",")
                 Else
-                    ea.Text = Arr(i)
+                    ea.text = Arr(i)
                     j = ea.CountText(",")
                     If Not (j = 2 Or j = 4) Then
                         ea.ConvertDecSeparator
-                        Arr(i) = ea.Text
+                        Arr(i) = ea.text
                     End If
                 End If
                 If InStr(Arr(i), ")(") > 0 Then
@@ -147,28 +147,28 @@ Private Sub CommandButton_geogebra_Click()
     End If
 
     'parametric plots
-    If TextBox_parametric1x.Text <> "" Then
-        parx = ConvertToGeogebraSyntax(TextBox_parametric1x.Text)
-        pary = ConvertToGeogebraSyntax(TextBox_parametric1y.Text)
-        parz = ConvertToGeogebraSyntax(TextBox_parametric1z.Text)
+    If TextBox_parametric1x.text <> "" Then
+        parx = ConvertToGeogebraSyntax(TextBox_parametric1x.text)
+        pary = ConvertToGeogebraSyntax(TextBox_parametric1y.text)
+        parz = ConvertToGeogebraSyntax(TextBox_parametric1z.text)
         s = s & "(" & parx & " , " & pary & " , " & parz & ");"
     End If
-    If TextBox_parametric2x.Text <> "" Then
-        parx = ConvertToGeogebraSyntax(TextBox_parametric2x.Text)
-        pary = ConvertToGeogebraSyntax(TextBox_parametric2y.Text)
-        parz = ConvertToGeogebraSyntax(TextBox_parametric2z.Text)
+    If TextBox_parametric2x.text <> "" Then
+        parx = ConvertToGeogebraSyntax(TextBox_parametric2x.text)
+        pary = ConvertToGeogebraSyntax(TextBox_parametric2y.text)
+        parz = ConvertToGeogebraSyntax(TextBox_parametric2z.text)
         s = s & "(" & parx & " , " & pary & " , " & parz & ");"
     End If
-    If TextBox_parametric3x.Text <> "" Then
-        parx = ConvertToGeogebraSyntax(TextBox_parametric3x.Text)
-        pary = ConvertToGeogebraSyntax(TextBox_parametric3y.Text)
-        parz = ConvertToGeogebraSyntax(TextBox_parametric3z.Text)
+    If TextBox_parametric3x.text <> "" Then
+        parx = ConvertToGeogebraSyntax(TextBox_parametric3x.text)
+        pary = ConvertToGeogebraSyntax(TextBox_parametric3y.text)
+        parz = ConvertToGeogebraSyntax(TextBox_parametric3z.text)
         s = s & "(" & parx & " , " & pary & " , " & parz & ");"
     End If
 
     'points
-    If TextBox_punkter.Text <> "" Then
-        punkttekst = TextBox_punkter.Text
+    If TextBox_punkter.text <> "" Then
+        punkttekst = TextBox_punkter.text
         If InStr(punkttekst, ";") > 0 Then
             punkttekst = Replace(punkttekst, ",", ".")
             punkttekst = Replace(punkttekst, ";", ",")
@@ -177,10 +177,10 @@ Private Sub CommandButton_geogebra_Click()
         punkttekst = Replace(punkttekst, vbCrLf, ";")
         punkttekst = Replace(punkttekst, vbCr, ";")
         punkttekst = Replace(punkttekst, " ", "")
-        If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+        If right$(punkttekst, 1) = "," Then punkttekst = Left$(punkttekst, Len(punkttekst) - 1)
         s = s & punkttekst & ";"
     End If
-    s = Left(s, Len(s) - 1)
+    s = Left$(s, Len(s) - 1)
     
     OpenGeoGebraWeb s, "3d", True, False
     
@@ -189,110 +189,110 @@ End Sub
 Private Sub CommandButton_insertplan_Click()
 Dim plan As String
     plan = "1*(x-0)+1*(y-0)+1*(z-0)=0"
-    If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = plan
-    ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = plan
-    ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = plan
+    If TextBox_ligning1.text = "" Then
+        TextBox_ligning1.text = plan
+    ElseIf TextBox_ligning2.text = "" Then
+        TextBox_ligning2.text = plan
+    ElseIf TextBox_ligning3.text = "" Then
+        TextBox_ligning3.text = plan
     End If
 End Sub
 
 Private Sub CommandButton_kugle_Click()
 Dim kugle As String
     kugle = "(x-0)^2+(y-0)^2+(z-0)^2=1^2"
-    If TextBox_ligning1.Text = "" Then
-        TextBox_ligning1.Text = kugle
-    ElseIf TextBox_ligning2.Text = "" Then
-        TextBox_ligning2.Text = kugle
-    ElseIf TextBox_ligning3.Text = "" Then
-        TextBox_ligning3.Text = kugle
+    If TextBox_ligning1.text = "" Then
+        TextBox_ligning1.text = kugle
+    ElseIf TextBox_ligning2.text = "" Then
+        TextBox_ligning2.text = kugle
+    ElseIf TextBox_ligning3.text = "" Then
+        TextBox_ligning3.text = kugle
     End If
 End Sub
 
 Private Sub CommandButton_nulstilalt_Click()
-    TextBox_forskrift1.Text = ""
-    TextBox_forskrift2.Text = ""
-    TextBox_forskrift3.Text = ""
-    TextBox_ligning1.Text = ""
-    TextBox_ligning2.Text = ""
-    TextBox_ligning3.Text = ""
-    TextBox_vektorer.Text = ""
-    TextBox_parametric1x.Text = ""
-    TextBox_parametric1y.Text = ""
-    TextBox_parametric1z.Text = ""
-    TextBox_tmin1.Text = ""
-    TextBox_tmax1.Text = ""
-    TextBox_parametric2x.Text = ""
-    TextBox_parametric2y.Text = ""
-    TextBox_parametric2z.Text = ""
-    TextBox_tmin2.Text = ""
-    TextBox_tmax2.Text = ""
-    TextBox_parametric3x.Text = ""
-    TextBox_parametric3y.Text = ""
-    TextBox_parametric3z.Text = ""
-    TextBox_tmin3.Text = ""
-    TextBox_tmax3.Text = ""
-    TextBox_punkter.Text = ""
+    TextBox_forskrift1.text = ""
+    TextBox_forskrift2.text = ""
+    TextBox_forskrift3.text = ""
+    TextBox_ligning1.text = ""
+    TextBox_ligning2.text = ""
+    TextBox_ligning3.text = ""
+    TextBox_vektorer.text = ""
+    TextBox_parametric1x.text = ""
+    TextBox_parametric1y.text = ""
+    TextBox_parametric1z.text = ""
+    TextBox_tmin1.text = ""
+    TextBox_tmax1.text = ""
+    TextBox_parametric2x.text = ""
+    TextBox_parametric2y.text = ""
+    TextBox_parametric2z.text = ""
+    TextBox_tmin2.text = ""
+    TextBox_tmax2.text = ""
+    TextBox_parametric3x.text = ""
+    TextBox_parametric3y.text = ""
+    TextBox_parametric3z.text = ""
+    TextBox_tmin3.text = ""
+    TextBox_tmax3.text = ""
+    TextBox_punkter.text = ""
 End Sub
 
 Private Sub CommandButton_nulstilforsk1_Click()
-    TextBox_forskrift1.Text = ""
+    TextBox_forskrift1.text = ""
 End Sub
 Private Sub CommandButton_nulstilforsk2_Click()
-    TextBox_forskrift2.Text = ""
+    TextBox_forskrift2.text = ""
 End Sub
 
 Private Sub CommandButton_nulstilforsk3_Click()
-    TextBox_forskrift3.Text = ""
+    TextBox_forskrift3.text = ""
 End Sub
 
 Private Sub CommandButton_nulstillign1_Click()
-    TextBox_ligning1.Text = ""
+    TextBox_ligning1.text = ""
 End Sub
 
 Private Sub CommandButton_nulstillign2_Click()
-    TextBox_ligning2.Text = ""
+    TextBox_ligning2.text = ""
 End Sub
 
 Private Sub CommandButton_nulstillign3_Click()
-    TextBox_ligning3.Text = ""
+    TextBox_ligning3.text = ""
 End Sub
 
 Private Sub CommandButton_nulstilpar1_Click()
-TextBox_parametric1x.Text = ""
-TextBox_parametric1y.Text = ""
-TextBox_parametric1z.Text = ""
-TextBox_tmin1.Text = ""
-TextBox_tmax1.Text = ""
-TextBox_smin1.Text = ""
-TextBox_smax1.Text = ""
+TextBox_parametric1x.text = ""
+TextBox_parametric1y.text = ""
+TextBox_parametric1z.text = ""
+TextBox_tmin1.text = ""
+TextBox_tmax1.text = ""
+TextBox_smin1.text = ""
+TextBox_smax1.text = ""
 End Sub
 Private Sub CommandButton_nulstilpar2_Click()
-TextBox_parametric2x.Text = ""
-TextBox_parametric2y.Text = ""
-TextBox_parametric2z.Text = ""
-TextBox_tmin2.Text = ""
-TextBox_tmax2.Text = ""
-TextBox_smin2.Text = ""
-TextBox_smax2.Text = ""
+TextBox_parametric2x.text = ""
+TextBox_parametric2y.text = ""
+TextBox_parametric2z.text = ""
+TextBox_tmin2.text = ""
+TextBox_tmax2.text = ""
+TextBox_smin2.text = ""
+TextBox_smax2.text = ""
 End Sub
 Private Sub CommandButton_nulstilpar3_Click()
-TextBox_parametric3x.Text = ""
-TextBox_parametric3y.Text = ""
-TextBox_parametric3z.Text = ""
-TextBox_tmin3.Text = ""
-TextBox_tmax3.Text = ""
-TextBox_smin3.Text = ""
-TextBox_smax3.Text = ""
+TextBox_parametric3x.text = ""
+TextBox_parametric3y.text = ""
+TextBox_parametric3z.text = ""
+TextBox_tmin3.text = ""
+TextBox_tmax3.text = ""
+TextBox_smin3.text = ""
+TextBox_smax3.text = ""
 End Sub
 
 Private Sub CommandButton_nulstilpunkter_Click()
-    TextBox_punkter.Text = ""
+    TextBox_punkter.text = ""
 End Sub
 
 Private Sub CommandButton_nulstilvektorer_Click()
-    TextBox_vektorer.Text = ""
+    TextBox_vektorer.text = ""
 End Sub
 
 Private Sub CommandButton_nyparplan_Click()
@@ -303,41 +303,41 @@ px = "0+1*s+1*t"
 py = "0+1*s-1*t"
 pz = "0+1*s+1*t"
 
-If TextBox_parametric1x.Text = "" Then
-    TextBox_parametric1x.Text = px
-    TextBox_parametric1y.Text = py
-    TextBox_parametric1z.Text = pz
-    TextBox_tmin1.Text = "0"
-    TextBox_tmax1.Text = "1"
-    TextBox_smin1.Text = "0"
-    TextBox_smax1.Text = "1"
-ElseIf TextBox_parametric2x.Text = "" Then
-    TextBox_parametric2x.Text = px
-    TextBox_parametric2y.Text = py
-    TextBox_parametric2z.Text = pz
-    TextBox_tmin2.Text = "0"
-    TextBox_tmax2.Text = "1"
-    TextBox_smin2.Text = "0"
-    TextBox_smax2.Text = "1"
-ElseIf TextBox_parametric3x.Text = "" Then
-    TextBox_parametric3x.Text = px
-    TextBox_parametric3y.Text = py
-    TextBox_parametric3z.Text = pz
-    TextBox_tmin3.Text = "0"
-    TextBox_tmax3.Text = "1"
-    TextBox_smin3.Text = "0"
-    TextBox_smax3.Text = "1"
+If TextBox_parametric1x.text = "" Then
+    TextBox_parametric1x.text = px
+    TextBox_parametric1y.text = py
+    TextBox_parametric1z.text = pz
+    TextBox_tmin1.text = "0"
+    TextBox_tmax1.text = "1"
+    TextBox_smin1.text = "0"
+    TextBox_smax1.text = "1"
+ElseIf TextBox_parametric2x.text = "" Then
+    TextBox_parametric2x.text = px
+    TextBox_parametric2y.text = py
+    TextBox_parametric2z.text = pz
+    TextBox_tmin2.text = "0"
+    TextBox_tmax2.text = "1"
+    TextBox_smin2.text = "0"
+    TextBox_smax2.text = "1"
+ElseIf TextBox_parametric3x.text = "" Then
+    TextBox_parametric3x.text = px
+    TextBox_parametric3y.text = py
+    TextBox_parametric3z.text = pz
+    TextBox_tmin3.text = "0"
+    TextBox_tmax3.text = "1"
+    TextBox_smin3.text = "0"
+    TextBox_smax3.text = "1"
 End If
 
 End Sub
 
 Private Sub CommandButton_nyvektor_Click()
-    If TextBox_vektorer.Text <> "" Then
-        If right(TextBox_vektorer.Text, 1) = ")" Then
-            TextBox_vektorer.Text = TextBox_vektorer.Text & vbCr
+    If TextBox_vektorer.text <> "" Then
+        If right$(TextBox_vektorer.text, 1) = ")" Then
+            TextBox_vektorer.text = TextBox_vektorer.text & vbCr
         End If
     End If
-    TextBox_vektorer.Text = TextBox_vektorer.Text & "(0 , 0 , 0)(1 , 1 , 1)"
+    TextBox_vektorer.text = TextBox_vektorer.text & "(0 , 0 , 0)(1 , 1 , 1)"
 End Sub
 
 Private Sub CommandButton_ok_Click()
@@ -369,32 +369,32 @@ Label_vent.visible = True
 colindex = 0
 palindex = 0
 
-xmin = TextBox_xmin.Text
-xmax = TextBox_xmax.Text
-Ymin = TextBox_ymin.Text
-Ymax = TextBox_ymax.Text
-zmin = TextBox_zmin.Text
-zmax = TextBox_zmax.Text
+xmin = TextBox_xmin.text
+xmax = TextBox_xmax.text
+Ymin = TextBox_ymin.text
+Ymax = TextBox_ymax.text
+zmin = TextBox_zmin.text
+zmax = TextBox_zmax.text
 
 'functions
-If TextBox_forskrift1.Text <> "" Then
-    lign = omax.CodeForMaxima(TextBox_forskrift1.Text)
+If TextBox_forskrift1.text <> "" Then
+    lign = omax.CodeForMaxima(TextBox_forskrift1.text)
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & "),"
     antalobj = antalobj + 1
 End If
-If TextBox_forskrift2.Text <> "" Then
-    lign = omax.CodeForMaxima(TextBox_forskrift2.Text)
+If TextBox_forskrift2.text <> "" Then
+    lign = omax.CodeForMaxima(TextBox_forskrift2.text)
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & "),"
     antalobj = antalobj + 1
 End If
-If TextBox_forskrift3.Text <> "" Then
-    lign = omax.CodeForMaxima(TextBox_forskrift3.Text)
+If TextBox_forskrift3.text <> "" Then
+    lign = omax.CodeForMaxima(TextBox_forskrift3.text)
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
@@ -403,8 +403,8 @@ If TextBox_forskrift3.Text <> "" Then
 End If
 
 'Equations
-If TextBox_ligning1.Text <> "" Then
-    lign = omax.CodeForMaxima(TextBox_ligning1.Text)
+If TextBox_ligning1.text <> "" Then
+    lign = omax.CodeForMaxima(TextBox_ligning1.text)
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
@@ -414,8 +414,8 @@ If TextBox_ligning1.Text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & ",z," & zmin & "," & zmax & "),"
     antalobj = antalobj + 1
 End If
-If TextBox_ligning2.Text <> "" Then
-    lign = omax.CodeForMaxima(TextBox_ligning2.Text)
+If TextBox_ligning2.text <> "" Then
+    lign = omax.CodeForMaxima(TextBox_ligning2.text)
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
@@ -425,8 +425,8 @@ If TextBox_ligning2.Text <> "" Then
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & ",z," & zmin & "," & zmax & "),"
     antalobj = antalobj + 1
 End If
-If TextBox_ligning3.Text <> "" Then
-    lign = omax.CodeForMaxima(TextBox_ligning3.Text)
+If TextBox_ligning3.text <> "" Then
+    lign = omax.CodeForMaxima(TextBox_ligning3.text)
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
@@ -439,14 +439,14 @@ End If
 
 
 'parametric plots
-If TextBox_parametric1x.Text <> "" Then
-    parx = omax.CodeForMaxima(TextBox_parametric1x.Text)
-    pary = omax.CodeForMaxima(TextBox_parametric1y.Text)
-    parz = omax.CodeForMaxima(TextBox_parametric1z.Text)
-    tmin = omax.CodeForMaxima(TextBox_tmin1.Text)
-    tmax = omax.CodeForMaxima(TextBox_tmax1.Text)
-    smin = omax.CodeForMaxima(TextBox_smin1.Text)
-    smax = omax.CodeForMaxima(TextBox_smax1.Text)
+If TextBox_parametric1x.text <> "" Then
+    parx = omax.CodeForMaxima(TextBox_parametric1x.text)
+    pary = omax.CodeForMaxima(TextBox_parametric1y.text)
+    parz = omax.CodeForMaxima(TextBox_parametric1z.text)
+    tmin = omax.CodeForMaxima(TextBox_tmin1.text)
+    tmax = omax.CodeForMaxima(TextBox_tmax1.text)
+    smin = omax.CodeForMaxima(TextBox_smin1.text)
+    smax = omax.CodeForMaxima(TextBox_smax1.text)
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""paramterfremstilling: (" & parx & "," & pary & "," & parz & ")"","
     Else
@@ -460,14 +460,14 @@ If TextBox_parametric1x.Text <> "" Then
     End If
     antalobj = antalobj + 1
 End If
-If TextBox_parametric2x.Text <> "" Then
-    parx = omax.CodeForMaxima(TextBox_parametric2x.Text)
-    pary = omax.CodeForMaxima(TextBox_parametric2y.Text)
-    parz = omax.CodeForMaxima(TextBox_parametric2z.Text)
-    tmin = TextBox_tmin2.Text
-    tmax = TextBox_tmax2.Text
-    smin = TextBox_smin2.Text
-    smax = TextBox_smax2.Text
+If TextBox_parametric2x.text <> "" Then
+    parx = omax.CodeForMaxima(TextBox_parametric2x.text)
+    pary = omax.CodeForMaxima(TextBox_parametric2y.text)
+    parz = omax.CodeForMaxima(TextBox_parametric2z.text)
+    tmin = TextBox_tmin2.text
+    tmax = TextBox_tmax2.text
+    smin = TextBox_smin2.text
+    smax = TextBox_smax2.text
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""paramterfremstilling: (" & parx & "," & pary & "," & parz & ")"","
     Else
@@ -481,14 +481,14 @@ If TextBox_parametric2x.Text <> "" Then
     End If
     antalobj = antalobj + 1
 End If
-If TextBox_parametric3x.Text <> "" Then
-    parx = omax.CodeForMaxima(TextBox_parametric3x.Text)
-    pary = omax.CodeForMaxima(TextBox_parametric3y.Text)
-    parz = omax.CodeForMaxima(TextBox_parametric3z.Text)
-    tmin = omax.CodeForMaxima(TextBox_tmin3.Text)
-    tmax = omax.CodeForMaxima(TextBox_tmax3.Text)
-    smin = omax.CodeForMaxima(TextBox_smin3.Text)
-    smax = omax.CodeForMaxima(TextBox_smax3.Text)
+If TextBox_parametric3x.text <> "" Then
+    parx = omax.CodeForMaxima(TextBox_parametric3x.text)
+    pary = omax.CodeForMaxima(TextBox_parametric3y.text)
+    parz = omax.CodeForMaxima(TextBox_parametric3z.text)
+    tmin = omax.CodeForMaxima(TextBox_tmin3.text)
+    tmax = omax.CodeForMaxima(TextBox_tmax3.text)
+    smin = omax.CodeForMaxima(TextBox_smin3.text)
+    smax = omax.CodeForMaxima(TextBox_smax3.text)
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""paramterfremstilling: (" & parx & "," & pary & "," & parz & ")"","
     Else
@@ -504,11 +504,11 @@ If TextBox_parametric3x.Text <> "" Then
 End If
 
 'vectors
-If TextBox_vektorer.Text <> "" Then
+If TextBox_vektorer.text <> "" Then
     If antalobj = 0 Then
         grafobj = grafobj & "surface_hide = false,"
     End If
-    vekt = TextBox_vektorer.Text
+    vekt = TextBox_vektorer.text
     Arr = Split(vekt, VbCrLfMac)
     For i = 0 To UBound(Arr)
         If Arr(i) <> "" Then
@@ -516,11 +516,11 @@ If TextBox_vektorer.Text <> "" Then
                 Arr(i) = Replace(Arr(i), ",", ".")
                 Arr(i) = Replace(Arr(i), ";", ",")
             Else
-                ea.Text = Arr(i)
+                ea.text = Arr(i)
                 j = ea.CountText(",")
                 If Not (j = 2 Or j = 4) Then
                     ea.ConvertDecSeparator
-                    Arr(i) = ea.Text
+                    Arr(i) = ea.text
                 End If
             End If
             If InStr(Arr(i), ")(") > 0 Then
@@ -544,8 +544,8 @@ If TextBox_vektorer.Text <> "" Then
 End If
 
 'points
-If TextBox_punkter.Text <> "" Then
-    punkttekst = TextBox_punkter.Text
+If TextBox_punkter.text <> "" Then
+    punkttekst = TextBox_punkter.text
     If InStr(punkttekst, ";") > 0 Then
         punkttekst = Replace(punkttekst, ",", ".")
         punkttekst = Replace(punkttekst, ";", ",")
@@ -557,10 +557,10 @@ If TextBox_punkter.Text <> "" Then
     punkttekst = Replace(punkttekst, vbCrLf, ",")
     punkttekst = Replace(punkttekst, vbCr, ",")
     punkttekst = Replace(punkttekst, " ", "")
-    If right(punkttekst, 1) = "," Then punkttekst = Left(punkttekst, Len(punkttekst) - 1)
+    If right$(punkttekst, 1) = "," Then punkttekst = Left$(punkttekst, Len(punkttekst) - 1)
     grafobj = grafobj & "key="""","
     
-    grafobj = grafobj & "point_type=filled_circle,point_size=" & TextBox_pointsize.Text & ",points_joined=" & VBA.LCase(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
+    grafobj = grafobj & "point_type=filled_circle,point_size=" & TextBox_pointsize.text & ",points_joined=" & VBA.LCase$(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
     antalobj = antalobj + 1
 End If
 
@@ -594,8 +594,8 @@ ElseIf ComboBox_kvalitet.ListIndex = 4 Then 'low
 End If
 
 
-If TextBox_titel.Text <> "" Then
-    grafobj = grafobj & "title=""" & TextBox_titel.Text & ""","
+If TextBox_titel.text <> "" Then
+    grafobj = grafobj & "title=""" & TextBox_titel.text & ""","
 End If
 'grafobj = grafobj & "user_preamble = ""set pm3d at s depthorder;set xyplane at 0"",colorbox=false,surface_hide = true"
 
@@ -617,16 +617,16 @@ If CheckBox_maximakommando Then
     omax.InsertMaximaOutput
 End If
     s = "set_draw_defaults("
-    If TextBox_xmin.Text <> vbNullString And TextBox_xmax.Text <> vbNullString Then
+    If TextBox_xmin.text <> vbNullString And TextBox_xmax.text <> vbNullString Then
         s = s & "xrange=[" & xmin & "," & xmax & "],"
     End If
-    If TextBox_ymin.Text <> vbNullString And TextBox_ymax.Text <> vbNullString Then
+    If TextBox_ymin.text <> vbNullString And TextBox_ymax.text <> vbNullString Then
         s = s & "yrange=[" & Ymin & "," & Ymax & "],"
     End If
-    If TextBox_zmin.Text <> vbNullString And TextBox_zmax.Text <> vbNullString Then
+    If TextBox_zmin.text <> vbNullString And TextBox_zmax.text <> vbNullString Then
         s = s & "zrange=[" & zmin & "," & zmax & "],"
     End If
-    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    If right$(s, 1) = "," Then s = Left$(s, Len(s) - 1)
     grafobj = s & ")," & grafobj
     omax.Draw3D grafobj, antalobj
     omax.PrepareNewCommand
@@ -658,30 +658,30 @@ px = "0+1*t"
 py = "0+1*t"
 pz = "0+1*t"
 
-If TextBox_parametric1x.Text = "" Then
-    TextBox_parametric1x.Text = px
-    TextBox_parametric1y.Text = py
-    TextBox_parametric1z.Text = pz
-    TextBox_tmin1.Text = "0"
-    TextBox_tmax1.Text = "1"
-    TextBox_smin1.Text = ""
-    TextBox_smax1.Text = ""
-ElseIf TextBox_parametric2x.Text = "" Then
-    TextBox_parametric2x.Text = px
-    TextBox_parametric2y.Text = py
-    TextBox_parametric2z.Text = pz
-    TextBox_tmin2.Text = "0"
-    TextBox_tmax2.Text = "1"
-    TextBox_smin2.Text = ""
-    TextBox_smax2.Text = ""
-ElseIf TextBox_parametric3x.Text = "" Then
-    TextBox_parametric3x.Text = px
-    TextBox_parametric3y.Text = py
-    TextBox_parametric3z.Text = pz
-    TextBox_tmin3.Text = "0"
-    TextBox_tmax3.Text = "1"
-    TextBox_smin3.Text = ""
-    TextBox_smax3.Text = ""
+If TextBox_parametric1x.text = "" Then
+    TextBox_parametric1x.text = px
+    TextBox_parametric1y.text = py
+    TextBox_parametric1z.text = pz
+    TextBox_tmin1.text = "0"
+    TextBox_tmax1.text = "1"
+    TextBox_smin1.text = ""
+    TextBox_smax1.text = ""
+ElseIf TextBox_parametric2x.text = "" Then
+    TextBox_parametric2x.text = px
+    TextBox_parametric2y.text = py
+    TextBox_parametric2z.text = pz
+    TextBox_tmin2.text = "0"
+    TextBox_tmax2.text = "1"
+    TextBox_smin2.text = ""
+    TextBox_smax2.text = ""
+ElseIf TextBox_parametric3x.text = "" Then
+    TextBox_parametric3x.text = px
+    TextBox_parametric3y.text = py
+    TextBox_parametric3z.text = pz
+    TextBox_tmin3.text = "0"
+    TextBox_tmax3.text = "1"
+    TextBox_smin3.text = ""
+    TextBox_smax3.text = ""
 End If
 
 End Sub
@@ -706,27 +706,27 @@ Private Sub TextBox_forskrift1_Change()
 End Sub
 
 Sub UpdateBoldTabs()
-    If TextBox_forskrift1.Text <> vbNullString Or TextBox_forskrift2.Text <> vbNullString Or TextBox_forskrift3.Text <> vbNullString Then
+    If TextBox_forskrift1.text <> vbNullString Or TextBox_forskrift2.text <> vbNullString Or TextBox_forskrift3.text <> vbNullString Then
         MultiPage1.Pages(0).Caption = TT.A(319) & "*"
     Else
         MultiPage1.Pages(0).Caption = TT.A(319)
     End If
-    If TextBox_ligning1.Text <> vbNullString Or TextBox_ligning2.Text <> vbNullString Or TextBox_ligning3.Text <> vbNullString Then
+    If TextBox_ligning1.text <> vbNullString Or TextBox_ligning2.text <> vbNullString Or TextBox_ligning3.text <> vbNullString Then
         MultiPage1.Pages(1).Caption = TT.A(834) & "*"
     Else
         MultiPage1.Pages(1).Caption = TT.A(834)
     End If
-    If TextBox_vektorer.Text <> vbNullString Then ' vectors
+    If TextBox_vektorer.text <> vbNullString Then ' vectors
         MultiPage1.Pages(2).Caption = TT.A(836) & "*"
     Else
         MultiPage1.Pages(2).Caption = TT.A(836)
     End If
-    If (TextBox_parametric1x.Text <> vbNullString And TextBox_parametric1y.Text <> vbNullString And TextBox_parametric1z.Text <> vbNullString) Or TextBox_parametric2x.Text <> vbNullString Or TextBox_parametric3x.Text <> vbNullString Then
+    If (TextBox_parametric1x.text <> vbNullString And TextBox_parametric1y.text <> vbNullString And TextBox_parametric1z.text <> vbNullString) Or TextBox_parametric2x.text <> vbNullString Or TextBox_parametric3x.text <> vbNullString Then
         MultiPage1.Pages(3).Caption = TT.A(320) & "*"
     Else
         MultiPage1.Pages(3).Caption = TT.A(320)
     End If
-    If TextBox_punkter.Text <> vbNullString Then
+    If TextBox_punkter.text <> vbNullString Then
         MultiPage1.Pages(4).Caption = TT.A(835) & "*"
     Else
         MultiPage1.Pages(4).Caption = TT.A(835)

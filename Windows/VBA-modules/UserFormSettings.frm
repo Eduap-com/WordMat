@@ -77,7 +77,7 @@ Private Sub CommandButton_ok_Click()
 On Error Resume Next
     Dim UnitChanged As Boolean
     
-    If InStr(TextBox_outunits.Text, "/") > 0 Or InStr(TextBox_outunits.Text, "*") > 0 Or InStr(TextBox_outunits.Text, "^") > 0 Then
+    If InStr(TextBox_outunits.text, "/") > 0 Or InStr(TextBox_outunits.text, "*") > 0 Or InStr(TextBox_outunits.text, "^") > 0 Then
         MsgBox TT.A(343)
         MultiPage1.Value = 2
         TextBox_outunits.SetFocus
@@ -171,8 +171,8 @@ On Error Resume Next
     dAsDiffChr = CheckBox_dasdiffchr.Value
     EqAskRef = CheckBox_askref.Value
     BackupType = ComboBox_backup.ListIndex
-    BackupMaxNo = ComboBox_backupno.Text
-    BackupTime = ComboBox_backuptime.Text
+    BackupMaxNo = ComboBox_backupno.text
+    BackupTime = ComboBox_backuptime.text
     MaximaDecOutType = ComboBox_DecType.ListIndex + 1
     OutputColor = ComboBox_color.ListIndex
     
@@ -186,14 +186,14 @@ On Error Resume Next
         End If
     End If
     
-    If OutUnits <> TextBox_outunits.Text Then
-        OutUnits = TextBox_outunits.Text
+    If OutUnits <> TextBox_outunits.text Then
+        OutUnits = TextBox_outunits.text
         UserUnits = True
     End If
     
     UseCodeFile = CheckBox_UseCodeFile.Value
     UseCodeBlocks = CheckBox_UseCodeBlocks.Value
-    SaveCodeFileText TextBox_code.Text
+    SaveCodeFileText TextBox_code.text
     
     SetMathAutoCorrect
     
@@ -224,7 +224,7 @@ Private Sub CommandButton_shortcuts_Click()
     
     ' Find the attached global template
     For Each WT In Application.Templates
-        If LCase(Left(WT, 7)) = "wordmat" And LCase(right(WT, 5)) = ".dotm" Then
+        If LCase$(Left$(WT, 7)) = "wordmat" And LCase$(right$(WT, 5)) = ".dotm" Then
             CustomizationContext = WT
             TemplateFundet = True
             Exit For
@@ -276,7 +276,7 @@ Private Sub CommandButton_shortcuts_Click()
 End Sub
 
 Private Sub CommandButton_sletenheder_Click()
-    TextBox_outunits.Text = ""
+    TextBox_outunits.text = ""
 End Sub
 
 Private Sub Label_checkpartnerskab_Click()
@@ -401,7 +401,7 @@ Private Sub UserForm_Activate()
     
     SetCasButtons
 
-    TextBox_code.Text = GetCodeFileText()
+    TextBox_code.text = GetCodeFileText()
 
     DoEvents
 
@@ -415,7 +415,7 @@ Sub SetButtonsAccordingToSettings()
     CheckBox_complex.Value = MaximaComplex
     CheckBox_units.Value = MaximaUnits
     CheckBox_indlejret.Value = ExcelIndlejret
-    TextBox_outunits.Text = OutUnits
+    TextBox_outunits.text = OutUnits
     CheckBox_checkupdate.Value = SettCheckForUpdate
     CheckBox_bigfloat.Value = MaximaBigFloat
     CheckBox_showassum.Value = ShowAssum
@@ -431,8 +431,8 @@ Sub SetButtonsAccordingToSettings()
     ComboBox_language.ListIndex = LanguageSetting
     
     ComboBox_backup.ListIndex = BackupType
-    ComboBox_backupno.Text = BackupMaxNo
-    ComboBox_backuptime.Text = BackupTime
+    ComboBox_backupno.text = BackupMaxNo
+    ComboBox_backuptime.text = BackupTime
     ComboBox_color.ListIndex = OutputColor
 
     If CheckBox_complex.Value Then
@@ -467,9 +467,9 @@ Sub SetButtonsAccordingToSettings()
         OptionButton_trigone.Value = True
     End If
 
-    If MaximaGangeTegn = VBA.ChrW(183) Then
+    If MaximaGangeTegn = VBA.ChrW$(183) Then
         OptionButton_prik.Value = True
-    ElseIf MaximaGangeTegn = VBA.ChrW(215) Then
+    ElseIf MaximaGangeTegn = VBA.ChrW$(215) Then
         OptionButton_kryds.Value = True
     Else
         OptionButton_stjerne.Value = True
@@ -689,8 +689,8 @@ Sub SetCaptions()
     CheckBox_showassum.Caption = TT.A(709)
     
     Frame5.Caption = TT.A(710) & " ?"
-    OptionButton_exactandnum.Caption = TT.A(712) & "  (x=" & ChrW(960) & "=3.14)"
-    OptionButton_exactonly.Caption = TT.A(710) & "  (x=" & ChrW(960) & ")"
+    OptionButton_exactandnum.Caption = TT.A(712) & "  (x=" & ChrW$(960) & "=3.14)"
+    OptionButton_exactonly.Caption = TT.A(710) & "  (x=" & ChrW$(960) & ")"
     OptionButton_numonly.Caption = TT.A(711) & "  (x=3.14)"
     CheckBox_bigfloat.Caption = TT.A(713)
     CheckBox_Insertforklaring.Caption = TT.A(714)
@@ -698,7 +698,7 @@ Sub SetCaptions()
     Frame3.Caption = TT.A(716)
     Label_list.Caption = TT.A(717)
     Frame2.Caption = TT.A(718)
-    OptionButton_prik.Caption = VBA.ChrW(183) & " (" & TT.A(719) & ")"
+    OptionButton_prik.Caption = VBA.ChrW$(183) & " (" & TT.A(719) & ")"
     Frame4.Caption = TT.A(720)
     OptionButton_lmbool.Caption = TT.A(721) & ": x=1 v x=2"
     OptionButton_lmset.Caption = TT.A(722) & ": L={1,2}"

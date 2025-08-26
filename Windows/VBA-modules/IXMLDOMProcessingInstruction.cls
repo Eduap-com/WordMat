@@ -47,7 +47,7 @@ Public Function IXMLDOMNode_myAttValues() As Collection
     Set IXMLDOMNode_myAttValues = Nothing
 End Function
 '
-Public Sub IXMLDOMNode_Save(dest)
-    Print #dest, "<?" & m_target & " " & m_data & "?>"
+Public Sub IXMLDOMNode_Save(ByRef dest As Variant)
+    Put #dest, , StringToUTF8Bytes("<?" & m_target & " " & m_data & "?>")
 End Sub
 

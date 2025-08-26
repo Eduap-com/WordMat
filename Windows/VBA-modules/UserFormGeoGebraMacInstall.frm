@@ -19,10 +19,10 @@ Option Explicit
 Private StopNow As Boolean
 
 Private Sub CommandButton_cancel_Click()
-    Dim FilePath As String
-    FilePath = GetProgramFilesDir & "GeoGebra.app"
+    Dim filePath As String
+    filePath = GetProgramFilesDir & "GeoGebra.app"
     
-    If Dir(FilePath, vbDirectory) = vbNullString Then
+    If Dir(filePath, vbDirectory) = vbNullString Then
         MsgBox TT.A(849), vbYesNo, ""
         Me.hide
     End If
@@ -38,11 +38,11 @@ Private Sub CommandButton_stop_Click()
 End Sub
 
 Private Sub CommandButton_test_Click()
-    Dim FilePath As String
+    Dim filePath As String
     
-    FilePath = GetProgramFilesDir & "GeoGebra.app"
+    filePath = GetProgramFilesDir & "GeoGebra.app"
     
-    If Dir(FilePath, vbDirectory) = vbNullString Then
+    If Dir(filePath, vbDirectory) = vbNullString Then
         MsgBox TT.A(850), vbOKOnly, TT.A(769)
         GoTo slut
     End If
@@ -52,7 +52,7 @@ Private Sub CommandButton_test_Click()
 slut:
 End Sub
 Public Sub DownloadNow()
-    Dim FilePath As String, i As Integer
+    Dim filePath As String, i As Integer
     Dim s As String, FN As String
     StopNow = False
     CommandButton_retry.visible = False
@@ -78,9 +78,9 @@ Public Sub DownloadNow()
     OpenLink "https://download.geogebra.org/package/mac", True
     AppActivate "Microsoft Word"
         
-    FilePath = GetDownloadsFolder & "GeoGebra.app"
+    filePath = GetDownloadsFolder & "GeoGebra.app"
     
-    Do While Dir(FilePath, vbDirectory) = vbNullString And i < 60 * 10
+    Do While Dir(filePath, vbDirectory) = vbNullString And i < 60 * 10
         DoEvents
         If StopNow Then
             Label1.Caption = TT.A(858)
@@ -91,7 +91,7 @@ Public Sub DownloadNow()
             CommandButton_retry.visible = True
             GoTo slut
         End If
-        If GrantAccessToMultipleFiles(Array(FilePath)) = "false" Then
+        If GrantAccessToMultipleFiles(Array(filePath)) = "false" Then
             Label1.Caption = TT.Error
             Label2.Caption = TT.A(860)
             CommandButton_stop.visible = False

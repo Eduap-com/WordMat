@@ -11,12 +11,12 @@ Sub Chi2Fordeling()
     k = val(kstring)
     If (k > 0 And k <= 20) Or (k > 20 And Int(k / 2) = k / 2) Then
         g = Gamma(k / 2)
-        ut = ("f(x)" & VBA.ChrW(8797) & ConvertNumberToString(1 / (2 ^ (k / 2) * g)) & ChrW(183) & "x^(" & k / 2 - 1 & ")" & ChrW(183) & "e^(-x/2)")
+        ut = ("f(x)" & VBA.ChrW$(8797) & ConvertNumberToString(1 / (2 ^ (k / 2) * g)) & ChrW$(183) & "x^(" & k / 2 - 1 & ")" & ChrW$(183) & "e^(-x/2)")
         ut = Replace(ut, ",", ".")
     Else
-        ut = "f(x)" & VBA.ChrW(8801) & "1/(2^(n/2)" & ChrW(183) & VBA.ChrW(915) & "(n/2) )" & ChrW(183) & "x^(n/2-1)" & ChrW(183) & "e^(-x/2)"
+        ut = "f(x)" & VBA.ChrW$(8801) & "1/(2^(n/2)" & ChrW$(183) & VBA.ChrW$(915) & "(n/2) )" & ChrW$(183) & "x^(n/2-1)" & ChrW$(183) & "e^(-x/2)"
     End If
-    Selection.InsertAfter (VBA.ChrW(&H3C7) & VBA.ChrW(&HB2) & " - " & TT.A(399) & " " & kstring & " " & TT.A(360))
+    Selection.InsertAfter (VBA.ChrW$(&H3C7) & VBA.ChrW$(&HB2) & " - " & TT.A(399) & " " & kstring & " " & TT.A(360))
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
     

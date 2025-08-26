@@ -27,10 +27,9 @@ Dim xmlstarttag As IXMLDOMProcessingInstruction
 GeoXMLdom.preserveWhiteSpace = False
 GeoXMLdom.Async = False
 
-'Set xmlstarttag = dom.createProcessingInstruction("xml", "version=""1.0"" encoding=""windows-1252""")
+'Set xmlstarttag = GeoXMLdom.createProcessingInstruction("xml", "version=""1.0"" encoding=""windows-1252""")
 'Set xmlstarttag = dom.createProcessingInstruction("xml", "version=""1.0"" encoding=""ISO-8859-1""")
 ' kun denne virker. ved specielle tegn
-'Set xmlstarttag = GeoXMLdom.createProcessingInstruction("xml", "version=""1.0""")
 Set xmlstarttag = GeoXMLdom.createProcessingInstruction("xml", "version=""1.0"" encoding=""utf-8""")
 GeoXMLdom.appendChild xmlstarttag
 
@@ -53,7 +52,8 @@ End Sub
 Public Sub Save(FilNavn As String)
     If Show3D Then CreateEuclidianView3DElement
     CreateKernelElement
-    GeoXMLdom.Save (FilNavn)
+        
+    GeoXMLdom.Save FilNavn
 End Sub
 
 Sub CreateGuiElement()
@@ -326,7 +326,7 @@ Sub CreateKernelElement()
     Dim uses3delement As IXMLDOMElement
     Set uses3delement = GeoXMLdom.createElement("uses3D")
     kernelelement.appendChild uses3delement
-    uses3delement.setAttribute "val", VBA.LCase(CStr(Show3D))
+    uses3delement.setAttribute "val", VBA.LCase$(CStr(Show3D))
 
     Dim continuouselement As IXMLDOMElement
     Set continuouselement = GeoXMLdom.createElement("continuous")
@@ -481,18 +481,17 @@ Public Sub CreateList(listname As String, List As String)
 
 End Sub
 Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
-    Dim Pos As Integer
+    Dim pos As Integer
     
     If InStr(Expr, "matrix") > 0 Then GoTo slut ' matrix/vektor not supported yet
     
-    Pos = InStr(funkname, "(")
-    If Pos > 1 Then
-        funkname = Left(funkname, Pos - 1)
+    pos = InStr(funkname, "(")
+    If pos > 1 Then
+        funkname = Left$(funkname, pos - 1)
     End If
     
     Expr = ConvertToGeogebraSyntax(Expr, ConvertMaxima)
-    Expr = Replace(Expr, VBA.ChrW(8804), "<=")  ' only works with geogebra app
-    Expr = Replace(Expr, VBA.ChrW(8805), ">=") ' only works with geogebra app
+    ConvertToGeoGebra5Syntax Expr
 
     Dim expressionelement As IXMLDOMElement
     Set expressionelement = GeoXMLdom.createElement("expression")
@@ -560,8 +559,7 @@ Public Sub CreateEquation(EquationName As String, Equation As String, ulighed As
     If InStr(Equation, "matrix") > 0 Then GoTo slut ' matrix/vektor not supported yet
         
     Equation = ConvertToGeogebraSyntax(Equation, ConvertMaxima)
-    Equation = Replace(Equation, VBA.ChrW(8804), "<=")  ' only works with geogebra app
-    Equation = Replace(Equation, VBA.ChrW(8805), ">=") ' only works with geogebra app
+    ConvertToGeoGebra5Syntax Equation
 
     Dim expressionelement As IXMLDOMElement
     Set expressionelement = GeoXMLdom.createElement("expression")
@@ -625,6 +623,7 @@ End Sub
 Public Sub CreateVector(VectorName As String, VectorExpr As String, ulighed As Boolean, Optional ConvertMaxima As Boolean = True)
             
     VectorExpr = ConvertToGeogebraSyntax(VectorExpr, ConvertMaxima)
+    ConvertToGeoGebra5Syntax VectorExpr
 
 
     Dim commandelement As IXMLDOMElement
@@ -704,8 +703,14 @@ End Sub
 
 'End Sub
 
-Function ConvertToGeogebraSyntaxFile(ByVal Text As String, Optional ConvertMaxima As Boolean = True) As String
-   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(Text, ConvertMaxima, False)
+Function ConvertToGeogebraSyntaxFile(ByVal text As String, Optional ConvertMaxima As Boolean = True) As String
+   ConvertToGeogebraSyntaxFile = ConvertToGeogebraSyntax(text, ConvertMaxima, False)
 End Function
-
-
+Sub ConvertToGeoGebra5Syntax(ByRef Expr As String)
+' takes a a string that has already been converted using ConvertToGeogebraSyntax, and makes changes needed for GeoGebra 5
+    If InStrB(Expr, ChrW$(8804)) <> 0 Then Expr = Replace(Expr, ChrW$(8804), "<=")
+    If InStrB(Expr, ChrW$(8805)) <> 0 Then Expr = Replace(Expr, ChrW$(8805), ">=")
+    If InStrB(Expr, ChrW$(960)) <> 0 Then Expr = Replace(Expr, ChrW$(960), "pi")
+'    If InStrB(Expr, ChrW$(956)) <> 0 Then Expr = Replace(Expr, ChrW$(956), ChrW$(&HCEBC)) ' mu
+'    Expr = Replace(Expr, ChrW(&H3BC), ChrW(&HB5))
+End Sub

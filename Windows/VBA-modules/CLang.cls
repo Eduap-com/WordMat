@@ -116,7 +116,7 @@ Public Sub LoadSprogArray()
     Dim FileNo As Integer
     Dim linje As String
     Dim Arr() As String
-    Dim FilePath As String, slash As String
+    Dim filePath As String, slash As String
     
     If LanguageFileMissing Then Exit Sub
 #If Mac Then
@@ -124,51 +124,53 @@ Public Sub LoadSprogArray()
 #Else
     slash = "\"
 #End If
-    FilePath = GetWordMatDir("languages")
+    filePath = GetWordMatDir("languages")
     If LangNo = 1 Then
-        FilePath = FilePath & "languages" & slash & "da.csv"
+        filePath = filePath & "languages" & slash & "da.csv"
     ElseIf LangNo = 2 Then
-        FilePath = FilePath & "languages" & slash & "en.csv"
+        filePath = filePath & "languages" & slash & "en.csv"
     ElseIf LangNo = 3 Then
-        FilePath = FilePath & "languages" & slash & "sp.csv"
+        filePath = filePath & "languages" & slash & "sp.csv"
     ElseIf LangNo = 4 Then
-        FilePath = FilePath & "languages" & slash & "de.csv"
+        filePath = filePath & "languages" & slash & "de.csv"
     ElseIf LangNo = 5 Then
-        FilePath = FilePath & "languages" & slash & "fr.csv"
+        filePath = filePath & "languages" & slash & "fr.csv"
     ElseIf LangNo = 6 Then
-        FilePath = FilePath & "languages" & slash & "it.csv"
+        filePath = filePath & "languages" & slash & "it.csv"
     ElseIf LangNo = 7 Then
-        FilePath = FilePath & "languages" & slash & "sv.csv"
+        filePath = filePath & "languages" & slash & "sv.csv"
     ElseIf LangNo = 8 Then
-        FilePath = FilePath & "languages" & slash & "nb.csv"
+        filePath = filePath & "languages" & slash & "nb.csv"
     ElseIf LangNo = 9 Then
-        FilePath = FilePath & "languages" & slash & "fi.csv"
+        filePath = filePath & "languages" & slash & "fi.csv"
     ElseIf LangNo = 10 Then
-        FilePath = FilePath & "languages" & slash & "nl.csv"
+        filePath = filePath & "languages" & slash & "nl.csv"
     ElseIf LangNo = 11 Then
-        FilePath = FilePath & "languages" & slash & "pl.csv"
+        filePath = filePath & "languages" & slash & "pl.csv"
     ElseIf LangNo = 12 Then
-        FilePath = FilePath & "languages" & slash & "pt-pt.csv"
+        filePath = filePath & "languages" & slash & "pt-pt.csv"
     ElseIf LangNo = 13 Then
-        FilePath = FilePath & "languages" & slash & "fo.csv"
+        filePath = filePath & "languages" & slash & "fo.csv"
     ElseIf LangNo = 14 Then
-        FilePath = FilePath & "languages" & slash & "et.csv"
+        filePath = filePath & "languages" & slash & "et.csv"
     ElseIf LangNo = 15 Then
-        FilePath = FilePath & "languages" & slash & "lv.csv"
+        filePath = filePath & "languages" & slash & "lv.csv"
     ElseIf LangNo = 16 Then
-        FilePath = FilePath & "languages" & slash & "lt.csv"
+        filePath = filePath & "languages" & slash & "lt.csv"
     ElseIf LangNo = 17 Then
-        FilePath = FilePath & "languages" & slash & "cs.csv"
+        filePath = filePath & "languages" & slash & "cs.csv"
     ElseIf LangNo = 18 Then
-        FilePath = FilePath & "languages" & slash & "el.csv"
+        filePath = filePath & "languages" & slash & "el.csv"
+    Else
+        filePath = filePath & "languages" & slash & "en.csv"
     End If
     
-    If Dir(FilePath) = vbNullString Then
+    If Dir(filePath) = vbNullString Then
         LanguageFileMissing = True
         MsgBox2 "Language file could not be located", vbOKOnly, "Error"
     Else
         FileNo = FreeFile
-        Open FilePath For Input As FileNo
+        Open filePath For Input As FileNo
         Do While Not EOF(FileNo) ' Loop until end of file.
             Line Input #FileNo, linje
             Arr = Split(linje, "#£")
@@ -194,12 +196,12 @@ Function FormatText(ByVal t As String) As String
     t = Replace(t, "\n", vbLf)
     t = Replace(t, "\t", vbTab)
     t = Replace(t, "$Tab", vbTab)
-    t = Replace(t, "$*", ChrW(183))
-    t = Replace(t, "$C", ChrW(8450))
-    t = Replace(t, "$R", ChrW(8477))
-    t = Replace(t, "$X^2", ChrW(&H3C7) & ChrW(&HB2))
-    t = Replace(t, "$Degree", ChrW(176))
-    t = Replace(t, "$ArrowRight", ChrW(8594))
+    t = Replace(t, "$*", ChrW$(183))
+    t = Replace(t, "$C", ChrW$(8450))
+    t = Replace(t, "$R", ChrW$(8477))
+    t = Replace(t, "$X^2", ChrW$(&H3C7) & ChrW$(&HB2))
+    t = Replace(t, "$Degree", ChrW$(176))
+    t = Replace(t, "$ArrowRight", ChrW$(8594))
     
     FormatText = t
 End Function

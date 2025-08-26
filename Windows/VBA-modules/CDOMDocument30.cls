@@ -28,15 +28,15 @@ Public Function createElement(tagName As String) As IXMLDOMElement
     elm.tagName = tagName
     Set createElement = elm
 End Function
-Public Sub Save(Destination)
+Public Sub Save(Destination As Variant)
+' saves the xml in utf-8 encoding
     On Error GoTo Err
-    
-    Dim fh As Integer
-    fh = FreeFile
-    Open Destination For Output As fh
-    
     Dim n As Integer
     Dim i As Integer
+        
+    Dim fh As Integer
+    fh = FreeFile
+    Open Destination For Binary As #fh
     
     n = m_children.Count
     For i = 1 To n
@@ -46,12 +46,15 @@ Public Sub Save(Destination)
     Next
     
     Close fh
-    Exit Sub
-    
+
+    GoTo slut
 Err:
     MsgBox "Error saving DOM documet " & Destination & " " & Err.Description, vbOKOnly, TT.Error
     On Error Resume Next
+#If Mac Then
     Close fh
+#End If
+slut:
 End Sub
 Public Property Let preserveWhiteSpace(ByVal RHS As Boolean)
 '

@@ -63,7 +63,7 @@ End Sub
 
 Private Sub Label_ok_Click()
     MsgBoxResult = vbOK
-    InputString = TextBox_input.Text
+    InputString = TextBox_input.text
     Me.hide
 End Sub
 
@@ -157,7 +157,7 @@ Private Sub UserForm_Activate()
     Me.Caption = Title
     Label_prompt.Caption = prompt
     TextBox_input.selStart = 0
-    TextBox_input.SelLength = Len(TextBox_input.Text)
+    TextBox_input.SelLength = Len(TextBox_input.text)
     TextBox_input.SetFocus
 End Sub
 
@@ -166,7 +166,7 @@ Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
 End Sub
 
 Public Function SetDefaultInput(Dinput As String)
-    TextBox_input.Text = Dinput
+    TextBox_input.text = Dinput
 End Function
 
 Public Property Get MultiLine() As Boolean

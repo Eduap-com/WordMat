@@ -29,6 +29,6 @@ Public Function myAttValues() As Collection
 '
 End Function
 '
-Public Sub Save(dest)
+Public Sub Save(dest As Variant)
 '
 End Sub

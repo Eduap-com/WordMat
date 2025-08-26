@@ -71,7 +71,7 @@ End Sub
 
 'Callback for proc1 onAction
 Sub Rib_FSfremskriv(control As IRibbonControl)
-    insertribformel "", "S=B" & VBA.ChrW(183) & "(1+r)"
+    insertribformel "", "S=B" & VBA.ChrW$(183) & "(1+r)"
 End Sub
 
 'Callback for menu_cifre getLabel
@@ -97,25 +97,25 @@ End Sub
 'Callback for Button4 onAction
 Sub Rib_FSkapital(control As IRibbonControl)
     If TT.LangNo = 1 Then
-        insertribformel "", "K_n=K_0" & VBA.ChrW(183) & "(1+r)^n"
+        insertribformel "", "K_n=K_0" & VBA.ChrW$(183) & "(1+r)^n"
     Else
-        insertribformel "", "A=P" & VBA.ChrW(183) & "(1+r/n)^(n" & VBA.ChrW(183) & "t)"
+        insertribformel "", "A=P" & VBA.ChrW$(183) & "(1+r/n)^(n" & VBA.ChrW$(183) & "t)"
     End If
 End Sub
 
 Sub Rib_FSannuitet1(control As IRibbonControl)
-    insertribformel "", "A=b" & VBA.ChrW(183) & "((1+r)^n-1)/r"
+    insertribformel "", "A=b" & VBA.ChrW$(183) & "((1+r)^n-1)/r"
 End Sub
 Sub Rib_FSannuitet2(control As IRibbonControl)
-    insertribformel "", "y=G" & VBA.ChrW(183) & "r/(1-(1+r)^(-n))"
+    insertribformel "", "y=G" & VBA.ChrW$(183) & "r/(1-(1+r)^(-n))"
 End Sub
 
 'Callback for lin1 onAction
 Sub Rib_FSlinligning(control As IRibbonControl)
     If TT.LangNo = 1 Then
-        insertribformel "", "y=a" & VBA.ChrW(183) & "x+b"
+        insertribformel "", "y=a" & VBA.ChrW$(183) & "x+b"
     Else
-        insertribformel "", "y=m" & VBA.ChrW(183) & "x+c"
+        insertribformel "", "y=m" & VBA.ChrW$(183) & "x+c"
     End If
 End Sub
 
@@ -126,39 +126,39 @@ End Sub
 
 'Callback for lin3 onAction
 Sub Rib_FSlinligning2(control As IRibbonControl)
-    insertribformel "", "y=a" & VBA.ChrW(183) & "(x-x_0)+y_0"
+    insertribformel "", "y=a" & VBA.ChrW$(183) & "(x-x_0)+y_0"
 End Sub
 
 'Callback for difftangent onAction
 Sub Rib_FSdiff(control As IRibbonControl)
-    insertribformel "", "y=f'(x_0)" & VBA.ChrW(183) & "(x-x_0)+f(x_0)"
+    insertribformel "", "y=f'(x_0)" & VBA.ChrW$(183) & "(x-x_0)+f(x_0)"
 End Sub
 
 'Callback for eksp1 onAction
 Sub Rib_FSekspligning(control As IRibbonControl)
-    insertribformel "", "y=b" & VBA.ChrW(183) & "a^x"
+    insertribformel "", "y=b" & VBA.ChrW$(183) & "a^x"
 End Sub
 'Callback for eksp5 onAction
 Sub Rib_FSekspligning2(control As IRibbonControl)
-    insertribformel "", "y=b" & VBA.ChrW(183) & "e^(k" & VBA.ChrW(183) & "x)"
+    insertribformel "", "y=b" & VBA.ChrW$(183) & "e^(k" & VBA.ChrW$(183) & "x)"
 End Sub
 
 'Callback for eksp6 onAction
 Sub Rib_FSekspligning3(control As IRibbonControl)
-    insertribformel "", "y=b" & VBA.ChrW(183) & "2^(x/T_2)"
+    insertribformel "", "y=b" & VBA.ChrW$(183) & "2^(x/T_2)"
 End Sub
 'Callback for eksp6 onAction
 Sub Rib_FSekspligning4(control As IRibbonControl)
-    insertribformel "", "y=b" & VBA.ChrW(183) & "(1/2)^(x/T_" & ChrW(189) & ")"
+    insertribformel "", "y=b" & VBA.ChrW$(183) & "(1/2)^(x/T_" & ChrW$(189) & ")"
 End Sub
 
 'Callback for eksp2 onAction
 Sub Rib_FSekspa(control As IRibbonControl)
-    insertribformel "", "a=" & VBA.ChrW(&H221A) & "(x_2-x_1&y_2/y_1)"
+    insertribformel "", "a=" & VBA.ChrW$(&H221A) & "(x_2-x_1&y_2/y_1)"
 End Sub
 'Callback for eksp3 onAction
 Sub Rib_FSford(control As IRibbonControl)
-    insertribformel "", "T_2=ln" & VBA.ChrW(8289) & "(2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(2)/k"
+    insertribformel "", "T_2=ln" & VBA.ChrW$(8289) & "(2)/ln" & VBA.ChrW$(8289) & "(a)=ln" & VBA.ChrW$(8289) & "(2)/k"
 End Sub
 Sub Rib_GetLabelInfinitesimalShort(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "Inf."
@@ -166,20 +166,20 @@ End Sub
 'Callback for eksp4 onAction
 Sub Rib_FShalv(control As IRibbonControl)
 #If Mac Then
-    insertribformel "", "T_(1/2) =ln" & VBA.ChrW(8289) & "(1/2)/(ln" & VBA.ChrW(8289) & "(a))=ln" & VBA.ChrW(8289) & "(1/2)/k"
+    insertribformel "", "T_(1/2) =ln" & VBA.ChrW$(8289) & "(1/2)/(ln" & VBA.ChrW$(8289) & "(a))=ln" & VBA.ChrW$(8289) & "(1/2)/k"
 #Else
-    insertribformel "", "T_" & ChrW(189) & "=ln" & VBA.ChrW(8289) & "(1/2)/ln" & VBA.ChrW(8289) & "(a)=ln" & VBA.ChrW(8289) & "(1/2)/k"
+    insertribformel "", "T_" & ChrW$(189) & "=ln" & VBA.ChrW$(8289) & "(1/2)/ln" & VBA.ChrW$(8289) & "(a)=ln" & VBA.ChrW$(8289) & "(1/2)/k"
 #End If
 End Sub
 
 'Callback for pot1 onAction
 Sub Rib_FSpotligning(control As IRibbonControl)
-    insertribformel "", "y=b" & VBA.ChrW(183) & "x^a"
+    insertribformel "", "y=b" & VBA.ChrW$(183) & "x^a"
 End Sub
 
 'Callback for pot2 onAction
 Sub Rib_FSpota(control As IRibbonControl)
-    insertribformel "", "a=log" & VBA.ChrW(8289) & "(y_2/y_1)/log" & VBA.ChrW(8289) & "(x_2/x_1)"
+    insertribformel "", "a=log" & VBA.ChrW$(8289) & "(y_2/y_1)/log" & VBA.ChrW$(8289) & "(x_2/x_1)"
 End Sub
 
 'Callback for pot3 onAction
@@ -190,20 +190,20 @@ End Sub
 Sub Rib_FSpol(control As IRibbonControl)
     insertribformel "", "x_t=-b/2a"
     Selection.TypeParagraph
-    insertribformel "", "y_t=-(b^2-4" & VBA.ChrW(183) & "a" & VBA.ChrW(183) & "c)/4a"
+    insertribformel "", "y_t=-(b^2-4" & VBA.ChrW$(183) & "a" & VBA.ChrW$(183) & "c)/4a"
 End Sub
 
 'Callback for geo1 onAction
 Sub Rib_FSsinrel(control As IRibbonControl)
-    insertribformel "", "a/sin" & VBA.ChrW(8289) & "(A)=b/sin" & VBA.ChrW(8289) & "(B)"
+    insertribformel "", "a/sin" & VBA.ChrW$(8289) & "(A)=b/sin" & VBA.ChrW$(8289) & "(B)"
 End Sub
 'Callback for geo2 onAction
 Sub Rib_FScosrel(control As IRibbonControl)
-    insertribformel "", "c^2=a^2+b^2-2" & VBA.ChrW(183) & "a" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "cos(C)"
+    insertribformel "", "c^2=a^2+b^2-2" & VBA.ChrW$(183) & "a" & VBA.ChrW$(183) & "b" & VBA.ChrW$(183) & "cos(C)"
 End Sub
 'Callback for geo3 onAction
 Sub Rib_FSarealtrekant(control As IRibbonControl)
-    insertribformel "", "T=1/2" & VBA.ChrW(183) & "a" & VBA.ChrW(183) & "b" & VBA.ChrW(183) & "sin(C)"
+    insertribformel "", "T=1/2" & VBA.ChrW$(183) & "a" & VBA.ChrW$(183) & "b" & VBA.ChrW$(183) & "sin(C)"
 End Sub
 'Callback for sandbin1 onAction
 Sub Rib_FSbinfrekvens(control As IRibbonControl)
@@ -211,7 +211,7 @@ Sub Rib_FSbinfrekvens(control As IRibbonControl)
     PrepareMaxima
     omax.FindDefinitions
     If Not InStr(omax.DefString, "K(n,r):=") > 0 Then
-        insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)" ' chrw8801 is 3 dash =
+        insertribformel "", "K(n,r)" & VBA.ChrW$(8797) & "n!/(r!" & VBA.ChrW$(183) & "(n-r)!)" ' chrw8801 is 3 dash =
         Selection.TypeParagraph
     End If
     
@@ -221,8 +221,8 @@ Sub Rib_FSbinfrekvens(control As IRibbonControl)
     If Not InStr(omax.DefString, "n:") > 0 Then
         s = s & "n=20"
     End If
-    s = Trim(s)
-    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    s = Trim$(s)
+    If right$(s, 1) = ";" Then s = Left$(s, Len(s) - 1)
     If s <> vbNullString Then
         s = InputBox("Enter required definitions", "Definitions", s)
         s = Replace(s, ";", " , ")
@@ -232,7 +232,7 @@ Sub Rib_FSbinfrekvens(control As IRibbonControl)
         Selection.TypeParagraph
     End If
     
-    insertribformel "", "P(r)" & VBA.ChrW(8797) & "K(n,r)" & VBA.ChrW(183) & "p^r" & VBA.ChrW(183) & "(1-p)^(n-r)"
+    insertribformel "", "P(r)" & VBA.ChrW$(8797) & "K(n,r)" & VBA.ChrW$(183) & "p^r" & VBA.ChrW$(183) & "(1-p)^(n-r)"
     Selection.TypeParagraph
 End Sub
 'Callback for sandbin5 onAction
@@ -241,7 +241,7 @@ Sub Rib_FSbinkum(control As IRibbonControl)
     PrepareMaxima
     omax.FindDefinitions
     If Not InStr(omax.DefString, "K(n,r):=") > 0 Then
-        insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)"
+        insertribformel "", "K(n,r)" & VBA.ChrW$(8797) & "n!/(r!" & VBA.ChrW$(183) & "(n-r)!)"
         Selection.TypeParagraph
     End If
     
@@ -251,8 +251,8 @@ Sub Rib_FSbinkum(control As IRibbonControl)
     If Not InStr(omax.DefString, "n:") > 0 Then
         s = s & "n=20"
     End If
-    s = Trim(s)
-    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    s = Trim$(s)
+    If right$(s, 1) = ";" Then s = Left$(s, Len(s) - 1)
     If s <> vbNullString Then
         s = InputBox("Enter required definitions", "Definitions", s)
         s = Replace(s, ";", " , ")
@@ -261,27 +261,27 @@ Sub Rib_FSbinkum(control As IRibbonControl)
         insertribformel "", "Definer: " & s
         Selection.TypeParagraph
     End If
-    insertribformel "", "P_kum (m)" & VBA.ChrW(8797) & "" & VBA.ChrW(8721) & "_(r=0)^m" & VBA.ChrW(9618) & VBA.ChrW(12310) & "K(n,r)" & VBA.ChrW(183) & "p^r" & VBA.ChrW(183) & "(1-p)^(n-r)" & VBA.ChrW(12311)
+    insertribformel "", "P_kum (m)" & VBA.ChrW$(8797) & "" & VBA.ChrW$(8721) & "_(r=0)^m" & VBA.ChrW$(9618) & VBA.ChrW$(12310) & "K(n,r)" & VBA.ChrW$(183) & "p^r" & VBA.ChrW$(183) & "(1-p)^(n-r)" & VBA.ChrW$(12311)
     Selection.TypeParagraph
 End Sub
 
 'Callback for sandbin2 onAction
 Sub Rib_FSbinkoeff(control As IRibbonControl)
-    insertribformel "", "K(n,r)" & VBA.ChrW(8797) & "n!/(r!" & VBA.ChrW(183) & "(n-r)!)"
+    insertribformel "", "K(n,r)" & VBA.ChrW$(8797) & "n!/(r!" & VBA.ChrW$(183) & "(n-r)!)"
 End Sub
 
 'Callback for sandbin3 onAction
 Sub Rib_FSbinmid(control As IRibbonControl)
-    insertribformel "", VBA.ChrW(956) & "=n" & VBA.ChrW(183) & "p"
+    insertribformel "", VBA.ChrW$(956) & "=n" & VBA.ChrW$(183) & "p"
 End Sub
 
 'Callback for sandbin4 onAction
 Sub Rib_FSbinspred(control As IRibbonControl)
-    insertribformel "", VBA.ChrW(963) & "=" & VBA.ChrW(&H221A) & "(n" & VBA.ChrW(183) & "p" & VBA.ChrW(183) & "(1-p))"
+    insertribformel "", VBA.ChrW$(963) & "=" & VBA.ChrW$(&H221A) & "(n" & VBA.ChrW$(183) & "p" & VBA.ChrW$(183) & "(1-p))"
 End Sub
 
 Sub Rib_FSbinusik(control As IRibbonControl)
-    insertribformel "", "p" & VBA.ChrW(770) & "±2" & VBA.ChrW(183) & VBA.ChrW(8730) & "((p" & VBA.ChrW(770) & "" & VBA.ChrW(183) & "(1-p" & VBA.ChrW(770) & "))/n)"
+    insertribformel "", "p" & VBA.ChrW$(770) & "±2" & VBA.ChrW$(183) & VBA.ChrW$(8730) & "((p" & VBA.ChrW$(770) & "" & VBA.ChrW$(183) & "(1-p" & VBA.ChrW$(770) & "))/n)"
 End Sub
 
 'Callback for sandnorm1 onAction
@@ -291,20 +291,20 @@ Sub Rib_FSnormfrekvens(control As IRibbonControl)
     omax.FindDefinitions
     
     If Not InStr(omax.DefString, "mu:") > 0 Then ' sigma
-        s = VBA.ChrW(181) & "=0 ; "
+        s = VBA.ChrW$(181) & "=0 ; "
     End If
     If Not InStr(omax.DefString, "sigma:") > 0 Then ' mu
         s = s & "s=1"
     End If
-    s = Trim(s)
-    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    s = Trim$(s)
+    If right$(s, 1) = ";" Then s = Left$(s, Len(s) - 1)
     If s <> vbNullString Then
         s = InputBox("Enter required definitions", "Definitions", s)
         #If Mac Then
         #Else
-            s = Replace(s, VBA.ChrW(181) & "=", VBA.ChrW(956) & "=")
+            s = Replace(s, VBA.ChrW$(181) & "=", VBA.ChrW$(956) & "=")
         #End If
-        s = Replace(s, "s=", VBA.ChrW(963) & "=")
+        s = Replace(s, "s=", VBA.ChrW$(963) & "=")
         s = Replace(s, ";", " , ")
         s = Replace(s, "  ", " ")
     
@@ -312,7 +312,7 @@ Sub Rib_FSnormfrekvens(control As IRibbonControl)
         Selection.TypeParagraph
     End If
 
-    insertribformel "", "f(x)" & VBA.ChrW(8797) & "1/(" & VBA.ChrW(&H221A) & "(2" & VBA.ChrW(960) & ")" & VBA.ChrW(183) & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((x-" & VBA.ChrW(956) & ")/" & VBA.ChrW(963) & ")^2)"
+    insertribformel "", "f(x)" & VBA.ChrW$(8797) & "1/(" & VBA.ChrW$(&H221A) & "(2" & VBA.ChrW$(960) & ")" & VBA.ChrW$(183) & VBA.ChrW$(963) & ")" & VBA.ChrW$(183) & "e^(-1/2" & VBA.ChrW$(183) & "((x-" & VBA.ChrW$(956) & ")/" & VBA.ChrW$(963) & ")^2)"
     Selection.TypeParagraph
 End Sub
 
@@ -323,26 +323,26 @@ Sub Rib_FSnormkum(control As IRibbonControl)
     omax.FindDefinitions
     
     If Not InStr(omax.DefString, "mu:") > 0 Then ' sigma
-        s = VBA.ChrW(181) & "=0 ; "
+        s = VBA.ChrW$(181) & "=0 ; "
     End If
     If Not InStr(omax.DefString, "sigma:") > 0 Then ' mu
         s = s & "s=1"
     End If
-    s = Trim(s)
-    If right(s, 1) = ";" Then s = Left(s, Len(s) - 1)
+    s = Trim$(s)
+    If right$(s, 1) = ";" Then s = Left$(s, Len(s) - 1)
     If s <> vbNullString Then
         s = InputBox("Enter required definitions", "Definitions", s)
-        s = Replace(s, "s=", VBA.ChrW(963) & "=")
-        s = Replace(s, VBA.ChrW(181) & "=", VBA.ChrW(956) & "=")
+        s = Replace(s, "s=", VBA.ChrW$(963) & "=")
+        s = Replace(s, VBA.ChrW$(181) & "=", VBA.ChrW$(956) & "=")
         s = Replace(s, ";", " , ")
         s = Replace(s, "  ", " ")
     
-        insertribformel "", "Definer: " & VBA.ChrW(963) & ">0"
+        insertribformel "", "Definer: " & VBA.ChrW$(963) & ">0"
         Selection.TypeParagraph
         insertribformel "", "Definer: " & s
         Selection.TypeParagraph
     End If
-    insertribformel "", "F(x)" & VBA.ChrW(8797) & VBA.ChrW(8747) & "_(-" & VBA.ChrW(8734) & ")^x" & VBA.ChrW(9618) & "1/(" & VBA.ChrW(&H221A) & "(2" & VBA.ChrW(960) & ")" & VBA.ChrW(183) & VBA.ChrW(963) & ")" & VBA.ChrW(183) & "e^(-1/2" & VBA.ChrW(183) & "((y-" & VBA.ChrW(956) & ")/" & VBA.ChrW(963) & ")^2) dy"
+    insertribformel "", "F(x)" & VBA.ChrW$(8797) & VBA.ChrW$(8747) & "_(-" & VBA.ChrW$(8734) & ")^x" & VBA.ChrW$(9618) & "1/(" & VBA.ChrW$(&H221A) & "(2" & VBA.ChrW$(960) & ")" & VBA.ChrW$(183) & VBA.ChrW$(963) & ")" & VBA.ChrW$(183) & "e^(-1/2" & VBA.ChrW$(183) & "((y-" & VBA.ChrW$(956) & ")/" & VBA.ChrW$(963) & ")^2) dy"
     Selection.TypeParagraph
 End Sub
 'Callback for sandchiford onAction
@@ -351,23 +351,23 @@ Sub Rib_FSchi2ford(control As IRibbonControl)
 End Sub
 'Callback for omdrejlegeme onAction
 Sub Rib_FSomdrejlegeme(control As IRibbonControl)
-    insertribformel "", "V=" & VBA.ChrW(&H3C0) & VBA.ChrW(183) & VBA.ChrW(8747) & "_a^b" & VBA.ChrW(9618) & "(f(x))" & VBA.ChrW(&HB2) & " dx"
+    insertribformel "", "V=" & VBA.ChrW$(&H3C0) & VBA.ChrW$(183) & VBA.ChrW$(8747) & "_a^b" & VBA.ChrW$(9618) & "(f(x))" & VBA.ChrW$(&HB2) & " dx"
 End Sub
 'Callback for kurvel onAction
 Sub Rib_FSkurvelaengde(control As IRibbonControl)
-    insertribformel "", "s=" & VBA.ChrW(8747) & "_a^b" & VBA.ChrW(9618) & VBA.ChrW(&H221A) & "(1+(f'(x))" & VBA.ChrW(&HB2) & ") dx"
+    insertribformel "", "s=" & VBA.ChrW$(8747) & "_a^b" & VBA.ChrW$(9618) & VBA.ChrW$(&H221A) & "(1+(f'(x))" & VBA.ChrW$(&HB2) & ") dx"
 End Sub
 'Callback for middelv onAction
 Sub Rib_FSmiddelv(control As IRibbonControl)
-    insertribformel "", "<f(x)>=1/(b-a) " & VBA.ChrW(8747) & "_a^b" & VBA.ChrW(9618) & "f(x) dx"
+    insertribformel "", "<f(x)>=1/(b-a) " & VBA.ChrW$(8747) & "_a^b" & VBA.ChrW$(9618) & "f(x) dx"
 End Sub
 'Callback for planparamlinje onAction
 Sub Rib_FSplanlinjelign(control As IRibbonControl) '
-    insertribformel "", "a" & VBA.ChrW(183) & "(x-x_0)+b" & VBA.ChrW(183) & "(y-y_0)=0"
+    insertribformel "", "a" & VBA.ChrW$(183) & "(x-x_0)+b" & VBA.ChrW$(183) & "(y-y_0)=0"
 End Sub
 'Callback for planparamlinje onAction
 Sub Rib_FSplanparamlinje(control As IRibbonControl) '
-    insertribformel "", "(" & VBA.ChrW(9632) & "(x@y))=(" & VBA.ChrW(9632) & "(x_0@y_0 ))+t" & VBA.ChrW(183) & "(" & VBA.ChrW(9632) & "(r_1@r_2 ))"
+    insertribformel "", "(" & VBA.ChrW$(9632) & "(x@y))=(" & VBA.ChrW$(9632) & "(x_0@y_0 ))+t" & VBA.ChrW$(183) & "(" & VBA.ChrW$(9632) & "(r_1@r_2 ))"
 End Sub
 
 Sub Rib_FSvektorvinkel(control As IRibbonControl)
@@ -376,22 +376,22 @@ Sub Rib_FSvektorvinkel(control As IRibbonControl)
     omax.FindDefinitions
     
     If Not InStr(omax.DefString, "aSymVecta:") > 0 Then ' vector a
-        s = "a" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2)), "
+        s = "a" & VBA.ChrW$(8407) & "=(" & VBA.ChrW$(9608) & "(1@2)), "
     End If
     If Not InStr(omax.DefString, "bSymVecta:") > 0 Then ' vector b
-        s = s & "b" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2))"
+        s = s & "b" & VBA.ChrW$(8407) & "=(" & VBA.ChrW$(9608) & "(1@2))"
     End If
-    s = Trim(s)
-    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    s = Trim$(s)
+    If right$(s, 1) = "," Then s = Left$(s, Len(s) - 1)
     If s <> vbNullString Then
         insertribformel "", "Definer: " & s
         Selection.TypeParagraph
     End If
    
    If CASengine = 0 Then
-    insertribformel "", "cos(v)=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "cos(v)=(a" & VBA.ChrW$(8407) & ChrW$(183) & "b" & VBA.ChrW$(8407) & ")/(|a" & VBA.ChrW$(8407) & "|" & ChrW$(183) & "|b" & VBA.ChrW$(8407) & "|)"
    Else
-    insertribformel "", "cos(v)=(dot(a" & VBA.ChrW(8407) & ";b" & VBA.ChrW(8407) & "))/(|a" & VBA.ChrW(8407) & "|" & ChrW(183) & "|b" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "cos(v)=(dot(a" & VBA.ChrW$(8407) & ";b" & VBA.ChrW$(8407) & "))/(|a" & VBA.ChrW$(8407) & "|" & ChrW$(183) & "|b" & VBA.ChrW$(8407) & "|)"
    End If
 End Sub
 Sub Rib_FSvektorproj(control As IRibbonControl)
@@ -400,22 +400,22 @@ Sub Rib_FSvektorproj(control As IRibbonControl)
     omax.FindDefinitions
     
     If Not InStr(omax.DefString, "aSymVecta:") > 0 Then ' vector a
-        s = "a" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2)), "
+        s = "a" & VBA.ChrW$(8407) & "=(" & VBA.ChrW$(9608) & "(1@2)), "
     End If
     If Not InStr(omax.DefString, "bSymVecta:") > 0 Then ' vector b
-        s = s & "b" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9608) & "(1@2))"
+        s = s & "b" & VBA.ChrW$(8407) & "=(" & VBA.ChrW$(9608) & "(1@2))"
     End If
-    s = Trim(s)
-    If right(s, 1) = "," Then s = Left(s, Len(s) - 1)
+    s = Trim$(s)
+    If right$(s, 1) = "," Then s = Left$(s, Len(s) - 1)
     If s <> vbNullString Then
         insertribformel "", "Definer: " & s
         Selection.TypeParagraph
     End If
     
-    insertribformel "", "b" & VBA.ChrW(8407) & "_a=(a" & VBA.ChrW(8407) & ChrW(183) & "b" & VBA.ChrW(8407) & ")/(|a" & VBA.ChrW(8407) & "|^2) a" & VBA.ChrW(8407)
+    insertribformel "", "b" & VBA.ChrW$(8407) & "_a=(a" & VBA.ChrW$(8407) & ChrW$(183) & "b" & VBA.ChrW$(8407) & ")/(|a" & VBA.ChrW$(8407) & "|^2) a" & VBA.ChrW$(8407)
 End Sub
 Sub Rib_FSdistpunkt(control As IRibbonControl)
-    insertribformel "", "dist(P,l)=|a" & ChrW(183) & "x_1+b" & ChrW(183) & "y_1+c|/" & VBA.ChrW(&H221A) & "(a^2+b^2)"
+    insertribformel "", "dist(P,l)=|a" & ChrW$(183) & "x_1+b" & ChrW$(183) & "y_1+c|/" & VBA.ChrW$(&H221A) & "(a^2+b^2)"
 End Sub
 
 'Callback for cirkelligning onAction
@@ -425,40 +425,40 @@ End Sub
 
 'Callback for rumparamlinje onAction
 Sub Rib_FSrumlinjelign(control As IRibbonControl) '
-    insertribformel "", "a" & VBA.ChrW(183) & "(x-x_0)+b" & VBA.ChrW(183) & "(y-y_0)+c" & VBA.ChrW(183) & "(z-z_0)=0"
+    insertribformel "", "a" & VBA.ChrW$(183) & "(x-x_0)+b" & VBA.ChrW$(183) & "(y-y_0)+c" & VBA.ChrW$(183) & "(z-z_0)=0"
 End Sub
 'Callback for rumparamlinje onAction
 Sub Rib_FSrumparamlinje(control As IRibbonControl)
-    insertribformel "", "(" & VBA.ChrW(9632) & "(x@y@z))=(" & VBA.ChrW(9632) & "(x_0@y_0@z_0 ))+t" & VBA.ChrW(183) & "(" & VBA.ChrW(9632) & "(r_1@r_2@r_3 ))"
+    insertribformel "", "(" & VBA.ChrW$(9632) & "(x@y@z))=(" & VBA.ChrW$(9632) & "(x_0@y_0@z_0 ))+t" & VBA.ChrW$(183) & "(" & VBA.ChrW$(9632) & "(r_1@r_2@r_3 ))"
 End Sub
 
 'Callback for rumafstandpunktlinje onAction
 Sub Rib_FSrumpunktlinje(control As IRibbonControl)
-    insertribformel "", "definer: r" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(r_1@r_2@r_3)) ,  (P0P)" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0))"
+    insertribformel "", "definer: r" & VBA.ChrW$(8407) & "=(" & VBA.ChrW$(9632) & "(r_1@r_2@r_3)) ,  (P0P)" & VBA.ChrW$(8407) & "=(" & VBA.ChrW$(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0))"
     Selection.TypeParagraph
-    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW(8407) & VBA.ChrW(215) & "(P0P)" & VBA.ChrW(8407) & "|)/(|r" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P,l)=(|r" & VBA.ChrW$(8407) & VBA.ChrW$(215) & "(P0P)" & VBA.ChrW$(8407) & "|)/(|r" & VBA.ChrW$(8407) & "|)"
 End Sub
 
 'Callback for rumligningplan onAction
 Sub Rib_FSrumligningplan(control As IRibbonControl)
-    insertribformel "", "definer: n" & VBA.ChrW(8407) & "=(" & VBA.ChrW(9632) & "(a@b@c))"
+    insertribformel "", "definer: n" & VBA.ChrW$(8407) & "=(" & VBA.ChrW$(9632) & "(a@b@c))"
     Selection.TypeParagraph
-    insertribformel "", "n" & VBA.ChrW(8407) & VBA.ChrW(183) & "(" & VBA.ChrW(9632) & "(x-x_0@y-y_0@z-z_0))=0"
+    insertribformel "", "n" & VBA.ChrW$(8407) & VBA.ChrW$(183) & "(" & VBA.ChrW$(9632) & "(x-x_0@y-y_0@z-z_0))=0"
 End Sub
 
 'Callback for rumligningplan2 onAction
 Sub Rib_FSrumligningplan2(control As IRibbonControl)
-    insertribformel "", "a" & ChrW(183) & "(x-x_0)+b" & ChrW(183) & "(y-y_0)+c" & ChrW(183) & "(z-z_0)=0"
+    insertribformel "", "a" & ChrW$(183) & "(x-x_0)+b" & ChrW$(183) & "(y-y_0)+c" & ChrW$(183) & "(z-z_0)=0"
 End Sub
 
 'Callback for rumafstandpunktplan onAction
 Sub Rib_FSrumafstandpunktplan(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=|n" & VBA.ChrW(8407) & ChrW(183) & "(" & VBA.ChrW(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW(8407) & "|)"
+    insertribformel "", "dist(P," & VBA.ChrW$(945) & ")=|n" & VBA.ChrW$(8407) & ChrW$(183) & "(" & VBA.ChrW$(9632) & "(x_1-x_0@y_1-y_0@z_1-z_0 ))|/(|n" & VBA.ChrW$(8407) & "|)"
 End Sub
 
 'Callback for rumafstandpunktplan2 onAction
 Sub Rib_FSrumafstandpunktplan2(control As IRibbonControl)
-    insertribformel "", "dist(P," & VBA.ChrW(945) & ")=(|a" & ChrW(183) & "x_1+b" & ChrW(183) & "y_1+c" & ChrW(183) & "z_1+d|)/" & VBA.ChrW(&H221A) & "(a^2+b^2+c^2)"
+    insertribformel "", "dist(P," & VBA.ChrW$(945) & ")=(|a" & ChrW$(183) & "x_1+b" & ChrW$(183) & "y_1+c" & ChrW$(183) & "z_1+d|)/" & VBA.ChrW$(&H221A) & "(a^2+b^2+c^2)"
 End Sub
 
 'Callback for kugleligning onAction
@@ -921,65 +921,65 @@ Sub Rib_GetLabelPercentage(control As IRibbonControl, ByRef returnedVal)
 End Sub
 'Callback for proc1 getLabel
 Sub Rib_FSpercentage1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "S=B" & ChrW(183) & "(1+r)"
+    returnedVal = "S=B" & ChrW$(183) & "(1+r)"
 End Sub
 Sub Rib_FSpercentage2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "K=K" & ChrW(&H2092) & ChrW(183) & "(1+r)" & ChrW(&H207F) & "     Kapitalfremskrivningsformel"
+    returnedVal = "K=K" & ChrW$(&H2092) & ChrW$(183) & "(1+r)" & ChrW$(&H207F) & "     Kapitalfremskrivningsformel"
 End Sub
 Sub Rib_FSpercentage3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "A=b" & ChrW(183) & "((1+r)" & ChrW(&H207F) & "- 1) / r" & "     Annuitetsopsparing"
+    returnedVal = "A=b" & ChrW$(183) & "((1+r)" & ChrW$(&H207F) & "- 1) / r" & "     Annuitetsopsparing"
 End Sub
 Sub Rib_FSpercentage4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=G" & ChrW(183) & "r/(1-(1+r)" & ChrW(&H207B) & ChrW(&H207F) & ")     Annuitetslaan"
+    returnedVal = "y=G" & ChrW$(183) & "r/(1-(1+r)" & ChrW$(&H207B) & ChrW$(&H207F) & ")     Annuitetslaan"
 End Sub
 
 Sub Rib_GetLabelFunctions(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(439)
 End Sub
 Sub Rib_FSlinear1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=a" & ChrW(183) & "x+b                Lineaer ligning"
+    returnedVal = "y=a" & ChrW$(183) & "x+b                Lineaer ligning"
 End Sub
 Sub Rib_FSlinear2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "a=(y" & ChrW(&H2082) & "-y" & ChrW(&H2081) & ")/(x" & ChrW(&H2082) & "-x" & ChrW(&H2081) & ")     Haeldningskoefficient"
+    returnedVal = "a=(y" & ChrW$(&H2082) & "-y" & ChrW$(&H2081) & ")/(x" & ChrW$(&H2082) & "-x" & ChrW$(&H2081) & ")     Haeldningskoefficient"
 End Sub
 Sub Rib_FSlinear3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=a" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+y" & ChrW(&H2080) & "         Lineaer ligning ud fra punkt (x" & ChrW(&H2080) & ",y" & ChrW(&H2080) & ") og a"
+    returnedVal = "y=a" & ChrW$(183) & "(x-x" & ChrW$(&H2080) & ")+y" & ChrW$(&H2080) & "         Lineaer ligning ud fra punkt (x" & ChrW$(&H2080) & ",y" & ChrW$(&H2080) & ") og a"
 End Sub
 Sub Rib_FSlinear4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=f'(x" & ChrW(&H2080) & ")" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+f(x" & ChrW(&H2080) & ")     Tangent til f(x) til x=x" & ChrW(&H2080)
+    returnedVal = "y=f'(x" & ChrW$(&H2080) & ")" & ChrW$(183) & "(x-x" & ChrW$(&H2080) & ")+f(x" & ChrW$(&H2080) & ")     Tangent til f(x) til x=x" & ChrW$(&H2080)
 End Sub
 Sub Rib_FSexp1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=b" & ChrW(183) & "a" & ChrW(&H2E3) & "                  Eksponentiel funktion"
+    returnedVal = "y=b" & ChrW$(183) & "a" & ChrW$(&H2E3) & "                  Eksponentiel funktion"
 End Sub
 Sub Rib_FSexp2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=b" & ChrW(183) & "e" & ChrW(&H1D4F) & ChrW(&H2E3) & "                  Eksponentiel funktion"
+    returnedVal = "y=b" & ChrW$(183) & "e" & ChrW$(&H1D4F) & ChrW$(&H2E3) & "                  Eksponentiel funktion"
 End Sub
 Sub Rib_FSexp3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=b" & ChrW(183) & "2^(x/T" & ChrW(&H2082) & ")                  Eksponentiel funktion"
+    returnedVal = "y=b" & ChrW$(183) & "2^(x/T" & ChrW$(&H2082) & ")                  Eksponentiel funktion"
 End Sub
 Sub Rib_FSexp4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=b" & ChrW(183) & ChrW(189) & "^(x/T" & ChrW(189) & ")                  Eksponentiel funktion"
+    returnedVal = "y=b" & ChrW$(183) & ChrW$(189) & "^(x/T" & ChrW$(189) & ")                  Eksponentiel funktion"
 End Sub
 Sub Rib_FSexp5(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "a=(x" & ChrW(&H2082) & "-x" & ChrW(&H2081) & ")" & ChrW(&H221A) & "(y" & ChrW(&H2082) & "/y" & ChrW(&H2081) & ")   Beregning af a ud fra to kendte punkter (x" & ChrW(&H2081) & ",y" & ChrW(&H2081) & ") og (x" & ChrW(&H2082) & ",y" & ChrW(&H2082) & ")"
+    returnedVal = "a=(x" & ChrW$(&H2082) & "-x" & ChrW$(&H2081) & ")" & ChrW$(&H221A) & "(y" & ChrW$(&H2082) & "/y" & ChrW$(&H2081) & ")   Beregning af a ud fra to kendte punkter (x" & ChrW$(&H2081) & ",y" & ChrW$(&H2081) & ") og (x" & ChrW$(&H2082) & ",y" & ChrW$(&H2082) & ")"
 End Sub
 Sub Rib_FSexp6(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "T" & ChrW(&H2082) & "=ln(2)/ln(a)=ln(2)/k         Fordoblingskonstant"
+    returnedVal = "T" & ChrW$(&H2082) & "=ln(2)/ln(a)=ln(2)/k         Fordoblingskonstant"
 End Sub
 Sub Rib_FSexp7(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "T" & ChrW(189) & "=ln(" & ChrW(189) & ")/ln(a)=ln(" & ChrW(189) & ")/k             Halveringskonstant"
+    returnedVal = "T" & ChrW$(189) & "=ln(" & ChrW$(189) & ")/ln(a)=ln(" & ChrW$(189) & ")/k             Halveringskonstant"
 End Sub
 Sub Rib_FSpow1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "y=b" & ChrW(183) & "x" & ChrW(&HAA) & "                          potensfunktion ligning"
+    returnedVal = "y=b" & ChrW$(183) & "x" & ChrW$(&HAA) & "                          potensfunktion ligning"
 End Sub
 Sub Rib_FSpow2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "a=log(y" & ChrW(&H2082) & "/y" & ChrW(&H2081) & ")/log(x" & ChrW(&H2082) & "/x" & ChrW(&H2081) & ")   Beregning af a ud fra to kendte punkter (x" & ChrW(&H2081) & ",y" & ChrW(&H2081) & ") og (x" & ChrW(&H2082) & ",y" & ChrW(&H2082) & ")"
+    returnedVal = "a=log(y" & ChrW$(&H2082) & "/y" & ChrW$(&H2081) & ")/log(x" & ChrW$(&H2082) & "/x" & ChrW$(&H2081) & ")   Beregning af a ud fra to kendte punkter (x" & ChrW$(&H2081) & ",y" & ChrW$(&H2081) & ") og (x" & ChrW$(&H2082) & ",y" & ChrW$(&H2082) & ")"
 End Sub
 Sub Rib_FSpow3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "(1+r" & ChrW(&H1D67) & ")=(1+r" & ChrW(&H2093) & ")" & ChrW(&HAA) & "    "
+    returnedVal = "(1+r" & ChrW$(&H1D67) & ")=(1+r" & ChrW$(&H2093) & ")" & ChrW$(&HAA) & "    "
 End Sub
 Sub Rib_FSpol1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "x" & ChrW(&H1D7C) & "=-b/2a  ,  y" & ChrW(&H1D7C) & "=-d/4a    Toppunktets koordinater"
+    returnedVal = "x" & ChrW$(&H1D7C) & "=-b/2a  ,  y" & ChrW$(&H1D7C) & "=-d/4a    Toppunktets koordinater"
 End Sub
 
 Sub Rib_GetLabelGeometry(control As IRibbonControl, ByRef returnedVal)
@@ -989,10 +989,10 @@ Sub Rib_FSgeo1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "a/sin(A)=b/sin(B)          Sinus-relation"
 End Sub
 Sub Rib_FSgeo2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "c" & ChrW(&HB2) & "=a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "-2" & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "cos(C)    Cosinus-relation"
+    returnedVal = "c" & ChrW$(&HB2) & "=a" & ChrW$(&HB2) & "+b" & ChrW$(&HB2) & "-2" & ChrW$(183) & "a" & ChrW$(183) & "b" & ChrW$(183) & "cos(C)    Cosinus-relation"
 End Sub
 Sub Rib_FSgeo3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "T=" & ChrW(189) & ChrW(183) & "a" & ChrW(183) & "b" & ChrW(183) & "sin(C)           Areal af trekant givet vinkel og to sider omkring"
+    returnedVal = "T=" & ChrW$(189) & ChrW$(183) & "a" & ChrW$(183) & "b" & ChrW$(183) & "sin(C)           Areal af trekant givet vinkel og to sider omkring"
 End Sub
 
 Sub Rib_GetLabelProbabilityShort(control As IRibbonControl, ByRef returnedVal)
@@ -1008,41 +1008,41 @@ Sub Rib_FSChi2dist(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(483)
 End Sub
 Sub Rib_FSprob1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "K(n,r)" & ChrW(&H2261) & "n!/(r!" & ChrW(183) & "(n-r)!)    Binomialkoefficient"
+    returnedVal = "K(n,r)" & ChrW$(&H2261) & "n!/(r!" & ChrW$(183) & "(n-r)!)    Binomialkoefficient"
 End Sub
 Sub Rib_FSprob2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "p(r)=K(n,r)" & ChrW(183) & "p" & ChrW(&H2B3) & ChrW(183) & "(1-p)" & ChrW(&H207F) & ChrW(&H207B) & ChrW(&H2B3) & "   Frekvensfunktion"
+    returnedVal = "p(r)=K(n,r)" & ChrW$(183) & "p" & ChrW$(&H2B3) & ChrW$(183) & "(1-p)" & ChrW$(&H207F) & ChrW$(&H207B) & ChrW$(&H2B3) & "   Frekvensfunktion"
 End Sub
 Sub Rib_FSprob3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "P(m)=" & ChrW(&H3A3) & "K(n,r)" & ChrW(183) & "p" & ChrW(&H2B3) & ChrW(183) & "(1-p)" & ChrW(&H207F) & ChrW(&H207B) & ChrW(&H2B3) & "   Kumuleret"
+    returnedVal = "P(m)=" & ChrW$(&H3A3) & "K(n,r)" & ChrW$(183) & "p" & ChrW$(&H2B3) & ChrW$(183) & "(1-p)" & ChrW$(&H207F) & ChrW$(&H207B) & ChrW$(&H2B3) & "   Kumuleret"
 End Sub
 Sub Rib_FSprob4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = ChrW(&H3BC) & "=n" & ChrW(183) & "p    Middelvaerdi"
+    returnedVal = ChrW$(&H3BC) & "=n" & ChrW$(183) & "p    Middelvaerdi"
 End Sub
 Sub Rib_FSprob5(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = ChrW(&H3C3) & "=" & ChrW(&H221A) & "(n" & ChrW(183) & "p" & ChrW(183) & "(1-p))   Spredning"
+    returnedVal = ChrW$(&H3C3) & "=" & ChrW$(&H221A) & "(n" & ChrW$(183) & "p" & ChrW$(183) & "(1-p))   Spredning"
 End Sub
 Sub Rib_FSprob5a(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = ChrW(&H70) & ChrW(&H302) & ChrW(177) & "2" & ChrW(183) & ChrW(&H221A) & "(" & ChrW(&H70) & ChrW(&H302) & ChrW(183) & "(1-" & ChrW(&H70) & ChrW(&H302) & ")/n)       Usikkerhed til 95% konfidensinterval"
+    returnedVal = ChrW$(&H70) & ChrW$(&H302) & ChrW$(177) & "2" & ChrW$(183) & ChrW$(&H221A) & "(" & ChrW$(&H70) & ChrW$(&H302) & ChrW$(183) & "(1-" & ChrW$(&H70) & ChrW$(&H302) & ")/n)       Usikkerhed til 95% konfidensinterval"
 End Sub
 Sub Rib_FSprob6(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "f(x)=1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-" & ChrW(189) & "(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   frekvensfunktion"
+    returnedVal = "f(x)=1/" & ChrW$(&H221A) & "(2" & ChrW$(&H3C0) & "" & ChrW$(&H3C3) & ")" & ChrW$(183) & "e^(-" & ChrW$(189) & "(x-" & ChrW$(&H3BC) & "/" & ChrW$(&H3C3) & ")" & ChrW$(&HB2) & ")   frekvensfunktion"
 End Sub
 Sub Rib_FSprob7(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "F(x)=" & ChrW(&H222B) & "1/" & ChrW(&H221A) & "(2" & ChrW(&H3C0) & "" & ChrW(&H3C3) & ")" & ChrW(183) & "e^(-" & ChrW(189) & "(x-" & ChrW(&H3BC) & "/" & ChrW(&H3C3) & ")" & ChrW(&HB2) & ")   Kumuleret frekvensfunktion"
+    returnedVal = "F(x)=" & ChrW$(&H222B) & "1/" & ChrW$(&H221A) & "(2" & ChrW$(&H3C0) & "" & ChrW$(&H3C3) & ")" & ChrW$(183) & "e^(-" & ChrW$(189) & "(x-" & ChrW$(&H3BC) & "/" & ChrW$(&H3C3) & ")" & ChrW$(&HB2) & ")   Kumuleret frekvensfunktion"
 End Sub
 Sub Rib_FSprob8(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "p(x)=k" & ChrW(183) & "x" & ChrW(&H207F) & "" & ChrW(189) & "" & ChrW(&HB2) & ChrW(&H207B) & ChrW(&HB9) & ChrW(183) & "e" & ChrW(&H207B) & ChrW(&H2E3) & "" & ChrW(189) & "" & ChrW(&HB2) & "  frekvensfunktion med frihedsgrad n"
+    returnedVal = "p(x)=k" & ChrW$(183) & "x" & ChrW$(&H207F) & "" & ChrW$(189) & "" & ChrW$(&HB2) & ChrW$(&H207B) & ChrW$(&HB9) & ChrW$(183) & "e" & ChrW$(&H207B) & ChrW$(&H2E3) & "" & ChrW$(189) & "" & ChrW$(&HB2) & "  frekvensfunktion med frihedsgrad n"
 End Sub
 
 Sub Rib_FSinf1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "V=" & ChrW(&H3C0) & ChrW(&H222B) & "f(x)" & ChrW(&HB2) & "dx     Rumfang af omdrejningslegeme"
+    returnedVal = "V=" & ChrW$(&H3C0) & ChrW$(&H222B) & "f(x)" & ChrW$(&HB2) & "dx     Rumfang af omdrejningslegeme"
 End Sub
 Sub Rib_FSinf2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "s=" & ChrW(&H222B) & "" & ChrW(&H221A) & "1+(f'(x))" & ChrW(&HB2) & "dx     Kurvelaengde af f(x) i interval a-b"
+    returnedVal = "s=" & ChrW$(&H222B) & "" & ChrW$(&H221A) & "1+(f'(x))" & ChrW$(&HB2) & "dx     Kurvelaengde af f(x) i interval a-b"
 End Sub
 Sub Rib_FSinf3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "1/(b-a)" & ChrW(&H222B) & "f(x)dx     Middelvaerdi af f(x) i interval a-b"
+    returnedVal = "1/(b-a)" & ChrW$(&H222B) & "f(x)dx     Middelvaerdi af f(x) i interval a-b"
 End Sub
 
 
@@ -1279,49 +1279,49 @@ Sub Rib_FS3D(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(485)
 End Sub
 Sub Rib_FSvec1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "a" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+b" & ChrW(183) & "(y-y" & ChrW(&H2080) & ")=0     Ligning for en linje"
+    returnedVal = "a" & ChrW$(183) & "(x-x" & ChrW$(&H2080) & ")+b" & ChrW$(183) & "(y-y" & ChrW$(&H2080) & ")=0     Ligning for en linje"
 End Sub
 Sub Rib_FSvec2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "(x,y)=(x" & ChrW(&H2080) & ",y" & ChrW(&H2080) & ")+t" & ChrW(183) & "(r" & ChrW(&H2081) & ",r" & ChrW(&H2082) & ")     parameterfremstilling for en linje"
+    returnedVal = "(x,y)=(x" & ChrW$(&H2080) & ",y" & ChrW$(&H2080) & ")+t" & ChrW$(183) & "(r" & ChrW$(&H2081) & ",r" & ChrW$(&H2082) & ")     parameterfremstilling for en linje"
 End Sub
 Sub Rib_FSvec3(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "cos(V)=a" & ChrW(183) & "b/(|a||b|)     Vinkel mellem vektorer"
+    returnedVal = "cos(V)=a" & ChrW$(183) & "b/(|a||b|)     Vinkel mellem vektorer"
 End Sub
 Sub Rib_FSvec4(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "dist(P,l)=|a" & ChrW(183) & "x" & ChrW(&H2081) & "+b" & ChrW(183) & "y" & ChrW(&H2081) & "+c|/" & ChrW(&H221A) & "a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "     Afstand fra punkt til linje"
+    returnedVal = "dist(P,l)=|a" & ChrW$(183) & "x" & ChrW$(&H2081) & "+b" & ChrW$(183) & "y" & ChrW$(&H2081) & "+c|/" & ChrW$(&H221A) & "a" & ChrW$(&HB2) & "+b" & ChrW$(&HB2) & "     Afstand fra punkt til linje"
 End Sub
 Sub Rib_FSvec5(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "b_a=a" & ChrW(183) & "b/|a|" & ChrW(&HB2) & ChrW(183) & "a     Projektion af vektor b paa vektor a"
+    returnedVal = "b_a=a" & ChrW$(183) & "b/|a|" & ChrW$(&HB2) & ChrW$(183) & "a     Projektion af vektor b paa vektor a"
 End Sub
 Sub Rib_FSvec6(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "(x-x" & ChrW(&H2080) & ")" & ChrW(&HB2) & "+(y-y" & ChrW(&H2080) & ")" & ChrW(&HB2) & "=r" & ChrW(&HB2) & "     Cirklens ligning"
+    returnedVal = "(x-x" & ChrW$(&H2080) & ")" & ChrW$(&HB2) & "+(y-y" & ChrW$(&H2080) & ")" & ChrW$(&HB2) & "=r" & ChrW$(&HB2) & "     Cirklens ligning"
 End Sub
 Sub Rib_FSvec7(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "(x,y,z)=(x" & ChrW(&H2080) & ",y" & ChrW(&H2080) & ",z" & ChrW(&H2080) & ")+t" & ChrW(183) & "(r" & ChrW(&H2081) & ",r" & ChrW(&H2082) & ",r" & ChrW(&H2083) & ")     parameterfremstilling for en linje"
+    returnedVal = "(x,y,z)=(x" & ChrW$(&H2080) & ",y" & ChrW$(&H2080) & ",z" & ChrW$(&H2080) & ")+t" & ChrW$(183) & "(r" & ChrW$(&H2081) & ",r" & ChrW$(&H2082) & ",r" & ChrW$(&H2083) & ")     parameterfremstilling for en linje"
 End Sub
 Sub Rib_FSvec8(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "cos(V)=a" & ChrW(183) & "b/(|a||b|)     Vinkel mellem vektorer"
+    returnedVal = "cos(V)=a" & ChrW$(183) & "b/(|a||b|)     Vinkel mellem vektorer"
 End Sub
 Sub Rib_FSvec9(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "b_a=a" & ChrW(183) & "b/|a|" & ChrW(&HB2) & "" & ChrW(183) & "a     Projektion af vektor b paa vektor a"
+    returnedVal = "b_a=a" & ChrW$(183) & "b/|a|" & ChrW$(&HB2) & "" & ChrW$(183) & "a     Projektion af vektor b paa vektor a"
 End Sub
 Sub Rib_FSvec10(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "dist(P,l)=|r x P" & ChrW(&H2080) & "P|/r     afstand fra punkt til linje"
+    returnedVal = "dist(P,l)=|r x P" & ChrW$(&H2080) & "P|/r     afstand fra punkt til linje"
 End Sub
 Sub Rib_FSvec11(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "n" & ChrW(183) & "(x-x" & ChrW(&H2080) & ",y-y" & ChrW(&H2080) & ",z-z" & ChrW(&H2080) & ")     ligning for plan"
+    returnedVal = "n" & ChrW$(183) & "(x-x" & ChrW$(&H2080) & ",y-y" & ChrW$(&H2080) & ",z-z" & ChrW$(&H2080) & ")     ligning for plan"
 End Sub
 Sub Rib_FSvec12(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = " a" & ChrW(183) & "(x-x" & ChrW(&H2080) & ")+b" & ChrW(183) & "(y-y" & ChrW(&H2080) & ")+c" & ChrW(183) & "(z-z" & ChrW(&H2080) & ")=0     ligning for plan"
+    returnedVal = " a" & ChrW$(183) & "(x-x" & ChrW$(&H2080) & ")+b" & ChrW$(183) & "(y-y" & ChrW$(&H2080) & ")+c" & ChrW$(183) & "(z-z" & ChrW$(&H2080) & ")=0     ligning for plan"
 End Sub
 Sub Rib_FSvec13(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "dist(P," & ChrW(&H3B1) & ")=|n-(x" & ChrW(&H2081) & "-x" & ChrW(&H2080) & ",y" & ChrW(&H2081) & "-y" & ChrW(&H2080) & ",z" & ChrW(&H2081) & "-z" & ChrW(&H2080) & ")|/|n|     Afstand fra punkt til plan"
+    returnedVal = "dist(P," & ChrW$(&H3B1) & ")=|n-(x" & ChrW$(&H2081) & "-x" & ChrW$(&H2080) & ",y" & ChrW$(&H2081) & "-y" & ChrW$(&H2080) & ",z" & ChrW$(&H2081) & "-z" & ChrW$(&H2080) & ")|/|n|     Afstand fra punkt til plan"
 End Sub
 Sub Rib_FSvec14(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "dist(P," & ChrW(&H3B1) & ")=|a" & ChrW(183) & "x" & ChrW(&H2081) & "+b" & ChrW(183) & "y" & ChrW(&H2081) & "+c" & ChrW(183) & "z" & ChrW(&H2081) & "+d)|/" & ChrW(&H221A) & "(a" & ChrW(&HB2) & "+b" & ChrW(&HB2) & "+c" & ChrW(&HB2) & ")     Afstand fra punkt til plan"
+    returnedVal = "dist(P," & ChrW$(&H3B1) & ")=|a" & ChrW$(183) & "x" & ChrW$(&H2081) & "+b" & ChrW$(183) & "y" & ChrW$(&H2081) & "+c" & ChrW$(183) & "z" & ChrW$(&H2081) & "+d)|/" & ChrW$(&H221A) & "(a" & ChrW$(&HB2) & "+b" & ChrW$(&HB2) & "+c" & ChrW$(&HB2) & ")     Afstand fra punkt til plan"
 End Sub
 Sub Rib_FSvec15(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "(x-x" & ChrW(&H2080) & ")" & ChrW(&HB2) & "+(y-y" & ChrW(&H2080) & ")" & ChrW(&HB2) & "+(z-z" & ChrW(&H2080) & ")" & ChrW(&HB2) & "=r" & ChrW(&HB2) & "     Kuglens ligning"
+    returnedVal = "(x-x" & ChrW$(&H2080) & ")" & ChrW$(&HB2) & "+(y-y" & ChrW$(&H2080) & ")" & ChrW$(&HB2) & "+(z-z" & ChrW$(&H2080) & ")" & ChrW$(&HB2) & "=r" & ChrW$(&HB2) & "     Kuglens ligning"
 End Sub
 
 Sub Rib_GetLabelMath(control As IRibbonControl, ByRef returnedVal As Variant)
