@@ -3,7 +3,7 @@ Option Explicit
 Sub OmdrejningsLegeme()
     Dim Kommando As String
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     Dim DefList As String
 
@@ -38,9 +38,9 @@ Sub OmdrejningsLegeme()
         If Len(Udtryk) > 0 Then
             If InStr(Udtryk, "matrix") < 1 Then
                 If InStr(Udtryk, "=") > 0 Then
-                    Arr = Split(Udtryk, "=")
-                    LHS = Arr(0)
-                    RHS = Arr(1)
+                    arr = Split(Udtryk, "=")
+                    LHS = arr(0)
+                    RHS = arr(1)
                     ea.text = LHS
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
@@ -97,8 +97,8 @@ Sub OmdrejningsLegeme()
     i = 0
     Do While i < omax.KommandoArrayLength + 1
         Kommando = omax.KommandoArray(i)
-        Arr = Split(Kommando, "=")
-        If Len(Kommando) > 0 Then Kommando = Arr(UBound(Arr))
+        arr = Split(Kommando, "=")
+        If Len(Kommando) > 0 Then Kommando = arr(UBound(arr))
         
         Kommando = Replace(Kommando, vbLf, "")
         Kommando = Replace(Kommando, vbCrLf, "")
@@ -124,7 +124,7 @@ End Sub
 
 Sub Plot3DGraph()
     Dim forskrifter As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim i As Integer
     On Error GoTo fejl
     
@@ -134,13 +134,13 @@ Sub Plot3DGraph()
     forskrifter = omax.FindDefinitions
     If Len(forskrifter) > 3 Then
 '        forskrifter = mid$(forskrifter, 2, Len(forskrifter) - 3) 'removed 1.33
-        Arr = Split(forskrifter, ListSeparator)
+        arr = Split(forskrifter, ListSeparator)
         forskrifter = ""
     
-        For i = 0 To UBound(Arr)
-            If InStr(Arr(i), "):") > 0 Then
-                Arr(i) = Replace(Arr(i), ":=", "=")
-                forskrifter = forskrifter & omax.ConvertToWordSymbols(Arr(i)) & "#$"
+        For i = 0 To UBound(arr)
+            If InStr(arr(i), "):") > 0 Then
+                arr(i) = Replace(arr(i), ":=", "=")
+                forskrifter = forskrifter & omax.ConvertToWordSymbols(arr(i)) & "#$"
             End If
         Next
     End If
@@ -156,12 +156,12 @@ Sub Plot3DGraph()
     
     
     If Len(forskrifter) > 1 Then
-        Arr = Split(forskrifter, "#$")
-        For i = 0 To UBound(Arr)
-            Arr(i) = Replace(Arr(i), " ", "")
-            If Arr(i) <> "" Then
+        arr = Split(forskrifter, "#$")
+        For i = 0 To UBound(arr)
+            arr(i) = Replace(arr(i), " ", "")
+            If arr(i) <> "" Then
 '                If MsgBox2(TT.A(374) & ": " & Arr(i) & " ?", vbYesNo, TT.A(375) & "?") = vbYes Then
-                    Insert3DEquation (Arr(i))
+                    Insert3DEquation (arr(i))
 '                End If
             End If
         Next
@@ -175,7 +175,7 @@ slut:
 End Sub
 
 Sub Insert3DEquation(Equation As String)
-    Dim LHS As String, RHS As String, Arr() As String, p As Integer
+    Dim LHS As String, RHS As String, arr() As String, p As Integer
     Dim ea As New ExpressionAnalyser, s As String
     Dim tbx As TextBox, tby As TextBox, tbz As TextBox, tbtmin As TextBox, tbtmax As TextBox, tbsmin As TextBox, tbsmax As TextBox
     Dim px As String, py As String, pz As String
@@ -183,9 +183,9 @@ Sub Insert3DEquation(Equation As String)
     If Equation = vbNullString Then Exit Sub
     
     Equation = Replace(Equation, ChrW$(9632), ChrW$(9608)) ' two different symbols used for vectors. Otherwise syntax is the same
-    Arr = Split(Equation, "=")
-    LHS = LCase$(Replace(Replace(Trim$(Arr(0)), " ", ""), ";", ","))
-    If UBound(Arr) > 0 Then RHS = Arr(1)
+    arr = Split(Equation, "=")
+    LHS = LCase$(Replace(Replace(Trim$(arr(0)), " ", ""), ";", ","))
+    If UBound(arr) > 0 Then RHS = arr(1)
 
     p = InStr(LHS, ChrW$(9608)) ' vector symbol
 
@@ -197,21 +197,21 @@ Sub Insert3DEquation(Equation As String)
             ea.text = LHS
             s = ea.GetNextBracketContent
             If InStr(s, "¦") > 0 Then
-                Arr = Split(s, "¦")
-                If UBound(Arr) = 2 Then
-                    px = px & Arr(0)
-                    py = py & Arr(1)
-                    pz = py & Arr(2)
+                arr = Split(s, "¦")
+                If UBound(arr) = 2 Then
+                    px = px & arr(0)
+                    py = py & arr(1)
+                    pz = py & arr(2)
                 End If
             End If
         Else ' Normal vector input
             ea.text = LHS
             s = ea.GetNextBracketContent(p)
-            Arr = Split(s, "@")
-            If UBound(Arr) = 2 Then
-                px = Arr(0)
-                py = Arr(1)
-                pz = Arr(2)
+            arr = Split(s, "@")
+            If UBound(arr) = 2 Then
+                px = arr(0)
+                py = arr(1)
+                pz = arr(2)
             End If
         End If
         If InStr(LHS, "t") > 0 Then ' if t in expression it is probably parametric plot

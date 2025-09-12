@@ -1475,7 +1475,7 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
     AddSetting s, "UseVBACAS", SettUseVBACAS
     AddSetting s, "CASengine", CASengine
     AddSetting s, "DllConnType", DllConnType
-    AddSetting s, "InstallLocation", InstallLocation
+'    AddSetting s, "InstallLocation", InstallLocation
     AddSetting s, "DecOutType", MaximaDecOutType
     AddSetting s, "SigFig", MaximaCifre
     AddSetting s, "Exact", MaximaExact
@@ -1492,7 +1492,7 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
     AddSetting s, "ShowAssum", ShowAssum
     AddSetting s, "dAsDiffChr", dAsDiffChr
     AddSetting s, "LastUpdateCheck", LastUpdateCheck
-    AddSetting s, "GangeTegn", MaximaGangeTegn
+    AddSetting s, "GangeTegn", GetRegSetting("Gangetegn")
     
     AddSetting s, "Forklaring", MaximaForklaring
     AddSetting s, "MaximaCommand", MaximaKommando
@@ -1532,12 +1532,12 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
     AddSetting s, "LatexWordMargins", LatexWordMargins
     AddSetting s, "LatexTitlePage", LatexTitlePage
     AddSetting s, "LatexToc", LatexTOC
-    AddSetting s, "ShowMenus", GetRegSetting("ShowMenus")
-    AddSetting s, "FormelFag", GetRegSetting("FormelFag")
-    AddSetting s, "FormelMatNiveau", GetRegSetting("FormelMatNiveau")
-    AddSetting s, "FormelFysNiveau", GetRegSetting("FormelFysNiveau")
-    AddSetting s, "FormelKemiNiveau", GetRegSetting("FormelKemiNiveau")
-    AddSetting s, "FormelUddannelse", GetRegSetting("FormelUddannelse")
+    AddSetting s, "ShowMenus", GetRegSettingString("ShowMenus")
+    AddSetting s, "FormelFag", GetRegSettingString("FormelFag")
+    AddSetting s, "FormelMatNiveau", GetRegSettingString("FormelMatNiveau")
+    AddSetting s, "FormelFysNiveau", GetRegSettingString("FormelFysNiveau")
+    AddSetting s, "FormelKemiNiveau", GetRegSettingString("FormelKemiNiveau")
+    AddSetting s, "FormelUddannelse", GetRegSettingString("FormelUddannelse")
     AddSetting s, "FormelSamlingClose", GetRegSetting("FormelSamlingClose")
     AddSetting s, "FormelSamlingDouble", GetRegSetting("FormelSamlingDouble")
     AddSetting s, "FormelSamlingEnheder", GetRegSetting("FormelSamlingEnheder")
@@ -1545,7 +1545,7 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
     AddSetting s, "UseCodeFile", UseCodeFile
     AddSetting s, "UseCodeBlocks", UseCodeBlocks
     
-    AddSetting s, "AntalBeregninger", Antalberegninger
+'    AddSetting s, "AntalBeregninger", Antalberegninger
 '    AddSetting s, "",
     
     WriteTextfileToString SettingsFileName, s
@@ -1554,7 +1554,7 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
 #End If
 End Sub
 Function LoadSettingsFromFile(filePath As String, Optional Silent As Boolean = False, Optional SaveToReg As Boolean = False) As Boolean
-    Dim s As String, Arr() As String, Arr2() As String, i As Integer
+    Dim s As String, arr() As String, Arr2() As String, i As Integer
     On Error GoTo fejl
     If filePath = vbNullString Then
 #If Mac Then
@@ -1572,11 +1572,11 @@ Function LoadSettingsFromFile(filePath As String, Optional Silent As Boolean = F
     End If
     s = ReadTextfileToString(filePath)
     
-    Arr = Split(s, vbCrLf)
+    arr = Split(s, vbCrLf)
     
-    For i = 0 To UBound(Arr)
-        If Left$(Trim$(Arr(i)), 1) <> "#" Then
-            Arr2 = Split(Arr(i), "=")
+    For i = 0 To UBound(arr)
+        If Left$(Trim$(arr(i)), 1) <> "#" Then
+            Arr2 = Split(arr(i), "=")
             If UBound(Arr2) > 0 Then
                 SetSetting Arr2(0), Arr2(1), SaveToReg
             End If
@@ -1749,7 +1749,8 @@ Private Sub SetSetting(Sett As String, SettVal As String, Optional SaveToReg As 
     ElseIf Sett = "FormelSamlingKonstanter" Then
         SetRegSettingString Sett, SettVal
     ElseIf Sett = "ShowMenus" Then
-        RegKeySave "ShowMenus", SettVal
+        SetRegSettingString Sett, SettVal
+'        RegKeySave "ShowMenus", SettVal
     ElseIf Sett = "UseCodeFile" Then
         mUseCodeFile = SettVal
         If SaveToReg Then UseCodeFile = mUseCodeFile

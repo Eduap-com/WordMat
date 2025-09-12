@@ -84,9 +84,9 @@ End Sub
 
 Private Sub GeoGebraPlot()
     Dim s As String, i As Long, xl As String, yl As String, j As Long
-    Dim Y As Double, Ymax As Double, Ymin As Double
-    Ymax = -10000000
-    Ymin = 10000000
+    Dim Y As Double, ymax As Double, ymin As Double
+    ymax = -10000000
+    ymin = 10000000
     Erase PointArr
     If Not SolveDE Then ' first calculate points with Maxima
         MsgBox Err.Description, vbOKOnly, "Error calculating points"
@@ -108,11 +108,11 @@ Private Sub GeoGebraPlot()
         If (j = 1 And CheckBox1.Value) Or (j = 2 And CheckBox2.Value) Or (j = 3 And CheckBox3.Value) Then
         For i = 0 To UBound(PointArr)
             Y = val(Trim$(Replace(Replace(PointArr(i, j), ",", "."), ChrW$(183), "*")))
-            If Y > Ymax Then
-               Ymax = Y
+            If Y > ymax Then
+               ymax = Y
             End If
-            If Y < Ymin Then
-               Ymin = Y
+            If Y < ymin Then
+               ymin = Y
             End If
             yl = yl & Replace(Y, ",", ".") & ","
         Next
@@ -128,8 +128,8 @@ Private Sub GeoGebraPlot()
       If TextBox_ymin.text <> "" And TextBox_ymax.text <> "" Then
          s = s & ";ZoomIn(" & Replace(TextBox_xmin.text, ",", ".") & "," & Replace(TextBox_ymin.text, ",", ".") & "," & Replace(TextBox_xmax.text, ",", ".") & "," & Replace(TextBox_ymax.text, ",", ".") & ");ZoomIn(0.9)" 'ggbApplet.setCoordinateSystem(0,1000,0,1000)
       Else
-         If Ymin > 0 And (Ymax - Ymin) > Ymin Then Ymin = 0
-         s = s & ";ZoomIn(" & Replace(TextBox_xmin.text, ",", ".") & "," & Replace(Ymin, ",", ".") & "," & Replace(TextBox_xmax.text, ",", ".") & "," & Replace(Ymax, ",", ".") & ");ZoomIn(0.9)" 'ggbApplet.setCoordinateSystem(0,1000,0,1000)
+         If ymin > 0 And (ymax - ymin) > ymin Then ymin = 0
+         s = s & ";ZoomIn(" & Replace(TextBox_xmin.text, ",", ".") & "," & Replace(ymin, ",", ".") & "," & Replace(TextBox_xmax.text, ",", ".") & "," & Replace(ymax, ",", ".") & ");ZoomIn(0.9)" 'ggbApplet.setCoordinateSystem(0,1000,0,1000)
       End If
         OpenGeoGebraWeb s, "", False, False
         Label_wait.Caption = "GeoGebra opened"
@@ -633,7 +633,7 @@ Function SolveDE() As Boolean
     ListOutput = omax.MaximaOutput
     
     Dim s As String, i As Long, j As Integer
-    Dim Arr As Variant
+    Dim arr As Variant
     ReDim PointArr(Npoints, n)
     ea.text = ListOutput
     ea.SetSquareBrackets
@@ -642,9 +642,9 @@ Function SolveDE() As Boolean
     End If
     Do
         s = ea.GetNextBracketContent(0)
-        Arr = Split(s, ListSeparator)
+        arr = Split(s, ListSeparator)
         For j = 0 To n 'UBound(Arr)
-            PointArr(i, j) = Arr(j)
+            PointArr(i, j) = arr(j)
         Next
         i = i + 1
     Loop While ea.pos < ea.Length - 1 And i < 10000
@@ -847,7 +847,7 @@ Sub OpdaterDefinitioner()
     Dim Vars As String
    Dim Var As String, var2 As String
    Dim ea As New ExpressionAnalyser
-   Dim Arr As Variant
+   Dim arr As Variant
    Dim i As Integer, s As String
    Validate
     
@@ -879,15 +879,15 @@ Sub OpdaterDefinitioner()
    Do While right$(TextBox_definitioner.text, 2) = VbCrLfMac
       TextBox_definitioner.text = Left$(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
    Loop
-   Arr = Split(TextBox_definitioner.text, VbCrLfMac)
+   arr = Split(TextBox_definitioner.text, VbCrLfMac)
    
-   For i = 0 To UBound(Arr) ' If variable is included in def, it must be removed
-      If Arr(i) <> "" Then
-         var2 = Split(Arr(i), "=")(0)
+   For i = 0 To UBound(arr) ' If variable is included in def, it must be removed
+      If arr(i) <> "" Then
+         var2 = Split(arr(i), "=")(0)
          If var2 = TextBox_varx.text Then
-            Arr(i) = ""
+            arr(i) = ""
          End If
-         If Arr(i) <> "" Then s = s & Arr(i) & VbCrLfMac
+         If arr(i) <> "" Then s = s & arr(i) & VbCrLfMac
       End If
    Next
    Do While right$(s, 2) = vbCrLf
@@ -895,13 +895,13 @@ Sub OpdaterDefinitioner()
    Loop
    TextBox_definitioner.text = s
    
-   Arr = Split(TextBox_definitioner.text, VbCrLfMac)
+   arr = Split(TextBox_definitioner.text, VbCrLfMac)
    Do
       Var = ea.GetNextListItem(ea.pos)
       Var = Replace(Var, vbCrLf, "")
-      For i = 0 To UBound(Arr)
-         If Arr(i) <> "" Then
-            var2 = Split(Arr(i), "=")(0)
+      For i = 0 To UBound(arr)
+         If arr(i) <> "" Then
+            var2 = Split(arr(i), "=")(0)
             If var2 = Var Then
                Var = ""
                Exit For

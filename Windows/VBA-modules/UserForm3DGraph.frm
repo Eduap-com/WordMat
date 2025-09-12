@@ -45,7 +45,7 @@ Sub SetEscEvents(ControlColl As Controls)
     Next
 End Sub
 Private Sub CommandButton_geogebra_Click()
-    Dim s As String, vekt As String, Arr() As String, i As Integer, j As Integer
+    Dim s As String, vekt As String, arr() As String, i As Integer, j As Integer
     Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String, cmd As String
     Dim sl As New CSortList, DefList As String, Var As String, k As Integer, fktudtryk As String, UrlLink As String, p As Integer
     
@@ -119,29 +119,29 @@ Private Sub CommandButton_geogebra_Click()
     'vectors
     If TextBox_vektorer.text <> "" Then
         vekt = TextBox_vektorer.text
-        Arr = Split(vekt, VbCrLfMac)
-        For i = 0 To UBound(Arr)
-            If Arr(i) <> "" Then
-                If InStr(Arr(i), ";") > 0 Then
-                    Arr(i) = Replace(Arr(i), ",", ".")
-                    Arr(i) = Replace(Arr(i), ";", ",")
+        arr = Split(vekt, VbCrLfMac)
+        For i = 0 To UBound(arr)
+            If arr(i) <> "" Then
+                If InStr(arr(i), ";") > 0 Then
+                    arr(i) = Replace(arr(i), ",", ".")
+                    arr(i) = Replace(arr(i), ";", ",")
                 Else
-                    ea.text = Arr(i)
+                    ea.text = arr(i)
                     j = ea.CountText(",")
                     If Not (j = 2 Or j = 4) Then
                         ea.ConvertDecSeparator
-                        Arr(i) = ea.text
+                        arr(i) = ea.text
                     End If
                 End If
-                If InStr(Arr(i), ")(") > 0 Then
-                    Arr(i) = Replace(Arr(i), ")(", "),(")
+                If InStr(arr(i), ")(") > 0 Then
+                    arr(i) = Replace(arr(i), ")(", "),(")
                 Else
-                    Arr(i) = "(0,0,0)," & Arr(i)
+                    arr(i) = "(0,0,0)," & arr(i)
                 End If
-                Arr(i) = Replace(Arr(i), "(", "(")
-                Arr(i) = Replace(Arr(i), ")", ")")
+                arr(i) = Replace(arr(i), "(", "(")
+                arr(i) = Replace(arr(i), ")", ")")
             
-                s = s & "vector(" & Arr(i) & ");"
+                s = s & "vector(" & arr(i) & ");"
             End If
         Next
     End If
@@ -349,8 +349,8 @@ Dim pary As String
 Dim parz As String
 Dim xmin As String
 Dim xmax As String
-Dim Ymin As String
-Dim Ymax As String
+Dim ymin As String
+Dim ymax As String
 Dim zmin As String
 Dim zmax As String
 Dim tmin As String
@@ -359,7 +359,7 @@ Dim smin As String
 Dim smax As String
 Dim punkttekst As String
 Dim antalobj As Integer
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer, j As Integer
 Dim ea As New ExpressionAnalyser
 
@@ -371,8 +371,8 @@ palindex = 0
 
 xmin = TextBox_xmin.text
 xmax = TextBox_xmax.text
-Ymin = TextBox_ymin.text
-Ymax = TextBox_ymax.text
+ymin = TextBox_ymin.text
+ymax = TextBox_ymax.text
 zmin = TextBox_zmin.text
 zmax = TextBox_zmax.text
 
@@ -382,7 +382,7 @@ If TextBox_forskrift1.text <> "" Then
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & "),"
     antalobj = antalobj + 1
 End If
 If TextBox_forskrift2.text <> "" Then
@@ -390,7 +390,7 @@ If TextBox_forskrift2.text <> "" Then
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & "),"
     antalobj = antalobj + 1
 End If
 If TextBox_forskrift3.text <> "" Then
@@ -398,7 +398,7 @@ If TextBox_forskrift3.text <> "" Then
     If CheckBox_udtryk.Value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & "),"
     antalobj = antalobj + 1
 End If
 
@@ -411,7 +411,7 @@ If TextBox_ligning1.text <> "" Then
     If OptionButton_kunflader.Value Then
         grafobj = grafobj & "enhanced3d=[" & GetNextEnhFunc() & ", x, y, z],"
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & ",z," & zmin & "," & zmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ",z," & zmin & "," & zmax & "),"
     antalobj = antalobj + 1
 End If
 If TextBox_ligning2.text <> "" Then
@@ -422,7 +422,7 @@ If TextBox_ligning2.text <> "" Then
     If OptionButton_kunflader.Value Then
         grafobj = grafobj & "enhanced3d=[" & GetNextEnhFunc() & ", x, y, z],"
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & ",z," & zmin & "," & zmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ",z," & zmin & "," & zmax & "),"
     antalobj = antalobj + 1
 End If
 If TextBox_ligning3.text <> "" Then
@@ -433,7 +433,7 @@ If TextBox_ligning3.text <> "" Then
     If OptionButton_kunflader.Value Then
         grafobj = grafobj & "enhanced3d=[" & GetNextEnhFunc() & ", x, y, z],"
     End If
-    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & Ymin & "," & Ymax & ",z," & zmin & "," & zmax & "),"
+    grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ",z," & zmin & "," & zmax & "),"
     antalobj = antalobj + 1
 End If
 
@@ -509,35 +509,35 @@ If TextBox_vektorer.text <> "" Then
         grafobj = grafobj & "surface_hide = false,"
     End If
     vekt = TextBox_vektorer.text
-    Arr = Split(vekt, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-            If InStr(Arr(i), ";") > 0 Then
-                Arr(i) = Replace(Arr(i), ",", ".")
-                Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(vekt, VbCrLfMac)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+            If InStr(arr(i), ";") > 0 Then
+                arr(i) = Replace(arr(i), ",", ".")
+                arr(i) = Replace(arr(i), ";", ",")
             Else
-                ea.text = Arr(i)
+                ea.text = arr(i)
                 j = ea.CountText(",")
                 If Not (j = 2 Or j = 4) Then
                     ea.ConvertDecSeparator
-                    Arr(i) = ea.text
+                    arr(i) = ea.text
                 End If
             End If
-            If InStr(Arr(i), ")(") > 0 Then
-                Arr(i) = Replace(Arr(i), ")(", "],[")
+            If InStr(arr(i), ")(") > 0 Then
+                arr(i) = Replace(arr(i), ")(", "],[")
             Else
-                Arr(i) = "[0,0,0]," & Arr(i)
+                arr(i) = "[0,0,0]," & arr(i)
             End If
-            Arr(i) = Replace(Arr(i), "(", "[")
-            Arr(i) = Replace(Arr(i), ")", "]")
+            arr(i) = Replace(arr(i), "(", "[")
+            arr(i) = Replace(arr(i), ")", "]")
             
             If CheckBox_udtryk.Value Then
-                grafobj = grafobj & "key=""Vektor: " & Arr(i) & ""","
+                grafobj = grafobj & "key=""Vektor: " & arr(i) & ""","
             Else
                 grafobj = grafobj & "key="""","
             End If
             grafobj = grafobj & "color=" & GetNextColor & ","
-            grafobj = grafobj & "vector(" & Arr(i) & "),"
+            grafobj = grafobj & "vector(" & arr(i) & "),"
         End If
     Next
     antalobj = antalobj + 1
@@ -621,7 +621,7 @@ End If
         s = s & "xrange=[" & xmin & "," & xmax & "],"
     End If
     If TextBox_ymin.text <> vbNullString And TextBox_ymax.text <> vbNullString Then
-        s = s & "yrange=[" & Ymin & "," & Ymax & "],"
+        s = s & "yrange=[" & ymin & "," & ymax & "],"
     End If
     If TextBox_zmin.text <> vbNullString And TextBox_zmax.text <> vbNullString Then
         s = s & "zrange=[" & zmin & "," & zmax & "],"

@@ -399,7 +399,7 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     Dim posca As Integer
     Dim poseller As Integer
     Dim pos As Integer
-    Dim Arr(20) As String
+    Dim arr(20) As String
     Dim i As Integer
     
     Do ' go back to nearest equal sign
@@ -419,11 +419,11 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
         End If
         If pos = Len(text) Then pos = 0
         If pos > 0 Then
-            Arr(i) = Left$(text, pos - 1)
+            arr(i) = Left$(text, pos - 1)
             text = right$(text, Len(text) - pos)
             i = i + 1
         Else
-            Arr(i) = text
+            arr(i) = text
         End If
     Loop While pos > 0
     
@@ -432,7 +432,7 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
         KlipTilLigmed = text
         ResIndex = -1
     Else
-        KlipTilLigmed = Arr(i - indeks)
+        KlipTilLigmed = arr(i - indeks)
     End If
     
     ' remove returns and spaces etc.
@@ -725,16 +725,16 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
         GoTo slut
     End If
    
-   Dim MajorVersion As Integer, MinorVersion As Integer, AppPatchVersion As Integer, Arr() As String
+   Dim MajorVersion As Integer, MinorVersion As Integer, AppPatchVersion As Integer, arr() As String
    Dim NewMajorVersion As Integer, NewMinorVersion As Integer, NewPatchVersion As Integer, NewEkstraInfoVersion As Integer
-   Arr = Split(AppVersion & PatchVersion, ".")
-   MajorVersion = CInt(Arr(0))
-   If UBound(Arr) > 0 Then MinorVersion = CInt(Arr(1))
-   If UBound(Arr) > 1 Then AppPatchVersion = CInt(Arr(2))
-   Arr = Split(NewVersion, ".")
-   NewMajorVersion = CInt(Arr(0))
-   If UBound(Arr) > 0 Then NewMinorVersion = CInt(Arr(1))
-   If UBound(Arr) > 1 Then NewPatchVersion = CInt(Arr(2))
+   arr = Split(AppVersion & PatchVersion, ".")
+   MajorVersion = CInt(arr(0))
+   If UBound(arr) > 0 Then MinorVersion = CInt(arr(1))
+   If UBound(arr) > 1 Then AppPatchVersion = CInt(arr(2))
+   arr = Split(NewVersion, ".")
+   NewMajorVersion = CInt(arr(0))
+   If UBound(arr) > 0 Then NewMinorVersion = CInt(arr(1))
+   If UBound(arr) > 1 Then NewPatchVersion = CInt(arr(2))
    
    If NewMajorVersion > MajorVersion Then
         UpdateNow = True
@@ -1255,7 +1255,7 @@ End Sub
 Sub SetEquationNumber()
 On Error GoTo fejl
     Application.ScreenUpdating = False
-    Dim F As Field, f2 As Field, n As String, p As Integer, Arr As Variant
+    Dim F As Field, f2 As Field, n As String, p As Integer, arr As Variant
     
     If Selection.Fields.Count = 0 Then
         MsgBox TT.A(345), vbOKOnly, TT.Error
@@ -1275,12 +1275,12 @@ On Error GoTo fejl
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(TT.A(346), TT.A(6), F.result & "." & f2.result)
-            Arr = Split(n, ".")
-            If UBound(Arr) > 0 Then
-                SetFieldNo F, CStr(Arr(0))
-                SetFieldNo f2, CStr(Arr(1))
+            arr = Split(n, ".")
+            If UBound(arr) > 0 Then
+                SetFieldNo F, CStr(arr(0))
+                SetFieldNo f2, CStr(arr(1))
             Else
-                SetFieldNo F, CStr(Arr(0))
+                SetFieldNo F, CStr(arr(0))
             End If
         Else
             n = InputBox(TT.A(346), TT.A(6), F.result)
@@ -1795,5 +1795,29 @@ Sub TestUTF8Write()
     s = "Hello µ world €"
     
     WriteUTF8File "/Users/yourname/Desktop/test_utf8.txt", s
+End Sub
+
+Sub SpeedTest()
+Dim t1 As Single, t2 As Single, i As Long, n As Long, s As String
+    n = 1000000
+    
+    s = "Dette er en streng"
+    
+    t1 = timer
+    For i = 0 To n
+'        s = Replace(s, "en", "et")
+        s = vbNewLine
+    Next
+    t1 = timer - t1
+    
+    t2 = timer
+    For i = 0 To n
+'        If InStr(s, "en") <> 0 Then s = Replace(s, "en", "et")
+        s = ChrW$(183)
+    Next
+    t2 = timer - t2
+    
+    MsgBox "t1: " & t1 & vbNewLine & "t2: " & t2 & vbNewLine & "Factor t1/t2: " & t1 / t2, vbOKOnly, "Speedtest"
+    
 End Sub
 

@@ -455,7 +455,7 @@
 454#£Define function
 455#£Define physical constants
 456#£Reduce
-457#£
+457#£Q-value contribution
 458#£Differentiate
 459#£Integrate
 460#£Plotting
@@ -542,7 +542,7 @@
 541#£Import settings
 542#£Export settings
 543#£Customize menu
-544#£
+544#£Sine Fitting
 545#£Plot graph (Alt+P)
 546#£Shows the graph for the selected function(s)/equation(s) and points. The graph can then be inserted into the document. Several graph programs are supported. Choose your favorite under settings.
 547#£Plot using GnuPlot

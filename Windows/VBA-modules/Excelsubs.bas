@@ -24,54 +24,61 @@ Sub Chi2Test()
     InsertOpenExcel "chi2test.xltm"
 #Else
     Dim s As String
-    Dim Arr As Variant
+    Dim arr As Variant
     Dim r As Integer
     Dim c As Integer
     
-On Error GoTo fejl
+    On Error GoTo fejl
 
-Dim signiv As Integer
-signiv = InputBox(TT.A(349), TT.A(350), "5")
-If Selection.Tables.Count = 0 Then
-    s = InputBox(TT.A(351), TT.A(352), "2x2")
-    Arr = Split(s, "x")
-    If UBound(Arr) < 1 Then Arr = Split(s, ",")
-    r = Arr(0)
-    c = Arr(1)
-End If
+    Dim signiv As Integer
+    s = InputBox(TT.A(349), TT.A(350), "5")
+    If Trim$(s) = vbNullString Then GoTo slut
+    If Not IsNumeric(s) Then GoTo slut
+    signiv = CInt(s)
+    
+    If Selection.Tables.Count = 0 Then
+        s = InputBox(TT.A(351), TT.A(352), "2x2")
+        arr = Split(s, "x")
+        If UBound(arr) < 1 Then arr = Split(s, ",")
+        If UBound(arr) < 1 Then GoTo slut
+        If Not IsNumeric(arr(0)) Then GoTo slut
+        If Not IsNumeric(arr(1)) Then GoTo slut
+        r = arr(0)
+        c = arr(1)
+    End If
 
-'Application.ScreenUpdating = False
+    'Application.ScreenUpdating = False
 
-If signiv <= 0 Then Exit Sub
-Dim cxl As New CExcel
-'cxl.vis = False
-cxl.vis = True
-cxl.NewFile
-If r = 0 Or c = 0 Then
-    cxl.GetTableData
-End If
+    If signiv <= 0 Then Exit Sub
+    Dim cxl As New CExcel
+    'cxl.vis = False
+    cxl.vis = True
+    cxl.NewFile
+    If r = 0 Or c = 0 Then
+        cxl.GetTableData
+    End If
     cxl.Chi2Test signiv / 100, r, c
 
-If r > 0 And c > 0 Then GoTo slut
+    If r > 0 And c > 0 Then GoTo slut
 
-Selection.Collapse
-Selection.InsertAfter TT.A(353) & vbCrLf
-Selection.InsertAfter TT.A(354) & ": " & vbTab & cxl.p & " = " & cxl.p * 100 & "%" & vbCrLf
+    Selection.Collapse
+    Selection.InsertAfter TT.A(353) & vbCrLf
+    Selection.InsertAfter TT.A(354) & ": " & vbTab & cxl.p & " = " & cxl.p * 100 & "%" & vbCrLf
 
-If cxl.p * 100 < signiv Then
-    Selection.InsertAfter TT.A(355) & " " & signiv & TT.A(356) & vbCrLf
-Else
-    Selection.InsertAfter TT.A(355) & " " & signiv & TT.A(357) & vbCrLf
-End If
-If cxl.Below5 Or cxl.sum < 50 Then
-    Selection.InsertAfter TT.A(358) & vbCrLf
-End If
+    If cxl.p * 100 < signiv Then
+        Selection.InsertAfter TT.A(355) & " " & signiv & TT.A(356) & vbCrLf
+    Else
+        Selection.InsertAfter TT.A(355) & " " & signiv & TT.A(357) & vbCrLf
+    End If
+    If cxl.Below5 Or cxl.sum < 50 Then
+        Selection.InsertAfter TT.A(358) & vbCrLf
+    End If
 
-GoTo slut
+    GoTo slut
 fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
-Application.ScreenUpdating = True
+    Application.ScreenUpdating = True
 #End If
 End Sub
 Sub Chi2GrafNoLoad()

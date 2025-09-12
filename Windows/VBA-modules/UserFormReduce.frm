@@ -53,7 +53,7 @@ Private Sub CommandButton_annuller_Click()
     Me.hide
 End Sub
 Sub ExecuteOK()
-    Dim Arr() As String, i As Integer
+    Dim arr() As String, i As Integer
     annuller = False
     SammeLinje = CheckBox_sammelinje.Value
 
@@ -88,11 +88,11 @@ Sub ExecuteOK()
     TempDefs = Trim$(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    Arr = Split(TempDefs, VbCrLfMac)
+    arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
-    For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right$(Arr(i), 1) = "=" Then
-            TempDefs = TempDefs & Arr(i) & ListSeparator
+    For i = 0 To UBound(arr)
+        If Len(arr(i)) > 2 And Not right$(arr(i), 1) = "=" Then
+            TempDefs = TempDefs & arr(i) & ListSeparator
         End If
     Next
     If right$(TempDefs, 1) = ListSeparator Then
@@ -110,7 +110,7 @@ Private Sub CommandButton_ok_Click()
 End Sub
 
 Private Sub UserForm_Activate()
-Dim Arr() As String, i As Integer
+Dim arr() As String, i As Integer
     SetCaptions
     If MaximaUnits Then
         Label_enheder.visible = True
@@ -141,12 +141,12 @@ Dim Arr() As String, i As Integer
     ComboBox_DecType.ListIndex = MaximaDecOutType - 1
     
     
-    Arr = Split(Vars, ";")
+    arr = Split(Vars, ";")
     ' definitioner vises
     
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-            TextBox_def.text = TextBox_def.text & Arr(i) & "=" & VbCrLfMac    ' Temp definitions
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+            TextBox_def.text = TextBox_def.text & arr(i) & "=" & VbCrLfMac    ' Temp definitions
         End If
     Next
     

@@ -25,7 +25,7 @@
 24#£Indtast et antal punkter, så oprettes en tabel hvor du kan indtaste punkterne.\r\n Når du har udfyldt tabellen, vælger du den ønskede regression fra menuen.
 25#£Det anbefales ikke at lave regression med mere end 200 punkter i en Word-tabel. Brug Excel hvis du vil lave regression på så mange punkter.
 26#£Der skete en fejl. Der er formentlig en fejl i inputtallene.
-27#£Du skal lave en tabel med to kolonner. x-værdier i venstre kolonne og y-værdier i højrekolonne. Bogstaver ignoreres. Der udføres regression på de markerede tal. Hvis ingen er markerede udføres regression på alle tal i tabellen.
+27#£Du skal lave en tabel med to kolonner. x-værdier i venstre kolonne og y-værdier i højrekolonne. 
 28#£Den ønskede regression kan ikke udføres på de punkter.
 29#£Lineær regression udført vha. WordMat: $Tab
 30#£Eksponentiel regression udført vha. WordMat: $Tab
@@ -455,7 +455,7 @@
 454#£Definer funktion
 455#£Definer fysiske konstanter
 456#£Omskriv
-457#£
+457#£Q-værdi bidrag
 458#£Differentier
 459#£Stamfunktion
 460#£Graftegning
@@ -542,7 +542,7 @@
 541#£Importer indstillinger
 542#£Eksporter indstillinger
 543#£Tilpas menu
-544#£
+544#£sinus-tilpasning
 545#£Vis graf (Alt+P)
 546#£Viser grafen for de(t) valgte funktioner/ligninger og punker. Grafen kan efterfølgende indsættes i dokumentet. Der understøttes forskellige grafprogrammer. Vælg din favorit i indstillinger, eller vælg ved at udvide denne knap
 547#£Indsæt graf vha. programmet GnuPlot

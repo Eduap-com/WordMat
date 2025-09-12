@@ -455,7 +455,7 @@
 454#£Funktsiooni määratlemine
 455#£Füüsikaliste konstantide määratlemine
 456#£Vähendada
-457#£
+457#£Q-väärtuse panus
 458#£Eristada
 459#£Integreerida
 460#£Joonestamist
@@ -542,7 +542,7 @@
 541#£Sätete importimine
 542#£Sätete eksportimine
 543#£Kohanda menüüd
-544#£
+544#£Siinuse liitmik
 545#£Graafiku graafik (Alt+P)
 546#£Näitab valitud funktsiooni(de)/võrrandi(te) ja punktide graafikut. Seejärel saab graafiku dokumenti sisestada. Toetatud on mitmed graafikaprogrammid. Valige seadete alt oma lemmik.
 547#£Joonistage GnuPloti abil

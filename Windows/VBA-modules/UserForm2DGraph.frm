@@ -188,7 +188,7 @@ End Sub
 Private Sub UserForm_Activate()
 Dim D As String, nd As String
 Dim xmin As String, xmax As String
-Dim Arr As Variant, i As Integer
+Dim arr As Variant, i As Integer
 On Error Resume Next
     SetCaptions
 #If Mac Then
@@ -216,10 +216,10 @@ If Not PicOpen Then
     D = Trim$(D)
     
     ' reverse definition order
-    Arr = Split(D, "$")
-    nd = Arr(0)
-    For i = 1 To UBound(Arr)
-        If Len(Arr(i)) > 0 Then nd = Trim$(Arr(i)) & VbCrLfMac & nd
+    arr = Split(D, "$")
+    nd = arr(0)
+    For i = 1 To UBound(arr)
+        If Len(arr(i)) > 0 Then nd = Trim$(arr(i)) & VbCrLfMac & nd
     Next
     
 '    d = Replace(d, "$", vbCrLf)
@@ -782,7 +782,7 @@ Dim pos2 As Integer
 Dim pos4 As Integer
 Dim pos5 As Integer
 Dim posog As Integer
-Dim Arr As Variant
+Dim arr As Variant
 
     ea.SetNormalBrackets
 
@@ -854,12 +854,12 @@ Dim Arr As Variant
         Else
             ea.text = forskrift
             ea.pos = pos
-            Arr = Split(ea.GetNextBracketContent, "&")
+            arr = Split(ea.GetNextBracketContent, "&")
             pos2 = ea.pos
-            If UBound(Arr) = 0 Then
+            If UBound(arr) = 0 Then
                 forskrift = Replace(forskrift, VBA.ChrW$(8730), "sqrt", 1, 1)
-            ElseIf UBound(Arr) = 1 Then
-                rod = Arr(0)
+            ElseIf UBound(arr) = 1 Then
+                rod = arr(0)
                 Call ea.InsertBeforePos("^(1/(" & rod & "))")
                 ea.text = Replace(ea.text, VBA.ChrW$(8730), "", 1, 1)
                 posog = ea.FindChr("&", 1)
@@ -912,7 +912,7 @@ Dim ymaxg As String
 Dim labeltext As String
 Dim lign As String
 Dim punkttekst As String
-Dim Arr As Variant
+Dim arr As Variant
 Dim Arr2 As Variant
 Dim i As Integer
 Dim vekt As String
@@ -1196,26 +1196,26 @@ End If
 'points
 If TextBox_punkter.text <> "" Then
     grafobj = grafobj & "key="""",color=black,"
-    Arr = Split(TextBox_punkter.text, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-    If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
-        Arr(i) = Replace(Arr(i), ",", ".")
-        Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(TextBox_punkter.text, VbCrLfMac)
+    For i = 0 To UBound(arr)
+    If InStr(arr(i), ";") > 0 Or InStr(arr(i), vbTab) > 0 Then
+        arr(i) = Replace(arr(i), ",", ".")
+        arr(i) = Replace(arr(i), ";", ",")
     End If
-        Arr(i) = Replace(Arr(i), vbTab, ",") ' if tab is copied from Excel
-        Arr(i) = Replace(Arr(i), " ", "")
-        If Len(Arr(i)) > 0 Then
-        If Left$(Arr(i), 1) <> "(" Then
-            Arr(i) = "(" & Arr(i)
+        arr(i) = Replace(arr(i), vbTab, ",") ' if tab is copied from Excel
+        arr(i) = Replace(arr(i), " ", "")
+        If Len(arr(i)) > 0 Then
+        If Left$(arr(i), 1) <> "(" Then
+            arr(i) = "(" & arr(i)
         End If
-        If right$(Arr(i), 1) <> ")" Then
-            Arr(i) = Arr(i) & ")"
+        If right$(arr(i), 1) <> ")" Then
+            arr(i) = arr(i) & ")"
         End If
-        Arr(i) = Replace(Arr(i), "),(", "],[")
-        Arr(i) = Replace(Arr(i), ");(", "],[")
-        Arr(i) = Replace(Arr(i), "(", "[")
-        Arr(i) = Replace(Arr(i), ")", "]")
-        punkttekst = punkttekst & Arr(i) & ","
+        arr(i) = Replace(arr(i), "),(", "],[")
+        arr(i) = Replace(arr(i), ");(", "],[")
+        arr(i) = Replace(arr(i), "(", "[")
+        arr(i) = Replace(arr(i), ")", "]")
+        punkttekst = punkttekst & arr(i) & ","
         End If
     Next
     If right$(punkttekst, 1) = "," Then punkttekst = Left$(punkttekst, Len(punkttekst) - 1)
@@ -1227,26 +1227,26 @@ End If
 If TextBox_punkter2.text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=blue,"
-    Arr = Split(TextBox_punkter2.text, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-    If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
-        Arr(i) = Replace(Arr(i), ",", ".")
-        Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(TextBox_punkter2.text, VbCrLfMac)
+    For i = 0 To UBound(arr)
+    If InStr(arr(i), ";") > 0 Or InStr(arr(i), vbTab) > 0 Then
+        arr(i) = Replace(arr(i), ",", ".")
+        arr(i) = Replace(arr(i), ";", ",")
     End If
-        Arr(i) = Replace(Arr(i), vbTab, ",") ' if tab is copied from Excel
-        Arr(i) = Replace(Arr(i), " ", "")
-        If Len(Arr(i)) > 0 Then
-        If Left$(Arr(i), 1) <> "(" Then
-            Arr(i) = "(" & Arr(i)
+        arr(i) = Replace(arr(i), vbTab, ",") ' if tab is copied from Excel
+        arr(i) = Replace(arr(i), " ", "")
+        If Len(arr(i)) > 0 Then
+        If Left$(arr(i), 1) <> "(" Then
+            arr(i) = "(" & arr(i)
         End If
-        If right$(Arr(i), 1) <> ")" Then
-            Arr(i) = Arr(i) & ")"
+        If right$(arr(i), 1) <> ")" Then
+            arr(i) = arr(i) & ")"
         End If
-        Arr(i) = Replace(Arr(i), "),(", "],[")
-        Arr(i) = Replace(Arr(i), ");(", "],[")
-        Arr(i) = Replace(Arr(i), "(", "[")
-        Arr(i) = Replace(Arr(i), ")", "]")
-        punkttekst = punkttekst & Arr(i) & ","
+        arr(i) = Replace(arr(i), "),(", "],[")
+        arr(i) = Replace(arr(i), ");(", "],[")
+        arr(i) = Replace(arr(i), "(", "[")
+        arr(i) = Replace(arr(i), ")", "]")
+        punkttekst = punkttekst & arr(i) & ","
         End If
     Next
     If right$(punkttekst, 1) = "," Then punkttekst = Left$(punkttekst, Len(punkttekst) - 1)
@@ -1258,16 +1258,16 @@ End If
 If TextBox_markerpunkter.text <> "" Then
     punkttekst = ""
     grafobj = grafobj & "key="""",color=red,"
-    Arr = Split(TextBox_markerpunkter.text, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-    If InStr(Arr(i), ";") > 0 Or InStr(Arr(i), vbTab) > 0 Then
-        Arr(i) = Replace(Arr(i), ",", ".")
-        Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(TextBox_markerpunkter.text, VbCrLfMac)
+    For i = 0 To UBound(arr)
+    If InStr(arr(i), ";") > 0 Or InStr(arr(i), vbTab) > 0 Then
+        arr(i) = Replace(arr(i), ",", ".")
+        arr(i) = Replace(arr(i), ";", ",")
     End If
-        Arr(i) = Replace(Arr(i), vbTab, ",") 'if tab is copied from Excel
-        Arr(i) = Replace(Arr(i), " ", "")
-        If Len(Arr(i)) > 0 Then
-        Arr2 = Split(Arr(i), ",")
+        arr(i) = Replace(arr(i), vbTab, ",") 'if tab is copied from Excel
+        arr(i) = Replace(arr(i), " ", "")
+        If Len(arr(i)) > 0 Then
+        Arr2 = Split(arr(i), ",")
         If UBound(Arr2) = 1 Then
             X = Arr2(0)
             Y = Arr2(1)
@@ -1284,42 +1284,42 @@ End If
 'vektorer
 If TextBox_vektorer.text <> "" Then
     vekt = TextBox_vektorer.text
-    Arr = Split(vekt, VbCrLfMac)
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-    If InStr(Arr(i), ";") > 0 Then
-        Arr(i) = Replace(Arr(i), ",", ".")
-        Arr(i) = Replace(Arr(i), ";", ",")
+    arr = Split(vekt, VbCrLfMac)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+    If InStr(arr(i), ";") > 0 Then
+        arr(i) = Replace(arr(i), ",", ".")
+        arr(i) = Replace(arr(i), ";", ",")
     End If
-    If InStr(Arr(i), ")-(") > 0 Then
-        Arr(i) = Replace(Arr(i), ")-(", "],[")
-    ElseIf InStr(Arr(i), ")(") > 0 Then
-        Arr(i) = Replace(Arr(i), ")(", "],[")
+    If InStr(arr(i), ")-(") > 0 Then
+        arr(i) = Replace(arr(i), ")-(", "],[")
+    ElseIf InStr(arr(i), ")(") > 0 Then
+        arr(i) = Replace(arr(i), ")(", "],[")
     Else
-        Arr(i) = "[0,0]," & Arr(i)
+        arr(i) = "[0,0]," & arr(i)
     End If
-    Arr(i) = Replace(Arr(i), "(", "[")
-    Arr(i) = Replace(Arr(i), ")", "]")
+    arr(i) = Replace(arr(i), "(", "[")
+    arr(i) = Replace(arr(i), ")", "]")
             If CheckBox_visforklaring.Value Then
-                grafobj = grafobj & "key=""Vektor: " & Arr(i) & ""","
+                grafobj = grafobj & "key=""Vektor: " & arr(i) & ""","
             Else
                 grafobj = grafobj & "key="""","
             End If
             grafobj = grafobj & "color=" & GetNextColor & ","
             grafobj = grafobj & "line_type=solid,line_width=" & Replace(highres, ",", ".") & ",head_angle=25,head_length=" & Replace((ConvertStringToNumber(TextBox_xmax.text) - ConvertStringToNumber(TextBox_xmin.text)) / 40, ",", ".") & ","
-            grafobj = grafobj & "vector(" & Arr(i) & "),"
+            grafobj = grafobj & "vector(" & arr(i) & "),"
         End If
     Next
 End If
 
     'labels
     If Len(TextBox_labels.text) > 0 Then
-        Arr = Split(TextBox_labels.text, VbCrLfMac)
-        For i = 0 To UBound(Arr)
-            If InStr(Arr(i), ";") > 0 Then
-                Arr2 = Split(Arr(i), ";")
+        arr = Split(TextBox_labels.text, VbCrLfMac)
+        For i = 0 To UBound(arr)
+            If InStr(arr(i), ";") > 0 Then
+                Arr2 = Split(arr(i), ";")
             Else
-                Arr2 = Split(Arr(i), ",")
+                Arr2 = Split(arr(i), ",")
             End If
             If UBound(Arr2) >= 2 Then
             labeltext = labeltext & "["
@@ -1746,8 +1746,8 @@ End Sub
 Private Sub Image1_MouseUp(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
 Dim xmin As Single
 Dim xmax As Single
-Dim Ymin As Single
-Dim Ymax As Single
+Dim ymin As Single
+Dim ymax As Single
 Dim s As String
 
 Label_zoom.visible = False
@@ -1755,8 +1755,8 @@ If Abs(X - gemx) < 5 Then GoTo slut
 
 xmin = ConvertStringToNumber(TextBox_xmin.text)
 xmax = ConvertStringToNumber(TextBox_xmax.text)
-Ymin = ConvertStringToNumber(TextBox_ymin.text)
-Ymax = ConvertStringToNumber(TextBox_ymax.text)
+ymin = ConvertStringToNumber(TextBox_ymin.text)
+ymax = ConvertStringToNumber(TextBox_ymax.text)
 
 s = ConvertPixelToCoordX(gemx)
 TextBox_xmax.text = ConvertPixelToCoordX(X)
@@ -1774,8 +1774,8 @@ End Sub
 Private Sub Image1_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 Dim xmin As Single
 Dim xmax As Single
-Dim Ymin As Single
-Dim Ymax As Single
+Dim ymin As Single
+Dim ymax As Single
 Dim dx As Single, dy As Single
 Dim nyy As Single
 Dim s As String
@@ -1783,10 +1783,10 @@ Label_zoom.visible = False
 
 xmin = ConvertStringToNumber(TextBox_xmin.text)
 xmax = ConvertStringToNumber(TextBox_xmax.text)
-Ymin = ConvertStringToNumber(TextBox_ymin.text)
-Ymax = ConvertStringToNumber(TextBox_ymax.text)
+ymin = ConvertStringToNumber(TextBox_ymin.text)
+ymax = ConvertStringToNumber(TextBox_ymax.text)
 dx = (xmax - xmin) * 0.3
-dy = (Ymax - Ymin) * 0.3
+dy = (ymax - ymin) * 0.3
 nyy = ConvertPixelToCoordY(gemy)
 'MsgBox dy, vbOKOnly, ""
 'cfakt = (xmax - xmin) / (Image1.Width * 0.85)
@@ -1819,31 +1819,31 @@ X = X - Image1.Width * 0.06
 ConvertPixelToCoordX = xmin + cfakt * X
 End Function
 Function ConvertPixelToCoordY(Y As Single) As Single
-Dim Ymin As Single, Ymax As Single, cfakt As Single
-Ymin = ConvertStringToNumber(TextBox_ymin.text)
-Ymax = ConvertStringToNumber(TextBox_ymax.text)
-cfakt = (Ymax - Ymin) / (Image1.Height * 0.9)
+Dim ymin As Single, ymax As Single, cfakt As Single
+ymin = ConvertStringToNumber(TextBox_ymin.text)
+ymax = ConvertStringToNumber(TextBox_ymax.text)
+cfakt = (ymax - ymin) / (Image1.Height * 0.9)
 Y = Image1.Height - Y
 Y = Y - Image1.Height * 0.08
-ConvertPixelToCoordY = Ymin + cfakt * Y
+ConvertPixelToCoordY = ymin + cfakt * Y
 End Function
 Private Sub CommandButton_zoom_Click()
 Dim dx As Single, dy As Single
 Dim midtx As Single, midty As Single
 Dim xmin As Single
 Dim xmax As Single
-Dim Ymin As Single
-Dim Ymax As Single
+Dim ymin As Single
+Dim ymax As Single
 On Error GoTo fejl
 xmin = ConvertStringToNumber(TextBox_xmin.text)
 xmax = ConvertStringToNumber(TextBox_xmax.text)
-Ymin = ConvertStringToNumber(TextBox_ymin.text)
-Ymax = ConvertStringToNumber(TextBox_ymax.text)
+ymin = ConvertStringToNumber(TextBox_ymin.text)
+ymax = ConvertStringToNumber(TextBox_ymax.text)
 
 midtx = (xmax + xmin) / 2
-midty = (Ymax + Ymin) / 2
+midty = (ymax + ymin) / 2
 dx = (xmax - xmin) * 0.3
-dy = (Ymax - Ymin) * 0.3
+dy = (ymax - ymin) * 0.3
 
 TextBox_xmin.text = betcif(midtx - dx, 5, False)
 TextBox_xmax.text = betcif(midtx + dx, 5, False)
@@ -1866,18 +1866,18 @@ Dim dx As Single, dy As Single
 Dim midtx As Single, midty As Single
 Dim xmin As Single
 Dim xmax As Single
-Dim Ymin As Single
-Dim Ymax As Single
+Dim ymin As Single
+Dim ymax As Single
 On Error GoTo fejl
 xmin = ConvertStringToNumber(TextBox_xmin.text)
 xmax = ConvertStringToNumber(TextBox_xmax.text)
-Ymin = ConvertStringToNumber(TextBox_ymin.text)
-Ymax = ConvertStringToNumber(TextBox_ymax.text)
+ymin = ConvertStringToNumber(TextBox_ymin.text)
+ymax = ConvertStringToNumber(TextBox_ymax.text)
 
 midtx = (xmax + xmin) / 2
-midty = (Ymax + Ymin) / 2
+midty = (ymax + ymin) / 2
 dx = (xmax - xmin) * 1
-dy = (Ymax - Ymin) * 1
+dy = (ymax - ymin) * 1
 
 TextBox_xmin.text = betcif(midtx - dx, 5, False)
 TextBox_xmax.text = betcif(midtx + dx, 5, False)
@@ -1981,7 +1981,7 @@ Sub OpdaterDefinitioner()
 Dim Vars As String
 Dim Var As String, var2 As String
 Dim ea As New ExpressionAnalyser
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer
     
     
@@ -2004,14 +2004,14 @@ Dim i As Integer
     Do While right$(TextBox_definitioner.text, 2) = VbCrLfMac
         TextBox_definitioner.text = Left$(TextBox_definitioner.text, Len(TextBox_definitioner.text) - 2)
     Loop
-    Arr = Split(TextBox_definitioner.text, VbCrLfMac)
+    arr = Split(TextBox_definitioner.text, VbCrLfMac)
     
     Do
     Var = ea.GetNextListItem
     Var = Replace(Var, VbCrLfMac, "")
-    For i = 0 To UBound(Arr)
-        If Arr(i) <> "" Then
-        var2 = Split(Arr(i), "=")(0)
+    For i = 0 To UBound(arr)
+        If arr(i) <> "" Then
+        var2 = Split(arr(i), "=")(0)
         If var2 = Var Then
             Var = ""
             Exit For
@@ -2165,21 +2165,21 @@ End Sub
 
 Sub InsertBoundary(Var As String, assumetext As String, tbmin As TextBox, tbmax As TextBox)
 Dim dlhs As String, drhs As String
-Dim Arr As Variant
-    Arr = Split(assumetext, "<")
-    If UBound(Arr) > 0 Then
-        dlhs = Replace(Arr(0), "=", "")
-        drhs = Replace(Arr(1), "=", "")
+Dim arr As Variant
+    arr = Split(assumetext, "<")
+    If UBound(arr) > 0 Then
+        dlhs = Replace(arr(0), "=", "")
+        drhs = Replace(arr(1), "=", "")
         If dlhs = Var Then
             tbmax.text = drhs
         ElseIf drhs = Var Then
             tbmin.text = dlhs
         End If
     End If
-    Arr = Split(assumetext, ">")
-    If UBound(Arr) > 0 Then
-        dlhs = Replace(Arr(0), "=", "")
-        drhs = Replace(Arr(1), "=", "")
+    arr = Split(assumetext, ">")
+    If UBound(arr) > 0 Then
+        dlhs = Replace(arr(0), "=", "")
+        drhs = Replace(arr(1), "=", "")
         If dlhs = Var Then
             tbmin.text = drhs
         ElseIf drhs = Var Then

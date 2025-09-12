@@ -180,8 +180,6 @@ End Function
 
 
 Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Integer = 0, Optional ByVal c As Integer = 0)
-'    Dim c As Integer
-'    Dim r As Integer
     Dim i As Integer
     Dim j As Integer
     On Error Resume Next
@@ -191,6 +189,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
         c = Tabel.ncolumns
     End If
     
+    Application.ScreenUpdating = False
     
 '    Dim ws As Worksheet
     Dim ws As Object 'Worksheet
@@ -200,17 +199,9 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     For j = 1 To c 'tabel.ncolumns
         ws.Cells(i + 2, j + 1).Formula = Tabel.TabelCelle(i, j)
         ws.Range(ws.Cells(i + 2, j + 1), ws.Cells(i + 2, j + 1)).BorderAround ColorIndex:=1, Weight:=xlThin
-'        ws.Range("A1").Offset(i, j).Text = tabel(i, j)
     Next
     Next
-    
-'    For i = 1 To tabel.nrows
-'    For j = 1 To tabel.ncolumns
-'        ws.Cells(i, j).Formula = tabel.TabelCelle(i, j)
-''        ws.Range("A1").Offset(i, j).Text = tabel(i, j)
-'    Next
-'    Next
-    
+        
     'count rows
     For i = 1 To r
         ws.Cells(i + 2, c + 2).Formula = "=sum(R" & i + 2 & "C2:R" & i + 2 & "C" & c + 1 & ")"
@@ -229,10 +220,8 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     ' Expected values
     For i = 3 To r + 2
     For j = 2 To c + 1
-'        ws.Cells(i, c + 2 + j).Formula = ws.Cells(r + 1, j).Value * ws.Cells(i, c + 1).Value / ws.Cells(r + 1, c + 1).Value
         ws.Cells(i, c + 2 + j).Formula = "=if(R" & r + 3 & "C" & c + 2 & ">0,R" & r + 3 & "C" & j & "*R" & i & "C" & c + 2 & "/R" & r + 3 & "C" & c + 2 & ",0)"
         ws.Range(ws.Cells(i, c + 2 + j), ws.Cells(i, c + 2 + j)).BorderAround ColorIndex:=1, Weight:=xlThin
-'        ws.Range("A1").Offset(i, j).Text = tabel(i, j)
     Next
     Next
     
@@ -248,18 +237,8 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
         ws.Range(ws.Cells(r + 3, i + 3 + c), ws.Cells(r + 3, i + 3 + c)).BorderAround ColorIndex:=1, Weight:=xlThin
     Next
     'total
-'    ws.Cells(r + 3, c + 2).Formula = "=sum(R" & r + 3 & "C2:R" & r + 3 & "C" & c + 1 & ")"
     
     ws.Calculate
-    ' Chi2 calculation of p-value
-'    ws.Cells(2, 2 * c + 4).Formula = "=a1"
-'    ws.Cells(2, 2 * c + 4).Formula = "=CHITEST(R1C1:R2C2;R1C5:R2C6)"
-'    ws.Cells(2, 8).Formula = "=sum(A1:B2)"
-'On Error Resume Next
-'    ws.Cells(2, 8).FormulaR1C1 = "=CHITEST(R1C1:R2C2,R1C5:R2C6)"
-'    ws.Cells(2, 8).FormulaR1C1 = "=CHITEST(RC[-5]:R[1]C[-4],RC[-3]:R[1]C[-2])"
-
-'    ws.Cells(2, 8).Formula = "=CHITEST(A1:B2,E1:F2)"
     ws.Cells(r + 5, 2).Formula = "=CHITEST(R3C2:R" & r + 2 & "C" & c + 1 & ",R3C" & c + 4 & ":R" & r + 2 & "C" & 2 * c + 3 & ")"
     
     p = ws.Cells(r + 5, 2).Value
@@ -305,14 +284,16 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     ws.Cells(r + 8, 1).Value = TT.A(360) & ":"
     ws.Cells(r + 8, 2).Value = (r - 1) * (c - 1)
     ws.Cells(r + 9, 1).Value = TT.A(407) & ":"
-    ws.Cells(r + 9, 2).Formula = "=sum(R" & r + 9 & "C3:R" & r + 9 & "C" & r * c + 2 & ")"
+'    ws.Cells(r + 9, 2).Formula = "=sum(R" & r + 9 & "C3:R" & r + 9 & "C" & r * c + 2 & ")"
+    ws.Cells(r + 9, 2).Formula = "=sum(R3C" & 2 * c + 6 & ":R" & 2 + r & "C" & 2 * c + 5 + c & ")"
     
+    ' Q-value contributions
     Dim k As Integer
+    ws.Cells(2, 2 * c + 6).value2 = TT.A(457)
     For i = 1 To r
     For j = 1 To c
 '        ws.Cells(r + 9, 3 + k).Formula = "=if(R" & 2 + i & "C" & c + 3 + j & ">0,(R" & 2 + i & "C" & 1 + j & "-R" & 2 + i & "C" & c + 3 + j & ")^2/R" & 2 + i & "C" & c + 3 + j & ",0)"
-'        MsgBox "=if(R" & 2 + i & "C" & c + 3 + j & ">0,(R" & 2 + i & "C" & 1 + j & "-R" & 2 + i & "C" & c + 3 + j & ")^2/R" & 2 + i & "C" & c + 3 + j & ",0)"
-        ws.Cells(r + 9, 3 + k).Formula = "=if(R" & 2 + i & "C" & c + 3 + j & ">0,(R" & 2 + i & "C" & 1 + j & "-R" & 2 + i & "C" & c + 3 + j & ")^2/R" & 2 + i & "C" & c + 3 + j & ",0)"
+        ws.Cells(2 + i, 2 * c + 5 + j).Formula = "=if(R" & 2 + i & "C" & c + 3 + j & ">0,(R" & 2 + i & "C" & 1 + j & "-R" & 2 + i & "C" & c + 3 + j & ")^2/R" & 2 + i & "C" & c + 3 + j & ",0)"
         k = k + 1
     Next
     Next
@@ -428,6 +409,9 @@ End Sub
 Public Function GetTableData() As Boolean
 Dim i As Integer
 Dim j As Integer
+    If Selection.Tables.Count > 0 Then
+        Selection.Tables(1).Select
+    End If
     GetTableData = Tabel.ReadSelection()
     
     For i = 1 To Tabel.nrows

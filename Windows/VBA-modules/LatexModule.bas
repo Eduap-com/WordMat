@@ -762,9 +762,9 @@ Sub WriteTextfileToString(FilNavn As String, WriteText As String)
    Dim fsT As Object
    'On Error GoTo fejl
 
-   If FilNavn = "" Then GoTo slut
-   If WriteText = "" Then
-      If Dir(FilNavn) <> "" Then Kill FilNavn
+   If FilNavn = vbNullString Then GoTo slut
+   If WriteText = vbNullString Then
+      If Dir(FilNavn) <> vbNullString Then Kill FilNavn
          GoTo slut
    End If
    Set fsT = CreateObject("ADODB.Stream")

@@ -682,6 +682,9 @@ End Sub
 Sub Rib_regrpol(control As IRibbonControl)
     polregression
 End Sub
+Sub Rib_regrsin(control As IRibbonControl)
+    FitSin
+End Sub
 Sub Rib_regrexcel(control As IRibbonControl)
     Call InsertChart
 End Sub
@@ -818,7 +821,7 @@ Sub Rib_HelpOnline(control As IRibbonControl)
     End If
 End Sub
 Sub Rib_HelpMaxima(control As IRibbonControl)
-    OpenLink "https://maxima.sourceforge.io/docs/manual/maxima_toc.html#SEC_Contents"
+    OpenLink "https://maxima.sourceforge.io/docs/manual/index.html#SEC_Contents"
 End Sub
 Sub Rib_CheckForUpdate(control As IRibbonControl)
     CheckForUpdate
@@ -862,9 +865,9 @@ Sub Rib_STunit4(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_GetLabelChangeUnits(control As IRibbonControl, ByRef returnedVal)
     If OutUnits <> vbNullString Then
-        Dim Arr() As String
-        Arr = Split(OutUnits, ",")
-        returnedVal = Arr(0)
+        Dim arr() As String
+        arr = Split(OutUnits, ",")
+        returnedVal = arr(0)
     Else
         returnedVal = "SI"
     End If
@@ -1465,7 +1468,9 @@ End Sub
 Sub Rib_GetLabelPolRegr(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = TT.A(479)
 End Sub
-
+Sub Rib_GetLabelSinRegr(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = TT.A(544)
+End Sub
 Sub Rib_GetLabelDistributions(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = TT.A(480)
 End Sub

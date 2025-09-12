@@ -115,7 +115,7 @@ Public Sub LoadSprogArray()
     ' also check ReadTextfileToString
     Dim FileNo As Integer
     Dim linje As String
-    Dim Arr() As String
+    Dim arr() As String
     Dim filePath As String, slash As String
     
     If LanguageFileMissing Then Exit Sub
@@ -173,10 +173,10 @@ Public Sub LoadSprogArray()
         Open filePath For Input As FileNo
         Do While Not EOF(FileNo) ' Loop until end of file.
             Line Input #FileNo, linje
-            Arr = Split(linje, "#£")
-            If UBound(Arr) > 0 Then
-                If IsNumeric(Arr(0)) Then
-                    SA(CInt(Arr(0))) = FormatText(Arr(1))
+            arr = Split(linje, "#£")
+            If UBound(arr) > 0 Then
+                If IsNumeric(arr(0)) Then
+                    SA(CInt(arr(0))) = FormatText(arr(1))
                 End If
             End If
         Loop

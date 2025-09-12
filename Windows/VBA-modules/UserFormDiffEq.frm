@@ -55,7 +55,7 @@ Private Sub Label_cancel_Click()
 End Sub
 
 Private Sub CommandButton_ok_Click()
-Dim Arr As Variant
+Dim arr As Variant
 Dim i As Integer
     
     luk = False
@@ -63,12 +63,12 @@ Dim i As Integer
     TempDefs = Trim$(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    Arr = Split(TempDefs, VbCrLfMac)
+    arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
-    For i = 0 To UBound(Arr)
-        If Len(Arr(i)) > 2 And Not right$(Arr(i), 1) = "=" Then
-            If Split(Arr(i), "=")(0) <> TextBox_funktion.text Then ' cant define variable to be solved for
-                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
+    For i = 0 To UBound(arr)
+        If Len(arr(i)) > 2 And Not right$(arr(i), 1) = "=" Then
+            If Split(arr(i), "=")(0) <> TextBox_funktion.text Then ' cant define variable to be solved for
+                TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
             Else
                 MsgBox TT.A(252) & " " & TextBox_funktion.text & " " & TT.A(253), vbOKOnly, TT.Error
                 Exit Sub
@@ -84,10 +84,10 @@ Dim i As Integer
 End Sub
 
 Private Sub Label_solvenum_Click()
-   Dim F As String, Arr() As String, sx As String, sy As String
-   Arr = Split(Label_ligning.Caption, "=")
-   If UBound(Arr) > 0 Then F = Trim$(Arr(1))
-   If Len(Trim$(Arr(0))) > 2 Then
+   Dim F As String, arr() As String, sx As String, sy As String
+   arr = Split(Label_ligning.Caption, "=")
+   If UBound(arr) > 0 Then F = Trim$(arr(1))
+   If Len(Trim$(arr(0))) > 2 Then
       MsgBox TT.A(847), vbOKOnly, TT.Error
       Exit Sub
    End If

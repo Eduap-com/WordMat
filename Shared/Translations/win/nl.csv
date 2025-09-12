@@ -455,7 +455,7 @@
 454#£Functie definiëren
 455#£Definieer fysische constanten
 456#£Reduceren
-457#£
+457#£Q-waarde bijdrage
 458#£Onderscheiden
 459#£Integreren
 460#£Plotten
@@ -542,7 +542,7 @@
 541#£Instellingen voor importeren
 542#£Instellingen exporteren
 543#£Menu aanpassen
-544#£
+544#£Sinus fitting
 545#£Grafiek grafiek (Alt+P)
 546#£Toont de grafiek voor de geselecteerde functie(s)/vergelijking(en) en punten. De grafiek kan vervolgens in het document worden ingevoegd. Verschillende graafprogramma's worden ondersteund. Kies je favoriet onder instellingen.
 547#£Plot met behulp van GnuPlot

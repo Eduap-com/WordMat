@@ -99,6 +99,13 @@ fejl:
     MsgBox TT.A(26), vbOKOnly, TT.Error
 slut:
 End Sub
+Sub FitSin()
+    If GraphApp = 2 Then
+    Else
+        FitSinGeoGebraSuite
+    End If
+End Sub
+
 Sub UserRegression()
 On Error GoTo fejl
     Dim Cregr As New CRegression

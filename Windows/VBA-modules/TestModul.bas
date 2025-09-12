@@ -551,7 +551,7 @@ Function StopNow() As Boolean
     StopNow = False
 End Function
 Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional Var As String, Optional Instruk As String)
-    Dim s As String, TypeText As String, Oresul As String, Oresul2 As String, Arr() As String, ResultOK As Boolean, i As Integer, p As Integer, p2 As Integer, res As String
+    Dim s As String, TypeText As String, Oresul As String, Oresul2 As String, arr() As String, ResultOK As Boolean, i As Integer, p As Integer, p2 As Integer, res As String
     If TestType = 1 Then
         TypeText = "Calculate"
     ElseIf TestType = 2 Then
@@ -572,9 +572,9 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
     ElseIf TestType = 2 Then
         MaximaSolvePar (Var)
     ElseIf TestType = 3 Then 'solvede
-        Arr = Split(Var, ";")
-        If UBound(Arr) < 1 Then Arr = Split(Var, ",")
-        SolveDEpar Arr(0), Arr(1)
+        arr = Split(Var, ";")
+        If UBound(arr) < 1 Then arr = Split(Var, ",")
+        SolveDEpar arr(0), arr(1)
     End If
     Wait 0.2
     Application.ScreenUpdating = True
@@ -600,11 +600,11 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
     Oresul = Trim$(Oresul)
     If Left$(Oresul, 1) = "=" Or Left$(Oresul, 1) = ChrW$(8776) Then Oresul = right$(Oresul, Len(Oresul) - 1)
     ResultOK = False
-    Arr = Split(resul, "@$")
-    For i = 0 To UBound(Arr)
-        res = Trim$(Arr(i))
+    arr = Split(resul, "@$")
+    For i = 0 To UBound(arr)
+        res = Trim$(arr(i))
         If Left$(res, 1) = "=" Or Left$(res, 1) = ChrW$(8776) Then res = right$(res, Len(res) - 1)
-        If res = Oresul Or Trim$(Arr(i)) = Oresul2 Then
+        If res = Oresul Or Trim$(arr(i)) = Oresul2 Then
             ResultOK = True
             Exit For
         End If
@@ -653,7 +653,7 @@ Sub CreateTestBeregnDE()
 End Sub
 
 Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
-   Dim Oresul As String, Arr() As String
+   Dim Oresul As String, arr() As String
    Dim komm As String, Var As String
     
    omax.ReadSelection
@@ -665,9 +665,9 @@ Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
      TestType = 4
       Var = InputBox("Enter dependent and independent variable to DEsolve for. Separate by semicolon. You can add initial condition." & vbCrLf & "Examples: y;x " & vbCrLf & "y=5;x=0", "Variable", "y;x")
       If Trim$(Var) = vbNullString Then Exit Sub
-      Arr = Split(Var, ";")
-      If UBound(Arr) < 1 Then Exit Sub
-      SolveDEpar Trim$(Arr(0)), Trim$(Arr(1))
+      arr = Split(Var, ";")
+      If UBound(arr) < 1 Then Exit Sub
+      SolveDEpar Trim$(arr(0)), Trim$(arr(1))
    ElseIf InStr(komm, "=") > 0 Or TestType = 2 Then
       TestType = 2
       Var = InputBox("Enter variable to solve for", "Variable", "x")
@@ -908,7 +908,7 @@ Sub UnicodeValsToString()
     Dim k As Integer, n As Integer
     Dim s As String
     Dim mo As OMath
-    Dim Arr() As String
+    Dim arr() As String
     Dim MoArr() As Variant
 
     n = Selection.OMaths.Count
@@ -916,7 +916,7 @@ Sub UnicodeValsToString()
         MsgBox "You must select an equation", vbOKOnly, "Error"
         Exit Sub
     End If
-    ReDim Arr(n - 1)
+    ReDim arr(n - 1)
     ReDim MoArr(n - 1)
 '    Selection.OMaths.Linearize
     For k = 0 To n - 1
@@ -926,7 +926,7 @@ Sub UnicodeValsToString()
         Set mo = MoArr(k)
         mo.Linearize
         mo.ConvertToNormalText
-        Arr(k) = Trim$(mo.Range.text)
+        arr(k) = Trim$(mo.Range.text)
         mo.ConvertToMathText
         mo.Range.Select
         mo.BuildUp
@@ -934,8 +934,8 @@ Sub UnicodeValsToString()
     Selection.Collapse wdCollapseEnd
     Selection.EndKey unit:=wdLine
 
-    For k = 0 To UBound(Arr)
-        text = Arr(k)
+    For k = 0 To UBound(arr)
+        text = arr(k)
         s = ""
         For j = 1 To Len(text)
             i = AscW(Mid$(text, j, 1))

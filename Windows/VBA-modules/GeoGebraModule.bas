@@ -4,9 +4,10 @@ Option Explicit
 Public GeoGebraDefs As String
 Public GeoGebraAssumes As String
 
-Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
+Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", Optional ExtraURL As String)
 ' Uses Browser to plot with GeoGebra.
-' There are no functions that use the parameters. If you just run GeoGebraWeb without parameters, it's plotting, so that's the only thing this function is used for
+' There are no functions that use the parameters Gtype and CASfunc. If you just run GeoGebraWeb without parameters, it's plotting, so that's the only thing this function is used for
+' ExtraURL is just appended at the end of the url string
 ' The function prepares to send to OpenGeoGebra, which actually opens edge and the right html file
 ' reads the selected equation/function
 ' Definitions are also found and inserted
@@ -16,7 +17,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
     Dim sl As New CSortList
     Dim Var As String, DefList As String
     Dim k As Integer, i As Integer, j As Integer, p As Integer
-    Dim Arr As Variant, uvar As String
+    Dim arr As Variant, uvar As String
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
     Dim VektNArr As Variant, VNi As Integer
@@ -108,9 +109,9 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
                 If Len(Udtryk) > 0 Then
                     If InStr(Udtryk, "matrix") < 1 Then
                         If InStr(Udtryk, "=") > 0 Then
-                            Arr = Split(Udtryk, "=")
-                            LHS = Trim$(Arr(0))
-                            RHS = Trim$(Arr(1))
+                            arr = Split(Udtryk, "=")
+                            LHS = Trim$(arr(0))
+                            RHS = Trim$(arr(1))
                             ea.text = LHS
                             fktnavn = ea.GetNextVar(1)
                             varnavn = ea.GetNextBracketContent(1)
@@ -226,23 +227,66 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "")
 
     'Points
     If Selection.Tables.Count > 0 Then
-        Dim Cregr As New CRegression, setdata As String
+        Dim Cregr As New CRegression, setdata As String, xmin As Single, xmax As Single, ymin As Single, ymax As Single, n As Integer
         Cregr.GetTableData
+        xmin = 1000000
+        xmax = -1000000
+        ymin = 1000000
+        ymax = -1000000
         For j = 1 To UBound(Cregr.XValues)
             '            UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & CStr(Cregr.XValues(j)) & ListSeparator & CStr(Cregr.YValues(j)) & vbCrLf
             '            cmd = "(" & Replace(Replace(geogebrafil.ConvertToGeoGebraSyntax(Cregr.XValues(j)), "+", "%2B"), ",", ".") & "," & Replace(Replace(geogebrafil.ConvertToGeoGebraSyntax(Cregr.YValues(j)), "+", "%2B"), ",", ".") & ")"
             cmd = "(" & Replace(ConvertToGeogebraSyntax(Cregr.XValues(j)), "+", "%2B") & "," & Replace(ConvertToGeogebraSyntax(Cregr.YValues(j)), "+", "%2B") & ")"
+            If Cregr.XValues(j) < xmin Then xmin = Cregr.XValues(j)
+            If Cregr.XValues(j) > xmax Then xmax = Cregr.XValues(j)
+            If Cregr.YValues(j) < ymin Then ymin = Cregr.YValues(j)
+            If Cregr.YValues(j) > ymax Then ymax = Cregr.YValues(j)
+            
             setdata = setdata & cmd & ","
             UrlLink = UrlLink & cmd & ";"
         Next
+        If xmax <> 0 Then
+            n = Int(Log(Abs(xmax)) / Log(10)) - 1
+            xmax = Sgn(xmax) * (Int(xmax / (10 ^ n)) + 1) * (10 ^ n)
+        End If
+        If xmin <> 0 Then
+            n = Int(Log(Abs(xmin)) / Log(10)) - 1
+            xmin = Sgn(xmin) * Int(xmin / (10 ^ n)) * (10 ^ n)
+        End If
+        If ymin <> 0 Then
+            n = Int(Log(Abs(ymin)) / Log(10)) - 1
+            ymin = Sgn(ymin) * Int(ymin / (10 ^ n)) * (10 ^ n)
+        End If
+        If ymax <> 0 Then
+            n = Int(Log(Abs(ymax)) / Log(10)) - 1
+            ymax = Sgn(ymax) * (Int(ymax / (10 ^ n)) + 1) * (10 ^ n)
+        End If
+        If xmin > 0 And xmax > 0 Then
+            If xmin / xmax < 0.5 Then xmin = -xmax / 50
+        End If
+        If ymin > 0 And ymax > 0 Then
+            If ymin / ymax < 0.5 Then ymin = -ymax / 50
+        End If
         setdata = Left$(setdata, Len(setdata) - 1)
         setdata = "{" & setdata & "}"
         UrlLink = UrlLink & setdata & ";"
         '        geogebrafil.CreateList "punkter", setdata
+        UrlLink = UrlLink & "ZoomIn[" & Replace(xmin, ",", ".") & "," & Replace(ymin, ",", ".") & "," & Replace(xmax, ",", ".") & "," & Replace(ymax, ",", ".") & "];"
     End If
             
     '    MsgBox UrlLink & cmd
     '    OpenLink UrlLink, True
+    If ExtraURL <> vbNullString Then
+        If right(UrlLink, 1) <> ";" Then
+            If Left(ExtraURL, 1) = ";" Then
+                UrlLink = UrlLink & ExtraURL
+            Else
+                UrlLink = UrlLink & ";" & ExtraURL
+            End If
+        Else
+            UrlLink = UrlLink & ExtraURL
+        End If
+    End If
     
     OpenGeoGebraWeb UrlLink, Gtype, False, False
 fejl:
@@ -348,7 +392,7 @@ End Function
 
 Sub FindGeoGebraDefsAndAssumes()
 ' sets the lines GeoGebraDefs and GeoGebraAssumes from omax
-Dim Arr() As String, i As Integer
+Dim arr() As String, i As Integer
 '    MsgBox omax.DefString
 '    MsgBox omax.defstringtext
     
@@ -356,22 +400,22 @@ Dim Arr() As String, i As Integer
     GeoGebraDefs = ""
     
 ' Add definitions and assumes written in math fields
-    Arr = Split(omax.DefString, ";")
-    For i = 0 To UBound(Arr) - 1
-        If Left$(Arr(i), 7) = "assume(" Then
-            GeoGebraAssumes = GeoGebraAssumes & Mid$(Arr(i), 8, Len(Arr(i)) - 8) & ChrW$(8743)
+    arr = Split(omax.DefString, ";")
+    For i = 0 To UBound(arr) - 1
+        If Left$(arr(i), 7) = "assume(" Then
+            GeoGebraAssumes = GeoGebraAssumes & Mid$(arr(i), 8, Len(arr(i)) - 8) & ChrW$(8743)
         Else
-            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(Arr(i), False) & ";"
+            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(arr(i), False) & ";"
         End If
     Next
     
 ' Add temporary definitions and assumes
-    Arr = Split(omax.TempDefs, ";") ' all temporary definitions and assumptions separated by semicolons
-    For i = 0 To UBound(Arr)
-        If InStr(Arr(i), ">") > 0 Or InStr(Arr(i), "<") > 0 Then
-            GeoGebraAssumes = GeoGebraAssumes & Arr(i) & ChrW$(8743)
+    arr = Split(omax.TempDefs, ";") ' all temporary definitions and assumptions separated by semicolons
+    For i = 0 To UBound(arr)
+        If InStr(arr(i), ">") > 0 Or InStr(arr(i), "<") > 0 Then
+            GeoGebraAssumes = GeoGebraAssumes & arr(i) & ChrW$(8743)
         Else
-            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(Arr(i)) & ";"
+            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(arr(i)) & ";"
         End If
     Next
     If GeoGebraAssumes <> "" Then GeoGebraAssumes = Left$(GeoGebraAssumes, Len(GeoGebraAssumes) - 1)
@@ -450,7 +494,7 @@ End Function
 Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As Boolean = True, Optional HtmlReady As Boolean = False) As String
 ' definitions will have already been run through codeforMaxima, so convertmaxima should be false
 
-   Dim p As Integer, p2 As Integer, Arr() As String, p3 As Integer, sp As Integer, ep As Integer
+   Dim p As Integer, p2 As Integer, arr() As String, p3 As Integer, sp As Integer, ep As Integer
    Dim ea As ExpressionAnalyser, s As String, gexpr As String, i As Integer, n As Integer
    Set ea = New ExpressionAnalyser
    ea.SetNormalBrackets
@@ -467,52 +511,54 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
    End If
 
       'greek letters
-      text = Replace(text, "Delta", VBA.ChrW$(916))
-      text = Replace(text, "delta", VBA.ChrW$(948))
-      text = Replace(text, "alpha", VBA.ChrW$(945))
-      text = Replace(text, "beta", VBA.ChrW$(946))
-      text = Replace(text, "gamma_incomplete", "\Gamma_incomplete ")
-      text = Replace(text, "gamma", VBA.ChrW$(915))
-      text = Replace(text, "gammaLB", VBA.ChrW$(947))
-      text = Replace(text, "theta", VBA.ChrW$(952))
-      text = Replace(text, "Theta", VBA.ChrW$(920))
-      text = Replace(text, "lambda", VBA.ChrW$(955))
-      text = Replace(text, "Lambda", VBA.ChrW$(923))
-      text = Replace(text, "rho", VBA.ChrW$(961))
-      text = Replace(text, "varphi", VBA.ChrW$(966))
-      text = Replace(text, "phi", VBA.ChrW$(981))
-      text = Replace(text, "Phi", VBA.ChrW$(934))
-      text = Replace(text, "varepsilon", VBA.ChrW$(949))
-      text = Replace(text, "epsilon", VBA.ChrW$(1013))
-      text = Replace(text, "psi", VBA.ChrW$(968))
-      text = Replace(text, "Psi", VBA.ChrW$(936))
-      text = Replace(text, "sigma", VBA.ChrW$(963))
-      text = Replace(text, "Sigma", VBA.ChrW$(931))
-      text = Replace(text, "mu", VBA.ChrW$(956))
-      text = Replace(text, "Ohm", VBA.ChrW$(937))
-      text = Replace(text, "Omega", VBA.ChrW$(937))
-      text = Replace(text, "omega", VBA.ChrW$(969))
-      text = Replace(text, "Xi", VBA.ChrW$(926))
-      text = Replace(text, "xi", VBA.ChrW$(958))
-      text = Replace(text, "Chi", VBA.ChrW$(935))
-      text = Replace(text, "chi", VBA.ChrW$(967))
-      text = Replace(text, "tau", VBA.ChrW$(964))
-      text = Replace(text, "Pi", VBA.ChrW$(928))
-      text = Replace(text, "greek-nu", VBA.ChrW$(957))
-      text = Replace(text, "kappa", VBA.ChrW$(954))
-      text = Replace(text, "zeta", VBA.ChrW$(950))
-      text = Replace(text, "eta", VBA.ChrW$(951)) ' must be last as eta is included in others
-      text = Replace(text, "increment", VBA.ChrW$(8710))  ' speciel delta increment
-      text = Replace(text, "Symhalf", VBA.ChrW$(189)) ' _
-      text = Replace(text, "degC", VBA.chrw$(8451))   ' speciel oC symbol
-      text = Replace(text, "<=", VBA.ChrW$(8804))  ' Only works with geogebra app
-      text = Replace(text, ">=", VBA.ChrW$(8805)) ' Only works with geogebra app
-      text = Replace(text, "CVinkelO", VBA.ChrW$(8736))
-      text = Replace(text, "CVinkel", VBA.ChrW$(8736))
-      text = Replace(text, "Symangle", VBA.ChrW$(8736))
-      text = Replace(text, "SymVecta", TT.A(683))
+      If InStr(text, "Delta") <> 0 Then text = Replace(text, "Delta", VBA.ChrW$(916))
+      If InStr(text, "delta") <> 0 Then text = Replace(text, "delta", VBA.ChrW$(948))
+      If InStr(text, "alpha") <> 0 Then text = Replace(text, "alpha", VBA.ChrW$(945))
+      If InStr(text, "beta") <> 0 Then text = Replace(text, "beta", VBA.ChrW$(946))
+      If InStr(text, "gamma_incomplete") <> 0 Then text = Replace(text, "gamma_incomplete", "\Gamma_incomplete ")
+      If InStr(text, "gamma(") <> 0 Then text = Replace(text, "gamma(", "Gamma(")
+      If InStr(text, "gamma") <> 0 Then text = Replace(text, "gamma", VBA.ChrW$(915))
+      If InStr(text, "Gamma(") <> 0 Then text = Replace(text, "Gamma(", "gamma(")
+      If InStr(text, "gammaLB") <> 0 Then text = Replace(text, "gammaLB", VBA.ChrW$(947))
+      If InStr(text, "theta") <> 0 Then text = Replace(text, "theta", VBA.ChrW$(952))
+      If InStr(text, "Theta") <> 0 Then text = Replace(text, "Theta", VBA.ChrW$(920))
+      If InStr(text, "lambda") <> 0 Then text = Replace(text, "lambda", VBA.ChrW$(955))
+      If InStr(text, "Lambda") <> 0 Then text = Replace(text, "Lambda", VBA.ChrW$(923))
+      If InStr(text, "rho") <> 0 Then text = Replace(text, "rho", VBA.ChrW$(961))
+      If InStr(text, "varphi") <> 0 Then text = Replace(text, "varphi", VBA.ChrW$(966))
+      If InStr(text, "phi") <> 0 Then text = Replace(text, "phi", VBA.ChrW$(981))
+      If InStr(text, "Phi") <> 0 Then text = Replace(text, "Phi", VBA.ChrW$(934))
+      If InStr(text, "varepsilon") <> 0 Then text = Replace(text, "varepsilon", VBA.ChrW$(949))
+      If InStr(text, "epsilon") <> 0 Then text = Replace(text, "epsilon", VBA.ChrW$(1013))
+      If InStr(text, "psi") <> 0 Then text = Replace(text, "psi", VBA.ChrW$(968))
+      If InStr(text, "Psi") <> 0 Then text = Replace(text, "Psi", VBA.ChrW$(936))
+      If InStr(text, "sigma") <> 0 Then text = Replace(text, "sigma", VBA.ChrW$(963))
+      If InStr(text, "Sigma") <> 0 Then text = Replace(text, "Sigma", VBA.ChrW$(931))
+      If InStr(text, "mu") <> 0 Then text = Replace(text, "mu", VBA.ChrW$(956))
+      If InStr(text, "Ohm") <> 0 Then text = Replace(text, "Ohm", VBA.ChrW$(937))
+      If InStr(text, "Omega") <> 0 Then text = Replace(text, "Omega", VBA.ChrW$(937))
+      If InStr(text, "omega") <> 0 Then text = Replace(text, "omega", VBA.ChrW$(969))
+      If InStr(text, "Xi") <> 0 Then text = Replace(text, "Xi", VBA.ChrW$(926))
+      If InStr(text, "xi") <> 0 Then text = Replace(text, "xi", VBA.ChrW$(958))
+      If InStr(text, "Chi") <> 0 Then text = Replace(text, "Chi", VBA.ChrW$(935))
+      If InStr(text, "chi") <> 0 Then text = Replace(text, "chi", VBA.ChrW$(967))
+      If InStr(text, "tau") <> 0 Then text = Replace(text, "tau", VBA.ChrW$(964))
+      If InStr(text, "Pi") <> 0 Then text = Replace(text, "Pi", VBA.ChrW$(928))
+      If InStr(text, "greek-nu") <> 0 Then text = Replace(text, "greek-nu", VBA.ChrW$(957))
+      If InStr(text, "kappa") <> 0 Then text = Replace(text, "kappa", VBA.ChrW$(954))
+      If InStr(text, "zeta") <> 0 Then text = Replace(text, "zeta", VBA.ChrW$(950))
+      If InStr(text, "eta") <> 0 Then text = Replace(text, "eta", VBA.ChrW$(951)) ' must be last as eta is included in others
+      If InStr(text, "increment") <> 0 Then text = Replace(text, "increment", VBA.ChrW$(8710))  ' speciel delta increment
+      If InStr(text, "Symhalf") <> 0 Then text = Replace(text, "Symhalf", VBA.ChrW$(189)) ' _
+      If InStr(text, "degC") <> 0 Then text = Replace(text, "degC", VBA.chrw$(8451))   ' speciel oC symbol
+      If InStr(text, "<=") <> 0 Then text = Replace(text, "<=", VBA.ChrW$(8804))  ' Only works with geogebra app
+      If InStr(text, ">=") <> 0 Then text = Replace(text, ">=", VBA.ChrW$(8805)) ' Only works with geogebra app
+      If InStr(text, "CVinkelO") <> 0 Then text = Replace(text, "CVinkelO", VBA.ChrW$(8736))
+      If InStr(text, "CVinkel") <> 0 Then text = Replace(text, "CVinkel", VBA.ChrW$(8736))
+      If InStr(text, "Symangle") <> 0 Then text = Replace(text, "Symangle", VBA.ChrW$(8736))
+      If InStr(text, "SymVecta") <> 0 Then text = Replace(text, "SymVecta", TT.A(683))
     
-      text = Replace(text, "diff", "Derivative")  ' variable other than x is not accepted in NIntegral, but ok in IntegralSymbolic
+      If InStr(text, "diff") <> 0 Then text = Replace(text, "diff", "Derivative")  ' variable other than x is not accepted in NIntegral, but ok in IntegralSymbolic
     
       'Else
       '    text = Replace(text, "log", "ln")
@@ -540,12 +586,12 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
    ea.ReplaceVar "log", "ln" ' The text will have been run through codeformaxima, so log will be ln. It needs to be changed back
    ea.ReplaceVar "lg10", "log10"
    text = ea.text
-   text = Replace(text, "%e", "exp(1)") 'VBA.chrw$(101)
-   text = Replace(text, "%pi", VBA.ChrW$(960)) '"pi"
-   text = Replace(text, "%", "")
-   text = Replace(text, "##", "*") 'dot product
-   text = Replace(text, "~", "*") ' vectorprodukt
-   text = Replace(text, "^^", "^") ' vectorprodukt
+   If InStr(text, "%e") <> 0 Then text = Replace(text, "%e", "exp(1)") 'VBA.chrw$(101)
+   If InStr(text, "%pi") <> 0 Then text = Replace(text, "%pi", VBA.ChrW$(960)) '"pi"
+   If InStr(text, "%") <> 0 Then text = Replace(text, "%", "")
+   If InStr(text, "##") <> 0 Then text = Replace(text, "##", "*") 'dot product
+   If InStr(text, "~") <> 0 Then text = Replace(text, "~", "*") ' vectorprodukt
+   If InStr(text, "^^") <> 0 Then text = Replace(text, "^^", "^") ' vectorprodukt
 
 '
       p = InStr(text, "logbase(")
@@ -553,8 +599,8 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
         If p > 0 Then
           ea.text = text
           s = ea.GetNextBracketContent(p + 7)
-          Arr = Split(s, ",")
-          If UBound(Arr) > 0 Then text = Left$(text, p - 1) & "log(" & Arr(1) & "," & Arr(0) & right$(text, Len(text) - p - Len(s) - 7)
+          arr = Split(s, ",")
+          If UBound(arr) > 0 Then text = Left$(text, p - 1) & "log(" & arr(1) & "," & arr(0) & right$(text, Len(text) - p - Len(s) - 7)
         End If
         p = InStr(text, "logbase(")
       Loop
@@ -936,7 +982,7 @@ End Function
 Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
     Dim i As Integer, j As Integer
-    Dim Arr As Variant, s As String, p As Long, cmd As String
+    Dim arr As Variant, s As String, p As Long, cmd As String
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
@@ -981,7 +1027,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     ' define variables that are not defined
     ea.text = DefList
     For i = 0 To sl.Length - 1
-        varnavn = sl.GetName(i)
+        varnavn = ConvertToGeogebraSyntax(sl.GetName(i)) ' name must be converted as well because maxima has introduced mu for mu-character etc
         fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
         p = InStr(sl.GetName(i), "(")
         If p > 0 Then
@@ -989,6 +1035,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
             If sl.GetVal(i) <> ReplacedVar Then
                 DefinerKonstanter sl.GetVal(i), DefList, geogebrafil
             End If
+            fktudtryk = ConvertToGeogebraSyntax(fktudtryk, False)
             geogebrafil.CreateFunction sl.GetName(i), fktudtryk, False, False
         ElseIf InStr(varnavn, "SymVect") > 0 Then
             varnavn = Replace(varnavn, "SymVecta", "")
@@ -996,10 +1043,11 @@ Sub CreateGeoGebraFil(geogebrasti As String)
             fktudtryk = Replace(fktudtryk, "}", ")")
             fktudtryk = Replace(fktudtryk, "((", "(")
             fktudtryk = Replace(fktudtryk, "))", ")")
+            fktudtryk = ConvertToGeogebraSyntax(fktudtryk, False)
             cmd = varnavn & "=" & fktudtryk
             geogebrafil.CreateVector varnavn, fktudtryk, False, False
         Else
-            geogebrafil.CreateEquation sl.GetName(i), fktudtryk, False, False
+            geogebrafil.CreateEquation varnavn, fktudtryk, False, False
         End If
     Next
     
@@ -1020,9 +1068,9 @@ Sub CreateGeoGebraFil(geogebrasti As String)
             If Len(Udtryk) > 0 Then
                 If InStr(Udtryk, "matrix") < 1 Then
                     If InStr(Udtryk, "=") > 0 Then
-                        Arr = Split(Udtryk, "=")
-                        LHS = Arr(0)
-                        RHS = Arr(1)
+                        arr = Split(Udtryk, "=")
+                        LHS = arr(0)
+                        RHS = arr(1)
                         ea.text = LHS
                         fktnavn = ea.GetNextVar(1)
                         varnavn = ea.GetNextBracketContent(1)
@@ -1152,6 +1200,10 @@ slut:
     On Error Resume Next
     omax.ConvertLnLog = True
 End Sub
+Function ConvertToGreek(s As String) As String
+' When definitions are found using
+
+End Function
 Function DefinerKonstanter(Expr As String, ByRef DefList As String, Optional ByRef geogebrafil As CGeoGebraFile = Nothing, Optional ByRef UrlLink As String) As String
 ' define variables not defined in expr
 ' deflist is a list of variables that are defined
@@ -1200,5 +1252,13 @@ slut:
 
 End Sub
  
+Sub FitSinGeoGebraSuite()
 
+    If Selection.Tables.Count > 0 Then
+        GeoGebraWeb "", "", "FitSin(l1)"
+    Else
+        MsgBox2 TT.A(580), vbOKOnly, TT.Error
+    End If
+
+End Sub
 

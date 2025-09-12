@@ -413,7 +413,7 @@ Public Sub InsertBracketAfter(s As String)
     pos = 1
     Do
     pos = InStr(pos, text, s)
-    If pos > 0 Then
+    If pos <> 0 Then
         If pos > 3 Then t = Mid$(text, pos - 3, 3)
         If t = "tan" Or t = "sin" Or t = "cos" Then
              pos = pos + 1
@@ -439,7 +439,7 @@ Public Sub InsertBracketAfter(s As String)
 '                pos = pos + 2
         End If
     End If
-    Loop While pos > 0
+    Loop While pos <> 0
 
 End Sub
 Public Sub InsertBracketBefore(s As String)
@@ -950,31 +950,31 @@ Function GetTextInterval(ByVal p1 As Long, ByVal p2 As Long) As String
 End Function
 
 Sub ReplaceVar(ByVal Var As String, ByVal replvar As String, Optional StartPos As Long = 1, Optional Count As Long = -1)
-' finds var in text and replaces with replvar
+    ' finds var in text and replaces with replvar
 
     Dim pos2 As Long
     
     pos2 = InStr(StartPos, text, Var)
     
-    Do While pos2 > 0 And Count <> 0
-    If pos2 = 1 Then
-        If Not (IsLetterPos(pos2 + Len(Var), False) Or IsNumber(pos2 + Len(Var))) Then
-            text = Left$(text, pos2 - 1) & Replace(text, Var, replvar, pos2, 1)
-            pos2 = pos2 + Len(replvar)
+    Do While pos2 <> 0 And Count <> 0
+        If pos2 = 1 Then
+            If Not (IsLetterPos(pos2 + Len(Var), False) Or IsNumber(pos2 + Len(Var))) Then
+                text = Left$(text, pos2 - 1) & Replace(text, Var, replvar, pos2, 1)
+                pos2 = pos2 + Len(replvar)
+            End If
+        ElseIf pos2 + Len(Var) = Len(text) + 1 Then
+            If Not (IsLetterPos(pos2 - 1, False)) Then
+                text = Left$(text, pos2 - 1) & Replace(text, Var, replvar, pos2, 1)
+                pos2 = pos2 + Len(replvar)
+            End If
+        Else
+            If Not (IsLetterPos(pos2 - 1, False) Or IsLetterPos(pos2 + Len(Var), False) Or IsNumber(pos2 + Len(Var))) Then
+                text = Left$(text, pos2 - 1) & Replace(text, Var, replvar, pos2, 1)
+                pos2 = pos2 + Len(replvar)
+            End If
         End If
-    ElseIf pos2 + Len(Var) = Len(text) + 1 Then
-        If Not (IsLetterPos(pos2 - 1, False)) Then
-            text = Left$(text, pos2 - 1) & Replace(text, Var, replvar, pos2, 1)
-            pos2 = pos2 + Len(replvar)
-        End If
-    Else
-        If Not (IsLetterPos(pos2 - 1, False) Or IsLetterPos(pos2 + Len(Var), False) Or IsNumber(pos2 + Len(Var))) Then
-            text = Left$(text, pos2 - 1) & Replace(text, Var, replvar, pos2, 1)
-            pos2 = pos2 + Len(replvar)
-        End If
-    End If
-    pos2 = InStr(pos2 + 1, text, Var)
-    Count = Count - 1
+        pos2 = InStr(pos2 + 1, text, Var)
+        Count = Count - 1
     Loop
 End Sub
 Sub ReplaceTrigPow(ByVal Var As String, ByVal replvar As String, Optional StartPos As Long = 1, Optional Count As Long = -1)
@@ -985,7 +985,7 @@ Sub ReplaceTrigPow(ByVal Var As String, ByVal replvar As String, Optional StartP
     
     pos2 = InStr(StartPos, text, Var & "^")
     
-    Do While pos2 > 0 And Count <> 0
+    Do While pos2 <> 0 And Count <> 0
         FindNextBreak
         If pos2 = 1 Then
             If Not (IsLetterPos(pos2 + Len(Var), False) Or IsNumber(pos2 + Len(Var))) Then
@@ -1074,7 +1074,7 @@ If right$(GetNextListItem, 1) = Sep Then
 End If
 
 End Function
-Sub SplitNonBracket(ByRef Arr As Variant, Optional Sep As String = "")
+Sub SplitNonBracket(ByRef arr As Variant, Optional Sep As String = "")
     Dim s As String, t As String
     pos = 1
     Do
@@ -1084,7 +1084,7 @@ Sub SplitNonBracket(ByRef Arr As Variant, Optional Sep As String = "")
         End If
     Loop While s <> ""
     If t <> "" Then t = Left$(t, Len(t) - 3)
-    Arr = Split(t, "$_q")
+    arr = Split(t, "$_q")
     
 End Sub
 
@@ -1093,7 +1093,7 @@ Sub RemoveFaultySeparator()
 Dim spos As Long
     If pos < 1 Then pos = 1
     spos = InStr(pos, text, ".")
-    Do While spos > 0
+    Do While spos <> 0
         If spos = 1 Then
             text = "0" & text
         ElseIf spos = Len(text) Then
