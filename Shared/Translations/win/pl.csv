@@ -542,7 +542,7 @@
 541#£Importowanie ustawien
 542#£Eksportowanie ustawien
 543#£Dostosuj menu
-544#£Dopasowanie sinusoidalne
+544#£Regresja zatokowa
 545#£Wykres wykresu (Alt+P)
 546#£Pokazuje wykres dla wybranych funkcji/równan i punktów. Wykres mozna nastepnie wstawic do dokumentu. Obslugiwanych jest kilka programów wykresów. Wybierz swoja ulubiona w ustawieniach.
 547#£Wykres za pomoca GnuPlot
