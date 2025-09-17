@@ -224,7 +224,7 @@ Private Sub CommandButton_shortcuts_Click()
     
     ' Find the attached global template
     For Each WT In Application.Templates
-        If LCase$(Left$(WT, 7)) = "wordmat" And LCase$(right$(WT, 5)) = ".dotm" Then
+        If LCase$(Left$(WT, 7)) = "wordmat" And LCase$(Right$(WT, 5)) = ".dotm" Then
             CustomizationContext = WT
             TemplateFundet = True
             Exit For

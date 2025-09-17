@@ -22,7 +22,7 @@ End Function
 Function TrimR(ByVal text As String, c As String)
 ' removes c from the right side of text
     If text = "" Then GoTo slut
-    Do While right$(text, 1) = c
+    Do While Right$(text, 1) = c
         text = Left$(text, Len(text) - 1)
     Loop
     TrimR = text
@@ -32,7 +32,7 @@ Function TrimL(ByVal text As String, c As String)
 ' removes c from the left side of text
     If text = "" Then GoTo slut
     Do While Left$(text, 1) = c
-        text = right$(text, Len(text) - 1)
+        text = Right$(text, Len(text) - 1)
     Loop
     TrimL = text
 slut:

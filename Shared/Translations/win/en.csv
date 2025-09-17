@@ -726,7 +726,7 @@
 725#£Is list/matrix index
 726#£Standard graph program
 727#£Embed Excel sheets
-728#£
+728#£The function could not be performed because WordMat+ is not installed.
 729#£State output units separated by comma\nexamples:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nIf nothing is stated units are returned in basic SI-units or SI-derived units without prefix.
 730#£Examples of supported units:\n(See manual for more)\n\nLength: cm , AU, ly, pc\nMass: u , G, mg\nFrequency: Hz , Bq\nEnergy: kWh , eV, aJ\nPressure: Bar , mmHg, atm, torr
 731#£Trigonometric equations

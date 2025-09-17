@@ -121,9 +121,9 @@ Sub RunTestSequence()
     ' You can enter multiple correct results, just separate with @$ ----------------------------------------
     'calculation tests
     If TestBeregn("2+3", "=5") Then GoTo slut
-    TestBeregn "2+3^3,4/log" & VBA.ChrW$(8289) & "(889) -sin" & VBA.ChrW$(8289) & "(34)", "-sin" & VBA.ChrW$(8289) & "((17" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & ")/90)+(41,89983" & VBA.ChrW$(183) & "ln" & VBA.ChrW$(8289) & "(10))/ln" & VBA.ChrW$(8289) & "(889) +2"
-
-    '    TestBeregn "2+3^3,4/log" & VBA.chrw$(8289) & "(889) -sin" & VBA.chrw$(8289) & "(34)", "=(-sin" & VBA.chrw$(8289) & "((17" & VBA.chrw$(183) & "" & VBA.chrw$(960) & ")/90))+(41,89983049571472" & VBA.chrw$(183) & "ln" & VBA.chrw$(8289) & "(10))/ln" & VBA.chrw$(8289) & "(889)+2@$=-sin" & VBA.chrw$(8289) & "((17" & VBA.chrw$(183) & "" & VBA.chrw$(960) & ")/90)+(41,899830495714724" & VBA.chrw$(183) & "ln" & VBA.chrw$(8289) & "(10))/ln" & VBA.chrw$(8289) & "(889)+2"
+    TestBeregn "2+3^3,4/log" & VBA.ChrW$(8289) & "(889) -sin" & VBA.ChrW$(8289) & "(34)", "41,89983/log" & VBA.ChrW$(8289) & "(889) -sin" & VBA.ChrW$(8289) & "(34)+2"
+    'TestBeregn "2+3^3,4/log" & VBA.ChrW$(8289) & "(889) -sin" & VBA.ChrW$(8289) & "(34)", "-sin" & VBA.ChrW$(8289) & "((17" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & ")/90)+(41,89983" & VBA.ChrW$(183) & "ln" & VBA.ChrW$(8289) & "(10))/ln" & VBA.ChrW$(8289) & "(889) +2"
+    'TestBeregn "2+3^3,4/log" & VBA.chrw$(8289) & "(889) -sin" & VBA.chrw$(8289) & "(34)", "=(-sin" & VBA.chrw$(8289) & "((17" & VBA.chrw$(183) & "" & VBA.chrw$(960) & ")/90))+(41,89983049571472" & VBA.chrw$(183) & "ln" & VBA.chrw$(8289) & "(10))/ln" & VBA.chrw$(8289) & "(889)+2@$=-sin" & VBA.chrw$(8289) & "((17" & VBA.chrw$(183) & "" & VBA.chrw$(960) & ")/90)+(41,899830495714724" & VBA.chrw$(183) & "ln" & VBA.chrw$(8289) & "(10))/ln" & VBA.chrw$(8289) & "(889)+2"
     If StopNow Then GoTo slut
     TestBeregn "1/5 2", "=2/5"
     If StopNow Then GoTo slut
@@ -135,7 +135,8 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestBeregn "2^2x+23/2x", "=2^(2" & VBA.ChrW$(183) & "x)+23/(2" & VBA.ChrW$(183) & "x)" ' fails if 2^2x is not interpreted as 2^(2*x)
     If StopNow Then GoTo slut
-    TestBeregn "log" & VBA.ChrW$(8289) & "(a)", "=ln" & VBA.ChrW$(8289) & "(a)/ln" & VBA.ChrW$(8289) & "(10)"
+    TestBeregn "log" & VBA.ChrW$(8289) & "(a)", "log" & VBA.ChrW$(8289) & "(a)"
+    'TestBeregn "log" & VBA.ChrW$(8289) & "(a)", "=ln" & VBA.ChrW$(8289) & "(a)/ln" & VBA.ChrW$(8289) & "(10)"
     If StopNow Then GoTo slut
     TestBeregn "log_2" & VBA.ChrW$(8289) & "(4)", "=2"
     If StopNow Then GoTo slut
@@ -143,9 +144,11 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestBeregn "log_4" & VBA.ChrW$(8289) & "a", "=ln" & VBA.ChrW$(8289) & "(a)/ln" & VBA.ChrW$(8289) & "(4)"
     If StopNow Then GoTo slut
-    TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x+y)", "=(sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x)/180)-sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x_0)/180))/(y+x)" ' Test af forkert placerede skjulte parenteser
+    TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x+y)", "(sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(8289) & "(x_0 ))/(y+x)"
+    'TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x+y)", "=(sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x)/180)-sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x_0)/180))/(y+x)" ' Test af forkert placerede skjulte parenteser
     If StopNow Then GoTo slut
-    TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x)/180)-sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x_0)/180))/(x-x_0)"
+    TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x-x_0 )", "(sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(8289) & "(x_0 ))/(x-x_0 )"
+    'TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x-x_0 )", "=(sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x)/180)-sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x_0)/180))/(x-x_0)"
     If StopNow Then GoTo slut
     TestBeregn "x/" & VBA.ChrW$(12310) & "2+x" & VBA.ChrW$(12311) & "^2", "=x/(x^(2)+2)"
     If StopNow Then GoTo slut
@@ -153,9 +156,11 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestBeregn "L=100^(1/5)/" & VBA.ChrW$(960) & "^(1/5)", "=100^(1/5)/" & VBA.ChrW$(960) & "^(1/5)"
     If StopNow Then GoTo slut
-    TestBeregn "cos^(-1)" & VBA.ChrW$(8289) & "(2)", "=(180" & VBA.ChrW$(183) & "cos^(-1)" & VBA.ChrW$(8289) & "(2))/" & VBA.ChrW$(960)
+    TestBeregn "cos^(-1)" & VBA.ChrW$(8289) & "(2)", "cos^(-1)" & VBA.ChrW$(8289) & "(2)"
+    'TestBeregn "cos^(-1)" & VBA.ChrW$(8289) & "(2)", "=(180" & VBA.ChrW$(183) & "cos^(-1)" & VBA.ChrW$(8289) & "(2))/" & VBA.ChrW$(960)
     If StopNow Then GoTo slut
-    TestBeregn "(" & VBA.ChrW$(8730) & "((x+1)^2+(2" & VBA.ChrW$(183) & "(x+1)/x)^2 ))^'", "=((-(8" & VBA.ChrW$(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW$(183) & "(x+1))/x^(2)+2" & VBA.ChrW$(183) & "(x+1))/(2" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "((4" & VBA.ChrW$(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))@$=(-((8" & VBA.ChrW$(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW$(183) & "(x+1))/x^(2)+2" & VBA.ChrW$(183) & "(x+1))/(2" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "((4" & VBA.ChrW$(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))"
+    TestBeregn "(" & VBA.ChrW$(8730) & "((x+1)^2+(2" & VBA.ChrW$(183) & "(x+1)/x)^2 ))^'", "(x^4+x^3-4" & VBA.ChrW$(183) & "x-4)/(x" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "(x^4+2" & VBA.ChrW$(183) & "x^3+5" & VBA.ChrW$(183) & "x^2+8" & VBA.ChrW$(183) & "x+4)" & VBA.ChrW$(183) & "|x| )"
+    'TestBeregn "(" & VBA.ChrW$(8730) & "((x+1)^2+(2" & VBA.ChrW$(183) & "(x+1)/x)^2 ))^'", "=((-(8" & VBA.ChrW$(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW$(183) & "(x+1))/x^(2)+2" & VBA.ChrW$(183) & "(x+1))/(2" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "((4" & VBA.ChrW$(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))@$=(-((8" & VBA.ChrW$(183) & "(x+1)^(2))/x^(3))+(8" & VBA.ChrW$(183) & "(x+1))/x^(2)+2" & VBA.ChrW$(183) & "(x+1))/(2" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "((4" & VBA.ChrW$(183) & "(x+1)^(2))/x^(2)+(x+1)^(2)))"
     If StopNow Then GoTo slut
     
     InsertSletDef
@@ -589,7 +594,7 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
         p = InStrRev(Oresul, "=")
         p2 = InStrRev(Oresul, ChrW$(8776))
         If p2 > p Then p = p2
-        If p > 0 Then Oresul = right$(Oresul, Len(Oresul) - p)
+        If p > 0 Then Oresul = Right$(Oresul, Len(Oresul) - p)
         MoveCursorToEndOfCalculation False
     Else
         GotoPrevEq
@@ -598,12 +603,12 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
         MoveCursorToEndOfCalculation False
     End If
     Oresul = Trim$(Oresul)
-    If Left$(Oresul, 1) = "=" Or Left$(Oresul, 1) = ChrW$(8776) Then Oresul = right$(Oresul, Len(Oresul) - 1)
+    If Left$(Oresul, 1) = "=" Or Left$(Oresul, 1) = ChrW$(8776) Then Oresul = Right$(Oresul, Len(Oresul) - 1)
     ResultOK = False
     arr = Split(resul, "@$")
     For i = 0 To UBound(arr)
         res = Trim$(arr(i))
-        If Left$(res, 1) = "=" Or Left$(res, 1) = ChrW$(8776) Then res = right$(res, Len(res) - 1)
+        If Left$(res, 1) = "=" Or Left$(res, 1) = ChrW$(8776) Then res = Right$(res, Len(res) - 1)
         If res = Oresul Or Trim$(arr(i)) = Oresul2 Then
             ResultOK = True
             Exit For
@@ -741,13 +746,13 @@ Function ConvertToVBAString(text As String) As String
         End If
     Next
     If Left$(s, 4) = """ & " Then
-        s = right$(s, Len(s) - 4)
+        s = Right$(s, Len(s) - 4)
     ElseIf Left$(s, 1) <> """" Then
         s = """" & s
     End If
-    If right$(s, 4) = " & """ Then
+    If Right$(s, 4) = " & """ Then
         s = Left$(s, Len(s) - 4)
-    ElseIf right$(s, 1) <> """" Then
+    ElseIf Right$(s, 1) <> """" Then
         s = s & """"
     End If
     ConvertToVBAString = s
@@ -946,13 +951,13 @@ Sub UnicodeValsToString()
             End If
         Next
         If Left$(s, 4) = """ & " Then
-            s = right$(s, Len(s) - 4)
+            s = Right$(s, Len(s) - 4)
         ElseIf Left$(s, 1) <> """" Then
             s = """" & s
         End If
-        If right$(s, 4) = " & """ Then
+        If Right$(s, 4) = " & """ Then
             s = Left$(s, Len(s) - 4)
-        ElseIf right$(s, 1) <> """" Then
+        ElseIf Right$(s, 1) <> """" Then
             s = s & """"
         End If
         Selection.Collapse wdCollapseEnd

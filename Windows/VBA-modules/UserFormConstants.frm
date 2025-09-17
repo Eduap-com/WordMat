@@ -96,7 +96,7 @@ Private Sub CommandButton_ok_Click()
     
     text = Trim$(text)
 
-    If right$(text, 1) = ";" Or right$(text, 1) = "," Then
+    If Right$(text, 1) = ";" Or Right$(text, 1) = "," Then
         text = Left$(text, Len(text) - 1)
     End If
 

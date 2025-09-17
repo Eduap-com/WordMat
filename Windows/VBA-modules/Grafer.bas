@@ -638,7 +638,7 @@ Sub InsertChart()
             End If
         End If
     Next
-    If right$(ScriptFunctions, 1) = "#" Then ScriptFunctions = Left$(ScriptFunctions, Len(ScriptFunctions) - 1)
+    If Right$(ScriptFunctions, 1) = "#" Then ScriptFunctions = Left$(ScriptFunctions, Len(ScriptFunctions) - 1)
     
     srange.Select
     'datapoints
@@ -653,7 +653,7 @@ Sub InsertChart()
             If Cregr.XValues(i) > xmax Then xmax = Cregr.XValues(i)
             If Cregr.XValues(i) < xmin Then xmin = Cregr.XValues(i)
         Next
-        If right$(ScriptDataPoints, 1) = "#" Then ScriptDataPoints = Left$(ScriptDataPoints, Len(ScriptDataPoints) - 1)
+        If Right$(ScriptDataPoints, 1) = "#" Then ScriptDataPoints = Left$(ScriptDataPoints, Len(ScriptDataPoints) - 1)
         ScriptDataPoints = ScriptDataPoints & ";" & xmin & ":" & xmax
     End If
     

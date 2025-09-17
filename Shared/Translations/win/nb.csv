@@ -726,7 +726,7 @@
 725#£Er liste-/matriseindeks
 726#£Standard programvare for graftegning
 727#£Sett inn innebygd Excel-ark
-728#£
+728#£Funksjonen kunne ikke utføres fordi WordMat+ ikke er installert.
 729#£Spesifiser hvilke enheter som skal være i utdata atskilt med komma\neksempler:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nHvis ingenting er spesifisert, vil alle enheter bli returnert som grunnleggende SI-enheter eller avledede SI-enheter uten prefiks.
 730#£Eksempler på støttede enheter:\n(Se bruksanvisningen for mer)\n\nLengde: cm , AU, ly, pc\nMasse: u , G, mg\nTid: min , Timer, dager, år\nFrekvens: Hz , Bq\nEnergi: kWh , eV, aJ\nTrykk: Bar , mmHg, atm, tørr
 731#£Trignonometriske ligninger

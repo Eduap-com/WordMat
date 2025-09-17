@@ -62,7 +62,7 @@ matchdeclare(alizimag,lambda([z],block(if is(freeof(%i,z)) then return(false),if
 matchdeclare(alizillinvtrig,lambda([z],is(z<-1 or z>1)))$
 matchdeclare(alizbelowone,lambda([z],is(z<1)))$
 matchdeclare(alizilllambertw,lambda([z],is(z<-1/%e)))$
-matchdeclare(alizlambertw2sol,lambda([z],is(z<1/%e and z>0)))$
+matchdeclare(alizlambertw2sol,lambda([z],is(z>-1/%e and z<0)))$
 matchdeclare(aliznum,numberp)$
 matchdeclare(aliznotnum,lambda([z],not(numberp(z))))$
 matchdeclare(alizaddop,lambda([z],is(op(z)="+" and containx(z,solvar))))$
@@ -123,7 +123,7 @@ defrule(absrule,abs(alizx)=aliz,[alizx=aliz,alizx=-aliz])$
 defrule(absremoverule,abs(alizx)=aliznegative,[])$
 defrule(lambertwillrule,alizx*%e^(alizx)-alizilllambertw=0,[])$
 defrule(lambertwrule2sol,alizx*%e^(alizx)-alizlambertw2sol=0,([alizx=generalized_lambert_w(0,alizlambertw2sol),alizx=generalized_lambert_w(-1,alizlambertw2sol)]))$
-defrule(lambertwrule1sol,alizx*%e^(alizx)-aliznegative=0,(assume(aliznegative<0),[alizx=generalized_lambert_w(0,aliznegative)]))$
+defrule(lambertwrule1sol,alizx*%e^(alizx)-alizpositive=0,(assume(alizpositive>0),[alizx=generalized_lambert_w(0,alizpositive)]))$
 defrule(lambertwrulegeneral,alizx*%e^(alizx)+aliz=0,(assume(aliz>1/%e),print("The lambert_w function is two-valued for values from -1/%e to 0"),[alizx=lambert_w(-aliz)]))$
 defrule(lambertwrule2,
 aliznotx*alizpositive^(aliznotzero*solvar+aliznotx2)+aliznotx3+aliznotx4*solvar=0,
@@ -236,18 +236,32 @@ scinot(udt):=block([talfakt,antbsf],if not(numberp(udt)) then return(udt),
 
 scinotall(udt):=block([],apply1(udt,scinotrul))$
 
-/*bruges ved bc*/
+/*bruges ved bc. Kaldes på alle udtrykket og alle undertryk*/
 dectalbc(udt):=block([qudt,antbsf],
-if numberp(udt) then go(hop),
-if atom(udt)  then return(printf(false,concat("~a"),udt)),
-if not(numberp(udt)) then return(udt),
+    if numberp(udt) then go(hop),
+    if atom(udt) then 
+        return(udt),
+/*        return(printf(false,concat("~a"),udt)),synes ikke denne giver mening. concat på eet argument?  */
+    if not(numberp(udt)) then 
+        return(udt),
 hop,
-if udt=0 or udt=0.0 then return(0),qudt:abs(udt),
-if qudt<10^-4 then return(scinot(udt)) elseif qudt>10^NoSigFig then return(scinot(udt)),
-antbsf:NoSigFig+1,
-if qudt<1 then antbsf:antbsf-1-floor(log(qudt)/log(10)),
-if udt<0 then antbsf:antbsf+1,
-udt:printf(false,concat("~",antbsf,"f"),udt),udt:striml(" ",udt),udt:strimr("0",udt),udt:strimr(".",udt),parse_string(udt) 
+    if udt=0 or udt=0.0 then
+        return(0),
+    qudt:abs(udt),
+    if qudt<10^-4 then 
+        return(scinot(udt)) 
+    elseif qudt>10^NoSigFig then
+        return(scinot(udt)),
+    antbsf:NoSigFig+1,
+    if qudt<1 then
+        antbsf:antbsf-1-floor(log(qudt)/log(10)),
+    if udt<0 then 
+        antbsf:antbsf+1,
+    udt:printf(false,concat("~",antbsf,"f"),udt),
+    udt:striml(" ",udt),
+    udt:strimr("0",udt),
+    udt:strimr(".",udt),
+    parse_string(udt) 
 )$
 
 /* bruges ved antal decimaler og ikke betydende cifre */

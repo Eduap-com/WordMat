@@ -726,7 +726,7 @@
 725#£On luettelo-/matriisiindeksi
 726#£Vakiokaavio-ohjelma
 727#£Upota Excel-taulukot
-728#£
+728#£Toimintoa ei voitu suorittaa, koska WordMat+:aa ei ole asennettu.
 729#£Tilan lähtöyksiköt erotettu pilkulla\nesimerkkejä :\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJos mitään ei ole ilmoitettu, yksiköt palautetaan SI-perusyksiköissä tai SI-johdetuissa yksiköissä ilman etuliitettä.
 730#£Esimerkkejä tuetuista yksiköistä:\n(Katso lisätietoja käsikirjasta)\n\nPituus: cm , AU, ly, pc\nMassa: u , G, mg\nTaajuus: Hz , Bq\nEnergia: kWh , eV, aJ\nPaine: Bar , mmHg, atm, torr
 731#£Trigonometriset yhtälöt

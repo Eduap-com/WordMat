@@ -1326,7 +1326,7 @@ Sub beregn()
         GoTo slut
     End If
     
-    If right$(omax.Kommando, 1) = "=" Then
+    If Right$(omax.Kommando, 1) = "=" Then
         omax.Kommando = Trim$(Left$(omax.Kommando, Len(omax.Kommando) - 1))
         RemoveEqual = True
     End If
@@ -1357,7 +1357,7 @@ Sub beregn()
         omax.beregn
         If RemoveEqual Then
             If Left$(omax.MaximaOutput, 1) = "=" Then
-                omax.MaximaOutput = right$(omax.MaximaOutput, Len(omax.MaximaOutput) - 1)
+                omax.MaximaOutput = Right$(omax.MaximaOutput, Len(omax.MaximaOutput) - 1)
             End If
         End If
     ElseIf CASengine = 1 Then
@@ -1447,7 +1447,7 @@ Function GetCmdAfterEqualSign(Kommando As String) As String
         For i = Len(Kommando) To 1 Step -1 ' loop through all characters in the string
             c = Mid$(Kommando, i, 1)
             If (c = "=" Or c = ChrW$(8776)) And BracketStack.Count = 0 Then ' we found the equal sign, now cut and stop
-                GetCmdAfterEqualSign = right$(Kommando, Len(Kommando) - i)
+                GetCmdAfterEqualSign = Right$(Kommando, Len(Kommando) - i)
                 Exit Function
             ElseIf c = ")" Or c = "]" Or c = "}" Then
                 BracketStack.Add c
@@ -2553,7 +2553,7 @@ Public Function GetVersion(n As String) As Single
 Dim v As String, p As Integer
     p = InStr(n, "-")
     If p > 0 Then
-        v = right$(n, Len(n) - p)
+        v = Right$(n, Len(n) - p)
     End If
     GetVersion = val(v)
 End Function

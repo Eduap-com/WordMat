@@ -105,7 +105,7 @@ Public Function GetRegistryValue(hive As String, path As String, valueName As St
             Case REG_BINARY
                 result = RegQueryValueEx(hKey, valueName, 0, valueType, dataBuffer(0), dataSize)
                 For i = 0 To dataSize - 1
-                    hexStr = hexStr & right$("0" & Hex(dataBuffer(i)), 2) & " "
+                    hexStr = hexStr & Right$("0" & Hex(dataBuffer(i)), 2) & " "
                 Next i
                 GetRegistryValue = Trim$(hexStr)
             Case Else

@@ -66,7 +66,7 @@ Dim i As Integer
     arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
     For i = 0 To UBound(arr)
-        If Len(arr(i)) > 2 And Not right$(arr(i), 1) = "=" Then
+        If Len(arr(i)) > 2 And Not Right$(arr(i), 1) = "=" Then
             If Split(arr(i), "=")(0) <> TextBox_funktion.text Then ' cant define variable to be solved for
                 TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
             Else
@@ -75,7 +75,7 @@ Dim i As Integer
             End If
         End If
     Next
-    If right$(TempDefs, 1) = ListSeparator Then
+    If Right$(TempDefs, 1) = ListSeparator Then
         TempDefs = Left$(TempDefs, Len(TempDefs) - 1)
     End If
     End If

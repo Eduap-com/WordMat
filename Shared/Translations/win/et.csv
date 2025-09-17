@@ -726,7 +726,7 @@
 725#£On loendi/maatriksi indeks
 726#£Standardne graafikuprogramm
 727#£Exceli lehtede manustamine
-728#£
+728#£Funktsiooni ei saanud täita, kuna WordMat+ pole installitud.
 729#£Oleku väljundühikud, mis on eraldatud komaga\nnäited:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nKui midagi ei ole öeldud, tagastatakse ühikud SI-põhiühikutes või SI-tuletatud ühikutes ilma eesliiteta.
 730#£Näited toetatud ühikutest:\n(Lisateabe saamiseks vaadake juhendit)\n\nPikkus: cm , AU, ly, pc\nMass: u , G, mg\nSagedus: Hz , Bq\nEnergia: kWh , eV, aJ\nRõhk: Bar , mmHg, atm, torr
 731#£Trigonomeetrilised võrrandid

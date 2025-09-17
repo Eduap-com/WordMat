@@ -726,7 +726,7 @@
 725#£Is lijst/matrix index
 726#£Standaard grafiek programma
 727#£Excel-sheets insluiten
-728#£
+728#£De functie kan niet worden uitgevoerd omdat WordMat+ niet is geïnstalleerd.
 729#£Toestandsuitvoereenheden gescheiden door komma\nvoorbeelden:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nAls er niets wordt vermeld, worden eenheden geretourneerd in eenvoudige SI-eenheden of SI-afgeleide eenheden zonder voorvoegsel.
 730#£Voorbeelden van ondersteunde eenheden:\n(Zie handleiding voor meer)\n\nLengte: cm , AU, ly, pc\nMassa: u , G, mg\nFrequentie: Hz , Bq\nEnergie: kWh , eV, aJ\nDruk: Bar , mmHg, atm, torr
 731#£Trigonometrische vergelijkingen

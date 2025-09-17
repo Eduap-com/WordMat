@@ -1839,8 +1839,8 @@ Public Function GetHardwareUUID() As String
             
     GetHardwareUUID = RegKeyRead("HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\IDConfigDB\Hardware Profiles\0001\HwProfileGuid")
     GetHardwareUUID = Trim$(GetHardwareUUID)
-    If Left$(GetHardwareUUID, 1) = "{" Then GetHardwareUUID = right$(GetHardwareUUID, Len(GetHardwareUUID) - 1)
-    If right$(GetHardwareUUID, 1) = "}" Then GetHardwareUUID = Left$(GetHardwareUUID, Len(GetHardwareUUID) - 1)
+    If Left$(GetHardwareUUID, 1) = "{" Then GetHardwareUUID = Right$(GetHardwareUUID, Len(GetHardwareUUID) - 1)
+    If Right$(GetHardwareUUID, 1) = "}" Then GetHardwareUUID = Left$(GetHardwareUUID, Len(GetHardwareUUID) - 1)
     
     On Error GoTo 0
         

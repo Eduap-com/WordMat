@@ -726,7 +726,7 @@
 725#£Je index seznamu/matice
 726#£Standardní grafický program
 727#£Vlození listu aplikace Excel
-728#£
+728#£Funkci nelze provést, protoze není nainstalována aplikace WordMat+.
 729#£Stavové výstupní jednotky oddelené cárkou\npríklady:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nPokud není nic uvedeno, jednotky jsou vráceny v základních jednotkách SI nebo jednotkách odvozených od SI bez predpony.
 730#£Príklady podporovaných jednotek:\n(Více viz manuál)\n\nDélka: cm , AU, ly, pc\nHmotnost: u , G, mg\nFrekvence: Hz , Bq\nEnergie: kWh , eV, aJ\nTlak: Bar , mmHg, atm, torr
 731#£Goniometrické rovnice

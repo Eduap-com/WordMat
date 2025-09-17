@@ -78,7 +78,7 @@ Function GetWordMatTemplate(Optional NormalDotmOK As Boolean = False) As Templat
 ' If the current document is called wordmat*.dotm then it is returned as a template
 ' Otherwise all global templates are searched to see if there is one called wordmat*.dotm
     If Len(ActiveDocument.AttachedTemplate) > 10 Then
-        If LCase$(Left$(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase$(right$(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
+        If LCase$(Left$(ActiveDocument.AttachedTemplate, 7)) = "wordmat" And LCase$(Right$(ActiveDocument.AttachedTemplate, 5)) = ".dotm" Then
             Set GetWordMatTemplate = ActiveDocument.AttachedTemplate
             Exit Function
         End If
@@ -420,7 +420,7 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
         If pos = Len(text) Then pos = 0
         If pos > 0 Then
             arr(i) = Left$(text, pos - 1)
-            text = right$(text, Len(text) - pos)
+            text = Right$(text, Len(text) - pos)
             i = i + 1
         Else
             arr(i) = text
@@ -708,12 +708,12 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     NewVersion = s
     p = InStr(NewVersion, vbLf)
     If p > 0 Then
-        News = right$(NewVersion, Len(NewVersion) - p)
+        News = Right$(NewVersion, Len(NewVersion) - p)
         NewVersion = Trim$(Left$(NewVersion, p - 1))
     Else ' mac
         p = InStr(NewVersion, vbCr)
         If p > 0 Then
-            News = right$(NewVersion, Len(NewVersion) - p)
+            News = Right$(NewVersion, Len(NewVersion) - p)
             NewVersion = Trim$(Left$(NewVersion, p - 1))
         End If
     End If
@@ -847,9 +847,9 @@ Function ConvertNumberToString(ByVal n As Double) As String
         ConvertNumberToString = VBA.Format(n, "#################0.0####################")
 #End If
         If Len(ConvertNumberToString) > 1 Then
-            If right$(ConvertNumberToString, 2) = ".0" Then
+            If Right$(ConvertNumberToString, 2) = ".0" Then
                 ConvertNumberToString = Left$(ConvertNumberToString, Len(ConvertNumberToString) - 2)
-            ElseIf right$(ConvertNumberToString, 2) = ",0" Then
+            ElseIf Right$(ConvertNumberToString, 2) = ",0" Then
                 ConvertNumberToString = Left$(ConvertNumberToString, Len(ConvertNumberToString) - 2)
             End If
         End If
@@ -1519,7 +1519,7 @@ Function GetWordMatDir(Optional SubDir As String) As String
 #Else
     If SubDir <> vbNullString Then
         SubDir = Trim$(SubDir)
-        If right$(SubDir, 1) <> "\" Then SubDir = SubDir & "\"
+        If Right$(SubDir, 1) <> "\" Then SubDir = SubDir & "\"
     End If
     If InstallLocation = "All" Then
         GetWordMatDir = GetProgramFilesDir() & "\WordMat\"
@@ -1570,6 +1570,7 @@ End Sub
 Function FormatDefinitions(DefS As String) As String
 ' Takes a string from omax.defintions and makes it as pretty as possible for showing in a textbox
 ' used for showing present definitions on several forms
+    
     DefS = " " & omax.ConvertToAscii(DefS)
     DefS = Replace(DefS, "$", VbCrLfMac & VbCrLfMac & " ")
     DefS = Replace(DefS, ":=", " = ")
@@ -1666,11 +1667,28 @@ Function FormatDefinitions(DefS As String) As String
     DefS = Replace(DefS, "omega", VBA.ChrW$(969))    ' small omega
     
     DefS = Replace(DefS, "((x))", "(x)")
-        
+    
+    Dim ea As New ExpressionAnalyser
+    ea.text = DefS
+    ea.ReplaceVar "zqx", "a"
+    ea.ReplaceVar "yqx", "b"
+    ea.ReplaceVar "xqx", "c"
+    ea.ReplaceVar "wqx", "d"
+    ea.ReplaceVar "vqx", "x"
+    ea.ReplaceVar "uqx", "y"
+    ea.ReplaceVar "tqx", "z"
+    ea.ReplaceVar "vqx_0", "x_0"
+    ea.ReplaceVar "vqx_1", "x_1"
+    ea.ReplaceVar "uqx_0", "y_0"
+    ea.ReplaceVar "uqx_1", "y_1"
+    ea.ReplaceVar "tqx_0", "z_0"
+    ea.ReplaceVar "tqx_1", "z_1"
+    DefS = ea.text
+    
     If DecSeparator = "," Then
         DefS = Replace(DefS, ".", ",")
     End If
-        
+    
     FormatDefinitions = DefS
 End Function
 

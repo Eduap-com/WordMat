@@ -726,7 +726,7 @@
 725#£Er liste/matrix indeks
 726#£Standard grafprogram
 727#£Indsæt Excelark indlejret
-728#£
+728#£Funktionen kunne ikke udføres da WordMat+ ikke er installeret.
 729#£Angiv hvilke enheder som skal være i output adskilt ad komma\neksempler:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nHvis intet angives returneres alle enheder som base SI-enheder eller afledte SI-enheder uden præfiks.
 730#£Eksempler på understøttede enheder:\n(Se manual for flere)\n\nLængde: cm , AU, ly, pc\nMasse: u , G, mg\nTid: min , Timer, dage, år\nFrekvens: Hz , Bq\nEnergi: kWh , eV, aJ\nTryk: Bar , mmHg, atm, torr
 731#£Trignonometriske ligninger

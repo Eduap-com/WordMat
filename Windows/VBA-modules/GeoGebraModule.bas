@@ -148,7 +148,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                                 cmd = "Param:X=" & RHS
                                 cmd = Replace(cmd, "+", "%2B") & ";"
                                 UrlLink = UrlLink & cmd
-                            ElseIf right$(LHS, 3) = "pil" Then ' vector
+                            ElseIf Right$(LHS, 3) = "pil" Then ' vector
                                 LHS = Left$(LHS, Len(LHS) - 3)
                                 RHS = Replace(RHS, "{", "(")
                                 RHS = Replace(RHS, "}", ")")
@@ -227,7 +227,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
 
     'Points
     If Selection.Tables.Count > 0 Then
-        Dim Cregr As New CRegression, setdata As String, xmin As Single, xmax As Single, ymin As Single, ymax As Single, n As Integer
+        Dim Cregr As New CRegression, setdata As String, xmin As Single, xmax As Single, ymin As Single, ymax As Single, n As Integer, dx As Double, dy As Double
         Cregr.GetTableData
         xmin = 1000000
         xmax = -1000000
@@ -247,26 +247,37 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
         Next
         If xmax <> 0 Then
             n = Int(Log(Abs(xmax)) / Log(10)) - 1
-            xmax = Sgn(xmax) * (Int(xmax / (10 ^ n)) + 1) * (10 ^ n)
+            xmax = (Int(xmax / (10 ^ n)) + 1) * (10 ^ n)
         End If
         If xmin <> 0 Then
             n = Int(Log(Abs(xmin)) / Log(10)) - 1
-            xmin = Sgn(xmin) * Int(xmin / (10 ^ n)) * (10 ^ n)
+            xmin = Int(xmin / (10 ^ n)) * (10 ^ n)
         End If
         If ymin <> 0 Then
             n = Int(Log(Abs(ymin)) / Log(10)) - 1
-            ymin = Sgn(ymin) * Int(ymin / (10 ^ n)) * (10 ^ n)
+            ymin = Int(ymin / (10 ^ n)) * (10 ^ n)
         End If
         If ymax <> 0 Then
             n = Int(Log(Abs(ymax)) / Log(10)) - 1
-            ymax = Sgn(ymax) * (Int(ymax / (10 ^ n)) + 1) * (10 ^ n)
+            ymax = (Int(ymax / (10 ^ n)) + 1) * (10 ^ n)
         End If
+        dx = Abs(xmax - xmin)
+        dy = Abs(ymax - ymin)
         If xmin > 0 And xmax > 0 Then
-            If xmin / xmax < 0.5 Then xmin = -xmax / 50
+            If xmin / xmax < 0.5 Then xmin = 0
+        ElseIf xmin < 0 And xmax < 0 Then
+            If xmax / xmin < 0.5 Then xmax = 0
         End If
         If ymin > 0 And ymax > 0 Then
-            If ymin / ymax < 0.5 Then ymin = -ymax / 50
+            If ymin / ymax < 0.5 Then ymin = 0
+        ElseIf ymin < 0 And ymax < 0 Then
+            If ymax / ymin < 0.5 Then ymax = 0
         End If
+        xmin = xmin - dx / 10
+        xmax = xmax + dx / 10
+        ymin = ymin - dy / 10
+        ymax = ymax + dy / 10
+        
         setdata = Left$(setdata, Len(setdata) - 1)
         setdata = "{" & setdata & "}"
         UrlLink = UrlLink & setdata & ";"
@@ -277,7 +288,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     '    MsgBox UrlLink & cmd
     '    OpenLink UrlLink, True
     If ExtraURL <> vbNullString Then
-        If right(UrlLink, 1) <> ";" Then
+        If Right(UrlLink, 1) <> ";" Then
             If Left(ExtraURL, 1) = ";" Then
                 UrlLink = UrlLink & ExtraURL
             Else
@@ -332,7 +343,7 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
         Next
     End If
     
-    If Len(cmd) > 0 Then If right$(cmd, 1) = ";" Then cmd = Left$(cmd, Len(cmd) - 1)
+    If Len(cmd) > 0 Then If Right$(cmd, 1) = ";" Then cmd = Left$(cmd, Len(cmd) - 1)
     '    If ConvertSyntax Then Cmd = ConvertToGeogebraSyntax(Cmd, True)
     cmd = DefS & cmd
     cmd = Replace(cmd, "+", "%2B")
@@ -600,7 +611,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
           ea.text = text
           s = ea.GetNextBracketContent(p + 7)
           arr = Split(s, ",")
-          If UBound(arr) > 0 Then text = Left$(text, p - 1) & "log(" & arr(1) & "," & arr(0) & right$(text, Len(text) - p - Len(s) - 7)
+          If UBound(arr) > 0 Then text = Left$(text, p - 1) & "log(" & arr(1) & "," & arr(0) & Right$(text, Len(text) - p - Len(s) - 7)
         End If
         p = InStr(text, "logbase(")
       Loop
@@ -626,12 +637,12 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
             If p3 = Len(s) + 1 Then Exit Do
             p3 = p3 + 1
          Loop While p3 < Len(s)
-         If right$(gexpr, 1) = "," Then gexpr = Left$(gexpr, Len(gexpr) - 1)
+         If Right$(gexpr, 1) = "," Then gexpr = Left$(gexpr, Len(gexpr) - 1)
          For i = 1 To n
 '            gexpr = gexpr & "]"
             gexpr = gexpr & ")"
          Next
-         text = Left$(text, sp - 1) & gexpr & right$(text, Len(text) - ep + 2)
+         text = Left$(text, sp - 1) & gexpr & Right$(text, Len(text) - ep + 2)
          
          text = Replace(text, " and ", " &amp;&amp; ") '&&
          text = Replace(text, " or ", " || ") '||
@@ -694,7 +705,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
         mtext = Replace(mtext, ListSeparator, "&")
 
         mtext = omax.matrixstartbracket & VBA.ChrW$(9632) & "(" & Mid$(mtext, 2, Len(mtext) - 2) & ")" & omax.matrixendbracket
-        ea.text = Left$(ea.text, p - 1) & mtext & right$(ea.text, Len(ea.text) - ea.pos + 1)
+        ea.text = Left$(ea.text, p - 1) & mtext & Right$(ea.text, Len(ea.text) - ea.pos + 1)
 
         p = InStr(p + 1, ea.text, "{{")
     Loop
@@ -702,7 +713,7 @@ Function ConvertGeoGebraSyntaxToWord(ByVal text As String) As String
     p = InStr(ea.text, "_{")
     Do While p > 0
         s = ea.GetNextBracketContent(p)
-        ea.text = Left$(ea.text, p) & s & right$(ea.text, Len(ea.text) - Len(s) - p - 2)
+        ea.text = Left$(ea.text, p) & s & Right$(ea.text, Len(ea.text) - Len(s) - p - 2)
         p = InStr(p + 1, ea.text, "_{")
     Loop
     text = ea.text
@@ -856,7 +867,6 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
         UserFormGeoGebra.Show
     Else
         UserFormGeoGebra.ReturnVal = 1
-        
     End If
 #If Mac Then
     If UserFormGeoGebra.ReturnVal = 1 Then
@@ -867,6 +877,8 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
     End If
 #Else
     If UserFormGeoGebra.ReturnVal = 1 Then
+        OpenLink "https://download.geogebra.org/package/mac", True
+        MsgBox "GeoGebra is downloading in your browser", vbOKOnly, "Done"
     Else
         GeoGebraWeb
     End If
@@ -1093,7 +1105,7 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                             If InStr(RHS, "¦") > 0 Then ' vector inserted using template from equation menu
                                 RHS = Replace(RHS, "¦", ";")
                                 geogebrafil.CreateVector fktnavn, RHS, False, True
-                            ElseIf right$(LHS, 1) = VBA.ChrW$(8407) Then ' vector
+                            ElseIf Right$(LHS, 1) = VBA.ChrW$(8407) Then ' vector
                                 RHS = Replace(RHS, VBA.ChrW$(9608), "")
                                 RHS = Replace(RHS, VBA.ChrW$(183), "*")
                                 RHS = Replace(RHS, ",", ".")

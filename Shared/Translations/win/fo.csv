@@ -726,7 +726,7 @@
 725#£Er listi/matrix index
 726#£Standard grafforrit
 727#£Seta Excel-ark innlagt
-728#£
+728#£Funktiónin kundi ikki útinnast, tí WordMat+ er ikki uppsett.
 729#£Specificera vilka enheter som ska vara i utdata separerade med komma\nexempel:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nOm inget är specificerat, returneras allar eindir som grund-SI-eindir ella avleiddar SI-eindir uttan forskeyt.
 730#£Dømi um stuðlaðar eindir:\n(Sí handbók fyri meira)\n\nLongd: cm , AU, ly, pc\nMassi: u , G, mg\nTíð: min , Tímar, dagar, ár\nFrekvens: Hz , Bq\nOrka: kWh , eV, aJ\nTrýst: Bar , mmHg, atm, turt
 731#£Trignonometriskar líkningar

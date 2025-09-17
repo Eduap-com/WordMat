@@ -254,7 +254,7 @@ Sub Insert3DEquation(Equation As String)
         Else ' vector
             Equation = "(0" & ListSeparator & "0" & ListSeparator & "0)(" & px & ListSeparator & " " & py & ListSeparator & " " & pz & ")"
             If UserForm3DGraph.TextBox_vektorer.text <> "" Then
-                If right$(UserForm3DGraph.TextBox_vektorer.text, 1) = ")" Then
+                If Right$(UserForm3DGraph.TextBox_vektorer.text, 1) = ")" Then
                     UserForm3DGraph.TextBox_vektorer.text = UserForm3DGraph.TextBox_vektorer.text & vbCr
                 End If
             End If

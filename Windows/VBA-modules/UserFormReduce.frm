@@ -91,11 +91,11 @@ Sub ExecuteOK()
     arr = Split(TempDefs, VbCrLfMac)
     TempDefs = ""
     For i = 0 To UBound(arr)
-        If Len(arr(i)) > 2 And Not right$(arr(i), 1) = "=" Then
+        If Len(arr(i)) > 2 And Not Right$(arr(i), 1) = "=" Then
             TempDefs = TempDefs & arr(i) & ListSeparator
         End If
     Next
-    If right$(TempDefs, 1) = ListSeparator Then
+    If Right$(TempDefs, 1) = ListSeparator Then
         TempDefs = Left$(TempDefs, Len(TempDefs) - 1)
     End If
     End If

@@ -108,7 +108,7 @@ Function GetAllPreviousCodeBlocks() As String
             s = TrimR(Trim$(s), vbCr)
             s = TrimR(Trim$(s), vbLf)
             If s <> vbNullString Then
-                If right$(s, 1) <> ";" And right$(s, 1) <> "$" Then s = s & "$"
+                If Right$(s, 1) <> ";" And Right$(s, 1) <> "$" Then s = s & "$"
                 If result = "" Then
                     result = s
                 Else

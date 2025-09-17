@@ -459,7 +459,7 @@ Sub InsertParagraph(text As String)
    End If
 End Sub
 Sub InsertChapter(text As String)
-   If right$(text, 1) = vbCr Then text = Left$(text, Len(text) - 1)
+   If Right$(text, 1) = vbCr Then text = Left$(text, Len(text) - 1)
     
    If InStr(text, "*") > 0 Then
       LaTexDoc = LaTexDoc & "\chapter*{" & Replace(text, "*", "") & "}" & vbCrLf
@@ -468,7 +468,7 @@ Sub InsertChapter(text As String)
    End If
 End Sub
 Sub InsertSection(text As String)
-   If right$(text, 1) = vbCr Then text = Left$(text, Len(text) - 1)
+   If Right$(text, 1) = vbCr Then text = Left$(text, Len(text) - 1)
     
    If LatexSectionNumbering Then
       If InStr(text, "*") > 0 Then
@@ -481,7 +481,7 @@ Sub InsertSection(text As String)
    End If
 End Sub
 Sub InsertSubSection(text As String)
-   If right$(text, 1) = vbCr Then text = Left$(text, Len(text) - 1)
+   If Right$(text, 1) = vbCr Then text = Left$(text, Len(text) - 1)
     
    If LatexSectionNumbering Then
       If InStr(text, "*") > 0 Then
@@ -494,7 +494,7 @@ Sub InsertSubSection(text As String)
    End If
 End Sub
 Sub InsertSubSubSection(text As String)
-   If right$(text, 1) = vbCr Then text = Left$(text, Len(text) - 1)
+   If Right$(text, 1) = vbCr Then text = Left$(text, Len(text) - 1)
     
    If LatexSectionNumbering Then
       If InStr(text, "*") > 0 Then

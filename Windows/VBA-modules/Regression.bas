@@ -100,10 +100,16 @@ fejl:
 slut:
 End Sub
 Sub FitSin()
-    If GraphApp = 2 Then
-    Else
-        FitSinGeoGebraSuite
+    On Error Resume Next
+    Err.Clear
+    Application.Run macroname:="WMPFitSin"
+    If Err.Number < 0 Then
+        MsgBox2 TT.A(728), vbOKOnly, TT.Error
     End If
+'    If GraphApp = 2 Then
+'    Else
+'        FitSinGeoGebraSuite
+'    End If
 End Sub
 
 Sub UserRegression()

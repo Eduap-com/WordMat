@@ -726,7 +726,7 @@
 725#£È indice di lista/matrice
 726#£Programma grafico standard
 727#£Incorporare fogli Excel
-728#£
+728#£Non è stato possibile eseguire la funzione perché WordMat+ non è installato.
 729#£Unità di output dello stato separate da virgola\nesempi:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nSe non viene indicato nulla, le unità vengono restituite in unità SI di base o unità derivate da SI senza prefisso.
 730#£Esempi di unità supportate:\n(Vedi il manuale per saperne di più)\n\nLunghezza: cm , AU, ly, pc\nMassa: u , G, mg\nFrequenza: Hz , Bq\nEnergia: kWh , eV, aJ\nPressione: Bar , mmHg, atm, torr
 731#£Equazioni trigonometriche

@@ -726,7 +726,7 @@
 725#£Jest indeksem listy/macierzy
 726#£Standardowy program do tworzenia wykresów
 727#£Osadzanie arkuszy programu Excel
-728#£
+728#£Nie mozna wykonac tej funkcji, poniewaz program WordMat+ nie jest zainstalowany.
 729#£Jednostki wyjsciowe stanu oddzielone przecinkami\nprzyklady:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJesli nic nie jest podane, jednostki sa zwracane w podstawowych jednostkach SI lub jednostkach pochodnych SI bez prefiksu.
 730#£Przyklady obslugiwanych jednostek:\n(Zobacz instrukcje, aby dowiedziec sie wiecej)\n\nDlugosc: cm , AU, ly, pc\nMasa: u , G, mg\nCzestotliwosc: Hz , Bq\nEnergia: kWh , eV, aJ\nCisnienie: Bar , mmHg, atm, torr
 731#£Równania trygonometryczne
