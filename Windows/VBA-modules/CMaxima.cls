@@ -719,7 +719,7 @@ start:
     KommandoForklaring = "Solve(" & Kommando & "," & variabel & ")"    ' only for output of command explanation
 
     ckommando = CodeForMaxima(ikommando)    ' coded command
-
+'    variabel = ReplaceFakeVarNames(variabel)
     '    kommando = "CSolve(" & ckommando & "," & variabel & ")"
     If TempDefs <> "" Then
         '        MaximaInputStreng = MaximaInputStreng & "[" & CodeForMaxima(Replace(TempDefs, "=", ":")) & "]$"
@@ -2529,7 +2529,7 @@ Sub Wait(pausetime As Variant)
     Loop
 End Sub
 
-Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As String
+Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As String
 ' Castype=0 is maxima, CasType=1/2 is GeoGebra (geogebra friendly. still needs convertToGeogebraSyntax)
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
@@ -2617,7 +2617,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     If Not MaximaComplex Then
         If InStr(text, ChrW$(8736)) <> 0 Then text = Replace(text, ChrW$(8736), "Symangle")    '
     End If
-    If CasType = 0 Then
+    If CAStype = 0 Then
         If Radians Then
             If InStr(text, ChrW$(176)) <> 0 Then text = Replace(text, ChrW$(176), "*%pi/180")    ' degree symbol
         Else
@@ -2831,24 +2831,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
     ea.ReplaceVar "Tan", "tan"
     ea.ReplaceVar "Log", "log"
     ea.ReplaceVar "Ln", "ln"
-    
-    'Variables replaced to stop maxima output in reverse order
-    ea.ReplaceVar "a", "zqx"
-    ea.ReplaceVar "b", "yqx"
-    ea.ReplaceVar "c", "xqx"
-    ea.ReplaceVar "d", "wqx"
-    ea.ReplaceVar "x", "vqx"
-    ea.ReplaceVar "y", "uqx"
-    ea.ReplaceVar "z", "tqx"
-    ea.ReplaceVar "x_0", "vqx_0"
-    ea.ReplaceVar "x_1", "vqx_1"
-    ea.ReplaceVar "y_0", "uqx_0"
-    ea.ReplaceVar "y_1", "uqx_1"
-    ea.ReplaceVar "z_0", "tqx_0"
-    ea.ReplaceVar "z_1", "tqx_1"
     text = ea.text
-    
-    
 
     ' remove +- symbol
     pos = InStr(text, ChrW$(177))
@@ -2930,7 +2913,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
                   ass = Replace(ass, " and ", "&&and&&")
                   ass = Replace(ass, " OR ", "&&or&&")
                   ass = Replace(ass, " or ", "&&or&&")
-                  If CasType = 0 Then
+                  If CAStype = 0 Then
                     s = s & sqbrAssump(SplitAssump(Trim$(ass))) & "&&then&&(" & Trim$(Arr3(0)) & ")"
                   Else
                     s = s & ass & "&&then&&(" & Trim$(Arr3(0)) & ")"
@@ -2963,7 +2946,7 @@ Function CodeForMaxima(ByVal text As String, Optional CasType As Integer = 0) As
                 If c = "|" Or c = ChrW$(8214) Then
                     If Not (ea.IsOperator(ea.ChrByIndex(posb - 1), 4)) Then
                         If matvekt Or InStr(ea.text, ChrW$(9632)) > 0 Then
-                            If CasType = 0 Then
+                            If CAStype = 0 Then
                                 ea.text = Left$(ea.text, pos - 1) & "vecmag(" & Mid$(ea.text, pos + 1, posb - pos - 1) & ")" & Right$(ea.text, Len(ea.text) - posb)
                             Else
                                 ea.text = Left$(ea.text, pos - 1) & "length(" & Mid$(ea.text, pos + 1, posb - pos - 1) & ")" & Right$(ea.text, Len(ea.text) - posb)
@@ -3231,7 +3214,7 @@ videre:
             Do
                 antalm = antalm + 1
             Loop Until ea.ChrByIndex(pos + 1 + antalm) <> "'"
-            If CasType = 0 Then
+            If CAStype = 0 Then
                 antalmS = "round(" & antalm & ")"
             Else
                 antalmS = CStr(antalm)
@@ -3298,7 +3281,7 @@ videre:
                End If
             ElseIf ea.ChrByIndex(pos + antalm + 1) = "(" Then    ' if f'(x)
 msat:
-                If DiffEqVar = Var Or CasType = 1 Or CasType = 2 Then  'if diffligning then no subst
+                If DiffEqVar = Var Or CAStype = 1 Or CAStype = 2 Then  'if diffligning then no subst
                   If Len(subt) > 0 And Len(subt) = antalm Then ' if partiel
                         text = Left$(text, pos - 1 - Len(F)) & "diff(" & F & "(" & Var & ")," & Var & "," & antalmS & ")" & Right$(text, Len(text) - pos - varl - antalm)
                     Else
@@ -3403,7 +3386,7 @@ msat:
                         nedre = Mid$(integrand, posn + 1, poso - posn - 1)
                         upper = Mid$(integrand, poso + 1, poss - poso - 1)
                         '        text = left$(text, posn - 1) & mid$(text, poss + 1, pos2 - poss - 1) & "," & mid$(text, pos2 + 1, 1) & "," & nedre & "," & upper & ")" & mid$(text, pos2 + 2, Len(text) - pos2 - 1)
-                        If CasType = 0 Then
+                        If CAStype = 0 Then
                            integrand = Right$(integrand, Len(integrand) - poss) & "," & Var & "," & nedre & "," & upper & ")"
                         Else ' geogebra only supports variable x
                            ea2.text = Right$(integrand, Len(integrand) - poss)
@@ -3640,7 +3623,7 @@ spring:
                 text = Left$(text, slpos) & " ## " & Right$(text, Len(text) - slpos - 1)
             End If
             arr = Split(matrix, "@")
-            If CasType = 1 Or CasType = 2 Then
+            If CAStype = 1 Or CAStype = 2 Then
                 mtext = "{"
                 For i = 0 To UBound(arr)
                     mtext = mtext & "{" & Replace(arr(i), "&", ",") & "},"
@@ -3668,7 +3651,7 @@ spring:
             matrix = ea.GetNextBracketContent
             slpos = ea.pos
             arr = Split(matrix, "@")
-            If CasType = 1 Or CasType = 2 Then
+            If CAStype = 1 Or CAStype = 2 Then
                 mtext = "{"
                 For i = 0 To UBound(arr)
                     mtext = mtext & "{" & arr(i) & "},"
@@ -3752,7 +3735,7 @@ hopBracket:
             slpos = ea.pos - 1
             ea.pos = pos
             arr = Split(matrix, ChrW$(166))
-            If CasType = 1 Or CasType = 2 Then
+            If CAStype = 1 Or CAStype = 2 Then
                 mtext = "{"
                 For i = 0 To UBound(arr)
                     mtext = mtext & "{" & arr(i) & "},"
@@ -3836,6 +3819,11 @@ hopBracket:
         ea.ReplaceVar "ln", "log"
     End If
     ea.ReplaceVar "arg", "carg"
+    
+    'Variables replaced to stop maxima output in reverse order
+    If CAStype = 0 Then 'Maxima
+        ea.text = ReplaceFakeVarNames(ea.text)
+    End If
     text = ea.text
 
 
@@ -3849,7 +3837,8 @@ hopBracket:
         text = ConvertDegreeToRad(text, "csc")
     End If
 
-    If CasType = 0 Then
+
+    If CAStype = 0 Then
         If InStr(text, ChrW$(960)) <> 0 Then text = Replace(text, ChrW$(960), "%pi")
         If InStr(text, "-" & ChrW$(8734)) <> 0 Then text = Replace(text, "-" & ChrW$(8734), "minf")
         If InStr(text, ChrW$(8734)) <> 0 Then text = Replace(text, ChrW$(8734), "inf")
@@ -4503,21 +4492,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     ea.ReplaceVar "sinh", "sinh" & ChrW$(8289)
     ea.ReplaceVar "tanh", "tanh" & ChrW$(8289)
     
-    'Variables replaced to stop maxima output in reverse order
-    ea.ReplaceVar "zqx", "a"
-    ea.ReplaceVar "yqx", "b"
-    ea.ReplaceVar "xqx", "c"
-    ea.ReplaceVar "wqx", "d"
-    ea.ReplaceVar "vqx", "x"
-    ea.ReplaceVar "uqx", "y"
-    ea.ReplaceVar "tqx", "z"
-    ea.ReplaceVar "vqx_0", "x_0"
-    ea.ReplaceVar "vqx_1", "x_1"
-    ea.ReplaceVar "uqx_0", "y_0"
-    ea.ReplaceVar "uqx_1", "y_1"
-    ea.ReplaceVar "tqx_0", "z_0"
-    ea.ReplaceVar "tqx_1", "z_1"
-    text = ea.text
+    text = ReplaceFakeVarNamesBack(ea.text)    'Variables replaced to stop maxima output in reverse order
 
     ' matrices
     pos = InStr(text, "matrix")
@@ -5805,6 +5780,7 @@ Sub InsertMaximaOutput()
     '    Set mo = Selection.OMaths.Add(mo)
     '    mo.OMaths(1).BuildUp
 
+    MaximaOutput = ReplaceFakeVarNamesBack(MaximaOutput)
     If Len(MaximaOutput) > 1000 Then
         If MsgBox2(TT.A(896) & Len(MaximaOutput) & VbCrLfMac & TT.A(897), vbYesNo, TT.A(846)) = vbNo Then
             MaximaOutput = Left$(MaximaOutput, 1000) & " " & TT.A(119)
@@ -6280,7 +6256,7 @@ start:
 
 slut:
 End Sub
-Function FindVariable(Optional text As String, Optional MaximaCode As Boolean = True) As Boolean
+Function FindVariable(Optional text As String, Optional MaximaCode As Boolean = True, Optional CAStype As Integer = 0) As Boolean
 ' finds variables in the text and puts them in Vars-string
     Dim Var As String
     Dim i As Integer
@@ -6300,7 +6276,7 @@ Function FindVariable(Optional text As String, Optional MaximaCode As Boolean = 
     End If
     Dim ea As New ExpressionAnalyser
     If MaximaCode Then
-        ea.text = CodeForMaxima(text)
+        ea.text = CodeForMaxima(text, CAStype)
     Else
         ea.text = text
     End If

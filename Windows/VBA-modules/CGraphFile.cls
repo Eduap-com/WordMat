@@ -156,7 +156,7 @@ Function ConvertToGraphSyntax(text As String, Optional ConvertMaxima As Boolean 
     If ConvertMaxima Then
         On Error Resume Next
         omax.ConvertLnLog = False
-        text = omax.CodeForMaxima(text)
+        text = omax.CodeForMaxima(text, 1)
         omax.ConvertLnLog = True
     End If
     text = Replace(text, "%e", "e")

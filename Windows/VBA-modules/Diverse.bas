@@ -174,7 +174,11 @@ On Error Resume Next
 #Else
 ' ActiveDocument.FollowHyperlink removes parameters such as ?command=... Therefore it may be necessary to use script
     If Script Then
-        MaxProc.RunFile GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe", """" & Link & """"
+        If Dir("C:\Program Files\Google\Chrome\Application\chrome.exe") <> vbNullString Then
+            MaxProc.RunFile "C:\Program Files\Google\Chrome\Application\chrome.exe", """" & Link & """"
+        Else
+            MaxProc.RunFile GetProgramFilesDir & "\Microsoft\Edge\Application\msedge.exe", """" & Link & """"
+        End If
     Else
         ActiveDocument.FollowHyperlink Address:=Link, NewWindow:=True ' If the link doesn't work, nothing happens.
     End If
@@ -1668,22 +1672,7 @@ Function FormatDefinitions(DefS As String) As String
     
     DefS = Replace(DefS, "((x))", "(x)")
     
-    Dim ea As New ExpressionAnalyser
-    ea.text = DefS
-    ea.ReplaceVar "zqx", "a"
-    ea.ReplaceVar "yqx", "b"
-    ea.ReplaceVar "xqx", "c"
-    ea.ReplaceVar "wqx", "d"
-    ea.ReplaceVar "vqx", "x"
-    ea.ReplaceVar "uqx", "y"
-    ea.ReplaceVar "tqx", "z"
-    ea.ReplaceVar "vqx_0", "x_0"
-    ea.ReplaceVar "vqx_1", "x_1"
-    ea.ReplaceVar "uqx_0", "y_0"
-    ea.ReplaceVar "uqx_1", "y_1"
-    ea.ReplaceVar "tqx_0", "z_0"
-    ea.ReplaceVar "tqx_1", "z_1"
-    DefS = ea.text
+    DefS = ReplaceFakeVarNamesBack(DefS)
     
     If DecSeparator = "," Then
         DefS = Replace(DefS, ".", ",")

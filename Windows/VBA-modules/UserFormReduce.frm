@@ -140,7 +140,7 @@ Dim arr() As String, i As Integer
     ComboBox_cifre.Value = MaximaCifre
     ComboBox_DecType.ListIndex = MaximaDecOutType - 1
     
-    
+    Vars = ReplaceFakeVarNamesBack(Vars)
     arr = Split(Vars, ";")
     ' definitioner vises
     

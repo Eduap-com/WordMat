@@ -246,7 +246,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
             omax.Kommando = Replace(omax.Kommando, VBA.ChrW$(8805), ">")
             eqs = True
         End If
-        If Not omax.FindVariable Then GoTo slut
+        If Not omax.FindVariable(, True, CASengine) Then GoTo slut
         If variabel = vbNullString Then
             UFSelectVar.Vars = omax.Vars
             UFSelectVar.DefS = omax.DefString
@@ -445,7 +445,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8743)) < 1 Then
         ' only 1 equation
         
-        If Not omax.FindVariable Then GoTo slut
+        If Not omax.FindVariable(, True, CASengine) Then GoTo slut
         If Not ValiderVariable Then GoTo slut
         SaveKommando = omax.Kommando
 newcas:
@@ -643,7 +643,7 @@ stophop:
 
     Else    '--------------- system of equations ----------------------
 
-        omax.FindVariable
+        omax.FindVariable , True, CASengine
         If Not ValiderVariable Then GoTo slut
         UFSelectVar.NoEq = omax.AntalKom
         UFSelectVar.Vars = omax.Vars
@@ -900,7 +900,7 @@ Sub MaximaEliminate()
     Else    ' system of equations
 
         omax.ReadSelection
-        omax.FindVariable
+        omax.FindVariable , True, CASengine
         If Not ValiderVariable Then GoTo slut
         UFSelectVar.Eliminate = True
         UFSelectVar.NoEq = omax.AntalKom
@@ -1036,7 +1036,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8743)) < 1 Then
         ' only 1 equation
 
-        If Not omax.FindVariable Then GoTo slut
+        If Not omax.FindVariable(, True, CASengine) Then GoTo slut
         
         If CASengine > 0 And Not AllTrig Then ' In GeoGebra, it must be recognized via VBA whether it is a trigonometric equation
             If Not InStr(omax.Vars, ";") > 0 Then ' the method only works with 1 variable
@@ -1176,7 +1176,7 @@ ghop:
         Dim Arr2 As Variant
 
         omax.ReadSelection
-        omax.FindVariable
+        omax.FindVariable , True, CASengine
         UFSelectVar.NoEq = Selection.OMaths.Count
         UFSelectVar.Vars = omax.Vars
         UFSelectVar.Show
@@ -1521,7 +1521,7 @@ Sub Omskriv()
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
-    If Not omax.FindVariable Then GoTo slut
+    If Not omax.FindVariable(, True, CASengine) Then GoTo slut
     UFomskriv.Vars = omax.Vars
     UFomskriv.Show
     If UFomskriv.annuller Then GoTo slut
@@ -2165,7 +2165,7 @@ Sub SolveDENumeric()
         GoTo slut
     End If
 
-    omax.FindVariable
+    omax.FindVariable , True, CASengine
     If InStr(omax.Vars, "t") > 0 Then
         variabel = "t"
     ElseIf InStr(omax.Vars, "x") > 0 Then
@@ -2322,7 +2322,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     If funktion = vbNullString And variabel = vbNullString Then
-        If Not omax.FindVariable Then GoTo slut
+        If Not omax.FindVariable(, True, CASengine) Then GoTo slut
         If InStr(omax.Vars, "t") > 0 Then
             variabel = "t"
         ElseIf InStr(omax.Vars, "x") > 0 Then
@@ -2644,3 +2644,49 @@ Public Sub IncreaseCalcCounter()
     AntalB = AntalB + 1
 #End If
 End Sub
+
+Function ReplaceFakeVarNames(s As String) As String
+' Maxima will place variables in reverse alphabetical order. By replacing the most used variable names with "Fake" names in opposite order we get alphabetical order
+' This function must be applied where the fake varname could appear
+' Worked for addition, but Maxima already has alphabetic order for multiplication, så multiplication became reversed
+
+'    Dim ea As New ExpressionAnalyser
+'    ea.text = s
+'
+'    ea.ReplaceVar "a", "zqx"
+'    ea.ReplaceVar "b", "yqx"
+'    ea.ReplaceVar "c", "xqx"
+'    ea.ReplaceVar "d", "wqx"
+'    ea.ReplaceVar "x", "vqx"
+'    ea.ReplaceVar "y", "uqx"
+'    ea.ReplaceVar "z", "tqx"
+'    ea.ReplaceVar "x_0", "vqx_0"
+'    ea.ReplaceVar "x_1", "vqx_1"
+'    ea.ReplaceVar "y_0", "uqx_0"
+'    ea.ReplaceVar "y_1", "uqx_1"
+'    ea.ReplaceVar "z_0", "tqx_0"
+'    ea.ReplaceVar "z_1", "tqx_1"
+'    ReplaceFakeVarNames = ea.text
+    ReplaceFakeVarNames = s
+End Function
+
+Function ReplaceFakeVarNamesBack(s As String) As String
+'    Dim ea As New ExpressionAnalyser
+'    ea.text = s
+'    ea.ReplaceVar "zqx", "a"
+'    ea.ReplaceVar "yqx", "b"
+'    ea.ReplaceVar "xqx", "c"
+'    ea.ReplaceVar "wqx", "d"
+'    ea.ReplaceVar "vqx", "x"
+'    ea.ReplaceVar "uqx", "y"
+'    ea.ReplaceVar "tqx", "z"
+'    ea.ReplaceVar "vqx_0", "x_0"
+'    ea.ReplaceVar "vqx_1", "x_1"
+'    ea.ReplaceVar "uqx_0", "y_0"
+'    ea.ReplaceVar "uqx_1", "y_1"
+'    ea.ReplaceVar "tqx_0", "z_0"
+'    ea.ReplaceVar "tqx_1", "z_1"
+'    ReplaceFakeVarNamesBack = ea.text
+
+    ReplaceFakeVarNamesBack = s
+End Function

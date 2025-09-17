@@ -14,11 +14,16 @@ Sub OmdrejningsLegeme()
     'On Error GoTo fejl
 
 #If Mac Then
-    UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra3dApplet.html"
+'    UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra3dApplet.html"
+    UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=3d"
 #Else
-    UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra3dApplet.html"
+    'UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra3dApplet.html"
+    UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=3d"
 #End If
-    UrlLink = UrlLink & "?command="
+    If TT.LangNo = 1 Then
+        UrlLink = UrlLink & "&lang=da"
+    End If
+    UrlLink = UrlLink & "&command="
     PrepareMaxima
     omax.ConvertLnLog = False
     omax.ReadSelection
