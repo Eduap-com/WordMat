@@ -455,7 +455,7 @@
 454#£Apibrezti funkcija
 455#£Fiziniu konstantu apibrezimas
 456#£Sumazinti
-457#£
+457#£Q vertes indelis
 458#£Atskirti
 459#£Integruoti
 460#£Braizymo
@@ -542,7 +542,7 @@
 541#£Importavimo parametrai
 542#£Eksportuoti parametrus
 543#£Tinkinimo meniu
-544#£
+544#£sinusine regresija
 545#£Braizymo grafikas (Alt + P)
 546#£Rodomas pasirinktos (-u) funkcijos (-u) / lygties (-ciu) ir tasku grafikas. Tada grafika galima iterpti i dokumenta. Palaikomos kelios grafiku programos. Nustatymuose pasirinkite savo megstamiausia.
 547#£Sklypas naudojant GnuPlot
@@ -726,7 +726,7 @@
 725#£Is list/matrix indeksas
 726#£Standartine grafiku programa
 727#£"Excel" lapu idejimas
-728#£
+728#£Funkcijos atlikti nepavyko, nes WordMat+ neidiegta.
 729#£Valstybes isvesties vienetai, atskirti kableliais\npavyzdziais:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJei nieko nenurodyta, vienetai grazinami pagrindiniais SI vienetais arba SI isvestiniais vienetais be priesdelio.
 730#£Palaikomu vienetu pavyzdziai:\n(Daugiau zr. vadova)\n\nIlgis: cm , AU, ly, pc\nMass: u , G, mg\nFrequency: Hz , Bq\nEnergy: kWh , eV, aJ\nPressure: Bar , mmHg, atm, torr
 731#£Trigonometrines lygtys

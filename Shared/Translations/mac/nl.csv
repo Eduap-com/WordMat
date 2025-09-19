@@ -455,7 +455,7 @@
 454#£Functie defini‘ren
 455#£Definieer fysische constanten
 456#£Reduceren
-457#£
+457#£Q-waarde bijdrage
 458#£Onderscheiden
 459#£Integreren
 460#£Plotten
@@ -542,7 +542,7 @@
 541#£Instellingen voor importeren
 542#£Instellingen exporteren
 543#£Menu aanpassen
-544#£
+544#£sinusregressie
 545#£Grafiek grafiek (Alt+P)
 546#£Toont de grafiek voor de geselecteerde functie(s)/vergelijking(en) en punten. De grafiek kan vervolgens in het document worden ingevoegd. Verschillende graafprogramma's worden ondersteund. Kies je favoriet onder instellingen.
 547#£Plot met behulp van GnuPlot
@@ -726,7 +726,7 @@
 725#£Is lijst/matrix index
 726#£Standaard grafiek programma
 727#£Excel-sheets insluiten
-728#£
+728#£De functie kan niet worden uitgevoerd omdat WordMat+ niet is ge•nstalleerd.
 729#£Toestandsuitvoereenheden gescheiden door komma\nvoorbeelden:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nAls er niets wordt vermeld, worden eenheden geretourneerd in eenvoudige SI-eenheden of SI-afgeleide eenheden zonder voorvoegsel.
 730#£Voorbeelden van ondersteunde eenheden:\n(Zie handleiding voor meer)\n\nLengte: cm , AU, ly, pc\nMassa: u , G, mg\nFrequentie: Hz , Bq\nEnergie: kWh , eV, aJ\nDruk: Bar , mmHg, atm, torr
 731#£Trigonometrische vergelijkingen

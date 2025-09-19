@@ -455,7 +455,7 @@
 454#£Define function
 455#£Define physical constants
 456#£Reduce
-457#£
+457#£Q-value contribution
 458#£Differentiate
 459#£Integrate
 460#£Plotting
@@ -542,7 +542,7 @@
 541#£Import settings
 542#£Export settings
 543#£Customize menu
-544#£
+544#£sinus regression
 545#£Plot graph (Alt+P)
 546#£Shows the graph for the selected function(s)/equation(s) and points. The graph can then be inserted into the document. Several graph programs are supported. Choose your favorite under settings.
 547#£Plot using GnuPlot
@@ -726,7 +726,7 @@
 725#£Is list/matrix index
 726#£Standard graph program
 727#£Embed Excel sheets
-728#£
+728#£The function could not be performed because WordMat+ is not installed.
 729#£State output units separated by comma\nexamples:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nIf nothing is stated units are returned in basic SI-units or SI-derived units without prefix.
 730#£Examples of supported units:\n(See manual for more)\n\nLength: cm , AU, ly, pc\nMass: u , G, mg\nFrequency: Hz , Bq\nEnergy: kWh , eV, aJ\nPressure: Bar , mmHg, atm, torr
 731#£Trigonometric equations
