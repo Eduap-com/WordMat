@@ -270,7 +270,7 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
         s = s & "A=" & DePoint & ";Xmin=-100;Xmax=100;Tic=0.1;"
         s = s & "SolveODE(" & ea.text & ", x(A), y(A), Xmin, Tic);" ' y(A) does not work
         s = s & "SolveODE(" & ea.text & ", x(A), y(A), Xmax, Tic)"
-        OpenGeoGebraWeb s, "Classic", True, True
+        OpenGeoGebraWeb s, "", True, True
         GoTo slut
 #If Mac Then
 #Else

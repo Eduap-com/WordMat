@@ -349,51 +349,31 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
     cmd = Replace(cmd, "+", "%2B")
         
 #If Mac Then
-    '    UrlLink = "file:///Library/Application%20Support/Microsoft/Office365/User%20Content.localized/Add-Ins.localized/WordMat/geogebra-math-apps/GeoGebra" & Gtype & "Applet.html"
-    If Gtype = "" Then
-'        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra" & Gtype & "Applet.html"
-        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=graphing"
-    ElseIf Gtype = "CAS" Then
-        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=cas"
-    ElseIf Gtype = "3d" Then
-        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=3d"
-    ElseIf Gtype = "prob" Then
-        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=probability"
-    ElseIf Gtype = "spreadsheet" Then
-        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=spreadsheet"
-    ElseIf Gtype = "geometry" Then
-        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=geometry"
-    ElseIf Gtype = "calculator" Then
-        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=calculator"
-    Else
-'        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=graphing"
-        UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra" & Gtype & "Applet.html"
-    End If
+    UrlLink = "file://" & GetGeoGebraMathAppsFolder()
 #Else
-    '    UrlLink = "https://geogebra.org/calculator"
     DN = GetGeoGebraMathAppsFolder()
-    If DN <> vbNullString Then
-        If Gtype = "" Then
-            UrlLink = "file://" & DN & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=graphing"
-        ElseIf Gtype = "CAS" Then
-            UrlLink = "file://" & DN & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=cas"
-        ElseIf Gtype = "3d" Then
-            UrlLink = "file://" & DN & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=3d"
-        ElseIf Gtype = "prob" Then
-            UrlLink = "file://" & DN & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=probability"
-        ElseIf Gtype = "spreadsheet" Then
-            UrlLink = "file://" & DN & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=spreadsheet"
-        ElseIf Gtype = "geometry" Then
-            UrlLink = "file://" & DN & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=geometry"
-        ElseIf Gtype = "calculator" Then ' simple calculator
-            UrlLink = "file://" & DN & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=calculator"
-        Else
-            UrlLink = "file://" & DN & "GeoGebra" & Gtype & "Applet.html"
-        End If
-    Else: GoTo slut
-    End If
+    UrlLink = "file://" & DN
+    If DN = vbNullString Then GoTo slut
 #End If
 
+    If Gtype = "" Or Gtype = "graphing" Then
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=graphing"
+    ElseIf Gtype = "CAS" Then
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=cas"
+    ElseIf Gtype = "3d" Then
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=3d"
+    ElseIf Gtype = "prob" Then
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=probability"
+    ElseIf Gtype = "spreadsheet" Then
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=spreadsheet"
+    ElseIf Gtype = "geometry" Then
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=geometry"
+    ElseIf Gtype = "calculator" Then
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=calculator"
+    Else
+        UrlLink = UrlLink & "GeoGebra" & Gtype & "Applet.html"
+    End If
+    
     If TT.LangNo = 1 Then
         UrlLink = UrlLink & "&lang=da"
     End If
