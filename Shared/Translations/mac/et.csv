@@ -455,7 +455,7 @@
 454#£Funktsiooni mŠŠratlemine
 455#£FŸŸsikaliste konstantide mŠŠratlemine
 456#£VŠhendada
-457#£
+457#£Q-vŠŠrtuse panus
 458#£Eristada
 459#£Integreerida
 460#£Joonestamist
@@ -542,7 +542,7 @@
 541#£SŠtete importimine
 542#£SŠtete eksportimine
 543#£Kohanda menŸŸd
-544#£
+544#£Siinuse regressioon
 545#£Graafiku graafik (Alt+P)
 546#£NŠitab valitud funktsiooni(de)/v›rrandi(te) ja punktide graafikut. SeejŠrel saab graafiku dokumenti sisestada. Toetatud on mitmed graafikaprogrammid. Valige seadete alt oma lemmik.
 547#£Joonistage GnuPloti abil
@@ -726,7 +726,7 @@
 725#£On loendi/maatriksi indeks
 726#£Standardne graafikuprogramm
 727#£Exceli lehtede manustamine
-728#£
+728#£Funktsiooni ei saanud tŠita, kuna WordMat+ pole installitud.
 729#£Oleku vŠljundŸhikud, mis on eraldatud komaga\nnŠited:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nKui midagi ei ole šeldud, tagastatakse Ÿhikud SI-p›hiŸhikutes v›i SI-tuletatud Ÿhikutes ilma eesliiteta.
 730#£NŠited toetatud Ÿhikutest:\n(Lisateabe saamiseks vaadake juhendit)\n\nPikkus: cm , AU, ly, pc\nMass: u , G, mg\nSagedus: Hz , Bq\nEnergia: kWh , eV, aJ\nR›hk: Bar , mmHg, atm, torr
 731#£Trigonomeetrilised v›rrandid

@@ -455,7 +455,7 @@
 454#£Zdefiniuj funkcje
 455#£Definiowanie stalych fizycznych
 456#£Zmniejszyc
-457#£
+457#£Wklad wartosci Q
 458#£Odr—zniac
 459#£Integrowac
 460#£Drukowania
@@ -542,7 +542,7 @@
 541#£Importowanie ustawien
 542#£Eksportowanie ustawien
 543#£Dostosuj menu
-544#£
+544#£Regresja zatokowa
 545#£Wykres wykresu (Alt+P)
 546#£Pokazuje wykres dla wybranych funkcji/r—wnan i punkt—w. Wykres mozna nastepnie wstawic do dokumentu. Obslugiwanych jest kilka program—w wykres—w. Wybierz swoja ulubiona w ustawieniach.
 547#£Wykres za pomoca GnuPlot
@@ -726,7 +726,7 @@
 725#£Jest indeksem listy/macierzy
 726#£Standardowy program do tworzenia wykres—w
 727#£Osadzanie arkuszy programu Excel
-728#£
+728#£Nie mozna wykonac tej funkcji, poniewaz program WordMat+ nie jest zainstalowany.
 729#£Jednostki wyjsciowe stanu oddzielone przecinkami\nprzyklady:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJesli nic nie jest podane, jednostki sa zwracane w podstawowych jednostkach SI lub jednostkach pochodnych SI bez prefiksu.
 730#£Przyklady obslugiwanych jednostek:\n(Zobacz instrukcje, aby dowiedziec sie wiecej)\n\nDlugosc: cm , AU, ly, pc\nMasa: u , G, mg\nCzestotliwosc: Hz , Bq\nEnergia: kWh , eV, aJ\nCisnienie: Bar , mmHg, atm, torr
 731#£R—wnania trygonometryczne

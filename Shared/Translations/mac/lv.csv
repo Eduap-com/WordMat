@@ -455,7 +455,7 @@
 454#£Definet funkciju
 455#£Fizisko konstantu definesana
 456#£Mazinat
-457#£
+457#£Q vertibas ieguldijums
 458#£Atskirtu
 459#£Integret
 460#£Skicesanu
@@ -542,7 +542,7 @@
 541#£Importesanas iestatijumi
 542#£Eksportesanas iestatijumi
 543#£Pielagot izvelni
-544#£
+544#£sinusa regresija
 545#£Diagrammas diagramma (Alt+P)
 546#£Parada atlasitas(-o) funkcijas(-u)/vienadojuma(-u) un punktu grafiku. Pec tam grafiku var ievietot dokumenta. Tiek atbalstitas vairakas grafiku programmas. Sadala Iestatijumi izvelieties savu izlasi.
 547#£Sizets, izmantojot GnuPlot
@@ -726,7 +726,7 @@
 725#£Ir saraksta/matricas indekss
 726#£Standarta grafiku programma
 727#£Excel lapu iegulsana
-728#£
+728#£Funkciju nevareja izpildit, jo WordMat+ nav instalets.
 729#£Stavokla izejas vienibas, kas atdalitas ar komatiem\npiemeriem:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nJa nekas nav noradits, vienibas tiek atgrieztas pamata SI vienibas vai no SI atvasinatas vienibas bez prefiksa.
 730#£Atbalstito vienibu piemeri:\n(Plasaku informaciju skatit rokasgramata)\n\nGarums: cm , AU, ly, pc\nMasa: u , G, mg\nFrekvence: Hz , Bq\nEnergija: kWh , eV, aJ\nSpiediens: Bar , mmHg, atm, torr
 731#£Trigonometriskie vienadojumi

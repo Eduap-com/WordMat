@@ -455,7 +455,7 @@
 454#£Définir la fonction
 455#£Définir des constantes physiques
 456#£Réduire
-457#£
+457#£Contribution de la valeur Q
 458#£Différencier
 459#£Intégrer
 460#£Tracé
@@ -542,7 +542,7 @@
 541#£Paramètres d'importation
 542#£Paramètres d'exportation
 543#£Personnaliser le menu
-544#£
+544#£Régression sinusale
 545#£Graphique de tracé (Alt+P)
 546#£Affiche le graphique de la ou des fonctions/équations sélectionnées et des points. Le graphique peut ensuite être inséré dans le document. Plusieurs programmes graphiques sont pris en charge. Choisissez votre favori sous les paramètres.
 547#£Tracer à l'aide de GnuPlot
@@ -726,7 +726,7 @@
 725#£Est un index de liste/matrice
 726#£Programme graphique standard
 727#£Intégrer des feuilles Excel
-728#£
+728#£La fonction n'a pas pu être exécutée car WordMat+ n'est pas installé.
 729#£Unités de sortie d'état séparées par des virgules\nexemples :\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nSi rien n'est indiqué, les unités sont renvoyées en unités SI de base ou en unités dérivées de SI sans préfixe.
 730#£Exemples d'unités prises en charge :\n(Voir le manuel pour plus d'informations)\n\nLongueur : cm , AU, ly, pc\nMasse : u , G, mg\nFréquence : Hz , Bq\nÉnergie : kWh , eV, aJ\nPression : Bar , mmHg, atm, torr
 731#£Équations trigonométriques

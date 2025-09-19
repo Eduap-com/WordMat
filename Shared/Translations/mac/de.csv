@@ -455,7 +455,7 @@
 454#£Funktion definieren
 455#£Physikalische Konstanten definieren
 456#£Umschreiben
-457#£
+457#£Q-Wert-Beitrag
 458#£Unterscheidungsmerkmale
 459#£Trunk-Funktion
 460#£Grafik
@@ -542,7 +542,7 @@
 541#£Einstellungen importieren
 542#£Export-Einstellungen
 543#£Menü "Anpassen"
-544#£
+544#£Sinus-Regression
 545#£Diagramm anzeigen (ALT+P)
 546#£Zeigt das Diagramm für die ausgewählten Funktionen/Gleichungen/Gleichungen und Punkte an. Das Diagramm kann anschließend in das Dokument eingefügt werden. Es werden verschiedene Grafikprogramme unterstützt. Wählen Sie Ihren Favoriten in den Einstellungen aus oder wählen Sie aus, indem Sie diese Schaltfläche erweitern
 547#£Einfügen eines Diagramms mit dem Programm GnuPlot
@@ -726,7 +726,7 @@
 725#£Ist Liste/Matrixindex
 726#£Standard-Grafiksoftware
 727#£Eingebettete Excel-Tabelle einfügen
-728#£
+728#£Die Funktion konnte nicht ausgeführt werden, da WordMat+ nicht installiert ist.
 729#£Geben Sie an, welche Einheiten in der Ausgabe durch Komma\nBeispiele getrennt sein sollen:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nWenn nichts angegeben ist, werden alle Einheiten als Basis-SI-Einheiten oder abgeleitete SI-Einheiten ohne Präfix zurückgegeben.
 730#£Beispiele für unterstützte Einheiten:\n(Weitere Informationen finden Sie im Handbuch)\n\nLänge: cm, AU, ly, pc\nMasse: u, G, mg\nZeit: min, Stunden, Tage, Jahre\nFrequenz: Hz, Bq\nEnergie: kWh, eV, aJ\nDruck: Bar, mmHg, atm, trocken
 731#£Trignonometrische Gleichungen

@@ -455,7 +455,7 @@
 454#£Definiera funktion
 455#£Definiera fysiska konstanter
 456#£Skriva
-457#£
+457#£Q-värdes bidrag
 458#£Differentiators
 459#£Trunk-funktion
 460#£Diagram
@@ -542,7 +542,7 @@
 541#£Importera inställningar
 542#£Exportera inställningar
 543#£Anpassa menyn
-544#£
+544#£sinusregression
 545#£Visa graf (Alt+P)
 546#£Visar grafen för de valda funktionerna/ekvationerna/ekvationerna och punkterna. Grafen kan sedan infogas i dokumentet. Olika grafprogram stöds. Välj din favorit i inställningarna eller välj genom att expandera den här knappen
 547#£Infoga graf med programmet GnuPlot
@@ -726,7 +726,7 @@
 725#£Är lista/matrisindex
 726#£Standard programvara för grafer
 727#£Infoga Excel-ark inbäddat
-728#£
+728#£Funktionen kunde inte utföras eftersom WordMat+ inte är installerat.
 729#£Ange vilka enheter som ska vara i utdata separerade med kommatecken:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nOm inget anges kommer alla enheter att returneras som bas-SI-enheter eller härledda SI-enheter utan prefix.
 730#£Exempel på enheter som stöds:\n(Se manualen för mer information)\n\nLängd: cm, AU, ly, pc\nMassa: u , G, mg\nTid: min, timmar, dagar, år\nFrekvens: Hz , Bq\nEnergi: kWh, eV, aJ\nTryck: Bar, mmHg, uttagsautomat, torr
 731#£Trignonometriska ekvationer
