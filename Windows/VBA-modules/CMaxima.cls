@@ -356,7 +356,9 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
     
 '    ConvertMaximaUnits = ConvertToWordSymbols(ConvertMaximaUnits)
 '    ConvertMaximaUnits = CodeForMaxima(ConvertMaximaUnits)
-    
+    If Left(ConvertMaximaUnits, 11) = "[done,done," Then ' some error occured that was shown before output was caught could be stack overflow
+        ConvertMaximaUnits = Expr ' just use result before
+    End If
     If matvekt Then ' if there are vectors in the expression, the first pass will have removed the special operators and functions that were introduced
         ConvertMaximaUnits = Replace(ConvertMaximaUnits, ChrW$(215), "~")    ' vector produkt
 '        ConvertMaximaUnits = left$(ConvertMaximaUnits, Pos - 1) & "vecmag(" & mid$(ea.text, Pos + 1, posb - Pos - 1) & ")" & right$(ea.text, Len(ea.text) - posb)

@@ -355,7 +355,7 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
         UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=graphing"
     ElseIf Gtype = "CAS" Then
         UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=cas"
-    ElseIf Gtype = "3D" Then
+    ElseIf Gtype = "3d" Then
         UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=3d"
     ElseIf Gtype = "prob" Then
         UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=probability"
