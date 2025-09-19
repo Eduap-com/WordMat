@@ -27,8 +27,8 @@ Sub SaveBackup()
         End If
     End If
         
-    If timer - SaveTime < BackupTime * 60 Then Exit Sub
-    SaveTime = timer
+    If Timer - SaveTime < BackupTime * 60 Then Exit Sub
+    SaveTime = Timer
     If ActiveDocument.path = "" Then
         MsgBox TT.A(679)
         Exit Sub

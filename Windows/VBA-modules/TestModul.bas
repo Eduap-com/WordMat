@@ -239,7 +239,7 @@ Sub RunTestSequence()
     If TestSolve("e^(-x)=2", "x", "x=-ln" & VBA.ChrW$(8289) & "(2)") Then GoTo slut
     If TestSolve("1=1,5" & VBA.ChrW$(183) & "x^2+0,5/x^0,5 -1", "x", "x=0,06287224    " & VBA.ChrW$(8744) & "    x=1") Then GoTo slut ' requires numerical solution. Previous to_poly error, with only one solution.
     If TestSolve("6174/(1+8652" & VBA.ChrW$(183) & "" & VBA.ChrW$(12310) & "0,711" & VBA.ChrW$(12311) & "^x )=8000000", "x", "x" & VBA.ChrW$(8712) & "" & VBA.ChrW$(8709)) Then GoTo slut
-    If TestSolve("x^2=e^(-x^2 )", "x", "x=-" & VBA.ChrW$(8730) & "(lambert_w (1) )    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(8730) & "(lambert_w (1) )") Then GoTo slut
+    If TestSolve("x^2=e^(-x^2 )", "x", "x=-" & VBA.ChrW$(8730) & "(W_0 (1) )    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(8730) & "(W_0 (1) )") Then GoTo slut
 
     MaximaExact = 2 ' num
     InsertTestMath "Definer: " & VBA.ChrW$(963) & ">0"

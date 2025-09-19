@@ -718,8 +718,8 @@ End Sub
 
 Sub Rib_nylign(control As IRibbonControl)
     On Error GoTo fejl
-    Application.ScreenUpdating = False
-    Selection.OMaths.Add Range:=Selection.Range
+    NewEquation
+        
     GoTo slut
 fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error

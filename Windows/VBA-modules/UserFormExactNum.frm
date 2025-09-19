@@ -17,8 +17,8 @@ Option Explicit
 
 Dim start As Single, j As Integer ' time
 Private Sub UserForm_Activate()
-    start = timer    ' Set start time.
-    Do While timer < start + 1
+    start = Timer    ' Set start time.
+    Do While Timer < start + 1
         DoEvents    ' Yield to other processes.
     Loop
 On Error Resume Next
@@ -82,7 +82,7 @@ Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
             SetAuto
             MaximaExact = 0
         End If
-        start = timer    ' Set start time.
+        start = Timer    ' Set start time.
 #If Mac Then
 #Else
         DoEvents

@@ -49,11 +49,11 @@ Function TrimRenter(ByVal text As String)
     TrimRenter = TrimR(TrimR(text, vbLf), vbCr)
 End Function
 
-Sub Wait(pausetime As Variant)
-'pausetime in senconds
-Dim start
-    start = timer    ' Set start time.
-    Do While timer < start + pausetime
+Sub Wait(pausetime As Single)
+'pausetime in seconds
+Dim start As Single
+    start = Timer    ' Set start time.
+    Do While Timer < start + pausetime
         DoEvents    ' Yield to other processes.
     Loop
 End Sub

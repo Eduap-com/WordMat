@@ -34,7 +34,7 @@ Sub Testspeed()
 Dim i As Integer
 Dim s As String
 Dim t As Single
-    t = timer
+    t = Timer
     For i = 0 To 1000
 '        s = GetRegistryValue("HKCU", "Software\WordMat\Settings", "AntalBeregninger", REG_DWORD)
 '        s = GetRegistryValue("HKCU", "Software\WordMat\Settings", "Skolenavn", 0)
@@ -42,7 +42,7 @@ Dim t As Single
         's = RegKeyRead("HKCU\Software\WordMat\Settings\AntalBeregninger")
         's = RegKeyRead("HKCU\Software\WordMat\Settings\FormelFag")
     Next
-    MsgBox timer - t & vbCrLf & s
+    MsgBox Timer - t & vbCrLf & s
 End Sub
 
 Public Function GetRegistryValue(hive As String, path As String, valueName As String, Optional valueType As Long = 0) As Variant

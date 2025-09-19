@@ -127,6 +127,7 @@ Private Sub Class_Terminate()
 End Sub
 
 Public Sub ResetMaxima()
+' Preparemaxima also ensures variables are forgotten, but there is no time penalty for this extra call, and killdef/forgetlist are set to "" hence the next call is smaller
     Dim kd As String
     
     If DllConnType = 2 Then Exit Sub ' wsh starts anew every time so reset is not necessary
@@ -185,7 +186,6 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
     End If
     i = 0
     Dim UFwait2 As UserFormWaitForMaxima
-    Set UFwait2 = New UserFormWaitForMaxima
 
     If StopTime < -2 Then    ' by graphs and some other nsolve
         '        MsgBox MaximaInputStreng
@@ -206,6 +206,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         '    MsgBox (MaxProc.LastMaximaOutput)
         Exit Sub
     ElseIf StopTime < 0 Then
+        Set UFwait2 = New UserFormWaitForMaxima
         UFwait2.Show vbModeless
         DoEvents
         MaxProc.ExecuteMaximaCommand InputStreng, 1
@@ -218,7 +219,8 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         GoTo slut
     Else ' normal calculation
         If MaxProc.Finished = 0 Then
-            RestartMaxima
+            WaitForMaximaUntil 100
+            If MaxProc.Finished = 0 Then RestartMaxima
 '            UFwait2.Show vbModeless
 '            DoEvents
 '            Do While MaxProc.Finished = 0 And i < 50
@@ -233,7 +235,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
 '            UFwait2.Label_tip.Caption = GetRandomTip
         End If
         If StopNow Then
-            Unload UFwait2
+            If Not UFwait2 Is Nothing Then Unload UFwait2
             MaxProc.CloseProcess
 '            MaxProc.Finished = 1
             MaxProc.StartMaximaProcess
@@ -241,7 +243,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         End If
 
         MaxProc.ExecuteMaximaCommand InputStreng, 0
-        UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
+        If Not UFwait2 Is Nothing Then UFwait2.Label_progress.Caption = UFwait2.Label_progress.Caption & "*"
     End If
     
     WaitForMaximaForm StopTime
@@ -253,10 +255,24 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
 
     If Reset Then
         FindLastMaximaOutput ConvertWordSymbols
-        ResetMaxima
+        If MaximaOutput = vbNullString And KommentarOutput = vbNullString Then ' Something must be wrong with Maxima. Try restart
+            If MaximaUnits Then
+                MaxProcUnit.CloseProcess
+                MaxProcUnit.StartMaximaProcess
+            Else
+                MaxProc.CloseProcess
+                MaxProc.StartMaximaProcess
+            End If
+        Else
+            ResetMaxima ' deletes definitions. does not slow WordMat
+        End If
+    End If
+
+    If FreshMaxima Then
+        MaxProc.ExecuteMaximaCommand "quit()$", 0
     End If
     On Error Resume Next
-    Unload UFwait2
+    If Not UFwait2 Is Nothing Then Unload UFwait2
     GoTo slut
 fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
@@ -360,8 +376,8 @@ Sub WaitForMaximaForm(StopTime As Integer)
     Dim UFwait2 As New UserFormWaitForMaxima
     
     i = 0
-    Do While MaxProc.Finished = 0 And i < 11
-        Wait (0.1)
+    Do While MaxProc.Finished = 0 And i < 110
+        Wait (0.01)
         i = i + 1
     Loop
     If MaxProc.Finished = 0 Then
@@ -440,7 +456,7 @@ Sub ShowDebug(Optional vis As Boolean = False, Optional MInputString As String, 
             UserFormDebug.TextBox_maximaoutput = OutputString
         End If
         
-        UserFormDebug.Label_time.Caption = UserFormDebug.Label_time.Caption & "Samlet tid: " & timer - tid & vbCrLf
+        UserFormDebug.Label_time.Caption = UserFormDebug.Label_time.Caption & "Samlet tid: " & Timer - tid & vbCrLf
         UserFormDebug.Show
     End If
 End Sub
@@ -619,7 +635,7 @@ Sub InsertKillDef()
     End If
     If Len(ForgetList) > 0 Then
         ForgetList = Left$(ForgetList, Len(ForgetList) - 1)    'remove last comma
-        MaximaInputStreng = MaximaInputStreng & "forget(" & ForgetList & ")$"
+        MaximaInputStreng = MaximaInputStreng & "forget(" & ForgetList & ")$reset(linenum,%,features,%rnum)$"
         ForgetList = ""
     End If
 
@@ -1526,7 +1542,7 @@ start:
         Else
             eqsg = ChrW$(&H2248)
         End If
-        If moutput(nr) <> "" Then
+        If moutput(nr) <> vbNullString Then
             MaximaOutput = eqsg & ConvertToWordSymbols(moutput(nr))
             KommentarOutput = ""
             If MaximaOutput = "=fejl" Then
@@ -2520,13 +2536,6 @@ Sub Draw3D(graphobj As String, Optional antalobj As Integer = 1)
         End If
 #End If
 
-End Sub
-Sub Wait(pausetime As Variant)
-    Dim start
-    start = timer    ' Set start time.
-    Do While timer < start + pausetime
-        DoEvents    ' Yield to other processes.
-    Loop
 End Sub
 
 Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As String
@@ -6005,8 +6014,8 @@ Sub GenerateOutputArray(Optional text As String)
     Dim pos As Long
     Dim pos2 As Long
     Dim posb As Long
-    Dim ArrIndex As Integer 'mac
-    ArrIndex = 1 'mac
+    Dim ArrIndex As Integer
+    ArrIndex = 1
 
     On Error GoTo fejl
 #If Mac Then
@@ -6048,7 +6057,6 @@ Sub GenerateOutputArray(Optional text As String)
 
         Output = Mid$(text, posb + 1, pos2 - pos - 4 - AntalCifre)
         If Mid$(text, pos + 3, 1) = "o" Then Output = RemovePrintetBool(Output)
-'#If Mac Then ' SBCL
         If Mid$(text, pos + 3, 1) = "i" Then
             ' next is input
             Minput(ArrIndex) = Minput(ArrIndex) & Output
@@ -6057,7 +6065,7 @@ Sub GenerateOutputArray(Optional text As String)
             Output = Trim$(Output) ' replace vbcrlfmac removed 1.29 for the '23,,' the arrow showing the error was not placed correctly on the next line
             ' next is output
             moutput(ArrIndex) = moutput(ArrIndex) & Output
-            ArrIndex = ArrIndex + 1 'mac
+            ArrIndex = ArrIndex + 1
         End If
         pos = pos2
 '        pos2 = InStr(pos + 3, text, vbLf & "(%")
@@ -6142,6 +6150,8 @@ Function GetMaximaUnitOutput(Optional text As String) As String
     Dim pos As Integer
     Dim pos2 As Integer
     Dim posb As Integer
+    Dim ArrIndex As Integer
+    ArrIndex = 1
     
     Dim MinputU() As String
     Dim moutputU() As String
@@ -6185,15 +6195,16 @@ Function GetMaximaUnitOutput(Optional text As String) As String
 
         If Mid$(text, pos + 3, 1) = "i" Then
             ' next is input
-            MinputU(nr) = MinputU(nr) & Output
+            MinputU(ArrIndex) = MinputU(ArrIndex) & Output
         Else
             ' next is output
-            moutputU(nr) = moutputU(nr) & Output
+            moutputU(ArrIndex) = moutputU(ArrIndex) & Output
+            ArrIndex = ArrIndex + 1
         End If
         pos = pos2
         pos2 = FindNextio(pos + 2, text) - 1
     Loop Until slutnu
-
+    nr = ArrIndex
     If moutputU(nr) = "" And Len(MinputU(nr)) < 6 Then
         nr = nr - 1
     End If
@@ -6396,10 +6407,10 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
     Dim deflign As Boolean
 
     ea.SetNormalBrackets
-    s = Replace(s, ChrW$(12310), "")    ' special invisible brackets are removed
-    s = Replace(s, ChrW$(12311), "")    ' special invisible brackets are removed
-    s = Replace(s, vbCrLf, "")    ' enter can accur
-    s = Replace(s, vbCr, "")
+    If InStr(s, ChrW$(12310)) Then s = Replace(s, ChrW$(12310), "")    ' special invisible brackets are removed
+    If InStr(s, ChrW$(12311)) Then s = Replace(s, ChrW$(12311), "")    ' special invisible brackets are removed
+    If InStr(s, vbCrLf) Then s = Replace(s, vbCrLf, "")    ' enter can accur
+    If InStr(s, vbCr) Then s = Replace(s, vbCr, "")
     slc = LCase$(s)
  
     If InStr(s, ChrW$(8788)) > 0 Or InStr(s, ChrW$(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(slc, "definer:") > 0 Or InStr(slc, "define:") > 0 Or InStr(slc, "ligning:") > 0 Or InStr(slc, "equation:") > 0 Or InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(s, ChrW$(8801)) > 0 Or InStr(slc, LCase$(TT.A(69))) > 0 Then
@@ -6414,9 +6425,9 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
             s = Right$(s, Len(s) - 16)
             deflign = True
         End If
-        s = Replace(s, ChrW$(8788), ":=")    ' \equiv and
-        s = Replace(s, ChrW$(8797), ":=")    ' def=
-        s = Replace(s, ChrW$(8801), ":=")    ' speciel := symbol
+        If InStr(s, ChrW$(8788)) Then s = Replace(s, ChrW$(8788), ":=")    ' \equiv and
+        If InStr(s, ChrW$(8797)) Then s = Replace(s, ChrW$(8797), ":=")   ' def=
+        If InStr(s, ChrW$(8801)) Then s = Replace(s, ChrW$(8801), ":=")    ' speciel := symbol
 
         s = Replace(s, ChrW$(11), "")
        slc = LCase$(s)
@@ -6469,7 +6480,7 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
                     defenk = Replace(defenk, ChrW$(12310), "(") ' hidden brackets
                     defenk = Replace(defenk, ChrW$(12311), ")") ' hidden brackets
                 Else
-                    defenk = Replace(defenk, ChrW$(34), "")    ' apostrof
+                    defenk = Replace(defenk, ChrW$(34), vbNullString)    ' apostrof
                     defenk = CodeForMaxima(defenk, CASengine)
                     If InStr(defenk, "if") <= 0 And (InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0) Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
                         AddDefinition = AddDefinition & GetAssumeText(defenk)
@@ -6513,9 +6524,9 @@ hop2:                    ' if setunit or assume or declare
                 t = ea2.GetNextVar
 
                 If InStr(Split(defenk, ":")(0), "diff") > 0 Then
-                    MsgBox TT.A(116) & s
-                ElseIf (t = "e" And InStr(defenk, "[") <= 0) Or t = "integrate" Or t = "sin" Or t = "cos" Or t = "tan" Or t = "diff" Or t = "solve" Or t = "at" Or t = "for" Or t = "in" Or t = "do" Or t = "if" Or t = "and" Or t = "or" Or t = "product" Or t = "step" Or t = "next" Or t = "from" Or t = "limit" Or t = "sum" Or t = "then" Or t = "and" Or t = "or" Or t = "else" Or t = "unless" Or t = "while" Then
-                    MsgBox TT.A(845) & " " & t & " " & TT.A(434), vbOKOnly, TT.Error
+                    MsgBox2 TT.A(116) & s, vbOKOnly, TT.Error
+                ElseIf (t = "e" And InStr(defenk, "[") <= 0) Or t = "integrate" Or t = "sin" Or t = "cos" Or t = "tan" Or t = "diff" Or t = "solve" Or t = "at" Or t = "for" Or t = "in" Or t = "do" Or t = "if" Or t = "and" Or t = "or" Or t = "product" Or t = "step" Or t = "next" Or t = "from" Or t = "limit" Or t = "sum" Or t = "then" Or t = "and" Or t = "or" Or t = "else" Or t = "unless" Or t = "while" Or t = "vecmag" Then
+                    MsgBox2 TT.A(845) & " " & t & " " & TT.A(434), vbOKOnly, TT.Error
                 ElseIf t = "setunits" Or t = "assume" Or t = "declare" Then
                     '                    AddDefinition =  AddDefinition & CodeForMaxima(defenk) & "$"
                     AddDefinition = AddDefinition & defenk & ";"
@@ -6656,12 +6667,12 @@ Function ValidateDef(ByVal LHS As String, ByVal RHS As String) As Boolean
 
     ' If Not ea.IsAllText Then   not good enough then, and; not taken into account
     If InStr(LHS, "+") > 0 Or InStr(LHS, "-") > 0 Or InStr(LHS, "*") > 0 Or InStr(LHS, "/") > 0 Then
-        MsgBox TT.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & RHS) & vbCrLf & TT.A(118), vbOKOnly, TT.Error
+        MsgBox2 TT.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & RHS) & vbCrLf & TT.A(118), vbOKOnly, TT.Error
         Exit Function
     End If
 
     If Right$(RHS, 1) = "+" > 0 Then
-        MsgBox TT.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & RHS) & vbCrLf & TT.A(118), vbOKOnly, TT.Error
+        MsgBox2 TT.A(117) & vbCrLf & vbTab & ConvertToAscii(LHS & "=" & RHS) & vbCrLf & TT.A(118), vbOKOnly, TT.Error
         Exit Function
     End If
 
@@ -6853,7 +6864,7 @@ Public Property Get AntalKom() As Integer
     AntalKom = UBound(Kommandoer) + 1
     GoTo slut
 fejl:
-    If Kommando <> "" Then
+    If Kommando <> vbNullString Then
         AntalKom = 1
     Else
         AntalKom = 0

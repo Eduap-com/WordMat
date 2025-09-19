@@ -18,8 +18,8 @@ Option Explicit
 
 Private start As Single
 Private Sub UserForm_Activate()
-    start = timer    ' Set start time.
-    Do While timer < start + 2
+    start = Timer    ' Set start time.
+    Do While Timer < start + 2
         DoEvents    ' Yield to other processes.
     Loop
     Me.hide
@@ -37,17 +37,17 @@ On Error GoTo slut
         Me.Label_text.Caption = TT.A(710) ' "Eksakt"
         DoEvents
         MaximaExact = 1
-        start = timer    ' Set start time.
+        start = Timer    ' Set start time.
     ElseIf MaximaExact = 1 Then
         Me.Label_text.Caption = TT.A(711) ' "Num"
         DoEvents
         MaximaExact = 2
-        start = timer    ' Set start time.
+        start = Timer    ' Set start time.
     Else
         Me.Label_text.Caption = TT.A(712) ' "Auto"
         DoEvents
         MaximaExact = 0
-        start = timer    ' Set start time.
+        start = Timer    ' Set start time.
     End If
     Else
         Me.hide

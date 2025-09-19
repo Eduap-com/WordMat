@@ -1,7 +1,6 @@
 Attribute VB_Name = "ModuleP"
 Option Private Module
 Option Explicit
-' Functions that require WordMat partnership
 ' Application.run "Function" can handle error, parameters and return values
 
 Sub TestPP()

@@ -14,7 +14,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
     
     If DebugWM Then
         UserFormDebug.Label_time.Caption = ""
-        tid = timer
+        tid = Timer
     End If
     
     SaveBackup
@@ -32,7 +32,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
 #If Mac Then
 #Else
     If Not MaxProc Is Nothing And DllConnType <= 1 Then ' on Windows Maxima must be started first, if using api. Skip if using wsh
-        If Not MaxProc.IsMaximaStarted And CASengine = 0 Then
+        If (Not MaxProc.IsMaximaStarted Or FreshMaxima) And CASengine = 0 Then
             MaxProc.Units = 0
             MaxProc.StartMaximaProcess
             WaitForMaximaUntil
@@ -106,10 +106,10 @@ End Function
 Sub WaitForMaximaUntil(Optional StopTime As Integer = 500)
     Dim i As Integer
 
-    If StopTime = 0 Then StopTime = 300
+    If StopTime = 0 Then StopTime = 3000
 
     Do While MaxProc.Finished = 0 And MaxProc.ErrCode = 0 And Not (omax.StopNow) And i < StopTime
-        Wait (0.1)
+        Wait (0.01)
         i = i + 1
     Loop
 slut:
@@ -117,9 +117,9 @@ End Sub
 Sub WaitForMaximaUnitUntil(Optional StopTime As Integer = 500)
     Dim i As Integer
 
-    If StopTime = 0 Then StopTime = 300
+    If StopTime = 0 Then StopTime = 3000
     Do While MaxProcUnit.Finished = 0 And MaxProcUnit.ErrCode = 0 And Not (omax.StopNow) And i < StopTime
-        Wait (0.1)
+        Wait (0.01)
         i = i + 1
     Loop
 slut:
@@ -1267,7 +1267,7 @@ Sub beregn()
         On Error GoTo fejl
    ' Application.ScreenUpdating = False
     Dim tid As Single
-    tid = timer
+    tid = Timer
 #If Mac Then
     Dim D As Document
     Set D = ActiveDocument
@@ -1278,9 +1278,6 @@ Sub beregn()
     Dim sstart As Long, sslut As Long
     sstart = Selection.start
     sslut = Selection.End
-    '    TimeText = ""
-    '    Dim st As Double
-    '    st = Timer
     scrollpos = ActiveWindow.VerticalPercentScrolled
     
     RunFirst
@@ -1308,7 +1305,7 @@ Sub beregn()
         End If
     End If
     omax.prevspr = ""
-
+    
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
         MsgBox TT.A(47), vbOKOnly, TT.Error

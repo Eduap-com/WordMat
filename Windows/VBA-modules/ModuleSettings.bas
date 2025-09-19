@@ -1816,10 +1816,10 @@ End Function
 Sub TestReadSett()
 Dim tid As Single
 
-    tid = timer
+    tid = Timer
 '    ReadAllSettingsFromRegistry
     LoadSettingsFromData
-    MsgBox timer - tid
+    MsgBox Timer - tid
 End Sub
 Public Function GetHardwareUUID() As String
 

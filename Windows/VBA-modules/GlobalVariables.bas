@@ -3,11 +3,11 @@ Option Explicit
 
 Public AppNavn As String
 
-Public Const AppVersion = "1.35"
+Public Const AppVersion = "1.36"
 #If Mac Then ' WordMat shows patchVersion attached to AppVersion. if ".1" then shows as 1.24.1. or " beta" -> "1.24 beta" A new PatchVersion does not trigger autoupdate
-    Public Const PatchVersion = ".4" ' Mac  ".1"
+    Public Const PatchVersion = "" ' Mac  ".1"
 #Else
-    Public Const PatchVersion = ".4" ' Windows ".1"
+    Public Const PatchVersion = "" ' Windows ".1"
 #End If
 'Public DebugWM As Boolean = True
 Public DebugWM As Boolean ' brug toggledebug funktion
@@ -18,6 +18,8 @@ Public Const PI As Double = 3.14159265358979
 #Else
     Public Const VbCrLfMac = vbCrLf
 #End If
+
+Public Const FreshMaxima = False ' true starts every calculation with a fresh start of Maxima on Windows. It will be slower
 
 Public TT As New CLang ' Text Translation
 

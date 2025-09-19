@@ -800,7 +800,7 @@ Sub CheckForUpdateSilent()
 End Sub
 Function GetHTML(URL As String) As String
     With CreateObject("MSXML2.XMLHTTP")
-        .Open "GET", URL & "?cb=" & timer() * 100, False  ' timer ensures that it is not a cached version
+        .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer ensures that it is not a cached version
         .Send
         GetHTML = .ResponseText
     End With
@@ -1551,8 +1551,20 @@ Sub NewEquation()
     On Error Resume Next
     
     If Selection.OMaths.Count = 0 Then
+        With Selection.Font
+            .Bold = False
+            .ColorIndex = wdAuto
+            .Italic = False
+            .Underline = False
+        End With
         Set r = Selection.OMaths.Add(Selection.Range)
     ElseIf Selection.Tables.Count = 0 Then
+        With Selection.Font
+            .Bold = False
+            .ColorIndex = wdAuto
+            .Italic = False
+            .Underline = False
+        End With
         If Selection.OMaths(1).Range.text = vbNullString Then
             Set r = Selection.OMaths.Add(Selection.Range)
         End If
@@ -1712,9 +1724,9 @@ End Sub
 
 Sub TestSprog()
     Dim tid As Double, n As Integer
-    tid = timer
+    tid = Timer
     n = TT.LangNo
-    MsgBox timer - tid
+    MsgBox Timer - tid
 End Sub
 
 Public Sub ShowComputerID()
@@ -1810,21 +1822,20 @@ Dim t1 As Single, t2 As Single, i As Long, n As Long, s As String
     
     s = "Dette er en streng"
     
-    t1 = timer
+    t1 = Timer
     For i = 0 To n
 '        s = Replace(s, "en", "et")
         s = vbNewLine
     Next
-    t1 = timer - t1
+    t1 = Timer - t1
     
-    t2 = timer
+    t2 = Timer
     For i = 0 To n
 '        If InStr(s, "en") <> 0 Then s = Replace(s, "en", "et")
         s = ChrW$(183)
     Next
-    t2 = timer - t2
+    t2 = Timer - t2
     
     MsgBox "t1: " & t1 & vbNewLine & "t2: " & t2 & vbNewLine & "Factor t1/t2: " & t1 / t2, vbOKOnly, "Speedtest"
     
 End Sub
-
