@@ -314,9 +314,6 @@ Sub RunMaximaWSH(Optional StopTime As Integer)
 End Sub
 Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) As String
 ' Converts a maxima expression, using the maxima-image with units loaded
-'#If Mac Then ' any of the following may work, but try this first
-'    ConvertMaximaUnits = Expr
-'#Else
     Dim i As Integer, k As String, arr As Variant, s As String
     
     Expr = Replace(Expr, """", "") ' The answer will typically be run through the num function which adds "" to numbers
@@ -344,24 +341,18 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
 #If Mac Then
     k = GetMaximaSettingsString & "fpprintprec:" & MaximaCifre & "$" & k ' there are problems with dectalallNum, so this fppprintprec method is used here with units
     s = ExecuteMaximaViaFile(k, 3, True)
-
     ConvertMaximaUnits = GetMaximaUnitOutput(s) 'MaxProcUnit.LastMaximaOutput
 #Else
     MaxProcUnit.ExecuteMaximaCommand k, 0
     WaitForMaximaUnitUntil
     ConvertMaximaUnits = GetMaximaUnitOutput() 'MaxProcUnit.LastMaximaOutput
-        
-'    MsgBox MaxProcUnit.LastMaximaOutput
 #End If
     
-'    ConvertMaximaUnits = ConvertToWordSymbols(ConvertMaximaUnits)
-'    ConvertMaximaUnits = CodeForMaxima(ConvertMaximaUnits)
     If Left(ConvertMaximaUnits, 11) = "[done,done," Then ' some error occured that was shown before output was caught could be stack overflow
         ConvertMaximaUnits = Expr ' just use result before
     End If
     If matvekt Then ' if there are vectors in the expression, the first pass will have removed the special operators and functions that were introduced
         ConvertMaximaUnits = Replace(ConvertMaximaUnits, ChrW$(215), "~")    ' vector produkt
-'        ConvertMaximaUnits = left$(ConvertMaximaUnits, Pos - 1) & "vecmag(" & mid$(ea.text, Pos + 1, posb - Pos - 1) & ")" & right$(ea.text, Len(ea.text) - posb)
         ConvertMaximaUnits = Replace(ConvertMaximaUnits, "^", "^^")
         ConvertMaximaUnits = Replace(ConvertMaximaUnits, "*", " ## ")
         Dim ea As New ExpressionAnalyser
@@ -4106,7 +4097,7 @@ End Function
 Function ConvertToWordSymbols(ByVal text As String) As String
     On Error GoTo fejl
     Dim gtegn As String
-    Dim ea As New ExpressionAnalyser
+    Dim ea As New ExpressionAnalyser, ea2 As New ExpressionAnalyser
     Dim pos As Long, pos2 As Long
     Dim Udtryk As String
     Dim possep As Long
@@ -4118,6 +4109,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     If text = "true" Then GoTo slut ' happens often
 
     ea.SetNormalBrackets
+    ea2.SetNormalBrackets
     gtegn = MaximaGangeTegn
 
     If CASengine = 0 Then
@@ -4322,6 +4314,14 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         ea.ReplaceVar "%timer", "timer"
         ea.ReplaceVar "%min", "min"
         ea.ReplaceVar "aar", ChrW$(229) & "r"
+        If Right(ea.text, 1) = ")" Or Right(ea.text, 2) = ")]" Then ' if units and a bracket is rightmost with a * before it then the bracket can most likely be removed
+            ea2.text = ea.text
+            s = ea2.GetPrevBracketContent(ea2.Length)
+            If ea2.ChrByIndex(ea2.pos - 2) = " " Then
+                ea.text = Left(ea.text, ea2.pos - 2) & " " & s
+                If Right(ea2.text, 1) = "]" Then ea.text = ea.text & "]"
+            End If
+        End If
     End If
     ea.ReplaceVar "*degC", ChrW$(8451)  ' degree symbol and C
 
