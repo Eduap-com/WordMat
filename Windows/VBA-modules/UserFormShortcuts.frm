@@ -63,7 +63,7 @@ Private Sub Label_nulstil_Click()
     SettShortcutAltN = KeybShortcut.NoShortcut
     SettShortcutAltE = KeybShortcut.NoShortcut
     SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
-    SettShortcutAltQ = KeybShortcut.NoShortcut
+    SettShortcutAltQ = KeybShortcut.GradTegn
     SettShortcutAltG = KeybShortcut.NoShortcut
     SettShortcutAltGr = KeybShortcut.NoShortcut
     
@@ -179,6 +179,8 @@ CB.AddItem TT.A(262)
 CB.AddItem TT.A(704) ' Convert latex
 CB.AddItem TT.A(705) ' Latex pdf
 CB.AddItem TT.A(607) ' reference to equation
+CB.AddItem TT.A(706)
+CB.AddItem TT.A(463)
 
 End Sub
 Private Sub Label_cancel_Click()

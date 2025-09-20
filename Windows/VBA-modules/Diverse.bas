@@ -1807,7 +1807,9 @@ Sub WriteUTF8File(filePath As String, text As String)
     Put #fnum, , b
     Close #fnum
 End Sub
-
+Sub InsertGradtegn()
+    Selection.TypeText ChrW(176)
+End Sub
 ' Example usage
 Sub TestUTF8Write()
     Dim s As String

@@ -21,6 +21,8 @@ Enum KeybShortcut
     ConvertEquationToLatex
     OpenLatexPDF
     InsertRefToEqution
+    GradTegn
+    Open3DPLot
 End Enum
 
 Public UFMSettings As UserFormSettings

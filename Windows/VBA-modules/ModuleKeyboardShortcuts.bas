@@ -42,6 +42,10 @@ Sub ExecuteKeyboardShortcut(ShortcutVal As KeybShortcut)
         SaveDocToLatexPdf
     Case KeybShortcut.InsertRefToEqution
         InsertEquationRef
+    Case KeybShortcut.GradTegn
+        InsertGradtegn
+    Case KeybShortcut.Open3DPLot
+        Plot3DGraph
     Case Else
         UserFormShortcuts.Show
     End Select
