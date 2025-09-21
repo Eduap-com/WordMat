@@ -108,12 +108,12 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     ElseIf (omax.DefFejl = True) Then
         GetErrorDefinition.Title = "Definition error"
         GetErrorDefinition.Description = TT.A(757) & vbCrLf & VisDef
-#If Mac Then
-    ElseIf (MaximaOutput = vbNullString) Then
-        GetErrorDefinition.Title = "Timeout"
-        GetErrorDefinition.Description = TT.A(884)
-        GetErrorDefinition.Stop = False
-#End If
+'#If Mac Then ' ved ikke hvorfor dette er på mac. Det giver specifikt et problem ved at løse 'f(x)=2x+5' uden definition af f(x)
+'    ElseIf (MaximaOutput = vbNullString) Then
+'        GetErrorDefinition.Title = "Timeout"
+'        GetErrorDefinition.Description = TT.A(884)
+'        GetErrorDefinition.Stop = False
+'#End If
         Else
         GetErrorDefinition.Stop = False
     End If
