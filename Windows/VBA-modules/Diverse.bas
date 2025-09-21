@@ -744,7 +744,7 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
         UpdateNow = True
     ElseIf NewMajorVersion = MajorVersion And NewMinorVersion > MinorVersion Then
         UpdateNow = True
-   ElseIf (Not RunSilent) And NewPatchVersion > AppPatchVersion Then ' if updatebutton was pressed, then also look for patch version
+   ElseIf (Not RunSilent) And NewMajorVersion = MajorVersion And NewMinorVersion = MinorVersion And NewPatchVersion > AppPatchVersion Then ' if updatebutton was pressed, then also look for patch version
         UpdateNow = True
    End If
    
