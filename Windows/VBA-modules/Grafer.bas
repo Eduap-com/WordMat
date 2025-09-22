@@ -253,7 +253,7 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
         If p > 0 Then
             LHS = Left(s, p - 1)
             s = Trim$(s)
-            If Not (Mid$(LHS, 2, 2) = "^'" And Len(LHS) = 3) Then
+            If Not ((Mid$(LHS, 2, 2) = "^'" Or Mid$(LHS, 2, 1) = "´" Or Mid$(LHS, 2, 1) = "`") And Len(LHS) <= 3) Then
                 MsgBox2 TT.A(911), vbOKOnly, TT.Error
                 GoTo slut
             End If
