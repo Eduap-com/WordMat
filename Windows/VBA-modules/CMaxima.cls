@@ -4323,7 +4323,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
             End If
         End If
     End If
-    ea.ReplaceVar "*degC", ChrW$(8451)  ' degree symbol and C
+    ea.ReplaceVar "degC", ChrW$(8451)  ' degree symbol and C ' v. 1.36 changed from *degC to just degC
 
     text = ea.text
 

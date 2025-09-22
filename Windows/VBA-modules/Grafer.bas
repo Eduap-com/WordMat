@@ -233,7 +233,7 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
     Dim arr As Variant
     Dim ea As New ExpressionAnalyser
   '  On Error GoTo fejl
-    Dim sstart As Long, sslut As Long
+    Dim sstart As Long, sslut As Long, LHS As String, p As Integer
     sstart = Selection.start
     sslut = Selection.End
         
@@ -249,6 +249,15 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
 #End If
                 
         s = Trim$(omax.Kommando)
+        p = InStr(s, "=")
+        If p > 0 Then
+            LHS = Left(s, p - 1)
+            s = Trim$(s)
+            If Not (Mid$(LHS, 2, 2) = "^'" And Len(LHS) = 3) Then
+                MsgBox2 TT.A(911), vbOKOnly, TT.Error
+                GoTo slut
+            End If
+        End If
         s = GetCmdAfterEqualSign(s)
         If s = "" Then
             MsgBox2 TT.A(804), vbOKOnly, "Error"

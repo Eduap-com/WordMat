@@ -1012,6 +1012,7 @@ Sub TabelToList()
 fejl:
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
 slut:
+    Oundo.EndCustomRecord
 End Sub
 Sub ListToTabel()
     Dim dd As New DocData
@@ -1020,6 +1021,7 @@ Sub ListToTabel()
     On Error GoTo fejl
     
     PrepareMaxima
+
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
     Oundo.StartCustomRecord
@@ -1183,7 +1185,7 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
 
     If AskRef Then
         If EqName <> vbNullString Then
-            t.Cell(1, 3).Range.Fields(1).Select
+            t.Cell(1, 1).Range.Fields(1).Select
             With ActiveDocument.Bookmarks
                 .Add Range:=Selection.Range, Name:=EqName
                 .DefaultSorting = wdSortByName

@@ -749,7 +749,7 @@ End Sub
 Sub Rib_TilLaTex(control As IRibbonControl)
     KonverterTilLaTex
 End Sub
-Sub Rib_ConvertLatex(control As IRibbonControl)
+Sub Rib_ConvLatex(control As IRibbonControl)
     ToggleLatex
 End Sub
 Sub Rib_ConvTexLatex(control As IRibbonControl)

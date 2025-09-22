@@ -313,7 +313,7 @@ Private Sub UserForm_Activate()
     CheckBox_convertwithmaxima.Value = ConvertTexWithMaxima
     CheckBox_sectionnumbers.Value = LatexSectionNumbering
     OptionButton_omslutauto.Value = True
-    ComboBox_documentclass.ListIndex = LatexDocumentclass
+    If ComboBox_documentclass.ListCount > LatexDocumentclass Then ComboBox_documentclass.ListIndex = LatexDocumentclass
     If LatexFontsize = "10" Then
        ComboBox_fontsize.ListIndex = 0
     ElseIf LatexFontsize = "11" Then

@@ -909,3 +909,4 @@
 908#£Non hai attivato i campi codice in "Impostazioni > codice". Il campo del codice viene inserito, ma non verrà utilizzato nei calcoli fino a quando non viene attivato.
 909#£Codice
 910#£Non è stato possibile inserire un campo codice.
+911#£I campi di direzione possono essere disegnati solo per equazioni differenziali del 1° ordine nella forma y'=...
