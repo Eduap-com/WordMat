@@ -909,3 +909,4 @@
 908#£Sie haben die Codefelder in "Einstellungen > Code" nicht aktiviert. Das Codefeld wird eingefügt, aber erst dann in Berechnungen verwendet, wenn es aktiviert ist.
 909#£Code
 910#£Hier konnte kein Codefeld eingefügt werden.
+911#£Richtungsfelder können nur für Differentialgleichungen 1. Ordnung in der Form y'=...
