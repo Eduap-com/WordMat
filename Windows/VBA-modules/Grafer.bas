@@ -263,14 +263,13 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
             MsgBox2 TT.A(804), vbOKOnly, "Error"
             Exit Sub
         End If
-        ea.text = s
+        
+        ea.text = ConvertToGeogebraSyntax(s)
         v = ea.GetNextVar
         If v <> "x" And v <> "y" Then
             If v = "t" Then
                 ea.ReplaceVar "t", "x"
             ElseIf v = "N" Then
-                ea.ReplaceVar v, "y"
-            Else
                 ea.ReplaceVar v, "y"
             End If
         End If
