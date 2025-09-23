@@ -4114,6 +4114,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
 
     If CASengine = 0 Then
         If InStr(text, " ") <> 0 Then text = Replace(text, " ", vbNullString)   ' space removed
+        If InStr(text, "##") <> 0 Then text = Replace(text, "##", "*")    '
     Else
         If InStr(text, " + ") <> 0 Then text = Replace(text, " + ", "+")
         If InStr(text, " - ") <> 0 Then text = Replace(text, " - ", "-")
