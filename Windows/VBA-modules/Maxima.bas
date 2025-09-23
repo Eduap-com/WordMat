@@ -5,6 +5,7 @@ Public omax As CMaxima
 Public tid As Double
 Private DeVarList As String
 Private TempCas As Integer
+Private RestartIndex As Integer
 
 Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Boolean
     On Error GoTo fejl
@@ -150,7 +151,11 @@ Sub RestartMaxima()
     MaxProc.StartMaximaProcess
     If Not MaxProcUnit Is Nothing Then
         MaxProcUnit.CloseProcess
-        MaxProcUnit.StartMaximaProcess
+        If MaximaUnits Then
+            MaxProcUnit.StartMaximaProcess
+        Else
+            Set MaxProcUnit = Nothing
+        End If
     End If
     GoTo slut
 fejl:
@@ -1405,6 +1410,7 @@ Sub beregn()
     
     If Len(omax.MaximaOutput) > 0 And Trim$(omax.MaximaOutput) <> "=res1" Then
         InsertOutput omax.MaximaOutput, False
+        RestartIndex = 0
     ElseIf omax.KommentarOutput <> vbNullString Then
         fejlm = TT.A(128) & vbCrLf
 #If Mac Then
@@ -1415,6 +1421,11 @@ Sub beregn()
         MsgBox2 fejlm, vbOKOnly, TT.Error
         RestartMaxima
 #End If
+    ElseIf CASengine = 0 Then ' empty result probably means some error. lets try a restart
+        If RestartIndex = 0 Then
+            RestartMaxima
+            RestartIndex = RestartIndex + 1
+        End If
     End If
     Oundo.EndCustomRecord
 

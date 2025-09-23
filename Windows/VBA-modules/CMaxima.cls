@@ -1376,7 +1376,7 @@ start:
     pkommando = Replace(pkommando, ChrW$(12310), "") ' special invisible brackets are removed
     pkommando = Replace(pkommando, ChrW$(12311), "")
     Kommando = CodeForMaxima(Kommando)
-    If Kommando = vbNullString And ConvertErrorText <> vbNullString Then
+    If Kommando = vbNullString Then 'And ConvertErrorText <> vbNullString Then
         GoTo slut
     End If
     inkom = "%"    ' save command
@@ -1488,9 +1488,9 @@ start:
         DefFejl = True
         '        ActiveWindow.ScrollIntoView MathOArr(defindex - nr - 1).Range, True
     ElseIf nr <= 1 Then
-        MaximaOutput = ""
+        MaximaOutput = vbNullString
         KommentarOutput = Minput(1) & vbLf & moutput(1)
-    ElseIf MaximaExact = 0 And MaximaDecOutType < 3 And Not MaximaUnits Then
+    ElseIf MaximaExact = 0 And MaximaDecOutType < 3 And Not MaximaUnits Then ' auto, dec/bc - ikke enheder
         Dim exactres As String
         Dim numres As String
         If nr > 1 Then moutput(nr - 1) = Replace(moutput(nr - 1), vbLf, "")
@@ -1524,7 +1524,7 @@ start:
         End If
     Else    ' vid not, num, exact
         Dim eqsg As String
-        If MaximaExact <> 1 Then
+        If MaximaExact <> 1 Or MaximaUnits Then
             eql = MaximaOutput
             nr = nr - 1 ' if auto or num, then last output is just true/false
         End If

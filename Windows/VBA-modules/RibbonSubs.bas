@@ -879,6 +879,7 @@ chosunit:
             MsgBox2 TT.A(343), vbOKOnly, TT.Error
             GoTo chosunit
         End If
+        On Error Resume Next
         WoMatRibbon.Invalidate
 End Sub
 Sub Rib_getLabelDecimaler(control As IRibbonControl, ByRef returnedVal)
