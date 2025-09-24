@@ -1548,8 +1548,7 @@ Function GetWordMatDir(Optional SubDir As String) As String
 End Function
 
 Sub NewEquation()
-    Dim r As Range
-    On Error GoTo fejl
+'    On Error GoTo fejl
     On Error Resume Next
     
     If Selection.OMaths.Count = 0 Then
@@ -1559,16 +1558,16 @@ Sub NewEquation()
             .Italic = False
             .Underline = False
         End With
-        Set r = Selection.OMaths.Add(Selection.Range)
+        Selection.OMaths.Add Selection.Range
     ElseIf Selection.Tables.Count = 0 Then
         With Selection.Font
-            .Bold = False
             .ColorIndex = wdAuto
-            .Italic = False
             .Underline = False
+'            .Bold = False ' bold and italic on an empty math box with 'insert equation here.' will cause an error from which Word cannot recover. Many calls to selection, like selection.typeparagraph will all cause error unti lWord is restarted
+'            .Italic = False
         End With
         If Selection.OMaths(1).Range.text = vbNullString Then
-            Set r = Selection.OMaths.Add(Selection.Range)
+            Selection.OMaths.Add Selection.Range
         End If
     ElseIf Selection.Tables(1).Columns.Count = 3 And Selection.Tables(1).Cell(1, 3).Range.Fields.Count > 0 Then
         Selection.Tables(1).Cell(1, 2).Range.OMaths(1).Range.Cut

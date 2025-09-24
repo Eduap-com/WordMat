@@ -1269,7 +1269,7 @@ End Sub
 
 Sub beregn()
     Dim fejlm As String, RemoveEqual As Boolean
-        On Error GoTo fejl
+    On Error GoTo fejl
    ' Application.ScreenUpdating = False
     Dim tid As Single
     tid = Timer
@@ -1427,17 +1427,17 @@ Sub beregn()
             RestartIndex = RestartIndex + 1
         End If
     End If
-    Oundo.EndCustomRecord
 
     GoTo slut
 fejl:
-    MsgBox TT.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, TT.Error
+    MsgBox2 TT.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "", vbOKOnly, TT.Error
     RestartMaxima
 slut:
 #If Mac Then
     D.Activate
 #End If
     On Error Resume Next
+    Oundo.EndCustomRecord
     If ActiveWindow.VerticalPercentScrolled <> scrollpos Then ActiveWindow.VerticalPercentScrolled = scrollpos
     Application.ScreenUpdating = True
     '    TimeText = TimeText & vbCrLf & "beregn ialt: " & Timer - st

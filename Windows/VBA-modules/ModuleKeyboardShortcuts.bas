@@ -20,7 +20,6 @@ Sub ExecuteKeyboardShortcut(ShortcutVal As KeybShortcut)
     Case KeybShortcut.ShowGraph
         StandardPlot
     Case KeybShortcut.Formelsamling
-        RunFirst
         Application.Run macroname:="WMPShowFormler"
     Case KeybShortcut.OmskrivUdtryk
         Omskriv
@@ -47,7 +46,7 @@ Sub ExecuteKeyboardShortcut(ShortcutVal As KeybShortcut)
     Case KeybShortcut.Open3DPLot
         Plot3DGraph
     Case Else
-        UserFormShortcuts.Show
+'        UserFormShortcuts.Show
     End Select
 End Sub
 
