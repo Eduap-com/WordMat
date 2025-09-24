@@ -44,12 +44,12 @@ Sub insertribformel(Kommentar As String, ByVal formel As String)
     Oundo.StartCustomRecord
 
     Application.ScreenUpdating = False
-    If Kommentar <> "" Then
+    If Kommentar <> vbNullString Then
         Selection.InsertAfter (Kommentar)
-        Selection.Collapse (wdCollapseEnd)
+        Selection.Collapse wdCollapseEnd
         Selection.TypeParagraph
     End If
-    Selection.Font.Bold = False
+    If Selection.OMaths.Count = 0 Then Selection.Font.Bold = False
     Selection.OMaths.Add Range:=Selection.Range
     Selection.TypeText formel
     Selection.OMaths.BuildUp
