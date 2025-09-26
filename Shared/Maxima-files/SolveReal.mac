@@ -1110,7 +1110,10 @@ newton_method(expr, var, guess, tol, max_iter) := block(
 		)=[] then (sec:true,x0=x0+1),
 		iter: iter + 1
 	),
-	if iter >= max_iter then print("Maximum iterations reached"),
+	/*
+	if iter >= max_iter then (
+		print("Maximum iterations reached"), print("x0",x0,"fx",fx,"pfx",pfx,"iter",iter,"lmbd",lmbd)
+		),*/
 	/*print(sconcat("Newton iterations: ",iter," L=",lmbd,"  S=",solq)),*/
 	if useBF=true then (
 		solq: bfloat(solq)
@@ -1187,8 +1190,8 @@ nsolve([paramq]) := block(
 		define(qfkt(qvar), ev(lhs(qlign) - rhs(qlign), numer))
 	),
 	qti: absolute_real_time(),
-	/* This is not the best method. The function could be defined some where else like sqrt(x-2)*/
-	if not(numberp(ev(qfkt(1.234), numer))) then (
+	/* Alternative method: length(listofvars(qfkt(x))) */
+	if not(constantp(ev(qfkt(1.234), numer))) then (
 		print("nsolve requires an equation with only 1 variable"),
 		return(qlign)
 	),
