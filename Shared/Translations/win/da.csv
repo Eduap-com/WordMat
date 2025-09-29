@@ -354,8 +354,8 @@
 353#£Der udføres $X^2 - test for sammenhæng vha. WordMat
 354#£P-værdi
 355#£På signifikansniveau
-356#£% kan 0-hypotesen, at der er ikke er sammenhæng, forkastes. Dvs. Der er en sammenhæng mellem de to variable.
-357#£% kan 0-hypotesen ikke forkastes. Der er derfor ikke belæg for at sige at der er en sammenhæng mellem de to variable.
+356#£% kan 0-hypotesen, at der ikke er en sammenhæng, forkastes. Dvs. Der er en sammenhæng mellem de to variable.
+357#£% kan 0-hypotesen ikke forkastes. Der er derfor ikke belæg for at sige, at der er en sammenhæng mellem de to variable.
 358#£Der er celler med værdier mindre end 5 eller den samlede sum af alle celler er mindre end 50. $X^2-fordelingen er derfor en dårlig approksimation i dette tilfælde og resultatet upålideligt. I nogle tilfælde kan datamaterialet gøres brugbart ved at lave en anden gruppering.
 359#£Chifordeling
 360#£Frihedsgrader
@@ -910,3 +910,4 @@
 909#£Kode
 910#£Der kunne ikke indsættes et kodefelt her.
 911#£Der kan kun tegnes hældningsfelter for 1. ordens differentialligninger på formen y'=.
+912#£WordMats indstilling er sat til at regne i grader. Er det intensionen?

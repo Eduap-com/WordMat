@@ -42,5 +42,4 @@ set "maxima_imagesdir=%MAXIMA_PREFIX%/lib/%package%/%version%"
 set "maxima_image_base=%maxima_imagesdir%/binary-sbcl/maxima"
 
 rem sbcl.exe --core "%maxima_image_base%.core" --noinform %lisp_options% --end-runtime-options --eval %start_maxima% --end-toplevel-options %*
-sbcl.exe --core "%maxima_image_base%.core" --noinform --disable-debugger --dynamic-space-size 1024
-
+sbcl.exe --core "%maxima_image_base%.core" --noinform

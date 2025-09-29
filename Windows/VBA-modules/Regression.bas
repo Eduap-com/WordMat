@@ -100,6 +100,9 @@ fejl:
 slut:
 End Sub
 Sub FitSin()
+    If Not Radians Then
+        If MsgBox2(TT.A(912), vbOKCancel, TT.A(846)) = vbCancel Then Exit Sub
+    End If
     On Error Resume Next
     Err.Clear
     Application.Run macroname:="WMPFitSin"

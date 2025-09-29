@@ -371,7 +371,7 @@ Sub ComputeLinRegr()
     
     If ComputeRegr(xval, yval) Then
     
-    Ligning = "y="
+    Ligning = "f(x)="
     If A = 1 Then
         Ligning = Ligning & "x"
     Else
@@ -401,7 +401,7 @@ Sub ComputeExpRegr()
     logy = Logv(yval)
     If ComputeRegr(xval, logy) Then
         
-    Ligning = "y="
+    Ligning = "f(x)="
     If b <> 1 Then
         Ligning = Ligning & ConvertNumberToString(betcif(Exp(b), MaximaCifre)) & VBA.ChrW$(183)
     End If
@@ -433,7 +433,7 @@ On Error GoTo fejl
     logy = Logv(yval)
     If ComputeRegr(logx, logy) Then
     
-    Ligning = "y=" & ConvertNumberToString(betcif(Exp(b), MaximaCifre))
+    Ligning = "f(x)=" & ConvertNumberToString(betcif(Exp(b), MaximaCifre))
     If A <> 0 Then
         Ligning = Ligning & VBA.ChrW$(183) & "x^(" & ConvertNumberToString(betcif(A, MaximaCifre)) & ")"
     End If
@@ -565,7 +565,7 @@ Sub ComputePolRegrKvad()
     b = betcif(b, MaximaCifre)
     c = betcif(c, MaximaCifre)
     r = betcif(r, MaximaCifre)
-    Ligning = "y=" & ConvertNumberToString(A) & VBA.ChrW$(183) & "x^2"
+    Ligning = "f(x)=" & ConvertNumberToString(A) & VBA.ChrW$(183) & "x^2"
     If b > 0 Then
         Ligning = Ligning & "+" & ConvertNumberToString(b) & VBA.ChrW$(183) & "x"
     ElseIf b < 0 Then
@@ -601,13 +601,13 @@ Sub ComputePolRegr()
     If polregr(xval, yval, orden) Then
     r = betcif(r, MaximaCifre)
     If Coeff(UBound(Coeff)) = 1 Then
-        Ligning = "y=x^" & UBound(Coeff)
+        Ligning = "f(x)=x^" & UBound(Coeff)
     ElseIf Coeff(UBound(Coeff)) = -1 Then
-        Ligning = "y=-x^" & UBound(Coeff)
+        Ligning = "f(x)=-x^" & UBound(Coeff)
     ElseIf Coeff(UBound(Coeff)) = 0 Then
-        Ligning = "y="
+        Ligning = "f(x)="
     Else
-        Ligning = "y=" & ConvertNumberToString(betcif(Coeff(UBound(Coeff)), MaximaCifre)) & VBA.ChrW$(183) & "x^" & UBound(Coeff)
+        Ligning = "f(x)=" & ConvertNumberToString(betcif(Coeff(UBound(Coeff)), MaximaCifre)) & VBA.ChrW$(183) & "x^" & UBound(Coeff)
     End If
     
     For i = UBound(Coeff) - 1 To 0 Step -1
