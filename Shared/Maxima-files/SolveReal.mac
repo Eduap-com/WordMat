@@ -188,6 +188,7 @@ keepfloat:true$/*soerger for at der ikke omdannes fra decimaltal til broek ved e
 fpprintprec:0$/*default*/
 rootsepsilon:1E-20$ /*1E-7 default used by realroots. */
 algepsilon:1E+16$/*1E+8 default used by algsys. But how?*/
+ordergreat(x,y,z,a,b,c,d)$ /* ensures that variables are output in a more familiar way*/
 errcatch(remrule("^^",all))$
 ev(tellsimp(0 ^ 0, 1), simp: false)$
 matchdeclare(aliznum,numberp)$
