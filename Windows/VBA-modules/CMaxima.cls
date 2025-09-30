@@ -3249,6 +3249,14 @@ videre:
                      Exit For
                   End If
                Next
+            ElseIf ea.pos > 1 Then
+                If Mid$(text, ea.pos - 1, 1) = "_" Then  'partiel (...)_xy''
+                    subt = Mid$(text, ea.pos, pos - ea.pos)
+                End If
+            End If
+            pos3 = InStrRev(text, ")_", pos - 1)
+            If pos3 > 0 And pos - pos3 < 4 Then
+                
             End If
 
             If ea.ChrByIndex(pos - 1) = ")" Then    ' if (...)'(x)

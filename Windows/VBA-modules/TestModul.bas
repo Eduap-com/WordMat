@@ -129,9 +129,9 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestBeregn VBA.ChrW$(8731) & "(-8)", "=-2"
     If StopNow Then GoTo slut
-    TestBeregn "a b/c+a b+f_a (x)", "=f_a (x)+(a" & VBA.ChrW$(183) & "b)/c+a" & VBA.ChrW$(183) & "b"
+    TestBeregn "a b/c+a b+f_a (x)", "f_a (x)+(b" & VBA.ChrW$(183) & "a)/c+b" & VBA.ChrW$(183) & "a"
     If StopNow Then GoTo slut
-    TestBeregn "f_a (x)+a (b+d)/c+f_c+2+a^x (2)", "=f_a (x)+f_c+(a" & VBA.ChrW$(183) & "(d+b))/c+2" & VBA.ChrW$(183) & "a^(x)+2"
+    TestBeregn "f_a (x)+a (b+d)/c+f_c+2+a^x (2)", "f_a (x)+2" & VBA.ChrW$(183) & "a^x+((b+d)" & VBA.ChrW$(183) & "a)/c+f_c+2"
     If StopNow Then GoTo slut
     TestBeregn "2^2x+23/2x", "=2^(2" & VBA.ChrW$(183) & "x)+23/(2" & VBA.ChrW$(183) & "x)" ' fails if 2^2x is not interpreted as 2^(2*x)
     If StopNow Then GoTo slut
@@ -144,7 +144,7 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestBeregn "log_4" & VBA.ChrW$(8289) & "a", "=ln" & VBA.ChrW$(8289) & "(a)/ln" & VBA.ChrW$(8289) & "(4)"
     If StopNow Then GoTo slut
-    TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x+y)", "(sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(8289) & "(x_0 ))/(y+x)"
+    TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x+y)", "(sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(8289) & "(x_0 ))/(x+y)"
     'TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x+y)", "=(sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x)/180)-sin" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "x_0)/180))/(y+x)" ' Test af forkert placerede skjulte parenteser
     If StopNow Then GoTo slut
     TestBeregn VBA.ChrW$(12310) & "sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(12311) & "" & VBA.ChrW$(8289) & "(x_0 )/(x-x_0 )", "(sin" & VBA.ChrW$(8289) & "(x)-sin" & VBA.ChrW$(8289) & "(x_0 ))/(x-x_0 )"
@@ -240,6 +240,7 @@ Sub RunTestSequence()
     If TestSolve("1=1,5" & VBA.ChrW$(183) & "x^2+0,5/x^0,5 -1", "x", "x=0,06287224    " & VBA.ChrW$(8744) & "    x=1") Then GoTo slut ' requires numerical solution. Previous to_poly error, with only one solution.
     If TestSolve("6174/(1+8652" & VBA.ChrW$(183) & "" & VBA.ChrW$(12310) & "0,711" & VBA.ChrW$(12311) & "^x )=8000000", "x", "x" & VBA.ChrW$(8712) & "" & VBA.ChrW$(8709)) Then GoTo slut
     If TestSolve("x^2=e^(-x^2 )", "x", "x=-" & VBA.ChrW$(8730) & "(W_0 (1) )    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(8730) & "(W_0 (1) )") Then GoTo slut
+    If TestSolve("0=3" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "((x-2) )-x+1", "x", "x=2,145898    " & VBA.ChrW$(8744) & "    x=8,854102") Then GoTo slut
 
     MaximaExact = 2 ' num
     InsertTestMath "Definer: " & VBA.ChrW$(963) & ">0"
@@ -405,7 +406,7 @@ Sub RunTestSequence()
     If TestBeregn("((" & VBA.ChrW$(9608) & "(-4@3))" & VBA.ChrW$(183) & "(" & VBA.ChrW$(9608) & "(1@7)))/|((" & VBA.ChrW$(9608) & "(-4@3)))|^2 " & VBA.ChrW$(183) & "(" & VBA.ChrW$(9608) & "(-4@3))", "=(" & VBA.ChrW$(9632) & "(-68/25@51/25))=(" & VBA.ChrW$(9632) & "(-2,72@2,04))@$=(" & VBA.ChrW$(9632) & "(-(68/25)@51/25))=(" & VBA.ChrW$(9632) & "(-2,72@2,04))") Then GoTo slut
     If TestBeregn("(" & VBA.ChrW$(9632) & "(-400@0@320))" & VBA.ChrW$(215) & "(" & VBA.ChrW$(9632) & "(-120@280@0))", "=(" & VBA.ChrW$(9632) & "(-89600@-38400@-112000))") Then GoTo slut 'Two different ways to enter vectors:
     If TestBeregn("(" & VBA.ChrW$(9608) & "(-400@0@320))" & VBA.ChrW$(215) & "(" & VBA.ChrW$(9608) & "(-120@280@0))", "=(" & VBA.ChrW$(9632) & "(-89600@-38400@-112000))") Then GoTo slut
-    If TestSolve("(" & VBA.ChrW$(9608) & "(x+y@x-y))=(" & VBA.ChrW$(9608) & "(1@2))", "x", "x=3/2    " & VBA.ChrW$(8743) & "    y=-(1/2)") Then GoTo slut
+    If TestSolve("(" & VBA.ChrW$(9608) & "(y+x@x-y))=(" & VBA.ChrW$(9608) & "(1@2))", "y", "y=-(1/2)    " & VBA.ChrW$(8743) & "    x=3/2") Then GoTo slut ' this one only works if equations written in correct order and correct variable chosen to solve for.
         
     MaximaExact = 2
     TestBeregn "rref([" & VBA.ChrW$(9632) & "(-1&0&1/2&1/2@1/2&-1&0&1/2@1/2&1&-1&0@0&0&1/2&-1)])", "=[" & VBA.ChrW$(9632) & "(1&0&0&-1,5@0&1&0&-1,25@0&0&1&-2@0&0&0&0)]"
@@ -660,6 +661,8 @@ End Sub
 Sub CreateTestBeregnPar(Optional TestType As Integer = 0)
    Dim Oresul As String, arr() As String
    Dim komm As String, Var As String
+    
+    PrepareMaxima
     
    omax.ReadSelection
    komm = TrimR(omax.Kommando, vbCr)
