@@ -202,6 +202,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
             MaxProc.StartMaximaProcess
         End If
         FindLastMaximaOutput
+        ShowDebug
         ResetMaxima
         '    MsgBox (MaxProc.LastMaximaOutput)
         Exit Sub
@@ -1063,7 +1064,7 @@ Sub Nsolve(ByVal variabel As String, ByVal qn As Integer, ByVal qm As Integer, B
 #If Mac Then
     RunMaxima 2
 #Else
-    RunMaxima -150
+    RunMaxima  '-150
 #End If
     If StopNow Then GoTo slut
 
@@ -3292,10 +3293,11 @@ videre:
             ElseIf ea.ChrByIndex(pos + antalm + 1) = "(" Then    ' if f'(x)
 msat:
                 If DiffEqVar = Var Or CAStype = 1 Or CAStype = 2 Then  'if diffligning then no subst
-                  If Len(subt) > 0 And Len(subt) = antalm Then ' if partiel
+                    If Len(subt) > 0 And Len(subt) = antalm Then ' if partiel
                         text = Left$(text, pos - 1 - Len(F)) & "diff(" & F & "(" & Var & ")," & Var & "," & antalmS & ")" & Right$(text, Len(text) - pos - varl - antalm)
-                    Else
-                        text = Left$(text, pos - 1 - Len(F)) & "substitute(diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & Var & ")" & Right$(text, Len(text) - pos - varl - antalm)
+                    Else ' limit, but maybe also more?
+'                        text = Left$(text, pos - 1 - Len(F)) & "substitute(diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & Var & ")" & Right$(text, Len(text) - pos - varl - antalm) ' 1.37 substitute is now subst, parameters in different order
+                        text = Left$(text, pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right$(text, Len(text) - pos - varl - antalm)
                         di = di + 1
                     End If
                 Else    ' ikke diff ligning
@@ -3614,7 +3616,7 @@ spring:
     If InStr(ea.text, " ") <> 0 Then ea.text = Replace(ea.text, " ", vbNullString)     ' any remaining spaces are removed
     '    ea.text = Replace(ea.text, " ", "*")     ' must be after diff and integral ' problematic at (x^2 )' -> diff(x^2*,x,1)
 
-    If InStr(ea.text, "det(") <> 0 Then text = Replace(ea.text, "det(", "determinant2(")    ' a little uncertain as there may be functions that end in "det"
+    If InStr(ea.text, "det(") <> 0 Then ea.text = Replace(ea.text, "det(", "determinant2(")    ' a little uncertain as there may be functions that end in "det"
     
     text = ea.text
     
@@ -3942,6 +3944,9 @@ Function ConvertDifferentials(text As String, DiffChr As String) As String
                     Udtryk = Right$(Udtryk, Len(Udtryk) - 1)
                 End If
                 text = Left$(text, pos - 2) & udtryk1 & Udtryk & udtryk2 & Right$(text, Len(text) - pos3 + 1)
+            ElseIf Len(num) > 3 And Mid$(num, 2, 1) = "^" Then 'd^2f(x)/dydx
+                Udtryk = Mid$(num, 4, Len(num) - 3)
+                text = Left$(text, pos - 2) & udtryk1 & Udtryk & udtryk2 & Right$(text, Len(text) - pos3 + 1)
             ElseIf Mid$(text, pos3 + 1, 1) = "(" Then ' parentheses right after d/dx operator
                 Udtryk = ea.GetNextBracketContent(pos3)
                 text = Left$(text, pos - 2) & udtryk1 & Udtryk & udtryk2 & Right$(text, Len(text) - ea.pos + 1)
@@ -4263,11 +4268,15 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     Loop
     '#End If
 
-    ' maxima 5.47.1 vil write a minus bracket in some cirsumstances  -2*x  -> -(2*x)  but only for the first term. A litte uncertain if there can be situations where the bracket should not be removed
-    If Left$(ea.text, 2) = "-(" Then
-        ea.GetNextBracketContent (1)
-        ea.text = "-" & Mid$(ea.text, 3, ea.pos - 4) & Right$(ea.text, Len(ea.text) - ea.pos + 1)
-    End If
+    ' maxima 5.47.1 vil write a minus bracket in some circumstances  -2*x  -> -(2*x)  but only for the first term. A litte uncertain if there can be situations where the bracket should not be removed
+    pos = InStr(ea.text, "-(")
+    Do While pos <> 0
+        If pos = 1 Or ea.ChrByIndex(pos - 1) = "=" Then
+            ea.GetNextBracketContent (pos)
+            ea.text = Left$(ea.text, pos) & Mid$(ea.text, pos + 2, ea.pos - pos - 3) & Right$(ea.text, Len(ea.text) - ea.pos + 1)
+        End If
+        pos = InStr(pos + 1, ea.text, "-(")
+    Loop
 
     ' converts a[i,j] -> a_(i,j)
     If MaximaIndex Then
@@ -6062,8 +6071,10 @@ Sub GenerateOutputArray(Optional text As String)
             AntalCifre = 2
         ElseIf nr < 1000 Then
             AntalCifre = 3
-        Else
+        ElseIf nr < 10000 Then
             AntalCifre = 4
+        Else
+            AntalCifre = 5
         End If
 
         Output = Mid$(text, posb + 1, pos2 - pos - 4 - AntalCifre)

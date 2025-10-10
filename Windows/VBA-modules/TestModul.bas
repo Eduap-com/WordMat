@@ -47,6 +47,7 @@ Sub RunTestSequence()
     MaximaComplex = False
     AllTrig = False
     MaximaLogOutput = 0
+    MaximaIndex = 0 ' subscript is just text. Otherwise will cause problems when x_1 is defined
     
     
     PrepareMaxima
@@ -106,8 +107,7 @@ Sub RunTestSequence()
     '    Application.ScreenRefresh
     
     'til test af enkelt
-    
-    '    GoTo slut
+'        GoTo slut
     
     
     DebugWM = False
@@ -240,8 +240,15 @@ Sub RunTestSequence()
     If TestSolve("1=1,5" & VBA.ChrW$(183) & "x^2+0,5/x^0,5 -1", "x", "x=0,06287224    " & VBA.ChrW$(8744) & "    x=1") Then GoTo slut ' requires numerical solution. Previous to_poly error, with only one solution.
     If TestSolve("6174/(1+8652" & VBA.ChrW$(183) & "" & VBA.ChrW$(12310) & "0,711" & VBA.ChrW$(12311) & "^x )=8000000", "x", "x" & VBA.ChrW$(8712) & "" & VBA.ChrW$(8709)) Then GoTo slut
     If TestSolve("x^2=e^(-x^2 )", "x", "x=-" & VBA.ChrW$(8730) & "(W_0 (1) )    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(8730) & "(W_0 (1) )") Then GoTo slut
-    If TestSolve("0=3" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "((x-2) )-x+1", "x", "x=2,145898    " & VBA.ChrW$(8744) & "    x=8,854102") Then GoTo slut
-
+    If TestSolve("0=3" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "((x-2) )-x+1", "x", "x=(3" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "5+11)/2    " & VBA.ChrW$(8744) & "    x=-(3" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "5-11)/2") Then GoTo slut
+    If TestSolve("0=3" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "(x-2)-x+1", "x", "x=(3" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "5+11)/2    " & VBA.ChrW$(8744) & "    x=-(3" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "5-11)/2") Then GoTo slut
+    If TestSolve(VBA.ChrW$(8730) & "(x+" & VBA.ChrW$(8730) & "(x-1)) =x^2", "x", "x=1    " & VBA.ChrW$(8744) & "    x=1,081031") Then GoTo slut
+    If TestSolve("(3x+9)^(1/3)=x+3", "x", "x=-4,732051    " & VBA.ChrW$(8744) & "    x=-3    " & VBA.ChrW$(8744) & "    x=-1,267949") Then GoTo slut
+    If TestSolve("0=3" & VBA.ChrW$(183) & "(x-2)^(-0,5)-x+1", "x", "x=3,472368") Then GoTo slut
+    If TestSolve("1,2" & VBA.ChrW$(183) & "(" & VBA.ChrW$(8730) & "5" & VBA.ChrW$(183) & "x-x^1,5 )^0,5=0", "x", "x=0    " & VBA.ChrW$(8744) & "    x=5") Then GoTo slut
+    If TestSolve("-x^2/9+2x/9+1/(x-2)-1/9=0", "x", "x=3,472368") Then GoTo slut
+    If TestSolve(VBA.ChrW$(8730) & "(3x+9)=x+3", "x", "x=-3    " & VBA.ChrW$(8744) & "    x=0") Then GoTo slut
+    
     MaximaExact = 2 ' num
     InsertTestMath "Definer: " & VBA.ChrW$(963) & ">0"
     If TestSolve("0,1=" & VBA.ChrW$(8747) & "_(-" & VBA.ChrW$(8734) & ")^5" & VBA.ChrW$(9618) & "1/(" & VBA.ChrW$(8730) & "2" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "" & VBA.ChrW$(963) & ")" & VBA.ChrW$(183) & "e^(-1/2" & VBA.ChrW$(183) & "((y-7)/" & VBA.ChrW$(963) & ")^2 ) dy", "sigma", VBA.ChrW$(963) & "=1,560608") Then GoTo slut
@@ -249,6 +256,8 @@ Sub RunTestSequence()
     InsertTestMath "Definer: f(x)={" & VBA.ChrW$(9608) & "(100" & VBA.ChrW$(183) & "" & VBA.ChrW$(12310) & "1,03" & VBA.ChrW$(12311) & "^x,  0" & VBA.ChrW$(8804) & "x" & VBA.ChrW$(8804) & "72@33743" & VBA.ChrW$(183) & "" & VBA.ChrW$(12310) & "0,95" & VBA.ChrW$(12311) & "^x,  72<x" & VBA.ChrW$(8804) & "150)" & VBA.ChrW$(9508)
     If TestSolve("f(x)=200", "x", "x=23,44977    " & VBA.ChrW$(8744) & "    x=99,97819") Then GoTo slut ' piecewise cannot be handled algebraically, so solvereal must go directly to nsolve
     InsertSletDef
+    
+    If TestSolve("0=3" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "((x-2) )-x+1", "x", "x=8,854102    " & VBA.ChrW$(8744) & "    x=2,145898") Then GoTo slut
     
     MaximaExact = 1
     
@@ -301,7 +310,8 @@ Sub RunTestSequence()
     AllTrig = True
     Radians = True
     InsertTestMath "Definer: -7,5<x<7,5"
-    If TestSolve("1,386" & VBA.ChrW$(183) & "cos" & VBA.ChrW$(8289) & "(0,63" & VBA.ChrW$(183) & "x)=0", "x", "x=" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "-2,380952    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "-0,7936508    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "0,7936508    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "2,380952@$x=-(2,380952" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & ")    " & VBA.ChrW$(8744) & "    x=-(0,7936508" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & ")    " & VBA.ChrW$(8744) & "    x=0,7936508" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & "    " & VBA.ChrW$(8744) & "    x=2,380952" & VBA.ChrW$(183) & "" & VBA.ChrW$(960)) Then GoTo slut
+  ' If TestSolve("1,386" & VBA.ChrW$(183) & "cos" & VBA.ChrW$(8289) & "(0,63" & VBA.ChrW$(183) & "x)=0", "x", "x=" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "-2,380952    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "-0,7936508    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "0,7936508    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "2,380952@$x=-(2,380952" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & ")    " & VBA.ChrW$(8744) & "    x=-(0,7936508" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & ")    " & VBA.ChrW$(8744) & "    x=0,7936508" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & "    " & VBA.ChrW$(8744) & "    x=2,380952" & VBA.ChrW$(183) & "" & VBA.ChrW$(960)) Then GoTo slut
+    If TestSolve("1,386" & VBA.ChrW$(183) & "cos" & VBA.ChrW$(8289) & "(0,63" & VBA.ChrW$(183) & "x)=0", "x", "x=-2,380952" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & "    " & VBA.ChrW$(8744) & "    x=-0,7936508" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & "    " & VBA.ChrW$(8744) & "    x=0,7936508" & VBA.ChrW$(183) & "" & VBA.ChrW$(960) & "    " & VBA.ChrW$(8744) & "    x=2,380952" & VBA.ChrW$(183) & "" & VBA.ChrW$(960)) Then GoTo slut
     InsertSletDef
     
     
@@ -311,9 +321,8 @@ Sub RunTestSequence()
     Selection.TypeParagraph
     InsertTestMath "Definer: -2<x<2"
     Selection.TypeParagraph
-    '    TestSolve "sin" & VBA.chrw$(8289) & "" & VBA.chrw$(12310) & "(x)" & VBA.chrw$(12311) & " " & VBA.chrw$(8730) & "(cos" & VBA.chrw$(8289) & "" & VBA.chrw$(12310) & "(x)" & VBA.chrw$(12311) & " )=0", "x", "x=0    " & VBA.chrw$(8744) & "    x=" & VBA.chrw$(960) & "/2"
-    If TestSolve("sin" & VBA.ChrW$(8289) & "" & VBA.ChrW$(12310) & "(x)" & VBA.ChrW$(12311) & " " & VBA.ChrW$(8730) & "(cos" & VBA.ChrW$(8289) & "" & VBA.ChrW$(12310) & "(x)" & VBA.ChrW$(12311) & " )=0", "x", "x=0    " & VBA.ChrW$(8744) & "    x=-(" & VBA.ChrW$(960) & "/2)    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(960) & "/2") Then GoTo slut
-    
+    If TestSolve("sin" & VBA.ChrW$(8289) & "" & VBA.ChrW$(12310) & "(x)" & VBA.ChrW$(12311) & " " & VBA.ChrW$(8730) & "(cos" & VBA.ChrW$(8289) & "" & VBA.ChrW$(12310) & "(x)" & VBA.ChrW$(12311) & " )=0", "x", "x=0    " & VBA.ChrW$(8744) & "    x=-" & VBA.ChrW$(960) & "/2    " & VBA.ChrW$(8744) & "    x=" & VBA.ChrW$(960) & "/2") Then GoTo slut
+
     InsertSletDef
     If StopNow Then GoTo slut
     
@@ -357,12 +366,14 @@ Sub RunTestSequence()
 
     MaximaExact = 0
     ShowSettings
-    
+        '****************************SolveDE ok here
     'numeric definition test
     InsertTestMath "definer: f(x)=-x^2" & VBA.ChrW$(8729) & "" & VBA.ChrW$(8730) & "x+2/x;x_1=0,25"
     Selection.TypeParagraph
-    TestSolve "f^' (x)=-32", "x", "x=0,2512389    " & VBA.ChrW$(8744) & "    x=5,464284"
+    
+    TestSolve "f^' (x)=-32", "x", "x=0,251239    " & VBA.ChrW$(8744) & "    x=5,464284@$x" & VBA.ChrW$(8776) & "0,251239    " & VBA.ChrW$(8744) & "    x" & VBA.ChrW$(8776) & "5,464284"
     If StopNow Then GoTo slut
+        
     TestBeregn "y=f^' (x_1 )" & VBA.ChrW$(183) & "(x-x_1 )+f(x_1 )", VBA.ChrW$(8776) & "-32,3125" & VBA.ChrW$(183) & "x+16,04688@$" & VBA.ChrW$(8776) & "16,04688-32,3125" & VBA.ChrW$(183) & "x"
     InsertSletDef
     If StopNow Then GoTo slut
@@ -375,6 +386,7 @@ Sub RunTestSequence()
         If StopNow Then GoTo slut
     End If '****** Interactive end *******
     
+    
     ' Scientific notation test
     MaximaExact = 2
     MaximaDecOutType = 3
@@ -385,6 +397,7 @@ Sub RunTestSequence()
 
     ' Differential- og integralregning
     MaximaExact = 0
+    TestSolveDE "N^'=1/10500" & VBA.ChrW$(183) & "N" & VBA.ChrW$(183) & "(1000-N)", "N,x", "N=0    " & VBA.ChrW$(8744) & "    N=1000    " & VBA.ChrW$(8744) & "    N=1000/(c" & VBA.ChrW$(183) & "e^(-((2" & VBA.ChrW$(183) & "x)/21) )+1)"
     ShowSettings "Differential- og integralregning"
     If TestBeregn(VBA.ChrW$(8518) & "/" & VBA.ChrW$(8518) & "x (" & VBA.ChrW$(8747) & "x^2 dx)", "=x^(2)") Then GoTo slut
     If TestBeregn(VBA.ChrW$(8706) & "^2/" & VBA.ChrW$(8706) & "x" & VBA.ChrW$(8706) & "y (x^2" & VBA.ChrW$(183) & "y)", "=2" & VBA.ChrW$(183) & "x") Then GoTo slut
@@ -397,6 +410,8 @@ Sub RunTestSequence()
     InsertTestMath "Definer: f(x)=0,000003" & VBA.ChrW$(183) & "x^4-0,01676" & VBA.ChrW$(183) & "x^2+60"
     Selection.TypeParagraph
     If TestBeregn(VBA.ChrW$(8747) & "_(-52)^52" & VBA.ChrW$(9618) & "" & VBA.ChrW$(12310) & "" & VBA.ChrW$(8730) & "(1+(f^' (x))^2 ) dx" & VBA.ChrW$(12311), VBA.ChrW$(8776) & "115,7009") Then GoTo slut
+    InsertTestMath "Definer: f(x,y)=x^2+3x" & VBA.ChrW$(183) & "y-2y+1"
+    If TestBeregn("(" & VBA.ChrW$(8706) & "^2 f(x,y))/" & VBA.ChrW$(8706) & "x" & VBA.ChrW$(8706) & "y", "=3") Then GoTo slut
     InsertSletDef
 
 
@@ -406,8 +421,9 @@ Sub RunTestSequence()
     If TestBeregn("((" & VBA.ChrW$(9608) & "(-4@3))" & VBA.ChrW$(183) & "(" & VBA.ChrW$(9608) & "(1@7)))/|((" & VBA.ChrW$(9608) & "(-4@3)))|^2 " & VBA.ChrW$(183) & "(" & VBA.ChrW$(9608) & "(-4@3))", "=(" & VBA.ChrW$(9632) & "(-68/25@51/25))=(" & VBA.ChrW$(9632) & "(-2,72@2,04))@$=(" & VBA.ChrW$(9632) & "(-(68/25)@51/25))=(" & VBA.ChrW$(9632) & "(-2,72@2,04))") Then GoTo slut
     If TestBeregn("(" & VBA.ChrW$(9632) & "(-400@0@320))" & VBA.ChrW$(215) & "(" & VBA.ChrW$(9632) & "(-120@280@0))", "=(" & VBA.ChrW$(9632) & "(-89600@-38400@-112000))") Then GoTo slut 'Two different ways to enter vectors:
     If TestBeregn("(" & VBA.ChrW$(9608) & "(-400@0@320))" & VBA.ChrW$(215) & "(" & VBA.ChrW$(9608) & "(-120@280@0))", "=(" & VBA.ChrW$(9632) & "(-89600@-38400@-112000))") Then GoTo slut
-    If TestSolve("(" & VBA.ChrW$(9608) & "(y+x@x-y))=(" & VBA.ChrW$(9608) & "(1@2))", "y", "y=-(1/2)    " & VBA.ChrW$(8743) & "    x=3/2") Then GoTo slut ' this one only works if equations written in correct order and correct variable chosen to solve for.
-        
+    If TestBeregn("det" & VBA.ChrW$(8289) & "((" & VBA.ChrW$(9608) & "(1@2)),(" & VBA.ChrW$(9608) & "(3@-4)))", "=-10") Then GoTo slut
+    If TestSolve("(" & VBA.ChrW$(9608) & "(y+x@x-y))=(" & VBA.ChrW$(9608) & "(1@2))", "y", "y=-1/2    " & VBA.ChrW$(8743) & "    x=3/2") Then GoTo slut ' this one only works if equations written in correct order and correct variable chosen to solve for.
+
     MaximaExact = 2
     TestBeregn "rref([" & VBA.ChrW$(9632) & "(-1&0&1/2&1/2@1/2&-1&0&1/2@1/2&1&-1&0@0&0&1/2&-1)])", "=[" & VBA.ChrW$(9632) & "(1&0&0&-1,5@0&1&0&-1,25@0&0&1&-2@0&0&0&0)]"
     If StopNow Then GoTo slut
@@ -441,7 +457,8 @@ Sub RunTestSequence()
     If TestSolveDE("(y^' )^2+x" & VBA.ChrW$(183) & "y^'=0", "y,x", "y=c    " & VBA.ChrW$(8744) & "    y=c-x^2/2") Then GoTo slut
     ' particular solutions
     ' This has not previously given a solution. It was sorted out in ic1real when TESTTF found a small difference in the constants, and then thought it was a false solution. TestTF has now got numerical comparison
-    If TestSolveDE("p^'=0,015" & VBA.ChrW$(183) & "p^1,2", "p=5,28;x=0", "p=-(1000000000000000/(243" & VBA.ChrW$(183) & "(x-238,9747)^5 ))") Then GoTo slut
+    If TestSolveDE("p^'=0,015" & VBA.ChrW$(183) & "p^1,2", "p=5,28;x=0", "p=-1000000000000000/(243" & VBA.ChrW$(183) & "(x-238,9747)^5 )") Then GoTo slut
+
     ' This has previously given the wrong solution, as there are two solutions, but when the constant is inserted, only one fits.
     If TestSolveDE("(x+5)" & VBA.ChrW$(183) & "y^'=" & VBA.ChrW$(8730) & "y", "y=1;x=-4", "y=(ln" & VBA.ChrW$(8289) & "(|x+5|)+2)^2/4") Then GoTo slut
 

@@ -810,7 +810,7 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
     Dim gemfontcolor As Integer
     Dim gemsb As Integer
     Dim gemsa As Integer
-    Dim mo As Range
+    Dim mo As Range, p As Integer, p2 As Integer, s As String
 #If Mac Then
     Selection.TypeText " " ' ensures that the preceding math-box does not change font
 #End If
@@ -852,6 +852,16 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
         Set mo = Selection.OMaths.Add(Selection.Range)
         Selection.TypeText omax.ConvertToWordSymbols(tdefs)
         mo.OMaths.BuildUp
+    End If
+    p = InStr(omax.KommentarOutput, "Assumptions:")
+    If p <> 0 Then
+        p2 = InStr(p + 10, omax.KommentarOutput, vbLf)
+        If p2 = 0 Then p2 = Len(omax.KommentarOutput)
+        s = Trim$(Mid$(omax.KommentarOutput, p + 13, p2 - p - 13))
+        s = TrimL(s, "[")
+        s = TrimR(s, "]")
+        s = FormatDefinitions(s)
+        Selection.TypeText TT.A(61) & " " & s
     End If
 
     Selection.TypeParagraph

@@ -42,6 +42,7 @@ matchdeclare([aliznotanyx,aliznotanyx2],lambda([z],not(containanyx(z,cons(solvar
 matchdeclare(alizadd,aliz+aliz=aliz)$
 matchdeclare(alizeven,evenp)$
 matchdeclare(alizodd,oddp)$
+matchdeclare(aliznat,lambda([z],if (nonnegintegerp(rationalize(1/z))) then (true) else (false)))$
 /*matchdeclare(alizoddnum,lambda([z],oddp(num(rationalize(z)))))$ */
 matchdeclare(alizoddnum,lambda([z],oddp(num(ev(rat(z),keepfloat=false)))))$ 
 matchdeclare(alizodddenom,lambda([z],oddp(denom(ToFrac(z)))))$
@@ -52,6 +53,7 @@ matchdeclare(alizinteger,lambda([z],integerp(ToFrac(z))))$
 matchdeclare(aliznoninteger,lambda([z],not(integerp(ToFrac(z)))))$
 matchdeclare(aliznonnatural,lambda([z],numberp(z) and not(integerp(ToFrac(z)) and z>0 )))$
 matchdeclare(alizirrational,lambda([z],constantp(z) and not(numberp(z))))$
+matchdeclare(aliznonirrationalnoninteger,lambda([z],numberp(z) and not(integerp(rationalize(z)))))$
 matchdeclare(alizneginteger,lambda([z],integerp(ToFrac(z) and z<0 )))$
 matchdeclare(aliznegative,lambda([z],is(z<0)))$
 matchdeclare(aliznegative0,lambda([z],is(z<=0)))$
@@ -131,6 +133,9 @@ block([z,numer:not(uselambertw)],if errcatch(z:aliznotzero*log(alizpositive)/ali
 if z<-1/%e then return([]),if z<0 then return([solvar=-generalized_lambert_w(0,z)/(aliznotzero*log(alizpositive))-aliznotx3/aliznotx4,
 solvar=-generalized_lambert_w(-1,z)/(aliznotzero*log(alizpositive))-aliznotx3/aliznotx4]),solvar=-lambert_w(z)/(aliznotzero*log(alizpositive))-aliznotx3/aliznotx4))$
 defrule(fracrule,aliznotx3*(alizx+aliznotx)/(alizx+aliznotx2),aliznotx3+aliznotx3*(aliznotx-aliznotx2)/(alizx+aliznotx2))$
+defrule(sqrtrul,(alizx)^(aliznat)-alizx2=0,(zout:alizx2^(1/aliznat)-alizx,if polynomialp(rationalize(zout),[solvar]) then (if evenp(1/aliznat) then assume(alizx>=0,alizx2>=0),[zout=0]) else (false)))$ /* This rule is pretty safe can solve sqrt(3x+9)=x+3. However it can be expanded to a more general rule. See dissolveradicals. */
+
+integerfp(x) := (integerp(x) or (floatnump(x) and (x = float(round(x))))); /* expands integerp to also accept floats like 2.0*/
 
 /* rule which expands in order to decrease the number of variables fx: 2x+3(x-2)=0 reduceres */
 expandrule(exprq):=block([scq],
@@ -154,8 +159,7 @@ defrule(sqrtundef,sqrt(aliznegative),error("man kan ikke tage kvadratroden af et
 defrule(imagundef,alizimag,error("Ugyldig loesning fjernet"))$
 defrule(asinundef,asin(alizillinvtrig),error("inverse trig error."))$
 defrule(acosundef,acos(alizillinvtrig),error("inverse trig error."))$
-defrule(ReplaceFirstRadical,alizx^aliznoninteger,(powno:powno+1,if powno>1 then alizx^aliznoninteger  else (radicalsubst:[alizx,aliznoninteger],powx)))$
-/* defrule(ReplaceFirstRadical,alizx^aliznoninteger,(if powstop then alizx^aliznoninteger  else (powstop:true,radicalsubst:[alizx,aliznoninteger],powx)))$ */
+defrule(ReplaceFirstRadical,alizx^aliznonirrationalnoninteger,(powno:powno+1,if powno>1 then alizx^aliznonirrationalnoninteger  else (radicalsubst:[alizx,aliznonirrationalnoninteger],powx)))$
 defrule(ReplaceFirstAbs,abs(alizx),(absno:absno+1,if absno>1 then abs(alizx) else (abssubst:alizx,absx)))$
 
 defrule(delogisticrule,aliznotxy*'diff(solvar,solvar2)+aliznotxy2*solvar+aliznotxy3*solvar^2=0,[solvar=0,solvar=-aliznotxy2/aliznotxy3,solvar=-(aliznotxy2/aliznotxy3)/(1+%c*%e^(aliznotxy2/aliznotxy*solvar2))])$
@@ -402,16 +406,16 @@ exprq2:logcontract(exprq),
 if exprsize(exprq2)<2*inpsiz then return(exprq2) else return(exprq)
 )$
 
- /*algsysforsoeg v1.06 pga. for faa cifre med realroots*/
+ /* 1.37 added rationalize otherwise does not work with numer*/
 solvepoly(exprq):=block([exprq2,aqz,bqz,cqz,qsol,realonly:true],
-exprq2:lhs(exprq)-rhs(exprq),
-if not(polynomialp(exprq2,[solvar],lambda([z],atom(z) or constantp(z)),integerp)) then return (exprq),
+exprq2:lhs(exprq)-rhs(exprq),exprq2:expand(rationalize(exprq2)), /*Must be expanded to correctly identify order. exponents Must be rational for polynomialp to work*/
+if not(polynomialp(exprq2,[solvar],lambda([z],atom(z) or constantp(z)),integerfp)) then return (exprq), 
 if polynomialp(exprq2,[solvar],lambda([z],atom(z) or constantp(z)),lambda([z],is(z<2 and z>=0))) then return (exprq),
 if polynomialp(exprq2,[solvar],lambda([z],atom(z) or constantp(z)),lambda([z],is(z<3 and z>=0))) then (
 aqz:coeff(exprq2,solvar,2),
 bqz:coeff(exprq2,solvar,1),
 cqz:coeff(exprq2,solvar,0),
-if aqz=0 or bqz=0 or cqz=0 then return(exprq) else return(if is(bqz^2-4*aqz*cqz<0)=true then ([]) else ([solvar=(-bqz+sqrt(bqz^2-4*aqz*cqz))/(2*aqz),solvar=(-bqz-sqrt(bqz^2-4*aqz*cqz))/(2*aqz)]))),
+if aqz=0 or bqz=0 or cqz=0 then return(exprq2=0) else return(if is(bqz^2-4*aqz*cqz<0)=true then ([]) else ([solvar=(-bqz+sqrt(bqz^2-4*aqz*cqz))/(2*aqz),solvar=(-bqz-sqrt(bqz^2-4*aqz*cqz))/(2*aqz)]))),
 if polynomialp(exprq2,[solvar],'constantp,'integerp) then (
     qsol:flatten(ev(algsys([exprq2],[solvar]),numer)),
     if qsol=[] then
@@ -430,6 +434,7 @@ if ev(imagpart(nexpr)/realpart(nexpr),numer)<10^-14 then return(realpart(nexpr))
 qexpr
 )$
 
+/* substitutes solutions back into equation to see if any imaginary result appears. If so it is assumed that the result is not valid */
 RemoveUndefined(eqnw,sollistq):=block([indq,indq2,solq,sollistq2,delq],
 if length(sollistq)=0 then return(sollistq),
 if op(eqnw)=end then return(sollistq),
@@ -444,7 +449,7 @@ if do(
 	delq:inpart(eqnw,indq2),
 	if delq=end then return(true),
 	errcatch(if powundef(subst(solq,delq)) then return(false)),
-	if errcatch(imagundef(ev(ev(delq,solq),numer)))=[] then return(false),
+	if errcatch(imagundef(ev(ev(delq,solq),numer)))=[] and errcatch(imagundef(ev(delq,solq)))=[] then return(false),
 	if errcatch(asinundef(ev(delq,solq)))=[] then return(false),
 	if errcatch(acosundef(ev(delq,solq)))=[] then return(false),
 	indq2:indq2+1
@@ -789,8 +794,7 @@ solvereal([paramq]):=block([solq,tempq,lignq,varq,condq,qassum,solu_1a,solu_2b,s
 lignq:paramq[1],varq:paramq[2],
 if length(paramq)=3 then condq:paramq[3] else condq=[],
 if nonscalarp(lignq) and length(lignq)>1 and freeof(at,lignq) then (print("solving system of equations"),return(solvesystem(lignq,varq))),
-if sepsolvecontext then (context:solreal,
-activate(initial)),
+if sepsolvecontext then (context:solreal,activate(initial)),
 if atom(varq) then (solvar:varq,remarray(''solvar)) else (solvar:solx,lignq:subst(solvar,varq,lignq)),
 if lignq=all then return([all]),
 if freeof(solvar,lignq) then (print(solvar," not present in equation"),if is(equal(lhs(lignq),rhs(lignq)))=true then return(all) elseif is(equal(lhs(lignq),rhs(lignq)))=false then return([]) else return(unknown)),
@@ -798,9 +802,10 @@ iteind:0,factind:0,solsteps:[],
 /* solq:solverecursive(factoreq(lignq),varq,condq), kan forstyre med maerkelig faktorisering af noget der nemt kan loeses*/
 solq:[lignq],
 /* problematisk kan foere til ugyldige loesninger solq:DissolveRadicals(solq),*/
+/*solq:applyrulelistZero(solq,sqrtrul),addsolstep(solq,"sqrtrul"),*/
 solq:DissolveAbs(solq),
 if autonsolve and not(freeof("if",solq)) then (solu_1a:nsolve(lignq,varq),go(slutqw)), /* solver cant handle piecewiese defintions*/
-solq:solverecursive(solq,varq,condq),
+solq:solverecursive(solq,varq,condq), 
 if solq=[0=0] then (solq:[all],go(finishlabel)),
 solq: ev(solq,logcontract2),addsolstep(solq,"logcontract2"),
 solq: unique(solq),
@@ -935,6 +940,7 @@ solverecursive(lignq,varq,condq):=block([solq],
 	solq:applyasinrule(solq),addsolstep(solq,"asinrule"),
 	solq:applyacosrule(solq),addsolstep(solq,"acosrule"),
 	solq:applyatanrule(solq),addsolstep(solq,"atanrule"),
+	solq:DissolveRadicals(solq), 
 	if solq#lignq then return(solverecursive(solq,varq,condq)),
 	solq:applysolvepoly(solq),addsolstep(solq,"solvepoly"),
 	if solq#lignq then return(solverecursive(solq,varq,condq)),
@@ -962,31 +968,57 @@ addsolstep(qsol):=block([],solsteps:unique(append(solsteps,qsol)))$
 */
 
 /* Tries to isolate radicals one bye one and square them out, but can easily give infinite loop or very large expressions. Now limited, will only apply if one radical, since can easily grow.
-Not mathematically sound. example: sqrt(x)=-1  ->(squaring) x=1 but is not a solution  
 dissolveradicals:true;solvar:x;DissolveRadicals([x^2=2*sqrt(x)]);*/
-DissolveRadicals(qexprl):=block([powno:0,solq,solq2:[],savevar,qind:0,qind2:0,noradicals:true],
+DissolveRadicals(qexprl):=block([powno:0,solq,solq2:[],solq3,savevar,qind:0,qind2:0,noradicals:true,numq,denomq],
 if not(dissolveradicals) then return(qexprl),
 savevar:solvar,
 do(
-qind2:qind2+1,
-if qind2>length(qexprl) then return(),
-qexpr:qexprl[qind2],
-solq:apply1(qexpr,ReplaceFirstRadical),
-if powno=1 then (
-noradicals:false,
-solq:ev(solvereal(solq,powx),dissolveradicals=false),
-qind:0,
-do(
-qind:qind+1,
-if qind>length(solq) then return(),
-if CheckSolved(solq[qind]) then 
-(
-solq2:append(solq2,[radicalsubst[1]^num(ratsimp(radicalsubst[2]))=expand(rhs(solq[qind])^(denom(ratsimp(radicalsubst[2]))))])
-)
-else
-(
-solq2:append(solq2,[subst(radicalsubst[1]^radicalsubst[2],powx,solq[qind])]))))),
-solvar:savevar,if noradicals then qexprl else solq2
+	qind2:qind2+1,
+	if qind2>length(qexprl) then return(),
+	qexpr:qexprl[qind2],
+	solq:apply1(qexpr,ReplaceFirstRadical),/* ReplaceFirstRadical is a rule that counts how many powers in expression that could be isolated, and sets pow equal to that number. If pow=1 then: for (x+1)^(1/2) sets radicalsubst:[x+1,1/2]. solq holds the new equation where everything under sqrt is replaced by a new variable powx: 4*powx = -(x^2/5)+2*x+3*/
+	if freeof(savevar,solq) then return(qexprl), /* If powx was the only part that had x, then normal recursivesolve will solve the equation. We dont need this*/ 
+	if powno=1 then (
+		noradicals:false,
+		solq:ev(solvereal(solq,powx),dissolveradicals=false,sepsolvecontext=false,showassumptions=false), /* Solve the equation with the radical replaced by powx */
+		qind:0,
+		do(
+			qind:qind+1,
+			if qind>length(solq) then return(),
+			if CheckSolved(solq[qind]) then 
+				(
+				radicalsubst[2]:rationalize(radicalsubst[2]),
+				numq:num(radicalsubst[2]),
+				denomq:denom(radicalsubst[2]),
+				if evenp(denomq) then
+				(
+					if sign(numq)=pos then
+					(					assume(radicalsubst[1]>=0,rhs(solq[qind])>=0)
+					)
+					else
+					(					assume(radicalsubst[1]>0,rhs(solq[qind])>0)
+					)
+				),
+				if sign(numq)=pos then(
+					solq3:expand(radicalsubst[1]^numq)-expand(rhs(solq[qind])^(denomq))
+				)
+				else(
+					solq3:expand(radicalsubst[1]^numq)*expand(rhs(solq[qind])^(-denomq))-1
+				),
+				solq2:append(solq2,[solq3=0])
+/*				if polynomialp(solq3,[savevar]) and abs(denomq)<1000 then (
+					solq2:append(solq2,[solq3=0])
+					)
+				else (solq2:append(solq2,[subst(radicalsubst[1]^radicalsubst[2],powx,solq[qind])])),print("solq2: ",solq2)
+*/
+			)
+			else
+				(
+				solq2:append(solq2,[subst(radicalsubst[1]^radicalsubst[2],powx,solq[qind])]))
+			)
+		)
+	),
+	solvar:savevar,if noradicals then qexprl else solq2
 )$
 
 DissolveAbs(qexprl):=block([absno:0,solq,solq2:[],savevar,qind:0,qind2:0,noabs:true],
@@ -1145,13 +1177,13 @@ newton_method(expr, var, guess, tol, max_iter) := block(
  *
  * Notes:
  *   - It uses various methods to find the roots of the equation within the specified bounds.
- *   - uses nsolverealrecursive to search ranges: ... [0-0.01] [0-0.1] [0-1], [0-10], [0-100] ... depending on qn and qm. Each range is divided into 91 points. and searches for different signs between neighboring points.
+ *   - uses nsolverealrecursive to search ranges: ... [0.001-0.01] [0.01-0.1] [0.1-1], [1-10], [10-100] ... depending on qn and qm. Each range is divided into 91 points. and searches for different signs between neighboring points.
  *   - If the number of solutions found is less than the specified maximum, it attempts to find more solutions using extended bounds and Newton's method.
  *   - The function ensures that the solutions are unique and correct.
  */
 /* Solves an equation for a variable or expression. The variable to solve for will have any arrays attached removed*/
 nsolve([paramq]) := block(
-	[qfkt, solq, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter],
+	[qfkt, solq, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter,qex],
 	if length(paramq) < 2 then (
 		print("Too few arguments"),
 		return()
@@ -1185,10 +1217,12 @@ nsolve([paramq]) := block(
 	), 
 	errormsg: false,
 	solq: [],
+
+	qex: lhs(qlign) - rhs(qlign),
 	if UseBF = true then (
 		define(qfkt(qvar), ev(lhs(qlign) - rhs(qlign), bfloat))
 	) else (
-		define(qfkt(qvar), ev(lhs(qlign) - rhs(qlign), numer))
+		define(qfkt(qvar), ev(lhs(qlign) - rhs(qlign), float))
 	),
 	qti: absolute_real_time(),
 	/* Alternative method: length(listofvars(qfkt(x))) */
@@ -1220,6 +1254,7 @@ nsolve([paramq]) := block(
 			)
 		)
 	),
+	if qfkt(0)=0.0 or qfkt(0)=0 or qfkt(0)=0.0b0 then solq: append(solq, [0]), /* nsolverec checks on both sides of 0, but never 0*/
 	if qmm > qm then errcatch(
 		if opposite_sign(qfkt(10^qm),qfkt(10^qmm)) then
 		(
@@ -1349,6 +1384,58 @@ find_root_safe(qfkt, qvar, a, b) := block([sol, fa, fb, fap, fbp],
 	return([sol])
 )$
 
+/* the function qfkt must not be defined(imaginary) at one of the points a or b. The other must be defined(real). The function searches for roots at the edge of definition by bisecting the distance between a and b recursively */
+find_root_edge(qfkt, qvar, a, b) := block([sol, fa, fb, fc, dx, fai,fbi,fci],
+	dx: (b - a) / 2,
+	if dx < 1E-15 then return([]),	
+	fa: errcatch(subst(a,qvar,qfkt)),if length(fa)=1 then fa:fa[1],
+	fb: errcatch(subst(b,qvar,qfkt))[1],if length(fb)=1 then fb:fb[1],
+	fc: errcatch(subst(a+dx,qvar,qfkt)),if length(fc)=1 then fc:fc[1],
+	fai: freeof(%i, fa),
+	fbi: freeof(%i, fb),
+	fci: freeof(%i, fc),
+	if (not(fai) and not(fbi)) then return([]), /* if both are imaginary, return */
+	if (fai and fbi) then return( /* if both are real, check for opposite sign and use findroot if that is the case*/
+		if opposite_sign(fa, fb) then (
+			return(find_root_safe(qfkt, qvar, a, b))
+		) else return([])
+	),
+	if fai then (
+		if fa<1E-15 and fa>-1E-15 then (return([a]))
+	),
+	if fbi then (
+		if fb<1E-15 and fb>-1E-15 then (return([b]))
+	),
+	if fci then (
+		if fc<1E-15 and fc>-1E-15 then (return([c]))
+		else if fai and fci then
+		(
+			if fc/(fc-fa)<0 and fc/(fc-fa)*dx>-1E-14 then (return([a+dx])) /* This take the steepness of the curve into account. If very steep in direction towards zero, then dont need to be so close to 0  */
+		),
+		if fbi and fci then
+		(
+			if fc/(fc-fb)*dx<1E-14 and fc/(fc-fb)>0 then (return([a+dx]))
+		)
+	), 
+	/* one is real, the other imaginary. Check which side is real and continue searching in that direction */
+	if fai and not fci then
+	(
+		return(find_root_edge(qfkt, qvar, a, a + dx))
+	)
+	else if fbi and not fci then
+	(
+		return(find_root_edge(qfkt, qvar, b - dx, b))
+	)
+	else if fci and not(fbi) then
+	(
+		return(find_root_edge(qfkt, qvar, b - dx, b))	
+	)
+	else if fbi and not(fai) then
+	(
+		return(find_root_edge(qfkt, qvar, a, a + dx))	
+	)		
+)$
+
 /*
  * Function: nsolverec
  * -------------------
@@ -1387,7 +1474,8 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 	)), 
 	while qi < length(glf) do (
 		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (
-			if opposite_sign(qfkt(ql[qi] - 10^(qn - 3)),qfkt(ql[qi] + 10^(qn - 3))) then
+			sollq: append(sollq, [ql[qi]])
+/*			if opposite_sign(qfkt(ql[qi] - 10^(qn - 3)),qfkt(ql[qi] + 10^(qn - 3))) then
 			(
 				if UseBF = true then (
 					sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
@@ -1395,10 +1483,15 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 					sollq: append(sollq, flatten([errcatch(find_root_safe(qfkt, qvar, ql[qi], ql[qi + 1]))]))
 				)
 			)
+			else if not(freeof(%i, glf[qi+1])) then (
+				sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, ql[qi], ql[qi + 1]))]))
+			)*/
 		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (
-			nothing
+			sollq: append(sollq, [ql[qi+1]])
 		) elseif not(freeof(%i, glf[qi])) or not(freeof(%i, glf[qi+1])) then (
-			nothing
+			if (not(freeof(%i, glf[qi])) and freeof(%i, glf[qi+1])) or (freeof(%i, glf[qi]) and not(freeof(%i, glf[qi+1]))) then (
+				sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, ql[qi], ql[qi + 1]))]))
+			)
 		) elseif opposite_sign(glf[qi],glf[qi + 1]) then (
 			if UseBF = true then (
 				sollq: append(sollq, flatten([errcatch(bf_find_root(qfkt, qvar, ql[qi], ql[qi + 1]))]))
@@ -1421,6 +1514,8 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 
 	while qi < length(glf) do (
 		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (
+			sollq: append(sollq, [-ql[qi]])
+/*			if ql[qi]>2.8 and ql[qi]<3.2 then print("glf[",qi,"]=",glf[qi]," glf[",qi+1,"]=",glf[qi+1]),
 			if opposite_sign(qfkt(-ql[qi] - 10^(qn - 3)),qfkt(-ql[qi] + 10^(qn - 3))) then
 			(
 				if UseBF = true then (
@@ -1429,13 +1524,14 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 					sollq: append(sollq, flatten([errcatch(find_root_safe(qfkt, qvar, -ql[qi + 1], -ql[qi]))]))
 				)
 			)
+			else if not(freeof(%i, glf[qi+1])) then (
+				sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, -ql[qi+1], -ql[qi]+1E-10))]))
+			)*/
 		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (
-			nothing
-		) elseif not(freeof(%i, glf[qi])) then (
-			if freeof(%i, glf[qi+1]) then (
-				nothing
-			) else ( /* lige op til et sted hvor funktionen ikke er defineret, måske der kan gøres noget */
-				nothing
+			sollq: append(sollq, [-ql[qi + 1]])
+		) elseif not(freeof(%i, glf[qi])) or not(freeof(%i, glf[qi+1])) then (
+			if (not(freeof(%i, glf[qi])) and freeof(%i, glf[qi+1])) or (freeof(%i, glf[qi]) and not(freeof(%i, glf[qi+1]))) then (
+				sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, ql[qi], ql[qi + 1]))]))
 			)
 		) elseif opposite_sign(glf[qi],glf[qi + 1]) then (
 			if UseBF = true then (

@@ -232,8 +232,9 @@ Sub InsertSletDef()
     On Error Resume Next
     Selection.OMaths(1).Range.Font.Size = 8
     Selection.OMaths(1).Range.Font.ColorIndex = wdGray50
-    On Error GoTo slut
     Selection.TypeText TT.A(69) & ":"
+    Selection.OMaths(1).Range.Font.Bold = False
+    On Error GoTo slut
     Selection.Collapse (wdCollapseEnd)
     Selection.TypeParagraph
     Selection.Font.Bold = False
