@@ -24,7 +24,7 @@ Sub Chi2Test()
     InsertOpenExcel "chi2test.xltm"
 #Else
     Dim s As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim r As Integer
     Dim c As Integer
     
@@ -38,13 +38,13 @@ Sub Chi2Test()
     
     If Selection.Tables.Count = 0 Then
         s = InputBox(TT.A(351), TT.A(352), "2x2")
-        arr = Split(s, "x")
-        If UBound(arr) < 1 Then arr = Split(s, ",")
-        If UBound(arr) < 1 Then GoTo slut
-        If Not IsNumeric(arr(0)) Then GoTo slut
-        If Not IsNumeric(arr(1)) Then GoTo slut
-        r = arr(0)
-        c = arr(1)
+        Arr = Split(s, "x")
+        If UBound(Arr) < 1 Then Arr = Split(s, ",")
+        If UBound(Arr) < 1 Then GoTo slut
+        If Not IsNumeric(Arr(0)) Then GoTo slut
+        If Not IsNumeric(Arr(1)) Then GoTo slut
+        r = Arr(0)
+        c = Arr(1)
     End If
 
     'Application.ScreenUpdating = False

@@ -1074,7 +1074,7 @@ If Right$(GetNextListItem, 1) = Sep Then
 End If
 
 End Function
-Sub SplitNonBracket(ByRef arr As Variant, Optional Sep As String = "")
+Sub SplitNonBracket(ByRef Arr As Variant, Optional Sep As String = "")
     Dim s As String, t As String
     pos = 1
     Do
@@ -1084,7 +1084,7 @@ Sub SplitNonBracket(ByRef arr As Variant, Optional Sep As String = "")
         End If
     Loop While s <> ""
     If t <> "" Then t = Left$(t, Len(t) - 3)
-    arr = Split(t, "$_q")
+    Arr = Split(t, "$_q")
     
 End Sub
 

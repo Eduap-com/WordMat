@@ -98,7 +98,7 @@ Sub SetButtonsInactive()
 End Sub
 
 Private Sub UserForm_Activate()
-    Dim h As Integer, w As Integer, arr() As String, i As Integer
+    Dim h As Integer, w As Integer, Arr() As String, i As Integer
     
 #If Mac Then
     prompt = Replace(prompt, vbCrLf, vbLf)
@@ -107,7 +107,7 @@ Private Sub UserForm_Activate()
 #End If
     InputString = vbNullString
 '    prompt = Replace(prompt, vbCr, vbLf)
-    arr = Split(prompt, vbLf)
+    Arr = Split(prompt, vbLf)
 '    h = 120 + 16 * GetCountOfChar(prompt, VbCrLfMac)
     If TextBox_input.MultiLine Then
         TextBox_input.Height = 90
@@ -115,11 +115,11 @@ Private Sub UserForm_Activate()
         TextBox_input.Height = 20
     End If
     
-    h = 120 + 16 * UBound(arr) + TextBox_input.Height
+    h = 120 + 16 * UBound(Arr) + TextBox_input.Height
     If h > 1000 Then h = 1000
     
-    For i = 0 To UBound(arr)
-        If Len(arr(i)) > w Then w = Len(arr(i))
+    For i = 0 To UBound(Arr)
+        If Len(Arr(i)) > w Then w = Len(Arr(i))
     Next
         
     w = 100 + 5 * w

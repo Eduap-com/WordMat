@@ -51,8 +51,9 @@ Sub ExecuteKeyboardShortcut(ShortcutVal As KeybShortcut)
 End Sub
 
 Sub PressAltM()
-    If SettShortcutAltM2 <> KeybShortcut.NoShortcut Then
-        If Timer() - TapTime < 0.8 Then
+    If SettShortcutAltM2 > 0 Then
+        If Abs(Timer() - TapTime) < 0.8 Then
+            TapTime = Timer()
             ExecuteKeyboardShortcut SettShortcutAltM2
             GoTo slut
         End If

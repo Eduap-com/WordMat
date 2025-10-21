@@ -45,7 +45,7 @@ Sub SetEscEvents(ControlColl As Controls)
     Next
 End Sub
 Private Sub CommandButton_geogebra_Click()
-    Dim s As String, vekt As String, arr() As String, i As Integer, j As Integer
+    Dim s As String, vekt As String, Arr() As String, i As Integer, j As Integer
     Dim ea As New ExpressionAnalyser, punkttekst As String, parx As String, pary As String, parz As String, cmd As String
     Dim sl As New CSortList, DefList As String, Var As String, k As Integer, fktudtryk As String, UrlLink As String, p As Integer
     
@@ -119,29 +119,29 @@ Private Sub CommandButton_geogebra_Click()
     'vectors
     If TextBox_vektorer.text <> "" Then
         vekt = TextBox_vektorer.text
-        arr = Split(vekt, VbCrLfMac)
-        For i = 0 To UBound(arr)
-            If arr(i) <> "" Then
-                If InStr(arr(i), ";") > 0 Then
-                    arr(i) = Replace(arr(i), ",", ".")
-                    arr(i) = Replace(arr(i), ";", ",")
+        Arr = Split(vekt, VbCrLfMac)
+        For i = 0 To UBound(Arr)
+            If Arr(i) <> "" Then
+                If InStr(Arr(i), ";") > 0 Then
+                    Arr(i) = Replace(Arr(i), ",", ".")
+                    Arr(i) = Replace(Arr(i), ";", ",")
                 Else
-                    ea.text = arr(i)
+                    ea.text = Arr(i)
                     j = ea.CountText(",")
                     If Not (j = 2 Or j = 4) Then
                         ea.ConvertDecSeparator
-                        arr(i) = ea.text
+                        Arr(i) = ea.text
                     End If
                 End If
-                If InStr(arr(i), ")(") > 0 Then
-                    arr(i) = Replace(arr(i), ")(", "),(")
+                If InStr(Arr(i), ")(") > 0 Then
+                    Arr(i) = Replace(Arr(i), ")(", "),(")
                 Else
-                    arr(i) = "(0,0,0)," & arr(i)
+                    Arr(i) = "(0,0,0)," & Arr(i)
                 End If
-                arr(i) = Replace(arr(i), "(", "(")
-                arr(i) = Replace(arr(i), ")", ")")
+                Arr(i) = Replace(Arr(i), "(", "(")
+                Arr(i) = Replace(Arr(i), ")", ")")
             
-                s = s & "vector(" & arr(i) & ");"
+                s = s & "vector(" & Arr(i) & ");"
             End If
         Next
     End If
@@ -359,7 +359,7 @@ Dim smin As String
 Dim smax As String
 Dim punkttekst As String
 Dim antalobj As Integer
-Dim arr As Variant
+Dim Arr As Variant
 Dim i As Integer, j As Integer
 Dim ea As New ExpressionAnalyser
 
@@ -509,35 +509,35 @@ If TextBox_vektorer.text <> "" Then
         grafobj = grafobj & "surface_hide = false,"
     End If
     vekt = TextBox_vektorer.text
-    arr = Split(vekt, VbCrLfMac)
-    For i = 0 To UBound(arr)
-        If arr(i) <> "" Then
-            If InStr(arr(i), ";") > 0 Then
-                arr(i) = Replace(arr(i), ",", ".")
-                arr(i) = Replace(arr(i), ";", ",")
+    Arr = Split(vekt, VbCrLfMac)
+    For i = 0 To UBound(Arr)
+        If Arr(i) <> "" Then
+            If InStr(Arr(i), ";") > 0 Then
+                Arr(i) = Replace(Arr(i), ",", ".")
+                Arr(i) = Replace(Arr(i), ";", ",")
             Else
-                ea.text = arr(i)
+                ea.text = Arr(i)
                 j = ea.CountText(",")
                 If Not (j = 2 Or j = 4) Then
                     ea.ConvertDecSeparator
-                    arr(i) = ea.text
+                    Arr(i) = ea.text
                 End If
             End If
-            If InStr(arr(i), ")(") > 0 Then
-                arr(i) = Replace(arr(i), ")(", "],[")
+            If InStr(Arr(i), ")(") > 0 Then
+                Arr(i) = Replace(Arr(i), ")(", "],[")
             Else
-                arr(i) = "[0,0,0]," & arr(i)
+                Arr(i) = "[0,0,0]," & Arr(i)
             End If
-            arr(i) = Replace(arr(i), "(", "[")
-            arr(i) = Replace(arr(i), ")", "]")
+            Arr(i) = Replace(Arr(i), "(", "[")
+            Arr(i) = Replace(Arr(i), ")", "]")
             
             If CheckBox_udtryk.Value Then
-                grafobj = grafobj & "key=""Vektor: " & arr(i) & ""","
+                grafobj = grafobj & "key=""Vektor: " & Arr(i) & ""","
             Else
                 grafobj = grafobj & "key="""","
             End If
             grafobj = grafobj & "color=" & GetNextColor & ","
-            grafobj = grafobj & "vector(" & arr(i) & "),"
+            grafobj = grafobj & "vector(" & Arr(i) & "),"
         End If
     Next
     antalobj = antalobj + 1

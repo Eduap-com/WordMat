@@ -865,9 +865,9 @@ Sub Rib_STunit4(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_GetLabelChangeUnits(control As IRibbonControl, ByRef returnedVal)
     If OutUnits <> vbNullString Then
-        Dim arr() As String
-        arr = Split(OutUnits, ",")
-        returnedVal = arr(0)
+        Dim Arr() As String
+        Arr = Split(OutUnits, ",")
+        returnedVal = Arr(0)
     Else
         returnedVal = "SI"
     End If

@@ -47,20 +47,20 @@ Public Property Let Datatext(ByVal text As Variant)
     Dim i As Integer
     Dim j As Integer
     Dim lsep As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim Arr2 As Variant
     Dim n As Integer
-    arr = Split(text, VbCrLfMac)
-    n = UBound(arr)
+    Arr = Split(text, VbCrLfMac)
+    n = UBound(Arr)
     ReDim xval(1 To n + 1) As Double
     ReDim yval(1 To n + 1) As Double
-    For j = 0 To UBound(arr)
-        If InStr(arr(j), ";") Then
+    For j = 0 To UBound(Arr)
+        If InStr(Arr(j), ";") Then
             lsep = ";"
         Else
             lsep = ","
         End If
-        Arr2 = Split(arr(j), lsep)
+        Arr2 = Split(Arr(j), lsep)
         If UBound(Arr2) > 0 Then
         i = i + 1
         xval(i) = Replace(Arr2(0), ".", ",")
@@ -276,7 +276,7 @@ Dim p As String
 Dim text As String
 Dim n As Integer
 Dim ea As New ExpressionAnalyser
-Dim arr As Variant
+Dim Arr As Variant
 
     ReDim xval(1 To 1000) As Double
     ReDim yval(1 To 1000) As Double
@@ -291,16 +291,16 @@ ea.pos = 1
 Do
 p = ea.GetNextBracketContent()
 If InStr(p, ";") Then
-    arr = Split(p, ";")
+    Arr = Split(p, ";")
 Else
-    arr = Split(p, ",")
+    Arr = Split(p, ",")
 End If
-If UBound(arr) > 0 Then
+If UBound(Arr) > 0 Then
     n = n + 1
 '    xval(n) = CDbl(arr(0))
 '    yval(n) = CDbl(arr(1))
-    xval(n) = val(Replace(arr(0), ",", "."))
-    yval(n) = val(Replace(arr(1), ",", "."))
+    xval(n) = val(Replace(Arr(0), ",", "."))
+    yval(n) = val(Replace(Arr(1), ",", "."))
 End If
 Loop While Not (p = "") And n < 1000
 
@@ -454,7 +454,7 @@ slut:
 End Sub
 Function ComputeUserRegr() As Boolean
     Dim fkt As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim xlist As String, ylist As String
     Dim i As Long, guess As String, Var As String, p As Integer, eps As String
     Dim ea As New ExpressionAnalyser, s As String
@@ -475,8 +475,8 @@ Function ComputeUserRegr() As Boolean
     fkt = Replace(omax.Kommando, vbCrLf, "")
     If fkt <> vbNullString Then
         If InStr(fkt, "=") Then
-            arr = Split(fkt, "=")
-            If UBound(arr) > 0 Then fkt = arr(1)
+            Arr = Split(fkt, "=")
+            If UBound(Arr) > 0 Then fkt = Arr(1)
         End If
         UserFormUserRegression.TextBox_function.text = fkt
     End If
@@ -504,9 +504,9 @@ Function ComputeUserRegr() As Boolean
     
     ea.text = fkt
     omax.FindVariable (fkt)
-    arr = Split(omax.Vars, ";")
-    For i = 0 To UBound(arr)
-        If arr(i) <> Var Then s = s & arr(i) & "=" & vbCrLf
+    Arr = Split(omax.Vars, ";")
+    For i = 0 To UBound(Arr)
+        If Arr(i) <> Var Then s = s & Arr(i) & "=" & vbCrLf
     Next
     UserFormUserRegression.TextBox_guess.text = s
     UserFormUserRegression.Show
@@ -524,10 +524,10 @@ Function ComputeUserRegr() As Boolean
     s = Replace(s, vbCrLf, ";")
     s = Replace(s, vbCr, ";")
     s = Replace(s, vbLf, ";")
-    arr = Split(s, ";")
+    Arr = Split(s, ";")
     guess = "["
-    For i = 0 To UBound(arr)
-        If Right$(arr(i), 1) <> "=" Then guess = guess & arr(i) & ";"
+    For i = 0 To UBound(Arr)
+        If Right$(Arr(i), 1) <> "=" Then guess = guess & Arr(i) & ";"
     Next
     If Len(guess) > 1 Then guess = Left$(guess, Len(guess) - 1)
     guess = guess & "]"

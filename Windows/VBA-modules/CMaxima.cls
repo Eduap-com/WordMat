@@ -315,7 +315,7 @@ Sub RunMaximaWSH(Optional StopTime As Integer)
 End Sub
 Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) As String
 ' Converts a maxima expression, using the maxima-image with units loaded
-    Dim i As Integer, k As String, arr As Variant, s As String
+    Dim i As Integer, k As String, Arr As Variant, s As String
     
     Expr = Replace(Expr, """", "") ' The answer will typically be run through the num function which adds "" to numbers
     
@@ -324,9 +324,9 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
     Else
         k = "numer:true$uforget(append(globalbaseunitlisting,globalderivedunitlisting))$"
         If Not OutUnits = vbNullString Then
-            arr = Split(OutUnits, ",")
-            For i = 0 To UBound(arr) ' It has to be done this way because you cannot run setunits on a list where the same type of unit appears twice. e.g. eV and J
-                k = k & "setunits(" & omax.ConvertUnits((arr(i))) & ")$"
+            Arr = Split(OutUnits, ",")
+            For i = 0 To UBound(Arr) ' It has to be done this way because you cannot run setunits on a list where the same type of unit appears twice. e.g. eV and J
+                k = k & "setunits(" & omax.ConvertUnits((Arr(i))) & ")$"
             Next
         End If
 '        k = k & expr & ",numer;applyb1(%,unitrule),numer;scanmap(processunits,%);dectalallNum(%),numer;"
@@ -893,7 +893,7 @@ slut:
 End Sub
 Sub MaximaSolveInequality(variabel As String)
     Dim nr As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     If variabel = "" Then Exit Sub
 
@@ -1226,7 +1226,7 @@ End Sub
 Sub Eliminate(Variable As String)
     Dim Kommentar As String
     Dim i As Integer
-    Dim arr As Variant
+    Dim Arr As Variant
     If Variable = "" Then Exit Sub
     If InStr(Kommandoer(0), "=") < 1 Then
         Kommentar = TT.A(139)
@@ -1279,17 +1279,17 @@ Sub Eliminate(Variable As String)
         KommentarOutput = Minput(1) & vbLf & moutput(1)
     Else
         MaximaOutput = Mid$(MaximaOutput, 2, Len(MaximaOutput) - 2)
-        arr = Split(MaximaOutput, ListSeparator)
-        If Not (InStr(arr(0), "=") > 0) Then
-            MaximaOutput = arr(0) & "=0"
+        Arr = Split(MaximaOutput, ListSeparator)
+        If Not (InStr(Arr(0), "=") > 0) Then
+            MaximaOutput = Arr(0) & "=0"
         Else
-            MaximaOutput = arr(0)
+            MaximaOutput = Arr(0)
         End If
-        For i = 1 To UBound(arr)
-            If Not (InStr(arr(i), "=") > 0) Then
-                MaximaOutput = MaximaOutput & "    " & ChrW$(8743) & "    " & arr(i) & "=0"
+        For i = 1 To UBound(Arr)
+            If Not (InStr(Arr(i), "=") > 0) Then
+                MaximaOutput = MaximaOutput & "    " & ChrW$(8743) & "    " & Arr(i) & "=0"
             Else
-                MaximaOutput = MaximaOutput & "    " & ChrW$(8743) & "    " & arr(i)
+                MaximaOutput = MaximaOutput & "    " & ChrW$(8743) & "    " & Arr(i)
             End If
         Next
     End If
@@ -1561,7 +1561,7 @@ Sub ConvertOutputToSolved()
 ' converts output from [1,3] to x=1 v x=3 or L={1,3}
 ' intended for numerical solution only
     Dim Variable As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     Dim Sep As String
     If LmSet Then
@@ -1572,9 +1572,9 @@ Sub ConvertOutputToSolved()
             MaximaOutput = Replace(MaximaOutput, "[", "(")
             MaximaOutput = Replace(MaximaOutput, "]", ")")
             MaximaOutput = Replace(MaximaOutput, "=", "")
-            arr = Split(Mid$(Variable, 2, Len(Variable) - 2), ",")
-            For i = 0 To UBound(arr)
-                MaximaOutput = Replace(MaximaOutput, arr(i), "")
+            Arr = Split(Mid$(Variable, 2, Len(Variable) - 2), ",")
+            For i = 0 To UBound(Arr)
+                MaximaOutput = Replace(MaximaOutput, Arr(i), "")
             Next
             MaximaOutput = "L={" & MaximaOutput & "}"
         End If
@@ -1613,7 +1613,7 @@ Sub ConvertOutputToSolvedGGB()
 ' for geogebra output for systems of equations
     Dim p As Integer, s As String, i As Integer, j As Integer
     Dim ea As New ExpressionAnalyser
-    Dim arr() As String, Arr2() As String
+    Dim Arr() As String, Arr2() As String
     
     If MaximaOutput = "?" Or MaximaOutput = "" Then
         Exit Sub
@@ -1623,18 +1623,18 @@ Sub ConvertOutputToSolvedGGB()
 '    p = InStr(ea.text, "(_")
     p = 1
     s = ea.GetNextBracketContent(p + 1)
-    arr = Split(s, "@")
+    Arr = Split(s, "@")
     MaximaOutput = ""
     
-    For i = 0 To UBound(arr)
-        Arr2 = Split(arr(i), "&")
+    For i = 0 To UBound(Arr)
+        Arr2 = Split(Arr(i), "&")
         If UBound(Arr2) > 0 Then
-            If UBound(arr) > 0 Then MaximaOutput = MaximaOutput & "("
+            If UBound(Arr) > 0 Then MaximaOutput = MaximaOutput & "("
             For j = 0 To UBound(Arr2)
                 MaximaOutput = MaximaOutput & Arr2(j) & "    " & ChrW$(8743) & "    "
             Next
             MaximaOutput = Left$(MaximaOutput, Len(MaximaOutput) - 9)
-            If UBound(arr) > 0 Then MaximaOutput = MaximaOutput & ")"
+            If UBound(Arr) > 0 Then MaximaOutput = MaximaOutput & ")"
         End If
         MaximaOutput = MaximaOutput & "    " & ChrW$(8744) & "    "
     Next
@@ -1644,7 +1644,7 @@ End Sub
 Sub ConvertOutputToSolved2(Optional Variable As String)
 ' converts output from [[x=1,y=3],[x=3,y=5]] to (x=1 and x=3) v ... or L={(1,3),(3,5)}
 ' intended for symbolic solution and mnewton and SolveIneq only
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
 
     If MaximaOutput = "[]" Then
@@ -1671,9 +1671,9 @@ Sub ConvertOutputToSolved2(Optional Variable As String)
                 MaximaOutput = Replace(MaximaOutput, "[", "(")
                 MaximaOutput = Replace(MaximaOutput, "]", ")")
                 MaximaOutput = Replace(MaximaOutput, "=", "")
-                arr = Split(Mid$(Variable, 2, Len(Variable) - 2), ",")
-                For i = 0 To UBound(arr)
-                    MaximaOutput = Replace(MaximaOutput, arr(i), "")
+                Arr = Split(Mid$(Variable, 2, Len(Variable) - 2), ",")
+                For i = 0 To UBound(Arr)
+                    MaximaOutput = Replace(MaximaOutput, Arr(i), "")
                 Next
                 MaximaOutput = "L={" & MaximaOutput & "}"
             End If
@@ -2342,7 +2342,7 @@ Sub Plot2D(forskrifter As String, punkter As String, Var As String, xmin As Stri
 ' functions separated by commas
 '    text = "load(draw)$draw2d("
     Dim text As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     Dim fkt As String
     colindex = 0
@@ -2360,10 +2360,10 @@ Sub Plot2D(forskrifter As String, punkter As String, Var As String, xmin As Stri
 '            fkt = "'RealOnly(" & fkt & ")"
         text = text & ",draw_realpart = false"
     End If
-    arr = Split(forskrifter, ";")
-    For i = 0 To UBound(arr)
-        fkt = omax.CodeForMaxima(arr(i))
-        text = text & ",key=""" & ConvertToAscii(arr(i)) & """,color=" & GetNextColor() & ",explicit(" & fkt & "," & Var & "," & xmin & "," & xmax & ")"
+    Arr = Split(forskrifter, ";")
+    For i = 0 To UBound(Arr)
+        fkt = omax.CodeForMaxima(Arr(i))
+        text = text & ",key=""" & ConvertToAscii(Arr(i)) & """,color=" & GetNextColor() & ",explicit(" & fkt & "," & Var & "," & xmin & "," & xmax & ")"
     Next
     If punkter <> "" Then
         text = text & ",key=""punkter"",point_type=filled_circle,point_size=1,points(" & punkter & ")"
@@ -2544,7 +2544,7 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     Dim pos4 As Long
     Dim pos5 As Long
     Dim posog As Long
-    Dim arr As Variant, Arr2() As String, Arr3() As String
+    Dim Arr As Variant, Arr2() As String, Arr3() As String
     Dim Var As String
     Dim startn As String
     Dim slutn As String
@@ -3096,16 +3096,16 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
             Else
                 ea.text = text
                 ea.pos = pos
-                arr = Split(ea.GetNextBracketContent, "&")
+                Arr = Split(ea.GetNextBracketContent, "&")
                 pos2 = ea.pos
-                If UBound(arr) = 0 Then
+                If UBound(Arr) = 0 Then
                     text = Replace(text, ChrW$(8730), "sqrt", 1, 1)
-                ElseIf UBound(arr) = 1 Then
-                    Call ea.InsertBeforePos("^(1/(" & arr(0) & ")))")
+                ElseIf UBound(Arr) = 1 Then
+                    Call ea.InsertBeforePos("^(1/(" & Arr(0) & ")))")
                     ea.text = Replace(ea.text, ChrW$(8730), "(", 1, 1)
                     posog = ea.FindChr("&", 1)
                     text = Left$(ea.text, pos + 1) & Right$(ea.text, Len(ea.text) - posog)
-                ElseIf UBound(arr) = -1 Then
+                ElseIf UBound(Arr) = -1 Then
                     MsgBox2 TT.A(169), vbOKOnly, TT.Error
                     GoTo fejl
                 End If
@@ -3122,16 +3122,16 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
             subs = ea.FindChr("_")
             sups = ea.FindChr("^")
             ends = ea.FindChr(ChrW$(9618))
-            arr = Split(Mid$(text, subs + 2, sups - subs - 3), "=")
-            If UBound(arr) < 1 Then    ' if definition is =, then translate to :
-                arr = Split(Mid$(text, subs + 2, sups - subs - 3), ":")
+            Arr = Split(Mid$(text, subs + 2, sups - subs - 3), "=")
+            If UBound(Arr) < 1 Then    ' if definition is =, then translate to :
+                Arr = Split(Mid$(text, subs + 2, sups - subs - 3), ":")
             End If
-            If UBound(arr) < 1 Then
+            If UBound(Arr) < 1 Then
                 MsgBox2 TT.A(425), vbOKOnly, TT.Error
                 GoTo videre
             End If
-            Var = arr(0)
-            startn = arr(1)
+            Var = Arr(0)
+            startn = Arr(1)
             slutn = Mid$(text, sups + 1, ends - sups - 1)
             sluts = ea.FindHierakiBreak(1)
             If ea.ChrByIndex(ea.pos) = "+" Or ea.ChrByIndex(ea.pos) = "-" Or ea.ChrByIndex(ea.pos) = "*" Or ea.ChrByIndex(ea.pos) = "/" Then sluts = sluts - 1
@@ -3149,16 +3149,16 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
             subs = ea.FindChr("_")
             sups = ea.FindChr("^")
             ends = ea.FindChr(ChrW$(9618))
-            arr = Split(Mid$(text, subs + 2, sups - subs - 3), "=")
-            If UBound(arr) < 1 Then    ' if definition is =, then translate to :
-                arr = Split(Mid$(text, subs + 2, sups - subs - 3), ":")
+            Arr = Split(Mid$(text, subs + 2, sups - subs - 3), "=")
+            If UBound(Arr) < 1 Then    ' if definition is =, then translate to :
+                Arr = Split(Mid$(text, subs + 2, sups - subs - 3), ":")
             End If
-            If UBound(arr) < 1 Then
+            If UBound(Arr) < 1 Then
                 MsgBox2 TT.A(426), vbOKOnly, TT.Error
                 GoTo videre
             End If
-            Var = arr(0)
-            startn = arr(1)
+            Var = Arr(0)
+            startn = Arr(1)
             slutn = Mid$(text, sups + 1, ends - sups - 1)
             sluts = ea.FindHierakiBreak(1)
             Expr = Mid$(text, ends + 1, sluts - ends)
@@ -3181,10 +3181,10 @@ videre:
                 sluts = ea.FindHierakiBreak(2)
                 Expr = Mid$(text, ends, sluts - ends + 1)
 
-                arr = Split(Var, ChrW$(8594))
-                Var = Trim$(arr(0))
+                Arr = Split(Var, ChrW$(8594))
+                Var = Trim$(Arr(0))
                 DiffEqVar = Var
-                app = Trim$(arr(1))
+                app = Trim$(Arr(1))
                 If Right$(app, 2) = "^+" Then
                     app = Left$(app, Len(app) - 2) & ",plus"
                 ElseIf Right$(app, 2) = "^-" Then
@@ -3634,17 +3634,17 @@ spring:
             If ea.ChrByIndex(slpos + 1) = "*" Then
                 text = Left$(text, slpos) & " ## " & Right$(text, Len(text) - slpos - 1)
             End If
-            arr = Split(matrix, "@")
+            Arr = Split(matrix, "@")
             If CAStype = 1 Or CAStype = 2 Then
                 mtext = "{"
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "{" & Replace(arr(i), "&", ",") & "},"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "{" & Replace(Arr(i), "&", ",") & "},"
                 Next
                 mtext = Left$(mtext, Len(mtext) - 1) & "}"
             Else
                 mtext = "matrix("
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "[" & Replace(arr(i), "&", ",") & "],"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "[" & Replace(Arr(i), "&", ",") & "],"
                 Next
                 mtext = Left$(mtext, Len(mtext) - 1) & ")"
             End If
@@ -3662,17 +3662,17 @@ spring:
             ea.pos = pos
             matrix = ea.GetNextBracketContent
             slpos = ea.pos
-            arr = Split(matrix, "@")
+            Arr = Split(matrix, "@")
             If CAStype = 1 Or CAStype = 2 Then
                 mtext = "{"
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "{" & arr(i) & "},"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "{" & Arr(i) & "},"
                 Next
                 mtext = Left$(mtext, Len(mtext) - 1) & "}"
             Else
                 mtext = "matrix("
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "[" & arr(i) & "],"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "[" & Arr(i) & "],"
                 Next
                 mtext = Left$(mtext, Len(mtext) - 1) & ")"
             End If
@@ -3746,17 +3746,17 @@ hopBracket:
             End If
             slpos = ea.pos - 1
             ea.pos = pos
-            arr = Split(matrix, ChrW$(166))
+            Arr = Split(matrix, ChrW$(166))
             If CAStype = 1 Or CAStype = 2 Then
                 mtext = "{"
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "{" & arr(i) & "},"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "{" & Arr(i) & "},"
                 Next
                 mtext = Left$(mtext, Len(mtext) - 1) & "}"
             Else
                 mtext = "matrix("
-                For i = 0 To UBound(arr)
-                    mtext = mtext & "[" & arr(i) & "],"
+                For i = 0 To UBound(Arr)
+                    mtext = mtext & "[" & Arr(i) & "],"
                 Next
                 mtext = Left$(mtext, Len(mtext) - 1) & ")"
             End If
@@ -4114,7 +4114,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     Dim pos As Long, pos2 As Long
     Dim Udtryk As String
     Dim possep As Long
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim mtext As String
     Dim slutp As Integer
     Dim s As String, s2 As String
@@ -4128,6 +4128,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     If CASengine = 0 Then
         If InStr(text, " ") <> 0 Then text = Replace(text, " ", vbNullString)   ' space removed
         If InStr(text, "##") <> 0 Then text = Replace(text, "##", "*")    '
+        If InStr(text, "^^") <> 0 Then text = Replace(text, "^^", "^")    '
     Else
         If InStr(text, " + ") <> 0 Then text = Replace(text, " + ", "+")
         If InStr(text, " - ") <> 0 Then text = Replace(text, " - ", "-")
@@ -4366,9 +4367,9 @@ Function ConvertToWordSymbols(ByVal text As String) As String
                 pos2 = ea.pos
                 '            Arr = Split(udtryk, ";")
                 ea.text = Udtryk
-                ea.SplitNonBracket arr, ";"
-                If UBound(arr) > 0 Then
-                    text = Left$(text, pos - 1) & "" & ChrW$(8730) & "(" & arr(1) & "&" & arr(0) & ")" & Right$(text, Len(text) - pos2 + 1)
+                ea.SplitNonBracket Arr, ";"
+                If UBound(Arr) > 0 Then
+                    text = Left$(text, pos - 1) & "" & ChrW$(8730) & "(" & Arr(1) & "&" & Arr(0) & ")" & Right$(text, Len(text) - pos2 + 1)
                 Else
                     GoTo fejl
                 End If
@@ -4440,11 +4441,11 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         ea.text = text
         ea.pos = pos + 8
         udt = ea.GetNextBracketContent()
-        arr = Split(udt, ListSeparator)
-        If UBound(arr) > 1 Then
-            text = Left$(text, pos - 1) & ChrW$(8747) & "_" & arr(2) & "^" & arr(3) & ChrW$(9618) & arr(0) & "  d" & arr(1) & " " & Right$(text, Len(text) - pos - Len(udt) - 10)
+        Arr = Split(udt, ListSeparator)
+        If UBound(Arr) > 1 Then
+            text = Left$(text, pos - 1) & ChrW$(8747) & "_" & Arr(2) & "^" & Arr(3) & ChrW$(9618) & Arr(0) & "  d" & Arr(1) & " " & Right$(text, Len(text) - pos - Len(udt) - 10)
         Else
-            text = Left$(text, pos - 1) & ChrW$(8747) & ChrW$(9618) & arr(0) & "  d" & arr(1) & " " & Right$(text, Len(text) - pos - Len(udt) - 10)
+            text = Left$(text, pos - 1) & ChrW$(8747) & ChrW$(9618) & Arr(0) & "  d" & Arr(1) & " " & Right$(text, Len(text) - pos - Len(udt) - 10)
         End If
         pos = InStr(pos, text, "integrate")
     Loop
@@ -4459,12 +4460,12 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         ea.text = text
         ea.pos = pos + 4
         udt = ea.GetNextBracketContent()
-        arr = Split(udt, ListSeparator)
-        If UBound(arr) > 1 Then
-            If arr(2) = "1" Then
-                text = Left$(text, pos - 1) & ChrW$(8518) & "/(" & ChrW$(8518) & arr(1) & ") (" & arr(0) & ")" & " " & Right$(text, Len(text) - Len(udt) - 5 - pos)
+        Arr = Split(udt, ListSeparator)
+        If UBound(Arr) > 1 Then
+            If Arr(2) = "1" Then
+                text = Left$(text, pos - 1) & ChrW$(8518) & "/(" & ChrW$(8518) & Arr(1) & ") (" & Arr(0) & ")" & " " & Right$(text, Len(text) - Len(udt) - 5 - pos)
             Else
-                text = Left$(text, pos - 1) & ChrW$(8518) & "/(" & ChrW$(8518) & "^" & arr(2) & " " & arr(1) & ") (" & arr(0) & ")" & " " & Right$(text, Len(text) - Len(udt) - 6)
+                text = Left$(text, pos - 1) & ChrW$(8518) & "/(" & ChrW$(8518) & "^" & Arr(2) & " " & Arr(1) & ") (" & Arr(0) & ")" & " " & Right$(text, Len(text) - Len(udt) - 6)
             End If
         Else
             pos = pos + 4
@@ -4482,9 +4483,9 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         ea.text = text
         ea.pos = pos + 4
         udt = ea.GetNextBracketContent()
-        arr = Split(udt, ListSeparator)
+        Arr = Split(udt, ListSeparator)
         'lim" & chrw$(9516) & "(x" & chrw$(8594) & "1)" & chrw$(8289) & "(x+1)
-        text = Left$(text, pos - 1) & "lim" & ChrW$(9516) & "(" & arr(1) & ChrW$(8594) & arr(2) & ")" & ChrW$(8289) & "(" & arr(0) & ") " & Right$(text, Len(text) - pos - Len(udt) - 6)
+        text = Left$(text, pos - 1) & "lim" & ChrW$(9516) & "(" & Arr(1) & ChrW$(8594) & Arr(2) & ")" & ChrW$(8289) & "(" & Arr(0) & ") " & Right$(text, Len(text) - pos - Len(udt) - 6)
         pos = InStr(pos, text, "limit")
     Loop
 
@@ -4528,12 +4529,16 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     Do While pos <> 0
         ea.text = text
         mtext = ea.GetNextBracketContent(pos + 5)
-        mtext = Replace(mtext, "]" & ListSeparator & "[", "@")
-        mtext = Replace(mtext, ListSeparator, "&")
-
-        mtext = matrixstartbracket & ChrW$(9632) & "(" & Mid$(mtext, 2, Len(mtext) - 2) & ")" & matrixendbracket
-        text = Left$(text, pos - 1) & mtext & Right$(text, Len(text) - ea.pos + 1)
-
+        If Len(mtext) > 0 Then
+            mtext = Replace(mtext, "]" & ListSeparator & "[", "@")
+            mtext = Replace(mtext, ListSeparator, "&")
+            If InStr(mtext, "@") > 0 Or InStr(mtext, "&") > 0 Then
+                mtext = matrixstartbracket & ChrW$(9632) & "(" & Mid$(mtext, 2, Len(mtext) - 2) & ")" & matrixendbracket
+                text = Left$(text, pos - 1) & mtext & Right$(text, Len(text) - ea.pos + 1)
+            Else
+                text = Left$(text, pos - 1) & Mid(mtext, 2, Len(mtext) - 2) & Right$(text, Len(text) - ea.pos + 1)
+            End If
+        End If
         pos = InStr(pos + 1, text, "matrix")
     Loop
 
@@ -4553,8 +4558,8 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         ea.text = text
         mtext = ea.GetNextBracketContent(pos + 2)
         slutp = ea.pos
-        arr = Split(mtext, ListSeparator)
-        text = Left$(text, pos - 1) & arr(1) & "   for   " & arr(0) & Right$(text, Len(text) - slutp + 1)
+        Arr = Split(mtext, ListSeparator)
+        text = Left$(text, pos - 1) & Arr(1) & "   for   " & Arr(0) & Right$(text, Len(text) - slutp + 1)
         pos = InStr(text, "%if")
     Loop
 
@@ -4685,13 +4690,13 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         pos = InStr(ea.text, "generalized_lambert_w")
         If pos <> 0 Then
             s = ea.GetNextBracketContent(pos + 20)
-            arr = Split(s, ListSeparator)
-            If UBound(arr) = 0 Then
-                arr = Split(s, ",")
+            Arr = Split(s, ListSeparator)
+            If UBound(Arr) = 0 Then
+                Arr = Split(s, ",")
             End If
-            s2 = Trim$(arr(0))
-            If (s2 = "0" Or s2 = "-1") And UBound(arr) = 1 Then
-                ea.text = Left$(ea.text, pos - 1) & "W_(" & s2 & ") (" & arr(1) & ")" & Right$(ea.text, Len(ea.text) - ea.pos + 1)
+            s2 = Trim$(Arr(0))
+            If (s2 = "0" Or s2 = "-1") And UBound(Arr) = 1 Then
+                ea.text = Left$(ea.text, pos - 1) & "W_(" & s2 & ") (" & Arr(1) & ")" & Right$(ea.text, Len(ea.text) - ea.pos + 1)
             End If
         End If
     Loop While pos <> 0
@@ -4760,16 +4765,16 @@ Function ConvertRadToDegree(text As String, trigfunc As String) As String
 End Function
 Sub RemoveComplexSolutions()
 'only real solutions' problem that even though there are in in it can perhaps be reduced to real
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     If Not MaximaComplex Then
         '        If InStr(MaximaOutput, "%i") Then
-        arr = Split(MaximaOutput, ListSeparator)
+        Arr = Split(MaximaOutput, ListSeparator)
         MaximaOutput = ""
-        For i = 0 To UBound(arr)
-            If InStr(arr(i), "%i") < 1 Then
+        For i = 0 To UBound(Arr)
+            If InStr(Arr(i), "%i") < 1 Then
                 If MaximaOutput <> "" Then MaximaOutput = MaximaOutput & "    " & ChrW$(8744) & "    "
-                MaximaOutput = MaximaOutput & arr(i)
+                MaximaOutput = MaximaOutput & Arr(i)
             End If
         Next
         '        End If
@@ -4783,7 +4788,7 @@ Function ConvertToLatex(text As String) As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     Dim s As String, t As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim rod As Integer
     Dim ends As Integer
     Dim subs As Integer, sups As Integer
@@ -5238,13 +5243,13 @@ Function ConvertToLatex(text As String) As String
                 ea.InsertUnderstoodBracketPair
             Else
                 ea.pos = pos
-                arr = Split(ea.GetNextBracketContent, "&")
+                Arr = Split(ea.GetNextBracketContent, "&")
                 pos2 = ea.pos
-                If UBound(arr) = 0 Then
+                If UBound(Arr) = 0 Then
 '                    ea.text = Replace(ea.text, chrw$(8730), "\sqrt ", 1, 1)
-                    ea.text = Left$(ea.text, pos - 1) & "\sqrt{" & arr(0) & "}" & Right$(ea.text, NotZero(ea.Length - ea.pos + 1))
-                ElseIf UBound(arr) = 1 Then
-                    ea.text = Left$(ea.text, pos - 1) & "\sqrt[" & arr(0) & "]{" & arr(1) & "}" & Right$(ea.text, NotZero(ea.Length - ea.pos + 1))
+                    ea.text = Left$(ea.text, pos - 1) & "\sqrt{" & Arr(0) & "}" & Right$(ea.text, NotZero(ea.Length - ea.pos + 1))
+                ElseIf UBound(Arr) = 1 Then
+                    ea.text = Left$(ea.text, pos - 1) & "\sqrt[" & Arr(0) & "]{" & Arr(1) & "}" & Right$(ea.text, NotZero(ea.Length - ea.pos + 1))
                 End If
             End If
         End If
@@ -6138,23 +6143,23 @@ End Function
 Function RemovePrintetBool(s As String) As String
 ' removes the true/false which can be printed in output on Mac
 ' mac auto. A true or false may be printed at the end.
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim t As String, ant As Integer, i As Integer
     On Error GoTo fejl
     s = TrimR(Trim$(s), vbLf)
     s = TrimR(Trim$(s), vbCr)
 If DllConnType = 2 Then
-    arr = Split(s, vbLf) ' wsh is a bit different
+    Arr = Split(s, vbLf) ' wsh is a bit different
 Else
-    arr = Split(s, VbCrLfMac)
+    Arr = Split(s, VbCrLfMac)
 End If
-    ant = UBound(arr)
+    ant = UBound(Arr)
     If ant > 0 Then
-        t = Trim$(arr(ant))
+        t = Trim$(Arr(ant))
         If t = "true" Or t = "false" Or t = "unknown" Or t = "expt: undefined: 0 to a negative exponent." Then
             s = vbNullString
             For i = 0 To ant - 1
-                s = s & arr(i)
+                s = s & Arr(i)
             Next
         End If
     End If
@@ -6425,7 +6430,7 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
     Dim defenk As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim deflign As Boolean
 
     ea.SetNormalBrackets
@@ -6520,24 +6525,24 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
                         defenk = Replace(defenk, "):", "):=", 1, 1)
                     End If
                 End If
-                arr = Split(defenk, ":")
-                If UBound(arr) = 0 Then
+                Arr = Split(defenk, ":")
+                If UBound(Arr) = 0 Then
                     '                    If InStr(defenk, "setunits") > 0 Or InStr(defenk, "assume") > 0 Then
                     GoTo hop2
                     '                    End If
                 End If
-                If Not ValidateDef(arr(0), arr(1)) Then GoTo hop
+                If Not ValidateDef(Arr(0), Arr(1)) Then GoTo hop
 
-                If Left$(arr(1), 1) = "=" Then arr(1) = Right$(arr(1), Len(arr(1)) - 1)
-                If arr(1) = "" Then GoTo hop
+                If Left$(Arr(1), 1) = "=" Then Arr(1) = Right$(Arr(1), Len(Arr(1)) - 1)
+                If Arr(1) = "" Then GoTo hop
             
                 If UBound(ldefname) < defindex Then
                     ReDim Preserve ldefname(defindex)
                     ReDim Preserve ldefvalue(defindex)
                     ReDim Preserve MathOArr(defindex)
                 End If
-                ldefname(defindex) = arr(0)
-                ldefvalue(defindex) = arr(1)
+                ldefname(defindex) = Arr(0)
+                ldefvalue(defindex) = Arr(1)
                 Set MathOArr(defindex) = MathObj
                 defindex = defindex + 1
 hop2:                    ' if setunit or assume or declare
@@ -6615,7 +6620,7 @@ End Function
 Function sqbrAssump(s As String) As String
    Dim ea As ExpressionAnalyser, t As String
    Dim v As String, p As Integer, c As String
-   Dim arr() As String, l1 As String, l2 As String
+   Dim Arr() As String, l1 As String, l2 As String
    t = s
    p = InStr(s, ChrW$(8712))
    If p <= 0 Then
@@ -6662,9 +6667,9 @@ Function sqbrAssump(s As String) As String
    Else
       c = ","
    End If
-   arr = Split(s, c)
-   If UBound(arr) = 1 Then
-      sqbrAssump = v & l1 & arr(0) & "&&and&&" & arr(1) & l2 & v
+   Arr = Split(s, c)
+   If UBound(Arr) = 1 Then
+      sqbrAssump = v & l1 & Arr(0) & "&&and&&" & Arr(1) & l2 & v
    Else
       sqbrAssump = t
    End If
@@ -6707,7 +6712,7 @@ Function GetAssumeText(defenk) As String
     Dim ea As ExpressionAnalyser
     Dim ea2 As ExpressionAnalyser
     Dim s As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim p1 As Integer, p2 As Integer
     If Len(defenk) > 0 Then
         If Left$(defenk, 6) = "assume" Then
@@ -6726,8 +6731,8 @@ Function GetAssumeText(defenk) As String
             Do
                 s = ea.GetNextListItem(ea.pos)
                 If InStr(s, "#") > 0 Then
-                    arr = Split(s, "#")
-                    s = "notequal(" & arr(0) & "," & arr(1) & ")"
+                    Arr = Split(s, "#")
+                    s = "notequal(" & Arr(0) & "," & Arr(1) & ")"
                 ElseIf Len(s) > 0 Then
                     ea2.text = s
                     p1 = ea2.FindNextGreaterOrLower(1)
@@ -6753,13 +6758,13 @@ Function GetAssumeText(defenk) As String
 End Function
 
 Sub AddToKillDefs(DefS As String)
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim j As Integer
     Dim s As String
     If DefS <> "" Then
-        arr = Split(DefS, ListSeparator)
-        For j = 0 To UBound(arr)
-            s = arr(j)
+        Arr = Split(DefS, ListSeparator)
+        For j = 0 To UBound(Arr)
+            s = Arr(j)
             s = Split(s, "=")(0)
             s = Split(s, "(")(0)
             KillDef = KillDef & s & ","
@@ -6774,15 +6779,15 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
     On Error GoTo slut
     Dim ea As New ExpressionAnalyser
     Dim Var As String
-    Dim arr As Variant
+    Dim Arr As Variant
     If CASengine > 0 Then
         ea.SetTuborgBrackets
     End If
     Ligning = RemoveBrackets(Ligning)
-    arr = Split(Ligning, "=")
+    Arr = Split(Ligning, "=")
 
-    If UBound(arr) = 1 Then    ' there is exactly one = sign
-        ea.text = arr(1)    'right side
+    If UBound(Arr) = 1 Then    ' there is exactly one = sign
+        ea.text = Arr(1)    'right side
         IsSolved = True
         Do
             Var = ea.GetNextVar
@@ -6815,7 +6820,7 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
 ' true if one is solved, false if none. All if all.
     Dim oneSolved As Boolean
     Dim allsolved As Boolean
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim i As Integer
     oneSolved = False
     allsolved = True
@@ -6828,10 +6833,10 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
         If InStr(ligninger, "%if(") > 0 Then GoTo slut
 
         ligninger = RemoveBrackets(ligninger)
-        arr = Split(ligninger, Sep)
+        Arr = Split(ligninger, Sep)
 
-        For i = 0 To UBound(arr)
-            If IsSolved(arr(i), variabel) Then
+        For i = 0 To UBound(Arr)
+            If IsSolved(Arr(i), variabel) Then
                 oneSolved = True
             Else
                 allsolved = False
@@ -6839,9 +6844,9 @@ Function IsAllSolved(ByVal ligninger As String, ByVal variabel As String, Option
         Next
         
         If InStr(ligninger, ChrW$(8743)) > 0 Then ' there may be systems of equations if vector equations have been submitted
-            arr = Split(ligninger, ChrW$(8743))
-            For i = 0 To UBound(arr)
-                If IsSolved(arr(i), variabel) Then
+            Arr = Split(ligninger, ChrW$(8743))
+            For i = 0 To UBound(Arr)
+                If IsSolved(Arr(i), variabel) Then
                     oneSolved = True
                 Else
                     allsolved = False
@@ -6927,15 +6932,15 @@ End Property
 Function GetMaximaSettingsString() As String
 'dll API makes these settings itself
 
-    Dim SettingsString As String, arr() As String, i As Integer
+    Dim SettingsString As String, Arr() As String, i As Integer
     
     SettingsString = "["
     If MaximaUnits Then
         SettingsString = SettingsString & "keepfloat:false,setunits([N,J,W,Pa,C,V,F,Ohm,T,H,K]),"
         If Not OutUnits = vbNullString Then
-            arr = Split(OutUnits, ",")
-            For i = 0 To UBound(arr) ' It has to be done this way because you cannot run setunits on a list where the same type of unit appears twice. e.g. eV and J
-                SettingsString = SettingsString & "setunits(" & omax.ConvertUnits(arr(i)) & "),"
+            Arr = Split(OutUnits, ",")
+            For i = 0 To UBound(Arr) ' It has to be done this way because you cannot run setunits on a list where the same type of unit appears twice. e.g. eV and J
+                SettingsString = SettingsString & "setunits(" & omax.ConvertUnits(Arr(i)) & "),"
             Next
         End If
     Else

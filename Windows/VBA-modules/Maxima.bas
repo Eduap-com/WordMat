@@ -378,7 +378,7 @@ Sub MaximaSolve()
     MaximaSolvePar
 End Sub
 Sub MaximaSolvePar(Optional variabel As String)
-    Dim arr As Variant, s As String, t As String, v As String
+    Dim Arr As Variant, s As String, t As String, v As String
     Dim fejlm As String
     On Error GoTo fejl
     Application.ScreenUpdating = False
@@ -860,6 +860,7 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
         s = Trim$(Mid$(omax.KommentarOutput, p + 13, p2 - p - 13))
         s = TrimL(s, "[")
         s = TrimR(s, "]")
+        s = Replace(s, ",", ", ")
         s = FormatDefinitions(s)
         Selection.TypeText TT.A(61) & " " & s
     End If
@@ -1005,7 +1006,7 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub MaximaNsolve(Optional ByVal variabel As String)
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim fejlm As String
     On Error GoTo fejl
     Application.ScreenUpdating = False
@@ -1103,9 +1104,9 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
                 Selection.TypeParagraph
             End If
             s = Replace(omax.Kommando, ",", ".")
-            arr = Split(s, "=")
-            LHS = arr(0)
-            RHS = arr(1)
+            Arr = Split(s, "=")
+            LHS = Arr(0)
+            RHS = Arr(1)
             If variabel <> "x" Then
                 ea.text = LHS
                 ea.ReplaceVar variabel, "x"
@@ -1147,9 +1148,9 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
             GoTo ghop
         Else
             s = Replace(omax.Kommando, ",", ".")
-            arr = Split(s, "=")
-            LHS = arr(0)
-            RHS = arr(1)
+            Arr = Split(s, "=")
+            LHS = Arr(0)
+            RHS = Arr(1)
             If variabel <> "x" Then
                 ea.text = LHS
                 ea.ReplaceVar variabel, "x"
@@ -1200,11 +1201,11 @@ ghop:
         Variable = Variable & "=1"
         inp = InputBox(TT.A(379), TT.A(380), Variable)
         If inp = "" Then GoTo slut    ' trykket cancel
-        arr = Split(inp, ListSeparator)
+        Arr = Split(inp, ListSeparator)
 
         Variable = ""
-        For j = 0 To UBound(arr)
-            Arr2 = Split(arr(j), "=")
+        For j = 0 To UBound(Arr)
+            Arr2 = Split(Arr(j), "=")
             Variable = Variable & Trim$(Arr2(0)) & ","
             If UBound(Arr2) = 0 Or Trim$(Arr2(1)) = "" Then
                 guess = guess & ",1"
@@ -2274,17 +2275,17 @@ slut:
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Function GetRHS(s As String) As String
-    Dim arr As Variant
+    Dim Arr As Variant
     s = omax.ConvertToAscii(s)
-    arr = Split(s, "=")
-    If UBound(arr) > 0 Then
-        GetRHS = arr(UBound(arr))
+    Arr = Split(s, "=")
+    If UBound(Arr) > 0 Then
+        GetRHS = Arr(UBound(Arr))
     Else
         GetRHS = s
     End If
 End Function
 Function GetLHSvar(s As String) As String
-    Dim arr As Variant
+    Dim Arr As Variant
     Dim ea As New ExpressionAnalyser
     Dim Var As String, i As Integer
     If s = vbNullString Then
@@ -2292,8 +2293,8 @@ Function GetLHSvar(s As String) As String
         Exit Function
     End If
     s = omax.ConvertToAscii(s)
-    arr = Split(s, "=")
-    s = arr(0)
+    Arr = Split(s, "=")
+    s = Arr(0)
     ea.text = s
     Do
         Var = ea.GetNextVar()
@@ -2394,16 +2395,16 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         variabel = UFdiffeq.TextBox_variabel.text
         funktion = UFdiffeq.TextBox_funktion.text
     Else
-        Dim arr() As String
-        arr = Split(variabel, "=")
-        If UBound(arr) > 0 Then
-            UFdiffeq.TextBox_startx.text = arr(1)
-            variabel = arr(0)
+        Dim Arr() As String
+        Arr = Split(variabel, "=")
+        If UBound(Arr) > 0 Then
+            UFdiffeq.TextBox_startx.text = Arr(1)
+            variabel = Arr(0)
         End If
-        arr = Split(funktion, "=")
-        If UBound(arr) > 0 Then
-            UFdiffeq.TextBox_starty.text = arr(1)
-            funktion = arr(0)
+        Arr = Split(funktion, "=")
+        If UBound(Arr) > 0 Then
+            UFdiffeq.TextBox_starty.text = Arr(1)
+            funktion = Arr(0)
         End If
     End If
     If variabel = "" Then GoTo slut
@@ -2636,17 +2637,17 @@ Function AskSignFromForm(Udtryk As String) As Integer
 End Function
 
 Function ValiderVariable() As Boolean
-    Dim arr() As String, i As Integer, ED As ErrorDefinition
+    Dim Arr() As String, i As Integer, ED As ErrorDefinition
     '    On Error Resume Next
     ValiderVariable = True
     If omax.AntalVars > 0 Then
-        arr = Split(omax.Vars, ";")
-        For i = 0 To UBound(arr)
-            If Left$(arr(i), 1) = "_" Then
+        Arr = Split(omax.Vars, ";")
+        For i = 0 To UBound(Arr)
+            If Left$(Arr(i), 1) = "_" Then
                 ValiderVariable = False
                 ED.Title = TT.A(879)
                 ED.DefFejl = False
-                ED.Description = TT.A(880) & arr(i) & vbCrLf & vbCrLf & TT.A(881)
+                ED.Description = TT.A(880) & Arr(i) & vbCrLf & vbCrLf & TT.A(881)
                 UserFormError.SetErrorDefinition ED
                 UserFormError.Show
                 Exit Function

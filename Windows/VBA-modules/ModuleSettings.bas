@@ -1556,7 +1556,7 @@ Sub SaveSettingsToFile(Optional SettingsFileName As String)
 #End If
 End Sub
 Function LoadSettingsFromFile(filePath As String, Optional Silent As Boolean = False, Optional SaveToReg As Boolean = False) As Boolean
-    Dim s As String, arr() As String, Arr2() As String, i As Integer
+    Dim s As String, Arr() As String, Arr2() As String, i As Integer
     On Error GoTo fejl
     If filePath = vbNullString Then
 #If Mac Then
@@ -1574,11 +1574,11 @@ Function LoadSettingsFromFile(filePath As String, Optional Silent As Boolean = F
     End If
     s = ReadTextfileToString(filePath)
     
-    arr = Split(s, vbCrLf)
+    Arr = Split(s, vbCrLf)
     
-    For i = 0 To UBound(arr)
-        If Left$(Trim$(arr(i)), 1) <> "#" Then
-            Arr2 = Split(arr(i), "=")
+    For i = 0 To UBound(Arr)
+        If Left$(Trim$(Arr(i)), 1) <> "#" Then
+            Arr2 = Split(Arr(i), "=")
             If UBound(Arr2) > 0 Then
                 SetSetting Arr2(0), Arr2(1), SaveToReg
             End If

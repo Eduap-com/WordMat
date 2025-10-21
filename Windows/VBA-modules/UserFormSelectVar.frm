@@ -53,7 +53,7 @@ End Sub
 
 Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
-Dim arr As Variant
+Dim Arr As Variant
 Dim i As Integer, c As Integer
     If OptionButton_numonly.Value = True Then
         MaximaExact = 2
@@ -89,9 +89,9 @@ Dim i As Integer, c As Integer
             End If
         Next
         If Len(TextBox_variabel.text) > 0 Then
-            arr = Split(TextBox_variabel.text, ",")
-            For i = 0 To UBound(arr)
-                    SelectedVar = SelectedVar & arr(i) & ","
+            Arr = Split(TextBox_variabel.text, ",")
+            For i = 0 To UBound(Arr)
+                    SelectedVar = SelectedVar & Arr(i) & ","
                     c = c + 1
             Next
         End If
@@ -104,13 +104,13 @@ Dim i As Integer, c As Integer
     TempDefs = Trim$(TempDefs)
     If Len(TempDefs) > 2 Then
     TempDefs = Replace(TempDefs, ",", ".")
-    arr = Split(TempDefs, VbCrLfMac)
+    Arr = Split(TempDefs, VbCrLfMac)
 
     TempDefs = vbNullString
-    For i = 0 To UBound(arr)
-        If Len(arr(i)) > 2 And Not Right$(arr(i), 1) = "=" Then
-            If Split(arr(i), "=")(0) <> SelectedVar Then ' may not define a variable which is solved for
-                TempDefs = TempDefs & omax.CodeForMaxima(arr(i)) & ListSeparator
+    For i = 0 To UBound(Arr)
+        If Len(Arr(i)) > 2 And Not Right$(Arr(i), 1) = "=" Then
+            If Split(Arr(i), "=")(0) <> SelectedVar Then ' may not define a variable which is solved for
+                TempDefs = TempDefs & omax.CodeForMaxima(Arr(i)) & ListSeparator
             Else
                 MsgBox TT.A(252) & " " & SelectedVar & " " & TT.A(253), vbOKOnly, TT.Error
                 Exit Sub

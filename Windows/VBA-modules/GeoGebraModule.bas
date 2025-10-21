@@ -17,11 +17,12 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     Dim sl As New CSortList
     Dim Var As String, DefList As String
     Dim k As Integer, i As Integer, j As Integer, p As Integer
-    Dim arr As Variant, uvar As String
+    Dim Arr As Variant, uvar As String
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
     Dim VektNArr As Variant, VNi As Integer
-    VektNArr = Array("a", "b", "c", "v", "w")
+'    VektNArr = Array("a", "b", "c", "v", "w")
+    VektNArr = Array("v_1", "v_2", "v_3", "v_4", "v_5", "v_6", "v_7", "v_8", "v_9")
 
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
@@ -109,9 +110,9 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                 If Len(Udtryk) > 0 Then
                     If InStr(Udtryk, "matrix") < 1 Then
                         If InStr(Udtryk, "=") > 0 Then
-                            arr = Split(Udtryk, "=")
-                            LHS = Trim$(arr(0))
-                            RHS = Trim$(arr(1))
+                            Arr = Split(Udtryk, "=")
+                            LHS = Trim$(Arr(0))
+                            RHS = Trim$(Arr(1))
                             ea.text = LHS
                             fktnavn = ea.GetNextVar(1)
                             varnavn = ea.GetNextBracketContent(1)
@@ -148,8 +149,8 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                                 cmd = "Param:X=" & RHS
                                 cmd = Replace(cmd, "+", "%2B") & ";"
                                 UrlLink = UrlLink & cmd
-                            ElseIf Right$(LHS, 3) = "pil" Then ' vector
-                                LHS = Left$(LHS, Len(LHS) - 3)
+                            ElseIf InStr(LHS, "pil") > 0 And InStr(RHS, "{") > 0 Then ' vector
+                                LHS = Replace(LHS, "pil", vbNullString)
                                 RHS = Replace(RHS, "{", "(")
                                 RHS = Replace(RHS, "}", ")")
                                 cmd = LHS & "=vector((0,0)," & RHS & ")"
@@ -174,7 +175,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                                 cmd = Replace(cmd, "+", "%2B") & ";"
                                 UrlLink = UrlLink & cmd
                             End If
-                        ElseIf Left$(Udtryk, 3) = "({{" Then ' vector
+                        ElseIf Left$(Udtryk, 2) = "{{" Or Left$(Udtryk, 3) = "({{" Then ' vector
                             Udtryk = Replace(Udtryk, "{", "(")
                             Udtryk = Replace(Udtryk, "}", ")")
                             '                        Udtryk = Replace(Udtryk, "((", "(")
@@ -412,7 +413,7 @@ End Function
 
 Sub FindGeoGebraDefsAndAssumes()
 ' sets the lines GeoGebraDefs and GeoGebraAssumes from omax
-Dim arr() As String, i As Integer
+Dim Arr() As String, i As Integer
 '    MsgBox omax.DefString
 '    MsgBox omax.defstringtext
     
@@ -420,22 +421,22 @@ Dim arr() As String, i As Integer
     GeoGebraDefs = ""
     
 ' Add definitions and assumes written in math fields
-    arr = Split(omax.DefString, ";")
-    For i = 0 To UBound(arr) - 1
-        If Left$(arr(i), 7) = "assume(" Then
-            GeoGebraAssumes = GeoGebraAssumes & Mid$(arr(i), 8, Len(arr(i)) - 8) & ChrW$(8743)
+    Arr = Split(omax.DefString, ";")
+    For i = 0 To UBound(Arr) - 1
+        If Left$(Arr(i), 7) = "assume(" Then
+            GeoGebraAssumes = GeoGebraAssumes & Mid$(Arr(i), 8, Len(Arr(i)) - 8) & ChrW$(8743)
         Else
-            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(arr(i), False) & ";"
+            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(Arr(i), False) & ";"
         End If
     Next
     
 ' Add temporary definitions and assumes
-    arr = Split(omax.TempDefs, ";") ' all temporary definitions and assumptions separated by semicolons
-    For i = 0 To UBound(arr)
-        If InStr(arr(i), ">") > 0 Or InStr(arr(i), "<") > 0 Then
-            GeoGebraAssumes = GeoGebraAssumes & arr(i) & ChrW$(8743)
+    Arr = Split(omax.TempDefs, ";") ' all temporary definitions and assumptions separated by semicolons
+    For i = 0 To UBound(Arr)
+        If InStr(Arr(i), ">") > 0 Or InStr(Arr(i), "<") > 0 Then
+            GeoGebraAssumes = GeoGebraAssumes & Arr(i) & ChrW$(8743)
         Else
-            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(arr(i)) & ";"
+            GeoGebraDefs = GeoGebraDefs & ConvertToGeogebraSyntax(Arr(i)) & ";"
         End If
     Next
     If GeoGebraAssumes <> "" Then GeoGebraAssumes = Left$(GeoGebraAssumes, Len(GeoGebraAssumes) - 1)
@@ -514,7 +515,7 @@ End Function
 Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As Boolean = True, Optional HtmlReady As Boolean = False) As String
 ' definitions will have already been run through codeforMaxima, so convertmaxima should be false
 
-   Dim p As Integer, p2 As Integer, arr() As String, p3 As Integer, sp As Integer, ep As Integer
+   Dim p As Integer, p2 As Integer, Arr() As String, p3 As Integer, sp As Integer, ep As Integer
    Dim ea As ExpressionAnalyser, s As String, gexpr As String, i As Integer, n As Integer
    Set ea = New ExpressionAnalyser
    ea.SetNormalBrackets
@@ -619,8 +620,8 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
         If p > 0 Then
           ea.text = text
           s = ea.GetNextBracketContent(p + 7)
-          arr = Split(s, ",")
-          If UBound(arr) > 0 Then text = Left$(text, p - 1) & "log(" & arr(1) & "," & arr(0) & Right$(text, Len(text) - p - Len(s) - 7)
+          Arr = Split(s, ",")
+          If UBound(Arr) > 0 Then text = Left$(text, p - 1) & "log(" & Arr(1) & "," & Arr(0) & Right$(text, Len(text) - p - Len(s) - 7)
         End If
         p = InStr(text, "logbase(")
       Loop
@@ -1003,7 +1004,7 @@ End Function
 Sub CreateGeoGebraFil(geogebrasti As String)
     Dim geogebrafil As New CGeoGebraFile
     Dim i As Integer, j As Integer
-    Dim arr As Variant, s As String, p As Long, cmd As String
+    Dim Arr As Variant, s As String, p As Long, cmd As String
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim ea As New ExpressionAnalyser
     Dim ea2 As New ExpressionAnalyser
@@ -1089,9 +1090,9 @@ Sub CreateGeoGebraFil(geogebrasti As String)
             If Len(Udtryk) > 0 Then
                 If InStr(Udtryk, "matrix") < 1 Then
                     If InStr(Udtryk, "=") > 0 Then
-                        arr = Split(Udtryk, "=")
-                        LHS = arr(0)
-                        RHS = arr(1)
+                        Arr = Split(Udtryk, "=")
+                        LHS = Arr(0)
+                        RHS = Arr(1)
                         ea.text = LHS
                         fktnavn = ea.GetNextVar(1)
                         varnavn = ea.GetNextBracketContent(1)
@@ -1114,8 +1115,9 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                             If InStr(RHS, "¦") > 0 Then ' vector inserted using template from equation menu
                                 RHS = Replace(RHS, "¦", ";")
                                 geogebrafil.CreateVector fktnavn, RHS, False, True
-                            ElseIf Right$(LHS, 1) = VBA.ChrW$(8407) Then ' vector
+                            ElseIf InStr(LHS, ChrW$(8407)) > 0 Then ' vector
                                 RHS = Replace(RHS, VBA.ChrW$(9608), "")
+                                RHS = Replace(RHS, VBA.ChrW$(9632), "")
                                 RHS = Replace(RHS, VBA.ChrW$(183), "*")
                                 RHS = Replace(RHS, ",", ".")
                                 RHS = Replace(RHS, "@", ";")
@@ -1130,8 +1132,9 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                             fktudtryk = "param1: X = " & RHS
                             geogebrafil.CreateEquation "param" & j, fktudtryk, False, True
                             j = j + 1
-                        ElseIf LHS = "(" & VBA.ChrW$(9608) & "(x@y))" Then 'parametric plot
+                        ElseIf LHS = "(" & VBA.ChrW$(9608) & "(x@y))" Or LHS = "(" & VBA.ChrW$(9632) & "(x@y))" Then 'parametric plot
                             RHS = Replace(RHS, VBA.ChrW$(9608), "")
+                            RHS = Replace(RHS, VBA.ChrW$(9632), "")
                             RHS = Replace(RHS, VBA.ChrW$(183), "*")
                             RHS = Replace(RHS, ",", ".")
                             RHS = Replace(RHS, "@", ";")
@@ -1155,8 +1158,9 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                     ElseIf InStr(Udtryk, "¦") > 0 Then ' vector inserted using template from equation menu
                         Udtryk = Replace(Udtryk, "¦", ";")
                         geogebrafil.CreateVector "v", Udtryk, False, True
-                    ElseIf Left$(Udtryk, 3) = "(" & VBA.ChrW$(9608) & "(" Then ' vector
+                    ElseIf Left$(Udtryk, 3) = "(" & VBA.ChrW$(9608) & "(" Or Left$(Udtryk, 3) = "(" & VBA.ChrW$(9632) & "(" Then ' vector
                         Udtryk = Replace(Udtryk, VBA.ChrW$(9608), "")
+                        Udtryk = Replace(Udtryk, VBA.ChrW$(9632), "")
                         Udtryk = Replace(Udtryk, VBA.ChrW$(183), "*")
                         Udtryk = Replace(Udtryk, ",", ".")
                         Udtryk = Replace(Udtryk, "@", ";")

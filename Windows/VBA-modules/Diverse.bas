@@ -6,6 +6,7 @@ Public ProgramFilesDir
 Public DocumentsDir
 Private UserDir As String
 Private tmpdir As String
+Private PrevResultTimer As Single
 #If Mac Then
 #Else
 Private Declare PtrSafe Function InternetGetConnectedState Lib "wininet.dll" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
@@ -302,7 +303,6 @@ Sub ForrigeResultat()
     Dim matfeltno As Integer
     Dim hopover As Boolean
     Application.ScreenUpdating = False
-    
     On Error Resume Next
     If Selection.OMaths.Count = 0 Then GoTo slut
     
@@ -315,18 +315,12 @@ Sub ForrigeResultat()
     End If
     
     Set sr = Selection.Range
-    If ResPos1 = Selection.Range.start Then ' if repeated click
-        If ResIndex < 0 Then
-            ResFeltIndex = ResFeltIndex + 1
-            ResIndex = 0
-        Else
-            ResIndex = ResIndex + 1
-        End If
-'        ActiveDocument.Range(ResPos1, ResPos2).text = ""
+    If ResPos1 = Selection.Range.start And Abs(Timer() - PrevResultTimer) < 2 Then ' if repeated click
+        ResIndex = ResIndex + 1
     Else
-        ResFeltIndex = 0
         ResIndex = 0
     End If
+    PrevResultTimer = Timer()
     
     If ResIndex < 0 Then ResIndex = 0
     On Error GoTo fejl
@@ -336,42 +330,30 @@ Sub ForrigeResultat()
     ra.End = sslut + 1
     matfeltno = ra.OMaths.Count
     Do
-        If ResFeltIndex >= matfeltno - 1 Then
+        If ResIndex >= matfeltno - 1 Then
             If ActiveDocument.Range.OMaths(matfeltno).Range.text = Selection.Range.text Then
-                Selection.text = ""
+                Selection.text = vbNullString
                 Selection.OMaths.Add Range:=Selection.Range
             Else
-                Selection.text = ""
+                Selection.text = vbNullString
             End If
             GoTo fejl
         End If
 '        ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range.Select
-        Set r = ActiveDocument.Range.OMaths(matfeltno - 1 - ResFeltIndex).Range
+        Set r = ActiveDocument.Range.OMaths(matfeltno - 1 - ResIndex).Range
         If Len(r.text) = 0 Then
-            ResFeltIndex = ResFeltIndex + 1
             ResIndex = 0
             GoTo slut
         End If
         s = omax.ReadEquation2(r)
-'        s = omax.ReadEquation(r)
         hopover = False
         If InStr(VBA.LCase$(s), "defin") > 0 Then
-            ResFeltIndex = ResFeltIndex + 1
-            ResIndex = 0
+            ResIndex = ResIndex + 1
             hopover = True
         Else
             s = KlipTilLigmed(s, ResIndex)
-            If Len(s) = 1 Or s = "f(x)" Then
-                If ResIndex < 0 Then
-                    ResFeltIndex = ResFeltIndex + 1
-                    ResIndex = 0
-                Else
-                    ResIndex = ResIndex + 1
-                End If
-                hopover = True
-            ElseIf s = VBA.ChrW$(8661) Then
-                ResFeltIndex = ResFeltIndex + 1
-                ResIndex = 0
+            If Len(s) = 0 Or s = ChrW$(8661) Then
+                ResIndex = ResIndex + 1
                 hopover = True
             End If
         End If
@@ -379,7 +361,7 @@ Loop While hopover
     
     sr.Select
     ResPos1 = Selection.Range.start
-    If Selection.Range.text = "Skriv ligningen her." Then
+    If Selection.Range.text = "Skriv ligningen her." Or Selection.Range.text = "Type equation here." Then
         ResPos1 = ResPos1 - 1 ' if already empty, selection is for some reason 1 character too many
     End If
     s = Replace(s, VBA.ChrW$(8289), "") ' function sign sin(x) otherwise becomes si*n(x). also problem with other functions
@@ -388,7 +370,6 @@ Loop While hopover
 GoTo slut
 fejl:
     ResIndex = 0
-    ResFeltIndex = 0
     ResPos2 = 0
     ResPos1 = 0
 slut:
@@ -404,49 +385,30 @@ Function KlipTilLigmed(text As String, ByVal indeks As Integer) As String
     Dim posca As Integer
     Dim poseller As Integer
     Dim pos As Integer
-    Dim arr(20) As String
     Dim i As Integer
     
-    Do ' go back to nearest equal sign
-        posligmed = InStr(text, "=")
-        possumtegn = InStr(text, VBA.ChrW$(8721))
-        posca = InStr(text, VBA.ChrW$(8776))
-        poseller = InStr(text, VBA.ChrW$(8744))
-        
-        pos = Len(text)
-    '    pos = posligmed
-        If posligmed > 0 And posligmed < pos Then pos = posligmed
-        If posca > 0 And posca < pos Then pos = posca
-        If poseller > 0 And poseller < pos Then pos = poseller
-        
-        If possumtegn > 0 And possumtegn < pos Then ' if there is a sum sign, there is an = sign as part of it
-            pos = 0
-        End If
-        If pos = Len(text) Then pos = 0
-        If pos > 0 Then
-            arr(i) = Left$(text, pos - 1)
-            text = Right$(text, Len(text) - pos)
-            i = i + 1
-        Else
-            arr(i) = text
-        End If
-    Loop While pos > 0
-    
-    If indeks = i Then ResIndex = -1  ' global variable marks that there are no more to the left
-    If i = 0 Then
-        KlipTilLigmed = text
-        ResIndex = -1
+    posligmed = InStrRev(text, "=")
+    possumtegn = InStrRev(text, ChrW$(8721))
+    posca = InStrRev(text, ChrW$(8776))
+    poseller = InStrRev(text, ChrW$(8744))
+    pos = 0
+    If posligmed > 0 And posligmed > pos Then pos = posligmed
+    If posca > 0 And posca > pos Then pos = posca
+    If poseller > 0 And poseller > pos Then pos = poseller
+    If possumtegn > 0 And possumtegn > pos Then ' if there is a sum sign, there is an = sign as part of it
+        pos = 0
+    End If
+    If pos = Len(text) Then pos = 0
+    If pos > 0 Then
+        KlipTilLigmed = Right$(text, Len(text) - pos)
     Else
-        KlipTilLigmed = arr(i - indeks)
+        KlipTilLigmed = text
     End If
     
     ' remove returns and spaces etc.
-'    s = Replace(s, vbCrLf, "")
-    KlipTilLigmed = Replace(KlipTilLigmed, vbCr, "")
-    KlipTilLigmed = Replace(KlipTilLigmed, VBA.ChrW$(11), "")
-'    s = Replace(s, vbLf, "")
-    KlipTilLigmed = Replace(KlipTilLigmed, VBA.ChrW$(8744), "") 'eller tegn
-'    KlipTilLigmed = Replace(KlipTilLigmed, " ", "")
+    If InStr(KlipTilLigmed, vbCr) > 0 Then KlipTilLigmed = Replace(KlipTilLigmed, vbCr, vbNullString)
+    If InStr(KlipTilLigmed, ChrW$(11)) > 0 Then KlipTilLigmed = Replace(KlipTilLigmed, ChrW$(11), vbNullString)
+    If InStr(KlipTilLigmed, ChrW$(8744)) > 0 Then KlipTilLigmed = Replace(KlipTilLigmed, ChrW$(8744), vbNullString)
     KlipTilLigmed = Trim$(KlipTilLigmed)
     
     If InStr(KlipTilLigmed, "/") > 0 Then KlipTilLigmed = "  " & KlipTilLigmed
@@ -730,16 +692,16 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
         GoTo slut
     End If
    
-   Dim MajorVersion As Integer, MinorVersion As Integer, AppPatchVersion As Integer, arr() As String
+   Dim MajorVersion As Integer, MinorVersion As Integer, AppPatchVersion As Integer, Arr() As String
    Dim NewMajorVersion As Integer, NewMinorVersion As Integer, NewPatchVersion As Integer, NewEkstraInfoVersion As Integer
-   arr = Split(AppVersion & PatchVersion, ".")
-   MajorVersion = CInt(arr(0))
-   If UBound(arr) > 0 Then MinorVersion = CInt(arr(1))
-   If UBound(arr) > 1 Then AppPatchVersion = CInt(arr(2))
-   arr = Split(NewVersion, ".")
-   NewMajorVersion = CInt(arr(0))
-   If UBound(arr) > 0 Then NewMinorVersion = CInt(arr(1))
-   If UBound(arr) > 1 Then NewPatchVersion = CInt(arr(2))
+   Arr = Split(AppVersion & PatchVersion, ".")
+   MajorVersion = CInt(Arr(0))
+   If UBound(Arr) > 0 Then MinorVersion = CInt(Arr(1))
+   If UBound(Arr) > 1 Then AppPatchVersion = CInt(Arr(2))
+   Arr = Split(NewVersion, ".")
+   NewMajorVersion = CInt(Arr(0))
+   If UBound(Arr) > 0 Then NewMinorVersion = CInt(Arr(1))
+   If UBound(Arr) > 1 Then NewPatchVersion = CInt(Arr(2))
    
    If NewMajorVersion > MajorVersion Then
         UpdateNow = True
@@ -1262,7 +1224,7 @@ End Sub
 Sub SetEquationNumber()
 On Error GoTo fejl
     Application.ScreenUpdating = False
-    Dim F As Field, f2 As Field, n As String, p As Integer, arr As Variant
+    Dim F As Field, f2 As Field, n As String, p As Integer, Arr As Variant
     
     If Selection.Fields.Count = 0 Then
         MsgBox TT.A(345), vbOKOnly, TT.Error
@@ -1282,12 +1244,12 @@ On Error GoTo fejl
         If Selection.Fields.Count = 2 Then
             Set f2 = Selection.Fields(2)
             n = InputBox(TT.A(346), TT.A(6), F.result & "." & f2.result)
-            arr = Split(n, ".")
-            If UBound(arr) > 0 Then
-                SetFieldNo F, CStr(arr(0))
-                SetFieldNo f2, CStr(arr(1))
+            Arr = Split(n, ".")
+            If UBound(Arr) > 0 Then
+                SetFieldNo F, CStr(Arr(0))
+                SetFieldNo f2, CStr(Arr(1))
             Else
-                SetFieldNo F, CStr(arr(0))
+                SetFieldNo F, CStr(Arr(0))
             End If
         Else
             n = InputBox(TT.A(346), TT.A(6), F.result)
@@ -1588,6 +1550,7 @@ End Sub
 Function FormatDefinitions(DefS As String) As String
 ' Takes a string from omax.defintions and makes it as pretty as possible for showing in a textbox
 ' used for showing present definitions on several forms
+    Dim s As String, p As Integer, ea As New ExpressionAnalyser, Arr() As String
     
     DefS = " " & omax.ConvertToAscii(DefS)
     DefS = Replace(DefS, "$", VbCrLfMac & VbCrLfMac & " ")
@@ -1687,6 +1650,56 @@ Function FormatDefinitions(DefS As String) As String
     DefS = Replace(DefS, "((x))", "(x)")
     
     DefS = ReplaceFakeVarNamesBack(DefS)
+    
+    p = InStr(DefS, "notequal")
+    ea.text = DefS
+    Do While p > 0
+        ea.SetNormalBrackets
+        s = ea.GetNextBracketContent(p)
+        Arr = Split(s, ",")
+        If UBound(Arr) > 0 Then
+            ea.text = Left(ea.text, p - 1) & Trim(Arr(0)) & " " & ChrW$(8800) & " " & Trim(Arr(1)) & Right(ea.text, Len(ea.text) - ea.pos + 1)
+        End If
+        p = InStr(p + 8, ea.text, "notequal")
+    Loop
+    DefS = ea.text
+    
+    p = InStr(DefS, "generalized_lambert")
+    ea.text = DefS
+    Do While p > 0
+        ea.SetNormalBrackets
+        s = ea.GetNextBracketContent(p + 19)
+        Arr = Split(s, ",")
+        If UBound(Arr) > 0 Then
+            If Trim(Arr(0)) = "1" Then
+                ea.text = Left(ea.text, p - 1) & "W" & ChrW$(&H2081) & " (" & Trim(Arr(1)) & ")" & Right(ea.text, Len(ea.text) - ea.pos + 1)
+            Else
+                ea.text = Left(ea.text, p - 1) & "W" & ChrW$(&H2080) & " (" & Trim(Arr(1)) & ")" & Right(ea.text, Len(ea.text) - ea.pos + 1)
+            End If
+        End If
+        p = InStr(p + 4, ea.text, "generalized_lambert")
+    Loop
+    DefS = ea.text
+    
+    ' i anden
+    p = InStr(DefS, "^")
+    ea.text = DefS
+    ea.SetNormalBrackets
+    Do While p > 0
+        If ea.IsNumber(p + 1) And Not ea.IsNumber(p + 2) Then
+            ea.text = Left$(ea.text, p - 1) & Replace(ea.text, "^2", ChrW$(&HB2), p, 1)
+            ea.text = Left$(ea.text, p - 1) & Replace(ea.text, "^3", ChrW$(&HB3), p, 1)
+            ea.text = Left$(ea.text, p - 1) & Replace(ea.text, "^4", ChrW$(&H2074), p, 1)
+            ea.text = Left$(ea.text, p - 1) & Replace(ea.text, "^5", ChrW$(&H2075), p, 1)
+            ea.text = Left$(ea.text, p - 1) & Replace(ea.text, "^6", ChrW$(&H2076), p, 1)
+            ea.text = Left$(ea.text, p - 1) & Replace(ea.text, "^7", ChrW$(&H2077), p, 1)
+            ea.text = Left$(ea.text, p - 1) & Replace(ea.text, "^8", ChrW$(&H2078), p, 1)
+            ea.text = Left$(ea.text, p - 1) & Replace(ea.text, "^9", ChrW$(&H2079), p, 1)
+        End If
+        p = InStr(p + 2, ea.text, "^")
+    Loop
+    DefS = ea.text
+
     
     If DecSeparator = "," Then
         DefS = Replace(DefS, ".", ",")
