@@ -911,3 +911,6 @@
 910#£Não foi possível inserir um campo de código aqui.
 911#£Os campos de direção só podem ser desenhados para equações diferenciais de 1ª ordem na forma y'=...
 912#£A configuração do WordMat é definida para calcular em graus. É essa a intenção?
+913#£Não é permitido usar o operador de chapéu em nomes de definição.
+914#£Não é permitido usar caracteres numéricos em nomes de definição.
+915#£Você definiu muitos parâmetros para a função:

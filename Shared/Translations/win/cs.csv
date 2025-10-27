@@ -911,3 +911,6 @@
 910#£Sem nelze vlozit pole kódu.
 911#£Smerová pole lze nakreslit pouze pro diferenciální rovnice 1. rádu ve tvaru y'=...
 912#£Nastavení aplikace WordMat je nastaveno na výpocet ve stupních. Je to zámer?
+913#£V názvech definic není dovoleno pouzívat operátor hat.
+914#£V názvech definic není dovoleno pouzívat císelné znaky.
+915#£Nastavili jste pro funkci prílis mnoho parametru:

@@ -227,8 +227,7 @@ infix("##",115,115)$
 "##"(qwa,qwb):=block(if scalarp(qwa) or scalarp(qwb) then return(qwa*qwb) else return(qwa.qwb))$
 
 vecmag(qwa):=if nonscalarp(qwa) then (if matrixp(qwa) then sqrt(conjugate(transpose(qwa)) . qwa) else 'vecmag(qwa)) else abs(qwa)$
-tvvec(qwa):=if scalarp(qwa) then error("Tvaervektor er ikke defineret for en skalar") else (if length(qwa)=2 then matrix(-qwa[2],qwa[1]) else error("Tvaervektor er kun defineret to-dimensionelle vektorer"))$
-ConvertToDegr(udt):=block([],applyb1(udt,msinrul,mcosrul,mtanrul,masinrul,macosrul,matanrul))$
+tvvec(qwa):=if scalarp(qwa) or symbolp(qwa) then ('tvvec(qwa)) else (if errcatch(length(qwa))=[2] then matrix(-qwa[2],qwa[1]) else ('tvvec(qwa)))$
 ConvertLog(udt):=block([],udt:ratsimp(apply1(udt,merul,mlogrul)),ev(udt,lgog(10)=1))$
 ConvertLogN(udt):=block([],udt:ratsimp(apply1(udt,merul,mlogrul)),ev(udt,lgog(10)=1,lgog(%e)=0.4342944819032518))$
 
@@ -2012,9 +2011,10 @@ qres)$
 
 /* Til haandtering af dobbeltbetydning af determinant  det(matrix) eller det(vektor,vektor) */
 determinant2([paramq]):=block([],
-if length(paramq)<1 then (print("Too few arguments"),return()) elseif length(paramq)>2 then (print("Too many arguments"),return()),
-if length(paramq)=1 then return (determinant(paramq[1])),
-determinant(addcol(paramq[1],paramq[2]))
+if length(paramq)<1 then (print("Too few arguments supplied to det"),return()) elseif length(paramq)>2 then (print("Too many arguments supplied to det"),return()),
+if length(paramq)=1 and matrixp(paramq[1]) then return (determinant(paramq[1])),
+if length(paramq)=2 and matrixp(paramq[1]) and matrixp(paramq[2]) then return (determinant(addcol(paramq[1],paramq[2]))),
+if length(paramq)=1 then 'determinant(paramq[1]) else 'determinant(paramq[1],paramq[2])
 )$
 
 /* nsolve2 er maerkeligt nok langsommere i de fleste tilfaelde men ikke ved sqrt(x)=x 

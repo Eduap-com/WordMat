@@ -910,12 +910,16 @@ Sub unicodevals2()
     Dim i As Integer
     Dim j As Integer
     Dim s As String
-    Selection.OMaths.Linearize
-    Selection.OMaths(1).ConvertToNormalText
-    text = Selection.text
-    Selection.OMaths(1).ConvertToMathText
-    Selection.OMaths(1).Range.Select
-    Selection.OMaths.BuildUp
+    If Selection.OMaths.Count > 0 Then
+        Selection.OMaths.Linearize
+        Selection.OMaths(1).ConvertToNormalText
+        text = Selection.text
+        Selection.OMaths(1).ConvertToMathText
+        Selection.OMaths(1).Range.Select
+        Selection.OMaths.BuildUp
+    Else
+        text = Selection.text
+    End If
 
     For j = 1 To Len(text)
         i = AscW(Mid$(text, j, 1))

@@ -911,3 +911,6 @@
 910#£Koodikenttää ei voitu lisätä tähän.
 911#£Suuntakenttiä voidaan piirtää vain 1. kertaluvun differentiaaliyhtälöille muodossa y'=...
 912#£WordMatin asetus on asetettu laskemaan asteina. Onko se tarkoitus?
+913#£Hattuoperaattorin käyttö määritelmien nimissä ei ole sallittua.
+914#£Numeeristen merkkien käyttö määritelmien nimissä ei ole sallittua.
+915#£Olet asettanut funktiolle liian monta parametria:

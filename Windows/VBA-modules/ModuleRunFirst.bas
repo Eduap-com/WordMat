@@ -2,6 +2,7 @@ Attribute VB_Name = "ModuleRunFirst"
 Option Explicit
 
 Private HasStarted As Boolean
+Private WMRunTime As Single
 
 #If Mac Then
 #Else
@@ -11,7 +12,24 @@ Private HasStarted As Boolean
 
 Sub RunFirst()
 ' Should be run on startup of WordMat
+    
+    If Abs(Timer() - WMRunTime) > 24# * 3600 Then
+        On Error Resume Next
+        Application.Run macroname:="Popstart"
+        Err.Clear
+        On Error GoTo TheEnd
+        DoEvents
+        WMRunTime = Timer()
+    End If
+    
     If HasStarted Then Exit Sub
+
+    On Error Resume Next
+    Application.Run macroname:="Popstart"
+    Err.Clear
+    On Error GoTo TheEnd
+    DoEvents
+    WMRunTime = Timer()
 
     ChangeAutoHyphen ' so 1-(-1) does not translate to 1--1 dash
 
@@ -60,7 +78,6 @@ Sub RunFirst()
         End If
         RegAppVersion = AppVersion
     End If
-
     If SettCheckForUpdate Then CheckForUpdateSilent
 
     HasStarted = True

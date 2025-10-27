@@ -70,11 +70,11 @@
 69#£Slet definitioner
 70#£Konstanter
 71#£Find værdier på nettet
-72#£Konverter ligninger til LaTex. (Genvejen alt+T konverterer en enkelt ligning)
+72#£Konverter ligninger til LaTeX. (Genvejen alt+T konverterer en enkelt ligning)
 73#£Kopier til clipboard
 74#£Visningsform
 75#£Genkend enheder og skriv dem ikke i kursiv
-76#£Brug Maxima til LaTex konvertering
+76#£Brug Maxima til LaTeX konvertering
 77#£Konverter alle
 78#£Konverter og gå til næste
 79#£Før
@@ -617,9 +617,9 @@
 616#£Forskellige metoder til manipulation af symboler.
 617#£Erstat til prikgangetegn
 618#£Erstatter alle * gangetegn med almindelige prikgangetegn $*
-619#£Konverter ligninger til Latex
-620#£Giver mulighed for at konvertere alle eller udvalgte ligninger i dokumentet til Latex. Giver også mulighed for at at generere Latex fil som pdf, hvis MikTex er installeret. En enkelt ligning kan konverteres til LaTex med genvejen Alt+T.
-621#£Konverter til Latex (Alt+T)
+619#£Konverter ligninger til LaTeX
+620#£Giver mulighed for at konvertere alle eller udvalgte ligninger i dokumentet til LaTeX. Giver også mulighed for at at generere Latex fil som pdf, hvis MikTex er installeret. En enkelt ligning kan konverteres til LaTeX med genvejen Alt+T.
+621#£Konverter til LaTeX (Alt+T)
 622#£Konverterer en ligning til Latex. Omslutningstegnene vælges på hovedsiden for latex-konvertering. Brug også genvejen Alt+T.
 623#£Erstat til stjernegangetegn
 624#£Erstatter alle " & ChrW(183) & " gangetegn til * gangetegn.
@@ -653,16 +653,16 @@
 652#£Check automatisk på nettet om der er kommet opdatering til WordMat.
 653#£Genvejsoversigt
 654#£Oversigt over hvilke tastaturgenveje der er i WordMat og genveje til matematikfelter i Word.
-655#£LaTex skabelon
-656#£LaTex skabelon
-657#£Åbner Worddokument der er en næsten tro kopi af LaTex dokument. 
+655#£LaTeX skabelon
+656#£LaTeX skabelon
+657#£Åbner Worddokument der er en næsten tro kopi af LaTeX dokument. 
 658#£Præcisionen er sat meget højt. Beregningstiden kan blive meget lang eller fejle. Prøv evt. igen med en lavere indstilling.
 659#£WordMat har en udmærket funktion til konvertering til LaTex, men der er også mulighed for at benytte den som er indbygget i Maxima
 660#£Enheder skal normalt ikke skrives med kursiv. Med denne funktion forsøger WordMat at identificere enheder og indsætter Latex-kode der skriver enheder i normal skrift
 661#£Luk
-662#£Genererer rigtigt LaTex-dokument vha. MikTex, som skal være installeret. Bør kun bruges til simple dokumenter da ikke alt er understøttet.
+662#£Genererer rigtigt LaTeX-dokument vha. MikTex, som skal være installeret. Bør kun bruges til simple dokumenter da ikke alt er understøttet.
 663#£Viser hvordan LaTex outputtet vil blive forstået
-664#£Generer LaTexkoden og åbner i TexWorks så koden kan gennemgås og evt. justeres
+664#£Generer LaTeX-koden og åbner i TexWorks så koden kan gennemgås og evt. justeres
 665#£Trekant
 666#£Notation
 667#£Graf
@@ -702,8 +702,8 @@
 701#£Nyt matematikfelt
 702#£Forrige resultat(er)
 703#£Skift num/eksakt
-704#£Konverter til LaTex
-705#£Latex Pdf
+704#£Konverter til LaTeX
+705#£LaTeX Pdf
 706#£Grader
 707#£Radianer
 708#£Vinkelenhed
@@ -876,7 +876,7 @@
 875#£Ligningen blev løst grafisk med GeoGebra:
 876#£Antallet af parenteser passer ikke i udtrykket
 877#£Indstillingsfejl
-878#£Du har en forkert indstilling i Word.\r\nI Ligningsmenuen skal du skifte fra Latex til Unicode for at WordMat virker
+878#£Du har en forkert indstilling i Word.\r\nI Ligningsmenuen skal du skifte fra LaTeX til Unicode for at WordMat virker
 879#£Syntaksfejl - Ikke korrekt matematik.
 880#£Du har indtastes noget som ikke er korrekt matematisk notation.\r\nFejlen er relateret til en variabel: 
 881#£Det kan fx skyldes, at du har sænket skrift på et tal. \r\nK_0 skal erstattes med et tal og ikke med fx 5000_0. Der skal bare stå 5000.
@@ -911,3 +911,6 @@
 910#£Der kunne ikke indsættes et kodefelt her.
 911#£Der kan kun tegnes hældningsfelter for 1. ordens differentialligninger på formen y'=.
 912#£WordMats indstilling er sat til at regne i grader. Er det intensionen?
+913#£Det er ikke tilladt at anvende hat-operatoren i definitionsnavne.
+914#£Det er ikke tilladt at anvende numerisk tegn i definitionsnavne.
+915#£Du har angivet for mange parametre til funktionen: 

@@ -911,3 +911,6 @@
 910#£Det gick inte att infoga ett kodfält här.
 911#£Riktningsfält kan endast ritas för 1:a ordningens differentialekvationer på formen y'=...
 912#£WordMat's inställning är inställd på att beräkna i grader. Är det meningen?
+913#£Det är inte tillåtet att använda operatorn hat i definitionsnamn.
+914#£Det är inte tillåtet att använda numeriska tecken i definitionsnamn.
+915#£Du har ställt in för många parametrar för funktionen:

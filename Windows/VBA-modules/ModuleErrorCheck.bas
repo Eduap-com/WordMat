@@ -82,6 +82,9 @@ Function GetErrorDefinition(MaximaOutput As String, KommentarOutput As String) A
     ElseIf InStr(CheckText2, "Toofewargumentssuppliedto") > 0 Then
         GetErrorDefinition.Title = TT.SyntaxError
         GetErrorDefinition.LocationError = TT.A(898) & ExtractText(CheckText2, "Toofewargumentssuppliedto", ";") & vbCrLf & TT.A(899)
+    ElseIf InStr(CheckText2, "Toomanyargumentssuppliedto") > 0 Then
+        GetErrorDefinition.Title = TT.SyntaxError
+        GetErrorDefinition.LocationError = TT.A(915) & ExtractText(CheckText2, "Toomanyargumentssuppliedto", ";") & vbCrLf & TT.A(899)
     ElseIf InStr(CheckText2, "incorrectsyntax:") > 0 Then
         GetErrorDefinition.Title = TT.SyntaxError
         GetErrorDefinition.Description = TT.SyntaxError & "."

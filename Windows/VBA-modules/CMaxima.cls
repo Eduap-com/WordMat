@@ -1539,8 +1539,10 @@ start:
         If moutput(nr) <> vbNullString Then
             MaximaOutput = eqsg & ConvertToWordSymbols(moutput(nr))
             KommentarOutput = ""
-            If MaximaOutput = "=fejl" Then
-                KommentarOutput = moutput(nr - 2) & moutput(nr - 1)
+            If MaximaOutput = "=fejl" Or MaximaOutput = "=done" Or MaximaOutput = "=false" Then
+                For i = 0 To nr - 1
+                    KommentarOutput = KommentarOutput & moutput(nr - i)
+                Next
             End If
             For i = 0 To nr - 1
                 KommentarOutput = KommentarOutput & Minput(nr - i)
@@ -2616,7 +2618,17 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     If InStr(text, ChrW$(8451)) <> 0 Then text = Replace(text, ChrW$(8451), "degC")    ' specielt oC
     If InStr(text, "^" & ChrW$(8728)) <> 0 Then text = Replace(text, "^" & ChrW$(8728), ChrW$(176))    ' another way of typing degrees
     If InStr(text, "%") <> 0 Then text = Replace(text, "%", "/100")    ' percentage symbol
-    If InStr(text, ChrW$(160)) <> 0 Then text = Replace(text, ChrW$(160), "")    ' before accent e.g. vector arrow 160 8407
+    pos = InStr(text, ChrW$(160))
+    Do While pos <> 0 ' &nbsp a soft hyphen, looks like a longer space. before accent e.g. vector arrow 160 8407
+        i = AscW(Mid$(text, pos + 1, 1))
+        If i > 8000 Or i = 770 Or i = 773 Then ' if accent (like vector arrow, or hat=770, overbar=773), then remove  maybe some are missing here
+            text = Left$(text, pos - 1) & Right$(text, Len(text) - pos)
+        Else ' if just a 'space' replace by space
+            text = Left$(text, pos - 1) & " " & Right$(text, Len(text) - pos)
+        End If
+        pos = InStr(text, ChrW$(160))
+    Loop
+    
     If Not MaximaComplex Then
         If InStr(text, ChrW$(8736)) <> 0 Then text = Replace(text, ChrW$(8736), "Symangle")    '
     End If
@@ -3793,9 +3805,9 @@ hopBracket:
     ea.InsertMultSigns
     text = ea.text
     If Radians Then
-        text = Replace(text, ChrW$(8736), " CVinkel ")    ' if complex then angle is polar notation
+        If InStr(text, ChrW$(8736)) <> 0 Then text = Replace(text, ChrW$(8736), " CVinkel ")    ' if complex then angle is polar notation
     Else
-        text = Replace(text, ChrW$(8736), " CVinkelgrad ")    ' if complex then angle is polar notation
+        If InStr(text, ChrW$(8736)) <> 0 Then text = Replace(text, ChrW$(8736), " CVinkelgrad ")    ' if complex then angle is polar notation
     End If
 
     If InStr(text, "gradq*") <> 0 Then text = Replace(text, "gradq*", "gradq ")
@@ -3909,7 +3921,7 @@ Function ConvertDifferentials(text As String, DiffChr As String) As String
                 antalm = Mid$(num, 3, 1)
                 pos2 = InStr(dem, DiffChr)
                 Do
-                    If Mid$(dem, pos2 + 2, 1) = "^" Then
+                    If Mid$(dem, pos2 + 2, 1) = "^" Then ' has been pos2 + 2
                         Var = Mid$(dem, pos2 + 1, 1)
                         antalm2 = Mid$(dem, pos2 + 3, 1)
                         For i = varind To varind + antalm2 - 1
@@ -4142,11 +4154,27 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     If InStr(text, vbCrLf) <> 0 Then text = Replace(text, vbCrLf, vbNullString)    ' enter
     If InStr(text, ChrW$(10)) <> 0 Then text = Replace(text, ChrW$(10), vbNullString)    ' shift-enter
     If InStr(text, ChrW$(13)) <> 0 Then text = Replace(text, ChrW$(13), vbNullString)    ' shift-enter
-    If InStr(text, "'lgog") <> 0 Then text = Replace(text, "'lgog", "lgog")    '
+    If InStr(text, "'lgog") <> 0 Then text = Replace(text, "'lgog", "lgog")
+    If InStr(text, "'at(") <> 0 Then text = Replace(text, "'at(", "at(")
+    If InStr(text, "'determinant(") <> 0 Then text = Replace(text, "'determinant(", "det(")
 
     ea.text = text
-
     ea.RemoveFaultySeparator
+    
+    pos = InStr(ea.text, "'tvvec(")
+    Do While pos <> 0
+        s = ea.GetNextBracketContent(pos + 6)
+        ea.text = Left$(ea.text, pos - 1) & "(" & s & ")" & ChrW$(770) & Right(ea.text, ea.Length - ea.pos + 1)
+        pos = InStr(ea.text, "'tvvec(")
+    Loop
+
+    pos = InStr(ea.text, "ConvertToDegr(") ' If a a function is not evaluated this will remain and must be removed.
+    Do While pos <> 0
+        s = ea.GetNextBracketContent(pos + 13)
+        ea.text = Left$(ea.text, pos - 1) & s & Right(ea.text, ea.Length - ea.pos + 1)
+        pos = InStr(ea.text, "ConvertToDegr(")
+    Loop
+
 
     ' fx e^x^-1 rettes
     pos = InStr(ea.text, "^-")
@@ -4465,7 +4493,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
             If Arr(2) = "1" Then
                 text = Left$(text, pos - 1) & ChrW$(8518) & "/(" & ChrW$(8518) & Arr(1) & ") (" & Arr(0) & ")" & " " & Right$(text, Len(text) - Len(udt) - 5 - pos)
             Else
-                text = Left$(text, pos - 1) & ChrW$(8518) & "/(" & ChrW$(8518) & "^" & Arr(2) & " " & Arr(1) & ") (" & Arr(0) & ")" & " " & Right$(text, Len(text) - Len(udt) - 6)
+                text = Left$(text, pos - 1) & "(" & ChrW$(8518) & "^" & Arr(2) & ")/(" & ChrW$(8518) & Arr(1) & "^" & Arr(2) & " ) (" & Arr(0) & ")" & " " & Right$(text, Len(text) - Len(udt) - 5 - pos)
             End If
         Else
             pos = pos + 4
@@ -6427,13 +6455,13 @@ slut:
 End Function
 Function AddDefinition(s As String, Optional MathObj As OMath) As String
     Dim t As String, slc As String
-    Dim ea As New ExpressionAnalyser
-    Dim ea2 As New ExpressionAnalyser
+    Dim ea As ExpressionAnalyser
+    Dim ea2 As ExpressionAnalyser
     Dim defenk As String
     Dim Arr As Variant
     Dim deflign As Boolean
+    Dim LHS As String
 
-    ea.SetNormalBrackets
     If InStr(s, ChrW$(12310)) Then s = Replace(s, ChrW$(12310), "")    ' special invisible brackets are removed
     If InStr(s, ChrW$(12311)) Then s = Replace(s, ChrW$(12311), "")    ' special invisible brackets are removed
     If InStr(s, vbCrLf) Then s = Replace(s, vbCrLf, "")    ' enter can accur
@@ -6441,6 +6469,9 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
     slc = LCase$(s)
  
     If InStr(s, ChrW$(8788)) > 0 Or InStr(s, ChrW$(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(slc, "definer:") > 0 Or InStr(slc, "define:") > 0 Or InStr(slc, "ligning:") > 0 Or InStr(slc, "equation:") > 0 Or InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(s, ChrW$(8801)) > 0 Or InStr(slc, LCase$(TT.A(69))) > 0 Then
+        Set ea = New ExpressionAnalyser
+        ea.SetNormalBrackets
+        Set ea2 = New ExpressionAnalyser
         If LCase$(Left$(s, 8)) = "definer:" Then
             s = Right$(s, Len(s) - 8)
         ElseIf LCase$(Left$(s, 7)) = "define:" Then
@@ -6457,26 +6488,17 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
         If InStr(s, ChrW$(8801)) Then s = Replace(s, ChrW$(8801), ":=")    ' speciel := symbol
 
         s = Replace(s, ChrW$(11), "")
-       slc = LCase$(s)
- 
-        '        If InStr(s, "block") < 1 Then
-        '            s = Replace(s, chrw$(34), "") ' apostrophe
-        '            s = Replace(s, "=", ":")
-        '            s = Replace(s, "::", ":")
-        '            s = Replace(s, "):", "):=")
-        '        End If
+        slc = LCase$(s)
 
-        '        s = Replace(s, "):=:", "):=")
         If InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(slc, LCase$(TT.A(69))) Then
             s = Replace(Trim$(Split(s, ":")(1)), vbCr, "")
-            If s = "" Then
+            If s = vbNullString Then
                 AddDefinition = "STOP"
                 Exit Function
             Else
-                '                AddDefinition = "kill(" & Replace(Replace(s, ";", ","), vbCr, "") & ")$" & AddDefinition
                 AddDefinition = "errcatch(kill(" & CodeForMaxima(Replace(s, ",", ";"), CASengine) & "))$" & AddDefinition
             End If
-        Else    ' gem definitioner
+        Else    ' perform definitions
             '            FindDefinitions = CodeForMaxima(s) & "," & FindDefinitions
             defstringtext = defstringtext & s & ";"
             ea.text = Replace(s, ";", " , ")
@@ -6509,7 +6531,15 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
                 Else
                     defenk = Replace(defenk, ChrW$(34), vbNullString)    ' apostrof
                     defenk = CodeForMaxima(defenk, CASengine)
-                    If InStr(defenk, "if") <= 0 And (InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0) Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
+                    Arr = Split(defenk, "=")
+                    LHS = Arr(0)
+                    If InStr(LHS, "tvvec") > 0 Then
+                        MsgBox2 TT.A(913), vbOKOnly, TT.Error
+                        GoTo hop
+                    ElseIf InStr(LHS, "vecmag") > 0 Or InStr(LHS, "abs(") > 0 Then
+                        MsgBox2 TT.A(914), vbOKOnly, TT.Error
+                        GoTo hop
+                    ElseIf InStr(defenk, "if") <= 0 And (InStr(defenk, "<") > 0 Or InStr(defenk, ">") > 0) Or (InStr(defenk, "#") > 0 And InStr(defenk, "##") <= 0) Then
                         AddDefinition = AddDefinition & GetAssumeText(defenk)
                         If UBound(ldefname) >= defindex Then
                             ldefname(defindex) = defenk
@@ -6520,9 +6550,9 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
                         GoTo hop
                     End If
                     If Not deflign Then
-                        defenk = Replace(defenk, "=", ":", 1, 1)
-                        defenk = Replace(defenk, "::", ":", 1, 1)
-                        defenk = Replace(defenk, "):", "):=", 1, 1)
+                        If InStr(defenk, "=") > 0 Then defenk = Replace(defenk, "=", ":", 1, 1)
+                        If InStr(defenk, "::") > 0 Then defenk = Replace(defenk, "::", ":", 1, 1)
+                        If InStr(defenk, "):") > 0 Then defenk = Replace(defenk, "):", "):=", 1, 1)
                     End If
                 End If
                 Arr = Split(defenk, ":")

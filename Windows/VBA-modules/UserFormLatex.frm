@@ -296,7 +296,6 @@ Private Sub UserForm_Activate()
     SetCaptions
     FillComboboxDocumentclass
     FillComboboxFontsize
-    
     EventsOn = False
     Selection.End = ActiveDocument.Range.End
     TextBox_for.text = ""
@@ -361,11 +360,13 @@ Sub UpDateLatex()
       Else
          If Selection.OMaths(1).Range.Tables.Count > 0 Then
             Set t = Selection.OMaths(1).Range.Tables(1)
+            If t.Columns.Count = 3 Then
             If t.Rows.Count = 1 And t.Columns.Count = 3 And t.Cell(1, 2).Range.OMaths.Count > 0 And t.Cell(1, 3).Range.Fields.Count Then
                
                TextBox_latex.text = "\begin{equation}" & LatexCode & "\end{equation}"
             Else
                TextBox_latex.text = "\begin{equation*}" & LatexCode & "\end{equation*}"
+            End If
             End If
          Else
             TextBox_latex.text = "\begin{equation*}" & LatexCode & "\end{equation*}"

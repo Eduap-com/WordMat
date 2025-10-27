@@ -911,3 +911,6 @@
 910#£Il n'a pas été possible d'insérer un champ de code ici.
 911#£Les champs de direction ne peuvent être dessinés que pour les équations différentielles du 1er ordre sous la forme y'=...
 912#£Le paramètre de WordMat est configuré pour calculer en degrés. Est-ce l'intention ?
+913#£Il n'est pas autorisé d'utiliser l'opérateur hat dans les noms de définition.
+914#£Il n'est pas permis d'utiliser des caractères numériques dans les noms de définition.
+915#£Vous avez défini trop de paramètres pour la fonction :

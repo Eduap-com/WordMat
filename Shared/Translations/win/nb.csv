@@ -911,3 +911,6 @@
 910#£Et kodefelt kan ikke settes inn her.
 911#£Retningsfelt kan bare tegnes for 1.ordens differensialligninger på formen y'=...
 912#£WordMats innstilling er satt til å beregne i grader. Er det intensjonen?
+913#£Det er ikke tillatt å bruke hatteoperatoren i definisjonsnavn.
+914#£Det er ikke tillatt å bruke numeriske tegn i definisjonsnavn.
+915#£Du har satt for mange parametere for funksjonen:

@@ -24,6 +24,7 @@ Public UfWait As UserFormWaitForMaxima
 Private MikTex64bit As Boolean
 
 Private Sub Class_Initialize()
+    On Error Resume Next
     toc = True
     TitlePage = True
     Titel = Split(ActiveDocument.Name, ".")(0)
@@ -64,7 +65,7 @@ Public Function FixedLatexPreamble1() As String
    End If
    
    If LatexFontsize = "" Then LatexFontsize = "11"
-   
+      
    s = s & "\documentclass[" & LatexFontsize & "pt]{" & dClass & "}" & vbCrLf
    s = s & "\usepackage[T1]{fontenc}" & vbCrLf
    s = s & "\usepackage[latin1]{inputenc}" & vbCrLf
@@ -91,6 +92,7 @@ Public Function FixedLatexPreamble1() As String
          ps = ps & "landscape"
       End If
    End If
+   
    If UseWordMargins Then
       s = s & " \geometry{" & ps & ","
       s = s & "left=" & Round(PointsToCentimeters(ActiveDocument.PageSetup.LeftMargin), 1) * 10 & "mm,"
@@ -101,7 +103,6 @@ Public Function FixedLatexPreamble1() As String
    ElseIf ps <> "" Then
       s = s & "\geometry{" & ps & "}" & vbCrLf
    End If
-   
    LID = ActiveDocument.Paragraphs(1).Range.LanguageID
 
    If LID = wdEnglishUK Then
@@ -201,7 +202,7 @@ Public Function FixedLatexPreamble1() As String
 End Function
 
 Public Function FixedLatexPreamble2() As String
-   Dim s As String, pageNo As String
+   Dim s As String, pageNo As Integer
    If Titel = "" Then
       Titel = Split(ActiveDocument.Name, ".")(0)
    End If
@@ -230,9 +231,9 @@ Public Function FixedLatexPreamble2() As String
       s = s & "\tableofcontents" & vbCrLf
       s = s & "\newpage" & vbCrLf
    End If
-   's = s & "" & vbCrLf
    s = s & "" & vbCrLf
    FixedLatexPreamble2 = s
+
 End Function
 
 Public Sub SaveTex(ByVal Mappe As String, ByVal FilNavn As String)
@@ -507,3 +508,18 @@ Sub InsertSubSubSection(text As String)
    End If
 End Sub
 
+Sub ValidateLatexDoc()
+' removes som errors that
+
+    LaTexDoc = Replace(LaTexDoc, vbCrLf & vbCrLf, vbCrLf)
+    LaTexDoc = Replace(LaTexDoc, vbCrLf & vbCrLf, vbCrLf)
+    LaTexDoc = Replace(LaTexDoc, vbCr & vbCr, vbCr)
+    LaTexDoc = Replace(LaTexDoc, vbCr & vbCr, vbCr)
+    LaTexDoc = Replace(LaTexDoc, vbLf & vbLf, vbLf)
+    LaTexDoc = Replace(LaTexDoc, vbLf & vbLf, vbLf)
+    
+    LaTexDoc = Replace(LaTexDoc, vbCrLf & vbCrLf & "}", "}")
+    LaTexDoc = Replace(LaTexDoc, vbCrLf & "}", "}")
+    LaTexDoc = Replace(LaTexDoc, vbLf & "}", "}")
+    LaTexDoc = Replace(LaTexDoc, vbCr & "}", "}")
+End Sub

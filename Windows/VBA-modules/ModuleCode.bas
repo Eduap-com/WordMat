@@ -107,7 +107,8 @@ Function GetAllPreviousCodeBlocks() As String
             s = TrimR(Trim$(s), vbCrLf)
             s = TrimR(Trim$(s), vbCr)
             s = TrimR(Trim$(s), vbLf)
-            If s <> vbNullString Then
+            s = Trim(s)
+            If s <> vbNullString And s <> TT.A(907) Then
                 If Right$(s, 1) <> ";" And Right$(s, 1) <> "$" Then s = s & "$"
                 If result = "" Then
                     result = s
@@ -117,6 +118,13 @@ Function GetAllPreviousCodeBlocks() As String
             End If
         End If
     Next i
+    result = Replace(result, ChrW$(8788), ":=")
+    If InStr(result, ChrW$(8804)) <> 0 Then result = Replace(result, ChrW$(8804), "<=")
+    If InStr(result, ChrW$(8805)) <> 0 Then result = Replace(result, ChrW$(8805), ">=")
+'    result = Replace(result, vbCrLf, vbNullString)
+'    result = Replace(result, vbLf, vbNullString)
+'    result = Replace(result, vbCr, vbNullString)
+    If InStr(result, ChrW$(11)) <> 0 Then result = Replace(result, ChrW$(11), vbNullString)
 
     GetAllPreviousCodeBlocks = result
 End Function

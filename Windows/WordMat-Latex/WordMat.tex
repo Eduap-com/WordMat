@@ -1,5 +1,5 @@
 % !TEX encoding = ISO-8859-1
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 \usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
 \usepackage{geometry}
@@ -21,84 +21,260 @@
 
 This file has VBA-code attached. To see/edit the code press Alt+F11 (Mac: option+fn+F11)\newline
 (or Visual Basic in the developer tab. Settings | Customize toolbar | check developer) \newline
-To execute macros press Alt+F8 (Mac: option+fn+F8) or use the developer menu. \textit{BackupThisDocument}  | ExportAllModules |\textit{ }ImportAllModules \textit{}GenerateKeyboardShortcutsWordMat |\textit{ RunTestSequence | RunTestSequenceNonInteractiveExports all modules to folder 'VBA-modules'. VBA-modules is not overwritten, but changed to VBA-modules-Backupx\newline
-Backup makes a copy of this file in subfolder Backup. Any existing Backup-file gets a number attached so not to overwrite previous backups.
-}For ExportAllModules and ImportAllModules to work you need:
+To execute macros press Alt+F8 (Mac: option+fn+F8) or use the developer menu. 
+\textit{BackupThisDocument}  | ExportAllModules |\textit{ }ImportAllModules \textit{}GenerateKeyboardShortcutsWordMat |\textit{ RunTestSequence | RunTestSequenceNonInteractive
+Exports all modules to folder 'VBA-modules'. VBA-modules is not overwritten, but changed to VBA-modules-Backupx\newline
+Backup makes a copy of this file in subfolder Backup. Any existing Backup-file gets a number attached so not to overwrite previous backups.}For ExportAllModules and ImportAllModules to work you need:
 \begin{itemize}
- \item Add reference 'Microsoft Visual Basic for Applications Extensibility 5.3' in VBA-Ide tools/references \item Settings | Trust center | Settings for macros | always trust VBA project object model\end{itemize}\textit{Do not upgrade this file to a newer Word-version. It will break menu compatibility.
-Do not add buttons inside the document, it will increase loadtime.
-}\textbf{ImportAllModules
-}Imports all modules from subfolder 'VBA-modules' (Most recent backup from ExportAllModules). All existing modules in the document are deleted. Import cannot be run using a button.
-\textbf{Word Crash
-}Sometimes this document will crash when opened. Disable all macros in security center. Open the document. Open VBE and compile (Maybe make some code changes first). Save and close. Reenable macros and open the document again will often resolve the problem. If not try other code changes. RibbonCommanders VBA Code cleaner will also solve the problem.
-\textbf{Keyboard Shortcuts
-}Problems often occur with keyboard shortcuts. They can be in normal.dotm instead of WordMat.dotm. Also Keyboard shortcuts are not compatible with Mac because Mac uses option button instead of Alt.
-
-Before a new release do this:
+ \item Add reference 'Microsoft Visual Basic for Applications Extensibility 5.3' in VBA-Ide tools/references
+ \item Settings | Trust center | Settings for macros | always trust VBA project object model
+\end{itemize}
+\textit{Do not upgrade this file to a newer Word-version. It will break menu compatibility.
+Do not add buttons inside the document, it will increase loadtime.}\textbf{ImportAllModules}Imports all modules from subfolder 'VBA-modules' (Most recent backup from ExportAllModules). All existing modules in the document are deleted. Import cannot be run using a button.
+\textbf{Word Crash}Sometimes this document will crash when opened. Disable all macros in security center. Open the document. Open VBE and compile (Maybe make some code changes first). Save and close. Reenable macros and open the document again will often resolve the problem. If not try other code changes. RibbonCommanders VBA Code cleaner will also solve the problem.
+\textbf{Keyboard Shortcuts}Problems often occur with keyboard shortcuts. They can be in normal.dotm instead of WordMat.dotm. Also Keyboard shortcuts are not compatible with Mac because Mac uses option button instead of Alt.
+Before a new release do this:
 \begin{enumerate}
- \item \textit{Run CheckKeyboardShortcuts on Windows }to check if KeyBoard shortcuts are ok. \item \textit{On Mac run }GenerateKeyboardShortcuts and then \textit{CheckKeyboardShortcuts}\end{enumerate}\textbf{Special Character problem when editing on Mac and Windows
-}The VBE-Codefiles on Mac and Windows are not compatible. ASCII-characters(0-127) is not a problem. The problem comes from the extended ASCII-table (128-255), since Windows uses ANSI codepages, while Mac uses xx(Unicode?).
-ASCII-characters: &%_^|\@~\newline
+ \item \textit{Run CheckKeyboardShortcuts on Windows }to check if KeyBoard shortcuts are ok.
+ \item \textit{On Mac run }GenerateKeyboardShortcuts and then \textit{CheckKeyboardShortcuts}
+\end{enumerate}\textbf{Special Character problem when editing on Mac and Windows}The VBE-Codefiles on Mac and Windows are not compatible. ASCII-characters(0-127) is not a problem. The problem comes from the extended ASCII-table (128-255), since Windows uses ANSI codepages, while Mac uses xx(Unicode?).
+ASCII-characters: \&%_^|\@~\newline
 Extended Characters that \textit{are} compatible: £(163), ©, µ\newline
 Problems both ways: ¤\newline
 Problems Windows to Mac: ½, .\newline
-Problems Mac to Windows: ø æ å Æ Ø Å á é ó À §There are few problems from Windows to Mac (¤,½). Just don't use those characters in the code or comments, or use ChrW(164) and ChrW(189). There are more problematic characters than the above, but they are the most common. To convert scrambled characters from a Mac-edit back to Windows ANSI, run the macro: \textit{'ReplaceToANSI'\newline
-}The character problem only affects codefiles, not characters in the document.\textbf{Strategy 1 to overcome character problem\newline
-}Make all code changes on Windows. WordMat.dotm can be opened and tested on Mac. Just don't save and overwrite the original and reopen on Windows. If this happens use function \textit{ReplaceToANSI}.\newline
-This must be run every time a Mac-edit has been done, or else the characters will convert to random new characters every roundtrip to mac and back, and then it cannot be undone.\textbf{Strategy 2 \newline
-}Run \textit{ReplaceToASCIIseq} to convert all problematic characters to ascii-sequences. You can then open the document on Windows and Mac independently. However the characters will show in the ui scrambled by the ascii-sequences. Before building the installer make sure to run \textit{ReplacetoExtendedASCII}. Preferably independently on Windows and Mac.\newline
-Also if you introduce more non-ascii characters, make sure to run \textit{ReplaceToASCIIseq} again.Run 'GenerateKeyBoardShortcuts' whenever you have run \textit{ReplaceToASCIIseq or ReplacetoExtendedASCII}.\textbf{
-
-How to work with Git-hub and VBA-modules
-}The idea is to always end by exporting all VBA-modules to the folder 'VBA-modules'. \newline
+Problems Mac to Windows: ø æ å Æ Ø Å á é ó À §
+There are few problems from Windows to Mac (¤,½). Just don't use those characters in the code or comments, or use ChrW(164) and ChrW(189). There are more problematic characters than the above, but they are the most common. To convert scrambled characters from a Mac-edit back to Windows ANSI, run the macro: \textit{'ReplaceToANSI'\newline}The character problem only affects codefiles, not characters in the document.
+\textbf{Strategy 1 to overcome character problem\newline}Make all code changes on Windows. WordMat.dotm can be opened and tested on Mac. Just don't save and overwrite the original and reopen on Windows. If this happens use function \textit{ReplaceToANSI}.\newline
+This must be run every time a Mac-edit has been done, or else the characters will convert to random new characters every roundtrip to mac and back, and then it cannot be undone.
+\textbf{Strategy 2 \newline}Run \textit{ReplaceToASCIIseq} to convert all problematic characters to ascii-sequences. You can then open the document on Windows and Mac independently. However the characters will show in the ui scrambled by the ascii-sequences. Before building the installer make sure to run \textit{ReplacetoExtendedASCII}. Preferably independently on Windows and Mac.\newline
+Also if you introduce more non-ascii characters, make sure to run \textit{ReplaceToASCIIseq} again.
+Run 'GenerateKeyBoardShortcuts' whenever you have run \textit{ReplaceToASCIIseq or ReplacetoExtendedASCII}.\textbf{
+How to work with Git-hub and VBA-modules}The idea is to always end by exporting all VBA-modules to the folder 'VBA-modules'. \newline
 Whenever you start to code, start by importing. The advantage of this method is that Git can then track changes in the exported modules, and multiple people can work on the VBA-code. It cannot do that within a word-file. Sometimes Wordmat.dotm fails to open for unknown reasons. In that case a previous version of Wordmat.dotm can be opened and the most recent modules imported, to restore the document.\newline
-\textit{Don't use Export/import modules on Mac. It's not compatible with Windows export/import.}
-Functions in VBAmodul:
+\textit{Don't use Export/import modules on Mac. It's not compatible with Windows export/import.}
+Functions in VBAmodul:
 \begin{itemize}
  \item ImportAllModules\newline
-Imports all forms, classes and modules from subfolder 'VBA-modules'. Removes all existing modules before import, including VBAmodul \item ExportAllModules\newline
+Imports all forms, classes and modules from subfolder 'VBA-modules'. Removes all existing modules before import, including VBAmodul
+ \item ExportAllModules\newline
 Exports all forms, classes and modules from current project to subfolder 'VBA-modules'\newline
-(including VBAmodul) All current content in folder is deleted before export. A logfile with date is added to the folder. \item RemoveAllModules\newline
-Removes all forms, classes and modules from current project, except VBAmodul.bas.\end{itemize}
-The work process is
+(including VBAmodul) All current content in folder is deleted before export. A logfile with date is added to the folder.
+ \item RemoveAllModules\newline
+Removes all forms, classes and modules from current project, except VBAmodul.bas.
+\end{itemize}
+The work process is
 \begin{enumerate}
- \item You have a WordMat.dotm file you are working on in folder WordMat/Windows \item When done coding run 'ExportAllModules' \item Push to github origin \item When resuming coding start by pulling from github \item Open your WordMat.dotm file and start by running 'ImportAllModules' \item Run 'GenerateKeyBoardShortcuts' as these are lost when importing\end{enumerate}\textbf{Before Building installer\begin{enumerate}
- \item }Run '\textit{ReplacetoExtendedASCII' (if using strategy 2)} \item Run '\textit{GenerateKeyboardShortcutsWordMat}'\end{enumerate}
-1 & 2 must be run separately on Windows and Mac
-
-·??¹²³??????°? ??????????????????????????? ????? ???????????????????????? ??????????????? ????????????????? ?????
-
-????????????????????  ½¼¾?????????????  ? ?????? ? ? ???? .
-
+ \item You have a WordMat.dotm file you are working on in folder WordMat/Windows
+ \item When done coding run 'ExportAllModules'
+ \item Push to github origin
+ \item When resuming coding start by pulling from github
+ \item Open your WordMat.dotm file and start by running 'ImportAllModules'
+ \item Run 'GenerateKeyBoardShortcuts' as these are lost when importing
+\end{enumerate}\textbf{Before Building installer
+\begin{enumerate}
+ \item }Run '\textit{ReplacetoExtendedASCII' (if using strategy 2)}
+ \item Run '\textit{GenerateKeyboardShortcutsWordMat}'
+\end{enumerate}
+1 & 2 must be run separately on Windows and Mac
+·??¹²³??????°? ??????????????????????????? ????? ???????????????????????? ??????????????? ????????????????? ?????
+????????????????????  ½¼¾?????????????  ? ?????? ? ? ???? .
 \section{Test section}
+------------------------------------Quick test--------------------------------------
+\begin{tabular}{|c|c|}
+\hline
+\textbf{x}&\textbf{y}\\ \hline
+1&2\\ \hline
+2&$5,2$\\ \hline
+3&6\\ \hline
+\end{tabular}\textit{}\begin{equation*}Skriv ligningen her.\end{equation*}
+\begin{equation*}Slet\ definitioner:\end{equation*}
+------------------------------------Work in progress--------------------------------------
+\begin{equation*}Slet\ definitioner:\end{equation*}
+Skal med i Test; Den virker nu, men ikke tidligere.
+Denne Differentialligning skal løses med bibetingelsen $N\left\left$(30\right\right)=103$:
+\begin{equation*}N^{\prime}=0,00526\cdot N\cdot 209-N\end{equation*}
+Med GeoGebra kan man ikke løse denne ligning.
+\begin{equation*}Definer:\\vec{a}=12, b=7-2\end{equation*}
+\begin{equation*}\\cos {\left\left$(v\right\right)}=dota;ba\cdot b\end{equation*}
+\begin{equation*}3+4=7\end{equation*}
+------------------------------- Not in testmodule ------------------------------------
+\begin{equation*}\left|\left\left$(\begin{matrix}\frac{100}{61}\\\frac{791}{61}\\\end{matrix}\right\right)-\left\left$(\begin{matrix}c\\\frac{43}{3}-\left\left$(\frac{5}{6}\right\right)c\\\end{matrix}\right\right)\right|\end{equation*}
+\begin{equation*}Hovedstol=Ydelse\bullet\frac{{1-\left\left$(1+r\right\right)}^{-n}}{r}\end{equation*}
+Løs ligningssystem. Skal have to løsninger. (tager tid)
+\begin{equation*}\left\left$(x-38\right\right)^{2}+\left\left$(y-18\right\right)^{2}={17,5}^{2}\end{equation*}
+\begin{equation*}\left\left$(x-27\right\right)^{2}+\left\left$(y-33\right\right)^{2}={9,4}^{2}\end{equation*}
+	$\Updownarrow$	\textit{Ligningssystemet løses for x,y vha. WordMat's 'Løs Ligninger' funktion, }\begin{equation*}\left\left$(x=21,9832\\\\\land\\\\ y=25,05068\right\right)\\\vee\\\\left\left$(x=36,08966\\\\\land\\\\ y=35,39542\right\right)\end{equation*}
+\begin{equation*}Slet\ definitioner:\end{equation*}
+fullratsimp(ConvertLog(ConvertToDegr(ev(%))))
+denne giver ikke samme resultat på Win og Mac. Det er funktionen simplifynum, der ændrer udtrykket på Windows.
+\begin{equation*}\int_{1}^{10}\sqrt{x^{-2}+1}dx=-\left\left$(\frac{\\ln {\left\left$(\sqrt{101}+1\right\right)}}{2}\right\right)+\frac{\\ln {\left\left$(\sqrt{101}-1\right\right)}}{2}+\frac{\\ln {\left\left$(\sqrt2+1\right\right)}}{2}-\frac{\\ln {\left\left$(\sqrt2-1\right\right)}}{2}+\sqrt{101}-\sqrt2\end{equation*}
+\newpage
+-------------------------------Run testmodule here------------------------------------
+\begin{equation*}Slet\ definitioner:\end{equation*}
+Alt+F8: RunTestSequence
+\textit{
+\begin{equation*}definer:n=10,\ p=\frac{1}{2}\end{equation*}
+\begin{equation*}K\left\left$(n,r\right\right)\defeqn!r!\cdot n-r!\end{equation*}
+\begin{equation*}P\left\left$(r\right\right)\defeq K\left\left$(n,r\right\right)\cdot pr\cdot 1-pn-r\end{equation*}
+Dette går galt med VBACAS. Det skyldes den nye funktion, hvor der ses tilbage på nærmeste =-tegn ved beregn.
+\begin{equation*}P\left\left$(X=3\right\right)=\sum_{i=2}^{5}P\left\left$(i\right\right)\end{equation*}
+\begin{equation*}Slet\ definitioner:\end{equation*}
+Problem med minus i vektorer der er tastet med skabeloner?
+\begin{equation*}\binom{1}{2}+\binom{-1}{2}=\left\left$(\begin{matrix}0\\4\\\end{matrix}\right\right)\end{equation*}
+\begin{equation*}a?-12\end{equation*}
+\begin{equation*}c?-13\end{equation*}
+\begin{equation*}a+c=\left\left$(\begin{matrix}-2\\5\\\end{matrix}\right\right)\end{equation*}
+Hvis denne løses med numerisk så er det ok, men løses den med eksakt giver den noget der ser komplekst ud så derfor dette resultat:}\begin{equation*}L=169,151951+12\cdot 1572,36-x-155,352\cdot 310,7-2\cdot x2dx=Ikke defineret indenfor R\end{equation*}
+Disse to 
+\begin{equation*}12\cdot 1572,36-x-155,352\cdot 310,7-2\cdot x=-x-155,35-x2+310,7\cdot x-22561,260,5\end{equation*}
+\textit{Udsagnets sandhedsværdi bestemmes vha. WordMat. }\begin{equation*}falsk\end{equation*}
+\begin{equation*}1572,36-\left\left$(x-155,35\right\right)^{2}=-x^{2}+310,7\cdot x-22561,26\end{equation*}
+\textit{Udsagnets sandhedsværdi bestemmes vha. WordMat. }\begin{equation*}falsk\end{equation*}
+\textit{
+\begin{equation*}Slet\ definitioner:\end{equation*}}
+\begin{equation*}\vec{s}\left\left$(t\right\right)?-25+3\cdot cost3\cdot sint\end{equation*}
+"s " & VBA.ChrW(8407) & "(t)" & VBA.ChrW(8788) & "((-2)¦5)+((3" & VBA.ChrW(183) & "cos(t))¦(3" & VBA.ChrW(183) & "sin" & VBA.ChrW(8289) & "(t) ))"
+\begin{equation*}\vec{s}\left\left$(\pi\right\right)\approx\left\left$(\begin{matrix}6\\0\\\end{matrix}\right\right)\end{equation*}
+\begin{equation*}=-6\cdot cost-6\cdot sint\end{equation*}
+\begin{equation*}\vec{s}\left\left$(t\right\right)?-25+3\cdot cost3\cdot sint\end{equation*}
+\begin{equation*}\vec{s}\left\left$(t\right\right)=3\cdot cost-23\cdot sint+5\end{equation*}
+\begin{equation*}\vec{s}\left\left$(\pi\right\right)=\left\left$(\begin{matrix}-5\\5\\\end{matrix}\right\right)\end{equation*}
+\begin{equation*}\\sin {\left\left$(\pi\right\right)}=0\end{equation*}
+\begin{equation*}1t2t3t\end{equation*}
+\begin{equation*}\binom{-2}{5}\end{equation*}
+\begin{equation*}\vec{s}\left\left$(t\right\right)\end{equation*}
+\begin{equation*}Slet\ definitioner:\end{equation*}
+Vektor med tastatur. Symbol 9608
+\begin{equation*}1t2t3t\end{equation*}
+\begin{equation*}123\end{equation*}
+"(" & VBA.ChrW(9608) & "(1t@2t@3t))"
+Vektor fra skabelon Matrix symbol 9632
+\begin{equation*}1\cdot tt-10,5\cdot t\end{equation*}
+"(" & VBA.ChrW(9632) & "(1" & VBA.ChrW(183) & "t@t-1@0,5" & VBA.ChrW(183) & "t))"
+Vektor fra skabelon stakke
+\begin{equation*}3\cdot cost3\cdot sint\end{equation*}
+"((3" & VBA.ChrW(183) & "cos" & VBA.ChrW(8289) & "(t))¦(3" & VBA.ChrW(183) & "sin" & VBA.ChrW(8289) & "(t) ))"
 
-
-------------------------------------Quick test--------------------------------------
-
-\begin{tabular}{|c|c|}\hline\textbf{x}&\textbf{y}\\ \hline1&2\\ \hline2&$5,2$\\ \hline3&6\\ \hline\end{tabular}\textit{}\begin{equation*}Skriv ligningen her.\end{equation*}
-\begin{equation*}Slet definitioner:\end{equation*}
-------------------------------------Work in progress--------------------------------------
-
-\begin{equation*}Slet definitioner:\end{equation*}Skal med i Test; Den virker nu, men ikke tidligere.Denne Differentialligning skal løses med bibetingelsen $N\left(30\right)=103$:\begin{equation*}N^{'}=0,00526\cdot N\cdot \left(209-N\right)\end{equation*}
-
-
-Med GeoGebra kan man ikke løse denne ligning.
-\begin{equation*}Definer:\overrightarrow{a}=\left(\begin{matrix}1\\2\end{matrix}\right),\overrightarrow{b}=\left(\begin{matrix}7\\-2\end{matrix}\right)\end{equation*}\begin{equation*}\cos \left(v\right)=\frac{dot\left(\overrightarrow{a};\overrightarrow{b}\right)}{|\overrightarrow{a}|\cdot |\overrightarrow{b}| }\end{equation*}
-
-
-------------------------------- Not in testmodule ------------------------------------
-
-\begin{equation*}|\left(\begin{matrix}\frac{100}{61}\\\frac{791}{61}\end{matrix}\right)-\left(\begin{matrix}c\\\frac{43}{3}-\left(\frac{5}{6}\right)c\end{matrix}\right)|\end{equation*}\begin{equation*}Hovedstol=Ydelse\cdot 1-\left(\frac{1+r\right)^{-n}}{r}\end{equation*}
-Løs ligningssystem. Skal have to løsninger. (tager tid)
-\begin{equation*}\left(x-38\right)^{2}+\left(y-18\right)^{2}=17,5^{2}\end{equation*}\begin{equation*}\left(x-27\right)^{2}+\left(y-33\right)^{2}=9,4^{2}\end{equation*}	$\Updownarrow $	\textit{Ligningssystemet løses for x,y vha. WordMat's 'Løs Ligninger' funktion, }\begin{equation*}\left(x=21,9832   \wedge     y=25,05068\right)  \vee    \left(x=36,08966   \wedge     y=35,39542\right)\end{equation*}\begin{equation*}Slet definitioner:\end{equation*}
-
-fullratsimp(ConvertLog(ConvertToDegr(ev(%))))
-
-denne giver ikke samme resultat på Win og Mac. Det er funktionen simplifynum, der ændrer udtrykket på Windows.
-\begin{equation*}\int_{1}^{10}\sqrt{x^{-2}+1} dx=-\left(\frac{\ln \left(\sqrt{101}+1\right)}{2}\right)+\frac{\ln \left(\sqrt{101}-1\right)}{2}+\frac{\ln \left(\sqrt{2}+1\right)}{2}-\frac{\ln \left(\sqrt{2}-1\right)}{2}+\sqrt{101}-\sqrt{2}\end{equation*}
-\newpage
--------------------------------Run testmodule here------------------------------------
-\begin{equation*}Slet definitioner:\end{equation*}
-Alt+F8: RunTestSequence
-
+\begin{equation*}x+y-z=2\end{equation*}
+\begin{equation*}x^{2}+y^{2}+z^{2}=1\end{equation*}
+\begin{equation*}x^{2}\cdot y\end{equation*}
+\begin{equation*}f\left\left$(x,y\right\right)=x+y\end{equation*}
+\begin{equation*}f^{\prime\left\left$(x\right\right)}=2\cdot x+1\end{equation*}
+\textit{Differentialligningen løses vha. WordMat's 'Løs differentialligning' funktion med startbetingelsen f(0)=5}\begin{equation*}fejl\end{equation*}
+\textit{Differentialligningen løses vha. WordMat's 'Løs differentialligning' funktion med startbetingelsen y(0)=3}\begin{equation*}y=4\cdot ex-1\end{equation*}
+\begin{equation*}f^{\prime\left\left$(x\right\right)}=k\cdot f\left\left$(x\right\right)\end{equation*}
+\textit{Differentialligningen løses vha. WordMat's 'Løs differentialligning' funktion}\begin{equation*}false\end{equation*}
+\textit{Differentialligningen løses vha. WordMat's 'Løs differentialligning' funktion}\begin{equation*}y=c\cdot e2\cdot x\end{equation*}
+\textit{Differentialligningen løses vha. WordMat's 'Løs differentialligning' funktion}\begin{equation*}y=c\cdot ek\cdot x\end{equation*}
+\begin{equation*}f^{\prime\left\left$(x\right\right)}=2\cdot x\end{equation*}
+\textit{Differentialligningen løses vha. WordMat's 'Løs differentialligning' funktion}\begin{equation*}false\end{equation*}
+\textit{Differentialligningen løses vha. WordMat's 'Løs differentialligning' funktion}\begin{equation*}y=c\cdot e2\cdot x\end{equation*}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{x}&1&2&3&4&5&6&7&8&9&10\\ \hline
+\textbf{y}&2&4&6&7&14&18&25&37&41&56\\ \hline
+\end{tabular}
+\begin{equation*}b\cdot ax+c\end{equation*}
+\begin{equation*}2+3\end{equation*}
+\begin{equation*}\frac{dh}{dt}=-0,035\cdot h\end{equation*}
+\textit{Differentialligningen løses vha. WordMat's 'Løs differentialligning' funktion}\begin{equation*}Definer:\ f\left\left$(t\right\right)=3,062\cdot 10-4\cdot t+c2\end{equation*}
+\begin{equation*}y=3,062\cdot 10-4\cdot 180+c2\end{equation*}
+\begin{equation*}0,3=6,124\cdot 10-4\cdot 180+c\end{equation*}
+	$\Updownarrow$	\textit{Ligningen løses for c vha. WordMat. }\begin{equation*}c=309,8759\end{equation*}
+\begin{equation*}K\left\left$(5,\ 2\right\right)=K\left\left$(5;2\right\right)\end{equation*}
+\begin{equation*}2+3x=6\end{equation*}
+	$\Updownarrow$	\textit{Ligningen løses for x vha. WordMat. }\begin{equation*}x=\frac{4}{3}\end{equation*}
+Ddet er 
+\begin{equation*}x^{2}=9\end{equation*}
+Definitioner i codeblocks bliver ikke slettet.
+h(x):=x^2
+\begin{equation*}h\left\left$(2\right\right)=4\end{equation*}
+\begin{equation*}f\left\left$(x\right\right)=x^{2}+1\end{equation*}
+\begin{equation*}3^{x}=5x+1\end{equation*}
+	$\Updownarrow$	\textit{Ligningen løses for x vha. WordMat. }\begin{equation*}x=2,298454\\\\\vee\\\\ x=0\end{equation*}
+	$\Updownarrow$	\textit{Ligningen løses for x vha. WordMat. }\begin{equation*}x=2,298454\\\\\vee\\\\ x=-2,775558\cdot 10-17\end{equation*}
+	$\Updownarrow$	\textit{Ligningen løses for x vha. WordMat. }\begin{equation*}x=2,298454\\\\\vee\\\\ x=0\end{equation*}
+\begin{equation*}x\cdot ex=4\end{equation*}
+	$\Updownarrow$	\textit{Ligningen løses for x vha. WordMat. }\begin{equation*}x=lambert_{w\left\left$(4\right\right)}\end{equation*}
+\begin{equation*}2x+3\end{equation*}
+\begin{equation*}Slet\ definitioner:\end{equation*}
+mere læsevenligt og kan håndtere større mængder tekst.
+\begin{equation*}y=\Gamma\left\left$(6\right\right)\cdot x\end{equation*}
+\begin{equation*}Definer:\mu=1\ ,\ s=1\end{equation*}
+\begin{equation*}f\left\left$(x\right\right)?12\pi\cdot s\cdot e-12\cdot x-\mu s2\end{equation*}
+\begin{equation*}f\left\left$(x\right\right)=12\pi\cdot 1\cdot e-12\cdot\mu -m12\end{equation*}
+\begin{equation*}\mu\end{equation*}
+VBA.chrw$(956)
+a:3;
+b:5;
+svarmig(navn,alder):=block([var1,var2] ,var1:30,var2:70,if alder<var1 then return(sconcat(navn," er ung" )),if alder>var2 then return(sconcat(navn," er gammel" )),sconcat(navn," er i hans bedste alder" ));
+ 
+\begin{equation*}1+2=3\end{equation*}
+\begin{equation*}svarmig\left\left$(peter,17\right\right)\end{equation*}
+\begin{equation*}\mathrm{peter\ er\ ung}\end{equation*}
+sd
+\begin{equation*}Slet\ definitioner:\end{equation*}
+l
+\begin{equation*}\\ln {\left\left$(x\right\right)}=3x-5\end{equation*}
+\begin{equation*}Definer:\ a=2,\ b=3\end{equation*}
+\begin{equation*}2\cdot a\cdot b\cdot c=d\end{equation*}
+\textit{}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+10&70&130	&190&250\\ \hline
+7,2&11,5&16,2&17,5&13,4\\ \hline
+\end{tabular}
+Lineær regression udført vha. WordMat: 	R2 = 0,5097874
+\begin{equation*}y=0,03066667x+9,173333\end{equation*}
+\begin{equation*}f\left\left$(x\right\right)=5,433661\cdot sin0,01694435\cdot x-1,330492+12,19464\end{equation*}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{x}&0&1&2&3&4\\ \hline
+\textbf{y}&28&34&36&33&29\\ \hline
+\end{tabular}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+0&1&2&3&4\\ \hline
+28&34&36&33&29\\ \hline
+\end{tabular}
+Lineær regression udført vha. WordMat: 	R2 = 0,002173913
+\begin{equation*}f\left\left$(x\right\right)=0,1x+31,8\end{equation*}
+\begin{equation*}Slet\ definitioner:\end{equation*}
+\begin{equation*}Definer:\ a=2\end{equation*}
+\begin{equation*}y=2\cdot x+1\end{equation*}
+\begin{equation*}Slet\ definitioner:\end{equation*}
+\begin{equation*}Definer:\left|\vec{a}\right|=\left|\vec{b}\right|\\ ,\\vec{a}=12   ,   b=43\end{equation*}
+\begin{equation*}2+3x\end{equation*}
+\begin{equation*}Slet\ definitioner:\end{equation*}
+\begin{equation*}\int_{0}^{L}\left\left$(\ 6-\sqrt{-x^{2}+8x+9}\right\right)dx=10\end{equation*}
+\begin{equation*}\frac{\partial^{2}}{\partial x\\partial y}x2\cdot y=2\cdot x\end{equation*}
+\textit{}\begin{equation*}3x2+2y\cdot xx'=2\cdot y+6\cdot x\end{equation*}
+\begin{equation*}Definer:\ f\left\left$(x,y\right\right)=x^{2}+3x\cdot y-2y+1\end{equation*}
+\begin{equation*}f_{y}^{\prime\left\left$(x,y\right\right)}=3\cdot x-2\end{equation*}
+\begin{equation*}f_{yx}^{\prime\prime}\left\left$(x,y\right\right)=3\end{equation*}
+\begin{equation*}3x2+2y\cdot xx'\end{equation*}
+\begin{equation*}=2\cdot y+6\cdot x\end{equation*}
+\begin{equation*}=6x+2y\end{equation*}
+\textit{
+\begin{equation*}Slet\ definitioner:\end{equation*}}
+\begin{equation*}det23,42\end{equation*}
+Er nu I testsub. Test på Mac.
+\begin{equation*}\sqrt{x+\sqrt{x-1}}=x^{2}\end{equation*}
+\begin{equation*}\left\left$(3x+9\right\right)^{\frac{1}{3}}=x+3\end{equation*}
+\begin{equation*}0=3\cdot x-2-0,5-x+1\end{equation*}
+\begin{equation*}0=3\cdot x-2-x+1\end{equation*}
+\begin{equation*}-\frac{x^{2}}{9}+\frac{2x}{9}+\frac{1}{x-2}-\frac{1}{9}=0\end{equation*}
+\begin{equation*}\sqrt{3x+9}=x+3\end{equation*}
+Test nsolve på mac med denne:
+\begin{equation*}1,2\cdot 5\cdot x-x1,50,5=0\end{equation*}
+\begin{equation*}Slet\ definitioner:\end{equation*}
+Indtast Maxima kode her
+ 
+Svarmig(navn,alder)?block([var1,var2] ,var1:30, var2:70,\newline
+  if alder<var1 then return(sconcat(navn," er ung" )), \newline
+  if alder>var2 then return(sconcat(navn," er gammel" )),\newline
+  sconcat(navn," er i hans bedste alder" )\newline
+)
+\begin{equation*}Svarmig\left\left$(hans,32\right\right)\approx hanserihansbedstealder\end{equation*}
+\begin{equation*}\int\frac{x^{2}}{3}dx=6\end{equation*}
 \end{document}

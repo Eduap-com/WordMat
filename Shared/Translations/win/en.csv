@@ -70,11 +70,11 @@
 69#£Delete definitions
 70#£Constants
 71#£Find values online
-72#£Convert equations to LaTex. (Shortcut alt+T converts a single equation)
+72#£Convert equations to LaTeX. (Shortcut alt+T converts a single equation)
 73#£Copy to clipboard
 74#£Display style
 75#£Dont write units in italic
-76#£Use Maxima to convert LaTex
+76#£Use Maxima to convert LaTeX
 77#£Convert all
 78#£Convert and go to next
 79#£Before
@@ -617,9 +617,9 @@
 616#£Different methods for manipulating symbols
 617#£Replace multiplication signs
 618#£replace all * multiplications signs with $*
-619#£Convert equations to LaTex. (Shortcut alt+T converts a single equation)
-620#£Convert some or all equations to LaTex in a document. Can also use MikTex to generate a complete LaTex document.
-621#£Convert to LaTex (Alt+T)
+619#£Convert equations to LaTeX. (Shortcut alt+T converts a single equation)
+620#£Convert some or all equations to LaTeX in a document. Can also use MikTex to generate a complete LaTeX document.
+621#£Convert to LaTeX (Alt+T)
 622#£Converts one equation to LaTex. Embed characters can be chosen on the LaTex form. Alt+T shortcut also convert one eqaution.
 623#£Replace to start multiplication
 624#£Replaces all " & ChrW(183) & " multiplication signs to * multiplication signs.
@@ -653,16 +653,16 @@
 652#£Automatically check for updates.
 653#£Keyboard shortcuts
 654#£Shows a list of keyboard shortcut to activate WordMat commands and shortcuts for entering math in the math input boxes in Word.
-655#£LaTex template
-656#£LaTex template
-657#£Opens a Word document which is styled like a LaTex document, but as easy to write as a Word document.
+655#£LaTeX template
+656#£LaTeX template
+657#£Opens a Word document which is styled like a LaTeX document, but as easy to write as a Word document.
 658#£Precisionen is set very high. The calculation time can be very long or fail. If so try again with a lower setting.
 659#£WordMat convert to LaTex very well, but there is also the option to use Maxima to convert to LaTex.
 660#£Unit are normally not written in italic as variables. With this function WordMat tries to identify units and insert LaTex code to write units in normal font.
 661#£Close
-662#£Generates a true LaTex-document using MikTex, which must be installed. Only use for simple document as not all document objects are supported.
+662#£Generates a true LaTeX-document using MikTex, which must be installed. Only use for simple document as not all document objects are supported.
 663#£Shows how the LaTex output is interpreted
-664#£Generates LaTex code and opens in TexWorks where you can make adjustments.
+664#£Generates LaTeX code and opens in TexWorks where you can make adjustments.
 665#£Triangle
 666#£Notation
 667#£Graph
@@ -702,8 +702,8 @@
 701#£New equation
 702#£Previous result(s)
 703#£Toggle num/exact
-704#£Convert to Latex
-705#£Latex PDF
+704#£Convert to LaTeX (Alt+T)
+705#£LaTeX PDF
 706#£Degrees
 707#£Radians
 708#£Angle unit
@@ -876,7 +876,7 @@
 875#£The equation was solved graphically with GeoGebra:
 876#£The number of parentheses does not match in the expression
 877#£Setting errors
-878#£You have an incorrect setting in Word.\r\nIn the Equations menu, switch from Latex to Unicode.
+878#£You have an incorrect setting in Word.\r\nIn the Equations menu, switch from LaTeX to Unicode.
 879#£Syntax error - Not correct math.
 880#£You have entered something that is not correct mathematical notation.\r\nThe error is related to a variable:
 881#£For example, this may be because you have subscript on a number. \r\nK_0 should be replaced with a number and not with e.g. 5000_0. It just needs to say 5000.
@@ -911,3 +911,6 @@
 910#£A code field could not be inserted here.
 911#£Direction fields can only be drawn for 1st order differential equations on the form y'=...
 912#£WordMat's setting is set to calculate in degrees. Is that the intention?
+913#£It is not allowed to use the hat operator in definition names.
+914#£It is not allowed to use absolute value bars in definition names
+915#£You have set too many parameters for the function:

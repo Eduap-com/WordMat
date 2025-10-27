@@ -22,11 +22,6 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
     
     If omax Is Nothing Then
         SetMathAutoCorrect
-        On Error Resume Next
-        Application.Run macroname:="Popstart"
-        Err.Clear
-        On Error GoTo fejl
-        DoEvents
         Set omax = New CMaxima
     End If
     
@@ -855,7 +850,11 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
     End If
     p = InStr(omax.KommentarOutput, "Assumptions:")
     If p <> 0 Then
+#If Mac Then
+        p2 = InStr(p + 10, omax.KommentarOutput, vbCr)
+#Else
         p2 = InStr(p + 10, omax.KommentarOutput, vbLf)
+#End If
         If p2 = 0 Then p2 = Len(omax.KommentarOutput)
         s = Trim$(Mid$(omax.KommentarOutput, p + 13, p2 - p - 13))
         s = TrimL(s, "[")
@@ -1411,8 +1410,16 @@ Sub beregn()
         If Not RemoveEqual Then omax.MaximaOutput = "=" & omax.MaximaOutput
     End If
     
+
+    
     If omax.StopNow Then GoTo slut
-    If CheckForError Then Exit Sub ' do not scroll down if there is an error, deffejl is selected
+'    If CheckForError Then Exit Sub ' do not scroll down if there is an error, deffejl is selected
+    If CheckForError Then
+        scrollpos = ActiveWindow.VerticalPercentScrolled
+        sslut = Selection.End
+        sstart = Selection.start
+        GoTo slut
+    End If
     '    TimeText = TimeText & vbCrLf & "beregn: " & Timer - st
 
     Dim Oundo As UndoRecord

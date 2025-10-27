@@ -269,6 +269,7 @@ Public Sub SaveFile(doctype As Integer)
       End If
    End If
    
+    latexfil.ValidateLatexDoc
     
    UfWait.Label_tip.Caption = "Gemmer fil"
    latexfil.CreateHeader

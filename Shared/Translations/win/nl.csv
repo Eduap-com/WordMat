@@ -911,3 +911,6 @@
 910#£Een codeveld kon hier niet worden ingevoegd.
 911#£Richtingsvelden kunnen alleen worden getekend voor differentiaalvergelijkingen van de 1e orde op de vorm y'=...
 912#£De instelling van WordMat is ingesteld om in graden te berekenen. Is dat de bedoeling?
+913#£Het is niet toegestaan om de hat operator te gebruiken in definitienamen.
+914#£Het is niet toegestaan om numerieke tekens te gebruiken in definitienamen.
+915#£Je hebt te veel parameters ingesteld voor de functie:

@@ -911,3 +911,6 @@
 910#£Koodivälja ei saanud siia sisestada.
 911#£Suunavälju saab joonistada ainult 1. järku diferentsiaalvõrrandite jaoks kujul y'=...
 912#£WordMati seadistus on seatud arvutama kraadides. Kas see on kavatsus?
+913#£Definitsiooninimedes ei ole lubatud kasutada mütsioperaatorit.
+914#£Definitsiooninimedes ei ole lubatud kasutada numbrilisi märke.
+915#£Olete funktsiooni jaoks määranud liiga palju parameetreid:

@@ -911,3 +911,6 @@
 910#£W tym miejscu nie mozna wstawic pola kodu.
 911#£Pola kierunkowe mozna rysowac tylko dla równan rózniczkowych 1. rzedu w postaci y'=...
 912#£Ustawienie programu WordMat jest ustawione na obliczanie w stopniach. Czy taka jest intencja?
+913#£Niedozwolone jest uzywanie operatora hat w nazwach definicji.
+914#£Niedozwolone jest uzywanie znaków numerycznych w nazwach definicji.
+915#£Ustawiles zbyt wiele parametrów dla funkcji:
