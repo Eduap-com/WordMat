@@ -59,7 +59,7 @@
 58#£Tutti i numeri risolvono questa disuguaglianza
 59#£La disuguaglianza non aveva soluzioni nel dominio $C per variabile
 60#£La disuguaglianza non aveva soluzioni nel dominio $R per variabile
-61#£Con le seguenti ipotesi/definizioni:
+61#£con le seguenti ipotesi/condizioni:
 62#£Definire
 63#£Nessuna connessione a Internet
 64#£Fare clic su OK per avviare l'aggiornamento
@@ -707,7 +707,7 @@
 706#£Gradi
 707#£Radianti
 708#£Unità angolare
-709#£Mostra le condizioni della soluzione (beta)
+709#£Visualizza le condizioni della soluzione
 710#£Esatto
 711#£Numerico
 712#£Automatico
@@ -910,3 +910,7 @@
 909#£Codice
 910#£Non è stato possibile inserire un campo codice.
 911#£I campi di direzione possono essere disegnati solo per equazioni differenziali del 1° ordine nella forma y'=...
+912#£L'impostazione di WordMat è impostata per calcolare in gradi. È questa l'intenzione?
+913#£Non è consentito utilizzare l'operatore hat nei nomi delle definizioni.
+914#£Non è consentito utilizzare caratteri numerici nei nomi delle definizioni.
+915#£Sono stati impostati troppi parametri per la funzione:

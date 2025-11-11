@@ -59,7 +59,7 @@
 58#£Ulikhet har alle tall som en løsning.
 59#£Ulikhet hadde ingen løsninger i $C for variabel
 60#£Ulikhet hadde ingen løsninger innenfor $R for variabel
-61#£med følgende forutsetninger/definisjoner:
+61#£med følgende forutsetninger/betingelser:
 62#£Definere
 63#£Ingen internettforbindelse
 64#£Klikk OK for å starte oppdateringen.
@@ -707,7 +707,7 @@
 706#£Grader
 707#£Radianer
 708#£Vinkel enhet
-709#£Vise løsningsbetingelser (beta)
+709#£Vise løsningsbetingelser
 710#£Nøyaktig
 711#£Numerisk
 712#£Automatisk
@@ -910,3 +910,7 @@
 909#£Kode
 910#£Et kodefelt kan ikke settes inn her.
 911#£Retningsfelt kan bare tegnes for 1.ordens differensialligninger på formen y'=...
+912#£WordMats innstilling er satt til å beregne i grader. Er det intensjonen?
+913#£Det er ikke tillatt å bruke hatteoperatoren i definisjonsnavn.
+914#£Det er ikke tillatt å bruke numeriske tegn i definisjonsnavn.
+915#£Du har satt for mange parametere for funksjonen:

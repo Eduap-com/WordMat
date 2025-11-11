@@ -59,7 +59,7 @@
 58#£K›ik numbrid lahendavad selle ebav›rdsuse
 59#£Ebav›rdsusel ei olnud muutujate $C valdkonnas lahendusi
 60#£Ebav›rdsusel ei olnud muutujate $R valdkonnas lahendusi
-61#£JŠrgmiste eelduste/mŠŠratlustega:
+61#£jŠrgmiste eelduste/tingimustega:
 62#£MŠŠratleda
 63#£Interneti-Ÿhendus puudub
 64#£VŠrskenduse alustamiseks kl›psake nuppu OK
@@ -707,7 +707,7 @@
 706#£Kraadi
 707#£Radiaanid
 708#£Nurga Ÿhik
-709#£Lahenduse tingimuste kuvamine (beetaversioon)
+709#£Lahenduse tingimuste vaatamine
 710#£TŠpne
 711#£Numbriline
 712#£Automaatne
@@ -910,3 +910,7 @@
 909#£Kood
 910#£KoodivŠlja ei saanud siia sisestada.
 911#£SuunavŠlju saab joonistada ainult 1. jŠrku diferentsiaalv›rrandite jaoks kujul y'=...
+912#£WordMati seadistus on seatud arvutama kraadides. Kas see on kavatsus?
+913#£Definitsiooninimedes ei ole lubatud kasutada mŸtsioperaatorit.
+914#£Definitsiooninimedes ei ole lubatud kasutada numbrilisi mŠrke.
+915#£Olete funktsiooni jaoks mŠŠranud liiga palju parameetreid:

@@ -59,7 +59,7 @@
 58#£Tous les chiffres résolvent cette inégalité
 59#£L'inégalité n'avait pas de solutions dans le domaine $C pour les variables
 60#£L'inégalité n'avait pas de solutions dans le domaine $R pour variable
-61#£Avec les hypothèses/définitions suivantes :
+61#£avec les hypothèses/conditions suivantes :
 62#£Définir
 63#£Pas de connexion Internet
 64#£Cliquez sur OK pour lancer la mise à jour
@@ -707,7 +707,7 @@
 706#£Degrés
 707#£Radians
 708#£Unité d'angle
-709#£Afficher les conditions de la solution (bêta)
+709#£Voir les conditions de la solution
 710#£Exact
 711#£Numérique
 712#£Automatique
@@ -910,3 +910,7 @@
 909#£Code
 910#£Il n'a pas été possible d'insérer un champ de code ici.
 911#£Les champs de direction ne peuvent être dessinés que pour les équations différentielles du 1er ordre sous la forme y'=...
+912#£Le paramètre de WordMat est configuré pour calculer en degrés. Est-ce l'intention ?
+913#£Il n'est pas autorisé d'utiliser l'opérateur hat dans les noms de définition.
+914#£Il n'est pas permis d'utiliser des caractères numériques dans les noms de définition.
+915#£Vous avez défini trop de paramètres pour la fonction :
