@@ -1819,7 +1819,7 @@ Sub CompareTest()
     PrepareMaxima
     omax.prevspr = ""
     Dim scrollpos As Double
-    Dim sstart As Long, sslut As Long
+    Dim sstart As Long, sslut As Long, p As Integer
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
@@ -1864,7 +1864,10 @@ Sub CompareTest()
         End If
         omax.InsertMaximaOutput
         If InStr(omax.KommentarOutput, "Numerically tested") > 0 And InStr(omax.MaximaOutput, "sand") > 0 Then
+            Selection.TypeParagraph
             Selection.TypeText TT.A(164)
+            p = InStr(omax.KommentarOutput, "to within")
+            If p <> 0 Then Selection.TypeText " (" & Trim$(Mid$(omax.KommentarOutput, p + 9, 3)) & " decimals)"
             Selection.TypeParagraph
         End If
     Else

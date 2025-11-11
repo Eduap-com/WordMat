@@ -1927,7 +1927,16 @@ Sub CompareTest()
     ElseIf nr <= 1 Then
         MaximaOutput = ""
         KommentarOutput = Minput(1) & vbLf & moutput(1)
+    Else
+        KommentarOutput = Minput(1) & vbLf & moutput(1)
+        If nr >= 2 Then KommentarOutput = KommentarOutput & vbLf & moutput(2)
+        For i = 0 To nr - 1
+            KommentarOutput = KommentarOutput & Minput(nr - i)
+        Next
+        KommentarOutput = Replace(KommentarOutput, vbCrLf, "")
     End If
+
+
 
 slut:
 End Sub
