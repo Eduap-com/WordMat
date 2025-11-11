@@ -59,7 +59,7 @@
 58#£Ungleichheit hat alle Zahlen als Lösung.
 59#£Für die Ungleichheit gab es keine Lösungen $C für variable
 60#£Für die Ungleichheit gab es innerhalb $R keine Lösungen für variable
-61#£mit den folgenden Annahmen/Definitionen:
+61#£unter folgenden Annahmen/Bedingungen:
 62#£Definieren
 63#£Keine Internetverbindung
 64#£Klicken Sie auf OK, um das Update zu starten.
@@ -707,7 +707,7 @@
 706#£Grad
 707#£Bogenmaß
 708#£Winkel-Einheit
-709#£Lösungsbedingungen anzeigen (Beta)
+709#£Lösungsbedingungen anzeigen
 710#£Genau
 711#£Numerisch
 712#£Automatisch

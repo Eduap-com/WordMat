@@ -107,7 +107,7 @@ Sub RunTestSequence()
     '    Application.ScreenRefresh
     
     'til test af enkelt
-'        GoTo slut
+'    GoTo slut
     
     
     DebugWM = False
@@ -248,8 +248,10 @@ Sub RunTestSequence()
     If TestSolve("1,2" & VBA.ChrW$(183) & "(" & VBA.ChrW$(8730) & "5" & VBA.ChrW$(183) & "x-x^1,5 )^0,5=0", "x", "x=0    " & VBA.ChrW$(8744) & "    x=5") Then GoTo slut
     If TestSolve("-x^2/9+2x/9+1/(x-2)-1/9=0", "x", "x=3,472368") Then GoTo slut
     If TestSolve(VBA.ChrW$(8730) & "(3x+9)=x+3", "x", "x=-3    " & VBA.ChrW$(8744) & "    x=0") Then GoTo slut
-    
+
     MaximaExact = 2 ' num
+    If TestSolve("40=72" & VBA.ChrW$(183) & "e^((0,619/0,22" & VBA.ChrW$(8729) & "(e^22-e^0,22t )) )", "t", "t=100") Then GoTo slut
+    If TestSolve(VBA.ChrW$(8730) & "(x^2+40000/x^4 )+x" & VBA.ChrW$(183) & "(2" & VBA.ChrW$(183) & "x-160000/x^5 )/(2" & VBA.ChrW$(183) & "" & VBA.ChrW$(8730) & "(x^2+40000/x^4 ))+2" & VBA.ChrW$(183) & "x-400/x^2 =0", "x", "x=5,520396") Then GoTo slut
     InsertTestMath "Definer: " & VBA.ChrW$(963) & ">0"
     If TestSolve("0,1=" & VBA.ChrW$(8747) & "_(-" & VBA.ChrW$(8734) & ")^5" & VBA.ChrW$(9618) & "1/(" & VBA.ChrW$(8730) & "2" & VBA.ChrW$(960) & "" & VBA.ChrW$(183) & "" & VBA.ChrW$(963) & ")" & VBA.ChrW$(183) & "e^(-1/2" & VBA.ChrW$(183) & "((y-7)/" & VBA.ChrW$(963) & ")^2 ) dy", "sigma", VBA.ChrW$(963) & "=1,560608") Then GoTo slut
     InsertSletDef
@@ -616,6 +618,12 @@ Sub PerformTest(TestType As Integer, komm As String, resul As String, Optional V
         MoveCursorToEndOfCalculation False
     Else
         GotoPrevEq
+        If Selection.OMaths.Count > 0 Then
+            If HasAssumptions Then
+                Selection.MoveRight 2
+                GotoNextEq
+            End If
+        End If
         omax.ReadSelection
         Oresul = TrimR(omax.Kommando, vbCr)
         MoveCursorToEndOfCalculation False
@@ -789,6 +797,14 @@ Sub GotoPrevEq()
 Dim i As Integer
     Do While Selection.OMaths.Count = 0 And i < 100
         Selection.GoToPrevious (wdGoToLine)
+        Selection.EndKey unit:=wdLine
+        i = i + 1 ' there are some equations where it just gets stuck on the same line. Something with vectors
+    Loop
+End Sub
+Sub GotoNextEq()
+Dim i As Integer
+    Do While Selection.OMaths.Count = 0 And i < 100
+        Selection.GoToNext (wdGoToLine)
         Selection.EndKey unit:=wdLine
         i = i + 1 ' there are some equations where it just gets stuck on the same line. Something with vectors
     Loop

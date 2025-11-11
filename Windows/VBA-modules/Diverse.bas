@@ -720,7 +720,7 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     
     If UpdateNow Then
         If PartnerShip Then
-            If MsgBox2(TT.A(21) & News & vbCrLf & vbCrLf & TT.A(64), vbOKCancel, TT.A(23)) = vbOK Then
+            If MsgBox2(TT.A(21) & News & vbCrLf & vbCrLf & TT.A(64), vbOKCancel, TT.A(23) & " " & NewVersion) = vbOK Then
                 On Error Resume Next
                 Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
                 On Error GoTo Install2
@@ -739,7 +739,7 @@ Install2:
         End If
     Else
         If Not RunSilent Then
-            MsgBox2 TT.A(344) & " " & AppNavn & " v." & AppVersion, vbOKOnly, "No Update"
+            MsgBox2 TT.A(344) & " " & AppNavn & " v." & AppVersion & PatchVersion, vbOKOnly, "No Update"
         End If
     End If
    

@@ -76,6 +76,9 @@ Sub RunFirst()
         If val(RegAppVersion) <= 1.34 Then
             OutputColor = wdGreen
         End If
+        If val(RegAppVersion) < 1.37 Then
+            ShowAssum = True
+        End If
         RegAppVersion = AppVersion
     End If
     If SettCheckForUpdate Then CheckForUpdateSilent

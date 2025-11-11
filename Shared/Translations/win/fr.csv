@@ -59,7 +59,7 @@
 58#£Tous les chiffres résolvent cette inégalité
 59#£L'inégalité n'avait pas de solutions dans le domaine $C pour les variables
 60#£L'inégalité n'avait pas de solutions dans le domaine $R pour variable
-61#£Avec les hypothèses/définitions suivantes :
+61#£avec les hypothèses/conditions suivantes :
 62#£Définir
 63#£Pas de connexion Internet
 64#£Cliquez sur OK pour lancer la mise à jour
@@ -707,7 +707,7 @@
 706#£Degrés
 707#£Radians
 708#£Unité d'angle
-709#£Afficher les conditions de la solution (bêta)
+709#£Voir les conditions de la solution
 710#£Exact
 711#£Numérique
 712#£Automatique

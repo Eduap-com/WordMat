@@ -148,7 +148,7 @@ Public Sub ResetMaxima()
         kd = kd & "forget([" & ForgetList & "])"
         ForgetList = ""
     End If
-    MaxProc.Reset kd
+    If kd <> vbNullString Then MaxProc.Reset kd
 #End If
 End Sub
 Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = True, Optional ConvertWordSymbols As Boolean = True)
@@ -1531,7 +1531,7 @@ start:
         End If
         If MaximaExact = 1 Then ' exact
             eqsg = "="
-        ElseIf eql = "true" Then
+        ElseIf eql = "true" Or eql = "unknown" Then
             eqsg = "="
         Else
             eqsg = ChrW$(&H2248)
@@ -1774,15 +1774,15 @@ Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid
         Kommando = "ConvertLog(" & Kommando & ")"
     End If
 
-    If MaximaExact = 2 Then
+    If MaximaExact = 2 And Not rationaliser Then
         Kommando = Kommando & ",numer"
     End If
     MaximaInputStreng = MaximaInputStreng & Kommando & ";"
 
 
-    If MaximaDecOutType = 3 Then   ' scientific notation
+    If MaximaDecOutType = 3 And Not rationaliser Then   ' scientific notation
         MaximaInputStrengSec = "scinotall(%),numer;"
-    ElseIf MaximaExact = 2 Then
+    ElseIf MaximaExact = 2 And Not rationaliser Then
         MaximaInputStrengSec = "dectalall(%),numer;"
     Else
         MaximaInputStrengSec = ""
@@ -2872,7 +2872,7 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     If InStr(text, ";") <> 0 Then text = Replace(text, ";", ",")
 
 '  piecewise defined functions defined with a curly bracket. fork functions
-   Dim ass As String, k As Long
+   Dim Ass As String, k As Long
     ea.text = text
     ea.SetNormalBrackets
     i = 0
@@ -2902,13 +2902,13 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
                 Arr3 = Split(Arr2(j), c)
                   If UBound(Arr3) > 1 Then
                      k = 1
-                     ass = ""
+                     Ass = ""
                      Do While k <= UBound(Arr3) ' if divided incorrectly then repaired
-                        If Len(ass) > 0 Or InStr(Arr3(k), "<") > 0 Or InStr(Arr3(k), ">") > 0 Or InStr(Arr3(k), ChrW$(8712)) > 0 Then
-                           If ass = "" Then
-                              ass = Arr3(k)
+                        If Len(Ass) > 0 Or InStr(Arr3(k), "<") > 0 Or InStr(Arr3(k), ">") > 0 Or InStr(Arr3(k), ChrW$(8712)) > 0 Then
+                           If Ass = "" Then
+                              Ass = Arr3(k)
                            Else
-                              ass = ass & c & Arr3(k)
+                              Ass = Ass & c & Arr3(k)
                            End If
                         Else
                            Arr3(0) = Arr3(0) & c & Arr3(k)
@@ -2916,22 +2916,22 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
                         k = k + 1
                      Loop
                   ElseIf UBound(Arr3) = 1 Then
-                     ass = Arr3(1)
+                     Ass = Arr3(1)
                   End If
                 If UBound(Arr3) > 0 Then
-                  ass = Replace(ass, "&", "") ' If using a template from Word, there will be an & after the comma.
-                  ass = Replace(ass, "" & ChrW$(8743) & " ", "&&and&&")
-                  ass = Replace(ass, " " & ChrW$(8743) & " ", "&&and&&")
-                  ass = Replace(ass, "" & ChrW$(8744) & " ", "&&or&&")
-                  ass = Replace(ass, " " & ChrW$(8744) & " ", "&&or&&")
-                  ass = Replace(ass, " AND ", "&&and&&")
-                  ass = Replace(ass, " and ", "&&and&&")
-                  ass = Replace(ass, " OR ", "&&or&&")
-                  ass = Replace(ass, " or ", "&&or&&")
+                  Ass = Replace(Ass, "&", "") ' If using a template from Word, there will be an & after the comma.
+                  Ass = Replace(Ass, "" & ChrW$(8743) & " ", "&&and&&")
+                  Ass = Replace(Ass, " " & ChrW$(8743) & " ", "&&and&&")
+                  Ass = Replace(Ass, "" & ChrW$(8744) & " ", "&&or&&")
+                  Ass = Replace(Ass, " " & ChrW$(8744) & " ", "&&or&&")
+                  Ass = Replace(Ass, " AND ", "&&and&&")
+                  Ass = Replace(Ass, " and ", "&&and&&")
+                  Ass = Replace(Ass, " OR ", "&&or&&")
+                  Ass = Replace(Ass, " or ", "&&or&&")
                   If CAStype = 0 Then
-                    s = s & sqbrAssump(SplitAssump(Trim$(ass))) & "&&then&&(" & Trim$(Arr3(0)) & ")"
+                    s = s & sqbrAssump(SplitAssump(Trim$(Ass))) & "&&then&&(" & Trim$(Arr3(0)) & ")"
                   Else
-                    s = s & ass & "&&then&&(" & Trim$(Arr3(0)) & ")"
+                    s = s & Ass & "&&then&&(" & Trim$(Arr3(0)) & ")"
                   End If
                Else
                     s = s & "0=0&&then&&(" & Trim$(Arr3(0)) & ")"
@@ -5859,7 +5859,7 @@ Sub InsertMaximaOutput()
         mo.OMaths(1).Range.Bold = True
     End If
 
-    InsertAssumptions
+'    InsertAssumptions ' replaced by a section in InsertForklaring
 
     If Len(KommentarOutput) > 3 Then
         s = TranslateReplaceComment(KommentarOutput)
@@ -5935,6 +5935,7 @@ Function TranslateReplaceComment(comm As String) As String
     TranslateReplaceComment = outtext
 End Function
 Sub InsertAssumptions()
+' replaced by a section in InsertForklaring
     Dim gemfontsize As Integer
     Dim gemitalic As Boolean
     Dim gemfontcolor As Integer
@@ -6322,7 +6323,7 @@ start:
 
 slut:
 End Sub
-Function FindVariable(Optional text As String, Optional MaximaCode As Boolean = True, Optional CAStype As Integer = 0) As Boolean
+Function FindVariable(Optional text As String, Optional MaximaCode As Boolean = True, Optional CAStype As Integer = 0, Optional NoVectors As Boolean = False) As Boolean
 ' finds variables in the text and puts them in Vars-string
     Dim Var As String
     Dim i As Integer
@@ -6368,7 +6369,7 @@ Function FindVariable(Optional text As String, Optional MaximaCode As Boolean = 
     Var = ea.GetNextVar()
     Var = Replace(Var, vbCrLf, vbNullString)
     Do While Var <> vbNullString
-        If ea.ChrByIndex(ea.pos + 1) <> "(" And ea.ChrByIndex(ea.pos + 1) <> "'" And ea.ChrByIndex(ea.pos + 1) <> ChrW$(8289) And Not (InStr(DefString, Var & ":") = 1 Or InStr(DefString, ";" & Var & ":") > 0) And InStr(Var, "qkqg") < 1 Then
+        If ea.ChrByIndex(ea.pos + 1) <> "(" And ea.ChrByIndex(ea.pos + 1) <> "'" And ea.ChrByIndex(ea.pos + 1) <> ChrW$(8289) And Not (InStr(DefString, Var & ":") = 1 Or InStr(DefString, ";" & Var & ":") > 0) And InStr(Var, "qkqg") < 1 And Not (NoVectors And InStr(Var, "SymVecta") > 0) Then
             varexists = False
             For i = 1 To varind - 1
                 If vararr(i) = Var Then varexists = True
@@ -6468,7 +6469,7 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
     If InStr(s, vbCr) Then s = Replace(s, vbCr, "")
     slc = LCase$(s)
  
-    If InStr(s, ChrW$(8788)) > 0 Or InStr(s, ChrW$(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(slc, "definer:") > 0 Or InStr(slc, "define:") > 0 Or InStr(slc, "ligning:") > 0 Or InStr(slc, "equation:") > 0 Or InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(s, ChrW$(8801)) > 0 Or InStr(slc, LCase$(TT.A(69))) > 0 Then
+    If InStr(s, ChrW$(8788)) > 0 Or InStr(s, ChrW$(8797)) > 0 Or InStr(s, ":=") > 0 Or InStr(slc, "definer:") > 0 Or InStr(slc, "define:") > 0 Or InStr(slc, "ligning:") > 0 Or InStr(slc, "equation:") > 0 Or InStr(slc, "slet def") > 0 Or InStr(slc, "slet\ def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(s, ChrW$(8801)) > 0 Or InStr(slc, LCase$(TT.A(69))) > 0 Then
         Set ea = New ExpressionAnalyser
         ea.SetNormalBrackets
         Set ea2 = New ExpressionAnalyser
@@ -6490,7 +6491,7 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
         s = Replace(s, ChrW$(11), "")
         slc = LCase$(s)
 
-        If InStr(slc, "slet def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(slc, LCase$(TT.A(69))) Then
+        If InStr(slc, "slet def") > 0 Or InStr(slc, "slet\ def") > 0 Or InStr(slc, "delete def") > 0 Or InStr(slc, LCase$(TT.A(69))) Then
             s = Replace(Trim$(Split(s, ":")(1)), vbCr, "")
             If s = vbNullString Then
                 AddDefinition = "STOP"

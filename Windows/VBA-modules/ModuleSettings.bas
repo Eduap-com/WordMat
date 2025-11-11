@@ -314,6 +314,7 @@ On Error Resume Next
     MaximaDecOutType = 2
     SettUseVBACAS = 2
     OutputColor = wdGreen
+    ShowAssum = True
     
     
     SettShortcutAltM = KeybShortcut.InsertNewEquation

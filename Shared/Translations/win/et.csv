@@ -59,7 +59,7 @@
 58#£Kõik numbrid lahendavad selle ebavõrdsuse
 59#£Ebavõrdsusel ei olnud muutujate $C valdkonnas lahendusi
 60#£Ebavõrdsusel ei olnud muutujate $R valdkonnas lahendusi
-61#£Järgmiste eelduste/määratlustega:
+61#£järgmiste eelduste/tingimustega:
 62#£Määratleda
 63#£Interneti-ühendus puudub
 64#£Värskenduse alustamiseks klõpsake nuppu OK
@@ -707,7 +707,7 @@
 706#£Kraadi
 707#£Radiaanid
 708#£Nurga ühik
-709#£Lahenduse tingimuste kuvamine (beetaversioon)
+709#£Lahenduse tingimuste vaatamine
 710#£Täpne
 711#£Numbriline
 712#£Automaatne

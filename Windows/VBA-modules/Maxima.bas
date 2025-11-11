@@ -6,6 +6,8 @@ Public tid As Double
 Private DeVarList As String
 Private TempCas As Integer
 Private RestartIndex As Integer
+Private RestartMaximaNextRun As Boolean
+Public HasAssumptions As Boolean ' used by test
 
 Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Boolean
     On Error GoTo fejl
@@ -28,7 +30,8 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
 #If Mac Then
 #Else
     If Not MaxProc Is Nothing And DllConnType <= 1 Then ' on Windows Maxima must be started first, if using api. Skip if using wsh
-        If (Not MaxProc.IsMaximaStarted Or FreshMaxima) And CASengine = 0 Then
+        If (Not MaxProc.IsMaximaStarted Or FreshMaxima Or RestartMaximaNextRun) And CASengine = 0 Then
+            RestartMaximaNextRun = False
             MaxProc.Units = 0
             MaxProc.StartMaximaProcess
             WaitForMaximaUntil
@@ -246,7 +249,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
             omax.Kommando = Replace(omax.Kommando, VBA.ChrW$(8805), ">")
             eqs = True
         End If
-        If Not omax.FindVariable(, True, CASengine) Then GoTo slut
+        If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
         If variabel = vbNullString Then
             UFSelectVar.Vars = omax.Vars
             UFSelectVar.DefS = omax.DefString
@@ -392,6 +395,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     TempCas = CASengine
     PrepareMaxima
     omax.prevspr = ""
+    HasAssumptions = False
 
     Set UFSelectVar = New UserFormSelectVar
     UFSelectVar.NoEq = 1
@@ -415,7 +419,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
-    If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8805)) > 1 Then
+    If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, ChrW$(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, ChrW$(8805)) > 1 Then
         MaximaSolveInequality variabel
         GoTo slut
     End If
@@ -435,7 +439,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     End If
 
     omax.ReadSelection
-    If InStr(omax.Kommando, VBA.ChrW$(8788)) > 0 Or InStr(VBA.LCase$(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase$(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase$(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW$(8801)) > 0 Then
+    If InStr(omax.Kommando, ChrW$(8788)) > 0 Or InStr(LCase$(omax.Kommando), "definer:") > 0 Or InStr(LCase$(omax.Kommando), "define:") > 0 Or InStr(LCase$(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, ChrW$(8801)) > 0 Then
         MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
@@ -445,7 +449,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8743)) < 1 Then
         ' only 1 equation
         
-        If Not omax.FindVariable(, True, CASengine) Then GoTo slut
+        If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
         If Not ValiderVariable Then GoTo slut
         SaveKommando = omax.Kommando
 newcas:
@@ -643,7 +647,7 @@ stophop:
 
     Else    '--------------- system of equations ----------------------
 
-        omax.FindVariable , True, CASengine
+        omax.FindVariable , True, CASengine, True
         If Not ValiderVariable Then GoTo slut
         UFSelectVar.NoEq = omax.AntalKom
         UFSelectVar.Vars = omax.Vars
@@ -784,6 +788,7 @@ newcassys:
     End If
     GoTo slut
 fejl:
+    If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
     MsgBox2 TT.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -796,6 +801,7 @@ slut:
     CASengineTempOnly = TempCas
     Selection.End = sslut    ' slut must be first
     Selection.start = sstart
+    If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
@@ -805,7 +811,7 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
     Dim gemfontcolor As Integer
     Dim gemsb As Integer
     Dim gemsa As Integer
-    Dim mo As Range, p As Integer, p2 As Integer, s As String
+    Dim mo As Range, p As Integer, p2 As Integer, s As String, Ass As String
 #If Mac Then
     Selection.TypeText " " ' ensures that the preceding math-box does not change font
 #End If
@@ -848,21 +854,85 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
         Selection.TypeText omax.ConvertToWordSymbols(tdefs)
         mo.OMaths.BuildUp
     End If
-    p = InStr(omax.KommentarOutput, "Assumptions:")
-    If p <> 0 Then
+    HasAssumptions = False
+    If ShowAssum Then
+        p = InStr(omax.KommentarOutput, "Assumptions:")
+        If p <> 0 Then
+            Do While p <> 0
 #If Mac Then
-        p2 = InStr(p + 10, omax.KommentarOutput, vbCr)
+                p2 = InStr(p + 10, omax.KommentarOutput, vbCr)
 #Else
-        p2 = InStr(p + 10, omax.KommentarOutput, vbLf)
+                p2 = InStr(p + 10, omax.KommentarOutput, vbLf)
 #End If
-        If p2 = 0 Then p2 = Len(omax.KommentarOutput)
-        s = Trim$(Mid$(omax.KommentarOutput, p + 13, p2 - p - 13))
-        s = TrimL(s, "[")
-        s = TrimR(s, "]")
-        s = Replace(s, ",", ", ")
-        s = FormatDefinitions(s)
-        Selection.TypeText TT.A(61) & " " & s
+                If p2 = 0 Then p2 = Len(omax.KommentarOutput)
+                s = Trim$(Mid$(omax.KommentarOutput, p + 13, p2 - p - 13))
+                s = TrimR(s, vbCrLf)
+                s = TrimR(s, vbCr)
+                s = TrimR(s, vbLf)
+                s = Trim$(s)
+                s = TrimL(s, "[")
+                s = TrimR(s, "]")
+                s = Replace(s, ",", ", ")
+                p = InStr(p + 10, omax.KommentarOutput, "Assumptions:")
+                Ass = Ass & s & ", "
+            Loop
+            Ass = Left(Ass, Len(Ass) - 2)
+            '            s = FormatDefinitions(s) ' better with omath
+            Selection.TypeText TT.A(61) & " " ' & s
+            InsertAssumptionsOMath Ass
+            RestartMaximaNextRun = True
+            HasAssumptions = True
+        End If
     End If
+    Selection.TypeParagraph
+    Selection.Font.Size = gemfontsize
+    Selection.Font.Italic = gemitalic
+    Selection.Font.ColorIndex = gemfontcolor
+    With Selection.ParagraphFormat
+        .SpaceBefore = gemsb
+        '        .SpaceBeforeAuto = False
+        .SpaceAfter = gemsa
+        '        .SpaceAfterAuto = False
+    End With
+
+End Sub
+Sub InsertAssumptionsOMath(AssumeText As String)
+' replaced by a section in InsertForklaring
+    Dim gemfontsize As Integer
+    Dim gemitalic As Boolean
+    Dim gemfontcolor As Integer
+    Dim gemsb As Integer
+    Dim gemsa As Integer
+    Dim mo As Range
+    Dim assum As String
+
+    If Not (ShowAssum) Then GoTo slut
+
+    assum = Trim$(omax.ConvertToWordSymbols(Replace(AssumeText, ",", " , ")))
+    If Len(assum) < 2 Then GoTo slut
+
+    gemfontsize = Selection.Font.Size
+    gemitalic = Selection.Font.Italic
+    gemfontcolor = Selection.Font.ColorIndex
+    gemsb = Selection.ParagraphFormat.SpaceBefore
+    gemsa = Selection.ParagraphFormat.SpaceAfter
+
+    With Selection.ParagraphFormat
+        .SpaceBefore = 0
+        .SpaceBeforeAuto = False
+        .SpaceAfter = 2
+        .SpaceAfterAuto = False
+        '        .LineUnitBefore = 0
+        '        .LineUnitAfter = 0
+        .Alignment = wdAlignParagraphCenter
+    End With
+    Selection.Font.Size = 8
+    Selection.Font.ColorIndex = wdGray50
+    Selection.Font.Italic = True
+
+    Set mo = Selection.OMaths.Add(Selection.Range)
+    Selection.TypeText assum
+    mo.OMaths.BuildUp
 
     Selection.TypeParagraph
     Selection.Font.Size = gemfontsize
@@ -875,6 +945,9 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
         '        .SpaceAfterAuto = False
     End With
 
+    GoTo slut
+fejl:
+slut:
 End Sub
 Sub MaximaEliminate()
     Dim ForklarTekst As String
@@ -915,7 +988,7 @@ Sub MaximaEliminate()
     Else    ' system of equations
 
         omax.ReadSelection
-        omax.FindVariable , True, CASengine
+        omax.FindVariable , True, CASengine, True
         If Not ValiderVariable Then GoTo slut
         UFSelectVar.Eliminate = True
         UFSelectVar.NoEq = omax.AntalKom
@@ -1051,7 +1124,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
     If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8743)) < 1 Then
         ' only 1 equation
 
-        If Not omax.FindVariable(, True, CASengine) Then GoTo slut
+        If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
         
         If CASengine > 0 And Not AllTrig Then ' In GeoGebra, it must be recognized via VBA whether it is a trigonometric equation
             If Not InStr(omax.Vars, ";") > 0 Then ' the method only works with 1 variable
@@ -1191,7 +1264,7 @@ ghop:
         Dim Arr2 As Variant
 
         omax.ReadSelection
-        omax.FindVariable , True, CASengine
+        omax.FindVariable , True, CASengine, True
         UFSelectVar.NoEq = Selection.OMaths.Count
         UFSelectVar.Vars = omax.Vars
         UFSelectVar.Show
@@ -1455,7 +1528,7 @@ slut:
     D.Activate
 #End If
     On Error Resume Next
-    Oundo.EndCustomRecord
+    If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
     If ActiveWindow.VerticalPercentScrolled <> scrollpos Then ActiveWindow.VerticalPercentScrolled = scrollpos
     Application.ScreenUpdating = True
     '    TimeText = TimeText & vbCrLf & "beregn ialt: " & Timer - st
@@ -1547,7 +1620,7 @@ Sub Omskriv()
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
-    If Not omax.FindVariable(, True, CASengine) Then GoTo slut
+    If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
     UFomskriv.Vars = omax.Vars
     UFomskriv.Show
     If UFomskriv.annuller Then GoTo slut
@@ -1767,6 +1840,10 @@ Sub CompareTest()
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
+    Dim Oundo As UndoRecord
+    Set Oundo = Application.UndoRecord
+    Oundo.StartCustomRecord
+
     omax.CompareTest
     If omax.StopNow Then GoTo slut
     If CheckForError Then
@@ -1799,12 +1876,14 @@ Sub CompareTest()
 
     GoTo slut
 fejl:
+    On Error Resume Next
     MsgBox TT.ErrorGeneral, vbOKOnly, TT.Error
     RestartMaxima
 slut:
     On Error Resume Next
     Selection.End = sslut
     Selection.start = sstart
+    Oundo.EndCustomRecord
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub faktoriser()
@@ -2191,7 +2270,7 @@ Sub SolveDENumeric()
         GoTo slut
     End If
 
-    omax.FindVariable , True, CASengine
+    omax.FindVariable , True, CASengine, True
     If InStr(omax.Vars, "t") > 0 Then
         variabel = "t"
     ElseIf InStr(omax.Vars, "x") > 0 Then
@@ -2348,7 +2427,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     If Not ValidateInput(omax.Kommando) Then GoTo slut
 
     If funktion = vbNullString And variabel = vbNullString Then
-        If Not omax.FindVariable(, True, CASengine) Then GoTo slut
+        If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
         If InStr(omax.Vars, "t") > 0 Then
             variabel = "t"
         ElseIf InStr(omax.Vars, "x") > 0 Then
@@ -2553,9 +2632,11 @@ Function ValidateInput(Expr, Optional MathObj As OMath) As Boolean
         ED.Title = TT.SyntaxError
         ED.MaximaOutput = Expr
         ED.Description = TT.A(876) & vbCrLf & Expr
-    ElseIf InStr(Expr, "\left$(") > 0 Or InStr(Expr, "\ast") > 0 Then
-        ED.Title = TT.A(877)
-        ED.Description = TT.A(878)
+    ElseIf InStr(Expr, "\") > 0 Then
+        If InStr(Expr, "\left(") > 0 Or InStr(Expr, "\frac{") > 0 Or InStr(Expr, "\int") > 0 Or InStr(Expr, "\sqrt") > 0 Or InStr(Expr, "\ast") > 0 Or InStr(Expr, "\sum") > 0 Or InStr(Expr, "\begin") > 0 Or InStr(Expr, "Slet\ def") > 0 Then
+            ED.Title = TT.A(877)
+            ED.Description = TT.A(878)
+        End If
     End If
    
     If ED.Title <> vbNullString Then

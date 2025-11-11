@@ -59,7 +59,7 @@
 58#£Alle getallen lossen deze ongelijkheid op
 59#£De ongelijkheid had geen oplossingen op het gebied $C voor variabele
 60#£De ongelijkheid had geen oplossingen op het gebied $R voor variabele
-61#£Met de volgende aannames/definities:
+61#£Met de volgende aannames/voorwaarden:
 62#£Definiëren
 63#£Geen internetverbinding
 64#£Klik op OK om de update te starten
@@ -707,7 +707,7 @@
 706#£Graden
 707#£Radialen
 708#£Hoek eenheid
-709#£Toon de voorwaarden van de oplossing (bèta)
+709#£Bekijk de voorwaarden van de oplossing
 710#£Nauwkeurig
 711#£Numeriek
 712#£Automatisch

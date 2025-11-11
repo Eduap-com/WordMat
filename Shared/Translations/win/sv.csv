@@ -59,7 +59,7 @@
 58#£Ojämlikhet har alla siffror som en lösning.
 59#£Ojämlikhet hade inga lösningar i $C för variabel
 60#£Ojämlikhet hade inga lösningar inom $R för variabel
-61#£med följande antaganden/definitioner:
+61#£med följande antaganden/villkor:
 62#£Definiera
 63#£Ingen internetuppkoppling
 64#£Klicka på OK för att starta uppdateringen.
@@ -707,7 +707,7 @@
 706#£Gradtal
 707#£Radianer
 708#£Vinkel enhet
-709#£Visa lösningsvillkor (beta)
+709#£Visa lösningsvillkor
 710#£Exakt
 711#£Numerisk
 712#£Automatisk

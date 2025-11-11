@@ -59,7 +59,7 @@
 58#£Wszystkie liczby rozwiazuja te nierównosc
 59#£Nierównosc nie miala rozwiazania w dziedzinie $C dla zmiennej
 60#£Nierównosc nie miala rozwiazania w dziedzinie $R dla zmiennych
-61#£Przy nastepujacych zalozeniach/definicjach:
+61#£przy nastepujacych zalozeniach/warunkach:
 62#£Definiowac
 63#£Brak polaczenia z Internetem
 64#£Kliknij przycisk OK, aby rozpoczac aktualizacje
@@ -707,7 +707,7 @@
 706#£Stopni
 707#£Radianach
 708#£Jednostka kata
-709#£Pokaz warunki rozwiazania (beta)
+709#£Wyswietlanie warunków rozwiazania
 710#£Dokladny
 711#£Numeryczny
 712#£Automatyczne

@@ -2163,10 +2163,10 @@ ea2.SetNormalBrackets
     
 End Sub
 
-Sub InsertBoundary(Var As String, assumetext As String, tbmin As TextBox, tbmax As TextBox)
+Sub InsertBoundary(Var As String, AssumeText As String, tbmin As TextBox, tbmax As TextBox)
 Dim dlhs As String, drhs As String
 Dim Arr As Variant
-    Arr = Split(assumetext, "<")
+    Arr = Split(AssumeText, "<")
     If UBound(Arr) > 0 Then
         dlhs = Replace(Arr(0), "=", "")
         drhs = Replace(Arr(1), "=", "")
@@ -2176,7 +2176,7 @@ Dim Arr As Variant
             tbmin.text = dlhs
         End If
     End If
-    Arr = Split(assumetext, ">")
+    Arr = Split(AssumeText, ">")
     If UBound(Arr) > 0 Then
         dlhs = Replace(Arr(0), "=", "")
         drhs = Replace(Arr(1), "=", "")

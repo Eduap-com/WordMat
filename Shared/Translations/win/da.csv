@@ -59,7 +59,7 @@
 58#£Uligheden har alle tal som løsning.
 59#£Uligheden havde ingen løsninger indenfor $C for variabel 
 60#£Uligheden havde ingen løsninger indenfor $R for variabel 
-61#£med følgende antagelser/definitioner:  
+61#£med følgende antagelser/betingelser:  
 62#£Definer
 63#£Ingen internetforbindelse
 64#£Klik OK for at starte opdateringen.
@@ -707,7 +707,7 @@
 706#£Grader
 707#£Radianer
 708#£Vinkelenhed
-709#£Vis løsningsbetingelser (beta)
+709#£Vis løsningsbetingelser
 710#£Eksakt
 711#£Numerisk
 712#£Automatisk

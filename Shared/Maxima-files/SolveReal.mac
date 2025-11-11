@@ -228,6 +228,7 @@ infix("##",115,115)$
 
 vecmag(qwa):=if nonscalarp(qwa) then (if matrixp(qwa) then sqrt(conjugate(transpose(qwa)) . qwa) else 'vecmag(qwa)) else abs(qwa)$
 tvvec(qwa):=if scalarp(qwa) or symbolp(qwa) then ('tvvec(qwa)) else (if errcatch(length(qwa))=[2] then matrix(-qwa[2],qwa[1]) else ('tvvec(qwa)))$
+ConvertToDegr(udt):=block([],applyb1(udt,msinrul,mcosrul,mtanrul,masinrul,macosrul,matanrul))$
 ConvertLog(udt):=block([],udt:ratsimp(apply1(udt,merul,mlogrul)),ev(udt,lgog(10)=1))$
 ConvertLogN(udt):=block([],udt:ratsimp(apply1(udt,merul,mlogrul)),ev(udt,lgog(10)=1,lgog(%e)=0.4342944819032518))$
 
@@ -596,12 +597,14 @@ if op(exprq)="^" then (if not(containx(part(exprq,2),solvar)) then return(true))
 
 factoreq(lignqw):=block([exprq,exprq2,inpsiz],
 if CheckSolved(lignqw) then return(lignqw),
-exprq:lhs(lignqw)-rhs(lignqw),
+exprq:lhs(lignqw)-rhs(lignqw), 
 if IsFactored(exprq) then return (exprq=0),
 inpsiz:exprsize(exprq),
 exprq2:sqfr(exprq),
 if IsFactored(exprq2) then return (exprq2=0),
-exprq2:sqfr(logcontract(exprq)),
+exprq2:errcatch(sqfr(logcontract(exprq))),
+if exprq2=[] then return(lignqw),
+exprq2:exprq2[1],
 if exprq=exprq2 then return(lignqw),
 if IsFactored(exprq2) then (if exprsize(exprq2)<5*inpsiz then return(exprq2=0) else return(lignqw)),
 lignqw 
@@ -1182,7 +1185,7 @@ newton_method(expr, var, guess, tol, max_iter) := block(
  */
 /* Solves an equation for a variable or expression. The variable to solve for will have any arrays attached removed*/
 nsolve([paramq]) := block(
-	[qfkt, solq, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter,qex],
+	[qfkt, solq, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter, qex, qqs],print("nsolving"),
 	if length(paramq) < 2 then (
 		print("Too few arguments"),
 		return()
@@ -1215,8 +1218,6 @@ nsolve([paramq]) := block(
 		qtol: float(qtol)
 	), 
 	errormsg: false,
-	solq: [],
-
 	qex: lhs(qlign) - rhs(qlign),
 	if UseBF = true then (
 		define(qfkt(qvar), ev(lhs(qlign) - rhs(qlign), bfloat))
@@ -1225,13 +1226,18 @@ nsolve([paramq]) := block(
 	),
 	qti: absolute_real_time(),
 	/* Alternative method: length(listofvars(qfkt(x))) */
-	if not(constantp(ev(qfkt(1.234), numer))) then (
-		print("nsolve requires an equation with only 1 variable"),
-		return(qlign)
+	solq:errcatch(ev(qfkt(1.234), numer)),
+	if solq#[] then (
+		if not(constantp(solq[1])) then (
+			print("nsolve requires an equation with only 1 variable"),
+			return(qlign)
+		)
 	),
-	solq: nsolverec(qfkt(qvar), qvar, solq, qn, -6, 30),
-	solq: nsolverec(qfkt(qvar), qvar, solq, qn, -2, 100),
+	solq: [],
+
 	solq: nsolverec(qfkt(qvar), qvar, solq, -1, 3, 1000),
+	solq: nsolverec(qfkt(qvar), qvar, solq, qn, -6, 30), 
+	solq: nsolverec(qfkt(qvar), qvar, solq, qn, -2, 100),
 	solq: nsolverec(qfkt(qvar), qvar, solq, 4, 5, 100),
 	solq: nsolverec(qfkt(qvar), qvar, solq, 6, qm, 30),
 	errcatch(
@@ -1239,7 +1245,7 @@ nsolve([paramq]) := block(
 			if UseBF = true then (
 				solq: append(solq, flatten([errcatch(bf_find_root(qfkt, qvar, -10^qn, 0))]))
 			) else (
-				solq: append(solq, flatten([errcatch(find_root(qfkt, qvar, -10^qn, 0))]))
+				solq: append(solq, flatten([errcatch(find_root_safe(qfkt, qvar, -10^qn, 0))]))
 			)
 		)
 	),
@@ -1249,18 +1255,23 @@ nsolve([paramq]) := block(
 			if UseBF = true then (
 				solq: append(solq, flatten([errcatch(bf_find_root(qfkt, qvar, 0, 10^qm))]))
 			) else (
-				solq: append(solq, flatten([errcatch(find_root(qfkt, qvar, 0, 10^qm))]))
+				solq: append(solq, flatten([errcatch(find_root_safe(qfkt, qvar, 0, 10^qm))]))
 			)
 		)
 	),
-	if qfkt(0)=0.0 or qfkt(0)=0 or qfkt(0)=0.0b0 then solq: append(solq, [0]), /* nsolverec checks on both sides of 0, but never 0*/
+
+	qqs: errcatch(qfkt(0)),
+	if qqs#[] then (
+		qqs:qqs[1],
+		if qqs=0.0 or qqs=0 or qqs=0.0b0 then solq: append(solq, [0]) /* nsolverec checks on both sides of 0, but never 0*/
+	),
 	if qmm > qm then errcatch(
 		if opposite_sign(qfkt(10^qm),qfkt(10^qmm)) then
 		(
 			if UseBF = true then (
 				solq: append(solq, flatten([errcatch(bf_find_root(qfkt, qvar, 10^qm, 10^qmm))]))
 			) else (
-				solq: append(solq, flatten([errcatch(find_root(qfkt, qvar, 10^qm, 10^qmm))]))
+				solq: append(solq, flatten([errcatch(find_root_safe(qfkt, qvar, 10^qm, 10^qmm))]))
 			)
 		)
 	),
@@ -1270,10 +1281,11 @@ nsolve([paramq]) := block(
 			if UseBF = true then (
 				solq: append(solq, flatten([errcatch(bf_find_root(qfkt, qvar, -10^qnn, -10^qn))]))
 			) else (
-				solq: append(solq, flatten([errcatch(find_root(qfkt, qvar, -10^qnn, -10^qn))]))
+				solq: append(solq, flatten([errcatch(find_root_safe(qfkt, qvar, -10^qnn, -10^qn))]))
 			)
 		)
 	),
+
 	if qnewt then (
 /*		load(mnewton),newtonepsilon: 1*10^-30,newtonmaxiter: 1000,
 		qsol:flatten(bfloat(errcatch(mnewton(qfkt(qvar), qvar, 1)))), */
@@ -1367,9 +1379,12 @@ TestSolution(solq):=block([zq,zq2,NewSolq:[]],
 
 /* find_root_safe uses find_root, but checks if the solution is a discontinuity by checking the function's behavior around the root. missing af bf version */
 find_root_safe(qfkt, qvar, a, b) := block([sol, fa, fb, fap, fbp],
-	sol: errcatch(find_root(qfkt, qvar, a, b)),
+	if a>b then return([]), 
+	sol: errcatch(bf_find_root(qfkt, qvar, a, b)),
 	if sol = [] then return([]),
-	sol: sol[1],
+	sol: sol[1], 
+/*	fa: errcatch(qfkt(a)),
+	fb: errcatch(qfkt(b)), */
 	fap: errcatch(subst((sol - 10^-6),qvar,qfkt)),
 	fbp: errcatch(subst(sol + 10^-6,qvar,qfkt)),
 	fap2: errcatch(subst((sol - 10^-5),qvar,qfkt)),
@@ -1378,6 +1393,7 @@ find_root_safe(qfkt, qvar, a, b) := block([sol, fa, fb, fap, fbp],
 		return([]),
 	if (not(freeof(%i, fa)) or not(freeof(%i, fb)) or not(freeof(%i, fap)) or not(freeof(%i, fbp))) then
 		return([]),
+/*	if (not(opposite_sign(fa, fb)) and not(opposite_sign(fa, fap)) and not(opposite_sign(fa, fbp))) then */
 	if fap[1]*fbp[1]<-1000 and fap2[1]*fbp2[1]<-1000 and fap[1]*fbp[1]<fap2[1]*fbp2[1] then
 		return([]),
 	return([sol])
@@ -1385,16 +1401,17 @@ find_root_safe(qfkt, qvar, a, b) := block([sol, fa, fb, fap, fbp],
 
 /* the function qfkt must not be defined(imaginary) at one of the points a or b. The other must be defined(real). The function searches for roots at the edge of definition by bisecting the distance between a and b recursively */
 find_root_edge(qfkt, qvar, a, b) := block([sol, fa, fb, fc, dx, fai,fbi,fci],
-	dx: (b - a) / 2,
-	if dx < 1E-15 then return([]),	
+	dx: (b - a) / 2, 
+	if dx < 1E-15 then return([]),
 	fa: errcatch(subst(a,qvar,qfkt)),if length(fa)=1 then fa:fa[1],
-	fb: errcatch(subst(b,qvar,qfkt))[1],if length(fb)=1 then fb:fb[1],
+	fb: errcatch(subst(b,qvar,qfkt)),if length(fb)=1 then fb:fb[1],
 	fc: errcatch(subst(a+dx,qvar,qfkt)),if length(fc)=1 then fc:fc[1],
 	fai: freeof(%i, fa),
 	fbi: freeof(%i, fb),
 	fci: freeof(%i, fc),
 	if (not(fai) and not(fbi)) then return([]), /* if both are imaginary, return */
-	if (fai and fbi) then return( /* if both are real, check for opposite sign and use findroot if that is the case*/
+	
+	if (fai and fbi) then (  /* if both are real, check for opposite sign and use findroot if that is the case*/
 		if opposite_sign(fa, fb) then (
 			return(find_root_safe(qfkt, qvar, a, b))
 		) else return([])
@@ -1407,13 +1424,17 @@ find_root_edge(qfkt, qvar, a, b) := block([sol, fa, fb, fc, dx, fai,fbi,fci],
 	),
 	if fci then (
 		if fc<1E-15 and fc>-1E-15 then (return([c]))
-		else if fai and fci then
+		else if fai and fci and dx<1E-14 then /* This take the steepness of the curve into account. If very steep in direction towards zero, then dont need to be so close to 0  */
 		(
-			if fc/(fc-fa)<0 and fc/(fc-fa)*dx>-1E-14 then (return([a+dx])) /* This take the steepness of the curve into account. If very steep in direction towards zero, then dont need to be so close to 0  */
+			if fc<fa/3 and fa>0 and fc>0 then (return([a+dx])),
+			if fc>fa/3 and fa<0 and fc<0 then (return([a+dx]))
+/*			if fc/(fc-fa)<0 and fc/(fc-fa)*dx>-1E-14 then (return([a+dx])) */
 		),
-		if fbi and fci then
+		if fbi and fci and dx<1E-14 then
 		(
-			if fc/(fc-fb)*dx<1E-14 and fc/(fc-fb)>0 then (return([a+dx]))
+			if fc<fb/3 and fb>0 and fc>0 then (return([a+dx])),
+			if fc>fb/3 and fb<0 and fc<0 then (return([a+dx]))
+/*			if abs(fc/(fc-fb)*dx)<1E-14 and fc/(fc-fb)>0 then (return([a+dx]))*/
 		)
 	), 
 	/* one is real, the other imaginary. Check which side is real and continue searching in that direction */
@@ -1429,7 +1450,7 @@ find_root_edge(qfkt, qvar, a, b) := block([sol, fa, fb, fc, dx, fai,fbi,fci],
 	(
 		return(find_root_edge(qfkt, qvar, b - dx, b))	
 	)
-	else if fbi and not(fai) then
+	else if fci and not(fai) then
 	(
 		return(find_root_edge(qfkt, qvar, a, a + dx))	
 	)		
@@ -1456,7 +1477,7 @@ find_root_edge(qfkt, qvar, a, b) := block([sol, fa, fb, fc, dx, fai,fbi,fci],
  *   typically start with qn=1 and qm=15. Solverec then test 91 values between 0 and 1 and then between -1 and 0. Then continues with 91 values between 1 and 10 and -1 and -10. This is repeated until
  *   a specified number of solutions `qantal` is found, or a timeout occurs or the maximum power level `qm` is reached. If two different signs are found for neighboring values, the Maxima function `bf_find_root` is used to find the root.
  */
-nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2, zl],
+nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2, zl,fpprec],
 	qi: 1,
 	if bfloatp(qn) then (
 			UseBF: true,
@@ -1472,8 +1493,10 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 		),zl, ql
 	)), 
 	while qi < length(glf) do (
-		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (
-			sollq: append(sollq, [ql[qi]])
+		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (fpprec:64,
+			if ev(bfloat(qfkt(qvar)),qvar=bfloat(ql[qi]),bfloat)=0.0b0 then(
+				sollq: append(sollq, [ql[qi]])
+			)
 /*			if opposite_sign(qfkt(ql[qi] - 10^(qn - 3)),qfkt(ql[qi] + 10^(qn - 3))) then
 			(
 				if UseBF = true then (
@@ -1485,8 +1508,10 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 			else if not(freeof(%i, glf[qi+1])) then (
 				sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, ql[qi], ql[qi + 1]))]))
 			)*/
-		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (
-			sollq: append(sollq, [ql[qi+1]])
+		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (fpprec:64,
+			if ev(bfloat(qfkt(qvar)),qvar=bfloat(ql[qi+1]),bfloat)=0.0b0 then(
+				sollq: append(sollq, [ql[qi+1]])
+			)
 		) elseif not(freeof(%i, glf[qi])) or not(freeof(%i, glf[qi+1])) then (
 			if (not(freeof(%i, glf[qi])) and freeof(%i, glf[qi+1])) or (freeof(%i, glf[qi]) and not(freeof(%i, glf[qi+1]))) then (
 				sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, ql[qi], ql[qi + 1]))]))
@@ -1512,8 +1537,10 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 	glf: flatten(errcatch(qfkt(-ql))),
 
 	while qi < length(glf) do (
-		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (
-			sollq: append(sollq, [-ql[qi]])
+		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (fpprec:64,
+			if ev(bfloat(qfkt(qvar)),qvar=bfloat(-ql[qi]))=0.0b0 then(
+				sollq: append(sollq, [-ql[qi]]),print("xx")
+			)
 /*			if ql[qi]>2.8 and ql[qi]<3.2 then print("glf[",qi,"]=",glf[qi]," glf[",qi+1,"]=",glf[qi+1]),
 			if opposite_sign(qfkt(-ql[qi] - 10^(qn - 3)),qfkt(-ql[qi] + 10^(qn - 3))) then
 			(
@@ -1526,8 +1553,10 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 			else if not(freeof(%i, glf[qi+1])) then (
 				sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, -ql[qi+1], -ql[qi]+1E-10))]))
 			)*/
-		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (
-			sollq: append(sollq, [-ql[qi + 1]])
+		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (fpprec:64,
+			if ev(bfloat(qfkt(qvar)),qvar=bfloat(-ql[qi+1]),bfloat)=0.0b0 then(
+				sollq: append(sollq, [-ql[qi+1]])
+			)
 		) elseif not(freeof(%i, glf[qi])) or not(freeof(%i, glf[qi+1])) then (
 			if (not(freeof(%i, glf[qi])) and freeof(%i, glf[qi+1])) or (freeof(%i, glf[qi]) and not(freeof(%i, glf[qi+1]))) then (
 				sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, ql[qi], ql[qi + 1]))]))
@@ -1993,20 +2022,25 @@ TestTF(qexpr):=block([qres,qvar,qweks,qsave],qsave:qexpr,
 if not(freeof("=",qexpr)) then qexpr:equal(lhs(qexpr)-rhs(qexpr),0),
 qres:is(qexpr),if qres=true then return(qres),qres:is(trigreduce(qexpr)),
 if qres=true then return(qres),
-    qres:is(radcan(qexpr)),
-    if qres=true then return(qres),
-    if qres=true then (print("Numerically tested"), return(qres)),
-            (errcatch(qweks:ceiling(log(ev(abs(ev(lhs(qsave),numer)),numer))/log(10))),
-        if not(integerp(qweks)) then 
-            qweks=1, 
-        if NoSigFig>5 then 
-            qweks:qweks+NoSigFig-5,
-        if qweks<0 then 
-            qweks:0 ,
-        qres:is(ev(abs(ev(lhs(qexpr)-rhs(qexpr),numer)),numer)<10^(-NoSigFig+qweks+1)),
-                if not(qres) then print(sconcat("Possible solution removed: ",qsave))),
-    if qres=true then return(qres),
-     (qvar:listofvars(qexpr),if length(qvar)>0 then qvar:first(qvar) else return(qres),qres:zeroequiv(lhs(qexpr)-rhs(qexpr),qvar)),
+qres:is(radcan(qexpr)), 
+if qres=true then return(qres),
+if qres=true then (print("Numerically tested"), return(qres)),
+(errcatch(qweks:ceiling(log(ev(abs(ev(lhs(qsave),numer)),numer))/log(10))),
+if not(integerp(qweks)) then 
+	qweks=1, 
+if NoSigFig>5 then 
+	qweks:qweks+NoSigFig-5,
+if qweks<0 then qweks:0 ,
+qres:is(ev(abs(ev(lhs(qexpr)-rhs(qexpr),numer)),numer)<10^(-NoSigFig+qweks+1)),
+		if not(qres) then print(sconcat("Possible solution removed: ",qsave))),
+if qres=true then (print("Numerically tested to within",qweks,"decimals" ),return(qres)),
+(qvar:listofvars(qexpr),
+	if length(qvar)>0 then 
+		qvar:first(qvar) 
+	else 
+		return(qres),
+		qres:zeroequiv(lhs(qexpr)-rhs(qexpr),qvar)
+	),
 qres)$
 
 /* Til haandtering af dobbeltbetydning af determinant  det(matrix) eller det(vektor,vektor) */

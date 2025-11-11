@@ -59,7 +59,7 @@
 58#£All numbers solve this inequality
 59#£The inequality had no solutions in the domain $C for variable 
 60#£The inequality had no solutions in the domain $R for variable 
-61#£With the following assumptions/definitions:  
+61#£with the following assumptions/conditions:
 62#£Define
 63#£No internet connection
 64#£Click OK to start the update
@@ -707,7 +707,7 @@
 706#£Degrees
 707#£Radians
 708#£Angle unit
-709#£Show solution conditions (beta)
+709#£View solution conditions
 710#£Exact
 711#£Numeric
 712#£Automatic
