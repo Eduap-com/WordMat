@@ -59,7 +59,7 @@
 58#£Kaikki numerot ratkaisevat tŠmŠn epŠtasa-arvon
 59#£Eriarvoisuuteen ei ollut ratkaisuja muuttujien $C
 60#£Eriarvoisuuteen ei ollut ratkaisuja $R muuttujalle
-61#£Seuraavilla oletuksilla/mŠŠritelmillŠ:
+61#£seuraavin oletuksin/ehdoin:
 62#£MŠŠritellŠ
 63#£Ei Internet-yhteyttŠ
 64#£Aloita pŠivitys napsauttamalla OK
@@ -707,7 +707,7 @@
 706#£Astetta
 707#£Radiaaneina
 708#£Kulman yksikkš
-709#£NŠytŠ ratkaisun ehdot (beta)
+709#£Ratkaisun ehtojen tarkasteleminen
 710#£Tarkka
 711#£Numeerinen
 712#£Automaattinen
@@ -910,3 +910,7 @@
 909#£Koodi
 910#£KoodikenttŠŠ ei voitu lisŠtŠ tŠhŠn.
 911#£SuuntakenttiŠ voidaan piirtŠŠ vain 1. kertaluvun differentiaaliyhtŠlšille muodossa y'=...
+912#£WordMatin asetus on asetettu laskemaan asteina. Onko se tarkoitus?
+913#£Hattuoperaattorin kŠyttš mŠŠritelmien nimissŠ ei ole sallittua.
+914#£Numeeristen merkkien kŠyttš mŠŠritelmien nimissŠ ei ole sallittua.
+915#£Olet asettanut funktiolle liian monta parametria:

@@ -59,7 +59,7 @@
 58#£Ojämlikhet har alla siffror som en lösning.
 59#£Ojämlikhet hade inga lösningar i $C för variabel
 60#£Ojämlikhet hade inga lösningar inom $R för variabel
-61#£med följande antaganden/definitioner:
+61#£med följande antaganden/villkor:
 62#£Definiera
 63#£Ingen internetuppkoppling
 64#£Klicka på OK för att starta uppdateringen.
@@ -707,7 +707,7 @@
 706#£Gradtal
 707#£Radianer
 708#£Vinkel enhet
-709#£Visa lösningsvillkor (beta)
+709#£Visa lösningsvillkor
 710#£Exakt
 711#£Numerisk
 712#£Automatisk
@@ -910,3 +910,7 @@
 909#£Kod
 910#£Det gick inte att infoga ett kodfält här.
 911#£Riktningsfält kan endast ritas för 1:a ordningens differentialekvationer på formen y'=...
+912#£WordMat's inställning är inställd på att beräkna i grader. Är det meningen?
+913#£Det är inte tillåtet att använda operatorn hat i definitionsnamn.
+914#£Det är inte tillåtet att använda numeriska tecken i definitionsnamn.
+915#£Du har ställt in för många parametrar för funktionen:

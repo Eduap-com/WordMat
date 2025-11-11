@@ -59,7 +59,7 @@
 58#£Wszystkie liczby rozwiazuja te nier—wnosc
 59#£Nier—wnosc nie miala rozwiazania w dziedzinie $C dla zmiennej
 60#£Nier—wnosc nie miala rozwiazania w dziedzinie $R dla zmiennych
-61#£Przy nastepujacych zalozeniach/definicjach:
+61#£przy nastepujacych zalozeniach/warunkach:
 62#£Definiowac
 63#£Brak polaczenia z Internetem
 64#£Kliknij przycisk OK, aby rozpoczac aktualizacje
@@ -707,7 +707,7 @@
 706#£Stopni
 707#£Radianach
 708#£Jednostka kata
-709#£Pokaz warunki rozwiazania (beta)
+709#£Wyswietlanie warunk—w rozwiazania
 710#£Dokladny
 711#£Numeryczny
 712#£Automatyczne
@@ -910,3 +910,7 @@
 909#£Kod
 910#£W tym miejscu nie mozna wstawic pola kodu.
 911#£Pola kierunkowe mozna rysowac tylko dla r—wnan r—zniczkowych 1. rzedu w postaci y'=...
+912#£Ustawienie programu WordMat jest ustawione na obliczanie w stopniach. Czy taka jest intencja?
+913#£Niedozwolone jest uzywanie operatora hat w nazwach definicji.
+914#£Niedozwolone jest uzywanie znak—w numerycznych w nazwach definicji.
+915#£Ustawiles zbyt wiele parametr—w dla funkcji:

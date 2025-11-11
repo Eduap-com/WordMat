@@ -59,7 +59,7 @@
 58#£îjavni hevur ¿ll t¿l sum loysn.
 59#£îjavni hevi ongar loysnir ’ $C fyri variabel
 60#£îjavni hevi ongar loysnir innan $R fyri variabel
-61#£vi hesum forsendum/skilgreiningum:
+61#£vi hesum forsendum/treytum:
 62#£Lsa
 63#£Einki internetsamband
 64#£Trst ‡ OK fyri at byrja dagf¿ringina.
@@ -707,7 +707,7 @@
 706#£Pr—gv
 707#£Radianir
 708#£Vinkla eining
-709#£Skoa loysingartreytir (beta)
+709#£Skoa loysingartreytir
 710#£Neyvt
 711#£T¿l
 712#£Sj‡lvvirkandi
@@ -910,3 +910,7 @@
 909#£K—i
 910#£Eitt kodefelt kundi ikki setast inn her.
 911#£Vegmarkir kunnu einans teknast fyri differentiall’kningar av 1.
+912#£Innstillingin hj‡ WordMat er sett til at rokna ’ stigum. Er ta ¾tlanin?
+913#£Ta er ikki loyvt at brœka hattaoperatorin ’ skilgreiningsn¿vnum.
+914#£Ta er ikki loyvt at brœka t¿l ’ skilgreiningarn¿vnum.
+915#£Tœ hevur sett ov n—gvar parameterar til funkti—nina:
