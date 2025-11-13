@@ -31,6 +31,7 @@ Sub RunFirst()
     DoEvents
     WMRunTime = Timer()
 
+    SetMathAutoCorrect
     ChangeAutoHyphen ' so 1-(-1) does not translate to 1--1 dash
 
 #If Mac Then

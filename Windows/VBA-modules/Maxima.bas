@@ -22,10 +22,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
     
     SaveBackup
     
-    If omax Is Nothing Then
-        SetMathAutoCorrect
-        Set omax = New CMaxima
-    End If
+    If omax Is Nothing Then Set omax = New CMaxima
     
 #If Mac Then
 #Else
@@ -860,28 +857,32 @@ Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
         If p <> 0 Then
             Do While p <> 0
 #If Mac Then
-                p2 = InStr(p + 10, omax.KommentarOutput, vbCr)
+                p2 = InStr(p + 15, omax.KommentarOutput, vbCr)
 #Else
-                p2 = InStr(p + 10, omax.KommentarOutput, vbLf)
+                p2 = InStr(p + 12, omax.KommentarOutput, vbLf)
 #End If
                 If p2 = 0 Then p2 = Len(omax.KommentarOutput)
-                s = Trim$(Mid$(omax.KommentarOutput, p + 13, p2 - p - 13))
-                s = TrimR(s, vbCrLf)
-                s = TrimR(s, vbCr)
-                s = TrimR(s, vbLf)
-                s = Trim$(s)
-                s = TrimL(s, "[")
-                s = TrimR(s, "]")
-                s = Replace(s, ",", ", ")
-                p = InStr(p + 10, omax.KommentarOutput, "Assumptions:")
-                Ass = Ass & s & ", "
+                If p2 - p > 12 Then
+                    s = Trim$(Mid$(omax.KommentarOutput, p + 13, p2 - p - 13))
+                    s = TrimR(s, vbCrLf)
+                    s = TrimR(s, vbCr)
+                    s = TrimR(s, vbLf)
+                    s = Trim$(s)
+                    s = TrimL(s, "[")
+                    s = TrimR(s, "]")
+                    s = Replace(s, ",", ", ")
+                    p = InStr(p + 10, omax.KommentarOutput, "Assumptions:")
+                    If Len(s) > 1 Then Ass = Ass & s & ", "
+                End If
             Loop
-            Ass = Left(Ass, Len(Ass) - 2)
-            '            s = FormatDefinitions(s) ' better with omath
-            Selection.TypeText TT.A(61) & " " ' & s
-            InsertAssumptionsOMath Ass
-            RestartMaximaNextRun = True
-            HasAssumptions = True
+            If Len(Ass) > 1 Then
+                '            s = FormatDefinitions(s) ' better with omath
+                Ass = Left(Ass, Len(Ass) - 2)
+                Selection.TypeText TT.A(61) & " " ' & s
+                InsertAssumptionsOMath Ass
+                RestartMaximaNextRun = True
+                HasAssumptions = True
+            End If
         End If
     End If
     Selection.TypeParagraph

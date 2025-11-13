@@ -1458,13 +1458,14 @@ End Function
 
 Sub SetMathAutoCorrect()
 ' cant be run from automacros
-    If MaximaGangeTegn = VBA.ChrW$(183) Then
-        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW$(183))
-    ElseIf MaximaGangeTegn = VBA.ChrW$(215) Then
-        Call Application.OMathAutoCorrect.Entries.Add(Name:="*", Value:=VBA.ChrW$(215))
+    On Error Resume Next
+    If MaximaGangeTegn = ChrW$(183) Then
+        Application.OMathAutoCorrect.Entries.Add Name:="*", Value:=VBA.ChrW$(183)
+    ElseIf MaximaGangeTegn = ChrW$(215) Then
+        Application.OMathAutoCorrect.Entries.Add Name:="*", Value:=VBA.ChrW$(215)
     Else
         On Error Resume Next
-        Call Application.OMathAutoCorrect.Entries("*").Delete
+        Application.OMathAutoCorrect.Entries("*").Delete
     End If
 End Sub
 
