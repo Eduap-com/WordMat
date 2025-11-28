@@ -207,14 +207,14 @@ Function OpenExcelWB(FilNavn As String, Optional startark As String, Optional Wo
     OpenExcelMac FilNavn & ";" & startark
 #Else
     Dim xclapp As Object 'Excel.Application
+    Dim wordmatsti As String
     Set xclapp = GetObject(, "Excel.Application")
     If Err.Number <> 0 Then
         Set xclapp = CreateObject("Excel.Application")
     End If
-    Dim wordmatsti As String
     xclapp.visible = True
     wordmatsti = GetProgramFilesDir & "\WordMat\Excelfiles\" & FilNavn
-    If Dir(wordmatsti) = "" Then
+    If Dir(wordmatsti) = vbNullString Then
         wordmatsti = Environ("AppData") & "\WordMat\Excelfiles\" & FilNavn
     End If
 

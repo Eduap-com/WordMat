@@ -1114,7 +1114,7 @@ Public Property Let CASengineTempOnly(xval As Integer)
     mCASengine = xval
 End Property
 Public Property Get CASengineRegOnly() As Integer
-    mCASengine = CInt(GetRegSetting("CASengine"))
+    mCASengine = val(GetRegSetting("CASengine"))
     CASengineRegOnly = mCASengine
 End Property
 Public Property Get RegAppVersion() As String
@@ -1169,7 +1169,7 @@ Public Property Let SettUseVBACAS(xval As Boolean)
 End Property
 Public Property Get SettShortcutAltM() As Integer
     If mSettShortcutAltM = 0 Then
-        mSettShortcutAltM = CInt(GetRegSetting("SettShortcutAltM"))
+        mSettShortcutAltM = val(GetRegSetting("SettShortcutAltM"))
     End If
     SettShortcutAltM = mSettShortcutAltM
 End Property
@@ -1179,7 +1179,7 @@ Public Property Let SettShortcutAltM(xval As Integer)
 End Property
 Public Property Get SettShortcutAltM2() As Integer
     If mSettShortcutAltM2 <= 0 Then
-        mSettShortcutAltM2 = CInt(GetRegSetting("SettShortcutAltM2"))
+        mSettShortcutAltM2 = val(GetRegSetting("SettShortcutAltM2"))
     End If
     SettShortcutAltM2 = mSettShortcutAltM2
 End Property
@@ -1189,7 +1189,7 @@ Public Property Let SettShortcutAltM2(xval As Integer)
 End Property
 Public Property Get SettShortcutAltB() As Integer
     If mSettShortcutAltB = 0 Then
-        mSettShortcutAltB = CInt(GetRegSetting("SettShortcutAltB"))
+        mSettShortcutAltB = val(GetRegSetting("SettShortcutAltB"))
     End If
     SettShortcutAltB = mSettShortcutAltB
 End Property
@@ -1199,7 +1199,7 @@ Public Property Let SettShortcutAltB(xval As Integer)
 End Property
 Public Property Get SettShortcutAltL() As Integer
     If mSettShortcutAltL = 0 Then
-        mSettShortcutAltL = CInt(GetRegSetting("SettShortcutAltL"))
+        mSettShortcutAltL = val(GetRegSetting("SettShortcutAltL"))
     End If
     SettShortcutAltL = mSettShortcutAltL
 End Property
@@ -1209,7 +1209,7 @@ Public Property Let SettShortcutAltL(xval As Integer)
 End Property
 Public Property Get SettShortcutAltD() As Integer
     If mSettShortcutAltD = 0 Then
-        mSettShortcutAltD = CInt(GetRegSetting("SettShortcutAltD"))
+        mSettShortcutAltD = val(GetRegSetting("SettShortcutAltD"))
     End If
     SettShortcutAltD = mSettShortcutAltD
 End Property
@@ -1219,7 +1219,7 @@ Public Property Let SettShortcutAltD(xval As Integer)
 End Property
 Public Property Get SettShortcutAltS() As Integer
     If mSettShortcutAltS = 0 Then
-        mSettShortcutAltS = CInt(GetRegSetting("SettShortcutAltS"))
+        mSettShortcutAltS = val(GetRegSetting("SettShortcutAltS"))
     End If
     SettShortcutAltS = mSettShortcutAltS
 End Property
@@ -1229,7 +1229,7 @@ Public Property Let SettShortcutAltS(xval As Integer)
 End Property
 Public Property Get SettShortcutAltP() As Integer
     If mSettShortcutAltP = 0 Then
-        mSettShortcutAltP = CInt(GetRegSetting("SettShortcutAltP"))
+        mSettShortcutAltP = val(GetRegSetting("SettShortcutAltP"))
     End If
     SettShortcutAltP = mSettShortcutAltP
 End Property
@@ -1239,7 +1239,7 @@ Public Property Let SettShortcutAltP(xval As Integer)
 End Property
 Public Property Get SettShortcutAltF() As Integer
     If mSettShortcutAltF = 0 Then
-        mSettShortcutAltF = CInt(GetRegSetting("SettShortcutAltF"))
+        mSettShortcutAltF = val(GetRegSetting("SettShortcutAltF"))
     End If
     SettShortcutAltF = mSettShortcutAltF
 End Property
@@ -1249,7 +1249,7 @@ Public Property Let SettShortcutAltF(xval As Integer)
 End Property
 Public Property Get SettShortcutAltO() As Integer
     If mSettShortcutAltO = 0 Then
-        mSettShortcutAltO = CInt(GetRegSetting("SettShortcutAltO"))
+        mSettShortcutAltO = val(GetRegSetting("SettShortcutAltO"))
     End If
     SettShortcutAltO = mSettShortcutAltO
 End Property
@@ -1259,7 +1259,7 @@ Public Property Let SettShortcutAltO(xval As Integer)
 End Property
 Public Property Get SettShortcutAltR() As Integer
     If mSettShortcutAltR = 0 Then
-        mSettShortcutAltR = CInt(GetRegSetting("SettShortcutAltR"))
+        mSettShortcutAltR = val(GetRegSetting("SettShortcutAltR"))
     End If
     SettShortcutAltR = mSettShortcutAltR
 End Property
@@ -1269,7 +1269,7 @@ Public Property Let SettShortcutAltR(xval As Integer)
 End Property
 Public Property Get SettShortcutAltJ() As Integer
     If mSettShortcutAltJ = 0 Then
-        mSettShortcutAltJ = CInt(GetRegSetting("SettShortcutAltJ"))
+        mSettShortcutAltJ = val(GetRegSetting("SettShortcutAltJ"))
     End If
     SettShortcutAltJ = mSettShortcutAltJ
 End Property
@@ -1279,7 +1279,7 @@ Public Property Let SettShortcutAltJ(xval As Integer)
 End Property
 Public Property Get SettShortcutAltN() As Integer
     If mSettShortcutAltN = 0 Then
-        mSettShortcutAltN = CInt(GetRegSetting("SettShortcutAltN"))
+        mSettShortcutAltN = val(GetRegSetting("SettShortcutAltN"))
     End If
     SettShortcutAltN = mSettShortcutAltN
 End Property
@@ -1289,7 +1289,7 @@ Public Property Let SettShortcutAltN(xval As Integer)
 End Property
 Public Property Get SettShortcutAltE() As Integer
     If mSettShortcutAltE = 0 Then
-        mSettShortcutAltE = CInt(GetRegSetting("SettShortcutAltE"))
+        mSettShortcutAltE = val(GetRegSetting("SettShortcutAltE"))
     End If
     SettShortcutAltE = mSettShortcutAltE
 End Property
@@ -1299,7 +1299,7 @@ Public Property Let SettShortcutAltE(xval As Integer)
 End Property
 Public Property Get SettShortcutAltT() As Integer
     If mSettShortcutAltT = 0 Then
-        mSettShortcutAltT = CInt(GetRegSetting("SettShortcutAltT"))
+        mSettShortcutAltT = val(GetRegSetting("SettShortcutAltT"))
     End If
     SettShortcutAltT = mSettShortcutAltT
 End Property
@@ -1309,7 +1309,7 @@ Public Property Let SettShortcutAltT(xval As Integer)
 End Property
 Public Property Get SettShortcutAltQ() As Integer
     If mSettShortcutAltQ = 0 Then
-        mSettShortcutAltQ = CInt(GetRegSetting("SettShortcutAltQ"))
+        mSettShortcutAltQ = val(GetRegSetting("SettShortcutAltQ"))
     End If
     SettShortcutAltQ = mSettShortcutAltQ
 End Property
@@ -1319,7 +1319,7 @@ Public Property Let SettShortcutAltQ(xval As Integer)
 End Property
 Public Property Get SettShortcutAltG() As Integer
     If mSettShortcutAltG = 0 Then
-        mSettShortcutAltG = CInt(GetRegSetting("SettShortcutAltG"))
+        mSettShortcutAltG = val(GetRegSetting("SettShortcutAltG"))
     End If
     SettShortcutAltG = mSettShortcutAltG
 End Property
@@ -1329,7 +1329,7 @@ Public Property Let SettShortcutAltG(xval As Integer)
 End Property
 Public Property Get SettShortcutAltGr() As Integer
     If mSettShortcutAltGr = 0 Then
-        mSettShortcutAltGr = CInt(GetRegSetting("SettShortcutAltGr"))
+        mSettShortcutAltGr = val(GetRegSetting("SettShortcutAltGr"))
     End If
     SettShortcutAltGr = mSettShortcutAltGr
 End Property
@@ -1361,7 +1361,7 @@ End Property
 
 
 Public Property Get ReadSettingsFromFile() As Integer ' 0= not set, 1=dont read settings from file, 2=read from appdata, 3=read from program files, 4= first try appdata then program files, 5= first try program files, then appdata
-    ReadSettingsFromFile = CInt(GetRegSetting("ReadSettingsFromFile"))
+    ReadSettingsFromFile = val(GetRegSetting("ReadSettingsFromFile"))
     If ReadSettingsFromFile <= 0 Then ' If a computer is run as a shared pc from intune. You can set this global key to look for the registry file
         ReadSettingsFromFile = val(RegKeyRead("HKEY_LOCAL_MACHINE\SOFTWARE\WORDMAT\Settings\ReadSettingsFromFile"))
     End If
@@ -1383,7 +1383,7 @@ Public Function GetRegSetting(key As String) As Integer
         GetRegSetting = 0
     Else
         On Error Resume Next
-        GetRegSetting = CInt(s)
+        GetRegSetting = val(s)
     End If
 End Function
 Private Sub SetRegSetting(ByVal key As String, ByVal val As Integer)
@@ -1605,13 +1605,13 @@ Private Sub SetSetting(Sett As String, SettVal As String, Optional SaveToReg As 
         mkommando = CBool(SettVal)
         If SaveToReg Then MaximaKommando = mkommando
     ElseIf Sett = "Exact" Then
-        mExact = CInt(SettVal)
+        mExact = val(SettVal)
         If SaveToReg Then MaximaExact = mExact
     ElseIf Sett = "Radians" Then
         mradians = CBool(SettVal)
         If SaveToReg Then Radians = mradians
     ElseIf Sett = "SigFig" Then
-        mcifre = CInt(SettVal)
+        mcifre = val(SettVal)
         If SaveToReg Then MaximaCifre = mcifre
     ElseIf Sett = "Complex" Then
         mComplex = CBool(SettVal)
@@ -1638,7 +1638,7 @@ Private Sub SetSetting(Sett As String, SettVal As String, Optional SaveToReg As 
         mbigfloat = SettVal
         If SaveToReg Then MaximaBigFloat = mbigfloat
     ElseIf Sett = "AntalBeregninger" Then
-        mantalb = CInt(SettVal)
+        mantalb = val(SettVal)
         If SaveToReg Then
             Antalberegninger = mantalb
             AntalB = mantalb
@@ -1653,13 +1653,13 @@ Private Sub SetSetting(Sett As String, SettVal As String, Optional SaveToReg As 
         mpolaroutput = CBool(SettVal)
         If SaveToReg Then PolarOutput = mpolaroutput
     ElseIf Sett = "GraphApp" Then
-        mgraphapp = CInt(SettVal)
+        mgraphapp = val(SettVal)
 #If Mac Then
         If mgraphapp = 0 Then mgraphapp = 2 ' gnuplot is not available on mac
 #End If
         If SaveToReg Then GraphApp = mgraphapp
     ElseIf Sett = "Language" Then
-        mlanguage = CInt(SettVal)
+        mlanguage = val(SettVal)
         If SaveToReg Then LanguageSetting = mlanguage
     ElseIf Sett = "dAsDiffChr" Then
         mdasdiffchr = CBool(SettVal)
@@ -1686,22 +1686,22 @@ Private Sub SetSetting(Sett As String, SettVal As String, Optional SaveToReg As 
         maskref = CBool(SettVal)
         If SaveToReg Then EqAskRef = maskref
     ElseIf Sett = "BackupType" Then
-        mBackupType = CInt(SettVal)
+        mBackupType = val(SettVal)
         If SaveToReg Then BackupType = mBackupType
     ElseIf Sett = "BackupNo" Then
-        mbackupno = CInt(SettVal)
+        mbackupno = val(SettVal)
         If SaveToReg Then BackupNo = mbackupno
     ElseIf Sett = "BackupMaxNo" Then
-        mbackupmaxno = CInt(SettVal)
+        mbackupmaxno = val(SettVal)
         If SaveToReg Then BackupMaxNo = mbackupmaxno
     ElseIf Sett = "BackupTime" Then
-        mbackuptime = CInt(SettVal)
+        mbackuptime = val(SettVal)
         If SaveToReg Then BackupTime = mbackuptime
     ElseIf Sett = "LatexSectionNumbering" Then
         mLatexSectionNumbering = CBool(SettVal)
         If SaveToReg Then LatexSectionNumbering = mLatexSectionNumbering
     ElseIf Sett = "LatexDocumentclass" Then
-        mLatexDocumentclass = CInt(SettVal)
+        mLatexDocumentclass = val(SettVal)
         If SaveToReg Then LatexDocumentclass = mLatexDocumentclass
     ElseIf Sett = "LatexFontsize" Then
         mLatexFontsize = SettVal
@@ -1710,19 +1710,19 @@ Private Sub SetSetting(Sett As String, SettVal As String, Optional SaveToReg As 
         mLatexWordMargins = CBool(SettVal)
         If SaveToReg Then LatexWordMargins = mLatexWordMargins
     ElseIf Sett = "LatexTitlePage" Then
-        mLatexTitlePage = CInt(SettVal)
+        mLatexTitlePage = val(SettVal)
         If SaveToReg Then LatexTitlePage = mLatexTitlePage
     ElseIf Sett = "LatexToc" Then
-        mLatexTOC = CInt(SettVal)
+        mLatexTOC = val(SettVal)
         If SaveToReg Then LatexTOC = mLatexTOC
     ElseIf Sett = "CASengine" Then
-        mCASengine = CInt(SettVal)
+        mCASengine = val(SettVal)
         If SaveToReg Then CASengine = mCASengine
     ElseIf Sett = "LastUpdateCheck" Then
         mLastUpdateCheck = SettVal
         If SaveToReg Then LastUpdateCheck = mLastUpdateCheck
     ElseIf Sett = "DllConnType" Then
-        mDllConnType = CInt(SettVal)
+        mDllConnType = val(SettVal)
         If SaveToReg Then DllConnType = mDllConnType
     ElseIf Sett = "InstallLocation" Then
         mInstallLocation = SettVal
@@ -1731,7 +1731,7 @@ Private Sub SetSetting(Sett As String, SettVal As String, Optional SaveToReg As 
         SettUseVBACAS = SettVal ' mUseVBACAS
 '        If SaveToReg Then SettUseVBACAS = msettusevbacas
     ElseIf Sett = "DecOutType" Then
-        mDecOutType = CInt(SettVal)
+        mDecOutType = val(SettVal)
         If SaveToReg Then MaximaDecOutType = mDecOutType
     ElseIf Sett = "FormelUddannelse" Then
         SetRegSettingString Sett, SettVal

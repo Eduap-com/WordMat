@@ -464,6 +464,12 @@ Sub RunTestSequence()
     ' This has previously given the wrong solution, as there are two solutions, but when the constant is inserted, only one fits.
     If TestSolveDE("(x+5)" & VBA.ChrW$(183) & "y^'=" & VBA.ChrW$(8730) & "y", "y=1;x=-4", "y=(ln" & VBA.ChrW$(8289) & "(|x+5|)+2)^2/4") Then GoTo slut
 
+    'unit test
+    MaximaUnits = True
+    If TestBeregn("10 km/time", "=2,777778  m/s") Then GoTo slut
+    MaximaUnits = False
+
+
 ggbtest:
     ' GeoGebra test
     CASengineTempOnly = 2

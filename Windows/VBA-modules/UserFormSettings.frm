@@ -389,6 +389,7 @@ Private Sub UserForm_Activate()
 #End If
     
     If ReadSettingsFromFile <= 1 Then
+        CASengine = CASengine ' to ensure casengine setting is saved to registry before reading all settings. Solve does not set CASengine in registry
         ReadAllSettingsFromRegistry
     End If
     
@@ -529,11 +530,11 @@ Sub SetButtonsAccordingToSettings()
     End If
 
     If ReadSettingsFromFile <= 1 Then
-        If CASengineRegOnly = 0 Then
+        If CASengine = 0 Then 'CASengineRegOnly
             OptionButton_casmaxima.Value = True
-        ElseIf CASengineRegOnly = 1 Then
+        ElseIf CASengine = 1 Then
             OptionButton_casgeogebra.Value = True
-        ElseIf CASengineRegOnly = 2 Then
+        ElseIf CASengine = 2 Then
             OptionButton_casgeogebradirect.Value = True
         Else
             OptionButton_casmaxima.Value = True

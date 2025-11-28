@@ -803,7 +803,7 @@ disablegroupbyadd() := block(post_eval_functions : [processunits]);
 
 /* Startup Message */
 print("*******************************************************************");
-print("*                       Units version 0.50                        *");
+print("*                       Units version 0.50 x                       *");
 print("*          Definitions based on the NIST Reference on             *");
 print("*              Constants, Units, and Uncertainty                  *");
 print("*       Conversion factors from various sources including         *");

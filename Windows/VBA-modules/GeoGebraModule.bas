@@ -536,7 +536,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
       If InStr(text, "delta") <> 0 Then text = Replace(text, "delta", VBA.ChrW$(948))
       If InStr(text, "alpha") <> 0 Then text = Replace(text, "alpha", VBA.ChrW$(945))
       If InStr(text, "beta") <> 0 Then text = Replace(text, "beta", VBA.ChrW$(946))
-      If InStr(text, "gamma_incomplete") <> 0 Then text = Replace(text, "gamma_incomplete", "\Gamma_incomplete ")
+      If InStr(text, "gamma_incomplete") <> 0 Then text = Replace(text, "gamma_incomplete", "gamma")
       If InStr(text, "gamma(") <> 0 Then text = Replace(text, "gamma(", "Gamma(")
       If InStr(text, "gamma") <> 0 Then text = Replace(text, "gamma", VBA.ChrW$(915))
       If InStr(text, "Gamma(") <> 0 Then text = Replace(text, "Gamma(", "gamma(")

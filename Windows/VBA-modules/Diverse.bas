@@ -1459,7 +1459,7 @@ End Function
 Sub SetMathAutoCorrect()
 ' cant be run from automacros
     On Error Resume Next
-    If MaximaGangeTegn = ChrW$(183) Then
+    If MaximaGangeTegn = ChrW$(183) Or MaximaGangeTegn = vbNullString Then
         Application.OMathAutoCorrect.Entries.Add Name:="*", Value:=VBA.ChrW$(183)
     ElseIf MaximaGangeTegn = ChrW$(215) Then
         Application.OMathAutoCorrect.Entries.Add Name:="*", Value:=VBA.ChrW$(215)

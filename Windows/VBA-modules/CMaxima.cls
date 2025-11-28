@@ -319,10 +319,11 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
     
     Expr = Replace(Expr, """", "") ' The answer will typically be run through the num function which adds "" to numbers
     
+    k = "fpprintprec:" & MaximaCifre & "$NoSigFig:" & MaximaCifre & "$" ' there are problems with dectalallNum, so this fppprintprec method is used here with units
     If basedim Then ' all units are reverted to base SI-units
-        k = Expr & ",numer;applyb1(%,unitrule),numer;dectalallNum(%),numer;"
+        k = k & Expr & ",numer;applyb1(%,unitrule),numer;dectalallNum(%),numer;"
     Else
-        k = "numer:true$uforget(append(globalbaseunitlisting,globalderivedunitlisting))$"
+        k = "numer:true$uforget(append(globalbaseunitlisting,globalderivedunitlisting))$" & k
         If Not OutUnits = vbNullString Then
             Arr = Split(OutUnits, ",")
             For i = 0 To UBound(Arr) ' It has to be done this way because you cannot run setunits on a list where the same type of unit appears twice. e.g. eV and J
@@ -340,7 +341,7 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
     End If
 '    MsgBox k
 #If Mac Then
-    k = GetMaximaSettingsString & "fpprintprec:" & MaximaCifre & "$" & k ' there are problems with dectalallNum, so this fppprintprec method is used here with units
+    k = GetMaximaSettingsString & k
     s = ExecuteMaximaViaFile(k, 3, True)
     ConvertMaximaUnits = GetMaximaUnitOutput(s) 'MaxProcUnit.LastMaximaOutput
 #Else
@@ -2344,9 +2345,10 @@ Sub SolveDE(ByVal funktion As String, ByVal variabel As String, Optional startx 
     
         If Len(MaximaOutput) > 1 Then
             MaximaOutput = RemoveBrackets(MaximaOutput)
-            MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & ChrW$(8744) & "    ")    ' Comma replaced by or
+            If InStr(MaximaOutput, ChrW$(915) & "_incomplete") <= 0 Then MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & ChrW$(8744) & "    ")            ' Comma replaced by or. If Gamma function present then dont. Then ; is
         End If
     End If
+    
 slut:
 End Sub
 Sub Plot2D(forskrifter As String, punkter As String, Var As String, xmin As String, xmax As String, ymin As String, ymax As String, xaksetitel As String, yaksetitel As String, Optional SaveFile As Boolean = False)
@@ -2628,12 +2630,18 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     If InStr(text, "^" & ChrW$(8728)) <> 0 Then text = Replace(text, "^" & ChrW$(8728), ChrW$(176))    ' another way of typing degrees
     If InStr(text, "%") <> 0 Then text = Replace(text, "%", "/100")    ' percentage symbol
     pos = InStr(text, ChrW$(160))
-    Do While pos <> 0 ' &nbsp a soft hyphen, looks like a longer space. before accent e.g. vector arrow 160 8407
-        i = AscW(Mid$(text, pos + 1, 1))
-        If i > 8000 Or i = 770 Or i = 773 Then ' if accent (like vector arrow, or hat=770, overbar=773), then remove  maybe some are missing here
-            text = Left$(text, pos - 1) & Right$(text, Len(text) - pos)
-        Else ' if just a 'space' replace by space
-            text = Left$(text, pos - 1) & " " & Right$(text, Len(text) - pos)
+    Do While pos <> 0 ' &nbsp a soft hyphen, looks like a longer space. before accent e.g. vector arrow 160 8407. It is only removed in some cases. As it is expected is some vector cases below. However these could be adjusted and then 160 could just be removed.
+        If pos = Len(text) Then
+            text = Left$(text, Len(text) - 1)
+        ElseIf pos = 0 Then
+            text = Right$(text, Len(text) - 1)
+        Else
+            i = AscW(Mid$(text, pos + 1, 1))
+            If i > 8000 Or i = 770 Or i = 773 Then ' if accent (like vector arrow, or hat=770, overbar=773), then remove  maybe some are missing here
+                text = Left$(text, pos - 1) & Right$(text, Len(text) - pos)
+            Else ' if just a 'space' replace by space
+                text = Left$(text, pos - 1) & " " & Right$(text, Len(text) - pos)
+            End If
         End If
         pos = InStr(text, ChrW$(160))
     Loop
@@ -4630,7 +4638,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     If InStr(text, "delta") <> 0 Then text = Replace(text, "delta", ChrW$(948))
     If InStr(text, "alpha") <> 0 Then text = Replace(text, "alpha", ChrW$(945))
     If InStr(text, "beta") <> 0 Then text = Replace(text, "beta", ChrW$(946))
-    If InStr(text, "gamma_incomplete") <> 0 Then text = Replace(text, "gamma_incomplete", "\Gamma_incomplete ")
+    If InStr(text, "gamma_incomplete") <> 0 Then text = Replace(text, "gamma_incomplete", ChrW$(915) & "_incomplete ")
     If InStr(text, "gamma") <> 0 Then text = Replace(text, "gamma", ChrW$(915))
     If InStr(text, "gammaLB") <> 0 Then text = Replace(text, "gammaLB", ChrW$(947))
     If InStr(text, "theta") <> 0 Then text = Replace(text, "theta", ChrW$(952))
