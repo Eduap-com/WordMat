@@ -1,0 +1,120 @@
+﻿<div style="float:right;display:flex;gap:8px;margin:0;">
+  <button type="button" onclick="window.location.href = 'index.html?page=Lambert-W-funktionen'" title="Forrige side" style="padding:6px 10px;">← Forrige</button>
+  <button type="button" onclick="window.location.href = 'index.html?page=Programmeringssproget'" title="Næste side" style="padding:6px 10px;">Næste →</button>
+</div>
+<div>
+
+<h1><a name="_Toc215857768">Programmering / Kodefelter</a></h1>
+
+<p>Du kan anvende programmering til at definere dine egne funktioner,
+og på den måde lave meget avancerede funktioner eller udvide WordMat’s
+muligheder.</p>
+
+<p>Her er et eksempel, der viser mulighederne:</p>
+
+<p><a name="_Hlk212109254"> \[ svarmig\left(navn,alder\right)</a><span
+style='font-family:"Cambria Math",serif'>:=</span>block\left(\left[var1,var2\right],var1:30,var2:70,if
+alder<var1 then return\left(sconcat\left(navn, er ung \right)\right),if
+alder>var2 then return\left(sconcat\left(navn, er gammel
+\right)\right),sconcat\left(navn, er i hansbedste alder \right)\right) \]  </p>
+
+<p>Her anvendes funktionen, der tager to parametre:</p>
+
+<p> \[ svarmig\left(peter,17\right)&#8776;petererung \]  </p>
+
+<p>Som det ses ovenfor, er mellemrum fjernet i outputtet. Det
+skyldes WordMat’s formattering af output. Det kan undgås ved at benytte ’Maxima
+kommando’ i stedet for beregn (Se forrige afsnit).</p>
+
+<p> \[ svarmig\left(peter,17\right) \]  </p>
+
+<p> \[ <span style='font-family:"Cambria Math",serif'>&#119901;&#119890;&#119905;&#119890;&#119903;</span>
+<span style='font-family:"Cambria Math",serif'>&#119890;&#119903;</span> <span
+style='font-family:"Cambria Math",serif'>&#119906;&#119899;&#119892;</span> 
+\]  </p>
+
+<table border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=151 valign=top style='width:113.15pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><img width=127 height=152
+  src="data:image/jpg;base64,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"
+  alt="Et billede, der indeholder tekst, skærmbillede, Font/skrifttype, nummer/tal&#10;&#10;AI-genereret indhold kan være ukorrekt."></p>
+  </td>
+  <td width=491 valign=top style='width:368.25pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p>Programmering i matematikfelter er ikke optimalt, da de
+  ikke er beregnet til lang tekst. Det kan dog gøres lidt nemmere ved at
+  arbejde med lineære matematikfelter.<br>
+  <br>
+  </p>
+  </td>
+ </tr>
+</table>
+
+<p>Hvis du vil programmere længere funktioner, anbefales det at
+anvende kodefelter i stedet for matematikfelter. Du indsætter et kodefelt ved
+at klikke på <b>Def. > Indsæt kodefelt</b></p>
+
+<div style='border:solid silver 1.0pt;padding:0cm 0cm 0cm 0cm;background:#F0F0F0'>
+
+<p style='margin-bottom:0cm;background:#F0F0F0;border:none;
+padding:0cm'><span style='font-size:10.0pt;line-height:115%;font-family:Consolas;
+color:black'>Indtast Maxima kode her</span></p>
+
+<p style='margin-bottom:0cm;background:#F0F0F0;border:none;
+padding:0cm'><span style='font-size:10.0pt;line-height:115%;font-family:Consolas'>&nbsp;</span></p>
+
+<p style='margin-bottom:0cm;background:#F0F0F0;border:none;
+padding:0cm'><span style='font-size:10.0pt;line-height:115%;font-family:Consolas;
+color:black'> </span></p>
+
+</div>
+
+<p><br>
+Når du indsætter et kodefelt, kan du blive mødt med en advarsel om at
+kodefelter ikke er slået til. De aktiveres i <b>Indstillinger > Kode >
+Tillad kodefelter</b>. Hvis kodefelter ikke er tilladt, vil kodefelterne blive
+ignoreret. Kodefelter er som standard <i>ikke</i> aktiveret, da kodefelter vil
+gøre WordMat lidt langsommere. Du skal også være opmærksom på at koden der i
+kodefelter gælder i resten af dokumentet, fra det sted kodefeltet er indsat,
+men ikke før. ’Slet definition’ har ingen effekt på kodefelter.</p>
+
+<p>Her er ovenstående funktion skrevet i et kodefelt, så den er
+lidt mere læsevenlig.</p>
+
+<div style='border:solid silver 1.0pt;padding:0cm 0cm 0cm 0cm;background:#F0F0F0'>
+
+<p style='background:#F0F0F0;border:none;padding:0cm'><span
+style='font-size:10.0pt;line-height:115%;font-family:Consolas;color:black'>Svarmig(navn,alder)</span><span
+style='font-size:10.0pt;line-height:115%;font-family:"Cambria Math",serif;
+color:black'>:=</span><span style='font-size:10.0pt;line-height:115%;
+font-family:Consolas;color:black'>block([var1,var2] ,var1:30, var2:70,</span><span
+style='font-size:10.0pt;line-height:115%;font-family:Consolas;color:black'><br>
+  if alder<var1 then return(sconcat(navn,&quot; er ung&quot; )), <br>
+  if alder>var2 then return(sconcat(navn,&quot; er gammel&quot; )),<br>
+  sconcat(navn,&quot; er i hans bedste alder&quot; )<br>
+)</span></p>
+
+</div>
+
+<p> \[ Svarmig\left(hans,32\right) \]  </p>
+
+<p>Med kodefelter kan man forberede funktioner, som så er
+tilgængelige, når man åbner worddokumentet.</p>
+
+<p>Det er muligt at lave sine egne funktioner, som altid er
+tilgængelig i WordMat, uden at de skrives i et Worddokument. Det gøres under <b>Indstillinger
+> Kode</b>. </p>
+
+<p><img width=267 height=50 id="Billede 1"
+src="data:image/jpg;base64,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"
+alt="Et billede, der indeholder tekst, skærmbillede, linje/række, Font/skrifttype&#10;&#10;AI-genereret indhold kan være ukorrekt."></p>
+
+<p>Sæt flueben ved <b>Anvend kodefi</b>l. Skriv dernæst din kode/funktion
+i tekstfeltet, så vil funktionerne altid være tilgængelig. Anvendelse af
+kodefil vil dog påvirke hastigheden af WordMat lidt.</p>
+
+<p><i>OBS: Hvis der er fejl i koden, der står ved kodefil, så
+fejler alle beregninger i WordMat.</i></p>
+
+</div>

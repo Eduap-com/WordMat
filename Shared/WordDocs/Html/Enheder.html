@@ -1,0 +1,305 @@
+﻿<div style="float:right;display:flex;gap:8px;margin:0;">
+  <button type="button" onclick="window.location.href = 'index.html?page=Trekantsløser'" title="Forrige side" style="padding:6px 10px;">← Forrige</button>
+  <button type="button" onclick="window.location.href = 'index.html?page=Specielle-funktioner'" title="Næste side" style="padding:6px 10px;">Næste →</button>
+</div>
+<div>
+
+<h1 style='margin-top:24.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:
+36.0pt;text-indent:-18.0pt'><a name="_Toc215857765">Enheder</a></h1>
+
+<p>Du kan skrive enheder på ethvert tal i en beregning. Fx:</p>
+
+<p> \[ v=\frac{120 km}{1,\!5 time}=\frac{80\cdot km}{time} \]  </p>
+
+<p>I simple tilfælde kan man godt forstå ovenstående, men
+enhederne bliver kun opfattet som variable. Det betyder, at enheden ikke
+automatisk samles i slutningen af udtrykket, og der sker ingen omregning til
+andre enheder.</p>
+
+<p>Hvis du derimod <b>slår enheder til</b>, vil WordMat
+automatisk håndtere og omregne enheder. Ovenstående beregning vil med enheder
+give dette resultat:</p>
+
+<p> \[ v=\frac{120km}{1,\!5 time}=22,\!22222 \frac{m}{s} \]  </p>
+
+<p>Resultatet er nu angivet med en enhed i slutningen af
+udtrykket. Der skrives ikke et gangetegn, og km/time er omregnet til SI-enheden
+m/s.</p>
+
+<p>OBS: Enheder virker kun med Maxima som CAS-motor.</p>
+
+<p><b>Sådan slår du enheder til og fra<br>
+</b>Du kan aktivere eller deaktivere enhedshåndtering på tre måder:</p>
+
+<p class=MsoListParagraph style='text-indent:-18.0pt'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><b>Via menuen:</b> Der er en genvej til at slå enheder til og fra i
+menuen:</p>
+
+<table border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=189 valign=top style='width:5.0cm;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p>                       <img width=75 height=61
+  src="data:image/jpg;base64,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"
+  alt="Et billede, der indeholder tekst, Font/skrifttype, skærmbillede, nummer/tal&#10;&#10;AI-genereret indhold kan være ukorrekt."></p>
+  </td>
+  <td width=453 valign=top style='width:339.65pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p>Klik på U’et for at slå enheder til og fra.</p>
+  </td>
+ </tr>
+ <tr>
+  <td width=189 valign=top style='width:5.0cm;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p>&nbsp;</p>
+  </td>
+  <td width=453 valign=top style='width:339.65pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p>&nbsp;</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>Via
+indstillinger:</b> Åben indstillinger (<b>Alt + J</b>) og sæt flueben ved
+Enheder (på CAS-fanen)</p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><b>Via
+tastaturgenvej:</b> Du kan også vælge at tilknytte en tastaturgenvej, der kan
+slå enheder til og fra. Du kan fx benytte genvejen Alt + E.<br>
+Klik på Genveje i menuen og sæt     <img width=178 height=15
+src="data:image/jpg;base64,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"></p>
+
+<p><b><span style='font-size:14.0pt;line-height:115%'>Vigtige
+forholdsregler<br>
+</span>Brug kun enheder, når du har brug for det.</b> Husk at slå funktionen
+fra igen, når du er færdig. </p>
+
+<p>Følgende er problematisk, når enheder er slået til:</p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Hastigheden af beregningerne bliver langsommere</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>WordMat kan have lidt sværere ved at løse ligninger og udføre
+andre operationer</p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Mange bogstaver er reserveret til enheder og kan ikke bruges som
+variable.<br>
+m, g, V, K osv. kan så ikke bruges som almindelige variable. Specielt i
+fysikformler kan det give problemer da m ofte står for masse. Man kan da bruge
+stort M eller m­<sub>1</sub> med sænket skrift. Ligeledes betyder g både
+tyngdeaccelerationen ved jordens overflade og gram. Brug fx g<sub>jord</sub> i
+stedet for g. Man skal også passe på med variable af to-tre bogstavers længde
+da det kan være enhed med præfiks. Fx aM, mm, …<br>
+<br>
+</p>
+
+<p>Du kan altid se i menuen om enheder er slå til, ved at se
+efter U’et ved indstillinger. Når du løser en ligning og enheder er slået til,
+så vil der blive skrevet en rød advarsel om at enheder er slået til, som en
+påmindelse om at slå enheder fra hvis du ikke skal bruge det.</p>
+
+<p>&nbsp;</p>
+
+<p><b>Hvilke enheder og præfiks understøttes?<br>
+</b>Der understøttes alle SI-enheder med alle SI-præfiks som angivet i
+tabellerne nedenfor. Både de 7 SI-grundenheder og afledte SI-enheder
+understøttes. Derudover understøttes også nogle hverdagsenheder som fx år, dag,
+time, minut. Se tabellen nedenfor for en komplet liste. Nogle enheder kan også
+skrives både med deres forkortelse eller staves som det siges. Fx meter eller
+forkortelsen ’m’.</p>
+
+<p>Der skelnes mellem store og små bogstaver. Enhederne skal
+skrives helt korrekt. Fx skal Joule skrives med stort J og ikke lille j.
+Præfiks kilo skal skrives med lille k.</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Bemærk
+at WordMat afleverer alle resultater som decimaltal, når enheder er slået til.</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>&nbsp;</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'><b>Præfiks
+           navn                   værdi                                               Præfiks
+           navn                   værdi</b></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'><a
+name="_Hlk215841884">Y                            Yotta                   10<sup>24</sup>                                                    y                              yocto                  10<sup>-24</sup></a></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Z                            Zetta                   10<sup>21</sup>                                                    z                              Zepto                  10<sup>-21</sup></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>E                            Exa                      10<sup>18</sup>                                                    a                              atto                      10<sup>-18</sup></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>P                           Peta                    10<sup>15</sup>                                                    f                              femto                 10<sup>-15</sup></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>T                            Tera                     10<sup>12</sup>                                                    p                              pico                     10<sup>-12</sup></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>G                           Giga                    10<sup>9</sup>                                                      n                              nano                   10<sup>-9</sup></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>M                          Mega                  10<sup>6</sup>                                                      &#956;                              micro                 10<sup>-6</sup></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>K                           kilo                      10<sup>3</sup>                                                      m                              milli                     10<sup>-3</sup></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>h                            hecto                  10<sup>2</sup>                                                      c                              centi                   10<sup>-2</sup></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>da                         deka                   10<sup>1</sup>                                                      d                              deci                     10<sup>-1</sup></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>&nbsp;</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'><b>SI-Grundenheder</b></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'><b>Størrelse         enhed                navn</b></p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Længde            m                          meter</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Masse               kg                         kilogram</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Tid                        s                            sekund</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Temperatur    K                           Kelvin</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>El.
+strøm           A                           Ampere</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Antal                   mol                      mol</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Lys
+intensitet cd                         candela</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>&nbsp;</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'><b>SI-Afledte
+enheder</b></p>
+
+<p>N, J, W, Pa, C, V, F, &#937; (eller Ohm), T, H</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'><b>Andre
+enheder der kan anvendes <br>
+</b>Længde:           AU, ly, pc</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Volumen:         L,
+liter</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Tid: 
+                    min, minut, minutter, time, timer, dag, dage, år</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Masse:
+             u, ton</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Frekvens:
+        Hz, Bq</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Energi:
+              eV, kWh, cal, kcal</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>Tryk:
+                   bar, torr, mmHg, atm</p>
+
+<p>Temperatur:    \( ^{\circ\text{C}}  \)  (specielt tegn
+\degc)   men virker som Kelvin</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>&nbsp;</p>
+
+<p>Mange enheder har også en længere version. Fx kan du skrive
+”10 meter” i stedet for ”10 m”. Hvis der skal anvendes præfiks i kombination
+med den lange version, skal præfiks også skrives i den lange version. Du kan fx
+skrive ”10 kilometer”.</p>
+
+<p><b>Outputenheder<br>
+</b>Som standard omregnes alle enheder til SI-enheder uden præfiks. Der kan
+både regnes om til SI-grundenhederne og de afledte SI-enheder.</p>
+
+<p>Du kan dog vælge andre outputenheder, og det kan gøres 2
+forskellige steder:</p>
+
+<p class=MsoListParagraph style='text-indent:-18.0pt'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>I menuen lige til højre for U’et, er der en knap med teksten <b>SI</b>.</p>
+
+<table border=0 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none'>
+ <tr>
+  <td width=170 valign=top style='width:127.35pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p>                  <img width=83 height=67 id="Billede 1"
+  src="data:image/jpg;base64,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"
+  alt="Et billede, der indeholder tekst, Font/skrifttype, skærmbillede, nummer/tal&#10;&#10;AI-genereret indhold kan være ukorrekt."></p>
+  </td>
+  <td width=472 valign=top style='width:354.05pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p>SI betyder at der regnes om til SI-enheder. Hvis du
+  trykker på knappen, får du mulighed for at angive andre enheder.<br>
+  Du kan angive flere enheder adskilt ad komma.<br>
+  Bemærk at knappen skifter tekst fra SI til den første enhed du har angivet på
+  listen, så du altid kan se om der er valgt andre enheder.</p>
+  </td>
+ </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p class=MsoListParagraph style='text-indent:-18.0pt'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Åben Indstillinger (<b>Alt + J</b>) og vælg fanen Enheder. Angiv de
+enheder som der skal regnes om til i tekstfeltet. Du kan angive flere enheder
+adskilt ad komma. Denne side har også en lille vejledning.</p>
+
+<p>Det er ikke tilladt at indtaste to enheder for samme fysiske
+størrelse. Fx er både eV og aJ begge energienheder. Det er så den sidste på
+listen, der gælder.</p>
+
+<p>Kombinerede enheder som “km/time” skal angives som “km,
+time”. Du kan ikke skrive ”cm^3” skriv bare ”cm”.</p>
+
+<p><b>Eksempler:<br>
+</b>Beregning af varmeenergi, der skal bruges til at opvarme 500g vand 15
+grader</p>
+
+<p> \[ Q=m\cdot c\cdot\inc T \]  </p>
+
+<p> \[ Q=\frac{500g\cdot 4,\!2\cdot kJ}{kg\cdot K}\cdot
+15K=31500 J \]  </p>
+
+<p>Beregning af tid til cykel har kørt 50km. Hastigheden er 10
+m/s. </p>
+
+<p> \[ definer:l=50km, v=10\frac{m}{s} \]  </p>
+
+<p> \[ v=\frac{l}{t} \]  </p>
+
+<p>                               \( \Updownarrow  \)  <span
+style='font-size:16.0pt;line-height:115%'>         </span>Ligningen løses for t
+vha. WordMat. </p>
+
+<p>Beregning af spænding ud fra modstand og strømstyrke</p>
+
+<p> \[ U=I\cdot R=150mA\cdot 5&#937;=0,\!75 V \]  </p>
+
+<p><span style='font-family:"Cambria Math",serif'>Beregning af
+afbøjningsvinkel i diffraktionsgitter</span></p>
+
+<p> \[ definer:n=1;\lambda =632,\!8nm ;d=\frac{1mm}{300} \]  </p>
+
+<p> \[ \sin \left(\theta \right)=\frac{n\cdot\lambda }{d} \]  </p>
+
+<p>                               \( \Updownarrow  \)  <span
+style='font-size:16.0pt;line-height:115%'>         </span>Ligningen løses for &#952;
+vha. WordMat. </p>
+
+<p> \[ \theta =\sin ^{-1}\left(0,\!18984\right)&#8776;10,\!94345
+\]  </p>
+
+<p><span style='font-family:"Cambria Math",serif'>I ovenstående
+eksempel var det nødvendigt at trykke beregn efter resultatet for at få et
+decimaltal. Det kan ske.</span></p>
+
+<p><span style='font-family:"Cambria Math",serif'>&nbsp;</span></p>
+
+<p> \[ slet\quad defintioner\! : \]  </p>
+
+<span style='font-size:11.0pt;line-height:115%;font-family:"Cambria Math",serif'><br
+clear=all style='page-break-before:always'>
+</span>
+
+<p>&nbsp;</p>
+
+</div>

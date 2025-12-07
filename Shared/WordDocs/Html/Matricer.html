@@ -1,0 +1,130 @@
+﻿<div style="float:right;display:flex;gap:8px;margin:0;">
+  <button type="button" onclick="window.location.href = 'index.html?page=Vektorer'" title="Forrige side" style="padding:6px 10px;">← Forrige</button>
+  <button type="button" onclick="window.location.href = 'index.html?page=Komplekse-tal'" title="Næste side" style="padding:6px 10px;">Næste →</button>
+</div>
+<div>
+
+<h1 style='margin-top:24.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:
+36.0pt;text-indent:-18.0pt'><a name="_Toc215857759">Matricer</a></h1>
+
+<p>Generelt håndterer WordMat matricer som man vil skrive det
+på papir. Maxima har dog en række indbyggede kommandoer til Matricer, der kan
+være meget nyttige.</p>
+
+<p><b><span style='font-size:14.0pt;line-height:115%'>Indtastning
+af matricer:<br>
+</span></b>Du kan oprette en matrix ved først at skrive startparentes,
+slutparentes og derefter et mellemrum.</p>
+
+<p> \[ \left[\right] \]  </p>
+
+<p>Placer cursoren i midten af parenteserne, og vælg derefter
+den ønskede matrix i <b>lignings-menuen</b> &#8594; <b>Matrix</b>.</p>
+
+<p> \[ \left[\begin{matrix}&amp;&amp;\\&amp;&amp;\\&amp;&amp;\end{matrix}\right]
+\]  </p>
+
+<p>For at udvide matrixens dimensioner (flere rækker/kolonner),
+højreklik på matrixen og vælg <b>Indsæt</b>.</p>
+
+<p> \[ \left[\begin{matrix}&amp;&amp;&amp;\\&amp;&amp;&amp;\\&amp;&amp;&amp;\end{matrix}\right]
+\]  </p>
+
+<p>For avancerede brugere kan matricer også indtastes direkte
+med genveje:</p>
+
+<p><i><span style='font-size:10.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Skriv      [\matrix (1&amp;2@2&amp;3)]      og
+tryk mellemrum</span></i></p>
+
+<p> \[ \left[\begin{matrix}1&amp;2\\2&amp;3\end{matrix}\right]
+\]  </p>
+
+<p>Matricer kan indtastes med både almindelige og firkantede
+parenteser. Output følger samme type som input.</p>
+
+<p><b><span style='font-size:14.0pt;line-height:115%'>Eksempler
+på matrixoperationer</span></b></p>
+
+<p class=MsoListParagraph style='text-indent:-18.0pt'><span style='font-size:
+10.0pt;line-height:115%;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b>matrix addition og multiplikation samt opløfte i potens.</b></p>
+
+<p> \[ \left[\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right]\cdot
+\left[\begin{matrix}3&amp;4\\5&amp;6\end{matrix}\right]+\left[\begin{matrix}8&amp;5\\1&amp;6\end{matrix}\right]^{2}=\left[\begin{matrix}82&amp;86\\43&amp;77\end{matrix}\right]
+\]  </p>
+
+<p class=MsoListParagraph style='text-indent:-18.0pt'><span style='font-size:
+10.0pt;line-height:115%;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b>Invers matrix</b></p>
+
+<p> \[ \left[\begin{matrix}3&amp;4\\5&amp;6\end{matrix}\right]^{-1}=\left[\begin{matrix}-3&amp;2\\\frac{5}{2}&amp;-\left(\frac{3}{2}\right)\end{matrix}\right]
+\]  </p>
+
+<p class=MsoListParagraph style='text-indent:-18.0pt'><span style='font-size:
+10.0pt;line-height:115%;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b> Determinant af matrix</b></p>
+
+<p> \[ det\left(\left[\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right]\right)=-2
+\]  </p>
+
+<p><b><span style='font-size:14.0pt;line-height:115%'>Definition
+af matricer<br>
+</span></b>Det kan være en fordel at bruge en streg over variabelnavnet for at
+markere, at det er en matrix. Brug genvejen \overbar.</p>
+
+<p> \[ Definer: ¯A=\left[\begin{matrix}1&amp;-2\\2&amp;3\end{matrix}\right]
+\]  </p>
+
+<p> \[ ¯A^{2}=\left[\begin{matrix}-3&amp;-8\\8&amp;5\end{matrix}\right]
+\]  </p>
+
+<p><b><span style='font-size:14.0pt;line-height:115%'>Maxima-funktioner<br>
+</span></b>Til at lave store matricer kan du bruge følgende indbyggede
+funktioner i Maxima:</p>
+
+<p> \[ zeromatrix\left(3, 4\right)=\left(\begin{matrix}0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0\end{matrix}\right)
+\]  </p>
+
+<p> \[ zeromatrix\left(3, 4\right)+1=\left(\begin{matrix}1&amp;1&amp;1&amp;1\\1&amp;1&amp;1&amp;1\\1&amp;1&amp;1&amp;1\end{matrix}\right)
+\]  </p>
+
+<p> \[ ident\left(3\right)=\left(\begin{matrix}1&amp;0&amp;0\\0&amp;1&amp;0\\0&amp;0&amp;1\end{matrix}\right)
+\]  </p>
+
+<p>Der findes også en række indbyggede funktioner i Maxima, som
+kan være relevante. Nogle af disse er listet her:</p>
+
+<p> \( rref\left(M\right) \)                                              Gauss-elimination
+(Reduced Row Echelon Form).</p>
+
+<p> \( eigenvalues\left(\left[\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right]\right)
+\)                           Finder egenværdier</p>
+
+<p> \( eigenvectors\left(\left[\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right]\right)
+\)                           Finder egenvektorer, men på listeform.</p>
+
+<p> \( transpose\left(M\right) \)                               transponerer
+Matricen M</p>
+
+<p> \( echelon\left(M\right) \)                                    Returnerer
+matrix med 1-taller i diagonal og 0’er under 1-tallerne</p>
+
+<p>&nbsp;</p>
+
+<p>Her er et par meget avancerede eksempler</p>
+
+<p> \( ematrix\left(n;m;x;i,;j\right) \)            Returnerer
+n×m matrix, med kun nuller, undtagen position i, j der vil have x.</p>
+
+<p>Følgende funktion indsætter værdier på baggrund af en
+funktion, der tager søjle- og kolonnenummeret som parametre. \(
+genmatrix\left(lambda\left(\left[i, j\right], i\cdot j\right), 3 ,
+3\right)=\left[\begin{matrix}1&amp;2&amp;3\\2&amp;4&amp;6\\3&amp;6&amp;9\end{matrix}\right]
+\)  </p>
+
+<p>Opretter en 3x3 matrix, hvor hvert element er produktet af
+række- og kolonnenummer.<br clear=all style='page-break-before:always'>
+</p>
+
+</div>

@@ -1,0 +1,82 @@
+﻿<div style="float:right;display:flex;gap:8px;margin:0;">
+  <button type="button" onclick="window.location.href = 'index.html?page=Programmering-Kodefelter'" title="Forrige side" style="padding:6px 10px;">← Forrige</button>
+  <button type="button" onclick="window.location.href = 'index.html?page=LaTeX'" title="Næste side" style="padding:6px 10px;">Næste →</button>
+</div>
+<div>
+
+<h2><a name="_Toc215857769">Programmeringssproget</a></h2>
+
+<p>Programmeringssproget der anvendes, er Maxima’s eget sprog,
+der minder om Lisp. Det kan kun anvendes hvis Maxima er sat som CAS-motor.
+GeoGebra understøtter ikke programmering. <br>
+Se <a href="https://maxima.sourceforge.io/docs/manual/">https://maxima.sourceforge.io/docs/manual/</a>
+for dokumentation.</p>
+
+<p>Her er lidt hjælp til at komme i gang:</p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Der skelnes mellem store og små bogstaver<br>
+Det kan give problemer når Word er sat til automatisk at starte med store
+bogstaver, da Maxima’s funktioner da ikke vil blive genkendt</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Linjer skal afsluttes med ; eller $<br>
+(kommandoer kan også adskilles af komma i block()-funktioner)</p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Variable defineres med kolon. Fx:<br>
+a:3;</p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><span
+style='font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Funktioner defineres med <span style='font-family:"Cambria Math",serif'>:=</span>
+fx<br>
+f(x)<span style='font-family:"Cambria Math",serif'>:=</span>x^2;<br>
+<br>
+</p>
+
+<p><b>block()</b></p>
+
+<p>Denne funktion kan anvendes til at samle et længere udtryk,
+og anvendes typisk således:</p>
+
+<p><span style='font-family:"Courier New"'>f(x)</span><span
+style='font-family:"Cambria Math",serif'>:=</span><span style='font-family:
+"Courier New"'>block([lokvar1, lokvar2], …);</span></p>
+
+<p>Det første argument i funktionen kan være en liste over
+lokale variable, der anvendes i funktion. Disse variable vil så ikke blive
+påvirket uden for funktionen. Hvert efterfølgende argument er en kommando, der
+skal udføres. Funktionens output er det sidste argument til funktionen. Du kan
+anvende <i>return(x)</i> i funktionen for at afslutte og returnere x.<br>
+Eksemplet med funktionen ”svarmig” ovenfor viser anvendelse af block.</p>
+
+<p><b>If  then else</b></p>
+
+<p>Fungerer som de fleste programmeringssprog</p>
+
+<p><span style='font-family:"Courier New"'>if x=0 then 5<br>
+elseif x=1 then 6<br>
+else 7<br>
+<br>
+</span></p>
+
+<p><span style='font-family:"Courier New"'>Eksempel på
+definition af stykkevisdefineret funktion:</span></p>
+
+<p><span style='font-family:"Courier New"'>f(x):= if x<0
+then x^2<br>
+elseif (x=0 and x<5) then x<br>
+else (-x+10)</span></p>
+
+<p>Se også funktionen svarmig ovenfor, hvor if anvendes sammen
+med block().</p>
+
+<br clear=all style='page-break-before:always'>
+
+<p>&nbsp;</p>
+
+</div>

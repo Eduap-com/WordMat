@@ -1,0 +1,52 @@
+﻿<div style="float:right;display:flex;gap:8px;margin:0;">
+  <button type="button" onclick="window.location.href = 'index.html?page=Logaritmer'" title="Forrige side" style="padding:6px 10px;">← Forrige</button>
+  <button type="button" onclick="window.location.href = 'index.html?page=Omskriv-reducer'" title="Næste side" style="padding:6px 10px;">Næste →</button>
+</div>
+<div>
+
+<h2><a name="_Toc215857710">Underforståede gangetegn</a></h2>
+
+<p>WordMat indsætter automatisk underforståede gangetegn, der
+hvor det ikke er tvetydigt. Eksempler:</p>
+
+<p> \[ 2x\rightarrow 2\cdot x \]  </p>
+
+<p> \[ 3\left(a+3\right)\rightarrow 3\cdot \left(a+3\right) \] 
+</p>
+
+<p> \[ \left(a+b\right)\left(x-2\right)  \rightarrow  
+\left(a+b\right)\cdot \left(x-2\right) \]  </p>
+
+<p>WordMat understøtter variable med flere tegn, og variable
+kan indeholde tal. Det kan give problemer i forhold til hvordan nogle
+matematikbøger skriver matematik.</p>
+
+<p>I følgende situationer indsætter WordMat <i>ikke</i>
+gangetegn</p>
+
+<p> \( x2 \)  bliver <u>ikke</u> til  \( x\cdot 2 \)  da det
+opfattes som variablen x2.</p>
+
+<p> \( ab \)  bliver <u>ikke</u> til  \( a\cdot b \)  da det opfattes
+som variablen ab.</p>
+
+<p style='line-height:150%'>Et andet problem er at matematiske
+tekster ikke altid er konsekvent med hvordan variable og funktioner skrives:</p>
+
+<p> \( f\left(b+2\right) \)  er funktion f med parameter b+2.
+Det er alle enige om.</p>
+
+<p> \( a\left(b+2\right) \)  vil nok oftest blive fortolket som
+a skal ganges ind i parentesen til \( a\cdot b+2\cdot a \)  , men i
+virkeligheden står der det samme som i forrige eksempel. Bortset fra at f er
+udskiftet med a, og der bør intet være til hinder for at man kalder en funktion
+a og en variabel f. Vi kalder bare oftest funktioner for f og variable for a. <br>
+Hvis det skal være konsistent, skal vi altså skelne mellem<br>
+ \( a\left(b+2\right) \)  hvor a er en funktion</p>
+
+<p> \( a\cdot \left(b+2\right) \)  hvor a er en variabel.</p>
+
+<p>I WordMat bliver \( a\left(2+x\right) \)    <u>ikke</u> til
+\( a\cdot \left(2+x\right) \)    da det opfattes som funktionen a(x).</p>
+
+</div>
