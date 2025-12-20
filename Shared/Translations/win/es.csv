@@ -644,7 +644,7 @@
 643#£Manual de Word
 644#£Abre el documento con ayuda.
 645#£Web Manual
-646#£Abre el manual del sitio web. Tiene mejor navegación y videos que el manual de Word, pero aún no está completo.
+646#£Abre el manual en internet desde un navegador.
 647#£Manual de Maxima
 648#£Maxima es el programa CAS que realiza muchas de las funciones matemáticas en WordMat. Maxima ha incorporado una gran cantidad de funciones que no son inmediatamente visibles en WordMat, pero se pueden realizar si conoce los nombres de las funciones. Aquí puede abrir un resumen de los comandos de maxima.
 649#£Acerca de
@@ -808,8 +808,8 @@
 807#£Expandir
 808#£Ayuda
 809#£Manual
-810#£Manual como documento Word
-811#£Documentación del sitio web
+810#£Restablecer ajustes
+811#£Todos los ajustes ahora se restablecen a valores predeterminados
 812#£Acerca de
 813#£Actualizar
 814#£Atajos

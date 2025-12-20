@@ -607,7 +607,7 @@ Sub ConvertEquationToLatex(Optional KeepOriginal As Boolean = False)
     If Selection.OMaths.Count = 0 Then Exit Sub
     Set eq = Selection.OMaths(1)
     UserFormLatex.Label_input.Caption = omax.Kommando
-    LatexCode = omax.ConvertToLatex(omax.Kommando)
+    LatexCode = Application.Run("ConvertToLatex", omax.Kommando)
     '   If OptionButton_visstor.Value = True Then
     '      LatexCode = "\displaystyle " & LatexCode
     '   ElseIf OptionButton_visinline.Value = True Then
@@ -699,7 +699,8 @@ On Error GoTo slut
         PrepareMaxima
         omax.ReadSelection
         Selection.OMaths(1).Range.text = ""
-        Selection.InsertAfter LatexStart & omax.ConvertToLatex(omax.Kommando) & LatexSlut
+       Selection.InsertAfter LatexStart & Application.Run("ConvertToLatex", omax.Kommando) & LatexSlut
+ '       Selection.InsertAfter LatexStart & omax.ConvertToLatex(omax.Kommando) & LatexSlut
     Else
         PrepareMaxima
         

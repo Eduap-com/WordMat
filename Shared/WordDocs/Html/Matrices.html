@@ -1,0 +1,129 @@
+﻿<div style="float:right;display:flex;gap:8px;margin:0;">
+  <button type="button" onclick="window.location.href = 'index.html?page=Vectors'" title="Forrige side" style="padding:6px 10px;">← Forrige</button>
+  <button type="button" onclick="window.location.href = 'index.html?page=Complex-numbers'" title="Næste side" style="padding:6px 10px;">Næste →</button>
+</div>
+<div>
+
+<h1 style='margin-top:24.0pt;margin-right:0cm;margin-bottom:0cm;margin-left:
+36.0pt;text-indent:-18.0pt'><a >Matrices</a></h1>
+
+<p>In general, WordMath handles matrices as one would write it
+on paper. However, Maxima has a number of built-in commands for Matrices that
+can be very useful.</p>
+
+<p><b><span style='font-size:14.0pt;line-height:115%'>Entering
+matrices:<br>
+</span></b>You can create a matrix by first typing the starting parenthesis,
+ending parenthesis, and then a space.</p>
+
+<p>\[\left[\right]\]</p>
+
+<p>Place the cursor in the middle of the brackets, and then
+select the desired matrix from <b>the equations menu</b> &#8594; <b>Matrix</b>.</p>
+
+<p>\[\left[\begin{matrix}&amp;&amp;\\&amp;&amp;\\&amp;&amp;\end{matrix}\right]\]</p>
+
+<p>To expand the dimensions of the matrix (multiple
+rows/columns), right-click on the matrix and select <b>Insert</b>.</p>
+
+<p>\[\left[\begin{matrix}&amp;&amp;&amp;\\&amp;&amp;&amp;\\&amp;&amp;&amp;\end{matrix}\right]\]</p>
+
+<p>For advanced users, matrices can also be entered directly
+with shortcuts:</p>
+
+<p><i><span style='font-size:10.0pt;line-height:115%;
+font-family:"Calibri",sans-serif'>Type [\array (1&amp;2@2&amp;3)] and press
+space</span></i></p>
+
+<p>\[\left[\begin{matrix}1&amp;2\\2&amp;3\end{matrix}\right]\]</p>
+
+<p>Matrices can be entered with both regular and square
+brackets. Output follows the same type as input.</p>
+
+<p><b><span style='font-size:14.0pt;line-height:115%'>Examples
+of matrix operations</span></b></p>
+
+<p class=MsoListParagraph ><span style='font-size:
+10.0pt;line-height:115%;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b>matrix addition, multiplication and power.</b></p>
+
+<p>\[\left[\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right]\cdot
+\left[\begin{matrix}3&amp;4\\5&amp;6\end{matrix}\right]+\left[\begin{matrix}8&amp;5\\1&amp;6\end{matrix}\right]^{2}=\left[\begin{matrix}82&amp;86\\43&amp;77\end{matrix}\right]\]</p>
+
+<p class=MsoListParagraph ><span style='font-size:
+10.0pt;line-height:115%;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b>Inverse matrix</b></p>
+
+<p>\[\left[\begin{matrix}3&amp;4\\5&amp;6\end{matrix}\right]^{-1}=\left[\begin{matrix}-3&amp;2\\\frac{5}{2}&amp;-\left(\frac{3}{2}\right)\end{matrix}\right]\]</p>
+
+<p class=MsoListParagraph ><span style='font-size:
+10.0pt;line-height:115%;font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b>Determinant of matrix</b></p>
+
+<p>\[det\left(\left[\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right]\right)=-2\]</p>
+
+<p><b><span style='font-size:14.0pt;line-height:115%'>Definition
+of matrices<br>
+</span></b>It can be an advantage to use a line over the variable name to
+indicate that it is a matrix. Use the shortcut \overbar.</p>
+
+<p>\[Definer\!
+:\overline{A}=\left[\begin{matrix}1&amp;-2\\2&amp;3\end{matrix}\right]\]</p>
+
+<p>\[\overline{A}^{2}=\left[\begin{matrix}-3&amp;-8\\8&amp;5\end{matrix}\right]\]</p>
+
+<p><b><span style='font-size:14.0pt;line-height:115%'>Maxima
+functions<br>
+</span></b>To create large matrices, you can use the following built-in
+functions in Maxima:</p>
+
+<p>\[zeromatrix\left(3,
+4\right)=\left(\begin{matrix}0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0\\0&amp;0&amp;0&amp;0\end{matrix}\right)\]</p>
+
+<p>\[zeromatrix\left(3,
+4\right)+1=\left(\begin{matrix}1&amp;1&amp;1&amp;1\\1&amp;1&amp;1&amp;1\\1&amp;1&amp;1&amp;1\end{matrix}\right)\]</p>
+
+<p>\[ident\left(3\right)=\left(\begin{matrix}1&amp;0&amp;0\\0&amp;1&amp;0\\0&amp;0&amp;1\end{matrix}\right)\]</p>
+
+<p>There are also a number of built-in functions in Maxima that
+may be relevant. Some of these are listed here:</p>
+
+<p> \(rref\left(M\right)\)                                              Gaussian
+elimination (Reduced Row Echelon Form).</p>
+
+<p> \(eigenvalues\left(\left[\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right]\right)\)
+                    Finds eigenvalues</p>
+
+<p> \(eigenvectors\left(\left[\begin{matrix}1&amp;2\\3&amp;4\end{matrix}\right]\right)\)
+                  Finds eigenvectors, but in list form.</p>
+
+<p> \(transpose\left(M\right)\)   transposes the Matrix M</p>
+
+<p> \(echelon\left(M\right)\)                                    Returns
+matrix with 1s in diagonal and 0s below 1s</p>
+
+<p>&nbsp;</p>
+
+<p>Here are a few very advanced examples</p>
+
+<p> \(ematrix\left(n;m;x;i,;j\right)\)           Returns n×m
+matrix, with only zeros, except position i, j that will have x.</p>
+
+<p>The following function inserts values based on a function
+that takes the column and column number as parameters.
+\(genmatrix\left(lambda\left(\left[i, j\right], i\cdot j\right), 3 ,
+3\right)=\left[\begin{matrix}1&amp;2&amp;3\\2&amp;4&amp;6\\3&amp;6&amp;9\end{matrix}\right]\)
+</p>
+
+<p>Creates a 3x3 matrix where each element is the product of
+row and column number.</p>
+
+<p style='margin-bottom:0cm;margin-bottom:0cm;margin-top:0cm'>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+</div>
+<div style="float:right;display:flex;gap:8px;margin:0;">
+  <button type="button" onclick="window.location.href = 'index.html?page=Vectors'" title="Forrige side" style="padding:6px 10px;">← Forrige</button>
+  <button type="button" onclick="window.location.href = 'index.html?page=Complex-numbers'" title="Næste side" style="padding:6px 10px;">Næste →</button>
+</div>

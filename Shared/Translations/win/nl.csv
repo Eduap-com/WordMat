@@ -644,7 +644,7 @@
 643#£Handleiding van Word
 644#£Opent handleiding als Word-document
 645#£Webhandleiding
-646#£Hiermee opent u de online webhandleiding. Heeft betere navigatie en video's dan de Word-handleiding, maar een werk in uitvoering.
+646#£Opent de handleiding op internet in een browser.
 647#£Maxima handleiding
 648#£Maxima is het CAS-programma dat de meeste rekenkundige berekeningen in WordMat uitvoert. Maxima heeft veel ingebouwde functies die niet direct zichtbaar zijn vanuit de WordMat gebruikersinterface, maar wel kunnen worden uitgevoerd als je de functienamen kent. Dit toont de Maxima help waar u documentatie kunt zien voor alle maxima functies.
 649#£Over
@@ -808,8 +808,8 @@
 807#£Uitbreiden
 808#£Help
 809#£Handmatig
-810#£Handleiding als Word-document
-811#£Documentatie op de website
+810#£Instellingen resetten
+811#£Alle instellingen zijn nu teruggezet naar standaardwaarden
 812#£Over
 813#£Update
 814#£Snelkoppelingen

@@ -347,7 +347,7 @@ Sub UpDateLatex()
    SaveSet
 
    Label_input.Caption = omax.Kommando
-   LatexCode = omax.ConvertToLatex(omax.Kommando)
+   LatexCode = Application.Run("ConvertToLatex", omax.Kommando)
    If OptionButton_visstor.Value = True Then
       LatexCode = "\displaystyle " & LatexCode
    ElseIf OptionButton_visinline.Value = True Then

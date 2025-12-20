@@ -644,7 +644,7 @@
 643#£Word handbók
 644#£Opnar skjalið við hjálp.
 645#£Vefhandbók
-646#£Opnar handbókina á heimasíðuni. Hevur betri navigatión og video enn Word handbókin, men ikki fullfíggjað enn.
+646#£Opnar handbókina á internetinum í einum vafra.
 647#£Maxima handbók
 648#£Maxima er CAS-forritið, sum útfærir nógvar av støddfrøðiligu funktiónunum í WordMat. Maxima hevur bygt eina rúgvu av funktiónum inn, sum ikki beinanvegin eru sjónligar í WordMat, men tær kunnu útførast, um tú kennir funktiónøvnini. Her kanst tú opna eina samantekt av maxima-boðum.
 649#£Um
@@ -808,8 +808,8 @@
 807#£Víðka
 808#£Hjálp
 809#£Handbók
-810#£Handbók sum Word skjal
-811#£Skjalfesting á heimasíðu
+810#£Endurstilla stillingar
+811#£Allar stillingar eru nú settar aftur til standardvirði
 812#£Um
 813#£Dagføring
 814#£Snarvegir

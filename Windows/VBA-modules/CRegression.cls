@@ -588,10 +588,16 @@ Sub ComputePolRegrKvad()
     End If
 End Sub
 Sub ComputePolRegr()
-    Dim i As Integer, orden As Integer, n As Integer
+    Dim i As Integer, s As String, orden As Integer, n As Integer
     On Error Resume Next
     n = UBound(xval) - LBound(xval)
-    orden = InputBox(TT.A(35) & n & ")" & vbCrLf & vbCrLf & TT.A(36), TT.A(37), "2")
+    s = InputBox(TT.A(35) & n & ")" & vbCrLf & vbCrLf & TT.A(36), TT.A(37), "2")
+    If s = vbNullString Then GoTo slut
+    If IsNumeric(s) Then
+        orden = val(s)
+    Else
+        GoTo slut
+    End If
     On Error GoTo fejl
     If orden < 1 Or orden > n Then
         MsgBox "You have stated an invalid order. it must be between 1 and " & n, vbOKOnly, TT.Error
@@ -637,7 +643,7 @@ Sub ComputePolRegr()
         End If
     Next
     
-    RegressionText = TT.A(38) & orden & TT.A(34) & ": " & vbTab
+    RegressionText = TT.A(38) & orden & " " & TT.A(34) & ": " & vbTab
 '    regrtype = 4
     Else
         Ligning = ""

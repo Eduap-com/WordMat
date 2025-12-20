@@ -887,8 +887,8 @@ Sub InstallGeoGebra(Optional ConfirmPrompt As Boolean = True)
     End If
 #Else
     If UserFormGeoGebra.ReturnVal = 1 Then
-        OpenLink "https://download.geogebra.org/package/mac", True
-        MsgBox "GeoGebra is downloading in your browser", vbOKOnly, "Done"
+        OpenLink "https://download.geogebra.org/package/win", True
+        MsgBox "GeoGebra is downloading in your browser. Go to Downloads and run the installer.", vbOKOnly, "Done"
     Else
         GeoGebraWeb
     End If

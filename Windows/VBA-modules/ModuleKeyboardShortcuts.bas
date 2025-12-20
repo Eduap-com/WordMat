@@ -45,6 +45,8 @@ Sub ExecuteKeyboardShortcut(ShortcutVal As KeybShortcut)
         InsertGradtegn
     Case KeybShortcut.Open3DPLot
         Plot3DGraph
+    Case KeybShortcut.Backslash
+        Selection.TypeText "\"
     Case Else
 '        UserFormShortcuts.Show
     End Select

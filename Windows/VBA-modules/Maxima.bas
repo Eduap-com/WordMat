@@ -1864,7 +1864,7 @@ Sub CompareTest()
             InsertForklaring TT.A(163), False
         End If
         omax.InsertMaximaOutput
-        If InStr(omax.KommentarOutput, "Numerically tested") > 0 And InStr(omax.MaximaOutput, "sand") > 0 Then
+        If InStr(omax.KommentarOutput, "Numerically tested") > 0 And (InStr(omax.MaximaOutput, "sand") > 0 Or InStr(omax.MaximaOutput, "true") > 0) Then
             Selection.TypeParagraph
             Selection.TypeText TT.A(164)
             p = InStr(omax.KommentarOutput, "to within")

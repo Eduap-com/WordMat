@@ -644,7 +644,7 @@
 643#£Manuál aplikace Word
 644#£Otevre manuál jako dokument aplikace Word
 645#£Webový manuál
-646#£Otevre online webovou prírucku. Má lepsí navigaci a videa nez manuál aplikace Word, ale stále se na nem pracuje.
+646#£Otevre manuál na internetu v prohlízeci.
 647#£Manuál Maxima
 648#£Maxima je program CAS, který provádí vetsinu matematických výpoctu ve WordMatu. Maxima má mnoho vestavených funkcí, které nejsou okamzite viditelné z uzivatelského rozhraní WordMat, ale lze je spustit, pokud znáte názvy funkcí. Zde se zobrazí nápoveda Maxima, kde si muzete prohlédnout dokumentaci ke vsem funkcím Maxima.
 649#£Asi
@@ -808,8 +808,8 @@
 807#£Expandovat
 808#£Pomoc
 809#£Manuál
-810#£Manuál jako dokument aplikace Word
-811#£Dokumentace webových stránek
+810#£Resetovat nastavení
+811#£Vsechny nastavení jsou nyní resetovány na výchozí hodnoty
 812#£Asi
 813#£Aktualizace
 814#£Zkratky

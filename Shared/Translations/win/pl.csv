@@ -644,7 +644,7 @@
 643#£Podrecznik programu Word
 644#£Otwiera podrecznik jako dokument programu Word
 645#£Podrecznik internetowy
-646#£Otwiera internetowa instrukcje obslugi. Ma lepsza nawigacje i filmy niz podrecznik Word, ale praca w toku.
+646#£Otwiera instrukcje w internecie w przegladarce.
 647#£Instrukcja obslugi Maxima
 648#£Maxima to program CAS, który wykonuje wiekszosc obliczen matematycznych w WordMat. Maxima ma wiele wbudowanych funkcji, które nie sa natychmiast widoczne z interfejsu uzytkownika WordMat, ale mozna je wykonac, jesli znasz nazwy funkcji. Spowoduje to wyswietlenie pomocy programu Maxima, w której mozna zapoznac sie z dokumentacja dotyczaca wszystkich funkcji programu Maxima.
 649#£Okolo
@@ -808,8 +808,8 @@
 807#£Rozszerzac
 808#£Pomoc
 809#£Recznie
-810#£Podrecznik jako dokument Word
-811#£Dokumentacja strony internetowej
+810#£Resetuj ustawienia
+811#£Wszystkie ustawienia zostaly teraz zresetowane do wartosci domyslnych
 812#£Okolo
 813#£Aktualizacja
 814#£Skróty

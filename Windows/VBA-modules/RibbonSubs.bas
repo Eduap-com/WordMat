@@ -820,6 +820,14 @@ Sub Rib_HelpOnline(control As IRibbonControl)
         OpenLink "https://www.eduap.com/wordmatdoc/en/index.html"
     End If
 End Sub
+Sub Rib_HelpPDF(control As IRibbonControl)
+'    OpenLink "https://sites.google.com/site/wordmat/"
+    If TT.LangNo = 1 Then
+        OpenLink GetWordMatDir & "WordDocs\WordMatManual.pdf"
+    Else
+        OpenLink GetWordMatDir & "WordDocs\WordMatManual_english.pdf"
+    End If
+End Sub
 Sub Rib_HelpMaxima(control As IRibbonControl)
     OpenLink "https://maxima.sourceforge.io/docs/manual"
 End Sub
@@ -1557,12 +1565,6 @@ Sub Rib_GetLabelHelp(control As IRibbonControl, ByRef returnedVal As Variant)
 End Sub
 Sub Rib_GetLabelManual(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = TT.A(809)
-End Sub
-Sub Rib_GetLabelManualDoc(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = TT.A(810)
-End Sub
-Sub Rib_GetLabelManualOnline(control As IRibbonControl, ByRef returnedVal As Variant)
-    returnedVal = TT.A(811)
 End Sub
 Sub Rib_GetLabelMaximaHelp(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(0)

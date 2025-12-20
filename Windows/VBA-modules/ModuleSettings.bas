@@ -23,6 +23,7 @@ Enum KeybShortcut
     InsertRefToEqution
     GradTegn
     Open3DPLot
+    Backslash
 End Enum
 
 Public UFMSettings As UserFormSettings
@@ -265,72 +266,73 @@ On Error Resume Next
     
     SettingsRead = True
 End Sub
-Public Sub SetAllDefaultRegistrySettings()
-' sets all settings to default, but only if they don't already exist
-On Error Resume Next
-    If Not RegKeyExists("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\Forklaring") Then
-    MaximaForklaring = True
-    MaximaKommando = False
-    MaximaExact = 2 ' numerisk
-    Radians = False
-    MaximaCifre = 7
-    MaximaSeparator = False
-    MaximaGangeTegn = "prik"
-    MaximaComplex = False
-    LmSet = False
-    MaximaUnits = False
-    MaximaLogOutput = 0
-    ExcelIndlejret = False
-    AllTrig = False
-    OutUnits = ""
-    SettCheckForUpdate = True
-    MaximaIndex = False
-    PolarOutput = False
+Public Sub SetAllDefaultRegistrySettings(Optional ForceReset As Boolean = False)
+    ' sets all settings to default, but only if they don't already exist
+    On Error Resume Next
+    If ForceReset Or Not RegKeyExists("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\Forklaring") Then
+        MaximaForklaring = True
+        MaximaKommando = False
+        MaximaExact = 2 ' numerisk
+        Radians = False
+        MaximaCifre = 7
+        MaximaSeparator = False
+        MaximaGangeTegn = "prik"
+        MaximaComplex = False
+        LmSet = False
+        MaximaUnits = False
+        MaximaLogOutput = 0
+        ExcelIndlejret = False
+        AllTrig = False
+        OutUnits = ""
+        SettCheckForUpdate = True
+        MaximaIndex = False
+        PolarOutput = False
 #If Mac Then
-    GraphApp = 4 ' geogebraweb
+        GraphApp = 4 ' geogebraweb
 #Else
-    GraphApp = 4
+        GraphApp = 4
 #End If
-    LanguageSetting = 0
-    dAsDiffChr = False
-    LatexStart = "$"
-    LatexSlut = "$"
-    LatexUnits = False
-    ConvertTexWithMaxima = False
-    EqNumPlacement = False
-    EqNumType = False
-    EqAskRef = False
-    BackupType = 2 ' dont ask
-    BackupNo = 1
-    BackupMaxNo = 20
-    BackupTime = 5
-    LatexSectionNumbering = True
-    LatexDocumentclass = 0
-    LatexFontsize = 11
-    LatexWordMargins = False
-    LatexTitlePage = 0
-    LatexTOC = 0
-    CASengine = 0
-    MaximaDecOutType = 2
-    SettUseVBACAS = 2
-    OutputColor = wdGreen
-    ShowAssum = True
+        LanguageSetting = 0
+        dAsDiffChr = False
+        LatexStart = "$"
+        LatexSlut = "$"
+        LatexUnits = False
+        ConvertTexWithMaxima = False
+        EqNumPlacement = False
+        EqNumType = False
+        EqAskRef = False
+        BackupType = 2 ' dont ask
+        BackupNo = 1
+        BackupMaxNo = 20
+        BackupTime = 5
+        LatexSectionNumbering = True
+        LatexDocumentclass = 0
+        LatexFontsize = 11
+        LatexWordMargins = False
+        LatexTitlePage = 0
+        LatexTOC = 0
+        CASengine = 0
+        MaximaDecOutType = 2
+        SettUseVBACAS = 2
+        OutputColor = wdGreen
+        ShowAssum = True
     
     
-    SettShortcutAltM = KeybShortcut.InsertNewEquation
-    SettShortcutAltM2 = -1
-    SettShortcutAltB = KeybShortcut.beregnudtryk
-    SettShortcutAltL = KeybShortcut.SolveEquation
-    SettShortcutAltD = KeybShortcut.Define
-    SettShortcutAltS = KeybShortcut.sletdef
-    SettShortcutAltF = KeybShortcut.Formelsamling
-    SettShortcutAltO = KeybShortcut.OmskrivUdtryk
-    SettShortcutAltR = KeybShortcut.PrevResult
-    SettShortcutAltJ = KeybShortcut.SettingsForm
-    SettShortcutAltN = -1
-    SettShortcutAltE = -1
-    SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
-    SettShortcutAltQ = -1
+        SettShortcutAltM = KeybShortcut.InsertNewEquation
+        SettShortcutAltM2 = -1
+        SettShortcutAltB = KeybShortcut.beregnudtryk
+        SettShortcutAltL = KeybShortcut.SolveEquation
+        SettShortcutAltD = KeybShortcut.Define
+        SettShortcutAltS = KeybShortcut.sletdef
+        SettShortcutAltF = KeybShortcut.Formelsamling
+        SettShortcutAltO = KeybShortcut.OmskrivUdtryk
+        SettShortcutAltR = KeybShortcut.PrevResult
+        SettShortcutAltJ = KeybShortcut.SettingsForm
+        SettShortcutAltN = -1
+        SettShortcutAltE = -1
+        SettShortcutAltG = KeybShortcut.Backslash
+        SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
+        SettShortcutAltQ = KeybShortcut.GradTegn
     
     End If
     If Not RegKeyExists("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\BigFloat") Then

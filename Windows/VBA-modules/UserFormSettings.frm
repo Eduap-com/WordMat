@@ -316,6 +316,21 @@ Private Sub Label_ImportSettingsFile_MouseMove(ByVal Button As Integer, ByVal Sh
     Label_ImportSettingsFile.BackColor = LBColorHover
 End Sub
 
+Private Sub Label_ResetSettings_Click()
+    SetAllDefaultRegistrySettings True
+    ReadAllSettingsFromRegistry
+    SetButtonsAccordingToSettings
+    MsgBox2 TT.A(811), vbOKOnly, TT.A(810)
+End Sub
+
+Private Sub Label_ResetSettings_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ResetSettings.BackColor = LBColorPress
+End Sub
+
+Private Sub Label_ResetSettings_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
+    Label_ResetSettings.BackColor = LBColorHover
+End Sub
+
 Private Sub Label_ShowMenus_Click()
     If QActivePartnership Then
         Application.Run macroname:="PQShowUFMenus"
@@ -352,6 +367,7 @@ Private Sub Label9_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, By
     Label_ImportSettingsFile.BackColor = LBColorInactive
     Label_checkpartnerskab.BackColor = LBColorInactive
     Label_ShowMenus.BackColor = LBColorInactive
+    Label_ResetSettings.BackColor = LBColorInactive
 End Sub
 
 Private Sub OptionButton_casmaxima_Change()
@@ -742,7 +758,7 @@ Sub SetCaptions()
     CheckBox_UseCodeBlocks.Caption = TT.A(905)
     Label_explainCode.Caption = TT.A(906)
     Label_color.Caption = TT.A(330) & ":"
-    
+    Label_ResetSettings.Caption = TT.A(810)
 #If Mac Then
     Label_casexplain.visible = True
 #Else
