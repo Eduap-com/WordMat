@@ -9,7 +9,7 @@ Sub LoadRibbon(ribbon As IRibbonUI)
 #If Mac Then
     Set WoMatRibbon = ribbon
 #Else
-    SetMaxProc
+'    SetMaxProc ' removed 1.38 will cause delay when opening word and an error if there are problems with mathmenu.dll
     Set WoMatRibbon = ribbon
 #End If
 End Sub
@@ -823,9 +823,17 @@ End Sub
 Sub Rib_HelpPDF(control As IRibbonControl)
 '    OpenLink "https://sites.google.com/site/wordmat/"
     If TT.LangNo = 1 Then
+#If Mac Then
+        RunScript "openpreview", GetWordMatDir & "WordDocs/WordMatManual.pdf"
+#Else
         OpenLink GetWordMatDir & "WordDocs\WordMatManual.pdf"
+#End If
     Else
+#If Mac Then
+        RunScript "openpreview", GetWordMatDir & "WordDocs/WordMatManual_english.pdf"
+#Else
         OpenLink GetWordMatDir & "WordDocs\WordMatManual_english.pdf"
+#End If
     End If
 End Sub
 Sub Rib_HelpMaxima(control As IRibbonControl)
