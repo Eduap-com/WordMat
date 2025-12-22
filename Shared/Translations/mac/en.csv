@@ -161,7 +161,7 @@
 160#£The differential equation could not be solved
 161#£Schools can sign up for a Partnership with Eduap. Partnership gets access to support, WordMath+ and much more. Click to read more
 162#£Binomial distribution
-163#£The expression is tested for truth by WordMat. 
+163#£The truth value of the statement is determined by WordMat. 
 164#£The result is based on numerical comparison
 165#£WordMat was unable to determine whether the expression was true or false
 166#£Units off
@@ -462,7 +462,7 @@
 461#£Show Graph
 462#£Direction field
 463#£3D Plot
-464#£Volume of revolution - 3D Rotate Graph about x-axis
+464#£Solid of revolution - 3D Rotate Graph about x-axis
 465#£Statistics
 466#£Ungrouped observations
 467#£Grouped observations
@@ -644,7 +644,7 @@
 643#£Word Manual
 644#£Opens manual as Word document
 645#£Web manual
-646#£Opens the online web manual. Has better navigation and videos than the Word manual, but a work in progress.
+646#£Opens the manual on the internet in a browser.
 647#£Maxima manual
 648#£Maxima is the CAS-program that does most of the math calculations in WordMat. Maxima has a lot of builtin functions which are not immediate visible from the WordMat user interface, but can be executed if you know the function names. This shows the Maxima help where you can see documentation for all the maxima functions.
 649#£About
@@ -808,8 +808,8 @@
 807#£Expand
 808#£Help
 809#£Manual
-810#£Documentation as Word document
-811#£Website documentation
+810#£Reset settings
+811#£All settings are now reset to default values
 812#£About
 813#£Update
 814#£Shortcuts

@@ -146,7 +146,7 @@ globalderivedunitlisting:[%volume,%frequency,%force,%pressure,
 %catalytic_activity];
 
 /*Volume*/
-%volumelisting : [m^3,[[L,liter],0.001,m]];
+%volumelisting : [m^3,[[%L,liter],0.001,m]];
 
 
 /* Derived Units with Special SI Names and Symbols 
@@ -803,7 +803,7 @@ disablegroupbyadd() := block(post_eval_functions : [processunits]);
 
 /* Startup Message */
 print("*******************************************************************");
-print("*                       Units version 0.50                        *");
+print("*                       Units version 0.50 x                       *");
 print("*          Definitions based on the NIST Reference on             *");
 print("*              Constants, Units, and Uncertainty                  *");
 print("*       Conversion factors from various sources including         *");
