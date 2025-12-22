@@ -269,7 +269,11 @@ End Sub
 Public Sub SetAllDefaultRegistrySettings(Optional ForceReset As Boolean = False)
     ' sets all settings to default, but only if they don't already exist
     On Error Resume Next
+#If Mac Then
     If ForceReset Or Not RegKeyExists("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\Forklaring") Then
+#Else
+    If ForceReset Or Not RegistryValueExists("HKCU", "Software\WordMat\Settings", "Forklaring") Then
+#End If
         MaximaForklaring = True
         MaximaKommando = False
         MaximaExact = 2 ' numerisk
@@ -284,7 +288,15 @@ Public Sub SetAllDefaultRegistrySettings(Optional ForceReset As Boolean = False)
         ExcelIndlejret = False
         AllTrig = False
         OutUnits = ""
-        SettCheckForUpdate = True
+#If Mac Then
+            SettCheckForUpdate = True
+#Else
+        If RegistryValueExists("HKLM", "Software\WordMat\Settings", "CheckForUpdate") Then ' When installed using MSI use global value to set checkforupdate
+            SettCheckForUpdate = GetRegistryValue("HKLM", "Software\WordMat\Settings", "CheckForUpdate") 'RegKeyRead("HKLM\SOFTWARE\WORDMAT\Settings\CheckForUpdate")
+        Else
+            SettCheckForUpdate = True
+        End If
+#End If
         MaximaIndex = False
         PolarOutput = False
 #If Mac Then
@@ -1023,6 +1035,9 @@ End Property
 Public Property Let SettCheckForUpdate(xval As Boolean)
     SetRegSetting "CheckForUpdate", Abs(CInt(xval))
 End Property
+Public Property Get SettCheckForUpdateLM() As Boolean
+    SettCheckForUpdateLM = CBool(GetRegSetting("CheckForUpdate"))
+End Property
 Public Property Get BackupType() As Integer
     If mBackupType = 0 Then
         ReadAllSettingsFromRegistry
@@ -1388,6 +1403,7 @@ Public Function GetRegSetting(key As String) As Integer
         GetRegSetting = val(s)
     End If
 End Function
+
 Private Sub SetRegSetting(ByVal key As String, ByVal val As Integer)
 #If Mac Then
     RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
@@ -1422,6 +1438,7 @@ Public Function GetRegSettingLong(key As String) As Long
     GetRegSettingLong = CLng(GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_DWORD))
 #End If
 End Function
+
 #End If
 Public Function GetRegSettingString(key As String) As String
 #If Mac Then

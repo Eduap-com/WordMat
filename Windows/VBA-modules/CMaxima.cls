@@ -467,23 +467,27 @@ Sub AnswerQuestion(StopTime As Integer, Optional ShowWaitForm As Boolean = True)
         pos = InStr(MaxProc.LastMaximaOutput, "positive, negative or zero?")
         pos2 = InStr(MaxProc.LastMaximaOutput, "positive or negative?")
         If pos > 0 Or pos2 > 0 Then
-            Dim UF As New UserFormAskSign
-            If pos <= 0 And pos2 > 0 Then pos = pos2
-            pos2 = InStr(MaxProc.LastMaximaOutput, "Is ")
-            UF.Label_udtryk.Caption = Mid$(MaxProc.LastMaximaOutput, pos2 + 3, pos - pos2 - 4)
-            If UF.Label_udtryk.Caption = prevspr Then
-                svar = prevsvar
+            If MaximaUnits Then
+                svar = "pos"
             Else
-                prevspr = UF.Label_udtryk.Caption
-                UF.Show
-                If UF.OptionButton_positiv.Value = True Then
-                    svar = "pos"
-                ElseIf UF.OptionButton_negativ.Value = True Then
-                    svar = "neg"
+                Dim UF As New UserFormAskSign
+                If pos <= 0 And pos2 > 0 Then pos = pos2
+                pos2 = InStr(MaxProc.LastMaximaOutput, "Is ")
+                UF.Label_udtryk.Caption = Mid$(MaxProc.LastMaximaOutput, pos2 + 3, pos - pos2 - 4)
+                If UF.Label_udtryk.Caption = prevspr Then
+                    svar = prevsvar
                 Else
-                    svar = "zero"
+                    prevspr = UF.Label_udtryk.Caption
+                    UF.Show
+                    If UF.OptionButton_positiv.Value = True Then
+                        svar = "pos"
+                    ElseIf UF.OptionButton_negativ.Value = True Then
+                        svar = "neg"
+                    Else
+                        svar = "zero"
+                    End If
+                    Unload UF
                 End If
-                Unload UF
             End If
         ElseIf InStr(MaxProc.LastMaximaOutput, " integer?") And MaximaComplex = False Then
             svar = "y"
@@ -515,7 +519,7 @@ igen:
         End If
         prevsvar = svar
         MaxProc.AnswerQuestion (svar)
-'        MsgBox MaxProc.LastMaximaOutput
+        '        MsgBox MaxProc.LastMaximaOutput
         WaitForMaximaForm StopTime
         answered = True
         defindex = 0 ' When answering the initial definition is lost from lastmaximaoutput. definition errors will not be detected. If this variable is not reset. WordMat will think a defition error has occured.

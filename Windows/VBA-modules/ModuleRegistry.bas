@@ -173,6 +173,77 @@ Public Function SetRegistryValue(hive As String, path As String, valueName As St
     RegCloseKey hKey
     SetRegistryValue = (result = 0)
 End Function
+Public Function RegistryKeyExists(hive As String, path As String) As Boolean
+    ' RegistryKeyExists("HKCU", "Software\WordMat\Settings")
+    ' Checks if a registry key exists using Windows API
+    
+    Dim hRoot As LongPtr
+    Dim hKey As LongPtr
+    Dim result As Long
+    
+    ' Map hive string to handle
+    Select Case UCase(hive)
+        Case "HKLM", "HKEY_LOCAL_MACHINE"
+            hRoot = HKEY_LOCAL_MACHINE
+        Case "HKCU", "HKEY_CURRENT_USER"
+            hRoot = HKEY_CURRENT_USER
+        Case Else
+            RegistryKeyExists = False
+            Exit Function
+    End Select
+    
+    ' Try to open the key with minimal access rights
+    result = RegOpenKeyEx(hRoot, path, 0, KEY_READ, hKey)
+    
+    If result = ERROR_SUCCESS Then
+        ' Key exists, close it and return True
+        RegCloseKey hKey
+        RegistryKeyExists = True
+    Else
+        ' Key doesn't exist or can't be accessed
+        RegistryKeyExists = False
+    End If
+End Function
+
+Public Function RegistryValueExists(hive As String, path As String, valueName As String) As Boolean
+    ' RegistryValueExists("HKCU", "Software\WordMat\Settings", "AntalBeregninger")
+    ' Checks if a specific registry value exists using Windows API
+    
+    Dim hRoot As LongPtr
+    Dim hKey As LongPtr
+    Dim result As Long
+    Dim valueType As Long
+    Dim dataSize As Long
+    
+    ' Map hive string to handle
+    Select Case UCase(hive)
+        Case "HKLM", "HKEY_LOCAL_MACHINE"
+            hRoot = HKEY_LOCAL_MACHINE
+        Case "HKCU", "HKEY_CURRENT_USER"
+            hRoot = HKEY_CURRENT_USER
+        Case Else
+            RegistryValueExists = False
+            Exit Function
+    End Select
+    
+    ' Try to open the key
+    result = RegOpenKeyEx(hRoot, path, 0, KEY_READ, hKey)
+    If result <> ERROR_SUCCESS Then
+        ' Key doesn't exist, so value doesn't exist either
+        RegistryValueExists = False
+        Exit Function
+    End If
+    
+    ' Try to query the value (just to check existence, not to read data)
+    result = RegQueryValueEx(hKey, valueName, 0, valueType, ByVal 0&, dataSize)
+    
+    ' Close the key
+    RegCloseKey hKey
+    
+    ' Return True if the value exists
+    RegistryValueExists = (result = ERROR_SUCCESS)
+End Function
+
 
 ' **** These are mainly for mac use ******
 Public Function RegKeyRead(i_RegKey As String) As String
