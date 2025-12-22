@@ -644,7 +644,7 @@
 643#£Handbok för Word
 644#£Öppnar dokumentet med hjälp.
 645#£Handbok för webben
-646#£Öppnar webbhandboken. Har bättre navigering och videor än Word-manualen, men är inte klar ännu.
+646#£Öppnar manualen på internet i en webbläsare.
 647#£Maxima manuell
 648#£Maxima är CAS-programmet som utför många av de matematiska funktionerna i WordMat. Maxima har byggt in en hel del funktioner som inte syns direkt i WordMat, men de kan utföras om du känner till funktionsnamnen. Här kan du öppna en sammanfattning av maxima-kommandon.
 649#£Om
@@ -808,8 +808,8 @@
 807#£Expandera
 808#£Hjälp
 809#£Handbok
-810#£Manual som Word-dokument
-811#£Dokumentation av webbplatsen
+810#£Återställ inställningarna
+811#£Alla inställningar återställs nu till standardvärden
 812#£Om
 813#£Uppdatera
 814#£Genvägar

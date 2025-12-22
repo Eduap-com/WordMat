@@ -644,7 +644,7 @@
 643#£Wordin käsikirja
 644#£Avaa manuaalin Word-asiakirjana
 645#£Web-opas
-646#£Avaa online-oppaan. Siinä on parempi navigointi ja videot kuin Word-oppaassa, mutta työ on kesken.
+646#£Avaa käyttöohjeen internetissä selaimessa.
 647#£Maxima-käsikirja
 648#£Maxima on CAS-ohjelma, joka tekee suurimman osan WordMatin matemaattisista laskutoimituksista. Maximassa on paljon sisäänrakennettuja toimintoja, jotka eivät näy välittömästi WordMat-käyttöliittymästä, mutta ne voidaan suorittaa, jos tiedät toimintojen nimet. Tämä näyttää Maxima-ohjeen, josta näet kaikkien maxima-funktioiden dokumentaatiot.
 649#£Noin
@@ -808,8 +808,8 @@
 807#£Laajentaa
 808#£Apua
 809#£Manuaalinen
-810#£Manuaalinen Word-asiakirjana
-811#£Verkkosivuston dokumentaatio
+810#£Nollaa asetukset
+811#£Kaikki asetukset on nyt palautettu oletusarvoihin
 812#£Noin
 813#£Päivittää
 814#£Pikakuvakkeet

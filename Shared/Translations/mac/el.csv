@@ -1,916 +1,916 @@
-0#£å•ThŒŽ‡ ‹Ž‡ Œ’™•‘«Y˜ Maxima
-1#£Ž—‡‹‹Th ‡–Ž““«Y’˜ Œ”§——˜
-2#£Ž—‡‹‹Th ‡–Ž““«Y’˜ Œ”§——˜ ‹Ž‡ ‡’‡š•–†
-3#£Ž—‡‹‹Th ‡’‡š•–†˜ —™’ Œ”§——
+0#£å•ŒŽ‡ ‹Ž‡ Œ’™•‘˜ Maxima
+1#£Ž—‡‹‹ ‡–Ž““’˜ Œ”§——˜
+2#£Ž—‡‹‹ ‡–Ž““’˜ Œ”§——˜ ‹Ž‡ ‡’‡š•–†
+3#£Ž—‡‹‹ ‡’‡š•–†˜ —™’ Œ”§——
 4#£îŒ‘ŽŠ•ŠŒ§™˜
-5#£D‘™–•‘•‹Th—™Œ ™• Ÿ’•“‡ ™˜ Œ”§——˜
-6#£ì–Ž—“Ÿ˜ ‡–Ž“•«y Œ”§——˜
+5#£‘™–•‘•‹—™Œ ™• Ÿ’•“‡ ™˜ Œ”§——˜
+6#£ì–Ž—“Ÿ˜ ‡–Ž“• Œ”§——˜
 7#£ç–Ž. eq.
-8#£Ž—‡‹‹Th Œ’Ÿ™™‡˜ Œ”§——˜ ‡–Ž.
-9#£’“«Y–— ‡–Ž“th’ Œ”§——˜
-10#£Íd†–Ö•’™‡ •’Ÿ“‡™‡ Œ”Ž—th—Œ’
-11#£ÌŽ‡ ’‡ ŒŽ—‡‹†‹Œ™Œ “Ž‡ ‡’‡š•–† —™’ Œ”§—— ‡–‹Ÿ™Œ–‡, ŒdŽ‘«Y”™Œ ÇŽ—‡‹‹Th ‡’‡š•–†˜ —™’ Œ”§——È ‡dŸ ™• “Œ’•«y ™•› WordMat —™’ Œ’Ÿ™™‡ ÇŽ—‡‹‹Th Œ”§——˜È
-12#£ï• Ÿ’•“‡ ›d†–ÖŒŽ ThŠ
-13#£ï• Ÿ’•“‡ Œ’Š«YÖŒ™‡Ž ’‡ “’ dŒ–Ž«YÖŒŽ Œ’† ŠŽ‡—™Th“‡™‡
+8#£Ž—‡‹‹ Œ’Ÿ™™‡˜ Œ”§——˜ ‡–Ž.
+9#£’“–— ‡–Ž“’ Œ”§——˜
+10#£Í†–Ö•’™‡ •’Ÿ“‡™‡ Œ”Ž——Œ’
+11#£ÌŽ‡ ’‡ ŒŽ—‡‹†‹Œ™Œ “Ž‡ ‡’‡š•–† —™’ Œ”§—— ‡–‹Ÿ™Œ–‡, ŒŽ‘”™Œ ÇŽ—‡‹‹ ‡’‡š•–†˜ —™’ Œ”§——È ‡Ÿ ™• “Œ’• ™•› WordMat —™’ Œ’Ÿ™™‡ ÇŽ—‡‹‹ Œ”§——˜È
+12#£ï• Ÿ’•“‡ ›†–ÖŒŽ Š
+13#£ï• Ÿ’•“‡ Œ’ŠÖŒ™‡Ž ’‡ “’ Œ–ŽÖŒŽ Œ’† ŠŽ‡—™“‡™‡
 14#£ç’‡š•–† Œ”§——˜
-15#£ï•d•«Y™—
-16#£ç–Ž—™Œ–Th d‘Œ›–†
-17#£€Œ”Ž† d‘Œ›–†
+15#£ï••™—
+16#£ç–Ž—™Œ– ‘Œ›–†
+17#£€Œ”Ž† ‘Œ›–†
 18#£ç–§“—
-19#£®™Th—™Œ ™• Ÿ’•“‡ ‡’‡š•–†˜ ‡™† ™’ ŒŽ—‡‹‹Th
-20#£ï• WordMath ‡Ž—™† Š›’‡™Th ™’ Œ™«Y‘Œ— “‡“‡™Žth’ ›d•‘•‹Ž—“th’ —™• Word. ì d›–Th’‡˜ ™•› WordMath Œ§’‡Ž ‡’•ŽÖ™•«y thŠŽ‡ ‡Ž Š–Œ†’\r\nWordMat Œ‹‡Ž—™† Œd§—˜ ™‡ ‡Ÿ‘•›‡ d–•‹–†““‡™‡: Maxima, GeoGebra, Math fonts.\r\nOptional components: GeoGebra 5, Graph, WordMath+. €Œ§™Œ dŒ–Ž——Ÿ™Œ–‡ —™’ Œ’Ÿ™™‡ License\r\nWordMath «Y‹Ž’Œ ‡dŸ ™•’ Mikael Samsoe Sorensen, Nyborg Gymnasium, EDUAP 2009-2025.
-21#£Íd†–ÖŒŽ “Ž‡ ’«Y‡ «YŠ•— ™•› WordMath «Y™•Ž“ ‹Ž‡ ‘Th¿.\r\nNews: \r\n
-22#£ïth–‡ ‡ ‡’‡‡™Œ››’Œ§™Œ —™ —Œ‘§Š‡ ‘Th¿˜
-23#£ê«Y‡ «YŠ•—
-24#£D‘™–•‘•‹Th—™Œ ™•’ ‡–Ž“Ÿ ™’ —“Œ§’ —™‡ •d•§‡ «Y‘Œ™Œ ’‡ †’Œ™Œ d‡‘Ž’Š–Ÿ“—. î™ —›’«YÖŒŽ‡ ‡ Š“Ž•›–‹Œ§ «Y’‡˜ d§’‡‡˜, Ÿd•› “d•–Œ§™Œ ’‡ ‰†‘Œ™Œ ™•›˜ dŸ’™•›˜ —‡˜.  1Ú4 ™‡’ «Y‘Œ™Œ ’‡ †’Œ™Œ ™’ d‡‘Ž’Š–Ÿ“—, ‡d‘th˜ ŒdŽ‘«Y”™Œ ™•’ d§’‡‡ ‡Ž ŒdŽ‘«Y”™Œ ™’ ŒdŽ›“™Th d‡‘Ž’Š–Ÿ“— ‡dŸ ™• “Œ’•«y.
-25#£€Œ’ —›’Ž—™†™‡Ž ’‡ †’Œ™Œ d‡‘Ž’Š–Ÿ“— —Œ dŒ–Ž——Ÿ™Œ–‡ ‡dŸ 200 —“Œ§‡ —Œ «Y’‡’ d§’‡‡ Word. x–—Ž“•d•ŽTh—™Œ ™• Excel Œ†’ «Y‘Œ™Œ ’‡ †’Œ™Œ d‡‘Ž’Š–Ÿ“— —Œ ™Ÿ—‡ d•‘‘† —“Œ§‡
-26#£D‡–•›—Ž†—™Œ —š†‘“‡. Íd†–ÖŒŽ dŽ‡’th˜ —š†‘“‡ —™•›˜ ‡–Ž“•«y˜ ŒŽ—‡‹‹Th˜
-27#£D–«YdŒŽ ’‡ Š“Ž•›–‹Th—Œ™Œ «Y’‡’ d§’‡‡ “Œ Š«y• —™Th‘Œ˜. ïŽ“«Y˜ x —™’ ‡–Ž—™Œ–Th —™Th‘ ‡Ž ™Ž“«Y˜ y —™ ŠŒ”Ž† —™Th‘. ï‡ ‹–†““‡™‡ ‡‹’••«y’™‡Ž. ‚ d‡‘Ž’Š–Ÿ“— d–‡‹“‡™•d•ŽŒ§™‡Ž —™•›˜ ŒdŽ‘Œ‹“«Y’•›˜ ‡–Ž“•«y˜. †’ ŠŒ’ «YÖŒŽ ŒdŽ‘Œ‹Œ§ ‡’«Y’‡˜,  d‡‘Ž’Š–Ÿ“— Œ™Œ‘Œ§™‡Ž —Œ Ÿ‘•›˜ ™•›˜ ‡–Ž“•«y˜ ™•› d§’‡‡
-28#£‚ d‡‘Ž’Š–Ÿ“— ŠŒ’ “d•–Œ§ ’‡ d–‡‹“‡™•d•ŽŒ§ —Œ ‡›™† ™‡ —“Œ§‡
-29#£Ì–‡““ŽTh d‡‘Ž’Š–Ÿ“— d•› Œ™Œ‘Œ§™‡Ž ‡dŸ ™• WordMat: $Tab
-30#£Œ™ŽTh d‡‘Ž’Š–Ÿ“— d•› Œ™Œ‘Œ§™‡Ž ‡dŸ ™• WordMat: $Tab
-31#£D‡‘Ž’Š–Ÿ“— Ž—Ö«y•˜ d•› Œ™Œ‘Œ§™‡Ž ‡dŸ ™• WordMat: $Tab
-32#£‚ d‡‘Ž’Š–Ÿ“— Ž—Ö«y•˜ ŠŒ’ “d•–Œ§ ’‡ d–‡‹“‡™•d•ŽŒ§ —Œ ‡›™† ™‡ —“Œ§‡.  1Ú4 ‘•Ž •Ž ‡–Ž“•§ d–«YdŒŽ ’‡ Œ§’‡Ž Œ™Ž•§ (‡Ž ŸÖŽ “Š«Y’).
-33#£D‡‘Ž’Š–Ÿ“— ‡•–Ž—“«Y’ ‡dŸ ™• Ö–Th—™ “Œ ™ —›’†–™—
-34#£Œ™Œ‘Œ§™‡Ž ‡dŸ WordMath
-35#£€‘th—™Œ ™ —ŒŽ–† ™˜ d‡‘Ž’Š–Ÿ“—˜ d•‘›’«y“•› (1-
-36#£(‚ “«Y‹Ž—™ —ŒŽ–† ‡•–§¾Œ™‡Ž ‡dŸ ™•’ ‡–Ž“Ÿ ™’ dŸ’™’)
-37#£d‡–‡‹‹Œ‘§‡
-38#£D•‘›’›“ŽTh d‡‘Ž’Š–Ÿ“— ‰‡“•«y
-39#£D‡‘Ž’Š–Ÿ“— ‡•–Ž—“«Y’ ‡dŸ ™• Ö–Th—™
+19#£®™—™Œ ™• Ÿ’•“‡ ‡’‡š•–†˜ ‡™† ™’ ŒŽ—‡‹‹
+20#£ï• WordMath ‡Ž—™† Š›’‡™ ™’ Œ™‘Œ— “‡“‡™Ž’ ›•‘•‹Ž—“’ —™• Word. ì ›–’‡˜ ™•› WordMath Œ§’‡Ž ‡’•ŽÖ™• ŠŽ‡ ‡Ž Š–Œ†’\r\nWordMat Œ‹‡Ž—™† Œ§—˜ ™‡ ‡Ÿ‘•›‡ –•‹–†““‡™‡: Maxima, GeoGebra, Math fonts.\r\nOptional components: GeoGebra 5, Graph, WordMath+. €Œ§™Œ Œ–Ž——Ÿ™Œ–‡ —™’ Œ’Ÿ™™‡ License\r\nWordMath ‹Ž’Œ ‡Ÿ ™•’ Mikael Samsoe Sorensen, Nyborg Gymnasium, EDUAP 2009-2025.
+21#£Í†–ÖŒŽ “Ž‡ ’‡ Š•— ™•› WordMath ™•Ž“ ‹Ž‡ ‘¿.\r\nNews: \r\n
+22#£ï–‡ ‡ ‡’‡‡™Œ››’Œ§™Œ —™ —Œ‘§Š‡ ‘¿˜
+23#£ê‡ Š•—
+24#£‘™–•‘•‹—™Œ ™•’ ‡–Ž“Ÿ ™’ —“Œ§’ —™‡ ••§‡ ‘Œ™Œ ’‡ †’Œ™Œ ‡‘Ž’Š–Ÿ“—. î™ —›’ÖŒŽ‡ ‡ Š“Ž•›–‹Œ§ ’‡˜ §’‡‡˜, Ÿ•› “•–Œ§™Œ ’‡ ‰†‘Œ™Œ ™•›˜ Ÿ’™•›˜ —‡˜. ™‡’ ‘Œ™Œ ’‡ †’Œ™Œ ™’ ‡‘Ž’Š–Ÿ“—, ‡‘˜ ŒŽ‘”™Œ ™•’ §’‡‡ ‡Ž ŒŽ‘”™Œ ™’ ŒŽ›“™ ‡‘Ž’Š–Ÿ“— ‡Ÿ ™• “Œ’•.
+25#£€Œ’ —›’Ž—™†™‡Ž ’‡ †’Œ™Œ ‡‘Ž’Š–Ÿ“— —Œ Œ–Ž——Ÿ™Œ–‡ ‡Ÿ 200 —“Œ§‡ —Œ ’‡’ §’‡‡ Word. –—Ž“••Ž—™Œ ™• Excel Œ†’ ‘Œ™Œ ’‡ †’Œ™Œ ‡‘Ž’Š–Ÿ“— —Œ ™Ÿ—‡ •‘‘† —“Œ§‡
+26#£‡–•›—Ž†—™Œ —š†‘“‡. Í†–ÖŒŽ Ž‡’˜ —š†‘“‡ —™•›˜ ‡–Ž“•˜ ŒŽ—‡‹‹˜
+27#£–ŒŽ ’‡ Š“Ž•›–‹—Œ™Œ ’‡’ §’‡‡ “Œ Š• —™‘Œ˜. ïŽ“˜ x —™’ ‡–Ž—™Œ– —™‘ ‡Ž ™Ž“˜ y —™ ŠŒ”Ž† —™‘. ï‡ ‹–†““‡™‡ ‡‹’••’™‡Ž. ‚ ‡‘Ž’Š–Ÿ“— –‡‹“‡™••ŽŒ§™‡Ž —™•›˜ ŒŽ‘Œ‹“’•›˜ ‡–Ž“•˜. †’ ŠŒ’ ÖŒŽ ŒŽ‘Œ‹Œ§ ‡’’‡˜,  ‡‘Ž’Š–Ÿ“— Œ™Œ‘Œ§™‡Ž —Œ Ÿ‘•›˜ ™•›˜ ‡–Ž“•˜ ™•› §’‡‡
+28#£‚ ‡‘Ž’Š–Ÿ“— ŠŒ’ “•–Œ§ ’‡ –‡‹“‡™••ŽŒ§ —Œ ‡›™† ™‡ —“Œ§‡
+29#£Ì–‡““Ž ‡‘Ž’Š–Ÿ“— •› Œ™Œ‘Œ§™‡Ž ‡Ÿ ™• WordMat: $Tab
+30#£Œ™Ž ‡‘Ž’Š–Ÿ“— •› Œ™Œ‘Œ§™‡Ž ‡Ÿ ™• WordMat: $Tab
+31#£‡‘Ž’Š–Ÿ“— Ž—Ö•˜ •› Œ™Œ‘Œ§™‡Ž ‡Ÿ ™• WordMat: $Tab
+32#£‚ ‡‘Ž’Š–Ÿ“— Ž—Ö•˜ ŠŒ’ “•–Œ§ ’‡ –‡‹“‡™••ŽŒ§ —Œ ‡›™† ™‡ —“Œ§‡. ‘•Ž •Ž ‡–Ž“•§ –ŒŽ ’‡ Œ§’‡Ž Œ™Ž•§ (‡Ž ŸÖŽ “Š’).
+33#£‡‘Ž’Š–Ÿ“— ‡•–Ž—“’ ‡Ÿ ™• Ö–—™ “Œ ™ —›’†–™—
+34#£Œ™Œ‘Œ§™‡Ž ‡Ÿ WordMath
+35#£€‘—™Œ ™ —ŒŽ–† ™˜ ‡‘Ž’Š–Ÿ“—˜ •‘›’“•› (1-
+36#£(‚ “‹Ž—™ —ŒŽ–† ‡•–§¾Œ™‡Ž ‡Ÿ ™•’ ‡–Ž“Ÿ ™’ Ÿ’™’)
+37#£‡–‡‹‹Œ‘§‡
+38#£•‘›’›“Ž ‡‘Ž’Š–Ÿ“— ‰‡“•
+39#£‡‘Ž’Š–Ÿ“— ‡•–Ž—“’ ‡Ÿ ™• Ö–—™
 40#£èŒŽ™•›–‹§‡
 41#£€Œ‡ŠŽ†
-42#£ç–Ö§—™Œ ’‡ “‡’™Œ«yŒ™Œ
-43#£‚ ‡–§‰ŒŽ‡ Œ§’‡Ž d•‘«y ›¿‘Th. ì Ö–Ÿ’•˜ ›d•‘•‹Ž—“•«y “d•–Œ§ ’‡ Œ§’‡Ž d•‘«y “Œ‹†‘•˜ Th ’‡ d–•‡‘«Y—ŒŽ —š†‘“‡. †’ ŠŒ’ ‘ŒŽ™•›–‹Œ§, Š•Ž“†—™Œ “Ž‡ Ö‡“‘Ÿ™Œ– –«y“Ž—.
-44#£‚ ‡–§‰ŒŽ‡ Œ§’‡Ž ‡–Œ™† ›¿‘Th. ì Ö–Ÿ’•˜ ›d•‘•‹Ž—“•«y “d•–Œ§ ’‡ Œ§’‡Ž ‡–Œ™† “Œ‹†‘•˜ Th ’‡ d–•‡‘«Y—ŒŽ —š†‘“‡. †’ ŠŒ’ ‘ŒŽ™•›–‹Œ§, Š•Ž“†—™Œ “Ž‡ Ö‡“‘Ÿ™Œ– –«y“Ž—.
-45#£‚ ‡–§‰ŒŽ‡ ŠŒ’ “d•–Œ§ ’‡ Œ§’‡Ž ‡–’™ŽTh. dŽ‘•‹Th Œ™Ž•«y ‡«Y–‡Ž•›
-46#£‚ ‡–§‰ŒŽ‡ ŠŒ’ Œ§’‡Ž «Y‹›–. dŽ‘«Y”™Œ «Y’‡’ Œ™ŽŸ ‡«Y–‡Ž•.
-47#£ï•d•«Y™— ™•› Š–•“«Y‡ —Œ Œ”§——
-48#£€Œ’ Œ§’‡Ž Š›’‡™Ÿ’ ’‡ ‹§’ŒŽ ›d•‘•‹Ž—“Ÿ˜ ™’ •–Ž—“th’
-49#£‚ «Yš–‡— ŠŽ‡š•–•d•ŽŒ§™‡Ž ‡dŸ ™• WordMat.
-50#£‚ «Yš–‡— ŠŒ’ “d•–•«y—Œ ’‡ ŠŽ‡š«Y–ŒŽ
-51#£íŒ™‡‰‘™Th ‡™†—™‡—˜
-52#£ü’‡ ‡’™Žd‡–†‹‹• ‰–§—Œ™‡Ž ‡dŸ ™• WordMat
-53#£€Œ’ Th™‡’ Š›’‡™Th  Œ’—“†™— ™˜ «Yš–‡—˜
-54#£D‡–•›—Ž†—™Œ —š†‘“‡. ï• WordMat dŽ‡’Ÿ™‡™‡ ŠŒ’ «YÖŒŽ Œ‹‡™‡—™‡Œ§ ——™†. €•Ž“†—™Œ ’‡ †’Œ™Œ Œd‡’Œ‹‡™†—™‡—, dŽ‡’th˜ “Œ ‡dŒ’Œ–‹•d•Ž“«Y’• ™• d–Ÿ‹–‡““‡ d–•—™‡—§‡˜ ‡dŸ Ž•«y˜. †’ ™• —Ö•‘Œ§• —‡˜ «YÖŒŽ —›’Œ–‹‡—§‡,  –«y“Ž— "“«Y•Š•˜ —«y’ŠŒ—˜ dll" —™Ž˜ „›“§—ŒŽ˜/ÌŽ‡ d–•Ö–“«Y’•›˜ “d•–Œ§ Œ’ŠŒÖ•“«Y’˜ ’‡ ŒdŽ‘«y—ŒŽ ™• d–Ÿ‰‘“‡
-55#£D‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ Œ§’— ™•› Maxima
-56#£‚ ‡’Ž—Ÿ™™‡ ‘«y’Œ™‡Ž ‹Ž‡
-57#£‡dŸ WordMat.
-58#£ 1Ú4 ‘•Ž •Ž ‡–Ž“•§ ‘«y’•›’ ‡›™Th ™’ ‡’Ž—Ÿ™™‡
-59#£‚ ‡’Ž—Ÿ™™‡ ŠŒ’ Œ§ÖŒ ‘«y—ŒŽ˜ —™•’ ™•“«Y‡ $C ‹Ž‡ “Œ™‡‰‘™Th
-60#£‚ ‡’Ž—Ÿ™™‡ ŠŒ’ Œ§ÖŒ ‘«y—ŒŽ˜ —™•’ ™•“«Y‡ $R ‹Ž‡ “Œ™‡‰‘™Th
-61#£“Œ ™Ž˜ ‡Ÿ‘•›Œ˜ d‡–‡Š•Ö«Y˜/d–•žd•«Y—ŒŽ˜:
+42#£ç–Ö§—™Œ ’‡ “‡’™ŒŒ™Œ
+43#£‚ ‡–§‰ŒŽ‡ Œ§’‡Ž •‘ ›¿‘. ì Ö–Ÿ’•˜ ›•‘•‹Ž—“• “•–Œ§ ’‡ Œ§’‡Ž •‘ “Œ‹†‘•˜  ’‡ –•‡‘—ŒŽ —š†‘“‡. †’ ŠŒ’ ‘ŒŽ™•›–‹Œ§, Š•Ž“†—™Œ “Ž‡ Ö‡“‘Ÿ™Œ– –“Ž—.
+44#£‚ ‡–§‰ŒŽ‡ Œ§’‡Ž ‡–Œ™† ›¿‘. ì Ö–Ÿ’•˜ ›•‘•‹Ž—“• “•–Œ§ ’‡ Œ§’‡Ž ‡–Œ™† “Œ‹†‘•˜  ’‡ –•‡‘—ŒŽ —š†‘“‡. †’ ŠŒ’ ‘ŒŽ™•›–‹Œ§, Š•Ž“†—™Œ “Ž‡ Ö‡“‘Ÿ™Œ– –“Ž—.
+45#£‚ ‡–§‰ŒŽ‡ ŠŒ’ “•–Œ§ ’‡ Œ§’‡Ž ‡–’™Ž. Ž‘•‹ Œ™Ž• ‡–‡Ž•›
+46#£‚ ‡–§‰ŒŽ‡ ŠŒ’ Œ§’‡Ž ‹›–. Ž‘”™Œ ’‡’ Œ™ŽŸ ‡–‡Ž•.
+47#£ï••™— ™•› Š–•“‡ —Œ Œ”§——
+48#£€Œ’ Œ§’‡Ž Š›’‡™Ÿ’ ’‡ ‹§’ŒŽ ›•‘•‹Ž—“Ÿ˜ ™’ •–Ž—“’
+49#£‚ š–‡— ŠŽ‡š•–••ŽŒ§™‡Ž ‡Ÿ ™• WordMat.
+50#£‚ š–‡— ŠŒ’ “•–•—Œ ’‡ ŠŽ‡š–ŒŽ
+51#£íŒ™‡‰‘™ ‡™†—™‡—˜
+52#£ü’‡ ‡’™Ž‡–†‹‹• ‰–§—Œ™‡Ž ‡Ÿ ™• WordMat
+53#£€Œ’ ™‡’ Š›’‡™  Œ’—“†™— ™˜ š–‡—˜
+54#£‡–•›—Ž†—™Œ —š†‘“‡. ï• WordMat Ž‡’Ÿ™‡™‡ ŠŒ’ ÖŒŽ Œ‹‡™‡—™‡Œ§ ——™†. €•Ž“†—™Œ ’‡ †’Œ™Œ Œ‡’Œ‹‡™†—™‡—, Ž‡’˜ “Œ ‡Œ’Œ–‹••Ž“’• ™• –Ÿ‹–‡““‡ –•—™‡—§‡˜ ‡Ÿ Ž•˜. †’ ™• —Ö•‘Œ§• —‡˜ ÖŒŽ —›’Œ–‹‡—§‡,  –“Ž— "“•Š•˜ —’ŠŒ—˜ dll" —™Ž˜ „›“§—ŒŽ˜/ÌŽ‡ –•Ö–“’•›˜ “•–Œ§ Œ’ŠŒÖ•“’˜ ’‡ ŒŽ‘—ŒŽ ™• –Ÿ‰‘“‡
+55#£‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ Œ§’— ™•› Maxima
+56#£‚ ‡’Ž—Ÿ™™‡ ‘’Œ™‡Ž ‹Ž‡
+57#£‡Ÿ WordMat.
+58#£‘•Ž •Ž ‡–Ž“•§ ‘’•›’ ‡›™ ™’ ‡’Ž—Ÿ™™‡
+59#£‚ ‡’Ž—Ÿ™™‡ ŠŒ’ Œ§ÖŒ ‘—ŒŽ˜ —™•’ ™•“‡ $C ‹Ž‡ “Œ™‡‰‘™
+60#£‚ ‡’Ž—Ÿ™™‡ ŠŒ’ Œ§ÖŒ ‘—ŒŽ˜ —™•’ ™•“‡ $R ‹Ž‡ “Œ™‡‰‘™
+61#£“Œ ™Ž˜ ‡Ÿ‘•›Œ˜ ‡–‡Š•Ö˜/–•ž•—ŒŽ˜:
 62#£ì–§¾
-63#£€Œ’ ›d†–ÖŒŽ —«y’ŠŒ— —™• ŠŽ‡Š§™›•
-64#£æ†’™Œ ‘Ž —™• •›“d§ OK ‹Ž‡ ’‡ ”ŒŽ’Th—ŒŽ  Œ’“«Y–—
-65#£î›’™•“Œ«y—ŒŽ˜ d‘™–•‘•‹§•› WordMat
-66#£î›’™•“Œ«y—ŒŽ˜ Œ”§——˜ ™•› Word
-67#£íd•–Œ§™Œ ’‡ Š“Ž•›–‹Th—Œ™Œ ™Ž˜ ŠŽ«Y˜ —‡˜ —›’™•“Œ«y—ŒŽ˜ d‘™–•‘Ÿ‹—˜ —™• Word Th ’‡ ‡‘‘†”Œ™Œ ™Ž˜ ›d†–Ö•›—Œ˜ —›’™•“Œ«y—ŒŽ˜. ï•d•Œ™Th—™Œ ™• Š–•“«Y‡ —Œ “Ž‡ Œ”§——. ç’•§”™Œ ™• “Œ’•«y "îÖŒŠ§‡—". ’™•d§—™Œ ™’ •“†Š‡ d•› •’•“†¾Œ™‡Ž —›’‡–™Th—ŒŽ˜. æ†’™Œ ‘Ž —™• “Ž–Ÿ ‰«Y‘•˜ —™’ †™ ŠŒ”Ž† ‹’§‡. dŽ‘«Y”™Œ 'ç›™Ÿ“‡™Œ˜ ‡™‡Ö–Th—ŒŽ˜ “‡“‡™Žth’'
-68#£ï«yd•›˜
-69#£€Ž‡‹–‡šTh •–Ž—“th’
-70#£î™‡Œ–«Y˜
-71#£å–Œ§™Œ ™Ž“«Y˜ online
-72#£íŒ™‡™–•dTh Œ”Ž—th—Œ’ —Œ LaTex. (î›’™Ÿ“Œ›— alt+T “Œ™‡™–«YdŒŽ “§‡ Œ”§——)
-73#£ç’™Ž‹–‡šTh —™• d–ŸÖŒŽ–•
+63#£€Œ’ ›†–ÖŒŽ —’ŠŒ— —™• ŠŽ‡Š§™›•
+64#£æ†’™Œ ‘Ž —™• •›“§ OK ‹Ž‡ ’‡ ”ŒŽ’—ŒŽ  Œ’“–—
+65#£î›’™•“Œ—ŒŽ˜ ‘™–•‘•‹§•› WordMat
+66#£î›’™•“Œ—ŒŽ˜ Œ”§——˜ ™•› Word
+67#£í•–Œ§™Œ ’‡ Š“Ž•›–‹—Œ™Œ ™Ž˜ ŠŽ˜ —‡˜ —›’™•“Œ—ŒŽ˜ ‘™–•‘Ÿ‹—˜ —™• Word  ’‡ ‡‘‘†”Œ™Œ ™Ž˜ ›†–Ö•›—Œ˜ —›’™•“Œ—ŒŽ˜. ï••Œ™—™Œ ™• Š–•“‡ —Œ “Ž‡ Œ”§——. ç’•§”™Œ ™• “Œ’• "îÖŒŠ§‡—". ’™•§—™Œ ™’ •“†Š‡ •› •’•“†¾Œ™‡Ž —›’‡–™—ŒŽ˜. æ†’™Œ ‘Ž —™• “Ž–Ÿ ‰‘•˜ —™’ †™ ŠŒ”Ž† ‹’§‡. Ž‘”™Œ 'ç›™Ÿ“‡™Œ˜ ‡™‡Ö–—ŒŽ˜ “‡“‡™Ž’'
+68#£ï•›˜
+69#£€Ž‡‹–‡š •–Ž—“’
+70#£î™‡Œ–˜
+71#£å–Œ§™Œ ™Ž“˜ online
+72#£íŒ™‡™–• Œ”Ž——Œ’ —Œ LaTex. (î›’™Ÿ“Œ›— alt+T “Œ™‡™–ŒŽ “§‡ Œ”§——)
+73#£ç’™Ž‹–‡š —™• –ŸÖŒŽ–•
 74#£î™›‘ Œ“š†’Ž—˜
-75#£í’ ‹–†šŒ™Œ “•’†ŠŒ˜ “Œ d‘†‹Ž•›˜ Ö‡–‡™Th–Œ˜
-76#£x–—Ž“•d•ŽTh—™Œ ™• Maxima ‹Ž‡ ’‡ “Œ™‡™–«Y¿Œ™Œ ™• LaTex
-77#£íŒ™‡™–•dTh Ÿ‘’
-78#£íŒ™‡™–•dTh ‡Ž “Œ™†‰‡— —™• ŒdŸ“Œ’•
-79#£D–Ž’
+75#£í’ ‹–†šŒ™Œ “•’†ŠŒ˜ “Œ ‘†‹Ž•›˜ Ö‡–‡™–Œ˜
+76#£–—Ž“••Ž—™Œ ™• Maxima ‹Ž‡ ’‡ “Œ™‡™–¿Œ™Œ ™• LaTex
+77#£íŒ™‡™–• Ÿ‘’
+78#£íŒ™‡™–• ‡Ž “Œ™†‰‡— —™• ŒŸ“Œ’•
+79#£–Ž’
 80#£íŒ™†
-81#£æ‡’«Y’‡˜
-82#£î›’ThŒŽ‡
-83#£’—“†™— thŠŽ‡
-84#£€Œ’ ›d†–Ö•›’ Œ”Ž—th—ŒŽ˜ —™• ›dŸ‘•Žd• ‡›™•«y ™•› Œ‹‹–†š•› ‹Ž‡ “Œ™‡™–•dTh.
-85#£d§‘›— —›—™Th“‡™•˜ ŠŽ‡š•–Žth’ Œ”Ž—th—Œ’ ‡–Ž“™Ž†
-86#£€Ž‡š•–Ž«Y˜ Œ”Ž—th—ŒŽ˜
-87#£ïŽ“Th «Y’‡–”˜
-88#£í«Y‹Œ•˜ ‰Th“‡™•˜
-89#£î«y’ŠŒ— •›§Š’
-90#£“š†’Ž— Œ”Ž—th—Œ’
-91#£Ž—‡‹‹Th ‘§—™‡˜
-92#£Ž—‡‹‹Th d§’‡‡
-93#£Ž—‡‹‹Th ‹–‡šTh“‡™•˜
-94#£DŽ‡’th˜ Œ™Ÿ˜ ™•“«Y‡! \r\nadjust xmin/xmax
-95#£D‡–•›—Ž†—™Œ —š†‘“‡. ‘«Y‹”™Œ ™•›˜ ‡–Ž“•«y˜ ‡™† xmin ‡Ž xmax
+81#£æ‡’’‡˜
+82#£î›’ŒŽ‡
+83#£’—“†™— ŠŽ‡
+84#£€Œ’ ›†–Ö•›’ Œ”Ž——ŒŽ˜ —™• ›Ÿ‘•Ž• ‡›™• ™•› Œ‹‹–†š•› ‹Ž‡ “Œ™‡™–•.
+85#£§‘›— —›—™“‡™•˜ ŠŽ‡š•–Ž’ Œ”Ž——Œ’ ‡–Ž“™Ž†
+86#£€Ž‡š•–Ž˜ Œ”Ž——ŒŽ˜
+87#£ïŽ“ ’‡–”˜
+88#£í‹Œ•˜ ‰“‡™•˜
+89#£î’ŠŒ— •›§Š’
+90#£“š†’Ž— Œ”Ž——Œ’
+91#£Ž—‡‹‹ ‘§—™‡˜
+92#£Ž—‡‹‹ §’‡‡
+93#£Ž—‡‹‹ ‹–‡š“‡™•˜
+94#£Ž‡’˜ Œ™Ÿ˜ ™•“‡! \r\nadjust xmin/xmax
+95#£‡–•›—Ž†—™Œ —š†‘“‡. ‘‹”™Œ ™•›˜ ‡–Ž“•˜ ‡™† xmin ‡Ž xmax
 96#£æ‡“§‡ —›’Œ–‹‡—§‡
-97#£D‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ ŒŽ—‡‹‹Th ‹–‡šTh“‡™•˜. ’Š«YÖŒ™‡Ž ’‡ ›d†–ÖŒŽ —š†‘“‡ —«y’™‡”˜ —Œ «Y’‡’ •–Ž—“Ÿ
-98#£D‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ ŒŽ—‡‹‹Th Œ’Ÿ˜ š«y‘‘•› ™•› Excel. ç›™Ÿ “d•–Œ§ ’‡ d–•‘Œ§ ‡dŸ d–•‹•«y“Œ’ ‡Žš’§ŠŽ‡ ŠŽ‡•dTh ‘ŒŽ™•›–‹§‡˜ ™•› Excel. æ‘Œ§—™Œ Ÿ‘‡ ™‡ ‡’•ŽÖ™† š«y‘‘‡ ™•› Excel ‡Ž, —™ —›’«YÖŒŽ‡, ‡’•§”™Œ ”‡’† ™• Excel d–Ž’ d–•—d‡Th—Œ™Œ ”‡’† “Œ ™• WordMat.
-99#£D‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ d–•—d†ŒŽ‡ “Œ™‡™–•dTh˜ ™˜ Œ’™•‘Th˜ —‡˜ —Œ —«y’™‡” Maxima.
-100#£D‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ d–•—d†ŒŽ‡ “Œ™‡™–•dTh˜ ™˜ Œ”ŸŠ•› Maxima —Œ —«y’™‡” ™•› Word.
-101#£‚ ‘«y— Œ§’‡Ž ‡‰«Y‰‡Ž. ¼—˜ Œ‘Th—Œ™Œ ’‡ Š•Ž“†—Œ™Œ ’‡ Ö–—Ž“•d•ŽTh—Œ™Œ ‡Ž ‡–Ž“™Ž«Y˜ “ŒŸŠ•›˜
-102#£€ŒŠ•“«Y’•› Ÿ™Ž d–ŸŒŽ™‡Ž ‹Ž‡ “Ž‡ ™–Ž‹’•“Œ™–ŽTh Œ”§——, ›d†–Ö•›’ ‡dŒ§–˜ d•‘‘«Y˜ ‘«y—ŒŽ˜. íŸ’• «Y’‡ ‡dŸ ‡›™† ‡’‡š«Y–Œ™‡Ž
-103#£€Œ’ «YÖ•›’ ‰–ŒŒ§ Ÿ‘Œ˜ •Ž ‘«y—ŒŽ˜.
-104#£îš†‘“‡: €Ž‡§–Œ— “Œ ™• “Š«Y’.
+97#£‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ ŒŽ—‡‹‹ ‹–‡š“‡™•˜. ’ŠÖŒ™‡Ž ’‡ ›†–ÖŒŽ —š†‘“‡ —’™‡”˜ —Œ ’‡’ •–Ž—“Ÿ
+98#£‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ ŒŽ—‡‹‹ Œ’Ÿ˜ š‘‘•› ™•› Excel. ç›™Ÿ “•–Œ§ ’‡ –•‘Œ§ ‡Ÿ –•‹•“Œ’ ‡Žš’§ŠŽ‡ ŠŽ‡• ‘ŒŽ™•›–‹§‡˜ ™•› Excel. æ‘Œ§—™Œ Ÿ‘‡ ™‡ ‡’•ŽÖ™† š‘‘‡ ™•› Excel ‡Ž, —™ —›’ÖŒŽ‡, ‡’•§”™Œ ”‡’† ™• Excel –Ž’ –•—‡—Œ™Œ ”‡’† “Œ ™• WordMat.
+99#£‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ –•—†ŒŽ‡ “Œ™‡™–•˜ ™˜ Œ’™•‘˜ —‡˜ —Œ —’™‡” Maxima.
+100#£‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ –•—†ŒŽ‡ “Œ™‡™–•˜ ™˜ Œ”ŸŠ•› Maxima —Œ —’™‡” ™•› Word.
+101#£‚ ‘— Œ§’‡Ž ‡‰‰‡Ž. ¼—˜ Œ‘—Œ™Œ ’‡ Š•Ž“†—Œ™Œ ’‡ Ö–—Ž“••Ž—Œ™Œ ‡Ž ‡–Ž“™Ž˜ “ŒŸŠ•›˜
+102#£€ŒŠ•“’•› Ÿ™Ž –ŸŒŽ™‡Ž ‹Ž‡ “Ž‡ ™–Ž‹’•“Œ™–Ž Œ”§——, ›†–Ö•›’ ‡Œ§–˜ •‘‘˜ ‘—ŒŽ˜. íŸ’• ’‡ ‡Ÿ ‡›™† ‡’‡š–Œ™‡Ž
+103#£€Œ’ Ö•›’ ‰–ŒŒ§ Ÿ‘Œ˜ •Ž ‘—ŒŽ˜.
+104#£îš†‘“‡: €Ž‡§–Œ— “Œ ™• “Š’.
 105#£î›’™‡™ŽŸ ‘†•˜.
-106#£î›’™‡™ŽŸ ‘†•˜. x–—Ž“•d•ŽThŒ Œ—š‡‘“«Y’• —«y“‰•‘•. íd•–Œ§ ’‡ Œ§’‡Ž «Y’‡ —«y“‰•‘• d•‘‘‡d‘‡—Ž‡—“•«y d•› ‘Œ§dŒŽ Th «Y’‡ , . ¾Th™“‡
-107#£D–•ŒŽŠ•d•§—: ®™Th—‡™Œ ’‡ ‘«y—Œ™Œ «Y’‡ —«y—™“‡ Œ”§——˜, ‡‘‘† Š‘th—‡™Œ ‘Ž‹Ÿ™Œ–Œ˜ “Œ™‡‰‘™«Y˜ ‡dŸ ™Ž˜ Œ”Ž—th—ŒŽ˜. íŸ’• •Ž d–th™Œ˜ Œ”Ž—th—ŒŽ˜ ŒdŽ‘«y•’™‡Ž. ‘«Y‹”™Œ ÖŒŽ–•§’™‡ ™Ž˜ ™Œ‘Œ›™‡§Œ˜ Œ”Ž—th—ŒŽ˜.
-108#£‚ Maxima ‡’«YšŒ–Œ ™• ‡Ÿ‘•›• —š†‘“‡:
-109#£í«Y‹Ž—™• —š†‘“‡
-110#£ï• WordMat ŠŒ’ “dŸ–Œ—Œ ’‡ Œ’™•d§—ŒŽ ™• š†Œ‘• 'Program files'
-111#£D‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ d–•—d†ŒŽ‡ ‡’•§‹“‡™•˜:
-112#£€Œ’ Œ§’‡Ž Š›’‡™Th  —«y’ŠŒ— “Œ ™• ŠŽ‡•“Ž—™Th
-113#£îŒ ‡›™Ÿ ™• —“Œ§• ™•› Œ‹‹–†š•› •–§¾•’™‡Ž ™‡ Œ”Th˜:
-114#£€Œ’ ›d†–Ö•›’ •–Ž—“•§ —Œ ‡›™Ÿ ™• —“Œ§• ™•› Œ‹‹–†š•›.
-115#£«YÖŒŽ ‡–Œ™«Y˜ ‡d–•—ŠŽŸ–Ž—™Œ˜ “Œ™‡‰‘™«Y˜. ‚ ‡’Œ”†–™™ “Œ™‡‰‘™Th ŠŒ’ “d•–Œ§ ’‡ d–•—ŠŽ•–Ž—™Œ§. x–—Ž“•d•ŽTh—™Œ ™• x Th ™• t ˜ ‡’Œ”†–™™ “Œ™‡‰‘™Th.
-116#£€Œ’ “d•–Œ§™Œ ’‡ •–§—Œ™Œ «Y’‡ d‡–†‹‹•\r\næ‡™‡–‹Th—™Œ ™•’ •–Ž—“Ÿ: \r\n
-117#£Íd†–ÖŒŽ —š†‘“‡ —™•’ •–Ž—“Ÿ:
-118#£ç‹’•Œ§™‡Ž, ‡‘‘† ŠŽ•–th—™Œ ™• —š†‘“‡ ŒŽ—ŸŠ•› ‹Ž‡ ’‡ ‡d•š«y‹Œ™Œ ‡›™Ÿ ™• —š†‘“‡ Œ”ŸŠ•›
-119#£... ï• ›dŸ‘•Žd• ‡š‡Ž–«YŒ.
-120#£ï• —Ö•‘Œ§• / •–‹‡’Ž—“Ÿ˜ —‡˜ «YÖŒŽ “Ž‡ Œ’Œ–‹Th —›’Œ–‹‡—§‡. ïth–‡ “d•–Œ§™Œ ’‡ Ö–—Ž“•d•ŽTh—Œ™Œ ™• WordMat+
-121#£î›‹’th“. ï• —Ö•‘Œ§• —‡˜ ŠŒ’ «YÖŒŽ Œ’Œ–‹Th —›’Œ–‹‡—§‡.
-122#£€‘th—™Œ ™•’ •–Ž—“Ÿ ™˜ ’«Y‡˜ —›’†–™—˜\r\nì •–Ž—“Ÿ˜ “d•–Œ§ ’‡ Ö–—Ž“•d•ŽŒ§ —™• ›dŸ‘•Žd• «Y‹‹–‡š•, ‡‘‘† ŸÖŽ d–Ž’.\r\n†’ ŒŽ—‡‹†‹Œ™Œ “Ž‡ Œ’™•‘Th 'delete def:' dŽ• †™ —™• «Y‹‹–‡š•, ŠŒ’ ‡ Œ§’‡Ž ‹’—™Ÿ ‡dŸ ŒŒ§’• ™• —“Œ§•.\r\níd•–Œ§™Œ ’‡ •–§—Œ™Œ dŒ–Ž——Ÿ™Œ–Œ˜ “Œ™‡‰‘™«Y˜ †Œ š•–† ŠŽ‡Ö–§¾•’™†˜ ™Ž˜ “Œ " & ListSeparator\r\nex.:  f(x)=x " & €Ž‡Ö–Ž—™ŽŸ ‘§—™‡˜ & " g(x)=2x+1
-123#£ê«Y‡ ‘ŒŽ™•›–‹§‡
-124#£ê«Y‡ Œ”§——
+106#£î›’™‡™ŽŸ ‘†•˜. –—Ž“••ŽŒ Œ—š‡‘“’• —“‰•‘•. í•–Œ§ ’‡ Œ§’‡Ž ’‡ —“‰•‘• •‘‘‡‘‡—Ž‡—“• •› ‘Œ§ŒŽ  ’‡ , . ¾™“‡
+107#£–•ŒŽŠ••§—: ®™—‡™Œ ’‡ ‘—Œ™Œ ’‡ ——™“‡ Œ”§——˜, ‡‘‘† Š‘—‡™Œ ‘Ž‹Ÿ™Œ–Œ˜ “Œ™‡‰‘™˜ ‡Ÿ ™Ž˜ Œ”Ž——ŒŽ˜. íŸ’• •Ž –™Œ˜ Œ”Ž——ŒŽ˜ ŒŽ‘•’™‡Ž. ‘‹”™Œ ÖŒŽ–•§’™‡ ™Ž˜ ™Œ‘Œ›™‡§Œ˜ Œ”Ž——ŒŽ˜.
+108#£‚ Maxima ‡’šŒ–Œ ™• ‡Ÿ‘•›• —š†‘“‡:
+109#£í‹Ž—™• —š†‘“‡
+110#£ï• WordMat ŠŒ’ “Ÿ–Œ—Œ ’‡ Œ’™•§—ŒŽ ™• š†Œ‘• 'Program files'
+111#£‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ –•—†ŒŽ‡ ‡’•§‹“‡™•˜:
+112#£€Œ’ Œ§’‡Ž Š›’‡™  —’ŠŒ— “Œ ™• ŠŽ‡•“Ž—™
+113#£îŒ ‡›™Ÿ ™• —“Œ§• ™•› Œ‹‹–†š•› •–§¾•’™‡Ž ™‡ Œ”˜:
+114#£€Œ’ ›†–Ö•›’ •–Ž—“•§ —Œ ‡›™Ÿ ™• —“Œ§• ™•› Œ‹‹–†š•›.
+115#£ÖŒŽ ‡–Œ™˜ ‡–•—ŠŽŸ–Ž—™Œ˜ “Œ™‡‰‘™˜. ‚ ‡’Œ”†–™™ “Œ™‡‰‘™ ŠŒ’ “•–Œ§ ’‡ –•—ŠŽ•–Ž—™Œ§. –—Ž“••Ž—™Œ ™• x  ™• t ˜ ‡’Œ”†–™™ “Œ™‡‰‘™.
+116#£€Œ’ “•–Œ§™Œ ’‡ •–§—Œ™Œ ’‡ ‡–†‹‹•\r\næ‡™‡–‹—™Œ ™•’ •–Ž—“Ÿ: \r\n
+117#£Í†–ÖŒŽ —š†‘“‡ —™•’ •–Ž—“Ÿ:
+118#£ç‹’•Œ§™‡Ž, ‡‘‘† ŠŽ•–—™Œ ™• —š†‘“‡ ŒŽ—ŸŠ•› ‹Ž‡ ’‡ ‡•š‹Œ™Œ ‡›™Ÿ ™• —š†‘“‡ Œ”ŸŠ•›
+119#£... ï• ›Ÿ‘•Ž• ‡š‡Ž–Œ.
+120#£ï• —Ö•‘Œ§• / •–‹‡’Ž—“Ÿ˜ —‡˜ ÖŒŽ “Ž‡ Œ’Œ–‹ —›’Œ–‹‡—§‡. ï–‡ “•–Œ§™Œ ’‡ Ö–—Ž“••Ž—Œ™Œ ™• WordMat+
+121#£î›‹’“. ï• —Ö•‘Œ§• —‡˜ ŠŒ’ ÖŒŽ Œ’Œ–‹ —›’Œ–‹‡—§‡.
+122#£€‘—™Œ ™•’ •–Ž—“Ÿ ™˜ ’‡˜ —›’†–™—˜\r\nì •–Ž—“Ÿ˜ “•–Œ§ ’‡ Ö–—Ž“••ŽŒ§ —™• ›Ÿ‘•Ž• ‹‹–‡š•, ‡‘‘† ŸÖŽ –Ž’.\r\n†’ ŒŽ—‡‹†‹Œ™Œ “Ž‡ Œ’™•‘ 'delete def:' Ž• †™ —™• ‹‹–‡š•, ŠŒ’ ‡ Œ§’‡Ž ‹’—™Ÿ ‡Ÿ ŒŒ§’• ™• —“Œ§•.\r\ní•–Œ§™Œ ’‡ •–§—Œ™Œ Œ–Ž——Ÿ™Œ–Œ˜ “Œ™‡‰‘™˜ †Œ š•–† ŠŽ‡Ö–§¾•’™†˜ ™Ž˜ “Œ " & ListSeparator\r\nex.:  f(x)=x " & €Ž‡Ö–Ž—™ŽŸ ‘§—™‡˜ & " g(x)=2x+1
+123#£ê‡ ‘ŒŽ™•›–‹§‡
+124#£ê‡ Œ”§——
 125#£ì–Ž—“Ÿ˜ Œ”§——˜
 126#£ì–§¾
-127#£‚ «Yš–‡— Œ§’‡Ž d•‘«y “Œ‹†‘. é«Y‘Œ™Œ ’‡ ™• ŒŽ—‡‹†‹Œ™Œ —™ ‘«Y”;\r\nç›™Ÿ “d•–Œ§ ’‡ Œd–Œ†—ŒŽ ™’ ™‡Ö«y™™‡ ™•› Word. ìŽ “Œ‹†‘Œ˜ Œ”Ž—th—ŒŽ˜ “d•–•«y’ ’‡ —™‡“‡™Th—•›’ ™• Word —Œ ‡–‹•«y˜ ›d•‘•‹Ž—™«Y˜. ”Œ™†—™Œ ™• Œ’ŠŒÖŸ“Œ’• Œd§‘›—˜ Ö–—Ž“•d•Žth’™‡˜ ‡–Ž“™Ž«Y˜ “ŒŸŠ•›˜\r\níd•–Œ§™Œ ’‡ ŠŒ§™Œ ™’ d‡–‡†™ «Y”•Š•:
-128#£€Œ’ Th™‡’ Š›’‡™Ÿ˜ • ›d•‘•‹Ž—“Ÿ˜ ™˜ «Yš–‡—˜.
-129#£‚ Œ”§—— ŠŒ’ Œ§ÖŒ ‘«y—ŒŽ˜ —™•’ ™•“«Y‡ $C ‹Ž‡ “Œ™‡‰‘™Th
-130#£‚ Œ”§—— ŠŒ’ Œ§ÖŒ ‘«y—ŒŽ˜ —™’ $R ™•“«Y‡ ‹Ž‡ “Œ™‡‰‘™Th
-131#£ï• WordMat ŠŒ’ “dŸ–Œ—Œ ’‡ ‘«y—ŒŽ ™’ Œ”§——
-132#£ 1Ú4 ‘•Ž •Ž ‡–Ž“•§ Œ§’‡Ž ‘«y—ŒŽ˜ —™’ Œ”§——
-133#£®™Th—‡™Œ ’‡ ‘«y—Œ™Œ ™’ Œ”§—— ‹Ž‡ “Ž‡ “Œ™‡‰‘™Th d•› «YÖŒŽ ThŠ •–Ž—™Œ§. Ž—‡‹†‹Œ™Œ “Ž‡ Œ’™•‘Th 'delete def:' d–Ž’ ‡dŸ ™’ Œ”§——.
-134#£ï• —«y—™“‡ ™’ Œ”Ž—th—Œ’ ŒdŽ‘«yŒ™‡Ž ‹Ž‡
-135#£‡dŸ ™ —›’†–™— ÇŒd§‘›— Œ”§——˜È ™•› WordMat,
-136#£æ‡™‡Ö–Ž—“«Y’ —Ö«Y— —›“‰§—˜ “Œ
-137#£ï• —«y—™“‡ ™’ Œ”Ž—th—Œ’ ŠŒ’ Œ§ÖŒ ‘«y—ŒŽ˜ —™•’ ™•“«Y‡ $C ‹Ž‡ “Œ™‡‰‘™«Y˜
-138#£ï• —«y—™“‡ ™’ Œ”Ž—th—Œ’ ŠŒ’ Œ§ÖŒ ‘«y—ŒŽ˜ —™•’ ™•“«Y‡ $R ‹Ž‡ “Œ™‡‰‘™«Y˜
-139#£D–«YdŒŽ ’‡ ›d†–ÖŒŽ «Y’‡ —«y“‰•‘• §—•’ —Œ “Ž‡ Œ”§——
-140#£€Œ’ «YÖŒŽ ‡™‡Ö–Œ§ —Ö«Y— —›“‰§—˜
-141#£ç›™Ÿ ŠŒ’ Œ§’‡Ž Œ”§——. íŽ‡ Œ”§—— ‡ «YÖŒŽ d†’™‡ «Y’‡ §—• d–Ÿ—“•.
-142#£ìŽ ‡Ÿ‘•›Œ˜ “Œ™‡‰‘™«Y˜ Œ”‡‘Œ§š•’™‡Ž ‡dŸ ™• —«y—™“‡ Œ”Ž—th—Œ’:
-143#£‡dŸ ™ —›’†–™— '”†‘ŒŽ¿ “Œ™‡‰‘™Th˜' ™•› WordMat, '
-144#£dŽ—™Ÿ˜
-145#£¿Œ«y™Ž•˜
+127#£‚ š–‡— Œ§’‡Ž •‘ “Œ‹†‘. é‘Œ™Œ ’‡ ™• ŒŽ—‡‹†‹Œ™Œ —™ ‘”;\r\nç›™Ÿ “•–Œ§ ’‡ Œ–Œ†—ŒŽ ™’ ™‡Ö™™‡ ™•› Word. ìŽ “Œ‹†‘Œ˜ Œ”Ž——ŒŽ˜ “•–•’ ’‡ —™‡“‡™—•›’ ™• Word —Œ ‡–‹•˜ ›•‘•‹Ž—™˜. ”Œ™†—™Œ ™• Œ’ŠŒÖŸ“Œ’• Œ§‘›—˜ Ö–—Ž“••Ž’™‡˜ ‡–Ž“™Ž˜ “ŒŸŠ•›˜\r\ní•–Œ§™Œ ’‡ ŠŒ§™Œ ™’ ‡–‡†™ ”•Š•:
+128#£€Œ’ ™‡’ Š›’‡™Ÿ˜ • ›•‘•‹Ž—“Ÿ˜ ™˜ š–‡—˜.
+129#£‚ Œ”§—— ŠŒ’ Œ§ÖŒ ‘—ŒŽ˜ —™•’ ™•“‡ $C ‹Ž‡ “Œ™‡‰‘™
+130#£‚ Œ”§—— ŠŒ’ Œ§ÖŒ ‘—ŒŽ˜ —™’ $R ™•“‡ ‹Ž‡ “Œ™‡‰‘™
+131#£ï• WordMat ŠŒ’ “Ÿ–Œ—Œ ’‡ ‘—ŒŽ ™’ Œ”§——
+132#£‘•Ž •Ž ‡–Ž“•§ Œ§’‡Ž ‘—ŒŽ˜ —™’ Œ”§——
+133#£®™—‡™Œ ’‡ ‘—Œ™Œ ™’ Œ”§—— ‹Ž‡ “Ž‡ “Œ™‡‰‘™ •› ÖŒŽ Š •–Ž—™Œ§. Ž—‡‹†‹Œ™Œ “Ž‡ Œ’™•‘ 'delete def:' –Ž’ ‡Ÿ ™’ Œ”§——.
+134#£ï• ——™“‡ ™’ Œ”Ž——Œ’ ŒŽ‘Œ™‡Ž ‹Ž‡
+135#£‡Ÿ ™ —›’†–™— ÇŒ§‘›— Œ”§——˜È ™•› WordMat,
+136#£æ‡™‡Ö–Ž—“’ —Ö— —›“‰§—˜ “Œ
+137#£ï• ——™“‡ ™’ Œ”Ž——Œ’ ŠŒ’ Œ§ÖŒ ‘—ŒŽ˜ —™•’ ™•“‡ $C ‹Ž‡ “Œ™‡‰‘™˜
+138#£ï• ——™“‡ ™’ Œ”Ž——Œ’ ŠŒ’ Œ§ÖŒ ‘—ŒŽ˜ —™•’ ™•“‡ $R ‹Ž‡ “Œ™‡‰‘™˜
+139#£–ŒŽ ’‡ ›†–ÖŒŽ ’‡ —“‰•‘• §—•’ —Œ “Ž‡ Œ”§——
+140#£€Œ’ ÖŒŽ ‡™‡Ö–Œ§ —Ö— —›“‰§—˜
+141#£ç›™Ÿ ŠŒ’ Œ§’‡Ž Œ”§——. íŽ‡ Œ”§—— ‡ ÖŒŽ †’™‡ ’‡ §—• –Ÿ—“•.
+142#£ìŽ ‡Ÿ‘•›Œ˜ “Œ™‡‰‘™˜ Œ”‡‘Œ§š•’™‡Ž ‡Ÿ ™• ——™“‡ Œ”Ž——Œ’:
+143#£‡Ÿ ™ —›’†–™— '”†‘ŒŽ¿ “Œ™‡‰‘™˜' ™•› WordMat, '
+144#£Ž—™Ÿ˜
+145#£¿Œ™Ž•˜
 146#£†‹’—™•˜
 147#£
-148#£å–«YŒ ‘«y—. DŒ–Ž——Ÿ™Œ–Œ˜ ‘«y—ŒŽ˜ “d•–•«y’ ’‡ ›d†–”•›’.
-149#£dŽ‘«Y”™Œ “Ÿ’• 1 «Yš–‡—
-150#£‚ «Yš–‡— ‡d‘•d•ŽŒ§™‡Ž ‡dŸ ™• WordMat Ö–—Ž“•d•Žth’™‡˜ ™Ž˜ “ŒŸŠ•›˜:
-151#£ç›™Ÿ“‡™ ‡d‘•d•§—,
-152#£ï–Ž‹’•“Œ™–Ž«Y˜ ™‡›™Ÿ™™Œ˜
-153#£€Œ’ Th™‡’ Š›’‡™Th  ‡d‘•d•§— ™˜ «Yš–‡—˜
-154#£‚ «Yš–‡— Œ§’‡Ž ‡d‘•›—™Œ›“«Y’ ‡dŸ ™• WordMat.
-155#£‚ «Yš–‡— ‘‡“‰†’Œ™‡Ž ›dŸ¿ ‡dŸ ™• WordMat.
-156#£€Œ’ Th™‡’ Š›’‡™Ÿ˜ • d‡–†‹•’™‡˜ ™˜ «Yš–‡—˜
-157#£‚ «Yš–‡— ŒdŒ™Œ§’Œ™‡Ž ‡dŸ ™• WordMat.
-158#£€Œ’ Th™‡’ Š›’‡™Th  Œd«Y™‡— ™˜ «Yš–‡—˜
-159#£D–«YdŒŽ ’‡ ‡dŒ’Œ–‹•d•ŽTh—Œ™Œ “•’†ŠŒ˜ ‹Ž‡ ’‡ ‘«y—Œ™Œ ŠŽ‡š•–Ž«Y˜ Œ”Ž—th—ŒŽ˜
-160#£‚ ŠŽ‡š•–ŽTh Œ”§—— ŠŒ’ “dŸ–Œ—Œ ’‡ ‘›Œ§
-161#£ï‡ —Ö•‘Œ§‡ “d•–•«y’ ’‡ Œ‹‹–‡š•«y’ ‹Ž‡ “Ž‡ —›’Œ–‹‡—§‡ “Œ ™’ Eduap. ‚ —›’Œ–‹‡—§‡ «YÖŒŽ d–Ÿ—‰‡— —Œ ›d•—™Th–Ž”, WordMath+ ‡Ž d•‘‘† †‘‘‡. æ†’™Œ ‘Ž ‹Ž‡ ’‡ ŠŽ‡‰†—Œ™Œ dŒ–Ž——Ÿ™Œ–‡
-162#£€Ž’›“ŽTh ‡™‡’•“Th
-163#£‚ «Yš–‡— Œ‘«Y‹ÖŒ™‡Ž ‹Ž‡ ™’ ‡‘ThŒŽ‡ ‡dŸ ™• WordMat.
-164#£ï• ‡d•™«Y‘Œ—“‡ ‰‡—§¾Œ™‡Ž —Œ ‡–Ž“™ŽTh —«y‹–Ž—
-165#£ï• WordMat ŠŒ’ Th™‡’ Š›’‡™Ÿ ’‡ d–•—ŠŽ•–§—ŒŽ ‡’  «Yš–‡— Th™‡’ ‡‘Th˜ Th ¿Œ›ŠTh˜
-166#£í•’†ŠŒ˜ ‡dŒ’Œ–‹•d•Ž“«Y’Œ˜
-167#£dŽ‘«Y”™Œ “•’†ŠŒ˜ Œ”ŸŠ•›
+148#£å–Œ ‘—. Œ–Ž——Ÿ™Œ–Œ˜ ‘—ŒŽ˜ “•–•’ ’‡ ›†–”•›’.
+149#£Ž‘”™Œ “Ÿ’• 1 š–‡—
+150#£‚ š–‡— ‡‘••ŽŒ§™‡Ž ‡Ÿ ™• WordMat Ö–—Ž“••Ž’™‡˜ ™Ž˜ “ŒŸŠ•›˜:
+151#£ç›™Ÿ“‡™ ‡‘••§—,
+152#£ï–Ž‹’•“Œ™–Ž˜ ™‡›™Ÿ™™Œ˜
+153#£€Œ’ ™‡’ Š›’‡™  ‡‘••§— ™˜ š–‡—˜
+154#£‚ š–‡— Œ§’‡Ž ‡‘•›—™Œ›“’ ‡Ÿ ™• WordMat.
+155#£‚ š–‡— ‘‡“‰†’Œ™‡Ž ›Ÿ¿ ‡Ÿ ™• WordMat.
+156#£€Œ’ ™‡’ Š›’‡™Ÿ˜ • ‡–†‹•’™‡˜ ™˜ š–‡—˜
+157#£‚ š–‡— ŒŒ™Œ§’Œ™‡Ž ‡Ÿ ™• WordMat.
+158#£€Œ’ ™‡’ Š›’‡™  Œ™‡— ™˜ š–‡—˜
+159#£–ŒŽ ’‡ ‡Œ’Œ–‹••Ž—Œ™Œ “•’†ŠŒ˜ ‹Ž‡ ’‡ ‘—Œ™Œ ŠŽ‡š•–Ž˜ Œ”Ž——ŒŽ˜
+160#£‚ ŠŽ‡š•–Ž Œ”§—— ŠŒ’ “Ÿ–Œ—Œ ’‡ ‘›Œ§
+161#£ï‡ —Ö•‘Œ§‡ “•–•’ ’‡ Œ‹‹–‡š•’ ‹Ž‡ “Ž‡ —›’Œ–‹‡—§‡ “Œ ™’ Eduap. ‚ —›’Œ–‹‡—§‡ ÖŒŽ –Ÿ—‰‡— —Œ ›•—™–Ž”, WordMath+ ‡Ž •‘‘† †‘‘‡. æ†’™Œ ‘Ž ‹Ž‡ ’‡ ŠŽ‡‰†—Œ™Œ Œ–Ž——Ÿ™Œ–‡
+162#£€Ž’›“Ž ‡™‡’•“
+163#£‚ š–‡— Œ‘‹ÖŒ™‡Ž ‹Ž‡ ™’ ‡‘ŒŽ‡ ‡Ÿ ™• WordMat.
+164#£ï• ‡•™‘Œ—“‡ ‰‡—§¾Œ™‡Ž —Œ ‡–Ž“™Ž —‹–Ž—
+165#£ï• WordMat ŠŒ’ ™‡’ Š›’‡™Ÿ ’‡ –•—ŠŽ•–§—ŒŽ ‡’  š–‡— ™‡’ ‡‘˜  ¿Œ›Š˜
+166#£í•’†ŠŒ˜ ‡Œ’Œ–‹••Ž“’Œ˜
+167#£Ž‘”™Œ “•’†ŠŒ˜ Œ”ŸŠ•›
 168#£í•’†ŠŒ˜ Œ”ŸŠ•›
-169#£ç‹«y‘Œ˜ d•› ŠŒ’ ™‡Ž–Ž†¾•›’
+169#£ç‹‘Œ˜ •› ŠŒ’ ™‡Ž–Ž†¾•›’
 170#£ç›™Ÿ“‡™ Š“Ž•›–‹§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜;
-171#£DŸ—‡ ‡–ÖŒ§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜ d–«YdŒŽ ’‡ ‡d•Œ«y—Œ™Œ;
-172#£x–Ÿ’•˜ “Œ™‡”«y ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜
-173#£ï• Word ŠŒ’ Š“Ž•›–‹Œ§ ‡›™Ÿ“‡™‡ ‡’™§‹–‡š‡ ‡—š‡‘Œ§‡˜, ‡‘‘† ‡d•Œ«yŒŽ ŠŒŠ•“«Y’‡ d•› Œ’ŠŒÖ•“«Y’˜ “d•–•«y’ ’‡ Ö–—Ž“•d•Ž•«y’ ‹Ž‡ ™’ ‡’‡Š“Ž•›–‹§‡ Œ’Ÿ˜ Ö‡“«Y’•› ‡–ÖŒ§•›\n\nWordMat ‡Ž “d•–Œ§ ’‡ Œ™Œ‘«Y—ŒŽ d‘Th– ‡’™§‹–‡š‡ ‡—š‡‘Œ§‡˜ Ÿ™‡’ †’Œ™Œ «Y’‡’ ›d•‘•‹Ž—“Ÿ ‡Ž ‡d•Œ«y—Œ™Œ ™• «Y‹‹–‡š• —Œ d•‘‘«Y˜ ŒŠŸ—ŒŽ˜. (ï‡ ‡’™§‹–‡š‡ ‡—š‡‘Œ§‡˜ Œ§’‡Ž d•‘«y dŽ• ‹–Th‹•–‡ Œ†’ ™• «Y‹‹–‡š• ŠŒ’ ‰–§—Œ™‡Ž —™• OneDrive) . ï‡ ‡–ÖŒ§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜ ‡d•Œ«y•’™‡Ž —™• š†Œ‘•: my documents/WordMat-backup
-174#£¦’•Ž‹“‡ š‡«Y‘•› ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜
-175#£®™th
-176#£D†’™‡
-177#£D•™«Y
-178#£D‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ d–•—d†ŒŽ‡ Š“Ž•›–‹§‡˜ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜
-179#£é«Y‘Œ™Œ ’‡ Œ’Œ–‹•d•ŽTh—Œ™Œ ™• WordMats ‡›™Ÿ“‡™ Š“Ž•›–‹§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜-system\n\n(ÌŽ‡ dŒ–Ž——Ÿ™Œ–Œ˜ d‘–•š•–§Œ˜, “Œ™‡‰Œ§™Œ —™Ž˜ –›“§—ŒŽ˜ | €“Ž•›–‹§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜)
-180#£æ‡’•’ŽTh ‡™‡’•“Th
-181#£x‡“‘Ÿ˜
+171#£Ÿ—‡ ‡–ÖŒ§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜ –ŒŽ ’‡ ‡•Œ—Œ™Œ;
+172#£–Ÿ’•˜ “Œ™‡” ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜
+173#£ï• Word ŠŒ’ Š“Ž•›–‹Œ§ ‡›™Ÿ“‡™‡ ‡’™§‹–‡š‡ ‡—š‡‘Œ§‡˜, ‡‘‘† ‡•ŒŒŽ ŠŒŠ•“’‡ •› Œ’ŠŒÖ•“’˜ “•–•’ ’‡ Ö–—Ž“••Ž•’ ‹Ž‡ ™’ ‡’‡Š“Ž•›–‹§‡ Œ’Ÿ˜ Ö‡“’•› ‡–ÖŒ§•›\n\nWordMat ‡Ž “•–Œ§ ’‡ Œ™Œ‘—ŒŽ ‘– ‡’™§‹–‡š‡ ‡—š‡‘Œ§‡˜ Ÿ™‡’ †’Œ™Œ ’‡’ ›•‘•‹Ž—“Ÿ ‡Ž ‡•Œ—Œ™Œ ™• ‹‹–‡š• —Œ •‘‘˜ ŒŠŸ—ŒŽ˜. (ï‡ ‡’™§‹–‡š‡ ‡—š‡‘Œ§‡˜ Œ§’‡Ž •‘ Ž• ‹–‹•–‡ Œ†’ ™• ‹‹–‡š• ŠŒ’ ‰–§—Œ™‡Ž —™• OneDrive) . ï‡ ‡–ÖŒ§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜ ‡•Œ•’™‡Ž —™• š†Œ‘•: my documents/WordMat-backup
+174#£¦’•Ž‹“‡ š‡‘•› ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜
+175#£®™
+176#£†’™‡
+177#£•™
+178#£‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ –•—†ŒŽ‡ Š“Ž•›–‹§‡˜ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜
+179#£é‘Œ™Œ ’‡ Œ’Œ–‹••Ž—Œ™Œ ™• WordMats ‡›™Ÿ“‡™ Š“Ž•›–‹§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜-system\n\n(ÌŽ‡ Œ–Ž——Ÿ™Œ–Œ˜ ‘–•š•–§Œ˜, “Œ™‡‰Œ§™Œ —™Ž˜ –›“§—ŒŽ˜ | €“Ž•›–‹§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜)
+180#£æ‡’•’Ž ‡™‡’•“
+181#£‡“‘Ÿ˜
 182#£æ‡’•’ŽŸ˜
 183#£¯‘Ÿ˜
-184#£D•‘«y ›¿‘Th
-185#£î•«ydŒ– (‡–‹Th)
+184#£•‘ ›¿‘
+185#£î•Œ– (‡–‹)
 186#£”§——
-187#£DŒ–§“Œ’Œ?
-188#£í«Y‹Ž—™•
-189#£íŸ’• ‹–‡““«Y˜
+187#£Œ–§“Œ’Œ?
+188#£í‹Ž—™•
+189#£íŸ’• ‹–‡““˜
 190#£“š†’Ž— ‡”Ÿ’’
-191#£D•ŽŸ™™‡
-192#£d–Œ†¾ŒŽ ™’ ™‡Ö«y™™‡ dŒ–Ž—™–•šTh˜
-193#£ 1Ú4 ™‡’ Œ“š‡’Ž—™Œ§  ŒŽŸ’‡, “d•–Œ§™Œ ’‡ ‡‘‘†”Œ™Œ ™ ‹’§‡ d–•‰•‘Th˜ d‡™th’™‡˜ d‡–‡™Œ™‡“«Y’‡ ™• ‡–Ž—™Œ–Ÿ •›“d§ ™•› d•’™ŽŽ•«y Œ’th —«y–Œ™Œ. æ†’™Œ ŠŒ”§ ‘Ž —™ ‹–‡““Th “Œ’•«y, ŒdŽ‘«Y”™Œ ŒdŽ‘•‹«Y˜ ‡Ž Ç‡’™Ž‹–‡šTh —™• d–ŸÖŒŽ–•È ‹Ž‡ ’‡ ‡’™Ž‹–†¿Œ™Œ ™’ ŒŽŸ’‡. æ‘Œ§—™Œ ™• d‡–†›–• ‹Ž‡ ’‡ ŒdŽ—™–«Y¿Œ™Œ —™• Word.
-194#£î™Œ–ŒŸ ™˜ Œd‡’†—™‡—˜
-195#£Ž—‡‹†‹Œ™Œ —›’™Œ™‡‹“«Y’Œ˜ ‹Ž‡ —“Œ§‡ d•› ‡ ŒdŽ—“‡§’•’™‡Ž “Œ ŸŽ’Œ˜ ŠŽ‡Œ•““«Y’Œ˜ ‹–‡““«Y˜ —™• ‹–†š“‡. D‡–‡ŠŒ§‹“‡™‡ \r\neksempel:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)\r\n §’‡Ž Œd§—˜ Š›’‡™Ÿ ’‡ †’Œ™Œ ‘Ž —™• ‹–†š“‡ ‹Ž‡ ’‡ ‘†‰Œ™Œ ™ —›’™Œ™‡‹“«Y’ Œ†’ Ö–—Ž“•d•ŽŒ§™Œ ™• •›“d§ ŒŽ—‡‹‹Th˜.
-196#£d§—˜, ‹Ž‡ ™’ ŒŽ—‡‹‹Th ŠŽ‡Œ•““«Y’’ ‹–‡““th’ d•› —“ŒŽth’•›’ —“Œ§‡ —™• ‹–†š“‡, ‡‘‘† “Œ †‘‘• Ö–th“‡ ‡dŸ ™‡ —“Œ§‡ —™ —™Th‘ 1. €Œ’ “d•–Œ§™Œ ’‡ Œ™Œ‘«Y—Œ™Œ d‡‘Ž’Š–Ÿ“— —Œ ‡›™Ÿ ™• —“Œ§•. íd•–Œ§™Œ ’‡ Š“Ž•›–‹Th—Œ™Œ †Œ Œ§Š•›˜ —ÖTh“‡™‡ —›’Š«Y•’™‡˜ ™Ž˜ ™Œ‘Œ§Œ˜.
-197#£dŽ‘«Y”™Œ «Y’‡’ d§’‡‡ “Œ ŠŒŠ•“«Y’‡ —›’™Œ™‡‹“«Y’’ d–Ž’ d‡™Th—Œ™Œ ™• ‹–†š“‡ ‹Ž‡ ’‡ ™‡ —›“d‘–th—Œ™Œ ‡›™Ÿ“‡™‡ —Œ ‡›™Ÿ ™• d‘‡§—Ž• ŒŽ“«Y’•›. ü’‡ —«y’•‘• —›’™Œ™‡‹“«Y’’ pr. ‹–‡““Th. ü’‡ —«y’•‘• —›’™Œ™‡‹“«Y’’ pr. ‹–‡““Th. ìŽ —›’™Œ™‡‹“«Y’Œ˜ d–«YdŒŽ ’‡ ŠŽ‡Ö–§¾•’™‡Ž “Œ Ÿ““‡, Œ–™“‡™ŽŸ Th —™‘•«Y™. ìŽ —›’™Œ™‡‹“«Y’Œ˜ “d•–•«y’ ’‡ ‡’™Ž‹–‡š•«y’ ‡dŸ ™• Excel. D‡–‡ŠŒ§‹“‡™‡: \r\n1.2 , 3.4\r\n3;4 ; 4,8\r\n5,6$Tab & "7.8
-198#£ìŽ “Œ™‡‰‘™«Y˜ d–«YdŒŽ ’‡ Œ§’‡Ž x ‡Ž y
-199#£Ž—‡‹‹Th «y‘•›
-200#£Ž—‡‹‹Th ‹–‡““Th˜
-201#£dŽ—“‡—“«Y’‡ —“Œ§‡
-202#£ìdŽ—•Š–Ÿ“—
+191#£•ŽŸ™™‡
+192#£–Œ†¾ŒŽ ™’ ™‡Ö™™‡ Œ–Ž—™–•š˜
+193#£™‡’ Œ“š‡’Ž—™Œ§  ŒŽŸ’‡, “•–Œ§™Œ ’‡ ‡‘‘†”Œ™Œ ™ ‹’§‡ –•‰•‘˜ ‡™’™‡˜ ‡–‡™Œ™‡“’‡ ™• ‡–Ž—™Œ–Ÿ •›“§ ™•› •’™ŽŽ• Œ’ —–Œ™Œ. æ†’™Œ ŠŒ”§ ‘Ž —™ ‹–‡““ “Œ’•, ŒŽ‘”™Œ ŒŽ‘•‹˜ ‡Ž Ç‡’™Ž‹–‡š —™• –ŸÖŒŽ–•È ‹Ž‡ ’‡ ‡’™Ž‹–†¿Œ™Œ ™’ ŒŽŸ’‡. æ‘Œ§—™Œ ™• ‡–†›–• ‹Ž‡ ’‡ ŒŽ—™–¿Œ™Œ —™• Word.
+194#£î™Œ–ŒŸ ™˜ Œ‡’†—™‡—˜
+195#£Ž—‡‹†‹Œ™Œ —›’™Œ™‡‹“’Œ˜ ‹Ž‡ —“Œ§‡ •› ‡ ŒŽ—“‡§’•’™‡Ž “Œ ŸŽ’Œ˜ ŠŽ‡Œ•““’Œ˜ ‹–‡““˜ —™• ‹–†š“‡. ‡–‡ŠŒ§‹“‡™‡ \r\neksempel:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)\r\n §’‡Ž Œ§—˜ Š›’‡™Ÿ ’‡ †’Œ™Œ ‘Ž —™• ‹–†š“‡ ‹Ž‡ ’‡ ‘†‰Œ™Œ ™ —›’™Œ™‡‹“’ Œ†’ Ö–—Ž“••ŽŒ§™Œ ™• •›“§ ŒŽ—‡‹‹˜.
+196#£§—˜, ‹Ž‡ ™’ ŒŽ—‡‹‹ ŠŽ‡Œ•““’’ ‹–‡““’ •› —“ŒŽ’•›’ —“Œ§‡ —™• ‹–†š“‡, ‡‘‘† “Œ †‘‘• Ö–“‡ ‡Ÿ ™‡ —“Œ§‡ —™ —™‘ 1. €Œ’ “•–Œ§™Œ ’‡ Œ™Œ‘—Œ™Œ ‡‘Ž’Š–Ÿ“— —Œ ‡›™Ÿ ™• —“Œ§•. í•–Œ§™Œ ’‡ Š“Ž•›–‹—Œ™Œ †Œ Œ§Š•›˜ —Ö“‡™‡ —›’Š•’™‡˜ ™Ž˜ ™Œ‘Œ§Œ˜.
+197#£Ž‘”™Œ ’‡’ §’‡‡ “Œ ŠŒŠ•“’‡ —›’™Œ™‡‹“’’ –Ž’ ‡™—Œ™Œ ™• ‹–†š“‡ ‹Ž‡ ’‡ ™‡ —›“‘–—Œ™Œ ‡›™Ÿ“‡™‡ —Œ ‡›™Ÿ ™• ‘‡§—Ž• ŒŽ“’•›. ü’‡ —’•‘• —›’™Œ™‡‹“’’ pr. ‹–‡““. ü’‡ —’•‘• —›’™Œ™‡‹“’’ pr. ‹–‡““. ìŽ —›’™Œ™‡‹“’Œ˜ –ŒŽ ’‡ ŠŽ‡Ö–§¾•’™‡Ž “Œ Ÿ““‡, Œ–™“‡™ŽŸ  —™‘•™. ìŽ —›’™Œ™‡‹“’Œ˜ “•–•’ ’‡ ‡’™Ž‹–‡š•’ ‡Ÿ ™• Excel. ‡–‡ŠŒ§‹“‡™‡: \r\n1.2 , 3.4\r\n3;4 ; 4,8\r\n5,6$Tab & "7.8
+198#£ìŽ “Œ™‡‰‘™˜ –ŒŽ ’‡ Œ§’‡Ž x ‡Ž y
+199#£Ž—‡‹‹ ‘•›
+200#£Ž—‡‹‹ ‹–‡““˜
+201#£Ž—“‡—“’‡ —“Œ§‡
+202#£ìŽ—•Š–Ÿ“—
 203#£ê‡Ž
-204#£ 1Ú4 ÖŽ
-205#£é›“Œ§™Œ ‡›™Th’ ™’ ŒdŽ‘•‹Th
-206#£ 1Ú4 ™‡’ Œ§’‡Ž Œ’Œ–‹•d•Ž“«Y’  ‘ŒŽ™•›–‹§‡ Š“Ž•›–‹§‡˜ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜ WordMats, ‡ Œ™Œ‘Œ—™Œ§ «Y’‡ ‡’™§‹–‡š• ‡—š‡‘Œ§‡˜ Ÿ™‡’ Œ™Œ‘Œ§™‡Ž «Y’‡˜ ›d•‘•‹Ž—“Ÿ˜. ü’‡ ‡’™§‹–‡š• ‡—š‡‘Œ§‡˜ ‘‡“‰†’Œ™‡Ž “Ÿ’• †Œ 5 ‘Œd™†. 10 ‡’™§‹–‡š‡ ‡—š‡‘Œ§‡˜ ‘‡“‰†’•’™‡Ž d–Ž’ ‡’™Ž‡™‡—™‡•«y’." & vbLf & vbLf & " íd•–Œ§™Œ ’‡ ‡‘‘†”Œ™Œ ‡›™«Y˜ ™Ž˜ –›“§—ŒŽ˜ —™Ž˜ –›“§—ŒŽ˜ | ç’™§‹–‡š• ‡—š‡‘Œ§‡˜.
-207#£íd•–Œ§™Œ d†’™‡ ’‡ ‡‘‘†”Œ™Œ ‡›™Th’ ™’ ŒdŽ‘•‹Th —™Ž˜ –›“§—ŒŽ˜ | ç’™§‹–‡š• ‡—š‡‘Œ§‡˜
+204#£ÖŽ
+205#£é›“Œ§™Œ ‡›™’ ™’ ŒŽ‘•‹
+206#£™‡’ Œ§’‡Ž Œ’Œ–‹••Ž“’  ‘ŒŽ™•›–‹§‡ Š“Ž•›–‹§‡˜ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜ WordMats, ‡ Œ™Œ‘Œ—™Œ§ ’‡ ‡’™§‹–‡š• ‡—š‡‘Œ§‡˜ Ÿ™‡’ Œ™Œ‘Œ§™‡Ž ’‡˜ ›•‘•‹Ž—“Ÿ˜. ü’‡ ‡’™§‹–‡š• ‡—š‡‘Œ§‡˜ ‘‡“‰†’Œ™‡Ž “Ÿ’• †Œ 5 ‘Œ™†. 10 ‡’™§‹–‡š‡ ‡—š‡‘Œ§‡˜ ‘‡“‰†’•’™‡Ž –Ž’ ‡’™Ž‡™‡—™‡•’." & vbLf & vbLf & " í•–Œ§™Œ ’‡ ‡‘‘†”Œ™Œ ‡›™˜ ™Ž˜ –›“§—ŒŽ˜ —™Ž˜ –›“§—ŒŽ˜ | ç’™§‹–‡š• ‡—š‡‘Œ§‡˜.
+207#£í•–Œ§™Œ †’™‡ ’‡ ‡‘‘†”Œ™Œ ‡›™’ ™’ ŒŽ‘•‹ —™Ž˜ –›“§—ŒŽ˜ | ç’™§‹–‡š• ‡—š‡‘Œ§‡˜
 208#£ç’™§‹–‡š• ‡—š‡‘Œ§‡˜
-209#£™• †–•Ž—“‡ ™’ ‹’Žth’ Œ§’‡Ž d†’ ‡dŸ 180
-210#£D–«YdŒŽ ’‡ ŒŽ—‡‹†‹Œ™Œ 3 d‘Œ›–«Y˜/‹’§Œ˜.  1Ú4 ÖŽ Ÿ“˜ 3 ‹’§Œ˜. ï•›‘†ÖŽ—™•’ 1 d‘Œ›–† d–«YdŒŽ ’‡ Œ§’‡Ž ‹’—™Th.
-211#£ï• †–•Ž—“‡ ™’ ‹’Žth’ ŠŒ’ Œ§’‡Ž 180
-212#£Ž—‡‹†‹‡™Œ d†–‡ d•‘‘«Y˜ ‹’§Œ˜/d‘Œ›–«Y˜
-213#£D–«YdŒŽ ’‡ ŒŽ—†‹Œ™Œ çæ„ƒåôî 3 d‘Œ›–«Y˜/‹’§Œ˜.  1Ú4 ÖŽ Ÿ“˜ 3 ‹’§Œ˜. ï•›‘†ÖŽ—™•’ 1 d‘Œ›–† d–«YdŒŽ ’‡ Œ§’‡Ž ‹’—™Th.
+209#£™• †–•Ž—“‡ ™’ ‹’Ž’ Œ§’‡Ž †’ ‡Ÿ 180
+210#£–ŒŽ ’‡ ŒŽ—‡‹†‹Œ™Œ 3 ‘Œ›–˜/‹’§Œ˜. ÖŽ Ÿ“˜ 3 ‹’§Œ˜. ï•›‘†ÖŽ—™•’ 1 ‘Œ›–† –ŒŽ ’‡ Œ§’‡Ž ‹’—™.
+211#£ï• †–•Ž—“‡ ™’ ‹’Ž’ ŠŒ’ Œ§’‡Ž 180
+212#£Ž—‡‹†‹‡™Œ †–‡ •‘‘˜ ‹’§Œ˜/‘Œ›–˜
+213#£–ŒŽ ’‡ ŒŽ—†‹Œ™Œ çæ„ƒåôî 3 ‘Œ›–˜/‹’§Œ˜. ÖŽ Ÿ“˜ 3 ‹’§Œ˜. ï•›‘†ÖŽ—™•’ 1 ‘Œ›–† –ŒŽ ’‡ Œ§’‡Ž ‹’—™.
 214#£
 215#£Ì’§‡
-216#£‰–«Y‡’ Ö–—Ž“•d•Žth’™‡˜ †–•Ž—“‡ ‹’Žth’ = 180 $Degree —Œ «Y’‡ ™–§‹’•
-217#£ï• “Th•˜ ™˜ d‘Œ›–†˜
-218#£‰–«YŒ Ö–—Ž“•d•Žth’™‡˜ ™•’ D›‡‹Ÿ–‡
-219#£ï• “Th•˜ ™’ d‘Œ›–th’
-220#£‰–«YŒ Ö–—Ž“•d•Žth’™‡˜ “‡«y–Ž—“‡
-221#£‰–«YŒ Ö–—Ž“•d•Žth’™‡˜ “§™•’•
-222#£‰–«YŒ Ö–—Ž“•d•Žth’™‡˜ —›’“§™•’•
-223#£‰–«YŒ Ö–—Ž“•d•Žth’™‡˜ ™• ’Ÿ“• ™•› —›’“Ž™Ÿ’•›
-224#£‰–«YŒ Ö–—Ž“•d•Žth’™‡˜ ™• ’Ÿ“• ™•› “Ž™Ÿ’•›
-225#£‚ ™Œ™–‡‹’ŽTh Œ”§—— ŒdŽ‘«yŒ™‡Ž ‹Ž‡
-226#£ç›™Th  ™Œ™–‡‹’ŽTh Œ”§—— «YÖŒŽ Š«y• ‘«y—ŒŽ˜:
-227#£ç‘‘†  †‘‘ ‘«y— Œ§’‡Ž ‡–’™ŽTh ‡Ž ™• “Th•˜ ŠŒ’ “d•–Œ§ ’‡ Œ§’‡Ž ‡–’™ŽŸ.
-228#£€ŒŠ•“«Y’•› Ÿ™Ž  ‘«y— ‹Ž‡
-229#£Œ§ÖŒ Š«y• ‘«y—ŒŽ˜ ‡Ž •Ž Š«y• ‘«y—ŒŽ˜ Th™‡’ Œ™Ž«Y˜, ‡›™Ÿ —“‡§’ŒŽ Ÿ™Ž ›d†–Ö•›’ Š«y• dŽ‡’† ™–§‹’‡. ïth–‡ d–«YdŒŽ ’‡ ›d•‘•‹§—•›“Œ ™Ž˜ ›dŸ‘•ŽdŒ˜ d‘Œ›–«Y˜ “Œ ‰†— ™ 2 ‘«y— Ö–—Ž“•d•Žth’™‡˜ ™’ §ŠŽ‡ “«Y•Š•.
-230#£Ž—‡‹‹Th —›“‰Ÿ‘•›
+216#£‰–‡’ Ö–—Ž“••Ž’™‡˜ †–•Ž—“‡ ‹’Ž’ = 180 $Degree —Œ ’‡ ™–§‹’•
+217#£ï• “•˜ ™˜ ‘Œ›–†˜
+218#£‰–Œ Ö–—Ž“••Ž’™‡˜ ™•’ ›‡‹Ÿ–‡
+219#£ï• “•˜ ™’ ‘Œ›–’
+220#£‰–Œ Ö–—Ž“••Ž’™‡˜ “‡–Ž—“‡
+221#£‰–Œ Ö–—Ž“••Ž’™‡˜ “§™•’•
+222#£‰–Œ Ö–—Ž“••Ž’™‡˜ —›’“§™•’•
+223#£‰–Œ Ö–—Ž“••Ž’™‡˜ ™• ’Ÿ“• ™•› —›’“Ž™Ÿ’•›
+224#£‰–Œ Ö–—Ž“••Ž’™‡˜ ™• ’Ÿ“• ™•› “Ž™Ÿ’•›
+225#£‚ ™Œ™–‡‹’Ž Œ”§—— ŒŽ‘Œ™‡Ž ‹Ž‡
+226#£ç›™  ™Œ™–‡‹’Ž Œ”§—— ÖŒŽ Š• ‘—ŒŽ˜:
+227#£ç‘‘†  †‘‘ ‘— Œ§’‡Ž ‡–’™Ž ‡Ž ™• “•˜ ŠŒ’ “•–Œ§ ’‡ Œ§’‡Ž ‡–’™ŽŸ.
+228#£€ŒŠ•“’•› Ÿ™Ž  ‘— ‹Ž‡
+229#£Œ§ÖŒ Š• ‘—ŒŽ˜ ‡Ž •Ž Š• ‘—ŒŽ˜ ™‡’ Œ™Ž˜, ‡›™Ÿ —“‡§’ŒŽ Ÿ™Ž ›†–Ö•›’ Š• Ž‡’† ™–§‹’‡. ï–‡ –ŒŽ ’‡ ›•‘•‹§—•›“Œ ™Ž˜ ›Ÿ‘•ŽŒ˜ ‘Œ›–˜ “Œ ‰†— ™ 2 ‘— Ö–—Ž“••Ž’™‡˜ ™’ §ŠŽ‡ “•Š•.
+230#£Ž—‡‹‹ —›“‰Ÿ‘•›
 231#£‘‘’Ž† ‹–†““‡™‡
-232#£¦‘‘‡ —«y“‰•‘‡
-233#£’«Y™
-234#£î«y“‰•‘•
-235#£d§‘›— Œ”§——˜ “Œ ‹–‡šŽ«Y˜ ‡Ž ‡–Ž“™Ž«Y˜ “ŒŸŠ•›˜
-236#£ç–ÖŽTh ŒŽ‡—§‡
-237#£í«Y•Š•˜ ŠŽ‡—™Th“‡™•˜
+232#£¦‘‘‡ —“‰•‘‡
+233#£’™
+234#£î“‰•‘•
+235#£§‘›— Œ”§——˜ “Œ ‹–‡šŽ˜ ‡Ž ‡–Ž“™Ž˜ “ŒŸŠ•›˜
+236#£ç–ÖŽ ŒŽ‡—§‡
+237#£í•Š•˜ ŠŽ‡—™“‡™•˜
 238#£Œ§’—
-239#£™«Y‘•˜
-240#£€Œ”Ž† d‘Œ›–† ‡Ž ‡–Ž—™Œ–Th d‘Œ›–† plottet. \n‚ ‡–Ž—™Œ–Th d‘Œ›–† Œ§’‡Ž “‡«y–. ‚ ŠŒ”Ž† d‘Œ›–† Œ§’‡Ž d–†—Ž’.
-241#£Ì–‡šŽTh ‘«y—
-242#£d§—˜ ¾•›“ dy ŠŽd‘Ÿ ‘Ž Th —«y–•’™‡˜ «Y’‡ d‘‡§—Ž•
-243#£“š†’Ž— ‹–‡šTh“‡™•˜ —Œ ”ŒÖ–Ž—™Ÿ d‡–†›–•
-244#£$X^2 ŠŽ‡’•“Th
-245#£íŒ™‡‰‘™«Y˜
-246#£€•Ž“Th
-247#£dŽ‘«Y”™Œ “«Y‹Ž—™•
-248#£^1 ŒŽ—‡‹†‹Œ™Œ ÖŒŽ–•§’™‡ max
-249#£íŒ™‡‰‘™«Y˜ ŠŽ‡Ö–Ž—“«Y’Œ˜ “Œ Ÿ““‡
-250#£dŽ‘«Y”™Œ ‡–Ž‰th˜
-251#£^1 ŒŽ—†‹Œ™Œ ÖŒŽ–•§’™‡
-252#£€Œ’ “d•–Œ§™Œ ’‡ ‘«y—Œ™Œ ™’ Œ”§—— ‹Ž‡
+239#£™‘•˜
+240#£€Œ”Ž† ‘Œ›–† ‡Ž ‡–Ž—™Œ– ‘Œ›–† plottet. \n‚ ‡–Ž—™Œ– ‘Œ›–† Œ§’‡Ž “‡–. ‚ ŠŒ”Ž† ‘Œ›–† Œ§’‡Ž –†—Ž’.
+241#£Ì–‡šŽ ‘—
+242#£§—˜ ¾•›“ dy ŠŽ‘Ÿ ‘Ž  —–•’™‡˜ ’‡ ‘‡§—Ž•
+243#£“š†’Ž— ‹–‡š“‡™•˜ —Œ ”ŒÖ–Ž—™Ÿ ‡–†›–•
+244#£$X^2 ŠŽ‡’•“
+245#£íŒ™‡‰‘™˜
+246#£€•Ž“
+247#£Ž‘”™Œ “‹Ž—™•
+248#£ ŒŽ—‡‹†‹Œ™Œ ÖŒŽ–•§’™‡ max
+249#£íŒ™‡‰‘™˜ ŠŽ‡Ö–Ž—“’Œ˜ “Œ Ÿ““‡
+250#£Ž‘”™Œ ‡–Ž‰˜
+251#£ ŒŽ—†‹Œ™Œ ÖŒŽ–•§’™‡
+252#£€Œ’ “•–Œ§™Œ ’‡ ‘—Œ™Œ ™’ Œ”§—— ‹Ž‡
 253#£‡Ž •–§—™Œ ™• ™‡›™ŸÖ–•’‡
-254#£D–•—d‡Œ§™Œ ’‡ ‘«y—Œ™Œ ‹Ž‡ “Ž‡ “Œ™‡‰‘™Th d•› Œ§’‡Ž “Ž‡ “•’†Š‡. ç›™Ÿ dŽ‡’Ÿ™‡™‡ ‡ d–•‡‘«Y—ŒŽ —š†‘“‡. ”Œ™†—™Œ ™• Œ’ŠŒÖŸ“Œ’• ’‡ Ö–—Ž“•d•ŽTh—Œ™Œ «Y’‡ †‘‘• Ÿ’•“‡ “Œ™‡‰‘™Th˜ Th ’‡ ‡dŒ’Œ–‹•d•ŽTh—Œ™Œ “•’†ŠŒ˜.
+254#£–•—‡Œ§™Œ ’‡ ‘—Œ™Œ ‹Ž‡ “Ž‡ “Œ™‡‰‘™ •› Œ§’‡Ž “Ž‡ “•’†Š‡. ç›™Ÿ Ž‡’Ÿ™‡™‡ ‡ –•‡‘—ŒŽ —š†‘“‡. ”Œ™†—™Œ ™• Œ’ŠŒÖŸ“Œ’• ’‡ Ö–—Ž“••Ž—Œ™Œ ’‡ †‘‘• Ÿ’•“‡ “Œ™‡‰‘™˜  ’‡ ‡Œ’Œ–‹••Ž—Œ™Œ “•’†ŠŒ˜.
 255#£‹
 256#£êŒ–Ÿ
 257#£Ö‡‘Ÿ˜
 258#£—§Š–•˜
 259#£šŒ‹‹†–Ž
-260#£Th‘Ž•˜
-261#£î™‡Œ–«Y˜ š›—ŽTh˜
+260#£‘Ž•˜
+261#£î™‡Œ–˜ š›—Ž˜
 262#£í•’†ŠŒ˜
-263#£ïŽ“«Y˜ d§’‡‡ - Œ–“Ÿ™™‡
-264#£ïŽ“«Y˜ d§’‡‡ - d›–’ŽTh š›—ŽTh
+263#£ïŽ“˜ §’‡‡ - Œ–“Ÿ™™‡
+264#£ïŽ“˜ §’‡‡ - ›–’Ž š›—Ž
 265#£ç—™–•’•“§‡
-266#£ï‡Ö«y™™‡ š™Ÿ˜ —™• Œ’Ÿ
+266#£ï‡Ö™™‡ š™Ÿ˜ —™• Œ’Ÿ
 267#£î™‡Œ–† —‡’§Š’
 268#£î™‡Œ–† Plancks —Œ ‘Œ™–•’Ž•‰Ÿ‘™
-269#£î™‡Œ–† ‰‡–«y™™‡˜
-270#£‘Œ«yŒ– d™th— ™˜ ŒdŽ™†Ö›’—˜ —™’ ŒdŽš†’ŒŽ‡ ™˜ ‹˜
-271#£î™•ŽÖŒŽthŠ˜ šŸ–™Ž—
+269#£î™‡Œ–† ‰‡–™™‡˜
+270#£‘ŒŒ– ™— ™˜ ŒŽ™†Ö›’—˜ —™’ ŒŽš†’ŒŽ‡ ™˜ ‹˜
+271#£î™•ŽÖŒŽŠ˜ šŸ–™Ž—
 272#£ç–Ž“Ÿ˜ Avogadros
 273#£î™‡Œ–† ‡Œ–§•›
 274#£î™‡Œ–† Boltzmanns
-275#£€Ž‡dŒ–‡™Ÿ™™‡ Œ’•«y
-276#£æŒ’•ŒdŽ™–Œd™ŽŸ™™‡
+275#£€Ž‡Œ–‡™Ÿ™™‡ Œ’•
+276#£æŒ’•ŒŽ™–Œ™ŽŸ™™‡
 277#£î™‡Œ–† Coulombs
 278#£î™‡Œ–† Stefan-Boltzmanns
-279#£“•’†Š‡ ‡™•“ŽTh˜ “†¾‡˜
-280#£“•’†Š‡ ‡™•“ŽTh˜ “†¾‡˜ —Œ MeV
-281#£ŒŽŠŽTh Œ–“•Ö–™ŽŸ™™‡
+279#£“•’†Š‡ ‡™•“Ž˜ “†¾‡˜
+280#£“•’†Š‡ ‡™•“Ž˜ “†¾‡˜ —Œ MeV
+281#£ŒŽŠŽ Œ–“•Ö–™ŽŸ™™‡
 282#£“†¾‡ ‘Œ™–•’§’
 283#£—Œ kg
-284#£“†¾‡ d–™•’§’
+284#£“†¾‡ –™•’§’
 285#£“†¾‡ ’Œ™–•’§’
 286#£“†¾‡ ‹˜
-287#£“«Y— ‡™§’‡ ‹˜
-288#£çdŸ—™‡— “Œ™‡”«y ‹˜ ‡Ž Th‘Ž•› (ç—™–•’•“ŽTh í•’†Š‡)
-289#£í†¾‡ ™•› Th‘Ž•›
-290#£í†¾‡ ™•› šŒ‹‹‡–Ž•«y
-291#£í«Y— ‡™§’‡ —Œ‘Th’˜
-292#£ï• GeoGebra 5 ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“«Y’•.
-293#£ï• •›“d§ ‡ —‡˜ “Œ™‡š«Y–ŒŽ —™’ ‡–ÖŽTh —Œ‘§Š‡ Ÿd•› “d•–Œ§™Œ ’‡ Œ‹‡™‡—™Th—Œ™Œ ™• GeoGebra. ï• WordMat —™‡ Windows ›d•—™–§¾ŒŽ ™• 'GeoGebra classic 5', ™• 'GeoGebra Calculator Suite', ™• 'GeoGebra Classic 6' ‡Ž ™Ž˜ dŒ–Ž——Ÿ™Œ–Œ˜ †‘‘Œ˜ ŒŠŸ—ŒŽ˜ Œš‡–“•‹th’ ™•› GeoGebra.
-294#£ï• GeoGebra Calculator Suite Œ§’‡Ž ThŠ Œ‹‡™Œ—™“«Y’•. ™Œ‘Œ§™‡Ž —Œ d–Ÿ‹–‡““‡ dŒ–ŽTh‹—˜ ‡Ž ŠŒ’ ‡d‡Ž™Œ§ ŠŽ‡Š§™›•. ëŒŽ’† ‹–Th‹•–‡.
-295#£‹‡™‡—™Th—™Œ ™• GeoGebra
-296#£™Œ‘«Y—™Œ ™• GeoGebra Calculator Suite
-297#£Th •–Ž‡«Y˜ —›’ThŒ˜
-298#£™Ž«Y™‡
-299#£Ž—‡‹†‹Œ™Œ Œ§“Œ’• ‡Ž, —™ —›’«YÖŒŽ‡, †’™Œ ‘Ž —™• ‹–†š“‡ ‹Ž‡ ’‡ ™• ™•d•Œ™Th—Œ™Œ
-300#£Íd†–ÖŒŽ —š†‘“‡ —™’ Œ”§——
-301#£D–«YdŒŽ d–th™‡ ’‡ –›“§—Œ™Œ ™• ymin ‡Ž ™• ymax - “Œ™† d‡™Th—™Œ Œ’“«Y–—
-302#£Ì–‡šTh“‡™‡ 3D
-303#£“š†’Ž— «Yš–‡—˜
-304#£€Ž‡š‡’Th˜
-305#£x–th“‡ ŒdŽš‡’ŒŽth’
-306#£Ž—‡‹‹Th Œ’™•‘Th˜ Maxima —™• Word
-307#£Ì–‡““«Y˜ ‡Ž ŒdŽš†’ŒŽŒ˜
-308#£íŸ’• ‹–‡““«Y˜
-309#£íŸ’• ŒdŽš†’ŒŽŒ˜
-310#£Ì–‡““«Y˜ ‡Ž ŒdŽš†’ŒŽŒ˜
-311#£ìŽ “Œ™‡‰‘™«Y˜ d–«YdŒŽ ’‡ Œ§’‡Ž x, y ‡Ž z
-312#£Ž—‡‹‹Th —š‡§–‡˜
-313#£Ž—‡‹‹Th ŒdŽd«YŠ•›
-314#£ê«Y• ŠŽ†’›—“‡
-315#£î«y’™‡”\n(startx ; starty , startz)(dx , dy , dz)\nOne vector pr. line\nD‡–‡ŠŒ§‹“‡™‡:\n(1,1,2)(1,2,3) \n ‡’™‘Œ§ ŠŽ†’›—“‡ (1,2,3) ‡dŸ ™• —“Œ§• (1,1,2)\n\n(1,-2,3)\n ‡’™‘Œ§ ŠŽ†’›—“‡ (1,-2,3) ‡dŸ ™• —“Œ§• (0,0,0)\n\nd‡–†ŠŒŽ‹“‡ “Œ ŠŒ‡ŠŽ†:\n(1,5, 3, 4,5)
-316#£í«Y‹Œ•˜ —™Ž‹“th’
-317#£î«y’™‡” ‹Ž‡ ™’ ŒŽ—‡‹‹Th —“Œ§’\n\n(1;2,1)\n(2.5,3.6,8.7)
-318#£î™• d‡–†›–• ‹–‡šTh“‡™•˜ “d•–Œ§™Œ ’‡ dŒ–Ž—™–«Y¿Œ™Œ ™• —«y—™“‡ —›’™Œ™‡‹“«Y’’ d‡™th’™‡˜ ™• ‡–Ž—™Œ–Ÿ •›“d§ ™•› d•’™ŽŽ•«y Œ’th —«y–Œ™Œ.\n\n†’ ™• ‡’™ŽŒ§“Œ’• š‡§’Œ™‡Ž ™Œ’™“«Y’•, “d•–Œ§™Œ ’‡ ‡‘‘†”Œ™Œ ™• “«Y‹Œ•˜ ™•› d‡–‡«y–•› ‹–‡šTh“‡™•˜ ‹Ž‡ ‡‘«y™Œ– Œš‡–“•‹Th.\n\nÌŽ‡ ’‡ ŒŽ—‡‹†‹Œ™Œ ™’ ŒŽŸ’‡ —™• Word, †’™Œ ŠŒ”§ ‘Ž —™ ‹–‡““Th “Œ’•«y, ŒdŽ‘«Y”™Œ 'ŒdŽ‘•‹«Y˜' ‡Ž “Œ™† '‡’™Ž‹–‡šTh —™• d–ŸÖŒŽ–•'. î™ —›’«YÖŒŽ‡, ™• d‡–†›–• ‹–‡šTh“‡™•˜ ‘Œ§’ŒŽ ‡Ž  ŒŽŸ’‡ “d•–Œ§ ’‡ ŒŽ—‡ÖŒ§ —™• Word.\n\nD‡–‡™–Th—™Œ Ÿ™Ž ™• d‡–†›–• ‹–‡šTh“‡™•˜ d–«YdŒŽ ’‡ Œ§’‡Ž ‘ŒŽ—™Ÿ ‹Ž‡ ’‡ “d•–«Y—Œ™Œ ’‡ ŒdŽ—™–«Y¿Œ™Œ —™• Word.\n\n 1Ú4 —• ›¿‘Ÿ™Œ– Œ§’‡Ž  d•ŽŸ™™‡ ™˜ ŒŽŸ’‡˜, ™Ÿ—• dŽ• ‡–‹Th Œ§’‡Ž  ™‡Ö«y™™‡ dŒ–Ž—™–•šTh˜.
+287#£“— ‡™§’‡ ‹˜
+288#£çŸ—™‡— “Œ™‡” ‹˜ ‡Ž ‘Ž•› (ç—™–•’•“Ž í•’†Š‡)
+289#£í†¾‡ ™•› ‘Ž•›
+290#£í†¾‡ ™•› šŒ‹‹‡–Ž•
+291#£í— ‡™§’‡ —Œ‘’˜
+292#£ï• GeoGebra 5 ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“’•.
+293#£ï• •›“§ ‡ —‡˜ “Œ™‡š–ŒŽ —™’ ‡–ÖŽ —Œ‘§Š‡ Ÿ•› “•–Œ§™Œ ’‡ Œ‹‡™‡—™—Œ™Œ ™• GeoGebra. ï• WordMat —™‡ Windows ›•—™–§¾ŒŽ ™• 'GeoGebra classic 5', ™• 'GeoGebra Calculator Suite', ™• 'GeoGebra Classic 6' ‡Ž ™Ž˜ Œ–Ž——Ÿ™Œ–Œ˜ †‘‘Œ˜ ŒŠŸ—ŒŽ˜ Œš‡–“•‹’ ™•› GeoGebra.
+294#£ï• GeoGebra Calculator Suite Œ§’‡Ž Š Œ‹‡™Œ—™“’•. ™Œ‘Œ§™‡Ž —Œ –Ÿ‹–‡““‡ Œ–Ž‹—˜ ‡Ž ŠŒ’ ‡‡Ž™Œ§ ŠŽ‡Š§™›•. ëŒŽ’† ‹–‹•–‡.
+295#£‹‡™‡—™—™Œ ™• GeoGebra
+296#£™Œ‘—™Œ ™• GeoGebra Calculator Suite
+297#£ •–Ž‡˜ —›’Œ˜
+298#£™Ž™‡
+299#£Ž—‡‹†‹Œ™Œ Œ§“Œ’• ‡Ž, —™ —›’ÖŒŽ‡, †’™Œ ‘Ž —™• ‹–†š“‡ ‹Ž‡ ’‡ ™• ™••Œ™—Œ™Œ
+300#£Í†–ÖŒŽ —š†‘“‡ —™’ Œ”§——
+301#£–ŒŽ –™‡ ’‡ –›“§—Œ™Œ ™• ymin ‡Ž ™• ymax - “Œ™† ‡™—™Œ Œ’“–—
+302#£Ì–‡š“‡™‡ 3D
+303#£“š†’Ž— š–‡—˜
+304#£€Ž‡š‡’˜
+305#£–“‡ ŒŽš‡’ŒŽ’
+306#£Ž—‡‹‹ Œ’™•‘˜ Maxima —™• Word
+307#£Ì–‡““˜ ‡Ž ŒŽš†’ŒŽŒ˜
+308#£íŸ’• ‹–‡““˜
+309#£íŸ’• ŒŽš†’ŒŽŒ˜
+310#£Ì–‡““˜ ‡Ž ŒŽš†’ŒŽŒ˜
+311#£ìŽ “Œ™‡‰‘™˜ –ŒŽ ’‡ Œ§’‡Ž x, y ‡Ž z
+312#£Ž—‡‹‹ —š‡§–‡˜
+313#£Ž—‡‹‹ ŒŽŠ•›
+314#£ê• ŠŽ†’›—“‡
+315#£î’™‡”\n(startx ; starty , startz)(dx , dy , dz)\nOne vector pr. line\n‡–‡ŠŒ§‹“‡™‡:\n(1,1,2)(1,2,3) \n ‡’™‘Œ§ ŠŽ†’›—“‡ (1,2,3) ‡Ÿ ™• —“Œ§• (1,1,2)\n\n(1,-2,3)\n ‡’™‘Œ§ ŠŽ†’›—“‡ (1,-2,3) ‡Ÿ ™• —“Œ§• (0,0,0)\n\n‡–†ŠŒŽ‹“‡ “Œ ŠŒ‡ŠŽ†:\n(1,5, 3, 4,5)
+316#£í‹Œ•˜ —™Ž‹“’
+317#£î’™‡” ‹Ž‡ ™’ ŒŽ—‡‹‹ —“Œ§’\n\n(1;2,1)\n(2.5,3.6,8.7)
+318#£î™• ‡–†›–• ‹–‡š“‡™•˜ “•–Œ§™Œ ’‡ Œ–Ž—™–¿Œ™Œ ™• ——™“‡ —›’™Œ™‡‹“’’ ‡™’™‡˜ ™• ‡–Ž—™Œ–Ÿ •›“§ ™•› •’™ŽŽ• Œ’ —–Œ™Œ.\n\n†’ ™• ‡’™ŽŒ§“Œ’• š‡§’Œ™‡Ž ™Œ’™“’•, “•–Œ§™Œ ’‡ ‡‘‘†”Œ™Œ ™• “‹Œ•˜ ™•› ‡–‡–•› ‹–‡š“‡™•˜ ‹Ž‡ ‡‘™Œ– Œš‡–“•‹.\n\nÌŽ‡ ’‡ ŒŽ—‡‹†‹Œ™Œ ™’ ŒŽŸ’‡ —™• Word, †’™Œ ŠŒ”§ ‘Ž —™ ‹–‡““ “Œ’•, ŒŽ‘”™Œ 'ŒŽ‘•‹˜' ‡Ž “Œ™† '‡’™Ž‹–‡š —™• –ŸÖŒŽ–•'. î™ —›’ÖŒŽ‡, ™• ‡–†›–• ‹–‡š“‡™•˜ ‘Œ§’ŒŽ ‡Ž  ŒŽŸ’‡ “•–Œ§ ’‡ ŒŽ—‡ÖŒ§ —™• Word.\n\n‡–‡™–—™Œ Ÿ™Ž ™• ‡–†›–• ‹–‡š“‡™•˜ –ŒŽ ’‡ Œ§’‡Ž ‘ŒŽ—™Ÿ ‹Ž‡ ’‡ “•–—Œ™Œ ’‡ ŒŽ—™–¿Œ™Œ —™• Word.\n\n—• ›¿‘Ÿ™Œ– Œ§’‡Ž  •ŽŸ™™‡ ™˜ ŒŽŸ’‡˜, ™Ÿ—• Ž• ‡–‹ Œ§’‡Ž  ™‡Ö™™‡ Œ–Ž—™–•š˜.
 319#£æ‡’Ÿ’Œ˜
-320#£D‡–‡“Œ™–ŽŸ ŠŽ†‹–‡““‡
+320#£‡–‡“Œ™–ŽŸ ŠŽ†‹–‡““‡
 321#£æ§™–Ž’•/ŸŽ’•/“‰
-322#£íd‘Œ
-323#£æ‡š«Y
+322#£í‘Œ
+323#£æ‡š
 324#£Ì–§¾•˜
-325#£‚ —›’™Ÿ“Œ›— Alt + M ŒŽ—†‹ŒŽ ’«YŒ˜ “‡“‡™Ž«Y˜ d–†”ŒŽ˜
-326#£‚ —›’™Ÿ“Œ›— AltGr + Enter ›d•‘•‹§¾ŒŽ
-327#£î›’™Ÿ“Œ›— Alt + E è«y’ŒŽ ™’ Œ”§——
+325#£‚ —›’™Ÿ“Œ›— Alt + M ŒŽ—†‹ŒŽ ’Œ˜ “‡“‡™Ž˜ –†”ŒŽ˜
+326#£‚ —›’™Ÿ“Œ›— AltGr + Enter ›•‘•‹§¾ŒŽ
+327#£î›’™Ÿ“Œ›— Alt + E è’ŒŽ ™’ Œ”§——
 328#£‚ —›’™Ÿ“Œ›— Alt + j ‡’•§‹ŒŽ ™Ž˜ –›“§—ŒŽ˜
-329#£î›’™Ÿ“Œ›— Alt + R Ž—†‹ŒŽ ™• d–•‹•«y“Œ’• ‡d•™«Y‘Œ—“‡
-330#£x–th“‡ Œ”ŸŠ•›
+329#£î›’™Ÿ“Œ›— Alt + R Ž—†‹ŒŽ ™• –•‹•“Œ’• ‡•™‘Œ—“‡
+330#£–“‡ Œ”ŸŠ•›
 331#£ŠŒ§™˜:
-332#£ï• \lambda Œ§’‡Ž —›’™•“•‹–‡š§‡ ™•› “Ž–•«y Œ‘‘’Ž•«y ‹–†““‡™•˜ ‘†“Š‡
-333#£î›’™Ÿ“Œ›— Alt + P îÖŒŠŽ†¾ŒŽ «Y’‡ ‹–†š“‡
-334#£íd•–Œ§™Œ ’‡ ‡d•Œ«y—Œ™Œ ™Ž˜ ‡‘‘‡‹«Y˜ —‡˜ —™‡ «Y‹‹–‡š‡ ™«yd’
-335#£ï‡ š«y‘‘‡ ™•› Excel “d•–•«y’ ’‡ ‡’•§”•›’ ”ŒÖ–Ž—™† Th ’‡ ŒŽ—‡Ö•«y’ Œ’—“‡™“«Y’‡
-336#£îTh“‡’— ™’ ÖŒ–Žth’; €•Ž“†—™Œ ™• WordMark www.eduap.com
-337#£ç–Ž“Ÿ˜ ›d•‘•‹Ž—“th’ “Œ ™• WordMath:
-338#£î™’ dŒ–Ž•ÖTh •–Ž—“•§, “d•–Œ§™Œ ’‡ •–§—Œ™Œ š›—Ž«Y˜ —™‡Œ–«Y˜ ‡Ž ™Ž“«Y˜ d§’‡‡.
-339#£ï• Word Œ™Œ‘Œ§™‡Ž ™‡Ö«y™Œ–‡ —Œ d–ŸÖŒŽ– d–•‰•‘Th - Ÿ™‡’ Œ“d‘«Y•’™‡Ž Œ”Ž—th—ŒŽ˜
-340#£Ž—‡‹†‹Œ™Œ ™Ž˜ ŠŽ«Y˜ —‡˜ dŒ–Ž‹–‡š«Y˜ ŠŽ‡‹–‡““†™’ ™•› Excel Ö–—Ž“•d•Žth’™‡˜ ™’ ŒŽ—‡‹‹Th d‘‡Ž—§•› ŒŽ“«Y’•›
-341#£î›’™Ÿ“Œ›— Alt + N ’‡‘‘‡‹Th “Œ™‡”«y ‡›™Ÿ“‡™•›,‡–Ž‰•«y˜,‡–Ž“•«y
-342#£íŽ‡ —›’†–™— “Œ ‹–†““‡™‡ ˜ —™‡Œ–† d‡§–’ŒŽ –›“Ž—™Ž† —™• GeoGebra
-343#£ìŽ “•’†ŠŒ˜ Œ”ŸŠ•› ŠŒ’ “d•–•«y’ ’‡ Œ§’‡Ž —›’Š›‡—“«Y’Œ˜ “•’†ŠŒ˜.  km/s ŠŒ’ ŒdŽ™–«YdŒ™‡Ž. î™ —›’«YÖŒŽ‡, Š‘th—™Œ: km,s
-344#£üÖŒ™Œ ThŠ ™’ dŽ• d–Ÿ—š‡™ «YŠ•— ™•›
-345#£dŽ‘•‹Th ‡–Ž“•«y Œ”§——˜
-346#£îŒ d•Ž•’ ‡–Ž“Ÿ ’‡ •–§—Œ™Œ ‡›™Th’ ™’ Œ”§——;\r\nìd•ŽŒ—ŠThd•™Œ ‡Ÿ‘•›Œ˜ Œ”Ž—th—ŒŽ˜ ‡ Œ’“Œ–•«y’ Œd§—˜.
-347#£€Ž’›“ŽTh Š•Ž“Th
-348#£é‡ ŒŽ—‡ÖŒ§ «Y’‡˜ ‡–Ž“Ÿ˜ ™“Th“‡™•˜ Œ”§——˜. î›’Th˜, ‡›™Ÿ ŒŽ—†‹Œ™‡Ž ˜ ‡–Ž“Ÿ˜ Œš‡‘‡§•›/™“Th“‡™•˜ —Œ “Ž‡ ŒdŽŒš‡‘§Š‡. ç‘‘† “d•–Œ§ Œd§—˜ ’‡ ŒŽ—‡ÖŒ§ –›šŸ. é«Y‘Œ™Œ ’‡ Œ“š‡’§—Œ™Œ ™•’ ‡–Ž“Ÿ; (çd†’™—  1Ú4 ÖŽ ‹Ž‡ ’‡ ™• –«y¿Œ™Œ)
-349#£Ž—‡‹†‹Œ™Œ Œd§dŒŠ• —“‡’™ŽŸ™™‡˜ —Œ d•—•—™Ÿ
-350#£d§dŒŠ• —“‡’™ŽŸ™™‡˜
-351#£Ž—‡‹‹Th ŠŽ‡—™†—Œ’ ™•› d§’‡‡\r\nrows x —™‘th’
-352#£Chi ™Œ™–†‹’• Š•Ž“Th ‹Ž‡ ™’ ‡’Œ”‡–™—§‡
-353#£$X^2 - Š•Ž“Th indepence d•› Œ™Œ‘Œ§™‡Ž Ö–—Ž“•d•Žth’™‡˜ WordMat
-354#£ïŽ“Th P
-355#£x–—Ž“•d•Žth’™‡˜ ™• Œd§dŒŠ• —“‡’™ŽŸ™™‡˜ ™•›
-356#£% ‚ 0-›dŸŒ— “d•–Œ§ ’‡ ‡d•––ŽšŒ§. ô˜ Œ ™•«y™•›, ›d†–ÖŒŽ Œ”†–™— “Œ™‡”«y ™’ Š«y• “Œ™‡‰‘™th’.
-357#£% ™˜ ›dŸŒ—˜ 0 ŠŒ’ “d•–Œ§ ’‡ ‡d•––ŽšŒ§. ô˜ Œ ™•«y™•›, ŠŒ’ ›d†–Ö•›’ —™•ŽÖŒ§‡ d•› ’‡ ›d•—™–§¾•›’ ™’ Œ”†–™— “Œ™‡”«y ™’ Š«y• “Œ™‡‰‘™th’.
-358#£Íd†–Ö•›’ Œ‘Ž† “Œ ™Ž“Th “Ž–Ÿ™Œ– ‡dŸ 5 Th ™• †–•Ž—“‡ Ÿ‘’ ™’ Œ‘Žth’ Œ§’‡Ž “Ž–Ÿ™Œ–• ‡dŸ 50. ‚ ‡™‡’•“Th $X^2 Œ§’‡Ž ™Ÿ™Œ “Ž‡ ‡Th d–•—«Y‹‹Ž— —Œ ‡›™Th ™’ dŒ–§d™— ‡Ž ™• ‡d•™«Y‘Œ—“‡ ‡’‡”ŽŸdŽ—™•. îŒ •–Ž—“«Y’Œ˜ dŒ–Žd™th—ŒŽ˜, ™‡ ŠŒŠ•“«Y’‡ “d•–•«y’ ’‡ ‹§’•›’ Ö–Th—Ž“‡ •“‡Š•d•Žth’™‡˜ ™•›˜ ‡–Ž“•«y˜ ŠŽ‡š•–Œ™Ž†.
-359#£æ‡™‡’•“Th Chidistribution
+332#£ï• \lambda Œ§’‡Ž —›’™•“•‹–‡š§‡ ™•› “Ž–• Œ‘‘’Ž• ‹–†““‡™•˜ ‘†“Š‡
+333#£î›’™Ÿ“Œ›— Alt + P îÖŒŠŽ†¾ŒŽ ’‡ ‹–†š“‡
+334#£í•–Œ§™Œ ’‡ ‡•Œ—Œ™Œ ™Ž˜ ‡‘‘‡‹˜ —‡˜ —™‡ ‹‹–‡š‡ ™’
+335#£ï‡ š‘‘‡ ™•› Excel “•–•’ ’‡ ‡’•§”•›’ ”ŒÖ–Ž—™†  ’‡ ŒŽ—‡Ö•’ Œ’—“‡™“’‡
+336#£î“‡’— ™’ ÖŒ–Ž’; €•Ž“†—™Œ ™• WordMark www.eduap.com
+337#£ç–Ž“Ÿ˜ ›•‘•‹Ž—“’ “Œ ™• WordMath:
+338#£î™’ Œ–Ž•Ö •–Ž—“•§, “•–Œ§™Œ ’‡ •–§—Œ™Œ š›—Ž˜ —™‡Œ–˜ ‡Ž ™Ž“˜ §’‡‡.
+339#£ï• Word Œ™Œ‘Œ§™‡Ž ™‡Ö™Œ–‡ —Œ –ŸÖŒŽ– –•‰•‘ - Ÿ™‡’ Œ“‘•’™‡Ž Œ”Ž——ŒŽ˜
+340#£Ž—‡‹†‹Œ™Œ ™Ž˜ ŠŽ˜ —‡˜ Œ–Ž‹–‡š˜ ŠŽ‡‹–‡““†™’ ™•› Excel Ö–—Ž“••Ž’™‡˜ ™’ ŒŽ—‡‹‹ ‘‡Ž—§•› ŒŽ“’•›
+341#£î›’™Ÿ“Œ›— Alt + N ’‡‘‘‡‹ “Œ™‡” ‡›™Ÿ“‡™•›,‡–Ž‰•˜,‡–Ž“•
+342#£íŽ‡ —›’†–™— “Œ ‹–†““‡™‡ ˜ —™‡Œ–† ‡§–’ŒŽ –›“Ž—™Ž† —™• GeoGebra
+343#£ìŽ “•’†ŠŒ˜ Œ”ŸŠ•› ŠŒ’ “•–•’ ’‡ Œ§’‡Ž —›’Š›‡—“’Œ˜ “•’†ŠŒ˜.  km/s ŠŒ’ ŒŽ™–Œ™‡Ž. î™ —›’ÖŒŽ‡, Š‘—™Œ: km,s
+344#£üÖŒ™Œ Š ™’ Ž• –Ÿ—š‡™ Š•— ™•›
+345#£Ž‘•‹ ‡–Ž“• Œ”§——˜
+346#£îŒ •Ž•’ ‡–Ž“Ÿ ’‡ •–§—Œ™Œ ‡›™’ ™’ Œ”§——;\r\nì•ŽŒ—Š•™Œ ‡Ÿ‘•›Œ˜ Œ”Ž——ŒŽ˜ ‡ Œ’“Œ–•’ Œ§—˜.
+347#£€Ž’›“Ž Š•Ž“
+348#£é‡ ŒŽ—‡ÖŒ§ ’‡˜ ‡–Ž“Ÿ˜ ™““‡™•˜ Œ”§——˜. î›’˜, ‡›™Ÿ ŒŽ—†‹Œ™‡Ž ˜ ‡–Ž“Ÿ˜ Œš‡‘‡§•›/™““‡™•˜ —Œ “Ž‡ ŒŽŒš‡‘§Š‡. ç‘‘† “•–Œ§ Œ§—˜ ’‡ ŒŽ—‡ÖŒ§ –›šŸ. é‘Œ™Œ ’‡ Œ“š‡’§—Œ™Œ ™•’ ‡–Ž“Ÿ; (ç†’™— ÖŽ ‹Ž‡ ’‡ ™• –¿Œ™Œ)
+349#£Ž—‡‹†‹Œ™Œ Œ§ŒŠ• —“‡’™ŽŸ™™‡˜ —Œ •—•—™Ÿ
+350#£§ŒŠ• —“‡’™ŽŸ™™‡˜
+351#£Ž—‡‹‹ ŠŽ‡—™†—Œ’ ™•› §’‡‡\r\nrows x —™‘’
+352#£Chi ™Œ™–†‹’• Š•Ž“ ‹Ž‡ ™’ ‡’Œ”‡–™—§‡
+353#£$X^2 - Š•Ž“ indepence •› Œ™Œ‘Œ§™‡Ž Ö–—Ž“••Ž’™‡˜ WordMat
+354#£ïŽ“ P
+355#£–—Ž“••Ž’™‡˜ ™• Œ§ŒŠ• —“‡’™ŽŸ™™‡˜ ™•›
+356#£% ‚ 0-›ŸŒ— “•–Œ§ ’‡ ‡•––ŽšŒ§. ô˜ Œ ™•™•›, ›†–ÖŒŽ Œ”†–™— “Œ™‡” ™’ Š• “Œ™‡‰‘™’.
+357#£% ™˜ ›ŸŒ—˜ 0 ŠŒ’ “•–Œ§ ’‡ ‡•––ŽšŒ§. ô˜ Œ ™•™•›, ŠŒ’ ›†–Ö•›’ —™•ŽÖŒ§‡ •› ’‡ ›•—™–§¾•›’ ™’ Œ”†–™— “Œ™‡” ™’ Š• “Œ™‡‰‘™’.
+358#£Í†–Ö•›’ Œ‘Ž† “Œ ™Ž“ “Ž–Ÿ™Œ– ‡Ÿ 5  ™• †–•Ž—“‡ Ÿ‘’ ™’ Œ‘Ž’ Œ§’‡Ž “Ž–Ÿ™Œ–• ‡Ÿ 50. ‚ ‡™‡’•“ $X^2 Œ§’‡Ž ™Ÿ™Œ “Ž‡ ‡ –•—‹‹Ž— —Œ ‡›™ ™’ Œ–§™— ‡Ž ™• ‡•™‘Œ—“‡ ‡’‡”ŽŸŽ—™•. îŒ •–Ž—“’Œ˜ Œ–Ž™—ŒŽ˜, ™‡ ŠŒŠ•“’‡ “•–•’ ’‡ ‹§’•›’ Ö–—Ž“‡ •“‡Š••Ž’™‡˜ ™•›˜ ‡–Ž“•˜ ŠŽ‡š•–Œ™Ž†.
+359#£æ‡™‡’•“ Chidistribution
 360#£å‡“•§ Œ‘Œ›Œ–§‡˜
 361#£€Ž‡‰†¾
 362#£¦’•Ž‹“‡ ™•› GeoGebra
-363#£Ž—‡‹†‹Œ™Œ ™Ž“Th ‹Ž‡
-364#£íd•–Œ§™Œ ’‡ ™• d–•—‡–“Ÿ—Œ™Œ ‡–‹Ÿ™Œ–‡
+363#£Ž—‡‹†‹Œ™Œ ™Ž“ ‹Ž‡
+364#£í•–Œ§™Œ ’‡ ™• –•—‡–“Ÿ—Œ™Œ ‡–‹Ÿ™Œ–‡
 365#£ì–Ž—“Ÿ˜ —™‡Œ–†˜
-366#£ï• ‹–†š“‡ ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“«Y’•. §’‡Ž «Y’‡ “Ž–Ÿ Š–Œ†’ d–Ÿ‹–‡““‡ d•› Œ‹‡§—™‡™‡Ž Œ«y•‘‡. íd•–Œ§™Œ ’‡ ™• d†–Œ™Œ ‡dŸ www.padowan.dk
-367#£íd•–Œ§™Œ ’‡ ™• d–•—‡–“Ÿ—Œ™Œ ‡–‹Ÿ™Œ–‡ —™’ Œ’Ÿ™™‡ —›’‡–™Th—ŒŽ˜ ‡•–Ž—“«Y’Œ˜ ‡dŸ ™• Ö–Th—™ —™• Graph
-368#£‚ —ÖŒŠ§‡— ‹–‡š“†™’ Ö–—Ž“•d•Žth’™‡˜ GeoGeoGebra ‡Ž Graph ‡d‡Ž™Œ§ ™• x ’‡ Œ§’‡Ž  ‡’Œ”†–™™ “Œ™‡‰‘™Th. \r\nìŽ ‡Ÿ‘•›Œ˜ Œš–†—ŒŽ˜ Œ§’‡Ž Ö–§˜ x. ïth–‡ “d•–Œ§™Œ ’‡ Š‘th—Œ™Œ “Ž‡ ’«Y‡ “Œ™‡‰‘™Th ‹Ž‡ Ö–Th— ˜ x.
-369#£ç’Œ”†–™™ “Œ™‡‰‘™Th
+366#£ï• ‹–†š“‡ ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“’•. §’‡Ž ’‡ “Ž–Ÿ Š–Œ†’ –Ÿ‹–‡““‡ •› Œ‹‡§—™‡™‡Ž Œ•‘‡. í•–Œ§™Œ ’‡ ™• †–Œ™Œ ‡Ÿ www.padowan.dk
+367#£í•–Œ§™Œ ’‡ ™• –•—‡–“Ÿ—Œ™Œ ‡–‹Ÿ™Œ–‡ —™’ Œ’Ÿ™™‡ —›’‡–™—ŒŽ˜ ‡•–Ž—“’Œ˜ ‡Ÿ ™• Ö–—™ —™• Graph
+368#£‚ —ÖŒŠ§‡— ‹–‡š“†™’ Ö–—Ž“••Ž’™‡˜ GeoGeoGebra ‡Ž Graph ‡‡Ž™Œ§ ™• x ’‡ Œ§’‡Ž  ‡’Œ”†–™™ “Œ™‡‰‘™. \r\nìŽ ‡Ÿ‘•›Œ˜ Œš–†—ŒŽ˜ Œ§’‡Ž Ö–§˜ x. ï–‡ “•–Œ§™Œ ’‡ Š‘—Œ™Œ “Ž‡ ’‡ “Œ™‡‰‘™ ‹Ž‡ Ö–— ˜ x.
+369#£ç’Œ”†–™™ “Œ™‡‰‘™
 370#£$X^2 ïŒ—™ ‡’Œ”‡–™—§‡˜
 371#£Ì–†š“‡ ‡’•§‹“‡™•˜
-372#£Ž—‡‹‹Th Œ’—“‡™“«Y’•›
-373#£‚ ŒŽ—‡‹‹Th Œ’—“‡™“«Y’•› ‡’™ŽŒŽ“«Y’•› “d•–Œ§ ’‡ ŠŽ‡–«Y—ŒŽ ‡–Œ™Th th–‡. €Žd‘‡—Ž†—™Œ ™• Œ’—“‡™“«Y’• ‡’™ŽŒ§“Œ’• ‹Ž‡ ’‡ ™‡ ‡’•§”Œ™Œ.
-374#£é«Y‘Œ™Œ ’‡ —ÖŒŠŽ†—Œ™Œ
-375#£’«Y™
-376#£î›—™Th“‡™‡ Œ”Ž—th—Œ’ ‡’Ž—•™Th™’ ŠŒ’ ›d•—™–§¾•’™‡Ž ‡Ÿ“. è«y—™Œ ˜ Œ”§—— Th ‘«y—™Œ ‹–‡šŽ† Ö–—Ž“•d•Žth’™‡˜ Graph Th GeoGebra.
-377#£”†‘ŒŽ¿ “Œ™‡‰‘™th’
-378#£“Œ ™Ž˜ ™Ž“«Y˜
-379#£D‘™–•‘•‹Th—™Œ startguess. ‚ ™›dŽTh ™Ž“Th ŒŽ‡—§‡˜ Œ§’‡Ž 1
-380#£íŒ™‡‰‘™«Y˜ ‡Ž ŒŽ‡—§‡
-381#£ï• —«y—™“‡ ™’ Œ”Ž—th—Œ’ ŒdŽ‘«yŒ™‡Ž ‹Ž‡
+372#£Ž—‡‹‹ Œ’—“‡™“’•›
+373#£‚ ŒŽ—‡‹‹ Œ’—“‡™“’•› ‡’™ŽŒŽ“’•› “•–Œ§ ’‡ ŠŽ‡–—ŒŽ ‡–Œ™ –‡. €Ž‘‡—Ž†—™Œ ™• Œ’—“‡™“’• ‡’™ŽŒ§“Œ’• ‹Ž‡ ’‡ ™‡ ‡’•§”Œ™Œ.
+374#£é‘Œ™Œ ’‡ —ÖŒŠŽ†—Œ™Œ
+375#£’™
+376#£î›—™“‡™‡ Œ”Ž——Œ’ ‡’Ž—•™™’ ŠŒ’ ›•—™–§¾•’™‡Ž ‡Ÿ“. è—™Œ ˜ Œ”§——  ‘—™Œ ‹–‡šŽ† Ö–—Ž“••Ž’™‡˜ Graph  GeoGebra.
+377#£”†‘ŒŽ¿ “Œ™‡‰‘™’
+378#£“Œ ™Ž˜ ™Ž“˜
+379#£‘™–•‘•‹—™Œ startguess. ‚ ™›Ž ™Ž“ ŒŽ‡—§‡˜ Œ§’‡Ž 1
+380#£íŒ™‡‰‘™˜ ‡Ž ŒŽ‡—§‡
+381#£ï• ——™“‡ ™’ Œ”Ž——Œ’ ŒŽ‘Œ™‡Ž ‹Ž‡
 382#£“Œ Start Guess
-383#£ï• —«y—™“‡ ™’ Œ”Ž—th—Œ’ ŠŒ’ “dŸ–Œ—Œ ’‡ ‘›Œ§
-384#£€‘th—‡™Œ ™ ——™Th “Œ™‡‰‘™Th;
-385#£€Œ’ ‰–«YŒ ‘«y—. ï• —“Œ§• «Y’‡–”˜ ‡Ž ‘Th”˜ ™•› ŠŽ‡—™Th“‡™•˜ d–«YdŒŽ ’‡ ‰–§—Œ™‡Ž ‡Ž —™Ž˜ Š«y• d‘Œ›–«Y˜ “Ž‡˜ ‘«y—˜
-386#£í«Y•Š•˜ Newtons d•› Œš‡–“Ÿ¾Œ™‡Ž “Œ ŒŽ‡—§‡ «Y’‡–”˜
-387#£í«Y•Š•˜ ŠŽ‡—™Th“‡™•˜ d•› Œš‡–“Ÿ¾Œ™‡Ž —™• ŠŽ†—™“‡
-388#£€Œ’ ‰–«YŒ ‘«y—
-389#£æ‡“§‡ ‘«y—
-390#£‚ ŠŽ‡š•–ŽTh Œ”§—— ŒdŽ‘«yŒ™‡Ž “Œ ™ —›’†–™— 'Solve differential equation' ™•› WordMat
-391#£“Œ •–Ž‡«Y˜ —›’ThŒ˜
-392#£“Œ —›’ThŒ˜ Œ§’—˜
+383#£ï• ——™“‡ ™’ Œ”Ž——Œ’ ŠŒ’ “Ÿ–Œ—Œ ’‡ ‘›Œ§
+384#£€‘—‡™Œ ™ ——™ “Œ™‡‰‘™;
+385#£€Œ’ ‰–Œ ‘—. ï• —“Œ§• ’‡–”˜ ‡Ž ‘”˜ ™•› ŠŽ‡—™“‡™•˜ –ŒŽ ’‡ ‰–§—Œ™‡Ž ‡Ž —™Ž˜ Š• ‘Œ›–˜ “Ž‡˜ ‘—˜
+386#£í•Š•˜ Newtons •› Œš‡–“Ÿ¾Œ™‡Ž “Œ ŒŽ‡—§‡ ’‡–”˜
+387#£í•Š•˜ ŠŽ‡—™“‡™•˜ •› Œš‡–“Ÿ¾Œ™‡Ž —™• ŠŽ†—™“‡
+388#£€Œ’ ‰–Œ ‘—
+389#£æ‡“§‡ ‘—
+390#£‚ ŠŽ‡š•–Ž Œ”§—— ŒŽ‘Œ™‡Ž “Œ ™ —›’†–™— 'Solve differential equation' ™•› WordMat
+391#£“Œ •–Ž‡˜ —›’Œ˜
+392#£“Œ —›’Œ˜ Œ§’—˜
 393#£“Œ ‡™†—™‡— Œ§’—˜
-394#£D–«YdŒŽ ’‡ †’Œ™Œ Œd‡’Œ§’— ™•› Word. †’ ŠŒ’ ™• †’Œ™Œ, ™• Word ‡ ŠŽ‡•dŒ§.
-395#£D‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ ŒŽ—‡‹‹Th Œ’Ÿ˜ ™«yd•›. €•Ž“†—™Œ ”‡’† «Y’‡ †‘‘• “«Y–•˜.
-396#£D–•—•“•§—
+394#£–ŒŽ ’‡ †’Œ™Œ Œ‡’Œ§’— ™•› Word. †’ ŠŒ’ ™• †’Œ™Œ, ™• Word ‡ ŠŽ‡•Œ§.
+395#£‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™’ ŒŽ—‡‹‹ Œ’Ÿ˜ ™•›. €•Ž“†—™Œ ”‡’† ’‡ †‘‘• “–•˜.
+396#£–•—•“•§—
 397#£ì“†Š‡
-398#£ç–Ž“Ÿ˜ ‰‡“th’ Œ‘Œ›Œ–§‡˜\r\nstate n ‹Ž‡ “Ž‡ ‹Œ’ŽTh «Yš–‡—.
-399#£æ‡™‡’•“Th —›Ö’Ÿ™™‡˜ “Œ
-400#£D‡–‡™–Th—ŒŽ˜
-401#£ç’‡“«Y’Œ™‡Ž
-402#£î«y’•‘•
-403#£ïŽ“Th P
-404#£Íd†–ÖŒŽ —›—Ö«Y™Ž—
-405#£€Œ’ ›d†–ÖŒŽ —›—Ö«Y™Ž—
-406#£ï• †–•Ž—“‡ Ÿ‘’ ™’ Œ‘Žth’ Œ§’‡Ž “Ž–Ÿ™Œ–• ‡dŸ 50. ‚ ‡™‡’•“Th $X^2 Œ§’‡Ž ™Ÿ™Œ “Ž‡ ‡Th d–•—«Y‹‹Ž— ‡Ž ™• ‡d•™«Y‘Œ—“‡ ‡’‡”ŽŸdŽ—™•.
-407#£ïŽ“Th Q
-408#£æ–§—Ž“ ™Ž“Th Q
-409#£ï• MikTex ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“«Y’•. ïth–‡ ‡ —™‡‘Œ§™Œ —™ —Œ‘§Š‡ ‘Th¿˜. D–«YdŒŽ ’‡ ‹§’ŒŽ Œd‡’Œ§’— ™•› ›d•‘•‹Ž—™Th “Œ™† ™’ Œ‹‡™†—™‡—. ï’ d–th™ š•–† d•› ‡ Œ™Œ‘«Y—Œ™Œ ™• MikTex ‡dŸ ™• WordMat, ‡ Œ‹‡™‡—™‡Œ§ “Ž‡ —ŒŽ–† d‡«Y™’.
-410#£ç›™Th  ‘ŒŽ™•›–‹§‡ ŠŒ’ ›d•—™–§¾Œ™‡Ž —Œ Mac
+398#£ç–Ž“Ÿ˜ ‰‡“’ Œ‘Œ›Œ–§‡˜\r\nstate n ‹Ž‡ “Ž‡ ‹Œ’Ž š–‡—.
+399#£æ‡™‡’•“ —›Ö’Ÿ™™‡˜ “Œ
+400#£‡–‡™–—ŒŽ˜
+401#£ç’‡“’Œ™‡Ž
+402#£î’•‘•
+403#£ïŽ“ P
+404#£Í†–ÖŒŽ —›—Ö™Ž—
+405#£€Œ’ ›†–ÖŒŽ —›—Ö™Ž—
+406#£ï• †–•Ž—“‡ Ÿ‘’ ™’ Œ‘Ž’ Œ§’‡Ž “Ž–Ÿ™Œ–• ‡Ÿ 50. ‚ ‡™‡’•“ $X^2 Œ§’‡Ž ™Ÿ™Œ “Ž‡ ‡ –•—‹‹Ž— ‡Ž ™• ‡•™‘Œ—“‡ ‡’‡”ŽŸŽ—™•.
+407#£ïŽ“ Q
+408#£æ–§—Ž“ ™Ž“ Q
+409#£ï• MikTex ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“’•. ï–‡ ‡ —™‡‘Œ§™Œ —™ —Œ‘§Š‡ ‘¿˜. –ŒŽ ’‡ ‹§’ŒŽ Œ‡’Œ§’— ™•› ›•‘•‹Ž—™ “Œ™† ™’ Œ‹‡™†—™‡—. ï’ –™ š•–† •› ‡ Œ™Œ‘—Œ™Œ ™• MikTex ‡Ÿ ™• WordMat, ‡ Œ‹‡™‡—™‡Œ§ “Ž‡ —ŒŽ–† ‡™’.
+410#£ç›™  ‘ŒŽ™•›–‹§‡ ŠŒ’ ›•—™–§¾Œ™‡Ž —Œ Mac
 411#£¦‘‘•Ž
-412#£ê«Y‡ Œ”§——
-413#£î«y“‰•‘‡
+412#£ê‡ Œ”§——
+413#£î“‰•‘‡
 414#£„›“§—ŒŽ˜ CAS
-415#£îÖTh“‡™‡
-416#£üÖŒ™Œ ŒŽ—‡‹†‹ŒŽ “Ž‡ ŠŽ‡’›—“‡™ŽTh Œ”§—— d•› Œ§’‡Ž —™’ d–‡‹“‡™ŽŸ™™‡ «Y’‡ —«y—™“‡ Œ”Ž—th—Œ’. Ž—‡‹†‹Œ™Œ ™•
-417#£“Œ™‡‰‘™«Y˜ d–•˜ Œd§‘›—, ŠŽ‡Ö–Ž—“«Y’Œ˜ “Œ Ÿ““‡.
-418#£D–«YdŒŽ ’‡ ŒŽ—†‹Œ™Œ
-419#£íŒ™‡‰‘™«Y˜ ŠŽ‡Ö–Ž—“«Y’Œ˜ “Œ Ÿ““‡
-420#£í§‡ ‡dŸ ™Ž˜ Œ”Ž—th—ŒŽ˜ ŠŒ’ •–§¾Œ™‡Ž Œ’™Ÿ˜ ™’ •–§’ ™˜ dŒ–Ž•ÖTh˜ ™•› d‡–‡™–™–§•›. €•Ž“†—™Œ ’‡ ŒdŒ™Œ§’Œ™Œ ™’ dŒ–Ž•ÖTh ™•› •Ž•d«YŠ•›
-421#£ü’‡ Th dŒ–Ž——Ÿ™Œ–‡ —«y“‰•‘‡ —›’/d‘’ Œ“š‡’§¾•’™‡Ž —™’ «Yš–‡—. Dth˜ ’‡ Œ–“’Œ«y—Œ™Œ;
-422#£î›’ Th d‘’
-423#£‚ Œ§—•Š•˜ ŠŒ’ Œ§’‡Ž ‡™‡’•™Th. Ž—†‹Œ™‡Ž «Y’‡ —›’.
-424#£Íd†–ÖŒŽ d–Ÿ‰‘“‡ “Œ ™‡ ‡–Ž“™Ž† —«y“‰•‘‡
-425#£ì —›“‰•‘Ž—“Ÿ˜ ‹Ž‡ ™• †–•Ž—“‡ ŠŒ’ Œ§’‡Ž ——™Ÿ˜. ‚ —«y’™‡” ‹Ž‡ ™• ‡™th™‡™• Ÿ–Ž• Œ§’‡Ž: i=1 (Th d‡–Ÿ“•Ž•)
-426#£ì —›“‰•‘Ž—“Ÿ˜ ‹Ž‡ ™• d–•œŸ’ ŠŒ’ Œ§’‡Ž ——™Ÿ˜. ‚ —«y’™‡” ‹Ž‡ ™• ‡™th™‡™• Ÿ–Ž• Œ§’‡Ž: i=1 (Th d‡–Ÿ“•Ž•)
-427#£Íd†–Ö•›’ d–•‰‘Th“‡™‡ —«y’™‡”˜. D–«YdŒŽ ’‡ ™Œ–“‡™§—Œ™Œ «Y’‡ •‘•‘Th–“‡ “Œ dx (‡’ x Œ§’‡Ž  “Œ™‡‰‘™Th). ¼—˜ «YÖŒ™Œ Ö–—Ž“•d•ŽTh—ŒŽ ™• d —Œ †‘‘• d‘‡§—Ž•. î™ —›’«YÖŒŽ‡, Ö–—Ž“•d•ŽTh—™Œ «Y’‡ ŠŽ‡š•–ŽŸ d (™«yd•˜: \dd)
-428#£Íd†–Ö•›’ d–•‰‘Th“‡™‡ —«y’™‡”˜. ü’‡ ŠŽd‘Ÿ •‘•‘Th–“‡ d–«YdŒŽ ’‡ ™Œ‘ŒŽth’ŒŽ “Œ Š«y• dx (‡’†‘•‹‡ “Œ ™Ž˜ “Œ™‡‰‘™«Y˜ ‹Ž‡ ™Ž˜ •d•§Œ˜ d–«YdŒŽ ’‡ Œ’—“‡™•«y’). ¼—˜ «YÖŒ™Œ Ö–—Ž“•d•ŽTh—ŒŽ ™• d —Œ †‘‘• d‘‡§—Ž•. î™ —›’«YÖŒŽ‡, Ö–—Ž“•d•ŽTh—™Œ «Y’‡ ŠŽ‡š•–ŽŸ d (™«yd•˜: \dd)
-429#£€Œ’ “d•–Œ§™Œ ’‡ Ö–—Ž“•d•ŽTh—Œ™Œ ™• ŠŽd‘Ÿ •‘•‘Th–“‡ ‹Ž‡ —›‹Œ–Ž“«Y’‡ •‘•‘–th“‡™‡. x–—Ž“•d•ŽTh—™Œ Š«y• Œ’—“‡™“«Y’Œ˜ dŽ’‡§ŠŒ˜
-430#£è†•˜! Íd†–Ö•›’ d–•‰‘Th“‡™‡ —«y’™‡”˜. ì —›“‰•‘Ž—“Ÿ˜ ‹Ž‡ ŠŽ‡š•–•d•§— ŠŒ’ Œ§’‡Ž ——™Ÿ˜.
-431#£€Œ’ «YÖŒŽ •–Ž—™Œ§
-432#£€Œ’ •–§¾Œ™‡Ž ‡‘‘† dŒ–Ž•–§¾Œ™‡Ž
+415#£îÖ“‡™‡
+416#£üÖŒ™Œ ŒŽ—‡‹†‹ŒŽ “Ž‡ ŠŽ‡’›—“‡™Ž Œ”§—— •› Œ§’‡Ž —™’ –‡‹“‡™ŽŸ™™‡ ’‡ ——™“‡ Œ”Ž——Œ’. Ž—‡‹†‹Œ™Œ ™•
+417#£“Œ™‡‰‘™˜ –•˜ Œ§‘›—, ŠŽ‡Ö–Ž—“’Œ˜ “Œ Ÿ““‡.
+418#£–ŒŽ ’‡ ŒŽ—†‹Œ™Œ
+419#£íŒ™‡‰‘™˜ ŠŽ‡Ö–Ž—“’Œ˜ “Œ Ÿ““‡
+420#£í§‡ ‡Ÿ ™Ž˜ Œ”Ž——ŒŽ˜ ŠŒ’ •–§¾Œ™‡Ž Œ’™Ÿ˜ ™’ •–§’ ™˜ Œ–Ž•Ö˜ ™•› ‡–‡™–™–§•›. €•Ž“†—™Œ ’‡ ŒŒ™Œ§’Œ™Œ ™’ Œ–Ž•Ö ™•› •Ž•Š•›
+421#£ü’‡  Œ–Ž——Ÿ™Œ–‡ —“‰•‘‡ —›’/‘’ Œ“š‡’§¾•’™‡Ž —™’ š–‡—. ˜ ’‡ Œ–“’Œ—Œ™Œ;
+422#£î›’  ‘’
+423#£‚ Œ§—•Š•˜ ŠŒ’ Œ§’‡Ž ‡™‡’•™. Ž—†‹Œ™‡Ž ’‡ —›’.
+424#£Í†–ÖŒŽ –Ÿ‰‘“‡ “Œ ™‡ ‡–Ž“™Ž† —“‰•‘‡
+425#£ì —›“‰•‘Ž—“Ÿ˜ ‹Ž‡ ™• †–•Ž—“‡ ŠŒ’ Œ§’‡Ž ——™Ÿ˜. ‚ —’™‡” ‹Ž‡ ™• ‡™™‡™• Ÿ–Ž• Œ§’‡Ž: i=1 ( ‡–Ÿ“•Ž•)
+426#£ì —›“‰•‘Ž—“Ÿ˜ ‹Ž‡ ™• –•œŸ’ ŠŒ’ Œ§’‡Ž ——™Ÿ˜. ‚ —’™‡” ‹Ž‡ ™• ‡™™‡™• Ÿ–Ž• Œ§’‡Ž: i=1 ( ‡–Ÿ“•Ž•)
+427#£Í†–Ö•›’ –•‰‘“‡™‡ —’™‡”˜. –ŒŽ ’‡ ™Œ–“‡™§—Œ™Œ ’‡ •‘•‘–“‡ “Œ dx (‡’ x Œ§’‡Ž  “Œ™‡‰‘™). ¼—˜ ÖŒ™Œ Ö–—Ž“••Ž—ŒŽ ™• d —Œ †‘‘• ‘‡§—Ž•. î™ —›’ÖŒŽ‡, Ö–—Ž“••Ž—™Œ ’‡ ŠŽ‡š•–ŽŸ d (™•˜: \dd)
+428#£Í†–Ö•›’ –•‰‘“‡™‡ —’™‡”˜. ü’‡ ŠŽ‘Ÿ •‘•‘–“‡ –ŒŽ ’‡ ™Œ‘ŒŽ’ŒŽ “Œ Š• dx (‡’†‘•‹‡ “Œ ™Ž˜ “Œ™‡‰‘™˜ ‹Ž‡ ™Ž˜ ••§Œ˜ –ŒŽ ’‡ Œ’—“‡™•’). ¼—˜ ÖŒ™Œ Ö–—Ž“••Ž—ŒŽ ™• d —Œ †‘‘• ‘‡§—Ž•. î™ —›’ÖŒŽ‡, Ö–—Ž“••Ž—™Œ ’‡ ŠŽ‡š•–ŽŸ d (™•˜: \dd)
+429#£€Œ’ “•–Œ§™Œ ’‡ Ö–—Ž“••Ž—Œ™Œ ™• ŠŽ‘Ÿ •‘•‘–“‡ ‹Ž‡ —›‹Œ–Ž“’‡ •‘•‘–“‡™‡. –—Ž“••Ž—™Œ Š• Œ’—“‡™“’Œ˜ Ž’‡§ŠŒ˜
+430#£è†•˜! Í†–Ö•›’ –•‰‘“‡™‡ —’™‡”˜. ì —›“‰•‘Ž—“Ÿ˜ ‹Ž‡ ŠŽ‡š•–••§— ŠŒ’ Œ§’‡Ž ——™Ÿ˜.
+431#£€Œ’ ÖŒŽ •–Ž—™Œ§
+432#£€Œ’ •–§¾Œ™‡Ž ‡‘‘† Œ–Ž•–§¾Œ™‡Ž
 433#£€Œ’ •–§¾Œ™‡Ž Œ’™Ÿ˜
-434#£Œ§’‡Ž ŠŒ—“Œ›“«Y’• ‡Ž ŠŒ’ “d•–Œ§ ’‡ •–Ž—™Œ§. ì •–Ž—“Ÿ˜ d‡–‡‘Œ§dŒ™‡Ž.
+434#£Œ§’‡Ž ŠŒ—“Œ›“’• ‡Ž ŠŒ’ “•–Œ§ ’‡ •–Ž—™Œ§. ì •–Ž—“Ÿ˜ ‡–‡‘Œ§Œ™‡Ž.
 435#£í‡“‡™Ž†
 436#£…›—
-437#£x“
-438#£D•—•—™Ÿ
+437#£“
+438#£•—•—™Ÿ
 439#£èŒŽ™•›–‹§Œ˜
 440#£ÌŒ“Œ™–§‡
-441#£DŽ‡’.
+441#£Ž‡’.
 442#£ŠŽ†’›—“‡
 443#£„›“§—ŒŽ˜
 444#£„›“§—ŒŽ˜
 445#£SCI
-446#£Íd•‘•‹§¾
-447#£è«y’
-448#£Œ’™•‘Th Maxima
-449#£d§‘›— Œ”§——˜ Th Œ”Ž—th—Œ’ “Œ ‡–Ž“™ŽTh “«Y•Š•
-450#£”†‘ŒŽ¿ “Œ™‡‰‘™th’
-451#£€•Ž“Th ——™•«y/‘†•›˜
-452#£d§‘›— ŠŽ‡š•–ŽTh˜ Œ”§——˜
-453#£€Ž‡‹–‡šTh •–Ž—“th’
+446#£Í•‘•‹§¾
+447#£è’
+448#£Œ’™•‘ Maxima
+449#£§‘›— Œ”§——˜  Œ”Ž——Œ’ “Œ ‡–Ž“™Ž “•Š•
+450#£”†‘ŒŽ¿ “Œ™‡‰‘™’
+451#£€•Ž“ ——™•/‘†•›˜
+452#£§‘›— ŠŽ‡š•–Ž˜ Œ”§——˜
+453#£€Ž‡‹–‡š •–Ž—“’
 454#£ì–Ž—“Ÿ˜ —›’†–™—˜
-455#£ì–Ž—“Ÿ˜ š›—Žth’ —™‡Œ–th’
-456#£‘‡™™th’
+455#£ì–Ž—“Ÿ˜ š›—Ž’ —™‡Œ–’
+456#£‘‡™™’
 457#£î›’ŒŽ—š•–† ‡”§‡˜ Q
 458#£€Ž‡–§’
-459#£’•d•Žth
+459#£’••Ž
 460#£îÖŒŠ§‡—
-461#£“š†’Ž— ‹–‡šTh“‡™•˜
-462#£DŒŠ§• ‡™Œ«y›’—˜
-463#£3D ìŽŸdŒŠ•
-464#£ 1Ú4 ‹•˜ dŒ–Ž—™–•šTh˜ - 3D dŒ–Ž—™–•šTh Ì–†š“‡ —ÖŒ™Ž† “Œ ™•’ †”•’‡ x
-465#£î™‡™Ž—™ŽTh
-466#£í •“‡Š•d•Ž“«Y’Œ˜ d‡–‡™–Th—ŒŽ˜
-467#£ì“‡Š•d•Ž“«Y’Œ˜ d‡–‡™–Th—ŒŽ˜
-468#£Ì–†š“‡ –‡‰ŠŽth’
+461#£“š†’Ž— ‹–‡š“‡™•˜
+462#£ŒŠ§• ‡™Œ›’—˜
+463#£3D ìŽŸŒŠ•
+464#£‹•˜ Œ–Ž—™–•š˜ - 3D Œ–Ž—™–•š Ì–†š“‡ —ÖŒ™Ž† “Œ ™•’ †”•’‡ x
+465#£î™‡™Ž—™Ž
+466#£í •“‡Š••Ž“’Œ˜ ‡–‡™–—ŒŽ˜
+467#£ì“‡Š••Ž“’Œ˜ ‡–‡™–—ŒŽ˜
+468#£Ì–†š“‡ –‡‰ŠŽ’
 469#£ƒ—™Ÿ‹–‡““‡
 470#£Ì–†š“‡ ‰“†™’
 471#£ç–•Ž—™ŽŸ ‹–†š“‡
-472#£ìŽŸdŒŠ• •›™Ž•«y ‡Ž “•›—™†Ž‡
-473#£î™‡™Ž—™ŽTh/prob.
-474#£ìdŽ—•Š–Ÿ“—
-475#£€Œ’ Œ§’‡Ž Š›’‡™Th  ŒŽ—‡‹‹Th —Œ d§’‡‡
+472#£ìŽŸŒŠ• •›™Ž• ‡Ž “•›—™†Ž‡
+473#£î™‡™Ž—™Ž/prob.
+474#£ìŽ—•Š–Ÿ“—
+475#£€Œ’ Œ§’‡Ž Š›’‡™  ŒŽ—‡‹‹ —Œ §’‡‡
 476#£Ì–‡““ŽŸ˜
 477#£Œ™ŽŸ˜
-478#£€«y’‡“
-479#£D•‘›th’›“•
-480#£€Ž‡’•“«Y˜
-481#£€›’›“ŽTh
-482#£æ‡’•’ŽTh ŠŽ‡’•“Th
-483#£$X^2-ŠŽ‡’•“Th
+478#£€’‡“
+479#£•‘›’›“•
+480#£€Ž‡’•“˜
+481#£€›’›“Ž
+482#£æ‡’•’Ž ŠŽ‡’•“
+483#£$X^2-ŠŽ‡’•“
 484#£2D ÌŒ“Œ™–§‡
 485#£3D ÌŒ“Œ™–§‡
-486#£ç’•§‹ŒŽ š›‘‘†ŠŽ• “‡“‡™Žth’ ™«yd’
-487#£ç’•§‹ŒŽ ™• š›‘‘†ŠŽ• ™«yd’ š›—ŽTh˜
-488#£ç’•§‹ŒŽ ™• š›‘‘†ŠŽ• ™«yd•› Ö“Œ§‡˜
-489#£ç›™Ÿ“‡™• ‡–Ž‰«Y˜ Th ‡–Ž“™ŽŸ ‡d•™«Y‘Œ—“‡
-490#£ï• WordMat ‡•–§¾ŒŽ ‡›™Ÿ“‡™‡ ™• wheather ‹Ž‡ ’‡ ŒdŽ—™–«Y¿ŒŽ ‡–Ž‰«Y˜ Th ‡–Ž“™ŽŸ ‡d•™«Y‘Œ—“‡ Th ‡Ž ™‡ Š«y•.
-491#£ç–Ž‰Th ‡d•™Œ‘«Y—“‡™‡
-492#£ 1Ú4 ‘‡ ™‡ ‡d•™Œ‘«Y—“‡™‡ ŒdŽ—™–†š‡’ ˜ ‡–Ž‰«Y˜ ‡d•™«Y‘Œ—“‡. íŒ–Ž«Y˜ š•–«Y˜ Ÿ“˜ ŠŒ’ “d•–Œ§ ’‡ ‡d•šŒ›ÖŒ§ “Ž‡ ‡–Ž“™ŽTh d–•—«Y‹‹Ž—.
-493#£ç–Ž“™Ž† ‡d•™Œ‘«Y—“‡™‡
-494#£ 1Ú4 ‘‡ ™‡ ‡d•™Œ‘«Y—“‡™‡ ŒdŽ—™–«Yš•’™‡Ž ˜ ŠŒ‡ŠŽ•§ ‡–Ž“•§
+486#£ç’•§‹ŒŽ š›‘‘†ŠŽ• “‡“‡™Ž’ ™’
+487#£ç’•§‹ŒŽ ™• š›‘‘†ŠŽ• ™’ š›—Ž˜
+488#£ç’•§‹ŒŽ ™• š›‘‘†ŠŽ• ™•› Ö“Œ§‡˜
+489#£ç›™Ÿ“‡™• ‡–Ž‰˜  ‡–Ž“™ŽŸ ‡•™‘Œ—“‡
+490#£ï• WordMat ‡•–§¾ŒŽ ‡›™Ÿ“‡™‡ ™• wheather ‹Ž‡ ’‡ ŒŽ—™–¿ŒŽ ‡–Ž‰˜  ‡–Ž“™ŽŸ ‡•™‘Œ—“‡  ‡Ž ™‡ Š•.
+491#£ç–Ž‰ ‡•™Œ‘—“‡™‡
+492#£‘‡ ™‡ ‡•™Œ‘—“‡™‡ ŒŽ—™–†š‡’ ˜ ‡–Ž‰˜ ‡•™‘Œ—“‡. íŒ–Ž˜ š•–˜ Ÿ“˜ ŠŒ’ “•–Œ§ ’‡ ‡•šŒ›ÖŒ§ “Ž‡ ‡–Ž“™Ž –•—‹‹Ž—.
+493#£ç–Ž“™Ž† ‡•™Œ‘—“‡™‡
+494#£‘‡ ™‡ ‡•™Œ‘—“‡™‡ ŒŽ—™–š•’™‡Ž ˜ ŠŒ‡ŠŽ•§ ‡–Ž“•§
 495#£î“‡’™Ž† ‡–Ž“™Ž† —™•ŽÖŒ§‡
-496#£æ‡•–§¾ŒŽ ™•’ ‡–Ž“Ÿ ™’ (—“‡’™Žth’) ‡–Ž“th’ ‹Ž‡ ™‡ ‡d•™Œ‘«Y—“‡™‡
+496#£æ‡•–§¾ŒŽ ™•’ ‡–Ž“Ÿ ™’ (—“‡’™Ž’) ‡–Ž“’ ‹Ž‡ ™‡ ‡•™Œ‘—“‡™‡
 497#£ç™§’Ž‡
-498#£ 1Ú4 ™‡’ dŽ«Y¾•’™‡Ž, Ÿ‘•Ž •Ž ™–Ž‹’•“Œ™–Ž•§ ›d•‘•‹Ž—“•§ Œ§’‡Ž —Œ ‡™§’Ž‡, ŠŽ‡š•–Œ™Ž† “•§–Œ˜.
-499#£dŽ—™“•’ŽTh —“ŒŽ•‹–‡š§‡
-500#£îŒ dŒ–§d™— ‡™†‘Ž¿˜, Ÿ‘‡ ™‡ ‡d•™Œ‘«Y—“‡™‡ ŒdŽ—™–«Yš•’™‡Ž “Œ ŒdŽ—™“•’ŽTh —“ŒŽ•‹–‡š§‡. D‡–†ŠŒŽ‹“‡: 2.3$*10^4
+498#£™‡’ Ž¾•’™‡Ž, Ÿ‘•Ž •Ž ™–Ž‹’•“Œ™–Ž•§ ›•‘•‹Ž—“•§ Œ§’‡Ž —Œ ‡™§’Ž‡, ŠŽ‡š•–Œ™Ž† “•§–Œ˜.
+499#£Ž—™“•’Ž —“ŒŽ•‹–‡š§‡
+500#£îŒ Œ–§™— ‡™†‘Ž¿˜, Ÿ‘‡ ™‡ ‡•™Œ‘—“‡™‡ ŒŽ—™–š•’™‡Ž “Œ ŒŽ—™“•’Ž —“ŒŽ•‹–‡š§‡. ‡–†ŠŒŽ‹“‡: 2.3$*10^4
 501#£„›“§—ŒŽ˜
 502#£ç‘‘†”™Œ †Œ Œ§Š•›˜ –›“§—ŒŽ˜.
-503#£Íd•‘•‹Ž—“Ÿ˜ (AltGr+Enter)
-504#£Íd•‘•‹§¾ŒŽ ™’ ŒdŽ‘Œ‹“«Y’ d‡–†—™‡— Th ŒdŽ—™–«YšŒŽ —™• d‘—Ž«Y—™Œ–• —«y“‰•‘• §—•’.
-505#£Œ’™•‘Th "Maxima"
-506#£î™«Y‘’ŒŽ ™’ Œ’™•‘Th Ö–§˜ šŽ‘™–†–Ž—“‡ —™‡ “«Y‹Ž—™‡. ô—™Ÿ—•, ™• ‡d•™«Y‘Œ—“‡ Œ§’‡Ž “•–š•d•Ž“«Y’•.
-507#£dŽ‘«yŒŽ Œ”§——(ŒŽ˜) (Alt+E)
-508#£dŽ‘«yŒŽ “Ž‡ Œ”§—— Th «Y’‡ —«y—™“‡ Œ”Ž—th—Œ’. ï•d•Œ™Th—™Œ ™• Š–•“«Y‡ —™’ Œ”§——. dŽ‘•‹Th dŒ–Ž——Ÿ™Œ–’ Œ”Ž—th—Œ’ ‹Ž‡ ™’ Œd§‘›— Œ’Ÿ˜ —›—™Th“‡™•˜ Œ”Ž—th—Œ’
-509#£d§‘›— ‡–Ž“™Ž†
-510#£d§‘›— Œ”§——˜ Ö–—Ž“•d•Žth’™‡˜ ‡–Ž“™Ž«Y˜ “ŒŸŠ•›˜.
-511#£”†‘ŒŽ¿ “Œ™‡‰‘™th’
-512#£”‡‘Œ§¿™Œ “§‡ Th dŒ–Ž——Ÿ™Œ–Œ˜ “Œ™‡‰‘™«Y˜ ‡dŸ «Y’‡ —«y—™“‡ Œ”Ž—th—Œ’.
-513#£‘«Y‹”™Œ Œ†’ Œ§’‡Ž ‡‘«Y˜
-514#£‘«Y‹”™Œ Œ†’  Œ”§—— Œ§’‡Ž ‡‘Th˜
-515#£d§‘›— ŠŽ‡š•–ŽTh˜ Œ”§——˜
-516#£d§‘›— ŠŽ‡š•–ŽTh˜ Œ”§——˜. Ž—‡‹†‹Œ™Œ ’‡ ŒŽ—‡ÖŒ§ Ö–—Ž“•d•Žth’™‡˜ ŠŽ‡š•–Œ™ŽTh —“ŒŽ•‹–‡š§‡. D‡–‡ŠŒ§‹“‡™‡: y'=y , y''=y Th f'(x)=f(x)
-517#£d§‘›— —›—™Th“‡™•˜ ŠŽ‡š•–Žth’ Œ”Ž—th—Œ’ ‡–Ž“™Ž†
-518#£D–«YdŒŽ ’‡ «YÖŒŽ ™ “•–šTh y'=?
-519#£“š†’Ž— •–Ž—“th’
-520#£“š‡’§¾ŒŽ •–Ž—“•«y˜ Œ’Œ–‹•«y˜ —Œ ‡›™Th’ ™ «Y— —™• «Y‹‹–‡š•
-521#£€Ž‡‹–‡šTh •–Ž—“th’ (Alt+F)
-522#£Ž—†‹ŒŽ ™’ Œ’™•‘Th 'Delete def:' —™• «Y‹‹–‡š•.  1Ú4 ‘•Ž •Ž •–Ž—“•§ d•› ™•d•Œ™•«y’™‡Ž d–Ž’ ‡dŸ ‡›™Th’ ™’ Œ’™•‘Th ŠŒ’ ‡ Œ§’‡Ž «Y‹›–•Ž —™• ›dŸ‘•Žd• «Y‹‹–‡š•.
+503#£Í•‘•‹Ž—“Ÿ˜ (AltGr+Enter)
+504#£Í•‘•‹§¾ŒŽ ™’ ŒŽ‘Œ‹“’ ‡–†—™‡—  ŒŽ—™–šŒŽ —™• ‘—Ž—™Œ–• —“‰•‘• §—•’.
+505#£Œ’™•‘ "Maxima"
+506#£î™‘’ŒŽ ™’ Œ’™•‘ Ö–§˜ šŽ‘™–†–Ž—“‡ —™‡ “‹Ž—™‡. ô—™Ÿ—•, ™• ‡•™‘Œ—“‡ Œ§’‡Ž “•–š••Ž“’•.
+507#£Ž‘ŒŽ Œ”§——(ŒŽ˜) (Alt+E)
+508#£Ž‘ŒŽ “Ž‡ Œ”§——  ’‡ ——™“‡ Œ”Ž——Œ’. ï••Œ™—™Œ ™• Š–•“‡ —™’ Œ”§——. Ž‘•‹ Œ–Ž——Ÿ™Œ–’ Œ”Ž——Œ’ ‹Ž‡ ™’ Œ§‘›— Œ’Ÿ˜ —›—™“‡™•˜ Œ”Ž——Œ’
+509#£§‘›— ‡–Ž“™Ž†
+510#£§‘›— Œ”§——˜ Ö–—Ž“••Ž’™‡˜ ‡–Ž“™Ž˜ “ŒŸŠ•›˜.
+511#£”†‘ŒŽ¿ “Œ™‡‰‘™’
+512#£”‡‘Œ§¿™Œ “§‡  Œ–Ž——Ÿ™Œ–Œ˜ “Œ™‡‰‘™˜ ‡Ÿ ’‡ ——™“‡ Œ”Ž——Œ’.
+513#£‘‹”™Œ Œ†’ Œ§’‡Ž ‡‘˜
+514#£‘‹”™Œ Œ†’  Œ”§—— Œ§’‡Ž ‡‘˜
+515#£§‘›— ŠŽ‡š•–Ž˜ Œ”§——˜
+516#£§‘›— ŠŽ‡š•–Ž˜ Œ”§——˜. Ž—‡‹†‹Œ™Œ ’‡ ŒŽ—‡ÖŒ§ Ö–—Ž“••Ž’™‡˜ ŠŽ‡š•–Œ™Ž —“ŒŽ•‹–‡š§‡. ‡–‡ŠŒ§‹“‡™‡: y'=y , y''=y  f'(x)=f(x)
+517#£§‘›— —›—™“‡™•˜ ŠŽ‡š•–Ž’ Œ”Ž——Œ’ ‡–Ž“™Ž†
+518#£–ŒŽ ’‡ ÖŒŽ ™ “•–š y'=?
+519#£“š†’Ž— •–Ž—“’
+520#£“š‡’§¾ŒŽ •–Ž—“•˜ Œ’Œ–‹•˜ —Œ ‡›™’ ™ — —™• ‹‹–‡š•
+521#£€Ž‡‹–‡š •–Ž—“’ (Alt+F)
+522#£Ž—†‹ŒŽ ™’ Œ’™•‘ 'Delete def:' —™• ‹‹–‡š•. ‘•Ž •Ž •–Ž—“•§ •› ™••Œ™•’™‡Ž –Ž’ ‡Ÿ ‡›™’ ™’ Œ’™•‘ ŠŒ’ ‡ Œ§’‡Ž ‹›–•Ž —™• ›Ÿ‘•Ž• ‹‹–‡š•.
 523#£ì–Ž—“Ÿ˜ (Alt+€)
-524#£Ž—†‹ŒŽ •–Ž—“Ÿ d•› Ž—Ö«yŒŽ —™• ›dŸ‘•Žd• «Y‹‹–‡š•
-525#£ì–Ž—“Ÿ˜ š›—Žth’ —™‡Œ–th’
-526#£dŽ‘«Y”™Œ ‡’†“Œ—‡ —™Ž˜ dŽ• Ö–—Ž“•d•Ž•«y“Œ’Œ˜ —™‡Œ–«Y˜ ‡Ž •–§—™Œ ™Ž˜ —™• «Y‹‹–‡š• ‹Ž‡ Ö–Th— —Œ ›d•‘•‹Ž—“•«y˜.
-527#£‘‡™™th’
-528#£î“§–›’— «Yš–‡—˜ “Œ Ö–Th— ŠŽ‡š•–Œ™Žth’ “ŒŸŠ’
-529#£çd‘•d•Žth
-530#£ç›™Ÿ“‡™ d–•—d†ŒŽ‡ ‡d‘•d•§—˜ ™˜ «Yš–‡—˜. x–—Ž“•d•ŽTh—™Œ ™ “Œ§— ‡Ž ŒdŽ‘«Y”™Œ —›‹Œ–Ž“«Y’Œ˜ “ŒŸŠ•›˜ Œ†’ ‡d•™«yÖŒŽ.
-531#£D‡–‡‹•’™•d•§—
-532#£D‡–‡‹•’™•d•ŽŒ§ “Ž‡ «Yš–‡—
-533#£dŒ™Œ§’
-534#£ 1Ú4 ‘Œ˜ •Ž d‡–Œ’«Y—ŒŽ˜ ŒdŒ™Œ§’•’™‡Ž
-535#£ï–‡d«Y¾Ž
-536#£Ž—‡‹‹Th Excel
+524#£Ž—†‹ŒŽ •–Ž—“Ÿ •› Ž—ÖŒŽ —™• ›Ÿ‘•Ž• ‹‹–‡š•
+525#£ì–Ž—“Ÿ˜ š›—Ž’ —™‡Œ–’
+526#£Ž‘”™Œ ‡’†“Œ—‡ —™Ž˜ Ž• Ö–—Ž“••Ž•“Œ’Œ˜ —™‡Œ–˜ ‡Ž •–§—™Œ ™Ž˜ —™• ‹‹–‡š• ‹Ž‡ Ö–— —Œ ›•‘•‹Ž—“•˜.
+527#£‘‡™™’
+528#£î“§–›’— š–‡—˜ “Œ Ö–— ŠŽ‡š•–Œ™Ž’ “ŒŸŠ’
+529#£ç‘••Ž
+530#£ç›™Ÿ“‡™ –•—†ŒŽ‡ ‡‘••§—˜ ™˜ š–‡—˜. –—Ž“••Ž—™Œ ™ “Œ§— ‡Ž ŒŽ‘”™Œ —›‹Œ–Ž“’Œ˜ “ŒŸŠ•›˜ Œ†’ ‡•™ÖŒŽ.
+531#£‡–‡‹•’™••§—
+532#£‡–‡‹•’™••ŽŒ§ “Ž‡ š–‡—
+533#£Œ™Œ§’
+534#£‘Œ˜ •Ž ‡–Œ’—ŒŽ˜ ŒŒ™Œ§’•’™‡Ž
+535#£ï–‡¾Ž
+536#£Ž—‡‹‹ Excel
 537#£€Ž‡–§’
-538#£dŽ‘«Y”™Œ ™’ «Yš–‡— ‹Ž‡ ’‡ ŠŽ‡š•–•d•ŽTh—Œ™Œ Th ’‡ ™•d•Œ™Th—Œ™Œ ™• Š–•“«Y‡ —™’ «Yš–‡—
-539#£’•d•Žth
-540#£æ‡•–§¾ŒŽ ™• ‡Ÿ–Ž—™• •‘•‘Th–“‡ ™˜ —›’†–™—˜
-541#£„›“§—ŒŽ˜ ŒŽ—‡‹‹Th˜
-542#£”‡‹‹Th –›“§—Œ’
-543#£D–•—‡–“•‹Th “Œ’•«y
-544#£d‡‘Ž’Š–Ÿ“— Ÿ‘d’
-545#£Ì–†š“‡ ‹–‡šTh“‡™•˜ (Alt+P)
-546#£“š‡’§¾ŒŽ ™• ‹–†š“‡ ‹Ž‡ ™Ž˜ ŒdŽ‘Œ‹“«Y’Œ˜ —›’‡–™Th—ŒŽ˜/Œ”Ž—th—ŒŽ˜ ‡Ž —“Œ§‡. ï• ‹–†š“‡ “d•–Œ§ —™ —›’«YÖŒŽ‡ ’‡ ŒŽ—‡ÖŒ§ —™• «Y‹‹–‡š•. Íd•—™–§¾•’™‡Ž ŠŽ†š•–‡ d–•‹–†““‡™‡ ‹–‡š“†™’. dŽ‘«Y”™Œ ™• ‡‹‡d“«Y’• —‡˜ —™Ž˜ –›“§—ŒŽ˜.
-547#£D‘•Th Ö–—Ž“•d•Žth’™‡˜ ™• GnuPlot
-548#£“š†’Ž— ‹–‡šTh“‡™•˜ Ö–—Ž“•d•Žth’™‡˜ ™• GnuPlot. ï• GnuPlot ›d•—™–§¾ŒŽ d•‘‘«Y˜ ‘ŒŽ™•›–‹§Œ˜ ‡Ž Š“Ž•›–‹Œ§ «Y’‡ Ÿ“•–š• ‹–†š“‡. íd•–Œ§™Œ ’‡ †’Œ™Œ ŠŽd‘Ÿ ‘Ž —™• ‹–†š“‡ —™• «Y‹‹–‡š• ‹Ž‡ ’‡ ™• ŒdŒ”Œ–‹‡—™Œ§™Œ ”‡’†.
-549#£îÖŒŠ§‡— “Œ Ö–Th— ‹–‡šTh“‡™•˜
-550#£Ž—†‹ŒŽ Œ’—“‡™“«Y’• ‡’™ŽŒ§“Œ’• ‹–‡šTh“‡™•˜ —™• Word, ™• •d•§• “d•–Œ§™Œ ’‡ ŒdŒ”Œ–‹‡—™Œ§™Œ †’•’™‡˜ ŠŽd‘Ÿ ‘Ž —™• ‹–†š“‡. ì–Ž—“•§, —›’‡–™Th—ŒŽ˜, Œ”Ž—th—ŒŽ˜ ‡Ž —“Œ§‡ “Œ™‡š«Y–•’™‡Ž ‡dŸ ™• Word —™• Graph. ï• Graph Œ§’‡Ž «Y’‡ d•‘«y ‹–Th‹•–• d–Ÿ‹–‡““‡ “Œ d•‘‘«Y˜ ‘ŒŽ™•›–‹§Œ˜. ï• “ŒŽ•’«Y™“‡ Œ§’‡Ž Ÿ™Ž ŠŒ’ ›d•—™–§¾Œ™‡Ž —Œ Mac ‡Ž ™‡ ‹–‡šTh“‡™‡ Œ“š‡’§¾•’™‡Ž —Œ Ö‡“‘Th ‡’†‘›—.
+538#£Ž‘”™Œ ™’ š–‡— ‹Ž‡ ’‡ ŠŽ‡š•–••Ž—Œ™Œ  ’‡ ™••Œ™—Œ™Œ ™• Š–•“‡ —™’ š–‡—
+539#£’••Ž
+540#£æ‡•–§¾ŒŽ ™• ‡Ÿ–Ž—™• •‘•‘–“‡ ™˜ —›’†–™—˜
+541#£„›“§—ŒŽ˜ ŒŽ—‡‹‹˜
+542#£”‡‹‹ –›“§—Œ’
+543#£–•—‡–“•‹ “Œ’•
+544#£‡‘Ž’Š–Ÿ“— Ÿ‘’
+545#£Ì–†š“‡ ‹–‡š“‡™•˜ (Alt+P)
+546#£“š‡’§¾ŒŽ ™• ‹–†š“‡ ‹Ž‡ ™Ž˜ ŒŽ‘Œ‹“’Œ˜ —›’‡–™—ŒŽ˜/Œ”Ž——ŒŽ˜ ‡Ž —“Œ§‡. ï• ‹–†š“‡ “•–Œ§ —™ —›’ÖŒŽ‡ ’‡ ŒŽ—‡ÖŒ§ —™• ‹‹–‡š•. Í•—™–§¾•’™‡Ž ŠŽ†š•–‡ –•‹–†““‡™‡ ‹–‡š“†™’. Ž‘”™Œ ™• ‡‹‡“’• —‡˜ —™Ž˜ –›“§—ŒŽ˜.
+547#£‘• Ö–—Ž“••Ž’™‡˜ ™• GnuPlot
+548#£“š†’Ž— ‹–‡š“‡™•˜ Ö–—Ž“••Ž’™‡˜ ™• GnuPlot. ï• GnuPlot ›•—™–§¾ŒŽ •‘‘˜ ‘ŒŽ™•›–‹§Œ˜ ‡Ž Š“Ž•›–‹Œ§ ’‡ Ÿ“•–š• ‹–†š“‡. í•–Œ§™Œ ’‡ †’Œ™Œ ŠŽ‘Ÿ ‘Ž —™• ‹–†š“‡ —™• ‹‹–‡š• ‹Ž‡ ’‡ ™• ŒŒ”Œ–‹‡—™Œ§™Œ ”‡’†.
+549#£îÖŒŠ§‡— “Œ Ö–— ‹–‡š“‡™•˜
+550#£Ž—†‹ŒŽ Œ’—“‡™“’• ‡’™ŽŒ§“Œ’• ‹–‡š“‡™•˜ —™• Word, ™• ••§• “•–Œ§™Œ ’‡ ŒŒ”Œ–‹‡—™Œ§™Œ †’•’™‡˜ ŠŽ‘Ÿ ‘Ž —™• ‹–†š“‡. ì–Ž—“•§, —›’‡–™—ŒŽ˜, Œ”Ž——ŒŽ˜ ‡Ž —“Œ§‡ “Œ™‡š–•’™‡Ž ‡Ÿ ™• Word —™• Graph. ï• Graph Œ§’‡Ž ’‡ •‘ ‹–‹•–• –Ÿ‹–‡““‡ “Œ •‘‘˜ ‘ŒŽ™•›–‹§Œ˜. ï• “ŒŽ•’™“‡ Œ§’‡Ž Ÿ™Ž ŠŒ’ ›•—™–§¾Œ™‡Ž —Œ Mac ‡Ž ™‡ ‹–‡š“‡™‡ Œ“š‡’§¾•’™‡Ž —Œ Ö‡“‘ ‡’†‘›—.
 551#£GeoGebra
-552#£ç’•§‹ŒŽ ™• GeoGebra ‡Ž “Œ™‡š«Y–ŒŽ ™Ž˜ ŒdŽ‘Œ‹“«Y’Œ˜ —›’‡–™Th—ŒŽ˜/Œ”Ž—th—ŒŽ˜ —™• GeoGebra, ‡th˜ ‡Ž ™›ÖŸ’ •–Ž—“•«y˜. ï• GeoGebra Œ§’‡Ž ™• dŽ• d‘•«y—Ž• —Œ Ö‡–‡™–Ž—™Ž† d–Ÿ‹–‡““‡ ‹–‡š“†™’. €“Ž•›–‹Œ§ Œd§—˜ «Y’‡ ‹–†š“‡ ›¿‘Th˜ d•ŽŸ™™‡˜. ï‡ “ŒŽ•’Œ™Th“‡™‡ Œ§’‡Ž: ç–‹Œ§ ’‡ ‡’•§”ŒŽ ‡Ž ™• ‹–†š“‡ ŠŒ’ “Œ™‡š«Y–Œ™‡Ž ‡›™Ÿ“‡™‡ —™• Word. D–«YdŒŽ ’‡ ‡’™Ž‹–‡šŒ§ ÖŒŽ–•§’™‡ —™• Word Ö–—Ž“•d•Žth’™‡˜ ™• “Œ’•«y ŒdŒ”Œ–‹‡—§‡˜ / 'ç’™Ž‹–‡šTh d–•‰•‘Th˜ ‹–‡šŽth’ —™• d–ŸÖŒŽ–•'. €Œ’ Œ§’‡Ž Š›’‡™Th  ŒdŒ”Œ–‹‡—§‡ ™•› ‹–‡šTh“‡™•˜ ”‡’† “Œ™† ™’ ŒŽ—‡‹‹Th.
+552#£ç’•§‹ŒŽ ™• GeoGebra ‡Ž “Œ™‡š–ŒŽ ™Ž˜ ŒŽ‘Œ‹“’Œ˜ —›’‡–™—ŒŽ˜/Œ”Ž——ŒŽ˜ —™• GeoGebra, ‡˜ ‡Ž ™›ÖŸ’ •–Ž—“•˜. ï• GeoGebra Œ§’‡Ž ™• Ž• ‘•—Ž• —Œ Ö‡–‡™–Ž—™Ž† –Ÿ‹–‡““‡ ‹–‡š“†™’. €“Ž•›–‹Œ§ Œ§—˜ ’‡ ‹–†š“‡ ›¿‘˜ •ŽŸ™™‡˜. ï‡ “ŒŽ•’Œ™“‡™‡ Œ§’‡Ž: ç–‹Œ§ ’‡ ‡’•§”ŒŽ ‡Ž ™• ‹–†š“‡ ŠŒ’ “Œ™‡š–Œ™‡Ž ‡›™Ÿ“‡™‡ —™• Word. –ŒŽ ’‡ ‡’™Ž‹–‡šŒ§ ÖŒŽ–•§’™‡ —™• Word Ö–—Ž“••Ž’™‡˜ ™• “Œ’• ŒŒ”Œ–‹‡—§‡˜ / 'ç’™Ž‹–‡š –•‰•‘˜ ‹–‡šŽ’ —™• –ŸÖŒŽ–•'. €Œ’ Œ§’‡Ž Š›’‡™  ŒŒ”Œ–‹‡—§‡ ™•› ‹–‡š“‡™•˜ ”‡’† “Œ™† ™’ ŒŽ—‡‹‹.
 553#£Ì–†š“‡ Excel
-554#£Ž—†‹ŒŽ Œ’—“‡™“«Y’• š«y‘‘• Excel d•› «YÖŒŽ —ÖŒŠŽ‡—™Œ§ ‹Ž‡ ’‡ Œ“š‡’§¾ŒŽ ‹–‡šTh“‡™‡ ‡Ž —“Œ§‡. æ†’™Œ ŠŽd‘Ÿ ‘Ž —™• excelsheets ‹Ž‡ ’‡ ™• ŒdŒ”Œ–‹‡—™Œ§™Œ ”‡’†. €Œ’ Œ§’‡Ž ™Ÿ—• ‹–Th‹•–• ‡Ž d‘•«y—Ž• —Œ Ö‡–‡™–Ž—™Ž† Ÿ—• “Œ–Ž«Y˜ ‡dŸ ™Ž˜ †‘‘Œ˜ ‘«y—ŒŽ˜ ‹–‡š“†™’. ï‡ d‘Œ•’Œ™Th“‡™‡ Œ§’‡Ž: Íd•—™–§¾ŒŽ ™’ Œ“†— ™•› Excel ‡Ž «YÖŒŽ —ÖŒŠŽ‡—™Œ§ ‹Ž‡ Œ«y•‘ —ÖŒŠ§‡— —“Œ§’. §’‡Ž “Ž‡ ‡‘Th ŒdŽ‘•‹Th ‹Ž‡ —›’Œ–‹‡—§‡ “Œ †‘‘‡ «Y“‡™‡, Ÿd˜ «Y“‡™‡ ŒdŽ—™Th“˜.
-555#£DŒŠ§• ‡™Œ«y›’—˜
-556#£“š‡’§¾ŒŽ ™• dŒŠ§• ‡™Œ«y›’—˜ ‡Ž —ÖŒŠŽ†¾ŒŽ ‡“d«y‘Œ˜ ‘«y—˜ ‹Ž‡ ŠŽ‡š•–ŽTh Œ”§—— d–th™˜ ™†”˜.
-557#£Ž—‡‹‹Th ‡–ÖŒ§•› GeoGebra
-558#£Ž—†‹ŒŽ Œ’Ÿ ‡–ÖŒ§• GeoGebra, ™• •d•§• “d•–Œ§™Œ ’‡ ŒdŒ”Œ–‹‡—™Œ§™Œ ‡Ž ’‡ ‡d•Œ«y—Œ™Œ “«Y—‡ ‡dŸ ™• Word. ï• ‡–ÖŒ§• Œ“š‡’§¾Œ™‡Ž ˜ ŒŽ•’§ŠŽ•. ìŽ ŒŽŸ’Œ˜ ‹–‡šTh“‡™•˜ d–«YdŒŽ ’‡ ‡’™Ž‹–‡š•«y’ —™• «Y‹‹–‡š•.
-559#£3D •ŽŸdŒŠ•
-560#£îÖŒŠŽ†—™Œ Œ”Ž—th—ŒŽ˜, —“Œ§‡, ŠŽ‡’«y—“‡™‡ ‡Ž d‡–‡“Œ™–Ž† ‹–‡šTh“‡™‡, —Œ 3D.
-561#£î™Œ–ŒŸ ™˜ Œd‡’†—™‡—˜
-562#£€Œ§Ö’ŒŽ —™Œ–Œ† dŒ–Ž—™–•šTh ‹Ž‡ “Ž‡ —›’†–™—. ï• ‹–†š“‡ ™˜ —›’†–™—˜ dŒ–Ž—™–«YšŒ™‡Ž 360 “•§–Œ˜ ‹«y– ‡dŸ ™•’ †”•’‡ x Š“Ž•›–‹th’™‡˜ «Y’‡ ‡’™ŽŒ§“Œ’• 3D.
-563#£î™‡™Ž—™ŽTh
-564#£ç’•§‹ŒŽ ‰Ž‰‘§• Œ–‹‡—§‡˜ ™•› Excel d•› «YÖŒŽ —ÖŒŠŽ‡—™Œ§ ‹Ž‡ “§‡ “Œ™‡‰‘™Th —™‡™Ž—™ŽTh˜. æ•Ž™†”™Œ ™‡ š«y‘‘‡ ‹Ž‡ ’‡ ŠŒ§™Œ Ÿ‘Œ˜ ™Ž˜ ‘ŒŽ™•›–‹§Œ˜.
-565#£ì“‡Š•d•Ž“«Y’Œ˜ d‡–‡™–Th—ŒŽ˜
-566#£…«y‘‘• Excel ‹Ž‡ “ •“‡Š•d•Ž“«Y’‡ ŠŒŠ•“«Y’‡. Íd•‘•‹§¾ŒŽ —›Ö’Ÿ™™Œ˜, “«Y—•›˜ Ÿ–•›˜, ™Œ™‡–™“Ÿ–Ž‡ ‘d ‡Ž Š“Ž•›–‹Œ§ —ÖŒ™Ž† ŠŽ‡‹–†““‡™‡ Ÿd˜ ŠŽ†‹–‡““‡ •›™Ž•«y ‡Ž “•›—™†Ž‡
-567#£ì“‡Š•d•Ž“«Y’Œ˜ d‡–‡™–Th—ŒŽ˜
-568#£…«y‘‘• Excel ‹Ž‡ •“‡Š•d•Ž“«Y’‡ ŠŒŠ•“«Y’‡. Íd•‘•‹§¾ŒŽ —›Ö’Ÿ™™Œ˜, “«Y— ™Ž“Th ‘d ‡Ž Š“Ž•›–‹Œ§ —ÖŒ™Ž† ŠŽ‡‹–†““‡™‡ Ÿd˜ Ž—™Ÿ‹–‡““‡ ‡Ž ŠŽ†‹–‡““‡ •›™Žth’ ‡Ž “•›—™†Ž‡
+554#£Ž—†‹ŒŽ Œ’—“‡™“’• š‘‘• Excel •› ÖŒŽ —ÖŒŠŽ‡—™Œ§ ‹Ž‡ ’‡ Œ“š‡’§¾ŒŽ ‹–‡š“‡™‡ ‡Ž —“Œ§‡. æ†’™Œ ŠŽ‘Ÿ ‘Ž —™• excelsheets ‹Ž‡ ’‡ ™• ŒŒ”Œ–‹‡—™Œ§™Œ ”‡’†. €Œ’ Œ§’‡Ž ™Ÿ—• ‹–‹•–• ‡Ž ‘•—Ž• —Œ Ö‡–‡™–Ž—™Ž† Ÿ—• “Œ–Ž˜ ‡Ÿ ™Ž˜ †‘‘Œ˜ ‘—ŒŽ˜ ‹–‡š“†™’. ï‡ ‘Œ•’Œ™“‡™‡ Œ§’‡Ž: Í•—™–§¾ŒŽ ™’ Œ“†— ™•› Excel ‡Ž ÖŒŽ —ÖŒŠŽ‡—™Œ§ ‹Ž‡ Œ•‘ —ÖŒŠ§‡— —“Œ§’. §’‡Ž “Ž‡ ‡‘ ŒŽ‘•‹ ‹Ž‡ —›’Œ–‹‡—§‡ “Œ †‘‘‡ “‡™‡, Ÿ˜ “‡™‡ ŒŽ—™“˜.
+555#£ŒŠ§• ‡™Œ›’—˜
+556#£“š‡’§¾ŒŽ ™• ŒŠ§• ‡™Œ›’—˜ ‡Ž —ÖŒŠŽ†¾ŒŽ ‡“‘Œ˜ ‘—˜ ‹Ž‡ ŠŽ‡š•–Ž Œ”§—— –™˜ ™†”˜.
+557#£Ž—‡‹‹ ‡–ÖŒ§•› GeoGebra
+558#£Ž—†‹ŒŽ Œ’Ÿ ‡–ÖŒ§• GeoGebra, ™• ••§• “•–Œ§™Œ ’‡ ŒŒ”Œ–‹‡—™Œ§™Œ ‡Ž ’‡ ‡•Œ—Œ™Œ “—‡ ‡Ÿ ™• Word. ï• ‡–ÖŒ§• Œ“š‡’§¾Œ™‡Ž ˜ ŒŽ•’§ŠŽ•. ìŽ ŒŽŸ’Œ˜ ‹–‡š“‡™•˜ –ŒŽ ’‡ ‡’™Ž‹–‡š•’ —™• ‹‹–‡š•.
+559#£3D •ŽŸŒŠ•
+560#£îÖŒŠŽ†—™Œ Œ”Ž——ŒŽ˜, —“Œ§‡, ŠŽ‡’—“‡™‡ ‡Ž ‡–‡“Œ™–Ž† ‹–‡š“‡™‡, —Œ 3D.
+561#£î™Œ–ŒŸ ™˜ Œ‡’†—™‡—˜
+562#£€Œ§Ö’ŒŽ —™Œ–Œ† Œ–Ž—™–•š ‹Ž‡ “Ž‡ —›’†–™—. ï• ‹–†š“‡ ™˜ —›’†–™—˜ Œ–Ž—™–šŒ™‡Ž 360 “•§–Œ˜ ‹– ‡Ÿ ™•’ †”•’‡ x Š“Ž•›–‹’™‡˜ ’‡ ‡’™ŽŒ§“Œ’• 3D.
+563#£î™‡™Ž—™Ž
+564#£ç’•§‹ŒŽ ‰Ž‰‘§• Œ–‹‡—§‡˜ ™•› Excel •› ÖŒŽ —ÖŒŠŽ‡—™Œ§ ‹Ž‡ “§‡ “Œ™‡‰‘™ —™‡™Ž—™Ž˜. æ•Ž™†”™Œ ™‡ š‘‘‡ ‹Ž‡ ’‡ ŠŒ§™Œ Ÿ‘Œ˜ ™Ž˜ ‘ŒŽ™•›–‹§Œ˜.
+565#£ì“‡Š••Ž“’Œ˜ ‡–‡™–—ŒŽ˜
+566#£…‘‘• Excel ‹Ž‡ “ •“‡Š••Ž“’‡ ŠŒŠ•“’‡. Í•‘•‹§¾ŒŽ —›Ö’Ÿ™™Œ˜, “—•›˜ Ÿ–•›˜, ™Œ™‡–™“Ÿ–Ž‡ ‘ ‡Ž Š“Ž•›–‹Œ§ —ÖŒ™Ž† ŠŽ‡‹–†““‡™‡ Ÿ˜ ŠŽ†‹–‡““‡ •›™Ž• ‡Ž “•›—™†Ž‡
+567#£ì“‡Š••Ž“’Œ˜ ‡–‡™–—ŒŽ˜
+568#£…‘‘• Excel ‹Ž‡ •“‡Š••Ž“’‡ ŠŒŠ•“’‡. Í•‘•‹§¾ŒŽ —›Ö’Ÿ™™Œ˜, “— ™Ž“ ‘ ‡Ž Š“Ž•›–‹Œ§ —ÖŒ™Ž† ŠŽ‡‹–†““‡™‡ Ÿ˜ Ž—™Ÿ‹–‡““‡ ‡Ž ŠŽ†‹–‡““‡ •›™Ž’ ‡Ž “•›—™†Ž‡
 569#£„‡‰ŠŸ‹–‡““‡
-570#£…«y‘‘• Excel ‹Ž‡ ™ Š“Ž•›–‹§‡ ‹–‡š“†™’ –†‰Š’
+570#£…‘‘• Excel ‹Ž‡ ™ Š“Ž•›–‹§‡ ‹–‡š“†™’ –†‰Š’
 571#£ƒ—™Ÿ‹–‡““‡
-572#£…«y‘‘• Excel ‹Ž‡ ’‡ —ÖŒŠŽ†—Œ™Œ d•‘‘‡d‘† Ž—™•‹–†““‡™‡ —Œ «Y’‡ ŠŽ†‹–‡““‡.
-573#£€Ž†‹–‡““‡ Th˜ —†‘‡˜
+572#£…‘‘• Excel ‹Ž‡ ’‡ —ÖŒŠŽ†—Œ™Œ •‘‘‡‘† Ž—™•‹–†““‡™‡ —Œ ’‡ ŠŽ†‹–‡““‡.
+573#£€Ž†‹–‡““‡ ˜ —†‘‡˜
 574#£
 575#£ç–•Ž—™ŽŸ ŠŽ†‹–‡““‡ —›Ö’Ÿ™™‡˜
 576#£
-577#£ìŽŸdŒŠ• •›™Ž•«y ‡Ž “•›—™†Ž
-578#£…«y‘‘• Excel ‹Ž‡ ’‡ —ÖŒŠŽ†—Œ™Œ d•‘‘‡d‘† ‹–‡šTh“‡™‡ •›™Ž•«y ‡Ž “•›—™†Ž‡ —Œ «Y’‡ ŠŽ†‹–‡““‡.
-579#£ìdŽ—•Š–Ÿ“—
-580#£D–th™‡ ŒŽ—‡‹†‹Œ™Œ «Y’‡’ d§’‡‡ “Œ ™‡ —“Œ§‡. î™ —›’«YÖŒŽ‡, ™•d•Œ™Th—™Œ ™• Š–•“«Y‡ —™•’ d§’‡‡ ‡Ž ŒdŽ‘«Y”™Œ ™«yd• d‡‘Ž’Š–Ÿ“—˜. ì d§’‡‡˜ “d•–Œ§ ’‡ Œ§’‡Ž †Œ™•˜ Th •–Ž¾Ÿ’™Ž•˜. †’ ›d†–Ö•›’ “Ÿ’• Š«y• —“Œ§‡, Œ–Œ§™‡Ž Ÿ™Ž Œ§’‡Ž †Œ™.
-581#£D‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™•’ «Y‘Œ‹Ö• ‹Ž‡ Œ’“«Y–—. ïth–‡ ‡ —™‡‘Œ§™Œ —™•’ Ž—™Ÿ™•d•, Ÿd•› “d•–Œ§™Œ ’‡ ŠŒ§™Œ “Ÿ’•Ž —‡˜ Œ†’ ›d†–ÖŒŽ ’«Y‡ Œ’“«Y–—. ‚ ™–«YÖ•›—‡ «YŠ•— Œ§’‡Ž:
-582#£Ž—†‹ŒŽ d§’‡‡ “Œ Š«y• —™Th‘Œ˜ ‹Ž‡ ™’ ŒŽ—‡‹‹Th —“Œ§’ d‡‘Ž’Š–Ÿ“—˜.
-583#£€Ž‡’•“«Y˜
-584#£…«y‘‘• Excel “Œ ‹–‡šTh“‡™‡ ŠŽ‡’•“Th˜. ï‡ ŠŽ‡‹–†““‡™‡ Œ§’‡Ž Š›’‡“Ž† ‡Ž “d•–•«y’ ’‡ —ÖŒŠŽ†—•›’ ‡™‡’•“«Y˜ ‹Ž‡ Ÿ‘Œ˜ ™Ž˜ d‡–‡“«Y™–•›˜.
-585#£€Ž’›“ŽTh ‡™‡’•“Th
-586#£…«y‘‘• Excel d•› —ÖŒŠŽ†¾ŒŽ ŠŽ’›“ŽTh ‡™‡’•“Th. î™• š«y‘‘• ŒdŽ‘«Y”™Œ p ‡Ž n
-587#£æ‡’•’ŽTh ‡™‡’•“Th
-588#£…«y‘‘• Excel d•› —ÖŒŠŽ†¾ŒŽ ‡’•’ŽTh ‡™‡’•“Th. dŽ‘«Y”™Œ “«Y— ‡Ž ™›dŽTh ‡dŸ‘Ž— —™‡ š«y‘‘‡
-589#£-ŠŽ‡’•“Th
-590#£…«y‘‘• Excel d•› —ÖŒŠŽ†¾ŒŽ $X^2-ŠŽ‡’•“Th. î™• š«y‘‘• ŒdŽ‘«Y”™Œ ‰‡“•«y˜ Œ‘Œ›Œ–§‡˜.
-591#£€•Ž“Th
-592#£î™‡™Ž—™Ž«Y˜ Š•Ž“«Y˜
+577#£ìŽŸŒŠ• •›™Ž• ‡Ž “•›—™†Ž
+578#£…‘‘• Excel ‹Ž‡ ’‡ —ÖŒŠŽ†—Œ™Œ •‘‘‡‘† ‹–‡š“‡™‡ •›™Ž• ‡Ž “•›—™†Ž‡ —Œ ’‡ ŠŽ†‹–‡““‡.
+579#£ìŽ—•Š–Ÿ“—
+580#£–™‡ ŒŽ—‡‹†‹Œ™Œ ’‡’ §’‡‡ “Œ ™‡ —“Œ§‡. î™ —›’ÖŒŽ‡, ™••Œ™—™Œ ™• Š–•“‡ —™•’ §’‡‡ ‡Ž ŒŽ‘”™Œ ™• ‡‘Ž’Š–Ÿ“—˜. ì §’‡‡˜ “•–Œ§ ’‡ Œ§’‡Ž †Œ™•˜  •–Ž¾Ÿ’™Ž•˜. †’ ›†–Ö•›’ “Ÿ’• Š• —“Œ§‡, Œ–Œ§™‡Ž Ÿ™Ž Œ§’‡Ž †Œ™.
+581#£‡–•›—Ž†—™Œ —š†‘“‡ ‡™† ™•’ ‘Œ‹Ö• ‹Ž‡ Œ’“–—. ï–‡ ‡ —™‡‘Œ§™Œ —™•’ Ž—™Ÿ™••, Ÿ•› “•–Œ§™Œ ’‡ ŠŒ§™Œ “Ÿ’•Ž —‡˜ Œ†’ ›†–ÖŒŽ ’‡ Œ’“–—. ‚ ™–Ö•›—‡ Š•— Œ§’‡Ž:
+582#£Ž—†‹ŒŽ §’‡‡ “Œ Š• —™‘Œ˜ ‹Ž‡ ™’ ŒŽ—‡‹‹ —“Œ§’ ‡‘Ž’Š–Ÿ“—˜.
+583#£€Ž‡’•“˜
+584#£…‘‘• Excel “Œ ‹–‡š“‡™‡ ŠŽ‡’•“˜. ï‡ ŠŽ‡‹–†““‡™‡ Œ§’‡Ž Š›’‡“Ž† ‡Ž “•–•’ ’‡ —ÖŒŠŽ†—•›’ ‡™‡’•“˜ ‹Ž‡ Ÿ‘Œ˜ ™Ž˜ ‡–‡“™–•›˜.
+585#£€Ž’›“Ž ‡™‡’•“
+586#£…‘‘• Excel •› —ÖŒŠŽ†¾ŒŽ ŠŽ’›“Ž ‡™‡’•“. î™• š‘‘• ŒŽ‘”™Œ p ‡Ž n
+587#£æ‡’•’Ž ‡™‡’•“
+588#£…‘‘• Excel •› —ÖŒŠŽ†¾ŒŽ ‡’•’Ž ‡™‡’•“. Ž‘”™Œ “— ‡Ž ™›Ž ‡Ÿ‘Ž— —™‡ š‘‘‡
+589#£-ŠŽ‡’•“
+590#£…‘‘• Excel •› —ÖŒŠŽ†¾ŒŽ $X^2-ŠŽ‡’•“. î™• š‘‘• ŒŽ‘”™Œ ‰‡“•˜ Œ‘Œ›Œ–§‡˜.
+591#£€•Ž“
+592#£î™‡™Ž—™Ž˜ Š•Ž“˜
 593#£€Ž’›“ŽŸtest
-594#£…«y‘‘• Excel ‹Ž‡ ŠŽ’›“ŽTh Š•Ž“Th. ¼ŠŽ• ‰Ž‰‘§• Œ–‹‡—§‡˜ ™•› Excel “Œ ™ ŠŽ’›“ŽTh ‡™‡’•“Th, ‡‘‘† «Y’‡ †‘‘• š«y‘‘•.
-595#£$X^2-Š•Ž“Th
-596#£™Œ‘Œ§ Š•Ž“Th $X^2 —Œ n x n d§’‡‡. dŽ‘«Y”™Œ ™•›˜ ‡–Ž“•«y˜ —™•’ d§’‡‡.
-597#£æ‡‘Th Œš‡–“•‹Th
-598#£™Œ‘Œ§ Š•Ž“Th ‡‘Th˜ Œš‡–“•‹Th˜. (€•Ž“Th ™Œ™–‡‹th’•› Chi) ‹Ž‡ ’‡ ŠŒ§™Œ ‡’ Š«y• ‡™‡’•“«Y˜ Œ§’‡Ž §ŠŽŒ˜.
-599#£î™‡™Ž—™ŽTh d–•—•“•§—
-600#£…«y‘‘• Excel “Œ d–Ÿ—Œ™ ‘ŒŽ™•›–‹ŽŸ™™‡ d•› “d•–Œ§ ’‡ “Œ™‡™–«Y¿ŒŽ ‡Ž ’‡ Œ”•Ž•’•“Th—ŒŽ ‡d•™«Y‘Œ—“‡. DŒ–Ž‘‡“‰†’ŒŽ d‡–†ŠŒŽ‹“‡ Ö–Th—˜.
-601#£ê«Y‡ Œ”§—— (Alt+M)
-602#£Ž—‡‹‹Th ™•› d‘‡Ž—§•› ŒŽ—‡‹‹Th˜ “‡“‡™Žth’ d‡–‡—™†—Œ’
-603#£ê«Y‡ ‡–Ž““«Y’ Œ”§—— (Alt+í, Alt+í)
-604#£Ž—†‹ŒŽ ’«Y‡ Œ”§—— “Œ ‡›™Ÿ“‡™ ‡–§“—. D‡™Th—™Œ Š«y• š•–«Y˜ Alt+M ‹Ž‡ ’‡ ŒŽ—‡‹†‹Œ™Œ ‡–Ž““«Y’ Œ”§——. ç›™Ÿ d–«YdŒŽ ’‡ Œ’Œ–‹•d•ŽŒ§ —™Ž˜ –›“§—ŒŽ˜ | ‡–Ž““«Y’Œ˜ Œ”Ž—th—ŒŽ˜.
-605#£ê«Y‡ Œdth’›“ ‡–Ž““«Y’ Œ”§—— —™’ •d•§‡ “d•–Œ§ ’‡ ‹§’ŒŽ ‡’‡š•–†.
-606#£Ž—†‹ŒŽ ’«Y‡ ‡–Ž““«Y’ Œ”§—— d•› “d•–Œ§™Œ ’‡ •’•“†—Œ™Œ ‹Ž‡ Œ«y•‘ ‡’‡š•–† ‡–‹Ÿ™Œ–‡. †’ • ‡–Ž“Ÿ˜ ™˜ Œ”§——˜ ‡‘‘†”ŒŽ ‡–‹Ÿ™Œ–‡, ‡‘‘†¾ŒŽ ‡Ž  ‡’‡š•–†.
-607#£Ž—‡‹‹Th ‡’‡š•–†˜ —™’ Œ”§——.
-608#£Ž—‡‹†‹Œ™Œ ™•’ ‡–Ž“Ÿ Œ”§——˜ “Ž‡˜ Œ”§——˜ “Œ d–•‹•«y“Œ’• Ÿ’•“‡. †’ • ‡–Ž“Ÿ˜ ™˜ Œ”§——˜ ‡‘‘†”ŒŽ ‡–‹Ÿ™Œ–‡, ‡‘‘†¾ŒŽ ‡Ž  ‡’‡š•–†.
+594#£…‘‘• Excel ‹Ž‡ ŠŽ’›“Ž Š•Ž“. ¼ŠŽ• ‰Ž‰‘§• Œ–‹‡—§‡˜ ™•› Excel “Œ ™ ŠŽ’›“Ž ‡™‡’•“, ‡‘‘† ’‡ †‘‘• š‘‘•.
+595#£$X^2-Š•Ž“
+596#£™Œ‘Œ§ Š•Ž“ $X^2 —Œ n x n §’‡‡. Ž‘”™Œ ™•›˜ ‡–Ž“•˜ —™•’ §’‡‡.
+597#£æ‡‘ Œš‡–“•‹
+598#£™Œ‘Œ§ Š•Ž“ ‡‘˜ Œš‡–“•‹˜. (€•Ž“ ™Œ™–‡‹’•› Chi) ‹Ž‡ ’‡ ŠŒ§™Œ ‡’ Š• ‡™‡’•“˜ Œ§’‡Ž §ŠŽŒ˜.
+599#£î™‡™Ž—™Ž –•—•“•§—
+600#£…‘‘• Excel “Œ –Ÿ—Œ™ ‘ŒŽ™•›–‹ŽŸ™™‡ •› “•–Œ§ ’‡ “Œ™‡™–¿ŒŽ ‡Ž ’‡ Œ”•Ž•’•“—ŒŽ ‡•™‘Œ—“‡. Œ–Ž‘‡“‰†’ŒŽ ‡–†ŠŒŽ‹“‡ Ö–—˜.
+601#£ê‡ Œ”§—— (Alt+M)
+602#£Ž—‡‹‹ ™•› ‘‡Ž—§•› ŒŽ—‡‹‹˜ “‡“‡™Ž’ ‡–‡—™†—Œ’
+603#£ê‡ ‡–Ž““’ Œ”§—— (Alt+í, Alt+í)
+604#£Ž—†‹ŒŽ ’‡ Œ”§—— “Œ ‡›™Ÿ“‡™ ‡–§“—. ‡™—™Œ Š• š•–˜ Alt+M ‹Ž‡ ’‡ ŒŽ—‡‹†‹Œ™Œ ‡–Ž““’ Œ”§——. ç›™Ÿ –ŒŽ ’‡ Œ’Œ–‹••ŽŒ§ —™Ž˜ –›“§—ŒŽ˜ | ‡–Ž““’Œ˜ Œ”Ž——ŒŽ˜.
+605#£ê‡ Œ’›“ ‡–Ž““’ Œ”§—— —™’ ••§‡ “•–Œ§ ’‡ ‹§’ŒŽ ‡’‡š•–†.
+606#£Ž—†‹ŒŽ ’‡ ‡–Ž““’ Œ”§—— •› “•–Œ§™Œ ’‡ •’•“†—Œ™Œ ‹Ž‡ Œ•‘ ‡’‡š•–† ‡–‹Ÿ™Œ–‡. †’ • ‡–Ž“Ÿ˜ ™˜ Œ”§——˜ ‡‘‘†”ŒŽ ‡–‹Ÿ™Œ–‡, ‡‘‘†¾ŒŽ ‡Ž  ‡’‡š•–†.
+607#£Ž—‡‹‹ ‡’‡š•–†˜ —™’ Œ”§——.
+608#£Ž—‡‹†‹Œ™Œ ™•’ ‡–Ž“Ÿ Œ”§——˜ “Ž‡˜ Œ”§——˜ “Œ –•‹•“Œ’• Ÿ’•“‡. †’ • ‡–Ž“Ÿ˜ ™˜ Œ”§——˜ ‡‘‘†”ŒŽ ‡–‹Ÿ™Œ–‡, ‡‘‘†¾ŒŽ ‡Ž  ‡’‡š•–†.
 609#£ì–Ž—“Ÿ˜ Œ”§——˜ —Œ —™‡Œ–Ÿ ‡–Ž“Ÿ
-610#£íŽ‡ Œ”§—— d•› «YÖŒŽ ThŠ ‡–Ž“Œ§ “d•–Œ§ ’‡ •–Ž—™Œ§ —Œ «Y’‡’ —›‹Œ–Ž“«Y’• ‡–Ž“Ÿ
-611#£Ž—†‹ŒŽ “Ž‡ ’«Y‡ Œ’Ÿ™™‡ Œ”§——˜.
-612#£é‡ d–•Th—ŒŽ ™•’ d–th™• ‡–Ž“Ÿ —™’ ‡–§“— Œ”Ž—th—Œ’. †’ ™• d–•‹•«y“Œ’• Œ§’‡Ž (2.5) ™Ÿ™Œ ™• ŒdŸ“Œ’• ‡ Œ§’‡Ž (3.1). íd•–Œ§ ’‡ ŒŽ—‡ÖŒ§ —Œ ŒdŽŒš‡‘§ŠŒ˜ ˜ ‡–Ž“Ÿ˜ ŒdŽŒš‡‘§Š‡˜ Th ’‡ ŒŽ—‡ÖŒ§ –›š†.
-613#£’“«Y–— Ÿ‘’ ™’ ‡–Ž“th’ Œ”Ž—th—Œ’ —™• «Y‹‹–‡š•
-614#£î›’Th˜ d–«YdŒŽ ’‡ Œ™Œ‘Œ§™‡Ž Ÿ™‡’ •Ž Œ”Ž—th—ŒŽ˜ «YÖ•›’ ŠŽ‡‹–‡šŒ§. ô—™Ÿ—•,  ŒŽ—‡‹‹Th ’«Y’ ‡–Ž““«Y’’ Œ”Ž—th—Œ’ ‡ ‡’‡‹†—ŒŽ “Ž‡ Œ’“«Y–—.
-615#£î«y“‰•‘‡
-616#£€Ž‡š•–Œ™Ž«Y˜ “«Y•Š•Ž ÖŒŽ–Ž—“•«y —›“‰Ÿ‘’
-617#£ç’™Ž‡™†—™‡— —“Œ§’ d•‘‘‡d‘‡—Ž‡—“•«y
-618#£ç’™Ž‡™‡—™Th—™Œ Ÿ‘‡ ™‡ —«y“‰•‘‡ d•‘‘‡d‘‡—Ž‡—“•«y * “Œ $*
-619#£íŒ™‡™–•dTh Œ”Ž—th—Œ’ —Œ LaTex. (î›’™Ÿ“Œ›— alt+T “Œ™‡™–«YdŒŽ “§‡ Œ”§——)
-620#£íŒ™‡™–«Y¿™Œ •–Ž—“«Y’Œ˜ Th Ÿ‘Œ˜ ™Ž˜ Œ”Ž—th—ŒŽ˜ —Œ LaTex —Œ «Y’‡ «Y‹‹–‡š•. íd•–Œ§ Œd§—˜ ’‡ Ö–—Ž“•d•ŽTh—ŒŽ ™• MikTex ‹Ž‡ ’‡ Š“Ž•›–‹Th—ŒŽ «Y’‡ d‘Th–Œ˜ «Y‹‹–‡š• LaTex.
-621#£íŒ™‡™–•dTh —Œ LaTex (Alt+T)
-622#£íŒ™‡™–«YdŒŽ “§‡ Œ”§—— —Œ LaTex. ìŽ Ö‡–‡™Th–Œ˜ Œ’—“†™—˜ “d•–•«y’ ’‡ ŒdŽ‘Œ‹•«y’ —™ šŸ–“‡ LaTex. ‚ —›’™Ÿ“Œ›— Alt+T “Œ™‡™–«YdŒŽ Œd§—˜ «Y’‡ eqaution.
-623#£ç’™Ž‡™‡—™Th—™Œ ‹Ž‡ ’‡ ”ŒŽ’Th—Œ™Œ ™•’ d•‘‘‡d‘‡—Ž‡—“Ÿ
-624#£ç’™Ž‡Ž—™† Ÿ‘‡ ™‡ —«y“‰•‘‡ d•‘‘‡d‘‡—Ž‡—“•«y " & ChrW(183) & " —Œ * —“†ŠŽ‡ d•‘‘‡d‘‡—Ž‡—“•«y.
+610#£íŽ‡ Œ”§—— •› ÖŒŽ Š ‡–Ž“Œ§ “•–Œ§ ’‡ •–Ž—™Œ§ —Œ ’‡’ —›‹Œ–Ž“’• ‡–Ž“Ÿ
+611#£Ž—†‹ŒŽ “Ž‡ ’‡ Œ’Ÿ™™‡ Œ”§——˜.
+612#£é‡ –•—ŒŽ ™•’ –™• ‡–Ž“Ÿ —™’ ‡–§“— Œ”Ž——Œ’. †’ ™• –•‹•“Œ’• Œ§’‡Ž (2.5) ™Ÿ™Œ ™• ŒŸ“Œ’• ‡ Œ§’‡Ž (3.1). í•–Œ§ ’‡ ŒŽ—‡ÖŒ§ —Œ ŒŽŒš‡‘§ŠŒ˜ ˜ ‡–Ž“Ÿ˜ ŒŽŒš‡‘§Š‡˜  ’‡ ŒŽ—‡ÖŒ§ –›š†.
+613#£’“–— Ÿ‘’ ™’ ‡–Ž“’ Œ”Ž——Œ’ —™• ‹‹–‡š•
+614#£î›’˜ –ŒŽ ’‡ Œ™Œ‘Œ§™‡Ž Ÿ™‡’ •Ž Œ”Ž——ŒŽ˜ Ö•›’ ŠŽ‡‹–‡šŒ§. ô—™Ÿ—•,  ŒŽ—‡‹‹ ’’ ‡–Ž““’’ Œ”Ž——Œ’ ‡ ‡’‡‹†—ŒŽ “Ž‡ Œ’“–—.
+615#£î“‰•‘‡
+616#£€Ž‡š•–Œ™Ž˜ “•Š•Ž ÖŒŽ–Ž—“• —›“‰Ÿ‘’
+617#£ç’™Ž‡™†—™‡— —“Œ§’ •‘‘‡‘‡—Ž‡—“•
+618#£ç’™Ž‡™‡—™—™Œ Ÿ‘‡ ™‡ —“‰•‘‡ •‘‘‡‘‡—Ž‡—“• * “Œ $*
+619#£íŒ™‡™–• Œ”Ž——Œ’ —Œ LaTex. (î›’™Ÿ“Œ›— alt+T “Œ™‡™–ŒŽ “§‡ Œ”§——)
+620#£íŒ™‡™–¿™Œ •–Ž—“’Œ˜  Ÿ‘Œ˜ ™Ž˜ Œ”Ž——ŒŽ˜ —Œ LaTex —Œ ’‡ ‹‹–‡š•. í•–Œ§ Œ§—˜ ’‡ Ö–—Ž“••Ž—ŒŽ ™• MikTex ‹Ž‡ ’‡ Š“Ž•›–‹—ŒŽ ’‡ ‘–Œ˜ ‹‹–‡š• LaTex.
+621#£íŒ™‡™–• —Œ LaTex (Alt+T)
+622#£íŒ™‡™–ŒŽ “§‡ Œ”§—— —Œ LaTex. ìŽ Ö‡–‡™–Œ˜ Œ’—“†™—˜ “•–•’ ’‡ ŒŽ‘Œ‹•’ —™ šŸ–“‡ LaTex. ‚ —›’™Ÿ“Œ›— Alt+T “Œ™‡™–ŒŽ Œ§—˜ ’‡ eqaution.
+623#£ç’™Ž‡™‡—™—™Œ ‹Ž‡ ’‡ ”ŒŽ’—Œ™Œ ™•’ •‘‘‡‘‡—Ž‡—“Ÿ
+624#£ç’™Ž‡Ž—™† Ÿ‘‡ ™‡ —“‰•‘‡ •‘‘‡‘‡—Ž‡—“• " & ChrW(183) & " —Œ * —“†ŠŽ‡ •‘‘‡‘‡—Ž‡—“•.
 625#£Dot as decimalseparator
-626#£ç’™Ž‡Ž—™† Ÿ‘‡ ™‡ , (Ÿ““‡™‡) —™‡ d‘‡§—Ž‡ ŒŽ—ŸŠ•› “‡“‡™Žth’ d‡–‡—™†—Œ’ “Œ . (™Œ‘Œ§‡) ‡Ž Ÿ‘‡ ;(Œ–™“‡™ŽŸ) “Œ ,(Ÿ““‡™‡)
-627#£æŸ““‡ ˜ ŠŽ‡Ö–Ž—™ŽŸ ŠŒ‡ŠŽth’
-628#£ç’™Ž‡Ž—™† Ÿ‘‡ . (™Œ‘Œ§Œ˜) —™‡ d‘‡§—Ž‡ ŒŽ—‡‹‹Th˜ “‡“‡™Žth’ d‡–‡—™†—Œ’“Œ ,(Ÿ““‡™‡) ‡Ž Ÿ‘‡ ,(Ÿ““‡™‡) “Œ ;(Œ–™“‡™Ž†)
-629#£í‡“‡™Ž† —ÖTh“‡™‡, ŠŽ‡‹–†““‡™‡ ‡Ž ŒŽŸ’Œ˜
-630#£ç’•§‹ŒŽ «Y‹‹–‡š• “Œ ™›dŽ† “‡“‡™Ž† —ÖTh“‡™‡, ŠŽ‡‹–†““‡™‡ .‘d. ç›™† “d•–•«y’ —™ —›’«YÖŒŽ‡ ’‡ ‡’™Ž‹–‡š•«y’ —™• «Y‹‹–‡šŸ —‡˜ ‡Ž ’‡ ÖŒŽ–‡‹‹•«y’ —«y“š’‡ “Œ ™’ ŒdŽ›“§‡ —‡˜.
-631#£D§’‡‡˜ $ArrowRight æ‡™†‘•‹•˜
-632#£è§—™‡ $ArrowRight d§’‡‡
-633#£ï–‡d«Y¾Ž
-634#£ï• WordMat “d•–Œ§ ’‡ ÖŒŽ–Ž—™Œ§ ŠŒŠ•“«Y’‡ —™ ‘§—™‡. D‡–†ŠŒŽ‹“‡: íd•–Œ§™Œ Œ«y•‘‡ ’‡ d–•—«Y—Œ™Œ «Y’‡’ ‡–Ž“Ÿ —Œ Ÿ‘‡ ™‡ —™•ŽÖŒ§‡ “Ž‡˜ ‘§—™‡˜. ô—™Ÿ—•, ™‡ ŠŒŠ•“«Y’‡ ‰–§—•’™‡Ž —›Ö’† —Œ «Y’‡’ d§’‡‡ —™• Word. ç•‘•›•«y’ —›’‡–™Th—ŒŽ˜ ‹Ž‡ ™ “Œ™‡™–•dTh dŽ’†’ ‘§—™‡˜ ‡Ž ‡’™§—™–•š‡.
-635#£Ž—‡‹‹Th š«y‘‘•› Excel
-636#£Ž—†‹ŒŽ Œ’Ÿ Œ’—“‡™“«Y’• š«y‘‘• Excel. æ†’™Œ ŠŽd‘Ÿ ‘Ž ‹Ž‡ †’•Ž‹“‡ ‡Ž ŒdŒ”Œ–‹‡—§‡.
-637#£íŒ™‡™–•dTh —Œ ‘§—™‡
-638#£íŒ™‡™–•dTh d§’‡‡ —Œ ‘§—™‡. î™ —›’«YÖŒŽ‡, “d•–Œ§™Œ ’‡ ÖŒŽ–Ž—™Œ§™Œ ‡›™Th’ ™ ‘§—™‡ Ö–—Ž“•d•Žth’™‡˜ ™• WordMat. D‡–†ŠŒŽ‹“‡: [1, 2, 3]+1 = [2, 3, 4] Se Œ‹ÖŒŽ–§ŠŽ• ‹Ž‡ dŒ–Ž——Ÿ™Œ–Œ˜ d‘–•š•–§Œ˜
-639#£íŒ™‡™–•dTh —Œ d§’‡‡
-640#£íŒ™‡™–«YdŒŽ “Ž‡ ‘§—™‡ —Œ d§’‡‡. ‚ ‘§—™‡ “d•–Œ§ ’‡ ‰–§—Œ™‡Ž —Œ «Y’‡ d‘‡§—Ž• “‡“‡™Žth’ d‡–‡—™†—Œ’ Th ’‡ Œ§’‡Ž ‹–‡““«Y’ —™• «Y‹‹–‡š• ‡Ž ŒdŽ‘Œ‹“«Y’, Ÿd˜ (1, 2), (3, 4), (5, 6)
-641#£d§‘›— ™–Ž‹th’•›
-642#£Ž—‡‹†‹Œ™Œ 3 d‘Œ›–«Y˜/‹’§Œ˜. ì ‘«y™˜ ™–Ž‹th’•› ›d•‘•‹§¾ŒŽ ™Ž˜ ›dŸ‘•ŽdŒ˜ d‘Œ›–«Y˜/‹’§Œ˜ ‡Ž Š“Ž•›–‹Œ§ “Ž‡ ŒŽŸ’‡ ™•› ™–Ž‹th’•›.
+626#£ç’™Ž‡Ž—™† Ÿ‘‡ ™‡ , (Ÿ““‡™‡) —™‡ ‘‡§—Ž‡ ŒŽ—ŸŠ•› “‡“‡™Ž’ ‡–‡—™†—Œ’ “Œ . (™Œ‘Œ§‡) ‡Ž Ÿ‘‡ ;(Œ–™“‡™ŽŸ) “Œ ,(Ÿ““‡™‡)
+627#£æŸ““‡ ˜ ŠŽ‡Ö–Ž—™ŽŸ ŠŒ‡ŠŽ’
+628#£ç’™Ž‡Ž—™† Ÿ‘‡ . (™Œ‘Œ§Œ˜) —™‡ ‘‡§—Ž‡ ŒŽ—‡‹‹˜ “‡“‡™Ž’ ‡–‡—™†—Œ’“Œ ,(Ÿ““‡™‡) ‡Ž Ÿ‘‡ ,(Ÿ““‡™‡) “Œ ;(Œ–™“‡™Ž†)
+629#£í‡“‡™Ž† —Ö“‡™‡, ŠŽ‡‹–†““‡™‡ ‡Ž ŒŽŸ’Œ˜
+630#£ç’•§‹ŒŽ ‹‹–‡š• “Œ ™›Ž† “‡“‡™Ž† —Ö“‡™‡, ŠŽ‡‹–†““‡™‡ .‘. ç›™† “•–•’ —™ —›’ÖŒŽ‡ ’‡ ‡’™Ž‹–‡š•’ —™• ‹‹–‡šŸ —‡˜ ‡Ž ’‡ ÖŒŽ–‡‹‹•’ —“š’‡ “Œ ™’ ŒŽ›“§‡ —‡˜.
+631#£§’‡‡˜ $ArrowRight æ‡™†‘•‹•˜
+632#£è§—™‡ $ArrowRight §’‡‡
+633#£ï–‡¾Ž
+634#£ï• WordMat “•–Œ§ ’‡ ÖŒŽ–Ž—™Œ§ ŠŒŠ•“’‡ —™ ‘§—™‡. ‡–†ŠŒŽ‹“‡: í•–Œ§™Œ Œ•‘‡ ’‡ –•——Œ™Œ ’‡’ ‡–Ž“Ÿ —Œ Ÿ‘‡ ™‡ —™•ŽÖŒ§‡ “Ž‡˜ ‘§—™‡˜. ô—™Ÿ—•, ™‡ ŠŒŠ•“’‡ ‰–§—•’™‡Ž —›Ö’† —Œ ’‡’ §’‡‡ —™• Word. ç•‘•›•’ —›’‡–™—ŒŽ˜ ‹Ž‡ ™ “Œ™‡™–• Ž’†’ ‘§—™‡˜ ‡Ž ‡’™§—™–•š‡.
+635#£Ž—‡‹‹ š‘‘•› Excel
+636#£Ž—†‹ŒŽ Œ’Ÿ Œ’—“‡™“’• š‘‘• Excel. æ†’™Œ ŠŽ‘Ÿ ‘Ž ‹Ž‡ †’•Ž‹“‡ ‡Ž ŒŒ”Œ–‹‡—§‡.
+637#£íŒ™‡™–• —Œ ‘§—™‡
+638#£íŒ™‡™–• §’‡‡ —Œ ‘§—™‡. î™ —›’ÖŒŽ‡, “•–Œ§™Œ ’‡ ÖŒŽ–Ž—™Œ§™Œ ‡›™’ ™ ‘§—™‡ Ö–—Ž“••Ž’™‡˜ ™• WordMat. ‡–†ŠŒŽ‹“‡: [1, 2, 3]+1 = [2, 3, 4] Se Œ‹ÖŒŽ–§ŠŽ• ‹Ž‡ Œ–Ž——Ÿ™Œ–Œ˜ ‘–•š•–§Œ˜
+639#£íŒ™‡™–• —Œ §’‡‡
+640#£íŒ™‡™–ŒŽ “Ž‡ ‘§—™‡ —Œ §’‡‡. ‚ ‘§—™‡ “•–Œ§ ’‡ ‰–§—Œ™‡Ž —Œ ’‡ ‘‡§—Ž• “‡“‡™Ž’ ‡–‡—™†—Œ’  ’‡ Œ§’‡Ž ‹–‡““’ —™• ‹‹–‡š• ‡Ž ŒŽ‘Œ‹“’, Ÿ˜ (1, 2), (3, 4), (5, 6)
+641#£§‘›— ™–Ž‹’•›
+642#£Ž—‡‹†‹Œ™Œ 3 ‘Œ›–˜/‹’§Œ˜. ì ‘™˜ ™–Ž‹’•› ›•‘•‹§¾ŒŽ ™Ž˜ ›Ÿ‘•ŽŒ˜ ‘Œ›–˜/‹’§Œ˜ ‡Ž Š“Ž•›–‹Œ§ “Ž‡ ŒŽŸ’‡ ™•› ™–Ž‹’•›.
 643#£‹ÖŒŽ–§ŠŽ• Word
-644#£ç’•§‹ŒŽ ™• Œ‹ÖŒŽ–§ŠŽ• ˜ «Y‹‹–‡š• ™•› Word
+644#£ç’•§‹ŒŽ ™• Œ‹ÖŒŽ–§ŠŽ• ˜ ‹‹–‡š• ™•› Word
 645#£‹ÖŒŽ–§ŠŽ• Web
-646#£ç’•§‹ŒŽ ™• ‘Œ™–•’ŽŸ Œ‹ÖŒŽ–§ŠŽ• web. üÖŒŽ ‡‘«y™Œ– d‘•Th‹— ‡Ž ‰§’™Œ• ‡dŸ ™• Œ‹ÖŒŽ–§ŠŽ• ™•› Word, ‡‘‘† «Y’‡ «Y–‹• —Œ Œ”«Y‘Ž”.
+646#£ç’•§‹ŒŽ ™• Œ‹ÖŒŽ–§ŠŽ• —™• ŠŽ‡Š§™›• —Œ ’‡ –Ÿ‹–‡““‡ Œ–Ž‹—˜.
 647#£‹ÖŒŽ–§ŠŽ• Maxima
-648#£ï• Maxima Œ§’‡Ž ™• d–Ÿ‹–‡““‡ CAS d•› †’ŒŽ ™•›˜ dŒ–Ž——Ÿ™Œ–•›˜ “‡“‡™Ž•«y˜ ›d•‘•‹Ž—“•«y˜ —™• WordMat. ï• Maxima «YÖŒŽ d•‘‘«Y˜ Œ’—“‡™“«Y’Œ˜ ‘ŒŽ™•›–‹§Œ˜ d•› ŠŒ’ Œ§’‡Ž †“Œ—‡ •–‡™«Y˜ ‡dŸ ™ ŠŽŒd‡šTh Ö–Th—™ WordMat, ‡‘‘† “d•–•«y’ ’‡ Œ™Œ‘Œ—™•«y’ Œ†’ ‹’–§¾Œ™Œ ™‡ •’Ÿ“‡™‡ ™’ ‘ŒŽ™•›–‹Žth’. ç›™Ÿ ŠŒ§Ö’ŒŽ ™ ‰•ThŒŽ‡ Maxima Ÿd•› “d•–Œ§™Œ ’‡ ŠŒ§™Œ ™Œ“–§— ‹Ž‡ Ÿ‘Œ˜ ™Ž˜ —›’‡–™Th—ŒŽ˜ maxima.
-649#£DŒ–§d•›
-650#£D•Ž•˜ «Yš™Ž‡”Œ ™• WordMat;
-651#£ü‘Œ‹Ö•˜ ‹Ž‡ Œ’“Œ–th—ŒŽ˜
-652#£ç›™Ÿ“‡™•˜ «Y‘Œ‹Ö•˜ ‹Ž‡ Œ’“Œ–th—ŒŽ˜.
-653#£î›’™•“Œ«y—ŒŽ˜ d‘™–•‘•‹§•›
-654#£“š‡’§¾ŒŽ “Ž‡ ‘§—™‡ —›’™•“Œ«y—Œ’ d‘™–•‘•‹§•› ‹Ž‡ ™’ Œ’Œ–‹•d•§— Œ’™•‘th’ ™•› WordMat ‡Ž —›’™•“Œ«y—Œ’ ‹Ž‡ ™’ ŒŽ—‡‹‹Th “‡“‡™Žth’ d‡–‡—™†—Œ’ —™‡ d‘‡§—Ž‡ ŒŽ—‡‹‹Th˜ “‡“‡™Žth’ d‡–‡—™†—Œ’ —™• Word.
-655#£D–Ÿ™›d• LaTex
-656#£D–Ÿ™›d• LaTex
-657#£ç’•§‹ŒŽ «Y’‡ «Y‹‹–‡š• ™•› Word d•› «YÖŒŽ —™›‘ —‡’ «Y‹‹–‡š• LaTex, ‡‘‘† ™Ÿ—• Œ«y•‘• ’‡ ‹–‡š™Œ§ Ÿ—• «Y’‡ «Y‹‹–‡š• ™•› Word.
-658#£ï• Precisionen «YÖŒŽ •–Ž—™Œ§ d•‘«y ¿‘†. ì Ö–Ÿ’•˜ ›d•‘•‹Ž—“•«y “d•–Œ§ ’‡ Œ§’‡Ž d•‘«y “Œ‹†‘•˜ Th ’‡ ‡d•™«yÖŒŽ. †’ ’‡Ž, Š•Ž“†—™Œ ”‡’† “Œ Ö‡“‘Ÿ™Œ– –«y“Ž—.
-659#£ï• WordMat “Œ™‡™–«YdŒ™‡Ž d•‘«y ‡‘† —Œ LaTex, ‡‘‘† ›d†–ÖŒŽ Œd§—˜  ŒdŽ‘•‹Th Ö–Th—˜ ™•› Maxima ‹Ž‡ “Œ™‡™–•dTh —Œ LaTex.
-660#£ìŽ “•’†ŠŒ˜ —›’Th˜ ŠŒ’ ‹–†š•’™‡Ž “Œ d‘†‹Ž•›˜ Ö‡–‡™Th–Œ˜ ˜ “Œ™‡‰‘™«Y˜. íŒ ‡›™Th ™ ‘ŒŽ™•›–‹§‡, ™• WordMat d–•—d‡Œ§ ’‡ ‡’‡‹’–§—ŒŽ “•’†ŠŒ˜ ‡Ž ’‡ ŒŽ—‡‹†‹ŒŽ thŠŽ‡ LaTex ‹Ž‡ ’‡ ‹–†¿ŒŽ “•’†ŠŒ˜ “Œ ‡’•’ŽTh ‹–‡““‡™•—ŒŽ–†.
+648#£ï• Maxima Œ§’‡Ž ™• –Ÿ‹–‡““‡ CAS •› †’ŒŽ ™•›˜ Œ–Ž——Ÿ™Œ–•›˜ “‡“‡™Ž•˜ ›•‘•‹Ž—“•˜ —™• WordMat. ï• Maxima ÖŒŽ •‘‘˜ Œ’—“‡™“’Œ˜ ‘ŒŽ™•›–‹§Œ˜ •› ŠŒ’ Œ§’‡Ž †“Œ—‡ •–‡™˜ ‡Ÿ ™ ŠŽŒ‡š Ö–—™ WordMat, ‡‘‘† “•–•’ ’‡ Œ™Œ‘Œ—™•’ Œ†’ ‹’–§¾Œ™Œ ™‡ •’Ÿ“‡™‡ ™’ ‘ŒŽ™•›–‹Ž’. ç›™Ÿ ŠŒ§Ö’ŒŽ ™ ‰•ŒŽ‡ Maxima Ÿ•› “•–Œ§™Œ ’‡ ŠŒ§™Œ ™Œ“–§— ‹Ž‡ Ÿ‘Œ˜ ™Ž˜ —›’‡–™—ŒŽ˜ maxima.
+649#£Œ–§•›
+650#£•Ž•˜ š™Ž‡”Œ ™• WordMat;
+651#£ü‘Œ‹Ö•˜ ‹Ž‡ Œ’“Œ–—ŒŽ˜
+652#£ç›™Ÿ“‡™•˜ ‘Œ‹Ö•˜ ‹Ž‡ Œ’“Œ–—ŒŽ˜.
+653#£î›’™•“Œ—ŒŽ˜ ‘™–•‘•‹§•›
+654#£“š‡’§¾ŒŽ “Ž‡ ‘§—™‡ —›’™•“Œ—Œ’ ‘™–•‘•‹§•› ‹Ž‡ ™’ Œ’Œ–‹••§— Œ’™•‘’ ™•› WordMat ‡Ž —›’™•“Œ—Œ’ ‹Ž‡ ™’ ŒŽ—‡‹‹ “‡“‡™Ž’ ‡–‡—™†—Œ’ —™‡ ‘‡§—Ž‡ ŒŽ—‡‹‹˜ “‡“‡™Ž’ ‡–‡—™†—Œ’ —™• Word.
+655#£–Ÿ™›• LaTex
+656#£–Ÿ™›• LaTex
+657#£ç’•§‹ŒŽ ’‡ ‹‹–‡š• ™•› Word •› ÖŒŽ —™›‘ —‡’ ‹‹–‡š• LaTex, ‡‘‘† ™Ÿ—• Œ•‘• ’‡ ‹–‡š™Œ§ Ÿ—• ’‡ ‹‹–‡š• ™•› Word.
+658#£ï• Precisionen ÖŒŽ •–Ž—™Œ§ •‘ ¿‘†. ì Ö–Ÿ’•˜ ›•‘•‹Ž—“• “•–Œ§ ’‡ Œ§’‡Ž •‘ “Œ‹†‘•˜  ’‡ ‡•™ÖŒŽ. †’ ’‡Ž, Š•Ž“†—™Œ ”‡’† “Œ Ö‡“‘Ÿ™Œ– –“Ž—.
+659#£ï• WordMat “Œ™‡™–Œ™‡Ž •‘ ‡‘† —Œ LaTex, ‡‘‘† ›†–ÖŒŽ Œ§—˜  ŒŽ‘•‹ Ö–—˜ ™•› Maxima ‹Ž‡ “Œ™‡™–• —Œ LaTex.
+660#£ìŽ “•’†ŠŒ˜ —›’˜ ŠŒ’ ‹–†š•’™‡Ž “Œ ‘†‹Ž•›˜ Ö‡–‡™–Œ˜ ˜ “Œ™‡‰‘™˜. íŒ ‡›™ ™ ‘ŒŽ™•›–‹§‡, ™• WordMat –•—‡Œ§ ’‡ ‡’‡‹’–§—ŒŽ “•’†ŠŒ˜ ‡Ž ’‡ ŒŽ—‡‹†‹ŒŽ ŠŽ‡ LaTex ‹Ž‡ ’‡ ‹–†¿ŒŽ “•’†ŠŒ˜ “Œ ‡’•’Ž ‹–‡““‡™•—ŒŽ–†.
 661#£æ‘Œ§’
-662#£€“Ž•›–‹Œ§ «Y’‡ d–‡‹“‡™ŽŸ «Y‹‹–‡š• LaTex Ö–—Ž“•d•Žth’™‡˜ ™• MikTex, ™• •d•§• d–«YdŒŽ ’‡ Œ‹‡™‡—™‡Œ§. x–—Ž“•d•ŽŒ§™‡Ž “Ÿ’• ‹Ž‡ ‡d‘Ÿ «Y‹‹–‡š•, ‡th˜ ŠŒ’ ›d•—™–§¾•’™‡Ž Ÿ‘‡ ™‡ ‡’™ŽŒ§“Œ’‡ Œ‹‹–†š•›.
-663#£€Œ§Ö’ŒŽ dth˜ Œ–“’Œ«yŒ™‡Ž  «Y”•Š•˜ LaTex
-664#£€“Ž•›–‹Œ§ thŠŽ‡ LaTex ‡Ž ‡’•§‹ŒŽ —™• TexWorks Ÿd•› “d•–Œ§™Œ ’‡ †’Œ™Œ d–•—‡–“•‹«Y˜.
+662#£€“Ž•›–‹Œ§ ’‡ –‡‹“‡™ŽŸ ‹‹–‡š• LaTex Ö–—Ž“••Ž’™‡˜ ™• MikTex, ™• ••§• –ŒŽ ’‡ Œ‹‡™‡—™‡Œ§. –—Ž“••ŽŒ§™‡Ž “Ÿ’• ‹Ž‡ ‡‘Ÿ ‹‹–‡š•, ‡˜ ŠŒ’ ›•—™–§¾•’™‡Ž Ÿ‘‡ ™‡ ‡’™ŽŒ§“Œ’‡ Œ‹‹–†š•›.
+663#£€Œ§Ö’ŒŽ ˜ Œ–“’ŒŒ™‡Ž  ”•Š•˜ LaTex
+664#£€“Ž•›–‹Œ§ ŠŽ‡ LaTex ‡Ž ‡’•§‹ŒŽ —™• TexWorks Ÿ•› “•–Œ§™Œ ’‡ †’Œ™Œ –•—‡–“•‹˜.
 665#£ï–§‹’•
 666#£î“Œ§—
 667#£Ì–†š“‡
-668#£D–•Ö–“«Y’•˜
-669#£dŽ—™“•’ŽTh —“ŒŽ•‹–‡š§‡
+668#£–•Ö–“’•˜
+669#£Ž—™“•’Ž —“ŒŽ•‹–‡š§‡
 670#£íŽ‹‡ŠŽ•§ ‡–Ž“•§
-671#£D–«YdŒŽ ’‡ Œd‡’ŒŽ’Th—Œ™Œ ™• Word ‹Ž‡ ’‡ Ž—Ö«y—ŒŽ  ‡‘‘‡‹Th ‹‘th——‡˜ d‡’™•«y.
-672#£è•”•™•“Th—™Œ ™• ‡–ÖŒ§• ‡™‡‹–‡šTh˜ ™Ž“th’ <= 0
-673#£ï•’ ›d•‘•‹Ž—“Ÿ
-674#£Íd•‘•‹§¾
-675#£ç›™Th  “«Y•Š•˜ ‡d‡Ž™Œ§ «Y’‡ ŠŽ†—™“‡ Ÿd•› “Ž‡ ‘«y— ‰–§—Œ™‡Ž Œ’™Ÿ˜ ™•› ŠŽ‡—™Th“‡™•˜. íŸ’• “§‡ ‘«y— d–«YdŒŽ ’‡ Œ§’‡Ž —™• ŠŽ†—™“‡. æ•Ž™†”™Œ ™• ‹–†š“‡ ‹Ž‡ ’‡ d–•—ŠŽ•–§—Œ™Œ ™Ž˜ ‘«y—ŒŽ˜.
-676#£îÖŒ™Ž† “Œ ™ “«Y•Š• ŠŽ‡—™Th“‡™•˜
-677#£‚ “«Y•Š•˜ Newton-Raphson ‡d‡Ž™Œ§ “Ž‡ ‡–ÖŽTh ŒŽ‡—§‡ —Œ “Ž‡ ‘«y—. ‚ “«Y•Š•˜ ŠŒ’ Œ§’‡Ž Œ‹‹›“«Y’ ‹Ž‡ ™’ Œ”Œ«y–Œ— ‘«y—˜ Œ†’ ›d†–ÖŒŽ. å–«YŒ “Ÿ’• 1 ‘«y—. æ•Ž™†”™Œ ™• ‹–†š“‡ ‹Ž‡ ’‡ d–•—ŠŽ•–§—Œ™Œ “Ž‡ ‡–ÖŽTh ŒŽ‡—§‡.
+671#£–ŒŽ ’‡ Œ‡’ŒŽ’—Œ™Œ ™• Word ‹Ž‡ ’‡ Ž—Ö—ŒŽ  ‡‘‘‡‹ ‹‘——‡˜ ‡’™•.
+672#£è•”•™•“—™Œ ™• ‡–ÖŒ§• ‡™‡‹–‡š˜ ™Ž“’ <= 0
+673#£ï•’ ›•‘•‹Ž—“Ÿ
+674#£Í•‘•‹§¾
+675#£ç›™  “•Š•˜ ‡‡Ž™Œ§ ’‡ ŠŽ†—™“‡ Ÿ•› “Ž‡ ‘— ‰–§—Œ™‡Ž Œ’™Ÿ˜ ™•› ŠŽ‡—™“‡™•˜. íŸ’• “§‡ ‘— –ŒŽ ’‡ Œ§’‡Ž —™• ŠŽ†—™“‡. æ•Ž™†”™Œ ™• ‹–†š“‡ ‹Ž‡ ’‡ –•—ŠŽ•–§—Œ™Œ ™Ž˜ ‘—ŒŽ˜.
+676#£îÖŒ™Ž† “Œ ™ “•Š• ŠŽ‡—™“‡™•˜
+677#£‚ “•Š•˜ Newton-Raphson ‡‡Ž™Œ§ “Ž‡ ‡–ÖŽ ŒŽ‡—§‡ —Œ “Ž‡ ‘—. ‚ “•Š•˜ ŠŒ’ Œ§’‡Ž Œ‹‹›“’ ‹Ž‡ ™’ Œ”Œ–Œ— ‘—˜ Œ†’ ›†–ÖŒŽ. å–Œ “Ÿ’• 1 ‘—. æ•Ž™†”™Œ ™• ‹–†š“‡ ‹Ž‡ ’‡ –•—ŠŽ•–§—Œ™Œ “Ž‡ ‡–ÖŽ ŒŽ‡—§‡.
 678#£îÖŒ™Ž† “Œ ™•’ Newton-Raphson
-679#£D–«YdŒŽ ’‡ ‡d•Œ«y—Œ™Œ ™• «Y‹‹–‡šŸ —‡˜ ‹Ž‡ ’‡ Œ§’‡Ž Š›’‡™Th  Š“Ž•›–‹§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜!
-680#£ü”•Š•˜ d•‘ŽTh˜ —“ŒŽ•‹–‡š§‡˜
-681#£D–•‰‘Th“‡™‡ “Œ ™• ‡–ÖŒ§• 'normal.dotm', “d•–Œ§ ’‡ d–•‡‘«Y—ŒŽ d–•‰‘Th“‡™‡ “Œ ™Ž˜ —›’™•“Œ«y—ŒŽ˜ d‘™–•‘•‹§•› —™• WordMat. ï‡ d–•‰‘Th“‡™‡ “d•–•«y’ ’‡ ŒdŽ‘›•«y’ “Œ ™ ŠŽ‡‹–‡šTh ™•› ‡–ÖŒ§•›, ‡th˜ Š“Ž•›–‹Œ§™‡Ž ‡›™Ÿ“‡™‡ «Y’‡ ’«Y• d–•ŒdŽ‘Œ‹“«Y’• ‡–ÖŒ§• ‡™† ™’ Œd‡’Œ§’— ™•› Word. €Œ’ Œ§’‡Ž Š›’‡™Th  ŠŽ‡‹–‡šTh ™•› ‡–ÖŒ§•› Œ’th ™• Word Œ§’‡Ž ‡’•ŽÖ™Ÿ. D–«YdŒŽ ’‡ ™• †’Œ™Œ “Œ “ ‡›™Ÿ“‡™• ™–Ÿd•.\r\n\r\n- DŽ«Y—™Œ ™• d‘Th™–• OK ‹Ž‡ ’‡ ‡’•§”Œ™Œ ™• š†Œ‘• Ÿd•› ‰–§—Œ™‡Ž ™• Normal.dotm. \r\n- çd•Œ«y—™Œ ™’ Œ–‹‡—§‡ —‡˜ ‡Ž ‘Œ§—™Œ ™• Word \r\n- ŠŽ‡‹–‡šTh normal.dotm \r\n- ç’•§”™Œ ™• Word ‡Ž ‡’•§”™Œ ‡Ž ‘Œ§—™Œ ™Ž˜ –›“§—ŒŽ˜ ™•› WordMat
-682#£Íd•‘•‹Ž—“Ÿ˜ ‡dŸ ™’ GeoGebra
-683#£‰«Y‘•˜
+679#£–ŒŽ ’‡ ‡•Œ—Œ™Œ ™• ‹‹–‡šŸ —‡˜ ‹Ž‡ ’‡ Œ§’‡Ž Š›’‡™  Š“Ž•›–‹§‡ ‡’™Ž‹–†š’ ‡—š‡‘Œ§‡˜!
+680#£ü”•Š•˜ •‘Ž˜ —“ŒŽ•‹–‡š§‡˜
+681#£–•‰‘“‡™‡ “Œ ™• ‡–ÖŒ§• 'normal.dotm', “•–Œ§ ’‡ –•‡‘—ŒŽ –•‰‘“‡™‡ “Œ ™Ž˜ —›’™•“Œ—ŒŽ˜ ‘™–•‘•‹§•› —™• WordMat. ï‡ –•‰‘“‡™‡ “•–•’ ’‡ ŒŽ‘›•’ “Œ ™ ŠŽ‡‹–‡š ™•› ‡–ÖŒ§•›, ‡˜ Š“Ž•›–‹Œ§™‡Ž ‡›™Ÿ“‡™‡ ’‡ ’• –•ŒŽ‘Œ‹“’• ‡–ÖŒ§• ‡™† ™’ Œ‡’Œ§’— ™•› Word. €Œ’ Œ§’‡Ž Š›’‡™  ŠŽ‡‹–‡š ™•› ‡–ÖŒ§•› Œ’ ™• Word Œ§’‡Ž ‡’•ŽÖ™Ÿ. –ŒŽ ’‡ ™• †’Œ™Œ “Œ “ ‡›™Ÿ“‡™• ™–Ÿ•.\r\n\r\n- Ž—™Œ ™• ‘™–• OK ‹Ž‡ ’‡ ‡’•§”Œ™Œ ™• š†Œ‘• Ÿ•› ‰–§—Œ™‡Ž ™• Normal.dotm. \r\n- ç•Œ—™Œ ™’ Œ–‹‡—§‡ —‡˜ ‡Ž ‘Œ§—™Œ ™• Word \r\n- ŠŽ‡‹–‡š normal.dotm \r\n- ç’•§”™Œ ™• Word ‡Ž ‡’•§”™Œ ‡Ž ‘Œ§—™Œ ™Ž˜ –›“§—ŒŽ˜ ™•› WordMat
+682#£Í•‘•‹Ž—“Ÿ˜ ‡Ÿ ™’ GeoGebra
+683#£‰‘•˜
 684#£¦’•Ž‹“‡ ™•› Safari
-685#£ï• d–Ÿ‰‘“‡ copuld ŠŒ’ d–«YdŒŽ ’‡ ‘›Œ§.\r\né«Y‘Œ™Œ ’‡ Š•Ž“†—Œ™Œ “Ž‡ †‘‘ “«Y•Š• Th CAS-Ž’™Th–‡;
-686#£æŽ’™Th–‡˜ CAS
+685#£ï• –Ÿ‰‘“‡ copuld ŠŒ’ –ŒŽ ’‡ ‘›Œ§.\r\né‘Œ™Œ ’‡ Š•Ž“†—Œ™Œ “Ž‡ †‘‘ “•Š•  CAS-Ž’™–‡;
+686#£æŽ’™–‡˜ CAS
 687#£î“‡’™Ž† ‡–Ž“™Ž† —™•ŽÖŒ§‡
-688#£’Œ–‹•d•§—/‡dŒ’Œ–‹•d•§— “•’†Š’
-689#£†’ •Ž “•’†ŠŒ˜ Œ§’‡Ž Œ’Œ–‹•d•Ž“«Y’Œ˜, ™• WordMath kan Œ–“’Œ«yŒŽ ‡Ž “Œ™‡™–«YdŒŽ “•’†ŠŒ˜. î™• •›“d§ SI “d•–Œ§™Œ ’‡ ‡‘‘†”Œ™Œ ™Ž˜ “•’†ŠŒ˜ Œ”ŸŠ•›. í’ Œ’Œ–‹•d•ŽŒ§™Œ “•’†ŠŒ˜, Œ™Ÿ˜ Œ†’ ™• Ö–ŒŽ†¾Œ—™Œ. íd•–Œ§ ’‡ Œd–Œ†—ŒŽ ™ —›“dŒ–Žš•–† ™•› WordMat ‡Ž ŠŽ‡™–Œ§ d•‘‘«Y˜ “Œ™‡‰‘™«Y˜.
-690#£Ž—‡‹‹Th dŒŠ§•› thŠŽ‡
-691#£€‘th—™Œ ™Ž˜ “•’†ŠŒ˜ —™Ž˜ •d•§Œ˜ ‡ “Œ™‡™–«Y¿Œ™Œ. çdŸ d–•ŒdŽ‘•‹Th, •Ž “•’†ŠŒ˜ Œ”ŸŠ•› Œ§’‡Ž “•’†ŠŒ˜ SI.
+688#£’Œ–‹••§—/‡Œ’Œ–‹••§— “•’†Š’
+689#£†’ •Ž “•’†ŠŒ˜ Œ§’‡Ž Œ’Œ–‹••Ž“’Œ˜, ™• WordMath kan Œ–“’ŒŒŽ ‡Ž “Œ™‡™–ŒŽ “•’†ŠŒ˜. î™• •›“§ SI “•–Œ§™Œ ’‡ ‡‘‘†”Œ™Œ ™Ž˜ “•’†ŠŒ˜ Œ”ŸŠ•›. í’ Œ’Œ–‹••ŽŒ§™Œ “•’†ŠŒ˜, Œ™Ÿ˜ Œ†’ ™• Ö–ŒŽ†¾Œ—™Œ. í•–Œ§ ’‡ Œ–Œ†—ŒŽ ™ —›“Œ–Žš•–† ™•› WordMat ‡Ž ŠŽ‡™–Œ§ •‘‘˜ “Œ™‡‰‘™˜.
+690#£Ž—‡‹‹ ŒŠ§•› ŠŽ‡
+691#£€‘—™Œ ™Ž˜ “•’†ŠŒ˜ —™Ž˜ ••§Œ˜ ‡ “Œ™‡™–¿Œ™Œ. çŸ –•ŒŽ‘•‹, •Ž “•’†ŠŒ˜ Œ”ŸŠ•› Œ§’‡Ž “•’†ŠŒ˜ SI.
 692#£î‡
-693#£ü’‡ dŒŠ§• thŠŽ‡ Œ§’‡Ž “Ž‡ dŒ–Ž•ÖTh Ÿd•› “d•–Œ§™Œ ’‡ d–•‹–‡““‡™§—Œ™Œ ‡dŒ›Œ§‡˜ ™• Maxima. ÌŽ‡ d‡–†ŠŒŽ‹“‡, “d•–Œ§™Œ ’‡ •–§—Œ™Œ dŽ• —«y’Œ™Œ˜ —›’‡–™Th—ŒŽ˜, •Ž •d•§Œ˜ “d•–•«y’ —™ —›’«YÖŒŽ‡ ’‡ Ö–—Ž“•d•Ž•«y’ dŽ• †™ —™• «Y‹‹–‡š•. €Œ§™Œ dŒ–Ž——Ÿ™Œ–‡ —™• Œ‹ÖŒŽ–§ŠŽ•.
-694#£ 1Ú4 ÖŽ. ‡–Ž“™Žth’ —™•ŽÖŒ§’
-695#£î™–•‹‹›‘•d•§—
-696#£dŽ‘«Y”™Œ ™•’ ™–Ÿd• “Œ ™•’ •d•§• •Ž ‡–Ž“•§ ‡ Œ§’‡Ž fomatted ‡Ž —™–•‹‹›‘•d•Ž“«Y’•Ž. î™‡ d‡–‡†™ d‡–‡ŠŒ§‹“‡™‡, ™• WordMat «YÖŒŽ •–Ž—™Œ§ —Œ 3 ¿š§‡\r\n\r\n€Œ‡ŠŽ†: 12,345\r\nî“‡’™Ž† ¿š§‡: 12,3\r\nSci. —›“‰•‘Ž—“Ÿ˜: 1,23*10^1
-697#£ì‘•‘–th—™Œ ™• ™Œ™–†‹’•
-698#£š‡–“Ÿ¾ŒŽ ™• ™Œ™–†‹’• ‹Ž‡ Ÿ‘Œ˜ ™Ž˜ “Œ™‡‰‘™«Y˜ —™’ «Yš–‡—
-699#£D‡–‡‹•’™ŽŸ ‡–’™Žth’ ‡Œ–‡§’ d•› ŠŒ’ •–§¾Œ™‡Ž
-700#£D–•ŒŽŠ•d•§—: DŒ–Ž——Ÿ™Œ–Œ˜ Œ”Ž—th—ŒŽ˜ ‡dŸ “Œ™‡‰‘™«Y˜ —™• —«y—™“‡. ^1™‡’ —ŸdŽ“•;
-701#£ê«Y‡ Œ”§——
-702#£D–•‹•«y“Œ’•(-‡) ‡d•™«Y‘Œ—“‡(™‡)
-703#£’‡‘‘‡‹Th ‡–Ž“•«y/‡–Ž‰•«y˜
-704#£íŒ™‡™–•dTh —Œ ‘‡™«Y”
-705#£è‡™«Y” PDF
-706#£å‡“•«y˜
+693#£ü’‡ ŒŠ§• ŠŽ‡ Œ§’‡Ž “Ž‡ Œ–Ž•Ö Ÿ•› “•–Œ§™Œ ’‡ –•‹–‡““‡™§—Œ™Œ ‡Œ›Œ§‡˜ ™• Maxima. ÌŽ‡ ‡–†ŠŒŽ‹“‡, “•–Œ§™Œ ’‡ •–§—Œ™Œ Ž• —’Œ™Œ˜ —›’‡–™—ŒŽ˜, •Ž ••§Œ˜ “•–•’ —™ —›’ÖŒŽ‡ ’‡ Ö–—Ž“••Ž•’ Ž• †™ —™• ‹‹–‡š•. €Œ§™Œ Œ–Ž——Ÿ™Œ–‡ —™• Œ‹ÖŒŽ–§ŠŽ•.
+694#£ÖŽ. ‡–Ž“™Ž’ —™•ŽÖŒ§’
+695#£î™–•‹‹›‘••§—
+696#£Ž‘”™Œ ™•’ ™–Ÿ• “Œ ™•’ ••§• •Ž ‡–Ž“•§ ‡ Œ§’‡Ž fomatted ‡Ž —™–•‹‹›‘••Ž“’•Ž. î™‡ ‡–‡†™ ‡–‡ŠŒ§‹“‡™‡, ™• WordMat ÖŒŽ •–Ž—™Œ§ —Œ 3 ¿š§‡\r\n\r\n€Œ‡ŠŽ†: 12,345\r\nî“‡’™Ž† ¿š§‡: 12,3\r\nSci. —›“‰•‘Ž—“Ÿ˜: 1,23*10^1
+697#£ì‘•‘–—™Œ ™• ™Œ™–†‹’•
+698#£š‡–“Ÿ¾ŒŽ ™• ™Œ™–†‹’• ‹Ž‡ Ÿ‘Œ˜ ™Ž˜ “Œ™‡‰‘™˜ —™’ š–‡—
+699#£‡–‡‹•’™ŽŸ ‡–’™Ž’ ‡Œ–‡§’ •› ŠŒ’ •–§¾Œ™‡Ž
+700#£–•ŒŽŠ••§—: Œ–Ž——Ÿ™Œ–Œ˜ Œ”Ž——ŒŽ˜ ‡Ÿ “Œ™‡‰‘™˜ —™• ——™“‡. ™‡’ —ŸŽ“•;
+701#£ê‡ Œ”§——
+702#£–•‹•“Œ’•(-‡) ‡•™‘Œ—“‡(™‡)
+703#£’‡‘‘‡‹ ‡–Ž“•/‡–Ž‰•˜
+704#£íŒ™‡™–• —Œ ‘‡™”
+705#£è‡™” PDF
+706#£å‡“•˜
 707#£ç™§’Ž‡
 708#£í•’†Š‡ ‹’§‡˜
-709#£D–•‰•‘Th —›’th’ ‘«y—˜
-710#£ç–Ž‰Th˜
+709#£–•‰•‘ —›’’ ‘—˜
+710#£ç–Ž‰˜
 711#£ç–Ž“™ŽŸ˜
 712#£ç›™Ÿ“‡™•˜
-713#£D•‘«y ›¿‘Th ‡–§‰ŒŽ‡ (beta)
-714#£Ž—‡‹‹Th ŒdŒ”Th‹—˜
-715#£Œ’™•‘Th "Ž—‡‹‹Th “Œ‹§—™’"
+713#£•‘ ›¿‘ ‡–§‰ŒŽ‡ (beta)
+714#£Ž—‡‹‹ ŒŒ”‹—˜
+715#£Œ’™•‘ "Ž—‡‹‹ “Œ‹§—™’"
 716#£€Ž‡Ö–Ž—™Ž†
 717#£è§—™‡
 718#£Mult.—“†ŠŽ
 719#£ïŒ‘Œ§‡
-720#£ï«yd•˜ ‘«y—˜
-721#£€›‡ŠŽTh
-722#£îŒ™ ‘«y—Œ’
+720#£ï•˜ ‘—˜
+721#£€›‡ŠŽ
+722#£îŒ™ ‘—Œ’
 723#£€Œ§™˜
-724#£§’‡Ž ‡d‘th˜ ™• Œ§“Œ’• “«Y–•˜ ™•› •’Ÿ“‡™•˜ “Œ™‡‰‘™Th˜
-725#£§’‡Ž Œ›–Œ™Th–Ž• ‘§—™‡˜/“Th™–‡˜
-726#£ï›dŽŸ d–Ÿ‹–‡““‡ ‹–‡š“†™’
-727#£’—“†™— š«y‘‘’ Excel
-728#£€Œ’ Th™‡’ Š›’‡™Th  Œ™«Y‘Œ— ™˜ ‘ŒŽ™•›–‹§‡˜ ŒdŒŽŠTh ™• WordMat+ ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“«Y’•.
-729#£ìŽ “•’†ŠŒ˜ Œ”ŸŠ•› ‡™†—™‡—˜ ŠŽ‡Ö–Ž—“«Y’Œ˜ “Œ Ÿ““‡\nd‡–‡ŠŒ§‹“‡™‡:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\n†’ ŠŒ’ ‡’‡š«Y–Œ™‡Ž ™§d•™‡, •Ž “•’†ŠŒ˜ ŒdŽ—™–«Yš•’™‡Ž —Œ ‰‡—Ž«Y˜ “•’†ŠŒ˜ SI Th “•’†ŠŒ˜ d•› d–•«Y–Ö•’™‡Ž ‡dŸ SI Ö–§˜ d–ŸŒ“‡.
-730#£D‡–‡ŠŒ§‹“‡™‡ ›d•—™–Ž¾Ÿ“Œ’’ “•’†Š’:\n(€Œ§™Œ ™• Œ‹ÖŒŽ–§ŠŽ• ‹Ž‡ dŒ–Ž——Ÿ™Œ–‡)\n\níTh•˜: cm, AU, ly, pc\nMass: u, G, mg\nî›Ö’Ÿ™™‡: Hz, Bq\nEnergy: kWh, eV, aJ\nPressure: Bar, mmHg, atm, torr
-731#£ï–Ž‹’•“Œ™–Ž«Y˜ Œ”Ž—th—ŒŽ˜
-732#£ 1Ú4 ‘Œ˜ •Ž ‘«y—ŒŽ˜
-733#£íŸ’• 1 ‘«y—
-734#£ç›™Ÿ“‡™•˜ «Y‘Œ‹Ö•˜ ‹Ž‡ Œ’“Œ–th—ŒŽ˜
-735#£dŽŠŽŸ–— —›’™•“Œ«y—Œ’ d‘™–•‘•‹§•›
-736#£d‡’ŒŽ’Th—™Œ ™• WordMat
-737#£ 1Ú4 ÖŽ. ™’ ›d•‘•‹Ž—“th’
-738#£î›’™•“Œ«y—ŒŽ˜ d‘™–•‘•‹§•› ŒdŽŠŽ•–Œ§.\n†’ Œ”‡•‘•›Œ§ ’‡ “’ ‘ŒŽ™•›–‹Œ§, ŠŽ‡‹–†¿™Œ ™• ‡–ÖŒ§• 'normal.dotm' —™• š†Œ‘• '~ / Library / Group Containers/UBF8T346G9. Office/User Content/Templates' ‡Ž Œd‡’ŒŽ’Th—™Œ ™• Word
-739#£î›’™•“Œ«y—ŒŽ˜ d‘™–•‘•‹§•› ŒdŽŠŽ•–Œ§.\n†’ Œ”‡•‘•›Œ§ ’‡ “’ ‘ŒŽ™•›–‹Œ§, ŠŽ‡‹–†¿™Œ ™• ‡–ÖŒ§• 'normal.dotm' —™• š†Œ‘• '%appdata%/Microsoft/Templates' ‡Ž Œd‡’ŒŽ’Th—™Œ ™• Word
-740#£ï• GeoGebra Calculator Suite Œ§’‡Ž Œ‹‡™Œ—™“«Y’• “Œ ™• WordMat. ™Œ‘Œ§™‡Ž —Œ d–Ÿ‹–‡““‡ dŒ–ŽTh‹—˜, ‡‘‘† ŠŒ’ ‡d‡Ž™Œ§ ŠŽ‡Š§™›•. èŒŽ™•›–‹Œ§ ™• §ŠŽ• —Œ Windows ‡Ž Mac ‡Ž ”ŒŽ’† ‹–Th‹•–‡.\nGeoGebra 5 èŒŽ™•›–‹Œ§ ™• §ŠŽ• —Œ Windows ‡Ž Mac, ‡‘‘† ‡d‡Ž™Œ§ Œ‹‡™†—™‡—.\nï‡ Windows ›d•—™–§¾•›’ Œd§—˜ ™Ž˜ †‘‘Œ˜ ŒŠŸ—ŒŽ˜ Œš‡–“•‹th’ ™•› GeoGebra Ÿd˜ ™• Geogebra 6, ™• Graphing Calculator .‘d. ç›™† ‡ Ö–—Ž“•d•Ž•«y’ Œ†’ ™• GeoGebra 5 ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“«Y’•.
-741#£ìŽ —›’™•“Œ«y—ŒŽ˜ d‘™–•‘•‹§•› ŠŒ’ «YÖ•›’ –›“Ž—™Œ§ ——™†
-742#£ï• ‡d•™«Y‘Œ—“‡ ™•› ›d•‘•‹Ž—“•«y Œ”‡–™†™‡Ž ‡dŸ ™• —“†ŠŽ ™•›
-743#£æ–‡™ŽŸ —Th“‡
-744#£€Ž‡š•–ŽTh Œ”§——
-745#£d§‘›— ŠŽ‡š•–ŽTh˜ Œ”§——˜
+724#£§’‡Ž ‡‘˜ ™• Œ§“Œ’• “–•˜ ™•› •’Ÿ“‡™•˜ “Œ™‡‰‘™˜
+725#£§’‡Ž Œ›–Œ™–Ž• ‘§—™‡˜/“™–‡˜
+726#£ï›ŽŸ –Ÿ‹–‡““‡ ‹–‡š“†™’
+727#£’—“†™— š‘‘’ Excel
+728#£€Œ’ ™‡’ Š›’‡™  Œ™‘Œ— ™˜ ‘ŒŽ™•›–‹§‡˜ ŒŒŽŠ ™• WordMat+ ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“’•.
+729#£ìŽ “•’†ŠŒ˜ Œ”ŸŠ•› ‡™†—™‡—˜ ŠŽ‡Ö–Ž—“’Œ˜ “Œ Ÿ““‡\n‡–‡ŠŒ§‹“‡™‡:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\n†’ ŠŒ’ ‡’‡š–Œ™‡Ž ™§•™‡, •Ž “•’†ŠŒ˜ ŒŽ—™–š•’™‡Ž —Œ ‰‡—Ž˜ “•’†ŠŒ˜ SI  “•’†ŠŒ˜ •› –•–Ö•’™‡Ž ‡Ÿ SI Ö–§˜ –ŸŒ“‡.
+730#£‡–‡ŠŒ§‹“‡™‡ ›•—™–Ž¾Ÿ“Œ’’ “•’†Š’:\n(€Œ§™Œ ™• Œ‹ÖŒŽ–§ŠŽ• ‹Ž‡ Œ–Ž——Ÿ™Œ–‡)\n\ní•˜: cm, AU, ly, pc\nMass: u, G, mg\nî›Ö’Ÿ™™‡: Hz, Bq\nEnergy: kWh, eV, aJ\nPressure: Bar, mmHg, atm, torr
+731#£ï–Ž‹’•“Œ™–Ž˜ Œ”Ž——ŒŽ˜
+732#£‘Œ˜ •Ž ‘—ŒŽ˜
+733#£íŸ’• 1 ‘—
+734#£ç›™Ÿ“‡™•˜ ‘Œ‹Ö•˜ ‹Ž‡ Œ’“Œ–—ŒŽ˜
+735#£ŽŠŽŸ–— —›’™•“Œ—Œ’ ‘™–•‘•‹§•›
+736#£‡’ŒŽ’—™Œ ™• WordMat
+737#£ÖŽ. ™’ ›•‘•‹Ž—“’
+738#£î›’™•“Œ—ŒŽ˜ ‘™–•‘•‹§•› ŒŽŠŽ•–Œ§.\n†’ Œ”‡•‘•›Œ§ ’‡ “’ ‘ŒŽ™•›–‹Œ§, ŠŽ‡‹–†¿™Œ ™• ‡–ÖŒ§• 'normal.dotm' —™• š†Œ‘• '~ / Library / Group Containers/UBF8T346G9. Office/User Content/Templates' ‡Ž Œ‡’ŒŽ’—™Œ ™• Word
+739#£î›’™•“Œ—ŒŽ˜ ‘™–•‘•‹§•› ŒŽŠŽ•–Œ§.\n†’ Œ”‡•‘•›Œ§ ’‡ “’ ‘ŒŽ™•›–‹Œ§, ŠŽ‡‹–†¿™Œ ™• ‡–ÖŒ§• 'normal.dotm' —™• š†Œ‘• '%appdata%/Microsoft/Templates' ‡Ž Œ‡’ŒŽ’—™Œ ™• Word
+740#£ï• GeoGebra Calculator Suite Œ§’‡Ž Œ‹‡™Œ—™“’• “Œ ™• WordMat. ™Œ‘Œ§™‡Ž —Œ –Ÿ‹–‡““‡ Œ–Ž‹—˜, ‡‘‘† ŠŒ’ ‡‡Ž™Œ§ ŠŽ‡Š§™›•. èŒŽ™•›–‹Œ§ ™• §ŠŽ• —Œ Windows ‡Ž Mac ‡Ž ”ŒŽ’† ‹–‹•–‡.\nGeoGebra 5 èŒŽ™•›–‹Œ§ ™• §ŠŽ• —Œ Windows ‡Ž Mac, ‡‘‘† ‡‡Ž™Œ§ Œ‹‡™†—™‡—.\nï‡ Windows ›•—™–§¾•›’ Œ§—˜ ™Ž˜ †‘‘Œ˜ ŒŠŸ—ŒŽ˜ Œš‡–“•‹’ ™•› GeoGebra Ÿ˜ ™• Geogebra 6, ™• Graphing Calculator .‘. ç›™† ‡ Ö–—Ž“••Ž•’ Œ†’ ™• GeoGebra 5 ŠŒ’ Œ§’‡Ž Œ‹‡™Œ—™“’•.
+741#£ìŽ —›’™•“Œ—ŒŽ˜ ‘™–•‘•‹§•› ŠŒ’ Ö•›’ –›“Ž—™Œ§ ——™†
+742#£ï• ‡•™‘Œ—“‡ ™•› ›•‘•‹Ž—“• Œ”‡–™†™‡Ž ‡Ÿ ™• —“†ŠŽ ™•›
+743#£æ–‡™ŽŸ —“‡
+744#£€Ž‡š•–Ž Œ”§——
+745#£§‘›— ŠŽ‡š•–Ž˜ Œ”§——˜
 746#£Indep. var
 747#£Dep. var/‘ŒŽ™•›–‹§‡
-748#£ç–ÖŽTh ‡™†—™‡—
-749#£í«Y‹Ž—™• —š†‘“‡
+748#£ç–ÖŽ ‡™†—™‡—
+749#£í‹Ž—™• —š†‘“‡
 750#£í‡“‡™ŽŸ —š†‘“‡
-751#£îš†‘“‡ —«y’™‡”˜
-752#£î›’™‡™ŽŸ ‘†•˜. ï• WordMat ŠŒ’ ‡™†‘‡‰Œ ™ —›“‰•‘Th —‡˜.
-753#£î‡˜ ‘Œ§dŒŽ «Y’‡
-754#£§’‡Ž d†–‡ d•‘‘•§
-755#£D‡–•›—Ž†—™Œ —š†‘“‡ —™•’ thŠŽ‡.
-756#£€Ž‡§–Œ— “Œ ‰†— ™• “Š«Y’
-757#£î›’«Y‰ «Y’‡ ‘†•˜. ï• —š†‘“‡ d–•‘ThŒ dŽ‡’th˜ ‡dŸ «Y’‡’ ‡dŸ ™•›˜ •–Ž—“•«y˜ —‡˜.\r\n¼—˜ “d•–Œ§™Œ ’‡ Œ’™•d§—Œ™Œ ™• —š†‘“‡ ‡dŸ ™Ž˜ d‡–‡†™ d‘–•š•–§Œ˜.
-758#£Íd†–ÖŒŽ —š†‘“‡ —Œ «Y’‡’ ‡dŸ ™•›˜ •–Ž—“•«y˜ —‡˜.\r\nì •–Ž—“Ÿ˜ ‡ ŒdŽ‘Œ‹Œ§ ™th–‡ —™• Word.
-759#£ü’‡˜ d‡–†’•“•˜ Ö‡–‡™Th–‡˜ «YÖŒŽ ™•d•Œ™Œ§ ‡dŸ
-760#£d§‘›— Œ”§——˜
+751#£îš†‘“‡ —’™‡”˜
+752#£î›’™‡™ŽŸ ‘†•˜. ï• WordMat ŠŒ’ ‡™†‘‡‰Œ ™ —›“‰•‘ —‡˜.
+753#£î‡˜ ‘Œ§ŒŽ ’‡
+754#£§’‡Ž †–‡ •‘‘•§
+755#£‡–•›—Ž†—™Œ —š†‘“‡ —™•’ ŠŽ‡.
+756#£€Ž‡§–Œ— “Œ ‰†— ™• “Š’
+757#£î›’‰ ’‡ ‘†•˜. ï• —š†‘“‡ –•‘Œ Ž‡’˜ ‡Ÿ ’‡’ ‡Ÿ ™•›˜ •–Ž—“•˜ —‡˜.\r\n¼—˜ “•–Œ§™Œ ’‡ Œ’™•§—Œ™Œ ™• —š†‘“‡ ‡Ÿ ™Ž˜ ‡–‡†™ ‘–•š•–§Œ˜.
+758#£Í†–ÖŒŽ —š†‘“‡ —Œ ’‡’ ‡Ÿ ™•›˜ •–Ž—“•˜ —‡˜.\r\nì •–Ž—“Ÿ˜ ‡ ŒŽ‘Œ‹Œ§ ™–‡ —™• Word.
+759#£ü’‡˜ ‡–†’•“•˜ Ö‡–‡™–‡˜ ÖŒŽ ™••Œ™Œ§ ‡Ÿ
+760#£§‘›— Œ”§——˜
 761#£íŒ™‡‰‘™Ÿ˜
-762#£^1 “Œ™‡‰‘™Th ‡™†—™‡—˜:
+762#£ “Œ™‡‰‘™ ‡™†—™‡—˜:
 763#£ì–Ž—“•§
-764#£D–•—–Ž’•§ •–Ž—“•§
-765#£D–•ŒŽŠ•d•§—: ìŽ “•’†ŠŒ˜ Œ§’‡Ž Œ’Œ–‹•d•Ž“«Y’Œ˜.\r\n‚ Œd§‘›— Œ”Ž—th—Œ’ ‡ Œ§’‡Ž š™ÖŸ™Œ–\r\nD–•—«Y”™Œ ‹Ž‡ “Œ™‡‰‘™«Y˜ d•› Œ§’‡Ž “•’†ŠŒ˜ Ÿd˜: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
-766#£d§‘›— —›—™Th“‡™•˜ Œ”Ž—th—Œ’
-767#£dŽ‘•‹Th “Œ™‡‰‘™th’
+764#£–•—–Ž’•§ •–Ž—“•§
+765#£–•ŒŽŠ••§—: ìŽ “•’†ŠŒ˜ Œ§’‡Ž Œ’Œ–‹••Ž“’Œ˜.\r\n‚ Œ§‘›— Œ”Ž——Œ’ ‡ Œ§’‡Ž š™ÖŸ™Œ–\r\n–•—”™Œ ‹Ž‡ “Œ™‡‰‘™˜ •› Œ§’‡Ž “•’†ŠŒ˜ Ÿ˜: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
+766#£§‘›— —›—™“‡™•˜ Œ”Ž——Œ’
+767#£Ž‘•‹ “Œ™‡‰‘™’
 768#£ï• WordMat ”ŒŽ’†
-769#£D‡–‡‡‘th dŒ–§“Œ’Œ
-770#£d§‘›— ™–Ž‹th’•›
-771#£ì–Th ‹’§‡
-772#£ 1Ú4 d•Ž•˜
+769#£‡–‡‡‘ Œ–§“Œ’Œ
+770#£§‘›— ™–Ž‹’•›
+771#£ì– ‹’§‡
+772#£•Ž•˜
 773#£€Œ”Ž†
 774#£ì’•“‡—§‡
-775#£í‡’•›Th‘
-776#£Ì’§Œ˜ Œš‡‘‡§‡, d‘Œ›–«Y˜ dŒ¾† ‹–†““‡™‡
-777#£D‘Œ›–«Y˜ d•› •’•“†¾•’™‡Ž ‡dŸ ‹’§Œ˜ AB
-778#£Ž—‡‹†‹Œ™Œ ‡–Ž“•«y˜ —™• ™–§‹’• —™• Word
-779#£“š†’Ž— ›d•‘•‹Ž—“th’ —™• Word
-780#£Ž—‡‹†‹Œ™Œ ™Ž˜ ‹’—™«Y˜ d‘Œ›–«Y˜ ‡Ž ‹’§Œ˜. ìŽ ›dŸ‘•ŽdŒ˜ d‘Œ›–«Y˜ ‡Ž ‹’§Œ˜ ‡ ›d•‘•‹Ž—™•«y’ —™ —›’«YÖŒŽ‡ ‡Ž ‡ ŒŽ—‡Ö•«y’ —™• Word.\r\n§’‡Ž Š›’‡™Th  ‡‘‘‡‹Th ™’ •’•“†™’ ™’ d‘Œ›–th’ ‡Ž ™’ ‹’Žth’ —™• ™–§‹’•. çd‘th˜ †’™Œ ‘Ž —™‡ ‹–†““‡™‡.
-781#£ï• ™–§‹’• ŠŒ’ «YÖŒŽ “«Y‹Œ•˜. ç‘‘† «Y’‡ ——™† ‘Ž“‡™Ÿ ™–§‹’• ‡ ŒŽ—‡ÖŒ§ —™• Word.
-782#£ï• trianglesolver ™•› WordMat Ö–—Ž“•d•ŽŒ§™‡Ž “Œ Œ§—•Š•:
-783#£€«y• ™–§‹’‡ “d•–•«y’ ’‡ ‡™‡—Œ›‡—™•«y’ ‡dŸ ™Ž˜ d‘–•š•–§Œ˜ —‡˜
-784#£çd‡Ž™•«y’™‡Ž dŒ–Ž——Ÿ™Œ–Œ˜ d‘–•š•–§Œ˜ ‹Ž‡ ™•’ ›d•‘•‹Ž—“Ÿ ™’ ›dŸ‘•Žd’ d‘Œ›–th’ ‡Ž ‹’Žth’
-785#£€«y• ™–§‹’‡
-786#£çd‡Ž™•«y’™‡Ž dŒ–Ž——Ÿ™Œ–Œ˜ d‘–•š•–§Œ˜ ‹Ž‡ ™•’ ›d•‘•‹Ž—“Ÿ ™’ ›dŸ‘•Žd’ d‘Œ›–th’ ‡Ž ‹’Žth’
-787#£ 1Ú4 ‘Œ˜ •Ž d‘Œ›–«Y˜ ‡Ž •Ž ‹’§Œ˜ “d•–•«y’ ™th–‡ ’‡ ›d•‘•‹Ž—™•«y’.
-788#£š‡–“Ÿ—™‡’ ‡–Ž“™Ž«Y˜ “«Y•Š•Ž ‡™† ™’ Œd§‘›— ™˜ Œ”§——˜. ’Š«YÖŒ™‡Ž ’‡ ›d†–Ö•›’ dŒ–Ž——Ÿ™Œ–Œ˜ ‘«y—ŒŽ˜.
-789#£D–•—–Ž’«Y˜ –›“§—ŒŽ˜
+775#£í‡’•›‘
+776#£Ì’§Œ˜ Œš‡‘‡§‡, ‘Œ›–˜ Œ¾† ‹–†““‡™‡
+777#£‘Œ›–˜ •› •’•“†¾•’™‡Ž ‡Ÿ ‹’§Œ˜ AB
+778#£Ž—‡‹†‹Œ™Œ ‡–Ž“•˜ —™• ™–§‹’• —™• Word
+779#£“š†’Ž— ›•‘•‹Ž—“’ —™• Word
+780#£Ž—‡‹†‹Œ™Œ ™Ž˜ ‹’—™˜ ‘Œ›–˜ ‡Ž ‹’§Œ˜. ìŽ ›Ÿ‘•ŽŒ˜ ‘Œ›–˜ ‡Ž ‹’§Œ˜ ‡ ›•‘•‹Ž—™•’ —™ —›’ÖŒŽ‡ ‡Ž ‡ ŒŽ—‡Ö•’ —™• Word.\r\n§’‡Ž Š›’‡™  ‡‘‘‡‹ ™’ •’•“†™’ ™’ ‘Œ›–’ ‡Ž ™’ ‹’Ž’ —™• ™–§‹’•. ç‘˜ †’™Œ ‘Ž —™‡ ‹–†““‡™‡.
+781#£ï• ™–§‹’• ŠŒ’ ÖŒŽ “‹Œ•˜. ç‘‘† ’‡ ——™† ‘Ž“‡™Ÿ ™–§‹’• ‡ ŒŽ—‡ÖŒ§ —™• Word.
+782#£ï• trianglesolver ™•› WordMat Ö–—Ž“••ŽŒ§™‡Ž “Œ Œ§—•Š•:
+783#£€• ™–§‹’‡ “•–•’ ’‡ ‡™‡—Œ›‡—™•’ ‡Ÿ ™Ž˜ ‘–•š•–§Œ˜ —‡˜
+784#£ç‡Ž™•’™‡Ž Œ–Ž——Ÿ™Œ–Œ˜ ‘–•š•–§Œ˜ ‹Ž‡ ™•’ ›•‘•‹Ž—“Ÿ ™’ ›Ÿ‘•Ž’ ‘Œ›–’ ‡Ž ‹’Ž’
+785#£€• ™–§‹’‡
+786#£ç‡Ž™•’™‡Ž Œ–Ž——Ÿ™Œ–Œ˜ ‘–•š•–§Œ˜ ‹Ž‡ ™•’ ›•‘•‹Ž—“Ÿ ™’ ›Ÿ‘•Ž’ ‘Œ›–’ ‡Ž ‹’Ž’
+787#£‘Œ˜ •Ž ‘Œ›–˜ ‡Ž •Ž ‹’§Œ˜ “•–•’ ™–‡ ’‡ ›•‘•‹Ž—™•’.
+788#£š‡–“Ÿ—™‡’ ‡–Ž“™Ž˜ “•Š•Ž ‡™† ™’ Œ§‘›— ™˜ Œ”§——˜. ’ŠÖŒ™‡Ž ’‡ ›†–Ö•›’ Œ–Ž——Ÿ™Œ–Œ˜ ‘—ŒŽ˜.
+789#£–•—–Ž’˜ –›“§—ŒŽ˜
 790#£ç›™Ÿ“‡™ “Œ§—
-791#£D–•—d‡Œ§ ’‡ “ŒŽth—ŒŽ ™’ «Yš–‡— —™ —›’™•“Ÿ™Œ– Š›’‡™Th “•–šTh Ö–—Ž“•d•Žth’™‡˜ ŠŽ‡š•–Œ™Ž«Y˜ “ŒŸŠ•›˜.
-792#£D–•—d‡Œ§ ’‡ d‡–‡‹†‹ŒŽ ™’ «Yš–‡—
-793#£dŒ™Œ§’ŒŽ ™’ «Yš–‡—.
-794#£çŽ™Ž•‘•‹th
-795#£íŒ™‡™–«YdŒŽ Ÿ‘•›˜ ™•›˜ ŠŒ‡ŠŽ•«y˜ ‡–Ž“•«y˜ —Œ ‘†—“‡™‡
-796#£íŒŽth—™Œ ™–Ž‹’•“Œ™–Ž†
-797#£íŒŽth—™Œ ™’ «Yš–‡— Ö–—Ž“•d•Žth’™‡˜ ™–Ž‹’•“Œ™–Ž«Y˜ ™‡›™Ÿ™™Œ˜.
-798#£Ž—‡‹‹Th §ŠŽ‡˜ ‹–‡““Th˜
+791#£–•—‡Œ§ ’‡ “ŒŽ—ŒŽ ™’ š–‡— —™ —›’™•“Ÿ™Œ– Š›’‡™ “•–š Ö–—Ž“••Ž’™‡˜ ŠŽ‡š•–Œ™Ž˜ “ŒŸŠ•›˜.
+792#£–•—‡Œ§ ’‡ ‡–‡‹†‹ŒŽ ™’ š–‡—
+793#£Œ™Œ§’ŒŽ ™’ š–‡—.
+794#£çŽ™Ž•‘•‹
+795#£íŒ™‡™–ŒŽ Ÿ‘•›˜ ™•›˜ ŠŒ‡ŠŽ•˜ ‡–Ž“•˜ —Œ ‘†—“‡™‡
+796#£íŒŽ—™Œ ™–Ž‹’•“Œ™–Ž†
+797#£íŒŽ—™Œ ™’ š–‡— Ö–—Ž“••Ž’™‡˜ ™–Ž‹’•“Œ™–Ž˜ ™‡›™Ÿ™™Œ˜.
+798#£Ž—‡‹‹ §ŠŽ‡˜ ‹–‡““˜
 799#£2D —ÖŒŠ§‡—
-800#£d‡’‡š•–† Ÿ‘’
+800#£‡’‡š•–† Ÿ‘’
 801#£ï§™‘•˜ †”•’‡
-802#£ï«yd•˜ ‹–‡““Th˜
-803#£ÌŽ‡ ’‡ ŒdŽ‘«y—Œ™Œ “Ž‡ Œ”§——, d–«YdŒŽ d–th™‡ ’‡ ŒŽ—‡‹†‹Œ™Œ “Ž‡ Œ”§—— —™• Word. ï•d•Œ™Th—™Œ ™•’ «Y–—•–‡ —™’ Œ”§—— ‡Ž d‡™Th—™Œ ”‡’† Çd§‘›— Œ”Ž—th—Œ’È. î“ŒŽth—™Œ dŒ–Ž——Ÿ™Œ–Œ˜ Œ”Ž—th—ŒŽ˜ ‹Ž‡ ’‡ ‘«y—Œ™Œ «Y’‡ —«y—™“‡ Œ”Ž—th—Œ’
-804#£€Œ’ «YÖŒŽ ŒdŽ‘Œ‹Œ§ Œ”§——
-805#£çd‘•d•Žth
-806#£D‡–†‹•’™‡˜
-807#£dŒ™Œ§’
-808#£å•ThŒŽ‡
+802#£ï•˜ ‹–‡““˜
+803#£ÌŽ‡ ’‡ ŒŽ‘—Œ™Œ “Ž‡ Œ”§——, –ŒŽ –™‡ ’‡ ŒŽ—‡‹†‹Œ™Œ “Ž‡ Œ”§—— —™• Word. ï••Œ™—™Œ ™•’ –—•–‡ —™’ Œ”§—— ‡Ž ‡™—™Œ ”‡’† Ç§‘›— Œ”Ž——Œ’È. î“ŒŽ—™Œ Œ–Ž——Ÿ™Œ–Œ˜ Œ”Ž——ŒŽ˜ ‹Ž‡ ’‡ ‘—Œ™Œ ’‡ ——™“‡ Œ”Ž——Œ’
+804#£€Œ’ ÖŒŽ ŒŽ‘Œ‹Œ§ Œ”§——
+805#£ç‘••Ž
+806#£‡–†‹•’™‡˜
+807#£Œ™Œ§’
+808#£å•ŒŽ‡
 809#£‹ÖŒŽ–§ŠŽ•
-810#£‹ÖŒŽ–§ŠŽ• ˜ «Y‹‹–‡š• ™•› Word
-811#£ïŒ“–§— Ž—™Ÿ™•d•›
-812#£DŒ–§d•›
-813#£’“Œ–th’
-814#£î›’™•“Œ«y—ŒŽ˜
-815#£î‡šTh˜
+810#£‡’‡š•–† –›“§—Œ’
+811#£‘Œ˜ •Ž –›“§—ŒŽ˜ Ö•›’ ‘•’ Œ‡’‘ŒŽ —™Ž˜ –•ŒŽ‘Œ‹“’Œ˜ ™Ž“˜
+812#£Œ–§•›
+813#£’“Œ–’
+814#£î›’™•“Œ—ŒŽ˜
+815#£î‡š˜
 816#£è•‹†–Ž“•˜
-817#£Ì‘th——‡
-818#£Íd•‹–†š
+817#£Ì‘——‡
+818#£Í•‹–†š
 819#£éŒ™ŽŸ
 820#£ç–’™ŽŸ
-821#£íŠ«Y’
+821#£íŠ’
 822#£è†•˜
 823#£ì–Ž—“•§
 824#£OK
-825#£ç›–th’
-826#£DŒ–§“Œ’Œ
+825#£ç›–’
+826#£Œ–§“Œ’Œ
 827#£€–‡—™–ŽŸ™™‡
 828#£î™‡“†™‡
-829#£‚ Œ”§—— ‘«y’Œ™‡Ž ‹Ž‡
-830#£‚ Œ”§—— ŒdŽ‘«yŒ™‡Ž ‡–Ž“™Ž† ‹Ž‡
-831#£‡dŸ WordMat.
+829#£‚ Œ”§—— ‘’Œ™‡Ž ‹Ž‡
+830#£‚ Œ”§—— ŒŽ‘Œ™‡Ž ‡–Ž“™Ž† ‹Ž‡
+831#£‡Ÿ WordMat.
 832#£èŒŽ™•›–‹§Œ˜
 833#£”§——
-834#£”Ž—th—ŒŽ˜
+834#£”Ž——ŒŽ˜
 835#£î“Œ§‡
-836#£€Ž‡’«y—“‡™‡
+836#£€Ž‡’—“‡™‡
 837#£ï§™‘•˜
-838#£d‡’‡š•–†
-839#£ì —«y’Œ™•˜ ›d•‘•‹Ž—“Ÿ˜ d•› ‹§’Œ™‡Ž ‡–Ž‰th˜ “d•–Œ§ ’‡ ŠŽ‡–«Y—ŒŽ d•‘«y. é«Y‘Œ™Œ ’‡ Œd‡’‡‘†‰Œ™Œ ‡–Ž“™Ž†;
-840#£x–—Ž“•d•ŽTh—™Œ ™• ‡’•’ŽŸ d ˜ ŠŽ‡š•–ŽŸ d
-841#£ì —›“‰•‘Ž—“Ÿ˜ dy/dx “d•–Œ§ ‡’•’Ž† ’‡ Ö–—Ž“•d•ŽŒ§ “Ÿ’• “Œ «Y’‡ ŒŽŠŽŸ ŠŽ‡š•–ŽŸ d (\dd) Th ™• —«y“‰•‘• ‹Ž‡ “Œ–Ž«Y˜ d‡–‡‹th‹•›˜ (\partial). †’ ŠŒ’ dŒ–Ž“«Y’Œ™Œ ’‡ —›‹Ö«YŒ™‡Ž ™• d/dx “Œ †‘‘Œ˜ Œš–†—ŒŽ˜, “d•–Œ§™Œ ’‡ Ö–—Ž“•d•ŽTh—Œ™Œ ‡›™Th’ ™ –«y“Ž—, ‡th˜ Œ§’‡Ž dŽ• ‹–Th‹•–• ’‡ d‘™–•‘•‹Th—Œ™Œ dy/dx Ö–—Ž“•d•Žth’™‡˜ ™• ‡’•’ŽŸ d.
-842#£D‡‘Ž’Š–Ÿ“— ‡•–Ž—“«Y’ ‡dŸ ™• Ö–Th—™
-843#£d§‘›— —›—™Th“‡™•˜ ŠŽ‡š•–Žth’ Œ”Ž—th—Œ’ ‡–Ž“™Ž†
-844#£D‡–•›—Ž†—™Œ —š†‘“‡
+838#£‡’‡š•–†
+839#£ì —’Œ™•˜ ›•‘•‹Ž—“Ÿ˜ •› ‹§’Œ™‡Ž ‡–Ž‰˜ “•–Œ§ ’‡ ŠŽ‡–—ŒŽ •‘. é‘Œ™Œ ’‡ Œ‡’‡‘†‰Œ™Œ ‡–Ž“™Ž†;
+840#£–—Ž“••Ž—™Œ ™• ‡’•’ŽŸ d ˜ ŠŽ‡š•–ŽŸ d
+841#£ì —›“‰•‘Ž—“Ÿ˜ dy/dx “•–Œ§ ‡’•’Ž† ’‡ Ö–—Ž“••ŽŒ§ “Ÿ’• “Œ ’‡ ŒŽŠŽŸ ŠŽ‡š•–ŽŸ d (\dd)  ™• —“‰•‘• ‹Ž‡ “Œ–Ž˜ ‡–‡‹‹•›˜ (\partial). †’ ŠŒ’ Œ–Ž“’Œ™Œ ’‡ —›‹ÖŒ™‡Ž ™• d/dx “Œ †‘‘Œ˜ Œš–†—ŒŽ˜, “•–Œ§™Œ ’‡ Ö–—Ž“••Ž—Œ™Œ ‡›™’ ™ –“Ž—, ‡˜ Œ§’‡Ž Ž• ‹–‹•–• ’‡ ‘™–•‘•‹—Œ™Œ dy/dx Ö–—Ž“••Ž’™‡˜ ™• ‡’•’ŽŸ d.
+842#£‡‘Ž’Š–Ÿ“— ‡•–Ž—“’ ‡Ÿ ™• Ö–—™
+843#£§‘›— —›—™“‡™•˜ ŠŽ‡š•–Ž’ Œ”Ž——Œ’ ‡–Ž“™Ž†
+844#£‡–•›—Ž†—™Œ —š†‘“‡
 845#£íŒ™‡‰‘™Ÿ˜
-846#£D–•ŒŽŠ•d•§—
-847#£‚ ŠŽ‡š•–ŽTh Œ”§—— d–«YdŒŽ ’‡ «YÖŒŽ ™ “•–šTh y'=...  ‹Ž‡ ’‡ ‘›Œ§ ‡–Ž“™Ž†
-848#£ï• •›“d§ ‡™Œ‰†¾ŒŽ ™• GeoGebra 5 —Œ Ç‘Th¿ŒŽ˜È —™• Mac —‡˜. î™ —›’«YÖŒŽ‡, ‡ ‡•Š‹Œ§™Œ —™ –«y“Ž—.
-849#£ï• GeoGebra 5 ŠŒ’ «YÖŒŽ Œ‹‡™‡—™‡Œ§ d‘Th–˜. æ‡™†‘”
-850#£ï• GeoGebra ŠŒ’ «YÖŒŽ Œ‹‡™‡—™‡Œ§ ‡Ÿ“‡. DŒ–Ž“«Y’Œ™Œ ’‡ •‘•‘–Œ§  ‘Th¿.
+846#£–•ŒŽŠ••§—
+847#£‚ ŠŽ‡š•–Ž Œ”§—— –ŒŽ ’‡ ÖŒŽ ™ “•–š y'=...  ‹Ž‡ ’‡ ‘›Œ§ ‡–Ž“™Ž†
+848#£ï• •›“§ ‡™Œ‰†¾ŒŽ ™• GeoGebra 5 —Œ Ç‘¿ŒŽ˜È —™• Mac —‡˜. î™ —›’ÖŒŽ‡, ‡ ‡•Š‹Œ§™Œ —™ –“Ž—.
+849#£ï• GeoGebra 5 ŠŒ’ ÖŒŽ Œ‹‡™‡—™‡Œ§ ‘–˜. æ‡™†‘”
+850#£ï• GeoGebra ŠŒ’ ÖŒŽ Œ‹‡™‡—™‡Œ§ ‡Ÿ“‡. Œ–Ž“’Œ™Œ ’‡ •‘•‘–Œ§  ‘¿.
 851#£î›’ŒÖ§¾
-852#£€Ž‡‹–‡šTh d‡‘Ž†˜ «YŠ•—˜
-853#£ÌŽ‡ ’‡ Œ§’‡Ž Š›’‡™Th  ‘Th¿ ™˜ ’«Y‡˜ «YŠ•—˜, d–«YdŒŽ ’‡ ‡™‡–‹Œ§  d‡‘Ž† «YŠ•— —™‡ î™•ŽÖŒ§‡ ‘Th¿˜.\r\n 1. é‡ d–«YdŒŽ ’‡ ‡’•§”ŒŽ «Y’‡ d‡–†›–• d•› •’•“†¾Œ™‡Ž 'Allow access to file'.\r\n2. æ†’™Œ ‘Ž —™• 'dŽ‘•‹Th...' \r\n3. æ†’™Œ ‘Ž —™’ ŒdŽ‘•‹Th "Öth–— d–Ÿ—‰‡—˜" "
-854#£‚ ‘Th¿ —™‡“†™—Œ
-855#£D–«YdŒŽ ’‡ ŒdŽ™–«Y¿Œ™Œ ™’ d–Ÿ—‰‡— —Œ GeoGebra.app ‹Ž‡ ’‡ —›’ŒÖŽ—™Œ§  Œ‹‡™†—™‡—
-856#£Ì§’Œ™‡Ž ‘Th¿ ™•› GeoGebra 5
-857#£1. ç–ÖŽ†, dŒ–Ž“«Y’Œ™Œ ’‡ ‹§’ŒŽ ‘Th¿ ™•› GeoGebra 5.\r\n2.  1Ú4 ™‡’ •‘•‘–Œ§  ‘Th¿, ‡ d–«YdŒŽ ’‡ ‡’•§”ŒŽ «Y’‡ d‡–†›–• d•› •’•“†¾Œ™‡Ž "ê‡ ŒdŽ™–«YdŒ™‡Ž  d–Ÿ—‰‡— —™• ‡–ÖŒ§•".\r\n3. æ†’™Œ ‘Ž —™• 'dŽ‘•‹Th...' \r\n4. æ†’™Œ ‘Ž —™’ ŒdŽ‘•‹Th "Öth–— d–Ÿ—‰‡—˜"
-858#£î™‡“‡™“«Y’•˜
-859#£‚ ŠŽ‡ŠŽ‡—§‡ ŠŽ‡ŸdŒ.\r\n\r\næ†’™Œ ‘Ž —™• •›“d§ æ‘Œ§—Ž“• ‡Ž d–•—d‡Th—™Œ ”‡’†.
-860#£€Œ’ d‡–‡Ö–Th—‡™Œ d–Ÿ—‰‡— —™• GeGebra. æ†’™Œ ‘Ž —™• Çd‡’†‘¿È ‹Ž‡ ’‡ d–•—d‡Th—Œ™Œ ”‡’†.
-861#£‚ ‘Th¿ Œ§’‡Ž ‡–‹Th. ‘«Y‹”™Œ —™• Safari Œ†’ š‡§’Œ™‡Ž Ÿ™Ž ›d†–ÖŒŽ ‘Th¿ —Œ Œ”«Y‘Ž”. íd•–Œ§™Œ ’‡ †’Œ™Œ ‘Ž —™• •›“d§ ŠŽ‡•dTh Œ†’ ŠŒ’ ›d†–ÖŒŽ d–Ÿ•Š•˜.
-862#£îš†‘“‡ ‡™† ™ ‘Th¿ ™•› GeoGebra
-863#£€Œ’ Th™‡’ Š›’‡™Th  Œ«y–Œ— ™•› ‡–ÖŒ§•› —™Ž˜ ‘Th¿ŒŽ˜.\r\níd•–Œ§™Œ ’‡ †’Œ™Œ ‘Ž —™• Çd‡’†‘¿È —™• †™ “«Y–•˜, Œ†’ «Y‘Œ™Œ ™• WordMat ’‡ •Ž™†”ŒŽ ”‡’†.
-864#£€th—™Œ †ŠŒŽ‡ —™• GeoGebra
-865#£é‡ d–«YdŒŽ ™th–‡ ’‡ ‡’•§”ŒŽ «Y’‡ d‡–†›–• d•› •’•“†¾Œ™‡Ž "ê‡ ŒdŽ™–«YdŒ™‡Ž  d–Ÿ—‰‡— —™• ‡–ÖŒ§•".\r\n\r\n1. æ†’™Œ ‘Ž —™• 'dŽ‘•‹Th...' \r\n2. æ†’™Œ ‘Ž —™’ ŒdŽ‘•‹Th "Öth–— d–Ÿ—‰‡—˜"
-866#£íŒ™‡§’— ™•› GeoGebra —Œ Œš‡–“•‹«Y˜
-867#£¼—˜ Ö–ŒŽ‡—™Œ§ ’‡ Šth—Œ™Œ †ŠŒŽ‡ ‹Ž‡ "î›“‰†’™‡ —›—™Th“‡™•˜", ‡d‘th˜ †’™Œ ‘Ž —™• OK.
+852#£€Ž‡‹–‡š ‡‘Ž†˜ Š•—˜
+853#£ÌŽ‡ ’‡ Œ§’‡Ž Š›’‡™  ‘¿ ™˜ ’‡˜ Š•—˜, –ŒŽ ’‡ ‡™‡–‹Œ§  ‡‘Ž† Š•— —™‡ î™•ŽÖŒ§‡ ‘¿˜.\r\n 1. é‡ –ŒŽ ’‡ ‡’•§”ŒŽ ’‡ ‡–†›–• •› •’•“†¾Œ™‡Ž 'Allow access to file'.\r\n2. æ†’™Œ ‘Ž —™• 'Ž‘•‹...' \r\n3. æ†’™Œ ‘Ž —™’ ŒŽ‘•‹ "Ö–— –Ÿ—‰‡—˜" "
+854#£‚ ‘¿ —™‡“†™—Œ
+855#£–ŒŽ ’‡ ŒŽ™–¿Œ™Œ ™’ –Ÿ—‰‡— —Œ GeoGebra.app ‹Ž‡ ’‡ —›’ŒÖŽ—™Œ§  Œ‹‡™†—™‡—
+856#£Ì§’Œ™‡Ž ‘¿ ™•› GeoGebra 5
+857#£1. ç–ÖŽ†, Œ–Ž“’Œ™Œ ’‡ ‹§’ŒŽ ‘¿ ™•› GeoGebra 5.\r\n2. ™‡’ •‘•‘–Œ§  ‘¿, ‡ –ŒŽ ’‡ ‡’•§”ŒŽ ’‡ ‡–†›–• •› •’•“†¾Œ™‡Ž "ê‡ ŒŽ™–Œ™‡Ž  –Ÿ—‰‡— —™• ‡–ÖŒ§•".\r\n3. æ†’™Œ ‘Ž —™• 'Ž‘•‹...' \r\n4. æ†’™Œ ‘Ž —™’ ŒŽ‘•‹ "Ö–— –Ÿ—‰‡—˜"
+858#£î™‡“‡™“’•˜
+859#£‚ ŠŽ‡ŠŽ‡—§‡ ŠŽ‡ŸŒ.\r\n\r\næ†’™Œ ‘Ž —™• •›“§ æ‘Œ§—Ž“• ‡Ž –•—‡—™Œ ”‡’†.
+860#£€Œ’ ‡–‡Ö–—‡™Œ –Ÿ—‰‡— —™• GeGebra. æ†’™Œ ‘Ž —™• Ç‡’†‘¿È ‹Ž‡ ’‡ –•—‡—Œ™Œ ”‡’†.
+861#£‚ ‘¿ Œ§’‡Ž ‡–‹. ‘‹”™Œ —™• Safari Œ†’ š‡§’Œ™‡Ž Ÿ™Ž ›†–ÖŒŽ ‘¿ —Œ Œ”‘Ž”. í•–Œ§™Œ ’‡ †’Œ™Œ ‘Ž —™• •›“§ ŠŽ‡• Œ†’ ŠŒ’ ›†–ÖŒŽ –Ÿ•Š•˜.
+862#£îš†‘“‡ ‡™† ™ ‘¿ ™•› GeoGebra
+863#£€Œ’ ™‡’ Š›’‡™  Œ–Œ— ™•› ‡–ÖŒ§•› —™Ž˜ ‘¿ŒŽ˜.\r\ní•–Œ§™Œ ’‡ †’Œ™Œ ‘Ž —™• Ç‡’†‘¿È —™• †™ “–•˜, Œ†’ ‘Œ™Œ ™• WordMat ’‡ •Ž™†”ŒŽ ”‡’†.
+864#£€—™Œ †ŠŒŽ‡ —™• GeoGebra
+865#£é‡ –ŒŽ ™–‡ ’‡ ‡’•§”ŒŽ ’‡ ‡–†›–• •› •’•“†¾Œ™‡Ž "ê‡ ŒŽ™–Œ™‡Ž  –Ÿ—‰‡— —™• ‡–ÖŒ§•".\r\n\r\n1. æ†’™Œ ‘Ž —™• 'Ž‘•‹...' \r\n2. æ†’™Œ ‘Ž —™’ ŒŽ‘•‹ "Ö–— –Ÿ—‰‡—˜"
+866#£íŒ™‡§’— ™•› GeoGebra —Œ Œš‡–“•‹˜
+867#£¼—˜ Ö–ŒŽ‡—™Œ§ ’‡ Š—Œ™Œ †ŠŒŽ‡ ‹Ž‡ "î›“‰†’™‡ —›—™“‡™•˜", ‡‘˜ †’™Œ ‘Ž —™• OK.
 868#£ü™•Ž“•˜
-869#£ï• GeoGebra 5 Œ§’‡Ž d‘«Y•’ Œ‹‡™Œ—™“«Y’•.\r\næ†’™Œ ‘Ž —™• 'î›’«YÖŒŽ‡' ‹Ž‡ ’‡ ‡’•§”Œ™Œ ™• GeoGebra.
-870#£Íd†–Ö•›’ —Œ‘§ŠŒ˜ d•› Œ§’‡Ž 0
-871#£D–«YdŒŽ d–th™‡ ’‡ ŒdŽ‘«Y”Œ™Œ «Y’‡’ d§’‡‡
-872#£d§‘Ž— ŒŽ—‡‹‹Th˜ ‡–Ž““«Y’˜ Œ”§——˜ —™•’ d§’‡‡
-873#£ï• GeoGebra «YÖŒŽ Ö–—Ž“•d•ŽŒ§ ‹Ž‡ ™’ Œd§‘›— ™•› —›—™Th“‡™•˜ Œ”Ž—th—Œ’. §’‡Ž ‡‰«Y‰‡Ž• ‡’ “d•–•«y’ ’‡ ›d†–”•›’ ‘«y—ŒŽ˜. î›’Ž—™†™‡Ž ’‡ Š•Ž“†—Œ™Œ “Ž‡ †‘‘ “«Y•Š•. D.Ö. “«Y‹Ž—™‡ Th ‡–Ž“™Ž†/‹–‡šŽ†
-874#£ç›™Th  ‘ŒŽ™•›–‹§‡ ŠŒ’ ›d•—™–§¾Œ™‡Ž ‡dŸ ™• GeoGebra. €•Ž“†—™Œ ™’ Œd§‘›— Œ”Ž—th—Œ’
-875#£‚ Œ”§—— ‘«yŒ ‹–‡šŽ† “Œ ™• GeoGebra:
-876#£ì ‡–Ž“Ÿ˜ ™’ d‡–Œ’«Y—Œ’ ŠŒ’ ™‡Ž–Ž†¾ŒŽ —™’ «Yš–‡—
-877#£îš†‘“‡™‡ –«y“Ž—˜
-878#£üÖŒ™Œ “Ž‡ Œ—š‡‘“«Y’ –«y“Ž— —™• Word.\r\nî™• “Œ’•«y ”Ž—th—ŒŽ˜, “Œ™‡‰Œ§™Œ ‡dŸ ‘‡™«Y” —Œ Unicode.
+869#£ï• GeoGebra 5 Œ§’‡Ž ‘•’ Œ‹‡™Œ—™“’•.\r\næ†’™Œ ‘Ž —™• 'î›’ÖŒŽ‡' ‹Ž‡ ’‡ ‡’•§”Œ™Œ ™• GeoGebra.
+870#£Í†–Ö•›’ —Œ‘§ŠŒ˜ •› Œ§’‡Ž 0
+871#£–ŒŽ –™‡ ’‡ ŒŽ‘”Œ™Œ ’‡’ §’‡‡
+872#£§‘Ž— ŒŽ—‡‹‹˜ ‡–Ž““’˜ Œ”§——˜ —™•’ §’‡‡
+873#£ï• GeoGebra ÖŒŽ Ö–—Ž“••ŽŒ§ ‹Ž‡ ™’ Œ§‘›— ™•› —›—™“‡™•˜ Œ”Ž——Œ’. §’‡Ž ‡‰‰‡Ž• ‡’ “•–•’ ’‡ ›†–”•›’ ‘—ŒŽ˜. î›’Ž—™†™‡Ž ’‡ Š•Ž“†—Œ™Œ “Ž‡ †‘‘ “•Š•. .Ö. “‹Ž—™‡  ‡–Ž“™Ž†/‹–‡šŽ†
+874#£ç›™  ‘ŒŽ™•›–‹§‡ ŠŒ’ ›•—™–§¾Œ™‡Ž ‡Ÿ ™• GeoGebra. €•Ž“†—™Œ ™’ Œ§‘›— Œ”Ž——Œ’
+875#£‚ Œ”§—— ‘Œ ‹–‡šŽ† “Œ ™• GeoGebra:
+876#£ì ‡–Ž“Ÿ˜ ™’ ‡–Œ’—Œ’ ŠŒ’ ™‡Ž–Ž†¾ŒŽ —™’ š–‡—
+877#£îš†‘“‡™‡ –“Ž—˜
+878#£üÖŒ™Œ “Ž‡ Œ—š‡‘“’ –“Ž— —™• Word.\r\nî™• “Œ’• ”Ž——ŒŽ˜, “Œ™‡‰Œ§™Œ ‡Ÿ ‘‡™” —Œ Unicode.
 879#£î›’™‡™ŽŸ ‘†•˜ - í ——™† “‡“‡™Ž†.
-880#£üÖŒ™Œ ŒŽ—‡‹†‹ŒŽ †™Ž d•› ŠŒ’ Œ§’‡Ž ——™Th “‡“‡™ŽTh —“ŒŽ•‹–‡š§‡.\r\nï• —š†‘“‡ —ÖŒ™§¾Œ™‡Ž “Œ “Ž‡ “Œ™‡‰‘™Th:
-881#£ÌŽ‡ d‡–†ŠŒŽ‹“‡, ‡›™Ÿ “d•–Œ§ ’‡ —›“‰‡§’ŒŽ ŒdŒŽŠTh «YÖŒ™Œ ŠŒ§™ —Œ «Y’‡’ ‡–Ž“Ÿ. ï• \r\nK_0 ‡ d–«YdŒŽ ’‡ ‡’™Ž‡™‡—™‡Œ§ “Œ «Y’‡’ ‡–Ž“Ÿ ‡Ž ŸÖŽ “Œ d.Ö. 5000_0. çd‘† d–«YdŒŽ ’‡ dŒŽ 5000.
-882#£€Œ’ “d•–•«y’ ’‡ ›d†–Ö•›’ Š«y• §—‡ —“Œ§‡ —Œ “Ž‡ Œ”§——
-883#£ï• —«y—™“‡ Œ”Ž—th—Œ’ ‘«yŒ “Œ ™• GeoGebra:
-884#£ì ›d•‘•‹Ž—“Ÿ˜ ŠŽ‡ŸdŒ ‡th˜ Ö–ŒŽ†—™Œ d•‘«y˜ Ö–Ÿ’•˜. íŒ–Ž«Y˜ š•–«Y˜ “d•–Œ§ ’‡ —‡˜ ‰•Th—ŒŽ ’‡ Š•Ž“†—Œ™Œ ™•’ ›d•‘•‹Ž—“Ÿ “Œ ™’ ŒdŽ‘•‹Th Çç–Ž“™ŽThÈ ‡’™§ ‹Ž‡ ç–Ž‰Th˜ Th ç›™Ÿ“‡™
-885#£€Œ’ Œ§’‡Ž Š›’‡™Th  —«y’ŠŒ— —™• Maxima. é«Y‘Œ™Œ ’‡ Ö–—Ž“•d•ŽTh—Œ™Œ ™ “«Y•Š• 'WSH';\r\n(ç›™Th  ŒdŽ‘•‹Th ‰–§—Œ™‡Ž —™’ Œ’Ÿ™™‡ ‹Ž‡ d–•Ö–“«Y’•›˜ —™Ž˜ „›“§—ŒŽ˜)
-886#£ï• WordMath ŠŒ’ “d•–Œ§ ’‡ ŒdŽ•Ž’’Th—ŒŽ “Œ ™• GeoGebra. ç›™Ÿ —›“‰‡§’ŒŽ dŽ‡’th˜ ŒdŒŽŠTh ŠŒ’ «YÖŒ™Œ •–§—ŒŽ ™Ž˜ ‡d‡Ž™•«y“Œ’Œ˜ –›“§—ŒŽ˜ ‡—š‡‘Œ§‡˜ —™• Safari. æ†’™Œ ‘Ž —™• ok ‹Ž‡ ’‡ ‘†‰Œ™Œ ™Ž˜ •Š‹§Œ˜
-887#£d§‘›— ‡–Ž“™Žth’
-888#£ï• WordMat ŠŒ’ “dŸ–Œ—Œ ’‡ Œ’™•d§—ŒŽ ™’ Œ‹‡™†—™‡— Maxima. D–•—d‡Th—™Œ ’‡ Œd‡’Œ‹‡™‡—™Th—Œ™Œ
-889#£îš†‘“‡ —«y’ŠŒ—˜ —™• Maxima Ö–—Ž“•d•Žth’™‡˜ WSH
+880#£üÖŒ™Œ ŒŽ—‡‹†‹ŒŽ †™Ž •› ŠŒ’ Œ§’‡Ž ——™ “‡“‡™Ž —“ŒŽ•‹–‡š§‡.\r\nï• —š†‘“‡ —ÖŒ™§¾Œ™‡Ž “Œ “Ž‡ “Œ™‡‰‘™:
+881#£ÌŽ‡ ‡–†ŠŒŽ‹“‡, ‡›™Ÿ “•–Œ§ ’‡ —›“‰‡§’ŒŽ ŒŒŽŠ ÖŒ™Œ ŠŒ§™ —Œ ’‡’ ‡–Ž“Ÿ. ï• \r\nK_0 ‡ –ŒŽ ’‡ ‡’™Ž‡™‡—™‡Œ§ “Œ ’‡’ ‡–Ž“Ÿ ‡Ž ŸÖŽ “Œ .Ö. 5000_0. ç‘† –ŒŽ ’‡ ŒŽ 5000.
+882#£€Œ’ “•–•’ ’‡ ›†–Ö•›’ Š• §—‡ —“Œ§‡ —Œ “Ž‡ Œ”§——
+883#£ï• ——™“‡ Œ”Ž——Œ’ ‘Œ “Œ ™• GeoGebra:
+884#£ì ›•‘•‹Ž—“Ÿ˜ ŠŽ‡ŸŒ ‡˜ Ö–ŒŽ†—™Œ •‘˜ Ö–Ÿ’•˜. íŒ–Ž˜ š•–˜ “•–Œ§ ’‡ —‡˜ ‰•—ŒŽ ’‡ Š•Ž“†—Œ™Œ ™•’ ›•‘•‹Ž—“Ÿ “Œ ™’ ŒŽ‘•‹ Çç–Ž“™ŽÈ ‡’™§ ‹Ž‡ ç–Ž‰˜  ç›™Ÿ“‡™
+885#£€Œ’ Œ§’‡Ž Š›’‡™  —’ŠŒ— —™• Maxima. é‘Œ™Œ ’‡ Ö–—Ž“••Ž—Œ™Œ ™ “•Š• 'WSH';\r\n(ç›™  ŒŽ‘•‹ ‰–§—Œ™‡Ž —™’ Œ’Ÿ™™‡ ‹Ž‡ –•Ö–“’•›˜ —™Ž˜ „›“§—ŒŽ˜)
+886#£ï• WordMath ŠŒ’ “•–Œ§ ’‡ ŒŽ•Ž’’—ŒŽ “Œ ™• GeoGebra. ç›™Ÿ —›“‰‡§’ŒŽ Ž‡’˜ ŒŒŽŠ ŠŒ’ ÖŒ™Œ •–§—ŒŽ ™Ž˜ ‡‡Ž™•“Œ’Œ˜ –›“§—ŒŽ˜ ‡—š‡‘Œ§‡˜ —™• Safari. æ†’™Œ ‘Ž —™• ok ‹Ž‡ ’‡ ‘†‰Œ™Œ ™Ž˜ •Š‹§Œ˜
+887#£§‘›— ‡–Ž“™Ž’
+888#£ï• WordMat ŠŒ’ “Ÿ–Œ—Œ ’‡ Œ’™•§—ŒŽ ™’ Œ‹‡™†—™‡— Maxima. –•—‡—™Œ ’‡ Œ‡’Œ‹‡™‡—™—Œ™Œ
+889#£îš†‘“‡ —’ŠŒ—˜ —™• Maxima Ö–—Ž“••Ž’™‡˜ WSH
 890#£î™‡“‡™† ‡›™Ÿ“‡™‡ —™•
 891#£€Œ’ ™‡ ‡™†šŒ–Œ. î™‡“‡™†.
-892#£‚ Œ’™•‘Th ŠŽ‡ŸdŒ “Œ™†
-893#£é‡ «Y‘‡™Œ ’‡ Š•Ž“†—Œ™Œ ”‡’† ‡Ž dŸ—• ‡Ž–Ÿ «Y‘Œ™Œ ’‡ dŒ–Ž“«Y’Œ™Œ. (ŠŒ›™Œ–Ÿ‘Œd™‡) ì ›d•‘•‹Ž—™Th˜ ‡ ‘ŒŽŠth—ŒŽ ‹Ž‡ ™• Ö–Ÿ’• ‡’‡“•’Th˜.
+892#£‚ Œ’™•‘ ŠŽ‡ŸŒ “Œ™†
+893#£é‡ ‘‡™Œ ’‡ Š•Ž“†—Œ™Œ ”‡’† ‡Ž Ÿ—• ‡Ž–Ÿ ‘Œ™Œ ’‡ Œ–Ž“’Œ™Œ. (ŠŒ›™Œ–Ÿ‘Œ™‡) ì ›•‘•‹Ž—™˜ ‡ ‘ŒŽŠ—ŒŽ ‹Ž‡ ™• Ö–Ÿ’• ‡’‡“•’˜.
 894#£îš†‘“‡ —™•’ •–Ž—“Ÿ
-895#£Íd†–ÖŒŽ «Y’‡ —š†‘“‡ —«y’™‡”˜ d•› —ÖŒ™§¾Œ™‡Ž “Œ «Y’‡ •‘•‘Th–“‡. é›“Th‡™Œ ™• dx —™• ™«Y‘•˜;
-896#£íTh•˜ Œ”ŸŠ•›:
-897#£æ†’™Œ ‘Ž —™• •›“d§ êçƒ ‹Ž‡ ’‡ ŒŽ—‡‹†‹Œ™Œ Ÿ‘•›˜ ™•›˜ Ö‡–‡™Th–Œ˜ —™• Word. (D–•ŒŽŠ•d•§—: íd•–Œ§ ’‡ ŒdŽ‰–‡Š«y’ŒŽ ™• Word Th ‡Ÿ“‡ ‡Ž ’‡ d–•‡‘«Y—ŒŽ ŠŽ‡•dTh ‘ŒŽ™•›–‹§‡˜ ™•› Word). \r\n æ†’™Œ ‘Ž —™• •›“d§ ìxƒ ‹Ž‡ ’‡ ŒŽ—‡‹†‹Œ™Œ “Ÿ’• ™•›˜ d–th™•›˜ 1000 Ö‡–‡™Th–Œ˜.
-898#£üÖŒ™Œ •–§—ŒŽ d•‘«y ‘§‹Œ˜ d‡–‡“«Y™–•›˜ ‹Ž‡ ™ —›’†–™—:
-899#£ç›™Ÿ “d•–Œ§ ’‡ —›“‰‡§’ŒŽ ŒdŒŽŠTh «YÖŒ™Œ Ö–—Ž“•d•ŽTh—ŒŽ Ÿ““‡™‡ ‡’™§ ‹Ž‡ Œ–™“‡™Ž† ‹Ž‡ ’‡ ŠŽ‡Ö–§—Œ™Œ ™Ž˜ d‡–‡“«Y™–•›˜. (ç’™§Œ™‡, “d•–Œ§™Œ ’‡ d–•—«Y—Œ™Œ «Y’‡ Œ’Ÿ ŠŽ†—™“‡ —™ “§‡ d‘Œ›–† ™•› Ÿ““‡™•˜.)
-900#£î›’ThŒ˜ ‘«y—˜:
-901#£D–«YdŒŽ d–th™‡ ’‡ ŒdŽ‘«Y”Œ™Œ “Ž‡ ‘§—™‡, d.Ö. [1; 2; 3]
-902#£¼—˜ «YÖŒ™Œ ‡’™‡‘‘†”ŒŽ n ‡Ž r —Œ K(n, r);
-903#£ç–ÖŒ§• thŠŽ‡
-904#£š‡–“•‹Th ‡–ÖŒ§•› thŠŽ‡
-905#£çd•Š•ÖTh dŒŠ§’ thŠŽ‡
-906#£ï• Œ§“Œ’• —™• ‡–ÖŒ§• thŠŽ‡ Œ™Œ‘Œ§™‡Ž —Œ Maxima —Œ †Œ Œ§’—. ÌŽ‡ d‡–†ŠŒŽ‹“‡, “d•–Œ§™Œ ’‡ ™• Ö–—Ž“•d•ŽTh—Œ™Œ ‹Ž‡ ’‡ •–§—Œ™Œ —›’‡–™Th—ŒŽ˜ d•› «Y‘Œ™Œ ’‡ «YÖŒ™Œ d†’™‡ ŠŽ‡«Y—Ž“Œ˜ —™• WordMat Th ‹Ž‡ ’‡ ‡‘‘†”Œ™Œ –›“§—ŒŽ˜ —™• Maxima. ‚ Ö–Th— ™•› ‡–ÖŒ§•› thŠŽ‡ ‡ †’ŒŽ ™•›˜ ›d•‘•‹Ž—“•«y˜ ‘§‹• dŽ• ‡–‹•«y˜. \nï‡ dŒŠ§‡ thŠŽ‡ “d•–•«y’ ’‡ ŒŽ—‡Ö•«y’ “«Y— ™•› “Œ’•«y •–Ž—“•«y ‡Ž Œ§’‡Ž dŒŠ§‡ —™• «Y‹‹–‡š• ™•› Word Ÿd•› “d•–Œ§™Œ ’‡ ŒŽ—‡‹†‹Œ™Œ ™•’ “«Y‹Ž—™• thŠŽ‡, • •d•§•˜ Œ™Œ‘Œ§™‡Ž —Œ †Œ ›d•‘•‹Ž—“Ÿ. ì thŠŽ‡˜ —™• ‡–ÖŒ§• thŠŽ‡ ‡Ž ™‡ dŒŠ§‡ thŠŽ‡ ‡d•—™«Y‘‘•’™‡Ž ‡dŒ›Œ§‡˜ —™• Maxima Ö–§˜ ŒdŒ”Œ–‹‡—§‡. ìd•Ž•ŠThd•™Œ —š†‘“‡ thŠŽ‡ ‡ d–•‡‘«Y—ŒŽ ™’ ‡d•™›Ö§‡ ™•› WordMat —Œ Ÿ‘•›˜ ™•›˜ ›d•‘•‹Ž—“•«y˜, •dŸ™Œ d–•—«Y”™Œ. ç’‡™–«Y”™Œ —™• “Œ’•«y —™’ dŒ–Ž•ÖTh å•ThŒŽ‡ > ‹ÖŒŽ–§ŠŽ• > å•ThŒŽ‡ “Œ Œ’™•‘«Y˜ Maxima, ‹Ž‡ ——™Th —«y’™‡” Maxima.
-907#£Ž—‡‹†‹Œ™Œ ™•’ ŠŽŸ Maxima ŒŠth
-908#£€Œ’ «YÖŒ™Œ Œ’Œ–‹•d•ŽTh—ŒŽ ™‡ dŒŠ§‡ thŠŽ‡ —™Ž˜ "„›“§—ŒŽ˜ > thŠŽ‡". ï• dŒŠ§• thŠŽ‡ ŒŽ—†‹Œ™‡Ž, ‡‘‘† ŠŒ’ ‡ Ö–—Ž“•d•ŽŒ§ —Œ ›d•‘•‹Ž—“•«y˜ “«YÖ–Ž ’‡ Œ’Œ–‹•d•ŽŒ§.
-909#£æthŠŽ‡˜
-910#£€Œ’ Th™‡’ Š›’‡™Th  ŒŽ—‡‹‹Th Œ’Ÿ˜ dŒŠ§•› thŠŽ‡ ŒŠth.
-911#£ï‡ dŒŠ§‡ ‡™Œ«y›’—˜ “d•–•«y’ ’‡ —ÖŒŠŽ‡—™•«y’ “Ÿ’• ‹Ž‡ ŠŽ‡š•–Ž«Y˜ Œ”Ž—th—ŒŽ˜ 1˜ ™†”˜ “Œ ™ “•–šTh y'=...
-912#£‚ –«y“Ž— ™•› WordMat «YÖŒŽ –›“Ž—™Œ§ ’‡ ›d•‘•‹§¾Œ™‡Ž —Œ “•§–Œ˜. ç›™Th Œ§’‡Ž  d–ŸŒ—;
-913#£€Œ’ ŒdŽ™–«YdŒ™‡Ž  Ö–Th— ™•› ™Œ‘Œ—™Th ‡d«Y‘•› —Œ •’Ÿ“‡™‡ •–Ž—“th’.
-914#£€Œ’ ŒdŽ™–«YdŒ™‡Ž  Ö–Th— ‡–Ž“™Žth’ Ö‡–‡™Th–’ —Œ •’Ÿ“‡™‡ •–Ž—“th’.
-915#£üÖŒ™Œ •–§—ŒŽ d†–‡ d•‘‘«Y˜ d‡–‡“«Y™–•›˜ ‹Ž‡ ™ —›’†–™—:
+895#£Í†–ÖŒŽ ’‡ —š†‘“‡ —’™‡”˜ •› —ÖŒ™§¾Œ™‡Ž “Œ ’‡ •‘•‘–“‡. é›“‡™Œ ™• dx —™• ™‘•˜;
+896#£í•˜ Œ”ŸŠ•›:
+897#£æ†’™Œ ‘Ž —™• •›“§ êçƒ ‹Ž‡ ’‡ ŒŽ—‡‹†‹Œ™Œ Ÿ‘•›˜ ™•›˜ Ö‡–‡™–Œ˜ —™• Word. (–•ŒŽŠ••§—: í•–Œ§ ’‡ ŒŽ‰–‡Š’ŒŽ ™• Word  ‡Ÿ“‡ ‡Ž ’‡ –•‡‘—ŒŽ ŠŽ‡• ‘ŒŽ™•›–‹§‡˜ ™•› Word). \r\n æ†’™Œ ‘Ž —™• •›“§ ìƒ ‹Ž‡ ’‡ ŒŽ—‡‹†‹Œ™Œ “Ÿ’• ™•›˜ –™•›˜ 1000 Ö‡–‡™–Œ˜.
+898#£üÖŒ™Œ •–§—ŒŽ •‘ ‘§‹Œ˜ ‡–‡“™–•›˜ ‹Ž‡ ™ —›’†–™—:
+899#£ç›™Ÿ “•–Œ§ ’‡ —›“‰‡§’ŒŽ ŒŒŽŠ ÖŒ™Œ Ö–—Ž“••Ž—ŒŽ Ÿ““‡™‡ ‡’™§ ‹Ž‡ Œ–™“‡™Ž† ‹Ž‡ ’‡ ŠŽ‡Ö–§—Œ™Œ ™Ž˜ ‡–‡“™–•›˜. (ç’™§Œ™‡, “•–Œ§™Œ ’‡ –•——Œ™Œ ’‡ Œ’Ÿ ŠŽ†—™“‡ —™ “§‡ ‘Œ›–† ™•› Ÿ““‡™•˜.)
+900#£î›’Œ˜ ‘—˜:
+901#£–ŒŽ –™‡ ’‡ ŒŽ‘”Œ™Œ “Ž‡ ‘§—™‡, .Ö. [1; 2; 3]
+902#£¼—˜ ÖŒ™Œ ‡’™‡‘‘†”ŒŽ n ‡Ž r —Œ K(n, r);
+903#£ç–ÖŒ§• ŠŽ‡
+904#£š‡–“•‹ ‡–ÖŒ§•› ŠŽ‡
+905#£ç•Š•Ö ŒŠ§’ ŠŽ‡
+906#£ï• Œ§“Œ’• —™• ‡–ÖŒ§• ŠŽ‡ Œ™Œ‘Œ§™‡Ž —Œ Maxima —Œ †Œ Œ§’—. ÌŽ‡ ‡–†ŠŒŽ‹“‡, “•–Œ§™Œ ’‡ ™• Ö–—Ž“••Ž—Œ™Œ ‹Ž‡ ’‡ •–§—Œ™Œ —›’‡–™—ŒŽ˜ •› ‘Œ™Œ ’‡ ÖŒ™Œ †’™‡ ŠŽ‡—Ž“Œ˜ —™• WordMat  ‹Ž‡ ’‡ ‡‘‘†”Œ™Œ –›“§—ŒŽ˜ —™• Maxima. ‚ Ö–— ™•› ‡–ÖŒ§•› ŠŽ‡ ‡ †’ŒŽ ™•›˜ ›•‘•‹Ž—“•˜ ‘§‹• Ž• ‡–‹•˜. \nï‡ ŒŠ§‡ ŠŽ‡ “•–•’ ’‡ ŒŽ—‡Ö•’ “— ™•› “Œ’• •–Ž—“• ‡Ž Œ§’‡Ž ŒŠ§‡ —™• ‹‹–‡š• ™•› Word Ÿ•› “•–Œ§™Œ ’‡ ŒŽ—‡‹†‹Œ™Œ ™•’ “‹Ž—™• ŠŽ‡, • ••§•˜ Œ™Œ‘Œ§™‡Ž —Œ †Œ ›•‘•‹Ž—“Ÿ. ì ŠŽ‡˜ —™• ‡–ÖŒ§• ŠŽ‡ ‡Ž ™‡ ŒŠ§‡ ŠŽ‡ ‡•—™‘‘•’™‡Ž ‡Œ›Œ§‡˜ —™• Maxima Ö–§˜ ŒŒ”Œ–‹‡—§‡. ì•Ž•Š•™Œ —š†‘“‡ ŠŽ‡ ‡ –•‡‘—ŒŽ ™’ ‡•™›Ö§‡ ™•› WordMat —Œ Ÿ‘•›˜ ™•›˜ ›•‘•‹Ž—“•˜, •Ÿ™Œ –•—”™Œ. ç’‡™–”™Œ —™• “Œ’• —™’ Œ–Ž•Ö å•ŒŽ‡ > ‹ÖŒŽ–§ŠŽ• > å•ŒŽ‡ “Œ Œ’™•‘˜ Maxima, ‹Ž‡ ——™ —’™‡” Maxima.
+907#£Ž—‡‹†‹Œ™Œ ™•’ ŠŽŸ Maxima ŒŠ
+908#£€Œ’ ÖŒ™Œ Œ’Œ–‹••Ž—ŒŽ ™‡ ŒŠ§‡ ŠŽ‡ —™Ž˜ "„›“§—ŒŽ˜ > ŠŽ‡". ï• ŒŠ§• ŠŽ‡ ŒŽ—†‹Œ™‡Ž, ‡‘‘† ŠŒ’ ‡ Ö–—Ž“••ŽŒ§ —Œ ›•‘•‹Ž—“•˜ “Ö–Ž ’‡ Œ’Œ–‹••ŽŒ§.
+909#£æŠŽ‡˜
+910#£€Œ’ ™‡’ Š›’‡™  ŒŽ—‡‹‹ Œ’Ÿ˜ ŒŠ§•› ŠŽ‡ ŒŠ.
+911#£ï‡ ŒŠ§‡ ‡™Œ›’—˜ “•–•’ ’‡ —ÖŒŠŽ‡—™•’ “Ÿ’• ‹Ž‡ ŠŽ‡š•–Ž˜ Œ”Ž——ŒŽ˜ 1˜ ™†”˜ “Œ ™ “•–š y'=...
+912#£‚ –“Ž— ™•› WordMat ÖŒŽ –›“Ž—™Œ§ ’‡ ›•‘•‹§¾Œ™‡Ž —Œ “•§–Œ˜. ç›™ Œ§’‡Ž  –ŸŒ—;
+913#£€Œ’ ŒŽ™–Œ™‡Ž  Ö–— ™•› ™Œ‘Œ—™ ‡‘•› —Œ •’Ÿ“‡™‡ •–Ž—“’.
+914#£€Œ’ ŒŽ™–Œ™‡Ž  Ö–— ‡–Ž“™Ž’ Ö‡–‡™–’ —Œ •’Ÿ“‡™‡ •–Ž—“’.
+915#£üÖŒ™Œ •–§—ŒŽ †–‡ •‘‘˜ ‡–‡“™–•›˜ ‹Ž‡ ™ —›’†–™—:

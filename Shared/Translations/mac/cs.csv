@@ -18,19 +18,19 @@
 17#£L’c
 18#£C’slov‡n’
 19#£Pri vkl‡d‡n’ se ptejte na jmŽno reference
-20#£WordMath umoznuje prov‡det matematickŽ v«ypocty v aplikaci Word. J‡dro WordMath je open source a je zdarma\r\nWordMat takŽ instaluje n‡sleduj’c’ programy: Maxima, GeoGebra, Math fonts.\r\nVolitelnŽ komponenty: GeoGebra 5, Graph, WordMath+. V’ce informac’ naleznete pod licenc’ \r\nWordMath vytvoril Mikael Sams¿e S¿rensen, Nyborg Gymnasium, EDUAP 2009-2025.
+20#£WordMath umoznuje prov‡det matematickŽ vpocty v aplikaci Word. J‡dro WordMath je open source a je zdarma\r\nWordMat takŽ instaluje n‡sleduj’c’ programy: Maxima, GeoGebra, Math fonts.\r\nVolitelnŽ komponenty: GeoGebra 5, Graph, WordMath+. V’ce informac’ naleznete pod licenc’ \r\nWordMath vytvoril Mikael Sams¿e S¿rensen, Nyborg Gymnasium, EDUAP 2009-2025.
 21#£Ke stazen’ je pripravena nov‡ verze WordMathu.\r\nNovinky: \r\n
 22#£Nyn’ budete presmerov‡ni na str‡nku stahov‡n’
 23#£Nov‡ verze
-24#£Zadejte pocet bodu, na kter«ych chcete provŽst regresi. PotŽ se vytvor’ tabulka, do kterŽ muzete vlozit svŽ body. Pokud chcete provŽst regresi, stac’ vybrat tabulku a z nab’dky vybrat pozadovanou regresi.
+24#£Zadejte pocet bodu, na kterch chcete provŽst regresi. PotŽ se vytvor’ tabulka, do kterŽ muzete vlozit svŽ body. Pokud chcete provŽst regresi, stac’ vybrat tabulku a z nab’dky vybrat pozadovanou regresi.
 25#£Nedoporucuje se prov‡det regresi u v’ce nez 200 bodu v tabulce Word. Pouzijte Excel, pokud chcete provŽst regresi v takovŽm poctu bodu
 26#£Doslo k chybe. Pravdepodobne doslo k chybe ve vstupn’ch c’slech
-27#£Mus’te vytvorit tabulku se dvema sloupci. Hodnoty x v levŽm sloupci a hodnoty y v pravŽm sloupci. P’smena se ignoruj’. Regrese se prov‡d’ na vybran«ych c’slech. Pokud nejsou vybr‡na z‡dn‡, provede se regrese u vsech c’sel v tabulce
+27#£Mus’te vytvorit tabulku se dvema sloupci. Hodnoty x v levŽm sloupci a hodnoty y v pravŽm sloupci. P’smena se ignoruj’. Regrese se prov‡d’ na vybranch c’slech. Pokud nejsou vybr‡na z‡dn‡, provede se regrese u vsech c’sel v tabulce
 28#£V techto bodech nelze provŽst regresi
 29#£Line‡rn’ regrese proveden‡ aplikac’ WordMat: $Tab
 30#£Exponenci‡ln’ regrese prov‡den‡ WordMat: $Tab
-31#£Regrese v«ykonu proveden‡ aplikac’ WordMat: $Tab
-32#£V techto bodech nelze provŽst regresi v«ykonu. Vsechna c’sla mus’ b«yt kladn‡ (a ne nulov‡).
+31#£Regrese vkonu proveden‡ aplikac’ WordMat: $Tab
+32#£V techto bodech nelze provŽst regresi vkonu. Vsechna c’sla mus’ bt kladn‡ (a ne nulov‡).
 33#£Uzivatelsky definovan‡ regrese s funkc’
 34#£v pod‡n’ WordMath
 35#£Uvedte porad’ polynomi‡ln’ regrese (1-
@@ -41,18 +41,18 @@
 40#£Funkce
 41#£Desetinn‡ c’sla
 42#£Poc‡tecn’ odhad
-43#£Presnost je nastavena velmi vysoko. Doba v«ypoctu muze b«yt velmi dlouh‡ nebo muze zpusobit chybu. Pokud to nevyjde, zkuste nizs’ nastaven’.
-44#£Presnost je nastavena pomerne vysoko. Doba v«ypoctu muze b«yt pomerne dlouh‡ nebo muze zpusobit chybu. Pokud to nevyjde, zkuste nizs’ nastaven’.
-45#£Presnost nemuze b«yt z‡porn‡. Volba kladnŽho celŽho c’sla
+43#£Presnost je nastavena velmi vysoko. Doba vpoctu muze bt velmi dlouh‡ nebo muze zpusobit chybu. Pokud to nevyjde, zkuste nizs’ nastaven’.
+44#£Presnost je nastavena pomerne vysoko. Doba vpoctu muze bt pomerne dlouh‡ nebo muze zpusobit chybu. Pokud to nevyjde, zkuste nizs’ nastaven’.
+45#£Presnost nemuze bt z‡porn‡. Volba kladnŽho celŽho c’sla
 46#£Presnost neplat’. Zvolte kladnŽ celŽ c’slo.
 47#£Um’stete kurzor do rovnice
-48#£Nen’ moznŽ prov‡det v«ypocty podle definic
-49#£V«yraz se lis’ podle WordMat.
-50#£Tento v«yraz nemohl b«yt rozlisen
+48#£Nen’ moznŽ prov‡det vpocty podle definic
+49#£Vraz se lis’ podle WordMat.
+50#£Tento vraz nemohl bt rozlisen
 51#£Stavov‡ promenn‡
 52#£Primitivn’ vlastnost je nalezena pomoc’ WordMat
-53#£V«yraz nebylo moznŽ integrovat
-54#£Doslo k chybe. Aplikace WordMat pravdepodobne nen’ spr‡vne nainstalov‡na. Zkuste ji preinstalovat, pr’padne s deaktivovan«ym antivirem. Pokud m‡ vase skola partnerstv’, muze problŽm vyresit nastaven’ "dll connection method" v c‡sti Nastaven’/PokrocilŽ
+53#£Vraz nebylo moznŽ integrovat
+54#£Doslo k chybe. Aplikace WordMat pravdepodobne nen’ spr‡vne nainstalov‡na. Zkuste ji preinstalovat, pr’padne s deaktivovanm antivirem. Pokud m‡ vase skola partnerstv’, muze problŽm vyresit nastaven’ "dll connection method" v c‡sti Nastaven’/PokrocilŽ
 55#£Pri pokusu o spusten’ aplikace Maxima doslo k chybe
 56#£Nerovnost je resena pro
 57#£podle WordMat.
@@ -79,10 +79,10 @@
 78#£PrevŽst a prej’t na dals’
 79#£Pred
 80#£Po
-81#£Z‡dn«y
+81#£Z‡dn
 82#£Zvyk
 83#£K—d pro vlozen’
-84#£Ve zb«yvaj’c’ c‡sti tohoto dokumentu nejsou z‡dnŽ rovnice k prevodu.
+84#£Ve zbvaj’c’ c‡sti tohoto dokumentu nejsou z‡dnŽ rovnice k prevodu.
 85#£Resit soustavu diferenci‡ln’ch rovnic numericky
 86#£Diferenci‡ln’ rovnice
 87#£Poc‡tecn’ hodnota
@@ -96,16 +96,16 @@
 95#£Doslo k chybe. Zkontrolujte c’sla podle xmin a xmax
 96#£Z‡dnŽ partnerstv’
 97#£Pri pokusu o vlozen’ aplikace Graph doslo k chybe. V definici muze doj’t k chybe syntaxe
-98#£Pri pokusu o vlozen’ listu aplikace Excel doslo k chybe. Pr’cinou muze b«yt predchoz’ chybovŽ ukoncen’ aplikace Excel. Zavrete vsechny otevrenŽ listy aplikace Excel a potŽ znovu otevrete aplikaci Excel, nez to budete znovu zkouset s aplikac’ WordMat.
+98#£Pri pokusu o vlozen’ listu aplikace Excel doslo k chybe. Pr’cinou muze bt predchoz’ chybovŽ ukoncen’ aplikace Excel. Zavrete vsechny otevrenŽ listy aplikace Excel a potŽ znovu otevrete aplikaci Excel, nez to budete znovu zkouset s aplikac’ WordMat.
 99#£Pri pokusu o prevod pr’kazu do syntaxe Maxima doslo k chybe.
-100#£Pri pokusu o prevod v«ystupu Maxima do syntaxe aplikace Word doslo k chybe.
+100#£Pri pokusu o prevod vstupu Maxima do syntaxe aplikace Word doslo k chybe.
 101#£Resen’ nen’ jistŽ. Muzete zkusit pouz’t i numerickŽ metody
 102#£Protoze se jedn‡ o goniometrickou rovnici, existuje nekonecne mnoho resen’. Pouze jedna z nich je uvedena
 103#£Vsechna resen’ nebyla nalezena.
 104#£Chyba: Delen’ nulou.
 105#£Chyba syntaxe.
-106#£Chyba syntaxe. Byl pouzit nespr‡vn«y symbol. Muze se jednat o chybej’c’ znamŽnko n‡soben’ nebo o , . vydat
-107#£Upozornen’: Poz‡dali jste o vyresen’ soustavy rovnic, ale uvedli jste mŽne promenn«ych nez rovnic. Res’ se pouze prvn’ rovnice. Zkontrolujte rucne posledn’ rovnici (rovnice).
+106#£Chyba syntaxe. Byl pouzit nespr‡vn symbol. Muze se jednat o chybej’c’ znamŽnko n‡soben’ nebo o , . vydat
+107#£Upozornen’: Poz‡dali jste o vyresen’ soustavy rovnic, ale uvedli jste mŽne promennch nez rovnic. Res’ se pouze prvn’ rovnice. Zkontrolujte rucne posledn’ rovnici (rovnice).
 108#£Spolecnost Maxima nahl‡sila n‡sleduj’c’ chybu:
 109#£Chyba Maxima
 110#£Aplikace WordMat nemohla naj’t slozku "Program files"
@@ -113,20 +113,20 @@
 112#£Nelze se pripojit k serveru
 113#£Na tomto m’ste dokumentu je definov‡no n‡sleduj’c’
 114#£Na tomto m’ste dokumentu nejsou z‡dnŽ definice.
-115#£m‡ nekolik nedefinovan«ych promenn«ych. Nez‡vislou promennou nelze identifikovat. Jako nez‡vislou promennou pouzijte x nebo t.
+115#£m‡ nekolik nedefinovanch promennch. Nez‡vislou promennou nelze identifikovat. Jako nez‡vislou promennou pouzijte x nebo t.
 116#£Odvozeninu nelze definovat\r\nOdstrante definici: \r\n
 117#£V definici je chyba:
-118#£Ignoruje se, ale oprav’ chybu vstupu, aby se zabr‡nilo tŽto chybe v«ystupu
+118#£Ignoruje se, ale oprav’ chybu vstupu, aby se zabr‡nilo tŽto chybe vstupu
 119#£... zbytek odstranen.
 120#£Vase skola/organizace m‡ aktivn’ partnerstv’. Nyn’ muzete pouz’vat aplikaci WordMat+
 121#£Promin. Vase skola nem‡ aktivn’ partnerstv’.
-122#£Uvedte definici novŽ funkce\r\nDefinici lze pouz’t ve zbytku dokumentu, ale ne dr’ve.\r\nPokud vloz’te pr’kaz 'delete def:' d‡le do dokumentu, nebude od tohoto bodu zn‡m.\r\nMuzete definovat v’ce promenn«ych najednou t’m, ze je oddel’te pomoc’ " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
+122#£Uvedte definici novŽ funkce\r\nDefinici lze pouz’t ve zbytku dokumentu, ale ne dr’ve.\r\nPokud vloz’te pr’kaz 'delete def:' d‡le do dokumentu, nebude od tohoto bodu zn‡m.\r\nMuzete definovat v’ce promennch najednou t’m, ze je oddel’te pomoc’ " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nov‡ funkce
 124#£Nov‡ rovnice
 125#£Definujte rovnici
 126#£Definovat
-127#£V«yraz je velmi dlouh«y. Chcete ji vlozit do Wordu?\r\nTo muze m’t vliv na rychlost Wordu. DlouhŽ rovnice mohou na pomal«ych poc’tac’ch zastavit aplikaci Word. Zvazte resen’ pomoc’ numerick«ych metod\r\nV«ystup muzete videt n’ze:
-128#£V«yraz nebylo moznŽ vypoc’tat.
+127#£Vraz je velmi dlouh. Chcete ji vlozit do Wordu?\r\nTo muze m’t vliv na rychlost Wordu. DlouhŽ rovnice mohou na pomalch poc’tac’ch zastavit aplikaci Word. Zvazte resen’ pomoc’ numerickch metod\r\nVstup muzete videt n’ze:
+128#£Vraz nebylo moznŽ vypoc’tat.
 129#£Rovnice nemela z‡dnŽ resen’ v oblasti $C pro promennou
 130#£Rovnice nemela z‡dnŽ resen’ v oboru $R pro promennou
 131#£WordMat nedok‡zal vyresit rovnici
@@ -137,53 +137,53 @@
 136#£RegistrovanŽ partnerstv’
 137#£Soustava rovnic nemela resen’ v oboru $C pro promennŽ
 138#£Soustava rovnic nemela resen’ v oblasti $R pro promennŽ
-139#£V rovnici mus’ b«yt znamŽnko rovn‡ se
+139#£V rovnici mus’ bt znamŽnko rovn‡ se
 140#£Nen’ registrov‡no z‡dnŽ partnerstv’
 141#£To nen’ rovnice. Rovnice bude m’t vzdy znamŽnko rovn‡ se.
 142#£Ze soustavy rovnic jsou odstraneny n‡sleduj’c’ promennŽ:
 143#£podle funkce 'Odstranit promennou' WordMat, '
-144#£pravdiv«y
-145#£falesn«y
-146#£nezn‡m«y
+144#£pravdiv
+145#£falesn
+146#£nezn‡m
 147#£
 148#£Resen’ bylo nalezeno. Muze existovat v’ce resen’.
-149#£Vyberte pouze 1 v«yraz
-150#£V«yraz je zjednodusen pomoc’ WordMat pomoc’ metod:
+149#£Vyberte pouze 1 vraz
+150#£Vraz je zjednodusen pomoc’ WordMat pomoc’ metod:
 151#£AutomatickŽ zjednodusen’,
 152#£TrigonometrickŽ identity
-153#£Tento v«yraz nelze zjednodusit
-154#£V«yraz je zjednodusen pomoc’ WordMat.
-155#£V«yraz je faktorizov‡n pomoc’ WordMat.
-156#£V«yraz nelze faktorizovat
-157#£V«yraz je rozs’ren pomoc’ WordMat.
-158#£V«yraz nelze rozbalit
+153#£Tento vraz nelze zjednodusit
+154#£Vraz je zjednodusen pomoc’ WordMat.
+155#£Vraz je faktorizov‡n pomoc’ WordMat.
+156#£Vraz nelze faktorizovat
+157#£Vraz je rozs’ren pomoc’ WordMat.
+158#£Vraz nelze rozbalit
 159#£Abyste mohli resit diferenci‡ln’ rovnice, mus’te zak‡zat jednotky
 160#£Diferenci‡ln’ rovnici se nepodarilo vyresit
 161#£Skoly se mohou prihl‡sit k partnerstv’ se spolecnost’ Eduap. Partnerstv’ z’sk‡v‡ pr’stup k podpore, WordMath+ a mnoho dals’ho. Kliknete pro v’ce informac’
 162#£BinomickŽ rozdelen’
-163#£V«yraz je testov‡n na pravdivost pomoc’ WordMat.
-164#£V«ysledek je zalozen na c’selnŽm srovn‡n’
-165#£Aplikace WordMat nebyla schopna urcit, zda je v«yraz pravdiv«y nebo nepravdiv«y
+163#£Vraz je testov‡n na pravdivost pomoc’ WordMat.
+164#£Vsledek je zalozen na c’selnŽm srovn‡n’
+165#£Aplikace WordMat nebyla schopna urcit, zda je vraz pravdiv nebo nepravdiv
 166#£Jednotky vypnutŽ
-167#£V«yber v«ystupn’ch jednotek
-168#£V«ystupn’ jednotky
+167#£Vber vstupn’ch jednotek
+168#£Vstupn’ jednotky
 169#£NeshodnŽ z‡vorky
 170#£AutomatickŽ z‡lohov‡n’?
 171#£Kolik z‡lozn’ch souboru ulozit?
 172#£Doba mezi z‡lohami
-173#£Word neprov‡d’ automatickou z‡lohu, ale ukl‡d‡ data, kter‡ mohou b«yt pr’padne pouzita k opetovnŽmu vytvoren’ ztracenŽho souboru\n\nWordMat muze prov‡det kompletn’ z‡lohy, kdyz provedete v«ypocet a uloz’te dokument v nekolika verz’ch. (Z‡lohov‡n’ je mnohem rychlejs’, pokud dokument nen’ na OneDrive) . Z‡lozn’ soubory jsou ulozeny ve slozce: my documents/WordMat-backup
+173#£Word neprov‡d’ automatickou z‡lohu, ale ukl‡d‡ data, kter‡ mohou bt pr’padne pouzita k opetovnŽmu vytvoren’ ztracenŽho souboru\n\nWordMat muze prov‡det kompletn’ z‡lohy, kdyz provedete vpocet a uloz’te dokument v nekolika verz’ch. (Z‡lohov‡n’ je mnohem rychlejs’, pokud dokument nen’ na OneDrive) . Z‡lozn’ soubory jsou ulozeny ve slozce: my documents/WordMat-backup
 174#£Otevr’t z‡lozn’ slozku
 175#£Poz‡dat
 176#£Vzdy
 177#£Nikdy
 178#£Pri pokusu o z‡lohov‡n’ doslo k chybe
-179#£Chcete aktivovat automatick«y z‡lohovac’ systŽm WordMats\n\n(Pro v’ce informac’ jdete do nastaven’ | Z‡loha)
+179#£Chcete aktivovat automatick z‡lohovac’ systŽm WordMats\n\n(Pro v’ce informac’ jdete do nastaven’ | Z‡loha)
 180#£Norm‡ln’ rozdelen’
-181#£N’zk«y
+181#£N’zk
 182#£Norm‡ln’
 183#£Vysoko
 184#£Velmi vysoko
-185#£Super (pomal«y)
+185#£Super (pomal)
 186#£Rovnice
 187#£Pockej?
 188#£Max
@@ -191,12 +191,12 @@
 190#£Zobrazit osy
 191#£Kvalita
 192#£Ovlivnuje rychlost ot‡cen’
-193#£Kdyz se zobraz’ obr‡zek, muzete zmenit œhel pohledu stisknut’m a podrzen’m levŽho tlac’tka mysi pri tazen’. Kliknete prav«ym tlac’tkem mysi na r‡dek nab’dky, vyberte moznosti a "kop’rovat do schr‡nky" pro zkop’rov‡n’ obr‡zku. Zavren’m okna se vr‡t’te do aplikace Word.
+193#£Kdyz se zobraz’ obr‡zek, muzete zmenit œhel pohledu stisknut’m a podrzen’m levŽho tlac’tka mysi pri tazen’. Kliknete pravm tlac’tkem mysi na r‡dek nab’dky, vyberte moznosti a "kop’rovat do schr‡nky" pro zkop’rov‡n’ obr‡zku. Zavren’m okna se vr‡t’te do aplikace Word.
 194#£Teleso revoluce
-195#£Zadejte souradnice bodu, kterŽ maj’ b«yt v grafu oznaceny cerven«ymi teckovan«ymi carami. Pr’klady \r\neksempel:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)\r\n Je takŽ moznŽ kliknout na graf pro z’sk‡n’ souradnic, pokud pouzijete tlac’tko pro vlozen’.
-196#£TakŽ pro vkl‡d‡n’ teckovan«ych car oznacuj’c’ch body do grafu, ale s jinou barvou nez body ve sloupci 1. V tomto bode nelze provŽst regresi. Spojen’m bodu muzete vytv‡ret nejruznejs’ tvary.
+195#£Zadejte souradnice bodu, kterŽ maj’ bt v grafu oznaceny cervenmi teckovanmi carami. Pr’klady \r\neksempel:\r\n1,2\r\n1,2 ; 3,4\r\n2,f(2)\r\n Je takŽ moznŽ kliknout na graf pro z’sk‡n’ souradnic, pokud pouzijete tlac’tko pro vlozen’.
+196#£TakŽ pro vkl‡d‡n’ teckovanch car oznacuj’c’ch body do grafu, ale s jinou barvou nez body ve sloupci 1. V tomto bode nelze provŽst regresi. Spojen’m bodu muzete vytv‡ret nejruznejs’ tvary.
 197#£Pred stisknut’m tlac’tka plot vyberte tabulku s daty souradnic, aby se tyto œdaje automaticky vyplnily do tohoto textovŽho pole. Jedna sada souradnic pr. c‡ra. Jedna sada souradnic pr. c‡ra. Souradnice je nutnŽ oddelit c‡rkou, stredn’kem nebo tabul‡torem. Souradnice lze zkop’rovat z Excelu. Pr’klady: \r\n1.2 , 3.4\r\n3,4 ; 4,8\r\n5,6$Tab & "7.8
-198#£PromennŽ mus’ b«yt x a y
+198#£PromennŽ mus’ bt x a y
 199#£Vlozit kruznici
 200#£Vlozit r‡dek
 201#£OznacenŽ body
@@ -204,14 +204,14 @@
 203#£Ano
 204#£Ne
 205#£Pamatujte si tuto volbu
-206#£Pokud je povolena funkce z‡lohov‡n’ WordMats, z‡lohov‡n’ se provede pri proveden’ v«ypoctu. Z‡loha se prov‡d’ pouze kazd«ych 5 minut. Pred preps‡n’m je por’zeno 10 z‡lozn’ch kopi’." & vbLf & vbLf & " Tato nastaven’ muzete zmenit v nastaven’ | Z‡lohov‡n’.
+206#£Pokud je povolena funkce z‡lohov‡n’ WordMats, z‡lohov‡n’ se provede pri proveden’ vpoctu. Z‡loha se prov‡d’ pouze kazdch 5 minut. Pred preps‡n’m je por’zeno 10 z‡lozn’ch kopi’." & vbLf & vbLf & " Tato nastaven’ muzete zmenit v nastaven’ | Z‡lohov‡n’.
 207#£Tuto volbu muzete kdykoli zmenit v nastaven’ | Z‡lohov‡n’
 208#£Z‡lohov‡n’
 209#£soucet œhlu je vets’ nez 180
-210#£Mus’te zadat 3 strany/œhly. Ne vsak 3 œhly. Mus’ b«yt zn‡ma alespon 1 strana.
+210#£Mus’te zadat 3 strany/œhly. Ne vsak 3 œhly. Mus’ bt zn‡ma alespon 1 strana.
 211#£soucet œhlu nen’ 180
 212#£Zadali jste pr’lis mnoho œhlu/stran
-213#£Mus’te zadat PRESNE 3 strany/œhly. Ne vsak 3 œhly. Mus’ b«yt zn‡ma alespon 1 strana.
+213#£Mus’te zadat PRESNE 3 strany/œhly. Ne vsak 3 œhly. Mus’ bt zn‡ma alespon 1 strana.
 214#£
 215#£òhel
 216#£nalezeno pomoc’ souctu œhlu = 180 $Degree v trojœheln’ku
@@ -225,22 +225,22 @@
 224#£nalezeno pomoc’ z‡kona sinusu
 225#£Kvadratick‡ rovnice je resena pro
 226#£Tato kvadratick‡ rovnice m‡ dve resen’:
-227#£Ale druhŽ resen’ je z‡pornŽ a dŽlka nemuze b«yt z‡porn‡.
+227#£Ale druhŽ resen’ je z‡pornŽ a dŽlka nemuze bt z‡porn‡.
 228#£Vzhledem k tomu, ze resen’ pro
-229#£mel dve resen’ a obe resen’ byla kladn‡, coz znamen‡, ze existuj’ dva moznŽ trojœheln’ky. Nyn’ se pokus’me vypoc’tat zb«yvaj’c’ strany na z‡klade 2. resen’ za pouzit’ stejnŽ metody.
+229#£mel dve resen’ a obe resen’ byla kladn‡, coz znamen‡, ze existuj’ dva moznŽ trojœheln’ky. Nyn’ se pokus’me vypoc’tat zbvaj’c’ strany na z‡klade 2. resen’ za pouzit’ stejnŽ metody.
 230#£Vlozit symbol
 231#£Reck‡ p’smena
 232#£Dals’ symboly
 233#£Vlozit
 234#£Symbol
-235#£Resen’ rovnice pomoc’ grafick«ych a numerick«ych metod
+235#£Resen’ rovnice pomoc’ grafickch a numerickch metod
 236#£Poc‡tecn’ odhad
 237#£Intervalov‡ metoda
 238#£zac’nat
 239#£konec
 240#£Plottet na pravŽ a levŽ strane. \nLev‡ strana je cern‡. Prav‡ strana je zelen‡.
 241#£GrafickŽ resen’
-242#£TakŽ pribl’zit dy dvojit«ym kliknut’m nebo pretazen’m r‡mecku
+242#£TakŽ pribl’zit dy dvojitm kliknut’m nebo pretazen’m r‡mecku
 243#£Zobrazit graf v samostatnŽm okne
 244#£Distribuce $X^2
 245#£PromennŽ
@@ -268,7 +268,7 @@
 267#£Planckova konstanta
 268#£Planckova konstanta v elektronvoltu
 269#£Gravitacn’ konstanta
-270#£Voln«y p‡d zrychlen’ na povrchu Zeme
+270#£Voln p‡d zrychlen’ na povrchu Zeme
 271#£Element‡rn’ n‡boj
 272#£C’slo Avogadros
 273#£Plynov‡ konstanta
@@ -295,13 +295,13 @@
 294#£GeoGebra Calculator Suite je jiz nainstalov‡na. Bez’ v prohl’zeci a nevyzaduje internet. Zac’n‡ rychle.
 295#£Instalace aplikace GeoGebra
 296#£Spustte sadu kalkulacek GeoGebra
-297#£nebo okrajov«ych podm’nek
+297#£nebo okrajovch podm’nek
 298#£Oznacit
 299#£Zadejte text a potŽ jej kliknut’m na graf um’stete
 300#£V rovnici je chyba
 301#£Nejprve mus’te nastavit ymin a ymax - potŽ stisknete aktualizaci
 302#£3D grafy
-303#£Zobrazit v«yraz
+303#£Zobrazit vraz
 304#£Transparentn’
 305#£Barva povrchu
 306#£Vlozen’ pr’kazu Maxima do aplikace Word
@@ -309,54 +309,54 @@
 308#£Pouze c‡ry
 309#£Pouze povrchy
 310#£C‡ry a plochy
-311#£PromennŽ mus’ b«yt x, y a z
+311#£PromennŽ mus’ bt x, y a z
 312#£Vlozit kouli
 313#£Rovina vlozen’
-314#£Nov«y vektor
-315#£Syntaxe\n(startx , starty , startz)(dx , dy , dz)\nJeden vektor pr. c‡ra\nPr’klady:\n(1,1,2)(1,2,3) \n nakresl’ vektor (1,2,3) z bodu (1,1,2)\n\n(1,-2,3)\n nakresl’ vektor (1,-2,3) z bodu (0,0,0)\n\npr’klad s desetinn«ymi c’sly:\n(1.5 , 3 , 4.5)
+314#£Nov vektor
+315#£Syntaxe\n(startx , starty , startz)(dx , dy , dz)\nJeden vektor pr. c‡ra\nPr’klady:\n(1,1,2)(1,2,3) \n nakresl’ vektor (1,2,3) z bodu (1,1,2)\n\n(1,-2,3)\n nakresl’ vektor (1,-2,3) z bodu (0,0,0)\n\npr’klad s desetinnmi c’sly:\n(1.5 , 3 , 4.5)
 316#£Velikost bodu
 317#£Syntaxe pro zad‡v‡n’ bodu\n\n(1,2,1)\n(2.5,3.6,8.7)
-318#£V okne grafu muzete ot‡cet souradnicov«ym systŽmem stisknut’m levŽho tlac’tka mysi pri pretahov‡n’.\n\nPokud objekt vypad‡ roztazen«y, muzete zmenit velikost okna grafu, aby se lŽpe prizpusobil.\n\nChcete-li vlozit obr‡zek do Wordu, kliknete prav«ym tlac’tkem mysi na r‡dek nab’dky, vyberte 'moznosti' a pak 'zkop’rovat do schr‡nky'. Pak se okno grafu zavre a obr‡zek muze b«yt vlozen do Wordu.\n\nVsimnete si, ze okno grafu mus’ b«yt zavrenŽ, aby se mohlo vr‡tit do Wordu.\n\nC’m vyss’ je kvalita obr‡zku, t’m pomalejs’ je rychlost ot‡cen’.
+318#£V okne grafu muzete ot‡cet souradnicovm systŽmem stisknut’m levŽho tlac’tka mysi pri pretahov‡n’.\n\nPokud objekt vypad‡ roztazen, muzete zmenit velikost okna grafu, aby se lŽpe prizpusobil.\n\nChcete-li vlozit obr‡zek do Wordu, kliknete pravm tlac’tkem mysi na r‡dek nab’dky, vyberte 'moznosti' a pak 'zkop’rovat do schr‡nky'. Pak se okno grafu zavre a obr‡zek muze bt vlozen do Wordu.\n\nVsimnete si, ze okno grafu mus’ bt zavrenŽ, aby se mohlo vr‡tit do Wordu.\n\nC’m vyss’ je kvalita obr‡zku, t’m pomalejs’ je rychlost ot‡cen’.
 319#£Pravidla
-320#£Parametrick«y graf
+320#£Parametrick graf
 321#£Zlut‡/cerven‡/fialov‡
-322#£Modr«y
-323#£Hned«y
-324#£Sed«y
+322#£Modr
+323#£Hned
+324#£Sed
 325#£Kl‡vesov‡ zkratka Alt + M vloz’ novou matematiku
 326#£Kl‡vesov‡ zkratka AltGr + Enter vypoc’t‡
 327#£Kl‡vesov‡ zkratka Alt + E Vyres’ rovnici
 328#£Kl‡vesov‡ zkratka Alt + j otevre nastaven’
-329#£Kl‡vesov‡ zkratka Alt + R Vloz’ predchoz’ v«ysledek
-330#£Barva v«ystupu
+329#£Kl‡vesov‡ zkratka Alt + R Vloz’ predchoz’ vsledek
+330#£Barva vstupu
 331#£doln’ index:
 332#£\lambda je zkratka pro malŽ reckŽ p’smeno lambda
 333#£Kl‡vesov‡ zkratka Alt + P Vykresl’ graf
 334#£Zmeny v dokumentech vzorcu muzete ulozit
 335#£Listy aplikace Excel lze otevr’t samostatne nebo vlozit vlozenŽ
 336#£Znacen’ odevzd‡v‡n’? Vyzkousejte WordMark www.eduap.com
-337#£Pocet v«ypoctu s WordMath:
+337#£Pocet vpoctu s WordMath:
 338#£V c‡sti Definice muzete definovat fyzik‡ln’ konstanty a hodnoty tabulky.
 339#£Word bez’ rychleji v zobrazen’ konceptu - kdyz se jedn‡ o rovnice
 340#£Vlozte vlastn’ popisy diagramu aplikace Excel pomoc’ vlozit textovŽ pole
 341#£Kl‡vesov‡ zkratka Alt + N Prep’n‡ mezi auto, exact, num
 342#£Funkce s p’smeny jako konstantou z’sk‡ posuvn’ky v GeoGebre
-343#£V«ystupn’ jednotky nesm’ b«yt kombinovanŽ.  km/s nen’ povoleno. PotŽ uvedte: km,s
+343#£Vstupn’ jednotky nesm’ bt kombinovanŽ.  km/s nen’ povoleno. PotŽ uvedte: km,s
 344#£Jiz m‡te nejnovejs’ verzi programu
-345#£V«yber c’sla rovnice
+345#£Vber c’sla rovnice
 346#£Na jakŽ c’slo nastavit tuto rovnici?\r\nVsechny n‡sleduj’c’ rovnice budou takŽ aktualizov‡ny.
-347#£Binomick«y test
-348#£Vloz’ se c’slo sekce rovnice. Obvykle se vkl‡d‡ jako c’slo kapitoly/odd’lu do nadpisu. Lze jej ale vlozit i skryt«y. Chcete zobrazit c’slo? (Odpovezte Ne, abyste to skryli)
-349#£Zadejte œroven v«yznamnosti v procentech
+347#£Binomick test
+348#£Vloz’ se c’slo sekce rovnice. Obvykle se vkl‡d‡ jako c’slo kapitoly/odd’lu do nadpisu. Lze jej ale vlozit i skryt. Chcete zobrazit c’slo? (Odpovezte Ne, abyste to skryli)
+349#£Zadejte œroven vznamnosti v procentech
 350#£òroven dulezitosti
 351#£Zadejte rozmery tabulky\r\nr‡dky x sloupce
 352#£Test ch’-kvadr‡t pro nez‡vislost
-353#£$X^2 - test nez‡vislosti proveden«y pomoc’ WordMatu
+353#£$X^2 - test nez‡vislosti proveden pomoc’ WordMatu
 354#£P-hodnota
-355#£Pouzit’ œrovne v«yznamnosti
-356#£% hypotŽzu 0 lze zam’tnout. Mezi temito dvema promenn«ymi je tedy z‡vislost.
-357#£% hypotŽzu 0 nelze zam’tnout. Neexistuj’ tedy z‡dnŽ dukazy, kterŽ by podporovaly z‡vislost mezi temito dvema promenn«ymi.
-358#£Existuj’ bunky s hodnotou mens’ nez 5 nebo soucet vsech bunek je mens’ nez 50. $X^2-rozdelen’ je pak v tomto pr’pade spatnou aproximac’ a v«ysledek je nespolehliv«y. V nekter«ych pr’padech mohou b«yt data uzitecn‡ odlisn«ym seskupen’m c’sel.
+355#£Pouzit’ œrovne vznamnosti
+356#£% hypotŽzu 0 lze zam’tnout. Mezi temito dvema promennmi je tedy z‡vislost.
+357#£% hypotŽzu 0 nelze zam’tnout. Neexistuj’ tedy z‡dnŽ dukazy, kterŽ by podporovaly z‡vislost mezi temito dvema promennmi.
+358#£Existuj’ bunky s hodnotou mens’ nez 5 nebo soucet vsech bunek je mens’ nez 50. $X^2-rozdelen’ je pak v tomto pr’pade spatnou aproximac’ a vsledek je nespolehliv. V nekterch pr’padech mohou bt data uzitecn‡ odlisnm seskupen’m c’sel.
 359#£Chidistribuce
 360#£Stupne volnosti
 361#£C’st
@@ -364,18 +364,18 @@
 363#£Zadejte hodnotu pro
 364#£Muzete ji upravit pozdeji
 365#£Definovat konstantu
-366#£Aplikace Graph nen’ nainstalov‡na. Jedn‡ se o mal«y bezplatn«y program, kter«y se snadno instaluje. Muzete ji z’skat od www.padowan.dk
-367#£Muzete ji upravit pozdeji v uzivatelem definovan«ych funkc’ch v Graphu
-368#£Vykreslov‡n’ grafu pomoc’ programu GeoGeoGebra a Graph vyzaduje, aby x byla nez‡visl‡ promenn‡. \r\nN‡sleduj’c’ v«yrazy jsou bez x. Nyn’ muzete uvŽst novou promennou, kter‡ se m‡ pouz’t jako x.
+366#£Aplikace Graph nen’ nainstalov‡na. Jedn‡ se o mal bezplatn program, kter se snadno instaluje. Muzete ji z’skat od www.padowan.dk
+367#£Muzete ji upravit pozdeji v uzivatelem definovanch funkc’ch v Graphu
+368#£Vykreslov‡n’ grafu pomoc’ programu GeoGeoGebra a Graph vyzaduje, aby x byla nez‡visl‡ promenn‡. \r\nN‡sleduj’c’ vrazy jsou bez x. Nyn’ muzete uvŽst novou promennou, kter‡ se m‡ pouz’t jako x.
 369#£Nez‡visl‡ promenn‡
 370#£$X^2 test nez‡vislosti
 371#£òvodn’ graf
-372#£Vlozen’ vlozen«ych
-373#£Vlozen’ vlozenŽho objektu muze nejakou dobu trvat. Dvojit«ym vlozen«ym objektem je otevrete.
+372#£Vlozen’ vlozench
+373#£Vlozen’ vlozenŽho objektu muze nejakou dobu trvat. Dvojitm vlozenm objektem je otevrete.
 374#£Chcete vykreslit
 375#£Vlozit
 376#£Soustavy rovnic nerovnost’ nejsou zat’m podporov‡ny. Reste jako rovnici nebo vyreste graficky pomoc’ grafu nebo GeoGebry.
-377#£Odstranen’ promenn«ych
+377#£Odstranen’ promennch
 378#£s hodnotami
 379#£Vstupte do startguess. Standardn’ hodnota odhadu je 1
 380#£PromennŽ a odhad
@@ -383,28 +383,28 @@
 382#£se startovac’m odhadem
 383#£Soustavu rovnic se nepodarilo vyresit
 384#£Uvedli jste spr‡vnou promennou?
-385#£Resen’ nebylo nalezeno. Poc‡tecn’ a koncov«y bod intervalu mus’ b«yt na obou stran‡ch resen’
+385#£Resen’ nebylo nalezeno. Poc‡tecn’ a koncov bod intervalu mus’ bt na obou stran‡ch resen’
 386#£Newtonova metoda aplikovan‡ s poc‡tecn’m odhadem
 387#£Intervalov‡ metoda pouzit‡ v intervalu
 388#£Resen’ nebylo nalezeno
 389#£Z‡dnŽ resen’
 390#£Diferenci‡ln’ rovnice je resena funkc’ 'Vyresit diferenci‡ln’ rovnici' aplikace WordMat
-391#£s okrajov«ymi podm’nkami
+391#£s okrajovmi podm’nkami
 392#£s poc‡tecn’mi podm’nkami
 393#£s poc‡tecn’m stavem
 394#£Mus’te restartovat aplikaci Word. Pokud tak neucin’te, aplikace Word se zhrout’.
 395#£Pri pokusu o vlozen’ vzorce doslo k chybe. Zkuste to znovu na jinŽm m’ste.
 396#£Simulace
 397#£Skupina
-398#£Pocet stupnu volnosti\r\nuvedte n pro obecn«y v«yraz.
+398#£Pocet stupnu volnosti\r\nuvedte n pro obecn vraz.
 399#£Frekvencn’ rozlozen’ s
 400#£Pozorov‡n’
-401#£Ocek‡van«y
+401#£Ocek‡van
 402#£Tot‡ln’
 403#£P-hodnota
 404#£Existuje korelace
 405#£Neexistuje z‡dn‡ korelace
-406#£Soucet vsech bunek je mens’ nez 50. $X^2-rozdelen’ je pak spatn‡ aproximace a v«ysledek nespolehliv«y.
+406#£Soucet vsech bunek je mens’ nez 50. $X^2-rozdelen’ je pak spatn‡ aproximace a vsledek nespolehliv.
 407#£Q-hodnota
 408#£Kritick‡ hodnota Q
 409#£MikTex nen’ nainstalov‡n. Nyn’ budete presmerov‡ni na str‡nku stahov‡n’. Po instalaci je nutnŽ poc’tac restartovat. Pri prvn’m spusten’ MikTexu z WordMatu bude nainstalov‡na rada bal’cku.
@@ -419,20 +419,20 @@
 418#£Mus’te zadat
 419#£promennŽ oddelenŽ c‡rkou
 420#£Jedna z rovnic nen’ definov‡na v mez’ch plochy pozemku. Zkuste rozs’rit oblast pozemku
-421#£Ve v«yrazu se objev’ jeden nebo v’ce symbolu plus/minus. Jak interpretovat?
+421#£Ve vrazu se objev’ jeden nebo v’ce symbolu plus/minus. Jak interpretovat?
 422#£Plus nebo m’nus
 423#£Vstup nen’ pochopen. Je vlozeno plus.
-424#£Vyskytl se problŽm s c’seln«ymi znaky
-425#£Z‡pis souctu nen’ spr‡vn«y. Syntaxe pro doln’ mez je: i=1 (nebo podobn‡)
+424#£Vyskytl se problŽm s c’selnmi znaky
+425#£Z‡pis souctu nen’ spr‡vn. Syntaxe pro doln’ mez je: i=1 (nebo podobn‡)
 426#£Oznacen’ produktu nen’ spr‡vnŽ. Syntaxe pro doln’ mez je: i=1 (nebo podobn‡)
 427#£Vyskytuj’ se problŽmy se syntax’. Integr‡l mus’te ukoncit retezcem dx (pokud je promenn‡ x). Mozn‡ jste pouzili d v jinŽm kontextu. Pak pouzijte diferenci‡ln’ d (typ: \dd)
-428#£Vyskytuj’ se problŽmy se syntax’. Dvojit«y integr‡l mus’ koncit dvema dx (v z‡vislosti na promenn«ych, pro kterŽ se maj’ integrovat). Mozn‡ jste pouzili d v jinŽm kontextu. Pak pouzijte diferenci‡ln’ d (typ: \dd)
-429#£Dvojit«y integr‡l nemuzete pouz’t pro urcitŽ integr‡ly. Pouzit’ dvou integr‡ln’ch znacek
-430#£Chyba! Vyskytuj’ se problŽmy se syntax’. Z‡pis pro derivaci nen’ spr‡vn«y.
+428#£Vyskytuj’ se problŽmy se syntax’. Dvojit integr‡l mus’ koncit dvema dx (v z‡vislosti na promennch, pro kterŽ se maj’ integrovat). Mozn‡ jste pouzili d v jinŽm kontextu. Pak pouzijte diferenci‡ln’ d (typ: \dd)
+429#£Dvojit integr‡l nemuzete pouz’t pro urcitŽ integr‡ly. Pouzit’ dvou integr‡ln’ch znacek
+430#£Chyba! Vyskytuj’ se problŽmy se syntax’. Z‡pis pro derivaci nen’ spr‡vn.
 431#£nen’ definov‡no
 432#£nen’ definov‡no, ale omezeno
 433#£Nen’ definov‡no v r‡mci
-434#£je vyhrazen«y a nelze jej definovat. Definice se preskoc’.
+434#£je vyhrazen a nelze jej definovat. Definice se preskoc’.
 435#£Mat
 436#£Phys
 437#£Chem
@@ -448,7 +448,7 @@
 447#£Vyresit
 448#£Pr’kaz Maxima
 449#£Rovnice(y) resit numerickou metodou
-450#£Odstranen’ promenn«ych
+450#£Odstranen’ promennch
 451#£Test true/false
 452#£Vyreste diferenci‡ln’ rovnici
 453#£Odstranen’ definic
@@ -466,9 +466,9 @@
 465#£Statistika
 466#£Neseskupen‡ pozorov‡n’
 467#£Seskupen‡ pozorov‡n’
-468#£Hulkov«y graf
+468#£Hulkov graf
 469#£Histogram
-470#£Krokov«y graf
+470#£Krokov graf
 471#£Kumulativn’ graf
 472#£R‡mecek a vousy
 473#£Statistiky/prob.
@@ -479,44 +479,44 @@
 478#£Moc
 479#£Polynom
 480#£Distribuce
-481#£Binomick«y
+481#£Binomick
 482#£Norm‡ln’ distribuce
 483#£$X^2 - distribuce
 484#£2D geometrie
 485#£3D geometrie
-486#£Otevre brozuru s matematick«ymi vzorci
+486#£Otevre brozuru s matematickmi vzorci
 487#£Otevre brozuru s fyzik‡ln’mi vzorci
-488#£Otevre brozuru s chemick«ymi vzorci
-489#£Automatick«y presn«y nebo c’seln«y v«ysledek
-490#£WordMat automaticky urc’, zda vr‡tit presn«y nebo c’seln«y v«ysledek nebo oboj’.
-491#£PresnŽ v«ysledky
-492#£Vsechny v«ysledky byly vr‡ceny jako presn«y v«ysledek. Nekdy se vsak c’selnŽ aproximaci nelze vyhnout.
-493#£C’selnŽ v«ysledky
-494#£Vsechny v«ysledky vr‡cenŽ jako desetinn‡ c’sla
-495#£V«yznamnŽ œdaje
-496#£Urcuje pocet (platn«ych) c’sel ve v«ysledc’ch
+488#£Otevre brozuru s chemickmi vzorci
+489#£Automatick presn nebo c’seln vsledek
+490#£WordMat automaticky urc’, zda vr‡tit presn nebo c’seln vsledek nebo oboj’.
+491#£PresnŽ vsledky
+492#£Vsechny vsledky byly vr‡ceny jako presn vsledek. Nekdy se vsak c’selnŽ aproximaci nelze vyhnout.
+493#£C’selnŽ vsledky
+494#£Vsechny vsledky vr‡cenŽ jako desetinn‡ c’sla
+495#£VznamnŽ œdaje
+496#£Urcuje pocet (platnch) c’sel ve vsledc’ch
 497#£Radi‡nech
-498#£Pri stlacen’ jsou vsechny goniometrickŽ v«ypocty v radi‡nech, jinak ve stupn’ch.
-499#£Vedeck«y z‡pis
-500#£Pri stlacen’ jsou vsechny v«ysledky vr‡ceny ve vedeckŽ notaci. Pr’klad: 2.3$*10^4
+498#£Pri stlacen’ jsou vsechny goniometrickŽ vpocty v radi‡nech, jinak ve stupn’ch.
+499#£Vedeck z‡pis
+500#£Pri stlacen’ jsou vsechny vsledky vr‡ceny ve vedeckŽ notaci. Pr’klad: 2.3$*10^4
 501#£Nastaven’
 502#£Zmente vsechny druhy nastaven’.
-503#£V«ypocet (AltGr+Enter)
-504#£Vypoc’t‡ vybran«y v«yraz nebo zpet na nejblizs’ znamŽnko rovn‡ se.
+503#£Vpocet (AltGr+Enter)
+504#£Vypoc’t‡ vybran vraz nebo zpet na nejblizs’ znamŽnko rovn‡ se.
 505#£Pr’kaz Maxima
-506#£Posle pr’kaz nefiltrovan«y do maxim. V«ysledek je vsak form‡tovan«y.
+506#£Posle pr’kaz nefiltrovan do maxim. Vsledek je vsak form‡tovan.
 507#£Res’ rovnici(e) (Alt+E)
 508#£Res’ rovnici nebo soustavu rovnic. Um’stete kurzor do rovnice. Vyberte v’ce rovnic pro resen’ soustavy rovnic
 509#£NumerickŽ resen’
-510#£Rovnice reste pomoc’ numerick«ych metod.
-511#£Odstranen’ promenn«ych
-512#£Odstrante jednu nebo v’ce promenn«ych ze soustavy rovnic.
+510#£Rovnice reste pomoc’ numerickch metod.
+511#£Odstranen’ promennch
+512#£Odstrante jednu nebo v’ce promennch ze soustavy rovnic.
 513#£Test, pokud je to pravda
 514#£Test, zda je rovnice pravdiv‡
 515#£Vyreste diferenci‡ln’ rovnici
 516#£Reste diferenci‡ln’ rovnici. Zadejte se pomoc’ jinŽho z‡pisu. Pr’klady: y'=y , y''=y nebo f'(x)=f(x)
 517#£Resit soustavu diferenci‡ln’ch rovnic numericky
-518#£Mus’ b«yt ve tvaru y'=?
+518#£Mus’ bt ve tvaru y'=?
 519#£Zobrazit definice
 520#£Zobrazuje definice aktivn’ na tŽto pozici v dokumentu
 521#£Odstranen’ definic (Alt+F)
@@ -524,81 +524,81 @@
 523#£Definovat (Alt+D)
 524#£Vloz’ definici, kter‡ je platn‡ ve zbytku dokumentu
 525#£Definov‡n’ fyzik‡ln’ch konstant
-526#£Vyberte si z nejpouz’vanejs’ch konstant a nechte si je v dokumentu definovat pro pouzit’ ve v«ypoctech.
+526#£Vyberte si z nejpouz’vanejs’ch konstant a nechte si je v dokumentu definovat pro pouzit’ ve vpoctech.
 527#£Zmensit
-528#£Zmensen’ v«yrazu pomoc’ ruzn«ych metod
+528#£Zmensen’ vrazu pomoc’ ruznch metod
 529#£Zjednodusit
-530#£Automatick«y pokus o zjednodusen’ v«yrazu. Pouzijte redukci a v pr’pade selh‡n’ zvolte konkrŽtn’ metody.
+530#£Automatick pokus o zjednodusen’ vrazu. Pouzijte redukci a v pr’pade selh‡n’ zvolte konkrŽtn’ metody.
 531#£Faktorizovat
-532#£Faktorizuje v«yraz
+532#£Faktorizuje vraz
 533#£Expandovat
 534#£Vsechny z‡vorky jsou rozs’reny
 535#£Tabulka
 536#£Vlozit Excel
 537#£Rozlisovat
-538#£Vyberte v«yraz, kter«y chcete odlisit, nebo um’stete kurzor do v«yrazu
+538#£Vyberte vraz, kter chcete odlisit, nebo um’stete kurzor do vrazu
 539#£Integrovat
-540#£Urcuje neurcit«y integr‡l funkce
+540#£Urcuje neurcit integr‡l funkce
 541#£Importovat nastaven’
 542#£Nastaven’ exportu
 543#£Prizpusobit menu
 544#£sinusov‡ regrese
 545#£Vykreslovac’ graf (Alt+P)
-546#£Zobrazuje graf pro vybranou funkci/rovnici a body. Graf je pak moznŽ vlozit do dokumentu. Podporov‡no je nekolik grafick«ych programu. V nastaven’ vyberte svou obl’benou polozku.
+546#£Zobrazuje graf pro vybranou funkci/rovnici a body. Graf je pak moznŽ vlozit do dokumentu. Podporov‡no je nekolik grafickch programu. V nastaven’ vyberte svou obl’benou polozku.
 547#£Vykreslen’ pomoc’ GnuPlot
 548#£Zobrazit graf pomoc’ GnuPlot. GnuPlot podporuje mnoho funkc’ a vytv‡r’ pekne vypadaj’c’ graf. Graf muzete v dokumentu poklepat a znovu jej upravit.
 549#£Vykreslen’ pomoc’ aplikace Graph
-550#£Vloz’ vlozen«y objekt Graph-do aplikace Word, kter«y lze upravit poklep‡n’m na graf. Definice, funkce, rovnice a body se pren‡sej’ z Wordu do grafu. Graph je velmi rychl«y program s mnoha funkcemi. Nev«yhodou je, ze nen’ podporov‡n na Macu a grafy jsou zobrazeny v n’zkŽm rozlisen’.
+550#£Vloz’ vlozen objekt Graph-do aplikace Word, kter lze upravit poklep‡n’m na graf. Definice, funkce, rovnice a body se pren‡sej’ z Wordu do grafu. Graph je velmi rychl program s mnoha funkcemi. Nevhodou je, ze nen’ podporov‡n na Macu a grafy jsou zobrazeny v n’zkŽm rozlisen’.
 551#£GeoGebra
-552#£Otevre GeoGebru a prenese do GeoGebry vybranŽ funkce/rovnice, stejne jako vsechny definice. GeoGebra je grafov«y program s nejbohats’mi funkcemi. Vytv‡r’ takŽ vysoce kvalitn’ graf. Nev«yhody jsou: Otev’r‡ se pomalu a graf se automaticky neprenese do aplikace Word. Mus’ se rucne zkop’rovat do Wordu pomoc’ edit-menu/'Kop’rovat grafickŽ zobrazen’ do schr‡nky'. Graf nelze po vlozen’ znovu upravit.
+552#£Otevre GeoGebru a prenese do GeoGebry vybranŽ funkce/rovnice, stejne jako vsechny definice. GeoGebra je grafov program s nejbohats’mi funkcemi. Vytv‡r’ takŽ vysoce kvalitn’ graf. Nevhody jsou: Otev’r‡ se pomalu a graf se automaticky neprenese do aplikace Word. Mus’ se rucne zkop’rovat do Wordu pomoc’ edit-menu/'Kop’rovat grafickŽ zobrazen’ do schr‡nky'. Graf nelze po vlozen’ znovu upravit.
 553#£Graf aplikace Excel
-554#£Vloz’ vlozen«y excelov«y list urcen«y k zobrazen’ grafu a bodu. Poklepejte na excelovŽ listy a znovu jej upravte. Nen’ tak rychl«y a bohat«y na funkce jako nekter‡ jin‡ grafick‡ resen’. V«yhody jsou: Podporuje ucen’ Excel a je navrzen pro snadnŽ vykreslov‡n’ bodu. Je to dobr‡ volba pro spolupr‡ci s jin«ymi predmety, jako jsou pr’rodovednŽ predmety.
+554#£Vloz’ vlozen excelov list urcen k zobrazen’ grafu a bodu. Poklepejte na excelovŽ listy a znovu jej upravte. Nen’ tak rychl a bohat na funkce jako nekter‡ jin‡ grafick‡ resen’. Vhody jsou: Podporuje ucen’ Excel a je navrzen pro snadnŽ vykreslov‡n’ bodu. Je to dobr‡ volba pro spolupr‡ci s jinmi predmety, jako jsou pr’rodovednŽ predmety.
 555#£Pole Smer
 556#£Zobraz’ smerovŽ pole a vynese krivky resen’ diferenci‡ln’ rovnice prvn’ho r‡du.
 557#£Vlozen’ souboru GeoGebra
-558#£Vloz’ pr‡zdn«y soubor GeoGebra, kter«y lze upravovat a ukl‡dat z aplikace Word. Soubor se zobraz’ jako ikona. Obr‡zky grafu mus’ b«yt zkop’rov‡ny do dokumentu.
+558#£Vloz’ pr‡zdn soubor GeoGebra, kter lze upravovat a ukl‡dat z aplikace Word. Soubor se zobraz’ jako ikona. Obr‡zky grafu mus’ bt zkop’rov‡ny do dokumentu.
 559#£3D graf
 560#£Vykreslete rovnice, body, vektory a parametrickŽ grafy ve 3D.
 561#£Teleso revoluce
 562#£Zobrazuje teleso rotace funkce. Graf funkce se otoc’ o 360 stupnu kolem osy x a vytvor’ 3D objekt.
 563#£Statistika
-564#£Otevre sesit aplikace Excel urcen«y pro statistiku jednŽ promennŽ. Pod’vejte se na listy, abyste videli vsechny funkce.
+564#£Otevre sesit aplikace Excel urcen pro statistiku jednŽ promennŽ. Pod’vejte se na listy, abyste videli vsechny funkce.
 565#£Seskupen‡ pozorov‡n’
 566#£List aplikace Excel pro neseskupen‡ data. Vypoc’t‡v‡ frekvence, prumer, kvartily atd. a generuje pr’slusnŽ diagramy, jako je box a whiskers diagram
 567#£Seskupen‡ pozorov‡n’
 568#£Excel list pro seskupen‡ data. Vypoc’t‡v‡ frekvence, stredn’ hodnotu atd. a generuje relevantn’ diagramy, jako je histogram a diagram krabice a vousu
-569#£Sloupcov«y diagram
-570#£Excel list pro vytv‡ren’ sloupcov«ych grafu
+569#£Sloupcov diagram
+570#£Excel list pro vytv‡ren’ sloupcovch grafu
 571#£Histogram
 572#£List aplikace Excel pro vykreslen’ v’ce histogramu v jednom diagramu.
 573#£SchŽma pr’padu schodiste
 574#£
 575#£Kumulativn’ frekvencn’ diagram
 576#£
-577#£Krabicov«y a vousov«y graf
+577#£Krabicov a vousov graf
 578#£List aplikace Excel pro vykreslen’ v’ce grafu r‡mecku a vousu v jednom diagramu.
 579#£Regrese
-580#£Nejprve vloz’me tabulku s body. PotŽ um’stete kurzor do tabulky a vyberte typ regrese. Stul muze b«yt svisl«y nebo vodorovn«y. Pokud existuj’ pouze dva body, predpokl‡d‡ se, ze jsou svislŽ.
+580#£Nejprve vloz’me tabulku s body. PotŽ um’stete kurzor do tabulky a vyberte typ regrese. Stul muze bt svisl nebo vodorovn. Pokud existuj’ pouze dva body, predpokl‡d‡ se, ze jsou svislŽ.
 581#£Pri kontrole aktualizace doslo k chybe. Nyn’ budete presmerov‡ni na webovou str‡nku, kde se muzete sami presvedcit, zda je k dispozici nov‡ aktualizace. Aktu‡ln’ verze je:
 582#£Vloz’ tabulku se dvema sloupci pro zad‡v‡n’ bodu pro regresi.
 583#£Distribuce
 584#£Excelov‡ tabulka s grafy rozlozen’. Diagramy jsou dynamickŽ a mohou vykreslit distribuce pro vsechny parametry.
 585#£BinomickŽ rozdelen’
-586#£Excel list, kter«y vykresluje binomickŽ rozdelen’. Na ars’ku zvolte p a n
+586#£Excel list, kter vykresluje binomickŽ rozdelen’. Na ars’ku zvolte p a n
 587#£Norm‡ln’ rozdelen’
-588#£List aplikace Excel, kter«y vykresluje norm‡ln’ rozdelen’. Volba stredn’ a smerodatnŽ odchylky na listech
+588#£List aplikace Excel, kter vykresluje norm‡ln’ rozdelen’. Volba stredn’ a smerodatnŽ odchylky na listech
 589#£-distribuce
-590#£List aplikace Excel, kter«y vykresluje distribuci $X^2. Na listu vyberte stupne volnosti.
+590#£List aplikace Excel, kter vykresluje distribuci $X^2. Na listu vyberte stupne volnosti.
 591#£Test
 592#£StatistickŽ testy
-593#£Binomick«y test
-594#£Excel list pro binomick«y test. Stejn«y sesit aplikace Excel jako binomick‡ distribuce, ale jin«y list.
+593#£Binomick test
+594#£Excel list pro binomick test. Stejn sesit aplikace Excel jako binomick‡ distribuce, ale jin list.
 595#£$X^2-test
 596#£Provede $X^2-test na tabulce n x n. Vyberte c’sla v tabulce.
 597#£Dobre sed’
 598#£Prov‡d’ test dobrŽ shody. (Test ch’-kvadr‡t), abyste zjistili, zda jsou dve rozdelen’ stejn‡.
 599#£Statistick‡ simulace
-600#£Excel list s pridanou funkcionalitou, kter‡ dok‡ze permutovat a ukl‡dat v«ysledek. Obsahuje pr’klad pouzit’.
+600#£Excel list s pridanou funkcionalitou, kter‡ dok‡ze permutovat a ukl‡dat vsledek. Obsahuje pr’klad pouzit’.
 601#£Nov‡ rovnice (Alt+M)
 602#£Vlozen’ matematickŽho vstupn’ho pole
 603#£Nov‡ c’slovan‡ rovnice (Alt+M Alt+M)
@@ -609,13 +609,13 @@
 608#£Vlozte c’slo rovnice dr’ve pojmenovanŽ rovnice. Pokud se pozdeji zmen’ c’slo rovnice, zmen’ se i odkaz.
 609#£Nastavte rovnici na pevnŽ c’slo
 610#£Rovnici, kter‡ je jiz oc’slov‡na, lze nastavit na urcitŽ c’slo
-611#£Vloz’ nov«y odd’l rovnice.
+611#£Vloz’ nov odd’l rovnice.
 612#£Preposle prvn’ c’slo v c’slov‡n’ rovnice d‡l. Pokud je predchoz’ (2.5), pak dals’ bude (3.1). Lze je vlozit do nadpisu jako c’slo nadpisu nebo vlozit skrytŽ.
 613#£Aktualizujte vsechna c’sla rovnic v dokumentu
-614#£Obvykle je nutnŽ ji spustit, kdyz byly odstraneny rovnice. Vlozen’ nov«ych c’slovan«ych rovnic si vsak vynut’ aktualizaci.
+614#£Obvykle je nutnŽ ji spustit, kdyz byly odstraneny rovnice. Vlozen’ novch c’slovanch rovnic si vsak vynut’ aktualizaci.
 615#£Symboly
 616#£RuznŽ metody manipulace se symboly
-617#£V«ymena znamŽnek n‡soben’
+617#£Vmena znamŽnek n‡soben’
 618#£Nahradte vsechny znaky n‡soben’ * znakem $*
 619#£PrevŽst rovnice do LaTexu. (Kl‡vesov‡ zkratka alt+T prevede jednu rovnici)
 620#£Prevedte nekterŽ nebo vsechny rovnice do LaTexu v dokumentu. Muze takŽ pouz’t MikTex k vygenerov‡n’ kompletn’ho dokumentu LaTex.
@@ -623,84 +623,84 @@
 622#£Prevede jednu rovnici na LaTex. VlozenŽ znaky lze vybrat ve formul‡ri LaTex. Kl‡vesov‡ zkratka Alt+T takŽ prev‡d’ jednu eqaution.
 623#£Nahradit pro spusten’ n‡soben’
 624#£Nahrazuje vsechny znaky n‡soben’ " & ChrW(183) & " za * znamŽnka n‡soben’.
-625#£Tecka jako oddelovac desetinn«ych m’st
-626#£Nahrad’ vsechny , (c‡rky) v matematick«ych vstupn’ch pol’ch za . (tecka) a vsechny ;(stredn’k) s ,(c‡rky)
-627#£C‡rka jako oddelovac desetinn«ych m’st
-628#£Nahrazuje vsechny soubory . (tecky) v matematick«ych vstupn’ch pol’ch s ,(c‡rky) a vsemi ,(c‡rky) s ;(stredn’ky)
+625#£Tecka jako oddelovac desetinnch m’st
+626#£Nahrad’ vsechny , (c‡rky) v matematickch vstupn’ch pol’ch za . (tecka) a vsechny ;(stredn’k) s ,(c‡rky)
+627#£C‡rka jako oddelovac desetinnch m’st
+628#£Nahrazuje vsechny soubory . (tecky) v matematickch vstupn’ch pol’ch s ,(c‡rky) a vsemi ,(c‡rky) s ;(stredn’ky)
 629#£MatematickŽ tvary, diagramy a obr‡zky
-630#£Otevre dokument s typick«ymi matematick«ymi tvary, diagramy atd. Ty pak muzete zkop’rovat do svŽho dokumentu a upravit s nimi podle sv«ych predstav.
+630#£Otevre dokument s typickmi matematickmi tvary, diagramy atd. Ty pak muzete zkop’rovat do svŽho dokumentu a upravit s nimi podle svch predstav.
 631#£Seznam $ArrowRight tabulky
 632#£Seznam $ArrowRight tabulky
 633#£Stul
 634#£WordMat muze manipulovat s daty v seznamu. Pr’klad: Ke vsem prvkum v seznamu muzete snadno pridat c’slo. Data jsou vsak casto v tabulce ve Wordu. Zde jsou funkce pro prevod seznamu til tabulek a obr‡cen’.
 635#£Vlozit list aplikace Excel
-636#£Vloz’ pr‡zdn«y vlozen«y list aplikace Excel. Dvojit«ym kliknut’m otevrete a upravte.
+636#£Vloz’ pr‡zdn vlozen list aplikace Excel. Dvojitm kliknut’m otevrete a upravte.
 637#£PrevŽst na seznam
 638#£Prevede tabulku na seznam. S t’mto seznamem lze potŽ manipulovat pomoc’ WordMat. Pr’klad: [1, 2, 3]+1 = [2, 3, 4] Pro v’ce informac’ se pod’vejte do manu‡lu
 639#£PrevŽst na tabulku
-640#£Prevede seznam na tabulku. Seznam muze b«yt v matematickŽm r‡mecku nebo muze b«yt naps‡n v dokumentu a vybr‡n napr’klad (1, 2), (3, 4), (5, 6)
+640#£Prevede seznam na tabulku. Seznam muze bt v matematickŽm r‡mecku nebo muze bt naps‡n v dokumentu a vybr‡n napr’klad (1, 2), (3, 4), (5, 6)
 641#£Resic trojœheln’ku
-642#£Zadejte 3 strany/œhly. Resic trojœheln’ku vypoc’t‡ zb«yvaj’c’ strany/œhly a vygeneruje obr‡zek trojœheln’ku.
+642#£Zadejte 3 strany/œhly. Resic trojœheln’ku vypoc’t‡ zbvaj’c’ strany/œhly a vygeneruje obr‡zek trojœheln’ku.
 643#£Manu‡l aplikace Word
 644#£Otevre manu‡l jako dokument aplikace Word
-645#£Webov«y manu‡l
-646#£Otevre online webovou pr’rucku. M‡ leps’ navigaci a videa nez manu‡l aplikace Word, ale st‡le se na nem pracuje.
+645#£Webov manu‡l
+646#£Otevre manu‡l na internetu v prohl’zeci.
 647#£Manu‡l Maxima
-648#£Maxima je program CAS, kter«y prov‡d’ vetsinu matematick«ych v«ypoctu ve WordMatu. Maxima m‡ mnoho vestaven«ych funkc’, kterŽ nejsou okamzite viditelnŽ z uzivatelskŽho rozhran’ WordMat, ale lze je spustit, pokud zn‡te n‡zvy funkc’. Zde se zobraz’ n‡poveda Maxima, kde si muzete prohlŽdnout dokumentaci ke vsem funkc’m Maxima.
+648#£Maxima je program CAS, kter prov‡d’ vetsinu matematickch vpoctu ve WordMatu. Maxima m‡ mnoho vestavench funkc’, kterŽ nejsou okamzite viditelnŽ z uzivatelskŽho rozhran’ WordMat, ale lze je spustit, pokud zn‡te n‡zvy funkc’. Zde se zobraz’ n‡poveda Maxima, kde si muzete prohlŽdnout dokumentaci ke vsem funkc’m Maxima.
 649#£Asi
 650#£Kdo vytvoril WordMat?
 651#£Kontrola aktualizac’
 652#£Automaticky kontrolovat aktualizace.
 653#£Kl‡vesovŽ zkratky
-654#£Zobrazuje seznam kl‡vesov«ych zkratek pro aktivaci pr’kazu WordMat a kl‡vesov«ych zkratek pro zad‡v‡n’ matematiky do matematick«ych vstupn’ch pol’ v aplikaci Word.
+654#£Zobrazuje seznam kl‡vesovch zkratek pro aktivaci pr’kazu WordMat a kl‡vesovch zkratek pro zad‡v‡n’ matematiky do matematickch vstupn’ch pol’ v aplikaci Word.
 655#£Sablona LaTex
 656#£Sablona LaTex
-657#£Otevre dokument aplikace Word, kter«y je stylizov‡n jako dokument LaTex, ale jeho psan’ je stejne snadnŽ jako dokument aplikace Word.
-658#£Precisionen je nastaven velmi vysoko. Doba v«ypoctu muze b«yt velmi dlouh‡ nebo muze selhat. Pokud ano, zkuste to znovu s nizs’m nastaven’m.
+657#£Otevre dokument aplikace Word, kter je stylizov‡n jako dokument LaTex, ale jeho psan’ je stejne snadnŽ jako dokument aplikace Word.
+658#£Precisionen je nastaven velmi vysoko. Doba vpoctu muze bt velmi dlouh‡ nebo muze selhat. Pokud ano, zkuste to znovu s nizs’m nastaven’m.
 659#£WordMat prevŽst na LaTex velmi dobre, ale je zde takŽ moznost pouz’t Maxima pro prevod na LaTex.
 660#£Jednotky se obvykle nezapisuj’ kurz’vou jako promennŽ. Pomoc’ tŽto funkce WordMat se pokus’ identifikovat jednotky a vlozit LaTex k—d pro z‡pis jednotek norm‡ln’m p’smem.
 661#£Zavr’t
-662#£Vytvor’ skutecn«y LaTex dokument pomoc’ MikTexu, kter«y mus’ b«yt nainstalov‡n. Pouz’vejte pouze pro jednoduch«y dokument, protoze ne vsechny objekty dokumentu jsou podporov‡ny.
-663#£Ukazuje, jak je interpretov‡n v«ystup LaTex
+662#£Vytvor’ skutecn LaTex dokument pomoc’ MikTexu, kter mus’ bt nainstalov‡n. Pouz’vejte pouze pro jednoduch dokument, protoze ne vsechny objekty dokumentu jsou podporov‡ny.
+663#£Ukazuje, jak je interpretov‡n vstup LaTex
 664#£Generuje k—d LaTex a otevre se v TexWorks, kde muzete prov‡det œpravy.
 665#£Trojœheln’k
 666#£Z‡pis
 667#£Graf
-668#£Pokrocil«y
-669#£Vedeck«y z‡pis
+668#£Pokrocil
+669#£Vedeck z‡pis
 670#£Komplexn’ c’sla
 671#£Chcete-li zmenit jazyk, mus’ se zmena jazyka projevit vsude, mus’te restartovat aplikaci Word.
-672#£Nelze vz’t logaritmick«y z‡znam hodnot <= 0
-673#£Vypoc’tav«y
+672#£Nelze vz’t logaritmick z‡znam hodnot <= 0
+673#£Vypoc’tav
 674#£Poc’t‡m
-675#£Tato metoda vyzaduje interval, ve kterŽm je resen’ v tomto intervalu. V intervalu mus’ b«yt pouze jedno resen’. Pod’vejte se na graf a identifikujte resen’.
+675#£Tato metoda vyzaduje interval, ve kterŽm je resen’ v tomto intervalu. V intervalu mus’ bt pouze jedno resen’. Pod’vejte se na graf a identifikujte resen’.
 676#£O intervalovŽ metode
 677#£Newton-Raphsonova metoda vyzaduje poc‡tecn’ odhad resen’. Nen’ zaruceno, ze metoda najde resen’, pokud nejakŽ existuje. Je nalezeno pouze 1 resen’. Pod’vejte se na graf a identifikujte poc‡tecn’ odhad.
 678#£O spolecnosti Newton-Raphson
 679#£Pred proveden’m z‡lohov‡n’ je nutnŽ dokument ulozit!
-680#£V«ystup pol‡rn’ho z‡pisu
-681#£ProblŽmy se souborem 'normal.dotm' mohou zpusobit problŽmy s kl‡vesov«ymi zkratkami v aplikaci WordMat. ProblŽmy lze vyresit odstranen’m souboru, protoze pri restartov‡n’ aplikace Word se automaticky vygeneruje nov«y v«ychoz’ soubor. Soubor nelze odstranit, pokud je aplikace Word otevren‡. Mus’te to udelat rucne.\r\n\r\n- Stisknut’m tlac’tka OK otevrete slozku, kde je um’sten soubor Normal.dotm. \r\n- Ulozte svou pr‡ci a zavrete Word \r\n- delete normal.dotm \r\n- Otevrete Word a otevrete a zavrete nastaven’ WordMat
-682#£V«ypocet prov‡d’ GeoGebra
+680#£Vstup pol‡rn’ho z‡pisu
+681#£ProblŽmy se souborem 'normal.dotm' mohou zpusobit problŽmy s kl‡vesovmi zkratkami v aplikaci WordMat. ProblŽmy lze vyresit odstranen’m souboru, protoze pri restartov‡n’ aplikace Word se automaticky vygeneruje nov vchoz’ soubor. Soubor nelze odstranit, pokud je aplikace Word otevren‡. Mus’te to udelat rucne.\r\n\r\n- Stisknut’m tlac’tka OK otevrete slozku, kde je um’sten soubor Normal.dotm. \r\n- Ulozte svou pr‡ci a zavrete Word \r\n- delete normal.dotm \r\n- Otevrete Word a otevrete a zavrete nastaven’ WordMat
+682#£Vpocet prov‡d’ GeoGebra
 683#£s’p
 684#£Otevren’ prohl’zece Safari
 685#£ProblŽm se nevyresil.\r\nChcete zkusit jinou metodu nebo CAS-engine?
 686#£Motor CAS
-687#£V«yznamnŽ œdaje
+687#£VznamnŽ œdaje
 688#£Zapnut’/vypnut’ jednotek
-689#£Pokud jsou zapnuty jednotky, muze aplikace WordMath interpretovat a prev‡det jednotky. Na tlac’tku SI muzete menit v«ystupn’ jednotky. Nezap’nejte jednotky, pokud to nepotrebujete. To muze ovlivnit chov‡n’ WordMat a vyhrazuje si mnoho promenn«ych.
+689#£Pokud jsou zapnuty jednotky, muze aplikace WordMath interpretovat a prev‡det jednotky. Na tlac’tku SI muzete menit vstupn’ jednotky. Nezap’nejte jednotky, pokud to nepotrebujete. To muze ovlivnit chov‡n’ WordMat a vyhrazuje si mnoho promennch.
 690#£Vlozit pole s k—dem
-691#£Uvedte jednotky, na kterŽ chcete prevŽst. Ve v«ychoz’m nastaven’ jsou v«ystupn’ jednotky jednotky SI.
+691#£Uvedte jednotky, na kterŽ chcete prevŽst. Ve vchoz’m nastaven’ jsou vstupn’ jednotky jednotky SI.
 692#£vœ
 693#£Pole k—du je oblast, ve kterŽ muzete pr’mo programovat Maxima. Muzete napr’klad definovat pokrocilejs’ funkce, kterŽ pak muzete pouz’t n’ze v dokumentu. V’ce v manu‡lu.
 694#£Ne. c’sel
 695#£Zaokrouhlen’
-696#£Vyberte, jak se maj’ c’sla zaokrouhlovat a zaokrouhlovat. V n’ze uveden«ych pr’kladech je WordMat nastaven na 3 c’sla\r\n\r\nDesetinn‡ c’sla: 12,345\r\nV«yznamn‡ c’sla: 12,3\r\nSci. Z‡pis: 1,23*10^1
+696#£Vyberte, jak se maj’ c’sla zaokrouhlovat a zaokrouhlovat. V n’ze uvedench pr’kladech je WordMat nastaven na 3 c’sla\r\n\r\nDesetinn‡ c’sla: 12,345\r\nVznamn‡ c’sla: 12,3\r\nSci. Z‡pis: 1,23*10^1
 697#£Dokoncete ctverec
-698#£Pouzije œpln«y ctverec pro vsechny promennŽ ve v«yrazu
-699#£Faktori‡l z‡porn«ych cel«ych c’sel nen’ definov‡n
-700#£Upozornen’: V systŽmu je v’ce rovnic nez promenn«ych. Byl to z‡mer?
+698#£Pouzije œpln ctverec pro vsechny promennŽ ve vrazu
+699#£Faktori‡l z‡pornch celch c’sel nen’ definov‡n
+700#£Upozornen’: V systŽmu je v’ce rovnic nez promennch. Byl to z‡mer?
 701#£Nov‡ rovnice
-702#£Predchoz’ v«ysledek(y)
+702#£Predchoz’ vsledek(y)
 703#£Prepnout c’slo/presnost
 704#£PrevŽst na Latex
 705#£LatexovŽ PDF
@@ -708,9 +708,9 @@
 707#£Radi‡nech
 708#£òhlov‡ jednotka
 709#£Zobrazit podm’nky resen’
-710#£Presn«y
-711#£C’seln«y
-712#£Automatick«y
+710#£Presn
+711#£C’seln
+712#£Automatick
 713#£Velmi vysok‡ presnost (beta)
 714#£Vlozit vysvetlen’
 715#£Vlozit pr’kaz Maxima
@@ -719,34 +719,34 @@
 718#£Mult.sign
 719#£Tecka
 720#£Typ resen’
-721#£Booleovsk«y
+721#£Booleovsk
 722#£Sada resen’
 723#£Doln’ index
 724#£Je pouze textov‡ c‡st n‡zvu promennŽ
 725#£Je index seznamu/matice
-726#£Standardn’ grafick«y program
+726#£Standardn’ grafick program
 727#£Vlozen’ listu aplikace Excel
 728#£Funkci nelze provŽst, protoze nen’ nainstalov‡na aplikace WordMat+.
-729#£StavovŽ v«ystupn’ jednotky oddelenŽ c‡rkou\npr’klady:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nPokud nen’ nic uvedeno, jednotky jsou vr‡ceny v z‡kladn’ch jednotk‡ch SI nebo jednotk‡ch odvozen«ych od SI bez predpony.
-730#£Pr’klady podporovan«ych jednotek:\n(V’ce viz manu‡l)\n\nDŽlka: cm , AU, ly, pc\nHmotnost: u , G, mg\nFrekvence: Hz , Bq\nEnergie: kWh , eV, aJ\nTlak: Bar , mmHg, atm, torr
+729#£StavovŽ vstupn’ jednotky oddelenŽ c‡rkou\npr’klady:\n\ncm , kJ\neV , nm, mV\naJ , AU, Bq\n\nPokud nen’ nic uvedeno, jednotky jsou vr‡ceny v z‡kladn’ch jednotk‡ch SI nebo jednotk‡ch odvozench od SI bez predpony.
+730#£Pr’klady podporovanch jednotek:\n(V’ce viz manu‡l)\n\nDŽlka: cm , AU, ly, pc\nHmotnost: u , G, mg\nFrekvence: Hz , Bq\nEnergie: kWh , eV, aJ\nTlak: Bar , mmHg, atm, torr
 731#£GoniometrickŽ rovnice
 732#£Vsechna resen’
 733#£Pouze 1 resen’
 734#£Automatick‡ kontrola aktualizac’
 735#£Opravit kl‡vesovŽ zkratky
 736#£Restartujte WordMat
-737#£Ne. v«ypoctu
-738#£Kl‡vesovŽ zkratky opraveny.\nPokud to st‡le nefunguje, smazte soubor 'normal.dotm' ve slozce '~/Library/Group Containers/UBF8T346G9. Office/Uzivatelsk«y obsah/Sablony' a restartujte aplikaci Word
+737#£Ne. vpoctu
+738#£Kl‡vesovŽ zkratky opraveny.\nPokud to st‡le nefunguje, smazte soubor 'normal.dotm' ve slozce '~/Library/Group Containers/UBF8T346G9. Office/Uzivatelsk obsah/Sablony' a restartujte aplikaci Word
 739#£Kl‡vesovŽ zkratky opraveny.\nPokud to st‡le nefunguje, smazte soubor 'normal.dotm' ve slozce '%appdata%/Microsoft/Templates' a restartujte Word
 740#£GeoGebra Calculator Suite je nainstalov‡na s aplikac’ WordMat. Bez’ v prohl’zeci, ale nevyzaduje internet. Funguje stejne na Windows a Macu a spoust’ se rychle.\nGeoGebra 5 funguje stejne na Windows i Macu, ale vyzaduje instalaci.\nWindows takŽ podporuj’ dals’ verze aplikac’ GeoGebra jako Geogebra 6, Grafick‡ kalkulacka atd. Ty se pouzij’, pokud GeoGebra 5 nenainstaluje.
 741#£Kl‡vesovŽ zkratky nejsou nastaveny spr‡vne
-742#£V«ysledek v«ypoctu z‡vis’ na znamŽnku
+742#£Vsledek vpoctu z‡vis’ na znamŽnku
 743#£St‡tn’ znak
 744#£Diferenci‡ln’ rovnice
 745#£Resen’ diferenci‡ln’ rovnice
 746#£Indep. var
 747#£Dep. var/funkce
-748#£V«ychoz’ podm’nka
+748#£Vchoz’ podm’nka
 749#£Chyba Maxima
 750#£Matematick‡ chyba
 751#£Syntaktick‡ chyba
@@ -755,9 +755,9 @@
 754#£Je jich pr’lis mnoho
 755#£V k—du doslo k chybe.
 756#£Delen’ nulou
-757#£Doslo k omylu. Chyba byla pravdepodobne zpusobena jednou z vasich definic.\r\nMozn‡ si chyby vsimnete z n’ze uveden«ych informac’.
+757#£Doslo k omylu. Chyba byla pravdepodobne zpusobena jednou z vasich definic.\r\nMozn‡ si chyby vsimnete z n’ze uvedench informac’.
 758#£V jednŽ z vasich definic je chyba.\r\nDefinice bude nyn’ vybr‡na ve Wordu.
-759#£Nepovolen«y znak byl um’sten uzivatelem
+759#£Nepovolen znak byl um’sten uzivatelem
 760#£Vyresit rovnici
 761#£Promenn‡
 762#£Nebo stavov‡ promenn‡:
@@ -765,38 +765,38 @@
 764#£Temp. definice
 765#£Upozornen’: Jednotky jsou zapnutŽ.\r\nResen’ rovnic bude hors’\r\nD‡vejte si pozor na promennŽ, kterŽ jsou jednotkami jako: A,C,F,H,J,K,L,N,S,T,V,W,m,g,u,s
 766#£Resit soustavu rovnic
-767#£V«yber promenn«ych
+767#£Vber promennch
 768#£WordMat se spoust’
 769#£Pockejte pros’m
 770#£Resic trojœheln’ku
-771#£Pravoœhl«y
-772#£Jak«ykoliv
+771#£Pravoœhl
+772#£Jakkoliv
 773#£Vpravo
 774#£Pojmenov‡n’
 775#£Manuel
 776#£òhly, velk‡ p’smena, malŽ strany
 777#£Strany pojmenovanŽ rohy AB
 778#£Vlozte c’sla do trojœheln’ku v aplikaci Word
-779#£Zobrazit v«ypocty v aplikaci Word
-780#£Vlozte zn‡mŽ strany a œhly. Zb«yvaj’c’ strany a œhly budou potŽ vypoc’t‡ny a vlozeny do Wordu.\r\nJe moznŽ zmenit n‡zvy stran a œhlu na trojœheln’ku. Stac’ kliknout na p’smena.
-781#£Trojœheln’k nem‡ pozadovanou velikost. Trojœheln’k se spr‡vn«ym mer’tkem vsak bude vlozen do aplikace Word.
-782#£Trojœheln’kov«y resitel WordMat se pouz’v‡ se vstupem:
+779#£Zobrazit vpocty v aplikaci Word
+780#£Vlozte zn‡mŽ strany a œhly. Zbvaj’c’ strany a œhly budou potŽ vypoc’t‡ny a vlozeny do Wordu.\r\nJe moznŽ zmenit n‡zvy stran a œhlu na trojœheln’ku. Stac’ kliknout na p’smena.
+781#£Trojœheln’k nem‡ pozadovanou velikost. Trojœheln’k se spr‡vnm mer’tkem vsak bude vlozen do aplikace Word.
+782#£Trojœheln’kov resitel WordMat se pouz’v‡ se vstupem:
 783#£Z vasich informac’ lze vytvorit dva trojœheln’ky
-784#£Pro v«ypocet zb«yvaj’c’ch stran a œhlu je zapotreb’ v’ce informac’
+784#£Pro vpocet zbvaj’c’ch stran a œhlu je zapotreb’ v’ce informac’
 785#£Dva trojœheln’ky
-786#£Pro v«ypocet zb«yvaj’c’ch stran a œhlu je zapotreb’ v’ce informac’
+786#£Pro vpocet zbvaj’c’ch stran a œhlu je zapotreb’ v’ce informac’
 787#£Nyn’ lze vypoc’tat vsechny strany a œhly.
 788#£Pri resen’ rovnice byly pouzity numerickŽ metody. Mohou existovat dals’ resen’.
 789#£Temp. nastaven’
 790#£AutomatickŽ zmensen’
-791#£Pokus’ se v«yraz zredukovat na co nejkrats’ formu pomoc’ ruzn«ych metod.
-792#£Pokus’ se v«yraz rozlozit
-793#£Rozbal’ v«yraz.
+791#£Pokus’ se vraz zredukovat na co nejkrats’ formu pomoc’ ruznch metod.
+792#£Pokus’ se vraz rozlozit
+793#£Rozbal’ vraz.
 794#£Racionalizovat
 795#£Prevede vsechna desetinn‡ c’sla na zlomky
 796#£Sn’zit trigonometricky
-797#£Zmensete v«yraz pomoc’ goniometrick«ych identit.
-798#£Vlozit stejn«y r‡dek
+797#£Zmensete vraz pomoc’ goniometrickch identit.
+798#£Vlozit stejn r‡dek
 799#£2D vykreslov‡n’
 800#£Obnovit vse
 801#£N‡zev osy
@@ -808,12 +808,12 @@
 807#£Expandovat
 808#£Pomoc
 809#£Manu‡l
-810#£Manu‡l jako dokument aplikace Word
-811#£Dokumentace webov«ych str‡nek
+810#£Resetovat nastaven’
+811#£Vsechny nastaven’ jsou nyn’ resetov‡ny na vchoz’ hodnoty
 812#£Asi
 813#£Aktualizace
 814#£Zkratky
-815#£Jasn«y
+815#£Jasn
 816#£Logaritmus
 817#£Jazyk
 818#£Podepsat
@@ -833,30 +833,30 @@
 832#£Funkce
 833#£Rovnice
 834#£Rovnice
-835#£V«yhybka
+835#£Vhybka
 836#£Vektory
 837#£Titul
 838#£Resetovat
-839#£Slozit«y v«ypocet proveden«y presne muze trvat velmi dlouho. Chcete to zkusit c’selne znovu?
+839#£Slozit vpocet proveden presne muze trvat velmi dlouho. Chcete to zkusit c’selne znovu?
 840#£BeznŽ d pouzijte jako diferenci‡l d
-841#£Z‡pis dy/dx lze norm‡lne pouz’t pouze se speci‡ln’m diferenci‡lem d (\dd) nebo se symbolem pro parci‡ln’ derivace (\partial). Pokud neocek‡v‡te, ze d/dx bude zamenen s jin«ym v«yrazem, muzete pouz’t toto nastaven’, protoze je rychlejs’ zadat dy/dx pomoc’ regul‡rn’ho d.
+841#£Z‡pis dy/dx lze norm‡lne pouz’t pouze se speci‡ln’m diferenci‡lem d (\dd) nebo se symbolem pro parci‡ln’ derivace (\partial). Pokud neocek‡v‡te, ze d/dx bude zamenen s jinm vrazem, muzete pouz’t toto nastaven’, protoze je rychlejs’ zadat dy/dx pomoc’ regul‡rn’ho d.
 842#£Uzivatelsky definovan‡ regrese
 843#£C’selne resit soustavu diferenci‡ln’ch rovnic
 844#£Doslo k chybe
 845#£Promenn‡
 846#£Varov‡n’
-847#£Diferenci‡ln’ rovnice by mela b«yt ve tvaru y'=...  aby to bylo reseno numericky
+847#£Diferenci‡ln’ rovnice by mela bt ve tvaru y'=...  aby to bylo reseno numericky
 848#£Tlac’tko st‡hne GeoGebra 5 do slozky "st‡hnout" na vasem poc’taci Mac. PotŽ budete provedeni nastaven’m.
 849#£GeoGebra 5 jeste nebyla plne nainstalov‡na. Koncovka
 850#£GeoGebra jeste nebyla nainstalov‡na. Pockejte na dokoncen’ stahov‡n’.
 851#£Pokracovat
 852#£Smazat starou verzi
-853#£Nez bude moznŽ st‡hnout novou verzi, mus’ b«yt odstranena star‡ verze v sekci Stahov‡n’.\r\n 1. Melo by se otevr’t okno nazvanŽ 'Povolit pr’stup k souboru'.\r\n2. Kliknete na 'Vybrat...' \r\n3. Kliknete na 'Priradit pr’stup' "
+853#£Nez bude moznŽ st‡hnout novou verzi, mus’ bt odstranena star‡ verze v sekci Stahov‡n’.\r\n 1. Melo by se otevr’t okno nazvanŽ 'Povolit pr’stup k souboru'.\r\n2. Kliknete na 'Vybrat...' \r\n3. Kliknete na 'Priradit pr’stup' "
 854#£Stahov‡n’ zastaveno
 855#£Nez bude moznŽ pokracovat v instalaci, je nutnŽ povolit pr’stup k GeoGebra.app
 856#£GeoGebra 5 se stahuje
 857#£1. Nejprve pockejte, az se GeoGebra 5 st‡hne.\r\n2. Az bude stahov‡n’ dokonceno, melo by se otevr’t okno nazvanŽ 'Povolit pr’stup k souboru'.\r\n3. Kliknete na 'Vybrat...' \r\n4. Kliknete na "Priradit pr’stup"
-858#£Zastaven«y
+858#£Zastaven
 859#£Proces byl zastaven.\r\n\r\nKliknete na tlac’tko Zavr’t a zkuste to znovu.
 860#£Neudelili jste pr’stup ke sluzbe GeGebra. Kliknete na tlac’tko "Opakovat" a zkuste to znovu.
 861#£Stahov‡n’ je pomalŽ. Zkontrolujte v prohl’zeci Safari, zda to vypad‡, ze prob’h‡ stahov‡n’. Pokud nedojde k z‡dnŽmu prubehu, muzete kliknout na tlac’tko Stop.
@@ -866,7 +866,7 @@
 865#£Nyn’ by se melo otevr’t okno s n‡zvem 'Povolit pr’stup k souboru'.\r\n\r\n1. Kliknete na 'Vybrat...' \r\n2. Kliknete na "Priradit pr’stup"
 866#£Presun GeoGebry do aplikac’
 867#£Mozn‡ budete muset udelit opr‡vnen’ pro "SystŽmovŽ ud‡losti", stac’ kliknout na OK.
-868#£Pripraven«y
+868#£Pripraven
 869#£GeoGebra 5 je nyn’ nainstalov‡na.\r\nKliknete na 'Pokracovat' pro otevren’ GeoGebry.
 870#£Existuj’ str‡nky, kterŽ maj’ hodnotu 0
 871#£Nejprve mus’te vybrat tabulku
@@ -874,18 +874,18 @@
 873#£K resen’ soustavy rovnic byla pouzita GeoGebra. Nen’ jistŽ, zda mohou existovat resen’. Doporucuje se vyzkouset jinou metodu. Napr. Maxima, nebo c’selnŽ/grafickŽ
 874#£Tato funkce nen’ aplikac’ GeoGebra podporov‡na. Vyzkousejte resic rovnic
 875#£Rovnice byla resena graficky pomoc’ programu GeoGebra:
-876#£Pocet z‡vorek se ve v«yrazu neshoduje
+876#£Pocet z‡vorek se ve vrazu neshoduje
 877#£Chyby nastaven’
 878#£M‡te nespr‡vnŽ nastaven’ ve Wordu.\r\nV menu Rovnice prepnete z Latexu na Unicode.
 879#£Syntaktick‡ chyba - Nespr‡vn‡ matematika.
-880#£Zadali jste neco, co nen’ spr‡vn«y matematick«y z‡pis.\r\nChyba souvis’ s promennou:
-881#£Muze to b«yt napr’klad proto, ze na c’sle m‡te doln’ index. Znak \r\nK_0 by mel b«yt nahrazen c’slem, nikoli napr. 5000_0. Stac’ r’ct 5000.
-882#£V rovnici nemohou b«yt dve rovni se
-883#£Rovnicov«y systŽm byl resen pomoc’ programu GeoGebra:
-884#£V«ypocet byl prerusen, protoze trval velmi dlouho. Nekdy muze pomoci zkusit v«ypocet s moznost’ "C’selnŽ" m’sto moznosti PresnŽ nebo AutomatickŽ
+880#£Zadali jste neco, co nen’ spr‡vn matematick z‡pis.\r\nChyba souvis’ s promennou:
+881#£Muze to bt napr’klad proto, ze na c’sle m‡te doln’ index. Znak \r\nK_0 by mel bt nahrazen c’slem, nikoli napr. 5000_0. Stac’ r’ct 5000.
+882#£V rovnici nemohou bt dve rovni se
+883#£Rovnicov systŽm byl resen pomoc’ programu GeoGebra:
+884#£Vpocet byl prerusen, protoze trval velmi dlouho. Nekdy muze pomoci zkusit vpocet s moznost’ "C’selnŽ" m’sto moznosti PresnŽ nebo AutomatickŽ
 885#£Nelze se pripojit k aplikaci Maxima. Chcete m’sto toho pouz’t metodu 'WSH'?\r\n(Tuto moznost najdete v Nastaven’)
 886#£Aplikace WordMath nemuze komunikovat s aplikac’ GeoGebra. Je to pravdepodobne proto, ze jste v Safari nenastavili pozadovan‡ nastaven’ zabezpecen’. Kliknut’m na OK z’sk‡te pokyny
-887#£Resen’ numerick«ych
+887#£Resen’ numerickch
 888#£Aplikace WordMat nemohla naj’t instalaci Maxima. Zkuste preinstalovat
 889#£Chyba pri pripojov‡n’ k Maxima pomoc’ WSH
 890#£Automaticky se zastav’ v
@@ -894,23 +894,23 @@
 893#£Chteli byste to zkusit znovu a jak dlouho chcete cekat. (sekund) Poc’tac se po dobu cek‡n’ uzamkne.
 894#£Chyba v definici
 895#£S integr‡lem je spojena syntaktick‡ chyba. Vzpomneli jste si na dx na z‡ver?
-896#£DŽlka v«ystupu:
+896#£DŽlka vstupu:
 897#£Kliknut’m na tlac’tko ANO vloz’te vsechny znaky do aplikace Word. (Upozornen’: Muze zpomalit Word nebo dokonce zpusobit jeho selh‡n’). \r\n Kliknut’m na tlac’tko NE vloz’te pouze prvn’ch 1000 znaku.
 898#£Nastavili jste pr’lis m‡lo parametru pro funkci:
-899#£To muze b«yt zpusobeno t’m, ze jste k oddelen’ parametru pouzili c‡rky m’sto stredn’ku. (M’sto toho muzete pridat mezeru na jednu stranu c‡rky.)
+899#£To muze bt zpusobeno t’m, ze jste k oddelen’ parametru pouzili c‡rky m’sto stredn’ku. (M’sto toho muzete pridat mezeru na jednu stranu c‡rky.)
 900#£Podm’nky resen’:
 901#£Nejprve mus’te vybrat seznam, napr. [1; 2; 3]
 902#£Mozn‡ jste zamenili n a r v K(n, r)?
 903#£Soubor k—du
 904#£Pouzit’ souboru k—du
 905#£Pole k—du povolen’
-906#£Text v souboru k—du se spoust’ v Maxime pri kazdŽm spusten’. Muzete jej pouz’t napr’klad k definov‡n’ funkc’, kterŽ chcete m’t vzdy k dispozici ve WordMatu, nebo ke zmene nastaven’ v Maxima. Pouzit’ souboru s k—dem trochu zpomal’ v«ypocty. \nPole k—du lze vlozit pomoc’ nab’dky definice a jsou to pole v dokumentu aplikace Word, do kter«ych muzete vlozit maxim‡ln’ k—d, kter«y se spoust’ pri kazdŽm v«ypoctu. K—d v souboru k—du a pol’ch k—du se odes’l‡ pr’mo do spolecnosti Maxima nezpracovan«y. Jak‡koli chyba k—du zpusob’, ze WordMat selze ve vsech v«ypoctech, takze si dejte pozor. Pod’vejte se do nab’dky v N‡povede > Manu‡l > N‡poveda k pr’kazum Maxima, kde najdete spr‡vnou syntaxi Maxima.
+906#£Text v souboru k—du se spoust’ v Maxime pri kazdŽm spusten’. Muzete jej pouz’t napr’klad k definov‡n’ funkc’, kterŽ chcete m’t vzdy k dispozici ve WordMatu, nebo ke zmene nastaven’ v Maxima. Pouzit’ souboru s k—dem trochu zpomal’ vpocty. \nPole k—du lze vlozit pomoc’ nab’dky definice a jsou to pole v dokumentu aplikace Word, do kterch muzete vlozit maxim‡ln’ k—d, kter se spoust’ pri kazdŽm vpoctu. K—d v souboru k—du a pol’ch k—du se odes’l‡ pr’mo do spolecnosti Maxima nezpracovan. Jak‡koli chyba k—du zpusob’, ze WordMat selze ve vsech vpoctech, takze si dejte pozor. Pod’vejte se do nab’dky v N‡povede > Manu‡l > N‡poveda k pr’kazum Maxima, kde najdete spr‡vnou syntaxi Maxima.
 907#£Zde zadejte k—d Maxima
-908#£Nezapnuli jste pole k—du v Nastaven’ > k—du. Pole k—du je vlozeno, ale nebude pouzito ve v«ypoctech, dokud nebude zapnuto.
+908#£Nezapnuli jste pole k—du v Nastaven’ > k—du. Pole k—du je vlozeno, ale nebude pouzito ve vpoctech, dokud nebude zapnuto.
 909#£K—d
 910#£Sem nelze vlozit pole k—du.
 911#£Smerov‡ pole lze nakreslit pouze pro diferenci‡ln’ rovnice 1. r‡du ve tvaru y'=...
-912#£Nastaven’ aplikace WordMat je nastaveno na v«ypocet ve stupn’ch. Je to z‡mer?
+912#£Nastaven’ aplikace WordMat je nastaveno na vpocet ve stupn’ch. Je to z‡mer?
 913#£V n‡zvech definic nen’ dovoleno pouz’vat oper‡tor hat.
 914#£V n‡zvech definic nen’ dovoleno pouz’vat c’selnŽ znaky.
 915#£Nastavili jste pro funkci pr’lis mnoho parametru:

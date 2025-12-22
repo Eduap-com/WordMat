@@ -644,7 +644,7 @@
 643#£Word rokasgramata
 644#£Atver rokasgramatu ka Word dokumentu
 645#£Timekla rokasgramata
-646#£Atver tiessaistes timekla rokasgramatu. Ir labaka navigacija un videoklipi neka Word rokasgramata, bet nepabeigts darbs.
+646#£Atver rokasgramatu interneta parlukprogramma.
 647#£Maxima rokasgramata
 648#£Maxima ir CAS programma, kas veic lielako dalu matematisko aprekinu WordMat. Maxima ir daudz iebuvetu funkciju, kas nav uzreiz redzamas no WordMat lietotaja saskarnes, bet tas var izpildit, ja zinat funkciju nosaukumus. Tiek paradita Maxima palidziba, kura var skatit visu maxima funkciju dokumentaciju.
 649#£Par
@@ -808,8 +808,8 @@
 807#£Izverst
 808#£Paliga
 809#£Pamaciba
-810#£Rokasgramata ka Word dokuments
-811#£Majas lapas dokumentacija
+810#£Iestatijumu atiestatisana
+811#£Tagad visi iestatijumi ir atiestatiti uz noklusejuma vertibam
 812#£Par
 813#£Aktualizet
 814#£Saisnes
