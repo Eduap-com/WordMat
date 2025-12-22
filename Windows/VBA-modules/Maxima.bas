@@ -785,7 +785,9 @@ newcassys:
     End If
     GoTo slut
 fejl:
-    If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
+    If Not Oundo Is Nothing Then
+        If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
+    End If
     MsgBox2 TT.ErrorGeneral & vbCrLf & "Err. no: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Line number: " & Erl, vbOKOnly, TT.Error
     RestartMaxima
 slut:
@@ -798,7 +800,9 @@ slut:
     CASengineTempOnly = TempCas
     Selection.End = sslut    ' slut must be first
     Selection.start = sstart
-    If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
+    If Not Oundo Is Nothing Then
+        If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
+    End If
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
 Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
@@ -1529,7 +1533,9 @@ slut:
     D.Activate
 #End If
     On Error Resume Next
-    If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
+    If Not Oundo Is Nothing Then
+        If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
+    End If
     If ActiveWindow.VerticalPercentScrolled <> scrollpos Then ActiveWindow.VerticalPercentScrolled = scrollpos
     Application.ScreenUpdating = True
     '    TimeText = TimeText & vbCrLf & "beregn ialt: " & Timer - st
