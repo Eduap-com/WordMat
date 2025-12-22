@@ -289,10 +289,12 @@ Public Sub SetAllDefaultRegistrySettings(Optional ForceReset As Boolean = False)
         AllTrig = False
         OutUnits = ""
 #If Mac Then
-            SettCheckForUpdate = True
+        SettCheckForUpdate = True
 #Else
         If RegistryValueExists("HKLM", "Software\WordMat\Settings", "CheckForUpdate") Then ' When installed using MSI use global value to set checkforupdate
             SettCheckForUpdate = GetRegistryValue("HKLM", "Software\WordMat\Settings", "CheckForUpdate") 'RegKeyRead("HKLM\SOFTWARE\WORDMAT\Settings\CheckForUpdate")
+        ElseIf RegistryValueExists("HKCU", "Software\WordMat\Settings", "CheckForUpdateDefault") Then ' When installed using MSI use global value to set checkforupdate
+            SettCheckForUpdate = GetRegistryValue("HKCU", "Software\WordMat\Settings", "CheckForUpdateDefault") 'RegKeyRead("HKLM\SOFTWARE\WORDMAT\Settings\CheckForUpdate")
         Else
             SettCheckForUpdate = True
         End If
