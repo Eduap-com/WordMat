@@ -644,7 +644,7 @@
 643#£"Word" vadovas
 644#£Atidaro neautomatini kaip "Word" dokumenta
 645#£Ziniatinklio vadovas
-646#£Atidaromas internetinis ziniatinklio vadovas. Turi geresni narsyma ir vaizdo irasus nei "Word" vadovas, bet nebaigtas darbas.
+646#£Atidaro vadova internete narsykleje.
 647#£"Maxima" vadovas
 648#£"Maxima" yra CAS programa, kuri atlieka dauguma matematiniu skaiciavimu "WordMat". "Maxima" turi daug integruotu funkciju, kurios nera is karto matomos is "WordMat" vartotojo sasajos, taciau gali buti vykdomos, jei zinote funkciju pavadinimus. Tai rodo "Maxima" pagalba, kurioje galite pamatyti visu "Maxima" funkciju dokumentacija.
 649#£Apie
@@ -808,8 +808,8 @@
 807#£Isplesti
 808#£Pagalba
 809#£Vadovas
-810#£Vadovas kaip "Word" dokumentas
-811#£Svetaines dokumentacija
+810#£Is naujo nustatyti nustatymus
+811#£Dabar visi nustatymai atstatomi i numatytasias reiksmes
 812#£Apie
 813#£Naujinti
 814#£Nuorodos

@@ -644,7 +644,7 @@
 643#£Wordi käsiraamat
 644#£Avab käsitsi Wordi dokumendina
 645#£Veebi kasutusjuhend
-646#£Avab veebipõhise web juhend. Sellel on parem navigeerimine ja videod kui Wordi käsiraamatul, kuid töö on pooleli.
+646#£Avab internetis brauseris juhendi.
 647#£Maxima käsiraamat
 648#£Maxima on CAS-programm, mis teeb suurema osa matemaatilistest arvutustest WordMatis. Maximal on palju sisseehitatud funktsioone, mis ei ole WordMati kasutajaliidesest kohe nähtavad, kuid mida saab käivitada, kui teate funktsioonide nimesid. See näitab Maxima spikrit, kus näete kõigi maxima funktsioonide dokumentatsiooni.
 649#£Umbes
@@ -808,8 +808,8 @@
 807#£Laiendada
 808#£Abi
 809#£Käsiraamat
-810#£Käsiraamat Wordi dokumendina
-811#£Veebisaidi dokumentatsioon
+810#£Lähtestada seaded
+811#£Kõik seaded on nüüd lähtestatud vaikeväärtustele
 812#£Umbes
 813#£Uuendama
 814#£Otseteed
