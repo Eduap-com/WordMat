@@ -6,6 +6,7 @@ Sub OpenWebV()
 #If Mac Then
 #Else
     Dim DN As String, FN As String
+    On Error GoTo slut
     Set UFwait2 = New UserFormWaitForMaxima
     UFwait2.Label_tip.Font.Size = 10
     UFwait2.Label_tip.Font.Italic = False
@@ -105,7 +106,12 @@ Sub PrepareGeoGebraCAS()
 '        MsgBox Res
     End If
 #Else
+    Err.Clear
     If WebV Is Nothing Then OpenWebV
+    If Err <> 0 Then
+        GeoGebraWindowOpen = False
+        Exit Sub
+    End If
     Err.Clear
     On Error Resume Next
 '    Res = WebV.Title
