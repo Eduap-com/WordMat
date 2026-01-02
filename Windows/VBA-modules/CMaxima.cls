@@ -3359,7 +3359,7 @@ msat:
         End If
     Loop While pos <> 0
     If CAStype <> 0 Then
-        If InStr(ea.text, "subst") <> 0 Then
+        If InStr(text, "subst") <> 0 Then
             ea.text = text
             ea.ReplaceVar "subst", "substitute" ' diff can introduce subst, which is called substitute in GeoGebra
             text = ea.text
