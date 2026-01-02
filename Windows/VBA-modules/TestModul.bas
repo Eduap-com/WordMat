@@ -129,9 +129,9 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     TestBeregn VBA.ChrW$(8731) & "(-8)", "=-2"
     If StopNow Then GoTo slut
-    TestBeregn "a b/c+a b+f_a (x)", "f_a (x)+(b" & VBA.ChrW$(183) & "a)/c+b" & VBA.ChrW$(183) & "a"
+    TestBeregn "a b/c+a b+f_a (x)", "f_a (x)+(b" & VBA.ChrW$(183) & "a)/c+b" & VBA.ChrW$(183) & "a@$f_a (x)+(a" & ChrW$(183) & "b)/c+a" & ChrW$(183) & "b"
     If StopNow Then GoTo slut
-    TestBeregn "f_a (x)+a (b+d)/c+f_c+2+a^x (2)", "f_a (x)+2" & VBA.ChrW$(183) & "a^x+((b+d)" & VBA.ChrW$(183) & "a)/c+f_c+2"
+    TestBeregn "f_a (x)+a (b+d)/c+f_c+2+a^x (2)", "f_a (x)+2" & VBA.ChrW$(183) & "a^x+((b+d)" & VBA.ChrW$(183) & "a)/c+f_c+2@$f_a (x)+(a" & ChrW$(183) & "(d+b))/c+f_c+2" & ChrW$(183) & "a^x+2"
     If StopNow Then GoTo slut
     TestBeregn "2^2x+23/2x", "=2^(2" & VBA.ChrW$(183) & "x)+23/(2" & VBA.ChrW$(183) & "x)" ' fails if 2^2x is not interpreted as 2^(2*x)
     If StopNow Then GoTo slut
@@ -397,7 +397,7 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     MaximaDecOutType = 2
 
-    ' Differential- og integralregning
+    ' Calculus
     MaximaExact = 0
     TestSolveDE "N^'=1/10500" & VBA.ChrW$(183) & "N" & VBA.ChrW$(183) & "(1000-N)", "N,x", "N=0    " & VBA.ChrW$(8744) & "    N=1000    " & VBA.ChrW$(8744) & "    N=1000/(c" & VBA.ChrW$(183) & "e^(-((2" & VBA.ChrW$(183) & "x)/21) )+1)"
     ShowSettings "Differential- og integralregning"
@@ -513,6 +513,11 @@ ggbtest:
     ' Equations
     If TestSolve("x^2=9", "x", "x=-3    " & VBA.ChrW$(8744) & "    x=3") Then GoTo slut
 
+    ' Calculus
+    InsertTestMath "Definer: f(x)=2*x^3+e^(2x)"
+    If TestBeregn("f^' (x)", "2e^2x+6x^2") Then GoTo slut
+    If TestBeregn("(2" & VBA.ChrW$(183) & "x^3 )^'", "=6x^(2)") Then GoTo slut
+    
     ' Differential equations
     If TestSolveDE("y^'+2x" & VBA.ChrW$(183) & "y=x", "y,x", "y=c_1 e^(-x^2 )+1/2") Then GoTo slut
     If TestSolveDE("y^'=b" & VBA.ChrW$(183) & "y" & VBA.ChrW$(183) & "(M-y)", "y,x", "y=-M e^(M" & VBA.ChrW$(183) & "b" & VBA.ChrW$(183) & "x)/(c_1-e^(M" & VBA.ChrW$(183) & "b" & VBA.ChrW$(183) & "x) )") Then GoTo slut

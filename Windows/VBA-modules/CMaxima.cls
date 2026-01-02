@@ -3299,9 +3299,13 @@ videre:
                 If ea.ChrByIndex(ea.pos - 2) = "_" Then    '  f_(...)'(x)
                     F = ea.GetPrevVar(ea.pos - 1) & "(" & Udtryk & ")"
                     GoTo msat
-                ElseIf ea.IsLetterPos(ea.pos - 2) Then    ' sin(x)'
+                ElseIf ea.IsLetterPos(ea.pos - 2, False) Then  ' sin(x)'   And ea.ChrByIndex(ea.pos - 1) <> "("
                     F = ea.GetPrevVar(ea.pos - 1)
-                    text = Left$(text, ea.pos - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right$(text, Len(text) - pos - varl - antalm)
+                    If CAStype = 0 Then
+                        text = Left$(text, ea.pos - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right$(text, Len(text) - pos - varl - antalm)
+                    Else
+                        text = Left$(text, ea.pos - Len(F)) & "Substitute(Derivative(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & Var & ")" & Right$(text, Len(text) - pos - varl - antalm)
+                    End If
                     di = di + 1
                 Else    ' (x^2)'
                     text = Left$(ea.text, ea.pos - 2) & "diff(" & Udtryk & "," & Var & "," & antalmS & ")" & Right$(ea.text, Len(ea.text) - pos - varl - antalm)
@@ -3329,7 +3333,11 @@ msat:
                     If Len(subt) > 0 And Len(subt) = antalm Then ' if partiel
                         text = Left$(text, pos - 1 - Len(F)) & "diff(" & F & "(" & Var & ")," & Var & "," & antalmS & ")" & Right$(text, Len(text) - pos - varl - antalm)
                     Else ' limit, but maybe also more?
-                        text = Left$(text, pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right$(text, Len(text) - pos - varl - antalm)
+                        If CAStype = 0 Then
+                            text = Left$(text, pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right$(text, Len(text) - pos - varl - antalm)
+                        Else
+                            text = Left$(text, pos - 1 - Len(F)) & "Substitute(Derivative(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & Var & ")" & Right$(text, Len(text) - pos - varl - antalm)
+                        End If
                         di = di + 1
                     End If
                 Else    ' ikke diff ligning
@@ -3349,7 +3357,11 @@ msat:
                      s = Left$(s2, Len(s2) - 1) & "]," & s & ")"
                     text = Left$(text, pos - 1 - Len(F)) & s & Right$(text, Len(text) - pos - varl - antalm)
                   Else ' normal not partiel f'(x)
-                    text = Left$(text, pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right$(text, Len(text) - pos - varl - antalm)
+                    If CAStype = 0 Then
+                        text = Left$(text, pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right$(text, Len(text) - pos - varl - antalm)
+                    Else
+                        text = Left$(text, pos - 1 - Len(F)) & "Substitute(Derivative(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & Var & ")" & Right$(text, Len(text) - pos - varl - antalm)
+                    End If
                     di = di + 1
                   End If
                 End If
@@ -3361,7 +3373,8 @@ msat:
     If CAStype <> 0 Then
         If InStr(text, "subst") <> 0 Then
             ea.text = text
-            ea.ReplaceVar "subst", "substitute" ' diff can introduce subst, which is called substitute in GeoGebra
+            ea.ReplaceVar "diff", "Derivative" ' diff can introduce subst, which is called substitute in GeoGebra
+            ea.ReplaceVar "subst", "Substitute" ' diff can introduce subst, which is called substitute in GeoGebra
             text = ea.text
         End If
     End If
