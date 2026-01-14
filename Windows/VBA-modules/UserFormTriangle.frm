@@ -798,11 +798,11 @@ If CSng(TextBox_A.text) >= 90 Then TextBox_A.text = ""
 TextBox_C.Enabled = False
 TextBox_A.Enabled = True
 #If Mac Then
+    FN = GetWordMatDir & "Images/trekantreth.png"
 #Else
-    FN = GetProgramFilesDir & "\WordMat\Images\trekantreth.emf"
-    If Dir(FN) = vbNullString Then FN = Environ("AppData") & "\WordMat\Images\trekantreth.emf"
-    If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
+    FN = GetWordMatDir("Images") & "Images/trekantreth.emf"
 #End If
+If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
 TextBox_A.Left = 32
 TextBox_A.Top = 186
 TextBox_B.Left = 318
@@ -840,12 +840,11 @@ If CSng(TextBox_C.text) >= 90 Then TextBox_C.text = ""
 TextBox_A.Enabled = False
 TextBox_C.Enabled = True
 #If Mac Then
+    FN = GetWordMatDir & "Images/trekantretv.png"
 #Else
-    FN = GetProgramFilesDir & "\WordMat\Images\trekantretv.emf"
-    If Dir(FN) = vbNullString Then FN = Environ("AppData") & "\WordMat\Images\trekantretv.emf"
-    If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
+    FN = GetWordMatDir("Images") & "Images/trekantretv.emf"
 #End If
-
+If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
 TextBox_A.Left = 32
 TextBox_A.Top = 186
 TextBox_B.Left = 10
@@ -881,12 +880,11 @@ On Error Resume Next
 TextBox_A.Enabled = True
 TextBox_C.Enabled = True
 #If Mac Then
+    FN = GetWordMatDir & "Images/trekantvilk.png"
 #Else
-    FN = GetProgramFilesDir & "\WordMat\Images\trekantvilk.emf"
-    If Dir(FN) = vbNullString Then FN = Environ("AppData") & "\WordMat\Images\trekantvilk.emf"
-    If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
+    FN = GetWordMatDir("Images") & "Images/trekantvilk.emf"
 #End If
-
+If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
 TextBox_A.Left = 32
 TextBox_A.Top = 186
 TextBox_B.Left = 115
@@ -1057,9 +1055,9 @@ End Sub
 Private Sub UserForm_Activate()
     SaveBackup
     SetCaptions
-#If Mac Then
-    Frame1.visible = False
-#End If
+'#If Mac Then
+'    Frame1.visible = False
+'#End If
     TextBox_A.text = TriangleAV
     TextBox_B.text = TriangleBV
     TextBox_C.text = TriangleCV
