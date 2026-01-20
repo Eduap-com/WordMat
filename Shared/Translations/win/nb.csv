@@ -118,8 +118,8 @@
 117#£Det er en feil i definisjonen:
 118#£Det blir ignorert. Men fiks det slik at du ikke får denne feilen med hver beregning.
 119#£... resten fjernet.
-120#£Skolen/organisasjonen din har et aktivt partnerskap. Du kan nå bruke WordMat+
-121#£Dessverre. Skolen din har ikke et aktivt partnerskap.
+120#£WordMat+ er nå aktivert for denne datamaskinen
+121#£En aktiv WordMat+-lisens eller partnerskap kunne ikke registreres for denne datamaskinen.
 122#£Skriv inn definisjonen av den nye funksjonen\r\nDefinisjonen kan brukes i resten av dokumentet, men ikke før.\r\n Hvis en 'delete def:'-kommando settes inn lenger ned i dokumentet, kan den ikke brukes deretter.\r\nFlere funksjoner kan defineres ved å skille definisjonene med " & ListSeparator\r\ne.g. f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Ny funksjon
 124#£Ny ligning
@@ -914,3 +914,9 @@
 913#£Det er ikke tillatt å bruke hatteoperatoren i definisjonsnavn.
 914#£Det er ikke tillatt å bruke numeriske tegn i definisjonsnavn.
 915#£Du har satt for mange parametere for funksjonen:
+916#£WordMat+
+917#£Sjekk for WordMat+
+918#£Kjøp WordMat+
+919#£Aktiver WordMat+ med kode
+920#£WordMat+ er ikke korrekt installert på denne datamaskinen. Du kan ikke fortsette. Prøv å installere WordMat på nytt.
+921#£WordMat+ er allerede aktivt på denne datamaskinen.

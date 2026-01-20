@@ -118,8 +118,8 @@
 117#£Tað er ein feilur í skilgreiningini:
 118#£Tað verður skúgvað til viks. Men rætta tað, so tú ikki fært hesa villuna við hvørjari útrokning.
 119#£... restin tikin burtur.
-120#£Tín/tykkara skúli/felagsskapur hevur eitt virkið felagsskap. Nú kanst tú brúka WordMat+
-121#£Tíverri. Skúlin hjá tær/tykkum hevur ikki eitt virkið felagsskap.
+120#£WordMat+ er nú virkið til hesa teldu
+121#£Eitt virkið WordMat+ loyvi ella samstarv kundi ikki skrásetast fyri hesa teldu.
 122#£Skriva skilgreiningina av tí nýggja funktiónini\r\nSkilgreiningin kann nýtast í restini av skjalinum, men ikki fyrr.\r\n Um ein 'delete def:' kommando er sett longri niðri í skjalið, kann hon ikki nýtast eftir tað.\r\nFleiri funktiónir kunnu lýsast við at skilja skilgreiningarnar sundur við " & ListSeparator\r\ne.g. f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nýggjur eiginleiki
 124#£Nýggj líkning
@@ -914,3 +914,9 @@
 913#£Tað er ikki loyvt at brúka hattaoperatorin í skilgreiningsnøvnum.
 914#£Tað er ikki loyvt at brúka tøl í skilgreiningarnøvnum.
 915#£Tú hevur sett ov nógvar parameterar til funktiónina:
+916#£WordMat+
+917#£Kanna fyri WordMat+
+918#£Keyp WordMat+
+919#£Virkja WordMat+ við kóða
+920#£WordMat+ er ikki rætt installerað á hesi teldu. Tú kanst ikki halda fram. Rokna við at installera WordMat aftur.
+921#£WordMat+ er longu virkið á hesi teldu.

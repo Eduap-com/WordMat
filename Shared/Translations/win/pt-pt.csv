@@ -118,8 +118,8 @@
 117#£Existe um erro na definição:
 118#£Ele é ignorado, mas corrija o erro de entrada para evitar esse erro de saída
 119#£... repouso removido.
-120#£A sua Escola/organização tem uma parceria ativa. Agora você pode usar o WordMat+
-121#£Desculpa. A sua escola não tem uma parceria ativa.
+120#£O WordMat+ está agora ativado para este computador
+121#£Uma licença ou parceria WordMat+ ativa não podia ser registada para este computador.
 122#£Indique a definição da nova função\r\nA definição pode ser usada no resto do documento, mas não antes.\r\nSe você inserir um comando 'delete def:' mais abaixo no documento, ele não será conhecido a partir desse ponto.\r\nVocê pode definir mais variáveis de cada vez separando-as com " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nova função
 124#£Nova equação
@@ -914,3 +914,9 @@
 913#£Não é permitido usar o operador de chapéu em nomes de definição.
 914#£Não é permitido usar caracteres numéricos em nomes de definição.
 915#£Você definiu muitos parâmetros para a função:
+916#£WordMat+
+917#£Verifique se há WordMat+
+918#£Compre WordMat+
+919#£Ative o WordMat+ com código
+920#£O WordMat+ não está instalado corretamente neste computador. Não podes continuar. Tenta reinstalar o WordMat.
+921#£O WordMat+ já está ativo neste computador.

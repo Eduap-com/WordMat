@@ -118,8 +118,8 @@
 117#£Il y a une erreur dans la définition :
 118#£Elle est ignorée, mais corrigez l'erreur d'entrée pour éviter cette erreur de sortie
 119#£... le reste enlevé.
-120#£Votre école/organisation a un partenariat actif. Vous pouvez maintenant utiliser WordMat+
-121#£Pardon. Votre école n'a pas de partenariat actif.
+120#£WordMat+ est désormais activé pour cet ordinateur
+121#£Une licence ou un partenariat WordMat+ actif ne pouvait pas être enregistré pour cet ordinateur.
 122#£Indiquez la définition de la nouvelle fonction\r\nLa définition peut être utilisée dans le reste du document, mais pas avant.\r\nSi vous insérez une commande 'delete def :' plus bas dans le document, elle ne sera pas connue à partir de ce moment.\r\nVous pouvez définir plus de variables à la fois en les séparant par " & ListSeparator\r\nex. :  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nouvelle fonction
 124#£Nouvelle équation
@@ -914,3 +914,9 @@
 913#£Il n'est pas autorisé d'utiliser l'opérateur hat dans les noms de définition.
 914#£Il n'est pas permis d'utiliser des caractères numériques dans les noms de définition.
 915#£Vous avez défini trop de paramètres pour la fonction :
+916#£WordMath+
+917#£Vérifiez pour WordMath+
+918#£Achetez WordMath+
+919#£Activez WordMath+ avec du code
+920#£WordMat+ n'est pas installé correctement sur cet ordinateur. Tu ne peux pas continuer. Essayez de réinstaller WordMat.
+921#£WordMat+ est déjà actif sur cet ordinateur.

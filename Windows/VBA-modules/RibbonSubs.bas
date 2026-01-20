@@ -848,6 +848,34 @@ End Sub
 Sub Rib_Genveje(control As IRibbonControl)
     UserFormShortcuts.Show
 End Sub
+Sub Rib_CheckForWordMatPlus(control As IRibbonControl)
+    QCheckForWordMatPlus
+End Sub
+Sub Rib_PurchaseWordMatPlus(control As IRibbonControl)
+    On Error GoTo fejl
+    If QActivePartnership(True, False) Then
+        MsgBox2 TT.A(921), vbOKOnly, "Already active"
+    Else
+        Application.Run macroname:="ActivateWordMatPlusByCode"
+    End If
+    GoTo slut
+fejl:
+    MsgBox2 TT.A(920), vbOKOnly, TT.Error
+slut:
+End Sub
+Sub Rib_ActivateWordMatPlusCode(control As IRibbonControl)
+    On Error GoTo fejl
+    If QActivePartnership(True, False) Then
+        MsgBox2 TT.A(921), vbOKOnly, "Already active"
+    Else
+        Application.Run macroname:="PurchaseWordMatPlus"
+    End If
+    GoTo slut
+fejl:
+    MsgBox2 TT.A(920), vbOKOnly, TT.Error
+slut:
+End Sub
+
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 '''''''''''''''''''Language labels''''''''''''''''
@@ -1591,6 +1619,18 @@ Sub Rib_GetLabelUserRegr(control As IRibbonControl, ByRef returnedVal)
 End Sub
 Sub Rib_GetLabelRegrExcel(control As IRibbonControl, ByRef returnedVal)
     returnedVal = "Excel regression"
+End Sub
+Sub Rib_GetLabelWordMatPlus(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = TT.A(916)
+End Sub
+Sub Rib_GetLabelCheckForWordMatPlus(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = TT.A(917)
+End Sub
+Sub Rib_GetLabelPurchaseWordMatPlus(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = TT.A(918)
+End Sub
+Sub Rib_GetLabelActivateWordMatPlusCode(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = TT.A(919)
 End Sub
 
 ' screentips

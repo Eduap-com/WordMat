@@ -118,8 +118,8 @@
 117#£Definicija ir kluda:
 118#£Tas tiek ignorets, bet izlabojiet ievades kludu, lai izvairitos no sis izvades kludas
 119#£... atputa nonemta.
-120#£Jusu skolai/organizacijai ir aktiva partneriba. Tagad varat izmantot WordMat+
-121#£Piedodiet. Jusu skolai nav aktivas partneribas.
+120#£WordMat+ tagad ir iespejots sim datoram
+121#£Sim datoram nevareja registret aktivu WordMat+ licenci vai partneribu.
 122#£Noradiet jaunas funkcijas definiciju\r\nDefiniciju var izmantot pareja dokumenta dala, bet ne agrak.\r\nJa dokumenta talak ievietojat komandu 'delete def:', ta no si briza nebus zinama.\r\nJus varat definet vairak mainigo vienlaikus, atdalot tos ar " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Jauna funkcija
 124#£Jauns vienadojums
@@ -914,3 +914,9 @@
 913#£Definicijas nosaukumos nav atlauts izmantot cepures operatoru.
 914#£Definiciju nosaukumos nav atlauts izmantot ciparu rakstzimes.
 915#£Funkcijai ir iestatits parak daudz parametru:
+916#£WordMat+
+917#£Parbaudiet WordMat+
+918#£Iegadaties WordMat+
+919#£WordMat+ aktivizesana ar kodu
+920#£WordMat+ saja datora nav pareizi instalets. Jus nevarat turpinat. Meginiet atkartoti instalet WordMat.
+921#£WordMat+ jau ir aktivs saja datora.

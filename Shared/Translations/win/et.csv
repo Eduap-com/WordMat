@@ -118,8 +118,8 @@
 117#£Definitsioonis on viga:
 118#£Seda ignoreeritakse, kuid selle väljundvea vältimiseks parandage sisendviga
 119#£... ülejäänud eemaldatud.
-120#£Teie koolil/organisatsioonil on aktiivne partnerlus. Nüüd saate kasutada WordMat+
-121#£Kahju. Teie koolil ei ole aktiivset partnerlust.
+120#£WordMat+ on nüüd selle arvuti jaoks lubatud
+121#£Aktiivset WordMat+ litsentsi või partnerlust ei saanud selle arvuti jaoks registreerida.
 122#£Märkige uue funktsiooni definitsioon\r\nDefinitsiooni saab kasutada ülejäänud dokumendis, kuid mitte varem.\r\nKui sisestate käsu "delete def:" dokumendis allapoole, ei ole see sellest punktist edasi teada.\r\nSaate määratleda korraga rohkem muutujaid, eraldades need klahviga " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Uus funktsioon
 124#£Uus võrrand
@@ -914,3 +914,9 @@
 913#£Definitsiooninimedes ei ole lubatud kasutada mütsioperaatorit.
 914#£Definitsiooninimedes ei ole lubatud kasutada numbrilisi märke.
 915#£Olete funktsiooni jaoks määranud liiga palju parameetreid:
+916#£WordMat+
+917#£Kontrolli WordMat+ kohta
+918#£Osta WordMat+
+919#£Aktiveeri WordMat+ koodiga
+920#£WordMat+ ei ole sellel arvutil õigesti installitud. Sa ei saa jätkata. Proovi WordMati uuesti paigaldada.
+921#£WordMat+ on sellel arvutil juba aktiivne.

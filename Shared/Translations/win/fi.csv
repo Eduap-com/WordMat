@@ -118,8 +118,8 @@
 117#£Määritelmässä on virhe:
 118#£Se ohitetaan, mutta korjaa syöttövirhe tämän tulostusvirheen välttämiseksi
 119#£... loput poistettu.
-120#£Koulullasi/organisaatiollasi on aktiivinen kumppanuus. Voit nyt käyttää WordMat+:aa
-121#£Anteeksi. Koulullasi ei ole aktiivista kumppanuutta.
+120#£WordMat+ on nyt käytössä tälle tietokoneelle
+121#£Tälle tietokoneelle ei voitu rekisteröidä aktiivista WordMat+-lisenssiä tai kumppanuutta.
 122#£Ilmoita uuden funktion määritelmä\r\nMääritelmää voidaan käyttää muualla asiakirjassa, mutta ei ennen.\r\nJos lisäät 'delete def:' -komennon alempana asiakirjassa, se ei ole tiedossa siitä kohdasta.\r\nVoit määrittää useampia muuttujia kerralla erottamalla ne toisistaan komennolla " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Uusi toiminto
 124#£Uusi yhtälö
@@ -914,3 +914,9 @@
 913#£Hattuoperaattorin käyttö määritelmien nimissä ei ole sallittua.
 914#£Numeeristen merkkien käyttö määritelmien nimissä ei ole sallittua.
 915#£Olet asettanut funktiolle liian monta parametria:
+916#£WordMat+
+917#£Tarkista WordMat+
+918#£Osta WordMat+
+919#£Aktivoi WordMat+ koodilla
+920#£WordMat+ ei ole asennettu oikein tälle tietokoneelle. Et voi jatkaa. Kokeile asentaa WordMat uudelleen.
+921#£WordMat+ on jo aktiivinen tällä tietokoneella.

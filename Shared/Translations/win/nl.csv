@@ -118,8 +118,8 @@
 117#£Er zit een fout in de definitie:
 118#£Het wordt genegeerd, maar corrigeer de invoerfout om deze uitvoerfout te voorkomen
 119#£... Rest verwijderd.
-120#£Uw school/organisatie heeft een actief partnerschap. U kunt nu WordMat+ gebruiken
-121#£Sorry. Uw school heeft geen actief partnerschap.
+120#£WordMat+ is nu ingeschakeld voor deze computer
+121#£Een actieve WordMat+-licentie of samenwerking kon niet voor deze computer worden geregistreerd.
 122#£Vermeld de definitie van de nieuwe functie\r\nDe definitie kan in de rest van het document worden gebruikt, maar niet eerder.\r\nAls je verderop in het document een 'delete def:' commando invoegt, is het vanaf dat moment niet meer bekend.\r\nJe kunt meer variabelen tegelijk definiëren door ze te scheiden met " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nieuwe functie
 124#£Nieuwe vergelijking
@@ -914,3 +914,9 @@
 913#£Het is niet toegestaan om de hat operator te gebruiken in definitienamen.
 914#£Het is niet toegestaan om numerieke tekens te gebruiken in definitienamen.
 915#£Je hebt te veel parameters ingesteld voor de functie:
+916#£WordMath+
+917#£Controleer op WordMat+
+918#£Koop WordMath+
+919#£Activeer WordMat+ met code
+920#£WordMat+ is niet correct geïnstalleerd op deze computer. Je kunt niet doorgaan. Probeer WordMat opnieuw te installeren.
+921#£WordMat+ is al actief op deze computer.

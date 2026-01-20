@@ -118,8 +118,8 @@
 117#£W definicji wystapil blad:
 118#£Jest ignorowany, ale popraw blad wejsciowy, aby uniknac tego bledu wyjsciowego
 119#£... reszta usunieta.
-120#£Twoja szkola/organizacja aktywnie wspólpracuje z partnerami. Mozesz teraz korzystac z WordMat+
-121#£Przepraszam. Twoja szkola nie ma aktywnego partnerstwa.
+120#£WordMat+ jest teraz wlaczony na tym komputerze
+121#£Aktywna licencja lub partnerstwo WordMat+ nie mogly byc zarejestrowane na tym komputerze.
 122#£Podaj definicje nowej funkcji\r\nDefinicja moze byc uzyta w pozostalej czesci dokumentu, ale nie wczesniej.\r\nJesli wstawisz polecenie 'usun def:' dalej w dokumencie, nie bedzie ono znane od tego momentu.\r\nMozesz zdefiniowac wiecej zmiennych na raz, oddzielajac je za pomoca " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nowa funkcja
 124#£Nowe równanie
@@ -914,3 +914,9 @@
 913#£Niedozwolone jest uzywanie operatora hat w nazwach definicji.
 914#£Niedozwolone jest uzywanie znaków numerycznych w nazwach definicji.
 915#£Ustawiles zbyt wiele parametrów dla funkcji:
+916#£WordMat+
+917#£Sprawdz WordMat+
+918#£Kup WordMat+
+919#£Aktywuj WordMat+ za pomoca kodu
+920#£WordMat+ nie jest poprawnie zainstalowany na tym komputerze. Nie mozesz kontynuowac. Spróbuj zainstalowac ponownie WordMat.
+921#£WordMat+ jest juz aktywny na tym komputerze.

@@ -118,8 +118,8 @@
 117#£Hay un error en la definición: 
 118#£Se ignora, pero debe corregir el error de entrada para evitar el error de salida
 119#£...resto eliminado.
-120#£Su escuela/organización tiene una asociación activa. Ahora puedes usar WordMat+
-121#£Desgraciadamente. Su escuela no tiene una asociación activa.
+120#£WordMat+ está ahora habilitado para este ordenador
+121#£No se pudo registrar una licencia o asociación activa de WordMat+ para este ordenador.
 122#£Establezca la definición de la nueva función\r\nLa definición se puede utilizar en el resto del documento, pero no antes.\r\nSi usted inserta un comando 'borrar def:'  más abajo, en el documento, no se puede utilizar, ésta definición, a partir de éste punto.\r\nPuede definir varias funciones, al mismo tiempo, mediante la separación de las definiciones con" & ListSeparator\r\nex.: f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nueva función
 124#£Nueva ecuación
@@ -914,3 +914,9 @@
 913#£No está permitido usar el operador hat en los nombres de definición.
 914#£No está permitido utilizar barras de valores absolutos en los nombres de definición
 915#£Ha establecido demasiados parámetros para la función:
+916#£WordMath+
+917#£Consulta WordMath+
+918#£Compra WordMath+
+919#£Activa WordMath+ con código
+920#£WordMat+ no está instalado correctamente en este ordenador. No puedes continuar. Prueba a reinstalar WordMat.
+921#£WordMat+ ya está activo en este ordenador.

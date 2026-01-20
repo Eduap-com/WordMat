@@ -38,7 +38,13 @@ fejl:
     mSkoleNavn = vbNullString
 slut:
 End Function
-
+Public Function QCheckForWordMatPlus()
+    If QActivePartnership(True, False) Then
+        MsgBox TT.A(120), vbOKOnly, "OK"
+    Else
+        MsgBox TT.A(121), vbOKOnly, "Sorry"
+    End If
+End Function
 Function SkoleNavn() As String
     On Error GoTo fejl
     If mSkoleNavn <> vbNullString Then

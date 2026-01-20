@@ -118,8 +118,8 @@
 117#£There is an error in the definition: 
 118#£It is ignored, but correct the input error to avoid this output error
 119#£ ...rest removed.
-120#£Your School/organization has an active partnership. You can now use WordMat+
-121#£Sorry. Your School does not have an active partnership.
+120#£WordMath+ is now enabled for this computer
+121#£An active WordMath+ license or partnership could not be registered for this computer.
 122#£State the definition of the new function\r\nThe definition can be used in the rest of the document, but not before.\r\nIf you insert a  'delete def:' command further down in the document it will not be known from that point.\r\nYou can define more variables at a time by separating them with " & ListSeparator\r\nex.: f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£New function
 124#£New equation
@@ -914,3 +914,9 @@
 913#£It is not allowed to use the hat operator in definition names.
 914#£It is not allowed to use absolute value bars in definition names
 915#£You have set too many parameters for the function:
+916#£WordMath+
+917#£Check for WordMath+
+918#£Buy WordMath+
+919#£Activate WordMath+ with code
+920#£WordMath+ is not installed correctly on this computer. You cannot continue. Try reinstalling WordMath.
+921#£WordMath+ is already active on this computer.

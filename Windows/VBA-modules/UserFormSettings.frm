@@ -280,11 +280,7 @@ Private Sub CommandButton_sletenheder_Click()
 End Sub
 
 Private Sub Label_checkpartnerskab_Click()
-    If QActivePartnership(True) Then
-        MsgBox TT.A(120), vbOKOnly, "OK"
-    Else
-        MsgBox TT.A(121), vbOKOnly, "Sorry"
-    End If
+    QCheckForWordMatPlus
 End Sub
 
 Private Sub Label_checkpartnerskab_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)

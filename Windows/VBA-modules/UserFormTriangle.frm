@@ -800,7 +800,7 @@ TextBox_A.Enabled = True
 #If Mac Then
     FN = GetWordMatDir & "Images/trekantreth.png"
 #Else
-    FN = GetWordMatDir("Images") & "Images/trekantreth.emf"
+    FN = GetWordMatDir("Images") & "Images/Trekantreth.png"
 #End If
 If Dir(FN) <> vbNullString Then ImageTrekant.Picture = LoadPicture(FN)
 TextBox_A.Left = 32

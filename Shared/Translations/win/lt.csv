@@ -118,8 +118,8 @@
 117#£Apibrezime yra klaida:
 118#£Jo nepaisoma, taciau istaisykite ivesties klaida, kad isvengtumete sios isvesties klaidos
 119#£... poilsis pasalintas.
-120#£Jusu mokykla ar organizacija palaiko aktyvia partneryste. Dabar galite naudoti "WordMat+"
-121#£Atleisk. Jusu mokykla neturi aktyvios partnerystes.
+120#£WordMat+ dabar igalintas siame kompiuteryje
+121#£Siame kompiuteryje nepavyko uzregistruoti aktyvios WordMat+ licencijos arba partnerystes.
 122#£Nurodykite naujos funkcijos apibrezima\r\nApibrezimas gali buti naudojamas likusioje dokumento dalyje, bet ne anksciau.\r\nJei toliau dokumente iterpsite komanda 'delete def:', ji nebus zinoma nuo to tasko.\r\nGalite apibrezti daugiau kintamuju vienu metu, atskirdami juos " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nauja funkcija
 124#£Nauja lygtis
@@ -914,3 +914,9 @@
 913#£Apibrezimu pavadinimuose neleidziama naudoti skrybeles operatoriaus.
 914#£Apibrezimu pavadinimuose neleidziama naudoti skaitiniu simboliu.
 915#£Nustatete per daug funkcijos parametru:
+916#£WordMat+
+917#£Patikrinkite, ar yra "WordMat+"
+918#£Pirkite "WordMat+"
+919#£Suaktyvinkite WordMat+ naudodami koda
+920#£WordMat+ siame kompiuteryje idiegta netinkamai. Testi negalima. Pabandykite is naujo idiegti "WordMat".
+921#£WordMat+ jau aktyvus siame kompiuteryje.
