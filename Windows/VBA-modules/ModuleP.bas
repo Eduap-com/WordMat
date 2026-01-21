@@ -45,6 +45,19 @@ Public Function QCheckForWordMatPlus()
         MsgBox TT.A(121), vbOKOnly, "Sorry"
     End If
 End Function
+Public Function QPurchaseWordMatPlus()
+    On Error GoTo fejl
+    If QActivePartnership(True, False) Then
+        MsgBox2 TT.A(921), vbOKOnly, "Already active"
+    Else
+        Application.Run macroname:="PurchaseWordMatPlus"
+    End If
+    GoTo slut
+fejl:
+    MsgBox2 TT.A(920), vbOKOnly, TT.Error
+slut:
+
+End Function
 Function SkoleNavn() As String
     On Error GoTo fejl
     If mSkoleNavn <> vbNullString Then

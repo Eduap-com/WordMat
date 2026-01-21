@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormAbout 
    Caption         =   "About"
-   ClientHeight    =   5715
+   ClientHeight    =   6480
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   8355.001
@@ -86,6 +86,10 @@ Private Sub Label_partnerskab2_Click()
     OpenLink "https://www.eduap.com/da/partnerskab/"
 End Sub
 
+Private Sub Label_WordMatPlus_Click()
+    QPurchaseWordMatPlus
+End Sub
+
 Private Sub Label1_Click()
     OpenLink "https://www.eduap.com"
 End Sub
@@ -119,6 +123,7 @@ Sub SetCaptions()
     End If
     Label_version.Caption = "Version: " & v
     Label_text.Caption = TT.A(20)
+    Label_WordMatPlus.Caption = TT.A(922)
 
 End Sub
 

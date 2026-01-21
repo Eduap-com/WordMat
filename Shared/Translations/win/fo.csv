@@ -134,11 +134,11 @@
 133#£Tú bað um at loysa líkningina fyri eina variabel, sum longu er skilgreind. Set/setið eina 'delete def:' kommando framman fyri líkningina.
 134#£Skattamatsskipanin er loyst fyri
 135#£við at brúka "Solve Equations" funktiónina hjá WordMat,
-136#£Felagsskapur skrásettur hjá
+136#£WordMat+ virkjað fyri
 137#£Líkningarskipanin hevði ongar loysnir innan $C fyri variablernar
 138#£Líkningarskipanin hevði ongar loysnir innan $R fyri variablernar
 139#£Tað má vera eitt javntekin í líkningini.
-140#£Eingin felagsskapur skrásettur
+140#£WordMat+ ikki virkið
 141#£Hetta er ikki ein líkning. Ein líkning fer altíð at hava eitt = tekin.
 142#£Eftirfarandi variabler eru strikaðar burtur úr líkningarskipanini:
 143#£við at brúka "Eliminera variabela" virkið í WordMat,
@@ -920,3 +920,4 @@
 919#£Virkja WordMat+ við kóða
 920#£WordMat+ er ikki rætt installerað á hesi teldu. Tú kanst ikki halda fram. Rokna við at installera WordMat aftur.
 921#£WordMat+ er longu virkið á hesi teldu.
+922#£Tú kanst eisini keypa einstakar licensir til WordMat+. Trýst her fyri at síggja meira...

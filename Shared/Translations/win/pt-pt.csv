@@ -134,11 +134,11 @@
 133#£Você pediu para resolver a equação para uma variável que já está definida. Insira um comando 'delete def:' antes da equação.
 134#£O sistema de equações é resolvido para
 135#£pela função 'resolver equação' do WordMat,
-136#£Parceria registada com
+136#£WordMat+ ativado para
 137#£O sistema de equações não apresentou soluções no domínio $C para variáveis
 138#£O sistema de equações não apresentou soluções no domínio $R para variáveis
 139#£Deve haver um sinal de igual numa equação
-140#£Nenhuma parceria registada
+140#£WordMat+ não ativado
 141#£Não se trata de uma equação. Uma equação terá sempre um sinal de igual.
 142#£As seguintes variáveis são eliminadas do sistema de equações:
 143#£pela função 'Eliminar variável' do WordMat, '
@@ -920,3 +920,4 @@
 919#£Ative o WordMat+ com código
 920#£O WordMat+ não está instalado corretamente neste computador. Não podes continuar. Tenta reinstalar o WordMat.
 921#£O WordMat+ já está ativo neste computador.
+922#£Também pode adquirir licenças individuais para WordMat+. Clique aqui para ver mais...

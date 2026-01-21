@@ -134,11 +134,11 @@
 133#£Sie haben darum gebeten, die Gleichung für eine Variable zu lösen, die bereits definiert wurde. Fügen Sie den Befehl 'delete def:' vor der Gleichung ein.
 134#£Das Steuerveranlagungssystem ist gelöst für
 135#£mit der Funktion "Gleichungen lösen" von WordMat,
-136#£Personengesellschaft, eingetragen mit
+136#£WordMat+ aktiviert für
 137#£Das Gleichungssystem hatte innerhalb von $C keine Lösungen für die Variablen
 138#£Das Gleichungssystem hatte innerhalb von $R keine Lösungen für die Variablen
 139#£In einer Gleichung muss es ein Gleichheitszeichen geben.
-140#£Keine eingetragene Partnerschaft
+140#£WordMat+ nicht aktiviert
 141#£Das ist keine Gleichung. Eine Gleichung hat immer ein =-Zeichen.
 142#£Die folgenden Variablen werden aus dem Gleichungssystem eliminiert:
 143#£mit der WordMat-Funktion "Variable eliminieren",
@@ -920,3 +920,4 @@
 919#£Aktiviere WordMat+ mit Code
 920#£WordMat+ ist auf diesem Computer nicht korrekt installiert. Du kannst nicht weitermachen. Versuche, WordMat neu zu installieren.
 921#£WordMat+ ist bereits auf diesem Computer aktiv.
+922#£Du kannst auch Einzellizenzen für WordMat+ erwerben. Klicken Sie hier, um mehr zu sehen...

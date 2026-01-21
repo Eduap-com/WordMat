@@ -3462,9 +3462,9 @@ msat:
                         End If
                         If MaximaExact = 2 Then
                             '                        ea.text = Replace(ea.text, chrw$(8747), "NIntegrate(", 1, 1)
-                            ea.text = Left$(ea.text, pos - 1) & "NIntegrate(" & integrand & Right$(ea.text, ea.Length - pos2 - Len(Var) + 2)
+                            ea.text = Left$(ea.text, pos - 1) & "NIntegrate(" & integrand & Right$(ea.text, ea.Length - pos2 - Len(Var) + 1 + Len(Var))
                         Else
-                            ea.text = Left$(ea.text, pos - 1) & "Integrate(" & integrand & Right$(ea.text, ea.Length - pos2 - Len(Var) + 2)
+                            ea.text = Left$(ea.text, pos - 1) & "Integrate(" & integrand & Right$(ea.text, ea.Length - pos2 - Len(Var) + 1 + Len(Var))
                             '                        ea.text = Replace(ea.text, chrw$(8747), "Integrate(", 1, 1)
                         End If
                     Else    ' indefinite integral
@@ -3472,7 +3472,7 @@ msat:
                         If Left$(integrand, 1) = ChrW$(9618) Then    'remove function symbol
                             integrand = Right$(integrand, Len(integrand) - 1)
                         End If
-                        ea.text = Left$(ea.text, pos - 1) & "integrate(" & integrand & Right$(ea.text, ea.Length - pos2 - Len(Var) + 2)
+                        ea.text = Left$(ea.text, pos - 1) & "integrate(" & integrand & Right$(ea.text, ea.Length - pos2 - Len(Var) + 1 + Len(Var))
                     End If
                     i = i + 1
                 End If

@@ -134,11 +134,11 @@
 133#£Jus paprasete isspresti kintamojo, kuris jau yra apibreztas, lygti. Pries lygti iterpkite komanda "istrinti def:".
 134#£Lygciu sistema isspresta
 135#£pagal WordMat funkcija "isspresti lygti",
-136#£Partneryste registruota
+136#£"WordMat+" ijungta
 137#£Lygciu sistema neturejo sprendiniu kintamuju $C srityje
 138#£Lygciu sistema neturejo sprendiniu kintamuju $R srityje
 139#£Lygtyje turi buti lygybes zenklas
-140#£Partneryste neregistruota
+140#£WordMat+ neigalintas
 141#£Tai nera lygtis. Lygtis visada tures lygybes zenkla.
 142#£Is lygciu sistemos pasalinami sie kintamieji:
 143#£pagal WordMat 's 'Pasalinti kintamaji' funkcija, '
@@ -920,3 +920,4 @@
 919#£Suaktyvinkite WordMat+ naudodami koda
 920#£WordMat+ siame kompiuteryje idiegta netinkamai. Testi negalima. Pabandykite is naujo idiegti "WordMat".
 921#£WordMat+ jau aktyvus siame kompiuteryje.
+922#£Taip pat galite isigyti atskiras "WordMat+" licencijas. Spauskite cia noredami pamatyti daugiau...

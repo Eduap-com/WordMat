@@ -134,11 +134,11 @@
 133#£Du bad att lösa ekvationen för en variabel som redan har definierats. Infoga kommandot "delete def:" före ekvationen.
 134#£Taxeringssystemet är löst för
 135#£med hjälp av WordMat's 'Solve Equations'-funktion,
-136#£Partnerskap registrerat hos
+136#£WordMat+ aktiverat för
 137#£Ekvationssystemet hade inga lösningar inom $C för variablerna
 138#£Ekvationssystemet hade inga lösningar inom $R för variablerna
 139#£Det måste finnas ett likhetstecken i en ekvation.
-140#£Inget partnerskap registrerat
+140#£WordMat+ ej aktiverat
 141#£Detta är inte en ekvation. En ekvation kommer alltid att ha ett =-tecken.
 142#£Följande variabler elimineras från ekvationssystemet:
 143#£med hjälp av WordMat's 'Eliminera variabel'-funktion,
@@ -920,3 +920,4 @@
 919#£Aktivera WordMat+ med kod
 920#£WordMat+ är inte korrekt installerat på denna dator. Du kan inte fortsätta. Försök installera om WordMat.
 921#£WordMat+ är redan aktivt på den här datorn.
+922#£Du kan också köpa enskilda licenser för WordMat+. Klicka här för att se mer...

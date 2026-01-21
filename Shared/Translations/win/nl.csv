@@ -134,11 +134,11 @@
 133#£U hebt gevraagd om de vergelijking op te lossen voor een variabele die al is gedefinieerd. Voeg een 'delete def:' commando in voor de vergelijking.
 134#£Het stelsel van vergelijkingen is opgelost voor
 135#£door de 'vergelijking oplossen'-functie van WordMat,
-136#£Partnerschap geregistreerd bij
+136#£WordMat+ ingeschakeld voor
 137#£Het stelsel van vergelijkingen had geen oplossingen in het domein $C voor variabelen
 138#£Het stelsel van vergelijkingen had geen oplossingen in het domein $R voor variabelen
 139#£Er moet een gelijkteken in een vergelijking staan
-140#£Geen geregistreerd partnerschap
+140#£WordMat+ niet ingeschakeld
 141#£Dit is geen vergelijking. Een vergelijking heeft altijd een gelijkteken.
 142#£De volgende variabelen worden uit het vergelijkingssysteem geëlimineerd:
 143#£door de functie 'Variabele elimineren' van WordMat, '
@@ -920,3 +920,4 @@
 919#£Activeer WordMat+ met code
 920#£WordMat+ is niet correct geïnstalleerd op deze computer. Je kunt niet doorgaan. Probeer WordMat opnieuw te installeren.
 921#£WordMat+ is al actief op deze computer.
+922#£Je kunt ook losse licenties voor WordMat+ kopen. Klik hier om meer te zien...

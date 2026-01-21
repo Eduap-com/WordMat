@@ -134,11 +134,11 @@
 133#£Pozádali jste o vyresení rovnice pro promennou, která je jiz definována. Pred rovnici vlozte príkaz 'delete def:'.
 134#£Soustava rovnic je resena pro
 135#£pomocí funkce "vyresit rovnici" aplikace WordMat,
-136#£Registrované partnerství
+136#£WordMat+ povolen pro
 137#£Soustava rovnic nemela resení v oboru $C pro promenné
 138#£Soustava rovnic nemela resení v oblasti $R pro promenné
 139#£V rovnici musí být znaménko rovná se
-140#£Není registrováno zádné partnerství
+140#£WordMat+ není povolen
 141#£To není rovnice. Rovnice bude mít vzdy znaménko rovná se.
 142#£Ze soustavy rovnic jsou odstraneny následující promenné:
 143#£podle funkce 'Odstranit promennou' WordMat, '
@@ -920,3 +920,4 @@
 919#£Aktivujte WordMat+ pomocí kódu
 920#£WordMat+ není na tomto pocítaci správne nainstalován. Nemuzes pokracovat. Zkuste preinstalovat WordMat.
 921#£WordMat+ je na tomto pocítaci jiz aktivní.
+922#£Muzete si také zakoupit jednotlivé licence pro WordMat+. Kliknete zde pro více informací...

@@ -134,11 +134,11 @@
 133#£You have asked to solve the equation for a variable which is already defined. Insert a 'delete def:' command before the equation.
 134#£The system of equations is solved for 
 135#£ by WordMat's 'solve equation' function, 
-136#£Partnership registered with
+136#£WordMath+ enabled for
 137#£The system of equations had no solutions in the domain $C for variables 
 138#£The system of equations had no solutions in the domain $R for variables 
 139#£There must be an equal sign in an equation
-140#£No partnership registered
+140#£WordMath+ not activated
 141#£This is not an equation. An equation will always have an equal sign.
 142#£The following variables are eliminated from the equation system: 
 143#£by WordMat 's 'Eliminate variable' function, '
@@ -920,3 +920,4 @@
 919#£Activate WordMath+ with code
 920#£WordMath+ is not installed correctly on this computer. You cannot continue. Try reinstalling WordMath.
 921#£WordMath+ is already active on this computer.
+922#£You can also purchase single licenses for WordMath+. Click here to see more...

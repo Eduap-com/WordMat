@@ -134,11 +134,11 @@
 133#£Olete palunud lahendada juba defineeritud muutuja võrrandi. Sisestage võrrandi ette käsk "delete def:".
 134#£Võrrandisüsteem on lahendatud
 135#£WordMati funktsiooni "lahenda võrrand" abil,
-136#£Registreeritud partnerlus
+136#£WordMat+ lubatud
 137#£Võrrandisüsteemil ei olnud muutujate $C valdkonnas lahendusi
 138#£Võrrandisüsteemil ei olnud muutujate $R valdkonnas lahendusi
 139#£Võrrandis peab olema võrdusmärk
-140#£Partnerlust ei registreeritud
+140#£WordMat+ pole lubatud
 141#£See ei ole võrrand. Võrrandil on alati võrdusmärk.
 142#£Võrrandisüsteemist eemaldatakse järgmised muutujad:
 143#£WordMati funktsiooni "Kõrvalda muutuja", "
@@ -920,3 +920,4 @@
 919#£Aktiveeri WordMat+ koodiga
 920#£WordMat+ ei ole sellel arvutil õigesti installitud. Sa ei saa jätkata. Proovi WordMati uuesti paigaldada.
 921#£WordMat+ on sellel arvutil juba aktiivne.
+922#£WordMat+ jaoks saab osta ka üksiklitsentse. Klõpsa siia, et näha rohkem...

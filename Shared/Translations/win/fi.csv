@@ -134,11 +134,11 @@
 133#£Olet pyytänyt ratkaisemaan yhtälön muuttujalle, joka on jo määritelty. Lisää 'delete def:' -komento ennen yhtälöä.
 134#£Yhtälöjärjestelmä on ratkaistu
 135#£WordMatin 'ratkaise yhtälö' -funktiolla,
-136#£Rekisteröity kumppanuus
+136#£WordMat+ käytössä
 137#£Yhtälöjärjestelmässä ei ollut ratkaisuja muuttujien $C
 138#£Yhtälöjärjestelmässä ei ollut ratkaisuja muuttujien $R alueella
 139#£Yhtälössä on oltava yhtäläisyysmerkki
-140#£Parisuhdetta ei ole rekisteröity
+140#£WordMat+ ei ole käytössä
 141#£Tämä ei ole yhtälö. Yhtälöllä on aina yhtäläisyysmerkki.
 142#£Yhtälöjärjestelmästä poistetaan seuraavat muuttujat:
 143#£WordMatin 'Elimino-muuttuja'-funktiolla, '
@@ -920,3 +920,4 @@
 919#£Aktivoi WordMat+ koodilla
 920#£WordMat+ ei ole asennettu oikein tälle tietokoneelle. Et voi jatkaa. Kokeile asentaa WordMat uudelleen.
 921#£WordMat+ on jo aktiivinen tällä tietokoneella.
+922#£Voit myös ostaa yksittäisiä lisenssejä WordMat+:lle. Klikkaa tästä nähdäksesi lisää...

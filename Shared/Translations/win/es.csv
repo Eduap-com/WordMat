@@ -134,11 +134,11 @@
 133#£Se le consulta resolver la ecuación para una variable que ya está definida. Inserte un comando 'borrar def:' antes de la ecuación.
 134#£El sistema de ecuaciones está resuelto para 
 135#£MedianteWordMat's 'resolver ecuación' función, 
-136#£Sociedad registrada con
+136#£WordMat+ habilitado para
 137#£El sistema de ecuaciones no tiene soluciones en el dominio $C para las variables 
 138#£El sistema de ecuaciones no tiene soluciones en el dominio $C para las variables 
 139#£Tiene que haber un signo igual en una ecuación
-140#£No hay sociedad registrada
+140#£WordMat+ no activado
 141#£No se encuentra el signo = en la ecuación.
 142#£Las siguientes variables serán eliminadas del sistema de ecuaciones
 143#£MedianteWordMat 's 'Elimina variable' función, '
@@ -920,3 +920,4 @@
 919#£Activa WordMath+ con código
 920#£WordMat+ no está instalado correctamente en este ordenador. No puedes continuar. Prueba a reinstalar WordMat.
 921#£WordMat+ ya está activo en este ordenador.
+922#£También puedes comprar licencias individuales para WordMat+. Haz clic aquí para ver más...

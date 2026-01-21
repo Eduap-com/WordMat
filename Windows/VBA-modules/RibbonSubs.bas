@@ -852,23 +852,14 @@ Sub Rib_CheckForWordMatPlus(control As IRibbonControl)
     QCheckForWordMatPlus
 End Sub
 Sub Rib_PurchaseWordMatPlus(control As IRibbonControl)
-    On Error GoTo fejl
-    If QActivePartnership(True, False) Then
-        MsgBox2 TT.A(921), vbOKOnly, "Already active"
-    Else
-        Application.Run macroname:="ActivateWordMatPlusByCode"
-    End If
-    GoTo slut
-fejl:
-    MsgBox2 TT.A(920), vbOKOnly, TT.Error
-slut:
+    QPurchaseWordMatPlus
 End Sub
 Sub Rib_ActivateWordMatPlusCode(control As IRibbonControl)
     On Error GoTo fejl
     If QActivePartnership(True, False) Then
         MsgBox2 TT.A(921), vbOKOnly, "Already active"
     Else
-        Application.Run macroname:="PurchaseWordMatPlus"
+        Application.Run macroname:="ActivateWordMatPlusByCode"
     End If
     GoTo slut
 fejl:

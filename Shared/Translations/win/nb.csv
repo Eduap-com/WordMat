@@ -134,11 +134,11 @@
 133#£Du ba om å få løse ligningen for en variabel som allerede er definert. Sett inn en 'slett def:'-kommando før ligningen.
 134#£Ligningssystemet er løst for
 135#£ved hjelp av WordMats 'Solve Equations'-funksjon,
-136#£Partnerskap registrert med
+136#£WordMat+ aktivert for
 137#£Ligningssystemet hadde ingen løsninger innenfor $C for variablene
 138#£Ligningssystemet hadde ingen løsninger innenfor $R for variablene
 139#£Det må være et likhetstegn i en ligning.
-140#£Ingen partnerskap registrert
+140#£WordMat+ ikke aktivert
 141#£Dette er ikke en ligning. En ligning vil alltid ha et =-tegn.
 142#£Følgende variabler elimineres fra ligningssystemet:
 143#£ved hjelp av WordMats 'Eliminer variabel'-funksjon,
@@ -920,3 +920,4 @@
 919#£Aktiver WordMat+ med kode
 920#£WordMat+ er ikke korrekt installert på denne datamaskinen. Du kan ikke fortsette. Prøv å installere WordMat på nytt.
 921#£WordMat+ er allerede aktivt på denne datamaskinen.
+922#£Du kan også kjøpe enkeltlisenser for WordMat+. Klikk her for å se mer...

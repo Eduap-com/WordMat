@@ -134,11 +134,11 @@
 133#£Poprosiles o rozwiazanie równania dla zmiennej, która jest juz zdefiniowana. Wstaw polecenie 'delete def:' przed równaniem.
 134#£Uklad równan jest rozwiazywany dla
 135#£za pomoca funkcji "rozwiaz równanie" programu WordMat,
-136#£Spólka partnerska zarejestrowana w
+136#£WordMat+ wlaczony dla
 137#£Uklad równan nie posiadal rozwiazan w dziedzinie $C dla zmiennych
 138#£Uklad równan nie posiadal rozwiazan w dziedzinie $R dla zmiennych
 139#£W równaniu musi znajdowac sie znak równosci
-140#£Brak zarejestrowanego zwiazku partnerskiego
+140#£WordMat+ nie wlaczony
 141#£To nie jest równanie. Równanie zawsze bedzie mialo znak równosci.
 142#£Z ukladu równan eliminowane sa nastepujace zmienne:
 143#£za pomoca funkcji "Wyeliminuj zmienna" programu WordMat, "
@@ -920,3 +920,4 @@
 919#£Aktywuj WordMat+ za pomoca kodu
 920#£WordMat+ nie jest poprawnie zainstalowany na tym komputerze. Nie mozesz kontynuowac. Spróbuj zainstalowac ponownie WordMat.
 921#£WordMat+ jest juz aktywny na tym komputerze.
+922#£Mozesz takze kupic pojedyncze licencje na WordMat+. Kliknij tutaj, aby zobaczyc wiecej...
