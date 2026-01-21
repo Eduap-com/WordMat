@@ -1751,9 +1751,7 @@ Public Sub ShowComputerID()
     HID = GetHardwareUUID()
     MyData.SetText HID
     MyData.PutInClipboard
-    If MsgBox("Hardware ID is used to identify your computer" & vbCrLf & HID & vbCrLf & vbCrLf & "The ID has been copied to the clipboard" & vbCrLf & "Do you wish to send this ID to Eduap to initiate payment of WordMat+", vbYesNo, "Hardware UUID") = vbYes Then
-        Application.Run macroname:="InitiatePayment"
-    End If
+    MsgBox2 "Hardware ID is used to identify your computer" & vbCrLf & HID & vbCrLf & vbCrLf & "The ID has been copied to the clipboard", vbOKOnly, "Hardware UUID"
     GoTo slut
 fejl:
     MsgBox "Error" & vbCrLf & Err.Description, vbOKOnly, "Error"
