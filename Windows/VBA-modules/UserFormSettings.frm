@@ -66,7 +66,7 @@ Private Sub ComboBox_language_Change()
 End Sub
 
 Private Sub CommandButton_HardwareUUID_Click()
-    ShowComputerID
+    Application.Run macroname:="ShowComputerID"
 End Sub
 
 Private Sub Label_cancel_Click()

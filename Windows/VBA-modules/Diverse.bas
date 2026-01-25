@@ -1745,19 +1745,6 @@ Sub TestSprog()
     MsgBox Timer - tid
 End Sub
 
-Public Sub ShowComputerID()
-    Dim MyData As New DataObject, HID As String
-    On Error GoTo fejl
-    HID = GetHardwareUUID()
-    MyData.SetText HID
-    MyData.PutInClipboard
-    MsgBox2 "Hardware ID is used to identify your computer" & vbCrLf & HID & vbCrLf & vbCrLf & "The ID has been copied to the clipboard", vbOKOnly, "Hardware UUID"
-    GoTo slut
-fejl:
-    MsgBox "Error" & vbCrLf & Err.Description, vbOKOnly, "Error"
-slut:
-End Sub
-
 Function StringToUTF8Bytes(s As String) As Byte()
 ' Convert a VBA string (UTF-16) to a UTF-8 byte array
 ' saving a string to a text file using print #fh,text   saves the file in ANSI encoding (Windows 1252 on Windows) which is single byte encoding
