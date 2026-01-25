@@ -118,8 +118,8 @@
 117#£Í†–ÖŒŽ —š†‘“‡ —™•’ •–Ž—“Ÿ:
 118#£ç‹’•Œ§™‡Ž, ‡‘‘† ŠŽ•–—™Œ ™• —š†‘“‡ ŒŽ—ŸŠ•› ‹Ž‡ ’‡ ‡•š‹Œ™Œ ‡›™Ÿ ™• —š†‘“‡ Œ”ŸŠ•›
 119#£... ï• ›Ÿ‘•Ž• ‡š‡Ž–Œ.
-120#£ï• —Ö•‘Œ§• / •–‹‡’Ž—“Ÿ˜ —‡˜ ÖŒŽ “Ž‡ Œ’Œ–‹ —›’Œ–‹‡—§‡. ï–‡ “•–Œ§™Œ ’‡ Ö–—Ž“••Ž—Œ™Œ ™• WordMat+
-121#£î›‹’“. ï• —Ö•‘Œ§• —‡˜ ŠŒ’ ÖŒŽ Œ’Œ–‹ —›’Œ–‹‡—§‡.
+120#£ï• WordMat+ Œ§’‡Ž ‘•’ Œ’Œ–‹••Ž“’• ‹Ž‡ ‡›™Ÿ’ ™•’ ›•‘•‹Ž—™
+121#£€Œ’ ™‡’ Š›’‡™  Œ‹‹–‡š “Ž‡˜ Œ’Œ–‹˜ †ŠŒŽ‡˜ Ö–—˜  —›’Œ–‹‡—§‡˜ WordMat+ ‹Ž‡ ‡›™Ÿ’ ™•’ ›•‘•‹Ž—™.
 122#£€‘—™Œ ™•’ •–Ž—“Ÿ ™˜ ’‡˜ —›’†–™—˜\r\nì •–Ž—“Ÿ˜ “•–Œ§ ’‡ Ö–—Ž“••ŽŒ§ —™• ›Ÿ‘•Ž• ‹‹–‡š•, ‡‘‘† ŸÖŽ –Ž’.\r\n†’ ŒŽ—‡‹†‹Œ™Œ “Ž‡ Œ’™•‘ 'delete def:' Ž• †™ —™• ‹‹–‡š•, ŠŒ’ ‡ Œ§’‡Ž ‹’—™Ÿ ‡Ÿ ŒŒ§’• ™• —“Œ§•.\r\ní•–Œ§™Œ ’‡ •–§—Œ™Œ Œ–Ž——Ÿ™Œ–Œ˜ “Œ™‡‰‘™˜ †Œ š•–† ŠŽ‡Ö–§¾•’™†˜ ™Ž˜ “Œ " & ListSeparator\r\nex.:  f(x)=x " & €Ž‡Ö–Ž—™ŽŸ ‘§—™‡˜ & " g(x)=2x+1
 123#£ê‡ ‘ŒŽ™•›–‹§‡
 124#£ê‡ Œ”§——
@@ -134,11 +134,11 @@
 133#£®™—‡™Œ ’‡ ‘—Œ™Œ ™’ Œ”§—— ‹Ž‡ “Ž‡ “Œ™‡‰‘™ •› ÖŒŽ Š •–Ž—™Œ§. Ž—‡‹†‹Œ™Œ “Ž‡ Œ’™•‘ 'delete def:' –Ž’ ‡Ÿ ™’ Œ”§——.
 134#£ï• ——™“‡ ™’ Œ”Ž——Œ’ ŒŽ‘Œ™‡Ž ‹Ž‡
 135#£‡Ÿ ™ —›’†–™— ÇŒ§‘›— Œ”§——˜È ™•› WordMat,
-136#£æ‡™‡Ö–Ž—“’ —Ö— —›“‰§—˜ “Œ
+136#£ï• WordMat+ Œ§’‡Ž Œ’Œ–‹••Ž“’• ‹Ž‡
 137#£ï• ——™“‡ ™’ Œ”Ž——Œ’ ŠŒ’ Œ§ÖŒ ‘—ŒŽ˜ —™•’ ™•“‡ $C ‹Ž‡ “Œ™‡‰‘™˜
 138#£ï• ——™“‡ ™’ Œ”Ž——Œ’ ŠŒ’ Œ§ÖŒ ‘—ŒŽ˜ —™•’ ™•“‡ $R ‹Ž‡ “Œ™‡‰‘™˜
 139#£–ŒŽ ’‡ ›†–ÖŒŽ ’‡ —“‰•‘• §—•’ —Œ “Ž‡ Œ”§——
-140#£€Œ’ ÖŒŽ ‡™‡Ö–Œ§ —Ö— —›“‰§—˜
+140#£ï• WordMat+ ŠŒ’ Œ§’‡Ž Œ’Œ–‹••Ž“’•
 141#£ç›™Ÿ ŠŒ’ Œ§’‡Ž Œ”§——. íŽ‡ Œ”§—— ‡ ÖŒŽ †’™‡ ’‡ §—• –Ÿ—“•.
 142#£ìŽ ‡Ÿ‘•›Œ˜ “Œ™‡‰‘™˜ Œ”‡‘Œ§š•’™‡Ž ‡Ÿ ™• ——™“‡ Œ”Ž——Œ’:
 143#£‡Ÿ ™ —›’†–™— '”†‘ŒŽ¿ “Œ™‡‰‘™˜' ™•› WordMat, '
@@ -914,3 +914,10 @@
 913#£€Œ’ ŒŽ™–Œ™‡Ž  Ö–— ™•› ™Œ‘Œ—™ ‡‘•› —Œ •’Ÿ“‡™‡ •–Ž—“’.
 914#£€Œ’ ŒŽ™–Œ™‡Ž  Ö–— ‡–Ž“™Ž’ Ö‡–‡™–’ —Œ •’Ÿ“‡™‡ •–Ž—“’.
 915#£üÖŒ™Œ •–§—ŒŽ †–‡ •‘‘˜ ‡–‡“™–•›˜ ‹Ž‡ ™ —›’†–™—:
+916#£WordMath+
+917#£ü‘Œ‹Ö•˜ ‹Ž‡ WordMat+
+918#£ç‹•–†—™Œ ™• WordMat+
+919#£’Œ–‹••Ž—™Œ ™• WordMat+ “Œ ŠŽŸ
+920#£ï• WordMat+ ŠŒ’ ÖŒŽ Œ‹‡™‡—™‡Œ§ ——™† —Œ ‡›™Ÿ’ ™•’ ›•‘•‹Ž—™. €Œ’ “•–Œ§™Œ ’‡ —›’ŒÖ§—Œ™Œ. €•Ž“†—™Œ ’‡ Œ‹‡™‡—™—Œ™Œ ”‡’† ™• WordMat.
+921#£ï• WordMat+ Œ§’‡Ž Š Œ’Œ–‹Ÿ —Œ ‡›™Ÿ’ ™•’ ›•‘•‹Ž—™.
+922#£í•–Œ§™Œ Œ§—˜ ’‡ ‡‹•–†—Œ™Œ “Œ“•’“’Œ˜ †ŠŒŽŒ˜ Ö–—˜ ‹Ž‡ ™• WordMat+. æ†’™Œ ‘Ž ŒŠ ‹Ž‡ ’‡ ŠŒ§™Œ Œ–Ž——Ÿ™Œ–‡...

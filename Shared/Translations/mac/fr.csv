@@ -118,8 +118,8 @@
 117#£Il y a une erreur dans la définition :
 118#£Elle est ignorée, mais corrigez l'erreur d'entrée pour éviter cette erreur de sortie
 119#£... le reste enlevé.
-120#£Votre école/organisation a un partenariat actif. Vous pouvez maintenant utiliser WordMat+
-121#£Pardon. Votre école n'a pas de partenariat actif.
+120#£WordMat+ est désormais activé pour cet ordinateur
+121#£Une licence ou un partenariat WordMat+ actif ne pouvait pas être enregistré pour cet ordinateur.
 122#£Indiquez la définition de la nouvelle fonction\r\nLa définition peut être utilisée dans le reste du document, mais pas avant.\r\nSi vous insérez une commande 'delete def :' plus bas dans le document, elle ne sera pas connue à partir de ce moment.\r\nVous pouvez définir plus de variables à la fois en les séparant par " & ListSeparator\r\nex. :  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nouvelle fonction
 124#£Nouvelle équation
@@ -134,11 +134,11 @@
 133#£Vous avez demandé de résoudre l'équation d'une variable qui est déjà définie. Insérez une commande 'delete def :' avant l'équation.
 134#£Le système d'équations est résolu pour
 135#£par la fonction 'résoudre l'équation' de WordMat,
-136#£Société de personnes enregistrée auprès de
+136#£WordMat+ activé pour
 137#£Le système d'équations n'avait pas de solutions dans le domaine $C pour les variables
 138#£Le système d'équations n'avait pas de solutions dans le domaine $R pour les variables
 139#£Il doit y avoir un signe égal dans une équation
-140#£Aucun partenariat enregistré
+140#£WordMat+ non activé
 141#£Il ne s'agit pas d'une équation. Une équation aura toujours un signe égal.
 142#£Les variables suivantes sont éliminées du système d'équations :
 143#£par la fonction 'Éliminer la variable' de WordMat, '
@@ -914,3 +914,10 @@
 913#£Il n'est pas autorisé d'utiliser l'opérateur hat dans les noms de définition.
 914#£Il n'est pas permis d'utiliser des caractères numériques dans les noms de définition.
 915#£Vous avez défini trop de paramètres pour la fonction :
+916#£WordMath+
+917#£Vérifiez pour WordMath+
+918#£Achetez WordMath+
+919#£Activez WordMath+ avec du code
+920#£WordMat+ n'est pas installé correctement sur cet ordinateur. Tu ne peux pas continuer. Essayez de réinstaller WordMat.
+921#£WordMat+ est déjà actif sur cet ordinateur.
+922#£Vous pouvez également acheter des licences individuelles pour WordMat+. Cliquez ici pour en voir plus...

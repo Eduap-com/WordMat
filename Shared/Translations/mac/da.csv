@@ -118,8 +118,8 @@
 117#£Der er en fejl i definitionen: 
 118#£Den ignoreres. Men ret det så du ikke får denne fejl ved hver beregning.
 119#£...resten fjernet.
-120#£Din skole/organisation har aktivt partnerskab. Du kan nu bruge WordMat+
-121#£Desværre. Din skole har ikke et aktivt partnerskab.
+120#£WordMat+ er nu aktiveret for denne computer
+121#£En aktiv WordMat+ licens eller partnerskab kunne ikke registreres for denne computer.
 122#£Indtast definitionen på den nye funktion\r\nDefinitionen kan benyttes i resten af dokumentet, men ikke før.\r\n Hvis der indsættes en 'slet def:' kommando længere nede i dokumentet kan den ikke benyttes derefter.\r\nDer kan defineres flere funktioner ved at adskille definitionerne med " & ListSeparator\r\nf.eks. f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Ny funktion
 124#£Ny ligning
@@ -134,11 +134,11 @@
 133#£Du har bedt om at løse ligningen for en variabel der allerede er defineret. Indsæt en 'slet def:' kommando før ligningen.
 134#£Ligningssystemet løses for 
 135#£ vha. WordMat's 'Løs Ligninger' funktion, 
-136#£Partnerskab registreret med
+136#£WordMat+ aktiveret for 
 137#£Ligningssystemet havde ingen løsninger indenfor $C for variablene 
 138#£Ligningssystemet havde ingen løsninger indenfor $R for variablene 
 139#£Der skal være et ligmed tegn i en ligning.
-140#£Ingen Partnerskab registreret
+140#£WordMat+ ikke aktiveret
 141#£Dette er ikke en ligning. En ligning vil altid have et = tegn.
 142#£Følgende variable elimineres fra ligningssystemet: 
 143#£vha. WordMat's 'Eliminer variabel' funktion, 
@@ -914,3 +914,10 @@
 913#£Det er ikke tilladt at anvende hat-operatoren i definitionsnavne.
 914#£Det er ikke tilladt at anvende numerisk tegn i definitionsnavne.
 915#£Du har angivet for mange parametre til funktionen: 
+916#£WordMat+
+917#£Check for WordMat+
+918#£Køb WordMat+
+919#£Aktiver WordMat+ med kode
+920#£WordMat+ er ikke installeret korrekt på denne computer. Du kan ikke fortsætte. Prøv at geninstallere WordMat.
+921#£WordMat+ er allerede aktivt på denne computer.
+922#£Du kan også købe enkeltlicenser til WordMat+. Klik her for at se mere.

@@ -118,8 +118,8 @@
 117#£Ta er ein feilur ’ skilgreiningini:
 118#£Ta verur skœgva til viks. Men r¾tta ta, so tœ ikki f¾rt hesa villuna vi hv¿rjari œtrokning.
 119#£... restin tikin burtur.
-120#£T’n/tykkara skœli/felagsskapur hevur eitt virki felagsskap. Nœ kanst tœ brœka WordMat+
-121#£T’verri. Skœlin hj‡ t¾r/tykkum hevur ikki eitt virki felagsskap.
+120#£WordMat+ er nœ virki til hesa teldu
+121#£Eitt virki WordMat+ loyvi ella samstarv kundi ikki skr‡setast fyri hesa teldu.
 122#£Skriva skilgreiningina av t’ nggja funkti—nini\r\nSkilgreiningin kann ntast ’ restini av skjalinum, men ikki fyrr.\r\n Um ein 'delete def:' kommando er sett longri niri ’ skjali, kann hon ikki ntast eftir ta.\r\nFleiri funkti—nir kunnu lsast vi at skilja skilgreiningarnar sundur vi " & ListSeparator\r\ne.g. f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nggjur eiginleiki
 124#£Nggj l’kning
@@ -134,11 +134,11 @@
 133#£Tœ ba um at loysa l’kningina fyri eina variabel, sum longu er skilgreind. Set/seti eina 'delete def:' kommando framman fyri l’kningina.
 134#£Skattamatsskipanin er loyst fyri
 135#£vi at brœka "Solve Equations" funkti—nina hj‡ WordMat,
-136#£Felagsskapur skr‡settur hj‡
+136#£WordMat+ virkja fyri
 137#£L’kningarskipanin hevi ongar loysnir innan $C fyri variablernar
 138#£L’kningarskipanin hevi ongar loysnir innan $R fyri variablernar
 139#£Ta m‡ vera eitt javntekin ’ l’kningini.
-140#£Eingin felagsskapur skr‡settur
+140#£WordMat+ ikki virki
 141#£Hetta er ikki ein l’kning. Ein l’kning fer alt’ at hava eitt = tekin.
 142#£Eftirfarandi variabler eru strikaar burtur œr l’kningarskipanini:
 143#£vi at brœka "Eliminera variabela" virki ’ WordMat,
@@ -914,3 +914,10 @@
 913#£Ta er ikki loyvt at brœka hattaoperatorin ’ skilgreiningsn¿vnum.
 914#£Ta er ikki loyvt at brœka t¿l ’ skilgreiningarn¿vnum.
 915#£Tœ hevur sett ov n—gvar parameterar til funkti—nina:
+916#£WordMat+
+917#£Kanna fyri WordMat+
+918#£Keyp WordMat+
+919#£Virkja WordMat+ vi k—a
+920#£WordMat+ er ikki r¾tt installera ‡ hesi teldu. Tœ kanst ikki halda fram. Rokna vi at installera WordMat aftur.
+921#£WordMat+ er longu virki ‡ hesi teldu.
+922#£Tœ kanst eisini keypa einstakar licensir til WordMat+. Trst her fyri at s’ggja meira...

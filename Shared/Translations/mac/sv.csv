@@ -118,8 +118,8 @@
 117#£Det finns ett fel i definitionen:
 118#£Det ignoreras. Men fixa det så att du inte får det här felet med varje beräkning.
 119#£... Resten borttagna.
-120#£Din skola/organisation har ett aktivt samarbete. Nu kan du använda WordMat+
-121#£Tyvärr. Din skola har inget aktivt partnerskap.
+120#£WordMat+ är nu aktiverat för denna dator
+121#£En aktiv WordMat+-licens eller partnerskap kunde inte registreras för denna dator.
 122#£Ange definitionen av den nya funktionen\r\nDefinitionen kan användas i resten av dokumentet, men inte tidigare.\r\n Om kommandot 'delete def:' infogas längre ner i dokumentet kan det inte användas därefter.\r\nFler funktioner kan definieras genom att separera definitionerna med " & ListSeparator\r\ne.g. f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Ny funktion
 124#£Ny ekvation
@@ -134,11 +134,11 @@
 133#£Du bad att lösa ekvationen för en variabel som redan har definierats. Infoga kommandot "delete def:" före ekvationen.
 134#£Taxeringssystemet är löst för
 135#£med hjälp av WordMat's 'Solve Equations'-funktion,
-136#£Partnerskap registrerat hos
+136#£WordMat+ aktiverat för
 137#£Ekvationssystemet hade inga lösningar inom $C för variablerna
 138#£Ekvationssystemet hade inga lösningar inom $R för variablerna
 139#£Det måste finnas ett likhetstecken i en ekvation.
-140#£Inget partnerskap registrerat
+140#£WordMat+ ej aktiverat
 141#£Detta är inte en ekvation. En ekvation kommer alltid att ha ett =-tecken.
 142#£Följande variabler elimineras från ekvationssystemet:
 143#£med hjälp av WordMat's 'Eliminera variabel'-funktion,
@@ -914,3 +914,10 @@
 913#£Det är inte tillåtet att använda operatorn hat i definitionsnamn.
 914#£Det är inte tillåtet att använda numeriska tecken i definitionsnamn.
 915#£Du har ställt in för många parametrar för funktionen:
+916#£WordMat+
+917#£Kolla efter WordMat+
+918#£Köp WordMat+
+919#£Aktivera WordMat+ med kod
+920#£WordMat+ är inte korrekt installerat på denna dator. Du kan inte fortsätta. Försök installera om WordMat.
+921#£WordMat+ är redan aktivt på den här datorn.
+922#£Du kan också köpa enskilda licenser för WordMat+. Klicka här för att se mer...

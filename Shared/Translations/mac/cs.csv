@@ -118,8 +118,8 @@
 117#£V definici je chyba:
 118#£Ignoruje se, ale opraví chybu vstupu, aby se zabránilo této chybe vstupu
 119#£... zbytek odstranen.
-120#£Vase skola/organizace má aktivní partnerství. Nyní muzete pouzívat aplikaci WordMat+
-121#£Promin. Vase skola nemá aktivní partnerství.
+120#£WordMat+ je nyní pro tento pocítac povolen
+121#£Aktivní licence nebo partnerství WordMat+ pro tento pocítac nebylo mozné zaregistrovat.
 122#£Uvedte definici nové funkce\r\nDefinici lze pouzít ve zbytku dokumentu, ale ne dríve.\r\nPokud vlozíte príkaz 'delete def:' dále do dokumentu, nebude od tohoto bodu znám.\r\nMuzete definovat více promennch najednou tím, ze je oddelíte pomocí " & ListSeparator\r\nex.:  f(x)=x " & ListSeparator & " g(x)=2x+1
 123#£Nová funkce
 124#£Nová rovnice
@@ -134,11 +134,11 @@
 133#£Pozádali jste o vyresení rovnice pro promennou, která je jiz definována. Pred rovnici vlozte príkaz 'delete def:'.
 134#£Soustava rovnic je resena pro
 135#£pomocí funkce "vyresit rovnici" aplikace WordMat,
-136#£Registrované partnerství
+136#£WordMat+ povolen pro
 137#£Soustava rovnic nemela resení v oboru $C pro promenné
 138#£Soustava rovnic nemela resení v oblasti $R pro promenné
 139#£V rovnici musí bt znaménko rovná se
-140#£Není registrováno zádné partnerství
+140#£WordMat+ není povolen
 141#£To není rovnice. Rovnice bude mít vzdy znaménko rovná se.
 142#£Ze soustavy rovnic jsou odstraneny následující promenné:
 143#£podle funkce 'Odstranit promennou' WordMat, '
@@ -914,3 +914,10 @@
 913#£V názvech definic není dovoleno pouzívat operátor hat.
 914#£V názvech definic není dovoleno pouzívat císelné znaky.
 915#£Nastavili jste pro funkci prílis mnoho parametru:
+916#£WordMat+
+917#£Zkontrolujte WordMat+
+918#£Kupte si WordMat+
+919#£Aktivujte WordMat+ pomocí kódu
+920#£WordMat+ není na tomto pocítaci správne nainstalován. Nemuzes pokracovat. Zkuste preinstalovat WordMat.
+921#£WordMat+ je na tomto pocítaci jiz aktivní.
+922#£Muzete si také zakoupit jednotlivé licence pro WordMat+. Kliknete zde pro více informací...
