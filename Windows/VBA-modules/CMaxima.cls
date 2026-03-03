@@ -451,7 +451,7 @@ Sub ShowDebug(Optional vis As Boolean = False, Optional MInputString As String, 
             UserFormDebug.TextBox_maximaoutput = OutputString
         End If
         
-        UserFormDebug.Label_time.Caption = UserFormDebug.Label_time.Caption & "Samlet tid: " & Timer - tid & vbCrLf
+        UserFormDebug.Label_time.Caption = UserFormDebug.Label_time.Caption & "Samlet tid: " & Timer - Tid & vbCrLf
         UserFormDebug.Show
     End If
 End Sub
@@ -786,7 +786,7 @@ start:
     End If
     
     If MaximaExact = 2 Then    ' necessary so that trig equations with sing are not solved exactly
-        MaximaInputStreng = MaximaInputStreng & "Solve(ev(" & ckommando & ",numer)," & variabel & ");"
+        MaximaInputStreng = MaximaInputStreng & "Solve(ev(" & ckommando & ",numer)," & variabel & ",false);"
     Else
         MaximaInputStreng = MaximaInputStreng & "Solve(" & ckommando & "," & variabel & ");"
     End If
@@ -1104,13 +1104,15 @@ Sub Nsolve(ByVal variabel As String, ByVal qn As Integer, ByVal qm As Integer, B
                 MaximaOutput = "L={" & MaximaOutput & "}"
             End If
         Else    ' notation med x=...
-            MaximaOutput = RemoveBrackets(MaximaOutput)
-            MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & ChrW$(8744) & "    ")    ' Comma replaced by or
-            MaximaOutput = Replace(MaximaOutput, "=", ChrW$(&H2248))    ' cirka equal
-            '    If MaximaOutput <> "" Then
-            '        MaximaOutput = variabel & chrw$(&H2248) & RemoveBrackets(MaximaOutput)
-            '    End If
-            '    MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & chrw$(8744) & "    " & variabel & chrw$(&H2248)) ' Comma replaced by or
+            If MaximaOutput <> "[]" Then
+                MaximaOutput = RemoveBrackets(MaximaOutput)
+                MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & ChrW$(8744) & "    ")    ' Comma replaced by or
+                MaximaOutput = Replace(MaximaOutput, "=", ChrW$(&H2248))    ' cirka equal
+                '    If MaximaOutput <> "" Then
+                '        MaximaOutput = variabel & chrw$(&H2248) & RemoveBrackets(MaximaOutput)
+                '    End If
+                '    MaximaOutput = Replace(MaximaOutput, ListSeparator, "    " & chrw$(8744) & "    " & variabel & chrw$(&H2248)) ' Comma replaced by or
+            End If
         End If
     End If
 
@@ -2515,9 +2517,9 @@ End Sub
 Sub Draw3D(graphobj As String, Optional antalobj As Integer = 1)
 '    text = "load(draw)$draw3d("
     Dim text As String
-    Dim tid As Integer
+    Dim Tid As Integer
 
-    tid = 20 + antalobj * 10
+    Tid = 20 + antalobj * 10
 
 #If Mac Then
 '        Text = "gnuplot_command:""/Library/'Application Support'/Microsoft/Office365/'User Content.localized'/Add-Ins.localized/WordMat/gnuplot/gnuplot""$set_plot_option([gnuplot_term, aqua])$draw3d("
@@ -2540,7 +2542,7 @@ Sub Draw3D(graphobj As String, Optional antalobj As Integer = 1)
 '        Call RunMaxima(-1 * tid)
 '    End If
 #Else
-        Call RunMaxima(-1 * tid)
+        Call RunMaxima(-1 * Tid)
         If InStr(MaxProc.LastMaximaOutput, "no surface within these ranges") Then
             ' if even one equation does not exist within the selected window there is an error
             MsgBox TT.A(420), vbOKOnly, TT.Error
@@ -4240,7 +4242,6 @@ Function ConvertToWordSymbols(ByVal text As String) As String
                 Loop While ea.IsNumber(ea.pos)
                 ' space removed to make insert bracket work
                 ea.text = Left$(ea.text, pos - 1) & gtegn & "10^" & Mid$(ea.text, pos + 2, ea.pos - pos - 2) & " " & Right$(ea.text, Len(ea.text) - ea.pos + 1)
-                'ea.text = left$(ea.text, pos - 1) & gtegn & "10^" & mid$(ea.text, pos + 2, ea.pos - pos - 2) & right$(text, Len(ea.text) - ea.pos + 1)
             End If
         End If
     Loop While pos <> 0
@@ -4256,7 +4257,6 @@ Function ConvertToWordSymbols(ByVal text As String) As String
                     ea.pos = ea.pos + 1
                 Loop While ea.IsNumber(ea.pos)
                 ea.text = Left$(ea.text, pos - 1) & gtegn & "10^" & Mid$(ea.text, pos + 1, ea.pos - pos - 1) & " " & Right$(ea.text, Len(ea.text) - ea.pos + 1)
-                '    ea.text = left$(ea.text, pos - 1) & gtegn & "10^" & mid$(ea.text, pos + 1, ea.pos - pos - 1) & right$(ea.text, Len(ea.text) - ea.pos + 1)
             End If
         End If
     Loop While pos > 1
@@ -4272,7 +4272,6 @@ Function ConvertToWordSymbols(ByVal text As String) As String
                     ea.pos = ea.pos + 1
                 Loop While ea.IsNumber(ea.pos)
                 ea.text = Left$(ea.text, pos - 1) & gtegn & "10^" & Mid$(ea.text, pos + 1, ea.pos - pos - 1) & " " & Right$(ea.text, Len(ea.text) - ea.pos + 1)
-                '    ea.text = left$(ea.text, pos - 1) & gtegn & "10^" & mid$(ea.text, pos + 1, ea.pos - pos - 1) & right$(ea.text, Len(ea.text) - ea.pos + 1)
             End If
         End If
     Loop While pos > 1
@@ -4511,7 +4510,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         udt = ea.GetNextBracketContent()
         Arr = Split(udt, ListSeparator)
         If UBound(Arr) > 1 Then
-            text = Left$(text, pos - 1) & ChrW$(8747) & "_" & Arr(2) & "^" & Arr(3) & ChrW$(9618) & Arr(0) & "  d" & Arr(1) & " " & Right$(text, Len(text) - pos - Len(udt) - 10)
+            text = Left$(text, pos - 1) & ChrW$(8747) & "_(" & Arr(2) & ")^(" & Arr(3) & ")" & ChrW$(9618) & Arr(0) & "  d" & Arr(1) & " " & Right$(text, Len(text) - pos - Len(udt) - 10)
         Else
             text = Left$(text, pos - 1) & ChrW$(8747) & ChrW$(9618) & Arr(0) & "  d" & Arr(1) & " " & Right$(text, Len(text) - pos - Len(udt) - 10)
         End If
@@ -6271,7 +6270,7 @@ Function IsSolved(ByVal Ligning As String, variabel As String) As Boolean
     If CASengine > 0 Then
         ea.SetTuborgBrackets
     End If
-    Ligning = RemoveBrackets(Ligning)
+    Ligning = RemoveBrackets(Trim(Ligning))
     Arr = Split(Ligning, "=")
 
     If UBound(Arr) = 1 Then    ' there is exactly one = sign

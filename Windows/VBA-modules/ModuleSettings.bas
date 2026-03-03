@@ -1838,11 +1838,11 @@ Function SaveAsFilePath(DefaultFileName As String, Optional Filter As String = "
 End Function
 
 Sub TestReadSett()
-Dim tid As Single
+Dim Tid As Single
 
-    tid = Timer
+    Tid = Timer
 '    ReadAllSettingsFromRegistry
     LoadSettingsFromData
-    MsgBox Timer - tid
+    MsgBox Timer - Tid
 End Sub
 

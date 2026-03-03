@@ -1739,10 +1739,10 @@ Sub TestError()
 End Sub
 
 Sub TestSprog()
-    Dim tid As Double, n As Integer
-    tid = Timer
+    Dim Tid As Double, n As Integer
+    Tid = Timer
     n = TT.LangNo
-    MsgBox Timer - tid
+    MsgBox Timer - Tid
 End Sub
 
 Function StringToUTF8Bytes(s As String) As Byte()

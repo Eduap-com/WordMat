@@ -38,6 +38,16 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     PrepareMaxima ' finds definitions
     
     omax.ReadSelection ' reads selected function
+    If Not Radians Then
+        For i = 0 To omax.KommandoArrayLength
+            If InStr(omax.KommandoArray(i), "sin") > 0 Or InStr(omax.KommandoArray(i), "cos") > 0 Or InStr(omax.KommandoArray(i), "tan") > 0 Then
+                If MsgBox(TT.A(912), vbYesNo, TT.A(846)) = vbNo Then
+                    Radians = True
+                    RefreshRibbon
+                End If
+            End If
+        Next
+    End If
 
     If Gtype <> "CAS" Then
         ' put definitions in the correct order
@@ -144,8 +154,8 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                             ElseIf LHS = "({{x},{y}})" Then 'parametric plot
                                 RHS = Replace(RHS, "{", "(")
                                 RHS = Replace(RHS, "}", ")")
-                                RHS = Replace(RHS, "((", "(")
-                                RHS = Replace(RHS, "))", ")")
+'                                RHS = Replace(RHS, "((", "(")
+'                                RHS = Replace(RHS, "))", ")")
                                 cmd = "Param:X=" & RHS
                                 cmd = Replace(cmd, "+", "%2B") & ";"
                                 UrlLink = UrlLink & cmd
@@ -1019,8 +1029,18 @@ Sub CreateGeoGebraFil(geogebrasti As String)
     Wait 1 ' the second time you open geogebra on mac word locks up if it is not there. It has something to do with finddefinitions, but I haven't been able to see what
 #End If
 
-    PrepareMaxima
+'    PrepareMaxima '1.39 removed. there were two. Why?
     omax.ReadSelection
+    If Not Radians Then
+        For i = 0 To omax.KommandoArrayLength
+            If InStr(omax.KommandoArray(i), "sin") > 0 Or InStr(omax.KommandoArray(i), "cos") > 0 Or InStr(omax.KommandoArray(i), "tan") > 0 Then
+                If MsgBox(TT.A(912), vbYesNo, TT.A(846)) = vbNo Then
+                    Radians = True
+                    RefreshRibbon
+                End If
+            End If
+        Next
+    End If
 
     Dim sl As New CSortList
     Dim Var As String, DefList As String
@@ -1138,8 +1158,8 @@ Sub CreateGeoGebraFil(geogebrasti As String)
                             RHS = Replace(RHS, VBA.ChrW$(183), "*")
                             RHS = Replace(RHS, ",", ".")
                             RHS = Replace(RHS, "@", ";")
-                            RHS = Replace(RHS, "((", "(")
-                            RHS = Replace(RHS, "))", ")")
+'                            RHS = Replace(RHS, "((", "(")
+'                            RHS = Replace(RHS, "))", ")")
                             fktudtryk = "param1: X = " & RHS
                             geogebrafil.CreateEquation "param" & j, fktudtryk, False, True
                             j = j + 1

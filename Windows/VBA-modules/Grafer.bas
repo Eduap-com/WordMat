@@ -232,7 +232,7 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
     Dim s As String, v As String
     Dim Arr As Variant
     Dim ea As New ExpressionAnalyser
-  '  On Error GoTo fejl
+    On Error GoTo fejl
     Dim sstart As Long, sslut As Long, LHS As String, p As Integer
     sstart = Selection.start
     sslut = Selection.End
@@ -265,14 +265,18 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
         End If
         
         ea.text = ConvertToGeogebraSyntax(s)
-        v = ea.GetNextVar
-        If v <> "x" And v <> "y" Then
-            If v = "t" Then
-                ea.ReplaceVar "t", "x"
-            ElseIf v = "N" Then
-                ea.ReplaceVar v, "y"
+        Do
+            v = ea.GetNextVar
+            If v <> "x" And v <> "y" Then
+                If v = IndepVar Then
+                    ea.ReplaceVar IndepVar, "x"
+                ElseIf v = DepVar Then
+                    ea.ReplaceVar DepVar, "y"
+                End If
             End If
-        End If
+            ea.pos = ea.pos + 1
+        Loop While ea.pos < ea.Length And v <> vbNullString
+        
         s = ea.text
         s = "SlopeField(" & s & ");"
         s = s & "A=" & DePoint & ";Xmin=-100;Xmax=100;Tic=0.1;"

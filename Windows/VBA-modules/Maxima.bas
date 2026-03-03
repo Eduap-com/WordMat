@@ -2,7 +2,7 @@ Attribute VB_Name = "Maxima"
 Option Explicit
 Public UFSelectVar As UserFormSelectVar
 Public omax As CMaxima
-Public tid As Double
+Public Tid As Double
 Private DeVarList As String
 Private TempCas As Integer
 Private RestartIndex As Integer
@@ -17,7 +17,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
     
     If DebugWM Then
         UserFormDebug.Label_time.Caption = ""
-        tid = Timer
+        Tid = Timer
     End If
     
     SaveBackup
@@ -123,7 +123,7 @@ End Sub
 #End If
 
 Sub RestartMaxima()
-    Set omax = New CMaxima
+'    Set omax = New CMaxima ' causes problems because restartmaxima is run from RunMaxima which is in Omax. 1.39
     
 #If Mac Then
 #Else
@@ -573,10 +573,13 @@ newcas:
         
         Dim Sep As String
         '        If CASengine = 0 Then
-        Sep = VBA.ChrW$(8744)
+        Sep = ChrW$(8744)
         '        Else
         '            sep = ";"
         '        End If
+        
+        If InStr(omax.KommentarOutput, "solving systems of equations") Then
+        End If
         If omax.StopNow Or (omax.IsAllSolved(omax.MaximaOutput, variabel, Sep) = "false" And Not (InStr(variabel, "+") > 0)) Then
             IsSolved = False
         Else
@@ -1242,7 +1245,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
 ghop:
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
-
+        
         InsertForklaring TT.A(830) & " " & variabel & " " & TT.A(57), False
 
         If Len(omax.MaximaOutput) > 150 Then
@@ -1252,6 +1255,11 @@ ghop:
         End If
 
         variabel = omax.ConvertToWordSymbols(variabel)
+
+        If omax.MaximaOutput = "[]" Then
+            Selection.TypeText TT.A(130) & variabel
+            GoTo slut
+        End If
 
         If omax.IsAllSolved(omax.MaximaOutput, variabel, VBA.ChrW$(8744)) = "false" And Not (InStr(variabel, "+") > 0) Then
             IsSolved = False
@@ -1359,8 +1367,8 @@ Sub beregn()
     Dim fejlm As String, RemoveEqual As Boolean
     On Error GoTo fejl
    ' Application.ScreenUpdating = False
-    Dim tid As Single
-    tid = Timer
+    Dim Tid As Single
+    Tid = Timer
 #If Mac Then
     Dim D As Document
     Set D = ActiveDocument

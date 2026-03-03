@@ -454,29 +454,26 @@ qexpr
 )$
 
 /* substitutes solutions back into equation to see if any imaginary result appears. If so it is assumed that the result is not valid */
-RemoveUndefined(eqnw,sollistq):=block([indq,indq2,solq,sollistq2,delq,resq],
+RemoveUndefined(eqnw,sollistq):=block([indq,indq2,solq,sollistq2,delq],
 if length(sollistq)=0 then return(sollistq),
 if op(eqnw)=end then return(sollistq),
 indq:0,sollistq2:[],
 startq,
-	indq:indq+1,
-	indq2:1,
-	if length(sollistq)<indq then go(slutq),
-	solq:sollistq[indq],
-	if IsSolved(solq,solvar)=false then (sollistq2:append(sollistq2,[solq]),go(startq)),
-	resq:ev(eqnw,solq,bfloat),
-	if op(resq)="=" and constantp(lhs(resq)) and constantp(rhs(resq)) then (if abs(lhs(resq)-rhs(resq))/max(1.0,abs(lhs(resq)),abs(rhs(resq))) > 1.0b-4 then go(startq)), /* removes solutions that reduce to a number and does not satisfy the equation within a tolerance */
-	if do(
-		delq:inpart(eqnw,indq2),
-		if delq=end then return(true),
-		resq:ev(delq,solq),
-		errcatch(if powundef(subst(solq,delq)) then return(false)),
-		if errcatch(imagundef(ev(resq,numer)))=[] and errcatch(imagundef(resq))=[] then return(false),
-		if errcatch(asinundef(resq))=[] then return(false),
-		if errcatch(acosundef(resq))=[] then return(false),
-		indq2:indq2+1
-		) then sollistq2:append(sollistq2,[solq]),
-	go(startq),
+indq:indq+1,
+indq2:1,
+if length(sollistq)<indq then go(slutq),
+solq:sollistq[indq],
+if IsSolved(solq,solvar)=false then (sollistq2:append(sollistq2,[solq]),go(startq)),
+if do(
+	delq:inpart(eqnw,indq2),
+	if delq=end then return(true),
+	errcatch(if powundef(subst(solq,delq)) then return(false)),
+	if errcatch(imagundef(ev(ev(delq,solq),numer)))=[] and errcatch(imagundef(ev(delq,solq)))=[] then return(false),
+	if errcatch(asinundef(ev(delq,solq)))=[] then return(false),
+	if errcatch(acosundef(ev(delq,solq)))=[] then return(false),
+	indq2:indq2+1
+	) then sollistq2:append(sollistq2,[solq]),
+go(startq),
 slutq,
 indq:1,
 do(
@@ -486,19 +483,18 @@ do(
 	)
 )$
 
- /* Removes incorrect solutions from a list according to assumptions */
 RemoveIncorrect(sollistq):=block([indq,sollistq2,solq],
 indq:0,sollistq2:[],
 if length(sollistq)=0 then return(sollistq),
 if domain=complex then return(sollistq),
 do(
-	indq:indq+1,
-	solq:sollistq[indq],
-	/* med numer virker flg ikke assume(x>=-1/3) , is(equal(x,-3/2)),numer men det er vel af en grund*/
-	/* if ev(is(equal(lhs(solq),rhs(solq))),numer)#false then sollistq2:append(sollistq2,[solq]), */
-	/* if is(equal(lhs(solq),rhs(solq)))#false then sollistq2:append(sollistq2,[solq]), Denne fjernet og erstattet af næste linje i v. 1.27 pga problem med [assume(-7.5<=x,x<=7.5)]$;AllTrig:true$Solve(1.386*cos(0.61*x)=0,x); OBS: kan ikke genskabe problemet i forrige linje*/
-	if is(equal(lhs(solq),ev(rhs(solq),numer)))#false then sollistq2:append(sollistq2,[solq]),
-	if length(sollistq)=indq then return(sollistq2)
+indq:indq+1,
+solq:sollistq[indq],
+/* med numer virker flg ikke assume(x>=-1/3) , is(equal(x,-3/2)),numer men det er vel af en grund*/
+/* if ev(is(equal(lhs(solq),rhs(solq))),numer)#false then sollistq2:append(sollistq2,[solq]), */
+/* if is(equal(lhs(solq),rhs(solq)))#false then sollistq2:append(sollistq2,[solq]), Denne fjernet og erstattet af næste linje i v. 1.27 pga problem med [assume(-7.5<=x,x<=7.5)]$;AllTrig:true$Solve(1.386*cos(0.61*x)=0,x); OBS: kan ikke genskabe problemet i forrige linje*/
+if is(equal(lhs(solq),ev(rhs(solq),numer)))#false then sollistq2:append(sollistq2,[solq]),
+if length(sollistq)=indq then return(sollistq2)
 )
 )$
 
@@ -618,7 +614,7 @@ if op(exprq)="/" then exprq:part(exprq,1),
 if op(exprq)="*" then return(true),
 if op(exprq)="^" then (if not(containx(part(exprq,2),solvar)) then return(true)), false)$
 
-factoreq(lignqw):=block([exprq,exprq2,inpsiz,errormsg:false],
+factoreq(lignqw):=block([exprq,exprq2,inpsiz],
 if CheckSolved(lignqw) then return(lignqw),
 exprq:lhs(lignqw)-rhs(lignqw), 
 if IsFactored(exprq) then return (exprq=0),
@@ -1009,7 +1005,6 @@ addsolstep(qsol):=block([],solsteps:unique(append(solsteps,qsol)))$
 
 /* Tries to isolate radicals one bye one and square them out, but can easily give infinite loop or very large expressions. Now limited, will only apply if one radical, since can easily grow.
 dissolveradicals:true;solvar:x;DissolveRadicals([x^2=2*sqrt(x)]);*/
-/* kan give problemer hvis nulregel anvendes, da en række løsninger, da smides væk. */
 DissolveRadicals(qexprl):=block([powno:0,solq,solq2:[],solq3,savevar,qind:0,qind2:0,noradicals:true,numq,denomq],
 if not(dissolveradicals) then return(qexprl),
 savevar:solvar,
@@ -1017,12 +1012,11 @@ do(
 	qind2:qind2+1,
 	if qind2>length(qexprl) then return(),
 	qexpr:qexprl[qind2],
-	solq:apply1(qexpr,ReplaceFirstRadical),/* ReplaceFirstRadical is a rule that counts how many powers in expression that could be isolated, and sets powno equal to that number. If powno=1 then: for (x+1)^(1/2) sets radicalsubst:[x+1,1/2]. solq holds the new equation where everything under sqrt is replaced by a new variable powx: 4*powx = -(x^2/5)+2*x+3*/
+	solq:apply1(qexpr,ReplaceFirstRadical),/* ReplaceFirstRadical is a rule that counts how many powers in expression that could be isolated, and sets pow equal to that number. If pow=1 then: for (x+1)^(1/2) sets radicalsubst:[x+1,1/2]. solq holds the new equation where everything under sqrt is replaced by a new variable powx: 4*powx = -(x^2/5)+2*x+3*/
 	if freeof(savevar,solq) then return(qexprl), /* If powx was the only part that had x, then normal recursivesolve will solve the equation. We dont need this*/ 
 	if powno=1 then (
 		noradicals:false,
 		solq:ev(solvereal(solq,powx),dissolveradicals=false,sepsolvecontext=false,showassumptions=false), /* Solve the equation with the radical replaced by powx */
-		if solq=unknown then return(qexprl), 
 		qind:0,
 		do(
 			qind:qind+1,
@@ -1035,26 +1029,23 @@ do(
 				if evenp(denomq) then
 				(
 					if sign(numq)=pos then
-					(		assume(radicalsubst[1]>=0) /* ,rhs(solq[qind])>=0   should be assumed as well, but it is not global, and can cause correct solutions to be removed. It is better to remove incorrect at the end by test.*/ 
+					(					assume(radicalsubst[1]>=0,rhs(solq[qind])>=0)
 					)
 					else
-					(		assume(radicalsubst[1]>0) /* ,rhs(solq[qind])>0 */
+					(					assume(radicalsubst[1]>0,rhs(solq[qind])>0)
 					)
 				),
-				if sign(numq)=pos then( 
+				if sign(numq)=pos then(
 					solq3:expand(radicalsubst[1]^numq)-expand(rhs(solq[qind])^(denomq))
-				)
-				elseif rhs(solq[qind])=0 then (
-					solq3:radicalsubst[1]
 				)
 				else(
 					solq3:expand(radicalsubst[1]^numq)*expand(rhs(solq[qind])^(-denomq))-1
-				),	
+				),
 				solq2:append(solq2,[solq3=0])
 /*				if polynomialp(solq3,[savevar]) and abs(denomq)<1000 then (
 					solq2:append(solq2,[solq3=0])
 					)
-				else (solq2:append(solq2,[subst(radicalsubst[1]^radicalsubst[2],powx,solq[qind])]))
+				else (solq2:append(solq2,[subst(radicalsubst[1]^radicalsubst[2],powx,solq[qind])])),print("solq2: ",solq2)
 */
 			)
 			else
@@ -1063,8 +1054,7 @@ do(
 			)
 		)
 	),
-	solvar:savevar,
-	if noradicals then qexprl else solq2
+	solvar:savevar,if noradicals then qexprl else solq2
 )$
 
 DissolveAbs(qexprl):=block([absno:0,solq,solq2:[],savevar,qind:0,qind2:0,noabs:true],
@@ -1671,8 +1661,8 @@ SolveFirst(eqnlqq,varq):=block([eqnq,autonsolve:true],
     ),
     if length(elq)>0 then (
         if CheckSolvedVar(elq[1],varq) then (
-            if length(elq)=1 then elq:first(elq),
-            append([elq],rest(eqnlqq,1))
+/*            if length(elq)=1 then elq:first(elq),*/
+            append(elq,rest(eqnlqq,1))
         ) else (false)
     )
 )$
@@ -1735,55 +1725,6 @@ permuts(lst) := block(
     result
 )$
 
-RemoveUndefinedSystem(eqnlq, sollistq):=block([sollistq2:[], zq, indq, delq, keepq,resq],
-    if length(sollistq)=0 then return(sollistq),
-    if op(eqnlq)=end then return(sollistq),
-
-    for zq in sollistq do (
-        keepq:true,
-        indq:1,
-        do(
-            delq:inpart(eqnlq,indq),
-            if delq=end then return(),
-            /* Same style of checks as RemoveUndefined, but for full system substitutions */
-			resq:ev(delq,zq),
-            if errcatch(if powundef(subst(zq,delq)) then return(false))=[] then (keepq:false, return()),
-            if errcatch(imagundef(ev(ev(delq,zq),numer)))=[] and errcatch(imagundef(resq))=[] then (keepq:false, return()),
-            if errcatch(asinundef(resq))=[] then (keepq:false, return()),
-            if errcatch(acosundef(resq))=[] then (keepq:false, return()),
-			resq:ev(resq,numer),
-			if abs(lhs(resq)-rhs(resq))/max(1.0,abs(lhs(resq)),abs(rhs(resq))) > 1.0e-7 then (keepq:false, return()),
-            indq:indq+1
-        ),
-        if keepq then sollistq2:append(sollistq2,[zq])
-    ),
-    sollistq2
-)$
-
-RemoveIncorrectSystem(sollistq):=block([sollistq2],
-    if length(sollistq)=0 then return(sollistq),
-    if domain=complex then return(sollistq),
-
-    sollistq2:delete(false,makelist(
-        if nonscalarp(zq) then (
-            if freeof(false, makelist( ( 
-                if op(zq2)="=" then
-					 (if (is(equal(lhs(zq2),ev(rhs(zq2),numer)))#false) then true else false)
-				else 
-					true),
-                zq2, zq)
-			) then zq else false
-        )
-        elseif op(zq)="=" then (
-            if is(equal(lhs(zq),ev(rhs(zq),numer)))#false then zq else false
-        )
-        else zq,
-        zq, sollistq
-    )
-	),
-    sollistq2
-)$
-
 /* Kan give falske loesninger, specielt ved 3+ lignigner hvor der indgaar ^2 og kvadratrod, men det forsoeges undgaaet ved at sortere ligningslisten saa de korteste ligninger loeses foerst. Maaske noget med assume og removeincorrect kan forbedre*/
 solvesystem(eqnlqsave, varlqsave) := block(
     [noq, varpermut, eqnpermut, eqnq, eqnqsav, eqnlqtemp, indq, indq2, sollq, varq, varlq, iteq, iteql, elq, eqnlq, resq, sprq, sprqgo, sollq2, ql, zq],
@@ -1815,7 +1756,7 @@ solvesystem(eqnlqsave, varlqsave) := block(
         print("Must be the same number of equations as variables"),
         return()
     ),
-    sollq: errcatch(solve(eqnlqsave, varlqsave)), /* First try maxima solver */
+    sollq: errcatch(solve(eqnlqsave, varlqsave)),
     if sollq # [] then (
         sollq: delete([], makelist(GetReal(z), z, sollq[1])),
         if sollq # [] and %rnum_list = [] then return(sollq)
@@ -1883,8 +1824,8 @@ solvesystem(eqnlqsave, varlqsave) := block(
         go(startsolq)
     ),
     /*Hvis foerste ligning blev loest saa fortsaettes her*/
-    if length(varlq)>0 then varlq: rest(varlq, -1), /*Den variabel der blev loest for fjernes fra listen*/
-    if length(varlq) >= 1 then go(startsolq), /* Hvis der er flere variable, der skal isoleres saa start forfra*/
+    varlq: rest(varlq, -1), /*Den variabel der blev loest for fjernes fra listen*/
+    if length(varlq) >= 1 then go(startsolq), /* Hvis de er flere variable der skal isoleres saa start forfra*/
     if not(IsSystemSolved(sollq, varlqsave)) and iteq < noq and iteql < noq then (resq: retry, go(tryagainlabel)),
     /*Her nulstilles og goeres klar til at loese evt gemte extra loesninger*/
     iteq: 1,
@@ -1897,8 +1838,7 @@ solvesystem(eqnlqsave, varlqsave) := block(
         eqnq: first(eqnlq),
         go(startq)
     ),
-    SortSolutions(sollq), 
-
+    SortSolutions(sollq),
     /*forsøg med mnewton, men kun for 2 ligninger. Desværre virker det ikke på Mac. Maxima 5.47. Der kommer en FLONUM-EPSILON is unbound error i linearalgebra/mring.lisp*/
 /*    if length(varlqsave)=2 then (
         errcatch[load(mnewton)],
@@ -1925,8 +1865,7 @@ solvesystem(eqnlqsave, varlqsave) := block(
         if freeof(false,zq) then sollq2:append(sollq2,[zq])
     ),
     sollq:sollq2,
-	sollq:RemoveIncorrectSystem(sollq),
-    sollq:RemoveUndefinedSystem(eqnlqsave,sollq),
+
     SortSolutions(sollq)
 )$
 
