@@ -930,3 +930,5 @@
 929#£Risinajumi tiek atrasti, "uzminejot" daudzus dazadus risinajumus. Metode darbojas praktiski visos vienadojumos, bet risinajumus var ignoret un atrast nepareizus risinajumus. (Tiek izmantota bisekcijas un Nutona metodes kombinacija)
 930#£Vispirms tiek izmeginats analitiskais risinajums, un, ja tas neizdodas, tiek izmantotas skaitliska risinajuma metodes.
 931#£Vienadojumus pamata var atrisinat divos dazados veidos. Ja rodas problemas ar vienadojumu, ieteicams izmeginat citu metodi vai citu CAS programmu vai grafisko risinajumu.
+932#£Atjauninat uz jaunako beta versiju
+933#£Jums jaapzinas, ka beta versijas var but kludas. Tie galvenokart ir paredzeti testesanai. So funkciju ieteicams lietot galvenokart saskana ar Eduap noradijumiem

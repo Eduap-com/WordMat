@@ -757,6 +757,22 @@ fejl:
 slut:
 
 End Sub
+Sub UpdateToBeta()
+    If QActivePartnership() Then
+        On Error Resume Next
+        If MsgBox2("Vil du gennemtvinge opdatering til den nyeste beta-version?" & vbCrLf & "Du skal være opmærksom på at beta-versioner ikke altid er gennemtestede og kan indeholde flere fejl.", vbOKCancel, "Bekræft") = vbOK Then
+            Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
+            On Error GoTo fejl
+            Application.Run macroname:="PUpdateWordMat", varg1:=True
+        End If
+    Else
+        MsgBox2 "This function requires WordMath+", vbOKOnly, TT.Error
+    End If
+    GoTo slut
+fejl:
+    MsgBox2 "Der skete en fejl i forsøget på at opdatere", vbOKOnly, TT.Error
+slut:
+End Sub
 
 Sub CheckForUpdateSilent()
     CheckForUpdatePar True

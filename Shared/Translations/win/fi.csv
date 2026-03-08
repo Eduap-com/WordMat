@@ -930,3 +930,5 @@
 929#£Ratkaisut löydetään 'arvaamalla' monia eri ratkaisuja. Menetelmä toimii käytännössä kaikissa yhtälöissä, mutta ratkaisuja voidaan ohittaa ja vääriä ratkaisuja löytyä. (Käytetään yhdistelmää bisektiosta ja Newtonin menetelmästä)
 930#£Ensin kokeillaan analyyttistä ratkaisua, ja jos se epäonnistuu, käytetään numeerisia ratkaisumenetelmiä.
 931#£Yhtälöt voidaan käytännössä ratkaista kahdella eri tavalla. Jos kohtaat ongelmia yhtälön kanssa, voi olla hyvä idea kokeilla toista menetelmää tai toista CAS-moottoria tai graafista ratkaisua.
+932#£Päivitys uusimpaan betaversioon
+933#£Sinun tulisi olla tietoinen siitä, että beta-versioissa voi olla virheitä. Ne on ensisijaisesti tarkoitettu testaukseen. Suositellaan käyttämään tätä toimintoa ensisijaisesti Eduapin ohjeiden mukaisesti

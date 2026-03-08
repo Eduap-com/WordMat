@@ -930,3 +930,5 @@
 929#£Løsningene finnes ved å 'gjette' mange forskjellige løsninger. Metoden fungerer på praktisk talt alle ligninger, men løsninger kan overses og falske løsninger kan finnes. (En kombinasjon av deldeling og Newtons metode brukes)
 930#£En analytisk løsning prøves først, og hvis den feiler, brukes numeriske løsningsmetoder.
 931#£Ligninger kan i bunn og grunn løses på to forskjellige måter. Hvis du opplever problemer med en ligning, kan det være lurt å prøve en annen metode, eller en annen CAS-motor eller grafisk løsning.
+932#£Oppdater til siste betaversjon
+933#£Du bør være klar over at det kan være feil i betaversjonene. De er primært ment for testing. Det anbefales å bruke denne funksjonen hovedsakelig som instruert av Eduap

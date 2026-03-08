@@ -111,8 +111,11 @@ Sub SetCaptions()
     Dim v As String
 
     v = AppVersion
-    If PatchVersion <> "" Then
+    If PatchVersion <> vbNullString Then
         v = v & PatchVersion
+    End If
+    If BetaVersion Then
+        v = v & " beta"
     End If
     If TT.LangNo = 1 Then
         Me.Caption = TT.A(812) & " WordMat"

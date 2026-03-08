@@ -842,6 +842,9 @@ End Sub
 Sub Rib_CheckForUpdate(control As IRibbonControl)
     CheckForUpdate
 End Sub
+Sub Rib_CheckForUpdateBeta(control As IRibbonControl)
+    UpdateToBeta
+End Sub
 Sub Rib_CheckForUpdateGeoGebra(control As IRibbonControl)
     InstallGeoGebra False
 End Sub
@@ -1602,6 +1605,9 @@ End Sub
 Sub Rib_GetLabelUpdate(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = TT.A(813)
 End Sub
+Sub Rib_GetLabelUpdateBeta(control As IRibbonControl, ByRef returnedVal As Variant)
+    returnedVal = TT.A(813) & " Beta"
+End Sub
 Sub Rib_GetLabelShortcuts(control As IRibbonControl, ByRef returnedVal As Variant)
     returnedVal = TT.A(814)
 End Sub
@@ -2117,8 +2123,14 @@ End Sub
 Sub Rib_STupdate1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(651)
 End Sub
+Sub Rib_STupdatebeta1(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = "Opdater til nyeste betaversion"
+End Sub
 Sub Rib_STupdate2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(652)
+End Sub
+Sub Rib_STupdatebeta2(control As IRibbonControl, ByRef returnedVal)
+    returnedVal = "Det anbefales kun at bruge denne funktion efter anvisning fra Eduap"
 End Sub
 Sub Rib_STgenveje1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(653)

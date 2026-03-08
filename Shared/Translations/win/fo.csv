@@ -930,3 +930,5 @@
 929#£Loysnirnar verða funnar við at 'gita' nógv ymiskar loysnir. Hendan hátturin virkar á nærum øllum javnum, men loysnir kunnu verða yvirsæddar og falskar loysnir kunnu finnast. (Ein samanseting av bisektion og Newtons háttalagi verður nýtt)
 930#£Ein analytisk loysn verður fyrst roynd, og um hon miseydnast, verða tølfrøðiligar loysnir nýttar.
 931#£Jøvnur kunnu í grundini loysast á tveir ymiskar mátar. Um tú upplivir trupulleikar við einari javnu, kann tað vera ein góð hugskot at royna eina aðra máta, ella royna ein annan CAS-motor ella grafiska loysn.
+932#£Uppdatering til nýggjastu betaútgávuna
+933#£Tú skalt vera varugur við, at tað kunnu vera villur í beta-útgávunum. Teir eru fyrst og fremst ætlaðir til royndir. Tað verður mælt til at brúka hesa funktión fyrst og fremst sum Eduap hevur ásett

@@ -930,3 +930,5 @@
 929#£Las soluciones se encuentran 'adivinando' muchas soluciones diferentes. El método funciona en prácticamente todas las ecuaciones, pero las soluciones pueden pasarse por alto y se pueden encontrar soluciones falsas. (Se utiliza una combinación de bisección y el método de Newton)
 930#£Primero se prueba una solución analítica y, si falla, se utilizan métodos numéricos de solución.
 931#£Las ecuaciones básicamente se pueden resolver de dos maneras diferentes. Si tienes problemas con una ecuación, puede ser buena idea probar otro método, o probar otro motor CAS o solución gráfica.
+932#£Actualización a la última versión beta
+933#£Debes tener en cuenta que puede haber errores en las versiones beta. Están principalmente destinados a ser analizados. Se recomienda utilizar esta función principalmente según las instrucciones de Eduap
