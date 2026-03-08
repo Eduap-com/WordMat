@@ -921,3 +921,12 @@
 920#£WordMat+ er ikke installeret korrekt på denne computer. Du kan ikke fortsætte. Prøv at geninstallere WordMat.
 921#£WordMat+ er allerede aktivt på denne computer.
 922#£Du kan også købe enkeltlicenser til WordMat+. Klik her for at se mere.
+923#£Output tal
+924#£Løsningsmetode
+925#£Analytisk og numerisk
+926#£Analytisk
+927#£Numerisk (decimaltal)
+928#£Ligningen løses vha. symbolske omskrivninger og algebraiske regneregler. Det giver eksakte løsninger og bedst garanti for at alle løsninger er fundet. Alle ligninger kan ikke løses vha. denne metode.
+929#£Løsningerne findes ved at 'gætte' på rigtigt mange forskellige løsninger. Metoden virker på stort set alle ligninger, men løsninger kan overses, og der kan findes falske løsninger. (Der anvendes bla. en kombination af bisektion og newtons metode)
+930#£Der forsøges først med analytisk løsning, og hvis det fejler så anvendes numeriske løsningsmetoder.
+931#£Ligninger kan grundliggende løses på to forskellige måder. Hvis du oplever problemer med en ligning, kan det være en god ide at prøve med en anden metode, eller forsøge en anden CAS-motor eller grafisk løsning.
