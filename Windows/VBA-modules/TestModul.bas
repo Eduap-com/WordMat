@@ -265,7 +265,7 @@ Sub RunTestSequence()
     If TestSolve("211,4885-10,4801" & ChrW$(183) & "(e^0,0329x+e^(-0,0329x) )=0", "x", "x=-91,25312    " & ChrW$(8744) & "    x=91,25312") Then GoTo slut
     If TestSolve(ChrW$(8730) & "x=1/8" & ChrW$(183) & "x^2", "x", "x=0    " & ChrW$(8744) & "    x=4") Then GoTo slut
     If TestSolve("0,004x+25/" & ChrW$(8730) & "x=10", "x", "x=6,281526    " & ChrW$(8744) & "    x=2371,663@$x=6,281527    " & ChrW$(8744) & "    x=2371,663") Then GoTo slut
-    If TestSolve("x+(x^3-100)^(1/3)=0", "x", "[" & ChrW$(9508) & "]") Then GoTo slut ' has caused problems because of 1/3 to 0.3333333
+    If TestSolve("x+(x^3-100)^(1/3)=0", "x", "x=3,684031") Then GoTo slut ' has caused problems because of 1/3 to 0.3333333
     If TestSolve("(" & ChrW$(9608) & "(x+y@x-y))=(" & ChrW$(9608) & "(1@2))", "x", "y=-1/2    " & ChrW$(8743) & "    x=3/2") Then GoTo slut ' vector equation that is a system of two simple equations
     If TestSolve("(x+1)^2+(y)^2=5^2  " & ChrW$(8743) & " (x-1)^2+(y)^2=5^2", "x", "(y=-2" & ChrW$(183) & "" & ChrW$(8730) & "6    " & ChrW$(8743) & "    x=0)   " & ChrW$(8744) & "   (y=2" & ChrW$(183) & "" & ChrW$(8730) & "6    " & ChrW$(8743) & "    x=0)") Then GoTo slut ' two circles exact
     If TestSolve("8" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r-(16" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^2)/(100-(4" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^3)/3)^(1/3) =0", "r", "r=0    " & ChrW$(8744) & "    r=2,016879") Then GoTo slut ' has caused problems before check of solutions

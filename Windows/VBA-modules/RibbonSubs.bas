@@ -2124,13 +2124,13 @@ Sub Rib_STupdate1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(651)
 End Sub
 Sub Rib_STupdatebeta1(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "Opdater til nyeste betaversion"
+    returnedVal = TT.A(932)
 End Sub
 Sub Rib_STupdate2(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(652)
 End Sub
 Sub Rib_STupdatebeta2(control As IRibbonControl, ByRef returnedVal)
-    returnedVal = "Det anbefales kun at bruge denne funktion efter anvisning fra Eduap"
+    returnedVal = TT.A(933)
 End Sub
 Sub Rib_STgenveje1(control As IRibbonControl, ByRef returnedVal)
     returnedVal = TT.A(653)

@@ -549,7 +549,7 @@ Public Sub RunMaximaFile(Optional StopTime As Integer, Optional ConvertWordSymbo
     If StopTime > 0 Then
         WT = StopTime
     Else
-        WT = "3"
+        WT = "10"
     End If
     '    Set UfWait2 = New UserFormWaitForMaxima
     '    On Error Resume Next ' if a form is already open it gives an error

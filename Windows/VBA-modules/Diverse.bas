@@ -760,7 +760,7 @@ End Sub
 Sub UpdateToBeta()
     If QActivePartnership() Then
         On Error Resume Next
-        If MsgBox2("Vil du gennemtvinge opdatering til den nyeste beta-version?" & vbCrLf & "Du skal være opmærksom på at beta-versioner ikke altid er gennemtestede og kan indeholde flere fejl.", vbOKCancel, "Bekræft") = vbOK Then
+        If MsgBox2("Do you want to start the installation of the beta version?" & vbCrLf & TT.A(933), vbOKCancel, "confirm") = vbOK Then
             Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
             On Error GoTo fejl
             Application.Run macroname:="PUpdateWordMat", varg1:=True
@@ -770,7 +770,7 @@ Sub UpdateToBeta()
     End If
     GoTo slut
 fejl:
-    MsgBox2 "Der skete en fejl i forsøget på at opdatere", vbOKOnly, TT.Error
+    MsgBox2 "An error occured when trying to install the beta version", vbOKOnly, TT.Error
 slut:
 End Sub
 
