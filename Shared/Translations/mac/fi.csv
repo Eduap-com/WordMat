@@ -921,3 +921,12 @@
 920#£WordMat+ ei ole asennettu oikein tŠlle tietokoneelle. Et voi jatkaa. Kokeile asentaa WordMat uudelleen.
 921#£WordMat+ on jo aktiivinen tŠllŠ tietokoneella.
 922#£Voit myšs ostaa yksittŠisiŠ lisenssejŠ WordMat+:lle. Klikkaa tŠstŠ nŠhdŠksesi lisŠŠ...
+923#£LŠhtšluvut
+924#£RatkaisumenetelmŠ
+925#£Analyyttinen ja numeerinen
+926#£Analyyttinen
+927#£Numeerinen (desimaali)
+928#£YhtŠlš ratkaistaan symbolisilla parafraasien ja algebrallisten aritmeettisten sŠŠntšjen avulla. TŠmŠ tarjoaa tarkat ratkaisut ja parhaan takuun siitŠ, ettŠ kaikki ratkaisut on lšydetty. Kaikkia yhtŠlšitŠ ei voida ratkaista tŠllŠ menetelmŠllŠ.
+929#£Ratkaisut lšydetŠŠn 'arvaamalla' monia eri ratkaisuja. MenetelmŠ toimii kŠytŠnnšssŠ kaikissa yhtŠlšissŠ, mutta ratkaisuja voidaan ohittaa ja vŠŠriŠ ratkaisuja lšytyŠ. (KŠytetŠŠn yhdistelmŠŠ bisektiosta ja Newtonin menetelmŠstŠ)
+930#£Ensin kokeillaan analyyttistŠ ratkaisua, ja jos se epŠonnistuu, kŠytetŠŠn numeerisia ratkaisumenetelmiŠ.
+931#£YhtŠlšt voidaan kŠytŠnnšssŠ ratkaista kahdella eri tavalla. Jos kohtaat ongelmia yhtŠlšn kanssa, voi olla hyvŠ idea kokeilla toista menetelmŠŠ tai toista CAS-moottoria tai graafista ratkaisua.

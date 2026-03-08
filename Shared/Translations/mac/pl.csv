@@ -921,3 +921,12 @@
 920#£WordMat+ nie jest poprawnie zainstalowany na tym komputerze. Nie mozesz kontynuowac. Spr—buj zainstalowac ponownie WordMat.
 921#£WordMat+ jest juz aktywny na tym komputerze.
 922#£Mozesz takze kupic pojedyncze licencje na WordMat+. Kliknij tutaj, aby zobaczyc wiecej...
+923#£Numery wyjsciowe
+924#£Metoda rozwiazywania
+925#£Analityczne i numeryczne
+926#£Analityczne
+927#£Numeryczne (dziesietne)
+928#£R—wnanie rozwiazuje sie za pomoca symbolicznego parafrazowania i algebraicznych regul arytmetyki. Zapewnia to precyzyjne rozwiazania i najlepsza gwarancje, ze wszystkie rozwiazania zostaly znalezione. Nie wszystkie r—wnania mozna rozwiazac ta metoda.
+929#£Rozwiazania znajduja sie poprzez "zgadywanie" wielu r—znych rozwiazan. Metoda dziala praktycznie na wszystkich r—wnaniach, ale rozwiazania moga zostac pominiete, a mozna znalezc falszywe rozwiazania. (Stosuje sie kombinacje podzialu i metody Newtona)
+930#£Najpierw pr—buje sie rozwiazania analitycznego, a jesli sie nie uda, stosuje sie metody numeryczne.
+931#£R—wnania mozna zasadniczo rozwiazac na dwa r—zne sposoby. Jesli masz problemy z r—wnaniem, warto spr—bowac innej metody lub innego silnika CAS lub rozwiazania graficznego.

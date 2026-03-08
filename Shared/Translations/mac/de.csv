@@ -921,3 +921,12 @@
 920#£WordMat+ ist auf diesem Computer nicht korrekt installiert. Du kannst nicht weitermachen. Versuche, WordMat neu zu installieren.
 921#£WordMat+ ist bereits auf diesem Computer aktiv.
 922#£Du kannst auch Einzellizenzen für WordMat+ erwerben. Klicken Sie hier, um mehr zu sehen...
+923#£Ausgabezahlen
+924#£Lösungsmethode
+925#£Analytisch und numerisch
+926#£Analytisch
+927#£Numerisch (dezimal)
+928#£Die Gleichung wird durch symbolische Paraphrasierung und algebraische arithmetische Regeln gelöst. Dies bietet genaue Lösungen und die beste Garantie, dass alle Lösungen gefunden wurden. Nicht alle Gleichungen können mit dieser Methode gelöst werden.
+929#£Die Lösungen werden durch das 'Raten' vieler verschiedener Lösungen gefunden. Die Methode funktioniert bei nahezu allen Gleichungen, aber Lösungen können übersehen werden und falsche Lösungen gefunden werden. (Eine Kombination aus Bisektion und Newtons Methode wird verwendet)
+930#£Zunächst wird eine analytische Lösung ausprobiert, und wenn sie fehlschlägt, werden numerische Lösungsmethoden verwendet.
+931#£Gleichungen können im Grunde auf zwei verschiedene Arten gelöst werden. Wenn du Probleme mit einer Gleichung hast, ist es vielleicht eine gute Idee, eine andere Methode auszuprobieren oder eine andere CAS-Engine oder grafische Lösung.
