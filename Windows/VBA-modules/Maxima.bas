@@ -232,6 +232,7 @@ Sub MaximaSolveInequality(Optional variabel As String)
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     
     Set UFSelectVar = New UserFormSelectVar
+    UFSelectVar.Frame_solvemethod.visible = False ' inequality cannot use nsolve - yet
 
     If Selection.OMaths.Count < 2 Then
 
@@ -490,6 +491,10 @@ newcas:
             UFSelectVar.DefS = omax.DefString
             UFSelectVar.Show
             variabel = UFSelectVar.SelectedVar
+            If UFSelectVar.SolveMethod = 2 Then
+                MaximaNsolve variabel
+                GoTo slut
+            End If
         End If
         If variabel = "" Then GoTo slut
         omax.TempDefs = Replace(UFSelectVar.TempDefs, "%pi", "pi")
@@ -578,8 +583,6 @@ newcas:
         '            sep = ";"
         '        End If
         
-        If InStr(omax.KommentarOutput, "solving systems of equations") Then
-        End If
         If omax.StopNow Or (omax.IsAllSolved(omax.MaximaOutput, variabel, Sep) = "false" And Not (InStr(variabel, "+") > 0)) Then
             IsSolved = False
         Else
@@ -591,7 +594,7 @@ newcas:
             InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831)
         End If
 
-        If InStr(omax.MaximaOutput, VBA.ChrW$(8709)) Then    ' no solution
+        If InStr(omax.MaximaOutput, VBA.ChrW$(8709)) Or omax.MaximaOutput = "[]" Then  ' no solution
             omax.InsertMaximaOutput
             Selection.TypeParagraph
             If MaximaComplex Then
@@ -652,10 +655,13 @@ stophop:
         UFSelectVar.NoEq = omax.AntalKom
         UFSelectVar.Vars = omax.Vars
         UFSelectVar.DefS = omax.DefString
-        UFSelectVar.Show
-        variabel = UFSelectVar.SelectedVar
+        UFSelectVar.Frame_solvemethod.visible = False
+        If variabel = vbNullString Then
+            UFSelectVar.Show
+            variabel = UFSelectVar.SelectedVar
+        End If
 
-        If variabel = "" Then GoTo slut
+        If variabel = vbNullString Then GoTo slut
         omax.TempDefs = UFSelectVar.TempDefs
         
 newcassys:
@@ -2446,7 +2452,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
 
     If funktion = vbNullString And variabel = vbNullString Then
         If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
-        If InStr(omax.Vars, "t") > 0 Then
+        If InStr(omax.Vars, "t") > 0 Then ' t before x, because of x(t)
             variabel = "t"
         ElseIf InStr(omax.Vars, "x") > 0 Then
             variabel = "x"
@@ -2514,6 +2520,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     If variabel = "" Then GoTo slut
     omax.TempDefs = UFdiffeq.TempDefs
 
+    omax.Kommando = Replace(omax.Kommando, funktion & "^' (" & variabel & ")", funktion & "^'") ' y' not y'(x) in equation
     If CASengine > 0 Then
         Dim s As String
         s = Replace(omax.Kommando, "^'", "'")

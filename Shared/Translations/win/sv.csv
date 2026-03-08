@@ -921,3 +921,12 @@
 920#£WordMat+ är inte korrekt installerat på denna dator. Du kan inte fortsätta. Försök installera om WordMat.
 921#£WordMat+ är redan aktivt på den här datorn.
 922#£Du kan också köpa enskilda licenser för WordMat+. Klicka här för att se mer...
+923#£Utdata
+924#£Lösningsmetod
+925#£Analytisk och numerisk
+926#£Analytisk
+927#£Numerisk (decimal)
+928#£Ekvationen löses med hjälp av symbolisk omskrivning och algebraiska aritmetiska regler. Detta ger exakta lösningar och bästa garanti för att alla lösningar har hittats. Alla ekvationer kan inte lösas med denna metod.
+929#£Lösningarna hittas genom att 'gissa' många olika lösningar. Metoden fungerar på praktiskt taget alla ekvationer, men lösningar kan förbises och falska lösningar kan hittas. (En kombination av bisektion och Newtons metod används)
+930#£En analytisk lösning prövas först, och om den misslyckas används numeriska lösningsmetoder.
+931#£Ekvationer kan i princip lösas på två olika sätt. Om du upplever problem med en ekvation kan det vara en bra idé att prova en annan metod, eller prova en annan CAS-motor eller grafisk lösning.

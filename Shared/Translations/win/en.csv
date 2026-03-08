@@ -921,3 +921,12 @@
 920#£WordMath+ is not installed correctly on this computer. You cannot continue. Try reinstalling WordMath.
 921#£WordMath+ is already active on this computer.
 922#£You can also purchase single licenses for WordMath+. Click here to see more...
+923#£Output numbers
+924#£Solve method
+925#£Analytical and numerical
+926#£Analytical
+927#£Numeric (decimal)
+928#£The equation is solved by means of symbolic paraphrasing and algebraic arithmetic rules. This provides exact solutions and the best guarantee that all solutions have been found. Not all equations can be solved using this method.
+929#£The solutions are found by 'guessing' many different solutions. The method works on virtually all equations, but solutions can be overlooked and false solutions can be found. (A combination of bisection and Newton's method is used)
+930#£An analytical solution is first tried, and if it fails, numerical solution methods are used.
+931#£Equations can basically be solved in two different ways. If you experience problems with an equation, it may be a good idea to try a different method, or try a different CAS engine or graphical solution.

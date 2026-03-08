@@ -786,7 +786,8 @@ start:
     End If
     
     If MaximaExact = 2 Then    ' necessary so that trig equations with sing are not solved exactly
-        MaximaInputStreng = MaximaInputStreng & "Solve(ev(" & ckommando & ",numer)," & variabel & ",false);"
+'        MaximaInputStreng = MaximaInputStreng & "Solve(ev(" & ckommando & ",numer)," & variabel & ",false);"
+        MaximaInputStreng = MaximaInputStreng & "Solve(float(" & ckommando & ")," & variabel & ",false);" ' float will not convert powers. preventing some problems
     Else
         MaximaInputStreng = MaximaInputStreng & "Solve(" & ckommando & "," & variabel & ");"
     End If

@@ -921,3 +921,12 @@
 920#£WordMat+ is niet correct geïnstalleerd op deze computer. Je kunt niet doorgaan. Probeer WordMat opnieuw te installeren.
 921#£WordMat+ is al actief op deze computer.
 922#£Je kunt ook losse licenties voor WordMat+ kopen. Klik hier om meer te zien...
+923#£Uitvoercijfers
+924#£Oplossingsmethode
+925#£Analytisch en numeriek
+926#£Analytisch
+927#£Numeriek (decimaal)
+928#£De vergelijking wordt opgelost door middel van symbolische parafrasering en algebraïsche rekenkundige regels. Dit levert nauwkeurige oplossingen en de beste garantie dat alle oplossingen zijn gevonden. Niet alle vergelijkingen kunnen met deze methode worden opgelost.
+929#£De oplossingen worden gevonden door 'te raden' op veel verschillende oplossingen. De methode werkt op vrijwel alle vergelijkingen, maar oplossingen kunnen over het hoofd worden gezien en valse oplossingen kunnen worden gevonden. (Er wordt een combinatie van tweedeling en Newtons methode gebruikt)
+930#£Eerst wordt een analytische oplossing geprobeerd, en als deze faalt, worden numerieke oplossingsmethoden gebruikt.
+931#£Vergelijkingen kunnen in principe op twee verschillende manieren worden opgelost. Als je problemen ondervindt met een vergelijking, kan het een goed idee zijn om een andere methode te proberen, of een andere CAS-engine of grafische oplossing.

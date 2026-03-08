@@ -921,3 +921,12 @@
 920#£WordMat+ no está instalado correctamente en este ordenador. No puedes continuar. Prueba a reinstalar WordMat.
 921#£WordMat+ ya está activo en este ordenador.
 922#£También puedes comprar licencias individuales para WordMat+. Haz clic aquí para ver más...
+923#£Números de salida
+924#£Método de solución
+925#£Analítico y numérico
+926#£Analítico
+927#£Numérico (decimal)
+928#£La ecuación se resuelve mediante paráfrasis simbólico y reglas aritméticas algebraicas. Esto proporciona soluciones exactas y la mejor garantía de que todas las soluciones han sido encontradas. No todas las ecuaciones pueden resolverse usando este método.
+929#£Las soluciones se encuentran 'adivinando' muchas soluciones diferentes. El método funciona en prácticamente todas las ecuaciones, pero las soluciones pueden pasarse por alto y se pueden encontrar soluciones falsas. (Se utiliza una combinación de bisección y el método de Newton)
+930#£Primero se prueba una solución analítica y, si falla, se utilizan métodos numéricos de solución.
+931#£Las ecuaciones básicamente se pueden resolver de dos maneras diferentes. Si tienes problemas con una ecuación, puede ser buena idea probar otro método, o probar otro motor CAS o solución gráfica.

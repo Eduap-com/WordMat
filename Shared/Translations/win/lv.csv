@@ -921,3 +921,12 @@
 920#£WordMat+ saja datora nav pareizi instalets. Jus nevarat turpinat. Meginiet atkartoti instalet WordMat.
 921#£WordMat+ jau ir aktivs saja datora.
 922#£Varat ari iegadaties atseviskas WordMat+ licences. Noklikskiniet seit, lai redzetu vairak ...
+923#£Izvades numuri
+924#£Risinajuma metode
+925#£Analitiskie un skaitliskie
+926#£Analitiskais
+927#£Skaitlisks (decimaldala)
+928#£Vienadojums tiek atrisinats, izmantojot simbolisku parfrazesanu un algebriskos aritmetiskos noteikumus. Tas nodrosina precizus risinajumus un vislabako garantiju, ka visi risinajumi ir atrasti. Ne visus vienadojumus var atrisinat, izmantojot so metodi.
+929#£Risinajumi tiek atrasti, "uzminejot" daudzus dazadus risinajumus. Metode darbojas praktiski visos vienadojumos, bet risinajumus var ignoret un atrast nepareizus risinajumus. (Tiek izmantota bisekcijas un Nutona metodes kombinacija)
+930#£Vispirms tiek izmeginats analitiskais risinajums, un, ja tas neizdodas, tiek izmantotas skaitliska risinajuma metodes.
+931#£Vienadojumus pamata var atrisinat divos dazados veidos. Ja rodas problemas ar vienadojumu, ieteicams izmeginat citu metodi vai citu CAS programmu vai grafisko risinajumu.

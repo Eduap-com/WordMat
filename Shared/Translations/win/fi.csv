@@ -921,3 +921,12 @@
 920#£WordMat+ ei ole asennettu oikein tälle tietokoneelle. Et voi jatkaa. Kokeile asentaa WordMat uudelleen.
 921#£WordMat+ on jo aktiivinen tällä tietokoneella.
 922#£Voit myös ostaa yksittäisiä lisenssejä WordMat+:lle. Klikkaa tästä nähdäksesi lisää...
+923#£Lähtöluvut
+924#£Ratkaisumenetelmä
+925#£Analyyttinen ja numeerinen
+926#£Analyyttinen
+927#£Numeerinen (desimaali)
+928#£Yhtälö ratkaistaan symbolisilla parafraasien ja algebrallisten aritmeettisten sääntöjen avulla. Tämä tarjoaa tarkat ratkaisut ja parhaan takuun siitä, että kaikki ratkaisut on löydetty. Kaikkia yhtälöitä ei voida ratkaista tällä menetelmällä.
+929#£Ratkaisut löydetään 'arvaamalla' monia eri ratkaisuja. Menetelmä toimii käytännössä kaikissa yhtälöissä, mutta ratkaisuja voidaan ohittaa ja vääriä ratkaisuja löytyä. (Käytetään yhdistelmää bisektiosta ja Newtonin menetelmästä)
+930#£Ensin kokeillaan analyyttistä ratkaisua, ja jos se epäonnistuu, käytetään numeerisia ratkaisumenetelmiä.
+931#£Yhtälöt voidaan käytännössä ratkaista kahdella eri tavalla. Jos kohtaat ongelmia yhtälön kanssa, voi olla hyvä idea kokeilla toista menetelmää tai toista CAS-moottoria tai graafista ratkaisua.

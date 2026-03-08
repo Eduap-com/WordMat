@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVar 
    Caption         =   "Solve equation"
-   ClientHeight    =   4695
+   ClientHeight    =   4635
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   10710
+   ClientWidth     =   10650
    OleObjectBlob   =   "UserFormSelectVar.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -21,6 +21,7 @@ Public TempDefs As String ' Can be set both before show is called and on the for
 Public SelectedVar As String ' The variable that has been selected
 Public NoEq As Integer ' no of equations to solve for
 Public Eliminate As Boolean
+Public SolveMethod As Integer ' 0=auto, 1=analytisk, 2=numeric
 Private Svars As Variant ' array that holds variable names as they are to be returned, i.e. without ascii conversion
 
 Private EventsCol As New Collection
@@ -55,12 +56,20 @@ Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
 Dim Arr As Variant
 Dim i As Integer, c As Integer
-    If OptionButton_numonly.Value = True Then
+    If OptionButton_numonly.Value Then
         MaximaExact = 2
-    ElseIf OptionButton_exactonly.Value = True Then
+    ElseIf OptionButton_exactonly.Value Then
         MaximaExact = 1
     Else
         MaximaExact = 0
+    End If
+    
+    If OptionButton_SolveMethodAuto.Value Then
+        SolveMethod = 0
+    ElseIf OptionButton_SolveMethodAnalytical.Value Then
+        SolveMethod = 1
+    Else
+        SolveMethod = 2
     End If
         
     MaximaCifre = ComboBox_cifre.Value
@@ -144,6 +153,7 @@ Dim i As Integer, c As Integer
     MaximaDecOutType = ComboBox_DecType.ListIndex + 1
     
     
+    
     GoTo slut
 fejl:
     SelectedVar = vbNullString
@@ -157,6 +167,18 @@ Private Sub ListBox_vars_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     CommandButton_ok_Click
 End Sub
 
+
+Private Sub OptionButton_SolveMethodNumeric_Change()
+    If OptionButton_SolveMethodNumeric.Value Then
+        OptionButton_exactonly.Enabled = False
+        OptionButton_exactandnum.Enabled = False
+        OptionButton_numonly.Value = True
+    Else
+        OptionButton_exactonly.Enabled = True
+        OptionButton_exactandnum.Enabled = True
+    End If
+        
+End Sub
 
 Private Sub TextBox_def_Enter()
     TextBox_def.WordWrap = True
@@ -297,10 +319,20 @@ Private Sub SetCaptions()
     Label4.Caption = TT.A(763)
     Label5.Caption = TT.A(764)
     Label8.Caption = TT.A(443)
-    Frame5.Caption = TT.A(710) & " ?"
+    Frame5.Caption = TT.A(923)
+    Frame_solvemethod.Caption = TT.A(924)
+    Frame_solvemethod.ControlTipText = TT.A(931)
+    OptionButton_SolveMethodAuto.Caption = TT.A(925)
+    OptionButton_SolveMethodAnalytical.Caption = TT.A(926)
+    OptionButton_SolveMethodNumeric.Caption = TT.A(711)
+    
+    OptionButton_SolveMethodAuto.ControlTipText = TT.A(930)
+    OptionButton_SolveMethodAnalytical.ControlTipText = TT.A(928)
+    OptionButton_SolveMethodNumeric.ControlTipText = TT.A(929)
+        
     OptionButton_exactandnum.Caption = TT.A(712)
     OptionButton_exactonly.Caption = TT.A(710)
-    OptionButton_numonly.Caption = TT.A(711)
+    OptionButton_numonly.Caption = TT.A(927)
     Label_enheder.Caption = TT.A(168) & ":"
     Label_unitwarning.Caption = TT.A(765)
 End Sub

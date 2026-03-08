@@ -921,3 +921,12 @@
 920#£WordMat+ ei ole sellel arvutil õigesti installitud. Sa ei saa jätkata. Proovi WordMati uuesti paigaldada.
 921#£WordMat+ on sellel arvutil juba aktiivne.
 922#£WordMat+ jaoks saab osta ka üksiklitsentse. Klõpsa siia, et näha rohkem...
+923#£Väljundnumbrid
+924#£Lahendusmeetod
+925#£Analüütiline ja numbriline
+926#£Analüütiline
+927#£Numbriline (kümnendsüsteem)
+928#£Võrrand lahendatakse sümboolse parafraaseerimise ja algebraliste aritmeetiliste reeglite abil. See pakub täpseid lahendusi ja parima garantii, et kõik lahendused on leitud. Kõiki võrrandeid ei saa selle meetodiga lahendada.
+929#£Lahendused leitakse, 'arvates' palju erinevaid lahendusi. See meetod töötab praktiliselt kõigi võrrandite puhul, kuid lahendusi võib tähelepanuta jätta ja leida valesid lahendusi. (Kasutatakse pooleks lõikamise ja Newtoni meetodi kombinatsiooni)
+930#£Esmalt proovitakse analüütilist lahendust ning kui see ebaõnnestub, kasutatakse numbrilisi lahendusmeetodeid.
+931#£Võrrandeid saab põhimõtteliselt lahendada kahel erineval viisil. Kui sul tekib probleeme võrrandiga, võib olla hea mõte proovida teist meetodit või teist CAS-mootorit või graafilist lahendust.

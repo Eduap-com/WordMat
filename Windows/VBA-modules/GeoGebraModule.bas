@@ -16,7 +16,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     Dim cmd As String, UrlLink As String, s As String
     Dim sl As New CSortList
     Dim Var As String, DefList As String
-    Dim k As Integer, i As Integer, j As Integer, p As Integer
+    Dim k As Integer, i As Integer, j As Integer, p As Integer, parI As Integer
     Dim Arr As Variant, uvar As String
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
@@ -156,7 +156,8 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                                 RHS = Replace(RHS, "}", ")")
 '                                RHS = Replace(RHS, "((", "(")
 '                                RHS = Replace(RHS, "))", ")")
-                                cmd = "Param:X=" & RHS
+                                parI = parI + 1
+                                cmd = "Param" & parI & ":X=" & RHS
                                 cmd = Replace(cmd, "+", "%2B") & ";"
                                 UrlLink = UrlLink & cmd
                             ElseIf InStr(LHS, "pil") > 0 And InStr(RHS, "{") > 0 Then ' vector

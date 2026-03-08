@@ -464,8 +464,8 @@ startq,
 	if length(sollistq)<indq then go(slutq),
 	solq:sollistq[indq],
 	if IsSolved(solq,solvar)=false then (sollistq2:append(sollistq2,[solq]),go(startq)),
-	resq:ev(eqnw,solq,bfloat),
-	if op(resq)="=" and constantp(lhs(resq)) and constantp(rhs(resq)) then (if abs(lhs(resq)-rhs(resq))/max(1.0,abs(lhs(resq)),abs(rhs(resq))) > 1.0b-4 then go(startq)), /* removes solutions that reduce to a number and does not satisfy the equation within a tolerance */
+	resq:ev(eqnw,solq,bfloat), 
+	if op(resq)="=" and constantp(lhs(resq)) and constantp(rhs(resq)) then (resq:errcatch(abs(lhs(resq)-rhs(resq))/max(1.0,abs(lhs(resq)),abs(rhs(resq)))), if not(resq=[]) and resq[1] > 1.0e-4 then go(startq)), /* removes solutions that reduce to a number and does not satisfy the equation within a tolerance */
 	if do(
 		delq:inpart(eqnw,indq2),
 		if delq=end then return(true),
@@ -530,7 +530,7 @@ lignq
 )$
 
 ExpandIntegerSolution(eqw):=block([lisq,expqw,expqw2],
-kill(%Z),
+kill(%Z), 
 if freeof(%Z,eqw) then return(eqw),
 if length(GetContextFacts(initial,solvar))+length(GetContextFacts(solreal,solvar))<2 then return(eqw),
 lisq:[],
@@ -538,9 +538,9 @@ expqw:lhs(eqw)-rhs(eqw),
 %Z:-100,
 do(
 	%Z:%Z+1,
-	expqw2:ev(expqw),
-	if is(equal(expqw2,0))#false then 
-		lisq:append(lisq,[ev(eqw)]),
+	expqw2:ev(expqw,numer),
+	if is(equal(expqw2,0))#false then (	
+		lisq:append(lisq,[ev(eqw)])),
 	if %Z>100 then return()
 ),
 kill(%Z),
@@ -822,7 +822,7 @@ if length(paramq)=3 then (SolveExact:paramq[3]) else (SolveExact:true),
 lignq:paramq[1],varq:paramq[2],
 if length(paramq)=3 then condq:paramq[3] else condq=[],
 if nonscalarp(lignq) and length(lignq)>1 and freeof(at,lignq) then (print("solving system of equations"),return(solvesystem(lignq,varq))),
-if sepsolvecontext then (context:solreal,activate(initial)),
+if sepsolvecontext then (context:solreal,activate(initial)), /* initial will hold any assumes made before the call to solvereal. activate(initial) will make them active even though facts() will not show them*/
 if atom(varq) then (solvar:varq,remarray(''solvar)) else (solvar:solx,lignq:subst(solvar,varq,lignq)),
 if lignq=all then return([all]),
 if freeof(solvar,lignq) then (print(solvar," not present in equation"),if is(equal(lhs(lignq),rhs(lignq)))=true then return(all) elseif is(equal(lhs(lignq),rhs(lignq)))=false then return([]) else return(unknown)),
@@ -832,7 +832,7 @@ solq:[lignq],
 /* problematisk kan foere til ugyldige loesninger solq:DissolveRadicals(solq),*/
 /*solq:applyrulelistZero(solq,sqrtrul),addsolstep(solq,"sqrtrul"),*/
 solq:DissolveAbs(solq),
-if autonsolve and not(freeof("if",solq)) then (solu_1a:nsolve(lignq,varq),go(slutqw)), /* solver cant handle piecewiese defintions*/
+if autonsolve and not(freeof("if",solq)) then (solu_1a:nsolve(lignq,varq),solu_1a:ev(solu_1a,numer),go(slutqw)), /* solver cant handle piecewiese defintions*/
 solq:solverecursive(solq,varq,condq), 
 if solq=[0=0] then (solq:[all],go(finishlabel)),
 solq: ev(solq,logcontract2),addsolstep(solq,"logcontract2"),
@@ -843,6 +843,7 @@ if IsAllSolved(solq,varq) and not(solunsure) then go(finishlabel),
 if autonsolve and not(SolveExact) and length(ev(listofvars(lignq),listconstvars=false))=1 then ( /*If WordMath set to numeric. Then try nsolve before Maximasolver. Nsolve only runs if only 1 variable in equation and on the original equation, as it can be changed incorrectly by simplification*/
 	solu_1a:makelist(if not IsSolved(eq,solvar) and length(ev(listofvars(eq),listconstvars=false))=1 then (nsolve(eq,varq)) else eq ,eq, [lignq]),
 	solu_1a:flatten(solu_1a),
+	solu_1a:ev(solu_1a,numer),
 	if IsAllSolved(solu_1a,varq) then go(slutqw)
 ),
 solq:applymaximasolve(solq),addsolstep(solq,"MaximaSolver"),
@@ -857,23 +858,11 @@ addsolstep(solq,"Simplify"),
 if not(atom(varq)) then solq:subst(varq,solvar,solq),
 addsolstep(solq,"subst tilbage"),
 finishlabel,
-if showassumptions then (
-	if facts(solreal)#[] then( 
-		qassum:delete([], makelist(if freeof(kind,zq) then zq else [],zq,facts(solreal))),		
-		solq:flatten(makelist(block([qi:1],do(if qi>length(qassum) then return([]),if is(ev(qassum[qi],numer,zq))=false then (print(sconcat("solution ",zq," removed due to assumption.")),zq:[],return([])),qi:qi+1),zq),zq,solq)),
-		if qassum#[] then print("Assumptions: ",qassum))
-),
-if sepsolvecontext then 
-	errcatch(
-		forget(facts(solreal)),
-		deactivate(solreal),
-		context:initial,
-			if facts(solreal)#[] then killcontext(solreal)
-			), 
 solvesteps:append(solvesteps,[solsteps]),
 solu_1a:solq,
 if IsAllSolved(solq,varq) and not(solunsure) then go(slutqw), /*1.39 changed to IsAllSolved in stead of IsAnySolved. zerorule can create equations that needs to be solved*/
-if not(solverealmaximasolve) and not(solverealtopoly) and not(autonsolve) then return (solq),
+/* This next section is a last ditch effort to solve the equation. Some of it might be legacy */
+if not(solverealmaximasolve) and not(solverealtopoly) and not(autonsolve) then go(slutqw),
 if solu_1a=[] and not(solunsure) then return ([]),
 if solu_1a#[] then(
 	if IsAllSolved(solu_1a,varq) then go(slutqw),
@@ -886,10 +875,11 @@ nxqsol0,
 if autonsolve and length(ev(listofvars(solu_1a),listconstvars=false))=1 then ( /*nsolve must be run before maximasolve (affects it somehow). Nsolve only runs if only 1 variable in equation*/
 	solu_1a:makelist(if not IsSolved(eq,solvar) and length(ev(listofvars(eq),listconstvars=false))=1 then (nsolve(eq,varq)) else eq ,eq, solu_1a),
 	solu_1a:flatten(solu_1a),
+	solu_1a:ev(solu_1a,numer),
 	if IsAllSolved(solu_1a,varq) then go(slutqw)
 ),
 if ContainsTrig(lignq) then go(nxqsol2),
-if solverealtopoly then 
+if solverealtopoly then /* not set by default*/
 	(load(to_poly_solve),
 	solu_1a:ev(errcatch(nicedummies(ev(to_poly_solve(lignq,varq),realonly:false)))[1]),
 	if not(freeof(to_poly_solve,solu_1a)) then go(nxqsol1),
@@ -925,11 +915,25 @@ if solverealmaximasolve then /* Last effort maxima solver with different simplif
 	if domain=real then solu_1a:RemoveImag(solu_1a),
 	solu_1a: CheckSolutions(lignq,varq,solu_1a)
 ),
-if not(freeof(%if,solu_1a)) then solq:solu_1a else solq:RemoveIncorrect(solu_1a),
-slutqw,
+/* if not(freeof(%if,solu_1a)) then solq:solu_1a else solq:RemoveIncorrect(solu_1a),  This line must be surpeflouos */
+slutqw, 
 solu_1a:RemoveIncorrect(solu_1a),addsolstep(solq,"RemoveIncorrect"),
 solu_1a:RemoveUndefined(lignq,solu_1a),addsolstep(solq,"RemoveUndefined"),
+solu_1a:unique(solu_1a),
 solu_1a:sort(solu_1a),
+if showassumptions then (
+	if facts(solreal)#[] then( 
+		qassum:delete([], makelist(if freeof(kind,zq) then zq else [],zq,facts(solreal))),		
+		solq:flatten(makelist(block([qi:1],do(if qi>length(qassum) then return([]),if is(ev(qassum[qi],numer,zq))=false then (print(sconcat("solution ",zq," removed due to assumption.")),zq:[],return([])),qi:qi+1),zq),zq,solq)),
+		if qassum#[] then print("Assumptions: ",qassum))
+),
+if sepsolvecontext then 
+	errcatch(
+		forget(facts(solreal)),
+		deactivate(solreal),
+		context:initial,
+			if facts(solreal)#[] then killcontext(solreal)
+			), 
 solu_1a
 )$
 
@@ -979,8 +983,8 @@ solverecursive(lignq,varq,condq):=block([solq],
 	solq:applytanrule(solq),addsolstep(solq,"tanrule"),
 	solq:applyasinrule(solq),addsolstep(solq,"asinrule"),
 	solq:applyacosrule(solq),addsolstep(solq,"acosrule"),
-	solq:applyatanrule(solq),addsolstep(solq,"atanrule"),
-	solq:DissolveRadicals(solq), 
+	solq:applyatanrule(solq),addsolstep(solq,"atanrule"), 
+	if SolveExact and length(ev(listofvars(solq),listconstvars=false))>1 then solq:DissolveRadicals(solq),
 	if solq#lignq then return(solverecursive(solq,varq,condq)),
 	solq:applysolvepoly(solq),addsolstep(solq,"solvepoly"),
 	if solq#lignq then return(solverecursive(solq,varq,condq)),
@@ -1002,16 +1006,17 @@ solverecursive(lignq,varq,condq):=block([solq],
 	solq
 )$
 
+/* checks if last member of solsteps is different from current solution, if different then adds the new. */
 addsolstep(qsol,qkomm):=block([li],li:append(qsol,[qkomm]),if solsteps=[] then solsteps:[li] elseif rest(last(solsteps),-1)#qsol then solsteps:append(solsteps,[li]),return())$
 /* mere simpel, men ikke god til debug
 addsolstep(qsol):=block([],solsteps:unique(append(solsteps,qsol)))$
 */
 
-/* Tries to isolate radicals one bye one and square them out, but can easily give infinite loop or very large expressions. Now limited, will only apply if one radical, since can easily grow.
-dissolveradicals:true;solvar:x;DissolveRadicals([x^2=2*sqrt(x)]);*/
+/* Tries to isolate radicals one bye one and square them out, but can easily give infinite loop or very large expressions. Now limited, will only apply if one radical, since can easily grow. */
 /* kan give problemer hvis nulregel anvendes, da en række løsninger, da smides væk. */
-DissolveRadicals(qexprl):=block([powno:0,solq,solq2:[],solq3,savevar,qind:0,qind2:0,noradicals:true,numq,denomq],
-if not(dissolveradicals) then return(qexprl),
+/* dissolveradicals:true;solvar:x;DissolveRadicals([x^2=2*sqrt(x)]);*/
+DissolveRadicals(qexprl):=block([powno:0,solq,solq2:[],solq3,savevar,qind:0,qind2:0,noradicals:true,numq,denomq,skiprad],
+if not(dissolveradicals) then return(qexprl), 
 savevar:solvar,
 do(
 	qind2:qind2+1,
@@ -1020,8 +1025,9 @@ do(
 	solq:apply1(qexpr,ReplaceFirstRadical),/* ReplaceFirstRadical is a rule that counts how many powers in expression that could be isolated, and sets powno equal to that number. If powno=1 then: for (x+1)^(1/2) sets radicalsubst:[x+1,1/2]. solq holds the new equation where everything under sqrt is replaced by a new variable powx: 4*powx = -(x^2/5)+2*x+3*/
 	if freeof(savevar,solq) then return(qexprl), /* If powx was the only part that had x, then normal recursivesolve will solve the equation. We dont need this*/ 
 	if powno=1 then (
-		noradicals:false,
+		noradicals:false, 
 		solq:ev(solvereal(solq,powx),dissolveradicals=false,sepsolvecontext=false,showassumptions=false), /* Solve the equation with the radical replaced by powx */
+
 		if solq=unknown then return(qexprl), 
 		qind:0,
 		do(
@@ -1029,28 +1035,38 @@ do(
 			if qind>length(solq) then return(),
 			if CheckSolved(solq[qind]) then 
 				(
+				skiprad:false,
 				radicalsubst[2]:rationalize(radicalsubst[2]),
 				numq:num(radicalsubst[2]),
 				denomq:denom(radicalsubst[2]),
+				if abs(denomq)>1000 or abs(numq)>1000 then (solq3:solq[qind],skiprad:true), /* If the exponent is very large it can create very large expressions. Better to skip in that case. */ 
+				if skiprad then (
+					solq2:append(solq2,[qexpr])
+				)
+				else (
 				if evenp(denomq) then
 				(
 					if sign(numq)=pos then
-					(		assume(radicalsubst[1]>=0) /* ,rhs(solq[qind])>=0   should be assumed as well, but it is not global, and can cause correct solutions to be removed. It is better to remove incorrect at the end by test.*/ 
+					(		
+						assume(radicalsubst[1]>=0) /* ,rhs(solq[qind])>=0   should be assumed as well, but it is not global, and can cause correct solutions to be removed. It is better to remove incorrect at the end by test.*/ 
 					)
 					else
 					(		assume(radicalsubst[1]>0) /* ,rhs(solq[qind])>0 */
 					)
 				),
 				if sign(numq)=pos then( 
-					solq3:expand(radicalsubst[1]^numq)-expand(rhs(solq[qind])^(denomq))
+					solq3:errcatch(expand(radicalsubst[1]^numq)-expand(rhs(solq[qind])^(denomq))),
+					if solq3=[] then (solq3:qexpr) else (solq3:solq3[1])
 				)
 				elseif rhs(solq[qind])=0 then (
 					solq3:radicalsubst[1]
 				)
 				else(
-					solq3:expand(radicalsubst[1]^numq)*expand(rhs(solq[qind])^(-denomq))-1
+					solq3:errcatch(expand(radicalsubst[1]^numq)*expand(rhs(solq[qind])^(-denomq))-1),
+					if solq3=[] then (solq3:lhs(qexpr)-rhs(qexpr)) else (solq3:solq3[1])
 				),	
 				solq2:append(solq2,[solq3=0])
+				)
 /*				if polynomialp(solq3,[savevar]) and abs(denomq)<1000 then (
 					solq2:append(solq2,[solq3=0])
 					)
@@ -1266,7 +1282,7 @@ nsolve([paramq]) := block(
 	if UseBF = true then (
 		define(qfkt(qvar), ev(lhs(qlign) - rhs(qlign), bfloat))
 	) else (
-		define(qfkt(qvar), ev(lhs(qlign) - rhs(qlign), float))
+		define(qfkt(qvar), float(lhs(qlign) - rhs(qlign)))
 	),
 	qti: absolute_real_time(),
 	/* Alternative method: length(listofvars(qfkt(x))) */
@@ -1375,7 +1391,7 @@ nsolve([paramq]) := block(
 /*remove duplicate values from solq, where values are within qtol*/
 	NewSolq:[],
 	for zq in solq do (
-		if flatten(makelist(if abs(zq2-zq)<qtol*10 then 1 else [] , zq2, NewSolq))=[] then
+		if flatten(makelist(if abs(zq2-zq)<qtol*100 then 1 else [] , zq2, NewSolq))=[] then
 			NewSolq:cons(zq,NewSolq)
 	),
 	solq:NewSolq,
@@ -1537,6 +1553,11 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 			if res = [] then false else flatten(res)
 		),zl, ql
 	)), 
+	if bfloatp(qn) then (
+		glf: bfloat(glf)
+	) else (
+		glf: float(glf)
+	),
 /*	print("ql=",ql),print("glf=",glf), */
 	while qi < length(glf) do (
 		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (fpprec:64,
@@ -1627,7 +1648,6 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 	), 
 	if qn > qm then return(sollq) else nsolverec(qfkt, qvar, sollq, qn + 1, qm, qp)
 )$
-
 
 RemoveIncorrectNum(sollistq):=block([indq,sollistq2,solq],
 indq:0,sollistq2:[],

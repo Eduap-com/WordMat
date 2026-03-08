@@ -921,3 +921,12 @@
 920#£WordMat+ siame kompiuteryje idiegta netinkamai. Testi negalima. Pabandykite is naujo idiegti "WordMat".
 921#£WordMat+ jau aktyvus siame kompiuteryje.
 922#£Taip pat galite isigyti atskiras "WordMat+" licencijas. Spauskite cia noredami pamatyti daugiau...
+923#£Isvesties numeriai
+924#£Sprendimo metodas
+925#£Analitinis ir skaitinis
+926#£Analitinis
+927#£Skaitinis (desimtainis)
+928#£Lygtis issprendziama naudojant simboline perfrazavima ir algebrines aritmetines taisykles. Tai suteikia tikslius sprendimus ir geriausia garantija, kad visi sprendimai buvo rasti. Ne visas lygtis galima isspresti naudojant si metoda.
+929#£Sprendimai randami "atspejus" daugybe skirtingu sprendimu. Metodas veikia praktiskai visose lygtyse, taciau sprendimus galima nepastebeti ir rasti klaidingu sprendimu. (Naudojamas bisekcijos ir Niutono metodo derinys)
+930#£Pirmiausia isbandomas analitinis tirpalas, o jei jis nepavyksta, naudojami skaitiniai tirpalo metodai.
+931#£Lygtys is esmes gali buti sprendziamos dviem skirtingais budais. Jei kyla problemu del lygties, gali buti naudinga isbandyti kita metoda arba kita CAS moduli ar grafini sprendima.

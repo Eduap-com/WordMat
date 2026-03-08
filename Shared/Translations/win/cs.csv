@@ -921,3 +921,12 @@
 920#£WordMat+ není na tomto pocítaci správne nainstalován. Nemuzes pokracovat. Zkuste preinstalovat WordMat.
 921#£WordMat+ je na tomto pocítaci jiz aktivní.
 922#£Muzete si také zakoupit jednotlivé licence pro WordMat+. Kliknete zde pro více informací...
+923#£Výstupní císla
+924#£Metoda resení
+925#£Analytické a numerické
+926#£Analytické
+927#£Císelné (desetinné)
+928#£Rovnice je resena pomocí symbolického parafrázování a algebraických aritmetických pravidel. To poskytuje presná resení a nejlepsí záruku, ze vsechna resení byla nalezena. Ne vsechny rovnice lze touto metodou vyresit.
+929#£Resení se nacházejí "hádáním" mnoha ruzných resení. Metoda funguje prakticky na vsech rovnicích, ale resení mohou být prehlédnuta a lze najít falesná resení. (Pouzívá se kombinace rozdelení na poloviny a Newtonovy metody)
+930#£Nejprve se zkousí analytické resení, a pokud selze, pouzijí se numerické metody resení.
+931#£Rovnice lze v podstate resit dvema ruznými zpusoby. Pokud máte problémy s rovnicí, muze být dobrý nápad zkusit jinou metodu, nebo jiný CAS engine ci grafické resení.
