@@ -516,6 +516,8 @@ newcas:
         End If
         
         If CASengine = 0 Then
+'            omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:" & Not (UFSelectVar.SolveMethod = 1) & "$"
+            omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:true$"
             omax.MaximaSolve (variabel)
         ElseIf CASengine = 1 Then
             If MaximaForklaring Then

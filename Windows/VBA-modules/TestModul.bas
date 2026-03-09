@@ -269,10 +269,12 @@ Sub RunTestSequence()
     If TestSolve("(" & ChrW$(9608) & "(x+y@x-y))=(" & ChrW$(9608) & "(1@2))", "x", "y=-1/2    " & ChrW$(8743) & "    x=3/2") Then GoTo slut ' vector equation that is a system of two simple equations
     If TestSolve("(x+1)^2+(y)^2=5^2  " & ChrW$(8743) & " (x-1)^2+(y)^2=5^2", "x", "(y=-2" & ChrW$(183) & "" & ChrW$(8730) & "6    " & ChrW$(8743) & "    x=0)   " & ChrW$(8744) & "   (y=2" & ChrW$(183) & "" & ChrW$(8730) & "6    " & ChrW$(8743) & "    x=0)") Then GoTo slut ' two circles exact
     If TestSolve("8" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r-(16" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^2)/(100-(4" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^3)/3)^(1/3) =0", "r", "r=0    " & ChrW$(8744) & "    r=2,016879") Then GoTo slut ' has caused problems before check of solutions
+    If TestSolve("x^2-5=ln" & ChrW$(8289) & "(x)", "x", "x=0,006738253    " & ChrW$(8744) & "    x=2,426173") Then GoTo slut
     
     'solvesystem
     Selection.TypeText "solving systems of equations": Selection.TypeParagraph
     If TestSolve("(x-38)^2+(y-18)^2=" & ChrW$(12310) & "17,5" & ChrW$(12311) & "^2  " & ChrW$(8743) & "  (x-27)^2+(y-33)^2=" & ChrW$(12310) & "9,4" & ChrW$(12311) & "^2", "x", "(y=25,05068    " & ChrW$(8743) & "    x=21,9832)   " & ChrW$(8744) & "   (y=35,39542    " & ChrW$(8743) & "    x=36,08966)") Then GoTo slut
+    If TestSolve("x^2+y^2-12x+2y=-33 " & ChrW$(8743) & "  x^2+y^2+2x-6y=26", "x", "[x]" & ChrW$(8712) & "" & ChrW$(8709)) Then GoTo slut
     
     MaximaComplex = True ' complex
     If TestSolve("x^2=-4", "x", "x=-2" & ChrW$(183) & "i    " & ChrW$(8744) & "    x=2" & ChrW$(183) & "i") Then GoTo slut

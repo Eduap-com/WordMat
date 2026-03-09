@@ -2208,7 +2208,7 @@ Private Sub SetCaptions()
     MultiPage1.Pages("Page4").Caption = TT.A(444)
     Label29.Caption = TT.A(823)
     Label45.Caption = TT.A(837)
-    Label_Ligninger.Caption = TT.A(832) & "  f(x)=..."
+    Label_ligninger.Caption = TT.A(832) & "  f(x)=..."
     CommandButton_nulstil1.Caption = TT.Reset
     CommandButton_nulstil2.Caption = TT.Reset
     CommandButton_nulstil3.Caption = TT.Reset

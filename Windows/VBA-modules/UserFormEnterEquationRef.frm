@@ -110,7 +110,7 @@ Sub SetCaptions()
     Label_name.Caption = TT.A(5)
     Label_cancel.Caption = TT.Cancel
     Label_ok.Caption = TT.OK
-    Label_Ligninger.Caption = TT.A(10)
+    Label_ligninger.Caption = TT.A(10)
     Label_help.Caption = TT.A(11)
     Label_error.Caption = TT.A(12)
 End Sub
