@@ -930,3 +930,5 @@
 929#£Ratkaisut lšydetŠŠn 'arvaamalla' monia eri ratkaisuja. MenetelmŠ toimii kŠytŠnnšssŠ kaikissa yhtŠlšissŠ, mutta ratkaisuja voidaan ohittaa ja vŠŠriŠ ratkaisuja lšytyŠ. (KŠytetŠŠn yhdistelmŠŠ bisektiosta ja Newtonin menetelmŠstŠ)
 930#£Ensin kokeillaan analyyttistŠ ratkaisua, ja jos se epŠonnistuu, kŠytetŠŠn numeerisia ratkaisumenetelmiŠ.
 931#£YhtŠlšt voidaan kŠytŠnnšssŠ ratkaista kahdella eri tavalla. Jos kohtaat ongelmia yhtŠlšn kanssa, voi olla hyvŠ idea kokeilla toista menetelmŠŠ tai toista CAS-moottoria tai graafista ratkaisua.
+932#£PŠivitys uusimpaan betaversioon
+933#£Sinun tulisi olla tietoinen siitŠ, ettŠ beta-versioissa voi olla virheitŠ. Ne on ensisijaisesti tarkoitettu testaukseen. Suositellaan kŠyttŠmŠŠn tŠtŠ toimintoa ensisijaisesti Eduapin ohjeiden mukaisesti
