@@ -739,7 +739,20 @@ Install2:
         End If
     Else
         If Not RunSilent Then
-            MsgBox2 TT.A(344) & " " & AppNavn & " v." & AppVersion & PatchVersion, vbOKOnly, "No Update"
+            Dim UFMsgBox As New UserFormMsgBox
+            
+            UFMsgBox.MsgBoxStyle = vbOKCancel
+            UFMsgBox.Title = "No Update"
+            UFMsgBox.prompt = TT.A(344) & " " & AppNavn & " v." & AppVersion & PatchVersion
+            UFMsgBox.Label_cancel.Caption = "Reinstall"
+            UFMsgBox.CancelButtonPos = 1
+            UFMsgBox.Show
+            
+            If UFMsgBox.MsgBoxResult = vbCancel Then
+                ReInstall
+            End If
+            Unload UFMsgBox
+'            MsgBox2 TT.A(344) & " " & AppNavn & " v." & AppVersion & PatchVersion, vbOKOnly, "No Update"
         End If
     End If
    
@@ -770,7 +783,23 @@ Sub UpdateToBeta()
     End If
     GoTo slut
 fejl:
-    MsgBox2 "An error occured when trying to install the beta version", vbOKOnly, TT.Error
+    MsgBox2 "An error occured when trying to install the beta version" & vbCrLf & Err.Description, vbOKOnly, TT.Error
+slut:
+End Sub
+Sub ReInstall()
+    If QActivePartnership() Then
+        On Error Resume Next
+        If MsgBox2("Do you want to reinstall WordMath?", vbOKCancel, "confirm") = vbOK Then
+            Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
+            On Error GoTo fejl
+            Application.Run macroname:="PUpdateWordMat"
+        End If
+    Else
+        MsgBox2 "This function requires WordMath+", vbOKOnly, TT.Error
+    End If
+    GoTo slut
+fejl:
+    MsgBox2 "An error occured when trying to reinstall" & vbCrLf & Err.Description, vbOKOnly, TT.Error
 slut:
 End Sub
 

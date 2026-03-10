@@ -931,4 +931,4 @@
 930#£Der forsøges først med analytisk løsning, og hvis det fejler så anvendes numeriske løsningsmetoder.
 931#£Ligninger kan grundliggende løses på to forskellige måder. Hvis du oplever problemer med en ligning, kan det være en god ide at prøve med en anden metode, eller forsøge en anden CAS-motor eller grafisk løsning.
 932#£Opdater til nyeste betaversion
-933#£Du skal være opmærksom på, at der kan være fejl beta-versioner. De er primært beregnet til test. Det anbefales primært at bruge denne funktion efter anvisning fra Eduap
+933#£Du skal være opmærksom på, at der kan være fejl i beta-versioner. De er primært beregnet til test. Det anbefales primært at bruge denne funktion efter anvisning fra Eduap

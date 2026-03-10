@@ -931,4 +931,4 @@
 930#£Si tenta prima una soluzione analitica e, se fallisce, si usano metodi numerici di soluzione.
 931#£Le equazioni possono essere risolte fondamentalmente in due modi diversi. Se incontri problemi con un'equazione, potrebbe essere una buona idea provare un metodo diverso, oppure un motore CAS o una soluzione grafica diversa.
 932#£Aggiornamento all'ultima versione beta
-933#£Dovresti sapere che potrebbero esserci errori nelle versioni beta. Sono principalmente destinati ai test. Si consiglia di utilizzare questa funzione principalmente come indicato da Eduap
+933#£Dovresti sapere che potrebbero esserci bug nelle versioni beta. Sono principalmente destinati ai test. Si consiglia di utilizzare questa funzione principalmente come indicato da Eduap

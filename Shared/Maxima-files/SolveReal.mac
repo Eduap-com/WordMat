@@ -816,7 +816,7 @@ makelist(if freeof("=",zxq) then solvar=zxq else zxq,zxq,exprq2)
 )$
 
 /* Solves an equation for a variable or expression. The variable to solve for will have any arrays attached removed. SolveExact is a 3rd parameter. If true solvereal will try harder to find an exact solution for equation with 1 variable. If false it will easier default to nsolve.*/
-solvereal([paramq]):=block([solq,tempq,lignq,varq,condq,qassum,solu_1a,solu_2b,solsteps,iteind:0,factind:0,solunsure:false,SolveExact:true],
+solvereal([paramq]):=block([solq,tempq,lignq,varq,condq,qassum,solu_1a,solu_2b,solsteps,iteind:0,factind:0,solunsure:false,SolveExact:true,NewSolq],
 if length(paramq)<2 then (print("Too few arguments"),return()) elseif length(paramq)>4 then (print("Too many arguments"),return()),
 if length(paramq)=3 then (SolveExact:paramq[3]) else (SolveExact:true),
 lignq:paramq[1],varq:paramq[2],
@@ -873,9 +873,18 @@ if domain=real then solu_1a:RemoveImag(solu_1a),
 if IsAllSolved(solu_1a,varq) then go(slutqw) ,
 nxqsol0,
 if autonsolve and length(ev(listofvars(solu_1a),listconstvars=false))=1 then ( /*nsolve must be run before maximasolve (affects it somehow). Nsolve only runs if only 1 variable in equation*/
-	solu_1a:makelist(if not IsSolved(eq,solvar) and length(ev(listofvars(eq),listconstvars=false))=1 then (nsolve(eq,varq)) else eq ,eq, solu_1a),
+	solu_1a:makelist(if not IsSolved(eq,solvar) and length(ev(listofvars(eq),listconstvars=false))=1 then (nsolve(eq,varq)) else eq ,eq, solu_1a), 	
+	solu_1a:join(solu_1a,makelist(if not IsSolved(eq,solvar) and length(ev(listofvars(eq),listconstvars=false))=1 then (nsolve(eq,varq)) else eq ,eq, [lignq])), /*also solving from initial equation, because it might be easier for nsolve*/
 	solu_1a:flatten(solu_1a),
 	solu_1a:ev(solu_1a,numer),
+	solu_1a:unique(solu_1a),
+	NewSolq:[], /*look for suplicates with a tolerance because of two nsolves*/
+	for zq in solu_1a do (
+		if flatten(makelist(if abs(rhs(zq2)-rhs(zq))<1e-12 then 1 else [] , zq2, NewSolq))=[] then
+			NewSolq:cons(zq,NewSolq)
+	),
+	solu_1a:NewSolq,
+	if solu_1a=[] and not(solunsure) then return ([]),
 	if IsAllSolved(solu_1a,varq) then go(slutqw)
 ),
 if ContainsTrig(lignq) then go(nxqsol2),
@@ -936,6 +945,7 @@ if sepsolvecontext then
 			), 
 solu_1a
 )$
+
 
 solverecursive(lignq,varq,condq):=block([solq],
 	solq:flatten([lignq]),
@@ -1684,7 +1694,7 @@ else
 /* loeser foerste ligning i en liste [x+y=1,x-y=2] -> [x=1-y,x-y=2] hvis to loesninger kommer liste i liste */
 SolveFirst(eqnlqq,varq):=block([eqnq,autonsolve:true],
     eqnq:first(eqnlqq),
-    elq:flatten(errcatch(Solve(eqnq,varq))),
+    elq:flatten(errcatch(Solve(eqnq,varq,false))),
     if elq=[] or elq=unknown then return(elq),
     if elq=[all] or elq=all then (
         if length(eqnlqq)=1 then return([all]) else return(rest(eqnlqq,1))

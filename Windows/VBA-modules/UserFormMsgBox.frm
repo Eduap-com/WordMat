@@ -21,6 +21,7 @@ Public MsgBoxStyle As VbMsgBoxStyle
 Public MsgBoxResult As VbMsgBoxResult
 Public Title As String
 Public prompt As String
+Public CancelButtonPos As Integer ' 0 = normal, 1= right side
 
 Private EventsCol As New Collection
 Sub SetEscEvents(ControlColl As Controls)
@@ -137,7 +138,11 @@ Private Sub UserForm_Activate()
     ElseIf MsgBoxStyle = vbOKCancel Then
         Label_cancel.visible = True
         Label_ok.Left = Me.Width / 2 - Label_ok.Width - 2
-        Label_cancel.Left = Me.Width / 2 + 2
+        If CancelButtonPos = 0 Then
+            Label_cancel.Left = Me.Width / 2 + 2
+        Else
+            Label_cancel.Left = Me.Width - Label_cancel.Width - 15
+        End If
     ElseIf MsgBoxStyle = vbYesNo Then
         Label_ok.Caption = "Yes"
         Label_cancel.Caption = "No"
