@@ -930,3 +930,5 @@
 929#£Resení se nacházejí "hádáním" mnoha ruznch resení. Metoda funguje prakticky na vsech rovnicích, ale resení mohou bt prehlédnuta a lze najít falesná resení. (Pouzívá se kombinace rozdelení na poloviny a Newtonovy metody)
 930#£Nejprve se zkousí analytické resení, a pokud selze, pouzijí se numerické metody resení.
 931#£Rovnice lze v podstate resit dvema ruznmi zpusoby. Pokud máte problémy s rovnicí, muze bt dobr nápad zkusit jinou metodu, nebo jin CAS engine ci grafické resení.
+932#£Aktualizace na nejnovejsí beta verzi
+933#£Meli byste si bt vedomi, ze v beta verzích mohou bt chyby. Jsou primárne urceny k testování. Doporucuje se pouzívat tuto funkci predevsím podle pokynu Eduap

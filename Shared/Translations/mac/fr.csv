@@ -930,3 +930,5 @@
 929#£Les solutions se trouvent en « devinant » de nombreuses solutions différentes. La méthode fonctionne sur pratiquement toutes les équations, mais les solutions peuvent être négligées et des fausses solutions peuvent être trouvées. (Une combinaison de la bisection et de la méthode de Newton est utilisée)
 930#£Une solution analytique est d'abord tentée, et si elle échoue, des méthodes de résolution numérique sont utilisées.
 931#£Les équations peuvent essentiellement être résolues de deux manières différentes. Si vous rencontrez des problèmes avec une équation, il peut être judicieux d'essayer une méthode différente, ou d'essayer un autre moteur CAS ou une solution graphique.
+932#£Mise à jour vers la dernière version bêta
+933#£Vous devez savoir qu'il peut y avoir des erreurs dans les versions bêta. Ils sont principalement destinés aux tests. Il est recommandé d'utiliser cette fonction principalement selon les instructions d'Eduap
