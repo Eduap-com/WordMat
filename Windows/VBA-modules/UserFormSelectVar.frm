@@ -142,7 +142,6 @@ Dim i As Integer, c As Integer
     If ComboBox_cas.ListIndex = 0 Then
         If CASengine <> 0 Then
             CASengine = 0
-'            PrepareMaxima
         End If
     ElseIf ComboBox_cas.ListIndex = 1 Then
         CASengine = 2

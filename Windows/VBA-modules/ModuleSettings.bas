@@ -1130,6 +1130,7 @@ Public Property Let CASengine(xval As Integer)
     mCASengine = xval
 End Property
 Public Property Let CASengineTempOnly(xval As Integer)
+' sets casengine, but  not in registry
     mCASengine = xval
 End Property
 Public Property Get CASengineRegOnly() As Integer

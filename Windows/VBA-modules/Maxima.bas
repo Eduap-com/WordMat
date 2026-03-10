@@ -516,8 +516,7 @@ newcas:
         End If
         
         If CASengine = 0 Then
-'            omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:" & Not (UFSelectVar.SolveMethod = 1) & "$"
-            omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:true$"
+            omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:" & LCase(CStr(Not (UFSelectVar.SolveMethod = 1))) & "$"
             omax.MaximaSolve (variabel)
         ElseIf CASengine = 1 Then
             If MaximaForklaring Then
@@ -534,6 +533,8 @@ newcas:
             Call RunGeoGebraDirect(s)
             If omax.MaximaOutput = "{}" Then
                 omax.MaximaOutput = variabel & VBA.ChrW$(8712) & VBA.ChrW$(8709)
+            ElseIf omax.MaximaOutput = "{?}" Then
+                omax.MaximaOutput = "?"
             ElseIf omax.MaximaOutput = "{" & variabel & "=" & variabel & "}" Or omax.MaximaOutput = "{x=x}" Then
                 omax.MaximaOutput = variabel & VBA.ChrW$(8712) & VBA.ChrW$(8477)
             Else
@@ -609,9 +610,16 @@ newcas:
             Selection.TypeParagraph
             Selection.TypeText TT.A(132)
         ElseIf omax.MaximaOutput = "?" Or omax.MaximaOutput = "" Or InStr(omax.KommentarOutput, "Lisp error") > 0 Or (Not LmSet And Not IsSolved) Then
-            If CASengine = 0 Then
-                GoTo stophop
+            If TempCas = 0 And CASengine = 0 Then
+                If MsgBox2(TT.A(131) & vbCrLf & vbCrLf & "Do you want to try GeoGebra CAS?", vbYesNo, "Retry?") = vbYes Then
+                    CASengine = 2
+                    GoTo newcas
+                End If
+'                GoTo stophop 'nsolve
             End If
+            Selection.TypeText TT.A(131)
+            Selection.TypeParagraph
+            GoTo slut
             UserFormChooseCAS.Show
             If UserFormChooseCAS.ChosenCAS = 2 Then ' maxima num
                 CASengineTempOnly = 0
@@ -808,7 +816,9 @@ slut:
     OutUnits = SaveSettingsOutunits
     MaximaLogOutput = SaveSettingsLog
     MaximaDecOutType = SaveSettingsDecOutType
-    CASengineTempOnly = TempCas
+    If TempCas <> CASengine Then
+        CASengine = TempCas
+    End If
     Selection.End = sslut    ' slut must be first
     Selection.start = sstart
     If Not Oundo Is Nothing Then
