@@ -931,4 +931,4 @@
 930#£Esmalt proovitakse analŸŸtilist lahendust ning kui see eba›nnestub, kasutatakse numbrilisi lahendusmeetodeid.
 931#£V›rrandeid saab p›him›tteliselt lahendada kahel erineval viisil. Kui sul tekib probleeme v›rrandiga, v›ib olla hea m›te proovida teist meetodit v›i teist CAS-mootorit v›i graafilist lahendust.
 932#£Uuendus viimasele beetaversioonile
-933#£Pea meeles, et beetaversioonides v›ib esineda vigu. Need on peamiselt m›eldud testimiseks. Seda funktsiooni soovitatakse kasutada peamiselt vastavalt Eduapi juhistele
+933#£Peaksid teadma, et beetaversioonides v›ib esineda vigu. Need on peamiselt m›eldud testimiseks. Seda funktsiooni soovitatakse kasutada peamiselt vastavalt Eduapi juhistele
