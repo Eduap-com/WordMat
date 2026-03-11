@@ -518,7 +518,7 @@ newcas:
         If CASengine = 0 Then
             omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:" & LCase(CStr(Not (UFSelectVar.SolveMethod = 1))) & "$"
             omax.MaximaSolve (variabel)
-        ElseIf CASengine = 1 Then
+        ElseIf CASengine = 1 Then ' GeoGebra web
             If MaximaForklaring Then
                 omax.GoToEndOfSelectedMaths
                 If MaximaForklaring Then
@@ -569,8 +569,6 @@ newcas:
         Set Oundo = Application.UndoRecord
         Oundo.StartCustomRecord
         
-        omax.GoToEndOfSelectedMaths
-        Selection.TypeParagraph
         If Len(omax.MaximaOutput) > 250 Then
             Dim resultat As VbMsgBoxResult
             resultat = MsgBox(TT.A(127) & vbCrLf & vbCrLf & omax.MaximaOutput, vbOKCancel, TT.A(846))
@@ -592,6 +590,8 @@ newcas:
             IsSolved = True
         End If
 
+        omax.GoToEndOfSelectedMaths
+        Selection.TypeParagraph
         ' insert explanation if desired
         If MaximaForklaring And (IsSolved Or InStr(omax.KommentarOutput, "solving system of equations")) Then
             InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831)
@@ -612,10 +612,15 @@ newcas:
         ElseIf omax.MaximaOutput = "?" Or omax.MaximaOutput = "" Or InStr(omax.KommentarOutput, "Lisp error") > 0 Or (Not LmSet And Not IsSolved) Then
             If TempCas = 0 And CASengine = 0 Then
                 If MsgBox2(TT.A(131) & vbCrLf & vbCrLf & "Do you want to try GeoGebra CAS?", vbYesNo, "Retry?") = vbYes Then
-                    CASengine = 2
+                    CASengineTempOnly = 2
                     GoTo newcas
                 End If
 '                GoTo stophop 'nsolve
+            ElseIf TempCas > 0 And UFSelectVar.SolveMethod = 0 Then
+                MaximaNsolve variabel, omax.Kommando
+                Selection.TypeText TT.A(788)
+                Selection.TypeParagraph
+                GoTo slut
             End If
             Selection.TypeText TT.A(131)
             Selection.TypeParagraph
@@ -817,7 +822,7 @@ slut:
     MaximaLogOutput = SaveSettingsLog
     MaximaDecOutType = SaveSettingsDecOutType
     If TempCas <> CASengine Then
-        CASengine = TempCas
+        CASengineTempOnly = TempCas
     End If
     Selection.End = sslut    ' slut must be first
     Selection.start = sstart
@@ -1103,14 +1108,14 @@ slut:
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
 End Sub
-Sub MaximaNsolve(Optional ByVal variabel As String)
+Sub MaximaNsolve(Optional ByVal variabel As String, Optional ByVal Equation As String)
     Dim Arr As Variant
     Dim fejlm As String
     On Error GoTo fejl
     Application.ScreenUpdating = False
     Dim IsSolved As Boolean
     Dim scrollpos As Double
-    Dim ea As New ExpressionAnalyser, s As String, v As String, t As String
+    Dim ea As New ExpressionAnalyser, s As String, v As String, t As String, EqCount As Integer
     scrollpos = ActiveWindow.VerticalPercentScrolled
 
     PrepareMaxima
@@ -1124,31 +1129,39 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
 
     If omax.DefFejl Then GoTo slut
 
-    If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
-        MsgBox TT.A(803), vbOKOnly, TT.A(804)
-        GoTo slut
+    If Equation = vbNullString Then
+        If Selection.OMaths.Count = 0 And Len(Selection.Range.text) < 2 Then
+            MsgBox TT.A(803), vbOKOnly, TT.A(804)
+            GoTo slut
+        End If
+        If sstart = sslut Then
+            Selection.OMaths(1).ParentOMath.Range.Select
+        End If
+        If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8805)) > 1 Then
+            MaximaSolveInequality
+            GoTo slut
+        End If
+        If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
+            Dim result As VbMsgBoxResult
+            result = MsgBox(TT.A(141), vbYesNo, TT.A(846))
+            If result = vbNo Then GoTo slut
+        End If
+        EqCount = Selection.OMaths.Count
+        If InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8743)) >= 1 Then EqCount = 2
+        omax.ReadSelection
+    Else
+        EqCount = 1
+        omax.Kommando = Equation
     End If
-    If sstart = sslut Then
-        Selection.OMaths(1).ParentOMath.Range.Select
-    End If
-    If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8805)) > 1 Then
-        MaximaSolveInequality
-        GoTo slut
-    End If
-    If InStr(Selection.OMaths(1).Range.text, "=") < 1 Then
-        Dim result As VbMsgBoxResult
-        result = MsgBox(TT.A(141), vbYesNo, TT.A(846))
-        If result = vbNo Then GoTo slut
-    End If
-
-    omax.ReadSelection
+        
     If InStr(omax.Kommando, VBA.ChrW$(8788)) > 0 Or InStr(VBA.LCase$(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase$(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase$(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW$(8801)) > 0 Then
         MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
+    
+    
 
-    If Selection.OMaths.Count < 2 And InStr(Selection.OMaths(1).Range.text, VBA.ChrW$(8743)) < 1 Then
-        ' only 1 equation
+    If EqCount = 1 Then ' only 1 equation
 
         If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
         
@@ -1242,24 +1255,24 @@ Sub MaximaNsolve(Optional ByVal variabel As String)
         Selection.End = sslut
         Selection.start = sstart
         ActiveWindow.VerticalPercentScrolled = scrollpos
-        If CASengine = 0 Then
-            GoTo ghop
-        Else
-            s = Replace(omax.Kommando, ",", ".")
-            Arr = Split(s, "=")
-            LHS = Arr(0)
-            RHS = Arr(1)
-            If variabel <> "x" Then
-                ea.text = LHS
-                ea.ReplaceVar variabel, "x"
-                LHS = ea.text
-                ea.text = RHS
-                ea.ReplaceVar variabel, "x"
-                RHS = ea.text
-            End If
-            OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & "," & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
-        End If
-        GoTo slut
+'        If CASengine = 0 Then
+'            GoTo ghop
+'        Else ' graphic solution
+'            s = Replace(omax.Kommando, ",", ".")
+'            Arr = Split(s, "=")
+'            LHS = Arr(0)
+'            RHS = Arr(1)
+'            If variabel <> "x" Then
+'                ea.text = LHS
+'                ea.ReplaceVar variabel, "x"
+'                LHS = ea.text
+'                ea.text = RHS
+'                ea.ReplaceVar variabel, "x"
+'                RHS = ea.text
+'            End If
+'            OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & "," & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
+'        End If
+'        GoTo slut
 ghop:
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
