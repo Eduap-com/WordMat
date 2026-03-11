@@ -138,10 +138,10 @@ On Error Resume Next
     
     If OptionButton_casmaxima.Value = True Then
         CASengine = 0
-    ElseIf OptionButton_casgeogebra.Value = True Then
-        CASengine = 1
     ElseIf OptionButton_casgeogebradirect.Value = True Then
         CASengine = 2
+    ElseIf OptionButton_casgeogebra.Value = True Then ' web
+        CASengine = 1
     Else
         CASengine = 0
     End If
@@ -544,10 +544,10 @@ Sub SetButtonsAccordingToSettings()
     If ReadSettingsFromFile <= 1 Then
         If CASengine = 0 Then 'CASengineRegOnly
             OptionButton_casmaxima.Value = True
-        ElseIf CASengine = 1 Then
-            OptionButton_casgeogebra.Value = True
         ElseIf CASengine = 2 Then
             OptionButton_casgeogebradirect.Value = True
+        ElseIf CASengine = 1 Then ' web
+            OptionButton_casgeogebra.Value = True
         Else
             OptionButton_casmaxima.Value = True
         End If
@@ -555,9 +555,9 @@ Sub SetButtonsAccordingToSettings()
         If CASengine = 0 Then
             OptionButton_casmaxima.Value = True
         ElseIf CASengine = 1 Then
-            OptionButton_casgeogebra.Value = True
-        ElseIf CASengine = 2 Then
             OptionButton_casgeogebradirect.Value = True
+        ElseIf CASengine = 2 Then
+            OptionButton_casgeogebra.Value = True
         Else
             OptionButton_casmaxima.Value = True
         End If
