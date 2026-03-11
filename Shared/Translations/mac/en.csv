@@ -931,8 +931,4 @@
 930#£An analytical solution is first tried, and if it fails, numerical solution methods are used.
 931#£Equations can basically be solved in two different ways. If you experience problems with an equation, it may be a good idea to try a different method, or try a different CAS engine or graphical solution.
 932#£Update to latest beta version
-<<<<<<< Updated upstream
 933#£You should be aware that there may be bugs in beta versions. They are primarily intended for testing. It is recommended to use this function primarily as instructed by Eduap
-=======
-933#£You should be aware that there may be errors in beta versions. They are primarily intended for testing. It is recommended to use this function primarily as instructed by Eduap
->>>>>>> Stashed changes
