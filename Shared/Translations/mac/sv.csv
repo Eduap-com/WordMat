@@ -931,4 +931,8 @@
 930#£En analytisk lösning prövas först, och om den misslyckas används numeriska lösningsmetoder.
 931#£Ekvationer kan i princip lösas på två olika sätt. Om du upplever problem med en ekvation kan det vara en bra idé att prova en annan metod, eller prova en annan CAS-motor eller grafisk lösning.
 932#£Uppdatera till senaste betaversionen
+<<<<<<< Updated upstream
 933#£Du bör vara medveten om att det kan finnas buggar i betaversionerna. De är främst avsedda för testning. Det rekommenderas att använda denna funktion främst enligt Eduaps instruktioner
+=======
+933#£Du bör vara medveten om att det kan finnas fel i betaversionerna. De är främst avsedda för testning. Det rekommenderas att använda denna funktion främst enligt Eduaps instruktioner
+>>>>>>> Stashed changes
