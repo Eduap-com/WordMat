@@ -931,4 +931,4 @@
 930#£Zunächst wird eine analytische Lösung ausprobiert, und wenn sie fehlschlägt, werden numerische Lösungsmethoden verwendet.
 931#£Gleichungen können im Grunde auf zwei verschiedene Arten gelöst werden. Wenn du Probleme mit einer Gleichung hast, ist es vielleicht eine gute Idee, eine andere Methode auszuprobieren oder eine andere CAS-Engine oder grafische Lösung.
 932#£Update zur neuesten Beta-Version
-933#£Du solltest wissen, dass es in den Beta-Versionen Fehler geben kann. Sie sind in erster Linie für Tests gedacht. Es wird empfohlen, diese Funktion hauptsächlich wie von Eduap angewiesen zu nutzen
+933#£Du solltest wissen, dass es in den Beta-Versionen Bugs geben kann. Sie sind in erster Linie für Tests gedacht. Es wird empfohlen, diese Funktion hauptsächlich wie von Eduap angewiesen zu nutzen
