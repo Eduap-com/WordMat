@@ -932,3 +932,4 @@
 931#£Ligninger kan i bunn og grunn løses på to forskjellige måter. Hvis du opplever problemer med en ligning, kan det være lurt å prøve en annen metode, eller en annen CAS-motor eller grafisk løsning.
 932#£Oppdater til siste betaversjon
 933#£Du bør være klar over at det kan være feil i betaversjonene. De er primært ment for testing. Det anbefales å bruke denne funksjonen hovedsakelig som instruert av Eduap
+934#£Viser grafen for venstre og høyre side av ligningen i samme koordinatsystem. Løsningene til ligningen er x-verdien av snittene. Husk å zoome inn og ut.
