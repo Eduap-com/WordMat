@@ -342,7 +342,7 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
         End If
     End If
     
-    If Gtype = "CAS" Or Gtype = "Classic" Then
+    If Gtype = "CAS" Or Gtype = "Classic" Or Gtype = "graphing" Then
         ArrCas = Split(cmd, ";")
         cmd = ""
         For i = 0 To UBound(ArrCas)

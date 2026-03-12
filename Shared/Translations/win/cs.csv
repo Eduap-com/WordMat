@@ -932,3 +932,4 @@
 931#£Rovnice lze v podstate resit dvema ruznými zpusoby. Pokud máte problémy s rovnicí, muze být dobrý nápad zkusit jinou metodu, nebo jiný CAS engine ci grafické resení.
 932#£Aktualizace na nejnovejsí beta verzi
 933#£Meli byste si být vedomi, ze v beta verzích mohou být chyby. Jsou primárne urceny k testování. Doporucuje se pouzívat tuto funkci predevsím podle pokynu Eduap
+934#£Zobrazuje graf pro levou a pravou stranu rovnice ve stejném souradnicovém systému. Reseními rovnice jsou x-hodnoty prusecíku. Nezapomente priblízit a oddálit.

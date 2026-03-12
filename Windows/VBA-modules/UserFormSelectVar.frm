@@ -4,7 +4,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} UserFormSelectVar
    ClientHeight    =   4635
    ClientLeft      =   -30
    ClientTop       =   75
-   ClientWidth     =   10650
+   ClientWidth     =   13650
    OleObjectBlob   =   "UserFormSelectVar.frx":0000
    StartUpPosition =   1  'CenterOwner
 End
@@ -68,8 +68,10 @@ Dim i As Integer, c As Integer
         SolveMethod = 0
     ElseIf OptionButton_SolveMethodAnalytical.Value Then
         SolveMethod = 1
-    Else
+    ElseIf OptionButton_SolveMethodNumeric.Value Then
         SolveMethod = 2
+    Else
+        SolveMethod = 3
     End If
         
     MaximaCifre = ComboBox_cifre.Value
@@ -277,6 +279,11 @@ Private Sub UserForm_Activate()
     Else
         ListBox_vars.MultiSelect = fmMultiSelectSingle
     End If
+    
+    If ListBox_vars.ListCount > 1 Then
+        OptionButton_SolveMethodNumeric.Enabled = False
+        OptionButton_SolveMethodGraphical.Enabled = False
+    End If
 
 fejl:
     On Error Resume Next
@@ -321,13 +328,18 @@ Private Sub SetCaptions()
     Frame5.Caption = TT.A(923)
     Frame_solvemethod.Caption = TT.A(924)
     Frame_solvemethod.ControlTipText = TT.A(931)
+    
+    Label_casengine.Caption = TT.A(686) & ":"
+    
     OptionButton_SolveMethodAuto.Caption = TT.A(925)
     OptionButton_SolveMethodAnalytical.Caption = TT.A(926)
     OptionButton_SolveMethodNumeric.Caption = TT.A(711)
+    OptionButton_SolveMethodGraphical.Caption = TT.A(241)
     
     OptionButton_SolveMethodAuto.ControlTipText = TT.A(930)
     OptionButton_SolveMethodAnalytical.ControlTipText = TT.A(928)
     OptionButton_SolveMethodNumeric.ControlTipText = TT.A(929)
+    OptionButton_SolveMethodGraphical.ControlTipText = TT.A(934)
         
     OptionButton_exactandnum.Caption = TT.A(712)
     OptionButton_exactonly.Caption = TT.A(710)

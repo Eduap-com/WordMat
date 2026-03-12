@@ -932,3 +932,4 @@
 931#£Le equazioni possono essere risolte fondamentalmente in due modi diversi. Se incontri problemi con un'equazione, potrebbe essere una buona idea provare un metodo diverso, oppure un motore CAS o una soluzione grafica diversa.
 932#£Aggiornamento all'ultima versione beta
 933#£Dovresti sapere che potrebbero esserci bug nelle versioni beta. Sono principalmente destinati ai test. Si consiglia di utilizzare questa funzione principalmente come indicato da Eduap
+934#£Mostra il grafico per i lati sinistro e destro dell'equazione nello stesso sistema di coordinate. Le soluzioni dell'equazione sono il valore x delle intersezioni. Ricordati di zoomare avanti e indietro.

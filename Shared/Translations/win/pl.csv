@@ -932,3 +932,4 @@
 931#£Równania mozna zasadniczo rozwiazac na dwa rózne sposoby. Jesli masz problemy z równaniem, warto spróbowac innej metody lub innego silnika CAS lub rozwiazania graficznego.
 932#£Aktualizacja do najnowszej wersji beta
 933#£Powinienes wiedziec, ze w wersjach beta moga wystepowac bledy. Sa one przeznaczone glównie do testowania. Zaleca sie korzystanie z tej funkcji glównie zgodnie z zaleceniami Eduap
+934#£Pokazuje wykres dla lewej i prawej strony równania w tym samym ukladzie wspólrzednych. Rozwiazania równania to wartosc x przeciec. Pamietaj, zeby powiekszac i oddalac obraz.

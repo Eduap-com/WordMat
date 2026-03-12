@@ -932,3 +932,4 @@
 931#£Yhtälöt voidaan käytännössä ratkaista kahdella eri tavalla. Jos kohtaat ongelmia yhtälön kanssa, voi olla hyvä idea kokeilla toista menetelmää tai toista CAS-moottoria tai graafista ratkaisua.
 932#£Päivitys uusimpaan betaversioon
 933#£Sinun tulisi olla tietoinen siitä, että beta-versioissa saattaa olla bugeja. Ne on ensisijaisesti tarkoitettu testaukseen. Suositellaan käyttämään tätä toimintoa ensisijaisesti Eduapin ohjeiden mukaisesti
+934#£Näyttää kaavion yhtälön vasemmalle ja oikealle puolelle samassa koordinaatistossa. Yhtälön ratkaisut ovat leikkauspisteiden x-arvo. Muista zoomata sisään ja ulos.

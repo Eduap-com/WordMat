@@ -932,3 +932,4 @@
 931#£Võrrandeid saab põhimõtteliselt lahendada kahel erineval viisil. Kui sul tekib probleeme võrrandiga, võib olla hea mõte proovida teist meetodit või teist CAS-mootorit või graafilist lahendust.
 932#£Uuendus viimasele beetaversioonile
 933#£Peaksid teadma, et beetaversioonides võib esineda vigu. Need on peamiselt mõeldud testimiseks. Seda funktsiooni soovitatakse kasutada peamiselt vastavalt Eduapi juhistele
+934#£Näitab graafikut võrrandi vasaku ja parema poole jaoks samas koordinaatsüsteemis. Võrrandi lahendused on lõikumiste x-väärtused. Pea meeles sisse ja välja suumida.

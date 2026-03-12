@@ -932,3 +932,4 @@
 931#£Vergelijkingen kunnen in principe op twee verschillende manieren worden opgelost. Als je problemen ondervindt met een vergelijking, kan het een goed idee zijn om een andere methode te proberen, of een andere CAS-engine of grafische oplossing.
 932#£Update naar de nieuwste bètaversie
 933#£Je moet je ervan bewust zijn dat er bugs kunnen zijn in bètaversies. Ze zijn voornamelijk bedoeld voor testen. Het wordt aanbevolen deze functie voornamelijk te gebruiken zoals Eduap heeft aangegeven
+934#£Toont de grafiek voor de linker- en rechterzijde van de vergelijking in hetzelfde coördinatensysteem. De oplossingen van de vergelijking zijn de x-waarde van de doorsneden. Vergeet niet in en uit te zoomen.

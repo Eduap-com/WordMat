@@ -382,6 +382,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     Dim scrollpos As Double
     Dim ea As New ExpressionAnalyser, SaveKommando As String
     Dim sstart As Long, sslut As Long, p As Long, p2 As Long
+    Dim LHS As String, RHS As String
     Dim SaveSettingsCifre As Integer
     Dim SaveSettingsExact As Integer
     Dim SaveSettingsOutunits As String
@@ -515,7 +516,22 @@ newcas:
             End If
         End If
         
-        If CASengine = 0 Then
+        If UFSelectVar.SolveMethod = 3 Then ' graphical solution
+            s = Replace(omax.Kommando, ",", ".")
+            Arr = Split(s, "=")
+            LHS = Arr(0)
+            RHS = Arr(1)
+            If variabel <> "x" Then
+                ea.text = LHS
+                ea.ReplaceVar variabel, "x"
+                LHS = ea.text
+                ea.text = RHS
+                ea.ReplaceVar variabel, "x"
+                RHS = ea.text
+            End If
+            OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & ", " & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "graphing", True, True
+            GoTo slut
+        ElseIf CASengine = 0 Then
             omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:" & LCase(CStr(Not (UFSelectVar.SolveMethod = 1))) & "$"
             omax.MaximaSolve (variabel)
         ElseIf CASengine = 1 Then ' GeoGebra web
@@ -616,7 +632,7 @@ newcas:
                     GoTo newcas
                 End If
 '                GoTo stophop 'nsolve
-            ElseIf TempCas > 0 And UFSelectVar.SolveMethod = 0 Then
+            ElseIf CASengine = 2 And UFSelectVar.SolveMethod = 0 Then
                 MaximaNsolve variabel, omax.Kommando
                 Selection.TypeText TT.A(788)
                 Selection.TypeParagraph
@@ -672,6 +688,7 @@ stophop:
         UFSelectVar.DefS = omax.DefString
         UFSelectVar.Frame_solvemethod.visible = False
         If variabel = vbNullString Then
+            UFSelectVar.Width = UFSelectVar.Width - UFSelectVar.Frame_solvemethod.Width - 5
             UFSelectVar.Show
             variabel = UFSelectVar.SelectedVar
         End If
@@ -1026,6 +1043,7 @@ Sub MaximaEliminate()
         UFSelectVar.Vars = omax.Vars
         UFSelectVar.DefS = omax.DefString
         UFSelectVar.Caption = TT.A(377)
+        UFSelectVar.Width = UFSelectVar.Width - UFSelectVar.Frame_solvemethod.Width - 5
         UFSelectVar.Show
         variabel = UFSelectVar.SelectedVar
         If variabel = "" Then GoTo slut
@@ -1189,6 +1207,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String, Optional ByVal Equation As S
         If variabel = vbNullString Then
             UFSelectVar.Vars = omax.Vars
             UFSelectVar.DefS = omax.DefString
+            UFSelectVar.Width = UFSelectVar.Width - UFSelectVar.Frame_solvemethod.Width - 5
             UFSelectVar.Show
             variabel = UFSelectVar.SelectedVar
         End If
@@ -1255,24 +1274,7 @@ Sub MaximaNsolve(Optional ByVal variabel As String, Optional ByVal Equation As S
         Selection.End = sslut
         Selection.start = sstart
         ActiveWindow.VerticalPercentScrolled = scrollpos
-'        If CASengine = 0 Then
-'            GoTo ghop
-'        Else ' graphic solution
-'            s = Replace(omax.Kommando, ",", ".")
-'            Arr = Split(s, "=")
-'            LHS = Arr(0)
-'            RHS = Arr(1)
-'            If variabel <> "x" Then
-'                ea.text = LHS
-'                ea.ReplaceVar variabel, "x"
-'                LHS = ea.text
-'                ea.text = RHS
-'                ea.ReplaceVar variabel, "x"
-'                RHS = ea.text
-'            End If
-'            OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & "," & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "CAS", True, True
-'        End If
-'        GoTo slut
+
 ghop:
         omax.GoToEndOfSelectedMaths
         Selection.TypeParagraph
