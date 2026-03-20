@@ -30,6 +30,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
         If (Not MaxProc.IsMaximaStarted Or FreshMaxima Or RestartMaximaNextRun) And CASengine = 0 Then
             RestartMaximaNextRun = False
             MaxProc.Units = 0
+            MaxProc.SetMaximaPath GetMaximaPath()
             MaxProc.StartMaximaProcess
             WaitForMaximaUntil
             If MaxProc.ErrCode > 0 Then
@@ -49,6 +50,7 @@ Public Function PrepareMaxima(Optional FindDefinitioner As Boolean = True) As Bo
                 On Error GoTo fejl
                 MaxProcUnit.Units = 1
                 MaxProcUnit.OutUnits = omax.ConvertUnits(OutUnits)
+                MaxProcUnit.SetMaximaPath GetMaximaPath()
                 MaxProcUnit.StartMaximaProcess
                 WaitForMaximaUnitUntil
             End If
@@ -143,10 +145,12 @@ Sub RestartMaxima()
     If omax Is Nothing Then
         Set omax = New CMaxima
     End If
+    MaxProc.SetMaximaPath GetMaximaPath()
     MaxProc.StartMaximaProcess
     If Not MaxProcUnit Is Nothing Then
         MaxProcUnit.CloseProcess
         If MaximaUnits Then
+            MaxProcUnit.SetMaximaPath GetMaximaPath()
             MaxProcUnit.StartMaximaProcess
         Else
             Set MaxProcUnit = Nothing

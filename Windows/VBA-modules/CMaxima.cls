@@ -172,6 +172,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
 
     If MaxProc Is Nothing Then
         Set MaxProc = GetMaxProc() 'CreateObject("MaximaProcessClass")
+        MaxProc.SetMaximaPath GetMaximaPath()
         MaxProc.StartMaximaProcess
     End If
 
@@ -199,6 +200,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         End If
         If MaxProc.Finished = 0 Then
             MaxProc.CloseProcess
+            MaxProc.SetMaximaPath GetMaximaPath()
             MaxProc.StartMaximaProcess
         End If
         FindLastMaximaOutput
@@ -239,6 +241,7 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
             If Not UFwait2 Is Nothing Then Unload UFwait2
             MaxProc.CloseProcess
 '            MaxProc.Finished = 1
+            MaxProc.SetMaximaPath GetMaximaPath()
             MaxProc.StartMaximaProcess
             Exit Sub
         End If
@@ -259,9 +262,11 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
         If MaximaOutput = vbNullString And KommentarOutput = vbNullString Then ' Something must be wrong with Maxima. Try restart
             If MaximaUnits Then
                 MaxProcUnit.CloseProcess
+                MaxProcUnit.SetMaximaPath GetMaximaPath()
                 MaxProcUnit.StartMaximaProcess
             Else
                 MaxProc.CloseProcess
+                MaxProc.SetMaximaPath GetMaximaPath()
                 MaxProc.StartMaximaProcess
             End If
         Else

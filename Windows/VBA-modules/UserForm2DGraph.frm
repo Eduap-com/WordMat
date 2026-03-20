@@ -59,6 +59,7 @@ Private Sub Label_cancel_Click()
 #Else
     If MaxProc.Finished = 0 Then
         MaxProc.CloseProcess
+        MaxProc.SetMaximaPath GetMaximaPath()
         MaxProc.StartMaximaProcess
     End If
 #End If
