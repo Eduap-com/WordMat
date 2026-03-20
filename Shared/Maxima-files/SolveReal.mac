@@ -1255,7 +1255,7 @@ newton_method(expr, var, guess, tol, max_iter) := block(
  */
 /* Solves an equation for a variable or expression. The variable to solve for will have any arrays attached removed*/
 nsolve([paramq]) := block(
-	[qfkt, solq, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter, qex, qqs],
+	[qfkt, solq, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter, qex, qqs, taylororder, flen],
 	if length(paramq) < 2 then (
 		print("Too few arguments"),
 		return()
@@ -1304,7 +1304,6 @@ nsolve([paramq]) := block(
 		)
 	),
 	solq: [],
-
 	solq: nsolverec(qfkt(qvar), qvar, solq, -1, 3, 1000),
 	solq: nsolverec(qfkt(qvar), qvar, solq, qn, -6, 30), 
 	solq: nsolverec(qfkt(qvar), qvar, solq, qn, -2, 100),
@@ -1329,7 +1328,6 @@ nsolve([paramq]) := block(
 			)
 		)
 	),
-
 	qqs: errcatch(qfkt(0)),
 	if qqs#[] then (
 		qqs:qqs[1],
@@ -1355,14 +1353,26 @@ nsolve([paramq]) := block(
 			)
 		)
 	),
-
 	if qnewt then (
 /*		load(mnewton),newtonepsilon: 1*10^-30,newtonmaxiter: 1000,
 		qsol:flatten(bfloat(errcatch(mnewton(qfkt(qvar), qvar, 1)))), */
 		/*Find roots of taylorapprox and use these as guess for newtons method*/
 		ql: [],
+		/* If the order of the taylor approximation is too high, it can take too long for large expressions. Perform a test on low order to estimate a suitable order */
+		qti2: elapsed_real_time(),
+		flen: slength(string(qfkt(qvar))),
+		if flen < 200 then errcatch(taylor(qfkt(qvar),qvar,1,3)), /* test run to get time, but not if very long*/
+		if ((elapsed_real_time() - qti2) < 0.005) and flen < 100 then (
+			taylororder: 20
+		) else if ((elapsed_real_time() - qti2) < 0.03) and flen < 150 then (
+			taylororder: 10
+		) else if ((elapsed_real_time() - qti2) < 0.2) and flen < 200 then (
+			taylororder: 5
+		) else (
+			taylororder: 3
+		),
 		for i in [1,-1,10,-10,100,-100] do (
-			ql: append(ql, errcatch(flatten(makelist(ev(realroots(ev(taylor(qfkt(qvar),qvar,i,20),numer),qtol),float))))),
+			ql: append(ql, errcatch(flatten(makelist(ev(realroots(ev(taylor(qfkt(qvar),qvar,i,taylororder),numer),qtol),float))))),
 			if length(ql) >= 10 then return()
 		),
 		ql:flatten(ql),
@@ -1380,7 +1390,8 @@ nsolve([paramq]) := block(
 			qsol:flatten(errcatch(newton_method(qfkt(qvar), qvar, zq, qtol, NmaxIter))),
 			if qsol # [] then (
 				errcatch(qsol:qsol[1]),
-				solq: append(solq, [qsol]))
+				solq: append(solq, [qsol])
+				)
 			),
 			if (absolute_real_time() - qti) > qmaxti then (
 				print("Time out"),
@@ -1453,6 +1464,7 @@ find_root_safe(qfkt, qvar, a, b) := block([sol, fa, fb, fap, fbp],
 	sol: errcatch(bf_find_root(qfkt, qvar, a, b)),
 	if sol = [] then return([]),
 	sol: sol[1], 
+	if op(sol) = 'bf_find_root then return([]),
 /*	fa: errcatch(qfkt(a)),
 	fb: errcatch(qfkt(b)), */
 	fap: errcatch(subst((sol - 10^-6),qvar,qfkt)),
