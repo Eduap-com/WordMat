@@ -21,6 +21,8 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
     Dim TempCas As Integer
     Dim VektNArr As Variant, VNi As Integer
+    Dim startRange As Range
+    Set startRange = Selection.Range
 '    VektNArr = Array("a", "b", "c", "v", "w")
     VektNArr = Array("v_1", "v_2", "v_3", "v_4", "v_5", "v_6", "v_7", "v_8", "v_9")
 
@@ -312,6 +314,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     End If
     
     OpenGeoGebraWeb UrlLink, Gtype, False, False
+    startRange.Select
 fejl:
 
 slut:
@@ -326,7 +329,7 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
 ' Function does not read in the document. Preparemaxima must be run prior, to find definitions, when UseDefs=true
 ' cmd added to the end of url'en with ?command=       Definitions are also added to command
 
-    Dim UrlLink As String, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
+    Dim UrlLink As String, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String, Pars As String
     Dim DefS As String, DN As String
        
     If UseDefs Then
@@ -358,7 +361,6 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
     If Len(cmd) > 0 Then If Right$(cmd, 1) = ";" Then cmd = Left$(cmd, Len(cmd) - 1)
     '    If ConvertSyntax Then Cmd = ConvertToGeogebraSyntax(Cmd, True)
     cmd = DefS & cmd
-    cmd = Replace(cmd, "+", "%2B")
         
 #If Mac Then
     UrlLink = "file://" & GetGeoGebraMathAppsFolder()
@@ -369,29 +371,45 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
 #End If
 
     If Gtype = "" Or Gtype = "graphing" Then
-        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=graphing"
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html"
+        Pars = Pars & "perspective=graphing"
     ElseIf Gtype = "CAS" Then
-        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=cas"
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html"
+        Pars = Pars & "perspective=cas"
     ElseIf Gtype = "3d" Then
-        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=3d"
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html"
+        Pars = Pars & "perspective=3d"
     ElseIf Gtype = "prob" Then
-        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=probability"
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html"
+        Pars = Pars & "perspective=probability"
     ElseIf Gtype = "spreadsheet" Then
-        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=spreadsheet"
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html"
+        Pars = Pars & "perspective=spreadsheet"
     ElseIf Gtype = "geometry" Then
-        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=geometry"
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html"
+        Pars = Pars & "perspective=geometry"
     ElseIf Gtype = "calculator" Then
-        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=calculator"
+        UrlLink = UrlLink & "GeoGebra/HTML5/5.0/GeoGebra.html"
+        Pars = Pars & "perspective=calculator"
     Else
         UrlLink = UrlLink & "GeoGebra" & Gtype & "Applet.html"
     End If
     
     If TT.LangNo = 1 Then
-        UrlLink = UrlLink & "&lang=da"
+'        UrlLink = UrlLink & "&lang=da"
+        Pars = Pars & "&lang=da"
     End If
-    UrlLink = UrlLink & "&command=" & cmd
 
-    OpenLink UrlLink, True
+    Pars = Pars & "&command=" & cmd
+    UrlLink = UrlLink & "?" & Pars  ' "&command=" & cmd
+    If QActivePartnership Then
+        cmd = Replace(cmd, "%2B", "+")
+        If Not QShowGeoGebraGraph(cmd) Then
+            OpenLink UrlLink, True
+        End If
+    Else
+        OpenLink UrlLink, True
+    End If
 slut:
 End Sub
 
@@ -1307,4 +1325,6 @@ Sub FitSinGeoGebraSuite()
     End If
 
 End Sub
+
+
 

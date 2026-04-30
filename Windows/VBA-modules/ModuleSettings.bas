@@ -238,6 +238,7 @@ On Error Resume Next
     mSettShortcutAltE = val(GetRegSetting("SettShortcutAltE"))
     mSettShortcutAltT = val(GetRegSetting("SettShortcutAltT"))
     mSettShortcutAltQ = val(GetRegSetting("SettShortcutAltQ"))
+    mSettShortcutAltQ = val(GetRegSetting("SettShortcutAltG"))
     
     mseparator = CBool(GetRegSetting("Separator"))
     If mseparator Then
@@ -344,9 +345,10 @@ Public Sub SetAllDefaultRegistrySettings(Optional ForceReset As Boolean = False)
         SettShortcutAltJ = KeybShortcut.SettingsForm
         SettShortcutAltN = -1
         SettShortcutAltE = -1
-        SettShortcutAltG = KeybShortcut.Backslash
         SettShortcutAltT = KeybShortcut.ConvertEquationToLatex
         SettShortcutAltQ = KeybShortcut.GradTegn
+'        SettShortcutAltG = KeybShortcut.Backslash
+        SettShortcutAltG = KeybShortcut.ShowGraph
     
     End If
     If Not RegKeyExists("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\BigFloat") Then

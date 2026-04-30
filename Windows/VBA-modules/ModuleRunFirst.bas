@@ -80,6 +80,9 @@ Sub RunFirst()
         If val(RegAppVersion) < 1.37 Then
             ShowAssum = True
         End If
+        If val(RegAppVersion) < 1.4 Then
+            SettShortcutAltG = KeybShortcut.ShowGraph
+        End If
         RegAppVersion = AppVersion
     End If
     If SettCheckForUpdate Then CheckForUpdateSilent

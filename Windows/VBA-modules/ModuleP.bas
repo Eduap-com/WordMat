@@ -76,6 +76,16 @@ Function SkoleNavn() As String
 fejl:
     SkoleNavn = vbNullString
 slut:
-
 End Function
+
+Public Function QShowGeoGebraGraph(Pars As String, Optional GeoGebraState As String) As Boolean
+    On Error GoTo fejl
+    Application.Run macroname:="WMPShowGeoGebraGraph", varg1:=Pars, varg2:=GeoGebraState
+    QShowGeoGebraGraph = True
+    GoTo slut
+fejl:
+    QShowGeoGebraGraph = False
+slut:
+End Function
+
 

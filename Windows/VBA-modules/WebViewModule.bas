@@ -38,7 +38,7 @@ Sub OpenWebV()
         GoTo slut
     End If
     
-    WebV.navigate "file://" & FN
+    WebV.Navigate "file://" & FN
     WebV.WaitWV
     
     Wait (2)
@@ -129,7 +129,7 @@ Sub TestWV()
     WebV.Width = 1500
 
 '    WebV.navigate "https://www.geogebra.org"
-    WebV.navigate "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebraCASApplet.html"
+    WebV.Navigate "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebraCASApplet.html"
     WebV.WaitWV
     JS = "ggbApplet.evalCommandCAS('2+3')"
     res = WebV.ExecuteScript(JS)

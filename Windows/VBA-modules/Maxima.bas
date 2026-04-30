@@ -536,7 +536,11 @@ newcas:
             OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & ", " & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "graphing", True, True
             GoTo slut
         ElseIf CASengine = 0 Then
-            omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:" & LCase(CStr(Not (UFSelectVar.SolveMethod = 1))) & "$"
+            If UFSelectVar.SolveMethod = 1 Then
+                omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:false$"
+            Else
+                omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:true$"
+            End If
             omax.MaximaSolve (variabel)
         ElseIf CASengine = 1 Then ' GeoGebra web
             If MaximaForklaring Then
