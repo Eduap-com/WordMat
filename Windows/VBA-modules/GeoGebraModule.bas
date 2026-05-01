@@ -89,7 +89,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                     fktudtryk = Replace(fktudtryk, "}", ")")
                     fktudtryk = Replace(fktudtryk, "((", "(")
                     fktudtryk = Replace(fktudtryk, "))", ")")
-                    fktudtryk = "vector((0,0)," & fktudtryk & ")"
+                    fktudtryk = "Vector((0,0)," & fktudtryk & ")"
                     cmd = varnavn & "=" & fktudtryk
                 Else
                     cmd = sl.GetName(i) & "=" & fktudtryk
@@ -166,7 +166,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                                 LHS = Replace(LHS, "pil", vbNullString)
                                 RHS = Replace(RHS, "{", "(")
                                 RHS = Replace(RHS, "}", ")")
-                                cmd = LHS & "=vector((0,0)," & RHS & ")"
+                                cmd = LHS & "=Vector((0,0)," & RHS & ")"
                                 DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
                                 cmd = Replace(cmd, "+", "%2B") & ";"
                                 UrlLink = UrlLink & cmd
@@ -194,9 +194,9 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                             '                        Udtryk = Replace(Udtryk, "((", "(")
                             '                        Udtryk = Replace(Udtryk, "))", ")")
                             If VNi < 5 Then
-                                cmd = VektNArr(VNi) & "=vector((0,0)," & Udtryk & ")"
+                                cmd = VektNArr(VNi) & "=Vector((0,0)," & Udtryk & ")"
                             Else
-                                cmd = "v" & VNi - 4 & "=vector((0,0)," & Udtryk & ")"
+                                cmd = "v" & VNi - 4 & "=Vector((0,0)," & Udtryk & ")"
                             End If
                             VNi = VNi + 1
                             cmd = Replace(cmd, "+", "%2B") & ";"
@@ -1290,7 +1290,7 @@ Dim varval As String
                     geogebrafil.CreateFunction Var, varval, False, False
                 Else
 '                    UrlLink = UrlLink & Var & "=" & varval & ";"
-                    UrlLink = UrlLink & Var & "=1;" & Var & "=slider(-5,5,0.1,1,100,false,true,true,false);"
+                    UrlLink = UrlLink & Var & "=1;" & Var & "=Slider(-5,5,0.1,1,100,false,true,true,false);"
                 End If
                 DefList = DefList & "," & Var
                 ea.text = DefList
