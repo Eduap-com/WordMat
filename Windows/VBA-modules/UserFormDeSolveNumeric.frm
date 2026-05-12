@@ -873,7 +873,8 @@ Sub OpdaterDefinitioner()
    Vars = RemoveVar(Vars, TextBox_var7.text)
    Vars = RemoveVar(Vars, TextBox_var8.text)
    Vars = RemoveVar(Vars, TextBox_var9.text)
-    
+   Vars = RemoveVar(Vars, TextBox_varx.text)
+   
    If Left$(Vars, 1) = ";" Then Vars = Right$(Vars, Len(Vars) - 1)
     
    ea.text = Vars

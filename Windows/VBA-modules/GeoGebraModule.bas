@@ -328,26 +328,16 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     End If
     
     OpenGeoGebraWeb UrlLink, Gtype, False, False
-#If Mac Then ' Mac will collapse selection to prepare for insert, because minibrowser cant do it
-    If Selection.InlineShapes.Count > 0 Then
-        Selection.InlineShapes(1).Select
-    ElseIf Selection.OMaths.Count > 0 Then
-        Selection.OMaths(Selection.OMaths.Count).Range.Select
-        Selection.Collapse wdCollapseEnd
-        Selection.TypeParagraph
-    Else
-        Selection.Collapse wdCollapseEnd
-    End If
-#Else
+
     startRange.Select
-#End If
+
 fejl:
 
 slut:
     CASengineTempOnly = TempCas
 End Sub
 
-Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax As Boolean = False, Optional UseDefs As Boolean = True)
+Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax As Boolean = False, Optional UseDefs As Boolean = True, Optional Perspective As Integer = 1)
 ' Opens GeoGebra in Edge.
 ' Gtype="" for plotting. Opens in Calculator suite
 ' Gtype="classic" for plotting. Used by haeldningsfelt
@@ -430,7 +420,7 @@ Sub OpenGeoGebraWeb(ByVal cmd As String, Gtype As String, Optional ConvertSyntax
     UrlLink = UrlLink & "?" & Pars  ' "&command=" & cmd
     If QActivePartnership Then
         cmd = Replace(cmd, "%2B", "+")
-        If Not QShowGeoGebraGraph(cmd) Then
+        If Not QShowGeoGebraGraph(cmd, vbNullString, Perspective) Then
             OpenLink UrlLink, True
         End If
     Else

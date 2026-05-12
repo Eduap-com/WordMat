@@ -78,9 +78,9 @@ fejl:
 slut:
 End Function
 
-Public Function QShowGeoGebraGraph(Pars As String, Optional GeoGebraState As String) As Boolean
+Public Function QShowGeoGebraGraph(Pars As String, Optional GeoGebraState As String, Optional Perspective As Integer = 1) As Boolean
     On Error GoTo fejl
-    Application.Run macroname:="WMPShowGeoGebraGraph", varg1:=Pars, varg2:=GeoGebraState
+    Application.Run macroname:="WMPShowGeoGebraGraph", varg1:=Pars, varg2:=GeoGebraState, varg3:=Perspective
     QShowGeoGebraGraph = True
     GoTo slut
 fejl:

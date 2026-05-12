@@ -13,6 +13,87 @@ Sub OmdrejningsLegeme()
 
     'On Error GoTo fejl
 
+
+
+
+    PrepareMaxima
+    omax.ConvertLnLog = False
+    omax.ReadSelection
+    
+    
+    ' Insert selected functions
+    For i = 0 To omax.KommandoArrayLength
+        Udtryk = omax.KommandoArray(i)
+        Udtryk = Replace(Udtryk, "definer:", "")
+        Udtryk = Replace(Udtryk, "Definer:", "")
+        Udtryk = Replace(Udtryk, "define:", "")
+        Udtryk = Replace(Udtryk, "Define:", "")
+        Udtryk = Replace(Udtryk, VBA.ChrW$(8788), "=") ' :=
+        Udtryk = Replace(Udtryk, VBA.ChrW$(8797), "=") ' triple =
+        Udtryk = Replace(Udtryk, VBA.ChrW$(8801), "=") ' def =
+        Udtryk = Trim$(Udtryk)
+        If Len(Udtryk) > 0 Then
+            If InStr(Udtryk, "matrix") < 1 Then
+                If InStr(Udtryk, "=") > 0 Then
+                    Arr = Split(Udtryk, "=")
+                    LHS = Arr(0)
+                    RHS = Arr(1)
+                    ea.text = LHS
+                    fktnavn = ea.GetNextVar(1)
+                    varnavn = ea.GetNextBracketContent(1)
+                    
+                    If LHS = fktnavn & "(" & varnavn & ")" Then
+                        ea.text = RHS
+                        ea.pos = 1
+                        ea.ReplaceVar varnavn, "x"
+                        fktudtryk = ea.text
+                        DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
+                        
+                        cmd = "Surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
+                        '                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        UrlLink = UrlLink & cmd
+
+                    Else
+                        fktudtryk = ReplaceIndepvarX(RHS)
+                        DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
+                        cmd = "Surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
+                        '                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
+                        UrlLink = UrlLink & cmd
+                        j = j + 1
+                    End If
+                ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW$(8804)) > 0 Or InStr(Udtryk, VBA.ChrW$(8805)) > 0 Then
+                    ' can only be used with GeoGebra 4.0
+                    DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
+                    cmd = Replace(ConvertToGeogebraSyntax(cmd), "+", "%2B") & ";"
+                    cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ")^2-y^2" & ";"
+                    UrlLink = UrlLink & cmd
+                    '                    geogebrafil.CreateFunction "u" & j, udtryk, True
+                Else
+                    Udtryk = ReplaceIndepvarX(Udtryk)
+                    Udtryk = Replace(Udtryk, vbCrLf, "")
+                    Udtryk = Replace(Udtryk, vbCr, "")
+                    Udtryk = Replace(Udtryk, vbLf, "")
+                    DefinerKonstanter Udtryk, DefList, Nothing, UrlLink
+                    cmd = "Surface(" & Replace(ConvertToGeogebraSyntax(Udtryk), "+", "%2B") & ",2*pi);"
+                    UrlLink = UrlLink & cmd
+                    j = j + 1
+                End If
+            End If
+        End If
+    Next
+    
+    
+    OpenGeoGebraWeb UrlLink, "", False, True, 5
+
+
+
+
+
+
+
+
+Exit Sub
+
 #If Mac Then
 '    UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra3dApplet.html"
     UrlLink = "file://" & GetGeoGebraMathAppsFolder() & "GeoGebra/HTML5/5.0/GeoGebra.html?perspective=3d"
