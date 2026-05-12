@@ -329,6 +329,15 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     
     OpenGeoGebraWeb UrlLink, Gtype, False, False
 #If Mac Then ' Mac will collapse selection to prepare for insert, because minibrowser cant do it
+    If Selection.InlineShapes.Count > 0 Then
+        Selection.InlineShapes(1).Select
+    ElseIf Selection.OMaths.Count > 0 Then
+        Selection.OMaths(Selection.OMaths.Count).Range.Select
+        Selection.Collapse wdCollapseEnd
+        Selection.TypeParagraph
+    Else
+        Selection.Collapse wdCollapseEnd
+    End If
 #Else
     startRange.Select
 #End If
@@ -895,7 +904,7 @@ Sub GeoGebra()
     End If
     
 #If Mac Then
-    RunScript "OpenGeoGebra", geogebrafilersti
+    RunScript "OpenGeoGebra", geogebrafilersti, 2
 #Else
     MaxProc.RunFile geogebrasti, geogebrafilersti
 #End If

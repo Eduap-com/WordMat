@@ -79,12 +79,16 @@ Function DataFolder() As String
     mDatafolder = DataFolder
 End Function
 
-Function RunScript(ScriptName As String, Param As String) As String
+Function RunScript(ScriptName As String, Param As String, Optional ScriptFileNo As Integer = 1) As String
 ' scriptfile must be placed in ~/Library/Application Scripts/com.microsoft.Word/
 ' ~/library is a hidden folder in the user folder
 ' filetype: .scpt or .applescript
 On Error GoTo fejl
-    RunScript = AppleScriptTask("WordMatScripts.scpt", ScriptName, Param)
+    If ScriptFileNo = 1 Then
+        RunScript = AppleScriptTask("WordMatScripts.scpt", ScriptName, Param)
+    Else
+        RunScript = AppleScriptTask("WordMatScripts" & ScriptFileNo & ".scpt", ScriptName, Param)
+    End If
 GoTo slut
 fejl:
     RunScript = "ScriptError"

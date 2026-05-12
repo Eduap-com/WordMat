@@ -533,7 +533,7 @@ newcas:
                 ea.ReplaceVar variabel, "x"
                 RHS = ea.text
             End If
-            OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & ", " & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "graphing", True, True
+            OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";Intersect(" & LHS & ", " & RHS & ");" & "NSolve(" & s & "," & variabel & ")", "graphing", True, True
             GoTo slut
         ElseIf CASengine = 0 Then
             If UFSelectVar.SolveMethod = 1 Then
