@@ -88,4 +88,11 @@ fejl:
 slut:
 End Function
 
-
+Public Function QExecuteGeoGebraCAScommand(cmd As String) As String
+    On Error GoTo fejl
+    QExecuteGeoGebraCAScommand = Application.Run(macroname:="WMPExecuteGeoGebraCAScommand", varg1:=cmd)
+    GoTo slut
+fejl:
+    QExecuteGeoGebraCAScommand = vbNullString
+slut:
+End Function
