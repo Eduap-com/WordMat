@@ -38,7 +38,12 @@ https://geogebra.github.io/docs/reference/en/GeoGebra_Apps_Embedding/
 
 ###geogebra-math-apps\GeoGebra\HTML5\5.0\GeoGebra.html changed:
 
-PerspectivePopup disabled. This is important, but you may need more:
+####hide equation editor at bottom
+line 881   add the class 'keyboard-initial-hidden' to body
+<body dir="ltr" tabindex="-1" class="keyboard-initial-hidden" onload="loadApp()">
+
+
+#### PerspectivePopup disabled. This is important, but you may need more:
 In GeoGebra.html line 809:
 
 .perspectivePopup,
@@ -48,7 +53,7 @@ In GeoGebra.html line 809:
 
 
 
-Add to function loadApp() at line 423 (after updateAppletParams)
+#### Add to function loadApp() at line 423 (after updateAppletParams)
 
 		// Suppress restore dialog for locally cached unsaved work.
 		try { localStorage.clear(); } catch(e) {}

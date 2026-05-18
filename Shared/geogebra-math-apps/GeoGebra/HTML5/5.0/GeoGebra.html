@@ -12,7 +12,7 @@
 
 var latestVersion="5.4.920.0";
 var module = "web3d";
-var defaultParams = {"vendor":"GeoGebra", "preloadModules":""};
+var defaultParams = {"vendor":"GeoGebra", "preloadModules":"", "keyboardType":"noKeyboard", "showKeyboardOnFocus":"false", "showAppsPicker":"false"};
 var prerelease = false;
 var startDelay = 0;
 var marginTop = 0;
@@ -464,8 +464,10 @@ var codebase = "";
 		}
 
 		showStartScreen();
+		if ($e("ggw")) {
+			$e("ggw").setAttribute("data-param-showAppsPicker", "false");
+		}
 		insertScript();
-		perspective(false, "picker");
 		if ($e("appsPicker")) {
 			$e("appsPicker").style.display = "none";
 		}
@@ -878,7 +880,7 @@ div.SymbolTablePopup{
 </style>
 
 </head>
-<body dir="ltr" tabindex="-1" onload="loadApp()">
+<body dir="ltr" tabindex="-1"  onload="loadApp()">
 	<span data-appId="1:895270214636:web:3c05deeefcd1a96584fec9" data-measurementId="G-8JGZQG6FHG" id="fbase"></span>
 	<div id="ggbPage" style="display:none; background-color:#FFFFFF;position:absolute;top:0;bottom:0;left:0;right:0;z-index:1000;">
 
@@ -1020,7 +1022,7 @@ div.SymbolTablePopup{
 </div>
     <div id="ggw"
     data-param-useBrowserForJS="false"
-    data-param-app="true" data-param-showAppsPicker="true" ></div>
+	data-param-app="true" data-param-showAppsPicker="false" ></div>
 </body>
 <!--FIREBASE-->
 </html>
