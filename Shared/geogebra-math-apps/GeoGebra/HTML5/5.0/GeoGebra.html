@@ -12,7 +12,7 @@
 
 var latestVersion="5.4.920.0";
 var module = "web3d";
-var defaultParams = {"vendor":"GeoGebra", "preloadModules":"", "keyboardType":"noKeyboard", "showKeyboardOnFocus":"false", "showAppsPicker":"false"};
+var defaultParams = {"vendor":"GeoGebra", "preloadModules":"", "keyboardType":"noKeyboard", "showKeyboardOnFocus":"false"};
 var prerelease = false;
 var startDelay = 0;
 var marginTop = 0;
@@ -464,10 +464,8 @@ var codebase = "";
 		}
 
 		showStartScreen();
-		if ($e("ggw")) {
-			$e("ggw").setAttribute("data-param-showAppsPicker", "false");
-		}
 		insertScript();
+		perspective(false, "picker");
 		if ($e("appsPicker")) {
 			$e("appsPicker").style.display = "none";
 		}
@@ -1022,7 +1020,7 @@ div.SymbolTablePopup{
 </div>
     <div id="ggw"
     data-param-useBrowserForJS="false"
-	data-param-app="true" data-param-showAppsPicker="false" ></div>
+    data-param-app="true" data-param-showAppsPicker="true" ></div>
 </body>
 <!--FIREBASE-->
 </html>
