@@ -2529,6 +2529,10 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         Else
             ea.text = omax.Kommando
             funktion = ea.GetNextVar(1)
+            If InStr(omax.Kommando, funktion & "(" & variabel & ")") > 0 Then
+                omax.Kommando = Replace(omax.Kommando, funktion & "(" & variabel & ")", funktion)
+                omax.Kommando = Replace(omax.Kommando, funktion & "^' (" & variabel & ")", funktion & "^'")
+            End If
         End If
         UFdiffeq.Vars = omax.Vars
         UFdiffeq.DefS = omax.DefString

@@ -1,0 +1,331 @@
+<!--RibbonX Visual Designer 1.92 for Microsoft Word 14.0. XML Code produced on 2010-08-04-->
+<customUI  xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="LoadRibbon">
+<ribbon >
+ <tabs >
+  <tab	id="Tab1"	label="WordMat"	keytip="M">
+ <group	id="g1" autoScale="true">
+    <button id="button_Formler2" size="large" imageMso="FunctionsEngineeringInsertGallery" getLabel="Rib_GetLabelFormulae" getScreentip="Rib_STformelsamling" onAction="Rib_Formelsamling" getVisible="Rib_GetVisible_SMFormula"/>
+    <splitButton id="splitButton_Formler" size="large" keytip="F1" getVisible="Rib_GetVisible_SMFormulaOld">
+    <button id="button_Formler" imageMso="FunctionsEngineeringInsertGallery" getLabel="Rib_GetLabelFormulae" getScreentip="Rib_STformelsamling" onAction="Rib_Formelsamling" />
+    <menu id="FSmenu1" >
+        <menu id="Menu1" getLabel="Rib_GetLabelPercentage"	imageMso="ApplyPercentageFormat" >
+            <button id="proc1" getLabel="Rib_FSpercentage1" onAction="Rib_FSfremskriv"/>
+            <button id="Button4" getLabel="Rib_FSpercentage2" onAction="Rib_FSkapital"/>
+            <button id="proc3" getLabel="Rib_FSpercentage3" onAction="Rib_FSannuitet1"/>
+            <button id="proc4" getLabel="Rib_FSpercentage4" onAction="Rib_FSannuitet2"/>
+        </menu >
+        <menu id="Menu2" getLabel="Rib_GetLabelFunctions"	imageMso="FunctionWizard">
+         <menu id="Menulin" getLabel="Rib_GetLabelLinRegr">
+            <button id="lin1" getLabel="Rib_FSlinear1" onAction="Rib_FSlinligning"/>
+            <button id="lin2" getLabel="Rib_FSlinear2" onAction="Rib_FSberegna"/>
+            <button id="lin3" getLabel="Rib_FSlinear3" onAction="Rib_FSlinligning2"/>
+            <button id="diff1" getLabel="Rib_FSlinear4" onAction="Rib_FSdiff"/>
+         </menu >
+         <menu id="Menueksp" getLabel="Rib_GetLabelExpRegr">
+            <button id="eksp1" getLabel="Rib_FSexp1" onAction="Rib_FSekspligning"/>
+            <button id="eksp5" getLabel="Rib_FSexp2" onAction="Rib_FSekspligning2"/>
+            <button id="eksp6" getLabel="Rib_FSexp3" onAction="Rib_FSekspligning3"/>
+            <button id="eksp7" getLabel="Rib_FSexp4" onAction="Rib_FSekspligning4"/>
+            <button id="eksp2" getLabel="Rib_FSexp5" onAction="Rib_FSekspa"/>
+            <button id="eksp3" getLabel="Rib_FSexp6" onAction="Rib_FSford"/>
+            <button id="eksp4" getLabel="Rib_FSexp7" onAction="Rib_FShalv"/>
+         </menu >
+         <menu id="Menupot" getLabel="Rib_GetLabelPowRegr">
+            <button id="pot1" getLabel="Rib_FSpow1" onAction="Rib_FSpotligning"/>
+            <button id="pot2" getLabel="Rib_FSpow2" onAction="Rib_FSpota"/>
+            <button id="pot3" getLabel="Rib_FSpow3" onAction="Rib_FSpotprocvaekst"/>
+         </menu >
+         <menu id="Menupol" getLabel="Rib_GetLabelPolRegr">
+            <button id="pol1" getLabel="Rib_FSpol1" onAction="Rib_FSpol"/>
+         </menu >
+        </menu >
+        <menu id="menugeo" getLabel="Rib_GetLabelGeometry"	imageMso="DesignMode">
+            <button id="geo1" getLabel="Rib_FSgeo1" onAction="Rib_FSsinrel"/>
+            <button id="geo2" getLabel="Rib_FSgeo2" onAction="Rib_FScosrel"/>
+            <button id="geo3" getLabel="Rib_FSgeo3" onAction="Rib_FSarealtrekant"/>
+        </menu >
+        <menuSeparator id="MenuSeparator1" />
+        <menu id="menusand" getLabel="Rib_GetLabelProbabilityShort" imageMso="FunctionsStatisticalInsertGallery">
+         <menu id="menusand1" getLabel="Rib_FSBinomial">
+            <button id="sandbin2" getLabel="Rib_FSprob1" onAction="Rib_FSbinkoeff"/>
+            <button id="sandbin1" getLabel="Rib_FSprob2" onAction="Rib_FSbinfrekvens"/>
+            <button id="sandbin5" getLabel="Rib_FSprob3" onAction="Rib_FSbinkum"/>
+            <button id="sandbin3" getLabel="Rib_FSprob4" onAction="Rib_FSbinmid"/>
+            <button id="sandbin4" getLabel="Rib_FSprob5" onAction="Rib_FSbinspred"/>
+            <button id="sandbin6" getLabel="Rib_FSprob5a" onAction="Rib_FSbinusik"/>
+         </menu>
+         <menu id="menusand2" getLabel="Rib_FSNormaldist">
+            <button id="sandnorm1" getLabel="Rib_FSprob6" onAction="Rib_FSnormfrekvens"/>
+            <button id="sandnorm2" getLabel="Rib_FSprob7" onAction="Rib_FSnormkum"/>
+         </menu>
+         <menu id="menusand3" getLabel="Rib_FSChi2dist">
+            <button id="sandchiford" getLabel="Rib_FSprob8" onAction="Rib_FSchi2ford"/>
+         </menu>
+        </menu>
+        <menu id="menuinf" getLabel="Rib_GetLabelInfinitesimalShort" image="Infinitesimal">
+            <button id="omdrejlegeme" getLabel="Rib_FSinf1" onAction="Rib_FSomdrejlegeme"/>
+            <button id="kurvel" getLabel="Rib_FSinf2" onAction="Rib_FSkurvelaengde"/>
+            <button id="middelv" getLabel="Rib_FSinf3" onAction="Rib_FSmiddelv"/>
+        </menu>
+        <menu id="menuvektor" getLabel="Rib_GetLabelVector" imageMso="ShapeStraightConnectorArrow">
+        <menu id="menuplangeo" getLabel="Rib_FS2D">
+            <button id="planlinjelign" getLabel="Rib_FSvec1" onAction="Rib_FSplanlinjelign"/>
+            <button id="planparamlinje" getLabel="Rib_FSvec2" onAction="Rib_FSplanparamlinje"/>
+            <button id="vektorvinkel" getLabel="Rib_FSvec3" onAction="Rib_FSvektorvinkel"/>
+            <button id="vektordist" getLabel="Rib_FSvec4" onAction="Rib_FSdistpunkt"/>
+            <button id="vektorproj" getLabel="Rib_FSvec5" onAction="Rib_FSvektorproj"/>
+            <button id="cirkelligning" getLabel="Rib_FSvec6" onAction="Rib_FScirklensligning"/>
+        </menu>
+        <menu id="menurumgeo" getLabel="Rib_FS3D">
+            <button id="rumparamlinje" getLabel="Rib_FSvec7" onAction="Rib_FSrumparamlinje"/>
+            <button id="vektorvinkelrum" getLabel="Rib_FSvec8" onAction="Rib_FSvektorvinkel"/>
+            <button id="vektorprojrum" getLabel="Rib_FSvec9" onAction="Rib_FSvektorproj"/>
+            <button id="rumafstandpunktlinje" getLabel="Rib_FSvec10" onAction="Rib_FSrumpunktlinje"/>
+            <button id="rumligningplan" getLabel="Rib_FSvec11" onAction="Rib_FSrumligningplan"/>
+            <button id="rumligningplan2" getLabel="Rib_FSvec12" onAction="Rib_FSrumligningplan2"/>
+            <button id="rumafstandpunktplan" getLabel="Rib_FSvec13" onAction="Rib_FSrumafstandpunktplan"/>
+            <button id="rumafstandpunktplan2" getLabel="Rib_FSvec14" onAction="Rib_FSrumafstandpunktplan2"/>
+            <button id="kugleligning" getLabel="Rib_FSvec15" onAction="Rib_FSkuglensligning"/>
+             </menu>
+            </menu>
+        <menuSeparator id="MenuSeparator2" />
+        <button id="matformler" getLabel="Rib_GetLabelMath" showImage="true" imageMso="M" onAction="Rib_matformler" getScreentip="Rib_STmathformula"/>
+        <button id="fysikformler" getLabel="Rib_GetLabelPhysics" showImage="true" imageMso="F" onAction="Rib_fysikformler" getScreentip="Rib_STphysicsformula"/>
+        <button id="kemiformler" getLabel="Rib_GetLabelChemistry" showImage="true" imageMso="K" onAction="Rib_kemiformler" getScreentip="Rib_STchemistryformula"/>            
+	</menu >
+    </splitButton>       
+</group >
+    
+<group id="g2"	getLabel="Rib_GetLabelSettings">   
+	<toggleButton id="togglebuttonAuto" getVisible="Rib_GetVisible_SMSettingAEN"
+            imageMso="A"
+		keytip="A"
+		getScreentip="Rib_STauto1"
+		getSupertip="Rib_STauto2"
+		getPressed="Rib_GetPressedAuto"
+            onAction="Rib_Auto" />
+          <toggleButton id="togglebuttonExact" 
+            imageMso="E" getVisible="Rib_GetVisible_SMSettingAEN"
+		keytip="E"
+		getScreentip="Rib_STexact1"
+		getSupertip="Rib_STexact2"
+		getPressed="Rib_GetPressedExact"
+            onAction="Rib_Exact" />
+          <toggleButton id="togglebuttonNum" 
+            imageMso="N" getVisible="Rib_GetVisible_SMSettingAEN"
+		keytip="N"
+		getScreentip="Rib_STnum1"
+		getSupertip="Rib_STnum2"
+		getPressed="Rib_GetPressedNum"
+            onAction="Rib_num" />
+	<separator  id="Separator2" getVisible="Rib_GetVisible_SMSettingAEN" />
+	<menu id="menu_cifre" getLabel="Rib_getLabelCiffer" getScreentip="Rib_STbetcif1" getSupertip="Rib_STbetcif2" keytip="C1" getVisible="Rib_GetVisible_SMSettingDecimals">
+	    <button id="b2" label="2" tag="2" onAction="Rib_Ciffer" />
+	    <button id="b3" label="3" tag="3" onAction="Rib_Ciffer" />
+	    <button id="b4" label="4" tag="4" onAction="Rib_Ciffer" />
+	    <button id="b5" label="5" tag="5" onAction="Rib_Ciffer" />
+	    <button id="b6" label="6" tag="6" onAction="Rib_Ciffer" />
+	    <button id="b7" label="7" tag="7" onAction="Rib_Ciffer" />
+	    <button id="b8" label="8" tag="8" onAction="Rib_Ciffer" />
+	    <button id="b9" label="9" tag="9" onAction="Rib_Ciffer" />
+	    <button id="b10" label="10" tag="10" onAction="Rib_Ciffer" />
+	    <button id="b11" label="11" tag="11" onAction="Rib_Ciffer" />
+	    <button id="b12" label="12" tag="12" onAction="Rib_Ciffer" />
+	    <button id="b13" label="13" tag="13" onAction="Rib_Ciffer" />
+	    <button id="b14" label="14" tag="14" onAction="Rib_Ciffer" />
+	    <button id="b15" label="15" tag="15" onAction="Rib_Ciffer" />
+	    <button id="b16" label="16" tag="16" onAction="Rib_Ciffer" />
+	    </menu>
+	        
+      <toggleButton id="togglebuttonUnits" imageMso="U"  keytip="U1" getVisible="Rib_GetVisible_SMSettingUnits"
+		getScreentip="Rib_STunit1" getSupertip="Rib_STunit2"
+		getPressed="Rib_GetPressedUnit" onAction="Rib_unit" />
+
+      <toggleButton id="togglebuttonRad" label="rad" getVisible="Rib_GetVisible_SMSettingRadians"
+		getScreentip="Rib_STrad1" getSupertip="Rib_STrad2"
+		getPressed="Rib_GetPressedRad" onAction="Rib_rad" keytip="P"/>
+
+	<menu id="menu_decimaler" getLabel="Rib_getLabelDecimaler" getScreentip="Rib_STDecimaler1" getSupertip="Rib_STDecimaler2" keytip="C2" getVisible="Rib_GetVisible_SMSettingDecimals">
+	    <button id="bdec" getLabel="Rib_getLabelDecimal" tag="1" onAction="Rib_decimaler" />
+	    <button id="bbc" getLabel="Rib_getLabelBC" tag="2" onAction="Rib_decimaler" />
+	    <button id="bvid" getLabel="Rib_getLabelVid" tag="3" onAction="Rib_decimaler" getScreentip="Rib_STsci1" getSupertip="Rib_STsci2" />
+	    </menu>
+
+	  <button id="bUnits" getLabel="Rib_GetLabelChangeUnits" getScreentip="Rib_STunit3" getSupertip="Rib_STunit4" onAction="Rib_ChangeUnits" keytip="U2" getVisible="Rib_GetVisible_SMSettingUnits"/>
+
+    <button id="Button6" imageMso="AddInManager" getScreentip="Rib_STset1" getSupertip="Rib_STset2"
+         description="Lav ændringer i indstillingerne"  onAction="Rib_Settings" keytip="I"/>
+
+    <dialogBoxLauncher>
+        <button id="button_SettingsDiag" getScreentip="Rib_GetLabelSettings" onAction="Rib_Settings" keytip="J"/>
+    </dialogBoxLauncher>
+</group >
+	    
+<group id="g3" label="CAS">
+	<splitButton id="sberegn" size="large" keytip="B" getVisible="Rib_GetVisible_SMCASCalculate">
+		<button id="Button8" imageMso="Calculator" keytip="B" description="titel" getScreentip="Rib_STcalc1" getSupertip="Rib_STcalc2" showImage="true"	getLabel="Rib_GetLabelBeregn" onAction="Rib_Beregn"/>
+		<menu id="menuberegn" label="def">
+			<button id="ButtonOmskriv" imageMso="TextAllCaps" getLabel="Rib_GetLabelReduce"	keytip="O" getScreentip="Rib_STreduce1"	getSupertip="Rib_STreduce2"	showImage="true" onAction="Rib_Omskriv" getVisible="Rib_GetVisible_SMCASReduceMenu" />
+            <button id="simp" getLabel="Rib_GetLabelSimplify" onAction="Rib_reducer" getScreentip="Rib_STsimplify1"	getSupertip="Rib_STsimplify2" getVisible="Rib_GetVisible_SMCASReduce"/>
+            <button id="factor" getLabel="Rib_GetLabelFactor" onAction="Rib_faktoriser" getScreentip="Rib_STfactor1"	getSupertip="Rib_STfactor2" getVisible="Rib_GetVisible_SMCASFactor"/>
+            <button id="udvid" getLabel="Rib_GetLabelExpand" onAction="Rib_udvid" getScreentip="Rib_STexpand1"	getSupertip="Rib_STexpand2" getVisible="Rib_GetVisible_SMCASExpand"/>
+						
+            <menuSeparator id="MenuSepaBeregn1"/>
+            <button id="Differentier" getLabel="Rib_GetLabelDifferentiate" getScreentip="Rib_STdiff1" getSupertip="Rib_STdiff2" onAction="Rib_diff" getVisible="Rib_GetVisible_SMCASDifferentiate" />
+            <button id="Stamfunktion" getLabel="Rib_GetLabelIntegrate" getVisible="Rib_GetVisible_SMCASIntegrate" getScreentip="Rib_STint1" imageMso="EquationIntegralGallery" getSupertip="Rib_STint2" onAction="Rib_stam"/>
+
+           <menuSeparator id="MenuSepaBeregn2"/>
+            <button id="ButtonMaxima" getVisible="Rib_GetVisible_SMCASMaximaCommand" imageMso="Calculator" keytip="M" description="Maxima Kommando"	getScreentip="Rib_STmaxima1" getSupertip="Rib_STmaxima2" getLabel="Rib_GetLabelMaximaCommand" showImage="true" onAction="Rib_MaximaKommando"/>
+        </menu>
+	</splitButton>
+
+	<splitButton id="sbsolve" size="large" keytip="L" getVisible="Rib_GetVisible_SMCASSolve">
+		<button id="ButtonSolve" imageMso="X" getLabel="Rib_GetLabelSolve" keytip="L" showImage="true" getScreentip="Rib_STsolve1" getSupertip="Rib_STsolve2" onAction="Rib_Solve" />
+            <menu id="menusolve" label="def">
+				<button id="solvenum" getLabel="Rib_GetLabelSolveNum" onAction="Rib_solvenum" getScreentip="Rib_STsolvenum1" getSupertip="Rib_STsolvenum2" getVisible="Rib_GetVisible_SMCASNSolve"/>
+				<button id="eliminate" getLabel="Rib_GetLabelEliminate" onAction="Rib_eliminate" getScreentip="Rib_STeliminate1" getSupertip="Rib_STeliminate2" getVisible="Rib_GetVisible_SMCASEliminate"/>
+				<button id="test" getLabel="Rib_GetLabelTestTF" onAction="Rib_test" getScreentip="Rib_STtest1"	getSupertip="Rib_STtest2" getVisible="Rib_GetVisible_SMCASTest"/>
+				<button id="solvede" getLabel="Rib_GetLabelSolveDE" onAction="Rib_solvede"  getScreentip="Rib_STsolvede1"	getSupertip="Rib_STsolvede2" getVisible="Rib_GetVisible_SMCASSolveDE"/>
+				<button id="solvedenum" getLabel="Rib_GetLabelSolveDEnum" onAction="Rib_solvedenum"  getScreentip="Rib_STsolvedenum1"	getSupertip="Rib_STsolvedenum2" getVisible="Rib_GetVisible_SMCASSolveDEC"/>
+			</menu>
+	</splitButton>
+	<splitButton id="sbuttonDef" size="large"  keytip="D" getVisible="Rib_GetVisible_SMDef">
+		<button id="ButtonDefiner" imageMso="FunctionWizard" label="Def." keytip="D" getScreentip="Rib_STdef1"	getSupertip="Rib_STdef2" showImage="true" onAction="Rib_Definitioner" />
+			<menu id="menudef" label="def">
+				<button id="defsletdef" getLabel="Rib_GetLabelDeleteDefs" onAction="Rib_sletdef" getScreentip="Rib_STsletdef1"	getSupertip="Rib_STsletdef2" imageMso="Delete" getVisible="Rib_GetVisible_SMDefDelete"/>
+				<button id="deffunkt" getLabel="Rib_GetLabelDefineFunction" imageMso="FunctionWizard" onAction="Rib_deffunk" getScreentip="Rib_STdefine1"	getSupertip="Rib_STdefine2" getVisible="Rib_GetVisible_SMDefFunction"/>
+				<button id="defkonstanter" getLabel="Rib_GetLabelDefineConstants"  onAction="Rib_defkonstanter" getScreentip="Rib_STdefconst1"	getSupertip="Rib_STdefconst2" getVisible="Rib_GetVisible_SMDefConstants"/>
+				<button id="defcodeblock" getLabel="Rib_GetLabelInsertCodeBlock"  onAction="Rib_InsertCodeBlock" getScreentip="Rib_STinsertCodeBlock"	getSupertip="Rib_STinsertCodeBlock2" getVisible="Rib_GetVisible_SMDefCodeBlock"/>
+			</menu>
+		</splitButton>
+</group >
+
+<group id="gplot"	getLabel="Rib_GetLabelPlotting" autoScale="false">
+	<splitButton id="sbuttongraf" size="large" keytip="V" getVisible="Rib_GetVisible_SMGraphs">
+		<button id="ButtonGraf"	imageMso="ChartTrendline" getLabel="Rib_GetLabelShowGraph" keytip="V" getScreentip="Rib_STplot1" getSupertip="Rib_STplot2" showImage="true"	onAction="Rib_graf"/>
+		<menu id="menuvisgraf" label="grafer">
+			<button id="ButtonGeoGebra" image="GeoGebra" label="GeoGebra Calculator Suite" keytip="B" getScreentip="Rib_STgeogebraBplot1" getSupertip="Rib_STgeogebraBplot2" showImage="true" onAction="Rib_GeoGebraB" getVisible="Rib_GetVisible_SMGraphsGeogebraSuite"/>
+			<button id="ButtonGeoGebra5" image="GeoGebra" label="GeoGebra 5" getScreentip="Rib_STgeogebraplot1" getSupertip="Rib_STgeogebraplot2" showImage="true" onAction="Rib_GeoGebra" getVisible="Rib_GetVisible_SMGraphsGeogebra5"/>
+			<button id="gnuplotobj" label="GnuPlot" imageMso="ChartTrendline" showImage="true"  getScreentip="Rib_STgnuplot1" getSupertip="Rib_STgnuplot2" onAction="Rib_gnuplot" getVisible="Rib_GetVisible_SMGraphsGnuPlot"/>
+			<button id="graphobj" label="Graph" image="Graph" showImage="true" 	getScreentip="Rib_STgraphplot1" getSupertip="Rib_STgraphplot2" onAction="Rib_graphobj" getVisible="Rib_GetVisible_SMGraphsGraph"/>
+			<button id="excelobj" label="Excel" imageMso="TableExcelSpreadsheetInsert" showImage="true"	getScreentip="Rib_STexcelplot1" getSupertip="Rib_STexcelplot2" onAction="Rib_excelobj" getVisible="Rib_GetVisible_SMGraphsExcel"/>
+		<menuSeparator id="MenuSepa"/>
+			<button id="retningsfeltm" image="Retningsfelt" getLabel="Rib_GetLabelDirectionField" getScreentip="Rib_STretnfelt1" getSupertip="Rib_STretnfelt2" onAction="Rib_retningsfelt" getVisible="Rib_GetVisible_SMGraphsDirectionField"/>
+		</menu>
+	</splitButton>
+	<splitButton id="sbutton3d" size="large" keytip="3" getVisible="Rib_GetVisible_SMGraphs3D">
+		<button id="plo3d" getLabel="Rib_GetLabel3DPlot"  imageMso="_3DSurfaceWireFrameClassic" showImage="true" getScreentip="Rib_ST3dplot1" getSupertip="Rib_ST3dplot2" onAction="Rib_plot3d" />
+		<menu>
+			<button id="omdrejlegm" getLabel="Rib_GetLabel3DRotate" imageMso="_3DTiltUpClassic" showImage="true" getScreentip="Rib_STomdleg1" getSupertip="Rib_STomdleg2" onAction="Rib_omdrejningslegeme" getVisible="Rib_GetVisible_SMGraphs3DSolidRev"/>
+		</menu>
+	</splitButton>
+	<splitButton id="sbuttonstatistik" size="large" keytip="S" getVisible="Rib_GetVisible_SMGraphsStatistics">
+		<button id="ButtonStatistik" imageMso="ChartInsert" getLabel="Rib_GetLabelStatistics" keytip="S" getScreentip="Rib_STstat1" getSupertip="Rib_STstat2" showImage="true" onAction="Rib_Statistik"/>
+		<menu id="smenustatistik" label="Statistik diagrammer">
+			<button id="suGrupperedeobservationer" getLabel="Rib_GetLabelUgrup" imageMso="FileSaveAsExcelXlsx" showImage="true" getScreentip="Rib_STugrup1" getSupertip="Rib_STugrup2" onAction="Rib_ugrupobs" getVisible="Rib_GetVisible_SMGraphsStatisticsUgrup"/>
+			<button id="Grupperedeobservationer" getLabel="Rib_GetLabelGrup" imageMso="FileSaveAsExcelXlsx" showImage="true" getScreentip="Rib_STgrup1" getSupertip="Rib_STgrup2" onAction="Rib_grupobs" getVisible="Rib_GetVisible_SMGraphsStatisticsGrup"/>
+		<menuSeparator id="MenuSepa2"/>
+			<button id="pindediagram" getLabel="Rib_GetLabelStickChart" imageMso="ChartSecondaryVerticalAxis" showImage="true" getScreentip="Rib_STpinde1" getSupertip="Rib_STpinde2" onAction="Rib_pindediagram" getVisible="Rib_GetVisible_SMGraphsStatisticsStickChart"/>
+			<button id="histogram" getLabel="Rib_GetLabelHistogram" imageMso="ChartGridlines" showImage="true" getScreentip="Rib_SThist1" getSupertip="Rib_SThist2" onAction="Rib_histogram" getVisible="Rib_GetVisible_SMGraphsStatisticsHistogram"/>
+			<button id="trappediagram" getLabel="Rib_GetLabelStepChart" imageMso="ChartLines" showImage="true" getScreentip="Rib_STtrap1" getSupertip="Rib_STtrap2" onAction="Rib_trappediagram" getVisible="Rib_GetVisible_SMGraphsStatisticsStair"/>
+			<button id="sumkurve" getLabel="Rib_GetLabelCumChart" imageMso="ChartLines" showImage="true" getScreentip="Rib_STsumkurve1" getSupertip="Rib_STsumkurve2" onAction="Rib_sumkurve" getVisible="Rib_GetVisible_SMGraphsStatisticsSumCurve"/>
+			<button id="boksplot" getLabel="Rib_GetLabelBoxPlot" imageMso="ObjectsAlignDistributeHorizontallyRemove" showImage="true" getScreentip="Rib_STboksplot1" getSupertip="Rib_STboksplot2" onAction="Rib_boksplot" getVisible="Rib_GetVisible_SMGraphsStatisticsBoxPlot"/>
+		</menu>
+	</splitButton>
+</group >
+
+<group id="gstat" getLabel="Rib_GetLabelStatProb" autoScale="true" getVisible="Rib_GetVisible_SMProb">
+	<menu id="mRegression" getLabel="Rib_GetLabelRegression" getScreentip="Rib_STregr1" getSupertip="Rib_STregr2" imageMso="ChartTrendline"  keytip="R" getVisible="Rib_GetVisible_SMProbRegression">
+		<button id="regrtabel" getLabel="Rib_GetLabelInsertTable" getScreentip="Rib_STtable1" getSupertip="Rib_STtable2" onAction="Rib_regrtabel" getVisible="Rib_GetVisible_SMProbRegressionTable"/>
+		<menuSeparator id="myMenuSep1"/>
+		<button id="regrlin" getLabel="Rib_GetLabelLinRegr" onAction="Rib_regrlin" getVisible="Rib_GetVisible_SMProbRegressionLin"/>
+		<button id="regreksp" getLabel="Rib_GetLabelExpRegr" onAction="Rib_regreksp" getVisible="Rib_GetVisible_SMProbRegressionExp"/>
+		<button id="regrpot" getLabel="Rib_GetLabelPowRegr" onAction="Rib_regrpot" getVisible="Rib_GetVisible_SMProbRegressionPow"/>
+		<button id="regrpol" getLabel="Rib_GetLabelPolRegr" onAction="Rib_regrpol" getVisible="Rib_GetVisible_SMProbRegressionPol"/>
+		<button id="regrsin" getLabel="Rib_GetLabelSinRegr" onAction="Rib_regrsin" getVisible="Rib_GetVisible_SMProbRegressionSin"/>
+        <menuSeparator id="MenuSep"/>
+		<button id="regrexcel" getLabel="Rib_GetLabelRegrExcel" onAction="Rib_regrexcel" getVisible="Rib_GetVisible_SMProbRegressionExcel"/>
+        <menuSeparator id="myMenuSep9"/>
+		<button id="regruser" getLabel="Rib_GetLabelUserRegr" onAction="Rib_regruser" getVisible="Rib_GetVisible_SMProbRegressionUser"/>
+	</menu >
+	<menu id="mFordelinger" getLabel="Rib_GetLabelDistributions" imageMso="ShapeCurve" getScreentip="Rib_STdistrib1" getSupertip="Rib_STdistrib2" keytip="F2" getVisible="Rib_GetVisible_SMProbDistributions">
+		<button id="Buttonbinomialfordeling" getLabel="Rib_GetLabelBinomDist" getScreentip="Rib_STbinom1" getSupertip="Rib_STbinom2" onAction="Rib_binomialfordeling" getVisible="Rib_GetVisible_SMProbDistributionsBinomial"/>
+		<button id="Buttonnormalfordeling" getLabel="Rib_GetLabelNormalDist" getScreentip="Rib_STnorm1" getSupertip="Rib_STnorm2" onAction="Rib_normalfordelinggraf"  getVisible="Rib_GetVisible_SMProbDistributionsNormal"/>
+		<button id="ButtonChi2fordeling" getLabel="Rib_GetLabelChi2Dist" getScreentip="Rib_STchi21" getSupertip="Rib_STchi22" showImage="true" onAction="Rib_chi2fordelinggraf"  getVisible="Rib_GetVisible_SMProbDistributionsChi"/>
+		<button id="Buttontfordeling" getLabel="Rib_GetLabeltDist" getScreentip="Rib_STt1" getSupertip="Rib_STt2" showImage="true" onAction="Rib_tfordelinggraf"  getVisible="Rib_GetVisible_SMProbDistributionsT"/>
+	</menu>
+	<menu id="mTest" getLabel="Rib_GetLabelTest" getScreentip="Rib_STtestmenu1" getSupertip="Rib_STtestmenu2" imageMso="DataValidation" keytip="Tes" getVisible="Rib_GetVisible_SMProbTests">
+		<button id="ButtonBinomtest" getLabel="Rib_GetLabelBinomTest" keytip="B" getScreentip="Rib_STbinomtest1" getSupertip="Rib_STbinomtest2" onAction="Rib_binomialtest" getVisible="Rib_GetVisible_SMProbTestsBinomial"/>
+		<button id="ButtonGoodnessoffit" label="Goodness of fit" keytip="x"	getScreentip="Rib_STgof1" getSupertip="Rib_STgof2" onAction="Rib_goodnessoffit" getVisible="Rib_GetVisible_SMProbTestsNormal"/>
+		<button id="ButtonChi2"	getLabel="Rib_GetLabelChi2Test" keytip="x" getScreentip="Rib_STchitest1" getSupertip="Rib_STchitest2" showImage="true" onAction="Rib_chi2test" getVisible="Rib_GetVisible_SMProbTestsChi"/>
+		<button id="ButtonSimulering"	getLabel="Rib_GetLabelSimulation" keytip="S" getScreentip="Rib_STsim1" getSupertip="Rib_STsim2" onAction="Rib_simulering" getVisible="Rib_GetVisible_SMProbTestsSimulation"/>
+	</menu>
+</group >
+<group id="gdiv" getLabel="Rib_GetLabelDiverse" autoScale="true" getVisible="Rib_GetVisible_SMOther">
+	<button id="ButtonNylign2" size="large" imageMso="EquationInsertNew" getLabel="Rib_GetLabelNewEquation" keytip="N" getScreentip="Rib_STneweq1" getSupertip="Rib_STneweq2" showImage="true" onAction="Rib_nylign" getVisible="Rib_GetVisible_SMOtherNewEq" />
+	<splitButton id="sbuttonnewequation" size="large" keytip="M" getVisible="Rib_GetVisible_SMOtherNewEqNum">
+		<button id="ButtonNylign" imageMso="EquationInsertNew" getLabel="Rib_GetLabelNewEquation" keytip="N" getScreentip="Rib_STneweq1" getSupertip="Rib_STneweq2" showImage="true" onAction="Rib_nylign"/>
+		<menu>
+			<button id="ButtonNumEq" imageMso="EquationInsertNew"	getLabel="Rib_GetLabelNumEquation" getScreentip="Rib_STnumeq1" getSupertip="Rib_STnumeq2" showImage="true" onAction="Rib_nynumlign"/>
+            <menuSeparator id="MenueqSepa1"/>
+			<button id="ButtonNumEqRef" imageMso="EquationInsertNew" getLabel="Rib_GetLabelNumEquationRef" getScreentip="Rib_STrefeq1" getSupertip="Rib_STrefeq2" showImage="true"	onAction="Rib_nynumlignref"/>
+			<button id="ButtonRefEq" getLabel="Rib_GetLabelRefEquation" getScreentip="Rib_STinsrefeq1" getSupertip="Rib_STinsrefeq2" showImage="true" imageMso="FileLinksToFiles" onAction="Rib_reflign"/>
+            <menuSeparator id="MenueqSepa2"/>
+			<button id="ButtonSetEqNo" getLabel="Rib_GetLabelSetEquationNo" getScreentip="Rib_STseteqno1" getSupertip="Rib_STseteqno2" imageMso="_1" showImage="true" onAction="Rib_seteqno"/>
+			<button id="ButtonInsertEquationSection"	getLabel="Rib_GetLabelInsertEquationSection" getScreentip="Rib_STeqsection1" getSupertip="Rib_STeqsection2"	imageMso="PageNumbersInHeaderInsertGallery" showImage="true" onAction="Rib_inserteqsec"/>
+            <menuSeparator id="MenueqSepa3"/>
+			<button id="ButtonUpdateEqNo"	getLabel="Rib_GetLabelUpdateEqNo" getScreentip="Rib_STequpdate1" getSupertip="Rib_STequpdate2" showImage="true"	imageMso="RecurrenceEdit" onAction="Rib_updateeqno"/>
+		</menu>
+	</splitButton>
+	<splitButton id="sbuttonLatex" size="large" keytip="Tex" getVisible="Rib_GetVisible_SMOtherLatex">
+		<button id="TilLatex"  onAction="Rib_TilLaTex" keytip="L" image="Latex" showImage="true" getScreentip="Rib_STlatex1" getSupertip="Rib_STlatex2" 	/>
+		<menu>
+			<button id="ButtonConvLatex" label="Eq &#x2192; LaTex" getScreentip="Rib_STConvLatex1" getSupertip="Rib_STConvLatex2" onAction="Rib_ConvLatex"/>
+            <menuSeparator id="MenuLatexSepa1"/>
+			<button id="ButtonConvPDFLatex"	label="Doc &#x2192; LaTex(.pdf)" screentip="Convert to Latex pdf-file (Alt+Q)" supertip="Converts the entire document to a Latex pdf-file using MikTex pdfLatex and opens in default pdf-viewer" onAction="Rib_ConvPDFLatex"/>
+			<button id="ButtonConvDocToLatex"	label="Doc &#x2192; LaTex(.tex)" screentip="Convert to Latex .tex-file" supertip="Converts the entire document to a Latex tex-file using MikTex pdfLatex and opens in default tex-viewer (TexWorks, TexMaker, ...)" onAction="Rib_ConvTexLatex"/>
+            <menuSeparator id="MenuLatexSepa2"/>
+			<button id="ButtonConvDocToHtml"	label="Doc &#x2192; Html" screentip="Convert to Html" supertip="Converts the selection or entire document to html, converting equations to LaTex or embedded images." onAction="Rib_ConvHtml"/>
+            <menuSeparator id="MenuLatexSepa3"/>
+			<button id="ButtonLatexTemplate" getLabel="Rib_GetLabelLatexTemplate" getScreentip="Rib_STlatextemplate1" getSupertip="Rib_STlatextemplate2" onAction="Rib_LatexTemplate"/>
+		</menu>
+	</splitButton>
+	<button id="TriangleSolver" getLabel="Rib_GetLabelTriangle" imageMso="ShapeIsoscelesTriangle" keytip="Tre" getScreentip="Rib_STtriangle1" getSupertip="Rib_STtriangle2" showImage="true" onAction="Rib_trianglesolver" getVisible="Rib_GetVisible_SMOtherTriangle"/>
+	<button id="OpenFigurer" getLabel="Rib_GetLabelFigurs" imageMso="PicturePositionGallery" getScreentip="Rib_STfigur1" getSupertip="Rib_STfigur2" showImage="true" onAction="Rib_figurer" keytip="F3" getVisible="Rib_GetVisible_SMOtherFigurs"/>
+	<menu id="mtabel" getLabel="Rib_GetLabelTable" imageMso="CreateTable" keytip="Tab" getScreentip="Rib_STtables1" getSupertip="Rib_STtables2" showImage="true" getVisible="Rib_GetVisible_SMOtherTable">
+		<button id="TabelToList" getLabel="Rib_GetLabelTableToList"	keytip="L" getScreentip="Rib_STtolist1" getSupertip="Rib_STtolist2" onAction="Rib_TabelToList"/>
+		<button id="ListToTabel" getLabel="Rib_GetLabelListToTable"	keytip="T" getScreentip="Rib_STtotable1" getSupertip="Rib_STtotable2" onAction="Rib_ListToTabel"/>
+		<button id="InsertExcel" getLabel="Rib_GetLabelInsertExcel" imageMso="ChartShowData" keytip="E"	getScreentip="Rib_STembedexcel1" getSupertip="Rib_STembedexcel2" showImage="true" onAction="Rib_insertexcel"/>
+	</menu>
+</group >
+    
+<group id="ghelp" getLabel="Rib_GetLabelHelp" autoScale="true">
+	<button id="ButtonGenveje" getLabel="Rib_GetLabelShortcuts" size="large" keytip="G" getScreentip="Rib_STgenveje1" getSupertip="Rib_STgenveje2" showImage="true" imageMso="Thesaurus" onAction="Rib_Genveje"/>
+	<menu id="menumanual" size="large" getLabel="Rib_GetLabelManual" imageMso="FunctionsLogicalInsertGallery">
+		<button id="ButtonHelpOnline"	imageMso="FunctionsLogicalInsertGallery" label="WWW (HTML)" keytip="O" getScreentip="Rib_STwebmanual1" getSupertip="Rib_STwebmanual2" showImage="true" onAction="Rib_HelpOnline"/>
+		<button id="ButtonHelp" imageMso="FunctionsLogicalInsertGallery" label="DOCX" keytip="H" getScreentip="Rib_STmanual1" getSupertip="Rib_STmanual2" showImage="true" onAction="Rib_Help"/>
+		<button id="ButtonHelpPDF" imageMso="FunctionsLogicalInsertGallery" label="PDF" keytip="P"  showImage="true" onAction="Rib_HelpPDF"/>
+		<menuSeparator id="myMenuSep3"/>
+		<button id="ButtonHelpMaxima" imageMso="FunctionsLogicalInsertGallery" getLabel="Rib_GetLabelMaximaHelp" keytip="O" getScreentip="Rib_STmaxmanual1" getSupertip="Rib_STmaxmanual2" showImage="true" onAction="Rib_HelpMaxima"/>
+	</menu>
+	<splitButton id="sbuttonupdate" size="normal" keytip="Op">
+		<button id="ButtonCheckUpdate" getLabel="Rib_GetLabelUpdate" keytip="C" getScreentip="Rib_STupdate1" getSupertip="Rib_STupdate2" showImage="true" imageMso="RecurrenceEdit" onAction="Rib_CheckForUpdate"/>			
+   		<menu>
+            <button id="ButtonCheckUpdate2" getLabel="Rib_GetLabelUpdate" getScreentip="Rib_STupdate1" getSupertip="Rib_STupdate2" showImage="true" imageMso="RecurrenceEdit" onAction="Rib_CheckForUpdate"/>			
+            <button id="ButtonCheckUpdateBeta" getLabel="Rib_GetLabelUpdateBeta" getScreentip="Rib_STupdatebeta1" getSupertip="Rib_STupdatebeta2" showImage="true" imageMso="RecurrenceEdit" onAction="Rib_CheckForUpdateBeta"/>			
+            <button id="ButtonCheckUpdateGeoGebra" label="Update/Install GeoGebra 5" screentip="Donwloads or Updates GeoGebra 5" showImage="true" imageMso="RecurrenceEdit" onAction="Rib_CheckForUpdateGeoGebra"/>
+		</menu>
+	</splitButton>
+	<button id="ButtonOm" getLabel="Rib_GetLabelAbout" keytip="Om" getScreentip="Rib_STabout1" getSupertip="Rib_STabout2" showImage="true" imageMso="WorkflowPending" onAction="Rib_om"/>
+
+	<menu id="menuwordmatplus" size="normal" getLabel="Rib_GetLabelWordMatPlus" imageMso="MenuAddACalendar">
+		<button id="ButtonBuyWMP" getLabel="Rib_GetLabelPurchaseWordMatPlus" keytip="B"  imageMso="CalculatedCurrency" onAction="Rib_PurchaseWordMatPlus"/>
+		<button id="ButtonActivateWMPcode" getLabel="Rib_GetLabelActivateWordMatPlusCode" keytip="A"  imageMso="AdpPrimaryKey" onAction="Rib_ActivateWordMatPlusCode"/>
+		<button id="ButtonCheckForWMP" getLabel="Rib_GetLabelCheckForWordMatPlus" keytip="C"  imageMso="ApproveApprovalRequest" onAction="Rib_CheckForWordMatPlus"/>
+	</menu>
+
+</group >
+   </tab >
+  </tabs >
+ </ribbon >
+</customUI >

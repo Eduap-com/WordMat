@@ -1,0 +1,1 @@
+VBAextract.exe export --dotm WordMat.dotm --folder Modules --UI

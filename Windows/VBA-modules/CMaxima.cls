@@ -2975,7 +2975,6 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     
 
     ' |x| -> abs(x) '
-    If CASengine = 0 Then
     ea.text = text
     i = 0
     Do
@@ -3017,7 +3016,6 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     End If
     i = 0
     text = ea.text
-   End If
 
     ' find implied parentheses after ^ and / ' (must be after diff and other functions with comma)
     ea.text = text
