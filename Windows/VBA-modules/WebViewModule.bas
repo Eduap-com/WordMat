@@ -145,8 +145,8 @@ Function ExecuteGeoGebraCasCommand(CmdString As String, Optional UseDefs As Bool
         If GeoGebraDefs <> "" Then
             ArrDef = Split(GeoGebraDefs, ";")
             For i = 0 To UBound(ArrDef)
-                JS = JS & "ggbApplet.evalCommand(""" & ArrDef(i) & """);"
-                cmd = ArrDef(i) & ";" & cmd
+'                JS = JS & "ggbApplet.evalCommand(""" & ArrDef(i) & """);"
+                cmd = Replace(ArrDef(i), "=", ":") & ";" & cmd ' for CAS commands, definitions must be with :
             Next
         End If
     

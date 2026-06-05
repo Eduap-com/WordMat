@@ -2640,7 +2640,10 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     If InStr(text, ChrW$(176) & "C") <> 0 Then text = Replace(text, ChrW$(176) & "C", "degC")    ' speciel degree(\circ) og C
     If InStr(text, ChrW$(8451)) <> 0 Then text = Replace(text, ChrW$(8451), "degC")    ' specielt oC
     If InStr(text, "^" & ChrW$(8728)) <> 0 Then text = Replace(text, "^" & ChrW$(8728), ChrW$(176))    ' another way of typing degrees
-    If InStr(text, "%") <> 0 Then text = Replace(text, "%", "/100")    ' percentage symbol
+    If InStr(text, "%") <> 0 Then
+        text = Replace(text, "%pi", ChrW(960))
+        text = Replace(text, "%", "/100")    ' percentage symbol
+    End If
     pos = InStr(text, ChrW$(160))
     Do While pos <> 0 ' &nbsp a soft hyphen, looks like a longer space. before accent e.g. vector arrow 160 8407. It is only removed in some cases. As it is expected is some vector cases below. However these could be adjusted and then 160 could just be removed.
         If pos = Len(text) Then
@@ -2875,6 +2878,7 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     ea.ReplaceVar "Tan", "tan"
     ea.ReplaceVar "Log", "log"
     ea.ReplaceVar "Ln", "ln"
+    ea.ReplaceVar "pi", "%pi"
     text = ea.text
 
     ' remove +- symbol
@@ -2946,6 +2950,8 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
                      Loop
                   ElseIf UBound(Arr3) = 1 Then
                      Ass = Arr3(1)
+                    Else
+                    Ass = vbNullString
                   End If
                 If UBound(Arr3) > 0 Then
                   Ass = Replace(Ass, "&", "") ' If using a template from Word, there will be an & after the comma.
@@ -2957,15 +2963,16 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
                   Ass = Replace(Ass, " and ", "&&and&&")
                   Ass = Replace(Ass, " OR ", "&&or&&")
                   Ass = Replace(Ass, " or ", "&&or&&")
+                  If j > 0 Then s = s & "&&elseif&&"
                   If CAStype = 0 Then
                     s = s & sqbrAssump(SplitAssump(Trim$(Ass))) & "&&then&&(" & Trim$(Arr3(0)) & ")"
                   Else
                     s = s & Ass & "&&then&&(" & Trim$(Arr3(0)) & ")"
                   End If
                Else
-                    s = s & "0=0&&then&&(" & Trim$(Arr3(0)) & ")"
+'                    s = s & "0=0&&then&&(" & Trim$(Arr3(0)) & ")"
+                    s = s & "&&else&&(" & Trim$(Arr3(0)) & ")"
                 End If
-                If j < UBound(Arr2) Then s = s & "&&elseif&&"
             Next
             ea.text = Left$(ea.text, pos - 1) & s & ")" & Right$(ea.text, Len(ea.text) - pos - Len(Expr) - 3)
             i = i + 1
@@ -5022,10 +5029,11 @@ Function ConvertLatexToWord(text As String) As String
     ConvertLatexToWord = ea.text
 
 End Function
-Sub ReadSelection()
-' inserts the selected equation as a command
-' this method does not use tempdoc, but changes the selected equation to text, reads it and changes it back to prof layout. This may cause changes in the way it is written.
-' the method is probably a bit faster though
+Sub ReadSelection(Optional SplitByOR As Boolean = True)
+    ' inserts the selected equation as a command
+    ' this method does not use tempdoc, but changes the selected equation to text, reads it and changes it back to prof layout. This may cause changes in the way it is written.
+    ' the method is probably a bit faster though
+    ' SplitByOR means to split the command into two commands if separated by an OR symbol (v)
 
     Dim antal As Integer
     Dim sstart As Long
@@ -5033,10 +5041,10 @@ Sub ReadSelection()
     Dim j As Integer, antalgenstart As Integer
     On Error GoTo fejl
 
-'if bold gives buildup problems' in v. 1.24.1 it is attempted to be handled without changing the original
-'        For j = 1 To Selection.OMaths.Count
-'            Selection.OMaths(j).Range.Font.Bold = False
-'        Next
+    'if bold gives buildup problems' in v. 1.24.1 it is attempted to be handled without changing the original
+    '        For j = 1 To Selection.OMaths.Count
+    '            Selection.OMaths(j).Range.Font.Bold = False
+    '        Next
     sstart = Selection.start
     sslut = Selection.End
     antal = Selection.OMaths.Count
@@ -5059,7 +5067,7 @@ Sub ReadSelection()
         Selection.OMaths(1).ParentOMath.Range.Select ' The above wasn't enough, but why was it there?
         antalgenstart = 0
 genstart:
-'        Kommando = ReadEquationCopy()
+        '        Kommando = ReadEquationCopy()
         Kommando = ReadEquation2()
         If Kommando = "" And antalgenstart = 0 Then    ' attempt to fix rare problem where everything is read as "" maybe it's due to tempdoc
             '            tempDoc.Close (False)
@@ -5073,45 +5081,43 @@ genstart:
         ElseIf Kommando = "" Then
             MsgBox "WordMat cant read the command. This can be caused by error which can be corrected by restarting Word (Close all Word documents).", vbOKOnly, TT.Error
         End If
-
-        If InStr(Kommando, ChrW$(8743)) Then
-            Kommandoer = Split(Kommando, ChrW$(8743))
-            '        For j = UBound(Kommandoer) To 0 Step -1
-            '            Kommandoer(j + 1) = Kommandoer(j)
-            '        Next
+        
+        If SplitByOR Then
+            If InStr(Kommando, ChrW$(8743)) Then
+                Kommandoer = Split(Kommando, ChrW$(8743))
+            End If
         End If
-
         Selection.Collapse (wdCollapseEnd)
     ElseIf antal > 1 Then
         ReDim Kommandoer(0 To 100)
         Dim mathcol As OMaths
 
         Set sr = Selection.Range
-'        Selection.Copy
-'        Set r = tempDoc.Range
-'        r.Paste
-'        With r
-'            .OMaths.BuildUp
-'            .OMaths.Linearize
-'        End With
+        '        Selection.Copy
+        '        Set r = tempDoc.Range
+        '        r.Paste
+        '        With r
+        '            .OMaths.BuildUp
+        '            .OMaths.Linearize
+        '        End With
 
-    Dim Oundo As UndoRecord
-    Set Oundo = Application.UndoRecord
-    Oundo.StartCustomRecord
+        Dim Oundo As UndoRecord
+        Set Oundo = Application.UndoRecord
+        Oundo.StartCustomRecord
     
-    Set mathcol = Selection.OMaths
-    With Selection.OMaths
-        .BuildUp
-        .Linearize
-    End With
+        Set mathcol = Selection.OMaths
+        With Selection.OMaths
+            .BuildUp
+            .Linearize
+        End With
 
         For j = 0 To antal - 1
             mathcol(j + 1).ConvertToNormalText
             Kommandoer(j) = Replace(mathcol(j + 1).Range.text, ChrW$(11), "")    ' remove shift-enter
         Next
         
-    Oundo.EndCustomRecord
-    ActiveDocument.Undo
+        Oundo.EndCustomRecord
+        ActiveDocument.Undo
         
 hop:
         ReDim Preserve Kommandoer(0 To antal - 1)
@@ -5122,7 +5128,7 @@ fejl:
     On Error GoTo slut
     ReadSelectionOld
 slut:
-'    tempDoc.Saved = True
+    '    tempDoc.Saved = True
     Selection.start = sstart
     Selection.End = sslut
 

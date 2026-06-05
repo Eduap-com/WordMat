@@ -96,3 +96,7 @@ fejl:
     QExecuteGeoGebraCAScommand = vbNullString
 slut:
 End Function
+Public Sub QShowTip()
+    On Error Resume Next
+    Application.Run macroname:="WMPShowTip"
+End Sub

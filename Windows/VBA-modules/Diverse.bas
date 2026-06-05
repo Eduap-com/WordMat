@@ -1559,7 +1559,7 @@ End Function
 Sub NewEquation()
 '    On Error GoTo fejl
     On Error Resume Next
-    
+
     If Selection.OMaths.Count = 0 Then
         With Selection.Font
             .Bold = False
@@ -1586,6 +1586,13 @@ Sub NewEquation()
         Selection.Paste
         Selection.TypeParagraph
         Selection.MoveLeft unit:=wdCharacter, Count:=2
+    End If
+    If Selection.Font.ColorIndex = OutputColor Then
+        Selection.OMaths(1).Range.Font.ColorIndex = wdAuto
+    ElseIf Selection.OMaths(1).Range.Font.ColorIndex = OutputColor Then
+        Selection.OMaths(1).Range.Font.ColorIndex = wdAuto
+    ElseIf Selection.OMaths(1).Range.Font.ColorIndex = 9999999 Then ' mix of colors
+        Selection.OMaths(1).Range.Font.ColorIndex = wdAuto
     End If
 GoTo slut
 fejl:
@@ -1886,4 +1893,13 @@ Dim t1 As Single, t2 As Single, i As Long, n As Long, s As String
     
     MsgBox "t1: " & t1 & vbNewLine & "t2: " & t2 & vbNewLine & "Factor t1/t2: " & t1 / t2, vbOKOnly, "Speedtest"
     
+End Sub
+Sub ShowTips()
+    If Not QActivePartnership Then
+        If TipModCounter > 0 And AntalB > 50 Then
+            If AntalB Mod TipModCounter = 0 Then
+                QShowTip
+            End If
+        End If
+    End If
 End Sub

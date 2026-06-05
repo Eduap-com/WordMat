@@ -12,6 +12,7 @@ Dim oAppClass As New oAppClass ' is also in P, so the risk of lost tempdoc is le
 
 Sub RunFirst()
 ' Should be run on startup of WordMat
+    Dim s As String
     
     If Abs(Timer() - WMRunTime) > 24# * 3600 Then
         On Error Resume Next
@@ -82,6 +83,11 @@ Sub RunFirst()
         End If
         If val(RegAppVersion) < 1.4 Then
             SettShortcutAltG = KeybShortcut.ShowGraph
+            If Not QActivePartnership Then
+                s = GetRegSettingString("ShowMenus")
+                s = "10" & Right(s, Len(s) - 2)
+                SetRegSettingString "ShowMenus", s
+            End If
         End If
         RegAppVersion = AppVersion
     End If

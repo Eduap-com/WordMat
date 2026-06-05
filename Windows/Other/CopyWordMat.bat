@@ -31,3 +31,6 @@ for /d %%i in ("%topLevelFolder%\*") do (
 )
 
 endlocal
+
+Rem Forces successful exit code to prevent error messages
+exit /b 0

@@ -80,6 +80,7 @@ Private mUseVBACAS As Integer  ' 0 = not loaded  1=no  2=yes1
 Private mUseCodeFile As Boolean
 Private mUseCodeBlocks As Boolean
 Private mOutputColor As Integer  ' 0 = wdauto ellers WdColorIndex enumeration (Word) 1= black, 2= blue
+Private mTipModCounter As Integer
 
 Private mSettShortcutAltM As Integer
 Private mSettShortcutAltM2 As Integer
@@ -222,6 +223,7 @@ On Error Resume Next
     mUseCodeFile = CBool(GetRegSetting("UseCodeFile"))
     mUseCodeBlocks = CBool(GetRegSetting("UseCodeBlocks"))
     mOutputColor = val(GetRegSetting("OutputColor"))
+    mTipModCounter = val(GetRegSetting("TipModCounter"))
     
     mSettShortcutAltM = val(GetRegSetting("SettShortcutAltM"))
     mSettShortcutAltM2 = val(GetRegSetting("SettShortcutAltM2"))
@@ -332,7 +334,6 @@ Public Sub SetAllDefaultRegistrySettings(Optional ForceReset As Boolean = False)
         OutputColor = wdGreen
         ShowAssum = True
     
-    
         SettShortcutAltM = KeybShortcut.InsertNewEquation
         SettShortcutAltM2 = -1
         SettShortcutAltB = KeybShortcut.beregnudtryk
@@ -364,7 +365,7 @@ Sub ReadSM(Optional ForceRead As Boolean = False)
             If IsNumeric(s) Then
                 s = Trim$(s) & String$(70 - Len(s), "1")
             Else
-                s = "11" ' formula
+                s = "10" ' formula
                 s = s & "1111" ' Settings
                 s = s & "11111111111111" ' CAS
                 s = s & "1111" ' def
@@ -1189,6 +1190,13 @@ Public Property Let SettUseVBACAS(xval As Boolean)
     mUseVBACAS = Abs(CInt(xval) + 1)
     SetRegSetting "UseVBACAS", mUseVBACAS
 End Property
+Public Property Get TipModCounter() As Integer
+    If mTipModCounter = 0 Then
+        mTipModCounter = val(GetRegSetting("TipModCounter"))
+    End If
+    TipModCounter = mTipModCounter
+End Property
+
 Public Property Get SettShortcutAltM() As Integer
     If mSettShortcutAltM = 0 Then
         mSettShortcutAltM = val(GetRegSetting("SettShortcutAltM"))

@@ -1447,6 +1447,7 @@ Sub beregn()
         End If
     End If
     omax.prevspr = ""
+    ShowTips
     
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
@@ -2529,6 +2530,9 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         Else
             ea.text = omax.Kommando
             funktion = ea.GetNextVar(1)
+            If Len(funktion) = 2 And Left(funktion, 1) = "d" Then
+                funktion = Right(funktion, 1)
+            End If
             If InStr(omax.Kommando, funktion & "(" & variabel & ")") > 0 Then
                 omax.Kommando = Replace(omax.Kommando, funktion & "(" & variabel & ")", funktion)
                 omax.Kommando = Replace(omax.Kommando, funktion & "^' (" & variabel & ")", funktion & "^'")
