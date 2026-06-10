@@ -211,6 +211,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
                                 ea.SetNormalBrackets
                                 RHS = Replace(RHS, "{", "(")
                                 RHS = Replace(RHS, "}", ")")
+                                DefinerKonstanter RHS, DefList, Nothing, UrlLink
                                 parI = parI + 1
                                 cmd = "Param" & parI & ":X=" & RHS
                                 cmd = Replace(cmd, "+", "%2B") & ";"
