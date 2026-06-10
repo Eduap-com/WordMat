@@ -160,7 +160,9 @@ Function ExecuteGeoGebraCasCommand(CmdString As String, Optional UseDefs As Bool
     
     If QActivePartnership Then
         res = QExecuteGeoGebraCAScommand(cmd)
+        If res = "ScriptError" Then GoTo hop
     Else
+hop:
         If WebV Is Nothing Then PrepareGeoGebraCAS
         JS = "ggbApplet.reset();" 'ggbApplet.setRounding(""" & MaximaCifre & "s"");"
     

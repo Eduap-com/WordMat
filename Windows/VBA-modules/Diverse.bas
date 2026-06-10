@@ -1895,6 +1895,9 @@ Dim t1 As Single, t2 As Single, i As Long, n As Long, s As String
     
 End Sub
 Sub ShowTips()
+    Dim m As Integer
+    m = Month(Date)
+    If m = 5 Or m = 6 Or m = 12 Then Exit Sub
     If Not QActivePartnership Then
         If TipModCounter > 0 And AntalB > 50 Then
             If AntalB Mod TipModCounter = 0 Then
