@@ -533,10 +533,14 @@ newcas:
                 ea.ReplaceVar variabel, "x"
                 RHS = ea.text
             End If
-            OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";intersect(" & LHS & ", " & RHS & ");" & "Nsolve(" & s & "," & variabel & ")", "graphing", True, True
+            OpenGeoGebraWeb "y=" & LHS & ";y=" & RHS & ";Intersect(" & LHS & ", " & RHS & ");" & "NSolve(" & s & "," & variabel & ")", "graphing", True, True
             GoTo slut
         ElseIf CASengine = 0 Then
-            omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:" & LCase(CStr(Not (UFSelectVar.SolveMethod = 1))) & "$"
+            If UFSelectVar.SolveMethod = 1 Then
+                omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:false$"
+            Else
+                omax.MaximaInputStreng = omax.MaximaInputStreng & "autonsolve:true$"
+            End If
             omax.MaximaSolve (variabel)
         ElseIf CASengine = 1 Then ' GeoGebra web
             If MaximaForklaring Then
@@ -1443,6 +1447,7 @@ Sub beregn()
         End If
     End If
     omax.prevspr = ""
+    ShowTips
     
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
@@ -2525,6 +2530,13 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
         Else
             ea.text = omax.Kommando
             funktion = ea.GetNextVar(1)
+            If Len(funktion) = 2 And Left(funktion, 1) = "d" Then
+                funktion = Right(funktion, 1)
+            End If
+            If InStr(omax.Kommando, funktion & "(" & variabel & ")") > 0 Then
+                omax.Kommando = Replace(omax.Kommando, funktion & "(" & variabel & ")", funktion)
+                omax.Kommando = Replace(omax.Kommando, funktion & "^' (" & variabel & ")", funktion & "^'")
+            End If
         End If
         UFdiffeq.Vars = omax.Vars
         UFdiffeq.DefS = omax.DefString

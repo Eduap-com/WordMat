@@ -182,7 +182,7 @@ Private Sub CommandButton_geogebra_Click()
     End If
     s = Left$(s, Len(s) - 1)
     
-    OpenGeoGebraWeb s, "3d", True, False
+    OpenGeoGebraWeb s, "3d", True, False, 5
     
 End Sub
 

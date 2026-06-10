@@ -38,7 +38,7 @@ Sub OpenWebV()
         GoTo slut
     End If
     
-    WebV.navigate "file://" & FN
+    WebV.Navigate "file://" & FN
     WebV.WaitWV
     
     Wait (2)
@@ -129,7 +129,7 @@ Sub TestWV()
     WebV.Width = 1500
 
 '    WebV.navigate "https://www.geogebra.org"
-    WebV.navigate "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebraCASApplet.html"
+    WebV.Navigate "file://" & GetProgramFilesDir & "/WordMat/geogebra-math-apps/GeoGebraCASApplet.html"
     WebV.WaitWV
     JS = "ggbApplet.evalCommandCAS('2+3')"
     res = WebV.ExecuteScript(JS)
@@ -137,50 +137,60 @@ Sub TestWV()
 End Sub
 
 Function ExecuteGeoGebraCasCommand(CmdString As String, Optional UseDefs As Boolean = True) As String
-Dim res As String
-
+    Dim res As String, cmd As String
     Dim JS As String, ArrDef() As String, ArrCas() As String, i As Integer, AssumeString As String
-    If WebV Is Nothing Then PrepareGeoGebraCAS
-    JS = "ggbApplet.reset();" 'ggbApplet.setRounding(""" & MaximaCifre & "s"");"
+
+    cmd = CmdString & ";"
     If UseDefs Then
         If GeoGebraDefs <> "" Then
             ArrDef = Split(GeoGebraDefs, ";")
             For i = 0 To UBound(ArrDef)
-                JS = JS & "ggbApplet.evalCommand(""" & ArrDef(i) & """);"
+'                JS = JS & "ggbApplet.evalCommand(""" & ArrDef(i) & """);"
+                cmd = Replace(ArrDef(i), "=", ":") & ";" & cmd ' for CAS commands, definitions must be with :
             Next
         End If
-        
+    
         If GeoGebraAssumes <> "" Then
             AssumeString = "Assume(" & GeoGebraAssumes
+            cmd = "Assume(" & GeoGebraAssumes & ");" & cmd
         End If
     End If
     
-    ArrCas = Split(CmdString, ";")
-    For i = 0 To UBound(ArrCas)
-        If AssumeString <> "" Then
-            JS = JS & "ggbApplet.evalCommandCAS(""" & AssumeString & "," & ArrCas(i) & ")"");"
-        Else
-            JS = JS & "ggbApplet.evalCommandCAS(""" & ArrCas(i) & """);"
-        End If
-    Next
-    res = ExecuteGeogebraCmdViaJS(JS)
-    If res = "xQw6rT" Then
-        Wait 1
+    cmd = Left(cmd, Len(cmd) - 1)
+    
+    If QActivePartnership Then
+        res = QExecuteGeoGebraCAScommand(cmd)
+    Else
+        If WebV Is Nothing Then PrepareGeoGebraCAS
+        JS = "ggbApplet.reset();" 'ggbApplet.setRounding(""" & MaximaCifre & "s"");"
+    
+        ArrCas = Split(CmdString, ";")
+        For i = 0 To UBound(ArrCas)
+            If AssumeString <> "" Then
+                JS = JS & "ggbApplet.evalCommandCAS(""" & AssumeString & "," & ArrCas(i) & ")"");"
+            Else
+                JS = JS & "ggbApplet.evalCommandCAS(""" & ArrCas(i) & """);"
+            End If
+        Next
         res = ExecuteGeogebraCmdViaJS(JS)
         If res = "xQw6rT" Then
-            Set WebV = Nothing
-            PrepareGeoGebraCAS
-            JS = "ggbApplet.reset();ggbApplet.evalCommandCAS(solve(x^2=9,x))"
+            Wait 1
             res = ExecuteGeogebraCmdViaJS(JS)
             If res = "xQw6rT" Then
-                res = "Fejl ved GeoGebra"
+                Set WebV = Nothing
+                PrepareGeoGebraCAS
+                JS = "ggbApplet.reset();ggbApplet.evalCommandCAS(solve(x^2=9,x))"
+                res = ExecuteGeogebraCmdViaJS(JS)
+                If res = "xQw6rT" Then
+                    res = "Fejl ved GeoGebra"
+                End If
             End If
+        ElseIf res = "ScriptError" Then
+            GGBJSGuidance
         End If
-    ElseIf res = "ScriptError" Then
-        GGBJSGuidance
     End If
     ExecuteGeoGebraCasCommand = res
-'    MsgBox Res
+    '    MsgBox Res
 End Function
 Sub GGBJSGuidance()
     If MsgBox(TT.A(886), vbOKCancel, TT.Error) = vbOK Then

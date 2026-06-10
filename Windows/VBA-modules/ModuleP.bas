@@ -76,6 +76,27 @@ Function SkoleNavn() As String
 fejl:
     SkoleNavn = vbNullString
 slut:
-
 End Function
 
+Public Function QShowGeoGebraGraph(Pars As String, Optional GeoGebraState As String, Optional Perspective As Integer = 1) As Boolean
+    On Error GoTo fejl
+    Application.Run macroname:="WMPShowGeoGebraGraph", varg1:=Pars, varg2:=GeoGebraState, varg3:=Perspective
+    QShowGeoGebraGraph = True
+    GoTo slut
+fejl:
+    QShowGeoGebraGraph = False
+slut:
+End Function
+
+Public Function QExecuteGeoGebraCAScommand(cmd As String) As String
+    On Error GoTo fejl
+    QExecuteGeoGebraCAScommand = Application.Run(macroname:="WMPExecuteGeoGebraCAScommand", varg1:=cmd)
+    GoTo slut
+fejl:
+    QExecuteGeoGebraCAScommand = vbNullString
+slut:
+End Function
+Public Sub QShowTip()
+    On Error Resume Next
+    Application.Run macroname:="WMPShowTip"
+End Sub

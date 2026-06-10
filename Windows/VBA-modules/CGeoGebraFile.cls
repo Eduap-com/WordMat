@@ -19,7 +19,7 @@ Public Show3D As Boolean
     Private Constructionelement As IXMLDOMElement
 #End If
 
-Private Sub Class_Initialize()
+Public Sub Initialize()
     CreateXML
 End Sub
 Private Sub CreateXML()
@@ -57,159 +57,246 @@ Public Sub Save(FilNavn As String)
 End Sub
 
 Sub CreateGuiElement()
-    Dim guielement As IXMLDOMElement
-    Dim showelement As IXMLDOMElement
+    
+    Dim GuiElement As IXMLDOMElement
+    Set GuiElement = GeoXMLdom.createElement("gui")
+    GeoGebraelement.appendChild GuiElement
+    
+    Dim WindowElement As IXMLDOMElement
+    Set WindowElement = GeoXMLdom.createElement("window")
+    GuiElement.appendChild WindowElement
+    WindowElement.setAttribute "width", "1600"
+    WindowElement.setAttribute "height", "1000"
+    
+'    Dim showElement As IXMLDOMElement
+'    Set showelement = GeoXMLdom.createElement("show") ' legacy
+'    guielement.appendChild showelement
+'    showelement.setAttribute "algebraView", "true"
+'    showelement.setAttribute "spreadsheetView", "false"
+'    showelement.setAttribute "auxiliaryObjects", "false"
+'    showelement.setAttribute "algebraInput", "true"
+'    showelement.setAttribute "cmdList", "true"
+    
+If Show3D Then
     Dim splitdividerelement As IXMLDOMElement
-    Dim fontelement As IXMLDOMElement
-    
-    Set guielement = GeoXMLdom.createElement("gui")
-    GeoGebraelement.appendChild guielement
-    
-    Set showelement = GeoXMLdom.createElement("show")
-    guielement.appendChild showelement
-    showelement.setAttribute "algebraView", "true"
-    showelement.setAttribute "spreadsheetView", "false"
-    showelement.setAttribute "auxiliaryObjects", "false"
-    showelement.setAttribute "algebraInput", "true"
-    showelement.setAttribute "cmdList", "true"
-    
     Set splitdividerelement = GeoXMLdom.createElement("splitDivider")
-    guielement.appendChild splitdividerelement
+    GuiElement.appendChild splitdividerelement
     splitdividerelement.setAttribute "loc", "650"
     splitdividerelement.setAttribute "locVertical", "400"
     splitdividerelement.setAttribute "loc2", "250"
     splitdividerelement.setAttribute "locVertical2", "300"
     splitdividerelement.setAttribute "horizontal", "true"
-    
-    Set fontelement = GeoXMLdom.createElement("font")
-    guielement.appendChild fontelement
-    fontelement.setAttribute "size", "12"
+
+End If
     
     
-    If Not Show3D Then Exit Sub
+    Dim FontElement As IXMLDOMElement
+    Set FontElement = GeoXMLdom.createElement("font")
+    GuiElement.appendChild FontElement
+    FontElement.setAttribute "size", "14"
+
+    Dim LabelingStyleElement As IXMLDOMElement
+    Set LabelingStyleElement = GeoXMLdom.createElement("labelingStyle")
+    GuiElement.appendChild LabelingStyleElement
+    LabelingStyleElement.setAttribute "val", "0"
+
     
     Dim perspectiveselement As IXMLDOMElement
     Set perspectiveselement = GeoXMLdom.createElement("perspectives")
-    guielement.appendChild perspectiveselement
+    GuiElement.appendChild perspectiveselement
     
     Dim perspectiveelement As IXMLDOMElement
     Set perspectiveelement = GeoXMLdom.createElement("perspective")
     perspectiveselement.appendChild perspectiveelement
+    perspectiveelement.setAttribute "id", "tmp"
     
     Dim paneselement As IXMLDOMElement
     Set paneselement = GeoXMLdom.createElement("panes")
     perspectiveelement.appendChild paneselement
-    perspectiveelement.setAttribute "id", "tmp"
     
     Dim pane1element As IXMLDOMElement
     Set pane1element = GeoXMLdom.createElement("pane")
     paneselement.appendChild pane1element
     pane1element.setAttribute "location", ""
-    pane1element.setAttribute "divider", "0.25"
+    pane1element.setAttribute "divider", "0.2"
     pane1element.setAttribute "orientation", "1"
 
-    Dim pane2element As IXMLDOMElement
-    Set pane2element = GeoXMLdom.createElement("pane")
-    paneselement.appendChild pane2element
-    pane2element.setAttribute "location", "1"
-    pane2element.setAttribute "divider", "0.35375"
-    pane2element.setAttribute "orientation", "1"
+'    Dim pane2element As IXMLDOMElement
+'    Set pane2element = GeoXMLdom.createElement("pane")
+'    paneselement.appendChild pane2element
+'    pane2element.setAttribute "location", "1"
+'    pane2element.setAttribute "divider", "0.35375"
+'    pane2element.setAttribute "orientation", "1"
 
+    Dim viewselement As IXMLDOMElement
+    Set viewselement = GeoXMLdom.createElement("views")
+    perspectiveelement.appendChild viewselement
+
+    Dim viewelement1 As IXMLDOMElement
+    Set viewelement1 = GeoXMLdom.createElement("view")
+    viewselement.appendChild viewelement1
+    viewelement1.setAttribute "id", "2"
+    viewelement1.setAttribute "visible", "true"
+    viewelement1.setAttribute "inframe", "false"
+    viewelement1.setAttribute "stylebar", "false"
+    viewelement1.setAttribute "location", "3"
+    viewelement1.setAttribute "size", "200" '331
+    viewelement1.setAttribute "tab", "ALGEBRA"
+    viewelement1.setAttribute "window", "100,100,600,400" '0,0,200,400
+
+    Dim viewelement2 As IXMLDOMElement
+If Show3D Then
+    Set viewelement2 = GeoXMLdom.createElement("view")
+    viewselement.appendChild viewelement2
+    viewelement2.setAttribute "id", "512"
+    viewelement2.setAttribute "visible", "true"
+    viewelement2.setAttribute "inframe", "false"
+    viewelement2.setAttribute "stylebar", "false"
+    viewelement2.setAttribute "location", "1" '1
+    viewelement2.setAttribute "size", "1111" ' 546
+    viewelement2.setAttribute "window", "100,100,600,400" ' '50,50,500,500
+    viewelement2.setAttribute "toolbar", "0 | 1 501 5 19 , 67 | 2 15 45 18 , 7 37 | 514 3 9 , 13 44 , 47 | 16 51 | 551 550 11 , 20 22 21 23 , 55 56 57 , 12 | 69 | 510 511 , 512 513 | 533 531 , 534 532 , 522 523 , 537 536 , 535 , 538 | 521 520 | 36 , 38 49 560 | 571 30 29 570 31 33 | 17 | 540 40 41 42 , 27 28 35 , 6 , 502"
+Else
+    Set viewelement2 = GeoXMLdom.createElement("view")
+    viewselement.appendChild viewelement2
+    viewelement2.setAttribute "id", "1"
+    viewelement2.setAttribute "visible", "true"
+    viewelement2.setAttribute "inframe", "false"
+    viewelement2.setAttribute "stylebar", "false"
+    viewelement2.setAttribute "location", "1"
+    viewelement2.setAttribute "size", "568"
+    viewelement2.setAttribute "window", "100,100,600,400"
+End If
+    
+    Dim toolbarelement As IXMLDOMElement
+    Set toolbarelement = GeoXMLdom.createElement("toolbar")
+    perspectiveelement.appendChild toolbarelement
+    toolbarelement.setAttribute "show", "true"
+    toolbarelement.setAttribute "items", "0 39 73 62 | 1 501 67 , 5 19 , 72 75 76 | 2 15 45 , 18 65 , 7 37 | 4 3 8 9 , 13 44 , 58 , 47 | 16 51 64 , 70 | 10 34 53 11 , 24 20 22 , 21 23 | 55 56 57 , 12 | 36 46 , 38 49 50 , 71 14 68 | 30 29 54 32 31 33 | 25 17 26 60 52 61 | 40 41 42 , 27 28 35 , 6"
+    toolbarelement.setAttribute "position", "1"
+    toolbarelement.setAttribute "help", "false"
+    
+    Dim inputelement As IXMLDOMElement
+    Set inputelement = GeoXMLdom.createElement("input")
+    perspectiveelement.appendChild inputelement
+    inputelement.setAttribute "show", "true"
+    inputelement.setAttribute "cmd", "true"
+    inputelement.setAttribute "top", "algebra"
+    
+    Dim dockelement As IXMLDOMElement
+    Set dockelement = GeoXMLdom.createElement("dock")
+    perspectiveelement.appendChild dockelement
+    dockelement.setAttribute "show", "false"
+    dockelement.setAttribute "east", "false"
+    
 'der mangler views, toolbar,input, dockbar elementer
-'      <views>
-'        <view id="4097" visible="false" inframe="true" stylebar="true" location="1,1,1,1" size="400" window="100,100,700,550" />
-'        <view id="1" visible="true" inframe="false" stylebar="false" location="1,3" size="283" window="100,100,600,400" />
-'        <view id="4" toolbar="0 || 2020 , 2021 , 2022 , 66 || 2001 , 2003 , 2002 , 2004 , 2005 || 2040 , 2041 , 2042 , 2044 , 2043" visible="false" inframe="false" stylebar="false" location="1,1" size="300" window="100,100,600,400" />
-'        <view id="8" toolbar="1001 | 1002 | 1003  || 1005 | 1004 || 1006 | 1007 | 1010 || 1008 1009 || 66 68 || 6" visible="false" inframe="false" stylebar="false" location="1,3" size="300" window="100,100,600,400" />
-'        <view id="512" toolbar="0 | 1 501 5 19 , 67 | 2 15 45 18 , 7 37 | 514 3 9 , 13 44 , 47 | 16 | 551 550 11 , 22 , 23 , 55 56 57 , 12 | 69 | 510 511 , 512 513 | 533 531 , 534 532 , 522 523 , 537 536 , 535 | 521 520 | 36 , 38 49 560 | 571 30 29 570 31 33 | 17 | 540 40 41 42 , 27 28 35 , 6 , 502" visible="true" inframe="false" stylebar="false" location="1,1" size="278" window="100,100,600,400" />
-'        <view id="2" visible="true" inframe="false" stylebar="false" location="3" size="200" window="100,100,250,400" />
-'        <view id="16" visible="false" inframe="false" stylebar="false" location="1" size="150" window="50,50,500,500" />
-'        <view id="32" visible="false" inframe="false" stylebar="true" location="1" size="150" window="50,50,500,500" />
-'        <view id="64" visible="false" inframe="true" stylebar="true" location="1" size="150" window="50,50,500,500" />
-'        <view id="70" visible="false" inframe="true" stylebar="true" location="1" size="150" window="50,50,500,500" />
-'      </views>
-'      <toolbar show="true" items="0 39 | 1 501 67 , 5 19 , 72 | 2 15 45 , 18 65 , 7 37 | 4 3 8 9 , 13 44 , 58 , 47 | 16 51 64 , 70 | 10 34 53 11 , 24  20 22 , 21 23 | 55 56 57 , 12 | 36 46 , 38 49  50 , 71 | 30 29 54 32 31 33 | 17 26 62 73 , 14 68 | 25 52 60 61 | 40 41 42 , 27 28 35 , 6" position="1" help="false" />
-'      <input show="true" cmd="true" top="false" />
-'      <dockBar show="true" east="true" />
+'<perspectives>
+'<perspective id="tmp">
+'<panes>
+'<pane location="" divider="0.3685968819599109" orientation="1"/>
+'</panes>
+
+'<views>
+'<view id="1" visible="false" inframe="false" stylebar="false" location="3,1" size="323" window="0,0,400,400"/>
+'<view id="4" toolbar="0 || 2020 , 2021 , 2022 , 66 || 2001 , 2003 , 2002 , 2004 , 2005 || 2040 , 2041 , 2042 , 2044 , 2043" visible="false" inframe="false" stylebar="false" location="1,1" size="200" window="0,0,400,400"/>
+'<view id="2" visible="true" inframe="false" stylebar="false" location="3" size="331" tab="ALGEBRA" window="0,0,200,400"/>
+'<view id="8" visible="false" inframe="false" stylebar="false" location="1" size="150" window="50,50,500,500"/>
+'<view id="16" visible="false" inframe="false" stylebar="false" location="1" size="150" window="50,50,500,500"/>
+'<view id="32" visible="false" inframe="false" stylebar="true" location="1" size="150" window="50,50,500,500"/>
+'<view id="64" visible="false" inframe="false" stylebar="false" location="1" size="150" window="50,50,500,500"/>
+'<view id="4097" visible="false" inframe="false" stylebar="false" location="1" size="150" window="50,50,500,500"/>
+'<view id="70" visible="false" inframe="false" stylebar="true" location="1" size="150" window="50,50,500,500"/>
+'<view id="512" visible="true" inframe="false" stylebar="false" location="1" size="546" window="50,50,500,500"/>
+'</views>
+'<toolbar show="true" items="0 39 73 62 | 1 501 67 , 5 19 , 72 75 76 | 2 15 45 , 18 65 , 7 37 | 4 3 8 9 , 13 44 , 58 , 47 | 16 51 64 , 70 | 10 34 53 11 , 24 20 22 , 21 23 | 55 56 57 , 12 | 36 46 , 38 49 50 , 71 14 68 | 30 29 54 32 31 33 | 25 17 26 60 52 61 | 40 41 42 , 27 28 35 , 6" position="1" help="false"/>
+'<input show="true" cmd="true" top="algebra"/>
+'<dockBar show="false" east="false"/>
+'</perspective>
+'</perspectives>
+'<labelingStyle val="3"/>
+'<font size="12"/>
     
 End Sub
 
 Sub CreateEuclidianViewElement()
-    Dim euclidianviewelement As IXMLDOMElement
-    Dim sizeelement As IXMLDOMElement
-    
-    
-    Set euclidianviewelement = GeoXMLdom.createElement("euclidianView")
-    GeoGebraelement.appendChild euclidianviewelement
+    Dim EuclidianviewElement As IXMLDOMElement
+    Set EuclidianviewElement = GeoXMLdom.createElement("euclidianView")
+    GeoGebraelement.appendChild EuclidianviewElement
 
+    Dim viewNoElement As IXMLDOMElement
+    Set viewNoElement = GeoXMLdom.createElement("viewNumber")
+    EuclidianviewElement.appendChild viewNoElement
+    viewNoElement.setAttribute "viewNo", "1"
+
+    Dim sizeelement As IXMLDOMElement
     Set sizeelement = GeoXMLdom.createElement("size")
-    euclidianviewelement.appendChild sizeelement
-    sizeelement.setAttribute "width", "628"
-    sizeelement.setAttribute "height", "508"
+    EuclidianviewElement.appendChild sizeelement
+    sizeelement.setAttribute "width", "568" '628
+    sizeelement.setAttribute "height", "427" '427
 
     Dim coordSystemelement As IXMLDOMElement
     Set coordSystemelement = GeoXMLdom.createElement("coordSystem")
-    euclidianviewelement.appendChild coordSystemelement
-    coordSystemelement.setAttribute "xZero", "215.0"
-    coordSystemelement.setAttribute "yZero", "315.0"
+    EuclidianviewElement.appendChild coordSystemelement
+    coordSystemelement.setAttribute "xZero", "640.0"
+    coordSystemelement.setAttribute "yZero", "400.0"
     coordSystemelement.setAttribute "scale", "50.0"
     coordSystemelement.setAttribute "yscale", "50.0"
 
     Dim evSettingselement As IXMLDOMElement
     Set evSettingselement = GeoXMLdom.createElement("evSettings")
-    euclidianviewelement.appendChild evSettingselement
+    EuclidianviewElement.appendChild evSettingselement
     evSettingselement.setAttribute "axes", "true"
-    evSettingselement.setAttribute "grid", "false"
+    evSettingselement.setAttribute "grid", "true"
     evSettingselement.setAttribute "gridIsBold", "false"
     evSettingselement.setAttribute "pointCapturing", "3"
     evSettingselement.setAttribute "pointStyle", "0"
     evSettingselement.setAttribute "rightAngleStyle", "1"
-    evSettingselement.setAttribute "checkboxSize", "13"
-    evSettingselement.setAttribute "gridType", "0"
+    evSettingselement.setAttribute "checkboxSize", "26"
+    evSettingselement.setAttribute "gridType", "3"
 
     Dim bgColorelement As IXMLDOMElement
     Set bgColorelement = GeoXMLdom.createElement("bgColor")
-    euclidianviewelement.appendChild bgColorelement
+    EuclidianviewElement.appendChild bgColorelement
     bgColorelement.setAttribute "r", "255"
     bgColorelement.setAttribute "g", "255"
     bgColorelement.setAttribute "b", "255"
 
     Dim axesColorelement As IXMLDOMElement
     Set axesColorelement = GeoXMLdom.createElement("axesColor")
-    euclidianviewelement.appendChild axesColorelement
-    axesColorelement.setAttribute "r", "0"
-    axesColorelement.setAttribute "g", "0"
-    axesColorelement.setAttribute "b", "0"
+    EuclidianviewElement.appendChild axesColorelement
+    axesColorelement.setAttribute "r", "28" '0 0 0
+    axesColorelement.setAttribute "g", "28"
+    axesColorelement.setAttribute "b", "31"
 
     Dim gridColorelement As IXMLDOMElement
     Set gridColorelement = GeoXMLdom.createElement("gridColor")
-    euclidianviewelement.appendChild gridColorelement
-    gridColorelement.setAttribute "r", "192"
-    gridColorelement.setAttribute "g", "192"
-    gridColorelement.setAttribute "b", "192"
+    EuclidianviewElement.appendChild gridColorelement
+    gridColorelement.setAttribute "r", "180" ' 192 192 192
+    gridColorelement.setAttribute "g", "179"
+    gridColorelement.setAttribute "b", "186"
 
-    Dim linestyleelement As IXMLDOMElement
-    Set linestyleelement = GeoXMLdom.createElement("lineStyle")
-    euclidianviewelement.appendChild linestyleelement
-    linestyleelement.setAttribute "axes", "1"
-    linestyleelement.setAttribute "grid", "10"
+    Dim lineStyleElement As IXMLDOMElement
+    Set lineStyleElement = GeoXMLdom.createElement("lineStyle")
+    EuclidianviewElement.appendChild lineStyleElement
+    lineStyleElement.setAttribute "axes", "1"
+    lineStyleElement.setAttribute "grid", "0" '10
 
     Dim axiselement As IXMLDOMElement
     Set axiselement = GeoXMLdom.createElement("axis")
-    euclidianviewelement.appendChild axiselement
+    EuclidianviewElement.appendChild axiselement
     axiselement.setAttribute "id", "0"
     axiselement.setAttribute "show", "true"
-    axiselement.setAttribute "label", ""
+    axiselement.setAttribute "label", "x"
     axiselement.setAttribute "unitLabel", ""
     axiselement.setAttribute "tickStyle", "1"
     axiselement.setAttribute "showNumbers", "true"
 
     Dim axis2element As IXMLDOMElement
     Set axis2element = GeoXMLdom.createElement("axis")
-    euclidianviewelement.appendChild axis2element
+    EuclidianviewElement.appendChild axis2element
     axis2element.setAttribute "id", "1"
     axis2element.setAttribute "show", "true"
-    axis2element.setAttribute "label", ""
+    axis2element.setAttribute "label", "y"
     axis2element.setAttribute "unitLabel", ""
     axis2element.setAttribute "tickStyle", "1"
     axis2element.setAttribute "showNumbers", "true"
@@ -373,19 +460,19 @@ Public Sub CreatePoint(pointname As String, xkoord As Double, ykoord As Double)
     pointelement.setAttribute "type", "point"
     pointelement.setAttribute "label", pointname
 
-    Dim showelement As IXMLDOMElement
-    Set showelement = GeoXMLdom.createElement("show")
-    pointelement.appendChild showelement
-    showelement.setAttribute "object", "true"
-    showelement.setAttribute "label", "true"
+    Dim showElement As IXMLDOMElement
+    Set showElement = GeoXMLdom.createElement("show")
+    pointelement.appendChild showElement
+    showElement.setAttribute "object", "true"
+    showElement.setAttribute "label", "true"
 
-    Dim objColorelement As IXMLDOMElement
-    Set objColorelement = GeoXMLdom.createElement("objColor")
-    pointelement.appendChild objColorelement
-    objColorelement.setAttribute "r", "0"
-    objColorelement.setAttribute "g", "0"
-    objColorelement.setAttribute "b", "0"
-    objColorelement.setAttribute "alpha", "0.0"
+    Dim objColorElement As IXMLDOMElement
+    Set objColorElement = GeoXMLdom.createElement("objColor")
+    pointelement.appendChild objColorElement
+    objColorElement.setAttribute "r", "0"
+    objColorElement.setAttribute "g", "0"
+    objColorElement.setAttribute "b", "0"
+    objColorElement.setAttribute "alpha", "0.0"
 
     Dim layerelement As IXMLDOMElement
     Set layerelement = GeoXMLdom.createElement("layer")
@@ -419,11 +506,11 @@ Public Sub CreatePoint(pointname As String, xkoord As Double, ykoord As Double)
 
 End Sub
 Public Sub CreateList(listname As String, List As String)
-    Dim expressionelement As IXMLDOMElement
-    Set expressionelement = GeoXMLdom.createElement("expression")
-    Constructionelement.appendChild expressionelement
-    expressionelement.setAttribute "label", listname
-    expressionelement.setAttribute "exp", List
+    Dim expressionElement As IXMLDOMElement
+    Set expressionElement = GeoXMLdom.createElement("expression")
+    Constructionelement.appendChild expressionElement
+    expressionElement.setAttribute "label", listname
+    expressionElement.setAttribute "exp", List
 
     Dim listelement As IXMLDOMElement
     Set listelement = GeoXMLdom.createElement("element")
@@ -431,25 +518,25 @@ Public Sub CreateList(listname As String, List As String)
     listelement.setAttribute "type", "list"
     listelement.setAttribute "label", listname
 
-    Dim linestyleelement As IXMLDOMElement
-    Set linestyleelement = GeoXMLdom.createElement("lineStyle")
-    listelement.appendChild linestyleelement
-    linestyleelement.setAttribute "type", "0"
-    linestyleelement.setAttribute "object", "true"
+    Dim lineStyleElement As IXMLDOMElement
+    Set lineStyleElement = GeoXMLdom.createElement("lineStyle")
+    listelement.appendChild lineStyleElement
+    lineStyleElement.setAttribute "type", "0"
+    lineStyleElement.setAttribute "object", "true"
     
-    Dim showelement As IXMLDOMElement
-    Set showelement = GeoXMLdom.createElement("show")
-    listelement.appendChild showelement
-    showelement.setAttribute "object", "true"
-    showelement.setAttribute "label", "true"
+    Dim showElement As IXMLDOMElement
+    Set showElement = GeoXMLdom.createElement("show")
+    listelement.appendChild showElement
+    showElement.setAttribute "object", "true"
+    showElement.setAttribute "label", "true"
 
-    Dim objColorelement As IXMLDOMElement
-    Set objColorelement = GeoXMLdom.createElement("objColor")
-    listelement.appendChild objColorelement
-    objColorelement.setAttribute "r", "0"
-    objColorelement.setAttribute "g", "110"
-    objColorelement.setAttribute "b", "0"
-    objColorelement.setAttribute "alpha", "0.0"
+    Dim objColorElement As IXMLDOMElement
+    Set objColorElement = GeoXMLdom.createElement("objColor")
+    listelement.appendChild objColorElement
+    objColorElement.setAttribute "r", "0"
+    objColorElement.setAttribute "g", "110"
+    objColorElement.setAttribute "b", "0"
+    objColorElement.setAttribute "alpha", "0.0"
 
     Dim layerelement As IXMLDOMElement
     Set layerelement = GeoXMLdom.createElement("layer")
@@ -493,14 +580,14 @@ Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean
     Expr = ConvertToGeogebraSyntax(Expr, ConvertMaxima)
     ConvertToGeoGebra5Syntax Expr
 
-    Dim expressionelement As IXMLDOMElement
-    Set expressionelement = GeoXMLdom.createElement("expression")
-    Constructionelement.appendChild expressionelement
-'    expressionelement.setAttribute "type", "point"
-    expressionelement.setAttribute "label", funkname
+    Dim expressionElement As IXMLDOMElement
+    Set expressionElement = GeoXMLdom.createElement("expression")
+    Constructionelement.appendChild expressionElement
+    expressionElement.setAttribute "label", funkname
 '    expressionelement.setAttribute "exp", "f(x)=2*x"
 '    expressionelement.setAttribute "exp", "2*x"
-    expressionelement.setAttribute "exp", Expr
+    expressionElement.setAttribute "exp", Expr
+    expressionElement.setAttribute "type", "function"
     
     
     Dim pointelement As IXMLDOMElement
@@ -509,23 +596,23 @@ Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean
     pointelement.setAttribute "type", "function"
     pointelement.setAttribute "label", funkname
 
-    Dim showelement As IXMLDOMElement
-    Set showelement = GeoXMLdom.createElement("show")
-    pointelement.appendChild showelement
-    showelement.setAttribute "object", "true"
-    showelement.setAttribute "label", "true"
+    Dim showElement As IXMLDOMElement
+    Set showElement = GeoXMLdom.createElement("show")
+    pointelement.appendChild showElement
+    showElement.setAttribute "object", "true"
+    showElement.setAttribute "label", "true"
 
-    Dim objColorelement As IXMLDOMElement
-    Set objColorelement = GeoXMLdom.createElement("objColor")
-    pointelement.appendChild objColorelement
-    objColorelement.setAttribute "r", "0"
-    objColorelement.setAttribute "g", "0"
+    Dim objColorElement As IXMLDOMElement
+    Set objColorElement = GeoXMLdom.createElement("objColor")
+    pointelement.appendChild objColorElement
+    objColorElement.setAttribute "r", "0"
+    objColorElement.setAttribute "g", "0"
     If ulighed Then
-        objColorelement.setAttribute "b", "255"
-        objColorelement.setAttribute "alpha", "0.25"
+        objColorElement.setAttribute "b", "255"
+        objColorElement.setAttribute "alpha", "0.25"
     Else
-        objColorelement.setAttribute "b", "0"
-        objColorelement.setAttribute "alpha", "0.0"
+        objColorElement.setAttribute "b", "0"
+        objColorElement.setAttribute "alpha", "0.0"
     End If
 
     Dim layerelement As IXMLDOMElement
@@ -537,6 +624,19 @@ Public Sub CreateFunction(funkname As String, Expr As String, ulighed As Boolean
     Set labelModeelement = GeoXMLdom.createElement("labelMode")
     pointelement.appendChild labelModeelement
     labelModeelement.setAttribute "val", "0"
+
+    Dim fixedElement As IXMLDOMElement
+    Set fixedElement = GeoXMLdom.createElement("fixed")
+    pointelement.appendChild fixedElement
+    fixedElement.setAttribute "val", "true"
+
+    Dim lineStyleElement As IXMLDOMElement
+    Set lineStyleElement = GeoXMLdom.createElement("lineStyle")
+    pointelement.appendChild lineStyleElement
+    lineStyleElement.setAttribute "thickness", "5"
+    lineStyleElement.setAttribute "type", "0"
+    lineStyleElement.setAttribute "typeHidden", "1"
+    lineStyleElement.setAttribute "opacity", "178"
 
     Dim animationelement As IXMLDOMElement
     Set animationelement = GeoXMLdom.createElement("animation")
@@ -561,12 +661,12 @@ Public Sub CreateEquation(EquationName As String, Equation As String, ulighed As
     Equation = ConvertToGeogebraSyntax(Equation, ConvertMaxima)
     ConvertToGeoGebra5Syntax Equation
 
-    Dim expressionelement As IXMLDOMElement
-    Set expressionelement = GeoXMLdom.createElement("expression")
-    Constructionelement.appendChild expressionelement
-    expressionelement.setAttribute "label", EquationName
-    expressionelement.setAttribute "exp", Equation
-    expressionelement.setAttribute "type", "line"
+    Dim expressionElement As IXMLDOMElement
+    Set expressionElement = GeoXMLdom.createElement("expression")
+    Constructionelement.appendChild expressionElement
+    expressionElement.setAttribute "label", EquationName
+    expressionElement.setAttribute "exp", Equation
+    expressionElement.setAttribute "type", "line"
     
     
     Dim pointelement As IXMLDOMElement
@@ -575,23 +675,27 @@ Public Sub CreateEquation(EquationName As String, Equation As String, ulighed As
     pointelement.setAttribute "type", "function"
     pointelement.setAttribute "label", EquationName
 
-    Dim showelement As IXMLDOMElement
-    Set showelement = GeoXMLdom.createElement("show")
-    pointelement.appendChild showelement
-    showelement.setAttribute "object", "true"
-    showelement.setAttribute "label", "true"
+    Dim showElement As IXMLDOMElement
+    Set showElement = GeoXMLdom.createElement("show")
+    pointelement.appendChild showElement
+    showElement.setAttribute "object", "true"
+    showElement.setAttribute "label", "true"
 
-    Dim objColorelement As IXMLDOMElement
-    Set objColorelement = GeoXMLdom.createElement("objColor")
-    pointelement.appendChild objColorelement
-    objColorelement.setAttribute "r", "0"
-    objColorelement.setAttribute "g", "0"
+    Dim objColorElement As IXMLDOMElement
+    Set objColorElement = GeoXMLdom.createElement("objColor")
+    pointelement.appendChild objColorElement
+    objColorElement.setAttribute "r", "20"
+    objColorElement.setAttribute "g", "20"
     If ulighed Then
-        objColorelement.setAttribute "b", "255"
-        objColorelement.setAttribute "alpha", "0.25"
+        objColorElement.setAttribute "b", "255"
+        objColorElement.setAttribute "alpha", "0.25"
     Else
-        objColorelement.setAttribute "b", "0"
-        objColorelement.setAttribute "alpha", "0.0"
+        objColorElement.setAttribute "b", "20"
+        If Show3D Then
+            objColorElement.setAttribute "alpha", "0.5"
+        Else
+            objColorElement.setAttribute "alpha", "0.0"
+        End If
     End If
 
     Dim layerelement As IXMLDOMElement
@@ -650,23 +754,23 @@ Public Sub CreateVector(VectorName As String, VectorExpr As String, ulighed As B
     pointelement.setAttribute "type", "Vector"
     pointelement.setAttribute "label", VectorName
 
-    Dim showelement As IXMLDOMElement
-    Set showelement = GeoXMLdom.createElement("show")
-    pointelement.appendChild showelement
-    showelement.setAttribute "object", "true"
-    showelement.setAttribute "label", "true"
+    Dim showElement As IXMLDOMElement
+    Set showElement = GeoXMLdom.createElement("show")
+    pointelement.appendChild showElement
+    showElement.setAttribute "object", "true"
+    showElement.setAttribute "label", "true"
 
-    Dim objColorelement As IXMLDOMElement
-    Set objColorelement = GeoXMLdom.createElement("objColor")
-    pointelement.appendChild objColorelement
-    objColorelement.setAttribute "r", "0"
-    objColorelement.setAttribute "g", "0"
+    Dim objColorElement As IXMLDOMElement
+    Set objColorElement = GeoXMLdom.createElement("objColor")
+    pointelement.appendChild objColorElement
+    objColorElement.setAttribute "r", "0"
+    objColorElement.setAttribute "g", "0"
     If ulighed Then
-        objColorelement.setAttribute "b", "255"
-        objColorelement.setAttribute "alpha", "0.25"
+        objColorElement.setAttribute "b", "255"
+        objColorElement.setAttribute "alpha", "0.25"
     Else
-        objColorelement.setAttribute "b", "0"
-        objColorelement.setAttribute "alpha", "0.0"
+        objColorElement.setAttribute "b", "0"
+        objColorElement.setAttribute "alpha", "0.0"
     End If
 
     Dim layerelement As IXMLDOMElement
