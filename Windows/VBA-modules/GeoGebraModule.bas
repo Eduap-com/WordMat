@@ -330,7 +330,12 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
         For j = 1 To UBound(Cregr.XValues)
             '            UF2Dgraph.TextBox_punkter.text = UF2Dgraph.TextBox_punkter.text & CStr(Cregr.XValues(j)) & ListSeparator & CStr(Cregr.YValues(j)) & vbCrLf
             '            cmd = "(" & Replace(Replace(geogebrafil.ConvertToGeoGebraSyntax(Cregr.XValues(j)), "+", "%2B"), ",", ".") & "," & Replace(Replace(geogebrafil.ConvertToGeoGebraSyntax(Cregr.YValues(j)), "+", "%2B"), ",", ".") & ")"
-            cmd = "(" & Replace(ConvertToGeogebraSyntax(Cregr.XValues(j)), "+", "%2B") & "," & Replace(ConvertToGeogebraSyntax(Cregr.YValues(j)), "+", "%2B") & ")"
+            If Cregr.DimCount = 3 Then
+                cmd = "(" & Replace(ConvertToGeogebraSyntax(Cregr.XValues(j)), "+", "%2B") & "," & Replace(ConvertToGeogebraSyntax(Cregr.YValues(j)), "+", "%2B") & "," & Replace(ConvertToGeogebraSyntax(Cregr.ZValues(j)), "+", "%2B") & ")"
+                Perspective = 5
+            Else
+                cmd = "(" & Replace(ConvertToGeogebraSyntax(Cregr.XValues(j)), "+", "%2B") & "," & Replace(ConvertToGeogebraSyntax(Cregr.YValues(j)), "+", "%2B") & ")"
+            End If
             If Cregr.XValues(j) < xmin Then xmin = Cregr.XValues(j)
             If Cregr.XValues(j) > xmax Then xmax = Cregr.XValues(j)
             If Cregr.YValues(j) < ymin Then ymin = Cregr.YValues(j)

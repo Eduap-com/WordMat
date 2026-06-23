@@ -188,6 +188,7 @@ Sub MaximaCommand()
         MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
+    ShowTips
 
     If CASengine = 0 Then
         omax.ExecuteMaximaCommand
@@ -422,6 +423,7 @@ Sub MaximaSolvePar(Optional variabel As String)
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
+    ShowTips
     If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, ChrW$(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, ChrW$(8805)) > 1 Then
         MaximaSolveInequality variabel
         GoTo slut
@@ -583,10 +585,19 @@ newcas:
             End If
         End If
         If CheckForError Then
-            scrollpos = ActiveWindow.VerticalPercentScrolled
-            sslut = Selection.End
-            sstart = Selection.start
-            GoTo slut
+            If TempCas = 0 And CASengine = 0 Then
+                If MsgBox2(TT.A(131) & vbCrLf & vbCrLf & "Do you want to try GeoGebra CAS?", vbYesNo, "Retry?") = vbYes Then
+                    CASengineTempOnly = 2
+                    omax.MaximaOutput = vbNullString
+                    omax.KommentarOutput = vbNullString
+                    GoTo newcas
+                End If
+            Else
+                scrollpos = ActiveWindow.VerticalPercentScrolled
+                sslut = Selection.End
+                sstart = Selection.start
+                GoTo slut
+            End If
         End If
 
         Dim Oundo As UndoRecord
@@ -637,12 +648,23 @@ newcas:
             If TempCas = 0 And CASengine = 0 Then
                 If MsgBox2(TT.A(131) & vbCrLf & vbCrLf & "Do you want to try GeoGebra CAS?", vbYesNo, "Retry?") = vbYes Then
                     CASengineTempOnly = 2
+                    omax.MaximaOutput = vbNullString
+                    omax.KommentarOutput = vbNullString
                     GoTo newcas
                 End If
 '                GoTo stophop 'nsolve
             ElseIf CASengine = 2 And UFSelectVar.SolveMethod = 0 Then
                 MaximaNsolve variabel, omax.Kommando
-                Selection.TypeText TT.A(788)
+                Selection.TypeParagraph
+                Selection.Font.Size = 8
+                Selection.Font.ColorIndex = wdGray50
+                Selection.Font.Italic = True
+                Selection.InsertAfter TT.A(788)
+                Selection.Collapse (wdCollapseEnd)
+                Selection.Font.Size = 11
+                Selection.Font.ColorIndex = wdAuto
+                Selection.Font.Italic = False
+                Selection.TypeParagraph
                 Selection.TypeParagraph
                 GoTo slut
             End If
@@ -1459,6 +1481,13 @@ Sub beregn()
         GoTo slut
     End If
 
+    If Selection.Font.ColorIndex = OutputColor Then
+        Selection.OMaths(1).Range.Font.ColorIndex = wdAuto
+    ElseIf Selection.OMaths(1).Range.Font.ColorIndex = OutputColor Then
+        Selection.OMaths(1).Range.Font.ColorIndex = wdAuto
+    ElseIf Selection.OMaths(1).Range.Font.ColorIndex = 9999999 Then ' mix of colors
+        Selection.OMaths(1).Range.Font.ColorIndex = wdAuto
+    End If
     omax.ReadSelection
     
     If InStr(omax.Kommando, VBA.ChrW$(8788)) > 0 Or InStr(VBA.LCase$(omax.Kommando), "definer:") > 0 Or InStr(VBA.LCase$(omax.Kommando), "define:") > 0 Or InStr(VBA.LCase$(omax.Kommando), "definer ligning:") > 0 Or InStr(omax.Kommando, VBA.ChrW$(8801)) > 0 Then
@@ -1676,6 +1705,7 @@ Sub Omskriv()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
+    ShowTips
 
     If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
     UFomskriv.Vars = omax.Vars
@@ -1807,6 +1837,7 @@ Sub reducer()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
+    ShowTips
 
     If CASengine > 0 Then
         s = "simplify(" & omax.Kommando & ")"
@@ -1896,6 +1927,7 @@ Sub CompareTest()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
+    ShowTips
 
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -1971,6 +2003,7 @@ Sub faktoriser()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
+    ShowTips
     
     If CASengine > 0 Then
         s = "factor(" & omax.Kommando & ")"
@@ -2241,6 +2274,7 @@ Sub Integrer()
 
     variabel = InputBox(TT.A(51), TT.A(845), "x")
     If variabel = "" Then GoTo slut
+    ShowTips
     
     If CASengine > 0 Then
         s = "integral(" & omax.Kommando & " , " & variabel & ")"
@@ -2329,6 +2363,7 @@ Sub SolveDENumeric()
         MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
+    ShowTips
 
     omax.FindVariable , True, CASengine, True
     If InStr(omax.Vars, "t") > 0 Then
@@ -2485,6 +2520,7 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
+    ShowTips
 
     If funktion = vbNullString And variabel = vbNullString Then
         If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
@@ -2678,7 +2714,7 @@ Sub InsertOutput(text As String, Optional ResultAfterTable As Boolean = True)
     End If
     
     Selection.Font.ColorIndex = OutputColor
-    Selection.TypeText text    ' causes problems with = sign coming under fraction line
+    Selection.TypeText text   ' causes problems with = sign coming under fraction line
     Selection.Move wdCharacter, -1
     If Selection.OMaths(1).Range.Font.Bold Then
         IsBold = True

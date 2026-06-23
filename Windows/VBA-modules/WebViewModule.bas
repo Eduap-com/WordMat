@@ -146,7 +146,11 @@ Function ExecuteGeoGebraCasCommand(CmdString As String, Optional UseDefs As Bool
             ArrDef = Split(GeoGebraDefs, ";")
             For i = 0 To UBound(ArrDef)
 '                JS = JS & "ggbApplet.evalCommand(""" & ArrDef(i) & """);"
-                cmd = Replace(ArrDef(i), "=", ":") & ";" & cmd ' for CAS commands, definitions must be with :
+                ' for CAS commands, definitions use :=. It may already be the case im cmdstring
+                ArrDef(i) = Replace(ArrDef(i), ":=", "DEFQZ")
+                ArrDef(i) = Replace(ArrDef(i), "=", ":=")
+                ArrDef(i) = Replace(ArrDef(i), "DEFQZ", ":=")
+                cmd = ArrDef(i) & ";" & cmd
             Next
         End If
     
@@ -166,7 +170,7 @@ hop:
         If WebV Is Nothing Then PrepareGeoGebraCAS
         JS = "ggbApplet.reset();" 'ggbApplet.setRounding(""" & MaximaCifre & "s"");"
     
-        ArrCas = Split(CmdString, ";")
+        ArrCas = Split(cmd, ";")
         For i = 0 To UBound(ArrCas)
             If AssumeString <> "" Then
                 JS = JS & "ggbApplet.evalCommandCAS(""" & AssumeString & "," & ArrCas(i) & ")"");"

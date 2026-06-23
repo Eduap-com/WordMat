@@ -11,12 +11,14 @@ Option Explicit
 
 Private xval() As Double
 Private yval() As Double
+Private zval() As Double
 Private Coeff() As Double ' coefficients for polregr Coeff(0)=a_0 ...
 Public A As Double
 Public b As Double
 Public c As Double
 Public r As Double
 Public Ligning As String
+Public DimCount As Integer ' 2d or 3d
 Private RegressionText As String
 Private regrtype As Integer
 Public ShowR As Boolean
@@ -38,6 +40,13 @@ End Property
 
 Public Property Let YValues(ByVal Value As Variant)
     yval = Value
+End Property
+Public Property Get ZValues() As Variant
+    ZValues = zval
+End Property
+
+Public Property Let ZValues(ByVal Value As Variant)
+    zval = Value
 End Property
 Public Property Get Datatext() As Variant
 
@@ -80,7 +89,9 @@ Dim i As Integer
 Dim j As Integer
 Dim n As Integer
 Dim oFS As Integer
+Dim StopNow As Boolean
 
+DimCount = 0
 On Error GoTo fejl
 
 If Selection.Tables.Count = 0 Then Exit Sub
@@ -116,20 +127,32 @@ If n < 2 Then ' if nothing selected in advance
     On Error Resume Next
     For i = 1 To n ' determine where numbers are located
         For j = 1 To rws(1).Cells.Count
-        cellval = rws(i).Cells(j).Range.text
-        cellval = Left$(cellval, Len(cellval) - 1)
-        cellval = Replace(cellval, "*10^", "E")
-        tal = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
-'        tal = val(Replace(cellval, ",", "."))
-        If Err.Number = 0 Then
-           oFS = j - 1
-           Exit For
-        Else
-           Err.Clear
-        End If
+            cellval = rws(i).Cells(j).Range.text
+            cellval = Left$(cellval, Len(cellval) - 1)
+            cellval = Replace(cellval, "*10^", "E")
+            tal = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
+    '        tal = val(Replace(cellval, ",", "."))
+            If Err.Number = 0 Then
+               If Not StopNow Then oFS = j - 1 ' offset for first number in row
+               DimCount = DimCount + 1
+               StopNow = True
+            Else
+               Err.Clear
+            End If
         Next
+        If StopNow Then Exit For
     Next
+Else
+' find dimension
+For i = 1 To rws(1).Cells.Count
+    cellval = rws(2).Cells(i).Range.text
+    cellval = Left$(cellval, Len(cellval) - 1)
+    If IsNumeric(cellval) Then
+        DimCount = DimCount + 1
+    End If
+Next
 End If
+
 
 If n < 2 Then
     GoTo fejl
@@ -137,6 +160,7 @@ End If
 
     ReDim xval(1 To n) As Double
     ReDim yval(1 To n) As Double
+    If DimCount > 2 Then ReDim zval(1 To n) As Double
 '    ReDim Preserve x(1 To n) As Double
 '    ReDim Preserve y(1 To n) As Double
     On Error Resume Next
@@ -175,6 +199,25 @@ End If
         If Not IsNumeric(cellval) Then GoTo NotNumber
         yval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
         yval(i) = val(Replace(cellval, ",", "."))
+        
+        ' if 3d
+        If DimCount > 2 Then
+            If rws(j).Cells(3 + oFS).Range.OMaths.Count > 0 Then
+                rws(j).Cells(3 + oFS).Range.Select
+                omax.ReadSelection
+                omax.beregn
+                cellval = Replace(omax.MaximaOutput, "=", "")
+            Else
+                cellval = Replace(rws(j).Cells(3 + oFS).Range.text, ",", ".")
+                cellval = Left$(cellval, Len(cellval) - 1)
+            End If
+            cellval = Replace(cellval, "*10^", "E")
+            If Not IsNumeric(cellval) Then GoTo NotNumber
+            zval(i) = CDbl(Replace(Replace(cellval, ".", ""), ",", ""))
+            zval(i) = val(Replace(cellval, ",", "."))
+        End If
+        
+        
         If Err.Number > 0 Then ' if either the x or y value is not a number (error from cdbl) then the line should be ignored
 NotNumber:
            i = i - 1

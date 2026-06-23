@@ -56,6 +56,7 @@ matchdeclare(aliznonnatural,lambda([z],numberp(z) and not(integerp(ToFrac(z)) an
 matchdeclare(alizirrational,lambda([z],constantp(z) and not(numberp(z))))$
 matchdeclare(aliznonirrationalnoninteger,lambda([z],numberp(z) and not(integerp(rationalize(z)))))$
 matchdeclare(alizneginteger,lambda([z],integerp(ToFrac(z) and z<0 )))$
+matchdeclare(aliznegativenum,lambda([z],if constantp(z) then is(z<0) else false))$
 matchdeclare(aliznegative,lambda([z],is(z<0)))$
 matchdeclare(aliznegative0,lambda([z],is(z<=0)))$
 matchdeclare(aliznegative2,lambda([z],is(op(z)="-")))$
@@ -73,8 +74,9 @@ matchdeclare(aliznotaddop,lambda([z],is(op(z)#"+")))$
 matchdeclare(aliznotone,lambda([z],is(z#1) and is(z#1.0)))$
 matchdeclare([alizatom,alizatom2],atom)$
 
-tellsimpafter(-((aliz + aliz2) / aliz3), (-aliz - aliz2) / aliz3)$
-tellsimpafter(aliznegative^aliznum,ev(aliznegative^rat(aliznum),keepfloat=false))$
+tellsimpafter(-((aliz + aliz2) / aliz3), (-aliz - aliz2) / aliz3)$ /* ensures -((a+b)/c) is simplified to (-a-b)/c */
+tellsimpafter(aliznegativenum^aliznum,ev(aliznegativenum^rat(aliznum),keepfloat=false))$ /* ensures that (-2)^0.4 is evaluated to a real number. Otherwise maxima will not when power is a float. Must be rat - not rationalize (try 0.4)*/
+  /* tellsimpafter(aliznegative^aliznum,ev(aliznegative^rat(aliznum),keepfloat=false))$    replaced 1.40 */
 tellsimpafter((-1)^alizoddnumevendenom,ev((-1)^alizoddnumevendenom,domain=complex))$
 
 defrule(swaprule,aliznotx=alizx,alizx=aliznotx)$
@@ -454,22 +456,23 @@ qexpr
 )$
 
 /* substitutes solutions back into equation to see if any imaginary result appears. If so it is assumed that the result is not valid */
-RemoveUndefined(eqnw,sollistq):=block([indq,indq2,solq,sollistq2,delq,resq],
+RemoveUndefined(eqnw,sollistq):=block([indq,indq2,solq,sollistq2,delq,resq,fpprec: 50],
 if length(sollistq)=0 then return(sollistq),
 if op(eqnw)=end then return(sollistq),
 indq:0,sollistq2:[],
-startq,
+startq, 
 	indq:indq+1,
 	indq2:1,
 	if length(sollistq)<indq then go(slutq),
 	solq:sollistq[indq],
-	if IsSolved(solq,solvar)=false then (sollistq2:append(sollistq2,[solq]),go(startq)),
-	resq:ev(eqnw,solq,bfloat), 
+	if IsSolved(solq,solvar)=false then (sollistq2:append(sollistq2,[solq]),go(startq)), 
+	resq:errcatch(ev(eqnw,solq,bfloat)), 
+	if resq=[] then (go(startq)),
 	if op(resq)="=" and constantp(lhs(resq)) and constantp(rhs(resq)) then (resq:errcatch(abs(lhs(resq)-rhs(resq))/max(1.0,abs(lhs(resq)),abs(rhs(resq)))), if not(resq=[]) and resq[1] > 1.0e-4 then go(startq)), /* removes solutions that reduce to a number and does not satisfy the equation within a tolerance */
 	if do(
 		delq:inpart(eqnw,indq2),
 		if delq=end then return(true),
-		resq:ev(delq,solq),
+		resq:errcatch(ev(delq,solq)),
 		errcatch(if powundef(subst(solq,delq)) then return(false)),
 		if errcatch(imagundef(ev(resq,numer)))=[] and errcatch(imagundef(resq))=[] then return(false),
 		if errcatch(asinundef(resq))=[] then return(false),

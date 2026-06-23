@@ -3342,9 +3342,14 @@ videre:
                End If
             ElseIf ea.ChrByIndex(pos + antalm + 1) = "(" Then    ' if f'(x)
 msat:
-                If DiffEqVar = Var Or CAStype = 1 Or CAStype = 2 Then  'if diffligning then no subst
+                If DiffEqVar = Var Or CAStype = 1 Or CAStype = 2 Then  'if diffligning or geogebra then no subst
                     If Len(subt) > 0 And Len(subt) = antalm Then ' if partiel
-                        text = Left$(text, pos - 1 - Len(F)) & "diff(" & F & "(" & Var & ")," & Var & "," & antalmS & ")" & Right$(text, Len(text) - pos - varl - antalm)
+                        f2 = Left$(F, pos2 - 1)
+                        If CAStype = 0 Then
+                            text = Left$(text, pos - 1 - Len(F)) & "diff(" & f2 & "(" & Var & ")," & subt & "," & antalmS & ")" & Right$(text, Len(text) - pos - varl - antalm)
+                        Else
+                            text = Left$(text, pos - 1 - Len(F)) & "Derivative(" & f2 & "(" & Var & ")," & subt & "," & antalmS & ")" & Right$(text, Len(text) - pos - varl - antalm)
+                        End If
                     Else ' limit, but maybe also more?
                         If CAStype = 0 Then
                             text = Left$(text, pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right$(text, Len(text) - pos - varl - antalm)
@@ -4069,6 +4074,7 @@ Function ConvertUnits(text As String) As String
     ea.ReplaceVar "muL", "%muL"
     ea.ReplaceVar "ml", "%%mL"
     ea.ReplaceVar "mul", "%muL"
+    ea.ReplaceVar "L", "%L"
     
     ConvertUnits = ea.text
 
@@ -4172,6 +4178,7 @@ Function ConvertToAscii(ByVal text As String) As String
 
     ConvertToAscii = text
 End Function
+
 Function ConvertToWordSymbols(ByVal text As String) As String
     On Error GoTo fejl
     Dim gtegn As String
@@ -4336,8 +4343,6 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     Loop
     ' number,non-number is removed e.g. 240, -> 240 and x*,45 ->x*0,45
     
-    '#If Mac Then
-    '** MAC   .0 on all numbers because float is used instead of dectalallnum
     pos = InStr(ea.text, ".0")
     Do While pos > 0
         If Not (ea.IsNumber(pos + 2)) Then
@@ -4345,7 +4350,20 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         End If
         pos = InStr(pos + 1, ea.text, ".0")
     Loop
-    '#End If
+    
+    If CASengine > 0 Then ' GeoGebra. Maxima can output 3.0000000000000000000 this removes the zeros
+        pos = InStr(ea.text, ".0") + 1
+        pos2 = pos - 1
+        Do While pos > 1
+            If ea.ChrByIndex(pos) = "0" Then
+                pos = pos + 1
+            Else
+                ea.text = Left(ea.text, pos2 - 1) & Right(ea.text, Len(ea.text) - pos + 1)
+                pos = InStr(pos, ea.text, ".0") + 1
+                pos2 = pos - 1
+            End If
+        Loop
+    End If
 
     ' maxima 5.47.1 vil write a minus bracket in some circumstances  -2*x  -> -(2*x)  but only for the first term. A litte uncertain if there can be situations where the bracket should not be removed
     pos = InStr(ea.text, "-(")
@@ -4427,6 +4445,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     If InStr(text, "*") <> 0 Then text = Replace(text, "*", gtegn)    ' chrw$(183)
 
     If InStr(text, "exp(") <> 0 Then text = Replace(text, "exp(", "e^(")
+    If InStr(text, "ln") <> 0 Then text = Replace(text, "ln", "ln" & ChrW$(8289))
     If InStr(text, "log") <> 0 Then text = Replace(text, "log", "ln" & ChrW$(8289))
     If InStr(text, "lgog(") <> 0 Then text = Replace(text, "lgog(", "log" & ChrW$(8289) & "(")
     If InStr(text, "sqrt") <> 0 Then text = Replace(text, "sqrt", ChrW$(8730))
@@ -4437,8 +4456,9 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         
     'root of higher degree
     If CASengine > 0 Then 'only for GeoGebra
+        pos = 1
         Do
-            pos = InStr(text, "nroot(")
+            pos = InStr(pos, text, "nroot(")
             If pos <> 0 Then
                 ea.text = text
                 Udtryk = ea.GetNextBracketContent(pos + 4)
@@ -4453,6 +4473,20 @@ Function ConvertToWordSymbols(ByVal text As String) As String
                 End If
             End If
         Loop While pos <> 0
+        
+        ' spaces that are multiplication signs
+        pos = 1
+        Do
+            pos = InStr(pos, text, " ")
+            If pos <> 0 Then
+                ea.text = text
+                If ea.IsNumber(pos - 1) And ea.IsLetterPos(pos + 1) Then
+                    ea.text = Left(ea.text, pos - 1) & gtegn & Right(ea.text, Len(ea.text) - pos)
+                End If
+                pos = pos + 1
+            End If
+        Loop While pos <> 0
+        text = ea.text
     End If
 
     ' notequal(x,y) -> x=y
@@ -5326,15 +5360,22 @@ Sub InsertMaximaOutput()
     End If
 
 '    InsertAssumptions ' replaced by a section in InsertForklaring
-
     If Len(KommentarOutput) > 3 Then
         s = TranslateReplaceComment(KommentarOutput)
         If Len(s) > 3 Then
             Selection.TypeParagraph
+            Selection.Font.Size = 8
+            Selection.Font.ColorIndex = wdGray50
+            Selection.Font.Italic = True
             Selection.InsertAfter s
             Selection.Collapse (wdCollapseEnd)
+            Selection.Font.Size = 11
+            Selection.Font.ColorIndex = wdAuto
+            Selection.Font.Italic = False
+            Selection.TypeParagraph
         End If
     End If
+
 
 End Sub
 Function TranslateReplaceComment(comm As String) As String
@@ -5400,69 +5441,7 @@ Function TranslateReplaceComment(comm As String) As String
 
     TranslateReplaceComment = outtext
 End Function
-Sub InsertAssumptions()
-' replaced by a section in InsertForklaring
-    Dim gemfontsize As Integer
-    Dim gemitalic As Boolean
-    Dim gemfontcolor As Integer
-    Dim gemsb As Integer
-    Dim gemsa As Integer
-    Dim mo As Range
-    Dim assum As String
 
-    If Not (ShowAssum) Then GoTo slut
-
-    If InStr(KommentarOutput, "Assumptions:") > 0 Then
-        Dim pos As Integer
-        Dim ea As New ExpressionAnalyser
-        pos = InStr(KommentarOutput, "Assumptions:")
-        ea.text = KommentarOutput
-        ea.pos = pos
-        assum = Trim$(omax.ConvertToWordSymbols(Replace(ea.GetNextBracketContent, ",", " , ")))
-    End If
-    If Len(assum) < 2 Then GoTo slut
-
-    gemfontsize = Selection.Font.Size
-    gemitalic = Selection.Font.Italic
-    gemfontcolor = Selection.Font.ColorIndex
-    gemsb = Selection.ParagraphFormat.SpaceBefore
-    gemsa = Selection.ParagraphFormat.SpaceAfter
-
-    With Selection.ParagraphFormat
-        .SpaceBefore = 0
-        .SpaceBeforeAuto = False
-        .SpaceAfter = 2
-        .SpaceAfterAuto = False
-        '        .LineUnitBefore = 0
-        '        .LineUnitAfter = 0
-        .Alignment = wdAlignParagraphCenter
-    End With
-    Selection.Font.Size = 8
-    Selection.Font.ColorIndex = wdGray50
-    Selection.Font.Italic = True
-
-    Selection.TypeParagraph
-    Selection.TypeText TT.A(900) & "  "
-    '            Selection.TypeText text:=vbTab
-    Set mo = Selection.OMaths.Add(Selection.Range)
-    Selection.TypeText assum
-    mo.OMaths.BuildUp
-
-    Selection.TypeParagraph
-    Selection.Font.Size = gemfontsize
-    Selection.Font.Italic = gemitalic
-    Selection.Font.ColorIndex = gemfontcolor
-    With Selection.ParagraphFormat
-        .SpaceBefore = gemsb
-        '        .SpaceBeforeAuto = False
-        .SpaceAfter = gemsa
-        '        .SpaceAfterAuto = False
-    End With
-
-    GoTo slut
-fejl:
-slut:
-End Sub
 
 Function FindMaximaOutput(text As String) As String
 ' picks output2 from the entire maxima output

@@ -640,30 +640,32 @@ Dim gempos As Long
 Dim c As String, Var As String
     On Error Resume Next
     Do
-    c = AscW(ChrByIndex(pos))
-    
-    If ChrByIndex(pos) = "_" Then
-            FindNextBreak
-    ElseIf IsNumber Then  ' tal eller pi 'And c <> 960
-        If (IsLetterPos(pos + 1)) And (Not (IsLetterPos(pos - 1, False)) Or pos = 1) Then  ' c=960 introduced v1.24 because geogebra creates pi2 which should give ->pi*2
-            gempos = pos
-            Var = GetPrevVar(pos) ' checks whether the number can be a number at the end of a function, then no multiplication sign should be inserted
-            If Not (Len(Var) > 0 And pos = gempos) Then
-                InsertAfterPos "*", gempos
+        c = AscW(ChrByIndex(pos))
+        
+        If c = 95 Then '  ChrByIndex(pos) = "_"
+                FindNextBreak
+        ElseIf IsNumber Then  ' tal eller pi 'And c <> 960
+            If (IsLetterPos(pos + 1)) And (Not (IsLetterPos(pos - 1, False)) Or pos = 1) Then  ' c=960 introduced v1.24 because geogebra creates pi2 which should give ->pi*2
+                gempos = pos
+                Var = GetPrevVar(pos) ' checks whether the number can be a number at the end of a function, then no multiplication sign should be inserted
+                If Not (Len(Var) > 0 And pos = gempos) Then
+                    InsertAfterPos "*", gempos
+                End If
+                pos = gempos
+                pos = pos + 1 'extra
+            ElseIf ChrByIndex(pos + 1) = " " Then
+                text = Left(text, pos) & "*" & Right(text, Len(text) - pos - 1)
+            ElseIf ChrByIndex(pos - 1) = ")" Or ChrByIndex(pos - 1) = ChrW$(960) Then
+                InsertBeforePos ("*")
+                pos = pos + 1 'extra
             End If
-            pos = gempos
-            pos = pos + 1 'extra
-        ElseIf ChrByIndex(pos - 1) = ")" Or ChrByIndex(pos - 1) = ChrW$(960) Then
-            InsertBeforePos ("*")
-            pos = pos + 1 'extra
+        ElseIf c = 41 Then 'ChrByIndex(pos) = ")"
+            If IsLetterPos(pos + 1) And ChrByIndex(pos + 1) <> "_" Then
+                InsertAfterPos ("*")
+                pos = pos + 1 'extra
+            End If
         End If
-    ElseIf ChrByIndex(pos) = ")" Then
-        If IsLetterPos(pos + 1) And ChrByIndex(pos + 1) <> "_" Then
-            InsertAfterPos ("*")
-            pos = pos + 1 'extra
-        End If
-    End If
-    pos = pos + 1
+        pos = pos + 1
     Loop Until pos > Len(text)
     
 End Sub

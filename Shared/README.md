@@ -36,22 +36,16 @@ Get new version here:
 https://geogebra.github.io/docs/reference/en/GeoGebra_Apps_Embedding/
 
 
-###geogebra-math-apps\GeoGebra\HTML5\5.0\GeoGebra.html changed:
+### geogebra-math-apps\GeoGebra\HTML5\5.0\GeoGebra.html changed:
 
-####hide equation editor at bottom
-line 881   add the class 'keyboard-initial-hidden' to body
-<body dir="ltr" tabindex="-1" class="keyboard-initial-hidden" onload="loadApp()">
+#### line 15 needs this added to hide keyboard and equation editor:
+var defaultParams = {"vendor":"GeoGebra", "preloadModules":"", "keyboardType":"noKeyboard", "showKeyboardOnFocus":"false"};
 
-
-#### PerspectivePopup disabled. This is important, but you may need more:
-In GeoGebra.html line 809:
-
+#### PerspectivePopup disabled. In GeoGebra.html about line 809:
 .perspectivePopup,
 .appPickerPopup {
 	display: none !important;
 }
-
-
 
 #### Add to function loadApp() at line 423 (after updateAppletParams)
 
