@@ -686,7 +686,7 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
     If InStr(text, "chi") <> 0 Then text = Replace(text, "chi", VBA.ChrW$(967))
     If InStr(text, "tau") <> 0 Then text = Replace(text, "tau", VBA.ChrW$(964))
     If InStr(text, "Pi") <> 0 Then text = Replace(text, "Pi", VBA.ChrW$(928))
-    If InStr(text, "greek-nu") <> 0 Then text = Replace(text, "greek-nu", VBA.ChrW$(957))
+    If InStr(text, "greeknu") <> 0 Then text = Replace(text, "greeknu", VBA.ChrW$(957))
     If InStr(text, "kappa") <> 0 Then text = Replace(text, "kappa", VBA.ChrW$(954))
     If InStr(text, "zeta") <> 0 Then text = Replace(text, "zeta", VBA.ChrW$(950))
     If InStr(text, "eta") <> 0 Then text = Replace(text, "eta", VBA.ChrW$(951)) ' must be last as eta is included in others
