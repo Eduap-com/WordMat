@@ -448,8 +448,13 @@ Sub ShowDebug(Optional vis As Boolean = False, Optional MInputString As String, 
         If OutputString = vbNullString Then
 #If Mac Then
 #Else
+    If MaximaUnits Then
+            UserFormDebug.TextBox_lastmaximaoutput = MaxProcUnit.LastMaximaOutput
+            UserFormDebug.TextBox_maximaoutput = MaxProcUnit.MaximaOutput
+    Else
             UserFormDebug.TextBox_lastmaximaoutput = MaxProc.LastMaximaOutput
             UserFormDebug.TextBox_maximaoutput = MaxProc.MaximaOutput
+    End If
 #End If
         Else
             UserFormDebug.TextBox_lastmaximaoutput = OutputString
@@ -2708,7 +2713,7 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     If InStr(text, ChrW$(967)) <> 0 Then text = Replace(text, ChrW$(967), "chi")
     If InStr(text, ChrW$(928)) <> 0 Then text = Replace(text, ChrW$(928), "Pi")
     If InStr(text, ChrW$(964)) <> 0 Then text = Replace(text, ChrW$(964), "tau")
-    If InStr(text, ChrW$(957)) <> 0 Then text = Replace(text, ChrW$(957), "greek-nu")
+    If InStr(text, ChrW$(957)) <> 0 Then text = Replace(text, ChrW$(957), "greeknu")
     If InStr(text, ChrW$(954)) <> 0 Then text = Replace(text, ChrW$(954), "kappa")
     If InStr(text, ChrW$(951)) <> 0 Then text = Replace(text, ChrW$(951), "eta")
     If InStr(text, ChrW$(950)) <> 0 Then text = Replace(text, ChrW$(950), "zeta")
@@ -4732,7 +4737,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     If InStr(text, "chi") <> 0 Then text = Replace(text, "chi", ChrW$(967))
     If InStr(text, "tau") <> 0 Then text = Replace(text, "tau", ChrW$(964))
     If InStr(text, "Pi") <> 0 Then text = Replace(text, "Pi", ChrW$(928))
-    If InStr(text, "greek-nu") <> 0 Then text = Replace(text, "greek-nu", ChrW$(957))
+    If InStr(text, "greeknu") <> 0 Then text = Replace(text, "greeknu", ChrW$(957))
     If InStr(text, "kappa") <> 0 Then text = Replace(text, "kappa", ChrW$(954))
     If InStr(text, "zeta") <> 0 Then text = Replace(text, "zeta", ChrW$(950))
     If InStr(text, "eta") <> 0 Then text = Replace(text, "eta", ChrW$(951))    ' must be last as eta is included in others
@@ -5042,7 +5047,7 @@ Function ConvertLatexToWord(text As String) As String
     text = Replace(text, "\chi", ChrW$(967))
     text = Replace(text, "\tau", ChrW$(964))
     text = Replace(text, "\Pi", ChrW$(928))
-    '    text = Replace(text, "\greek-nu", chrw$(957))
+    '    text = Replace(text, "\greeknu", chrw$(957))
     text = Replace(text, "\kappa", ChrW$(954))
     text = Replace(text, "\zeta", ChrW$(950))
     text = Replace(text, "\eta", ChrW$(951))    ' must be last as eta is included in others

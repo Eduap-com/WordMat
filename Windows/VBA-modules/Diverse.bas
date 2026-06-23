@@ -1694,7 +1694,7 @@ Function FormatDefinitions(DefS As String) As String
     DefS = Replace(DefS, "chi", VBA.ChrW$(967))
     DefS = Replace(DefS, "Pi", VBA.ChrW$(928))
     DefS = Replace(DefS, "tau", VBA.ChrW$(964))
-    DefS = Replace(DefS, "greek-nu", VBA.ChrW$(957))
+    DefS = Replace(DefS, "greeknu", VBA.ChrW$(957))
     DefS = Replace(DefS, "kappa", VBA.ChrW$(954))
     DefS = Replace(DefS, "eta", VBA.ChrW$(951))
     DefS = Replace(DefS, "zeta", VBA.ChrW$(950))
