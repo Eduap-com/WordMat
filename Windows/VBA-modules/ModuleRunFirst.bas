@@ -94,8 +94,10 @@ Sub RunFirst()
     If SettCheckForUpdate Then CheckForUpdateSilent
 
     HasStarted = True
-
+    GoTo slut
 TheEnd:
+    MsgBox2 Err.Number & Err.Description, vbOKOnly, TT.Error
+slut:
 End Sub
 
 Sub SetMaxProc()
