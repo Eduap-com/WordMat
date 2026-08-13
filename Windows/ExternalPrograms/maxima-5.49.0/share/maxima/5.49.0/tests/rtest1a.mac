@@ -1,0 +1,140 @@
+(use_fast_arrays:true,array(bil,3),0);
+0$
+bil[1];
+false;
+bil[1]:3;
+3;
+bil[1];
+3;
+listarray(bil);
+[false, 3, false,false];
+arrayinfo(bil);
+[declared, 1, [3]];
+ha[1]:2;
+2;
+ha[3];
+false;
+arrayinfo(ha);
+[hash_table, 1, 1];
+use_fast_arrays:false;
+false;
+array(bil1,3);
+bil1;
+bil1[2];
+bil1[2];
+bil1[2]:3;
+3;
+bil1[2];
+3;
+listarray(bil1);
+[''?munbound,''?munbound,3,''?munbound];
+arrayinfo(bil1);
+[declared, 1, [3]];
+oldha[1]:8;
+8;
+oldha[2];
+oldha[2];
+arrayinfo(oldha);
+[hashed, 1, [1]];
+use_fast_arrays:true;
+true;
+bilx[n]:=n*bilx[n-1];
+bilx[n]:=n*bilx[n-1];
+bilx[0]:1;
+1;
+bilx[3];
+6;
+
+use_fast_arrays: false;
+false;
+
+block ([use_fast_arrays : true], kill (foo), foo [2] : 'x, foo [3] : 'y, foo [5] : 'z, foo [7] : 'a, sort (listarray (foo)));
+[a, x, y, z];
+
+/* Bug #2978: "kill(a[i])" doesn't work with fast arrays */
+
+block ([use_fast_arrays : true,
+        y : yvalue],
+  local (y),
+  kill (foo),
+  foo ['x] : 'x,
+  foo ['y] : 'y,
+  foo [ y] :  y,
+  foo ['z] : 'z,
+  /* Check that indices get evaluated */
+  kill (foo ['y]),
+  kill (foo [ y]),
+  sort (listarray (foo)));
+[x, z];
+
+block ([use_fast_arrays : true,
+        y : yvalue],
+  local (y),
+  kill (foo),
+  foo [1, 'x] : 'x,
+  foo [2, 'y] : 'y,
+  foo [2,  y] :  y,
+  foo [3, 'z] : 'z,
+  /* Check that indices get evaluated */
+  kill (foo [2, 'y]),
+  kill (foo [2,  y]),
+  sort (listarray (foo)));
+[x, z];
+
+/* kill(all) erases display properties for conjugate
+ * mailing list 2017-02-24: "kill(all) results in non-default display options in wxMaxima"
+ * Verify here that properties list for conjugate and friends is not reset by kill(all),
+ * but it is reset by kill(foo) where foo = conjugate or friend.
+ */
+
+(?putprop ('conjugate, 111, 'foo),
+ ?putprop (nounify ('erf_generalized), 222, 'bar),
+ ?putprop ('beta, 333, 'baz),
+ ?putprop ('nset, 444, 'quux),
+ ?putprop ('maxmin, 666, 'blurf),
+ ?putprop ('nummod, 777, 'barf),
+ 0);
+0;
+
+kill(all);
+done;
+
+[?get ('conjugate, 'foo),
+ ?get (nounify ('erf_generalized), 'bar),
+ ?get ('beta, 'baz),
+ ?get ('nset, 'quux),
+ ?get ('maxmin, 'blurf),
+ ?get ('nummod, 'barf)];
+[111, 222, 333, 444, 666, 777];
+
+(kill (conjugate),
+ apply (kill, [nounify ('erf_generalized)]),
+ kill (beta),
+ kill (nset, maxmin, nummod),
+ 0);
+0;
+
+[?get ('conjugate, 'foo),
+ ?get (nounify ('erf_generalized), 'bar),
+ ?get ('beta, 'baz),
+ ?get ('nset, 'quux),
+ ?get ('maxmin, 'blurf),
+ ?get ('nummod, 'barf)];
+[false, false, false, false, false, false];
+
+/* verify that props is empty after kill(all) -- pre-bugfix behavior is that props
+ * has several built-in symbols before and after kill(all)
+ */
+
+/* this test fails due to bug in kill(rules); see SF bug #3289 */
+(kill(all), props);
+[];
+
+/* workaround bug #3289 */
+(kill(all),
+ not some (lambda ([x], member (x, props)),
+           ['conjugate, nounify ('erf_generalized), 'beta, 'nset, 'maxmin, 'nummod]));
+true;
+
+(reset(use_fast_arrays),1);
+1;

@@ -1,0 +1,63 @@
+#
+# Illustrate uses of plotting with a watchpoint set
+#
+if (!strstrt(GPVAL_COMPILE_OPTIONS, "+WATCHPOINTS")) {
+    print "This copy of gnuplot does not support watchpoints"
+    exit  # return to caller
+}
+
+set title "Find and mark intersection of two curves"
+set key right reverse Left
+unset link y2
+set style watchpoint nolabel
+set grid
+set xrange [50:500]
+
+plot 'silver.dat' using 1:($2 - ($0+$3)) watch y=0.0 lt nodraw
+INTERSECT_X = WATCH_1[1]
+plot 'silver.dat' using 1:2, '' using 1:($0+$3) watch x=INTERSECT_X
+INTERSECT_Y = imag(WATCH_1[1])
+show var INTERSECT
+
+set label 1 at INTERSECT_X, INTERSECT_Y point pt 6 ps 3
+set arrow 1 from INTERSECT_X, 0.1*INTERSECT_Y to INTERSECT_X, 0.8*INTERSECT_Y noborder
+plot 'silver.dat' using 1:2 lw 2, '' using 1:($0+$3) lw 2, \
+     keyentry with point pt 6 lc "black" \
+     title sprintf("Intersection at  [%.1f, %.1f]", INTERSECT_X, INTERSECT_Y)
+
+pause -1 "<cr> to continue"
+
+reset
+
+if (!strstrt(GPVAL_COMPILE_OPTIONS, "+LIBCERF")) {
+    print "This copy of gnuplot does not support FresnelC, FresnelS"
+    exit;
+}
+
+unset key
+set title "Find y intercepts of a parametric function" offset 0,-1
+set xrange [-0.1 : 0.9]
+set yrange [ 0.0 : 0.85]
+set border 0
+set xzeroaxis
+set yzeroaxis
+set xtics axis
+set ytics axis
+set sample 250
+
+plot sample [t=-1:3.95] '+' using (FresnelC(t)) : (FresnelS(t)) with lines watch x=0.5 lt 3
+
+show watchpoints
+
+pause -1 "<cr> to replot with intercept labels constructed from WATCH_1 array"
+
+set title "Intercept labels constructed from WATCH_1 array values" noenhanced
+set for [i=1:|WATCH_1|] label i at real(WATCH_1[i]), imag(WATCH_1[i])
+set for [i=1:|WATCH_1|] label i point pt 7 ps 0.5
+set for [i=1:|WATCH_1|] label i sprintf("Hit %d at y = %.4f",i,imag(WATCH_1[i]))
+replot
+
+
+pause -1 "<cr> to continue"
+
+reset

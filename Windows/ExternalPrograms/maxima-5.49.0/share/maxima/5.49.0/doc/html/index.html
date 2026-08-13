@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Top (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Top (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Top (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="#Top" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="../dir_html/index.html" rel="up" title="(dir)">
+<link href="Introduction-to-Maxima.html" rel="next" title="Introduction to Maxima">
+<link href="../dir_html/index.html" rel="prev" title="(dir)">
+<style type="text/css">
+<!--
+ul.toc-numbered-mark {list-style: none}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+</head>
+
+<body lang="en">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="top-level-extent" id="Top">
+<div class="nav-panel">
+<p>
+Next: <a href="Introduction-to-Maxima.html" accesskey="n" rel="next">Introduction to Maxima</a>, Previous: <a href="../dir_html/index.html" accesskey="p" rel="prev">(dir)</a>, Up: <a href="../dir_html/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<a class="top" id="SEC_Top"></a>
+<p>Maxima is a computer algebra system, implemented in Lisp.
+</p>
+<p>Maxima is derived from the Macsyma system,
+developed at MIT in the years 1968 through 1982 as part of Project MAC.
+MIT turned over a copy of the Macsyma source code to the Department of Energy
+in 1982; that version is now known as DOE Macsyma.
+A copy of DOE Macsyma was maintained by Professor William F. Schelter
+of the University of Texas from 1982 until his death in 2001.
+In 1998, Schelter obtained permission from the Department of Energy
+to release the DOE Macsyma source code under the GNU Public License,
+and in 2000 he initiated the Maxima project at SourceForge to maintain
+and develop DOE Macsyma, now called Maxima.
+</p>
+
+
+
+<div class="region-shortcontents" id="SEC_Shortcontents">
+<h2 class="shortcontents-heading">Short Table of Contents</h2>
+
+<div class="shortcontents">
+<ul class="toc-numbered-mark">
+<li><a id="stoc-Introduction-to-Maxima" href="#toc-Introduction-to-Maxima">1 Introduction to Maxima</a></li>
+<li><a id="stoc-Command_002dline-options" href="#toc-Command_002dline-options">2 Command-line options</a></li>
+<li><a id="stoc-Runtime-Environment" href="#toc-Runtime-Environment">3 Runtime Environment</a></li>
+<li><a id="stoc-Bug-Detection-and-Reporting" href="#toc-Bug-Detection-and-Reporting">4 Bug Detection and Reporting</a></li>
+<li><a id="stoc-Help" href="#toc-Help">5 Help</a></li>
+<li><a id="stoc-Command-Line" href="#toc-Command-Line">6 Command Line</a></li>
+<li><a id="stoc-Data-Types-and-Structures" href="#toc-Data-Types-and-Structures">7 Data Types and Structures</a></li>
+<li><a id="stoc-Expressions" href="#toc-Expressions">8 Expressions</a></li>
+<li><a id="stoc-Operators" href="#toc-Operators">9 Operators</a></li>
+<li><a id="stoc-Evaluation" href="#toc-Evaluation">10 Evaluation</a></li>
+<li><a id="stoc-Simplification" href="#toc-Simplification">11 Simplification</a></li>
+<li><a id="stoc-Elementary-Functions" href="#toc-Elementary-Functions">12 Elementary Functions</a></li>
+<li><a id="stoc-Maxima_0027s-Database" href="#toc-Maxima_0027s-Database">13 Maxima&rsquo;s Database</a></li>
+<li><a id="stoc-Plotting" href="#toc-Plotting">14 Plotting</a></li>
+<li><a id="stoc-File-Input-and-Output" href="#toc-File-Input-and-Output">15 File Input and Output</a></li>
+<li><a id="stoc-Polynomials" href="#toc-Polynomials">16 Polynomials</a></li>
+<li><a id="stoc-Special-Functions" href="#toc-Special-Functions">17 Special Functions</a></li>
+<li><a id="stoc-Elliptic-Functions" href="#toc-Elliptic-Functions">18 Elliptic Functions</a></li>
+<li><a id="stoc-Limits" href="#toc-Limits">19 Limits</a></li>
+<li><a id="stoc-Differentiation" href="#toc-Differentiation">20 Differentiation</a></li>
+<li><a id="stoc-Integration" href="#toc-Integration">21 Integration</a></li>
+<li><a id="stoc-Equations" href="#toc-Equations">22 Equations</a></li>
+<li><a id="stoc-Differential-Equations" href="#toc-Differential-Equations">23 Differential Equations</a></li>
+<li><a id="stoc-Numerical" href="#toc-Numerical">24 Numerical</a></li>
+<li><a id="stoc-Matrices-and-Linear-Algebra" href="#toc-Matrices-and-Linear-Algebra">25 Matrices and Linear Algebra</a></li>
+<li><a id="stoc-Sums_002c-Products_002c-and-Series" href="#toc-Sums_002c-Products_002c-and-Series">26 Sums, Products, and Series</a></li>
+<li><a id="stoc-Number-Theory" href="#toc-Number-Theory">27 Number Theory</a></li>
+<li><a id="stoc-Groups" href="#toc-Groups">28 Groups</a></li>
+<li><a id="stoc-Miscellaneous-Options" href="#toc-Miscellaneous-Options">29 Miscellaneous Options</a></li>
+<li><a id="stoc-Rules-and-Patterns" href="#toc-Rules-and-Patterns">30 Rules and Patterns</a></li>
+<li><a id="stoc-Sets" href="#toc-Sets">31 Sets</a></li>
+<li><a id="stoc-Function-Definition" href="#toc-Function-Definition">32 Function Definition</a></li>
+<li><a id="stoc-Program-Flow" href="#toc-Program-Flow">33 Program Flow</a></li>
+<li><a id="stoc-Debugging" href="#toc-Debugging">34 Debugging</a></li>
+<li><a id="stoc-Error-and-warning-messages" href="#toc-Error-and-warning-messages">35 Error and warning messages</a></li>
+<li><a id="stoc-Package-affine" href="#toc-Package-affine">36 Package affine</a></li>
+<li><a id="stoc-Package-alt_002ddisplay" href="#toc-Package-alt_002ddisplay">37 Package alt-display</a></li>
+<li><a id="stoc-Package-asympa" href="#toc-Package-asympa">38 Package asympa</a></li>
+<li><a id="stoc-Package-atensor" href="#toc-Package-atensor">39 Package atensor</a></li>
+<li><a id="stoc-Package-augmented_005flagrangian" href="#toc-Package-augmented_005flagrangian">40 Package augmented_lagrangian</a></li>
+<li><a id="stoc-Package-bernstein" href="#toc-Package-bernstein">41 Package bernstein</a></li>
+<li><a id="stoc-Package-bitwise" href="#toc-Package-bitwise">42 Package bitwise</a></li>
+<li><a id="stoc-Package-bode" href="#toc-Package-bode">43 Package bode</a></li>
+<li><a id="stoc-Package-cartan" href="#toc-Package-cartan">44 Package cartan</a></li>
+<li><a id="stoc-Package-celine" href="#toc-Package-celine">45 Package celine</a></li>
+<li><a id="stoc-Package-clebsch_005fgordan" href="#toc-Package-clebsch_005fgordan">46 Package clebsch_gordan</a></li>
+<li><a id="stoc-Package-cobyla" href="#toc-Package-cobyla">47 Package cobyla</a></li>
+<li><a id="stoc-Package-colnew" href="#toc-Package-colnew">48 Package colnew</a></li>
+<li><a id="stoc-Package-combinatorics" href="#toc-Package-combinatorics">49 Package combinatorics</a></li>
+<li><a id="stoc-Package-contrib_005fode" href="#toc-Package-contrib_005fode">50 Package contrib_ode</a></li>
+<li><a id="stoc-Package-ctensor" href="#toc-Package-ctensor">51 Package ctensor</a></li>
+<li><a id="stoc-Package-descriptive" href="#toc-Package-descriptive">52 Package descriptive</a></li>
+<li><a id="stoc-Package-diag" href="#toc-Package-diag">53 Package diag</a></li>
+<li><a id="stoc-Package-distrib" href="#toc-Package-distrib">54 Package distrib</a></li>
+<li><a id="stoc-Package-draw" href="#toc-Package-draw">55 Package draw</a></li>
+<li><a id="stoc-Package-drawdf" href="#toc-Package-drawdf">56 Package drawdf</a></li>
+<li><a id="stoc-Package-dynamics" href="#toc-Package-dynamics">57 Package dynamics</a></li>
+<li><a id="stoc-Package-engineering_002dformat" href="#toc-Package-engineering_002dformat">58 Package engineering-format</a></li>
+<li><a id="stoc-Package-ezunits" href="#toc-Package-ezunits">59 Package ezunits</a></li>
+<li><a id="stoc-Package-f90" href="#toc-Package-f90">60 Package f90</a></li>
+<li><a id="stoc-Package-finance" href="#toc-Package-finance">61 Package finance</a></li>
+<li><a id="stoc-Package-format" href="#toc-Package-format">62 Package format</a></li>
+<li><a id="stoc-Package-fractals" href="#toc-Package-fractals">63 Package fractals</a></li>
+<li><a id="stoc-Package-gentran" href="#toc-Package-gentran">64 Package gentran</a></li>
+<li><a id="stoc-Package-ggf" href="#toc-Package-ggf">65 Package ggf</a></li>
+<li><a id="stoc-Package-graphs" href="#toc-Package-graphs">66 Package graphs</a></li>
+<li><a id="stoc-Package-grobner" href="#toc-Package-grobner">67 Package grobner</a></li>
+<li><a id="stoc-Package-hompack" href="#toc-Package-hompack">68 Package hompack</a></li>
+<li><a id="stoc-Package-impdiff" href="#toc-Package-impdiff">69 Package impdiff</a></li>
+<li><a id="stoc-Package-interpol" href="#toc-Package-interpol">70 Package interpol</a></li>
+<li><a id="stoc-Package-itensor" href="#toc-Package-itensor">71 Package itensor</a></li>
+<li><a id="stoc-Package-lapack" href="#toc-Package-lapack">72 Package lapack</a></li>
+<li><a id="stoc-Package-lbfgs" href="#toc-Package-lbfgs">73 Package lbfgs</a></li>
+<li><a id="stoc-Package-levin" href="#toc-Package-levin">74 Package levin</a></li>
+<li><a id="stoc-Package-lindstedt" href="#toc-Package-lindstedt">75 Package lindstedt</a></li>
+<li><a id="stoc-Package-linearalgebra" href="#toc-Package-linearalgebra">76 Package linearalgebra</a></li>
+<li><a id="stoc-Package-lsquares" href="#toc-Package-lsquares">77 Package lsquares</a></li>
+<li><a id="stoc-Package-minpack" href="#toc-Package-minpack">78 Package minpack</a></li>
+<li><a id="stoc-Package-makeOrders" href="#toc-Package-makeOrders">79 Package makeOrders</a></li>
+<li><a id="stoc-Package-mnewton" href="#toc-Package-mnewton">80 Package mnewton</a></li>
+<li><a id="stoc-Package-numericalio" href="#toc-Package-numericalio">81 Package numericalio</a></li>
+<li><a id="stoc-Package-odepack" href="#toc-Package-odepack">82 Package odepack</a></li>
+<li><a id="stoc-Package-operatingsystem" href="#toc-Package-operatingsystem">83 Package operatingsystem</a></li>
+<li><a id="stoc-Package-opsubst" href="#toc-Package-opsubst">84 Package opsubst</a></li>
+<li><a id="stoc-Package-orthopoly" href="#toc-Package-orthopoly">85 Package orthopoly</a></li>
+<li><a id="stoc-Package-pslq" href="#toc-Package-pslq">86 Package pslq</a></li>
+<li><a id="stoc-Package-pytranslate" href="#toc-Package-pytranslate">87 Package pytranslate</a></li>
+<li><a id="stoc-Package-quantum_005fcomputing" href="#toc-Package-quantum_005fcomputing">88 Package quantum_computing</a></li>
+<li><a id="stoc-Package-ratpow" href="#toc-Package-ratpow">89 Package ratpow</a></li>
+<li><a id="stoc-Package-romberg" href="#toc-Package-romberg">90 Package romberg</a></li>
+<li><a id="stoc-Package-simplex" href="#toc-Package-simplex">91 Package simplex</a></li>
+<li><a id="stoc-Package-simplification" href="#toc-Package-simplification">92 Package simplification</a></li>
+<li><a id="stoc-Package-solve_005frec" href="#toc-Package-solve_005frec">93 Package solve_rec</a></li>
+<li><a id="stoc-Package-stats" href="#toc-Package-stats">94 Package stats</a></li>
+<li><a id="stoc-Package-stirling" href="#toc-Package-stirling">95 Package stirling</a></li>
+<li><a id="stoc-Package-stringproc" href="#toc-Package-stringproc">96 Package stringproc</a></li>
+<li><a id="stoc-Package-sym" href="#toc-Package-sym">97 Package sym</a></li>
+<li><a id="stoc-Package-to_005fpoly_005fsolve" href="#toc-Package-to_005fpoly_005fsolve">98 Package to_poly_solve</a></li>
+<li><a id="stoc-Package-trigtools" href="#toc-Package-trigtools">99 Package trigtools</a></li>
+<li><a id="stoc-Package-unit" href="#toc-Package-unit">100 Package unit</a></li>
+<li><a id="stoc-Package-wrstcse" href="#toc-Package-wrstcse">101 Package wrstcse</a></li>
+<li><a id="stoc-Package-zeilberger" href="#toc-Package-zeilberger">102 Package zeilberger</a></li>
+<li><a id="stoc-Function-and-Variable-Index" href="#toc-Function-and-Variable-Index" rel="index">Appendix A Function and Variable Index</a></li>
+<li><a id="stoc-Documentation-Categories" href="#toc-Documentation-Categories">Appendix B Documentation Categories</a></li>
+</ul>
+</div>
+</div>
+<div class="region-contents" id="SEC_Contents">
+<h2 class="contents-heading">Table of Contents</h2>
+
+<div class="contents">
+
+<ul class="toc-numbered-mark">
+  <li><a id="toc-Introduction-to-Maxima" href="Introduction-to-Maxima.html">1 Introduction to Maxima</a></li>
+  <li><a id="toc-Command_002dline-options" href="Command_002dline-options.html">2 Command-line options</a></li>
+  <li><a id="toc-Runtime-Environment" href="Runtime-Environment.html#Runtime-Environment">3 Runtime Environment</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-for-Runtime-Environment" href="Runtime-Environment.html#Introduction-for-Runtime-Environment">3.1 Introduction for Runtime Environment</a></li>
+    <li><a id="toc-Interrupts" href="Runtime-Environment.html#Interrupts">3.2 Interrupts</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Runtime-Environment" href="Runtime-Environment.html#Functions-and-Variables-for-Runtime-Environment">3.3 Functions and Variables for Runtime Environment</a></li>
+  </ul></li>
+  <li><a id="toc-Bug-Detection-and-Reporting" href="Bug-Detection-and-Reporting.html#Bug-Detection-and-Reporting">4 Bug Detection and Reporting</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Bug-Detection-and-Reporting" href="Bug-Detection-and-Reporting.html#Functions-and-Variables-for-Bug-Detection-and-Reporting">4.1 Functions and Variables for Bug Detection and Reporting</a></li>
+  </ul></li>
+  <li><a id="toc-Help" href="Help.html#Help">5 Help</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Documentation" href="Help.html#Documentation">5.1 Documentation</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Help" href="Help.html#Functions-and-Variables-for-Help">5.2 Functions and Variables for Help</a></li>
+  </ul></li>
+  <li><a id="toc-Command-Line" href="Command-Line.html#Command-Line">6 Command Line</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Command-Line" href="Command-Line.html#Introduction-to-Command-Line">6.1 Introduction to Command Line</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Command-Line" href="Command-Line.html#Functions-and-Variables-for-Command-Line">6.2 Functions and Variables for Command Line</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Display" href="Command-Line.html#Functions-and-Variables-for-Display">6.3 Functions and Variables for Display</a></li>
+  </ul></li>
+  <li><a id="toc-Data-Types-and-Structures" href="Data-Types-and-Structures.html#Data-Types-and-Structures">7 Data Types and Structures</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Numbers" href="Data-Types-and-Structures.html#Numbers">7.1 Numbers</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Numbers" href="Data-Types-and-Structures.html#Introduction-to-Numbers">7.1.1 Introduction to Numbers</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Numbers" href="Data-Types-and-Structures.html#Functions-and-Variables-for-Numbers">7.1.2 Functions and Variables for Numbers</a></li>
+    </ul></li>
+    <li><a id="toc-Strings" href="Data-Types-and-Structures.html#Strings">7.2 Strings</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Strings" href="Data-Types-and-Structures.html#Introduction-to-Strings">7.2.1 Introduction to Strings</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Strings" href="Data-Types-and-Structures.html#Functions-and-Variables-for-Strings">7.2.2 Functions and Variables for Strings</a></li>
+    </ul></li>
+    <li><a id="toc-Constants" href="Data-Types-and-Structures.html#Constants">7.3 Constants</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Functions-and-Variables-for-Constants" href="Data-Types-and-Structures.html#Functions-and-Variables-for-Constants">7.3.1 Functions and Variables for Constants</a></li>
+    </ul></li>
+    <li><a id="toc-Lists" href="Data-Types-and-Structures.html#Lists">7.4 Lists</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Lists" href="Data-Types-and-Structures.html#Introduction-to-Lists">7.4.1 Introduction to Lists</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Lists" href="Data-Types-and-Structures.html#Functions-and-Variables-for-Lists">7.4.2 Functions and Variables for Lists</a></li>
+      <li><a id="toc-Performance-considerations-for-Lists" href="Data-Types-and-Structures.html#Performance-considerations-for-Lists">7.4.3 Performance considerations for Lists</a></li>
+    </ul></li>
+    <li><a id="toc-Arrays" href="Data-Types-and-Structures.html#Arrays">7.5 Arrays</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Functions-and-Variables-for-Arrays" href="Data-Types-and-Structures.html#Functions-and-Variables-for-Arrays">7.5.1 Functions and Variables for Arrays</a></li>
+    </ul></li>
+    <li><a id="toc-Structures" href="Data-Types-and-Structures.html#Structures">7.6 Structures</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Structures" href="Data-Types-and-Structures.html#Introduction-to-Structures">7.6.1 Introduction to Structures</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Structures" href="Data-Types-and-Structures.html#Functions-and-Variables-for-Structures">7.6.2 Functions and Variables for Structures</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Expressions" href="Expressions.html#Expressions">8 Expressions</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Expressions" href="Expressions.html#Introduction-to-Expressions">8.1 Introduction to Expressions</a></li>
+    <li><a id="toc-Nouns-and-Verbs" href="Expressions.html#Nouns-and-Verbs">8.2 Nouns and Verbs</a></li>
+    <li><a id="toc-Identifiers" href="Expressions.html#Identifiers">8.3 Identifiers</a></li>
+    <li><a id="toc-Inequality" href="Expressions.html#Inequality">8.4 Inequality</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Expressions" href="Expressions.html#Functions-and-Variables-for-Expressions">8.5 Functions and Variables for Expressions</a></li>
+  </ul></li>
+  <li><a id="toc-Operators" href="Operators.html#Operators">9 Operators</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-operators" href="Operators.html#Introduction-to-operators">9.1 Introduction to operators</a></li>
+    <li><a id="toc-Arithmetic-operators" href="Operators.html#Arithmetic-operators">9.2 Arithmetic operators</a></li>
+    <li><a id="toc-Relational-operators" href="Operators.html#Relational-operators">9.3 Relational operators</a></li>
+    <li><a id="toc-Logical-operators" href="Operators.html#Logical-operators">9.4 Logical operators</a></li>
+    <li><a id="toc-Operators-for-Equations" href="Operators.html#Operators-for-Equations">9.5 Operators for Equations</a></li>
+    <li><a id="toc-Assignment-operators" href="Operators.html#Assignment-operators">9.6 Assignment operators</a></li>
+    <li><a id="toc-User-defined-operators" href="Operators.html#User-defined-operators">9.7 User defined operators</a></li>
+  </ul></li>
+  <li><a id="toc-Evaluation" href="Evaluation.html#Evaluation">10 Evaluation</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Evaluation" href="Evaluation.html#Functions-and-Variables-for-Evaluation">10.1 Functions and Variables for Evaluation</a></li>
+  </ul></li>
+  <li><a id="toc-Simplification" href="Simplification.html#Simplification">11 Simplification</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Simplification" href="Simplification.html#Introduction-to-Simplification">11.1 Introduction to Simplification</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Simplification" href="Simplification.html#Functions-and-Variables-for-Simplification">11.2 Functions and Variables for Simplification</a></li>
+  </ul></li>
+  <li><a id="toc-Elementary-Functions" href="Elementary-Functions.html#Elementary-Functions">12 Elementary Functions</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-for-Numbers" href="Elementary-Functions.html#Functions-for-Numbers">12.1 Functions for Numbers</a></li>
+    <li><a id="toc-Functions-for-Complex-Numbers" href="Elementary-Functions.html#Functions-for-Complex-Numbers">12.2 Functions for Complex Numbers</a></li>
+    <li><a id="toc-Combinatorial-Functions" href="Elementary-Functions.html#Combinatorial-Functions">12.3 Combinatorial Functions</a></li>
+    <li><a id="toc-Root_002c-Exponential-and-Logarithmic-Functions" href="Elementary-Functions.html#Root-Exponential-and-Logarithmic-Functions">12.4 Root, Exponential and Logarithmic Functions</a></li>
+    <li><a id="toc-Trigonometric-Functions" href="Elementary-Functions.html#Trigonometric-Functions">12.5 Trigonometric Functions</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Trigonometric" href="Elementary-Functions.html#Introduction-to-Trigonometric">12.5.1 Introduction to Trigonometric</a></li>
+      <li><a id="toc-Functions-and-Variables-for-Trigonometric" href="Elementary-Functions.html#Functions-and-Variables-for-Trigonometric">12.5.2 Functions and Variables for Trigonometric</a>
+      <ul class="toc-numbered-mark">
+        <li><a id="toc-Trigonometric-and-Hyperbolic-Functions" href="Elementary-Functions.html#Trigonometric-and-Hyperbolic-Functions">12.5.2.1 Trigonometric and Hyperbolic Functions</a></li>
+        <li><a id="toc-Options-Controlling-Simplification" href="Elementary-Functions.html#Options-Controlling-Simplification">12.5.2.2 Options Controlling Simplification</a></li>
+        <li><a id="toc-Explicit-Simplifications-Using-Identities" href="Elementary-Functions.html#Explicit-Simplifications-Using-Identities">12.5.2.3 Explicit Simplifications Using Identities</a></li>
+        <li><a id="toc-Additional-Functions" href="Elementary-Functions.html#Additional-Functions">12.5.2.4 Additional Functions</a></li>
+      </ul></li>
+    </ul></li>
+    <li><a id="toc-Random-Numbers" href="Elementary-Functions.html#Random-Numbers">12.6 Random Numbers</a></li>
+  </ul></li>
+  <li><a id="toc-Maxima_0027s-Database" href="Maxima_0027s-Database.html#Maxima_0027s-Database">13 Maxima&rsquo;s Database</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Maxima_0027s-Database" href="Maxima_0027s-Database.html#Introduction-to-Maxima_0027s-Database">13.1 Introduction to Maxima&rsquo;s Database</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Properties" href="Maxima_0027s-Database.html#Functions-and-Variables-for-Properties">13.2 Functions and Variables for Properties</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Facts" href="Maxima_0027s-Database.html#Functions-and-Variables-for-Facts">13.3 Functions and Variables for Facts</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Predicates" href="Maxima_0027s-Database.html#Functions-and-Variables-for-Predicates">13.4 Functions and Variables for Predicates</a></li>
+  </ul></li>
+  <li><a id="toc-Plotting" href="Plotting.html#Plotting">14 Plotting</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Plotting" href="Plotting.html#Introduction-to-Plotting">14.1 Introduction to Plotting</a></li>
+    <li><a id="toc-Plotting-Formats" href="Plotting.html#Plotting-Formats">14.2 Plotting Formats</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Plotting" href="Plotting.html#Functions-and-Variables-for-Plotting">14.3 Functions and Variables for Plotting</a></li>
+    <li><a id="toc-Plotting-Options" href="Plotting.html#Plotting-Options">14.4 Plotting Options</a></li>
+    <li><a id="toc-Gnuplot-Options" href="Plotting.html#Gnuplot-Options">14.5 Gnuplot Options</a></li>
+    <li><a id="toc-Gnuplot_005fpipes-Format-Functions" href="Plotting.html#Gnuplot_005fpipes-Format-Functions">14.6 Gnuplot_pipes Format Functions</a></li>
+  </ul></li>
+  <li><a id="toc-File-Input-and-Output" href="File-Input-and-Output.html#File-Input-and-Output">15 File Input and Output</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Comments" href="File-Input-and-Output.html#Comments">15.1 Comments</a></li>
+    <li><a id="toc-Files" href="File-Input-and-Output.html#Files">15.2 Files</a></li>
+    <li><a id="toc-Functions-and-Variables-for-File-Input-and-Output" href="File-Input-and-Output.html#Functions-and-Variables-for-File-Input-and-Output">15.3 Functions and Variables for File Input and Output</a></li>
+    <li><a id="toc-Functions-and-Variables-for-TeX-Output" href="File-Input-and-Output.html#Functions-and-Variables-for-TeX-Output">15.4 Functions and Variables for TeX Output</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Fortran-Output" href="File-Input-and-Output.html#Functions-and-Variables-for-Fortran-Output">15.5 Functions and Variables for Fortran Output</a></li>
+  </ul></li>
+  <li><a id="toc-Polynomials" href="Polynomials.html#Polynomials">16 Polynomials</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Polynomials" href="Polynomials.html#Introduction-to-Polynomials">16.1 Introduction to Polynomials</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Polynomials" href="Polynomials.html#Functions-and-Variables-for-Polynomials">16.2 Functions and Variables for Polynomials</a></li>
+    <li><a id="toc-Introduction-to-algebraic-extensions" href="Polynomials.html#Introduction-to-algebraic-extensions">16.3 Introduction to algebraic extensions</a></li>
+    <li><a id="toc-Functions-and-Variables-for-algebraic-extensions" href="Polynomials.html#Functions-and-Variables-for-algebraic-extensions">16.4 Functions and Variables for algebraic extensions</a></li>
+  </ul></li>
+  <li><a id="toc-Special-Functions" href="Special-Functions.html#Special-Functions">17 Special Functions</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Special-Functions" href="Special-Functions.html#Introduction-to-Special-Functions">17.1 Introduction to Special Functions</a></li>
+    <li><a id="toc-Bessel-Functions" href="Special-Functions.html#Bessel-Functions">17.2 Bessel Functions</a></li>
+    <li><a id="toc-Airy-Functions" href="Special-Functions.html#Airy-Functions">17.3 Airy Functions</a></li>
+    <li><a id="toc-Gamma-and-Factorial-Functions" href="Special-Functions.html#Gamma-and-Factorial-Functions">17.4 Gamma and Factorial Functions</a></li>
+    <li><a id="toc-Exponential-Integrals" href="Special-Functions.html#Exponential-Integrals">17.5 Exponential Integrals</a></li>
+    <li><a id="toc-Error-Function" href="Special-Functions.html#Error-Function">17.6 Error Function</a></li>
+    <li><a id="toc-Struve-Functions" href="Special-Functions.html#Struve-Functions">17.7 Struve Functions</a></li>
+    <li><a id="toc-Hypergeometric-Functions" href="Special-Functions.html#Hypergeometric-Functions">17.8 Hypergeometric Functions</a></li>
+    <li><a id="toc-Parabolic-Cylinder-Functions" href="Special-Functions.html#Parabolic-Cylinder-Functions">17.9 Parabolic Cylinder Functions</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Special-Functions" href="Special-Functions.html#Functions-and-Variables-for-Special-Functions">17.10 Functions and Variables for Special Functions</a></li>
+  </ul></li>
+  <li><a id="toc-Elliptic-Functions" href="Elliptic-Functions.html#Elliptic-Functions">18 Elliptic Functions</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Elliptic-Functions-and-Integrals" href="Elliptic-Functions.html#Introduction-to-Elliptic-Functions-and-Integrals">18.1 Introduction to Elliptic Functions and Integrals</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Elliptic-Functions" href="Elliptic-Functions.html#Functions-and-Variables-for-Elliptic-Functions">18.2 Functions and Variables for Elliptic Functions</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Elliptic-Integrals" href="Elliptic-Functions.html#Functions-and-Variables-for-Elliptic-Integrals">18.3 Functions and Variables for Elliptic Integrals</a></li>
+  </ul></li>
+  <li><a id="toc-Limits" href="Limits.html#Limits">19 Limits</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Limits" href="Limits.html#Functions-and-Variables-for-Limits">19.1 Functions and Variables for Limits</a></li>
+  </ul></li>
+  <li><a id="toc-Differentiation" href="Differentiation.html#Differentiation">20 Differentiation</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Differentiation" href="Differentiation.html#Functions-and-Variables-for-Differentiation">20.1 Functions and Variables for Differentiation</a></li>
+  </ul></li>
+  <li><a id="toc-Integration" href="Integration.html#Integration">21 Integration</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Integration" href="Integration.html#Introduction-to-Integration">21.1 Introduction to Integration</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Integration" href="Integration.html#Functions-and-Variables-for-Integration">21.2 Functions and Variables for Integration</a></li>
+    <li><a id="toc-Introduction-to-QUADPACK" href="Integration.html#Introduction-to-QUADPACK">21.3 Introduction to QUADPACK</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Overview" href="Integration.html#Overview">21.3.1 Overview</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-QUADPACK" href="Integration.html#Functions-and-Variables-for-QUADPACK">21.4 Functions and Variables for QUADPACK</a></li>
+  </ul></li>
+  <li><a id="toc-Equations" href="Equations.html#Equations">22 Equations</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Equations" href="Equations.html#Functions-and-Variables-for-Equations">22.1 Functions and Variables for Equations</a></li>
+    <li><a id="toc-Examples-for-algsys" href="Equations.html#Examples-for-algsys">22.2 Examples for algsys</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Strategies" href="Equations.html#Strategies">22.2.1 Strategies</a></li>
+      <li><a id="toc-Example-1_003a-Intersection-of-two-circles" href="Equations.html#Example-1_003a-Intersection-of-two-circles">22.2.2 Example 1: Intersection of two circles</a></li>
+      <li><a id="toc-Example-2_003a-Equations-with-irrational-coefficients" href="Equations.html#Example-2_003a-Equations-with-irrational-coefficients">22.2.3 Example 2: Equations with irrational coefficients</a></li>
+      <li><a id="toc-Example-3_003a-Assumptions-on-parameters" href="Equations.html#Example-3_003a-Assumptions-on-parameters">22.2.4 Example 3: Assumptions on parameters</a></li>
+      <li><a id="toc-Example-4_003a-Preproccess-equations-with-poly_005freduced_005fgrobner" href="Equations.html#Example-4_003a-Preproccess-equations-with-poly_005freduced_005fgrobner">22.2.5 Example 4: Preproccess equations with poly_reduced_grobner</a></li>
+      <li><a id="toc-Example-5_003a-Intersection-of-a-sphere-with-two-paraboloids" href="Equations.html#Example-5_003a-Intersection-of-a-sphere-with-two-paraboloids">22.2.6 Example 5: Intersection of a sphere with two paraboloids</a></li>
+    </ul></li>
+    <li><a id="toc-References-for-equations" href="Equations.html#References-for-equations">22.3 References for equations</a></li>
+  </ul></li>
+  <li><a id="toc-Differential-Equations" href="Differential-Equations.html#Differential-Equations">23 Differential Equations</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Differential-Equations" href="Differential-Equations.html#Introduction-to-Differential-Equations">23.1 Introduction to Differential Equations</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Differential-Equations" href="Differential-Equations.html#Functions-and-Variables-for-Differential-Equations">23.2 Functions and Variables for Differential Equations</a></li>
+  </ul></li>
+  <li><a id="toc-Numerical" href="Numerical.html#Numerical">24 Numerical</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-fast-Fourier-transform" href="Numerical.html#Introduction-to-fast-Fourier-transform">24.1 Introduction to fast Fourier transform</a></li>
+    <li><a id="toc-Functions-and-Variables-for-fft" href="Numerical.html#Functions-and-Variables-for-fast-Fourier-transform">24.2 Functions and Variables for fft</a></li>
+    <li><a id="toc-Functions-and-Variables-for-FFTPACK5" href="Numerical.html#Functions-and-Variables-for-FFTPACK5">24.3 Functions and Variables for FFTPACK5</a></li>
+    <li><a id="toc-Functions-for-numerical-solution-of-equations" href="Numerical.html#Functions-for-numerical-solution-of-equations">24.4 Functions for numerical solution of equations</a></li>
+    <li><a id="toc-Introduction-to-numerical-solution-of-differential-equations" href="Numerical.html#Introduction-to-numerical-solution-of-differential-equations">24.5 Introduction to numerical solution of differential equations</a></li>
+    <li><a id="toc-Functions-for-numerical-solution-of-differential-equations" href="Numerical.html#Functions-for-numerical-solution-of-differential-equations">24.6 Functions for numerical solution of differential equations</a></li>
+  </ul></li>
+  <li><a id="toc-Matrices-and-Linear-Algebra" href="Matrices-and-Linear-Algebra.html#Matrices-and-Linear-Algebra">25 Matrices and Linear Algebra</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Matrices-and-Linear-Algebra" href="Matrices-and-Linear-Algebra.html#Introduction-to-Matrices-and-Linear-Algebra">25.1 Introduction to Matrices and Linear Algebra</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Dot" href="Matrices-and-Linear-Algebra.html#Dot">25.1.1 Dot</a></li>
+      <li><a id="toc-Matrices" href="Matrices-and-Linear-Algebra.html#Matrices">25.1.2 Matrices</a></li>
+      <li><a id="toc-Vectors" href="Matrices-and-Linear-Algebra.html#Vectors">25.1.3 Vectors</a></li>
+      <li><a id="toc-eigen" href="Matrices-and-Linear-Algebra.html#eigen">25.1.4 eigen</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-Matrices-and-Linear-Algebra" href="Matrices-and-Linear-Algebra.html#Functions-and-Variables-for-Matrices-and-Linear-Algebra">25.2 Functions and Variables for Matrices and Linear Algebra</a></li>
+  </ul></li>
+  <li><a id="toc-Sums_002c-Products_002c-and-Series" href="Sums-Products-and-Series.html#Sums-Products-and-Series">26 Sums, Products, and Series</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Sums-and-Products" href="Sums-Products-and-Series.html#Functions-and-Variables-for-Sums-and-Products">26.1 Functions and Variables for Sums and Products</a></li>
+    <li><a id="toc-Introduction-to-Series" href="Sums-Products-and-Series.html#Introduction-to-Series">26.2 Introduction to Series</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Series" href="Sums-Products-and-Series.html#Functions-and-Variables-for-Series">26.3 Functions and Variables for Series</a></li>
+    <li><a id="toc-Introduction-to-Fourier-series" href="Sums-Products-and-Series.html#Introduction-to-Fourier-series">26.4 Introduction to Fourier series</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Fourier-series" href="Sums-Products-and-Series.html#Functions-and-Variables-for-Fourier-series">26.5 Functions and Variables for Fourier series</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Poisson-series" href="Sums-Products-and-Series.html#Functions-and-Variables-for-Poisson-series">26.6 Functions and Variables for Poisson series</a></li>
+  </ul></li>
+  <li><a id="toc-Number-Theory" href="Number-Theory.html#Number-Theory">27 Number Theory</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Number-Theory" href="Number-Theory.html#Functions-and-Variables-for-Number-Theory">27.1 Functions and Variables for Number Theory</a></li>
+  </ul></li>
+  <li><a id="toc-Groups" href="Groups.html#Groups">28 Groups</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Groups" href="Groups.html#Functions-and-Variables-for-Groups">28.1 Functions and Variables for Groups</a></li>
+  </ul></li>
+  <li><a id="toc-Miscellaneous-Options" href="Miscellaneous-Options.html#Miscellaneous-Options">29 Miscellaneous Options</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Miscellaneous-Options" href="Miscellaneous-Options.html#Introduction-to-Miscellaneous-Options">29.1 Introduction to Miscellaneous Options</a></li>
+    <li><a id="toc-Share" href="Miscellaneous-Options.html#Share">29.2 Share</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Miscellaneous-Options" href="Miscellaneous-Options.html#Functions-and-Variables-for-Miscellaneous-Options">29.3 Functions and Variables for Miscellaneous Options</a></li>
+  </ul></li>
+  <li><a id="toc-Rules-and-Patterns" href="Rules-and-Patterns.html#Rules-and-Patterns">30 Rules and Patterns</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Rules-and-Patterns" href="Rules-and-Patterns.html#Introduction-to-Rules-and-Patterns">30.1 Introduction to Rules and Patterns</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Rules-and-Patterns" href="Rules-and-Patterns.html#Functions-and-Variables-for-Rules-and-Patterns">30.2 Functions and Variables for Rules and Patterns</a></li>
+  </ul></li>
+  <li><a id="toc-Sets" href="Sets.html#Sets">31 Sets</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Sets" href="Sets.html#Introduction-to-Sets">31.1 Introduction to Sets</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Usage" href="Sets.html#Usage">31.1.1 Usage</a></li>
+      <li><a id="toc-Set-Member-Iteration" href="Sets.html#Set-Member-Iteration">31.1.2 Set Member Iteration</a></li>
+      <li><a id="toc-Authors" href="Sets.html#Authors">31.1.3 Authors</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-Sets" href="Sets.html#Functions-and-Variables-for-Sets">31.2 Functions and Variables for Sets</a></li>
+  </ul></li>
+  <li><a id="toc-Function-Definition" href="Function-Definition.html#Function-Definition">32 Function Definition</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Function-Definition" href="Function-Definition.html#Introduction-to-Function-Definition">32.1 Introduction to Function Definition</a></li>
+    <li><a id="toc-Function" href="Function-Definition.html#Function">32.2 Function</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Ordinary-functions" href="Function-Definition.html#Ordinary-functions">32.2.1 Ordinary functions</a></li>
+      <li><a id="toc-Memoizing-Functions" href="Function-Definition.html#Memoizing-Functions">32.2.2 Memoizing Functions</a></li>
+    </ul></li>
+    <li><a id="toc-Macros" href="Function-Definition.html#Macros">32.3 Macros</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Function-Definition" href="Function-Definition.html#Functions-and-Variables-for-Function-Definition">32.4 Functions and Variables for Function Definition</a></li>
+  </ul></li>
+  <li><a id="toc-Program-Flow" href="Program-Flow.html#Program-Flow">33 Program Flow</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Lisp-and-Maxima" href="Program-Flow.html#Lisp-and-Maxima">33.1 Lisp and Maxima</a></li>
+    <li><a id="toc-Garbage-Collection" href="Program-Flow.html#Garbage-Collection">33.2 Garbage Collection</a></li>
+    <li><a id="toc-Introduction-to-Program-Flow" href="Program-Flow.html#Introduction-to-Program-Flow">33.3 Introduction to Program Flow</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Program-Flow" href="Program-Flow.html#Functions-and-Variables-for-Program-Flow">33.4 Functions and Variables for Program Flow</a></li>
+  </ul></li>
+  <li><a id="toc-Debugging" href="Debugging.html#Debugging">34 Debugging</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Source-Level-Debugging" href="Debugging.html#Source-Level-Debugging">34.1 Source Level Debugging</a></li>
+    <li><a id="toc-Keyword-Commands" href="Debugging.html#Keyword-Commands">34.2 Keyword Commands</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Debugging" href="Debugging.html#Functions-and-Variables-for-Debugging">34.3 Functions and Variables for Debugging</a></li>
+  </ul></li>
+  <li><a id="toc-Error-and-warning-messages" href="Error-and-warning-messages.html#Error-and-warning-messages">35 Error and warning messages</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Error-Messages" href="Error-and-warning-messages.html#Error-Messages">35.1 Error Messages</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-apply_003a-no-such-_0022list_0022-element" href="Error-and-warning-messages.html#No-such-list-element">35.1.1 apply: no such &quot;list&quot; element</a></li>
+      <li><a id="toc-argument-must-be-a-non_002datomic-expression" href="Error-and-warning-messages.html#argument-must-be-a-non_002datomic-expression">35.1.2 argument must be a non-atomic expression</a></li>
+      <li><a id="toc-assignment_003a-cannot-assign-to-_003cfunction-name_003e" href="Error-and-warning-messages.html#cannot-assign-to-function">35.1.3 assignment: cannot assign to <code class="code">&lt;function name&gt;</code></a></li>
+      <li><a id="toc-expt_003a-undefined_003a-0-to-a-negative-exponent_002e" href="Error-and-warning-messages.html#g_t0-to-a-negative-exponent">35.1.4 expt: undefined:  0 to a negative exponent.</a></li>
+      <li><a id="toc-incorrect-syntax_003a-_002c-is-not-a-prefix-operator" href="Error-and-warning-messages.html#Comma-is-not-a-prefix-operator">35.1.5 incorrect syntax: , is not a prefix operator</a></li>
+      <li><a id="toc-incorrect-syntax_003a-Illegal-use-of-delimiter-_0029" href="Error-and-warning-messages.html#Illegal-use-of-delimiter">35.1.6 incorrect syntax: Illegal use of delimiter )</a></li>
+      <li><a id="toc-loadfile_003a-failed-to-load-_003cfilename_003e" href="Error-and-warning-messages.html#loadfile-failed-to-load">35.1.7 loadfile: failed to load <code class="code">&lt;filename&gt;</code></a></li>
+      <li><a id="toc-makelist_003a-second-argument-must-evaluate-to-a-number" href="Error-and-warning-messages.html#makelist-second-argument-must-evaluate-to-a-number">35.1.8 makelist: second argument must evaluate to a number</a></li>
+      <li><a id="toc-Only-symbols-can-be-bound" href="Error-and-warning-messages.html#Only-symbols-can-be-bound">35.1.9 Only symbols can be bound</a></li>
+      <li><a id="toc-operators-of-arguments-must-all-be-the-same" href="Error-and-warning-messages.html#Operators-of-arguments-must-all-be-the-same">35.1.10 operators of arguments must all be the same</a></li>
+      <li><a id="toc-Out-of-memory" href="Error-and-warning-messages.html#out-of-memory">35.1.11 Out of memory</a></li>
+      <li><a id="toc-part_003a-fell-off-the-end" href="Error-and-warning-messages.html#part-fell-off-the-end">35.1.12 part: fell off the end</a></li>
+      <li><a id="toc-undefined-variable-_0028draw-or-plot_0029" href="Error-and-warning-messages.html#undefined-variable-during-plotting">35.1.13 undefined variable (draw or plot)</a></li>
+      <li><a id="toc-VTK-is-not-installed_002c-which-is-required-for-Scene" href="Error-and-warning-messages.html#VTK-is-not-installed">35.1.14 VTK is not installed, which is required for Scene</a></li>
+    </ul></li>
+    <li><a id="toc-Warning-Messages" href="Error-and-warning-messages.html#Warning-Messages">35.2 Warning Messages</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Encountered-undefined-variable-_003cx_003e-in-translation" href="Error-and-warning-messages.html#undefined-variable-during-translation">35.2.1 Encountered undefined variable <code class="code">&lt;x&gt;</code> in translation</a></li>
+      <li><a id="toc-Rat_003a-replaced-_003cx_003e-by-_003cy_003e-_003d-_003cz_003e" href="Error-and-warning-messages.html#replaced-x-by-y">35.2.2 Rat: replaced <code class="code">&lt;x&gt;</code> by <code class="code">&lt;y&gt; = &lt;z&gt;</code></a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-affine" href="Package-affine.html#Package-affine">36 Package affine</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Affine" href="Package-affine.html#Introduction-to-Affine">36.1 Introduction to Affine</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Affine" href="Package-affine.html#Functions-and-Variables-for-Affine">36.2 Functions and Variables for Affine</a></li>
+  </ul></li>
+  <li><a id="toc-Package-alt_002ddisplay" href="Package-alt_002ddisplay.html#Package-alt_002ddisplay">37 Package alt-display</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-alt_002ddisplay" href="Package-alt_002ddisplay.html#Introduction-to-alt_002ddisplay">37.1 Introduction to alt-display</a></li>
+    <li><a id="toc-Functions-and-Variables-for-alt_002ddisplay" href="Package-alt_002ddisplay.html#Functions-and-Variables-for-alt_002ddisplay">37.2 Functions and Variables for alt-display</a></li>
+  </ul></li>
+  <li><a id="toc-Package-asympa" href="Package-asympa.html#Package-asympa">38 Package asympa</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-asympa" href="Package-asympa.html#Introduction-to-asympa">38.1 Introduction to asympa</a></li>
+    <li><a id="toc-Functions-and-variables-for-asympa" href="Package-asympa.html#Functions-and-variables-for-asympa">38.2 Functions and variables for asympa</a></li>
+  </ul></li>
+  <li><a id="toc-Package-atensor" href="Package-atensor.html#Package-atensor">39 Package atensor</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-atensor" href="Package-atensor.html#Introduction-to-atensor">39.1 Introduction to atensor</a></li>
+    <li><a id="toc-Functions-and-Variables-for-atensor" href="Package-atensor.html#Functions-and-Variables-for-atensor">39.2 Functions and Variables for atensor</a></li>
+  </ul></li>
+  <li><a id="toc-Package-augmented_005flagrangian" href="Package-augmented_005flagrangian.html#Package-augmented_005flagrangian">40 Package augmented_lagrangian</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-augmented_005flagrangian" href="Package-augmented_005flagrangian.html#Functions-and-Variables-for-augmented_005flagrangian">40.1 Functions and Variables for augmented_lagrangian</a></li>
+  </ul></li>
+  <li><a id="toc-Package-bernstein" href="Package-bernstein.html#Package-bernstein">41 Package bernstein</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-Bernstein" href="Package-bernstein.html#Functions-and-Variables-for-Bernstein">41.1 Functions and Variables for Bernstein</a></li>
+  </ul></li>
+  <li><a id="toc-Package-bitwise" href="Package-bitwise.html#Package-bitwise">42 Package bitwise</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-bitwise" href="Package-bitwise.html#Functions-and-Variables-for-bitwise">42.1 Functions and Variables for bitwise</a></li>
+  </ul></li>
+  <li><a id="toc-Package-bode" href="Package-bode.html#Package-bode">43 Package bode</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-bode" href="Package-bode.html#Functions-and-Variables-for-bode">43.1 Functions and Variables for bode</a></li>
+  </ul></li>
+  <li><a id="toc-Package-cartan" href="Package-cartan.html#Package-cartan">44 Package cartan</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-cartan" href="Package-cartan.html#Introduction-to-cartan">44.1 Introduction to cartan</a></li>
+    <li><a id="toc-Functions-and-Variables-for-cartan" href="Package-cartan.html#Functions-and-Variables-for-cartan">44.2 Functions and Variables for cartan</a></li>
+  </ul></li>
+  <li><a id="toc-Package-celine" href="Package-celine.html#Package-celine">45 Package celine</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-celine" href="Package-celine.html#Introduction-to-celine">45.1 Introduction to celine</a></li>
+  </ul></li>
+  <li><a id="toc-Package-clebsch_005fgordan" href="Package-clebsch_005fgordan.html#Package-clebsch_005fgordan">46 Package clebsch_gordan</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-clebsch_005fgordan" href="Package-clebsch_005fgordan.html#Functions-and-Variables-for-clebsch_005fgordan">46.1 Functions and Variables for clebsch_gordan</a></li>
+  </ul></li>
+  <li><a id="toc-Package-cobyla" href="Package-cobyla.html#Package-cobyla">47 Package cobyla</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-cobyla" href="Package-cobyla.html#Introduction-to-cobyla">47.1 Introduction to cobyla</a></li>
+    <li><a id="toc-Functions-and-Variables-for-cobyla" href="Package-cobyla.html#Functions-and-Variables-for-cobyla">47.2 Functions and Variables for cobyla</a></li>
+    <li><a id="toc-Examples-for-cobyla" href="Package-cobyla.html#Examples-for-cobyla">47.3 Examples for cobyla</a></li>
+  </ul></li>
+  <li><a id="toc-Package-colnew" href="Package-colnew.html#Package-colnew">48 Package colnew</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-colnew" href="Package-colnew.html#Introduction-to-colnew">48.1 Introduction to colnew</a></li>
+    <li><a id="toc-Functions-and-Variables-for-colnew" href="Package-colnew.html#Functions-and-Variables-for-colnew">48.2 Functions and Variables for colnew</a></li>
+    <li><a id="toc-Examples-for-colnew" href="Package-colnew.html#Examples-for-colnew">48.3 Examples for colnew</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Example-1_003a-A-uniformly-loaded-beam-of-variable-stiffness" href="Package-colnew.html#Example-1_003a-A-uniformly-loaded-beam-of-variable-stiffness">48.3.1 Example 1: A uniformly loaded beam of variable stiffness</a></li>
+      <li><a id="toc-Example-2_003a-Deformation-of-a-spherical-cap" href="Package-colnew.html#Example-2_003a-Deformation-of-a-spherical-cap">48.3.2 Example 2: Deformation of a spherical cap</a></li>
+      <li><a id="toc-Example-3_003a-Rotating-flow-of-viscous-incompressible-fluid" href="Package-colnew.html#Example-3_003a-Rotating-flow-of-viscous-incompressible-fluid">48.3.3 Example 3: Rotating flow of viscous incompressible fluid</a></li>
+      <li><a id="toc-Example-4_003a-Quantum-Neumann-equation" href="Package-colnew.html#Example-4_003a-Quantum-Neumann-equation">48.3.4 Example 4: Quantum Neumann equation</a></li>
+      <li><a id="toc-Example-5_003a-Simple-example-of-continuation" href="Package-colnew.html#Example-5_003a-Simple-example-of-continuation">48.3.5 Example 5: Simple example of continuation</a></li>
+    </ul></li>
+    <li><a id="toc-References-for-colnew" href="Package-colnew.html#References-for-colnew">48.4 References for colnew</a></li>
+  </ul></li>
+  <li><a id="toc-Package-combinatorics" href="Package-combinatorics.html#Package-combinatorics">49 Package combinatorics</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Package-combinatorics-1" href="Package-combinatorics.html#Introduction-to-combinatorics">49.1 Package combinatorics</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Combinatorics" href="Package-combinatorics.html#Functions-and-Variables-for-Combinatorics">49.2 Functions and Variables for Combinatorics</a></li>
+  </ul></li>
+  <li><a id="toc-Package-contrib_005fode" href="Package-contrib_005fode.html#Package-contrib_005fode">50 Package contrib_ode</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-contrib_005fode" href="Package-contrib_005fode.html#Introduction-to-contrib_005fode">50.1 Introduction to contrib_ode</a></li>
+    <li><a id="toc-Functions-and-Variables-for-contrib_005fode" href="Package-contrib_005fode.html#Functions-and-Variables-for-contrib_005fode">50.2 Functions and Variables for contrib_ode</a></li>
+    <li><a id="toc-Possible-improvements-to-contrib_005fode" href="Package-contrib_005fode.html#Possible-improvements-to-contrib_005fode">50.3 Possible improvements to contrib_ode</a></li>
+    <li><a id="toc-Test-cases-for-contrib_005fode" href="Package-contrib_005fode.html#Test-cases-for-contrib_005fode">50.4 Test cases for contrib_ode</a></li>
+    <li><a id="toc-References-for-contrib_005fode" href="Package-contrib_005fode.html#References-for-contrib_005fode">50.5 References for contrib_ode</a></li>
+  </ul></li>
+  <li><a id="toc-Package-ctensor" href="Package-ctensor.html#Package-ctensor">51 Package ctensor</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-ctensor" href="Package-ctensor.html#Introduction-to-ctensor">51.1 Introduction to ctensor</a></li>
+    <li><a id="toc-Functions-and-Variables-for-ctensor" href="Package-ctensor.html#Functions-and-Variables-for-ctensor">51.2 Functions and Variables for ctensor</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Initialization-and-setup" href="Package-ctensor.html#Initialization-and-setup">51.2.1 Initialization and setup</a></li>
+      <li><a id="toc-The-tensors-of-curved-space" href="Package-ctensor.html#The-tensors-of-curved-space">51.2.2 The tensors of curved space</a></li>
+      <li><a id="toc-Taylor-series-expansion" href="Package-ctensor.html#Taylor-series-expansion">51.2.3 Taylor series expansion</a></li>
+      <li><a id="toc-Frame-fields" href="Package-ctensor.html#Frame-fields">51.2.4 Frame fields</a></li>
+      <li><a id="toc-Algebraic-classification" href="Package-ctensor.html#Algebraic-classification">51.2.5 Algebraic classification</a></li>
+      <li><a id="toc-Torsion-and-nonmetricity" href="Package-ctensor.html#Torsion-and-nonmetricity">51.2.6 Torsion and nonmetricity</a></li>
+      <li><a id="toc-Miscellaneous-features" href="Package-ctensor.html#Miscellaneous-features">51.2.7 Miscellaneous features</a></li>
+      <li><a id="toc-Utility-functions" href="Package-ctensor.html#Utility-functions">51.2.8 Utility functions</a></li>
+      <li><a id="toc-Variables-used-by-ctensor" href="Package-ctensor.html#Variables-used-by-ctensor">51.2.9 Variables used by <code class="code">ctensor</code></a></li>
+      <li><a id="toc-Reserved-names" href="Package-ctensor.html#Reserved-names">51.2.10 Reserved names</a></li>
+      <li><a id="toc-Changes" href="Package-ctensor.html#Changes">51.2.11 Changes</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-descriptive" href="Package-descriptive.html#Package-descriptive">52 Package descriptive</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-descriptive" href="Package-descriptive.html#Introduction-to-descriptive">52.1 Introduction to descriptive</a></li>
+    <li><a id="toc-Functions-and-Variables-for-data-manipulation" href="Package-descriptive.html#Functions-and-Variables-for-data-manipulation">52.2 Functions and Variables for data manipulation</a></li>
+    <li><a id="toc-Functions-and-Variables-for-descriptive-statistics" href="Package-descriptive.html#Functions-and-Variables-for-descriptive-statistics">52.3 Functions and Variables for descriptive statistics</a></li>
+    <li><a id="toc-Functions-and-Variables-for-statistical-graphs" href="Package-descriptive.html#Functions-and-Variables-for-statistical-graphs">52.4 Functions and Variables for statistical graphs</a></li>
+  </ul></li>
+  <li><a id="toc-Package-diag" href="Package-diag.html#Package-diag">53 Package diag</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-diag" href="Package-diag.html#Functions-and-Variables-for-diag">53.1 Functions and Variables for diag</a></li>
+  </ul></li>
+  <li><a id="toc-Package-distrib" href="Package-distrib.html#Package-distrib">54 Package distrib</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-distrib" href="Package-distrib.html#Introduction-to-distrib">54.1 Introduction to distrib</a></li>
+    <li><a id="toc-Functions-and-Variables-for-continuous-distributions" href="Package-distrib.html#Functions-and-Variables-for-continuous-distributions">54.2 Functions and Variables for continuous distributions</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Normal-Random-Variable" href="Package-distrib.html#Normal-Random-Variable">54.2.1 Normal Random Variable</a></li>
+      <li><a id="toc-Student_0027s-t-Random-Variable" href="Package-distrib.html#Student_0027s-t-Random-Variable">54.2.2 Student&rsquo;s t Random Variable</a></li>
+      <li><a id="toc-Noncentral-Student_0027s-t-Random-Variable" href="Package-distrib.html#Noncentral-Student_0027s-t-Random-Variable">54.2.3 Noncentral Student&rsquo;s t Random Variable</a></li>
+      <li><a id="toc-Chi_002dsquared-Random-Variable" href="Package-distrib.html#Chi_002dsquared-Random-Variable">54.2.4 Chi-squared Random Variable</a></li>
+      <li><a id="toc-Noncentral-Chi_002dsquared-Random-Variable" href="Package-distrib.html#Noncentral-Chi_002dsquared-Random-Variable">54.2.5 Noncentral Chi-squared Random Variable</a></li>
+      <li><a id="toc-F-Random-Variable" href="Package-distrib.html#F-Random-Variable">54.2.6 F Random Variable</a></li>
+      <li><a id="toc-Exponential-Random-Variable" href="Package-distrib.html#Exponential-Random-Variable">54.2.7 Exponential Random Variable</a></li>
+      <li><a id="toc-Lognormal-Random-Variable" href="Package-distrib.html#Lognormal-Random-Variable">54.2.8 Lognormal Random Variable</a></li>
+      <li><a id="toc-Gamma-Random-Variable" href="Package-distrib.html#Gamma-Random-Variable">54.2.9 Gamma Random Variable</a></li>
+      <li><a id="toc-Beta-Random-Variable" href="Package-distrib.html#Beta-Random-Variable">54.2.10 Beta Random Variable</a></li>
+      <li><a id="toc-Continuous-Uniform-Random-Variable" href="Package-distrib.html#Continuous-Uniform-Random-Variable">54.2.11 Continuous Uniform Random Variable</a></li>
+      <li><a id="toc-Logistic-Random-Variable" href="Package-distrib.html#Logistic-Random-Variable">54.2.12 Logistic Random Variable</a></li>
+      <li><a id="toc-Pareto-Random-Variable" href="Package-distrib.html#Pareto-Random-Variable">54.2.13 Pareto Random Variable</a></li>
+      <li><a id="toc-Weibull-Random-Variable" href="Package-distrib.html#Weibull-Random-Variable">54.2.14 Weibull Random Variable</a></li>
+      <li><a id="toc-Rayleigh-Random-Variable" href="Package-distrib.html#Rayleigh-Random-Variable">54.2.15 Rayleigh Random Variable</a></li>
+      <li><a id="toc-Laplace-Random-Variable" href="Package-distrib.html#Laplace-Random-Variable">54.2.16 Laplace Random Variable</a></li>
+      <li><a id="toc-Cauchy-Random-Variable" href="Package-distrib.html#Cauchy-Random-Variable">54.2.17 Cauchy Random Variable</a></li>
+      <li><a id="toc-Gumbel-Random-Variable" href="Package-distrib.html#Gumbel-Random-Variable">54.2.18 Gumbel Random Variable</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-discrete-distributions" href="Package-distrib.html#Functions-and-Variables-for-discrete-distributions">54.3 Functions and Variables for discrete distributions</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-General-Finite-Discrete-Random-Variable" href="Package-distrib.html#General-Finite-Discrete-Random-Variable">54.3.1 General Finite Discrete Random Variable</a></li>
+      <li><a id="toc-Binomial-Random-Variable" href="Package-distrib.html#Binomial-Random-Variable">54.3.2 Binomial Random Variable</a></li>
+      <li><a id="toc-Poisson-Random-Variable" href="Package-distrib.html#Poisson-Random-Variable">54.3.3 Poisson Random Variable</a></li>
+      <li><a id="toc-Bernoulli-Random-Variable" href="Package-distrib.html#Bernoulli-Random-Variable">54.3.4 Bernoulli Random Variable</a></li>
+      <li><a id="toc-Geometric-Random-Variable" href="Package-distrib.html#Geometric-Random-Variable">54.3.5 Geometric Random Variable</a></li>
+      <li><a id="toc-Discrete-Uniform-Random-Variable" href="Package-distrib.html#Discrete-Uniform-Random-Variable">54.3.6 Discrete Uniform Random Variable</a></li>
+      <li><a id="toc-Hypergeometric-Random-Variable" href="Package-distrib.html#Hypergeometric-Random-Variable">54.3.7 Hypergeometric Random Variable</a></li>
+      <li><a id="toc-Negative-Binomial-Random-Variable" href="Package-distrib.html#Negative-Binomial-Random-Variable">54.3.8 Negative Binomial Random Variable</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-draw" href="Package-draw.html#Package-draw">55 Package draw</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-draw" href="Package-draw.html#Introduction-to-draw">55.1 Introduction to draw</a></li>
+    <li><a id="toc-Functions-and-Variables-for-draw" href="Package-draw.html#Functions-and-Variables-for-draw">55.2 Functions and Variables for draw</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Scenes" href="Package-draw.html#Scenes">55.2.1 Scenes</a></li>
+      <li><a id="toc-Functions" href="Package-draw.html#Functions">55.2.2 Functions</a></li>
+      <li><a id="toc-Plot-options-for-draw-programs" href="Package-draw.html#Plot-options-for-draw-programs">55.2.3 Plot options for draw programs</a></li>
+      <li><a id="toc-Graphics-objects" href="Package-draw.html#Graphics-objects">55.2.4 Graphics objects</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-pictures" href="Package-draw.html#Functions-and-Variables-for-pictures">55.3 Functions and Variables for pictures</a></li>
+    <li><a id="toc-Functions-and-Variables-for-worldmap" href="Package-draw.html#Functions-and-Variables-for-worldmap">55.4 Functions and Variables for worldmap</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Variables-and-Functions" href="Package-draw.html#Variables-and-Functions">55.4.1 Variables and Functions</a></li>
+      <li><a id="toc-Graphic-objects" href="Package-draw.html#Graphic-objects">55.4.2 Graphic objects</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-drawdf" href="Package-drawdf.html#Package-drawdf">56 Package drawdf</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-drawdf" href="Package-drawdf.html#Introduction-to-drawdf">56.1 Introduction to drawdf</a></li>
+    <li><a id="toc-Functions-and-Variables-for-drawdf" href="Package-drawdf.html#Functions-and-Variables-for-drawdf">56.2 Functions and Variables for drawdf</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Functions-1" href="Package-drawdf.html#Functions-1">56.2.1 Functions</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-dynamics" href="Package-dynamics.html#Package-dynamics">57 Package dynamics</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-The-dynamics-package" href="Package-dynamics.html#The-dynamics-package">57.1 The dynamics package</a></li>
+    <li><a id="toc-Graphical-analysis-of-discrete-dynamical-systems" href="Package-dynamics.html#Graphical-analysis-of-discrete-dynamical-systems">57.2 Graphical analysis of discrete dynamical systems</a></li>
+    <li><a id="toc-Visualization-with-VTK" href="Package-dynamics.html#Visualization-with-VTK">57.3 Visualization with VTK</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Scene-options" href="Package-dynamics.html#Scene-options">57.3.1 Scene options</a></li>
+      <li><a id="toc-Scene-objects" href="Package-dynamics.html#Scene-objects">57.3.2 Scene objects</a></li>
+      <li><a id="toc-Scene-object_0027s-options" href="Package-dynamics.html#Scene-object_0027s-options">57.3.3 Scene object&rsquo;s options</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-engineering_002dformat" href="Package-engineering_002dformat.html#Package-engineering_002dformat">58 Package engineering-format</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-engineering_002dformat" href="Package-engineering_002dformat.html#Functions-and-Variables-for-engineering_002dformat">58.1 Functions and Variables for engineering-format</a></li>
+  </ul></li>
+  <li><a id="toc-Package-ezunits" href="Package-ezunits.html#Package-ezunits">59 Package ezunits</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-ezunits" href="Package-ezunits.html#Introduction-to-ezunits">59.1 Introduction to ezunits</a></li>
+    <li><a id="toc-Introduction-to-physical_005fconstants" href="Package-ezunits.html#Introduction-to-physical_005fconstants">59.2 Introduction to physical_constants</a></li>
+    <li><a id="toc-Functions-and-Variables-for-ezunits" href="Package-ezunits.html#Functions-and-Variables-for-ezunits">59.3 Functions and Variables for ezunits</a></li>
+  </ul></li>
+  <li><a id="toc-Package-f90" href="Package-f90.html#Package-f90">60 Package f90</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Package-f90-1" href="Package-f90.html#Functions-for-f90">60.1 Package f90</a></li>
+  </ul></li>
+  <li><a id="toc-Package-finance" href="Package-finance.html#Package-finance">61 Package finance</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-finance" href="Package-finance.html#Introduction-to-finance">61.1 Introduction to finance</a></li>
+    <li><a id="toc-Functions-and-Variables-for-finance" href="Package-finance.html#Functions-and-Variables-for-finance">61.2 Functions and Variables for finance</a></li>
+  </ul></li>
+  <li><a id="toc-Package-format" href="Package-format.html#Package-format">62 Package format</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-format" href="Package-format.html#Introduction-to-format">62.1 Introduction to format</a></li>
+    <li><a id="toc-Functions-and-Variables-for-format" href="Package-format.html#Functions-and-Variables-for-format">62.2 Functions and Variables for format</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Template-keywords" href="Package-format.html#Template-keywords-1">62.2.1 Template keywords</a></li>
+      <li><a id="toc-User-defined-templates" href="Package-format.html#User-defined-templates">62.2.2 User defined templates</a></li>
+      <li><a id="toc-Determining-coefficients" href="Package-format.html#Determining-coefficients">62.2.3 Determining coefficients</a></li>
+      <li><a id="toc-Related-functions" href="Package-format.html#Related-functions">62.2.4 Related functions</a></li>
+      <li><a id="toc-Implementation" href="Package-format.html#Implementation">62.2.5 Implementation</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-fractals" href="Package-fractals.html#Package-fractals">63 Package fractals</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-fractals" href="Package-fractals.html#Introduction-to-fractals">63.1 Introduction to fractals</a></li>
+    <li><a id="toc-Definitions-for-IFS-fractals" href="Package-fractals.html#Definitions-for-IFS-fractals">63.2 Definitions for IFS fractals</a></li>
+    <li><a id="toc-Definitions-for-complex-fractals" href="Package-fractals.html#Definitions-for-complex-fractals">63.3 Definitions for complex fractals</a></li>
+    <li><a id="toc-Definitions-for-Koch-snowflakes" href="Package-fractals.html#Definitions-for-Koch-snowflakes">63.4 Definitions for Koch snowflakes</a></li>
+    <li><a id="toc-Definitions-for-Peano-maps" href="Package-fractals.html#Definitions-for-Peano-maps">63.5 Definitions for Peano maps</a></li>
+  </ul></li>
+  <li><a id="toc-Package-gentran" href="Package-gentran.html#Package-gentran">64 Package gentran</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Gentran" href="Package-gentran.html#Introduction-to-Gentran">64.1 Introduction to Gentran</a></li>
+    <li><a id="toc-Functions-for-Gentran" href="Package-gentran.html#Functions-for-Gentran">64.2 Functions for Gentran</a></li>
+    <li><a id="toc-Gentran-Mode-Switches" href="Package-gentran.html#Gentran-Mode-Switches">64.3 Gentran Mode Switches</a></li>
+    <li><a id="toc-Gentran-Option-Variables" href="Package-gentran.html#Gentran-Option-Variables">64.4 Gentran Option Variables</a></li>
+    <li><a id="toc-Gentran-Evaluation-Forms" href="Package-gentran.html#Gentran-Evaluation-Forms">64.5 Gentran Evaluation Forms</a></li>
+  </ul></li>
+  <li><a id="toc-Package-ggf" href="Package-ggf.html#Package-ggf">65 Package ggf</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-ggf" href="Package-ggf.html#Functions-and-Variables-for-ggf">65.1 Functions and Variables for ggf</a></li>
+  </ul></li>
+  <li><a id="toc-Package-graphs" href="Package-graphs.html#Package-graphs">66 Package graphs</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-graphs" href="Package-graphs.html#Introduction-to-graphs">66.1 Introduction to graphs</a></li>
+    <li><a id="toc-Functions-and-Variables-for-graphs" href="Package-graphs.html#Functions-and-Variables-for-graphs">66.2 Functions and Variables for graphs</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Building-graphs" href="Package-graphs.html#Building-graphs">66.2.1 Building graphs</a></li>
+      <li><a id="toc-Graph-properties" href="Package-graphs.html#Graph-properties">66.2.2 Graph properties</a></li>
+      <li><a id="toc-Modifying-graphs" href="Package-graphs.html#Modifying-graphs">66.2.3 Modifying graphs</a></li>
+      <li><a id="toc-Reading-and-writing-to-files" href="Package-graphs.html#Reading-and-writing-to-files">66.2.4 Reading and writing to files</a></li>
+      <li><a id="toc-Visualization" href="Package-graphs.html#Visualization">66.2.5 Visualization</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-grobner" href="Package-grobner.html#Package-grobner">67 Package grobner</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-grobner" href="Package-grobner.html#Introduction-to-grobner">67.1 Introduction to grobner</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Notes-on-the-grobner-package" href="Package-grobner.html#Notes-on-the-grobner-package">67.1.1 Notes on the grobner package</a></li>
+      <li><a id="toc-Implementations-of-admissible-monomial-orders-in-grobner" href="Package-grobner.html#Implementations-of-admissible-monomial-orders-in-grobner">67.1.2 Implementations of admissible monomial orders in grobner</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-grobner" href="Package-grobner.html#Functions-and-Variables-for-grobner">67.2 Functions and Variables for grobner</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Global-switches-for-grobner" href="Package-grobner.html#Global-switches-for-grobner">67.2.1 Global switches for grobner</a></li>
+      <li><a id="toc-Simple-operators-in-grobner" href="Package-grobner.html#Simple-operators-in-grobner">67.2.2 Simple operators in grobner</a></li>
+      <li><a id="toc-Other-functions-in-grobner" href="Package-grobner.html#Other-functions-in-grobner">67.2.3 Other functions in grobner</a></li>
+      <li><a id="toc-Standard-postprocessing-of-Groebner-Bases" href="Package-grobner.html#Standard-postprocessing-of-Groebner-Bases">67.2.4 Standard postprocessing of Groebner Bases</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-hompack" href="Package-hompack.html#Package-hompack">68 Package hompack</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-hompack" href="Package-hompack.html#Introduction-to-hompack">68.1 Introduction to hompack</a></li>
+    <li><a id="toc-Functions-and-Variables-for-hompack" href="Package-hompack.html#Functions-and-Variables-for-hompack">68.2 Functions and Variables for hompack</a></li>
+  </ul></li>
+  <li><a id="toc-Package-impdiff" href="Package-impdiff.html#Package-impdiff">69 Package impdiff</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-impdiff" href="Package-impdiff.html#Functions-and-Variables-for-impdiff">69.1 Functions and Variables for impdiff</a></li>
+  </ul></li>
+  <li><a id="toc-Package-interpol" href="Package-interpol.html#Package-interpol">70 Package interpol</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-interpol" href="Package-interpol.html#Introduction-to-interpol">70.1 Introduction to interpol</a></li>
+    <li><a id="toc-Functions-and-Variables-for-interpol" href="Package-interpol.html#Functions-and-Variables-for-interpol">70.2 Functions and Variables for interpol</a></li>
+  </ul></li>
+  <li><a id="toc-Package-itensor" href="Package-itensor.html#Package-itensor">71 Package itensor</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-itensor" href="Package-itensor.html#Introduction-to-itensor">71.1 Introduction to itensor</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-New-tensor-notation" href="Package-itensor.html#New-tensor-notation">71.1.1 New tensor notation</a></li>
+      <li><a id="toc-Indicial-tensor-manipulation" href="Package-itensor.html#Indicial-tensor-manipulation">71.1.2 Indicial tensor manipulation</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-itensor" href="Package-itensor.html#Functions-and-Variables-for-itensor">71.2 Functions and Variables for itensor</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Managing-indexed-objects" href="Package-itensor.html#Managing-indexed-objects">71.2.1 Managing indexed objects</a></li>
+      <li><a id="toc-Tensor-symmetries" href="Package-itensor.html#Tensor-symmetries">71.2.2 Tensor symmetries</a></li>
+      <li><a id="toc-Indicial-tensor-calculus" href="Package-itensor.html#Indicial-tensor-calculus">71.2.3 Indicial tensor calculus</a></li>
+      <li><a id="toc-Tensors-in-curved-spaces" href="Package-itensor.html#Tensors-in-curved-spaces">71.2.4 Tensors in curved spaces</a></li>
+      <li><a id="toc-Moving-frames" href="Package-itensor.html#Moving-frames">71.2.5 Moving frames</a></li>
+      <li><a id="toc-Torsion-and-nonmetricity-1" href="Package-itensor.html#Torsion-and-nonmetricity-1">71.2.6 Torsion and nonmetricity</a></li>
+      <li><a id="toc-Exterior-algebra" href="Package-itensor.html#Exterior-algebra">71.2.7 Exterior algebra</a></li>
+      <li><a id="toc-Exporting-TeX-expressions" href="Package-itensor.html#Exporting-TeX-expressions">71.2.8 Exporting TeX expressions</a></li>
+      <li><a id="toc-Interfacing-with-ctensor" href="Package-itensor.html#Interfacing-with-ctensor">71.2.9 Interfacing with ctensor</a></li>
+      <li><a id="toc-Reserved-words" href="Package-itensor.html#Reserved-words">71.2.10 Reserved words</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-lapack" href="Package-lapack.html#Package-lapack">72 Package lapack</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-lapack" href="Package-lapack.html#Introduction-to-lapack">72.1 Introduction to lapack</a></li>
+    <li><a id="toc-Functions-and-Variables-for-lapack" href="Package-lapack.html#Functions-and-Variables-for-lapack">72.2 Functions and Variables for lapack</a></li>
+  </ul></li>
+  <li><a id="toc-Package-lbfgs" href="Package-lbfgs.html#Package-lbfgs">73 Package lbfgs</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-lbfgs" href="Package-lbfgs.html#Introduction-to-lbfgs">73.1 Introduction to lbfgs</a></li>
+    <li><a id="toc-Functions-and-Variables-for-lbfgs" href="Package-lbfgs.html#Functions-and-Variables-for-lbfgs">73.2 Functions and Variables for lbfgs</a></li>
+  </ul></li>
+  <li><a id="toc-Package-levin" href="Package-levin.html#Package-levin">74 Package levin</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-levin" href="Package-levin.html#Introduction-to-levin">74.1 Introduction to levin</a></li>
+    <li><a id="toc-Functions-and-Variables-for-levin" href="Package-levin.html#Functions-and-Variables-for-levin">74.2 Functions and Variables for levin</a></li>
+    <li><a id="toc-Examples-for-levin" href="Package-levin.html#Examples-for-levin">74.3 Examples for levin</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Example-1_003a-The-Basel-problem" href="Package-levin.html#Example-1_003a-The-Basel-problem">74.3.1 Example 1: The Basel problem</a></li>
+      <li><a id="toc-Example-2_003a-Divergent-Taylor-series-for-log_00281_002bx_0029-when-x_003d2" href="Package-levin.html#Example-2_003a-Divergent-Taylor-series-for-log_00281_002bx_0029-when-x_003d2">74.3.2 Example 2: Divergent Taylor series for log(1+x) when x=2</a></li>
+    </ul></li>
+    <li><a id="toc-References-for-levin" href="Package-levin.html#References-for-levin">74.4 References for levin</a></li>
+  </ul></li>
+  <li><a id="toc-Package-lindstedt" href="Package-lindstedt.html#Package-lindstedt">75 Package lindstedt</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-lindstedt" href="Package-lindstedt.html#Functions-and-Variables-for-lindstedt">75.1 Functions and Variables for lindstedt</a></li>
+  </ul></li>
+  <li><a id="toc-Package-linearalgebra" href="Package-linearalgebra.html#Package-linearalgebra">76 Package linearalgebra</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-linearalgebra" href="Package-linearalgebra.html#Introduction-to-linearalgebra">76.1 Introduction to linearalgebra</a></li>
+    <li><a id="toc-Functions-and-Variables-for-linearalgebra" href="Package-linearalgebra.html#Functions-and-Variables-for-linearalgebra">76.2 Functions and Variables for linearalgebra</a></li>
+  </ul></li>
+  <li><a id="toc-Package-lsquares" href="Package-lsquares.html#Package-lsquares">77 Package lsquares</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-lsquares" href="Package-lsquares.html#Introduction-to-lsquares">77.1 Introduction to lsquares</a></li>
+    <li><a id="toc-Functions-and-Variables-for-lsquares" href="Package-lsquares.html#Functions-and-Variables-for-lsquares">77.2 Functions and Variables for lsquares</a></li>
+  </ul></li>
+  <li><a id="toc-Package-minpack" href="Package-minpack.html#Package-minpack">78 Package minpack</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-minpack" href="Package-minpack.html#Introduction-to-minpack">78.1 Introduction to minpack</a></li>
+    <li><a id="toc-Functions-and-Variables-for-minpack" href="Package-minpack.html#Functions-and-Variables-for-minpack">78.2 Functions and Variables for minpack</a></li>
+  </ul></li>
+  <li><a id="toc-Package-makeOrders" href="Package-makeOrders.html#Package-makeOrders">79 Package makeOrders</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-makeOrders" href="Package-makeOrders.html#Functions-and-Variables-for-makeOrders">79.1 Functions and Variables for makeOrders</a></li>
+  </ul></li>
+  <li><a id="toc-Package-mnewton" href="Package-mnewton.html#Package-mnewton">80 Package mnewton</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-mnewton" href="Package-mnewton.html#Introduction-to-mnewton">80.1 Introduction to mnewton</a></li>
+    <li><a id="toc-Functions-and-Variables-for-mnewton" href="Package-mnewton.html#Functions-and-Variables-for-mnewton">80.2 Functions and Variables for mnewton</a></li>
+  </ul></li>
+  <li><a id="toc-Package-numericalio" href="Package-numericalio.html#Package-numericalio">81 Package numericalio</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-numericalio" href="Package-numericalio.html#Introduction-to-numericalio">81.1 Introduction to numericalio</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Plain_002dtext-input-and-output" href="Package-numericalio.html#Plain_002dtext-input-and-output">81.1.1 Plain-text input and output</a></li>
+      <li><a id="toc-Separator-flag-values-for-input" href="Package-numericalio.html#Separator-flag-values-for-input">81.1.2 Separator flag values for input</a></li>
+      <li><a id="toc-Separator-flag-values-for-output" href="Package-numericalio.html#Separator-flag-values-for-output">81.1.3 Separator flag values for output</a></li>
+      <li><a id="toc-Binary-floating_002dpoint-input-and-output" href="Package-numericalio.html#Binary-floating_002dpoint-input-and-output">81.1.4 Binary floating-point input and output</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-plain_002dtext-input-and-output" href="Package-numericalio.html#Functions-and-Variables-for-plain_002dtext-input-and-output">81.2 Functions and Variables for plain-text input and output</a></li>
+    <li><a id="toc-Functions-and-Variables-for-binary-input-and-output" href="Package-numericalio.html#Functions-and-Variables-for-binary-input-and-output">81.3 Functions and Variables for binary input and output</a></li>
+  </ul></li>
+  <li><a id="toc-Package-odepack" href="Package-odepack.html#Package-odepack">82 Package odepack</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-ODEPACK" href="Package-odepack.html#Introduction-to-ODEPACK">82.1 Introduction to ODEPACK</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Getting-Started-with-ODEPACK" href="Package-odepack.html#Getting-Started-with-ODEPACK">82.1.1 Getting Started with ODEPACK</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-odepack" href="Package-odepack.html#Functions-and-Variables-for-odepack">82.2 Functions and Variables for odepack</a></li>
+  </ul></li>
+  <li><a id="toc-Package-operatingsystem" href="Package-operatingsystem.html#Package-operatingsystem">83 Package operatingsystem</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-operatingsystem" href="Package-operatingsystem.html#Introduction-to-operatingsystem">83.1 Introduction to operatingsystem</a></li>
+    <li><a id="toc-Directory-operations" href="Package-operatingsystem.html#Directory-operations">83.2 Directory operations</a></li>
+    <li><a id="toc-File-operations" href="Package-operatingsystem.html#File-operations">83.3 File operations</a></li>
+    <li><a id="toc-Environment-operations" href="Package-operatingsystem.html#Environment-operations">83.4 Environment operations</a></li>
+  </ul></li>
+  <li><a id="toc-Package-opsubst" href="Package-opsubst.html#Package-opsubst">84 Package opsubst</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-opsubst" href="Package-opsubst.html#Functions-and-Variables-for-opsubst">84.1 Functions and Variables for opsubst</a></li>
+  </ul></li>
+  <li><a id="toc-Package-orthopoly" href="Package-orthopoly.html#Package-orthopoly">85 Package orthopoly</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-orthogonal-polynomials" href="Package-orthopoly.html#Introduction-to-orthogonal-polynomials">85.1 Introduction to orthogonal polynomials</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Getting-Started-with-orthopoly" href="Package-orthopoly.html#Getting-Started-with-orthopoly">85.1.1 Getting Started with orthopoly</a></li>
+      <li><a id="toc-Limitations" href="Package-orthopoly.html#Limitations">85.1.2 Limitations</a></li>
+      <li><a id="toc-Floating-point-Evaluation" href="Package-orthopoly.html#Floating-point-Evaluation-1">85.1.3 Floating point Evaluation</a></li>
+      <li><a id="toc-Graphics-and-orthopoly" href="Package-orthopoly.html#Graphics-and-orthopoly">85.1.4 Graphics and <code class="code">orthopoly</code></a></li>
+      <li><a id="toc-Miscellaneous-Functions" href="Package-orthopoly.html#Miscellaneous-Functions">85.1.5 Miscellaneous Functions</a></li>
+      <li><a id="toc-Algorithms" href="Package-orthopoly.html#Algorithms">85.1.6 Algorithms</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-orthogonal-polynomials" href="Package-orthopoly.html#Functions-and-Variables-for-orthogonal-polynomials">85.2 Functions and Variables for orthogonal polynomials</a></li>
+  </ul></li>
+  <li><a id="toc-Package-pslq" href="Package-pslq.html#Package-pslq">86 Package pslq</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-pslq" href="Package-pslq.html#Introduction-to-pslq">86.1 Introduction to pslq</a></li>
+    <li><a id="toc-Functions-and-Variables-for-pslq" href="Package-pslq.html#Functions-and-Variables-for-pslq">86.2 Functions and Variables for pslq</a></li>
+  </ul></li>
+  <li><a id="toc-Package-pytranslate" href="Package-pytranslate.html#Package-pytranslate">87 Package pytranslate</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-pytranslate" href="Package-pytranslate.html#Introduction-to-pytranslate">87.1 Introduction to pytranslate</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Tests-for-pytranslate" href="Package-pytranslate.html#Tests-for-pytranslate">87.1.1 Tests for pytranslate</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-in-pytranslate" href="Package-pytranslate.html#Functions-in-pytranslate">87.2 Functions in pytranslate</a></li>
+    <li><a id="toc-Extending-pytranslate" href="Package-pytranslate.html#Extending-pytranslate">87.3 Extending pytranslate</a></li>
+  </ul></li>
+  <li><a id="toc-Package-quantum_005fcomputing" href="Package-quantum_005fcomputing.html#Package-quantum_005fcomputing">88 Package quantum_computing</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Package-quantum_005fcomputing-1" href="Package-quantum_005fcomputing.html#Introduction-to-quantum_005fcomputing">88.1 Package quantum_computing</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Quantum_005fComputing" href="Package-quantum_005fcomputing.html#Functions-and-Variables-for-Quantum_005fComputing">88.2 Functions and Variables for Quantum_Computing</a></li>
+  </ul></li>
+  <li><a id="toc-Package-ratpow" href="Package-ratpow.html#Package-ratpow">89 Package ratpow</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-ratpow" href="Package-ratpow.html#Functions-and-Variables-for-ratpow">89.1 Functions and Variables for ratpow</a></li>
+  </ul></li>
+  <li><a id="toc-Package-romberg" href="Package-romberg.html#Package-romberg">90 Package romberg</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-romberg" href="Package-romberg.html#Functions-and-Variables-for-romberg">90.1 Functions and Variables for romberg</a></li>
+  </ul></li>
+  <li><a id="toc-Package-simplex" href="Package-simplex.html#Package-simplex">91 Package simplex</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-simplex" href="Package-simplex.html#Introduction-to-simplex">91.1 Introduction to simplex</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Tests-for-simplex" href="Package-simplex.html#Tests-for-simplex">91.1.1 Tests for simplex</a>
+      <ul class="toc-numbered-mark">
+        <li><a id="toc-klee_005fminty" href="Package-simplex.html#klee_005fminty">91.1.1.1 klee_minty</a></li>
+        <li><a id="toc-NETLIB" href="Package-simplex.html#NETLIB">91.1.1.2 NETLIB</a></li>
+      </ul></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-simplex" href="Package-simplex.html#Functions-and-Variables-for-simplex">91.2 Functions and Variables for simplex</a></li>
+  </ul></li>
+  <li><a id="toc-Package-simplification" href="Package-simplification.html#Package-simplification">92 Package simplification</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-simplification" href="Package-simplification.html#Introduction-to-simplification">92.1 Introduction to simplification</a></li>
+    <li><a id="toc-Package-absimp" href="Package-simplification.html#Package-absimp">92.2 Package absimp</a></li>
+    <li><a id="toc-Package-facexp" href="Package-simplification.html#Package-facexp">92.3 Package facexp</a></li>
+    <li><a id="toc-Package-functs" href="Package-simplification.html#Package-functs">92.4 Package functs</a></li>
+    <li><a id="toc-Package-ineq" href="Package-simplification.html#Package-ineq">92.5 Package ineq</a></li>
+    <li><a id="toc-Package-rducon" href="Package-simplification.html#Package-rducon">92.6 Package rducon</a></li>
+    <li><a id="toc-Package-scifac" href="Package-simplification.html#Package-scifac">92.7 Package scifac</a></li>
+  </ul></li>
+  <li><a id="toc-Package-solve_005frec" href="Package-solve_005frec.html#Package-solve_005frec">93 Package solve_rec</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-solve_005frec" href="Package-solve_005frec.html#Introduction-to-solve_005frec">93.1 Introduction to solve_rec</a></li>
+    <li><a id="toc-Functions-and-Variables-for-solve_005frec" href="Package-solve_005frec.html#Functions-and-Variables-for-solve_005frec">93.2 Functions and Variables for solve_rec</a></li>
+  </ul></li>
+  <li><a id="toc-Package-stats" href="Package-stats.html#Package-stats">94 Package stats</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-stats" href="Package-stats.html#Introduction-to-stats">94.1 Introduction to stats</a></li>
+    <li><a id="toc-Functions-and-Variables-for-inference_005fresult" href="Package-stats.html#Functions-and-Variables-for-inference_005fresult">94.2 Functions and Variables for inference_result</a></li>
+    <li><a id="toc-Functions-and-Variables-for-stats" href="Package-stats.html#Functions-and-Variables-for-stats">94.3 Functions and Variables for stats</a></li>
+    <li><a id="toc-Functions-and-Variables-for-special-distributions" href="Package-stats.html#Functions-and-Variables-for-special-distributions">94.4 Functions and Variables for special distributions</a></li>
+  </ul></li>
+  <li><a id="toc-Package-stirling" href="Package-stirling.html#Package-stirling">95 Package stirling</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-stirling" href="Package-stirling.html#Functions-and-Variables-for-stirling">95.1 Functions and Variables for stirling</a></li>
+  </ul></li>
+  <li><a id="toc-Package-stringproc" href="Package-stringproc.html#Package-stringproc">96 Package stringproc</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-String-Processing" href="Package-stringproc.html#Introduction-to-String-Processing">96.1 Introduction to String Processing</a></li>
+    <li><a id="toc-String-Input-and-Output" href="Package-stringproc.html#String-Input-and-Output">96.2 String Input and Output</a></li>
+    <li><a id="toc-Characters" href="Package-stringproc.html#Characters">96.3 Characters</a></li>
+    <li><a id="toc-String-Processing" href="Package-stringproc.html#String-Processing">96.4 String Processing</a></li>
+    <li><a id="toc-Octets-and-Utilities-for-Cryptography" href="Package-stringproc.html#Octets-and-Utilities-for-Cryptography">96.5 Octets and Utilities for Cryptography</a></li>
+    <li><a id="toc-Regular-Expressions" href="Package-stringproc.html#Regular-Expressions">96.6 Regular Expressions</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Introduction-to-Regular-Expressions" href="Package-stringproc.html#Introduction-to-Regular-Expressions">96.6.1 Introduction to Regular Expressions</a></li>
+      <li><a id="toc-Functions-and-Variables" href="Package-stringproc.html#Functions-and-Variables">96.6.2 Functions and Variables</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-sym" href="Package-sym.html#Package-sym">97 Package sym</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Symmetries" href="Package-sym.html#Introduction-to-Symmetries">97.1 Introduction to Symmetries</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Symmetries" href="Package-sym.html#Functions-and-Variables-for-Symmetries">97.2 Functions and Variables for Symmetries</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Changing-bases" href="Package-sym.html#Changing-bases">97.2.1 Changing bases</a></li>
+      <li><a id="toc-Changing-representations" href="Package-sym.html#Changing-representations">97.2.2 Changing representations</a></li>
+      <li><a id="toc-Groups-and-orbits" href="Package-sym.html#Groups-and-orbits">97.2.3 Groups and orbits</a></li>
+      <li><a id="toc-Partitions" href="Package-sym.html#Partitions">97.2.4 Partitions</a></li>
+      <li><a id="toc-Polynomials-and-their-roots" href="Package-sym.html#Polynomials-and-their-roots">97.2.5 Polynomials and their roots</a></li>
+      <li><a id="toc-Resolvents" href="Package-sym.html#Resolvents">97.2.6 Resolvents</a></li>
+      <li><a id="toc-Miscellaneous" href="Package-sym.html#Miscellaneous">97.2.7 Miscellaneous</a></li>
+    </ul></li>
+  </ul></li>
+  <li><a id="toc-Package-to_005fpoly_005fsolve" href="Package-to_005fpoly_005fsolve.html#Package-to_005fpoly_005fsolve">98 Package to_poly_solve</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Functions-and-Variables-for-to_005fpoly_005fsolve" href="Package-to_005fpoly_005fsolve.html#Functions-and-Variables-for-to_005fpoly_005fsolve">98.1 Functions and Variables for to_poly_solve</a></li>
+  </ul></li>
+  <li><a id="toc-Package-trigtools" href="Package-trigtools.html#Package-trigtools">99 Package trigtools</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-trigtools" href="Package-trigtools.html#Introduction-to-trigtools">99.1 Introduction to trigtools</a></li>
+    <li><a id="toc-Functions-and-Variables-for-trigtools" href="Package-trigtools.html#Functions-and-Variables-for-trigtools">99.2 Functions and Variables for trigtools</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-Convert-to-sin-and-cos" href="Package-trigtools.html#Convert-to-sin-and-cos">99.2.1 Convert to sin and cos</a></li>
+      <li><a id="toc-Convert-to-Trigonometric-Functions" href="Package-trigtools.html#Convert-to-Trigonometric-Functions">99.2.2 Convert to Trigonometric Functions</a></li>
+      <li><a id="toc-Convert-to-Hyperbolic-Functions" href="Package-trigtools.html#Convert-to-Hyperbolic-Functions">99.2.3 Convert to Hyperbolic Functions</a></li>
+      <li><a id="toc-Factor-Sums-of-sin-and-cos-Functions" href="Package-trigtools.html#Factor-Sums-of-sin-and-cos-Functions">99.2.4 Factor Sums of sin and cos Functions</a></li>
+      <li><a id="toc-Solve-Trigonometric-Equations" href="Package-trigtools.html#Solve-Trigonometric-Equations">99.2.5 Solve Trigonometric Equations</a></li>
+      <li><a id="toc-Evaluation-of-Trigonometric-Functions" href="Package-trigtools.html#Evaluation-of-Trigonometric-Functions">99.2.6 Evaluation of Trigonometric Functions</a></li>
+      <li><a id="toc-Contract-atan-Functions" href="Package-trigtools.html#Contract-atan-Functions">99.2.7 Contract atan Functions</a></li>
+    </ul></li>
+    <li><a id="toc-References" href="Package-trigtools.html#References">99.3 References</a></li>
+  </ul></li>
+  <li><a id="toc-Package-unit" href="Package-unit.html#Package-unit">100 Package unit</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-Units" href="Package-unit.html#Introduction-to-Units">100.1 Introduction to Units</a></li>
+    <li><a id="toc-Functions-and-Variables-for-Units" href="Package-unit.html#Functions-and-Variables-for-Units">100.2 Functions and Variables for Units</a></li>
+  </ul></li>
+  <li><a id="toc-Package-wrstcse" href="Package-wrstcse.html#Package-wrstcse">101 Package wrstcse</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-wrstcse" href="Package-wrstcse.html#Introduction-to-wrstcse">101.1 Introduction to wrstcse</a></li>
+    <li><a id="toc-Functions-and-Variables-for-wrstcse" href="Package-wrstcse.html#Functions-and-Variables-for-wrstcse">101.2 Functions and Variables for wrstcse</a></li>
+  </ul></li>
+  <li><a id="toc-Package-zeilberger" href="Package-zeilberger.html#Package-zeilberger">102 Package zeilberger</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Introduction-to-zeilberger" href="Package-zeilberger.html#Introduction-to-zeilberger">102.1 Introduction to zeilberger</a>
+    <ul class="toc-numbered-mark">
+      <li><a id="toc-The-indefinite-summation-problem" href="Package-zeilberger.html#The-indefinite-summation-problem">102.1.1 The indefinite summation problem</a></li>
+      <li><a id="toc-The-definite-summation-problem" href="Package-zeilberger.html#The-definite-summation-problem">102.1.2 The definite summation problem</a></li>
+      <li><a id="toc-Verbosity-levels" href="Package-zeilberger.html#Verbosity-levels">102.1.3 Verbosity levels</a></li>
+    </ul></li>
+    <li><a id="toc-Functions-and-Variables-for-zeilberger" href="Package-zeilberger.html#Functions-and-Variables-for-zeilberger">102.2 Functions and Variables for zeilberger</a></li>
+    <li><a id="toc-General-global-variables" href="Package-zeilberger.html#General-global-variables">102.3 General global variables</a></li>
+    <li><a id="toc-Variables-related-to-the-modular-test" href="Package-zeilberger.html#Variables-related-to-the-modular-test">102.4 Variables related to the modular test</a></li>
+  </ul></li>
+  <li><a id="toc-Function-and-Variable-Index" href="Function-and-Variable-Index.html" rel="index">Appendix A Function and Variable Index</a></li>
+  <li><a id="toc-Documentation-Categories" href="Documentation-Categories.html">Appendix B Documentation Categories</a></li>
+</ul>
+</div>
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Introduction-to-Maxima.html" accesskey="n" rel="next">Introduction to Maxima</a>, Previous: <a href="../dir_html/index.html" accesskey="p" rel="prev">(dir)</a>, Up: <a href="../dir_html/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Test/demo for 'grid walls', solid rectangles that lie in the xy, xz, yz
+# planes in 3D plots if enabled.
+#
+set title "Test/demo of new feature 'grid walls'"
+
+set wall z0 fs transparent solid 0.5 border -1 fc "slategray"
+set wall x0 fs transparent solid 0.5 border -1 fc "forest-green"
+set wall y0 fs transparent solid 0.5 border -1 fc "bisque"
+
+set xrange [0:1]
+set yrange [0:1]
+set xyplane at 0
+set isosample 25,25
+set palette cubehelix
+set pm3d interpolate 2,2
+unset colorbox
+unset key
+unset xtics
+unset ytics
+
+set view 65, 145
+
+sinc(x) = sin(x)/x
+splot .1 + y* sinc(20*(x-0.5)) with pm3d
+
+pause -1 "<cr> to continue"

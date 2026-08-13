@@ -27,6 +27,8 @@ define_variable(solverealtopoly,false,boolean)$
 define_variable(solverealmaximasolve,true,boolean)$
 newcontext(solreal)$context:initial$
 
+op(qexpr):=part(qexpr,0)$ /* In maxima v.1.49 op(x) no longer recognizes partswitch. However part does. The manual says op(x) is equivalent to part(x,0) with partswitch=false - hence this work around to avoid errors using op. - It is probably better to make new op2(expr) instead of redefining as here.  */
+
 containx(exprq,xqz):=block([],member(xqz,listofvars(exprq)))$
 containanyx(exprq,xqz):=block([],not(lfreeof(xqz,listofvars(exprq)) ))$ /* for solvesystem */
 
@@ -1334,7 +1336,7 @@ nsolve([paramq]) := block(
 	qqs: errcatch(qfkt(0)),
 	if qqs#[] then (
 		qqs:qqs[1],
-		if qqs=0.0 or qqs=0 or qqs=0.0b0 then solq: append(solq, [0]) /* nsolverec checks on both sides of 0, but never 0*/
+		if qqs=0.0 or qqs=0 or qqs=bfloat(0) then solq: append(solq, [0]) /* nsolverec checks on both sides of 0, but never 0*/
 	),
 	if qmm > qm then errcatch(
 		if opposite_sign(qfkt(10^qm),qfkt(10^qmm)) then
@@ -1585,8 +1587,8 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 	),
 /*	print("ql=",ql),print("glf=",glf), */
 	while qi < length(glf) do (
-		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (fpprec:64,
-			if ev(bfloat(qfkt(qvar)),qvar=bfloat(ql[qi]),bfloat)=0.0b0 then(
+		if glf[qi] = 0.0 or glf[qi] = bfloat(0) then (fpprec:64,
+			if ev(bfloat(qfkt(qvar)),qvar=bfloat(ql[qi]),bfloat)=bfloat(0) then(
 				sollq: append(sollq, [ql[qi]])
 			)
 						/*			if opposite_sign(qfkt(ql[qi] - 10^(qn - 3)),qfkt(ql[qi] + 10^(qn - 3))) then
@@ -1601,8 +1603,8 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 										sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, ql[qi], ql[qi + 1]))]))
 									)
 						*/
-		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (fpprec:64,
-			if ev(bfloat(qfkt(qvar)),qvar=bfloat(ql[qi+1]),bfloat)=0.0b0 then(
+		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = bfloat(0) then (fpprec:64,
+			if ev(bfloat(qfkt(qvar)),qvar=bfloat(ql[qi+1]),bfloat)=bfloat(0) then(
 				sollq: append(sollq, [ql[qi+1]])
 			)
 		) elseif not(freeof(%i, glf[qi])) or not(freeof(%i, glf[qi+1])) then (
@@ -1630,8 +1632,8 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 	glf: flatten(errcatch(qfkt(-ql))),
 
 	while qi < length(glf) do (
-		if glf[qi] = 0.0 or glf[qi] = 0.0b0 then (fpprec:64,
-			if ev(bfloat(qfkt(qvar)),qvar=bfloat(-ql[qi]))=0.0b0 then(
+		if glf[qi] = 0.0 or glf[qi] = bfloat(0) then (fpprec:64,
+			if ev(bfloat(qfkt(qvar)),qvar=bfloat(-ql[qi]))=bfloat(0) then(
 				sollq: append(sollq, [-ql[qi]])
 			)
 /*			if ql[qi]>2.8 and ql[qi]<3.2 then print("glf[",qi,"]=",glf[qi]," glf[",qi+1,"]=",glf[qi+1]),
@@ -1646,8 +1648,8 @@ nsolverec(qfkt, qvar, sollq, qn, qm, qp) := block([ql, glf, qi, UseBF, qV1, qV2,
 			else if not(freeof(%i, glf[qi+1])) then (
 				sollq: append(sollq, flatten([errcatch(find_root_edge(qfkt, qvar, -ql[qi+1], -ql[qi]+1E-10))]))
 			)*/
-		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = 0.0b0 then (fpprec:64,
-			if ev(bfloat(qfkt(qvar)),qvar=bfloat(-ql[qi+1]),bfloat)=0.0b0 then(
+		) elseif glf[qi + 1] = 0.0 or glf[qi + 1] = bfloat(0) then (fpprec:64,
+			if ev(bfloat(qfkt(qvar)),qvar=bfloat(-ql[qi+1]),bfloat)=bfloat(0) then(
 				sollq: append(sollq, [-ql[qi+1]])
 			)
 		) elseif not(freeof(%i, glf[qi])) or not(freeof(%i, glf[qi+1])) then (

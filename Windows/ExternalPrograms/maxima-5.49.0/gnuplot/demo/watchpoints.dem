@@ -1,0 +1,45 @@
+#
+# Illustrate uses of plotting with a watchpoint set
+#
+if (!strstrt(GPVAL_COMPILE_OPTIONS, "+WATCHPOINTS")) {
+    print "This copy of gnuplot does not support watchpoints"
+    exit  # return to caller
+}
+
+# watchpoints are only active on plots "with lines" or "with linespoints"
+#
+set style data lines
+
+set key left Left reverse title "   "
+set border lw 1.2
+set tics nomirror
+set y2tics 0.25
+set link y2
+
+set multiplot
+set title "Use watchpoints to find threshold values on a smoothed curve"
+plot 'moli3.dat' using 0:(abs($2)*sin($0/6.)**2) smooth cnormal lt -1 lw 2 \
+     watch y=.25 watch y=.50 watch y=.75 \
+     title "plot FOO smooth cnormal\n watch y=.25 watch y=.50 watch y=.75"
+set obj 1 rect from real(WATCH_1[1]), imag(WATCH_1[1]) to graph 2, graph -2
+set obj 1 fs empty bo lc "red"
+set obj 2 rect from real(WATCH_2[1]), imag(WATCH_2[1]) to graph 2, graph -2
+set obj 2 fs empty bo lc "blue"
+set obj 3 rect from real(WATCH_3[1]), imag(WATCH_3[1]) to graph 2, graph -2
+set obj 3 fs empty bo lc "forest-green"
+
+replot
+unset multiplot
+
+show watchpoints
+
+pause -1 "<cr> to continue"
+
+set title "Same plot with auto-generated watchpoint hit labels"
+set style watchpoint label boxed
+set style watchpoint label right point pt 7 offset -1,0.5
+set style textbox opaque margin 0,0 lw 0.5
+replot
+
+pause -1 "<cr> to continue"
+reset

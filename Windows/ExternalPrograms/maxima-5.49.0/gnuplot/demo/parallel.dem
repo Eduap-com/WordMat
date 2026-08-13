@@ -1,0 +1,79 @@
+#
+# Parallel axis plot
+# shows plot layout but would better use some real data set
+# NB: March 2019 revised syntax for 5.3
+#
+set title "Parallel Axis Plot" font ",15"
+
+set border 0
+unset key
+set xrange [] noextend
+unset ytics
+set style data parallelaxes
+
+# Use x-axis tic positions to label the axes
+set xtics 1,1,5 format "axis %g" scale 0,0
+
+# Turn on axis tics for the parallel axes
+set for [i=1:5] paxis i tics
+
+# Use the range commands to create an "interesting" plot.
+# For suitable input data this is the sort of result you
+# might get without axis range manipulation.
+
+set paxis 2 range  [0:30]
+set paxis 4 range  [-10:50]
+set paxis 5 range  [50:*] reverse
+set paxis 5 tics left offset 4
+
+plot 'silver.dat' using 2:(int($0/25)) lc variable, '' using 3, '' using 1, '' using ($3/2), '' using 2
+
+pause -1 "Hit return to continue"
+
+reset
+
+set title "Parallel Axis Plot" font ",15"
+
+save_encoding = GPVAL_ENCODING
+set encoding utf8
+
+set border 0
+unset ytics
+set xrange [] noextend
+unset key
+
+set style data parallelaxes
+set paxis 1 tics format '%.0f Å' offset -1
+set paxis 4 tics left offset 4 format '%.0f Å^2'
+set paxis 4 range [0:40]
+
+plot 'GM1_sugar.pdb' using 6:5 lc var lw 2 title "X", '' using 7 at 1.75 title "Y", '' using 8 at 2.5 title "Z", '' using 10 title "B"
+
+pause -1 "Hit return to continue"
+reset
+
+set style data parallel
+set palette defined (0 "dark-blue", 1 "dark-orange")
+set xrange [0.5:7.5]
+unset ytics
+set xtics font ":Bold,13"
+unset border
+set bmargin 4
+unset colorbox
+a = 12.
+b = 34.
+
+set title "Parallel Axis Plot" font ",15"
+
+plot sample [x=1:20] '+' using (rand(0)):0 lc palette title "random", \
+    '' u ($1) title "x", \
+    '' u (-$1) title "-x", \
+    '' u (a*$1) title "a*x", \
+    '' u (a*$1+b) title "a*x+b", \
+    '' u (exp($1)) title "e^x", \
+    '' u (1/$1) title "1/x"
+
+pause -1 "Hit return to continue"
+
+set encoding save_encoding
+reset

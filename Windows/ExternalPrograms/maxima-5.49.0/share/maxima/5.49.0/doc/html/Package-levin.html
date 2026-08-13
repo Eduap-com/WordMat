@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package levin (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Package levin (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Package levin (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-lindstedt.html#Package-lindstedt" rel="next" title="Package lindstedt">
+<link href="Package-lbfgs.html#Package-lbfgs" rel="prev" title="Package lbfgs">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},       // do not skip pre
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  tex: {
+    processEscapes: false,      // do not use \$ to produce a literal dollar sign
+    processEnvironments: false, // do not process \begin{xxx}...\end{xxx} outside math mode
+    processRefs: false,         // do not process \ref{...} outside of math mode
+    displayMath: [             // start/end delimiter pairs for display math
+      ['\\[', '\\]']
+    ],
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Package-levin">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-lindstedt.html#Package-lindstedt" accesskey="n" rel="next">Package lindstedt</a>, Previous: <a href="Package-lbfgs.html#Package-lbfgs" accesskey="p" rel="prev">Package lbfgs</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-levin-1"><span>74 Package levin<a class="copiable-link" href="#Package-levin-1"> &para;</a></span></h2>
+
+
+<a class="anchor" id="Item_003a-levin_002fnode_002fIntroduction-to-levin"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-levin" accesskey="1">Introduction to levin</a></li>
+<li><a href="#Functions-and-Variables-for-levin" accesskey="2">Functions and Variables for levin</a></li>
+<li><a href="#Examples-for-levin" accesskey="3">Examples for levin</a></li>
+<li><a href="#References-for-levin" accesskey="4">References for levin</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-levin">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-levin" accesskey="n" rel="next">Functions and Variables for levin</a>, Previous: <a href="#Package-levin" accesskey="p" rel="prev">Package levin</a>, Up: <a href="#Package-levin" accesskey="u" rel="up">Package levin</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-levin-1"><span>74.1 Introduction to levin<a class="copiable-link" href="#Introduction-to-levin-1"> &para;</a></span></h3>
+
+<p>Package levin provides functions that implement the Levin u-transformation
+(<a class="ref" href="#levin_002d1973">Levin 1973</a>).
+This transformation may accelerate convergence
+of the sum of infinite sequences using a small number of terms.
+</p>
+<p>Methods to accelerate the convergence of infinite series do not usually return the exact sum.  There are two major sources of error: truncation error, due to
+the finite number of terms used; and, rounding error, due to the finite
+precision arithmetic used in the calculations.  Truncation
+error dominates for a small number of terms (perhaps 5 to 10 terms).
+Rounding error dominates as the number of terms increases (perhaps
+above 10 to 20 terms for IEEE-754 double precision arithmetic).
+</p>
+<p>This package has two functions that address these sources of error. 
+</p>
+<p>Function <code class="code"><a class="ref" href="#levin_005fu_005fsum">levin_u_sum</a></code> (by default) uses rational arithmetic with a
+fixed number
+of terms.  This eliminates rounding error if the terms are known exactly.
+</p>
+<p>Function <code class="code"><a class="ref" href="#bflevin_005fu_005fsum">bflevin_u_sum</a></code> uses bigfloat precision.
+It uses error estimates to increase the number of terms and the bigfloat
+arithmetic precision to meet an accuracy target. 
+</p>
+<p>See <code class="code"><a class="ref" href="#Examples-for-levin">Examples for levin</a></code> for examples.
+See <code class="code"><a class="ref" href="#References-for-levin">References for levin</a></code> for further information.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-levin">Package levin</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-levin_002fnode_002fFunctions-and-Variables-for-levin"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-levin">
+<div class="nav-panel">
+<p>
+Next: <a href="#Examples-for-levin" accesskey="n" rel="next">Examples for levin</a>, Previous: <a href="#Introduction-to-levin" accesskey="p" rel="prev">Introduction to levin</a>, Up: <a href="#Package-levin" accesskey="u" rel="up">Package levin</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-levin-1"><span>74.2 Functions and Variables for levin<a class="copiable-link" href="#Functions-and-Variables-for-levin-1"> &para;</a></span></h3>
+
+
+<a class="anchor" id="levin_005fu_005fsum"></a><a class="anchor" id="Item_003a-levin_002fdeffn_002flevin_005fu_005fsum"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-levin_005fu_005fsum"><span class="category-def">Function: </span><span><strong class="def-name">levin_u_sum</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">levin_u_sum</b> (<var class="var">a</var>, <var class="var">n</var>, <var class="var">n_0</var>, <var class="var">nterms</var>, <var class="var">mode</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">levin_u_sum</b> (<var class="var">a</var>, <var class="var">n</var>, <var class="var">n_0</var>, <var class="var">nterms</var>)</var><a class="copiable-link" href="#index-levin_005fu_005fsum"> &para;</a></span></dt>
+<dd>
+<p>Estimate <code class="code">sum(<var class="var">a</var>(<var class="var">n</var>), <var class="var">n</var>, <var class="var">n_0</var>, inf)</code> using at most <var class="var">nterms</var>
+terms using the Levin u-transform see <a class="pxref" href="#levin_002d1973">Levin 1973</a>.
+</p>
+<p>The following values are recognized for the optional argument <var class="var">mode</var>.
+If <var class="var">mode</var> is not supplied, it is assumed to be <code class="code">levin_algebraic</code>.
+</p>
+<dl class="table">
+<dt><code class="code">levin_algebraic</code></dt>
+<dd><p>The calculation is performed in exact arithmetic. <code class="code">levin_u_sum</code> returns the result.
+</p>
+</dd>
+<dt><code class="code">levin_numeric</code></dt>
+<dd><p>The calculation is performed in bigfloat arithmetic.
+The return value is a list <code class="code">[<var class="var">result</var>, <var class="var">variance</var>]</code>
+where <var class="var">result</var> is the result of the bigfloat calculation,
+and <var class="var">variance</var> is in units of <code class="code">10^(-2*fpprec)</code>.
+</p>
+</dd>
+</dl>
+
+<p><code class="code">load(&quot;levin&quot;)</code> loads this function.
+</p>
+<p>See <code class="code"><a class="ref" href="#Examples-for-levin">Examples for levin</a></code> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-levin">Package levin</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="bflevin_005fu_005fsum"></a><a class="anchor" id="Item_003a-levin_002fdeffn_002fbflevin_005fu_005fsum"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-bflevin_005fu_005fsum"><span class="category-def">Function: </span><span><strong class="def-name">bflevin_u_sum</strong> <var class="def-var-arguments">(<var class="var">a</var>, <var class="var">n</var>, <var class="var">n_0</var>)</var><a class="copiable-link" href="#index-bflevin_005fu_005fsum"> &para;</a></span></dt>
+<dd>
+<p>Estimate <code class="code">sum(<var class="var">a</var>(<var class="var">n</var>), <var class="var">n</var>, <var class="var">n_0</var>, inf)</code> using the
+Levin u-transform in bigfloat arithmetic.
+</p>
+<p><code class="code">bflevin_u_sum</code> attempts to return the sum of the infinite series
+with a precision given by the global variable <code class="code"><a class="ref" href="Data-Types-and-Structures.html#fpprec">fpprec</a></code> using bigfloat arithmetic.
+</p>
+<p>See <code class="code"><a class="ref" href="#levin_005foptions">levin_options</a></code> for options to control this function.
+<code class="code">bflevin_u_sum</code> uses an adaptive algorithm to increase both the number of
+terms and the bigfloat precision used for internal calculations
+until the estimated error is acceptable.
+</p>
+<p><code class="code">load(&quot;levin&quot;)</code> loads this function.
+</p>
+<p>See <code class="code"><a class="ref" href="#Examples-for-levin">Examples for levin</a></code> for examples.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-levin">Package levin</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="levin_005foptions"></a><a class="anchor" id="Item_003a-levin_002fdeffn_002flevin_005foptions"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-levin_005foptions"><span class="category-def">Variable: </span><span><strong class="def-name">levin_options</strong><a class="copiable-link" href="#index-levin_005foptions"> &para;</a></span></dt>
+<dd>
+<p>Function <code class="code"><a class="ref" href="#bflevin_005fu_005fsum">bflevin_u_sum</a></code> attempts to return the sum of an infinite series
+with a precision given by the global variable <code class="code"><a class="ref" href="Data-Types-and-Structures.html#fpprec">fpprec</a></code> using bigfloat arithmetic.
+<code class="code">bflevin_u_sum</code> uses an adaptive algorithm to increase both the number of
+terms used and the bigfloat precision used for internal calculations
+until the estimated error is acceptable.
+</p>
+<p>The undeclared array <code class="code">levin_options</code> contains options for controlling <code class="code">bflevin_u_sum</code>.
+Note that the subscript values for <code class="code">levin_options</code> are strings.
+</p>
+<dl class="table">
+<dt><code class="code">levin_options[&quot;debug&quot;]</code></dt>
+<dd><p>When <code class="code">true</code>, <code class="code">bflevin_u_sum</code> generates additional output. Default: <code class="code">false</code>
+</p>
+</dd>
+<dt><code class="code">levin_options[&quot;min_terms&quot;]</code></dt>
+<dd><p>Minimum number of terms used by <code class="code">bflevin_u_sum</code>. Default: 5
+</p>
+</dd>
+<dt><code class="code">levin_options[&quot;max_terms&quot;]</code></dt>
+<dd><p>Maximum number of terms used by <code class="code">bflevin_u_sum</code>. Default: 640 (equal to 5*2^7)
+</p>
+</dd>
+<dt><code class="code">levin_options[&quot;min_precision&quot;]</code></dt>
+<dd><p>Initial bigfloat precision for <code class="code">bflevin_u_sum</code>. Default: 16
+</p>
+</dd>
+<dt><code class="code">levin_options[&quot;max_precision&quot;]</code></dt>
+<dd><p>Maximum bigfloat precision for <code class="code">bflevin_u_sum</code>. Default: 1000
+</p>
+</dd>
+</dl>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-levin">Package levin</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Sums-and-products">Sums and products</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+
+<a class="anchor" id="Item_003a-levin_002fnode_002fExamples-for-levin"></a><hr>
+</div>
+<div class="section-level-extent" id="Examples-for-levin">
+<div class="nav-panel">
+<p>
+Next: <a href="#References-for-levin" accesskey="n" rel="next">References for levin</a>, Previous: <a href="#Functions-and-Variables-for-levin" accesskey="p" rel="prev">Functions and Variables for levin</a>, Up: <a href="#Package-levin" accesskey="u" rel="up">Package levin</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Examples-for-levin-1"><span>74.3 Examples for levin<a class="copiable-link" href="#Examples-for-levin-1"> &para;</a></span></h3>
+
+<ul class="mini-toc">
+<li><a href="#Example-1_003a-The-Basel-problem" accesskey="1">Example 1: The Basel problem</a></li>
+<li><a href="#Example-2_003a-Divergent-Taylor-series-for-log_00281_002bx_0029-when-x_003d2" accesskey="2">Example 2: Divergent Taylor series for log(1+x) when x=2</a></li>
+</ul>
+<div class="subsection-level-extent" id="Example-1_003a-The-Basel-problem">
+<h4 class="subsection"><span>74.3.1 Example 1: The Basel problem<a class="copiable-link" href="#Example-1_003a-The-Basel-problem"> &para;</a></span></h4>
+
+<p>The Basel problem asks for the precise summation
+of the reciprocals of the
+squares of the natural numbers.  Leonhard Euler found, in 1734, 
+</p>
+$$
+{\sum_{n=1}^{\infty}{{1}\over{n^2}}}
+ = {{\pi^2}\over{6}}
+ = {1.6449340668482262...}
+$$
+
+
+<p>The sum is evaluated using both: <code class="code"><a class="ref" href="#levin_005fu_005fsum">levin_u_sum</a></code> using modes levin_algebraic and levin_numeric; and  
+<code class="code"><a class="ref" href="#bflevin_005fu_005fsum">bflevin_u_sum</a></code> with two values of bigfloat precision <code class="code"><a class="ref" href="Data-Types-and-Structures.html#fpprec">fpprec</a></code>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) (load(&quot;levin&quot;), exact: %pi^2/6, done);
+(%o1)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) s: levin_u_sum(1/n^2, n, 1, 10);
+                           3899836039
+(%o2)                      ----------
+                           2370816000
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) float(s);
+(%o3)                   1.644934081345832
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) float(s - exact);
+(%o4)                 1.4497605782537448e-8
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) s: levin_u_sum(1/n^2, n, 1, 10, 'levin_numeric);
+(%o5)     [1.644934081345756b0, 1.882785043290232b-12]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) bfloat(s[1] - exact);
+(%o6)                 1.449752928817105b-8
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) s: bflevin_u_sum(1/n^2, n, 1);
+(%o7)                  1.644934066848226b0
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) s - bfloat(exact);
+(%o8)                 2.775557561562891b-17
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) /* Now increase fpprec and try the same example again. */
+ fpprec: 32;
+(%o9)                          32
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) s: bflevin_u_sum(1/n^2, n, 1);
+(%o10)         1.644934066848226436472415166646b0
+</pre></div><div class="group"><pre class="example-preformatted">(%i11) s - bfloat(exact);
+(%o11)       - 3.0814879110195773648895647081359b-33
+</pre></div></div>
+
+<p>Using 10 terms in the series we were able to extrapolate
+to the exact sum with an error of approximately <em class="math tex2jax_process">\(10^{-8}\)</em>.
+This would require
+around <em class="math tex2jax_process">\(10^{8}\)</em> terms by direct summation.
+In this case the two modes of <var class="var">levin_u_sum</var> returned
+results of similar accuracy.
+</p>
+
+<p>The effect of the number of terms <var class="var">nterms</var> on the accuracy of <var class="var">levin_u_sum</var>
+is shown in the following example.  The sum of the series and the approximation error
+is evaluated for
+increasing values of argument <var class="var">nterms</var> for both values of the optional argument <var class="var">mode</var>:
+<var class="var">levin_algebraic</var> and <var class="var">levin_numeric</var>.  The numeric calculations are performed
+with bigfloat precision <var class="var">fpprec</var> of 16.  Errors are calculated with <var class="var">fpprec</var> equal to 64.
+</p>
+<p>The results are reported in three columns:
+<var class="var">nterms</var>, the number of terms used;
+<var class="var">errora</var>, the difference between the algebraic result and the exact
+sum; 
+and <var class="var">errorn</var>, the difference between numeric result and the exact sum.
+For small values of <var class="var">nterms</var> the two modes return similar results.
+As <var class="var">nterms</var> increases above 12, the error
+for mode <var class="var">levin_algebraic</var> continues to decrease.  However, for mode
+<var class="var">levin_numeric</var> the error increases with <var class="var">nterms</var> to due to roundoff.
+This behavior is commonly encountered, and can be addressed by increasing
+<var class="var">fpprec</var>.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) (load(&quot;levin&quot;), fpprec: 32, fpprintprec: 3, exact: %pi^2/6, done);
+(%o1)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) for nterms: 6 step 2 thru 24 do (
+     sa: levin_u_sum(1/n^2, n, 1, nterms),
+     sn: block([fpprec: 16], levin_u_sum(1/n^2, n, 1, nterms, 'levin_numeric)),
+     errora: abs(bfloat(sa - exact)),
+     errorn: abs(bfloat(sn[1] - exact)),
+     print(nterms, &quot;     &quot;, errora, &quot;   &quot;, errorn));
+6       2.58b-4     2.58b-4 
+8       3.51b-6     3.51b-6 
+10       1.45b-8     1.45b-8 
+12       2.44b-10     2.44b-10 
+14       5.16b-12     3.78b-11 
+16       3.54b-14     4.5b-10 
+18       3.75b-16     3.21b-11 
+20       1.36b-17     8.66b-9 
+22       1.73b-19     4.48b-7 
+24       4.45b-22     4.25b-6 
+(%o2)                         done
+</pre></div></div>
+
+</div>
+<div class="subsection-level-extent" id="Example-2_003a-Divergent-Taylor-series-for-log_00281_002bx_0029-when-x_003d2">
+<h4 class="subsection"><span>74.3.2 Example 2: Divergent Taylor series for log(1+x) when x=2<a class="copiable-link" href="#Example-2_003a-Divergent-Taylor-series-for-log_00281_002bx_0029-when-x_003d2"> &para;</a></span></h4>
+
+<p>The Levin u-transformation can find the anti-limit of certain
+divergent series.
+In this example we calculate the
+anti-limit of the divergent Taylor series for log(1+x) when x=2.
+</p>
+$$
+{A_n} = {-\sum_{m=1}^{n}{{\left( -2 \right)}^{m}\over{m}}}
+$$
+
+
+<p>with anti-limit equal to log(3) = 1.0986122886681098...
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) (load(&quot;levin&quot;), done);
+(%o1)                         done
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) levin_u_sum(-(-2)^n/n, n, 1, 10);
+                           3641179708
+(%o2)                      ----------
+                           3314344635
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) s: float(%);
+(%o3)                  1.0986122775370342
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) exact: log(3.0);
+(%o4)                  1.0986122886681096
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) s - exact;
+(%o5)                - 1.1131075394743561e-8
+</pre></div></div>
+
+<a class="anchor" id="Item_003a-levin_002fnode_002fReferences-for-levin"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="References-for-levin">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Examples-for-levin" accesskey="p" rel="prev">Examples for levin</a>, Up: <a href="#Package-levin" accesskey="u" rel="up">Package levin</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="References-for-levin-1"><span>74.4 References for levin<a class="copiable-link" href="#References-for-levin-1"> &para;</a></span></h3>
+
+<p>The t, u and v Levin transformations are introduced in:
+</p>
+<ul class="itemize mark-bullet">
+<li><a class="anchor" id="levin_002d1973"></a>(Levin 1973) Levin, David.
+  Development of Non-Linear Transformations for Improving Convergence
+  of Sequences,
+  International Journal of Computer Mathematics 3 (1973): 371–88.
+  <a class="url" href="https://doi.org/10.1080/00207167308803075">  doi:10.1080/00207167308803075</a>
+
+</li><li>Levin, David, and Avram Sidi.
+  Two New Classes of Nonlinear Transformations for Accelerating the
+  Convergence of Infinite Integrals and Series,
+  Applied Mathematics and Computation 9, no. 3 (October 1981): 175–215.
+  <a class="url" href="https://doi.org/10.1016/0096-3003(81)90028-X">  doi:10.1016/0096-3003(81)90028-X</a>
+
+</li></ul>
+
+<p>Smith and Ford compared the performance of series acceleration
+algorithms in a series of papers.  In conjunction with Fessler
+they published algorithms and code that implement the u-transformation
+with estimates of truncation and round-off errors.
+</p>
+<ul class="itemize mark-bullet">
+<li><a class="anchor" id="smith_002dford_002d1979"></a>(Smith and Ford 1979)
+  Smith, David A., and William F. Ford.
+  Acceleration of Linear and Logarithmic Convergence,
+  SIAM Journal on Numerical Analysis 16, no. 2 (1979): 223.
+  <a class="url" href="https://doi.org/10.1080/00207167308803075">  doi:10.1137/0716017</a>
+
+</li><li><a class="anchor" id="smith_002dford_002d1982"></a>(Smith and Ford 1982)
+  Smith, David A., and William F. Ford.
+  Numerical Comparisons of Nonlinear Convergence Accelerators,
+  Mathematics of Computation 38, no. 158 (1 May 1982): 481–481.
+  <a class="url" href="https://doi.org/10.1090/S0025-5718-1982-0645665-1">  doi:10.1090/S0025-5718-1982-0645665-1</a>
+
+</li><li>Fessler, Theodore, William F. Ford, and David A. Smith.
+  HURRY: An Acceleration Algorithm for Scalar Sequences and Series.
+  ACM Transactions on Mathematical Software 9, no. 3 (1 September 1983): 346–54.
+  <a class="url" href="https://doi.org/10.1145/356044.356051">  doi:10.1145/356044.356051</a>
+
+</li><li>Fessler, Theodore, David A. Smith, and William Ford.
+  Algorithm 602: HURRY: An Acceleration Algorithm for Scalar
+  Sequences and Series.
+  ACM Transactions on Mathematical Software (TOMS) 9, no. 3
+  (September 1983): 355–57.
+  <a class="url" href="https://doi.org/10.1145/356044.356052">  doi:10.1145/356044.356052</a>
+
+</li></ul>
+
+
+<p>Sidi (2003) discusses u transformations and more
+recent extensions.
+</p>
+<ul class="itemize mark-bullet">
+<li><a class="anchor" id="sidi_002d2003"></a>(Sidi 2003) Sidi, Avram.
+  Practical Extrapolation Methods: Theory and Applications,
+  Cambridge University Press, 2003,
+  <a class="url" href="https://doi.org/10.1017/CBO9780511546815">ISBN 9780521661591</a>
+
+</li></ul>
+
+<p>Bender and Orszag (1978), Chapter 8 Summation of Series,
+provides general background on motivation and methods, but does
+not cover Levin transformations.
+</p><ul class="itemize mark-bullet">
+<li><a class="anchor" id="bender_002dorszag"></a>(Bender and Orszag, 1978)
+Bender, Carl, and Steven Orszag.
+Advanced Mathematical Methods for Scientists and Engineers,
+McGraw-Hill, 1978,
+ISBN 978-0-07-004452-4
+
+</li></ul>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-lindstedt.html#Package-lindstedt" accesskey="n" rel="next">Package lindstedt</a>, Previous: <a href="Package-lbfgs.html#Package-lbfgs" accesskey="p" rel="prev">Package lbfgs</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

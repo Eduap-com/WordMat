@@ -1,0 +1,8 @@
+\initial {C}
+\entry{\code {conditional_integrate}}{6}
+\entry{\code {convert_to_signum}}{6}
+\initial {I}
+\entry{\code {intfudu}}{4}
+\entry{\code {intfugudu}}{5}
+\initial {S}
+\entry{\code {signum_to_abs}}{5}

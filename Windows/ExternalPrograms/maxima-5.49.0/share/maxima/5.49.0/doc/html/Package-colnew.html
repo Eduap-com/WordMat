@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package colnew (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Package colnew (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Package colnew (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-combinatorics.html#Package-combinatorics" rel="next" title="Package combinatorics">
+<link href="Package-cobyla.html#Package-cobyla" rel="prev" title="Package cobyla">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},       // do not skip pre
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  tex: {
+    processEscapes: false,      // do not use \$ to produce a literal dollar sign
+    processEnvironments: false, // do not process \begin{xxx}...\end{xxx} outside math mode
+    processRefs: false,         // do not process \ref{...} outside of math mode
+    displayMath: [             // start/end delimiter pairs for display math
+      ['\\[', '\\]']
+    ],
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Package-colnew">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-combinatorics.html#Package-combinatorics" accesskey="n" rel="next">Package combinatorics</a>, Previous: <a href="Package-cobyla.html#Package-cobyla" accesskey="p" rel="prev">Package cobyla</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-colnew-1"><span>48 Package colnew<a class="copiable-link" href="#Package-colnew-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-colnew_002fnode_002fIntroduction-to-colnew"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-colnew" accesskey="1">Introduction to colnew</a></li>
+<li><a href="#Functions-and-Variables-for-colnew" accesskey="2">Functions and Variables for colnew</a></li>
+<li><a href="#Examples-for-colnew" accesskey="3">Examples for colnew</a></li>
+<li><a href="#References-for-colnew" accesskey="4">References for colnew</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-colnew">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-colnew" accesskey="n" rel="next">Functions and Variables for colnew</a>, Previous: <a href="#Package-colnew" accesskey="p" rel="prev">Package colnew</a>, Up: <a href="#Package-colnew" accesskey="u" rel="up">Package colnew</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-colnew-1"><span>48.1 Introduction to colnew<a class="copiable-link" href="#Introduction-to-colnew-1"> &para;</a></span></h3>
+
+<p><var class="var">colnew</var> solves mixed-order systems of boundary-value problems (BVPs)
+in ordinary differential equations(ODEs).  It is a Common Lisp translation
+(via <var class="var">f2cl</var>) of the Fortran routine COLNEW (see <a class="pxref" href="#bader_002dascher">Bader&amp;Ascher 1987</a>).
+</p>
+<p>The method uses collocation at Gaussian points and interpolation using
+basis functions. Approximate solutions are computed on a sequence
+of automatically selected meshes until a user-specified set of tolerances
+is satisfied. A damped Newton&rsquo;s method is used for the nonlinear iteration.
+</p>
+<p>COLNEW has some advanced features:
+</p>
+<ul class="itemize mark-bullet">
+<li><b class="b">Continuation:</b>
+Most iterative  numerical solvers require an initial guess. There are
+parameter dependent problems that have an obvious solution for a special
+value of the parameter  
+(for example a coupling constant vanishes).  One can then slowly
+vary the parameter, solving the problem numerically
+using as a guess the previous solution, until one gets into a strong
+coupling regime, hence the name continuation.
+Sometimes an
+artificial parameter is introduced to allow the use of continuation.
+
+</li><li><b class="b">Singularities:</b>
+Another interesting feature of COLNEW is that one can manage singularities
+in the differential equation by setting interior
+&quot;boundary points&quot; on the singularities. This is because the differential
+equation is only imposed in the interior of the intervals, but the solution
+is checked for continuity and continuity of the derivative
+on the boundary of the intervals.
+
+</li><li><b class="b">Stiff differential equations:</b>
+COLNEW can be used for solving some stiff differential equations due to
+the use of adaptive meshes.
+
+</li></ul>
+
+<p>The maxima interface to COLNEW exposes the full power and complexity
+of the Fortran 77 implementation.
+</p>
+<p>COLNEW is a modification of the package COLSYS (see <a class="pxref" href="#ascher_002d1981a">Ascher 1981a</a> and <a class="ref" href="#ascher_002d1981b">Ascher 1981b</a>).
+It incorporates a new basis
+representation replacing B-splines, and improvements for
+the linear and nonlinear algebraic equation solvers.
+The package can be referenced as either COLNEW or COLSYS.
+</p>
+<p>Many practical problems that are not in the standard form accepted by COLNEW
+can be converted into this form.  See <a class="xref" href="#ascher_002drussell">Asher&amp;Russell 1981</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-colnew">Package colnew</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-colnew_002fnode_002fFunctions-and-Variables-for-colnew"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-colnew">
+<div class="nav-panel">
+<p>
+Next: <a href="#Examples-for-colnew" accesskey="n" rel="next">Examples for colnew</a>, Previous: <a href="#Introduction-to-colnew" accesskey="p" rel="prev">Introduction to colnew</a>, Up: <a href="#Package-colnew" accesskey="u" rel="up">Package colnew</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-colnew-1"><span>48.2 Functions and Variables for colnew<a class="copiable-link" href="#Functions-and-Variables-for-colnew-1"> &para;</a></span></h3>
+
+<a class="anchor" id="colnew_005fexpert"></a><a class="anchor" id="Item_003a-colnew_002fdeffn_002fcolnew_005fexpert"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-colnew_005fexpert"><span class="category-def">Function: </span><span><strong class="def-name">colnew_expert</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">colnew_expert</b> (<var class="var">ncomp</var>, <var class="var">m</var>, <var class="var">aleft</var>, <var class="var">aright</var>, <var class="var">zeta</var>, <var class="var">ipar</var>, <var class="var">ltol</var>, <var class="var">tol</var>, <var class="var">fixpnt</var>, <var class="var">ispace</var>, <var class="var">fspace</var>, <var class="var">iflag</var>, <var class="var">fsub</var>, <var class="var">dfsub</var>, <var class="var">gsub</var>, <var class="var">dgsub</var>, <var class="var">guess</var>)</var><a class="copiable-link" href="#index-colnew_005fexpert"> &para;</a></span></dt>
+<dd>
+<p><var class="var">colnew_expert</var> solves mixed-order systems of boundary-value problems (BVPs) in ordinary
+differential equations (ODEs) using a numerical collocation method.
+</p>
+<p><var class="var">colnew_expert</var> returns the list [<var class="var">iflag</var>, <var class="var">fspace</var>, <var class="var">ispace</var>].
+<var class="var">iflag</var> is an error flag.  Lists <var class="var">fspace</var> and <var class="var">ispace</var> contain the
+state of the solution 
+and can be: used by <code class="code"><a class="ref" href="#colnew_005fappsln">colnew_appsln</a></code> to calculate solution values
+at arbitrary points in the solution domain; and passed back to <var class="var">colnew_expert</var> to restart the solution process
+with different arguments. 
+</p>
+<p>The function arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">ncomp</code></dt>
+<dd><p>Number of differential equations   (ncomp ≤ 20)
+</p>
+</dd>
+<dt><code class="code">m</code></dt>
+<dd><p>Integer list of length <var class="var">ncomp</var>.  
+\(m_j\)
+is the order of the <em class="math tex2jax_process">\(j\)</em>-th
+differential equation,
+with 
+\(1 \le m_j \le 4\)
+and 
+\(m^* = \sum_j m_j \le 40.\)
+</p>
+</dd>
+<dt><code class="code">aleft</code></dt>
+<dd><p>Left end of interval
+</p>
+</dd>
+<dt><code class="code">aright</code></dt>
+<dd><p>Right end of interval
+</p>
+</dd>
+<dt><code class="code">zeta</code></dt>
+<dd><p><var class="var">zeta</var> 
+\((\zeta)\)
+is a real list of length 
+\(m^*.\)
+\(\zeta_j\)
+is the 
+<em class="math tex2jax_process">\(j\)</em>-th boundary or side condition point. The
+list 
+\(\zeta\)
+must be ordered, 
+with  
+\(\zeta_j \le \zeta_{j+1}.\)
+All side condition
+points must be mesh points in all meshes used,
+see description of ipar[11] and fixpnt below.
+</p>
+</dd>
+<dt><code class="code">ipar</code></dt>
+<dd><p>A integer list of length 11.  The parameters in ipar are:
+</p>
+<ul class="itemize mark-bullet">
+<li><var class="var">ipar[1]</var>
+    <ul class="itemize mark-bullet">
+<li>0, if the problem is linear
+    </li><li>1, if the problem is nonlinear
+  </li></ul>
+  
+</li><li><var class="var">ipar[2]</var> ( = <em class="math tex2jax_process">\(k\)</em> )<br>
+  Number of collocation points per subinterval , where
+\(\max_j m_j \le k \le 7.\)
+  If <var class="var">ipar[2]</var>=0 then colnew sets 
+\(k = \max\left(\max_i m_i + 5, 5 - \max_i m_i\right).\)
+  
+</li><li><var class="var">ipar[3]</var>  ( = <em class="math tex2jax_process">\(n\)</em> )<br>
+  Number of subintervals in the initial mesh.<br>
+  If <var class="var">ipar[3]</var> = 0 then colnew arbitrarily sets <em class="math tex2jax_process">\(n = 5\)</em>.
+  
+</li><li><var class="var">ipar[4]</var> ( = ntol )<br>
+  Number of solution and derivative tolerances.<br>
+  Require 
+\(0 < {\rm ntol} < m^*.\)
+  
+</li><li><var class="var">ipar[5]</var>  ( = ndimf )<br>
+  The length of list <var class="var">fspace</var>. Its size provides a constraint on <var class="var">nmax</var>.
+  Choose ipar[5] according to the formula
+\({\rm ipar[5]} \ge {\rm nmax} \cdot {\rm nsizef}\)
+  where
+\({\rm nsizef} = 4 + 3m^* + (5 + {\rm kd})\times{\rm kdm} + (2m^* - {\rm nrec})\times 2 m^*.\)
+  
+</li><li><var class="var">ipar[6]</var> ( = ndimi )<br>
+  The length of list <var class="var">ispace</var>. Its size provides a constraint on <var class="var">nmax</var>, the maximum
+  number of subintervals.  Choose <var class="var">ipar[6]</var> according to the formula
+\({\rm ipar[6]} = {\rm nmax}\times {\rm nsizei}\)
+  where
+\({\rm nsizei} = 3 + {\rm kdm}\)
+  with
+$$
+\eqalign{
+    {\rm kdm} &= {\rm kd} + m^* \cr
+    {\rm kd} &= k + {\rm ncomp} \cr
+    {\rm nrec} &= {\it number\, of\, right\, end\, boundary\, conditions} \cr
+  }
+$$
+.
+  
+</li><li><var class="var">ipar[7]</var> ( = iprint )<br>
+  output control
+  <ul class="itemize mark-bullet">
+<li>-1, for full diagnostic printout
+    </li><li>0, for selected printout
+    </li><li>1, for no printout
+  </li></ul>
+  
+</li><li><var class="var">ipar[8]</var> ( = iread )<br>
+    <ul class="itemize mark-bullet">
+<li>0, causes colnew to generate a uniform initial mesh.
+    </li><li>1,
+     if the initial mesh is provided by the user.  it
+     is defined in fspace as follows:  the mesh
+     aleft=x[1]&lt;x[2]&lt; ... &lt;x[n]&lt;x[n+1]=aright
+     will occupy  fspace[1], ..., fspace[n+1]. the
+     user needs to supply only the interior mesh
+     points  fspace[j] = x[j], j = 2, ..., n.
+   </li><li>2,
+     if the initial mesh is supplied by the user
+     as with <var class="var">ipar[8]</var>=1, and in addition no adaptive
+     mesh selection is to be done.
+   </li></ul>
+   
+</li><li><var class="var">ipar[9]</var>  ( = iguess )
+  <ul class="itemize mark-bullet">
+<li>0,
+        if no initial guess for the solution is provided
+    </li><li>1,
+        if an initial guess is provided by the user
+        in subroutine guess.
+    </li><li>2,
+        if an initial mesh and approximate solution
+        coefficients are provided by the user in <var class="var">fspace</var>.
+        (the former and new mesh are the same).
+    </li><li>3,
+        if a former mesh and approximate solution
+        coefficients are provided by the user in <var class="var">fspace</var>,
+        and the new mesh is to be taken twice as coarse;
+        i.e.,every second point from the former mesh.
+    </li><li>4,
+        if in addition to a former initial mesh and
+        approximate solution coefficients, a new mesh
+        is provided in <var class="var">fspace</var> as well.
+       (see description of output for further details
+        on iguess = 2, 3, and 4.)
+  </li></ul>
+  
+</li><li><var class="var">ipar[10]</var>
+  <ul class="itemize mark-bullet">
+<li>0, if the problem is regular
+    </li><li>1, if the first relax factor is =rstart, and the
+        nonlinear iteration does not rely on past convergence
+        (use for an extra sensitive nonlinear problem only).
+    </li><li>2, if we are to return immediately upon  (a) two
+        successive nonconvergences, or  (b) after obtaining
+        error estimate for the first time.
+    </li></ul>
+    
+</li><li><var class="var">ipar[11]</var> ( = nfxpnt , the dimension of fixpnt)<br>
+    The number of fixed points in the mesh other than <var class="var">aleft</var>
+    and <var class="var">aright</var>. 
+    The code requires that all side condition points
+    other than <var class="var">aleft</var> and <var class="var">aright</var> (see description of
+    <var class="var">zeta</var>) must be included as fixed points in <var class="var">fixpnt</var>.
+  </li></ul>
+
+
+</dd>
+<dt><code class="code">ltol</code></dt>
+<dd><p>A list of length <var class="var">ntol=ipar[4]</var>. <var class="var">ltol[j]=k</var> specifies
+that the j-th tolerance in <var class="var">tol</var> controls the error
+in the k-th component of z(u).
+</p>
+<p>The list <var class="var">ltol</var> must be ordered with
+<em class="math tex2jax_process">\(1 ≤ ltol[1] < ltol[2] <  ... < ltol[ntol] ≤ mstar\)</em>.
+</p>
+</dd>
+<dt><code class="code">tol</code></dt>
+<dd><p>An list of length <var class="var">ntol=ipar[4]</var>. <var class="var">tol[j]</var> is the
+error tolerance on the ltol[j]-th component
+of z(u).
+</p>
+<p>Thus, the code attempts to satisfy
+for j=1,...,ntol on each subinterval
+<em class="math tex2jax_process">\(abs(z(v)-z(u))[k] ≤ tol(j)*abs(z(u))[k]+tol(j)\)</em>
+if v(x) is the approximate solution vector.
+</p>
+</dd>
+<dt><code class="code">fixpnt</code></dt>
+<dd><p>An list of length <var class="var">ipar[11]</var>. It contains the points, other than
+<var class="var">aleft</var> and <var class="var">aright</var>, which are to be included in every mesh.
+All side condition points other than <var class="var">aleft</var> and <var class="var">aright</var>
+(see <var class="var">zeta</var>) be included as fixed points in <var class="var">fixpnt</var>.
+</p>
+</dd>
+<dt><code class="code">ispace</code></dt>
+<dd><p>An integer work list of length <var class="var">ipar[6]</var>.
+</p>
+</dd>
+<dt><code class="code">fspace</code></dt>
+<dd><p>A real work list of length <var class="var">ipar[5]</var>.
+</p>
+</dd>
+<dt><code class="code">fsub</code></dt>
+<dd><p><var class="var">fsub</var> is a function f(x,z1,...,z[mstar]) which realizes
+the system of ODEs.
+</p>
+<p>It returns a list of <var class="var">ncomp</var> values, one for each ODE.
+Each value is the highest order
+derivative in each ode in terms of of x,z1,...,z[mstar] .
+</p>
+</dd>
+<dt><code class="code">dfsub</code></dt>
+<dd><p><var class="var">dfsub</var> is a function df(x,z1,...,z[mstar]) for evaluating
+the Jacobian of f.
+</p>
+</dd>
+<dt><code class="code">gsub</code></dt>
+<dd><p>Name of subroutine gsub(i,z1,z2,...,z[mstar]) for evaluating the i-th
+component of the boundary value function g(z1,...,z[mstar]).
+The independent variable x is not an argument of g.  The value
+<var class="var">x=zeta[i]</var> must be substituted in advance.
+</p>
+
+</dd>
+<dt><code class="code">dgsub</code></dt>
+<dd><p>Name of subroutine dgsub(i,z1,...,z[mstar]) for evaluating the
+i-th row of the Jacobian of g(z1,...,z[mstar]).
+</p>
+</dd>
+<dt><code class="code">guess</code></dt>
+<dd><p>Name of subroutine to evaluate the initial
+approximation for  (u(x)) and for dmval(u(x))= vector
+of the mj-th derivatives of u(x).
+This subroutine is needed only if using <var class="var">ipar(9)</var> = 1.
+</p>
+</dd>
+</dl>
+
+<p>The return value of <var class="var">colnew_expert</var> is the list
+<var class="var">[iflag, fspace, ispace]</var>, where:
+</p>
+<dl class="table">
+<dt><code class="code">iflag</code></dt>
+<dd><p>The mode of return from <var class="var">colnew_expert</var>.
+  </p><ul class="itemize mark-bullet">
+<li>= 1 for normal return
+    </li><li>= 0 if the collocation matrix is singular.
+    </li><li>= -1 if the expected no. of subintervals exceeds storage specifications.
+    </li><li>= -2 if the nonlinear iteration has not converged.
+    </li><li>= -3 if there is an input data error.
+  </li></ul>
+
+</dd>
+<dt><code class="code">fspace</code></dt>
+<dd><p>A list of floats of length <var class="var">ipar[5]</var>.
+</p>
+</dd>
+<dt><code class="code">ispace</code></dt>
+<dd><p>A list of integers of length <var class="var">ipar[6]</var>.
+</p>
+</dd>
+</dl>
+
+<p><code class="code"><a class="ref" href="#colnew_005fappsln">colnew_appsln</a></code> uses <var class="var">fspace</var> and <var class="var">ispace</var> to calculate solution values
+at arbitrary points.  The lists can also be used to restart the solution process
+with modified meshes and parameters.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-colnew">Package colnew</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="colnew_005fappsln"></a><a class="anchor" id="Item_003a-colnew_002fdeffn_002fcolnew_005fappsln"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-colnew_005fappsln"><span class="category-def">Function: </span><span><strong class="def-name">colnew_appsln</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">colnew_appsln</b> (<var class="var">x</var>, <var class="var">zlen</var>, <var class="var">fspace</var>, <var class="var">ispace</var>)</var><a class="copiable-link" href="#index-colnew_005fappsln"> &para;</a></span></dt>
+<dd>
+<p>Return a list of solution values from <code class="code"><a class="ref" href="#colnew_005fexpert">colnew_expert</a></code> results.
+</p>
+<p>The function arguments are:
+</p>
+<dl class="table">
+<dt><code class="code">x</code></dt>
+<dd><p>List of x-coordinates to calculate solution.
+</p></dd>
+<dt><code class="code">zlen</code></dt>
+<dd><p><var class="var">mstar</var>, the length of the solution list z
+</p></dd>
+<dt><code class="code">fspace</code></dt>
+<dd><p>List <var class="var">fspace</var> returned from <code class="code"><a class="ref" href="#colnew_005fexpert">colnew_expert</a></code>.
+</p></dd>
+<dt><code class="code">ispace</code></dt>
+<dd><p>List <var class="var">ispace</var> returned from <code class="code"><a class="ref" href="#colnew_005fexpert">colnew_expert</a></code>.
+</p></dd>
+</dl>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-colnew">Package colnew</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+<a class="anchor" id="Item_003a-colnew_002fnode_002fExamples-for-colnew"></a><hr>
+</div>
+<div class="section-level-extent" id="Examples-for-colnew">
+<div class="nav-panel">
+<p>
+Next: <a href="#References-for-colnew" accesskey="n" rel="next">References for colnew</a>, Previous: <a href="#Functions-and-Variables-for-colnew" accesskey="p" rel="prev">Functions and Variables for colnew</a>, Up: <a href="#Package-colnew" accesskey="u" rel="up">Package colnew</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Examples-for-colnew-1"><span>48.3 Examples for colnew<a class="copiable-link" href="#Examples-for-colnew-1"> &para;</a></span></h3>
+
+<p>COLNEW is best learned by example.
+</p>
+<ul class="mini-toc">
+<li><a href="#Example-1_003a-A-uniformly-loaded-beam-of-variable-stiffness" accesskey="1">Example 1: A uniformly loaded beam of variable stiffness</a></li>
+<li><a href="#Example-2_003a-Deformation-of-a-spherical-cap" accesskey="2">Example 2: Deformation of a spherical cap</a></li>
+<li><a href="#Example-3_003a-Rotating-flow-of-viscous-incompressible-fluid" accesskey="3">Example 3: Rotating flow of viscous incompressible fluid</a></li>
+<li><a href="#Example-4_003a-Quantum-Neumann-equation" accesskey="4">Example 4: Quantum Neumann equation</a></li>
+<li><a href="#Example-5_003a-Simple-example-of-continuation" accesskey="5">Example 5: Simple example of continuation</a></li>
+</ul>
+<div class="subsection-level-extent" id="Example-1_003a-A-uniformly-loaded-beam-of-variable-stiffness">
+<h4 class="subsection"><span>48.3.1 Example 1: A uniformly loaded beam of variable stiffness<a class="copiable-link" href="#Example-1_003a-A-uniformly-loaded-beam-of-variable-stiffness"> &para;</a></span></h4>
+
+<p>The problem describes a uniformly loaded beam of variable stiffness, simply supported at both ends.
+</p>
+<p>The problem from <a class="ref" href="#gawain_002dball">Gawain&amp;Ball 1978</a> and is Example 1 from <a class="ref" href="#ascher_002d1981a">Ascher 1981a</a>.
+The maxima code is in file <a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/prob1.mac">share/colnew/prob1.mac</a> and a Fortran implementation
+is in <a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/ex1">share/colnew/ex1</a>.
+</p>
+
+<p>The differential equation is
+</p>
+
+$$
+(x^3 u'')'' = x^3u'''' + 6x^2u''' + 6xu'' = 1 \quad {\rm over} \quad 1 \le x \le 2
+$$
+
+
+<p>with boundary conditions
+</p>
+$$
+\eqalign{
+u(1) &= 0 \cr
+u''(1) &= 0 \cr
+u(2) &= 0 \cr
+u''(2) &= 0}
+$$
+
+
+<p>The exact solution is
+</p>
+$$
+u(x) = {{10\log 2 - 3}\over 4}(1-x) + {1\over 2}\left({1\over x} + (3+x)\log x - x\right)
+$$
+
+
+<p>There is <var class="var">nconc</var> = 1 differential equation of fourth order. The list of orders
+\(m = [4]\)
+and
+\(m^* = \sum_j m_j = 4.\)
+</p>
+<p>The unknown vector of length 
+\(m^*\)
+is
+</p>
+$$
+
+\eqalign{
+z(x) &= [z_1(x),z_2(x),z_3(x),z_4(x)] \cr
+     &= [u(x),u'(x),u''(x),u'''(x)]
+}
+$$
+
+
+<p>The differential equation is expressed as
+</p>
+$$
+
+u''''(x) = F(x,z_1,z_2,z_3,z_4) = 1 - 6 x^2 z_3 - 6x z_2
+$$
+
+
+<p>There are 
+\(m^* = 4\)
+boundary conditions. They are given by a
+function <em class="math tex2jax_process">\(G(z_1,z_2,z_3,z_4)\)</em> that returns a list of length 
+\(m^*.\)
+The <em class="math tex2jax_process">\(j\)</em>-th boundary condition applies at 
+\(x = \zeta_j\)
+and is satisfied
+when <em class="math tex2jax_process">\(g[j] = 0\)</em>.  We have
+</p>
+<table class="multitable">
+<thead><tr><th>j&nbsp;&nbsp;&nbsp;</th><th>zeta[j]&nbsp;</th><th>Condition&nbsp;</th><th>g[j]</th></tr></thead>
+<tbody><tr><td>1</td><td>1.0</td><td><em class="math tex2jax_process">\(u=0\)</em></td><td><em class="math tex2jax_process">\(z_1\)</em></td></tr>
+<tr><td>2</td><td>1.0</td><td><em class="math tex2jax_process">\(u'\hbox{}'=0\)</em></td><td><em class="math tex2jax_process">\(z_3\)</em></td></tr>
+<tr><td>3</td><td>2.0</td><td><em class="math tex2jax_process">\(u=0\)</em></td><td><em class="math tex2jax_process">\(z_1\)</em></td></tr>
+<tr><td>4</td><td>2.0</td><td><em class="math tex2jax_process">\(u'\hbox{}'=0\)</em></td><td><em class="math tex2jax_process">\(z_3\)</em></td></tr>
+</tbody>
+</table>
+
+<p>giving  
+\(\zeta = [1.0,1,0,2.0,2.0]\)
+and <em class="math tex2jax_process">\(G(z_1,z_2,z_3,z_4) = [z_1, z_3, z_1, z_3]\)</em>.
+</p>
+<p>The Jacobians <var class="var">df</var> and <var class="var">dg</var> of <var class="var">f</var> and <var class="var">g</var> respectively
+are determined symbolically.
+</p>
+<p>The solution uses the default five collocation points per subinterval
+and the first mesh contains only one subinterval.
+The maximum error magnitude in the approximate solution is evaluated at 100 equidistant points
+by function <code class="code"><a class="ref" href="#colnew_005fappsln">colnew_appsln</a></code> using the results returned by COLNEW and
+compared to the estimates from the code.
+</p>
+<div class="example user-maxima">
+<div class="group"><pre class="example-preformatted">(%i1) load(&quot;colnew&quot;)$
+
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) /* One differential equation of order 4 */
+ m : [4];
+
+(%o2)                          [4]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) /* Location of boundary conditions */
+ zeta : float([1,1,2,2]);
+
+(%o3)                 [1.0, 1.0, 2.0, 2.0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) /* Set up parameter array.  Use defaults for all except as shown */
+ ipar : makelist(0,k,1,11);
+(%o4)           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) /* initial mesh size */
+ ipar[3] : 1$
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) /* number of tolerances */
+ ipar[4] : 2$
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) /* size of real work array */
+ ipar[5] : 2000$
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) /* size of integer work array */
+ ipar[6] : 200$
+
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) /* Two error tolerances (on u and its second derivative) */
+ ltol : [1, 3];
+(%o9)                        [1, 3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) tol : [1d-7, 1d-7];
+
+(%o10)                  [1.0e-7, 1.0e-7]
+</pre></div><div class="group"><pre class="example-preformatted">(%i11) /* Real work array */
+ fspace : makelist(0d0, k, 1, ipar[5])$
+</pre></div><div class="group"><pre class="example-preformatted">(%i12) /* Integer work array */
+ ispace : makelist(0, k, 1, ipar[6])$
+</pre></div><div class="group"><pre class="example-preformatted">(%i13) /* no internal fixed points */
+ fixpnt : []$
+
+</pre></div><div class="group"><pre class="example-preformatted">(%i14) /* Define the equations */
+ fsub(x, z1, z2, z3, z4) := [(1-6*x^2*z4-6*x*z3)/x^3];
+                                          2
+                                   1 - 6 x  z4 + (- 6) x z3
+(%o14) fsub(x, z1, z2, z3, z4) := [------------------------]
+                                               3
+                                              x
+</pre></div><div class="group"><pre class="example-preformatted">(%i15) df : jacobian(fsub(x,z1, z2, z3, z4),[z1,z2,z3,z4]);
+                       [         6     6 ]
+(%o15)                 [ 0  0  - --  - - ]
+                       [          2    x ]
+                       [         x       ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i16) define(dfsub(x, z1, z2, z3, z4), df);
+
+                                     [         6     6 ]
+(%o16)   dfsub(x, z1, z2, z3, z4) := [ 0  0  - --  - - ]
+                                     [          2    x ]
+                                     [         x       ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i17) g(z1, z2, z3, z4) := [z1, z3, z1, z3];
+(%o17)        g(z1, z2, z3, z4) := [z1, z3, z1, z3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i18) gsub(i, z1, z2, z3, z4) :=
+ subst(['z1=z1,'z2=z2,'z3=z3,'z4=z4], g(z1, z2, z3, z4)[i]);
+
+(%o18) gsub(i, z1, z2, z3, z4) := 
+subst(['z1 = z1, 'z2 = z2, 'z3 = z3, 'z4 = z4], 
+g(z1, z2, z3, z4) )
+                 i
+</pre></div><div class="group"><pre class="example-preformatted">(%i19) dg:jacobian(g(z1, z2, z3, z4), [z1,z2,z3,z4]);
+                         [ 1  0  0  0 ]
+                         [            ]
+                         [ 0  0  1  0 ]
+(%o19)                   [            ]
+                         [ 1  0  0  0 ]
+                         [            ]
+                         [ 0  0  1  0 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i20) dgsub(i, z1, z2, z3, z4) :=
+ subst(['z1=z1,'z2=z2,'z3=z3,'z4=z4], row(dg, i)[1]);
+
+(%o20) dgsub(i, z1, z2, z3, z4) := 
+     subst(['z1 = z1, 'z2 = z2, 'z3 = z3, 'z4 = z4], row(dg, i) )
+                                                               1
+</pre></div><div class="group"><pre class="example-preformatted">(%i21) /* Exact solution */
+  exact(x) := [.25*(10.*log(2.)-3.)*(1.-x) + .5*(1./x+(3.+x)*log(x)-x),
+             -.25*(10.*log(2.)-3.) + .5*(-1./x/x+log(x)+(3.+x)/x-1.),
+             .5*(2./x**3+1./x-3./x/x),
+             .5*(-6./x**4-1./x/x+6./x**3)]$
+
+</pre></div><div class="group"><pre class="example-preformatted">(%i22) [iflag, fspace, ispace] :
+ colnew_expert(1, m, 1d0, 2d0, zeta, ipar, ltol, tol, fixpnt, ispace, fspace,
+             0, fsub, dfsub, gsub, dgsub, dummy)$
+
+
+ VERSION *COLNEW* OF COLSYS .    
+
+
+ THE MAXIMUM NUMBER OF SUBINTERVALS IS MIN (  12 (ALLOWED FROM FSPACE),  16 (ALLOWED FROM ISPACE) )
+
+ THE NEW MESH (OF    1 SUBINTERVALS), 
+    1.000000    2.000000
+
+ THE NEW MESH (OF    2 SUBINTERVALS), 
+    1.000000    1.500000    2.000000
+
+ THE NEW MESH (OF    4 SUBINTERVALS), 
+    1.000000    1.250000    1.500000    1.750000    2.000000
+</pre></div><div class="group"><pre class="example-preformatted">(%i23) /* Calculate the error at 101 points using the known exact solution */
+ block([x : 1,
+       err : makelist(0d0, k, 1, 4),
+       j],
+  for j : 1 thru 101 do
+    block([],
+      zval : colnew_appsln([x], 4, fspace, ispace)[1],
+      u : float(exact(x)),
+      err : map(lambda([a,b], max(a,b)), err, abs(u-zval)),
+      x : x + 0.01),
+  print(&quot;The exact errors are:&quot;),
+  printf(true, &quot;   ~{ ~11,4e~}~%&quot;, err));
+The exact errors are: 
+     1.7389e-10   6.2679e-9   2.1843e-7   9.5743e-6
+(%o23)                        false
+</pre></div></div>
+
+</div>
+<div class="subsection-level-extent" id="Example-2_003a-Deformation-of-a-spherical-cap">
+<h4 class="subsection"><span>48.3.2 Example 2: Deformation of a spherical cap<a class="copiable-link" href="#Example-2_003a-Deformation-of-a-spherical-cap"> &para;</a></span></h4>
+
+<p>These equations describe the small finite deformation of a thin shallow
+spherical cap of constant thickness subject to a quadratically varying
+axisymmetric external pressure distribution superimposed on a uniform
+internal pressure distribution.
+The problem is described in <a class="ref" href="#parker_002dwan">Parker&amp;Wan 1984</a> and is Example 2
+from <a class="ref" href="#ascher_002d1981a">Ascher 1981a</a>.
+The maxima code is in file <a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/prob2.mac">share/colnew/prob2.mac</a> and a Fortran
+implementation is in <a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/ex2">share/colnew/ex2</a>.
+</p>
+
+<p>There are two nonlinear differential equations
+for <em class="math tex2jax_process">\(φ\)</em> and <em class="math tex2jax_process">\(ψ\)</em> over <em class="math tex2jax_process">\(0 < x < 1\)</em>.
+</p>
+$$
+\eqalign{
+{ε^4 \over μ}\left[φ'' + {1 \over x}φ' - {1\over x^2}φ\right] + ψ \left(1-{1\over x}φ\right) - φ &= - γ x\left(1-{x^2\over 2}\right) \cr
+\mu \left[ψ'<!-- /@w -->' + {1\over x} ψ' - {1 \over x^2}ψ\right] - φ\left(1-{φ \over {2x}}\right) &= 0
+}
+$$
+
+
+
+<p>subject to boundary conditions
+<em class="math tex2jax_process">\(φ = 0\)</em> and <em class="math tex2jax_process">\(x ψ' - 0.3 ψ + 0.7 x = 0\)</em> at <em class="math tex2jax_process">\(x=0\)</em> and <em class="math tex2jax_process">\(x=1\)</em>.
+</p>
+
+<p>For <em class="math tex2jax_process">\(ε = μ = 0.01\)</em>, two solutions exists.  These are obtained by
+starting the
+nonlinear iteration from two different guesses to the solution:
+initially with the default initial
+guess; and secondly, with the initial conditions given by the
+function <var class="var">solutn</var>.
+</p>
+<p>There are <var class="var">nconc</var> = 2 differential equations of second order.
+The list of orders 
+\(m = [2,2]\)
+ and
+\(m^* = \sum_i m_i = 4.\)
+</p>
+<p>The vector of unknowns of length 
+\(m^* = 4\)
+is
+<em class="math tex2jax_process">\(z(x) = [ φ(x), φ'(x), ψ(x), ψ'(x)]\)</em>.
+</p>
+<p>The differential equation is expressed as
+</p>
+$$
+\eqalign{
+F(x,z_1,z_2,z_3,z_4)
+  &= \left[
+       \matrix{
+         \phi''(x) \cr
+         \psi''(x)
+       }
+     \right]
+     \cr
+  &= \left[
+       \matrix{
+         \displaystyle{z_1 \over x^2} - {z_2 \over x} + \left[z_1-z_3 \left(1-{z_1\over x}\right) - γ x \left(1-{x^2 \over 2}\right)\right] {\mu \over \epsilon^4}
+         \cr 
+         \displaystyle{z_3 \over x^2} - {z_4 \over x} + {z_1 \over μ} \left(1-{z_1\over {2x}}\right)
+       }
+     \right]
+}
+$$
+
+
+<p>There are four boundary conditions given by list <em class="math tex2jax_process">\(zeta\)</em>
+and function <em class="math tex2jax_process">\(G(z_1,z_2,z_3,z_4)\)</em>.
+</p>
+<table class="multitable">
+<thead><tr><th width="10%">j&nbsp;&nbsp;&nbsp;</th><th width="10%">zeta[j]</th><th width="40%">Condition</th><th width="40%">g[j]</th></tr></thead>
+<tbody><tr><td width="10%">1</td><td width="10%">0.0</td><td width="40%"><em class="math tex2jax_process">\(φ = 0\)</em></td><td width="40%"><em class="math tex2jax_process">\(z_1\)</em></td></tr>
+<tr><td width="10%">2</td><td width="10%">0.0</td><td width="40%"><em class="math tex2jax_process">\(x ψ' - 0.3 ψ + 0.7 x = 0\)</em></td><td width="40%"><em class="math tex2jax_process">\(z_3\)</em></td></tr>
+<tr><td width="10%">3</td><td width="10%">1.0</td><td width="40%"><em class="math tex2jax_process">\(φ = 0\)</em></td><td width="40%"><em class="math tex2jax_process">\(z_1\)</em></td></tr>
+<tr><td width="10%">4</td><td width="10%">1.0</td><td width="40%"><em class="math tex2jax_process">\(x ψ' - 0.3 ψ + 0.7 x = 0\)</em></td><td width="40%"><em class="math tex2jax_process">\(z_4 - 0.3\ {}z_3 + 0.7\)</em></td></tr>
+</tbody>
+</table>
+
+<p>giving 
+\(\zeta=[0.0,0.0,1.0,1.0]\)
+and 
+<em class="math tex2jax_process">\(G(z_1,z_2,z_3,z_4)=[z_1, z_3, z_1, z_4-0.3 z_3+0.7]\)</em>.
+</p>
+<p>Note that <em class="math tex2jax_process">\(x\)</em> is not an argument of function <em class="math tex2jax_process">\(G\)</em>.  The 
+value of 
+\(x = \zeta_j\)
+must be substituted.
+</p>
+<div class="example user-maxima">
+<div class="group"><pre class="example-preformatted">(%i1) load(&quot;colnew&quot;)$
+
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) /* Define constants */
+ gamma : 1.1;
+(%o2)                          1.1
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) eps : 0.01;
+(%o3)                         0.01
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) dmu : eps;
+(%o4)                         0.01
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) eps4mu : eps^4/dmu;
+(%o5)                        1.0e-6
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) xt : sqrt(2*(gamma-1)/gamma);
+(%o6)                  0.42640143271122105
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) /* Number of differential equations */
+ ncomp : 2;
+(%o7)                           2
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) /* Orders */
+ m : [2, 2];
+
+(%o8)                        [2, 2]
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) /* Interval ends */
+ aleft : 0.0;
+(%o9)                          0.0
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) aright : 1.0;
+
+(%o10)                         1.0
+</pre></div><div class="group"><pre class="example-preformatted">(%i11) /* Locations of side conditions */
+ zeta : float([0, 0, 1, 1])$
+</pre></div><div class="group"><pre class="example-preformatted">(%i12) /* Set up parameter array.  */
+ ipar : makelist(0,k,1,11);
+(%o12)          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i13) /* Non-linear prob */
+ ipar[1] : 1;
+(%o13)                          1
+</pre></div><div class="group"><pre class="example-preformatted">(%i14) /* 4 collocation points per subinterval */
+ ipar[2] : 4;
+(%o14)                          4
+</pre></div><div class="group"><pre class="example-preformatted">(%i15) /* Initial uniform mesh of 10 subintervals */
+ ipar[3] : 10;
+(%o15)                         10
+</pre></div><div class="group"><pre class="example-preformatted">(%i16) ipar[8] : 0;
+(%o16)                          0
+</pre></div><div class="group"><pre class="example-preformatted">(%i17) /* Size of fspace, ispace */
+ ipar[5] : 40000;
+(%o17)                        40000
+</pre></div><div class="group"><pre class="example-preformatted">(%i18) ipar[6] : 2500;
+(%o18)                        2500
+</pre></div><div class="group"><pre class="example-preformatted">(%i19) /* No output */
+ ipar[7] : 1;
+(%o19)                          1
+</pre></div><div class="group"><pre class="example-preformatted">(%i20) /* No initial approx is provided */
+ ipar[9] : 0;
+(%o20)                          0
+</pre></div><div class="group"><pre class="example-preformatted">(%i21) /* Regular problem */
+ ipar[10] : 0;
+(%o21)                          0
+</pre></div><div class="group"><pre class="example-preformatted">(%i22) /* No fixed points in mesh */
+ ipar[11] : 0;
+(%o22)                          0
+</pre></div><div class="group"><pre class="example-preformatted">(%i23) /* Tolerances on all components */
+ ipar[4] : 4;
+
+(%o23)                          4
+</pre></div><div class="group"><pre class="example-preformatted">(%i24) /* Tolerances on all four components */
+ ltol : [1, 2, 3, 4];
+(%o24)                    [1, 2, 3, 4]
+</pre></div><div class="group"><pre class="example-preformatted">(%i25) tol : [1d-5, 1d-5, 1d-5, 1d-5];
+
+(%o25)          [1.0e-5, 1.0e-5, 1.0e-5, 1.0e-5]
+</pre></div><pre class="example-preformatted">(%i26) fspace : makelist(0d0, k, 1, ipar[5])$
+(%i27) ispace : makelist(0, k, 1, ipar[6])$
+</pre><div class="group"><pre class="example-preformatted">(%i28) fixpnt : []$
+
+</pre></div><div class="group"><pre class="example-preformatted">(%i29) /* Define the equations */
+ fsub(x, z1, z2, z3, z4) :=
+ [z1/x/x - z2/x + (z1-z3*(1-z1/x) - gamma*x*(1-x*x/2))/eps4mu,
+  z3/x/x - z4/x + z1*(1-z1/2/x)/dmu];
+
+(%o29) fsub(x, z1, z2, z3, z4) := 
+ z1                     z1                     x x
+ --        z1 - z3 (1 - --) + (- gamma) x (1 - ---)
+ x    z2                x                       2
+[-- - -- + ----------------------------------------, 
+ x    x                     eps4mu
+                  z1
+                  --
+z3                2
+--        z1 (1 - --)
+x    z4           x
+-- - -- + -----------]
+x    x        dmu
+</pre></div><div class="group"><pre class="example-preformatted">(%i30) df : jacobian(fsub(x,z1, z2, z3, z4),[z1,z2,z3,z4]);
+(%o30) 
+      [             z3        1      1             z1           ]
+      [  1000000.0 (-- + 1) + --   - -  1000000.0 (-- - 1)   0  ]
+      [             x          2     x             x            ]
+      [                       x                                 ]
+      [                                                         ]
+      [            z1     50.0 z1               1             1 ]
+      [ 100.0 (1 - ---) - -------   0           --          - - ]
+      [            2 x       x                   2            x ]
+      [                                         x               ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i31) dfsub(x, z1, z2, z3, z4) :=
+  subst(['x=x,'z1=z1,'z2=z2,'z3=z3,'z4=z4], df);
+
+(%o31) dfsub(x, z1, z2, z3, z4) := 
+      subst(['x = x, 'z1 = z1, 'z2 = z2, 'z3 = z3, 'z4 = z4], df)
+</pre></div><div class="group"><pre class="example-preformatted">(%i32) g(z1, z2, z3, z4) := [z1, z3, z1, z4 - 0.3*z3 + .7];
+(%o32) g(z1, z2, z3, z4) := [z1, z3, z1, z4 - 0.3 z3 + 0.7]
+</pre></div><div class="group"><pre class="example-preformatted">(%i33) gsub(i, z1, z2, z3, z4) :=
+    subst(['z1=z1,'z2=z2,'z3=z3,'z4=z4], g(z1, z2, z3, z4)[i]);
+
+(%o33) gsub(i, z1, z2, z3, z4) := 
+subst(['z1 = z1, 'z2 = z2, 'z3 = z3, 'z4 = z4], 
+g(z1, z2, z3, z4) )
+                 i
+</pre></div><div class="group"><pre class="example-preformatted">(%i34) dg:jacobian(g(z1, z2, z3, z4), [z1,z2,z3,z4]);
+                       [ 1  0    0    0 ]
+                       [                ]
+                       [ 0  0    1    0 ]
+(%o34)                 [                ]
+                       [ 1  0    0    0 ]
+                       [                ]
+                       [ 0  0  - 0.3  1 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i35) dgsub(i, z1, z2, z3, z4) := subst(['z1=z1,'z2=z2,'z3=z3,'z4=z4], row(dg, i)[1]);
+
+(%o35) dgsub(i, z1, z2, z3, z4) := 
+     subst(['z1 = z1, 'z2 = z2, 'z3 = z3, 'z4 = z4], row(dg, i) )
+                                                               1
+</pre></div><div class="group"><pre class="example-preformatted">(%i36) /* Initial approximation function for second run */
+ solutn(x) :=
+ block([cons : gamma*x*(1-0.5*x*x),
+       dcons : gamma*(1-1.5*x*x),
+       d2cons : -3*gamma*x],
+  if is(x &gt; xt) then
+    [[0, 0, -cons, -dcons],
+     [0, -d2cons]]
+  else
+    [[2*x, 2, -2*x + cons, -2 + dcons],
+     [0, d2cons]]);
+
+(%o36) solutn(x) := block([cons : gamma x (1 - 0.5 x x), 
+dcons : gamma (1 - 1.5 x x), d2cons : - 3 gamma x], 
+if is(x &gt; xt) then [[0, 0, - cons, - dcons], [0, - d2cons]]
+ else [[2 x, 2, - 2 x + cons, - 2 + dcons], [0, d2cons]])
+</pre></div><div class="group"><pre class="example-preformatted">(%i37) /* First run with default initial guess */
+ [iflag, fspace, ispace] :
+ colnew_expert(ncomp, m, aleft, aright, zeta, ipar, ltol, tol, fixpnt, ispace, fspace,
+ 0, fsub, dfsub, gsub, dgsub, dummy)$
+
+</pre></div><div class="group"><pre class="example-preformatted">(%i38) /* Check return status iflag, 1 = success */
+ iflag;
+
+(%o38)                          1
+</pre></div><div class="group"><pre class="example-preformatted">(%i39) /* Print values of solution at x = 0,.05,...,1 */
+ x : 0;
+(%o39)                          0
+</pre></div><div class="group"><pre class="example-preformatted">(%i40) for j : 1 thru 21 do
+ block([],
+   zval : colnew_appsln([x], 4, fspace, ispace)[1],
+   printf(true, &quot;~5,2f  ~{~15,5e~}~%&quot;, x, zval),
+   x : x + 0.05);
+
+ 0.00       0.00000e+0     4.73042e-2   -2.72134e-31    -1.10497e+0
+ 0.05       2.36520e-3     4.73037e-2    -5.51761e-2    -1.10064e+0
+ 0.10       4.73037e-3     4.73030e-2    -1.09919e-1    -1.08765e+0
+ 0.15       7.09551e-3     4.73030e-2    -1.63796e-1    -1.06600e+0
+ 0.20       9.46069e-3     4.73039e-2    -2.16375e-1    -1.03569e+0
+ 0.25       1.18259e-2     4.73040e-2    -2.67221e-1    -9.96720e-1
+ 0.30       1.41911e-2     4.73020e-2    -3.15902e-1    -9.49092e-1
+ 0.35       1.65562e-2     4.72980e-2    -3.61986e-1    -8.92804e-1
+ 0.40       1.89215e-2     4.72993e-2    -4.05038e-1    -8.27857e-1
+ 0.45       2.12850e-2     4.72138e-2    -4.44627e-1    -7.54252e-1
+ 0.50       2.36370e-2     4.67629e-2    -4.80320e-1    -6.72014e-1
+ 0.55       2.59431e-2     4.51902e-2    -5.11686e-1    -5.81260e-1
+ 0.60       2.81093e-2     4.07535e-2    -5.38310e-1    -4.82374e-1
+ 0.65       2.99126e-2     2.98538e-2    -5.59805e-1    -3.76416e-1
+ 0.70       3.08743e-2     5.53985e-3    -5.75875e-1    -2.65952e-1
+ 0.75       3.00326e-2    -4.51680e-2    -5.86417e-1    -1.56670e-1
+ 0.80       2.55239e-2    -1.46617e-1    -5.91753e-1    -6.04539e-2
+ 0.85       1.37512e-2    -3.46952e-1    -5.93069e-1    -1.40102e-3
+ 0.90      -1.25155e-2    -7.52826e-1    -5.93303e-1    -2.86234e-2
+ 0.95      -6.94274e-2    -1.65084e+0    -5.99062e-1    -2.48115e-1
+ 1.00      2.63400e-14     1.19263e+2    -6.25420e-1    -8.87626e-1
+(%o40)                        done
+</pre></div><div class="group"><pre class="example-preformatted">(%i41) /* Second run with initial guess */
+ ipar[9] : 1;
+(%o41)                          1
+</pre></div><div class="group"><pre class="example-preformatted">(%i42) [iflag, fspace, ispace] :
+ colnew_expert(ncomp, m, aleft, aright, zeta, ipar, ltol, tol, fixpnt, ispace, fspace,
+ 0, fsub, dfsub, gsub, dgsub, solutn)$
+
+</pre></div><div class="group"><pre class="example-preformatted">(%i43) /* Check return status iflag, 1 = success */
+ iflag;
+
+(%o43)                          1
+</pre></div><div class="group"><pre class="example-preformatted">(%i44) /* Print values of solution at x = 0,.05,...,1 */
+ x : 0;
+(%o44)                          0
+</pre></div><div class="group"><pre class="example-preformatted">(%i45) for j : 1 thru 21 do
+ block([],
+   zval : colnew_appsln([x], 4, fspace, ispace)[1],
+   printf(true, &quot;~5,2f  ~{~15,5e~}~%&quot;, x, zval),
+   x : x + 0.05);
+ 0.00       0.00000e+0     2.04139e+0    5.11228e-33    -9.03975e-1
+ 0.05       1.02070e-1     2.04139e+0    -4.52648e-2    -9.07936e-1
+ 0.10       2.04139e-1     2.04139e+0    -9.09256e-2    -9.19819e-1
+ 0.15       3.06209e-1     2.04140e+0    -1.37379e-1    -9.39624e-1
+ 0.20       4.08279e-1     2.04141e+0    -1.85020e-1    -9.67352e-1
+ 0.25       5.10351e-1     2.04152e+0    -2.34246e-1    -1.00301e+0
+ 0.30       6.12448e-1     2.04303e+0    -2.85454e-1    -1.04663e+0
+ 0.35       7.15276e-1     2.10661e+0    -3.39053e-1    -1.09916e+0
+ 0.40       8.32131e-1    -2.45181e-1    -3.96124e-1    -1.20544e+0
+ 0.45       1.77510e-2    -3.57554e+0    -4.45400e-1    -7.13543e-1
+ 0.50       2.25122e-2     1.23608e-1    -4.80360e-1    -6.70074e-1
+ 0.55       2.58693e-2     4.85257e-2    -5.11692e-1    -5.81075e-1
+ 0.60       2.80994e-2     4.11112e-2    -5.38311e-1    -4.82343e-1
+ 0.65       2.99107e-2     2.99116e-2    -5.59805e-1    -3.76409e-1
+ 0.70       3.08739e-2     5.55200e-3    -5.75875e-1    -2.65950e-1
+ 0.75       3.00325e-2    -4.51649e-2    -5.86417e-1    -1.56669e-1
+ 0.80       2.55239e-2    -1.46616e-1    -5.91753e-1    -6.04538e-2
+ 0.85       1.37512e-2    -3.46952e-1    -5.93069e-1    -1.40094e-3
+ 0.90      -1.25155e-2    -7.52826e-1    -5.93303e-1    -2.86233e-2
+ 0.95      -6.94274e-2    -1.65084e+0    -5.99062e-1    -2.48115e-1
+ 1.00      2.64996e-14     1.19263e+2    -6.25420e-1    -8.87626e-1
+(%o45)                        done
+</pre></div></div>
+
+<p>Columns 1 (x) and 2 (<em class="math tex2jax_process">\(φ\)</em>) of the two sets of results
+above, and the figure below,
+can be compared with Figure 1 in <a class="ref" href="#ascher_002d1981a">Ascher 1981a</a>.
+</p>
+<img class="image" src="./figures/colnew-ex2.png" alt="colnew example 2: deformation of spherical cap">
+
+</div>
+<div class="subsection-level-extent" id="Example-3_003a-Rotating-flow-of-viscous-incompressible-fluid">
+<h4 class="subsection"><span>48.3.3 Example 3: Rotating flow of viscous incompressible fluid<a class="copiable-link" href="#Example-3_003a-Rotating-flow-of-viscous-incompressible-fluid"> &para;</a></span></h4>
+
+<p>Example 3 from <a class="ref" href="#ascher_002d1981a">Ascher 1981a</a> describes the velocities in the
+boundary layer produced by the rotating flow of a viscous incompressible
+fluid over a stationary infinite disk (see <a class="pxref" href="#gawain_002dball">Gawain&amp;Ball 1978</a>).
+</p>
+<p>The differential equations are:
+$$
+\eqalign{
+G'' + {3-n\over 2} HG' + (n-1)H'G - s(G-1) &= 0 \cr
+H''' + {3-n\over 2} HH'' + n\left(H'\right)^2 - 1 + G^2 -sH' &= 0
+}
+$$
+</p>
+
+<p>with the boundary conditions
+$$
+\eqalign{
+G(0) &= H(0) = H'(0) = 0 \cr
+G(\infty) &= 1 \cr
+H'(\infty) &= 0
+}
+$$
+</p>
+
+<p>The solution uses a number of techniques to obtain convergence.
+Refer to <a class="ref" href="#ascher_002d1981a">Ascher 1981a</a> for details.
+</p>
+<p>The maxima code is in file
+<a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/prob3.mac">share/colnew/prob3.mac</a>.  The reference Fortran implementation is in <a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/ex3">share/colnew/ex3</a>. 
+</p>
+
+</div>
+<div class="subsection-level-extent" id="Example-4_003a-Quantum-Neumann-equation">
+<h4 class="subsection"><span>48.3.4 Example 4: Quantum Neumann equation<a class="copiable-link" href="#Example-4_003a-Quantum-Neumann-equation"> &para;</a></span></h4>
+
+<p>A more sophisticated example is <a class="ref" href="#bellon_002dtalon">Bellon&amp;Talon 2005</a>,
+which deals with singularities in the
+solution domain, provides an initial guess to the solution
+and uses continuation to solve the system of non-linear
+differential equations.
+</p>
+<p>The maxima code is in file
+<a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/prob4.mac">share/colnew/prob4.mac</a>.  The Fortran
+implementation is in <a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/ex4">share/colnew/ex4</a>. 
+</p>
+
+</div>
+<div class="subsection-level-extent" id="Example-5_003a-Simple-example-of-continuation">
+<h4 class="subsection"><span>48.3.5 Example 5: Simple example of continuation<a class="copiable-link" href="#Example-5_003a-Simple-example-of-continuation"> &para;</a></span></h4>
+
+<p>This example (see <a class="pxref" href="#ascher_002det_002dal">Ascher et al, 1995, Example 9.2</a>) solves a numerically
+difficult boundary value problem using continuation.
+The maxima code is in file <a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/prob5.mac">share/colnew/prob5.mac</a> and a Fortran
+implementation is in <a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/colnew/ex5">share/colnew/ex5</a>.
+The linear differential equation is
+$$
+
+\epsilon u'' + x u' = -\epsilon \pi^2 \cos \pi x - \pi x\sin \pi x \quad -1 < x < 1
+
+$$
+</p>
+
+<p>with boundary conditions
+$$
+\eqalign{
+u(-1) &= -2 \cr
+u(1) &= 0
+}
+$$
+</p>
+
+<p>The exact solution is
+$$
+
+u(x) = \cos \pi x + {{\rm erf}\left(\displaystyle{x \over \sqrt{2\epsilon}}\right) \over
+{\rm erf}\left(\displaystyle{1 \over \sqrt{2\epsilon}}\right)}
+
+$$
+</p>
+
+<p>When <em class="math tex2jax_process">\(ε\)</em> is small the solution has a rapid transition near <em class="math tex2jax_process">\(x=0\)</em>
+and is difficult to solve numerically.  COLNEW is able to solve the
+problem for directly for 
+\(\epsilon = 10^{-6},\)
+but here we will use
+continuation to solve it succesively for 
+\(\epsilon = [10^{-2}, 10^{-3}, 10^{-4}, 10^{-5}, 10^{-6}].\)
+</p>
+<p>There is <var class="var">nconc</var> = 1 differential equation of second order.
+The list of orders
+\(m = [2]\)
+and 
+\(m^* = \sum_j m[j] = 2.\)
+</p>
+<p>The unknown vector of length 
+\(m^*\)
+is
+<em class="math tex2jax_process">\(z(x) = [z_1(x),z_2(x)] = [u(x),u'(x)]\)</em>.
+</p>
+<p>The differential equation is expressed as
+$$
+
+[u''(x)] = F(x,z_1,z_2) = \left[-{x\over \epsilon}z_2 - \pi^2\cos \pi x - {\pi x \over \epsilon}\sin \pi x\right]
+
+$$
+</p>
+
+<p>There are 
+\(m^*=2\)
+boundary conditions. They are given by a
+function <em class="math tex2jax_process">\(G(z_1,z_2)\)</em> that returns a list of length 
+\(m^*.\)
+The <em class="math tex2jax_process">\(j\)</em>-th boundary condition applies at 
+\(x = \zeta_j\)
+and is satisfied
+when <em class="math tex2jax_process">\(g[j] = 0\)</em>.  We have
+</p>
+<table class="multitable">
+<thead><tr><th>j&nbsp;&nbsp;&nbsp;</th><th>zeta[j]&nbsp;</th><th>Condition&nbsp;</th><th>g[j]</th></tr></thead>
+<tbody><tr><td>1</td><td>-1.0</td><td><em class="math tex2jax_process">\(u=-2\)</em></td><td><em class="math tex2jax_process">\(z_1+2\)</em></td></tr>
+<tr><td>2</td><td>1.0</td><td><em class="math tex2jax_process">\(u=0\)</em></td><td><em class="math tex2jax_process">\(z_1\)</em></td></tr>
+</tbody>
+</table>
+
+<p>giving  
+\(\zeta = [-1.0,1,0]\)
+and <em class="math tex2jax_process">\(G(z_1,z_2) = [z_1+2, z_1]\)</em>.
+</p>
+<p>The Jacobians <var class="var">df</var> and <var class="var">dg</var> of <var class="var">f</var> and <var class="var">g</var> respectively
+are determined symbolically.
+</p>
+<p>The ODE will be solved for multiple values of <em class="math tex2jax_process">\(ε\)</em>.  The functions
+<var class="var">fsub</var>, <var class="var">dfsub</var>, <var class="var">gsub</var> and <var class="var">dgsub</var> are defined
+before <var class="var">e</var> is set, so that it can be changed in the program.
+</p>
+
+
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;colnew&quot;)$
+(%i2) kill(e,x,z1,z2)$
+</pre><div class="group"><pre class="example-preformatted">(%i3) /* Exact solution */
+ exact(x):=cos(%pi*x)+erf(x/sqrt(2*e))/erf(1/sqrt(2*e))$
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) /* Define the equations.  Do this before e is defined */
+ f: [-(x/e)*z2 - %pi^2*cos(%pi*x) - (%pi*x/e)*sin(%pi*x)];
+             x z2   %pi x sin(%pi x)      2
+(%o4)     [- ---- - ---------------- - %pi  cos(%pi x)]
+              e            e
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) define(fsub(x,z1,z2),f);
+                            x z2   %pi x sin(%pi x)
+(%o5) fsub(x, z1, z2) := [- ---- - ----------------
+                             e            e
+                                                    2
+                                               - %pi  cos(%pi x)]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) df: jacobian(f,[z1,z2]);
+                           [      x ]
+(%o6)                      [ 0  - - ]
+                           [      e ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) define(dfsub(x,z1,z2),df);
+                                     [      x ]
+(%o7)            dfsub(x, z1, z2) := [ 0  - - ]
+                                     [      e ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) /* Build the functions gsub and dgsub
+   Use define and buildq to remove dependence on g and dg */
+ g: [z1+2,z1];
+(%o8)                     [z1 + 2, z1]
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) define(gsub(i,z1,z2),buildq([g],g[i]));
+(%o9)           gsub(i, z1, z2) := [z1 + 2, z1]
+                                               i
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) dg: jacobian(g,[z1,z2]);
+                            [ 1  0 ]
+(%o10)                      [      ]
+                            [ 1  0 ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i11) define(
+ dgsub(i,z1,z2),
+ buildq([val:makelist(dg[i],i,1,length(dg))],block([dg:val],dg[i])));
+(%o11) dgsub(i, z1, z2) := block([dg : [[1, 0], [1, 0]]], dg )
+                                                            i
+</pre></div><div class="group"><pre class="example-preformatted">(%i12) /* Define constant epsilon */
+ e : 0.01$
+</pre></div><div class="group"><pre class="example-preformatted">(%i13) /* Number of differential equations */
+ ncomp : 1$
+</pre></div><div class="group"><pre class="example-preformatted">(%i14) /* Orders */
+ m : [2]$
+</pre></div><div class="group"><pre class="example-preformatted">(%i15) /* Interval ends */
+ aleft:-1.0$
+</pre></div><pre class="example-preformatted">(%i16) aright:1.0$
+</pre><div class="group"><pre class="example-preformatted">(%i17) /* Locations of side conditions */
+ zeta : float([-1, 1])$
+</pre></div><div class="group"><pre class="example-preformatted">(%i18) /* Set up parameter array.  */
+ ipar : makelist(0,k,1,11)$
+</pre></div><div class="group"><pre class="example-preformatted">(%i19) /* linear prob */
+ ipar[1] : 0$
+</pre></div><div class="group"><pre class="example-preformatted">(%i20) /* 5 collocation points per subinterval */
+ ipar[2] : 5$
+</pre></div><div class="group"><pre class="example-preformatted">(%i21) /* Initial uniform mesh of 1 subintervals */
+ ipar[3] : 1$
+</pre></div><pre class="example-preformatted">(%i22) ipar[8] : 0$
+</pre><div class="group"><pre class="example-preformatted">(%i23) /* Size of fspace, ispace */
+ ipar[5] : 10000$
+</pre></div><pre class="example-preformatted">(%i24) ipar[6] :  1000$
+</pre><div class="group"><pre class="example-preformatted">(%i25) /* No output.  Don't do this for development. */
+ ipar[7]:1$
+</pre></div><div class="group"><pre class="example-preformatted">(%i26) /* No initial guess is provided */
+ ipar[9] : 0$
+</pre></div><div class="group"><pre class="example-preformatted">(%i27) /* Regular problem */
+ ipar[10] : 0$
+</pre></div><div class="group"><pre class="example-preformatted">(%i28) /* No fixed points in mesh */
+ ipar[11] : 0$
+</pre></div><div class="group"><pre class="example-preformatted">(%i29) /* Tolerances on two components */
+ ipar[4] : 2$
+</pre></div><div class="group"><pre class="example-preformatted">(%i30) /* Two error tolerances (on u and its derivative)
+   Relatively large tolerances to keep the example small */
+ ltol : [1, 2]$
+</pre></div><pre class="example-preformatted">(%i31) tol : [1e-4, 1e-4]$
+(%i32) fspace : makelist(0e0, k, 1, ipar[5])$
+(%i33) ispace : makelist(0, k, 1, ipar[6])$
+(%i34) fixpnt : []$
+</pre><div class="group"><pre class="example-preformatted">(%i35) /* First run with default initial guess.
+   Returns iflag. 1 = success */
+ ([iflag, fspace, ispace] :
+  colnew_expert(ncomp, m, aleft, aright, zeta, ipar, ltol, tol,
+  fixpnt, ispace, fspace,
+  0, fsub, dfsub, gsub, dgsub, dummy),
+  if (iflag#1) then error(&quot;On return from colnew_expert: iflag = &quot;,iflag),
+  iflag);
+(%o35)                          1
+</pre></div><div class="group"><pre class="example-preformatted">(%i36) /* Function to generate equally spaced list of values */
+ xlist(xmin,xmax,n):=block([dx:(xmax-xmin)/n],makelist(i,i,0,n)*dx+xmin)$
+</pre></div><div class="group"><pre class="example-preformatted">(%i37) /* x values for solution.  Cluster around x=0 */
+ X: xlist(aleft,aright,500)$
+</pre></div><div class="group"><pre class="example-preformatted">(%i38) /* Generate solution values for z1=u(x) */
+ ans:colnew_appsln(X,2,fspace,ispace)$
+</pre></div><pre class="example-preformatted">(%i39) z:maplist(first,ans)$
+(%i40) Z:[z]$
+</pre><div class="group"><pre class="example-preformatted">(%i41) /* Compare with exact solution and report */
+ y:float(map(exact,X))$
+</pre></div><div class="group"><pre class="example-preformatted">(%i42) maxerror:apply(max,abs(y-z));
+(%o42)                6.881499912125832e-7
+</pre></div><div class="group"><pre class="example-preformatted">(%i43) printf(true,&quot; e: ~8,3e  iflag ~3d  Mesh size ~3d  max error ~8,3e~%&quot;,
+  e,iflag,ispace[1],maxerror);
+ e: 1.000e-2  iflag   1  Mesh size  16  max error 6.881e-7
+(%o43)                        false
+</pre></div><div class="group"><pre class="example-preformatted">(%i44) /* Now use continuation to solve for progressively smaller e
+   Use previous solution as initial guess and every second point
+   from previous mesh as initial mesh */
+ ipar[9] : 3$
+</pre></div><div class="group"><pre class="example-preformatted">(%i45) /* Run COLNEW using continuation for new value of e
+   Set new mesh size ipar[3] from previous size ispace[1]
+   Push list of values of z1=u(x) on to list Z */
+ run_it(e_):=block(
+  e:e_,
+  ipar[3]:ispace[1],
+  [iflag, fspace, ispace]:
+     colnew_expert(ncomp,m,aleft,aright,zeta,ipar,ltol,tol,fixpnt,
+     ispace,fspace,0,fsub,dfsub,gsub,dgsub,dummy),
+  if (iflag#1) then error(&quot;On return from colnew_expert: iflag =&quot;,iflag),
+  ans:colnew_appsln(X,2,fspace,ispace),
+  z:maplist(first,ans),
+  push(z,Z),
+  y:float(map(exact,X)),
+  maxerror:apply(max,abs(y-z)),
+  printf(true,&quot; e: ~8,3e  iflag ~3d  Mesh size ~3d  max error ~8,3e~%&quot;,
+    e,iflag,ispace[1],maxerror),
+  iflag
+ )$
+</pre></div><div class="group"><pre class="example-preformatted">(%i46) for e_ in [1e-3,1e-4,1e-5,1e-6] do run_it(e_)$
+ e: 1.000e-3  iflag   1  Mesh size  20  max error 3.217e-7
+ e: 1.000e-4  iflag   1  Mesh size  40  max error 3.835e-7
+ e: 1.000e-5  iflag   1  Mesh size  38  max error 8.689e-9
+ e: 1.000e-6  iflag   1  Mesh size  60  max error 6.333e-7
+</pre></div><div class="group"><pre class="example-preformatted">(%i47) /* Z is list of solutions z1 = u(x).  Restore order. */
+ Z:reverse(Z)$
+</pre></div><div class="group"><pre class="example-preformatted">(%i48) /* Plot z1=u(x) for each value of e */
+ plot2d([
+  [discrete,X,Z[1]], [discrete,X,Z[2]], [discrete,X,Z[3]],
+  [discrete,X,Z[4]], [discrete,X,Z[5]]],
+  [legend,&quot;e=1e-2&quot;,&quot;e=1e-3&quot;,&quot;e=1e-4&quot;,&quot;e=1e-5&quot;,&quot;e=1e-6&quot;],
+  [xlabel,&quot;x&quot;],[ylabel,&quot;u(x)&quot;],
+  [png_file,&quot;./colnew-ex5.png&quot;]); */
+ done$
+(%o48)  [/tmp/5zscumjmw4lichu2.gnuplot, ./colnew-ex5.png]
+</pre></div></div>
+
+<p>The figure below shows the solution for
+<em class="math tex2jax_process">\(ε=[10^{-2},10^{-3},10^{-4},10^{-5},10^{-6}]\)</em>.
+<img class="image" src="./figures/colnew-ex5.png" alt="colnew example 5: solution of a boundary value problem">
+</p>
+<a class="anchor" id="Item_003a-colnew_002fnode_002fReferences-for-colnew"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="References-for-colnew">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Examples-for-colnew" accesskey="p" rel="prev">Examples for colnew</a>, Up: <a href="#Package-colnew" accesskey="u" rel="up">Package colnew</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="References-for-colnew-1"><span>48.4 References for colnew<a class="copiable-link" href="#References-for-colnew-1"> &para;</a></span></h3>
+
+<ul class="itemize mark-bullet">
+<li><a class="anchor" id="gawain_002dball"></a>(Gawain&amp;Ball 1978) T. H. Gawain and R. E. Ball,
+   Improved Finite Difference Formulas for Boundary Value Problems,
+   International Journal for Numerical Methods in Engineering 12, no. 7 (1978)
+   1151–60.
+   <a class="url" href="https://doi.org/10.1002/nme.1620120706">doi:10.1002/nme.1620120706</a>
+
+
+</li><li><a class="anchor" id="ascher_002d1979a"></a>(Ascher 1979a) U. Ascher, J. Christiansen and R. D. Russell,
+    A collocation solver for mixed order systems of boundary value problems,
+    Math. Comp. 33 (1979), 659-679,
+    <a class="url" href="https://doi.org/10.1090/S0025-5718-1979-0521281-7">    doi:10.1090/S0025-5718-1979-0521281-7</a>
+
+</li><li><a class="anchor" id="ascher_002d1979b"></a>(Ascher 1979b) U. Ascher, J. Christiansen and R. D. Russell,
+    COLSYS - a collocation code for boundary value problems,
+    in <i class="i">Codes for boundary-value problems in ordinary differential equations</i>,
+    Lecture Notes in Computer Science 76, Springer Verlag,
+    B. Childs et. al. (eds.) (1979), 164-185,
+    ISBN 978-3-540-09554-5
+
+</li><li><a class="anchor" id="ascher_002d1981a"></a>(Ascher 1981a) U. Ascher, J. Christiansen and R. D. Russell,
+    Collocation software for boundary-value odes,
+    ACM Trans. Math Software 7 (1981), 209-222.
+    <a class="url" href="https://doi.org/10.1145/355945.355950">    doi:10.1145/355945.355950</a>
+
+</li><li><a class="anchor" id="ascher_002d1981b"></a>(Ascher 1981b) U. Ascher, U., J. Christiansen, and R. D. Russell.
+   ‘Algorithm 569: COLSYS: Collocation Software for Boundary-Value ODEs [D2]’.
+   ACM Transactions on Mathematical Software 7, no. 2 (June 1981): 223–29.
+   <a class="url" href="https://doi.org/10.1145/355945.355951">   doi:10.1145/355945.355951</a>
+
+</li><li><a class="anchor" id="ascher_002drussell"></a>(Ascher&amp;Russell 1981) U. Ascher and R. D. Russell.
+   ‘Reformulation of Boundary Value Problems into “Standard” Form’.
+   SIAM Review 23, no. 2 (April 1981), 238–54,
+   <a class="url" href="https://doi.org/10.1137/1023039">doi:10.1137/1023039</a>
+
+</li><li><a class="anchor" id="parker_002dwan"></a>(Parker&amp;Wan 1984) David F. Parker and Frederic Y. M. Wan,
+  ‘Finite Polar Dimpling of Shallow Caps Under Sub-Buckling Axisymmetric
+  Pressure Distributions’.
+  SIAM Journal on Applied Mathematics 44, no. 2 (April 1984): 301–26,
+  <a class="url" href="https://doi.org/10.1137/0144022">doi:10.1137/0144022</a>
+
+</li><li><a class="anchor" id="bader_002dascher"></a>(Bader&amp;Ascher 1987) G. Bader and U. Ascher,
+    A new basis implementation for a mixed order boundary value ode solver,
+    SIAM J. Scient. Stat. Comput. (1987), 483-500,
+    <a class="url" href="https://doi.org/10.1137/0908047">doi:10.1137/0908047</a>
+
+</li><li><a class="anchor" id="ascher_002det_002dal"></a>(Ascher et al, 1995) Uri M. Ascher, Robert M. M. Mattheij,
+   and Robert D. Russell.
+   Numerical Solution of Boundary Value Problems for Ordinary Differential
+   Equations.
+   Classics in Applied Mathematics 13, SIAM, (1995),
+   ISBN 978-0-89871-354-1
+
+</li><li><a class="anchor" id="bellon_002dtalon"></a>(Bellon&amp;Talon 2005) M. Bellon, M. Talon,
+   Spectrum of the quantum Neumann model,
+   Physics Letters A, Volume 337, Issues 4–6, pp 360-368,
+   <a class="url" href="https://doi.org/10.1016/j.physleta.2005.02.002">   doi:10.1016/j.physleta.2005.02.002</a>
+   <a class="url" href="https://arxiv.org/abs/hep-th/0407005">arXiv:hep-th/0407005</a>
+</li></ul>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-combinatorics.html#Package-combinatorics" accesskey="n" rel="next">Package combinatorics</a>, Previous: <a href="Package-cobyla.html#Package-cobyla" accesskey="p" rel="prev">Package cobyla</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package minpack (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Package minpack (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Package minpack (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-makeOrders.html#Package-makeOrders" rel="next" title="Package makeOrders">
+<link href="Package-lsquares.html#Package-lsquares" rel="prev" title="Package lsquares">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},       // do not skip pre
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  tex: {
+    processEscapes: false,      // do not use \$ to produce a literal dollar sign
+    processEnvironments: false, // do not process \begin{xxx}...\end{xxx} outside math mode
+    processRefs: false,         // do not process \ref{...} outside of math mode
+    displayMath: [             // start/end delimiter pairs for display math
+      ['\\[', '\\]']
+    ],
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Package-minpack">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-makeOrders.html#Package-makeOrders" accesskey="n" rel="next">Package makeOrders</a>, Previous: <a href="Package-lsquares.html#Package-lsquares" accesskey="p" rel="prev">Package lsquares</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-minpack-1"><span>78 Package minpack<a class="copiable-link" href="#Package-minpack-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-minpack_002fnode_002fIntroduction-to-minpack"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-minpack" accesskey="1">Introduction to minpack</a></li>
+<li><a href="#Functions-and-Variables-for-minpack" accesskey="2">Functions and Variables for minpack</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-minpack">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-minpack" accesskey="n" rel="next">Functions and Variables for minpack</a>, Previous: <a href="#Package-minpack" accesskey="p" rel="prev">Package minpack</a>, Up: <a href="#Package-minpack" accesskey="u" rel="up">Package minpack</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-minpack-1"><span>78.1 Introduction to minpack<a class="copiable-link" href="#Introduction-to-minpack-1"> &para;</a></span></h3>
+
+<p><code class="code">Minpack</code> is a Common Lisp translation (via <code class="code">f2cl</code>) of the
+Fortran library <a class="url" href="https://www.netlib.org/minpack/">MINPACK as obtained from Netlib</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Optimization">Optimization</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-minpack">Package minpack</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-minpack_002fnode_002fFunctions-and-Variables-for-minpack"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-minpack">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-minpack" accesskey="p" rel="prev">Introduction to minpack</a>, Up: <a href="#Package-minpack" accesskey="u" rel="up">Package minpack</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-minpack-1"><span>78.2 Functions and Variables for minpack<a class="copiable-link" href="#Functions-and-Variables-for-minpack-1"> &para;</a></span></h3>
+
+<a class="anchor" id="minpack_005flsquares"></a><a class="anchor" id="Item_003a-minpack_002fdeffn_002fminpack_005flsquares"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-minpack_005flsquares"><span class="category-def">Function: </span><span><strong class="def-name">minpack_lsquares</strong> <var class="def-var-arguments">(<var class="var">flist</var>, <var class="var">varlist</var>, <var class="var">guess</var>, [&rsquo;tolerance = <var class="var">tolerance</var>, &rsquo;jacobian = <var class="var">jacobian</var>])</var><a class="copiable-link" href="#index-minpack_005flsquares"> &para;</a></span></dt>
+<dd>
+<p>Compute the point that minimizes the sum of the squares of the
+functions in the list <var class="var">flist</var>.  The variables are in the list
+<var class="var">varlist</var>.  An initial guess of the optimum point must be provided
+in <var class="var">guess</var>.
+</p>
+<p>Let <var class="var">flist</var> be a list of <em class="math tex2jax_process">\(m\)</em> functions,
+\(f_i(x_1, x_2, ..., x_n).\)
+Then this function can be used to find the values of
+\(x_1, x_2, ..., x_n\)
+that solve the least squares problem
+</p>
+$$
+\sum_i^m f_i(x_1, x_2,...,x_n)^2
+$$
+
+
+
+<p>The optional keyword arguments, <var class="var">tolerance</var> and <var class="var">jacobian</var>
+provide some control over the algorithm.
+</p>
+<dl class="table">
+<dt><code class="code">tolerance</code></dt>
+<dd><p>the estimated relative error desired in the sum of squares.  The
+default value is approximately
+\(1.0537\times 10^{-8}.\)
+</p></dd>
+<dt><code class="code">jacobian</code></dt>
+<dd><p>specifies the Jacobian.  If <var class="var">jacobian</var>
+is not given or is <code class="code">true</code> (the default), the Jacobian is computed
+from <var class="var">flist</var>.  If <var class="var">jacobian</var> is <code class="code">false</code>, a numerical
+approximation is used.  See <a class="xref" href="Package-linearalgebra.html#jacobian">Jacobian</a>.
+</p></dd>
+</dl>
+
+<p><code class="code">minpack_lsquares</code> returns a list of three items as follows:
+</p><ol class="enumerate">
+<li> The estimated solution
+</li><li> The sum of squares
+</li><li> The success of the algorithm. The possible values are
+<ol class="enumerate" start="0">
+<li> improper input parameters.
+</li><li> algorithm estimates that the relative error in the sum of squares is
+at most <code class="code">tolerance</code>. 
+</li><li> algorithm estimates that the relative error between x and the solution
+is at most <code class="code">tolerance</code>. 
+</li><li> conditions for info = 1 and info = 2 both hold.
+</li><li> fvec is orthogonal to the columns of the jacobian to machine
+precision. 
+</li><li> number of calls to fcn with iflag = 1 has reached 100*(n+1).
+</li><li> tol is too small. no further reduction in the sum of squares is
+possible. 
+</li><li> tol is too small. no further improvement in the approximate solution x
+is possible. 
+</li></ol>
+</li></ol>
+
+<p>Here is an example using Powell&rsquo;s singular function.
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;minpack&quot;)$
+(%i2) powell(x1,x2,x3,x4) := [x1+10*x2, sqrt(5)*(x3-x4), (x2-2*x3)^2, sqrt(10)*(x1-x4)^2]$
+</pre><div class="group"><pre class="example-preformatted">(%i3) minpack_lsquares(powell(x1,x2,x3,x4), [x1,x2,x3,x4], [3,-1,0,1]);
+(%o3) [[1.6521175961683935e-17, - 1.6521175961683934e-18, 
+2.6433881538694683e-18, 2.6433881538694683e-18], 
+6.109327859207777e-34, 4]
+</pre></div></div>
+
+<p>Same problem but use numerical approximation to Jacobian.
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;minpack&quot;)$
+(%i2) powell(x1,x2,x3,x4) := [x1+10*x2, sqrt(5)*(x3-x4), (x2-2*x3)^2, sqrt(10)*(x1-x4)^2]$
+</pre><div class="group"><pre class="example-preformatted">(%i3) minpack_lsquares(powell(x1,x2,x3,x4), [x1,x2,x3,x4], [3,-1,0,1], jacobian = false);
+(%o3) [[5.060282149485331e-11, - 5.060282149491206e-12, 
+2.1794478435472183e-11, 2.1794478435472183e-11], 
+3.534491794847031e-21, 5]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-minpack">Package minpack</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="minpack_005fsolve"></a><a class="anchor" id="Item_003a-minpack_002fdeffn_002fminpack_005fsolve"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-minpack_005fsolve"><span class="category-def">Function: </span><span><strong class="def-name">minpack_solve</strong> <var class="def-var-arguments">(<var class="var">flist</var>, <var class="var">varlist</var>, <var class="var">guess</var>, [&rsquo;tolerance = <var class="var">tolerance</var>, &rsquo;jacobian = <var class="var">jacobian</var>])</var><a class="copiable-link" href="#index-minpack_005fsolve"> &para;</a></span></dt>
+<dd>
+<p>Solve a system of <code class="code">n</code> equations in <code class="code">n</code> unknowns.
+The <code class="code">n</code> equations are given in the list <var class="var">flist</var>, and the
+unknowns are in <var class="var">varlist</var>.  An initial guess of the solution must
+be provided in <var class="var">guess</var>.
+</p>
+<p>Let <var class="var">flist</var> be a list of <em class="math tex2jax_process">\(m\)</em> functions,
+\(f_i(x_1, x_2, ..., x_n).\)
+Then this functions solves the system of <em class="math tex2jax_process">\(m\)</em> nonlinear equations
+in <em class="math tex2jax_process">\(n\)</em> variables:
+</p>
+$$
+f_i(x_1, x_2, ..., x_n) = 0
+$$
+
+
+<p>The optional keyword arguments, <var class="var">tolerance</var> and <var class="var">jacobian</var>
+provide some control over the algorithm.
+</p>
+<dl class="table">
+<dt><code class="code">tolerance</code></dt>
+<dd><p>the estimated relative error desired in the sum of squares.  The
+default value is approximately
+\(1.0537\times 10^{-8}.\)
+</p></dd>
+<dt><code class="code">jacobian</code></dt>
+<dd><p>specifies the Jacobian.  If <var class="var">jacobian</var>
+is not given or is <code class="code">true</code> (the default), the Jacobian is computed
+from <var class="var">flist</var>.  If <var class="var">jacobian</var> is <code class="code">false</code>, a numerical
+approximation is used.  See <a class="xref" href="Package-linearalgebra.html#jacobian">Jacobian</a>.
+</p></dd>
+</dl>
+
+<p><code class="code">minpack_solve</code> returns a list of three items as follows:
+</p><ol class="enumerate">
+<li> The estimated solution
+</li><li> The sum of squares
+</li><li> The success of the algorithm.  The possible values are
+<ol class="enumerate" start="0">
+<li> improper input parameters.
+</li><li> algorithm estimates that the relative error in the solution is
+at most <code class="code">tolerance</code>. 
+</li><li> number of calls to fcn with iflag = 1 has reached 100*(n+1).
+</li><li> tol is too small. no further reduction in the sum of squares is
+possible. 
+</li><li> Iteration is not making good progress.
+</li></ol>
+</li></ol>
+
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;minpack&quot;)$
+(%i2) powell(x1,x2,x3,x4) := [x1+10*x2, sqrt(5)*(x3-x4), (x2-2*x3)^2, sqrt(10)*(x1-x4)^2]$
+</pre><div class="group"><pre class="example-preformatted">(%i3) minpack_lsquares(powell(x1,x2,x3,x4), [x1,x2,x3,x4], [3,-1,0,1]);
+(%o3) [[1.6521175961683935e-17, - 1.6521175961683934e-18, 
+2.6433881538694683e-18, 2.6433881538694683e-18], 
+6.109327859207777e-34, 4]
+</pre></div></div>
+<p>In this particular case, we can solve this analytically:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) powell(x1,x2,x3,x4) := [x1+10*x2, sqrt(5)*(x3-x4), (x2-2*x3)^2, sqrt(10)*(x1-x4)^2]$
+</pre><div class="group"><pre class="example-preformatted">(%i2) solve(powell(x1,x2,x3,x4),[x1,x2,x3,x4]);
+(%o2)          [[x1 = 0, x2 = 0, x3 = 0, x4 = 0]]
+</pre></div></div>
+<p>and we see that the numerical solution is quite close the analytical one.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-minpack">Package minpack</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-makeOrders.html#Package-makeOrders" accesskey="n" rel="next">Package makeOrders</a>, Previous: <a href="Package-lsquares.html#Package-lsquares" accesskey="p" rel="prev">Package lsquares</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

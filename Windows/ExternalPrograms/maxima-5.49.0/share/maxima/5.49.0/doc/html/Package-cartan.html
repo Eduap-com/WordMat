@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package cartan (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Package cartan (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Package cartan (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-celine.html#Package-celine" rel="next" title="Package celine">
+<link href="Package-bode.html#Package-bode" rel="prev" title="Package bode">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Package-cartan">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-celine.html#Package-celine" accesskey="n" rel="next">Package celine</a>, Previous: <a href="Package-bode.html#Package-bode" accesskey="p" rel="prev">Package bode</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-cartan-1"><span>44 Package cartan<a class="copiable-link" href="#Package-cartan-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-cartan_002fnode_002fIntroduction-to-cartan"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-cartan" accesskey="1">Introduction to cartan</a></li>
+<li><a href="#Functions-and-Variables-for-cartan" accesskey="2">Functions and Variables for cartan</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-cartan">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-cartan" accesskey="n" rel="next">Functions and Variables for cartan</a>, Previous: <a href="#Package-cartan" accesskey="p" rel="prev">Package cartan</a>, Up: <a href="#Package-cartan" accesskey="u" rel="up">Package cartan</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-cartan-1"><span>44.1 Introduction to cartan<a class="copiable-link" href="#Introduction-to-cartan-1"> &para;</a></span></h3>
+
+<p><code class="code">cartan</code> is a package which implements the calculus of differential
+forms. Included are facilities for computing exterior products,
+contraction of vectors and forms, exterior derivatives, and Lie
+derivatives. The differential forms are given in terms of the natural
+basis forms derived from the coordinates on the manifold. Type
+<code class="code">load(cartan);</code> to load this package. For a demonstration, type
+<code class="code">demo(cartan);</code>
+</p>
+<p><code class="code">cartan</code> was implemented by F.B. Estabrook and H.D. Wahlquist.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-geometry">Differential geometry</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-cartan">Package cartan</a>
+&middot;
+</div>
+
+
+<a class="anchor" id="Item_003a-cartan_002fnode_002fFunctions-and-Variables-for-cartan"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-cartan">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-cartan" accesskey="p" rel="prev">Introduction to cartan</a>, Up: <a href="#Package-cartan" accesskey="u" rel="up">Package cartan</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-cartan-1"><span>44.2 Functions and Variables for cartan<a class="copiable-link" href="#Functions-and-Variables-for-cartan-1"> &para;</a></span></h3>
+
+<a class="anchor" id="init_005fcartan"></a><a class="anchor" id="Item_003a-cartan_002fdeffn_002finit_005fcartan"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-init_005fcartan"><span class="category-def">Function: </span><span><strong class="def-name">init_cartan</strong> <var class="def-var-arguments">([<var class="var">x_1</var>, &hellip;, <var class="var">x_m</var>])</var><a class="copiable-link" href="#index-init_005fcartan"> &para;</a></span></dt>
+<dd><p>Initializes some global variables for the package. The argument, a
+Maxima list, is an ordered list of coordinates. The coordinate list is
+stored as the value of the variable <code class="code">cartan_coords</code>. The value of
+the variable <code class="code">cartan_basis</code> is a list of the basis 1-forms. The
+dimension is stored as the value of the variable <code class="code">cartan_dim</code>.
+</p></dd></dl>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;cartan&quot;)$
+(%i2) init_cartan([x,y,z]);
+(%o2)                            [dx, dy, dz]
+(%i3) cartan_basis;
+(%o3)                            [dx, dy, dz]
+(%i4) cartan_dim;
+(%o4)                                  3
+</pre></div>
+
+<a class="anchor" id="cartan_002d_007e"></a><a class="anchor" id="Item_003a-cartan_002fdeffn_002f_007e"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-_007e"><span class="category-def">Infix Operator: </span><span><strong class="def-name">~</strong><a class="copiable-link" href="#index-_007e"> &para;</a></span></dt>
+<dd><p>The tilde &ldquo;~&rdquo; is an infix operator which denotes the exterior (wedge)
+product. The canonical ordering of the products is determined by the
+order in which the coordinates were specified. For example, if the
+coordinate list is specified as <code class="code">[x,y,z]</code>, then the two-form
+<code class="code">dy~dx</code> simplifies to <code class="code">-dx~dy</code>.
+</p></dd></dl>
+
+<div class="example">
+<pre class="example-preformatted">(%i1) init_cartan([x,y,z]);
+(%o1)                            [dx, dy, dz]
+(%i2) vr:[v1,v2,v3];
+(%o2)                            [v1, v2, v3]
+(%i3) f1:x~dy+z~dz;
+(%o3)                             z dz + x dy
+(%i4) f2:dz~f1;
+(%o4)                              - x dy dz
+</pre></div>
+
+
+<a class="anchor" id="cartan_002d_007c"></a><a class="anchor" id="Item_003a-cartan_002fdeffn_002f_007c"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-_007c"><span class="category-def">Infix Operator: </span><span><strong class="def-name">|</strong><a class="copiable-link" href="#index-_007c"> &para;</a></span></dt>
+<dd><p>The bar &ldquo;|&rdquo; is an infix operator which defines the contraction of a
+vector on a form. The vector should be given on the left.
+</p></dd></dl>
+
+<a class="anchor" id="ext_005fdiff"></a><a class="anchor" id="Item_003a-cartan_002fdeffn_002fext_005fdiff"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-ext_005fdiff"><span class="category-def">Function: </span><span><strong class="def-name">ext_diff</strong> <var class="def-var-arguments">(<var class="var">form</var>)</var><a class="copiable-link" href="#index-ext_005fdiff"> &para;</a></span></dt>
+<dd><p>The exterior derivative operator. It takes one argument, which should be a differential form.
+</p></dd></dl>
+
+<a class="anchor" id="lie_005fdiff"></a><a class="anchor" id="Item_003a-cartan_002fdeffn_002flie_005fdiff"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-lie_005fdiff"><span class="category-def">Function: </span><span><strong class="def-name">lie_diff</strong> <var class="def-var-arguments">(<var class="var">vector1</var>,[<var class="var">vector2</var>,<var class="var">form</var>])</var><a class="copiable-link" href="#index-lie_005fdiff"> &para;</a></span></dt>
+<dd><p>The Lie derivative operator. The first argument is a vector field. The
+second argument may be either a vector field or a differential form.
+</p></dd></dl>
+
+<p>(Note: display2d is set to false in the following example.)
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) init_cartan([x,y,z]);
+(%o1) [dx,dy,dz]
+(%i2) vr:[v1,v2,v3];
+(%o2) [v1,v2,v3]
+(%i3) f1:x ~ dy+z ~ dz;
+(%o3) z*dz+x*dy
+(%i4) vr | f1;
+(%o4) v3*z+v2*x
+(%i5) f2:dz ~ f1;
+(%o5) -(x*dy*dz)
+(%i6) ext_diff(f1);
+(%o6) dx*dy
+(%i7) ext_diff(f3(x,y,z) ~ dx);
+(%o7) -('diff(f3(x,y,z),z,1)*dx*dz)-'diff(f3(x,y,z),y,1)*dx*dy
+(%i8) depends([v1,v2,v3],[x,y,z]);
+(%o8) [v1(x,y,z),v2(x,y,z),v3(x,y,z)]
+(%i9) lie_diff(vr,f2);
+(%o9) -('diff(v3,z,1)*x*dy*dz)-'diff(v2,y,1)*x*dy*dz-v1*dy*dz
+                               -'diff(v2,x,1)*x*dx*dz+'diff(v3,x,1)*x*dx*dy
+(%i10) depends([w1,w2,w3],[x,y,z]);
+(%o10) [w1(x,y,z),w2(x,y,z),w3(x,y,z)]
+(%i11) wr:[w1,w2,w3];
+(%o11) [w1,w2,w3]
+(%i12) lie_diff(vr,wr);
+(%o12) [-('diff(v1,z,1)*w3)-'diff(v1,y,1)*w2+v3*'diff(w1,z,1)+v2*'diff(w1,y,1)
+                           +v1*'diff(w1,x,1)-'diff(v1,x,1)*w1,
+        -('diff(v2,z,1)*w3)+v3*'diff(w2,z,1)+v2*'diff(w2,y,1)+v1*'diff(w2,x,1)
+                           -'diff(v2,y,1)*w2-'diff(v2,x,1)*w1,
+        v3*'diff(w3,z,1)+v2*'diff(w3,y,1)+v1*'diff(w3,x,1)-'diff(v3,z,1)*w3
+                        -'diff(v3,y,1)*w2-'diff(v3,x,1)*w1]
+</pre></div>
+
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-cartan">Package cartan</a>
+&middot;
+</div>
+
+
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-celine.html#Package-celine" accesskey="n" rel="next">Package celine</a>, Previous: <a href="Package-bode.html#Package-bode" accesskey="p" rel="prev">Package bode</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

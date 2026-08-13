@@ -1,0 +1,102 @@
+set size square
+set timestamp "%a %d %b %Y"
+set clip
+set xtics axis nomirror
+set ytics axis nomirror
+unset grid
+unset polar
+set title "Primitive Smith Chart"
+unset key
+set xlabel "Impedance or Admittance Coordinates"
+set para
+set rrange [-0 : 10]
+set trange [-pi : pi]
+set xrange [-1:1]
+set yrange [-1:1]
+tv(t,r) = sin(t)/(1+r)
+tu(t,r) = (cos(t) +r)/(1+r)
+cu(t,x) = 1 + cos(t)/x
+cv(t,x) = (1+ sin(t))/x
+plot cu(t,.1),cv(t,.1),cu(t,.1),-cv(t,.1),\
+cu(t,1),cv(t,1),cu(t,1),-cv(t,1),\
+cu(t,10),cv(t,10),cu(t,10),-cv(t,10),\
+tu(t,.1),tv(t,.1),\
+tu(t,.5),tv(t,.5),\
+tu(t,1),tv(t,1),\
+tu(t,5),tv(t,5),\
+tu(t,10),tv(t,10),\
+cu(t,.5),cv(t,.5),cu(t,.5),-cv(t,.5),\
+tu(t,0),tv(t,0)
+
+pause -1 "Hit return to continue"
+
+set angles degrees
+set polar
+set grid polar 15. lt -1 dt 0 lw 0.5
+unset border
+unset param
+set title "Antenna Pattern"
+set xlabel "Azimuth"
+set ylabel "dBSM"
+set style data line
+set rrange [-200:60]
+set trange [*:*]
+set xrange [-220:220]
+set yrange [-220:220]
+unset xtics
+plot "antenna.dat" index 0 using 1:5, "" index 1
+
+pause -1 "Hit return to continue"
+
+reset
+
+set polar
+set angle degree
+set grid polar 15. lt -1 dt 0 lw 0.5
+set border 0
+set logscale r 10
+set view equal xy
+set size square
+set noxtics
+set noytics
+set rrange [.5 : 19]
+set trange [90 : 360]
+set rtics axis scale 0.5,0 nomirror rotate by -270  offset 0, 0.7
+set rtics (2,5,10,15)
+set key opaque box samplen 0.75
+set title "log scale polar axis, trange in degrees" 
+#
+set style data impulse
+plot 'silver.dat' using ($1*1.8/pi):3:0 lc var lw 2 title 'silver.dat'
+
+pause -1 "Hit return to continue"
+
+reset
+
+set title "yerrors in polar mode"
+
+$DATA << EOD
+0   1.3 0.2
+30  0.9 0.1
+60  0.7 0.1
+90  1.0 0.3
+120 1.1 0.1
+150 0.5 0.1
+180 1.2 0.2
+EOD
+
+set polar
+set angles degrees
+set grid polar 15. lt -1 dt 0 lw 0.5
+unset border
+unset xtics
+unset ytics
+unset raxis
+set yrange [0:1.5]
+set size ratio 0.5
+
+plot $DATA with yerrorbars lw 1.5 title "polar error bars"
+
+pause -1 "Hit return to continue"
+
+reset

@@ -1,0 +1,378 @@
+(kill (all), 0);
+0;
+
+(x : 123, y : abc, 0);
+0;
+
+defstruct (f (x, y, z));
+'[f (x, y, z)];
+
+myrecord : new (f);
+'(f (x, y, z));
+
+myrecord@y : 45;
+45;
+
+myrecord;
+'(f (x, 45, z));
+
+[x, y, z, myrecord@x, myrecord@y, myrecord@z];
+'[123, abc, z, myrecord@x, 45, myrecord@z];
+
+('(myrecord@y), [op (%%), args (%%)]);
+'["@", [myrecord, y]];
+
+(kill (y), myrecord@y);
+45;
+
+[kill (f), errcatch (new (f)), errcatch (myrecord@x)];
+[done, [], [f(x, 45, z)@x]];
+
+defstruct (f (x, y=3.14159, z));
+'[f(x, 3.14159, z)];
+
+ff : new (f);
+'(f (x, 3.14159, z));
+
+(ff@y : 2.71828, ff);
+'(f (x, 2.71828, z));
+
+k : h (g (aa, bb), cc);
+'(h (g (aa, bb), cc));
+
+errcatch (k@1@2 : dd);
+[];
+
+defstruct (h (xx, yy), g (uu, vv));
+'[h (xx, yy), g (uu, vv)];
+
+(k@1@2 : dd, k);
+'(h (g (aa, dd), cc));
+
+x : new (h);
+'(h (xx, yy));
+
+x@yy : new (g);
+g (uu, vv);
+
+x;
+h (xx, g (uu, vv));
+
+x@yy@vv : 123;
+123;
+
+x;
+h (xx, g (uu, 123));
+
+(yy : %i, vv : 1/2, 0);
+0;
+
+[x@yy, x@yy@vv];
+'[g (uu, 123), 123];
+
+string ('(x@yy + x@yy@vv));
+"x@yy@vv+x@yy";
+
+(kill (x@yy@vv), [x, x@yy, x@yy@vv]);
+'[h (xx, g (uu, vv)), g (uu, vv), x@yy@vv];
+
+(kill (x@yy), [x, x@yy]);
+'[h (xx, yy), x@yy];
+
+(kill (x), x);
+'x;
+
+block ([uu0 : 123, vv0 : 456], x : new (h (new (g), new (g (uu0, vv0)))));
+'(h (g (uu, vv), g (123, 456)));
+
+([a00, a01, b00, b01] : [123, 456, 789, 987],
+ block ([a0 : '(a00 + a01), b0 : '(b00 + b01)], defstruct (foo (a = a0, b = b0))));
+'[foo (a00 + a01, b00 + b01)];
+
+y : new (foo);
+'(foo (a00 + a01, b00 + b01));
+
+ev (y);
+foo (123 + 456, 789 + 987);
+
+/* IN FOLLOWING EXAMPLES QUOTE SHOULD BE UNNECESSARY !!
+ * CHANGE $EV CODE TO MAKE IT WORK OK WITHOUT QUOTE !!
+ */
+
+ev (sin (x@xx + 1), '(x@xx)=%e);
+sin (%e + 1);
+
+ev (sin (x@yy@uu + 1), '(x@yy@uu)=%i);
+sin (%i + 1);
+
+x;
+'(h (g (uu, vv), g (123, 456)));
+
+(kill (all), 0);
+0;
+
+[a, b, c]: [x, y, z];
+[x, y, z];
+
+[x, y, z]: [11, 22, 33];
+[11, 22, 33];
+
+[''a, ''b, ''c];
+[11, 22, 33];
+
+[x, y, z]: x*y*z;
+[7986, 7986, 7986];
+
+[x, y, z];
+[7986, 7986, 7986];
+
+(kill (a, b), [a, b]: [b, 2*a]);
+'[b, 2*a];
+
+[a, b]: [b, 2*a];
+'[2*a, 2*b];
+
+[a, b]: [b, 2*a];
+'[2*b, 4*a];
+
+[a, b]: [b, 2*a];
+'[4*a, 4*b];
+
+[a, b]: [b, 2*a];
+'[4*b, 8*a];
+
+(kgcd(a, b) := (while b#0 do [a, b]: [b, remainder(a, b)], abs(a)), kgcd(11*7*5*3, 17*13*11*7));
+''(gcd (11*7*5*3, 17*13*11*7));
+
+(i:10, j:20, [i, j] : [j, i]);
+[20, 10];
+
+[i, j];
+[20, 10];
+
+/* QUESTIONABLE. MAYBE THIS ONE SHOULD CAUSE AN ERROR */
+[i, i] : [1, 2];
+[1, 2];
+
+/* QUESTIONABLE. MAYBE PRECEDING ASSIGNMENT SHOULD HAVE FAILED */
+i;
+2;
+
+a : [1, 2, 3, 4];
+[1, 2, 3, 4];
+
+(i : 2, [i, a[i]] : [4, 11]);
+[4, 11];
+
+a;
+[1, 11, 3, 4];
+
+[ a[1], a[2] ] : [ a[3], a[4] ];
+[3, 4];
+
+a;
+[3, 4, 3, 4];
+
+(a : [1, 2, 3, 4], i:0, [ a[i : i + 1], a[i : i + 1] ] : [ a[i : i + 1], a[i : i + 1] ]);
+[1, 2];
+
+a;
+[1, 2, 1, 2];
+
+[a, [b, c], [[d, e], f]] : [1, [2, 3], [[4, 5], 6]];
+[1, [2, 3], [[4, 5], 6]];
+
+[a, b, c, d, e, f];
+[1, 2, 3, 4, 5, 6];
+
+/* NEED TESTS FOR :: HERE */
+
+(L : '[a, b, c], L :: [11, 22, 33], [a, b, c]);
+[11, 22, 33];
+
+/* example from mailing list 2014-02-27 "assigning to a list of structure fields does not work" */
+
+(kill (P, N, D, Quot), defstruct(Quot(N,D=1)), P:new(Quot));
+Quot(N, 1);
+
+[P@N,P@D]:[3,7];
+[3, 7];
+
+P;
+Quot(3, 7);
+
+/* some more tests */
+
+kill (x, y, z, a, b, c, d);
+done;
+
+(x : [a, b], y : [c, d], 0);
+0;
+
+[x, y] :: [[1, 2], [3, 4]];
+[[1, 2], [3, 4]];
+
+[a, b, c, d];
+[1, 2, 3, 4];
+
+[x[1], y[1]] :: [11, 22];
+[11, 22];
+
+[x, y, a, b, c, d];
+[[a, b], [c, d], 11, 2, 22, 4];
+
+[x[1], y[1]] : [33, 44];
+[33, 44];
+
+[x, y, a, b, c, d];
+[[33, b], [44, d], 11, 2, 22, 4];
+
+(kill (foo), defstruct (foo (a, b)));
+[foo (a, b)];
+
+z : new (foo (-1, -2));
+foo (-1, -2);
+
+[z@b, z@a] : [-3, -4];
+[-3, -4];
+
+z;
+foo (-4, -3);
+
+kill (a, b);
+done;
+
+[a[123], b[456]] : [17, 29];
+[17, 29];
+
+a;
+a;
+
+a[123];
+17;
+
+[arrayinfo (a), listarray (a)];
+[[hashed, 1, [123]], [17]];
+
+[arrayinfo (b), listarray (b)];
+[[hashed, 1, [456]], [29]];
+
+[c[321], d[654]] : [19, 31];
+[19, 31];
+
+[c, d];
+[22, 4];
+
+[arrayinfo (c), arrayinfo (d)];
+[[hashed, 1, [321]], [hashed, 1, [654]]];
+
+[listarray ('c), listarray ('d)];
+[[19], [31]];
+
+[a, [b, [c, [d, [x, [y, [z]]]]]]] : [-1, [-2, [-3, [-4, [-5, [-6, [-7]]]]]]];
+[-1, [-2, [-3, [-4, [-5, [-6, [-7]]]]]]];
+
+[a, b, c, d, x, y, z];
+[-1, -2, -3, -4, -5, -6, -7];
+
+(hash_assign (e, x) := ?marrayset (x, ?meval (first (e)), ?meval (second (e))),
+ translate (hash_assign), /* mset extension op must be a Lisp function */
+ infix ("hash_get"),
+ ?putprop (verbify ("hash_get"), 'hash_assign, '?mset_extension_operator),
+ 0);
+0;
+
+(foo [bar] : 123,
+ foo hash_get bar : 456,
+ foo [bar]);
+456;
+
+[foo hash_get baz] : 789;
+[789];
+
+foo [baz];
+789;
+
+/* bug reported to mailing list 2017-02-02: "Structs broken?" */
+
+(kill (all),
+ reset (),
+ defstruct (foo (a, b)),
+ bar : new (foo),
+ aa : make_array (fixnum, 6),
+ bar@a : aa,
+ 0);
+0;
+
+(bar@a[4] : 123,
+ listarray (aa));
+[0, 0, 0, 0, 123, 0];
+
+?arrayp (bar@a);
+true;
+
+listarray (bar@a);
+[0, 0, 0, 0, 123, 0];
+
+(bb : make_array (fixnum, 6),
+ f(i) := if i = 1 then aa elseif i = 2 then bb,
+ 0);
+0;
+
+(f(2)[5] : 456,
+ listarray (bb));
+[0, 0, 0, 0, 0, 456];
+
+?arrayp (f(2));
+true;
+
+listarray (f(2));
+[0, 0, 0, 0, 0, 456];
+
+(l : [aa, bb],
+ 0);
+0;
+
+(l[2][1] : 789,
+ listarray (bb));
+[0, 789, 0, 0, 0, 456];
+
+?arrayp (l[2]);
+true;
+
+listarray (l[2]);
+[0, 789, 0, 0, 0, 456];
+
+(h1[mumble] : aa,
+ h1[blurf] : bb,
+ 0);
+0;
+
+(h1[mumble][3] : 333,
+ listarray (aa));
+[0, 0, 0, 333, 123, 0];
+
+?arrayp (h1[mumble]);
+true;
+
+listarray (h1[mumble]);
+[0, 0, 0, 333, 123, 0];
+
+(use_fast_arrays : true,
+ h2[mumble] : aa,
+ h2[blurf] : bb,
+ 0);
+0;
+
+(h2[blurf][2] : 555,
+ listarray (bb));
+[0, 789, 555, 0, 0, 456];
+
+?arrayp (h2[blurf]);
+true;
+
+listarray (h2[blurf]);
+[0, 789, 555, 0, 0, 456];
+
+(reset(use_fast_arrays),1);
+1;

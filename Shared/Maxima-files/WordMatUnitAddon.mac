@@ -20,9 +20,20 @@ logexpand:true$/*alle log regneregler   true: log(a^x)=x*log(a)  all: log(a*b)=l
 triginverses:all$/*noget med sin^-1(sin(x))=x altid og begge veje*/
 intanalysis:false$/*Kan loese flere bestemte integraler. Noget med ikke at soege efter poler i omraadet og altid integrere.*/
 listconstvars:true$/*for at %i ogsaa kommer med blandt variable saa kompleks kan findes*/
+
 defrule(unitrule,aliz,convert(aliz,[]))$
 
+
+dectal(udt):= dectalbc(udt)$ /* changed in 1.41 */
+
+
+
+/* I dont think is required anymore, since scinot has been rewritten
 defrule(dectalrul,aliz,dectal(aliz))$ /* aendret i version 1.07 defrule(dectalrul,aliznum,dectal(aliznum))$ */
+
+dectalallNum(udt):=block([qout],
+udt:ev(udt,lgog(x):=if x=%e then 0.4342944819032518 elseif numberp(x) then ev(log(x)/log(10),numer) else 'lgog(x),numer),qout:errcatch(apply1(udt,dectalrul)),if qout=[] then udt else qout[1]
+)$
 
 dectal(udt):=block([qudt,antbsf],
 if numberp(udt) then go(hop),
@@ -36,13 +47,16 @@ if udt<0 then antbsf:antbsf+1,
 udt:printf(false,concat("~",antbsf,"f"),udt),udt:striml(" ",udt),udt:strimr("0",udt),strimr(".",udt) 
 )$
 
-dectalallNum(udt):=block([qout],
-udt:ev(udt,lgog(x):=if x=%e then 0.4342944819032518 elseif numberp(x) then ev(log(x)/log(10),numer) else 'lgog(x),numer),qout:errcatch(apply1(udt,dectalrul)),if qout=[] then udt else qout[1]
-)$
-
 defrule(scinotrul,aliznum,scinot(aliznum))$
-scinot(udt):=block([talfakt,antbsf],if not(numberp(udt)) then return(udt),if udt=0 then return(0),if abs(udt)<1 then antbsf:NoSigFig+4 else antbsf:NoSigFig+4,if udt<0 then antbsf:antbsf+1,(if udt<-10 or (udt>-1 and udt<1) or udt>10 then return(sremove(" ",printf(false,concat("~",antbsf,"e"),udt))) else return(dectal(udt))))$
+scinot(udt):=block([talfakt,antbsf],if not(numberp(udt)) then return(udt),
+    if udt=0 then return(0),
+    if abs(udt)<1 then antbsf:NoSigFig+4 else antbsf:NoSigFig+4,
+    if udt<0 then antbsf:antbsf+1,
+    (if udt<-10 or (udt>-1 and udt<1) or udt>10 then return(sremove(" ",printf(false,concat("~",antbsf,"e"),udt))) else return(dectal(udt)))
+)$
 scinotall(udt):=block([],apply1(udt,scinotrul))$
+*/
+
 
 keepfloat:false$
 fpprintprec:14$ /* if 16 or above problems: 2*nm = 2.00000000001E-9 m */
