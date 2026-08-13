@@ -78,12 +78,18 @@
 		 (t
 		  `(,op ,@e)))))))
 	  
+(defun same-op-p (x y)
+  "Returns T if X and Y (returned by GET-OP-AND-ARG) are the same operator.
+  ALIKE1 is used in order to ignore things like SIMP flags."
+  (alike1 (if (atom (car x)) (list x) x)
+          (if (atom (car y)) (list y) y)))
+
 (defun flatten-op (e op)
   (let ((e-op) (e-arg))
     (setq e-op (multiple-value-list (get-op-and-arg e)))
     (setq e-arg (cadr e-op))
     (setq e-op (car e-op))
-    (cond ((equal e-op op)
+    (cond ((same-op-p e-op op)
 	   (mapcan #'(lambda (x) (flatten-op x op)) e-arg))
 	  (t
 	   (list e)))))

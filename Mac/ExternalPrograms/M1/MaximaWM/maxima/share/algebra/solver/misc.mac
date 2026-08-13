@@ -14,7 +14,7 @@ Library General Public License for more details.
 
 You should have received a copy of the GNU Library General Public
 License along with this library; if not, write to the Free Software
-Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 Dan Stanger dan.stanger@ieee.org
 please contact me for updates to this code
@@ -83,3 +83,10 @@ Union2(l1, l2) :=
   else if not(member(l2[1], l1)) then Union2(append(l1, [l2[1]]), rest(l2))
   else Union2(l1, rest(l2))$
 
+/******************************************************************************/
+/* Some work arounds for case sensitivity and function name changes.          */
+/******************************************************************************/
+
+Empty( e) :=emptyp( e)$
+ZeroP( n) :=equal(n,0)$
+Flatten( e) :=flatten(e)$

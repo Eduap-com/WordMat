@@ -41,12 +41,6 @@
 ;;      vtk or vtk6
 ;;      vtk7
 
-;; gnuplot_pipes does not work with the combination SBCL/Windows.
-;; Therefore set the default value for draw_renderer to gnuplot
-;; in that case, set it to gnuplot_pipes otherwise.
-#+(or (and sbcl win32) (and sbcl win64))
-(defvar $draw_renderer '$gnuplot)
-#-(or (and sbcl win32) (and sbcl win64))
 (defvar $draw_renderer '$gnuplot_pipes)
 
 (defvar $draw_use_pngcairo nil "If true, use pngcairo terminal when png is requested.")
@@ -99,7 +93,7 @@
       (gethash '$background_color *gr-options*) "#ffffff"
       (gethash '$color *gr-options*)            "#0000ff" ; for lines, points, borders and labels
       (gethash '$fill_color *gr-options*)       "#ff0000" ; for filled regions
-      (gethash '$fill_density *gr-options*)     0         ; in [0,1], only for object 'bars
+      (gethash '$fill_density *gr-options*)     nil       ; if specified, must be in [0, 1]
 
       ; implicit plot options
       (gethash '$ip_grid *gr-options*)    '((mlist simp) 50 50)
@@ -986,10 +980,11 @@
 
 (defun update-terminal (val)
   (let ((terms '($screen $png $pngcairo $jpg $gif $eps $eps_color $canvas
-                 $epslatex $epslatex_standalone $svg $x11 $qt
+                 $epslatex $epslatex_standalone $svg $tikz $tikz_standalone $x11 $qt
                  $dumb $dumb_file $pdf $pdfcairo $wxt $animated_gif $windows
                  $multipage_pdfcairo $multipage_pdf $multipage_eps 
-                 $multipage_eps_color $aquaterm $tiff $vrml $obj $stl $pnm $ply)))
+                 $multipage_eps_color $aquaterm $tiff $vrml $obj $stl $pnm $ply
+                 $cairolatex_pdf $cairolatex_pdf_standalone)))
      (cond
        ((member val terms)
           (when (and (eq val '$png) $draw_use_pngcairo)
@@ -1368,14 +1363,16 @@
   (cond
     ((and (integerp val) (>= val -1 ))
        (setf (gethash '$point_type *gr-options*) val))
-    (t (let ((shapes '($none $dot $plus $multiply $asterisk
-                       $square $filled_square $circle $filled_circle
-                       $up_triangle $filled_up_triangle $down_triangle
-                       $filled_down_triangle $diamant $filled_diamant
-                       $sphere $cube $cylinder $cone)))
-          (if (member val shapes)
-              (setf (gethash '$point_type *gr-options*) (- (position val shapes) 1))
-              (merror "draw: illegal point type: ~M " val)))))  )
+    (t (let*
+         ((shapes '($none $dot $plus $multiply $asterisk
+                    $square $filled_square $circle $filled_circle
+                    $up_triangle $filled_up_triangle $down_triangle
+                    $filled_down_triangle $diamant $filled_diamant
+                    $sphere $cube $cylinder $cone))
+          (pos (position val shapes)))
+         (if pos
+           (setf (gethash '$point_type *gr-options*) (- pos 1))
+           (merror "draw: illegal point type: ~M " val))))))
 
 
 

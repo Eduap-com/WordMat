@@ -29,18 +29,37 @@ with n=startnum */
     
 );
 
-/* wc_tolappend appends a list of element values to another renumbering all tol[] found in both lists
-so they won't conflict. */
-
-wc_tolappend([wc_args]):=block([wc_retval:[],wc_numberoftols:1],
-    for wc_i in wc_args do
-    (
-        wc_retval:append(wc_retval,%wc_tolrenumber(wc_i,wc_numberoftols)),
-        wc_numberoftols:wc_numberoftols+length(%wc_tols(wc_i))
+/* wc_tolappend appends a list of element values to an independent list of element
+values renaming all tol[n] found in one list if they would coincide with a tol[n]
+with the same n in the other. */
+wc_tolappend([x]):=block([wc_usedTols:[],wc_tolCntr:1,retval:[]],
+    /* Find which index we can start assigning new tol[n] to */
+    for wc_param in x do
+            for wc_arg in map('first,map('args,%wc_tols(wc_param))) do
+                    if numberp(wc_arg) then
+                        if wc_arg >= wc_tolCntr then wc_tolCntr:wc_arg+1,
+    
+    /* Iterate over all parameters f this function */
+    for wc_param in x do
+        (
+            /* Iterate over all tol[n] of this parameter*/
+            for wc_arg in map('first,map('args,%wc_tols(wc_param))) do
+            (
+                /* Is this tol[n] already in use by a different parameter? */
+                if member(wc_arg,wc_usedTols)  then
+                /* It is already in use => substitute it by a new one. */
+                (
+                    disp(used=wc_arg),
+                    wc_param:subst(tol[wc_arg]=tol[wc_tolCntr],wc_param),
+                    wc_tolCntr:wc_tolCntr+1
+                ),
+                /* mark this tol as "already in use" */
+                push(wc_arg,wc_usedTols)
+            ),
+        retval:append(retval,wc_param)
     ),
-    wc_retval
-);
-
+    return(retval)
+)$
 /* wc_systematic returns a list of the results of all combinations one can get by assigning every tol[n] wc_valuespertol 
 values between -1 and 1. */
 
@@ -54,7 +73,7 @@ wc_systematic(wc_x,[wc_valuespertol]):=block(
     wc_numoftols:length(%wc_tols),
     
     /* Default the number of values per tolerance parameter to 3 */
-    if wc_valuespertol=[] then wc_valuespertol:3 else wc_valuespertol:first(wc_valuespertol),
+    if wc_valuespertol=[] then wc_valuespertol:wc_defaultvaluespertol else wc_valuespertol:first(wc_valuespertol),
     makelist(
         (
             subst(
@@ -82,6 +101,8 @@ wc_montecarlo(wc_x,wc_samples):=block(
         %wc_tols:%wc_tols(wc_x),
         wc_numoftols
     ],
+    if not integerp(wc_samples) then error("wc_montecarlo: The second parameter needs to be a integer"),
+    if wc_samples<0 then error("wc_montecarlo: The second parameter needs to be positive"),
     wc_numoftols:length(%wc_tols),
     
     makelist(
@@ -109,11 +130,22 @@ wc_typicalvalues(wc_x):=
         wc_x
     );
 
+
+/* Calculates the typical values of wc_x, but doesn't touch the tolerance wc_exception */
+%wc_typicalvalues(wc_x,wc_exception):=
+    subst(
+        delete(
+            wc_exception=0,
+            makelist(i=0,i,%wc_tols(wc_x))
+        ),
+        wc_x
+    );
+
 /* Convenience function: Get the minimum, the typical and the maximal value */
 
 wc_mintypmax(wc_x,[wc_params]):=block([wc_allvalues,wc_param1,min,wc_typ,max],
     if length(wc_params) < 1 then
-        wc_param1:3
+        wc_param1:wc_defaultvaluespertol
     else
         wc_param1:inpart(wc_params,1),
     
@@ -132,14 +164,302 @@ wc_mintypmax(wc_x,[wc_params]):=block([wc_allvalues,wc_param1,min,wc_typ,max],
  ?putprop('mintypmax, ?cdr([?mlist,?mequal]), '?distribute_over)$
 
 /* A function that pretty-prints the value ranges the input values are in */
-wc_inputvalueranges(wc_x):=apply('matrix,
-    makelist(
-        append([lhs(wc_i)],wc_mintypmax(rhs(wc_i))),
-        wc_i,wc_x
+wc_inputvalueranges(wc_x,[show_toln]):=
+(
+    if (show_toln#[]) and (show_toln#['true]) and (show_toln#['false]) then
+       error("wc_inputvalueranges: Second parameter must be a bool"),
+    apply('matrix,
+        if show_toln=['true] then
+            makelist(
+                append(
+                    [lhs(wc_i)],
+                    wc_mintypmax(rhs(wc_i)),
+                    [%wc_tols(rhs(wc_i))]
+                ),
+                wc_i,wc_x
+            )        
+        else
+            makelist(
+                append([lhs(wc_i)],wc_mintypmax(rhs(wc_i))),
+                wc_i,wc_x
+            )
     )
 );
 
-/* A function that generates an equation out of the min, typ and maximum value for an element */
+/* A function that creates assumptions on the range the input values are in */
+wc_inputvalueassumptions(wc_x):=block([wc_line,wc_assumptions:[]],
+    if not listp(wc_x) then error("wc_inputvalueassumptions: Parameter needs to be a list"),
+    for wc_i in wc_x do
+        (
+            wc_line:wc_mintypmax(rhs(wc_i)),
+            push(lhs(wc_i)<=subst(wc_line,'max),wc_assumptions),
+            push(lhs(wc_i)>=subst(wc_line,'min),wc_assumptions)
+        ),
+    apply('assume,wc_assumptions)
+);
 
-wc_mintypmax2tol(wc_tol,wc_min,wc_typ,wc_max):=
-    ((-2*wc_typ+wc_min+wc_max)*wc_tol^2)/2-((wc_min-wc_max)*wc_tol)/2+wc_typ;
+/* A function that creates assumptions on the range the tol[n] of wc_x are in */
+wc_tolassumptions(wc_x):=block([wc_line,wc_assumptions:[]],
+    for wc_i in %wc_tols(wc_x) do
+        (
+            wc_line:wc_mintypmax(rhs(wc_i)),
+            push(lhs(wc_i)<=1,wc_assumptions),
+            push(lhs(wc_i)>=-1,wc_assumptions)
+        ),
+    apply('assume,wc_assumptions)
+);
+
+/* A function that generates an equation out of the min, typ and maximum value for an element */
+wc_mintypmax2tol(wc_tol,wc_min,wc_typ,wc_max):=block([wc_try],
+    if wc_min>wc_typ then warning("wc_mintypmax2tol: Min value bigger than typ value"),
+    if wc_typ>wc_max then warning("wc_mintypmax2tol: Max value smaller than typ value"),
+    /* Try to find a linear equation that hits all three points */
+    wc_try:wc_typ+(wc_max-wc_typ)*wc_tol,
+    /* Let's see if the quadratic equation hitss the targets */
+    if subst (wc_tol=-1,wc_try) = wc_min then
+        return(wc_try)
+    else
+        return(
+            wc_typ+
+            (wc_tol+abs(wc_tol))/2*(wc_max-wc_typ)+
+            (wc_tol-abs(wc_tol))/2*(wc_typ-wc_min)
+        )
+);
+
+/* How many sigmas the range of tol[x]=-1...1 is assumed to be wide */
+wc_defaultsigma:6;
+/* How many samples per tol we want the EWC method to use by default */
+wc_defaultvaluespertol:3;
+defstruct(wc_rssparams(sigma,mu));
+
+/* Determines the rss parameters of the tolerance of x */
+wc_getrssparams(x):=block([tols:[],derivates_linearized,derivates,sigmaval,meanval],
+    /* Compile a list of tolerances */
+    for i in listofvars(x) do
+        if not(freeof('tol,i)) then
+            push(i,tols),
+    /* Create the mean value */
+    meanval:wc_typicalvalues(x),
+    /* Create a list of derivatives, linearized over the point that all tol[x] are 0.*/
+    derivates:makelist(block([derivate:limit(%wc_typicalvalues(diff(x,i),i),i,0)],
+        if derivate='ind then block([wc_poslimit,wc_neglimit],
+           /* We have two derivates. As we are performing a worst case
+              calculation we make a worst-case assumption and use the bigger
+              one ignoring its sign */
+           wc_poslimit:limit(wc_diffofwctol,wc_tol,0,'plus),
+           wc_neglimit:limit(wc_diffofwctol,wc_tol,0,'minus),
+           derivate:max(abs(wc_poslimit),abs(wc_neglimit)),
+           /* If we can determine which of the limits is bigger we can
+              do without the abs() */
+           if abs(wc_poslimit) > abs(wc_neglimit) then
+              derivate:wc_poslimit,
+           if abs(wc_poslimit) < abs(wc_neglimit) then
+              derivate:wc_neglimit
+           ),
+        derivate),
+        i,tols),
+    derivates_linearized:makelist(taytorat(taylor(i)),i,derivates),
+    /* Compile the RMS value assuming that all input tolerances were 6-sigma ones*/
+    sigmaval:sqrt(lsum(i^2,i,derivates_linearized/wc_defaultsigma)),
+    return(new(wc_rssparams(sigmaval,meanval)))
+);
+
+/* Determines the rss parameters from the distribution of data */
+wc_distrib2rssparams(data):=block([wc_mu,wc_sigma,wc_len],
+    if not listp(data) then error("wc_distrib2rssparams: Input data needs to be a list of sample values"),
+    wc_len:length(data),
+    if wc_len<2 then error("wc_distrib2rssparams: Input data needs to be at least 2 samples long"),
+    wc_mu:lsum(i,i,data)/wc_len,
+    wc_sigma:lsum((i-wc_mu)^2,i,data)/(wc_len-1),
+    return(new(wc_rssparams(wc_sigma,wc_mu)))
+);
+
+/* Generates input data for the tolerance parameters from measurement data */
+wc_distrib2toldata(tol,data,[sigmas]):=block(
+    [wc_rssparams:wc_distrib2rssparams(data),wc_sigmas:wc_defaultsigma],
+    if length(sigmas) > 1 then error("wc_distrib2toldata: More than 3 parameters)"),
+    if length(sigmas) = 1 then 
+    (
+        if not numberp(sigmas[1]) then error("wc_distrib2toldata: sigmas needs to be a number)"),
+        wc_sigmas:sigmas[1]
+    ),
+    wc_rssparams@sigma*wc_sigmas*tol+wc_rssparams@mu
+);
+
+/* Estimate the tolerances of x assuming that all input value tolerances and the
+output tolerances are rss curves. */
+wc_mintypmax_rss(x,sigmas):=float(block([rssparams:wc_getrssparams(x)],
+    [
+        'min=rssparams@mu-sigmas*rssparams@sigma,
+        'typ=rssparams@mu,
+        'max=rssparams@mu+sigmas*rssparams@sigma,
+        Fail=float(1-(erf(sigmas/sqrt(2))))*1e6*"ppm"
+    ]
+));
+
+/* Like wc_mintypmax_rss, but output the tolerances in percent, not in abs values. */
+wc_mintypmax_rss_percent(x,sigmas):=block([rssparams:wc_getrssparams(x)],
+    [
+        'min=((rssparams@mu-sigmas*rssparams@sigma)/rssparams@mu-1)*100*"%",
+        'typ=wc_typicalvalues(x),
+        'max=((rssparams@mu+sigmas*rssparams@sigma)/rssparams@mu-1)*100*"%",
+        Fail=float(1-(erf(sigmas/sqrt(2))))*1e6*"ppm"
+    ]
+);
+
+/* Like wc_mintypmax, but output the tolerances in percent, not in abs values. */
+wc_mintypmax_percent([x]):=block([mintypmax:apply('wc_mintypmax,x)],
+    [
+        'min=(subst(mintypmax,'min)/subst(mintypmax,'typ)-1)*100*"%",
+        'typ=subst(mintypmax,'typ),
+        'max=(subst(mintypmax,'max)/subst(mintypmax,'typ)-1)*100*"%"
+    ]
+);
+
+/* Finding the extreme Worst Case is O(n^2) complete and therefore slow
+for a high number of tol[n]. This function now merges all tol[n] we can
+determine for in which direction they will affect the tolerances,
+starting at the typical case and merge them in order to speed up the
+brute-force step.
+
+defs allows to add things like
+  tol[1]=0 for preventing tol[1] from being merged, or
+  tol[2]=1 for preventing tol[1] from being merged and assuming it to read 1.
+*/
+wc_ewc_simplify(x,[defs]):=block(
+    [
+        wc_tolminus,
+        wc_tolplus,
+        wc_toltyp,
+        /*the tol[n] we merge as many tolerances as we can to */
+        mergedtol:[],
+        /* Is the tol[n] we merge as many tolerances as we can to positive? */
+        wc_mergedtoldirection:1,
+        /* x with defs temporarily substituted into it */
+        x_defs
+    ],
+
+    /* substitute the tol[n] our defs give us values to into x */
+    if  errcatch(
+            x_defs:x,
+            if defs # [] then x_defs:subst(defs,x),
+            'wc_success
+        ) # ['wc_success] then
+            error ("wc_ewc_simplify: parameters 2...n need to be assignments to tol[n]."),
+
+    /* Now let's see we can merge the remaining tol[n] */
+    wc_toltyp:wc_typicalvalues(x_defs),
+
+    for wc_tol in %wc_tols(x_defs) do
+        /* If one step of this loop errors out this means one tolerance isn't merged, but
+           the for loop can still continue. */
+        errcatch(
+            /* Let's see if increasing the current tol[n] increases x_defs*/
+            wc_tolminus:wc_typicalvalues(subst(wc_tol=-1,x_defs)),
+            wc_tolplus :wc_typicalvalues(subst(wc_tol= 1,x_defs)),
+
+            if
+                ((wc_tolplus > wc_toltyp) and (wc_toltyp >= wc_tolminus)) or
+                ((wc_tolplus >= wc_toltyp) and (wc_toltyp > wc_tolminus))
+            then
+            (
+                /* increasing tol[n] increases x_defs */
+                if mergedtol = [] then
+                    (
+                        /* merge this tol[n] with all future ones */
+                        mergedtol:wc_tol,
+                        wc_mergedtoldirection:1
+                    )
+                else
+                (
+                    x_defs:subst(wc_tol=wc_mergedtoldirection*mergedtol,x_defs),
+                    x     :subst(wc_tol=wc_mergedtoldirection*mergedtol,x     )
+                )
+            )
+            else
+            (        
+                /* The above if might have resulted in true or unknown */
+                if
+                    ((wc_tolplus < wc_toltyp) and (wc_toltyp <= wc_tolminus)) or
+                    ((wc_tolplus <= wc_toltyp) and (wc_toltyp < wc_tolminus))
+                then
+                    (
+                        /* increasing wc_tol decreases x_defs */
+                        if mergedtol = [] then
+                            (
+                                /* merge this wc_tol with all future ones */
+                                mergedtol:wc_tol,
+                                wc_mergedtoldirection:-1
+                            )
+                        else
+                                /* merge this wc_tol with the first  one we identified a direction for */
+                        (
+                            x_defs:subst(wc_tol=-wc_mergedtoldirection*mergedtol,x_defs),
+                            x     :subst(wc_tol=-wc_mergedtoldirection*mergedtol,x     )
+                        )
+                    )
+            )
+    ),
+    return(x)
+);
+
+/* Sometimes the secret of engineering is simplifying something, for example by
+approximating it by a taylor series. This is what this function does do */
+wc_toltaylor(x,[maxorder]):=block(
+    [
+        /* The derivate of x to the tol[n] we currently look at */
+        wc_diffofwctol,
+        /* wc_diffofwctol for the current tol being 0 */
+        wc_diffofwctollimit,
+        retval:wc_typicalvalues(x)
+    ],
+    /* Determine the order of the taylor series we want to generate */
+    if maxorder = [] then maxorder:[1],
+    if length(maxorder) > 1 then error("wc_toltaylor: more than 2 arguments!"),
+    maxorder:maxorder[1],
+    if not numberp(maxorder) then error("wc_toltaylor: The 2nd argument must be a number!"),
+    if maxorder<0 then error("wc_toltaylor: The 2nd argument must not be negative!"),
+
+    /* Perform the taylor series for all tolerances */
+    for wc_tol in %wc_tols(x) do
+        for wc_difforder:1 thru maxorder do
+        (
+            /* Let's see if we can get the derivate we need the naive way */
+            wc_diffofwctol:%wc_typicalvalues(diff(x,wc_tol,wc_difforder),wc_tol),
+            wc_diffofwctollimit:limit(wc_diffofwctol,wc_tol,0),
+
+            /* If the derivate is 'ind we have two derivates at tol[n]=0 */
+            if wc_diffofwctollimit='ind then block([wc_poslimit,wc_neglimit],
+               /* We have two derivates. As we are performing a worst case
+                  calculation we make a worst-case assumption and use the bigger
+                  one ignoring its sign */
+               wc_poslimit:limit(wc_diffofwctol,wc_tol,0,'plus),
+               wc_neglimit:limit(wc_diffofwctol,wc_tol,0,'minus),
+               wc_diffofwctollimit:max(abs(wc_poslimit),abs(wc_neglimit)),
+               /* If we can determine which of the limits is bigger we can
+                  do without the abs() */
+               if abs(wc_poslimit) > abs(wc_neglimit) then
+                  wc_diffofwctollimit:wc_poslimit,
+               if abs(wc_poslimit) < abs(wc_neglimit) then
+                  wc_diffofwctollimit:wc_neglimit
+           ),
+           /* Add the taylor term we just learned about to the result */
+           retval:retval+wc_tol^wc_difforder/wc_difforder*wc_typicalvalues(wc_diffofwctollimit)
+        ),
+   return(retval)
+);
+
+
+wc_sensitivities(expr):=block([tols:[],wc_tol,wc_typ:wc_typicalvalues(expr),wc_result:[]],
+    /* Compile a list of tol[n] */
+    for i in listofvars(expr) do
+        if not(freeof('tol,i)) then
+            push(i,tols),
+    /* Compile a matrix that shows the sensitivity of expr to this parameter */
+    for i in tols do
+    (
+        wc_tol:%wc_typicalvalues(expr,i),
+        push([i,subst(i=-1,wc_tol)-wc_typ,subst(i=1,wc_tol)-wc_typ],wc_result)
+    ),
+    return(apply('matrix,wc_result))
+);

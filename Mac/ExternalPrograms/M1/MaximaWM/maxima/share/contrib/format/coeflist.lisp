@@ -56,7 +56,7 @@
 ;;; A variable list consists of a list of variables, simple expressions and specs like
 ;;;   OPERATOR(fcn) or OPERATOR(fcn,...) represents ALL calls to fcn in the expression.
 ;;;   MATCH(fcn,arg..) represents subexpressions of expression which pass FCN(subexpr,args..)
-;;; Instanciating the variable list involves replacing those special cases with those
+;;; Instantiating the variable list involves replacing those special cases with those
 ;;; subexpressions of the relevant expression which pass the test.
 ;;;;******************************************************************************************
 
@@ -346,7 +346,7 @@
 
 (defun untlist (tlist vars)
   (flet ((un1 (list trig)
-	   (flet ((un2 (e)(mul (cadr e)(cons-exp trig (multl (cddr e) vars)))))
+	   (flet ((un2 (e)(mul (cadr e)(ftake* trig (multl (cddr e) vars)))))
 	     (addn (mapcar #'un2 list) t))))
     (addn (mapcar #'un1 tlist '(%sin %cos)) t)))
 
@@ -373,7 +373,7 @@
 			  (if (eq (second r) 'ps)
 			      (mapcar #'(lambda (p)
 					  (list (specdisrep (cons hdr (cdr p)))
-						(cons-exp 'rat (caar p)(cdar p))))
+						(ftake* 'rat (caar p)(cdar p))))
 				      (cddddr r))
 			      (list (list (specdisrep (cons hdr (cdr r))) 0))))))))
       (mlist* (mlist* '$%taylor var order nil)(map-mlist (make1 expr))))))
@@ -483,7 +483,7 @@
 	((eq test t) (values list nil))
 	(t  (let ((pass nil)(fail nil))
 	      (dolist (item list)
-		(if (is-boole-check (mapply test (cddr item) '$partition_test))
+		(if ($is-boole-eval (mapply test (cddr item) '$partition_test))
 		    (push item pass)
 		    (push item fail)))
 	      (values (nreverse pass)(nreverse fail))))))

@@ -1,3 +1,79 @@
+/* Test read_list parsing -- verify expected handling of separator with missing value */
+
+(read_from_string (f, S, sep) :=
+     block ([S1, L],
+            S1: make_string_input_stream (S),
+            L: apply (f, [S1, sep]),
+            close (S1),
+            L),
+ kill (a, b, c, d, e, f, g, h, i));
+done;
+
+(bb:"a,b,c
+d,e,f
+g,h,i",
+ read_from_string (read_list, bb, 'comma));
+[a, b, c,
+ d, e, f,
+ g, h, i];
+
+read_from_string (read_nested_list, bb, 'comma);
+[[a, b, c],
+ [d, e, f],
+ [g, h, i]];
+
+(cc:",a,b,c,
+,d,e,f,
+,g,h,i,",
+ read_from_string (read_list, cc, 'comma));
+[false, a, b, c, false,
+ false, d, e, f, false,
+ false, g, h, i, false];
+
+read_from_string (read_nested_list, cc, 'comma);
+[[false, a, b, c, false],
+ [false, d, e, f, false],
+ [false, g, h, i, false]];
+
+(dd:",a,b,c
+,d,e,f
+,g,h,i",
+ read_from_string (read_list, dd, 'comma));
+[false, a, b, c,
+ false, d, e, f,
+ false, g, h, i];
+
+read_from_string (read_nested_list, dd, 'comma);
+[[false, a, b, c],
+ [false, d, e, f],
+ [false, g, h, i]];
+
+(ee:"a,b,c,
+d,e,f,
+g,h,i,",
+ read_from_string (read_list, ee, 'comma));
+[a, b, c, false,
+ d, e, f, false,
+ g, h, i, false];
+
+read_from_string (read_nested_list, ee, 'comma);
+[[a, b, c, false],
+ [d, e, f, false],
+ [g, h, i, false]];
+
+(ff:"a,,,b,,,c
+d,,,e,,,f
+g,,,h,,,i",
+ read_from_string (read_list, ff, 'comma));
+[a, false, false, b, false, false, c,
+ d, false, false, e, false, false, f,
+ g, false, false, h, false, false, i];
+
+read_from_string (read_nested_list, ff, 'comma);
+[[a, false, false, b, false, false, c],
+ [d, false, false, e, false, false, f],
+ [g, false, false, h, false, false, i]];
+
 /* Test read/write array */
 
 (kill (all),
@@ -78,8 +154,16 @@ true;
  is (m = m3));
 true;
 
+(m3a : read_matrix (file_search ("really-csv.data"), ","),
+ is (m = m3a));
+true;
+
 (m4 : read_matrix (file_search ("really-space-separated.csv"), 'space),
  is (m = m4));
+true;
+
+(m4a : read_matrix (file_search ("really-space-separated.csv"), " "),
+ is (m = m4a));
 true;
 
 (write_data (m2, sconcat (maxima_tempdir, "/tmp-matrix.csv")),
@@ -87,14 +171,24 @@ true;
  is (m2 = m5));
 true;
 
-(write_data (m2, sconcat (maxima_tempdir, "/tmp-matrix.data", 'comma)),
- m6 : read_matrix(sconcat (maxima_tempdir, "/tmp-matrix.data", 'comma)),
+(write_data (m2, sconcat (maxima_tempdir, "/tmp-matrix.data"), 'comma),
+ m6 : read_matrix(sconcat (maxima_tempdir, "/tmp-matrix.data"), 'comma),
  is (m2 = m6));
 true;
 
-(write_data (m2, sconcat (maxima_tempdir, "/tmp-matrix-2.csv", 'space)),
- m7 : read_matrix(sconcat (maxima_tempdir, "/tmp-matrix-2.csv", 'space)),
+(write_data (m2, sconcat (maxima_tempdir, "/tmp-matrix.data"), ","),
+ m6a : read_matrix(sconcat (maxima_tempdir, "/tmp-matrix.data"), ","),
+ is (m2 = m6a));
+true;
+
+(write_data (m2, sconcat (maxima_tempdir, "/tmp-matrix-2.csv"), 'space),
+ m7 : read_matrix(sconcat (maxima_tempdir, "/tmp-matrix-2.csv"), 'space),
  is (m2 = m7));
+true;
+
+(write_data (m2, sconcat (maxima_tempdir, "/tmp-matrix-2.csv"), " "),
+ m7a : read_matrix(sconcat (maxima_tempdir, "/tmp-matrix-2.csv"), " "),
+ is (m2 = m7a));
 true;
 
 (array (a, 10, 6),
@@ -263,11 +357,13 @@ true;
 
 (kill (all),
  l_nested :
-  [[false],
+  [[],
    [false, false],
    [false, false, false],
    [false, false, false, false],
    [Foo],
+   [],
+   [],
    [Foo, false],
    [false, Foo],
    [Foo, false, false],
@@ -278,7 +374,10 @@ true;
    [false, Foo, BAR],
    [Foo, BAR, baz, embedded\ space\ and\ \$p\*cia\!\ c\#\@rs],
    [12.34, Foo, 12375e-3, BAR, 1234b-2, baz, 1234],
-   ["tab	space comma, semicolon; pipe| dollar$", "quux \"blart\"", ?a\-lisp\-symbol]],
+   ["tab	space comma, semicolon; pipe| dollar$", "quux \"blart\"", ?a\-lisp\-symbol],
+   [],
+   [],
+   []],
  0);
 0;
 
@@ -286,13 +385,33 @@ true;
  is (l_nested = l_nested_2));
 true;
 
+(write_data (l_nested_2, sconcat (maxima_tempdir, "/tmp-semicolon.data"), ";"),
+ l_nested_2a : read_nested_list (sconcat (maxima_tempdir, "/tmp-semicolon.data"), ";"),
+ is (l_nested = l_nested_2a));
+true;
+
 (l_nested_3 : read_nested_list (file_search ("pipe.data"), 'pipe),
  is (l_nested = l_nested_3));
 true;
 
-(write_data (l_nested_2, sconcat (maxima_tempdir, "/tmp-tab.data"), 'tab),
- l_nested_4: read_nested_list (sconcat (maxima_tempdir, "/tmp-tab.data"), 'tab),
+(write_data (l_nested_3, sconcat (maxima_tempdir, "/tmp-pipe.data"), "|"),
+ l_nested_3a : read_nested_list (sconcat (maxima_tempdir, "/tmp-pipe.data"), "|"),
+ is (l_nested = l_nested_3a));
+true;
+
+(write_data (l_nested, sconcat (maxima_tempdir, "/tmp-tab.data"), 'tab),
+ /* tab not recognized by read_nested_list, since Maxima parser
+  * (barring hackery to recognize tab characters as tokens)
+  * just burns through multiple tabs.
+  */
+ l_nested_4: read_nested_list (sconcat (maxima_tempdir, "/tmp-tab.data"), 'space),
  is (l_nested = l_nested_4));
+true;
+
+/* ASCII character 9 is the tab character. ascii(9) returns a 1-element string. */
+(write_data (l_nested, sconcat (maxima_tempdir, "/tmp-tab.data"), ascii(9)),
+ l_nested_4a: read_nested_list (sconcat (maxima_tempdir, "/tmp-tab.data"), " "),
+ is (l_nested = l_nested_4a));
 true;
 
 /* Test read/write on streams (instead of files) */
@@ -535,3 +654,73 @@ block ([a, l],
   [is (length (l) = ?length (a)), every (makelist (l[i] = a[i - 1], i, length (l)))]);
 [true, true];
 
+/* verify that empty lines are ignored by
+ * read_matrix, read_list, read_array, and read_hashed_array,
+ * but not read_nested_list.
+ */
+
+(zz: "
+
+11,22,33,44
+55,66,77,88
+
+99,111,222,333
+444,555,666,777
+888,999,1111,2222
+
+
+",
+ aa: [11,22,33,44,
+      55,66,77,88,
+      99,111,222,333,
+      444,555,666,777,
+      888,999,1111,2222],
+ read_from_string (f, S, [a]) :=
+     block ([S1, L],
+            S1: make_string_input_stream (S),
+            L: apply (f, cons (S1, a)),
+            close (S1),
+            L),
+0);
+0;
+
+read_from_string (read_matrix, zz, 'comma);
+matrix ([11,22,33,44],
+        [55,66,77,88],
+        [99,111,222,333],
+        [444,555,666,777],
+        [888,999,1111,2222]);
+
+read_from_string (read_list, zz, 'comma);
+[11,22,33,44,
+ 55,66,77,88,
+ 99,111,222,333,
+ 444,555,666,777,
+ 888,999,1111,2222];
+
+(yy: make_array (fixnum, 5*4),
+ read_from_string (read_array, zz, yy, 'comma),
+ yy);
+''(make_array (fixnum, 5*4), fillarray (%%, aa), %%);
+
+(kill(hh, hh1),
+ read_from_string (read_hashed_array, zz, hh, 'comma),
+ hh1[11]: [22, 33, 44],
+ hh1[55]: [66, 77, 88],
+ hh1[99]: [111, 222, 333],
+ hh1[444]: [555, 666, 777],
+ hh1[888]: [999, 1111, 2222],
+ is (equal (hh, hh1)));
+true;
+
+read_from_string (read_nested_list, zz, 'comma);
+[[],
+ [],
+ [11,22,33,44],
+ [55,66,77,88],
+ [],
+ [99,111,222,333],
+ [444,555,666,777],
+ [888,999,1111,2222],
+ [],
+ []];

@@ -42,7 +42,7 @@ is (sum+1/10^50=1.0L0) ;  should be true
 ;; Reduce the number of decimal digits in a decimal bigfloat B
 ;; to the number specified
 
-(defun $decimalfptrim(B)		; B is a bigfloat
+(defmfun $decimalfptrim(B)		; B is a bigfloat
   (if (decimalfpp B)
       (cons (car B)(decimalfptrim (cdr B) t))  ;;trim excess digits
     ($bfloat B))) ;; if its binary, $bfloat should trim it
@@ -156,7 +156,7 @@ is (sum+1/10^50=1.0L0) ;  should be true
 ;; exponent marker |b|. The number of significant digits is controlled
 ;; by $fpprintprec.
 
-;; uses L marker instead of b.   123b0 prints 1.23L2
+;; uses L marker instead of b.   123L0 prints 1.23L2
 
 (defun decfpformat (l) 
   (if (decimalfpp l)
@@ -206,6 +206,7 @@ is (sum+1/10^50=1.0L0) ;  should be true
 
 ;; overwrite this one, too
 (defun bigfloat2rat (x)
+  #+gcl(declare (notinline write-char))
   (if (decimalfpp x) (let ((k (* (cadr x)(expt 10 (caddr x)))))
 		       (list '(rat) (numerator k)(denominator k)))
     (let ()
@@ -267,14 +268,24 @@ is (sum+1/10^50=1.0L0) ;  should be true
 	  (scale-float mantissa e))))
     ))
 
+(defvar *decbfloat-header* nil
+  "Current header ('BIGFLOAT 'SIMP $FPPREC 'DECIMAL) for new decimal bigfloats")
+
+(defvar *decbfloat-header-prec* nil
+  "Precision of current bigfloat header")
+
 (defun decbcons (s)
-  `((bigfloat simp ,$fpprec decimal) . ,(decimalfptrim s)))
+  (unless (eql $fpprec *decbfloat-header-prec*)
+    ;; Precision was changed, make a new header.
+    (setq *decbfloat-header* `(bigfloat simp ,$fpprec decimal)
+          *decbfloat-header-prec* $fpprec))
+  (cons *decbfloat-header* (decimalfptrim s)))
 
 ;; probably not useful.  We only allow new decimal bigfloats
 ;; if they are typed in as 1.2L0 etc  Or maybe if they are integers??
 
 
-(defun $bfloat (x) ;; used by too many other programs. need to replace it here
+(defmfun $bfloat (x) ;; used by too many other programs. need to replace it here
   (cond 
    ((bigfloatp x))	   ; return x, possibly changed precision
    ((numberp x)		   ;; favors decimal conversion for CL numbers
@@ -300,11 +311,11 @@ is (sum+1/10^50=1.0L0) ;  should be true
    ;; here we return to the previous program
    (t  ($binarybfloat x))))
 
-(defun $decbfloat (x)
+(defmfun $decbfloat (x)
   (cond 
    ((decimalfpp x) 
     (if (null $rounddecimalfloats) x	; just return it
-      (decbcons (decimalfptrim (cdr x))))); possibly chop/round it
+      (decbcons (cdr x)))); possibly chop/round it
    
    
    ((numberp x)  ;; favors decimal conversion for CL numbers
@@ -324,9 +335,9 @@ is (sum+1/10^50=1.0L0) ;  should be true
 (defun decfppower (ba e)  ;ba^e,  e is nonneg int
   (let ((ans '(1 0))
 	(b (cdr ba)))
-    (dotimes (i e (decbcons (decimalfptrim ans))) (setf ans (decfptimes ans b)))))
+    (dotimes (i e (decbcons ans)) (setf ans (decfptimes ans b)))))
 
-(defun $binarybfloat (x &aux (y nil))
+(defmfun $binarybfloat (x &aux (y nil))
     (cond ((setf y (bigfloatp x)) y )
 	  ((or (numberp x)
 	       (member x '($%e $%pi $%gamma) :test #'eq))
@@ -340,7 +351,10 @@ is (sum+1/10^50=1.0L0) ;  should be true
 	  ((eq (caar x) 'mexpt)
 	   (if (equal (cadr x) '$%e)
 	       (*fpexp (decfp2binfp (caddr x))) ;; exp(x)
-	       (exptbigfloat (decfp2binfp (cadr x)) (decfp2binfp(caddr x)))))
+	       (exptbigfloat (decfp2binfp (cadr x))
+			     (caddr x)
+			     ;;(decfp2binfp(caddr x))
+			     )))
 	  ((eq (caar x) 'mncexpt)
 	   (list '(mncexpt) ($binarybfloat (cadr x)) (caddr x)))
 	  ((eq (caar x) 'rat)
@@ -364,6 +378,8 @@ is (sum+1/10^50=1.0L0) ;  should be true
 		     (t ($binarybfloat (exponentialize (caar x) y))))
 	       (subst0 (list (ncons (caar x)) y) x)))
 	  (t (recur-apply #'$binarybfloat x)))) ;;
+
+(defun bigfloat-prec(z)(third(car z))) ;; assume ((bigfloat simp #)..) or (bigfloat simp # decimal) ...)
 
 ;; works for sin cos atan tan log ... and everything else not explicitly redefined
 
@@ -399,11 +415,10 @@ is (sum+1/10^50=1.0L0) ;  should be true
 	  (setf (get j 'floatprog) (compile nil program))))))
 
 (eval-when
-    #+gcl (load eval)
-    #-gcl (:load-toplevel :execute)
-     (do-symbols (j :maxima 'decimal-floats-installed) 
-       (unless (member j '(mabs mplus mtimes rat) :test 'eq)
-		       (make-decimalfp-prog j))))
+    (:load-toplevel :execute)
+  (do-symbols (j :maxima 'decimal-floats-installed)
+    (unless (member j '(mabs mplus mtimes rat) :test 'eq)
+      (make-decimalfp-prog j))))
 
 ;; exceptions to the uniform treatment above...
 
@@ -600,16 +615,43 @@ is (sum+1/10^50=1.0L0) ;  should be true
 				   (cdr a)))))
 
 ;;; taken out of nparse.lisp.
+
+#|   there is something broken in GCL Maxima.  123L0 says "incorrect syntax"
+This doesn't fix it.
+(defun scan-number-exponent (data)
+  (push (ncons (if (or (char= (parse-tyipeek) #\+)
+		       (char= (parse-tyipeek) #\-))
+		   (parse-tyi)
+		   #\+))
+	data)
+  (scan-digits data () () t))
+(defun scan-number-after-dot (data)
+  (scan-digits data '(#\E #\e #\F #\f #\B #\b #\D #\d #\S #\s 
+		      ;;#\L #\l 
+		      #+cmu #\W #+cmu #\w) #'scan-number-exponent))
+
+ (defun scan-number-before-dot (data)
+  (scan-digits data '(#\. #\E #\e #\F #\f #\B #\b #\D #\d #\S #\s 
+		      #\L #\l 
+		      #+cmu #\W #+cmu #\w)
+	       #'scan-number-rest))
+|#
 (defun make-number (data)
   (setq data (nreverse data))
   ;; Maxima really wants to read in any number as a flonum
   ;; (except when we have a bigfloat, of course!).  So convert exponent
   ;; markers to the flonum-exponent-marker.
   (let ((marker (car (nth 3 data))))
-    (unless (eql marker flonum-exponent-marker)
-      (when (member marker '(#\E #\F #\S #\D  #+cmu #\W))
-        (setf (nth 3 data) (list flonum-exponent-marker)))))
-  (cond  ((equal (nth 3 data) '(#\B))
+    (unless (eql marker +flonum-exponent-marker+)
+      (when
+	  #+ignore
+	(member marker '(#\E #\F #\S #\D #\L  #\l  #+cmu #\W)) ; breaks decimal fp
+	(member marker '(#\E #\F #\S #\D  #+cmu #\W))
+        (setf (nth 3 data) (list +flonum-exponent-marker+)))))
+  
+  (cond 
+
+    ((equal (nth 3 data) '(#\B))
 	 ;; (format t "~% exponent B data=~s~%" data)
 	  (let*
 	      ((*read-base* 10.)
@@ -678,7 +720,7 @@ is (sum+1/10^50=1.0L0) ;  should be true
 
 ;; from maxmin.lisp
 
-(defun $rationalize (e)
+(defmfun $rationalize (e)
 
   (setq e (ratdisrep e))
   (cond ((floatp e) 
@@ -692,7 +734,12 @@ is (sum+1/10^50=1.0L0) ;  should be true
 	 ((decimalfpp e) (cl-rat-to-maxima (* (cadr e)(expt 10 (caddr e)))))
 	
 	(($mapatom e) e)
-	(t (simplify (cons (list (mop e)) (mapcar #'$rationalize (margs e)))))))
+	(($subvarp (mop e)) ;subscripted function
+		     (subfunmake 
+		      (subfunname e) 
+			  (mapcar #'$rationalize (subfunsubs e)) 
+			  (mapcar #'$rationalize (subfunargs e))))
+	(t (recur-apply #'$rationalize e))))
 
 ;; from trigi
 
@@ -722,25 +769,23 @@ rationalize(1.0L-1)-1/10		; ; should be zero
 |#
 
 (eval-when
-    #+gcl (load eval)
-    #-gcl (:load-toplevel :execute)
-     (fpprec1 nil $fpprec)		; Set up user's precision
-     )
+    (:load-toplevel :execute)
+  (fpprec1 nil $fpprec))		; Set up user's precision
 
 ;; these 3 functions below are not needed .. see advise-fun-simp
 ;; for the workaround.
 #+ignore
-(defun $decfloor(f)  
+(defmfun $decfloor(f)  
   (if (decimalfpp f) (floor (* (cadr f)(expt 10 (caddr f))))
     (mfuncall '$floor f)))
 
 #+ignore
-(defun $decceiling(f)
+(defmfun $decceiling(f)
   (if (decimalfpp f)(ceiling (* (cadr f)(expt 10 (caddr f))))
     (mfuncall '$ceiling f)))
 
 #+ignore
-(defun $dectruncate(f)
+(defmfun $dectruncate(f)
   (if (decimalfpp f)(truncate (* (cadr f)(expt 10 (caddr f))))
     (mfuncall '$truncate f)))
 
@@ -760,13 +805,13 @@ rationalize(1.0L-1)-1/10		; ; should be zero
 
 (defvar *oldremainder (symbol-function '$remainder))
 
-(defun $remainder (x y)  ;; convert to rational?  remainder is always 0 in Rational Field
+(defmfun $remainder (x y)  ;; convert to rational?  remainder is always 0 in Rational Field
   (if (decimalfpp x)(setf x (bigfloat2rat x)))
   (if (decimalfpp y)(setf y (bigfloat2rat y)))
 ;  (format t "~% x=~s y=~s" x y) test
   (funcall *oldremainder x y))
       
-(defun $decimalfpp(x)(if (decimalfpp x) t nil))      
+(defmfun $decimalfpp(x)(if (decimalfpp x) t nil))      
       
 
 

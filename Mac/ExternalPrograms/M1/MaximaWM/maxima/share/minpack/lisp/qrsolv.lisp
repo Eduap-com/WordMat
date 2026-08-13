@@ -234,7 +234,7 @@
                          (* cos qtbpj)))
                 (setf (f2cl-lib:fref wa-%data% (k) ((1 n)) wa-%offset%) temp)
                 '""
-                '"           accumulate the tranformation in the row of s."
+                '"           accumulate the transformation in the row of s."
                 '""
                 (setf kp1 (f2cl-lib:int-add k 1))
                 (if (< n kp1) (go label70))
@@ -349,7 +349,7 @@
        end_label
         (return (values nil nil nil nil nil nil nil nil nil))))))
 
-(in-package #-gcl #:cl-user #+gcl "CL-USER")
+(in-package #:cl-user)
 #+#.(cl:if (cl:find-package '#:f2cl) '(and) '(or))
 (eval-when (:load-toplevel :compile-toplevel :execute)
   (setf (gethash 'fortran-to-lisp::qrsolv

@@ -22,7 +22,7 @@
 (defmvar $bernstein_explicit nil)
 
 ;; numerical (complex rational, float, or big float) evaluation of bernstein polynomials
-(in-package #-gcl #:bigfloat #+gcl "BIGFLOAT")
+(in-package #:bigfloat)
 
 (defun bernstein-poly (k n x)
   (* (to (maxima::opcons 'maxima::%binomial n k)) (expt x k) (expt (- 1 x) (- n k))))
@@ -51,14 +51,14 @@
    (mul 
     (opcons '%binomial n k)
     (opcons 'mexpt x (add 1 k))
-    (opcons '$hypergeometric 
+    (opcons '%hypergeometric 
 	    (opcons 'mlist (add 1 k) (sub k n))
 	    (opcons 'mlist (add 2 k))
 	    x))
    (add 1 k)))
 	  
-(putprop '%bernstein_poly `((k n x) nil nil ,#'bernstein-integral) 'integral)
-(putprop '$bernstein_poly `((k n x) nil nil ,#'bernstein-integral) 'integral)
+(putprop '%bernstein_poly `((k n x) nil nil ,'bernstein-integral) 'integral)
+(putprop '$bernstein_poly `((k n x) nil nil ,'bernstein-integral) 'integral)
 
 (defun bernstein-poly-simp (e y z)
   (declare (ignore y))
@@ -81,7 +81,7 @@
 
 	  (t (list (list fn 'simp) k n x)))))
 	    
-(setf (get '%bernstein_poly 'operators) #'bernstein-poly-simp)
+(setf (get '%bernstein_poly 'operators) 'bernstein-poly-simp)
 
 (defprop %bernstein_poly
   ((k n x)
@@ -159,5 +159,5 @@
 
     (muln (mapcar #'(lambda (a b z) (opcons '%bernstein_poly a b z)) (margs k) (margs n) (margs x)) t)))
 
-(setf (get '%multibernstein_poly 'operators) #'multi-bernstein-poly-simp)
+(setf (get '%multibernstein_poly 'operators) 'multi-bernstein-poly-simp)
       
