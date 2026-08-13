@@ -1,0 +1,13 @@
+#
+# Auto-generation of appropriate axis tick marks is tricky for
+# for combination of axis range and log scaling.
+#
+set title "Auto-generation of appropriate logscale axis tics"
+set key left reverse
+set tics nomirror
+set grid
+set auto
+set log xy
+plot [1.5 : 99] x**5 title "f(x) = x^5"
+pause -1
+reset

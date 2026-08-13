@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package operatingsystem (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Package operatingsystem (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Package operatingsystem (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-opsubst.html#Package-opsubst" rel="next" title="Package opsubst">
+<link href="Package-odepack.html#Package-odepack" rel="prev" title="Package odepack">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Package-operatingsystem">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-opsubst.html#Package-opsubst" accesskey="n" rel="next">Package opsubst</a>, Previous: <a href="Package-odepack.html#Package-odepack" accesskey="p" rel="prev">Package odepack</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-operatingsystem-1"><span>83 Package operatingsystem<a class="copiable-link" href="#Package-operatingsystem-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-operatingsystem_002fnode_002fIntroduction-to-operatingsystem"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-operatingsystem" accesskey="1">Introduction to operatingsystem</a></li>
+<li><a href="#Directory-operations" accesskey="2">Directory operations</a></li>
+<li><a href="#File-operations" accesskey="3">File operations</a></li>
+<li><a href="#Environment-operations" accesskey="4">Environment operations</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-operatingsystem">
+<div class="nav-panel">
+<p>
+Next: <a href="#Directory-operations" accesskey="n" rel="next">Directory operations</a>, Previous: <a href="#Package-operatingsystem" accesskey="p" rel="prev">Package operatingsystem</a>, Up: <a href="#Package-operatingsystem" accesskey="u" rel="up">Package operatingsystem</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-operatingsystem-1"><span>83.1 Introduction to operatingsystem<a class="copiable-link" href="#Introduction-to-operatingsystem-1"> &para;</a></span></h3>
+
+<p>Package <code class="code">operatingsystem</code> contains functions for operatingsystem-tasks, like file system operations.
+</p>
+
+<a class="anchor" id="Item_003a-operatingsystem_002fnode_002fDirectory-operations"></a><hr>
+</div>
+<div class="section-level-extent" id="Directory-operations">
+<div class="nav-panel">
+<p>
+Next: <a href="#File-operations" accesskey="n" rel="next">File operations</a>, Previous: <a href="#Introduction-to-operatingsystem" accesskey="p" rel="prev">Introduction to operatingsystem</a>, Up: <a href="#Package-operatingsystem" accesskey="u" rel="up">Package operatingsystem</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Directory-operations-1"><span>83.2 Directory operations<a class="copiable-link" href="#Directory-operations-1"> &para;</a></span></h3>
+
+
+<a class="anchor" id="chdir"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fchdir"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-chdir"><span class="category-def">Function: </span><span><strong class="def-name">chdir</strong> <var class="def-var-arguments">(<var class="var">dir</var>)</var><a class="copiable-link" href="#index-chdir"> &para;</a></span></dt>
+<dd><p>Change to directory <var class="var">dir</var>
+</p></dd></dl>
+
+<a class="anchor" id="mkdir"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fmkdir"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-mkdir"><span class="category-def">Function: </span><span><strong class="def-name">mkdir</strong> <var class="def-var-arguments">(<var class="var">dir</var>)</var><a class="copiable-link" href="#index-mkdir"> &para;</a></span></dt>
+<dd><p>Create directory <var class="var">dir</var>
+</p></dd></dl>
+
+<a class="anchor" id="rmdir"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002frmdir"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-rmdir"><span class="category-def">Function: </span><span><strong class="def-name">rmdir</strong> <var class="def-var-arguments">(<var class="var">dir</var>)</var><a class="copiable-link" href="#index-rmdir"> &para;</a></span></dt>
+<dd><p>remove directory <var class="var">dir</var>
+</p></dd></dl>
+
+<a class="anchor" id="getcurrentdirectory"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fgetcurrentdirectory"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-getcurrentdirectory"><span class="category-def">Function: </span><span><strong class="def-name">getcurrentdirectory</strong> <var class="def-var-arguments">()</var><a class="copiable-link" href="#index-getcurrentdirectory"> &para;</a></span></dt>
+<dd><p>returns the current working directory.
+</p>
+<p>See also <code class="code"><a class="ref" href="File-Input-and-Output.html#directory">directory</a></code>.
+</p>
+</dd></dl>
+
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;operatingsystem&quot;)$
+(%i2) mkdir(&quot;testdirectory&quot;)$
+(%i3) chdir(&quot;testdirectory&quot;)$
+(%i4) chdir(&quot;..&quot;)$
+(%i5) rmdir(&quot;testdirectory&quot;)$
+</pre></div>
+
+<a class="anchor" id="Item_003a-operatingsystem_002fnode_002fFile-operations"></a><hr>
+</div>
+<div class="section-level-extent" id="File-operations">
+<div class="nav-panel">
+<p>
+Next: <a href="#Environment-operations" accesskey="n" rel="next">Environment operations</a>, Previous: <a href="#Directory-operations" accesskey="p" rel="prev">Directory operations</a>, Up: <a href="#Package-operatingsystem" accesskey="u" rel="up">Package operatingsystem</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="File-operations-1"><span>83.3 File operations<a class="copiable-link" href="#File-operations-1"> &para;</a></span></h3>
+
+
+<a class="anchor" id="copy_005ffile"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fcopy_005ffile"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-copy_005ffile"><span class="category-def">Function: </span><span><strong class="def-name">copy_file</strong> <var class="def-var-arguments">(<var class="var">file1</var>, <var class="var">file2</var>)</var><a class="copiable-link" href="#index-copy_005ffile"> &para;</a></span></dt>
+<dd><p>copies file <var class="var">file1</var> to <var class="var">file2</var>
+</p></dd></dl>
+
+<a class="anchor" id="rename_005ffile"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002frename_005ffile"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-rename_005ffile"><span class="category-def">Function: </span><span><strong class="def-name">rename_file</strong> <var class="def-var-arguments">(<var class="var">file1</var>, <var class="var">file2</var>)</var><a class="copiable-link" href="#index-rename_005ffile"> &para;</a></span></dt>
+<dd><p>renames file <var class="var">file1</var> to <var class="var">file2</var>
+</p></dd></dl>
+
+<a class="anchor" id="delete_005ffile"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fdelete_005ffile"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-delete_005ffile"><span class="category-def">Function: </span><span><strong class="def-name">delete_file</strong> <var class="def-var-arguments">(<var class="var">file1</var>)</var><a class="copiable-link" href="#index-delete_005ffile"> &para;</a></span></dt>
+<dd><p>deletes file <var class="var">file1</var>
+</p></dd></dl>
+
+
+<a class="anchor" id="Item_003a-operatingsystem_002fnode_002fEnvironment-operations"></a><hr>
+</div>
+<div class="section-level-extent" id="Environment-operations">
+<div class="nav-panel">
+<p>
+Previous: <a href="#File-operations" accesskey="p" rel="prev">File operations</a>, Up: <a href="#Package-operatingsystem" accesskey="u" rel="up">Package operatingsystem</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Environment-operations-1"><span>83.4 Environment operations<a class="copiable-link" href="#Environment-operations-1"> &para;</a></span></h3>
+
+
+<a class="anchor" id="getenv"></a><a class="anchor" id="Item_003a-operatingsystem_002fdeffn_002fgetenv"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-getenv"><span class="category-def">Function: </span><span><strong class="def-name">getenv</strong> <var class="def-var-arguments">(<var class="var">env</var>)</var><a class="copiable-link" href="#index-getenv"> &para;</a></span></dt>
+<dd><p>Get the value of the environment variable <var class="var">env</var>
+</p>
+<p>Example:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;operatingsystem&quot;)$
+(%i2) getenv(&quot;PATH&quot;);
+(%o2) /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+</pre></div>
+
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-opsubst.html#Package-opsubst" accesskey="n" rel="next">Package opsubst</a>, Previous: <a href="Package-odepack.html#Package-odepack" accesskey="p" rel="prev">Package odepack</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

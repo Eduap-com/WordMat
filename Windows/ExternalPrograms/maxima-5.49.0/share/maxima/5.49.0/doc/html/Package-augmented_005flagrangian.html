@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package augmented_lagrangian (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Package augmented_lagrangian (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Package augmented_lagrangian (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-bernstein.html#Package-bernstein" rel="next" title="Package bernstein">
+<link href="Package-atensor.html#Package-atensor" rel="prev" title="Package atensor">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Package-augmented_005flagrangian">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-bernstein.html#Package-bernstein" accesskey="n" rel="next">Package bernstein</a>, Previous: <a href="Package-atensor.html#Package-atensor" accesskey="p" rel="prev">Package atensor</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-augmented_005flagrangian-1"><span>40 Package augmented_lagrangian<a class="copiable-link" href="#Package-augmented_005flagrangian-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-augmented_005flagrangian_002fnode_002fFunctions-and-Variables-for-augmented_005flagrangian"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-augmented_005flagrangian" accesskey="1">Functions and Variables for augmented_lagrangian</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-augmented_005flagrangian">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Package-augmented_005flagrangian" accesskey="p" rel="prev">Package augmented_lagrangian</a>, Up: <a href="#Package-augmented_005flagrangian" accesskey="u" rel="up">Package augmented_lagrangian</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-augmented_005flagrangian-1"><span>40.1 Functions and Variables for augmented_lagrangian<a class="copiable-link" href="#Functions-and-Variables-for-augmented_005flagrangian-1"> &para;</a></span></h3>
+
+<a class="anchor" id="augmented_005flagrangian_005fmethod"></a><a class="anchor" id="Item_003a-augmented_005flagrangian_002fdeffn_002faugmented_005flagrangian_005fmethod"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-augmented_005flagrangian_005fmethod"><span class="category-def">Function: </span><span><strong class="def-name">augmented_lagrangian_method</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">augmented_lagrangian_method</b> (<var class="var">FOM</var>, <var class="var">xx</var>, <var class="var">C</var>, <var class="var">yy</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">augmented_lagrangian_method</b> (<var class="var">FOM</var>, <var class="var">xx</var>, <var class="var">C</var>, <var class="var">yy</var>, optional_args) <br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">augmented_lagrangian_method</b> ([<var class="var">FOM</var>, <var class="var">grad</var>], <var class="var">xx</var>, <var class="var">C</var>, <var class="var">yy</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">augmented_lagrangian_method</b> ([<var class="var">FOM</var>, <var class="var">grad</var>], <var class="var">xx</var>, <var class="var">C</var>, <var class="var">yy</var>, optional_args)</var><a class="copiable-link" href="#index-augmented_005flagrangian_005fmethod"> &para;</a></span></dt>
+<dd>
+<p>Returns an approximate minimum of the expression <var class="var">FOM</var>
+with respect to the variables <var class="var">xx</var>,
+holding the constraints <var class="var">C</var> equal to zero.
+<var class="var">yy</var> is a list of initial guesses for <var class="var">xx</var>.
+The method employed is the augmented Lagrangian method (see Refs [1] and [2]).
+</p>
+<p><var class="var">grad</var>, if present, is the gradient of <var class="var">FOM</var> with respect to <var class="var">xx</var>,
+represented as a list of expressions,
+one for each variable in <var class="var">xx</var>.
+If not present, the gradient is constructed automatically.
+</p>
+<p><var class="var">FOM</var> and each element of <var class="var">grad</var>, if present,
+must be ordinary expressions, not names of functions or lambda expressions.
+</p>
+<p><code class="code">optional_args</code> represents additional arguments,
+specified as <code class="code"><var class="var">symbol</var> = <var class="var">value</var></code>.
+The optional arguments recognized are:
+</p>
+<dl class="table">
+<dt><code class="code">niter</code></dt>
+<dd><p>Number of iterations of the augmented Lagrangian algorithm
+</p></dd>
+<dt><code class="code">lbfgs_tolerance</code></dt>
+<dd><p>Tolerance supplied to LBFGS
+</p></dd>
+<dt><code class="code">iprint</code></dt>
+<dd><p>IPRINT parameter (a list of two integers which controls verbosity) supplied to LBFGS
+</p></dd>
+<dt><code class="code">%lambda</code></dt>
+<dd><p>Initial value of <code class="code">%lambda</code> to be used for calculating the augmented Lagrangian
+</p></dd>
+</dl>
+
+<p>This implementation minimizes the augmented Lagrangian by
+applying the limited-memory BFGS (LBFGS) algorithm,
+which is a quasi-Newton algorithm.
+</p>
+<p><code class="code">load(&quot;augmented_lagrangian&quot;)</code> loads this function.
+</p>
+<p>See also <a class="ref" href="Package-lbfgs.html#Package-lbfgs">Package lbfgs</a>
+</p>
+<p>References:
+</p>
+<p>[1] <a class="url" href="http://www-fp.mcs.anl.gov/otc/Guide/OptWeb/continuous/constrained/nonlinearcon/auglag.html">http://www-fp.mcs.anl.gov/otc/Guide/OptWeb/continuous/constrained/nonlinearcon/auglag.html</a>
+</p>
+<p>[2] <a class="url" href="http://www.cs.ubc.ca/spider/ascher/542/chap10.pdf">http://www.cs.ubc.ca/spider/ascher/542/chap10.pdf</a>
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) load (&quot;lbfgs&quot;);
+(%o1)  /home/gunter/src/maxima-code/share/lbfgs/lbfgs.mac
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) load (&quot;augmented_lagrangian&quot;);
+(%o2) /home/gunter/src/maxima-code/share/contrib/augmented_lagra\
+ngian.mac
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) FOM: x^2 + 2*y^2;
+                               2    2
+(%o3)                       2 y  + x
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) xx: [x, y];
+(%o4)                        [x, y]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) C: [x + y - 1];
+(%o5)                      [y + x - 1]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) yy: [1, 1];
+(%o6)                        [1, 1]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) augmented_lagrangian_method(FOM, xx, C, yy, iprint=[-1,0]);
+(%o7) [[x = 0.666659841080023, y = 0.333340272455448], 
+                                 %lambda = [- 1.333337940892518]]
+</pre></div></div>
+
+<p>Same example as before, but this time the gradient is supplied as an argument.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load (&quot;lbfgs&quot;)$
+(%i2) load (&quot;augmented_lagrangian&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i3) FOM: x^2 + 2*y^2;
+                               2    2
+(%o3)                       2 y  + x
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) xx: [x, y];
+(%o4)                        [x, y]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) grad : [2*x, 4*y];
+(%o5)                      [2 x, 4 y]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) C: [x + y - 1];
+(%o6)                      [y + x - 1]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) yy: [1, 1];
+(%o7)                        [1, 1]
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) augmented_lagrangian_method ([FOM, grad], xx, C, yy,
+                             iprint = [-1, 0]);
+(%o8) [[x = 0.6666598410800247, y = 0.3333402724554464], 
+                                 %lambda = [- 1.333337940892525]]
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Optimization">Optimization</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-augmented_005flagrangian">Package augmented_lagrangian</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-bernstein.html#Package-bernstein" accesskey="n" rel="next">Package bernstein</a>, Previous: <a href="Package-atensor.html#Package-atensor" accesskey="p" rel="prev">Package atensor</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

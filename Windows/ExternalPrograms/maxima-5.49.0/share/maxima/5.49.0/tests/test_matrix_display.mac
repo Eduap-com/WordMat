@@ -1,0 +1,170 @@
+/* test_matrix_display.mac
+ * copyright 2025 by Robert Dodier
+ * I release this work under terms of the GNU General Public License, version 2.
+ *
+ * Tell Maxima to process this file with batch or load;
+ * e.g.: maxima --batch test_matrix_display.mac
+ * or: maxima --preload test_matrix_display.mac
+ * Optionally see the various matrix expressions again
+ * via ''values; afterwards.
+ */
+
+hh(m,n):=genmatrix(lambda([i,j],1/(i+j-1)),m,n);
+foo(n):= flatten ([ makelist ([ hh(k,n), hh(n,k) ], k, 1, n - 1), hh(n,n) ]);
+
+distribute_over: false;
+
+foo1: foo(1);
+foo2: foo(2);
+foo3: foo(3);
+foo4: foo(4);
+foo5: foo(5);
+
+abs_foo1: map (abs, foo1);
+abs_foo2: map (abs, foo2);
+abs_foo3: map (abs, foo3);
+abs_foo4: map (abs, foo4);
+abs_foo5: map (abs, foo5);
+
+det_foo1: map (nounify (determinant), foo1);
+det_foo2: map (nounify (determinant), foo2);
+det_foo3: map (nounify (determinant), foo3);
+det_foo4: map (nounify (determinant), foo4);
+det_foo5: map (nounify (determinant), foo5);
+
+recip_abs_foo1: map (lambda ([x], x/(1 + abs(x))), foo1);
+recip_abs_foo2: map (lambda ([x], x/(1 + abs(x))), foo2);
+recip_abs_foo3: map (lambda ([x], x/(1 + abs(x))), foo3);
+recip_abs_foo4: map (lambda ([x], x/(1 + abs(x))), foo4);
+recip_abs_foo5: map (lambda ([x], x/(1 + abs(x))), foo5);
+
+box_foo1: map (box, foo1);
+box_foo2: map (box, foo2);
+box_foo3: map (box, foo3);
+box_foo4: map (box, foo4);
+box_foo5: map (box, foo5);
+
+recip_box_abs_foo1: map (lambda ([x], x/(1 + box (abs(x)))), foo1);
+recip_box_abs_foo2: map (lambda ([x], x/(1 + box (abs(x)))), foo2);
+recip_box_abs_foo3: map (lambda ([x], x/(1 + box (abs(x)))), foo3);
+recip_box_abs_foo4: map (lambda ([x], x/(1 + box (abs(x)))), foo4);
+recip_box_abs_foo5: map (lambda ([x], x/(1 + box (abs(x)))), foo5);
+
+recip_abs_box_foo1: map (lambda ([x], x/(1 + abs (box(x)))), foo1);
+recip_abs_box_foo2: map (lambda ([x], x/(1 + abs (box(x)))), foo2);
+recip_abs_box_foo3: map (lambda ([x], x/(1 + abs (box(x)))), foo3);
+recip_abs_box_foo4: map (lambda ([x], x/(1 + abs (box(x)))), foo4);
+recip_abs_box_foo5: map (lambda ([x], x/(1 + abs (box(x)))), foo5);
+
+display_matrix_brackets: false;
+display_box_double_lines: false;
+
+foo1;
+foo2;
+foo3;
+foo4;
+foo5;
+
+abs_foo1;
+abs_foo2;
+abs_foo3;
+abs_foo4;
+abs_foo5;
+
+det_foo1;
+det_foo2;
+det_foo3;
+det_foo4;
+det_foo5;
+
+recip_abs_foo1;
+recip_abs_foo2;
+recip_abs_foo3;
+recip_abs_foo4;
+recip_abs_foo5;
+
+box_foo1;
+box_foo2;
+box_foo3;
+box_foo4;
+box_foo5;
+
+recip_box_abs_foo1;
+recip_box_abs_foo2;
+recip_box_abs_foo3;
+recip_box_abs_foo4;
+recip_box_abs_foo5;
+
+recip_abs_box_foo1;
+recip_abs_box_foo2;
+recip_abs_box_foo3;
+recip_abs_box_foo4;
+recip_abs_box_foo5;
+
+print (foo1) $
+print (foo2) $
+print (foo3) $
+print (foo4) $
+print (foo5) $
+
+print (abs_foo1) $
+print (abs_foo2) $
+print (abs_foo3) $
+print (abs_foo4) $
+print (abs_foo5) $
+
+print (det_foo1) $
+print (det_foo2) $
+print (det_foo3) $
+print (det_foo4) $
+print (det_foo5) $
+
+print (recip_abs_foo1) $
+print (recip_abs_foo2) $
+print (recip_abs_foo3) $
+print (recip_abs_foo4) $
+print (recip_abs_foo5) $
+
+print (box_foo1) $
+print (box_foo2) $
+print (box_foo3) $
+print (box_foo4) $
+print (box_foo5) $
+
+print (recip_box_abs_foo1) $
+print (recip_box_abs_foo2) $
+print (recip_box_abs_foo3) $
+print (recip_box_abs_foo4) $
+print (recip_box_abs_foo5) $
+
+print (recip_abs_box_foo1) $
+print (recip_abs_box_foo2) $
+print (recip_abs_box_foo3) $
+print (recip_abs_box_foo4) $
+print (recip_abs_box_foo5) $
+
+reset ();
+
+display_matrix_padding_vertical: false;
+
+blurf: print (box (genmatrix (lambda ([i, j], x^i/sum (y[k], k, 1, j)), 8, 5)));
+
+block ([display_matrix_brackets: true], print (recip_abs_box_foo5), print (blurf));
+block ([display_matrix_brackets: false], print (recip_abs_box_foo5), print (blurf));
+
+reset ();
+
+display_matrix_padding_horizontal: false;
+
+block ([display_matrix_brackets: true], print (recip_abs_box_foo5), print (blurf));
+block ([display_matrix_brackets: false], print (recip_abs_box_foo5), print (blurf));
+
+reset ();
+
+display_matrix_padding_horizontal: false;
+display_matrix_padding_vertical: false;
+
+block ([display_matrix_brackets: true], print (recip_abs_box_foo5), print (blurf));
+block ([display_matrix_brackets: false], print (recip_abs_box_foo5), print (blurf));
+
+reset ();

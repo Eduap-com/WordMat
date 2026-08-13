@@ -340,8 +340,8 @@ Function ConvertMaximaUnits(Expr As String, Optional basedim As Boolean = True) 
         If MaximaDecOutType = 3 Then
             k = k & "scinotall(%);"
         Else
-'            k = k & "dectalallNum(%),numer;" ' causes problems for units with % prefix as the units are then displayed first.
-            k = k & "%,numer;"
+            k = k & "dectalallNum(%),numer;" ' causes problems for units with % prefix as the units are then displayed first.
+'            k = k & "%,numer;"
         End If
     End If
 '    MsgBox k

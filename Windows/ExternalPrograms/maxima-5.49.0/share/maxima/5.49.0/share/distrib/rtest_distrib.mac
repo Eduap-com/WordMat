@@ -1,0 +1,686 @@
+(kill (all),
+ load(distrib),
+ rnd_state: make_random_state(false),
+ set_random_state (make_random_state (123456789)),
+ save_tolerance : float_approx_equal_tolerance,
+ float_approx_equal_tolerance : 1e-12,
+ 0);
+0;
+
+
+
+
+/* normal distribution */
+
+(mycontext: newcontext (), 0);
+0;
+
+pdf_normal(4/3,n,1);
+%e^-((4/3-n)^2/2)/(sqrt(2)*sqrt(%pi));
+
+(assume(s>0), cdf_normal(x,m,s));
+erf((x-m)/(sqrt(2)*s))/2+1/2;
+
+quantile_normal(1/7,2,1);
+sqrt(2)*inverse_erf(-5/7)+2;
+
+random_normal(2,1/3,3);
+[1.967829590026135, 2.120195623477506, 2.230155261001342];
+
+quantile_normal (0, m, s);
+minf;
+
+quantile_normal (1, m, s);
+inf;
+
+foo: quantile_normal (q, 2, 1);
+if equal(q, 0) then minf elseif equal(q, 1) then inf else 2 + sqrt(2)*inverse_erf(2*q - 1);
+
+ev (foo, q = 0);
+minf;
+
+ev (foo, q = 1);
+inf;
+
+ev (foo, q = 1/7);
+sqrt(2)*inverse_erf(-5/7)+2;
+
+mle_normal ([11, 13, 17, 19, 23, 29]);
+[location = 56/3, scale = sqrt(329)/3];
+
+mle_normal ([11, 13, 13, 17, 17, 17, 19, 23, 23, 29, 29, 29]);
+[location = 20, scale = sqrt(39)];
+
+mle_normal ([11, 13, 17, 19, 23, 29], [1, 2, 3, 1, 2, 3]);
+[location = 20, scale = sqrt(39)];
+
+killcontext (mycontext);
+done;
+
+
+/* student distribution */
+
+pdf_student_t(2,5/9);
+3*5^(5/18)*gamma(7/9)/(41^(7/9)*sqrt(%pi)*gamma(5/18));
+
+cdf_student_t(2,5/9);
+1-beta_incomplete_regularized(5/18,1/2,5/41)/2;
+
+cdf_student_t(1/10,5);
+1-beta_incomplete_regularized(5/2,1/2,500/501)/2;
+
+quantile_student_t(0.01,26);
+-2.478629732546409;
+
+random_student_t(102,3);
+[0.891862660419367,0.217299210064025,.5425534835346298];
+
+
+
+
+/* chi square distribution is based on gamma */
+
+random_chi2(0.01,3);
+[5.143726638818105E-81,3.3017730563278E-188,1.338137218695894E-39];
+
+random_chi2(50,3);
+[47.84885101221457,49.4165250891075,52.77360025014328];
+
+random_chi2(500,3);
+[450.450023060629,491.1645455437304,448.2236716394652];
+
+
+
+
+/* noncentral chi square distribution */
+
+pdf_noncentral_chi2(13/10,2,8);
+%e^-(93/20)*bessel_i(0,2*sqrt(13)/sqrt(5))/2;
+
+cdf_noncentral_chi2(13.1,2,8);
+0.7364674817837453;
+
+quantile_noncentral_chi2(0.9,52,1.9);
+67.80391983267481;
+
+random_noncentral_chi2(12,6.5,3);
+[15.00674323768026,24.34835852498128,17.89531280985209];
+
+
+
+
+/* F distribution */
+
+float(pdf_f(2,3,8/3));
+0.1303747102124378;
+
+cdf_f(2,30,5);
+1-542856937402935361/(665416609183179841*sqrt(13));
+
+quantile_f(2/3,2,20.1);
+1.160908609712148;
+
+random_f(10,31,3);
+[1.292249504147881,.7833929757718893,1.312838168471361];
+
+
+
+
+/* exponential distribution is based on gamma */
+
+random_exp(53.21,3);
+[.02160755103125626,.03258741884383696,.02294997277868339];
+
+random_exp(3.21,3);
+[.4463703709164452,.04871274913659535,.09773054426322608];
+
+random_exp(302.5,3);
+[.006696757079634556,.001445392494195325,.002343015491586471];
+
+
+
+
+/* lognormal distribution */
+
+pdf_lognormal(55,-56,3);
+%e^-((log(55)+56)^2/18)/(165*sqrt(2)*sqrt(%pi));
+
+cdf_lognormal(3.5,2,1.2);
+1/2-erf(0.62269752625386/sqrt(2))/2;
+
+quantile_lognormal(2/5,2.2,0.2);
+%e^(0.2*sqrt(2)*inverse_erf(-1/5)+2.2);
+
+random_lognormal(10,15.23,3);
+[2.353791985229249E-11,0.187574637106219,2.9149310594062033E-9];
+
+cdf_lognormal(-2,m,s);
+0;
+
+quantile_lognormal (0, m, s);
+0;
+
+quantile_lognormal (1, m, s);
+inf;
+
+foo: quantile_lognormal (q, 22/10, 2/10);
+if equal(q, 0) then 0 elseif equal(q, 1) then inf else exp(22/10 + (2/10)*sqrt(2)*inverse_erf(2*q - 1));
+
+ev (foo, q = 0);
+0;
+
+ev (foo, q = 1);
+inf;
+
+ev (foo, q = 2/5);
+%e^(2/10*sqrt(2)*inverse_erf(-1/5)+22/10);
+
+mle_lognormal ([exp(17), exp(13), exp(11), exp(7), exp(5)]);
+[log_location = 53/5, log_scale = 2*sqrt(114)/5];
+
+mle_lognormal ([exp(17), exp(17), exp(17), exp(13), exp(11), exp(11), exp(7), exp(7), exp(7), exp(7), exp(5)]);
+[log_location = 119/11, log_scale = 2*sqrt(582)/11];
+
+mle_lognormal ([exp(17), exp(13), exp(11), exp(7), exp(5)], [3, 1, 2, 4, 1]/11);
+[log_location = 119/11, log_scale = 2*sqrt(582)/11];
+
+
+/* gamma distribution */
+
+pdf_gamma(5,2.1,3.5);
+0.09686570955466306;
+
+cdf_gamma(5,2,3);
+1-gamma_incomplete_regularized(2,5/3);
+
+cdf_gamma(5,2.1,30.5);
+0.009139841119737905;
+
+cdf_gamma(5,21,30.5);
+0.0;
+
+quantile_gamma(1/6,15,0.2);
+2.254909620526077;
+
+random_gamma(1/2,12,3);
+[26.21845843519933,1.74922521393547,12.67589121569082];
+
+quantile_gamma (0, a, b);
+0;
+
+quantile_gamma (1, a, b);
+inf;
+
+
+/* beta distribution */
+
+pdf_beta(1/8,5/8,666/57);
+282475249*7^(13/19)/(1073741824*8^(47/152)*beta(5/8,222/19));
+
+cdf_beta(1/2,3,8);
+121/128;
+
+quantile_beta(1/8,2,3.2);
+0.1534071622832576;
+
+random_beta(1,18,3);
+[.01590083925830285,.07944026842342344,.01991813424220185];
+
+random_beta(10,1,3);
+[.9768714741444106,.8703877784295725,0.985410331444349];
+
+quantile_beta (0, a, b);
+0;
+
+quantile_beta (1, a, b);
+1;
+
+/* continuous uniform distribution */
+
+quantile_continuous_uniform (0, a, b);
+a;
+
+quantile_continuous_uniform (1, a, b);
+b;
+
+foo: quantile_continuous_uniform (q, -10, 10);
+if equal(q, 0) then -10 elseif equal(q, 1) then 10 else 20*q - 10;
+
+ev (foo, q = 3/4);
+5;
+
+
+/* logistic distribution */
+
+random_logistic(-5,6,3);
+[-.5460542049418455,-.1005197360489252,-13.85839539776822];
+
+random_logistic(56,60,3);
+[16.18610806632373,-24.27721421793832,210.1491259203347];
+
+quantile_logistic (0, a, b);
+minf;
+
+quantile_logistic (1, a, b);
+inf;
+
+foo: quantile_logistic (q, 2, 1/3);
+if equal(q, 0) then minf elseif equal(q, 1) then inf else 2 - log(1/q - 1)/3;
+
+ev (foo, q = 1/7);
+2 - log(6)/3;
+
+
+/* pareto distribution */
+
+random_pareto(56,60,3);
+[60.3980718433857,60.02319863764327,61.15889083104624];
+
+random_pareto(6,60.2,3);
+[82.00840337695395,68.26980986249082,62.88591356337489];
+
+quantile_pareto (0, a, b);
+b;
+
+quantile_pareto (1, a, b);
+inf;
+
+foo: quantile_pareto (q, %pi, sqrt(2));
+if equal(q, 0) then sqrt(2) elseif equal(q, 1) then inf else sqrt(2)/(1 - q)^(1/%pi);
+
+ev (foo, q = 3/5);
+sqrt(2)/2^(1/%pi)*5^(1/%pi);
+
+
+/* weibull distribution */
+
+kurtosis_weibull(4,5);
+(-3*gamma(1/4)*gamma(3/4)/4-3*gamma(1/4)^4/256
+  +3*sqrt(%pi)*gamma(1/4)^2/16+1) /(sqrt(%pi)/2-gamma(1/4)^2/16)^2 -3;
+
+random_weibull(0.5,5,3);
+[2.683098300894825,.3090168279401363,.1236639157364477];
+
+random_weibull(15,0.05,3);
+[.04977109163672318,.04870054424691551,.04386166879841022];
+
+quantile_weibull (0, a, b);
+0;
+
+quantile_weibull (1, a, b);
+inf;
+
+foo: quantile_weibull (q, 11, 1/7);
+if equal(q, 0) then 0 elseif equal(q, 1) then inf else ((-log(1 - q))^(1/11))/7;
+
+ev (foo, q = 3/17);
+(-log(14/17))^(1/11)/7;
+
+/* I checked this result by applying lbfgs to the negative log likelihood */
+mle_weibull ([1, 19, 17, 23, 11, 43]);
+[shape = 1.305349878443785, scale = 20.35298540894298];
+
+/* Rescaling data should yield same shape and rescaled scale */
+mle_weibull ([1, 19, 17, 23, 11, 43]/10);
+[shape = 1.305349878443785, scale = 2.035298540894298];
+
+/* I checked this result by applying lbfgs to the negative log likelihood */
+mle_weibull ([1, 1, 1, 19, 19, 17, 23, 23, 23, 23, 11, 43]);
+[shape = 1.147500774671715, scale = 17.68225583330855];
+
+mle_weibull ([1, 19, 17, 23, 11, 43], [3, 2, 1, 4, 1, 1]/12);
+[shape = 1.147500774671715, scale = 17.68225583330855];
+
+mle_weibull (10*[1, 19, 17, 23, 11, 43], [3, 2, 1, 4, 1, 1]/12);
+[shape = 1.147500774671715, scale = 176.8225583330855];
+
+
+/* rayleigh distribution is based on weibull */
+
+pdf_rayleigh(2.5,6);
+3.459505910082928E-96;
+
+pdf_rayleigh(5/2,6);
+180*%e^-225;
+
+cdf_rayleigh(2.5,6);
+1.0;
+
+cdf_rayleigh(5/2,6);
+1-%e^-225;
+
+
+
+
+/* laplace distribution */
+
+pdf_laplace(2.5,-5,3);
+0.01368083310398313;
+
+cdf_laplace(2/5,-5,30);
+(2-%e^-(9/50))/2;
+
+random_laplace(-12,17,3);
+[12.6464246671848,-28.88305575541671,-25.390527331018];
+
+random_laplace(-0.02,170,3);
+[.1421750180506419,-142.1776353512574,329.313331828124];
+
+quantile_laplace (0, a, b);
+minf;
+
+quantile_laplace (1, a, b);
+inf;
+
+foo: quantile_laplace (q, -11/7, 4/7);
+if equal(q, 0) then minf elseif equal(q, 1) then inf else -11/7 - 4/7*signum(2*q - 1)*log(1 - signum(2*q - 1)*(2*q - 1));
+
+ev (foo, q = 9/19);
+-11/7 + 4/7*log(18/19);
+
+
+/* cauchy distribution */
+
+quantile_cauchy(5/8,15,21);
+21*tan(%pi/8)+15;
+
+random_cauchy(1,3,3);
+[1.44255833281213,-.4527321151148478,2.236170110804809];
+
+random_cauchy(-65,38,3);
+[-66.15930541384257,-53.93341688372076,4099.33722348125];
+
+quantile_cauchy (0, a, b);
+minf;
+
+quantile_cauchy (1, a, b);
+inf;
+
+foo: quantile_cauchy (q, %pi, %phi);
+if equal(q, 0) then minf elseif equal(q, 1) then inf else %pi + %phi*tan(%pi*(q - 1/2));
+
+ev (foo, q = 1/2);
+%pi;
+
+
+/* gumbel distribution */
+
+pdf_gumbel(5,-5,3);
+%e^(-%e^-(10/3)-10/3)/3;
+
+random_gumbel(-8,6,3);
+[-8.522847585460354,6.74085360167784,7.34394651604513];
+
+random_gumbel(80,1/6,3);
+[80.07101974101381,80.43036203957068,79.73692916250752];
+
+quantile_gumbel (0, a, b);
+minf;
+
+quantile_gumbel (1, a, b);
+inf;
+
+foo: quantile_gumbel (q, -17, 1/19);
+if equal(q, 0) then minf elseif equal(q, 1) then inf else -17 - log(-log(q))/19;
+
+
+/* binomial distribution */
+
+pdf_binomial(x,n,1);
+kron_delta(n,x);
+
+pdf_binomial(x,n,0);
+kron_delta(0,x);
+
+pdf_binomial(0,0,0);
+1;
+
+pdf_binomial(0,0,1);
+1;
+
+foo: pdf_binomial (x, n, 3/11);
+if x < 0 or x > n or x-floor(x) > 0 then 0 else binomial(n, x)*3^x*8^(n - x)/11^n;
+
+baz: (declare (n, integer), ev (foo));
+if x < 0 or x > n or x-floor(x) > 0 then 0 else binomial(n, x)*3^x*8^(n - x)/11^n;
+
+quux: ev (baz, x = 6);
+if 6 > n then 0 else binomial(n, 6)*729*8^(n - 6)/11^n;
+
+ev (quux, n = 8);
+1306368/214358881;
+
+cdf_binomial(3.2,6,1/8);
+130683/131072;
+
+cdf_binomial(4,6,1/8);
+262101/262144;
+
+foo: cdf_binomial (x, 13, 1/3);
+if x < 0 then 0 elseif x >= 13 then 1 else beta_incomplete_regularized(13 - floor(x), floor(x) + 1, 2/3);
+
+ev (foo, x = 11 + 1/4);
+59048/59049; /* beta_incomplete_regularized (2, 12, 2/3); */
+
+quantile_binomial(0.74,23,1/5);
+6;
+
+quantile_binomial (0, n, p);
+0;
+
+quantile_binomial (1, n, p);
+n;
+
+random_binomial(50,1/8,3);
+[7,4,6];
+
+
+/* poisson distribution */
+
+foo: pdf_poisson (x, m);
+if equal(m, 0) then kron_delta(0, x) elseif x < 0 or x - floor(x) > 0 then 0 else exp(-m)*m^x/x!;
+
+ev (foo, m = 0);
+kron_delta(0, x);
+
+ev (foo, m = 2, x = 5);
+exp(-2)*4/15;
+
+cdf_poisson(13,19/2);
+gamma_incomplete_regularized(14,19/2);
+
+cdf_poisson(0.1,0.5);
+0.6065306597126336;
+
+foo: cdf_poisson (x, 0.5);
+if x < 0 then 0 else gamma_incomplete_regularized(floor(x)+1, 0.5);
+
+ev (foo, x = 0.1);
+0.6065306597126336;
+
+quantile_poisson(1/9,10);
+6;
+
+/* RESUME HERE */
+
+random_poisson(110,3);
+[105,132,104];
+
+random_poisson(0);
+0;
+
+
+/* geometric distribution */
+
+cdf_geometric(5,1/8);
+144495/262144;
+
+random_geometric(1/89,3);
+[30,38,58];
+
+
+
+
+/* hypergeometric distribution */
+
+pdf_hypergeometric(4,8,7,5);
+70/429;
+
+cdf_hypergeometric(10,18,70,25);
+19928255517766/19951839306549;
+
+quantile_hypergeometric(1/21,15,20,30);
+11;
+
+random_hypergeometric(19,22,31,3);
+[14,14,13];
+
+
+
+
+/* negative binomial distribution */
+
+pdf_negative_binomial(4,7,1/8);
+252105/4294967296;
+
+cdf_negative_binomial(4,7,1/8);
+425849/4294967296;
+
+quantile_negative_binomial(7/10,10,1/7);
+69;
+
+quantile_negative_binomial(1/8,9,6/17);
+9;
+
+quantile_negative_binomial(7/1000,2,1/17);
+1.0;
+
+random_negative_binomial(6,3/5,3);
+[5,8,9];
+
+
+/* inverse gamma distribution */
+
+(mycontext: newcontext (), 0);
+0;
+
+pdf_inverse_gamma (0, x, y);
+0;
+
+pdf_inverse_gamma (u, x, y);
+if u > 0 then ''(y^x/gamma(x)/u^(1 + x)*exp(-y/u)) else 0;
+
+(assume (u > 0),
+ pdf_inverse_gamma (u, x, y));
+''(y^x/gamma(x)/u^(1 + x)*exp(-y/u));
+
+(assume (x > 0),
+ limit (pdf_inverse_gamma (u, x, y), u, inf));
+0;
+
+pdf_inverse_gamma (h, 7/2, 20);
+if h > 0 then ''(20^(7/2)/gamma(7/2)/h^(9/2)*exp(-20/h)) else 0;
+
+pdf_inverse_gamma (12/7, 7/2, 20);
+''(20^(7/2)/gamma(7/2)/(12/7)^(9/2)*exp(-20/(12/7)));
+
+cdf_inverse_gamma (0, f, g);
+0;
+
+cdf_inverse_gamma (w, f, g);
+if w > 0 then gamma_incomplete(f, g/w)/gamma(f) else 0;
+
+(assume (w > 0),
+ cdf_inverse_gamma (w, f, g));
+gamma_incomplete(f, g/w)/gamma(f);
+
+cdf_inverse_gamma (5, 3/4, d);
+gamma_incomplete(3/4, d/5)/gamma(3/4);
+
+cdf_inverse_gamma (5, 3/4, 11/3);
+''(gamma_incomplete(3/4, (11/3)/5)/gamma(3/4));
+
+(assume (f > 0),
+ limit (cdf_inverse_gamma (w, f, g), w, inf));
+1;
+
+killcontext (mycontext);
+done;
+
+quantile_inverse_gamma (v, s, t);
+if equal(v, 0) then 0
+    elseif equal(v, 1) then inf
+    else 1/quantile_gamma(1 - v, s, 1/t);
+
+quantile_inverse_gamma(u, 1+z, 2-y);
+if equal(u,0) then 0 elseif equal(u,1) then inf else 1/quantile_gamma(1-u,z+1,1/(2-y));
+
+quantile_inverse_gamma(1-u^2, 1+a*z, 2 - y/x);
+if equal(1-u^2,0) then 0 elseif equal(1-u^2,1) then inf else 1/quantile_gamma(u^2,a*z+1,1/(2-y/x));
+
+quantile_inverse_gamma (0, s, t);
+0;
+
+quantile_inverse_gamma (1, s, t);
+inf;
+
+(kill (foo),
+ foo(q) := find_root (cdf_inverse_gamma (p, 4.4, 2) = q, p, 0.001, 10*2/3.4),
+ qq: [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ map (lambda ([q], quantile_inverse_gamma (q, 4.4, 2)), qq));
+''(map (foo, qq));
+
+mean_inverse_gamma (h, i);
+i/(h - 1);
+
+mean_inverse_gamma (12, 17);
+17/11;
+
+mode_inverse_gamma (u, v);
+v/(1 + u);
+
+mode_inverse_gamma (0.5, 1.5);
+1.0;
+
+var_inverse_gamma (p, q);
+q^2/(p - 1)^2/(p - 2);
+
+var_inverse_gamma (2.5, 0.25);
+''(0.25^2/1.5^2/0.5);
+
+skewness_inverse_gamma (y, z);
+4*sqrt(y - 2)/(y - 3);
+
+skewness_inverse_gamma (14.75, 1e6);
+''(4*sqrt(12.75)/11.75);
+
+kurtosis_inverse_gamma (l, m);
+6*(5*l - 11)/(l - 3)/(l - 4);
+
+kurtosis_inverse_gamma (4.75, 1e-6);
+''(6*(5*4.75 - 11)/1.75/0.75);
+
+/* simple probabilitistic test for random number generator;
+ * construct interval with tail mass approximately 1/10^6.
+ * this is a pretty imprecise test, a test based on the
+ * Kolgomorov-Smirnov statistic would be more precise.
+ */
+(foo (a, b, n, tail_mass) :=
+    block ([x, mean, sd, sample_mean, q, low, high],
+           x: random_inverse_gamma (a, b, n),
+           mean: mean_inverse_gamma (a, b),
+           sd: std_inverse_gamma (a, b),
+           sample_mean: apply ("+", x)/n,
+           q: quantile_normal (tail_mass/2, 0, 1),
+           /* bear in mind q < 0 */
+           low: mean + q*sd/sqrt(n),
+           high: mean - q*sd/sqrt(n),
+           if sample_mean > low and sample_mean < high then true
+               else 'failed_random_inverse_gamma (a, b, n, tail_mass, mean, sd, sample_mean, q, low, high)),
+ foo (5, 4.25, 1000, 1e-6));
+true;
+
+(set_random_state(rnd_state),
+ float_approx_equal_tolerance : save_tolerance,
+ 0);
+0;

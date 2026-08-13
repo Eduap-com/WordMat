@@ -1,0 +1,281 @@
+;;; -*-  Mode: Lisp; Package: Maxima; Syntax: Common-Lisp; Base: 10 -*- ;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;     The data in this file contains enhancements.                   ;;;;;
+;;;                                                                    ;;;;;
+;;;  Copyright (c) 1984,1987 by William Schelter,University of Texas   ;;;;;
+;;;     All rights reserved                                            ;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(in-package :maxima)
+
+(defvar $manual_demo "manual.demo")
+
+(defvar *debug-display-html-help* nil
+  "Set to non-NIL to get some debugging messages from hdescribe.")
+
+(defmspec $example (l)
+  (declare (special *need-prompt*))
+  (let ((example (second l)))
+    (when (symbolp example)
+      ;; Coerce a symbol to be a string.
+      ;; Remove the first character if it is a dollar sign.
+      (setq example (coerce (exploden (stripdollar example)) 'string)))
+    (unless (stringp example)
+      (merror 
+        (intl:gettext "example: argument must be a symbol or a string; found: ~M") example))
+    ;; Downcase the string. $example is not case sensitive.
+    (setq example (string-downcase example))
+    (with-open-file (st ($file_search1 $manual_demo '((mlist) $file_search_demo)))
+      (prog (tem all c-tag d-tag)
+       again
+       (setq tem (read-char st nil))
+       (unless tem (go notfound))
+       (unless (eql tem #\&) (go again))
+       (setq tem (read-char st nil))
+       (unless (eql tem #\&) (go again))
+       ;; so we are just after having read &&
+
+       (setq tem (read st nil nil))
+       (unless tem (go notfound))
+       ;; Coerce the topic in tem to be a string.
+       (setq tem (coerce (exploden tem) 'string))
+       (cond ((string= tem example)
+	      (go doit))
+	     (t (push tem all)
+		(go again)))
+       ;; at this stage we read maxima forms and print and eval
+       ;; until a peek sees '&' as the first character of next expression,
+       ;; but at first skip over whitespaces.
+       doit       
+       (when (member (setq tem (peek-char nil st nil)) 
+                     '(#\tab #\space #\newline #\linefeed #\return #\page))
+         ;; Found whitespace. Read char and look for next char.
+         ;; The && label can be positioned anywhere before the next topic.
+         (setq tem (read-char st nil))
+         (go doit))
+       (cond ((or (null tem) (eql tem #\&))
+	      (setf *need-prompt* t)
+	      (return '$done)))
+       (setq tem (dbm-read st nil nil))
+       (incf $linenum)
+       (setq c-tag (makelabel $inchar))
+       (unless $nolabels (setf (symbol-value c-tag) (nth 2 tem)))
+       (let ($display2d)
+	 (displa `((mlabel) ,c-tag ,(nth 2 tem))))
+       (setq $% (meval* (nth 2 tem)))
+       (setq d-tag (makelabel $outchar))
+       (unless $nolabels (setf (symbol-value d-tag) $%))
+       (when (eq (caar tem) 'displayinput)
+	 (displa `((mlabel) ,d-tag ,$%)))
+       (go doit)
+
+       notfound
+       (setf *need-prompt* t)
+       (if (= (length l) 1)
+         (return `((mlist) ,@(nreverse all)))
+         (progn
+           (mtell (intl:gettext "example: ~M not found. 'example();' returns the list of known examples.~%") example)
+           (return '$done)))))))
+
+(defun mread-noprompt (&rest read-args)
+  (let ((*mread-prompt* "") (*prompt-on-read-hang*))
+    (declare (special *mread-prompt* *prompt-on-read-hang*))
+    (unless read-args (setq read-args (list #+(or sbcl cmu) *standard-input*
+                                            #-(or sbcl cmu) *query-io*)))
+    (caddr (apply #'mread read-args))))
+
+;; Some list creation utilities.
+
+(defmspec $create_list (l)
+  (cons '(mlist) (apply #'create-list1 (cadr l) (cddr l))))
+
+(defun create-list1 (form &rest l &aux lis var1 top)
+  (cond ((null l) (list (meval* form)))
+	(t
+	 (setq var1 (first l)
+	       lis (second l)
+	       l (cddr l))
+	 (unless (symbolp var1) (merror (intl:gettext "create_list: expected a symbol; found: ~A") var1))
+ 	 (setq lis (meval* lis))
+	 (mbinding ((list var1))
+	   (cond ((and (numberp lis)
+		       (progn
+			 (setq top (car l) l (cdr l))
+			 (setq top (meval* top))
+			 (numberp top)))
+		  (loop for i from lis to top
+		     do (mset var1 i)
+		     append
+		     (apply #'create-list1 form l)))
+		 (($listp lis)
+		  (loop for v in (cdr lis)
+		     do (mset var1 v)
+		     append
+		     (apply #'create-list1 form l)))
+		 (t (merror (intl:gettext "create_list: unexpected arguments."))))))))
+
+;; The documentation is now in INFO format and can be printed using
+;; tex, or viewed using info or gnu emacs or using a web browser.  All
+;; versions of maxima have a builtin info retrieval mechanism.
+
+(defmspec $describe (x)
+  (let ((topic ($sconcat (cadr x)))
+	(exact-p (or (null (caddr x)) (eq (caddr x) '$exact))))
+    (if exact-p
+	(cl-info::info-exact topic)
+	(cl-info::info-inexact topic))))
+
+(defmspec $apropos (s)
+  (setq s (car (margs s)))
+  (cond ((or (stringp s)
+	     (and (symbolp s) (setq s (string (stripdollar s)))))
+         ;; A list of all Maxima names which contain the string S.
+         (let ((acc (apropos-list s :maxima)))
+           ;; Filter the names which are Maxima User symbols starting
+           ;; with % or $ and remove duplicates.
+           (remove-duplicates
+            (cons '(mlist)
+                   (delete-if-not
+		    #'(lambda (x)
+                        (cond ((eq x '||) nil)
+			      ((char= (get-first-char x) #\$) x)
+                              ;; Change to a verb, when present.
+                              ((char= (get-first-char x) #\%) (or (get x 'noun) x))
+                              (t nil)))
+                    acc)) :test #'eq)))
+        (t
+         (merror
+          (intl:gettext "apropos: argument must be a string or symbol; found: ~M") s))))
+
+;;; Function to encode special characters in a URL string
+(defun needs-encoding-p (char) (position char "$*! \"\'?<>&%"))
+(defun encode-char (char) (format nil "%~2,'0X" (char-code char)))
+(defun url-encode (url)
+  (apply #'concatenate 'string
+         (map 'list (lambda (char)
+                      (if (needs-encoding-p char)
+                          (encode-char char)
+                          (string char)))
+              url)))
+
+
+;;; Display help in browser instead of the terminal
+(defun display-html-help (x)
+  ;; The pattern is basically " <nnn>" where "nnn" is any number of
+  ;; digits.
+  (let* ((topic ($sconcat x))
+         (found-it (gethash topic cl-info::*html-index*)))
+    (when *debug-display-html-help*
+      (format *debug-io* "topic = ~S~%" topic)
+      (format *debug-io* "found-it = ~S~%" found-it))
+    (when found-it
+      (destructuring-bind (base-name . id)
+	  found-it
+	  (let ((url (concatenate 'string
+                                ;; If BASE-NAME is an absolute path,
+                                ;; use "FILE://" as the protocol.
+                                ;; Otherwise use $URL_BASE.
+                                (if (eq :absolute (car (pathname-directory base-name)))
+                                    "file://"
+				    $url_base)
+				"/"
+				(namestring base-name)
+				"#"
+				id))
+                ;; $system will concatenate the words in list cmd_list
+                ;; to create the command to be executed
+	        (cmd_list ()))
+            (setq url (url-encode url))
+	    (when *debug-display-html-help*
+	      (format *debug-io* "URL: ~S~%" url))
+            (when (and (boundp '*autoconf-windows*)
+	               (string-equal *autoconf-windows* "true")
+                       (not (string-equal $browser "start")))
+              ;; In Windows if the browser is not the default,
+              ;; its name should be placed after "start".
+              (setf cmd_list (append cmd_list '("start"))))
+	    (setf cmd_list (append cmd_list (list $browser url)))
+	    (when *debug-display-html-help*
+	      (format *debug-io* "Command: ~{~a ~}~%" cmd_list))
+	    (apply '$system cmd_list))))))
+
+(defun display-html-topics (wanted)
+  (when maxima::*debug-display-html-help*
+    (format *debug-io* "wanted = ~S~%" wanted))
+  (loop for (nil entry) in wanted
+	do (display-html-help (car entry))))
+  
+(defun display-text-topics (wanted)
+  (loop for item in wanted
+	do (let ((doc (cl-info::read-info-text (first item) (second item))))
+	     (if doc
+		 (format t "~A~%~%" doc)
+		 (format t "Unable to find documentation for `~A'.~%~
+                                Possible bug maxima-index.lisp or build_index.pl?~%"
+			 (first (second item)))))))  
+
+;; Escape the characters that are special to XML. This mechanism excludes
+;; the possibility that any keyword might coincide with the any xml tag
+;; start or tag end marker.
+#+(or)
+(defun xml-fix-string (x)
+  (when (stringp x)
+    (let* ((tmp-x (wxxml-string-substitute "&amp;" #\& x))
+           (tmp-x (wxxml-string-substitute "&lt;" #\< tmp-x))
+           (tmp-x (wxxml-string-substitute "&gt;" #\> tmp-x))
+           (tmp-x (wxxml-string-substitute "&#13;" #\Return tmp-x))
+           (tmp-x (wxxml-string-substitute "&#13;" #\Linefeed tmp-x))
+           (tmp-x (wxxml-string-substitute "&#13;" #\Newline tmp-x))
+           (tmp-x (wxxml-string-substitute "&quot;" #\" tmp-x)))
+      tmp-x)
+    x))
+
+
+#+(or)
+(defun display-wxmaxima-topics (wanted)
+  (loop for (dir entry) in wanted
+	do
+	   ;; Tell wxMaxima to jump to the manual entry for "keyword"
+	   (format t "<html-manual-keyword>~a</html-manual-keyword>~%"
+		   (xml-fix-string (car entry)))
+	   ;; Tell the lisp to make sure that this string is actually output
+	   ;; as soon as possible
+	   (finish-output)))
+
+;; When a frontend is running, this function should be redefined to
+;; display the help in whatever way the frontend wants to.
+(defun display-frontend-topics (wanted)
+  (declare (ignore wanted))
+  (merror (intl:gettext "output_format_for_help: frontend not implemented.")))
+
+(defvar *verify-html-index-on-output-format* t
+  "Verify the html index when the output format is set to html.  This
+  check is only done once.")
+
+(defun set-output-format-for-help (assign-var val)
+  "When $output_format_for_help is set, this function validates the
+  value and sets *help-display-function* to the function to display
+  the help item in the specified format."
+  ;; Don't need assign-var here.  It should be $output_format_for_help
+  ;; since this function is only called when $output_format_for_help
+  ;; is assigned.
+  (declare (ignore assign-var))
+  (case val
+    ($text
+     (setf *help-display-function* 'display-text-topics))
+    ($html
+     (setf *help-display-function* 'display-html-topics)
+     (when *verify-html-index-on-output-format*
+       (setf *verify-html-index-on-output-format* nil)
+       ;; Verify the html index.  This happens only when the output
+       ;; format is set to html the first time.  It is also
+       ;; independent of the value of *verify-html-index* (set via the
+       ;; command-line option --verify-html-index).
+       ($verify_html_index)))
+    ($frontend
+     (if $maxima_frontend
+	 (setf *help-display-function* 'display-frontend-topics)
+	 (merror (intl:gettext "output_format_for_help set to frontend, but no frontend is running."))))
+    (otherwise
+     (merror (intl:gettext "output_format_for_help should be one of text, html, or frontend: ~M")
+	     val))))

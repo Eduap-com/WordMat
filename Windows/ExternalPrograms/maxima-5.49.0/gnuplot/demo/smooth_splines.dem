@@ -1,0 +1,85 @@
+# Plot smoothing with 
+# natural cubic splines (smooth csplines)
+# weighted approximate cubic splines (smooth acsplines)
+# Bezier curve (smooth bezier)
+# 2D and 3D acspline examples
+
+print "various splines for smoothing"
+
+set title "cubic spline fit to data (no weights)"
+set samples 300
+set xlabel "Time (sec)"
+set ylabel "Rate"
+plot "silver.dat" t "experimental" w errorb, \
+               ""  smooth csplines t "cubic smooth" lw 2
+
+pause -1 "Now apply a smoothing spline, weighted by 1/rel error (-> return)"
+set title "acsplines weighted by relative error"
+# error is column 3; weight larger errors less
+# start with rel error = 1/($3/$2)
+S=1
+plot "silver.dat" t "experimental" w errorb,\
+               "" u 1:2:(S*$2/$3) smooth acsplines t "acspline Y/Z" lw 2
+
+pause -1 "Make it smoother by changing the smoothing weights (-> return)"
+set title "acsplines with increasing weight from error estimate"
+plot "silver.dat" t "rate" w errorb,\
+               "" u 1:2:($2/($3*1.e1)) sm acs t "acspline Y/(Z*1.e1)" lw 2,\
+               "" u 1:2:($2/($3*1.e3)) sm acs t "         Y/(Z*1.e3)" lw 2,\
+               "" u 1:2:($2/($3*1.e5)) sm acs t "         Y/(Z*1.e5)" lw 2
+
+pause -1 "Accentuate the relative changes with logscaling on y"
+set title "Same plot (various weighting) in log scale"
+set logscale y
+set grid x y mx my
+replot
+
+pause -1 "Now approximate the data with a bezier curve between the endpoints (-> return)"
+set title "Bezier curve rather than cubic spline"
+unset logscale y
+plot "silver.dat" t "experimental" w errorb,\
+               "" smooth sbezier t "bezier" lw 2
+
+pause -1 "You would rather use log-scales ? (-> return)"
+set title "Bezier curve with log scale"
+set logscale y
+replot
+
+unset log
+unset grid
+
+pause -1 "Same thing in 3D - planar case"
+set title "3D smooth acsplines (special case with curve in single plane)"
+set key right top
+set key title "\n\n"
+set xrange [0:600]
+set yrange [0:600]
+set zrange [0:300]
+set xyplane at 0
+unset xtics
+set ytics offset 0,-1
+set ylabel  "Time" offset 0,-2
+
+set view 89.9 ,90, 1.5,1.0
+splot "silver.dat" using (1):1:2 t "rate" w errorb,\
+               "" u (1):1:2:($2/($3*1.e1)) smooth acs t "acspline Y/(Z*1.e1)" lw 2,\
+               "" u (1):1:2:($2/($3*1.e3)) smooth acs t "         Y/(Z*1.e3)" lw 2,\
+               "" u (1):1:2:($2/($3*1.e5)) smooth acs t "         Y/(Z*1.e5)" lw 2
+
+pause -1 "Same thing in 3D general case"
+set title "3D acsplines (general case)\nNote much larger weight values needed"
+set view 90,45,1.,1.5
+unset xtics
+unset ytics
+unset xlabel
+unset ylabel
+
+W = 1.e7
+set key title sprintf("\n\nW = %.2g", W)
+splot "silver.dat" using 1:1:2 t "rate" w errorb,\
+               "" u 1:1:2:(W * $2/($3*1.e1)) smooth acs lw 2,\
+               "" u 1:1:2:(W * $2/($3*1.e3)) smooth acs lw 2,\
+               "" u 1:1:2:(W * $2/($3*1.e5)) smooth acs lw 2
+
+pause -1 "Hit return to continue"
+reset

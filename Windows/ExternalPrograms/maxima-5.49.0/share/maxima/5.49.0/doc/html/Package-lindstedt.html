@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package lindstedt (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Package lindstedt (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Package lindstedt (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-linearalgebra.html#Package-linearalgebra" rel="next" title="Package linearalgebra">
+<link href="Package-levin.html#Package-levin" rel="prev" title="Package levin">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},       // do not skip pre
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  tex: {
+    processEscapes: false,      // do not use \$ to produce a literal dollar sign
+    processEnvironments: false, // do not process \begin{xxx}...\end{xxx} outside math mode
+    processRefs: false,         // do not process \ref{...} outside of math mode
+    displayMath: [             // start/end delimiter pairs for display math
+      ['\\[', '\\]']
+    ],
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Package-lindstedt">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-linearalgebra.html#Package-linearalgebra" accesskey="n" rel="next">Package linearalgebra</a>, Previous: <a href="Package-levin.html#Package-levin" accesskey="p" rel="prev">Package levin</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-lindstedt-1"><span>75 Package lindstedt<a class="copiable-link" href="#Package-lindstedt-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-lindstedt_002fnode_002fFunctions-and-Variables-for-lindstedt"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-lindstedt" accesskey="1">Functions and Variables for lindstedt</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-lindstedt">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Package-lindstedt" accesskey="p" rel="prev">Package lindstedt</a>, Up: <a href="#Package-lindstedt" accesskey="u" rel="up">Package lindstedt</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-lindstedt-1"><span>75.1 Functions and Variables for lindstedt<a class="copiable-link" href="#Functions-and-Variables-for-lindstedt-1"> &para;</a></span></h3>
+
+
+<a class="anchor" id="Lindstedt"></a><a class="anchor" id="Item_003a-lindstedt_002fdeffn_002fLindstedt"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-Lindstedt"><span class="category-def">Function: </span><span><strong class="def-name">Lindstedt</strong> <var class="def-var-arguments">(<var class="var">eq</var>,<var class="var">pvar</var>,<var class="var">torder</var>,<var class="var">ic</var>)</var><a class="copiable-link" href="#index-Lindstedt"> &para;</a></span></dt>
+<dd><p>This is a first pass at a Lindstedt code.  It can solve problems
+with initial conditions entered, which can be arbitrary constants,
+(just not <var class="var">%k1</var> and <var class="var">%k2</var>) where the initial conditions on the perturbation
+equations are <em class="math tex2jax_process">\(z[i]=0, z'[i]=0\)</em> for <em class="math tex2jax_process">\(i>0\)</em>. <var class="var">ic</var> is the list of 
+initial conditions.
+</p>
+<p>Problems occur when initial conditions are not given, as the constants
+in the perturbation equations are the same as the zero order equation
+solution.  Also, problems occur when the initial conditions for the
+perturbation equations are not <em class="math tex2jax_process">\(z[i]=0, z'[i]=0\)</em> for <em class="math tex2jax_process">\(i>0\)</em>, such as the
+Van der Pol equation.
+</p>
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;makeOrders&quot;)$
+
+(%i2) load(&quot;lindstedt&quot;)$
+
+(%i3) Lindstedt('diff(x,t,2)+x-(e*x^3)/6,e,2,[1,0]);
+          2
+         e  (cos(5 T) - 24 cos(3 T) + 23 cos(T))
+(%o3) [[[---------------------------------------
+                          36864
+   e (cos(3 T) - cos(T))
+ - --------------------- + cos(T)],
+            192
+          2
+       7 e    e
+T = (- ---- - -- + 1) t]]
+       3072   16
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;makeOrders&quot;)</code> and <code class="code">load(&quot;lindstedt&quot;)</code>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Differential-equations">Differential equations</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-lindstedt">Package lindstedt</a>
+&middot;
+</div>
+
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-linearalgebra.html#Package-linearalgebra" accesskey="n" rel="next">Package linearalgebra</a>, Previous: <a href="Package-levin.html#Package-levin" accesskey="p" rel="prev">Package levin</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

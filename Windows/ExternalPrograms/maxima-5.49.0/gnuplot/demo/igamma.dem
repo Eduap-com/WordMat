@@ -1,0 +1,46 @@
+#
+# Show limitation in old (prior to version 6) igamma domain and convergence
+#
+save_encoding = GPVAL_ENCODING
+set encoding utf8
+
+set title "igamma domain and convergence improved in version 6"
+
+set label 1 at graph 0.1, 0.8
+set label 1 "igamma(a,z) = {Γ^{-1}(a) {/*2 ∫@_{/*0.5 0}^{/*.5 z}} {/:Italic t^{a-1}e^{-t}dt}"
+
+set sample 1000
+set xrange [.99 : 1.01]
+set yrange [0:1]
+set tics nomirror
+set border 3 lt 0
+set key bottom
+set tics tc rgb "black"
+set ytics 1
+
+plot for [N=1:9] igamma( 10.**N, x*10.**N ) lw 2 \
+         title sprintf("igamma( 10^{%d}, x*10^{%d})",N,N)
+
+pause -1 "<cr> to continue"
+reset
+#
+# Previous igamma algorithm fails to converge for large a
+#
+set title "igamma domain and convergence improved in version 6"
+set border -1 front linewidth 1.000
+set view 46, 16, 1, 1
+set samples 201, 201
+set isosamples 201, 201
+set style data lines
+set xyplane relative 0
+set xlabel "a" 
+set xrange [ 0.00000 : 3000.00 ]
+set ylabel "x" 
+set yrange [ 0.00000 : 3000.00 ]
+set zrange [ * : * ]
+
+splot igamma(x,y) lw .1 
+
+pause -1
+reset
+set encoding save_encoding

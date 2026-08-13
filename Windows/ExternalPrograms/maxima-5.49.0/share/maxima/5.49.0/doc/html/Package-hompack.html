@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package hompack (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Package hompack (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Package hompack (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-impdiff.html#Package-impdiff" rel="next" title="Package impdiff">
+<link href="Package-grobner.html#Package-grobner" rel="prev" title="Package grobner">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Package-hompack">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-impdiff.html#Package-impdiff" accesskey="n" rel="next">Package impdiff</a>, Previous: <a href="Package-grobner.html#Package-grobner" accesskey="p" rel="prev">Package grobner</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-hompack-1"><span>68 Package hompack<a class="copiable-link" href="#Package-hompack-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-hompack_002fnode_002fIntroduction-to-hompack"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-hompack" accesskey="1">Introduction to hompack</a></li>
+<li><a href="#Functions-and-Variables-for-hompack" accesskey="2">Functions and Variables for hompack</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-hompack">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-hompack" accesskey="n" rel="next">Functions and Variables for hompack</a>, Up: <a href="#Package-hompack" accesskey="u" rel="up">Package hompack</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-hompack-1"><span>68.1 Introduction to hompack<a class="copiable-link" href="#Introduction-to-hompack-1"> &para;</a></span></h3>
+
+<p><code class="code">Hompack</code> is a Common Lisp translation (via <code class="code">f2cl</code>) of the
+Fortran library HOMPACK, as obtained from Netlib.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-hompack">Package hompack</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-hompack_002fnode_002fFunctions-and-Variables-for-hompack"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-hompack">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-hompack" accesskey="p" rel="prev">Introduction to hompack</a>, Up: <a href="#Package-hompack" accesskey="u" rel="up">Package hompack</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-hompack-1"><span>68.2 Functions and Variables for hompack<a class="copiable-link" href="#Functions-and-Variables-for-hompack-1"> &para;</a></span></h3>
+
+<a class="anchor" id="hompack_005fpolsys"></a><a class="anchor" id="Item_003a-hompack_002fdeffn_002fhompack_005fpolsys"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-hompack_005fpolsys"><span class="category-def">Function: </span><span><strong class="def-name">hompack_polsys</strong> <var class="def-var-arguments">(<var class="var">eqnlist</var>, <var class="var">varlist</var> [, <var class="var">iflg1</var>, <var class="var">epsbig</var>, <var class="var">epssml</var>, <var class="var">numrr</var>])</var><a class="copiable-link" href="#index-hompack_005fpolsys"> &para;</a></span></dt>
+<dd><p>Finds the roots of the system of polynomials in the variables
+<var class="var">varlist</var> in the system of equations in <var class="var">eqnlist</var>.  The number
+of equations must match number of variables.  Each equation must be a
+polynomial with variables in <var class="var">varlist</var>.  The coefficients must be
+real numbers.
+</p>
+<p>The optional keyword arguments provide some control over the
+algorithm.
+</p>
+<dl class="table">
+<dt><code class="code">epsbig</code></dt>
+<dd><p>is the local error tolerance allowed by the
+path tracker, defaulting to 1e-4.
+</p></dd>
+<dt><code class="code">epssml</code></dt>
+<dd><p>is the accuracy
+desired for the final solution, defaulting to 1d-14.
+</p></dd>
+<dt><code class="code">numrr</code></dt>
+<dd><p>is the number of multiples of 1000 steps that will be tried
+before abandoning a path, defaulting to 10.
+</p></dd>
+<dt><code class="code">iflg1</code></dt>
+<dd><p>defaulting to 0, controls the algorithm as follows:
+</p><dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>If the problem is to be solved without calling <code class="code">polsys</code>&rsquo; scaling
+routine, <code class="code">sclgnp</code>, and without using the projective
+transformation.
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>If scaling but no projective transformation is to be used.
+</p></dd>
+<dt><code class="code">10</code></dt>
+<dd><p>If no scaling but projective transformation is to be used.
+</p></dd>
+<dt><code class="code">11</code></dt>
+<dd><p>If both scaling and projective transformation are to be used.
+</p></dd>
+</dl>
+</dd>
+</dl>
+
+<p><code class="code">hompack_polsys</code> returns a list.  The elements of the list are:
+</p><dl class="table">
+<dt><code class="code">retcode</code></dt>
+<dd><p>Indicates whether the solution is valid or not.
+</p><dl class="table">
+<dt><code class="code">0</code></dt>
+<dd><p>Solution found without problems
+</p></dd>
+<dt><code class="code">1</code></dt>
+<dd><p>Solution succeeded but <code class="code">iflg2</code> indicates some issues with a
+root. (That is, <code class="code">iflg2</code> is not all ones.)
+</p></dd>
+<dt><code class="code">-1</code></dt>
+<dd><p><code class="code">NN</code>, the declared dimension of the number of terms in the
+polynomials,  is too small.  (This should not happen.)
+</p></dd>
+<dt><code class="code">-2</code></dt>
+<dd><p><code class="code">MMAXT</code>, the declared dimension for the internal coefficient and
+degree arrays, is too small.  (This should not happen.)
+</p></dd>
+<dt><code class="code">-3</code></dt>
+<dd><p><code class="code">TTOTDG</code>, the total degree of the equations,  is too small.
+(This should not happen.)
+</p></dd>
+<dt><code class="code">-4</code></dt>
+<dd><p><code class="code">LENWK</code>, the length of the internal real work array, is too
+small.  (This should not happen.)
+</p></dd>
+<dt><code class="code">-5</code></dt>
+<dd><p><code class="code">LENIWK</code>, the length of the internal integer work array, is too
+small.  (This should not happen.)
+</p></dd>
+<dt><code class="code">-6</code></dt>
+<dd><p><var class="var">iflg1</var> is not 0 or 1, or 10 or 11.  (This should not happen; an
+error should be thrown before <code class="code">polsys</code> is called.)
+</p></dd>
+</dl>
+</dd>
+<dt><code class="code">roots</code></dt>
+<dd><p>The roots of the system of equations.  This is in the same format as
+<code class="code">solve</code> would return.
+</p></dd>
+<dt><code class="code">iflg2</code></dt>
+<dd><p>A list containing information on how the path for the m&rsquo;th root terminated:
+</p><dl class="table">
+<dt><code class="code">1</code></dt>
+<dd><p>Normal return
+</p></dd>
+<dt><code class="code">2</code></dt>
+<dd><p>Specified error tolerance cannot be met.  Increase <var class="var">epsbig</var> and
+<var class="var">epssml</var>  and rerun.
+</p></dd>
+<dt><code class="code">3</code></dt>
+<dd><p>Maximum number of steps exceeded.  To track the path further, increase
+<var class="var">numrr</var> and rerun the path.  However, the path may be diverging, if the
+lambda value is near 1 and the roots values are large.
+</p></dd>
+<dt><code class="code">4</code></dt>
+<dd><p>Jacobian matrix does not have full rank.  The algorithm has failed
+(the zero curve of the homotopy map cannot be followed any further).
+</p></dd>
+<dt><code class="code">5</code></dt>
+<dd><p>The tracking algorithm has lost the zero curve of the homotopy map and
+is not making progress.  The error tolerances <var class="var">epsbig</var> and
+<var class="var">epssml</var> were too lenient.  The problem should be restarted with
+smaller error tolerances.
+</p></dd>
+<dt><code class="code">6</code></dt>
+<dd><p>The normal flow newton iteration in <code class="code">stepnf</code> or <code class="code">rootnf</code>
+failed to converge.  The error tolerance <var class="var">epsbig</var> may be too
+stringent.
+</p></dd>
+<dt><code class="code">7</code></dt>
+<dd><p>Illegal input parameters, a fatal error.
+</p></dd>
+</dl>
+</dd>
+<dt><code class="code">lambda</code></dt>
+<dd><p>A list of the final lambda value for the m-th root, where lambda is the
+continuation parameter.
+</p></dd>
+<dt><code class="code">arclen</code></dt>
+<dd><p>A list of the arc length of the m-th root.
+</p></dd>
+<dt><code class="code">nfe</code></dt>
+<dd><p>A list of the number of jacobian matrix evaluations required to track the m-th
+root.
+</p></dd>
+</dl>
+
+<p>Here are some examples of using <code class="code">hompack_polsys</code>.
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(hompack)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) hompack_polsys([x1^2-1, x2^2-2],[x1,x2]);
+(%o2) [0, [[x1 = 7.493410174972965e-17 %i - 1.0, 
+x2 = - 2.1199276810167172e-16 %i - 1.4142135623730951], 
+[x1 = 1.0 - 1.7812202259088373e-17 %i, 
+x2 = - 9.892128000334418e-17 %i - 1.4142135623730951], 
+[x1 = - 8.745710933584358e-17 %i - 1.0, 
+x2 = 1.4142135623730951 - 3.1543521174128613e-17 %i], 
+[x1 = 1.0 - 5.5487454344135625e-18 %i, 
+x2 = 9.617653810456737e-17 %i + 1.4142135623730951]], 
+[1, 1, 1, 1], [1.0, 1.0, 0.9999999999999999, 
+0.9999999999999999], [4.6126237693413445, 4.6126230108601, 
+4.612623872939582, 4.6126231144843475], [40, 40, 40, 40]]
+</pre></div></div>
+
+<p>The analytical solution can be obtained with solve:
+</p><div class="example user-maxima">
+<div class="group"><pre class="example-preformatted">(%i1) solve([x1^2-1, x2^2-2],[x1,x2]);
+(%o1) [[x1 = 1, x2 = - sqrt(2)], [x1 = 1, x2 = sqrt(2)], 
+            [x1 = - 1, x2 = - sqrt(2)], [x1 = - 1, x2 = sqrt(2)]]
+</pre></div></div>
+<p>We see that <code class="code">hompack_polsys</code> returned the correct answer except
+that the roots are in a different order and there is a small imaginary
+part.
+</p>
+<p>Another example, with corresponding solution from solve:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(hompack)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) hompack_polsys([x1^2 + 2*x2^2 + x1*x2 - 5, 2*x1^2 + x2^2 + x2-4],[x1,x2]);
+(%o2) [0, [[x1 = 1.2015573017007832 - 6.51849608628558e-16 %i, 
+x2 = - 2.2667444298167825e-16 %i - 1.6672703634801431], 
+[x1 = - 5.901956169878514e-17 %i - 1.4285291895653132, 
+x2 = - 6.670215053038164e-17 %i - 0.9106199083334114], 
+[x1 = 1.942890293094024e-16 %i + 0.5920619420732687, 
+x2 = 1.383859154368197 - 1.942890293094024e-16 %i], 
+[x1 = 0.08945540033671631 - 8.534583737796769e-16 %i, 
+x2 = 2.415141536592239e-16 %i + 1.5576674810817213]], 
+[1, 1, 1, 1], [1.0000000000000004, 1.0000000000000002, 1.0, 
+0.9999999999999999], [6.205795654034981, 7.7222132593900525, 
+7.228287079174324, 5.6114742835849105], [35, 41, 48, 40]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) solve([x1^2+2*x2^2+x1*x2 - 5, 2*x1^2+x2^2+x2-4],[x1,x2]);
+(%o3) [[x1 = 0.08945540336850383, x2 = 1.5576673866090713], 
+[x1 = 0.5920619554695062, x2 = 1.3838592860838075], 
+[x1 = 1.2015573525007488, x2 = - 1.66727025803531], 
+[x1 = - 1.428529150636283, x2 = - 0.9106198942815954]]
+</pre></div></div>
+
+<p>Note that <code class="code">hompack_polsys</code> can sometimes be very slow.  Perhaps
+<code class="code">solve</code> can be used.  Or perhaps <code class="code">eliminate</code> can be used to
+convert the system of polynomials into one polynomial for which
+<code class="code">allroots</code> can find all the roots.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-hompack">Package hompack</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-impdiff.html#Package-impdiff" accesskey="n" rel="next">Package impdiff</a>, Previous: <a href="Package-grobner.html#Package-grobner" accesskey="p" rel="prev">Package grobner</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

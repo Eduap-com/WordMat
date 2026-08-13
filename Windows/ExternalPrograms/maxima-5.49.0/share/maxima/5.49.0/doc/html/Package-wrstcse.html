@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package wrstcse (Maxima 5.49.0 Manual)</title>
+
+<meta name="description" content="Package wrstcse (Maxima 5.49.0 Manual)">
+<meta name="keywords" content="Package wrstcse (Maxima 5.49.0 Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-zeilberger.html#Package-zeilberger" rel="next" title="Package zeilberger">
+<link href="Package-unit.html#Package-unit" rel="prev" title="Package unit">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Package-wrstcse">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-zeilberger.html#Package-zeilberger" accesskey="n" rel="next">Package zeilberger</a>, Previous: <a href="Package-unit.html#Package-unit" accesskey="p" rel="prev">Package unit</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-wrstcse-1"><span>101 Package wrstcse<a class="copiable-link" href="#Package-wrstcse-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-wrstcse_002fnode_002fIntroduction-to-wrstcse"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-wrstcse" accesskey="1">Introduction to wrstcse</a></li>
+<li><a href="#Functions-and-Variables-for-wrstcse" accesskey="2">Functions and Variables for wrstcse</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-wrstcse">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-wrstcse" accesskey="n" rel="next">Functions and Variables for wrstcse</a>, Previous: <a href="#Package-wrstcse" accesskey="p" rel="prev">Package wrstcse</a>, Up: <a href="#Package-wrstcse" accesskey="u" rel="up">Package wrstcse</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-wrstcse-1"><span>101.1 Introduction to wrstcse<a class="copiable-link" href="#Introduction-to-wrstcse-1"> &para;</a></span></h3>
+
+<p><code class="code">wrstcse</code> provides a few approaches to worst case calculations that are powerful enough
+for most engineering problems, but avoid the problems that make a true interval arithmetic
+unfeasible for non-trivial problems:
+</p><ul class="itemize mark-bullet">
+<li>Extreme worst case calculation by determining which combination of
+extreme input values will yield the most extreme result
+(<code class="code"><a class="ref" href="#wc_005fmintypmax">wc_mintypmax</a></code>, <code class="code"><a class="ref" href="#wc_005fsystematic">wc_systematic</a></code>). Its approach isn&rsquo;t
+guaranteed to find local minima and maxima in the middle of 
+the input parameter space. In most real-world problems, though, the
+derivation of the result to each parameter doesn&rsquo;t change its sign in
+the tolerance space, which moves the extreme cases to the edges of the
+tolerance space making them accessible to this
+method.
+Via <code class="code"><a class="ref" href="#wc_005fewc_005fsimplify">wc_ewc_simplify</a></code> this method can typically be reduced from a
+brute-force approach to being O(n)-complete.
+</li><li>The monte carlo approach that assigns each parameter random values in
+the tolerance space and, when repeated n times will yield a
+view of the distribution n samples might have. The view provided by
+this method is pessimistic, as most real-wprld items are more
+probabible to lie in the middle of the tolerance space than at its
+end.
+</li><li>The root mean square approach that knowing an approximation of the
+parameters of the gaussian distribution of the input values one can
+determine how big the tolerances will realistically be if one requires
+a given yield (see <code class="code"><a class="ref" href="#wc_005fmintypmax_005frss">wc_mintypmax_rss</a></code>). Note that even rectangles
+tend to quickly add up to approximation of gauss curve, if affecting
+the same tolerance which makes this method applicable to most
+real-world problems.
+</li></ul>
+
+<p>Tolerances are applied to parameters by providing each
+tolerance-laden parameter with a <var class="var">tol[n]</var> that wrstcase will vary
+between -1 and 1 looking for extreme results, while <var class="var">rol[n]</var>=0
+should yield the typical value of a parameter.. Using the same <var class="var">n</var> 
+for two parameters will make both parameters have coupled tolerances.
+Therefore two  1% resistors that both will change over the
+temperature range by another 2% in the same way can be defined as follows:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[1]*.01)*(1+tol[3]*.02),
+   R_2= 2000.0*(1+tol[2]*.01)*(1+tol[3]*.02)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1) (0.02 tol  + 1), 
+                             1               3
+                    R_2 = 2000.0 (0.01 tol  + 1) (0.02 tol  + 1)]
+                                          2               3
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) R_1+R_2=wc_mintypmax(subst(vals,R_1+R_2));
+(%o3) R_2 + R_1 = [min = 2910.6, typ = 3000.0, 
+                                        max = 3090.6000000000004]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) R_1+R_2=wc_mintypmax_percent(subst(vals,R_1+R_2));
+(%o4) R_2 + R_1 = [min = - 2.980000000000005 %, typ = 3000.0, 
+                                      max = 3.0200000000000227 %]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) R_1/R_2=wc_mintypmax(subst(vals,R_1/R_2));
+      R_1
+(%o5) --- = [min = 0.4900990099009901, typ = 0.5, 
+      R_2
+                                        max = 0.5101010101010102]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) R_1/R_2=wc_mintypmax_percent(subst(vals,R_1/R_2));
+      R_1
+(%o6) --- = [min = - 1.980198019801982 %, typ = 0.5, 
+      R_2
+                                       max = 2.020202020202033 %]
+</pre></div></div>
+
+<p><code class="code">load (&quot;wrstcse&quot;)</code> loads this package.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-wrstcse">Package wrstcse</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-wrstcse_002fnode_002fFunctions-and-Variables-for-wrstcse"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-wrstcse">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-wrstcse" accesskey="p" rel="prev">Introduction to wrstcse</a>, Up: <a href="#Package-wrstcse" accesskey="u" rel="up">Package wrstcse</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-wrstcse-1"><span>101.2 Functions and Variables for wrstcse<a class="copiable-link" href="#Functions-and-Variables-for-wrstcse-1"> &para;</a></span></h3>
+
+<a class="anchor" id="wc_005ftypicalvalues"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005ftypicalvalues"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005ftypicalvalues"><span class="category-def">Function: </span><span><strong class="def-name">wc_typicalvalues</strong> <var class="def-var-arguments">(<var class="var">expression</var>)</var><a class="copiable-link" href="#index-wc_005ftypicalvalues"> &para;</a></span></dt>
+<dd>
+<p>Returns what happens if all <var class="var">tol[n]</var> happen to be 0, which moves
+all parameter to the middle of their tolerance range.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 2000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 2000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) divider:U_Out=U_In*R_1/(R_1+R_2);
+                                R_1 U_In
+(%o3)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) wc_typicalvalues(vals);
+(%o4)             [R_1 = 1000.0, R_2 = 2000.0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) wc_typicalvalues(subst(vals,divider));
+(%o5)            U_Out = 0.3333333333333333 U_In
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005finputvalueranges"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005finputvalueranges"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005finputvalueranges"><span class="category-def">Function: </span><span><strong class="def-name">wc_inputvalueranges</strong> <var class="def-var-arguments">(<var class="var">expression</var>, [<var class="var">show_tols</var>])</var><a class="copiable-link" href="#index-wc_005finputvalueranges"> &para;</a></span></dt>
+<dd>
+<p>Convenience function: Displays a list which parameter can vary between
+which values.
+</p>
+<p>If <var class="var">show_tols</var> is <code class="code">true</code> then this function additionally displays
+which <var class="var">tol[n]</var> each variable is affected by.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005fmintypmax2tol">wc_mintypmax2tol</a></code> and <code class="code"><a class="ref" href="#wc_005finputvalueassumptions">wc_inputvalueassumptions</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[&quot;R_1&quot;]*.01+tol[&quot;Temp&quot;]*.001),
+   R_2= 2000.0*(1+tol[&quot;R_2&quot;]*.01+tol[&quot;Temp&quot;]*.001),
+   R_3= 2000.0*(1+tol[&quot;R_3&quot;]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.001 tol     + 0.01 tol    + 1), 
+                              Temp           R_1
+R_2 = 2000.0 (0.001 tol     + 0.01 tol    + 1), 
+                       Temp           R_2
+R_3 = 2000.0 (0.01 tol    + 1)]
+                      R_3
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) wc_inputvalueranges(vals);
+(%o3) 
+    [ R_1  min = 989.0   typ = 1000.0  max = 1010.9999999999999 ]
+    [                                                           ]
+    [ R_2  min = 1978.0  typ = 2000.0  max = 2021.9999999999998 ]
+    [                                                           ]
+    [ R_3  min = 1980.0  typ = 2000.0        max = 2020.0       ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) wc_inputvalueranges(vals,true);
+               [ R_1 ]         [ min = 989.0  ]
+               [     ]         [              ]
+(%o4)  Col 1 = [ R_2 ] Col 2 = [ min = 1978.0 ]
+               [     ]         [              ]
+               [ R_3 ]         [ min = 1980.0 ]
+         [ typ = 1000.0 ]         [ max = 1010.9999999999999 ]
+         [              ]         [                          ]
+ Col 3 = [ typ = 2000.0 ] Col 4 = [ max = 2021.9999999999998 ]
+         [              ]         [                          ]
+         [ typ = 2000.0 ]         [       max = 2020.0       ]
+         [ [tol    , tol   ] ]
+         [     Temp     R_1  ]
+         [                   ]
+ Col 5 = [ [tol    , tol   ] ]
+         [     Temp     R_2  ]
+         [                   ]
+         [     [tol   ]      ]
+         [         R_3       ]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fsystematic"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fsystematic"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005fsystematic"><span class="category-def">Function: </span><span><strong class="def-name">wc_systematic</strong> <var class="def-var-arguments">(<var class="var">expression</var>, [<var class="var">num</var>])</var><a class="copiable-link" href="#index-wc_005fsystematic"> &para;</a></span></dt>
+<dd>
+<p>Systematically introduces <var class="var">num</var> values per parameter into <var class="var">expression</var>
+and returns a list of the result. If no <var class="var">num</var> is given, <var class="var">num</var> defaults
+to <var class="var">wc_defaultvaluespertol</var>. Negative values for <var class="var">num</var> make
+<code class="code">wc_systematic</code> use the monte carlo method with <var class="var">num</var> samples,
+instead.
+</p>
+<p>If an equation uses the following values with tolerances:
+</p>
+<p><code class="code">vals:[R_1=100+tol[1],R_2=100+tol[2]];</code>
+</p>
+<p><code class="code">num=2</code> will cause the following combinations of tolerances to be tested:
+<img class="image" src="./figures/wrstcse_ewc_2.png" alt="./figures/wrstcse_ewc_2">
+<code class="code">num=3</code> will cause the following combinations of tolerances to be tested:
+<img class="image" src="./figures/wrstcse_ewc_3.png" alt="./figures/wrstcse_ewc_3">
+<code class="code">num=-500</code> will cause the following combinations of tolerances to
+be tested, instead:
+<img class="image" src="./figures/wrstcse_montecarlo.png" alt="./figures/wrstcse_montecarlo">
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005fdefaultvaluespertol">wc_defaultvaluespertol</a></code>, <code class="code"><a class="ref" href="#wc_005fmintypmax">wc_mintypmax</a></code>,
+<code class="code"><a class="ref" href="#wc_005fdefaultvaluespertol">wc_defaultvaluespertol</a></code>,
+<code class="code"><a class="ref" href="#wc_005fewc_005fsimplify">wc_ewc_simplify</a></code> and <code class="code"><a class="ref" href="#wc_005fmontecarlo">wc_montecarlo</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 2000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 2000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) divider: U_Out=U_In*(R_1)/(R_1+R_2);
+                                R_1 U_In
+(%o3)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) wc_systematic(subst(vals,rhs(divider)));
+(%o4) [0.33333333333333337 U_In, 0.3311036789297659 U_In, 
+0.3289036544850498 U_In, 0.3355704697986577 U_In, 
+0.3333333333333333 U_In, 0.33112582781456956 U_In, 
+0.3377926421404682 U_In, 0.3355481727574751 U_In, 
+0.3333333333333333 U_In]
+</pre></div></div>
+</dd></dl>
+
+
+<a class="anchor" id="wc_005fewc_005fsimplify"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fewc_005fsimplify"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005fewc_005fsimplify"><span class="category-def">Function: </span><span><strong class="def-name">wc_ewc_simplify</strong> <var class="def-var-arguments">(<var class="var">expression</var>, <var class="var">definitions</var>...)</var><a class="copiable-link" href="#index-wc_005fewc_005fsimplify"> &para;</a></span></dt>
+<dd>
+<p>Brute-forcing through all combinations of <var class="var">tol[n]</var> in order to find the
+worst-case combination is O(m^n)-complete and therefore computationally intensive
+for high numbers of tol[n].
+</p>
+<p><code class="code">wc_ewc_simplify</code> uses the sign of the derivatives of <var class="var">expression</var> to combine
+as many <code class="code">tol[n]</code>, as possible. The result is an expression that might run much
+faster through <code class="code">wc_mintypmax</code> and <code class="code">wc_systematic</code>, but that, if the derivate
+of <var class="var">expression</var> doesn&rsquo;t change sign in the <var class="var">tol[n]</var> space, still yields the
+same results for the brute-force approaches to worst-case analysis.
+</p>
+<p>Note that changing the number of <var class="var">tol[n]</var> will change the statistical distribution
+of the results over the <var class="var">tol[n]</var> space and therefore will change the statistical
+distribution of the montecarlo method and the results of the root sum square functions.
+</p>
+
+<p>See also <code class="code"><a class="ref" href="#wc_005fmintypmax">wc_mintypmax</a></code> and <code class="code"><a class="ref" href="#wc_005fmontecarlo">wc_montecarlo</a></code>.
+</p>
+<p><var class="var">definitions</var> allows to temporarily asssign values to specific <var class="var">tol[n]</var> during
+the optimizations (normally optimizagion is done with all <var class="var">tol[n]</var> being zero)
+which has the side-effect of excempting these <var class="var">tol[n]</var> from the
+optimization.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 2000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 2000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ratprint:false;
+(%o3)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) assume(U_In&gt;0);
+(%o4)                      [U_In &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) divider: U_Out=U_In*(R_1)/(R_1+R_2);
+                                R_1 U_In
+(%o5)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) divider_vals:subst(vals,divider);
+                        1000.0 (0.01 tol  + 1) U_In
+                                        1
+(%o6) U_Out = -----------------------------------------------
+              2000.0 (0.01 tol  + 1) + 1000.0 (0.01 tol  + 1)
+                              2                        1
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) divider_vals_simplified:lhs(divider_vals)=wc_ewc_simplify(rhs(divider_vals));
+                        1000.0 (1 - 0.01 tol ) U_In
+                                            2
+(%o7) U_Out = -----------------------------------------------
+              2000.0 (0.01 tol  + 1) + 1000.0 (1 - 0.01 tol )
+                              2                            2
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) wc_systematic(rhs(divider_vals));
+(%o8) [0.33333333333333337 U_In, 0.3311036789297659 U_In, 
+0.3289036544850498 U_In, 0.3355704697986577 U_In, 
+0.3333333333333333 U_In, 0.33112582781456956 U_In, 
+0.3377926421404682 U_In, 0.3355481727574751 U_In, 
+0.3333333333333333 U_In]
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) wc_systematic(rhs(divider_vals_simplified));
+(%o9) [0.3377926421404682 U_In, 0.3333333333333333 U_In, 
+                                         0.3289036544850498 U_In]
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) lhs(divider_vals)=wc_mintypmax(rhs(divider_vals));
+(%o10) U_Out = [min = 0.3289036544850498 U_In, 
+    typ = 0.3333333333333333 U_In, max = 0.3377926421404682 U_In]
+</pre></div><div class="group"><pre class="example-preformatted">(%i11) lhs(divider_vals_simplified)=wc_mintypmax(rhs(divider_vals_simplified));
+(%o11) U_Out = [min = 0.3289036544850498 U_In, 
+    typ = 0.3333333333333333 U_In, max = 0.3377926421404682 U_In]
+</pre></div></div>
+
+<p>Use case for adding definitions (<var class="var">tol[&quot;E_Gain&quot;]</var> cannot be optimized without
+knowing the sign of <var class="var">tol[&quot;U_In&quot;]</var>):
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   U_In=1.2*tol[&quot;U_In&quot;], /* The input voltage range */
+   n_Bits=16,            /* The ADC's number of bits */
+   U_Ref=1.2*(1+.01*tol[&quot;U_Ref&quot;]), /* The Adc's reference */
+   E_Gain=1+1.2e-6*tol[&quot;E_Gain&quot;], /* Gain error */
+   E_Offset=1.5e-6                /* Offset error */
+ ];
+(%o2) [U_In = 1.2 tol    , n_Bits = 16, 
+                     U_In
+U_Ref = 1.2 (0.01 tol      + 1), E_Gain = 1.2e-6 tol       + 1, 
+                     U_Ref                          E_Gain
+E_Offset = 1.5e-6]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) ratprint:false;
+(%o3)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) wc_inputvalueranges(vals);
+(%o4) 
+     [   U_In      min = - 1.2      typ = 0        max = 1.2    ]
+     [                                                          ]
+     [  n_Bits      min = 16        typ = 16       max = 16     ]
+     [                                                          ]
+     [  U_Ref      min = 1.188     typ = 1.2      max = 1.212   ]
+     [                                                          ]
+     [  E_Gain   min = 0.9999988    typ = 1     max = 1.0000012 ]
+     [                                                          ]
+     [ E_Offset   min = 1.5e-6    typ = 1.5e-6   max = 1.5e-6   ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) ndsadc:n_DSADC=((U_In*E_Gain+E_Offset)/U_Ref+.5)*(2^(n_Bits)-1);
+                  n_Bits       E_Gain U_In + E_Offset
+(%o5) n_DSADC = (2       - 1) (---------------------- + 0.5)
+                                       U_Ref
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) lhs(ndsadc)=wc_ewc_simplify(subst(vals,rhs(ndsadc)));
+(%o6) n_DSADC = 65535 ((0.8333333333333334
+ (1.5e-6 - 1.2 (1.2e-6 tol       + 1) tol     ))
+                          E_Gain         U_Ref
+/(0.01 tol      + 1) + 0.5)
+          U_Ref
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) lhs(ndsadc)=wc_ewc_simplify(subst(vals,rhs(ndsadc)),tol[&quot;U_In&quot;]=1);
+(%o7) n_DSADC = 65535 ((0.8333333333333334
+ (1.2 tol     (1 - 1.2e-6 tol     ) + 1.5e-6))
+         U_In                U_Ref
+/(0.01 tol      + 1) + 0.5)
+          U_Ref
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fmontecarlo"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fmontecarlo"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005fmontecarlo"><span class="category-def">Function: </span><span><strong class="def-name">wc_montecarlo</strong> <var class="def-var-arguments">(<var class="var">expression</var>, <var class="var">num</var>)</var><a class="copiable-link" href="#index-wc_005fmontecarlo"> &para;</a></span></dt>
+<dd>
+<p>Introduces <var class="var">num</var> random values per parameter into
+<var class="var">expression</var> and returns a list of the result.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005fsystematic">wc_systematic</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 2000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 2000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) divider: U_Out=U_In*(R_1)/(R_1+R_2);
+                                R_1 U_In
+(%o3)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) wc_montecarlo(subst(vals,rhs(divider)),10);
+(%o4) [0.3301505377099377 U_In, 0.33276843198354916 U_In, 
+0.33406203454153227 U_In, 0.33434833585190965 U_In, 
+0.3341006856369802 U_In, 0.3359647531928058 U_In, 
+0.32911646313213117 U_In, 0.333158315034511 U_In, 
+0.3325173140803672 U_In, 0.3331108406798784 U_In]
+</pre></div></div>
+</dd></dl>
+
+
+<a class="anchor" id="wc_005fmintypmax"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fmintypmax"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005fmintypmax"><span class="category-def">Function: </span><span><strong class="def-name">wc_mintypmax</strong> <var class="def-var-arguments">(<var class="var">expr</var>, [<var class="var">n</var>])</var><a class="copiable-link" href="#index-wc_005fmintypmax"> &para;</a></span></dt>
+<dd>
+<p>Prints the minimum, maximum and typical value of <var class="var">expr</var>. If <var class="var">n</var>
+is positive, <var class="var">n</var> values for each parameter will be tried systematically.
+If <var class="var">n</var> is negative, <var class="var">-n</var> random values are used instead.
+If no <var class="var">n</var> is given, <var class="var">wc_defaultvaluespertol</var> is assumed.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005fmintypmax_005fpercent">wc_mintypmax_percent</a></code>, <code class="code"><a class="ref" href="#wc_005fmintypmax_005frss">wc_mintypmax_rss</a></code>,
+<code class="code"><a class="ref" href="#wc_005fewc_005fsimplify">wc_ewc_simplify</a></code> and <code class="code"><a class="ref" href="#wc_005fsystematic">wc_systematic</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+(%i2) ratprint:false$
+</pre><div class="group"><pre class="example-preformatted">(%i3) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 1000.0*(1+tol[2]*.01)
+ ];
+(%o3) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 1000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) assume(U_In&gt;0);
+(%o4)                      [U_In &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) divider:U_Out=U_In*R_1/(R_1+R_2);
+                                R_1 U_In
+(%o5)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) lhs(divider)=wc_mintypmax(subst(vals,rhs(divider)));
+(%o6) U_Out = [min = 0.495 U_In, typ = 0.5 U_In, 
+                                                max = 0.505 U_In]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fmintypmax_005fpercent"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fmintypmax_005fpercent"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005fmintypmax_005fpercent"><span class="category-def">Function: </span><span><strong class="def-name">wc_mintypmax_percent</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">sigmas</var>)</var><a class="copiable-link" href="#index-wc_005fmintypmax_005fpercent"> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">wc_mintypmax</code>, but outputs the tolerance range in percent.
+</p>
+<p>See <code class="code"><a class="ref" href="#wc_005fmintypmax">wc_mintypmax</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+(%i2) ratprint:false$
+(%i3) wc_defaultsigma:6$
+</pre><div class="group"><pre class="example-preformatted">(%i4) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 1000.0*(1+tol[2]*.01)
+ ];
+(%o4) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 1000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) assume(U_In&gt;0);
+(%o5)                      [U_In &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) divider:U_Out=U_In*R_1/(R_1+R_2);
+                                R_1 U_In
+(%o6)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) lhs(divider)=wc_mintypmax(subst(vals,rhs(divider)));
+(%o7) U_Out = [min = 0.495 U_In, typ = 0.5 U_In, 
+                                                max = 0.505 U_In]
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) lhs(divider)=wc_mintypmax_percent(subst(vals,rhs(divider)));
+(%o8) U_Out = [min = - 1.0000000000000009 %, typ = 0.5 U_In, 
+                                      max = 1.0000000000000009 %]
+</pre></div></div>
+</dd></dl>
+
+
+<a class="anchor" id="wc_005fmintypmax_005frss"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fmintypmax_005frss"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005fmintypmax_005frss"><span class="category-def">Function: </span><span><strong class="def-name">wc_mintypmax_rss</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">sigmas</var>)</var><a class="copiable-link" href="#index-wc_005fmintypmax_005frss"> &para;</a></span></dt>
+<dd>
+<p>Prints the minimum and maximum of <var class="var">expr</var>, as well as how high the
+probability is that <var class="var">expr</var> will lie out of that range based on a root
+sum square calculation and assuming all input ranges will be gauss-shaped.
+</p>
+<p><var class="var">wc_defaultsigma</var> defines how many sigma of an input value&rsquo;s tolerance
+distribution the range of <var class="var">tol[n]</var>=[-1...1] corresponds to.
+</p>
+<p>The RSS methods has a few advantages a brute-force worst-case calculation:
+It is fast even witput <code class="code"><a class="ref" href="#wc_005fewc_005fsimplify">wc_ewc_simplify</a></code>. It prevents overengineering
+resulting from assuming all tolerances to add up in a catastrophical way if
+this only happens in a neglectible number of cases. But it will yield only
+the correct results if the gaussian distribution of the input data is known.
+</p>
+<p>Due to its nature this method doesn&rsquo;t support tolerances that aren&rsquo;t
+symmetrical. Therefore in that case the tolerances are extended in the
+direction that is less wide.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005fdefaultsigma">wc_defaultsigma</a></code> <code class="code"><a class="ref" href="#wc_005fmintypmax_005frss_005fpercent">wc_mintypmax_rss_percent</a></code>, and
+<code class="code"><a class="ref" href="#wc_005fmintypmax">wc_mintypmax</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+(%i2) ratprint:false$
+(%i3) wc_defaultsigma:6$
+</pre><div class="group"><pre class="example-preformatted">(%i4) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 1000.0*(1+tol[2]*.01)
+ ];
+(%o4) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 1000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) assume(U_In&gt;0);
+(%o5)                      [U_In &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) divider:U_Out=U_In*R_1/(R_1+R_2);
+                                R_1 U_In
+(%o6)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) lhs(divider)=wc_mintypmax_rss(subst(vals,rhs(divider)),6);
+(%o7) U_Out = [min = 0.49646446609406725 U_In, typ = 0.5 U_In, 
+ max = 0.5035355339059328 U_In, Fail = 0.0019731752898266564 ppm]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fmintypmax_005frss_005fpercent"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fmintypmax_005frss_005fpercent"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005fmintypmax_005frss_005fpercent"><span class="category-def">Function: </span><span><strong class="def-name">wc_mintypmax_rss_percent</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">sigmas</var>)</var><a class="copiable-link" href="#index-wc_005fmintypmax_005frss_005fpercent"> &para;</a></span></dt>
+<dd>
+<p>Like <code class="code">wc_mintypmax_rss</code>, but outputs the tolerance range in percent.
+</p>
+<p>See <code class="code"><a class="ref" href="#wc_005fmintypmax_005frss">wc_mintypmax_rss</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+(%i2) ratprint:false$
+(%i3) wc_defaultsigma:6$
+</pre><div class="group"><pre class="example-preformatted">(%i4) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 1000.0*(1+tol[2]*.01)
+ ];
+(%o4) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 1000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) assume(U_In&gt;0);
+(%o5)                      [U_In &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) divider:U_Out=U_In*R_1/(R_1+R_2);
+                                R_1 U_In
+(%o6)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) lhs(divider)=wc_mintypmax_rss(subst(vals,rhs(divider)),6);
+(%o7) U_Out = [min = 0.49646446609406725 U_In, typ = 0.5 U_In, 
+ max = 0.5035355339059328 U_In, Fail = 0.0019731752898266564 ppm]
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) lhs(divider)=float(wc_mintypmax_rss_percent(subst(vals,rhs(divider)),6));
+(%o8) U_Out = [min = - 0.7071067811865506 %, typ = 0.5 U_In, 
+    max = 0.7071067811865506 %, Fail = 0.0019731752898266564 ppm]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fdefaultsigma"></a><a class="anchor" id="Item_003a-wrstcse_002fdefvr_002fwc_005fdefaultsigma"></a><dl class="first-defvr def-block">
+<dt class="defvr def-line" id="index-wc_005fdefaultsigma"><span class="category-def">Option variable: </span><span><strong class="def-name">wc_defaultsigma</strong><a class="copiable-link" href="#index-wc_005fdefaultsigma"> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">6</code>
+</p>
+<p>Defines how many sigmas of the gauss distribution that represents the
+tolerances of a parameter correspond to a <var class="var">tol[n]</var> value of -1...1.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005fmintypmax_005frss">wc_mintypmax_rss</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+(%i2) ratprint:false$
+</pre><div class="group"><pre class="example-preformatted">(%i3) vals: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 1000.0*(1+tol[2]*.01)
+ ];
+(%o3) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 1000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) assume(U_In&gt;0);
+(%o4)                      [U_In &gt; 0]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) divider:U_Out=U_In*R_1/(R_1+R_2);
+                                R_1 U_In
+(%o5)                   U_Out = ---------
+                                R_2 + R_1
+</pre></div><pre class="example-preformatted">(%i6) wc_defaultsigma:1$
+</pre><div class="group"><pre class="example-preformatted">(%i7) lhs(divider)=wc_mintypmax_rss(subst(vals,rhs(divider)),6);
+(%o7) U_Out = [min = 0.4787867965644036 U_In, typ = 0.5 U_In, 
+ max = 0.5212132034355964 U_In, Fail = 0.0019731752898266564 ppm]
+</pre></div><pre class="example-preformatted">(%i8) wc_defaultsigma:3$
+</pre><div class="group"><pre class="example-preformatted">(%i9) lhs(divider)=wc_mintypmax_rss(subst(vals,rhs(divider)),6);
+(%o9) U_Out = [min = 0.49292893218813455 U_In, typ = 0.5 U_In, 
+ max = 0.5070710678118655 U_In, Fail = 0.0019731752898266564 ppm]
+</pre></div><pre class="example-preformatted">(%i10) wc_defaultsigma:6$
+</pre><div class="group"><pre class="example-preformatted">(%i11) lhs(divider)=wc_mintypmax_rss(subst(vals,rhs(divider)),6);
+(%o11) U_Out = [min = 0.49646446609406725 U_In, typ = 0.5 U_In, 
+ max = 0.5035355339059328 U_In, Fail = 0.0019731752898266564 ppm]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fdefaultvaluespertol"></a><a class="anchor" id="Item_003a-wrstcse_002fdefvr_002fwc_005fdefaultvaluespertol"></a><dl class="first-defvr def-block">
+<dt class="defvr def-line" id="index-wc_005fdefaultvaluespertol"><span class="category-def">Option variable: </span><span><strong class="def-name">wc_defaultvaluespertol</strong><a class="copiable-link" href="#index-wc_005fdefaultvaluespertol"> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">3</code>
+</p>
+<p>Defines how many samples per <var class="var">tol[n]</var> the EWC method of
+<code class="code">wc_systematic</code> and <code class="code">wc_mintypmax</code> shall use by default.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005fsystematic">wc_systematic</a></code> and <code class="code"><a class="ref" href="#wc_005fmintypmax">wc_mintypmax</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+(%i2) ratprint:false$
+</pre><div class="group"><pre class="example-preformatted">(%i3) vals: [
+   R_1= 100.0*(1+tol[1]*.01),
+   R_2= 1000.0*(1+tol[2]*.01)
+ ];
+(%o3) [R_1 = 100.0 (0.01 tol  + 1), R_2 = 1000.0 (0.01 tol  + 1)]
+                            1                             2
+</pre></div><pre class="example-preformatted">(%i4) wc_defaultvaluespertol:2$
+</pre><div class="group"><pre class="example-preformatted">(%i5) wc_systematic(vals);
+(%o5) [[R_1 = 99.0, R_2 = 990.0], [R_1 = 99.0, R_2 = 1010.0], 
+         [R_1 = 101.0, R_2 = 990.0], [R_1 = 101.0, R_2 = 1010.0]]
+</pre></div><pre class="example-preformatted">(%i6) wc_defaultvaluespertol:3$
+</pre><div class="group"><pre class="example-preformatted">(%i7) wc_systematic(vals);
+(%o7) [[R_1 = 99.0, R_2 = 990.0], [R_1 = 99.0, R_2 = 1000.0], 
+[R_1 = 99.0, R_2 = 1010.0], [R_1 = 100.0, R_2 = 990.0], 
+[R_1 = 100.0, R_2 = 1000.0], [R_1 = 100.0, R_2 = 1010.0], 
+[R_1 = 101.0, R_2 = 990.0], [R_1 = 101.0, R_2 = 1000.0], 
+[R_1 = 101.0, R_2 = 1010.0]]
+</pre></div><pre class="example-preformatted">(%i8) wc_defaultvaluespertol:5$
+</pre><div class="group"><pre class="example-preformatted">(%i9) wc_systematic(vals);
+(%o9) [[R_1 = 99.0, R_2 = 990.0], [R_1 = 99.0, R_2 = 995.0], 
+[R_1 = 99.0, R_2 = 1000.0], [R_1 = 99.0, 
+R_2 = 1004.9999999999999], [R_1 = 99.0, R_2 = 1010.0], 
+[R_1 = 99.5, R_2 = 990.0], [R_1 = 99.5, R_2 = 995.0], 
+[R_1 = 99.5, R_2 = 1000.0], [R_1 = 99.5, 
+R_2 = 1004.9999999999999], [R_1 = 99.5, R_2 = 1010.0], 
+[R_1 = 100.0, R_2 = 990.0], [R_1 = 100.0, R_2 = 995.0], 
+[R_1 = 100.0, R_2 = 1000.0], [R_1 = 100.0, 
+R_2 = 1004.9999999999999], [R_1 = 100.0, R_2 = 1010.0], 
+[R_1 = 100.49999999999999, R_2 = 990.0], 
+[R_1 = 100.49999999999999, R_2 = 995.0], 
+[R_1 = 100.49999999999999, R_2 = 1000.0], 
+[R_1 = 100.49999999999999, R_2 = 1004.9999999999999], 
+[R_1 = 100.49999999999999, R_2 = 1010.0], 
+[R_1 = 101.0, R_2 = 990.0], [R_1 = 101.0, R_2 = 995.0], 
+[R_1 = 101.0, R_2 = 1000.0], [R_1 = 101.0, 
+R_2 = 1004.9999999999999], [R_1 = 101.0, R_2 = 1010.0]]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005ftolappend"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005ftolappend"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005ftolappend"><span class="category-def">Function: </span><span><strong class="def-name">wc_tolappend</strong> <var class="def-var-arguments">(<var class="var">list1</var>, <var class="var">list2</var>,...)</var><a class="copiable-link" href="#index-wc_005ftolappend"> &para;</a></span></dt>
+<dd>
+<p>Appends lists of parameters from independent sources making sure that
+tolerances of all elements in one list will stay independent from all
+elements in the others.
+</p>
+<p>Works like append() in that it appends all values from all of its
+arguments to make one big list. But this command, if one list
+happens to contain a <var class="var">tol[n]</var> with the same <var class="var">n</var> as another
+list, changes one of these <var class="var">n</var> to a new value that makes
+it independent from all tolerances from the other list.
+</p>
+<p>See also <code class="code"><a class="ref" href="Data-Types-and-Structures.html#append">append</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) val_a: [
+   R_1= 1000.0*(1+tol[1]*.01),
+   R_2= 1000.0*(1+tol[2]*.01)
+ ];
+(%o2) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_2 = 1000.0 (0.01 tol  + 1)]
+                                                          2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) val_b: [
+   R_3= 1000.0*(1+tol[1]*.01),
+   R_4= 1000.0*(1+tol[4]*.01)
+ ];
+(%o3) [R_3 = 1000.0 (0.01 tol  + 1), 
+                             1
+                                    R_4 = 1000.0 (0.01 tol  + 1)]
+                                                          4
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) append(val_a,val_b);
+(%o4) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+R_2 = 1000.0 (0.01 tol  + 1), R_3 = 1000.0 (0.01 tol  + 1), 
+                      2                             1
+R_4 = 1000.0 (0.01 tol  + 1)]
+                      4
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) wc_tolappend(val_a,val_b);
+                            used = 1
+
+(%o5) [R_1 = 1000.0 (0.01 tol  + 1), 
+                             1
+R_2 = 1000.0 (0.01 tol  + 1), R_3 = 1000.0 (0.01 tol  + 1), 
+                      2                             5
+R_4 = 1000.0 (0.01 tol  + 1)]
+                      4
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005fmintypmax2tol"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005fmintypmax2tol"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005fmintypmax2tol"><span class="category-def">Function: </span><span><strong class="def-name">wc_mintypmax2tol</strong> <var class="def-var-arguments">(<var class="var">tolname</var>, <var class="var">minval</var>, <var class="var">typval</var>, <var class="var">maxval</var>)</var><a class="copiable-link" href="#index-wc_005fmintypmax2tol"> &para;</a></span></dt>
+<dd>
+<p>Generates a parameter that uses the tolerance <var class="var">tolname</var> and tolerates between the
+given values.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) vals: [U_Diode=wc_mintypmax2tol(tol[1],.5,.75,.82),
+       R=wc_mintypmax2tol(tol[2],1,1.1,1.3),
+       U_In=wc_mintypmax2tol(tol[3],0,0,15)];
+(%o2) [U_Diode = 0.034999999999999976 (|tol | + tol )
+                                       |   1|      1
+ + 0.125 (tol  - |tol |) + 0.75, 
+             1   |   1|
+R = 0.09999999999999998 (|tol | + tol )
+                         |   2|      2
+ + 0.050000000000000044 (tol  - |tol |) + 1.1, 
+                            2   |   2|
+       15 (|tol | + tol )
+           |   3|      3
+U_In = ------------------]
+               2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) wc_inputvalueranges(vals);
+         [ U_Diode  min = 0.5  typ = 0.75  max = 0.82 ]
+         [                                            ]
+(%o3)    [    R     min = 1.0  typ = 1.1   max = 1.3  ]
+         [                                            ]
+         [  U_In     min = 0    typ = 0     max = 15  ]
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005finputvalueassumptions"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005finputvalueassumptions"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005finputvalueassumptions"><span class="category-def">Function: </span><span><strong class="def-name">wc_inputvalueassumptions</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href="#index-wc_005finputvalueassumptions"> &para;</a></span></dt>
+<dd>
+<p>Often it is good practice to keep all numeric values with tolerances in a list
+and to introduce them into the equations only when needed.
+</p>
+<p><code class="code">wc_inputvalueassumptions</code> in this case can inform the
+<code class="code">assume</code> database about the range each variable in that list will
+be in.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005ftolassumptions">wc_tolassumptions</a></code>, <code class="code"><a class="ref" href="#wc_005finputvalueranges">wc_inputvalueranges</a></code> and
+<code class="code"><a class="ref" href="Maxima_0027s-Database.html#assume">assume</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<div class="group"><pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;);
+(%o1) /home/gunter/src/maxima-code/share/contrib/wrstcse.mac
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) vals:[
+    R_1=100*(1+1/100*tol[&quot;R1&quot;])*(1+1/100*tol[&quot;Temp&quot;]),
+    R_2=200*(1+1/100*tol[&quot;R2&quot;])*(1+1/100*tol[&quot;Temp&quot;])];
+                  tol         tol
+                     R1          Temp
+(%o2) [R_1 = 100 (----- + 1) (------- + 1), 
+                   100          100
+                                        tol         tol
+                                           R2          Temp
+                             R_2 = 200 (----- + 1) (------- + 1)]
+                                         100          100
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) float(wc_inputvalueassumptions(%));
+(%o3) [R_2 &gt;= 196.02, R_2 &lt;= 204.02, R_1 &gt;= 98.01, R_1 &lt;= 102.01]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) is(R_1&gt;R_2);
+(%o4)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) is(R_1&gt;90);
+(%o5)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) is(R_1&gt;200);
+(%o6)                         false
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) is(R_1&lt;200);
+(%o7)                         true
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) is(R_1&gt;100);
+(%o8)                        unknown
+</pre></div></div>
+</dd></dl>
+
+<a class="anchor" id="wc_005ftolassumptions"></a><a class="anchor" id="Item_003a-wrstcse_002fdeffn_002fwc_005ftolassumptions"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-wc_005ftolassumptions"><span class="category-def">Function: </span><span><strong class="def-name">wc_tolassumptions</strong> <var class="def-var-arguments">(<var class="var">expr</var>)</var><a class="copiable-link" href="#index-wc_005ftolassumptions"> &para;</a></span></dt>
+<dd>
+<p>Adds the range of the <var class="var">tol[n]</var> contained in <var class="var">expr</var> to the assume
+database.
+</p>
+<p>See also <code class="code"><a class="ref" href="#wc_005finputvalueassumptions">wc_inputvalueassumptions</a></code>, <code class="code"><a class="ref" href="#wc_005finputvalueranges">wc_inputvalueranges</a></code> and <code class="code"><a class="ref" href="Maxima_0027s-Database.html#assume">assume</a></code>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<div class="group"><pre class="example-preformatted">(%i1) load(&quot;wrstcse&quot;);
+(%o1) /home/gunter/src/maxima-code/share/contrib/wrstcse.mac
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) vals:[
+    R_1=100*(1+1/100*tol[&quot;R1&quot;])*(1+1/100*tol[&quot;Temp&quot;]),
+    R_2=200*(1+1/100*tol[&quot;R2&quot;])*(1+1/100*tol[&quot;Temp&quot;])];
+                  tol         tol
+                     R1          Temp
+(%o2) [R_1 = 100 (----- + 1) (------- + 1), 
+                   100          100
+                                        tol         tol
+                                           R2          Temp
+                             R_2 = 200 (----- + 1) (------- + 1)]
+                                         100          100
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) float(wc_tolassumptions(%));
+(%o3) [tol   &gt;= - 1.0, tol   &lt;= 1.0, tol     &gt;= - 1.0, 
+          R1              R1            Temp
+                    tol     &lt;= 1.0, tol   &gt;= - 1.0, tol   &lt;= 1.0]
+                       Temp            R2              R2
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) is(tol[R_1]&gt;tol[R_2]);
+(%o4)                        unknown
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) is(tol[R_1]&gt;1);
+(%o5)                        unknown
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) is(tol[R_1]&lt;-1);
+(%o6)                        unknown
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) is(tol[R_1]&lt;0);
+(%o7)                        unknown
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) is(tol[R_2]&gt;2);
+(%o8)                        unknown
+</pre></div></div>
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-zeilberger.html#Package-zeilberger" accesskey="n" rel="next">Package zeilberger</a>, Previous: <a href="Package-unit.html#Package-unit" accesskey="p" rel="prev">Package unit</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

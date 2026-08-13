@@ -1,0 +1,30 @@
+#
+# Demonstrate use of TeX Computer Modern fonts in gnuplot PostScript terminal
+# This demo requires Adobe Type 1 fonts that may not be installed on your system.
+# If necessary you can download them from
+#    http://mirrors.ctan.org/fonts/cm/ps-type1/bakoma/pfb/cmr10.pfb
+#    http://mirrors.ctan.org/fonts/cm/ps-type1/bakoma/pfb/cmmi10.pfb
+#    http://mirrors.ctan.org/fonts/cm/ps-type1/bakoma/patched-pfb/cmsy10.pfb
+# 
+set term push
+set term post eps color fontfile 'cmr10.pfb' fontfile 'cmmi10.pfb' fontfile 'cmsy10.pfb'
+set output 'cmfonts.eps'
+
+set title "Use of TeX Computer Modern fonts in gnuplot PostScript terminal"
+
+set label 1 'Times-Roman: {/Times-Roman abcdefghABCDEFGH}'
+set label 2 'cmr10: {/cmr10 abcdefghABCDEFGH}'
+set label 3 'cmmi10: {/cmmi10 abcdefghABCDEFGH} {/cmmi10 \013\014\015\016\042}'
+set label 4 'cmsy10: {/cmmi10 abcdefghABCDEFGH} {/cmsy10 \013\014\015\016\042}'
+set label 1 at graph 0.05,0.6 left
+set label 2 at graph 0.05,0.5 left
+set label 3 at graph 0.05,0.4 left
+set label 4 at graph 0.05,0.3 left
+
+set xlabel "{/cmmi10 \013}"
+plot [0:2*pi] sin(x) title "{/cmr10 sin({/cmmi10 \013})}"
+
+unset output
+set terminal pop
+reset
+

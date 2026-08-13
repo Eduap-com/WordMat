@@ -1,0 +1,265 @@
+(kill(values), 0);
+0$
+
+atan2(1, 1);
+%pi/4$
+
+atan2(1, -1);
+3*%pi/4$
+
+atan2(-1, -1);
+-3*%pi/4$
+
+atan2(-1, 1);
+-%pi/4$
+
+atan2(0, 1);
+0$
+
+atan2(0, -1);
+%pi$
+
+atan2(1, 0);
+%pi/2$
+
+atan2(-1, 0);
+-%pi/2$
+
+errcatch(atan2(0, 0));
+[]$
+
+atan2(0, inf);
+0$
+
+atan2(zerob, inf);
+0$
+
+atan2(zeroa, inf);
+0$
+
+atan2(0, -inf);
+%pi$
+
+atan2(zerob, -inf);
+-%pi$
+
+atan2(zeroa, -inf);
+%pi$
+
+atan2(0,minf);
+%pi$
+
+atan2(zerob,minf);
+-%pi$
+
+atan2(zeroa,minf);
+%pi$
+
+atan2(inf, 1);
+%pi/2$
+
+atan2(-inf, 1);
+-%pi/2$
+
+atan2(minf,1);
+-%pi/2$
+
+atan2(1, inf);
+0$
+
+atan2(1, -inf);
+%pi$
+
+atan2(1, minf);
+%pi$
+
+atan2(inf, -1);
+%pi/2$
+
+atan2(-inf, -1);
+-%pi/2$
+
+atan2(minf, -1);
+-%pi/2$
+
+block([ans],
+  assume(-%pi < x, x <= '%pi),
+  ans : atan2(sin(x),cos(x)),
+  forget(-%pi < x, x <= '%pi),
+  ans);
+x$
+
+atan2(sin(x), cos(x));
+x-2*%pi*ceiling((x-%pi)/(2*%pi))$
+
+/* test identity atan2(sin(x), cos(x))  */
+block([ans1 : makelist(trigreduce(atan2(sin(%pi*k/8),cos(%pi*k/8))),k,-16,16),
+       ans2 : block([zzz : atan2(sin(x),cos(x))], makelist(subst(x = %pi*k/8, zzz),k,-16,16))],
+    every(lambda([q],is(q=0)),trigsimp(ans1 - ans2)));
+true$
+
+/* test identity atan2(-sin(x), cos(x))*/
+block([ans1 : makelist(trigreduce(atan2(-sin(%pi*k/8),cos(%pi*k/8))),k,-16,16),
+       ans2 : block([zzz : atan2(-sin(x),cos(x))], makelist(subst(x = %pi*k/8, zzz),k,-16,16))],
+    every(lambda([q],is(q=0)), trigsimp(ans1 - ans2)));
+true$
+
+/* test identity atan2(sin(x), -cos(x))*/
+block([ans1 : makelist(trigreduce(atan2(sin(%pi*k/8),-cos(%pi*k/8))),k,-16,16),
+       ans2 : block([zzz : atan2(sin(x),-cos(x))], makelist(subst(x = %pi*k/8, zzz),k,-16,16))],
+    every(lambda([q],is(q=0)), trigsimp(ans1 - ans2)));
+true$
+
+/* test identity atan2(-sin(x), -cos(x))*/
+block([ans1 : makelist(trigreduce(atan2(-sin(%pi*k/8),-cos(%pi*k/8))),k,-16,16),
+       ans2 : block([zzz : atan2(-sin(x),-cos(x))], makelist(subst(x = %pi*k/8, zzz),k,-16,16))],
+    every(lambda([q],is(q=0)), trigsimp(ans1 - ans2)));
+true$
+
+/* test identity atan2(cos(x), sin(x))  */
+block([ans1 : makelist(trigreduce(atan2(cos(%pi*k/8),sin(%pi*k/8))),k,-16,16),
+       ans2 : block([zzz : atan2(cos(x),sin(x))], makelist(subst(x = %pi*k/8, zzz),k,-16,16))],
+    every(lambda([q],is(q=0)),trigsimp(ans1 - ans2)));
+true$
+
+/* test identity atan2(-cos(x), sin(x))*/
+block([ans1 : makelist(trigreduce(atan2(-cos(%pi*k/8),sin(%pi*k/8))),k,-16,16),
+       ans2 : block([zzz : atan2(-cos(x),sin(x))], makelist(subst(x = %pi*k/8, zzz),k,-16,16))],
+    every(lambda([q],is(q=0)), trigsimp(ans1 - ans2)));
+true$
+
+/* test identity atan2(cos(x), -sin(x))*/
+block([ans1 : makelist(trigreduce(atan2(cos(%pi*k/8),-sin(%pi*k/8))),k,-16,16),
+       ans2 : block([zzz : atan2(cos(x),-sin(x))], makelist(subst(x = %pi*k/8, zzz),k,-16,16))],
+    every(lambda([q],is(q=0)), trigsimp(ans1 - ans2)));
+true$
+
+/* test identity atan2(-sin(x), -cos(x))*/
+block([ans1 : makelist(trigreduce(atan2(-sin(%pi*k/8),-cos(%pi*k/8))),k,-16,16),
+       ans2 : block([zzz : atan2(-sin(x),-cos(x))], makelist(subst(x = %pi*k/8, zzz),k,-16,16))],
+    every(lambda([q],is(q=0)), trigsimp(ans1 - ans2)));
+true$
+
+integrate(atan2(sin(x),cos(x)),x,0,9*%pi);
+%pi^2/2$
+
+/* Directional limits near branch cuts */
+limit(atan2(epsilon, -1), epsilon, 0, plus);
+%pi$
+
+limit(atan2(epsilon, -1), epsilon, 0, minus);
+-%pi$
+
+limit(atan2(-1, epsilon), epsilon, 0, plus);
+-%pi/2$
+
+limit(atan2(-1, epsilon), epsilon, 0, minus);
+-%pi/2$
+
+atan2(1.0, 0.0);
+1.5707963267948966$ 
+
+atan2(inf, 1);
+%pi/2$
+
+atan2(-inf, 1);
+-%pi/2$
+
+atan2(1, inf);
+0$
+
+atan2(1, -inf);
+%pi$
+
+atan2(inf, inf);
+atan2(inf,inf)$
+
+atan2(-inf, -inf);
+atan2(-inf,-inf)$
+
+atan2(1.0e-100, -1);
+3.141592653589793$ 
+
+atan2(-1.0e-100, -1);
+-3.141592653589793$ 
+
+atan2(1, -1.0e-100);
+1.5707963267948966$
+
+atan2(-1, -1e-100);
+ -1.5707963267948966$
+
+atan2(1e-100, 1e-100);
+0.7853981633974483$  
+
+atan2(-1e-100, -1e-100);
+-2.356194490192345$
+
+atan2(1, -0.0);
+1.5707963267948966$
+
+atan2(-1, -0.0);
+- 1.5707963267948966$
+
+block([ans], 
+  assume(equal(x,0)),
+  ans : errcatch(atan2(x,x)),
+  forget(equal(x,0)),
+  ans);
+[]$
+
+block([ans], 
+  assume(x > 0),
+  ans : atan2(x,x),
+  forget(x > 0),
+  ans);
+%pi/4$
+
+block([ans], 
+  assume(x < 0),
+  ans : atan2(x,x),
+  forget(x < 0),
+  ans);
+-3*%pi/4$
+
+/* #4615 carg range is not in (-%pi, %pi] */
+block([c:3*(cos(5*%pi/13)+%i*sin(5*%pi/13)), d:4*(cos(7*%pi/13)+%i*sin(7*%pi/13))],
+  carg(c/d));
+-2*%pi/13$
+
+/* #4609 atan2(inf,inf) -> 0*/
+block([ans : atan2(inf,inf)],
+  [inpart(ans,0), args(ans)]);
+[atan2, [inf, inf]]$
+
+/* #3750 Quoting atan2 inhibits simplification*/
+'atan2(9,0);
+%pi/2$
+
+/* #3127 incorrect integral of expression containing atan2*/
+integrate(sin(t)*atan2(2*sin(t),1-2*cos(t)),t,0,%pi);
+%pi/4$
+
+/* #4613 integrate(atan2(sin(x), cos(x)), x, 0, 9*%pi);*/
+integrate(atan2(sin(x), cos(x)), x, 0, 9*%pi);
+%pi^2/2$
+
+/*\#4614 atan2 reflection rule*/
+block([trigsign : true], subst([x=-1,y=0], atan2(-y,x) + atan2(y,x)));
+2*%pi$
+
+block([trigsign : true,ans], 
+  assume(notequal(y,0)),
+  ans : 0,
+  forget(notequal(y,0)),
+  ans);
+0$
+
+(kill(values),0);
+0$ 
+
+facts();
+[]$
+
+(reset(trigsign),0);
+0$
