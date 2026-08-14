@@ -1,3 +1,0 @@
-(setf (logical-pathname-translations "SYS")
-  '(("SYS:SRC;**;*.*.*" #p"/opt/homebrew/Cellar/sbcl/2.6.7/share/sbcl/src/**/*.*")
-    ("SYS:CONTRIB;**;*.*.*" #p"/opt/homebrew/Cellar/sbcl/2.6.7/share/sbcl/contrib/**/*.*")))

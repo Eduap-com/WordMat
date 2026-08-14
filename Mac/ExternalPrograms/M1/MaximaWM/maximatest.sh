@@ -5,11 +5,17 @@
 
 #ROOT=`(cd \`dirname "$SCRIPT"\` > /dev/null 2>&1 ; pwd)`
 #MAXIMA_PREFIX=$ROOT/maxima/
+
 MAXIMA_PREFIX='/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima'
 export MAXIMA_PREFIX
 
-PATH="$MAXIMA_PREFIX/bin:$PATH"
-export PATH
+#PATH="$MAXIMA_PREFIX/bin:$PATH"
+#export PATH
+
+MAXIMA_LAYOUT_AUTOTOOLS=false
+export MAXIMA_LAYOUT_AUTOTOOLS
+#env MAXIMA_LAYOUT_AUTOTOOLS=false
+
 #function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
 echo Starting Maxima M1-compiled
 
