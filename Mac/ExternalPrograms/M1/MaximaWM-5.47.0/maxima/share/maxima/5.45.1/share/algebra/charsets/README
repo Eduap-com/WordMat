@@ -1,0 +1,68 @@
+CharSets is a program which I translated from the Maple package CharSets,
+written by Dr. Dongming Wang.  His homepage is  http://calfor.lip6.fr/~wang.
+A good reference for Characteristic sets is his book Elimination Methods.
+
+I wish to thank Dr. Wang for making this code available to the maxima
+project.  I also wish to thank Dr. Willis, Dr. Fateman and Mr. Dotson for
+their assistance with this project.
+Finally, I wish to dedicate this work to the late Dr. Paul Karmel.
+Dan Stanger
+11/28/02
+
+The CharSets package depends on the set functions in set.lisp, which was
+previously in maxima/src/ and is now in maxima/share/algebra/charsets/.
+To use CharSets, set.lisp must be loaded first, as it is no longer part
+of the compiled Maxima code. For general use, nset.lisp in
+maxima/share/contrib/nset/ supersedes set.lisp.
+
+Robert Dodier
+2005/02/07
+
+src/flatten.lisp has also been moved to share/algebra/charsets/,
+with $every cut from src/mutils.lisp and pasted into flatten.lisp.
+$flatten and $every have been renamed to $charsets_flatten and 
+$charsets_every, and every function in set.lisp has been renamed
+from $foo to $charsets_foo. Function calls in charsets.mac and
+rtestflatten.mac have been fixed up from foo to charsets_foo to
+match set.lisp and flatten.lisp.
+
+Robert Dodier
+2005/02/23
+
+charsets appears to be broken, and I don't see how it ever worked. I've
+made some recent commits to fix some things, but there are still some
+references to undefined functions, and maybe other problems. The 
+undefined functions are some subset of:
+
+[Gcd, RootOf, charsets_die, charsets_dieA, coeffs, complexity, 
+das, eval, evala, fmedset, gbasis, lcm, leadmon, medset, ml2, ml3, 
+normalf, numer, prem, rand, readstat, simplify, sprem, theRankFunction, 
+tn, variablep]
+
+which are the symbols which appear in function calls in functions
+defined in charset.mac, which are apparently not defined functions
+(i.e., neither a Lisp function, nor a Maxima := function, nor a 
+Maxima defmspec, nor a Maxima autoloading function). Some of those
+symbols are local names of functions which are arguments, so it is
+expected that there will be no function definitions for those 
+symbols. I haven't tried to sort out which are the local names and
+which are honest-to-goodness undefined functions. 
+
+Some fragmentary notes about the undefined functions.
+
+ * Gcd and RootOf are only referenced in charsets_Malgcd which is
+   not called anywhere.
+ * charsets_die and charsets_dieA are used as variables but then
+   as functions. The value of the variables doesn't appear to be
+   a lambda expression. Is the variable supposed to be assigned
+   lambda([], foo) where foo is the value now assigned? In both
+   cases, the value is a random number, so it's meaningful to
+   call it (to get a different number each time).
+ * gbasis, leadmon, and normalf appear to be functions from an old
+   Maple package for computing Groebner bases.
+ * theRankFunction and tn are function arguments which are, I believe,
+   supposed to be function names.
+ * rand maybe is supposed to be random.
+
+Robert Dodier
+2016-01-04

@@ -1,0 +1,814 @@
+/* ------------------------------------------------------------------- */
+/* SARAG - Root Isolation                                              */
+/* by Fabrizio Caruso modified by Alexandre Le Meur and Marie-Françoise Roy */       
+
+	
+/* i-th Bernstein polynomial of degree p for c and d */ 
+bernstein(p,i,c,d,var) :=
+  binomial(p,i) * (var-c)^i * (d-var)^(p-i) / (d-c)^p;
+
+
+/* -------------------------------------- */
+/* Bounds on real roots                   */
+
+/* Cauchy Root Upper Bound */
+/* Lemma 10.2 */
+/* (Defined for non-zero polynomials) */
+cauchyRootUpperBound(pol,var) :=
+  block([p,q,i,den],
+    p : expandIf(p),
+    p : degree(pol,var),
+    q : 0,
+    while coeff(pol,var,q)=0 do
+       q : q + 1,
+    den : abs(coeff(pol,var,p)),
+
+    return(sum(abs(coeff(pol,var,i)),i,q,p)/den)
+    ); /* end proc */
+
+
+/* Cauchy Root Lower Bound for non-zero roots */
+cauchyRootLowerBound(pol,var) :=
+   block([p,q,i,den],
+    p : expandIf(p),
+    p : degree(pol,var),
+    q : 0,
+    while coeff(pol,var,q)=0 do
+       q : q + 1,
+    den : abs(coeff(pol,var,q)),
+    return((sum(abs(coeff(pol,var,i)),i,q,p)/den)^(-1))
+    ); /* end proc */
+
+
+
+/* Prime Cauchy Root Upper Bound */
+/* Lemma 10.5 */
+primeCauchyRootUpperBound(pol,var) :=
+  block([p,q,i,den],
+    p : expandIf(p),
+    p : degree(pol,var),
+    q : 0,
+    while coeff(pol,var,q)=0 do
+       q : q + 1,
+    den : coeff(pol,var,p)^2,
+    return((p+1)* sum(coeff(pol,var,i)^2,i,q,p)/den)
+    ); /* end proc */
+
+
+/* Prime Cauchy Root Lower Bound for non-zero roots */
+primeCauchyRootLowerBound(pol,var) :=
+  block([p,q,i,den],
+    p : expandIf(p),
+    p : degree(pol,var),
+    q : 0,
+    while coeff(pol,var,q)=0 do
+       q : q + 1,
+    den : coeff(pol,var,q)^2,
+    return(((p+1)* sum(coeff(pol,var,i)^2,i,q,p)/den)^(-1))
+    ); /* end proc */
+
+
+/* ----------------------------------------- */
+/* Auxiliary routines for sign determination */
+
+/* It determines the sign */
+/* to the right of the left end of open interval  */
+signToTheLeft(bern) :=
+  block([i],
+    i : 1,
+    while(sgn(bern[i])=0) do 
+      i : i+1,
+    return(sgn(bern[i]))
+    ); /* end proc */
+
+
+/* It determines the sign */
+/* to the left of the right end of open interval  */
+signToTheLeft(bern) :=
+  block([i],
+    i : length(bern),
+    while(sgn(bern[i])=0) do 
+      i : i-1,
+    return(sgn(bern[i]))
+    ); /* end proc */
+
+
+
+
+/* ------------------------------------- */
+/* Splitting of Bezier curves */
+
+/* Alg. 10.31 */
+bernsteinSplit(coeffList, c, d,e) :=
+  block([p : length(coeffList)-1,
+         b : make_array('any),
+         bern_ce,
+         bern_ed,
+         alpha, beta,
+         i,j],
+  
+  b : make_array('any,p+1),
+  for i : 0 thru p do
+    b[i] : coeffList[i+1],
+
+  bern_ce : [b[0]],
+  bern_ed : [b[p]],
+  alpha : (d-e)/(d-c),
+  beta : (e-c)/(d-c),
+  for i : 1 thru p do
+    (
+    for j : 0 thru p-i do
+       b[j] : alpha * b[j] + beta * b[j+1],
+    bern_ce : endcons(b[0],bern_ce),
+  
+    bern_ed : cons(b[p-i],bern_ed)
+
+    ), /* end for */
+  return([bern_ce,bern_ed])
+  ); /* end proc */
+
+
+/* Algorithm 10.34 */
+specialBernsteinSplit(coeffList,c,d) :=
+ block([p : length(coeffList)-1,
+        bern_first,
+        bern_second,
+        b : make_array('any),
+        i,j],
+  
+  b : make_array('any,p+1),
+  for i : 0 thru p do
+    b[i] : coeffList[i+1],
+
+  bern_first : [2^p * b[0]],
+  bern_second : [2^p * b[p]],
+
+  for i : 1 thru p do
+    (
+    for j : 0 thru p-i do
+        b[j] : b[j] + b[j+1],
+
+   bern_first : endcons(2^(p-i) * b[0],bern_first),
+
+   bern_second : cons(2^(p-i)*b[p-i],bern_second)
+
+    ), /* end for */
+
+  return([bern_first,bern_second])
+  ); /* end proc */
+
+
+
+/* Square free part of a polynomial */
+squareFree(pol,var) := gcdFreePartWithZ(pol,diff(pol,var),var)[2];
+
+/* ---------------------------------------------- */
+/* Auxiliary routines for polynomial manipulation */
+
+translated(pol,var,c) := subst(var-c,var,pol);
+
+reciprocal(pol,var,p) := var^p * subst(1/var,var,pol);
+ 
+/* contraction */
+/* (defined for l different from zero) */
+contracted(pol,var,l) := subst(var*l,var,pol);
+
+/* auxiliary coefficients as defined in page 340 */
+/* (in the book notation: a_(c,k))               */
+specialCoeff(l,c,k) := 
+  (-2^(l+k) + c*2^(l+1))/(2^k);
+ 
+
+
+/* Generic base logarithm */
+logInBase(val,base) :=
+   log(val)/log(base); 
+
+discreteLogInBaseTwo(val) :=
+   block([i],
+   i : 0,
+   while 2^i < val do
+     i : i + 1,
+   return(i)
+   ); /* end proc */
+
+bernsteinCoeffList(pol,var,c,d) :=
+  convert2Bernstein(pol,degree(pol,var),var,c,d);
+
+/* Bernstein coefficients */
+/* computed by using Proposition 10.24 */
+convert2Bernstein(p,polDeg,var,c,d) :=
+  block([pol,auxPol,transMinusC, conDMinusC, recP, transMinusOne,res,i],
+
+pol:p,
+
+    if polDeg<degree(pol,var) then ( print("bad degree, d must be more than degree(P)"),
+    return(false))
+
+    else
+
+    pol : expandIf(pol),
+    polDeg : max(degree(pol,var),polDeg),
+    
+    transMinusC : expand(translated(pol,var,-c)),
+    conDMinusC : expand(contracted(transMinusC,var,d-c)),
+
+    recP : expand(reciprocal(conDMinusC,var,polDeg)),
+
+    transMinusOne : expand(translated(recP,var,-1)),
+
+    auxPol : translated(reciprocal(
+             contracted(translated(
+             pol,var,-c),var,d-c),var,polDeg),var,-1),
+    auxPol : ratsimp(auxPol,var),
+
+    res : makelist(ratcoeff(auxPol,var,polDeg-i)/
+                   binomial(polDeg,i),i,0,polDeg),
+    return(res)
+    ); /* end proc */
+
+
+/* For a given squarefree polynonial SFP of degree p  */
+/* Bernstein coefficients of the polynomial           */
+/* 2^(k*p)*SFP in the Bernstein basis                 */
+/* (specialCoeff(l,c,k),specialCoeff(l,c+1,k)))           */
+bernsteinSpecialCoeffList(pol,var,leftEnd,rightEnd) :=
+   bernsteinCoeffList(pol,var,leftEnd,rightEnd);
+
+
+
+
+
+/* --------------------------------------------------- */
+/* Real root isolation */
+
+isListLess(lhs,rhs) :=
+  if length(lhs) = 1 then
+    if length(rhs) = 1 then
+      lhs[1]<rhs[1]
+    else
+      lhs[1]<=rhs[1]
+  else
+    if length(rhs) = 1 then
+      lhs[2]<=rhs[1]
+    else
+      lhs[1]<rhs[1];
+   
+
+/* Order Isolating List */
+isListSort(isList) := 
+  sort(isList,isListLess);
+
+
+isListWithSignsLess(lhs,rhs) :=
+  isListLess(first(lhs),first(rhs));
+
+/* Order Isolating list with signs */
+isListWithSignsSort(isListWithSigns) :=
+  sort(isListWithSigns,isListWithSignsLess);
+
+
+
+/* Real root isolation in an archimedean real closed field */
+/* the output is a list of elements of the following form: */
+/* single point : [p] */
+/* interval : [[a,b],[c,k]], where c, k are the coeffs in a_{c,k} */
+
+/* Aliases for "deCasteljauIsolateRoots..." */
+
+/* Aliases for "deCasteljauIsolateRootsGeneral" */
+
+deCasteljauIsolateRootsWithARCF(pol,var) := /* ARCF stands for Archimedean Real Closed Field */
+  deCasteljauIsolateRootsGenStruct(pol,var,false);
+
+deCasteljauIsolateRootsWithZ(pol,var) := 
+  deCasteljauIsolateRootsGenStruct(pol,var,true); 
+
+/* Aliases for "deCasteljauIsolateRootsGenStructVerbose" */
+
+deCasteljauIsolateRootsGenStruct(pol,var,integer_flag) :=
+  deCasteljauFindRootsGenStruct(pol,var,inf,integer_flag);
+
+deCasteljauIsolateRootsBetweenWithARCF(pol,var,a,b) :=
+  deCasteljauFindRootsGenIntGenStructCert(pol,var,inf,a,b,false,false)[1];
+
+deCasteljauIsolateRootsBetweenWithZ(pol,var,a,b) :=
+  deCasteljauFindRootsGenIntGenStructCert(pol,var,inf,a,b,true,false)[1];
+
+deCasteljauIsolateRootsBetweenWithZCert(pol,var,a,b) :=
+  deCasteljauFindRootsGenIntGenStructCert(pol,var,inf,a,b,true,true);
+
+
+/* Aliases for "deCasteljauFindRootsGeneral..." */
+
+/* Aliases for "deCasteljauFindRootsGeneral" */
+
+deCasteljauFindRootsWithARCF(pol,var,threshold) :=
+  deCasteljauFindRootsGenStruct(pol,var,threshold,false);
+
+deCasteljauFindRootsWithZ(pol,var,threshold) :=
+  deCasteljauFindRootsGenStruct(pol,var,threshold,true);
+
+/* Aliases for "deCasteljauFindRootsGenStruct" */
+
+deCasteljauFindRootsBetweenWithZ(pol,var,threshold,a,b) :=
+  deCasteljauFindRootsGenIntGenStructCert(pol,var,threshold,a,b,true,false)[1];
+
+deCasteljauFindRootsWithZ(pol,var,threshold) :=
+  deCasteljauFindRootsGenStruct(pol,var,threshold,true);
+
+deCasteljauFindRootsGenStruct(pol,var,threshold,integer_flag) :=
+  deCasteljauFindRootsGenIntGenStructCert(pol,var,threshold,false,0,integer_flag,false)[1];
+
+deCasteljauFindRootsGenStructCert(pol,var,threshold,integer_flag) :=
+  deCasteljauFindRootsGenIntGenStructCert(pol,var,threshold,false,0,integer_flag,true)[1];
+
+/* definition de deCasteljauFindRootsGenIntGenStructCert */
+
+deCasteljauFindRootsGenIntGenStructCert(pol,var,threshold,a,b,integer_flag,modifCert) :=
+  block([leftEnd,rightEnd,midPoint,n,sqPol,bCoeff,pos,deg,
+         resList,item,sgnCh,splitRes,c,k,count,gcdTest,normFact,searchLeftEnd, searchRightEnd,mod,sg,certificate,P,resCert,bernIntSet,bsplit,lhsSplit, rhsSplit,bernInt],
+  
+
+  P : expandIf(pol),
+  deg : degree(P,var),
+
+
+  if a = false then
+     (
+     n : discreteLogInBaseTwo(cauchyRootUpperBound(P,var)),
+     searchLeftEnd : -(2^n),
+     searchRightEnd : 2^n
+     ) /* end if */
+  else
+     (
+     searchLeftEnd : a,
+     searchRightEnd : b
+     ), /* end else */
+
+  sqPol : expand(factor(squareFree(P,var))), 
+  
+  resList : [],  
+  resCert : [],
+  if modifCert then ( 
+  bCoeff : bernsteinCoeffList(P,var,searchLeftEnd,searchRightEnd)
+  
+     ) /* end if */
+ else ( 
+       bCoeff : bernsteinCoeffList(sqPol,var,searchLeftEnd,searchRightEnd)
+             ), /* end else */
+  sg: sgn(bCoeff[1]),
+  normFact : 0, 
+
+/* normFact is the multiplicative coefficient which makes the berstein coefficients integers*/
+
+  if integer_flag then
+     (
+     normFact : apply(lcm,map(denom,bCoeff)),
+     bCoeff : normFact*bCoeff
+     ), /* end if */
+  
+
+  bernIntSet : [[[searchLeftEnd,searchRightEnd],normFact,bCoeff]],
+  certificate : true,
+  while not(bernIntSet=[]) and certificate do
+    (
+    item : first(bernIntSet),
+    bernIntSet : rest(bernIntSet),
+    
+    bernInt : first(item),
+    bCoeff : third(item),    
+
+    leftEnd : first(bernInt),
+    rightEnd : second(bernInt),
+
+  if modifCert then 
+   (
+    if first(bCoeff)=0 then
+      (
+      certificate:false,
+      resCert:[false,[[leftEnd],sqPol],true,false]
+      )
+    else
+      ( 
+      if last(bCoeff)=0 then
+       (
+       certificate:false,
+       resCert:[false,[[rightEnd],sqPol],true,false]
+       ) /* end if */
+     ) /* end else */
+    ), /* end if */
+    sgnCh : signChanges(bCoeff),
+   if (sgnCh = 1) and (rightEnd-leftEnd)<threshold then 
+
+        (if modifCert then      /* Loop which is useful for the function in the certificate file */
+         ((certificate : false),
+         resCert : [false,[[leftEnd,rightEnd],sqPol],true,false]
+               ) /* end if */
+         else 
+          resList : endcons([leftEnd,rightEnd],resList)
+            ) /* end if */
+    
+    else 
+       ( 
+
+       midPoint : (leftEnd+rightEnd)/2,
+       if (sgnCh>=1) then
+          (
+          if subst(midPoint,var,pol)=0 then
+             (
+             resList : endcons([midPoint],resList) 
+                          ), /* end if */
+          
+         bsplit : bernsteinSplitWithZ(bCoeff,leftEnd,rightEnd,midPoint),
+         lhsSplit : first(bsplit),
+
+        rhsSplit : second(bsplit),
+       
+        bernIntSet : endcons([[leftEnd,midPoint],
+                             normFact,lhsSplit],bernIntSet),
+        bernIntSet : endcons([[midPoint,rightEnd],
+                             normFact,rhsSplit],bernIntSet),
+
+        if rightEnd-midPoint<1 then 
+
+         ( normFact : normFact*2^deg ) /* end if */
+   
+
+
+                   ) /* end if */
+      else ( if modifCert then 
+               resCert : endcons([[leftEnd,rightEnd],normFact,bCoeff],resCert)
+               
+	      )  /* end else */
+       ) /* end else */
+    ), /* end while */
+  if certificate then (
+        if modifCert then
+            if isListCertSort(resCert)[1][3][1]>0 then 
+                  return([positive,compressCertificate(isListCertSort(resCert)),0,false,true])
+            else 
+                  return([negative,compressCertificate(isListCertSort(resCert)),0,false,true])
+        else
+        return([isListSort(resList),sqPol,false,false])
+         ) /* end if */
+  else 
+  return(resCert)
+  ); 
+ /* end proc */
+
+
+deCasteljauNumberOfRoots(pol,var) :=
+  length(deCasteljauIsolateRoots(pol,var));  
+
+deCasteljauNumberOfRootsBetween(pol,var,a,b) :=
+  length(deCasteljauIsolateRootsBetween(pol,var,a,b));  
+
+/* Refine an open interval describing a unique real root */
+refineRoot(rootInterval,pol,var) :=
+  block([leftEnd,rightEnd,midPoint,n,sqPol,bCoeffList,pos,
+         resList,item,sgnCh,splitRes,c,k,count,gcdTest,
+         lhs,rhs],
+  leftEnd : rootInterval[1],
+  rightEnd : rootInterval[2],
+  midPoint : (leftEnd+rightEnd)/2,
+  if subst(midPoint,var,pol)=0 then
+    return([midPoint])
+  else
+    (
+    resList : [],
+    sqPol : expand(factor(squareFree(pol,var))),
+
+
+    bCoeffList : bernsteinCoeffList(sqPol,var,leftEnd,rightEnd),
+
+    splitRes : specialBernsteinSplit(bCoeffList,leftEnd,rightEnd),
+    lhs : splitRes[1],
+    rhs : splitRes[2],
+    if signChanges(lhs)=1 then
+      return([leftEnd,midPoint])
+    else
+      return([midPoint,rightEnd])
+    ) /* end else */
+); /* end proc */
+  
+
+
+/* Finds an intermidiate point (already in the right order) */
+intermidiatePoint(lhs,rhs,poly,var) :=
+  if length(lhs)=1 then
+    if length(rhs) = 1 then
+      (lhs[1]+rhs[1])/2
+    else
+       if not(lhs[1]=rhs[1]) then
+         (lhs[1]+rhs[1])/2
+       else
+         intermidiatePoint(lhs,refineRoot(rhs,poly,var),poly,var)
+  else
+    if length(rhs)=1 then
+      if not(lhs[2]=rhs[1]) then
+        (lhs[2]+rhs[1])/2
+      else
+        intermidiatePoint(refineRoot(lhs,poly,var),rhs,poly,var)
+    else
+      if not(lhs[2]=rhs[1]) then
+        (lhs[2]+rhs[1])/2
+      else
+        lhs[2];
+  
+
+/* -------------------------------------------------------- */
+/* Sign or real roots */
+
+/* Sign of real roots */
+/* in an archimedean real closed field */
+
+deCasteljauRootsSign(isolListForP,p,q,var) := 
+  block([sfP,sfQ,g,commonPtList,nonCommonPtList,commonInList,nonCommonInList,
+         candList,nCom,sfPCoeffList,gCoeffList,
+         bound,i,l,c,k,
+         leftEnd,rightEnd,midPt,item,bernG, bernSfP, bernQ,
+         sgnM,sgnL,sgnR, bernSplitSfP, bernSplitG],
+
+  p : expandIf(p),
+  q : expandIf(q),
+  sfP : expand(factor(squareFree(p,var))),  
+  g : gcd(sfP,q),
+
+  commonPtList : [],  /* In the book's notation : N(P) */
+  commonInList : [],
+  nonCommonPtList : [],
+  nonCommonInList : [],
+  candList : [], /* In the book's notation : Pos */
+  nCom : [],
+  for i : 1 thru length(isolListForP) do
+    (
+    
+    if length(isolListForP[i])=1 then
+       (
+       sgnM : sgn(subst(isolListForP[i][1],var,q)),
+       if sgnM = 0 then
+          commonPtList : endcons([isolListForP[i],sgnM],commonPtList)
+       else
+          nonCommonPtList : endcons([isolListForP[i],sgnM],nonCommonPtList)
+       ) /* end if */
+    else
+       (
+
+       leftEnd : isolListForP[i][1],
+       rightEnd : isolListForP[i][2], 
+      
+       candList : endcons([[bernsteinCoeffList(sfP,var,leftEnd,rightEnd),
+                         bernsteinCoeffList(g,var,leftEnd,rightEnd)],
+                         isolListForP[i]],
+                         candList)
+       ) /* end else */
+    ), /* end for */
+
+  while not(candList=[]) do
+    (
+    item : first(candList), 
+
+    candList : rest(candList),
+    bernG : item[1][2],
+    bernSfP : item[1][1],
+    leftEnd : item[2][1],
+    rightEnd : item[2][2], 
+
+    if signChanges(bernG) = 1 then
+      commonInList : endcons([item[2],0],commonInList)
+    else 
+      if signChanges(bernG) = 0 then
+        nCom : endcons([bernSfP,[leftEnd,rightEnd]],nCom)
+      else
+        (
+        midPt : (leftEnd+rightEnd)/2,
+        sgnL : subst(leftEnd,var,sqP),
+        sgnM : subst(midPt,var,sqP),
+        sgnR : subst(rightEnd,var,sqP),
+
+        if sgnM = 0 then
+           ( 
+           if sgn(subst(midPt,var,q)) = 0 then
+             commonPtList : endcons([[midPt],0],commonPtList)
+           else 
+             nonCommonPtList : endcons([[midPt],sgn(subst(midPt,var,q))],nonPtCommonList)
+           ) /* end if */
+        else
+           (
+           bernSplitSfP : specialBernsteinSplit(bernSfP,leftEnd,rightEnd),
+           bernSplitG : specialBernsteinSplit(bernG,leftEnd,rightEnd),
+           if sgnL*sgnM<0 then
+              candList : endcons([[bernSplitSfP[1],bernSplitG[1]],
+                               [leftEnd,midPt] 
+                              ],candList)
+           
+           else
+              candList : endcons([[bernSplitSfP[2],bernSplitG[2]],
+                                [midPt,rightEnd] 
+                              ],candList)
+           ) /* end else */
+
+        ) /* end else */
+     ), /* end while */
+
+/* second part */
+  candList : nCom,
+
+  while not(candList=[]) do
+    (
+    item : first(candList),
+    candList : rest(candList),
+    leftEnd : item[2][1],
+    rightEnd : item[2][2],
+   
+    bernSfP : item[1],    
+   
+    bernQ : bernsteinCoeffList(q,var,leftEnd,rightEnd),
+   
+    if signChanges(bernQ)=0 then
+      (
+
+      i : 1,
+      while(bernQ[i]=0) do
+        i : i+1,
+      
+
+      nonCommonInList : endcons([[leftEnd,rightEnd],
+                               sgn(bernQ[i])],nonCommonInList)
+      ) /* end if */
+    else
+      (
+      midPt : (leftEnd+rightEnd)/2,
+      sgnM : sgn(subst(midPt,var,sfP)),
+
+      i : 1,
+      while(bernSfP[i]=0) do
+        i : i+1,
+      sgnL : sgn(bernSfP[i]),
+
+      i : length(bernSfP),
+      while(bernSfP[i]=0) do
+        i : i - 1,
+      sgnR : sgn(bernSfP[i]),
+
+      
+      if sgnM=0 then
+         nonCommonPtList : endcons([[midPt],sgn(subst(midPt,var,q))],nonCommonPtList)
+      else
+         (
+         if sgnL*sgnM<0 then
+            candList : endcons([bernsteinCoeffList(sfP,var,leftEnd,midPt),
+                             [leftEnd,midPt]
+                            ],candList)
+         else
+            candList : endcons([bernsteinCoeffList(sfP,var,midPt,rightEnd),
+                             [midPt,rightEnd]
+                            ],candList)
+         ) /* end else */
+      ) /* end ele */
+    ), /* end if */
+
+  return([[nonCommonPtList,nonCommonInList],[commonPtList,commonInList]])
+  ); /* end proc */
+
+
+deCasteljauSignsAtRoots(isolListForP,p,q,var) := 
+  isListWithSignsSort(lambda([l],append(l[1][1],l[1][2],
+                    l[2][1],l[2][2]))(
+         deCasteljauRootsSign(isolListForP,p,q,var)));
+
+
+/* --------------------------------------- */
+/* Sign Comparison of real roots */
+/* in the Z ring */
+
+
+/* Rewrite a set of isolating points with signs as intervals and removes the sign */
+makeAsIn(ptList) :=
+  if length(ptList)=0 then 
+    []
+  else 
+    cons([ptList[1][1][1],ptList[1][1][1]],makeAsIn(rest(ptList)));
+
+/* Rewrite dummy intervals as points */
+makeAsPt(inList) :=
+  if length(inList)=0 then
+   []
+  else
+   if inList[1][1]=inList[1][2] then
+     cons([inList[1][1]],makeAsPt(rest(inList)))
+   else
+     cons(inList[1],makeAsPt(rest(inList)));
+
+
+/* Removes the sign */
+removeSign(inList) :=
+  if length(inList)=0 then
+    []
+  else
+    cons(first(first(inList)),removeSign(rest(inList)));
+
+/* Interval Intersection */
+intersectIn(inList1,inList2) := 
+  block([i,len1,len2, leftEnd1,rightEnd1,leftEnd2,rightEnd2,res],
+
+  len1 : length(inList1),
+  len2 : length(inList2),
+    
+
+  if len1=0 then
+    return(inList2)
+  else
+    if len2=0 then
+      return(intList1),
+
+  res : [],
+  i : 1,
+  
+  while (i<=len1)  do
+    (
+    leftEnd1 : inList1[i][1],
+    leftEnd2 : inList2[i][1],
+    rightEnd1 : inList1[i][2],
+    rightEnd2 : inList2[i][2],
+    
+    if (leftEnd1<=leftEnd2) and
+       (leftEnd2<=rightEnd1) then
+       (
+       res : endcons([leftEnd2,min(rightEnd1,rightEnd2)],res),
+       i : i + 1
+       )   /* end if */
+    else 
+      if (leftEnd2<=leftEnd1) and
+         (leftEnd1<=rightEnd2) then
+         (
+         res : endcons([leftEnd1,min(rightEnd1,rightEnd2)],res),
+         i : i + 1
+         ) /* end if */
+      else
+         (
+         print("impossible configuration"),
+         return([])
+         ) /* end else */
+    ), /* end while */
+    return(res)
+    
+
+  );  /* end proc */
+
+
+
+/* Evaluation of the signs of two polynomials at their roots */
+/* in an archimedean real closed field */
+
+deCasteljauEvaluateSignsAtRoots(p,q,var):=
+  block([l,isolP,isolQ,
+         signComPtP,signComInP,signComPtQ,signComInQ,
+         signNComPtP,signNComInP,signNComPtQ,signNComInQ,
+         signP,signQ,signComP,signNComP,signComQ,signNComQ,
+         signComAsInP,signComAsInQ,comIn],
+  
+  p : expandIf(p),
+  q : expandIf(q),
+
+  isolP : deCasteljauIsolateRoots(p,var),
+
+  isolQ : deCasteljauIsolateRoots(q,var),
+  signP : deCasteljauRootsSign(isolP,p,q,var),
+  signComP : second(signP),
+
+  signComPtP : first(signComP),
+  signComInP : second(signComP),
+  signNComP : first(signP), 
+  signNComP : sort(append(first(signNComP),second(signNComP))),
+
+  signQ : deCasteljauRootsSign(isolQ,q,p,var), 
+  signComQ : second(signQ),
+
+  signComPtQ : signComQ[1],
+  signComInQ : signComQ[2],
+  signNComQ : first(signQ),
+  signNComQ : sort(append(first(signNComQ),second(signNComQ))),
+
+  signComAsInP : sort(append(makeAsIn(signComPtP),removeSign(signComInP))),
+  signComAsInQ : sort(append(makeAsIn(signComPtQ),removeSign(signComInQ))),
+
+comIn : makeAsPt(intersectIn(signComAsInP,signComAsInQ)),
+return([comIn,signNComP,signNComQ])
+  ); /* end proc */
+
+
+/* Real root sample points */
+/* for an archimedean real closed field */
+realSamplePointsARCF(polList) :=
+  block([i,j,listSize,compRes],
+  listSize : length(polList),
+  for i : 1 thru listSize do
+    for j : 1 thru listSize do
+      compRes : realRootComparisonARCF(p,q,var),
+  return([0]) 
+  ); 
+
+
+

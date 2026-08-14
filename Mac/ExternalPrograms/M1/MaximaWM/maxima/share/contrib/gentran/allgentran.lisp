@@ -156,7 +156,7 @@
 ; (mkfil arg)  -->  (stripdollar arg) ;
 ;                                     ;
 ;;;  (cons 'stripdollar m)) --mds
-        (stripdollar m))
+        (if (streamp m) m (stripdollar m)))
 
 (defun posn ()
 ;                       ;
@@ -223,10 +223,6 @@
 ;		       (princ " "))     ;
 ;                                       ;
   `(dotimes (i ,m) (princ " ")))
-
-(defmacro while (exp stmt)
-  `(loop while ,exp do ,stmt) ) ;;rjf
-
 
 
 
@@ -408,7 +404,7 @@
                         ((and (equal (tyi iport) #\>) (equal (tyi iport) #\>))
 	                (setq *vexptrm test)
                         (return nil))
-                        (t (gentranerr 'e nil "single > after active statement" nil))))
+                        (t (gentranerr 'e nil "single > after active statement"))))
 
 	      ((member test '(#\; #\$ #\NULL))
 	       (setq *vexptrm test)))
@@ -603,7 +599,7 @@
         (cond ((or (markedvarp tvar) (not(member (getvartype tvar) (list type nil)))) (setq num (+ 1 num))(go loop))))
 	(put tvar '*vtype* type)
 	(cond ((equal type 'unknown)
-	       (gentranerr 'w tvar "undeclared variable" nil))
+	       (gentranerr 'w tvar "undeclared variable"))
 	      (type
 	       (symtabput nil tvar (list type))))
 	(return tvar)))
@@ -760,8 +756,8 @@
 
 (defun delstk (pr)
   ; remove all occurrences of filepair from output file stack ;
-  (while (member pr (cdr (reverse *outstk*)))
-	 (popstk pr)))
+  (loop while (member pr (cdr (reverse *outstk*)))
+	 do (popstk pr)))
 
 (defun flisteqp (flist1 flist2)
   (progn
@@ -799,11 +795,11 @@
 	(t
 	 (prog (stk1 stk2)
 	       (setq stk1 *outstk*)
-	       (while (not (equal (car stk1) pr))
-		      (progn (setq stk2 (aconc stk2 (car stk1)))
-			     (setq stk1 (cdr stk1))))
-	       (while (not (equal (car stk1) '(nil)))
-		      (setq stk1 (cdr stk1)))
+	       (loop while (not (equal (car stk1) pr))
+		      do (progn (setq stk2 (aconc stk2 (car stk1)))
+				(setq stk1 (cdr stk1))))
+	       (loop while (not (equal (car stk1) '(nil)))
+		      do (setq stk1 (cdr stk1)))
 	       (resetstk (append stk2 (cdr stk1)))))))
 
 (defun pushinstk (pr)
@@ -1025,9 +1021,9 @@
   (prog (result)
 	(cond ((null lst) (return nil)))
 	(setq result (list (car lst)))
-	(while (setq lst (cdr lst))
-	       (setq result (cons (car lst)
-				  (cons '|,| result))))
+	(loop while (setq lst (cdr lst))
+	       do (setq result (cons (car lst)
+				     (cons '|,| result))))
 	(return (reverse result))))
 
 
@@ -1075,7 +1071,7 @@
 		(merror "atomic arg required" x))))
 	((numberp x)
 	 x)
-	((member (char (string x) 0) '(#\$ #\% #\&))
+	((member (char (string x) 0) '(#\$ #\%))
 	 (intern (subseq (string x) 1)))
 	(t
 	 x)))
@@ -1202,8 +1198,14 @@
 
 
 ;;  error & warning message printing routine  ;;
-(defun gentranerr( msgtype exp msg1 msg2)
-  (if (eq msgtype 'e) ($error exp msg1 msg2) (mtell exp msg1 msg2)))
+(defun gentranerr( msgtype exp msg1)
+  (if (eq msgtype 'e)
+    (if exp
+      ($error "gentran:" exp msg1)
+      ($error "gentran:" msg1))
+    (if exp
+      (mtell (concatenate 'string "gentran: ~M " msg1) exp)
+      (mtell (concatenate 'string "gentran: " msg1)))))
 
 
 
@@ -1275,8 +1277,8 @@
 		     ((equal ind 4)
 		      (gcomplex exp))))
 
-	       ((char= (char (string exp) 0) #\&)
-		(format nil "\"~A\"" (stripdollar1 exp)))
+	       ((stringp exp)
+		(format nil "\"~a\"" exp))
 	       ((eq exp t) (cond ((eq (stripdollar1 $gentranlang) 'c) 1)
 				 (t '| .true. |)))
 	       (t
@@ -1586,6 +1588,7 @@
 (defun franzif (stmt)
   ; return the franz lisp representation for an if statement ;
   (destructuring-bind (x exp stmt1 y stmt2) stmt
+   (declare (ignore x y))
    (let ((fr '(cond)))
         (setq fr (append1 fr (list (franzexp exp 0 exp)
 				   (franzstmt stmt1))))
@@ -1657,6 +1660,7 @@
   ;            dobody)                                                      ;
   (let ((gvar) condbody)
     (destructuring-bind (dovar (_x1 . dolist) _x2 _x3 _x4 doexitcond dobody) (cdr stmt)
+       (declare (ignore _x1 _x2 _x3 _x4))
        (setq tvname $tempvarname)
        (setq $tempvarname 'i)
        (setq gvar ($tempvar nil))
@@ -1845,7 +1849,7 @@
 	   (cond ((not (or (pmstmt f)
 			   (pmexp f)
 			   (pmlogexp f)))
-		  (gentranerr 'e f "cannot be translated" nil)))))
+		  (gentranerr 'e f "cannot be translated")))))
 
 (defun pmexp (s)
   ; exp  ::=  const | var | funcall | ((mminus ~) exp) |       ;
@@ -2281,8 +2285,7 @@
       (equal s t)))
 
 (defun pmstring (s)
-  (and (atom s)
-       (equal (car (explodec s)) '&)))
+  (stringp s))
 
 (defun pmid (s)
   (and (atom s)
@@ -2305,14 +2308,13 @@
 
 (defun seg (forms)
   ; exp  --+-->  exp                                          ;
-  ;        +-->  (assign    assign    ... assign      exp   ) ;
-  ;                     (1)       (2)           (n-1)    (n)  ;
+  ;        +-->  stmtgp                                       ;
   ; stmt  --+-->  stmt                                        ;
   ;         +-->  stmtgp                                      ;
   ; stmtgp  ----->  stmtgp                                    ;
   ; def  ----->  def                                          ;
   (foreach f in forms collect
-	   (cond ((and (not (equal (car f) 'literal)) (lispexpp f))
+	   (cond ((and (not (atom f)) (not (equal (car f) 'literal)) (lispexpp f))
 		  (cond ((toolongexpp f)
 			 (segexp f 'unknown))
 			(t
@@ -2333,9 +2335,15 @@
 		  f))))
 
 (defun segexp (exp type)
-  ; exp  -->  (assign    assign    ... assign      exp   ) ;
+  ; exp  -->  stmtgp                                       ;
+  ;           with stmtgp comprising                       ;
+  ;           (assign    assign    ... assign      exp   ) ;
   ;                  (1)       (2)           (n-1)    (n)  ;
-  (reverse (segexp1 exp type)))
+  ;                                                        ;
+  ; I wonder if it makes sense to extract the list of      ;
+  ; assigned-to variables and supply them to MKSTMTGP.
+
+  (mkstmtgp 0 (reverse (segexp1 exp type))))
 
 (defun segexp1 (exp type)
   ; exp  -->  (exp    assign      assign      ... assign   ) ;
@@ -2354,6 +2362,12 @@
 (defun segexp2 (exp type)
   ; exp  -->  (exp    assign      assign      ... assign   ) ;
   ;               (n)       (n-1)       (n-2)           (1)  ;
+  ;                                                          ;
+  ; From what I can tell, this function doesn't track the    ;
+  ; created temporary variables. I wonder if it would be     ;
+  ; useful to callers to have a separate list of the         ;
+  ; assigned-to variables.                                   ;
+
   (prog (expn assigns newassigns unops op termlist var tmp)
 	(setq expn exp)
 	(loop while (equal (length expn) 2) do
@@ -2846,7 +2860,7 @@
 (defun fortbreak (stmt)
   (declare (ignore stmt))
   (cond ((null *endofloopstack*)
-	 (gentranerr 'e nil "break not inside loop - cannot be translated" nil))
+	 (gentranerr 'e nil "break not inside loop - cannot be translated"))
 	((atom (car *endofloopstack*))
 	 (prog (n1)
 	       (setq n1 (genstmtno))
@@ -3031,7 +3045,7 @@
 	 (gentranerr 'e
 		     nil
 		     "return not inside function - cannot be translated"
-		     nil))))
+		     ))))
 
 (defun fortstmtgp (stmtgp)
   (progn
@@ -3163,9 +3177,7 @@
    (append (append type (fortexp name))
 	   (aconc params (mkterpri)))))
 
-(defun quotstring (arg)
-(if (stringp arg) (compress (cons #\" (append (exploden arg) '(#\"))))  ;; -mds fix absent "..." in fortwrite of strings
-        arg))
+(defun quotstring (arg) arg)
 
 (defun mkffortwrite (arglist)
   (append (append (list (mkforttab) 'write '|(*,*)| '| | )
@@ -4370,11 +4382,11 @@
         (setq inlist (map 'list 'fsearch inlist)) ;; use filesearch to find input files --mds
 	(foreach inf in (setq inlist (preproc inlist)) do
 		 (cond ((listp inf)
-                        (if (not inf)(gentranerr 'e inf "file not found in searchpath" nil)
-			(gentranerr 'e inf "wrong type of arg" nil)))
+                        (if (not inf)(gentranerr 'e inf "file not found in searchpath")
+			(gentranerr 'e inf "wrong type of arg")))
 		       
-		       ((not(open (stripdollar inf) :direction :probe)) ;; rjf 11/1/2018
-			(gentranerr 'e inf "nonexistent input file" nil))
+		       ((and (not (streamp inf)) (not(open (stripdollar inf) :direction :probe))) ;; rjf 11/1/2018
+			(gentranerr 'e inf "nonexistent input file"))
 		       
 		       ))
 	(cond (outlist
@@ -4387,7 +4399,7 @@
 			 (gentranerr 'e
 				     inf
 				     "template file already open for input"
-				     nil))
+				     ))
 			(t
 		        (pushinstk (cons inf (open inf
                                                   :direction :input)))))
@@ -4485,9 +4497,9 @@
 				     (gentranerr 'w
 						 a
 						 "file not open for output"
-						 nil))))
+						 ))))
 			     (t
-			      (gentranerr 'e a "wrong type of arg" nil)))))
+			      (gentranerr 'e a "wrong type of arg")))))
 
 
  (loop for z in args do  (if (not (member z names))(push z names)))

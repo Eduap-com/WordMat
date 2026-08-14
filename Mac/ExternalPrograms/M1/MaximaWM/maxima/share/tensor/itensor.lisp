@@ -14,7 +14,7 @@
 ;; Comments:
 ;;
 ;; The Itensor package was downcased, cleaned up, and moving frames
-;; functionality was added by Viktor Toth (http://www.vttoth.com/).
+;; functionality was added by Viktor Toth (https://www.vttoth.com/).
 ;;
 ;; As of November, 2004, the naming conventions in this package now
 ;; correspond with the naming conventions in commercial MACSYMA.
@@ -25,7 +25,7 @@
 (macsyma-module itensor) ;; added 9/24/82 at UCB
 
 (cond (($get '$itensor '$version) (merror "ITENSOR already loaded"))
-      (t ($put '$itensor '$v20081223 '$version)))
+      (t ($put '$itensor '$v20210714 '$version)))
 
 ;    Various functions in Itensor have been parceled out to separate files. A
 ;    function in one of these files will only be loaded in (automatically) if
@@ -385,132 +385,150 @@
   )
 )
 
-(declare-top (special x temp d)) 
+(defmfun $idiff (&rest args)
+  (let (derivlist)
+    (ideriv args)))
 
-(defmfun $covdiff nargs
-  (prog
-    (x e temp d i)
-    (and (< nargs 2) (merror "COVDIFF must have at least 2 args"))
-    (setq i 2 e (arg 1))
-    again (setq x (arg i) e (covdiff e) i (1+ i))
-    (and (> i nargs) (return e))
-    (go again)
-  )
-)
+(let (temp x d)
 
-(defun covdiff (e)                      ; The covariant derivative...
-  (setq d ($idummy))
-  (cond
-    (               ; is the partial derivative for scalars (*** torsion?)
-      (or (atom e) (eq (caar e) 'rat))
-      (idiff e x)
+  (defmfun $covdiff nargs
+    (prog
+      (e i)
+      (and (< nargs 2) (merror "COVDIFF must have at least 2 args"))
+      (setq temp nil d nil)
+      (setq i 2 e (arg 1))
+      again (setq x (arg i) e (covdiff e) i (1+ i))
+      (and (> i nargs) (return e))
+      (go again)
     )
-    (
-      (rpobj e)
-      (setq temp
-        (mapcar
-          #'(lambda (v)
-            (list '(mtimes)
-              (list (diffop) (list smlist d x) (list smlist v))
-              (consubst d v e)
-            )
-          )
-          (conti e)
-        )
+  )
+  
+  (defun covdiff (e)                      ; The covariant derivative...
+    (setq d ($idummy))
+    (cond
+      (               ; is the partial derivative for scalars (*** torsion?)
+        (or (atom e) (eq (caar e) 'rat))
+        (idiff e x)
       )
-      (simplus
-        (cons
-          '(mplus)
+      (
+        (rpobj e)
+        (setq temp
+          (mapcar
+            #'(lambda (v)
+              (list '(mtimes)
+                (list (diffop) (list smlist d x) (list smlist v))
+                (consubst d v e)
+              )
+            )
+            (conti e)
+          )
+        )
+        (simplus
           (cons
-            (idiff e x)
-            (cond
-              (
-                (or (covi e) (cdddr e))
-                (cons (list '(mtimes) -1.  (cons '(mplus)
-                      (nconc
-                        (mapcar
-                          #'(lambda (v)
-                            (list '(mtimes)
+            '(mplus)
+            (cons
+              (idiff e x)
+              (cond
+                (
+                  (or (covi e) (cdddr e))
+                  (cons (list '(mtimes) -1.  (cons '(mplus)
+                        (nconc
+                          (mapcar
+                            #'(lambda (v)
+                              (list '(mtimes)
+                                  (list
+                                    (diffop)
+                                    (list smlist v x)
+                                    (list smlist d)
+                                  )
+                                  (covsubst d v e)
+                              )
+                            )
+                            (covi e)
+                          )
+                          (mapcar
+                            #'(lambda (v)
+                              (list
+                                '(mtimes)
                                 (list
                                   (diffop)
                                   (list smlist v x)
                                   (list smlist d)
                                 )
-                                (covsubst d v e)
-                            )
-                          )
-                          (covi e)
-                        )
-                        (mapcar
-                          #'(lambda (v)
-                            (list
-                              '(mtimes)
-                              (list
-                                (diffop)
-                                (list smlist v x)
-                                (list smlist d)
+                                (dersubst d v e)
                               )
-                              (dersubst d v e)
                             )
+                            (cdddr e)
                           )
-                          (cdddr e)
                         )
                       )
                     )
+                    temp
                   )
-                  temp
                 )
+                (t temp)
               )
-              (t temp)
             )
           )
+          1. t
         )
-        1. t
       )
-    )
-    (
-      (eq (caar e) 'mtimes)     ; (a*b)'
-      (simplus
-        (covdifftimes (cdr e) x)
-        1 t
-      )
-    )
-    (
-      (eq (caar e) 'mplus)      ; (a+b)'=a'+b'
-      (simplifya
-        (cons
-          '(mplus)
-          (mapcar 'covdiff (cdr e))
+      (
+        (eq (caar e) 'mtimes)     ; (a*b)'
+        (simplus
+          (covdifftimes (cdr e) x)
+          1 t
         )
-        nil
       )
-    )
-    (
-      (eq (caar e) 'mexpt)      ; (a^b)'=b*a^(b-1)*a'
-      (simptimes
-        (list
-          '(mtimes)
-          (caddr e)
-          (list
-            '(mexpt)
-            (cadr e)
-            (list '(mplus) -1. (caddr e))
+      (
+        (eq (caar e) 'mplus)      ; (a+b)'=a'+b'
+        (simplifya
+          (cons
+            '(mplus)
+            (mapcar 'covdiff (cdr e))
           )
-          ($covdiff (cadr e) x)
+          nil
         )
-        1. nil
       )
+      (
+        (eq (caar e) 'mexpt)      ; (a^b)'=b*a^(b-1)*a'
+        (simptimes
+          (list
+            '(mtimes)
+            (caddr e)
+            (list
+              '(mexpt)
+              (cadr e)
+              (list '(mplus) -1. (caddr e))
+            )
+            ($covdiff (cadr e) x)
+          )
+          1. nil
+        )
+      )
+      (
+        (eq (caar e) 'mequal)
+        (list (car e) (covdiff (cadr e)) (covdiff (caddr e)))
+      )
+      ((and (eq (caar e) '%determinant) (eq (cadr e) $imetric))
+       (cond ((or $iframe_flag $itorsion_flag $inonmet_flag)
+             (prog (d1 d2) (setq d1 ($idummy) d2 ($idummy))
+                    (return (simptimes (list '(mtimes) e 
+                        (list (cons $imetric '(simp)) '((mlist simp)) (list '(mlist simp) d1 d2))
+                        (cond ((position '$extdiff *mlambda-call-stack*)  ; Special case, we're in extdiff()
+                         ($idiff (list (cons $imetric '(simp)) (list '(mlist simp) d1 d2) '((mlist simp))) x))
+                         (t ($covdiff (list (cons $imetric '(simp)) (list '(mlist simp) d1 d2) '((mlist simp))) x))
+                        )
+                    ) 1. t))
+             ))
+             (t 0)
+       )
+      )
+      (t (merror "Not acceptable to COVDIFF: ~M" (ishow e)))
     )
-    (
-      (eq (caar e) 'mequal)
-      (list (car e) (covdiff (cadr e)) (covdiff (caddr e)))
-    )
-    ((eq (caar e) '%determinant) 0)
-    (t (merror "Not acceptable to COVDIFF: ~M" (ishow e)))
-  )
-)
-
-
+  ))
+  
+  
 (defun covdifftimes (l x) 
   (prog (sp left out) 
     (setq out (ncons '(mplus)))
@@ -528,8 +546,6 @@
     (go loop)
   )
 ) 
-
-(declare-top (unspecial r temp d)) 
 
 (defun vecdiff (v i j d) ;Add frame bracket contribution when iframe_flag:true
   (cond
@@ -706,10 +722,7 @@
 
 (defmfun $liediff (v e) (liediff v e 1))
 
-(defmfun $rediff (x) (meval '(($ev) x $idiff)))
-
-;;(defmfun $evundiff (x) ($rediff ($undiff x)))
-(defmfun $evundiff (x) (meval (list '($ev) ($undiff x) '$nouns)))
+(defmfun $rediff (x) (meval `(($ev) ,x $idiff)))
 
 (defmfun $undiff (x) 
   (cond
@@ -729,12 +742,15 @@
     )
     (t
       (mysubst0
-        (simplifya (cons (ncons (caar x)) (mapcar '$undiff (cdr x))) t)
+        (simplifya (cons (ncons (caar x)) (mapcar (symbol-function '$undiff) (cdr x))) t)
         x
       )
     )
   )
 )
+
+;;(defmfun $evundiff (x) ($rediff ($undiff x)))
+(defmfun $evundiff (x) (meval (list '($ev) ($undiff x) '$nouns)))
 
 (defun putinones (e) 
   (cond
@@ -792,7 +808,7 @@
                       $inmc1 %inmc1 $ikt1 %ikt1))
 (setq christoffels2 '($ichr2 %ichr2 $icc2 %icc2 $ifc2 %ifc2
                       $inmc2 %inmc2 $ikt2 %ikt2))
-(setq christoffels (append christoffels1 christoffels2 '(%ifb $ifb)))
+(setq christoffels (append christoffels1 christoffels2 '(%ifb $ifb %itr $itr)))
 
 ;; Main contraction function
 (defmfun $contract (e)
@@ -805,10 +821,10 @@
     )
     (
       (eq (caar e) 'mplus)
-      (mysubst0 (simplus (cons '(mplus) (mapcar '$contract (cdr e))) 1. t) e)
+      (mysubst0 (simplus (cons '(mplus) (mapcar (symbol-function '$contract) (cdr e))) 1. t) e)
     )
     (t
-      (mysubst0 (simplifya (cons (car e) (mapcar '$contract (cdr e))) nil) e)
+      (mysubst0 (simplifya (cons (car e) (mapcar (symbol-function '$contract) (cdr e))) nil) e)
     )
   )
 )
@@ -1185,11 +1201,12 @@
       )
     )
 
-    ;No tensor can contract Kronecker-deltas or Levi-Civita symbols.
+    ;No tensor can contract Kronecker-deltas, Levi-Civita symbols, or the torsion tensor.
     (and
       (or (eq (caar g) '$kdelta) (eq (caar g) '%kdelta)
           (eq (caar g) '$levi_civita) (eq (caar g) '%levi_civita)
           (eq (caar g) '$icurvature) (eq (caar g) '%icurvature)
+          (eq (caar g) '$itr) (eq (caar g) '%itr)
       )
       (return nil)
     )
@@ -1318,6 +1335,8 @@
       (
         (member (car cf) christoffels1)
         (cond
+            ; VTT - before anything else, check that we're contracting on the last index only
+            ((not (equal (append c (last (cdadr g))) (cdadr g))) (return nil))
           (
             ;;(and (eql (length a) 2) (eql (length b) 1))
             (and (eql (+ (length (plusi a)) (length (minusi b))) 2) (eql (+ (length (plusi b)) (length (minusi a))) 1))
@@ -1460,7 +1479,7 @@
               (set *linelabel* f)))
 
 (defun ishow (f) 
-       ((lambda (foobar)                              ;FOOBAR intialized to NIL
+       ((lambda (foobar)                              ;FOOBAR initialized to NIL
 		(cond ((atom f) f)
 		      ((rpobj f)                      ;If an indexed object ...
 		       (setq foobar
@@ -2283,10 +2302,6 @@
             args)
            t)))))
 
-(defmfun $idiff (&rest args)
-  (let (derivlist)
-    (ideriv args)))
-
 (defmfun idiff (e x)
   (cond
          (($constantp e) 0.)
@@ -2320,7 +2335,8 @@
        (setq dummy ($idummy))
        (cond ((eq dummy x) (setq dummy ($idummy))))
        (list '(mtimes simp) 2. e
-       (list '($ichr2 simp) (cons smlist (list dummy x))
+;;       (list '(($ichr2) simp) (cons smlist (list dummy x))
+       (list (diffop) (cons smlist (list dummy x))
        (cons smlist (ncons dummy)))))
        nil))
 	     ((eq (caar e) 'mnctimes)
@@ -2611,15 +2627,17 @@ indexed objects")) (t (return (flush (arg 1) l nil))))))
 		    (t e)))
 	     (t (subst0 (cons (ncons (caar e))
 			      (mapcar (function
-				       (lambda (q) ($flushnd q name n)))
+				       (lambda (q) (funcall (symbol-function '$flushnd) q name n)))
 				      (cdr e))) e))))
 
-(declare-top (special index n dumx))
+(defvar itensor-n)
 
 (defmfun $rename nargs
- (cond ((= nargs 1) (setq index 1)) (t (setq index (arg 2)))) (rename (arg 1)))
+ (let (index)
+   (cond ((= nargs 1) (setq index 1)) (t (setq index (arg 2))))
+   (rename (arg 1) index)))
 
-(defun rename (e)                           ;Renames dummy indices consistently
+(defun rename (e index)                           ;Renames dummy indices consistently
        (cond
 	((atom e) e)
 	((or (rpobj e) (eq (caar e) 'mtimes););If an indexed object or a product
@@ -2627,12 +2645,12 @@ indexed objects")) (t (return (flush (arg 1) l nil))))))
              (or (eql (length e) 3) (eql (cadddr e) 1)))
     )
 	 ((lambda  (l) 
-	(simptimes (reorder (cond (l (sublis (itensor-cleanup l (setq n index)) e))(t e))) 1 t))
+	(simptimes (reorder (cond (l (sublis (itensor-cleanup l (setq itensor-n index)) e))(t e))) 1 t))
 	  (cdaddr ($indices e))                     ;Gets list of dummy indices
 	  ))
 	(t            ;Otherwise map $RENAME on each of the subparts e.g. a sum
 	 (mysubst0 (simplifya  (cons (ncons (caar e))
-				  (mapcar 'rename (cdr e)))
+				  (mapcar (lambda (e) (rename e index)) (cdr e)))
 			    t)
 		   e))
 	))
@@ -2660,17 +2678,15 @@ indexed objects")) (t (return (flush (arg 1) l nil))))))
 		(t (ncons e)))))
 	e))
 
-;;(defun itensor-cleanup (a n)((lambda (dumx)(cleanup1 a)) nil))        ;Sets DUMX to NIL
-(defun itensor-cleanup (a nn) (setq n nn dumx nil) (cleanup1 a))
+(let (dumx)
+  (defun itensor-cleanup (a nn) (setq itensor-n nn dumx nil) (cleanup1 a))
  
-(defun cleanup1 (a)
-  (and a (setq dumx (implode (nconc (exploden $idummyx)    ;Keep proper order of
-				    (exploden n))) n (1+ n))          ;indices
+  (defun cleanup1 (a)
+    (and a (setq dumx (implode (nconc (exploden $idummyx)    ;Keep proper order of
+				      (exploden itensor-n))) itensor-n (1+ itensor-n))          ;indices
 	(cond ((eq dumx (car a)) (cleanup1 (cdr a)))
-	      (t (cons (cons (car a) dumx) (cleanup1 (cdr a)))))))
+	        (t (cons (cons (car a) dumx) (cleanup1 (cdr a))))))))
 ;Make list of dotted pairs indicating substitutions i.e. ((a . #1) (b . #2))
-
-(declare-top (unspecial n dumx index))
 
 (defun itensor-sort (l) (cond ((cdr l) (sort l 'less)) (t l)))
 ;Sort into ascending order
@@ -2773,7 +2789,7 @@ indexed objects")) (t (return (flush (arg 1) l nil))))))
               (setq prop (assoc idx (zl-get tensor 'texprs) :test #'equal))
               (sublis
                 (mapcar #'cons(cddr prop) subs)
-                ($rename (cadr prop) (cond ((boundp 'n) n) (t 1)))
+                ($rename (cadr prop) (cond ((boundp 'itensor-n) itensor-n) (t 1)))
               )
             )
             (
@@ -2965,7 +2981,7 @@ indexed objects")) (t (return (flush (arg 1) l nil))))))
   (cond ((> 1 (length ind)) ($ishow (meval (list '($ev) e))))
 	((> 2 (length ind)) ($ishow (cons smlist (mapcar (lambda (i) (meval (list '($ev) e (list '(mequal) (car ind) i)))) (numlist)))))
 	((> 3 (length ind)) ($ishow (list '(mequal) e (cons '($matrix simp) (mapcar (lambda (j) (cons smlist (mapcar (lambda (i) (meval (list '($ev) e (list '(mequal) (car ind) i) (list '(mequal) (cadr ind) j)))) (numlist)))) (numlist))))))
-	(t (mapcar (lambda (i)  ($showcomps ($substitute i (car (last ind)) e)) (and (> 4 (length ind)) (< i $dim) (setq $linenum (1+ $linenum)))) (numlist)))
+	(t (mapcar (lambda (i)  (funcall (symbol-function '$showcomps) ($substitute i (car (last ind)) e)) (and (> 4 (length ind)) (< i $dim) (setq $linenum (1+ $linenum)))) (numlist)))
   )
  )
 )
@@ -2988,6 +3004,9 @@ indexed objects")) (t (return (flush (arg 1) l nil))))))
   (prog (len idx1 idx2)
     (setq
       len ($length (cadr ($indices e)))
+    )
+    (cond ((> len $dim) (return 0)))
+    (setq
       idx1 (do ((i $dim (1- i)) l) ((eq i len) l) (setq l (cons ($idummy) l)))
       idx2 (do ((i $dim (1- i)) l) ((eq i len) l) (setq l (cons ($idummy) l)))
     )

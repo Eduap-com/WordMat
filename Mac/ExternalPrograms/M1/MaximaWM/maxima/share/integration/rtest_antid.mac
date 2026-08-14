@@ -57,8 +57,9 @@ ratsimp(antidiff(antidiff(g, x, u(x)), x, u(x)));
 done;
 
 antidiff(diff(f(x) * (1 + f(x))^a,x), x, f(x));
--'integrate(((a+1)*f(x)*%e^(a*log(f(x)+1))+(-a-1)*f(x)*(f(x)+1)^a)
-             *'diff(f(x),x,1)
-             /(f(x)+1),x)
- +a*(a*f(x)-1)*%e^(a*log(f(x)+1))/(a^2+a)
- +(a*f(x)-1)*%e^(a*log(f(x)+1))/(a^2+a)+(f(x)+1)^a/a;
+'integrate((((a+1)*f(x)*(f(x)+1)^a
+                   +(-(%e^(a*log(f(x)+1))*a)-%e^(a*log(f(x)+1)))*f(x))
+                   *'diff(f(x),x,1))
+                   /(f(x)+1),x)
+ +(f(x)+1)^a/a+(%e^(a*log(f(x)+1))*a*(a*f(x)-1))/(a^2+a)
+ +(%e^(a*log(f(x)+1))*(a*f(x)-1))/(a^2+a);

@@ -4,7 +4,7 @@
  * ***                                                                   *** *
  * ***                           * Solve_rec *                           *** *
  * ***                                                                   *** *
- * ***           This file implements some funtions for solving          *** *
+ * ***           This file implements some functions for solving         *** *
  * ***         recurrence equations with maxima. In particular it        *** *
  * ***           implements the Petkovsek's hyper algorithm and          *** *
  * ***       Abramov's algorithm for solving linear recurrences with     *** *
@@ -1054,7 +1054,7 @@ simplify_product(prod) := block(
   /* Take care of fractions. */
   else if part(term, 0)="/" then block(
     [nu : num(term), de : denom(term)],
-    /* Check for cancelations. */
+    /* Check for cancellations. */
     for %kk:-deg thru deg do block(
       [g],
       g : gcd(expand(subst(%n+%kk, %n, nu)), de),

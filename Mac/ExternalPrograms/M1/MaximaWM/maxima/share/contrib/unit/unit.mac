@@ -106,23 +106,23 @@ globalbaseunitlisting : [%length,%mass,%time,%current,%temperature,
 %amount_of_substance,%luminous_intensity];
 
 /*Length */
-%lengthlisting : [[[m,meter],1,m],[[AU],149.6*10^9,e],[[ly],9.4605284*10^15,m],[[pc,parsec],3.08567758066631*10^16,m]];
+%lengthlisting : [[[m,meter,meters],1,m],[[%in,inch,inches],0.0254,e]];
 
 /*Mass*/
-%masslisting : [[[kg,kilogram],1,0],[[g,gram],1/1000,m],[[ton],10^3,e],
-[[u],1.66053886*10^-27,e]];
+%masslisting : [[[kg,kilogram,kilograms],1,0],[[g,gram,grams],1/1000,m],
+[[gr,grain,grains],6.479891*10^-5,e],[[slug,slugs],1.459390,e]];
 
 /*Time*/
-%timelisting : [[[s,sekund,sekunder],1,m],[[%min,minut,minutter],60,e],[[%timer,time],3600,e],[[dage,dag],3600*24,e],[[aar],3600*24*365,e]];
+%timelisting : [[[s,second,seconds],1,m],[[%min,minute,minutes],60,e]];
 
 /*Electric Current*/
-%currentlisting : [[[A,ampere],1,m]];
+%currentlisting : [[[A,ampere,amperes],1,m]];
 
 /*Thermodynamic Temperature*/
-%temperaturelisting : [[[K,kelvin],1,m],[[degC,celcius],1,e]];
+%temperaturelisting : [[[K,kelvin,kelvins],1,m]];
 
 /*Amount of Substance*/
-%amount_of_substancelisting : [[[mol,mole],1,m]];
+%amount_of_substancelisting : [[[mol,mole,moles],1,m]];
 
 /*Luminous Intensity*/
 %luminous_intensitylisting: [[[cd,candela],1,m],[[lm,lumen],1,m]];
@@ -146,7 +146,7 @@ globalderivedunitlisting:[%volume,%frequency,%force,%pressure,
 %catalytic_activity];
 
 /*Volume*/
-%volumelisting : [m^3,[[L,liter],0.001,m]];
+%volumelisting : [m^3,[[L,liter,liters],0.001,m]];
 
 
 /* Derived Units with Special SI Names and Symbols 
@@ -162,54 +162,54 @@ globalderivedunitlisting:[%volume,%frequency,%force,%pressure,
 	  Need to work on this.*/
 
 /*Frequency*/
-%frequencylisting : [1/s,[[Hz,hertz],1,m],[[Bq,bequerel],1,m]];
+%frequencylisting : [1/s,[[Hz,hertz],1,m]];
 
 /*Force*/
-%forcelisting : [kg*m/s^2,[[N,%Newton],1,m]];
+%forcelisting : [kg*m/s^2,[[N,%Newton,Newtons],1,m],
+[[dyn,dyne,dynes],1*10^-5,d]];
 
 /*Pressure*/
-%pressurelisting : [kg/(m*s^2),[[Pa,pascal],1,m],[[torr],133.32239,m],[[bar],10^5,m],[[atm],1.01325*10^5,e],[[mmHg],133.322,e]];
+%pressurelisting : [kg/(m*s^2),[[Pa,pascal,pascals],1,m],[[torr],133.32239,m]];
 
 /*Energy, Work, Quantity of Heat */
-%energylisting : [kg*m^2/s^2,[[J,joule],1,m],
-[[eV],1.6021765*10^-19,m],
-[[kWh],3.6*10^6,e],[[cal],4.186,e],[[kcal],4186,e]];
+%energylisting : [kg*m^2/s^2,[[J,joule,joules],1,m],
+[[eV,electron_volt,electron_volts],1.6021765*10^-19,m]];
 
 /*Power, Radiant */
-%powerlisting : [kg*m^2/s^3,[[W,watt],1,m]];
+%powerlisting : [kg*m^2/s^3,[[W,watt,watts],1,m]];
 
 /*Electric Charge, Quantity of Electricity*/
-%electric_chargelisting : [s*A,[[C,coulomb],1,m]];
+%electric_chargelisting : [s*A,[[C,coulomb,coulombs],1,m]];
 
 /*Electric Potential Difference, Electromotive Force */	
-%electric_potential_differencelisting : [kg*m^2/(s^3*A),[[V,volt],1,m]];
+%electric_potential_differencelisting : [kg*m^2/(s^3*A),[[V,volt,volts],1,m]];
 
 /*Capacitance*/
-%capacitancelisting : [s^4*A^2/(m^2*kg),[[F,farad],1,m]];
+%capacitancelisting : [s^4*A^2/(m^2*kg),[[F,farad,farads],1,m]];
 
 /*Electric Resistance*/
-%resistancelisting : [m^2*kg/(s^3*A^2),[[Ohm,ohm],1,m]];
+%resistancelisting : [m^2*kg/(s^3*A^2),[[Ohm,ohm,ohms],1,m]];
 
 /*Electric Conductance*/
 %conductancelisting : [s^3*A^2/(m^2*kg),[[S,siemens],1,m]];
 
 /*Magnetic Flux*/
-%magnetic_fluxlisting : [m^2*kg/(s^2*A),[[Wb,weber],1,m]];
+%magnetic_fluxlisting : [m^2*kg/(s^2*A),[[Wb,weber,webers],1,m]];
 
 /*Magnetic Flux Density*/
 %magnetic_flux_densitylisting : [kg/(s^2*A),[[T,tesla],1,m]];
 
 /*Inductance*/
-%inductancelisting : [m^2*kg/(s^2*A^2),[[H,henry],1,m]];
+%inductancelisting : [m^2*kg/(s^2*A^2),[[H,henry,henries],1,m]];
 
 /*Illuminance */
 %illuminancelisting : [cd/m^2,[[lx,lux],1,m]];
 
 /*Absorbed Dose, Specific Energy (imparted), Kerma */
-%absorbed_doselisting : [m^2/s^2,[[Gy,gray],1,m],[[Sv,sievert],1,m]];
+%absorbed_doselisting : [m^2/s^2,[[Gy,gray,grays],1,m]];
 
 /*Catalytic Activity */
-%catalytic_activitylisting : [mol/s,[[kat],1,m]];
+%catalytic_activitylisting : [mol/s,[[kat,katal,katals],1,m]];
 
 
 /*===================== Package Functions ====================*/ 
@@ -304,7 +304,7 @@ metricexpandall(%limit) := block([i,j,k,l,unitlistname,
 		unitlistusename :: append(ev(unitlistusename),[tempentry]))))))
    );
 
-/* This function creats a list of all defined units */
+/* This function creates a list of all defined units */
 makeallunitslist() := block([i,j,k,b,allunitslisttemp],
     allunitslisttemp : [],
     modedeclare([i,j,k], fixnum),
@@ -820,7 +820,7 @@ print("Initializing unit arrays...");
 
 /* This variable controls how many of the metric prefixes are added
    on to the default lists*/
-%unitexpand : 4;
+%unitexpand : 2;
 
 /* This is a list which contains dimensions the user doesn't want
 simplified by the derived units simplifier.  Default is empty. */
@@ -909,4 +909,3 @@ post_eval_functions : [processunits,?groupadd];
 currentdoeval : true;
 
 ttyoff: nolabels, false$
-assume(kg>0,m>0,s>0,AU>0,ly>0,pc>0,g>0,u>0,%min>0,%timer>0,dage>0,aar>0,A>0,K>0,degC>0,mol>0,cd>0,lm>0,L>0,V>0,Hz>0,Bq>0,Pa>0,bar>0,atm>0,mmHg>0,J>0,eV>0,kWh>0,W>0,C>0,F>0,Ohm>0,S>0,Wb>0,T>0,H>0,lux>0,Gy>0,kat>0)$

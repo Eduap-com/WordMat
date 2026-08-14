@@ -7,6 +7,7 @@
 ;; This software has NO WARRANTY, not even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+(in-package :maxima)
 ($put '$linalgextra 1 '$version)
 
 (defun $circulant (lst)
@@ -94,7 +95,7 @@
 (defun order-of-root (p x pt)
   (let ((order 0))
     (setq p ($expand p))
-    (while (and (alike 0 ($substitute pt x p)) (not (alike 0 p)))
+    (while (and (alike1 0 ($substitute pt x p)) (not (alike1 0 p)))
       (incf order)
       (setq p ($expand ($diff p x))))
     order))

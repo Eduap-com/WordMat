@@ -1,4 +1,4 @@
-(in-package #-gcl #:maxima #+GCL "MAXIMA")
+(in-package #:maxima)
 
 #+(or)
 (progn
@@ -7,7 +7,7 @@
   (format t "sys = ~A~%" (merge-pathnames (make-pathname :name "odepack" :type "system")
 					  *load-truename*)))
 
-#+(or ecl abcl) ($load "lisp-utils/defsystem.lisp")
+#+ecl ($load "lisp-utils/defsystem.lisp")
 
 (let ((path (merge-pathnames (make-pathname :name "odepack" :type "system")
 			     (maxima-load-pathname-directory))))
@@ -21,4 +21,8 @@
 #+ecl
 (in-package #:common-lisp)
 
-(mk:oos "maxima-dlsode" :compile)
+#-abcl (mk:oos "maxima-dlsode" :compile)
+
+#+abcl (require "asdf")
+#+abcl (push (maxima-load-pathname-directory) asdf:*central-registry*)
+#+abcl (asdf:operate 'asdf:load-source-op "maxima-dlsode")

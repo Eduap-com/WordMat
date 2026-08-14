@@ -1,4 +1,4 @@
-(in-package #-gcl #:maxima #+GCL "MAXIMA")
+(in-package #:maxima)
 
 #+nil
 (progn
@@ -6,7 +6,7 @@
   (format t "(maxima-load-pathname-directory) = ~A~%" (maxima-load-pathname-directory))
   (format t "sys = ~A~%" (merge-pathnames (make-pathname :name "lapack" :type "system") (maxima-load-pathname-directory))))
 
-#+(or ecl abcl) ($load "lisp-utils/defsystem.lisp")
+#+ecl ($load "lisp-utils/defsystem.lisp")
 
 (load (merge-pathnames (make-pathname :name "lapack" :type "system") (maxima-load-pathname-directory)))
 
@@ -16,4 +16,8 @@
 ;; Bugfix by Marius Gerbershagen:
 #+ecl (in-package #:common-lisp)
 
-(mk:oos "lapack-interface" :compile)
+#-abcl (mk:oos "lapack-interface" :compile)
+
+#+abcl (require "asdf")
+#+abcl (push (maxima-load-pathname-directory) asdf:*central-registry*)
+#+abcl (asdf:operate 'asdf:load-source-op "lapack")

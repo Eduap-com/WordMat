@@ -1,6 +1,7 @@
 ;;;                 COPYRIGHT NOTICE
 ;;;  
 ;;;  Copyright (C) 2007-2016 Mario Rodriguez Riotorto
+;;;  Time-stamp: "2025-11-27 12:27:02 Leo Butler"
 ;;;  
 ;;;  This program is free software; you can redistribute
 ;;;  it and/or modify it under the terms of the
@@ -31,6 +32,18 @@
 ($put '$gnuplot 1 '$version); to be removed in the future
 (defvar $draw_version 2)
 
+(defun extrema-over-finite-floats-list (x)
+  (let ((xmax most-negative-double-float) (xmin most-positive-double-float))
+    (loop for x1 in x
+          do (when (and (realp x1) (not (float-inf-p x1)) (not (float-nan-p x1)))
+               (when (< x1 xmin) (setq xmin x1))
+               (when (> x1 xmax) (setq xmax x1))))
+    (values xmin xmax)))
+
+
+(defun finite-real-p (x)
+  (and (realp x) (not (float-nan-p x)) (not (float-inf-p x))))
+
 
 (defun write-font-type ()
    (if (and (string= (get-option '$font) "") (not (eql (get-option '$font_size) 10)))
@@ -42,14 +55,14 @@
 
 
 ;; one-window multiplot: consecutive calls
-;; to draw allways plot on the same window
+;; to draw always plot on the same window
 (defvar *multiplot-is-active* nil)
 (defun $multiplot_mode (term)
   (case term
     ($screen
       ($multiplot_mode '$none)
       (send-gnuplot-command
-        (format nil "if(GPVAL_VERSION >= 5.0){set terminal x11 dashed ~a replotonresize~%set multiplot~%} else {set terminal x11 dashed ~a~%set multiplot~%}" (write-font-type) (write-font-type)))
+       (format nil "set terminal GNUTERM dashed ~a~%set multiplot~%" (write-font-type)))
       (setf *multiplot-is-active* t))
     ($wxt
       ($multiplot_mode '$none)
@@ -78,7 +91,7 @@
 ;; This function is called from the graphic objects constructors
 ;; (points, rectangle, etc.). When a new object is created, and if
 ;; the user hasn't especified an x or y range, ranges are computed
-;; automaticallly by calling this function. There is a trick so
+;; automatically by calling this function. There is a trick so
 ;; that object constructors know if they can modify global variables
 ;; xrange and yrange; if these lists are of length 2, it means that
 ;; it was a user selection and they can't be altered; if they are of
@@ -105,17 +118,17 @@
    (update-range '$zrange zmin zmax))
 
 (defmacro check-extremes-x ()
-  '(when (numberp xx)
+  '(when (finite-real-p xx)
     (when (< xx xmin) (setf xmin xx))
     (when (> xx xmax) (setf xmax xx))))
 
 (defmacro check-extremes-y ()
-  '(when (numberp yy)
+  '(when (finite-real-p yy)
     (when (< yy ymin) (setf ymin yy))
     (when (> yy ymax) (setf ymax yy))))
 
 (defmacro check-extremes-z ()
-  '(when (numberp zz)
+  '(when (finite-real-p zz)
     (when (< zz zmin) (setf zmin zz))
     (when (> zz zmax) (setf zmax zz))))
 
@@ -159,7 +172,7 @@
 ;;     fill_density
 ;;     xaxis_secondary
 ;;     yaxis_secondary
-(defun errors (arg)
+(defun-checked errors (arg)
   (let ((etype  (get-option '$error_type))
         (joined (get-option '$points_joined))
         element-size
@@ -202,9 +215,8 @@
                   " ~a w ~a ~a lw ~a lt ~a lc ~a axis ~a"
                   (make-obj-title (get-option '$key))
                   with
-                  (if (eql etype '$boxes)  ; in case of boxes, should they be filled?
-                      (format nil "fs solid ~a"
-                              (get-option '$fill_density))
+                  (if (eql etype '$boxes)  ; in case of boxes, should they be filled? Default is "not filled".
+                      (format nil "fs solid ~a" (or (get-option '$fill_density) 0))
                       "")
                   (get-option '$line_width)
                   (get-option '$line_type)
@@ -305,7 +317,7 @@
             (setf n (cadr dim))
             (setf twocolumns nil))
          (t (merror "draw (points2d): bad 2d array input format")))
-      (setf pts (make-array (* 2 n) :element-type 'flonum))
+      (setf pts (make-array (* 2 n) :element-type t))
       (loop for k below n do
          (if twocolumns
             (setf xx ($float (aref arg k 0))
@@ -337,10 +349,10 @@
                (= (length dim) 1))  ; y format
             (setf n (car dim))
             (setf x (make-array n
-                                :element-type 'flonum
+                                :element-type t
                                 :initial-contents (loop for k from 1 to n collect ($float k)) ))
             (setf y (make-array n
-                                :element-type 'flonum
+                                :element-type t
                                 :initial-contents (loop for k below n collect ($float (aref arg1 k))))))
          ((and (arrayp arg2)   ; xx yy format
                (= (length dim) 1)
@@ -349,7 +361,7 @@
             (setf x arg1
                   y arg2))
          (t (merror "draw (points2d): bad 1d array input format")))
-      (setf pts (make-array (* 2 n) :element-type 'flonum))
+      (setf pts (make-array (* 2 n) :element-type t))
       (loop for k below n do
          (setf xx ($float (aref x k))
                yy ($float (aref y k)))
@@ -407,12 +419,9 @@
                      y (map 'list #'$float (cdaddr arg1))))
             (t (merror "draw (points2d): incorrect input format")))
       (transform-lists 2)
-      (setf xmin ($tree_reduce 'min (cons '(mlist simp) x))
-            xmax ($tree_reduce 'max (cons '(mlist simp) x))
-            ymin ($tree_reduce 'min (cons '(mlist simp) y))
-            ymax ($tree_reduce 'max (cons '(mlist simp) y)) )
-      (setf pts (make-array (* 2 (length x)) :element-type 'flonum
-                                             :initial-contents (mapcan #'list x y)))
+      (multiple-value-setq (xmin xmax) (extrema-over-finite-floats-list x))
+      (multiple-value-setq (ymin ymax) (extrema-over-finite-floats-list y))
+      (setf pts (make-array (* 2 (length x)) :initial-contents (mapcan #'list x y)))
       ;; update x-y ranges if necessary
       (update-ranges-2d xmin xmax ymin ymax)
       (make-gr-object
@@ -421,7 +430,7 @@
          :groups '((2 0)) ; numbers are sent to gnuplot in groups of 2
          :points (list pts) ) ))
 
-(defun points (arg1 &optional (arg2 nil))
+(defun-checked points (arg1 &optional (arg2 nil))
    (if (arrayp arg1)
       (if (= (length (array-dimensions arg1)) 2)
          (points-array-2d arg1)
@@ -486,7 +495,7 @@
                  (get-option '$line_type)
                  pal )))))
 
-(defun points3d (arg1 &optional (arg2 nil) (arg3 nil))
+(defun-checked points3d (arg1 &optional (arg2 nil) (arg3 nil))
    (let (pts x y z xmin xmax ymin ymax zmin zmax ncols col)
       (check-enhanced3d-model "points" '(0 1 3))
       (cond (($listp arg1)   ; list input
@@ -598,6 +607,7 @@
 ;; Options:
 ;;     transparent
 ;;     fill_color
+;;     fill_density
 ;;     border
 ;;     line_width
 ;;     line_type
@@ -606,7 +616,7 @@
 ;;     xaxis_secondary
 ;;     yaxis_secondary
 ;;     transform
-(defun polygon (arg1 &optional (arg2 nil))
+(defun-checked polygon (arg1 &optional (arg2 nil))
    (if (and (get-option '$transparent)
             (not (get-option '$border)))
        (merror "draw (polygon): transparent is true and border is false; this is not consistent"))
@@ -644,8 +654,9 @@
                                          :initial-contents (append (mapcan #'list x y)
                                                                    (list (first x) (first y))) )) ) )
          ((not (get-option '$border)) ; no transparent, no border
-             (setf pltcmd (format nil " ~a w filledcurves lc ~a axis ~a"
+             (setf pltcmd (format nil " ~a w filledcurves~a lc ~a axis ~a"
                                       (make-obj-title (get-option '$key))
+                                      (format nil "~@[ fillstyle solid ~a~]" (get-option '$fill_density))
                                       (hex-to-rgb (get-option '$fill_color))
                                       (axes-to-plot)))
              (setf grps '((2 0)))  ; numbers are sent to gnuplot in groups of 2
@@ -653,8 +664,9 @@
                                          :element-type 'flonum
                                          :initial-contents (mapcan #'list x y)) ) ))
          (t ; no transparent with border
-             (setf pltcmd (list (format nil " ~a w filledcurves lc ~a axis ~a"
+             (setf pltcmd (list (format nil " ~a w filledcurves~a lc ~a axis ~a"
                                         (make-obj-title (get-option '$key))
+                                        (format nil "~@[ fillstyle solid ~a~]" (get-option '$fill_density))
                                         (hex-to-rgb (get-option '$fill_color))
                                         (axes-to-plot))
                                 (format nil " t '' w l lw ~a lt ~a lc ~a axis ~a"
@@ -697,7 +709,7 @@
 ;;     xaxis_secondary
 ;;     yaxis_secondary
 ;;     transform
-(defun triangle (arg1 arg2 arg3)
+(defun-checked triangle (arg1 arg2 arg3)
    (if (or (not ($listp arg1))
            (not (= ($length arg1) 2))
            (not ($listp arg2))
@@ -738,7 +750,7 @@
 ;;     xaxis_secondary
 ;;     yaxis_secondary
 ;;     transform
-(defun quadrilateral (arg1 arg2 arg3 arg4)
+(defun-checked quadrilateral (arg1 arg2 arg3 arg4)
    (if (or (not ($listp arg1))
            (not (= ($length arg1) 2))
            (not ($listp arg2))
@@ -785,7 +797,7 @@
 ;;     xaxis_secondary
 ;;     yaxis_secondary
 ;;     transform
-(defun rectangle (arg1 arg2)
+(defun-checked rectangle (arg1 arg2)
    (if (or (not ($listp arg1))
            (not (= ($length arg1) 2))
            (not ($listp arg2))
@@ -817,6 +829,7 @@
 ;;     nticks
 ;;     transparent
 ;;     fill_color
+;;     fill_density
 ;;     border
 ;;     line_width
 ;;     line_type
@@ -825,7 +838,7 @@
 ;;     xaxis_secondary
 ;;     yaxis_secondary
 ;;     transform
-(defun ellipse (xc yc a b ang1 ang2)
+(defun-checked ellipse (xc yc a b ang1 ang2)
   (if (and (get-option '$transparent)
            (not (get-option '$border)))
       (merror "draw2d (ellipse): transparent is true and border is false; this is not consistent"))
@@ -886,18 +899,20 @@
            (setf pts `( ,(make-array (length result) :element-type 'flonum
                                                     :initial-contents result)))  )
        ((not (get-option '$border)) ; no transparent, no border
-           (setf pltcmd (format nil " ~a w filledcurves xy=~a,~a lc ~a axis ~a"
+           (setf pltcmd (format nil " ~a w filledcurves xy=~a,~a ~alc ~a axis ~a"
                                     (make-obj-title (get-option '$key))
                                     fxc fyc
+                                    (format nil "~@[ fillstyle solid ~a~]" (get-option '$fill_density))
                                     (hex-to-rgb (get-option '$fill_color))
                                     (axes-to-plot)))
            (setf grps '((2 0)))
            (setf pts `( ,(make-array (length result) :element-type 'flonum
                                                     :initial-contents result)))  )
        (t ; no transparent with border
-             (setf pltcmd (list (format nil " ~a w filledcurves xy=~a,~a lc ~a axis ~a"
+             (setf pltcmd (list (format nil " ~a w filledcurves xy=~a,~a ~a lc ~a axis ~a"
                                             (make-obj-title (get-option '$key))
                                             fxc fyc
+                                            (format nil "~@[ fillstyle solid ~a~]" (get-option '$fill_density))
                                             (hex-to-rgb (get-option '$fill_color))
                                             (axes-to-plot))
                                 (format nil " t '' w l lw ~a lt ~a lc ~a axis ~a"
@@ -948,7 +963,7 @@
             when pos do (write-string replacement out)
             while pos)))
 
-(defun label (&rest lab)
+(defun-checked label (&rest lab)
   (let ((n (length lab))
         (result nil)
         is2d)
@@ -1021,7 +1036,7 @@
 ;;     line_width
 ;;     xaxis_secondary
 ;;     yaxis_secondary
-(defun bars (&rest boxes)
+(defun-checked bars (&rest boxes)
   (let ((n (length boxes))
         (count -1)
         (xmin most-positive-double-float)
@@ -1051,7 +1066,7 @@
        :name 'bars
        :command (format nil " ~a w boxes fs solid ~a lw ~a lc ~a axis ~a"
                             (make-obj-title (get-option '$key))
-                            (get-option '$fill_density)
+                            (or (get-option '$fill_density) 0) ;; Default is "not filled".
                             (get-option '$line_width)
                             (hex-to-rgb (get-option '$fill_color))
                             (axes-to-plot) )
@@ -1080,7 +1095,7 @@
 ;;     unit_vectors
 ;;     xaxis_secondary
 ;;     yaxis_secondary
-(defun vect (arg1 arg2)
+(defun-checked vect (arg1 arg2)
    (if (or (not ($listp arg1))
            (not (= ($length arg1) 2))
            (not ($listp arg2))
@@ -1144,7 +1159,7 @@
 ;;     key
 ;;     color
 ;;     unit_vectors
-(defun vect3d (arg1 arg2)
+(defun-checked vect3d (arg1 arg2)
    (if (or (not ($listp arg1))
            (not (= ($length arg1) 3))
            (not ($listp arg2))
@@ -1213,10 +1228,11 @@
 ;;     color
 ;;     filled_func
 ;;     fill_color
+;;     fill_density
 ;;     key
 ;;     xaxis_secondary
 ;;     yaxis_secondary
-(defun explicit (fcn var minval maxval)
+(defun-checked explicit (fcn var minval maxval)
   (let* ((nticks (get-option '$nticks))
          (depth (get-option '$adapt_depth))
          ($numer t)
@@ -1343,8 +1359,9 @@
              (setf result-array (make-array (length result)
                                             :element-type 'flonum 
                                             :initial-contents result))
-             (setf pltcmd (format nil " ~a w filledcurves x1 lc ~a axis ~a"
+             (setf pltcmd (format nil " ~a w filledcurves x1 ~a lc ~a axis ~a"
                                       (make-obj-title (get-option '$key))
+                                      (format nil "~@[ fillstyle solid ~a~]" (get-option '$fill_density))
                                       (hex-to-rgb (get-option '$fill_color))
                                       (axes-to-plot)))
              (make-gr-object
@@ -1368,8 +1385,9 @@
                           (aref result-array (incf count)) yy
                           (aref result-array (incf count)) yy2) )  ))
              (update-ranges-2d xmin xmax ymin ymax)
-             (setf pltcmd (format nil " ~a w filledcurves lc ~a axis ~a"
+             (setf pltcmd (format nil " ~a w filledcurves~a lc ~a axis ~a"
                                       (make-obj-title (get-option '$key))
+                                      (format nil "~@[ fillstyle solid ~a~]" (get-option '$fill_density))
                                       (hex-to-rgb (get-option '$fill_color))
                                       (axes-to-plot)  ))
              (make-gr-object
@@ -1389,6 +1407,7 @@
 ;;     region(ineq,x-var,x-minval,x-maxval,y-var,y-minval,y-maxval)
 ;; Options:
 ;;     fill_color
+;;     fill_density
 ;;     key
 ;;     x_voxel
 ;;     y_voxel
@@ -1396,7 +1415,7 @@
   (let ((len (1- (length coord))))
     `(push (make-array ,len :element-type 'flonum :initial-contents ,coord) pts)))
 
-(defun region (ineq x-var x-minval x-maxval y-var y-minval y-maxval)
+(defun-checked region (ineq x-var x-minval x-maxval y-var y-minval y-maxval)
   (let* ((nx (get-option '$x_voxel))
          (ny (get-option '$y_voxel))
          (xmin ($float x-minval))
@@ -1417,13 +1436,14 @@
 
     ; build 2d arrays: x, y and boolean
     (labels ((fun (xx yy)  ; evaluates boolean expression
-                  (is-boole-check 
-                    (simplify
-                      ($substitute
-                        (list '(mlist)
-                              (list '(mequal) x-var xx)
-                              (list '(mequal) y-var yy))
-                        ineq))))
+                  (let (($prederror t))
+                    ($is-boole-eval
+                      (simplify
+                        ($substitute
+                          (list '(mlist)
+                                (list '(mequal) x-var xx)
+                                (list '(mequal) y-var yy))
+                          ineq)))))
              (bipart (xx1 yy1 xx2 yy2) ; bipartition, (xx1, yy1) => T, (xx2, yy2) => NIL
                      (let ((xm (* 0.5 (+ xx1 xx2)))
                            (ym (* 0.5 (+ yy1 yy2))))
@@ -1518,12 +1538,14 @@
 
     ; list of commands
     (setf pltcmd
-          (cons (format nil " ~a w filledcurves lc ~a axis ~a"
+          (cons (format nil " ~a w filledcurves~a lc ~a axis ~a"
                         (make-obj-title (get-option '$key))
+                        (format nil "~@[ fillstyle solid ~a~]" (get-option '$fill_density))
                         (hex-to-rgb (get-option '$fill_color))
                         (axes-to-plot))
                 (make-list (- (length pts) 1)
-                           :initial-element (format nil " t '' w filledcurves lc ~a axis ~a"
+                           :initial-element (format nil " t '' w filledcurves~a lc ~a axis ~a"
+                                              (format nil "~@[ fillstyle solid ~a~]" (get-option '$fill_density))
                                               (hex-to-rgb (get-option '$fill_color))
                                               (axes-to-plot) ))))
     (update-ranges-2d xmin xmax ymin ymax)
@@ -1576,7 +1598,7 @@
 (defun sample-data (expr xmin xmax ymin ymax sample grid)
   (let* ((xdelta (/ (- xmax xmin) ($first grid)))
 	 (ydelta (/ (- ymax ymin) ($second grid)))
-	 (epsilon #+gcl (float 1/1000000) #-gcl 1e-6))
+	 (epsilon 1e-6))
     (do ((x-val xmin (+ x-val xdelta))
 	 (i 0 (1+ i)))
 	((> i ($first grid)))
@@ -1637,7 +1659,7 @@
 	  (t
 	   expr1))))
 
-(defun implicit (expr x xmin xmax y ymin ymax)
+(defun-checked implicit (expr x xmin xmax y ymin ymax)
   (let* (($numer t) ($plot_options $plot_options)
          (pts ())
          (expr (m- ($rhs expr) ($lhs expr)))
@@ -1725,7 +1747,7 @@
 ;;     enhanced3d
 ;;     wired_surface
 ;; Some functions and macros are defined in grcommon.lisp
-(defun implicit3d (expr par1 xmin xmax par2 ymin ymax par3 zmin zmax)
+(defun-checked implicit3d (expr par1 xmin xmax par2 ymin ymax par3 zmin zmax)
   (let ((xmin ($float xmin))
         (xmax ($float xmax))
         (ymin ($float ymin))
@@ -1804,7 +1826,7 @@
 ;;     wired_surface
 ;;     surface_hide
 ;;     transform
-(defun explicit3d (fcn par1 minval1 maxval1 par2 minval2 maxval2)
+(defun-checked explicit3d (fcn par1 minval1 maxval1 par2 minval2 maxval2)
   (let* ((xu_grid (get-option '$xu_grid))
          (yv_grid (get-option '$yv_grid))
          (fminval1 ($float minval1))
@@ -1908,7 +1930,7 @@
 ;;     enhanced3d
 ;;     wired_surface
 ;;     transform
-(defun elevation_grid (mat x0 y0 width height)
+(defun-checked elevation_grid (mat x0 y0 width height)
   (let ( (fx0 ($float x0))
          (fy0 ($float y0))
          (fwidth ($float width))
@@ -1995,7 +2017,7 @@
 ;;     enhanced3d
 ;;     wired_surface
 ;;     transform
-(defun mesh (&rest row)
+(defun-checked mesh (&rest row)
   (let (result xx yy zz
         (xmin most-positive-double-float)
         (xmax most-negative-double-float)
@@ -2070,7 +2092,7 @@
 ;;     key
 ;;     enhanced3d
 ;;     transform
-(defun triangle3d (arg1 arg2 arg3)
+(defun-checked triangle3d (arg1 arg2 arg3)
    (if (or (not ($listp arg1))
            (not (= ($length arg1) 3))
            (not ($listp arg2))
@@ -2113,7 +2135,7 @@
 ;;     key
 ;;     enhanced3d
 ;;     transform
-(defun quadrilateral3d (arg1 arg2 arg3 arg4)
+(defun-checked quadrilateral3d (arg1 arg2 arg3 arg4)
    (if (or (not ($listp arg1))
            (not (= ($length arg1) 3))
            (not ($listp arg2))
@@ -2163,7 +2185,7 @@
 ;;     yaxis_secondary
 ;;     transform
 ;; Note: similar to draw2d-parametric in plot.lisp
-(defun parametric (xfun yfun par parmin parmax)
+(defun-checked parametric (xfun yfun par parmin parmax)
   (let* ((nticks (get-option '$nticks))
          ($numer t)
          (tmin ($float parmin))
@@ -2226,7 +2248,7 @@
 ;;     xaxis_secondary
 ;;     yaxis_secondary
 ;; This object is constructed as a parametric function
-(defun polar (radius ang minang maxang)
+(defun-checked polar (radius ang minang maxang)
   (let ((grobj (parametric `((mtimes simp) ,radius ((%cos simp) ,ang))
                             `((mtimes simp) ,radius ((%sin simp) ,ang))
                             ang minang maxang)))
@@ -2253,7 +2275,8 @@
 ;; This object is constructed as a parametric surface in 3d.
 ;; Functions are defined in format r=r(azimuth,zenith),
 ;; where, normally, azimuth is an angle in [0,2*%pi] and zenith in [0,%pi]
-(defun spherical (radius azi minazi maxazi zen minzen maxzen)
+(defun-checked spherical (radius azi minazi maxazi zen minzen maxzen)
+  #+sbcl (declare (notinline parametric_surface))
   (let ((grobj (parametric_surface
                      `((mtimes simp) ,radius ((%sin simp) ,zen) ((%cos simp) ,azi))
                      `((mtimes simp) ,radius ((%sin simp) ,zen) ((%sin simp) ,azi))
@@ -2284,7 +2307,8 @@
 ;; This object is constructed as a parametric surface in 3d.
 ;; Functions are defined in format z=z(radius,azimuth), where,
 ;; normally, azimuth is an angle in [0,2*%pi] and r any real
-(defun cylindrical (r z minz maxz azi minazi maxazi)
+(defun-checked cylindrical (r z minz maxz azi minazi maxazi)
+  #+sbcl (declare (notinline parametric_surface))
   (let ((grobj (parametric_surface
                      `((mtimes simp) ,r ((%cos simp) ,azi))
                      `((mtimes simp) ,r ((%sin simp) ,azi))
@@ -2313,7 +2337,7 @@
 ;;     enhanced3d
 ;;     surface_hide
 ;;     transform
-(defun parametric3d (xfun yfun zfun par1 parmin parmax)
+(defun-checked parametric3d (xfun yfun zfun par1 parmin parmax)
   (let* ((nticks (get-option '$nticks))
          ($numer t)
          (tmin ($float parmin))
@@ -2393,7 +2417,7 @@
 ;;     wired_surface
 ;;     surface_hide
 ;;     transform
-(defun parametric_surface (xfun yfun zfun par1 par1min par1max par2 par2min par2max)
+(defun-checked parametric_surface (xfun yfun zfun par1 par1min par1max par2 par2min par2max)
   (let* ((ugrid (get-option '$xu_grid))
          (vgrid (get-option '$yv_grid))
          ($numer t)
@@ -2500,7 +2524,7 @@
           (dotimes (k vgrid)
             (setf result (append result ,circ))))))
 
-(defun tube (xfun yfun zfun rad par1 parmin parmax)
+(defun-checked tube (xfun yfun zfun rad par1 parmin parmax)
   (let* ((ugrid (get-option '$xu_grid))
          (vgrid (get-option '$yv_grid))
          ($numer t)
@@ -2655,7 +2679,7 @@
 ;; Options:
 ;;     colorbox
 ;;     palette
-(defun image (mat x0 y0 width height)
+(defun-checked image (mat x0 y0 width height)
   (let ( (fx0 ($float x0))
          (fy0 ($float y0))
          (fwidth ($float width))
@@ -2702,9 +2726,14 @@
                    ncols (nth 2 mat))  ; picture width
              (setf dx (/ fwidth ncols)
                    dy (/ fheight nrows))
-             (if (equal (nth 1 mat) '$level)  ; gray level picture
-                 (setf n 3)   ; 3 numbers to be sent to gnuplot: x,y,value
-                 (setf n 5))  ; 5 numbers to be sent: x,y,r,g,b
+             (cond
+               ((equal (nth 1 mat) '$level) ; gray level picture
+                (setf n 3))                 ; 3 numbers to be sent to gnuplot: x,y,value
+               ((equal (nth 1 mat) '$rgb)
+                (setf n 5))                 ; 5 numbers to be sent: x,y,r,g,b
+               ((equal (nth 1 mat) '$rgb_alpha)
+                (setf n 6))                 ; 6 numbers to be sent: x,y,r,g,b,t
+               (t (merror "image: picture type ~M not recognized." (nth 1 mat))))
              (setf result (make-array (* n nrows ncols) :element-type 'flonum))
              (let ((yi (+ fy0 height (* dy -0.5)))
                    (count1 -1)
@@ -2728,10 +2757,12 @@
        :name 'image
        :command (case n
                    (3 (format nil " t '' w image"))
-                   (5 (format nil " t '' w rgbimage")))
+                   (5 (format nil " t '' w rgbimage"))
+                   (6 (format nil " t '' w rgbalpha")))
        :groups (case n
-                   (3 '((3 0)))   ; numbers are sent to gnuplot in gropus of 3, no blank lines
-                   (5 '((5 0))  ))  ; numbers in groups of 5, no blank lines
+                   (3 '((3 0)))   ; numbers are sent to gnuplot in groups of 3, no blank lines
+                   (5 '((5 0)))   ; numbers in groups of 5, no blank lines
+                   (6 '((6 0))))  ; numbers in groups of 6, no blank lines
        :points (list result)) ) )
 
 
@@ -2826,7 +2857,7 @@
       (setf plotcmd
          (concatenate 'string
             (unless (or *multiplot-is-active*
-                        (member (get-option '$terminal) '($eps $epslatex $epslatex_standalone)))
+                        (member (get-option '$terminal) '($eps $epslatex $epslatex_standalone $cairolatex_pdf $cairolatex_pdf_standalone)))
                (format nil "set obj 1 fc rgb '~a' fs solid 1.0 noborder ~%"
                        (get-option '$background_color)) )
             (if (equal (get-option '$proportional_axes) '$none)
@@ -3308,6 +3339,16 @@
                            (/ (first (get-option '$dimensions)) 100.0)
                            (/ (second (get-option '$dimensions)) 100.0)
                            (get-option '$file_name)))
+        ($cairolatex_pdf (format cmdstorage "set terminal cairolatex pdf ~a color size ~acm, ~acm~%set out '~a.tex'"
+                           (write-font-type)
+                           (/ (first (get-option '$dimensions)) 100.0)
+                           (/ (second (get-option '$dimensions)) 100.0)
+                           (get-option '$file_name)))
+        ($cairolatex_pdf_standalone (format cmdstorage "set terminal cairolatex pdf standalone ~a color size ~acm, ~acm~%set out '~a.tex'"
+                           (write-font-type)
+                           (/ (first (get-option '$dimensions)) 100.0)
+                           (/ (second (get-option '$dimensions)) 100.0)
+                           (get-option '$file_name)))
         (($pdf $multipage_pdf) (format cmdstorage "set terminal pdf dashed enhanced ~a color size ~acm, ~acm~%set out '~a.pdf'"
                            (write-font-type)
                            (/ (first (get-option '$dimensions)) 100.0)
@@ -3333,6 +3374,16 @@
                            (round (first (get-option '$dimensions)))
                            (round (second (get-option '$dimensions)))
                            (get-option '$file_name)))
+        ($tikz (format cmdstorage "set terminal tikz ~a size ~a, ~a~%set out '~a.tikz'"
+                           (write-font-type)
+                           (/ (round (first (get-option '$dimensions))) 100.0)
+                           (/ (round (second (get-option '$dimensions))) 100.0)
+                           (get-option '$file_name)))
+        ($tikz_standalone (format cmdstorage "set terminal tikz standalone ~a size ~a, ~a~%set out '~a.tikz'"
+			  (write-font-type)
+                          (/ (round (first (get-option '$dimensions))) 100.0)
+                          (/ (round (second (get-option '$dimensions))) 100.0)
+                          (get-option '$file_name)))
         ($animated_gif (format cmdstorage "set terminal gif enhanced animate ~a size ~a, ~a delay ~a~%set out '~a.gif'"
                            (write-font-type)
                            (round (first (get-option '$dimensions)))
@@ -3370,28 +3421,19 @@
                            (round (second (get-option '$dimensions)))))
 
         (otherwise
-          ;; If we arrive here, (get-option '$terminal) returned something unrecognized;
-          ;; at present (commit ccd8074, 2020-12-07) the following are accepted by
-          ;; UPDATE-TERMINAL, but not handled here: $obj $ply $pnm $screen $stl $tiff $vrml
-          (cond
-            ((string= *autoconf-windows* "true")  ; running on windows operating system
-              (format cmdstorage "set terminal windows enhanced ~a ~a size ~a, ~a~%"
+         ;; If we arrive here, (get-option '$terminal) returned something
+         ;; unrecognized; at present (commit ccd8074, 2020-12-07) the following
+         ;; are accepted by UPDATE-TERMINAL, but not handled here: $obj $ply
+         ;; $pnm $screen $stl $tiff $vrml
+         (unless (eq (get-option '$terminal) '$screen)
+           (mtell "draw: warning: I don't know about terminal '~m'; I'll try to restore the default.~%" (get-option '$terminal))
+           (mtell "draw: try this: set_draw_defaults(terminal = <something>);~%"))
+
+         (format cmdstorage "set terminal GNUTERM ~a ~a size ~a, ~a~%"
                           *draw-terminal-number*
                           (write-font-type)
                           (round (first (get-option '$dimensions)))
-                          (round (second (get-option '$dimensions)))))
-            (t
-              ;; Non-Windows platform. There isn't any terminal specification which
-              ;; works across the board; in the absence of a terminal specification
-              ;; which is known to work, we must refrain altogether.
-              ;;
-              ;; Treat $SCREEN as a default option. Otherwise, complain.
-
-              (unless (eq (get-option '$terminal) '$screen)
-                (mtell "draw: warning: I don't know about terminal '~m'; I'll try to restore the default.~%" (get-option '$terminal))
-                (mtell "draw: try this: set_draw_defaults(terminal = <something>);~%"))
-
-              (format cmdstorage "set terminal pop~%"))))))
+                          (round (second (get-option '$dimensions)))))))
 
     ; compute some parameters for multiplot
     (when (and (not isanimatedgif) (not ismultipage))
@@ -3451,7 +3493,7 @@
                 (format cmdstorage "~%set size ~a, ~a~%" size1 size2)
                 (format cmdstorage "set origin ~a, ~a~%" origin1 origin2)
                 (unless (or *multiplot-is-active*
-                            (member (get-option '$terminal) '($epslatex $epslatex_standalone)))
+                            (member (get-option '$terminal) '($epslatex $epslatex_standalone $cairolatex_pdf $cairolatex_pdf_standalone)))
                   (format cmdstorage "set obj 1 rectangle behind from screen ~a,~a to screen ~a,~a~%" 
                                      origin1 origin2 (+ origin1 size1 ) (+ origin2 size2)))  ))
         (setf is1stobj t
@@ -3508,12 +3550,12 @@
                      ; code related to draw_realpart
                      (cond
                        (non-numeric-region
-                         (when (numberp (aref coordinates 1))
+                         (when (and (finite-real-p (aref coordinates 0)) (finite-real-p (aref coordinates 1)))
                            (setf non-numeric-region nil)
                            (write-subarray coordinates datastorage) ))
                        (t
                          (cond
-                           ((numberp (aref coordinates 1))
+                           ((and (finite-real-p (aref coordinates 0)) (finite-real-p (aref coordinates 1)))
                              (write-subarray coordinates datastorage))
                            (t
                              (setf non-numeric-region t)
@@ -3649,6 +3691,16 @@
                            (/ (first (get-option '$dimensions)) 100.0)
                            (/ (second (get-option '$dimensions)) 100.0)
                            (get-option '$file_name))))
+      ($cairolatex_pdf (format str "set terminal cairolatex pdf ~a color size ~acm, ~acm~%set out '~a.tex'"
+                           (write-font-type)
+                           (/ (first (get-option '$dimensions)) 100.0)
+                           (/ (second (get-option '$dimensions)) 100.0)
+                           (get-option '$file_name)))
+      ($cairolatex_pdf_standalone (format str "set terminal cairolatex pdf standalone ~a color size ~acm, ~acm~%set out '~a.tex'"
+                           (write-font-type)
+                           (/ (first (get-option '$dimensions)) 100.0)
+                           (/ (second (get-option '$dimensions)) 100.0)
+                           (get-option '$file_name)))
       ($pdf (setf str (format nil "set terminal pdf dashed enhanced ~a color size ~acm, ~acm~%set out '~a.pdf'"
                            (write-font-type)
                            (/ (first (get-option '$dimensions)) 100.0)
@@ -3674,6 +3726,16 @@
                            (round (first (get-option '$dimensions)))
                            (round (second (get-option '$dimensions)))
                            (get-option '$file_name))))
+      ($tikz (setf str (format nil "set terminal tikz ~a size ~a, ~a~%set out '~a.tikz'"
+                           (write-font-type)
+                           (/ (round (first (get-option '$dimensions))) 100.0)
+                           (/ (round (second (get-option '$dimensions))) 100.0)
+                           (get-option '$file_name))))
+      ($tikz_standalone (setf str (format nil "set terminal tikz standalone ~a size ~a, ~a~%set out '~a.tikz'"
+                           (write-font-type)
+                           (/ (round (first (get-option '$dimensions))) 100.0)
+                           (/ (round (second (get-option '$dimensions))) 100.0)
+                           (get-option '$file_name))))
       (otherwise (merror "draw: not a file format")))
    (send-gnuplot-command (format nil "~a~%replot~%unset output~%" str)) ))
 
@@ -3691,7 +3753,7 @@
          ($wxt      (setf str "wxt"))
          ($aquaterm (setf str "aquaterm"))
          ($qt       (setf str "qt"))
-         (otherwise (setf str "x11")))
+         (otherwise (setf str "GNUTERM")))
       (send-gnuplot-command (format nil "set terminal ~a ~a~%" str num))   ))
 
 

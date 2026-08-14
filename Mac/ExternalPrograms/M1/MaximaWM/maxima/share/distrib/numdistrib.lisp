@@ -316,10 +316,10 @@
 ;; Conditions: 0<p<1; f>0 (degrees of freedom) ; theta>0 (non centrality param.)
 (defun qnchi2 (p df lambda)
    (let ((accu 1e-13)
-         (racc (* 8 flonum-epsilon))
-         (dbl_epsilon (* 8 flonum-epsilon))
-         (dbl_min least-positive-normalized-flonum)
-         (dbl_max most-positive-flonum)
+         (racc (* 8 +flonum-epsilon+))
+         (dbl_epsilon (* 8 +flonum-epsilon+))
+         (dbl_min +least-positive-normalized-flonum+)
+         (dbl_max +most-positive-flonum+)
          (eps 1e-11)    ; must be > accu
          (reps 1e-10)   ; relative tolerance
          (ux 1.0) (lx 1.0) (nx 1.0) (pp 1.0))
@@ -798,7 +798,8 @@
 (defvar *rbeta-k2*)
 (defvar *rbeta-a*)
 (defvar *rbeta-b*)
-(defun rndbeta-cheng (aa bb )
+
+(defun rndbeta-cheng0 (aa bb )
   (declare (type flonum aa bb))
   (let (qsame u1 u2 v w z tt r s y genbet
         (expmax 7.0) (infnty 1.0e304))
@@ -847,9 +848,11 @@
 
            s70
            ;; Step 5
-           (if (/= aa *rbeta-a*)
-               (setf genbet (/ *rbeta-b* (+ *rbeta-b* w)))
-               (setf genbet (/ w (+ *rbeta-b* w))))
+           (if (= w infnty)
+             (setf genbet 'rndbeta-encountered-infnty)
+             (if (/= aa *rbeta-a*)
+                 (setf genbet (/ *rbeta-b* (+ *rbeta-b* w)))
+                 (setf genbet (/ w (+ *rbeta-b* w)))))
            (go s230)
 
            s100
@@ -903,12 +906,19 @@
 
            s200
            ;; Step 6
-           (if (/= aa *rbeta-a*)
-               (setf genbet (/ *rbeta-b* (+ *rbeta-b* w)))
-               (setf genbet (/ w (+ *rbeta-b* w))))
+           (if (= w infnty)
+             (setf genbet 'rndbeta-encountered-infnty)
+             (if (/= aa *rbeta-a*)
+                 (setf genbet (/ *rbeta-b* (+ *rbeta-b* w)))
+                 (setf genbet (/ w (+ *rbeta-b* w)))))
 
            s230)
         genbet))
+
+(defun rndbeta-cheng (aa bb )
+  (let (genbet)
+    (loop while (eq (setq genbet (rndbeta-cheng0 aa bb)) 'rndbeta-encountered-infnty))
+    genbet))
 
 
 ;;  The sample size ss must be a non negative integer.

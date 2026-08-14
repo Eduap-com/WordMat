@@ -142,15 +142,19 @@
                                     (expr_to_str (second ode)) "\"")))
           (t (merror 
               (intl:gettext "plotdf: first argument must be either an expression or a list with two expressions."))))
-    (setq file (plot-temp-file (format nil "maxout~d.xmaxima" (getpid))))
-    (show-open-plot
-     (with-output-to-string
-         (st)
-       (cond
-         ($show_openplot (format st "plotdf ~a ~a~%" cmd opts))
-         (t (format st "{plotdf ~a ~a} " cmd opts))))
-     file)
-    file))
+    ;; Outputs the data, either into a file to be passedto Xmaxima
+    ;; or sent directly to Xmaxima if Maxima is being run from Xmaxima.
+    (let ((data (format nil "plotdf ~a ~a~%" cmd opts)))
+      (setq file (plot-file-path (format nil "~a.xmaxima" (random-name 16))))
+      (cond ($show_openplot
+             (with-open-file (fl
+                              #+sbcl (sb-ext:native-namestring file)
+                              #-sbcl file
+                              :direction :output :if-exists :supersede)
+                             (princ data fl))
+             ($system $xmaxima_plot_command (format nil $gnuplot_file_args file)))
+            (t (princ (format nil "{~a}" data)) ""))
+      (list '(mlist) file))))
 
 ;; plot equipotential curves for a scalar field f(x,y)
 (defun $ploteq (fun &rest options)
@@ -166,11 +170,11 @@
       (setq s1 (cadar options))
       (setq s2 (caddar options))
       (setq options (cdr options)))
-    (defun subxy (expr)
+    (defun subxy2 (expr)
       (if (listp expr)
-          (mapcar #'subxy expr)
+          (mapcar #'subxy2 expr)
           (cond ((eq expr s1) '$x) ((eq expr s2) '$y) (t expr))))
-    (setf mfun (mapcar #'subxy mfun))
+    (setf mfun (mapcar #'subxy2 mfun))
 ;; the next two lines should take into account parameters given in the options
 ;;    (if (delete '$y (delete '$x (rest (mfuncall '$listofvars ode))))
 ;;        (merror "The equation(s) can depend only on 2 variable which must be specified!"))
@@ -199,11 +203,16 @@
     (unless (search "-yaxislabel " opts)
       (setq opts (concatenate 'string opts " -yaxislabel " (ensure-string s2))))
 							      
-    (setq file (plot-temp-file (format nil "maxout~d.xmaxima" (getpid))))
-    (show-open-plot
-     (with-output-to-string
-         (st)
-       (cond ($show_openplot (format st "plotdf ~a ~a~%" cmd opts))
-             (t (format st "{plotdf ~a ~a}" cmd opts))))
-     file)
-    file))
+    ;; Outputs the data, either into a file to be passed to Xmaxima
+    ;; or sent directly to Xmaxima if Maxima is being run from Xmaxima.
+    (let ((data (format nil "plotdf ~a ~a~%" cmd opts)))
+      (setq file (plot-file-path (format nil "~a.xmaxima" (random-name 16))))
+      (cond ($show_openplot
+             (with-open-file (fl
+                              #+sbcl (sb-ext:native-namestring file)
+                              #-sbcl file
+                              :direction :output :if-exists :supersede)
+                             (princ data fl))
+             ($system $xmaxima_plot_command (format nil $gnuplot_file_args file)))
+            (t (princ (format nil "{~a}" data)) ""))
+      (list '(mlist) file))))
