@@ -44,5 +44,6 @@ set "maxima_image_base=%maxima_imagesdir%/binary-sbcl/maxima"
 rem sbcl.exe --core "%maxima_image_base%.core" --noinform %lisp_options% --end-runtime-options --eval %start_maxima% --end-toplevel-options %*
 rem sbcl.exe --core "%maxima_image_base%.core" --noinform
 
-sbcl.exe --core "%maxima_image_base%.core" --noinform --dynamic-space-size^ 2000 --end-runtime-options --eval (cl-user::run)
+sbcl.exe --core "%maxima_image_base%.core" --noinform --dynamic-space-size^ 2000 --end-runtime-options
+rem a80 --eval (cl-user::run)
 

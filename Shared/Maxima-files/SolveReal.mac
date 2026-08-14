@@ -26,6 +26,7 @@ define_variable(sepsolvecontext,true,boolean)$
 define_variable(solverealtopoly,false,boolean)$
 define_variable(solverealmaximasolve,true,boolean)$
 newcontext(solreal)$context:initial$
+sbclversion() := ?lisp\-implementation\-version()$
 
 op(qexpr):=part(qexpr,0)$ /* In maxima v.1.49 op(x) no longer recognizes partswitch. However part does. The manual says op(x) is equivalent to part(x,0) with partswitch=false - hence this work around to avoid errors using op. - It is probably better to make new op2(expr) instead of redefining as here.  */
 
@@ -237,12 +238,66 @@ ConvertToDegr(udt):=block([],applyb1(udt,msinrul,mcosrul,mtanrul,masinrul,macosr
 ConvertLog(udt):=block([],udt:ratsimp(apply1(udt,merul,mlogrul)),ev(udt,lgog(10)=1))$
 ConvertLogN(udt):=block([],udt:ratsimp(apply1(udt,merul,mlogrul)),ev(udt,lgog(10)=1,lgog(%e)=0.4342944819032518))$
 
-scinot(udt):=block([talfakt,antbsf],if not(numberp(udt)) then return(udt),
+/* Once solvereal.mac no longer needs to support 5.49 this can be replaced by scinotnew */
+scinot(udt):=block([],
+if sbclversion()="2.6.0" then (
+	scinotold(udt)
+)
+else (
+	scinotnew(udt))
+)$
+
+/* Old version from <=1.40 problematic because of changes in sbcl 2.6.7 */
+scinotold(udt):=block([talfakt,antbsf],if not(numberp(udt)) then return(udt),
     antbsf:NoSigFig+4,
     if udt<0 then antbsf:antbsf+1,
     if udt>1e10 or udt <-1e10 then antbsf:antbsf+1, 
     if abs(udt)<1e-9 then antbsf:antbsf+1, 
-    (if udt<-10 or (udt>-1 and udt<1) or udt>10 then return(sremove(" ",printf(false,concat("~",antbsf,"e"),udt))) else return(dectaldec(udt))))$
+	(
+		if udt<-10 or (udt>-1 and udt<1) or udt>10 then 
+			return(
+					sremove(" ",printf(false,concat("~",antbsf,"e"),udt))) else return(dectaldec(udt)
+				)
+		)
+)$
+
+/* this version works from sbcl 2.6.7 and onwards */
+scinotnew(udt) := block(
+  [n, s, p, mant, ex, dot],
+  n: NoSigFig,
+  s: printf(false, concat("~,", n-1, "e"), float(udt)),
+  p: ssearch("e", s),
+  mant: substring(s, 1, p),
+  ex:   substring(s, p+1),
+  dot:  ssearch(".", mant),
+  while slength(mant) > dot+1 and charat(mant, slength(mant)) = "0" do
+      mant: substring(mant, 1, slength(mant)),
+  if charat(ex, 1) = "+" then ex: substring(ex, 2),
+  concat(mant, "e", ex)
+)$
+
+
+/* scinot version independent of printf, which is a bit slower and can cause problems in edge cases*/
+scinotgen(x) := block(
+  [n, y, a, sgn, e, m, d, ds, mant],
+  n: if integerp(NoSigFig) and NoSigFig > 0 then NoSigFig else 7,
+  y: float(x),
+  if y = 0.0 then return("0.0e0"),
+  sgn: if y < 0 then "-" else "",
+  a: abs(y),
+  e: floor(log(a)/log(10.0)),
+  while a/10^e >= 10 do e: e+1,
+  while a/10^e <  1 do e: e-1,
+  m: a/10^e,
+  d: round(m*10^(n-1)),
+  if d >= 10^n then (d: 10^(n-1), e: e+1),
+  ds: string(d),
+  mant: concat(substring(ds,1,2), ".", substring(ds,2)),
+  if sequal(charat(mant, slength(mant)), ".") then mant: concat(mant, "0"),
+  while slength(mant) > 3 and sequal(charat(mant, slength(mant)), "0") do
+      mant: substring(mant, 1, slength(mant)),
+  concat(sgn, mant, "e", string(e))
+)$
 
 scinotall(udt):=block([],apply1(udt,scinotrul))$
 
