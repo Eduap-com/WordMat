@@ -530,6 +530,11 @@ Sub RunTestSequence()
     'unit test
     MaximaUnits = True
     If TestBeregn("10 km/time", "=2,777778  m/s") Then GoTo slut
+    If TestBeregn("2L", "=0,002 m^(3)") Then GoTo slut
+    If TestBeregn("2ml", "=2" & ChrW$(183) & "10^-6  m^(3)") Then GoTo slut
+    If TestBeregn("2dage", "=172800 s") Then GoTo slut
+    If TestBeregn("1,23 kg" & ChrW$(183) & "(2,998" & ChrW$(183) & "10^8  m/s)^2", "=1,105524" & ChrW$(183) & "10^17  J") Then GoTo slut
+    If TestSolve("60W=2,1kJ/t", "t", "t=35 s") Then GoTo slut
     MaximaUnits = False
 
 
