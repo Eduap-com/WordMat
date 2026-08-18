@@ -208,7 +208,7 @@ is (sum+1/10^50=1.0L0) ;  should be true
 (defun bigfloat2rat (x)
   #+gcl(declare (notinline write-char))
   (if (decimalfpp x) (let ((k (* (cadr x)(expt 10 (caddr x)))))
-		       (list '(rat) (numerator k)(denominator k)))
+		       (cons (numerator k) (denominator k)))
     (let ()
   (setq x (bigfloatp x))
   (let (($float2bf t)
@@ -806,14 +806,54 @@ rationalize(1.0L-1)-1/10		; ; should be zero
 (defvar *oldremainder (symbol-function '$remainder))
 
 (defmfun $remainder (x y)  ;; convert to rational?  remainder is always 0 in Rational Field
-  (if (decimalfpp x)(setf x (bigfloat2rat x)))
-  (if (decimalfpp y)(setf y (bigfloat2rat y)))
-;  (format t "~% x=~s y=~s" x y) test
-  (funcall *oldremainder x y))
+  (flet ((fix-arg (val)
+           (if (decimalfpp val)
+               (let ((r (bigfloat2rat val)))
+                 (list '(rat simp) (car r) (cdr r)))
+               val)))
+    (funcall *oldremainder (fix-arg x) (fix-arg y))))
       
 (defmfun $decimalfpp(x)(if (decimalfpp x) t nil))      
       
 
+
+;; Redefine FPPREC1 to use $BINARYBFLOAT so that fundamental binary
+;; constants remain base-2 bigfloats.
+(defun fpprec1 (assign-var q)
+  (declare (ignore assign-var))
+  (if (or (not (fixnump q)) (< q 1))
+      (merror (intl:gettext "fpprec: value must be a positive integer; found: ~M") q))
+  (setq fpprec (+ 2 (integer-length (expt 10. q)))
+	*bigfloatone* ($binarybfloat 1)
+	*bigfloatzero* ($binarybfloat 0)
+	*bfhalf* (list (car *bigfloatone*) (cadr *bigfloatone*) 0)
+	*bfmhalf* (list (car *bigfloatone*) (- (cadr *bigfloatone*)) 0))
+  q)
+
+;; Redefine FPRATION1 to explicitly use $BINARYBFLOAT, ensuring
+;; it doesn't accidentally receive base-10 significands/exponents.
+(defun fpration1 (x)
+  (let ((fprateps (cdr ($binarybfloat (if $bftorat
+				    (list '(rat simp) 1 (exptrl 2 (1- fpprec)))
+				    $ratepsilon)))))
+    (or (and (equal x *bigfloatzero*) (cons 0 1))
+	(prog (y a)
+	   (return (do ((xx x (setq y (invertbigfloat
+				       (bcons (fpdifference (cdr xx) (cdr ($binarybfloat a)))))))
+			(num (setq a (fpentier x))
+			     (+ (* (setq a (fpentier y)) num) onum))
+			(den 1 (+ (* a den) oden))
+			(onum 1 num)
+			(oden 0 den))
+		       ((and (not (zerop den))
+			     (not (fpgreaterp
+				   (fpabs (fpquotient
+					   (fpdifference (cdr x)
+							 (fpquotient (cdr ($binarybfloat num))
+								     (cdr ($binarybfloat den))))
+					   (cdr x)))
+				   fprateps)))
+			(cons num den))))))))
 
 
 (in-package :bigfloat)

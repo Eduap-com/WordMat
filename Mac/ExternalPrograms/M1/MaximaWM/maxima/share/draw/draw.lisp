@@ -2,7 +2,7 @@
 
 ($put '$draw 2 '$version)
 
-#+(or ecl abcl) ($load "lisp-utils/defsystem.lisp")
+(unless (member :mk-defsystem *features*) ($load "lisp-utils/defsystem.lisp"))
 
 (load (merge-pathnames (make-pathname :name "draw" :type "system") (maxima-load-pathname-directory)))
 

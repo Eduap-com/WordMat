@@ -8,4 +8,5 @@
   :serial t
   :components ((:file "defpackage")
 	       (:file "la")
-	       (:file "neldermead")))
+	       (:file "neldermead")
+	       (:file "nm-maxima")))

@@ -784,7 +784,8 @@ for i : 1 thru 500 do (
    x : (random(11) - 5) / (1 + random(10)),
    exact : float(jacobi_p(n,a,b,x)),
    approx : jacobi_p(n,float(a),float(b),float(x)),
-   if (abs(exact-part(approx,1)) <= part(approx,2)) then foo : 0 else foo : 1,
+   /* double interval size to account for rounding of initial rationals */
+   if (abs(exact-part(approx,1)) <= 2*part(approx,2)) then foo : 0 else foo : 1,
    if (foo = 1) then print ("n = ",n, " a = ",a," b = ",b, "x = ",x),
    gomer : cons(foo,gomer)),
 check_zero_list(gomer));
@@ -1963,3 +1964,24 @@ makelist (check_gen_laguerre (gen_laguerre (2, a, x), L[2](a, x)), a, -3, 1);
 
 makelist (check_gen_laguerre (gen_laguerre (3, a, x), L[3](a, x)),  a, -4, 1);
 [true, true, true, true, true, true];
+
+hermite(5,2.3);
+388.9097599999996$
+
+hermite(5,23/10);
+1215343/3125$
+
+subst(x=23/10, hermite(5,x));
+1215343/3125$
+
+
+/* Bug #4826: "division by zero computing a Jacobi polynomial" */
+
+jacobi_p(5, -1, 1/2, x);
+(46189*x^5-36465*x^4-41470*x^3+27742*x^2+6369*x-2365)/8192;
+
+
+/* similar bug for ultraspherical */
+
+ultraspherical(1, -1/2, x);
+-x;

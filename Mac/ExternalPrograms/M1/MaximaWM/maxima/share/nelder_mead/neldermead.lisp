@@ -628,7 +628,8 @@
 						     (xk simplex 0)
 						     (xk simplex i) -1.0d0)))
 					     10.0d0)))))
-     
+
+    (declare (ignorable xbest reshaped-p))
 
    iterate ;; 1.
    (setf (values simplex failure)

@@ -3,8 +3,7 @@
 ;; which are otherwise very voluminous (and this construct
 ;; is accepted by other CL implementations).
 
-#+(or ecl abcl)
-($load "lisp-utils/defsystem.lisp")
+(unless (member :mk-defsystem *features*) ($load "lisp-utils/defsystem.lisp"))
 
 (mk:defsystem linearalgebra
   :source-pathname (maxima::maxima-load-pathname-directory)

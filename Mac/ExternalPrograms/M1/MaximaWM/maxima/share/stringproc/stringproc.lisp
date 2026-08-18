@@ -546,8 +546,8 @@ TODO: Comments on Xmaxima in Windows.
 
 
 ;; Convert a Lisp character into a string of length 1.
-;;
-(defun $cunlisp (lc) ;; at Maxima level only for testing
+;; This is implemented as Lisp function so that it is not visible to the user.
+(defun cunlisp (lc)
   (unless (characterp lc)
     (gf-merror "cunlisp: argument must be a Lisp character") )
   (string lc) )
@@ -874,7 +874,13 @@ Please use `unicode' for code points larger than 127." )))
     (push (utf-8-m-char (length ch) ch) m-chars) ))
 
 
-(putprop '$sexplode '$charlist 'alias)
+;; sexplode is the same as charlist; define a function which just punts to charlist,
+;; do not define an alias because that has surprising behavior in at least one nontrivial circumstance,
+;; namely sexplode being called from within another function foo,
+;; such that stringproc has not yet been loaded (and therefore the alias not yet defined)
+;; when foo is defined.
+
+(defun $sexplode (str) ($charlist str))
 
 
 ;; $tokens is an interface to `tokens' by Paul Graham.

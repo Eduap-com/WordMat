@@ -1,0 +1,41 @@
+load("alt-display.mac") $
+load(mathml) $
+
+mathml_header : "<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<!DOCTYPE html PUBLIC
+\"-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN\"
+\"http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd\"
+[
+<!ENTITY mathml \"http://www.w3.org/1998/Math/MathML\">
+]>  
+<html xmlns=\"http://www.w3.org/1999/xhtml\">
+<head>
+<title>Maxima MathML Output Test Page</title>
+</head>
+<body>
+  ";
+mathml_input_file_name:"";
+
+define_alt_display(mathml_display1d(x),
+    if linenum<0 then linenum:0
+    else (
+      printf(true,"<li><div class='maxima-input' style='margin: 15px; font-size: large; font-family: monospace; font-weight: bold; color: black;'>"),
+      apply(mathml,[?cadr(x)]),
+      printf(true,"</div></li>~%")));
+
+define_alt_display(mathml_display2d(x),
+  block([color,label:?makelabel(outchar)],
+    color:if ?cadr(x)=false then lightgray else darkblue,
+    if second(x)#'end_of_file then (
+      printf(true,"<li><div class='output' style='background-color:lightgray; color: darkblue; font-size: 130%;'><span class='outputlabel' style='color: ~a; font-weight: bold;'>(~a~a) </span>~%",color,outchar,linenum),
+      if label=?cadr(x) then mathml(%) else mathml(second(x)),
+      printf(true,"~%</div></li>~%~%"))));
+set_alt_display(1,mathml_display1d) $
+set_alt_display(2,mathml_display2d) $
+
+mathml_batch(file) := (printf(true,"~a",mathml_header),
+  printf(true,"<h1>Test from ~a</h1>~%<ol id='output'>~%",file),
+  mathml_input_file_name:file, batch(file),
+  printf(true,"</ol><p><a href=\"https://validator.w3.org/check\">W3C Validate</a></p></body></html>"),
+  'end_of_file);
+linenum:-1;

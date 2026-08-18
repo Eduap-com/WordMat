@@ -321,6 +321,3 @@ list of lists call this function on each of the lists independently."
     (list '(mlist)
       (cons '(mlist) ans)
       (cons '(mlist) (mapcar 'new-disrep all-monoms))))))
-
-(defun $pb ()
-  (save-linenumbers :file "/tmp/lines"))

@@ -1,0 +1,5 @@
+if ENABLE_BUILD_DOCS
+   DOC_DIR = doc
+endif
+
+SUBDIRS = $(DOC_DIR) 

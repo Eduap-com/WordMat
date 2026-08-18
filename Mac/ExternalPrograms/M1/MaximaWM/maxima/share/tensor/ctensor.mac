@@ -758,7 +758,7 @@ ct_coordsys(coordinate_system, [extra_args]):=
     dim:3,
     ct_coords:[x,y,z],
     if cframe_flag then error("No frames implementation")
-    else lg:lg:matrix([x^2,y,0],[y,y^2,0],[0,0,z])
+    else lg:matrix([x^2,y,0],[y,y^2,0],[0,0,z])
   )
   else if coordinate_system='alternateflat4d then
   (
@@ -1765,8 +1765,8 @@ petrov():=block
 frame_bracket(fr,fri,diagframe):=block
 (
   for a thru dim do for b thru dim do for c thru dim do
-    fb[a,b,c]:sum(sum(fr[a,e%]*(diff(fri[e%,c],ct_coords[f%])-
-              diff(fri[f%,c],ct_coords[e%]))*fr[b,f%],e%,1,dim),f%,1,dim)
+    fb[a,b,c]:sum(sum(fr[b,e%]*(diff(fri[a,e%],ct_coords[f%])-
+              diff(fri[a,f%],ct_coords[e%]))*fr[c,f%],e%,1,dim),f%,1,dim)
 );
 
 /* The findde function finds a list of unique differential equations in the
@@ -1983,4 +1983,4 @@ riccicov(ii,jj,kk,ll):=block(
 
 
 
-put('ctensor,'v20211011,'version)$
+put('ctensor,'v20260409,'version)$

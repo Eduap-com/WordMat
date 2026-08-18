@@ -244,7 +244,7 @@ execute_test (draw2d(
     explicit(sin(x),x,0,10)
 ),0);
 0$
-gnuplot_contains_string("obj 1 fc rgb '#FFFF00'");
+gnuplot_contains_string("obj 1 fc rgb '#ffff00'");
 true$
 
 /* test line_width and line colors including semi-transparent ones */
@@ -274,9 +274,9 @@ execute_test (draw2d(
     explicit(cos(x),x,0,10)
 ),0);
 0$
-gnuplot_contains_string("lc rgb '#FF0000'");
+gnuplot_contains_string("lc rgb '#ff0000'");
 true$
-gnuplot_contains_string("lc rgb '#0000FF'");
+gnuplot_contains_string("lc rgb '#0000ff'");
 true$
 
 /* test colorbox */
@@ -479,9 +479,9 @@ execute_test (draw2d(
     explicit(cos(x),x,0,10)
 ),0);
 0$
-gnuplot_contains_string("lc rgb '#FF0000'");
+gnuplot_contains_string("lc rgb '#ff0000'");
 true$
-gnuplot_contains_string("lc rgb '#00FF00'");
+gnuplot_contains_string("lc rgb '#00ff00'");
 true$
 
 /* Test if drawing a grid works */

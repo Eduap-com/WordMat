@@ -11,7 +11,10 @@ load("alt-display.lisp");
 
 alt_display_text_prefix:""; /* rim: "TEXT;>>"; */
 alt_display_text_suffix:""; /* rim: "<<TEXT;"; */
-alt_display_text(x) := printf(true,"~%~a~a~a~%",alt_display_text_prefix,first(x),alt_display_text_suffix);
+alt_display_text(form) := block([?\*alt\-display2d\*:false, ?\*alt\-display1d\*:false],
+  /* Create an MTEXT form from FORM (an MTEXT form) and the prefix & suffix.
+     To avoid nested MTEXT forms, flatten the result, then print it. */
+  printf(true,"~M",flatten(endcons(alt_display_text_suffix,cons(alt_display_text_prefix,form)))));
 
 define_alt_display(f,body) ::= buildq(
   [f:f, fargs:first(args(f)),

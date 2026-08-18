@@ -1,7 +1,7 @@
 ;;;                 COPYRIGHT NOTICE
 ;;;  
 ;;;  Copyright (C) 2007-2016 Mario Rodriguez Riotorto
-;;;  Time-stamp: "2025-11-27 12:27:02 Leo Butler"
+;;;  Time-stamp: "2026-03-08 20:05:07 villate"
 ;;;  
 ;;;  This program is free software; you can redistribute
 ;;;  it and/or modify it under the terms of the
@@ -2836,13 +2836,37 @@
       (gethash '%polar         *2d-graphic-objects*) 'polar
       (gethash '%image         *2d-graphic-objects*) 'image )
 
+;; Resolve suggest(opt = val) markers in a flattened scene list.
+;; A suggested option is applied only when that option is not also set
+;; explicitly elsewhere in the same scene (in any position), so scene
+;; builders can propose a default xrange/yrange/... without clobbering
+;; a user setting.
+(defun resolve-suggestions (largs)
+  (let (explicit result)
+    ;; Collect options explicitly set.
+    (dolist (x largs)
+      (when (and (consp x)
+                 (eq (caar x) 'mequal))
+        (push (cadr x) explicit)))
+    ;; Unpack instances of suggest(opt = val) to opt = val
+    ;; if opt isn't explicity set.
+    (dolist (x largs (nreverse result))
+      (if (and (consp x)
+               (eq (caar x) '%suggest)
+               (consp (cadr x))
+               (eq (caaadr x) 'mequal))
+        (let ((inner (cadr x)))
+          (unless (member (cadr inner) explicit :test #'eq)
+            (push inner result)))
+        (push x result)))))
+
 (defun make-scene-2d (args)
    (let ((objects nil)
          plotcmd largs aux)
       (ini-gr-options)
       (ini-local-option-variables)
       (user-defaults)
-      (setf largs (listify-arguments args))
+      (setf largs (resolve-suggestions (listify-arguments args)))
       ; update option values and detect objects to be plotted
       (dolist (x largs)
          (cond ((equal ($op x) "=")
@@ -3044,7 +3068,7 @@
       (ini-gr-options)
       (ini-local-option-variables)
       (user-defaults)
-      (setf largs (listify-arguments args))
+      (setf largs (resolve-suggestions (listify-arguments args)))
       ; update option values and detect objects to be plotted
       (dolist (x largs)
          (cond ((equal ($op x) "=")
@@ -3444,7 +3468,7 @@
 
     ; Make gnuplot versions newer than 5.0 understand that linetype means
     ; we try to set the dash type
-    (format cmdstorage "~%if(GPVAL_VERSION >= 5.0){set for [i=1:8] linetype i dashtype i; set format '%h'}")
+    (format cmdstorage "~%if(GPVAL_VERSION >= 5.0){set for [i=1:8] linetype i dashtype i}")
 
     ;; By default gnuplot assumes everything below 1e-8 to be a rounding error
     ;; and rounds it down to 0. This is handy for standalone gnuplot as it allows
@@ -3579,12 +3603,7 @@
                (format cmdstorage "~%unset output~%quit~%~%")
                (format cmdstorage "~%set term dumb~%~%") )
              (close cmdstorage)
-	     #+(or (and sbcl win32) (and sbcl win64) (and ccl windows))
-             ($system $gnuplot_command gfn)
-	     #-(or (and sbcl win32) (and sbcl win64) (and ccl windows))
-	     ($system (format nil "~a \"~a\"" 
-			      $gnuplot_command
-			      gfn) ))
+             ($system $gnuplot_command (format nil $gnuplot_file_args gfn)))
           (t ; non animated gif
              ; command file maxout.gnuplot is now ready
              (format cmdstorage "~%")
@@ -3629,15 +3648,14 @@
 		     ($system $gnuplot_command gfn))
 		 #-(or (and sbcl win32) (and sbcl win64) (and ccl windows))
 		 ($system (if (member (get-option '$terminal) '($screen $aquaterm $wxt $x11 $qt $windows))
-			      (format nil "~a ~a"
-				      $gnuplot_command
+			      (format nil "~a ~a" $gnuplot_command
 				      (format nil $gnuplot_view_args gfn))
-			      (format nil "~a \"~a\"" 
-				      $gnuplot_command
-				      gfn))) ))))
+			    (format nil "~a ~a" 
+				    $gnuplot_command
+				      (format nil $gnuplot_file_args gfn))))))))
 
     ; the output is a simplified description of the scene(s)
-    (reverse scenes-list)) )
+    (reverse scenes-list)))
 
 
 ;; This function transforms an integer number into

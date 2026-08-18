@@ -13,11 +13,77 @@
 
 (in-package :maxima)
 
-; Kill off translation properties of conditionals.
-; Ideally we could avoid calling MEVAL when arguments are declared Boolean.
-; We're not there yet.
-
-(remprop 'mcond 'translate)
+;; translation of mcond into lisp.
+;; Builds a lisp "block" that executes lisp translation of each mcond
+;; clause one after the other.  Returns from block if pred is true.
+;; If pred is false does nothing.  If pred is unknown, appends untranslated
+;; pred and body to a list, which is returned as an mcond at end of block.
+(def%tr mcond (form)
+  (let ((g (tr-gensym))
+        (nl nil)
+        (mode nil))
+    ;; build up list nl from l
+    ;; nl is in reverse order from l
+    ;; each two items in nl are a body followed by a corresponding condition
+    (do ((l (cdr form) (cddr l))) ((null l))
+      ; Optimize the else-if case: if we're at the else case at the end
+      ; and the body is just another conditional, then we just continue
+      ; directly with the clauses of the inner conditional instead of
+      ; nesting.
+      (when (and (null (cddr l))
+                 (eq (car l) t)
+                 (consp (cadr l))
+                 (eq (caaadr l) 'mcond))
+        (setq l (cdadr l)))
+      (let ((wrap-a-pred 'mcond))
+        (declare (special wrap-a-pred))
+        (destructuring-let (((pred-mode . pred-tr) (translate-predicate (car l)))
+                            ((body-mode . body-tr) (translate (cadr l))))
+          (setq mode (*union-mode mode body-mode))
+	  ;; below, a clause in the original mcond is translated into
+	  ;; two (body, condition) pairs in nl: one to execute if the
+	  ;; original condition is true, and one to add a clause
+	  ;; to the unevaluated mcond if the condition is unknown
+          (if (eq pred-mode '$boolean)
+	      ;; pred-tr is either T or NIL
+              (setq nl (list* `(setq unevaluated-mcond (append unevaluated-mcond (list ,pred-tr (mcond-eval-symbols-tr ',(cadr l)))))
+                              pred-tr
+                              `(return-from translated-mcond ,body-tr)
+                              `(and ,pred-tr
+				    (null unevaluated-mcond))
+                              nl))
+	      ;; use variable g for result of pred evaluation
+              (setq nl (list* `(setq unevaluated-mcond (append unevaluated-mcond (list ,g (mcond-eval-symbols-tr ',(cadr l)))))
+			      g
+                              `(return-from translated-mcond ,body-tr)
+                              `(and (eq t (setq ,g ,pred-tr))
+				    (null unevaluated-mcond))
+                              nl))))))
+    ; We leave off the final clause if the condition is true
+    ; and the consequent is false.
+    (when (and (eq t (cadr nl)) (null (car nl)))
+      (setq nl (cddr nl)))
+    ;; build up a block in the translated routine
+    ;; each (body, condition) pair in nl is translated into an "if"
+    (setq form nil)
+    (do ((l nl (cddr l))) ((null l))
+      (setq form
+            (cons (cons 'if
+			(cons (cadr l)
+                              (cond ((and (not (atom (car l)))
+					  (cdr l)
+					  (eq (caar l) 'progn))
+				     (cdar l))
+				    ((and (equal (car l) (cadr l))
+					  (atom (car l)))
+				     nil)
+				    (t (list (car l))))))
+                  form)))
+    (if (among g form)
+        (cons '$any `(let (,g unevaluated-mcond)
+		       (block translated-mcond ,@form (cons '(mcond) unevaluated-mcond))))
+        (cons mode `(let (unevaluated-mcond)
+		      (block translated-mcond ,@form (cons '(mcond) unevaluated-mcond)))))))
 
 ; X is an expression of the form ((OP) B1 G1 B2 G2 B3 G3 ...)
 ; where OP is MCOND or %MCOND,

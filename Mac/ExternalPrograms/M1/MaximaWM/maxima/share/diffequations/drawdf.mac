@@ -61,7 +61,7 @@ calc_soln_curve(derivs, vars, init, mins, maxs, max_step, max_tstep, min_tstep, 
 block (
   [ xxx,ddd,k1,k2,k3,k4,t0,t1,r,dxxx,nxxx,nk1,tstep,
     current_partition:'init,
-    numer:true,display2d:false ],
+    numer:true,display2d: if display2d = true then false else display2d ],
 
   make_f_rk_4(first(derivs), second(derivs), first(vars), second(vars),
     first(mins), first(maxs), second(mins), second(maxs), partition_expr),

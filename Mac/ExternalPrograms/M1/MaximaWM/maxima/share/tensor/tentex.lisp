@@ -59,7 +59,12 @@
 (defprop $levi_civita  "\\varepsilon" texword)
 (defprop %levi_civita  "\\varepsilon" texword)
 
-(defun $tentex (x) (meval (list '$tex (tenreform x))))
+;(defun $tentex (x) (meval (list '$tex (tenreform x))))
+; Turn off simplification to avoid meval mangling indices
+(defun $tentex (x) 
+(let (($simp $simp))
+     (setq $simp nil)
+     (meval (list '$tex (tenreform x)))))
 
 (defun tenreform (x)
   (cond
