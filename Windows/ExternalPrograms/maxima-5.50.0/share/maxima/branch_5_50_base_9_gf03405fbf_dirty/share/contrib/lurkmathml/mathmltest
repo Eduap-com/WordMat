@@ -1,0 +1,16 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+  echo "$0: no Maxima input files specified."
+  exit 1
+fi
+
+# First, build up the Maxima batch file
+rm -f tmp-mathmltest-input.mac
+for file in $@; do
+    cat $file >> tmp-mathmltest-input.mac
+done
+
+# Now run Maxima over the test file, to produce tmp-mathmltest-output.xml
+export MAXIMA_USERDIR=$PWD
+../../../maxima-local --very-quiet -p mathmltest.mac --batch-string='mathml_batch("./tmp-mathmltest-input.mac");' > tmp-mathmltest-output.xml

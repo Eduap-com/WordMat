@@ -1,0 +1,4 @@
+@unnchapentry{}{10001}{Top}{1}
+@numchapentry{Package mathml}{1}{Package mathml}{2}
+@numsecentry{Definitions for package mathml}{1.1}{Definitions for package mathml}{2}
+@appentry{Function and variable index}{A}{Function and variable index}{5}

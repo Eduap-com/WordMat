@@ -10,11 +10,15 @@ Dim oAppClass As New oAppClass ' is also in P, so the risk of lost tempdoc is le
     Private Declare PtrSafe Function CreateMutex Lib "kernel32" Alias "CreateMutexA" (ByVal lpMutexAttributes As LongPtr, ByVal bInitialOwner As LongPtr, ByVal lpName As String) As LongPtr
 #End If
 
+Function GetTimerSeconds()
+    GetTimerSeconds = Day(Date) * 24# * 3600 + Timer()
+End Function
+
 Sub RunFirst()
-      ' Should be run on startup of WordMat
+          ' Should be run on startup of WordMat
           Dim s As String
           
-10        If Abs(Timer() - WMRunTime) > 24# * 3600 Then
+10        If Abs(GetTimerSeconds() - WMRunTime) > 24# * 3600 Then
 20            On Error Resume Next
 30            Err.Clear
 40            Application.Run macroname:="Popstart"
@@ -28,7 +32,7 @@ Sub RunFirst()
 120           Err.Clear
 130           On Error GoTo TheEnd
 140           DoEvents
-150           WMRunTime = Timer()
+150           WMRunTime = GetTimerSeconds()
 160       End If
           
 170       If HasStarted Then Exit Sub
@@ -46,7 +50,7 @@ Sub RunFirst()
 280       Err.Clear
 290       On Error GoTo TheEnd
 300       DoEvents
-310       WMRunTime = Timer()
+310       WMRunTime = GetTimerSeconds()
 320       AntalB = Antalberegninger
 
 330       SetMathAutoCorrect
@@ -101,19 +105,21 @@ Sub RunFirst()
 740               SettShortcutAltG = KeybShortcut.ShowGraph
 750               If Not QActivePartnership Then
 760                   s = GetRegSettingString("ShowMenus")
-770                   s = "10" & Right(s, Len(s) - 2)
-780                   SetRegSettingString "ShowMenus", s
-790               End If
-800           End If
-810           RegAppVersion = AppVersion
-820       End If
-830       If SettCheckForUpdate Then CheckForUpdateSilent
+770                   If Len(s) > 2 Then
+780                       s = "10" & Right(s, Len(s) - 2)
+790                       SetRegSettingString "ShowMenus", s
+800                   End If
+810               End If
+820           End If
+830           RegAppVersion = AppVersion
+840       End If
+850       If SettCheckForUpdate Then CheckForUpdateSilent
 
-840       GoTo slut
+860       GoTo slut
 TheEnd:
-850       MsgBox2 "A startup error occured. WordMat will probably work, but please show this to support: " & "Err. number: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Linenumber: " & Erl, vbOKOnly, TT.Error
+870       MsgBox2 "A startup error occured. WordMat will probably work, but please show this to support: " & "Err. number: " & Err.Number & vbCrLf & Err.Description & vbCrLf & "Linenumber: " & Erl, vbOKOnly, TT.Error
 slut:
-860       HasStarted = True
+880       HasStarted = True
 End Sub
 
 Sub SetMaxProc()

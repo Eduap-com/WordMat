@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Command-line options (Maxima 5.50.9.gf03405fbf Manual)</title>
+
+<meta name="description" content="Command-line options (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="keywords" content="Command-line options (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Runtime-Environment.html#Runtime-Environment" rel="next" title="Runtime Environment">
+<link href="Introduction-to-Maxima.html" rel="prev" title="Introduction to Maxima">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span:hover a.copiable-link {visibility: visible}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Command_002dline-options">
+<div class="nav-panel">
+<p>
+Next: <a href="Runtime-Environment.html#Runtime-Environment" accesskey="n" rel="next">Runtime Environment</a>, Previous: <a href="Introduction-to-Maxima.html" accesskey="p" rel="prev">Introduction to Maxima</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Command_002dline-options-1"><span>2 Command-line options<a class="copiable-link" href="#Command_002dline-options-1"> &para;</a></span></h2>
+<a class="anchor" id="command_005fline_005foptions"></a><p>The following command line options are available for Maxima:
+</p>
+<dl class="table">
+<dt><code class="code">-b &lt;file&gt;, --batch=&lt;file&gt;</code></dt>
+<dd><p>Process maxima file &lt;file&gt; in batch mode.
+</p>
+
+</dd>
+<dt><code class="code">--batch-lisp=&lt;file&gt;</code></dt>
+<dd><p>Process lisp file &lt;file&gt; in batch mode.
+</p>
+
+</dd>
+<dt><code class="code">--batch-string=&lt;string&gt;</code></dt>
+<dd><p>Process maxima command(s) &lt;string&gt; in batch mode.
+</p>
+
+</dd>
+<dt><code class="code">-d, --directories</code></dt>
+<dd><p>Display maxima internal directory information.
+</p>
+
+</dd>
+<dt><code class="code">--disable-readline</code></dt>
+<dd><p>Disable readline support.
+</p>
+
+</dd>
+<dt><code class="code">-g, --enable-lisp-debugger</code></dt>
+<dd><p>Enable underlying lisp debugger.
+</p>
+
+</dd>
+<dt><code class="code">-h, --help</code></dt>
+<dd><p>Display this usage message.
+</p>
+
+</dd>
+<dt><code class="code">--userdir=&lt;directory&gt;</code></dt>
+<dd><p>Use &lt;directory&gt; for user directory (default is %USERPROFILE%/maxima
+         for Windows, and $HOME/.maxima for other operating systems).
+</p>
+
+</dd>
+<dt><code class="code">--init=&lt;file&gt;</code></dt>
+<dd><p>Set the base name of the Maxima &amp; Lisp initialization files (default
+         is &quot;maxima-init&quot;.) The last extension and any directory parts are
+         removed to form the base name. The resulting files, &lt;base&gt;.mac and
+         &lt;base&gt;.lisp are only searched for in userdir (see &ndash;userdir option).
+         This may be specified for than once, but only the last is used.
+</p>
+
+</dd>
+<dt><code class="code">-l &lt;lisp&gt;, --lisp=&lt;lisp&gt;</code></dt>
+<dd><p>Use lisp implementation &lt;lisp&gt;.
+</p>
+
+</dd>
+<dt><code class="code">--list-avail</code></dt>
+<dd><p>List the installed version/lisp combinations.
+</p>
+
+</dd>
+<dt><code class="code">-p &lt;file&gt;, --preload=&lt;file&gt;, --preload-lisp=&lt;file&gt;, --init-mac=&lt;file&gt;, --init-lisp=&lt;file&gt;</code></dt>
+<dd><p>Preload &lt;file&gt;, which may be any file time accepted by Maxima&rsquo;s LOAD
+         function. The &lt;file&gt; is loaded before any other system initialization
+         is done. This will be searched for in the locations given by
+         file_search_maxima and file_search_lisp. This can be specified
+         multiple times to load multiple files. The equivalent options
+         &ndash;preload-lisp, &ndash;init-mac, and &ndash;init-lisp are deprecated.
+</p>
+
+</dd>
+<dt><code class="code">-q, --quiet</code></dt>
+<dd><p>Suppress Maxima start-up message.
+</p>
+
+</dd>
+<dt><code class="code">-Q, --quit-on-error</code></dt>
+<dd><p>Quit, and return an exit code 1, when Maxima encounters an error.
+</p>
+
+</dd>
+<dt><code class="code">-r &lt;string&gt;, --run-string=&lt;string&gt;</code></dt>
+<dd><p>Process maxima command(s) &lt;string&gt; in interactive mode.
+</p>
+
+</dd>
+<dt><code class="code">-s &lt;port&gt;, --server=&lt;port&gt;</code></dt>
+<dd><p>Connect Maxima to server on &lt;port&gt;.
+</p>
+
+</dd>
+<dt><code class="code">--suppress-input-echo</code></dt>
+<dd><p>Do not print input expressions when processing noninteractively.
+</p>
+
+</dd>
+<dt><code class="code">-u &lt;version&gt;, --use-version=&lt;version&gt;</code></dt>
+<dd><p>Use maxima version &lt;version&gt;.
+</p>
+
+</dd>
+<dt><code class="code">-v, --verbose</code></dt>
+<dd><p>Display lisp invocation in maxima wrapper script.
+</p>
+
+</dd>
+<dt><code class="code">--version</code></dt>
+<dd><p>Display the default installed version.
+</p>
+
+</dd>
+<dt><code class="code">--very-quiet</code></dt>
+<dd><p>Suppress expression labels, Maxima start-up message and verification
+         of html index.
+</p>
+
+</dd>
+<dt><code class="code">--very-very-quiet</code></dt>
+<dd><p>In addition to &ndash;very-quiet, suppress most printed output by setting
+         TTYOFF to T.
+</p>
+
+</dd>
+<dt><code class="code">-X &lt;Lisp options&gt;, --lisp-options=&lt;Lisp options&gt;</code></dt>
+<dd><p>Options to be given to the underlying Lisp
+</p>
+
+</dd>
+<dt><code class="code">--no-init, --norc</code></dt>
+<dd><p>Do not load the init file(s) on startup
+</p>
+
+</dd>
+<dt><code class="code">--verify-html-index</code></dt>
+<dd><p>Verify on startup that the set of html topics is consistent with text
+         topics.
+</p>
+
+</dd>
+</dl>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Command_002dline-Options">Command-line Options</a>
+&middot;
+</div>
+
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Runtime-Environment.html#Runtime-Environment" accesskey="n" rel="next">Runtime Environment</a>, Previous: <a href="Introduction-to-Maxima.html" accesskey="p" rel="prev">Introduction to Maxima</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

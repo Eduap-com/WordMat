@@ -1,0 +1,22 @@
+# Input filter for data files, usable from plot or splot
+#
+set title "Extract desired lines from unsorted input using\n"."plot .. if (<expression>)"
+
+set margins 15,5,12
+unset tics
+set xtics nomirror scale 0.0, 0.0
+set xtics rotate by -90
+unset border
+set offsets 0,0,0, graph .1
+set style data linespoints
+LC = 7
+
+DATA = "energy_circles.dat"
+LIST = "Coal Oil Gas Nuclear Renewable"
+
+plot for [type in LIST] DATA using (int($0)/6):7:xticlabel(3) \
+                        lc (LC=LC+1) lw 2 pt 6 pi -1 title type."   " at beg \
+     if (strcol(4) eq type)
+
+pause -1 "<cr> to continue"
+reset

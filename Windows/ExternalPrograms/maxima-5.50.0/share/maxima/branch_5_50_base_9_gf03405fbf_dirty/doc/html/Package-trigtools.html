@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package trigtools (Maxima 5.50.9.gf03405fbf Manual)</title>
+
+<meta name="description" content="Package trigtools (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="keywords" content="Package trigtools (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-unit.html#Package-unit" rel="next" title="Package unit">
+<link href="Package-to_005fpoly_005fsolve.html#Package-to_005fpoly_005fsolve" rel="prev" title="Package to_poly_solve">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.center {text-align:center}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},       // do not skip pre
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  tex: {
+    processEscapes: false,      // do not use \$ to produce a literal dollar sign
+    processEnvironments: false, // do not process \begin{xxx}...\end{xxx} outside math mode
+    processRefs: false,         // do not process \ref{...} outside of math mode
+    displayMath: [             // start/end delimiter pairs for display math
+      ['\\[', '\\]']
+    ],
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Package-trigtools">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-unit.html#Package-unit" accesskey="n" rel="next">Package unit</a>, Previous: <a href="Package-to_005fpoly_005fsolve.html#Package-to_005fpoly_005fsolve" accesskey="p" rel="prev">Package to_poly_solve</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-trigtools-1"><span>100 Package trigtools<a class="copiable-link" href="#Package-trigtools-1"> &para;</a></span></h2>
+
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fIntroduction-to-trigtools"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-trigtools" accesskey="1">Introduction to trigtools</a></li>
+<li><a href="#Functions-and-Variables-for-trigtools" accesskey="2">Functions and Variables for trigtools</a></li>
+<li><a href="#References" accesskey="3">References</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-trigtools">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-trigtools" accesskey="n" rel="next">Functions and Variables for trigtools</a>, Previous: <a href="#Package-trigtools" accesskey="p" rel="prev">Package trigtools</a>, Up: <a href="#Package-trigtools" accesskey="u" rel="up">Package trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<div class="center"><h1 class="titlefont">Trigtools Package</h1>
+</div><br>
+<br>
+<div class="center"><b class="b">Aleksas Dormarkas</b>
+</div><div class="center"><a class="email" href="mailto:aleksasd873@gmail.com">aleksasd873@gmail.com</a>
+</div><div class="center"><a class="email" href="mailto:aleksas.domarkas@mif.vu.lt">aleksas.domarkas@mif.vu.lt</a>
+</div><div class="center">December 1, 2013
+</div>
+<h3 class="section" id="Introduction-to-trigtools-1"><span>100.1 Introduction to trigtools<a class="copiable-link" href="#Introduction-to-trigtools-1"> &para;</a></span></h3>
+<p>We use open-source computer algebra system(CAS) maxima 5.31.2.
+The trigtools package<a class="footnote" id="DOCF10" href="#FOOT10"><sup>10</sup></a> contains commands that help you work with
+trigonometric expressions. List of functions in trigtools package:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code"><a class="ref" href="#c2sin">c2sin</a></code>
+</li><li><code class="code"><a class="ref" href="#c2cos">c2cos</a></code>
+</li><li><code class="code"><a class="ref" href="#c2trig">c2trig</a></code>
+</li><li><code class="code"><a class="ref" href="#c2hyp">c2hyp</a></code>
+</li><li><code class="code"><a class="ref" href="#trigfactor">trigfactor</a></code>
+</li><li><code class="code"><a class="ref" href="#trigsolve">trigsolve</a></code>
+</li><li><code class="code"><a class="ref" href="#trigvalue">trigvalue</a></code>
+</li><li><code class="code"><a class="ref" href="#trigeval">trigeval</a></code>
+</li><li><code class="code"><a class="ref" href="#atan_005fcontract">atan_contract</a></code>
+</li></ul>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-trigtools">Package trigtools</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fFunctions-and-Variables-for-trigtools"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-trigtools">
+<div class="nav-panel">
+<p>
+Next: <a href="#References" accesskey="n" rel="next">References</a>, Previous: <a href="#Introduction-to-trigtools" accesskey="p" rel="prev">Introduction to trigtools</a>, Up: <a href="#Package-trigtools" accesskey="u" rel="up">Package trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-trigtools-1"><span>100.2 Functions and Variables for trigtools<a class="copiable-link" href="#Functions-and-Variables-for-trigtools-1"> &para;</a></span></h3>
+
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fConvert-to-sin-and-cos"></a><ul class="mini-toc">
+<li><a href="#Convert-to-sin-and-cos" accesskey="1">Convert to sin and cos</a></li>
+<li><a href="#Convert-to-Trigonometric-Functions" accesskey="2">Convert to Trigonometric Functions</a></li>
+<li><a href="#Convert-to-Hyperbolic-Functions" accesskey="3">Convert to Hyperbolic Functions</a></li>
+<li><a href="#Factor-Sums-of-sin-and-cos-Functions" accesskey="4">Factor Sums of sin and cos Functions</a></li>
+<li><a href="#Solve-Trigonometric-Equations" accesskey="5">Solve Trigonometric Equations</a></li>
+<li><a href="#Evaluation-of-Trigonometric-Functions" accesskey="6">Evaluation of Trigonometric Functions</a></li>
+<li><a href="#Contract-atan-Functions" accesskey="7">Contract atan Functions</a></li>
+</ul>
+<hr>
+<div class="subsection-level-extent" id="Convert-to-sin-and-cos">
+<div class="nav-panel">
+<p>
+Next: <a href="#Convert-to-Trigonometric-Functions" accesskey="n" rel="next">Convert to Trigonometric Functions</a>, Previous: <a href="#Functions-and-Variables-for-trigtools" accesskey="p" rel="prev">Functions and Variables for trigtools</a>, Up: <a href="#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Convert-to-sin-and-cos-1"><span>100.2.1 Convert to sin and cos<a class="copiable-link" href="#Convert-to-sin-and-cos-1"> &para;</a></span></h4>
+
+<a class="anchor" id="c2sin"></a><a class="anchor" id="Item_003a-trigtools_002fdeffn_002fc2sin"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-c2sin"><span class="category-def">Function: </span><span><strong class="def-name">c2sin</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href="#index-c2sin"> &para;</a></span></dt>
+<dd><a class="anchor" id="c2cos"></a><a class="anchor" id="Item_003a-trigtools_002fdeffn_002fc2cos"></a></dd><dt class="deffnx def-cmd-deffn def-line" id="index-c2cos"><span class="category-def">Function: </span><span><strong class="def-name">c2cos</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href="#index-c2cos"> &para;</a></span></dt>
+<dd><p>The function c2sin converts the expression 
+\(a\cos x + b\sin x\)
+to
+\(r\sin(x+\phi).\)
+</p>
+<p>The function c2cos converts the expression 
+\(a\cos x + b\sin x\)
+to
+\(r\cos(x-\phi).\)
+</p>
+<p><code class="code">load(&quot;trigtools&quot;)</code> loads these functions.
+</p>
+<p>Examples:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) c2sin(3*sin(x)+4*cos(x));
+                                      4
+(%o2)                  5 sin(x + atan(-))
+                                      3
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigexpand(%),expand;
+(%o3)                  3 sin(x) + 4 cos(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) c2cos(3*sin(x)-4*cos(x));
+                                       3
+(%o4)                 - 5 cos(x + atan(-))
+                                       4
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) trigexpand(%),expand;
+(%o5)                  3 sin(x) - 4 cos(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) c2sin(sin(x)+cos(x));
+                                      %pi
+(%o6)                 sqrt(2) sin(x + ---)
+                                       4
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) trigexpand(%),expand;
+(%o7)                    sin(x) + cos(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) c2cos(sin(x)+cos(x));
+                                      %pi
+(%o8)                 sqrt(2) cos(x - ---)
+                                       4
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) trigexpand(%),expand;
+(%o9)                    sin(x) + cos(x)
+</pre></div></div>
+
+<p>Example. Solve trigonometric equation
+</p>
+<div class="example user-maxima">
+<div class="group"><pre class="example-preformatted">(%i1) eq:3*sin(x)+4*cos(x)=2;
+(%o1)                3 sin(x) + 4 cos(x) = 2
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) plot2d([3*sin(x)+4*cos(x),2],[x,-%pi,%pi]);
+(%o2)                         false
+</pre></div></div>
+
+<div class="center"><img class="image" src="figures/trigtools-1.png" alt="plot1">
+</div>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) eq:3*sin(x)+4*cos(x)=2$
+</pre><div class="group"><pre class="example-preformatted">(%i3) eq1:c2sin(lhs(eq))=2;
+                                    4
+(%o3)                5 sin(x + atan(-)) = 2
+                                    3
+</pre></div><pre class="example-preformatted">(%i4) solvetrigwarn:false$
+</pre><div class="group"><pre class="example-preformatted">(%i5) solve(eq1)[1]$ x1:rhs(%);
+                             2         4
+(%o6)                   asin(-) - atan(-)
+                             5         3
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) float(%), numer;
+(%o7)                 - 0.5157783719341241
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) eq2:c2cos(lhs(eq))=2;
+                                    3
+(%o8)                5 cos(x - atan(-)) = 2
+                                    4
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) solve(eq2,x)[1]$ x2:rhs(%);
+                             3         2
+(%o10)                  atan(-) + acos(-)
+                             4         5
+</pre></div><div class="group"><pre class="example-preformatted">(%i11) float(%), numer;
+(%o11)                  1.802780589520693
+</pre></div><div class="group"><pre class="example-preformatted">(%i12) sol:[x1,x2];
+                   2         4        3         2
+(%o12)       [asin(-) - atan(-), atan(-) + acos(-)]
+                   5         3        4         5
+</pre></div></div>
+
+
+<p>Answ.: 
+\(x = x_1 + 2\pi k,\)
+\(x_1 = \sin^{-1}{2\over 5} - \tan^{-1}{4\over
+3},\)
+or
+\(x_1 = \tan^{-1}{3\over 4} + \cos^{-1}{2\over 5},\)
+for <em class="math tex2jax_process">\(k\)</em> any integer.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-trigtools">Package trigtools</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fConvert-to-Trigonometric-Functions"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Convert-to-Trigonometric-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Convert-to-Hyperbolic-Functions" accesskey="n" rel="next">Convert to Hyperbolic Functions</a>, Previous: <a href="#Convert-to-sin-and-cos" accesskey="p" rel="prev">Convert to sin and cos</a>, Up: <a href="#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Convert-to-Trigonometric-Functions-1"><span>100.2.2 Convert to Trigonometric Functions<a class="copiable-link" href="#Convert-to-Trigonometric-Functions-1"> &para;</a></span></h4>
+
+<a class="anchor" id="c2trig"></a><a class="anchor" id="Item_003a-trigtools_002fdeffn_002fc2trig"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-c2trig"><span class="category-def">Function: </span><span><strong class="def-name">c2trig</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href="#index-c2trig"> &para;</a></span></dt>
+<dd><p>The function c2trig (convert to trigonometric) reduce expression with hyperbolic functions
+sinh, cosh, tanh, coth to trigonometric expression with sin, cos, tan, cot.
+</p>
+<p><code class="code">load(&quot;trigtools&quot;)</code> loads these functions.
+</p>
+<p>Examples:
+</p>
+<ol class="enumerate">
+<li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(trigtools)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) sinh(x)=c2trig(sinh(x));
+(%o2)               sinh(x) = - %i sin(%i x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) cosh(x)=c2trig(cosh(x));
+(%o3)                  cosh(x) = cos(%i x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) tanh(x)=c2trig(tanh(x));
+(%o4)               tanh(x) = - %i tan(%i x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) coth(x)=c2trig(coth(x));
+(%o5)                coth(x) = %i cot(%i x)
+</pre></div></div>
+
+</li><li> see <a class="url" href="https://maxima.sourceforge.io/ext/list_archives/2013/msg03230.html">https://maxima.sourceforge.io/ext/list_archives/2013/msg03230.html</a>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) cos(p+q*%i);
+(%o2)                     cos(%i q + p)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigexpand(%);
+(%o3)          cos(p) cosh(q) - %i sin(p) sinh(q)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) c2trig(%);
+(%o4)                     cos(%i q + p)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) sin(a+b*%i);
+(%o2)                     sin(%i b + a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigexpand(%);
+(%o3)          %i cos(a) sinh(b) + sin(a) cosh(b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) c2trig(%);
+(%o4)                     sin(%i b + a)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) cos(a*%i+b*%i);
+(%o2)                   cos(%i b + %i a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigexpand(%);
+(%o3)           sinh(a) sinh(b) + cosh(a) cosh(b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) c2trig(%);
+(%o4)                   cos(%i b + %i a)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) tan(a+%i*b);
+(%o2)                     tan(%i b + a)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigexpand(%);
+                       %i tanh(b) + tan(a)
+(%o3)                 ---------------------
+                      1 - %i tan(a) tanh(b)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) c2trig(%);
+(%o4)                     tan(%i b + a)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) cot(x+%i*y);
+(%o2)                     cot(%i y + x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigexpand(%);
+                     - %i cot(x) coth(y) - 1
+(%o3)                -----------------------
+                       cot(x) - %i coth(y)
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) c2trig(%);
+(%o4)                     cot(%i y + x)
+</pre></div></div>
+</li></ol>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-trigtools">Package trigtools</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fConvert-to-Hyperbolic-Functions"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Convert-to-Hyperbolic-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Factor-Sums-of-sin-and-cos-Functions" accesskey="n" rel="next">Factor Sums of sin and cos Functions</a>, Previous: <a href="#Convert-to-Trigonometric-Functions" accesskey="p" rel="prev">Convert to Trigonometric Functions</a>, Up: <a href="#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Convert-to-Hyperbolic-Functions-1"><span>100.2.3 Convert to Hyperbolic Functions<a class="copiable-link" href="#Convert-to-Hyperbolic-Functions-1"> &para;</a></span></h4>
+
+<a class="anchor" id="c2hyp"></a><a class="anchor" id="Item_003a-trigtools_002fdeffn_002fc2hyp"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-c2hyp"><span class="category-def">Function: </span><span><strong class="def-name">c2hyp</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href="#index-c2hyp"> &para;</a></span></dt>
+<dd><p>The function c2hyp (convert to hyperbolic) convert expression with exp function
+to expression with hyperbolic functions sinh, cosh.
+</p>
+<p><code class="code">load(&quot;trigtools&quot;)</code> loads this function.
+</p>
+<p>Examples:
+</p>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) c2hyp(exp(x));
+(%o2)                   sinh(x) + cosh(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) c2hyp(exp(x)+exp(x^2)+1);
+                 2          2
+(%o3)      sinh(x ) + cosh(x ) + sinh(x) + cosh(x) + 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) c2hyp(exp(x)/(2*exp(y)-3*exp(z)));
+                        sinh(x) + cosh(x)
+(%o4)     ---------------------------------------------
+          2 (sinh(y) + cosh(y)) - 3 (sinh(z) + cosh(z))
+</pre></div></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Hyperbolic-functions">Hyperbolic functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-trigtools">Package trigtools</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fFactor-Sums-of-sin-and-cos-Functions"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Factor-Sums-of-sin-and-cos-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Solve-Trigonometric-Equations" accesskey="n" rel="next">Solve Trigonometric Equations</a>, Previous: <a href="#Convert-to-Hyperbolic-Functions" accesskey="p" rel="prev">Convert to Hyperbolic Functions</a>, Up: <a href="#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Factor-Sums-of-sin-and-cos-Functions-1"><span>100.2.4 Factor Sums of sin and cos Functions<a class="copiable-link" href="#Factor-Sums-of-sin-and-cos-Functions-1"> &para;</a></span></h4>
+
+<a class="anchor" id="trigfactor"></a><a class="anchor" id="Item_003a-trigtools_002fdeffn_002ftrigfactor"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-trigfactor"><span class="category-def">Function: </span><span><strong class="def-name">trigfactor</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href="#index-trigfactor"> &para;</a></span></dt>
+<dd><p>The function trigfactor factors expressions of
+form 
+\(\pm \sin x \pm \cos y.\)
+</p>
+<p><code class="code">load(&quot;trigtools&quot;)</code> loads this function.
+</p>
+<p>Examples:
+</p>
+<ol class="enumerate">
+<li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) trigfactor(sin(x)+cos(x));
+                                      %pi
+(%o2)                 sqrt(2) cos(x - ---)
+                                       4
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigrat(%);
+(%o3)                    sin(x) + cos(x)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) trigfactor(sin(x)+cos(y));
+                     y   x   %pi      y   x   %pi
+(%o2)          2 cos(- - - + ---) cos(- + - - ---)
+                     2   2    4       2   2    4
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigrat(%);
+(%o3)                    cos(y) + sin(x)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) trigfactor(sin(x)-cos(3*y));
+                   3 y   x   %pi      3 y   x   %pi
+(%o2)        2 sin(--- - - + ---) sin(--- + - - ---)
+                    2    2    4        2    2    4
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigrat(%);
+(%o3)                   sin(x) - cos(3 y)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) trigfactor(-sin(5*x)-cos(3*y));
+                  3 y   5 x   %pi      3 y   5 x   %pi
+(%o2)     - 2 cos(--- - --- + ---) cos(--- + --- - ---)
+                   2     2     4        2     2     4
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigrat(%);
+(%o3)                 - cos(3 y) - sin(5 x)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) sin(alpha)+sin(beta)=trigfactor(sin(alpha)+sin(beta));
+                                     beta   alpha
+(%o2) sin(beta) + sin(alpha) = 2 cos(---- - -----)
+                                      2       2
+                                                    beta   alpha
+                                                sin(---- + -----)
+                                                     2       2
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigrat(%);
+(%o3)    sin(beta) + sin(alpha) = sin(beta) + sin(alpha)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) sin(alpha)-sin(beta)=trigfactor(sin(alpha)-sin(beta));
+                                       beta   alpha
+(%o2) sin(alpha) - sin(beta) = - 2 sin(---- - -----)
+                                        2       2
+                                                    beta   alpha
+                                                cos(---- + -----)
+                                                     2       2
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) cos(alpha)+cos(beta)=trigfactor(cos(alpha)+cos(beta));
+                                     beta   alpha
+(%o2) cos(beta) + cos(alpha) = 2 cos(---- - -----)
+                                      2       2
+                                                    beta   alpha
+                                                cos(---- + -----)
+                                                     2       2
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) cos(alpha)-cos(beta)=trigfactor(cos(alpha)-cos(beta));
+                                     beta   alpha
+(%o2) cos(alpha) - cos(beta) = 2 sin(---- - -----)
+                                      2       2
+                                                    beta   alpha
+                                                sin(---- + -----)
+                                                     2       2
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) trigfactor(3*sin(x)+7*cos(x));
+(%o2)                  3 sin(x) + 7 cos(x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) c2sin(%);
+                                          7
+(%o3)               sqrt(58) sin(x + atan(-))
+                                          3
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) trigexpand(%),expand;
+(%o4)                  3 sin(x) + 7 cos(x)
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) trigfactor(sin(2*x));
+(%o2)                       sin(2 x)
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigexpand(%);
+(%o3)                    2 cos(x) sin(x)
+</pre></div></div>
+</li></ol>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-trigtools">Package trigtools</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fSolve-Trigonometric-Equations"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Solve-Trigonometric-Equations">
+<div class="nav-panel">
+<p>
+Next: <a href="#Evaluation-of-Trigonometric-Functions" accesskey="n" rel="next">Evaluation of Trigonometric Functions</a>, Previous: <a href="#Factor-Sums-of-sin-and-cos-Functions" accesskey="p" rel="prev">Factor Sums of sin and cos Functions</a>, Up: <a href="#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Solve-Trigonometric-Equations-1"><span>100.2.5 Solve Trigonometric Equations<a class="copiable-link" href="#Solve-Trigonometric-Equations-1"> &para;</a></span></h4>
+
+<a class="anchor" id="trigsolve"></a><a class="anchor" id="Item_003a-trigtools_002fdeffn_002ftrigsolve"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-trigsolve"><span class="category-def">Function: </span><span><strong class="def-name">trigsolve</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href="#index-trigsolve"> &para;</a></span></dt>
+<dd><p>The function trigsolve find solutions of trigonometric equation from
+interval 
+\([a,b).\)
+</p>
+<p><code class="code">load(&quot;trigtools&quot;)</code> loads this function.
+</p>
+
+<p>Examples:
+</p><ol class="enumerate">
+<li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<div class="group"><pre class="example-preformatted">(%i1) eq:eq:3*sin(x)+4*cos(x)=2;
+(%o1)                3 sin(x) + 4 cos(x) = 2
+</pre></div><div class="group"><pre class="example-preformatted">(%i2) plot2d([3*sin(x)+4*cos(x),2],[x,-%pi,%pi]);
+(%o2)                         false
+</pre></div></div>
+
+<div class="center"><img class="image" src="figures/trigtools-2.png" alt="plot2">
+</div>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) eq:eq:3*sin(x)+4*cos(x)=2$
+</pre><div class="group"><pre class="example-preformatted">(%i3) sol:trigsolve(eq,-%pi,%pi);
+            2 sqrt(21)   12              2 sqrt(21)   12
+(%o3) {atan(---------- - --), %pi - atan(---------- + --)}
+                5        5                   5        5
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) float(%), numer;
+(%o4)      {- 0.5157783719341241, 1.8027805895206928}
+</pre></div></div>
+
+<p>Answ. : 
+\(x = \tan^{-1}\left({2\sqrt{21}\over 5} - {12\over
+5}\right) + 2\pi k\)
+;
+\(x = \pi - \tan^{-1}\left({2\sqrt{21}\over 5} +
+{12\over 5}\right) + 2\pi k,\)
+<em class="math tex2jax_process">\(k\)</em> &ndash; any integer.
+</p>
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) eq:cos(3*x)-sin(x)=sqrt(3)*(cos(x)-sin(3*x));
+(%o2)    cos(3 x) - sin(x) = sqrt(3) (cos(x) - sin(3 x))
+</pre></div><pre class="example-preformatted">(%i3) plot2d([lhs(eq)-rhs(eq)], [x,0,2*%pi])$
+</pre></div>
+
+<div class="center"><img class="image" src="figures/trigtools-3.png" alt="plot3">
+</div>
+<p>We have 6 solutions from [0, 2*pi].
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) eq:cos(3*x)-sin(x)=sqrt(3)*(cos(x)-sin(3*x))$
+(%i3) plot2d([lhs(eq)-rhs(eq)], [x,0.2,0.5])$
+</pre></div>
+
+<div class="center"><img class="image" src="figures/trigtools-4.png" alt="plot4">
+</div>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) load(&quot;trigtools&quot;)$
+(%i3) eq:cos(3*x)-sin(x)=sqrt(3)*(cos(x)-sin(3*x))$
+(%i4) plot2d([lhs(eq)-rhs(eq)], [x,3.3,3.6])$
+</pre></div>
+
+<div class="center"><img class="image" src="figures/trigtools-5.png" alt="plot4">
+</div>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) eq:cos(3*x)-sin(x)=sqrt(3)*(cos(x)-sin(3*x))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) trigfactor(lhs(eq))=map(trigfactor,rhs(eq));
+                  %pi            %pi
+(%o3) - 2 sin(x + ---) sin(2 x - ---) = 
+                   4              4
+                                              %pi            %pi
+                            2 sqrt(3) sin(x - ---) sin(2 x - ---)
+                                               4              4
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) factor(lhs(%)-rhs(%));
+               4 x + %pi                4 x - %pi
+(%o4) - 2 (sin(---------) + sqrt(3) sin(---------))
+                   4                        4
+                                                       8 x - %pi
+                                                   sin(---------)
+                                                           4
+</pre></div></div>
+
+<p>Equation is equivalent to
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) eq:cos(3*x)-sin(x)=sqrt(3)*(cos(x)-sin(3*x))$
+</pre><div class="group"><pre class="example-preformatted">(%i3) trigfactor(lhs(eq))=map(trigfactor,rhs(eq));
+                  %pi            %pi
+(%o3) - 2 sin(x + ---) sin(2 x - ---) = 
+                   4              4
+                                              %pi            %pi
+                            2 sqrt(3) sin(x - ---) sin(2 x - ---)
+                                               4              4
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) L:factor(rhs(%)-lhs(%));
+             4 x + %pi                4 x - %pi       8 x - %pi
+(%o4) 2 (sin(---------) + sqrt(3) sin(---------)) sin(---------)
+                 4                        4               4
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) eq1:part(L,2)=0;
+               4 x + %pi                4 x - %pi
+(%o5)      sin(---------) + sqrt(3) sin(---------) = 0
+                   4                        4
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) eq2:part(L,3)=0;
+                           8 x - %pi
+(%o6)                  sin(---------) = 0
+                               4
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) S1:trigsolve(eq1,0,2*%pi);
+                           %pi  13 %pi
+(%o7)                     {---, ------}
+                           12     12
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) S2:trigsolve(eq2,0,2*%pi);
+                    %pi  5 %pi  9 %pi  13 %pi
+(%o8)              {---, -----, -----, ------}
+                     8     8      8      8
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) S:listify(union(S1,S2));
+             %pi  %pi  5 %pi  13 %pi  9 %pi  13 %pi
+(%o9)       [---, ---, -----, ------, -----, ------]
+             12    8     8      12      8      8
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) float(%), numer;
+(%o10) [0.2617993877991494, 0.39269908169872414, 
+1.9634954084936207, 3.4033920413889422, 3.5342917352885173, 
+5.105088062083414]
+</pre></div></div>
+
+<p>Answer: 
+\(x = a + 2\pi k,\)
+where <em class="math tex2jax_process">\(a\)</em> any from <em class="math tex2jax_process">\(S\)</em>, <em class="math tex2jax_process">\(k\)</em> any integer.
+</p>
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) eq:8*cos(x)*cos(4*x)*cos(5*x)-1=0;
+(%o2)          8 cos(x) cos(4 x) cos(5 x) - 1 = 0
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) trigrat(%);
+(%o3)     2 cos(10 x) + 2 cos(8 x) + 2 cos(2 x) + 1 = 0
+</pre></div></div>
+
+<p>Left side is periodic with period 
+\(T=\pi.\)
+</p>
+<p>We have 10 solutions from [0, pi].
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) eq:8*cos(x)*cos(4*x)*cos(5*x)-1=0$
+</pre><div class="group"><pre class="example-preformatted">(%i3) plot2d([lhs(eq),rhs(eq)],[x,0,%pi]);
+(%o3)                         false
+</pre></div></div>
+
+<div class="center"><img class="image" src="figures/trigtools-6.png" alt="plot6">
+</div>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) eq:8*cos(x)*cos(4*x)*cos(5*x)-1=0$
+</pre><div class="group"><pre class="example-preformatted">(%i3) x4:find_root(eq, x, 1.3, 1.32);
+(%o3)                  1.3089969389957472
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) x5:find_root(eq, x, 1.32, 1.35);
+(%o4)                  1.3463968515384828
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) plot2d([lhs(eq),0], [x,1.3,1.35], [gnuplot_preamble, &quot;set grid;&quot;]);
+(%o5)                         false
+</pre></div></div>
+
+<div class="center"><img class="image" src="figures/trigtools-7.png" alt="plot7">
+</div>
+<p>Equation we multiply by 
+\(2\sin x\cos 2x:\)
+</p>
+
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) eq:8*cos(x)*cos(4*x)*cos(5*x)-1=0$
+</pre><div class="group"><pre class="example-preformatted">(%i3) eq*2*sin(x)*cos(2*x);
+(%o3) 2 sin(x) cos(2 x) (8 cos(x) cos(4 x) cos(5 x) - 1) = 0
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) eq1:trigreduce(%),expand;
+(%o4)                sin(13 x) + sin(x) = 0
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) trigfactor(lhs(eq1))=0;
+(%o5)                2 cos(6 x) sin(7 x) = 0
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) S1:trigsolve(cos(6*x),0,%pi);
+              %pi  %pi  5 %pi  7 %pi  3 %pi  11 %pi
+(%o6)        {---, ---, -----, -----, -----, ------}
+              12    4    12     12      4      12
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) S2:trigsolve(sin(7*x),0,%pi);
+               %pi  2 %pi  3 %pi  4 %pi  5 %pi  6 %pi
+(%o7)      {0, ---, -----, -----, -----, -----, -----}
+                7     7      7      7      7      7
+</pre></div></div>
+
+<p>We remove solutions of 
+\(\sin x = 0\)
+and
+\(\cos 2x = 0.\)
+</p>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) S1:trigsolve(cos(6*x),0,%pi)$
+(%i3) S2:trigsolve(sin(7*x),0,%pi)$
+</pre><div class="group"><pre class="example-preformatted">(%i4) S3:trigsolve(sin(x),0,%pi);
+(%o4)                          {0}
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) S4:trigsolve(cos(2*x),0,%pi);
+                           %pi  3 %pi
+(%o5)                     {---, -----}
+                            4     4
+</pre></div></div>
+
+<p>We find 10 solutions from 
+\([0, \pi]:\)
+</p>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) S1:trigsolve(cos(6*x),0,%pi)$
+(%i3) S2:trigsolve(sin(7*x),0,%pi)$
+(%i4) S3:trigsolve(sin(x),0,%pi)$
+(%i5) S4:trigsolve(cos(2*x),0,%pi)$
+</pre><div class="group"><pre class="example-preformatted">(%i6) union(S1,S2)$ setdifference(%,S3)$ setdifference(%,S4);
+       %pi  %pi  2 %pi  5 %pi  3 %pi  4 %pi  7 %pi  5 %pi
+(%o8) {---, ---, -----, -----, -----, -----, -----, -----, 
+       12    7     7     12      7      7     12      7
+                                                   6 %pi  11 %pi
+                                                   -----, ------}
+                                                     7      12
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) S:listify(%);
+       %pi  %pi  2 %pi  5 %pi  3 %pi  4 %pi  7 %pi  5 %pi
+(%o9) [---, ---, -----, -----, -----, -----, -----, -----, 
+       12    7     7     12      7      7     12      7
+                                                   6 %pi  11 %pi
+                                                   -----, ------]
+                                                     7      12
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) length(S);
+(%o10)                         10
+</pre></div><div class="group"><pre class="example-preformatted">(%i11) float(S), numer;
+(%o11) [0.2617993877991494, 0.4487989505128276, 
+0.8975979010256552, 1.3089969389957472, 1.3463968515384828, 
+1.7951958020513104, 1.8325957145940461, 2.243994752564138, 
+2.6927937030769655, 2.8797932657906435]
+</pre></div></div>
+<p>Answer: 
+\(x = a + 2\pi k,\)
+where <em class="math tex2jax_process">\(a\)</em> any from <em class="math tex2jax_process">\(S\)</em>, <em class="math tex2jax_process">\(k\)</em> any integer.
+</p>
+</li></ol>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-trigtools">Package trigtools</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fEvaluation-of-Trigonometric-Functions"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Evaluation-of-Trigonometric-Functions">
+<div class="nav-panel">
+<p>
+Next: <a href="#Contract-atan-Functions" accesskey="n" rel="next">Contract atan Functions</a>, Previous: <a href="#Solve-Trigonometric-Equations" accesskey="p" rel="prev">Solve Trigonometric Equations</a>, Up: <a href="#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Evaluation-of-Trigonometric-Functions-1"><span>100.2.6 Evaluation of Trigonometric Functions<a class="copiable-link" href="#Evaluation-of-Trigonometric-Functions-1"> &para;</a></span></h4>
+
+<a class="anchor" id="trigvalue"></a><a class="anchor" id="Item_003a-trigtools_002fdeffn_002ftrigvalue"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-trigvalue"><span class="category-def">Function: </span><span><strong class="def-name">trigvalue</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href="#index-trigvalue"> &para;</a></span></dt>
+<dd><p>The function trigvalue compute values of 
+\(\sin
+{m\pi\over n},\)
+\(\cos
+{m\pi\over n},\)
+\(\tan
+{m\pi\over n},\)
+and 
+\(\cot
+{m\pi\over n}\)
+in radicals.
+</p>
+<p><code class="code">trigvalue</code> is essentially an internal function.
+Use function <code class="code"><a class="ref" href="#trigeval">trigeval</a></code> in preference.
+</p>
+<p><code class="code">load(&quot;trigtools&quot;)</code> loads this function.
+</p>
+</dd></dl>
+
+<a class="anchor" id="trigeval"></a><a class="anchor" id="Item_003a-trigtools_002fdeffn_002ftrigeval"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-trigeval"><span class="category-def">Function: </span><span><strong class="def-name">trigeval</strong> <var class="def-var-arguments">(<var class="var">x</var>)</var><a class="copiable-link" href="#index-trigeval"> &para;</a></span></dt>
+<dd><p>The function trigeval compute values of expressions with 
+\(\sin
+{m\pi\over n},\)
+\(\cos
+{m\pi\over n},\)
+\(\tan
+{m\pi\over n},\)
+and 
+\(\cot
+{m\pi\over n}\)
+in radicals.
+</p></dd></dl>
+
+<p><code class="code">load(&quot;trigtools&quot;)</code> loads this function.
+</p>
+<p>Examples:
+</p><ol class="enumerate">
+<li> Values of trigonometric functions
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) load(trigtools)$
+</pre><div class="group"><pre class="example-preformatted">(%i3) trigvalue(sin(%pi/10));
+                           sqrt(5) - 1
+(%o3)                      -----------
+                                4
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) trigvalue(cos(%pi/10));
+                        sqrt(sqrt(5) + 5)
+(%o4)                   -----------------
+                               3/2
+                              2
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) trigvalue(tan(%pi/10));
+                       sqrt(5 - 2 sqrt(5))
+(%o5)                  -------------------
+                             sqrt(5)
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) float(%), numer;
+(%o6)                  0.3249196962329063
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) float(tan(%pi/10)), numer;
+(%o7)                  0.3249196962329063
+</pre></div><div class="group"><pre class="example-preformatted">(%i8) trigvalue(cot(%pi/10));
+(%o8)                  sqrt(2 sqrt(5) + 5)
+</pre></div><div class="group"><pre class="example-preformatted">(%i9) float(%), numer;
+(%o9)                  3.0776835371752536
+</pre></div><div class="group"><pre class="example-preformatted">(%i10) float(cot(%pi/10)), numer;
+(%o10)                  3.077683537175254
+</pre></div><div class="group"><pre class="example-preformatted">(%i11) trigvalue(sin(%pi/32));
+              sqrt(2 - sqrt(sqrt(sqrt(2) + 2) + 2))
+(%o11)        -------------------------------------
+                                2
+</pre></div><div class="group"><pre class="example-preformatted">(%i12) trigvalue(cos(%pi/32));
+              sqrt(sqrt(sqrt(sqrt(2) + 2) + 2) + 2)
+(%o12)        -------------------------------------
+                                2
+</pre></div><div class="group"><pre class="example-preformatted">(%i13) trigvalue(cos(%pi/256));
+(%o13) sqrt(sqrt(sqrt(sqrt(sqrt(sqrt(sqrt(2) + 2) + 2) + 2) + 2)
+                                                      + 2) + 2)/2
+</pre></div><div class="group"><pre class="example-preformatted">(%i14) trigvalue(cos(%pi/60));
+(%o14) 
+  sqrt(sqrt(sqrt(2) sqrt(3) sqrt(sqrt(5) + 5) + sqrt(5) + 7) + 4)
+  ---------------------------------------------------------------
+                                3/2
+                               2
+</pre></div><div class="group"><pre class="example-preformatted">(%i15) trigvalue(sin(%pi/60));
+(%o15) 
+  sqrt(4 - sqrt(sqrt(2) sqrt(3) sqrt(sqrt(5) + 5) + sqrt(5) + 7))
+  ---------------------------------------------------------------
+                                3/2
+                               2
+</pre></div><div class="group"><pre class="example-preformatted">(%i16) trigvalue(sin(%pi/18));
+                                %pi
+(%o16)                      sin(---)
+                                18
+</pre></div><div class="group"><pre class="example-preformatted">(%i17) trigvalue(sin(%pi/20));
+               sqrt(4 - sqrt(2) sqrt(sqrt(5) + 5))
+(%o17)         -----------------------------------
+                               3/2
+                              2
+</pre></div></div>
+
+</li><li> ode example
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) load(odes)$
+</pre><div class="group"><pre class="example-preformatted">(%i3) eq:'diff(y,x,5)+2*y=0;
+                           5
+                          d y
+(%o3)                     --- + 2 y = 0
+                            5
+                          dx
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) odeL(eq,y,x);
+               1/5     4 %pi
+            - 2    cos(-----) x
+                         5              1/5     4 %pi
+(%o4) y = %e                    C5 sin(2    sin(-----) x)
+                                                  5
+        1/5     4 %pi
+     - 2    cos(-----) x
+                  5              1/5     4 %pi
+ + %e                    C4 cos(2    sin(-----) x)
+                                           5
+        1/5     2 %pi
+     - 2    cos(-----) x
+                  5              1/5     2 %pi
+ + %e                    C3 sin(2    sin(-----) x)
+                                           5
+        1/5     2 %pi
+     - 2    cos(-----) x
+                  5              1/5     2 %pi
+ + %e                    C2 cos(2    sin(-----) x)
+                                           5
+        1/5
+     - 2    x
+ + %e         C1
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) sol:trigeval(%);
+              (sqrt(5) - 1) x
+            - ---------------
+                    9/5
+                   2                 sqrt(sqrt(5) + 5) x
+(%o5) y = %e                  C3 sin(-------------------)
+                                            13/10
+                                           2
+       (sqrt(5) - 1) x
+     - ---------------
+             9/5
+            2                 sqrt(sqrt(5) + 5) x
+ + %e                  C2 cos(-------------------)
+                                     13/10
+                                    2
+     (sqrt(5) + 1) x
+     ---------------
+           9/5
+          2                 sqrt(5 - sqrt(5)) x
+ + %e                C5 sin(-------------------)
+                                   13/10
+                                  2
+     (sqrt(5) + 1) x
+     ---------------
+           9/5                                          1/5
+          2                 sqrt(5 - sqrt(5)) x      - 2    x
+ + %e                C4 cos(-------------------) + %e         C1
+                                   13/10
+                                  2
+</pre></div><pre class="example-preformatted">(%i6) subst(sol,eq)$
+(%i7) ev(%, nouns)$
+</pre><div class="group"><pre class="example-preformatted">(%i8) radcan(%);
+(%o8)                         0 = 0
+</pre></div></div>
+
+</li><li> n-th root of complex number
+
+<p>Example. Find the 4-th roots of %i
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) solve(x^4=%i,x);
+                1/8                1/8             1/8
+(%o2) [x = (- 1)    %i, x = - (- 1)   , x = - (- 1)    %i, 
+                                                             1/8
+                                                    x = (- 1)   ]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) rectform(%);
+                  %pi        %pi                %pi        %pi
+(%o3) [x = %i cos(---) - sin(---), x = - %i sin(---) - cos(---), 
+                   8          8                  8          8
+                  %pi           %pi              %pi        %pi
+          x = sin(---) - %i cos(---), x = %i sin(---) + cos(---)]
+                   8             8                8          8
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) trigeval(%);
+           sqrt(sqrt(2) + 2) %i   sqrt(2 - sqrt(2))
+(%o4) [x = -------------------- - -----------------, 
+                    2                     2
+      sqrt(2 - sqrt(2)) %i   sqrt(sqrt(2) + 2)
+x = - -------------------- - -----------------, 
+               2                     2
+    sqrt(2 - sqrt(2))   sqrt(sqrt(2) + 2) %i
+x = ----------------- - --------------------, 
+            2                    2
+    sqrt(2 - sqrt(2)) %i   sqrt(sqrt(2) + 2)
+x = -------------------- + -----------------]
+             2                     2
+</pre></div></div>
+</li></ol>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-trigtools">Package trigtools</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fContract-atan-Functions"></a><hr>
+</div>
+<div class="subsection-level-extent" id="Contract-atan-Functions">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Evaluation-of-Trigonometric-Functions" accesskey="p" rel="prev">Evaluation of Trigonometric Functions</a>, Up: <a href="#Functions-and-Variables-for-trigtools" accesskey="u" rel="up">Functions and Variables for trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h4 class="subsection" id="Contract-atan-Functions-1"><span>100.2.7 Contract atan Functions<a class="copiable-link" href="#Contract-atan-Functions-1"> &para;</a></span></h4>
+
+<a class="anchor" id="atan_005fcontract"></a><a class="anchor" id="Item_003a-trigtools_002fdeffn_002fatan_005fcontract"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-atan_005fcontract"><span class="category-def">Function: </span><span><strong class="def-name">atan_contract</strong> <var class="def-var-arguments">(<var class="var">r</var>)</var><a class="copiable-link" href="#index-atan_005fcontract"> &para;</a></span></dt>
+<dd><p>The function atan_contract(r) contracts atan functions. We
+assume: 
+\(|r| < {\pi\over 2}.\)
+</p>
+<p><code class="code">load(&quot;trigtools&quot;)</code> loads this function.
+</p>
+
+<p>Examples:
+</p>
+<ol class="enumerate">
+<li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) atan_contract(atan(x)+atan(y));
+(%o2)                   atan(y) + atan(x)
+</pre></div><pre class="example-preformatted">(%i3) assume(abs(atan(x)+atan(y))&lt;%pi/2)$
+</pre><div class="group"><pre class="example-preformatted">(%i4) atan(x)+atan(y)=atan_contract(atan(x)+atan(y));
+                                          y + x
+(%o4)           atan(y) + atan(x) = atan(-------)
+                                         1 - x y
+</pre></div></div>
+
+</li><li> &nbsp;<!-- /@w -->
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) atan(1/3)+atan(1/5)+atan(1/7)+atan(1/8)$ %=atan_contract(%);
+                1         1         1         1    %pi
+(%o3)      atan(-) + atan(-) + atan(-) + atan(-) = ---
+                3         5         7         8     4
+</pre></div></div>
+
+</li><li> Machin&rsquo;s formulae
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) 4*atan(1/5)-atan(1/239)=atan_contract(4*atan(1/5)-atan(1/239));
+                          1          1     %pi
+(%o2)              4 atan(-) - atan(---) = ---
+                          5         239     4
+</pre></div></div>
+
+</li><li> see <a class="url" href="https://en.wikipedia.org/wiki/Machin-like_formula">https://en.wikipedia.org/wiki/Machin-like_formula</a>
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;trigtools&quot;)$
+(%i2) 12*atan(1/49)+32*atan(1/57)-5*atan(1/239)+12*atan(1/110443)$
+</pre><div class="group"><pre class="example-preformatted">(%i3) %=atan_contract(%);
+              1             1             1
+(%o3) 12 atan(--) + 32 atan(--) - 5 atan(---)
+              49            57           239
+                                                      1       %pi
+                                          + 12 atan(------) = ---
+                                                    110443     4
+</pre></div></div>
+</li></ol>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Trigonometric-functions">Trigonometric functions</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-trigtools">Package trigtools</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="Item_003a-trigtools_002fnode_002fReferences"></a><hr>
+</div>
+</div>
+<div class="section-level-extent" id="References">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Functions-and-Variables-for-trigtools" accesskey="p" rel="prev">Functions and Variables for trigtools</a>, Up: <a href="#Package-trigtools" accesskey="u" rel="up">Package trigtools</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="References-1"><span>100.3 References<a class="copiable-link" href="#References-1"> &para;</a></span></h3>
+
+<ol class="enumerate">
+<li> <a class="url" href="https://maxima.sourceforge.io">https://maxima.sourceforge.io</a>
+</li></ol>
+
+
+
+</div>
+</div>
+<div class="footnotes-segment">
+<hr>
+<h4 class="footnotes-heading">Footnotes</h4>
+
+<h5 class="footnote-body-heading"><a id="FOOT10" href="#DOCF10">(10)</a></h5>
+<p>This is a conversion by hand of the original &ldquo;trigtools-doc.pdf&rdquo; file in &ldquo;share/contrib/trigtools&rdquo;, by Raymond Toy.  See the pdf for the definitive version.</p>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-unit.html#Package-unit" accesskey="n" rel="next">Package unit</a>, Previous: <a href="Package-to_005fpoly_005fsolve.html#Package-to_005fpoly_005fsolve" accesskey="p" rel="prev">Package to_poly_solve</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

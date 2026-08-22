@@ -4348,7 +4348,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     Loop
     ' number,non-number is removed e.g. 240, -> 240 and x*,45 ->x*0,45
     
-    pos = InStr(ea.text, ".0")
+    pos = InStr(ea.text, ".0") ' numbers written as 2.0 changed to 2
     Do While pos > 0
         If Not (ea.IsNumber(pos + 2)) Then
             ea.text = Left$(ea.text, pos - 1) & Right$(ea.text, Len(ea.text) - pos - 1)
@@ -4362,10 +4362,12 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         Do While pos > 1
             If ea.ChrByIndex(pos) = "0" Then
                 pos = pos + 1
-            Else
+            ElseIf Not ea.IsNumber(pos) Then
                 ea.text = Left(ea.text, pos2 - 1) & Right(ea.text, Len(ea.text) - pos + 1)
                 pos = InStr(pos, ea.text, ".0") + 1
                 pos2 = pos - 1
+            Else
+                Exit Do
             End If
         Loop
     End If

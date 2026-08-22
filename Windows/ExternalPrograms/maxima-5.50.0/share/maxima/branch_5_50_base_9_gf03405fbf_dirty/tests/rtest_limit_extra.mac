@@ -1,0 +1,1757 @@
+/* limits of log expressions */
+
+limit(log(x),x,minf);
+infinity$
+
+limit(log(x),x,0);
+infinity$
+
+limit(log(x),x,0,'minus);
+infinity$
+
+limit(log(x),x,0,'plus);
+minf$
+
+limit(log(x),x,inf);
+inf$
+
+limit(log(-2+%i*x),x,0);
+ind$
+
+limit(46*log(-2+%i*x),x,0);
+ind$
+
+limit(107+log(-2+%i*x),x,0);
+ind$
+
+limit(log(-2+%i*x),x,0,'minus);
+log(2)-%i*%pi$
+
+limit(46*log(-2+%i*x),x,0,'minus);
+46*(log(2)-%i*%pi)$
+
+limit(107+log(-2+%i*x),x,0,'minus);
+107 + log(2) - %i*%pi$
+
+limit(log(-2+%i*x),x,0,'plus);
+log(2)+%i*%pi$
+
+limit(46*log(-2+%i*x),x,0,'plus);
+46*(log(2)+%i*%pi)$
+
+limit(107+log(-2+%i*x),x,0,'plus);
+107 + log(2) + %i*%pi$
+
+/* #3831 limit(log((sqrt(x^2+1))/2),x,1) hangs  related bugs */
+limit(log((sqrt(x^2+1))/2),x,1,'minus);
+-(log(2)/2)$
+
+limit(log((sqrt(x^2+1))/2),x,1,'plus);
+-(log(2)/2)$
+
+limit(log((sqrt(x^2+1))/2),x,1);
+-(log(2)/2)$
+
+limit(log((sqrt(x^4+1))/2),x,1,'minus);
+-(log(2)/2)$
+
+limit(log((sqrt(x^4+1))/2),x,1,'plus);
+-(log(2)/2)$
+
+limit(log((sqrt(x^4+1))/2),x,1);
+-(log(2)/2)$
+
+block([logarc : true], integrate(1/sqrt(9+x^2),x,0,3));
+log((3*sqrt(2)+3)/3)$
+
+block([logarc : false], integrate(1/sqrt(9+x^2),x,0,3));
+asinh(1)$
+
+limit(log((sqrt(x^2+9)+x)/3),x,1,'minus);
+log((sqrt(10)+1)/3)$
+
+limit(log((sqrt(x^2+9)+x)/3),x,1,'plus);
+log((sqrt(10)+1)/3)$
+
+limit(log((sqrt(x^2+9)+x)/3),x,1);
+log((sqrt(10)+1)/3)$
+
+/* Tests associated with the fix to bug 3831 limit(log((sqrt(x^2+1))/2),x,1) hangs */
+limit(log(x),x,1,'minus);
+0$
+
+limit(log(x),x,1,'plus);
+0$
+
+limit(log(x),x,1);
+0$
+
+limit(log(x),x,minf);
+infinity$
+
+limit(log(x),x,inf);
+inf$
+
+limit(log(x),x,0,'minus);
+infinity$
+
+limit(log(x),x,0,'plus);
+minf$
+
+limit(log(signum(x)),x,0);
+ind$
+
+limit(log(107+sin(x)),x,inf);
+ind$
+
+/* far too complex result, but it's not the fault of simplimln */
+limit(log((x-%i)/(x+%i)),x,2);
+log((5*%i+10)/(11*%i+2))$
+
+limit(log(-46 + %i*x),x,0,'minus);
+log(46) - %i*%pi$
+
+limit(log(-46 + %i*x),x,0,'plus);
+log(46) + %i*%pi$
+
+limit(log(-46 + %i*exp(x)),x,0);
+log(%i - 46)$
+
+limit(log(-46 + %i*(exp(x)-1)),x,0,'plus);
+log(46) + %i*%pi$
+
+limit(log(-46 + %i*(exp(x)-1)),x,0,'minus);
+log(46) - %i*%pi$
+
+limit(log(-46 + %i*(exp(x)-1)),x,0);
+ind$
+
+limit(log(-1 + %i*x*sin(1/x)),x,0,'minus);
+'und$
+
+limit(log(-1 + %i*signum(x)),x,0,'minus);
+log(-1-%i)$
+
+limit(log(-1 + %i*signum(x)),x,0,'plus);
+log(-1+%i)$
+
+limit(log(-1 + %i*signum(x)),x,0);
+ind$
+
+limit(log(-51 + %i* sin(x)), x, 0, 'plus);
+log(51)+%i*%pi$
+
+limit(log(-51 + %i* sin(x)), x, 0, 'minus);
+log(51)-%i*%pi$
+
+/* End of tests associated with the fix to bug 3831 */
+
+/* #3844 Wrong limit involving gamma function */
+limit(gamma(1/x) - x, x, 'inf);
+-%gamma$
+
+limit(x*(gamma(1/x) - (x - %gamma)),x,inf);
+(%pi^2+6*%gamma^2)/12$
+
+limit(x^(3/2)*(gamma(1/x) - (x - %gamma)),x,inf);
+inf$
+
+limit(x^2*(gamma(1/x) - (x - %gamma + (6*%gamma^2+%pi^2)/(12*x))),x,inf);
+-((4*zeta(3)+%gamma*%pi^2+2*%gamma^3)/12)$
+
+/* #3846 limit gives quotient by zero error */
+limit(gamma(1/x)/gamma(x),x,0,plus);
+inf$
+
+limit(gamma(x)/gamma(1/x),x,0,plus);
+0$
+
+/* #3842 limit(atan(x),x,%i) --> error. That was determined to be a non-bug, but
+here are two related limit problems. */
+ limit(atan(%i + x),x,0);
+ 'infinity$
+
+ limit(atan(%i - x),x,0);
+ 'infinity$
+
+ /* #3839 limits of asin expressions */
+ limit(asin(3+%i*x),x,0,plus);
+ %pi - asin(3)$
+
+ limit(asin(3+%i*x),x,0,minus);
+ asin(3)$
+
+/* Once the next two tests were slow (7 seconds) with the default value for 
+  lhospitallim. At that time, locally these tests set lhospitallim : 1. These
+  tests are no longer slow with the default value of lhospitallim. */
+ limit(rectform(asin(3+%i*x)),x,0,'plus);
+ %pi/2-(%i*log(17-3*2^(5/2)))/2$
+
+limit(rectform(asin(3+%i*x)),x,0,'minus);
+%pi/2-%i*log(2^(3/2)+3)$
+
+/* #3838 limit(atan(sin(x)),x,inf,plus) --> atan(ind) */
+limit(atan(sin(x)),x,inf,plus);
+ind$
+
+/* #3836 limit of a log expression with essential singularity */
+limit(log(-2 + %i*x * sin(1/x)),x,0,plus);
+und$
+
+/* #3824 limit of an antiderivative */
+(xxx : integrate((x-%i)/((x-2*%i)*(x^2+1)),x),0);
+0$
+
+limit(rectform(xxx),x,minf);
+-%pi/2$
+
+rectform(limit(xxx,x,minf));
+-%pi/2$
+
+/* #3816 limit of difference of logs */
+(xxx : (%i*log(x^2+1))/6-(%i*log(x-2*%i))/3,0);
+0$
+
+limit(rectform(xxx),x,minf,'plus);
+-%pi/3$
+
+rectform(limit(xxx,x,minf,'plus));
+-%pi/3$
+
+(remvalue(xxx),0);
+0$
+
+/* #3592 Wrong limit */
+(declare(n,integer),assume(n > 0), 0);
+0$
+
+limit((z^(2*n)-1)/(z^2-1),z,-1);
+n$
+
+(remove(n,integer),forget(n > 0),0);
+0$
+
+/* #3589 Stack overflow for a limit evaluation */
+limit((sqrt(x)-2)*log(1-sqrt(x)/2),x,4,minus);
+0$
+
+/* #3587 Wrong limit for logarithmic function */
+limit(log(3-sqrt(x)),x,9,minus);
+minf$
+
+/* #3562 integrate(1/(1+tan(x)), x, 0, %pi/2) gives complex result, should be %pi/4 */
+integrate(1/(1+tan(x)),x,0,%pi/2);
+%pi/4$
+
+/* #3535 limit doesn't account for certain singularities in mexpt, log, gamma_incomplete, ... */
+limit(log(%i*x - 1),x,0,minus);
+-%i*%pi$
+
+limit(log(%i*x - 1),x,0,plus);
+%i*%pi$
+
+limit(rectform(log(%i*x - 1)),x,0,minus);
+-%i*%pi$
+
+limit(rectform(log(%i*x - 1)),x,0,plus);
+%i*%pi$
+
+limit(sqrt((%i-x)^2),x,0,'minus);
+%i$
+
+limit(sqrt((%i-x)^2),x,0,'plus);
+-%i$
+
+/* need tests for gamma_incomplete(1/2, %i*x - 1) */
+
+/* #3534 integrate(x*exp(-x^2)*sin(x),x,minf,inf) gives zero */
+integrate(x*exp(-x^2)*sin(x),x,minf,inf);
+sqrt(%pi)/(2 * (%e)^(1/4))$
+
+/* #3509 limits involving multiple non-finites sometimes give errors */
+limit(1/(zeroa+zerob));
+infinity$
+
+limit(1/(1/inf+1/minf));
+infinity$
+
+limit(signum(zeroa+zerob));
+ind$
+
+/* #3459 Wrong limit calculation */
+ limit(x / (x+2^x+cos(x)),x,-inf);
+ 1$
+
+ /* #3415 limit doesn't check for zero coefficients in limit((a*x+1)/(a*x+2),x,inf) */
+ 
+ (assume(equal(a,0)),0);
+ 0$
+
+ limit((a*x+1)/(a*x+2),x,inf);
+ 1/2$
+
+ (forget(equal(a,0)),0);
+ 0$
+
+ /* #3393 limit/tlimit give wrong result */
+ limit(log(log(x + exp(log(x) * log(log(x))))) / log(log(log(exp(x) + x))), x, inf);
+ 1$
+
+/* #3345 bug in limit -- hard to test--works OK with an assume on y*/
+
+/* #3313 limit fails with domain complex --bad failure; commented out for now:
+block([domain : 'complex], limit((x*(4/log(x))^(2*log(x)/log(log(x)))),x,inf));
+*/
+
+/* #3279 limit incorrect with domain:complex */
+block([domain : 'real], limit((2^(2*x+1)+(2^x*x^100)^(3/2))/(4^x-100*2^x),x,inf));
+2$
+
+block([domain : 'complex], limit((2^(2*x+1)+(2^x*x^100)^(3/2))/(4^x-100*2^x),x,inf));
+2$
+
+/* #3203 limit(floor(n*x),x,0) for n > 10^8  */
+ limit(floor((10^8 +1)*x),x,0,minus);
+ -1$
+
+ limit(erfc(x*(1 + %i)), x, inf);
+ 0$
+
+/* #3143 limit((x^(1/x) - 1)*sqrt(x), x, 0, minus) => inf */
+ limit((x^(1/x) - 1)*sqrt(x), x, 0, minus);
+ infinity$
+
+ /* #3142 limit((x^(1/x) - 1)*sqrt(x), x, inf) => inf */
+ limit((x^(1/x) - 1)*sqrt(x), x, inf);
+ 0$
+
+/* #3140 limit((x^(1/x) - 1)*sqrt(x), x, 0, minus) + domain:complex => stack overflow */
+block([domain : 'real], limit((x^(1/x) - 1)*sqrt(x), x, 0, minus));
+0$
+
+/* bad failure!
+block([domain : 'complex], limit((x^(1/x) - 1)*sqrt(x), x, 0, minus));
+*/
+
+/* #3137 gruntz(abs(sin(x))/sqrt(1-cos(x)), x, 0, plus) => stack overflow */
+limit(abs(sin(x))/sqrt(1-cos(x)), x, 0, plus);
+sqrt(2)$
+
+gruntz(abs(sin(x))/sqrt(1-cos(x)), x, 0, plus);
+sqrt(2)$
+
+/* #3136 gruntz(atan2(x^2 - 2, x^3 - 2*x), x, sqrt(2), minus) => atan2(0,0) undefined */
+limit(atan2(x^2 - 2, x^3 - 2*x), x, sqrt(2), minus);
+atan(1/sqrt(2))-%pi$
+
+gruntz(atan2(x^2 - 2, x^3 - 2*x), x, sqrt(2), minus);
+atan(1/sqrt(2))-%pi$
+
+/* #3135 gruntz(atan2(x^2 - 2, x^3 - 3*x), x, sqrt(2), minus) incorrect */
+limit(atan2(x^2 - 2, x^3 - 3*x), x, sqrt(2), minus);
+-%pi$
+
+gruntz(atan2(x^2 - 2, x^3 - 3*x), x, sqrt(2), minus);
+-%pi$
+
+/* #3280 gruntz incorrect limit */
+gruntz((2^(2*x+1)+(2^x*x^100)^(3/2))/(4^x-100*2^x),x,inf);
+2$
+
+/* #3055 limit(exp((log(log(x + exp(log(x)*log(log(x)))))) / (log(log(log(exp(x) + x + log(x)))))), x, inf) */
+limit(exp((log(log(x + exp(log(x)*log(log(x)))))) / (log(log(log(exp(x) + x + log(x)))))), x, inf);
+%e$
+
+/* #3054 limit(exp(exp(2*log(x**5 + x)*log(log(x)))) / exp(exp(10*log(x)*log(log(x)))), x, inf) */
+/*
+limit(exp(exp(2*log(x**5 + x)*log(log(x)))) / exp(exp(10*log(x)*log(log(x)))), x, inf)$
+xxx$
+*/
+
+/* #3053 limit with branch cuts */
+block([domain : 'real], limit(sqrt(-1 + %i*x), x, 0,minus));
+-%i$
+
+block([domain : 'real], limit(sqrt(-1 - %i*x), x, 0,plus));
+-%i$
+
+block([domain : 'complex], limit(sqrt(-1 + %i*x), x, 0,minus));
+-%i$
+
+block([domain : 'complex], limit(sqrt(-1 - %i*x), x, 0,plus));
+-%i$
+
+/*#3051 limit(2/5*((3/4)^m - 1)*(a - 10) + 1/5*(3*(3/4)^m + 2)*a, m, inf) with domain: complex */
+block([domain : 'real],limit(2/5*((3/4)^m - 1)*(a - 10) + 1/5*(3*(3/4)^m + 2)*a, m, inf));
+4$
+
+block([domain : 'complex],limit(2/5*((3/4)^m - 1)*(a - 10) + 1/5*(3*(3/4)^m + 2)*a, m, inf));
+4$
+
+/* #3041 limit(inf*(zeroa+inf)) => und, should be inf */
+ limit(inf*(zeroa+inf));
+ inf$
+
+ /* #2972 Wrong limits involving logs */
+ limit( 27^(log(n)/log(3))/n^3, n, inf);
+ 1$
+
+ limit( 27^(log(n)/log(3)+1)/n^3, n, inf);
+ 27$
+
+ limit( ((27^(log(n)/log(3)+1)-1)/26+n-log(n)/log(3)-1)/n^3,n,inf);
+ 27/26$
+
+ /* #2953 limit loops endlessly */
+ limit((a/x^b + (1-a)/y^b)^(-1/b),b,0);
+ x^a*y^(1-a)$
+
+ /* #2899 Limit that once worked is broken */
+ limit((1+sqrt(n+1))^(-n-1)/(1+sqrt(n))^(-n),n,inf);
+ 0$
+
+ /* #2898 limit of continuous --> und */
+ (e : log(x)^2+2*%gamma*log(x)-%pi^2/6+%gamma^2,0);
+ 0$
+
+ tlimit(e,x,1);
+ -((%pi^2-6*%gamma^2)/6)$
+
+ limit(e,x,1);
+-((%pi^2-6*%gamma^2)/6)$
+
+/* #2877 Limits behave incorrectly when applied to derivatives */
+(dg: diff(g(x), x),0);
+0$
+
+(lim: limit(dg, x, 0),0);
+0$
+
+(limit(lim, x, 0),0);
+0$
+
+limit(lim, a, 0);
+limit('diff(g(x),x,1),x,0)$
+
+/* #2849 limit(ind*XXX) and limit(ind/XXX) gives errors rather than results */
+map('limit, [ind*inf, inf/ind,ind*minf,minf/ind,ind*inf,ind/inf,ind*minf,ind/minf]);
+[und,und,und,und,und,und,und,und]$
+
+limit(ind+1);
+ind$
+
+limit(ind^2);
+ind$
+
+limit(1/ind);
+und$
+
+/* #2847 limits of powers of constants */
+limit((1+%i)^n,n,inf);
+infinity$
+
+limit((5+%i)^n,n,inf);
+infinity$
+
+/*#2653 Bug for limit */ 
+limit((atan(x)/x)^(1/(x^2)), x, 0);
+%e^(-1/3)$
+
+/* #2388 wrong limit */
+limit(((9*x)^(1/3)-3)/(sqrt(3+x)-sqrt(2*x)),x,3);
+-(2*sqrt(6)/3)$
+
+/* #2366 limit of gamma_incomplete */
+ limit(gamma_incomplete(sin(x),cos(x)),x,inf);
+ und$
+
+/* #2187 Inaccurate limit evaluation */
+is(0 # limit(sin(x)/(x-a),x,0));
+true$
+
+/* #1822 limit(inf+minf) should give und  */
+limit(inf+minf);
+und$
+
+limit(x+minf,x,inf);
+und$
+
+limit(x+inf,x,minf);
+und$
+
+/* #1804 limit of x*floor(1/x) as x goes to 0 */
+limit(x*floor(1/x),x,0);
+1$
+
+/* #1743 limit of trig expression */
+ (e : (2*sin(x)*z+cos(x)*sin(2*x)-2*cos(x)^2*sin(x))/(z^2+(-sin(2*x)^2-4*sin(x)^2-cos(x)^2-1)*z+sin(2*x)^2-4*cos(x)*sin(x)*sin(2*x)+4*cos(x)^2*sin(x)^2),0);
+ 0$
+
+ limit(e,z,0);
+ (4*sin(x))/(cos(4*x)+3*cos(2*x)-8)$
+
+ (remvalue(e,dg,lim),0);
+ 0$
+
+limit(atan2(sin(x),cos(x)),x,0);
+0$
+
+limit(atan2(cos(x),sin(x)),x,0);
+%pi/2$
+
+limit(atan2(cos(x),cos(x)),x,0);
+%pi/4$
+
+limit(atan2(1/x^2,sin(1/x)),x,0);
+%pi/2$
+
+limit(atan2(sin(x) + x, cos(x) + x),x,inf);
+%pi/4$
+
+limit(atan2(sin(x) - x, cos(x) + x),x,inf);
+-(%pi/4)$
+
+limit(atan2(sin(x) - x, cos(x) - x),x,inf);
+-3*%pi/4$
+
+limit(atan2(sin(x) - x, cos(x) + x),x,inf);
+-%pi/4$
+
+limit(atan2(cos(x),x),x,inf);
+0$
+
+limit(atan2(sin(x),x),x,minf);
+ind$
+
+limit(atan2(sin(x)/x,x),x,minf);
+ind$
+
+limit(atan2(exp(x),x),x,minf);
+%pi$
+
+limit(atan2(-exp(x),x),x,minf);
+-%pi$
+
+/* #3794 assuming zerob < 0 & zeroa > 0 gives bugs for some limits */
+limit(atan2(x^2-2,x^3-2*x),x,sqrt(2),minus);
+atan(1/sqrt(2))-%pi$
+
+/* No longer necessary, but not removed to keep problem numbering. */
+(/*assume(zeroa > 0, zerob < 0),*/0);
+0$
+
+limit(atan2(x^2-2,x^3-2*x),x,sqrt(2),minus);
+atan(1/sqrt(2))-%pi$
+
+/* No longer necessary, but not removed to keep problem numbering. */
+(/*forget(zeroa > 0, zerob < 0),*/0);
+0$
+
+/* #3866 limit(log(sinh(x)),x,0,'plus) --> infinity */
+
+limit(log(sinh(x)),x,0,'plus);
+minf$
+
+limit(log(sinh(x)),x,0,'minus);
+infinity$
+
+limit(log(sinh(x)),x,0);
+infinity$
+
+/* unit_step expressions */
+
+limit(unit_step(x),x,minf);
+0$
+
+limit(unit_step(x),x,-%pi);
+0$
+
+limit(unit_step(x),x,%pi);
+1$
+
+limit(unit_step(x),x,0,'minus);
+0$
+
+limit(unit_step(x),x,0,'plus);
+1$
+
+limit(23*unit_step(x),x,0,'minus);
+0$
+
+limit(23*unit_step(x),x,0,'plus);
+23$
+
+limit(23*unit_step(x) + 107,x,0,'minus);
+107$
+
+limit(23*unit_step(x) + 107,x,0,'plus);
+130$
+
+limit(unit_step(sin(x)),x,0);
+ind$
+
+/* limits of conjugate expressions */
+limit(conjugate(sqrt(-1+%i*sin(x))),x,0,'minus);
+%i$
+
+limit(conjugate(sqrt(-1+%i*sin(x))),x,0,'plus);
+-%i$
+
+limit(conjugate(sqrt(-1+%i*sin(x))),x,0);
+ind$
+
+(assume(a > 0), limit(conjugate(sqrt(a+%i*sin(x))),x,0));
+conjugate(sqrt(a))$
+
+limit(conjugate(sqrt(-a+%i*sin(x))),x,0,'minus);
+%i*sqrt(a)$
+
+limit(conjugate(sqrt(-a+%i*sin(x))),x,0,'plus);
+-%i*sqrt(a)$
+
+limit(107+93*conjugate(sqrt(-a+%i*sin(x))),x,0,'minus);
+107 + 93*%i*sqrt(a)$
+
+limit(107+93*conjugate(sqrt(-a+%i*sin(x))),x,0,'plus);
+107 - 93*%i*sqrt(a)$
+
+(forget(a>0),0);
+0$
+/* #3865 crash from taking limit of factorial(x) + 1 */
+limit(factorial(x) + 1, x, 0);
+2$
+
+limit(atan2(0,1-3^x),x,0,'plus);
+%pi$
+
+limit(atan2(0,1-3^x),x,0);
+ind$
+
+/* additional atan tests */
+limit(atan(x),x,-4);
+-atan(4)$
+
+limit(atan(x),x,0,minus);
+0$
+
+limit(atan(x),x,0,plus);
+0$
+
+limit(atan(x),x,-2.0);
+-1.10714871779409$
+
+block([fpprec : 32], float_approx_equal(limit(atan(x),x,bfloat(sqrt(2))), atan(bfloat(sqrt(2)))));
+true$
+
+is(limit(atan(x),x,float(sqrt(2))) = atan(float(sqrt(2))));
+true$
+
+limit(atan(sin(x)),x,inf);
+ind$
+
+limit(atan(x),x,minf);
+-(%pi/2)$
+
+limit(atan(x),x,inf);
+%pi/2$
+
+limit(atan(x^2),x,inf);
+%pi/2$
+
+limit(atan(1/x),x,0);
+ind$
+
+/* #3864 limit of atan2 expression */
+limit(atan2(0,1-3^x),x,0,'minus);
+0$
+
+/* #3895 limit */
+limit((x^x-a^a)/(x-a), x, a);
+a^a*(log(a)+1)$
+
+limit((x^x-2^2)/(x-2), x, 2);
+4*log(2)+4$
+
+tlimit((x^x-a^a)/(x-a), x, a);
+a^a*(log(a)+1)$
+
+/* #3844 Wrong limit involving gamma function */
+limit(gamma(1/x) - x, x, inf);
+-%gamma$
+
+/* #3838 limit(atan(sin(x)),x,inf,plus) --> atan(ind) */
+limit(atan(sin(x)),x,inf,plus);
+ind$
+
+/* #3483 limit apparently causes infinite loop  */
+(X : log((sqrt(t)*sqrt(t+1)+t)/t)/(t+1)-(t*(log((t-sqrt(t)*sqrt(t+1))/t)-log((sqrt(t)*sqrt(t+1)+t)/t)))/(t+1)-log((t-sqrt(t)*sqrt(t+1))/t)/(t+1)-(2*sqrt(t))/sqrt(t+1),0);
+0$
+
+limit(X,t,1,'minus);
+log(sqrt(2)+1)-log(1-sqrt(2))-sqrt(2)$
+
+limit(X,t,1,'plus);
+ log(sqrt(2)+1)+(-(2*log(sqrt(2)-1))-2*%i*%pi)/2-sqrt(2)$
+
+limit(X,t,1);
+log(sqrt(2)+1)+(-(2*log(sqrt(2)-1))-2*%i*%pi)/2-sqrt(2)$
+
+tlimit(X,t,1);
+log(sqrt(2)+1)-log(1-sqrt(2))-sqrt(2)$
+
+block([algebraic : true], limit(ratsimp(X),t,1));
+log(sqrt(2)+1)+(-(2*log(sqrt(2)-1))-2*%i*%pi)/2-sqrt(2)$
+
+(remvalue(X),0);
+0$
+
+/* #2953 limit loops endlessly */
+limit((a/x^b + (1-a)/y^b)^(-1/b),b,0);
+ x^a*y^(1-a)$
+
+/* #2706 Limit runs forever, never returning (simplified bug) */
+block([ans1,ans2, ans3],
+  assume(w3 < 0),
+  ans1 : limit((%e^(-sqrt(-zzz))*(w3*sqrt(-zzz)*%e^(2*sqrt(-zzz))-w3*sqrt(-zzz)))/(2*zzz),zzz,0),
+  forget(w3 < 0),
+  assume(equal(w3,0)),
+  ans2 : limit((%e^(-sqrt(-zzz))*(w3*sqrt(-zzz)*%e^(2*sqrt(-zzz))-w3*sqrt(-zzz)))/(2*zzz),zzz,0),
+  forget(equal(w3,0)),
+  assume(w3>0),
+  ans3 : limit((%e^(-sqrt(-zzz))*(w3*sqrt(-zzz)*%e^(2*sqrt(-zzz))-w3*sqrt(-zzz)))/(2*zzz),zzz,0),
+  forget(w3>0),
+  [ans1,ans2, ans3]);
+  [-w3,0,-w3]$
+
+/* #2388 wrong limit */
+X : limit(((9*x)^(1/3)-3)/(sqrt(3+x)-sqrt(2*x)),x,3);
+-(2*sqrt(6))/3$
+
+block([ans : radcan(X)], remvalue(X),ans);
+-(2^(3/2)/sqrt(3))$
+
+/* #3861 function simplimsubst problems */
+limit(log(-1+%i*x) * ceiling(a),x,0,minus);
+-%i*%pi*ceiling(a)$
+
+limit(log(-1+%i*x) * a,x,0,minus);
+-%i*%pi*a$
+
+/* #484 limit(x=0,x,0) wrong */
+is(equal(0=0, limit(x=0,x,0)));
+false$
+
+is(equal(0<0, limit(x<0,x,0)));
+false$
+
+is(equal(0#0, limit(x#0,x,0)));
+false$
+
+limit(atan(x),x,a);
+atan(a)$
+
+block([ans],declare(z,complex), ans : limit(atan(x),x,z), remove(z,complex),ans);
+atan(z)$
+
+limit(fib(x+1)/fib(x),x,inf);
+%phi$
+
+limit(fib(x+2)/fib(x),x,inf);
+%phi+1$
+
+/* #4029 limit(cos(1/x)^2 + sin(1/x)^2 + cos(x),x,0) --> ind */
+limit(cos(1/x)^2 + sin(1/x)^2,x,0);
+1$
+
+limit(cos(1/x)^2 + sin(1/x)^2 + cos(x),x,0);
+2$
+
+block([ans], assume(a > 0),ans : limit(sin(x)^(a),x,inf),forget(a > 0), ans);
+ind$
+
+block([ans], assume(a > 0),ans : limit(sin(x)^(-a),x,inf),forget(a > 0), ans);
+und$
+
+limit((2+sin(x))^(-9),x,inf);
+ind$
+
+limit((2+sin(x))^(9),x,inf);
+ind$
+
+/* #4099 gruntz called on algebraic */
+gruntz(((9*x)^(1/3)-3)/(sqrt(3+x)-sqrt(2*x)),x,3,plus);
+(-2^(3/2)/sqrt(3))$
+
+/* This bug is mentioned in the tlimit source code, but I don't think it's reported.*/
+tlimit(2^n/n^5,n,inf);
+inf$
+
+/* #3927 tlimit(exp(x)/x^5,x,inf) = 0 */
+tlimit(exp(x)/x^5,x,inf);
+inf$
+
+block([lhospitallim : 8], tlimit(exp(x)/x^5,x,inf));
+inf$
+
+block([lhospitallim : 1], tlimit(exp(x)/x^5,x,inf));
+inf$
+
+block([lhospitallim : 1], tlimit(exp(x)/x^46,x,inf));
+inf$
+
+block([lhospitallim : 1], tlimit(exp(x)/x^107,x,inf));
+inf$
+
+/* See #3932 inconsistent limit results with trig */
+(QQ: (-rr*csc(rr)^2)+%pi*csc(rr)^2+cot(rr)-%pi/rr^2,0);
+0$
+
+limit(QQ,rr,0);
+%pi/3$
+
+limit(trigsimp(QQ),rr,0);
+%pi/3$
+
+limit(map('trigsimp,QQ),rr,0);
+%pi/3$
+
+(remvalue(QQ),0);
+0$
+
+/* #3903 A limit toward infinity gives a nounform */
+limit((sin(x)+x)/sqrt(x*(2*sin(x)+2*cos(x))+2*x^2+1),x,inf);
+1/sqrt(2)$
+
+tlimit((sin(x)+x)/sqrt(x*(2*sin(x)+2*cos(x))+2*x^2+1),x,inf);
+1/sqrt(2)$
+
+gruntz((sin(x)+x)/sqrt(x*(2*sin(x)+2*cos(x))+2*x^2+1),x,inf);
+1/sqrt(2)$
+
+/* #3826 limit returns temp variable expression */
+
+block([ans], assume(q > 0), ans : limit(x^q/(a*x^q- 1),x,inf), forget(q > 0),ans);
+1/a$
+
+block([ans], assume(q > 0), ans : tlimit(x^q/(a*x^q- 1),x,inf), forget(q > 0),ans);
+1/a$
+
+block([ans], assume(q > 0), ans : gruntz(x^q/(a*x^q- 1),x,inf), forget(q > 0),ans);
+1/a$
+
+/* #3393 limit/tlimit give wrong result */
+limit(log(log(x + exp(log(x) * log(log(x))))) / log(log(log(exp(x) + x))), x, inf);
+1$
+
+tlimit(log(log(x + exp(log(x) * log(log(x))))) / log(log(log(exp(x) + x))), x, inf);
+1$
+
+gruntz(log(log(x + exp(log(x) * log(log(x))))) / log(log(log(exp(x) + x))), x, inf);
+1$
+
+/* #2561 limit(log(x^2),x,-20) gives 2*log(-20) */
+block([logexpand : false], limit(log(x^2),x,-20));
+log(400)$
+
+block([logexpand : false], tlimit(log(x^2),x,-20));
+log(400)$
+
+block([logexpand : false], gruntz(log(x^2),x,-20,minus));
+log(400)$
+
+/* #2389 incorrect limit
+Commented out for now because it calls asksign when it should not
+block([ans],
+  assume(k>2),
+  declare(k,integer),
+  ans : limit(((t+1)^k-t^k-k*t^(k-1)-(k*(k-1)/2)*t^(k-2))/t^(k-3),t,inf),
+  forget(k>2),
+  forget(k,integer),
+  ans);
+  */
+
+/* #2273 limit gives the wrong answer
+  (This bug was fixed long ago, but I'm not sure there was a rtest for it.) */
+ limit((sqrt(t^2+4)*(((t+2/t^2)^2+4)^(3/2)-(t+2/t^2)^3-4*(t+2/t^2)))/
+    (sqrt((t+2/t^2)^2+4)*((t^2+4)^(3/2)-t^3-4*t)),t,inf);
+ 1$
+
+ tlimit((sqrt(t^2+4)*(((t+2/t^2)^2+4)^(3/2)-(t+2/t^2)^3-4*(t+2/t^2)))/
+    (sqrt((t+2/t^2)^2+4)*((t^2+4)^(3/2)-t^3-4*t)),t,inf);
+ 1$
+
+ gruntz((sqrt(t^2+4)*(((t+2/t^2)^2+4)^(3/2)-(t+2/t^2)^3-4*(t+2/t^2)))/
+    (sqrt((t+2/t^2)^2+4)*((t^2+4)^(3/2)-t^3-4*t)),t,inf);
+ 1$
+
+/* #4109 Limits of polylogarithms */
+limit(li[2](x)/log(-x)^2,x,inf);
+-(1/2)$
+
+limit(li[3](x)/log(-x)^3,x,inf);
+-(1/6)$
+
+ limit(li[2](x),x,%e/2);
+ li[2](%e/2)$
+
+ /* #4108 limit code & nondefault value of taylor_logexpand */
+ block([taylor_logexpand : false], limit((1/%pi*(atan(n/%pi)+%pi/2))^n,n,inf));
+ %e^-1$
+
+ block([taylor_logexpand : true], limit((1/%pi*(atan(n/%pi)+%pi/2))^n,n,inf));
+ %e^-1$
+
+ /* #4103 limit(acot(x),x,0) should be IND (not UND) */
+ limit(acot(x),x,0);
+ ind$
+
+ /* #4087 limit((%i+1)^a/(2^(a/2)),a,inf) => 0 (wrong) */
+ limit((%i+1)^a*2^(-a/2),a,inf);
+ ind$
+
+ limit((%i+1)^(2*a)*2^-a,a,inf);
+ ind$
+
+/* #4085 limit((2-%i)^a/a!,a,inf) */
+ limit((2-%i)^a/a!,a,inf);
+ 0$
+
+ /* #4081 limit((2+sin(x))^(-2),x,inf) --> und */
+ limit((2+sin(x))^(-2),x,inf);
+ ind$
+
+ /* #4073 limit(log(sin(x)+9),x,inf) --> und could be ind */
+ limit(log(sin(x)+9),x,inf);
+ ind$
+
+ /*#4029 limit(cos(1/x)^2 + sin(1/x)^2 + cos(x),x,0) --> ind */
+ limit(cos(1/x)^2 + sin(1/x)^2,x,0);
+ 1$
+
+ limit(cos(1/x)^2 + sin(1/x)^2 + cos(x),x,0);
+ 2$
+
+ /* #4024 integrate(x*sin(x)*exp(-x^2),x,0, inf) */
+  integrate(x*sin(x)*exp(-x^2),x,minf, inf);
+  (%e^(-1/4)*sqrt(%pi))/2$
+
+/* #4021 limit(inf^(2+1/inf)) should be inf */
+limit(inf^(2+1/inf));
+inf$
+
+/* #4020 various limit bugs with exp(%i*x) */
+limit(x*exp(%i*x),x,inf);
+infinity$
+
+limit(x+x*exp(%i*x),x,inf);
+infinity$
+
+limit(1+x*exp(%i*x),x,inf); 
+infinity$
+
+limit(sin(x) + x*cos(x),x,inf);
+und$
+
+/* #4004 a cosine of arcsin limit that is evaluated incorrectly */
+block([ans],
+   declare(m, integer),
+   assume(equal(cos((4 * %pi * m + %pi)/2), 0)),
+   ans : limit(cos((4*m + 1) * asin(1/sqrt(x^2 + 1)))/abs(x), x, 0),
+   remove(m,integer),
+   forget(equal(cos((4 * %pi * m + %pi)/2), 0)),
+   ans);
+4*m + 1$
+
+/* Also mentioned in #4004 */
+block([ans],
+  assume(equal(a,0)),
+  ans : limit(a/x + 1, x, 0),
+  forget(equal(a,0)),
+  ans);
+1$
+
+block([ans],
+  assume(equal(a,0)),
+  ans : limit(a*x + 1, x, inf),
+  forget(equal(a,0)),
+  ans);
+1$
+
+block([ans],
+  assume(equal(a,0)),
+  ans : limit((2*x + a)/(x + a), x, 0),
+  forget(equal(a,0)),
+  ans);
+2$
+
+/* #4003 limit bug with on-default values for ratsimpexpons and ratfac */
+block([ratsimpexpons : true, ratfac : true], 
+  limit(2/5*((3/4)^m - 1)*(a - 10) + 1/5*(3*(3/4)^m + 2)*a, m, inf));
+4$
+
+/* #4001 limit(sin(x)/x + sin(x) + cos(x),x,inf) = 0 */
+limit(sin(x)/x + sin(x) + cos(x),x,inf);
+ind$
+
+/* #4151 limit bug as x tend to inf for trigonometric expressions */
+limit((4*x^3+2*x^2*sin(x)+1)/(x+1)^2 - 4*x,x,inf);
+ind$
+
+limit(expand((4*x^3+2*x^2*sin(x)+1)/(x+1)^2 - 4*x),x,inf);
+ind$
+
+/* #4137 simplimplus bugs */
+limit(3^x * cos(x) + sin(x),x,inf);
+und$
+
+limit(3^x * cos(x) + 2^x,x,inf);
+und$
+
+ errcatch(limit(3^x + (9+%i)^x,x,inf));
+ [infinity]$
+
+/* See mailing list https://sourceforge.net/p/maxima/mailman/message/37868153/ */
+integrate(tan(x)^(1/3)/(cos(x)+sin(x))^2,x,0,%pi/2);
+%pi/(2*sqrt(3))+%pi/(2*3^(3/2))$
+
+/* #4147 integrate(log(sin(x))/cos(x),x,0,%pi/2) */
+ integrate(log(sin(x))/cos(x),x,0,%pi/2);
+  -(%pi^2/8)$
+
+/* #4138 limit((1+1/x)^x,x,6/5) is "und" in complex domain */
+ block([domain : 'complex], limit((1+1/x)^x,x,6/5)); 
+ 11^(6/5)/6^(6/5)$
+
+ /* #4133 limit(abs(cos(a*x)),x,inf) */
+ block([ans], (assume(a < 0), ans : limit(abs(cos(a*x)),x,inf), forget(a < 0), ans));
+ ind$
+
+block([ans], (assume(equal(a,0)), ans : limit(abs(cos(a*x)),x,inf), forget(equal(a,0)), ans));
+ 1$
+
+ block([ans], (assume(a > 0), ans : limit(abs(cos(a*x)),x,inf), forget(a > 0), ans));
+ ind$
+
+  /* #4103 limit(acot(x),x,0) should be IND (not UND) */
+ limit(acot(x),x,0);
+ ind$
+
+/* #4222 limit(6^x, x, 1) and similar cases: stack overflow crash */
+integrate(1/10^x, x, 0, 1);
+9/(10*log(10))$
+
+limit(6^x, x, 1);
+6$
+
+limit(2^x * 3^x, x, 1);
+6$
+
+limit(2^x * 3^x + 28,x,1);
+34$
+
+limit((2^x * 3^x + 28)/(x+2),x,1);
+34/3$
+
+limit(%pi^2*%i*cos(x-1)*6^x,x,1);
+6*%i*%pi^2$
+/* end of tests for #4222 */
+
+/* #4227 limit(abs(sin(x))/sin(x), x, inf) = 1 */
+limit(abs(sin(x))/sin(x), x, inf);
+und$
+
+/* #4133 limit(abs(cos(a*x)),x,inf) */
+block([ans],  assume(a < 0), ans : limit(abs(cos(a*x)),x,inf), forget(a < 0), ans);
+ind$
+
+block([ans],  assume(a > 0), ans : limit(abs(cos(a*x)),x,inf), forget(a > 0), ans);
+ind$
+
+block([ans],  assume(equal(a,0)), ans : limit(abs(cos(a*x)),x,inf), forget(equal(a,0)), ans);
+1$
+
+limit(abs(sin(x) + abs(cos(x))),x,inf);
+ind$
+
+/* #3824 limit of an antiderivative */
+block([xxx : integrate((x-%i)/((x-2*%i)*(x^2+1)),x)],
+  [limit(rectform(xxx),x,minf), rectform(limit(xxx,x,minf))]);
+[-%pi/2, -%pi/2]$
+
+/* #3483 limit apparently causes infinite loop */
+(X : log((sqrt(t)*sqrt(t+1)+t)/t)/(t+1)-(t*(log((t-sqrt(t)*sqrt(t+1))/t)-log((sqrt(t)*sqrt(t+1)+t)/t)))/(t+1)-log((t-sqrt(t)*sqrt(t+1))/t)/(t+1)-(2*sqrt(t))/sqrt(t+1),0);
+0$ 
+
+limit(ratsimp(X),t,1);
+ log(sqrt(2)+1)-log(sqrt(2)-1)-%i*%pi-sqrt(2)$
+
+/* doesn't finish! */
+limit(X,t,1);
+log(sqrt(2)+1)+(-(2*log(sqrt(2)-1))-2*%i*%pi)/2-sqrt(2)$
+
+(remvalue(X),0);
+0$
+
+/* #4238 limit((abs(sin(x)*cos(x)-x^4) -x)/x^3,x,0,plus) gives internal error 
+This test exercises the function mabs-subst. */
+limit((abs(sin(x)*cos(x)-x^4) -x)/x^3,x,0,plus);
+-2/3$
+
+limit(log(cos(x)),x,inf);
+und$
+
+/* #3153 Limits of erfc  */
+ (domain : complex, block([ans], 
+    assume(t > 0,ω > 0),
+    ans : integrate(exp(-%i*ω^2*ρ^2-(%i*t^2)/(4*ρ^2)),ρ,0,inf),
+    forget(t > 0, ω > 0),
+    ans));
+(-1/2)*((sqrt(-(%i*%pi*ω^2))*%e^-(2*sqrt(-((t^2*ω^2)/4))))/(ω^2))$
+  
+(domain : real, block([ans], 
+    assume(t > 0,ω > 0),
+    ans : integrate(exp(-%i*ω^2*ρ^2-(%i*t^2)/(4*ρ^2)),ρ,0,inf),
+    forget(t > 0, ω > 0),
+    ans));
+ -(((-1)^(1/4)*sqrt(%pi)*%e^-(%i*t*ω))/(2*ω))$
+
+/* #4277 limit misses some constant expressions */
+block([limsubst : false], limit(sum(f(x),x,1,inf),x, 3));
+'sum(f(x),x,1,inf)$
+
+block([limsubst : true], limit(sum(f(x),x,1,inf),x, 3));
+'sum(f(x),x,1,inf)$
+
+limit(integrate(f(x),x),x,%pi);
+'limit('integrate(f(x),x),x,%pi)$
+
+block([limsubst : false], limit(integrate(f(x,t),t),x,%pi));
+'limit('integrate(f(x,t),t),x,%pi)$
+
+block([limsubst : true], limit(integrate(f(x,t),t),x,%pi));
+'limit('integrate(f(x,t),t),x,%pi)$
+
+block([limsubst : false], limit(diff(g(x,t),t,3),x,42));
+'limit('diff(g(x,t),t,3),x,42)$
+
+block([limsubst : true], limit(diff(g(x,t),t,3),x,42));
+'diff(g(42,t),t,3)$
+
+/* #4210 tlimit consults global assumptions for limit variable*/
+tlimit(atan(1/x),x,0,'minus);
+-%pi/2$
+
+tlimit(atan(1/x),x,0,'plus);
+%pi/2$
+
+block([ans],
+   assume(x > 0),
+   ans : tlimit(atan(1/x),x,0,'minus),
+   forget(x > 0),
+   ans);
+-%pi/2$
+
+block([ans],
+   assume(x > 0),
+   ans : limit(atan(1/x),x,0,'minus),
+   forget(x > 0),
+   ans);
+-%pi/2$
+
+/* #4191 limits of gamma_incomplete */
+limit(gamma_incomplete(3,x),x,minf);
+inf$
+
+limit(gamma_incomplete(3,sin(x)),x,inf);
+ind$
+
+limit(gamma_incomplete(3, sin(x)*exp(x)),x,inf);
+und$
+
+/* #4185 limit of the form ind/ind */
+limit((5+cos(x))/(7+cos(x)),x,inf);
+ind$
+
+limit((5+cos(x))/(1+cos(x)),x,inf);
+und$
+
+limit((5+cos(x))/(cos(x)),x,inf);
+und$
+
+/* #4197 limits of erfi expressions & extended reals*/
+ limit(erfi(sin(x)*exp(x)),x,inf);
+ und$
+
+ limit(erfi(sin(x)),x,inf);
+ ind$
+
+/* #4321 limits of Newton quotients for some inverse trig */
+
+limit((cos(3+h)-cos(3))/h,h,0);
+-sin(3)$
+
+ limit((acos(3+h)-acos(3))/h,h,0);
+ %i/2^(3/2)$
+
+ limit((asin(3+h)-asin(3))/h,h,0);
+ -%i/2^(3/2)$
+
+limit((acos(x+h) - acos(x))/h,h,0);
+sqrt(1-x^2)/(x^2-1)$
+
+tlimit((acos(x+h) - acos(x))/h,h,0);
+sqrt(1-x^2)/(x^2-1)$
+
+limit((asin(x+h)-asin(x))/h,h,0);
+-sqrt(1-x^2)/(x^2-1)$
+
+tlimit((asin(x+h)-asin(x))/h,h,0);
+-sqrt(1-x^2)/(x^2-1)$
+
+/* #4338 limit((1+%i)^(2*a)*2^(-a),x,inf) when logexpand is true */
+block([logexpand : true], limit((1+%i)^(2*a)*2^(-a),a,inf));
+ind$
+
+block([logexpand : false], limit((1+%i)^(2*a)*2^(-a),a,inf));
+ind$
+
+block([logexpand : true], tlimit((1+%i)^(2*a)*2^(-a),a,inf));
+ind$
+
+block([logexpand : false], tlimit((1+%i)^(2*a)*2^(-a),a,inf));
+ind$
+
+/* #4416 limit of Newton quotient involving asin */
+
+(xxx : (asin(x+h)-asin(x))/h,0);
+0$
+
+tlimit(xxx,h,0);
+-sqrt(1-x^2)/(x^2-1)$
+
+tlimit(subst(h=-h,xxx),h,0);
+-sqrt(1-x^2)/(x^2-1)$
+
+tlimit(subst(h=h*cos(h),xxx),h,0);
+-sqrt(1-x^2)/(x^2-1)$
+
+(xxx : (acos(x+h)-acos(x))/h,0);
+0$
+
+tlimit(xxx,h,0);
+sqrt(1-x^2)/(x^2-1)$
+
+tlimit(subst(h=-h,xxx),h,0);
+sqrt(1-x^2)/(x^2-1)$
+
+tlimit(subst(h=h*cos(h),xxx),h,0);
+sqrt(1-x^2)/(x^2-1)$
+
+(xxx : (atan(x+h)-atan(x))/h,0);
+0$
+
+tlimit(xxx,h,0);
+1/(1+x^2)$
+
+tlimit(subst(h=-h,xxx),h,0);
+1/(1+x^2)$
+
+tlimit(subst(h=h*cos(h),xxx),h,0);
+1/(1+x^2)$
+
+/* Tests for #4530 limit(floor( 1/2 + sin(1/x)/10), x, 0) returns ind but should be 0 */
+
+limit(floor(1/2 + sin(1/x)/10), x, 0);
+0$
+
+limit(floor(1/2 + cos(1/x)/10), x, 0);
+0$
+
+limit(floor(1/2 + 10*cos(1/x)/(21)), x, 0);
+0$
+
+limit(ceiling(1/2 + sin(1/x)/10), x, 0);
+1$
+
+limit(ceiling(1/2 + cos(1/x)/10), x, 0);
+1$
+
+limit(round(1/2 + sin(1/x)/10), x, 0);
+ind$
+
+limit(round(1/2 + cos(1/x)/10), x, 0);
+ind$
+
+/* #4529 atan2 limit with radexpand : false */
+block([radexpand : false], limit(atan2(x^2-2, x^3-3*x),x,sqrt(2),minus));
+-%pi$
+
+block([radexpand : true], limit(atan2(x^2-2, x^3-3*x),x,sqrt(2),minus));
+-%pi$
+
+/* tests for atan2(zeroa/b, zeroa/b) */
+
+limit(atan2(exp(x)-1, sin(x)),x,0,plus);
+%pi/4$
+
+is(subst(x=1.0e-8, float(abs(atan2(exp(x)-1, sin(x)) - %pi/4) < 1.0e-8)));
+true$
+
+limit(atan2(exp(x)-1, 8*sin(x)),x,0,plus);
+atan(1/8)$
+
+is(subst(x=1.0e-8, float(abs(atan2(exp(x)-1,8*sin(x)) - atan(1/8))) < 1.0e-8));
+true$
+
+limit(atan2(exp(x)-1, -sin(x)),x,0,minus);
+-%pi/4$
+
+is(subst(x=-1.0e-8, float(abs(atan2(exp(x)-1,-sin(x)) + %pi/4)) < 1.0e-8));
+true$
+
+limit(atan2(exp(x)-1, -sin(x)),x,0,plus);
+3*%pi/4$
+
+is(subst(x=1.0e-8, float(abs(atan2(exp(x)-1,-sin(x)) - 3*%pi/4)) < 1.0e-8));
+true$
+
+limit(atan2(exp(x)-1, -107*sin(x)),x,0,plus);
+%pi - atan(1/107)$
+
+is(subst(x=1.0e-8, float(abs(atan2(exp(x)-1, -107*sin(x)) - (%pi - atan(1/107)))) < 1.0e-8));
+true$
+
+limit(atan2(exp(x)-1, sin(x)),x,0,minus);
+-3*%pi/4$
+
+is(subst(x=-1.0e-8, float(abs(atan2(exp(x)-1, sin(x)) + 3*%pi/4)) < 1.0e-8));
+true$
+
+limit(atan2(exp(x)-1, 5*sin(x)),x,0,minus);
+atan(1/5)-%pi$
+
+is(subst(x=-1.0e-8, float(abs(atan2(exp(x)-1, 5*sin(x)) - atan(1/5)+%pi))) < 1.0e-8);
+true$
+
+/* #4536 atan2(0,0) undefined error while evaluating a limit 
+   This is fix for *just one* of two bugs mentioned in ticket 4536. */
+limit(atan2(exp(x)-cos(x), -x*sin(x)),x,0,minus);
+-%pi/2$   
+
+/* #4539 some limits of expintegral_ci  */
+limit(expintegral_ci(%i*x),x,inf);
+inf$
+
+limit(expintegral_ci(%i*x),x,minf);
+inf$
+
+limit(expintegral_ci(5+cos(x)),x,inf);
+ind$
+
+limit(expintegral_ci(x*sin(x)),x,0);
+minf$
+
+limit(expintegral_ci(x),x,0,'minus);
+minf$
+
+limit(expintegral_ci(x),x,0,'plus);
+minf$
+
+limit(expintegral_ci(x),x,inf);
+0$
+
+limit(expintegral_ci(x),x,minf);
+%i*%pi$
+
+limit(expintegral_si(sin(x)),x,inf);
+ind$
+
+/* #4546 limit of a log of a rational trig polynomial */
+limit(log((5*%i*sin(4*x)+5*cos(4*x)-10*%i*sin(2*x)-10*cos(2*x)+1)/(5*%i*sin(4*x)+5*cos(4*x)-50*%i*sin(2*x)-50*cos(2*x)+25)),x,t);
+log((%i*sin(4*t))/(%i*sin(4*t)+cos(4*t)-10*%i*sin(2*t)-10*cos(2*t)+5)
+            +cos(4*t)/(%i*sin(4*t)+cos(4*t)-10*%i*sin(2*t)-10*cos(2*t)+5)
+            -(2*%i*sin(2*t))/(%i*sin(4*t)+cos(4*t)-10*%i*sin(2*t)-10*cos(2*t)
+                                         +5)
+            -(2*cos(2*t))/(%i*sin(4*t)+cos(4*t)-10*%i*sin(2*t)-10*cos(2*t)+5)
+            +1/(5*(%i*sin(4*t)+cos(4*t)-10*%i*sin(2*t)-10*cos(2*t)+5)))$
+
+limit( log((sin(x)+cos(x))/(%i*sin(x)+cos(x)+2)) , x, t);
+log(sin(t)/(%i*sin(t)+cos(t)+2)+cos(t)/(%i*sin(t)+cos(t)+2))$
+
+block([ans], assume(t > 0),
+            ans : limit ( log((log(x)+exp(x))/(%i*exp(x)+log(x)+2)), x, t),
+            forget(t >0),
+            ans);
+log(log(t)/(log(t)+%i*%e^t+2)+%e^t/(log(t)+%i*%e^t+2))$
+
+limit(log(-2+%i*y),y,0, 'minus);
+log(2) - %i*%pi$
+
+limit(log(-2+%i*y),y,0, 'plus);
+log(2) + %i*%pi$
+
+limit(log(-2+%i*y),y,0);
+ind$
+
+limit(log(2+%i*y),y,0,'minus);
+log(2)$
+
+limit(log(2+%i*y),y,0,'plus);
+log(2)$
+
+(assume(a > 0),0);
+0$
+
+limit(log(a+%i*y),y,0,'minus);
+log(a)$
+
+limit(log(a+%i*y),y,0,'plus);
+log(a)$
+
+limit(log(-a+%i*y),y,0,'minus);
+log(a) - %i*%pi$
+
+limit(log(-a+%i*y),y,0,'plus);
+log(a) + %i*%pi$
+
+(forget(a>0),0);
+0$
+
+/* #4536 atan2(0,0) undefined error while evaluating a limit */
+
+(xxx : x*log(1/tan(x)-1)-(2*x*log((tan(x)^2-2*tan(x)+1)/2)+(%pi-2*atan2((tan(x)-1)/2,-((tan(x)-1)/2)))*
+log(tan(x)^2+1)+2*%i*li[2](-((%i*((%i+1)*tan(x)+%i-1))/2))+2*%i*li[2](%i*tan(x)+1)-2*%i*li[2](1-%i*tan(x))
+-2*%i*li[2](-((%i*((%i-1)*tan(x)+%i+1))/2))-4*x*log(tan(x)))/4, 0);
+0$
+
+/* see \#4614 atan2 reflection rule*/
+[trigsimp(block([trigsign : false], limit(xxx,x,%pi/4,'minus))), block([trigsign : true], limit(xxx,x,%pi/4,'minus))];
+[%catalan,%catalan]$
+
+[block([trigsign : false], limit(xxx,x,%pi/4,'plus)), block([trigsign : true], limit(xxx,x,%pi/4,'plus))];
+[-((-(4*%pi*log(2))-2*%i*%pi^2-8*%catalan)/8), -((-(4*%pi*log(2))-2*%i*%pi^2-8*%catalan)/8)]$
+
+ (remvalue(xxx),0);
+ 0$
+
+limit(atan2(exp(x)-cos(x), -x*sin(x)),x,0,minus);
+-%pi/2$
+
+limit(atan2((tan(x)-1)/2,-(tan(x)-1)/2),x,0);
+-%pi/4$
+
+/* #4563 limit of high degree polynomials*/
+limit((x-45)*(x-7)^90000 + 45*(x-45),x,45);
+0$
+
+limit((x-45)*(x-7)^90000 + 45*(x-45) + 107,x,45);
+107$
+
+block ([display2d : false, stream : make_string_output_stream (),ans],
+  trace(?taylim),
+  with_stdout(stream, tlimit((1+sqrt(1+n))^(-n-1)/(1+sqrt(n))^-n,n,inf)),
+  ans : get_output_stream_string (stream),
+  untrace(?taylim),
+  ans);
+"1 Call   taylim [(sqrt(n)+1)^n*(sqrt(n+1)+1)^(-n-1),n,inf,think]
+1 Return taylim zeroa
+"$
+/* \#4619 limit(inf = inf) causes stack overflow*/
+block([ans : limit(minf = minf)], [inpart(ans,0),args(ans)]);
+["=", [minf, minf]]$
+
+block([ans : limit(minf = minf,x,42)], [inpart(ans,0),args(ans)]);
+["=", [minf, minf]]$
+
+block([ans : limit(x < 8)], [inpart(ans,0),args(ans)]);
+["<", [x, 8]]$
+
+/* \#4634 Divergent integral simplifies to -1/4 with simplify_sum */
+/* I put the test simplify_sum( sum(n*(-1)^n,n,1,inf)) into rtest_simplify_sum. Here is
+the other test mentioned in ticket 4634. */
+limit(((-1)^N*(2*N+1))/4-1/4,N,inf);
+und$
+
+/* \#4717 limit(signum(exp(%i*x)*exp(x)),x,inf);*/
+limit(signum(exp(%i*x)*exp(x)),x,inf);
+ind$
+
+limit(signum(exp(%i*x)*exp(x))/x,x,inf);
+0$
+
+/* \#4740 limit(expintegral_e(3/4,-log(1-1/x))*(-log(1-1/x))^(1/4),x,inf);*/
+block([expintrep : gamma_incomplete],
+   limit(expintegral_e(3/4,-log(1-1/x))*(-log(1-1/x))^(1/4),x,inf));
+gamma(1/4)$
+
+block([expintrep : false],
+   limit(expintegral_e(3/4,-log(1-1/x))*(-log(1-1/x))^(1/4),x,inf));
+gamma(1/4)$
+
+/* \#4747 limits of some exonential integrals when expintrep : gamma_incomplete*/
+block([expintrep : gamma_incomplete], 
+     limit(expintegral_ci(5 + cos(x)), x, inf));
+ind$
+
+/* \#4689 limit of a spherical_bessel_j function */
+limit(spherical_bessel_j(1,x)^2,x,inf);
+0$
+
+limit(spherical_bessel_j(1,x)^2,x,minf);
+0$
+
+limit(spherical_bessel_j(1,x),x,inf);
+0$
+
+limit(spherical_bessel_j(3,x),x,inf);
+0$
+
+limit(spherical_bessel_j(3,x),x,minf);
+0$
+
+/* \#4772 limits of tan expressions toward infinity */
+limit(tan(x),x,minf);
+und$
+
+limit(tan(x),x,inf);
+und$
+
+limit(tan(x)/x,x,minf);
+und$
+
+limit(tan(x)/x,x,inf);
+und$
+
+/* \# 4777 limits of tan toward odd x integer / 2 */
+block([ans],
+     declare(n,odd),
+     ans : limit(tan(x),x,n*%pi/2,minus),
+     remove(n,odd),
+     ans);
+  inf$
+
+  block([ans],
+      declare(n,odd),
+      ans : limit(tan(x),x,n*%pi/2,plus),
+      remove(n,odd),
+      ans);
+  minf$
+
+/* additoinal limit of tangent expression tests */
+/* #4772 limits of tan expressions toward infinity */
+limit(tan(x),x,minf);
+und$
+
+limit(tan(x),x,inf);
+und$
+
+limit(tan(x)/x,x,minf);
+und$
+
+limit(tan(x)/x,x,inf);
+und$
+
+/* #4777 limits of tan toward odd x integer / 2 */
+block([ans],
+     declare(n,odd),
+     ans : limit(tan(x),x,n*%pi/2,minus),
+     remove(n,odd),
+     ans);
+inf$
+
+block([ans],
+     declare(n,odd),
+     ans : limit(tan(x),x,n*%pi/2,plus),
+     remove(n,odd),
+     ans);
+minf$
+
+/* Additional tests for limits of tan(X) */
+
+limit(tan(x), x, 0);
+0$
+
+limit(tan(x), x, 1);
+tan(1)$
+
+limit(tan(x), x, -2);
+-tan(2)$
+
+limit(tan(a), a, b);
+tan(b)$
+
+limit(tan(x+1), x, 2);
+tan(3)$
+
+limit(tan(x), x, 0, minus);
+0$
+
+limit(tan(x), x, 0, plus);
+0$
+
+limit(tan(1/x), x, 0, plus);
+und$
+
+limit(tan(1/x), x, 0, minus);
+und$
+
+limit(tan(exp(x)), x, inf);
+und$
+
+limit(tan(x), x, %pi/2);
+infinity$
+
+limit(tan(x), x, 3*%pi/2);
+infinity$
+
+limit(tan(x), x, %pi);
+0$
+
+limit(tan(x), x, 2*%pi);
+0$
+
+limit(tan(x), x, %pi/2, minus);
+inf$
+
+limit(tan(x), x, %pi/2, plus);
+minf$
+
+limit(tan(x), x, -%pi/2, minus);
+inf$
+
+limit(tan(x), x, -%pi/2, plus);
+minf$
+
+limit(tan(x + %pi/2), x, 0, minus);
+inf$
+
+limit(tan(x + %pi/2), x, 0, plus);
+minf$
+
+limit(tan(sin(1/x)), x, 0);
+ind$
+
+limit(tan(sin(1/x))/x, x, 0);
+und$
+
+limit(tan(%pi/2 + sin(1/x)), x, 0);
+und$
+
+limit(tan(%pi * sin(107*x)/2),x,inf);
+und$
+
+limit(tan(%pi * sin(107*x)/3),x,inf);
+ind$
+
+limit(tan(%pi/2 + 1/x), x, inf);
+minf$
+
+block([ans], declare(k,even), ans : limit(tan(x), x, k*%pi/2), remove(k,even), ans);
+0$
+
+block([ans], declare(k,odd), ans : limit(tan(x), x, k*%pi/2, minus), remove(k,odd), ans);
+inf$
+
+block([ans], declare(k,odd), ans : limit(tan(x), x, k*%pi/2, plus), remove(k,odd), ans);
+minf$
+
+/* tests for limit(a^b,x,pt), mostly when limit(a,x,pt) = ind */
+limit((9 + sin(x))^-2, x, inf);
+ind$
+
+limit((-5 + cos(x))^-1, x, inf);
+ind$
+
+limit(sin(x)^-1, x, inf);
+und$
+
+limit((9 + sin(x))^z, x, inf);
+ind$
+
+limit((1/2)^x, x, inf);
+0$
+
+limit((1/2)^x, x, minf);
+inf$
+
+limit((%i/2)^x, x, inf);
+0$
+
+limit((%i)^x, x, inf);
+ind$
+
+limit(2^x, x, inf);
+inf$
+
+limit(2^x, x, minf);
+0$
+
+limit((2*%i)^x, x, minf);
+0$
+
+limit((2*%i)^x, x, inf);
+infinity$
+
+limit((1 + 1/x)^x, x, inf);
+%e$
+
+limit(x^x, x, 0);
+1$
+
+limit(x^(1/x), x, inf);
+1$
+
+limit((sin(1/x) + 2)^sin(1/x), x, 0);
+ind$
+
+limit((2*sin(1/x))^sin(1/x), x, 0);
+und$
+
+limit((sin(1/x) + 2)^(1/(1/x^2 + 1)), x, 0);
+1$
+
+limit((sin(1/x))^(1/(1/x^2 + 1)), x, 0);
+und$
+
+limit((sin(1/x)/2)^(1/x^2), x, 0);
+0$
+
+limit((sin(1/x) + 3)^(1/x^2), x, 0);
+inf$
+
+limit((sin(1/x) + 3)^(-1/x^2), x, 0);
+0$
+
+limit((3 * %i * sin(1/x))^(-2/x^2), x, 0);
+0$
+
+limit((sin(1/x) + 2)^3, x, 0);
+ind$
+
+limit((sin(1/x) + 2)^-3, x, 0);
+ind$
+
+limit(sin(1/x)^-2, x, 0);
+und$
+
+/* end of tests for limit(a^b,x,pt), mostly when limit(a,x,pt) = ind */
+
+/* \#4794 limit(1/(acos(x)-%pi/2),x,0) causes division by zero error */
+limit(1/(acos(x)-%pi/2),x,0, 'minus);
+inf$
+
+limit(1/(acos(x)-%pi/2),x,0, 'plus);
+minf$
+
+/* clean up*/
+/*(kill(values),0);
+0$*/
+
+/* Did any values, facts, or contexts leak?*/
+
+facts();
+[]$
+
+contexts;
+[initial,global]$
+

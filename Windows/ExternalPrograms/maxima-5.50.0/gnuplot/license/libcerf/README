@@ -1,0 +1,30 @@
+== C library package == 
+
+The C library package consists of
+- the library's C source (directory lib/),
+- test code (directory test/),
+- manual pages (directory man/),
+- build utilities (aclocal.m4, build-aux/, config*, m4/, Makefile*).
+
+Installation requires a recent C compiler that supports the C99 standard.
+Otherwise, the library is self-contained, and installation should be
+straightforward, using the usual command sequence
+
+./configure
+make
+sudo make install
+
+The command ./configure takes various options that are explained in the
+file INSTALL.
+
+Please report bugs to the package maintainer.
+
+== Language bindings ==
+
+The C library libcerf can be wrapped for use with other programming languages.
+Such language bindings are added to the libcerf package as contributed by
+their authors.
+
+The following bindings are available:
+- fortran, by Antonio Cervellino <antonio.cervellino@psi.ch>
+

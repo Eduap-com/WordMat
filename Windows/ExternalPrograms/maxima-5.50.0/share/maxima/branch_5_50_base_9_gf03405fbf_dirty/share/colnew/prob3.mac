@@ -1,0 +1,75 @@
+/* Boundary layer on a rotating disk. One first takes a guess G=1-exp(-x), H=-x^2*exp(-x), and solves the */
+/* equations for n=0.2,s=0.2,L=60. Then one uses continuation to solve for n=0.2,s=0.1,L=120 and finally for */
+/* n=0.2,s=0.05,L=200. Moreovers one remaps the interval [0,L] to [0,1] so one solves the equations: */
+/*   G''  = L^2*s*(G-1)-L*((3-n)/2*H*G'+(n-1)*H'*G) */
+/*   H''' = L^3*(1-G^2)+L^2*s*H'-L*((3-n)/2*H*H''+n*(H')^2) */
+/*   G(0)=H(0)=H'(0)=0, G(1)=1,H'(1)=0 */
+/* Below one denotes G->z1,G'->z2,H->z3,H'->z4,H''->z5 */
+  
+load(colnew)$
+
+/* Constants */
+n:0.2$
+cons:0.5*(3.0-n)$
+/* The three successive values of s and l */
+sval:[0.2d0,0.1d0,0.05d0]$
+lval:[60d0,120d0,200d0]$
+
+/* Colnew initialization */
+ncomp:2$
+m:[2,3]$
+aleft:0.0$
+aright:1.0$
+zeta:[0.0,0.0,0.0,1.0,1.0]$
+/* ipar[9]=1 for the first run (guess) then 9 (continuation) */
+ipar:[1,4,10,2,40000,2500,1,0,1,0,0]$  /* non linear problem */
+ltol:[1,3]$              /* tolerances only on z1=G and z3=H */
+tol:[1d-7,1d-7]$
+fspace:makelist(0d0,k,1,40000)$
+ispace:makelist(0, k, 1, 2500)$
+fixpnt:[]$
+
+/* Equations */
+
+f(x,z1,z2,z3,z4,z5) := [l^2*s*(z1-1.0)-l*cons*z3*z2-l*(n-1.0)*z4*z1,
+l^3*(1.0-z1^2)+l^2*s*z4-l*cons*z3*z5-l*n*z4^2]$
+
+df : jacobian(f(x,z1,z2,z3,z4,z5),[z1,z2,z3,z4,z5])$
+
+/* Constraints */
+
+g(z1,z2,z3,z4,z5) := [z1,z3,z4,z1-1.0,z4]$ /* Bijection with zeta */
+
+dg : jacobian(g(z1,z2,z3,z4,z5),[z1,z2,z3,z4,z5])$
+
+/* Guess */
+
+/* Specifies for any x, the values of the z's but also the values dmval of G'' and H''' */
+
+guess(x) := [[1.0-exp(-l*x),l*exp(-l*x),-l^2*x^2*exp(-l*x),
+(l^3*x^2-2.0*l^2*x)*exp(-l*x),(-l^4*x^2+4.0*l^3*x-2.0*l^2)*exp(-l*x)],
+[-l^2*exp(-l*x),(l^5*x^2-6.0*l^4*x+6.0*l^3)*exp(-l*x)]]$
+
+/* Run colnew in three steps */
+
+for comput from 1 thru 3 do (
+  /* Do fresh computations of fsub, etc. with fresh values of variables */
+  s:sval[comput],
+  l:lval[comput],
+  print("n= ",n," s= ",s," l= ",l),
+  define(fsub(x,z1,z2,z3,z4,z5),f(x,z1,z2,z3,z4,z5)),
+  define(dfsub(x,z1,z2,z3,z4,z5), df),
+  gsub(i,z1,z2,z3,z4,z5) :=  g(z1,z2,z3,z4,z5)[i],
+  dgsub(i,z1,z2,z3,z4,z5) := row(dg,i)[1],
+
+  [iflag, fspace, ispace] : colnew_expert(ncomp, m, aleft, aright, zeta, ipar, ltol, tol,
+                           fixpnt, ispace, fspace, 0, fsub, dfsub, gsub, dgsub, guess),
+  /* For runs 2 and 3 set ipar[9]=3 and ipar[3]=ispace[1], size of previous mesh */
+  ipar[9]:3,
+  ipar[3]:ispace[1],
+  /* Plot the three solutions successively */
+  xx:makelist(0.01*k,k,0,100),
+  zvals:colnew_appsln(xx, 5, fspace, ispace),
+  hvals:makelist(zvals[k][1],k,1,101),
+  plot2d([discrete,l*xx,hvals]),
+  ?sleep(floor(2/comput)))$

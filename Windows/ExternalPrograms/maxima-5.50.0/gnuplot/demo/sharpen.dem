@@ -1,0 +1,37 @@
+#
+# "sharpen" filter
+#
+
+set sample 300
+set yrange [-15:12]
+set xrange [-10:2]
+set grid x
+set xtics 1
+set clip two
+set key title "lgamma(x)"  samplen 0
+
+set multiplot layout 2,1 title "Effect of 'sharpen' filter"
+plot lgamma(x) title "no filters"
+if (GPVAL_VERSION >= 6.0) {
+    plot lgamma(x) sharpen title "  sharpen"
+} else {
+    set label 1 center at graph 0.5, 0.5 "This copy of gnuplot does not support 'sharpen'"
+    unset key; plot NaN
+}
+unset multiplot
+
+pause -1 "<cr> to continue"
+
+reset
+set key right center title "step function"  samplen 0
+set multiplot layout 2,1 title "Effect of 'sharpen' filter"
+set xrange [0:6]
+plot  int(x) title "no filter"
+plot  int(x) sharpen title "  sharpen"
+unset multiplot
+
+pause -1 "<cr> to continue"
+
+reset
+
+

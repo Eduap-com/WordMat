@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package format (Maxima 5.50.9.gf03405fbf Manual)</title>
+
+<meta name="description" content="Package format (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="keywords" content="Package format (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-fractals.html#Package-fractals" rel="next" title="Package fractals">
+<link href="Package-finance.html#Package-finance" rel="prev" title="Package finance">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Package-format">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-fractals.html#Package-fractals" accesskey="n" rel="next">Package fractals</a>, Previous: <a href="Package-finance.html#Package-finance" accesskey="p" rel="prev">Package finance</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-format-1"><span>62 Package format<a class="copiable-link" href="#Package-format-1"> &para;</a></span></h2>
+
+
+<a class="anchor" id="Item_003a-format_002fnode_002fIntroduction-to-format"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-format" accesskey="1">Introduction to format</a></li>
+<li><a href="#Functions-and-Variables-for-format" accesskey="2">Functions and Variables for format</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-format">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-format" accesskey="n" rel="next">Functions and Variables for format</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-format-1"><span>62.1 Introduction to format<a class="copiable-link" href="#Introduction-to-format-1"> &para;</a></span></h3>
+
+<p>The <code class="code">format</code> package was written by Bruce R. Miller, NIST (miller-at-cam.nist.gov).
+</p>
+<p><code class="code">format</code> is a package for formatting algebraic expressions in
+Maxima. It provides facilities for user-directed hierarchical
+structuring of expressions, as well as for directing simplifications to
+selected subexpressions. It emphasizes a semantic rather than
+syntactic description of the desired form. The package also provides
+utilities for obtaining efficiently the coefficients of polynomials,
+trigonometric sums and power series.
+</p>
+<p>In a general purpose Computer Algebra System (CAS), any particular
+mathematical expression can take on a variety of forms: expanded form,
+factored form or anything in between. Each form may have advantages; a
+given form may be more compact than another, or allow clear expression
+of certain algorithms. Or it may simply be more informative,
+particularly if it has physical significance.  A CAS contains many tools
+for transforming expressions. However, most are like Maxima&rsquo;s
+<code class="code">factor</code> and <code class="code">expand</code>, operating only on the entire expression
+or its top level. At the other extreme are operations like
+<code class="code">substpart</code> which extract a specific part of an expression, then
+transform and replace it.  Unfortunately, the means of specifying the
+piece of interest is purely syntactic, requiring the user to keep close
+watch on the form of the arguments to avoid error.
+</p>
+<p>The package described here gives users of Maxima more control over the
+structure of expressions, and it does so using a more semantic, almost
+algebraic, language describing the desired structure. It also provides a
+semantic means of addressing parts of an expression for particular
+simplifications. For example, to rearrange an expression into a series
+in <code class="code">eps</code> through order 5, whose terms will be polynomials in
+<code class="code">x</code> and <code class="code">y</code>, whose coefficients, in turn, will be
+trigonometric sums in <code class="code">l</code> and <code class="code">g</code> with factored coefficients
+one uses the command:<br>
+</p>
+<p><code class="code">format(foo; %series(eps; 5); %poly(x; y);%trig(l; g); %factor);</code><br>
+</p>
+<p>The principal tool, <code class="code">format</code>, is described in section
+<a class="ref" href="#Functions-and-Variables-for-format">Functions and Variables for format</a>. It uses procedures in
+<code class="code">coeflist</code> which obtain coefficients of polynomials, trigonometric
+sums and power series.
+</p>
+<a class="anchor" id="Item_003a-format_002fnode_002fFunctions-and-Variables-for-format"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-format">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-format" accesskey="p" rel="prev">Introduction to format</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-format-1"><span>62.2 Functions and Variables for format<a class="copiable-link" href="#Functions-and-Variables-for-format-1"> &para;</a></span></h3>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002fformat"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-format"><span class="category-def">Function: </span><span><strong class="def-name">format</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">template<sub class="sub">1</sub></var>, ...)</var><a class="copiable-link" href="#index-format"> &para;</a></span></dt>
+<dd><p>Each <code class="code">template</code> indicates the desired form for an expression;
+either the expected form or that into which it will be transformed. At
+the same time, the indicated form implies a set of <em class="emph">pieces</em>; the
+next template in the chain applies to those pieces. For example,
+<code class="code">%poly(x)</code> specifies the transformation into a polynomial in
+<code class="code">x</code>, with the pieces being the coefficients. The passive
+<code class="code">%frac</code> treats the expression as a fraction; the pieces are the
+numerator and denominator.  Whereas the next template formats all pieces
+of the previous layer, positional <em class="emph">subtemplates</em> may be used to
+specify formats for each piece individually. This is most useful when
+the pieces have unique roles and need to be treated differently, such as
+a fraction&rsquo;s numerator and denominator.
+</p></dd></dl>
+
+<p>The full syntax of a template is<br>
+</p>
+<p><code class="code">keyword (parameter ; ...)[subtemplate ; ...]</code><br>
+</p>
+<p>The recognized keywords are described below under <a class="ref" href="#Template-keywords">Template keywords</a>. The parameters (if not
+needed) and subtemplates (along with parentheses and brackets) are optional.
+</p>
+<p>In addition to the keyword templates, arithmetic patterns are
+recognized.  This is an expression involving addition, multiplication
+and exponentiation containing a single instance of a keyword
+template. In effect, the system &lsquo;solves&rsquo; the expression to be formatted
+for the corresponding part, formats it accordingly and reinserts it. For
+example, <code class="code">format(X,a+%factor)</code> is equivalent to
+<code class="code">a+factor(X-a)</code>. Any other template is assumed to be a function to
+be applied to the expression; the result is then formatted according to
+the rest of the template chain.
+</p>
+
+<p>Examples for general restructuring:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;format&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) format((a+b*x)*(c-x)^2,%poly(x),factor);
+            3                2                        2
+(%o2)    b x  - (2 b c - a) x  + c (b c - 2 a) x + a c
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) format((1+2*eps*(q+r*cos(g))^2)^4,%series(eps,2),%trig(g),factor);
+                   2      2                2
+(%o3) 1 + eps (4 (r  + 2 q ) + 4 cos(2 g) r  + 16 cos(g) q r)
+      2        4       2  2      4                4
+ + eps  (3 (3 r  + 24 q  r  + 8 q ) + 3 cos(4 g) r
+                  3                     2      2
+ + 24 cos(3 g) q r  + 24 cos(g) q r (3 r  + 4 q )
+                2   2      2
+ + 12 cos(2 g) r  (r  + 6 q )) + . . .
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) format((1+2*a+a^2)*b + a*(1+2*b+b^2),%sum,%product,%factor);
+                              2          2
+(%o4)                a (b + 1)  + (a + 1)  b
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) format(expand((a+x)^3-a^3),%f-a^3);
+                                 3    3
+(%o5)                     (x + a)  - a
+</pre></div></div>
+
+<ul class="mini-toc">
+<li><a href="#Template-keywords-1" accesskey="1">Template keywords</a></li>
+<li><a href="#User-defined-templates" accesskey="2">User defined templates</a></li>
+<li><a href="#Determining-coefficients" accesskey="3">Determining coefficients</a></li>
+<li><a href="#Related-functions" accesskey="4">Related functions</a></li>
+<li><a href="#Implementation" accesskey="5">Implementation</a></li>
+</ul>
+<div class="subsection-level-extent" id="Template-keywords-1">
+<h4 class="subsection"><span>62.2.1 Template keywords<a class="copiable-link" href="#Template-keywords-1"> &para;</a></span></h4>
+<a class="anchor" id="Template-keywords"></a>
+<p>Keywords come in several <em class="emph">classes</em>: Algebraic, Sums, Products,
+Fractions, Complex, Bags, General, Targeting, Control, Subtemplate Aids,
+and Convenience.
+</p>
+<p>A few remarks about keywords: A passive keyword does not transform the
+expression but treats it as a sum, fraction or whatever. The order of
+the pieces corresponds to the internal ordering; subtemplate usage may
+be awkward. See the documentation of <code class="code">coerce_bag</code> for a description
+of the coercions used. Targeting templates are basically shorthand
+equivalents of structuring templates using subtemplates.
+</p>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="40%">Coersion to</th><th width="40%">Pieces and Ordering</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Algebraic</em></strong></td><td width="40%"></td><td width="40%"></td></tr>
+<tr><td width="30%"><code class="code">%poly(<var class="var">x</var><sub class="sub">1</sub>,...), %p</code></td><td width="40%">polynomial in <var class="var">x<sub class="sub">i</sub></var></td><td width="40%">coefficients (ascending exps.)</td></tr>
+<tr><td width="30%"><code class="code">%series(<em class="emph">eps</em>,<em class="emph">n</em>), %s</code></td><td width="40%">series in <em class="emph">eps</em> through order <em class="emph">n</em></td><td width="40%">coefficients (ascending exps.)</td></tr>
+<tr><td width="30%"><code class="code">%Taylor(<em class="emph">eps</em>,<em class="emph">n</em>)</code></td><td width="40%">Taylor in <em class="emph">eps</em> through order <em class="emph">n</em></td><td width="40%">coefficients (ascending exps.)</td></tr>
+<tr><td width="30%"><code class="code">%monicpoly(<var class="var">x<sub class="sub">1</sub></var>,...),%mp</code></td><td width="40%">monic polynomial in <var class="var">x<sub class="sub">i</sub></var></td><td width="40%">leading coef then coefs</td></tr>
+<tr><td width="30%"><code class="code">%trig(<var class="var">x<sub class="sub">1</sub></var>,...), %t</code></td><td width="40%">trigonometric sum in <var class="var">x<sub class="sub">i</sub></var></td><td width="40%"><code class="code">sin</code> coefs (ascending), then <code class="code">cos</code></td></tr>
+<tr><td width="30%"><code class="code">%coeff(<var class="var">v</var>,<var class="var">n</var>)</code></td><td width="40%">polynomial in <var class="var">v</var></td><td width="40%">coefficient of <var class="var">v<sup class="sup">n</sup></var> and remainder</td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="40%">Coersion to</th><th width="40%">Pieces and Ordering</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Sums</em></strong></td><td width="40%"></td><td width="40%"></td></tr>
+<tr><td width="30%"><code class="code">%sum</code></td><td width="40%"><em class="emph">passive</em></td><td width="40%">terms (<code class="code">inpart</code> order)</td></tr>
+<tr><td width="30%"><code class="code">%partfrac(<var class="var">x</var>), %pf</code></td><td width="40%">partial fraction decomp in <var class="var">x</var></td><td width="40%">terms (<code class="code">inpart</code> order)</td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="40%">Coersion to</th><th width="40%">Pieces and Ordering</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Products</em></strong></td><td width="40%"></td><td width="40%"></td></tr>
+<tr><td width="30%"><code class="code">%product, %prod</code></td><td width="40%"><em class="emph">passive</em></td><td width="40%">factors (<code class="code">inpart</code> order)</td></tr>
+<tr><td width="30%"><code class="code">%factor, %f</code></td><td width="40%">factored form</td><td width="40%">factors (<code class="code">inpart</code> order)</td></tr>
+<tr><td width="30%"><code class="code">%factor(<em class="emph">minpoly</em>), %f</code></td><td width="40%">factored with element adjoined</td><td width="40%">factors (<code class="code">inpart</code> order)</td></tr>
+<tr><td width="30%"><code class="code">%sqfr, %sf</code></td><td width="40%">square-free factored form</td><td width="40%">factors (<code class="code">inpart</code> order)</td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="40%">Coersion to</th><th width="40%">Pieces and Ordering</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Fractions</em></strong></td><td width="40%"></td><td width="40%"></td></tr>
+<tr><td width="30%"><code class="code">%frac</code></td><td width="40%"><em class="emph">passive</em></td><td width="40%">numerator and denominator</td></tr>
+<tr><td width="30%"><code class="code">%ratsimp, %r</code></td><td width="40%">rationally simplified</td><td width="40%">numerator and denominator</td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="40%">Coersion to</th><th width="40%">Pieces and Ordering</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Complex</em></strong></td><td width="40%"></td><td width="40%"></td></tr>
+<tr><td width="30%"><code class="code">%rectform, %g</code></td><td width="40%">gaussian form</td><td width="40%">real and imaginary parts</td></tr>
+<tr><td width="30%"><code class="code">%polarform</code></td><td width="40%">polar form</td><td width="40%">magnitude and phase</td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="40%">Coersion to</th><th width="40%">Pieces and Ordering</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Bags</em></strong></td><td width="40%"></td><td width="40%"></td></tr>
+<tr><td width="30%"><code class="code">%equation, %eq</code></td><td width="40%">equation</td><td width="40%">l.h.s. and r.h.s.</td></tr>
+<tr><td width="30%"><code class="code">%relation(<var class="var">r</var>), %rel</code></td><td width="40%">relation; <var class="var">r</var> in <code class="code">(=,&gt;,&gt;=,&lt;,&lt;=,!=)</code></td><td width="40%">l.h.s. and r.h.s.</td></tr>
+<tr><td width="30%"><code class="code">%list</code></td><td width="40%">list</td><td width="40%">elements</td></tr>
+<tr><td width="30%"><code class="code">%matrix</code></td><td width="40%">matrix</td><td width="40%">rows (use <code class="code">%list</code> for elements)</td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="40%">Coersion to</th><th width="40%">Pieces and Ordering</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">General</em></strong></td><td width="40%"></td><td width="40%"></td></tr>
+<tr><td width="30%"><code class="code">%expression, %expr</code></td><td width="40%"><em class="emph">passive</em></td><td width="40%">the operands (<code class="code">inpart</code> order)</td></tr>
+<tr><td width="30%"><code class="code">%preformat(<var class="var">T<sub class="sub">1</sub></var>,...)</code></td><td width="40%">format accord. to chain <var class="var">T<sub class="sub">i</sub></var></td><td width="40%">the result, not the parts</td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="70%">Function</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Targeting</em></strong></td><td width="70%"></td></tr>
+<tr><td width="30%"><code class="code">%arg(n)</code></td><td width="70%">formats the <code class="code">n</code>-th argument</td></tr>
+<tr><td width="30%"><code class="code">%lhs(<var class="var">r</var>)</code></td><td width="70%">formats the l.h.s. of an eqn. or relation (default &rsquo;=&rsquo;)</td></tr>
+<tr><td width="30%"><code class="code">%rhs(<var class="var">r</var>)</code></td><td width="70%">formats the l.h.s. of an eqn.</td></tr>
+<tr><td width="30%"><code class="code">%element(i,...), %el</code></td><td width="70%">formats an element of a matrix</td></tr>
+<tr><td width="30%"><code class="code">%num, %denom</code></td><td width="70%">formats the numerator or denominator of a fraction</td></tr>
+<tr><td width="30%"><code class="code">%match(<var class="var">P</var>)</code></td><td width="70%">formats all subexpressions for which <var class="var">P(<em class="emph">expr</em>)</var> returns true</td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="70%">Function</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Control</em></strong></td><td width="70%"></td></tr>
+<tr><td width="30%"><code class="code">%if(<var class="var">P<sub class="sub">1</sub></var>,...)[<var class="var">T<sub class="sub">1</sub></var>,...,<var class="var">T<sub class="sub">n+1</sub></var>]</code></td><td width="70%">Find first <var class="var">P<sub class="sub">i</sub>(<em class="emph">expr</em>)</var> &rarr; <code class="code">true</code>, then format <em class="emph">expr</em> using <var class="var">T<sub class="sub">i</sub></var>, else <var class="var">T<sub class="sub">n+1</sub></var></td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="70%">Function</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Subtemplate Aids</em></strong></td><td width="70%"></td></tr>
+<tr><td width="30%"><code class="code">%noop</code></td><td width="70%">does nothing; used to fill a subtemplate slot</td></tr>
+<tr><td width="30%"><code class="code">[<var class="var">T<sub class="sub">1</sub></var>,<var class="var">T<sub class="sub">2</sub></var>,...]</code></td><td width="70%">creates a template chain where an individual template was expected</td></tr>
+<tr><td width="30%"><code class="code">%ditto(<var class="var">T</var>)</code></td><td width="70%">repeats the template so that it applies to following pices</td></tr>
+</tbody>
+</table>
+<br>
+<table class="multitable">
+<thead><tr><th width="30%">Template(w/abbrev.)</th><th width="70%">Function</th></tr></thead>
+<tbody><tr><td width="30%"><strong class="strong">Class: <em class="emph">Convenience</em></strong></td><td width="70%"></td></tr>
+<tr><td width="30%"><code class="code">%subst(<em class="emph">eqns</em>,...)</code></td><td width="70%">substitutes <em class="emph">eqns</em> into expression; result is formatted at next layer</td></tr>
+<tr><td width="30%"><code class="code">%ratsubst(<em class="emph">eqns</em>,...)</code></td><td width="70%"><code class="code">lratsubst</code>&rsquo;s <em class="emph">eqns</em> into expression; result is formatted at next layer</td></tr>
+</tbody>
+</table>
+
+
+<p>Example with simplification on subexpression:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;format&quot;)$
+(%i2) foo:x^2*sin(y)^4-2*x^2*sin(y)^2+x^4*cos(y)^4-2*x^4*cos(y)^2+x^4+x^2+1$
+</pre><div class="group"><pre class="example-preformatted">(%i3) trigsimp(foo);
+              4    2     4         4    2       4
+(%o3)       (x  + x ) cos (y) - 2 x  cos (y) + x  + 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) format(foo,%p(x),trigsimp);
+                    4    4       2    4
+(%o4)              x  sin (y) + x  cos (y) + 1
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) format([a=b,c=d,e=f],%equation);
+(%o5)                 [a, c, e] = [b, d, f]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) format(%,%list);
+(%o6)                 [a = b, c = d, e = f]
+</pre></div><pre class="example-preformatted">(%i7) m1:matrix([a^2+2*a+1=q,b^2+2*b+1=r], [c^2+2*c+1=s,d^2+2*d+1=t])$
+</pre><div class="group"><pre class="example-preformatted">(%i8) format(m1,%equation,%matrix[%noop,%list[%noop,%factor]]);
+            [  2             2           ]
+            [ a  + 2 a + 1  b  + 2 b + 1 ]   [ q  r ]
+(%o8)       [                            ] = [      ]
+            [  2                     2   ]   [ s  t ]
+            [ c  + 2 c + 1    (d + 1)    ]
+</pre></div></div>
+<p>The following examples illustrate the usage with &lsquo;bags.&rsquo;
+</p><div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) format([a=b,c=d,e=f],%equation);
+(%o1) [a, c, e] = [b, d, f]
+(%i2) format(%,%list);
+(%o2) [a = b, c = d, e = f]
+(%i3) m1:matrix([a^2+2*a+1=q,b^2+2*b+1=r], [c^2+2*c+1=s,d^2+2*d+1=t])$
+(%i4) format(m1,%equation,%matrix[%noop,%list[%noop,%factor]]);
+                   [  2             2           ]
+                   [ a  + 2 a + 1  b  + 2 b + 1 ]   [ q  r ]
+(%o4)              [                            ] = [      ]
+                   [  2                     2   ]   [ s  t ]
+                   [ c  + 2 c + 1    (d + 1)    ]
+
+</pre></div></div>
+
+
+</div>
+<div class="subsection-level-extent" id="User-defined-templates">
+<h4 class="subsection"><span>62.2.2 User defined templates<a class="copiable-link" href="#User-defined-templates"> &para;</a></span></h4>
+
+<p>New templates can be defined by giving the template keyword the property
+<code class="code">formatter</code>; the value should be a function (or lambda expression)
+of the expression to be formatted and any parameters for the template.
+For example, <code class="code">%rectform</code> and <code class="code">%if</code> could be defined as
+</p>
+<p><code class="code">put(%rectform,lambda([c],block([r:rectformlist(c)],<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format-piece(r[1]) +%I* format-piece(r[2]))),formatter)</code><br>
+</p>
+<p><code class="code">put(%if, lambda([x,test],<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if test(x) then format-piece(x,1)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;format-piece(x,2)),formatter)</code><br>
+</p>
+<p>Functions used for defining templates are the following.
+</p>
+<a class="anchor" id="Item_003a-format_002fdeffn_002f_0025format_005fpiece"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-_0025format_005fpiece"><span class="category-def">function: </span><span><strong class="def-name">%format_piece</strong> <var class="def-var-arguments">(<var class="var">piece</var>,<var class="var">nth</var>)</var><a class="copiable-link" href="#index-_0025format_005fpiece"> &para;</a></span></dt>
+<dd><p><code class="code">lratsubst</code>&rsquo;s <code class="code">eqns</code> into expression and the result is formatted at the next layer.
+Format a given piece of an expression, automatically accounting for
+subtemplates and the remaining template chain. A specific subtemplate,
+rather than the next one, can be selected by specifying <var class="var">nth</var>.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002f_0025coerce_005fbag"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-_0025coerce_005fbag"><span class="category-def">function: </span><span><strong class="def-name">%coerce_bag</strong> <var class="def-var-arguments">(<var class="var">op</var>,<var class="var">expr</var>)</var><a class="copiable-link" href="#index-_0025coerce_005fbag"> &para;</a></span></dt>
+<dd><p>Attempts to coerce <var class="var">expr</var> into an expression with <var class="var">op</var> (one of
+<code class="code">=, #, &lt;, &lt;=, &gt;, &gt;=, [</code> or matrix) as the top-level operator. It
+coerces the expression by swapping operands between layers but only if
+adjacent layers are also lists, matrices or relations. This model
+assumes that a list of equations, for example, can be viewed as an
+equation whose sides are lists. Certain combinations, particularly those
+involving inequalities may not be meaningful, however, so some caution
+is advised.
+</p></dd></dl>
+
+</div>
+<div class="subsection-level-extent" id="Determining-coefficients">
+<h4 class="subsection"><span>62.2.3 Determining coefficients<a class="copiable-link" href="#Determining-coefficients"> &para;</a></span></h4>
+
+<p>We define the &lsquo;algebras&rsquo; of polynomials, trigonometric sums and power series to
+be those expressions that can be cast into the following forms.
+</p>
+$$
+\eqalign{
+{\bf P}(v_1,\cdots) &=  \{P\,|\, P=\sum_i c_i v^{p_{1,i}}_1 v^{p_{2,i}}_2 \cdots\} \cr
+{\bf T}(v_1,\cdots) &=  \{T\,|\, T=\sum_i [ c_i \cos(m_{1,i} v_1+\cdots)+s_i \sin(m'_{1,i} v_1 +\cdots)] \} \cr
+{\bf S}(v,O) &= \{S\,|\, S=\sum_i c_i v^{p_i};\,p_n \le O \} 
+}
+
+$$
+
+
+<p>The variables <var class="var">v<sub class="sub">i</sub></var> may be any atomic expression in the sense
+of <code class="code">ratvars</code>. The shorthands <code class="code">operator(op)</code> and
+<code class="code">match(predicate)</code> may be used to specify all subexpressions having
+op as an operator, or that pass the predicate, respectively.
+</p>
+<p>The coefficients <var class="var">c<sub class="sub">i</sub></var> and <var class="var">s<sub class="sub">i</sub></var> are general Maxima
+expressions. In principle they would be independent of the variables
+<var class="var">v<sub class="sub">i</sub></var>, but in practice they may contain non-polynomial
+dependence (or non-trigonometric, in the trigonometric case).  These
+non-polynomial cases would include expressions like <code class="code">(1 +
+x)<sup class="sup">n</sup></code>, where <code class="code">n</code> is symbolic. Likewise,
+<code class="code">(x<sup class="sup">a</sup>)<sup class="sup">b</sup></code> is, in general, multivalued; unless <code class="code">a =
+1</code> or <code class="code">b</code> is a member of <code class="code">Z</code>, or <code class="code">radexpand=all</code>, it will
+not be interpreted as <code class="code">x<sup class="sup">ab</sup></code> is a member of
+<strong class="strong">P</strong>. Furthermore, we extend the algebras to include lists,
+vectors, matrices and equations, by interpreting a list of polynomials,
+say, as a polynomial with lists as coefficients.
+</p>
+<p>The exponents <var class="var">p<sub class="sub">i</sub></var> in series are restricted to numbers, but
+the exponents <var class="var">c<sub class="sub">j,i</sub></var> and multiples <var class="var">m<sub class="sub">j,i</sub></var> for
+polynomials and trigonometric sums may be general expressions
+(excluding bags).
+</p>
+<p>The following functions construct a list of the coefficients and &lsquo;keys&rsquo;,
+that is, the exponents or multiples. Note that these are sparse
+representations; no coefficients are zero.<br>
+</p>
+<p><code class="code">coeffs(P,v<sub class="sub">1</sub>,...) &rarr; [[%poly,v<sub class="sub">1</sub>,...],[c<sub class="sub">1</sub>,p<sub class="sub">1,1</sub>,...],...] </code><br>
+<code class="code">trig_coeffs(T,v<sub class="sub">1</sub>,...) &rarr;</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<code class="code">[[%trig,v<sub class="sub">1</sub>,...],[[c<sub class="sub">1</sub>,m<sub class="sub">1,1</sub>,...],...],[[s<sub class="sub">1</sub>,m'<sub class="sub">1,1</sub>,...],...]]</code><br>
+<code class="code">series_coeffs(S,v,O) &rarr; [[%series,v,O],[c<sub class="sub">1</sub>,p<sub class="sub">1</sub>],...,[c<sub class="sub">n</sub>,p<sub class="sub">n</sub>]</code><br>
+<code class="code">Taylor_coeffs(S,v,O) &rarr; [[%Taylor,v,O],[c<sub class="sub">1</sub>,p<sub class="sub">1</sub>],...,[c<sub class="sub">n</sub>,p<sub class="sub">n</sub>]</code><br>
+</p>
+<p>The latter two functions both expand an expression through order
+<code class="code">O</code>, but the series version only carries expands arithmetic
+operations and is often considerably faster than <code class="code">Taylor_coeffs</code>.
+</p>
+<p>Examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;format&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) cl1:coeffs((a+b*x)*(c-x)^2,x);
+                       2          2
+(%o2) [[%poly, x], [a c , 0], [b c  - 2 a c, 1], [a - 2 b c, 2], 
+                                                          [b, 3]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i3) map('first,rest(coeffs((a+b*x)*(c-x)^2=q0+q1*x+q2*x^2+q3*x^3,x)));
+          2          2
+(%o3) [a c  = q0, b c  - 2 a c = q1, a - 2 b c = q2, b = q3]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) trig_coeffs(2*(a+cos(x))*cos(x+3*y),x,y);
+(%o4) [[%trig, x, y], [], [[1, 0, 3], [2 a, 1, 3], [1, 2, 3]]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i5) series_coeffs((a+b*x)*(c-x)^2,x,2);
+                            2          2
+(%o5) [[%series, x, 2], [a c , 0], [b c  - 2 a c, 1], 
+                                                  [a - 2 b c, 2]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i6) coeffs((a+b*x)*sin(x),x);
+(%o6)      [[%poly, x], [a sin(x), 0], [b sin(x), 1]]
+</pre></div><div class="group"><pre class="example-preformatted">(%i7) coeffs((a+log(b)*x)*(c-log(x))^2,operator(log));
+                                    2           2
+(%o7) [[%poly, log(x), log(b)], [a c , 0, 0], [c  x, 0, 1], 
+          [- 2 a c, 1, 0], [- 2 c x, 1, 1], [a, 2, 0], [x, 2, 1]]
+</pre></div></div>
+
+
+</div>
+<div class="subsection-level-extent" id="Related-functions">
+<h4 class="subsection"><span>62.2.4 Related functions<a class="copiable-link" href="#Related-functions"> &para;</a></span></h4>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002fget_005fcoef"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-get_005fcoef"><span class="category-def">function: </span><span><strong class="def-name">get_coef</strong> <var class="def-var-arguments">(<var class="var">clist</var>,<var class="var">k<sub class="sub">1</sub></var>,...)</var><a class="copiable-link" href="#index-get_005fcoef"> &para;</a></span></dt>
+<dd><p>Gets the coefficient from the coefficient list <var class="var">clist</var> corresponding
+to the keys <var class="var">k<sub class="sub">i</sub></var>. The keys are matched to variable powers when
+<var class="var">clist</var> is a <code class="code">%poly</code>, <code class="code">%series</code> or <code class="code">%Taylor</code> form. If
+<var class="var">clist</var> is a <code class="code">%trig</code> then <var class="var">k<sub class="sub">1</sub></var> should be <code class="code">sin</code>
+or <code class="code">cos</code> and the remaining keys are matched to multipliers.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002funcoef"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-uncoef"><span class="category-def">function: </span><span><strong class="def-name">uncoef</strong> <var class="def-var-arguments">(<var class="var">clist</var>)</var><a class="copiable-link" href="#index-uncoef"> &para;</a></span></dt>
+<dd><p>Reconstructs the expression from a coefficient list <var class="var">clist</var>. The
+coefficient list can be any of the coefficient list forms.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002fpartition_005fpoly"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-partition_005fpoly"><span class="category-def">function: </span><span><strong class="def-name">partition_poly</strong> <var class="def-var-arguments">(<var class="var">expr</var>,<var class="var">test</var>,<var class="var">v<sub class="sub">1</sub></var>,...)</var><a class="copiable-link" href="#index-partition_005fpoly"> &para;</a></span></dt>
+<dd><p>Partitions <var class="var">expr</var> into two polynomials; the first is made of those
+monomials for which the function test returns true and the second is the
+remainder. The test function is called on the powers of the <var class="var">v<sub class="sub">i</sub></var>.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002fpartition_005ftrig"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-partition_005ftrig"><span class="category-def">function: </span><span><strong class="def-name">partition_trig</strong> <var class="def-var-arguments">(<var class="var">expr</var>,<var class="var">sintest</var>,<var class="var">costest</var>,<var class="var">v<sub class="sub">1</sub></var>,...)</var><a class="copiable-link" href="#index-partition_005ftrig"> &para;</a></span></dt>
+<dd><p>Trigonometric analog to partition poly; The functions <var class="var">sintest</var> and
+<var class="var">costest</var> select sine and cosine terms, respectively; each are called on
+the multipliers of the <var class="var">v<sub class="sub">i</sub></var>.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002fpartition_005fseries"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-partition_005fseries"><span class="category-def">function: </span><span><strong class="def-name">partition_series</strong> <var class="def-var-arguments">(<var class="var">expr</var>,<var class="var">test</var>,<var class="var">v</var>,<var class="var">O</var>)</var><a class="copiable-link" href="#index-partition_005fseries"> &para;</a></span></dt>
+</dl>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002fpartition_005fTaylor"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-partition_005fTaylor"><span class="category-def">function: </span><span><strong class="def-name">partition_Taylor</strong> <var class="def-var-arguments">(<var class="var">expr</var>,<var class="var">test</var>,<var class="var">v</var>,<var class="var">O</var>)</var><a class="copiable-link" href="#index-partition_005fTaylor"> &para;</a></span></dt>
+<dd><p>Analog to <code class="code">partition_poly</code> for series.
+</p></dd></dl>
+
+<p>Example:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;format&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) partition_poly((a+b*x)*(c-x)^2,'evenp,x);
+                      2      2     3       2
+(%o2)   [(a - 2 b c) x  + a c , b x  + (b c  - 2 a c) x]
+</pre></div></div>
+
+<br>
+
+<p><strong class="strong">Support functions</strong>
+</p>
+<a class="anchor" id="Item_003a-format_002fdeffn_002fmatching_005fparts"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-matching_005fparts"><span class="category-def">function: </span><span><strong class="def-name">matching_parts</strong> <var class="def-var-arguments">(<var class="var">expr</var>,<var class="var">predicate</var>,<var class="var">args</var>...)</var><a class="copiable-link" href="#index-matching_005fparts"> &para;</a></span></dt>
+<dd><p>Returns a list of all subexpressions of <var class="var">expr</var> for which the application
+<code class="code">predicate(piece,args ... )</code> returns <code class="code">true</code>.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002ffunction_005fcalls"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-function_005fcalls"><span class="category-def">function: </span><span><strong class="def-name">function_calls</strong> <var class="def-var-arguments">(<var class="var">expr</var>,<var class="var">functions</var>...)</var><a class="copiable-link" href="#index-function_005fcalls"> &para;</a></span></dt>
+<dd><p>Returns a list of all calls in <var class="var">expr</var> involving any of <var class="var">functions</var>.
+</p></dd></dl>
+
+<a class="anchor" id="Item_003a-format_002fdeffn_002ffunction_005farguments"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-function_005farguments"><span class="category-def">function: </span><span><strong class="def-name">function_arguments</strong> <var class="def-var-arguments">(<var class="var">expr</var>,<var class="var">functions</var>...)</var><a class="copiable-link" href="#index-function_005farguments"> &para;</a></span></dt>
+<dd><p>Returns a list of all argument lists for calls to <var class="var">functions</var> in <var class="var">expr</var>.
+</p></dd></dl>
+
+<p>Examples:
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;format&quot;)$
+(%i2) t2:(a+log(b)*x)*(c-log(x))^2$
+</pre><div class="group"><pre class="example-preformatted">(%i3) matching_parts(t2,constantp);
+(%o3)                       [2, - 1]
+</pre></div><div class="group"><pre class="example-preformatted">(%i4) function_calls(t2,log);
+(%o4)                   [log(x), log(b)]
+</pre></div></div>
+
+</div>
+<div class="subsection-level-extent" id="Implementation">
+<h4 class="subsection"><span>62.2.5 Implementation<a class="copiable-link" href="#Implementation"> &para;</a></span></h4>
+
+<p>Original documentation is located in the share/contrib/format directory and contains an
+appendix describing the implementation algorithm in more detail.
+</p>
+
+</div>
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-fractals.html#Package-fractals" accesskey="n" rel="next">Package fractals</a>, Previous: <a href="Package-finance.html#Package-finance" accesskey="p" rel="prev">Package finance</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

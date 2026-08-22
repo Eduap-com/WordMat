@@ -1,0 +1,210 @@
+/* Basic values */
+
+'hstep(0);
+1/2$
+
+'hstep(20252);
+1$
+
+'hstep(-20252);
+0$
+
+hstep(-5);
+0$
+
+hstep(0);
+1/2$   
+
+hstep(3);
+1$
+
+hstep(-1e-10);
+0$
+
+hstep(1e-10);
+1$
+
+hstep(2.0^(-1021));
+1$
+
+hstep(exp(x));
+1$
+
+/* Reflection property */
+hstep(-2) + hstep(2);
+1$
+
+hstep(-3);
+0$
+
+hstep(-10);
+0$
+
+/* symbolic reflection */
+hstep(-x);
+1 - hstep(x)$  
+
+/* simplifications */
+hstep((1+x^2)*q);
+hstep(q)$
+
+hstep(20252 * b);
+hstep(b)$
+
+hstep(28*(a+b));
+hstep(a+b)$
+
+hstep(-28*(a+b));
+1-hstep(a+b)$
+
+/* compositions with hstep */
+realpart(hstep(x));
+hstep(x)$
+
+imagpart(hstep(x));
+0$
+
+abs(hstep(x));
+hstep(x)$
+
+conjugate(hstep(x));
+hstep(x)$
+
+/* Integrals */
+integrate(hstep(x), x);
+x*hstep(x)$
+
+integrate(hstep(x), x, -1, 1);
+1$
+
+integrate(hstep(x), x, -2, 2);
+2$
+
+integrate(hstep(x), x, -5, 5);
+5$
+
+integrate(hstep(x), x, 0, 3);
+3$
+
+integrate(hstep(x), x, -3, 0);
+0$
+
+integrate(hstep(x), x, -3, -1);
+0$
+
+integrate(hstep(x), x, 1, 4);
+3$
+
+integrate(hstep(x), x, -10, 10);
+10$
+
+integrate(hstep(-x), x, -2, 2);
+2$   /* reflection integral */
+
+integrate(hstep(x-1), x, 0, 3);
+2$
+
+integrate(hstep(2-x), x, 0, 5);
+2$
+
+integrate(hstep(x) + hstep(-x), x, -2, 2);
+4$
+
+/* Limits at zero */
+limit(hstep(x), x, 0, minus);
+0$
+
+limit(hstep(x), x, 0, plus);
+1$
+
+limit(hstep(x), x, 0);
+ind$  
+
+/* Limits at infinity */
+limit(hstep(x), x, inf);
+1$
+
+limit(hstep(x), x, minf);
+0$
+
+/* Shifted step function */
+limit(hstep(x-2), x, 2, minus);
+0$
+
+limit(hstep(x-2), x, 2, plus);
+1$
+
+limit(hstep(x+3), x, -3, minus);
+0$
+
+limit(hstep(x+3), x, -3, plus);
+1$
+
+/* Symmetry check with reflection */
+limit(hstep(-x), x, 0, minus);
+1$
+
+limit(hstep(-x), x, 0, plus);
+0$
+
+limit(hstep(1/x),x,0);
+ind$
+
+limit(hstep(x) * cos(x),x,0);
+ind$
+
+limit(hstep(x) * cos(x),x,0,plus);
+1$
+
+limit(hstep(x) * cos(x),x,0,minus);
+0$
+
+/* sign of hstep */
+sign(hstep(x));
+pz$
+
+sign(hstep(x) + 8);
+pos$
+
+block([ans], 
+  assume(x >=0),
+  ans : sign(hstep(x)),
+  forget(x >=0),
+  ans);
+pos$
+
+block([ans], 
+  assume(x <= 0),
+  ans : sign(hstep(x)),
+  forget(x <= 0),
+  ans);
+pz$
+
+/* \#4646 minor hstep problems and missing features */
+hstep(x^2+1);
+1$
+
+block([ans],
+  declare(z,complex),
+  ans : hstep(z^2+1),
+  remove(z,complex),
+  [inpart(ans,0), inpart(ans,1)]);
+[hstep, z^2+1]$
+
+errcatch(sign(hstep(1-%i)));
+[]$
+
+errcatch(csign(hstep(1-%i)));
+[]$
+
+hstep(exp(z));
+1$
+
+block([ans],
+  declare(z,complex),
+  ans : hstep(exp(z)),
+  remove(z,complex),
+  [inpart(ans,0), inpart(ans,1)]);
+[hstep,%e^z]$
+
+

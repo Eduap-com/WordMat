@@ -23,6 +23,8 @@ It mainly loads unit.mac which makes maxima able to calculate with units.
 This file is change from the original file, to add more units.
 It is placed in *Maxima-sbcl-5.38.1\share\maxima\5.38.1\share\contrib\unit* by the Windows installer
 
+**unit-functions.lisp**
+A repaired file in the units package that otherwise cause an error
 
 **Other changes to the maxima installation are:**
 - maxima.core file is changed on both Windows and Mac, but must be build separately (*Maxima-sbcl-5.38.1\lib\maxima\5.38.1\binary-sbcl\maxima.core*)

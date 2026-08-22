@@ -1,0 +1,174 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=etex 2026.8.17)  18 AUG 2026 22:12
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**txiversion.tex
+(./txiversion.tex
+(/home/dauti/Software/maxima-code/maxima-5.50.0/crosscompile-windows/build/maxi
+ma-prefix/src/maxima/share/logic/doc/texinfo.tex
+Loading texinfo [version 2018-02-12.17]:
+\outerhsize=\dimen16
+\outervsize=\dimen17
+\cornerlong=\dimen18
+\cornerthick=\dimen19
+\topandbottommargin=\dimen20
+\bindingoffset=\dimen21
+\normaloffset=\dimen22
+\txipagewidth=\dimen23
+\txipageheight=\dimen24
+\headlinebox=\box16
+\footlinebox=\box17
+\margin=\insert252
+\EMsimple=\toks13
+\groupbox=\box18
+\groupinvalidhelp=\toks14
+\mil=\dimen25
+\exdentamount=\skip18
+\inmarginspacing=\skip19
+\centerpenalty=\count27
+ pdf,
+\tempnum=\count28
+\lnkcount=\count29
+\filename=\toks15
+\filenamelength=\count30
+\pgn=\count31
+\toksA=\toks16
+\toksB=\toks17
+\toksC=\toks18
+\toksD=\toks19
+\boxA=\box19
+\boxB=\box20
+\countA=\count32
+\nopdfimagehelp=\toks20
+ fonts,
+\textleading=\dimen26
+\sffam=\fam8
+ markup,
+\fontdepth=\count33
+ glyphs,
+\errorbox=\box21
+
+page headings,
+\titlepagetopglue=\skip20
+\titlepagebottomglue=\skip21
+\evenheadline=\toks21
+\oddheadline=\toks22
+\evenfootline=\toks23
+\oddfootline=\toks24
+ tables,
+\tableindent=\dimen27
+\itemindent=\dimen28
+\itemmargin=\dimen29
+\itemmax=\dimen30
+\itemno=\count34
+\multitableparskip=\skip22
+\multitableparindent=\skip23
+\multitablecolspace=\dimen31
+\multitablelinespace=\skip24
+\colcount=\count35
+\everytab=\toks25
+ conditionals,
+\doignorecount=\count36
+ indexing,
+\dummybox=\box22
+\whatsitskip=\skip25
+\whatsitpenalty=\count37
+\entryrightmargin=\dimen32
+\thinshrinkable=\skip26
+\entrybox=\box23
+\delayedbox=\box24
+\interbox=\box25
+\secondaryindent=\skip27
+\partialpage=\box26
+\doublecolumnhsize=\dimen33
+\savedtopmark=\toks26
+\savedfirstmark=\toks27
+\balancedcolumns=\box27
+ sectioning,
+\unnumberedno=\count38
+\chapno=\count39
+\secno=\count40
+\subsecno=\count41
+\subsubsecno=\count42
+\appendixno=\count43
+\absseclevel=\count44
+\secbase=\count45
+\chapheadingskip=\skip28
+\secheadingskip=\skip29
+\subsecheadingskip=\skip30
+ toc,
+\tocfile=\write0
+\contentsrightmargin=\skip31
+\savepageno=\count46
+\lastnegativepageno=\count47
+\tocindent=\dimen34
+ environments,
+\lispnarrowing=\skip32
+\envskipamount=\skip33
+\circthick=\dimen35
+\cartouter=\dimen36
+\cartinner=\dimen37
+\normbskip=\skip34
+\normpskip=\skip35
+\normlskip=\skip36
+\lskip=\skip37
+\rskip=\skip38
+\nonfillparindent=\dimen38
+\tabw=\dimen39
+\verbbox=\box28
+
+defuns,
+\defbodyindent=\skip39
+\defargsindent=\skip40
+\deflastargmargin=\skip41
+\defunpenalty=\count48
+\parencount=\count49
+\brackcount=\count50
+ macros,
+\savedcatcodeone=\count51
+\savedcatcodetwo=\count52
+\paramno=\count53
+\macname=\toks28
+ cross references,
+\auxfile=\write1
+\savesfregister=\count54
+\toprefbox=\box29
+\printedrefnamebox=\box30
+\infofilenamebox=\box31
+\printedmanualbox=\box32
+ insertions,
+\footnoteno=\count55
+\SAVEfootins=\box33
+\SAVEmargin=\box34
+
+(/usr/share/texlive/texmf-dist/tex/generic/epsf/epsf.tex
+This is `epsf.tex' v2.7.4 <14 February 2011>
+\epsffilein=\read1
+\epsfframemargin=\dimen40
+\epsfframethickness=\dimen41
+\epsfrsize=\dimen42
+\epsftmp=\dimen43
+\epsftsize=\dimen44
+\epsfxsize=\dimen45
+\epsfysize=\dimen46
+\pspoints=\dimen47
+)
+\noepsfhelp=\toks29
+ localization,
+\nolanghelp=\toks30
+\countUTFx=\count56
+\countUTFy=\count57
+\countUTFz=\count58
+ formatting,
+\defaultparindent=\dimen48
+ and turning on texinfo input format.) [1] ) 
+Here is how much of TeX's memory you used:
+ 3046 strings out of 494964
+ 29650 string characters out of 6156926
+ 60973 words of memory out of 5000000
+ 4644 multiletter control sequences out of 15000+600000
+ 34384 words of font info for 120 fonts, out of 8000000 for 9000
+ 1179 hyphenation exceptions out of 8191
+ 10i,4n,16p,300b,318s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on txiversion.dvi (1 page, 172 bytes).

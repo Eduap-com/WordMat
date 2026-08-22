@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Concept Index (Xmaxima Manual)</title>
+
+<meta name="description" content="Concept Index (Xmaxima Manual)">
+<meta name="keywords" content="Concept Index (Xmaxima Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style type="text/css">
+<!--
+/* Define colors for light and dark mode */
+
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+a.summary-letter-printindex {text-decoration: none}
+span.program-in-footer {font-size: smaller}
+span:hover a.copiable-link {visibility: visible}
+td.printindex-index-entry {vertical-align: top}
+td.printindex-index-section {vertical-align: top; padding-left: 1em}
+th.entries-header-printindex {text-align:left}
+th.sections-header-printindex {text-align:left; padding-left: 1em}
+:root {
+    /* Default light mode colors */
+    --background-color: white;
+    --text-color: black;
+    --example-background-color: rgb(238,238,255);
+    --link-color: #00f;
+    --link-visited-color: #a0a;
+    --hover-background-color: #555753;
+    --hover-color: #cdf;
+    --nav-panel-background-color: #CDCCDD;
+    --div-titlebox-background-color: rgb(200,255,255);
+    --div-synopsisbox-backgraound-color: rgb(255,220,255);
+    --pre-example-border: 1px solid rgb(180,180,180);
+    --div-categorybox-border: 1px solid gray;
+    --div-categorybox-background-color: #fdf6e3;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark Mode Overrides */
+        --background-color: #444;
+        --text-color: #eee;
+        --example-background-color: #454545;
+        --link-color: #9df;
+        --link-visited-color: #9fd;
+        --hover-background-color: #ddd;
+        --hover-color: #55f;
+        --nav-panel-background-color: #555;
+        --div-titlebox-background-color: black;
+        --div-synopsisbox-backgraound-color: black;
+        --pre-example-border: 1px solid black;
+        --div-categorybox-border: 1px solid gray;
+        --div-categorybox-background-color: #544;
+    }
+}
+
+/* Overrides to the default Makeinfo CSS */
+div.display {margin-left: 0}
+div.example {
+    margin-left: 0;
+    font-family: "Courier New", "DejaVu Sans Mono", monospace
+}
+/* end of overrides */
+
+body {
+    color: var(--text-color);
+    background: var(--background-color);
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: Arial, Verdana, Helvetica, sans-serif
+}
+h1 { font-size: 150% }
+h2 { font-size: 125% }
+h3 { font-size: 110% }
+a:link {
+    text-decoration: none;
+    color: var(--link-color);
+}
+a:visited {color: var(--link-visited-color) }
+a:hover, span.button:hover {
+    background-color: var(--hover-background-color);
+    color: var(--hover-color);
+}
+/*
+ * What are these used for?  I (rtoy) can't find these anywhere.
+ * Commenting these out for now, but they should be removed if they're
+ * not really used anywhere.
+ */
+/*
+div.textbox {
+    border: solid;
+    border-width: thin;
+    padding: 1em 2em;
+}
+div.titlebox {
+    border: none;
+    padding-top: 1em 2em;
+    background: var(--div-titlebox-background-color);
+}
+div.synopsisbox {
+    border: none;
+    padding-top: 1em 2em;
+    background: var(--div-synopsisbox-background-color);
+}
+*/
+
+pre.example, pre.example-preformatted {
+    border: var(--pre-example-border);
+    color: var(--text-color);
+    padding: 5px;
+    background-color: var(--example-background-color);
+    /* Add scrollbar for examples for narrow windows */
+    overflow: auto;
+}
+
+/*
+ * For pygments, make the background color of the highlighted code the
+ * same as the example background color.  Without this, it looks funny.
+ */
+
+div.highlight {
+    background-color: var(--example-background-color) !important;
+}
+
+div.spacerbox { border: none; padding: 2em 0 }
+div.image { margin: 0; padding: 1em; text-align: center }
+div.categorybox {
+    border: var(--div-categorybox-border);
+    padding: 1em;
+    background: var(--div-categorybox-background-color);
+}
+img {
+    max-width:80%;
+    max-height: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+tt, code { font-family: "Courier New", "DejaVu Sans Mono", monospace }
+
+/*
+ * Put background color on the navigation bar
+ * Texinfo 7.1 and later uses .nav-panel.  6.8 uses div.header.
+ */
+div.header, .nav-panel {
+    background-color: var(--nav-panel-background-color);
+    padding: 3px 10px;
+}
+
+/*
+ * Pygments uses a line height of 125%, which seems too small compared
+ * to what we used to do.
+ */
+div.highlight pre {
+    line-height: normal !important;
+}
+
+/* Reduce the indentation of lists and descriptions */
+ul,ol { padding-left: 1em }
+dd { margin-left: 0.5em }
+
+@media screen and (min-width: 600px) {
+    body {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    div.display { margin: 0 2em }
+    div.example { margin: 0 2em }
+    pre.example, pre.example-preformatted { padding: 1em }
+    ul,ol { padding-left: 2em }
+    dd { margin-left: 1.5em }
+}
+
+-->
+</style>
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+
+
+</head>
+
+<body lang="en">
+<div class="unnumbered-level-extent" id="Concept-Index">
+<table class="nav-panel">
+<tr><td class="nav-button">[<a href="Getting-Help.html" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td class="nav-button">[<a href="Getting-Help.html" title="Previous section in reading order"> &lt; </a>]</td>
+<td class="nav-button">[ Up ]</td>
+<td class="nav-button">[ &gt; ]</td>
+<td class="nav-button">[ &gt;&gt; ]</td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button">[<a href="index.html" title="Cover (top) of document">Top</a>]</td>
+<td class="nav-button">[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td class="nav-button">[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td class="nav-button">[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="unnumbered" id="Concept-Index-1"><span>Concept Index<a class="copiable-link" href="#Concept-Index-1"> &para;</a></span></h1>
+
+<div class="printindex cp-printindex">
+<table class="cp-letters-header-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Concept-Index-1_cp_symbol-1"><b>;</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_symbol-2"><b>$</b></a>
+ &nbsp; 
+<br>
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-A"><b>A</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-C"><b>C</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-D"><b>D</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-E"><b>E</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-F"><b>F</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-G"><b>G</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-H"><b>H</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-I"><b>I</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-K"><b>K</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-O"><b>O</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-P"><b>P</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-R"><b>R</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-S"><b>S</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-T"><b>T</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-Y"><b>Y</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-Z"><b>Z</b></a>
+ &nbsp; 
+</td></tr></table>
+<table class="cp-entries-printindex">
+<tr><td></td><th class="entries-header-printindex">Index Entry</th><th class="sections-header-printindex">Section</th></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_symbol-1">;</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-_003b">;</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Entering-commands">3 Entering commands</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_symbol-2">$</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-_0024">$</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Entering-commands">3 Entering commands</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-A">A</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Alt_002dg">Alt-g</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Alt_002di">Alt-i</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Alt_002dn">Alt-n</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Input-lines-history">3.1 Input lines history</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Alt_002dp">Alt-p</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Input-lines-history">3.1 Input lines history</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Alt_002ds">Alt-s</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-B">B</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Batch-file">Batch file</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Main-Window.html#index-browser">browser</a></td><td class="printindex-index-section"><a href="Main-Window.html">2 Xmaxima Window</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-C">C</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Clear-input">Clear input</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-Close">Close</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-Config">Config</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Copy">Copy</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Ctrl_002da">Ctrl-a</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002da-1">Ctrl-a</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002db">Ctrl-b</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002dc">Ctrl-c</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002de">Ctrl-e</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002df">Ctrl-f</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002dj">Ctrl-j</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Entering-commands">3 Entering commands</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002dk">Ctrl-k</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002dn">Ctrl-n</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002dp">Ctrl-p</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002du">Ctrl-u</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Entering-commands">3 Entering commands</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002du-1">Ctrl-u</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002dv">Ctrl-v</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002dx">Ctrl-x</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Ctrl_002dy">Ctrl-y</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Cut">Cut</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-D">D</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-Dragging">Dragging</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-E">E</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Edit">Edit</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Edit-1">Edit</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-Embedded">Embedded</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-End">End</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-F">F</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-File">File</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-G">G</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-graph2d">graph2d</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-H">H</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-Help">Help</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Home">Home</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-I">I</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Interrupt">Interrupt</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-K">K</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Kill">Kill</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-O">O</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-openplot_005fcurves">openplot_curves</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-P">P</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-PageDown">PageDown</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-PageUp">PageUp</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Other-key-combinations">3.3 Other key combinations</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Paste">Paste</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-plot2d">plot2d</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-plot3d">plot3d</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-plotdf">plotdf</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Main-Window.html#index-Preferences">Preferences</a></td><td class="printindex-index-section"><a href="Main-Window.html">2 Xmaxima Window</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-R">R</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-Replot">Replot</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Restart">Restart</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Restore-Maxima-State">Restore Maxima State</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-Rotate">Rotate</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-S">S</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-Save">Save</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Save-Maxima-Input">Save Maxima Input</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Session-control.html#index-Save-Maxima-State">Save Maxima State</a></td><td class="printindex-index-section"><a href="Session-control.html">4 Session control</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-T">T</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Main-Window.html#index-text-window">text window</a></td><td class="printindex-index-section"><a href="Main-Window.html">2 Xmaxima Window</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-Y">Y</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Entering-commands.html#index-Yank">Yank</a></td><td class="printindex-index-section"><a href="Entering-commands.html#Cutting-and-pasting">3.2 Cutting and pasting</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-Index-1_cp_letter-Z">Z</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="Xmaxima-plots.html#index-Zoom">Zoom</a></td><td class="printindex-index-section"><a href="Xmaxima-plots.html">5 Xmaxima plots</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+</table>
+<table class="cp-letters-footer-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Concept-Index-1_cp_symbol-1"><b>;</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_symbol-2"><b>$</b></a>
+ &nbsp; 
+<br>
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-A"><b>A</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-B"><b>B</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-C"><b>C</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-D"><b>D</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-E"><b>E</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-F"><b>F</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-G"><b>G</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-H"><b>H</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-I"><b>I</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-K"><b>K</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-O"><b>O</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-P"><b>P</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-R"><b>R</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-S"><b>S</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-T"><b>T</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-Y"><b>Y</b></a>
+ &nbsp; 
+<a class="summary-letter-printindex" href="#Concept-Index-1_cp_letter-Z"><b>Z</b></a>
+ &nbsp; 
+</td></tr></table>
+</div>
+</div>
+<hr>
+<table class="nav-panel">
+<tr><td class="nav-button">[<a href="Getting-Help.html" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td class="nav-button">[ &gt;&gt; ]</td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button">[<a href="index.html" title="Cover (top) of document">Top</a>]</td>
+<td class="nav-button">[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td class="nav-button">[<a href="#Concept-Index" title="Index">Index</a>]</td>
+<td class="nav-button">[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+  <span class="program-in-footer">This document was generated on <em class="emph">August 18, 2026</em> using <a class="uref" href="https://www.gnu.org/software/texinfo/"><em class="emph">makeinfo</em></a>.</span>
+</p>
+
+
+</body>
+</html>

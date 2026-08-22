@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package rk_adaptive (Maxima 5.50.9.gf03405fbf Manual)</title>
+
+<meta name="description" content="Package rk_adaptive (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="keywords" content="Package rk_adaptive (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-romberg.html#Package-romberg" rel="next" title="Package romberg">
+<link href="Package-ratpow.html#Package-ratpow" rel="prev" title="Package ratpow">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Package-rk_005fadaptive">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-romberg.html#Package-romberg" accesskey="n" rel="next">Package romberg</a>, Previous: <a href="Package-ratpow.html#Package-ratpow" accesskey="p" rel="prev">Package ratpow</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-rk_005fadaptive-1"><span>90 Package rk_adaptive<a class="copiable-link" href="#Package-rk_005fadaptive-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-rk_005fadaptive_002fnode_002fIntroduction-to-rk_005fadaptive"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-rk_005fadaptive" accesskey="1">Introduction to rk_adaptive</a></li>
+<li><a href="#Functions-and-Variables-for-rk_005fadaptive" accesskey="2">Functions and Variables for rk_adaptive</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-rk_005fadaptive">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-rk_005fadaptive" accesskey="n" rel="next">Functions and Variables for rk_adaptive</a>, Previous: <a href="#Package-rk_005fadaptive" accesskey="p" rel="prev">Package rk_adaptive</a>, Up: <a href="#Package-rk_005fadaptive" accesskey="u" rel="up">Package rk_adaptive</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-rk_005fadaptive-1"><span>90.1 Introduction to rk_adaptive<a class="copiable-link" href="#Introduction-to-rk_005fadaptive-1"> &para;</a></span></h3>
+
+<p><code class="code">rk_adaptive</code> employs the runge-kutta method for numberically solving differential
+equations, but other than <code class="code">rk</code> it tries to find a sensible step size, which reduces
+both runtime and amount of data produced.
+</p>
+<a class="anchor" id="Item_003a-rk_005fadaptive_002fnode_002fFunctions-and-Variables-for-rk_005fadaptive"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-rk_005fadaptive">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-rk_005fadaptive" accesskey="p" rel="prev">Introduction to rk_adaptive</a>, Up: <a href="#Package-rk_005fadaptive" accesskey="u" rel="up">Package rk_adaptive</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-rk_005fadaptive-1"><span>90.2 Functions and Variables for rk_adaptive<a class="copiable-link" href="#Functions-and-Variables-for-rk_005fadaptive-1"> &para;</a></span></h3>
+
+<a class="anchor" id="rk_005fadaptive"></a><a class="anchor" id="Item_003a-rk_005fadaptive_002fdeffn_002frk_005fadaptive"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-rk_005fadaptive"><span class="category-def">Function: </span><span><strong class="def-name">rk_adaptive</strong> <var class="def-var-arguments">(<var class="var">expr</var>, <var class="var">vars</var>, <var class="var">vars_initval</var>, <var class="var">var</var>,</var><a class="copiable-link" href="#index-rk_005fadaptive"> &para;</a></span></dt>
+<dd><p><var class="var">startval</var>, <var class="var">endval</var>, <var class="var">params1...</var>)
+</p>
+<p>Tries to solve the ODE whose derivates are defined by <code class="code">expr</code> to the variables
+<code class="code">vars</code>, starting at their initial values <code class="code">vars_initval</code>.
+The independent variable (in physics: normally time) is <code class="code">var</code>, being stepped from
+<code class="code">startval</code> to <code class="code">endval</code>.
+</p>
+<p>Sometimes it speeds up the calculation to use a floating-point number as
+<code class="code">startval</code>, as using floars will prevent all results from becoming endless rational
+numbers.
+</p>
+<p>The following optional parameters are accepted:
+</p>
+<ul class="itemize mark-bullet">
+<li><code class="code">maxstep=num</code>: The maximum step size to be used.
+</li><li><code class="code">minstep=num</code>: The minimum step size to be used.
+</li><li><code class="code">timestep_initial=num</code>: The initial guess for the optimum time step to start with.
+</li><li><code class="code">maxabserr=num</code>: The maximum absolute error of the resulting curves.
+</li><li><code class="code">maxrelerr=num</code>: The maximum relative error of the resulting curves as a
+      fallback for variables with big values for which <code class="code">maxabserr</code> might be too sensitive.
+</li></ul>
+
+<p>See also <a class="ref" href="Numerical.html#rk">rk</a>.
+</p>
+<p>Example:
+</p><div class="example user-maxima">
+<pre class="example-preformatted">(%i1) pnts:rk_adaptive(-1/10*x,x,1,t,0,100)  $
+</pre></div>
+</dd></dl>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-romberg.html#Package-romberg" accesskey="n" rel="next">Package romberg</a>, Previous: <a href="Package-ratpow.html#Package-ratpow" accesskey="p" rel="prev">Package ratpow</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

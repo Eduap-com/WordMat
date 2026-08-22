@@ -1,0 +1,175 @@
+/* bogus arguments */
+errcatch(sinc());
+[]$
+
+errcatch(sinc(a,b));
+[]$
+
+/* numeric inputs */
+sinc(0);
+1$
+
+block([numer : true], sinc(0));
+1.0$
+
+sinc(0.0);
+1.0$
+
+sinc(1.0);
+0.8414709848078965$
+
+sinc(2.5);
+ 0.23938885764158258$
+
+sinc(-3.0);
+0.0470400026866224$
+
+sinc(1.0b0);
+8.414709848078965b-1$
+
+sinc(1.0 + 2.0*%i);
+1.416996119211876 - 0.8743911970021461*%i$
+
+sinc(1.0b0 + 3.0b0*%i);
+2.470968822383473b0-2.000225543972226b0*%i$
+
+block([numer:true], sinc(1));
+0.8414709848078965$
+
+block([numer:true], sinc(2 + 3*%i));
+ 0.4463290318402434-2.7539470277436475*%i$
+
+block([numer:true], float(sinc(0.0)));
+1.0$
+
+/* binary 64 subnormals -- the next two tests fail using Clozure (this Clozure bug has been reported) */
+sinc(0.5000001*2.0^(-1075));
+1.0$
+
+sinc(expand(0.5000001*2.0^(-1075) * (1+%i)));
+1.0$
+
+/* mixed float & bigfloat */
+sinc(1.2 + 3.5b0*%i);
+2.886489912329489b0-3.423637846717706b0*%i$
+
+sinc(0.0b0);
+1.0b0$
+
+block([numer : true], sinc(0.0b0));
+1.0$
+
+/* reflection */
+sinc(-x) - sinc(x);
+0$
+
+sinc(a+b) - sinc(-a-b);
+0$
+
+/* simplifications */
+sinc(%pi);
+0$
+
+(declare(n,integer),assume(n > 0), 0);
+0$
+
+sinc(n*%pi);
+0$
+
+sinc(2*n*%pi + %pi/3);
+(sqrt(3)/2)/(2*n * %pi + %pi/3)$
+
+(forget(n > 0), remove(n,integer),0);
+0$
+
+/* Taylor polynomials -------------------- */
+
+taylor(sinc(x), x, 0, 6);
+1-x^2/6+x^4/120-x^6/5040$
+
+taylor(sinc(x), x, %pi/2, 3);
+2/%pi-(4*(x-%pi/2))/%pi^2-((%pi^2-8)*(x-%pi/2)^2)/%pi^3+((2*%pi^2-16)*(x-%pi/2)^3)/%pi^4$
+
+taylor(sinc(a*x) - sin(a*x)/(a*x),x,0,8);
+0$
+
+/* test taylorize */
+sinc(taylor(x+x^2,x,0,5));
+1-x^2/6-x^3/3-(19*x^4)/120+x^5/30$
+
+sinc(taylor(x+x^2,x,0,5)) - taylor(sinc(x+x^2),x,0,5);
+0$
+
+/* limits */
+
+limit(sinc(x), x, 0);
+1$
+
+limit(sinc(x), x, inf);
+0$
+
+limit(sinc(x), x, -inf);
+0$
+
+limit(sinc(x), x, minf);
+0$
+
+limit((sinc(x)-1)/x^2,x,0);
+-1/6$
+
+limit((sinc(x)-1 + x^2/6)/x^4,x,0);
+1/120$
+
+limit(sinc(sin(x)),x,inf);
+ind$
+
+/* derivatives */
+diff(sinc(x), x);
+(cos(x)-sinc(x))/x$
+
+ratsimp(subst(sinc(x) = sin(x)/x, diff(sinc(x) - sin(x)/x,x)));
+0$
+
+diff(sinc(x), x, 2);
+(-((cos(x)-sinc(x))/x)-sin(x))/x-(cos(x)-sinc(x))/x^2$
+
+/* antiderivatives  */
+
+integrate(sinc(x), x);
+expintegral_si(x)$
+
+integrate(sinc(a*x), x);
+expintegral_si(a*x)/a$
+
+/* rectform */
+rectform(sinc(a+%i*b));
+(cos(a)*b*sinh(b)+a*sin(a)*cosh(b))/(b^2+a^2)+(%i*(a*cos(a)*sinh(b)-sin(a)*b*cosh(b)))/(b^2+a^2)$
+
+ polarform(sinc(1 + %i));
+ %e^(%i*atan(((cos(1)*sinh(1))/2-(cosh(1)*sin(1))/2)
+                    /((cos(1)*sinh(1))/2+(cosh(1)*sin(1))/2)))
+ *sqrt(((cos(1)*sinh(1))/2+(cosh(1)*sin(1))/2)^2
+        +((cos(1)*sinh(1))/2-(cosh(1)*sin(1))/2)^2)$
+        
+/* sign */
+block([ans],
+   assume(-%pi < x, x < %pi), 
+   ans : [sign(sinc(x)), sign(sinc(-x))],
+   forget(-%pi < x, x < %pi),
+   ans);
+[pos, pos]$
+
+block([ans],
+   assume(-%pi <= x, x <= %pi), 
+   ans : [sign(sinc(x)), sign(sinc(-x))],
+   forget(-%pi <= x, x <= %pi),
+   ans);
+[pz, pz]$
+
+/* conjugate */
+block([ans],
+   declare(z,complex),
+   ans : conjugate(sinc(z)),
+   forget(z,complex),
+   ans);
+sinc(conjugate(z))$

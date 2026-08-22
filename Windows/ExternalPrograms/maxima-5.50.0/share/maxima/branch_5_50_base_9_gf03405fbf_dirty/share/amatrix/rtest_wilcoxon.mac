@@ -1,0 +1,47 @@
+/* copyright 2007 by Robert Dodier
+ * I release this file under the terms of the GNU General Public License.
+ */
+
+(if ?mget ('wilcoxon, '?mexpr) = false
+     then (kill (all),
+           load (amatrix),
+           load (wilcoxon)),
+ set_random_state (make_random_state (1234)),
+ 0);
+0;
+
+(set_random_state (make_random_state (1234)),
+ foo : random_matrix (20, 6),
+ foo [all, 4] : amatrixmap (lambda ([x, y], if x + y > 1.0 then 1 else 0), foo [all, 1], foo [all, 2]),
+ foo [all, 5] : amatrixmap (lambda ([x], if x > 0.5 then 1 else 0), foo [all, 3]),
+ foo [all, 6] : amatrixmap (lambda ([x], if x > 0.5 then 1 else 0), foo [all, 6]),
+ 0);
+0;
+
+wilcoxon (foo [all, 1], foo [all, 4]);
+''(69/(6 * 14));
+ 
+wilcoxon (foo [all, 1], foo [all, 5]);
+''(111/2/(8 * 12));
+ 
+wilcoxon (foo [all, 1], foo [all, 6]);
+''(65/(8 * 12));
+ 
+wilcoxon (foo [all, 2], foo [all, 4]);
+''(80/(6 * 14));
+ 
+wilcoxon (foo [all, 2], foo [all, 5]);
+''(85/2/(8 * 12));
+ 
+wilcoxon (foo [all, 2], foo [all, 6]);
+''(61/2/(8 * 12));
+ 
+wilcoxon (foo [all, 3], foo [all, 4]);
+''(40/(6 * 14));
+ 
+wilcoxon (foo [all, 3], foo [all, 5]);
+''(96/(8 * 12));
+ 
+wilcoxon (foo [all, 3], foo [all, 6]);
+''(42/(8 * 12));
+ 

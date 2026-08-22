@@ -653,10 +653,20 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     On Error GoTo fejl
     
 #If Mac Then
-    If PartnerShip Then
-        s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacversionP.txt")
+    Dim MacArch As String
+    MacArch = RunScript("GetMacArch", vbNullString) ' Application.Run("RunScript", "GetMacArch", "")
+    If MacArch = "Intel" Then
+        If PartnerShip Then
+            s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacintelversionP.txt")
+        Else
+            s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacintelversion.txt")
+        End If
     Else
-        s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacversion.txt")
+        If PartnerShip Then
+            s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacversionP.txt")
+        Else
+            s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacversion.txt")
+        End If
     End If
     If InStr(s, "404 Not Found") > 0 Then s = vbNullString
 #Else

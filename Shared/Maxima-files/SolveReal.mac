@@ -28,7 +28,7 @@ define_variable(solverealmaximasolve,true,boolean)$
 newcontext(solreal)$context:initial$
 sbclversion() := ?lisp\-implementation\-version()$
 
-op(qexpr):=part(qexpr,0)$ /* In maxima v.1.49 op(x) no longer recognizes partswitch. However part does. The manual says op(x) is equivalent to part(x,0) with partswitch=false - hence this work around to avoid errors using op. - It is probably better to make new op2(expr) instead of redefining as here.  */
+op2(qexpr):=part(qexpr,0)$ /* In maxima v.1.49 op(x) no longer recognizes partswitch. However part does. The manual says op(x) is equivalent to part(x,0) with partswitch=false - hence this work around to avoid errors using op. */
 
 containx(exprq,xqz):=block([],member(xqz,listofvars(exprq)))$
 containanyx(exprq,xqz):=block([],not(lfreeof(xqz,listofvars(exprq)) ))$ /* for solvesystem */
@@ -39,7 +39,7 @@ ToFrac(exprq):=block([zq],zq:ev(rat(exprq),keepfloat=false),
 
 matchdeclare([aliz,aliz2,aliz3,aliz4,aliz5],all)$
 matchdeclare([alizx,alizx2],lambda([z],containx(z,solvar)))$
-matchdeclare(aliz1ledx,lambda([z],is(op(z)#"*") and containx(z,solvar)))$
+matchdeclare(aliz1ledx,lambda([z],is(op2(z)#"*") and containx(z,solvar)))$
 matchdeclare([aliznotx,aliznotx2,aliznotx3,aliznotx4],lambda([z],not(containx(z,solvar))))$
 matchdeclare([aliznotxy,aliznotxy2,aliznotxy3],lambda([z],not(containx(z,solvar) or containx(z,solvar2) or is(z=0)) ))$
 matchdeclare([aliznotanyx,aliznotanyx2],lambda([z],not(containanyx(z,cons(solvar,solsysvars)))))$
@@ -62,7 +62,7 @@ matchdeclare(alizneginteger,lambda([z],integerp(ToFrac(z) and z<0 )))$
 matchdeclare(aliznegativenum,lambda([z],if constantp(z) then is(z<0) else false))$
 matchdeclare(aliznegative,lambda([z],is(z<0)))$
 matchdeclare(aliznegative0,lambda([z],is(z<=0)))$
-matchdeclare(aliznegative2,lambda([z],is(op(z)="-")))$
+matchdeclare(aliznegative2,lambda([z],is(op2(z)="-")))$
 matchdeclare([alizpositive,alizpositive2],lambda([z],not(is(is(z>0)=false))))$
 matchdeclare([aliznotzero,aliznotzero2],lambda([z],not(is(is(z#0)=false))))$
 matchdeclare(alizimag,lambda([z],block(if is(freeof(%i,z)) then return(false),if abs(ev(imagpart(z)/realpart(z),numer))>10^-14 then return(true),return(false) )))$
@@ -72,8 +72,8 @@ matchdeclare(alizilllambertw,lambda([z],is(z<-1/%e)))$
 matchdeclare(alizlambertw2sol,lambda([z],is(z>-1/%e and z<0)))$
 matchdeclare(aliznum,numberp)$
 matchdeclare(aliznotnum,lambda([z],not(numberp(z))))$
-matchdeclare(alizaddop,lambda([z],is(op(z)="+" and containx(z,solvar))))$
-matchdeclare(aliznotaddop,lambda([z],is(op(z)#"+")))$
+matchdeclare(alizaddop,lambda([z],is(op2(z)="+" and containx(z,solvar))))$
+matchdeclare(aliznotaddop,lambda([z],is(op2(z)#"+")))$
 matchdeclare(aliznotone,lambda([z],is(z#1) and is(z#1.0)))$
 matchdeclare([alizatom,alizatom2],atom)$
 
@@ -426,20 +426,20 @@ errcatch(res2:ldefint(udt,var,x0,x1)), if numberp(res2) then return(res2),
 res1)$
 
 zerorule(exprq):=block([indq,ledq,restq,xledq,exprq2],partswitch:true,
-if op(exprq)#"=" or inpart(exprq,3)#end then return(exprq),
+if op2(exprq)#"=" or inpart(exprq,3)#end then return(exprq),
 if CheckSolved(exprq) then return(exprq),
 /* exprq2:factor(lhs(exprq)-rhs(exprq))=0, */
 exprq2:factoreq(exprq),
 exprq2:lhs(exprq2)-rhs(exprq2),
-if op(exprq2)="-" and part(exprq2,2)=end then exprq2:-exprq2,
-if not(op(exprq2)="*") then 
+if op2(exprq2)="-" and part(exprq2,2)=end then exprq2:-exprq2,
+if not(op2(exprq2)="*") then 
 	exprq2:sqfr(exprq2)=0 
 else 
 	exprq2:exprq2=0,
 if rhs(exprq2)#0 then return
 (exprq),
-if op(lhs(exprq2))="-" then exprq2:-exprq2,
-if op(lhs(exprq2))#"*" then return(exprq),
+if op2(lhs(exprq2))="-" then exprq2:-exprq2,
+if op2(lhs(exprq2))#"*" then return(exprq),
 restq:1,xledq:0,indq:1,
 startq,
 ledq:inpart(exprq2,1,indq),
@@ -461,11 +461,11 @@ else
 
 /* The normal divzerorule does not always work*/
 mydivzerorule(exprq):=block([indq,ledq,restq,xledq,exprq2],partswitch:true,
-if op(exprq)#"=" or inpart(exprq,3)#end then return(exprq),
+if op2(exprq)#"=" or inpart(exprq,3)#end then return(exprq),
 if lhs(exprq)=0 then exprq:rhs(exprq)=lhs(exprq), 
 if not rhs(exprq)=0 then return(exprq),
 if CheckSolved(exprq) then return(exprq), 
-if op(lhs(exprq))="/" then (
+if op2(lhs(exprq))="/" then (
 	if containx(part(lhs(exprq),1),solvar)=true then (assume( notequal(part(lhs(exprq),2),0)),return(part(lhs(exprq),1)=0))
 ),
 exprq
@@ -515,7 +515,7 @@ qexpr
 /* substitutes solutions back into equation to see if any imaginary result appears. If so it is assumed that the result is not valid */
 RemoveUndefined(eqnw,sollistq):=block([indq,indq2,solq,sollistq2,delq,resq,fpprec: 50],
 if length(sollistq)=0 then return(sollistq),
-if op(eqnw)=end then return(sollistq),
+if op2(eqnw)=end then return(sollistq),
 indq:0,sollistq2:[],
 startq, 
 	indq:indq+1,
@@ -525,7 +525,7 @@ startq,
 	if IsSolved(solq,solvar)=false then (sollistq2:append(sollistq2,[solq]),go(startq)), 
 	resq:errcatch(ev(eqnw,solq,bfloat)), 
 	if resq=[] then (go(startq)),
-	if op(resq)="=" and constantp(lhs(resq)) and constantp(rhs(resq)) then (resq:errcatch(abs(lhs(resq)-rhs(resq))/max(1.0,abs(lhs(resq)),abs(rhs(resq)))), if not(resq=[]) and resq[1] > 1.0e-4 then go(startq)), /* removes solutions that reduce to a number and does not satisfy the equation within a tolerance */
+	if op2(resq)="=" and constantp(lhs(resq)) and constantp(rhs(resq)) then (resq:errcatch(abs(lhs(resq)-rhs(resq))/max(1.0,abs(lhs(resq)),abs(rhs(resq)))), if not(resq=[]) and resq[1] > 1.0e-4 then go(startq)), /* removes solutions that reduce to a number and does not satisfy the equation within a tolerance */
 	if do(
 		delq:inpart(eqnw,indq2),
 		if delq=end then return(true),
@@ -574,14 +574,14 @@ do(
 
 
 IsSameOp(lignq):=block([],
-if op(lhs(lignq))=op(rhs(lignq)) then 
+if op2(lhs(lignq))=op2(rhs(lignq)) then 
 	return(true) 
 else 
 	return(false)
 )$
 
 RemoveSameOp(lignq):=block([qop],
-qop:op(lhs(lignq)),
+qop:op2(lhs(lignq)),
 if not(IsSameOp(lignq)) then 
 	return(lignq),
 if qop=sin then 
@@ -618,17 +618,17 @@ qutp
 
 DoubleExp(lignq):=block([qvs,ql1,ql2,qadd,qop],qadd:0,
 qvs:ev(applyb1(lhs(lignq)-rhs(lignq),toexpm,toexpp),logsimp=false),
-if not (op(qvs)="+") then return(lignq),
+if not (op2(qvs)="+") then return(lignq),
 ql1:inpart(qvs,1),
 ql2:inpart(qvs,2),
 if not(inpart(qvs,3)=end) then return(lignq),
-if op(ql1)=end or op(ql2)=end then return(lignq),
-if op(ql1)="-" and op(ql2)#"-" then (ql1:-1*ql1,go(next1)),
-if op(ql2)="-" then (ql2:-1*ql2,go(next1)),
+if op2(ql1)=end or op2(ql2)=end then return(lignq),
+if op2(ql1)="-" and op2(ql2)#"-" then (ql1:-1*ql1,go(next1)),
+if op2(ql2)="-" then (ql2:-1*ql2,go(next1)),
 qadd:log(-1),
 next1,
-qop:op(ql1),
-if not(qop=op(ql2)) then return(lignq),
+qop:op2(ql1),
+if not(qop=op2(ql2)) then return(lignq),
 if qop="^" and inpart(ql1,1)=inpart(ql2,1) then 
 	return(inpart(ql1,2)-inpart(ql2,2)+qadd=0),
 if qop="/" and part(ql1,2)=part(ql2,2) then 
@@ -642,7 +642,7 @@ lignq
 
 /*Used to remove %union() result from to_poly_solve. applied: scanmap(RemoveUnion,expr)*/
 RemoveUnion(qexpr):=block([],
-if op(qexpr)#%union then return(qexpr)
+if op2(qexpr)#%union then return(qexpr)
 else return(args(qexpr)) 
 )$
 
@@ -667,16 +667,16 @@ if freeof(solvar,rhs(lignqw)) then true else false
 
 /* Checks if expression is factored eg. -2*(x+2) -(x+2)^2*/
 IsFactored(exprq):=block([],
-if op(exprq)="-" then 
+if op2(exprq)="-" then 
 	(if part(exprq,2)=end 
 		then 
 			exprq:part(exprq,1) 
 		else 
 			return(false)
 	),
-if op(exprq)="/" then exprq:part(exprq,1),
-if op(exprq)="*" then return(true),
-if op(exprq)="^" then (if not(containx(part(exprq,2),solvar)) then return(true)), false)$
+if op2(exprq)="/" then exprq:part(exprq,1),
+if op2(exprq)="*" then return(true),
+if op2(exprq)="^" then (if not(containx(part(exprq,2),solvar)) then return(true)), false)$
 
 factoreq(lignqw):=block([exprq,exprq2,inpsiz,errormsg:false],
 if CheckSolved(lignqw) then return(lignqw),
@@ -696,7 +696,7 @@ lignqw
 factoreq2(lignqw):=block([exprq],
 if CheckSolved(lignqw) then return(lignqw),
 exprq:lhs(lignqw),
-if op(exprq)="*" then return(lignqw) else (return(sqfr(exprq)=rhs(lignqw)))
+if op2(exprq)="*" then return(lignqw) else (return(sqfr(exprq)=rhs(lignqw)))
 )$
 /* forsoeg med factoreq istedet for factoreq2*/
 applyfactor2(exprq):=block([exprq2],exprq2:makelist(block([zxq2],zxq2:factoreq(zxq),if zxq2=false then return(zxq),zxq2),zxq,exprq))$
@@ -744,7 +744,7 @@ if exprsize(sexprq)<exprsize(exprq) then exprq:sexprq,
 exprq
 )$
 
-simplifysol(sollist):=block([exprq2],exprq2:makelist(block([zxq2],if not(op(zxq)="=") then return(zxq),zxq2:lhs(zxq)=simplify(rhs(zxq)),if zxq2=false then return(zxq),zxq2),zxq,sollist))$
+simplifysol(sollist):=block([exprq2],exprq2:makelist(block([zxq2],if not(op2(zxq)="=") then return(zxq),zxq2:lhs(zxq)=simplify(rhs(zxq)),if zxq2=false then return(zxq),zxq2),zxq,sollist))$
 
 exprsize(exprq):=length(charlist(string(exprq)))$
 
@@ -818,7 +818,7 @@ applyconverttoreal(exprq):=block([exprq2],exprq2:makelist(block([zxq2],if zxq=al
 
 applyabsruleonce(exprq,supq):=block([indq,delq,delq2,qfundet],
 if length(exprq)=0 then return(exprq),
-if op(exprq)=end then return(exprq),
+if op2(exprq)=end then return(exprq),
 qfundet:false,
 indq:0,
 exprq:do(
@@ -1464,7 +1464,7 @@ nsolve([paramq]) := block(
 	/*If there is an error using find_root, it will append the function to solution. These must be removed*/
 	solq: block([new_solq: []],
 		for zq in solq do (
-			if (op(zq) # 'bf_find_root) and (op(zq) # 'find_root)  then new_solq: cons(zq, new_solq)
+			if (op2(zq) # 'bf_find_root) and (op2(zq) # 'find_root)  then new_solq: cons(zq, new_solq)
 		),
 		solq: reverse(new_solq)
 	),
@@ -1524,7 +1524,7 @@ find_root_safe(qfkt, qvar, a, b) := block([sol, fa, fb, fap, fbp],
 	sol: errcatch(bf_find_root(qfkt, qvar, a, b)),
 	if sol = [] then return([]),
 	sol: sol[1], 
-	if op(sol) = 'bf_find_root then return([]),
+	if op2(sol) = 'bf_find_root then return([]),
 /*	fa: errcatch(qfkt(a)),
 	fb: errcatch(qfkt(b)), */
 	fap: errcatch(subst((sol - 10^-6),qvar,qfkt)),
@@ -1784,14 +1784,14 @@ SortSolutions(solq):=block([z],makelist(sort(z),z,solq))$
 
 /* matrixeqtolist(matrix([x],[y])=matrix([1],[2]));    ->   [x=1,y=2]*/
 matrixtolist(matq):=block([],
-    if op(matq)#matrix then return(matq),
+    if op2(matq)#matrix then return(matq),
     flatten(args(matq))
 )$
 
 /* konverterer vektorligning til liste af ligninger*/
 matrixeqtolist(mateq):=block(
     [lq, rq, indq, listeq],
-    if op(lhs(mateq)) # matrix then return(mateq),
+    if op2(lhs(mateq)) # matrix then return(mateq),
     listeq: [],
     lq: matrixtolist(lhs(mateq)),
     rq: matrixtolist(rhs(mateq)),
@@ -1839,7 +1839,7 @@ permuts(lst) := block(
 
 RemoveUndefinedSystem(eqnlq, sollistq):=block([sollistq2:[], zq, indq, delq, keepq,resq],
     if length(sollistq)=0 then return(sollistq),
-    if op(eqnlq)=end then return(sollistq),
+    if op2(eqnlq)=end then return(sollistq),
 
     for zq in sollistq do (
         keepq:true,
@@ -1869,14 +1869,14 @@ RemoveIncorrectSystem(sollistq):=block([sollistq2],
     sollistq2:delete(false,makelist(
         if nonscalarp(zq) then (
             if freeof(false, makelist( ( 
-                if op(zq2)="=" then
+                if op2(zq2)="=" then
 					 (if (is(equal(lhs(zq2),ev(rhs(zq2),numer)))#false) then true else false)
 				else 
 					true),
                 zq2, zq)
 			) then zq else false
         )
-        elseif op(zq)="=" then (
+        elseif op2(zq)="=" then (
             if is(equal(lhs(zq),ev(rhs(zq),numer)))#false then zq else false
         )
         else zq,
@@ -2361,7 +2361,7 @@ else false
 
 /* Grad og div*/
 prefix("gradq")$
-gradq(parq)::=block([qargs,funn,varq,varq2],qargs:args(parq), funn:op(parq), 
+gradq(parq)::=block([qargs,funn,varq,varq2],qargs:args(parq), funn:op2(parq), 
     if length(qargs)>2 then (
         if constantp(qargs[1]) then (
             matrix([subst(qargs[1],varq,diff(funn(varq,qargs[2],qargs[3]),varq,1))],[subst(qargs[2],varq2,diff(funn(qargs[1],varq2,qargs[3]),varq2,1))],[subst(qargs[3],varq2,diff(funn(qargs[1],qargs[2],varq2),varq2,1))])) else ev(matrix([diff(parq,'x,1)],[diff(parq,'y,1)],[diff(parq,'z,1)]))
@@ -2392,7 +2392,7 @@ CompleteSquare([paramq]) := block(
 	expr: paramq[1],
 	completed_expr: expr,
 	if length(paramq) >= 2 then vars: paramq[2] else vars: listofvars(completed_expr),
-	if op(expr) = "=" then completed_expr: lhs(expr) - rhs(expr),
+	if op2(expr) = "=" then completed_expr: lhs(expr) - rhs(expr),
 	for var in vars do (
 		if not freeof(var, completed_expr) then (
 			errcatch(
@@ -2407,6 +2407,6 @@ CompleteSquare([paramq]) := block(
 			)
 		)
 	),
-	if op(expr) = "=" then completed_expr: completed_expr = 0,
+	if op2(expr) = "=" then completed_expr: completed_expr = 0,
 	completed_expr
 )$

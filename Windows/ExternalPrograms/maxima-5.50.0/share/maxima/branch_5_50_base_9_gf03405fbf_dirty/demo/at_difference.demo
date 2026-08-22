@@ -1,0 +1,45 @@
+"at_difference(this, that) is equivalent at(that) minus at(this)" $
+
+at_difference (sin(x), x, a, b);
+
+"Display at_difference(...) with a vertical bar." $
+
+'at_difference (sin(x), x, a, b);
+
+"Statement of the fundamental theorem of calculus." $
+
+I: 'integrate (f(x), x, a, b) = 'at_difference ('integrate (f(x), x), x, a, b);
+
+"Consider a specific case of the FTC." $
+
+I1: subst (f(x) = cos(h*x), I);
+
+"Verbify at_difference, integrate, and at to get a result." $
+
+ev (I1, at_difference);
+
+ev (%, integrate);
+
+ev (%, at);
+
+is (%);
+
+"Verbify in a different order, towards same result." $
+
+ev (I1, integrate);
+
+ev (%, at_difference);
+
+is (%);
+
+"Verbify everything at once, same result." $
+
+ev (I1, nouns);
+
+is (%);
+
+"Verify at_difference works well with pretty printer abs and box." $
+
+aa: abs (box ('at_difference ((1 - g(u[k]))/(1 + g(u[k])), u[k], 2/3, 5/7)));
+
+ev (aa, at_difference);

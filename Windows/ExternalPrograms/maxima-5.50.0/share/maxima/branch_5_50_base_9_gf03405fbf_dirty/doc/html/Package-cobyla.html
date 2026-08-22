@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package cobyla (Maxima 5.50.9.gf03405fbf Manual)</title>
+
+<meta name="description" content="Package cobyla (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="keywords" content="Package cobyla (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-colnew.html#Package-colnew" rel="next" title="Package colnew">
+<link href="Package-clebsch_005fgordan.html#Package-clebsch_005fgordan" rel="prev" title="Package clebsch_gordan">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+ul.mark-bullet {list-style-type: disc}
+ul.mark-none {list-style-type: none}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+
+<script type='text/javascript'>
+MathJax = {
+  options: {
+    skipHtmlTags: {'[-]': ['pre']},       // do not skip pre
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  tex: {
+    processEscapes: false,      // do not use \$ to produce a literal dollar sign
+    processEnvironments: false, // do not process \begin{xxx}...\end{xxx} outside math mode
+    processRefs: false,         // do not process \ref{...} outside of math mode
+    displayMath: [             // start/end delimiter pairs for display math
+      ['\\[', '\\]']
+    ],
+  },
+};
+</script><script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+</head>
+
+<body lang="en" class="tex2jax_ignore">
+<div class="chapter-level-extent" id="Package-cobyla">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-colnew.html#Package-colnew" accesskey="n" rel="next">Package colnew</a>, Previous: <a href="Package-clebsch_005fgordan.html#Package-clebsch_005fgordan" accesskey="p" rel="prev">Package clebsch_gordan</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-cobyla-1"><span>47 Package cobyla<a class="copiable-link" href="#Package-cobyla-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-cobyla_002fnode_002fIntroduction-to-cobyla"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-cobyla" accesskey="1">Introduction to cobyla</a></li>
+<li><a href="#Functions-and-Variables-for-cobyla" accesskey="2">Functions and Variables for cobyla</a></li>
+<li><a href="#Examples-for-cobyla" accesskey="3">Examples for cobyla</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-cobyla">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-cobyla" accesskey="n" rel="next">Functions and Variables for cobyla</a>, Previous: <a href="#Package-cobyla" accesskey="p" rel="prev">Package cobyla</a>, Up: <a href="#Package-cobyla" accesskey="u" rel="up">Package cobyla</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-cobyla-1"><span>47.1 Introduction to cobyla<a class="copiable-link" href="#Introduction-to-cobyla-1"> &para;</a></span></h3>
+
+<p><code class="code">fmin_cobyla</code> is a Common Lisp translation (via <code class="code">f2cl</code>) of the
+Fortran constrained optimization routine COBYLA by Powell[1][2][3].  
+</p>
+<p>COBYLA minimizes an objective function <em class="math tex2jax_process">\(F(X)\)</em> subject to <em class="math tex2jax_process">\(M\)</em> inequality
+constraints of the form 
+\(g(X) \ge 0\)
+on <em class="math tex2jax_process">\(X\)</em>,
+where <em class="math tex2jax_process">\(X\)</em> is a vector of variables that has <em class="math tex2jax_process">\(N\)</em> components.
+</p>
+<p>Equality constraints <em class="math tex2jax_process">\(g(X) = 0\)</em> can often be implemented by a pair of inequality 
+constraints 
+\(g(X) \ge 0\)
+and 
+\(-g(X) \ge 0.\)
+Maxima&rsquo;s interface to COBYLA
+allows equality constraints and internally converts the equality
+constraints to a pair of inequality constraints.
+</p>
+<p>The algorithm employs linear approximations to the
+objective and constraint functions, the approximations being formed by
+linear interpolation at <em class="math tex2jax_process">\(N+1\)</em> points in the space of the variables.
+The interpolation points are regarded as vertices of a simplex. The
+parameter <var class="var">RHO</var> controls the size of the simplex and it is reduced
+automatically from <var class="var">RHOBEG</var> to <var class="var">RHOEND</var>. For each <var class="var">RHO</var> the subroutine tries
+to achieve a good vector of variables for the current size, and then
+<var class="var">RHO</var> is reduced until the value <var class="var">RHOEND</var> is reached. Therefore, <var class="var">RHOBEG</var> and
+<var class="var">RHOEND</var> should be set to reasonable initial changes to and the required   
+accuracy in the variables respectively, but this accuracy should be
+viewed as a subject for experimentation because it is not guaranteed.
+The routine treats each constraint individually when calculating
+a change to the variables, rather than lumping the constraints together
+into a single penalty function. The name of the subroutine is derived
+from the phrase Constrained Optimization BY Linear Approximations.
+</p>
+
+<p>References:
+</p>
+<p>[1] Fortran Code is from <a class="url" href="http://plato.asu.edu/sub/nlores.html#general">http://plato.asu.edu/sub/nlores.html#general</a>
+</p>
+<p>[2] M. J. D. Powell, &quot;A direct search optimization method that models the objective and constraint functions by linear interpolation,&quot; in Advances in Optimization and Numerical Analysis, eds. S. Gomez and J.-P. Hennart (Kluwer Academic: Dordrecht, 1994), p. 51-67.  <a class="url" href="https://doi.org/10.1007/978-94-015-8330-5_4">doi:10.1007/978-94-015-8330-5_4</a>
+</p>
+<p>[3] M. J. D. Powell, &quot;Direct search algorithms for optimization calculations,&quot; Acta Numerica 7, 287-336 (1998).  <a class="url" href="https://doi.org/10.1017/S0962492900002841">doi:10.1017/S0962492900002841</a> Also available as University of Cambridge, Department of Applied Mathematics and Theoretical Physics,  Numerical Analysis Group, Report NA1998/04 from <a class="url" href="https://web.archive.org/web/20160607190705/http://www.damtp.cam.ac.uk:80/user/na/reports.html">https://web.archive.org/web/20160607190705/http://www.damtp.cam.ac.uk:80/user/na/reports.html</a>
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Optimization">Optimization</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-cobyla">Package cobyla</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-cobyla_002fnode_002fFunctions-and-Variables-for-cobyla"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-cobyla">
+<div class="nav-panel">
+<p>
+Next: <a href="#Examples-for-cobyla" accesskey="n" rel="next">Examples for cobyla</a>, Previous: <a href="#Introduction-to-cobyla" accesskey="p" rel="prev">Introduction to cobyla</a>, Up: <a href="#Package-cobyla" accesskey="u" rel="up">Package cobyla</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-cobyla-1"><span>47.2 Functions and Variables for cobyla<a class="copiable-link" href="#Functions-and-Variables-for-cobyla-1"> &para;</a></span></h3>
+
+<a class="anchor" id="fmin_005fcobyla"></a><a class="anchor" id="Item_003a-cobyla_002fdeffn_002ffmin_005fcobyla"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-fmin_005fcobyla"><span class="category-def">Function: </span><span><strong class="def-name">fmin_cobyla</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">fmin_cobyla</b> (<var class="var">F</var>, <var class="var">X</var>, <var class="var">Y</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">fmin_cobyla</b> (<var class="var">F</var>, <var class="var">X</var>, <var class="var">Y</var>, optional_args)</var><a class="copiable-link" href="#index-fmin_005fcobyla"> &para;</a></span></dt>
+<dd>
+<p>Returns an approximate minimum of the expression <var class="var">F</var> with respect
+to the variables <var class="var">X</var>, subject to an optional set of constraints.
+<var class="var">Y</var> is a list of initial guesses for <var class="var">X</var>.
+</p>
+<p><var class="var">F</var> must be ordinary expressions, not names of functions or lambda expressions.
+</p>
+<p><code class="code">optional_args</code> represents additional arguments,
+specified as <code class="code"><var class="var">symbol</var> = <var class="var">value</var></code>.
+The optional arguments recognized are:
+</p>
+<dl class="table">
+<dt><code class="code">constraints</code></dt>
+<dd><p>List of inequality and equality constraints that must be satisfied by
+<var class="var">X</var>.  The inequality constraints must be actual inequalities of
+the form 
+\(g(X) \ge h(X)\)
+or 
+\(g(X) \le h(X).\)
+The equality constraints must be of the
+form 
+\(g(X) = h(X).\)
+</p></dd>
+<dt><code class="code">rhobeg</code></dt>
+<dd><p>Initial value of the internal <var class="var">RHO</var> variable which controls 
+the size of simplex.  (Defaults to 1.0)
+</p></dd>
+<dt><code class="code">rhoend</code></dt>
+<dd><p>The desired final value rho parameter.  It is approximately
+ the accuracy in the variables. (Defaults to 1d-6.)
+</p></dd>
+<dt><code class="code">iprint</code></dt>
+<dd><p>Verbose output level.  (Defaults to 0)
+</p><ul class="itemize mark-bullet">
+<li>0 - No output
+</li><li>1 - Summary at the end of the calculation
+</li><li>2 - Each new value of RHO and SIGMA is printed, including 
+ the vector of variables, some function information when RHO is reduced.
+</li><li>3 - Like 2, but information is printed when F(X) is computed.
+</li></ul>
+</dd>
+<dt><code class="code">maxfun</code></dt>
+<dd><p>The maximum number of function evaluations.  (Defaults to 1000).
+</p></dd>
+</dl>
+
+<p>On return, a vector is given:
+</p><ol class="enumerate">
+<li> The value of the variables giving the minimum.  This is a list of
+elements of the form <code class="code"><var class="var">var</var> = <var class="var">value</var></code> for each of the
+variables listed in <var class="var">X</var>.
+</li><li> The minimized function value
+</li><li> The number of function evaluations.
+</li><li> Return code with the following meanings
+ <ul class="itemize mark-none">
+<li>0 - No errors.
+ </li><li>1 - Limit on maximum number of function evaluations reached.
+ </li><li>2 - Rounding errors inhibiting progress.
+ </li><li>-1 - <var class="var">MAXCV</var> value exceeds <var class="var">RHOEND</var>.  This indicates that the
+  constraints were probably not satisfied.  User should investigate
+  the value of the constraints.
+
+</li></ul>
+</li></ol>
+
+<p><var class="var">MAXCV</var> stands for &ldquo;MAXimum Constraint Violation&rdquo; and is the
+value of <em class="math tex2jax_process">\(max(0.0, -c1(x), -c2(x),...-cm(x))\)</em> where <em class="math tex2jax_process">\(ck(x)\)</em>
+denotes the k&rsquo;th constraint function.  (Note that maxima allows
+constraints of the form <em class="math tex2jax_process">\(f(x) = g(x)\)</em>, which are internally
+converted to <em class="math tex2jax_process">\(f(x)-g(x) >= 0\)</em> and <em class="math tex2jax_process">\(g(x)-f(x) >= 0\)</em> which is
+required by COBYLA).
+</p>
+<p><code class="code">load(&quot;fmin_cobyla&quot;)</code> loads this function.
+</p>
+</dd></dl>
+
+<a class="anchor" id="bf_005ffmin_005fcobyla"></a><a class="anchor" id="Item_003a-cobyla_002fdeffn_002fbf_005ffmin_005fcobyla"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-bf_005ffmin_005fcobyla"><span class="category-def">Function: </span><span><strong class="def-name">bf_fmin_cobyla</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">bf_fmin_cobyla</b> (<var class="var">F</var>, <var class="var">X</var>, <var class="var">Y</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">bf_fmin_cobyla</b> (<var class="var">F</var>, <var class="var">X</var>, <var class="var">Y</var>, optional_args)</var><a class="copiable-link" href="#index-bf_005ffmin_005fcobyla"> &para;</a></span></dt>
+<dd>
+<p>This function is identical to <code class="code">fmin_cobyla</code>, except that bigfloat
+operations are used, and the default value for <var class="var">rhoend</var> is
+<code class="code">10^(fpprec/2)</code>. 
+</p>
+<p>See <code class="code"><a class="ref" href="#fmin_005fcobyla">fmin_cobyla</a></code> for more information.
+</p>
+<p><code class="code">load(&quot;bf_fmin_cobyla&quot;)</code> loads this function.
+</p>
+</dd></dl>
+
+<a class="anchor" id="Item_003a-cobyla_002fnode_002fExamples-for-cobyla"></a><hr>
+</div>
+<div class="section-level-extent" id="Examples-for-cobyla">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Functions-and-Variables-for-cobyla" accesskey="p" rel="prev">Functions and Variables for cobyla</a>, Up: <a href="#Package-cobyla" accesskey="u" rel="up">Package cobyla</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Examples-for-cobyla-1"><span>47.3 Examples for cobyla<a class="copiable-link" href="#Examples-for-cobyla-1"> &para;</a></span></h3>
+
+<p>Minimize 
+\(x_1 x_2\)
+with 
+\(1-x_1^2-x_2^2 \ge 0.\)
+The theoretical solution is
+$$
+\eqalign{
+x_1 &= {1\over \sqrt{2}} \cr
+x_2 &= -{1\over \sqrt{2}}
+}
+$$
+</p>
+
+<div class="example user-maxima">
+<pre class="example-preformatted">(%i1) load(&quot;fmin_cobyla&quot;)$
+</pre><div class="group"><pre class="example-preformatted">(%i2) fmin_cobyla(x1*x2, [x1, x2], [1,1],
+            constraints = [x1^2+x2^2&lt;=1], iprint=1);
+   Normal return from subroutine COBYLA
+
+   NFVALS =   64   F =-5.000000E-01    MAXCV = 2.000122E-12
+   X = 7.071076E-01  -7.071060E-01
+(%o2) [[x1 = 0.707107555323284, x2 = - 0.7071060070503778], 
+                                     - 0.4999999999998015, 64, 0]
+</pre></div></div>
+
+<p>Here is the same example but the constraint
+is 
+\(x_1^2+x_2^2 \le -1\)
+which
+is impossible over the reals.
+</p>
+<div class="example">
+<div class="group"><pre class="example-preformatted">(%i1) fmin_cobyla(x1*x2, [x1, x2], [1,1],
+         constraints = [x1^2+x2^2 &lt;= -1], iprint=1);
+</pre></div><pre class="example-preformatted">   Normal return from subroutine COBYLA
+
+   NFVALS =   65   F = 3.016417E-13    MAXCV = 1.000000E+00
+   X =-3.375179E-07  -8.937057E-07
+(%o1) [[x1 = - 3.375178983064622e-7, x2 = - 8.937056510780022e-7], 
+                                                3.016416530564557e-13, 65, - 1]
+(%i2) subst(%o1[2], [x1^2+x2^2 &lt;= -1]);
+(%o2)                 [- 6.847914590915444e-13 &lt;= - 1]
+</pre></div>
+
+<p>We see the return code (<code class="code">%o1[4]</code>) is -1 indicating that the
+constraints may not be satisfied.  Substituting the solution into the
+constraint equation as shown in <code class="code">%o2</code> shows that the constraint
+is, of course, violated.
+</p>
+<p>There are additional examples in the
+<a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/cobyla/ex">share/cobyla/ex</a> directory and in
+<a class="url" href="https://sourceforge.net/p/maxima/code/ci/master/tree/share/cobyla/rtest_cobyla.mac">share/cobyla/rtest_cobyla.mac</a>.
+</p>
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-colnew.html#Package-colnew" accesskey="n" rel="next">Package colnew</a>, Previous: <a href="Package-clebsch_005fgordan.html#Package-clebsch_005fgordan" accesskey="p" rel="prev">Package clebsch_gordan</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+<a href="js_licenses.html" rel="jslicense"><small>JavaScript license information</small></a>
+</body>
+</html>

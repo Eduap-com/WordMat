@@ -1,0 +1,174 @@
+/* These tests take about one hour to run and may not provide a thorough evaluation of 'great',
+   but they do catch many bugs.
+
+   Due to the long runtime, we exclude rtest_great_slow from the testsuite.
+   
+   Some tests taken from #4383 great not transitive (so simplifya not idempotent). 
+
+   At the end of this test, timing data is printed, which may offer guidance
+   for optimizing the 'great' function. Here are my July 2025 results using 
+   Clozure CL:
+
+┌                                                                         ┐
+│ function          time/call            calls        runtime      gctime │
+│                                                                         │
+│  ordfna   9.255251172025138E-6 sec   136000496  1258.71875 sec     0    │
+│                                                                         │
+│ ordlist   2.1628356736202983E-5 sec  52501966   1135.53125 sec     0    │
+│                                                                         │
+│ ordmexpt  1.3680523696510158E-5 sec  92981181   1272.03125 sec     0    │
+│                                                                         │
+│  great    1.380019254575814E-5 sec   346142136  4776.828125 sec    0    │
+│                                                                         │
+│  total    1.345245790963599E-5 sec   627625779  8443.109375 sec    0    │
+└                                                                         ┘
+ */
+(timer(?great, ?ordmexpt, ?ordlist, ?ordfna),thyme : absolute_real_time(), 0)$
+0$
+
+(L : [exp(-a/p),v,1/gamma(v+1)],0);
+0$
+
+is(equal(sort(L) , sort(reverse(L))));
+true$
+
+
+(L : [2/3, -1/8,%i, %pi, inf, und, minf, a,b,-a,-b, a[1], z[a], rat(x), rat(a+b), exp(x),exp(-x),1/a,1/b,-1/a, -1/b,a/b, %pi, 
+    x^2, x^%pi, %pi^x, 2^(2/3),sqrt(exp(z)),exp(z),cos(x),tan(x),sin(x), diff(x),
+    a+b,c/d, cos(z), box(a,42), box(-a,42),true, false, a*b, a+b+c,a=b, a>b,f(a,b,a),
+    'diff(f,x), 'integrate(g(x),x), [],[false], [[]],a.b, a^^7, b^^z, block([fpprec : 15], 1.0),
+    block([fpprec : 18], 1.0), 2.3, 5.8*%i],0);
+0$
+
+/* To look at failures, return `fail`, not `length(fail)` */
+(F(L) := block([a,b,c,ok,fail : []],
+ for a in L do (
+  for b in L do (
+     for c in L do (
+            ok : cardinality(map('sort, permutations([a,b,c]))),
+            if ok # 1 then push([a,b,c], fail)))),
+     length(fail)),0);
+0$
+
+
+F(L);
+0$
+
+
+F(append(L, map('exp,L)));
+0$
+
+(domain : complex, declare(z,complex),0);
+0$
+
+(L : [2/3, -1/8,%i, %pi, inf, und, minf, a,b,-a,-b, a[1], z[a], rat(x), rat(a+b), exp(x),exp(-x),1/a,1/b,-1/a, -1/b,a/b, %pi, 
+    x^2, x^%pi, %pi^x, 2^(2/3),sqrt(exp(z)),exp(z),cos(x),tan(x),sin(x), diff(x),
+    a+b,c/d, cos(z), box(a,42), box(-a,42),true, false, a*b, a+b+c,a=b, a>b,f(a,b,a),
+    'diff(f,x), 'integrate(g(x),x), [],[false], [[]],a.b, a^^7, b^^z,block([fpprec : 15], 3.0),
+    block([fpprec : 18], 3.0), 2.3, 5.8*%i],0);
+0$
+
+
+F(L);
+0$
+
+
+F(append(L, map('exp,L)));
+0$
+
+F(append(L, map('log,L)));
+0$
+
+F(append(L, map('log, map('log,L))));
+0$
+
+F(append(L, map(lambda([q],-1/q^%pi),L)));
+0$
+
+/* #4383 great not transitive (so simplifya not idempotent) */
+exp(z) + sqrt(exp(z)) + exp(z);
+2*exp(z) + sqrt(exp(z))$
+
+is(orderlessp(exp(z),sqrt(exp(z))) # orderlessp(sqrt(exp(z)),exp(z)));
+true$
+
+is((a^(b*d))^f(c)/(b*f(c)) = expand((a^(b*d))^f(c)/(b*f(c)),0,0));
+true$
+
+(bad: '[
+[f(b),a^(b*c),b],
+[a^(b*c),b,f(b)], 
+[b,f(b),a^(b*c)]
+],0);
+0$
+
+block([ok : true],
+  for i in bad do (
+     ok : ok and sort(i) = sort(reverse(i))),
+  ok);
+true$
+
+/* #365 orderlessp not transitive */
+
+(l: [z+x*(x+2)+v+1,z+x^2+x+v+1,z+(x+1)^2+v],0);
+0$
+
+orderlessp(l[1],l[2]);
+true$
+
+orderlessp(l[2],l[3]);
+true$
+
+orderlessp(l[1],l[3]);
+true$
+
+(remvalue(l),0);
+0$
+
+(LL : sort([-(1/c^%pi),-(1/(1/c)^%pi),b*c]),0);
+0$
+
+orderlessp(first(LL), second(LL));
+true$
+
+orderlessp(second(LL), third(LL));
+true$
+
+orderlessp(first(LL), third(LL));
+true$
+
+(remvalue(LL),0);
+0$
+
+/* #3072 orderlessp/great not transitive (2) */
+
+cardinality(map('sort, permutations([A(w*(x-1)), x, A(x-1)])));
+1$
+
+/* #4484 more 'great' bugs */
+
+block([domain : 'complex], cardinality(map(sort, permutations([a[1],a,exp(a[1])]))));
+1$
+
+block([domain : 'real], cardinality(map(sort, permutations([%e^(a . b),a^^7,a*b]))));
+1$
+
+(print(absolute_real_time()-thyme," seconds"),0);
+0$
+
+/* Did we make a mess? Let's clean it up!*/
+(remvalue(L),remvalue(thyme), remfun(F),remvalue(bad),0);
+0$
+
+values;
+[]$
+
+(reset(domain), forget(z,'complex),0);
+0$
+
+contexts;
+[initial, global]$
+
+
+(print(timer_info()),0);
+0$

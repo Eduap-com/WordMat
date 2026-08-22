@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package bode (Maxima 5.50.9.gf03405fbf Manual)</title>
+
+<meta name="description" content="Package bode (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="keywords" content="Package bode (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-cartan.html#Package-cartan" rel="next" title="Package cartan">
+<link href="Package-bitwise.html#Package-bitwise" rel="prev" title="Package bitwise">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Package-bode">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-cartan.html#Package-cartan" accesskey="n" rel="next">Package cartan</a>, Previous: <a href="Package-bitwise.html#Package-bitwise" accesskey="p" rel="prev">Package bitwise</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-bode-1"><span>43 Package bode<a class="copiable-link" href="#Package-bode-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-bode_002fnode_002fFunctions-and-Variables-for-bode"></a><ul class="mini-toc">
+<li><a href="#Functions-and-Variables-for-bode" accesskey="1">Functions and Variables for bode</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Functions-and-Variables-for-bode">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Package-bode" accesskey="p" rel="prev">Package bode</a>, Up: <a href="#Package-bode" accesskey="u" rel="up">Package bode</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-bode-1"><span>43.1 Functions and Variables for bode<a class="copiable-link" href="#Functions-and-Variables-for-bode-1"> &para;</a></span></h3>
+
+
+<a class="anchor" id="bode_005fgain"></a><a class="anchor" id="Item_003a-bode_002fdeffn_002fbode_005fgain"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-bode_005fgain"><span class="category-def">Function: </span><span><strong class="def-name">bode_gain</strong> <var class="def-var-arguments">(<var class="var">H</var>, <var class="var">range</var>, ...<var class="var">plot_opts</var>...)</var><a class="copiable-link" href="#index-bode_005fgain"> &para;</a></span></dt>
+<dd><p>Function to draw Bode gain plots.
+</p>
+<p>Examples (1 through 7 from 
+</p><div class="example">
+<pre class="example-preformatted"><a class="url" href="http://www.swarthmore.edu/NatSci/echeeve1/Ref/Bode/BodeHow.html">http://www.swarthmore.edu/NatSci/echeeve1/Ref/Bode/BodeHow.html</a>,
+</pre></div>
+<p>8 from Ron Crummett):
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bode&quot;)$
+
+(%i2) H1 (s) := 100 * (1 + s) / ((s + 10) * (s + 100))$
+
+(%i3) bode_gain (H1 (s), [w, 1/1000, 1000])$
+
+(%i4) H2 (s) := 1 / (1 + s/omega0)$
+
+(%i5) bode_gain (H2 (s), [w, 1/1000, 1000]), omega0 = 10$
+
+(%i6) H3 (s) := 1 / (1 + s/omega0)^2$
+
+(%i7) bode_gain (H3 (s), [w, 1/1000, 1000]), omega0 = 10$
+
+(%i8) H4 (s) := 1 + s/omega0$
+
+(%i9) bode_gain (H4 (s), [w, 1/1000, 1000]), omega0 = 10$
+
+(%i10) H5 (s) := 1/s$
+
+(%i11) bode_gain (H5 (s), [w, 1/1000, 1000])$
+
+(%i12) H6 (s) := 1/((s/omega0)^2 + 2 * zeta * (s/omega0) + 1)$
+
+(%i13) bode_gain (H6 (s), [w, 1/1000, 1000]), 
+                  omega0 = 10, zeta = 1/10$
+
+(%i14) H7 (s) := (s/omega0)^2 + 2 * zeta * (s/omega0) + 1$
+
+(%i15) bode_gain (H7 (s), [w, 1/1000, 1000]),
+                  omega0 = 10, zeta = 1/10$
+
+(%i16) H8 (s) := 0.5 / (0.0001 * s^3 + 0.002 * s^2 + 0.01 * s)$
+
+(%i17) bode_gain (H8 (s), [w, 1/1000, 1000])$
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;bode&quot;)</code>. See also <a class="ref" href="#bode_005fphase">bode_phase</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bode">Package bode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+<a class="anchor" id="bode_005fphase"></a><a class="anchor" id="Item_003a-bode_002fdeffn_002fbode_005fphase"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-bode_005fphase"><span class="category-def">Function: </span><span><strong class="def-name">bode_phase</strong> <var class="def-var-arguments">(<var class="var">H</var>, <var class="var">range</var>, ...<var class="var">plot_opts</var>...)</var><a class="copiable-link" href="#index-bode_005fphase"> &para;</a></span></dt>
+<dd><p>Function to draw Bode phase plots.
+</p>
+<p>Examples (1 through 7 from 
+</p><div class="example">
+<pre class="example-preformatted"><a class="url" href="http://www.swarthmore.edu/NatSci/echeeve1/Ref/Bode/BodeHow.html">http://www.swarthmore.edu/NatSci/echeeve1/Ref/Bode/BodeHow.html</a>,
+</pre></div>
+<p>8 from Ron Crummett):
+</p><div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;bode&quot;)$
+
+(%i2) H1 (s) := 100 * (1 + s) / ((s + 10) * (s + 100))$
+
+(%i3) bode_phase (H1 (s), [w, 1/1000, 1000])$
+
+(%i4) H2 (s) := 1 / (1 + s/omega0)$
+
+(%i5) bode_phase (H2 (s), [w, 1/1000, 1000]), omega0 = 10$
+
+(%i6) H3 (s) := 1 / (1 + s/omega0)^2$
+
+(%i7) bode_phase (H3 (s), [w, 1/1000, 1000]), omega0 = 10$
+
+(%i8) H4 (s) := 1 + s/omega0$
+
+(%i9) bode_phase (H4 (s), [w, 1/1000, 1000]), omega0 = 10$
+
+(%i10) H5 (s) := 1/s$
+
+(%i11) bode_phase (H5 (s), [w, 1/1000, 1000])$
+
+(%i12) H6 (s) := 1/((s/omega0)^2 + 2 * zeta * (s/omega0) + 1)$
+
+(%i13) bode_phase (H6 (s), [w, 1/1000, 1000]), 
+                   omega0 = 10, zeta = 1/10$
+
+(%i14) H7 (s) := (s/omega0)^2 + 2 * zeta * (s/omega0) + 1$
+
+(%i15) bode_phase (H7 (s), [w, 1/1000, 1000]), 
+                   omega0 = 10, zeta = 1/10$
+
+(%i16) H8 (s) := 0.5 / (0.0001 * s^3 + 0.002 * s^2 + 0.01 * s)$
+
+(%i17) bode_phase (H8 (s), [w, 1/1000, 1000])$
+
+(%i18) block ([bode_phase_unwrap : false],
+              bode_phase (H8 (s), [w, 1/1000, 1000]));
+
+(%i19) block ([bode_phase_unwrap : true], 
+              bode_phase (H8 (s), [w, 1/1000, 1000]));
+</pre></div>
+
+<p>To use this function write first <code class="code">load(&quot;bode&quot;)</code>. See also <a class="ref" href="#bode_005fgain">bode_gain</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Plotting">Plotting</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-bode">Package bode</a>
+&middot;
+</div>
+
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-cartan.html#Package-cartan" accesskey="n" rel="next">Package cartan</a>, Previous: <a href="Package-bitwise.html#Package-bitwise" accesskey="p" rel="prev">Package bitwise</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

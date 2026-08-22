@@ -1,0 +1,51 @@
+/* mailing list 2016-01-08: "set_plot_option question" */
+
+(set_plot_option([style,[points,3],[lines,2]]),get_plot_option(style));
+[style, [points, 3], [lines, 2]]$
+
+/*
+ * Bug #3186, get_plot_option cannot get the last pair of *plot-options*
+ *
+ * Also, make sure get_plot_option returns a copy of *plot-options* so
+ * changes to the result of get_plot_option don't change
+ * *plot-options* unexpecgedly.
+ */
+get_plot_option('gnuplot_term);
+[gnuplot_term, default];
+
+c:get_plot_option('color);
+[color, blue, red, green, magenta, black, cyan];
+
+c[2]:'purple;
+purple;
+
+get_plot_option('color);
+[color, blue, red, green, magenta, black, cyan];
+
+/* mailing list 2026-04-02: Recent changes to "box" has broken plot options */
+
+(set_plot_option (['box, true]), get_plot_option ('box));
+[box, true];
+
+(set_plot_option (['box, false]), get_plot_option ('box));
+[box, false];
+
+(set_plot_option (['point_type, 'box]), get_plot_option ('point_type));
+[point_type, box];
+
+[house, box]: [3, 4];
+[3, 4];
+
+house;
+3;
+
+box;
+4;
+
+remvalue (box);
+[box];
+
+box;
+box;
+
+

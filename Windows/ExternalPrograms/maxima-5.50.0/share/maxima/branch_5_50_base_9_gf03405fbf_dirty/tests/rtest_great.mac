@@ -1,0 +1,131 @@
+(L : [exp(-a/p),v,1/gamma(v+1)],0);
+0$
+
+is(equal(sort(L) , sort(reverse(L))));
+true$
+
+(declare(z,complex),domain : complex,0);
+0$
+
+/* #4383 great not transitive (so simplifya not idempotent) */
+exp(z) + sqrt(exp(z)) + exp(z);
+2*exp(z) + sqrt(exp(z))$
+
+is(orderlessp(exp(z),sqrt(exp(z))) # orderlessp(sqrt(exp(z)),exp(z)));
+true$
+
+is((a^(b*d))^f(c)/(b*f(c)) = expand((a^(b*d))^f(c)/(b*f(c)),0,0));
+true$
+
+(bad: '[
+[f(b),a^(b*c),b],
+[a^(b*c),b,f(b)], 
+[b,f(b),a^(b*c)]
+],0);
+0$
+
+block([ok : true],
+  for i in bad do (
+     ok : ok and sort(i) = sort(reverse(i))),
+  ok);
+true$
+
+/* #365 orderlessp not transitive */
+
+(l: [z+x*(x+2)+v+1,z+x^2+x+v+1,z+(x+1)^2+v],0);
+0$
+
+orderlessp(l[1],l[2]);
+true$
+
+orderlessp(l[2],l[3]);
+true$
+
+orderlessp(l[1],l[3]);
+true$
+
+(remvalue(l),0);
+0$
+
+(LL : sort([-(1/c^%pi),-(1/(1/c)^%pi),b*c]),0);
+0$
+
+orderlessp(first(LL), second(LL));
+true$
+
+orderlessp(second(LL), third(LL));
+true$
+
+orderlessp(first(LL), third(LL));
+true$
+
+(remvalue(LL),0);
+0$
+
+/* #3072 orderlessp/great not transitive (2) */
+
+cardinality(map('sort, permutations([A(w*(x-1)), x, A(x-1)])));
+1$
+
+/* #4484 more 'great' bugs */
+
+block([domain : 'complex], cardinality(map(sort, permutations([a[1],a,exp(a[1])]))));
+1$
+
+block([domain : 'real], cardinality(map(sort, permutations([%e^(a . b),a^^7,a*b]))));
+1$
+
+(L : [%e^(a . b),a^^7,a*b],0);
+0$
+
+block([ans1,ans2,ans3], 
+  ans1 : xreduce("+",L), 
+  ans2 : expand(ans1,0,0), 
+  ans3 : expand(ans2,0,0),
+  [ans1,ans2,ans3]);
+[a*b+a^^7+%e^(a . b),a*b+a^^7+%e^(a . b),a*b+a^^7+%e^(a . b)]$
+
+/* \#3183 %i * 3^%i/2^%i; does not consistently simplify*/
+
+block([e0 : ((0.23665921047828*%i+0.7345467111924259)*(0.4980156681183566*%i-0.15494982830181)*1.5^%i*cosh(%pi))
+      /2^%i, e1,e2],
+      e1 : expand(e0,0,0),
+      e2 : expand(e1,0,0),
+      outermap(lambda([a,b], is(a=b)),[e0,e1,e2],[e0,e1,e2]));
+[[true, true, true], [true, true, true], [true, true, true]]$
+
+block([e0 : %i * 3^%i/2^%i, e1, e2, e3],
+       e1 : 1*e0,
+       e2 : 1*e1,
+       e3 : 1*e2,
+       outermap(lambda([a,b], is(a=b)),[e0,e1,e2,e3],[e0,e1,e2,e3]));
+[[true, true, true, true], [true, true, true, true], [true, true, true, true], [true, true, true, true]]$     
+     
+block([EY,ans], declare(K,constant), 
+      EY: 1/2^K+K+3^K,
+      ans : [EY-EY,(-EY) - (-EY)],
+      remove(K,constant),
+      ans);
+[0,0]$
+
+block([a,b,c,d,M,L,ans],
+ [a, b, c, d] : [3, M, M^3, 3^M],
+ L : powerset ({a, b, c, d}, 2),
+ declare (M, constant),
+ ans : maplist (lambda ([p], ?great (first(p), second(p))), L),
+ remove(M,constant),
+ ans);
+[false, false, false, false, false, false]$
+
+/* Did we make a mess? Let's clean it up!*/
+(remvalue(L),remvalue(bad),remove(z,complex), reset(domain), 0);
+0$
+
+values;
+[]$
+
+facts();
+[]$
+
+contexts;
+[initial, global]$

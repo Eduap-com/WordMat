@@ -1,0 +1,1 @@
+(defparameter cl-user::*maxima-binary-directory* "/home/dauti/Software/maxima-code/maxima-5.50.0/crosscompile-windows/build/maxima-prefix/src/maxima/src/") (load "../lisp-utils/defsystem.lisp") (mk:add-registry-location "../src/") (load "../lisp-utils/make-depends.lisp") (funcall (intern "CREATE-DEPENDENCY-FILE" :mk) "binary-clisp/maxima.mem" "clisp-depends.mk.tmp") 

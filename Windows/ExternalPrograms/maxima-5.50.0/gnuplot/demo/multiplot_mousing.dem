@@ -1,0 +1,80 @@
+#
+# The purpose of this demo is to exercise multiplot mouse tracking
+# and to test the behavior of pan/zoom operations.
+# This only makes sense when run interactively, so the demo is not
+# for inclusion in "all.dem" or the on-line demo collection.
+#
+sinc(x) = (x==0) ? 1.0 : sin(x) / x
+
+set multiplot layout 2,2 title "Test cases for multiplot mousing"
+
+    unset log
+    set view
+    set auto xy
+    reset
+
+    set title "Panel 0"
+    plot sinc(x)
+
+    set title "Panel 1"
+    set view map
+    set sample 71; set isosample 71
+    splot sinc(sqrt(x*x+y*y)) with contourfill
+
+    set title "Panel 2"
+    plot [0.01 : 100] log(x)
+
+    set title "Panel 3"
+    set log xy
+    plot x
+
+unset multiplot
+
+pause -1
+
+reset
+
+set pm3d depthorder
+
+set multiplot layout 2,2 title "Test cases for multiplot mousing"
+
+    set title "Panel 0"
+    plot sinc(x)
+
+    set title "Panel 1"
+    set sample 71; set isosample 71
+    splot sinc(sqrt(x*x+y*y)) with contourfill
+
+    set title "Panel 2"
+    set polar
+    set angle degree
+    set grid polar 15. lt -1 dt 0 lw 0.5
+    set border 0
+    set logscale r 10
+    set view equal xy
+    set size square
+    set noxtics
+    set noytics
+    set rrange [.5 : 19]
+    set trange [90 : 360]
+    set rtics axis scale 0.5,0 nomirror rotate by -270  offset 0, 0.7
+    set rtics (2,5,10,15)
+    set key opaque box samplen 0.75
+    #
+    set style data impulse
+    plot 'silver.dat' using ($1*1.8/pi):3:0 lc var lw 2 title 'silver.dat'
+
+    set title "Panel 3"
+      # 'reset' has no effect inside a multiplot
+      # so we must undo the bits that conflict between panels 2 and 3
+        unset polar
+	unset isotropic
+	unset angle
+	unset grid
+    set palette viridis
+    splot [-10:10][-10:10]sinc(sqrt(x*x+y*y)) with contourfill
+
+unset multiplot
+
+pause -1
+

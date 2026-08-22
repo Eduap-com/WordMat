@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Package mnewton (Maxima 5.50.9.gf03405fbf Manual)</title>
+
+<meta name="description" content="Package mnewton (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="keywords" content="Package mnewton (Maxima 5.50.9.gf03405fbf Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<link href="index.html" rel="start" title="Top">
+<link href="Function-and-Variable-Index.html" rel="index" title="Function and Variable Index">
+<link href="index.html#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="index.html" rel="up" title="Top">
+<link href="Package-numericalio.html#Package-numericalio" rel="next" title="Package numericalio">
+<link href="Package-makeOrders.html#Package-makeOrders" rel="prev" title="Package makeOrders">
+<style type="text/css">
+<!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
+strong.def-name {font-family: monospace; font-weight: bold; font-size: larger}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="manual.css">
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Package-mnewton">
+<div class="nav-panel">
+<p>
+Next: <a href="Package-numericalio.html#Package-numericalio" accesskey="n" rel="next">Package numericalio</a>, Previous: <a href="Package-makeOrders.html#Package-makeOrders" accesskey="p" rel="prev">Package makeOrders</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h2 class="chapter" id="Package-mnewton-1"><span>80 Package mnewton<a class="copiable-link" href="#Package-mnewton-1"> &para;</a></span></h2>
+
+<a class="anchor" id="Item_003a-mnewton_002fnode_002fIntroduction-to-mnewton"></a><ul class="mini-toc">
+<li><a href="#Introduction-to-mnewton" accesskey="1">Introduction to mnewton</a></li>
+<li><a href="#Functions-and-Variables-for-mnewton" accesskey="2">Functions and Variables for mnewton</a></li>
+</ul>
+<hr>
+<div class="section-level-extent" id="Introduction-to-mnewton">
+<div class="nav-panel">
+<p>
+Next: <a href="#Functions-and-Variables-for-mnewton" accesskey="n" rel="next">Functions and Variables for mnewton</a>, Previous: <a href="#Package-mnewton" accesskey="p" rel="prev">Package mnewton</a>, Up: <a href="#Package-mnewton" accesskey="u" rel="up">Package mnewton</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Introduction-to-mnewton-1"><span>80.1 Introduction to mnewton<a class="copiable-link" href="#Introduction-to-mnewton-1"> &para;</a></span></h3>
+
+<p><code class="code">mnewton</code> is an implementation of Newton&rsquo;s method for solving nonlinear
+equations in one or more variables.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Numerical-methods">Numerical methods</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Share-packages">Share packages</a>
+&middot;
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+
+<a class="anchor" id="Item_003a-mnewton_002fnode_002fFunctions-and-Variables-for-mnewton"></a><hr>
+</div>
+<div class="section-level-extent" id="Functions-and-Variables-for-mnewton">
+<div class="nav-panel">
+<p>
+Previous: <a href="#Introduction-to-mnewton" accesskey="p" rel="prev">Introduction to mnewton</a>, Up: <a href="#Package-mnewton" accesskey="u" rel="up">Package mnewton</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+<h3 class="section" id="Functions-and-Variables-for-mnewton-1"><span>80.2 Functions and Variables for mnewton<a class="copiable-link" href="#Functions-and-Variables-for-mnewton-1"> &para;</a></span></h3>
+
+<a class="anchor" id="newtonepsilon"></a><a class="anchor" id="Item_003a-mnewton_002fdefvr_002fnewtonepsilon"></a><dl class="first-defvr def-block">
+<dt class="defvr def-line" id="index-newtonepsilon"><span class="category-def">Option variable: </span><span><strong class="def-name">newtonepsilon</strong><a class="copiable-link" href="#index-newtonepsilon"> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">10.0^(-fpprec/2)</code>
+</p>
+<p>Precision to determine when the <code class="code">mnewton</code> function has converged towards
+the solution.
+</p>
+<p>When <code class="code">newtonepsilon</code> is a bigfloat,
+<code class="code">mnewton</code> computations are done with bigfloats;
+otherwise, ordinary floats are used.
+</p>
+<p>See also <a class="ref" href="#mnewton">mnewton</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="newtonmaxiter"></a><a class="anchor" id="Item_003a-mnewton_002fdefvr_002fnewtonmaxiter"></a><dl class="first-defvr def-block">
+<dt class="defvr def-line" id="index-newtonmaxiter"><span class="category-def">Option variable: </span><span><strong class="def-name">newtonmaxiter</strong><a class="copiable-link" href="#index-newtonmaxiter"> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">50</code>
+</p>
+<p>Maximum number of iterations to stop the <code class="code">mnewton</code> function
+if it does not converge or if it converges too slowly.
+</p>
+<p>See also <a class="ref" href="#mnewton">mnewton</a>.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="newtondebug"></a><a class="anchor" id="Item_003a-mnewton_002fdefvr_002fnewtondebug"></a><dl class="first-defvr def-block">
+<dt class="defvr def-line" id="index-newtondebug"><span class="category-def">Option variable: </span><span><strong class="def-name">newtondebug</strong><a class="copiable-link" href="#index-newtondebug"> &para;</a></span></dt>
+<dd><p>Default value: <code class="code">false</code>
+</p>
+<p>When <code class="code">newtondebug</code> is <code class="code">true</code>, 
+<code class="code">mnewton</code> prints out debugging information while solving a problem.
+</p>
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+</dd></dl>
+
+<a class="anchor" id="mnewton"></a><a class="anchor" id="Item_003a-mnewton_002fdeffn_002fmnewton"></a><dl class="first-deffn def-block">
+<dt class="deffn def-line" id="index-mnewton"><span class="category-def">Function: </span><span><strong class="def-name">mnewton</strong> <var class="def-var-arguments"><br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">mnewton</b> (<var class="var">FuncList</var>, <var class="var">VarList</var>, <var class="var">GuessList</var>) <br>&nbsp;&nbsp;&nbsp;&nbsp;<b class="b">mnewton</b> (<var class="var">FuncList</var>, <var class="var">VarList</var>, <var class="var">GuessList</var>, <var class="var">DF</var>)</var><a class="copiable-link" href="#index-mnewton"> &para;</a></span></dt>
+<dd>
+<p>Approximate solution of multiple nonlinear equations by Newton&rsquo;s method.
+</p>
+<p><var class="var">FuncList</var> is a list of functions to solve,
+<var class="var">VarList</var> is a list of variable names, and
+<var class="var">GuessList</var> is a list of initial approximations.
+The optional argument <var class="var">DF</var> is the Jacobian matrix of the list of functions;
+if not supplied, it is calculated automatically from <var class="var">FuncList</var>.
+</p>
+<p><var class="var">FuncList</var> may be specified as a list of equations,
+in which case the function to be solved is the left-hand side of each equation minus the right-hand side.
+</p>
+<p>If there is only a single function, variable, and initial point,
+they may be specified as a single expression, variable, and initial value;
+they need not be lists of one element.
+</p>
+<p>A variable may be a simple symbol or a subscripted symbol.
+</p>
+<p>The solution, if any, is returned as a list of one element,
+which is a list of equations, one for each variable,
+specifying an approximate solution;
+this is the same format as returned by <code class="code">solve</code>.
+If the solution is not found, <code class="code">[]</code> is returned.
+</p>
+<p>Functions and initial points may contain complex numbers,
+and solutions likewise may contain complex numbers.
+</p>
+<p><code class="code">mnewton</code> is governed by global variables <code class="code"><a class="ref" href="#newtonepsilon">newtonepsilon</a></code> and
+<code class="code"><a class="ref" href="#newtonmaxiter">newtonmaxiter</a></code>, and the global flag <a class="ref" href="#newtondebug">newtondebug</a>.
+</p>
+<p><code class="code">load(&quot;mnewton&quot;)</code> loads this function.
+</p>
+<p>See also <code class="code"><a class="ref" href="Equations.html#realroots">realroots</a></code>, <code class="code"><a class="ref" href="Equations.html#allroots">allroots</a></code>, <code class="code"><a class="ref" href="Numerical.html#find_005froot">find_root</a></code> and
+<a class="ref" href="Numerical.html#newton">newton</a>.
+</p>
+<p>Examples:
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;mnewton&quot;)$
+
+(%i2) mnewton([x1+3*log(x1)-x2^2, 2*x1^2-x1*x2-5*x1+1],
+              [x1, x2], [5, 5]);
+(%o2) [[x1 = 3.756834008012769, x2 = 2.779849592817897]]
+(%i3) mnewton([2*a^a-5],[a],[1]);
+(%o3)             [[a = 1.70927556786144]]
+(%i4) mnewton([2*3^u-v/u-5, u+2^v-4], [u, v], [2, 2]);
+(%o4) [[u = 1.066618389595407, v = 1.552564766841786]]
+</pre></div>
+
+<p>The variable <code class="code">newtonepsilon</code> controls the precision of the
+approximations.  It also controls if computations are performed with
+floats or bigfloats.
+</p>
+<div class="example">
+<pre class="example-preformatted">(%i1) load(&quot;mnewton&quot;)$
+
+(%i2) (fpprec : 25, newtonepsilon : bfloat(10^(-fpprec+5)))$
+
+(%i3) mnewton([2*3^u-v/u-5, u+2^v-4], [u, v], [2, 2]);
+(%o3) [[u = 1.066618389595406772591173b0, 
+                               v = 1.552564766841786450100418b0]]
+</pre></div>
+
+<div class=categorybox>
+Categories:
+<a class="ref" href="Documentation-Categories.html#Category_003a-Package-mnewton">Package mnewton</a>
+&middot;
+</div>
+</dd></dl>
+
+
+</div>
+</div>
+<hr>
+<div class="nav-panel">
+<p>
+Next: <a href="Package-numericalio.html#Package-numericalio" accesskey="n" rel="next">Package numericalio</a>, Previous: <a href="Package-makeOrders.html#Package-makeOrders" accesskey="p" rel="prev">Package makeOrders</a> &nbsp; [<a href="index.html#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="Function-and-Variable-Index.html" title="Index" rel="index">Index</a>]</p>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+#
+# zerrorfill
+#
+set yrange [0.5:5.5]
+set zrange [1:*]
+set xyplane at 1
+set log z
+set key opaque box height 1 at screen .9, .8
+set border 127
+set grid x y z vertical
+set grid lt 1 lw 0.75 lc "grey"
+set xtics offset 0, -0.5
+set ytics offset -0.5, -0.5
+
+set title "splot with zerrorfill\n(note that plot ordering must be back-to-front)"
+splot for [k=5:1:-1] 'silver.dat' using 1:(k):2:3 with zerror lt black fc lt k title "k = ".k
+
+pause -1 "Hit return to continue"
+reset
+#
+# Reproduce surface1.dem plot #16
+# using zerrorfill instead of hidden3d parametric surfaces
+#
+set format z "%.1f" 
+unset key
+set view 66, 200, 1, 1
+set xyplane 0
+unset xtics
+unset ytics
+set title "fence plot constructed with zerrorfill" 
+set xlabel "X axis"  rotate parallel 
+set ylabel "Y axis" rotate parallel offset -4
+set pm3d depthorder base
+sinc(u,v) = sin(sqrt(u**2+v**2)) / sqrt(u**2+v**2)
+
+set style fill solid noborder
+splot for [i=-5:4][y=-50:50:5] '+' using (i):($1/100.):(-1):(-1):(sinc($1/10., 1.+i)) with zerrorfill
+
+pause -1 "Hit return to continue"
+reset

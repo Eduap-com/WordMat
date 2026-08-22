@@ -1,0 +1,158 @@
+/* Todo: We could sometimes recycle values of deriv_1step or deriv_2steps */
+rk_adaptive(expr,vars,vars_initval,var,startval,endval,[params]):=block(
+    [
+        result,
+        point,
+        deriv_1step,
+        deriv_2steps,
+        time:startval,
+        timestep:float((endval-startval)/1000),
+        err,
+        maxabserr:1e-4,
+        maxrelerr:1e-6,
+        maxstep:abs(endval-startval)/100,
+        minstep:abs(endval-startval)/1000000,
+        sgn:1,
+        minstepduration:0,
+        keep_1step:false,
+        debugmode:false,
+        file,
+        debugfile,
+        stopcriterion:false
+    ],
+    mode_declare(keep_1step,boolean),
+    mode_declare(sgn,integer),
+
+    if endval >= startval then sgn:1 else sgn:-1,
+
+    /* Interpret the optional parameters */
+    for i in params do
+    (
+        if lhs(i)='stopcriterion then stopcriterion:rhs(i) else
+        (
+            if lhs(i)='debugfile then (debugfile:rhs(i),debugmode:true) else
+            (
+                if not numberp(rhs(i)) then
+                    error (sconcat("rk_adaptive: Expected a number for parameter ",
+                    lhs(i))),
+                if lhs(i)='maxstep then maxstep:rhs(i) else
+                if lhs(i)='minstep then minstep:rhs(i) else
+                if lhs(i)='timestep_initial then timestep:rhs(i) else
+                if lhs(i)='maxabserr then maxabserr:rhs(i) else
+                if lhs(i)='maxrelerr then maxrelerr:rhs(i) else
+                warning("rk_adaptive: Found a unknown param")
+            )
+        )
+    ),
+    if maxrelerr <= 0 then error("rk_adaptive: Illegal value for maxrelerr"),
+    if maxabserr <= 0 then error("rk_adaptive: Illegal value for maxabserr"),
+    if maxstep <= 0 then error("rk_adaptive: Illegal value for maxstep"),
+    if minstep <= 0 then error("rk_adaptive: Illegal value for minstep"),
+    if timestep*sgn <= 0 then error("rk_adaptive: Illegal value for timestep_initial"),
+    /* Do we need to reverse some comparisons since the time we end is before the time we start at? */
+    /* Make sure our first 3 arguments are lists */
+    if not listp(expr) then expr:[expr],
+    if not listp(vars) then vars:[vars],
+    if not listp(vars_initval) then vars_initval:[vars_initval],
+
+    /* Empty the debug file, if it is in use */
+    if debugmode then
+    (
+        file:openw(debugfile),
+        close(file)
+    ),
+    /* Add the starting point to the result */
+    point:vars_initval,
+    result:[append([startval],vars_initval)],
+    /* Now calculate the other points */
+    do (
+        do (
+            /* Calculate the next 2 points */
+            if not keep_1step then
+                deriv_1step:subst(var=time,
+                    subst(map("=",vars,point),expr)
+                ),
+            deriv_2steps:subst(var=time+timestep,
+                subst(map("=",vars,point+deriv_1step*timestep),expr)
+            ),
+            keep_1step:false,
+            /* Calculate the error. Err=1 is the limit */
+            err:apply('max,
+                map(
+                    lambda(
+                        [pnt,drv_1step,drv_2steps],
+                        if cabs(pnt) > maxrelerr then
+                           min(
+                               cabs(drv_1step-drv_2steps)/maxabserr,
+                               cabs((drv_1step-drv_2steps)/pnt)/maxrelerr
+                           )
+                        else
+                            cabs(drv_1step-drv_2steps)/maxabserr
+                    ),
+                    point,deriv_1step,deriv_2steps
+                )
+            ),
+            if debugmode then
+            (
+                file:opena(debugfile),
+                printf(file,"~a~%",
+                    sconcat(
+                        var,"=",time,
+                        ",point=",point,
+                        ",deriv_1step=",deriv_1step,
+                        ",deriv_2steps=",deriv_2steps,
+                        ",timestep=",timestep,
+                        ",err=",err
+                    )
+                ),
+                close(file)
+            ),
+            
+            /* See if we should adjust the time step width */
+            if err>1.0 then
+            (
+                timestep:timestep/2,
+                /* See if we have arrived at the minimum step width */
+                if sgn*timestep<=sgn*minstep then
+                (
+                    timestep:sgn*minstep,
+                    time:time+timestep,
+                    push(append([time],point+deriv_1step*timestep),result),
+                    point:point+deriv_1step*timestep,
+                    minstepduration:minstepduration+timestep,
+                    return()
+                )
+            )
+            else
+            (
+                time:time+timestep,
+                push(append([time],point+deriv_1step*timestep),result),
+                point:point+deriv_1step*timestep,
+                if err<.25 then
+                (
+                    timestep:timestep*2,
+                    if timestep*sgn > maxstep*sgn then
+                        timestep:maxstep*sgn
+                )
+                else
+                (
+                    deriv_1step:deriv_2steps,
+                    keep_1step:true
+                ),
+                return()
+            )
+        ),
+        if sgn*time>sgn*endval then return(),
+        if subst(map("=",vars,point+deriv_1step*timestep),stopcriterion) then return()
+    ),
+    if minstepduration>0 then warning(
+        sconcat(
+            "rk_adaptive: Ignored the tolerance goal for ",
+            minstepduration,
+            " units of ",var
+        )
+    ),
+    /* Convert the result into a more user-friendly format (tm)*/
+    args(transpose(apply('matrix,reverse(result))))
+);
+compile(rk_adaptive);

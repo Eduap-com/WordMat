@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>2 Xmaxima Window (Xmaxima Manual)</title>
+
+<meta name="description" content="2 Xmaxima Window (Xmaxima Manual)">
+<meta name="keywords" content="2 Xmaxima Window (Xmaxima Manual)">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="makeinfo">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<style type="text/css">
+<!--
+/* Define colors for light and dark mode */
+
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
+span.program-in-footer {font-size: smaller}
+span:hover a.copiable-link {visibility: visible}
+:root {
+    /* Default light mode colors */
+    --background-color: white;
+    --text-color: black;
+    --example-background-color: rgb(238,238,255);
+    --link-color: #00f;
+    --link-visited-color: #a0a;
+    --hover-background-color: #555753;
+    --hover-color: #cdf;
+    --nav-panel-background-color: #CDCCDD;
+    --div-titlebox-background-color: rgb(200,255,255);
+    --div-synopsisbox-backgraound-color: rgb(255,220,255);
+    --pre-example-border: 1px solid rgb(180,180,180);
+    --div-categorybox-border: 1px solid gray;
+    --div-categorybox-background-color: #fdf6e3;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark Mode Overrides */
+        --background-color: #444;
+        --text-color: #eee;
+        --example-background-color: #454545;
+        --link-color: #9df;
+        --link-visited-color: #9fd;
+        --hover-background-color: #ddd;
+        --hover-color: #55f;
+        --nav-panel-background-color: #555;
+        --div-titlebox-background-color: black;
+        --div-synopsisbox-backgraound-color: black;
+        --pre-example-border: 1px solid black;
+        --div-categorybox-border: 1px solid gray;
+        --div-categorybox-background-color: #544;
+    }
+}
+
+/* Overrides to the default Makeinfo CSS */
+div.display {margin-left: 0}
+div.example {
+    margin-left: 0;
+    font-family: "Courier New", "DejaVu Sans Mono", monospace
+}
+/* end of overrides */
+
+body {
+    color: var(--text-color);
+    background: var(--background-color);
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: Arial, Verdana, Helvetica, sans-serif
+}
+h1 { font-size: 150% }
+h2 { font-size: 125% }
+h3 { font-size: 110% }
+a:link {
+    text-decoration: none;
+    color: var(--link-color);
+}
+a:visited {color: var(--link-visited-color) }
+a:hover, span.button:hover {
+    background-color: var(--hover-background-color);
+    color: var(--hover-color);
+}
+/*
+ * What are these used for?  I (rtoy) can't find these anywhere.
+ * Commenting these out for now, but they should be removed if they're
+ * not really used anywhere.
+ */
+/*
+div.textbox {
+    border: solid;
+    border-width: thin;
+    padding: 1em 2em;
+}
+div.titlebox {
+    border: none;
+    padding-top: 1em 2em;
+    background: var(--div-titlebox-background-color);
+}
+div.synopsisbox {
+    border: none;
+    padding-top: 1em 2em;
+    background: var(--div-synopsisbox-background-color);
+}
+*/
+
+pre.example, pre.example-preformatted {
+    border: var(--pre-example-border);
+    color: var(--text-color);
+    padding: 5px;
+    background-color: var(--example-background-color);
+    /* Add scrollbar for examples for narrow windows */
+    overflow: auto;
+}
+
+/*
+ * For pygments, make the background color of the highlighted code the
+ * same as the example background color.  Without this, it looks funny.
+ */
+
+div.highlight {
+    background-color: var(--example-background-color) !important;
+}
+
+div.spacerbox { border: none; padding: 2em 0 }
+div.image { margin: 0; padding: 1em; text-align: center }
+div.categorybox {
+    border: var(--div-categorybox-border);
+    padding: 1em;
+    background: var(--div-categorybox-background-color);
+}
+img {
+    max-width:80%;
+    max-height: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+tt, code { font-family: "Courier New", "DejaVu Sans Mono", monospace }
+
+/*
+ * Put background color on the navigation bar
+ * Texinfo 7.1 and later uses .nav-panel.  6.8 uses div.header.
+ */
+div.header, .nav-panel {
+    background-color: var(--nav-panel-background-color);
+    padding: 3px 10px;
+}
+
+/*
+ * Pygments uses a line height of 125%, which seems too small compared
+ * to what we used to do.
+ */
+div.highlight pre {
+    line-height: normal !important;
+}
+
+/* Reduce the indentation of lists and descriptions */
+ul,ol { padding-left: 1em }
+dd { margin-left: 0.5em }
+
+@media screen and (min-width: 600px) {
+    body {
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    div.display { margin: 0 2em }
+    div.example { margin: 0 2em }
+    pre.example, pre.example-preformatted { padding: 1em }
+    ul,ol { padding-left: 2em }
+    dd { margin-left: 1.5em }
+}
+
+-->
+</style>
+
+<link rel="icon" type="image/svg+xml" href="figures/maxima.svg">
+<link rel="alternate icon" href="figures/favicon.ico">
+
+
+
+
+
+</head>
+
+<body lang="en">
+<div class="chapter-level-extent" id="Main-Window">
+<table class="nav-panel">
+<tr><td class="nav-button">[<a href="index.html" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td class="nav-button">[<a href="index.html" title="Previous section in reading order"> &lt; </a>]</td>
+<td class="nav-button">[ Up ]</td>
+<td class="nav-button">[<a href="Entering-commands.html#Entering-commands" title="Next section in reading order"> &gt; </a>]</td>
+<td class="nav-button">[<a href="Entering-commands.html#Entering-commands" title="Next chapter"> &gt;&gt; </a>]</td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button">[<a href="index.html" title="Cover (top) of document">Top</a>]</td>
+<td class="nav-button">[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td class="nav-button">[<a href="Concept-Index.html" title="Index">Index</a>]</td>
+<td class="nav-button">[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h1 class="chapter" id="Xmaxima-Window"><span>2 Xmaxima Window<a class="copiable-link" href="#Xmaxima-Window"> &para;</a></span></h1>
+
+<p>By default, Xmaxima creates two windows, a command window, where all
+the commands for Maxima will be entered and the output returned by
+Maxima will be printed.
+<a class="index-entry-id" id="index-text-window"></a>
+</p>
+<p>The second window is Xmaxima&rsquo;s browser; it is used to show a quick
+primer, a copy of the Maxima manual and any other HTML you might want to
+download from the Web.
+<a class="index-entry-id" id="index-browser"></a>
+</p>
+<img class="image" src="figures/xmaximawindow.png" alt="figures/xmaximawindow">
+
+<img class="image" src="figures/xmaximabrowser.png" alt="figures/xmaximabrowser">
+
+<p>The cursor is the small vertical bar that blinks in the text window. The
+text that is currently being written in the text window and which could
+be submitted to Maxima for evaluation is rendered in green. The text
+sent back by Maxima is rendered in black, and the text that has been
+previously entered by the user and that was already evaluated by Maxima
+is rendered in blue.
+</p>
+
+<p>You can also choose different types and sizes for the fonts, in the
+section &lsquo;<samp class="samp">Preferences</samp>&rsquo; of the <code class="code">Options</code> menu; those settings
+will be saved for future sessions.
+<a class="index-entry-id" id="index-Preferences"></a>
+</p>
+</div>
+<hr>
+<table class="nav-panel">
+<tr><td class="nav-button">[<a href="index.html" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td class="nav-button">[<a href="Entering-commands.html#Entering-commands" title="Next chapter"> &gt;&gt; </a>]</td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button"> &nbsp; </td>
+<td class="nav-button">[<a href="index.html" title="Cover (top) of document">Top</a>]</td>
+<td class="nav-button">[<a href="xmaxima_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td class="nav-button">[<a href="Concept-Index.html" title="Index">Index</a>]</td>
+<td class="nav-button">[<a href="xmaxima_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+  <span class="program-in-footer">This document was generated on <em class="emph">August 18, 2026</em> using <a class="uref" href="https://www.gnu.org/software/texinfo/"><em class="emph">makeinfo</em></a>.</span>
+</p>
+
+
+</body>
+</html>
