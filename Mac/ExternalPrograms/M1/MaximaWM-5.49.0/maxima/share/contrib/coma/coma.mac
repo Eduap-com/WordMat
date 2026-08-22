@@ -1,0 +1,1826 @@
+/* ======================================================================= */
+/* coma.mac                                                          V 2.1 */
+/* ----------------------------------------------------------------------- */
+/* COntrol engineering with MAxima            (c) Wilhelm Haager 2009-2019 */
+/* ----------------------------------------------------------------------- */
+/*                                                                         */
+/*  This program is free software; you can redistribute it and/or modify   */
+/*  it under the terms of the GNU General Public License as published by   */
+/*  the Free Software Foundation.                                          */
+/*                                                                         */
+/*  New:                                                                   */
+/*  - function bode_plot                                                   */
+/*  - option-processing for plot functions renewed                         */
+/*  - 2012-01-25: bugfix in "phase"                                        */
+/*  - 2012-02-27: "poles" and "zeros" enhanced                             */
+/*  - 2012-11-02: bugfix in "step_response": variable "t" local ()         */
+/*  - 2012-12-21: "ratsimp" replaced by "xthru" in many places             */
+/*  - 2013-01-05: "nilt" improved                                          */
+/*  - 2013-03-30: "pulse_response" added                                   */
+/*  - 2013-11-16: Rootsepsilon" set to 1.0e-7 (bug in Maxima 5.31)         */
+/*  - 2014-01-23: some bugfixes (nilt,...)                                 */
+/*  - 2014-07-14: margin adjustment in bode_plot                           */
+/*  - 2014-08-10: "xthru" replaced by "ratsimp" in "impedance_chain"       */
+/*  - 2014-09-07: "xthru" replaced by "ratsimp" in "transfer_function"     */
+/*  - 2014-11-07: Grid lines for Bode-plots                                */
+/*  - 2014-11-14: Nested lists for graphic options enabled                 */
+/*  - 2015-01-09: "//" - Parallel-Operator for electric resistances        */
+/*  - 2015-04-26: bug in "hurwitz" removed                                 */
+/*  - 2015-06-21: function "product_form" added                            */
+/*  - 2015-06-22: function "asymptotic" added, "phase" rewritten           */
+/*  - 2015-10-11: sum_form instead of standard_form; minor changes         */
+/*  - 2015-10-24  bugfixes, minor changes (product_form, plot)             */
+/*  - 2015-11-11  adaptations for wxMaxima 15.08 (wxplot_size)             */
+/*  - 2016-01-10  /_ infix operator and //_ postfix operator declared      */
+/*  - 2016-06-05  bug in _COMA_ppo removed (thanks to Daniel Volinski)     */
+/*  - 2016-07-25  sum_form enhanced; new function npartfrac                */
+/*  - 2016-08-05  sallrrots, spartfrac, silt added                         */
+/*  - 2016-09-19  bug in product_form removed (thanks to Klaus Weichinger) */
+/*  - 2017-02-20  new gain_crossover, new phase_crossover etc.             */
+/*  - 2017-05-07  bode_plot: option "logy=dB" added (P.Heidrich, S.Milani) */
+/*  - 2017-06-08  sum_form extended (second parameter: 1...6 )             */
+/*  - 2017-06-08  product_form extended (second parameter: 1...2)          */
+/*  - 2017-08-08  new bode_plots, phase, absval, asymptotic                */
+/*  - 2018-01-14  Nichols plot                                             */
+/*  - 2018-02-24  Weird error with cabs,carg,assume_pos avoided            */
+/*  - 2018-02-26  stable_area enhanced                                     */
+/*  - 2018-03-16  bugfix in product_form, gain_margin and time_delay       */
+/*  - 2018-12-03  (basic) treatment of time delays; function fullermap     */
+/*  - 2018-12-16  "nilt" extended, new variable "try_symbolic_ilt"         */
+/*  - 2019-01-03  "closed_loop" for time delayed systems                   */
+/*  - 2019-01-09  Digital algorithms added                                 */
+/*  - 2019-01-28  "normalize" and "tf" added                               */
+/*  - 2019-02-24  "stable_ares" depicted as transparent "region"           */
+/*  - 2019-03-26  "moving average" and "regan" added                       */
+/*  - 2019-05-08  "periodic" added                                         */
+/*  - 2019-05-21  "add_noise", "mult_noise" added                          */
+/* ======================================================================= */
+
+disp("coma v.2.1 (Wilhelm Haager, 2019-05-21)")$
+load("draw");  /* not necessary any more but beneficial (2013-11-16) */
+
+/* ======================================================================= */
+/* Some functions to avoid really weird errors (2018-02-24,2018-03-05)     */
+/* ======================================================================= */
+xabs(x):=lambda([u],cabs(num(u))/cabs(denom(u)))(xthru(x));
+xarg(x):=lambda([u],carg(num(u))-carg(denom(u)))(xthru(x));
+
+
+/* ======================================================================= */
+/* Default values                                                          */
+/* ======================================================================= */
+
+fpprintprec:5;
+rootsepsilon:1.0e-7;
+coma_defaults:[grid=true, wx=true, dimensions=[700,400],
+   user_preamble="set grid lt 3 lc '#111111',lt 3 lc '#AAAAAA';set tics font 'courier new,10'",
+   color=[red,blue,dark-green,goldenrod,violet,gray40,dark-cyan,
+         orange,brown,sea-green],
+   fill_color=[red,blue,dark-green,goldenrod,violet,gray40,dark-cyan,
+             orange,brown,sea-green]
+   ];
+
+/* ======================================================================= */
+/* Messages                                                                */
+/* ======================================================================= */
+_COMA_msg:[0,0,0];
+_COMA_msg[1]:"*** COMA error *** Coefficients must be numeric";
+_COMA_msg[2]:"*** COMA error *** yrange must be a list of TWO ranges";
+_COMA_msg[3]:"*** COMA warning *** Delay time ignored";
+
+/* ======================================================================= */
+/* Plot Functions                                                          */
+/* ======================================================================= */
+
+/* ----------------------------------------------------------------------- */
+/* plot - plots functions in one and two variables (2015-10-24)            */
+/* ----------------------------------------------------------------------- */
+plot(f,[opts]) :=
+block(
+  [x,x1,x2,y,y1,y2,defs,hli,fli,h,n,t,wxx,varli,
+    wxplot_size:assoc(dimensions,coma_defaults),ratprint:false],
+  opts:flatten(opts),
+  defs:[ ],
+  [x1,x2]:assoc('xrange,opts,[0,1]),
+  [y1,y2]:assoc('yrange,opts,[0,1]),
+  varli:map(lambda([u],if _COMA_go(u) then [t] else listofvars(u)),flatten([f])),
+  varli:map(lambda([u],delete(s,u)),varli),
+  varli:map(lambda([u],if u=[] then u:[t] else u),varli), /* 10/2015 fuer Treppenfunktion */
+  varli:map(sort,varli),
+  n:apply(max,map(length,varli)),
+  if n>2 then return(false),
+  fli:flatten([f]),
+  if n<2 then block(  /* 2d-plot */
+    fli:map(lambda([u,w],
+    if _COMA_go(u) then u else explicit(u,part(w,1),x1,x2)
+    ),fli,varli))
+  else block(  /* 3d-plot */
+    fli:map(lambda([u,w],
+    if _COMA_go(u) then u else explicit(u,part(w,1),x1,x2,part(w,2),y1,y2)
+    ),fli,varli)),
+  hli:_COMA_ppo(fli,defs,opts),
+  if is(n>1) then block(
+     if wxx#false then apply(wxdraw3d,hli) else apply(draw3d,hli))
+  else block(
+    if wxx#false then apply(wxdraw2d,hli) else apply(draw2d,hli))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* step_response(f,opts) - plots the step response of f                    */
+/* ----------------------------------------------------------------------- */
+step_response(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),
+    hli,defs:[],fli,t,tanf,tend,wxx,ratprint:false,assume_pos:false],
+  opts:flatten(opts),
+  if not listp(f) then f:[f],
+  fli:flatten(map(lambda([_u], if _COMA_go(_u) then _u
+        else if algorithmp(_u) then 'stepf(algorithm_step_response(_u))
+        else (nilt(xthru(_u/s),s,t))),f)),
+  fli:map(lambda([u],if _COMA_go(u) or algorithmp(u) then u
+    /*    else explicit(if t>0 then u else 0,t,tanf,tend)),fli),  */
+        else explicit(u,t,tanf,tend)),fli),
+  hli:_COMA_ppo(fli,defs,opts),
+  if option_exists('xrange,hli) then [tanf,tend]:get_option('xrange,hli)
+  else block([tanf,tend]:[0,_COMA_npv(_COMA_srat(sublist(f,ntfp)),[2,5,10])],
+       set_option('xrange=[tanf,tend],hli)),
+  if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+/* ----------------------------------------------------------------------- */
+/* step_response(f,opts) - plots the step response of f   (TESTVERSION 8.1.2019)                 */
+/* ----------------------------------------------------------------------- */
+step_response(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),
+    hli,defs:[],fli,t,tanf,tend,wxx,ratprint:false,assume_pos:false],
+  opts:flatten(opts),
+  if not listp(f) then f:[f],
+  if option_exists('xrange,opts) then [tanf,tend]:get_option('xrange,opts)
+  else block([tanf,tend]:[0,_COMA_npv(_COMA_srat(sublist(f,ntfp)),[2,5,10])],
+       set_option('xrange=[tanf,tend],opts)),
+  fli:flatten(map(lambda([_u], if _COMA_go(_u) then _u
+    else if algorithmp(_u) then ('stepf(algorithm_step_response(_u,round(tend/ _u[2]))))
+    else (nilt(    (_u/s),s,t))),f)),
+  fli:map(lambda([u],if _COMA_go(u) then u
+    /*    else explicit(if t>0 then u else 0,t,tanf,tend)),fli),  */
+    else explicit(u,t,tanf,tend)),fli),
+  hli:_COMA_ppo(fli,defs,opts),
+  if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+/* ----------------------------------------------------------------------- */
+/* response(f,opts) - plots the inverse Laplace transform of f (pulse resp)*/
+/* ----------------------------------------------------------------------- */
+response(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),
+    hli,defs:[],fli,t,tanf,tend,wxx,ratprint:false,assume_pos:false],
+  opts:flatten(opts),
+  f:flatten([f]),
+  fli:flatten(map(lambda([u], if _COMA_go(u) then u
+                             else nilt(xthru(u),s,t)),f)),
+  fli:map(lambda([u],if _COMA_go(u) then u
+        else explicit(if t>0 then u else 0,t,tanf,tend)),fli),
+  hli:_COMA_ppo(fli,defs,opts),
+  if option_exists('xrange,hli) then [tanf,tend]:get_option('xrange,hli)
+  else block([tanf,tend]:[0,_COMA_npv(_COMA_srat(f),[2,5,10])],
+       set_option('xrange=[tanf,tend],hli)),
+  if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* nyquist_plot(f,opts) - nyquist plot of the transfer function f          */
+/* ----------------------------------------------------------------------- */
+nyquist_plot(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults)*[1,1.25],
+    hli,defs,t,tanf,tend,wxx,fli,ratprint:false],
+  opts:flatten(opts),
+  defs:[aspect_ratio=-1, nticks=500],
+  [tanf,tend] : _COMA_bpr(sublist(flatten([f]),lambda([u],not _COMA_go(u)))),
+  [tanf,tend] : [tanf/10,tend*10], /* ADAPT RANGE HERE */
+  tanf:float(log(tanf)/log(10)),
+  tend:float(log(tend)/log(10)),
+  fli:map(lambda([u], if _COMA_go(u) then u else
+          [float(realpart(ev(u,s=%i*t))), float(imagpart(ev(u,s=%i*t)))]
+          ),flatten([f])),
+  fli:map(lambda([u],if _COMA_go(u) then u else ev(u,t=10**t)),fli),
+  fli:map(lambda([u],if _COMA_go(u) then u
+          else parametric(part(u,1),part(u,2),t,tanf,tend)),fli),
+  hli:ev(_COMA_ppo(fli,defs,opts)),
+  if wxx#false then apply(wxdraw2d,hli) else apply(draw2d,hli)
+)$
+
+/* ----------------------------------------------------------------------- */
+/* nichols_plot(f,opts) - Nichols plot of the Bode-diagram                 */
+/* ----------------------------------------------------------------------- */
+nichols_plot(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),hli,defs,t,tanf,tend,fli,
+       fli1,fli2,wxx,ratprint:false,db:false],
+  opts:flatten(opts),
+  if option_exists('logy,opts) and assoc('logy,opts)='dB then /* dB-scale, 2017-05-07 */
+  (
+    set_option('logy=false,opts),
+    db:true
+  ),
+  fli:ratsimp(flatten([f])),
+  [tanf,tend] : _COMA_bpr(sublist(flatten([f]),lambda([u],not _COMA_go(u)))),
+  [tanf,tend] : [tanf/10,tend*10], /* ADAPT RANGE HERE */
+  tanf:float(log(tanf)/log(10)),
+  tend:float(log(tend)/log(10)),
+  fli1:map(lambda([u],if _COMA_go(u) then u else
+       float(if db then (20*log(absval(u))/log(10)) else (absval(u)))),fli),
+  fli2:map(lambda([u], if _COMA_go(u) then u else ev(phase(u))),fli),
+  fli1:map(lambda([u],if _COMA_go(u) then u else ev(u,omega=10**t)),fli1),
+  fli2:map(lambda([u],if _COMA_go(u) then u else ev(u,omega=10**t)),fli2),
+  fli:map(lambda([u,v],if _COMA_go(u) then u else
+              parametric(u,v,t,tanf,tend)),fli2,fli1),
+  defs:['nticks=500,'logy=true,grid=false,'user_preamble="set grid xtics mxtics ytics mytics"],
+  hli:_COMA_ppo(fli,defs,opts),
+  if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* magnitude_plot(f,opts) - magnitude plot of the Bode-diagram             */
+/* ----------------------------------------------------------------------- */
+magnitude_plot(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),hli,defs,t,tanf,tend,fli,wxx,ratprint:false,db:false],
+    opts:flatten(opts),
+  if option_exists('logy,opts) and assoc('logy,opts)='dB then /* dB-scale, 2017-05-07 */
+  (
+    set_option('logy=false,opts),
+    db:true
+  ),
+  fli:ratsimp(flatten([f])),
+  fli:map(lambda([u],if _COMA_go(u) then u else
+         float(if db then (20*log(absval(u))/log(10)) else (absval(u)))),fli),
+  fli:map(lambda([u],if _COMA_go(u) then u else explicit(u,omega,tanf,tend)),fli),
+  defs:['logx=true,'logy=true,grid=false,'user_preamble="set grid xtics mxtics ytics mytics"],
+  hli:_COMA_ppo(fli,defs,opts),
+  if option_exists('xrange,opts) then [tanf,tend]:assoc('xrange,opts)
+  else block([tanf,tend] : _COMA_bpr(f),
+       set_option('xrange=[tanf,tend],hli)),
+  if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* phase_plot(f,opts) - phase plot of the Bode-diagram                     */
+/* ----------------------------------------------------------------------- */
+phase_plot(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),
+    hli,defs,t,tanf,tend,fli,ratprint:false,ph,wxx,omega],
+  opts:flatten(opts),
+  defs:['logx=true,grid=false,'user_preamble="set grid xtics mxtics ytics mytics",'nticks=500],
+  fli:map(ratsimp,flatten([f])),
+  fli:map(lambda([u], if _COMA_go(u) then u else ev(phase(u),assume_pos=true)),fli),
+  fli:map(lambda([u], if _COMA_go(u) then u else explicit(u,omega,tanf,tend)),fli),
+  hli:_COMA_ppo(fli,defs,opts),
+  if option_exists('xrange,opts) then [tanf,tend]:assoc('xrange,opts)
+  else block(
+     [tanf,tend] : _COMA_bpr(f),
+     set_option('xrange=[tanf,tend],hli)),
+  if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* bode_plot(f,opts) - Bode-diagram (magnitude_plot and phase_plot)        */
+/* ----------------------------------------------------------------------- */
+bode_plot(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults)*[1,2],
+    fli,fli1,fli2,hli1,hli2,defs1,defs2,t,tanf,tend,ratprint:false,wxx,
+    xdim,ydim,dims,g0,db:false],
+  opts:flatten(opts),
+  if option_exists('logy,opts) and assoc('logy,opts)='dB then /* dB-scale, 2017-05-07 */
+  (
+    set_option('logy=false,opts),
+    db:true
+  ),
+  fli:ratsimp(flatten([f])),
+  defs1:['logx=true,'logy=true,grid=false,'user_preamble=["set tmargin 0.5",
+        "set lmargin 6","set rmargin 3","set bmargin 1.5","set grid xtics mxtics ytics mytics"]],
+  defs2:['logx=true, 'nticks=500,grid=false,'user_preamble=["set tmargin 0.5",
+        "set lmargin 6","set rmargin 3","set bmargin 1.5","set grid xtics mxtics ytics mytics"]],
+  xdim:600, ydim:500, /* default values (for both diagrams together) */
+  if listp(coma_defaults)=false then coma_defaults:['grid=true],
+  if option_exists('dimensions,coma_defaults) then block(
+     xdim:assoc('dimensions,coma_defaults)[1],
+     ydim:2.0*assoc('dimensions,coma_defaults)[2]),
+  if option_exists('dimensions,opts) then block(
+     xdim:assoc('dimensions,opts)[1],
+     ydim:assoc('dimensions,opts)[2]),
+  dims:'dimensions=[xdim,ydim],
+  /* Generating the function list */
+  fli1:map(lambda([u],if _COMA_go(u) then u else
+         float(if db then (20*log(absval(u))/log(10)) else (absval(u)))),fli),
+  fli1:map(lambda([u],if _COMA_go(u) then u else explicit(u,omega,tanf,tend)),fli1),
+  hli1:_COMA_ppo(fli1,defs1,opts),
+  delete_option('dimensions,hli1),
+  fli2:map(lambda([u], if _COMA_go(u) then u else ev(phase(u))),fli),
+  fli2:map(lambda([u], if _COMA_go(u) then u else explicit(u,omega,tanf,tend)),fli2),
+  hli2:_COMA_ppo(fli2,defs2,opts),
+  delete_option('dimensions,hli2),
+  /* Processing the ranges (xrange, yrange) */
+  if option_exists('xrange,opts) then [tanf,tend]:assoc('xrange,opts)
+  else block(
+     [tanf,tend] : _COMA_bpr(f),
+     set_option('xrange=[tanf,tend],hli1),
+     set_option('xrange=[tanf,tend],hli2)),
+  if option_exists('yrange,hli1) then block([yr],
+     yr:assoc('yrange,opts),
+     delete_option('yrange,hli1), delete_option('yrange,hli2),
+     if listp(yr) and listp(yr[1]) and listp(yr[2]) then block(
+        set_option('yrange=yr[1],hli1), set_option('yrange=yr[2],hli2))
+     else disp(_COMA_msg[2])),
+  /* Put the scenes together */
+  g0:[apply(gr2d,ev(hli1)),apply(gr2d,ev(hli2)),dims],
+  if wxx#false then apply(wxdraw,g0) else apply(draw,g0)
+)$
+
+/* ----------------------------------------------------------------------- */
+/* absval - absolute value of a frequency response (treats asymptotic)     */
+/* ----------------------------------------------------------------------- */
+absval(f,[opts]) :=
+block([fli,ratprint:false,assume_pos:true,dt],
+  /* --- treatment of asymptotic, 24.7.2017 --- */
+  [fli,dt]:_COMA_strip(f),
+  fli:map(lambda([u],
+        if not mapatom(u) and op(u)='asymptotic then block
+        ([assume_pos:true,inflag:true,f1,zz,nn,zl,nl,hz,hn,n,l0,l1],
+          f1:product_form(first(args(u))),
+          zz:num(f1),
+          nn:denom(f1),
+          zl:if not mapatom(zz) and op(zz)="*" then args(zz) else [zz],
+          nl:if not mapatom(nn) and op(nn)="*" then args(nn) else [nn],
+          hz:map(lambda([u],cl:coefficient_list(u,s),
+          n:length(cl),
+          [l0,l1]:[first(cl),last(cl)],
+          if l0 # 0 then (if n<2 or omega<1/abs(l1)^(1/(n-1))
+                          then l0 else s^(n-1)*l1)
+                 else s^(n-1)*l1),zl),
+          hn:map(lambda([u],cl:coefficient_list(u,s),
+          n:length(cl),
+          [l0,l1]:[first(cl),last(cl)],
+          if l0 # 0 then (if n<2 or omega<1/abs(l1)^(1/(n-1))
+                           then l0 else s^(n-1)*l1)
+                  else s^(n-1)*l1),nl),
+          apply("*",hz)/apply("*",hn)
+        ) else u
+      ),fli),
+  /* --- END treatment of asymptotic --- */
+  fli:float(map(xabs,subst(s=%i*omega,fli))),
+  if length(fli) = 1 then fli[1] else fli)$
+
+/* ----------------------------------------------------------------------- */
+/* phase(f) - phase of a frequency response (treats asymptotic)            */
+/* ----------------------------------------------------------------------- */
+phase(f):=block(
+  [inflag:true,n,li,ass:false,res,ratprint:false,assume_pos:true,dt],
+  [f,dt]:_COMA_strip(f),
+  res:map(lambda([ff],
+    if not mapatom(ff) and op(ff)='asymptotic then (ass:true, ff:product_form(first(args(ff))))
+                                           else ff:product_form(ff),
+    if not mapatom(ff) and op(ff)="*" then li:args(ff) else li:[ff],
+    n:0,
+    while n<length(li) do /* Zerlegen von Potenzen */
+    (
+      n:n+1,
+      if not mapatom(li[n]) and op(li[n])="^" and abs(args(li[n])[2])>1 then
+      block([prae,post,mid],
+        prae:rest(li,-length(li)+n-1),
+        post:rest(li,n),
+        mid:makelist(args(li[n])[1]**signum(args(li[n])[2]),k,1,abs(args(li[n])[2])),
+        li:append(prae,mid,post)
+      )
+    ),
+    /* --- treatment of asymptotic 24.7.2017 --- */
+    li:map(lambda([u],
+        if ass then block([lu,lo,xcf:_COMA_cf(u)],
+          if length(xcf)>0 then
+          ( lu:limit(xarg(subst(s=%i*omega,u)),omega,0,plus),
+            lo:limit(xarg(subst(s=%i*omega,u)),omega,inf),
+            if omega<xcf[1] then lu else lo) else xarg(subst(s=%i*omega,u)) )
+        else xarg(subst(s=%i*omega,u))
+     ),li),
+    /* --- END treatment of asymptotic --- */
+    apply("+", li)*180/%pi),
+    f) + log(dt)/s*omega*180/%pi,
+  if length(res) = 1 then res[1] else res)$
+
+/* ----------------------------------------------------------------------- */
+/* poles_and_zeros(f,opts) - plots the poles/zeros distribution            */
+/* ----------------------------------------------------------------------- */
+poles_and_zeros(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),dt,
+    hli,defs,zli,pli,wxx,x1,x2,y1,y2,range,ratprint:false],
+  opts:flatten(opts),
+  defs:[aspect_ratio=-1,points_joined=false],
+  [f,dt]:_COMA_strip(f),     /* _COMA_(u)...Wrapper around graphic object */
+  zli:map(lambda([u],if _COMA_go(u) then _COMA_(u) else zeros(u)),f),
+  pli:map(lambda([u],if _COMA_go(u) then _COMA_(u) else poles(u)),f),
+  range:_COMA_rlpr(flatten(sublist(append(zli,pli),listp)),1.2,1.2),
+  [x1,x2]:assoc('xrange,opts,rhs(range[1])),
+  [y1,y2]:assoc('yrange,opts,rhs(range[2])),
+  set_option('xrange=[x1,x2],opts),
+  set_option('yrange=[y1,y2],opts),
+  zli:map(lambda([u],if op(u)=_COMA_ then u
+          else map(lambda([v],[realpart(v),imagpart(v)]),u)),zli),
+  zli:map(lambda([u],if op(u)=_COMA_ then u else [points(u)]),zli),
+  zli:map(lambda([u],if op(u)=_COMA_ then u else cons(point_type=6,u)),zli),
+  pli:map(lambda([u],if op(u)=_COMA_ then u
+          else map(lambda([v],[realpart(v),imagpart(v)]),u)),pli),
+  pli:map(lambda([u],if op(u)=_COMA_ then u else [points(u)]),pli),
+  pli:map(lambda([u],if op(u)=_COMA_ then u else cons(point_type=2,u)),pli),
+  pli:map(lambda([u,v],if op(u)=_COMA_ then args(u)
+                else append(u,v)),zli,pli),
+     /*    else flatten([u,v])),zli,pli), */
+  hli:_COMA_ppo(pli,defs,opts),
+  hli:delete(points([]),flatten(hli)),
+  if wxx#false then apply(wxdraw2d,hli) else apply(draw2d,hli)
+)$
+
+/* ----------------------------------------------------------------------- */
+/* contourplot                                                             */
+/* ----------------------------------------------------------------------- */
+contourplot(f,p1,p2,[opts]):=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),
+    x1,x2,y,y1,y2,defs,cli,hli,fli,ratprint:false,wxx],
+  opts:flatten(opts),
+  defs:[contours=[0],color=[red],line_width=[1]],
+  hli:_COMA_ppo(1,defs,opts),
+  [x1,x2]:assoc('xrange,opts,[0,1]),
+  [y1,y2]:assoc('yrange,opts,[0,1]),
+  cli:assoc('contours,hli),
+  hli:map(lambda([u],f=u),cli),
+  hli:map(lambda([u],implicit(u,p1,x1,x2,p2,y1,y2)),hli),
+  hli:flatten(_COMA_ppo(hli,defs,opts)),
+  delete_option('contours,hli),
+  if wxx#false then apply(wxdraw2d,hli) else apply(draw2d,hli)
+)$
+
+/* ----------------------------------------------------------------------- */
+/* root_locus(f,opts) - root locus plot of the transfer function f         */
+/* ----------------------------------------------------------------------- */
+root_locus(f,[opts]) :=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),
+    i,range,nnticks,fac,pars,nn,pl,poli:[],gpoli:[],t,t1,t2,defs,hli,fli,h,
+    ratprint:false,startpoints,endpoints,wxx,dt],
+  opts:flatten(opts),
+  defs:[aspect_ratio=-1,trange=[0.001,100],nticks=500],
+  hli:_COMA_ppo(0,defs,opts),
+  [t1,t2]:assoc('trange,hli),
+  nnticks:assoc('nticks,hli),
+  delete_option(nticks,hli),
+  delete_option(trange,hli),
+  fac:float((t2/t1)**(1/nnticks)),
+  [fli,dt]:_COMA_strip(f),
+  pars:map(lambda([u],first(delete(s,listofvars(u)))),fli), /* variable */
+  range:_COMA_rlpr(
+        flatten(map(lambda([u,v],poles(ev(u,ev(v)=t1))),fli,pars)),2,1.5),
+  if not option_exists('xrange,hli) then set_option(first(range),hli),
+  if not option_exists('yrange,hli) then set_option(last(range),hli),
+  for i:1 step 1 thru length(fli) do block(
+    nn:denom(ratsimp(fli[i])),
+    poli:[zeros(ev(nn,ev(pars[i])=t1))],
+    t:t1,
+    while t<t2 do block(
+      t:t*fac,
+      poli:endcons(_COMA_rlsp(zeros(ev(nn,ev(pars[i])=t)),last(poli)),poli)),
+    poli:map(lambda([v],map(lambda([u],[realpart(u),imagpart(u)]),v)),poli),
+    [startpoints,endpoints]:[first(poli),last(poli)],
+    poli:map('points,apply("[",args(transpose(apply(matrix,poli))))),
+    poli:append(['points_joined=true,'point_type=-1],poli),
+    poli:append(poli,['points_joined=false,'point_type=2,points(startpoints)]),
+    poli:append(poli,['point_type=6,points(endpoints)]),
+    gpoli:endcons(poli,gpoli)
+  ),
+  hli:_COMA_ppo(gpoli,hli,[]),
+ if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+_COMA_rlpr(poles,fx,fy) :=   /* root locus plot range */
+block(                       /* fx,fy ... oversizing factors */
+  [immax,remin,remax,xmin,xmax,ymax,xm,aspect_ratio:0.6],
+  immax:apply(max,imagpart(poles)),
+  remax:apply(max,realpart(poles)),
+  remin:apply(min,realpart(poles)),
+  ymax:fy*immax,
+  xm:(remax+remin)/2,
+  xmax:xm+fx*(remax-remin)/2,
+  xmin:xm-fx*(remax-remin)/2,
+  if is(xmax=xmin) then block(xmax:xmax+1,xmin:xmin-1),
+  ymax:max(ymax,(xmax-xmin)/2*aspect_ratio),
+  xmax:max(xmax,xm+ymax/aspect_ratio),
+  xmin:min(xmin,xm-ymax/aspect_ratio),
+  ['xrange=[xmin,xmax],'yrange=[-ymax,ymax]]
+)$
+_COMA_rlsp(z1,z2) :=  /* root locus sort points */
+block([l:z1], for i:1 step 1 thru length(z1-1) do block(
+  for j:i+1 step 1 thru length(z1) do
+  if cabs(z2[i]-l[j])<cabs(z2[i]-l[i]) then [l[j],l[i]]:[l[i],l[j]]),l)$
+
+/* ======================================================================= */
+/* Stability and related functions                                         */
+/* ======================================================================= */
+
+/* ----------------------------------------------------------------------- */
+/* poles(f) - poles of the transfer function f(s)                          */
+/* ----------------------------------------------------------------------- */
+poles(f):=
+block([res,polyfactor:false,ratprint:false,dt],
+  res:map(lambda([ff],
+    if ntfp(ff) then map(rhs,chop(allroots(%i*expand(float(denom(ff))))))
+       else []
+  ), xthru(first(_COMA_strip(float(f))))),
+  if listp(f) then res else res[1]
+)$
+
+/* ----------------------------------------------------------------------- */
+/* zeros(f) - zeros of the transfer function f(s)                          */
+/* ----------------------------------------------------------------------- */
+zeros(f):=
+block([res,polyfactor:false,ratprint:false,dt],
+  res:map(lambda([ff],
+    if ntfp(ff) then map(rhs,chop(allroots(%i*expand(float(num(ff))))))
+       else []),xthru(first(_COMA_strip(float(f))))),
+  if listp(f) then res else res[1]
+)$
+
+/* ----------------------------------------------------------------------- */
+/* hurwitz(p) - Hurwitz-determinants of the polynomial p(s)                */
+/* ----------------------------------------------------------------------- */
+hurwitz(p):=
+block(
+  [cli,n,i,k,hli,mat,res],
+  if not listp(p) then p:[p],
+  p:map(expand,p),
+  res:map(lambda([pp],
+  block(
+    hli:[],
+    n:hipow(pp,'s),
+    cli:reverse(coefficient_list(pp,s)),
+    cli:append(makelist(0,i,1,n-1),cli,makelist(0,i,1,n  )),
+    hli:makelist(mat:apply(matrix,makelist(
+      /*  makelist('cli[''((2*(n-j)+1)+(i-1))],j,1,k),i,1,k)) ,k,2,n), HAA, 14.2.2018 */
+        makelist('cli[((2*(n-j)+1)+(i-1))],j,1,k),i,1,k)) ,k,2,n),
+    hli:ev(hli,nouns), /* trick to prevent substituting variables k and n */
+    hli:map(determinant,hli),
+    if n>1 then hli else [])
+  ), p),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* stable_area(f,p1,p2) - plots the stable area with respect to p1 and p2  */
+/* ----------------------------------------------------------------------- */
+stable_area_outlined(f,p1,p2,[opts]):=
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),
+    x,x1,x2,y,y1,y2,defs,hli,fli,h,wxx,ratprint:false],
+  opts:flatten(opts),
+  defs:[xrange=[0,1],yrange=[0,1]],
+  f:flatten([f]),
+  h:map(lambda([u],if _COMA_go(u) then u else append(hurwitz(denom(u)),
+              coefficient_list(denom(u)))),f),
+  fli:map(lambda([u],if _COMA_go(u) then u else apply('min,u)),h),
+  fli:map(lambda([u],if _COMA_go(u) then u else implicit(u,p1,x1,x2,p2,y1,y2)),fli),
+  hli:_COMA_ppo(fli,defs,opts),
+  [x1,x2]:get_option('xrange,hli),
+  [y1,y2]:get_option('yrange,hli),
+  if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+
+stable_area(f,p1,p2,[opts]):=   /* depiction as region 24.2.2019 */
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),
+    x,x1,x2,y,y1,y2,defs,hli,fli,h,wxx,ratprint:false],
+  opts:flatten(opts),
+  defs:[xrange=[0,1],yrange=[0,1],x_voxel=50,y_voxel=50,
+       user_preamble="set style fill transparent solid 0.2 noborder"],
+  f:flatten([f]),
+  h:map(lambda([u],if _COMA_go(u) then u else
+      map(lambda([v],v>0),append(hurwitz(denom(u)),coefficient_list(denom(u))))),f),
+  fli:map(lambda([u],if _COMA_go(u) then u else apply("and",u)),h),
+  fli:map(lambda([u],if _COMA_go(u) then u else region(u,p1,x1,x2,p2,y1,y2)),fli),
+  hli:_COMA_ppo(fli,defs,opts),
+  [x1,x2]:get_option('xrange,hli),
+  [y1,y2]:get_option('yrange,hli),
+  if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+
+unstable_area(f,p1,p2,[opts]):=   /* depiction as region 24.2.2019 */
+block(
+  [wxplot_size:assoc(dimensions,coma_defaults),
+    x,x1,x2,y,y1,y2,defs,hli,fli,h,wxx,ratprint:false],
+  opts:flatten(opts),
+  defs:[xrange=[0,1],yrange=[0,1],x_voxel=50,y_voxel=50,
+       user_preamble="set style fill transparent solid 0.2 noborder"],
+  f:flatten([f]),
+  h:map(lambda([u],if _COMA_go(u) then u else
+      map(lambda([v],v<0),append(hurwitz(denom(u)),coefficient_list(denom(u))))),f),
+  fli:map(lambda([u],if _COMA_go(u) then u else apply("or",u)),h),
+  fli:map(lambda([u],if _COMA_go(u) then u else region(u,p1,x1,x2,p2,y1,y2)),fli),
+  hli:_COMA_ppo(fli,defs,opts),
+  [x1,x2]:get_option('xrange,hli),
+  [y1,y2]:get_option('yrange,hli),
+  if wxx#false then apply(wxdraw2d,ev(hli)) else apply(draw2d,ev(hli))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* stablep(f) - checks whether the transfer function f(s) is stable        */
+/* ----------------------------------------------------------------------- */
+stablep(f) :=
+block([ratprint:false],
+  if listp(f) then
+    map(lambda([ff],
+      not (member(true,map(lambda([u],is(realpart(u)>=0)),poles(ff))))
+    ), f)
+  else not (member(true,map(lambda([u],is(realpart(u)>=0)),poles(f))))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* phase_crossover(f) - calculates the phase crossover frequencies of f    */
+/* ----------------------------------------------------------------------- */
+phase_crossover(f):=
+block([re,im,sol,res,ratprint:false,omega,dt],
+  [f,dt]:_COMA_strip(f),
+  res:map(lambda([ff,dd],
+  if dd=1 then block(     /* without time delay */
+    re:realpart(ev(ff,s=%i*omega)),
+    im:imagpart(ev(ff,s=%i*omega)),
+    sol:algsys([num(im)=0],[omega]),
+    sol:sublist(flatten(sol),lambda([u],subst(u,denom(re))#0 and
+         is(ev(re,u)<0) and is(rhs(u)>0))),
+    sort(sol,lambda([u,v],rhs(u)<rhs(v))))
+  else block([],    /*  with time delay */
+    ['omega=find_root(phase(ff*dd)+180,omega,0,1e10)])
+  ), f,dt),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* gain_crossover(f) - calculates the gain crossover frequencies of f      */
+/* ----------------------------------------------------------------------- */
+gain_crossover(f):=
+block(
+  [roots,sol,res,polyfactor:false,ratprint:false,zz,omega,dt],
+  [f,dt]:_COMA_strip(f),
+  res:map(lambda([ff,dd],
+    if ntfp(ff)
+    then block
+    (
+      ff:xthru(subst(s=%i*omega,ff)),
+      zz:num(xthru((cabs(num(ff))/cabs(denom(ff)))**2-1)),
+      roots:if hipow(zz,omega)>0 then realroots(zz) else [],
+      sol:float(sublist(roots,lambda([u],is(part(u,2)>0)))),
+      if listp(sol) then sort(sol,lambda([u,v],rhs(u)<rhs(v)))
+    ) else []
+  ), f,dt),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* phase_margin(f) - calculates the phase margin of f                      */
+/* ----------------------------------------------------------------------- */
+phase_margin(f):=
+block(
+  [res,h,ratprint:false],
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],
+    h:gain_crossover(ff),
+    180+map(lambda([v],float(ev(phase(ff),v))),h)),f),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* gain_margin(f) - calculates the gain margin of f                        */
+/* ----------------------------------------------------------------------- */
+ gain_margin(f):=
+ block([res,h,ratprint:false,omega],
+   if not listp(f) then f:[f],
+   res:map(lambda([ff],
+       h:float(phase_crossover(ff)),
+       (-1)/realpart(map(lambda([v],ev(ff,s=%i*omega,v,eval)),h))),f),
+   if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* stability_limit(f,par) - calculates conditions for imaginary poles      */
+/* ----------------------------------------------------------------------- */
+stability_limit(f,par,[opt]):=
+block(
+  [eqs,nn,sol,res,assume_pos:true,omega,ratprint:false,dt],
+  [f,dt]:_COMA_strip(f),
+  if setify(dt)#{1} then disp(_COMA_msg[3]),
+  res:map(lambda([ff],
+  block(
+    nn:ev(denom(ff),s=%i*omega),
+    eqs:map(lambda([u],u(nn)=0),[realpart,imagpart]),
+    sol:ev(solve(eqs,[par,omega]),realonly=true),
+    sol:sublist(sol,lambda([u], assoc(omega,u)>0)))
+  ), f),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* damping(f) - negative realpart of the rightmost pole of f(s)            */
+/* ----------------------------------------------------------------------- */
+damping(f) :=
+block(
+  [polyfactor:true,ratprint:false,expr,p,res],
+  res:map(lambda([ff],
+  block(
+    p:poles(float(xthru(ff))),
+    expr:map(realpart,p),
+    -apply(max,expr))
+  ), first(_COMA_strip(f))),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* damping_ratio(f) - minimal value of all damping ratios                  */
+/* ----------------------------------------------------------------------- */
+damping_ratio(f) :=
+block(
+  [polyfactor:true,ratprint:false,expr,p,res],
+  res:map(lambda([ff],
+  block(
+    p:poles(float(xthru(ff))),
+    expr:map(lambda([u],realpart(u)/sqrt(realpart(u)**2+imagpart(u)**2)),p),
+    -apply(max,expr))
+  ), first(_COMA_strip(f))),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ======================================================================= */
+/* Transfer Function Related                                               */
+/* ======================================================================= */
+
+/* ----------------------------------------------------------------------- */
+/* normalize(f,a) - applies the similarity theorm on a transfer functi     */
+/* ----------------------------------------------------------------------- */
+normalize(f,[ _a]):=
+block([alpha:1,k,cl,res,assume_pos:true],
+  if length(_a)>0 then alpha: _a[1],
+  if not listp(f) then f:[f],
+  res:map(lambda([u],
+    u:sum_form(u),
+    cl:coefficient_list(denom(u),s),
+    k:last(cl)**(1/(length(cl)-1)),
+    subst(s=s/alpha/k,u)),f),
+  res:fullmap(lambda([u],if numberp(u) and abs('round(u)-u) < 1.0e-10
+    and round(u)>0 then 'round(u) else u),sum_form(res)),
+  if length(res)=1 then res[1] else res)$
+
+/* ----------------------------------------------------------------------- */
+/* tf(type,a,..) - generates special transferfunctions                     */
+/* ----------------------------------------------------------------------- */
+
+tf(f,[p]):=
+block([k,T1,T2,D,omega_n,Td,Tn,Tv,Ti,kr,Ta,Tb,nz:1,nn:2,h,pz,pn,c,d,eps,a,b],
+  local(c,d),
+  if f='pt1 then
+     (if length(p)>0 then k:p[1],if length(p)>1 then T1:p[2],return(k/(1+s*T1))),
+  if f='pt2  and length(p)>0 and p[1]='prod then
+     (if length(p)>1 then k:p[2],if length(p)>2 then T1:p[3], if length(p)>3 then T2:p[4],
+     return(k/((1+s*T1)*(1+s*T2)))),
+  if f='pt2 then
+     (if length(p)>0 then k:p[1],if length(p)>1 then D:p[2],if length(p)>2 then omega_n:p[3],
+     return(k/(1+2*D/omega_n*s+s**2/omega_n**2))),
+  if f='dt1 then
+     (if length(p)>0 then Td:p[1],if length(p)>1 then T1:p[2],
+     return(s*Td/(1+s*T1))),
+  if f='it1 then
+     (if length(p)>0 then Ti:p[1],if length(p)>1 then T1:p[2],
+     return(1/(s*Ti*(1+s*T1)))),
+  if f='pdt1 then
+     (if length(p)>0 then k:p[1],if length(p)>1 then T1:p[2],if length(p)>2 then T2:p[3],
+     return(k*(1+s*T1)/(1+s*T2))),
+  if f='pd then
+     (if length(p)>0 then k:p[1],if length(p)>1 then T1:p[2],
+     return(k*(1+s*T1))),
+  if f='allpass then
+     (if length(p)>0 then k:p[1],if length(p)>1 then T1:p[2],
+     return(k*(1-s*T1)/(1+s*T1))),
+  if f='pi then
+     (if length(p)>0 then kr:p[1],if length(p)>1 then Tn:p[2],
+     return(kr*(1+1/(s*Tn)))),
+  if f='pid  and length(p)>0 and p[1]='prod then
+     (if length(p)>1 then Ta:p[2],if length(p)>2 then Tb:p[3], if length(p)>3 then Ti:p[4],
+     return((1+s*Ta)*(1+s*Tb)/(s*Ti))),
+  if f='pid then
+     (if length(p)>0 then kr:p[1],if length(p)>1 then Tn:p[2],if length(p)>2 then Tv:p[3],
+     return(kr*(1+1/(s*Tn)+s*Tv))),
+  if f='pidt1  and length(p)>0 and p[1]='prod then
+     (if length(p)>1 then Ta:p[2],if length(p)>2 then Tb:p[3], if length(p)>3 then Ti:p[4],
+     if length(p)>4 then T1:p[5],return((1+s*Ta)*(1+s*Tb)/(s*Ti*(1+s*T1)))),
+  if f='pidt1 then
+     (if length(p)>0 then kr:p[1],if length(p)>1 then Tn:p[2],if length(p)>2 then Tv:p[3],
+     if length(p)>3 then T1:p[4], return(kr*(1+1/(s*Tn)+s*Tv/(1+s*T1)))),
+  if f='generic then
+     (if length(p)>0 then nz:p[1],if length(p)>1 then nn:p[2],if length(p)>2 then c:p[3],
+     if length(p)>3 then d:p[4],return(sum(c[i]*s**i,i,0,nz)/sum(d[i]*s**i,i,0,nn))),
+  if f='random then
+  (
+    nn:3,h:20,
+    if length(p)>1 and map(numberp,rest(p,length(p)-2))=[true,true]
+    then (h:last(p),nn:second(reverse(p)))
+    else if length(p)>0 and numberp(last(p)) then (nn:last(p)),
+    nz:random(nn),
+    if member('normalized,p) then
+    (
+      pz:1, pn:1+s**nn,
+      for i:1 thru nn-1 do pn: pn + (1+random(h)) * s**i,
+      for i:1 thru nz do pz: pz + (1+random(h)) * s**i
+    )
+    else
+    (
+      pz:0, pn:0,
+      for i:0 thru nn do pn: pn + (1+random(h)) * s**i,
+      for i:0 thru nz do pz: pz + (1+random(h)) * s**i
+    ),
+    f:pz/pn,
+    while not stablep(f) and member('stable,p) do
+    (
+      if member('normalized,p) then (pn:1+s**nn,for i:1 thru nn-1 do pn: pn+(1+random(h))*s**i)
+      else (pn:0,for i:0 thru nn do pn: pn + (1+random(h))*s**i),
+      f:pz/pn
+    ),return(f)
+  ),
+  if f='butterworth then
+  (
+    nn:if length(p)>0 then p[1] else 3,
+    h:if length(p)>1 then p[2] else 1,
+    return(float(h**nn/([1,s+h,1][1+mod(nn,2)]*
+       product(expand((s**2-2*s*h*cos((2*k+nn-1)/(2*nn)*%pi)+h**2)),k,1,nn/2))))
+  ),
+  if f='pseudobutt then
+  (
+    nn:if length(p)>0 then p[1] else 3, h:if length(p)>1 then p[2] else 1,
+    return(float(h**nn/([1,s+h,1][1+mod(nn,2)]*
+       product(expand((s+h*(sin(k*%pi/(nn+1))+%i*cos(k*%pi/(nn+1))))*
+       (s+h*(sin(k*%pi/(nn+1))-%i*cos(k*%pi/(nn+1))))),k,1,nn/2))))
+  ),
+if f='ptn then /* similar to butterworth, poles confined to a given angle */
+  (
+    nn:if length(p)>0 then p[1] else 3,
+    h:if length(p)>1 then p[2] else 1,
+    eps:if length(p)>2 then p[3] else 0,
+    if evenp(nn) then return(float(h**nn/(product(expand(
+            (s**2+2*s*h*cos((k-1/2)*%pi/(nn-1)*eps/90)+h**2)),k,1,nn/2))))
+    else return(float(h**nn/((h+s)*product(expand(
+            (s**2+2*s*h*cos(k/(nn-1)*%pi*eps/90)+h**2)),k,1,nn/2))))
+  ),
+if f='chebychev or f='tschebytscheff then
+  (
+    nn:if length(p)>0 then p[1] else 3,
+    h:if length(p)>1 then p[2] else 1,
+    eps:if length(p)>2 then p[3] else 0.2,
+    return(subst(s=s/h,
+      if evenp(nn)
+      then 1/float(product(
+        ( b:1/(cosh(eps)**2-cos((2*k-1)*%pi/(2*nn))**2),
+          a:2*b*sinh(eps)*cos((2*k-1)*%pi/(2*nn)),
+          1+a*s+b*s**2),k,1,nn/2))
+      else 1/float((1+s/sinh(eps)) * product(
+        ( b:1/(cosh(eps)**2-cos((k-1)*%pi/nn)**2),
+          a:2*b*sinh(eps)*cos((k-1)*%pi/nn),
+          1+a*s+b*s**2),k,2,(nn+1)/2))))
+  ),
+if f='bessel then
+  (
+    nn:if length(p)>0 then p[1] else 3,
+    h:if length(p)>1 then p[2] else 1,
+    return(normalize(1/(1+sum(product(2*(nn-i+1)/i/(2*nn-i+1),i,1,k)*(s)**k,k,1,nn)),h))
+  ),
+if f='ise then
+  (
+    nn:if length(p)>0 then p[1] else 3,
+    h:if length(p)>1 then p[2] else 1,
+    return(normalize(1/sum(binomial(nn-floor((k+1)/2),floor(k/2))*s^(nn-k),k,0,nn),h))
+  )
+)$
+
+/* ----------------------------------------------------------------------- */
+/* tranftype(f) - returns the type of the transfer function f as a string  */
+/* ----------------------------------------------------------------------- */
+tranftype(f) :=
+block([res],
+  res:map(lambda([ff],
+  block(
+    [zz,nn,z0:1,z1,n0:1,n1,ratprint:false],
+    zz:coefficient_list(num(xthru(ff)),s),
+    nn:coefficient_list(denom(xthru(ff)),s),
+    z1:length(zz),
+    n1:length(nn),
+    while is(zz[z0]=0) do z0:z0+1,
+    while is(nn[n0]=0) do n0:n0+1,
+    if is([z1,n1]=[1,1]) then return("P"),
+    if is([z1,n0]=[1,1]) then return(concat("PT",n1-1)),
+    if is([z1,n1]=[1,2]) then return(concat("I")),
+    if is([z1,n0]=[1,n1]) then return(concat("I",n1-1)),
+    if is([z1,n0]=[1,2]) then return(concat("IT",n1-n0)),
+    if is([z1]=[1]) then return(concat("I",n0-1,"T",n1-n0)),
+    if is([z0,z1,n1]=[2,2,1]) then return("D"),
+    if is([z0,n1]=[z1,1]) then return(concat("D",z0-1)),
+    if is([z0,z1,n0]=[2,2,1]) then return(concat("DT",n1-1)),
+    if is([z1,n1]=[2,1]) then return("PD"),
+    if is([z0,n1]=[1,1]) then return(concat("PD",z1-1)),
+    if is([z0,z1,n0]=[1,2,1]) then return(concat("PDT",n1-1)),
+    if is([n1]=[1]) then return(concat("D",n0-1,"T",n1-n0)),
+    if is([z1,n0,n1]=[2,2,2]) then return("PI"),
+    if is([z1,n0,n1]=[3,2,2]) then return("PID"),
+    if is([z1,n0]=[3,2]) then return(concat("PIDT",n1-n0)),
+    if is([z0,z1,n1]=[1,2,1]) then return("PD"),
+    if is([z0,n0]=[1,1]) then return(concat("PD",z1-z0,"T",n1-n0)),
+    return("any"))
+  ), first(_COMA_strip(f))),
+  if length(res)=1 then res[1] else res
+)$
+tftype(f):=tranftype(f)$
+
+/* ----------------------------------------------------------------------- */
+/* rantranf(n) - Random transfer function of order n                       */
+/* ----------------------------------------------------------------------- */
+rantranf(n) :=
+block(
+  [zz:0, nn:0, kz:random(n), kn:n, i, f],
+  for i:0 step 1 thru kn do nn: nn + (1+random(10)) * s**i,
+  for i:0 step 1 thru kz do zz: zz + (1+random(10)) * s**i,
+  zz/nn
+)$
+
+/* ----------------------------------------------------------------------- */
+/* stable_rantranf(n) - stable random transfer function of order n         */
+/* ----------------------------------------------------------------------- */
+
+stable_rantranf(n) :=
+block(
+  [ntest:1,zz:0, nn:0, kz, kn, i, f],
+  kn:min(n,7),
+  kz:random(kn),
+  for i:0 step 1 thru kn do nn: nn + (1+random(10)) * s**i,
+  for i:0 step 1 thru kz do zz: zz + (1+random(10)) * s**i,
+  f:(zz/nn),
+  unless stablep(f) do block(
+    ntest:ntest+1,
+    nn:0,
+    for i:0 step 1 thru kn do nn: nn + (1+random(10)) * s**i,
+    f:(zz/nn)),
+  return(f)
+)$
+
+/* ----------------------------------------------------------------------- */
+/* gentranf(c,nz,d,nn) - general transfer function of order nn             */
+/* ----------------------------------------------------------------------- */
+gentranf(c,nz,d,nn) := sum(c[i]*s**i,i,0,nz)/sum(d[i]*s**i,i,0,nn)$
+
+/* ----------------------------------------------------------------------- */
+/* impedance_chain(z1,z2,...n) - transfer function of an impedance chain   */
+/* ----------------------------------------------------------------------- */
+impedance_chain(z1,z2,[zi]) :=
+block(
+  [_z1:[],_num:1,_sol,_vars,_n,_k,_ue,_i,ratprint:false,_eqs,
+             _z:flatten(append([z1,z2],zi))],
+/* Repetition of the chain at odd number of parameters */
+  if oddp(length(_z)) then block(
+     _num:last(_z),
+     _z:rest(_z,-1),
+     for _j:1 thru _num do _z1:append(_z,_z1),
+     _z:_z1),
+  _n:length(_z)/2,
+/* Building and solving the mesh-equations */
+  _eqs:makelist(_z[2*(_k-1)]*_i[_k-1]=_z[2*_k]*_i[_k]+_z[2*_k-1]*sum(_i[_j],_j,_k,_n),_k,2,_n),
+  _eqs:cons(_ue=_z[1]*sum(_i[_j],_j,1,_n)+_z[2]*_i[1],_eqs),
+  _vars:makelist(_i[_k],_k,1,_n),
+  _sol:linsolve(_eqs,_vars), /* linsolve works better than solve (why?) */
+/* Calculation of the transfer function as the ratio Ua/Ue */
+  ratsimp(subst(_sol,_z[2*_n]*_i[_n]/ _ue))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* nilt(f,s,t) - inverse Laplace transform of f with numerically           */
+/*               calculated poles                                          */
+/* ----------------------------------------------------------------------- */
+oilt(f,[st]):=  /* Old version - just for test purposes */
+block([polyfactor:true,ratprint:false,ft,res,dt,fl,lvar,tvar,dummy],
+  if length(st)=2 then [lvar,tvar]:st else [lvar,tvar]:['s,'t],
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],
+    [fl,dt]: if op(ff)="+" then _COMA_strip(args(ff)) else _COMA_strip(ff),
+    ft:map(lambda([v],(if unit_step_included then unit_step(t) else 1)*
+        if try_symbolic_ilt
+           then block([r:ilt(v,lvar,tvar)],
+                if member("ilt",map(string,operators(r))) /* cannot be transformed analytically */
+                   then ev(expand(ilt(float(num(v)/allroots(float(denom(v)))),lvar,tvar)),numer)
+                   else r)
+           else ev(expand(ilt(float(num(v)/allroots(float(denom(v)))),lvar,tvar)),numer)
+                       ),xthru(fl)),
+   ft:map(lambda([u,v],ev(u,t=t+v)),ft,log(dt)/s),
+ /*  apply("+",ft)),expandwrt(f,s)),      15.2.2019 */
+   apply("+",ft)),f),
+    if length(res)=1 then res[1] else res
+)$
+nilt(f,[st]):=  /* New version - 18.2019 */
+block([polyfactor:true,ratprint:false,ft,res,dt,fl,lvar,tvar,dummy],
+  if length(st)=2 then [lvar,tvar]:st else [lvar,tvar]:['s,'t],
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],
+    [fl,dt]: _COMA_sdt(ff),
+    ft:map(lambda([v],(if unit_step_included then unit_step(t) else 1)*
+        if try_symbolic_ilt
+           then block([r:ilt(v,lvar,tvar)],
+                if member("ilt",map(string,operators(r))) /* cannot be transformed analytically */
+                   then ev(expand(ilt(float(num(v)/allroots(float(denom(v)))),lvar,tvar)),numer)
+                   else r)
+           else ev(expand(ilt(float(num(v)/allroots(float(denom(v)))),lvar,tvar)),numer)
+                       ),xthru(fl)),
+   ft:map(lambda([u,v],ev(u,t=t+v)),ft,log(dt)/s),
+ /*  apply("+",ft)),expandwrt(f,s)),      15.2.2019 */
+   apply("+",ft)),f),
+    if length(res)=1 then res[1] else res
+)$
+try_symbolic_ilt:true$
+unit_step_included:true$
+
+/* ----------------------------------------------------------------------- */
+/* closed_loop(Fo) - calculates the closed loop transfer function Fw       */
+/* ----------------------------------------------------------------------- */
+closed_loop(f,[x]):=
+block(
+  [res,ratprint:false,hf,ht,n:5],
+  if length(x)>0 then n:first(x),
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],
+    [hf,ht]:_COMA_strip(ff),
+    if ht=[1] then (if not mapatom(ff/(1+ff)) then map(expand,xthru(ff/(1+ff))) else ff/(1+ff))
+              else sum((-1)**((_k)+1)*first(hf)**(_k)*first(ht)**(_k),(_k),1,n)
+   ), f),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* open_loop(Fw) - calculates the open loop transfer function Fo           */
+/* ----------------------------------------------------------------------- */
+open_loop(f):=
+block(
+  [res,ratprint:false],
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],map(expand,xthru(ff/(1-ff)))), f),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* time_delay(tt,n,k) - Pade-approximation of order n (numerator order k)  */
+/* ----------------------------------------------------------------------- */
+time_delay(tt,n,[k]):=
+if n=0 then 1
+else block([ratprint:false,numer:false,keepfloat:false,h],
+    h:if emptyp(k) then n-1 else first(k),
+    lambda([u],num(u)/denom(u))(first(pade(taylor(exp(-s*tt),s,0,h+n),h,n)))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* ntfp(f) - checks whether f has only numeric coefficients             */
+/* ----------------------------------------------------------------------- */
+ntfp(f) :=
+block([ratprint:false,f1,zz,nn,res],
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],
+     f1:xthru(ff),
+     zz:coefficient_list(num(f1),s),
+     nn:coefficient_list(denom(f1),s),
+     if is(setify(map(numberp,zz))={true}) and
+       is(setify(map(numberp,nn))={true})
+       then true else false
+  ), float(f)),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* transfer_function - transfer function from state space or equations     */
+/* ----------------------------------------------------------------------- */
+transfer_function(a,[d]) :=
+block(
+[ratprint:false,A,B,C,D,sp:systemp(a)],
+if sp then block(
+   if length(a)=4 then [A,B,C,D]:a,
+   if length(a)=3 then
+      [A,B,C,D]:endcons(zeromatrix(length(a[3]),length(a[2][1])),a)),
+if sp and matrixp(D) and length(D)=1 and length(D[1])=1 then D:D[1][1],
+if sp then return(map(expand,xthru(C.invert(s*ident(length(A))-A).B+D))),
+if matrixp(a) then block(
+   if length(d)=3 then [A,B,C,D]:[a,d[1],d[2],d[3]]
+   else [A,B,C,D]:[a,d[1],d[2],zeromatrix(length(d[2]),length(d[1][1]))],
+   if matrixp(D) and length(D)=1 and length(D[1])=1 then D:D[1][1],
+   map(expand,ratsimp(C.invert(s*ident(length(A))-A).B+D)))
+else block([m],
+m:coefmatrix(subst(linsolve(a,d[1]),flatten([d[3]])),flatten([d[2]])),
+if not listp(d[2]) and not listp(d[3]) then m[1][1] else m
+))$
+
+/* ----------------------------------------------------------------------- */
+/* sum_form - One of the 4 standard forms of a transfer function           */
+/*    (making one of the leading or absolute coefficients to 1)            */
+/* ----------------------------------------------------------------------- */
+sum_form(f,[nli]):=
+block([_zz,_nn,_zli,_nli,_sz,_kz,_kn,_n,_zli1,_nli1,_res,dt,_h],
+  _n: if emptyp(nli) then 4 else nli[1],
+  [f,dt]:_COMA_strip(f),
+  _res:map(lambda([ff],
+    _sz:if member(s,listofvars(ff)) then s
+        elseif member(z,listofvars(ff)) then z else s,
+    [_zz,_nn]:lambda([u],[num(u),denom(u)])(xthru(ff)),
+    _zli:coefficient_list(_zz,_sz),
+    _nli:coefficient_list(_nn,_sz),
+    _zli1:delete(0,_zli),
+    _nli1:delete(0,_nli),
+    _kz:[last(_zli1),first(_zli1),last(_nli1),first(_nli1),last(_zli1),first(_zli1)][_n],
+    _kn:[last(_zli1),first(_zli1),last(_nli1),first(_nli1),last(_nli1),first(_nli1)][_n],
+    [_zli,_nli]:[_zli,_nli]/ [_kz,_kn],
+    fullermap(lambda([u],if numberp(u) and equal(fix(u),u) then fix(u) else u),
+      [1,1,1,1,_kz/ _kn,_kz/ _kn][_n]*apply("+",float(_zli)*makelist(_sz**i,i,0,length(_zli)-1))/
+      apply("+",float(_nli)*makelist(_sz**i,i,0,length(_nli)-1)))),f)*dt,
+    if length(_res)=1 then _res[1] else _res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* product_form - Factorized forms of a transfer function (2017-06-08)     */
+/* ----------------------------------------------------------------------- */
+product_form(f,[n]):=
+block([res,dt],
+  [f,dt]:_COMA_strip(f),
+  res:map(lambda([ff],
+  if ntfp(ff) and not mapatom(ff)
+    then block([inflag:true,polyfactor:true,ratprint:false,fff,zz,nn,zli,nli,zdiv,ndiv],
+    fff:xthru(float(ff)),
+    fff:chop(allroots(num(fff))/allroots(denom(fff))),
+    zz:num(fff),
+    nn:denom(fff),
+    if not emptyp(n) and n[1]=1 then return(fullmap(lambda([u],if numberp(u)
+       and abs(round(u)-u)<1e-10 then round(u) else u),(zz/nn))), /* high coefficient is 1 */
+    zli:if not mapatom(zz) and op(zz)="*" then args(zz) else [zz],
+    nli:if not mapatom(nn) and op(nn)="*" then args(nn) else [nn],
+    zli:map(lambda([u],coefficient_list(u,s)),zli),
+    nli:map(lambda([u],coefficient_list(u,s)),nli),
+    zdiv:map(lambda([u],first(delete(0,u))),zli),
+    ndiv:map(lambda([u],first(delete(0,u))),nli),
+    fullmap(lambda([u],if numberp(u) and abs('round(u)-u) < 1.0e-10 and round(u)>0 then 'round(u) else u),
+      ((apply("*",zdiv)*
+        apply("*",map(lambda([u],u.makelist(s^k,k,0,length(u)-1)),zli/zdiv)))/
+        apply("*",ndiv))/
+        apply("*",map(lambda([u],u.makelist(s^k,k,0,length(u)-1)),nli/ndiv)))
+        ) else ff),f)*dt,
+             if length(res)=1 then res[1] else res)$
+
+/* ----------------------------------------------------------------------- */
+/* npartfrac - Partial fraction expansion with numeric coefficients        */
+/* ----------------------------------------------------------------------- */
+npartfrac(G):=
+block([polyfactor:true,ratprint:false],
+   map(lambda([u],sum_form(u,3)),partfrac(num(G)/allroots(denom(G)),
+      first(listofvars(G))))
+)$
+
+/* ======================================================================= */
+/* Optimization, Controller Design                                         */
+/* ======================================================================= */
+
+/* ----------------------------------------------------------------------- */
+/* ise(f) - integral of squared error                                      */
+/* ----------------------------------------------------------------------- */
+ise(f):=
+block(
+  [n,sol,res,ratprint:false,dn,varlist,dt],
+  [f,dt]:_COMA_strip(f),
+  if setify(dt)#{1} then disp(_COMA_msg[3]),
+  res:map(lambda([ff],
+  block(
+    block(                  /* Trick: solve darf gleichnamige Symbole in f */
+      [a,b,aa,bb,c,d,i],    /* nicht evaluieren! (macht es aber sonst :-)  */
+      [c,d]:[num(ff),denom(ff)],
+      n:hipow(d,s),
+      dn:coeff(expand(d),s,n),
+      aa:sum('a[i]*s**i,i,0,n-1),
+      bb:sum('b[i]*s**i,i,0,n-1),
+      eq:coefficient_list(expand(c*subst(s=-s,c)-aa*subst(s=-s,d)-bb*d),s),
+      varlist:flatten([makelist('a[i],i,0,n-1),makelist('b[i],i,0,n-1)])),
+    sol:solve(eq,varlist),
+    at('a[n-1]/dn,first(sol)))
+  ), ratsimp(f)),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* gain_optimum(fs,fr) - controller design according to the gain optimum   */
+/* ----------------------------------------------------------------------- */
+gain_optimum(fs,fr,[v]):=
+block(
+  [fw,omega,vars,eq,pli,li,ratprint:false,assume_pos:true,res],
+  fw:ratsimp(closed_loop(fr*fs)),
+  if emptyp(v) then vars:delete(s,listofvars(fr)) else vars:flatten([v]),
+  res:map(lambda([ff],
+  block(
+    ff:ratsimp(ev(ff,s=%i*omega)),
+    eq:cabs(num(ff))**2-cabs(denom(ff))**2,
+    li:coefficient_list(expand(eq),omega),
+    li:sublist(li,lambda([u],not atom(u))),
+    li:sublist(li,lambda([u],is(op(u)="+"))),
+    li:sublist(li,lambda([v],not apply("and",map(lambda([u],freeof(u,v)),vars)))),
+    li:makelist(li[k],k,1,min(length(li),length(vars))),
+    li:solve(li,vars),
+    pli:sublist(li,lambda([x],
+                (not member(false,map(lambda([u],is(rhs(u)>0)),x))))),
+    if emptyp(pli) then li else first(pli))
+  ), flatten([fw])),
+  if length(res)=1 then res[1] else res
+)$
+/* ======================================================================= */
+/* Digital Algorithms                                                      */
+/* ======================================================================= */
+
+/* ----------------------------------------------------------------------- */
+/* stepf(f,[tt]) - step function of f with the optional sampling time tt   */
+/* ----------------------------------------------------------------------- */
+stepf(f,[tt]):= /*11.1.2019 */
+(block([ratprint:false,T:1,index:1],
+  if listp(tt) and length(tt)>0 then T:tt[1],
+  if listp(f) then
+  (
+    if listp(f[1])  then (
+      if t<f[1][1] then 0
+      else (
+        while t>f[index][1] and index<length(f) do index:index+1,
+        if t>f[index][1] then f[index][2] else f[max(index-1,1)][2]))
+    else f[max(1,min(floor(t/T)+1,length(f)))]
+  )
+  else subst(t=T*floor(t/T),f)))$
+
+/* ----------------------------------------------------------------------- */
+/* algorithmp(f) - checks whether f is a digital algorithm                 */
+/* ----------------------------------------------------------------------- */
+algorithmp(f):=if  listp(f) and not mapatom(f[1]) and
+  op(f[1])="=" and lhs(f[1])='(x[k])
+  then true else false$
+
+/* ----------------------------------------------------------------------- */
+/* eulerb(f) - Euler algorithm (with backward difference equations)        */
+/* ----------------------------------------------------------------------- */
+eulerb(F,[xx]):=
+block([ratprint:false,_Fz,_T,_zz,zz,nn,zz1,nn1,h,x,u,k,n],
+  _T: if length(xx)>0 then first(xx) else T,
+  _Fz:ratsimp(ev(F,s=(1/ _zz-1)/ _T*_zz)),
+  zz:coefficient_list(num(_Fz),_zz),
+  nn:coefficient_list(denom(_Fz),_zz),
+  h:max(1,float(lmax(numbers(zz)))),
+  zz:float(expand(zz/h)),
+  nn:float(expand(nn/h)),
+  zz1:apply("+",makelist(u[k-n],n,0,length(zz)-1)*zz),
+  nn1:apply("+",makelist(x[k-n],n,0,length(nn)-1)*nn),
+  h:coefficient_list(zz1-nn1,x[k]),
+  [x[k]=-h[1]/h[2],_T]
+)$
+
+/* ----------------------------------------------------------------------- */
+/* eulerf(f) - Euler algorithm (with forward difference equations)         */
+/* ----------------------------------------------------------------------- */
+eulerf(F,[xx]):=
+block([ratprint:false,_Fz,_T,_zz,zz,nn,zz1,nn1,h,x,u,k,n],
+  _T: if length(xx)>0 then first(xx) else T,
+  _Fz:ratsimp(ev(F,s=(1/ _zz-1)/ _T)),
+  zz:coefficient_list(num(_Fz),_zz),
+  nn:coefficient_list(denom(_Fz),_zz),
+  h:max(1,float(lmax(numbers(zz)))),
+  zz:float(expand(zz/h)),
+  nn:float(expand(nn/h)),
+  zz1:apply("+",makelist(u[k-n],n,0,length(zz)-1)*zz),
+  nn1:apply("+",makelist(x[k-n],n,0,length(nn)-1)*nn),
+  h:coefficient_list(zz1-nn1,x[k]),
+  [x[k]=-h[1]/h[2],_T]
+)$
+
+/* ----------------------------------------------------------------------- */
+/* tustin(f) - Tustin algorithm                                            */
+/* ----------------------------------------------------------------------- */
+tustin(F,[xx]):=
+block([ratprint:false,_Fz,_T,_zz,zz,nn,zz1,nn1,h,x,u,k,n],
+  _T: if length(xx)>0 then first(xx) else T,
+  _Fz:ratsimp(ev(F,s=2*(1/ _zz-1)/ _T/(1/ _zz+1))),
+  zz:coefficient_list(num(_Fz),_zz),
+  nn:coefficient_list(denom(_Fz),_zz),
+  h:max(1,float(lmax(numbers(zz)))),
+  zz:float(expand(zz/h)),
+  nn:float(expand(nn/h)),
+  zz1:apply("+",makelist(u[k-n],n,0,length(zz)-1)*zz),
+  nn1:apply("+",makelist(x[k-n],n,0,length(nn)-1)*nn),
+  h:coefficient_list(zz1-nn1,x[k]),
+  [x[k]=-h[1]/h[2],_T]
+)$
+
+/* ----------------------------------------------------------------------- */
+/* algorithm_step_response - Test function for an algorithm                */
+/* ----------------------------------------------------------------------- */
+algorithm_step_response(f,[nn]):=
+block([varli,alg:rhs(f[1]),n:100,x,u],
+  local(x,u),
+  if length(nn)>0 then n:nn[1],
+  varli:sublist(ev(listofvars(alg),k=0),lambda([v],not atom(v) and mapatom(v)
+    and (op(v)=x or op(v)=u))),
+  for k:lmin(flatten(map(args,varli))) thru -1 do (u[k]:0,x[k]:0), /* Init. */
+  for k:0 thru n do (u[k]:1,x[k]:ev(alg)),
+  makelist(float([k*f[2],x[k]]),k,0,n)
+)$
+
+
+/* ======================================================================= */
+/* State Space                                                             */
+/* ======================================================================= */
+
+/* ----------------------------------------------------------------------- */
+/* systemp(x) - checks whether x is a linear system with state matrices    */
+/* ----------------------------------------------------------------------- */
+systemp(x) :=
+block([nx,nu,ny],
+if not listp(x) then return(false),
+if length(x)<3 or length(x)>4 then return(false),
+if not matrixp(x[1]) then return(false),
+if not matrixp(x[2]) then return(false),
+if not matrixp(x[3]) then return(false),
+[nx,nu,ny]:[length(x[1]),length(x[2][1]),length(x[3])],
+if length(x[1][1]) # nx then return(false),
+if length(x[2]) # nx then return(false),
+if length(x[3][1]) # nx then return(false),
+if length(x)=3 then return(true),
+D: if not matrixp(x[4]) then matrix([x[4]]) else x[4],
+if length(D) # ny then return(false),
+if length(D[1]) # nu then return(false),
+return(true)
+)$
+
+/* ----------------------------------------------------------------------- */
+/* nsystemp(x) - checks whether x is a linear system with numeric coeffs.  */
+/* ----------------------------------------------------------------------- */
+nsystemp(x) :=
+if systemp(x) and freeof(false,fullmap(numberp,x)) then true else false$
+
+/* ----------------------------------------------------------------------- */
+/* controller_canonical_form                                               */
+/* ----------------------------------------------------------------------- */
+controller_canonical_form(f) :=
+block(
+[ratprint:false,zz,nn,zli,nli,A,B,C,D,o],
+[zz,nn]:[num(xthru(f)),denom(xthru(f))],
+zli:coefficient_list(zz,s), nli:coefficient_list(nn,s),
+zli:zli/last(nli), nli:nli/last(nli),
+o:length(nli)-1,
+zli:append(zli,makelist(0,k,1,length(nli)-length(zli))),
+A:genmatrix(lambda([u,v],if u=o then -nli[v] else if v-u=1 then 1 else 0),o,o),
+B:apply(matrix,endcons([1],makelist([0],k,1,o-1))),
+C:matrix(rest(map(lambda([u,v],u-last(zli)*v),zli,nli),-1)),
+D:last(zli),
+[A,B,C,D]
+);
+
+/* ----------------------------------------------------------------------- */
+/* observer_canonical_form                                                 */
+/* ----------------------------------------------------------------------- */
+observer_canonical_form(f) :=
+block(
+[ratprint:false,zz,nn,zli,nli,A,B,C,D,o],
+[zz,nn]:[num(xthru(f)),denom(xthru(f))],
+zli:coefficient_list(zz,s), nli:coefficient_list(nn,s),
+zli:zli/last(nli), nli:nli/last(nli),
+o:length(nli)-1,
+zli:append(zli,makelist(0,k,1,length(nli)-length(zli))),
+A:genmatrix(lambda([u,v],if v=o then -nli[u] else if u-v=1 then 1 else 0),o,o),
+B:apply(matrix,rest(map(lambda([u,v],[u-last(zli)*v]),zli,nli),-1)),
+C:matrix(endcons(1,makelist(0,k,1,o-1))),
+D:last(zli),
+[A,B,C,D]
+);
+
+/* ----------------------------------------------------------------------- */
+/* controllability_matrix                                                  */
+/* ----------------------------------------------------------------------- */
+controllability_matrix(x,[y]) :=
+block([A,B],
+  [A,B]:if systemp(x) then [x[1],x[2]] else [x,first(y)],
+  transpose(apply(matrix,makelist(
+    flatten(args(transpose(A^^n.B))),n,0,length(A)-1))));
+
+/* ----------------------------------------------------------------------- */
+/* observability_matrix                                                    */
+/* ----------------------------------------------------------------------- */
+observability_matrix(x,[y]) :=
+block([A,C],
+  [A,C]:if systemp(x) then [x[1],x[3]] else [x,first(y)],
+  apply(matrix,makelist(flatten(args(C.A^^n)),n,0,length(A)-1)));
+
+/* ======================================================================= */
+/* Data Acquisition and Processing                                         */
+/* ======================================================================= */
+
+/* ----------------------------------------------------------------------- */
+/* moving_average(x,n) - Moving Average of n elements in a list x          */
+/* ----------------------------------------------------------------------- */
+moving_average(x,n):=
+block([h1,h2:[],h],
+  h1:append(makelist(first(x),k,n/2),x,makelist(last(x),k,n/2)),
+  for i:1 thru length(x) do
+  (
+    h:makelist(h1[k],k,i,i+n-1),
+    h2:endcons(float(apply("+",h)/n),h2)
+  ),
+  h2
+)$
+
+/* ----------------------------------------------------------------------- */
+/* regan - regression analysis                  (Wilhelm Haager 8.11.2014) */
+/* ----------------------------------------------------------------------- */
+/* f ... list of functions                                                 */
+/* p ... list of points                                                    */
+/* ----------------------------------------------------------------------- */
+regan(p,f):=
+  lambda([x],f.(transpose(x).x)^^(-1).transpose(x).matrix(map(second,p)))
+  (apply(matrix,map(lambda([u],ev(f,'x=u)),map(first,p))))$
+
+/* ----------------------------------------------------------------------- */
+/* add_noise(f,sd) - add a noise with standard deviation sd to f           */
+/* ----------------------------------------------------------------------- */
+add_noise(f,[opts]):=
+block([sd,res,resu,zli,nli],
+  local(nrandom,sli),
+  nrandom(x):=float(x*cos(random(1.0)*2*%pi)*sqrt(-2*log(random(1.0)))),
+  sli(n):=makelist(s**k,k,0,n),
+  sd:if length(opts)>0 then opts[1] else 0.1,
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],
+    if numberp(ff) or mapatom(ff) then resu:ff+nrandom(sd)
+    else
+    (
+      zli:map(lambda([v],v+nrandom(sd)),coefficient_list(num(ff))),
+      nli:map(lambda([v],v+nrandom(sd)),coefficient_list(denom(ff))),
+      resu:apply("+",zli*sli(length(zli)-1))/apply("+",nli*sli(length(nli)-1))
+    ),
+  resu),f),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ----------------------------------------------------------------------- */
+/* mult_noise(f,sd) - multiply a noise with standard deviation sd to f     */
+/* ----------------------------------------------------------------------- */
+mult_noise(f,[opts]):=
+block([sd,res,resu,zli,nli],
+  local(nrandom,sli),
+  nrandom(x):=float(x*cos(random(1.0)*2*%pi)*sqrt(-2*log(random(1.0)))),
+  sli(n):=makelist(s**k,k,0,n),
+  sd:if length(opts)>0 then opts[1] else 0.1,
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],
+    if numberp(ff) or mapatom(ff) then resu:ff*(1+nrandom(sd))
+    else
+    (
+      zli:map(lambda([v],v*(1+nrandom(sd))),coefficient_list(num(ff))),
+      nli:map(lambda([v],v*(1+nrandom(sd))),coefficient_list(denom(ff))),
+      resu:apply("+",zli*sli(length(zli)-1))/apply("+",nli*sli(length(nli)-1))
+    ),
+  resu),f),
+  if length(res)=1 then res[1] else res
+)$
+
+/* ======================================================================= */
+/* Various Useful Functions                                                */
+/* ======================================================================= */
+
+/* ----------------------------------------------------------------------- */
+/* sigma(t) - unit step function                                           */
+/* ----------------------------------------------------------------------- */
+/* sigma(t):=if t < 0 then 0 else 1$   */
+
+/* ----------------------------------------------------------------------- */
+/* coefficient_list(p,s) - calculates a list of the coefficients of        */
+/*                         the polynomial p(s) in ascending order          */
+/* ----------------------------------------------------------------------- */
+/*coefficient_list(p,s) := lambda([v],map(lambda([u],coeff(v,s,u)),        */
+/*   makelist(i,i,0,hipow(v,s))))(expand(p))$                              */
+coefficient_list(p,[x]) :=
+block([var,varlist:listofvars(p)],
+  if length(x)>0 then var:first(x)
+  else if length(varlist)=1 then var:first(varlist)
+  else if member('s,varlist) then var:s
+  else if member('z,varlist) then var:z,
+  lambda([v],map(lambda([u],coeff(v,var,u)),
+  makelist(i,i,0,hipow(v,var))))(expand(p))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* get_option(o,l) - returns the option o from the list l (if existing)    */
+/* option_exists(o,l) - tests, whether the option o exists in list l       */
+/* list_option_exists(o,l) - tests, whether o exists and is a list         */
+/* delete_option(o,l) - returns a list with option o deleted from l        */
+/* set_option(o=v,l) - sets an option o with the value v                   */
+/* ----------------------------------------------------------------------- */
+get_option(o,l,[d]) := assoc(o,sublist(l,lambda([v],
+       not atom(v) and op(v)="=")),if d=[] then false else first(d))$
+delete_option(o,l) ::= buildq([o,l],l:if option_exists(o,l) then
+       sublist(l,lambda([u], atom(u) or op(u)#"=" or first(u)#o)) else l)$
+option_exists(o,l) := if member(o,map(first,sublist(l,lambda([v],
+       not atom(v) and op(v)="=")))) then true$
+list_option_exists(o,l) :=
+   if option_exists(o,l) then if listp(assoc(o,l)) then true$
+set_option(o,l) ::= buildq([o,l],l:endcons(o,delete_option(first(o),l)))$
+
+chop(f):=
+block([epsilon:1.0e-10],
+  local(test),
+  test(u):=if numberp(u) and cabs(u)<epsilon then 0 else u,
+  if mapatom(f) then test(f) else fullmap(test,f)
+)$
+
+/* ----------------------------------------------------------------------- */
+/* // - parallel connection of resistances                 (WH, 26.9.2014) */
+/* ----------------------------------------------------------------------- */
+"//"([x]):=xthru(1/apply("+",1/x));
+nary("//",115);
+
+/* ----------------------------------------------------------------------- */
+/* /_ - cis operator and cf operator for AC calculation    (WH, 10.1.2016) */
+/* ----------------------------------------------------------------------- */
+"/_"(a,b):=rectform(float(a*(cos(b*%pi/180)+%i*sin(b*%pi/180))))$
+infix("/_",150,150)$
+cisform(_z)::=buildq(
+    [_a:ev(cabs(_z),numer,eval),_b:ev(carg(_z)*180/%pi,numer,eval)],
+    '(_a /_ _b))$
+kill("//_");
+"//_"(_z)::=buildq(
+    [_a:ev(cabs(_z),numer,eval),_b:ev(carg(_z)*180/%pi,numer,eval)],
+    '(_a /_ _b))$
+postfix("//_",20);
+
+/* ----------------------------------------------------------------------- */
+/* spartfrac - partial fraction expansion with numeric and symbolic poles  */
+/* ----------------------------------------------------------------------- */
+/* STILL UNDER DEVELOPMENT !
+spartfrac(G,[var]):=
+block([ratprint:false,variable,varli:listofvars(G)],
+  if length(var)>0 then variable:var[1]
+  else if member(s,varli) then variable:s
+  else if member(z,varli) then variable:z
+  else variable:first(varli),
+  map(lambda([u],sum_form(u,3)),
+  partfrac(num(G)/sallroots(denom(G)),variable))
+)$
+*/
+
+/* ----------------------------------------------------------------------- */
+/* sallroots - like allroots, but can contain symbolic factors and roots   */
+/* ----------------------------------------------------------------------- */
+/* STILL UNDER DEVELOPMENT !
+sallroots(p,[var]):=
+block([polyfactor:true,p1,pli,pli1,pli2,variable,varli:listofvars(G)],
+  if length(var)>0 then variable:var[1]
+  else if member(s,varli) then variable:s
+  else if member(z,varli) then variable:z
+  else variable:first(varli),
+  p1:factorout(p,1),
+  if op(p1)="*"
+  then (
+    pli:args(p1),
+    pli1:sublist(pli,lambda([u],freeof(variable,u) or length(listofvars(u))>1)),
+    pli2:sublist(pli,lambda([u],not freeof(variable,u) and not length(listofvars(u))>1)),
+    apply("*",cons(allroots(apply("*",pli2)),pli1)))
+  else allroots(p)
+)$
+*/
+
+/* ----------------------------------------------------------------------- */
+/* silt(f) - inverse Laplace transform with numeric and symbolic poles     */
+/* ----------------------------------------------------------------------- */
+/* STILL UNDER DEVELOPMENT !
+silt(f):=
+block([polyfactor:true,ratprint:false,ft,res],
+  if not listp(f) then f:[f],
+  res:map(lambda([ff],
+    ft:ilt(ff,s,t),
+    if string(op(ft))="ilt" then
+    (
+      ft:ilt(float(num(ff)/sallroots(denom(ff))),s,t),
+      ft:ev(ft,float,expand)
+    )
+    else ft),
+    xthru(f)),
+    if length(res)=1 then res[1] else res
+)$
+*/
+
+/* ----------------------------------------------------------------------- */
+/* operators - list of all operators in an expr.     (Wilhelm Haager 2013) */
+/* ----------------------------------------------------------------------- */
+operators(x):=
+block([opli:[]],
+local(ops),
+ops(x):=if atom(x)
+        then opli
+        else (if not member(op(x),opli)
+              then opli:cons(op(x),opli),map(ops,args(x))),ops(x),opli);
+contains(op,x):=if member(op,operators(x)) then true;
+contains_any(op,x):=
+  if member(true,map(lambda([u],contains(u,x)),flatten([op])))
+  then true;
+contains_all(op,x):=
+  if member(false,map(lambda([u],contains(u,x)),flatten([op])))
+  then false
+  else true;
+
+/* ----------------------------------------------------------------------- */
+/* numbers - list of all numbers in an expr.         (Wilhelm Haager 2019) */
+/* ----------------------------------------------------------------------- */
+numbers(x):=block([li:[]],
+        fullmap(lambda([u],if numberp(u) then li:cons(u,li),u),x),li)$
+
+/* ----------------------------------------------------------------------- */
+/* fullermap(f,x) - like fullmap, works also on atoms                      */
+/* ----------------------------------------------------------------------- */
+fullermap(f,x):=if mapatom(x) then f(x) else fullmap(f,x);
+
+/* ----------------------------------------------------------------------- */
+/* periodic(f,x1,x2) - makes the function f periodic       (W.Haager 2019) */
+/* ----------------------------------------------------------------------- */
+periodic(f,[x]):=
+block([par,x1,x2,ratprint:false],
+  if length(x)>=2 then (x1:x[1],x2:x[2])
+     else if length(x)=1 then (x1:0,x2:x[1])
+     else (x1:0,x2:1),
+  par:first(listofvars(f)),
+  subst(par=par-(x2-x1)*(floor((par-x1)/(x2-x1))),f)
+)$
+
+
+
+/* ======================================================================= */
+/* Auxiliary Functions (only for internal use)                             */
+/* ======================================================================= */
+
+/* ----------------------------------------------------------------------- */
+/* _COMA_bpr(f) - calculation of an appropriate plot range                 */
+/* ----------------------------------------------------------------------- */
+_COMA_bpr(f):=
+block(
+  [frequencies,omin,omax,g,dt],
+  [f,dt]:_COMA_strip(f),
+  f:map(lambda([u],if not mapatom(u) and op(u)='asymptotic then first(args(u)) else u),f),
+  g:gain_crossover(f),
+  frequencies:flatten([_COMA_cf(sublist(f,lambda([u],not _COMA_go(u)))),
+                  if length(g)>0 then map(last,flatten([g])) else []]),
+  if length(frequencies)=0 then frequencies:[1],
+  omin:apply(min,frequencies)/3,   /* ADAPT RANGE HERE */
+  omax:apply(max,frequencies)*3,   /* ADAPT RANGE HERE */
+  [10**floor(log(omin)/log(10)), 10**ceiling(log(omax)/log(10))]
+)$
+
+/* ----------------------------------------------------------------------- */
+/* _COMA_srat - calculates an appropriate display time for step_response   */
+/* ----------------------------------------------------------------------- */
+_COMA_srat(f):=
+block(
+  [pl,l,dt],
+  [f,dt]:_COMA_strip(f),
+  pl:flatten(poles(f)),
+  pl:delete(0.0,pl), pl:delete(0,pl),
+  if length(pl)=0 then 1 else
+  block(
+  l:map(lambda([u],float(5/sqrt(realpart(u)**2+imagpart(u)**2))),pl),
+  apply(max,l))+lmax(-log(dt)/s)
+)$
+
+/* ----------------------------------------------------------------------- */
+/* _COMA_npv - next proper value for a plot range                          */
+/* ----------------------------------------------------------------------- */
+_COMA_npv(f,li):=
+block(
+  [n:length(li)],
+  while f>last(li) do li:append(li,rest(li,length(li)-n)*10),
+  li:append(li,rest(li,length(li)-n)*10), /* zur Vermeidung eines numer. Bugs */
+  while f<first(li) do li:append(rest(li,n-length(li))/10,li),
+  first(sublist(li,lambda([u],is(f<u))))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* _COMA_cf(f) - cutoff frequencies                                        */
+/* ----------------------------------------------------------------------- */
+_COMA_cf(f):=
+block([pl],
+  if not listp(f) then f:[f],
+  f:sublist(f, lambda([u],not _COMA_go(u))),
+  pl:flatten([poles(f),zeros(f)]),
+  pl:sort(map(lambda([u],sqrt(realpart(u)**2+imagpart(u)**2)),pl)),
+  pl:sublist(pl,lambda([u],u>0))
+)$
+
+/* ----------------------------------------------------------------------- */
+/* _COMA_mx - "map extended", like map, adapts all lists according         */
+/*   to the last   one, then performs a map over all lists                 */
+/* ----------------------------------------------------------------------- */
+_COMA_mx([lists]) :=
+block(
+  [res:["["],i],
+  for i:1 step 1 thru length(lists)-1 do
+     res:endcons(
+       block([n1:length(lists[i]),n2:length(last(lists)),res:[],j],
+       for j:1 step 1 thru n2 do res:endcons(lists[i][mod(j-1,n1)+1],res),
+       res),res),
+  res:endcons(last(lists),res),
+  apply(map,res)
+)$
+
+/* ----------------------------------------------------------------------- */
+/* _COMA_strip(f) - strips off time delays from transfer functions.        */
+/* _COMA_sdt(f) - newr, better version (2019-02-18)                        */
+/* ----------------------------------------------------------------------- */
+/* Result is a list with 2 elements:                                       */
+/* 1. the transfer functions without time delay                            */
+/* 2. the according time delays                                            */
+/* ----------------------------------------------------------------------- */
+_COMA_strip(f):=
+block([h,d,fli:[],dli:[]],
+  f:if listp(f) then f else[f],
+  for e in f do
+  (
+     d:1,
+     h:if not atom(e) then scanmap(lambda([u],if not atom(u) and op(u)="^" and first(args(u))=%e
+        then (d:u, 1) else u),e)
+        else (e),
+     fli:endcons(h,fli),
+     dli:endcons(d,dli)),
+     [fli,dli]
+)$
+_COMA_sdt(f):= /* strip off time delays */
+block([df,dfli,element,fli:[],dli:[],ratprint:false],
+  df:expandwrt(f,%e),
+  dfli:if mapatom(df) or op(df)#"+" then [df] else args(df),
+  fli:subst(%e=1,dfli),
+  dli:ratsimp(dfli/fli),
+  [fli,dli]
+)$
+
+/* ----------------------------------------------------------------------- */
+/* _COMA_go(f) - checks whether f is a graphic object                      */
+/* ----------------------------------------------------------------------- */
+_COMA_go(f) :=
+if (not atom(f) and member(op(f),['explicit,'points,'implicit,'parametric,
+             'region,'polar,'polygon,'rectangle,'ellipse,'label,'stepf]))
+   then true else false$
+
+/* ----------------------------------------------------------------------- */
+/* _COMA_ppo(f,defs,opts) - process plot options                           */
+/* ----------------------------------------------------------------------- */
+/* f ... List of functions, objects (or transfer functions)                */
+/*       f = 0 ... only global options are processed                       */
+/*       f = 1 ... options are processed, but no functions                 */
+/* defs ... default options for a routine                                  */
+/* opts ... explicitly given options for a routine                         */
+/* ----------------------------------------------------------------------- */
+_COMA_ppo(f,defs,opts):=
+block(
+  [x,hli,fli,ar,preamble:[],list_options, list_exceptions:['dimensions,
+     'xrange,'yrange,'trange,'user_preamble,'ip_grid,'ip_grid_in,'allocation]],
+  if listp(coma_defaults)=false then coma_defaults:['grid=true],
+  hli:append(coma_defaults,defs,opts),
+/* Gnuplot Praeambeln in Liste zusammenfassen */
+  set_option('user_preamble=flatten(map(lambda([u],rhs(u)),
+     sublist(hli,lambda([u],lhs(u)='user_preamble)))),hli),
+  preamble:assoc(user_preamble,hli,[]),
+/* Mehrfache Optionen loeschen */
+  for i:length(hli) step -1 thru 1 do hli:set_option(hli[i],hli),
+/* wx-Entscheidung */
+  if option_exists('wx,hli) then
+     block(if wxx#true and wxx#false then wxx:assoc('wx,hli),
+        delete_option('wx,hli)),
+  if option_exists('terminal,opts) then wxx:false,
+  if option_exists('dimensions,opts) then wxplot_size:assoc('dimensions,hli,[]),
+  preamble:assoc(user_preamble,hli,[]),
+/* Aspect Ratio in die Gnuplot Praeambel einbauen */
+  if option_exists('aspect_ratio,hli) then block(
+     ar:float(assoc('aspect_ratio,hli)),
+     delete_option('aspect_ratio,hli),
+     preamble:endcons(concat("set size ratio ",ar),flatten([preamble]))),
+  if length(preamble)>0 then set_option(user_preamble=preamble,hli),
+/* Listenoptionen verarbeiten */
+  list_options:sublist(hli,lambda([u],listp(rhs(u)))),
+  for i:1 thru length(list_exceptions) do
+      delete_option(list_exceptions[i],list_options),
+  for i:1 thru length(list_options) do
+      delete_option(lhs(list_options[i]),hli),
+  if f=0 then return(hli),
+  if f=1 then return(append(hli,list_options)),
+  list_options:map(lambda([v],map(lambda([u],lhs(v)=u),rhs(v))),list_options),
+  append(hli,apply(_COMA_mx,append(list_options,[f])))
+)$
+
+/* ======================================================================= */
+/*   END of COMA                                                           */
+/* ======================================================================= */

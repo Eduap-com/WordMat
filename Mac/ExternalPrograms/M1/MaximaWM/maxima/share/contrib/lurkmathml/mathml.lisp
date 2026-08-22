@@ -8,6 +8,7 @@
 ;;   small corrections and additions: Andrey Grozin, 2001
 ;;   additional additions: Judah Milgram (JM), September 2001
 ;;   additional corrections: Barton Willis (BLW), October 2001
+;;   corrections and updates, Leo Butler (March 2026)
 
 ;; Usage: mathml(d8,"/tmp/foo.xml"); mathml(d10,"/tmp/foo.xml"); ..
 ;; to append lines d8 and d10 to the mathml file.  If given only
@@ -33,6 +34,28 @@
 
 (declare-top (special lop rop ccol $gcprint texport $labels $inchar vaxima-main-dir))
 
+(let ((mathml-mathspaces
+  (mapcar (lambda(s)
+	    (cons (car s) (format nil "~fem" (cdr s))))
+          `((veryverythinmathspace              .  ,(/  1 18))
+            (verythinmathspace                  .  ,(/  2 18))
+            (thinmathspace                      .  ,(/  3 18))
+            (mediummathspace                    .  ,(/  4 18))
+            (thickmathspace                     .  ,(/  5 18))
+            (verythickmathspace                 .  ,(/  6 18))
+            (veryverythickmathspace             .  ,(/  7 18))
+            (negativeveryverythinmathspace      .  ,(/ -1 18))
+            (negativeverythinmathspace          .  ,(/ -2 18))
+            (negativethinmathspace              .  ,(/ -3 18))
+            (negativemediummathspace            .  ,(/ -4 18))
+            (negativethickmathspace             .  ,(/ -5 18))
+            (negativeverythickmathspace         .  ,(/ -6 18))
+            (negativeveryverythickmathspace     .  ,(/ -7 18))))))
+  (defun get-mathml-mathspace (sym)
+    "Translation of named spaces to their length in `em' units.
+Ref: https://developer.mozilla.org/en-US/docs/Web/MathML/Reference/Values#Constants"
+    (or (cdr (assoc sym mathml-mathspaces)) sym)))
+
 ;; top level command the result of converting the expression x.
 
 (defmspec $mathml(l) ;; mexplabel, and optional filename
@@ -46,8 +69,22 @@
 	   )
 	  (t (apply 'mathml1  args)))))
 
+(defun $xml_sanitize (x &optional (strings "'\"<>&;#"))
+  (let ((html-entities (mapcar #'(lambda(x) (cons x (reverse (coerce (format nil "&#x~x;" (char-code x)) 'list)))) (coerce strings 'list))))
+    (flet ((safe-assoc (e)
+	     (or (cdr (assoc e html-entities :test #'eql)) e))
+	   (flatten (l)
+	     (do* ((f (car l) (car l))
+		   (r (if (listp f) f (list f)) (cond ((null f) r)
+						      ((listp f) (setq r (append f r)))
+						      (t         (push f r))))
+		   (l (cdr l) (cdr l)))
+		  ((null f) (reverse r)))))
+      (coerce
+       (flatten (mapcar #'safe-assoc (coerce x 'list))) 'string))))
+
 (defun mathml1 (mexplabel &optional filename ) ;; mexplabel, and optional filename
-  (prog (mexp  texport $gcprint ccol x y itsalabel tmpport)
+  (prog (mexp  texport $gcprint ccol x y itsalabel)
 	;; $gcprint = nil turns gc messages off
 	(setq ccol 1)
 	(cond ((null mexplabel)
@@ -64,7 +101,6 @@
 	;; do a normal evaluation of the expression in macsyma
 	(setq mexp (meval mexplabel))
 	(cond ((member mexplabel $labels :test #'eq); leave it if it is a label
-	       (setq mexplabel (intern (format nil "(~a)" (stripdollar mexplabel))))
 	       (setq itsalabel t))
 	      (t (setq mexplabel nil)));flush it otherwise
 
@@ -77,29 +113,13 @@
 		     (setq mexp (list '(mdefmacro) (cons (list x) (cdadr y)) (caddr y))))
 		    ((setq y (mget x 'aexpr))
 		     (setq mexp (list '(mdefine) (cons (list x 'array) (cdadr y)) (caddr y)))))))
-	(cond ((and (null (atom mexp))
-		    (member (caar mexp) '(mdefine mdefmacro) :test #'eq))
-	       (format texport "<pre>~%" ) 
-	       (cond (mexplabel (format texport "~a " mexplabel)))
-               ;; need to get rid of "<" signs
-               (setq tmpport (make-string-output-stream))
-               (mgrind mexp tmpport)
-               (close tmpport)
-               (format texport "~a" 
-                       (string-substitute "&lt;" #\< (get-output-stream-string tmpport)))
-	       (format texport ";~%</pre>"))
-
-	      ((and itsalabel ;; but is it a user-command-label?
-                  (char= (char (string $inchar) 1) (char (string mexplabel) 1)))
-	       ;; aha, this is a C-line: do the grinding:
-	       (format texport "<pre>~%~a " mexplabel)
-               ;; need to get rid of "<" signs
-               (setq tmpport (make-string-output-stream))
-               (mgrind mexp tmpport)
-               (close tmpport)
-               (format texport "~a" 
-                       (string-substitute "&lt;" #\< (get-output-stream-string tmpport)))
-	       (format texport ";~%</pre>"))
+        (cond ((or (and (null (atom mexp))
+                     (member (caar mexp) '(mdefine mdefmacro) :test #'eq))
+                   itsalabel)
+	       (format texport "<pre>~%~a~a;~%</pre>~%"
+		       (if mexplabel (aformat nil "(~a) " (stripdollar mexplabel)) "")
+		       ($xml_sanitize (with-output-to-string (strm)
+					(mgrind mexp strm)))))
 
 	      (t ; display the expression for MathML now:
 		 (myprinc "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"> " texport)
@@ -109,8 +129,8 @@
 		       ;; around the whole expression
 		       (mathml mexp nil nil 'mparen 'mparen))
 		 (cond (mexplabel
-			(format texport "<mspace width=\"verythickmathspace\"/> <mtext>~a</mtext> " mexplabel)))
-		 (format texport "</math>")))
+			(aformat texport "<mspace width=\"~a\"/> <mtext>~a</mtext> " (get-mathml-mathspace 'verythickmathspace) (stripdollar mexplabel))))
+		 (format texport "</math>~%")))
 	(cond(filename(terpri texport); and drain port if not terminal
 		      (close texport)))
 	(return mexplabel)))
@@ -131,14 +151,6 @@
 	      ((get (caar x) 'mathml) (funcall (get (caar x) 'mathml) x l r))
 	      (t (mathml-function x l r nil))))
 
-(defun string-substitute (newstring oldchar x &aux matchpos)
-  (setq matchpos (position oldchar x))
-  (if (null matchpos) x
-    (concatenate 'string 
-                 (subseq x 0 matchpos)
-                 newstring
-                 (string-substitute newstring oldchar (subseq x (1+ matchpos))))))
-
 ;;; NOTE that we try to include spaces after closing tags (e.g. "</mwhatever> ")
 ;;; so that the line breaking algorithm in myprinc has some spaces where it
 ;;; can choose to line break.
@@ -149,9 +161,22 @@
 (defun mathml-atom (x l r) 
   (append l
 	  (list (cond ((numberp x) (mathmlnumformat x))
-                      ((stringp x) (format nil "<mtext>~a</mtext>" x))
-		      ((and (symbolp x) (get x 'mathmlword)))
-		      (t (mathml-stripdollar x))))
+                      ((and (stringp x) (> (length x) 0) (not (char= #\< (aref x 0)))) (format nil "<mtext>~a</mtext>" x))
+                      ((stringp x) x)
+		      ((symbolp x)
+		       (or (get x 'mathmlword)
+			   (let ((m (get x 'reversealias)))
+			     (when m
+			       (or (get m 'mathmlword)
+				   (mathml-stripdollar m))))
+			   (mathml-stripdollar x)))
+		      (t ;; adapted from mactex.lisp
+		       (let ((x (if (member (marray-type x) '(array hash-table $functional))
+				    ($sconcat x)
+				    (format nil "~A" x))))
+			 ;; Do not apply stringdisp here -- we are outputting a string
+			 ;; only because we don't have a better way to handle Lisp arrays.
+			 (format nil "<mtext>~a</mtext>" ($xml_sanitize (string-trim '(#\") x)))))))
 	  r))
 
 (defun mathmlnumformat(atom)
@@ -174,9 +199,70 @@
                    "</mn></msup> </mrow> ")
                   ))))))
 
+(defmvar $mathml_underscore_is_subscript nil
+  "If NIL, only trailing digits are treated as subscripts.
+If T, all underscores (_) are treated as subscripts. If an integer N,
+then, beginning from the right of the symbol name, the first N
+underscores are treated as subscripts.")
+(defmvar $mathml_non_numeric_subscripts nil
+  "If NIL, only digits are treated as subscripts.
+Otherwise, eacj part of a symbol name bounded on the left by an
+underscore may be treated as a subscript; but, see also
+`$MATHML_UNDERSCORE_IS_SUBSCRIPT'.")
+
 (defun mathml-stripdollar(sym)
+  "If SYM is not a symbol, then return SYM;
+else if either $MATHML_UNDERSCORE_IS_SUBSCRIPT is NIL or
+$MATHML_NON_NUMERIC_SUBSCRIPTS is less than 1 (== NIL), then apply
+MATHML-STRIPDOLLAR-DEFAULT to SYM;
+else if $MATHML_UNDERSCORE_IS_SUBSCRIPT is at least one, then
+- split the symbol-name of SYM into strings along the underscores;
+- if there are no underscores, return a suitably marked-up symbol-name;
+- otherwise, collect the subscripts until we have enough (or all of them);
+- return the remaining symbol-name with the subscripts."
+  (declare (special $mathml_underscore_is_subscript $mathml_non_numeric_subscripts))
+  (assert (or (member $mathml_underscore_is_subscript '(t nil))
+	      (fixnump $mathml_underscore_is_subscript))
+	  () "`mathml_underscore_is_subscript' should be an integer or `true' or `false'")
+  (cond ((not (symbolp sym)) sym)
+	((or (null $mathml_underscore_is_subscript)
+	     (and (fixnump $mathml_underscore_is_subscript)
+		  (< $mathml_underscore_is_subscript 1)))
+	 (mathml-stripdollar-default sym))
+	((eq t $mathml_underscore_is_subscript)
+	 (let (($mathml_underscore_is_subscript most-positive-fixnum))
+	   (mathml-stripdollar sym)))
+	((and (fixnump $mathml_underscore_is_subscript)
+	      (>= $mathml_underscore_is_subscript 1))
+	 (block this
+	   (let* ((s (mfuncall '$split (maybe-invert-string-case (string-left-trim '(#\$) (symbol-name sym))) "_"))
+		  (l (length s))
+		  (n-max (min (- l 2) $mathml_underscore_is_subscript)))
+	     (when (< l 3) (return-from this (strcat "<mi>" (cadr s) "</mi>")))
+	     (flet ((subscript-p (x)
+		      (or $mathml_non_numeric_subscripts
+			  (digit-char-p x))))
+	       (do* ((sn (reverse (cdr s))                                  (cdr sn))
+		     (n  1                                                  (1+ n))
+		     (num(every #'subscript-p (car sn))                     (every #'subscript-p (car sn)))
+		     (r  (if num (list "<mi>" (car sn) "</mi>"))            (if num (append (list "<msub><mi>" (car sn) "</mi>") r) r))
+		     (e  (if num " </msub>" "")                             (if num (strcat e "</msub>") e)))
+		    ((or (null (cdr sn))
+			 (null num)
+			 (>= n n-max))
+		     (progn
+		       (when (and num                ;; (CAR SN) is a subscript, but
+				  (<= n n-max)       ;; the do*-loop did not have a chance to discard if from SN
+				  (> (length sn) 1)) ;; so we do it manually
+			 (setq sn (cdr sn)))
+		       (format nil "~a<mi>~{~a~^_~}</mi> ~{~a ~} ~a" (if (string= e "") "" "<msub>") (reverse sn) r e)))
+		 )))))
+	(t ;; we should never get here
+	 (error "MATHML-STRIPDOLLAR-DEFAULT: "))))
+
+(defun mathml-stripdollar-default(sym)
   (or (symbolp sym) 
-      (return-from mathml-stripdollar sym))
+      (return-from mathml-stripdollar-default sym))
   (let* ((pname (maybe-invert-string-case (string-left-trim '(#\$) (symbol-name sym))))
 	 (l (length pname))
 	 (begin-sub
@@ -193,15 +279,15 @@
            (strcat "<mi>" pname "</mi> ")))))
 
 (defun mathml-paren (x l r)
-  (mathml x (append l '("<mfenced separators=\"\">")) (cons "</mfenced> " r) 'mparen 'mparen))
+  (mathml x (append l '("<mrow><mo>(</mo>")) (cons "<mo>)</mo></mrow> " r) 'mparen 'mparen))
 
 (defun mathml-array (x l r)
   (let ((f))
     (if (eq 'mqapply (caar x))
 	(setq f (cadr x)
 	      x (cdr x)
-	      l (mathml f (append l (list "<mfenced separators=\",\">")) 
-                        (list "</mfenced> ") 'mparen 'mparen))
+	      l (mathml f (append l (list "<mrow>"))
+                        (list "</mrow> ") 'mparen 'mparen))
       (setq f (caar x)
 	    l (mathml (mathmlword f) (append l '("<msub><mrow>")) nil lop 'mfunction)))
     (setq
@@ -287,27 +373,34 @@
         (append l spell-out-expt r))
       (append l formatted r))))
 
-(defprop mprog "<mi>block</mi><mspace width=\"mediummathspace\"/> " mathmlword) 
+(defprop mprog #.(concatenate 'string "<mi>block</mi><mspace width=\"" (get-mathml-mathspace 'mediummathspace) "\"/> ") mathmlword)
 (defprop %erf "<mi>erf</mi> " mathmlword)
 (defprop $erf "<mi>erf</mi> " mathmlword) ;; etc for multicharacter names
 (defprop $true  "<mi>true</mi> "  mathmlword)
 (defprop $false "<mi>false</mi> " mathmlword)
 
 (defprop mprogn mathml-matchfix mathml) ;; mprogn is (<progstmnt>, ...)
-(defprop mprogn (("<mfenced separators=\"\">") "</mfenced> ") mathmlsym)
+(defprop mprogn (("<mrow><mo>(</mo>") "<mo>)</mo></mrow> ") mathmlsym)
 
 (defprop mlist mathml-matchfix mathml)
-(defprop mlist (("<mfenced separators=\"\" open=\"[\" close=\"]\">")"</mfenced> ") mathmlsym)
+(defprop mlist (("<mrow><mo>[</mo>")"<mo>]</mo></mrow> ") mathmlsym)
+
+(defprop mbox mathml-matchfix mathml)
+(defprop mbox (("<menclose notation=\"box\"><menclose notation=\"box\">")"</menclose></menclose>") mathmlsym)
+(defprop mlabox mathml-mlabox mathml)
+(defun mathml-mlabox (x l r)
+  (append l '("<mtable><mtr><mtd columnalign=\"center\" style=\"font-size: 0.8em;\">") (mathml (caddr x) nil nil 'mparen 'mparen)
+	  '("</mtd></mtr><mtr><mtd><menclose notation=\"box\"><menclose notation=\"box\">") (mathml (cadr x) nil nil 'mparen 'mparen) '("</menclose></menclose></mtd></mtr></mtable>") r))
 
 ;;absolute value
 (defprop mabs mathml-matchfix mathml)
-(defprop mabs (("<mfenced separators=\"\" open=\"|\" close=\"|\">")"</mfenced> ") mathmlsym) 
+(defprop mabs (("<mrow><mo form=\"prefix\">|</mo>")"<mo form=\"postfix\">|</mo></mrow> ") mathmlsym)
 
 (defprop mqapply mathml-mqapply mathml)
 
 (defun mathml-mqapply (x l r)
-  (setq l (mathml (cadr x) l (list "(" ) lop 'mfunction)
-	r (mathml-list (cddr x) nil (cons ")" r) "<mo>,</mo>"))
+  (setq l (mathml (cadr x) l (list "<mo>(</mo>" ) lop 'mfunction)
+	r (mathml-list (cddr x) nil (cons "<mo>)</mo>" r) "<mo>,</mo>"))
   (append l r));; fixed 9/24/87 RJF
 
 (defprop $%i "<mi>&ImaginaryI;</mi> " mathmlword)
@@ -404,6 +497,7 @@
 			  (member (get-first-char f) '(#\% #\$) :test #'char=) ;; insist it is a % or $ function
                           (not (member f '(%sum %product %derivative %integrate %at
                                          %lsum %limit) :test #'eq)) ;; what else? what a hack...
+			  (not (member 'array (cdar fx) :test #'eq)) ; fix for x[i]^2
 			  (or (and (atom expon) (not (numberp expon))) ; f(x)^y is ok
 			      (and (atom expon) (numberp expon) (> expon 0))))))
 			      ; f(x)^3 is ok, but not f(x)^-1, which could
@@ -418,12 +512,13 @@
 		        (t nil))))) ; won't doit. fall through
       (t (setq l (mathml (cadr x) (append l '("<msup><mrow>")) nil lop (caar x))
 	       r (if (mmminusp (setq x (nformat (caddr x))))
-		    ;; the change in base-line makes parens unnecessary
+                    ;; the change in base-line makes parens unnecessary
+                    ;; exponents are wrapped in 〈〉 (= #x3008 #x3009)
 		    (if nc
-			(mathml (cadr x) '("</mrow> <mfenced separators=\"\" open=\"<\" close=\">\"> -")(cons "</mfenced></msup> " r) 'mparen 'mparen)
-			(mathml (cadr x) '("</mrow> <mfenced separators=\"\"> -")(cons "</mfenced></msup> " r) 'mparen 'mparen))
+			(mathml (cadr x) '("</mrow> <mrow><mo form=\"prefix\">&#x3008;</mo><mo form=\"prefix\">-</mo>")(cons "<mo form=\"postfix\">&#x3009;</mo></mrow></msup> " r) 'mparen 'mparen)
+			(mathml (cadr x) '("</mrow> <mrow> <mo form=\"prefix\">-</mo>")(cons "</mrow></msup> " r) 'mparen 'mparen))
 		    (if nc
-			(mathml x (list "</mrow> <mfenced separators=\"\" open=\"<\" close=\">\">")(cons "</mfenced></msup>" r) 'mparen 'mparen)
+			(mathml x (list "</mrow> <mrow><mo form=\"prefix\">&#x3008;</mo>")(cons "<mo form=\"postfix\">&#x3009;</mo></mrow></msup>" r) 'mparen 'mparen)
 			(if (and (numberp x) (< x 10))
 			    (mathml x (list "</mrow> ")(cons "</msup> " r) 'mparen 'mparen)
 			    (mathml x (list "</mrow> <mrow>")(cons "</mrow></msup> " r) 'mparen 'mparen))
@@ -441,7 +536,7 @@
 (defprop mnctimes 109. mathml-rbp)
 
 (defprop mtimes mathml-nary mathml)
-(defprop mtimes "<mspace width=\"thinmathspace\"/>" mathmlsym)
+(defprop mtimes #.(concatenate 'string "<mspace width=\"" (get-mathml-mathspace 'thinmathspace) "\"/>") mathmlsym) ;; thinmathspace
 (defprop mtimes 120. mathml-lbp)
 (defprop mtimes 120. mathml-rbp)
 
@@ -472,11 +567,11 @@
 (defprop $matrix mathml-matrix mathml)
 
 (defun mathml-matrix(x l r) ;;matrix looks like ((mmatrix)((mlist) a b) ...)
-  (append l `("<mfenced separators=\"\" open=\"(\" close=\")\"><mtable>")
+  (append l `("<mrow><mo form=\"prefix\">(</mo><mtable>")
 	 (mapcan #'(lambda(y)
 			  (mathml-list (cdr y) (list "<mtr><mtd>") (list "</mtd></mtr> ") "</mtd><mtd>"))
 		 (cdr x))
-	 '("</mtable></mfenced> ") r))
+	 '("</mtable><mo>)</mo></mrow> ") r))
 
 ;; macsyma sum or prod is over integer range, not  low <= index <= high
 ;; Mathml is lots more flexible .. but
@@ -515,12 +610,12 @@
   (let ((s1 (mathml (cadr x) nil nil 'mparen 'mparen));;integrand delims / & d
 	(var (mathml (caddr x) nil nil 'mparen rop))) ;; variable
        (cond((= (length x) 3)
-	     (append l `("<mrow><mo>&int;</mo><mrow>" ,@s1 "</mrow> <mspace width=\"mediummathspace\"/> <mrow><mo>&DifferentialD;</mo><mi>" ,@var "</mi></mrow></mrow> ") r))
-	    (t ;; presumably length 5
+	     (append l `("<mrow><mo>&int;</mo><mrow>" ,@s1 "</mrow> <mspace width=\"" ,(get-mathml-mathspace 'mediummathspace)  "\"/> <mrow><mo>&DifferentialD;</mo>" ,@var "</mrow></mrow> ") r))
+    (t ;; presumably length 5
 	       (let ((low (mathml (nth 3 x) nil nil 'mparen 'mparen))
 		     ;; 1st item is 0
 		     (hi (mathml (nth 4 x) nil nil 'mparen 'mparen)))
-		    (append l `("<mrow><munderover><mo>&int;</mo> <mrow>" ,@low "</mrow> <mrow>" ,@hi "</mrow> </munderover> <mrow>" ,@s1 "</mrow> <mspace width=\"mediummathspace\"/> <mrow><mo>&DifferentialD;</mo><mi>" ,@var "</mi> </mrow></mrow> ") r))))))
+		 (append l `("<mrow><munderover><mo>&int;</mo> <mrow>" ,@low "</mrow> <mrow>" ,@hi "</mrow> </munderover> <mrow>" ,@s1 "</mrow> <mspace width=\"" ,(get-mathml-mathspace 'mediummathspace) "\"/> <mrow><mo>&DifferentialD;</mo>" ,@var " </mrow></mrow> ") r))))))
 
 (defprop %limit mathml-limit mathml)
 
@@ -541,7 +636,28 @@
 (defun mathml-at (x l r)
   (let ((s1 (mathml (cadr x) nil nil lop rop))
 	(sub (mathml (caddr x) nil nil 'mparen 'mparen)))
-       (append l '("<msub><mfenced separators=\"\" open=\"\" close=\"|\">") s1  '("</mfenced> <mrow>") sub '("</mrow> </msub> ") r)))
+       (append l '("<msub><mrow>") s1  '("<mo form=\"postfix\">|</mo></mrow> <mrow>") sub '("</mrow> </msub> ") r)))
+
+(defprop %at_difference mathml-at-difference mathml)
+
+;; e.g. 'at_difference(f(x), x, a, b)
+
+(defun mathml-at-difference (e l r)
+  (let*
+    ((f (first (rest e)))
+     (x (second (rest e)))
+     (a (third (rest e)))
+     (b (fourth (rest e)))
+     (mathml-f (mathml f nil nil lop rop))
+     (mathml-sub (mathml (list '(mequal) x a) nil nil 'mparen 'mparen))
+     (mathml-sup (mathml (list '(mequal) x b) nil nil 'mparen 'mparen)))
+    (append l
+            '("<msubsup>")
+            '("<mrow>") mathml-f '("<mo form=\"postfix\">|</mo></mrow>")
+            '("<mrow>") mathml-sub '("</mrow>")
+            '("<mrow>") mathml-sup '("</mrow>")
+            '("</msubsup> ")
+            r)))
 
 ;;binomial coefficients
 
@@ -549,11 +665,11 @@
 
 (defun mathml-choose (x l r)
   `(,@l
-    "<mfenced separators=\"\" open=\"(\" close=\")\"><mtable><mtr><mtd>"
+    "<mrow><mo form=\"prefix\">(</mo><mtable><mtr><mtd>"
     ,@(mathml (cadr x) nil nil 'mparen 'mparen)
     "</mtd></mtr> <mtr><mtd>"
     ,@(mathml (caddr x) nil nil 'mparen 'mparen)
-    "</mtd></mtr> </mtable></mfenced> "
+    "</mtd></mtr> </mtable><mo>)</mo></mrow> "
     ,@r))
 
 
@@ -696,10 +812,14 @@
 (defprop mcond 25. mathml-lbp)
 (defprop mcond 25. mathml-rbp)
 
+(defprop %del mathml-prefix mathml)
+(defprop %del ("<mo>&DifferentialD;</mo>") mathmlsym)
+(defprop %del 125 mathml-rbp)
+
 (defprop %derivative mathml-derivative mathml)
 
 (defun mathml-derivative (x l r)
-  (mathml (mathml-d x "&DifferentialD;") l r lop rop ))
+  (mathml (mathml-d x (dim-derivative-sym x "<mo form=\"prefix\">&DifferentialD;</mo>" "<mo form=\"prefix\">&PartialD;</mo>")) l r lop rop ))
 
 (defun mathml-d(x dsym) ;dsym should be "&DifferentialD;" or "&PartialD;"
   ;; format the macsyma derivative form so it looks
@@ -719,13 +839,14 @@
      ,arg)))
 
 (defun mathml-mcond (x l r)
-  (append l
-    (mathml (cadr x) '("<mi>if</mi> <mspace width=\"mediummathspace\"/>")
-      '("<mspace width=\"mediummathspace\"/> <mi>then</mi><mspace width=\"mediummathspace\"/> ") 'mparen 'mparen)
-    (if (eql (fifth x) '$false)
-      (mathml (caddr x) nil r 'mcond rop)
-      (append (mathml (caddr x) nil nil 'mparen 'mparen)
-        (mathml (fifth x) '("<mspace width=\"mediummathspace\"/> <mi>else</mi><mspace width=\"mediummathspace\"/> ") r 'mcond rop)))))
+  (let ((mediummathspace (get-mathml-mathspace 'mediummathspace)))
+    (append l
+           (mathml (cadr x) (list "<mi>if</mi> <mspace width=\"" mediummathspace "\"/>")
+                   (list "<mspace width=\"" mediummathspace "\"/> <mi>then</mi><mspace width=\"" mediummathspace "\"/> ") 'mparen 'mparen)
+           (if (eql (fifth x) '$false)
+               (mathml (caddr x) nil r 'mcond rop)
+               (append (mathml (caddr x) nil nil 'mparen 'mparen)
+                       (mathml (fifth x) (list "<mspace width=\"" mediummathspace "\"/> <mi>else</mi><mspace width=\"" mediummathspace "\"/> ") r 'mcond rop))))))
 
 (defprop mdo mathml-mdo mathml)
 (defprop mdo 30. mathml-lbp)
@@ -739,10 +860,10 @@
 ;; these aren't quite right
 
 (defun mathml-mdo (x l r)
-  (mathml-list (mathmlmdo x) l r "<mspace width=\"mediummathspace\"/> "))
+  (mathml-list (mathmlmdo x) l r (concatenate 'string "<mspace width=\"" (get-mathml-mathspace 'mediummathspace) "\"/> ")))
 
 (defun mathml-mdoin (x l r)
-  (mathml-list (mathmlmdoin x) l r "<mspace width=\"mediummathspace\"/> "))
+  (mathml-list (mathmlmdoin x) l r (concatenate 'string "<mspace width=\"" (get-mathml-mathspace 'mediummathspace) "\"/> ")))
 
 (defun mathmlmdo (x)
    (nconc (cond ((second x) `("<mi>for</mi> " ,(second x))))

@@ -315,9 +315,20 @@ flatten_conversion_equation (e%) := block
 equationp (e) := not atom (e) and op (e) = "=";
 
 compute_conversion_factor (u1%, u2%) :=
- (if conversions_to_base_units = 'conversions_to_base_units
-    then compute_conversions_to_base_units (),
-  ev (simplify_units (u1% / u2%), conversions_to_base_units));
+  block ([e%],
+    if conversions_to_base_units = 'conversions_to_base_units
+        then compute_conversions_to_base_units (),
+    e% : u1% / u2%,
+    /* Reduce u1/u2 to base units, then simplify.  Substitute only the
+     * definitions whose unit occurs in u1/u2 (each rhs is already fully
+     * reduced to base units, so one pass suffices; absent-lhs defs are no-ops)
+     * -- this replaces an ev over the entire hundreds-strong table on every
+     * conversion.  simplify_units must WRAP the substitution so unit positivity
+     * is applied to the base-unit result (sqrt(s^2) -> s, not abs(s)).  Uses
+     * freeof (not listofvars) so subscripted units such as 'Hz[S] match.
+     */
+    simplify_units (ev (e%, sublist (conversions_to_base_units,
+                                     lambda ([eq%], not freeof (lhs (eq%), e%))))));
 
 compute_conversions_to_base_units () :=
   conversions_to_base_units : listify (compute_conversions_to_base_units0 (known_unit_conversions));
@@ -454,7 +465,8 @@ block ([L],
  */
 
 matchdeclare
-   (aa%, lambda ([e%], numberp (e%) or (atom (e%) and not symbolp (e%))),
+   (/* are there other nonnumerical constants similar to %i ?? */
+    aa%, lambda ([e%], numberp (e%) or (atom (e%) and (not symbolp (e%) or e% = %i))),
     bb%, lambda ([e%], symbolp (e%) and member (e%, fundamental_dimensions)),
     cc%, lambda ([e%], symbolp (e%) and get (e%, 'units) # false),
     dd%, lambda ([e%], symbolp (e%) and get (e%, 'constvalue) # false),
@@ -463,7 +475,9 @@ matchdeclare
     ff%, lambda ([e%], symbolp (e%)),
     gg%, lambda ([e%], not atom (e%) and op (e%) = "`"),
     hh%, lambda ([e%], not atom (e%) and op (e%) = "^"),
-    ii%, lambda ([e%], not mapatom (e%) and member (op (e%), ["+", "-", "*", "/"])));
+    ii%, lambda ([e%], not mapatom (e%) and member (op (e%), ["*", "/"])),
+    jj%, lambda ([e%], not mapatom (e%) and op (e%) = "+"),
+    kk%, lambda ([e%], not mapatom (e%) and op (e%) = "-"));
 
 simp : false;
 defrule (raa, 'dimensions (aa%), 1);
@@ -475,14 +489,25 @@ defrule (ree1, 'dimensions (ee1%), dimensions (?mget (ee1%, 'numer)));
 defrule
    (rff,
     'dimensions (ff%), 
-    block
-      ([ff%2 : ev (ff%, args (known_unit_conversions), infeval)],
-        if ff%2 # ff% then dimensions (ff%2) else 'dimensions (ff%)));
+    /* Reduce the unit symbol to base units via the pre-computed, fully-reduced
+     * conversions_to_base_units table (a single assoc lookup) instead of the
+     * old ev(ff%, args(known_unit_conversions), infeval) -- an infinite-eval
+     * loop substituting the whole conversion list, the dominant cost in
+     * dimensions()/fundamental_units() (maxima-discuss 2026-05, Soegtrop/Dodier).
+     * dimensions is invariant under unit conversion, so this is equivalent.
+     */
+    (if conversions_to_base_units = 'conversions_to_base_units
+        then compute_conversions_to_base_units (),
+     block
+      ([ff%2 : assoc (ff%, conversions_to_base_units, ff%)],
+        if ff%2 # ff% then dimensions (ff%2) else 'dimensions (ff%))));
 defrule (rgg, 'dimensions (gg%), (constvalue (first (gg%)), if unitp (%%) then dimensions (second (%%)) else 1) * dimensions (second (gg%)));
 matchdeclare (aa%, all, bb%, constantp_not1);
 defrule (rhh, 'dimensions (aa%^bb%), dimensions (aa%) ^ bb%);
 defrule (rii, 'dimensions (ii%), map (dimensions, ii%));
-/* ??? defrule (rjj, 'dimensions (sqrt (aa%)), sqrt (dimensions (aa%))); */
+defrule (rjj, 'dimensions (jj%), apply ("+", unique (map (dimensions, args (jj%)))));
+defrule (rkk, 'dimensions (kk%), apply ("+", unique (map (dimensions, args (kk%)))));
+/* ??? defrule (rfoo, 'dimensions (sqrt (aa%)), sqrt (dimensions (aa%))); */
 simp : true;
 
 dimensions (expr) :=
@@ -496,7 +521,7 @@ dimensions (expr) :=
 dimensions1 (expr) :=
     if not atom (expr) and (setp (expr) or listp (expr) or matrixp (expr) or op (expr) = "=")
         then map (dimensions, expr)
-        else apply (apply1, ['dimensions (expr), raa, rbb, rcc, rdd, ree, ree1, rff, rgg, rhh, rii]);
+        else apply (apply1, ['dimensions (expr), raa, rbb, rcc, rdd, ree, ree1, rff, rgg, rhh, rii, rjj, rkk]);
 
 /* Adapted from dimensions_as_list in share/physics/dimension.mac.
  * Thanks to Barton Willis.
@@ -527,6 +552,10 @@ fundamental_units ([L]) :=
                     if listp (d)
                         then apply ("*", map ("^", fundamental_units (), d))
                         else 'fundamental_units (L [1]));
+
+all_units_fundamental (e) := applyb1 (e, fundamental_units_rule);
+
+defrule (fundamental_units_rule, uu%, uu% `` fundamental_units (uu%));
 
 /* Adapted from dimensionless in share/physics/dimension.mac.
  * Thanks to Barton Willis.
@@ -633,8 +662,8 @@ dimensionally (e%) ::=
       units_gensyms : make_array ('hashed),
       unitless_args : applyb1 (e%_args, rununitify),
       reunitification_eqs : map (lambda ([e], lhs (e) = 1 ` rhs (e)), inverse_gensym_map (units_gensyms)),
-      reunitified : subst (reunitification_eqs, apply (e%_op, unitless_args)),
-      rezeroified : subst (makelist (x = 0, x, listarray (qtys_gensyms)), reunitified),
+      reunitified : sublis (reunitification_eqs, apply (e%_op, unitless_args)),
+      rezeroified : sublis (makelist (x = 0, x, listarray (qtys_gensyms)), reunitified),
       killcontext (context_name),
       rezeroified));
 

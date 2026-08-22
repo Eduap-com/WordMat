@@ -1,5 +1,148 @@
 foo: 3^5;
-bar: 3^5 + x^5 $
-baz: expand ((2 - a)^4) $
+bar: 3^5 + x^5 ;
+baz: expand ((2 - a)^4) ;
 baz - bar*foo;
-abc^(foo + bar + baz) $
+abc^(foo + bar + baz) ;
+/* do */
+for a:-3 thru 26 step 7 do display(a);
+'(''_);
+for i: 1 while i <= 10 do s: s+i;
+'(''_);
+block([series:1, term: exp(sin(x)), x],
+  for p: 1 unless p > 7 do
+  (term: diff (term, x)/p,
+    series: series + subst (x=0, term)*x^p),
+  series);
+block([poly:0],
+  for i: 1 thru 5 do
+  for j: i step -1 thru 1 do
+  poly: poly + i*x^j,
+  poly);
+'(''_);
+for count: 2 next 3*count thru 20 do display (count)$
+'(''_);
+for count next 3*count thru 20 from 2 do display (count)$
+'(''_);
+block([x:1000],
+  thru 20 do x: 0.5*(x + 5.0/x),
+  x);
+'(''_);
+f(x) := sin(x+%pi);
+g(x,y) := cos(x-y);
+h(x,'y) := if x < y then 1 else 0;
+k(x,[y]) := if y=[] then x else 0;
+f(x) := if x < 1 then 1 else if x < 2 then 2 else if x < 3 then 3 else if x < 4 then 4 else if x < 5 then 5 else if x < 6 then 6 else if x < 7 then 7 else if x < 8 then 8 else if x < 9 then 9 else 10;
+"--->"(x,y) ::= buildq([x:x,y:y], x := y);
+infix("--->",180,90);
+f(x) ---> x+1;
+f(2);
+%i3;
+'%o3;
+factor(%o3);
+(x^5^a^b + 3^7^(a+b))^b^c;
+FOO[1,2];
+FOO[x,y](w);
+kill (f, g);
+'at_difference (f (u), u, a, b);
+'at_difference ('integrate (g (w), w), w, 1 - %pi^2, epsilon[3]^4);
+'at_difference (exp (-(1/2)*((z - mu)/sigma)^2) / sigma / sqrt (2*%pi), z, minf, inf);
+z[2]^3;
+A^^n;
+A^^4;
+A[n]^^(3+k);
+A^^(-3);
+sin(x)^3;
+FOO(x,y)^4;
+/* by default, trailing digits in a symbol name are treated as subscripts */
+x1;
+bar1234;
+/* the default needs treat these cases as subscripts */
+x_1;
+x_1_2;
+a_very_long_variable_name;
+/* test of alternative */
+(mathml_non_numeric_subscripts:false, mathml_underscore_is_subscript:true);
+x_1;
+x_1_2;
+x_1_2_3;
+x_1_2_3_4;
+x_0_1_2_3_4_5_6_7_8_9_10_11_12_13_14_15;
+a_very_long_variable_name;
+a_very_long_variable_name_1_2;
+alpha_3[x];
+mathml_underscore_is_subscript:1;
+x_1;
+x_1_2;
+x_1_2_3;
+mathml_underscore_is_subscript:2;
+x_1;
+x_1_2;
+x_1_2_3;
+mathml_underscore_is_subscript:3;
+x_1;
+x_1_2;
+x_1_2_3;
+x_1_2_3_4;
+(mathml_non_numeric_subscripts:true, mathml_underscore_is_subscript:true);
+x_1;
+x_1_2;
+x_1_2_3;
+x_1_2_3_4;
+x_0_1_2_3_4_5_6_7_8_9_10_11_12_13_14_15;
+a_very_long_variable_name;
+a_very_long_variable_name_1_2;
+alpha_3[x];
+mathml_underscore_is_subscript:1;
+x_1;
+x_1_2;
+x_1_2_3;
+a_very_long_variable_name;
+a_very_long_variable_name_1_2;
+mathml_underscore_is_subscript:2;
+x_1;
+x_1_2;
+x_1_2_3;
+a_very_long_variable_name;
+a_very_long_variable_name_1_2;
+mathml_underscore_is_subscript:3;
+x_1;
+x_1_2;
+x_1_2_3;
+x_1_2_3_4;
+a_very_long_variable_name;
+a_very_long_variable_name_1_2;
+box(x^2+y^2=1);
+box(box(x^2+y^2) = r^2);
+box(x^2+y^2=r^2,Pythagoras);
+mathml_non_numeric_subscripts:false;
+box(box(x^2+y^2,sum_of_squares)=box(r^2,hypotenuse_squared),Pythagoras);
+lambda([x,y], x/y);
+lambda([[x]], lreduce("*",x,1));
+diff(x*y^2);
+diff(x);
+diff(x[1]^2*x[3]^3+y1^3*z4^5);
+(depends(F,[x]),'diff(F,x));
+'diff(F,x,3);
+'diff(F,y);
+(depends(G,[x,y]),'diff(G,x));
+'diff(G,y);
+'diff(G,x,1,y,1);
+'diff(G,x,1,y,2);
+'diff(G,x,2,y,1);
+'diff(G,x,4,y,2);
+(f : cos(x+y)+%e, 'diff(f,x));
+'diff(f,y);
+'diff(f,x,1,y,1);
+'diff(f,x,1,y,2);
+'diff(f,x,2,y,1);
+'diff(f,x,4,y,2);
+(f : cos(x)+%e, 'diff(f,x));
+'diff(f,y);
+'diff(f,x,1,y,1);
+'diff(f,x,1,y,2);
+'diff(f,x,2,y,1);
+'diff(f,x,4,y,2);
+taylor(x+x^3,x,0,2);
+ordergreat(z,y,x)$ x+y+z;
+orderless(t,u,v)$ v+u+t;
+make_array (fixnum, 10);

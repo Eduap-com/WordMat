@@ -373,8 +373,16 @@ mean (x, [w]) :=
            [w, sum_w]: if w = [] then [1, n] else [w[1], if listp (w[1]) then lsum (w1, w1, w[1]) else n*w[1]],
            verify_weights ('mean, w, n),
            if listp(x) or matrixp(x)
-               then block ([e: apply ("+", w * args(x)) / sum_w],
-                           ratsimp_nonnumeric (e))
+               then if n > 0
+                        then block ([e: apply ("+", w * args(x)) / sum_w],
+                                    ratsimp_nonnumeric (e))
+                        /* mean is undefined if x is empty (sum is well-defined and length is well-defined, but not sum/length);
+                         * there are various possibilities here, such as triggering an error or returning false,
+                         * just return und for now.
+                         * Also, I suppose that any other functions of lists or matrices should likewise
+                         * try to return something meaningful for empty data.
+                         */
+                        else und
                else error("mean: first argument must be a list or matrix; found", x));
 
 verify_weights (fn, w, n) :=
@@ -952,7 +960,7 @@ make_skyline (xx, yy, fill_color, fill_density) :=
             'points (skyline_points)]);
 
 histogram_description(m,[select]):=
-   block([fr,amp,scen,before,localopts,num_classes,v,lbels, my_fill_color, my_fill_density,
+   block([n_data,fr,amp,scen,before,localopts,num_classes,v,lbels, my_fill_color, my_fill_density,
           /* specific options */
           my_nclasses:10, my_frequency:'absolute, my_htics:'auto, histogram_bars, histogram_drawing],
       [before, localopts]: extract_options (select, 'nclasses, 'frequency, 'htics, 'fill_color, 'fill_density),
@@ -1031,29 +1039,31 @@ histogram_description(m,[select]):=
                  then my_nclasses: num_classes:
                         ceiling(1 + log(length(m)) / 0.6931471805599453), /* <-- log(2) */
                fr: float(continuous_freq(m,my_nclasses)),
+               n_data: length (m),
                if member(my_frequency, ['relative, 'percent])
-                 then fr: [first(fr), second(fr) / apply("+", second(fr))],
+                 then fr: [first(fr), second(fr) / n_data],
                if my_frequency = 'percent
                  then fr[2]: fr[2] * 100.0,
                amp: makelist(fr[1][i+1]-fr[1][i], i, 1, length(fr[1])-1),
                if my_frequency = 'density
-                 then fr: [first(fr), second(fr) / apply("+", second(fr) * amp)],
+                 then block ([listarith: true],
+                             fr: [first(fr), second(fr) / n_data / amp]),
 
                /* histogram tics */
                if my_htics = 'auto
                  then my_htics: []
                elseif my_htics = 'endpoints
-                 then my_htics: xtics = setify(fr[1])
+                 then my_htics: 'xtics = setify(fr[1])
                elseif my_htics = 'intervals
                  then ( lbels: [concat("[",fr[1][1],",",fr[1][2],"]")],
 			lbels: append(lbels, makelist(concat("(",fr[1][k],",",fr[1][k+1],"]"),k,2,num_classes)),
 			lbels: makelist([lbels[k],fr[1][k]+amp[k]/2],k,1,num_classes),
-			my_htics: xtics = makeset([a,b],[a,b],lbels) )
+			my_htics: 'xtics = makeset([a,b],[a,b],lbels) )
                elseif listp(my_htics)
                  then ( if length(my_htics) < num_classes
 		          then my_htics: append(my_htics, makelist("",k,length(my_htics)+1,num_classes)),
 		        lbels: makelist([my_htics[k],fr[1][k]+amp[k]/2],k,1,num_classes),
-		        my_htics: xtics = makeset([a,b],[a,b],lbels) ),
+		        my_htics: 'xtics = makeset([a,b],[a,b],lbels) ),
 
                histogram_bars: apply ('bars, makelist ([(fr[1][k] + fr[1][k + 1])/2, fr[2][k], amp[k]], k, 1, length (fr[1]) - 1)),
                histogram_drawing:
@@ -1062,8 +1072,8 @@ histogram_description(m,[select]):=
                        else ['fill_color = my_fill_color, 'fill_density = my_fill_density, histogram_bars],
 
                scen: append ([before,
-                              'xrange = [first(fr[1]), last(fr[1])] + [-1,+1] * mean(amp)/2,
-                              'yrange = lmax(fr[2])*[-0.05, 1.05],
+                              'suggest('xrange = [first(fr[1]), last(fr[1])] + [-1,+1] * mean(amp)/2),
+                              'suggest('yrange = lmax(fr[2])*[-0.05, 1.05]),
                               my_htics],
                              histogram_drawing))
 
@@ -1194,7 +1204,7 @@ barsplot_description([args]):=
         totalgap: nsamples + my_groups_gap,
         append(
            before,
-           [points([[my_start_at,0]]), xtics = 'none],
+           [points([[my_start_at,0]]), 'suggest('xtics = 'none)],
            makelist(
                 ['fill_color = my_bars_colors[m],
                  'key = my_sample_keys[m],
@@ -1216,7 +1226,7 @@ barsplot_description([args]):=
         freqs: map(lambda([z], reverse(makelist(block([s:0], for i:1 thru k do s: s+z[i], s),k,1,length(z)))), freqs),
         append(
            before,
-           [points([[my_start_at,0]]), xtics = 'none],
+           [points([[my_start_at,0]]), 'suggest('xtics = 'none)],
            makelist(
                 ['fill_color = my_bars_colors[m],
                  'key = my_sample_keys[m],
@@ -1431,12 +1441,12 @@ boxplot_description(m,[select]):=
               else [],
 
             if my_box_orientation = 'vertical
-              then [ 'xtics  = setify(makelist(k,k,1,tot)),
-                     'xrange = (tot-1)*0.05*[-1,+1.5]+[0.5,tot+0.5],
-                     'yrange = (top-bot)*0.05*[-1,+1]+[bot,top] ]
-              else [ 'ytics  = setify(makelist(k,k,1,tot)),
-                     'yrange = (tot-1)*0.05*[-1,+1.5]+[0.5,tot+0.5],
-                     'xrange = (top-bot)*0.05*[-1,+1]+[bot,top] ] ])
+              then [ 'suggest('xtics  = setify(makelist(k,k,1,tot))),
+                     'suggest('xrange = (tot-1)*0.05*[-1,+1.5]+[0.5,tot+0.5]),
+                     'suggest('yrange = (top-bot)*0.05*[-1,+1]+[bot,top]) ]
+              else [ 'suggest('ytics  = setify(makelist(k,k,1,tot))),
+                     'suggest('yrange = (tot-1)*0.05*[-1,+1.5]+[0.5,tot+0.5]),
+                     'suggest('xrange = (top-bot)*0.05*[-1,+1]+[bot,top]) ] ])
         else error("sorry, can't plot the box-whisker plot for these data"))$
 
 boxplot([desc]) := draw2d(apply(boxplot_description, desc)) $
@@ -1625,21 +1635,3 @@ starplot_description([args]):=
       ['key = ""])    )$
 starplot([desc]) := draw2d(apply(starplot_description, desc)) $
 wxstarplot([desc]) := wxdraw2d(apply(starplot_description, desc)) $
-
-/* find_runs -- find consecutive identical values in an array or list.
- * Returns a structure runs(...) with fields lengths and values.
- */
-
-defstruct (runs (lengths, values));
-
-find_runs (x) :=
-  if x = [] then runs ([], [])
-    else block ([dx : map (lambda ([a, b], is(a # b)), rest(x), rest(x, -1)), ii0, ii, dii],
-                ii0 : sublist_indices (dx, identity),
-                ii : append ([0], ii0, [length (x)]),
-                dii : rest(ii) - rest(ii, -1),
-                runs (dii, makelist (x[i], i, rest (ii))));
-
-find_runs_inverse (r) :=
-  block ([v: r@values, n: r@lengths],
-         apply (append, makelist (makelist (v[i], n[i]), i, 1, length(v))));

@@ -296,6 +296,23 @@
   (mPr_engine (caddr mexpress) 'mparen 'mparen)
   (tprinc "</msub>") (row-end "</mrow>")
 )
+
+;;     e.g. 'at_difference(f(x), x, a, b)
+;;
+(defun mPr-at-difference (mexpress)
+  (let*
+    ((f (first (rest mexpress)))
+     (x (second (rest mexpress)))
+     (a (third (rest mexpress)))
+     (b (fourth (rest mexpress))))
+  (row-begin "<mrow>")
+  (mPr_engine f lop rop)
+  (tprinc "<msubsup><mo>|</mo>")
+  (mPr_engine (list '(mequal) x a) 'mparen 'mparen)
+  (mPr_engine (list '(mequal) x b) 'mparen 'mparen)
+  (tprinc "</msubsup>")
+  (row-end "</mrow>")))
+
 ;;      in mPr_engine ,whennever mexpress is an atom this function taking care 
 ;;of it by getting a TeX symbol if it exists. Also it handles some word which
 ;;has a reserved character for TeX
@@ -848,6 +865,8 @@
 (setup '(%at (mPrprocess mPr-at)))
 
 (setup '($at (mPrprocess mPr-at)))
+
+(setup '(%at_difference (mPrprocess mPr-at-difference)))
 
 (setup '($det (mPrprocess mPr-det)))
 

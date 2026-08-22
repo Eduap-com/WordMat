@@ -1,3 +1,5 @@
+(unless (member :mk-defsystem *features*) ($load "lisp-utils/defsystem.lisp"))
+
 #+nil
 (format t "colnew.system = ~S~%" (merge-pathnames (make-pathname :name "colnew" :type "system") (maxima-load-pathname-directory)))
 (load (merge-pathnames (make-pathname :name "colnew" :type "system") (maxima-load-pathname-directory)))

@@ -58,7 +58,7 @@
              ($x (setq value '((mlist) $axes "x")))
              ($y (setq value '((mlist) $axes "y")))
              (t (setq value '((mlist) $axes "xy"))))))
-      ($box
+      (mbox
        (if (not (third value))
            (setq value '((mlist) $nobox 1))
 	   (setq value '((mlist) $nobox 0))))

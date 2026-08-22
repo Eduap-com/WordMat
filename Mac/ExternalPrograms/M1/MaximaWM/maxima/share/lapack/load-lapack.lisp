@@ -6,7 +6,7 @@
   (format t "(maxima-load-pathname-directory) = ~A~%" (maxima-load-pathname-directory))
   (format t "sys = ~A~%" (merge-pathnames (make-pathname :name "lapack" :type "system") (maxima-load-pathname-directory))))
 
-#+ecl ($load "lisp-utils/defsystem.lisp")
+(unless (member :mk-defsystem *features*) ($load "lisp-utils/defsystem.lisp"))
 
 (load (merge-pathnames (make-pathname :name "lapack" :type "system") (maxima-load-pathname-directory)))
 

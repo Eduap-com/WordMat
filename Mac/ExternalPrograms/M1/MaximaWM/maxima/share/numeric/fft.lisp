@@ -2,6 +2,8 @@
 
 (in-package :maxima)
 
+(unless (member :mk-defsystem *features*) ($load "lisp-utils/defsystem.lisp"))
+
 (mk:defsystem maxima-fft
   :source-pathname (maxima::maxima-load-pathname-directory)
   :binary-pathname (maxima::maxima-objdir "share" "numeric")

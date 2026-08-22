@@ -1,0 +1,20 @@
+      program foomain
+
+<<
+    for i thru length (random_values_for_freevars)
+        do (gentran (eval (translated_foos[i]): eval (funmake ('foo, random_values_for_freevars[i]))),
+            gentran (eval (original_foos[i]): eval (foo_values[i])),
+            gentran (print ("original foo", eval (i), "=", eval (original_foos[i]))),
+            gentran (print ("translated foo", eval (i), "=", eval (translated_foos[i]))),
+            gentran (if eval (translated_foos[i]) = eval (original_foos[i])
+                         then print ("same")
+                         else print ("DIFFERENCE =", eval (translated_foos[i]) - eval (original_foos[i]))));
+>>
+
+      stop
+      end
+
+<<
+    gentran (eval (fundef (foo)));
+>>
+

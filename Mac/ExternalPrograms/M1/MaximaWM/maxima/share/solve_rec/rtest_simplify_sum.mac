@@ -666,3 +666,10 @@ simplify_sum(sum((2*i+1)^-2, i, 0, inf));
 
 (kill(a), simplify_sum(sum((2*i+1)^-2, i, 0, inf)));
 %pi^2/8;
+
+/* \#4634 Divergent integral simplifies to -1/4 with simplify_sum */
+/* this was a bug in the limit code, *not* in the simplify_sum package! But I'm 
+putting the test here because otherwise the testsuite would need to load simplify_sum more
+than once. */
+simplify_sum( sum(n*(-1)^n,n,1,inf));
+und$
