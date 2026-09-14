@@ -1315,7 +1315,7 @@ newton_method(expr, var, guess, tol, max_iter) := block(
  */
 /* Solves an equation for a variable or expression. The variable to solve for will have any arrays attached removed*/
 nsolve([paramq]) := block(
-	[qfkt, solq, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter, qex, qqs, taylororder, flen],
+	[qfkt, solq, solq2, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter, qex, qqs, taylororder, flen],
 	if length(paramq) < 2 then (
 		print("Too few arguments"),
 		return()
@@ -1364,11 +1364,16 @@ nsolve([paramq]) := block(
 		)
 	),
 	solq: [],
-	solq: nsolverec(qfkt(qvar), qvar, solq, -1, 3, 1000),
-	solq: nsolverec(qfkt(qvar), qvar, solq, qn, -6, 30), 
-	solq: nsolverec(qfkt(qvar), qvar, solq, qn, -2, 100),
-	solq: nsolverec(qfkt(qvar), qvar, solq, 4, 5, 100),
-	solq: nsolverec(qfkt(qvar), qvar, solq, 6, qm, 30),
+	solq2: errcatch(nsolverec(qfkt(qvar), qvar, solq, -1, 3, 1000)),
+	if solq2#[] then solq: solq2[1],
+	solq2: errcatch(nsolverec(qfkt(qvar), qvar, solq, qn, -6, 30)),
+	if solq2#[] then solq: solq2[1],
+	solq2: errcatch(nsolverec(qfkt(qvar), qvar, solq, qn, -2, 100)),
+	if solq2#[] then solq: solq2[1],
+	solq2: errcatch(nsolverec(qfkt(qvar), qvar, solq, 4, 5, 100)),
+	if solq2#[] then solq: solq2[1],
+	solq2: errcatch(nsolverec(qfkt(qvar), qvar, solq, 6, qm, 30)),
+	if solq2#[] then solq: solq2[1],
 	errcatch(
 		if opposite_sign(qfkt(-10^qn),qfkt(0)) then(
 			if UseBF = true then (

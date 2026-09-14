@@ -8,10 +8,8 @@ Public Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
     Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As LongPtr
     Private Declare PtrSafe Function SetForegroundWindow Lib "user32" (ByVal hWnd As LongPtr) As Long
 #Else
-    Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" _
-        (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
-    Private Declare Function SetForegroundWindow Lib "user32" _
-        (ByVal hWnd As Long) As Long
+    Private Declare Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+    Private Declare Function SetForegroundWindow Lib "user32" (ByVal hWnd As Long) As Long
 #End If
 
 Sub Sleep2(ByVal WaitTime As Long)

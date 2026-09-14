@@ -417,7 +417,16 @@ var codebase = "";
 		}
 
 // Suppress restore dialog for locally cached unsaved work.
-	try { localStorage.clear(); } catch(e) {}
+	// Only remove the autosave entries ("autosave" + app suffix); clearing everything
+	// would also delete saved settings (xml_user_preferences*, xml_default_object_preferences*).
+	try {
+		for (var i = localStorage.length - 1; i >= 0; i--) {
+			var storageKey = localStorage.key(i);
+			if (storageKey && storageKey.indexOf("autosave") === 0) {
+				localStorage.removeItem(storageKey);
+			}
+		}
+	} catch(e) {}
 
 	// Suppress "leave without saving" beforeunload dialog.
 	try {

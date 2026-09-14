@@ -96,49 +96,49 @@ End Sub
 Sub SaveSet2()
    If Not EventsOn Then Exit Sub
     LatexPreamble = TextBox_preamble.text
-    LatexSectionNumbering = CheckBox_sectionnumbers.Value
+    LatexSectionNumbering = CheckBox_sectionnumbers.value
     LatexDocumentclass = ComboBox_documentclass.ListIndex
     LatexFontsize = ComboBox_fontsize.ListIndex + 10
-    LatexWordMargins = CheckBox_forceMargins.Value
+    LatexWordMargins = CheckBox_forceMargins.value
     TextBox_FixedPreamble.text = latexfil.FixedLatexPreamble1
-    LatexTOC = CInt(CheckBox_contents.Value)
-    LatexTitlePage = CInt(CheckBox_title.Value)
+    LatexTOC = CInt(CheckBox_contents.value)
+    LatexTitlePage = CInt(CheckBox_title.value)
 End Sub
 Sub SaveSet()
-    LatexUnits = CheckBox_units.Value
-    ConvertTexWithMaxima = CheckBox_convertwithmaxima.Value
+    LatexUnits = CheckBox_units.value
+    ConvertTexWithMaxima = CheckBox_convertwithmaxima.value
     
-If OptionButton_omslutdollar.Value = True Then
+If OptionButton_omslutdollar.value = True Then
     LatexStart = "$"
     LatexSlut = "$"
-ElseIf OptionButton_omslutdobbeltdollar.Value = True Then
+ElseIf OptionButton_omslutdobbeltdollar.value = True Then
     LatexStart = "$$"
     LatexSlut = "$$"
-ElseIf OptionButton_omslutsqbrackets.Value = True Then
+ElseIf OptionButton_omslutsqbrackets.value = True Then
     LatexStart = "\[ "
     LatexSlut = " \]"
-ElseIf OptionButton_omslutdispmath.Value = True Then
+ElseIf OptionButton_omslutdispmath.value = True Then
     LatexStart = vbCrLf & "\displaymath" & vbCrLf
     LatexSlut = vbCrLf & "\displaymath" & vbCrLf
-ElseIf OptionButton_omsluteqn.Value = True Then
+ElseIf OptionButton_omsluteqn.value = True Then
     LatexStart = vbCrLf & "\begin{equation}" & vbCrLf
     LatexSlut = vbCrLf & "\end{equation}" & vbCrLf
-ElseIf OptionButton_omsluteqnstar.Value = True Then
+ElseIf OptionButton_omsluteqnstar.value = True Then
     LatexStart = vbCrLf & "\begin{equation*}" & vbCrLf
     LatexSlut = vbCrLf & "\end{equation*}" & vbCrLf
-ElseIf OptionButton_omsluturl.Value = True Then
+ElseIf OptionButton_omsluturl.value = True Then
     LatexStart = vbCrLf & "<img src=""https://latex.codecogs.com/gif.latex?"
     LatexSlut = """ title=""LaTex"" />" & vbCrLf
-ElseIf OptionButton_omslutingen.Value = True Then
+ElseIf OptionButton_omslutingen.value = True Then
     LatexStart = ""
     LatexSlut = ""
-ElseIf OptionButton_omslutlatex.Value = True Then
+ElseIf OptionButton_omslutlatex.value = True Then
     LatexStart = "[latex]"
     LatexSlut = "[\latex]"
-ElseIf OptionButton_omslutuser.Value = True Then
+ElseIf OptionButton_omslutuser.value = True Then
     LatexStart = TextBox_for.text
     LatexSlut = TextBox_efter.text
-ElseIf OptionButton_omslutauto.Value = True Then
+ElseIf OptionButton_omslutauto.value = True Then
    If Selection.OMaths.Count > 0 Then
     If Selection.OMaths(1).Justification = wdOMathJcInline Then
         LatexStart = "$"
@@ -258,7 +258,7 @@ Private Sub OptionButton_omsluturl_click()
 End Sub
 
 Private Sub OptionButton_omslutuser_click()
-    If OptionButton_omslutuser.Value = True Then
+    If OptionButton_omslutuser.value = True Then
         TextBox_for.visible = True
         TextBox_efter.visible = True
         Label_for.visible = True
@@ -308,10 +308,10 @@ Private Sub UserForm_Activate()
         Label_input.Caption = omax.Kommando
     End If
     
-    CheckBox_units.Value = LatexUnits
-    CheckBox_convertwithmaxima.Value = ConvertTexWithMaxima
-    CheckBox_sectionnumbers.Value = LatexSectionNumbering
-    OptionButton_omslutauto.Value = True
+    CheckBox_units.value = LatexUnits
+    CheckBox_convertwithmaxima.value = ConvertTexWithMaxima
+    CheckBox_sectionnumbers.value = LatexSectionNumbering
+    OptionButton_omslutauto.value = True
     If ComboBox_documentclass.ListCount > LatexDocumentclass Then ComboBox_documentclass.ListIndex = LatexDocumentclass
     If LatexFontsize = "10" Then
        ComboBox_fontsize.ListIndex = 0
@@ -324,9 +324,9 @@ Private Sub UserForm_Activate()
     End If
     TextBox_preamble.text = LatexPreamble
     ShowFixedPreamble
-    CheckBox_forceMargins.Value = LatexWordMargins
-    CheckBox_title.Value = CBool(LatexTitlePage)
-    CheckBox_contents.Value = CBool(LatexTOC)
+    CheckBox_forceMargins.value = LatexWordMargins
+    CheckBox_title.value = CBool(LatexTitlePage)
+    CheckBox_contents.value = CBool(LatexTOC)
 '    If LatexStart = "$" And LatexSlut = "$" Then
 '        OptionButton_omslutdollar.Value = True
 '    ElseIf LatexStart = "$$" And LatexSlut = "$$" Then
@@ -348,13 +348,13 @@ Sub UpDateLatex()
 
    Label_input.Caption = omax.Kommando
    LatexCode = Application.Run("ConvertToLatex", omax.Kommando)
-   If OptionButton_visstor.Value = True Then
+   If OptionButton_visstor.value = True Then
       LatexCode = "\displaystyle " & LatexCode
-   ElseIf OptionButton_visinline.Value = True Then
+   ElseIf OptionButton_visinline.value = True Then
       LatexCode = "\inline " & LatexCode
    End If
 
-   If OptionButton_omslutauto.Value = True Then
+   If OptionButton_omslutauto.value = True Then
       If Selection.OMaths(1).Justification = wdOMathJcInline Then
          TextBox_latex.text = "$" & LatexCode & "$"
       Else

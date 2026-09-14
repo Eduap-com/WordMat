@@ -16,9 +16,9 @@ Private m_children As Collection
 Private m_attnames As Collection
 Private m_attvalues As Collection
 '
-Public Sub setAttribute(Name As String, Value)
+Public Sub setAttribute(Name As String, value)
     m_attnames.Add Name
-    m_attvalues.Add Value
+    m_attvalues.Add value
 End Sub
 '
 Public Function appendChild(Obj As IXMLDOMNode) As IXMLDOMNode

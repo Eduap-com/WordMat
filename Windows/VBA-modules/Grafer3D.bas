@@ -3,7 +3,7 @@ Option Explicit
 Sub OmdrejningsLegeme()
     Dim Kommando As String
     Dim fktnavn As String, Udtryk As String, LHS As String, RHS As String, varnavn As String, fktudtryk As String
-    Dim Arr As Variant
+    Dim Arr As Variant, Arr2() As String
     Dim i As Integer, UrlLink As String, cmd As String, j As Integer
     Dim DefList As String
 
@@ -12,8 +12,6 @@ Sub OmdrejningsLegeme()
     ea.SetNormalBrackets
 
     'On Error GoTo fejl
-
-
 
 
     PrepareMaxima
@@ -48,7 +46,10 @@ Sub OmdrejningsLegeme()
                         ea.ReplaceVar varnavn, "x"
                         fktudtryk = ea.text
                         DefinerKonstanter fktudtryk, DefList, Nothing, UrlLink
-                        
+                        If InStr(fktudtryk, "<") > 0 Or InStr(fktudtryk, ">") > 0 Then
+                            Arr2 = Split(fktudtryk, ",")
+                            fktudtryk = "If(" & Arr2(1) & ";" & Arr2(0) & ")"
+                        End If
                         cmd = "Surface(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ",2*pi);"
                         '                        cmd = "z^2=(" & Replace(ConvertToGeogebraSyntax(fktudtryk), "+", "%2B") & ")^2-y^2" & ";"
                         UrlLink = UrlLink & cmd

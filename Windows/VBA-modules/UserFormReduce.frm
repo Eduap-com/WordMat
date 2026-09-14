@@ -55,17 +55,17 @@ End Sub
 Sub ExecuteOK()
     Dim Arr() As String, i As Integer
     annuller = False
-    SammeLinje = CheckBox_sammelinje.Value
+    SammeLinje = CheckBox_sammelinje.value
 
-    If OptionButton_numonly.Value = True Then
+    If OptionButton_numonly.value = True Then
         MaximaExact = 2
-    ElseIf OptionButton_exactonly.Value = True Then
+    ElseIf OptionButton_exactonly.value = True Then
         MaximaExact = 1
     Else
         MaximaExact = 0
     End If
 '    MaximaVidNotation = CheckBox_vidnotation.value
-    MaximaCifre = ComboBox_cifre.Value
+    MaximaCifre = ComboBox_cifre.value
     If MaximaUnits Then
         If OutUnits <> TextBox_outunits.text Then
             OutUnits = TextBox_outunits.text
@@ -74,9 +74,9 @@ Sub ExecuteOK()
         End If
     End If
 
-    If OptionButton_logauto.Value = True Then
+    If OptionButton_logauto.value = True Then
         MaximaLogOutput = 0
-    ElseIf OptionButton_log10.Value = True Then
+    ElseIf OptionButton_log10.value = True Then
         MaximaLogOutput = 2
     Else
         MaximaLogOutput = 1
@@ -122,22 +122,22 @@ Dim Arr() As String, i As Integer
     End If
     
     If MaximaExact = 1 Then
-        OptionButton_exactonly.Value = True
+        OptionButton_exactonly.value = True
     ElseIf MaximaExact = 2 Then
-        OptionButton_numonly.Value = True
+        OptionButton_numonly.value = True
     Else
-        OptionButton_exactandnum.Value = True
+        OptionButton_exactandnum.value = True
     End If
 
     If MaximaLogOutput = 0 Then
-        OptionButton_logauto.Value = True
+        OptionButton_logauto.value = True
     ElseIf MaximaLogOutput = 2 Then
-        OptionButton_log10.Value = True
+        OptionButton_log10.value = True
     Else
-        OptionButton_ln.Value = True
+        OptionButton_ln.value = True
     End If
 
-    ComboBox_cifre.Value = MaximaCifre
+    ComboBox_cifre.value = MaximaCifre
     ComboBox_DecType.ListIndex = MaximaDecOutType - 1
     
     Vars = ReplaceFakeVarNamesBack(Vars)

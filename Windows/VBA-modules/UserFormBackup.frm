@@ -45,7 +45,7 @@ Sub SetEscEvents(ControlColl As Controls)
 End Sub
 Private Sub CommandButton_no_Click()
     Backup = False
-    If CheckBox1.Value = True Then
+    If CheckBox1.value = True Then
         BackupType = 2
         MsgBox TT.A(207), vbOKOnly
     End If
@@ -58,7 +58,7 @@ End Sub
 
 Private Sub Label_ok_Click()
     Backup = True
-    If CheckBox1.Value = True Then
+    If CheckBox1.value = True Then
         BackupType = 1
         MsgBox TT.A(207), vbOKOnly
     End If

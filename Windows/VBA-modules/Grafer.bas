@@ -117,18 +117,18 @@ Public Sub Plot2DGraph()
                 UF2Dgraph.TextBox_punkter.text = Arr(55)
                 UF2Dgraph.TextBox_punkter2.text = Arr(56)
                 UF2Dgraph.TextBox_markerpunkter.text = Arr(57)
-                UF2Dgraph.CheckBox_pointsjoined.Value = CBool(Arr(58))
-                UF2Dgraph.CheckBox_pointsjoined2.Value = CBool(Arr(59))
+                UF2Dgraph.CheckBox_pointsjoined.value = CBool(Arr(58))
+                UF2Dgraph.CheckBox_pointsjoined2.value = CBool(Arr(59))
                 UF2Dgraph.TextBox_pointsize.text = Arr(60)
                 UF2Dgraph.TextBox_pointsize2.text = Arr(61)
         
                 UF2Dgraph.TextBox_vektorer.text = Arr(62)
                 UF2Dgraph.TextBox_labels.text = Arr(63)
         
-                UF2Dgraph.CheckBox_gitter.Value = CBool(Arr(64))
-                UF2Dgraph.CheckBox_logx.Value = CBool(Arr(65))
-                UF2Dgraph.CheckBox_logy.Value = CBool(Arr(66))
-                UF2Dgraph.CheckBox_visforklaring.Value = CBool(Arr(67))
+                UF2Dgraph.CheckBox_gitter.value = CBool(Arr(64))
+                UF2Dgraph.CheckBox_logx.value = CBool(Arr(65))
+                UF2Dgraph.CheckBox_logy.value = CBool(Arr(66))
+                UF2Dgraph.CheckBox_visforklaring.value = CBool(Arr(67))
                 
                 Sel.InlineShapes(1).Select
                 UF2Dgraph.Show vbModeless
@@ -316,7 +316,7 @@ Sub PlotDF(Optional DE As String, Optional IndepVar As String = "x", Optional De
 
     Selection.End = sslut ' The end must come first, otherwise things will go wrong.
     Selection.start = sstart
-    UF2Dgraph.MultiPage1.Value = 5
+    UF2Dgraph.MultiPage1.value = 5
     UF2Dgraph.MultiPage1.SetFocus
     UF2Dgraph.Show vbModeless
 
@@ -728,9 +728,9 @@ End If
 
 ' settings
 If Radians Then
-    ws.Range("A4").Value = "rad"
+    ws.Range("A4").value = "rad"
 Else
-    ws.Range("A4").Value = "grad"
+    ws.Range("A4").value = "grad"
 End If
 
     ' selected functions
@@ -757,17 +757,17 @@ End If
                     fktnavn = ea.GetNextVar(1)
                     varnavn = ea.GetNextBracketContent(1)
                     If LHS = fktnavn & "(" & varnavn & ")" Then
-                        ws.Range("B4").Offset(0, i).Value = RHS
-                        ws.Range("B1").Offset(0, i).Value = varnavn
+                        ws.Range("B4").Offset(0, i).value = RHS
+                        ws.Range("B1").Offset(0, i).value = varnavn
                     Else
-                        ws.Range("B4").Offset(0, i).Value = RHS
-                        ws.Range("B1").Offset(0, i).Value = "x"
+                        ws.Range("B4").Offset(0, i).value = RHS
+                        ws.Range("B1").Offset(0, i).value = "x"
                     End If
                 ElseIf InStr(Udtryk, ">") > 0 Or InStr(Udtryk, "<") > 0 Or InStr(Udtryk, VBA.ChrW$(8804)) > 0 Or InStr(Udtryk, VBA.ChrW$(8805)) > 0 Then
                 Else
                     Udtryk = ReplaceIndepvarX(Udtryk)
-                    ws.Range("B4").Offset(0, i).Value = Udtryk
-                    ws.Range("B1").Offset(0, i).Value = "x"
+                    ws.Range("B4").Offset(0, i).value = Udtryk
+                    ws.Range("B1").Offset(0, i).value = "x"
                End If
             End If
         End If
@@ -782,19 +782,19 @@ End If
         xmin = Cregr.XValues(1)
         xmax = Cregr.XValues(1)
         For i = 1 To UBound(Cregr.XValues)
-            ws.Range("Q6").Offset(i, 0).Value = val(Replace(Cregr.XValues(i), ",", "."))
-            ws.Range("R6").Offset(i, 0).Value = val(Replace(Cregr.YValues(i), ",", "."))
+            ws.Range("Q6").Offset(i, 0).value = val(Replace(Cregr.XValues(i), ",", "."))
+            ws.Range("R6").Offset(i, 0).value = val(Replace(Cregr.YValues(i), ",", "."))
 '            ws.Range("H6").Offset(i, 0).Value = ConvertNumber(Cregr.XValues(i))
 '            ws.Range("I6").Offset(i, 0).Value = ConvertNumber(Cregr.YValues(i))
             If Cregr.XValues(i) > xmax Then xmax = Cregr.XValues(i)
             If Cregr.XValues(i) < xmin Then xmin = Cregr.XValues(i)
         Next
-        ws.Range("W3").Value = xmin
-        ws.Range("X3").Value = xmax
+        ws.Range("W3").value = xmin
+        ws.Range("X3").value = xmax
     Else
         If Len(Udtryk) > 0 Then ' if only function, then xmin and xmax must be set
-            ws.Range("W3").Value = -2
-            ws.Range("X3").Value = 5
+            ws.Range("W3").value = -2
+            ws.Range("X3").value = 5
         End If
     End If
     
