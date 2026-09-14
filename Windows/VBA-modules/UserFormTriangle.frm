@@ -139,7 +139,7 @@ On Error GoTo fejl
     TypeLine TextBox_captionsc.text & " = " & ConvertNumberToStringBC(sc), Not (CBool(ConvertStringToNumber(TextBox_sc.text)))
     
 
-    If CheckBox_tal.Value Then
+    If CheckBox_tal.value Then
         bc = 3 ' number of significant digits in side length of figure
         If Log10(SA) > bc Then bc = Int(Log10(SA)) + 1
         If Log10(sb) > bc Then bc = Int(Log10(sb)) + 1
@@ -169,7 +169,7 @@ On Error GoTo fejl
     TypeLine TextBox_captionsb.text & " = " & ConvertNumberToStringBC(sb2), Not (CBool(ConvertStringToNumber(TextBox_sb.text)))
     TypeLine TextBox_captionsc.text & " = " & ConvertNumberToStringBC(sc2), Not (CBool(ConvertStringToNumber(TextBox_sc.text)))
         
-    If CheckBox_tal.Value Then
+    If CheckBox_tal.value Then
         bc = 3 ' number of significant digits in side length of figure
         If Log10(sa2) > bc Then bc = Int(Log10(sa2)) + 1
         If Log10(sb2) > bc Then bc = Int(Log10(sb2)) + 1
@@ -966,14 +966,14 @@ Private Sub OptionButton_navngivsiderAB_Change()
 OpdaterNavngivning
 End Sub
 Sub OpdaterNavngivning()
-If OptionButton_navngivstorlille.Value = True Then
+If OptionButton_navngivstorlille.value = True Then
     TextBox_captionA.text = VBA.UCase(TextBox_captionA.text)
     TextBox_captionsa.text = VBA.LCase$(TextBox_captionA.text)
     TextBox_captionB.text = VBA.UCase(TextBox_captionB.text)
     TextBox_captionsb.text = VBA.LCase$(TextBox_captionB.text)
     TextBox_captionC.text = VBA.UCase(TextBox_captionC.text)
     TextBox_captionsc.text = VBA.LCase$(TextBox_captionC.text)
-ElseIf OptionButton_navngivsiderAB.Value = True Then
+ElseIf OptionButton_navngivsiderAB.value = True Then
     TextBox_captionsa.text = TextBox_captionB.text & TextBox_captionC.text
     TextBox_captionsb.text = TextBox_captionA.text & TextBox_captionC.text
     TextBox_captionsc.text = TextBox_captionA.text & TextBox_captionB.text
@@ -982,36 +982,36 @@ OptionButton_retv.Caption = TextBox_captionA.text & " " & TT.A(773)
 OptionButton_reth.Caption = TextBox_captionC.text & " " & TT.A(773)
 End Sub
 Private Sub TextBox_captionA_Change()
-    If OptionButton_navngivstorlille.Value = True Then
+    If OptionButton_navngivstorlille.value = True Then
         TextBox_captionA.text = VBA.UCase(TextBox_captionA.text)
         TextBox_captionsa.text = VBA.LCase$(TextBox_captionA.text)
-    ElseIf OptionButton_navngivsiderAB.Value = True Then
+    ElseIf OptionButton_navngivsiderAB.value = True Then
         OpdaterNavngivning
     End If
     OptionButton_retv.Caption = TextBox_captionA.text & " " & TT.A(773)
 End Sub
 
 Private Sub TextBox_captionB_Change()
-If OptionButton_navngivstorlille.Value = True Then
+If OptionButton_navngivstorlille.value = True Then
     TextBox_captionB.text = VBA.UCase(TextBox_captionB.text)
     TextBox_captionsb.text = VBA.LCase$(TextBox_captionB.text)
-ElseIf OptionButton_navngivsiderAB.Value = True Then
+ElseIf OptionButton_navngivsiderAB.value = True Then
     OpdaterNavngivning
 End If
 End Sub
 
 Private Sub TextBox_captionC_Change()
-If OptionButton_navngivstorlille.Value = True Then
+If OptionButton_navngivstorlille.value = True Then
     TextBox_captionC.text = VBA.UCase(TextBox_captionC.text)
     TextBox_captionsc.text = VBA.LCase$(TextBox_captionC.text)
-ElseIf OptionButton_navngivsiderAB.Value = True Then
+ElseIf OptionButton_navngivsiderAB.value = True Then
     OpdaterNavngivning
 End If
 OptionButton_reth.Caption = TextBox_captionC.text & " " & TT.A(773)
 End Sub
 
 Private Sub TextBox_captionsa_Change()
-If OptionButton_navngivstorlille.Value = True Then
+If OptionButton_navngivstorlille.value = True Then
     TextBox_captionsa.text = VBA.LCase$(TextBox_captionsa.text)
     TextBox_captionA.text = VBA.UCase(TextBox_captionsa.text)
 End If
@@ -1019,7 +1019,7 @@ OpdaterNavngivning
 End Sub
 
 Private Sub TextBox_captionsb_Change()
-If OptionButton_navngivstorlille.Value = True Then
+If OptionButton_navngivstorlille.value = True Then
     TextBox_captionsb.text = VBA.LCase$(TextBox_captionsb.text)
     TextBox_captionB.text = VBA.UCase(TextBox_captionsb.text)
 End If
@@ -1027,7 +1027,7 @@ OpdaterNavngivning
 End Sub
 
 Private Sub TextBox_captionsc_Change()
-If OptionButton_navngivstorlille.Value = True Then
+If OptionButton_navngivstorlille.value = True Then
     TextBox_captionsc.text = VBA.LCase$(TextBox_captionsc.text)
     TextBox_captionC.text = VBA.UCase(TextBox_captionsc.text)
 End If
@@ -1066,18 +1066,18 @@ Private Sub UserForm_Activate()
     TextBox_sc.text = TriangleCS
     
     If TriangleSett1 = 1 Then
-        OptionButton_retv.Value = True
+        OptionButton_retv.value = True
     ElseIf TriangleSett1 = 2 Then
-        OptionButton_reth.Value = True
+        OptionButton_reth.value = True
     Else
-        OptionButton_vilk.Value = True
+        OptionButton_vilk.value = True
     End If
     If TriangleSett2 = 1 Then
-        OptionButton_navngivmanuel.Value = True
+        OptionButton_navngivmanuel.value = True
     ElseIf TriangleSett2 = 2 Then
-        OptionButton_navngivstorlille.Value = True
+        OptionButton_navngivstorlille.value = True
     Else
-        OptionButton_navngivsiderAB.Value = True
+        OptionButton_navngivsiderAB.value = True
     End If
     
 
@@ -1099,8 +1099,8 @@ Private Sub UserForm_Activate()
     TextBox_captionsa.text = TriangleNAS
     TextBox_captionsb.text = TriangleNBS
     TextBox_captionsc.text = TriangleNCS
-    CheckBox_tal.Value = TriangleSett3
-    CheckBox_forklaring.Value = TriangleSett4
+    CheckBox_tal.value = TriangleSett3
+    CheckBox_forklaring.value = TriangleSett4
     
     OpdaterNavngivning
 End Sub
@@ -1118,18 +1118,18 @@ Private Sub SaveSettings()
     TriangleNAS = TextBox_captionsa.text
     TriangleNBS = TextBox_captionsb.text
     TriangleNCS = TextBox_captionsc.text
-    TriangleSett3 = CheckBox_tal.Value
-    TriangleSett4 = CheckBox_forklaring.Value
-    If OptionButton_retv.Value Then
+    TriangleSett3 = CheckBox_tal.value
+    TriangleSett4 = CheckBox_forklaring.value
+    If OptionButton_retv.value Then
         TriangleSett1 = 1
-    ElseIf OptionButton_reth.Value = True Then
+    ElseIf OptionButton_reth.value = True Then
         TriangleSett1 = 2
     Else
         TriangleSett1 = 3
     End If
-    If OptionButton_navngivmanuel.Value = True Then
+    If OptionButton_navngivmanuel.value = True Then
         TriangleSett2 = 1
-    ElseIf OptionButton_navngivstorlille.Value = True Then
+    ElseIf OptionButton_navngivstorlille.value = True Then
         TriangleSett2 = 2
     Else
         TriangleSett2 = 3

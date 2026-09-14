@@ -241,25 +241,25 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     ws.Calculate
     ws.Cells(r + 5, 2).Formula = "=CHITEST(R3C2:R" & r + 2 & "C" & c + 1 & ",R3C" & c + 4 & ":R" & r + 2 & "C" & 2 * c + 3 & ")"
     
-    p = ws.Cells(r + 5, 2).Value
+    p = ws.Cells(r + 5, 2).value
     p = betcif(p, MaximaCifre)
 '    ws.Cells(r + 5, 2).Style = "Percent"
     ws.Cells(r + 5, 2).NumberFormat = "0.00%"
     ws.Cells(r + 5, 2).Font.Bold = True
     
     
-    ws.Cells(1, 1).Value = VBA.ChrW$(&H3C7) & VBA.ChrW$(&HB2) & "-test"
-    ws.Cells(2, 2).Value = TT.A(400)
-    ws.Cells(2, c + 4).Value = TT.A(401)
-    ws.Cells(r + 3, 1).Value = TT.A(402)
+    ws.Cells(1, 1).value = VBA.ChrW$(&H3C7) & VBA.ChrW$(&HB2) & "-test"
+    ws.Cells(2, 2).value = TT.A(400)
+    ws.Cells(2, c + 4).value = TT.A(401)
+    ws.Cells(r + 3, 1).value = TT.A(402)
     ws.Cells(r + 3, 1).HorizontalAlignment = xlRight
     
-    ws.Cells(2, c + 2).Value = TT.A(402)
-    ws.Cells(2, 2 * c + 4).Value = TT.A(402)
+    ws.Cells(2, c + 2).value = TT.A(402)
+    ws.Cells(2, 2 * c + 4).value = TT.A(402)
     
-    ws.Cells(r + 5, 1).Value = TT.A(403) & ":"
-    ws.Cells(r + 6, 1).Value = TT.A(350) & ":"
-    ws.Cells(r + 6, 2).Value = signiv
+    ws.Cells(r + 5, 1).value = TT.A(403) & ":"
+    ws.Cells(r + 6, 1).value = TT.A(350) & ":"
+    ws.Cells(r + 6, 2).value = signiv
     ws.Cells(r + 6, 2).Style = TT.A(438)
     
     ws.Cells(r + 5, 4).Formula = "=if(R" & r + 5 & "C2<R" & r + 6 & "C2,""" & TT.A(404) & """,""" & TT.A(405) & """)"
@@ -281,9 +281,9 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     
     ws.Columns("A:A").ColumnWidth = 15
     
-    ws.Cells(r + 8, 1).Value = TT.A(360) & ":"
-    ws.Cells(r + 8, 2).Value = (r - 1) * (c - 1)
-    ws.Cells(r + 9, 1).Value = TT.A(407) & ":"
+    ws.Cells(r + 8, 1).value = TT.A(360) & ":"
+    ws.Cells(r + 8, 2).value = (r - 1) * (c - 1)
+    ws.Cells(r + 9, 1).value = TT.A(407) & ":"
 '    ws.Cells(r + 9, 2).Formula = "=sum(R" & r + 9 & "C3:R" & r + 9 & "C" & r * c + 2 & ")"
     ws.Cells(r + 9, 2).Formula = "=sum(R3C" & 2 * c + 6 & ":R" & 2 + r & "C" & 2 * c + 5 + c & ")"
     
@@ -304,7 +304,7 @@ Public Sub Chi2Test(Optional signiv As Double = 0.05, Optional ByVal r As Intege
     End With
     
     
-    ws.Cells(r + 10, 1).Value = TT.A(408) & ":"
+    ws.Cells(r + 10, 1).value = TT.A(408) & ":"
     ws.Cells(r + 10, 2).Formula = "=chiinv(R" & r + 6 & "C2,R" & r + 8 & "C2)"
     XLapp.ScreenUpdating = True
 
@@ -431,7 +431,7 @@ Public Sub CopyTableToXL()
 
     For i = 1 To Tabel.ncolumns
     For j = 1 To Tabel.nrows
-        ws.Range("a1").Offset(j - 1, i - 1).Value = Tabel(j, i)
+        ws.Range("a1").Offset(j - 1, i - 1).value = Tabel(j, i)
     Next
     Next
     

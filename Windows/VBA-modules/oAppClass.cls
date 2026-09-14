@@ -105,18 +105,18 @@ Private Sub oApp_WindowBeforeDoubleClick(ByVal Sel As Selection, Cancel As Boole
                 UF2Dgraph.TextBox_punkter.text = Arr(55)
                 UF2Dgraph.TextBox_punkter2.text = Arr(56)
                 UF2Dgraph.TextBox_markerpunkter.text = Arr(57)
-                UF2Dgraph.CheckBox_pointsjoined.Value = CBool(Arr(58))
-                UF2Dgraph.CheckBox_pointsjoined2.Value = CBool(Arr(59))
+                UF2Dgraph.CheckBox_pointsjoined.value = CBool(Arr(58))
+                UF2Dgraph.CheckBox_pointsjoined2.value = CBool(Arr(59))
                 UF2Dgraph.TextBox_pointsize.text = Arr(60)
                 UF2Dgraph.TextBox_pointsize2.text = Arr(61)
         
                 UF2Dgraph.TextBox_vektorer.text = Arr(62)
                 UF2Dgraph.TextBox_labels.text = Arr(63)
         
-                UF2Dgraph.CheckBox_gitter.Value = CBool(Arr(64))
-                UF2Dgraph.CheckBox_logx.Value = CBool(Arr(65))
-                UF2Dgraph.CheckBox_logy.Value = CBool(Arr(66))
-                UF2Dgraph.CheckBox_visforklaring.Value = CBool(Arr(67))
+                UF2Dgraph.CheckBox_gitter.value = CBool(Arr(64))
+                UF2Dgraph.CheckBox_logx.value = CBool(Arr(65))
+                UF2Dgraph.CheckBox_logy.value = CBool(Arr(66))
+                UF2Dgraph.CheckBox_visforklaring.value = CBool(Arr(67))
                 
         
                 Sel.InlineShapes(1).Select

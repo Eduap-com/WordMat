@@ -135,20 +135,20 @@ Private Sub TextBox_definitioner_AfterUpdate()
 End Sub
 
 Private Sub TextBox_xmin_Exit(ByVal Cancel As MSForms.ReturnBoolean)
-    If ToggleButton_propto.Value Then
+    If ToggleButton_propto.value Then
         TextBox_ymin.text = TextBox_xmin.text
     End If
 End Sub
 Private Sub TextBox_xmax_Exit(ByVal Cancel As MSForms.ReturnBoolean)
-    If ToggleButton_propto.Value Then
+    If ToggleButton_propto.value Then
         TextBox_ymax.text = TextBox_xmax.text
     End If
 End Sub
 Private Sub ToggleButton_auto_Click()
 If DisableEvents Then Exit Sub
 DisableEvents = True
-ToggleButton_propto.Value = False
-ToggleButton_manuel.Value = False
+ToggleButton_propto.value = False
+ToggleButton_manuel.value = False
 TextBox_ymin.text = ""
 TextBox_ymax.text = ""
 DisableEvents = False
@@ -159,8 +159,8 @@ End Sub
 Private Sub ToggleButton_manuel_Click()
 If DisableEvents Then Exit Sub
 DisableEvents = True
-ToggleButton_auto.Value = False
-ToggleButton_propto.Value = False
+ToggleButton_auto.value = False
+ToggleButton_propto.value = False
 If TextBox_ymin.text = "" Then
     TextBox_ymin.text = TextBox_xmin.text
 End If
@@ -173,8 +173,8 @@ End Sub
 Private Sub ToggleButton_propto_Click()
 If DisableEvents Then Exit Sub
 DisableEvents = True
-ToggleButton_auto.Value = False
-ToggleButton_manuel.Value = False
+ToggleButton_auto.value = False
+ToggleButton_manuel.value = False
 If TextBox_ymin.text = "" Then
     TextBox_ymin.text = TextBox_xmin.text
 Else
@@ -594,45 +594,45 @@ Sub ExcelPlot()
     xmin = val(TextBox_xmin.text)
     xmax = val(TextBox_xmax.text)
     If xmin < xmax Then
-        ws.Range("n3").Value = Me.TextBox_xmin.text
-        ws.Range("o3").Value = Me.TextBox_xmax.text
+        ws.Range("n3").value = Me.TextBox_xmin.text
+        ws.Range("o3").value = Me.TextBox_xmax.text
     Else
-        ws.Range("n3").Value = -5
-        ws.Range("o3").Value = 5
+        ws.Range("n3").value = -5
+        ws.Range("o3").value = 5
     End If
 
     
-    ws.Range("b4").Value = Me.TextBox_ligning1.text
-    ws.Range("c4").Value = Me.TextBox_ligning2.text
-    ws.Range("d4").Value = Me.TextBox_ligning3.text
-    ws.Range("e4").Value = Me.TextBox_ligning4.text
-    ws.Range("f4").Value = Me.TextBox_ligning5.text
-    ws.Range("g4").Value = Me.TextBox_ligning6.text
+    ws.Range("b4").value = Me.TextBox_ligning1.text
+    ws.Range("c4").value = Me.TextBox_ligning2.text
+    ws.Range("d4").value = Me.TextBox_ligning3.text
+    ws.Range("e4").value = Me.TextBox_ligning4.text
+    ws.Range("f4").value = Me.TextBox_ligning5.text
+    ws.Range("g4").value = Me.TextBox_ligning6.text
     'xmin og xmax copied over
-    ws.Range("B2").Value = Me.TextBox_xmin1.text
-    ws.Range("B3").Value = Me.TextBox_xmax1.text
-    ws.Range("C2").Value = Me.TextBox_xmin2.text
-    ws.Range("C3").Value = Me.TextBox_xmax2.text
-    ws.Range("D2").Value = Me.TextBox_xmin3.text
-    ws.Range("D3").Value = Me.TextBox_xmax3.text
-    ws.Range("E2").Value = Me.TextBox_xmin4.text
-    ws.Range("E3").Value = Me.TextBox_xmax4.text
-    ws.Range("F2").Value = Me.TextBox_xmin5.text
-    ws.Range("F3").Value = Me.TextBox_xmax5.text
-    ws.Range("G2").Value = Me.TextBox_xmin6.text
-    ws.Range("G3").Value = Me.TextBox_xmax6.text
+    ws.Range("B2").value = Me.TextBox_xmin1.text
+    ws.Range("B3").value = Me.TextBox_xmax1.text
+    ws.Range("C2").value = Me.TextBox_xmin2.text
+    ws.Range("C3").value = Me.TextBox_xmax2.text
+    ws.Range("D2").value = Me.TextBox_xmin3.text
+    ws.Range("D3").value = Me.TextBox_xmax3.text
+    ws.Range("E2").value = Me.TextBox_xmin4.text
+    ws.Range("E3").value = Me.TextBox_xmax4.text
+    ws.Range("F2").value = Me.TextBox_xmin5.text
+    ws.Range("F3").value = Me.TextBox_xmax5.text
+    ws.Range("G2").value = Me.TextBox_xmin6.text
+    ws.Range("G3").value = Me.TextBox_xmax6.text
     'variable name copied over
-    ws.Range("B1").Value = Me.TextBox_var1.text
-    ws.Range("C1").Value = Me.TextBox_var2.text
-    ws.Range("D1").Value = Me.TextBox_var3.text
-    ws.Range("E1").Value = Me.TextBox_var4.text
-    ws.Range("F1").Value = Me.TextBox_var5.text
-    ws.Range("G1").Value = Me.TextBox_var6.text
+    ws.Range("B1").value = Me.TextBox_var1.text
+    ws.Range("C1").value = Me.TextBox_var2.text
+    ws.Range("D1").value = Me.TextBox_var3.text
+    ws.Range("E1").value = Me.TextBox_var4.text
+    ws.Range("F1").value = Me.TextBox_var5.text
+    ws.Range("G1").value = Me.TextBox_var6.text
     ' iSettings
     If Radians Then
-        ws.Range("A4").Value = "rad"
+        ws.Range("A4").value = "rad"
     Else
-        ws.Range("A4").Value = "grad"
+        ws.Range("A4").value = "grad"
     End If
 
     On Error GoTo slut
@@ -650,8 +650,8 @@ Sub ExcelPlot()
             End If
             linje = Split(plinjer(i), Sep)
             If UBound(linje) > 0 Then
-                ws.Range("H7").Offset(i, 0).Value = Replace(linje(0), ",", ".")
-                ws.Range("I7").Offset(i, 0).Value = Replace(linje(1), ",", ".")
+                ws.Range("H7").Offset(i, 0).value = Replace(linje(0), ",", ".")
+                ws.Range("I7").Offset(i, 0).value = Replace(linje(1), ",", ".")
             End If
         Next
     End If
@@ -659,8 +659,8 @@ Sub ExcelPlot()
 
 slut:
     On Error GoTo slut2
-    ws.Range("p3").Value = Me.TextBox_ymin.text
-    ws.Range("q3").Value = Me.TextBox_ymax.text
+    ws.Range("p3").value = Me.TextBox_ymin.text
+    ws.Range("q3").value = Me.TextBox_ymax.text
     'wb.Charts(1).Activate
     If TextBox_xaksetitel.text <> "" Then
         WB.Charts(1).Axes(xlCategory, xlPrimary).AxisTitle.text = Me.TextBox_xaksetitel.text
@@ -715,7 +715,7 @@ If tb.text <> "" Then
     ea.text = forskrift
     forskrift = ea.text
     
-    ws.Range("b4").Offset(0, col).Value = forskrift
+    ws.Range("b4").Offset(0, col).value = forskrift
     
     
     'find variable
@@ -724,7 +724,7 @@ If tb.text <> "" Then
     varnavn = ea.GetNextVar
     i = 0
     ' find available variable plot
-    Do While ws.Range("N6").Offset(i, 0).Value <> ""
+    Do While ws.Range("N6").Offset(i, 0).value <> ""
       i = i + 1
     Loop
     On Error Resume Next
@@ -734,12 +734,12 @@ If tb.text <> "" Then
         Call ea.ReplaceVar(varnavn, "matm" & varnavn)
         ea.pos = ea.pos + Len(varnavn) + 4
         j = 0
-        Do While ws.Range("N6").Offset(j, 0).Value <> varnavn & "=" And j < i ' check om findes
+        Do While ws.Range("N6").Offset(j, 0).value <> varnavn & "=" And j < i ' check om findes
           j = j + 1
         Loop
         If j = i Then
-        ws.Range("N6").Offset(i, 0).Value = varnavn & "="
-        ws.Range("N6").Offset(i, 1).Value = 1
+        ws.Range("N6").Offset(i, 0).value = varnavn & "="
+        ws.Range("N6").Offset(i, 1).value = 1
         WB.Names.Add Name:="matm" & varnavn, RefersToR1C1:="=Tabel!R" & i + 6 & "C15"
         i = i + 1
         End If
@@ -764,7 +764,7 @@ If tb.text <> "" Then
     
     ' Error in any cells?
     For i = 0 To 200
-        If TypeName(ws.Range("b7").Offset(i, col).Value) = "Error" Then ws.Range("b7").Offset(i, col).Value = ""
+        If TypeName(ws.Range("b7").Offset(i, col).value) = "Error" Then ws.Range("b7").Offset(i, col).value = ""
     Next
         
 End If
@@ -933,7 +933,7 @@ ymaxg = ConvertNumberToMaxima(TextBox_ymax.text)
 'forskrifter
 If TextBox_ligning1.text <> "" Then
     lign = Replace(TextBox_ligning1.text, "'", "‰")
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
         grafobj = grafobj & "key="""","
@@ -961,7 +961,7 @@ If TextBox_ligning1.text <> "" Then
 End If
 If TextBox_ligning2.text <> "" Then
     lign = Replace(TextBox_ligning2.text, "'", "‰")
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
         grafobj = grafobj & "key="""","
@@ -989,7 +989,7 @@ If TextBox_ligning2.text <> "" Then
 End If
 If TextBox_ligning3.text <> "" Then
     lign = Replace(TextBox_ligning3.text, "'", "‰")
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
         grafobj = grafobj & "key="""","
@@ -1016,7 +1016,7 @@ If TextBox_ligning3.text <> "" Then
 End If
 If TextBox_ligning4.text <> "" Then
     lign = Replace(TextBox_ligning4.text, "'", "‰")
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
         grafobj = grafobj & "key="""","
@@ -1043,7 +1043,7 @@ If TextBox_ligning4.text <> "" Then
 End If
 If TextBox_ligning5.text <> "" Then
     lign = Replace(TextBox_ligning5.text, "'", "‰")
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
         grafobj = grafobj & "key="""","
@@ -1070,7 +1070,7 @@ If TextBox_ligning5.text <> "" Then
 End If
 If TextBox_ligning6.text <> "" Then
     lign = Replace(TextBox_ligning6.text, "'", "‰")
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     Else
         grafobj = grafobj & "key="""","
@@ -1099,7 +1099,7 @@ End If
 'ligninger
 If TextBox_lig1.text <> "" Then
     lign = Replace(TextBox_lig1.text, "'", "‰")
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
     lign = omax.CodeForMaxima(lign)
@@ -1117,7 +1117,7 @@ If TextBox_lig1.text <> "" Then
 End If
 If TextBox_lig2.text <> "" Then
     lign = Replace(TextBox_lig2.text, "'", "‰")
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
     lign = omax.CodeForMaxima(lign)
@@ -1135,7 +1135,7 @@ If TextBox_lig2.text <> "" Then
 End If
 If TextBox_Lig3.text <> "" Then
     lign = Replace(TextBox_Lig3.text, "'", "‰")
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""" & omax.ConvertToAscii(lign) & ""","
     End If
     lign = omax.CodeForMaxima(lign)
@@ -1158,7 +1158,7 @@ If TextBox_parametric1x.text <> "" Then
     pary = omax.CodeForMaxima(TextBox_parametric1y.text)
     tmin = ConvertNumberToMaxima(TextBox_tmin1.text)
     tmax = ConvertNumberToMaxima(TextBox_tmax1.text)
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""(" & omax.ConvertToAscii(TextBox_parametric1x.text) & "," & omax.ConvertToAscii(TextBox_parametric1y.text) & ")"","
     Else
         grafobj = grafobj & "key="""","
@@ -1171,7 +1171,7 @@ If TextBox_parametric2x.text <> "" Then
     pary = omax.CodeForMaxima(TextBox_parametric2y.text)
     tmin = ConvertNumberToMaxima(TextBox_tmin2.text)
     tmax = ConvertNumberToMaxima(TextBox_tmax2.text)
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""(" & omax.ConvertToAscii(TextBox_parametric2x.text) & "," & omax.ConvertToAscii(TextBox_parametric2y.text) & ")"","
     Else
         grafobj = grafobj & "key="""","
@@ -1184,7 +1184,7 @@ If TextBox_parametric3x.text <> "" Then
     pary = omax.CodeForMaxima(TextBox_parametric3y.text)
     tmin = ConvertNumberToMaxima(TextBox_tmin3.text)
     tmax = ConvertNumberToMaxima(TextBox_tmax3.text)
-    If CheckBox_visforklaring.Value Then
+    If CheckBox_visforklaring.value Then
         grafobj = grafobj & "key=""(" & omax.ConvertToAscii(TextBox_parametric3x.text) & "," & omax.ConvertToAscii(TextBox_parametric3y.text) & ")"","
     Else
         grafobj = grafobj & "key="""","
@@ -1221,7 +1221,7 @@ If TextBox_punkter.text <> "" Then
     Next
     If Right$(punkttekst, 1) = "," Then punkttekst = Left$(punkttekst, Len(punkttekst) - 1)
     
-    grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(highres * ConvertStringToNumber(TextBox_pointsize.text), ",", ".") & ",points_joined=" & VBA.LCase$(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
+    grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(highres * ConvertStringToNumber(TextBox_pointsize.text), ",", ".") & ",points_joined=" & VBA.LCase$(CheckBox_pointsjoined.value) & ",points([" & punkttekst & "]),"
 End If
 
 'points 2
@@ -1252,7 +1252,7 @@ If TextBox_punkter2.text <> "" Then
     Next
     If Right$(punkttekst, 1) = "," Then punkttekst = Left$(punkttekst, Len(punkttekst) - 1)
     
-    grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(TextBox_pointsize2.text, ",", ".") & ",points_joined=" & VBA.LCase$(CheckBox_pointsjoined2.Value) & ",points([" & punkttekst & "]),"
+    grafobj = grafobj & "point_type=filled_circle,point_size=" & Replace(TextBox_pointsize2.text, ",", ".") & ",points_joined=" & VBA.LCase$(CheckBox_pointsjoined2.value) & ",points([" & punkttekst & "]),"
 End If
 
 'selected points
@@ -1301,7 +1301,7 @@ If TextBox_vektorer.text <> "" Then
     End If
     Arr(i) = Replace(Arr(i), "(", "[")
     Arr(i) = Replace(Arr(i), ")", "]")
-            If CheckBox_visforklaring.Value Then
+            If CheckBox_visforklaring.value Then
                 grafobj = grafobj & "key=""Vektor: " & Arr(i) & ""","
             Else
                 grafobj = grafobj & "key="""","
@@ -1357,14 +1357,14 @@ End If
     grafobj = "line_width=" & Replace(highres, ",", ".") & "," & grafobj
     If Not MaximaComplex Then grafobj = "draw_realpart = false," & grafobj
     
-    If CheckBox_logx.Value Then
+    If CheckBox_logx.value Then
         If ConvertStringToNumber(TextBox_xmin.text) > 0 Then
             grafobj = "logx=true," & grafobj
         Else
             MsgBox "xmin must be >0 to use log x-axis."
         End If
     End If
-    If CheckBox_logy.Value Then
+    If CheckBox_logy.value Then
         If ConvertStringToNumber(TextBox_ymin.text) > 0 Then
             grafobj = "logy=true," & grafobj
         Else
@@ -1434,7 +1434,7 @@ On Error GoTo fejl
         If Len(dfsol) > 0 Then
             df = df & ",duration=100,solns_at(" & dfsol & ")" ' duration defaulat is 10. by increasing you can plot closer to asympototes
         End If
-        If CheckBox_onlykurver.Value Then
+        If CheckBox_onlykurver.value Then
             df = df & ",show_field=false"
         End If
         If text = "" Then ' must be range
@@ -1447,7 +1447,7 @@ On Error GoTo fejl
         End If
     End If
     If Len(text) > 0 Then
-        Call omax.Draw2D(text, df, ConvertDrawLabel(TextBox_xaksetitel.text), ConvertDrawLabel(TextBox_yaksetitel.text), CheckBox_gitter.Value, True, highres)
+        Call omax.Draw2D(text, df, ConvertDrawLabel(TextBox_xaksetitel.text), ConvertDrawLabel(TextBox_yaksetitel.text), CheckBox_gitter.value, True, highres)
         If omax.MaximaOutput = "" Then
             Label_wait.Caption = "Fejl!"
             Label_wait.visible = True
@@ -1484,7 +1484,7 @@ Dim text As String
     text = GetDraw2Dtext()
     
     If Len(text) > 0 Then
-    Call omax.Draw2D(text, "", omax.ConvertToAscii(TextBox_xaksetitel.text), omax.ConvertToAscii(TextBox_yaksetitel.text), CheckBox_gitter.Value, False, 1)
+    Call omax.Draw2D(text, "", omax.ConvertToAscii(TextBox_xaksetitel.text), omax.ConvertToAscii(TextBox_yaksetitel.text), CheckBox_gitter.value, False, 1)
     DoEvents
     End If
 
@@ -1934,10 +1934,10 @@ s = s & TextBox_lig1.text & Sep & TextBox_lig2.text & Sep & TextBox_Lig3.text & 
 s = s & TextBox_parametric1x.text & Sep & TextBox_parametric1y.text & Sep & TextBox_tmin1.text & Sep & TextBox_tmax1.text & Sep
 s = s & TextBox_parametric2x.text & Sep & TextBox_parametric2y.text & Sep & TextBox_tmin2.text & Sep & TextBox_tmax2.text & Sep
 s = s & TextBox_parametric3x.text & Sep & TextBox_parametric3y.text & Sep & TextBox_tmin3.text & Sep & TextBox_tmax3.text & Sep
-s = s & TextBox_punkter.text & Sep & TextBox_punkter2.text & Sep & TextBox_markerpunkter.text & Sep & CheckBox_pointsjoined.Value & Sep & CheckBox_pointsjoined2.Value & Sep & TextBox_pointsize.text & Sep & TextBox_pointsize2.text & Sep
+s = s & TextBox_punkter.text & Sep & TextBox_punkter2.text & Sep & TextBox_markerpunkter.text & Sep & CheckBox_pointsjoined.value & Sep & CheckBox_pointsjoined2.value & Sep & TextBox_pointsize.text & Sep & TextBox_pointsize2.text & Sep
 s = s & TextBox_vektorer.text & Sep
 s = s & TextBox_labels.text & Sep
-s = s & CheckBox_gitter.Value & Sep & CheckBox_logx.Value & Sep & CheckBox_logy.Value & Sep & CheckBox_visforklaring.Value & Sep
+s = s & CheckBox_gitter.value & Sep & CheckBox_logx.value & Sep & CheckBox_logy.value & Sep & CheckBox_visforklaring.value & Sep
 
 
 ils.AlternativeText = s

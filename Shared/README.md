@@ -47,6 +47,21 @@ var defaultParams = {"vendor":"GeoGebra", "preloadModules":"", "keyboardType":"n
 	display: none !important;
 }
 
+#### make settings save work. about line 420
+replace this
+	try { localStorage.clear(); } catch(e) {}
+with this
+	// Only remove the autosave entries ("autosave" + app suffix); clearing everything
+	// would also delete saved settings (xml_user_preferences*, xml_default_object_preferences*).
+	try {
+		for (var i = localStorage.length - 1; i >= 0; i--) {
+			var storageKey = localStorage.key(i);
+			if (storageKey && storageKey.indexOf("autosave") === 0) {
+				localStorage.removeItem(storageKey);
+			}
+		}
+	} catch(e) {}
+
 #### Add to function loadApp() at line 423 (after updateAppletParams)
 
 		// Suppress restore dialog for locally cached unsaved work.

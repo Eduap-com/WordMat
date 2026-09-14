@@ -56,25 +56,25 @@ Private Sub CommandButton_ok_Click()
 On Error GoTo fejl
 Dim Arr As Variant
 Dim i As Integer, c As Integer
-    If OptionButton_numonly.Value Then
+    If OptionButton_numonly.value Then
         MaximaExact = 2
-    ElseIf OptionButton_exactonly.Value Then
+    ElseIf OptionButton_exactonly.value Then
         MaximaExact = 1
     Else
         MaximaExact = 0
     End If
     
-    If OptionButton_SolveMethodAuto.Value Then
+    If OptionButton_SolveMethodAuto.value Then
         SolveMethod = 0
-    ElseIf OptionButton_SolveMethodAnalytical.Value Then
+    ElseIf OptionButton_SolveMethodAnalytical.value Then
         SolveMethod = 1
-    ElseIf OptionButton_SolveMethodNumeric.Value Then
+    ElseIf OptionButton_SolveMethodNumeric.value Then
         SolveMethod = 2
     Else
         SolveMethod = 3
     End If
         
-    MaximaCifre = ComboBox_cifre.Value
+    MaximaCifre = ComboBox_cifre.value
     If MaximaUnits Then
         If OutUnits <> TextBox_outunits.text Then
             OutUnits = TextBox_outunits.text
@@ -170,10 +170,10 @@ End Sub
 
 
 Private Sub OptionButton_SolveMethodNumeric_Change()
-    If OptionButton_SolveMethodNumeric.Value Then
+    If OptionButton_SolveMethodNumeric.value Then
         OptionButton_exactonly.Enabled = False
         OptionButton_exactandnum.Enabled = False
-        OptionButton_numonly.Value = True
+        OptionButton_numonly.value = True
     Else
         OptionButton_exactonly.Enabled = True
         OptionButton_exactandnum.Enabled = True
@@ -209,14 +209,14 @@ Private Sub UserForm_Activate()
     End If
     
     If MaximaExact = 1 Then
-        OptionButton_exactonly.Value = True
+        OptionButton_exactonly.value = True
     ElseIf MaximaExact = 2 Then
-        OptionButton_numonly.Value = True
+        OptionButton_numonly.value = True
     Else
-        OptionButton_exactandnum.Value = True
+        OptionButton_exactandnum.value = True
     End If
 
-    ComboBox_cifre.Value = MaximaCifre
+    ComboBox_cifre.value = MaximaCifre
 
     If CASengine = 0 Then
         ComboBox_cas.ListIndex = 0

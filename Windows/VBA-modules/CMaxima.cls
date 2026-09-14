@@ -268,6 +268,8 @@ Public Sub RunMaxima(Optional StopTime As Integer, Optional Reset As Boolean = T
                 MaxProc.CloseProcess
                 MaxProc.SetMaximaPath GetMaximaPath()
                 MaxProc.StartMaximaProcess
+                KillDef = vbNullString
+                ForgetList = vbNullString
             End If
         Else
             ResetMaxima ' deletes definitions. does not slow WordMat
@@ -489,9 +491,9 @@ Sub AnswerQuestion(StopTime As Integer, Optional ShowWaitForm As Boolean = True)
                 Else
                     prevspr = UF.Label_udtryk.Caption
                     UF.Show
-                    If UF.OptionButton_positiv.Value = True Then
+                    If UF.OptionButton_positiv.value = True Then
                         svar = "pos"
-                    ElseIf UF.OptionButton_negativ.Value = True Then
+                    ElseIf UF.OptionButton_negativ.value = True Then
                         svar = "neg"
                     Else
                         svar = "zero"
@@ -593,9 +595,9 @@ start:
             Var = Mid$(s, pos2 + 3, pos - pos2 - 4)
             UF.Label_udtryk.Caption = Var
             UF.Show
-            If UF.OptionButton_positiv.Value = True Then
+            If UF.OptionButton_positiv.value = True Then
                 Assume = "assume(" & Var & ">0)$"
-            ElseIf UF.OptionButton_negativ.Value = True Then
+            ElseIf UF.OptionButton_negativ.value = True Then
                 Assume = "assume(" & Var & "<0)$"
             Else
                 Assume = "assume(" & Var & "=0)$"
@@ -5915,8 +5917,8 @@ Function AddDefinition(s As String, Optional MathObj As OMath) As String
     Dim deflign As Boolean
     Dim LHS As String
 
-    If InStr(s, ChrW$(12310)) Then s = Replace(s, ChrW$(12310), "")    ' special invisible brackets are removed
-    If InStr(s, ChrW$(12311)) Then s = Replace(s, ChrW$(12311), "")    ' special invisible brackets are removed
+'    If InStr(s, ChrW$(12310)) Then s = Replace(s, ChrW$(12310), "")    ' special invisible brackets are removed causes problems codeformaxima can handle them. example: "a:=899400" & chrw$(183) & "0,0025/" & chrw$(12310) & "1-(1+0,0025)" & chrw$(12311) & "^(-240)"   correct: a=4988,051
+'    If InStr(s, ChrW$(12311)) Then s = Replace(s, ChrW$(12311), "")    ' special invisible brackets are removed
     If InStr(s, vbCrLf) Then s = Replace(s, vbCrLf, "")    ' enter can accur
     If InStr(s, vbCr) Then s = Replace(s, vbCr, "")
     slc = LCase$(s)
@@ -6390,6 +6392,10 @@ End Property
 Public Property Get DefValue(Index As Integer) As String
     On Error Resume Next
     DefValue = ldefvalue(Index)
+End Property
+Public Property Let DefValue(Index As Integer, DefValue As String)
+    On Error Resume Next
+    ldefvalue(Index) = DefValue
 End Property
 Public Property Get DefOMath(Index As Integer) As OMath
     On Error Resume Next

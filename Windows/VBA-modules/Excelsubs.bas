@@ -104,23 +104,23 @@ Sub Chi2GrafNoLoad()
     xlsh.Cells(2, 1).Formula = "=G$3/100+A1"
     xlsh.Cells(1, 2).Formula = "=CHIDIST(A1,G$2)"
 
-    xlsh.Range("F1").Value = TT.A(359) '"Chifordeling"
-    xlsh.Range("F2").Value = TT.A(360) & ":"
-    xlsh.Range("G2").Value = 7
-    xlsh.Range("F3").Value = "Xmax:"
-    xlsh.Range("G3").Value = 15
+    xlsh.Range("F1").value = TT.A(359) '"Chifordeling"
+    xlsh.Range("F2").value = TT.A(360) & ":"
+    xlsh.Range("G2").value = 7
+    xlsh.Range("F3").value = "Xmax:"
+    xlsh.Range("G3").value = 15
 
-    xlsh.Range("F5").Value = TT.A(361) & ":"
-    xlsh.Range("G5").Value = 0.05
+    xlsh.Range("F5").value = TT.A(361) & ":"
+    xlsh.Range("G5").value = 0.05
 
     xlsh.Range("H5").Formula = "=CHIINV(G5,G2)"
 
-    xlsh.Cells(1, 4).Value = 0
+    xlsh.Cells(1, 4).value = 0
     xlsh.Cells(2, 4).Formula = "=H5"
     xlsh.Cells(3, 4).Formula = "=H5"
     xlsh.Cells(1, 5).Formula = "=G5"
     xlsh.Cells(2, 5).Formula = "=G5"
-    xlsh.Cells(3, 5).Value = 0
+    xlsh.Cells(3, 5).value = 0
     XLapp.visible = True
     On Error Resume Next
     Err.Number = 0

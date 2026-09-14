@@ -280,6 +280,7 @@ Sub RunTestSequence()
     If TestSolve("8" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r-(16" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^2)/(100-(4" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^3)/3)^(1/3) =0", "r", "r=0    " & ChrW$(8744) & "    r=2,016879") Then GoTo slut ' has caused problems before check of solutions
     If TestSolve("x^2-5=ln" & ChrW$(8289) & "(x)", "x", "x=0,006738253    " & ChrW$(8744) & "    x=2,426173") Then GoTo slut
     If TestSolve("1214729,56=21520,64" & ChrW$(183) & "(1-(1+r)^(-80))/r", "r", "r=-1,942866    " & ChrW$(8744) & "    r=0,009203618") Then GoTo slut ' failed because of problem in removeundefined
+    If TestSolve("x^(-2)+e^x=-3x^2+5x+4", "x", "x=0,4939248    " & ChrW$(8744) & "    x=1,477293") Then GoTo slut
 
     'solvesystem
     Selection.TypeText "solving systems of equations": Selection.TypeParagraph
@@ -301,6 +302,9 @@ Sub RunTestSequence()
     InsertSletDef
     InsertTestMath "Definer: f(x)={" & ChrW$(9608) & "(100" & ChrW$(183) & "" & ChrW$(12310) & "1,03" & ChrW$(12311) & "^x,  0" & ChrW$(8804) & "x" & ChrW$(8804) & "72@33743" & ChrW$(183) & "" & ChrW$(12310) & "0,95" & ChrW$(12311) & "^x,  72<x" & ChrW$(8804) & "150)" & ChrW$(9508)
     If TestSolve("f(x)=200", "x", "x=23,44977    " & ChrW$(8744) & "    x=99,97819") Then GoTo slut ' piecewise cannot be handled algebraically, so solvereal must go directly to nsolve
+    InsertSletDef
+    InsertTestMath "Definer: a=899400" & ChrW$(183) & "0,0025/" & ChrW$(12310) & "1-(1+0,0025)" & ChrW$(12311) & "^(-240)"
+    If TestBeregn("a", ChrW$(8776) & "4988,051") Then GoTo slut
     InsertSletDef
     
     If TestSolve("0=3" & ChrW$(183) & "" & ChrW$(8730) & "((x-2) )-x+1", "x", "x=2,145898    " & ChrW$(8744) & "    x=8,854102") Then GoTo slut

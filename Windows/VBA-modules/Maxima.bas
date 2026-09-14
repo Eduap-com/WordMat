@@ -1716,12 +1716,12 @@ Sub Omskriv()
     
     If CASengine > 0 Then
         s = omax.Kommando
-        If UFomskriv.CheckBox_trigreduce.Value Then s = "trigsimplify(" & s & ")"
-        If UFomskriv.CheckBox_factor.Value Then s = "factor(" & s & ")"
-        If UFomskriv.CheckBox_expand.Value Then s = "expand(" & s & ")"
-        If UFomskriv.CheckBox_auto.Value Then s = "simplify(" & s & ")"
-        If UFomskriv.CheckBox_completesquare.Value Then s = "completesquare(" & s & ")"
-        If Not UFomskriv.CheckBox_factor.Value Then ' numeric expands factorised expressions.
+        If UFomskriv.CheckBox_trigreduce.value Then s = "trigsimplify(" & s & ")"
+        If UFomskriv.CheckBox_factor.value Then s = "factor(" & s & ")"
+        If UFomskriv.CheckBox_expand.value Then s = "expand(" & s & ")"
+        If UFomskriv.CheckBox_auto.value Then s = "simplify(" & s & ")"
+        If UFomskriv.CheckBox_completesquare.value Then s = "completesquare(" & s & ")"
+        If Not UFomskriv.CheckBox_factor.value Then ' numeric expands factorised expressions.
             If MaximaDecOutType = 3 Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
             ElseIf MaximaExact = 2 Then
@@ -1731,7 +1731,7 @@ Sub Omskriv()
     End If
     
     If CASengine = 0 Then
-        omax.Omskriv False, UFomskriv.CheckBox_auto.Value, UFomskriv.CheckBox_factor.Value, UFomskriv.CheckBox_expand.Value, UFomskriv.CheckBox_rationaliser.Value, UFomskriv.CheckBox_trigreduce.Value, UFomskriv.CheckBox_completesquare.Value
+        omax.Omskriv False, UFomskriv.CheckBox_auto.value, UFomskriv.CheckBox_factor.value, UFomskriv.CheckBox_expand.value, UFomskriv.CheckBox_rationaliser.value, UFomskriv.CheckBox_trigreduce.value, UFomskriv.CheckBox_completesquare.value
     ElseIf CASengine = 1 Then
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
@@ -1764,22 +1764,22 @@ Sub Omskriv()
         If Len(omax.MaximaOutput) > 0 Then
             If MaximaForklaring Then
                 s = TT.A(150)
-                If UFomskriv.CheckBox_auto.Value Then
+                If UFomskriv.CheckBox_auto.value Then
                     s = s & TT.A(151)
                 End If
-                If UFomskriv.CheckBox_expand.Value Then
+                If UFomskriv.CheckBox_expand.value Then
                     s = s & TT.A(807) & ", "
                 End If
-                If UFomskriv.CheckBox_factor.Value Then
+                If UFomskriv.CheckBox_factor.value Then
                     s = s & TT.A(806) & ", "
                 End If
-                If UFomskriv.CheckBox_rationaliser.Value Then
+                If UFomskriv.CheckBox_rationaliser.value Then
                     s = s & TT.A(794) & ", "
                 End If
-                If UFomskriv.CheckBox_trigreduce.Value Then
+                If UFomskriv.CheckBox_trigreduce.value Then
                     s = s & TT.A(152)
                 End If
-                If UFomskriv.CheckBox_completesquare.Value Then
+                If UFomskriv.CheckBox_completesquare.value Then
                     s = s & TT.A(697)
                 End If
                 InsertForklaring s, False
@@ -2816,11 +2816,11 @@ Function AskSignFromForm(Udtryk As String) As Integer
     UF.Label_udtryk.Caption = Udtryk
     UF.Show
     
-    If UF.OptionButton_nul.Value Then
+    If UF.OptionButton_nul.value Then
         AskSignFromForm = 0
-    ElseIf UF.OptionButton_negativ.Value Then
+    ElseIf UF.OptionButton_negativ.value Then
         AskSignFromForm = 1
-    ElseIf UF.OptionButton_positiv.Value Then
+    ElseIf UF.OptionButton_positiv.value Then
         AskSignFromForm = 2
     Else
         AskSignFromForm = 3
