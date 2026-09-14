@@ -60,7 +60,7 @@
 	      (setq $post_eval_functions '((mlist)))
 	      (mapc #'kill1 (cdr $infolists))
 	      (setq $ratvars '((mlist simp)) varlist nil genvar nil
-		    checkfactors nil greatorder nil lessorder nil $gensumnum 0
+		    *checkfactors* nil greatorder nil lessorder nil $gensumnum 0
 		    *ratweights nil $ratweights 
 		    '((mlist simp))
 		    tellratlist nil $dontfactor '((mlist)) $setcheck nil)
