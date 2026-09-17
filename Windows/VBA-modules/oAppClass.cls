@@ -12,7 +12,7 @@ Public WithEvents oApp As Word.Application
 Attribute oApp.VB_VarHelpID = -1
 Private Sub oApp_DocumentBeforeClose(ByVal Doc As Document, Cancel As Boolean)
     On Error Resume Next
-    If AntalB > Antalberegninger Then
+    If AntalB > AntalberegningerReg Then
         Antalberegninger = AntalB
     End If
 End Sub

@@ -529,8 +529,10 @@ Sub RunTestSequence()
 
     ' This has previously given the wrong solution, as there are two solutions, but when the constant is inserted, only one fits.
     If TestSolveDE("(x+5)" & ChrW$(183) & "y^'=" & ChrW$(8730) & "y", "y=1;x=-4", "y=(ln" & ChrW$(8289) & "(|x+5|)+2)^2/4") Then GoTo slut
-
     
+    ' This can cause floating point overflow if Maxima has not had traps disabled. Exam question
+    If TestSolveDE("y^'=0,0768" & ChrW$(183) & "y^(2/3)-0,0102" & ChrW$(183) & "y", "y=59;x=1", "y=2,035416" & ChrW$(183) & "10^(-4)" & ChrW$(183) & "e^(-(0,0102" & ChrW$(183) & "(x-1214,003)) )" & ChrW$(183) & "(128" & ChrW$(183) & "e^(0,0034" & ChrW$(183) & "(x-1214,003) )-1)^3    " & ChrW$(8744) & "    y=2,035416" & ChrW$(183) & "10^(-4)" & ChrW$(183) & "e^(-(0,0102" & ChrW$(183) & "(x-1214,003)) )" & ChrW$(183) & "(128" & ChrW$(183) & "e^(0,0034" & ChrW$(183) & "(x-1214,003) )-1)^3") Then GoTo slut
+
     'unit test
     MaximaUnits = True
     If TestBeregn("10 km/time", "=2,777778  m/s") Then GoTo slut

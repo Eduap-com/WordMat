@@ -4,6 +4,7 @@ factoring the input may yield different results. Factoring is only done using sq
 /*load(to_poly_solve)$*/
 
 simpsum:true$
+assume_pos:true$ /* avoids some questions about sign, but not all. noask.lisp is also used*/
 linel:800$ /*avoids linebreaks when using print on mac*/
 
 [packagefile:true,partswitch:true,domain:real]$

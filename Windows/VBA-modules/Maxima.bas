@@ -629,7 +629,13 @@ newcas:
         Selection.TypeParagraph
         ' insert explanation if desired
         If MaximaForklaring And (IsSolved Or InStr(omax.KommentarOutput, "solving system of equations")) Then
-            InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831)
+            p = InStr(omax.KommentarOutput, "Note: Maxima assumed")
+            If p > 0 Then
+                p2 = InStr(p + 20, omax.KommentarOutput, ".")
+                If p2 > p + 20 Then s = "Note: Maxima assumed " & Mid$(omax.KommentarOutput, p + 20, p2 - p - 20)
+            End If
+
+            InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831) & " " & s
         End If
 
         If InStr(omax.MaximaOutput, VBA.ChrW$(8709)) Or omax.MaximaOutput = "[]" Then  ' no solution
