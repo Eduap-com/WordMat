@@ -188,7 +188,6 @@ Sub MaximaCommand()
         MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
-    ShowTips
 
     If CASengine = 0 Then
         omax.ExecuteMaximaCommand
@@ -219,7 +218,7 @@ slut:
     Selection.End = sslut    ' The end must come first or things will go wrong.
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
-
+    ShowTips
 End Sub
 Sub MaximaSolveInequality(Optional variabel As String)
     On Error GoTo fejl
@@ -423,7 +422,6 @@ Sub MaximaSolvePar(Optional variabel As String)
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
-    ShowTips
     If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, ChrW$(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, ChrW$(8805)) > 1 Then
         MaximaSolveInequality variabel
         GoTo slut
@@ -883,6 +881,7 @@ slut:
         If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
     End If
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
     Dim tdefs As String
@@ -1475,7 +1474,6 @@ Sub beregn()
         End If
     End If
     omax.prevspr = ""
-    ShowTips
     
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
     If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
@@ -1623,6 +1621,7 @@ slut:
     End If
     If ActiveWindow.VerticalPercentScrolled <> scrollpos Then ActiveWindow.VerticalPercentScrolled = scrollpos
     Application.ScreenUpdating = True
+    ShowTips
     '    TimeText = TimeText & vbCrLf & "beregn ialt: " & Timer - st
     '    MsgBox TimeText
     '    MsgBox Timer - tid
@@ -1711,7 +1710,6 @@ Sub Omskriv()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
 
     If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
     UFomskriv.Vars = omax.Vars
@@ -1816,6 +1814,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub reducer()
     On Error GoTo fejl
@@ -1843,7 +1842,6 @@ Sub reducer()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
 
     If CASengine > 0 Then
         s = "simplify(" & omax.Kommando & ")"
@@ -1907,6 +1905,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub CompareTest()
     On Error GoTo fejl
@@ -1933,7 +1932,6 @@ Sub CompareTest()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
 
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -1983,6 +1981,7 @@ slut:
     Selection.start = sstart
     Oundo.EndCustomRecord
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub faktoriser()
     On Error GoTo fejl
@@ -2009,7 +2008,6 @@ Sub faktoriser()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
     
     If CASengine > 0 Then
         s = "factor(" & omax.Kommando & ")"
@@ -2071,6 +2069,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub udvid()
     On Error GoTo fejl
@@ -2280,7 +2279,6 @@ Sub Integrer()
 
     variabel = InputBox(TT.A(51), TT.A(845), "x")
     If variabel = "" Then GoTo slut
-    ShowTips
     
     If CASengine > 0 Then
         s = "integral(" & omax.Kommando & " , " & variabel & ")"
@@ -2342,6 +2340,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub SolveDENumeric()
     Dim scrollpos As Double
@@ -2369,7 +2368,6 @@ Sub SolveDENumeric()
         MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
-    ShowTips
 
     omax.FindVariable , True, CASengine, True
     If InStr(omax.Vars, "t") > 0 Then
@@ -2460,6 +2458,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Function GetRHS(s As String) As String
     Dim Arr As Variant
@@ -2526,7 +2525,6 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
 
     If funktion = vbNullString And variabel = vbNullString Then
         If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
@@ -2703,6 +2701,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 
 Sub InsertOutput(text As String, Optional ResultAfterTable As Boolean = True)
