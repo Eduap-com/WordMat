@@ -652,18 +652,18 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     Partnership = QActivePartnership()
     On Error GoTo fejl
     
-    s = GetVersionStringFromServer("www.eduap.com", Partnership)
-    If Len(s) = 0 Then
-        s = GetVersionStringFromServer("www.wordmat.dk", Partnership)
+    s = GetVersionStringFromServer("www.wordmat.dk", Partnership)
+    If Len(s) = 0 Or s = "error" Then
+        s = GetVersionStringFromServer("www.eduap.com", Partnership)
     End If
     
-    If Len(s) = 0 Then
+    If Len(s) = 0 Or s = "error" Or Left$(s, 8) <> "version:" Then
         If Not RunSilent Then
             MsgBox2 TT.A(112), vbOKOnly, TT.Error
         End If
         GoTo slut
     End If
-    NewVersion = s
+    NewVersion = Right(s, Len(s) - 8)
     p = InStr(NewVersion, vbLf)
     If p > 0 Then
         News = Right$(NewVersion, Len(NewVersion) - p)
@@ -768,22 +768,28 @@ Dim s As String
     MacArch = RunScript("GetMacArch", vbNullString) ' Application.Run("RunScript", "GetMacArch", "")
     If MacArch = "Intel" Then
         If Partnership Then
-            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacintelversionP.txt")
+'            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacintelversionP.txt")
+            s = RunScript("GetHTML", "https://" & Servername & "/api/get-wordmat-version.php?platform=macintelp")
         Else
-            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacintelversion.txt")
+'            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacintelversion.txt")
+            s = RunScript("GetHTML", "https://" & Servername & "/api/get-wordmat-version.php?platform=macintel")
         End If
     Else
         If Partnership Then
-            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacversionP.txt")
+'            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacversionP.txt")
+            s = RunScript("GetHTML", "https://" & Servername & "/api/get-wordmat-version.php?platform=macapplep")
         Else
-            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacversion.txt")
+'            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacversion.txt")
+            s = RunScript("GetHTML", "https://" & Servername & "/api/get-wordmat-version.php?platform=macapple")
         End If
     End If
 #Else
     If Partnership Then
-        s = GetHTML("https://" & Servername & "/download/info/wordmatversionP.txt") ' returns "error" if server is not available
+'        s = GetHTML("https://" & Servername & "/download/info/wordmatversionP.txt") ' returns "error" if server is not available
+        s = GetHTML("https://" & Servername & "/api/get-wordmat-version.php?platform=winp")
     Else
-        s = GetHTML("https://" & Servername & "/download/info/wordmatversion.txt")
+'        s = GetHTML("https://" & Servername & "/download/info/wordmatversion.txt")
+        s = GetHTML("https://" & Servername & "/api/get-wordmat-version.php?platform=win")
     End If
 #End If
     If s = "error" Or InStr(s, "<head>") > 0 Or InStr(s, "404 Not Found") > 0 Then s = vbNullString
@@ -828,7 +834,11 @@ End Sub
 Function GetHTML(URL As String) As String
 On Error GoTo fejl
     With CreateObject("MSXML2.XMLHTTP")
-        .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer ensures that it is not a cached version
+        If InStr(URL, "?") > 0 Then
+            .Open "GET", URL & "&cb=" & Timer() * 100, False  ' timer ensures that it is not a cached version
+        Else
+            .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer ensures that it is not a cached version
+        End If
         .Send
         GetHTML = .ResponseText
     End With
