@@ -145,7 +145,7 @@ Function ExecuteGeoGebraCasCommand(CmdString As String, Optional UseDefs As Bool
         If GeoGebraDefs <> "" Then
             ArrDef = Split(GeoGebraDefs, ";")
             For i = 0 To UBound(ArrDef)
-'                JS = JS & "ggbApplet.evalCommand(""" & ArrDef(i) & """);"
+                '                JS = JS & "ggbApplet.evalCommand(""" & ArrDef(i) & """);"
                 ' for CAS commands, definitions use :=. It may already be the case im cmdstring
                 ArrDef(i) = Replace(ArrDef(i), ":=", "DEFQZ")
                 ArrDef(i) = Replace(ArrDef(i), "=", ":=")
@@ -162,7 +162,7 @@ Function ExecuteGeoGebraCasCommand(CmdString As String, Optional UseDefs As Bool
     
     cmd = Left(cmd, Len(cmd) - 1)
     
-    If QActivePartnership Then
+    If QActivePartnership And GetMacArch <> "intel" Then
         res = QExecuteGeoGebraCAScommand(cmd)
         If res = "ScriptError" Then GoTo hop
     Else
