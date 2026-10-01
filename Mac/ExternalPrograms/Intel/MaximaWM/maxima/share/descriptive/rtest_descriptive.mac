@@ -4,11 +4,90 @@
 (load(descriptive), float_approx_equal_tolerance : 1e-12, 0);
 0$
 
+mean ([]);
+und;
+
+mean (matrix ());
+und;
+
+mean (matrix ([]));
+[];
+
 mean([a, b, c]);
 (c+b+a)/3$
 
+/* error: negative weight */
+errcatch (mean ([a, b, c], [-1/2, 1/2, 1]));
+[];
+
+/* error: weights list not same length as data */
+errcatch (mean ([a, b, c], [0.5, 0.5]));
+[];
+
+/* error: sum of weights is 0 */
+errcatch (mean ([a, b, c], [0, 0, 0]));
+[];
+
+/* error: weight must be 1, if not a list */
+errcatch (mean ([a, b, c], 2));
+[];
+
+mean([a, b, c], 1);
+(c+b+a)/3$
+
+mean([a, b, c], [1, 1, 1]);
+(c+b+a)/3$
+
+mean([a, b, c], [1, 1, 1]/3);
+(c+b+a)/3$
+
+mean([a, b, c], [3, 2, 1]);
+(c+2*b+3*a)/6$
+
+mean([a, b, c], [3, 2, 1]/6);
+(c+2*b+3*a)/6$
+
 mean(matrix([a, b], [c, d], [e, f]));
 [(e+c+a)/3,(f+d+b)/3]$
+
+mean(matrix([a, b], [c, d], [e, f]), 1);
+[(e+c+a)/3,(f+d+b)/3]$
+
+mean(matrix([a, b], [c, d], [e, f]), [1, 1, 1]);
+[(e+c+a)/3,(f+d+b)/3]$
+
+mean(matrix([a, b], [c, d], [e, f]), [2, 3, 5]);
+[(5*e+3*c+2*a)/10,(5*f+3*d+2*b)/10]$
+
+mean(matrix([a, b], [-11, 13], [c, d], [-29, 43], [123, -456], [e, f]), [2, 0, 3, 0, 0, 5]);
+[(5*e+3*c+2*a)/10,(5*f+3*d+2*b)/10]$
+
+noncentral_moment ([a, b, c, d, e, f], 1, [2, 3, 5, 7, 11, 13]);
+(13*f + 11*e + 7*d + 5*c + 3*b + 2*a)/41;
+
+noncentral_moment ([a, b, c, d, e, f], 2, [2, 3, 5, 7, 11, 13]);
+(13*f^2 + 11*e^2 + 7*d^2 + 5*c^2 + 3*b^2 + 2*a^2)/41;
+
+mean ([a - 3, a - 2, a - 1, a, a + 1, a + 2, a + 3], [2, 3, 5, 7, 5, 3, 2]);
+a;
+
+central_moment ([a - 3, a - 2, a - 1, a, a + 1, a + 2, a + 3], 1, [2, 3, 5, 7, 5, 3, 2]);
+0;
+
+central_moment ([a - 3, a - 2, a - 1, a, a + 1, a + 2, a + 3], 2, [2, 3, 5, 7, 5, 3, 2]);
+''((2*3^2 + 3*2^2 + 5*1^2 + 7*0^2 + 5*1^2 + 3*2^2 + 2*3^2)/(2 + 3 + 5 + 7 + 5 + 3 + 2));
+
+central_moment ([a - 3, a - 2, a - 1, a, a + 1, a + 2, a + 3], 3, [2, 3, 5, 7, 5, 3, 2]);
+0;
+
+central_moment ([a, b, c], 0, [d, e, f]);
+1;
+
+central_moment ([a, b, c], 1, [d, e, f]);
+0;
+
+central_moment ([a, b, c], 2, [d, e, f]);
+''(block ([mm: (d*a + e*b + f*c)/(d + e + f)], ratsimp ((d*(a - mm)^2 + e*(b - mm)^2 + f*(c - mm)^2)/(d + e + f))));
 
 (s1 : read_list(file_search ("pidigits.data")), mean(s1));
 471/100$
@@ -151,7 +230,7 @@ quartile_skewness(s2);
 [-0.0408542246982353,0.1467025572005382,0.0336239103362392,
        0.03780068728522298,0.2105263157894735]$
 
-cov(s2);
+foo: cov(s2);
 matrix([17.22190675000003,13.61811305000002,14.37216775000002,
         19.39623590000002,15.42162414999993],
        [13.61811305000002,14.98773650999988,13.30448104999995,
@@ -162,6 +241,27 @@ matrix([17.22190675000003,13.61811305000002,14.37216775000002,
         32.17651043999993,20.44684694],
        [15.42162414999993,14.97109813,16.18170714999994,20.44684694,
         24.42307619000002])$
+
+cov (s2, 1);
+''foo;
+
+cov (s2, makelist (1, length (s2)));
+''foo;
+
+cov (s2, makelist (1/length (s2), length (s2)));
+''foo;
+
+(baz: apply (matrix, makelist ([i, i^2, i^3], i, 1, 10)),
+ ww: makelist (i, i, 1, 10),
+ baz1: apply (matrix, apply (append, makelist (makelist (baz[i], ww[i]), i, 1, 10))),
+ quux: cov (baz1));
+''(transpose (baz1) . baz1 / length (baz1) - transpose (mean (baz1)) . mean (baz1));
+
+cov (baz, ww);
+''quux;
+
+cov (baz, ww / lsum (w, w, ww));
+''quux;
 
 cov1(s2);
 matrix([17.39586540404044,13.75566974747477,14.51734116161618,
@@ -471,179 +571,4 @@ matrix([7,6,log(3)],[2,21,log(3)],[4,16,log(8)],[4,10,log(5)])$
 
 (reset (float_approx_equal_tolerance), 0);
 0;
-
-find_runs ([]);
-runs([], []);
-
-find_runs ([1]);
-runs([1], [1]);
-
-find_runs ([1000]);
-runs([1], [1000]);
-
-find_runs ([1, 1]);
-runs ([2], [1]);
-
-find_runs ([1000, 1000]);
-runs ([2], [1000]);
-
-find_runs ([1, 1000]);
-runs ([1, 1], [1, 1000]);
-
-find_runs ([1000, 1]);
-runs ([1, 1], [1000, 1]);
-
-find_runs ([2, 2, 2]);
-runs ([3], [2]);
-
-find_runs ([2, 2, 2, 2, 2, 2]);
-runs ([6], [2]);
-
-(set_random_state (make_random_state (3)),
- test_find_runs (x) :=
-   block ([r: find_runs (x), y],
-          y: find_runs_inverse (r),
-          if x = y then true
-            else ['data = x, 'find_runs = r, 'find_runs_inverse = y]),
- 0);
-0;
-
-test_find_runs (l: makelist (random (m), n)), m = 2, n = 3;
-true;
-
-test_find_runs (sort (l));
-true;
-
-test_find_runs (l: makelist (random (m), n)), m = 2, n = 9;
-true;
-
-test_find_runs (sort (l));
-true;
-
-test_find_runs (l: makelist (random (m), n)), m = 2, n = 27;
-true;
-
-test_find_runs (sort (l));
-true;
-
-test_find_runs (l: makelist (random (m), n)), m = 10, n = 3;
-true;
-
-test_find_runs (sort (l));
-true;
-
-test_find_runs (l: makelist (random (m), n)), m = 10, n = 9;
-true;
-
-test_find_runs (sort (l));
-true;
-
-test_find_runs (l: makelist (random (m), n)), m = 10, n = 27;
-true;
-
-test_find_runs (sort (l));
-true;
-
-test_find_runs (l: makelist (random (m), n)), m = 100, n = 3;
-true;
-
-test_find_runs (sort (l));
-true;
-
-test_find_runs (l: makelist (random (m), n)), m = 100, n = 9;
-true;
-
-test_find_runs (sort (l));
-true;
-
-test_find_runs (l: makelist (random (m), n)), m = 100, n = 27;
-true;
-
-test_find_runs (sort (l));
-true;
-
-(kill (a, b, c, d, e, f, g, h, i, j),
- test_find_runs_with_symbols (l) :=
-   block ([eqs: [0 = a, 1 = b, 2 = c, 3 = d, 4 = e, 5 = f, 6 = g, 7 = h, 8 = i, 9 = j]],
-          test_find_runs (subst (eqs, l))),
- 0);
-0;
-
-find_runs ([a]);
-runs ([1], [a]);
-
-find_runs ([b]);
-runs ([1], [b]);
-
-find_runs ([a, a]);
-runs ([2], [a]);
-
-find_runs ([a, b]);
-runs ([1, 1], [a, b]);
-
-find_runs ([b, a]);
-runs ([1, 1], [b, a]);
-
-find_runs ([b, b]);
-runs ([2], [b]);
-
-test_find_runs_with_symbols (l: makelist (random (m), n)), m = 10, n = 3;
-true;
-
-test_find_runs_with_symbols (sort (l));
-true;
-
-test_find_runs_with_symbols (l: makelist (random (m), n)), m = 10, n = 9;
-true;
-
-test_find_runs_with_symbols (sort (l));
-true;
-
-test_find_runs_with_symbols (l: makelist (random (m), n)), m = 10, n = 27;
-true;
-
-test_find_runs_with_symbols (sort (l));
-true;
-
-find_runs (["foo"]);
-runs ([1], ["foo"]);
-
-find_runs (["bar"]);
-runs ([1], ["bar"]);
-
-find_runs (["foo", "foo"]);
-runs ([2], ["foo"]);
-
-find_runs (["foo", "bar"]);
-runs ([1, 1], ["foo", "bar"]);
-
-find_runs (["bar", "foo"]);
-runs ([1, 1], ["bar", "foo"]);
-
-find_runs (["bar", "bar"]);
-runs ([2], ["bar"]);
-
-(test_find_runs_with_strings (l) :=
-   block ([eqs: [0 = "foo", 1 = "bar", 2 = "baz", 3 = "quux", 4 = "mumble", 5 = "blurf", 6 = "blart", 7 = "wheeze", 8 = "snort", 9 = "sigh"]],
-          test_find_runs (subst (eqs, l))),
- 0);
-0;
-
-test_find_runs_with_strings (l: makelist (random (m), n)), m = 10, n = 3;
-true;
-
-test_find_runs_with_strings (sort (l));
-true;
-
-test_find_runs_with_strings (l: makelist (random (m), n)), m = 10, n = 9;
-true;
-
-test_find_runs_with_strings (sort (l));
-true;
-
-test_find_runs_with_strings (l: makelist (random (m), n)), m = 10, n = 27;
-true;
-
-test_find_runs_with_strings (sort (l));
-true;
 

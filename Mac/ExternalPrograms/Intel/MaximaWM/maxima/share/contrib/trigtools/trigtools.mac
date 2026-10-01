@@ -7,6 +7,12 @@ rigtools package is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License.
 */
 
+/* This bit about looking at the OPERATORS property detects if to_poly_solve has been defined as a simplifying function,
+ * in order to see if we need to load the to_poly_solve package.
+ */
+
+if ?get ('to_poly_solve, '?operators) = false then load ("to_poly_solve.mac");
+
 /*
 The function c2sin convert expression a*cos(x)+b*sin(x)  to r*sin(x+phi).
 */

@@ -1,5 +1,4 @@
-;; 8/8 | 5/5 
-;; Copyright (C) 2000, 2001, 2003, 2008, 2009 Barton Willis
+;; Copyright (C) 2000, 2001, 2003, 2008, 2009, 2026 Barton Willis
 
 #|
   This is free software; you can redistribute it and/or
@@ -47,9 +46,9 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 ;; When orthopoly_returns_intervals is true, floating point evaluation 
 ;; returns an interval using the form (($interval) c r), where c is the 
 ;; center of the interval and r is its radius.  We don't provide the user
-;; with any tools for working with intervals; if a user wants
+;; with any tools for working with intervals.
 
-(defmvar $orthopoly_returns_intervals t)
+(defmvar $orthopoly_returns_intervals nil)
 
 (defun orthopoly-return-handler (d f e)
   (cond ((or (floatp f) (complexp f))
@@ -110,7 +109,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 	   (setq p ($expand (mult x p)))
 	   (setq q ($expand (mult x (add q (simplify `((mabs) ,(mul p dx)))))))
 	   (setq q (simplify `((mabs) ,q)))
-	   `(($interval) ,p ,q)))
+	   `(($interval simp) ,p ,q)))
 	(t (mult x a))))
 	   
 ;; TeX a function with subscripts and superscripts.  The string fn is the
@@ -150,7 +149,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
     (cond ((null hi)
 	   (setq form `((,fn simp array) ,@lo)))
 	  (b2
-	   (setq form `((mexpt) ((,fn simp array) ,@lo) (("") ,@hi))))
+	   (setq form `((mexpt) ((,fn simp array) ,@lo) ((mprogn) ,@hi))))
 	  (t
 	   (setq form `((mexpt) ((,fn simp array) ,@lo) ,@hi))))
     `((,form simp) ,@(nthcdr k x))))
@@ -254,12 +253,6 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
                         (power x index))
                    index 0 n))))))
 
-(eval-when
-    #+gcl (load eval)
-    #-gcl (:load-toplevel :execute)
-    (let (($context '$global) (context '$global))
-      (meval '(($declare) $pochhammer $complex))))
-
 (defmvar $pochhammer_max_index 100)
 
 ;; This disallows noninteger assignments to $pochhammer_max_index.
@@ -275,7 +268,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 (defun $pochhammer (x n)
   (take '($pochhammer) x n))
 
-(in-package #-gcl #:bigfloat #+gcl "BIGFLOAT")
+(in-package #:bigfloat)
 
 ;; Numerical evaluation of pochhammer using the bigfloat package.
 (defun pochhammer (x n)
@@ -352,7 +345,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 (setf (get '$pochhammer 'dimension) 'dimension-pochhammer)
 
 (defun dimension-pochhammer (form result)
-  (setq form `(( (("") ,(nth 1 form)) simp array) ,(nth 2 form)))
+  (setq form `(( ((mprogn) ,(nth 1 form)) simp array) ,(nth 2 form)))
   (dimension-array form result))
 
 ;; pochhammer-quotient(a b x n) returns pochhammer( a,n) / pochhammer(b,n).  
@@ -392,6 +385,13 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 ;; O(eps^2). 
 
 (defun $jacobi_p (n a b x)
+  (if (and (integerp a) (integerp n) (<= (- n) a) (< a 0))
+    ;; For (- n) <= a < 0, avoid problems with (a + k) in denominator of unsimplified expression.
+    (let ((a-gensym (gensym "a")))
+      ($ratsimp ($substitute a a-gensym ($ratsimp (jacobi_p-1 n a-gensym b x)))))
+    (jacobi_p-1 n a b x)))
+
+(defun jacobi_p-1 (n a b x)
   (cond ((use-hypergeo n x)
 	 (let ((f) (d) (e))
 	   ;(setq d (div ($pochhammer (add a 1) n) ($pochhammer 1 n)))
@@ -399,15 +399,15 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 	   (multiple-value-setq (f e)
 	     ($hypergeo21 (mul -1 n) (add n a b 1) (add a 1)
 			  (div (add 1 (mul -1 x)) 2) n))
-	   (setq e (if e (+ e (* 4 n (abs f) flonum-epsilon)) nil))
+	   (setq e (if e (+ e (* 4 n (abs f) +flonum-epsilon+)) nil))
 	   (orthopoly-return-handler d f e)))
 	(t `(($jacobi_p simp) ,n ,a ,b ,x))))
 
 (putprop '$jacobi_p
 	 '((n a b x)
-	   ((unk) "$first" "$jacobi_p")
-	   ((unk) "$second" "$jacobi_p")
-	   ((unk) "$third" "$jacobi_p")
+	   ((unk) first jacobi_p)
+	   ((unk)  second jacobi_p)
+	   ((unk)  third jacobi_p)
 
 	   ((mtimes)
 	    ((mexpt) ((mplus ) a b ((mtimes ) 2 n)) -1)
@@ -433,12 +433,22 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-jacobi-p (form result)
   (dimension-function
-   (dimension-sub-and-super-scripted-function "P" `(1) `(2 3) t 4 form)
+   (dimension-sub-and-super-scripted-function '|$p| `(1) `(2 3) t 4 form)
    result))
      	  
-;; See A&S 22.5.46, page 779.
-
 (defun $ultraspherical (n a x)
+  ;; The 2F1 form (A&S 22.5.46) has denominator parameter c = a + 1/2. For a in
+  ;; {-1/2, -3/2, ..., -(2*n-1)/2}, i.e. c in {0, -1, ..., 1-n}, the factor
+  ;; (a + 1/2 + k) vanishes in a denominator of the unsimplified expression.
+  ;; Evaluate with a gensym in place of a so the removable singularity cancels,
+  ;; then substitute a back.
+  (let ((c (add a (div 1 2))))
+    (if (and (integerp n) (integerp c) (<= (- 1 n) c) (<= c 0))
+      (let ((a-gensym (gensym "a")))
+        ($ratsimp ($substitute a a-gensym ($ratsimp (ultraspherical-1 n a-gensym x)))))
+      (ultraspherical-1 n a x))))
+
+(defun ultraspherical-1 (n a x)
   (cond ((use-hypergeo n x)
 	 (let ((f) (d) (e))
 	   ;(setq d (div ($pochhammer (mul 2 a) n) ($pochhammer 1 n)))
@@ -446,14 +456,14 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 	   (multiple-value-setq (f e)
 	     ($hypergeo21 (mul -1 n) (add n (mul 2 a)) (add a (div 1 2))
 			  (div (add 1 (mul -1 x)) 2) n))
-	   (setq e (if e (+ e (* 4 n (abs f) flonum-epsilon)) nil))
+	   (setq e (if e (+ e (* 4 n (abs f) +flonum-epsilon+)) nil))
 	   (orthopoly-return-handler d f e)))
 	(t `(($ultraspherical simp) ,n ,a ,x))))
 
 (putprop '$ultraspherical 
 	 '((n a x)
-	   ((unk) "$first" "$ultraspherical")
-	   ((unk) "$second" "$ultrapsherical")
+	   ((unk) first ultraspherical)
+	   ((unk)  second ultrapsherical)
 	   ((mtimes)
 	    ((mplus)
 	     ((mtimes)
@@ -473,7 +483,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-ultraspherical (form result)
     (dimension-function
-     (dimension-sub-and-super-scripted-function "C" `(1) `(2) t 3 form)
+     (dimension-sub-and-super-scripted-function '|$c| `(1) `(2) t 3 form)
      result))
   
 (defun $chebyshev_t (n x)
@@ -486,7 +496,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (putprop '$chebyshev_t 
 	 '((n x)
-	   ((unk) "$first" "$chebyshev_t")
+	   ((unk) first chebyshev_t)
 	   ((mtimes)
 	    ((mplus)
 	     ((mtimes) n (($chebyshev_t) ((mplus ) -1 n) x))
@@ -503,7 +513,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-chebyshev-t (form result)
   (dimension-function
-   (dimension-sub-and-super-scripted-function "T" `(1) nil nil 2 form)
+   (dimension-sub-and-super-scripted-function '|$t| `(1) nil nil 2 form)
    result))
 
 ;; See A & S 22.5.48, page 779.
@@ -520,7 +530,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (putprop '$chebyshev_u
 	 '((n x)
-	   ((unk) "$first" "$chebyshev_u")
+	   ((unk) first chebyshev_u)
 	   ((mtimes)
 	    ((mplus)
 	     ((mtimes)
@@ -539,7 +549,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-chebyshev-u (form result)
   (dimension-function
-   (dimension-sub-and-super-scripted-function "U" `(1) nil nil 2 form)
+   (dimension-sub-and-super-scripted-function '|$u| `(1) nil nil 2 form)
    result))
 
 ;; See A&S 8.2.1 page 333 and 22.5.35 page 779.  We evaluate the legendre
@@ -554,7 +564,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (putprop '$legendre_p 
 	 '((n x) 
-	   ((unk) "$first" "$legendre_p")
+	   ((unk) first legendre_p)
 	   ((mtimes)
 	     ((mplus)
 	      ((mtimes) n (($legendre_p) ((mplus) -1 n) x))
@@ -571,7 +581,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-legendre-p (form result)
   (dimension-function
-   (dimension-sub-and-super-scripted-function "P" `(1) nil nil 2 form)
+   (dimension-sub-and-super-scripted-function '|$p| `(1) nil nil 2 form)
    result))
   
 (defun $legendre_q (n x)
@@ -581,7 +591,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (putprop '$legendre_q 
 	 '((n x) 
-	   ((unk) "$first" "$legendre_p")
+	   ((unk) first legendre_p)
 	   ((mplus)
 	    ((mtimes) -1 ((%kron_delta) 0 n)
 	     ((mexpt) ((mplus) -1 ((mexpt) x 2)) -1)) 
@@ -601,7 +611,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-legendre-q (form result)
  (dimension-function
-   (dimension-sub-and-super-scripted-function "Q" `(1) nil nil 2 form)
+   (dimension-sub-and-super-scripted-function '|$q| `(1) nil nil 2 form)
    result))
    	 
 ;; See A & S 8.6.7 and 8.2.6 pages 333 and 334. I chose the 
@@ -697,8 +707,8 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (putprop '$assoc_legendre_q
 	 '((n m x)
-	   ((unk) "$first" "$assoc_legendre_q")
-	   ((unk) "$second" "$assoc_legendre_q")
+	   ((unk) first assoc_legendre_q)
+	   ((unk) second assoc_legendre_q)
 	   
 	   ((mplus)
 	    ((mtimes)
@@ -719,7 +729,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-assoc-legendre-q (form result)
  (dimension-function
-   (dimension-sub-and-super-scripted-function "Q" `(1) `(2) nil 3 form)
+   (dimension-sub-and-super-scripted-function '|$q| `(1) `(2) nil 3 form)
    result))
 
 ;; See A & S 22.5.37 page 779, A & S 8.6.6 (second equation) page 334, and 
@@ -756,7 +766,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 	  (t
 	   (setq d 1)
 	   (setq f `(($assoc_legendre_p simp) ,n ,m ,x))))
-    (interval-mult d f (* flonum-epsilon dx))))
+    (interval-mult d f (* +flonum-epsilon+ dx))))
 
 
 ;; For the derivative of the associated legendre p function, see
@@ -764,8 +774,8 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (putprop `$assoc_legendre_p
 	 '((n m x)
-	   ((unk) "$first" "$assoc_legendre_p")
-	   ((unk) "$second" "$assoc_legendre_p")
+	   ((unk) first assoc_legendre_p)
+	   ((unk) second assoc_legendre_p)
 	   ((mtimes simp)
 	    ((mplus simp)
 	     ((mtimes simp) -1 ((mplus simp) m n) (($unit_step) n)
@@ -783,7 +793,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-assoc-legendre-p (form result)
   (dimension-function
-   (dimension-sub-and-super-scripted-function "P" `(1) `(2) nil 3 form)
+   (dimension-sub-and-super-scripted-function '|$p| `(1) `(2) nil 3 form)
    result))
 		  		
 ;; See A&S 22.5.55 and 22.5.56, page 780.
@@ -804,11 +814,11 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 		  (setq d (mul (if (oddp n) -1 1) (factorial (+ 1 (* 2 n))) 2 x
 			       (div 1 (factorial n))))))
 	   (orthopoly-return-handler d f e))) 
-	(t `(($hermite) ,n ,x))))
+	(t `(($hermite simp) ,n ,x))))
 
 (putprop '$hermite
 	 '((n x)
-	   ((unk) "$first" "$hermite")
+	   ((unk) first hermite)
 	   ((mtimes) 2 n (($hermite) ((mplus) -1 n) x)))
 	 'grad)
 
@@ -821,28 +831,35 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-hermite (form result)
  (dimension-function
-   (dimension-sub-and-super-scripted-function "H" `(1) nil nil 2 form)
+   (dimension-sub-and-super-scripted-function '|$h| `(1) nil nil 2 form)
    result))
 
 ;; See A & S 22.5.54, page 780.  For integer n, use the identity
 ;;     binomial(n+a,n) = pochhammer(a+1,n)/pochhammer(1,n)
 
 (defun $gen_laguerre (n a x)
+  (if (and (integerp a) (integerp n) (<= (- n) a) (< a 0))
+    ;; For (- n) <= a < 0, avoid problems with (a + k) in denominator of unsimplified expression.
+    (let ((a-gensym (gensym "a")))
+      ($ratsimp ($substitute a a-gensym ($ratsimp (gen_laguerre-1 n a-gensym x)))))
+    (gen_laguerre-1 n a x)))
+
+(defun gen_laguerre-1 (n a x)
   (cond ((use-hypergeo n x)
 	 (let ((f) (d) (e))
 	   ;(setq d (div ($pochhammer (add a 1) n) ($pochhammer 1 n)))
 	   (setq d (pochhammer-quotient (add a 1) 1 x n))
 	   (multiple-value-setq (f e)
 	     ($hypergeo11 (mul -1 n) (add 1 a) x n))
-	   (setq e (if e (+ e (* 4 (abs f) flonum-epsilon n)) nil))
+	   (setq e (if e (+ e (* 4 (abs f) +flonum-epsilon+ n)) nil))
 	   (orthopoly-return-handler d f e)))
 	(t
-	 `(($gen_laguerre) ,n ,a ,x))))
+	 `(($gen_laguerre simp) ,n ,a ,x))))
 
 (putprop '$gen_laguerre
 	 '((n a x)
-	   ((unk) "$first" "$gen_laguerre")
-	   ((unk) "$second" "$gen_laguerre")
+	   ((unk) first gen_laguerre)
+	   ((unk) second gen_laguerre)
 	   ((mtimes)
 	    ((mplus)
 	     ((mtimes) -1 ((mplus) a n)
@@ -854,13 +871,13 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 (defprop $gen_laguerre tex-gen-laguerre tex)
 
 (defun tex-gen-laguerre (x l r)
-  (tex-sub-and-super-scripted-function "L" `(0) nil `(1) t 1 x l r))
+  (tex-sub-and-super-scripted-function "L" `(0) nil `(1) t 2 x l r))
 
 (setf (get '$gen_laguerre 'dimension) 'dimension-gen-laguerre)
 
 (defun dimension-gen-laguerre (form result)
   (dimension-function
-   (dimension-sub-and-super-scripted-function "L" `(1) `(2) t 3 form)
+   (dimension-sub-and-super-scripted-function '|$l| `(1) `(2) t 3 form)
    result))
 
 ;; See A & S 22.5.16, page 778.
@@ -871,11 +888,11 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 	   (multiple-value-setq (f e) ($hypergeo11 (mul -1 n) 1 x n))
 	   (orthopoly-return-handler 1 f e)))
 	(t
-	 `(($laguerre) ,n ,x))))
+	 `(($laguerre simp) ,n ,x))))
 
 (putprop '$laguerre
 	 '((n x)
-	   ((unk) "$first" "$laguerre")
+	   ((unk) first laguerre)
 	   ((mtimes)
 	    ((mplus)
 	     ((mtimes) -1 n (($laguerre) ((mplus) -1 n) x))
@@ -892,7 +909,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-laguerre (form result)
   (dimension-function
-   (dimension-sub-and-super-scripted-function "L" `(1) nil nil 2 form)
+   (dimension-sub-and-super-scripted-function '|$l| `(1) nil nil 2 form)
    result))
 
 (defun $spherical_hankel1 (n x)
@@ -911,11 +928,11 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 			(power '$%e (mul '$%i x)) (div -1 (power x (add 1 n)))))
 	   (orthopoly-return-handler d f e))
 	  (t 
-	   `(($spherical_hankel1) ,n ,x)))))
+	   `(($spherical_hankel1 simp) ,n ,x)))))
 
 (putprop '$spherical_hankel1
 	 '((n x)
-	   ((unk) "$first" "$spherical_hankel1")
+	   ((unk) first spherical_hankel1)
 	   ((mplus simp) (($spherical_hankel1) ((mplus) -1 n) x)
 	    ((mtimes simp) -1 ((mplus) 1 n)
 	     (($spherical_hankel1) n x) ((mexpt) x -1))))
@@ -941,11 +958,11 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 	 (let ((f))
 	   (setq f ($spherical_hankel1 n x))
 	   (if (oddp n) (interval-mult -1 f) f)))
-	(t `(($spherical_hankel2) ,n ,x))))
+	(t `(($spherical_hankel2 simp) ,n ,x))))
 
 (putprop '$spherical_hankel2
 	 '((n x)
-	   ((unk) "$first" "$spherical_hankel2")
+	   ((unk) first spherical_hankel2)
 	   ((mplus simp) (($spherical_hankel2) ((mplus) -1 n) x)
 	    ((mtimes simp) -1 ((mplus) 1 n)
 	     (($spherical_hankel2) n x) ((mexpt) x -1))))
@@ -972,9 +989,11 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 	(x2 (mul x x)) (m2))
     (dotimes (m n1 s)
       (setq m2 (* 2 m))
-      (setq w (div (mul w `((rat) ,(* -1 (+ n m2 2) (+ n m2 1) 
-				      (- n m2) (- n (+ m2 1)))
-			    ,(* 4 (+ m2 1) (+ m2 2)))) x2))
+      (setq w (div (mul w (div
+			   (* -1 (+ n m2 2) (+ n m2 1) 
+				  (- n m2) (- n (+ m2 1)))
+			   (* 4 (+ m2 1) (+ m2 2))))
+		   x2))
       (setq s (add s w)))))
 
 (defun q-fun (n x)
@@ -983,9 +1002,11 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 	(n1 (floor (/ (- n 1) 2))))
     (dotimes (m n1 (div (mul n (+ n 1) s) (mul 2 x)))
       (setq m2 (* 2 m))
-      (setq w (div (mul w `((rat) ,(* -1 (+ n m2 3) (+ n m2 2) 
-				      (- n (+ m2 1)) (- n (+ m2 2)))
-			    ,(* 4 (+ m2 3) (+ m2 2)))) x2))
+      (setq w (div (mul w (div
+			   (* -1 (+ n m2 3) (+ n m2 2) 
+			      (- n (+ m2 1)) (- n (+ m2 2)))
+			   (* 4 (+ m2 3) (+ m2 2))))
+		   x2))
       (setq s (add s w)))))
 
 
@@ -1030,11 +1051,11 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 	 (mul (if (oddp n) -1 1) ($spherical_bessel_y (- (+ n 1)) x)))
 
 	(t 
-	 `(($spherical_bessel_j) ,n ,x))))
+	 `(($spherical_bessel_j simp) ,n ,x))))
 	 
 (putprop '$spherical_bessel_j
 	 '((n x)
-	   ((unk) "$first" "$spherical_bessel_j")
+	   ((unk) first spherical_bessel_j)
 	   ((mtimes) ((mexpt) ((mplus) 1 ((mtimes) 2 n)) -1)
 	    ((mplus)
 	     ((mtimes) n (($spherical_bessel_j) ((mplus) -1 n) x))
@@ -1080,11 +1101,11 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 	((integerp n)
 	 (mul (if (oddp n) 1 -1) ($spherical_bessel_j (- (+ n 1)) x)))
-	(t  `(($spherical_bessel_y) ,n ,x))))
+	(t  `(($spherical_bessel_y simp) ,n ,x))))
 
 (putprop '$spherical_bessel_y
 	 '((n x)
-	   ((unk) "$first" "$spherical_bessel_y")
+	   ((unk) first spherical_bessel_y)
 	   ((mtimes) ((mexpt) ((mplus) 1 ((mtimes) 2 n)) -1)
 	    ((mplus)
 	     ((mtimes) n (($spherical_bessel_y) ((mplus) -1 n) x))
@@ -1132,7 +1153,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 			     `((rat) 1 2)))
 		 (assoc-leg-cos n m th)))))
 	(t
-	 `(($spherical_harmonic) ,n ,m ,th ,p))))
+	 `(($spherical_harmonic simp) ,n ,m ,th ,p))))
 
 (defprop $spherical_harmonic tex-spherical-harmonic tex)
 
@@ -1143,13 +1164,13 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
 
 (defun dimension-spherical-harmonic (form result)
  (dimension-function
-  (dimension-sub-and-super-scripted-function "Y" `(1) `(2) nil 3 form)
+  (dimension-sub-and-super-scripted-function '|$y| `(1) `(2) nil 3 form)
   result))
 
 (putprop '$spherical_harmonic
 	 '((n m theta phi)
-	   ((unk) "$first" "$spherical_harmonic")
-	   ((unk) "$second" "$spherical_harmonic")
+	   ((unk) first spherical_harmonic)
+	   ((unk) second spherical_harmonic)
 	   ((mplus)
 	    ((mtimes) ((rat ) -1 2)
 	     ((mexpt)
@@ -1223,7 +1244,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
       (setq u0 u)
       (setq err (+ err (abs (* u0 (aref fs k)))))
       (incf i))
-    (values f0 (* 12 flonum-epsilon err))))
+    (values f0 (* 12 +flonum-epsilon+ err))))
     
 (defun hypergeo21-float (n b c x)
   (let ((f0) (fm1) (f) (i 0) (k) (dk) (ak) (bk) (err)
@@ -1262,7 +1283,7 @@ Maxima code for evaluating orthogonal polynomials listed in Chapter 22 of Abramo
       (setq u0 u)
       (incf i)
       (setq err (+ err (abs (* (aref fs k) u0)))))
-    (values f0 (* 12 flonum-epsilon err))))
+    (values f0 (* 12 +flonum-epsilon+ err))))
     
 ;; For recursion relations, see A & S 22.7 page 782. 
 

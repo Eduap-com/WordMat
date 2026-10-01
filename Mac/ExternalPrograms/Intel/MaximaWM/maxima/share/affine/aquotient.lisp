@@ -8,23 +8,22 @@
 (in-package :maxima)
 
 (eval-when
-    #+gcl (compile load eval)
-    #-gcl (:compile-toplevel :load-toplevel :execute)
+    (:compile-toplevel :load-toplevel :execute)
 
-    (defmacro p-cof (f)			;leading coefficient of f
-      `(third ,f))
+  (defmacro p-cof (f)			;leading coefficient of f
+    `(third ,f))
 
-    (defmacro p-next-term (f)
-      `(cddr ,f))
+  (defmacro p-next-term (f)
+    `(cddr ,f))
 
-    (defmacro p-deg (f)
-      `(second ,f))
+  (defmacro p-deg (f)
+    `(second ,f))
 
-    (defmacro term-cof (terms)
-      `(second ,terms))
+  (defmacro term-cof (terms)
+    `(second ,terms))
 
-    (defmacro term-deg (terms)
-      `(first ,terms)))
+  (defmacro term-deg (terms)
+    `(first ,terms)))
 
 ;;(make-poly var x)==> (list x 1 1)
 
@@ -668,7 +667,7 @@
 ;)
 
 
-;;essentially same speed as regualar ptimes or maybe 5 %faster
+;;essentially same speed as regular ptimes or maybe 5 %faster
 ;;does (afp-times (x+y+z)^10 times itself in 2530 msec. and 2640 for ptimes.
 
 
@@ -909,8 +908,8 @@
 ;;and I compared the values on several hundred random
 ;;m n and it was correct.
 ;;on (test 896745600000 7890012  1000) of 1000 repeats
-;;the fast-gcd was .725 sec and the regualar gcd was 5.6 sec. using 0 and 23000 words resp.
-;;On Explorer: Release 1.0)the fast-gcd was 1.9 sec and the regualar gcd was .102 sec. using 0 and 0 words resp.
+;;the fast-gcd was .725 sec and the regular gcd was 5.6 sec. using 0 and 23000 words resp.
+;;On Explorer: Release 1.0)the fast-gcd was 1.9 sec and the regular gcd was .102 sec. using 0 and 0 words resp.
 ;(defun test (m n rep &aux a b)
 ;  (tim (loop for i below rep
 ;	do (setq a (fast-gcd m n))))

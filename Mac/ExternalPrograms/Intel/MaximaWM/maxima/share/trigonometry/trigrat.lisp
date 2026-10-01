@@ -35,9 +35,7 @@
 #$trigrat(exp):=
     if matrixp (exp) or listp (exp) or setp (exp) or trigrat_equationp (exp)
     then map (trigrat, exp)
-    else block([e%,n%,d%,lg,f%,lexp,ls,d2%,l2%,alg,gcd1],
-		alg:algebraic,gcd1:gcd,
-		algebraic:true,gcd:subres,
+    else block([e%,n%,d%,lg,f%,lexp,ls,d2%,l2%,algebraic:true,gcd:subres, ratfac:false,ratexpand:true],
 		e%: rat(ratsimp(expand(exponentialize(exp)))),
 		n%:num(e%),d%:denom(e%),
 		listofei(d%),
@@ -46,10 +44,9 @@
 		f%:if length(lexp)=0 then 1
 		  else if length(lexp)=1 then part(l2%,1)
 		  else apply("*",l2%),
-  		n%:rectform(ratexpand(n%/f%)),
-	        d%:rectform(ratexpand(d%/f%)),
+  		n%:demoivre(ratexpand(n%/f%)),
+	        d%:demoivre(ratexpand(d%/f%)),
 		e%:ratsimp(n%/d%,%i),
-		algebraic:alg,gcd:gcd1,
 		e%)$
 
 ; written by D. Lazard, august 1988

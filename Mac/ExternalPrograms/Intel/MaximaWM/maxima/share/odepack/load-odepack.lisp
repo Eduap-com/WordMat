@@ -1,4 +1,4 @@
-(in-package #-gcl #:maxima #+GCL "MAXIMA")
+(in-package #:maxima)
 
 #+nil
 (progn
@@ -7,12 +7,10 @@
   ~A~%" (merge-pathnames (make-pathname :name "lapack" :type "system")
 					  *load-truename*)))
 
-#+(or ecl abcl) ($load "lisp-utils/defsystem.lisp")
+(unless (member :mk-defsystem *features*) ($load "lisp-utils/defsystem.lisp"))
 
-(let ((path (merge-pathnames (make-pathname :name "odepack" :type
-"system")
-			     #-gcl *load-pathname* +gcl
-			     #sys:*load-pathname*)))
+(let ((path (merge-pathnames (make-pathname :name "odepack" :type "system")
+			     *load-pathname*)))
   (format t "path = ~S~%" path) (load path))
 
 ;; Maxima errored out when any lapack function was used which

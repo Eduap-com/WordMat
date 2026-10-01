@@ -15,7 +15,7 @@
 ;;;
 ;;;  You should have received a copy of the GNU General Public License
 ;;;  along with this program; if not, write to the Free Software
-;;;  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+;;;  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 ;;;
 
 (in-package :maxima)
@@ -309,7 +309,7 @@
     (dolist (v *h-vertices*)
       (setq *g-vertices* (remove v *g-vertices*)))
 
-    ;; embedd h
+    ;; embed h
     (let ((cycle *h-vertices*))
       (loop while (not (null (cdr cycle))) do
 	   (let ((u (car cycle))
@@ -345,7 +345,7 @@
       ;; select the bridge with the smallest number of available walks
       (let ((bridge (first *bridges*))
 	    (path))
-	;; find the bridge with the smalles number of possible facial walks
+	;; find the bridge with the smallest number of possible facial walks
 	(loop for b in *bridges* do
 	     (when (< (length (gethash b *available-faces*))
 		      (length (gethash bridge *available-faces*)))
@@ -358,7 +358,7 @@
 	    (return-from demoucron nil))
 	;; find a path in the bridge
 	(setq path (find-path bridge g))
-	;; embedd the path
+	;; embed the path
 	(embedd-path path (first (gethash bridge *available-faces*)))
 	(when $demoucron_debug
 	  (print "---         path:")

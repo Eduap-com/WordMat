@@ -163,7 +163,7 @@ blurf(a);
 'if a < 0 then -1 else 1;
 
 (translate(blurf), blurf(a));
-'if a < 0 then -1 else 1;
+'if -a > 0 then -1 else 1;
 
 /* Other examples of translated functions */
 
@@ -174,10 +174,10 @@ my_max (11, 33, 22);
 33;
 
 my_max (a + b, c, 1);
-'if a + b > c and a + b > 1 then a + b elseif c > 1 then c else 1;
+'if a + b - c > 0 and a + b - 1 > 0 then a + b elseif c - 1 > 0 then c else 1;
 
 [assume (c < 1), my_max (a + b, c, 1), forget (c < 1)];
-[[c < 1], 'if a + b > c and a + b > 1 then a + b else 1, [c < 1]];
+[[c < 1], 'if a + b - c > 0 and a + b - 1 > 0 then a + b else 1, [c < 1]];
 
 /* explicit resimplification in evaluation (i.e. DEFMSPEC MCOND) not needed,
  * since simplification of branches will be handled after evaluation.

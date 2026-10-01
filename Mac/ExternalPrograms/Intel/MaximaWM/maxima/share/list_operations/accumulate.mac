@@ -1,0 +1,29 @@
+accumulate (f%, x, [optional]) :=
+    if listp (x)
+        then accumulate_list (f%, x, optional)
+        else error ("accumulate: argument must be a list or a matrix.");
+
+accumulate_list (f%, x, optional) :=
+    block ([x0, x0_present, x1, y],
+           [x0, x0_present]: if optional # [] then [ first (optional), true ],
+           if x = []
+               then (if x0_present then [ x0 ] else [])
+           else (if x0_present
+                     /* When an initial value is supplied, that initial value
+                      * is the first element of the return value.
+                      * This agrees with the behavior of accumulate-like functions
+                      * in the other systems I was able to find which have them
+                      * (R, Python, Kotlin, and Scala; Ruby and Swift don't appear to have it).
+                      * The initial value is required in Kotlin and Scala,
+                      * but not in R or Python; the first element of the return value
+                      * is the first element of x in R and Python,
+                      * when no initial value is specified.
+                      * Adopt the R/Python policy here: initial value is optional,
+                      * first element is the initial value if specified
+                      * and otherwise first element of the return value is the first element of x.
+                      */
+                     then (y: [ x0 ], x1: x)
+                     else (y: [ x[1] ], x1: rest (x)),
+                 for z in x1
+                     do push (f% (y[1], z), y),
+                 reverse (y)));

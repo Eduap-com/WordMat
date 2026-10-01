@@ -1,0 +1,201 @@
+\input texinfo
+
+@c makeinfo drawutils.texi         to make .info
+@c texi2html drawutils.texi        to make .html
+@c texi2pdf drawutils.texi         to make .pdf
+
+@setfilename drawutils.info
+@settitle drawutils
+
+@ifinfo 
+@macro var {expr}
+<\expr\>
+@end macro
+@end ifinfo
+
+@dircategory Mathematics/Maxima
+@direntry
+* drawutils: (maxima/drawutils).           Maxima share package drawutils: additional drawing functions for package draw.
+@end direntry
+
+@node Top, Introduction to drawutils, (dir), (dir)
+@top
+@menu
+* Introduction to drawutils::
+* Vector fields::
+* Venn diagrams::
+* Function and variable index::
+@end menu
+
+@node Introduction to drawutils, Vector fields, Top, Top
+@chapter Introduction to drawutils
+
+Package @code{drawutils} contains user contributed code based on the @code{draw} package.
+
+
+@node Vector fields, Venn diagrams, Introduction to drawutils, Top
+@chapter Vector fields
+
+By Donald J. Bindner (2010)
+
+Functions for plotting vector fields in 2D and 3D.
+
+
+@deffn {Function} plot_vector_field (@var{F}, @var{X}, @var{Y}, ... )
+Draws a 2D vector field.
+
+Arguments:
+
+@itemize @bullet
+
+@item
+@var{F}: a vector containing field components.
+
+@item
+@var{X}: name and bounds of first coordinate.
+
+@item
+@var{Y}: name and bounds of second coordinate.
+
+@end itemize
+
+Optional parameters:
+
+@itemize @bullet
+@item
+Those defined in the @code{draw} package.
+@item
+@var{scale=1}: auto-scaling of arrows (default).
+
+@item
+@var{scale=0}: no auto-scaling.
+
+@item
+@var{scale=*}: adjust arrows shorter -- numbers between 0 and 1 or longer -- numbers greater than 1.
+
+@end itemize
+
+Examples:
+
+@example
+(%i1) load(drawutils)$
+(%i2) plot_vector_field([-y,x], [x,-1,1], [y,-1,1])$
+(%i3) plot_vector_field([-y,x], [x,-1,1], [y,-1,1],
+                        scale=0)$
+@end example
+
+@end deffn
+
+
+@deffn {Function} plot_vector_field3d (@var{F}, @var{X}, @var{Y}, @var{Z},  ... )
+Draws a 3D vector field.
+
+Arguments:
+
+@itemize @bullet
+
+@item
+@var{F}: a vector containing field components.
+
+@item
+@var{X}: name and bounds of first coordinate.
+
+@item
+@var{Y}: name and bounds of second coordinate.
+
+@item
+@var{Z}: name and bounds of third coordinate.
+
+@end itemize
+
+Optional parameters:
+
+@itemize @bullet
+@item
+Those defined in the @code{draw} package.
+@item
+@var{scale=1}: auto-scaling of arrows (default).
+
+@item
+@var{scale=0}: no auto-scaling.
+
+@item
+@var{scale=*}: adjust arrows shorter -- numbers between 0 and 1 or longer -- numbers greater than 1.
+
+@end itemize
+
+Examples:
+
+@example
+(%i1) load(drawutils)$
+(%i2) plot_vector_field3d([-y,x,z], [x,-1,1], [y,-1,1], [z,-1,1])$
+(%i3) plot_vector_field3d([-y,x,z], [x,-1,1], [y,-1,1], [z,-1,1],
+                          scale=0)$
+@end example
+
+@end deffn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@node Venn diagrams, Function and variable index, Vector fields, Top
+@chapter Venn diagrams
+
+By Pankaj Sejwal (2015)
+
+The @emph{vennplot} package enables the user to plot Venn diagram for any logical 
+relation. Logical atoms are represented as equally distanced circles of different 
+random colours which help in distinguishing different circles.
+
+No known bug, but in case some issue needs to be addressed, please share it on 
+Maxima mailing list.
+
+@deffn {Function} vennplot (@var{logical_expression})
+Draws a basicVenn diagram.
+
+Examples:
+
+@example
+(%i1) load(drawutils)$
+(%i2) vennplot(a and b and not(c) and d)$
+(%i3) vennplot(a and b and c and d)$
+(%i4) vennplot(not(d))$
+@end example
+
+TODO : Filling circles with different colors
+
+@end deffn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@node Function and variable index,  , Venn diagrams, Top
+@appendix Function and variable index
+@printindex fn
+@c @printindex vr
+
+@bye

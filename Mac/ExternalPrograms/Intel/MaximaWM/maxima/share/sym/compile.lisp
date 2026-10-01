@@ -16,5 +16,7 @@
 ;       *              e-mail : avb@sysal.ibp.fr                      *
 ;       ***************************************************************
 
+(unless (member :mk-defsystem *features*) ($load "lisp-utils/defsystem.lisp"))
+
 (load ($file_search "sym.system"))
 (mk:compile-system "sym")

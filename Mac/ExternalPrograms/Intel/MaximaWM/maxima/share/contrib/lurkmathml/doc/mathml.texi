@@ -1,0 +1,386 @@
+\input texinfo
+@c %**start of header
+@setfilename mathml.info
+@settitle Package mathml
+
+@ifinfo
+@macro var {expr}
+<\expr\>
+@end macro
+@end ifinfo
+@c %**end of header
+
+@dircategory Mathematics/Maxima
+@direntry
+* Package mathml: (maxima)Maxima share package mathml to generate Presentation MathML.
+@end direntry
+
+@menu
+* Definitions for package mathml::
+@end menu
+
+@node Top, , (dir), (dir)
+@top
+@menu
+* Package mathml::
+* Function and variable index::
+@end menu
+
+@node  Package mathml, Function and variable index, Top, Top
+@chapter Package mathml
+
+The @code{mathml} package is designed to convert a Maxima expression
+into Presentation MathML, version 2.0.
+
+@menu
+* Definitions for package mathml::
+@end menu
+
+@node Definitions for package mathml,  , Package mathml, Package mathml
+@section Definitions for package mathml
+
+@anchor{mathml}
+@deffn {Function} mathml
+@*mathml (@var{expr}) @
+@*mathml (@var{expr}, @var{filename_or_false}) @
+@*mathml (@var{label}, @var{filename_or_false})
+
+Convert an expression to Presentation MathML (version 2).
+
+When the first argument is a label,
+the label and its associated value are printed verbatim,
+not typeset as MathML.
+
+When the optional argument @var{filename_or_false} is supplied, any
+output will be appended to the file, unless it is @code{false}, in which
+case the output is returned as a string.
+
+@code{load("mathml");} loads this package.
+
+Examples:
+
+@c ===beg===
+@c load(mathml) $
+@c mathml (integrate (sin(x), x));
+@c integrate (1/(1 + x^3), x);
+@c mathml (%i3);
+@c mathml (%o3);
+@c mathml (''%o3);
+@c mathml (''%o3, "/tmp/tmp.xml");
+@c mathml (''%o3, false);
+@c ===end===
+@ifnothtml
+@example
+(%i1) load(mathml) $
+(%i2) mathml (integrate (sin(x), x));
+ <math xmlns="http://www.w3.org/1998/Math/MathML"> <mo>-</mo>
+ <mi>cos</mi> <mi>x</mi> </math>
+(%o2)                           false
+(%i3) integrate (1/(1 + x^3), x);
+                                     2 x - 1
+                   2            atan(───────)
+              log(x  - x + 1)        sqrt(3)    log(x + 1)
+(%o3)       - ─────────────── + ───────────── + ──────────
+                     6             sqrt(3)          3
+(%i4) mathml (%i3);
+<pre>
+(%i3) integrate(1/(x^3+1),x);
+</pre>
+(%o4)                            %i3
+(%i5) mathml (%o3);
+<pre>
+(%o3) -(log(x^2-x+1)/6)+atan((2*x-1)/sqrt(3))/sqrt(3)+log(x+1)/3;
+</pre>
+(%o5)                            %o3
+(%i6) mathml (''%o3);
+ <math xmlns="http://www.w3.org/1998/Math/MathML"> <mo>-</mo>
+ <mfrac><mrow><mi>log</mi> <mrow><mo>(</mo><msup><mrow><mi>x</mi>
+ </mrow> <mn>2</mn> </msup> <mo>-</mo> <mi>x</mi> <mo>+</mo>
+ <mn>1</mn> <mo>)</mo></mrow> </mrow> <mrow><mn>6</mn>
+ </mrow></mfrac> <mo>+</mo> <mfrac><mrow><mi>arctan</mi>
+ <mrow><mo>(</mo><mfrac><mrow><mn>2</mn>
+ <mspace width="0.16666667em"/><mi>x</mi> <mo>-</mo> <mn>1</mn>
+ </mrow> <mrow><msqrt><mn>3</mn> </msqrt></mrow></mfrac>
+ <mo>)</mo></mrow> </mrow> <mrow><msqrt><mn>3</mn> </msqrt>
+ </mrow></mfrac> <mo>+</mo> <mfrac><mrow><mi>log</mi>
+ <mrow><mo>(</mo><mi>x</mi> <mo>+</mo> <mn>1</mn> <mo>)</mo></mrow>
+ </mrow> <mrow><mn>3</mn> </mrow></mfrac> </math>
+(%o6)                           false
+(%i7) mathml (''%o3, "/tmp/tmp.xml");
+(%o7)                           false
+(%i8) mathml (''%o3, false);
+(%o8)
+ <math xmlns="http://www.w3.org/1998/Math/MathML"> <mo>-</mo>
+ <mfrac><mrow><mi>log</mi> <mrow><mo>(</mo><msup><mrow><mi>x</mi>
+ </mrow> <mn>2</mn> </msup> <mo>-</mo> <mi>x</mi> <mo>+</mo>
+ <mn>1</mn> <mo>)</mo></mrow> </mrow> <mrow><mn>6</mn>
+ </mrow></mfrac> <mo>+</mo> <mfrac><mrow><mi>arctan</mi>
+ <mrow><mo>(</mo><mfrac><mrow><mn>2</mn>
+ <mspace width="0.16666667em"/><mi>x</mi> <mo>-</mo> <mn>1</mn>
+ </mrow> <mrow><msqrt><mn>3</mn> </msqrt></mrow></mfrac>
+ <mo>)</mo></mrow> </mrow> <mrow><msqrt><mn>3</mn> </msqrt>
+ </mrow></mfrac> <mo>+</mo> <mfrac><mrow><mi>log</mi>
+ <mrow><mo>(</mo><mi>x</mi> <mo>+</mo> <mn>1</mn> <mo>)</mo></mrow>
+ </mrow> <mrow><mn>3</mn> </mrow></mfrac> </math>
+@end example
+@end ifnothtml
+@ifhtml
+@html
+<pre class='input'>
+(%i1) load(mathml) $
+(%i2) mathml (integrate (sin(x), x));
+</pre>
+<pre class='xmloutput'>
+ &#x3c;math xmlns="http://www.w3.org/1998/Math/MathML"> &#x3c;mo>-&#x3c;/mo>
+ &#x3c;mi>cos&#x3c;/mi> &#x3c;mi>x&#x3c;/mi> &#x3c;/math>
+</pre>
+ <br/><span> &#x21e8; </span>
+ <math xmlns="http://www.w3.org/1998/Math/MathML"> <mo>-</mo>
+ <mi>cos</mi> <mi>x</mi> </math>
+<pre class='output'>
+(%o2)                           false
+</pre>
+@end html
+@html
+<pre class='input'>
+(%i3) integrate (1/(1 + x^3), x);
+</pre>
+<pre class='output'>
+                                     2 x - 1
+                   2            atan(───────)
+              log(x  - x + 1)        sqrt(3)    log(x + 1)
+(%o3)       - ─────────────── + ───────────── + ──────────
+                     6             sqrt(3)          3
+</pre>
+@end html
+@html
+<pre class='input'>
+(%i4) mathml (%i3);
+</pre>
+@end html
+@example
+<pre>
+(%i3) integrate(1/(x^3+1),x);
+</pre>
+@end example
+@html
+<pre class='output'>
+(%o4)                            %i3
+</pre>
+<pre class='input'>
+(%i5) mathml (%o3);
+</pre>
+@end html
+@example
+<pre>
+(%o3) -(log(x^2-x+1)/6)+atan((2*x-1)/sqrt(3))/sqrt(3)+log(x+1)/3;
+</pre>
+@end example
+@html
+<pre class='output'>
+(%o5)                            %o3
+</pre>
+<pre class='input'>
+(%i6) mathml (''%o3);
+</pre>
+<pre class='xmloutput'>
+ &#x3c;math xmlns="http://www.w3.org/1998/Math/MathML"> &#x3c;mo>-&#x3c;/mo>
+ &#x3c;mfrac>&#x3c;mrow>&#x3c;mi>log&#x3c;/mi> &#x3c;mrow>&#x3c;mo>(&#x3c;/mo>&#x3c;msup>&#x3c;mrow>&#x3c;mi>x&#x3c;/mi>
+ &#x3c;/mrow> &#x3c;mn>2&#x3c;/mn> &#x3c;/msup> &#x3c;mo>-&#x3c;/mo> &#x3c;mi>x&#x3c;/mi> &#x3c;mo>+&#x3c;/mo>
+ &#x3c;mn>1&#x3c;/mn> &#x3c;mo>)&#x3c;/mo>&#x3c;/mrow> &#x3c;/mrow> &#x3c;mrow>&#x3c;mn>6&#x3c;/mn>
+ &#x3c;/mrow>&#x3c;/mfrac> &#x3c;mo>+&#x3c;/mo> &#x3c;mfrac>&#x3c;mrow>&#x3c;mi>arctan&#x3c;/mi>
+ &#x3c;mrow>&#x3c;mo>(&#x3c;/mo>&#x3c;mfrac>&#x3c;mrow>&#x3c;mn>2&#x3c;/mn>
+ &#x3c;mspace width="0.16666667em"/>&#x3c;mi>x&#x3c;/mi> &#x3c;mo>-&#x3c;/mo> &#x3c;mn>1&#x3c;/mn>
+ &#x3c;/mrow> &#x3c;mrow>&#x3c;msqrt>&#x3c;mn>3&#x3c;/mn> &#x3c;/msqrt>&#x3c;/mrow>&#x3c;/mfrac>
+ &#x3c;mo>)&#x3c;/mo>&#x3c;/mrow> &#x3c;/mrow> &#x3c;mrow>&#x3c;msqrt>&#x3c;mn>3&#x3c;/mn> &#x3c;/msqrt>
+ &#x3c;/mrow>&#x3c;/mfrac> &#x3c;mo>+&#x3c;/mo> &#x3c;mfrac>&#x3c;mrow>&#x3c;mi>log&#x3c;/mi>
+ &#x3c;mrow>&#x3c;mo>(&#x3c;/mo>&#x3c;mi>x&#x3c;/mi> &#x3c;mo>+&#x3c;/mo> &#x3c;mn>1&#x3c;/mn> &#x3c;mo>)&#x3c;/mo>&#x3c;/mrow>
+ &#x3c;/mrow> &#x3c;mrow>&#x3c;mn>3&#x3c;/mn> &#x3c;/mrow>&#x3c;/mfrac> &#x3c;/math>
+</pre>
+ <br/><span> &#x21e8; </span>
+ <math xmlns="http://www.w3.org/1998/Math/MathML"> <mo>-</mo>
+ <mfrac><mrow><mi>log</mi> <mrow><mo>(</mo><msup><mrow><mi>x</mi>
+ </mrow> <mn>2</mn> </msup> <mo>-</mo> <mi>x</mi> <mo>+</mo>
+ <mn>1</mn> <mo>)</mo></mrow> </mrow> <mrow><mn>6</mn>
+ </mrow></mfrac> <mo>+</mo> <mfrac><mrow><mi>arctan</mi>
+ <mrow><mo>(</mo><mfrac><mrow><mn>2</mn>
+ <mspace width="0.16666667em"/><mi>x</mi> <mo>-</mo> <mn>1</mn>
+ </mrow> <mrow><msqrt><mn>3</mn> </msqrt></mrow></mfrac>
+ <mo>)</mo></mrow> </mrow> <mrow><msqrt><mn>3</mn> </msqrt>
+ </mrow></mfrac> <mo>+</mo> <mfrac><mrow><mi>log</mi>
+ <mrow><mo>(</mo><mi>x</mi> <mo>+</mo> <mn>1</mn> <mo>)</mo></mrow>
+ </mrow> <mrow><mn>3</mn> </mrow></mfrac> </math>
+<pre class='output'>
+(%o6)                           false
+</pre>
+<pre class='input'>
+(%i7) mathml (''%o3, "/tmp/tmp.xml");
+</pre>
+<pre class='output'>
+(%o7)                           false
+</pre>
+<pre class='input'>
+(%i8) mathml (''%o3, false);
+</pre>
+<pre class='output'>
+(%o8)
+ &#x3c;math xmlns="http://www.w3.org/1998/Math/MathML"> &#x3c;mo>-&#x3c;/mo>
+ &#x3c;mfrac>&#x3c;mrow>&#x3c;mi>log&#x3c;/mi> &#x3c;mrow>&#x3c;mo>(&#x3c;/mo>&#x3c;msup>&#x3c;mrow>&#x3c;mi>x&#x3c;/mi>
+ &#x3c;/mrow> &#x3c;mn>2&#x3c;/mn> &#x3c;/msup> &#x3c;mo>-&#x3c;/mo> &#x3c;mi>x&#x3c;/mi> &#x3c;mo>+&#x3c;/mo>
+ &#x3c;mn>1&#x3c;/mn> &#x3c;mo>)&#x3c;/mo>&#x3c;/mrow> &#x3c;/mrow> &#x3c;mrow>&#x3c;mn>6&#x3c;/mn>
+ &#x3c;/mrow>&#x3c;/mfrac> &#x3c;mo>+&#x3c;/mo> &#x3c;mfrac>&#x3c;mrow>&#x3c;mi>arctan&#x3c;/mi>
+ &#x3c;mrow>&#x3c;mo>(&#x3c;/mo>&#x3c;mfrac>&#x3c;mrow>&#x3c;mn>2&#x3c;/mn>
+ &#x3c;mspace width="0.16666667em"/>&#x3c;mi>x&#x3c;/mi> &#x3c;mo>-&#x3c;/mo> &#x3c;mn>1&#x3c;/mn>
+ &#x3c;/mrow> &#x3c;mrow>&#x3c;msqrt>&#x3c;mn>3&#x3c;/mn> &#x3c;/msqrt>&#x3c;/mrow>&#x3c;/mfrac>
+ &#x3c;mo>)&#x3c;/mo>&#x3c;/mrow> &#x3c;/mrow> &#x3c;mrow>&#x3c;msqrt>&#x3c;mn>3&#x3c;/mn> &#x3c;/msqrt>
+ &#x3c;/mrow>&#x3c;/mfrac> &#x3c;mo>+&#x3c;/mo> &#x3c;mfrac>&#x3c;mrow>&#x3c;mi>log&#x3c;/mi>
+ &#x3c;mrow>&#x3c;mo>(&#x3c;/mo>&#x3c;mi>x&#x3c;/mi> &#x3c;mo>+&#x3c;/mo> &#x3c;mn>1&#x3c;/mn> &#x3c;mo>)&#x3c;/mo>&#x3c;/mrow>
+ &#x3c;/mrow> &#x3c;mrow>&#x3c;mn>3&#x3c;/mn> &#x3c;/mrow>&#x3c;/mfrac> &#x3c;/math>
+</pre>
+@end html
+@end ifhtml
+
+The difference between the results of input line 6 versus 8 is the value
+of @code{%o8} is bound to the string of MathML markup, while @code{%o6}
+is @code{false} and the MathML markup has been printed to the terminal.
+@end deffn
+
+@anchor{mathml_non_numeric_subscripts}
+@defvr {Option variable} mathml_non_numeric_subscripts
+Default value: @code{false}
+
+When @code{mathml_non_numeric_subscripts} is @code{true} and @code{mathml_underscore_is_subscript}, an underscore is treated as a subscript unconditionally.
+The default is that only substrings of digits are subscripts.
+
+@c ===beg===
+@c load(mathml) $
+@c (mathml_non_numeric_subscripts:false, mathml_underscore_is_subscript:true) $
+@c mathml(a_variable_name);
+@c mathml(a_variable_name_1_2);
+@c mathml_non_numeric_subscripts:true $
+@c mathml(a_variable_name);
+@c mathml(a_variable_name_1_2);
+@c ===end===
+@example
+(%i1) load(mathml) $
+(%i2) (mathml_non_numeric_subscripts:false, mathml_underscore_is_subscript:true) $
+(%i3) mathml(a_variable_name);
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <mi>a_variable_name</mi>  </math>
+(%o3)                           false
+(%i4) mathml(a_variable_name_1_2);
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>a_variable_name</mi> <msub><mi> 1 </mi> <mi> 2 </mi>   </msub></msub></math>
+(%o4)                           false
+(%i5) mathml_non_numeric_subscripts:true $
+(%i6) mathml(a_variable_name);
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>a</mi> <msub><mi> variable </mi> <mi> name </mi>   </msub></msub></math>
+(%o6)                           false
+(%i7) mathml(a_variable_name_1_2);
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>a</mi> <msub><mi> variable </mi> <msub><mi> name </mi> <msub><mi> 1 </mi> <mi> 2 </mi>   </msub></msub></msub></msub></math>
+@end example
+@end defvr
+
+@anchor{mathml_underscore_is_subscript}
+@defvr {Option variable} mathml_underscore_is_subscript
+Default value: @code{false}
+
+When @code{mathml_non_numeric_subscripts} is @code{true}. In this case,
+when @code{mathml_underscore_is_subscript} is @code{false},
+@code{mathml} treats an underscore as part of a symbol and only trailing
+digits in the symbol name are treated as subscripts; when @code{true},
+all underscores in a symbol name are treated as if they begin a
+subscript; otherwise, when @code{mathml_underscore_is_subscript} is a
+positive integer @var{n}, the first @var{n} underscores in a symbol name
+(counting from the right) are treated as subscripts and any remaining
+subscripts are treated as ordinary characters.
+
+When @code{mathml_non_numeric_subscripts} is @code{false}, the above
+description is accurate for the right-most part of the symbol name that
+contains only digits and underscores (compare the lines following
+@code{%i4} and @code{%i7} in the above example).
+
+@c ===beg===
+@c load(mathml) $
+@c mathml_underscore_is_subscript:false $
+@c mathml(x_1);
+@c mathml_underscore_is_subscript:1 $
+@c mathml(x_1);
+@c mathml(x_1_2);
+@c ===end===
+@ifnothtml
+@example
+(%i1) load(mathml) $
+(%i2) mathml_underscore_is_subscript:false $
+(%i3) mathml(x_1);
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>x_</mi> <mn>1</mn></msub> </math>
+(%o3)                           false
+(%i4) mathml_underscore_is_subscript:1 $
+(%i5) mathml(x_1);
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>x</mi> <mi> 1 </mi>   </msub></math>
+(%o5)                           false
+(%i6) mathml(x_1_2);
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>x_1</mi> <mi> 2 </mi>   </msub></math>
+@end example
+@end ifnothtml
+@ifhtml
+@html
+<pre class='input'>
+(%i1) load(mathml) $
+(%i2) mathml_underscore_is_subscript:false $
+(%i3) mathml(x_1);
+</pre>
+@end html
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>x_</mi> <mn>1</mn></msub> </math>
+@html
+ <br/><span> &#x21e8; </span>
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>x_</mi> <mn>1</mn></msub> </math>
+<pre class='output'>
+(%o3)                           false
+</pre>
+<pre class='input'>
+(%i4) mathml_underscore_is_subscript:1 $
+(%i5) mathml(x_1);
+</pre>
+@end html
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>x</mi> <mi> 1 </mi>   </msub></math>
+@html
+ <br/><span> &#x21e8; </span>
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>x</mi> <mi> 1 </mi>   </msub></math>
+<pre class='output'>
+(%o5)                           false
+</pre>
+<pre class='input'>
+(%i6) mathml(x_1_2);
+</pre>
+@end html
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>x_1</mi> <mi> 2 </mi>   </msub></math>
+@html
+ <br/><span> &#x21e8; </span>
+ <math xmlns="http://www.w3.org/1998/Math/MathML">
+ <msub><mi>x_1</mi> <mi> 2 </mi>   </msub></math>
+@end html
+@end ifhtml
+@end defvr
+
+@node Function and variable index,  , Package mathml, Top
+@appendix Function and variable index
+@printindex fn
+@printindex vr
+
+@bye
+
+@c Local Variables:
+@c mode: texinfo
+@c TeX-master: t
+@c End:

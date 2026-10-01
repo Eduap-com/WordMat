@@ -44,7 +44,7 @@
  		       								 
   You should have received a copy of the GNU General Public License	
   along with this program; if not, write to the Free Software 		 
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 */
 
 put('ode1_abel,001,'version)$
@@ -235,7 +235,7 @@ ode1_abel_relative_invariant_zero(f0,f1,f2,f3,y,x) := block(
 
    when invariant s3 is constant (following Schwarz)
 
-   Note: Sign of coefficents has just changed from Schwarz
+   Note: Sign of coefficients has just changed from Schwarz
 
  */
 ode1_abel_relative_invariant_nonzero(f0,f1,f2,f3,y,x) := block(

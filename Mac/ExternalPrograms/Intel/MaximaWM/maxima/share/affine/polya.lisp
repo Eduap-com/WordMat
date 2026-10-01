@@ -182,7 +182,7 @@
 
 (defun convert-polynomial-to-vector (polynomial hash-table &optional last-column-number parts-of-monomial)
   "Returns the row corresponding to the polynomial and the new last-column-number.
-   The first argument is a regualar macsyma polynomial in expanded form as returned
+   The first argument is a regular macsyma polynomial in expanded form as returned
    by Expand(polynomial);. The second argument is the hash-table, and the last is the
    number of entries in the hash table."
   (let* ((terms (list-terms polynomial))
@@ -1682,9 +1682,8 @@ dot_products, much the same as can be obtained by doing $dotsimp")
   (cons '(mlist simp) answer))))
 
 (eval-when
-    #+gcl (load  compile)
-    #-gcl (:load-toplevel :compile-toplevel)
-    (defvar $poly_vector (make-polynomial-vectors)))
+    (:load-toplevel :compile-toplevel)
+  (defvar $poly_vector (make-polynomial-vectors)))
 
 (defvar $type_of_entries_for_poly_vector :any-macsyma)
 

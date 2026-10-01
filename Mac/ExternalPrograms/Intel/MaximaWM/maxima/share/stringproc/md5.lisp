@@ -39,7 +39,7 @@
    (%o6)           ab:07:ac:bb:1e:49:68:01:93:7a:df:a7:72:42:4b:f7
 
    Note that in case the string contains German umlauts or other non-ASCII 
-   characters the md5 checksum is platform dependend.
+   characters the md5 checksum is platform dependent.
    
    To check the md5sum of a *small* file the file can be streamed into a string.
 
@@ -76,10 +76,9 @@
 (in-package :maxima)
 
 (eval-when
-  #+gcl (compile eval)
-  #-gcl (:compile-toplevel :execute)
-    (defvar old-ibase-md5 *read-base*)
-    (setq *read-base* 10.) )
+    (:compile-toplevel :execute)
+  (defvar old-ibase-md5 *read-base*)
+  (setq *read-base* 10.) )
 
 
 (defvar *h5* nil)
@@ -178,6 +177,32 @@
       (md5-final nil -1 len) )))
 
 
+(defun md5sum-return (rtype)
+  (cond
+    ((equal rtype '$list)
+      (cons '(mlist simp)
+        (reduce #'nconc (mapcar #'word-to-octets *h5*)) ))
+    ((equal rtype '$number)
+      (reduce #'(lambda (x y) (logior (ash x 32.) y)) *h5*) )
+    ((equal rtype '$string)
+      (nstring-downcase (format nil "~{~8,'0x~}" *h5*)) )
+    (t  
+      (gf-merror (intl:gettext 
+        "`md5sum': Optional argument must be 'list, 'number or 'string." )))))
+
+(defun md5sum-stream (s rtype)
+  (setq *h5* '(#x67452301 #xefcdab89 #x98badcfe #x10325476))
+  (let ((bytes (make-list 64.)) (len 0))
+    (do
+      ((len-1 (read-sequence bytes s)))
+      ((< len-1 64.) (md5-final (butlast bytes (- (length bytes) len-1)) len-1 (+ len len-1)))
+      (md5-update bytes)
+      (setq len (+ len len-1))
+      (setq len-1 (read-sequence bytes s))))
+
+  (setq *h5* (mapcar #'swap-endian32 *h5*))
+  (md5sum-return rtype))
+
 (defmfun $md5sum (s &optional (rtype '$string))
   (let (bytes len)
     (cond
@@ -187,9 +212,11 @@
         (setq bytes (number-to-octets s)) )
       (($listp s)
         (setq bytes (cdr s)) )
+      ((streamp s)
+       (return-from md5sum-impl (md5sum-stream s rtype)))
       (t 
         (gf-merror (intl:gettext 
-          "`md5sum': Argument must be a string, a non-negative integer or a list of octets." ))))
+          "`md5sum': Argument must be a string, non-negative integer, list of octets, or stream." ))))
     (setq len (length bytes) 
           *h5* '(#x67452301 #xefcdab89 #x98badcfe #x10325476) )
     (do ((off len)) 
@@ -198,20 +225,8 @@
       (md5-update (butlast bytes off))
       (setq bytes (last bytes off)) )
     (setq *h5* (mapcar #'swap-endian32 *h5*))
-    (cond
-      ((equal rtype '$list)
-        (cons '(mlist simp)
-          (reduce #'nconc (mapcar #'word-to-octets *h5*)) ))
-      ((equal rtype '$number)
-        (reduce #'(lambda (x y) (logior (ash x 32.) y)) *h5*) )
-      ((equal rtype '$string)
-        (nstring-downcase (format nil "~{~8,'0x~}" *h5*)) )
-      (t  
-        (gf-merror (intl:gettext 
-          "`md5sum': Optional argument must be 'list, 'number or 'string." ))))))
-
+    (md5sum-return rtype)))
 
 (eval-when
-  #+gcl (compile eval)
-  #-gcl (:compile-toplevel :execute)
-    (setq *read-base* old-ibase-md5) )
+    (:compile-toplevel :execute)
+  (setq *read-base* old-ibase-md5) )

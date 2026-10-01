@@ -17,7 +17,7 @@
 
   You should have received a copy of the GNU General Public License	
   along with this program; if not, write to the Free Software 		 
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 */
 
 if get('ode1_nonlinear,'version)=false then
@@ -208,7 +208,7 @@ ode_check(e_,a_) := block(
 )$
 
 /* Attempt to simplify the result from ode_check() */
-ode_check_tidy(e) := block(
+ode_check_tidy(e) := block(local(f),
   for f in ['bessel_simplify, 'expintegral_e_simplify,'ode_trig_simp]
   do 
     (if (f(e)=0) then return(e:0)),
@@ -218,7 +218,7 @@ ode_check_tidy(e) := block(
 /*  This Bessel function simplification code can be improved,
     but is does work well on the contrib_ode testsuite.
 */
-bessel_simplify(e) := block(
+bessel_simplify(e) := block(local(f),
  for f in ['besksimp, 'besisimp, 'besysimp, 'besjsimp, 
            'hankel1simp, 'hankel2simp, 'struvehsimp, 'struvelsimp]
  do
@@ -245,7 +245,7 @@ besFsimp(ex,F,Fsub) := block([arglist,ords,ord2,max,min,s,t,u,m,n,x,e:ex],
   argset:equiv_classes(argset,lambda([x,y],
     (second(x)=second(y)) and integerp(ratsimp(first(x)-first(y))))),
 
-  /* Iterate over each equivalance class */
+  /* Iterate over each equivalence class */
 
   for s in argset do (
     x:second(first(s)),  /* The common argument for s */
@@ -360,7 +360,7 @@ expintegral_e_simplify(ex) := block( [argset],
   argset:equiv_classes(argset,
            lambda([x,y], integerp(x[1]-y[1]) and (second(x)=second(y)))),
 
-  /* Iterate over each equivalance class */
+  /* Iterate over each equivalence class */
   for s in argset do block( [z, ords],
     z:second(first(s)),  /* The common argument for s */
     ords:map('first,s),  /* List of orders */
