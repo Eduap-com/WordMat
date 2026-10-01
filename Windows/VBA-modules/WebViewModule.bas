@@ -161,8 +161,11 @@ Function ExecuteGeoGebraCasCommand(CmdString As String, Optional UseDefs As Bool
     End If
     
     cmd = Left(cmd, Len(cmd) - 1)
-    
-    If QActivePartnership And GetMacArch <> "intel" Then
+#If Mac Then
+    If QActivePartnership And GetMacArch() <> "Intel" Then
+#Else
+    If QActivePartnership Then
+#End If
         res = QExecuteGeoGebraCAScommand(cmd)
         If res = "ScriptError" Then GoTo hop
     Else
