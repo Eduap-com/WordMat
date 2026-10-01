@@ -89,20 +89,20 @@ Dim i As Integer, c As Integer
             SelectedVar = Svars(ListBox_vars.ListIndex)
     '        SelectedVar = ListBox_vars.value
         Else
-            SelectedVar = TextBox_variabel.text
+            SelectedVar = omax.CodeForMaxima(TextBox_variabel.text)
         End If
     Else
         For i = 0 To ListBox_vars.ListCount - 1
             If ListBox_vars.Selected(i) Then
     '            SelectedVar = SelectedVar & ListBox_vars.List(i) & ","
-                SelectedVar = SelectedVar & Svars(i) & ","
+                SelectedVar = omax.CodeForMaxima(TextBox_variabel.text) & Svars(i) & ","
                 c = c + 1
             End If
         Next
         If Len(TextBox_variabel.text) > 0 Then
             Arr = Split(TextBox_variabel.text, ",")
             For i = 0 To UBound(Arr)
-                    SelectedVar = SelectedVar & Arr(i) & ","
+                    SelectedVar = SelectedVar & omax.CodeForMaxima(Arr(i)) & ","
                     c = c + 1
             Next
         End If

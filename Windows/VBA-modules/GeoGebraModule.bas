@@ -56,7 +56,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     On Error GoTo fejl
 
     TempCas = CASengine
-    CASengineTempOnly = 1
+    CASengineTempOnly = 2
 
     PrepareMaxima ' finds definitions
     
@@ -102,7 +102,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
         Next
 
         ' define variables that are not defined
-        omax.FindVariable
+        omax.FindVariable CAStype:=2
         ea.text = DefList
         For i = 0 To sl.Length - 1
             fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
@@ -657,7 +657,11 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
 
     '  text = Replace(text, "log", "lg")
     If ConvertMaxima Then
-        text = omax.CodeForMaxima(text, 1) ' CASengine
+        If CASJS Then
+            text = omax.CodeForMaxima(text, 1) ' CASengine
+        Else
+            text = omax.CodeForMaxima(text, 2) ' for graphing
+        End If
     End If
 
     'greek letters

@@ -722,11 +722,12 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
 Install2:
             On Error GoTo fejl
             MsgBox2 TT.A(21) & News & vbCrLf & TT.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, TT.A(23)
-            If TT.LangNo = 1 Then
-                OpenLink "https://www.eduap.com/da/wordmat/"
-            Else
-                OpenLink "https://www.eduap.com/wordmat/"
-            End If
+            OpenLink "https://www.wordmat.dk"
+'            If TT.LangNo = 1 Then
+'                OpenLink "https://www.eduap.com/da/wordmat/"
+'            Else
+'                OpenLink "https://www.eduap.com/wordmat/"
+'            End If
         End If
     Else
         If Not RunSilent Then
@@ -751,11 +752,12 @@ Install2:
 fejl:
     If Not RunSilent Then
         If MsgBox2(TT.A(581) & AppVersion, vbOKCancel, TT.Error) = vbOK Then
-            If TT.LangNo = 1 Then
-                OpenLink "https://www.eduap.com/da/wordmat/"
-            Else
-                OpenLink "https://www.eduap.com/wordmat/"
-            End If
+            OpenLink "https://www.wordmat.dk"
+'            If TT.LangNo = 1 Then
+'                OpenLink "https://www.eduap.com/da/wordmat/"
+'            Else
+'                OpenLink "https://www.eduap.com/wordmat/"
+'            End If
         End If
     End If
 slut:

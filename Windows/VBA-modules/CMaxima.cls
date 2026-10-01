@@ -3072,6 +3072,7 @@ Function CodeForMaxima(ByVal text As String, Optional CAStype As Integer = 0) As
     If InStr(ea.text, "cos^(-1)") <> 0 Then ea.text = Replace(ea.text, "cos^(-1)", "acos")
     If InStr(ea.text, "sin^(-1)") <> 0 Then ea.text = Replace(ea.text, "sin^(-1)", "asin")
     If InStr(ea.text, "tan^(-1)") <> 0 Then ea.text = Replace(ea.text, "tan^(-1)", "atan")
+    If InStr(ea.text, "erf^(-1)") <> 0 Then ea.text = Replace(ea.text, "erf^(-1)", "inverse_erf")
 
     ea.ConvertTrigPow ("sin")    ' must be after inverse trig
     ea.ConvertTrigPow ("cos")
@@ -3360,8 +3361,10 @@ msat:
                     Else ' limit, but maybe also more?
                         If CAStype = 0 Then
                             text = Left$(text, pos - 1 - Len(F)) & "subst(" & Var & ",qkqg" & di & ",diff(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "))" & Right$(text, Len(text) - pos - varl - antalm)
-                        Else
+                        ElseIf CAStype = 1 Then ' geogebra cas
                             text = Left$(text, pos - 1 - Len(F)) & "Substitute(Derivative(" & F & "(qkqg" & di & "),qkqg" & di & "," & antalmS & "),qkqg" & di & "," & Var & ")" & Right$(text, Len(text) - pos - varl - antalm)
+                        Else ' geogebra graph does not support substitute
+                            text = Left$(text, pos - 1 - Len(F)) & "Derivative(" & F & "," & Var & "," & antalmS & ")" & Right$(text, Len(text) - pos - varl - antalm)
                         End If
                         di = di + 1
                     End If
@@ -4374,11 +4377,11 @@ Function ConvertToWordSymbols(ByVal text As String) As String
         Loop
     End If
 
-    ' maxima 5.47.1 vil write a minus bracket in some circumstances  -2*x  -> -(2*x)  but only for the first term. A litte uncertain if there can be situations where the bracket should not be removed
+    ' maxima 5.47.1 vil write a minus bracket in some circumstances  -2*x  -> -(2*x) mainly for the first term. Be careful that the removal of the bracket does not hit:  -(x-5)^2 or
     pos = InStr(ea.text, "-(")
     Do While pos <> 0
-        If pos = 1 Or ea.ChrByIndex(pos - 1) = "=" Then
-            ea.GetNextBracketContent (pos)
+        s = ea.GetNextBracketContent(pos)
+        If Not (InStr(s, "+") > 0 Or InStr(s, "-") > 0) Then ' check that the contents in the bracket does not have + or - that would be converted when bracket is liftet. This will not catch all cases where the bracket could be lifted, but better skip one. exampe: -(1/(a-b)) will not be lifted
             ea.text = Left$(ea.text, pos) & Mid$(ea.text, pos + 2, ea.pos - pos - 3) & Right$(ea.text, Len(ea.text) - ea.pos + 1)
         End If
         pos = InStr(pos + 1, ea.text, "-(")
@@ -4642,6 +4645,7 @@ Function ConvertToWordSymbols(ByVal text As String) As String
     ea.ReplaceVar "cosh", "cosh" & ChrW$(8289)
     ea.ReplaceVar "sinh", "sinh" & ChrW$(8289)
     ea.ReplaceVar "tanh", "tanh" & ChrW$(8289)
+    ea.ReplaceVar "inverse_erf ", "erf^(-1)" & ChrW$(8289)
     
     text = ReplaceFakeVarNamesBack(ea.text)    'Variables replaced to stop maxima output in reverse order
 

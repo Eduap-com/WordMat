@@ -286,6 +286,9 @@ Sub RunTestSequence()
     Selection.TypeText "solving systems of equations": Selection.TypeParagraph
     If TestSolve("(x-38)^2+(y-18)^2=" & ChrW$(12310) & "17,5" & ChrW$(12311) & "^2  " & ChrW$(8743) & "  (x-27)^2+(y-33)^2=" & ChrW$(12310) & "9,4" & ChrW$(12311) & "^2", "x", "(y=25,05068    " & ChrW$(8743) & "    x=21,9832)   " & ChrW$(8744) & "   (y=35,39542    " & ChrW$(8743) & "    x=36,08966)") Then GoTo slut
     If TestSolve("x^2+y^2-12x+2y=-33 " & ChrW$(8743) & "  x^2+y^2+2x-6y=26", "x", "[x]" & ChrW$(8712) & "" & ChrW$(8709)) Then GoTo slut
+    InsertTestMath "F(x)" & ChrW$(8797) & "" & ChrW$(8747) & "_(-" & ChrW$(8734) & ")^x" & ChrW$(9618) & "1/(" & ChrW$(8730) & "2" & ChrW$(960) & "" & ChrW$(183) & "" & ChrW$(963) & ")" & ChrW$(183) & "e^(-1/2" & ChrW$(183) & "((y-" & ChrW$(956) & ")/" & ChrW$(963) & ")^2 ) dy" ' normal distribution from two points
+    If TestSolve("F(1)=0,15   " & ChrW$(8743) & "   F(8)=0,95", "mu,sigma", ChrW$(956) & "=3,705803    " & ChrW$(8743) & "    " & ChrW$(963) & "=2,610687") Then GoTo slut
+    InsertSletDef
     
     MaximaComplex = True ' complex
     If TestSolve("x^2=-4", "x", "x=-2" & ChrW$(183) & "i    " & ChrW$(8744) & "    x=2" & ChrW$(183) & "i") Then GoTo slut
@@ -500,16 +503,20 @@ Sub RunTestSequence()
     If StopNow Then GoTo slut
     
     ' Differential equation test
-    If TestSolveDE("N^'=1/10500" & ChrW$(183) & "N" & ChrW$(183) & "(1000-N)", "N,x", "N=0    " & ChrW$(8744) & "    N=1000    " & ChrW$(8744) & "    N=1000/(e^(-((2" & ChrW$(183) & "x)/21) )" & ChrW$(183) & "c+1)") Then GoTo slut
+'    If TestSolveDE("N^'=1/10500" & ChrW$(183) & "N" & ChrW$(183) & "(1000-N)", "N,x", "N=0    " & ChrW$(8744) & "    N=1000    " & ChrW$(8744) & "    N=1000/(e^(-((2" & ChrW$(183) & "x)/21) )" & ChrW$(183) & "c+1)") Then GoTo slut ' med parentes om -()
+    If TestSolveDE("N^'=1/10500" & ChrW$(183) & "N" & ChrW$(183) & "(1000-N)", "N,x", "N=0    " & ChrW$(8744) & "    N=1000    " & ChrW$(8744) & "    N=1000/(e^(-(2" & ChrW$(183) & "x)/21)" & ChrW$(183) & "c+1)") Then GoTo slut
     If TestSolveDE("N^'=(0,025-0,0004t)" & ChrW$(183) & "N", "N,t", "N=e^(t/40-t^2/5000)" & ChrW$(183) & "c") Then GoTo slut
     If TestSolveDE("y^'+2x" & ChrW$(183) & "y=x", "y,x", "y=e^(-x^2 )" & ChrW$(183) & "c+1/2") Then GoTo slut
-'    If TestSolveDE("y^'+2x" & ChrW$(183) & "y=x", "y,x", "y=c" & ChrW$(183) & "e^(-x^2 )+1/2") Then GoTo slut
-    If TestSolveDE("L^'=k" & ChrW$(183) & "(100-L)", "L,x", "L=e^(-(k" & ChrW$(183) & "x) )" & ChrW$(183) & "c+100") Then GoTo slut
-    If TestSolveDE("2y^'+y^2-5y=0", "y,x", "y=0    " & ChrW$(8744) & "    y=5    " & ChrW$(8744) & "    y=5/(e^(-((5" & ChrW$(183) & "x)/2) )" & ChrW$(183) & "c+1)") Then GoTo slut
-    If TestSolveDE("y^'=5y" & ChrW$(183) & "(y+1)", "y,x", "y=0    " & ChrW$(8744) & "    y=-1    " & ChrW$(8744) & "    y=-1/(e^(-(5" & ChrW$(183) & "x) )" & ChrW$(183) & "c+1)") Then GoTo slut
-    If TestSolveDE("y^'=b" & ChrW$(183) & "y" & ChrW$(183) & "(b/a-y)", "y,x", "y=0    " & ChrW$(8744) & "    y=b/a    " & ChrW$(8744) & "    y=b/(e^(-((b^2" & ChrW$(183) & "x)/a) )" & ChrW$(183) & "c" & ChrW$(183) & "a+a)") Then GoTo slut
-    If TestSolveDE("N^'=0,00526" & ChrW$(183) & "N" & ChrW$(183) & "(209-N)", "N=30;x=103", "N=209/(e^(-(1,09934" & ChrW$(183) & "x) )" & ChrW$(183) & "8,948974" & ChrW$(183) & "10^49+1)") Then GoTo slut
-    If TestSolveDE("y^'=b" & ChrW$(183) & "y" & ChrW$(183) & "(M-y)", "y,x", "y=0    " & ChrW$(8744) & "    y=M    " & ChrW$(8744) & "    y=M/(e^(-(M" & ChrW$(183) & "b" & ChrW$(183) & "x) )" & ChrW$(183) & "c+1)") Then GoTo slut
+'    If TestSolveDE("L^'=k" & ChrW$(183) & "(100-L)", "L,x", "L=e^(-(k" & ChrW$(183) & "x) )" & ChrW$(183) & "c+100") Then GoTo slut
+    If TestSolveDE("L^'=k" & ChrW$(183) & "(100-L)", "L,x", "L=e^(-k" & ChrW$(183) & "x)" & ChrW$(183) & "c+100") Then GoTo slut
+'    If TestSolveDE("2y^'+y^2-5y=0", "y,x", "y=0    " & ChrW$(8744) & "    y=5    " & ChrW$(8744) & "    y=5/(e^(-((5" & ChrW$(183) & "x)/2) )" & ChrW$(183) & "c+1)") Then GoTo slut
+    If TestSolveDE("2y^'+y^2-5y=0", "y,x", "y=0    " & ChrW$(8744) & "    y=5    " & ChrW$(8744) & "    y=5/(e^(-(5" & ChrW$(183) & "x)/2)" & ChrW$(183) & "c+1)") Then GoTo slut
+'    If TestSolveDE("y^'=5y" & ChrW$(183) & "(y+1)", "y,x", "y=0    " & ChrW$(8744) & "    y=-1    " & ChrW$(8744) & "    y=-1/(e^(-(5" & ChrW$(183) & "x) )" & ChrW$(183) & "c+1)") Then GoTo slut
+    If TestSolveDE("y^'=5y" & ChrW$(183) & "(y+1)", "y,x", "y=0    " & ChrW$(8744) & "    y=-1    " & ChrW$(8744) & "    y=-(1/(e^(-5" & ChrW$(183) & "x)" & ChrW$(183) & "c+1))") Then GoTo slut
+'    If TestSolveDE("y^'=b" & ChrW$(183) & "y" & ChrW$(183) & "(b/a-y)", "y,x", "y=0    " & ChrW$(8744) & "    y=b/a    " & ChrW$(8744) & "    y=b/(e^(-((b^2" & ChrW$(183) & "x)/a) )" & ChrW$(183) & "c" & ChrW$(183) & "a+a)") Then GoTo slut
+    If TestSolveDE("y^'=b" & ChrW$(183) & "y" & ChrW$(183) & "(b/a-y)", "y,x", "y=0    " & ChrW$(8744) & "    y=b/a    " & ChrW$(8744) & "    y=b/(e^(-(b^2" & ChrW$(183) & "x)/a)" & ChrW$(183) & "c" & ChrW$(183) & "a+a)") Then GoTo slut
+    If TestSolveDE("N^'=0,00526" & ChrW$(183) & "N" & ChrW$(183) & "(209-N)", "N=30;x=103", "N=209/(e^(-1,09934" & ChrW$(183) & "x)" & ChrW$(183) & "8,948974" & ChrW$(183) & "10^49+1)") Then GoTo slut
+    If TestSolveDE("y^'=b" & ChrW$(183) & "y" & ChrW$(183) & "(M-y)", "y,x", "y=0    " & ChrW$(8744) & "    y=M    " & ChrW$(8744) & "    y=M/(e^(-M" & ChrW$(183) & "b" & ChrW$(183) & "x)" & ChrW$(183) & "c+1)") Then GoTo slut
 
 '    Other ordering for these c*e^x not e^x*c
 '    TestSolveDE "N^'=1/10500" & ChrW$(183) & "N" & ChrW$(183) & "(1000-N)", "N,x", "N=0    " & ChrW$(8744) & "    N=1000    " & ChrW$(8744) & "    N=1000/(c" & ChrW$(183) & "e^(-((2" & ChrW$(183) & "x)/21) )+1)"
@@ -525,8 +532,9 @@ Sub RunTestSequence()
     If TestSolveDE("(y^' )^2+x" & ChrW$(183) & "y^'=0", "y,x", "y=c    " & ChrW$(8744) & "    y=c-x^2/2") Then GoTo slut
     ' particular solutions
     ' This has not previously given a solution. It was sorted out in ic1real when TESTTF found a small difference in the constants, and then thought it was a false solution. TestTF has now got numerical comparison
-    If TestSolveDE("p^'=0,015" & ChrW$(183) & "p^1,2", "p=5,28;x=0", "p=-1000000000000000/(243" & ChrW$(183) & "(x-238,9747)^5 )") Then GoTo slut
-
+'    If TestSolveDE("p^'=0,015" & ChrW$(183) & "p^1,2", "p=5,28;x=0", "p=-1000000000000000/(243" & ChrW$(183) & "(x-238,9747)^5 )") Then GoTo slut ' - bracket gone
+    If TestSolveDE("p^'=0,015" & ChrW$(183) & "p^1,2", "p=5,28;x=0", "p=-(1000000000000000/(243" & ChrW$(183) & "(x-238,9747)^5 ))") Then GoTo slut
+    
     ' This has previously given the wrong solution, as there are two solutions, but when the constant is inserted, only one fits.
     If TestSolveDE("(x+5)" & ChrW$(183) & "y^'=" & ChrW$(8730) & "y", "y=1;x=-4", "y=(ln" & ChrW$(8289) & "(|x+5|)+2)^2/4") Then GoTo slut
     

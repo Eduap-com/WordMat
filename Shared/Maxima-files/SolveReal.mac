@@ -4,7 +4,7 @@ factoring the input may yield different results. Factoring is only done using sq
 /*load(to_poly_solve)$*/
 
 simpsum:true$
-assume_pos:true$ /* avoids some questions about sign, but not all. noask.lisp is also used*/
+/* assume_pos:true$  avoids some questions about sign, but not all. noask.lisp is also used*/
 linel:800$ /*avoids linebreaks when using print on mac*/
 
 [packagefile:true,partswitch:true,domain:real]$
@@ -141,6 +141,12 @@ if z<-1/%e then return([]),if z<0 then return([solvar=-generalized_lambert_w(0,z
 solvar=-generalized_lambert_w(-1,z)/(aliznotzero*log(alizpositive))-aliznotx3/aliznotx4]),solvar=-lambert_w(z)/(aliznotzero*log(alizpositive))-aliznotx3/aliznotx4))$
 defrule(fracrule,aliznotx3*(alizx+aliznotx)/(alizx+aliznotx2),aliznotx3+aliznotx3*(aliznotx-aliznotx2)/(alizx+aliznotx2))$
 defrule(sqrtrul,(alizx)^(aliznat)-alizx2=0,(zout:alizx2^(1/aliznat)-alizx,if polynomialp(rationalize(zout),[solvar]) then (if evenp(1/aliznat) then assume(alizx>=0,alizx2>=0),[zout=0]) else (false)))$ /* This rule is pretty safe can solve sqrt(3x+9)=x+3. However it can be expanded to a more general rule. See dissolveradicals. */
+
+defrule(erfsolrule,erf(alizx)=aliz,(if constantp(aliz) then (if aliz<=-1 or aliz>=1 then ([]) else alizx=inverse_erf(aliz)) else (assume(aliz>-1 and aliz<1),alizx=inverse_erf(aliz))))$
+defrule(inverfsolrule,inverse_erf(alizx)=aliz,alizx=erf(aliz))$
+defrule(inderfundef,inverse_erf(alizillinvtrig),error("inverse_erf error."))$
+applyerfrule(exprq):=block([exprq2],flatten(exprq2:makelist(block([zxq2],zxq2:erfsolrule(zxq),if zxq2=false then return(zxq),zxq2),zxq,exprq)))$
+applyinverfrule(exprq):=block([exprq2],exprq2:makelist(block([zxq2],zxq2:inverfsolrule(zxq),if zxq2=false then return(zxq),zxq2),zxq,exprq))$
 
 integerfp(x) := (integerp(x) or (floatnump(x) and (x = float(round(x))))); /* expands integerp to also accept floats like 2.0*/
 
@@ -1055,6 +1061,8 @@ solverecursive(lignq,varq,condq):=block([solq],
 	solq:applyasinrule(solq),addsolstep(solq,"asinrule"),
 	solq:applyacosrule(solq),addsolstep(solq,"acosrule"),
 	solq:applyatanrule(solq),addsolstep(solq,"atanrule"), 
+	solq:applyerfrule(solq),addsolstep(solq,"erfrule"),
+	solq:applyinverfrule(solq),addsolstep(solq,"inverfrule"),
 	if SolveExact and length(ev(listofvars(solq),listconstvars=false))>1 then solq:DissolveRadicals(solq),
 	if solq#lignq then return(solverecursive(solq,varq,condq)),
 	solq:applysolvepoly(solq),addsolstep(solq,"solvepoly"),
@@ -1428,8 +1436,14 @@ nsolve([paramq]) := block(
 		qti2: elapsed_real_time(),
 		flen: slength(string(qfkt(qvar))),
 		if flen < 200 then errcatch(taylor(qfkt(qvar),qvar,1,3)), /* test run to get time, but not if very long*/
-		if ((elapsed_real_time() - qti2) < 0.005) and flen < 100 then (
+		if ((elapsed_real_time() - qti2) < 0.0005) and flen < 100 then (
 			taylororder: 20
+		)	
+		else if ((elapsed_real_time() - qti2) < 0.001) and flen < 100 then (
+			taylororder: 17
+		)
+		else if ((elapsed_real_time() - qti2) < 0.005) and flen < 100 then (
+			taylororder: 14
 		) else if ((elapsed_real_time() - qti2) < 0.03) and flen < 150 then (
 			taylororder: 10
 		) else if ((elapsed_real_time() - qti2) < 0.2) and flen < 200 then (
@@ -1438,7 +1452,15 @@ nsolve([paramq]) := block(
 			taylororder: 3
 		),
 		for i in [1,-1,10,-10,100,-100] do (
+			qti2: elapsed_real_time(),
 			ql: append(ql, errcatch(flatten(makelist(ev(realroots(ev(taylor(qfkt(qvar),qvar,i,taylororder),numer),qtol),float))))),
+			if ((elapsed_real_time() - qti2) > 1 and taylororder > 5) then (
+				taylororder: taylororder-3
+			) else if ((elapsed_real_time() - qti2) > 0.5  and taylororder > 4) then (
+				taylororder: taylororder-2
+			) else if ((elapsed_real_time() - qti2) > 0.2  and taylororder > 3) then (
+				taylororder: taylororder-1
+			),
 			if length(ql) >= 10 then return()
 		),
 		ql:flatten(ql),
@@ -1530,7 +1552,12 @@ find_root_safe(qfkt, qvar, a, b) := block([sol, fa, fb, fap, fbp],
 	sol: errcatch(bf_find_root(qfkt, qvar, a, b)),
 	if sol = [] then return([]),
 	sol: sol[1], 
-	if op2(sol) = 'bf_find_root then return([]),
+	if op2(sol) = 'bf_find_root then ( /* Example this will not eval in this function:  bf_find_root(-(1.0*erf((2.0e-6*(664961.0*sigma-2474850.0))/sigma))-0.84,sigma,2.1000000000000000888178419700125232338905334472656b0,2.2000000000000001776356839400250464677810668945313b0))*/
+		if b-a>2e-14 then (
+			sol: errcatch(find_root(qfkt, qvar, a, b)),
+			if op2(sol) = 'find_root then return([])
+		) else (return([]))  
+	),
 /*	fa: errcatch(qfkt(a)),
 	fb: errcatch(qfkt(b)), */
 	fap: errcatch(subst((sol - 10^-6),qvar,qfkt)),

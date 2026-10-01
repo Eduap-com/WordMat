@@ -1435,8 +1435,8 @@ Sub beregn()
     Dim fejlm As String, RemoveEqual As Boolean
     On Error GoTo fejl
    ' Application.ScreenUpdating = False
-    Dim Tid As Single
-    Tid = Timer
+'    Dim Tid As Single
+'    Tid = Timer
 #If Mac Then
     Dim D As Document
     Set D = ActiveDocument
@@ -1448,6 +1448,15 @@ Sub beregn()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
+    
+    If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
+        MsgBox TT.A(47), vbOKOnly, TT.Error
+        GoTo slut
+    End If
+    If Selection.OMaths.Count > 1 Then
+        MsgBox TT.A(149), vbOKOnly, TT.Error
+        GoTo slut
+    End If
     
     RunFirst
     
@@ -1476,14 +1485,6 @@ Sub beregn()
     omax.prevspr = ""
     
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
-    If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
-        MsgBox TT.A(47), vbOKOnly, TT.Error
-        GoTo slut
-    End If
-    If Selection.OMaths.Count > 1 Then
-        MsgBox TT.A(149), vbOKOnly, TT.Error
-        GoTo slut
-    End If
 
     If Selection.Font.ColorIndex = OutputColor Then
         Selection.OMaths(1).Range.Font.ColorIndex = wdAuto
