@@ -8,6 +8,7 @@ Private UserDir As String
 Private tmpdir As String
 Private PrevResultTimer As Single
 #If Mac Then
+Private MacArch As String
 #Else
 Private Declare PtrSafe Function InternetGetConnectedState Lib "wininet.dll" (ByRef dwFlags As Long, ByVal dwReserved As Long) As Long
 #End If
@@ -763,11 +764,19 @@ fejl:
 slut:
 
 End Sub
+#If Mac Then
+Function GetMacArch() As String
+    If MacArch = vbNullString Then
+        MacArch = RunScript("GetMacArch", vbNullString) ' Application.Run("RunScript", "GetMacArch", "")
+    Else
+        GetMacArch = MacArch
+    End If
+End Function
+#End If
 Function GetVersionStringFromServer(Servername As String, Partnership As Boolean) As String
 Dim s As String
 #If Mac Then
-    Dim MacArch As String
-    MacArch = RunScript("GetMacArch", vbNullString) ' Application.Run("RunScript", "GetMacArch", "")
+    MacArch = GetMacArch
     If MacArch = "Intel" Then
         If Partnership Then
 '            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacintelversionP.txt")
