@@ -48,7 +48,7 @@ Private Sub CommandButton_ok_Click()
 '    funk = "sqrt(fomd(x)^2 - y^2)"
 '    funk = funk & ",-(" & funk & ")"
         
-If Not CheckBox_linjer.Value Then
+If Not CheckBox_linjer.value Then
     grafobj = "palette=[""#55FF55"",""#5555FF"",""#222222""],enhanced3d=[x-z/10-y/10, x, y, z]," & grafobj
 End If
 If ComboBox_kvalitet.ListIndex = 0 Then 'super
@@ -60,7 +60,7 @@ ElseIf ComboBox_kvalitet.ListIndex = 2 Then ' high
 ElseIf ComboBox_kvalitet.ListIndex = 4 Then 'low
     grafobj = "x_voxel=5,y_voxel=5,z_voxel=5," & grafobj
 End If
-If CheckBox_grid.Value Then
+If CheckBox_grid.value Then
     grafobj = grafobj & "xaxis_width = 2,xaxis_color = blue,xaxis_type  = solid,xaxis=true,yaxis_width = 2,yaxis_color = orange,yaxis_type=solid,yaxis=true,zaxis_width = 2,zaxis_color = orange,zaxis_type=solid,zaxis=true,user_preamble = ""set xyplane at 0"","
 End If
 

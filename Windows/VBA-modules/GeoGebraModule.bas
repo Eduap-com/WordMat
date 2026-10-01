@@ -56,7 +56,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     On Error GoTo fejl
 
     TempCas = CASengine
-    CASengineTempOnly = 1
+    CASengineTempOnly = 2
 
     PrepareMaxima ' finds definitions
     
@@ -73,28 +73,36 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     End If
 
     If Gtype <> "CAS" Then
+        For i = 0 To omax.defindex - 1 'assumptions in the def list are added to preceding function. x^2, 0<x<3   combined into one definition
+            If i = 1 And (InStr(omax.DefName(i), "<") > 0 Or InStr(omax.DefName(i), ">") > 0) Then
+                omax.DefValue(i - 1) = omax.DefValue(i - 1) & ",(" & omax.DefName(i) & ")"
+            End If
+        Next
+        
         ' put definitions in the correct order
         For i = 0 To omax.defindex - 1
-            DefList = DefList & "," & omax.DefName(i)
-            ea.text = omax.DefValue(i)
-            Var = ea.GetNextVar
-            If Var = "" Then
-                sl.Add omax.DefName(i), omax.DefValue(i), 0
-            Else
-                k = 0
-                For j = 0 To sl.Length - 1
-                    ea.text = sl.GetVal(j)
-                    If ea.ContainsVar(omax.DefName(i)) Then
-                        Exit For
-                    End If
-                    k = k + 1
-                Next
-                sl.Add omax.DefName(i), omax.DefValue(i), k
+            If omax.DefName(i) <> vbNullString And omax.DefValue(i) <> vbNullString Then
+                DefList = DefList & "," & omax.DefName(i)
+                ea.text = omax.DefValue(i)
+                Var = ea.GetNextVar
+                If Var = "" Then
+                    sl.Add omax.DefName(i), omax.DefValue(i), 0
+                Else
+                    k = 0
+                    For j = 0 To sl.Length - 1
+                        ea.text = sl.GetVal(j)
+                        If ea.ContainsVar(omax.DefName(i)) Then
+                            Exit For
+                        End If
+                        k = k + 1
+                    Next
+                    sl.Add omax.DefName(i), omax.DefValue(i), k
+                End If
             End If
         Next
 
         ' define variables that are not defined
-        omax.FindVariable
+        omax.FindVariable CAStype:=2
         ea.text = DefList
         For i = 0 To sl.Length - 1
             fktudtryk = ReplaceIndepvarX(sl.GetVal(i))
@@ -142,7 +150,7 @@ Sub GeoGebraWeb(Optional Gtype As String = "", Optional CASfunc As String = "", 
     For i = 0 To omax.KommandoArrayLength
         Udtryk = omax.KommandoArray(i)
         s = Trim$(LCase$(Udtryk))
-        If Not (InStr(s, "definer:") > 0 Or InStr(s, "define:") > 0) Then
+        If Not (InStr(s, "definer:") > 0 Or InStr(s, "define:") > 0 Or InStr(s, ChrW$(8788)) > 0 Or InStr(s, ChrW$(8797)) > 0) Then  ' :=  \defeq
             '            Udtryk = Replace(Udtryk, "definer:", "")
             '            Udtryk = Replace(Udtryk, "Definer:", "")
             '            Udtryk = Replace(Udtryk, "define:", "")
@@ -649,7 +657,11 @@ Function ConvertToGeogebraSyntax(ByVal text As String, Optional ConvertMaxima As
 
     '  text = Replace(text, "log", "lg")
     If ConvertMaxima Then
-        text = omax.CodeForMaxima(text, 1) ' CASengine
+        If CASJS Then
+            text = omax.CodeForMaxima(text, 1) ' CASengine
+        Else
+            text = omax.CodeForMaxima(text, 2) ' for graphing
+        End If
     End If
 
     'greek letters

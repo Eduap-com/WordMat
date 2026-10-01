@@ -633,7 +633,7 @@ End Sub
 Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     On Error GoTo fejl
     Dim NewVersion As String, p As Integer, News As String, s As String
-    Dim UpdateNow As Boolean, PartnerShip As Boolean
+    Dim UpdateNow As Boolean, Partnership As Boolean
    
     If GetInternetConnectedState = False Then
         If Not RunSilent Then MsgBox TT.A(63), vbOKOnly, TT.Error
@@ -649,40 +649,21 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
     LastUpdateCheck = Date ' this should be here, and not at the end, because if an error occurs in the update, it should only come once
     
     On Error Resume Next
-    PartnerShip = QActivePartnership()
+    Partnership = QActivePartnership()
     On Error GoTo fejl
     
-#If Mac Then
-    Dim MacArch As String
-    MacArch = RunScript("GetMacArch", vbNullString) ' Application.Run("RunScript", "GetMacArch", "")
-    If MacArch = "Intel" Then
-        If PartnerShip Then
-            s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacintelversionP.txt")
-        Else
-            s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacintelversion.txt")
-        End If
-    Else
-        If PartnerShip Then
-            s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacversionP.txt")
-        Else
-            s = RunScript("GetHTML", "https://www.eduap.com/download/info/wordmatmacversion.txt")
-        End If
+    s = GetVersionStringFromServer("www.wordmat.dk", Partnership)
+    If Len(s) = 0 Or s = "error" Then
+        s = GetVersionStringFromServer("www.eduap.com", Partnership)
     End If
-    If InStr(s, "404 Not Found") > 0 Then s = vbNullString
-#Else
-    If PartnerShip Then
-        s = GetHTML("https://www.eduap.com/download/info/wordmatversionP.txt")
-    Else
-        s = GetHTML("https://www.eduap.com/download/info/wordmatversionP.txt")
-    End If
-#End If
-    If Len(s) = 0 Then
+    
+    If Len(s) = 0 Or s = "error" Or Left$(s, 8) <> "version:" Then
         If Not RunSilent Then
             MsgBox2 TT.A(112), vbOKOnly, TT.Error
         End If
         GoTo slut
     End If
-    NewVersion = s
+    NewVersion = Right(s, Len(s) - 8)
     p = InStr(NewVersion, vbLf)
     If p > 0 Then
         News = Right$(NewVersion, Len(NewVersion) - p)
@@ -729,7 +710,7 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
 '    End If
     
     If UpdateNow Then
-        If PartnerShip Then
+        If Partnership Then
             If MsgBox2(TT.A(21) & News & vbCrLf & vbCrLf & TT.A(64), vbOKCancel, TT.A(23) & " " & NewVersion) = vbOK Then
                 On Error Resume Next
                 Documents.Save NoPrompt:=True, OriginalFormat:=wdOriginalDocumentFormat
@@ -741,11 +722,12 @@ Sub CheckForUpdatePar(Optional RunSilent As Boolean = False)
 Install2:
             On Error GoTo fejl
             MsgBox2 TT.A(21) & News & vbCrLf & TT.A(22) & vbCrLf & vbCrLf & "", vbOKOnly, TT.A(23)
-            If TT.LangNo = 1 Then
-                OpenLink "https://www.eduap.com/da/wordmat/"
-            Else
-                OpenLink "https://www.eduap.com/wordmat/"
-            End If
+            OpenLink "https://www.wordmat.dk"
+'            If TT.LangNo = 1 Then
+'                OpenLink "https://www.eduap.com/da/wordmat/"
+'            Else
+'                OpenLink "https://www.eduap.com/wordmat/"
+'            End If
         End If
     Else
         If Not RunSilent Then
@@ -770,16 +752,51 @@ Install2:
 fejl:
     If Not RunSilent Then
         If MsgBox2(TT.A(581) & AppVersion, vbOKCancel, TT.Error) = vbOK Then
-            If TT.LangNo = 1 Then
-                OpenLink "https://www.eduap.com/da/wordmat/"
-            Else
-                OpenLink "https://www.eduap.com/wordmat/"
-            End If
+            OpenLink "https://www.wordmat.dk"
+'            If TT.LangNo = 1 Then
+'                OpenLink "https://www.eduap.com/da/wordmat/"
+'            Else
+'                OpenLink "https://www.eduap.com/wordmat/"
+'            End If
         End If
     End If
 slut:
 
 End Sub
+Function GetVersionStringFromServer(Servername As String, Partnership As Boolean) As String
+Dim s As String
+#If Mac Then
+    Dim MacArch As String
+    MacArch = RunScript("GetMacArch", vbNullString) ' Application.Run("RunScript", "GetMacArch", "")
+    If MacArch = "Intel" Then
+        If Partnership Then
+'            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacintelversionP.txt")
+            s = RunScript("GetHTML", "https://" & Servername & "/api/get-wordmat-version.php?platform=macintelp")
+        Else
+'            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacintelversion.txt")
+            s = RunScript("GetHTML", "https://" & Servername & "/api/get-wordmat-version.php?platform=macintel")
+        End If
+    Else
+        If Partnership Then
+'            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacversionP.txt")
+            s = RunScript("GetHTML", "https://" & Servername & "/api/get-wordmat-version.php?platform=macapplep")
+        Else
+'            s = RunScript("GetHTML", "https://" & Servername & "/download/info/wordmatmacversion.txt")
+            s = RunScript("GetHTML", "https://" & Servername & "/api/get-wordmat-version.php?platform=macapple")
+        End If
+    End If
+#Else
+    If Partnership Then
+'        s = GetHTML("https://" & Servername & "/download/info/wordmatversionP.txt") ' returns "error" if server is not available
+        s = GetHTML("https://" & Servername & "/api/get-wordmat-version.php?platform=winp")
+    Else
+'        s = GetHTML("https://" & Servername & "/download/info/wordmatversion.txt")
+        s = GetHTML("https://" & Servername & "/api/get-wordmat-version.php?platform=win")
+    End If
+#End If
+    If s = "error" Or InStr(s, "<head>") > 0 Or InStr(s, "404 Not Found") > 0 Then s = vbNullString
+    GetVersionStringFromServer = s
+End Function
 Sub UpdateToBeta()
     If QActivePartnership() Then
         On Error Resume Next
@@ -817,11 +834,20 @@ Sub CheckForUpdateSilent()
     CheckForUpdatePar True
 End Sub
 Function GetHTML(URL As String) As String
+On Error GoTo fejl
     With CreateObject("MSXML2.XMLHTTP")
-        .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer ensures that it is not a cached version
+        If InStr(URL, "?") > 0 Then
+            .Open "GET", URL & "&cb=" & Timer() * 100, False  ' timer ensures that it is not a cached version
+        Else
+            .Open "GET", URL & "?cb=" & Timer() * 100, False  ' timer ensures that it is not a cached version
+        End If
         .Send
         GetHTML = .ResponseText
     End With
+    GoTo slut
+fejl:
+    GetHTML = "error"
+slut:
 End Function
 
 Public Function GetInternetConnectedState() As Boolean
@@ -1203,7 +1229,8 @@ Sub InsertNumberedEquation(Optional AskRef As Boolean = False)
 
     If AskRef Then
         If EqName <> vbNullString Then
-            t.Cell(1, 1).Range.Fields(1).Select
+'            t.Cell(1, 1).Range.Fields(1).Select
+            F.Select
             With ActiveDocument.Bookmarks
                 .Add Range:=Selection.Range, Name:=EqName
                 .DefaultSorting = wdSortByName
@@ -1515,9 +1542,9 @@ Sub SetMathAutoCorrect()
 ' cant be run from automacros
     On Error Resume Next
     If MaximaGangeTegn = ChrW$(183) Or MaximaGangeTegn = vbNullString Then
-        Application.OMathAutoCorrect.Entries.Add Name:="*", Value:=VBA.ChrW$(183)
+        Application.OMathAutoCorrect.Entries.Add Name:="*", value:=VBA.ChrW$(183)
     ElseIf MaximaGangeTegn = ChrW$(215) Then
-        Application.OMathAutoCorrect.Entries.Add Name:="*", Value:=VBA.ChrW$(215)
+        Application.OMathAutoCorrect.Entries.Add Name:="*", value:=VBA.ChrW$(215)
     Else
         On Error Resume Next
         Application.OMathAutoCorrect.Entries("*").Delete

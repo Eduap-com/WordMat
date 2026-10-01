@@ -814,11 +814,11 @@ Sub Rib_Help(control As IRibbonControl)
 End Sub
 Sub Rib_HelpOnline(control As IRibbonControl)
 '    OpenLink "https://sites.google.com/site/wordmat/"
-    If TT.LangNo = 1 Then
-        OpenLink "https://www.eduap.com/wordmatdoc/da/index.html"
-    Else
-        OpenLink "https://www.eduap.com/wordmatdoc/en/index.html"
-    End If
+'    If TT.LangNo = 1 Then
+        OpenLink "https://www.wordmat.dk/docs"
+'    Else
+'        OpenLink "https://www.eduap.com/wordmatdoc/en/index.html"
+'    End If
 End Sub
 Sub Rib_HelpPDF(control As IRibbonControl)
 '    OpenLink "https://sites.google.com/site/wordmat/"

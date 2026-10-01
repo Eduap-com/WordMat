@@ -107,12 +107,12 @@ Private Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, 
 End Sub
 
 Private Sub Label_TAB1_Click()
-    MultiPage1.Value = 0
+    MultiPage1.value = 0
     SetTabsInactive
     Label_TAB1.BackColor = LBColorTABPress
 End Sub
 Private Sub Label_TAB2_Click()
-    MultiPage1.Value = 1
+    MultiPage1.value = 1
     SetTabsInactive
     Label_TAB2.BackColor = LBColorTABPress
 End Sub
@@ -121,19 +121,19 @@ Private Sub Label_TAB1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer
 End Sub
 Private Sub Label_TAB1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 0 Then Label_TAB1.BackColor = LBColorHover
+    If MultiPage1.value <> 0 Then Label_TAB1.BackColor = LBColorHover
 End Sub
 Private Sub Label_TAB2_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB2.BackColor = LBColorPress
 End Sub
 Private Sub Label_TAB2_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 1 Then Label_TAB2.BackColor = LBColorHover
+    If MultiPage1.value <> 1 Then Label_TAB2.BackColor = LBColorHover
 End Sub
 
 Sub SetTabsInactive()
-    If MultiPage1.Value <> 0 Then Label_TAB1.BackColor = LBColorInactive
-    If MultiPage1.Value <> 1 Then Label_TAB2.BackColor = LBColorInactive
+    If MultiPage1.value <> 0 Then Label_TAB1.BackColor = LBColorInactive
+    If MultiPage1.value <> 1 Then Label_TAB2.BackColor = LBColorInactive
 End Sub
 
 Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)

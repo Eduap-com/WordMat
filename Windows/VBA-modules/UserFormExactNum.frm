@@ -71,7 +71,7 @@ Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
     If j Mod 2 = 0 Then GoTo slut
 #Else
 #End If
-    If KeyCode.Value = 78 And Shift = 4 Then ' alt+n
+    If KeyCode.value = 78 And Shift = 4 Then ' alt+n
         If MaximaExact = 0 Then
             SetExact
             MaximaExact = 1

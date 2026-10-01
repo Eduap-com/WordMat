@@ -45,8 +45,8 @@ Public Sub SaveFile(doctype As Integer)
    UfWait.Show vbModeless
    UserFormLatex.EventsOn = True
    latexfil.Reset
-   latexfil.TitlePage = UserFormLatex.CheckBox_title.Value
-   latexfil.toc = UserFormLatex.CheckBox_contents.Value
+   latexfil.TitlePage = UserFormLatex.CheckBox_title.value
+   latexfil.toc = UserFormLatex.CheckBox_contents.value
    latexfil.Titel = Split(ActiveDocument.Name, ".")(0)
    latexfil.Author = ActiveDocument.BuiltInDocumentProperties(wdPropertyAuthor)
     
@@ -636,7 +636,7 @@ Sub ConvertEquationToLatex(Optional KeepOriginal As Boolean = False)
         EqEnd = "\end{equation}"
     End If
 
-    If UserFormLatex.OptionButton_omslutauto.Value = True Then
+    If UserFormLatex.OptionButton_omslutauto.value = True Then
         If Selection.OMaths(1).Justification = wdOMathJcInline Then
             s = "$" & LatexCode & "$"
         Else

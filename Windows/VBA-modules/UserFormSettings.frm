@@ -50,7 +50,7 @@ Sub SetEscEvents(ControlColl As Controls)
 End Sub
 
 Private Sub CheckBox_complex_Change()
-    If CheckBox_complex.Value Then
+    If CheckBox_complex.value Then
         CheckBox_polaroutput.visible = True
     Else
         CheckBox_polaroutput.visible = False
@@ -79,107 +79,107 @@ On Error Resume Next
     
     If InStr(TextBox_outunits.text, "/") > 0 Or InStr(TextBox_outunits.text, "*") > 0 Or InStr(TextBox_outunits.text, "^") > 0 Then
         MsgBox TT.A(343)
-        MultiPage1.Value = 2
+        MultiPage1.value = 2
         TextBox_outunits.SetFocus
         Exit Sub
     End If
     
-    If OptionButton_prik.Value Then
+    If OptionButton_prik.value Then
         MaximaGangeTegn = "prik"
-    ElseIf OptionButton_kryds.Value Then
+    ElseIf OptionButton_kryds.value Then
         MaximaGangeTegn = "x"
     Else
         MaximaGangeTegn = "*"
     End If
         
-    If OptionButton_numonly.Value = True Then
+    If OptionButton_numonly.value = True Then
         MaximaExact = 2
-    ElseIf OptionButton_exactonly.Value = True Then
+    ElseIf OptionButton_exactonly.value = True Then
         MaximaExact = 1
     Else
         MaximaExact = 0
     End If
     
-    LmSet = OptionButton_lmset.Value
+    LmSet = OptionButton_lmset.value
         
-    If OptionButton_logauto.Value = True Then
+    If OptionButton_logauto.value = True Then
         MaximaLogOutput = 0
-    ElseIf OptionButton_log10.Value = True Then
+    ElseIf OptionButton_log10.value = True Then
         MaximaLogOutput = 2
     Else
         MaximaLogOutput = 1
     End If
     
-    If OptionButton_gnuplot.Value Then
+    If OptionButton_gnuplot.value Then
         GraphApp = 0
-    ElseIf OptionButton_graph.Value Then
+    ElseIf OptionButton_graph.value Then
         GraphApp = 1
-    ElseIf OptionButton_geogebra.Value Then
+    ElseIf OptionButton_geogebra.value Then
         GraphApp = 2
-    ElseIf OptionButton_excel.Value Then
+    ElseIf OptionButton_excel.value Then
         GraphApp = 3
-    ElseIf OptionButton_geogebraweb.Value Then
+    ElseIf OptionButton_geogebraweb.value Then
         GraphApp = 4
     End If
     
-    If OptionButton_placementright.Value = True Then
+    If OptionButton_placementright.value = True Then
         EqNumPlacement = False
     Else
         EqNumPlacement = True
     End If
     
-    If OptionButton_eqnumone.Value = True Then
+    If OptionButton_eqnumone.value = True Then
         EqNumType = False
     Else
         EqNumType = True
     End If
     
-    SettUseVBACAS = CheckBox_VBACAS.Value
+    SettUseVBACAS = CheckBox_VBACAS.value
     
-    If OptionButton_casmaxima.Value = True Then
+    If OptionButton_casmaxima.value = True Then
         CASengine = 0
-    ElseIf OptionButton_casgeogebradirect.Value = True Then
+    ElseIf OptionButton_casgeogebradirect.value = True Then
         CASengine = 2
-    ElseIf OptionButton_casgeogebra.Value = True Then ' web
+    ElseIf OptionButton_casgeogebra.value = True Then ' web
         CASengine = 1
     Else
         CASengine = 0
     End If
 
-    If OptionButton_regdll.Value Then
+    If OptionButton_regdll.value Then
         DllConnType = 0
-    ElseIf OptionButton_WSH.Value Then
+    ElseIf OptionButton_WSH.value Then
         DllConnType = 2
     End If
     
     LanguageSetting = ComboBox_language.ListIndex
     
-    MaximaForklaring = CheckBox_Insertforklaring.Value
-    MaximaKommando = CheckBox_Insertmaximacommand.Value
-    Radians = OptionButton_radianer.Value
-    MaximaCifre = ComboBox_cifre.Value
-    MaximaSeparator = OptionButton_punktum.Value
-    MaximaComplex = CheckBox_complex.Value
-    LmSet = OptionButton_lmset.Value
-    ExcelIndlejret = CheckBox_indlejret.Value
-    AllTrig = OptionButton_trigall.Value
-    SettCheckForUpdate = CheckBox_checkupdate.Value
-    MaximaIndex = OptionButton_indexvar.Value
-    MaximaBigFloat = CheckBox_bigfloat.Value
-    ShowAssum = CheckBox_showassum.Value
-    PolarOutput = CheckBox_polaroutput.Value
-    dAsDiffChr = CheckBox_dasdiffchr.Value
-    EqAskRef = CheckBox_askref.Value
+    MaximaForklaring = CheckBox_Insertforklaring.value
+    MaximaKommando = CheckBox_Insertmaximacommand.value
+    Radians = OptionButton_radianer.value
+    MaximaCifre = ComboBox_cifre.value
+    MaximaSeparator = OptionButton_punktum.value
+    MaximaComplex = CheckBox_complex.value
+    LmSet = OptionButton_lmset.value
+    ExcelIndlejret = CheckBox_indlejret.value
+    AllTrig = OptionButton_trigall.value
+    SettCheckForUpdate = CheckBox_checkupdate.value
+    MaximaIndex = OptionButton_indexvar.value
+    MaximaBigFloat = CheckBox_bigfloat.value
+    ShowAssum = CheckBox_showassum.value
+    PolarOutput = CheckBox_polaroutput.value
+    dAsDiffChr = CheckBox_dasdiffchr.value
+    EqAskRef = CheckBox_askref.value
     BackupType = ComboBox_backup.ListIndex
     BackupMaxNo = ComboBox_backupno.text
     BackupTime = ComboBox_backuptime.text
     MaximaDecOutType = ComboBox_DecType.ListIndex + 1
     OutputColor = ComboBox_color.ListIndex
     
-    If MaximaUnits <> CheckBox_units.Value Then
-        MaximaUnits = CheckBox_units.Value
+    If MaximaUnits <> CheckBox_units.value Then
+        MaximaUnits = CheckBox_units.value
         UnitChanged = True
-        If CheckBox_units.Value Then
+        If CheckBox_units.value Then
             LoadUnits = True
         Else
             MustRestart = True
@@ -191,8 +191,8 @@ On Error Resume Next
         UserUnits = True
     End If
     
-    UseCodeFile = CheckBox_UseCodeFile.Value
-    UseCodeBlocks = CheckBox_UseCodeBlocks.Value
+    UseCodeFile = CheckBox_UseCodeFile.value
+    UseCodeBlocks = CheckBox_UseCodeBlocks.value
     SaveCodeFileText TextBox_code.text
     
     SetMathAutoCorrect
@@ -421,23 +421,23 @@ Private Sub UserForm_Activate()
 End Sub
 
 Sub SetButtonsAccordingToSettings()
-    CheckBox_Insertforklaring.Value = MaximaForklaring
-    CheckBox_Insertmaximacommand.Value = MaximaKommando
-    ComboBox_cifre.Value = MaximaCifre
+    CheckBox_Insertforklaring.value = MaximaForklaring
+    CheckBox_Insertmaximacommand.value = MaximaKommando
+    ComboBox_cifre.value = MaximaCifre
     ComboBox_DecType.ListIndex = MaximaDecOutType - 1
-    CheckBox_complex.Value = MaximaComplex
-    CheckBox_units.Value = MaximaUnits
-    CheckBox_indlejret.Value = ExcelIndlejret
+    CheckBox_complex.value = MaximaComplex
+    CheckBox_units.value = MaximaUnits
+    CheckBox_indlejret.value = ExcelIndlejret
     TextBox_outunits.text = OutUnits
-    CheckBox_checkupdate.Value = SettCheckForUpdate
-    CheckBox_bigfloat.Value = MaximaBigFloat
-    CheckBox_showassum.Value = ShowAssum
-    CheckBox_polaroutput.Value = PolarOutput
-    CheckBox_dasdiffchr.Value = dAsDiffChr
-    CheckBox_askref.Value = EqAskRef
+    CheckBox_checkupdate.value = SettCheckForUpdate
+    CheckBox_bigfloat.value = MaximaBigFloat
+    CheckBox_showassum.value = ShowAssum
+    CheckBox_polaroutput.value = PolarOutput
+    CheckBox_dasdiffchr.value = dAsDiffChr
+    CheckBox_askref.value = EqAskRef
     
-    CheckBox_UseCodeFile.Value = UseCodeFile
-    CheckBox_UseCodeBlocks.Value = UseCodeBlocks
+    CheckBox_UseCodeFile.value = UseCodeFile
+    CheckBox_UseCodeBlocks.value = UseCodeBlocks
     
     Label_antalb.Caption = AntalB
     
@@ -448,131 +448,131 @@ Sub SetButtonsAccordingToSettings()
     ComboBox_backuptime.text = BackupTime
     ComboBox_color.ListIndex = OutputColor
 
-    If CheckBox_complex.Value Then
+    If CheckBox_complex.value Then
         CheckBox_polaroutput.visible = True
     Else
         CheckBox_polaroutput.visible = False
     End If
     
     If MaximaExact = 1 Then
-        OptionButton_exactonly.Value = True
+        OptionButton_exactonly.value = True
     ElseIf MaximaExact = 2 Then
-        OptionButton_numonly.Value = True
+        OptionButton_numonly.value = True
     Else
-        OptionButton_exactandnum.Value = True
+        OptionButton_exactandnum.value = True
     End If
 
     If Radians Then
-        OptionButton_radianer.Value = True
+        OptionButton_radianer.value = True
     Else
-        OptionButton_grader.Value = True
+        OptionButton_grader.value = True
     End If
 
     If MaximaSeparator Then
-        OptionButton_punktum.Value = True
+        OptionButton_punktum.value = True
     Else
-        OptionButton_komma.Value = True
+        OptionButton_komma.value = True
     End If
     
     If AllTrig Then
-        OptionButton_trigall.Value = True
+        OptionButton_trigall.value = True
     Else
-        OptionButton_trigone.Value = True
+        OptionButton_trigone.value = True
     End If
 
     If MaximaGangeTegn = VBA.ChrW$(183) Then
-        OptionButton_prik.Value = True
+        OptionButton_prik.value = True
     ElseIf MaximaGangeTegn = VBA.ChrW$(215) Then
-        OptionButton_kryds.Value = True
+        OptionButton_kryds.value = True
     Else
-        OptionButton_stjerne.Value = True
+        OptionButton_stjerne.value = True
     End If
 
     If LmSet Then
-        OptionButton_lmset.Value = True
+        OptionButton_lmset.value = True
     Else
-        OptionButton_lmbool.Value = True
+        OptionButton_lmbool.value = True
     End If
     
     
     If MaximaLogOutput = 0 Then
-        OptionButton_logauto.Value = True
+        OptionButton_logauto.value = True
     ElseIf MaximaLogOutput = 2 Then
-        OptionButton_log10.Value = True
+        OptionButton_log10.value = True
     Else
-        OptionButton_ln.Value = True
+        OptionButton_ln.value = True
     End If
     
     If MaximaIndex Then
-        OptionButton_indexvar.Value = True
+        OptionButton_indexvar.value = True
     Else
-        OptionButton_indextext.Value = True
+        OptionButton_indextext.value = True
     End If
     
     If GraphApp = 0 Then
-        OptionButton_gnuplot.Value = True
+        OptionButton_gnuplot.value = True
     ElseIf GraphApp = 1 Then
-        OptionButton_graph.Value = True
+        OptionButton_graph.value = True
     ElseIf GraphApp = 2 Then
-        OptionButton_geogebra.Value = True
+        OptionButton_geogebra.value = True
     ElseIf GraphApp = 3 Then
-        OptionButton_excel.Value = True
+        OptionButton_excel.value = True
     ElseIf GraphApp = 4 Then
-        OptionButton_geogebraweb.Value = True
+        OptionButton_geogebraweb.value = True
     End If
     
     If EqNumPlacement Then
-        OptionButton_placementleft.Value = True
+        OptionButton_placementleft.value = True
     Else
-        OptionButton_placementright.Value = True
+        OptionButton_placementright.value = True
     End If
     
     If EqNumType Then
-        OptionButton_eqnumtwo.Value = True
+        OptionButton_eqnumtwo.value = True
     Else
-        OptionButton_eqnumone.Value = True
+        OptionButton_eqnumone.value = True
     End If
     
     If QActivePartnership Then
         CheckBox_VBACAS.Enabled = True
-        CheckBox_VBACAS.Value = SettUseVBACAS
+        CheckBox_VBACAS.value = SettUseVBACAS
     Else
         CheckBox_VBACAS.Enabled = False
-        CheckBox_VBACAS.Value = False
+        CheckBox_VBACAS.value = False
     End If
 
     If ReadSettingsFromFile <= 1 Then
         If CASengine = 0 Then 'CASengineRegOnly
-            OptionButton_casmaxima.Value = True
+            OptionButton_casmaxima.value = True
         ElseIf CASengine = 2 Then
-            OptionButton_casgeogebradirect.Value = True
+            OptionButton_casgeogebradirect.value = True
         ElseIf CASengine = 1 Then ' web
-            OptionButton_casgeogebra.Value = True
+            OptionButton_casgeogebra.value = True
         Else
-            OptionButton_casmaxima.Value = True
+            OptionButton_casmaxima.value = True
         End If
     Else
         If CASengine = 0 Then
-            OptionButton_casmaxima.Value = True
+            OptionButton_casmaxima.value = True
         ElseIf CASengine = 1 Then
-            OptionButton_casgeogebradirect.Value = True
+            OptionButton_casgeogebradirect.value = True
         ElseIf CASengine = 2 Then
-            OptionButton_casgeogebra.Value = True
+            OptionButton_casgeogebra.value = True
         Else
-            OptionButton_casmaxima.Value = True
+            OptionButton_casmaxima.value = True
         End If
     End If
     
     If DllConnType <= 1 Then
-        OptionButton_regdll.Value = True
+        OptionButton_regdll.value = True
     Else
-        OptionButton_WSH.Value = True
+        OptionButton_WSH.value = True
     End If
 
 End Sub
 
 Sub SetCasButtons()
-If OptionButton_casmaxima.Value Then
+If OptionButton_casmaxima.value Then
     FrameLog.visible = True
     CheckBox_units.visible = True
     CheckBox_bigfloat.visible = True
@@ -780,7 +780,7 @@ Dim c As control
 End Sub
 
 Private Sub UserForm_Initialize()
-    MultiPage1.Value = 0
+    MultiPage1.value = 0
 #If Mac Then
     ScaleForm 1.5
 #End If
@@ -792,42 +792,42 @@ Private Sub Label_ok_Click()
 End Sub
 
 Private Sub Label_TAB1_Click()
-    MultiPage1.Value = 0
+    MultiPage1.value = 0
     SetTabsInactive
     Label_TAB1.BackColor = LBColorTABPress
 End Sub
 Private Sub Label_TAB2_Click()
-    MultiPage1.Value = 1
+    MultiPage1.value = 1
     SetTabsInactive
     Label_TAB2.BackColor = LBColorTABPress
 End Sub
 Private Sub Label_TAB3_Click()
-    MultiPage1.Value = 2
+    MultiPage1.value = 2
     SetTabsInactive
     Label_TAB3.BackColor = LBColorTABPress
 End Sub
 Private Sub Label_TAB4_Click()
-    MultiPage1.Value = 3
+    MultiPage1.value = 3
     SetTabsInactive
     Label_TAB4.BackColor = LBColorTABPress
 End Sub
 Private Sub Label_TAB5_Click()
-    MultiPage1.Value = 4
+    MultiPage1.value = 4
     SetTabsInactive
     Label_TAB5.BackColor = LBColorTABPress
 End Sub
 Private Sub Label_TAB6_Click()
-    MultiPage1.Value = 5
+    MultiPage1.value = 5
     SetTabsInactive
     Label_TAB6.BackColor = LBColorTABPress
 End Sub
 Private Sub Label_TAB7_Click()
-    MultiPage1.Value = 6
+    MultiPage1.value = 6
     SetTabsInactive
     Label_TAB7.BackColor = LBColorTABPress
 End Sub
 Private Sub Label_TAB8_Click()
-    MultiPage1.Value = 7
+    MultiPage1.value = 7
     SetTabsInactive
     Label_TAB8.BackColor = LBColorTABPress
 End Sub
@@ -848,56 +848,56 @@ Private Sub Label_TAB1_MouseDown(ByVal Button As Integer, ByVal Shift As Integer
 End Sub
 Private Sub Label_TAB1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 0 Then Label_TAB1.BackColor = LBColorHover
+    If MultiPage1.value <> 0 Then Label_TAB1.BackColor = LBColorHover
 End Sub
 Private Sub Label_TAB2_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB2.BackColor = LBColorPress
 End Sub
 Private Sub Label_TAB2_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 1 Then Label_TAB2.BackColor = LBColorHover
+    If MultiPage1.value <> 1 Then Label_TAB2.BackColor = LBColorHover
 End Sub
 Private Sub Label_TAB3_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB3.BackColor = LBColorPress
 End Sub
 Private Sub Label_TAB3_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 2 Then Label_TAB3.BackColor = LBColorHover
+    If MultiPage1.value <> 2 Then Label_TAB3.BackColor = LBColorHover
 End Sub
 Private Sub Label_TAB4_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB4.BackColor = LBColorPress
 End Sub
 Private Sub Label_TAB4_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 3 Then Label_TAB4.BackColor = LBColorHover
+    If MultiPage1.value <> 3 Then Label_TAB4.BackColor = LBColorHover
 End Sub
 Private Sub Label_TAB5_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB5.BackColor = LBColorPress
 End Sub
 Private Sub Label_TAB5_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 4 Then Label_TAB5.BackColor = LBColorHover
+    If MultiPage1.value <> 4 Then Label_TAB5.BackColor = LBColorHover
 End Sub
 Private Sub Label_TAB6_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB6.BackColor = LBColorPress
 End Sub
 Private Sub Label_TAB6_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 5 Then Label_TAB6.BackColor = LBColorHover
+    If MultiPage1.value <> 5 Then Label_TAB6.BackColor = LBColorHover
 End Sub
 Private Sub Label_TAB7_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB7.BackColor = LBColorPress
 End Sub
 Private Sub Label_TAB7_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorHover
+    If MultiPage1.value <> 6 Then Label_TAB7.BackColor = LBColorHover
 End Sub
 Private Sub Label_TAB8_MouseDown(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     Label_TAB8.BackColor = LBColorPress
 End Sub
 Private Sub Label_TAB8_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal X As Single, ByVal Y As Single)
     SetTabsInactive
-    If MultiPage1.Value <> 7 Then Label_TAB8.BackColor = LBColorHover
+    If MultiPage1.value <> 7 Then Label_TAB8.BackColor = LBColorHover
 End Sub
 
 Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
@@ -912,14 +912,14 @@ End Sub
 
 Sub SetTabsInactive()
     
-    If MultiPage1.Value <> 0 Then Label_TAB1.BackColor = LBColorInactive
-    If MultiPage1.Value <> 1 Then Label_TAB2.BackColor = LBColorInactive
-    If MultiPage1.Value <> 2 Then Label_TAB3.BackColor = LBColorInactive
-    If MultiPage1.Value <> 3 Then Label_TAB4.BackColor = LBColorInactive
-    If MultiPage1.Value <> 4 Then Label_TAB5.BackColor = LBColorInactive
-    If MultiPage1.Value <> 5 Then Label_TAB6.BackColor = LBColorInactive
-    If MultiPage1.Value <> 6 Then Label_TAB7.BackColor = LBColorInactive
-    If MultiPage1.Value <> 7 Then Label_TAB8.BackColor = LBColorInactive
+    If MultiPage1.value <> 0 Then Label_TAB1.BackColor = LBColorInactive
+    If MultiPage1.value <> 1 Then Label_TAB2.BackColor = LBColorInactive
+    If MultiPage1.value <> 2 Then Label_TAB3.BackColor = LBColorInactive
+    If MultiPage1.value <> 3 Then Label_TAB4.BackColor = LBColorInactive
+    If MultiPage1.value <> 4 Then Label_TAB5.BackColor = LBColorInactive
+    If MultiPage1.value <> 5 Then Label_TAB6.BackColor = LBColorInactive
+    If MultiPage1.value <> 6 Then Label_TAB7.BackColor = LBColorInactive
+    If MultiPage1.value <> 7 Then Label_TAB8.BackColor = LBColorInactive
     
 End Sub
 

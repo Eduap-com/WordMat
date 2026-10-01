@@ -188,7 +188,6 @@ Sub MaximaCommand()
         MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
-    ShowTips
 
     If CASengine = 0 Then
         omax.ExecuteMaximaCommand
@@ -219,7 +218,7 @@ slut:
     Selection.End = sslut    ' The end must come first or things will go wrong.
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
-
+    ShowTips
 End Sub
 Sub MaximaSolveInequality(Optional variabel As String)
     On Error GoTo fejl
@@ -423,7 +422,6 @@ Sub MaximaSolvePar(Optional variabel As String)
     If sstart = sslut Then
         Selection.OMaths(1).ParentOMath.Range.Select
     End If
-    ShowTips
     If InStr(Selection.OMaths(1).Range.text, "<") > 1 Or InStr(Selection.OMaths(1).Range.text, ">") > 1 Or InStr(Selection.OMaths(1).Range.text, ChrW$(8804)) > 1 Or InStr(Selection.OMaths(1).Range.text, ChrW$(8805)) > 1 Then
         MaximaSolveInequality variabel
         GoTo slut
@@ -629,7 +627,13 @@ newcas:
         Selection.TypeParagraph
         ' insert explanation if desired
         If MaximaForklaring And (IsSolved Or InStr(omax.KommentarOutput, "solving system of equations")) Then
-            InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831)
+            p = InStr(omax.KommentarOutput, "Note: Maxima assumed")
+            If p > 0 Then
+                p2 = InStr(p + 20, omax.KommentarOutput, ".")
+                If p2 > p + 20 Then s = "Note: Maxima assumed " & Mid$(omax.KommentarOutput, p + 20, p2 - p - 20)
+            End If
+
+            InsertForklaring TT.A(829) & " " & variabel & " " & TT.A(831) & " " & s
         End If
 
         If InStr(omax.MaximaOutput, VBA.ChrW$(8709)) Or omax.MaximaOutput = "[]" Then  ' no solution
@@ -877,6 +881,7 @@ slut:
         If Oundo.IsRecordingCustomRecord Then Oundo.EndCustomRecord
     End If
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub InsertForklaring(ForklarTekst As String, Optional biimp As Boolean = True)
     Dim tdefs As String
@@ -1430,8 +1435,8 @@ Sub beregn()
     Dim fejlm As String, RemoveEqual As Boolean
     On Error GoTo fejl
    ' Application.ScreenUpdating = False
-    Dim Tid As Single
-    Tid = Timer
+'    Dim Tid As Single
+'    Tid = Timer
 #If Mac Then
     Dim D As Document
     Set D = ActiveDocument
@@ -1443,6 +1448,15 @@ Sub beregn()
     sstart = Selection.start
     sslut = Selection.End
     scrollpos = ActiveWindow.VerticalPercentScrolled
+    
+    If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
+        MsgBox TT.A(47), vbOKOnly, TT.Error
+        GoTo slut
+    End If
+    If Selection.OMaths.Count > 1 Then
+        MsgBox TT.A(149), vbOKOnly, TT.Error
+        GoTo slut
+    End If
     
     RunFirst
     
@@ -1469,17 +1483,8 @@ Sub beregn()
         End If
     End If
     omax.prevspr = ""
-    ShowTips
     
     If CASengine = 0 And Not omax.MaximaInstalled Then GoTo slut
-    If Selection.OMaths.Count = 0 Then  'And Len(Selection.Range.text) < 2
-        MsgBox TT.A(47), vbOKOnly, TT.Error
-        GoTo slut
-    End If
-    If Selection.OMaths.Count > 1 Then
-        MsgBox TT.A(149), vbOKOnly, TT.Error
-        GoTo slut
-    End If
 
     If Selection.Font.ColorIndex = OutputColor Then
         Selection.OMaths(1).Range.Font.ColorIndex = wdAuto
@@ -1617,6 +1622,7 @@ slut:
     End If
     If ActiveWindow.VerticalPercentScrolled <> scrollpos Then ActiveWindow.VerticalPercentScrolled = scrollpos
     Application.ScreenUpdating = True
+    ShowTips
     '    TimeText = TimeText & vbCrLf & "beregn ialt: " & Timer - st
     '    MsgBox TimeText
     '    MsgBox Timer - tid
@@ -1705,7 +1711,6 @@ Sub Omskriv()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
 
     If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
     UFomskriv.Vars = omax.Vars
@@ -1716,12 +1721,12 @@ Sub Omskriv()
     
     If CASengine > 0 Then
         s = omax.Kommando
-        If UFomskriv.CheckBox_trigreduce.Value Then s = "trigsimplify(" & s & ")"
-        If UFomskriv.CheckBox_factor.Value Then s = "factor(" & s & ")"
-        If UFomskriv.CheckBox_expand.Value Then s = "expand(" & s & ")"
-        If UFomskriv.CheckBox_auto.Value Then s = "simplify(" & s & ")"
-        If UFomskriv.CheckBox_completesquare.Value Then s = "completesquare(" & s & ")"
-        If Not UFomskriv.CheckBox_factor.Value Then ' numeric expands factorised expressions.
+        If UFomskriv.CheckBox_trigreduce.value Then s = "trigsimplify(" & s & ")"
+        If UFomskriv.CheckBox_factor.value Then s = "factor(" & s & ")"
+        If UFomskriv.CheckBox_expand.value Then s = "expand(" & s & ")"
+        If UFomskriv.CheckBox_auto.value Then s = "simplify(" & s & ")"
+        If UFomskriv.CheckBox_completesquare.value Then s = "completesquare(" & s & ")"
+        If Not UFomskriv.CheckBox_factor.value Then ' numeric expands factorised expressions.
             If MaximaDecOutType = 3 Then
                 s = "ScientificText(" & s & " , " & MaximaCifre & ")"
             ElseIf MaximaExact = 2 Then
@@ -1731,7 +1736,7 @@ Sub Omskriv()
     End If
     
     If CASengine = 0 Then
-        omax.Omskriv False, UFomskriv.CheckBox_auto.Value, UFomskriv.CheckBox_factor.Value, UFomskriv.CheckBox_expand.Value, UFomskriv.CheckBox_rationaliser.Value, UFomskriv.CheckBox_trigreduce.Value, UFomskriv.CheckBox_completesquare.Value
+        omax.Omskriv False, UFomskriv.CheckBox_auto.value, UFomskriv.CheckBox_factor.value, UFomskriv.CheckBox_expand.value, UFomskriv.CheckBox_rationaliser.value, UFomskriv.CheckBox_trigreduce.value, UFomskriv.CheckBox_completesquare.value
     ElseIf CASengine = 1 Then
         If MaximaForklaring Then
             omax.GoToEndOfSelectedMaths
@@ -1764,22 +1769,22 @@ Sub Omskriv()
         If Len(omax.MaximaOutput) > 0 Then
             If MaximaForklaring Then
                 s = TT.A(150)
-                If UFomskriv.CheckBox_auto.Value Then
+                If UFomskriv.CheckBox_auto.value Then
                     s = s & TT.A(151)
                 End If
-                If UFomskriv.CheckBox_expand.Value Then
+                If UFomskriv.CheckBox_expand.value Then
                     s = s & TT.A(807) & ", "
                 End If
-                If UFomskriv.CheckBox_factor.Value Then
+                If UFomskriv.CheckBox_factor.value Then
                     s = s & TT.A(806) & ", "
                 End If
-                If UFomskriv.CheckBox_rationaliser.Value Then
+                If UFomskriv.CheckBox_rationaliser.value Then
                     s = s & TT.A(794) & ", "
                 End If
-                If UFomskriv.CheckBox_trigreduce.Value Then
+                If UFomskriv.CheckBox_trigreduce.value Then
                     s = s & TT.A(152)
                 End If
-                If UFomskriv.CheckBox_completesquare.Value Then
+                If UFomskriv.CheckBox_completesquare.value Then
                     s = s & TT.A(697)
                 End If
                 InsertForklaring s, False
@@ -1810,6 +1815,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub reducer()
     On Error GoTo fejl
@@ -1837,7 +1843,6 @@ Sub reducer()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
 
     If CASengine > 0 Then
         s = "simplify(" & omax.Kommando & ")"
@@ -1901,6 +1906,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub CompareTest()
     On Error GoTo fejl
@@ -1927,7 +1933,6 @@ Sub CompareTest()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
 
     Dim Oundo As UndoRecord
     Set Oundo = Application.UndoRecord
@@ -1977,6 +1982,7 @@ slut:
     Selection.start = sstart
     Oundo.EndCustomRecord
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub faktoriser()
     On Error GoTo fejl
@@ -2003,7 +2009,6 @@ Sub faktoriser()
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
     
     If CASengine > 0 Then
         s = "factor(" & omax.Kommando & ")"
@@ -2065,6 +2070,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub udvid()
     On Error GoTo fejl
@@ -2274,7 +2280,6 @@ Sub Integrer()
 
     variabel = InputBox(TT.A(51), TT.A(845), "x")
     If variabel = "" Then GoTo slut
-    ShowTips
     
     If CASengine > 0 Then
         s = "integral(" & omax.Kommando & " , " & variabel & ")"
@@ -2336,6 +2341,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Sub SolveDENumeric()
     Dim scrollpos As Double
@@ -2363,7 +2369,6 @@ Sub SolveDENumeric()
         MsgBox TT.A(48), vbOKOnly, TT.Error
         GoTo slut
     End If
-    ShowTips
 
     omax.FindVariable , True, CASengine, True
     If InStr(omax.Vars, "t") > 0 Then
@@ -2454,6 +2459,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 Function GetRHS(s As String) As String
     Dim Arr As Variant
@@ -2520,7 +2526,6 @@ Sub SolveDEpar(Optional funktion As String, Optional variabel As String)
     End If
 
     If Not ValidateInput(omax.Kommando) Then GoTo slut
-    ShowTips
 
     If funktion = vbNullString And variabel = vbNullString Then
         If Not omax.FindVariable(, True, CASengine, True) Then GoTo slut
@@ -2697,6 +2702,7 @@ slut:
     Selection.End = sslut
     Selection.start = sstart
     ActiveWindow.VerticalPercentScrolled = scrollpos
+    ShowTips
 End Sub
 
 Sub InsertOutput(text As String, Optional ResultAfterTable As Boolean = True)
@@ -2816,11 +2822,11 @@ Function AskSignFromForm(Udtryk As String) As Integer
     UF.Label_udtryk.Caption = Udtryk
     UF.Show
     
-    If UF.OptionButton_nul.Value Then
+    If UF.OptionButton_nul.value Then
         AskSignFromForm = 0
-    ElseIf UF.OptionButton_negativ.Value Then
+    ElseIf UF.OptionButton_negativ.value Then
         AskSignFromForm = 1
-    ElseIf UF.OptionButton_positiv.Value Then
+    ElseIf UF.OptionButton_positiv.value Then
         AskSignFromForm = 2
     Else
         AskSignFromForm = 3

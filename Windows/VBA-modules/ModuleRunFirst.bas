@@ -24,9 +24,9 @@ Sub RunFirst()
 40            Application.Run macroname:="Popstart"
 50            If Err.Number = -2147352573 Then
 60                If TT.LangNo = 1 Then
-70                    OpenLink "https://www.eduap.com/da/partnerskab/"
+70                    OpenLink "https://wordmat.dk/da/partnerskab"
 80                Else
-90                    OpenLink "https://www.eduap.com/partnerskab/"
+90                    OpenLink "https://wordmat.dk/en/partnership"
 100               End If
 110           End If
 120           Err.Clear
@@ -42,9 +42,9 @@ Sub RunFirst()
 200       Application.Run macroname:="Popstart"
 210       If Err.Number = -2147352573 Then
 220           If TT.LangNo = 1 Then
-230               OpenLink "https://www.eduap.com/da/partnerskab/"
+230               OpenLink "https://wordmat.dk/da/partnerskab"
 240           Else
-250               OpenLink "https://www.eduap.com/partnerskab/"
+250               OpenLink "https://wordmat.dk/en/partnership"
 260           End If
 270       End If
 280       Err.Clear

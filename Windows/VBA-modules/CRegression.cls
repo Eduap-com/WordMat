@@ -31,22 +31,22 @@ Public Property Get XValues() As Variant
     XValues = xval
 End Property
 
-Public Property Let XValues(ByVal Value As Variant)
-    xval = Value
+Public Property Let XValues(ByVal value As Variant)
+    xval = value
 End Property
 Public Property Get YValues() As Variant
     YValues = yval
 End Property
 
-Public Property Let YValues(ByVal Value As Variant)
-    yval = Value
+Public Property Let YValues(ByVal value As Variant)
+    yval = value
 End Property
 Public Property Get ZValues() As Variant
     ZValues = zval
 End Property
 
-Public Property Let ZValues(ByVal Value As Variant)
-    zval = Value
+Public Property Let ZValues(ByVal value As Variant)
+    zval = value
 End Property
 Public Property Get Datatext() As Variant
 

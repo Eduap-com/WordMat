@@ -187,7 +187,7 @@ On Error Resume Next
     malltrig = CBool(GetRegSetting("AllTrig"))
     moutunits = GetRegSettingString("OutUnits")
     mbigfloat = CBool(GetRegSetting("BigFloat"))
-    mantalb = val(GetRegSetting("AntalBeregninger"))
+    mantalb = GetRegSettingLong("AntalBeregninger") 'val(GetRegSetting("AntalBeregninger"))
     mIndex = CBool(GetRegSetting("Index"))
     mshowassum = CBool(GetRegSetting("ShowAssum"))
     mpolaroutput = CBool(GetRegSetting("PolarOutput"))
@@ -930,7 +930,13 @@ Public Property Let OutUnits(ByVal text As String)
 End Property
 
 #If VBA7 Then
+Public Property Get AntalberegningerReg() As LongPtr
+    AntalberegningerReg = GetRegSettingLong("AntalBeregninger")
+End Property
 Public Property Get Antalberegninger() As LongPtr
+    If mantalb <= 0 Then
+        mantalb = GetRegSettingLong("AntalBeregninger")
+    End If
     Antalberegninger = mantalb
 End Property
 Public Property Let Antalberegninger(xval As LongPtr)
@@ -938,7 +944,13 @@ Public Property Let Antalberegninger(xval As LongPtr)
     mantalb = xval
 End Property
 #Else
+Public Property Get AntalberegningerReg() As Long
+    AntalberegningerReg = GetRegSettingLong("AntalBeregninger")
+End Property
 Public Property Get Antalberegninger() As Long
+    If mantalb <= 0 Then
+        mantalb = GetRegSettingLong("AntalBeregninger")
+    End If
     Antalberegninger = mantalb
 End Property
 Public Property Let Antalberegninger(xval As Long)
@@ -1670,11 +1682,11 @@ Private Sub SetSetting(Sett As String, SettVal As String, Optional SaveToReg As 
         mbigfloat = SettVal
         If SaveToReg Then MaximaBigFloat = mbigfloat
     ElseIf Sett = "AntalBeregninger" Then
-        mantalb = val(SettVal)
-        If SaveToReg Then
-            Antalberegninger = mantalb
-            AntalB = mantalb
-        End If
+'        mantalb = val(SettVal)
+'        If SaveToReg Then
+'                Antalberegninger = mantalb
+'                AntalB = mantalb
+'        End If
     ElseIf Sett = "Index" Then
         mIndex = CBool(SettVal)
         If SaveToReg Then MaximaIndex = mIndex

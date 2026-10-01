@@ -32,7 +32,7 @@ End Sub
 Private Sub UserForm_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
 '    If (KeyCode.Value = 18 Or KeyCode.Value = 78) And Shift = 4 Then ' alt+n
 On Error GoTo slut
-    If KeyCode.Value = 78 And Shift = 4 Then ' alt+n
+    If KeyCode.value = 78 And Shift = 4 Then ' alt+n
     If MaximaExact = 0 Then
         Me.Label_text.Caption = TT.A(710) ' "Eksakt"
         DoEvents
@@ -57,3 +57,9 @@ On Error GoTo slut
     End If
 slut:
 End Sub
+
+Private Sub UserForm_QueryClose(Cancel As Integer, CloseMode As Integer)
+    Cancel = True
+    Me.hide
+End Sub
+

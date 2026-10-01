@@ -49,7 +49,7 @@ Sub SetEscEvents(ControlColl As Controls)
     Next
 End Sub
 Private Sub CheckBox_autostep_Click()
-   If CheckBox_autostep.Value Then
+   If CheckBox_autostep.value Then
       UpdateStep
    End If
 End Sub
@@ -106,7 +106,7 @@ Private Sub GeoGebraPlot()
     If Len(xl) > 1 Then xl = Left$(xl, Len(xl) - 1)
     For j = 1 To UBound(PointArr, 2)
         yl = ""
-        If (j = 1 And CheckBox1.Value) Or (j = 2 And CheckBox2.Value) Or (j = 3 And CheckBox3.Value) Then
+        If (j = 1 And CheckBox1.value) Or (j = 2 And CheckBox2.value) Or (j = 3 And CheckBox3.value) Then
         For i = 0 To UBound(PointArr)
             Y = val(Trim$(Replace(Replace(PointArr(i, j), ",", "."), ChrW$(183), "*")))
             If Y > ymax Then
@@ -186,7 +186,7 @@ s = s & "" & Sep & "" & Sep & "" & Sep
 s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep
 s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep
 s = s & "" & Sep & "" & Sep & "" & Sep & "" & Sep
-s = s & pointText & Sep & pointText2 & Sep & "" & Sep & CheckBox_pointsjoined.Value & Sep & CheckBox_pointsjoined.Value & Sep & "2" & Sep & "2" & Sep
+s = s & pointText & Sep & pointText2 & Sep & "" & Sep & CheckBox_pointsjoined.value & Sep & CheckBox_pointsjoined.value & Sep & "2" & Sep & "2" & Sep
 s = s & "" & Sep
 s = s & "" & Sep
 s = s & "true" & Sep & "false" & Sep & "false" & Sep & "false" & Sep
@@ -227,55 +227,55 @@ Dim i As Long, j As Integer
         .Cell(1, 1).Range.Bold = True
         .Columns(1).Width = 65
         i = 2
-        If CheckBox1.Value Then
+        If CheckBox1.value Then
             .Cell(1, i).Range.text = TextBox_var1.text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
-        If CheckBox2.Value Then
+        If CheckBox2.value Then
             .Cell(1, i).Range.text = TextBox_var2.text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
-        If CheckBox3.Value Then
+        If CheckBox3.value Then
             .Cell(1, i).Range.text = TextBox_var3.text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
-        If CheckBox4.Value Then
+        If CheckBox4.value Then
             .Cell(1, i).Range.text = TextBox_var4.text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
-        If CheckBox5.Value Then
+        If CheckBox5.value Then
             .Cell(1, i).Range.text = TextBox_var5.text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
-        If CheckBox6.Value Then
+        If CheckBox6.value Then
             .Cell(1, i).Range.text = TextBox_var6.text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
-        If CheckBox7.Value Then
+        If CheckBox7.value Then
             .Cell(1, i).Range.text = TextBox_var7.text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
-        If CheckBox8.Value Then
+        If CheckBox8.value Then
             .Cell(1, i).Range.text = TextBox_var8.text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
             i = i + 1
         End If
-        If CheckBox9.Value Then
+        If CheckBox9.value Then
             .Cell(1, i).Range.text = TextBox_var9.text
             .Cell(1, i).Range.Bold = True
             .Columns(i).Width = 65
@@ -478,7 +478,7 @@ End Sub
 Private Sub UpdateStep()
 Dim st As Double
    Validate
-   If CheckBox_autostep.Value And IsNumeric(TextBox_xmin.text) And IsNumeric(TextBox_xmax.text) Then
+   If CheckBox_autostep.value And IsNumeric(TextBox_xmin.text) And IsNumeric(TextBox_xmax.text) Then
       st = (StrToDbl(TextBox_xmax.text) - StrToDbl(TextBox_xmin.text)) / 500
       TextBox_step.text = st
    End If
@@ -674,7 +674,7 @@ On Error GoTo fejl
     End If
     colindex = 0
     text = text & "color=" & GetNextColor & ","
-    If Not CheckBox_pointsjoined.Value Then
+    If Not CheckBox_pointsjoined.value Then
         text = text & "point_size=" & Replace(highres * 1, ",", ".") & ","
     Else
 #If Mac Then
@@ -683,9 +683,9 @@ On Error GoTo fejl
         text = text & "point_size=0,"
 #End If
     End If
-    text = text & "point_type=filled_circle,points_joined=" & VBA.LCase$(CheckBox_pointsjoined.Value) & ","
-    If CheckBox1.Value Then
-        If CheckBox_visforklaring.Value Then
+    text = text & "point_type=filled_circle,points_joined=" & VBA.LCase$(CheckBox_pointsjoined.value) & ","
+    If CheckBox1.value Then
+        If CheckBox_visforklaring.value Then
             text = text & "key=""" & omax.ConvertToAscii(TextBox_var1.text) & ""","
         Else
             text = text & "key="""","
@@ -693,8 +693,8 @@ On Error GoTo fejl
         text = text & "points(makelist([pq[1],pq[2]],pq,qDElist)),"
         yAxislabel = yAxislabel & TextBox_var1.text & ","
     End If
-    If CheckBox2.Value Then
-        If CheckBox_visforklaring.Value Then
+    If CheckBox2.value Then
+        If CheckBox_visforklaring.value Then
             text = text & "key=""" & omax.ConvertToAscii(TextBox_var2.text) & ""","
         Else
             text = text & "key="""","
@@ -703,8 +703,8 @@ On Error GoTo fejl
         text = text & "points(makelist([pq[1],pq[3]],pq,qDElist)),"
         yAxislabel = yAxislabel & TextBox_var2.text & ","
     End If
-    If CheckBox3.Value Then
-        If CheckBox_visforklaring.Value Then
+    If CheckBox3.value Then
+        If CheckBox_visforklaring.value Then
             text = text & "key=""" & omax.ConvertToAscii(TextBox_var3.text) & ""","
         Else
             text = text & "key="""","
@@ -713,8 +713,8 @@ On Error GoTo fejl
         text = text & "points(makelist([pq[1],pq[4]],pq,qDElist)),"
         yAxislabel = yAxislabel & TextBox_var3.text & ","
     End If
-    If CheckBox4.Value Then
-        If CheckBox_visforklaring.Value Then
+    If CheckBox4.value Then
+        If CheckBox_visforklaring.value Then
             text = text & "key=""" & omax.ConvertToAscii(TextBox_var4.text) & ""","
         Else
             text = text & "key="""","
@@ -723,8 +723,8 @@ On Error GoTo fejl
         text = text & "points(makelist([pq[1],pq[5]],pq,qDElist)),"
         yAxislabel = yAxislabel & TextBox_var4.text & ","
     End If
-    If CheckBox5.Value Then
-        If CheckBox_visforklaring.Value Then
+    If CheckBox5.value Then
+        If CheckBox_visforklaring.value Then
             text = text & "key=""" & omax.ConvertToAscii(TextBox_var5.text) & ""","
         Else
             text = text & "key="""","
@@ -733,8 +733,8 @@ On Error GoTo fejl
         text = text & "points(makelist([pq[1],pq[6]],pq,qDElist)),"
         yAxislabel = yAxislabel & TextBox_var5.text & ","
     End If
-    If CheckBox6.Value Then
-        If CheckBox_visforklaring.Value Then
+    If CheckBox6.value Then
+        If CheckBox_visforklaring.value Then
             text = text & "key=""" & omax.ConvertToAscii(TextBox_var6.text) & ""","
         Else
             text = text & "key="""","
@@ -743,8 +743,8 @@ On Error GoTo fejl
         text = text & "points(makelist([pq[1],pq[7]],pq,qDElist)),"
         yAxislabel = yAxislabel & TextBox_var6.text & ","
     End If
-    If CheckBox7.Value Then
-        If CheckBox_visforklaring.Value Then
+    If CheckBox7.value Then
+        If CheckBox_visforklaring.value Then
             text = text & "key=""" & omax.ConvertToAscii(TextBox_var7.text) & ""","
         Else
             text = text & "key="""","
@@ -753,8 +753,8 @@ On Error GoTo fejl
         text = text & "points(makelist([pq[1],pq[8]],pq,qDElist)),"
         yAxislabel = yAxislabel & TextBox_var7.text & ","
     End If
-    If CheckBox8.Value Then
-        If CheckBox_visforklaring.Value Then
+    If CheckBox8.value Then
+        If CheckBox_visforklaring.value Then
             text = text & "key=""" & omax.ConvertToAscii(TextBox_var8.text) & ""","
         Else
             text = text & "key="""","
@@ -763,8 +763,8 @@ On Error GoTo fejl
         text = text & "points(makelist([pq[1],pq[9]],pq,qDElist)),"
         yAxislabel = yAxislabel & TextBox_var8.text & ","
     End If
-    If CheckBox9.Value Then
-        If CheckBox_visforklaring.Value Then
+    If CheckBox9.value Then
+        If CheckBox_visforklaring.value Then
             text = text & "key=""" & omax.ConvertToAscii(TextBox_var9.text) & ""","
         Else
             text = text & "key="""","

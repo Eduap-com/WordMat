@@ -379,7 +379,7 @@ zmax = TextBox_zmax.text
 'functions
 If TextBox_forskrift1.text <> "" Then
     lign = omax.CodeForMaxima(TextBox_forskrift1.text)
-    If CheckBox_udtryk.Value Then
+    If CheckBox_udtryk.value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & "),"
@@ -387,7 +387,7 @@ If TextBox_forskrift1.text <> "" Then
 End If
 If TextBox_forskrift2.text <> "" Then
     lign = omax.CodeForMaxima(TextBox_forskrift2.text)
-    If CheckBox_udtryk.Value Then
+    If CheckBox_udtryk.value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & "),"
@@ -395,7 +395,7 @@ If TextBox_forskrift2.text <> "" Then
 End If
 If TextBox_forskrift3.text <> "" Then
     lign = omax.CodeForMaxima(TextBox_forskrift3.text)
-    If CheckBox_udtryk.Value Then
+    If CheckBox_udtryk.value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",explicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & "),"
@@ -405,10 +405,10 @@ End If
 'Equations
 If TextBox_ligning1.text <> "" Then
     lign = omax.CodeForMaxima(TextBox_ligning1.text)
-    If CheckBox_udtryk.Value Then
+    If CheckBox_udtryk.value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
-    If OptionButton_kunflader.Value Then
+    If OptionButton_kunflader.value Then
         grafobj = grafobj & "enhanced3d=[" & GetNextEnhFunc() & ", x, y, z],"
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ",z," & zmin & "," & zmax & "),"
@@ -416,10 +416,10 @@ If TextBox_ligning1.text <> "" Then
 End If
 If TextBox_ligning2.text <> "" Then
     lign = omax.CodeForMaxima(TextBox_ligning2.text)
-    If CheckBox_udtryk.Value Then
+    If CheckBox_udtryk.value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
-    If OptionButton_kunflader.Value Then
+    If OptionButton_kunflader.value Then
         grafobj = grafobj & "enhanced3d=[" & GetNextEnhFunc() & ", x, y, z],"
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ",z," & zmin & "," & zmax & "),"
@@ -427,10 +427,10 @@ If TextBox_ligning2.text <> "" Then
 End If
 If TextBox_ligning3.text <> "" Then
     lign = omax.CodeForMaxima(TextBox_ligning3.text)
-    If CheckBox_udtryk.Value Then
+    If CheckBox_udtryk.value Then
         grafobj = grafobj & "key=""" & lign & ""","
     End If
-    If OptionButton_kunflader.Value Then
+    If OptionButton_kunflader.value Then
         grafobj = grafobj & "enhanced3d=[" & GetNextEnhFunc() & ", x, y, z],"
     End If
     grafobj = grafobj & "color=" & GetNextColor & ",implicit(" & lign & ",x," & xmin & "," & xmax & ",y," & ymin & "," & ymax & ",z," & zmin & "," & zmax & "),"
@@ -447,7 +447,7 @@ If TextBox_parametric1x.text <> "" Then
     tmax = omax.CodeForMaxima(TextBox_tmax1.text)
     smin = omax.CodeForMaxima(TextBox_smin1.text)
     smax = omax.CodeForMaxima(TextBox_smax1.text)
-    If CheckBox_udtryk.Value Then
+    If CheckBox_udtryk.value Then
         grafobj = grafobj & "key=""paramterfremstilling: (" & parx & "," & pary & "," & parz & ")"","
     Else
         grafobj = grafobj & "key="""","
@@ -468,7 +468,7 @@ If TextBox_parametric2x.text <> "" Then
     tmax = TextBox_tmax2.text
     smin = TextBox_smin2.text
     smax = TextBox_smax2.text
-    If CheckBox_udtryk.Value Then
+    If CheckBox_udtryk.value Then
         grafobj = grafobj & "key=""paramterfremstilling: (" & parx & "," & pary & "," & parz & ")"","
     Else
         grafobj = grafobj & "key="""","
@@ -489,7 +489,7 @@ If TextBox_parametric3x.text <> "" Then
     tmax = omax.CodeForMaxima(TextBox_tmax3.text)
     smin = omax.CodeForMaxima(TextBox_smin3.text)
     smax = omax.CodeForMaxima(TextBox_smax3.text)
-    If CheckBox_udtryk.Value Then
+    If CheckBox_udtryk.value Then
         grafobj = grafobj & "key=""paramterfremstilling: (" & parx & "," & pary & "," & parz & ")"","
     Else
         grafobj = grafobj & "key="""","
@@ -531,7 +531,7 @@ If TextBox_vektorer.text <> "" Then
             Arr(i) = Replace(Arr(i), "(", "[")
             Arr(i) = Replace(Arr(i), ")", "]")
             
-            If CheckBox_udtryk.Value Then
+            If CheckBox_udtryk.value Then
                 grafobj = grafobj & "key=""Vektor: " & Arr(i) & ""","
             Else
                 grafobj = grafobj & "key="""","
@@ -560,7 +560,7 @@ If TextBox_punkter.text <> "" Then
     If Right$(punkttekst, 1) = "," Then punkttekst = Left$(punkttekst, Len(punkttekst) - 1)
     grafobj = grafobj & "key="""","
     
-    grafobj = grafobj & "point_type=filled_circle,point_size=" & TextBox_pointsize.text & ",points_joined=" & VBA.LCase$(CheckBox_pointsjoined.Value) & ",points([" & punkttekst & "]),"
+    grafobj = grafobj & "point_type=filled_circle,point_size=" & TextBox_pointsize.text & ",points_joined=" & VBA.LCase$(CheckBox_pointsjoined.value) & ",points([" & punkttekst & "]),"
     antalobj = antalobj + 1
 End If
 
@@ -569,7 +569,7 @@ End If
 If grafobj = "" Then GoTo slut
 
 If OptionButton_kunlinjer Then
-    If Not CheckBox_transp.Value Then
+    If Not CheckBox_transp.value Then
         grafobj = "surface_hide = true," & grafobj
     End If
     grafobj = "user_preamble = ""set xyplane at 0""," & grafobj 'palette=gray,
@@ -579,7 +579,7 @@ ElseIf OptionButton_linjerogflader Then
     grafobj = "user_preamble = ""set pm3d at s depthorder;set xyplane at 0""," & grafobj 'palette=gray,
 End If
 
-If CheckBox_grid.Value Then
+If CheckBox_grid.value Then
     grafobj = grafobj & "xaxis_width = 2,xaxis_color = orange,xaxis_type  = solid,xaxis=true,yaxis_width = 2,yaxis_color = orange,yaxis_type=solid,yaxis=true,zaxis_width = 2,zaxis_color = blue,zaxis_type=solid,zaxis=true,grid=true,user_preamble = ""set xyplane at 0"","
 End If
 
