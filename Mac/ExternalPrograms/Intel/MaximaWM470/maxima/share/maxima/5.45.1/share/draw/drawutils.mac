@@ -1,0 +1,193 @@
+/*               COPYRIGHT NOTICE
+
+Copyright (C) 2010 Donald J Bindner
+              2015 Pankaj Sejwal
+
+This program is free software; you can redistribute
+it and/or modify it under the terms of the
+GNU General Public License as published by
+the Free Software Foundation; either version 2 
+of the License, or (at your option) any later version. 
+
+This program is distributed in the hope that it
+will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY
+or FITNESS FOR A PARTICULAR PURPOSE. See the 
+GNU General Public License for more details at
+http://www.gnu.org/copyleft/gpl.html
+*/
+
+
+/*
+This is a set of user contributed plotting routines
+based on package draw.
+
+See documentation in drawutils.texi
+*/
+
+drawutils_version :  1 $
+
+if draw_version = 'draw_version then load("draw") $
+
+
+
+
+
+/*********************/
+/* Vector fields     */
+/*       by          */
+/* Donald J. Bindner */
+/*      2010         */
+/*********************/
+
+
+plot_vector_field( F, X, Y, [args] ) := block(
+ [vars, G,P,Q, points, grid_d,u,scale, range,xrange,yrange, v],
+ scale : assoc('scale,args,1), args:delete( 'scale=scale, args ),
+ /* create function versions of each componont and of the field itself */
+ vars : [ X[1],Y[1] ],
+ P : G( vars, ev(F[1])), P : subst( lambda, G, P ),
+ Q : G( vars, ev(F[2])), Q : subst( lambda, G, Q ),
+ G : lambda( [z], [apply(P,z), apply(Q,z)] ),
+ /* create a list of points to base arrows at */
+ points : listify( cartesian_product( 
+      setify( makelist(  X[2] + (X[3]-X[2])*i/10, i, 0, 10 )),
+      setify( makelist(  Y[2] + (Y[3]-Y[2])*i/10, i, 0, 10 )) )),
+ /* diagonal length of a grid square */
+ grid_d : sqrt((X[3]-X[2])^2 + (Y[3]-Y[2])^2)/10.0,
+ /* u is the divisor that shortens arrows to fit in grid squares */
+ u : max( apply( max, makelist( abs(P(k[1],k[2])), k, points )) / (X[3]-X[2]) * 10,
+          apply( max, makelist( abs(Q(k[1],k[2])), k, points )) / (Y[3]-Y[2]) * 10 ),
+ if scale#0 and u>grid_d/50.0 then u:scale/u else u:1,
+ /* xrange and yrange need to be large enough to contain head
+  * and tail of each arrow (or some won't appear in output) */
+ range : lambda( [z], [ apply(min,z), apply(max,z) ] ),
+ xrange : range( flatten(makelist( [k[1],k[1]+P(k[1],k[2])], k, points ))),
+ yrange : range( flatten(makelist( [k[2],k[2]+Q(k[1],k[2])], k, points ))),
+ /* generate the vectors to draw and set an appropriate arrow
+  * head length for each one */
+ v : flatten( makelist( [head_length=u*sqrt(G(k).G(k))/5+grid_d/100, vector(k, u*G(k) )], k, points )),
+ /* draw! */
+ draw2d(color=blue,line_width=1,head_type='nofilled,
+        head_angle=20,'xrange=xrange,'yrange=yrange,
+        xlabel=string(X[1]),ylabel=string(Y[1]), args, v )   )$
+
+
+plot_vector_field3d( F, X, Y, Z, [args] ) := block(
+ [vars, G,P,Q,R, points, grid_d,u,scale, range,xrange,yrange,zrange, v],
+ scale : assoc('scale,args,1), args:delete( 'scale=scale, args ),
+ /* create function versions of each componont and of the field itself */
+ vars : [ X[1],Y[1],Z[1] ],
+ P : G( vars, ev(F[1])), P : subst( lambda, G, P ),
+ Q : G( vars, ev(F[2])), Q : subst( lambda, G, Q ),
+ R : G( vars, ev(F[3])), R : subst( lambda, G, R ),
+ G : lambda( [z], [apply(P,z), apply(Q,z), apply(R,z)] ),
+ /* create a list of points to base arrows at */
+ points : listify( cartesian_product( 
+      setify( makelist(  X[2] + (X[3]-X[2])*i/5, i, 0, 5 )),
+      setify( makelist(  Y[2] + (Y[3]-Y[2])*i/5, i, 0, 5 )),
+      setify( makelist(  Z[2] + (Z[3]-Z[2])*i/5, i, 0, 5 )) )),
+ /* the diagonal length of a grid square */
+ grid_d : sqrt((X[3]-X[2])^2 + (Y[3]-Y[2])^2 + (Z[3]-Z[2])^2)/5.0,
+ /* u is the divisor that shortens arrows to fit in grid squares */
+ u : max( apply( max, makelist( abs(P(k[1],k[2],k[3])), k, points )) / (X[3]-X[2]) * 5,
+          apply( max, makelist( abs(Q(k[1],k[2],k[3])), k, points )) / (Y[3]-Y[2]) * 5,
+          apply( max, makelist( abs(R(k[1],k[2],k[3])), k, points )) / (Z[3]-Z[2]) * 5 ),
+ if scale#0 and u>grid_d/50.0 then u:scale/u else u:1,
+ /* xrange,yrange,zrange need to be large enough to contain head
+  * and tail of each arrow (or some won't appear in output) */
+ range : lambda( [z], [ apply(min,z), apply(max,z) ] ),
+ xrange : range( flatten(makelist( [k[1],k[1]+P(k[1],k[2],k[3])], k, points ))),
+ yrange : range( flatten(makelist( [k[2],k[2]+Q(k[1],k[2],k[3])], k, points ))),
+ zrange : range( flatten(makelist( [k[3],k[3]+R(k[1],k[2],k[3])], k, points ))),
+ /* generate the vectors to draw and set an appropriate arrow
+  * head length for each one */
+ v : flatten(makelist( [head_length=u*sqrt(G(k).G(k))/10+grid_d/100, vector(k, u*G(k))], k, points )),
+ /* draw! */
+ draw3d(color=blue,line_width=1,head_type='nofilled,
+        head_angle=10,'xrange=xrange,'yrange=yrange,
+        'zrange=zrange,xlabel=string(X[1]),ylabel=string(Y[1]),zlabel=string(Z[1]), args, v ) )$
+
+
+
+
+/*****************/
+/* Venn diagrams */
+/*       by      */
+/* Pankaj Sejwal */
+/*      2015     */
+/*****************/
+
+
+load(basic)$
+
+fun(n):=/* To plot n-circles at equal distance from each other, find coordinates using roots of complex function of order n */
+map(lambda([s],[realpart(s),imagpart(s)]),makelist(cos(2*k*%pi/n)+%i*sin(2*k*%pi/n),k,1,n))$
+
+
+liss(n):=/* Create equations for circles using the coordinates obtained from fun()) */
+block([pts:fun(n)],pts:map(lambda([w],(x-first(w))^2+(y-last(w))^2=n),pts))$
+
+
+collectatoms(rel):=/* Collect all atoms from the relation provided to be plotted,
+eg, (a and b or not(c))=>[a,b,c], calls findatoms() to get job done */
+block([final:[]],findatoms(rel),flatten(reverse(final)))$
+
+
+findatoms(rel):=block([temp,ntemp],ntemp:args(rel),/* Collects atoms in logical relation iteratively  */
+temp:sublist(ntemp,lambda([s],atom(s))),
+if(temp#[]) then push(temp,final),
+for item in temp do ntemp:delete(item,ntemp),
+map(findatoms,ntemp))$
+
+
+transform(eq,args,lis):=/* Substitutes the equations of circles into logical relation, 
+maxima automatically handles it as (x^2+y^2<const) in case of inclusion and not(x^2+y^2<const) 
+equal to (x^2+y^2>const) in case of exclusion */
+block([temp],
+eq:map(lambda([s],lhs(s)<rhs(s)),eq),
+temp:map("=",lis,eq),
+args:psubst(temp,args),args)$
+
+
+randomcolor():=/*create a random color for each circle plotted */
+block([temp:[],final:[]],for i:1 thru 6 do 
+(temp:[],for j:1 thru 4 do push(random(2),temp),push(temp,final)),
+final:psubst([[0,0,0,0]=0,[0,0,0,1]=1,[0,0,1,0]=2,[0,0,1,1]=3,[0,1,0,0]=4,
+[0,1,0,1]=5,[0,1,1,0]=6,[0,1,1,1]=7,[1,0,0,0]=8,[1,0,0,1]=9,
+[1,0,1,0]=a,[1,0,1,1]=b,[1,1,0,0]=c,[1,1,0,1]=d,[1,1,1,0]=e,[1,1,1,1]=f],final),
+final)$
+
+
+vennplot(args):=/* Does plotting work for the logical relation and is the only function needed by user */
+block([pts,reg,form,temp,wee,colr,i:1],
+lis:collectatoms(args),
+form:liss(length(lis)),
+n:length(lis),
+pts:(fun(n)),
+temp:transform(form,args,lis),
+wee:[title=string(args),proportional_axes=xy,
+grid= true,line_type= solid,x_voxel = 50,y_voxel = 50],
+reg:apply(lambda([s],region(s,x,-(n+1),n+1,y,-(n+1),n+1)),[transform(form,args,lis)]),
+wee:endcons(reg,wee),
+wee:endcons(grid=false,wee),
+wee:endcons(font="Courier-Oblique",wee),
+wee:endcons(font_size=15,wee),
+wee:endcons(line_width=3,wee),
+for item in form do 
+      ( colr:apply(concat,cons("#",randomcolor())),
+      wee:endcons(key=string(part(lis,i)),wee),
+      wee:endcons(color= (colr),wee),     
+      wee:endcons(label([string(part(lis,i)),first(part(pts,i)),last(part(pts,i))-0.4]),wee),i:i+1,
+      wee:endcons(implicit(item,x,-(n+1),n+1,y,-(n+1),n+1),wee)),
+apply(draw2d,wee))$
+
+
+/* Usage examples:
+
+vennplot(a and b and not(c))$
+vennplot(not(d) and b);
+
+*/
+
+

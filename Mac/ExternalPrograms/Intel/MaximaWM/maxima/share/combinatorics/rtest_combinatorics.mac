@@ -1,0 +1,168 @@
+(if not ?fboundp ('permp) then load ("combinatorics"), 0);
+0;
+
+cyclep ([], 0);
+true;
+
+cyclep ([], 1);
+true;
+
+cyclep ([1], 1);
+true;
+
+permp ([]);
+true;
+
+permp ([1]);
+true;
+
+permult ([], []);
+[];
+
+permult ([1], [1]);
+[1];
+
+perm_inverse ([]);
+[];
+
+perm_inverse ([1]);
+[1];
+
+permute ([], []);
+[];
+
+permute ([1], '[a]);
+[a];
+
+apply_cycles ([], []);
+[];
+
+apply_cycles ([], '[a, b, c]);
+[a, b, c];
+
+/* this next one should perhaps be a no-op, not sure;
+ * at present it triggers an error.
+ * I won't try to resolve that now.
+apply_cycles ([[]], [a, b, c]);
+[a, b, c]; /* <-- not sure */
+ */
+
+apply_cycles ([[1]], '[a, b, c]);
+[a, b, c];
+
+/* pretty sure this next one should be a no-op;
+ * at present it triggers an error.
+ * I won't try to resolve it now.
+perm_undecomp ([[], []], 0);
+[];
+ */
+
+perm_undecomp ([[1], [1]], 1);
+[1];
+
+perm_cycles ([]);
+[];
+
+perm_cycles ([1]);
+[];
+
+/* perm_lex_rank([]) returns 1, but maybe it should be an error;
+ * I won't try to resolve it now.
+errcatch (perm_lex_rank ([]));
+[];
+ */
+
+perm_lex_rank ([1]);
+1;
+
+/* perm_lex_unrank(0, 0) triggers an invalid argument error; that seems OK. */
+errcatch (perm_lex_unrank (0, 0));
+[];
+
+perm_lex_unrank (1, 1);
+[1];
+
+perm_length ([]);
+0;
+
+perm_length ([1]);
+0;
+
+perm_decomp ([]);
+[];
+
+perm_decomp ([1]);
+[];
+
+perm_parity ([]);
+0;
+
+perm_parity ([1]);
+0;
+
+/* perms_lex(0) triggers an invalid argument error; that seems OK. */
+errcatch (perms_lex (0));
+[];
+
+perms_lex (1);
+[[1]];
+
+/* perm_lex_next([]) should trigger an invalid argument error, I think, or maybe return false;
+ * at present it triggers a Lisp error, "Invalid index -1 for (SIMPLE-ARRAY FIXNUM (0))".
+ * I won't try to resolve that for now.
+errcatch (perm_lex_next ([]));
+[];
+ */
+
+perm_lex_next ([1]);
+false;
+
+/* perm_rank([]) should maybe trigger an invalid argument error; not sure.
+ * At present it returns 1.
+ * I won't try to resolve that now.
+errcatch (perm_rank ([]));
+[];
+ */
+
+/* perm_rank([]) returns 1, but maybe it should be an error;
+ * I won't try to resolve it now.
+errcatch (perm_rank ([]));
+[];
+ */
+
+perm_rank ([1]);
+1;
+
+/* perm_unrank(0, 0) triggers an invalid argument error; that seems OK. */
+errcatch (perm_unrank (0, 0));
+[];
+
+perm_unrank (1, 1);
+[1];
+
+/* perms(0) triggers an invalid argument error; that seems OK. */
+errcatch (perms (0));
+[];
+
+perms (1);
+[[1]];
+
+/* I wonder if perm_next([]) should trigger an invalid argument error;
+ * I won't try to resolve that now.
+ */
+perm_next ([]);
+false;
+
+perm_next ([1]);
+false;
+
+/* random_perm(0) triggers an invalid argument error;
+ * I suspect it should return [].
+ * I won't try to resolve that now.
+random_perm (0);
+[];
+ */
+
+random_perm (1);
+[1];
+

@@ -123,6 +123,7 @@ eigenvectors(mat):=
 		block([eigvecs,equations,unknowns,solution,eigvals,dimnsn,
 		count,vectr,index3,index4,index2,index1,matrx,mmatrx,notknwn,
 		unit,multiplicities,%rnum,realonly,algebraic,interm,intern],
+		local(solution, mmatrx),
                 mode_declare([equations,unknowns,solution,eigvals,
                               unit,interm],list,
                              [dimnsn,count,index3,index4,index2,index1],fixnum,
@@ -170,7 +171,7 @@ substvectk(l,n,exp):=(mode_declare(l,list,n,fixnum,exp,any),
                 sublis(sub_list,exp)))$
 
 
-uniteigenvectors (M):= block ([uv],
+uniteigenvectors (M):= block ([uv], local(uv),
     mode_declare (uv, list, [i, j], fixnum),
 
     if knowneigvects
@@ -188,7 +189,7 @@ uniteigenvectors (M):= block ([uv],
 
 
 similaritytransform(mat):=
-		block([listvec,listuevec],
+		block([listvec,listuevec], local(listuevec),
                 mode_declare([listvec,listuevec],list),
 		listuevec:uniteigenvectors(mat),
 		if nondiagonalizable then return(listuevec)
@@ -208,7 +209,7 @@ uvect(x):=unitvector(x)$
 
 covect(x):=columnvector(x)$
 
-gschmit(x%, [f]):= if f = [] then gramschmidt(x%) else gramschmidt (x%, f[1])$
+gschmit(x%, [f]):= if f = [] then gramschmidt(x%) else gramschmidt (x%, first(f))$
 
 eivals(mat):=eigenvalues(mat)$
 

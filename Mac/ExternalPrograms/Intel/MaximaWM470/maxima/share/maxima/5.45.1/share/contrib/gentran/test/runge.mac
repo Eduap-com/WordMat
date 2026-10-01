@@ -1,0 +1,14 @@
+/* Enter parameters */
+k : 1/(2*m)*p^2$
+u : k0/2*q^2$
+d : b/2*qdot$
+h : k + u$
+
+/*  Perform Calculations  */
+batchload("rk.in");  /* define Runge-Katta method */
+batchload("ham.in"); /*  Hamiltonian Calculation  */
+
+gentranlang : fortran$
+genfloat:true$
+/*  Call Template Processor  */
+gentranin("runge.template", ["runge.f"]);

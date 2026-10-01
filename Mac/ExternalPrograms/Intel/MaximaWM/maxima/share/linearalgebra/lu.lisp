@@ -7,6 +7,7 @@
 ;; This software has NO WARRANTY, not even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
+(in-package :maxima)
 ($put '$lu 3 '$version)
 	
 ;; Return the i,j entry of the Maxima matrix m. The rows of m have been permuted according
@@ -278,8 +279,10 @@
       (setq d (funcall fconvert (m-elem m perm i i)))
       ;;(if ($matrixp d) (setq d ($determinant_by_lu d fld)))
       (setq acc (funcall fmult acc d)))
-    (bbsort1 (cdr perm))
-    (funcall (mring-mring-to-maxima fld) (if sign (funcall (mring-negate fld) acc) acc))))
+    (multiple-value-bind (perm-sorted perm-sign) (bbsort1 (cdr perm))
+      (declare (ignore perm-sorted))
+      (funcall (mring-mring-to-maxima fld)
+               (if perm-sign (funcall (mring-negate fld) acc) acc)))))
 
 (defun $mat_cond (m p)
   ($require_square_matrix m '$first '$mat_cond)
@@ -300,7 +303,7 @@
   (let ((OK t) (n))
       (cond (($matrixp mat)
               (setq n ($matrix_size mat))
-              (cond ((not (eql ($first n) ($second n))) ;nonsquare matrices aren't invertiable
+              (cond ((not (eql ($first n) ($second n))) ;nonsquare matrices aren't invertible
                  nil)
               (t    
                 (setq mat (fourth ($get_lu_factors ($lu_factor mat fld))))

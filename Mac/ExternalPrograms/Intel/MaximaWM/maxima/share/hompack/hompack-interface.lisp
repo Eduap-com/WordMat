@@ -1,8 +1,8 @@
 ;;; -*- Mode: lisp -*-
 
-;; Simple Maxima inteface to hompack routines
+;; Simple Maxima interface to hompack routines
 
-(in-package #-gcl #:maxima #+gcl "MAXIMA")
+(in-package #:maxima)
 
 (defmvar $debug_hompack nil
   "Set to non-NIL to enable some debugging prints")
@@ -49,7 +49,7 @@
 				  (let ((p ($hipow term v)))
 				    (incf term-deg p)
 				    ;; TODO: Check that p is non-negative integer
-				    (setf prod (mul prod (pow v p)))
+				    (setf prod (mul prod (power v p)))
 				    p))
 			      vars))
 		 (c ($float ($expand (div term prod)))))
@@ -67,7 +67,7 @@
 	    (push c coef)
 	    (push (list* '(mlist) deg) kdeg)))
 	(setf total-deg (* total-deg (reduce #'max eqn-deg)))
-	;; Now accumlate the results from each equation on to the final list
+	;; Now accumulate the results from each equation on to the final list
 	(push (list* '(mlist) (nreverse kdeg)) final-kdeg)
 	(push (list* '(mlist) (nreverse coef)) final-coef)))
     ;; Finally, return the full list of coefficients and degress for
@@ -339,7 +339,7 @@
 			   (coerce-float-fun fjf varlist))
 		       ;; The Fortran code wants the k-th column, so
 		       ;; transpose the Jacobian here to make the
-		       ;; interface bewteen Maxima and Fortran a
+		       ;; interface between Maxima and Fortran a
 		       ;; little simpler.  Then we can just extract
 		       ;; the k-th row of the transpose to get what's
 		       ;; needed.

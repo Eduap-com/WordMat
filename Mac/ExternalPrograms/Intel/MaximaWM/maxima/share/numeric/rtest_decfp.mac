@@ -17,7 +17,72 @@ true;
 rationalize(1.0L-1)-1/10;
 0;
 
+/* Test that orderlessp is a total ordering on mixed binary and decimal bigfloats. */
+block(
+	/* Some special values that have very similar internal representations ... */
+	[zb1 : block([fpprec : 1], bfloat(0.0)),
+	 zb2 : block([fpprec : 2], bfloat(0.0)),
+	 zd1 : block([fpprec : 1], bfloat(0)),
+	 zd2 : block([fpprec : 2], bfloat(0)),
+	 zd6 : block([fpprec : 6], bfloat(0)),
+	 zd9 : block([fpprec : 9], bfloat(0)),
+	 b1 : block([fpprec : 1], bfloat(1.0)),
+	 b2 : block([fpprec : 2], bfloat(1.0)),
+	 d1 : block([fpprec : 1], bfloat(320)),
+	 d2 : block([fpprec : 2], bfloat(320)),
+	 d6 : block([fpprec : 6], bfloat(320)),
+	 d9 : block([fpprec : 9], bfloat(320)),
+	 L, fpprec : fpprec],
+	local(orderlessp),
+	
+	/* totalorderp by Stavros Macrakis */
+	totalorderp(func, domain) := block(
+		[ord, i, j, res : []],
+		ord : sort(domain, func),
+		i : 0,
+		for eli in ord do (
+			i : i + 1,
+			j : 0,
+			for elj in ord do (
+				j : j + 1,
+				if func(eli, elj) # is(i < j) and not(eli = elj) then push([i, j, eli, elj], res)
+			)
+		),
+		res
+	),
+	
+	L : [b1, b2, d1, d2, d6, d9],
+	
+	/* Add the negatives.  */
+	L : append(L, -L),
+	
+	/* Add different zeros. */
+	L : append(L, [zb1, zb2, zd1, zd2, zd6, zd9]),
+	
+	/* Throw in some more.  */
+	for i in [-4, -3, -2, -1, 1, 2, 3, 4] do (
+		for fpprec : 1 thru 11 step 2 do (
+			/* bfloat will turn integers into decimal bigfloats
+			   and floats into binary bigfloats. */
+			push(bfloat(25 * i), L),
+			push(bfloat(25.0 * i), L),
+			push(bfloat(5 * i), L),
+			push(bfloat(5.0 * i), L),
+			push(bfloat(i), L),
+			push(bfloat(1.0 * i), L),
+			push(bfloat(i / 5), L),
+			push(bfloat(i / 5.0), L),
+			push(bfloat(i / 25), L),
+			push(bfloat(i / 25.0), L)
+		)
+	),
+	
+	/* Test for total order. */
+	totalorderp(orderlessp, L)
+);
+[];
+
 /* The decfp code changes the value of bigfloatone (and possibly other 
 such values) to decimal floats. Let's reset them. */
-(reset(?bigfloat%pi,?bigfloat%e,?bfmhalf,?bfhalf,?bigfloatone,?bigfloatzero),0);
+(reset(?\*bfmhalf\*,?\*bfhalf\*,?\*bigfloatone\*,?\*bigfloatzero\*),0);
 0$

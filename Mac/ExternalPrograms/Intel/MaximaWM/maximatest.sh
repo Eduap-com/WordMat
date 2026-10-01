@@ -5,13 +5,19 @@
 
 #ROOT=`(cd \`dirname "$SCRIPT"\` > /dev/null 2>&1 ; pwd)`
 #MAXIMA_PREFIX=$ROOT/maxima/
+
 MAXIMA_PREFIX='/Library/Application Support/Microsoft/Office365/User Content.localized/Add-Ins.localized/WordMat/MaximaWM/maxima'
 export MAXIMA_PREFIX
 
-PATH="$MAXIMA_PREFIX/bin:$PATH"
-export PATH
+#PATH="$MAXIMA_PREFIX/bin:$PATH"
+#export PATH
+
+MAXIMA_LAYOUT_AUTOTOOLS=false
+export MAXIMA_LAYOUT_AUTOTOOLS
+#env MAXIMA_LAYOUT_AUTOTOOLS=false
+
 #function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
-echo Starting Maxima M1-compiled
+echo Starting Maxima Intel-compiled
 
 MaxTime=$1
 
@@ -21,6 +27,6 @@ then
 fi
 
 #exec "$MAXIMA_PREFIX/bin/maxima" "$1" "$2" "$3" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
-"./maxima/bin/sbcl" --core "./maxima/lib/maxima/5.47.0/binary-sbcl/maxima.core"
+"./maxima/bin/sbcl" --core "./maxima/lib/maxima/5.50.0/binary-sbcl/maxima.core"  #--eval '(cl-user::run)'
 # "$MAXIMA_PREFIX/bin/Maximatimeout" 10
-#"$MAXIMA_PREFIX/bin/Maximatimeout" --signal=0 --kill-after=$MaxTime $MaxTime "$MAXIMA_PREFIX/bin/sbcl" --core "$MAXIMA_PREFIX/lib/maxima/5.47.0/binary-sbcl/maxima.core"
+#"$MAXIMA_PREFIX/bin/Maximatimeout" --signal=0 --kill-after=$MaxTime $MaxTime "$MAXIMA_PREFIX/bin/sbcl" --core "$MAXIMA_PREFIX/lib/maxima/5.45.1/binary-sbcl/maxima.core"

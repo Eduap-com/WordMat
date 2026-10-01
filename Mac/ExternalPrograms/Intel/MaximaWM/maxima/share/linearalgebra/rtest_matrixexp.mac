@@ -253,6 +253,18 @@ true$
 xequal(matrixfun(lambda([x],1+x^5), m), ident(3)+m^^5);
 true$
 
+/* \#2596 error in matrix exponentiation */
+block([keepfloat : true,ratmx : true], matrixexp(matrix([%i*%pi])));
+matrix([-1])$
+
+block([keepfloat : true,ratmx : false], matrixexp(matrix([%i*%pi])));
+matrix([-1])$
+
+block([keepfloat : false,ratmx : true], matrixexp(matrix([%i*%pi])));
+matrix([-1])$
+
+block([keepfloat : false,ratmx : false], matrixexp(matrix([%i*%pi])));
+matrix([-1])$
 
 
 

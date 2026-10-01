@@ -138,9 +138,9 @@ simpW(x):=
     x:ev(x,icurvature),
     x:canform(x),
     x:ev(x,ichr2),
-    x:canform(contract(simpmetderiv(canform(contract(canform(x)))))),
+    x:rename(canform(contract(simpmetderiv(canform(contract(canform(x))))))),
     flipflag:not flipflag,
-    x:simpmetderiv(canform(contract(simpmetderiv(x,stop))),stop),
+    x:rename(simpmetderiv(canform(contract(simpmetderiv(x,stop))),stop)),
     flipflag:not flipflag,
     canform(conmetderiv(canform(contract(simpmetderiv(canform(x),stop))),imetric))
 )$

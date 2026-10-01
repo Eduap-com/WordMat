@@ -15,7 +15,7 @@
 ;;;
 ;;;  You should have received a copy of the GNU General Public License
 ;;;  along with this program; if not, write to the Free Software
-;;;  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+;;;  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 ;;;
 
 
@@ -376,6 +376,29 @@
 		  (graph-vertex-labels gr)
 		  (digraph-vertex-labels gr))))
 
+(defmfun $get_unique_vertex_by_label (l gr)
+  (unless (stringp l) (merror (intl:gettext "get_unique_vertex_by_label: first argument must be a string; found ~M") l))
+  (require-graph-or-digraph 'get_unique_vertex_by_label 2 gr)
+  (get-unique-vertex-by-label l gr))
+
+(defun get-unique-vertex-by-label (l gr)
+  (let ((vv (get-all-vertices-by-label l gr)))
+    (cond 
+      ((null vv) nil)
+      ((= (length vv) 1) (first vv))
+      (t (merror (intl:gettext "get_unique_vertex_by_label: two or more vertices have the same label ~:M") l)))))
+
+(defun get-all-vertices-by-label (l gr)
+  (let (vv)
+    (maphash (lambda (v l1) (when (string= l1 l) (push v vv)))
+             (if (graph-p gr) (graph-vertex-labels gr) (digraph-vertex-labels gr)))
+    (sort vv '<)))
+  
+(defmfun $get_all_vertices_by_label (l gr)
+  (unless (stringp l) (merror (intl:gettext "get_all_vertices_by_label: first argument must be a string; found ~M") l))
+  (require-graph-or-digraph 'get_all_vertices_by_label 2 gr)
+  (cons '(mlist) (get-all-vertices-by-label l gr)))
+
 (defmfun $clear_vertex_label (v gr)
   (require-vertex 'clear_vertex_label 1 v)
   (require-graph-or-digraph 'clear_vertex_label 2 gr)
@@ -732,7 +755,7 @@
     (add-edge (list 0 (1- n)) g)
     (dotimes (i n)
       (setq pos (cons `((mlist simp) ,i
-                        ((mlist simp) ,(cos (* i 2 pi (/ n))) ,(sin (* i 2 pi (/ n)))))
+                        ((mlist simp) ,($cos (* i 2 pi (/ n))) ,($sin (* i 2 pi (/ n)))))
                       pos)))
     ($set_positions (cons '(mlist simp) pos) g)
     g))
@@ -779,12 +802,12 @@
 	(add-edge `(,e1 ,e2) g)))
     (dotimes (i n)
       (push `((mlist simp) ,i ((mlist simp)
-			       ,(sin (/ (* 2 i pi) n))
-			       ,(cos (/ (* 2 i pi) n))))
+			       ,($sin (/ (* 2 i pi) n))
+			       ,($cos (/ (* 2 i pi) n))))
 	    positions)
       (push `((mlist simp) ,(+ n i) ((mlist simp)
-				     ,(* 0.66 (sin (/ (* 2 i pi) n)))
-				     ,(* 0.66 (cos (/ (* 2 i pi) n)))))
+				     ,(* 0.66 ($sin (/ (* 2 i pi) n)))
+				     ,(* 0.66 ($cos (/ (* 2 i pi) n)))))
 	    positions))
     (setf (graph-vertex-positions g) (cons '(mlist simp) positions))
     g))
@@ -815,8 +838,8 @@
 	(add-edge `(,i ,j) g)))
     (dotimes (i n)
       (push `((mlist simp) ,i ((mlist simp)
-                               ,(cos (/ (* 2 i pi) n))
-                               ,(sin (/ (* 2 i pi) n))))
+                               ,($cos (/ (* 2 i pi) n))
+                               ,($sin (/ (* 2 i pi) n))))
             pos))
     (setf (graph-vertex-positions g) (cons '(mlist simp) pos))
     g))

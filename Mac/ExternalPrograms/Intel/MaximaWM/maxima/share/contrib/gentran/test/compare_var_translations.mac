@@ -1,0 +1,81 @@
+var:-((sqrt(m_piM^4+W^8*cost^2-W^8+4*P0^2*W^6)+((cost^2-1)*m_nuc^2+W^2*cost^2-W^2)*m_piM^4+sqrt(m_piM^2+P0^2)*(4*W^2*m_nuc*m_piM^2-4*W^2*m_nuc^3+4*W^4*m_nuc)+((2-2*cost^2)*m_nuc^4-4*W^2*cost^2*m_nuc^2-2*W^4*cost^2-2*W^4)*m_piM^2+(cost^2-1)*m_nuc^6+(W^2-W^2*cost^2)*m_nuc^4+(W^4-W^4*cost^2)*m_nuc^2+W^6*cost^2-W^6)/((cost^2-1)*m_piM^4+((2-2*cost^2)*m_nuc^2-2*W^2*cost^2-2*W^2)*m_piM^2+(cost^2-1)*m_nuc^4+(2*W^2-2*W^2*cost^2)*m_nuc^2+W^4*cost^2-W^4));
+
+/* should find that translated functions produce same results as original */
+
+freevars: listofvars (var);
+
+implicit_integer (varname) :=
+    block ([S1: charat (string (varname), 1)],
+           is (member (S1, ["i", "j", "k", "l", "m", "n", "I", "J", "K", "L", "M", "N"]) # false));
+
+make_type_decls (l) :=
+    block ([l1, l2a, l2b],
+           l1: makelist (if implicit_integer (x) then ['integer, x] else ['real, x], x, l),
+           [l2_real, l2_integer]: partition (l1, 'integer),
+           [ funmake (type, cons ('real, map (second, l2_real))),
+             funmake (type, cons ('integer, map (second, l2_integer))) ]);
+
+type_decls: cons (type (real, foo), make_type_decls (freevars));
+
+define (funmake (foo, freevars), buildq ([var, type_decls], block (splice (type_decls), return (var))));
+
+random_for (x, lower_limit, upper_limit) :=
+    if implicit_integer (x)
+        then lower_limit + random (upper_limit - lower_limit)
+        else lower_limit + random (float (upper_limit - lower_limit));
+
+random_values_for (l) := map (lambda ([x], random_for (x, 1, 4)), l);
+
+random_values_for_freevars: makelist (random_values_for (freevars), 20);
+
+foo_values: map (lambda ([l], apply (foo, l)), random_values_for_freevars);
+
+load (gentran);
+
+translated_foos: makelist (concat ('translated_foo, i), i, 1, length (random_values_for_freevars));
+original_foos: makelist (concat ('original_foo, i), i, 1, length (random_values_for_freevars));
+
+block ([gentranlang: 'fortran], gentranin ("foo-fortran.template", ["foomain.f"]));
+block ([gentranlang: 'ratfor, ratlinelen: 1000],
+       gentranin ("foo-ratfor.template", ["foomain.rat"]));
+
+/* need explicit type declarations for C, but gentranin disables type declaration output,
+ * so output boilerplate via printf to C output file instead of working with template.
+ */
+
+gentranlang: 'c;
+
+S: openw ("foomain.c");
+printf (S, "
+#include <stdio.h>
+#include <math.h>
+
+typedef float real;
+typedef int integer;
+");
+
+gentranpush (S);
+gentran (eval (fundef (foo)));
+
+printf (S, "
+int main (int argc, char** argv) {
+");
+
+for i thru length (random_values_for_freevars)
+    do (gentran (type (real, eval (translated_foos[i]), eval (original_foos[i])),
+                 eval (translated_foos[i]): eval (funmake ('foo, random_values_for_freevars[i])),
+                 eval (original_foos[i]): eval (foo_values[i]),
+                 printf ("original foo%d = %g\\n", eval (i), eval (original_foos[i])),
+                 printf ("translated foo%d = %g\\n", eval (i), eval (translated_foos[i])),
+                 if eval (translated_foos[i]) = eval (original_foos[i])
+                     then printf ("same\\n")
+                     else printf ("DIFFERENCE = %g\\n", eval (translated_foos[i] - original_foos[i]))));
+
+printf (S, "
+    return (0);
+}
+");
+
+close (S);
+
+gentranpop (false);

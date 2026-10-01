@@ -2,7 +2,7 @@
 
 ;;; Simple Maxima interface to minpack routines
 
-(in-package #-gcl #:maxima #+gcl "MAXIMA")
+(in-package #:maxima)
 
 (defmvar $debug_minpack nil
   "Set to true to enable debugging messages from minpack routines")
@@ -180,14 +180,17 @@
     (merror "~M: ~M is not a list of functions"
 	    %%pretty-fname fcns))
   (unless (and (listp vars) (eq (caar vars) 'mlist))
-    (merror "~M:  ~M is not a list of variables"
+    (merror "~M:~%  ~M is not a list of variables"
 	    %%pretty-fname vars))
   (unless (and (listp init-x) (eq (caar init-x) 'mlist))
-    (merror "~M: ~M is not a list of initial values"
+    (merror "~M:~%  ~M is not a list of initial values"
 	    %%pretty-fname init-x))
   (unless (and (realp tolerance) (plusp tolerance))
-    (merror "~M: tolerance must be a non-negative real number, not: ~M"
+    (merror "~M:~%  tolerance must be a non-negative real number, not: ~M"
 	    %%pretty-fname tolerance))
+  (unless (= (length (cdr fcns)) (length (cdr vars)))
+    (merror "~M:~%  number of equations (~A) must be the same as the number of variables (~A)~%"
+            %%pretty-fname (length (cdr fcns)) (length (cdr vars))))
 
   (let* ((n (length (cdr vars)))
 	 (x (make-array n :element-type 'double-float
