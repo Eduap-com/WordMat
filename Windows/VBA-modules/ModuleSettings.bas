@@ -934,9 +934,15 @@ Public Property Get AntalberegningerReg() As LongPtr
     AntalberegningerReg = GetRegSettingLong("AntalBeregninger")
 End Property
 Public Property Get Antalberegninger() As LongPtr
+On Error GoTo fejl
     If mantalb <= 0 Then
         mantalb = GetRegSettingLong("AntalBeregninger")
+        If mantalb <= 0 Then mantalb = 1
     End If
+    GoTo slut
+fejl:
+    mantalb = 1
+slut:
     Antalberegninger = mantalb
 End Property
 Public Property Let Antalberegninger(xval As LongPtr)
@@ -1456,12 +1462,17 @@ End Sub
 'Public Sub SetRegSettingLong(key As String, val As Long)
 '    RegKeySave "HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key, val, "REG_DWORD"
 'End Sub
-Public Function GetRegSettingLong(key As String) As Long
+Public Function GetRegSettingLong(key As String) As LongPtr
+On Error GoTo fejl
 #If Mac Then
-    GetRegSettingLong = CLng(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
+    GetRegSettingLong = CLngPtr(RegKeyRead("HKEY_CURRENT_USER\SOFTWARE\WORDMAT\Settings\" & key))
 #Else
-    GetRegSettingLong = CLng(GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_DWORD))
+    GetRegSettingLong = CLngPtr(GetRegistryValue("HKCU", "SOFTWARE\WORDMAT\Settings", key, REG_DWORD))
 #End If
+    GoTo slut
+fejl:
+    GetRegSettingLong = 0
+slut:
 End Function
 
 #End If
