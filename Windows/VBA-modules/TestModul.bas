@@ -178,6 +178,19 @@ Sub RunTestSequence()
     If TestBeregn(ChrW$(12310) & "cos" & ChrW$(12311) & "^(-1) (0,5)", "=188,4956/" & ChrW$(960)) Then GoTo slut ' Skrevet vha. Design-Skrift-Hævet skrift.
     If StopNow Then GoTo slut
     
+    ' test of decimals
+    MaximaDecOutType = 1 ' 1 =dec, 2=bet cif, 3=vidnot
+    MaximaCifre = 2
+    SettUseVBACAS = False
+    MaximaExact = 2 ' num
+    
+    If TestBeregn("12,34567", ChrW$(8776) & "12,35") Then GoTo slut
+    
+    MaximaDecOutType = 2
+    MaximaCifre = 7
+    MaximaExact = 1 ' exact
+    SettUseVBACAS = True
+    
     InsertSletDef
     ' equation solving
     InsertHeadingtext "Equation solving"
@@ -280,14 +293,20 @@ Sub RunTestSequence()
     If TestSolve("8" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r-(16" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^2)/(100-(4" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^3)/3)^(1/3) =0", "r", "r=0    " & ChrW$(8744) & "    r=2,016879") Then GoTo slut ' has caused problems before check of solutions
     If TestSolve("x^2-5=ln" & ChrW$(8289) & "(x)", "x", "x=0,006738253    " & ChrW$(8744) & "    x=2,426173") Then GoTo slut
     If TestSolve("1214729,56=21520,64" & ChrW$(183) & "(1-(1+r)^(-80))/r", "r", "r=-1,942866    " & ChrW$(8744) & "    r=0,009203618") Then GoTo slut ' failed because of problem in removeundefined
-    If TestSolve("x^(-2)+e^x=-3x^2+5x+4", "x", "x=0,4939248    " & ChrW$(8744) & "    x=1,477293") Then GoTo slut
-
+    If Not NonInterA Then
+        If TestSolve("x^(-2)+e^x=-3x^2+5x+4", "x", "x=0,4939248    " & ChrW$(8744) & "    x=1,477293") Then GoTo slut ' will only solve when set to num
+    Else
+        MaximaExact = 2 ' num
+        If TestSolve("x^(-2)+e^x=-3x^2+5x+4", "x", "x=0,4939248    " & ChrW$(8744) & "    x=1,477293") Then GoTo slut
+        MaximaExact = 1 ' exact
+    End If
+    
     'solvesystem
     Selection.TypeText "solving systems of equations": Selection.TypeParagraph
     If TestSolve("(x-38)^2+(y-18)^2=" & ChrW$(12310) & "17,5" & ChrW$(12311) & "^2  " & ChrW$(8743) & "  (x-27)^2+(y-33)^2=" & ChrW$(12310) & "9,4" & ChrW$(12311) & "^2", "x", "(y=25,05068    " & ChrW$(8743) & "    x=21,9832)   " & ChrW$(8744) & "   (y=35,39542    " & ChrW$(8743) & "    x=36,08966)") Then GoTo slut
     If TestSolve("x^2+y^2-12x+2y=-33 " & ChrW$(8743) & "  x^2+y^2+2x-6y=26", "x", "[x]" & ChrW$(8712) & "" & ChrW$(8709)) Then GoTo slut
     InsertTestMath "F(x)" & ChrW$(8797) & "" & ChrW$(8747) & "_(-" & ChrW$(8734) & ")^x" & ChrW$(9618) & "1/(" & ChrW$(8730) & "2" & ChrW$(960) & "" & ChrW$(183) & "" & ChrW$(963) & ")" & ChrW$(183) & "e^(-1/2" & ChrW$(183) & "((y-" & ChrW$(956) & ")/" & ChrW$(963) & ")^2 ) dy" ' normal distribution from two points
-    If TestSolve("F(1)=0,15   " & ChrW$(8743) & "   F(8)=0,95", "mu,sigma", ChrW$(956) & "=3,705803    " & ChrW$(8743) & "    " & ChrW$(963) & "=2,610687") Then GoTo slut
+    If TestSolve("F(1)=0,15   " & ChrW$(8743) & "   F(8)=0,95", "mu,sigma", ChrW$(956) & "=3,705803    " & ChrW$(8743) & "    " & ChrW$(963) & "=2,610687@$" & ChrW$(956) & "=3,692068" & ChrW$(183) & "erf^(-1)" & ChrW$(8289) & "(-9/10)+8    " & ChrW$(8743) & "    " & ChrW$(963) & "=2,610687") Then GoTo slut
     InsertSletDef
     
     MaximaComplex = True ' complex

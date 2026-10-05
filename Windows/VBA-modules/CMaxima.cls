@@ -6454,8 +6454,11 @@ Function GetMaximaSettingsString() As String
     
     SettingsString = SettingsString & "DecOutType:" & MaximaDecOutType - 1 & ","
     SettingsString = SettingsString & "NoSigFig:" & MaximaCifre & ","
-    SettingsString = SettingsString & "fpprintprec:" & MaximaCifre & ","
-            
+    If MaximaDecOutType = 1 Then ' decimal
+        SettingsString = SettingsString & "fpprintprec: 10,"
+    Else
+        SettingsString = SettingsString & "fpprintprec:" & MaximaCifre & ","
+    End If
     If Right$(SettingsString, 1) = "," Then SettingsString = Left$(SettingsString, Len(SettingsString) - 1)
     SettingsString = SettingsString & "]$"
      
