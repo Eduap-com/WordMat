@@ -110,7 +110,7 @@ Sub RunTestSequence()
     '    Application.ScreenRefresh
     
     'til test af enkelt
-'    GoTo slut
+    '    GoTo slut
     
     
     DebugWM = False
@@ -293,6 +293,7 @@ Sub RunTestSequence()
     If TestSolve("8" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r-(16" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^2)/(100-(4" & ChrW$(183) & "" & ChrW$(960) & "" & ChrW$(183) & "r^3)/3)^(1/3) =0", "r", "r=0    " & ChrW$(8744) & "    r=2,016879") Then GoTo slut ' has caused problems before check of solutions
     If TestSolve("x^2-5=ln" & ChrW$(8289) & "(x)", "x", "x=0,006738253    " & ChrW$(8744) & "    x=2,426173") Then GoTo slut
     If TestSolve("1214729,56=21520,64" & ChrW$(183) & "(1-(1+r)^(-80))/r", "r", "r=-1,942866    " & ChrW$(8744) & "    r=0,009203618") Then GoTo slut ' failed because of problem in removeundefined
+    If TestSolve("e^x/(x^2+1)-2" & ChrW$(183) & "e^x" & ChrW$(183) & "x/(x^2+1)^2 =1", "x", "x=-0,3735484    " & ChrW$(8744) & "    x=0    " & ChrW$(8744) & "    x=3,281031") Then GoTo slut ' has 3 solutions. Gave too many solutions because of maxima solve splitting the equation. ApplyMaximaSolve now only uses result of solve it there is a complete solution
     If Not NonInterA Then
         If TestSolve("x^(-2)+e^x=-3x^2+5x+4", "x", "x=0,4939248    " & ChrW$(8744) & "    x=1,477293") Then GoTo slut ' will only solve when set to num
     Else
@@ -558,7 +559,7 @@ Sub RunTestSequence()
     If TestSolveDE("(x+5)" & ChrW$(183) & "y^'=" & ChrW$(8730) & "y", "y=1;x=-4", "y=(ln" & ChrW$(8289) & "(|x+5|)+2)^2/4") Then GoTo slut
     
     ' This can cause floating point overflow if Maxima has not had traps disabled. Exam question
-    If TestSolveDE("y^'=0,0768" & ChrW$(183) & "y^(2/3)-0,0102" & ChrW$(183) & "y", "y=59;x=1", "y=2,035416" & ChrW$(183) & "10^(-4)" & ChrW$(183) & "e^(-(0,0102" & ChrW$(183) & "(x-1214,003)) )" & ChrW$(183) & "(128" & ChrW$(183) & "e^(0,0034" & ChrW$(183) & "(x-1214,003) )-1)^3    " & ChrW$(8744) & "    y=2,035416" & ChrW$(183) & "10^(-4)" & ChrW$(183) & "e^(-(0,0102" & ChrW$(183) & "(x-1214,003)) )" & ChrW$(183) & "(128" & ChrW$(183) & "e^(0,0034" & ChrW$(183) & "(x-1214,003) )-1)^3") Then GoTo slut
+    If TestSolveDE("y^'=0,0768" & ChrW$(183) & "y^(2/3)-0,0102" & ChrW$(183) & "y", "y=59;x=1", "y=2,035416" & ChrW$(183) & "10^(-4)" & ChrW$(183) & "e^(-(0,0102" & ChrW$(183) & "(x-1214,003)) )" & ChrW$(183) & "(128" & ChrW$(183) & "e^(0,0034" & ChrW$(183) & "(x-1214,003) )-1)^3") Then GoTo slut
 
     'unit test
     MaximaUnits = True

@@ -1810,7 +1810,14 @@ Sub Omskriv(vidnot As Boolean, autosimp As Boolean, faktoriser As Boolean, udvid
 
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
 
-    Call RunMaxima
+    If MaximaUnits Then
+        MaximaUnits = False
+        Call RunMaxima
+        MaximaUnits = True
+    Else
+        Call RunMaxima
+    End If
+    
     If StopNow Then GoTo slut
 
     Dim nr As Integer, i As Integer
@@ -1926,7 +1933,14 @@ Sub CompareTest()
 
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
 
-    Call RunMaxima
+    If MaximaUnits Then
+        MaximaUnits = False
+        Call RunMaxima
+        MaximaUnits = True
+    Else
+        Call RunMaxima
+    End If
+    
     If StopNow Then GoTo slut
 
     Dim nr As Integer, i As Integer
@@ -1990,7 +2004,14 @@ Sub Factor()
 
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
 
-    Call RunMaxima
+    If MaximaUnits Then
+        MaximaUnits = False
+        Call RunMaxima
+        MaximaUnits = True
+    Else
+        Call RunMaxima
+    End If
+    
     If StopNow Then GoTo slut
 
     Dim nr As Integer, i As Integer
@@ -2047,7 +2068,14 @@ Sub Expand()
 
     MaximaInputStreng = MaximaInputStreng & MaximaInputStrengSec
 
-    Call RunMaxima
+    If MaximaUnits Then
+        MaximaUnits = False
+        Call RunMaxima
+        MaximaUnits = True
+    Else
+        Call RunMaxima
+    End If
+    
     If StopNow Then GoTo slut
 
     Dim nr As Integer, i As Integer
@@ -2410,7 +2438,14 @@ Sub Plot2D(forskrifter As String, punkter As String, Var As String, xmin As Stri
 
     text = text & ");"
     MaximaInputStreng = MaximaInputStreng & text
-    Call RunMaxima(-30)
+    If MaximaUnits Then
+        MaximaUnits = False
+        Call RunMaxima(-30)
+        MaximaUnits = True
+    Else
+        Call RunMaxima(-30)
+    End If
+    
 
 End Sub
 Sub Draw2D(graphobj As String, df As String, xaksetitel As String, yaksetitel As String, grid As Boolean, SaveFile As Boolean, ByVal resolution As Integer)

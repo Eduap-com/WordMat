@@ -870,8 +870,12 @@ flatten(
 		else 
 			(tqexpr:errcatch(solve(zxq,solvar)),
 				if tqexpr=[] then (solunsure:true,print("Solution unsure"),return(zxq)),
-				if tqexpr=[[]] then (solunsure:true,print("Solution unsure"),tqexpr)
-				else tqexpr
+				if tqexpr=[[]] then (solunsure:true,print("Solution unsure"),return(tqexpr)),
+				if listp(tqexpr) then ( /*1.42.1 only return if the solution is verified - not a rewrite*/
+					if CheckAllSolved(tqexpr) then return(tqexpr) else return(exprq)
+					),
+				if CheckSolved(tqexpr) then return(tqexpr) 
+				else return(exprq)
 			),
 		zxq,exprq))
 )$
