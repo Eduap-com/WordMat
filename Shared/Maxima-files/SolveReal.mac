@@ -1212,41 +1212,42 @@ If guess is a bfloat, the function will use bfloats otherwise float. Float is fa
 */
 newton_method(expr, var, guess, tol, max_iter) := block(
 	[x0, x1, x2, fx, dfx, pfx, pfx2, iter, solq, lmbd, sec, UseBF, fpprec],
+	local(nmf_, nmdf_), /* the helper functions are local: they are not left in Maxima (a global f overwrote the user's f) */
 	if bfloatp(guess) then (
 		UseBF: true,
 		fpprec: 50,
 		lmbd: 1b0,
 		pfx: 1b30,
-		define(f(var), ev(expr, bfloat)), 
-		define(dfunc(var), ev(diff(expr,var), bfloat))
+		define(nmf_(var), ev(expr, bfloat)), 
+		define(nmdf_(var), ev(diff(expr,var), bfloat))
 	) else (
 		UseBF: false,
 		lmbd: 1.0,
 		pfx: 1.0*10^30,
 		guess: ev(guess, numer),
-		define(f(var), ev(expr, numer)), 
-		define(dfunc(var), float(ev(diff(expr,var), numer)))
+		define(nmf_(var), ev(expr, numer)), 
+		define(nmdf_(var), float(ev(diff(expr,var), numer)))
 	),
 	x0: guess,
 	iter: 0,
 	solq:[],
 	sec: false,
-	if errcatch(dfunc(guess)) = [] then (
+	if errcatch(nmdf_(guess)) = [] then (
 /*		print("Newton's method requires a differentiable function. Switching to secant method"),*/
 		sec: true
 	),
 	while iter < max_iter do (
 		if errcatch(
 		if UseBF=true then (
-			fx: ev(f(x0),bfloat)
+			fx: ev(nmf_(x0),bfloat)
 		) else (
-			fx: ev(f(x0),numer)
+			fx: ev(nmf_(x0),numer)
 		),
-/*		print(sconcat("x0=", x0, " f(x0)=",fx)),*/
+/*		print(sconcat("x0=", x0, " nmf_(x0)=",fx)),*/
 		if (abs(fx) <= tol) then (			
 			if (abs(x1-x0)<=tol)  and imagpart(fx)=0 then (
 			solq:[x0], 
-/*		 	print(sconcat("Iteration ", iter, ": x0 = ", x0, ", x1 = ", x1, ", f(x0) = ", fx ,",f'(x0) = ",dfx, ", lmbd = ", lmbd)) ,*/ 
+/*		 	print(sconcat("Iteration ", iter, ": x0 = ", x0, ", x1 = ", x1, ", nmf_(x0) = ", fx ,",f'(x0) = ",dfx, ", lmbd = ", lmbd)) ,*/ 
 			return()
 			),
 			UseBF: true,x0:bfloat(x0),lmbd:bfloat(lmbd),fpprec:30,
@@ -1254,13 +1255,13 @@ newton_method(expr, var, guess, tol, max_iter) := block(
 		),
 		if (sec=true) then
 		(
-			dfx: ev((fx-f(x0-1e-9))/(1e-9))
+			dfx: ev((fx-nmf_(x0-1e-9))/(1e-9))
 		)
 		else (
 			if UseBF=true then (
-				dfx: ev(dfunc(x0),bfloat)
+				dfx: ev(nmdf_(x0),bfloat)
 			) else (
-				dfx: ev(dfunc(x0),numer)
+				dfx: ev(nmdf_(x0),numer)
 			)
 			),
 		if abs(dfx) < tol then (
@@ -1329,6 +1330,7 @@ newton_method(expr, var, guess, tol, max_iter) := block(
 /* Solves an equation for a variable or expression. The variable to solve for will have any arrays attached removed*/
 nsolve([paramq]) := block(
 	[qfkt, solq, solq2, qn, qm, qti, qmaxti, qantal, qmm, qnn, qnewt, fpprec: 50, UseBF, qtol, NewSolq, NmaxIter, qex, qqs, taylororder, flen],
+	local(qfkt), /* the function qfkt is local too (define made it global) */
 	if length(paramq) < 2 then (
 		print("Too few arguments"),
 		return()
