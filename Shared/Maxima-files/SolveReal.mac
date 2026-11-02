@@ -1280,13 +1280,13 @@ newton_method(expr, var, guess, tol, max_iter) := block(
 			x1: x0
 		),
 		if UseBF=true then (
-			x0: ev(realpart(x0 - lmbd * fx / dfx),bloat)
+			x0: ev(realpart(x0 - lmbd * fx / dfx),bfloat)
 		) else (
 			x0: ev(realpart(x0 - lmbd * fx / dfx),numer)
 		),
 		pfx2: pfx,
 		pfx: fx
-		)=[] then (sec:true,x0=x0+1),
+		)=[] then (sec:true,x0:x0+1),
 		iter: iter + 1
 	),
 	/*
@@ -1294,7 +1294,7 @@ newton_method(expr, var, guess, tol, max_iter) := block(
 		print("Maximum iterations reached"), print("x0",x0,"fx",fx,"pfx",pfx,"iter",iter,"lmbd",lmbd)
 		),*/
 	/*print(sconcat("Newton iterations: ",iter," L=",lmbd,"  S=",solq)),*/
-	if useBF=true then (
+	if UseBF=true then (
 		solq: bfloat(solq)
 	) else (
 		solq: float(solq)
