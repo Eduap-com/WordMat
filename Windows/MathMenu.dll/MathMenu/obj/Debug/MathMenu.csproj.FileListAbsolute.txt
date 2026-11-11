@@ -31,3 +31,4 @@ C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\obj\Debug\MathMenu.pdb
 C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\bin\Debug\MathMenu.dll.config
 C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\bin\Debug\MathMenu.dll
 C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\bin\Debug\MathMenu.pdb
+C:\GitHub\WordMat\Windows\MathMenu.dll\MathMenu\bin\Debug\MathMenu.tlb
