@@ -1855,3 +1855,7 @@
 1854#£suma
 1855#£producto
 1856#£WordMat+ permite realizar cálculos matemáticos en Word.\nWordMat está fabricado por Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Usar el CAS de JavaScript (más rápido)
+1858#£El CAS de WordMat+ se ejecuta con el motor de JavaScript QuickJS. Sin la marca, calcula VBACAS.
+1859#£CAS integrado: {1}
+1860#£Motor de JavaScript: QuickJS, © Fabrice Bellard, Charlie Gordon y otros (licencia MIT)

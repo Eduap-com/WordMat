@@ -1855,3 +1855,7 @@
 1854#£summa
 1855#£tulo
 1856#£WordMat+ mahdollistaa matemaattisten laskutoimitusten tekemisen Wordissa.\nWordMatin valmistaa Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Käytä JavaScript-CAS:ia (nopeampi)
+1858#£WordMat+:n CAS toimii QuickJS-JavaScript-moottorilla. Ilman valintamerkkiä laskee VBACAS.
+1859#£Sisäänrakennettu CAS: {1}
+1860#£JavaScript-moottori: QuickJS, © Fabrice Bellard, Charlie Gordon ym. (MIT-lisenssi)

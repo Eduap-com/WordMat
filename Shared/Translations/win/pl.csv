@@ -1855,3 +1855,7 @@
 1854#£suma
 1855#£iloczyn
 1856#£WordMat+ umozliwia wykonywanie obliczen matematycznych w Wordzie.\nWordMat zostal stworzony przez Mikaela Samsøe Sørensena, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Uzyj CAS w JavaScript (szybszy)
+1858#£CAS programu WordMat+ jest uruchamiany przez silnik JavaScript QuickJS. Bez zaznaczenia oblicza VBACAS.
+1859#£Wbudowany CAS: {1}
+1860#£Silnik JavaScript: QuickJS, © Fabrice Bellard, Charlie Gordon i inni (licencja MIT)

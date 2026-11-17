@@ -1855,3 +1855,7 @@
 1854#£sum
 1855#£product
 1856#£WordMat+ makes it possible to make mathematical calculations in Word.\nWordMat is made by Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Use the JavaScript CAS (faster)
+1858#£The CAS of WordMat+ is run by the JavaScript engine QuickJS. Without the check mark, VBACAS calculates.
+1859#£Built-in CAS: {1}
+1860#£JavaScript engine: QuickJS, © Fabrice Bellard, Charlie Gordon and others (MIT license)

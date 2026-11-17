@@ -1855,3 +1855,7 @@
 1854#£άθροισμα
 1855#£γινόμενο
 1856#£Το WordMat+ καθιστά δυνατή την πραγματοποίηση μαθηματικών υπολογισμών στο Word.\nΤο WordMat είναι κατασκευασμένο από τον Mikael Samsoe Sorensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Χρήση του CAS JavaScript (ταχύτερο)
+1858#£Το CAS του WordMat+ εκτελείται από τη μηχανή JavaScript QuickJS. Χωρίς το σημάδι ελέγχου υπολογίζει το VBACAS.
+1859#£Ενσωματωμένο CAS: {1}
+1860#£Μηχανή JavaScript: QuickJS, © Fabrice Bellard, Charlie Gordon κ.ά. (άδεια MIT)

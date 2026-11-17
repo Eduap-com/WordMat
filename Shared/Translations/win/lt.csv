@@ -1855,3 +1855,7 @@
 1854#£suma
 1855#£sandauga
 1856#£WordMat+ leidzia atlikti matematinius skaiciavimus Word programoje.\nWordMat sukure Mikael Samsøe Sørensen, Nyborg gimnazija, EDUAP 2009-{1}.
+1857#£Naudoti JavaScript CAS (greitesnis)
+1858#£WordMat+ CAS vykdo JavaScript variklis QuickJS. Be varneles skaiciuoja VBACAS.
+1859#£Integruotas CAS: {1}
+1860#£JavaScript variklis: QuickJS, © Fabrice Bellard, Charlie Gordon ir kt. (MIT licencija)

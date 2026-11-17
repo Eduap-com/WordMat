@@ -1855,3 +1855,7 @@
 1854#£summa
 1855#£reizinajums
 1856#£WordMat+ lauj veikt matematiskos aprekinus Word vide.\nWordMat razo Mikael Samsøe Sørensen, Nyborg gimnazija, EDUAP 2009-{1}.
+1857#£Izmantot JavaScript CAS (atraks)
+1858#£WordMat+ CAS darbina JavaScript dzinejs QuickJS. Bez atzimes rekina VBACAS.
+1859#£Iebuvetais CAS: {1}
+1860#£JavaScript dzinejs: QuickJS, © Fabrice Bellard, Charlie Gordon u. c. (MIT licence)

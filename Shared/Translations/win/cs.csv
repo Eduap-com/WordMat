@@ -1855,3 +1855,7 @@
 1854#£soucet
 1855#£soucin
 1856#£WordMat+ umoznuje provádet matematické výpocty ve Wordu.\nWordMat vyrábí Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Pouzít JavaScriptový CAS (rychlejsí)
+1858#£CAS programu WordMat+ bezí v JavaScriptovém jádru QuickJS. Bez zaskrtnutí pocítá VBACAS.
+1859#£Vestavený CAS: {1}
+1860#£JavaScriptové jádro: QuickJS, © Fabrice Bellard, Charlie Gordon a dalsí (licence MIT)

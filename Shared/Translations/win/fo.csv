@@ -1855,3 +1855,7 @@
 1854#£summur
 1855#£produkt
 1856#£WordMat+ ger tað møguligt at gera matematiskar útreikningar í Word.\nWordMat er framleitt av Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Brúka JavaScript-CAS (skjótari)
+1858#£CAS hjá WordMat+ verður koyrt av JavaScript-motorinum QuickJS. Uttan flugubeinið roknar VBACAS.
+1859#£Innbygt CAS: {1}
+1860#£JavaScript-motorur: QuickJS, © Fabrice Bellard, Charlie Gordon o.o. (MIT-loyvi)

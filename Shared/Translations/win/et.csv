@@ -1855,3 +1855,7 @@
 1854#£summa
 1855#£korrutis
 1856#£WordMat+ võimaldab teha matemaatilisi arvutusi Wordis.\nWordMati valmistab Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Kasuta JavaScripti CAS-i (kiirem)
+1858#£WordMat+ CAS-i käitab JavaScripti mootor QuickJS. Ilma linnukeseta arvutab VBACAS.
+1859#£Sisseehitatud CAS: {1}
+1860#£JavaScripti mootor: QuickJS, © Fabrice Bellard, Charlie Gordon jt (MIT-litsents)
