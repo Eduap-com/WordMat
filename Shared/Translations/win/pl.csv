@@ -933,3 +933,925 @@
 932#£Aktualizacja do najnowszej wersji beta
 933#£Powinienes wiedziec, ze w wersjach beta moga wystepowac bledy. Sa one przeznaczone glównie do testowania. Zaleca sie korzystanie z tej funkcji glównie zgodnie z zaleceniami Eduap
 934#£Pokazuje wykres dla lewej i prawej strony równania w tym samym ukladzie wspólrzednych. Rozwiazania równania to wartosc x przeciec. Pamietaj, zeby powiekszac i oddalac obraz.
+935#£Kolekcja wzorów
+936#£Otwiera kolekcje wzorów z wzorami z matematyki, fizyki i chemii. Kliknij wzór, aby wstawic go do dokumentu.
+937#£Otwiera sie okno dialogowe, w którym wybierasz, jak wybrane wyrazenie lub równanie zostanie przepisane: redukcja, faktoryzacja, rozwiniecie, uzupelnienie kwadratu lub przeksztalcenie dziesietne do ulamków. Mozesz takze podac tymczasowe definicje i wybrac wyjscie. Wynik jest zapisywany w nowej linii.
+938#£Redukuje wybrane wyrazenie lub obie strony równania do najkrótszej formy, np. (x^2-1)/(x-1) do x+1 oraz sin(x)^2+cos(x)^2 do 1. Wynik zapisuje sie na nowej linii.
+939#£Rozklada wybrane wyrazenie, np. x^2-1=(x-1)(x+1). Wynik zapisuje sie po wyrazeniu, tak jak w Calculate.
+940#£Mnozy nawiasy w wybranym wyrazeniu, np. (x+1)^2=x^2+2x+1. Wynik zapisuje sie po wyrazeniu, jak w wyrazeniu.
+941#£Przepisuje os wielomianu kwadratowego^2+bx+c na a(x+b/(2a))^2+c-b^2/(4a), np. x^2+6x+5 na (x+3)^2-4. Wspólczynniki moga byc literami. Dziala takze na równaniu, np. równaniu okregu x^2-4x+y^2+14y+53=25 do (x-2)^2+(y+7)^2=25. Wynik zapisuje sie na nowej linii.
+942#£Wysyla wybrane wyrazenie bezposrednio do Maxima i wstawia wynik jako nowe równanie. Wyrazenie musi byc zapisane w skladni Maxima, np. integrate(x^2,x) lub factor(x^2-1). Jesli nic nie jest wybrane, polecenie mozna zapisac w ramce. Wymaga Wordmats Maxima.
+943#£Równanie testowe
+944#£Sprawdza, czy oznaczone równanie jest prawdziwe dla wszystkich wartosci zmiennych, np. sin(x)^2+cos(x)^2=1. Najpierw próbuje sie uzyskac dokladny dowód, w przeciwnym razie równanie jest testowane numerycznie. Odpowiedz brzmi: prawdziwa, falszywa (z kontrprzykladem), prawdopodobnie prawdziwa lub nieznana, i jest zapisana na nowej linii.
+945#£Usuniecie jednej lub wiecej zmiennych z ukladu równan: wybierz równania i wybierz zmienne do wyeliminowania (mniej niz liczba równan). Na przyklad, x=2t+1 i y=t^2 po wyeliminowaniu t daje y=(x-1)^2/4.
+946#£Rozwiazuje jedno lub wiecej sprzezonych równan rózniczkowych numerycznie, np. x'=y i y'=-x. Wynik mozna wyswietlic jako wykres w GeoGebra, wstawic jako liste lub tabele, albo wyslac do Excela.
+947#£Zdecydowanie.
+948#£Na poczatku równania wstawia 'Definie:' przy kursorze lub nowe równanie razem z nim. Definicje maja zastosowanie w obliczeniach ponizej nich w dokumencie.
+949#£Wstawia "Usun definicje:" na nowa linie. Definicje powyzej nie sa uzywane w obliczeniach ponizej.
+950#£Wyswietla wykres dla wybranych funkcji/równan i punktów. Program graficzny jest wybierany w ustawieniach lub przez rozwiniecie tego przycisku.
+951#£Wykresy
+952#£Wyswietla wykresy i punkty w GeoGebra: w oknie WordMat GeoGebra z WordMat+, w przeciwnym razie w przegladarce. Nie jest potrzebny internet.
+953#£Otwiera GeoGebra 5 i przesyla wybrane funkcje oraz definicje.
+954#£Otwiera (lub osadza) arkusze Excela WordMat z wykresami i punktami z wybranymi funkcjami oraz punktami w tabeli.
+955#£Pokazuje tresc wybranych funkcji w GeoGebra. Graf zasady jest obracany o 360 stopni wokól osi x, aby utworzyc obiekt 3D. Zbiór definicji zapisuje sie po przecinku, np. f(x)=x^2, 0<=x<=2.
+956#£Wykresy statystyczne
+957#£Dostosowuje funkcje, która sam napiszesz, np. f(x)=a·e^(b·x)+c, do punktów w tabeli. Parametry to zmienne inne niz zmienna niezalezna.
+958#£Regresja w Excelu
+959#£Wstawia nowe pole matematyczne. W równaniu numerowanym: nadaj równaniu numer.
+960#£Wstawia nowe pole matematyczne, które jest automatycznie numerowane. Jesli kursor jest w równaniu, jest ponumerowany. Pozycja i typ liczby sa wybierane w ustawieniach.
+961#£Wstawia odniesienie do nazwanego równania: numer równania, który jest aktualizowany wraz ze zmiana liczb.
+962#£Równanie numerowane, w którym znajduje sie kursor, otrzymuje okreslona liczbe. Ponizej znajduja sie nastepujace równania.
+963#£Otwiera okno dialogowe LaTeX, gdzie dokument mozna przekonwertowac na plik .tex lub pdf (wymaga MikTex). Znaki zalaczajace do przekonwertowanych równan sa wybierane w Opcje, Notacja.
+964#£Przeksztalc równanie do LaTeX
+965#£Zastepuje równanie przy kursorze jego kodem LaTeX. Znaki obejmujace dla równan wewnetrznych oraz równan na linii sa wybierane osobno w Ustawieniach, Notacja.
+966#£Przekonwertowanie LaTeX-a na równania
+967#£Konwertuje kod LaTeX w zaznaczeniu na pola równan. Jesli nic nie jest wybrane, równanie LaTeX jest konwertowane na kursorze. Kod znajduje sie na $...$, \(...\), $$...$$, \[...\], \begin{align} itd., a znaki otoczkowe w Ustawieniach, Notacja. Zaznaczenie bez znaków otulajacych jest konwertowane jako jedno równanie. Alt+T poza równaniem robi to samo.
+968#£Dokument
+969#£Przekonwertowanie do pliku PDF LaTeX
+970#£Konwertuje caly dokument na LaTeX, tlumaczy go na plik pdf za pomoca MikTex pdflatex i otwiera go w domyslnej aplikacji pdf. Trzeba zainstalowac MikTex.
+971#£Konwertuj do pliku LaTeX .tex
+972#£Konwertuje caly dokument na .tex plik i otwiera go w domyslnym programie .tex (TexWorks, TexMaker, ...). Plik umieszcza w folderze obok dokumentu.
+973#£Przekonwertowanie do HTML
+974#£Konwertuje zaznaczenie lub caly dokument na strone html, która otwiera przegladarka. Równania sa zapisywane w LaTeX i wyswietlane w MathJax (wymaga internetu), obrazy sa osadzone na stronie. Plik umieszczany jest w folderze obok dokumentu, a kod html bez <head> niego jest kopiowany do schowka, aby mozna go wkleic na przyklad do niestandardowego bloku HTML w WordPressie.
+975#£Przejscie na Markdown
+976#£Konwertuje znaczniki lub caly dokument w plik z odznaczaniem (.md): naglówki, listy, cudzyslowy, pogrubienie, kursywe, przekreslenie, kod, linki, tabele i przypisy oraz równania jako LaTeX ($...$ i $$...$$). Obrazy sa zapisywane jako pliki w tym samym folderze. Folder jest umieszczany obok dokumentu i otwierany, a tekst kopiowany do schowka.
+977#£Przekonwertowanie markdownu na formatowanie Word
+978#£Przeksztalca markdown w zaznaczeniu lub w calym dokumencie w formatowanie Word: naglówki (#), listy (- i 1.), cytowania (>), pogrubienie (**), kursywa (*), przekreslenie (~~), kod (' i ''''), linki, obrazy, tabele, przypisy i linie poziome, a LaTeX ($...$ i $$...$) staja sie polami równan.
+979#£Wybierz, które polecenie powinno wykonac kazde skrót klawiatury (Alt+M, Alt+B, Alt+L...) i zobacz skróty w Wordzie dla pól matematycznych.
+980#£O WordMat+
+981#£Brakuje indeksu w {1}
+982#£Funkcja {1} nie posiada argumentu. Na przyklad, wpisz {1}(x) lub {1}^(-1)(x) z szablonem funkcji Worda
+983#£Brakuje jednego elementu na liscie
+984#£Liczba bazowa dla logarytmu musi byc dodatnia i róznic sie od 1
+985#£Brakuje nawiasów {1}\n\nNawiasy bez nawiasu startowego sa podkreslone w ponizszym wyrazeniu z dodatkowymi odstepami wokól: \n\n      {2}  )  {3}
+986#£Nawiasy {1} nie pasuja do {2}\n\nNawiasy sa podkreslone w wyrazeniu dodatkowymi odstepami: \n\n      {3}  {1} {4}  )  {5}
+987#£Brakuje drabinki koncowej {1}\n\nNawias, który nie ma zamykajacego nawiasu, jest podkreslony w ponizszym wyrazeniu z dodatkowymi odstepami wokól: \n\n      {2}  {1} {3}
+988#£Bledy skladniowe\n{1} operator nie moze byc umieszczony na poczatku wyrazenia.
+989#£Blad funkcji trygonometrycznej odwrotnej: {1}\nArgument musi znajdowac sie miedzy -1 a 1
+990#£Bledy skladniowe\n{1} operator nie moze byc umieszczony na koncu wyrazenia.
+991#£Liczba ta jest zbyt duza, by przeliczyc ja na liczbe dziesietna
+992#£Dzielenie przez zero
+993#£Wystapil blad. Nie moge tu wprowadzic wzoru. \nSpróbuj zamknac wszystkie dokumenty Word i uruchomic go od nowa. \n\nOpis bledu: \n{1}
+994#£Tabela nie zawiera liczb. Musisz stworzyc tabele z dwoma kolumnami: wartosci x w lewej kolumnie i wartosci y w prawej.
+995#£Musisz stworzyc tabele z dwoma kolumnami. X wartosci w lewej kolumnie i wartosci Y w prawej.
+996#£Regresja liniowa wykonana za pomoca WordMat. WordMat:
+997#£Regresja wykladnicza wykonana za pomoca WordMat. WordMat:
+998#£Regresja potencji wykonana za pomoca WordMat:
+999#£Okreslmy rzad regresji wielomianowej (1-{1})\n\n(Maksymalna kolejnosc jest okreslana przez liczbe punktów)
+1000#£Kolejnosc musi byc miedzy 1 a {1}
+1001#£Regresja wielomianowa stopnia {1} wykonana za pomoca WordMat. WordMat:
+1002#£Tabela krzyzowa musi zawierac co najmniej 2 wiersze i 2 kolumny liczb.
+1003#£{1}² - test spójnosci wykonywany jest za pomoca WordMat WordMat
+1004#£Wartosc P: {1} = {2}%
+1005#£Na poziomie istotnosci {1}% mozna odrzucic hipoteze 0, ze nie ma korelacji. Czyli Istnieje korelacja miedzy tymi dwoma zmiennymi.
+1006#£Na poziomie istotnosci {1}% hipotezy 0 nie mozna odrzucic. W zwiazku z tym nie ma dowodów na korelacje miedzy tymi dwoma zmiennymi.
+1007#£Sa wartosci oczekiwane mniejsze niz 5 lub suma wszystkich komórek jest mniejsza niz 50. Rozklad {1}² jest wiec w tym przypadku slabym przyblizeniem, a wynik niewiarygodny. W niektórych przypadkach material danych mozna wykorzystac poprzez inne grupowanie.
+1008#£Wartosc P:
+1009#£Wartosc Q:
+1010#£Krytyczna wartosc Q:
+1011#£Plik Excel WordMat {1} nie zostal znaleziony. Funkcja wymaga zainstalowania WordMat.
+1012#£Wstawiam zagniezdzony arkusz Excel...
+1013#£Podczas próby wstawienia arkuszy Excel wystapil blad.
+1014#£Blad czytania pliku: {1}
+1015#£GeoGebra 5 nie mogla zostac otwarta: {1}
+1016#£GeoGebra 5 nie jest zainstalowana na twoim komputerze. \n\nChcesz pobrac GeoGebra 5? (Nie: wykres jest wyswietlany w GeoGebra Calculator Suite)
+1017#£GeoGebra pobierze sie w Twojej przegladarce. Przejdz do Pobrania i uruchom instalator.
+1018#£Podczas próby otwarcia wystapil blad: {1}
+1019#£Ta wersja WordMat+ sama nie sprawdza nowych wersji. Teraz zostaniesz przekierowany na strone pobierania.
+1020#£WordMat+ nie moze sprawdzic nowej wersji na tym komputerze (brakuje MathMenu.dll WordMat lub starszej wersji). Teraz zostaniesz przekierowany na strone pobierania.
+1021#£Masz juz najnowsza wersje WordMat+ v.{1}
+1022#£Dostepna jest nowa wersja WordMat do pobrania. \nWiadomosci:  \n{1}\n\nKliknij OK, aby rozpoczac aktualizacje.
+1023#£Nowa wersja {1}
+1024#£Dostepna jest nowa wersja WordMat do pobrania. \nWiadomosci:  \n{1}\nTeraz zostaniesz przekierowany na strone pobierania
+1025#£Wystapil blad zwiazany z sprawdzaniem aktualizacji. Teraz zostaniesz przekierowany na strone internetowa, gdzie mozesz sprawdzic, czy pojawila sie nowa aktualizacja. Aktualna wersja to: {1}
+1026#£Aktualizacja nie moze byc automatycznie pobrana na tym komputerze (brakuje MathMenu.dll WordMat lub jest starsza wersja). Teraz zostaniesz przekierowany na strone pobierania.
+1027#£Pobieranie pliku instalacyjnego
+1028#£Plik instalacyjny nie posiada waznego podpisu cyfrowego od Eduap. Zostal ponownie usuniety.
+1029#£Plik instalacyjny nie zostal poprawnie pobrany
+1030#£Plik instalacyjny zostal pobrany. \nKliknij OK, aby rozpoczac aktualizacje. Zostaniesz poproszony o zapisanie i zamkniecie Worda.
+1031#£Instalacja nie mogla zostac rozpoczeta (blad {1}).
+1032#£Podczas aktualizacji wystapil blad (blad {1}).
+1033#£Ta wersja WordMat+ nie moze pobierac ani instalowac aktualizacji. Teraz zostaniesz przeniesiony na strone pobierania.
+1034#£Aktualizacja do wersji beta wymaga WordMat+.
+1035#£Chcesz zaczac instalowac wersje beta?
+1036#£Aktualizacja beta
+1037#£Podczas instalacji wersji beta wystapil blad: {1}
+1038#£Strony zakupu nie mozna otworzyc na tym komputerze (brakuje MathMenu.dll WordMat lub jest starsza wersja). Zainstaluj ponownie WordMat.
+1039#£Polecenie to nie jest jeszcze dostepne w WordMat+. W sekcji Skróty wybierz inne polecenie dla klawisza.
+1040#£Poprzedni wynik
+1041#£WordMat+: nie ma wyniku przed równaniem.
+1042#£WordMat+: nie ma juz zadnych wyników. Stuknij ponownie, aby uzyskac najnowsze informacje.
+1043#£Wystapil blad: {1}
+1044#£Efekt nie zostal zrealizowany.
+1045#£Plik instalacyjny zostal pobrany. \nKliknij OK, aby rozpoczac aktualizacje
+1046#£Serwer Eduap zwrócil blad. \nMam nadzieje, ze to tymczasowy problem. Jesli problem sie utrzymuje i masz wazna licencje WordMat+, skontaktuj sie z eduap@eduap.com\n\nBlad: wordmatlicense nieudana
+1047#£Brak internetu
+1048#£WordMat+ nie moze sprawdzic licencji, poniewaz MathMenu.dll WordMat nie moze byc uzywany na tym komputerze. \n\nPlik brakuje, jest starsza wersja lub jest zablokowany przez ustawienia bezpieczenstwa (antywirus, Endpoint Protection). \n\nZainstaluj ponownie WordMat lub skontaktuj sie z dzialem IT. Do tego czasu WordMat+ bedzie dzialal bez licencji.
+1049#£Kliknij Zezwalaj dwa razy po zamknieciu tego okna\nMusisz to zrobic tylko raz.
+1050#£Uprawnienia dla WordMat
+1051#£Aplikacje matematyczne GeoGebra nie znalezione
+1052#£Pliki programu nie znaleziono
+1053#£Regresja sinusowa wymaga aktywnej licencji WordMat+.
+1054#£Regresja sinus wykonana za pomoca WordMat (w {1}): WordMat (w ):
+1055#£Regresja w Excelu...
+1056#£Plik Excel WordMat Graphs.xltm nie zostal znaleziony. Regresja Excela wymaga zainstalowania WordMat.
+1057#£Podczas próby wstawienia arkuszy Excel wystapil blad. Moze to wynikac z wczesniejszego awarii Excela. Zamknij otwarte arkusze Excel i otwórz Excela, zanim spróbujesz ponownie przez WordMat.
+1058#£{1} ma kilka niezdefiniowanych zmiennych. Zmiennej niezaleznej nie mozna zidentyfikowac. Uzyj x lub t jako zmiennej niezaleznej.
+1059#£Musza byc co najmniej 3 punkty danych.
+1060#£Regresja sinusowa
+1061#£Nie udalo sie oszacowac czestotliwosci za pomoca FFT.
+1062#£wykonano z WordMat{1}:
+1063#£Model nie zawiera zmiennej niezaleznej {1}
+1064#£Model nie posiada zadnych parametrów (zmiennych innych niz {1})
+1065#£Musi byc co najmniej tyle punktów, ile parametrów ({1})
+1066#£Regresja niestandardowa wymaga Maxima, gdy nie ma aktywnej licencji WordMat+.
+1067#£Regresja nie mogla znalezc parametrów. Spróbuj z innymi poczatkowymi przypuszczeniami
+1068#£Rozklad {1}²
+1069#£Gratulacje! \nTwoja szkola podpisala umowe partnerska i WordMat+ jest juz aktywowany.
+1070#£Sukces
+1071#£Niestety\nTwoja szkola jeszcze nie podpisala partnerstwa.
+1072#£Brak partnerstwa
+1073#£xmin musi miec >0, aby uzywac logarytmicznej osi x.
+1074#£YMIN musi byc >0, aby uzywac logarytmicznej osi y.
+1075#£Graf nie mógl zostac wstawiony: {1}
+1076#£WordMat+ wlaczony dla {1}
+1077#£Wersja: {1}
+1078#£WordMat+ umozliwia wykonywanie obliczen matematycznych w Wordzie. Obliczenia sa wykonywane przez CAS bedacy czescia WordMat+, wiec nie trzeba instalowac innych programów. \nWordMat zostal stworzony przez Mikaela Samsøe Sørensena, Nyborg Gymnasium, EDUAP 2009-{1}.
+1079#£Sukces!
+1080#£Brakuje danych
+1081#£Wartosc poczatkowa {1} nie jest liczba
+1082#£Dlugosc startu, konca i kroku powinny byc numerami
+1083#£Równan rózniczkowych nie udalo sie rozwiazac: {1}
+1084#£Wybierz co najmniej jedna zmienna do wyswietlenia
+1085#£Za duzo punktów dla GeoGebry. Wybierz dluzszy krok kroku.
+1086#£Excel nie mógl sie otworzyc: {1}
+1087#£Start to nie liczba
+1088#£Koniec to nie liczba
+1089#£Dlugosc kroku to nie liczba
+1090#£Jest {1} kroków. Prawdopodobnie nie dziala to w GeoGebra przy tylu krokach.
+1091#£Nie mozna jednoczesnie rozwiazac równania dla {1} i jednoczesnie go zdefiniowac.
+1092#£Równanie rózniczkowe:
+1093#£Warunki startowe:
+1094#£Równania nazwane
+1095#£Wybierz równanie, do którego chcesz sie odwolac, i kliknij OK (lub podwójnie kliknij). Odniesienie staje sie numerem równania i jest aktualizowane, gdy liczby sie zmieniaja.
+1096#£Aby pózniej wstawic odniesienie do równania, wybierz 'Wstaw odniesienie do równania' w sekcji 'Nowe równanie'.
+1097#£Restart Maxima
+1098#£Uzywaj Worda jako edytora LaTeX. \n\nMozesz wpisywac polecenia LaTeX bezposrednio do dokumentu, aby miec pelna kontrole, albo skorzystac z funkcji Worda i pozwolic WordMat+ konwertowac na LaTeX. \n\nAby utworzyc plik pdf, trzeba zainstalowac MikTex. Jesli go brakuje, zostaniesz przekierowany do instalacji. \n\nObok dokumentu tworzony jest folder ('document name-Latex') z plikiem tex i obrazami.
+1099#£Wspierane formatowanie: \n- Naglówki (style) staja sie sekcjami i podsekcjami: \n   Tytul = rozdzial (klasa dokumentu, ksiazka lub raport; artykul: tytul dokumentu)\n   Tytul 1 = sekcja, Tytul 2 = podsekcja, Naglówek 3 = podpodsekcja\n- Czcionka pogrubiona, kursywa i podkreslona\n- Numer strony wlacz/wylacz jak w dokumencie\n- Równania: inline, numerowane i nienumerowane (zawierajace znaki w Ustawieniach, Notacja)\n- Listy punktowane (punkty i liczby)\n- Tabele\n- Obrazy, ksztalty i diagramy\n- Bibliografia
+1100#£Ustawienia LaTeX
+1101#£Klasa dokumentu:
+1102#£Rozmiar czcionki:
+1103#£Uzyj marginesów Worda
+1104#£Uzyj marginesów dokumentu zamiast domyslnych marginesów LaTeXa (geometria pakietu)
+1105#£Strona tytulowa
+1106#£Osobna strona tytulowa z tytulem nazwy dokumentu oraz autorem dokumentu
+1107#£Spis tresci
+1108#£Osobna strona spisu tresci po stronie tytulowej
+1109#£Numerowane odcinki
+1110#£Naglówki sa ponumerowane
+1111#£Rozmiar czcionki dla tekstu zwyklego. Rozmiar czcionki w Wordzie nie jest uzywany
+1112#£Preambula LaTeX
+1113#£Automatyczne generowanie:
+1114#£Wlasne:
+1115#£Usuwam wlasna preambule
+1116#£Tworzy kod LaTeX jako plik tex i otwiera go w domyslnym programie dla plików tex (TexWorks, TexMaker...), aby kod mógl byc przegladany i modyfikowany
+1117#£Tworzy dokument LaTeX jako plik pdf za pomoca MikTex. MikTex, który musi byc zainstalowany. Powinien byc uzywany tylko do prostych dokumentów
+1118#£Poczekaj...
+1119#£{1}... (twoja wlasna wstep) ... \n\n{2}
+1120#£Wybierz, jak sparafrazowac to zdanie.
+1121#£Jednostki wyjsciowe:
+1122#£Redukuj
+1123#£Czynnik
+1124#£Wstawia poza nawiasem, np. x^2-1 do (x-1)(x+1).
+1125#£Mnozy nawiasy, np. (x+1)^2 do x^2+2x+1.
+1126#£Np. x^2+6x+5 do (x+3)^2-4, równiez równanie okregu.
+1127#£Wszystkie liczby dziesietne sa przeliczane na ulamki, a wynik jest dokladny.
+1128#£Wklej na te sama linie
+1129#£Wynik zapisuje sie po wyrazeniu ze znakiem równosci (nie za pomoca równania)
+1130#£Wyjscie logarytmiczne
+1131#£Auto
+1132#£Wybierz zmienne, które maja zostac wyeliminowane.
+1133#£Z równan {2} mozna wyeliminowac co najwyzej {1} zmiennych.
+1134#£Wybierz maksymalna liczbe {1} zmiennych, poniewaz istnieje {1} równan.
+1135#£Eliminuj maksymalna liczbe {1} zmiennych
+1136#£Albo napisz je sam, oddzielone przecinkami
+1137#£Wybierz do {1} zmiennych
+1138#£Albo zapisz je rozdzielone przecinkami (reszta jest automatycznie wybierana)
+1139#£Eliminuj zmienne
+1140#£Rozwiaz równanie
+1141#£Równania mozna zasadniczo rozwiazac na dwa rózne sposoby. Jesli napotkasz problemy z równaniem, warto spróbowac innej metody.
+1142#£Rozwiazania znajduja sie przez "zgadywanie" wielu róznych rozwiazan. Metoda dziala praktycznie na wszystkich równaniach, ale mozna je pominac, a mozna znalezc falszywe.
+1143#£Uwaga: Urzadzenia sa wlaczone. \nUwazaj na zmienne bedace jednostkami, np. A, C, F, H, J, K, L, N, S, T, V, W, m, g, u, s
+1144#£Limit czasowy, liczba cyfr oraz n dla notacji naukowej musza byc liczbami.
+1145#£Limit czasowy musi wynosic co najmniej 0, liczba cyfr co najmniej 20, a n dla notacji naukowej to liczba calkowita od 0 do 100.
+1146#£Wybierz przynajmniej jedna aplikacje CAS.
+1147#£Folder kopii zapasowej to: {1}
+1148#£WordMat+ jest wlaczony.
+1149#£Wymaga to WordMat+.
+1150#£Ustawienia sa zresetowane.
+1151#£Liczba dziesietna
+1152#£Dokument {1} Markdown
+1153#£Markdown {1} Word
+1154#£Rozwiazywacz trójkatów w WordMat jest uzywany z wejsciem:
+1155#£Poniewaz relacja cosinusowa zostala rozwiazana powyzej dla
+1156#£Uzupelnienie kwadratowe wymaga wielomianu kwadratowego
+1157#£{1} musi miec dwie liczby, np. binomial(7; 2)
+1158#£Musza istniec co najmniej dwa równania, z których nalezy wyeliminowac, np. eliminate([x=2t+1; y=t^2]; t)
+1159#£eliminate wymaga wyeliminowania równan i zmiennych, np. eliminate([x=2t+1; y=t^2]; t)
+1160#£TestTF wymaga równania
+1161#£Wyrazenie staje sie zbyt duze, by go mnozyc
+1162#£binomial (n; r) wymaga n{1}0
+1163#£Zalozeniem musi byc nierównosc, np. x>0: {1}
+1164#£Zalozeniem musi byc nierównosc miedzy zmienna a liczba, np. x>0
+1165#£Wartosci w zalozeniu nie mozna obliczyc: {1}
+1166#£Nie jest zdefiniowany pierwiastek liczby ujemnej
+1167#£Potega liczby ujemnej nie jest zdefiniowana dla tego wykladnika
+1168#£Liczba jest zbyt duza
+1169#£Ln i log sa zdefiniowane tylko dla liczb dodatnich
+1170#£diff powinny miec od 1 do 3 argumentów: diff(wyrazenie; x; n)
+1171#£Drugim parametrem w diff musi byc zmienna, np. diff(x^2; x)
+1172#£Trzeci parametr w diff musi byc liczba calkowita
+1173#£Trzeci parametr w rózniczkach powinien miec wartosc od 0 do 100
+1174#£Okresl, która zmienna róznicowac, np. diff(expression; x)
+1175#£{1} nie da sie jeszcze rozróznic
+1176#£Zapisz wartosc graniczna jako klej z x{1}a ponizej
+1177#£Brakuje wygladu po kleju
+1178#£Funkcja fragmentaryczna musi miec wyrazenie i warunek w kazdym wierszu
+1179#£Funkcja fragmentaryczna nie jest tu zdefiniowana (zaden z warunków nie jest spelniony)
+1180#£Notacja polarna r{1}v wymaga wlaczenia liczb zespolonych
+1181#£Zapisz liczbe zespolona w postaci biegunowej, np. r{1}v
+1182#£{1} musi miec jeden argument, np. {1}(3+2i)
+1183#£Argument 0 nie jest zdefiniowany
+1184#£Równania nie da sie podzielic na czesc rzeczywista i urojona
+1185#£Wszystkie liczby zespolone sa rozwiazaniami
+1186#£Równanie ma nieskonczona liczbe rozwiazan ({1} jest na krzywej)
+1187#£Nie mozna znalezc pierwiastka kwadratowego z {1}
+1188#£Znak {1} nie jest znany
+1189#£Zestaw definicji dla {1} moze zawierac tylko {2}: {3}
+1190#£Zbiór definicji dla {1} musi zawierac {2}: {3}
+1191#£Definicja nie zawiera znaku równosci: {1}
+1192#£To nie jest definicja: {1}
+1193#£Definicja nie jest pelna: {1}
+1194#£{1} jest poleceniem i nie mozna go zdefiniowac
+1195#£Parametry w definicji funkcji musza byc zmienne, np. f(x)=2x+1: {1}
+1196#£Nie mozna zdefiniowac funkcji wbudowanej: {1}
+1197#£{1} jest stala i nie mozna jej zdefiniowac
+1198#£Lewa strona definicji musi byc nazwa lub funkcja, np. a=5 lub f(x)=2x+1: {1}
+1199#£Indeks {1} znajduje sie poza {2} macierzy ({3} wierszy)
+1200#£Indeks {1} znajduje sie poza macierza {2} ({3} kresków)
+1201#£Indeks {1} jest poza {2} ({3} pozycji)
+1202#£Definicja wykorzystuje sama siebie (definicje rekurencyjna)
+1203#£Funkcja {1} musi miec {2} argument(y)
+1204#£Tylko funkcje jednej zmiennej mozna rozróznic za pomoca etykiety: {1}
+1205#£{1} nie jest zdefiniowany dla {2} (zbiór definicji jest {3})
+1206#£{1} nie moze byc uzywany jako licznik, poniewaz {1} jest zdefiniowany. Usun definicje lub uzyj innej nazwy.
+1207#£Nie mozna znalezc progu dla {1}, poniewaz {1} jest zdefiniowany. Usun definicje lub uzyj innej nazwy.
+1208#£Osadzanie po {1} nie moze byc zrobione, poniewaz {1} jest zdefiniowane. Usun definicje lub uzyj innej nazwy.
+1209#£Rózniczkowanie przez {1} nie moze byc rózniczkowane, poniewaz {1} jest zdefiniowane. Usun definicje lub uzyj innej nazwy.
+1210#£Zbyt {1} nie da sie rozwiazac, bo {1} jest zdefiniowane. Usun definicje lub uzyj innej nazwy.
+1211#£Wyrazenie nie moze byc wyswietlane w GeoGebra: {1}
+1212#£GeoGebra nie moze byc uzyta do wyrazenia w WordMat+
+1213#£GeoGebra nie moze zostac uruchomiona (MiniBrowser WordMat)
+1214#£GeoGebra nie moze zostac uruchomiona (AppleScript WordMat)
+1215#£GeoGebra zostala zatrzymana, poniewaz obliczenia trwaly ponad {1} sekund
+1216#£GeoGebra nie jest zainstalowana (aplikacje geogebra-math WordMat)
+1217#£GeoGebra nie moze zostac uruchomiona (brakuje WebViewWrap w WordMat)
+1218#£GeoGebra nie moze zostac uruchomiona
+1219#£GeoGebra nie moze liczyc na urzadzenia
+1220#£GeoGebra nie potrafi tego obliczyc: {1}
+1221#£GeoGebra nie moze byc tutaj uzywana do {1}
+1222#£Równanie testowe wymaga równania
+1223#£GeoGebra nie moze byc uzyta do tego równania rózniczkowego
+1224#£GeoGebra nie moze uzyc tego warunku
+1225#£GeoGebra nie moze uzywac tych terminów
+1226#£GeoGebra nie potrafi rozwiazac równania rózniczkowego
+1227#£GeoGebra nie moze wyeliminowac zmiennych
+1228#£GeoGebra nie potrafi rozwiazac równania
+1229#£GeoGebra znajdowala jedynie zlozone rozwiazania
+1230#£GeoGebra nie potrafi tego obliczyc
+1231#£GeoGebra znalazla tylko jeden zlozony wynik
+1232#£Wykres nie mógl byc wyswietlany: {1}
+1233#£Korpus obrotu nie mógl byc wyswietlany: {1}
+1234#£Wybierz jedna lub wiecej funkcji, np. f(x)=x^2 lub y={1}x. Zbiór definicji zapisuje sie po przecinku, np. f(x)=x^2, 0{2}x{2}2.
+1235#£{1} nie jest funkcja x i nie moze byc wyswietlana jako moment obrotowy.
+1236#£Graph nie jest dostepny na Maca.
+1237#£Graf nie mógl byc wyswietlany w Graph: {1}
+1238#£Graf nie obsluguje funkcji kilku zmiennych: {1}
+1239#£Graf nie moze wyswietlac wektorów i krzywych: {1}
+1240#£Graf nie moze wyswietlac wektorów i punktów w 3D:{1}
+1241#£Wprowadz wartosc {1}\n\nMozna to pózniej dostosowac w niestandardowych funkcjach w Graphie. Mozesz nawet zrobic animacje, w której wartosc zmienia sie ciagle, w sekcji Obliczaj/Animuj.
+1242#£Pasek kierunkowy nie mógl byc wyswietlany: {1}
+1243#£Pokaz wykres
+1244#£Rozwiazuje dla {1}, który równiez jest jednostka. Dlatego {1} nie jest jednostka w tym równaniu. Rozwaz uzycie innej nazwy zmiennej lub wylaczenie jednostek.
+1245#£Zaznacz równanie do rozwiazania
+1246#£Wybierz równanie rózniczkowe do rozwiazania
+1247#£Ustaw funkcje dla warunków poczatkowych
+1248#£nie dalo sie rozwiazac
+1249#£Równanie rózniczkowe rozwiazuje sie za pomoca . WordMat ({1})
+1250#£z warunkiem startowym {1}
+1251#£z warunkami poczatkowymi {1}
+1252#£z warunkami brzegowymi {1}
+1253#£Równanie {1} uzywa WordMat.
+1254#£Wyrazenie {1} uzywanie WordMat.
+1255#£Zredukowane
+1256#£Czynnikowanie
+1257#£mnozone
+1258#£Przeksztalcone z uzupelnieniem kwadratowym
+1259#£Przeksztalcone w ulamki
+1260#£Parafrazowane
+1261#£Zmienne {1} wyeliminowac za pomoca WordMat.
+1262#£Zmienna {1} zostac wyeliminowana za pomoca WordMat.
+1263#£Wybierz równanie do testowania
+1264#£To równanie jest prawdziwe.
+1265#£Równanie to jest prawdziwe dla wszystkich wartosci {1}.
+1266#£To równanie jest falszywe.
+1267#£Równanie jest falszywe, poniewaz lewa strona nie jest zdefiniowana.
+1268#£Równanie jest falszywe, poniewaz prawa strona nie jest zdefiniowana.
+1269#£Równanie jest falszywe dla wszystkich wartosci {1}.
+1270#£Równanie to nie jest prawdziwe dla wszystkich wartosci {1}. Na przyklad jest falszywe dla {2}
+1271#£, gdzie lewa strona nie jest zdefiniowana.
+1272#£gdzie prawa strona nie jest zdefiniowana.
+1273#£Równanie to prawdopodobnie jest prawdziwe. Nie dalo sie tego dokladnie udowodnic, ale obie strony maja te sama wartosc liczbowa.
+1274#£Równanie to prawdopodobnie jest prawdziwe dla wszystkich wartosci {1}. Nie dalo sie tego dokladnie udowodnic, ale jest prawdziwe we wszystkich {2} punktach, w których zostalo testowane numerycznie.
+1275#£Równanie to nie jest prawdziwe dla wszystkich wartosci {1}.
+1276#£Nie udalo sie ustalic, czy równanie jest prawdziwe.
+1277#£Równanie testuje sie za pomoca WordMat.
+1278#£Blad w definicji {1}: {2}
+1279#£System podatkowy jest rozwiazany numerycznie dla {1} za pomoca WordMat.
+1280#£System podatkowy jest rozwiazany dla {1} za pomoca WordMat.
+1281#£Nierównosc jest rozwiazywana numerycznie dla {1} za pomoca WordMat.
+1282#£Nierównosc jest rozwiazywana dla {1} za pomoca WordMat.
+1283#£Równanie jest rozwiazywane numerycznie dla {1} w przedziale {2} za pomoca WordMat.
+1284#£Równanie jest rozwiazywane numerycznie dla {1} za pomoca WordMat.
+1285#£Równanie jest rozwiazywane dla {1} za pomoca WordMat.
+1286#£Obliczanie zostalo przerwane przed przeszukaniem calego interwalu. Moze istniec kilka obejsc.
+1287#£Obliczanie zostalo przerwane, zanim znaleziono wszystkie rozwiazania. Moze istniec kilka rozwiazan.
+1288#£System równan nie mial rozwiazan w obrebie {2} dla zmiennych {1}
+1289#£Nierównosci nie mialy rozwiazan w zbiorze definicyjnym {1}
+1290#£Nierównosci nie mialy rozwiazan w {2} dla zmiennych {1}
+1291#£Brak znalezionych rozwiazan
+1292#£Równanie nie zawieralo rozwiazan w zbiorze definicyjnym {1}
+1293#£Równanie nie zawieralo rozwiazan {2} dla zmiennych {1}
+1294#£Zapisz {1}x po wyrazeniu w calce (np. {2}x^2 {1}x)
+1295#£Równanie zawiera strukture, której VBACAS jeszcze nie potrafi obliczyc: \n\n      {1}
+1296#£Sume zapisz z k=a ponizej i b nad znakiem (np. k=1 i n)
+1297#£Równanie zawiera akcent, którego VBACAS nie potrafi jeszcze obliczyc: \n\n      {1}
+1298#£Równanie zawiera strukture, której VBACAS jeszcze nie potrafi obliczyc (wielowierszowa tablica równan): \n\n      {1}
+1299#£Równanie zawiera strukture, której VBACAS nie potrafi jeszcze obliczyc (np. suma, calka, granica, macierz lub akcent): \n\n      {1}
+1300#£Zapisz {1}x {1}y po wyrazeniu w podwójnej calce (np. {2}x·y {1}x {1}y)
+1301#£Calka musi miec {1} rózniczki (np. {2}x {2}y)
+1302#£Równanie wydaje sie obejmowac:
+1303#£ale Word zapisal go tak, aby argument funkcji kontynuowal sie po nawiasie:
+1304#£Nie mozna go zobaczyc w równaniu, ale daje inny wynik.
+1305#£Czy równanie powinno byc poprawione tak, aby bylo obliczane w obecnej formie? \n(Nie: obliczaj, bo Word go zapisal)
+1306#£Musisz wybrac tabele
+1307#£W tabeli nie ma prawidlowych par liczbowych
+1308#£integrate musi miec 1, 2 lub 4 argumenty: integrate(wyrazenie; x) lub integrate(wyrazenie; x; a; b)
+1309#£Drugim parametrem w integrate musi byc zmienna, np. integrate(x^2; x)
+1310#£Okresl, która zmienna integrowac po, np. integrate(wyrazenie; x)
+1311#£Calki nie mozna obliczyc: calka nie jest zdefiniowana w calym przedziale
+1312#£Calki nie dalo sie obliczyc wystarczajaco precyzyjnie numerycznie (calka jest zbyt mocno zmienna)
+1313#£znalezienie równania
+1314#£czytanie równania
+1315#£zastepujac równanie
+1316#£Równania nie dalo sie przekonwertowac na LaTeX ({1}): {2}
+1317#£Równanie {1} LaTeX
+1318#£{1} {2} nie mozna bylo przeksztalcic w równania i nie zostalo zmienione: {3}
+1319#£Kod LaTeX nie mógl zostac przeksztalcony w równanie: {1}
+1320#£Kod jest pusty.
+1321#£Ta funkcja nie jest obslugiwana na Macu.
+1322#£Ta wersja WordMat+ nie moze tworzyc plików pdf za pomoca MikTex. Zamiast tego utwórz plik tex.
+1323#£MikTex nie jest zainstalowany. Teraz zostaniesz przekierowany do miktex.org, gdzie mozna go pobrac. Przy pierwszym uruchomieniu konwertera zostaniesz równiez poproszony o pobranie kilku pakietów. Po prostu kliknij OK.
+1324#£Zapisz dokument przed konwersja na LaTeX. Pliki LaTeX umieszcza sie w folderze obok dokumentu.
+1325#£Dokument nie znajduje sie na twoim komputerze (OneDrive). Zapisz go do folderu na komputerze przed konwersja.
+1326#£Przeksztalcanie równan
+1327#£Konwertowanie formatowania
+1328#£Konwertowanie obrazów
+1329#£Tabele konwersji
+1330#£Konwersja akapitów
+1331#£Zapisywanie pliku
+1332#£{1} {2} nie mozna bylo zapisac jako pliku i zostalo zastapione ramka z tekstem "Image n missing".
+1333#£Dokument nie mógl zostac przekonwertowany do LaTeX: {1}
+1334#£WordMat+ nie znalazl zadnego folderu, w którym mozna pisac na tym Macu.
+1335#£MikTex (pdflatex.exe) nie zostal odnaleziony.
+1336#£PDFLATEX dziala {1}. Time
+1337#£Blad popelnil pdflatex.exe podczas jazdy samochodem.
+1338#£Dokument LaTeX nie mógl zostac przetlumaczony. PDFLATEX podawal blad: \n\n{1}\n\nKliknij OK, aby otworzyc plik tex.
+1339#£Plik pdf zostal utworzony, ale te znaki pdflatex nie potrafia pisac. Zostaly zastapione pogrubiona litera ? w pliku PDF: \n\n{1}
+1340#£Plik pdf nie zostal znaleziony. Kliknij OK, aby otworzyc plik tex i znalezc blad.
+1341#£folder z obrazami
+1342#£Folder dokumentu
+1343#£Konwertuje linki i przypisy
+1344#£Kopiowanie do schowka
+1345#£Strona html jest zapisana jako\n{1}
+1346#£Kod html nie mógl zostac skopiowany do schowka.
+1347#£{1} {2} nie mozna odczytac i jest zapisane jako tekst.
+1348#£{1} {2} nie dalo sie zapisac i zostalo zastapione tekstem "Image n missing".
+1349#£Dokument nie mógl zostac przekonwertowany do html ({1}): {2}
+1350#£(not used)
+1351#£Plik Markdown zapisuje sie jako\n{1}
+1352#£Tekst markdownu jest kopiowany do schowka.
+1353#£Tekst markdown nie mógl zostac skopiowany do schowka.
+1354#£Obrazy sa zapisywane jako pliki w tym samym folderze.
+1355#£{1} {2} nie dalo sie uratowac.
+1356#£Dokument nie mógl zostac przekonwertowany na mardown ({1}): {2}
+1357#£*Brak {1} obrazu*
+1358#£Markdown nie mógl zostac przeksztalcony: {1}
+1359#£{1} {2} nie znaleziono w komputerze i nie jest wlozone.
+1360#£{1} {2} nie dalo sie przeksztalcic w pola równan.
+1361#£Szablon LaTeX (LatexWordTemplate.dotx) nie zostal znaleziony. Instaluje sie razem z WordMat.
+1362#£limit powinny miec 3 lub 4 argumenty: limit(wyrazenie; x; a) lub limit(wyrazenie; x; a; plus)
+1363#£Czwarty parametr w granicy musi byc plus lub minus
+1364#£Limit ten nie istnieje
+1365#£{1} musi miec 4 argumenty: {1}(wyrazenie; k; a; b)
+1366#£Drugim parametrem w {1} musi byc zmienna, np. {1}(k^2; k; 1; n)
+1367#£Dolna granica nie moze byc nieskonczona
+1368#£Za duzo stawów (maksymalna {1})
+1369#£Termin {1}={2} nie ma wartosci
+1370#£Szereg jest rozbiezny (suma nie istnieje)
+1371#£Sumy potegi nie da sie obliczyc
+1372#£Macierz zerowa powinna miec rozmiar od 1 do 100
+1373#£Macierz jednostkowa musi miec rozmiar od 1 do 100
+1374#£Iloczyn macierzowy wymaga, aby pierwszy mial tyle kolumn, ile drugi ma wierszy ({1} i {2})
+1375#£Tablica moze byc podniesiona tylko do liczby calkowitej (lub T dla transponowanego)
+1376#£Macierz mozna podniesc tylko do liczby calkowitej
+1377#£Tylko macierze kwadratowe moga byc podniesione do potegi (macierz jest {1})
+1378#£Wykladnik jest zbyt duzy
+1379#£Wyznacznik istnieje tylko dla macierzy kwadratowych (macierz jest {1})
+1380#£Wyznacznik tablicy parametrów mozna obliczyc maksymalnie {1}×{1}
+1381#£Tylko macierze kwadratowe maja odwrotnosc (macierz jest {1})
+1382#£Macierz nie ma odwrotnosci (wyznacznik wynosi 0)
+1383#£Odwrotnosc tablicy parametrów mozna obliczyc co najwyzej {1}×{1}
+1384#£Maxima nie jest zainstalowana (WordMat)
+1385#£Maxima nie moze zostac uruchomiona (brakuje MathMenu.dll WordMat)
+1386#£Maxima nie moze zostac uruchomiona
+1387#£Maxima nie moze zostac uruchomiona (AppleScript WordMat)
+1388#£Maxima zadala pytanie, na które WordMat+ nie potrafi odpowiedziec
+1389#£Maxima zostala zatrzymana, poniewaz obliczenia trwaly ponad {1} sekund
+1390#£Polaczenie z Maxima przez WSH wymaga wspólpracy
+1391#£Maxima nie mogla zostac uruchomiona przez WSH: blad {1} {2}
+1392#£Bledy w kodzie Maxima (pola kodu lub plik): {1}
+1393#£Maxima nie potrafi obliczyc {1}
+1394#£Maxima nie moze byc uzywana do {1} w WordMat+
+1395#£Warunki poczatkowe w dwóch róznych punktach
+1396#£Te warunki
+1397#£Maksima nie potrafia rozwiazac równania rózniczkowego
+1398#£Maxima nie potrafi tego obliczyc
+1399#£Maxima znalazla tylko jeden zlozony wynik
+1400#£Maxima nie jest w stanie wyeliminowac zmiennych
+1401#£Maksima nie sa w stanie rozwiazac nierównosci
+1402#£Maxima nie potrafi rozwiazac równania
+1403#£Maxima znajdowala tylko zlozone rozwiazania
+1404#£Gnuplot nie jest dostepny na Maca. Uzyj GeoGebra.
+1405#£Graf nie mógl byc wyswietlany za pomoca Gnuplot: {1}
+1406#£Blad w kodzie Maxima
+1407#£Pola kodu lub plik kodu zawieraja blad: {1}
+1408#£Wpisz polecenie Maxima
+1409#£Blad w kodzie Maxima (pola kodu): {1}
+1410#£Jest za duzo kolumn
+1411#£Liczenie zostalo wstrzymane
+1412#£Termin czesci obliczen zostal przekroczony
+1413#£Obliczenia zostaly przerwane, poniewaz zajely ponad {1} sekund
+1414#£Kadry sa definiowane wylacznie dla liczb calkowitych
+1415#£Kadry sa definiowane tylko dla liczb >= 0
+1416#£Liczba ta jest zbyt duza dla kadry
+1417#£Liczba ta jest zbyt duza - VBACAS nie potrafi obliczyc liczby powyzej 170 jako liczby dziesietne
+1418#£desolve musi miec równanie rózniczkowe, np. desolve(y'=2y)
+1419#£Równanie rózniczkowe musi byc równaniem, np. y'=2y
+1420#£Argument {1} w desolve nie jest rozumiany
+1421#£Równanie nie zawiera funkcji pochodnej (np. y')
+1422#£Równanie nie zawiera zadnej pochodnej {1}
+1423#£Nie ma wolnej nazwy dla stalej
+1424#£Rzad pochodnej musi byc liczba
+1425#£Zapisz warunki jako {1}(0)=2 po równaniu: desolve(równanie; {1} (0)=2)
+1426#£Równan rózniczkowych wyzszego rzedu niz 2 nie da sie rozwiazac
+1427#£Równania rózniczkowego nie dalo sie rozwiazac ({1}{2} nie mozna go wyizolowac)
+1428#£Równania rózniczkowego nie dalo sie rozwiazac (nie jest ani liniowe, ani separowalne)
+1429#£Równania rózniczkowego nie mozna rozwiazac ({1}{2}{2} nie mozna go wyizolowac)
+1430#£Równania rózniczkowego nie mozna rozwiazac (drugiego rzedu mozna rozwiazac, gdy jest liniowe o stalych wspólczynnikach, czyli {1}{3}{3}=f({2}))
+1431#£Równania rózniczkowego nie udalo sie rozwiazac (nie mozna znalezc rozwiazania czasteczkowego dla {1})
+1432#£Równanie rózniczkowe drugiego rzedu moze miec co najwyzej dwa warunki
+1433#£Warunki musza byc równaniami, np. {1}(0)=1 oraz {1}{2}(0)=2
+1434#£Warunki powinny byc zapisane jako {1}(0)=1 oraz {1}{2}(0)=2
+1435#£Zadne rozwiazanie nie spelnia warunków
+1436#£Równanie rózniczkowe pierwszego rzedu musi spelniac jeden warunek, np. {1}(0)=2
+1437#£Warunek musi byc równaniem, np. {1}(0)=2
+1438#£Warunek powinien byc zapisany jako {1}(0)=2
+1439#£Zadne rozwiazanie nie spelnia warunku {1}
+1440#£Równania rózniczkowego nie udalo sie rozwiazac (funkcji rdzeniowej {1} nie mozna znalezc)
+1441#£Dlugosc kroku musi byc dodatnia
+1442#£Wartosc koncowa musi byc wieksza niz wartosc poczatkowa
+1443#£Za duzo kroków ({1}). Wybierz dluzszy krok
+1444#£Wpisz tylko prawa strone równania rózniczkowego dla {1}: {2}
+1445#£Zdefiniuj {1} w Definicjach
+1446#£Równania rózniczkowego dla {1} nie mozna obliczyc przez {2}={3}
+1447#£Umiesc kursor w wyrazeniu, które ma byc parafrazowane.
+1448#£Polecenie Maxima wymaga Maxima w WordMat, która nie jest zainstalowana.
+1449#£Wpisz polecenie Maxima, np. integrate(x^2,x) lub factor(x^2-1). Wynik zapisuje sie jako nowe równanie.
+1450#£Komenda Maxima
+1451#£Polecenie Maxima nie wystepuje w tej wersji WordMat+.
+1452#£Umiesc kursor w polu matematycznym.
+1453#£Umiesc kursor w równaniu, które ma byc rozwiazane.
+1454#£Wybierz równania, z których eliminujesz zmienne.
+1455#£Wybierz co najmniej dwa równania, aby wyeliminowac zmienne (np. x=2t+1 i y=t^2).
+1456#£Umiesc kursor w równaniu rózniczkowym, które ma byc rozwiazane.
+1457#£Nie ma aktywnej licencji WordMat+. \n\nWordMat+ nadal moze byc uzywany, ale te funkcje nie sa aktywne: {1}WordMat+ wlasny CAS (VBACAS). Grafy Maxima lub GeoGe{1}bra sa liczone w oknie GeoGebra WordMat. Sa wyswietlane w przegladarce{1} Wstawianie wzorów z kolekcji wzorów{1}Regresja sinusowa{1}Menu personalizacji\n\nKliknij OK, aby przejsc do www.wordmat.dk
+1458#£Nie ma aktywnej licencji WordMat+, wiec nie mozna uzywac wlasnego CAS (VBACAS) WordMat+, ani Maxima, ani GeoGebra na tym komputerze. Wybierz jedna z nich w Ustawieniach, zainstaluj WordMat z Maxima lub odnow licencje na www.wordmat.dk.
+1459#£Maxima nie jest czescia tej wersji WordMat+
+1460#£Równanie jest juz ponumerowane.
+1461#£Równania numerowanego nie mozna wstawic do tabeli.
+1462#£Równanie numerowane
+1463#£Wpisz nazwe równania.
+1464#£Nazwa musi miec maksymalnie 40 znaków.
+1465#£Imie powinno zaczynac sie na litere.
+1466#£Nazwa moze zawierac tylko litery, cyfry i _ (nie spacji).
+1467#£Nazwa juz istnieje.
+1468#£W dokumencie nie ma nazwanych równan. Uzyj 'Wstaw ponumerowane równanie dla odniesienia' w sekcji Nowe równanie.
+1469#£Odniesienie do równania
+1470#£Umiesc kursor w równaniu numerowanym.
+1471#£Na jaka liczbe powinno byc ustawione to równanie? \nKolejne równania maja swoje liczby zaktualizowane, aby pasowaly.
+1472#£Wpisz cala liczbe lub section.number (2.3) dla liczb z sekcja.
+1473#£Wstawia sie równanie numer sekcji. Zazwyczaj wstawia sie go jako numer rozdzialu lub sekcji. w naglówku. Jednak numer mozna równiez wstawic ukryty. Czy numer powinien byc wyswietlany? (Odpowiedz nie, aby go ukryc)
+1474#£Wstaw sekcje równania nr
+1475#£Sekcja równan
+1476#£Definicje usuwania nie moga byc wstawiane do tabeli.
+1477#£Okresl, które jednostki powinny znajdowac sie na wyjsciu, oddzielone przecinkami\nPrzyklady: \n\ncm, kJ, godziny\neV, nm, mV\naJ, AU, Bq\n\nJesli nic nie zostanie okreslone, wszystkie jednostki zostana zwrócone jako podstawowe jednostki SI lub pochodne jednostki SI bez prefiksu.
+1478#£Drugim parametrem w solve musi byc zmienna, np. solve(x^2=4; x)
+1479#£Nierównosci nie moga byc rozwiazane, gdy wlaczy sie liczby zespolone
+1480#£Równania nie da sie rozwiazac analitycznie. Spróbuj rozwiazac je numerycznie.
+1481#£Równania nie da sie jeszcze rozwiazac: {1}=0
+1482#£Okresl, dla której zmiennej nalezy rozwiazywac, np. solve(równanie; x)
+1483#£Równania nie da sie dokladnie rozwiazac (stopien jest zbyt wysoki)
+1484#£Zbyt wiele rozwiazan w przedziale
+1485#£Za duzo rozwiazan
+1486#£Okres nie moze byc obliczony
+1487#£Rozwiazan w przedziale nie da sie obliczyc
+1488#£Równania nie da sie jeszcze dokladnie rozwiazac: {1}=0
+1489#£Tego równania nie da sie jeszcze dokladnie rozwiazac
+1490#£Kat nie moze byc obliczony
+1491#£Równania nie da sie jeszcze dokladnie rozwiazac: {1}={2}
+1492#£Nierównosci nie da sie rozwiazac (jeszcze): {1}
+1493#£Nierównosci nie da sie jeszcze rozwiazac: {1}{2}0
+1494#£Nierównosc ma nieskonczona liczbe przedzialów rozwiazan. Okreslmy przedzial dla {1}, np. 0{2}{1}{2}{3}
+1495#£Nierównosci nie da sie jeszcze rozwiazac
+1496#£{1} musi miec {2}{3}
+1497#£{1} (x) nie jest zdefiniowane dla x=0, -1, -2, ...
+1498#£W_0(x) jest zdefiniowany tylko dla x{1}-1/e
+1499#£acosh (x) jest zdefiniowana tylko dla x{1}1
+1500#£{1} (x) jest zbyt duzy, by go obliczyc;
+1501#£{1} nie ma tu zadnej wartosci
+1502#£{1} nie mozna róznicowac wedlug {2} ({2} w pierwszym argumentie)
+1503#£Niewiadome musza byc zmienne, np. solve([x+y=5; x-y=1]; [x;y])
+1504#£Ukladów z nierównosciami nie da sie jeszcze rozwiazac
+1505#£Nie ma równan do rozwiazania
+1506#£Uklad równan nie ma zmiennych do rozwiazania dla
+1507#£Uklad równan jest naddeterminowany: jest wiecej równan ({1}) niz nieznanych ({2}).
+1508#£System podatkowy nie moze byc jeszcze dokladnie rozwiazany
+1509#£System podatkowy nie jest jeszcze rozwiazany
+1510#£Okreslmy zmienne do wyeliminowania, np. eliminate([x+y=a; x-y=b]; x)
+1511#£Zmienne, które nalezy wyeliminowac, musza byc zmiennymi, np. eliminate([x+y=a; x-y=b; x*y=c]; [x;y])
+1512#£Zmiennych nie da sie wyeliminowac z nierównosci
+1513#£Z równan {2} mozna wyeliminowac co najwyzej {1} zmienne
+1514#£Gdy {1} zostana wyeliminowane, nie pozostaja zadne równania (zawsze sa spelniane)
+1515#£{1} nie da sie wyeliminowac (jeszcze)
+1516#£{1} nie mozna wyeliminowac (stopnie sa zbyt wysokie)
+1517#£Urzadzenia sie nie zgadzaja: {1}
+1518#£Nieznana jednostka: {1}
+1519#£a lista
+1520#£wektor
+1521#£macierz
+1522#£Liczba
+1523#£{1} musi miec przynajmniej jeden pierwiastek
+1524#£Wszystkie wiersze w tablicy musza miec równa liczbe elementów
+1525#£Elementy wektora musza byc liczbami lub wyrazeniami
+1526#£Nie da sie {1} {2}{3}
+1527#£Nie da sie podac liczby {1}
+1528#£o innym rozmiarze
+1529#£Nie mozna mnozyc {1} i {2} przez rózne liczby elementów
+1530#£Wektory musza miec równa liczbe wspólrzednych
+1531#£Wektor moze byc podniesiony tylko do kwadratu (iloczyn skalarny z samym soba)
+1532#£Nie da sie podniesc do {1}
+1533#£Funkcja nie moze przyjmowac {1} jako argumentu
+1534#£musi miec tablice lub dwa wektory
+1535#£Rozmiar macierzy zerowej musi byc liczba calkowita
+1536#£ident musi miec rozmiar, np. ident(3)
+1537#£Rozmiar macierzy jednostkowej musi byc liczba calkowita
+1538#£hat musi miec jeden wektor
+1539#£Wektor krzyzowy istnieje tylko dla wektorów na plaszczyznie
+1540#£{1} musi miec dwa wektory, np. {1}(a; b)
+1541#£{1} tablicy nie moze byc jeszcze obliczona
+1542#£Iloczyn wektorowy istnieje tylko dla wektorów w przestrzeni (3 wspólrzedne)
+1543#£Wyznacznik dwóch wektorów istnieje tylko dla wektorów w plaszczyznie (2 wspólrzedne)
+1544#£{1} musi sie klócic
+1545#£length musi miec jedna liste, np. length(x)
+1546#£Element ma maksymalnie dwa indeksy, np. A[1; 2]
+1547#£Indeks powinien byc liczba calkowita: {1}
+1548#£Indeks jest zbyt duzy: {1}
+1549#£Indeks {1} znajduje sie poza macierza ({2} wierszy)
+1550#£Indeks {1} znajduje sie poza macierza ({2} kresków)
+1551#£Lista ma tylko jeden indeks, np. x[2]
+1552#£Wektor ma tylko jedna kolumne: drugi indeks musi miec wartosc 1
+1553#£Wektory po obu stronach znaku równosci musza miec równa liczbe wspólrzednych
+1554#£Macierze po obu stronach znaku równosci musza miec ten sam rozmiar
+1555#£Tablica moze byc równa tylko jednej macierzy
+1556#£Wektor nie moze byc jednak liczbie
+1557#£Obliczenia nie moga byc wykonywane na polach definicji. Mozesz uzyc ponizszej definicji do obliczen.
+1558#£oraz
+1559#£automatyczna
+1560#£dokladne
+1561#£Numeryczne
+1562#£jednostki na
+1563#£Jednostki wylaczone
+1564#£Kod LaTeX
+1565#£Kody LaTeX
+1566#£Równanie
+1567#£Równania
+1568#£Obraz
+1569#£Obrazy
+1570#£Argument
+1571#£Argumenty
+1572#£Poziom istotnosci:
+1573#£Suma wszystkich komórek jest mniejsza niz 50. {1} rozklad jest wiec w tym przypadku slabym przyblizeniem, a wynik niewiarygodny.
+1574#£Stopnie swobody:
+1575#£Przeksztalcenie
+1576#£Dostosuj menu
+1577#£Wybierz, które elementy menu sa widoczne
+1578#£Cyfry i zaokraglenie
+1579#£Przepisuj...
+1580#£Rozwiaz równania
+1581#£Rozwiazywanie sprzezonych równan rózniczkowych
+1582#£Prawdopodobienstwo
+1583#£Niezgrupowane
+1584#£Grupa
+1585#£Wstaw tabele
+1586#£Zwyczaj
+1587#£Rozklad t
+1588#£Równania numerowane
+1589#£Pokaz wszystko
+1590#£Ukryj wszystko
+1591#£Ustalony wedlug poziomu
+1592#£Ustala widoczne elementy menu zgodnie z poziomem matematyki, którego sie uczysz
+1593#£Montaz sinusowy
+1594#£Ta funkcja wymaga WordMat+
+1595#£Aby uzyskac dostep do WordMat+, Twoja szkola/organizacja moze:\n zawarcie umowe partnerska z Eduap.
+1596#£Przeczytaj wiecej o innych korzysciach plynacych z partnerstwa tutaj:
+1597#£Sprawdz, czy Twoja szkola juz podpisala umowe partnerska
+1598#£Konfiguracja kolekcji wzorów
+1599#£Wybierz swoja edukacje
+1600#£Wybierz poziomy przedmiotów
+1601#£Zawsze mozesz zmienic swoje wybory pózniej
+1602#£Matematyka:
+1603#£Fizyka:
+1604#£Chemia:
+1605#£Nastepny
+1606#£Serial w GnuPlot
+1607#£Funkcje f(x)=...
+1608#£Tytul osi x
+1609#£Tytul osi y
+1610#£Var
+1611#£Rozmiar punktu:
+1612#£Pokaz w Excelu
+1613#£Excel osadzony
+1614#£Siatka
+1615#£Logarytmiczna os X
+1616#£Os logarytmiczna Y
+1617#£Wytwórnie
+1618#£Wstaw etykiete
+1619#£Wyjasnienie programu
+1620#£Punkty 2
+1621#£Skladnia\nPunkt startowy - Wektor\n(startx ; starty)-(dx ; dy)\n\nPrzyklady: \n(1,1)-(1,2)     \n  Rysowanie wektora (1.2) z punktu (1.1)\n\n(1,2)\n  Rysowanie wektora (1.2) z punktu (0.0)\n\n(1,5 ; 4,5)\nJesli uwzglednimy liczby dziesietne; uzywane jako separator
+1622#£Nowy Wektor
+1623#£Równanie 1
+1624#£Równanie 2
+1625#£Równanie 3
+1626#£Zmienne powinny byc x i y
+1627#£Rekwizyt
+1628#£Manu
+1629#£niezaleznie. zmienne
+1630#£zmienna dep.
+1631#£Krzywe calkowite (krzywe)
+1632#£Okresl punkty, przez które nalezy wytyczyc sciezki rozwiazania.
+1633#£Otwarte
+1634#£Otwiera sie okno, w którym mozesz kliknac punkt, gdzie powinna byc krzywa calkowita i gdzie moga byc suwaki, dzieki czemu mozesz zobaczyc, jak pole kierunku zmienia sie wraz z suwakiem
+1635#£Interaktywne
+1636#£Czekaj!
+1637#£Const
+1638#£od
+1639#£do
+1640#£Suwaki
+1641#£Pokazuj tylko krzywe
+1642#£Licencja:
+1643#£Automatycznie ustaw dlugosc kroku
+1644#£Ustawia liczbe kroków na 500
+1645#£Równania rozwiazuje sie za pomoca 4. rzedu Runge-Kutta
+1646#£Wstawianie obliczonych punktów jako listy w dokumencie Word
+1647#£Mozesz wpisac zmienna lub funkcje w zaleznosci od tego, co jest zapisane w równaniu. np. y lub f(x), ale nie f.
+1648#£OK, nowa linia
+1649#£Definicje na tym etapie dokumentu
+1650#£Przyklad: a=5, x>0
+1651#£Przyklad: g, min, cm
+1652#£Grudzien.
+1653#£Dziala w przegladarce, ale nie online
+1654#£Powiazanie z Maxima
+1655#£Laczy sie z Maxima za pomoca pliku .net dll, który obsluguje komunikacje
+1656#£Maxima jest uruchamiana przez powloke z pomoca wsh. Kazde obliczenie jest nowa instancja Maxima. Jest nieco wolniejsza i na krótko wyswietla czarne okno cmd, ale nie zalezy od pliku dll.
+1657#£Wymaga WordMat+
+1658#£Sachiczne partnerstwo
+1659#£Przejdz wyzej (próbowalem wczesniej)
+1660#£Przesun sie w dól (do spróbowania pózniej)
+1661#£Silniki sa testowane z góry.  \nNastepny jest uzywany, gdy jeden silnik nie moze dzialac.
+1662#£Nieograniczona precyzja
+1663#£Licz na nieograniczona precyzje (duze liczby)
+1664#£Maksymalna liczba cyfr:
+1665#£Maksymalna liczba cyfr w liczbach dokladnych
+1666#£Limit czasowy:
+1667#£Limit czasu na obliczenia w sekundach (0 = brak limitu)
+1668#£Notacja naukowa, n:
+1669#£Notacja naukowa dla liczb ponizej 10^-n (0 = nigdy)
+1670#£LaTeX otaczajacy postacie wokól równania
+1671#£W tekscie:
+1672#£Tekst przed kodem LaTeX dla równania wewnatrz tekstu, np. $
+1673#£Tekst po kodzie LaTeX dla równania wewnatrz tekstu, np. $
+1674#£Na wlasnej linii:
+1675#£Tekst przed kodem LaTeX dla równania na linii osobno, np. \[ lub \begin{equation}
+1676#£Tekst po kodzie LaTeX dla równania na linii osobno, np. \] lub \end{equation}
+1677#£Jednostki z pisaniem pionowym (\mathrm)
+1678#£Encje nie sa rozpoznawane i zapisywane kursywa (\mathrm{m})
+1679#£Podwójne nacisniecie Alt+M
+1680#£Musisz wpisac dokladnie 3 katy/boki, ale nie tylko 3. \nWiec: \n1 bok + 2 katy\n2 boki + 1 kat (mozliwe 2 rozwiazania)\n3 strony
+1681#£Dokladnie tam, gdzie odpowiedz jest pozadana. Moze wplywac na czas obliczen.
+1682#£Nie znaleziono kodu LaTeX. Wybierz kod lub umiesc kursor w równaniu LaTeX (np. {1} lub {2}).
+1683#£{1} {2} nie moze byc odczytany przez VBACAS i jest zapisywany jako tekst ({3}) w dokumencie LaTeX.
+1684#£Dywergencja {1} wymaga funkcji wektorowej. Gradient {2} zapisuje sie jako {3}
+1685#£Rotacja {1} wymaga funkcji wektorowej o 2 lub 3 wspólrzednych
+1686#£{1} wymaga, aby {2} miala tyle samo wspólrzednych co zmiennych
+1687#£Dywergencja {1} wektora zapisanego wprost wymaga 2 lub 3 wspólrzednych (zmienne x, y i z)
+1688#£"{1}" wkrótce pojawi sie w WordMat+ dla pakietu Office.
+1689#£W "{1}" wystapil blad.
+1690#£Szczególy
+1691#£Kopiuj
+1692#£Jednostki sa wlaczone.
+1693#£Jednostki sa wylaczone.
+1694#£Pokaz okienko zadan
+1695#£Jezyk zmienia sie, gdy WordMat+ zostanie ponownie otwarty.
+1696#£Najkrótsza postac, np. (x^2-1)/(x-1) na x+1 i sin(x)^2+cos(x)^2 na 1.
+1697#£Obliczenia trwaly zbyt dlugo i zostaly zatrzymane.
+1698#£WordMat+ dla programu Word (Word desktop i Word Online)\nWersja {1}\n\nWersja rozwojowa: kolejne funkcje sa dodawane stale.
+1699#£Edytuj równanie
+1700#£/ ulamek, ^ potega, _ indeks, sqrt pierwiastek kwadratowy, strzalki przesuwaja kursor. Enter: wstaw. Ctrl+Enter: wstaw i oblicz. Esc: anuluj.
+1701#£Wstaw i oblicz
+1702#£Kliknij na wykresie, aby narysowac krzywa rozwiazania przez ten punkt.
+1703#£Miejsca zerowe
+1704#£Ekstrema
+1705#£Punkty przeciecia
+1706#£Seria punktów {1}
+1707#£Pokaz wspólrzedne
+1708#£Wybiera okno grafu tak, aby wszystkie punkty, zera, ekstrema i przeciecia byly widoczne, a osi, gdy sa niedaleko.
+1709#£Brak siatki
+1710#£Duza siatka
+1711#£Mala siatka
+1712#£Styczna
+1713#£Rysuje styczna do grafu przy wartosciach x zapisanych tutaj. Kilka wartosci jest rozdzielonych przez ;
+1714#£Punkt startowy
+1715#£Bez punktu startowego wektor jest rysowany z (0;0).
+1716#£Przeciagnij w dól, aby kontynuowac liczby: 1, 2 daje 3, 4 ... Podwójne klikniecie wypelnia do ostatniego wiersza.
+1717#£Wpisz wzór z x, np. 2*x, a y zostanie obliczone dla wierszy od tego miejsca w dól.
+1718#£Wpisz punkty w tabeli lub wklej je z Excela lub tabeli Word.\nPrzeciagnij maly kwadrat, aby kontynuowac liczby w dól: 1, 2 daje 3, 4 ...\nWpisz wzór w kolumnie y, np. 2x lub =2x, a y zostanie obliczone dla wierszy od tego miejsca w dól.\nZaznacz kilka komórek myszka lub klawiszem Shift i nacisnij Delete, aby je usunac.\nPrzycisk z daje kolumne z dla punktów w przestrzeni.
+1719#£Wstawia styczna do funkcji jako nowa funkcje, a punkt stycznosci jako punkt. Wybierz funkcje i wpisz x lub kliknij wykres.
+1720#£Przeciagnij na wykresie, aby narysowac wektor.
+1721#£Kliknij etykiete w tabeli, a nastepnie na wykres, aby ja przesunac.
+1722#£Obserwacja
+1723#£Liczebnosc
+1724#£Czestosc
+1725#£Czestosc skumulowana
+1726#£Od
+1727#£Do
+1728#£Liczba obserwacji
+1729#£Najmniejsza wartosc
+1730#£Dolny kwartyl
+1731#£Mediana
+1732#£Górny kwartyl
+1733#£Najwieksza wartosc
+1734#£Srednia
+1735#£Odchylenie standardowe
+1736#£Odchylenie standardowe z próby
+1737#£Statystyki opisowe obliczane za pomoca WordMat:
+1738#£Tabela musi zawierac obserwacje albo obserwacje w pierwszej kolumnie i ich liczebnosci w drugiej kolumnie.
+1739#£Tabela musi miec trzy kolumny: poczatek przedzialów, koniec przedzialów i liczebnosci.
+1740#£Poczatek kazdego przedzialu musi byc mniejszy niz jego koniec, a przedzialy nie moga sie nakladac.
+1741#£Liczebnosci nie moga byc ujemne.
+1742#£Wpisz liczbe róznych obserwacji, a zostanie utworzona tabela, w której mozesz wpisac obserwacje i ich liczebnosci.\nGdy wypelnisz tabele, wybierz {1} lub diagram z menu.
+1743#£Wpisz liczbe przedzialów, a zostanie utworzona tabela, w której mozesz wpisac przedzialy i ich liczebnosci.\nGdy wypelnisz tabele, wybierz {1} lub diagram z menu.
+1744#£Diagram
+1745#£Brak diagramu
+1746#£Czestosc w procentach
+1747#£Pokaz kwartyle
+1748#£Nazwa
+1749#£na jednostke
+1750#£Wpisz obserwacje i ich liczebnosci w tabeli lub wklej je z Excela lub tabeli Worda.
+1751#£Wpisz przedzialy i ich liczebnosci w tabeli lub wklej je z Excela lub tabeli Worda.
+1752#£Wpisz kwartyle kazdego wykresu pudelkowego: najmniejsza wartosc, dolny kwartyl, mediana, górny kwartyl oraz najwieksza wartosc.
+1753#£Kwartyle musza byc w rosnacej kolejnosci.
+1754#£Surowe dane
+1755#£Niepogrupowane
+1756#£Pogrupowane
+1757#£Czestosc skum.
+1758#£Przenies do niepogrupowanych
+1759#£Przenies do pogrupowanych
+1760#£Szerokosc przedzialu
+1761#£Wpisz obserwacje w tabeli lub wklej je z Excela lub tabeli Worda.
+1762#£Dodaj do wykresu pudelkowego
+1763#£Tabela jest wstawiana do dokumentu po zamknieciu okna.
+1764#£{1} obserwacji lezy poza przedzialami.
+1765#£Szerokosc przedzialu musi byc wieksza niz 0.
+1766#£Wykres kropkowy
+1767#£Legenda pola
+1768#£W prawym górnym rogu pokazuje pole o tej samej szerokosci co pierwszy przedzial oraz to, ilu procentom obserwacji ono odpowiada.
+1769#£Obserwacja na granicy miedzy dwoma przedzialami nalezy do dolnego przedzialu, ]a;b], co jest dunskim standardem, lub do górnego przedzialu, [a;b[.
+1770#£Stopnie swobody
+1771#£Pokaz rozklad skumulowany
+1772#£Wybierz rozklad.
+1773#£Puste pole oznacza brak ograniczenia po tej stronie.
+1774#£Wpisz prawdopodobienstwo, np. 0,95 lub 95 %, a zostanie znaleziona odpowiadajaca mu wartosc.
+1775#£n musi byc liczba calkowita wieksza niz 0.
+1776#£p musi byc miedzy 0 a 1.
+1777#£Odchylenie standardowe musi byc wieksze niz 0.
+1778#£Liczba stopni swobody musi byc wieksza niz 0.
+1779#£Obserwowane
+1780#£Dwustronny
+1781#£Lewostronny
+1782#£Prawostronny
+1783#£Obszar krytyczny
+1784#£Wartosc p
+1785#£Hipoteza zerowa zostaje odrzucona.
+1786#£Hipotezy zerowej nie mozna odrzucic.
+1787#£Przedzial ufnosci dla p
+1788#£Brak testu
+1789#£Oczekiwane
+1790#£Wartosc krytyczna
+1791#£Statystyka testowa
+1792#£Wstaw wynik
+1793#£Musza istniec co najmniej dwa wiersze z obserwowana liczba i oczekiwana liczba wieksza niz 0.
+1794#£Test zgodnosci jest przeprowadzany za pomoca WordMat
+1795#£Na poziomie istotnosci {1}% hipoteza zerowa, ze obserwacje podazaja za oczekiwanym rozkladem, moze zostac odrzucona.
+1796#£Na poziomie istotnosci {1}% hipotezy zerowej nie mozna odrzucic. Nie ma wiec dowodów, ze obserwacje odbiegaja od oczekiwanego rozkladu.
+1797#£Wartosci oczekiwane:
+1798#£Sprawdz, czy pogrupowane dane maja rozklad normalny
+1799#£{1} i {2} z danych
+1800#£Dopasuj
+1801#£Musi byc co najmniej {1} przedzialów, gdy srednia i odchylenie standardowe sa szacowane na podstawie danych.
+1802#£Test wykorzystuje pogrupowane dane z karty {1}. Wpisz je pod {2} i zaznacz {3}, aby histogram mozna bylo porównac z rozkladem normalnym.
+1803#£Nadaje kazdej krzywej pole z(t), dzieki czemu jest rysowana w przestrzeni.
+1804#£Zmienne musza byc x i y, a w przestrzeni takze z
+1805#£Równania jako obrazy
+1806#£Word Online potrzebuje kilku sekund na napisanie równania. Przy tym ustawieniu WordMat+ wstawia nowe równania i wyniki jako male obrazy, na których liczy tak jak na równaniach. Obrazy mozna ponownie zamienic na równania w menu {1}.
+1807#£Zamien równania na obrazy
+1808#£Zamienia równania w zaznaczeniu, lub w calym dokumencie, gdy nic nie jest zaznaczone, na obrazy, które Word Online wyswietla i zmienia znacznie szybciej. WordMat+ liczy na obrazach tak jak na równaniach.
+1809#£Zamien obrazy na równania
+1810#£Zamienia obrazy równan w wyborze lub w calym dokumencie, gdy nic nie jest wybrane, z powrotem w rzeczywiste równania, na przyklad przed oddaniem dokumentu.
+1811#£Równania zamienione na obrazy: {1}
+1812#£Obrazy zamienione na równania: {1}
+1813#£Nie przeksztalcone (bez zmian): {1}
+1814#£Nie ma równan do konwersji.
+1815#£Nie ma obrazków równan do konwersji.
+1816#£Równania jako obrazki sa uzywane wylacznie w Word Online.
+1817#£Równan nie udalo sie zamienic.
+1818#£Matematyka
+1819#£Fizyka
+1820#£Zamknij po wybraniu wzoru
+1821#£Przytrzymaj Ctrl po kliknieciu formuly, a kolekcja formul sie nie zamyka.
+1822#£Wstaw 2
+1823#£Wzór jest wprowadzany dwukrotnie: raz do dokumentacji, a raz do wpisania liczb.
+1824#£Wstaw stale
+1825#£W fizyce i chemii stale fizyczne sa wstawiane jako liczby w drugim wzorze.
+1826#£Pokaz w okienku
+1827#£Kolekcja formul jest widoczna w panelu obok dokumentu zamiast w duzym oknie. Stosuje sie ja od nastepnego otwarcia kolekcji formul.
+1828#£Szukaj:
+1829#£Uwaga: Kolekcja wzorów chemicznych nie jest jeszcze kompletna.
+1830#£Wpisz pole wyszukiwania lub kliknij temat.
+1831#£Kliknij na rysunek, aby wstawic go do dokumentu.
+1832#£Word Online moze wyswietlac rysunki, ale nie moze ich edytowac. Otwórz dokument w Wordzie na Windows lub Mac, aby je zmienic.
+1833#£Pokazuje figury w panelu: trójkaty, okrag jednostkowy, uklady wspólrzednych i linie monotonicznosci. Kliknij rysunek, aby wstawic go do dokumentu.
+1834#£Plik {1} zostal pobrany. Jest w plikach pobranych w przegladarce.
+1835#£Uzywaj Worda jako edytora LaTeX. \n\nMozesz wpisywac polecenia LaTeX bezposrednio w dokumencie, aby uzyskac pelna kontrole, albo korzystac z funkcji Worda i pozwolic WordMat+ konwertowac na LaTeX. \n\nPlik tex jest pobierany na komputer. Jesli dokument zawiera zdjecia, pobierany jest plik zip z plikiem tex i obrazami folderów.
+1836#£Tworzy kod LaTeX jako plik tex, który jest pobierany na komputer, dzieki czemu kod mozna przegladac i korygowac w programie LaTeX
+1837#£Zapisz
+1838#£Wokól osi x
+1839#£Wokól osi y
+1840#£Obraca wykresy zaznaczonych funkcji o 360 stopni wokól osi x lub osi y, tak ze powstaje bryla obrotowa w 3D. Kazdy wykres jest obracany od swojego Xmin do swojego Xmax.
+1841#£Równanie
+1842#£Konwertuj
+1843#£Panel boczny
+1844#£Pokazuje panel boczny z ustawieniami lub zamyka go, gdy jest otwarty.
+1845#£WordMat+ uzywa JSXGraph do wykresów i MathLive do wprowadzania równan. Oba maja licencje MIT.
+1846#£Licencje
+1847#£przedzialami
+1848#£W nawiasie: @ lub Alt+Enter tworzy nowy wiersz, & nowa kolumne.
+1849#£pierwiastek n-tego stopnia
+1850#£macierz
+1851#£calka oznaczona
+1852#£calka nieoznaczona
+1853#£W nawiasie: @ lub Alt+Enter dodaje nowa wspólrzedna.
+1854#£suma
+1855#£iloczyn
+1856#£WordMat+ umozliwia wykonywanie obliczen matematycznych w Wordzie.\nWordMat zostal stworzony przez Mikaela Samsøe Sørensena, Nyborg Gymnasium, EDUAP 2009-{1}.

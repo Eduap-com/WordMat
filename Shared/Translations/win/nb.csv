@@ -727,8 +727,8 @@
 726#£Standard programvare for graftegning
 727#£Sett inn innebygd Excel-ark
 728#£Funksjonen kunne ikke utføres fordi WordMat+ ikke er installert.
-729#£Spesifiser hvilke enheter som skal være i utdata atskilt med komma\neksempler:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nHvis ingenting er spesifisert, vil alle enheter bli returnert som grunnleggende SI-enheter eller avledede SI-enheter uten prefiks.
-730#£Eksempler på støttede enheter:\n(Se bruksanvisningen for mer)\n\nLengde: cm , AU, ly, pc\nMasse: u , G, mg\nTid: min , Timer, dager, år\nFrekvens: Hz , Bq\nEnergi: kWh , eV, aJ\nTrykk: Bar , mmHg, atm, tørr
+729#£Spesifiser hvilke enheter som skal være i utdata atskilt med komma\neksempler:\n\ncm , kJ, timer\neV , nm, mV\naJ , AU, Bq\n\nHvis ingenting er spesifisert, vil alle enheter bli returnert som grunnleggende SI-enheter eller avledede SI-enheter uten prefiks.
+730#£Eksempler på støttede enheter:\n(Se bruksanvisningen for mer)\n\nLengde: cm , AU, ly, pc\nMasse: u , G, mg\nTid: min , timer, dage, år\nFrekvens: Hz , Bq\nEnergi: kWh , eV, aJ\nTrykk: Bar , mmHg, atm, torr
 731#£Trignonometriske ligninger
 732#£Alle løsninger
 733#£Bare 1 løsning
@@ -933,3 +933,925 @@
 932#£Oppdater til siste betaversjon
 933#£Du bør være klar over at det kan være feil i betaversjonene. De er primært ment for testing. Det anbefales å bruke denne funksjonen hovedsakelig som instruert av Eduap
 934#£Viser grafen for venstre og høyre side av ligningen i samme koordinatsystem. Løsningene til ligningen er x-verdien av snittene. Husk å zoome inn og ut.
+935#£Formelsamling
+936#£Åpner formelsamlingen med formler fra matematikk, fysikk og kjemi. Klikk på en formel for å sette den inn i dokumentet.
+937#£Åpner en dialog hvor du velger hvordan det valgte uttrykket eller ligningen skal skrives om: redusere, faktorisere, utvide, kvadrere fullføring, eller desimal til brøk. Du kan også gi midlertidige definisjoner og velge utdata. Resultatet skrives på en ny linje.
+938#£Reduserer det valgte uttrykket eller begge sider av en ligning til korteste form, f.eks. (x^2-1)/(x-1) til x+1 og sin(x)^2+cos(x)^2 til 1. Resultatet skrives på en ny linje.
+939#£Faktoriserer det valgte uttrykket, f.eks. x^2-1=(x-1)(x+1). Resultatet skrives etter uttrykket akkurat som i Calculate.
+940#£Multipliser parenteser i det valgte uttrykket, f.eks. (x+1)^2=x^2+2x+1. Resultatet skrives etter uttrykket som i Calculate.
+941#£Omskriver en kvadratisk polynomaks^2+bx+c til a(x+b/(2a))^2+c-b^2/(4a), f.eks. x^2+6x+5 til (x+3)^2-4. Koeffisientene kan være bokstaver. Fungerer også på en ligning, f.eks. en sirkelligning x^2-4x+y^2+14y+53=25 til (x-2)^2+(y+7)^2=25. Resultatet skrives på en ny linje.
+942#£Sender det valgte uttrykket direkte til Maxima og setter inn resultatet som en ny ligning. Uttrykket må skrives i Maximas syntaks, f.eks. integrate(x^2,x) eller factor(x^2-1). Hvis ingenting er valgt, kan kommandoen skrives i en boks. Krever WordMats Maxima.
+943#£Testligning
+944#£Undersøker om den markerte ligningen er sann for alle verdier av variablene, f.eks. sin(x)^2+cos(x)^2=1. Først forsøkes et eksakt bevis, ellers testes ligningen numerisk. Svaret er sant, usant (med et moteksempel), sannsynligvis sant eller ukjent, og skrives på en ny linje.
+945#£Fjerning av én eller flere variabler fra et ligningssystem: velg ligningene og velg variablene som skal elimineres (færre enn antall ligninger). For eksempel, x=2t+1 og y=t^2 med t eliminert gir y=(x-1)^2/4.
+946#£Løser en eller flere sammenkoblede differensialligninger numerisk, f.eks. x'=y og y'=-x. Resultatet kan vises som en graf i GeoGebra, settes inn som en liste eller tabell, eller sendes til Excel.
+947#£Definitivt.
+948#£Setter inn 'Define:' i begynnelsen av ligningen ved markøren, eller en ny ligning med den. Definisjonene gjelder i beregningene under dem i dokumentet.
+949#£Setter inn 'Slett definisjoner:' på en ny linje. Definisjonene over brukes ikke i beregningene under.
+950#£Viser grafen for de valgte funksjonene/ligningene og punktene. Grafprogrammet velges i innstillingene, eller ved å utvide denne knappen.
+951#£Grafer
+952#£Viser grafer og punkter i GeoGebra: i WordMats GeoGebra-vindu med WordMat+, ellers i nettleseren. Ingen internett kreves.
+953#£Åpner GeoGebra 5 og overfører de valgte funksjonene og definisjonene.
+954#£Åpner (eller legger inn) WordMats Excel-ark for grafer og punkter med de valgte funksjonene og punktene i tabellen.
+955#£Viser kroppen til de valgte funksjonene i GeoGebra. Grafen til prinsippet roteres 360 grader rundt x-aksen for å lage et 3D-objekt. Et definisjonssett skrives etter et komma, f.eks. f(x)=x^2, 0<=x<=2.
+956#£Statistikktabeller
+957#£Tilpasser en funksjon du skriver selv, f.eks. f(x)=a·e^(b·x)+c, til punktene i tabellen. Parameterne er variablene utenom den uavhengige variabelen.
+958#£Excel-regresjon
+959#£Setter inn et nytt matematikkfelt. I en nummerert ligning: gjør ligningen nummerert.
+960#£Setter inn et nytt matematisk felt som automatisk nummereres. Hvis markøren er i en ligning, blir den nummerert. Posisjon og type nummer velges under Innstillinger.
+961#£Setter inn en referanse til en navngitt ligning: ligningsnummeret, som oppdateres når tallene endres.
+962#£Den nummererte ligningen som markøren befinner seg i, får et spesifikt tall. Følgende ligninger følger.
+963#£Åpner LaTeX-dialogen hvor dokumentet kan konverteres til en .tex-fil eller en pdf-fil (krever MikTex). De omsluttende tegnene for konverterte ligninger velges under Alternativer, Notasjon.
+964#£Konverter ligningen til LaTeX
+965#£Erstatter ligningen ved markøren med dens LaTeX-kode. De omsluttende tegnene for inline-ligninger og ligninger på en linje velges separat under Innstillinger, Notasjon.
+966#£Konverter LaTeX til ligninger
+967#£Konverterer LaTeX-koden i utvalget til ligningsfelt. Hvis ingenting er valgt, konverteres LaTeX-ligningen ved markøren. Koden finnes ved $...$, \(...\), $$...$$, \[...\], \begin{align}, osv., og de omsluttende tegnene under Innstillinger, Notasjon. Et utvalg uten omsluttende tegn konverteres til én ligning. Alt+T utenfor en ligning gjør det samme.
+968#£Dokument
+969#£Konverter til LaTeX pdf-fil
+970#£Konverterer hele dokumentet til LaTeX, oversetter det til en pdf-fil med MikTex pdflatex og åpner det i standard pdf-filapplikasjonen. MikTex må installeres.
+971#£Konverter til LaTeX .tex fil
+972#£Konverterer hele dokumentet til en .tex-fil og åpner det i standard .tex-filprogrammet (TexWorks, TexMaker, ...). Filen plasseres i en mappe ved siden av dokumentet.
+973#£Konverter til HTML
+974#£Konverterer utvalget av hele dokumentet til en html-side, som åpnes i nettleseren. Ligningene skrives som LaTeX og vises med MathJax (krever internett), bildene er innebygd i siden. Filen plasseres i en mappe ved siden av dokumentet, og html-koden uten <head> den kopieres til utklippstavlen, slik at den for eksempel kan limes inn i en tilpasset HTML-blokk i WordPress.
+975#£Konverter til Markdown
+976#£Konverterer markupen eller hele dokumentet til en markdown (.md)-fil: overskrifter, lister, sitater, fet skrift, kursiv, gjennomstryk, kode, lenker, tabeller og fotnoter, og ligningene som LaTeX ($...$ og $$...$$). Bildene lagres som filer i samme mappe. Mappen plasseres ved siden av dokumentet og åpnes, og teksten kopieres til utklippstavlen.
+977#£Konverter markdown til Word-formatering
+978#£Gjør markdown i utvalget eller gjennom hele dokumentet om til Word-formatering: overskrifter (#), lister (- og 1.), sitater (>), fet skrift (**), kursiv (*), strikethrough (~~), kode (' og '''), lenker, bilder, tabeller, fotnoter og horisontale linjer, og LaTeX ($...$ og $$...$$) blir ligningsfelt.
+979#£Velg hvilken kommando hver tastatursnarvei (Alt+M, Alt+B, Alt+L...) skal utføre, og se Words snarveier for mattefelt.
+980#£Om WordMat+
+981#£En indeks mangler i {1}
+982#£Funksjonen {1} mangler et argument. For eksempel, skriv {1}(x) eller {1}^(-1)(x) med Words funksjonsmal
+983#£Et punkt i listen mangler
+984#£Grunntallet for en logaritme må være positivt og forskjellig fra 1
+985#£En parentes mangler for {1}\n\nParentesen som mangler en startklammer er markert i uttrykket nedenfor med ekstra mellomrom rundt: \n\n      {2}  )  {3}
+986#£Parentesen {1} stemmer ikke med {2}\n\nParentesene er markert i uttrykket med ekstra mellomrom: \n\n      {3}  {1} {4}  )  {5}
+987#£Det mangler en siste bracket for {1}\n\nParentesen som mangler en avsluttende parentes er markert i uttrykket nedenfor med ekstra mellomrom rundt: \n\n      {2}  {1} {3}
+988#£Syntaksfeil\n{1} operator må ikke plasseres i begynnelsen av uttrykket.
+989#£Feil i invers trigonometrisk funksjon: {1}\nArgumentet må være mellom -1 og 1
+990#£Syntaksfeil\n{1} operator må ikke plasseres på slutten av uttrykket.
+991#£Tallet er for stort til å konverteres til et desimaltall
+992#£Inndeling med null
+993#£En feil oppstod. Kan ikke sette inn formel her. \nPrøv å lukke alle Word-dokumenter og starte Word på nytt. \n\nFeilbeskrivelse: \n{1}
+994#£Tabellen inneholder ingen tall. Du må lage en tabell med to kolonner: x-verdier i venstre kolonne og y-verdier i høyre kolonne.
+995#£Du må lage en tabell med to kolonner. X-verdier i venstre kolonne og Y-verdier i høyre kolonne.
+996#£Lineær regresjon utført ved bruk av WordMat. WordMat:
+997#£Eksponentiell regresjon utført ved bruk av WordMat. WordMat:
+998#£Potensregresjon utført ved bruk av WordMat:
+999#£Spesifiser rekkefølgen på polynomregresjonen (1-{1})\n\n(Maksimal rekkefølge bestemmes av antall poeng)
+1000#£Rekkefølgen må være mellom 1 og {1}
+1001#£Polynomregresjon av grad {1} utført ved hjelp av WordMat. WordMat:
+1002#£Krysstabellen må ha minst 2 rader og 2 kolonner med tall.
+1003#£{1}² - test for koherens utføres ved bruk av WordMat WordMat
+1004#£P-verdi: {1} = {2} %
+1005#£På signifikansnivået {1} % kan 0-hypotesen om at det ikke finnes noen korrelasjon avvises. Det vil si. Det finnes en korrelasjon mellom de to variablene.
+1006#£På signifikansnivået {1} % kan ikke 0-hypotesen forkastes. Derfor finnes det ingen bevis for at det er en korrelasjon mellom de to variablene.
+1007#£Det finnes forventede verdier mindre enn 5, eller totalsummen av alle cellene er mindre enn 50. {1}²-fordelingen er derfor en dårlig tilnærming i dette tilfellet og resultatet upålitelig. I noen tilfeller kan datamaterialet gjøres brukbart ved å lage en annen gruppering.
+1008#£P-verdi:
+1009#£Q-verdi:
+1010#£Kritisk Q-verdi:
+1011#£WordMats Excel-fil {1} kunne ikke finnes. Funksjonen krever at WordMat er installert.
+1012#£Legger inn nestet Excel-ark...
+1013#£En feil oppstod i forsøket på å sette inn Excel-ark.
+1014#£Feillesing av filen: {1}
+1015#£GeoGebra 5 kunne ikke åpnes: {1}
+1016#£GeoGebra 5 er ikke installert på datamaskinen din. \n\nVil du laste ned GeoGebra 5? (Nei: grafen vises i GeoGebra Calculator Suite)
+1017#£GeoGebra vil laste ned i nettleseren din. Gå til Nedlastinger og kjør installasjonsprogrammet.
+1018#£En feil oppsto da jeg prøvde å åpne: {1}
+1019#£Denne versjonen av WordMat+ sjekker ikke selv for nye versjoner. Du vil nå bli sendt til nedlastingssiden.
+1020#£WordMat+ kan ikke sjekke for en ny versjon på denne datamaskinen (WordMats MathMenu.dll mangler eller en eldre versjon). Du vil nå bli omdirigert til nedlastingssiden.
+1021#£Du har allerede den nyeste versjonen av WordMat+ v.{1}
+1022#£Det finnes en ny versjon av WordMat klar for nedlasting. \nNyheter:  \n{1}\n\nKlikk OK for å starte oppdateringen.
+1023#£Ny versjon {1}
+1024#£Det finnes en ny versjon av WordMat klar for nedlasting. \nNyheter:  \n{1}\nDu vil nå bli omdirigert til nedlastingssiden
+1025#£Det oppsto en feil i forbindelse med å sjekke etter en oppdatering. Du vil nå bli sendt til nettsiden, hvor du kan se om det er en ny oppdatering. Den nåværende versjonen er: {1}
+1026#£Oppdateringen kan ikke lastes ned automatisk på denne datamaskinen (WordMats MathMenu.dll mangler eller en eldre versjon). Du vil nå bli omdirigert til nedlastingssiden.
+1027#£Nedlasting av installasjonsfilen
+1028#£Installasjonsfilen har ikke en gyldig digital signatur fra Eduap. Den har blitt slettet igjen.
+1029#£Installasjonsfilen ble ikke lastet ned korrekt
+1030#£Installasjonsfilen er lastet ned. \nKlikk OK for å starte oppdateringen. Du vil bli bedt om å lagre og lukke Word.
+1031#£Installasjonen kunne ikke startes (feil {1}).
+1032#£En feil oppstod under oppdateringen (feil {1}).
+1033#£Denne versjonen av WordMat+ kan ikke laste ned og installere oppdateringer. Du vil nå bli tatt til nedlastingssiden.
+1034#£Oppdatering til betaversjonen krever WordMat+.
+1035#£Vil du begynne å installere betaversjonen?
+1036#£Oppdater betaen
+1037#£En feil oppsto under installasjon av betaversjonen: {1}
+1038#£Kjøpssiden kan ikke åpnes på denne datamaskinen (WordMats MathMenu.dll mangler eller en eldre versjon). Installer WordMat igjen.
+1039#£Kommandoen er ikke tilgjengelig i WordMat+ ennå. Under Snarveier, velg en annen kommando for nøkkelen.
+1040#£Tidligere resultat
+1041#£WordMat+: det finnes ikke noe resultat før ligningen.
+1042#£WordMat+: det finnes ikke flere resultater. Trykk igjen for det siste.
+1043#£En feil oppsto: {1}
+1044#£Resultatet ble ikke gjennomført.
+1045#£Installasjonsfilen er lastet ned. \nKlikk OK for å starte oppdateringen
+1046#£Eduaps server returnerte en feilmelding. \nForhåpentligvis er dette et midlertidig problem. Hvis problemet vedvarer og du har en gyldig WordMat+-lisens, vennligst kontakt eduap@eduap.com\n\nFeil: wordmatlicense feilet
+1047#£Ingen internett
+1048#£WordMat+ kan ikke sjekke lisensen fordi WordMats MathMenu.dll ikke kan brukes på denne datamaskinen. \n\nFilen mangler, er en eldre versjon, eller den er blokkert av sikkerhetsinnstillinger (antivirus, endepunktbeskyttelse). \n\nInstaller WordMat igjen eller kontakt IT-avdelingen din. Inntil da vil WordMat+ fungere som uten lisens.
+1049#£Klikk på Tillat to ganger etter at du har lukket dette vinduet\nDu trenger bare å gjøre dette én gang.
+1050#£Tillatelser for WordMat
+1051#£GeoGebra matematikkapper ikke funnet
+1052#£Programfiler ikke funnet
+1053#£Sinusregresjon krever en aktiv WordMat+-lisens.
+1054#£Sinusregresjon utført med WordMat (i {1}): WordMat (i ):
+1055#£Excel-regresjon...
+1056#£WordMats Excel-fil Graphs.xltm kunne ikke finnes. Excel-regresjon krever at WordMat installeres.
+1057#£Det oppsto en feil i forsøket på å sette inn Excel-ark. Dette kan skyldes at Excel krasjet tidligere. Lukk åpne Excel-ark og åpne Excel før du prøver via WordMat igjen.
+1058#£{1} har flere udefinerte variabler. Den uavhengige variabelen kan ikke identifiseres. Bruk x eller t som den uavhengige variabelen.
+1059#£Det må være minst 3 datapunkter.
+1060#£Sinusregresjon
+1061#£Kunne ikke estimere frekvensen via FFT.
+1062#£fremført med WordMat{1}:
+1063#£Modellen inkluderer ikke den uavhengige variabelen {1}
+1064#£Modellen har ingen parametere (variabler annet enn {1})
+1065#£Det må være minst like mange punkter som parametere ({1})
+1066#£Tilpasset regresjon krever Maxima når det ikke finnes noen aktiv WordMat+-lisens.
+1067#£Regresjonen klarte ikke å finne parametrene. Prøv med andre startgjetninger
+1068#£{1}²-fordeling
+1069#£Gratulerer! \nSkolen din har inngått et partnerskap, og WordMat+ er nå aktivert.
+1070#£Suksess
+1071#£Dessverre\nSkolen din har ennå ikke inngått partnerskap.
+1072#£Ingen partnerskap
+1073#£xmin må være >0 for å bruke logaritmisk x-akse.
+1074#£YMIN må være >0 for å bruke logaritmisk y-akse.
+1075#£Grafen kunne ikke settes inn: {1}
+1076#£WordMat+ aktivert for {1}
+1077#£Versjon: {1}
+1078#£WordMat+ gjør det mulig å gjøre matematiske beregninger i Word. Beregningene gjøres av en CAS som er en del av WordMat+, så ingen andre programmer trenger å installeres. \nWordMat lages av Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1079#£Suksess!
+1080#£Data mangler
+1081#£Startverdien til {1} er ikke et tall
+1082#£Start-, slutt- og skrittlengde bør være tall
+1083#£Differensialligningene kunne ikke løses: {1}
+1084#£Velg minst én variabel som skal vises
+1085#£For mange poeng til GeoGebra. Velg en lengre steglengde.
+1086#£Excel kunne ikke åpnes: {1}
+1087#£Start er ikke et tall
+1088#£Slutten er ikke et tall
+1089#£Steglengden er ikke et tall
+1090#£Det finnes {1} trinn. Det fungerer sannsynligvis ikke i GeoGebra med så mange trinn.
+1091#£Du kan ikke både løse ligningen for {1} og samtidig definere den.
+1092#£Differensialligning:
+1093#£Startbetingelse:
+1094#£Navngitte ligninger
+1095#£Velg ligningen som skal refereres til og klikk OK (eller dobbeltklikk). Referansen blir ligningsnummeret og oppdateres når tallene endres.
+1096#£For å sette inn en referanse til ligningen senere, velg 'Sett inn referanse til ligningen' under 'Ny ligning'.
+1097#£Start Maxima på nytt
+1098#£Bruk Word som en LaTeX-editor. \n\nDu kan skrive LaTeX-kommandoer direkte inn i dokumentet for full kontroll, eller bruke Words funksjoner og la WordMat+ konvertere til LaTeX. \n\nMikTex må installeres for å lage en pdf-fil. Du vil bli sendt til installasjonen hvis den mangler. \n\nEn mappe ('dokumentnavn-Latex') opprettes ved siden av dokumentet med tex-filen og bildene.
+1099#£Støttet formatering: \n- Overskrifter (stiler) blir seksjoner og underseksjoner: \n   Tittel = kapittel (dokumentklasse, bok eller rapport; artikkel: tittel på dokumentet)\n   Overskrift 1 = seksjon, Overskrift 2 = underavsnitt, Overskrift 3 = underunderseksjon\n- Fet skrift, kursiv og understreket skrift\n- Sidetall på/av som i dokumentet\n- Ligninger: inline, nummerert og uten nummer (inkluderer tegn under Innstillinger, Notasjon)\n- Punktlister (punktlister og tall)\n- Tabeller\n- Bilder, former og diagrammer\n- Bibliografi
+1100#£LaTeX-innstillinger
+1101#£Dokumentklasse:
+1102#£Skriftstørrelse:
+1103#£Bruk Words marger
+1104#£Bruk dokumentmarger i stedet for LaTeX sine standardmarger (pakkegeometri)
+1105#£Tittelside
+1106#£En egen tittelside med tittelen på dokumentets navn og forfatteren av dokumentet
+1107#£Innholdsfortegnelse
+1108#£En egen innholdsfortegnelse etter tittelsiden
+1109#£Nummererte seksjoner
+1110#£Overskriftene er nummerert
+1111#£Skriftstørrelsen for ren tekst. Words skriftstørrelse brukes ikke
+1112#£LaTeX-preambel
+1113#£Automatisk generert:
+1114#£Egne:
+1115#£Sletter din egen innledning
+1116#£Lager LaTeX-koden som en texfil og åpner den i standardprogrammet for texfiler (TexWorks, TexMaker...) slik at koden kan gjennomgås og justeres
+1117#£Oppretter et LaTeX-dokument som en pdf-fil ved bruk av MikTex. MikTex, som må installeres. Bør kun brukes for enkle dokumenter
+1118#£Vent...
+1119#£{1}... (din egen innledning) ... \n\n{2}
+1120#£Velg hvordan du omformulerer frasen.
+1121#£Utgangsenheter:
+1122#£Reduser
+1123#£Faktor
+1124#£Setter inn utenfor parentes, f.eks. x^2-1 til (x-1)(x+1).
+1125#£Multipliser parentesene, f.eks. (x+1)^2 med x^2+2x+1.
+1126#£F.eks. x^2+6x+5 til (x+3)^2-4, også ligningen for en sirkel.
+1127#£Alle desimaltall konverteres til brøker, og resultatet er eksakt.
+1128#£Lim på samme linje
+1129#£Resultatet skrives etter uttrykket med likhetstegn (ikke ved en ligning)
+1130#£Logaritmeutgang
+1131#£Auto
+1132#£Velg variablene som skal elimineres.
+1133#£Høyst kan {1} variabler elimineres fra {2} ligninger.
+1134#£Velg maksimalt {1} variabler, da det finnes {1} ligninger.
+1135#£Eliminer maksimalt {1} variabler
+1136#£Eller skriv dem selv, adskilt med kommaer
+1137#£Velg opptil {1} variabler
+1138#£Eller skriv dem adskilt med kommaer (resten velges automatisk)
+1139#£Eliminer variabler
+1140#£Løs ligningen
+1141#£Ligninger kan i bunn og grunn løses på to forskjellige måter. Hvis du opplever problemer med en ligning, kan det være lurt å prøve en annen metode.
+1142#£Løsningene finnes ved å 'gjette' mange forskjellige løsninger. Metoden fungerer på praktisk talt alle ligninger, men løsninger kan overses og falske løsninger kan finnes.
+1143#£Advarsel: Enhetene er slått på. \nVær oppmerksom på variabler som er enheter, f.eks. A, C, F, H, J, K, L, N, S, T, V, W, m, g, u, s
+1144#£Tidsbegrensningen, antall sifre og n for vitenskapelig notasjon må være tall.
+1145#£Tidsbegrensningen må være minst 0, antall sifre minst 20 og n for vitenskapelig notasjon et helt tall fra 0 til 100.
+1146#£Velg minst én CAS-applikasjon.
+1147#£Backup-mappen er: {1}
+1148#£WordMat+ er aktivert.
+1149#£Dette krever WordMat+.
+1150#£Innstillingene er tilbakestilt.
+1151#£Desimaler
+1152#£Dokument {1} Markdown
+1153#£Markdown {1} Word
+1154#£WordMats trekantløser brukes med inngang:
+1155#£Siden cosinus-relasjonen løste vi ovenfor for
+1156#£Kvadratfullføring krever et kvadratisk polynom
+1157#£{1} må ha to tall, f.eks. binomial(7; 2)
+1158#£Det må være minst to ligninger å eliminere fra, f.eks. eliminate([x=2t+1; y=t^2]; t)
+1159#£eliminate krever at ligningene og variablene elimineres, f.eks. eliminate([x=2t+1; y=t^2]; t)
+1160#£TestTF krever en ligning
+1161#£Uttrykket blir for stort til å kunne multipliseres
+1162#£binomial (n; r) krever n{1}0
+1163#£En antakelse må være en ulikhet, f.eks. x>0: {1}
+1164#£En antakelse må være en ulikhet mellom en variabel og et tall, f.eks. x>0
+1165#£Verdien i antakelsen kan ikke beregnes: {1}
+1166#£En rett rot av et negativt tall er ikke definert
+1167#£Potensen til et negativt tall er ikke definert for denne eksponenten
+1168#£Tallet er for stort
+1169#£Ln og log er kun definert for positive tall
+1170#£diff bør ha 1 til 3 argumenter: diff(uttrykk; x; n)
+1171#£Den andre parameteren i diff må være variabelen, f.eks. diff(x^2; x)
+1172#£Den tredje parameteren i differensialet må være et heltall
+1173#£Den tredje parameteren i differensialet bør være et tall fra 0 til 100
+1174#£Spesifiser hvilken variabel som skal deriveres med, f.eks. diff(uttrykk; x)
+1175#£{1} kan ikke skilles (ennå)
+1176#£Skriv grenseverdien som lim med x{1}a nedenfor
+1177#£Et utseende mangler etter lim
+1178#£En stykkevis funksjon må ha et uttrykk og en betingelse i hver rad
+1179#£Stykkevis funksjonen er ikke definert her (ingen av betingelsene er oppfylt)
+1180#£Polarnotasjon r{1}v krever at komplekse tall slås på
+1181#£Skriv et komplekst tall i polarform som r{1}v
+1182#£{1} må ha ett argument, f.eks. {1}(3+2i)
+1183#£Argumentet til 0 er ikke definert
+1184#£Ligningen kan ikke deles inn i en reell og en imaginær del
+1185#£Alle komplekse tall er løsninger
+1186#£Ligningen har et uendelig antall løsninger ({1} ligger på en kurve)
+1187#£Kvadratroten av {1} kan ikke finnes
+1188#£Tegnet på {1} er ikke kjent
+1189#£Definisjonssettet for {1} kan kun inneholde {2}: {3}
+1190#£Definisjonssettet for {1} må inneholde {2}: {3}
+1191#£Definisjonen mangler et likhetstegn: {1}
+1192#£Det er ikke en definisjon: {1}
+1193#£Definisjonen er ikke fullstendig: {1}
+1194#£{1} er en kommando og kan ikke defineres
+1195#£Parameterne i en funksjonsdefinisjon må være variable, f.eks. f(x)=2x+1: {1}
+1196#£En innebygd funksjon kan ikke defineres: {1}
+1197#£{1} er en konstant og kan ikke defineres
+1198#£Venstre side av en definisjon må være et navn eller en funksjon, f.eks. a=5 eller f(x)=2x+1: {1}
+1199#£Indeksen {1} ligger utenfor matrisen {2} ({3} rader)
+1200#£Indeksen {1} ligger utenfor matrisen {2} ({3} streker)
+1201#£Indeksen {1} er utenfor {2} ({3} elementer)
+1202#£En definisjon bruker seg selv (rekursiv definisjon)
+1203#£Funksjonen {1} må ha {2} argument(er)
+1204#£Kun en funksjon av én variabel kan differensieres ved etikett: {1}
+1205#£{1} er ikke definert for {2} (definisjonssettet er {3})
+1206#£{1} kan ikke brukes som en teller fordi {1} er definert. Slett definisjonen eller bruk et annet navn.
+1207#£En terskel kan ikke finnes for {1} fordi {1} er definert. Slett definisjonen eller bruk et annet navn.
+1208#£Embedding etter {1} kan ikke gjøres fordi {1} er definert. Slett definisjonen eller bruk et annet navn.
+1209#£Differensiering ved {1} kan ikke differensieres fordi {1} er definert. Slett definisjonen eller bruk et annet navn.
+1210#£For {1} kan ikke løses fordi {1} er definert. Slett definisjonen eller bruk et annet navn.
+1211#£Uttrykket kan ikke vises i GeoGebra: {1}
+1212#£GeoGebra kan ikke brukes for uttrykket i WordMat+
+1213#£GeoGebra kan ikke startes (WordMats MiniBrowser)
+1214#£GeoGebra kan ikke startes (WordMats AppleScript)
+1215#£GeoGebra ble stoppet fordi beregningen tok mer enn {1} sekunder
+1216#£GeoGebra er ikke installert (WordMats geogebra-math-apper)
+1217#£GeoGebra kan ikke startes (WordMats WebViewWrap mangler)
+1218#£GeoGebra kan ikke startes
+1219#£GeoGebra kan ikke stole på enheter
+1220#£GeoGebra kan ikke beregne det: {1}
+1221#£GeoGebra kan ikke brukes til {1} her
+1222#£Testligningen krever en ligning
+1223#£GeoGebra kan ikke brukes for denne differensialligningen
+1224#£GeoGebra kan ikke bruke betingelsen
+1225#£GeoGebra kan ikke bruke begrepene
+1226#£GeoGebra kan ikke løse differensialligningen
+1227#£GeoGebra kan ikke eliminere variablene
+1228#£GeoGebra kan ikke løse ligningen
+1229#£GeoGebra fant kun komplekse løsninger
+1230#£GeoGebra kan ikke beregne det
+1231#£GeoGebra fant bare ett komplekst resultat
+1232#£Grafen kunne ikke vises: {1}
+1233#£Pivotkroppen kunne ikke vises: {1}
+1234#£Velg én eller flere funksjoner, f.eks. f(x)=x^2 eller y={1}x. Et definisjonssett skrives etter et komma, f.eks. f(x)=x^2, 0{2}x{2}2.
+1235#£{1} er ikke en funksjon av x og kan ikke vises som et dreiemoment.
+1236#£Graph er ikke tilgjengelig for Mac.
+1237#£Grafen kunne ikke vises i Graf: {1}
+1238#£Grafen støtter ikke funksjoner av flere variabler: {1}
+1239#£Grafen kan ikke vise vektorer og kurver: {1}
+1240#£Grafen kan ikke vise vektorer og punkter i 3D:{1}
+1241#£Skriv inn verdi for {1}\n\nDen kan justeres etterpå under egendefinerte funksjoner i Graph. Du kan til og med lage en animasjon der verdien endres kontinuerlig, under Calculate/Animate.
+1242#£Retningslinjen kunne ikke vises: {1}
+1243#£Vis graf
+1244#£Den løser for {1} som også er en enhet. Derfor er {1} ikke en enhet i denne ligningen. Vurder å bruke et annet variabelnavn eller slå av enheter.
+1245#£Marker ligningen som skal løses
+1246#£Velg differensialligningen som skal løses
+1247#£Sett funksjonen for startbetingelsene
+1248#£kunne ikke løses
+1249#£Differensialligningen løses ved hjelp av. WordMat ({1})
+1250#£med startbetingelsen {1}
+1251#£med startbetingelsene {1}
+1252#£med randbetingelsene {1}
+1253#£Ligningen {1} å bruke WordMat.
+1254#£Uttrykket {1} bruk av WordMat.
+1255#£Redusert
+1256#£Faktorisert
+1257#£multiplisert
+1258#£Omskrevet med kvadratisk fullføring
+1259#£Omskrevet til brøker
+1260#£Parafrasert
+1261#£Variablene {1} elimineres ved hjelp av WordMat.
+1262#£Variabelen {1} elimineres ved hjelp av WordMat.
+1263#£Velg ligningen som skal testes
+1264#£Ligningen stemmer.
+1265#£Ligningen gjelder for alle verdier av {1}.
+1266#£Ligningen er feil.
+1267#£Ligningen er falsk siden venstre side ikke er definert.
+1268#£Ligningen er falsk siden høyre side ikke er definert.
+1269#£Ligningen er falsk for alle verdier av {1}.
+1270#£Ligningen gjelder ikke for alle verdier av {1}. For eksempel er den falsk for {2}
+1271#£, hvor venstre side ikke er definert.
+1272#£hvor høyre side ikke er definert.
+1273#£Ligningen er sannsynligvis sann. Det kunne ikke bevises nøyaktig, men de to sidene har samme numeriske verdi.
+1274#£Ligningen er sannsynligvis sann for alle verdier av {1}. Den kunne ikke bevises nøyaktig, men den er sann i alle de {2} punktene hvor den er testet numerisk.
+1275#£Ligningen gjelder ikke for alle verdier av {1}.
+1276#£Det kunne ikke avgjøres om ligningen er sann.
+1277#£Ligningen testes ved hjelp av WordMat.
+1278#£Feil i definisjonen {1}: {2}
+1279#£Skattesystemet løses numerisk for {1} ved hjelp av WordMat.
+1280#£Skattesystemet løses for {1} ved bruk av WordMat.
+1281#£Ulikheten løses numerisk for {1} ved bruk av WordMat.
+1282#£Ulikheten løses for {1} ved hjelp av WordMat.
+1283#£Ligningen løses numerisk for {1} i intervallet {2} ved bruk av WordMat.
+1284#£Ligningen løses numerisk for {1} ved hjelp av WordMat.
+1285#£Ligningen løses for {1} ved hjelp av WordMat.
+1286#£Beregningen ble stoppet før hele intervallet ble søkt. Det kan finnes flere løsninger.
+1287#£Beregningen ble stoppet før alle løsningene var funnet. Det kan finnes flere løsninger.
+1288#£Ligningssystemet hadde ingen løsninger innenfor {2} for variablene {1}
+1289#£Ulikhet hadde ingen løsninger i definisjonsmengden {1}
+1290#£Ulikhet hadde ingen løsninger i {2} for variabel {1}
+1291#£Ingen løsninger funnet
+1292#£Ligningen hadde ingen løsninger i definisjonsmengden {1}
+1293#£Ligningen hadde ingen løsninger i {2} for variabel {1}
+1294#£Skriv {1}x etter uttrykket i integralet (f.eks. {2}x^2 {1}x)
+1295#£Ligningen inneholder en struktur som VBACAS ennå ikke kan beregne: \n\n      {1}
+1296#£Skriv summen med k=a under og b over tegnet (f.eks. k=1 og n)
+1297#£Ligningen inneholder en aksent som VBACAS ennå ikke kan beregne: \n\n      {1}
+1298#£Ligningen inneholder en struktur som VBACAS ennå ikke kan beregne (et flerraders ligningsarray): \n\n      {1}
+1299#£Ligningen inneholder en struktur som VBACAS ennå ikke kan beregne (f.eks. sum, integral, grense, matrise eller aksent): \n\n      {1}
+1300#£Skriv {1}x {1}y etter uttrykket i dobbeltintegralet (f.eks. {2}x·y {1}x {1}y)
+1301#£Integralet må ha {1} differensialer (f.eks. {2}x {2}y)
+1302#£Ligningen ser ut til å inkludere:
+1303#£men Word har lagret den slik at funksjonens argument fortsetter etter parentesen:
+1304#£Den kan ikke sees i ligningen, men gir et annet resultat.
+1305#£Bør ligningen korrigeres slik at den beregnes slik den er? \n(Nei: regn ut siden Word har reddet det)
+1306#£Du må velge en tabell
+1307#£Det finnes ingen gyldige tallpar i tabellen
+1308#£integrate må ha 1, 2 eller 4 argumenter: integrate(uttrykk; x) eller integrate(uttrykk; x; a; b)
+1309#£Den andre parameteren i integrate må være variabelen, f.eks. integrate(x^2; x)
+1310#£Spesifiser hvilken variabel som skal integreres etter, f.eks. integrate(uttrykk; x)
+1311#£Integralet kan ikke beregnes: integranden er ikke definert i hele intervallet
+1312#£Integralet kunne ikke beregnes numerisk nøyaktig nok (integranden svinger for mye)
+1313#£Å finne ligningen
+1314#£Lesing av ligningen
+1315#£Erstatning av ligningen
+1316#£Ligningen kunne ikke konverteres til LaTeX ({1}): {2}
+1317#£LaTeX-{1}ligningen
+1318#£{1} {2} kunne ikke omsettes til ligninger og har ikke blitt endret: {3}
+1319#£LaTeX-koden kunne ikke konverteres til en ligning: {1}
+1320#£Koden er tom.
+1321#£Denne funksjonen støttes ikke på Mac.
+1322#£Denne versjonen av WordMat+ kan ikke lage pdf-filer med MikTex. Lag heller en texfil.
+1323#£MikTex er ikke installert. Du vil nå bli sendt til miktex.org hvor det kan lastes ned. Første gang konverteren kjøres, vil du også bli bedt om å laste ned noen pakker. Bare klikk OK.
+1324#£Lagre dokumentet før du konverterer det til LaTeX. LaTeX-filene plasseres i en mappe ved siden av dokumentet.
+1325#£Dokumentet er ikke på datamaskinen din (OneDrive). Lagre det i en mappe på datamaskinen før du konverterer det.
+1326#£Konverteringsligninger
+1327#£Konvertering av formatering
+1328#£Konvertering av bilder
+1329#£Konverteringstabeller
+1330#£Konvertering av avsnitt
+1331#£Å skrive filen
+1332#£{1} {2} kunne ikke lagres som en fil og er erstattet av en ramme med teksten «Image n missing».
+1333#£Dokumentet kunne ikke konverteres til LaTeX: {1}
+1334#£WordMat+ fant ingen mappe som det er tillatt å skrive i på denne Mac-en.
+1335#£MikTex (pdflatex.exe) ble ikke funnet.
+1336#£pdflatex kjører {1}. tid
+1337#£En feil oppsto da pdflatex.exe ble kjørt.
+1338#£LaTeX-dokumentet kunne ikke oversettes. pdflatex ga feilen: \n\n{1}\n\nKlikk OK for å åpne tex-filen.
+1339#£PDF-filen er laget, men disse tegnene kan pdflatex ikke skrive. De er erstattet med en fet ? I PDF-filen: \n\n{1}
+1340#£PDF-filen kunne ikke finnes. Klikk OK for å åpne tex-filen slik at feilen kan finnes.
+1341#£mappen for bildene
+1342#£Dokumentets mappe
+1343#£Konverteringslenker og fotnoter
+1344#£Kopiering til utklippstavle
+1345#£HTML-siden lagres som\n{1}
+1346#£HTML-koden kunne ikke kopieres til utklippstavlen.
+1347#£{1} {2} kunne ikke leses og er skrevet som tekst.
+1348#£{1} {2} kunne ikke lagres og har blitt erstattet med teksten "Bilde n mangler".
+1349#£Dokumentet kunne ikke konverteres til html ({1}): {2}
+1350#£(not used)
+1351#£Markdown-filen lagres som\n{1}
+1352#£Markdown-teksten kopieres til utklippstavlen.
+1353#£Markdown-teksten kunne ikke kopieres til utklippstavlen.
+1354#£Bildene lagres som filer i samme mappe.
+1355#£{1} {2} kunne ikke reddes.
+1356#£Dokumentet kunne ikke konverteres til markdown ({1}): {2}
+1357#£*Bilde {1} mangler*
+1358#£Markdown kunne ikke konverteres: {1}
+1359#£{1} {2} ble ikke funnet på datamaskinen og er ikke satt inn.
+1360#£{1} {2} kunne ikke omgjøres til ligningsfelt.
+1361#£LaTeX-malen (LatexWordTemplate.dotx) ble ikke funnet. Den installeres sammen med WordMat.
+1362#£limit bør ha 3 eller 4 argumenter: limit(uttrykk; x; a) eller limit(uttrykk; x; a; pluss)
+1363#£Den fjerde parameteren i grensen må være pluss eller minus
+1364#£Grensen eksisterer ikke
+1365#£{1} må ha 4 argumenter: {1}(uttrykk; k; a; b)
+1366#£Den andre parameteren i {1} må være variabelen, f.eks. {1}(k^2; k; 1; n)
+1367#£Den nedre grensen kan ikke være uendelig
+1368#£For mange ledd (maks {1})
+1369#£Leddet for {1}={2} har ingen verdi
+1370#£Serien er divergent (summen eksisterer ikke)
+1371#£Potenssummen kan ikke beregnes
+1372#£Nullmatrisen bør være størrelse 1 til 100
+1373#£Enhetsmatrisen må være størrelse 1 til 100
+1374#£Matriseproduktet krever at den første har like mange kolonner som den andre har rader ({1} og {2})
+1375#£Et array kan bare heves til et helt tall (eller T for det transponerte)
+1376#£En matrise kan bare heves til et helt tall
+1377#£Kun kvadratiske matriser kan heves til en potens (matrisen er {1})
+1378#£Eksponenten er for stor
+1379#£Determinanten eksisterer kun for kvadratiske matriser (matrisen er {1})
+1380#£Determinanten til et array av parametere kan beregnes for {1}×{1} høyst
+1381#£Kun kvadratiske matriser har en invers (matrisen er {1})
+1382#£Matrisen har ingen invers (determinanten er 0)
+1383#£Inversen av et array av parametere kan beregnes for {1}×{1} høyst
+1384#£Maxima er ikke installert (WordMat)
+1385#£Maxima kan ikke startes (WordMats MathMenu.dll mangler)
+1386#£Maxima kan ikke startes
+1387#£Maxima kan ikke startes (WordMats AppleScript)
+1388#£Maxima stilte et spørsmål som WordMat+ ikke kan svare på
+1389#£Maxima ble stoppet fordi beregningen tok mer enn {1} sekunder
+1390#£Forbindelsen til Maxima via WSH krever partnerskap
+1391#£Maxima kunne ikke startes via WSH: feil {1} {2}
+1392#£Feil i Maxima-koden (kodefelt eller kodefil): {1}
+1393#£Maxima kan ikke beregne {1}
+1394#£Maxima kan ikke brukes til {1} i WordMat+
+1395#£Startbetingelser i to forskjellige punkter
+1396#£Disse forholdene
+1397#£Maksima kan ikke løse differensialligningen
+1398#£Maxima kan ikke regne det ut
+1399#£Maxima fant bare ett komplekst resultat
+1400#£Maxima kan ikke eliminere variablene
+1401#£Maksima kan ikke løse ulikhet
+1402#£Maxima klarer ikke å løse ligningen
+1403#£Maxima fant bare komplekse løsninger
+1404#£Gnuplot er ikke tilgjengelig for Mac. Bruk GeoGebra.
+1405#£Grafen kunne ikke vises med Gnuplot: {1}
+1406#£Feil i Maxima-koden
+1407#£Kodefeltene eller kodefilen har en feil: {1}
+1408#£Skriv en Maxima-kommando
+1409#£Feil i Maxima-koden (kodefelt): {1}
+1410#£Det er for mange kolonner
+1411#£Beregningen ble stoppet
+1412#£Fristen for deler av beregningen er overskredet
+1413#£Beregningen ble stoppet fordi den tok mer enn {1} sekunder
+1414#£Fakultet er definert kun for heltall
+1415#£Fakultet defineres kun for tall >= 0
+1416#£Antallet er for stort for fakultetet
+1417#£Tallet er for stort - VBACAS kan ikke beregne fakultetet for tall over 170 som desimaltall
+1418#£desolve må ha en differensialligning, f.eks. desolve(y'=2y)
+1419#£Differensialligningen må være en ligning, f.eks. y'=2y
+1420#£Argumentet {1} i oppløsning er ikke forstått
+1421#£Ligningen inneholder ingen avledet funksjon (f.eks. y')
+1422#£Ligningen inneholder ingen derivert av {1}
+1423#£Det finnes ikke noe fritt navn for konstanten
+1424#£Ordenen til den deriverte må være et tall
+1425#£Skriv betingelser som {1}(0)=2 etter ligningen: desolve(ligning; {1} (0)=2)
+1426#£Differensialligninger av høyere orden enn 2 kan ikke løses
+1427#£Differensialligningen kunne ikke løses ({1}{2} kan ikke isoleres)
+1428#£Differensialligningen kunne ikke løses (den er verken lineær eller separabel)
+1429#£Differensialligningen kunne ikke løses ({1}{2}{2} kan ikke isoleres)
+1430#£Differensialligningen kunne ikke løses (andreordens kan løses når den er lineær med konstante koeffisienter, eller {1}{3}{3}=f({2}))
+1431#£Differensialligningen kunne ikke løses (en partikkelløsning for {1} kan ikke finnes)
+1432#£En differensialligning av andre orden kan ha maksimalt to betingelser
+1433#£Betingelsene må være ligninger, f.eks. {1}(0)=1 og {1}{2}(0)=2
+1434#£Betingelsene skal skrives som {1}(0)=1 og {1}{2}(0)=2
+1435#£Ingen løsning oppfyller betingelsene
+1436#£En differensialligning av første orden må ha én betingelse, f.eks. {1}(0)=2
+1437#£Betingelsen må være en ligning, f.eks. {1}(0)=2
+1438#£Betingelsen skal skrives som {1}(0)=2
+1439#£Ingen løsning oppfyller betingelsen {1}
+1440#£Differensialligningen kunne ikke løses (stammefunksjonen til {1} kan ikke finnes)
+1441#£Steglengden må være positiv
+1442#£Sluttverdien må være større enn startverdien
+1443#£For mange skritt ({1}). Velg en lengre skrittlengde
+1444#£Skriv kun høyre side av differensialligningen for {1}: {2}
+1445#£Definer {1} under Definisjoner
+1446#£Differensialligningen for {1} kan ikke beregnes ved {2}={3}
+1447#£Plasser markøren i uttrykket som skal omskrives.
+1448#£Maxima-kommandoen krever WordMats Maxima, som ikke er installert.
+1449#£Skriv inn en Maxima-kommando, f.eks. integrate(x^2,x) eller factor(x^2-1). Resultatet skrives som en ny ligning.
+1450#£Maxima-kommando
+1451#£Maxima-kommandoen er ikke til stede i denne versjonen av WordMat+.
+1452#£Plasser markøren i et mattefelt.
+1453#£Plasser markøren i ligningen som skal løses.
+1454#£Velg ligningene for å eliminere variablene fra.
+1455#£Velg minst to ligninger for å eliminere variabler (f.eks. x=2t+1 og y=t^2).
+1456#£Plasser markøren i differensialligningen som skal løses.
+1457#£Det finnes ingen aktiv WordMat+-lisens. \n\nWordMat+ kan fortsatt brukes, men disse funksjonene er ikke aktive: {1}WordMat+s egen CAS (VBACAS). Maxima- eller GeoGe{1}bra-grafer telles i WordMats GeoGebra-vindu. De vises i nettleseren{1}Setter inn formler fra formelsamlingen{1}Sinusregresjon{1}Tilpass-menyen\n\nKlikk OK for å gå til www.wordmat.dk
+1458#£Det finnes ingen aktiv WordMat+-lisens, så WordMat+s egen CAS (VBACAS) kan ikke brukes, og verken Maxima eller GeoGebra kan brukes på denne datamaskinen. Velg en av dem under Innstillinger, installer WordMat med Maxima, eller fornye lisensen på www.wordmat.dk.
+1459#£Maxima er ikke en del av denne versjonen av WordMat+
+1460#£Ligningen er allerede nummerert.
+1461#£En nummerert ligning kan ikke settes inn i en tabell.
+1462#£Nummerert ligning
+1463#£Skriv inn et navn for ligningen.
+1464#£Navnet må ha maksimalt 40 tegn.
+1465#£Navnet bør begynne med en bokstav.
+1466#£Navnet kan bare inneholde bokstaver, tall og _ (ikke mellomrom).
+1467#£Navnet eksisterer allerede.
+1468#£Det finnes ingen navngitte ligninger i dokumentet. Bruk 'Sett inn nummerert ligning som referanse' under Ny ligning.
+1469#£Ligningsreferanse
+1470#£Sett markøren i en nummerert ligning.
+1471#£Hvilket tall bør denne ligningen settes til? \nDe påfølgende ligningene får tallene sine oppdatert for å passe.
+1472#£Skriv et heltall, eller section.number (2.3) for tall med section.
+1473#£Et seksjonsnummer for ligningen vil bli satt inn. Vanligvis settes det inn som et kapittel- eller seksjonsnummer. i en overskrift. Men nummeret kan også settes inn skjult. Bør nummeret vises? (Svar nei for å skjule det)
+1474#£Sett inn ligningsseksjon nr.
+1475#£Ligningsseksjon
+1476#£Delete-definisjoner kan ikke settes inn i en tabell.
+1477#£Spesifiser hvilke enheter som skal være i utgangen, adskilt med kommaer\nEksempler: \n\ncm, kJ, åpningstider\neV, nm, mV\naJ, AU, Bq\n\nHvis ingenting er spesifisert, vil alle enheter bli returnert som base SI-enheter eller avledede SI-enheter uten prefiks.
+1478#£Den andre parameteren i solve må være variabelen, f.eks. solve(x^2=4; x)
+1479#£Ulikheter kan ikke løses når komplekse tall slås på
+1480#£Ligningen kan ikke løses analytisk. Prøv å løse den numerisk.
+1481#£Ligningen kan ikke løses (ennå): {1}=0
+1482#£Spesifiser hvilken variabel som skal løses, f.eks. solve(ligning; x)
+1483#£Ligningen kan ikke løses nøyaktig (graden er for høy)
+1484#£For mange løsninger i intervallet
+1485#£For mange løsninger
+1486#£Perioden kan ikke beregnes
+1487#£Løsningene i intervallet kan ikke beregnes
+1488#£Ligningen kan ikke løses nøyaktig (ennå): {1}=0
+1489#£Ligningen kan ikke løses nøyaktig (ennå)
+1490#£Vinkelen kan ikke beregnes
+1491#£Ligningen kan ikke løses nøyaktig (ennå): {1}={2}
+1492#£Ulikhet kan ikke løses (ennå): {1}
+1493#£Ulikheten kan ikke løses (ennå): {1}{2}0
+1494#£Ulikhet har et uendelig antall løsningsintervaller. Spesifiser et intervall for {1}, f.eks. 0{2}{1}{2}{3}
+1495#£Ulikhet kan ikke løses (ennå)
+1496#£{1} må ha {2}{3}
+1497#£{1} (x) er ikke definert for x=0, -1, -2, ...
+1498#£W_0(x) er kun definert for x{1}-1/e
+1499#£acosh (x) er kun definert for x{1}1
+1500#£{1} (x) er for stor til å beregnes;
+1501#£{1} har ingen verdi her
+1502#£{1} kan ikke skilles ut fra {2} ({2} i det første argumentet)
+1503#£De ukjente må være variable, f.eks. solve([x+y=5; x-y=1]; [x;y])
+1504#£Systemer med ulikheter kan ikke løses (ennå)
+1505#£Det finnes ingen ligninger å løse
+1506#£Ligningssystemet har ingen variabler å løse for
+1507#£Ligningssystemet er overbestemt: det finnes flere ligninger ({1}) enn ukjente ({2}).
+1508#£Skattesystemet kan ikke løses nøyaktig (ennå)
+1509#£Skattesystemet kan ikke løses (ennå)
+1510#£Spesifiser variablene som skal elimineres, f.eks. eliminate([x+y=a; x-y=b]; x)
+1511#£Variablene som skal elimineres må være variabler, f.eks. eliminate([x+y=a; x-y=b; x*y=c]; [x;y])
+1512#£Variabler kan ikke elimineres fra ulikheter
+1513#£Høyst kan {1} variabler elimineres fra {2} ligningene
+1514#£Når {1} elimineres, er det ingen ligninger igjen (de er alltid oppfylt)
+1515#£{1} kan ikke elimineres (ennå)
+1516#£{1} kan ikke elimineres (gradene er for høye)
+1517#£Enhetene matcher ikke: {1}
+1518#£Ukjent enhet: {1}
+1519#£En liste
+1520#£en vektor
+1521#£En matrise
+1522#£et tall
+1523#£{1} må ha minst ett element
+1524#£Alle rader i et array må ha like mange elementer
+1525#£Elementene i en vektor må være tall eller uttrykk
+1526#£Du kan ikke sette {1} på {2}{3}
+1527#£Du kan ikke sette et tall på {1}
+1528#£av en annen størrelse
+1529#£Du kan ikke multiplisere {1} og {2} med forskjellige antall elementer
+1530#£Vektorene må ha like mange koordinater
+1531#£En vektor kan bare heves i kvadrat (prikkproduktet med seg selv)
+1532#£Du kan ikke løfte til {1}
+1533#£Funksjonen kan ikke ta {1} som et argument
+1534#£Den må ha et array eller to vektorer
+1535#£Størrelsen på nullmatrisen må være heltall
+1536#£ident må ha størrelsen, f.eks. ident(3)
+1537#£Størrelsen på enhetsmatrisen må være et helt tall
+1538#£Hatten må ha én vektor
+1539#£Kryssvektoren eksisterer kun for vektorer i planet
+1540#£{1} må ha to vektorer, f.eks. {1}(a; b)
+1541#£{1} til et array kan ennå ikke beregnes
+1542#£Kryssproduktet eksisterer kun for vektorer i rommet (3 koordinater)
+1543#£Determinanten av to vektorer eksisterer kun for vektorer i planet (2 koordinater)
+1544#£{1} må ha et argument
+1545#£length må ha én liste, f.eks. length(x)
+1546#£Et element har maksimalt to indekser, f.eks. A[1; 2]
+1547#£Indeksen skal være et heltall: {1}
+1548#£Indeksen er for stor: {1}
+1549#£Indeksen {1} ligger utenfor matrisen ({2} rader)
+1550#£Indeksen {1} er utenfor matrisen ({2} streker)
+1551#£En liste har bare én indeks, f.eks. x[2]
+1552#£En vektor har bare én kolonne: den andre indeksen må være 1
+1553#£Vektorene på de to sidene av likhetstegnet må ha likt antall koordinater
+1554#£Matrisene på begge sider av likhetstegnet må være like store
+1555#£Et array kan bare være lik én matrise
+1556#£En vektor kan ikke være lik et tall
+1557#£Beregninger kan ikke utføres på definisjonsfelt. Du kan bruke definisjonen nedenfor til en beregning.
+1558#£og
+1559#£Automat
+1560#£Nøyaktig
+1561#£Numerisk
+1562#£enheter på
+1563#£enheter av
+1564#£LaTeX-kode
+1565#£LaTeX-koder
+1566#£Ligning
+1567#£Ligninger
+1568#£bilde
+1569#£Bilder
+1570#£Argument
+1571#£Argumenter
+1572#£Signifikansnivå:
+1573#£Den totale summen av alle cellene er mindre enn 50. {1} fordelingen er derfor en dårlig tilnærming i dette tilfellet og resultatet upålitelig.
+1574#£Frihetsgrader:
+1575#£Konvertering
+1576#£Tilpass menyen
+1577#£Velg hvilke menypunkter som er synlige
+1578#£Sifre og avrunding
+1579#£Omskriving...
+1580#£Løs ligning(er)
+1581#£Løs koblede differensialligninger
+1582#£Sannsynlighet
+1583#£Ugruppert
+1584#£Gruppert
+1585#£Sett inn tabell
+1586#£Skikk
+1587#£t-fordeling
+1588#£Nummererte ligninger
+1589#£Vis alt
+1590#£Skjul alt
+1591#£Satt etter nivå
+1592#£Setter synlige menypunkter etter hvilket matematikknivå du blir undervist i henhold til
+1593#£Sinustilpasning
+1594#£Denne funksjonen krever WordMat+
+1595#£For å få tilgang til WordMat+ kan skolen/organisasjonen din:\n inngå partnerskapsavtale med Eduap.
+1596#£Les mer om de andre fordelene med et partnerskap her:
+1597#£Sjekk om skolen din allerede har signert et partnerskap
+1598#£Oppsett for formelsamling
+1599#£Velg din utdanning
+1600#£Velg fagnivåene dine
+1601#£Du kan alltid endre valgene dine senere
+1602#£Matematikk:
+1603#£Fysikk:
+1604#£Kjemi:
+1605#£Neste
+1606#£Show i GnuPlot
+1607#£Funksjoner f(x)=...
+1608#£Tittel på x-aksen
+1609#£Tittel på y-aksen
+1610#£Var
+1611#£Poengstørrelse:
+1612#£Vis i Excel
+1613#£Excel innebygd
+1614#£Rutenett
+1615#£Logaritmisk X-akse
+1616#£Logaritmisk Y-akse
+1617#£Plateselskaper
+1618#£Sett inn etikett
+1619#£Forklaring på serien
+1620#£Poeng 2
+1621#£Syntaks\nStartpunkt - Vektor\n(startx ; starty)-(dx ; dy)\n\nEksempler: \n(1,1)-(1,2)     \n  Tegning av vektor (1.2) fra punkt (1.1)\n\n(1,2)\n  Tegning av vektor (1,2) fra punkt (0,0)\n\n(1,5 ; 4,5)\nHvis desimaltall er inkludert; brukes som separator
+1622#£New Vector
+1623#£Ligning 1
+1624#£Ligning 2
+1625#£Ligning 3
+1626#£Variablene bør være x og y
+1627#£Rekvisitt
+1628#£Manu
+1629#£Uansett. variabel
+1630#£Dep. variabel
+1631#£Integralkurver (kurver)
+1632#£Spesifiser punkter som løsningsveier skal tegnes gjennom.
+1633#£Åpent
+1634#£Åpner vindu hvor du kan klikke på punktet der det skal være integralkurve og der det kan være skyveknapper, slik at du kan se retningsfeltet endre seg med glidebryteren
+1635#£Interaktivt
+1636#£Vent!
+1637#£const
+1638#£fra
+1639#£til
+1640#£Sliders
+1641#£Vis kun kurver
+1642#£Lisens:
+1643#£Still steglengden automatisk
+1644#£Setter antall trinn til 500
+1645#£Ligningene løses med 4. ordens Runge-Kutta
+1646#£Innsetting av beregnede punkter som en liste i Word-dokumentet
+1647#£Du kan enten skrive inn en variabel eller en funksjon, avhengig av. av det som står skrevet i ligningen. dvs. for eksempel y eller f(x), men ikke f.
+1648#£OK, ny linje
+1649#£Definisjoner på dette punktet i dokumentet
+1650#£Eksempel: a=5, x>0
+1651#£Eksempel: g, min, cm
+1652#£Des.
+1653#£Kjører i en nettleser, men ikke på nett
+1654#£Forbindelse til Maxima
+1655#£Kobles til Maxima med en .net dll-fil som håndterer kommunikasjonen
+1656#£Maxima kjøres gjennom et skall med wsh. Hver beregning er en ny instans av Maxima. Den er litt tregere og viser kort et svart cmd-vindu, men avhenger ikke av dll-filen.
+1657#£Krever WordMat+
+1658#£Sjekkpartnerskap
+1659#£Flytt opp (prøvde før)
+1660#£Flytt ned (skal prøve senere)
+1661#£Motorene testes ovenfra.  \nDen neste brukes når en motor ikke kan.
+1662#£Ubegrenset presisjon
+1663#£Stol på ubegrenset presisjon (store tall)
+1664#£Maksimalt antall sifre:
+1665#£Maksimalt antall sifre i eksakte tall
+1666#£Tidsbegrensning(er):
+1667#£Tidsbegrensning for en beregning i sekunder (0 = ingen grense)
+1668#£Vitenskapelig notasjon, n:
+1669#£Vitenskapelig notasjon for tall under 10^-n (0 = aldri)
+1670#£LaTeX-omsluttende karakterer om en ligning
+1671#£I teksten:
+1672#£Teksten før LaTeX-koden for en ligning inne i teksten, f.eks. $
+1673#£Teksten etter LaTeX-koden for en ligning inne i teksten, f.eks. $
+1674#£På sin egen måte:
+1675#£Teksten før LaTeX-koden for en ligning på en linje separat, f.eks. \[ eller \begin{ligning}
+1676#£Teksten etter LaTeX-koden for en ligning på en linje separat, f.eks. \] eller \end{ligning}
+1677#£Enheter med oppreist skrift (\mathrm)
+1678#£Entiteter gjenkjennes ikke og skrives i kursiv (\mathrm{m})
+1679#£Dobbelttrykk Alt+M
+1680#£Du må skrive inn nøyaktig 3 vinkler/sider, men ikke bare 3 vinkler. \nSå: \n1 side + 2 vinkler\n2 sider + 1 vinkel (muligens 2 løsninger)\n3 sider
+1681#£Der nøyaktig svaret er ønsket. Kan påvirke beregningstiden.
+1682#£Ingen LaTeX-kode funnet. Velg koden eller plasser markøren i en LaTeX-ligning (f.eks. {1} eller {2}).
+1683#£{1} {2} kunne ikke leses av VBACAS og er skrevet som tekst ({3}) i LaTeX-dokumentet.
+1684#£Divergensen {1} krever en vektorfunksjon. Gradienten til {2} skrives {3}
+1685#£Rotasjonen (curl) {1} krever en vektorfunksjon med 2 eller 3 koordinater
+1686#£{1} krever at {2} har like mange koordinater som variabler
+1687#£Divergensen {1} av en utskrevet vektor krever 2 eller 3 koordinater (variablene x, y og z)
+1688#£"{1}" kommer snart i WordMat+ for Office.
+1689#£En feil oppsto i "{1}".
+1690#£Detaljer
+1691#£Kopier
+1692#£Enheter er slått på.
+1693#£Enheter er slått av.
+1694#£Vis oppgaveruten
+1695#£Språket endres når WordMat+ åpnes igjen.
+1696#£Den korteste formen, f.eks. (x^2-1)/(x-1) til x+1 og sin(x)^2+cos(x)^2 til 1.
+1697#£Beregningen tok for lang tid og ble stoppet.
+1698#£WordMat+ for Word (Word desktop og Word Online)\nVersjon {1}\n\nUtviklingsversjon: flere funksjoner legges til kontinuerlig.
+1699#£Rediger ligning
+1700#£/ brøk, ^ potens, _ indeks, sqrt kvadratrot, piltastene flytter markøren. Enter: sett inn. Ctrl+Enter: sett inn og beregn. Esc: avbryt.
+1701#£Sett inn og beregn
+1702#£Klikk i grafen for å tegne en løsningskurve gjennom punktet.
+1703#£Nullpunkter
+1704#£Ekstremalpunkter
+1705#£Skjæringspunkter
+1706#£Punktserie {1}
+1707#£Vis koordinater
+1708#£Velger grafvinduet slik at alle punkter, nullpunkter, ekstremalpunkter og skjæringspunkter vises, og aksene når de ikke er langt unna.
+1709#£Ingen rutenett
+1710#£Stort rutenett
+1711#£Lite rutenett
+1712#£Tangent
+1713#£Tegner tangenten til grafen ved x-verdiene som er skrevet her. Flere verdier er adskilt ved ;
+1714#£Startpunkt
+1715#£Uten startpunkt tegnes vektoren fra (0;0).
+1716#£Dra ned for å fortsette tallene: 1, 2 gir 3, 4 ... Dobbeltklikk fyller ned til siste rad.
+1717#£Skriv en formel med x, f.eks. 2*x, så beregnes y for radene herfra og ned.
+1718#£Skriv punktene i tabellen, eller lim dem inn fra Excel eller en Word-tabell.\nDra det lille feltet for å fortsette tallene nedover: 1, 2 gir 3, 4 ...\nSkriv en formel i y-kolonnen, f.eks. 2x eller =2x, og y beregnes for radene herfra og ned.\nVelg flere celler med musen eller Shift, og trykk Delete for å slette dem.\nKnappen z gir en z-kolonne for punkter i rommet.
+1719#£Setter inn tangenten til en funksjon som en ny funksjon, og tangeringspunktet som et punkt. Velg funksjonen og skriv x, eller klikk på grafen.
+1720#£Dra i grafen for å tegne en vektor.
+1721#£Klikk på en etikett i tabellen og deretter på grafen for å flytte den.
+1722#£Observasjon
+1723#£Frekvens
+1724#£Relativ frekvens
+1725#£Kumulativ frekvens
+1726#£Fra
+1727#£Til
+1728#£Antall observasjoner
+1729#£Minste verdi
+1730#£Nedre kvartil
+1731#£Median
+1732#£Øvre kvartil
+1733#£Største verdi
+1734#£Gjennomsnitt
+1735#£Standardavvik
+1736#£Utvalgets standardavvik
+1737#£Beskrivende statistikk beregnet med WordMat:
+1738#£Tabellen må inneholde observasjonene, eller observasjonene i første kolonne og deres frekvenser i den andre kolonnen.
+1739#£Tabellen må ha tre kolonner: starten på intervallene, slutten på intervallene og frekvensene.
+1740#£Begynnelsen på hvert intervall må være mindre enn slutten, og intervallene må ikke overlappe.
+1741#£Frekvensene må ikke være negative.
+1742#£Skriv inn antall forskjellige observasjoner, og det opprettes en tabell hvor du kan legge inn observasjonene og deres frekvenser.\nNår du har fylt ut tabellen, velg {1} eller et diagram fra menyen.
+1743#£Skriv inn antall intervaller, og det opprettes en tabell hvor du kan skrive inn intervallene og deres frekvenser.\nNår du har fylt ut tabellen, velg {1} eller et diagram fra menyen.
+1744#£Diagram
+1745#£Intet diagram
+1746#£Relativ frekvens i prosent
+1747#£Vis kvartiler
+1748#£Navn
+1749#£per enhet
+1750#£Skriv inn observasjonene og deres frekvenser i tabellen, eller lim dem inn fra Excel eller en Word-tabell.
+1751#£Skriv inn intervallene og deres frekvenser i tabellen, eller lim dem inn fra Excel eller en Word-tabell.
+1752#£Skriv kvartilene i hvert boksplott: minste verdi, nedre kvartil, median, øvre kvartil og største verdi.
+1753#£Kvartilene må stå i stigende rekkefølge.
+1754#£Rådata
+1755#£Ugruppert
+1756#£Gruppert
+1757#£Kum. frekvens
+1758#£Overfør til ugruppert
+1759#£Overfør til gruppert
+1760#£Intervallbredde
+1761#£Skriv observasjonene i tabellen, eller lim dem inn fra Excel eller en Word-tabell.
+1762#£Legg til i boksplott
+1763#£Tabellen settes inn i dokumentet når vinduet lukkes.
+1764#£{1} observasjoner ligger utenfor intervallene.
+1765#£Intervallbredden må være større enn 0.
+1766#£Prikkdiagram
+1767#£Arealforklaring
+1768#£Viser øverst til høyre en boks med samme bredde som det første intervallet, og hvor mange prosent av observasjonene den tilsvarer.
+1769#£En observasjon på grensen mellom to intervaller tilhører det nedre intervallet, ]a;b], som er den danske standarden, eller det øvre intervallet, [a;b[.
+1770#£Frihetsgrader
+1771#£Vis kumulativ fordeling
+1772#£Velg en fordeling.
+1773#£Et tomt felt betyr ingen grense på den siden.
+1774#£Skriv en sannsynlighet, f.eks. 0,95 eller 95 %, og den tilsvarende verdien finnes.
+1775#£n må være et helt tall større enn 0.
+1776#£p må være mellom 0 og 1.
+1777#£Standardavviket må være større enn 0.
+1778#£Antall frihetsgrader må være større enn 0.
+1779#£Observert
+1780#£Tosidig
+1781#£Venstresidet
+1782#£Høyresidet
+1783#£Kritisk område
+1784#£P-verdi
+1785#£Nullhypotesen forkastes.
+1786#£Nullhypotesen kan ikke forkastes.
+1787#£Konfidensintervall for p
+1788#£Ingen test
+1789#£Forventet
+1790#£Kritisk verdi
+1791#£Testobservator
+1792#£Sett inn resultat
+1793#£Det må være minst to rader med et observert antall og et forventet antall som er større enn 0.
+1794#£En goodness of fit-test utføres med WordMat
+1795#£På signifikansnivået {1}% kan nullhypotesen, om at observasjonene følger den forventede fordelingen, forkastes.
+1796#£På signifikansnivået {1}% kan nullhypotesen ikke forkastes. Det finnes derfor ingen bevis for at observasjonene avviker fra den forventede fordelingen.
+1797#£Forventede verdier:
+1798#£Test om de grupperte dataene er normalfordelte
+1799#£{1} og {2} fra dataene
+1800#£Tilpass
+1801#£Det må være minst {1} intervaller når gjennomsnittet og standardavviket er estimert ut fra dataene.
+1802#£Testen bruker de grupperte dataene på fanen {1}. Skriv dem inn under {2} og kryss av for {3}, slik at histogrammet kan sammenlignes med normalfordelingen.
+1803#£Gir hver kurve et felt z(t), slik at den tegnes i rommet.
+1804#£Variablene må være x og y, og z i rommet
+1805#£Ligninger som bilder
+1806#£Word Online bruker flere sekunder på å skrive en ligning. Med denne innstillingen legger WordMat+ inn nye ligninger og resultater som små bilder, som den beregner på som på ligninger. Bildene kan gjøres om til ligninger igjen i menyen {1}.
+1807#£Gjør ligninger om til bilder
+1808#£Gjør om ligningene for utvalget, eller for hele dokumentet når ingenting er valgt, til bilder, som Word Online viser og endrer mye raskere. WordMat+ beregner på bildene som på ligninger.
+1809#£Gjør bilder om til ligninger
+1810#£Gjør bildene av ligningene i utvalget, eller i hele dokumentet når ingenting er valgt, om til reelle ligninger igjen, for eksempel før dokumentet leveres inn.
+1811#£Ligninger gjort om til bilder: {1}
+1812#£Bilder gjort om til ligninger: {1}
+1813#£Ikke konvertert (uendret): {1}
+1814#£Det finnes ingen ligninger å konvertere.
+1815#£Det finnes ingen bilder av ligninger å konvertere.
+1816#£Ligninger som bilder brukes kun i Word Online.
+1817#£Ligningene kunne ikke konverteres.
+1818#£Matematikk
+1819#£Fysikk
+1820#£Lukk når en formel velges
+1821#£Hold inne Ctrl når du klikker på en formel, og formelsamlingen lukkes ikke.
+1822#£Sett inn 2
+1823#£Formelen legges inn to ganger: én gang for dokumentasjon og én gang hvor du kan legge inn tall.
+1824#£Sett inn konstanter
+1825#£I fysikk og kjemi settes de fysiske konstantene inn som tall i den andre formelen.
+1826#£Vis i ruten
+1827#£Formelsamlingen vises i panelet ved siden av dokumentet i stedet for i et stort vindu. Den gjelder fra neste gang formelsamlingen åpnes.
+1828#£Søk:
+1829#£Merk: Samlingen av kjemiformler er ikke komplett ennå.
+1830#£Skriv inn søkefeltet, eller klikk på et emne.
+1831#£Klikk på en figur for å sette den inn i dokumentet.
+1832#£Word Online kan vise figurene, men kan ikke redigere dem. Åpne dokumentet i Word for Windows eller Mac for å endre dem.
+1833#£Viser figurer i ruten: trekanter, enhetssirkel, koordinatsystemer og monotonitetslinjer. Klikk på en figur for å sette den inn i dokumentet.
+1834#£Filen {1} er lastet ned. Den ligger i nettleserens nedlastinger.
+1835#£Bruk Word som en LaTeX-editor. \n\nDu kan skrive LaTeX-kommandoer direkte i dokumentet for full kontroll, eller bruke Words funksjoner og la WordMat+ konvertere til LaTeX. \n\nTex-filen lastes ned til datamaskinen. Hvis dokumentet har bilder, lastes en zip-fil med tex-filen og mappebildene ned.
+1836#£Lager LaTeX-koden som en texfil som lastes ned til datamaskinen, slik at koden kan gjennomgås og justeres i et LaTeX-program
+1837#£Lagre
+1838#£Om x-aksen
+1839#£Om y-aksen
+1840#£Dreier grafene for funksjonene som er krysset av, 360 grader om x-aksen eller y-aksen, slik at det oppstår et omdreiningslegeme i 3D. Hver graf dreies fra sin Xmin til sin Xmax.
+1841#£Formel
+1842#£Konverter
+1843#£Siderute
+1844#£Viser sideruten med innstillingene, eller lukker den når den er åpen.
+1845#£WordMat+ bruker JSXGraph til grafer og MathLive til inntasting av ligninger. Begge har MIT-lisens.
+1846#£Lisenser
+1847#£stykkevis
+1848#£I en parentes: @ eller Alt+Enter gir en ny rad, & en ny kolonne.
+1849#£n'te rot
+1850#£matrise
+1851#£bestemt integral
+1852#£ubestemt integral
+1853#£I en parentes: @ eller Alt+Enter gir en ny koordinat.
+1854#£sum
+1855#£produkt
+1856#£WordMat+ gjør det mulig å gjøre matematiske beregninger i Word.\nWordMat lages av Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.

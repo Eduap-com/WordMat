@@ -926,10 +926,932 @@
 925#£Analytical and numerical
 926#£Analytical
 927#£Numeric (decimal)
-928#£The equation is solved by means of symbolic paraphrasing and algebraic arithmetic rules. This provides exact solutions and the best guarantee that all solutions have been found. Not all equations can be solved using this method.
+928#£The equation is solved by means of symbolic manipulation and algebraic arithmetic rules. This provides exact solutions and the best guarantee that all solutions have been found. Not all equations can be solved using this method.
 929#£The solutions are found by 'guessing' many different solutions. The method works on virtually all equations, but solutions can be overlooked and false solutions can be found. (A combination of bisection and Newton's method is used)
 930#£An analytical solution is first tried, and if it fails, numerical solution methods are used.
 931#£Equations can basically be solved in two different ways. If you experience problems with an equation, it may be a good idea to try a different method, or try a different CAS engine or graphical solution.
 932#£Update to latest beta version
 933#£You should be aware that there may be bugs in beta versions. They are primarily intended for testing. It is recommended to use this function primarily as instructed by Eduap
 934#£Shows the graph for the left and right sides of the equation in the same coordinate system. The solutions to the equation are the x-value of the intersections. Remember to zoom in and out.
+935#£Formula collection
+936#£Opens the formula collection with formulas from math, physics, and chemistry. Click a formula to insert it into the document.
+937#£Opens a dialog where you choose how the selected expression or equation is rewritten: reduce, factorize, expand, square completion, or decimal to fractions. You can also provide temporary definitions and select the output. The result is written on a new line.
+938#£Reduces the selected expression or both sides of an equation to the shortest form, e.g. (x^2-1)/(x-1) to x+1 and sin(x)^2+cos(x)^2 to 1. The result is written on a new line.
+939#£Factorizes the selected expression, e.g. x^2-1=(x-1)(x+1). The result is written after the expression just like in Calculate.
+940#£Multiply parentheses in the selected expression, e.g. (x+1)^2=x^2+2x+1. The result is written after the expression as in Calculate.
+941#£Rewrites a quadratic polynomial ax^2+bx+c to a(x+b/(2a))^2+c-b^2/(4a), e.g. x^2+6x+5 to (x+3)^2-4. The coefficients may be letters. Also works on an equation, e.g. a circle's equation x^2-4x+y^2+14y+53=25 to (x-2)^2+(y+7)^2=25. The result is written on a new line.
+942#£Sends the selected expression directly to Maxima and inserts the result as a new equation. The expression must be written in Maxima's syntax, e.g. integrate(x^2,x) or factor(x^2-1). If nothing is selected, the command can be written in a box. Requires WordMats Maxima.
+943#£Test equation
+944#£Examines whether the marked equation is true for all values of the variables, e.g. sin(x)^2+cos(x)^2=1. First, an exact proof is attempted, otherwise the equation is tested numerically. The answer is true, false (with a counterexample), probably true or unknown, and is written on a new line.
+945#£Removing one or more variables from a system of equations: select the equations and select the variables to be eliminated (fewer than the number of equations). For example, x=2t+1 and y=t^2 with t eliminated give y=(x-1)^2/4.
+946#£Solves one or more coupled differential equations numerically, e.g. x'=y and y'=-x. The result can be displayed as a graph in GeoGebra, inserted as a list or table, or sent to Excel.
+947#£Def.
+948#£Inserts 'Define:' at the beginning of the equation at the cursor, or a new equation with it. The definitions apply in the calculations below them in the document.
+949#£Inserts 'Delete definitions:' on a new line. The definitions above it are not used in the calculations below it.
+950#£Displays the graph for the selected functions/equations and points. The graph program is selected in settings, or by expanding this button.
+951#£Graphs
+952#£Displays graphs and points in GeoGebra: in WordMat's GeoGebra window with WordMat+, otherwise in the browser. No internet required.
+953#£Opens GeoGebra 5 and transfers the selected functions and definitions.
+954#£Opens (or embeds) WordMat's Excel sheets for graphs and points with the selected functions and the points in the table.
+955#£Shows the body of the selected functions in GeoGebra. The graph of the precept is rotated 360 degrees around the x-axis to create a 3D object. A definition set is written after a comma, e.g. f(x)=x^2, 0<=x<=2.
+956#£Statistics Charts
+957#£Adapts a function you write yourself, e.g. f(x)=a·e^(b·x)+c, to the points in the table. The parameters are the variables other than the independent variable.
+958#£Excel regression
+959#£Inserts a new math field. In a numbered equation: make the equation numbered.
+960#£Inserts a new math field that is automatically numbered. If the cursor is in an equation, it is numbered. The position and type of the number are selected under Settings.
+961#£Inserts a reference to a named equation: the equation number, which is updated when the numbers change.
+962#£The numbered equation in which the cursor is located is given a specific number. The following equations follow.
+963#£Opens the LaTeX dialog where the document can be converted to a .tex file or a pdf file (requires MikTex). The enclosing characters for converted equations are selected under Options, Notation.
+964#£Convert equation to LaTeX
+965#£Replaces the equation at the cursor with its LaTeX code. The enveloping characters for inline equations and equations on a line separately are selected under Settings, Notation.
+966#£Convert LaTeX to equations
+967#£Converts the LaTeX code in the selection into equation fields. If nothing is selected, the LaTeX equation is converted at the cursor. The code is found at $...$, \(...\), $$...$$, \[...\], \begin{align}, etc., and the enveloping characters under Settings, Notation. A selection without enveloping characters is converted as one equation. Alt+T outside an equation does the same.
+968#£Document
+969#£Convert to LaTeX pdf file
+970#£Converts the entire document to LaTeX, translates it into a pdf file with MikTex pdflatex and opens it in the default pdf file application. MikTex must be installed.
+971#£Convert to LaTeX .tex file
+972#£Converts the entire document to a .tex file and opens it in the default .tex file program (TexWorks, TexMaker, ...). The file is placed in a folder next to the document.
+973#£Convert to Html
+974#£Converts the selection or the entire document into an html page, which is opened in the browser. The equations are written as LaTeX and displayed with MathJax (requires internet), the images are embedded in the page. The file is placed in a folder next to the document, and the html code without <head> it is copied to the clipboard, so that it can be pasted, for example, into a Custom HTML block in WordPress.
+975#£Convert to Markdown
+976#£Converts the markup or the entire document into a markdown (.md) file: headings, lists, quotes, bold, italic, strikethrough, code, links, tables, and footnotes, and the equations as LaTeX ($...$ and $$...$$). The images are saved as files in the same folder. The folder is placed next to the document and opened, and the text is copied to the clipboard.
+977#£Convert markdown to Word formatting
+978#£Turns markdown in the selection or throughout the document into Word formatting: headings (#), lists (- and 1st), citations (>), bold (**), italics (*), strikethrough (~~), code (' and '''), links, images, tables, footnotes, and horizontal lines, and LaTeX ($...$ and $$...$$) become equation fields.
+979#£Choose which command each keyboard shortcut (Alt+M, Alt+B, Alt+L...) should perform, and see Word's shortcuts for math fields.
+980#£About WordMat+
+981#£An index is missing in {1}
+982#£The function {1} is missing an argument. For example, type {1}(x) or {1}^(-1)(x) with Word's function template
+983#£An item in the list is missing
+984#£The base number for a logarithm must be positive and different from 1
+985#£A start bracket is missing to {1}\n\nThe bracket missing a start bracket is emphasized in the expression below with extra blank spaces:\n\n      {2}  )  {3}
+986#£Start bracket {1} do not match {2}\n\nThe brackets are emphasized in the expression below with extra blank spaces:\n\n      {3}  {1}  {4}  )  {5}
+987#£An endbracket is missing for {1}\n\nThe bracket is emphasized in the expression below with extra blank spaces:\n\n      {2}  {1}  {3}
+988#£Syntax error\n{1} operator cannot be placed at the beginning of an expression.
+989#£Error at inverse trignonometric function: {1}\nThe argumentet must be between -1 og 1
+990#£Syntax error\n{1} operator cannot be placed at the very end of an expression.
+991#£The number is too large to be converted to a decimal number
+992#£Division by zero
+993#£An error occurred. Can't insert formula here. \nTry closing all Word documents and restarting Word. \n\nError description: \n{1}
+994#£The table contains no numbers. You need to create a table with two columns: x-values in the left column and y-values in the right column.
+995#£You need to create a table with two columns. X values in the left column and Y values in the right column.
+996#£Linear regression performed using WordMat. WordMat:
+997#£Exponential regression performed using WordMat. WordMat:
+998#£Potency regression performed using the WordMat:
+999#£Specify the order of the polynomial regression (1-{1})\n\n(The maximum order is determined by the number of points)
+1000#£The order must be between 1 and {1}
+1001#£Polynomial regression of degree {1} performed using the WordMat. WordMat:
+1002#£The cross-table must have at least 2 rows and 2 columns of numbers.
+1003#£{1}² - test for coherence is performed using WordMat WordMat
+1004#£P-value: {1} = {2}%
+1005#£At the significance level {1}%, the 0 hypothesis that there is no correlation can be rejected. I.e. There is a correlation between the two variables.
+1006#£At the significance level {1}%, the 0 hypothesis cannot be rejected. Therefore, there is no evidence to say that there is a correlation between the two variables.
+1007#£There are expected values less than 5 or the total sum of all cells is less than 50. The {1}² distribution is therefore a poor approximation in this case and the result unreliable. In some cases, the data material can be made usable by making a different grouping.
+1008#£P-value:
+1009#£Q-value:
+1010#£Critical Q-value:
+1011#£WordMat's Excel file {1} could not be found. The feature requires WordMat to be installed.
+1012#£Inserting nested Excel sheet...
+1013#£An error occurred in the attempt to insert Excel sheets.
+1014#£Error reading the file: {1}
+1015#£GeoGebra 5 could not be opened: {1}
+1016#£GeoGebra 5 is not installed on your computer. \n\nWant to download GeoGebra 5? (No: the graph is displayed in the GeoGebra Calculator Suite)
+1017#£GeoGebra will download in your browser. Go to Downloads and run the installer.
+1018#£An error occurred while trying to open: {1}
+1019#£This version of WordMat+ does not check for new versions itself. You will now be directed to the download page.
+1020#£WordMat+ cannot check for a new version on this computer (WordMat's MathMenu.dll is missing or an older version). You will now be redirected to the download page.
+1021#£You already have the latest version of WordMat+ v.{1}
+1022#£There is a new version of WordMat ready for download. \nNews:  \n{1}\n\nClick OK to start the update.
+1023#£New version {1}
+1024#£There is a new version of WordMat ready for download. \nNews:  \n{1}\nYou will now be redirected to the download page
+1025#£There was an error in connection with checking for an update. You will now be sent to the website, where you can see if there is a new update. The current version is: {1}
+1026#£The update cannot be downloaded automatically on this computer (WordMat's MathMenu.dll is missing or an older version). You will now be redirected to the download page.
+1027#£Downloading the installation file
+1028#£The installation file does not have a valid digital signature from Eduap. It has been deleted again.
+1029#£The installation file was not downloaded correctly
+1030#£The installation file has been downloaded. \nClick OK to start the update. You will be prompted to save and close Word.
+1031#£The installation could not be started (error {1}).
+1032#£An error occurred during the update (error {1}).
+1033#£This version of WordMat+ cannot download and install updates. You will now be taken to the download page.
+1034#£Updating to the beta version requires WordMat+.
+1035#£Do you want to start the installation of the beta version?
+1036#£Update beta
+1037#£An error occurred while installing the beta version: {1}
+1038#£The purchase page cannot be opened on this computer (WordMat's MathMenu.dll is missing or an older version). Install WordMat again.
+1039#£The command isn't available in WordMat+ yet. Under Shortcuts, choose a different command for the key.
+1040#£Previous result
+1041#£WordMat+: there is no result before the equation.
+1042#£WordMat+: there are no more results. Tap again for the latest.
+1043#£An error occurred: {1}
+1044#£The result was not implemented.
+1045#£The installation file has been downloaded. \nClick OK to start the update
+1046#£The Eduap server returned an error.\nThis is hopefully a temporary problem. If the problem persist and you have a valid WordMath+ license, then please contact eduap@eduap.com\n\nError: wordmatlicens failed
+1047#£No internet
+1048#£WordMat+ cannot check the license, because WordMat's MathMenu.dll cannot be used on this computer.\n\nThe file is missing, is an older version, or is blocked by security settings (antivirus, Endpoint Protection).\n\nInstall WordMat again, or contact the IT department. Until then WordMat+ works as without a license.
+1049#£Click Allow twice after you close this window\nYou only need to do this once.
+1050#£Permissions for WordMat
+1051#£geogebra-math-apps could not be found
+1052#£Program files not found
+1053#£Sine regression requires an active WordMat+ license.
+1054#£Sinus regression performed using WordMat (in {1}): WordMat (in ):
+1055#£Excel regression...
+1056#£WordMat's Excel file Graphs.xltm could not be found. Excel regression requires WordMat to be installed.
+1057#£There was an error in the attempt to insert Excel sheets. This may be because Excel has crashed earlier. Close open Excel sheets and open Excel before trying via WordMat again.
+1058#£{1} has several undefined variables. The independent variable cannot be identified. Use x or t as the independent variable.
+1059#£There must be at least 3 data points.
+1060#£Sine regression
+1061#£Could not estimate frequency via FFT.
+1062#£performed with WordMat{1}:
+1063#£The model does not include the independent variable {1}
+1064#£The model has no parameters (variables other than {1})
+1065#£There must be at least as many points as parameters ({1})
+1066#£Custom regression requires Maxima when there is no active WordMat+ license.
+1067#£The regression could not find the parameters. Try with other starting guesses
+1068#£{1}² distribution
+1069#£Congratulations! \nYour school has signed up for a partnership and WordMat+ is now activated.
+1070#£Success
+1071#£Unfortunately\nYour school has not signed a partnership yet.
+1072#£No partnership
+1073#£xmin must be >0 to use logarithmic x-axis.
+1074#£YMIN must be >0 to use logarithmic y-axis.
+1075#£The graph could not be inserted: {1}
+1076#£WordMat+ enabled for {1}
+1077#£Version: {1}
+1078#£WordMat+ makes it possible to make mathematical calculations in Word. The calculations are made by a CAS that is part of WordMat+, so no other programs need to be installed. \nWordMat is made by Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1079#£Success!
+1080#£Data is missing
+1081#£The starting value of {1} is not a number
+1082#£Start, end and stride length should be numbers
+1083#£The differential equations could not be solved: {1}
+1084#£Select at least one variable to display
+1085#£Too many points for GeoGebra. Choose a larger stride length.
+1086#£Excel Could Not Open: {1}
+1087#£Start is not a number
+1088#£End is not a number
+1089#£Stride length is not a number
+1090#£There are {1} steps. It probably doesn't work in GeoGebra with so many steps.
+1091#£You cannot both solve the equation for {1} and at the same time define it.
+1092#£Differential Equation:
+1093#£Start condition:
+1094#£Named equations
+1095#£Select the equation to refer to and click OK (or double-click). The reference becomes the equation number and is updated when the numbers change.
+1096#£To insert a reference to the equation later, select 'Insert reference to equation' under 'New equation'.
+1097#£Restart Maxima
+1098#£Use Word as a LaTeX editor. \n\nYou can type LaTeX commands directly into the document for full control, or use Word's features and let WordMat+ convert to LaTeX. \n\nMikTex must be installed to create a pdf file. You will be sent to the installation if it is missing. \n\nA folder ('document name-Latex') is created next to the document with the tex file and images.
+1099#£Supported Formatting: \n- Headings (styles) become sections and subsections: \n   Title = chapter (document class, book or report; article: title of the document)\n   Heading 1 = section, Heading 2 = subsection, Heading 3 = subsubsection\n- Bold, italic and underlined font\n- Page number on/off as in the document\n- Equations: inline, numbered, and unnumbered (enclosing characters under Settings, Notation)\n- Bulleted lists (bullets and numbers)\n- Tables\n- Images, shapes, and diagrams\n- Bibliography
+1100#£LaTeX Settings
+1101#£Document class:
+1102#£Font size:
+1103#£Use Word's margins
+1104#£Use document margins instead of LaTeX's default margins (package geometry)
+1105#£Title page
+1106#£A separate title page with the title of the document name and the author of the document
+1107#£Table of Contents
+1108#£A separate table of contents page after the title page
+1109#£Numbered sections
+1110#£The headings are numbered
+1111#£The font size for plain text. Word's font size is not used
+1112#£LaTeX Preamble
+1113#£Autogenerated:
+1114#£Own:
+1115#£Deleting your own preamble
+1116#£Creates the LaTeX code as a tex file and opens it in the default program for tex files (TexWorks, TexMaker...) so that the code can be reviewed and adjusted
+1117#£Creates a LaTeX document as a pdf file using MikTex. MikTex, which must be installed. Should only be used for simple documents
+1118#£Wait...
+1119#£{1}... (your own preamble) ... \n\n{2}
+1120#£Choose how to paraphrase the phrase.
+1121#£Output units:
+1122#£Reduce
+1123#£Factor
+1124#£Inserts outside parentheses, e.g. x^2-1 to (x-1)(x+1).
+1125#£Multiply the parentheses, e.g. (x+1)^2 to x^2+2x+1.
+1126#£E.g. x^2+6x+5 to (x+3)^2-4, also the equation of a circle.
+1127#£All decimal numbers are converted to fractions, and the result is exact.
+1128#£Paste on the same line
+1129#£The result is written after the expression with an equal sign (not by an equation)
+1130#£Logarithm output
+1131#£Auto
+1132#£Select the variables to be eliminated.
+1133#£At most, {1} variables can be eliminated from {2} equations.
+1134#£Choose a maximum of {1} variables as there are {1} equations.
+1135#£Eliminate a maximum of {1} variables
+1136#£Or write them yourself separated by commas
+1137#£Select up to {1} variables
+1138#£Or write them separated by commas (the rest are automatically selected)
+1139#£Eliminate variables
+1140#£Solve equation
+1141#£Equations can basically be solved in two different ways. If you experience problems with an equation, it may be a good idea to try another method.
+1142#£The solutions are found by 'guessing' many different solutions. The method works on virtually all equations, but solutions can be overlooked and false solutions can be found.
+1143#£Warning: Devices are turned on. \nBeware of variables that are units e.g. A, C, F, H, J, K, L, N, S, T, V, W, m, g, u, s
+1144#£The time limit, number of digits, and n for scientific notation must be numbers.
+1145#£The time limit must be at least 0, the number of digits at least 20 and n for scientific notation a whole number from 0 to 100.
+1146#£Select at least one CAS application.
+1147#£The backup folder is: {1}
+1148#£WordMat+ is enabled.
+1149#£This requires WordMat+.
+1150#£The settings are reset.
+1151#£Decimals
+1152#£Document {1} Markdown
+1153#£Markdown {1} Word
+1154#£WordMat's triangle solver is used with input:
+1155#£Since the cosine relation we solved above for
+1156#£Square completion requires a quadratic polynomial
+1157#£{1} must have two numbers, e.g. binomial(7; 2)
+1158#£There must be at least two equations to eliminate from, e.g. eliminate([x=2t+1; y=t^2]; t)
+1159#£eliminate requires the equations and the variables to be eliminated, e.g. eliminate([x=2t+1; y=t^2]; t)
+1160#£TestTF requires an equation
+1161#£The expression becomes too big to be multiplied
+1162#£binomial (n; r) requires n{1}0
+1163#£An assumption must be an inequality, e.g. x>0: {1}
+1164#£An assumption must be an inequality between a variable and a number, e.g. x>0
+1165#£The value in the assumption cannot be calculated: {1}
+1166#£A straight root of a negative number is not defined
+1167#£The power of a negative number is not defined for this exponent
+1168#£The number is too large
+1169#£Ln and log are defined only for positive numbers
+1170#£diff should have 1 to 3 arguments: diff(expression; x; n)
+1171#£The second parameter in diff must be the variable, e.g. diff(x^2; x)
+1172#£The third parameter in diff must be a whole number
+1173#£The third parameter in diff should be a number from 0 to 100
+1174#£Specify which variable to differentiate by, e.g. diff(expression; x)
+1175#£{1} cannot be differentiated (yet)
+1176#£Write the limit value as glue with x{1}a below
+1177#£A look is missing after glue
+1178#£A piecemeal function must have an expression and a condition in each row
+1179#£The piecemeal function is not defined here (none of the conditions are met)
+1180#£Polar notation r{1}v requires complex numbers to be turned on
+1181#£Write a complex number in polar form like r{1}v
+1182#£{1} must have one argument, e.g. {1}(3+2i)
+1183#£The argument of 0 is not defined
+1184#£The equation cannot be divided into a real and an imaginary part
+1185#£All complex numbers are solutions
+1186#£The equation has an infinite number of solutions ({1} is on a curve)
+1187#£The square root of {1} cannot be found
+1188#£The sign of {1} is not known
+1189#£The definition set for {1} may contain only {2}: {3}
+1190#£The definition set for {1} must contain {2}: {3}
+1191#£The definition lacks an equal sign: {1}
+1192#£It is not a definition: {1}
+1193#£The definition is not complete: {1}
+1194#£{1} is a command and cannot be defined
+1195#£The parameters in a function definition must be variable, e.g. f(x)=2x+1: {1}
+1196#£A built-in function cannot be defined: {1}
+1197#£{1} is a constant and cannot be defined
+1198#£The left side of a definition must be a name or function, e.g. a=5 or f(x)=2x+1: {1}
+1199#£The index {1} is outside the matrix {2} ({3} rows)
+1200#£The index {1} is outside the matrix {2} ({3} bars)
+1201#£The index {1} is outside {2} ({3} items)
+1202#£A definition uses itself (recursive definition)
+1203#£The function {1} must have {2} argument(s)
+1204#£Only a function of one variable can be differentiated by label: {1}
+1205#£{1} is not defined for {2} (the definition set is {3})
+1206#£{1} cannot be used as a counter because {1} is defined. Delete the definition or use a different name.
+1207#£A threshold cannot be found for {1} because {1} is defined. Delete the definition or use a different name.
+1208#£Embedding after {1} can't be done because {1} is defined. Delete the definition or use a different name.
+1209#£Differentiation by {1} cannot be differentiated because {1} is defined. Delete the definition or use a different name.
+1210#£Too {1} can't be solved because {1} is defined. Delete the definition or use a different name.
+1211#£The expression cannot be displayed in GeoGebra: {1}
+1212#£GeoGebra cannot be used for the expression in WordMat+
+1213#£GeoGebra cannot be started (WordMat's MiniBrowser)
+1214#£GeoGebra cannot be started (WordMat's AppleScript)
+1215#£GeoGebra was stopped because the calculation took more than {1} seconds
+1216#£GeoGebra is not installed (WordMat's geogebra-math apps)
+1217#£GeoGebra cannot be started (WordMat's WebViewWrap is missing)
+1218#£GeoGebra cannot be started
+1219#£GeoGebra can't count on devices
+1220#£GeoGebra can't calculate it: {1}
+1221#£GeoGebra cannot be used for {1} here
+1222#£Test equation requires an equation
+1223#£GeoGebra cannot be used for this differential equation
+1224#£GeoGebra can't use the condition
+1225#£GeoGebra cannot use the terms
+1226#£GeoGebra cannot solve the differential equation
+1227#£GeoGebra can't eliminate the variables
+1228#£GeoGebra can't solve the equation
+1229#£GeoGebra found only complex solutions
+1230#£GeoGebra can't calculate it
+1231#£GeoGebra found only one complex result
+1232#£Graph could not be displayed: {1}
+1233#£The Pivot Body Could Not Be Displayed: {1}
+1234#£Select one or more functions, e.g. f(x)=x^2 or y={1}x. A definition set is written after a comma, e.g. f(x)=x^2, 0{2}x{2}2.
+1235#£{1} is not a function of x and cannot be displayed as a torque.
+1236#£Graph is not available for Mac.
+1237#£Graph could not be displayed in Graph: {1}
+1238#£Graph does not support functions of several variables: {1}
+1239#£Graph can't display vectors and curves: {1}
+1240#£Graph can't display vectors and points in 3D:{1}
+1241#£Enter value for {1}\n\nIt can be adjusted afterwards under custom functions in Graph. You can even make an animation where the value changes continuously, under Calculate/Animate.
+1242#£The directional bar could not be displayed: {1}
+1243#£Show graph
+1244#£It solves for {1} that is also a unit. Therefore, {1} is not a unit in this equation. Consider using a different variable name or turning off units.
+1245#£Select the equation to solve
+1246#£Select the differential equation to solve
+1247#£Set the function for the beginning conditions
+1248#£could not be solved
+1249#£The differential equation is solved by WordMat ({1})
+1250#£with start condition {1}
+1251#£with start conditions {1}
+1252#£with boundary conditions {1}
+1253#£The equation is {1} by WordMat.
+1254#£The expression is {1} by WordMat.
+1255#£simplified
+1256#£factored
+1257#£expanded
+1258#£rewritten by completing the square
+1259#£rewritten with fractions
+1260#£rewritten
+1261#£The variables {1} are eliminated by WordMat.
+1262#£The variable {1} is eliminated by WordMat.
+1263#£Select the equation to test
+1264#£The equation is true.
+1265#£The equation is true for all values of {1}.
+1266#£The equation is false.
+1267#£The equation is false, as the left side is not defined.
+1268#£The equation is false, as the right side is not defined.
+1269#£The equation is false for all values of {1}.
+1270#£The equation is not true for all values of {1}. It is false for e.g. {2}
+1271#£, where the left side is not defined.
+1272#£where the right side is not defined.
+1273#£The equation is probably true. It could not be proved exactly, but the two sides have the same numeric value.
+1274#£The equation is probably true for all values of {1}. It could not be proved exactly, but it is true in all the {2} points it was tested numerically in.
+1275#£The equation is not true for all values of {1}.
+1276#£It could not be determined whether the equation is true.
+1277#£The equation is tested by WordMat.
+1278#£Error in the definition {1}: {2}
+1279#£The system of equations is solved numerically for {1} by WordMat.
+1280#£The system of equations is solved for {1} by WordMat.
+1281#£The inequality is solved numerically for {1} by WordMat.
+1282#£The inequality is solved for {1} by WordMat.
+1283#£The equation is solved numerically for {1} in the interval {2} by WordMat.
+1284#£The equation is solved numerically for {1} by WordMat.
+1285#£The equation is solved for {1} by WordMat.
+1286#£The calculation was stopped before the whole interval was searched. There may be more solutions.
+1287#£The calculation was stopped before all solutions were found. There may be more solutions.
+1288#£The system of equations had no solutions in the domain {2} for the variables {1}
+1289#£The inequality had no solutions in the domain {1}
+1290#£The inequality had no solutions in the domain {2} for variable {1}
+1291#£No solutions were found
+1292#£The equation had no solutions in the domain {1}
+1293#£The equation had no solutions in the domain {2} for variable {1}
+1294#£Write {1}x after the expression in the integral (e.g. {2}x^2 {1}x)
+1295#£The equation contains a structure that VBACAS cannot calculate yet: \n\n      {1}
+1296#£Write the sum with k=a below and b above the character (e.g. k=1 and n)
+1297#£The equation contains an accent that VBACAS cannot calculate yet: \n\n      {1}
+1298#£The equation contains a structure that VBACAS cannot calculate yet (a multi-row equation array): \n\n      {1}
+1299#£The equation contains a structure that VBACAS cannot calculate yet (e.g. sum, integral, limit, matrix or accent): \n\n      {1}
+1300#£Write {1}x {1}y after the expression in the double integral (e.g. {2}x·y {1}x {1}y)
+1301#£The integral must have {1} differentials (e.g. {2}x {2}y)
+1302#£The equation seems to include:
+1303#£but Word has saved it so that the function's argument continues after the parenthesis:
+1304#£It cannot be seen in the equation, but gives a different result.
+1305#£Should the equation be corrected so that it is calculated as it stands? \n(No: calculate as Word has saved it)
+1306#£You must select a table
+1307#£No valid number pairs in table
+1308#£integrate must have 1, 2 or 4 arguments: integrate(expression; x) or integrate(expression; x; a; b)
+1309#£The second parameter in integrate must be the variable, e.g. integrate(x^2; x)
+1310#£Specify which variable to integrate after, e.g. integrate(expression; x)
+1311#£The integral cannot be calculated: the integrand is not defined in the entire interval
+1312#£The integral could not be calculated numerically accurately enough (the integrand fluctuates too much)
+1313#£finding the equation
+1314#£reading the equation
+1315#£replacing the equation
+1316#£The equation could not be converted to LaTeX ({1}): {2}
+1317#£LaTeX {1} equation
+1318#£{1} {2} could not be converted into equations and has not been changed: {3}
+1319#£The LaTeX code could not be converted to an equation: {1}
+1320#£The code is empty.
+1321#£This feature is not supported on Mac.
+1322#£This version of WordMat+ cannot create pdf files with MikTex. Create a tex file instead.
+1323#£MikTex is not installed. You will now be sent to miktex.org where it can be downloaded. The first time the converter is run, you will also be prompted to download some packages. Just click OK.
+1324#£Save the document before converting it to LaTeX. The LaTeX files are placed in a folder next to the document.
+1325#£The document is not on your computer (OneDrive). Save it to a folder on your computer before converting it.
+1326#£Converting equations
+1327#£Converting formatting
+1328#£Converting images
+1329#£Converting tables
+1330#£Converting paragraphs
+1331#£Writing the file
+1332#£{1} {2} could not be saved as a file and has been replaced by a frame with the text "Image n missing".
+1333#£Document could not be converted to LaTeX: {1}
+1334#£WordMat+ did not find any folder that it is allowed to write in on this Mac.
+1335#£MikTex (pdflatex.exe) was not found.
+1336#£pdflatex runs {1}. time
+1337#£A mistake occurred when pdflatex.exe was driven.
+1338#£The LaTeX document could not be translated. pdflatex gave the error: \n\n{1}\n\nClick OK to open the tex file.
+1339#£The pdf file has been made, but these characters pdflatex cannot write. They have been replaced with a bold ? in the pdf file: \n\n{1}
+1340#£The pdf file could not be found. Click OK to open the tex file so that the error can be found.
+1341#£the folder for the images
+1342#£the document's folder
+1343#£Converts links and footnotes
+1344#£Copying to clipboard
+1345#£The html page is saved as\n{1}
+1346#£The html code could not be copied to the clipboard.
+1347#£{1} {2} could not be read and is written as text.
+1348#£{1} {2} could not be saved and has been replaced by the text "Image n missing".
+1349#£Document could not be converted to html ({1}): {2}
+1350#£(not used)
+1351#£Markdown file is saved as\n{1}
+1352#£The markdown text is copied to the clipboard.
+1353#£The markdown text could not be copied to the clipboard.
+1354#£The images are saved as files in the same folder.
+1355#£{1} {2} could not be saved.
+1356#£Document could not be converted to markdown ({1}): {2}
+1357#£*Image {1} missing*
+1358#£Markdown could not be converted: {1}
+1359#£{1} {2} was not found on the computer and is not inserted.
+1360#£{1} {2} could not be turned into equation fields.
+1361#£The LaTeX template (LatexWordTemplate.dotx) was not found. It installs together with WordMat.
+1362#£limit should have 3 or 4 arguments: limit(expression; x; a) or limit(expression; x; a; plus)
+1363#£The fourth parameter in limit must be plus or minus
+1364#£The limit does not exist
+1365#£{1} must have 4 arguments: {1}(expression; k; a; b)
+1366#£The second parameter in {1} must be the variable, e.g. {1}(k^2; k; 1; n)
+1367#£The lower limit cannot be infinite
+1368#£Too many joints (maximum {1})
+1369#£The term for {1}={2} has no value
+1370#£The series is divergent (the sum does not exist)
+1371#£The power sum cannot be calculated
+1372#£The zero matrix should be size 1 to 100
+1373#£The unit matrix must be size 1 to 100
+1374#£The matrix product requires that the first has as many columns as the second has rows ({1} and {2})
+1375#£An array can only be raised to a whole number (or T for the transposed)
+1376#£A matrix can only be raised to a whole number
+1377#£Only quadratic matrices can be raised to a power (the matrix is {1})
+1378#£The exponent is too big
+1379#£The determinant exists only for quadratic matrices (the matrix is {1})
+1380#£The determinant of an array of parameters can be calculated for {1}×{1} at most
+1381#£Only quadratic matrices have an inverse (the matrix is {1})
+1382#£The matrix has no inverse (the determinant is 0)
+1383#£The inverse of an array of parameters can be calculated for {1}×{1} at most
+1384#£Maxima is not installed (WordMat)
+1385#£Maxima cannot be started (WordMat's MathMenu.dll are missing)
+1386#£Maxima cannot be started
+1387#£Maxima cannot be started (WordMat's AppleScript)
+1388#£Maxima asked a question that WordMat+ can't answer
+1389#£Maxima was stopped because the calculation took more than {1} seconds
+1390#£The connection to Maxima via WSH requires partnership
+1391#£Maxima could not be started via WSH: error {1} {2}
+1392#£Errors in the Maxima code (code fields or code file): {1}
+1393#£Maxima cannot calculate {1}
+1394#£Maxima cannot be used for {1} in WordMat+
+1395#£Initial conditions in two different points
+1396#£these conditions
+1397#£Maxima cannot solve the differential equation
+1398#£Maxima can't calculate it
+1399#£Maxima found only one complex result
+1400#£Maxima can't eliminate the variables
+1401#£Maxima cannot solve inequality
+1402#£Maxima can't solve the equation
+1403#£Maxima only found complex solutions
+1404#£Gnuplot is not available for Mac. Use GeoGebra.
+1405#£The graph could not be displayed with Gnuplot: {1}
+1406#£Error in the Maxima code
+1407#£The code fields or code file have an error: {1}
+1408#£Type a Maxima command
+1409#£Error in the Maxima code (code fields): {1}
+1410#£There are too many columns
+1411#£The calculation was stopped
+1412#£The deadline for part of the calculation has been exceeded
+1413#£The calculation was stopped because it took more than {1} seconds
+1414#£Faculty is defined for whole numbers only
+1415#£Faculty is defined only for numbers >= 0
+1416#£The number is too large for faculty
+1417#£The number is too large - VBACAS cannot calculate the faculty of numbers over 170 as decimal numbers
+1418#£desolve must have a differential equation, e.g. desolve(y'=2y)
+1419#£The differential equation must be an equation, e.g. y'=2y
+1420#£The argument {1} in desolve is not understood
+1421#£The equation contains no derived function (e.g. y')
+1422#£The equation does not contain any derivative of {1}
+1423#£There is no free name for the constant
+1424#£The order of the derivative must be a number
+1425#£Write conditions as {1}(0)=2 after the equation: desolve(equation; {1} (0)=2)
+1426#£Differential equations of higher order than 2 cannot be solved
+1427#£The differential equation could not be solved ({1}{2} cannot be isolated)
+1428#£The differential equation could not be solved (it is neither linear nor separable)
+1429#£The differential equation could not be solved ({1}{2}{2} cannot be isolated)
+1430#£The differential equation could not be solved (the 2nd order can be solved when it is linear with constant coefficients, or {1}{3}{3}=f({2}))
+1431#£The differential equation could not be solved (a particulate solution for {1} cannot be found)
+1432#£A differential equation of the 2nd order can have at most two conditions
+1433#£The conditions must be equations, e.g. {1}(0)=1 and {1}{2}(0)=2
+1434#£The conditions should be written as {1}(0)=1 and {1}{2}(0)=2
+1435#£No solution meets the conditions
+1436#£A differential equation of the 1st order must have one condition, e.g. {1}(0)=2
+1437#£The condition must be an equation, e.g. {1}(0)=2
+1438#£The condition should be written as {1}(0)=2
+1439#£No solution meets the condition {1}
+1440#£The differential equation could not be solved (the stem function of {1} cannot be found)
+1441#£Stride length must be positive
+1442#£The end value must be greater than the starting value
+1443#£Too many steps ({1}). Choose a larger stride length
+1444#£Type only the right side of the differential equation for {1}: {2}
+1445#£Define {1} under Definitions
+1446#£The differential equation for {1} cannot be calculated by {2}={3}
+1447#£Place the cursor in the expression to be paraphrased.
+1448#£The Maxima command requires WordMat's Maxima, which is not installed.
+1449#£Type a Maxima command, e.g. integrate(x^2,x) or factor(x^2-1). The result is written as a new equation.
+1450#£Maxima command
+1451#£The Maxima command is not present in this version of WordMat+.
+1452#£Place the cursor in a math field.
+1453#£Place the cursor in the equation to be solved.
+1454#£Select the equations to eliminate variables from.
+1455#£Select at least two equations to eliminate variables (e.g., x=2t+1 and y=t^2).
+1456#£Place the cursor in the differential equation to be solved.
+1457#£There is no active WordMat+ license.\n\nWordMat+ can still be used, but these functions are not active:{1}WordMat+'s own CAS (VBACAS). Calculations use Maxima or GeoGebra{1}Graphs in WordMat's GeoGebra window. They are shown in the browser{1}Inserting formulas from the formula collection{1}Sine regression{1}Customize menu\n\nClick OK to go to www.wordmat.dk
+1458#£There is not an active WordMat+ license, so WordMat+'s own CAS (VBACAS) cannot be used, and neither Maxima nor GeoGebra can be used on this computer. Choose one of them under Settings, install WordMat with Maxima, or renew the license on www.wordmat.dk.
+1459#£Maxima is not part of this version of WordMat+
+1460#£The equation is already numbered.
+1461#£A numbered equation cannot be inserted into a table.
+1462#£Numbered equation
+1463#£Type a name for the equation.
+1464#£The name must have a maximum of 40 characters.
+1465#£The name should begin with a letter.
+1466#£The name can only contain letters, numbers, and _ (not spaces).
+1467#£The name already exists.
+1468#£There are no named equations in the document. Use 'Insert numbered equation for reference' under New equation.
+1469#£Equation Reference
+1470#£Put the cursor in a numbered equation.
+1471#£What number should this equation be set to? \nThe subsequent equations have their numbers updated to fit.
+1472#£Type a whole number, or section.number (2.3) for numbers with section.
+1473#£An equation section number will be inserted. Typically, it is inserted as a chapter or section number. in a heading. However, the number can also be inserted hidden. Should the number be displayed? (Answer no to hide it)
+1474#£Insert equation section no.
+1475#£Equation section
+1476#£Delete definitions cannot be inserted into a table.
+1477#£Specify which units should be in the output separated by commas\nExamples: \n\ncm , kJ, hours\neV, nm, mV\naJ , AU, Bq\n\nIf nothing is specified, all units will be returned as base SI units or derived SI units without a prefix.
+1478#£The second parameter in solve must be the variable, e.g. solve(x^2=4; x)
+1479#£Inequalities cannot be solved when complex numbers are turned on
+1480#£The equation cannot be solved analytically. Try to solve it numerically.
+1481#£The equation cannot be solved (yet): {1}=0
+1482#£Specify which variable is to be solved for, e.g. solve(equation; x)
+1483#£The equation cannot be solved exactly (the degree is too high)
+1484#£Too many solutions in the interval
+1485#£Too many solutions
+1486#£The period cannot be calculated
+1487#£The solutions in the interval cannot be calculated
+1488#£The equation cannot be solved exactly (yet): {1}=0
+1489#£The equation cannot be solved exactly (yet)
+1490#£The angle cannot be calculated
+1491#£The equation cannot be solved exactly (yet): {1}={2}
+1492#£Inequality cannot be solved (yet): {1}
+1493#£The inequality cannot be solved (yet): {1}{2}0
+1494#£Inequality has an infinite number of solution intervals. Specify an interval for {1}, e.g. 0{2}{1}{2}{3}
+1495#£Inequality cannot be solved (yet)
+1496#£{1} must have {2}{3}
+1497#£{1} (x) is not defined for x=0, -1, -2, ...
+1498#£W_0(x) is defined only for x{1}-1/e
+1499#£acosh (x) is defined only for x{1}1
+1500#£{1} (x) is too large to be calculated;
+1501#£{1} has no value here
+1502#£{1} cannot be differentiated according to {2} ({2} in the first argument)
+1503#£The unknowns must be variable, e.g. solve([x+y=5; x-y=1]; [x;y])
+1504#£Systems with inequalities cannot be solved (yet)
+1505#£There are no equations to solve
+1506#£The system of equations has no variables to solve for
+1507#£The system of equations is overdetermined: there are more equations ({1}) than unknown ones ({2}).
+1508#£The tax system cannot be solved exactly (yet)
+1509#£The tax system cannot be solved (yet)
+1510#£Specify the variables to be eliminated, e.g. eliminate([x+y=a; x-y=b]; x)
+1511#£The variables to be eliminated must be variables, e.g. eliminate([x+y=a; x-y=b; x*y=c]; [x;y])
+1512#£Variables cannot be eliminated from inequalities
+1513#£At most, {1} variables can be eliminated from {2} equations
+1514#£When {1} are eliminated, there are no equations left (they are always met)
+1515#£{1} can't be eliminated (yet)
+1516#£{1} cannot be eliminated (the degrees are too high)
+1517#£Devices don't match: {1}
+1518#£Unknown unit: {1}
+1519#£a list
+1520#£a vector
+1521#£a matrix
+1522#£a number
+1523#£{1} must have at least one element
+1524#£All rows in an array must have an equal number of elements
+1525#£The elements of a vector must be numbers or expressions
+1526#£You can't put {1} to {2}{3}
+1527#£You can't put a number to {1}
+1528#£of a different size
+1529#£You cannot multiply {1} and {2} by different numbers of elements
+1530#£The vectors must have an equal number of coordinates
+1531#£A vector can only be raised squared (the dot product with itself)
+1532#£You can't uplift to {1}
+1533#£The function cannot take {1} as an argument
+1534#£it must have an array or two vectors
+1535#£The size of the zero matrix must be whole numbers
+1536#£ident must have the size, e.g. ident(3)
+1537#£The size of the unit matrix must be a whole number
+1538#£hat must have one vector
+1539#£The cross vector exists only for vectors in the plane
+1540#£{1} must have two vectors, e.g. {1}(a; b)
+1541#£{1} of an array cannot be calculated yet
+1542#£The cross-product exists only for vectors in space (3 coordinates)
+1543#£The determinant of two vectors exists only for vectors in the plane (2 coordinates)
+1544#£{1} must have an argument
+1545#£length must have one list, e.g. length(x)
+1546#£An element has a maximum of two indices, e.g. A[1; 2]
+1547#£The index should be a whole number: {1}
+1548#£The index is too big: {1}
+1549#£The index {1} is outside the matrix ({2} rows)
+1550#£The index {1} is outside the matrix ({2} bars)
+1551#£A list has only one index, e.g. x[2]
+1552#£A vector has only one column: the other index must be 1
+1553#£The vectors on the two sides of the equal sign must have an equal number of coordinates
+1554#£The matrices on the two sides of the equal sign must be the same size
+1555#£An array can only be equal to one matrix
+1556#£A vector cannot be equal to a number
+1557#£Calculations cannot be performed on definition fields. You may use your definition below for a calculation.
+1558#£and
+1559#£automatic
+1560#£exact
+1561#£numeric
+1562#£units on
+1563#£units off
+1564#£LaTeX code
+1565#£LaTeX codes
+1566#£equation
+1567#£equations
+1568#£image
+1569#£images
+1570#£argument
+1571#£arguments
+1572#£Significance level:
+1573#£The total sum of all cells is less than 50. {1} distribution is therefore a poor approximation in this case and the result unreliable.
+1574#£Degrees of freedom:
+1575#£Converting
+1576#£Customize the menu
+1577#£Choose which menu items are visible
+1578#£Digits and rounding
+1579#£Rewrite...
+1580#£Solve equation(s)
+1581#£Solve coupled differential equations
+1582#£Probability
+1583#£Ungrouped
+1584#£Grouped
+1585#£Insert Table
+1586#£Custom
+1587#£t-distribution
+1588#£Numbered equations
+1589#£Show all
+1590#£Hide all
+1591#£Set by level
+1592#£Sets visible menu items according to the level of mathematics you are taught according to
+1593#£Sine Fitting
+1594#£This feature requires WordMat+
+1595#£To access WordMat+, your school/organisation can:\n enter into a partnership agreement with Eduap.
+1596#£Read more about the other benefits of a partnership here:
+1597#£Check if your school has already signed a partnership
+1598#£Formula collection setup
+1599#£Choose your education
+1600#£Choose your subject levels
+1601#£You can always change your selections later
+1602#£Mathematics:
+1603#£Physics:
+1604#£Chemistry:
+1605#£Next
+1606#£Show in GnuPlot
+1607#£Functions   f(x)=...
+1608#£Title of the x-axis
+1609#£Title of the y-axis
+1610#£Var
+1611#£Point size:
+1612#£Show in Excel
+1613#£Excel embedded
+1614#£Grid
+1615#£Logarithmic X-axis
+1616#£Logarithmic Y-axis
+1617#£Labels
+1618#£Insert label
+1619#£Show explanation
+1620#£Points 2
+1621#£Syntax\nStarting Point - Vector\n(startx ; starty)-(dx ; dy)\n\nExamples: \n(1,1)-(1,2)     \n  Drawing vector (1.2) from point (1.1)\n\n(1,2)\n  Drawing vector (1.2) from point (0.0)\n\n(1,5 ; 4,5)\nIf decimal numbers are included; used as a separator
+1622#£New Vector
+1623#£Equation 1
+1624#£Equation 2
+1625#£Equation 3
+1626#£Variables must be x and y
+1627#£Prop
+1628#£Manu
+1629#£indep. variable
+1630#£dep. variable
+1631#£Integral Curves (Curves)
+1632#£Specify points through which solution paths should be drawn.
+1633#£Open
+1634#£Opens window where you can click on the point where there should be Integral Curve and where there can be sliders, so you can see the direction field change with the slider
+1635#£Interactive
+1636#£Wait!
+1637#£const
+1638#£from
+1639#£to
+1640#£Sliders
+1641#£Show only curves
+1642#£License:
+1643#£Auto set step length
+1644#£Sets the number of steps to 500
+1645#£Method used to solve the equations is 4th order Runge Kutta
+1646#£Inserting calculated bullets as list in Word document
+1647#£You can either enter a variable or function depending. of what is written in the equation. i.e. e.g. y or f(x) but not f.
+1648#£OK, new line
+1649#£Definitions at this location in the document
+1650#£Example: a=5, x>0
+1651#£Example: g, min, cm
+1652#£Dec.
+1653#£Runs in a browser, but not online
+1654#£Maxima connection method
+1655#£Connects to Maxima using .net dll file that handles communication
+1656#£Maxima is run through a shell using wsh. Each calculation is a new instance of Maxima. Is a bit slower and will briefly show a black cmd window, but not depended on dll.
+1657#£Requires WordMat+
+1658#£Check partnership
+1659#£Move up (tried before)
+1660#£Move down (to be tried later)
+1661#£The engines are tested from above.  \nThe next one is used when one motor can't.
+1662#£Unlimited precision
+1663#£Count on unlimited precision (big numbers)
+1664#£Maximum number of digits:
+1665#£Maximum number of digits in exact numbers
+1666#£Time limit (s):
+1667#£Time limit for a calculation in seconds (0 = no limit)
+1668#£Sci. notation, n:
+1669#£Scientific notation for numbers below 10^-n (0 = never)
+1670#£LaTeX enveloping characters about an equation
+1671#£In the text:
+1672#£The text before the LaTeX code for an equation inside the text, e.g. $
+1673#£The text after the LaTeX code for an equation inside the text, e.g. $
+1674#£On its own line:
+1675#£The text before the LaTeX code for an equation on a line separately, e.g. \[ or \begin{equation}
+1676#£The text after the LaTeX code for an equation on a line separately, e.g. \] or \end{equation}
+1677#£Units with upright writing (\mathrm)
+1678#£Entities are not recognized and written in italics (\mathrm{m})
+1679#£Doubletap Alt+M
+1680#£You need to enter exactly 3 angles/sides, but not just 3 angles. \nSo: \n1 side + 2 angles\n2 sides + 1 angle (possibly 2 solutions)\n3 pages
+1681#£Where exactly the answer is desired. May affect calculation time.
+1682#£No LaTeX code found. Select the code or place the cursor in a LaTeX equation (e.g. {1} or {2}).
+1683#£{1} {2} could not be read by VBACAS and is written as text ({3}) in the LaTeX document.
+1684#£The divergence {1} requires a vector function. The gradient of {2} is written {3}
+1685#£The curl {1} requires a vector function with 2 or 3 coordinates
+1686#£{1} requires {2} to have as many coordinates as variables
+1687#£The divergence {1} of a vector written out requires 2 or 3 coordinates (the variables x, y and z)
+1688#£"{1}" is coming soon in WordMat+ for Office.
+1689#£An error occurred in "{1}".
+1690#£Details
+1691#£Copy
+1692#£Units are turned on.
+1693#£Units are turned off.
+1694#£Show the task pane
+1695#£The language changes when WordMat+ is opened again.
+1696#£The shortest form, e.g. (x^2-1)/(x-1) to x+1 and sin(x)^2+cos(x)^2 to 1.
+1697#£The calculation took too long and was stopped.
+1698#£WordMat+ for Word (Word desktop and Word Online)\nVersion {1}\n\nDevelopment version: more features are added continuously.
+1699#£Edit equation
+1700#£/ fraction, ^ power, _ index, sqrt square root, the arrow keys move the cursor. Enter: insert. Ctrl+Enter: insert and calculate. Esc: cancel.
+1701#£Insert and calculate
+1702#£Click in the graph to draw a solution curve through the point.
+1703#£Zeros
+1704#£Extrema
+1705#£Intersections
+1706#£Point series {1}
+1707#£Show coordinates
+1708#£Chooses the graph window so that all points, zeros, extrema and intersections can be seen, and the axes when they are not far away.
+1709#£No grid
+1710#£Large grid
+1711#£Small grid
+1712#£Tangent
+1713#£Draws the tangent to the graph at the x-values written here. Several values are separated by ;
+1714#£Start point
+1715#£Without a start point the vector is drawn from (0;0).
+1716#£Drag down to continue the numbers: 1, 2 gives 3, 4 ... Double-click fills down to the last row.
+1717#£Type a formula with x, e.g. 2*x, and y is calculated for the rows from here down.
+1718#£Type the points in the table, or paste them from Excel or a Word table.\nDrag the small square to continue the numbers downwards: 1, 2 gives 3, 4 ...\nType a formula in the y column, e.g. 2x or =2x, and y is calculated for the rows from here down.\nSelect several cells with the mouse or Shift, and press Delete to delete them.\nThe button z gives a z column for points in space.
+1719#£Inserts the tangent of a function as a new function, and the point of tangency as a point. Choose the function and type x, or click on the graph.
+1720#£Drag in the graph to draw a vector.
+1721#£Click a label in the table and then on the graph to move it.
+1722#£Observation
+1723#£Frequency
+1724#£Relative frequency
+1725#£Cumulative frequency
+1726#£From
+1727#£To
+1728#£Number of observations
+1729#£Smallest value
+1730#£Lower quartile
+1731#£Median
+1732#£Upper quartile
+1733#£Largest value
+1734#£Mean
+1735#£Standard deviation
+1736#£Sample standard deviation
+1737#£Descriptive statistics calculated with WordMat:
+1738#£The table must contain the observations, or the observations in the first column and their frequencies in the second column.
+1739#£The table must have three columns: the start of the intervals, the end of the intervals and the frequencies.
+1740#£The start of each interval must be less than its end, and the intervals must not overlap.
+1741#£The frequencies must not be negative.
+1742#£Enter the number of different observations, and a table is created where you can enter the observations and their frequencies.\nWhen you have filled in the table, choose {1} or a diagram from the menu.
+1743#£Enter the number of intervals, and a table is created where you can enter the intervals and their frequencies.\nWhen you have filled in the table, choose {1} or a diagram from the menu.
+1744#£Diagram
+1745#£No diagram
+1746#£Relative frequency in percent
+1747#£Show quartiles
+1748#£Name
+1749#£per unit
+1750#£Type the observations and their frequencies in the table, or paste them from Excel or a Word table.
+1751#£Type the intervals and their frequencies in the table, or paste them from Excel or a Word table.
+1752#£Type the quartiles of each box plot: smallest value, lower quartile, median, upper quartile and largest value.
+1753#£The quartiles must be in increasing order.
+1754#£Raw data
+1755#£Ungrouped
+1756#£Grouped
+1757#£Cum. frequency
+1758#£Transfer to ungrouped
+1759#£Transfer to grouped
+1760#£Interval width
+1761#£Type the observations in the table, or paste them from Excel or a Word table.
+1762#£Add to box plot
+1763#£The table is inserted in the document when the window is closed.
+1764#£{1} observations are outside the intervals.
+1765#£The interval width must be greater than 0.
+1766#£Dot plot
+1767#£Area legend
+1768#£Shows in the upper right corner a box with the same width as the first interval, and how many percent of the observations it corresponds to.
+1769#£An observation on the boundary between two intervals belongs to the lower interval, ]a;b], which is the Danish standard, or to the upper interval, [a;b[.
+1770#£Degrees of freedom
+1771#£Show cumulative distribution
+1772#£Choose a distribution.
+1773#£An empty field means no limit on that side.
+1774#£Type a probability, e.g. 0.95 or 95 %, and the corresponding value is found.
+1775#£n must be a whole number greater than 0.
+1776#£p must be between 0 and 1.
+1777#£The standard deviation must be greater than 0.
+1778#£The number of degrees of freedom must be greater than 0.
+1779#£Observed
+1780#£Two-sided
+1781#£Left-sided
+1782#£Right-sided
+1783#£Critical region
+1784#£P-value
+1785#£The null hypothesis is rejected.
+1786#£The null hypothesis cannot be rejected.
+1787#£Confidence interval for p
+1788#£No test
+1789#£Expected
+1790#£Critical value
+1791#£Test statistic
+1792#£Insert result
+1793#£There must be at least two rows with an observed count and an expected count that is greater than 0.
+1794#£A goodness of fit test is carried out with WordMat
+1795#£At the significance level {1}% the null hypothesis, that the observations follow the expected distribution, can be rejected.
+1796#£At the significance level {1}% the null hypothesis cannot be rejected. There is therefore no evidence that the observations deviate from the expected distribution.
+1797#£Expected values:
+1798#£Test whether the grouped data are normally distributed
+1799#£{1} and {2} from the data
+1800#£Fit
+1801#£There must be at least {1} intervals when the mean and the standard deviation are estimated from the data.
+1802#£The test uses the grouped data on the tab {1}. Type them under {2} and tick {3}, so that the histogram can be compared with the normal distribution.
+1803#£Gives each curve a field z(t), so that it is drawn in space.
+1804#£The variables must be x and y, and z in space
+1805#£Equations as pictures
+1806#£Word Online takes several seconds to write an equation. With this setting WordMat+ inserts new equations and results as small pictures, which it calculates on as on equations. The pictures can be made equations again in the menu {1}.
+1807#£Turn equations into pictures
+1808#£Turns the equations of the selection, or of the whole document when nothing is selected, into pictures, which Word Online shows and changes much faster. WordMat+ calculates on the pictures as on equations.
+1809#£Turn pictures into equations
+1810#£Turns the pictures of equations in the selection, or in the whole document when nothing is selected, into real equations again, for example before the document is handed in.
+1811#£Equations turned into pictures: {1}
+1812#£Pictures turned into equations: {1}
+1813#£Not converted (unchanged): {1}
+1814#£There are no equations to convert.
+1815#£There are no pictures of equations to convert.
+1816#£Equations as pictures are only used in Word Online.
+1817#£The equations could not be converted.
+1818#£Mathematics
+1819#£Physics
+1820#£Close when a formula is chosen
+1821#£Hold down Ctrl when you click a formula, and the formula collection does not close.
+1822#£Insert 2
+1823#£The formula is inserted twice: one for documentation and one where you can put in numbers.
+1824#£Insert constants
+1825#£In physics and chemistry the physical constants are inserted as numbers in the second formula.
+1826#£Show in the pane
+1827#£The formula collection is shown in the pane beside the document instead of in a large window. It applies from the next time the formula collection is opened.
+1828#£Search:
+1829#£Note: The chemistry formula collection is not complete yet.
+1830#£Type in the search field, or click a topic.
+1831#£Click a figure to insert it in the document.
+1832#£Word Online can show the figures but cannot edit them. Open the document in Word for Windows or Mac to change them.
+1833#£Shows figures in the pane: triangles, unit circle, coordinate systems and monotonicity lines. Click a figure to insert it in the document.
+1834#£The file {1} has been downloaded. It is in the browser's downloads.
+1835#£Use Word as a LaTeX editor.\n\nYou can type LaTeX commands directly in the document for full control, or use Word's features and let WordMat+ convert to LaTeX.\n\nThe tex file is downloaded to the computer. If the document has pictures, a zip file with the tex file and the folder images is downloaded.
+1836#£Makes the LaTeX code as a tex file that is downloaded to the computer, so the code can be reviewed and adjusted in a LaTeX program
+1837#£Save
+1838#£About the x-axis
+1839#£About the y-axis
+1840#£Turns the graphs of the checked functions 360 degrees about the x-axis or the y-axis, so a solid of revolution appears in 3D. Each graph is turned from its Xmin to its Xmax.
+1841#£Equation
+1842#£Convert
+1843#£Side pane
+1844#£Shows the side pane with the settings, or closes it when it is open.
+1845#£WordMat+ uses JSXGraph for graphs and MathLive for entering equations. Both have the MIT license.
+1846#£Licenses
+1847#£piecewise
+1848#£In a bracket: @ or Alt+Enter gives a new row, & a new column.
+1849#£nth root
+1850#£matrix
+1851#£definite integral
+1852#£indefinite integral
+1853#£In a bracket: @ or Alt+Enter gives a new coordinate.
+1854#£sum
+1855#£product
+1856#£WordMat+ makes it possible to make mathematical calculations in Word.\nWordMat is made by Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
