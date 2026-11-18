@@ -933,3 +933,929 @@
 932#£Atjauninat uz jaunako beta versiju
 933#£Jums jaapzinas, ka beta versijas var but kludas. Tie galvenokart ir paredzeti testesanai. So funkciju ieteicams lietot galvenokart saskana ar Eduap noradijumiem
 934#£Rada vienadojuma kreisas un labas puses grafiku viena koordinatu sistema. Vienadojuma risinajumi ir krustojumu x vertiba. Neaizmirstiet tuvinat un talinat.
+935#£Formulu vaksana
+936#£Atver formulu kolekciju ar formulam no matematikas, fizikas un kimijas. Noklikskiniet uz formulas, lai to ievietotu dokumenta.
+937#£Atver dialogu, kura izvelies, ka parrakstit izveleto izteiksmi vai vienadojumu: samazinat, faktorizet, paplasinat, kvadratet pabeigsanu vai decimaldalu dalu. Vari ari sniegt pagaidu definicijas un izveleties rezultatu. Rezultats tiek rakstits jauna rinda.
+938#£Samazina izveleto izteiksmi vai abas vienadojuma puses lidz isakajai formai, piemeram, (x^2-1)/(x-1) lidz x+1 un sin(x)^2+cos(x)^2 uz 1. Rezultats tiek rakstits uz jaunas rindas.
+939#£Faktorize izveleto izteiksmi, piemeram, x^2-1=(x-1)(x+1). Rezultats tiek rakstits pec izteiksmes, tapat ka Calculate.
+940#£Reiziniet iekavas izveletaja izteiksme, piemeram, (x+1)^2=x^2+2x+1. Rezultats tiek rakstits pec izteiksmes, ka Calculate.
+941#£Parraksta kvadratisko polinomu ax^2+bx+c uz a(x+b/(2a))^2+c-b^2/(4a), piemeram, x^2+6x+5 uz (x+3)^2-4. Koeficienti var but burti. Strada ari ar vienadojumu, piemeram, apla vienadojumu x^2-4x+y^2+14y+53=25 uz (x-2)^2+(y+7)^2=25. Rezultats tiek rakstits uz jaunas rindas.
+942#£Nosuta izveleto izteiksmi tiesi Maxima un ievieto rezultatu ka jaunu vienadojumu. Izteiksmei jabut rakstitai Maxima sintakse, piemeram, integrate(x^2,x) vai factor(x^2-1). Ja nekas nav izvelets, komandu var ierakstit lodzina. Nepieciesams WordMats Maxima.
+943#£Testa vienadojums
+944#£Parbauda, vai atzimetais vienadojums ir patiess visam mainigo vertibam, piemeram, sin(x)^2+cos(x)^2=1. Vispirms tiek meginats precizs pieradijums, preteja gadijuma vienadojums tiek parbaudits skaitliski. Atbilde ir patiesa, nepatiesa (ar pretpiemeru), iespejams, patiesa vai nezinama, un tiek rakstita uz jaunas rindas.
+945#£Izsledzot vienu vai vairakus mainigos no vienadojumu sistemas: izvelieties vienadojumus un atlasiet tos mainigos, kurus izslegt (mazak neka vienadojumu skaits). Piemeram, x=2t+1 un y=t^2 ar t izslegtu dod y=(x-1)^2/4.
+946#£Risina vienu vai vairakus saistitus diferencialvienadojumus skaitliski, piemeram, x'=y un y'=-x. Rezultatu var attelot ka grafiku GeoGebra, ievietot ka sarakstu vai tabulu, vai nosutit uz Excel.
+947#£Noteikti.
+948#£Pievieno 'Define:' vienadojuma sakuma pie kursora vai jaunu vienadojumu ar to. Definicijas attiecas uz aprekiniem zemak dokumenta.
+949#£Ievieto 'Dzest definicijas:' jauna rinda. Definicijas virs tas netiek izmantotas zemak esosajos aprekinos.
+950#£Attelo izveleto funkciju/vienadojumu un punktu grafiku. Grafiku programma tiek izveleta iestatijumos vai paplasinot so pogu.
+951#£Grafiki
+952#£Grafiki un punkti tiek atteloti GeoGebra: WordMat GeoGebra loga ar WordMat+, citadi parlukprogramma. Internets nav nepieciesams.
+953#£Atver GeoGebra 5 un parnes izveletas funkcijas un definicijas.
+954#£Atver (vai iegulst) WordMat Excel lapas grafikiem un punktiem ar izveletajam funkcijam un punktiem tabula.
+955#£Parada izveleto funkciju saturu GeoGebra. Prieksraksta grafiks tiek pagriezts par 360 gradiem ap x asi, lai izveidotu 3D objektu. Definiciju kopa tiek uzrakstita pec komata, piemeram, f(x)=x^2, 0<=x<=2.
+956#£Statistikas tabulas
+957#£Pielago pasrakstitu funkciju, piemeram, f(x)=aáe^(báx)+c, punktiem tabula. Parametri ir mainigie, kas nav neatkarigie.
+958#£Excel regresija
+959#£Ievieto jaunu matematikas lauku. Numureta vienadojuma: padari vienadojumu numuretu.
+960#£Ievieto jaunu matematikas lauku, kas tiek automatiski numurets. Ja kursors ir vienadojuma, tas tiek numurets. Numura pozicija un veids tiek izveleti sadala Iestatijumi.
+961#£Ievieto atsauci uz nosauktu vienadojumu: vienadojuma numuru, kas tiek atjauninats, kad skaitli mainas.
+962#£Numuretajam vienadojumam, kura atrodas kursors, tiek pieskirts konkrets skaitlis. Talak seko sadi vienadojumi.
+963#£Atver LaTeX dialogu, kur dokumentu var parveidot .tex faila vai pdf faila (nepieciesams MikTex). Konverteto vienadojumu pievienojosas rakstzimes tiek izveletas sadala Opcijas, Notacija.
+964#£Parverst vienadojumu uz LaTeX
+965#£Aizvieto vienadojumu pie kursora ar ta LaTeX kodu. Ietverosas rakstzimes rindas vienadojumiem un vienadojumiem uz linijas atseviski tiek izveletas sadala Iestatijumi, Notacija.
+966#£Parverst LaTeX vienadojumos
+967#£Parvers LaTeX kodu izvele vienadojumu laukos. Ja nekas nav izvelets, LaTeX vienadojums tiek konvertets kursora. Kods atrodas pie $...$, \(...\), $$...$$, \[...\], \begin{align} utt., un aptverosas rakstzimes sadala Iestatijumi, Notacija. Atlase bez aptverosam rakstzimem tiek parveidota ka viens vienadojums. Alt+T arpus vienadojuma dara to pasu.
+968#£Dokuments
+969#£Konvertet uz LaTeX pdf failu
+970#£Parveido visu dokumentu uz LaTeX, partulko to PDF faila ar MikTex pdflatex un atver to noklusejuma PDF faila lietotne. MikTex ir jainstale.
+971#£Konvertet uz LaTeX .tex failu
+972#£Parvers visu dokumentu par .tex failu un atver to noklusejuma .tex faila programma (TexWorks, TexMaker, ...). Fails tiek ievietots mape blakus dokumentam.
+973#£Konvertet uz HTML
+974#£Atlase vai viss dokuments tiek parversts html lapa, kas tiek atverta parlukprogramma. Vienadojumi tiek rakstiti ka LaTeX un atteloti ar MathJax (nepieciesams internets), atteli ir iegulti lapa. Fails tiek ievietots mape blakus dokumentam, un html kods bez <head> ta tiek kopets starpliktuve, lai, piemeram, to varetu ielimet pielagota HTML bloka WordPress.
+975#£Pareja uz Markdown
+976#£Parvers markejumu vai visu dokumentu par markdown (.md) failu: virsraksti, saraksti, pedinas, treknraksts, slipraksts, svitrojums, kods, saites, tabulas un kajenes, un vienadojumi ka LaTeX ($...$ un $$...$$). Atteli tiek saglabati ka faili viena mape. Mape tiek novietota blakus dokumentam un atverta, un teksts tiek kopets uz starpliktuvi.
+977#£Parveidot markdown uz Word formatejumu
+978#£Tas parvers markdown izvele vai visa dokumenta par Word formatejumu: virsraksti (#), saraksti (- un 1st), citati (>), treknraksts (**), kursivs (*), svitrojums (~~), kods (' un '''), saites, atteli, tabulas, piezimes un horizontalas linijas, un LaTeX ($...$ un $$...$$) klust par vienadojumu laukiem.
+979#£Izvelies, kuru komandu katrs tastaturas isinajumtaustins (Alt+M, Alt+B, Alt+L...) izpildis, un apskati Word isinajumtaustinus matematikas laukiem.
+980#£Par WordMat+
+981#£Indekss {1}
+982#£Funkcijai {1} trukst argumenta. Piemeram, tips {1}(x) vai {1}^(-1)(x) ar Word funkcijas veidni
+983#£Trukst viena saraksta punkta
+984#£Logaritma bazes skaitlim jabut pozitivam un atskirigam no 1
+985#£Trukst iekavu {1}\n\nIekavas, kuram nav sakuma iekavas, ir izceltas zemak esosaja izteiksme ar papildu atstarpem apkart: \n\n      {2}  )  {3}
+986#£Iekavas {1} nesakrit ar {2}\n\nIekavas izteiksme ir izceltas ar papildu atstarpem: \n\n      {3}  {1} {4}  )  {5}
+987#£Trukst galigas tabulas {1}\n\nIekavas, kuram nav aizveramas iekavas, ir izceltas zemak esosaja izteiksme ar papildu atstarpem apkart: \n\n      {2}  {1} {3}
+988#£Sintakses kludas\n{1} operatoru nedrikst novietot izteiksmes sakuma.
+989#£Apgriezta trigonometriska funkcijas kluda: {1}\nArgumentam jabut starp -1 un 1
+990#£Sintakses kludas\n{1} operators nedrikst tikt novietots izteiksmes beigas.
+991#£Skaitlis ir parak liels, lai to parverstu decimalskaitli
+992#£Dalisana ar nulli
+993#£Radas kluda. Seit nevar ievietot formulu. \nPamegini aizvert visus Word dokumentus un restartet Word. \n\nKludas apraksts: \n{1}
+994#£Tabula nav skaitlu. Jums jaizveido tabula ar divam kolonnam: x-vertibas kreisaja kolonna un y-vertibas labaja kolonna.
+995#£Jums jaizveido tabula ar divam kolonnam. X vertibas kreisaja kolonna un Y vertibas labaja kolonna.
+996#£Lineara regresija veikta, izmantojot WordMat. WordMat:
+997#£Eksponenciala regresija, kas veikta, izmantojot WordMat. WordMat:
+998#£Potences regresija, kas veikta, izmantojot WordMat:
+999#£Noradiet polinomialas regresijas secibu (1-{1})\n\n(Maksimalo kartibu nosaka punktu skaits)
+1000#£Secibai jabut no 1 lidz {1}
+1001#£Polinomiala regresija pakape {1} veikta, izmantojot WordMat. WordMat:
+1002#£Krusttabulai jabut vismaz 2 rindam un 2 skaitlu kolonnam.
+1003#£{1} - koherences parbaude tiek veikta, izmantojot WordMat WordMat
+1004#£P-vertiba: {1} = {2}%
+1005#£Pie nozimibas limena {1}%, 0 hipotezi, ka korelacijas nav, var noraidit. T.i. Pastav korelacija starp abiem mainigajiem.
+1006#£Pie nozimibas limena {1}% 0 hipotezi nevar noraidit. Tadel nav pieradijumu, ka pastav korelacija starp abiem mainigajiem.
+1007#£Ir sagaidamas vertibas, kas ir mazakas par 5, vai ari visu sunu kopeja summa ir mazaka par 50. Tadel {1} sadalijums saja gadijuma ir vajs tuvinajums, un rezultats nav uzticams. Dazos gadijumos datu materialu var padarit izmantojamu, izmantojot citu grupejumu.
+1008#£P-vertiba:
+1009#£Q-vertiba:
+1010#£Kritiska Q-vertiba:
+1011#£WordMat Excel fails {1} netika atrasts. Si funkcija prasa WordMat instalaciju.
+1012#£Ievietoju ligzdotu Excel lapu...
+1013#£Meginajuma ievietot Excel tabulas radas kluda.
+1014#£Kluda, lasot failu: {1}
+1015#£GeoGebra 5 nevareja atvert: {1}
+1016#£GeoGebra 5 nav instalets tava datora. \n\nVelaties lejupieladet GeoGebra 5? (Ne: grafiks ir attelots GeoGebra kalkulatoru komplekta)
+1017#£GeoGebra lejupieladesies tava parlukprogramma. Ej uz Downloads un palaid instaletaju.
+1018#£Meginot atvert, radas kluda: {1}
+1019#£Si WordMat+ versija pati neparbauda jaunas versijas. Tagad jus tiksiet novirziti uz lejupielades lapu.
+1020#£WordMat+ nevar parbaudit jaunu versiju saja datora (WordMat MathMenu.dll ir pazudusi vai vecaka versija). Tagad jus tiksiet novirzits uz lejupielades lapu.
+1021#£Tev jau ir jaunaka WordMat+ v.{1}
+1022#£Ir pieejama jauna WordMat versija lejupieladei. \nZinas:  \n{1}\n\nNoklikskiniet uz OK, lai saktu atjauninajumu.
+1023#£Jauna versija {1}
+1024#£Ir pieejama jauna WordMat versija lejupieladei. \nZinas:  \n{1}\nTagad jus tiksiet novirzits uz lejupielades lapu
+1025#£Bija kluda, parbaudot atjauninajumu. Tagad jus tiksiet nosutits uz majaslapu, kur varesiet redzet, vai ir jauns atjauninajums. Pasreizeja versija ir: {1}
+1026#£Atjauninajumu nevar automatiski lejupieladet saja datora (WordMat MathMenu.dll trukst vai ir vecaka versija). Tagad jus tiksiet novirzits uz lejupielades lapu.
+1027#£Instalacijas faila lejupielade
+1028#£Instalacijas failam nav deriga digitala paraksta no Eduap. Tas atkal ir dzests.
+1029#£Instalacijas fails netika pareizi lejupieladets
+1030#£Instalacijas fails ir lejupieladets. \nNoklikskiniet uz OK, lai saktu atjauninajumu. Jums tiks piedavats saglabat un aizvert Word.
+1031#£Instalaciju nevareja palaist (kluda {1}).
+1032#£Atjauninasanas laika radas kluda (kluda {1}).
+1033#£Si WordMat+ versija nevar lejupieladet un instalet atjauninajumus. Tagad jus tiksiet novirziti uz lejupielades lapu.
+1034#£Atjauninasanai uz beta versiju nepieciesams WordMat+.
+1035#£Velies sakt instalet beta versiju?
+1036#£Atjauninajuma beta versija
+1037#£Instalejot beta versiju, radas kluda: {1}
+1038#£Pirkuma lapu saja datora nevar atvert (trukst WordMat MathMenu.dll vai ir vecaka versija). Instalejiet WordMat velreiz.
+1039#£Komanda vel nav pieejama WordMat+. Saisnes izvelies citu komandu taustinam.
+1040#£Ieprieksejais rezultats
+1041#£WordMat+: pirms vienadojuma nav rezultata.
+1042#£WordMat+: vairs nav rezultatu. Pieskaries velreiz, lai uzzinatu jaunako.
+1043#£Radas kluda: {1}
+1044#£Rezultats netika istenots.
+1045#£Instalacijas fails ir lejupieladets. \nNoklikskiniet uz OK, lai saktu atjauninajumu
+1046#£Eduap serveris atgrieza kludu. \nCerams, ka ta ir pagaidu problema. Ja problema saglabajas un jums ir deriga WordMat+ licence, ludzu, sazinieties ar eduap@eduap.com\n\nKluda: wordmatlicense neizdevas
+1047#£Nav interneta
+1048#£WordMat+ nevar parbaudit licenci, jo WordMat MathMenu.dll nevar izmantot saja datora. \n\nFails ir pazudis, ir vecaka versija vai to bloke drosibas iestatijumi (antiviruss, galapunktu aizsardziba). \n\nInstalejiet WordMat velreiz vai sazinieties ar savu IT nodalu. Lidz tam WordMat+ darbosies ka bez licences.
+1049#£Noklikskini Atlaut divreiz pec si loga aizversanas\nTev tas jadara tikai vienu reizi.
+1050#£Atlauja WordMat
+1051#£GeoGebra matematikas lietotnes nav atrastas
+1052#£Programmas faili nav atrasti
+1053#£Sinusa regresijai nepieciesama aktiva WordMat+ licence.
+1054#£Sinusa regresija, kas veikta, izmantojot WordMat ({1}): WordMat (ieksa):
+1055#£Excel regresija...
+1056#£WordMat Excel fails Graphs.xltm nebija atrodams. Excel regresijai nepieciesams instalet WordMat.
+1057#£Meginajuma ievietot Excel tabulas bija kluda. Tas varetu but tapec, ka Excel agrak ir avarejis. Aizveriet atvertas Excel tabulas un atveriet Excel pirms meginat velreiz caur WordMat.
+1058#£{1} ir vairaki nedefineti mainigie. Neatkarigo mainigo nevar identificet. Izmantojiet x vai t ka neatkarigo mainigo.
+1059#£Jabut vismaz 3 datu punktiem.
+1060#£Sinusa regresija
+1061#£Ar FFT nevareju novertet frekvenci.
+1062#£izpildija kopa ar WordMat{1}:
+1063#£Modeli nav ieklauts neatkarigais mainigais {1}
+1064#£Modelim nav parametru (mainigo, iznemot {1})
+1065#£Jabut vismaz tik daudz punktu, cik parametru ({1})
+1066#£Pielagotai regresijai nepieciesama Maxima, ja nav aktivas WordMat+ licences.
+1067#£Regresija nespeja atrast parametrus. Pamegini ar citiem sakuma minejumiem
+1068#£{1} izplatiba
+1069#£Apsveicu! \nJusu skola ir noslegusi partneribu, un WordMat+ tagad ir aktivizets.
+1070#£Panakumi
+1071#£Diemzel\nJusu skola vel nav noslegusi partneribu.
+1072#£Nav partneribas
+1073#£XMIN jabut >0, lai izmantotu logaritmisko x asi.
+1074#£YMIN jabut >0, lai izmantotu logaritmisko y asi.
+1075#£Grafiku nevareja ievietot: {1}
+1076#£WordMat+ ieslegts {1}
+1077#£Versija: {1}
+1078#£WordMat+ lauj veikt matematiskos aprekinus Word vide. Aprekinus veic CAS, kas ir dala no WordMat+, tapec nav jainstale citas programmas. \nWordMat razo Mikael Sams¿e S¿rensen, Nyborg gimnazija, EDUAP 2009-{1}.
+1079#£Veiksme!
+1080#£Dati trukst
+1081#£{1} sakuma vertiba nav skaitlis
+1082#£Sakuma, beigu un sola garumam jabut skaitliem
+1083#£Diferencialvienadojumus nevareja atrisinat: {1}
+1084#£Izvelieties vismaz vienu mainigo, ko attelot
+1085#£Parak daudz punktu GeoGebra. Izvelies lielaku sola garumu.
+1086#£Excel nevareja atvert: {1}
+1087#£Sakums nav skaitlis
+1088#£Beigas nav skaitlis
+1089#£Sola garums nav skaitlis
+1090#£Ir {1} soli. Drosi vien tas nestrada GeoGebra ar tik daudziem soliem.
+1091#£Tu nevari vienlaikus atrisinat vienadojumu {1} un vienlaikus to definet.
+1092#£Diferencialvienadojums:
+1093#£Sakuma stavoklis:
+1094#£Nosauktie vienadojumi
+1095#£Izvelieties vienadojumu, uz kuru atsaukties, un noklikskiniet uz OK (vai dubultklikski). Atsauce klust par vienadojuma numuru un tiek atjauninata, kad skaitli mainas.
+1096#£Lai velak ievietotu atsauci uz vienadojumu, izvelieties 'Insert reference to equation' sadala 'New equation'.
+1097#£Restartet Maxima
+1098#£Izmanto Word ka LaTeX redaktoru. \n\nJus varat ierakstit LaTeX komandas tiesi dokumenta, lai pilniba kontroletu, vai izmantot Word funkcijas un laut WordMat+ konverteties uz LaTeX. \n\nLai izveidotu PDF failu, jainstale MikTex. Ja tas trukst, jus tiksiet nosutits uz instalaciju. \n\nBlakus dokumentam tiek izveidota mape ('dokumenta nosaukums-latekss') ar tex failu un atteliem.
+1099#£Atbalstitais formatejums: \n- Virsraksti (stili) klust par sekcijam un apakssekcijam: \n   Nosaukums = nodala (dokumenta klase, gramata vai zinojums; raksts: dokumenta nosaukums)\n   Virsraksts 1 = sadala, virsraksts 2 = apakssadala, virsraksts 3 = apaksapakssadala\n- Treknraksts, kursivs un pasvitrots fonts\n- Lapas numurs ieslegts/izslegts ka dokumenta\n- Vienadojumi: rinda, numureti un nenumureti (rakstzimes ievietojot sadala Iestatijumi, Notacija)\n- Punktu saraksti (punkti un skaitli)\n- Tabulas\n- Atteli, formas un diagrammas\n- Bibliografija
+1100#£LaTeX iestatijumi
+1101#£Dokumentu klase:
+1102#£Fonta izmers:
+1103#£Izmantojiet Word malas
+1104#£Izmantojiet dokumenta malas, nevis LaTeX noklusejuma malas (iepakojuma geometrija)
+1105#£Titullapa
+1106#£Atseviska titullapa ar dokumenta nosaukuma nosaukumu un dokumenta autoru
+1107#£Satura raditajs
+1108#£Atseviska satura raditaja lapa pec titullapas
+1109#£Numuretie posmi
+1110#£Virsraksti ir numureti
+1111#£Fonta izmers vienkarsam tekstam. Word fonta izmers netiek izmantots
+1112#£LaTeX preambula
+1113#£Automatiski generets:
+1114#£Pasi:
+1115#£Dzesu savu ievadu
+1116#£Izveido LaTeX kodu ka tex failu un atver to noklusejuma tex failu programma (TexWorks, TexMaker...), lai kodu varetu parskatit un pielagot
+1117#£Izveido LaTeX dokumentu ka pdf failu, izmantojot MikTex. MikTex, kas jainstale. Jaizmanto tikai vienkarsiem dokumentiem
+1118#£Pagaidi...
+1119#£{1}... (tavs pasa ievads) ... \n\n{2}
+1120#£Izvelies, ka parfrazet so frazi.
+1121#£Izvades vienibas:
+1122#£Samazinat
+1123#£Faktors
+1124#£Ievieto arpus iekavam, piemeram, x^2-1 lidz (x-1)(x+1).
+1125#£Reiziniet iekavas, piemeram, (x+1)^2 uz x^2+2x+1.
+1126#£Piemeram, x^2+6x+5 lidz (x+3)^2-4, ari apla vienadojums.
+1127#£Visi decimalskaitli tiek parversti dalskaitlos, un rezultats ir precizs.
+1128#£Lime uz tas pasas linijas
+1129#£Rezultats tiek rakstits pec izteiksmes ar vienadibas zimi (nevis ar vienadojumu)
+1130#£Logaritma izvade
+1131#£Auto
+1132#£Izvelieties mainigos, kurus izslegsiet.
+1133#£Labakaja gadijuma no {2} vienadojumiem var izslegt {1} mainigos.
+1134#£Izvelieties maksimali {1} mainigos, jo ir {1} vienadojumi.
+1135#£Izslegt maksimalo {1} mainigo skaitu
+1136#£Vai ari raksti pats, atdalot tas ar kotiem
+1137#£Izvelieties lidz {1} mainigajiem
+1138#£Vai ari rakstiet tos atdalitus ar komatu (parejie tiek automatiski izveleti)
+1139#£Mainigo likvidesana
+1140#£Atrisinat vienadojumu
+1141#£Vienadojumus var atrisinat divos dazados veidos. Ja tev ir problemas ar vienadojumu, var but laba ideja izmeginat citu metodi.
+1142#£Risinajumus atrod, 'minot' daudzus dazadus risinajumus. Metode darbojas gandriz visos vienadojumos, tacu risinajumus var nepamanit un atrast nepatiesus risinajumus.
+1143#£Bridinajums: Ierices ir ieslegtas. \nUzmanieties no mainigajiem, kas ir vienibas, piemeram, A, C, F, H, J, K, L, N, S, T, V, W, m, g, u, s
+1144#£Laika limits, ciparu skaits un n zinatniskaja pieraksta jabut skaitliem.
+1145#£Laika limitam jabut vismaz 0, ciparu skaitam vismaz 20, un n zinatniskaja pieraksta - veselam skaitlim no 0 lidz 100.
+1146#£Izvelieties vismaz vienu CAS pieteikumu.
+1147#£Rezerves kopijas mape ir: {1}
+1148#£WordMat+ ir ieslegts.
+1149#£Tam nepieciesams WordMat+.
+1150#£Iestatijumi tiek atiestatiti.
+1151#£Decimalie skaitli
+1152#£Dokumentu {1} Markdown
+1153#£Markdown {1} Word
+1154#£WordMat trijstura risinatajs tiek izmantots ar ievadi:
+1155#£Ta ka kosinusa sakaribu mes ieprieks atrisinajam prieks
+1156#£Kvadratveida pabeigsanai nepieciesams kvadratisks polinoms
+1157#£{1} jabut diviem numuriem, piemeram, binomial(7; 2)
+1158#£No kuriem jaizsledz vismaz divi vienadojumi, piemeram, eliminate([x=2t+1; y=t^2]; t)
+1159#£eliminate prasa izslegt vienadojumus un mainigos, piemeram, eliminate([x=2t+1; y=t^2]; t)
+1160#£TestTF prasa vienadojumu
+1161#£Izteiksme klust parak liela, lai to reizinatu
+1162#£binomial (n; r) prasa n{1}0
+1163#£Pienemumam jabut nevienadibai, piemeram, x>0: {1}
+1164#£Pienemumam jabut nevienadibai starp mainigo un skaitli, piemeram, x>0
+1165#£Vertibu pienemuma nevar aprekinat: {1}
+1166#£Negativa skaitla taisna sakne nav defineta
+1167#£Negativa skaitla pakape sim eksponentam nav defineta
+1168#£Skaits ir parak liels
+1169#£Ln un log ir defineti tikai pozitiviem skaitliem
+1170#£diff jabut 1 lidz 3 argumentiem: diff(izteiksme; x; n)
+1171#£Otrajam parametram diferenciala jabut mainigajam, piemeram, diff(x^2; x)
+1172#£Tresajam parametram diferenciala jabut veselam skaitlim
+1173#£Tresajam parametram diferenciala jabut skaitlim no 0 lidz 100
+1174#£Noradiet, pec kura mainiga diferencet, piemeram, diff(expression; x)
+1175#£{1} vel nav iespejams atskirt
+1176#£Uzraksti limita vertibu ka limi ar x{1}a zemak
+1177#£Pec limes pietrukst izskata
+1178#£Fragmentarai funkcijai katra rinda jabut izteiksmei un nosacijumam
+1179#£Fragmentara funkcija seit nav defineta (neviens no nosacijumiem nav izpildits)
+1180#£Polara notacija r{1}v prasa, lai ieslegtu kompleksos skaitlus
+1181#£Uzraksti kompleksu skaitli polara forma, piemeram, r{1}v
+1182#£{1} jabut vienam argumentam, piemeram, {1}(3+2i)
+1183#£0 arguments nav definets
+1184#£Vienadojumu nevar sadalit reala un iedomata dala
+1185#£Visi kompleksie skaitli ir risinajumi
+1186#£Vienadojumam ir bezgaligs risinajumu skaits ({1} ir uz liknes)
+1187#£{1} kvadratsakne nav atrodama
+1188#£{1} pazimes nav zinamas
+1189#£{1} definiciju kopa var saturet tikai {2}: {3}
+1190#£{1} definiciju kopai jaietver {2}: {3}
+1191#£Definicija nav vienadas zimes: {1}
+1192#£Ta nav definicija: {1}
+1193#£Definicija nav pilniga: {1}
+1194#£{1} ir komanda un to nevar definet
+1195#£Funkcijas definicija parametriem jabut mainigiem, piemeram, f(x)=2x+1: {1}
+1196#£Iebuvetu funkciju nevar definet: {1}
+1197#£{1} ir konstante un to nevar definet
+1198#£Definicijas kreisaja puse jabut nosaukumam vai funkcijai, piemeram, a=5 vai f(x)=2x+1: {1}
+1199#£Indekss {1} atrodas arpus matricas {2} ({3} rindas)
+1200#£Indekss {1} ir arpus matricas {2} ({3} svitras)
+1201#£Indeksa {1} ir arpus {2} ({3} vienumi)
+1202#£Definicija izmanto pati sevi (rekursiva definicija)
+1203#£Funkcijai {1} jabut {2} argumentiem(-iem)
+1204#£Tikai viena mainiga funkciju var diferencet pec etiketes: {1}
+1205#£{1} nav defineta {2} (definicijas kopa ir {3})
+1206#£{1} nevar izmantot ka skaititaju, jo {1} ir defineta. Izdzes definiciju vai izmanto citu nosaukumu.
+1207#£Slieksni {1} nevar atrast, jo {1} ir defineta. Dzesiet definiciju vai izmantojiet citu nosaukumu.
+1208#£Iegult pec {1} nav iespejams, jo {1} ir definets. Izdzes definiciju vai izmanto citu nosaukumu.
+1209#£Diferenciaciju pec {1} nevar atskirt, jo {1} ir defineta. Izdzes definiciju vai izmanto citu nosaukumu.
+1210#£Parak {1} nevar atrisinat, jo {1} ir defineta. Izdzes definiciju vai izmanto citu nosaukumu.
+1211#£So izteiksmi GeoGebra nevar attelot: {1}
+1212#£GeoGebra nevar izmantot izteiksmei WordMat+
+1213#£GeoGebra nevar palaist (WordMat MiniBrowser)
+1214#£GeoGebra nevar palaist (WordMat AppleScript)
+1215#£GeoGebra tika aptureta, jo aprekins aiznema vairak neka {1} sekundes
+1216#£GeoGebra nav instaleta (WordMat geogebra-matematikas lietotnes)
+1217#£GeoGebra nevar palaist (WordMat WebViewWrap nav pieejams)
+1218#£GeoGebra nevar palaist
+1219#£GeoGebra nevar palauties uz iericem
+1220#£GeoGebra to nevar aprekinat: {1}
+1221#£GeoGebra seit nevar izmantot {1}
+1222#£Testa vienadojumam nepieciesams vienadojums
+1223#£GeoGebra nevar izmantot sim diferencialvienadojumam
+1224#£GeoGebra nevar izmantot so nosacijumu
+1225#£GeoGebra nevar izmantot sos terminus
+1226#£GeoGebra nevar atrisinat diferencialvienadojumu
+1227#£GeoGebra nevar izslegt mainigos
+1228#£GeoGebra nevar atrisinat vienadojumu
+1229#£GeoGebra atrada tikai sarezgitus risinajumus
+1230#£GeoGebra to nevar aprekinat
+1231#£GeoGebra atrada tikai vienu sarezgitu rezultatu
+1232#£Grafiku nevareja attelot: {1}
+1233#£Grozamo korpusu nevareja demonstret: {1}
+1234#£Izvelieties vienu vai vairakas funkcijas, piemeram, f(x)=x^2 vai y={1}x. Definiciju kopa tiek rakstita pec komata, piemeram, f(x)=x^2, 0{2}x{2}2.
+1235#£{1} nav funkcija no x un to nevar attelot ka griezes momentu.
+1236#£Graph nav pieejams Mac datoriem.
+1237#£Grafu nevareja attelot grafika: {1}
+1238#£Grafiks neatbalsta funkcijas ar vairakiem mainigajiem: {1}
+1239#£Grafiks nevar attelot vektorus un liknes: {1}
+1240#£Grafiks nevar attelot vektorus un punktus 3D:{1}
+1241#£Ievadiet vertibu {1}\n\nTo var pielagot pec tam pielagotas funkcijas Graph. Tu pat vari izveidot animaciju, kur vertiba mainas nepartraukti, sadala Calculate/Animate.
+1242#£Virziena joslu nevareja attelot: {1}
+1243#£Sova grafiks
+1244#£Tas atrisina {1}, kas ari ir vieniba. Tadejadi {1} nav vieniba saja vienadojuma. Apsveriet iespeju izmantot citu mainiga nosaukumu vai izslegt vienibas.
+1245#£Atzime vienadojumu, ko jaatrisina
+1246#£Izvelieties diferencialvienadojumu, ko risinat
+1247#£Iestatit funkciju sakuma nosacijumiem
+1248#£nevareja atrisinat
+1249#£Diferencialvienadojumu risina, izmantojot . WordMat ({1})
+1250#£ar sakuma nosacijumu {1}
+1251#£ar sakotnejiem nosacijumiem {1}
+1252#£ar robeznosacijumiem {1}
+1253#£Vienadojums {1} izmantot WordMat.
+1254#£Izteiciens {1} WordMat.
+1255#£Samazinats
+1256#£Faktorizeta
+1257#£reizinats
+1258#£Parrakstits ar kvadratveida pabeigsanu
+1259#£Parrakstits dalskaitlos
+1260#£Parafrazets
+1261#£Mainigos {1} izslegt, izmantojot WordMat.
+1262#£So mainigo {1} izslegt, izmantojot WordMat.
+1263#£Izvelieties vienadojumu parbaudei
+1264#£Vienadojums ir patiess.
+1265#£Vienadojums ir speka visam {1} vertibam.
+1266#£Vienadojums ir nepareizs.
+1267#£Vienadojums ir nepaties, jo kreisa puse nav defineta.
+1268#£Vienadojums ir nepareizs, jo laba puse nav defineta.
+1269#£Vienadojums ir nepareizs visam {1} vertibam.
+1270#£Vienadojums nav patiess visam {1} vertibam. Piemeram, tas ir nepatiesigs attieciba uz {2}
+1271#£, kur kreisa puse nav defineta.
+1272#£kur laba puse nav defineta.
+1273#£Vienadojums, visticamak, ir patiess. To nevaretu precizi pieradit, bet abam pusem ir vienada skaitliska vertiba.
+1274#£Vienadojums, visticamak, ir patiess visam {1} vertibam. To nevar precizi pieradit, bet tas ir patiess visos {2} punktos, kuros tas ir parbaudits skaitliski.
+1275#£Vienadojums nav patiess visam {1} vertibam.
+1276#£Nav iespejams noteikt, vai vienadojums ir patiess.
+1277#£Vienadojums tiek parbaudits, izmantojot WordMat.
+1278#£Kluda definicija {1}: {2}
+1279#£Nodoklu sistema tiek atrisinata skaitliski {1}, izmantojot WordMat.
+1280#£Nodoklu sistema tiek atrisinata {1}, izmantojot WordMat.
+1281#£Nevienadiba tiek atrisinata skaitliski {1}, izmantojot WordMat.
+1282#£Nevienadiba tiek atrisinata {1}, izmantojot WordMat.
+1283#£Vienadojums tiek atrisinats skaitliski {1} intervala {2}, izmantojot WordMat.
+1284#£Vienadojums tiek atrisinats skaitliski {1}, izmantojot WordMat.
+1285#£Vienadojums tiek atrisinats {1}, izmantojot WordMat.
+1286#£Aprekins tika apturets pirms visa intervala parmeklesanas. Var but vairaki risinajumi.
+1287#£Aprekins tika apturets, pirms visi risinajumi tika atrasti. Var but vairaki risinajumi.
+1288#£Vienadojumu sistema nebija risinajuma {2} mainigajiem {1}
+1289#£Nevienadibai definiciju kopa nebija risinajumu {1}
+1290#£Nevienadibai nebija risinajumu {2} mainigajiem {1}
+1291#£Risinajumi netika atrasti
+1292#£Vienadojumam definicijas kopa nebija risinajumu {1}
+1293#£Vienadojumam nebija risinajumu {2} mainigajiem {1}
+1294#£Pieraksti {1}x pec izteiksmes integrali (piemeram, {2}x^2 {1}x)
+1295#£Vienadojuma ir struktura, ko VBACAS vel nevar aprekinat: \n\n      {1}
+1296#£Uzrakstit summu ar k=a zem rakstzimes un b virs rakstzimes (piemeram, k=1 un n)
+1297#£Vienadojuma ir akcents, ko VBACAS vel nevar aprekinat: \n\n      {1}
+1298#£Vienadojuma ir struktura, ko VBACAS vel nevar aprekinat (daudzrindu vienadojumu masivs): \n\n      {1}
+1299#£Vienadojuma ir struktura, ko VBACAS vel nevar aprekinat (piemeram, summa, integralis, robeza, matrica vai akcents): \n\n      {1}
+1300#£Pieraksti {1}x {1}y pec izteiksmes dubultintegrali (piemeram, {2}xáy {1}x {1}y)
+1301#£Integralim jabut {1} diferencialiem (piemeram, {2}x {2}y)
+1302#£Vienadojums skiet ietver:
+1303#£tacu Word to ir saglabajis, lai funkcijas arguments turpinatos pec iekavam:
+1304#£To nevar redzet vienadojuma, bet dod citu rezultatu.
+1305#£Vai vienadojumu vajadzetu labot ta, lai tas tiktu aprekinats ta, ka tas ir? \n(Ne: aprekinat, jo Word to ir saglabajis)
+1306#£Tev jaizvelas tabula
+1307#£Tabula nav derigu skaitlu paru
+1308#£integrate jabut 1, 2 vai 4 argumentiem: integrate(izteiksme; x) vai integrate(izteiksme; x; a; b)
+1309#£Otrajam parametram integrate jabut mainigajam, piemeram, integrate(x^2; x)
+1310#£Noradiet, pec kura mainiga integret, piemeram, integrate(izteiksme; x)
+1311#£Integrali nevar aprekinat: integrejama vertiba nav defineta visa intervala
+1312#£Integrali nevareja skaitliski aprekinat pietiekami precizi (integrands parak svarstas)
+1313#£Vienadojuma atrasana
+1314#£Izlasot vienadojumu
+1315#£Aizvietojot vienadojumu
+1316#£Vienadojumu nevareja parverst LaTeX ({1}): {2}
+1317#£LaTeX {1} vienadojums
+1318#£{1} {2} nevareja parverst vienadojumos un nav mainita: {3}
+1319#£LaTeX kodu nevareja parverst vienadojuma: {1}
+1320#£Kods ir tukss.
+1321#£Si funkcija nav atbalstita Mac datora.
+1322#£Si WordMat+ versija nevar izveidot pdf failus ar MikTex. Izveido tex failu.
+1323#£MikTex nav instalets. Tagad jus tiksiet nosutits uz miktex.org, kur to vares lejupieladet. Pirmo reizi palaidot parveidotaju, jums tiks piedavats lejupieladet dazas pakotnes. Vienkarsi noklikskiniet uz OK.
+1324#£Saglabat dokumentu pirms konvertesanas uz LaTeX. LaTeX faili tiek ievietoti mape blakus dokumentam.
+1325#£Dokuments nav tava datora (OneDrive). Saglaba to mape datora pirms konvertesanas.
+1326#£Vienadojumu parveidosana
+1327#£Formatesanas konvertesana
+1328#£Attelu konvertesana
+1329#£Parveidosanas tabulas
+1330#£Rindkopu konvertesana
+1331#£Faila rakstisana
+1332#£{1} {2} nevareja saglabat ka failu un tika aizstats ar rami ar tekstu "Trukst attela n".
+1333#£Dokumentu nevareja parveidot uz LaTeX: {1}
+1334#£WordMat+ neatrada nevienu mapi, kura butu atlauts rakstit saja Mac datora.
+1335#£MikTex (pdflatex.exe) netika atrasts.
+1336#£pdflatex darbojas {1}. laiks
+1337#£Kluda notika, kad pdflatex.exe vadija.
+1338#£LaTeX dokumentu nebija iespejams iztulkot. pdflatex deva kludu: \n\n{1}\n\nNoklikskiniet uz OK, lai atvertu tex failu.
+1339#£PDF fails ir izveidots, bet sie simboli pdflatex nevar rakstit. Tie ir aizstati ar treknrakstu ? PDF faila: \n\n{1}
+1340#£PDF fails netika atrasts. Noklikskiniet uz OK, lai atvertu tex failu un atrastu kludu.
+1341#£mape atteliem
+1342#£dokumenta mape
+1343#£Parveido saites un piezimes
+1344#£Kopesana uz starpliktuvi
+1345#£HTML lapa tiek saglabata ka\n{1}
+1346#£HTML kodu nevareja nokopet uz starpliktuvi.
+1347#£{1} {2} nav iespejams izlasit un ir rakstits ka teksts.
+1348#£{1} {2} nevareja saglabat un tika aizstats ar tekstu "Trukst attela n".
+1349#£Dokumentu nevareja parverst html ({1}): {2}
+1350#£(not used)
+1351#£Markdown fails tiek saglabats ka\n{1}
+1352#£Markdown teksts tiek kopets uz klipbordu.
+1353#£Markdown tekstu nevareja nokopet uz starpliktuvi.
+1354#£Atteli tiek saglabati ka faili viena mape.
+1355#£{1} {2} nevareja izglabt.
+1356#£Dokumentu nevareja parverst uz markdown ({1}): {2}
+1357#£*Trukst attela {1}*
+1358#£Markdown nebija iespejams parverst: {1}
+1359#£{1} {2} netika atrasts datora un nav ievietots.
+1360#£{1} {2} nevareja parverst vienadojumu laukos.
+1361#£LaTeX veidne (LatexWordTemplate.dotx) netika atrasta. Ta instalejas kopa ar WordMat.
+1362#£limit jabut 3 vai 4 argumentiem: limit(izteiksme; x; a) vai limit(izteiksme; x; a; plus)
+1363#£Ceturtajam parametram limita jabut plus vai minus
+1364#£Robeza neeksiste
+1365#£{1} jabut 4 argumentiem: {1}(izteiksme; k; a; b)
+1366#£Otrajam parametram {1} jabut mainigajam, piemeram, {1}(k^2; k; 1; n)
+1367#£Apakseja robeza nevar but bezgaliga
+1368#£Parak daudz locitavu (maksimalais {1})
+1369#£Terminam {1}={2} nav vertibas
+1370#£Virkne ir divergenta (summa neeksiste)
+1371#£Jaudas summu aprekinat nav iespejams
+1372#£Nulles matricai jabut izmeram no 1 lidz 100
+1373#£Vienibas matricai jabut izmeram no 1 lidz 100
+1374#£Matricas reizinajums prasa, lai pirmajam butu tikpat daudz kolonnu, cik otrajam ir rindas ({1} un {2})
+1375#£Masivu var pacelt tikai lidz veselam skaitlim (vai T, ja ir transponets)
+1376#£Matricu var pacelt tikai lidz veselam skaitlim
+1377#£Tikai kvadratiskas matricas var paaugstinat lidz pakapei (matrica ir {1})
+1378#£Eksponents ir parak liels
+1379#£Determinants eksiste tikai kvadratiskajam matricam (matrica ir {1})
+1380#£Parametru masiva determinantu var aprekinat ne vairak ka {1}{1}
+1381#£Tikai kvadratiskajam matricam ir apgriezts (matrica ir {1})
+1382#£Matricai nav apgriezta (determinanta vertiba ir 0)
+1383#£Parametru masiva inverso var aprekinat ne vairak ka {1}{1}
+1384#£Maxima nav uzstadits (WordMat)
+1385#£Maxima nevar palaist (WordMat MathMenu.dll trukst)
+1386#£Maxima nevar iedarbinat
+1387#£Maxima nevar palaist (WordMat AppleScript)
+1388#£Maxima uzdeva jautajumu, uz kuru WordMat+ nevar atbildet
+1389#£Maxima tika aptureta, jo aprekins aiznema vairak neka {1} sekundes
+1390#£Savienojums ar Maxima caur WSH prasa partneribu
+1391#£Maxima nevareja palaist caur WSH: kluda {1} {2}
+1392#£Maxima koda kludas (koda lauki vai koda fails): {1}
+1393#£Maxima nevar aprekinat {1}
+1394#£Maxima nevar izmantot {1} WordMat+
+1395#£Sakotnejie apstakli divos dazados punktos
+1396#£Sie apstakli
+1397#£Maxima nevar atrisinat diferencialvienadojumu
+1398#£Maxima to nevar aprekinat
+1399#£Maxima atrada tikai vienu kompleksu rezultatu
+1400#£Maxima nevar izslegt mainigos
+1401#£Maxima nevar atrisinat nevienadibu
+1402#£Maxima nevar atrisinat vienadojumu
+1403#£Maxima atrada tikai kompleksus risinajumus
+1404#£Gnuplot nav pieejams Mac datoram. Izmanto GeoGebra.
+1405#£Grafiku nevareja attelot ar Gnuplot: {1}
+1406#£Kluda Maxima koda
+1407#£Koda laukiem vai koda failam ir kluda: {1}
+1408#£Ieraksti Maxima komandu
+1409#£Kluda Maxima koda (koda laukos): {1}
+1410#£Ir parak daudz kolonnu
+1411#£Aprekins tika apturets
+1412#£Dazu aprekinu termins ir parsniegts
+1413#£Aprekins tika apturets, jo tas aiznema vairak neka {1} sekundes
+1414#£Fakultate tiek defineta tikai veseliem skaitliem
+1415#£Fakultate tiek defineta tikai skaitliem >= 0
+1416#£Sis skaits ir parak liels macibspekiem
+1417#£Skaitlis ir parak liels - VBACAS nevar aprekinat skaitli virs 170 ka decimaldalu
+1418#£desolve jabut diferencialvienadojumam, piemeram, desolve(y'=2y)
+1419#£Diferencialvienadojumam jabut vienadojumam, piemeram, y'=2y
+1420#£Arguments, kas {1} izskiduma, nav saprotams
+1421#£Vienadojuma nav atvasinatas funkcijas (piemeram, y')
+1422#£Vienadojuma nav neviena atvasinajuma no {1}
+1423#£Konstantei nav briva nosaukuma
+1424#£Atvasinajuma secibai jabut skaitlim
+1425#£Pieraksti nosacijumus ka {1}(0)=2 pec vienadojuma: desolve(vienadojums; {1} (0)=2)
+1426#£Diferencialvienadojumus, kas ir augstaki par 2, nav iespejams atrisinat
+1427#£Diferencialvienadojumu nevareja atrisinat ({1}{2} nevar izolet)
+1428#£Diferencialvienadojumu nevareja atrisinat (tas nav ne linears, ne atdalams)
+1429#£Diferencialvienadojumu nevareja atrisinat ({1}{2}{2} nevar izolet)
+1430#£Diferencialvienadojumu nevareja atrisinat (otras kartas var atrisinat, ja tas ir linears ar konstantiem koeficientiem, vai {1}{3}{3}=f({2}))
+1431#£Diferencialvienadojumu nevareja atrisinat (dalinu risinajums {1} nav atrodams)
+1432#£Otras kartas diferencialvienadojumam var but ne vairak ka divi nosacijumi
+1433#£Nosacijumiem jabut vienadojumiem, piemeram, {1}(0)=1 un {1}{2}(0)=2
+1434#£Nosacijumi jauzraksta ka {1}(0)=1 un {1}{2}(0)=2
+1435#£Neviens risinajums neatbilst siem nosacijumiem
+1436#£Pirmas kartas diferencialvienadojumam jabut vienam nosacijumam, piemeram, {1}(0)=2
+1437#£Nosacijumam jabut vienadojumam, piemeram, {1}(0)=2
+1438#£Nosacijums jauzraksta ka {1}(0)=2
+1439#£Neviens risinajums neatbilst nosacijumam {1}
+1440#£Diferencialvienadojumu nebija iespejams atrisinat (stiena funkciju {1} nav atrast)
+1441#£Sola garumam jabut pozitivam
+1442#£Gala vertibai jabut lielakai par sakuma vertibu
+1443#£Parak daudz solu ({1}). Izvelies lielaku sola garumu
+1444#£Ievadi tikai diferencialvienadojuma labo pusi {1}: {2}
+1445#£Definejiet {1} zem definicijam
+1446#£Diferencialvienadojumu {1} nevar aprekinat ar {2}={3}
+1447#£Novietojiet kursoru izteiksme, kuru parfrazes.
+1448#£Maxima komanda prasa WordMat Maxima, kas nav instaleta.
+1449#£Ierakstiet Maxima komandu, piemeram, integrate(x^2,x) vai factor(x^2-1). Rezultats tiek uzrakstits ka jauns vienadojums.
+1450#£Maxima komanda
+1451#£Maxima komanda saja WordMat+ versija nav pieejama.
+1452#£Novieto kursoru matematikas lauka.
+1453#£Novieto kursoru vienadojuma, kuru jaatrisina.
+1454#£Izvelieties vienadojumus, no kuriem izslegt mainigos.
+1455#£Izvelieties vismaz divus vienadojumus, lai izslegtu mainigos (piemeram, x=2t+1 un y=t^2).
+1456#£Novietojiet kursoru atrisinamaja diferencialvienadojuma.
+1457#£Nav aktivas WordMat+ licences. \n\nWordMat+ joprojam var izmantot, tacu sis funkcijas nav aktivas: {1}WordMat+ pasa CAS (VBACAS). Maxima vai GeoGe{1}bra grafiki tiek skaititi WordMat GeoGebra loga. Tie tiek atteloti parlukprogramma{1}Formulu ievietosana no formulu kolekcijas{1}Sinusa regresija{1}Pielagot izvelni\n\nNoklikskiniet uz OK, lai dotos uz www.wordmat.dk
+1458#£Nav aktivas WordMat+ licences, tapec WordMat+ pasa CAS (VBACAS) nevar izmantot, un ne Maxima, ne GeoGebra nevar izmantot saja datora. Izvelieties vienu no tiem iestatijumos, instalejiet WordMat ar Maxima vai atjaunojiet licenci www.wordmat.dk.
+1459#£Maxima nav dala no sis WordMat+ versijas
+1460#£Vienadojums jau ir numurets.
+1461#£Numuretu vienadojumu tabula nevar ievietot.
+1462#£Numuretais vienadojums
+1463#£Ierakstiet vienadojuma nosaukumu.
+1464#£Nosaukumam jabut ne vairak ka 40 rakstzimem.
+1465#£Vardam jasakas ar burtu.
+1466#£Nosaukums var saturet tikai burtus, ciparus un _ (nevis atstarpes).
+1467#£Sis nosaukums jau pastav.
+1468#£Dokumenta nav nosauktu vienadojumu. Izmanto 'Ievietot numuretu vienadojumu atsaucei' sadala Jaunais vienadojums.
+1469#£Vienadojuma atsauce
+1470#£Ieliec kursoru numureta vienadojuma.
+1471#£Uz kadu skaitli sai vienadojumam butu jaiestata? \nTurpmakajiem vienadojumiem tiek atjauninati numuri, lai tie atbilstu.
+1472#£Ierakstiet veselu skaitli vai sadalas numuru (2.3) skaitliem ar sekciju.
+1473#£Tiks ievietots vienadojuma sadalas numurs. Parasti tas tiek ievietots ka nodalas vai sadalas numurs. virsraksta. Tomer numuru var ievietot ari pasleptu. Vai skaitlis butu japarada? (Atbildet ne, lai to pasleptu)
+1474#£Ievieto vienadojuma sadalu nr.
+1475#£Vienadojumu sadala
+1476#£Dzesanas definicijas tabula nevar ievietot.
+1477#£Noradiet, kuras vienibas jabut izeja, atdalitas ar komatiem\nPiemeri: \n\ncm , kJ, stundas\neV, nm, mV\naJ, AU, Bq\n\nJa nekas nav noradits, visas vienibas tiks atgrieztas ka bazes SI vienibas vai atvasinatas SI vienibas bez prefiksa.
+1478#£Otrajam parametram risinajuma jabut mainigajam, piemeram, solve(x^2=4; x)
+1479#£Nevienadibas nevar atrisinat, ja kompleksie skaitli tiek ieslegti
+1480#£Vienadojumu nevar atrisinat analitiski. Megini to atrisinat skaitliski.
+1481#£Vienadojumu vel nav iespejams atrisinat): {1}=0
+1482#£Noradiet, kuram mainigajam jaatrisina, piemeram, solve(vienadojums; x)
+1483#£Vienadojumu nevar atrisinat precizi (pakape ir parak augsta)
+1484#£Parak daudz risinajumu intervala
+1485#£Parak daudz risinajumu
+1486#£Periodu nav iespejams aprekinat
+1487#£Intervala risinajumus nav iespejams aprekinat
+1488#£Vienadojumu vel nav iespejams precizi atrisinat: {1}=0
+1489#£Vienadojumu vel nav iespejams precizi atrisinat
+1490#£Lenki nav iespejams aprekinat
+1491#£Vienadojumu vel nav iespejams precizi atrisinat: {1}={2}
+1492#£Nevienlidzibu vel nav iespejams atrisinat): {1}
+1493#£Nevienadibu vel nav iespejams atrisinat): {1}{2}0
+1494#£Nevienadibai ir bezgaligs risinajuma intervalu skaits. Noradiet intervalu {1}, piemeram, 0{2}{1}{2}{3}
+1495#£Nevienlidzibu vel nav iespejams atrisinat
+1496#£{1} noteikti {2}{3}
+1497#£{1} (x) nav defineta x=0, -1, -2, ...
+1498#£W_0(x) ir definets tikai x{1}-1/e
+1499#£acosh (x) ir definets tikai x{1}1
+1500#£{1} (x) ir parak liels, lai to aprekinatu;
+1501#£{1} seit nav nekadas vertibas
+1502#£{1} nevar atskirt pec {2} ({2} pirmaja argumenta)
+1503#£Nezinamajiem jabut mainigiem, piemeram, solve([x+y=5; x-y=1]; [x;y])
+1504#£Sistemas ar nevienadibam vel nav iespejams atrisinat
+1505#£Nav vienadojumu, ko risinat
+1506#£Vienadojumu sistemai nav mainigo, ko risinat
+1507#£Vienadojumu sistema ir parnoteikta: vienadojumu ({1}) ir vairak neka nezinamo ({2}).
+1508#£Nodoklu sistemu vel nav iespejams precizi atrisinat
+1509#£Nodoklu sistemu vel nav iespejams atrisinat
+1510#£Noradiet izsledzamos mainigos, piemeram, eliminate([x+y=a; x-y=b]; x)
+1511#£Izsledzamajiem mainigajiem jabut mainigajiem, piemeram, eliminate([x+y=a; x-y=b; x*y=c]; [x;y])
+1512#£Mainigos nevar izslegt no nevienadibam
+1513#£Maksimali {1} mainigos var izslegt no {2} vienadojumiem
+1514#£Kad {1} tiek izslegti, vairs nepaliek vienadojumi (tie vienmer tiek izpilditi)
+1515#£{1} vel nevar izslegt
+1516#£{1} nevar izslegt (gradi ir parak augsti)
+1517#£Ierices nesakrit: {1}
+1518#£Nezinama vieniba: {1}
+1519#£Saraksts
+1520#£vektors
+1521#£matrica
+1522#£Skaitlis
+1523#£{1} jabut vismaz vienam elementam
+1524#£Visam rindam masiva jabut vienadam elementu skaitam
+1525#£Vektora elementiem jabut skaitliem vai izteiksmem
+1526#£Tu nevari {1} likt {2}{3}
+1527#£Tu nevari pieskirt skaitli {1}
+1528#£cita izmera
+1529#£Jus nevarat reizinat {1} un {2} ar dazadu elementu skaitu
+1530#£Vektoriem jabut vienadam koordinatu skaitam
+1531#£Vektoru var pacelt tikai kvadrata (skalarais reizinajums ar sevi)
+1532#£Tu nevari pacelt lidz {1}
+1533#£Funkcija nevar pienemt {1} ka argumentu
+1534#£Tam jabut masivam vai diviem vektoriem
+1535#£Nulles matricas lielumam jabut veseliem skaitliem
+1536#£ident jabut izmeram, piemeram, ident(3)
+1537#£Vienibas matricas izmeram jabut veselam skaitlim
+1538#£cepurei jabut vienam vektoram
+1539#£Krustvektors eksiste tikai vektoriem plakne
+1540#£{1} jabut diviem vektoriem, piemeram, {1}(a; b)
+1541#£{1} no masiva vel nav iespejams aprekinat
+1542#£Krustprodukts pastav tikai vektoriem telpa (3 koordinatas)
+1543#£Divu vektoru determinants pastav tikai vektoriem plakne (2 koordinatas)
+1544#£{1} jabut stridam
+1545#£length jabut vienam sarakstam, piemeram, length(x)
+1546#£Elementam ir ne vairak ka divi indeksi, piemeram, A[1; 2]
+1547#£Indeksam jabut veselam skaitlim: {1}
+1548#£Indekss ir parak liels: {1}
+1549#£Indekss {1} atrodas arpus matricas ({2} rindas)
+1550#£Indekss {1} ir arpus matricas ({2} svitras)
+1551#£Saraksta ir tikai viens indekss, piemeram, x[2]
+1552#£Vektoram ir tikai viena kolonna: otram indeksam jabut 1
+1553#£Vektoriem abas vienadas zimes puses jabut vienadam koordinatu skaitam
+1554#£Matricas abas vienadas zimes puses jabut vienada izmera
+1555#£Masivs var but vienads tikai ar vienu matricu
+1556#£Vektors nevar but vienads ar skaitli
+1557#£Aprekinus definicijas laukos nevar veikt. Jus varat izmantot zemak esoso definiciju aprekinam.
+1558#£un
+1559#£Automatiska
+1560#£Precizs
+1561#£Skaitliska
+1562#£Vienibas uz
+1563#£Vienibas izsledzas
+1564#£LaTeX kods
+1565#£LaTeX kodi
+1566#£Vienadojums
+1567#£Vienadojumi
+1568#£Attels
+1569#£Atteli
+1570#£Argumentacija
+1571#£Argumenti
+1572#£Nozimiguma limenis:
+1573#£Visu sunu kopeja summa ir mazaka par 50. Tadejadi {1} sadalijums saja gadijuma ir vajs aptuvens un rezultats nav uzticams.
+1574#£Brivibas pakapes:
+1575#£Parveidosana
+1576#£Pielagojiet izvelni
+1577#£Izvelies, kuri edienkartes punkti ir redzami
+1578#£Cipari un noapalosana
+1579#£Parraksti...
+1580#£Atrisinat vienadojumus
+1581#£Atrisinat savienotos diferencialvienadojumus
+1582#£Varbutiba
+1583#£Atvienota grupa
+1584#£Grupeti
+1585#£Ievietot tabulu
+1586#£Tradicija
+1587#£t-sadalijums
+1588#£Numuretie vienadojumi
+1589#£Radit visu
+1590#£Slept visu
+1591#£Iestatits pec limena
+1592#£Iestata redzamos izvelnes punktus atbilstosi matematikas limenim, pec kura jums tiek macits
+1593#£Sinusa pielagosana
+1594#£Sai funkcijai nepieciesams WordMat+
+1595#£Lai pieklutu WordMat+, jusu skola/organizacija var:\n noslegt partneribas ligumu ar Eduap.
+1596#£Lasiet vairak par citiem partneribas ieguvumiem seit:
+1597#£Parbaudi, vai tava skola jau ir noslegusi partneribu
+1598#£Formulu vaksanas uzstadijums
+1599#£Izvelies savu izglitibu
+1600#£Izvelies savus prieksmetu limenus
+1601#£Vienmer vari velak mainit savas izveles
+1602#£Matematika:
+1603#£Fizika:
+1604#£Kimija:
+1605#£Nakamais
+1606#£Sovs GnuPlot
+1607#£Funkcijas f(x)=...
+1608#£X ass nosaukums
+1609#£Y ass nosaukums
+1610#£Var
+1611#£Punktu lielums:
+1612#£Radit Excel programma
+1613#£Excel iegulsana
+1614#£Rezgis
+1615#£Logaritmiska X ass
+1616#£Logaritmiska Y-ass
+1617#£Izdevniecibas
+1618#£Ievietot etiketi
+1619#£Radit skaidrojumu
+1620#£Punkti 2
+1621#£Sintakse\nSakumpunkts - Vektors\n(startx ; starty)-(dx ; dy)\n\nPiemeri: \n(1,1)-(1,2)     \n  Vektora (1.2) zimesana no punkta (1.1)\n\n(1,2)\n  Vektora (1.2) zimesana no punkta (0.0)\n\n(1,5 ; 4,5)\nJa tiek ieklauti decimalskaitli; izmantots ka atdalitajs
+1622#£Jaunais Vektors
+1623#£1. vienadojums
+1624#£2. vienadojums
+1625#£3. vienadojums
+1626#£Mainigajiem jabut x un y
+1627#£Prop
+1628#£Manu
+1629#£Indep. mainigais
+1630#£Dep. mainigais
+1631#£Integralas liknes (liknes)
+1632#£Noradiet punktus, caur kuriem jazime risinajuma celi.
+1633#£Atvert
+1634#£Atveras logs, kur var noklikskinat uz punkta, kur jabut integralajai liknei un kur var but slidni, lai redzetu, ka virziena lauks mainas ar slidni
+1635#£Interaktiva
+1636#£Pagaidi!
+1637#£const
+1638#£no
+1639#£uz
+1640#£Slidni
+1641#£Radit tikai liknes
+1642#£Licence:
+1643#£Iestatiet sola garumu automatiski
+1644#£Iestata solu skaitu uz 500
+1645#£Vienadojumi tiek risinati ar 4. kartas Runge-Kutta
+1646#£Aprekinato punktu ievietosana ka saraksts Word dokumenta
+1647#£Jus varat ievadit mainigo vai funkciju, atkariba no ta. no ta, kas ir rakstits vienadojuma. t.i., piemeram, y vai f(x), bet ne f.
+1648#£Labi, jauna linija
+1649#£Definicijas saja dokumenta punkta
+1650#£Piemers: a=5, x>0
+1651#£Piemers: g, min, cm
+1652#£Dec.
+1653#£Darbojas parlukprogramma, bet ne tiessaiste
+1654#£Savienojums ar Maxima
+1655#£Savienojas ar Maxima ar .net dll failu, kas apstrada komunikaciju
+1656#£Maxima tiek veikta caur caulu ar wsh. Katrs aprekins ir jauna Maxima instance. Tas ir nedaudz lenaks un islaicigi rada melnu cmd logu, bet nav atkarigs no dll faila.
+1657#£Nepieciesams WordMat+
+1658#£Parbaudi partneribu
+1659#£Parej uz augsu (meginaju agrak)
+1660#£Parvietoties uz leju (meginasim velak)
+1661#£Dzineji tiek testeti no augsas.  \nNakamais tiek izmantots, kad viens motors to nevar.
+1662#£Neierobezota precizitate
+1663#£Palauties uz neierobezotu precizitati (lieli skaitli)
+1664#£Maksimalais ciparu skaits:
+1665#£Maksimalais ciparu skaits precizos skaitlos
+1666#£Laika ierobezojums (-i):
+1667#£Aprekina laika limits sekundes (0 = bez ierobezojuma)
+1668#£Zinatniska notacija, n:
+1669#£Zinatniska notacija skaitliem zem 10^-n (0 = nekad)
+1670#£LaTeX aptverosie raksturlielumi ap vienadojumu
+1671#£Teksta:
+1672#£Teksts pirms LaTeX koda vienadojumam teksta, piemeram, $
+1673#£Teksts aiz LaTeX koda vienadojumam teksta, piemeram, $
+1674#£Sava linija:
+1675#£Teksts pirms LaTeX koda vienadojumam uz linijas ir atseviski, piemeram, \[ vai \begin{vienadojums}
+1676#£Teksts pec LaTeX koda vienadojumam uz linijas atseviski, piemeram, \] vai \end{vienadojums}
+1677#£Vienibas ar taisnu rakstibu (\mathrm)
+1678#£Vienibas netiek atpazitas un rakstitas slipraksta (\mathrm{m})
+1679#£Dubultspiediena Alt+M
+1680#£Jaievada tiesi 3 lenki/malas, bet ne tikai 3 lenki. \nTatad: \n1 mala + 2 lenki\n2 malas + 1 lenkis (iespejams, 2 risinajumi)\n3 lapas
+1681#£Kur tiesi tiek prasita atbilde. Var ietekmet aprekina laiku.
+1682#£LaTeX kods nav atrasts. Izvelieties kodu vai novietojiet kursoru LaTeX vienadojuma (piemeram, {1} vai {2}).
+1683#£{1} {2} VBACAS nevareja nolasit, un LaTeX dokumenta ta ir rakstita ka teksts ({3}).
+1684#£Divergencei {1} nepieciesama vektorfunkcija. Funkcijas {2} gradientu raksta {3}
+1685#£Rotoram (curl) {1} nepieciesama vektorfunkcija ar 2 vai 3 koordinatam
+1686#£{1} prasa, lai {2} butu tikpat daudz koordinatu, cik mainigo
+1687#£Izrakstita vektora divergencei {1} nepieciesamas 2 vai 3 koordinatas (mainigie x, y un z)
+1688#£"{1}" drizuma bus pieejams WordMat+ Office versija.
+1689#£Radas kluda: "{1}".
+1690#£Sikaka informacija
+1691#£Kopet
+1692#£Mervienibas ir ieslegtas.
+1693#£Mervienibas ir izslegtas.
+1694#£Radit uzdevumruti
+1695#£Valoda mainas, kad WordMat+ tiek atverts velreiz.
+1696#£Isaka forma, piemeram, (x^2-1)/(x-1) klust par x+1 un sin(x)^2+cos(x)^2 par 1.
+1697#£Aprekins aiznema parak ilgu laiku un tika apturets.
+1698#£WordMat+ programmai Word (Word desktop un Word Online)\nVersija {1}\n\nIzstrades versija: nepartraukti tiek pievienotas jaunas funkcijas.
+1699#£Rediget vienadojumu
+1700#£/ dala, ^ pakape, _ indekss, sqrt kvadratsakne, bulttaustini parvieto kursoru. Enter: ievietot. Ctrl+Enter: ievietot un aprekinat. Esc: atcelt.
+1701#£Ievietot un aprekinat
+1702#£Noklikskiniet grafika, lai uzzimetu risinajuma likni caur punktu.
+1703#£Nulles
+1704#£Ekstremi
+1705#£Krustpunkti
+1706#£Punktu serija {1}
+1707#£Radit koordinatas
+1708#£Izvelas grafu logu ta, lai butu redzami visi punkti, nulles, ekstremumi un krustpunkti, ka ari asis, kad tas nav talu.
+1709#£Bez rezga
+1710#£Liels rezgis
+1711#£Mazs rezgis
+1712#£Pieskare
+1713#£Zime grafika pieskari pie seit ierakstitajam x vertibam. Vairakas vertibas atdala ar ;
+1714#£Sakumpunkts
+1715#£Bez sakumpunkta vektors tiek zimets no (0;0).
+1716#£Velciet uz leju, lai turpinatu skaitlus: 1, 2 dod 3, 4 ... Dubultklikskis aizpilda lidz pedejai rindai.
+1717#£Ievadiet formulu ar x, piemeram, 2*x, un y tiek aprekinats rindam no sejienes uz leju.
+1718#£Ierakstiet punktus tabula vai ielimejiet tos no Excel vai Word tabulas.\nVelc mazo kvadratu, lai turpinatu skaitlus uz leju: 1, 2 dod 3, 4 ...\nIerakstiet formulu y kolonna, piemeram, 2x vai =2x, un y tiek aprekinats rindam no sejienes uz leju.\nAtlasiet vairakas sunas ar peli vai Shift un nospiediet Delete, lai tas izdzestu.\nPoga z dod z kolonnu punktiem telpa.
+1719#£Ievieto funkcijas pieskari ka jaunu funkciju un pieskarsanas punktu ka punktu. Izvelieties funkciju un ierakstiet x vai noklikskiniet uz grafika.
+1720#£Velciet grafika, lai uzzimetu vektoru.
+1721#£Noklikskiniet uz etiketes tabula un pec tam uz grafika, lai to parvietotu.
+1722#£Noverojums
+1723#£Biezums
+1724#£Relativais biezums
+1725#£Kumulativais biezums
+1726#£No
+1727#£Lidz
+1728#£Noverojumu skaits
+1729#£Mazaka vertiba
+1730#£Apakseja kvartile
+1731#£Mediana
+1732#£Augseja kvartile
+1733#£Lielaka vertiba
+1734#£Videja vertiba
+1735#£Standartnovirze
+1736#£Izlases standartnovirze
+1737#£Aprakstosa statistika, aprekinata ar WordMat:
+1738#£Tabula jaietver noverojumi vai noverojumi pirmaja kolonna un to biezums otraja kolonna.
+1739#£Tabulai jabut tris kolonnam: intervalu sakumam, intervalu beigam un biezumiem.
+1740#£Katra intervala sakumam jabut mazakam par ta beigam, un intervali nedrikst parklaties.
+1741#£Biezumi nedrikst but negativi.
+1742#£Ievadiet dazadu noverojumu skaitu, un tiek izveidota tabula, kura varat ievadit noverojumus un to biezumus.\nKad esi aizpildijis tabulu, izvelies {1} vai diagrammu no izvelnes.
+1743#£Ievadiet intervalu skaitu, un tiek izveidota tabula, kura varat ievadit intervalus un to biezumus.\nKad esi aizpildijis tabulu, izvelies {1} vai diagrammu no izvelnes.
+1744#£Diagramma
+1745#£Nav diagrammas
+1746#£Relativais biezums procentos
+1747#£Radit kvartiles
+1748#£Nosaukums
+1749#£uz vienibu
+1750#£Ierakstiet noverojumus un to biezumus tabula vai ielimejiet tos no Excel vai Word tabulas.
+1751#£Ierakstiet intervalus un to biezumus tabula vai ielimejiet tos no Excel vai Word tabulas.
+1752#£Ierakstiet katras kastes diagrammas kvartiles: mazaka vertiba, apakseja kvartile, mediana, augseja kvartile un lielaka vertiba.
+1753#£Kvartilem jabut augosa seciba.
+1754#£Neapstradati dati
+1755#£Negrupeti
+1756#£Grupeti
+1757#£Kum. biezums
+1758#£Parnest uz negrupetiem
+1759#£Parnest uz grupetiem
+1760#£Intervala platums
+1761#£Ierakstiet noverojumus tabula vai ielimejiet tos no Excel vai Word tabulas.
+1762#£Pievienot kastes diagrammai
+1763#£Tabula tiek ievietota dokumenta, kad logs tiek aizverts.
+1764#£{1} noverojumi ir arpus intervaliem.
+1765#£Intervala platumam jabut lielakam par 0.
+1766#£Punktu diagramma
+1767#£Laukuma skaidrojums
+1768#£Augseja labaja sturi redzama kaste ar tadu pasu platumu ka pirmajam intervalam un cik procentiem no noverojumiem ta atbilst.
+1769#£Noverojums uz robezas starp diviem intervaliem pieder apaksejam intervalam, ]a;b], kas ir danu standarts, vai augsejam intervalam, [a;b[.
+1770#£Brivibas pakapes
+1771#£Radit kumulativo sadalijumu
+1772#£Izvelieties sadalijumu.
+1773#£Tukss lauks nozime, ka saja puse nav ierobezojuma.
+1774#£Ierakstiet varbutibu, piemeram, 0,95 vai 95 %, un tiek atrasta atbilstosa vertiba.
+1775#£n jabut veselam skaitlim, kas ir lielaks par 0.
+1776#£p jabut starp 0 un 1.
+1777#£Standartnovirzei jabut lielakai par 0.
+1778#£Brivibas pakapju skaitam jabut lielakam par 0.
+1779#£Noverots
+1780#£Divpusejs
+1781#£Kreisas puses
+1782#£Labas puses
+1783#£Kritiskais apgabals
+1784#£P-vertiba
+1785#£Nulles hipoteze tiek noraidita.
+1786#£Nulles hipotezi nevar noraidit.
+1787#£Ticamibas intervals p vertibai
+1788#£Nav testa
+1789#£Sagaidams
+1790#£Kritiska vertiba
+1791#£Testa statistika
+1792#£Ievietot rezultatu
+1793#£Jabut vismaz divam rindam ar noveroto skaitu un sagaidamo skaitu, kas ir lielaks par 0.
+1794#£Atbilstibas parbaude tiek veikta ar WordMat
+1795#£Pie nozimibas limena {1}% var noraidit nulles hipotezi, ka noverojumi seko gaidamajam sadalijumam.
+1796#£Pie nozimibas limena {1}% nulles hipotezi nevar noraidit. Tadel nav pieradijumu, ka noverojumi novirzas no gaidama sadalijuma.
+1797#£Sagaidamas vertibas:
+1798#£Parbaudit, vai grupetie dati ir normali sadaliti
+1799#£{1} un {2} no datiem
+1800#£Pielagot
+1801#£Jabut vismaz {1} intervaliem, kad videja vertiba un standartnovirze tiek noverteta no datiem.
+1802#£Tests izmanto grupetos datus cilne {1}. Ierakstiet tos zem {2} un atzimejiet {3}, lai histogrammu varetu salidzinat ar normalo sadalijumu.
+1803#£Katrai liknei pieskir lauku z(t), lai ta tiktu zimeta telpa.
+1804#£Mainigajiem jabut x un y, un z telpa
+1805#£Vienadojumi ka atteli
+1806#£Word Online prasa vairakas sekundes, lai uzrakstitu vienadojumu. Ar so iestatijumu WordMat+ ievieto jaunus vienadojumus un rezultatus ka nelielus attelus, kurus aprekina ka vienadojumus. Attelus var atkal veidot ka vienadojumus izvelnes {1}.
+1807#£Parverst vienadojumus attelos
+1808#£Parvers atlases vienadojumus vai visu dokumentu, kad nekas nav izvelets, attelos, ko Word Online rada un maina daudz atrak. WordMat+ aprekina attelus tapat ka vienadojumus.
+1809#£Parverst attelus vienadojumos
+1810#£Tas parvers vienadojumu attelus atlases procesa vai visa dokumenta, kad nekas nav izvelets, par realiem vienadojumiem, piemeram, pirms dokuments tiek iesniegts.
+1811#£Vienadojumi parversti attelos: {1}
+1812#£Atteli parversti vienadojumos: {1}
+1813#£Nav parveidots (nemainits): {1}
+1814#£Nav vienadojumu, ko parverst.
+1815#£Nav attelu ar vienadojumiem, ko parverst.
+1816#£Vienadojumi ka atteli tiek izmantoti tikai Word Online.
+1817#£Vienadojumus nevareja parverst.
+1818#£Matematika
+1819#£Fizika
+1820#£Aizvert, kad izveleta formula
+1821#£Turiet nospiestu Ctrl, kad noklikskinat uz formulas, un formulu kolekcija neaizveras.
+1822#£Ievietot 2
+1823#£Formula tiek ievietota divreiz: vienu reizi dokumentacijai un otru, kur var ievadit skaitlus.
+1824#£Ievietot konstantes
+1825#£Fizika un kimija fiziskas konstantes otraja formula tiek ievietotas ka skaitli.
+1826#£Radit ruti
+1827#£Formulu kolekcija tiek attelota loga blakus logam, nevis loga. Ta tiek piemerota no nakamas reizes, kad tiek atverta formulu kolekcija.
+1828#£Meklet:
+1829#£Piezime: Kimijas formulu kolekcija vel nav pabeigta.
+1830#£Ierakstiet meklesanas lauka vai noklikskiniet uz temas.
+1831#£Noklikskiniet uz attela, lai to ievietotu dokumenta.
+1832#£Word Online var radit attelus, bet tos nevar rediget. Atveriet dokumentu Word for Windows vai Mac, lai tos mainitu.
+1833#£Ruti redzamas figuras: trijsturi, vienibas aplis, koordinatu sistemas un monotoniskas linijas. Noklikskiniet uz attela, lai to ievietotu dokumenta.
+1834#£Fails {1} ir lejupieladets. Tas ir parlukprogrammas lejupielades.
+1835#£Izmanto Word ka LaTeX redaktoru. \n\nLaTeX komandas var ievadit tiesi dokumenta, lai pilniba kontroletu, vai izmantot Word funkcijas un laut WordMat+ konverteties uz LaTeX. \n\nTex fails tiek lejupieladets datora. Ja dokumenta ir atteli, tiek lejupieladets zip fails ar tex failu un mapes atteliem.
+1836#£Izveido LaTeX kodu ka tex failu, kas tiek lejupieladets datora, lai kodu varetu parskatit un pielagot LaTeX programma
+1837#£Saglabat
+1838#£Ap x asi
+1839#£Ap y asi
+1840#£Pagriez atzimeto funkciju grafikus par 360 gradiem ap x asi vai y asi, lai izveidotos rotacijas kermenis 3D. Katrs grafiks tiek pagriezts no ta Xmin lidz Xmax.
+1841#£Vienadojums
+1842#£Konvertet
+1843#£Sanu ruts
+1844#£Parada sanu ruti ar iestatijumiem vai aizver to, ja ta ir atverta.
+1845#£WordMat+ izmanto JSXGraph grafikiem un MathLive vienadojumu ievadei. Abiem ir MIT licence.
+1846#£Licences
+1847#£pa dalam
+1848#£Iekavas: @ vai Alt+Enter izveido jaunu rindu, & jaunu kolonnu.
+1849#£n-tas pakapes sakne
+1850#£matrica
+1851#£noteiktais integralis
+1852#£nenoteiktais integralis
+1853#£Iekavas: @ vai Alt+Enter pievieno jaunu koordinatu.
+1854#£summa
+1855#£reizinajums
+1856#£WordMat+ lauj veikt matematiskos aprekinus Word vide.\nWordMat razo Mikael Sams¿e S¿rensen, Nyborg gimnazija, EDUAP 2009-{1}.
+1857#£Izmantot JavaScript CAS (atraks)
+1858#£WordMat+ CAS darbina JavaScript dzinejs QuickJS. Bez atzimes rekina VBACAS.
+1859#£Iebuvetais CAS: {1}
+1860#£JavaScript dzinejs: QuickJS, © Fabrice Bellard, Charlie Gordon u. c. (MIT licence)

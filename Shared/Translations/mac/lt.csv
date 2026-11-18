@@ -933,3 +933,929 @@
 932#£Atnaujinkite i naujausia beta versija
 933#£Turetumete zinoti, kad beta versijose gali buti klaidu. Jie pirmiausia skirti bandymams. Sia funkcija rekomenduojama naudoti pirmiausia pagal Eduap nurodymus
 934#£Rodo kaires ir desines lygties pusiu diagrama toje pacioje koordinaciu sistemoje. Lygties sprendiniai yra susikirtimu x verte. Nepamirskite priartinti ir nutolinti.
+935#£Formuliu rinkimas
+936#£Atidaro formuliu kolekcija su formulemis is matematikos, fizikos ir chemijos. Spustelekite formule, kad ja iterptumete i dokumenta.
+937#£Atidaromas dialogas, kuriame pasirenkate, kaip perrasyti pasirinkta israiska ar lygti: sumazinti, faktorizuoti, isplesti, kvadratuoti uzbaigima arba desimtaine iki trupmenu. Taip pat galite pateikti laikinus apibrezimus ir pasirinkti rezultata. Rezultatas rasomas naujoje eiluteje.
+938#£Sutrumpina pasirinkta israiska arba abi lygties puses iki trumpiausios formos, pvz., (x^2-1)/(x-1) iki x+1 ir sin(x)^2+cos(x)^2 i 1. Rezultatas rasomas naujoje eiluteje.
+939#£Faktorizuoja pasirinkta israiska, pvz., x^2-1=(x-1)(x+1). Rezultatas rasomas po israiskos, kaip ir Calculate.
+940#£Padauginkite skliaustus pasirinktoje israiskoje, pvz., (x+1)^2=x^2+2x+1. Rezultatas rasomas po israiskos, kaip Calculate.
+941#£Perraso kvadratini polinoma ax^2+bx+c i a(x+b/(2a))^2+c-b^2/(4a), pvz., x^2+6x+5 i (x+3)^2-4. Koeficientai gali buti raides. Taip pat veikia su lygtimi, pvz., apskritimo lygtimi x^2-4x+y^2+14y+53=25 i (x-2)^2+(y+7)^2=25. Rezultatas rasomas naujoje eiluteje.
+942#£Pasirinkta israiska tiesiogiai siuncia Maxima ir iterpia rezultata kaip nauja lygti. Israiska turi buti uzrasyta Maxima sintakse, pvz., integrate(x^2,x) arba factor(x^2-1). Jei nieko nepasirenkama, komanda gali buti uzrasyta lauke. Reikalinga WordMats Maxima.
+943#£Testavimo lygtis
+944#£Tiria, ar pazymeta lygtis yra teisinga visoms kintamuju reiksmems, pvz., sin(x)^2+cos(x)^2=1. Pirmiausia bandoma tiksliai irodyti, kitaip lygtis tikrinama skaitmeniskai. Atsakymas yra teisingas, klaidingas (su kontrpavyzdziu), tikriausiai teisingas arba nezinomas, ir rasomas naujoje eiluteje.
+945#£Pasalinus viena ar daugiau kintamuju is lygciu sistemos: pasirinkite lygtis ir pasalinkite kintamuosius (maziau nei lygciu skaicius). Pavyzdziui, x=2t+1 ir y=t^2, kai t pasalinta, gauname y=(x-1)^2/4.
+946#£Skaitiniu budu sprendzia viena ar kelias susietas diferencialines lygtis, pvz., x'=y ir y'=-x. Rezultatas gali buti rodomas kaip grafikas GeoGebra programoje, iterptas kaip sarasas ar lentele, arba siunciamas i Excel.
+947#£Tikrai.
+948#£Ideda "Apibrezti:" lygties pradzioje prie zymeklio arba nauja lygti su ja. Apibrezimai taikomi zemiau esanciuose skaiciavimuose dokumente.
+949#£Iterpia "Istrinti apibrezimus:" naujoje eiluteje. Auksciau esantys apibrezimai nenaudojami zemiau esanciuose skaiciavimuose.
+950#£Rodo pasirinktu funkciju/lygciu ir tasku grafika. Grafiko programa pasirenkama nustatymuose arba isskleidziant si mygtuka.
+951#£Grafai
+952#£Grafikai ir taskai rodomi GeoGebra: WordMat GeoGebra lange su WordMat+, kitu atveju narsykleje. Internetas nereikalingas.
+953#£Atidaro GeoGebra 5 ir perduoda pasirinktas funkcijas bei apibrezimus.
+954#£Atidaro (arba iterpia) WordMat Excel lenteles grafikams ir taskams su pasirinktomis funkcijomis ir lenteles taskais.
+955#£Rodo pasirinktu funkciju turini GeoGebra programoje. Priesaikos grafikas pasukamas 360 laipsniu aplink x asi, kad butu sukurtas 3D objektas. Po kablelio rasomas apibrezimu rinkinys, pvz., f(x)=x^2, 0<=x<=2.
+956#£Statistikos lenteles
+957#£Pritaiko funkcija, kuria rasote patys, pvz., f(x)=aáe^(báx)+c, taskams lenteleje. Parametrai yra kintamieji, isskyrus nepriklausoma kintamaji.
+958#£Excel regresija
+959#£Iterpia nauja matematikos lauka. Numeruotoje lygtyje: padarykite lygti sunumeruota.
+960#£Iterpia nauja matematikos lauka, kuris automatiskai sunumeruojamas. Jei zymeklis yra lygties dalyje, jis yra sunumeruotas. Skaiciaus padetis ir tipas pasirenkami skiltyje Nustatymai.
+961#£Iterpia nuoroda i pavadinta lygti: lygties numeri, kuris atnaujinamas, kai skaiciai keiciasi.
+962#£Numeruota lygtis, kurioje yra zymeklis, gauna konkretu skaiciu. Toliau pateikiamos sios lygtys.
+963#£Atidaromas LaTeX dialogas, kuriame dokumentas gali buti konvertuotas i .tex faila arba pdf faila (reikalingas MikTex). Konvertuotu lygciu simboliai pasirenkami skiltyje Parinktys, Notacija.
+964#£Konvertuoti lygti i LaTeX
+965#£Pakeicia zymeklio lygti i LaTeX koda. Apgaubiantys simboliai linijinems lygtims ir lygtims eiluteje atskirai pasirenkami skiltyje Nustatymai, Notacija.
+966#£Konvertuokite LaTeX i lygtis
+967#£Konvertuoja LaTeX koda pasirinkime i lygciu laukus. Jei nieko nepasirenkama, LaTeX lygtis konvertuojama zymekliu. Kodas randamas ties $...$, \(...\), $$...$$, \[...\], \begin{align} ir t.t., o apgaubiantys simboliai - Nustatymai, Notacija. Pasirinkimas be apgaubianciu simboliu konvertuojamas i viena lygti. Alt+T uz lygties ribu daro ta pati.
+968#£Dokumentas
+969#£Konvertuoti i LaTeX pdf faila
+970#£Konvertuoja visa dokumenta i LaTeX, isvercia ji i pdf faila su MikTex pdflatex ir atidaro ji numatytoje pdf failo programoje. MikTex turi buti idiegtas.
+971#£Konvertuoti i LaTeX .tex faila
+972#£Konvertuoja visa dokumenta i .tex faila ir atidaro ji pagal numatytaja .tex failo programa (TexWorks, TexMaker ir kt.). Failas dedamas i aplanka salia dokumento.
+973#£Konvertuoti i HTML
+974#£Konvertuoja pasirinkima arba visa dokumenta i html puslapi, kuris atidaromas narsykleje. Lygtys rasomos kaip LaTeX ir rodomos su MathJax (reikalingas internetas), paveiksleliai iterpiami i puslapi. Failas dedamas i aplanka salia dokumento, o html kodas be <head> jo nukopijuojamas i iskarpine, kad, pavyzdziui, butu galima iklijuoti i individualu HTML bloka WordPress.
+975#£Perejimas prie Markdown
+976#£Konvertuoja zymejima arba visa dokumenta i markdown (.md) faila: antrastes, sarasai, kabutes, paryskintos, kursyvu, perbraukimas, kodas, nuorodos, lenteles ir isnasos, o lygtis - LaTeX ($...$ ir $$...$$). Vaizdai issaugomi kaip failai tame paciame aplanke. Aplankas dedamas salia dokumento ir atidaromas, o tekstas nukopijuojamas i iskarpine.
+977#£Konvertuoti markdown i Word formatavima
+978#£Tai pavercia markdown atrankoje ar visame dokumente i Word formatavima: antrastes (#), sarasai (- ir 1st), citatos (>), paryskintos (**), kursyvas (*), perbraukimas (~~), kodas (' ir '''), nuorodos, vaizdai, lenteles, isnasos ir horizontalios linijos, o LaTeX ($...$ ir $$...$$) tampa lygciu laukais.
+979#£Pasirinkite, kuria komanda turetu atlikti kiekvienas klaviaturos spartusis klavisas (Alt+M, Alt+B, Alt+L...), ir perziurekite Word spartinius klavisus matematikos laukams.
+980#£Apie WordMat+
+981#£Truksta indekso {1}
+982#£Funkcijai {1} truksta argumento. Pavyzdziui, tipas {1}(x) arba {1}^(-1)(x) su Word funkcijos sablonu
+983#£Truksta vieno saraso elemento
+984#£Logaritmo bazinis skaicius turi buti teigiamas ir skirtingas nuo 1
+985#£Truksta skliaustu {1}\n\nSkliaustuose, kuriuose nera pradinio skliausto, paryskinta zemiau pateiktoje israiskoje su papildomais tarpais aplink: \n\n      {2}  )  {3}
+986#£Skliaustuose {1} nesutampa {2}\n\nSkliausteliai israiskoje pazymeti papildomomis tarpais: \n\n      {3}  {1} {4}  )  {5}
+987#£Truksta galutines lenteles {1}\n\nSkliaustuose, kuriuose nera uzdarymo skliaustu, paryskinta zemiau pateiktoje israiskoje su papildomomis tarpais aplink: \n\n      {2}  {1} {3}
+988#£Sintakses klaidos\n{1} operatoriaus negalima deti israiskos pradzioje.
+989#£Atvirkstine trigonometrines funkcijos klaida: {1}\nArgumentas turi buti tarp -1 ir 1
+990#£Sintakses klaidos\n{1} operatoriaus negalima deti israiskos pabaigoje.
+991#£Skaicius per didelis, kad butu galima konvertuoti i desimtaini skaiciu
+992#£Dalyba nuliu
+993#£Ivyko klaida. Formules cia ideti negalima. \nPabandykite uzdaryti visus Word dokumentus ir paleisti Word is naujo. \n\nKlaidos aprasymas: \n{1}
+994#£Lenteleje nera skaiciu. Reikia sukurti lentele su dviem stulpeliais: x reiksmes kairiajame stulpelyje ir y reiksmes desiniajame stulpelyje.
+995#£Reikia sukurti lentele su dviem stulpeliais. X reiksmes kairiajame stulpelyje ir Y reiksmes desiniajame stulpelyje.
+996#£Linijine regresija atliekama naudojant WordMat. WordMat:
+997#£Eksponentine regresija atliekama naudojant WordMat. WordMat:
+998#£Potencijos regresija, atliekama naudojant WordMat:
+999#£Nurodykite polinomines regresijos tvarka (1-{1})\n\n(Maksimali tvarka nustatoma pagal tasku skaiciu)
+1000#£Tvarka turi buti nuo 1 iki {1}
+1001#£Polinomine regresija laipsnio {1} atliekama naudojant WordMat. WordMat:
+1002#£Kryzmine lentele turi tureti bent 2 eilutes ir 2 skaiciu stulpelius.
+1003#£{1} - koherencijos testas atliekamas naudojant WordMat WordMat
+1004#£P-reiksme: {1} = {2}%
+1005#£Reiksmingumo lygyje {1} %, hipoteze 0, kad koreliacijos nera, gali buti atmesta. T. y. Tarp siu dvieju kintamuju egzistuoja koreliacija.
+1006#£Reiksmingumo lygyje {1}% hipotezes atmesti negalima. Todel nera irodymu, kad egzistuoja koreliacija tarp siu dvieju kintamuju.
+1007#£Yra tiketinos reiksmes mazesnes nei 5 arba visu langeliu suma mazesne nei 50. Todel {1} pasiskirstymas siuo atveju yra prasta aproksimacija, o rezultatas - nepatikimas. Kai kuriais atvejais duomenu medziaga gali buti naudojama sudarius kitoki grupavima.
+1008#£P-reiksme:
+1009#£Q-reiksme:
+1010#£Kritine Q-verte:
+1011#£WordMat Excel failo {1} nepavyko rasti. Si funkcija reikalauja idiegti WordMat.
+1012#£Idejus ideta Excel lentele...
+1013#£Bandant iterpti Excel lenteles ivyko klaida.
+1014#£Klaida skaitant faila: {1}
+1015#£GeoGebra 5 atidaryti nepavyko: {1}
+1016#£GeoGebra 5 nera idiegta jusu kompiuteryje. \n\nNorite atsisiusti GeoGebra 5? (Ne: grafikas rodomas GeoGebra skaiciuotuvu rinkinyje)
+1017#£GeoGebra atsisius zaidima jusu narsykleje. Eikite i "Downloads" ir paleiskite diegimo programa.
+1018#£Bandant atidaryti ivyko klaida: {1}
+1019#£Si WordMat+ versija pati netikrina nauju versiju. Dabar busite nukreipti i atsisiuntimo puslapi.
+1020#£WordMat+ negali patikrinti naujos versijos siame kompiuteryje (truksta WordMat MathMenu.dll arba yra senesne). Dabar busite nukreipti i atsisiuntimo puslapi.
+1021#£Jus jau turite naujausia WordMat+ v.{1}
+1022#£Yra nauja WordMat versija, kuria galima atsisiusti. \nNaujienos:  \n{1}\n\nSpustelekite OK, kad pradetumete atnaujinima.
+1023#£Nauja versija {1}
+1024#£Yra nauja WordMat versija, kuria galima atsisiusti. \nNaujienos:  \n{1}\nDabar busite nukreipti i atsisiuntimo puslapi
+1025#£Buvo klaida, susijusi su atnaujinimo tikrinimu. Dabar busite nukreipti i svetaine, kur galesite suzinoti, ar yra naujas atnaujinimas. Dabartine versija yra: {1}
+1026#£Atnaujinimas negali buti automatiskai atsisiunciamas siame kompiuteryje (truksta WordMat MathMenu.dll arba yra senesne versija). Dabar busite nukreipti i atsisiuntimo puslapi.
+1027#£Diegimo failo atsisiuntimas
+1028#£Diegimo failas neturi galiojancio skaitmeninio paraso is Eduap. Jis vel buvo istrintas.
+1029#£Diegimo failas nebuvo tinkamai atsisiustas
+1030#£Diegimo failas buvo atsisiustas. \nSpustelekite Gerai, kad pradetumete atnaujinima. Jums bus pasiulyta issaugoti ir uzdaryti Word.
+1031#£Diegimo paleisti nepavyko (klaida {1}).
+1032#£Atnaujinimo metu ivyko klaida (klaida {1}).
+1033#£Si WordMat+ versija negali atsisiusti ir idiegti atnaujinimu. Dabar busite nukreipti i atsisiuntimo puslapi.
+1034#£Atnaujinimas i beta versija reikalauja WordMat+.
+1035#£Norite pradeti diegti beta versija?
+1036#£Atnaujinimo beta versija
+1037#£Idiegiant beta versija ivyko klaida: {1}
+1038#£Pirkimo puslapio atidaryti siame kompiuteryje negalima (truksta WordMat MathMenu.dll arba yra senesne versija). Idiekite WordMat dar karta.
+1039#£Komanda dar nera prieinama WordMat+ programoje. Skiltyje Shortcuts pasirinkite kita komanda klavisui.
+1040#£Ankstesnis rezultatas
+1041#£WordMat+: pries lygti nera rezultato.
+1042#£WordMat+: daugiau rezultatu nera. Bakstelekite dar karta, kad suzinotumete naujausia informacija.
+1043#£Ivyko klaida: {1}
+1044#£Rezultatas nebuvo igyvendintas.
+1045#£Diegimo failas buvo atsisiustas. \nSpustelekite "Gerai", kad pradetumete atnaujinima
+1046#£Eduap serveris grazino klaida. \nTikiuosi, kad tai laikina problema. Jei problema islieka ir turite galiojancia WordMat+ licencija, susisiekite su eduap@eduap.com\n\nKlaida: wordmatlicense nepavyko
+1047#£Nera interneto
+1048#£WordMat+ negali patikrinti licencijos, nes WordMat MathMenu.dll negali buti naudojama siame kompiuteryje. \n\nFailas dinges, yra senesne versija arba ji blokuoja saugumo nustatymai (antivirusine programa, galiniu tasku apsauga). \n\nIdiekite WordMat dar karta arba susisiekite su savo IT skyriumi. Iki tol WordMat+ veiks tarsi be licencijos.
+1049#£Spustelekite "Leisti" du kartus po to, kai uzdarete si langa\nTai reikia padaryti tik viena karta.
+1050#£Leidimai WordMat
+1051#£GeoGebra matematikos programeles nerastos
+1052#£Nerasti programu failai
+1053#£Sinusine regresija reikalauja aktyvios WordMat+ licencijos.
+1054#£Sinusu regresija, atliekama naudojant WordMat ({1} m.): WordMat ( m.):
+1055#£Excel regresija...
+1056#£WordMat Excel failo Graphs.xltm rasti nepavyko. Excel regresijai reikia idiegti WordMat.
+1057#£Buvo klaida bandant iterpti Excel lenteles. Tai gali buti del to, kad Excel anksciau uzstrigo. Uzdarykite atidarytas Excel lenteles ir atidarykite Excel pries bandydami dar karta per WordMat.
+1058#£{1} turi keleta neapibreztu kintamuju. Nepriklausomo kintamojo identifikuoti negalima. Naudokite x arba t kaip nepriklausoma kintamaji.
+1059#£Turi buti bent 3 duomenu taskai.
+1060#£Sinusine regresija
+1061#£Negalejau ivertinti daznio per FFT.
+1062#£atliko kartu su WordMat{1}:
+1063#£Modelyje nepriklausomas kintamasis neapima {1}
+1064#£Modelis neturi parametru (kintamuju, isskyrus {1})
+1065#£Turi buti bent tiek tasku, kiek parametru ({1})
+1066#£Individualizuota regresija reikalauja Maxima, kai nera aktyvios WordMat+ licencijos.
+1067#£Regresija nerado parametru. Pabandykite su kitais pradiniais spejimais
+1068#£{1} pasiskirstymas
+1069#£Sveikinu! \nJusu mokykla pasirase partneryste ir WordMat+ dabar aktyvuotas.
+1070#£Sekme
+1071#£Deja\nJusu mokykla dar nepasirase partnerystes.
+1072#£Nera partnerystes
+1073#£XMIN turi buti >0, kad naudotu logaritmine x asi.
+1074#£YMIN turi buti >0, kad naudotu logaritmine y asi.
+1075#£Grafiko iterpti negalima: {1}
+1076#£WordMat+ ijungtas {1}
+1077#£Versija: {1}
+1078#£WordMat+ leidzia atlikti matematinius skaiciavimus Word programoje. Skaiciavimus atlieka CAS, kuris yra WordMat+ dalis, todel nereikia diegti kitu programu. \nWordMat sukure Mikael Sams¿e S¿rensen, Nyborg gimnazija, EDUAP 2009-{1}.
+1079#£Sekme!
+1080#£Duomenu truksta
+1081#£Pradine {1} reiksme nera skaicius
+1082#£Pradzios, pabaigos ir zingsnio ilgis turetu buti skaiciai
+1083#£Diferencialiniu lygciu isspresti nepavyko: {1}
+1084#£Pasirinkite bent viena kintamaji, kuri rodysite
+1085#£Per daug tasku GeoGebrai. Pasirinkite didesni zingsnio ilgi.
+1086#£Excel negalejo atsidaryti: {1}
+1087#£Pradzia nera skaicius
+1088#£Pabaiga nera skaicius
+1089#£Zingsnio ilgis nera skaicius
+1090#£Yra {1} zingsniu. Tikriausiai GeoGebra neveikia su tiek daug zingsniu.
+1091#£Negalite vienu metu isspresti lygties {1} ir tuo paciu ja apibrezti.
+1092#£Diferencialine lygtis:
+1093#£Pradzios salygos:
+1094#£Pavadintos lygtys
+1095#£Pasirinkite lygti, i kuria norite kreiptis, ir spustelekite OK (arba dukart spustelekite). Nuoroda tampa lygties numeriu ir atnaujinama, kai skaiciai keiciasi.
+1096#£Noredami veliau iterpti nuoroda i lygti, pasirinkite "Iterpti nuoroda i lygti" po "Nauja lygtis".
+1097#£Restart Maxima
+1098#£Naudokite Word kaip LaTeX redaktoriu. \n\nLaTeX komandas galite ivesti tiesiai i dokumenta, kad pilnai valdytumete, arba naudoti Word funkcijas ir leisti WordMat+ konvertuoti i LaTeX. \n\nNorint sukurti pdf faila, reikia idiegti MikTex. Jei jo truksta, busite nukreipti i instaliacija. \n\nSalia dokumento sukuriamas aplankas ("dokumento pavadinimas-Latex") su tex failu ir paveiksleliais.
+1099#£Palaikomas formatavimas: \n- Antrastes (stiliai) tampa sekcijomis ir poskyriais: \n   Pavadinimas = skyrius (dokumento klase, knyga ar ataskaita; straipsnis: dokumento pavadinimas)\n   Antraste 1 = skyrius, antraste 2 = poskyris, antraste 3 = poskyris\n- Paryskintas, kursyvu ir pabrauktas sriftas\n- Puslapio numeris ijungtas/isjungtas, kaip dokumente\n- Lygtys: eiluteje, sunumeruotos ir nenumeruotos (simboliai pridedami prie Nustatymai, Notacija)\n- Punktai (punktai ir skaiciai)\n- Lenteles\n- Vaizdai, formos ir diagramos\n- Bibliografija
+1100#£LaTeX nustatymai
+1101#£Dokumentu klase:
+1102#£Srifto dydis:
+1103#£Naudokite Word parastes
+1104#£Naudokite dokumento parastes vietoje LaTeX numatytu parastiu (paketo geometrija)
+1105#£Titulinis puslapis
+1106#£Atskiras titulinis puslapis su dokumento pavadinimo pavadinimu ir dokumento autoriumi
+1107#£Turinys
+1108#£Atskiras turinio lenteles puslapis po titulinio puslapio
+1109#£Numeruotos atkarpos
+1110#£Antrastes yra sunumeruotos
+1111#£Srifto dydis paprastam tekstui. Word srifto dydis nenaudojamas
+1112#£LaTeX preambule
+1113#£Automatiskai generuota:
+1114#£Savosios:
+1115#£Istrinu savo izanga
+1116#£Sukuria LaTeX koda kaip tex faila ir atidaro ji numatytoje tex failu programoje (TexWorks, TexMaker...), kad kodas butu perziuretas ir koreguojamas
+1117#£Sukuria LaTeX dokumenta kaip pdf faila naudodamas MikTex. MikTex, kuri butina idiegti. Turetu buti naudojamas tik paprastiems dokumentams
+1118#£Palaukti, palauk...
+1119#£{1}... (tavo paties izanga) ... \n\n{2}
+1120#£Pasirinkite, kaip perfrazuoti sia fraze.
+1121#£Isvesties vienetai:
+1122#£Sumazinti
+1123#£Faktorius
+1124#£Iterpiama uz skliaustu, pvz., x^2-1 iki (x-1)(x+1).
+1125#£Padauginkite skliaustus, pvz., (x+1)^2 i x^2+2x+1.
+1126#£Pvz., x^2+6x+5 iki (x+3)^2-4, taip pat apskritimo lygtis.
+1127#£Visi desimtainiai skaiciai konvertuojami i trupmenas, o rezultatas yra tikslus.
+1128#£Klijuokite ant tos pacios linijos
+1129#£Rezultatas rasomas po israiskos su lygybes zenklu (ne lygtimi)
+1130#£Logaritmo isvestis
+1131#£Auto
+1132#£Pasirinkite pasalinamus kintamuosius.
+1133#£Is {2} lygciu galima pasalinti daugiausia {1} kintamuosius.
+1134#£Pasirinkite maksimalu {1} kintamuju, nes yra {1} lygciu.
+1135#£Pasalinkite maksimalu {1} kintamuju skaiciu
+1136#£Arba rasykite patys, atskirtus kableliais
+1137#£Pasirinkite iki {1} kintamuju
+1138#£Arba rasykite juos atskirai kableliais (likusieji pasirenkami automatiskai)
+1139#£Pasalinti kintamuosius
+1140#£Spresti lygti
+1141#£Lygtis is esmes galima spresti dviem skirtingais budais. Jei susiduriate su problemomis su lygtimi, gali buti naudinga isbandyti kita metoda.
+1142#£Sprendiniai randami "spejant" daugybe skirtingu sprendiniu. Metodas veikia beveik visose lygtyse, taciau sprendinius galima nepastebeti ir rasti klaidingus sprendinius.
+1143#£Ispejimas: irenginiai ijungti. \nSaugokites kintamuju, kurie yra vienetai, pvz., A, C, F, H, J, K, L, N, S, T, V, W, m, g, u, s
+1144#£Laiko limitas, skaitmenu skaicius ir n mokslineje notacijoje turi buti skaiciai.
+1145#£Laiko limitas turi buti bent 0, skaitmenu skaicius ne mazesnis kaip 20, o n mokslineje notacijoje - sveikasis skaicius nuo 0 iki 100.
+1146#£Pasirinkite bent viena CAS paraiska.
+1147#£Atsargines kopijos aplankas yra: {1}
+1148#£Ijungtas WordMat+.
+1149#£Tam reikalingas WordMat+.
+1150#£Nustatymai atstatomi.
+1151#£Desimtainiai skaiciai
+1152#£Dokumento {1} nuolaida
+1153#£Markdown {1} Word
+1154#£WordMat trikampio sprendiklis naudojamas su ivestimi:
+1155#£Kadangi kosinuso rysi issprendeme auksciau del
+1156#£Kvadratinis uzbaigimas reikalauja kvadratinio polinomo
+1157#£{1} turi tureti du numerius, pvz., binomial(7; 2)
+1158#£Turi buti bent dvi lygtys, is kuriu galima atmesti, pvz., eliminate([x=2t+1; y=t^2]; t)
+1159#£eliminate reikalauja pasalinti lygtis ir kintamuosius, pvz., eliminate([x=2t+1; y=t^2]; t)
+1160#£TestTF reikalauja lygties
+1161#£Israiska tampa per didele, kad ja butu galima padauginti
+1162#£binomial (n; r) reikalauja n{1}0
+1163#£Prielaida turi buti nelygybe, pvz., x>0: {1}
+1164#£Prielaida turi buti nelygybe tarp kintamojo ir skaiciaus, pvz., x>0
+1165#£Prielaidos reiksmes apskaiciuoti negalima: {1}
+1166#£Neigiamam skaiciui tiesi saknis nera apibrezta
+1167#£Neigiamo skaiciaus laipsnis siam eksponentui nera apibreztas
+1168#£Skaicius per didelis
+1169#£Ln ir log apibreziami tik teigiamiems skaiciams
+1170#£diff turetu tureti 1-3 argumentus: diff(israiska; x; n)
+1171#£Antrasis parametras diferencijoje turi buti kintamasis, pvz., diff(x^2; x)
+1172#£Treciasis parametras diferencialiniame skaiciuje turi buti sveikasis skaicius
+1173#£Treciasis parametras diferencijoje turetu buti skaicius nuo 0 iki 100
+1174#£Nurodykite, pagal kuri kintamaji diferencijuoti, pvz., diff(expression; x)
+1175#£{1} dar negalima atskirti
+1176#£Uzrasykite ribine reiksme kaip klijus su x{1}a zemiau
+1177#£Po kliju truksta isvaizdos
+1178#£Fragmentine funkcija turi tureti israiska ir salyga kiekvienoje eiluteje
+1179#£Fragmentine funkcija cia nera apibrezta (ne viena salyga nera ivykdyta)
+1180#£Poliarine notacija r{1}v reikalauja, kad butu ijungti kompleksiniai skaiciai
+1181#£Uzrasyk kompleksini skaiciu poliarineje formoje, pavyzdziui, r{1}v
+1182#£{1} turi tureti viena argumenta, pvz., {1}(3+2i)
+1183#£0 argumentas nera apibreztas
+1184#£Lygtis negali buti padalinta i realia ir isivaizduojama dali
+1185#£Visi kompleksiniai skaiciai yra sprendiniai
+1186#£Lygtis turi begalini sprendiniu skaiciu ({1} yra ant kreives)
+1187#£Kvadratines saknies is {1} nerandama
+1188#£{1} pozymis nera zinomas
+1189#£{1} apibrezimu aibe gali apimti tik {2}: {3}
+1190#£{1} apibrezimu aibe turi tureti {2}: {3}
+1191#£Apibrezime nera lygybes zenklo: {1}
+1192#£Tai nera apibrezimas: {1}
+1193#£Apibrezimas nera pilnas: {1}
+1194#£{1} yra komanda ir negali buti apibrezta
+1195#£Funkcijos apibrezimo parametrai turi buti kintami, pvz., f(x)=2x+1: {1}
+1196#£Negalima apibrezti imontuotos funkcijos: {1}
+1197#£{1} yra konstanta ir negali buti apibrezta
+1198#£Apibrezimo kaireje puseje turi buti pavadinimas arba funkcija, pvz., a=5 arba f(x)=2x+1: {1}
+1199#£Indeksas {1} yra uz matricos {2} ribu ({3} eilutes)
+1200#£Indeksas {1} yra uz matricos {2} ribu ({3} bruksniu)
+1201#£Indekso {1} yra uz {2} ribu ({3} elementu)
+1202#£Apibrezimas naudoja pats save (rekursyvus apibrezimas)
+1203#£Funkcija {1} turi tureti {2} argumenta(-us)
+1204#£Tik vieno kintamojo funkcija gali buti diferencijuota pagal zyma: {1}
+1205#£{1} nera apibrezta {2} (apibrezimu rinkinys yra {3})
+1206#£{1} negali buti naudojamas kaip skaitiklis, nes {1} yra apibreztas. Istrinkite apibrezima arba naudokite kita pavadinima.
+1207#£Slenkstis {1} negali rasti, nes {1} yra apibreztas. Istrinkite apibrezima arba naudokite kita pavadinima.
+1208#£Iterpimas po {1} negali buti padarytas, nes {1} yra apibreztas. Istrinkite apibrezima arba naudokite kita pavadinima.
+1209#£Diferencijavimas pagal {1} negali buti diferencijuotas, nes {1} yra apibreztas. Istrinkite apibrezima arba naudokite kita pavadinima.
+1210#£Per {1} negalima isspresti, nes {1} yra apibrezta. Istrinkite apibrezima arba naudokite kita pavadinima.
+1211#£Israiska negali buti rodoma GeoGebra: {1}
+1212#£GeoGebra negali buti naudojama WordMat+ israiskai
+1213#£GeoGebra paleisti negalima (WordMat MiniBrowser)
+1214#£GeoGebra negalima paleisti (WordMat AppleScript)
+1215#£GeoGebra buvo sustabdyta, nes skaiciavimas uztruko daugiau nei {1} sekundes
+1216#£GeoGebra nera idiegta (WordMat geogebra-math programeles)
+1217#£GeoGebra paleisti nepavyko (truksta WordMat WebViewWrap)
+1218#£GeoGebra paleisti neimanoma.
+1219#£GeoGebra negali pasikliauti irenginiais
+1220#£GeoGebra negali to apskaiciuoti: {1}
+1221#£GeoGebra cia negali buti naudojama {1}
+1222#£Testo lygtis reikalauja lygties
+1223#£GeoGebra negali buti naudojama siai diferencialinei lygciai
+1224#£GeoGebra negali naudoti sios salygos
+1225#£GeoGebra negali naudoti siu terminu
+1226#£GeoGebra negali isspresti diferencialines lygties
+1227#£GeoGebra negali pasalinti kintamuju
+1228#£GeoGebra negali isspresti lygties
+1229#£GeoGebra rado tik sudetingus sprendinius
+1230#£GeoGebra negali to apskaiciuoti
+1231#£GeoGebra rado tik viena sudetinga rezultata
+1232#£Grafikas negalejo buti rodomas: {1}
+1233#£Sukamojo korpuso nebuvo galima rodyti: {1}
+1234#£Pasirinkite viena ar kelias funkcijas, pvz., f(x)=x^2 arba y={1}x. Po kablelio rasoma apibrezimu aibe, pvz., f(x)=x^2, 0{2}x{2}2.
+1235#£{1} nera x funkcija ir negali buti rodoma kaip sukimo momentas.
+1236#£Graph nera prieinamas Mac kompiuteriui.
+1237#£Grafas negalejo buti rodomas Graph: {1}
+1238#£Grafas nepalaiko keliu kintamuju funkciju: {1}
+1239#£Grafikas negali rodyti vektoriu ir kreiviu: {1}
+1240#£Grafas negali rodyti vektoriu ir tasku 3D:{1}
+1241#£Iveskite verte uz {1}\n\nVeliau ja galima koreguoti pagal pasirinktines funkcijas Graph programoje. Netgi galite sukurti animacija, kurioje reiksme nuolat keiciasi, skiltyje Calculate/Animate.
+1242#£Krypties juosta negalejo buti rodoma: {1}
+1243#£Rodyti grafika
+1244#£Jis issprendzia {1}, kuris taip pat yra vienetas. Todel {1} nera vienetas sioje lygtyje. Apsvarstykite galimybe naudoti kita kintamojo pavadinima arba isjungti vienetus.
+1245#£Pazymekite lygti, kuria reikia isspresti
+1246#£Pasirinkite diferencialine lygti sprendimui
+1247#£Nustatykite funkcija pradinems salygoms
+1248#£negalejo buti isspresta
+1249#£Diferencialine lygtis sprendziama naudojant . WordMat ({1})
+1250#£pradine salyga {1}
+1251#£pradines salygos {1}
+1252#£su ribinemis salygomis {1}
+1253#£Lygtis {1} naudojant WordMat.
+1254#£Israiska {1} naudojant WordMat.
+1255#£sumazintas
+1256#£Faktorizuota
+1257#£Padauginta
+1258#£Perrasyta su kvadratiniu uzbaigimu
+1259#£Perrasyta i trupmenas
+1260#£Perfrazuota
+1261#£Kintamieji {1} buti pasalinti naudojant WordMat.
+1262#£Kintamasis {1} buti pasalintas naudojant WordMat.
+1263#£Pasirinkite lygti testavimui
+1264#£Lygtis yra teisinga.
+1265#£Lygtis galioja visoms {1} reiksmems.
+1266#£Lygtis yra klaidinga.
+1267#£Lygtis yra klaidinga, nes kaire puse nera apibrezta.
+1268#£Lygtis yra klaidinga, nes desine puse nera apibrezta.
+1269#£Lygtis yra klaidinga visoms {1} reiksmems.
+1270#£Lygtis nera teisinga visoms {1} reiksmems. Pavyzdziui, ji klaidinga {2}
+1271#£, kur kaire puse nera apibrezta.
+1272#£kur desine puse nera apibrezta.
+1273#£Lygtis tikriausiai teisinga. Jos tiksliai irodyti nepavyktu, taciau abi puses turi ta pacia skaitine verte.
+1274#£Lygtis tikriausiai teisinga visoms {1} reiksmems. Jos tiksliai irodyti nepavyktu, taciau ji teisinga visuose {2} taskuose, kuriuose ji buvo skaitmeniskai patikrinta.
+1275#£Lygtis nera teisinga visoms {1} reiksmems.
+1276#£Negalima nustatyti, ar lygtis yra teisinga.
+1277#£Lygtis tikrinama naudojant WordMat.
+1278#£Klaida apibrezime {1}: {2}
+1279#£Mokesciu sistema sprendziama skaitmeniniu budu {1} naudojant WordMat.
+1280#£Mokesciu sistema sprendziama {1} naudojant WordMat.
+1281#£Nelygybe sprendziama skaitmeniskai {1} naudojant WordMat.
+1282#£Nelygybe sprendziama {1} naudojant WordMat.
+1283#£Lygtis sprendziama skaitmeniskai {1} intervale {2} naudojant WordMat.
+1284#£Lygtis sprendziama skaitmeniskai {1} naudojant WordMat.
+1285#£Lygtis sprendziama {1} naudojant WordMat.
+1286#£Skaiciavimas buvo sustabdytas dar nepatikrinus viso intervalo. Gali buti keletas sprendimu.
+1287#£Skaiciavimas buvo sustabdytas, kol nebuvo rasti visi sprendimai. Gali buti keli sprendimai.
+1288#£Lygciu sistema neturejo sprendiniu {2} kintamiesiems {1}
+1289#£Nelygybe neturejo sprendiniu apibrezimu aibeje {1}
+1290#£Nelygybe neturejo sprendimu {2} kintamiesiems {1}
+1291#£Sprendimu nerasta
+1292#£Lygtis neturejo sprendiniu apibrezimu aibeje {1}
+1293#£Lygtis neturejo sprendiniu {2} kintamiesiems {1}
+1294#£Po integralo israiskos {1}x rasykite (pvz., {2}x^2 {1}x)
+1295#£Lygtis turi struktura, kurios VBACAS dar negali apskaiciuoti: \n\n      {1}
+1296#£Parasykite suma, kur k=a zemiau ir b virs simbolio (pvz., k=1 ir n)
+1297#£Lygtyje yra akcentas, kurio VBACAS dar negali apskaiciuoti: \n\n      {1}
+1298#£Lygtyje yra struktura, kurios VBACAS dar negali apskaiciuoti (daugiaeile lygciu matrica): \n\n      {1}
+1299#£Lygtyje yra struktura, kurios VBACAS dar negali apskaiciuoti (pvz., sumavimas, integralas, riba, matrica ar akcentas): \n\n      {1}
+1300#£Rasykite {1}x {1}y po israiskos dvigubame integrale (pvz., {2}xáy {1}x {1}y)
+1301#£Integralas turi tureti {1} diferencialus (pvz., {2}x {2}y)
+1302#£Lygtis, atrodo, apima:
+1303#£taciau Word ji issaugojo taip, kad funkcijos argumentas testusi po skliausteliu:
+1304#£Jos negalima matyti lygtyje, taciau ji duoda kitoki rezultata.
+1305#£Ar lygtis turetu buti pataisyta taip, kad butu apskaiciuota taip, kaip yra? \n(Ne: skaiciuoti, nes Word issaugojo)
+1306#£Reikia pasirinkti lentele
+1307#£Lenteleje nera galiojanciu skaiciu poru
+1308#£integrate turi tureti 1, 2 arba 4 argumentus: integrate(israiska; x) arba integrate(israiska; x; a; b)
+1309#£Antrasis parametras integrate turi buti kintamasis, pvz., integrate(x^2; x)
+1310#£Nurodykite, po kurio kintamojo integruoti, pvz., integrate(israiska; x)
+1311#£Integralas negali buti apskaiciuotas: integrandas nera apibreztas visame intervale
+1312#£Integralas negalejo buti apskaiciuotas pakankamai tiksliai skaitmeniskai (integrandas per daug svyruoja)
+1313#£Lygties radimas
+1314#£Lygties skaitymas
+1315#£lygties pakeitimas
+1316#£Sios lygties nebuvo galima konvertuoti i LaTeX ({1}): {2}
+1317#£LaTeX {1} lygtis
+1318#£{1} {2} negalejo buti konvertuota i lygtis ir nebuvo pakeista: {3}
+1319#£LaTeX kodas negalejo buti konvertuotas i lygti: {1}
+1320#£Kodas tuscias.
+1321#£Si funkcija nera palaikoma Mac kompiuteryje.
+1322#£Si WordMat+ versija negali sukurti pdf failu su MikTex. Sukurkite tex faila vietoj to.
+1323#£MikTex nera idiegtas. Dabar busite nukreipti i miktex.org, kur ji galima atsisiusti. Pirma karta paleidus konverteri, taip pat busite paprasyti atsisiusti tam tikrus paketus. Tiesiog spustelekite OK.
+1324#£Issaugokite dokumenta pries konvertuodami ji i LaTeX. LaTeX failai dedami i aplanka salia dokumento.
+1325#£Dokumentas nera jusu kompiuteryje (OneDrive). Issaugokite ji kompiuterio aplanke pries konvertuodami.
+1326#£Lygciu konvertavimas
+1327#£Formatavimo konvertavimas
+1328#£Vaizdu konvertavimas
+1329#£Konvertavimo lenteles
+1330#£Pastraipu konvertavimas
+1331#£Failo rasymas
+1332#£{1} {2} negalejo buti issaugotas kaip failas ir buvo pakeistas kadru su tekstu "Truksta paveikslelio n".
+1333#£Dokumento nebuvo galima konvertuoti i LaTeX: {1}
+1334#£WordMat+ nerado jokio aplanko, kuriame butu leidziama rasyti siame Mac kompiuteryje.
+1335#£MikTex (pdflatex.exe) nebuvo rastas.
+1336#£pdflatex veikia {1}. Laikas
+1337#£Ivyko klaida, kai pdflatex.exe buvo vairuojamas.
+1338#£LaTeX dokumento isversti nepavyko. pdflatex pateike klaida: \n\n{1}\n\nSpustelekite OK, kad atidarytumete tex faila.
+1339#£PDF failas jau sukurtas, taciau sie simboliai pdflatex negali rasyti. Jie pakeisti paryskintu ? PDF faile: \n\n{1}
+1340#£PDF failo nepavyko rasti. Spustelekite OK, kad atidarytumete tex faila ir butu galima rasti klaida.
+1341#£Paveiksleliu aplankas
+1342#£dokumento aplankas
+1343#£Konvertuoja nuorodas ir paaiskinimus
+1344#£Kopijavimas i segtuva
+1345#£HTML puslapis issaugomas kaip\n{1}
+1346#£HTML kodo nebuvo galima nukopijuoti i iskarpine.
+1347#£{1} {2} negalejo buti skaitoma ir buvo uzrasyta kaip tekstas.
+1348#£{1} {2} issaugoti nepavyko ir jis buvo pakeistas tekstu "Truksta paveikslelio n (Truksta paveikslelio n").
+1349#£Dokumento nebuvo galima konvertuoti i html ({1}): {2}
+1350#£(not used)
+1351#£Markdown failas issaugomas kaip\n{1}
+1352#£Markdown tekstas nukopijuojamas i segtuva.
+1353#£Markdown teksto nebuvo galima nukopijuoti i segtuva.
+1354#£Paveiksleliai saugomi kaip failai tame paciame aplanke.
+1355#£{1} {2} nepavyko isgelbeti.
+1356#£Dokumento nebuvo galima konvertuoti i markdown ({1}): {2}
+1357#£*Truksta {1} vaizdo*
+1358#£Markdown nebuvo galima konvertuoti: {1}
+1359#£{1} {2} kompiuteryje nerasta ir nera ideta.
+1360#£{1} {2} negalejo buti paversti lygciu laukais.
+1361#£LaTeX sablonas (LatexWordTemplate.dotx) nebuvo rastas. Jis idiegiamas kartu su WordMat.
+1362#£limit turetu tureti 3 arba 4 argumentus: limit(israiska; x; a) arba limit(israiska; x; a; plius)
+1363#£Ketvirtasis parametras ribose turi buti plius arba minus
+1364#£Riba neegzistuoja
+1365#£{1} turi tureti 4 argumentus: {1}(israiska; k; a; b)
+1366#£Antrasis parametras {1} kintamajame turi buti kintamasis, pvz., {1}(k^2; k; 1; n)
+1367#£Apatine riba negali buti begaline
+1368#£Per daug sanariu (maksimalus {1})
+1369#£Terminas {1}={2} neturi reiksmes
+1370#£Eilute yra divergentine (suma neegzistuoja)
+1371#£Galios sumos apskaiciuoti neimanoma.
+1372#£Nuline matrica turetu buti nuo 1 iki 100 dydzio
+1373#£Vienetine matrica turi buti nuo 1 iki 100 dydzio
+1374#£Matricos sandauga reikalauja, kad pirmasis turetu tiek stulpeliu, kiek antrasis turi eiluciu ({1} ir {2})
+1375#£Masyvas gali buti pakeltas tik iki sveikojo skaiciaus (arba T transponuotam)
+1376#£Matrica gali buti pakelta tik iki sveikojo skaiciaus
+1377#£Tik kvadratines matricos gali buti pakeltos iki laipsnio (matrica yra {1})
+1378#£Eksponentas per didelis
+1379#£Determinantas egzistuoja tik kvadratinems matricoms (matrica yra {1})
+1380#£Parametru masyvo determinantas gali buti apskaiciuotas ne daugiau kaip {1}{1}
+1381#£Tik kvadratines matricos turi atvirkstine matrica (matrica yra {1})
+1382#£Matrica neturi inverso (determinantas yra 0)
+1383#£Parametru masyvo inversa galima apskaiciuoti ne daugiau kaip {1}{1}
+1384#£Maxima nera idiegta (WordMat)
+1385#£Maxima negalima paleisti (truksta WordMat MathMenu.dll)
+1386#£Maxima negalima paleisti
+1387#£Maxima negalima paleisti (WordMat AppleScript)
+1388#£Maxima uzdave klausima, i kuri WordMat+ negali atsakyti
+1389#£Maxima buvo sustabdyta, nes skaiciavimas uztruko daugiau nei {1} sekundes
+1390#£Rysys su Maxima per WSH reikalauja partnerystes
+1391#£Maxima negalejo paleisti per WSH: klaida {1} {2}
+1392#£Klaidos Maxima kode (kodo laukuose arba kodo faile): {1}
+1393#£Maxima negali apskaiciuoti {1}
+1394#£Maxima negali buti naudojami {1} WordMat+
+1395#£Pradines salygos dviejuose skirtinguose taskuose
+1396#£Sios salygos
+1397#£Maxima negali isspresti diferencialines lygties
+1398#£Maxima negali to apskaiciuoti
+1399#£Maxima rado tik viena kompleksini rezultata
+1400#£Maxima negali pasalinti kintamuju
+1401#£Maxima negali isspresti nelygybes
+1402#£Maxima negali isspresti lygties
+1403#£Maxima rado tik sudetingus sprendinius
+1404#£Gnuplot nera prieinamas Mac platformai. Naudokite GeoGebra.
+1405#£Grafikas negalejo buti rodomas su Gnuplot: {1}
+1406#£Klaida Maxima kode
+1407#£Kodo laukai arba kodo failas turi klaida: {1}
+1408#£Iveskite Maxima komanda
+1409#£Klaida Maxima kode (kodo laukuose): {1}
+1410#£Yra per daug stulpeliu
+1411#£Skaiciavimas buvo sustabdytas
+1412#£Terminas daliai skaiciavimo jau virsytas
+1413#£Skaiciavimas buvo sustabdytas, nes uztruko daugiau nei {1} sekundes
+1414#£Fakultetas apibreziamas tik sveikiesiems skaiciams
+1415#£Fakultetas apibreziamas tik skaiciams >= 0
+1416#£Ju skaicius per didelis destytojams
+1417#£Skaicius per didelis - VBACAS negali skaiciuoti skaiciu virs 170 kaip desimtainiu skaiciu
+1418#£desolve turi tureti diferencialine lygti, pvz., desolve(y'=2y)
+1419#£Diferencialine lygtis turi buti lygtis, pvz., y'=2y
+1420#£Argumentas, {1} "desolve", nera suprantamas
+1421#£Lygtyje nera isvestines funkcijos (pvz., y')
+1422#£Lygtis neturi jokios isvestines is {1}
+1423#£Nera laisvo pavadinimo konstantai
+1424#£Isvestines tvarka turi buti skaicius
+1425#£Salygas rasykite kaip {1}(0)=2 po lygties: desolve(lygtis; {1} (0)=2)
+1426#£Aukstesnes nei 2 eiles diferencialines lygtys negali buti issprestos
+1427#£Diferencialines lygties isspresti nepavyko ({1}{2} negalima izoliuoti)
+1428#£Diferencialines lygties isspresti nepavyko (ji nera nei linijine, nei atskiriama)
+1429#£Diferencialines lygties isspresti nepavyko ({1}{2}{2} negalima izoliuoti)
+1430#£Diferencialines lygties isspresti nepavyko (antra eile galima isspresti, kai ji yra linijine su pastoviais koeficientais, arba {1}{3}{3}=f({2}))
+1431#£Diferencialines lygties isspresti nepavyko (daleliu sprendinio {1} nerasta)
+1432#£Antros eiles diferencialine lygtis gali tureti ne daugiau kaip dvi salygas
+1433#£Salygos turi buti lygtys, pvz., {1}(0)=1 ir {1}{2}(0)=2
+1434#£Salygos turetu buti uzrasytos kaip {1}(0)=1 ir {1}{2}(0)=2
+1435#£Joks sprendimas neatitinka salygu
+1436#£Pirmos eiles diferencialine lygtis turi tureti viena salyga, pvz., {1}(0)=2
+1437#£Salyga turi buti lygtis, pvz., {1}(0)=2
+1438#£Salyga turetu buti uzrasyta kaip {1}(0)=2
+1439#£Joks sprendimas neatitinka salygos {1}
+1440#£Diferencialines lygties isspresti nepavyko (kamieno funkcijos {1} rasti nepavyko)
+1441#£Zingsnio ilgis turi buti teigiamas
+1442#£Galutine verte turi buti didesne uz pradine
+1443#£Per daug zingsniu ({1}). Pasirinkite didesni zingsnio ilgi
+1444#£Iveskite tik desine diferencialines lygties puse {1}: {2}
+1445#£Apibrezkite {1} pagal apibrezimus
+1446#£Diferencialines lygties {1} negalima apskaiciuoti pagal {2}={3}
+1447#£Zymekli idekite i israiska, kuri bus perfrazuojama.
+1448#£Maxima komanda reikalauja WordMat Maxima, kuri nera idiegta.
+1449#£Iveskite Maxima komanda, pvz., integrate(x^2,x) arba factor(x^2-1). Rezultatas uzrasomas kaip nauja lygtis.
+1450#£Maxima komanda
+1451#£Maxima komanda sioje WordMat+ versijoje neegzistuoja.
+1452#£Padekite zymekli matematikos lauke.
+1453#£Idekite zymekli i sprendziama lygti.
+1454#£Pasirinkite lygtis, is kuriu pasalinsite kintamuosius.
+1455#£Pasirinkite bent dvi lygtis, kad pasalintumete kintamuosius (pvz., x=2t+1 ir y=t^2).
+1456#£Padekite zymekli i sprendziama diferencialine lygti.
+1457#£Nera aktyvios WordMat+ licencijos. \n\nWordMat+ vis dar galima naudoti, taciau sios funkcijos nera aktyvios: {1}WordMat+ CAS (VBACAS). Maxima arba GeoGe{1}bra grafai skaiciuojami WordMat GeoGebra lange. Jie rodomi narsykleje{1} Formuliu kolekcijos iterpimas{1}Sinusine regresija{1} Customize meniu\n\nSpustelekite OK, kad eitumete i www.wordmat.dk
+1458#£Nera aktyvios WordMat+ licencijos, todel WordMat+ CAS (VBACAS) negali buti naudojama, o nei Maxima, nei GeoGebra negali buti naudojami siame kompiuteryje. Pasirinkite viena is ju nustatymuose, idiekite WordMat su Maxima arba atnaujinkite licencija www.wordmat.dk.
+1459#£Maxima nera sios WordMat+ versijos dalis
+1460#£Lygtis jau yra sunumeruota.
+1461#£Numeruota lygtis negali buti iterpta i lentele.
+1462#£Numeruota lygtis
+1463#£Iveskite lygties pavadinima.
+1464#£Vardas turi tureti ne daugiau kaip 40 simboliu.
+1465#£Vardas turetu prasideti raide.
+1466#£Pavadinime gali buti tik raides, skaiciai ir _ (ne tarpai).
+1467#£Sis pavadinimas jau egzistuoja.
+1468#£Dokumente nera pavadintu lygciu. Naudokite "Iterpti numeruota lygti nuorodai" skiltyje "Nauja lygtis".
+1469#£Lygties nuoroda
+1470#£Irasykite zymekli i sunumeruota lygti.
+1471#£Kokiam skaiciui si lygtis turetu buti nustatyta? \nTolimesnes lygtys atnaujinamos pagal skaicius.
+1472#£Iveskite sveikaji skaiciu arba sekcijos numeri (2.3) numeriams su skyriumi.
+1473#£Bus iterptas lygties skyriaus numeris. Paprastai jis iterpiamas kaip skyriaus arba skyriaus numeris. antrasteje. Taciau numeri galima iterpti ir paslepta. Ar numeris turetu buti rodomas? (Atsakykite ne, kad pasleptumete)
+1474#£Iterpkite lygties skyriu nr.
+1475#£Lygciu skyrius
+1476#£Istrinti apibrezimai negali buti iterpti i lentele.
+1477#£Nurodykite, kurie vienetai turi buti isvestyje, atskirti kableliais\nPavyzdziai: \n\ncm , kJ, valandos\neV, nm, mV\naJ , AU, Bq\n\nJei nieko nera nurodyta, visi vienetai bus grazinami kaip baziniai SI vienetai arba isvestiniai SI vienetai be prefikso.
+1478#£Antrasis parametras sprendime turi buti kintamasis, pvz., solve(x^2=4; x)
+1479#£Nelygybes negali buti issprestos, kai ijungiami kompleksiniai skaiciai
+1480#£Lygties analitiskai isspresti neimanoma. Pabandykite ja isspresti skaitmeniskai.
+1481#£Lygties isspresti dar neimanoma: {1}=0
+1482#£Nurodykite, kuri kintamaji reikia spresti, pvz., solve(lygtis; x)
+1483#£Lygtis negali buti isspresta tiksliai (laipsnis per didelis)
+1484#£Per daug sprendiniu intervale
+1485#£Per daug sprendimu
+1486#£Sio laikotarpio apskaiciuoti neimanoma
+1487#£Intervalo sprendiniu apskaiciuoti neimanoma
+1488#£Lygties negalima isspresti tiksliai (kol kas): {1}=0
+1489#£Sios lygties dar negalima isspresti tiksliai (kol kas)
+1490#£Kampo apskaiciuoti neimanoma
+1491#£Lygties negalima isspresti tiksliai (kol kas): {1}={2}
+1492#£Nelygybes isspresti (kol kas): {1}
+1493#£Nelygybe dar negali buti isspresta: {1}{2}0
+1494#£Nelygybe turi begalini sprendiniu intervalu skaiciu. Nurodykite intervala {1}, pvz., 0{2}{1}{2}{3}
+1495#£Nelygybes isspresti (kol kas)
+1496#£{1} turejo {2}{3}
+1497#£{1} (x) nera apibreztas x=0, -1, -2, ...
+1498#£W_0(x) apibreziamas tik x{1}-1/e
+1499#£acosh (x) apibreziamas tik x{1}1
+1500#£{1} (x) yra per didelis, kad butu galima apskaiciuoti;
+1501#£{1} cia neturi jokios vertes
+1502#£{1} negalima atskirti pagal {2} ({2} pirmajame argumente)
+1503#£Nezinomieji turi buti kintami, pvz., solve([x+y=5; x-y=1]; [x;y])
+1504#£Sistemos su nelygybemis dar negali buti issprestos
+1505#£Nera jokiu lygciu, kurias reiketu spresti
+1506#£Lygciu sistema neturi kintamuju, kuriuos reiketu spresti
+1507#£Lygciu sistema yra per daug nulemta: yra daugiau lygciu ({1}) nei nezinomu ({2}).
+1508#£Mokesciu sistema dar negali buti isspresta tiksliai (kol kas)
+1509#£Mokesciu sistema dar negali buti isspresta
+1510#£Nurodykite pasalinamus kintamuosius, pvz., eliminate([x+y=a; x-y=b]; x)
+1511#£Pasalinti kintamieji turi buti kintamieji, pvz., eliminate([x+y=a; x-y=b; x*y=c]; [x;y])
+1512#£Kintamieji negali buti pasalinti is nelygybiu
+1513#£Daugiausia {1} kintamuju galima pasalinti is {2} lygciu
+1514#£Kai {1} pasalinami, nelieka jokiu lygciu (jos visada ivykdomos)
+1515#£{1} dar negalima pasalinti (kol kas)
+1516#£{1} negalima pasalinti (laipsniai per dideli)
+1517#£Irenginiai nesutampa: {1}
+1518#£Nezinomas vienetas: {1}
+1519#£Sarasas
+1520#£vektorius
+1521#£matrica
+1522#£Skaicius
+1523#£{1} turi tureti bent viena elementa
+1524#£Visos eilutes masyve turi tureti vienoda elementu skaiciu
+1525#£Vektoriaus elementai turi buti skaiciai arba israiskos
+1526#£Negali {1} priskirti {2}{3}
+1527#£Negalite priskirti skaiciaus {1}
+1528#£kitokio dydzio
+1529#£Negalite padauginti {1} ir {2} is skirtingo elementu skaiciaus
+1530#£Vektoriai turi tureti vienoda koordinaciu skaiciu
+1531#£Vektorius gali buti pakeltas tik kvadratu (skaliarine sandauga su savimi)
+1532#£Negali pakelti iki {1}
+1533#£Funkcija negali priimti {1} kaip argumento
+1534#£Ji turi tureti masyva arba du vektorius
+1535#£Nulines matricos dydis turi buti sveikieji skaiciai
+1536#£ident turi buti tokio dydzio, pvz., ident(3)
+1537#£Vienetines matricos dydis turi buti sveikasis skaicius
+1538#£skrybele turi tureti viena vektoriu
+1539#£Kryzminis vektorius egzistuoja tik vektoriams plokstumoje
+1540#£{1} turi tureti du vektorius, pvz., {1}(a; b)
+1541#£{1} masyvo dar negalima apskaiciuoti
+1542#£Kryzmine sandauga egzistuoja tik vektoriams erdveje (3 koordinates)
+1543#£Dvieju vektoriu determinantas egzistuoja tik vektoriams plokstumoje (2 koordinates)
+1544#£{1} turi gincytis
+1545#£length turi tureti viena sarasa, pvz., length(x)
+1546#£Elementas turi daugiausiai du indeksus, pvz., A[1; 2]
+1547#£Indeksas turetu buti sveikas skaicius: {1}
+1548#£Indeksas per didelis: {1}
+1549#£Indeksas {1} yra uz matricos ribu ({2} eilutes)
+1550#£Indeksas {1} yra uz matricos ribu ({2} bruksniu)
+1551#£Sarasas turi tik viena indeksa, pvz., x[2]
+1552#£Vektorius turi tik viena stulpeli: kitas indeksas turi buti 1
+1553#£Vektoriai abiejose lygybes zenklo pusese turi tureti vienoda koordinatu skaiciu
+1554#£Matricos abiejose lygybes zenklo pusese turi buti vienodo dydzio
+1555#£Masyvas gali buti lygus tik vienai matricai
+1556#£Vektorius negali buti lygus skaiciui
+1557#£Skaiciavimai negali buti atliekami apibrezimo laukuose. Zemiau pateikta apibrezima galite naudoti skaiciavimui.
+1558#£ir
+1559#£Automatinis
+1560#£Tikslus
+1561#£Skaitmeninis
+1562#£Vienetai
+1563#£Vienetai isjungti
+1564#£LaTeX kodas
+1565#£LaTeX kodai
+1566#£Lygtis
+1567#£Lygtys
+1568#£Vaizdas
+1569#£Vaizdai
+1570#£Argumentas
+1571#£Argumentai
+1572#£Reiksmingumo lygis:
+1573#£Visu lasteliu suma yra mazesne nei 50. {1} pasiskirstymas siuo atveju yra prasta aproksimacija ir rezultatas nepatikimas.
+1574#£Laisves laipsniai:
+1575#£Konvertavimas
+1576#£Pritaikykite meniu
+1577#£Pasirinkite, kurie meniu punktai yra matomi
+1578#£Skaitmenys ir apvalinimas
+1579#£Perrasyk...
+1580#£Isspresti lygtis
+1581#£Spresti susietas diferencialines lygtis
+1582#£Tikimybe
+1583#£Nesugrupuota
+1584#£Grupuota
+1585#£Iterpti lentele
+1586#£Paprotys
+1587#£t-pasiskirstymas
+1588#£Numeruotos lygtys
+1589#£Rodyti viska
+1590#£Slepti viska
+1591#£Nustatoma pagal lygi
+1592#£Nustato matomus meniu punktus pagal matematikos lygi, pagal kuri mokotes
+1593#£Sinusinis pritaikymas
+1594#£Siai funkcijai reikalingas WordMat+
+1595#£Noredami pasiekti WordMat+, jusu mokykla/organizacija gali:\n sudaryti partnerystes sutarti su Eduap.
+1596#£Daugiau apie kitus partnerystes privalumus skaitykite cia:
+1597#£Patikrinkite, ar jusu mokykla jau pasirase partneryste
+1598#£Formuliu surinkimo sistema
+1599#£Pasirink savo issilavinima
+1600#£Pasirinkite savo dalyko lygius
+1601#£Visada galite veliau pakeisti savo pasirinkimus
+1602#£Matematika:
+1603#£Fizika:
+1604#£Chemija:
+1605#£Kitas
+1606#£Laida GnuPlote
+1607#£Funkcijos f(x)=...
+1608#£X asies pavadinimas
+1609#£Y asies pavadinimas
+1610#£Var
+1611#£Tasku dydis:
+1612#£Rodyti Excel programoje
+1613#£Excel iterpimas
+1614#£Tinklelis
+1615#£Logaritmine X asis
+1616#£Logaritmine Y asis
+1617#£Leidyklos
+1618#£Iterpti etikete
+1619#£Laidos paaiskinimas
+1620#£Taskai 2
+1621#£Sintakse\nPradzios taskas - vektorius\n(startx ; starty)-(dx ; dy)\n\nPavyzdziai: \n(1,1)-(1,2)     \n  Vektoriaus (1.2) piesimas nuo tasko (1.1)\n\n(1,2)\n  Vektoriaus (1.2) piesimas nuo tasko (0.0)\n\n(1,5 ; 4,5)\nJei itraukti desimtainiai skaiciai; naudojama kaip separatorius
+1622#£Naujas vektorius
+1623#£Lygtis 1
+1624#£2 lygtis
+1625#£3 lygtis
+1626#£Kintamieji turetu buti x ir y
+1627#£Propas
+1628#£Manu
+1629#£indep. kintamasis
+1630#£Dep. kintamasis
+1631#£Integralines kreives (kreives)
+1632#£Nurodykite taskus, per kuriuos turi buti nubrezti sprendimo keliai.
+1633#£Atidaryk
+1634#£Atsidaro langas, kuriame galite spusteleti taska, kur turetu buti integraline kreive ir kur gali buti slankikliai, kad galetumete matyti, kaip keiciasi krypties laukas su slankikliu
+1635#£Interaktyvu
+1636#£Palaukti, palauk!
+1637#£const
+1638#£nuo
+1639#£i
+1640#£Slankikliai
+1641#£Rodyti tik kreives
+1642#£Licencija:
+1643#£Automatiskai nustatykite zingsnio ilgi
+1644#£Nustato zingsniu skaiciu i 500
+1645#£Lygtys sprendziamos naudojant 4-os eiles Runge-Kutta
+1646#£Apskaiciuotu punktu iterpimas kaip sarasas Word dokumente
+1647#£Galite ivesti kintamaji arba funkcija, priklausomai nuo to. to, kas parasyta lygtyje. t. y. pvz., y arba f(x), bet ne f(x).
+1648#£Gerai, nauja linija
+1649#£Apibrezimai sioje dokumento vietoje
+1650#£Pavyzdys: a=5, x>0
+1651#£Pavyzdys: g, min, cm
+1652#£Gruodis.
+1653#£Veikia narsykleje, bet ne internete
+1654#£Rysys su Maxima
+1655#£Jungiasi prie Maxima su .net dll failu, kuris tvarko komunikacija
+1656#£Maxima apdorojama per apvalkala su wsh. Kiekvienas skaiciavimas yra naujas Maxima egzempliorius. Jis yra siek tiek letesnis ir trumpam rodo juoda cmd langa, bet nepriklauso nuo dll failo.
+1657#£Reikalauja WordMat+
+1658#£Patikrinkite partneryste
+1659#£Kilti aukstyn (bandziau anksciau)
+1660#£Nusileisk zemyn (bus bandoma veliau)
+1661#£Varikliai testuojami is virsaus.  \nKitas naudojamas tada, kai vienas variklis negali.
+1662#£Neribotas tikslumas
+1663#£Pasikliaukite neribotu tikslumu (dideliais skaiciais)
+1664#£Didziausias skaitmenu skaicius:
+1665#£Didziausias tiksliu skaiciu skaitmenu skaicius
+1666#£Laiko limitas:
+1667#£Skaiciavimo laiko limitas sekundemis (0 = be limito)
+1668#£Moksline notacija, n:
+1669#£Mokslinis zymejimas skaiciams iki 10^-n (0 = niekada)
+1670#£LaTeX apgaubiantys simbolius apie lygti
+1671#£Tekste:
+1672#£Tekstas pries LaTeX koda turi lygti tekste, pvz., $
+1673#£Tekstas po LaTeX kodo lygties tekste, pvz., $
+1674#£Savo linija:
+1675#£Tekstas pries LaTeX koda atskirai koduoja lygti tieseje, pvz., \[ arba \begin{equation}
+1676#£Tekstas po LaTeX kodo atskirai esanciai lygciai tieseje, pvz., \] arba \end{equation}
+1677#£Vienetai su vertikaliu rasymu (\mathrm)
+1678#£Objektai nera atpazistami ir rasomi kursyvu (\mathrm{m})
+1679#£Dvigubo paspaudimo Alt+M
+1680#£Reikia ivesti tiksliai 3 kampus/sonus, bet ne tik 3 kampus. \nTaigi: \n1 krastine + 2 kampai\n2 krastines + 1 kampas (galbut 2 sprendiniai)\n3 puslapiai
+1681#£Kur tiksliai pageidaujamas atsakymas. Gali paveikti skaiciavimo laika.
+1682#£LaTeX kodo nerasta. Pasirinkite koda arba padekite zymekli LaTeX lygtyje (pvz., {1} arba {2}).
+1683#£{1} {2} negalejo buti skaitoma VBACAS ir LaTeX dokumente rasoma kaip tekstas ({3}).
+1684#£Divergencijai {1} reikia vektorines funkcijos. Funkcijos {2} gradientas rasomas {3}
+1685#£Rotoriui (curl) {1} reikia vektorines funkcijos su 2 arba 3 koordinatemis
+1686#£{1} reikalauja, kad {2} turetu tiek pat koordinaciu, kiek kintamuju
+1687#£Israsyto vektoriaus divergencijai {1} reikia 2 arba 3 koordinaciu (kintamieji x, y ir z)
+1688#£"{1}" netrukus atsiras WordMat+ Office versijoje.
+1689#£Ivyko klaida "{1}".
+1690#£Issamiau
+1691#£Kopijuoti
+1692#£Vienetai ijungti.
+1693#£Vienetai isjungti.
+1694#£Rodyti uzduociu sriti
+1695#£Kalba keiciasi, kai vel atidaromas WordMat+.
+1696#£Trumpiausia forma, pvz., (x^2-1)/(x-1) tampa x+1, o sin(x)^2+cos(x)^2 tampa 1.
+1697#£Skaiciavimas uztruko per ilgai ir buvo sustabdytas.
+1698#£WordMat+ programai Word (Word desktop ir Word Online)\nVersija {1}\n\nKurimo versija: nuolat pridedamos naujos funkcijos.
+1699#£Redaguoti lygti
+1700#£/ trupmena, ^ laipsnis, _ indeksas, sqrt kvadratine saknis, rodykliu klavisai perkelia zymekli. Enter: iterpti. Ctrl+Enter: iterpti ir apskaiciuoti. Esc: atsaukti.
+1701#£Iterpti ir apskaiciuoti
+1702#£Spustelekite grafike, kad nubreztumete sprendimo kreive per taska.
+1703#£Nuliai
+1704#£Ekstremumai
+1705#£Sankirtos taskai
+1706#£Tasku serija {1}
+1707#£Rodyti koordinates
+1708#£Pasirenka grafo langa taip, kad butu matomi visi taskai, nuliai, ekstremumai ir sankirtos, o asys, kai jos nera toli.
+1709#£Be tinklelio
+1710#£Didelis tinklelis
+1711#£Mazas tinklelis
+1712#£Liestine
+1713#£Nubrezia grafiko liestine ties cia irasytomis x reiksmemis. Kelios reiksmes skiriamos ;
+1714#£Pradzios taskas
+1715#£Be pradzios tasko vektorius breziamas is (0;0).
+1716#£Tempkite zemyn, kad testumete skaicius: 1, 2 duoda 3, 4 ... Dvigubas spustelejimas uzpildo iki paskutines eilutes.
+1717#£Iveskite formule su x, pvz., 2*x, ir y apskaiciuojama eilutems nuo cia zemyn.
+1718#£Iveskite taskus lenteleje arba iklijuokite juos is Excel ar Word lenteles.\nTempkite maza kvadrateli, kad testumete skaicius zemyn: 1, 2 duoda 3, 4 ...\nIveskite formule i y stulpeli, pvz., 2x arba =2x, ir y apskaiciuojamas eilutems nuo cia zemyn.\nPazymekite kelis langelius pele arba Shift ir paspauskite Delete, kad juos istrintumete.\nMygtukas z suteikia z stulpeli taskams erdveje.
+1719#£Iterpia funkcijos liestine kaip nauja funkcija, o lietimosi taska kaip taska. Pasirinkite funkcija ir irasykite x arba spustelekite grafika.
+1720#£Tempkite grafike, kad nubreztumete vektoriu.
+1721#£Spustelekite etikete lenteleje, o tada grafika, kad ja perkeltumete.
+1722#£Stebejimas
+1723#£Daznumas
+1724#£Santykinis daznis
+1725#£Kaupiamasis daznis
+1726#£Nuo
+1727#£Iki
+1728#£Stebejimu skaicius
+1729#£Maziausia reiksme
+1730#£Apatinis kvartilis
+1731#£Mediana
+1732#£Virsutinis kvartilis
+1733#£Didziausia reiksme
+1734#£Vidurkis
+1735#£Standartinis nuokrypis
+1736#£Imties standartinis nuokrypis
+1737#£Aprasomoji statistika, apskaiciuota naudojant WordMat:
+1738#£Lenteleje turi buti pateikti stebejimai arba pirmojo stulpelio stebejimai ir ju dazniai antrame stulpelyje.
+1739#£Lenteleje turi buti trys stulpeliai: intervalu pradzia, intervalu pabaiga ir dazniai.
+1740#£Kiekvieno intervalo pradzia turi buti mazesne uz pabaiga, ir intervalai neturi persidengti.
+1741#£Dazniai neturi buti neigiami.
+1742#£Iveskite skirtingu stebejimu skaiciu, ir sukuriama lentele, kurioje galite ivesti stebejimus ir ju daznius.\nUzpilde lentele, pasirinkite {1} arba diagrama is meniu.
+1743#£Iveskite intervalu skaiciu, ir sukuriama lentele, kurioje galite ivesti intervalus ir ju daznius.\nUzpilde lentele, pasirinkite {1} arba diagrama is meniu.
+1744#£Diagrama
+1745#£Nera diagramos
+1746#£Santykinis daznis procentais
+1747#£Rodyti kvartilius
+1748#£Pavadinimas
+1749#£vienetui
+1750#£Iveskite stebejimus ir ju daznuma i lentele arba iklijuokite juos is Excel ar Word lenteles.
+1751#£Iveskite intervalus ir ju daznius lenteleje arba iklijuokite juos is Excel ar Word lenteles.
+1752#£Iveskite kiekvienos staciakampes diagramos kvartilius: maziausia reiksme, apatinis kvartilis, mediana, virsutinis kvartilis ir didziausia reiksme.
+1753#£Kvartiliai turi buti didejancioje tvarkoje.
+1754#£Neapdoroti duomenys
+1755#£Nesugrupuoti
+1756#£Sugrupuoti
+1757#£Kaup. daznis
+1758#£Perkelti i nesugrupuotus
+1759#£Perkelti i sugrupuotus
+1760#£Intervalo plotis
+1761#£Iveskite stebejimus i lentele arba iklijuokite juos is Excel ar Word lenteles.
+1762#£Prideti prie staciakampes diagramos
+1763#£Lentele idedama i dokumenta, kai langas uzdaromas.
+1764#£{1} stebejimai yra uz intervalu ribu.
+1765#£Intervalo plotis turi buti didesnis nei 0.
+1766#£Taskine diagrama
+1767#£Ploto legenda
+1768#£Virsutiniame desiniajame kampe parodytas langelis, kurio plotis toks pat kaip pirmasis intervalas, ir kiek procentu stebejimu jis atitinka.
+1769#£Stebejimas ties dvieju intervalu riba priklauso apatiniam intervalui, ]a;b], kuris yra danu standartas, arba virsutiniam intervalui, [a;b[.
+1770#£Laisves laipsniai
+1771#£Rodyti kumuliatyvuji skirstini
+1772#£Pasirinkite skirstini.
+1773#£Tuscias laukas reiskia, kad toje puseje nera ribos.
+1774#£Iveskite tikimybe, pvz., 0,95 arba 95 %, ir randama atitinkama reiksme.
+1775#£n turi buti sveikasis skaicius, didesnis uz 0.
+1776#£p turi buti tarp 0 ir 1.
+1777#£Standartinis nuokrypis turi buti didesnis nei 0.
+1778#£Laisves laipsniu skaicius turi buti didesnis nei 0.
+1779#£Stebeta
+1780#£Dvipusis
+1781#£Kairiapusis
+1782#£Desiniapusis
+1783#£Kritine sritis
+1784#£P-reiksme
+1785#£Nuline hipoteze atmetama.
+1786#£Nulines hipotezes atmesti negalima.
+1787#£Pasikliautinasis intervalas p
+1788#£Be testo
+1789#£Laukiama
+1790#£Kritine verte
+1791#£Testo statistika
+1792#£Iterpti rezultata
+1793#£Turi buti bent dvi eilutes su stebimu skaiciumi ir tiketinu skaiciumi, didesniu nei 0.
+1794#£Tinkamumo testas atliekamas naudojant WordMat
+1795#£Reiksmingumo lygyje {1}% galima atmesti nulio hipoteze, kad stebejimai atitinka tiketina pasiskirstyma.
+1796#£Reiksmingumo lygyje {1}% nulio hipotezes atmesti negalima. Todel nera irodymu, kad stebejimai nukrypsta nuo tiketino pasiskirstymo.
+1797#£Laukiamos reiksmes:
+1798#£Patikrinti, ar sugrupuoti duomenys pasiskirste normaliai
+1799#£{1} ir {2} is duomenu
+1800#£Pritaikyti
+1801#£Turi buti bent {1} intervalai, kai vidurkis ir standartinis nuokrypis yra ivertinti remiantis duomenimis.
+1802#£Testas naudoja grupuotus duomenis skirtuke {1}. Iveskite juos po {2} ir pazymekite {3}, kad histograma butu galima palyginti su normaliuoju pasiskirstymu.
+1803#£Kiekvienai kreivei suteikia lauka z(t), kad ji butu nupiesta erdveje.
+1804#£Kintamieji turi buti x ir y, ir z erdveje
+1805#£Lygtys kaip paveiksleliai
+1806#£Word Online uztrunka kelias sekundes parasyti lygti. Su siuo nustatymu WordMat+ iterpia naujas lygtis ir rezultatus kaip mazus paveikslelius, kuriuos apskaiciuoja kaip lygtis. Paveikslelius galima vel paversti lygtimis meniu {1}.
+1807#£Paversti lygtis paveiksleliais
+1808#£Pavercia atrankos lygtis arba viso dokumento lygtis, kai niekas nera pasirinkta, i paveikslelius, kuriuos Word Online rodo ir keicia daug greiciau. WordMat+ skaiciuoja paveikslelius kaip ir lygtis.
+1809#£Paversti paveikslelius lygtimis
+1810#£Pavercia lygciu paveikslelius atrankoje arba visame dokumente, kai niekas nera pasirinkta, i tikras lygtis, pavyzdziui, pries dokumento pateikima.
+1811#£Lygtys paverstos paveiksleliais: {1}
+1812#£Paveiksleliai paversti lygtimis: {1}
+1813#£Nekonvertuota (nepakitusi): {1}
+1814#£Nera jokiu lygciu, kurias reiketu konvertuoti.
+1815#£Nera jokiu lygciu paveiksleliu, kuriuos butu galima konvertuoti.
+1816#£Lygtys kaip paveiksleliai naudojami tik Word Online.
+1817#£Lygciu konvertuoti nebuvo imanoma.
+1818#£Matematika
+1819#£Fizika
+1820#£Uzdaryti, kai pasirenkama formule
+1821#£Laikyk nuspausta Ctrl paspaudes formule, ir formuliu kolekcija neuzsidaro.
+1822#£Iterpti 2
+1823#£Formule iterpiama du kartus: viena dokumentacijai, kita - kur galima ivesti skaicius.
+1824#£Iterpti konstantas
+1825#£Fizikoje ir chemijoje fizikos konstantos iterpiamos kaip skaiciai i antraja formule.
+1826#£Rodyti srityje
+1827#£Formuliu kolekcija rodoma langelyje salia dokumento, o ne dideliame lange. Ji taikoma nuo kito karto, kai formules kolekcija atidaroma.
+1828#£Paieska:
+1829#£Pastaba: chemijos formuliu kolekcija dar nera baigta.
+1830#£Iveskite paieskos lauka arba spustelekite tema.
+1831#£Spustelekite paveiksleli, kad iterptumete ji i dokumenta.
+1832#£Word Online gali rodyti paveikslelius, bet negali ju redaguoti. Atidarykite dokumenta Word for Windows arba Mac versijoje, kad juos pakeistumete.
+1833#£Rodo paveikslelius lange: trikampius, vienetini apskritima, koordinaciu sistemas ir monotoniskumo linijas. Spustelekite paveiksleli, kad ji iterptumete i dokumenta.
+1834#£Failas {1} buvo atsisiustas. Jis yra narsykles atsisiuntimuose.
+1835#£Naudokite Word kaip LaTeX redaktoriu. \n\nLaTeX komandas galite ivesti tiesiogiai dokumente, kad gautumete pilna valdyma, arba naudoti Word funkcijas ir leisti WordMat+ konvertuoti i LaTeX. \n\nTex failas atsisiunciamas i kompiuteri. Jei dokumente yra nuotrauku, atsisiunciamas zip failas su tex failu ir aplanko vaizdais.
+1836#£Sukuria LaTeX koda kaip tex faila, kuris atsisiunciamas i kompiuteri, kad koda butu galima perziureti ir koreguoti LaTeX programoje
+1837#£Issaugoti
+1838#£Apie x asi
+1839#£Apie y asi
+1840#£Pasuka pazymetu funkciju grafikus 360 laipsniu apie x asi arba y asi, kad susidarytu sukinys 3D. Kiekvienas grafikas sukamas nuo jo Xmin iki Xmax.
+1841#£Lygtis
+1842#£Konvertuoti
+1843#£Soninis skydelis
+1844#£Parodo sonini skydeli su nustatymais arba uzdaro ji, kai jis atidarytas.
+1845#£WordMat+ naudoja JSXGraph grafikams ir MathLive lygtims ivesti. Abu turi MIT licencija.
+1846#£Licencijos
+1847#£dalimis
+1848#£Skliaustuose: @ arba Alt+Enter sukuria nauja eilute, & nauja stulpeli.
+1849#£n-tojo laipsnio saknis
+1850#£matrica
+1851#£apibreztinis integralas
+1852#£neapibreztinis integralas
+1853#£Skliaustuose: @ arba Alt+Enter prideda nauja koordinate.
+1854#£suma
+1855#£sandauga
+1856#£WordMat+ leidzia atlikti matematinius skaiciavimus Word programoje.\nWordMat sukure Mikael Sams¿e S¿rensen, Nyborg gimnazija, EDUAP 2009-{1}.
+1857#£Naudoti JavaScript CAS (greitesnis)
+1858#£WordMat+ CAS vykdo JavaScript variklis QuickJS. Be varneles skaiciuoja VBACAS.
+1859#£Integruotas CAS: {1}
+1860#£JavaScript variklis: QuickJS, © Fabrice Bellard, Charlie Gordon ir kt. (MIT licencija)

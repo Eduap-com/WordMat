@@ -933,3 +933,929 @@
 932#£Update naar de nieuwste bètaversie
 933#£Je moet je ervan bewust zijn dat er bugs kunnen zijn in bètaversies. Ze zijn voornamelijk bedoeld voor testen. Het wordt aanbevolen deze functie voornamelijk te gebruiken zoals Eduap heeft aangegeven
 934#£Toont de grafiek voor de linker- en rechterzijde van de vergelijking in hetzelfde coördinatensysteem. De oplossingen van de vergelijking zijn de x-waarde van de doorsneden. Vergeet niet in en uit te zoomen.
+935#£Formuleverzameling
+936#£Opent de formuleverzameling met formules uit wiskunde, natuurkunde en scheikunde. Klik op een formule om deze in het document in te voegen.
+937#£Opent een dialoogvenster waarin je kiest hoe de geselecteerde uitdrukking of vergelijking wordt herschreven: reduceren, factoriseren, uitbreiden, kwadratische voltooiing of decimale tot breuken. Je kunt ook tijdelijke definities geven en de output selecteren. Het resultaat wordt op een nieuwe regel geschreven.
+938#£Reduceert de geselecteerde uitdrukking of beide zijden van een vergelijking tot de kortste vorm, bijvoorbeeld (x^2-1)/(x-1) tot x+1 en sin(x)^2+cos(x)^2 tot 1. Het resultaat wordt op een nieuwe regel geschreven.
+939#£Factoriseert de geselecteerde expressie, bijvoorbeeld x^2-1=(x-1)(x+1). Het resultaat wordt na de expressie geschreven, net als in Calculate.
+940#£Vermenigvuldig haakjes in de geselecteerde expressie, bijvoorbeeld (x+1)^2=x^2+2x+1. Het resultaat wordt na de expressie geschreven zoals in Calculate.
+941#£Herschrijft een kwadratisch polynoom ax^2+bx+c naar a(x+b/(2a))^2+c-b^2/(4a), bijvoorbeeld x^2+6x+5 naar (x+3)^2-4. De coëfficiënten kunnen letters zijn. Werkt ook op een vergelijking, bijvoorbeeld de cirkelvergelijking x^2-4x+y^2+14y+53=25 naar (x-2)^2+(y+7)^2=25. Het resultaat wordt op een nieuwe lijn geschreven.
+942#£Stuurt de geselecteerde expressie direct naar Maxima en voegt het resultaat in als een nieuwe vergelijking. De expressie moet worden geschreven in de syntaxis van Maxima, bijvoorbeeld integrate(x^2,x) of factor(x^2-1). Als er niets is geselecteerd, kan het commando in een vak worden gezet. Vereist WordMats Maxima.
+943#£Testvergelijking
+944#£Onderzoekt of de gemarkeerde vergelijking waar is voor alle waarden van de variabelen, bijvoorbeeld sin(x)^2+cos(x)^2=1. Eerst wordt een exact bewijs geprobeerd, anders wordt de vergelijking numeriek getest. Het antwoord is waar, onwaar (met een tegenvoorbeeld), waarschijnlijk waar of onbekend, en wordt op een nieuwe regel geschreven.
+945#£Verwijder één of meer variabelen uit een systeem van vergelijkingen: selecteer de vergelijkingen en selecteer de variabelen die geëlimineerd moeten worden (minder dan het aantal vergelijkingen). Bijvoorbeeld, x=2t+1 en y=t^2 met t geëlimineerd geven y=(x-1)^2/4.
+946#£Los een of meer gekoppelde differentiaalvergelijkingen numeriek op, bijvoorbeeld x'=y en y'=-x. Het resultaat kan worden weergegeven als een grafiek in GeoGebra, worden ingevoegd als een lijst of tabel, of naar Excel worden gestuurd.
+947#£Definitief.
+948#£Voegt 'Definieer:' in aan het begin van de vergelijking bij de cursor, of een nieuwe vergelijking erbij. De definities zijn van toepassing in de berekeningen hieronder in het document.
+949#£Voegt 'Delete definitions:' in op een nieuwe regel. De bovenstaande definities worden niet gebruikt in de berekeningen eronder.
+950#£Toont de grafiek voor de geselecteerde functies/vergelijkingen en punten. Het grafiekprogramma wordt geselecteerd in de instellingen, of door deze knop uit te breiden.
+951#£Grafieken
+952#£Toont grafieken en punten in GeoGebra: in het GeoGebra-venster van WordMat met WordMat+, anders in de browser. Geen internet nodig.
+953#£Opent GeoGebra 5 en draagt de geselecteerde functies en definities over.
+954#£Opent (of ingebed) de Excel-sheets van WordMat voor grafieken en punten met de geselecteerde functies en de punten in de tabel.
+955#£Toont het lichaam van de geselecteerde functies in GeoGebra. De grafiek van het precept wordt 360 graden rond de x-as gedraaid om een 3D-object te creëren. Een definitieset wordt geschreven na een komma, bijvoorbeeld f(x)=x^2, 0<=x<=2.
+956#£Statistiektabellen
+957#£Past een functie die je zelf schrijft, bijvoorbeeld f(x)=a·e^(b·x)+c, aan de punten in de tabel. De parameters zijn de variabelen behalve de onafhankelijke variabele.
+958#£Excel-regressie
+959#£Voegt een nieuw wiskundig veld in. In een genummerde vergelijking: maak de vergelijking genummerd.
+960#£Voegt een nieuw wiskundig veld in dat automatisch wordt genummerd. Als de cursor in een vergelijking zit, wordt deze genummerd. De positie en het type van het nummer worden geselecteerd onder Instellingen.
+961#£Voegt een verwijzing in naar een benoemde vergelijking: het vergelijkingsnummer, dat wordt bijgewerkt wanneer de getallen veranderen.
+962#£De genummerde vergelijking waarin de cursor zich bevindt, krijgt een specifiek getal. De volgende vergelijkingen volgen.
+963#£Opent het LaTeX-dialoogvenster waar het document kan worden omgezet naar een .tex bestand of een pdf-bestand (vereist MikTex). De bijgevoegde tekens voor geconverteerde vergelijkingen worden geselecteerd onder Opties, Notatie.
+964#£Zet de vergelijking om naar LaTeX
+965#£Vervangt de vergelijking bij de cursor door zijn LaTeX-code. De omhullende tekens voor inline-vergelijkingen en vergelijkingen op een lijn afzonderlijk worden geselecteerd onder Instellingen, Notatie.
+966#£Zet LaTeX om naar vergelijkingen
+967#£Zet de LaTeX-code in de selectie om in vergelijkingsvelden. Als er niets is geselecteerd, wordt de LaTeX-vergelijking omgezet bij de cursor. De code wordt gevonden op $...$, \(...\), $$...$$, \[...\], \begin{align}, enz., en de omhullende tekens onder Instellingen, Notatie. Een selectie zonder omhullende tekens wordt omgezet in één vergelijking. Alt+T buiten een vergelijking doet hetzelfde.
+968#£Document
+969#£Converteer naar LaTeX pdf-bestand
+970#£Converteert het hele document naar LaTeX, vertaalt het naar een pdf-bestand met MikTex pdflatex en opent het in de standaard pdf-bestandapplicatie. MikTex moet geïnstalleerd zijn.
+971#£Converteer naar LaTeX .tex bestand
+972#£Converteert het hele document naar een .tex bestand en opent het in het standaard .tex bestandsprogramma (TexWorks, TexMaker, ...). Het bestand wordt in een map naast het document geplaatst.
+973#£Converteer naar HTML
+974#£Zet de selectie van het hele document om in een html-pagina, die in de browser wordt geopend. De vergelijkingen worden als LaTeX geschreven en weergegeven met MathJax (vereist internet), de afbeeldingen worden in de pagina ingebed. Het bestand wordt in een map naast het document geplaatst, en de html-code zonder <head> dat wordt gekopieerd naar het klembord, zodat het bijvoorbeeld in een Custom HTML-blok in WordPress kan worden geplakt.
+975#£Converteer naar Markdown
+976#£Zet de markup of het hele document om in een markdown (.md) bestand: koppen, lijsten, citaten, vetgedrukt, cursief, doorstreep, code, links, tabellen en voetnoten, en de vergelijkingen als LaTeX ($...$ en $$...$$). De afbeeldingen worden opgeslagen als bestanden in dezelfde map. De map wordt naast het document geplaatst en geopend, en de tekst wordt gekopieerd naar het klembord.
+977#£Zet markdown om naar Word-opmaak
+978#£Zet markdown in de selectie of door het document heen om in Word-opmaak: koppen (#), lijsten (- en 1e), citaties (>), vetgedrukt (**), cursief (*), doorstrepen (~~), code (' en '''), links, afbeeldingen, tabellen, voetnoten en horizontale lijnen, en LaTeX ($...$ en $$...$$) worden vergelijkingsvelden.
+979#£Kies welk commando elke sneltoets (Alt+M, Alt+B, Alt+L...) moet uitvoeren, en bekijk de sneltoetsen van Word voor wiskundige velden.
+980#£Over WordMat+
+981#£Er ontbreekt een index in {1}
+982#£De functie {1} mist een argument. Bijvoorbeeld type {1}(x) of {1}^(-1)(x) met het functiesjabloon van Word
+983#£Er ontbreekt een item in de lijst
+984#£Het basisgetal voor een logaritme moet positief zijn en verschillen van 1
+985#£Er ontbreekt een haakje voor {1}\n\nDe haakjes zonder beginhaak wordt in de onderstaande uitdrukking gemarkeerd met extra spaties om: \n\n      {2}  )  {3}
+986#£De haak {1} komt niet overeen met {2}\n\nDe haakjes worden in de uitdrukking gemarkeerd met extra spaties door: \n\n      {3}  {1} {4}  )  {5}
+987#£Er ontbreekt een eindronde voor {1}\n\nDe haakjes zonder sluitende haakjes worden in de onderstaande uitdrukking gemarkeerd met extra spaties om: \n\n      {2}  {1} {3}
+988#£Syntaxisfouten\n{1} operator mag niet aan het begin van de expressie worden geplaatst.
+989#£Fout in inverse trigonometrische functie: {1}\nHet argument moet tussen -1 en 1 liggen
+990#£Syntaxisfouten\n{1} operator mag niet aan het einde van de uitdrukking worden geplaatst.
+991#£Het getal is te groot om om te worden omgezet naar een decimaal getal
+992#£Deling door nul
+993#£Er is een fout opgetreden. Kan hier geen formule invoegen. \nProbeer alle Word-documenten te sluiten en Word opnieuw op te starten. \n\nFoutbeschrijving: \n{1}
+994#£De tabel bevat geen cijfers. Je moet een tabel maken met twee kolommen: x-waarden in de linker kolom en y-waarden in de rechter kolom.
+995#£Je moet een tabel maken met twee kolommen. X-waarden in de linkerkolom en Y-waarden in de rechterkolom.
+996#£Lineaire regressie uitgevoerd met WordMat. WordMat:
+997#£Exponentiële regressie uitgevoerd met WordMat. WordMat:
+998#£Potentieregressie uitgevoerd met behulp van de WordMat:
+999#£Specificeer de volgorde van de polynoomregressie (1-{1})\n\n(De maximale volgorde wordt bepaald door het aantal punten)
+1000#£De volgorde moet tussen 1 en {1}
+1001#£Polynomiale regressie van graad {1} uitgevoerd met behulp van de WordMat. WordMat:
+1002#£De kruistabel moet minstens 2 rijen en 2 kolommen met nummers hebben.
+1003#£{1} - test voor coherentie wordt uitgevoerd met WordMat WordMat
+1004#£P-waarde: {1} = {2}%
+1005#£Op het significantieniveau {1}% kan de hypothese van 0 dat er geen correlatie is, worden verworpen. Dat wil zeggen: Er is een correlatie tussen de twee variabelen.
+1006#£Op het significantieniveau {1}% kan de 0-hypothese niet worden verworpen. Er is dus geen bewijs dat er een correlatie is tussen de twee variabelen.
+1007#£Er zijn verwachte waarden kleiner dan 5 of de totale som van alle cellen is minder dan 50. De {1}-verdeling is daarom in dit geval een slechte benadering en het resultaat onbetrouwbaar. In sommige gevallen kan het datamateriaal bruikbaar worden gemaakt door een andere groepering te maken.
+1008#£P-waarde:
+1009#£Q-waarde:
+1010#£Kritieke Q-waarde:
+1011#£Het Excel-bestand van WordMat {1} niet gevonden kon worden. De functie vereist dat WordMat wordt geïnstalleerd.
+1012#£Geneste Excel-sheet invoegen...
+1013#£Er deed zich een fout op bij de poging om Excel-sheets in te voegen.
+1014#£Fout lezen van het bestand: {1}
+1015#£GeoGebra 5 kon niet worden geopend: {1}
+1016#£GeoGebra 5 is niet geïnstalleerd op je computer. \n\nWil je GeoGebra 5 downloaden? (Nee: de grafiek wordt weergegeven in de GeoGebra Calculator Suite)
+1017#£GeoGebra zal in je browser downloaden. Ga naar Downloads en start de installer.
+1018#£Er deed zich een fout op tijdens het proberen te openen: {1}
+1019#£Deze versie van WordMat+ controleert zelf niet op nieuwe versies. Je wordt nu doorgestuurd naar de downloadpagina.
+1020#£WordMat+ kan op deze computer niet controleren op een nieuwe versie (de MathMenu.dll van WordMat ontbreekt of een oudere versie). Je wordt nu doorgestuurd naar de downloadpagina.
+1021#£Je hebt al de nieuwste versie van WordMat+ v.{1}
+1022#£Er is een nieuwe versie van WordMat klaar om te downloaden. \nNieuws:  \n{1}\n\nKlik op OK om de update te starten.
+1023#£Nieuwe versie {1}
+1024#£Er is een nieuwe versie van WordMat klaar om te downloaden. \nNieuws:  \n{1}\nJe wordt nu doorgestuurd naar de downloadpagina
+1025#£Er was een fout in verband met het controleren op een update. Je wordt nu naar de website gestuurd, waar je kunt zien of er een nieuwe update is. De huidige versie is: {1}
+1026#£De update kan niet automatisch op deze computer worden gedownload (de MathMenu.dll van WordMat ontbreekt of een oudere versie). Je wordt nu doorgestuurd naar de downloadpagina.
+1027#£Het installatiebestand downloaden
+1028#£Het installatiebestand heeft geen geldige digitale handtekening van Eduap. Het is opnieuw verwijderd.
+1029#£Het installatiebestand is niet correct gedownload
+1030#£Het installatiebestand is gedownload. \nKlik op OK om de update te starten. Je wordt gevraagd om Word op te slaan en te sluiten.
+1031#£De installatie kon niet worden gestart (fout {1}).
+1032#£Tijdens de update trad er een fout op (fout {1}).
+1033#£Deze versie van WordMat+ kan geen updates downloaden en installeren. Je wordt nu naar de downloadpagina geleid.
+1034#£Updaten naar de bètaversie vereist WordMat+.
+1035#£Wil je beginnen met het installeren van de bètaversie?
+1036#£Update beta
+1037#£Er deed zich een fout op tijdens het installeren van de bètaversie: {1}
+1038#£De aankooppagina kan niet op deze computer worden geopend (de MathMenu.dll van WordMat ontbreekt of een oudere versie). Installeer WordMat opnieuw.
+1039#£Het commando is nog niet beschikbaar in WordMat+. Kies onder Shortcuts een ander commando voor de key.
+1040#£Vorige uitslag
+1041#£WordMat+: er is geen resultaat vóór de vergelijking.
+1042#£WordMat+: er zijn geen resultaten meer. Tik opnieuw voor het laatste nieuws.
+1043#£Er deed zich een fout voor: {1}
+1044#£Het resultaat werd niet uitgevoerd.
+1045#£Het installatiebestand is gedownload. \nKlik op OK om de update te starten
+1046#£Eduaps server gaf een foutmelding. \nHopelijk is dit een tijdelijk probleem. Als het probleem blijft bestaan en je hebt een geldige WordMat+-licentie, neem dan contact op met eduap@eduap.com\n\nFout: wordmatlicense mislukt
+1047#£Geen internet
+1048#£WordMat+ kan de licentie niet controleren omdat de MathMenu.dll van WordMat niet op deze computer kan worden gebruikt. \n\nHet bestand ontbreekt, is een oudere versie, of het wordt geblokkeerd door beveiligingsinstellingen (antivirus, Endpoint Protection). \n\nInstalleer WordMat opnieuw of neem contact op met je IT-afdeling. Tot die tijd werkt WordMat+ alsof het geen licentie heeft.
+1049#£Klik twee keer op Toestaan nadat je dit venster hebt gesloten\nJe hoeft dit maar één keer te doen.
+1050#£Rechten voor WordMat
+1051#£GeoGebra wiskunde-apps niet gevonden
+1052#£Programmabestanden niet gevonden
+1053#£Sinusregressie vereist een actieve WordMat+-licentie.
+1054#£Sinusregressie uitgevoerd met WordMat (in {1}): WordMat (in ):
+1055#£Excel-regressie...
+1056#£Het Excel-bestand Graphs.xltm van WordMat kon niet worden gevonden. Excel-regressie vereist dat WordMat wordt geïnstalleerd.
+1057#£Er was een foutmelding bij de poging om Excel-sheets in te voegen. Dit kan komen doordat Excel eerder is gecrasht. Sluit Excel-sheets open en open Excel voordat je het opnieuw probeert via WordMat.
+1058#£{1} heeft verschillende ongedefinieerde variabelen. De onafhankelijke variabele kan niet worden geïdentificeerd. Gebruik x of t als onafhankelijke variabele.
+1059#£Er moeten minstens 3 datapunten zijn.
+1060#£Sinusregressie
+1061#£Ik kon de frequentie niet schatten via FFT.
+1062#£uitgevoerd met WordMat{1}:
+1063#£Het model bevat de onafhankelijke variabele niet {1}
+1064#£Het model heeft geen parameters (variabelen anders dan {1})
+1065#£Er moeten minstens evenveel punten zijn als parameters ({1})
+1066#£Aangepaste regressie vereist Maxima wanneer er geen actieve WordMat+-licentie is.
+1067#£De regressie kon de parameters niet vinden. Probeer het met andere startgokjes
+1068#£{1} verspreiding
+1069#£Gefeliciteerd! \nJe school heeft een partnerschap aangegaan en WordMat+ is nu geactiveerd.
+1070#£Succes
+1071#£Helaas\nJe school heeft nog geen partnerschap getekend.
+1072#£Geen partnerschap
+1073#£xmin moet >0 zijn om logaritmische x-as te gebruiken.
+1074#£YMIN moet >0 zijn om logaritmische y-as te gebruiken.
+1075#£De grafiek kon niet worden ingevoegd: {1}
+1076#£WordMat+ ingeschakeld voor {1}
+1077#£Versie: {1}
+1078#£WordMat+ maakt het mogelijk om wiskundige berekeningen in Word uit te voeren. De berekeningen worden uitgevoerd door een CAS die deel uitmaakt van WordMat+, dus er hoeven geen andere programma's geïnstalleerd te worden. \nWordMat is gemaakt door Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1079#£Succes!
+1080#£Data ontbreekt
+1081#£De startwaarde van {1} is geen getal
+1082#£Start-, eind- en paslengte moeten nummers zijn
+1083#£De differentiaalvergelijkingen konden niet worden opgelost: {1}
+1084#£Selecteer ten minste één variabele om weer te geven
+1085#£Te veel punten voor GeoGebra. Kies een grotere paslengte.
+1086#£Excel kon niet openen: {1}
+1087#£Start is geen getal
+1088#£Einde is geen getal
+1089#£Paslengte is geen getal
+1090#£Er zijn {1} stappen. Het werkt waarschijnlijk niet in GeoGebra met zoveel stappen.
+1091#£Je kunt niet zowel de vergelijking voor {1} oplossen als tegelijkertijd definiëren.
+1092#£Differentiaalvergelijking:
+1093#£Startvoorwaarde:
+1094#£Benoemde vergelijkingen
+1095#£Selecteer de vergelijking om naar te verwijzen en klik op OK (of dubbelklik). De referentie wordt het vergelijkingsnummer en wordt bijgewerkt wanneer de getallen veranderen.
+1096#£Om later een referentie naar de vergelijking in te voegen, kies 'Verwijzing naar vergelijking invoegen' onder 'Nieuwe vergelijking'.
+1097#£Herstart Maxima
+1098#£Gebruik Word als LaTeX-editor. \n\nJe kunt LaTeX-commando's direct in het document typen voor volledige controle, of de functies van Word gebruiken en WordMat+ laten converteren naar LaTeX. \n\nMikTex moet geïnstalleerd worden om een pdf-bestand te maken. Je wordt naar de installatie gestuurd als het ontbreekt. \n\nNaast het document wordt een map ('documentnaam-Latex') aangemaakt met het texbestand en afbeeldingen.
+1099#£Ondersteunde opmaak: \n- Koppen (stijlen) worden secties en subsecties: \n   Titel = hoofdstuk (documentklasse, boek of rapport; artikel: titel van het document)\n   Kop 1 = sectie, Kop 2 = subsectie, Kop 3 = subsubsectie\n- Vetgedrukt, cursief en onderstreept lettertype\n- Paginanummer aan/uit zoals in het document\n- Vergelijkingen: inline, genummerd en ongenummerd (met karakters onder Instellingen, Notatie)\n- Opsommingstekens (opsommingstekens en cijfers)\n- Tabellen\n- Afbeeldingen, vormen en diagrammen\n- Bibliografie
+1100#£LaTeX-instellingen
+1101#£Documentklasse:
+1102#£Lettergrootte:
+1103#£Gebruik de marges van Word
+1104#£Gebruik documentmarges in plaats van de standaardmarges van LaTeX (pakketgeometrie)
+1105#£Titelpagina
+1106#£Een aparte titelpagina met de titel van het document en de auteur van het document
+1107#£Inhoudsopgave
+1108#£Een aparte inhoudsopgavepagina na de titelpagina
+1109#£Genummerde secties
+1110#£De koppen zijn genummerd
+1111#£De lettergrootte voor platte tekst. De lettergrootte van Word wordt niet gebruikt
+1112#£LaTeX Preambule
+1113#£Automatisch gegenereerd:
+1114#£Eigen:
+1115#£Je eigen inleiding verwijderen
+1116#£Maakt de LaTeX-code aan als een texbestand en opent deze in het standaardprogramma voor texbestanden (TexWorks, TexMaker...) zodat de code kan worden bekeken en aangepast
+1117#£Maakt een LaTeX-document aan als pdf-bestand met MikTex. MikTex, dat geïnstalleerd moet worden. Mag alleen worden gebruikt voor eenvoudige documenten
+1118#£Wacht...
+1119#£{1}... (je eigen inleiding) ... \n\n{2}
+1120#£Kies hoe je de zin parafraseert.
+1121#£Uitgangsunits:
+1122#£Verminder
+1123#£Factor
+1124#£Voegt buiten haakjes in, bijvoorbeeld x^2-1 tot (x-1)(x+1).
+1125#£Vermenigvuldig de haakjes, bijvoorbeeld (x+1)^2 met x^2+2x+1.
+1126#£Bijvoorbeeld: x^2+6x+5 tot (x+3)^2-4, ook de vergelijking van een cirkel.
+1127#£Alle decimale getallen worden omgezet in breuken, en het resultaat is exact.
+1128#£Plak op dezelfde regel
+1129#£Het resultaat wordt geschreven na de uitdrukking met een gelijkteken (niet door een vergelijking)
+1130#£Logaritme-uitvoer
+1131#£Auto
+1132#£Selecteer de variabelen die geëlimineerd moeten worden.
+1133#£Hooguit kunnen {1} variabelen uit {2} vergelijkingen worden verwijderd.
+1134#£Kies maximaal {1} variabelen, want er zijn {1} vergelijkingen.
+1135#£Elimineer maximaal {1} variabelen
+1136#£Of schrijf ze zelf op, gescheiden door komma's
+1137#£Selecteer tot {1} variabelen
+1138#£Of schrijf ze gescheiden door komma's (de rest wordt automatisch geselecteerd)
+1139#£Elimineer variabelen
+1140#£Los de vergelijking op
+1141#£Vergelijkingen kunnen in principe op twee verschillende manieren worden opgelost. Als je problemen ondervindt met een vergelijking, is het misschien een goed idee om een andere methode te proberen.
+1142#£De oplossingen worden gevonden door te 'raden' op veel verschillende oplossingen. De methode werkt op vrijwel alle vergelijkingen, maar oplossingen kunnen over het hoofd worden gezien en valse oplossingen kunnen worden gevonden.
+1143#£Waarschuwing: Apparaten zijn ingeschakeld. \nWees op je hoede voor variabelen die eenheden zijn zoals A, C, F, H, J, K, L, N, S, T, V, W, m, g, u, s
+1144#£De tijdslimiet, het aantal cijfers en n voor wetenschappelijke notatie moeten getallen zijn.
+1145#£De tijdslimiet moet minstens 0 zijn, het aantal cijfers minstens 20 en n voor wetenschappelijke notatie een heel getal van 0 tot 100.
+1146#£Selecteer ten minste één CAS-applicatie.
+1147#£De back-upmap is: {1}
+1148#£WordMat+ is ingeschakeld.
+1149#£Dit vereist WordMat+.
+1150#£De instellingen zijn gereset.
+1151#£Decimalen
+1152#£Document {1} Markdown
+1153#£Markdown {1} Word
+1154#£De driehoekoplosser van WordMat wordt gebruikt met invoer:
+1155#£Aangezien de cosinusrelatie die we hierboven hebben opgelost voor
+1156#£Kwadratische voltooiing vereist een kwadratisch polynoom
+1157#£{1} moet twee getallen hebben, bijvoorbeeld binomial(7; 2)
+1158#£Er moeten minstens twee vergelijkingen zijn om uit te elimineren, bijvoorbeeld eliminate([x=2t+1; y=t^2]; t)
+1159#£eliminate vereist dat de vergelijkingen en variabelen worden geëlimineerd, bijvoorbeeld eliminate([x=2t+1; y=t^2]; t)
+1160#£TestTF vereist een vergelijking
+1161#£De uitdrukking wordt te groot om te vermenigvuldigen
+1162#£binomial (n; r) vereist n{1}0
+1163#£Een aanname moet een ongelijkheid zijn, bijvoorbeeld x>0: {1}
+1164#£Een aanname moet een ongelijkheid zijn tussen een variabele en een getal, bijvoorbeeld x>0
+1165#£De waarde in de aanname kan niet worden berekend: {1}
+1166#£Een rechte wortel van een negatief getal is niet gedefinieerd
+1167#£De macht van een negatief getal is niet gedefinieerd voor deze exponent
+1168#£Het aantal is te groot
+1169#£Ln en log zijn alleen gedefinieerd voor positieve getallen
+1170#£diff zou 1 tot 3 argumenten moeten hebben: diff(expressie; x; n)
+1171#£De tweede parameter in diff moet de variabele zijn, bijvoorbeeld diff(x^2; x)
+1172#£De derde parameter in diff moet een heel getal zijn
+1173#£De derde parameter in diff moet een getal zijn van 0 tot 100
+1174#£Specificeer naar welke variabele te differentiëren, bijvoorbeeld diff(expressie; x)
+1175#£{1} kunnen (nog niet) worden onderscheiden
+1176#£Schrijf de limietwaarde hieronder als lijm met x{1}a
+1177#£Er ontbreekt een look na lijm
+1178#£Een stukstukfunctie moet in elke rij een uitdrukking en een voorwaarde hebben
+1179#£De stuksgebonden functie is hier niet gedefinieerd (geen van de voorwaarden wordt vervuld)
+1180#£Polaire notatie r{1}v vereist dat complexe getallen worden ingeschakeld
+1181#£Schrijf een complex getal in polaire vorm zoals r{1}v
+1182#£{1} moet één argument hebben, bijvoorbeeld {1}(3+2i)
+1183#£Het argument van 0 is niet gedefinieerd
+1184#£De vergelijking kan niet worden opgedeeld in een reëel en een imaginair deel
+1185#£Alle complexe getallen zijn oplossingen
+1186#£De vergelijking heeft een oneindig aantal oplossingen ({1} op een kromme ligt)
+1187#£De vierkantswortel van {1} kan niet worden gevonden
+1188#£Het teken van {1} is niet bekend
+1189#£De definitie van {1} mag alleen {2} bevatten: {3}
+1190#£De definitie voor {1} moet {2} bevatten: {3}
+1191#£De definitie mist een gelijkteken: {1}
+1192#£Het is geen definitie: {1}
+1193#£De definitie is niet volledig: {1}
+1194#£{1} is een commando en kan niet worden gedefinieerd
+1195#£De parameters in een functiedefinitie moeten variabel zijn, bijvoorbeeld f(x)=2x+1: {1}
+1196#£Een ingebouwde functie kan niet worden gedefinieerd: {1}
+1197#£{1} is een constante en kan niet worden gedefinieerd
+1198#£De linkerkant van een definitie moet een naam of functie zijn, bijvoorbeeld a=5 of f(x)=2x+1: {1}
+1199#£De index {1} ligt buiten de matrix {2} ({3} rijen)
+1200#£De index {1} ligt buiten de matrix {2} ({3} balken)
+1201#£De index {1} ligt buiten {2} ({3} items)
+1202#£Een definitie gebruikt zichzelf (recursieve definitie)
+1203#£De functie {1} moet {2} argument(en) hebben.
+1204#£Slechts een functie van één variabele kan worden onderscheiden door label: {1}
+1205#£{1} is niet gedefinieerd voor {2} (de definitieset is {3})
+1206#£{1} kan niet als teller worden gebruikt omdat {1} gedefinieerd is. Verwijder de definitie of gebruik een andere naam.
+1207#£Er kan geen drempel worden gevonden voor {1} omdat {1} gedefinieerd is. Verwijder de definitie of gebruik een andere naam.
+1208#£Embedding na {1} kan niet omdat {1} gedefinieerd is. Verwijder de definitie of gebruik een andere naam.
+1209#£Differentiatie door {1} kan niet worden onderscheiden omdat {1} gedefinieerd is. Verwijder de definitie of gebruik een andere naam.
+1210#£Te {1} niet opgelost kan worden omdat {1} gedefinieerd is. Verwijder de definitie of gebruik een andere naam.
+1211#£De uitdrukking kan niet worden weergegeven in GeoGebra: {1}
+1212#£GeoGebra kan niet worden gebruikt voor de uitdrukking in WordMat+
+1213#£GeoGebra kan niet worden gestart (WordMat's MiniBrowser)
+1214#£GeoGebra kan niet worden gestart (WordMat's AppleScript)
+1215#£GeoGebra werd gestopt omdat de berekening meer dan {1} seconden duurde
+1216#£GeoGebra is niet geïnstalleerd (WordMat's geogebra-math apps)
+1217#£GeoGebra kan niet worden gestart (WordMat's WebViewWrap ontbreekt)
+1218#£GeoGebra kan niet worden gestart
+1219#£GeoGebra kan niet op apparaten rekenen
+1220#£GeoGebra kan het niet berekenen: {1}
+1221#£GeoGebra kan hier niet voor {1} worden gebruikt
+1222#£Testvergelijking vereist een vergelijking
+1223#£GeoGebra kan niet worden gebruikt voor deze differentiaalvergelijking
+1224#£GeoGebra kan de voorwaarde niet gebruiken
+1225#£GeoGebra kan de termen niet gebruiken
+1226#£GeoGebra kan de differentiaalvergelijking niet oplossen
+1227#£GeoGebra kan de variabelen niet elimineren
+1228#£GeoGebra kan de vergelijking niet oplossen
+1229#£GeoGebra vond alleen complexe oplossingen
+1230#£GeoGebra kan het niet berekenen
+1231#£GeoGebra vond slechts één complex resultaat
+1232#£Grafiek kon niet worden weergegeven: {1}
+1233#£Het draaipunt kon niet worden getoond: {1}
+1234#£Selecteer één of meer functies, bijvoorbeeld f(x)=x^2 of y={1}x. Een definitieverzameling wordt geschreven na een komma, bijvoorbeeld f(x)=x^2, 0{2}x{2}2.
+1235#£{1} is geen functie van x en kan niet als koppel worden weergegeven.
+1236#£Graph is niet beschikbaar voor Mac.
+1237#£Grafiek kon niet worden weergegeven in Grafiek: {1}
+1238#£Graaf ondersteunt geen functies van verschillende variabelen: {1}
+1239#£Grafiek kan geen vectoren en krommen weergeven: {1}
+1240#£Een grafiek kan geen vectoren en punten in 3D weergeven:{1}
+1241#£Voer waarde in voor {1}\n\nHet kan daarna worden aangepast onder aangepaste functies in Graph. Je kunt zelfs een animatie maken waarbij de waarde continu verandert, onder Calculate/Animate.
+1242#£De richtingsbalk kon niet worden weergegeven: {1}
+1243#£Showgrafiek
+1244#£Het lost voor {1} dat ook een eenheid is. Daarom is {1} geen eenheid in deze vergelijking. Overweeg een andere variabelenaam te gebruiken of eenheden uit te schakelen.
+1245#£Markeer de vergelijking die opgelost moet worden
+1246#£Kies de differentiaalvergelijking die opgelost moet worden
+1247#£Stel de functie in voor de beginvoorwaarden
+1248#£kon niet worden opgelost
+1249#£De differentiaalvergelijking wordt opgelost met behulp van . WordMat ({1})
+1250#£met de startvoorwaarde {1}
+1251#£met de beginvoorwaarden {1}
+1252#£met de randvoorwaarden {1}
+1253#£De vergelijking {1} met WordMat.
+1254#£De uitdrukking {1} het gebruik van WordMat.
+1255#£verminderd
+1256#£gefactoriseerd
+1257#£vermenigvuldigd
+1258#£Herschreven met vierkante voltooiing
+1259#£Herschreven naar breuken
+1260#£Parafraseerd
+1261#£De variabelen {1} worden geëlimineerd met WordMat.
+1262#£De variabele {1} worden geëlimineerd met WordMat.
+1263#£Selecteer de vergelijking die getest moet worden
+1264#£De vergelijking klopt.
+1265#£De vergelijking geldt voor alle waarden van {1}.
+1266#£De vergelijking is onjuist.
+1267#£De vergelijking is onjuist omdat de linkerkant niet gedefinieerd is.
+1268#£De vergelijking is onjuist omdat de rechterkant niet gedefinieerd is.
+1269#£De vergelijking is onwaar voor alle waarden van {1}.
+1270#£De vergelijking is niet waar voor alle waarden van {1}. Bijvoorbeeld, zij is onwaar voor {2}
+1271#£, waarbij de linkerzijde niet gedefinieerd is.
+1272#£waarbij de rechterkant niet gedefinieerd is.
+1273#£De vergelijking is waarschijnlijk waar. Het kon niet exact worden bewezen, maar de twee zijden hebben dezelfde numerieke waarde.
+1274#£De vergelijking is waarschijnlijk waar voor alle waarden van {1}. Het kon niet exact worden bewezen, maar het is waar in alle {2} punten waarop het numeriek is getest.
+1275#£De vergelijking geldt niet voor alle waarden van {1}.
+1276#£Het kon niet worden vastgesteld of de vergelijking waar is.
+1277#£De vergelijking wordt getest met WordMat.
+1278#£Fout in de definitie {1}: {2}
+1279#£Het belastingsysteem wordt numeriek opgelost voor {1} met behulp van WordMat.
+1280#£Het belastingsysteem wordt opgelost voor {1} met WordMat.
+1281#£De ongelijkheid wordt numeriek opgelost voor {1} met behulp van WordMat.
+1282#£De ongelijkheid wordt voor {1} opgelost met behulp van WordMat.
+1283#£De vergelijking wordt numeriek opgelost voor {1} in het interval {2} met behulp van WordMat.
+1284#£De vergelijking wordt numeriek opgelost voor {1} met behulp van WordMat.
+1285#£De vergelijking wordt voor {1} opgelost met behulp van WordMat.
+1286#£De berekening werd gestopt voordat het hele interval was doorzocht. Er kunnen verschillende omwegen zijn.
+1287#£De berekening werd gestopt voordat alle oplossingen waren gevonden. Er kunnen meerdere oplossingen zijn.
+1288#£Het systeem van vergelijkingen had geen oplossingen binnen {2} voor de variabelen {1}
+1289#£Ongelijkheid had geen oplossingen in de definitieset {1}
+1290#£Ongelijkheid had geen oplossingen in {2} voor variabele {1}
+1291#£Geen oplossingen gevonden
+1292#£De vergelijking had geen oplossingen in de definitieverzameling {1}
+1293#£De vergelijking had geen oplossingen in {2} voor variabele {1}
+1294#£Schrijf {1}x na de uitdrukking in de integraal (bijv. {2}x^2 {1}x)
+1295#£De vergelijking bevat een structuur die VBACAS nog niet kan berekenen: \n\n      {1}
+1296#£Schrijf de som met k=a onder en b boven het karakter (bijv. k=1 en n)
+1297#£De vergelijking bevat een accent dat VBACAS nog niet kan berekenen: \n\n      {1}
+1298#£De vergelijking bevat een structuur die VBACAS nog niet kan berekenen (een meerrijige vergelijkingsarray): \n\n      {1}
+1299#£De vergelijking bevat een structuur die VBACAS nog niet kan berekenen (bijv. som, integraal, limiet, matrix of accent): \n\n      {1}
+1300#£Schrijf {1}x {1}y na de uitdrukking in de dubbele integraal (bijv. {2}x·y {1}x {1}y)
+1301#£De integraal moet {1} differentiëlen hebben (bijvoorbeeld {2}x {2}y)
+1302#£De vergelijking lijkt te bevatten:
+1303#£maar Word heeft het bewaard zodat het argument van de functie na de haakjes doorgaat:
+1304#£Het is niet zichtbaar in de vergelijking, maar geeft een ander resultaat.
+1305#£Moet de vergelijking worden aangepast zodat deze wordt berekend zoals deze nu is? \n(Nee: bereken zoals Word het heeft opgeslagen)
+1306#£Je moet een tabel selecteren
+1307#£Er zijn geen geldige nummerparen in de tabel
+1308#£integrate moet 1, 2 of 4 argumenten hebben: integrate(expressie; x) of integrate(expressie; x; a; b)
+1309#£De tweede parameter in integrate moet de variabele zijn, bijvoorbeeld integrate(x^2; x)
+1310#£Specificeer na welke variabele geïntegreerd moet worden, bijvoorbeeld integrate(expressie; x)
+1311#£De integraal kan niet worden berekend: de integrand is niet gedefinieerd in het gehele interval
+1312#£De integraal kon niet numeriek nauwkeurig genoeg worden berekend (de integrand fluctueert te veel)
+1313#£Het vinden van de vergelijking
+1314#£Het lezen van de vergelijking
+1315#£vervanging van de vergelijking
+1316#£De vergelijking kon niet worden omgezet naar LaTeX ({1}): {2}
+1317#£LaTeX {1} vergelijking
+1318#£{1} {2} kon niet worden omgezet in vergelijkingen en is niet veranderd: {3}
+1319#£De LaTeX-code kon niet worden omgezet in een vergelijking: {1}
+1320#£De code is leeg.
+1321#£Deze functie wordt niet ondersteund op de Mac.
+1322#£Deze versie van WordMat+ kan geen pdf-bestanden maken met MikTex. Maak in plaats daarvan een texbestand aan.
+1323#£MikTex is niet geïnstalleerd. Je wordt nu naar miktex.org gestuurd waar het gedownload kan worden. De eerste keer dat de converter wordt uitgevoerd, word je ook gevraagd om enkele pakketten te downloaden. Klik gewoon op OK.
+1324#£Sla het document op voordat je het converteert naar LaTeX. De LaTeX-bestanden worden in een map naast het document geplaatst.
+1325#£Het document staat niet op je computer (OneDrive). Sla het op in een map op je computer voordat je het converteert.
+1326#£Omzetten van vergelijkingen
+1327#£Omzetten van opmaak
+1328#£Afbeeldingen converteren
+1329#£Tabellen omzetten
+1330#£Paragrafen omzetten
+1331#£Het schrijven van het bestand
+1332#£{1} {2} kon niet als bestand worden opgeslagen en is vervangen door een kader met de tekst "Image n missing".
+1333#£Document kon niet worden omgezet naar LaTeX: {1}
+1334#£WordMat+ heeft geen enkele map gevonden waarin het op deze Mac mag schrijven.
+1335#£MikTex (pdflatex.exe) werd niet gevonden.
+1336#£pdflatex draait {1}. tijd
+1337#£Er werd een fout gemaakt toen pdflatex.exe werd gereden.
+1338#£Het LaTeX-document kon niet worden vertaald. PDFLATEX gaf de foutmelding: \n\n{1}\n\nKlik op OK om het texbestand te openen.
+1339#£Het pdf-bestand is gemaakt, maar deze personages kan pdflatex niet schrijven. Ze zijn vervangen door een vetgedrukte ? In het pdf-bestand: \n\n{1}
+1340#£Het pdf-bestand kon niet worden gevonden. Klik op OK om het texbestand te openen zodat de fout gevonden kan worden.
+1341#£De map voor de afbeeldingen
+1342#£De map van het document
+1343#£Converts, links en voetnoten
+1344#£Kopiëren naar klembord
+1345#£De html-pagina wordt opgeslagen als\n{1}
+1346#£De html-code kon niet naar het klembord worden gekopieerd.
+1347#£{1} {2} kon niet gelezen worden en is als tekst geschreven.
+1348#£{1} {2} kon niet worden opgeslagen en is vervangen door de tekst "Afbeelding n ontbrekend".
+1349#£Document kon niet worden omgezet naar html ({1}): {2}
+1350#£(not used)
+1351#£Markdown-bestand wordt opgeslagen als\n{1}
+1352#£De markdown-tekst wordt naar het klembord gekopieerd.
+1353#£De markdown-tekst kon niet naar het klembord worden gekopieerd.
+1354#£De afbeeldingen worden opgeslagen als bestanden in dezelfde map.
+1355#£{1} {2} kon niet gered worden.
+1356#£Document kon niet worden omgezet in markdown ({1}): {2}
+1357#£*Afbeelding {1} ontbreekt*
+1358#£Markdown kon niet worden omgezet: {1}
+1359#£{1} {2} werd niet op de computer gevonden en is niet ingebracht.
+1360#£{1} {2} kon niet worden omgezet in vergelijkingsvelden.
+1361#£Het LaTeX-sjabloon (LatexWordTemplate.dotx) is niet gevonden. Het wordt samen met WordMat geïnstalleerd.
+1362#£limit moet 3 of 4 argumenten hebben: limit(expressie; x; a) of limit(expressie; x; a; plus)
+1363#£De vierde parameter in limiet moet plus of min zijn
+1364#£De limiet bestaat niet
+1365#£{1} moet 4 argumenten hebben: {1}(expressie; k; a; b)
+1366#£De tweede parameter in {1} moet de variabele zijn, bijvoorbeeld {1}(k^2; k; 1; n)
+1367#£De ondergrens kan niet oneindig zijn
+1368#£Te veel gewrichten (maximaal {1})
+1369#£De term voor {1}={2} heeft geen waarde
+1370#£De reeks is divergent (de som bestaat niet)
+1371#£De machtsom kan niet worden berekend
+1372#£De nulmatrix moet grootte 1 tot 100 hebben
+1373#£De eenheidsmatrix moet grootte 1 tot 100 zijn
+1374#£Het matrixproduct vereist dat de eerste evenveel kolommen heeft als de tweede rijen heeft ({1} en {2})
+1375#£Een array kan alleen worden verhoogd tot een geheel getal (of T voor de getransponeerde)
+1376#£Een matrix kan alleen tot een geheel getal worden verhoogd
+1377#£Alleen kwadratische matrices kunnen tot een macht worden verhoogd (de matrix is {1})
+1378#£De exponent is te groot
+1379#£De determinant bestaat alleen voor kwadratische matrices (de matrix is {1})
+1380#£De determinant van een array parameters kan voor {1}{1} hooguit worden berekend
+1381#£Alleen kwadratische matrices hebben een inverse (de matrix is {1})
+1382#£De matrix heeft geen inverse (de determinant is 0)
+1383#£De inverse van een array parameters kan voor {1}{1} hooguit worden berekend
+1384#£Maxima is niet geïnstalleerd (WordMat)
+1385#£Maxima kan niet worden gestart (de MathMenu.dll van WordMat ontbreken)
+1386#£Maxima kan niet worden gestart
+1387#£Maxima kan niet worden gestart (WordMat's AppleScript)
+1388#£Maxima stelde een vraag die WordMat+ niet kan beantwoorden
+1389#£Maxima werd gestopt omdat de berekening meer dan {1} seconden duurde
+1390#£De verbinding met Maxima via WSH vereist partnerschap
+1391#£Maxima kon niet via WSH worden gestart: fout {1} {2}
+1392#£Fouten in de Maxima-code (codevelden of codebestand): {1}
+1393#£Maxima kan {1}
+1394#£Maxima kan niet worden gebruikt voor {1} in WordMat+
+1395#£Beginvoorwaarden in twee verschillende punten
+1396#£deze omstandigheden
+1397#£Maxima kunnen de differentiaalvergelijking niet oplossen
+1398#£Maxima kan het niet berekenen
+1399#£Maxima vond slechts één complex resultaat
+1400#£Maxima kan de variabelen niet elimineren
+1401#£Maxima kunnen ongelijkheid niet oplossen
+1402#£Maxima kan de vergelijking niet oplossen
+1403#£Maxima vonden alleen complexe oplossingen
+1404#£Gnuplot is niet beschikbaar voor Mac. Gebruik GeoGebra.
+1405#£De grafiek kon niet worden weergegeven met Gnuplot: {1}
+1406#£Fout in de Maxima-code
+1407#£De codevelden of het codebestand hebben een fout: {1}
+1408#£Typ een Maxima-commando
+1409#£Fout in de Maxima-code (codevelden): {1}
+1410#£Er zijn te veel kolommen
+1411#£De berekening werd gestopt
+1412#£De deadline voor een deel van de berekening is overschreden
+1413#£De berekening werd gestopt omdat het meer dan {1} seconden duurde
+1414#£Faculteit wordt alleen gedefinieerd voor hele getallen
+1415#£Faculteit wordt alleen gedefinieerd voor getallen >= 0
+1416#£Het aantal is te groot voor docenten
+1417#£Het getal is te groot - VBACAS kan de faculteit van getallen boven 170 niet als decimale getallen berekenen
+1418#£desolve moet een differentiaalvergelijking hebben, bijvoorbeeld desolve(y'=2y)
+1419#£De differentiaalvergelijking moet een vergelijking zijn, bijvoorbeeld y'=2y
+1420#£Het argument {1} in desolve wordt niet begrepen
+1421#£De vergelijking bevat geen afgeleide functie (bijv. y')
+1422#£De vergelijking bevat geen afgeleide van {1}
+1423#£Er is geen vrije naam voor de constante
+1424#£De orde van de afgeleide moet een getal zijn
+1425#£Schrijf voorwaarden als {1}(0)=2 na de vergelijking: desolve(vergelijking; {1} (0)=2)
+1426#£Differentiaalvergelijkingen van een hogere orde dan 2 kunnen niet worden opgelost
+1427#£De differentiaalvergelijking kon niet worden opgelost ({1}{2} niet geïsoleerd kon worden)
+1428#£De differentiaalvergelijking kon niet worden opgelost (hij is noch lineair noch scheidbaar)
+1429#£De differentiaalvergelijking kon niet worden opgelost ({1}{2}{2} niet geïsoleerd kon worden)
+1430#£De differentiaalvergelijking kon niet worden opgelost (de tweede orde kan worden opgelost wanneer deze lineair is met constante coëfficiënten, of {1}{3}{3}=f({2}))
+1431#£De differentiaalvergelijking kon niet worden opgelost (een deeltjesoplossing voor {1} kan niet worden gevonden)
+1432#£Een differentiaalvergelijking van de tweede orde kan hoogstens twee voorwaarden hebben
+1433#£De voorwaarden moeten vergelijkingen zijn, bijvoorbeeld {1}(0)=1 en {1}{2}(0)=2
+1434#£De voorwaarden moeten worden geschreven als {1}(0)=1 en {1}{2}(0)=2
+1435#£Geen enkele oplossing voldoet aan de voorwaarden
+1436#£Een differentiaalvergelijking van de eerste orde moet één voorwaarde hebben, bijvoorbeeld {1}(0)=2
+1437#£De voorwaarde moet een vergelijking zijn, bijvoorbeeld {1}(0)=2
+1438#£De voorwaarde moet worden geschreven als {1}(0)=2
+1439#£Geen enkele oplossing voldoet aan de voorwaarde {1}
+1440#£De differentiaalvergelijking kon niet worden opgelost (de stamfunctie van {1} kan niet worden gevonden)
+1441#£De paslengte moet positief zijn
+1442#£De eindwaarde moet groter zijn dan de startwaarde
+1443#£Te veel passen ({1}). Kies een grotere paslengte
+1444#£Typ alleen de rechterkant van de differentiaalvergelijking voor {1}: {2}
+1445#£Definieer {1} onder Definities
+1446#£De differentiaalvergelijking voor {1} kan niet worden berekend met {2}={3}
+1447#£Plaats de cursor in de uitdrukking die geparafraseerd moet worden.
+1448#£Het Maxima-commando vereist WordMat's Maxima, dat niet is geïnstalleerd.
+1449#£Typ een Maxima-commando, bijvoorbeeld integrate(x^2,x) of factor(x^2-1). Het resultaat wordt geschreven als een nieuwe vergelijking.
+1450#£Maxima-commando
+1451#£Het Maxima-commando is niet aanwezig in deze versie van WordMat+.
+1452#£Plaats de cursor in een wiskundig veld.
+1453#£Plaats de cursor in de te lossen vergelijking.
+1454#£Selecteer de vergelijkingen waaruit variabelen worden verwijderd.
+1455#£Selecteer ten minste twee vergelijkingen om variabelen te elimineren (bijv. x=2t+1 en y=t^2).
+1456#£Plaats de cursor in de differentiaalvergelijking die opgelost moet worden.
+1457#£Er is geen actieve WordMat+-licentie. \n\nWordMat+ kan nog steeds worden gebruikt, maar deze functies zijn niet actief: {1}WordMat+'s eigen CAS (VBACAS). Maxima- of GeoGe{1}bra-grafieken worden geteld in het GeoGebra-venster van WordMat. Ze worden weergegeven in de browser{1}Formules invoegen uit de formulecollectie{1}Sinusregressie{1}Menu aanpassen\n\nKlik op OK om naar www.wordmat.dk te gaan
+1458#£Er is geen actieve WordMat+-licentie, dus WordMat+'s eigen CAS (VBACAS) kan niet worden gebruikt, en noch Maxima noch GeoGebra kunnen op deze computer worden gebruikt. Kies er één onder Instellingen, installeer WordMat met Maxima, of verleng de licentie op www.wordmat.dk.
+1459#£Maxima maakt geen deel uit van deze versie van WordMat+
+1460#£De vergelijking is al genummerd.
+1461#£Een genummerde vergelijking kan niet in een tabel worden ingevoegd.
+1462#£Genummerde vergelijking
+1463#£Typ een naam voor de vergelijking.
+1464#£De naam moet maximaal 40 tekens hebben.
+1465#£De naam moet met een letter beginnen.
+1466#£De naam mag alleen letters, cijfers en _ (geen spaties) bevatten.
+1467#£De naam bestaat al.
+1468#£Er zijn geen benoemde vergelijkingen in het document. Gebruik 'Genummerde vergelijking invullen ter referentie' onder Nieuwe vergelijking.
+1469#£Vergelijkingsreferentie
+1470#£Plaats de cursor in een genummerde vergelijking.
+1471#£Op welk getal moet deze vergelijking worden gezet? \nDe volgende vergelijkingen krijgen hun getallen aangepast om te passen.
+1472#£Typ een heel getal, of section.number (2.3) voor getallen met sectie.
+1473#£Er wordt een sectienummer van de vergelijking ingevoegd. Meestal wordt het ingevoegd als een hoofdstuk- of sectienummer. in een kop. Het nummer kan echter ook verborgen worden ingevoegd. Moet het nummer worden weergegeven? (Antwoord nee om het te verbergen)
+1474#£Voeg vergelijkingssectie nr.
+1475#£Vergelijkingssectie
+1476#£Delete-definities kunnen niet in een tabel worden ingevoegd.
+1477#£Geef aan welke eenheden in de uitvoer moeten staan, gescheiden door komma's\nVoorbeelden: \n\ncm, kJ, uren\neV, nm, mV\naJ, AU, Bq\n\nAls er niets wordt gespecificeerd, worden alle eenheden teruggegeven als basis SI-eenheden of afgeleide SI-eenheden zonder voorvoegsel.
+1478#£De tweede parameter in solve moet de variabele zijn, bijvoorbeeld solve(x^2=4; x)
+1479#£Ongelijkheden kunnen niet worden opgelost wanneer complexe getallen worden ingeschakeld
+1480#£De vergelijking kan niet analytisch worden opgelost. Probeer het numeriek op te lossen.
+1481#£De vergelijking kan (nog) niet worden opgelost: {1}=0
+1482#£Geef aan voor welke variabele opgelost moet worden, bijvoorbeeld solve(vergelijking; x)
+1483#£De vergelijking kan niet exact worden opgelost (de graad is te hoog)
+1484#£Te veel oplossingen in het interval
+1485#£Te veel oplossingen
+1486#£De periode kan niet worden berekend
+1487#£De oplossingen in het interval kunnen niet worden berekend
+1488#£De vergelijking kan nog niet exact worden opgelost: {1}=0
+1489#£De vergelijking kan (nog) niet exact worden opgelost
+1490#£De hoek kan niet worden berekend
+1491#£De vergelijking kan (nog) niet exact worden opgelost: {1}={2}
+1492#£Ongelijkheid kan (nog) niet worden opgelost): {1}
+1493#£De ongelijkheid kan (nog) niet worden opgelost: {1}{2}0
+1494#£Ongelijkheid heeft een oneindig aantal oplossingsintervallen. Specificeer een interval voor {1}, bijvoorbeeld 0{2}{1}{2}{3}
+1495#£Ongelijkheid kan (nog niet) worden opgelost
+1496#£{1} moet {2}{3}
+1497#£{1} (x) is niet gedefinieerd voor x=0, -1, -2, ...
+1498#£W_0(x) is alleen gedefinieerd voor x{1}-1/e
+1499#£acosh (x) is alleen gedefinieerd voor x{1}1
+1500#£{1} (x) te groot is om berekend te worden;
+1501#£{1} heeft hier geen waarde
+1502#£{1} kan niet worden onderscheiden volgens {2} ({2} in het eerste argument)
+1503#£De onbekenden moeten variabel zijn, bijvoorbeeld solve([x+y=5; x-y=1]; [x;y])
+1504#£Systemen met ongelijkheden kunnen (nog) niet worden opgelost
+1505#£Er zijn geen vergelijkingen om op te lossen
+1506#£Het stelsel van vergelijkingen heeft geen variabelen om voor op te lossen
+1507#£Het systeem van vergelijkingen is overbepaald: er zijn meer vergelijkingen ({1}) dan onbekende ({2}).
+1508#£Het belastingsysteem kan (nog) niet exact worden opgelost
+1509#£Het belastingsysteem is (nog niet) opgelost
+1510#£Specificeer de variabelen die geëlimineerd moeten worden, bijvoorbeeld eliminate([x+y=a; x-y=b]; x)
+1511#£De variabelen die geëlimineerd moeten worden, moeten variabelen zijn, bijvoorbeeld eliminate([x+y=a; x-y=b; x*y=c]; [x;y])
+1512#£Variabelen kunnen niet worden uitgesloten uit ongelijkheden
+1513#£Hooguit kunnen {1} variabelen uit {2} vergelijkingen worden geëlimineerd
+1514#£Wanneer {1} worden geëlimineerd, zijn er geen vergelijkingen meer over (ze zijn altijd vervuld)
+1515#£{1} kan nog niet worden geëlimineerd (nog)
+1516#£{1} kan niet worden geëlimineerd (de graden zijn te hoog)
+1517#£Apparaten komen niet overeen: {1}
+1518#£Onbekende eenheid: {1}
+1519#£Een lijst
+1520#£een vector
+1521#£een matrix
+1522#£een aantal
+1523#£{1} moet minstens één element bevatten
+1524#£Alle rijen in een array moeten een gelijk aantal elementen hebben
+1525#£De elementen van een vector moeten getallen of expressies zijn
+1526#£Je kunt {1} niet aan {2}{3}
+1527#£Je kunt geen getal aan {1}
+1528#£van een andere grootte
+1529#£Je kunt {1} en {2} niet vermenigvuldigen met verschillende aantallen elementen
+1530#£De vectoren moeten een gelijk aantal coördinaten hebben
+1531#£Een vector kan alleen in het kwadraat worden verhoogd (het stippproduct met zichzelf)
+1532#£Je kunt niet opstijgen om {1}
+1533#£De functie kan {1} niet als argument nemen
+1534#£het moet een array of twee vectoren hebben
+1535#£De grootte van de nulmatrix moet hele getallen zijn
+1536#£ident moet de grootte hebben, bijvoorbeeld ident(3)
+1537#£De grootte van de eenheidsmatrix moet een geheel getal zijn
+1538#£Dat moet één vector hebben
+1539#£De kruisvector bestaat alleen voor vectoren in het vlak
+1540#£{1} moet twee vectoren hebben, bijvoorbeeld {1}(a; b)
+1541#£{1} van een array kan nog niet worden berekend
+1542#£Het kruisproduct bestaat alleen voor vectoren in de ruimte (3 coördinaten)
+1543#£De determinant van twee vectoren bestaat alleen voor vectoren in het vlak (2 coördinaten)
+1544#£{1} moet een argument hebben
+1545#£length moet één lijst hebben, bijvoorbeeld length(x)
+1546#£Een element heeft maximaal twee indices, bijvoorbeeld A[1; 2]
+1547#£De index moet een geheel getal zijn: {1}
+1548#£De index is te groot: {1}
+1549#£De index {1} ligt buiten de matrix ({2} rijen)
+1550#£De index {1} ligt buiten de matrix ({2} balken)
+1551#£Een lijst heeft slechts één index, bijvoorbeeld x[2]
+1552#£Een vector heeft slechts één kolom: de andere index moet 1 zijn
+1553#£De vectoren aan de twee zijden van het gelijkteken moeten een gelijk aantal coördinaten hebben
+1554#£De matrices aan de twee zijden van het gelijkteken moeten even groot zijn
+1555#£Een array kan slechts gelijk zijn aan één matrix
+1556#£Een vector kan niet gelijk zijn aan een getal
+1557#£Berekeningen kunnen niet worden uitgevoerd op definitievelden. U kunt uw onderstaande definitie gebruiken voor een berekening.
+1558#£en
+1559#£Automatisch
+1560#£Exact
+1561#£Numeriek
+1562#£Eenheden op
+1563#£Eenheden uitgeschakeld
+1564#£LaTeX-code
+1565#£LaTeX-codes
+1566#£Vergelijking
+1567#£Vergelijkingen
+1568#£Afbeelding
+1569#£Afbeeldingen
+1570#£Argument
+1571#£Argumenten
+1572#£Significantieniveau:
+1573#£De totale som van alle cellen is minder dan 50. {1} verdeling is daarom in dit geval een slechte benadering en het resultaat onbetrouwbaar.
+1574#£Vrijheidsgraden:
+1575#£Ombouw
+1576#£Pas het menu aan
+1577#£Kies welke menu-items zichtbaar zijn
+1578#£Cijfers en afronding
+1579#£Herschrijven...
+1580#£Los vergelijkingen op
+1581#£Los gekoppelde differentiaalvergelijkingen op
+1582#£Waarschijnlijkheid
+1583#£Ongegroepeerd
+1584#£Gegroepeerd
+1585#£Invoegen Tabel
+1586#£Gewoonte
+1587#£t-verdeling
+1588#£Genummerde vergelijkingen
+1589#£Laat alles zien
+1590#£Verstop alles
+1591#£Per niveau ingesteld
+1592#£Stelt zichtbare menu-items in op basis van het wiskundeniveau dat je krijgt aangeleerd volgens
+1593#£Sinuspassing
+1594#£Deze functie vereist WordMat+
+1595#£Om toegang te krijgen tot WordMat+ kan uw school/organisatie:\n een partnerschapsovereenkomst met Eduap aangaat.
+1596#£Lees hier meer over de andere voordelen van een partnerschap:
+1597#£Controleer of je school al een partnerschap heeft getekend
+1598#£Formuleverzameling opzet
+1599#£Kies je opleiding
+1600#£Kies je vakniveaus
+1601#£Je kunt je keuzes altijd later aanpassen
+1602#£Wiskunde:
+1603#£Natuurkunde:
+1604#£Chemie:
+1605#£Volgende
+1606#£Tentoonstelling in GnuPlot
+1607#£Functies f(x)=...
+1608#£Titel van de x-as
+1609#£Titel van de y-as
+1610#£Var
+1611#£Puntgrootte:
+1612#£Toon in Excel
+1613#£Excel embedded
+1614#£Grid
+1615#£Logaritmische X-as
+1616#£Logaritmische Y-as
+1617#£Labels
+1618#£Invoegen label
+1619#£Uitleg van de show
+1620#£Punten 2
+1621#£Syntaxis\nStartpunt - Vector\n(startx ; starty)-(dx ; dy)\n\nVoorbeelden: \n(1,1)-(1,2)     \n  Vector tekenen (1.2) vanaf punt (1.1)\n\n(1,2)\n  Vector (1.2) tekenen vanaf punt (0.0)\n\n(1,5 ; 4,5)\nAls decimale getallen worden meegenomen; gebruikt als scheidingsteken
+1622#£Nieuwe Vector
+1623#£Vergelijking 1
+1624#£Vergelijking 2
+1625#£Vergelijking 3
+1626#£De variabelen moeten x en y zijn
+1627#£Rekwisiet
+1628#£Manu
+1629#£onmogelijk. variabel
+1630#£Dep. variabele
+1631#£Integrale krommen (krommen)
+1632#£Specificeer punten waarlangs oplossingspaden getrokken moeten worden.
+1633#£Open
+1634#£Opent een venster waar je kunt klikken op het punt waar de integrale kromme zou moeten zijn en waar schuifregelaars kunnen zijn, zodat je het richtingsveld kunt zien veranderen met de schuifregelaar
+1635#£Interactief
+1636#£Wacht!
+1637#£Const
+1638#£van
+1639#£aan
+1640#£Sliders
+1641#£Alleen krommen tonen
+1642#£Vergunning:
+1643#£Stel de paslengte automatisch in
+1644#£Stelt het aantal stappen in op 500
+1645#£De vergelijkingen worden opgelost met de 4e orde Runge-Kutta
+1646#£Berekende bullets invoegen als lijst in een Word-document
+1647#£Je kunt ofwel een variabele of functie invoeren, afhankelijk van wat er in de vergelijking staat. Dat wil zeggen, bijvoorbeeld y of f(x), maar niet f.
+1648#£Oké, nieuwe lijn
+1649#£Definities op dit punt in het document
+1650#£Voorbeeld: a=5, x>0
+1651#£Voorbeeld: g, min, cm
+1652#£Dec.
+1653#£Draait in een browser maar niet online
+1654#£Verbinding met Maxima
+1655#£Maakt verbinding met Maxima met een .net dll-bestand dat de communicatie afhandelt
+1656#£Maxima wordt door een shell met wsh uitgevoerd. Elke berekening is een nieuwe instantie van Maxima. Het is iets trager en toont kort een zwart cmd-venster, maar is niet afhankelijk van het dll-bestand.
+1657#£Vereist WordMat+
+1658#£Checkpartnerschap
+1659#£Hoger gaan (eerder geprobeerd)
+1660#£Verhuizen (later te berechten)
+1661#£De motoren worden van bovenaf getest.  \nDe volgende wordt gebruikt wanneer één motor dat niet kan.
+1662#£Onbeperkte precisie
+1663#£Reken op onbeperkte precisie (grote cijfers)
+1664#£Maximaal aantal cijfers:
+1665#£Maximaal aantal cijfers in exacte aantallen
+1666#£Tijdslimiet(en):
+1667#£Tijdslimiet voor een berekening in seconden (0 = geen limiet)
+1668#£Wetenschappelijke notatie, n:
+1669#£Wetenschappelijke notatie voor getallen onder 10^-n (0 = nooit)
+1670#£LaTeX-omhullende karakters over een vergelijking
+1671#£In de tekst:
+1672#£De tekst vóór de LaTeX-code voor een vergelijking binnen de tekst, bijvoorbeeld $
+1673#£De tekst na de LaTeX-code voor een vergelijking binnen de tekst, bijvoorbeeld $
+1674#£Op zichzelf staande lijn:
+1675#£De tekst vóór de LaTeX-code voor een vergelijking op een regel apart, bijvoorbeeld \[ of \begin{equation}
+1676#£De tekst na de LaTeX-code voor een vergelijking op een regel apart, bijvoorbeeld \] of \end{equation}
+1677#£Eenheden met rechtopstaande schrijf (\mathrm)
+1678#£Entiteiten worden niet herkend en in cursief geschreven (\mathrm{m})
+1679#£Dubbeldruk Alt+M
+1680#£Je moet precies 3 hoeken/zijden invoeren, maar niet slechts 3 hoeken. \nDus: \n1 zijde + 2 hoeken\n2 zijden + 1 hoek (mogelijk 2 oplossingen)\n3 pagina's
+1681#£Waar precies het antwoord gewenst is. Kan de rekentijd beïnvloeden.
+1682#£Geen LaTeX-code gevonden. Selecteer de code of plaats de cursor in een LaTeX-vergelijking (bijvoorbeeld {1} of {2}).
+1683#£{1} {2} kon niet door VBACAS worden gelezen en is als tekst ({3}) geschreven in het LaTeX-document.
+1684#£De divergentie {1} vereist een vectorfunctie. De gradiënt van {2} wordt geschreven als {3}
+1685#£De rotatie (curl) {1} vereist een vectorfunctie met 2 of 3 coördinaten
+1686#£{1} vereist dat {2} evenveel coördinaten als variabelen heeft
+1687#£De divergentie {1} van een uitgeschreven vector vereist 2 of 3 coördinaten (de variabelen x, y en z)
+1688#£"{1}" komt binnenkort in WordMat+ voor Office.
+1689#£Er deed zich een fout op in "{1}".
+1690#£Details
+1691#£Kopiëren
+1692#£Eenheden zijn ingeschakeld.
+1693#£Eenheden zijn uitgeschakeld.
+1694#£Taakvenster weergeven
+1695#£De taal verandert wanneer WordMat+ opnieuw wordt geopend.
+1696#£De kortste vorm, bijvoorbeeld (x^2-1)/(x-1) naar x+1 en sin(x)^2+cos(x)^2 naar 1.
+1697#£De berekening duurde te lang en werd gestopt.
+1698#£WordMat+ voor Word (Word desktop en Word Online)\nVersie {1}\n\nOntwikkelversie: er worden continu meer functies toegevoegd.
+1699#£Vergelijking bewerken
+1700#£/ breuk, ^ macht, _ index, sqrt vierkantswortel, de pijltjestoetsen bewegen de cursor. Enter: invoegen. Ctrl+Enter: invoegen en berekenen. Esc: annuleren.
+1701#£Invoegen en berekenen
+1702#£Klik in de grafiek om een oplossingscurve door het punt te tekenen.
+1703#£Nulpunten
+1704#£Extremen
+1705#£Snijpunten
+1706#£Puntenreeks {1}
+1707#£Coördinaten tonen
+1708#£Kiest het grafiekvenster zodat alle punten, nulpunten, extremen en snijpunten zichtbaar zijn, en de assen wanneer die niet ver weg liggen.
+1709#£Geen raster
+1710#£Groot raster
+1711#£Klein raster
+1712#£Raaklijn
+1713#£Tekent de raaklijn naar de graaf bij de hier geschreven x-waarden. Verschillende waarden worden gescheiden door ;
+1714#£Startpunt
+1715#£Zonder startpunt wordt de vector vanuit (0;0) getekend.
+1716#£Sleep omlaag om de getallen voort te zetten: 1, 2 geeft 3, 4 ... Dubbelklikken vult tot de laatste rij.
+1717#£Typ een formule met x, bijvoorbeeld 2*x, en y wordt berekend voor de rijen vanaf hier naar beneden.
+1718#£Typ de punten in de tabel, of plak ze vanuit Excel of een Word-tabel.\nSleep het kleine vakje om de getallen naar beneden te laten gaan: 1, 2 geeft 3, 4 ...\nTyp een formule in de kolom y, bijvoorbeeld 2x of =2x, en y wordt berekend voor de rijen vanaf hier naar beneden.\nSelecteer meerdere cellen met de muis of Shift en druk op Delete om ze te wissen.\nDe knop z geeft een z-kolom voor punten in de ruimte.
+1719#£Voegt de raaklijn van een functie in als een nieuwe functie, en het raakpunt als een punt. Kies de functie en typ x, of klik op de grafiek.
+1720#£Sleep in de grafiek om een vector te tekenen.
+1721#£Klik op een label in de tabel en vervolgens op de grafiek om het te verplaatsen.
+1722#£Observatie
+1723#£Frequentie
+1724#£Relatieve frequentie
+1725#£Cumulatieve frequentie
+1726#£Van
+1727#£Tot
+1728#£Aantal waarnemingen
+1729#£Kleinste waarde
+1730#£Onderste kwartiel
+1731#£Mediaan
+1732#£Bovenste kwartiel
+1733#£Grootste waarde
+1734#£Gemiddelde
+1735#£Standaarddeviatie
+1736#£Steekproefstandaarddeviatie
+1737#£Beschrijvende statistieken berekend met WordMat:
+1738#£De tabel moet de waarnemingen bevatten, of de waarnemingen in de eerste kolom en hun frequenties in de tweede kolom.
+1739#£De tabel moet drie kolommen hebben: het begin van de intervallen, het einde van de intervallen en de frequenties.
+1740#£Het begin van elk interval moet kleiner zijn dan het einde, en de intervallen mogen niet overlappen.
+1741#£De frequenties mogen niet negatief zijn.
+1742#£Voer het aantal verschillende waarnemingen in, en er wordt een tabel gemaakt waarin je de waarnemingen en hun frequenties kunt invoeren.\nAls je de tabel hebt ingevuld, kies je {1} of een diagram uit het menu.
+1743#£Voer het aantal intervallen in, en er wordt een tabel gemaakt waarin je de intervallen en hun frequenties kunt invoeren.\nAls je de tabel hebt ingevuld, kies je {1} of een diagram uit het menu.
+1744#£Diagram
+1745#£Geen diagram
+1746#£Relatieve frequentie in procenten
+1747#£Kwartielen tonen
+1748#£Naam
+1749#£per eenheid
+1750#£Typ de waarnemingen en hun frequenties in de tabel, of plak ze uit Excel of een Word-tabel.
+1751#£Typ de intervallen en hun frequenties in de tabel, of plak ze vanuit Excel of een Word-tabel.
+1752#£Typ de kwartielen van elke boxplot: kleinste waarde, onderste kwartiel, mediaan, bovenste kwartiel en grootste waarde.
+1753#£De kwartielen moeten in oplopende volgorde staan.
+1754#£Ruwe data
+1755#£Ongegroepeerd
+1756#£Gegroepeerd
+1757#£Cum. frequentie
+1758#£Overzetten naar ongegroepeerd
+1759#£Overzetten naar gegroepeerd
+1760#£Intervalbreedte
+1761#£Typ de waarnemingen in de tabel, of plak ze uit Excel of een Word-tabel.
+1762#£Toevoegen aan boxplot
+1763#£De tabel wordt in het document ingevoegd wanneer het venster wordt gesloten.
+1764#£{1} waarnemingen liggen buiten de intervallen.
+1765#£De intervalbreedte moet groter zijn dan 0.
+1766#£Stippendiagram
+1767#£Oppervlaktelegenda
+1768#£Toont rechtsboven een vak met dezelfde breedte als het eerste interval, en met hoeveel procent van de waarnemingen het overeenkomt.
+1769#£Een waarneming op de grens tussen twee intervallen behoort tot het onderste interval, ]a;b], wat de Deense standaard is, of tot het bovenste interval, [a;b[.
+1770#£Vrijheidsgraden
+1771#£Toon cumulatieve verdeling
+1772#£Kies een verdeling.
+1773#£Een leeg veld betekent geen limiet aan die kant.
+1774#£Typ een kans, bijvoorbeeld 0,95 of 95%, en de overeenkomstige waarde wordt gevonden.
+1775#£n moet een geheel getal groter zijn dan 0.
+1776#£p moet tussen 0 en 1 liggen.
+1777#£De standaarddeviatie moet groter zijn dan 0.
+1778#£Het aantal vrijheidsgraden moet groter zijn dan 0.
+1779#£Geobserveerd
+1780#£Tweezijdig
+1781#£Linkszijdig
+1782#£Rechtszijdig
+1783#£Kritiek gebied
+1784#£P-waarde
+1785#£De nulhypothese wordt verworpen.
+1786#£De nulhypothese kan niet worden verworpen.
+1787#£Betrouwbaarheidsinterval voor p
+1788#£Geen test
+1789#£Verwacht
+1790#£Kritieke waarde
+1791#£Toetsingsgrootheid
+1792#£Resultaat invoegen
+1793#£Er moeten minstens twee rijen zijn met een waargenomen telling en een verwachte telling die groter is dan 0.
+1794#£Een goodness of fit test wordt uitgevoerd met WordMat
+1795#£Op het significantieniveau {1}% kan de nulhypothese, dat de waarnemingen de verwachte verdeling volgen, worden verworpen.
+1796#£Op het significantieniveau {1}% kan de nulhypothese niet worden verworpen. Er is daarom geen bewijs dat de waarnemingen afwijken van de verwachte verdeling.
+1797#£Verwachte waarden:
+1798#£Test of de gegroepeerde gegevens normaal verdeeld zijn
+1799#£{1} en {2} uit de data
+1800#£Fit
+1801#£Er moeten minstens {1} intervallen zijn wanneer het gemiddelde en de standaarddeviatie uit de gegevens worden geschat.
+1802#£De test gebruikt de gegroepeerde gegevens op het tabblad {1}. Typ ze onder {2} en vink {3} aan, zodat het histogram kan worden vergeleken met de normale verdeling.
+1803#£Geeft elke kromme een veld z(t), zodat deze in de ruimte wordt getekend.
+1804#£De variabelen moeten x en y zijn, en z in de ruimte
+1805#£Vergelijkingen als afbeeldingen
+1806#£Word Online doet er enkele seconden over om een vergelijking te schrijven. Met deze instelling voegt WordMat+ nieuwe vergelijkingen in en resulteert als kleine afbeeldingen, waarop het berekent zoals op vergelijkingen. De afbeeldingen kunnen opnieuw vergelijkingen worden gemaakt in het menu {1}.
+1807#£Vergelijkingen omzetten in afbeeldingen
+1808#£Zet de vergelijkingen van de selectie, of van het hele document wanneer er niets geselecteerd is, om in afbeeldingen, die Word Online toont en veel sneller verandert. WordMat+ berekent op de afbeeldingen zoals op vergelijkingen.
+1809#£Afbeeldingen omzetten in vergelijkingen
+1810#£Verandert de afbeeldingen van vergelijkingen in de selectie, of in het hele document wanneer niets is geselecteerd, weer in echte vergelijkingen, bijvoorbeeld voordat het document wordt ingeleverd.
+1811#£Vergelijkingen omgezet in afbeeldingen: {1}
+1812#£Afbeeldingen omgezet in vergelijkingen: {1}
+1813#£Niet omgezet (ongewijzigd): {1}
+1814#£Er zijn geen vergelijkingen om te converteren.
+1815#£Er zijn geen afbeeldingen van vergelijkingen om te converteren.
+1816#£Vergelijkingen als afbeeldingen worden alleen gebruikt in Word Online.
+1817#£De vergelijkingen konden niet worden omgezet.
+1818#£Wiskunde
+1819#£Natuurkunde
+1820#£Sluit wanneer een formule wordt gekozen
+1821#£Houd Ctrl ingedrukt als je op een formule klikt, en de formulecollectie sluit niet.
+1822#£2 invoegen
+1823#£De formule wordt twee keer ingevoegd: één keer voor documentatie en één keer waar je cijfers kunt invoeren.
+1824#£Constanten invoegen
+1825#£In de natuurkunde en scheikunde worden de fysische constanten als getallen in de tweede formule ingevoegd.
+1826#£In het deelvenster weergeven
+1827#£De formuleverzameling wordt weergegeven in het paneel naast het document in plaats van in een groot venster. Deze is van toepassing vanaf de volgende keer dat de formuleverzameling wordt geopend.
+1828#£Zoeken:
+1829#£Opmerking: De verzameling chemieformules is nog niet compleet.
+1830#£Typ het zoekveld in, of klik op een onderwerp.
+1831#£Klik op een figuur om deze in het document in te voegen.
+1832#£Word Online kan de figuren tonen, maar kan ze niet bewerken. Open het document in Word voor Windows of Mac om ze te wijzigen.
+1833#£Toont figuren in het paneel: driehoeken, eenheidscirkel, coördinatensystemen en monotonielijnen. Klik op een figuur om deze in het document in te voegen.
+1834#£Het bestand {1} is gedownload. Het staat in de downloads van de browser.
+1835#£Gebruik Word als LaTeX-editor. \n\nJe kunt LaTeX-commando's direct in het document typen voor volledige controle, of de functies van Word gebruiken en WordMat+ laten converteren naar LaTeX. \n\nHet texbestand wordt naar de computer gedownload. Als het document afbeeldingen heeft, wordt een zipbestand met het tex-bestand en de mapafbeeldingen gedownload.
+1836#£Maakt de LaTeX-code als een texbestand dat naar de computer wordt gedownload, zodat de code kan worden bekeken en aangepast in een LaTeX-programma
+1837#£Opslaan
+1838#£Om de x-as
+1839#£Om de y-as
+1840#£Draait de grafieken van de aangevinkte functies 360 graden om de x-as of de y-as, zodat er een omwentelingslichaam in 3D ontstaat. Elke grafiek wordt gedraaid van zijn Xmin tot zijn Xmax.
+1841#£Vergelijking
+1842#£Converteren
+1843#£Zijvenster
+1844#£Toont het zijvenster met de instellingen, of sluit het wanneer het geopend is.
+1845#£WordMat+ gebruikt JSXGraph voor grafieken en MathLive voor het invoeren van vergelijkingen. Beide hebben de MIT-licentie.
+1846#£Licenties
+1847#£stuksgewijs
+1848#£Tussen haakjes: @ of Alt+Enter maakt een nieuwe rij, & een nieuwe kolom.
+1849#£n-de machtswortel
+1850#£matrix
+1851#£bepaalde integraal
+1852#£onbepaalde integraal
+1853#£Tussen haakjes: @ of Alt+Enter voegt een nieuwe coördinaat toe.
+1854#£som
+1855#£product
+1856#£WordMat+ maakt het mogelijk om wiskundige berekeningen in Word uit te voeren.\nWordMat is gemaakt door Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£JavaScript-CAS gebruiken (sneller)
+1858#£Het CAS van WordMat+ wordt uitgevoerd door de JavaScript-engine QuickJS. Zonder het vinkje rekent VBACAS.
+1859#£Ingebouwd CAS: {1}
+1860#£JavaScript-engine: QuickJS, © Fabrice Bellard, Charlie Gordon e.a. (MIT-licentie)

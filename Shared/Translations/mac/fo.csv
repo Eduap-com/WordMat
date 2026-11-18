@@ -933,3 +933,929 @@
 932#£Uppdatering til nggjastu betaœtg‡vuna
 933#£Tœ skalt vera varugur vi, at ta kunnu vera villur ’ beta-œtg‡vum. Teir eru fyrst og fremst ¾tlair til royndir. Ta verur m¾lt til at brœka hesa funkti—n fyrst og fremst sum Eduap hevur ‡sett
 934#£V’sir grafin fyri vinstru og h¿gru s’u av j¿vnuni ’ sama koordinatskipan. Loysnirnar til javnuna eru x-viri av skurunum. Minnist til at zooma inn og œt.
+935#£Formœlusavn
+936#£Opnar formilusavni vi formulum œr st¿ddfr¿i, fysikki og evnafr¿i. Trst ‡ eina formulu fyri at seta hana inn ’ skjali.
+937#£Opnar ein dialog, har tœ velur, hvussu valda œttrykki ella javnan verur skriva um: minka, faktorisera, v’ka, kvadrama fullf¿rslu, ella desimala til brot. Tœ kanst eisini geva fyribils ‡setingar og velja œttaki. òrsliti verur skriva ‡ eina nggja linju.
+938#£Minkar valda œttrykki ella b‡ar s’ur av eini javnu til stytsta form, t.d. (x^2-1)/(x-1) til x+1 og sin(x)^2+cos(x)^2 til 1. òrsliti verur skriva ‡ eina nggja linju.
+939#£Faktoriserar valda œttrykki, t.d. x^2-1=(x-1)(x+1). òrsliti verur skriva eftir œttrykkinum, eins og ’ Calculate.
+940#£Margfalda parentesur ’ valda œttrykkinum, t.d. (x+1)^2=x^2+2x+1. òrsliti verur skriva eftir œttrykkinum, sum ’ Calculate.
+941#£Umskrivar ein kvadratiska polynom-aks^2+bx+c til a(x+b/(2a))^2+c-b^2/(4a), t.d. x^2+6x+5 til (x+3)^2-4. Koeffisientarnir kunnu vera b—kstavir. Virkar eisini ‡ eina javnu, t.d. eina ringjavnu x^2-4x+y^2+14y+53=25 til (x-2)^2+(y+7)^2=25. òrsliti verur skriva ‡ eina nggja linju.
+942#£Sendir valda œttrykki beinleiis til Maxima og leggur œrsliti inn sum eina nggja javnu. òttrykkini skulu skrivast ’ syntaksini hj‡ Maxima, t.d. integrate(x^2,x) ella faktor(x^2-1). Um einki er valt, kann boi skrivast ’ einum kassa. Krevur WordMats Maxima.
+943#£Royndarjavna
+944#£Kannar, um tann merkta javnan er sann fyri ¿ll viri av broytunum, t.d. sin(x)^2+cos(x)^2=1. Fyrst verur roynt eitt n‡greiniligt pr—gv, annars verur javnan roynd vi t¿lum. Svari er satt, falskt (vi m—td¿mi), sannl’kt satt ella —kent, og verur skriva ‡ eina nggja linju.
+945#£At taka burtur eina ella fleiri broytur œr einum javnuskipan: vel javnurnar og vel t¾r broytur, sum skulu takast burtur (f¾rri enn tali av javnum). Til d¿mis, x=2t+1 og y=t^2 vi t burtur, gevur y=(x-1)^2/4.
+946#£Loysir eina ella fleiri samankoplaar differentialjavnur vi t¿lum, t.d. x'=y og y'=-x. òrsliti kann v’sast sum ein grafur ’ GeoGebra, leggjast inn sum ein listi ella talva, ella sendast til Excel.
+947#£Kl‡rt.
+948#£Setur inn 'Define:' ’ byrjanini av j¿vnuni vi kursorinum, ella eina nggja j¿vnu vi henni. çsetingarnar eru galdandi ’ œtreikningunum nianfyri ’ skjalinum.
+949#£Setur inn 'Strika ‡setingar:' ‡ eina nggja linju. çsetingarnar omanfyri vera ikki brœktar ’ œtreikningunum nianfyri.
+950#£V’sir grafin fyri valdu funkti—nirnar/javnurnar og punktini. Grafforriti verur valt ’ stillingum, ella vi at v’ka henda kn¿ttin.
+951#£Grafar
+952#£V’sir grafar og punkt ’ GeoGebra: ’ GeoGebra-vindeyganum hj‡ WordMat vi WordMat+, annars ’ vafranum. Eingin internet krevst.
+953#£Opnar GeoGebra 5 og flytur valdu funkti—nirnar og ‡setingarnar.
+954#£Opnar (ella leggur inn) Excel-arkini hj‡ WordMat til grafar og punkt vi teimum valdu funkti—nunum og punktunum ’ talvuni.
+955#£V’sir kroppin av teimum valdu funkti—nunum ’ GeoGebra. Grafurin av preceptinum verur snaraur 360 stig runt x-‡sin fyri at skapa eitt 3D-objekt. Ein definisjonssett verur skriva eftir einum komma, t.d. f(x)=x^2, 0<=x<=2.
+956#£T¿l yvir t¿l
+957#£Tillagar eina funkti—n, tœ sj‡lvur skrivar, t.d. f(x)=aáe^(báx)+c, til punktini ’ talvuni. Parametrarnir eru variablarnir uttan tann —hefta variablan.
+958#£Excel-regresj—n
+959#£Setur inn eitt ntt st¿ddfr¿iligt ¿ki. ê eini nummareraari j¿vnu: ger javnuna nummaraa.
+960#£Setur inn eitt ntt st¿ddfr¿iligt ¿ki, sum sj‡lvvirkandi verur nummara. Um kursorin er ’ einari j¿vnu, verur hann nummaraur. Staseting og slag av nummari vera vald undir Stillingum.
+961#£Setur inn eina ‡v’sing til eina nevnda javnu: javnutali, sum verur dagf¿rt, t‡ t¿lini broytast.
+962#£Nummaraa javnan, har kursorurin er, f¾r eitt ‡v’st tal. Fylgjandi javningar fylgja.
+963#£Opnar LaTeX-dialogin, har skjali kann umsetast til eina .tex-f’lu ella eina pdf-f’lu (krevur MikTex). Tey inniliggjandi teknini fyri umsettar j¿vnur vera vald undir Options, Notation.
+964#£Umset j¿vnu til LaTeX
+965#£Skiftir javnuna ‡ kursorinum œt vi LaTeX-k—an. Umsluttandi teknini fyri inline-j¿vnur og j¿vnur ‡ einari linju hv¿r s¾r vera vald undir Stillingum, N—tum.
+966#£Umset LaTeX til j¿vnur
+967#£Umsetur LaTeX-k—an ’ valinum til javnufelt. Um einki er valt, verur LaTeX-javnan umsett vi kursorin. K—in finst ‡ $...$, \(...\), $$...$$, \[...\], \begin{align}, o.s.fr., og umkransandi teknini undir Settings, Notation. Eitt val uttan umkransandi tekn verur umsett til eina javnu. Alt+T uttanfyri eina javnu ger ta sama.
+968#£Skjal
+969#£Umset til LaTeX pdf-f’lu
+970#£Umsetur alt skjali til LaTeX, umsetur ta til eina pdf-f’lu vi MikTex pdflatex og letur hana upp ’ sj‡lvvalda pdf-f’luforritinum. MikTex m‡ installerast.
+971#£Umset til LaTeX .tex f’lu
+972#£Umsetur alt skjali til eina .tex-f’lu og letur hana upp ’ sj‡lvvalda .tex-f’luforritinum (TexWorks, TexMaker, ...). F’lan verur l¿gd ’ eina mappu vi s’una av skjalinum.
+973#£Umset til HTML
+974#£Umsetur vali ella alt skjali til eina html-s’u, sum verur opna ’ vafranum. J¿vnurnar vera skrivaar sum LaTeX og v’star vi MathJax (krevur internet), myndirnar vera innlagdar ’ s’una. F’lan verur l¿gd ’ eina mappu vi s’una av dokumentinum, og html-k—in uttan <head> hana verur kopieraur til klippibori, so hon kann l’mast, til d¿mis, inn ’ ein Custom HTML-blokk ’ WordPress.
+975#£Umseta til Markdown
+976#£Umsetur markupi ella alt skjali til eina markdown (.md) f’lu: yvirskriftir, listar, tilvitnanir, feitt, kursiv, gj¿gnumstrik, koda, leinkjur, tabellir og f—tnotur, og j¿vnirnar sum LaTeX ($...$ og $$...$$). Myndirnar vera goymdar sum f’lur ’ somu mappu. Mappan verur l¿gd vi s’una av skjalinum og opin, og teksturin verur avritaur ‡ klippibori.
+977#£Umset markdown til Word-format
+978#£Ger markdown ’ valinum ella gj¿gnum skjali til Word-format: yvirskriftir (#), listar (- og 1st), keldur (>), fevnd (**), kursiv (*), strik (~~), koda (' og '''), leinkjur, myndir, talvur, f—tnotur og l‡rŽttar linjur, og LaTeX ($...$ og $$...$$) gerast javnufelt.
+979#£Vel hv¿rja kommando hv¿r knappaborsstytting (Alt+M, Alt+B, Alt+L...) skal fremja, og s’ggj skj—tvegirnar hj‡ Word til st¿ddfr¿iligar felt.
+980#£Um WordMat+
+981#£Ein indeksur manglar ’ {1}
+982#£Funkti—nin {1} manglar eitt argument. Til d¿mis, slag {1}(x) ella {1}^(-1)(x) vi Word's funkti—nssnim‡ti
+983#£Ein lutur ’ listanum manglar
+984#£Grundtali fyri ein logaritma m‡ vera positivt og ¿rv’si enn 1
+985#£Ein parentesa manglar til {1}\n\nParentesan, sum manglar byrjanarklombur, verur lst ’ œttrykkinum nianfyri vi eyka pl‡ssum runt: \n\n      {2}  )  {3}
+986#£Klomburnar {1} samsvara ikki vi {2}\n\nParentesurnar eru framhevaar ’ œttrykkinum vi eyka rœmum: \n\n      {3}  {1} {4}  )  {5}
+987#£Ta manglar ein endaligur brakettur til {1}\n\nKlombrarin, sum manglar lokandi klombur, verur lstur ’ œttrykkinum nianfyri vi eyka millumrœmum rundan um: \n\n      {2}  {1} {3}
+988#£Syntaksvillur\n{1} operatorur m‡ ikki setast fremst ’ œttrykkinum.
+989#£Invers trigonometrisk funkti—n feilur: {1}\nArgumenti m‡ vera millum -1 og 1
+990#£Syntaksvillur\n{1} operatorur m‡ ikki setast aftast ’ œttrykkinum.
+991#£Tali er ov st—rt til at vera umrokna til eitt desimaltal
+992#£Deiling vi null
+993#£Ein feilur hendi. Kann ikki seta formœluna her. \nRoys at lata ¿ll Word-skj¿l aftur og byrja Word av nggjum. \n\nVillulsing: \n{1}
+994#£Talvan inniheldur ongar t¿l. Tœ m‡st gera eina talvu vi tveimum d‡lkum: x-viri ’ vinstru d‡lki og y-viri ’ h¿gru kolonnu.
+995#£Tœ m‡st gera eina tabell vi tveimum d‡lkum. X viri ’ vinstru kolonnu og Y-viri ’ h¿gru kolonnu.
+996#£Linjuregresj—n framd vi WordMat. WordMat:
+997#£Eksponentiell regresj—n framd vi WordMat. WordMat:
+998#£Styrkisregressi—n framd vi WordMat:
+999#£çset rafylgjuna av polynomiska regressi—nini (1-{1})\n\n(H¾gsta rafylgjan verur ‡sett av tali ‡ stigum)
+1000#£Rafylgjan m‡ vera millum 1 og {1}
+1001#£Polynomregressi—n av stigi {1} framd vi WordMat. WordMat:
+1002#£Krosstalvan skal hava minst 2 rair og 2 d‡lkar vi t¿lum.
+1003#£{1} - roynd fyri samanhang verur gj¿rd vi WordMat WordMat
+1004#£P-viri: {1} = {2}%
+1005#£ç tdningarstigi {1}% kann 0-hypotesan um, at eingin korrelati—n er, avv’sast. T.v.s. Ta er korrelati—n millum hesar b‡ar variablar.
+1006#£ç signifikansstigi {1}% kann 0-hypotesan ikki avv’sast. T’ er eingin pr—gv fyri, at samband er millum hesar b‡ar broytur.
+1007#£V¾nta viri eru minni enn 5, ella samlaa summan av ¿llum cellum er minni enn 50. {1} bti er t’ ein v‡nalig tiln¾rming ’ hesum f¿ri, og œrsliti —‡l’tandi. ê summum f¿rum kann d‡tutilfari gerast brœkiligt vi at gera eina ara b—lking.
+1008#£P-viri:
+1009#£Q-viri:
+1010#£Kritisk Q-viri:
+1011#£Excel-f’lan hj‡ WordMat {1} kundi ikki finnast. Funkti—nin krevur, at WordMat verur installera.
+1012#£Seti inn innbygd Excel-skjal...
+1013#£Ein feilur hendi ’ royndini at seta inn Excel-ark.
+1014#£Feilur ’ at lesa f’luna: {1}
+1015#£GeoGebra 5 kundi ikki latast upp: {1}
+1016#£GeoGebra 5 er ikki installera ‡ t’ni teldu. \n\nVilt tœ niurloada GeoGebra 5? (Nei: grafurin verur v’stur ’ GeoGebra Calculator Suite)
+1017#£GeoGebra fer at niurhala ’ t’num vafra. Far til Downloads og koyr installat¿rin.
+1018#£Ein feilur hendi, t‡ eg royndi at lata upp: {1}
+1019#£Henda œtg‡van av WordMat+ kannar ikki sj‡lv fyri nggjum œtg‡vum. Tœ verur nœ v’stur til niurhalss’una.
+1020#£WordMat+ kann ikki kanna fyri nggjari œtg‡vu ‡ hesi teldu (WordMat's MathMenu.dll manglar ella ein eldri œtg‡va). Tœ verur nœ v’saur til niurhalss’una.
+1021#£Tœ hevur longu nggjastu œtg‡vuna av WordMat+ v.{1}
+1022#£Ein nggj œtg‡va av WordMat er kl‡r at taka niur. \nT’indi:  \n{1}\n\nTrst OK fyri at byrja uppdateringina.
+1023#£Nggj œtg‡va {1}
+1024#£Ein nggj œtg‡va av WordMat er kl‡r at taka niur. \nT’indi:  \n{1}\nTœ verur nœ v’saur v’ari til niurhaldss’una
+1025#£Ein feilur var ’ sambandi vi at kanna fyri eina dagf¿ring. Tœ verur nœ sendur til heimas’una, har tœ kanst s’ggja, um ein nggj dagf¿ring kemur. Nœverandi œtg‡va er: {1}
+1026#£Uppdateringin kann ikki takast niur sj‡lvvirkandi ‡ hesi teldu (WordMat's MathMenu.dll manglar ella ein eldri œtg‡va). Tœ verur nœ v’saur til niurhalss’una.
+1027#£Niurhala installati—nsf’luna
+1028#£Installati—nsf’lan hevur ikki eina galdandi talgilda undirskrift fr‡ Eduap. Hon er aftur strika.
+1029#£Installati—nsf’lan var ikki tikin niur r¾tt
+1030#£Installati—nsf’lan er tikin niur. \nTrst OK fyri at byrja dagf¿ringina. Tœ verur biin um at goyma og lata Word aftur.
+1031#£Installati—nin kundi ikki startast (villa {1}).
+1032#£Ein feilur kom fram undir dagf¿ringini (villa {1}).
+1033#£Henda œtg‡van av WordMat+ kann ikki taka niur og installera uppdateringar. Tœ verur nœ tikin til niurhalss’una.
+1034#£At dagf¿ra til beta-œtg‡vuna krevur WordMat+.
+1035#£Vilt tœ byrja at installera beta-œtg‡vuna?
+1036#£Uppdatering av beta
+1037#£Ein feilur hendi, t‡ beta-œtg‡van var installera: {1}
+1038#£Keypss’an kann ikki latast upp ‡ hesi teldu (WordMat's MathMenu.dll manglar ella ein eldri œtg‡va). Set WordMat upp aftur.
+1039#£Boi er ikki t¿kt ’ WordMat+ enn. Undir Shortcuts, vel eitt anna kommando til lykilin.
+1040#£Fyrra œrslit
+1041#£WordMat+: eingin œrslit er ‡renn j¿vnuna.
+1042#£WordMat+: eingin fleiri œrslit eru. Trst aftur fyri nggjastu œrslitini.
+1043#£Ein villa hendi: {1}
+1044#£òrsliti var ikki framkv¾mt.
+1045#£Installati—nsf’lan er tikin niur. \nTrst OK fyri at byrja dagf¿ringina
+1046#£Serverin hj‡ Eduap gav eina villu. \nV—nandi er hetta ein fyribils trupulleiki. Um trupulleikin heldur fram og tœ hevur eitt galdandi WordMat+ loyvi, vinarliga set teg ’ samband vi eduap@eduap.com\n\nVilla: wordmatlicense miseydnaist
+1047#£Einki internet
+1048#£WordMat+ kann ikki kanna licensina, t’ WordMat's MathMenu.dll kann ikki ntast ‡ hesi teldu. \n\nF’lan manglar, er eldri œtg‡va, ella hon er blokera av trygdarinnstillingum (antivirus, Endpoint Protection). \n\nSet WordMat upp aftur ella set teg ’ samband vi IT-deildina. Til t‡ virkar WordMat+ sum uttan loyvi.
+1049#£Trst ‡ Loyva tv¾r ferir eftir at tœ hevur lati hetta vindeyga aftur\nTœ skalt bara gera hetta einafer.
+1050#£R¾ttindi til WordMat
+1051#£GeoGebra st¿ddfr¿iforrit ikki funnin
+1052#£Forritsf’lur ikki funnar
+1053#£Sinus-regresj—n krevur eitt virki WordMat+ loyvi.
+1054#£Sinus regressi—n framd vi WordMat (’ {1}): WordMat (’ ):
+1055#£Excel-regressi—n...
+1056#£Excel-f’lan hj‡ WordMat, Graphs.xltm, kundi ikki finnast. Excel-regresj—n krevur, at WordMat verur installera.
+1057#£Ta var ein feilur ’ royndini at leggja Excel-skjal inn. Hetta kann vera t’ at Excel er dotti niur fyrr. Lat Excel-arkini upp og lat Excel upp ‡renn tœ roynir vi WordMat aftur.
+1058#£{1} hevur fleiri —defineraar variablar. îhefta variabla kann ikki eymerkjast. Brœka x ella t sum —hefta variabula.
+1059#£Ta m‡ vera minst 3 d‡tupunkt.
+1060#£Sinus regresj—n
+1061#£Kundi ikki meta um t’nina vi FFT.
+1062#£framf¿rdi vi WordMat{1}:
+1063#£Modelli inniheldur ikki —heftu broytuna {1}
+1064#£Modelli hevur ongar parametrar (arar broytur enn {1})
+1065#£Ta m‡ vera minst l’ka n—gv punkt sum parametrar ({1})
+1066#£Custom regression krevur Maxima, t‡ eingin virkin WordMat+ licens er.
+1067#£Regressi—nin megnai ikki at finna parametrarnar. Roys vi ¿rum byrjanargitingum
+1068#£{1} œtbreisla
+1069#£Tillukku! \nT’n skœli hevur skriva undir samstarv, og WordMat+ er nœ virkja.
+1070#£V¾leydnaur
+1071#£T’verri\nT’n skœli hevur enn ikki skriva undir samstarv.
+1072#£Einki samstarv
+1073#£xmin m‡ vera >0 fyri at brœka logaritmiska x-‡sin.
+1074#£YMIN m‡ vera >0 fyri at brœka logaritmiska y-‡sin.
+1075#£Grafurin kundi ikki setast inn: {1}
+1076#£WordMat+ virki til {1}
+1077#£òtg‡va: {1}
+1078#£WordMat+ ger ta m¿guligt at gera matematiskar œtreikningar ’ Word. òtreislurnar vera gj¿rdar av einum CAS, sum er partur av WordMat+, so eingin onnur forrit skulu installerast. \nWordMat er framleitt av Mikael Sams¿e S¿rensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1079#£V¾leydna!
+1080#£Data manglar
+1081#£Byrjanarviri av {1} er ikki eitt tal
+1082#£Byrjan, endi og longd ‡ fetum skulu vera t¿l
+1083#£Differentialjavnurnar kundu ikki loysast: {1}
+1084#£Vel minst eina variablu at v’sa
+1085#£Ov n—gv stig til GeoGebra. Vel longri fetlongd.
+1086#£Excel kundi ikki lata seg upp: {1}
+1087#£Start er ikki eitt tal
+1088#£Endin er ikki eitt tal
+1089#£Stiglengd er ikki eitt tal
+1090#£Ta eru {1} stig. Ta riggar helst ikki ’ GeoGebra vi so n—gvum stigum.
+1091#£Tœ kanst ikki b¾i loysa javnuna fyri {1} og samstundis ‡seta hana.
+1092#£Differentialjavna:
+1093#£Byrjanarst¿a:
+1094#£Nevndar javnir
+1095#£Vel j¿vnuna, sum skal v’sast til, og trst OK (ella tv’klikka). çv’singin verur j¿vnutali og verur dagf¿rd, t‡ t¿lini broytast.
+1096#£Fyri at seta inn eina ‡v’sing til javnuna seinni, vel 'Set inn ‡v’sing til javnu' undir 'Nggj javna'.
+1097#£Endurr¾sa Maxima
+1098#£Brœka Word sum LaTeX-ritstj—ra. \n\nTœ kanst skriva LaTeX-bo beinleiis inn ’ skjali fyri fulla string, ella brœka Word-funkti—nirnar og lata WordMat+ umseta til LaTeX. \n\nMikTex m‡ installerast fyri at skapa eina pdf-f’lu. Tœ verur sendur til installati—nina, um hon manglar. \n\nEin mappa ('dokumentnavn-Latex') verur gj¿rd vi s’una av skjalinum vi tex-f’luni og myndunum.
+1099#£Stula formatering: \n- Yvirskriftir (st’lar) gerast partar og undirpartar: \n   Heiti = kapittul (skjalflokkur, b—k ella fr‡greiing; grein: heiti ‡ skjalinum)\n   Yvirskrift 1 = deild, Yvirskrift 2 = undirdeild, Yvirskrift 3 = undirundirgrein\n- Feitt, kursiv og undirstrika skrift\n- S’utal ‡/av sum ’ skjalinum\n- J¿vnur: inline, nummara og —nummara (vi teknum undir Settings, Notation)\n- Punktlistar (punktlistar og t¿l)\n- Talvur\n- Myndir, form og yvirlit\n- B—kayvirlit
+1100#£LaTeX stillingar
+1101#£Skjalflokkur:
+1102#£Skriftst¿dd:
+1103#£Brœka Word's marginir
+1104#£Brœka dokumentmarginir ’ stain fyri LaTeX's standard margins (package geometry)
+1105#£Titils’a
+1106#£Ein serst¿k titils’a vi heitinum ‡ skjalinum og h¿vundinum av skjalinum
+1107#£Innihaldsyvirlit
+1108#£Ein serst¿k innihaldsyvirlitss’a eftir fors’una
+1109#£Nummarair partar
+1110#£Yvirskriftirnar eru nummarsettar
+1111#£Skriftst¿ddin fyri vanligan tekst. Skriftst¿ddin hj‡ Word verur ikki brœkt
+1112#£LaTeX-foror
+1113#£Sj‡lvvirkandi:
+1114#£Egna:
+1115#£At strika t’na egnu inngang
+1116#£Skapar LaTeX-kotuna sum eina tex-f’lu og letur hana upp ’ sj‡lvvalda forritinum fyri tex-f’lur (TexWorks, TexMaker...), so k—in kann kannast og tillagast
+1117#£Skapar eitt LaTeX-skjal sum pdf-f’lu vi MikTex. MikTex, sum m‡ installerast. Skal bert ntast til einfaldar dokumentir
+1118#£B’a...
+1119#£{1}... (t’n egna inngangur) ... \n\n{2}
+1120#£Vel hvussu tœ umorar setningin.
+1121#£òttakseindir:
+1122#£Minka
+1123#£Faktor
+1124#£Setur inn uttan fyri klommar, t.d. x^2-1 til (x-1)(x+1).
+1125#£Margfalda parentesurnar, t.d. (x+1)^2 vi x^2+2x+1.
+1126#£T.d. x^2+6x+5 til (x+3)^2-4, eisini javnan fyri ein ring.
+1127#£¯ll desimalt¿l vera umrokna til brot, og œrsliti er n‡greiniligt.
+1128#£L’ma ‡ somu linju
+1129#£òrsliti verur skriva eftir œttrykkinum vi einum javntekni (ikki vi j¿vnu)
+1130#£Logaritmuœttak
+1131#£Auto
+1132#£Vel variablar, sum skulu strikast.
+1133#£ê mesta lagi kunnu {1} broytur takast burtur œr {2} j¿vnum.
+1134#£Vel ’ mesta lagi {1} variablar, t’ ta eru {1} j¿vnur.
+1135#£Strika eitt maksimum av {1} broytum
+1136#£Ella skriva tey sj‡lvur, sundurbtt vi kommum
+1137#£Vel upp til {1} variablar
+1138#£Ella skriva tey sundurbtt vi kommum (hinir vera sj‡lvvirkandi valdir)
+1139#£Strika variablar
+1140#£Loysa j¿vnu
+1141#£J¿vnur kunnu ’ grundini loysast ‡ tveir ymiskar m‡tar. Um tœ hevur trupulleikar vi eini j¿vnu, kann ta vera ein g— hugskot at royna ara m‡ta.
+1142#£Loysnirnar vera funnar vi at 'gita' n—gv ymiskar loysnir. M‡tin virkar ‡ n¾rum ¿llum javnum, men loysnir kunnu vera yvirs¾ddar og falskar loysnir finnast.
+1143#£çvaring: T—lini eru tendra. \nVer varin vi broytum, sum eru eindir, t.d. A, C, F, H, J, K, L, N, S, T, V, W, m, g, u, s
+1144#£T’armarki, tali av t¿lum og nou fyri v’sindaliga notati—n mugu vera t¿l.
+1145#£T’armarki m‡ vera minst 0, tali av t¿lum minst 20, og nou fyri v’sindaliga skriving eitt heiltal fr‡ 0 til 100.
+1146#£Vel minst eina CAS-ums—kn.
+1147#£Backup-mappan er: {1}
+1148#£WordMat+ er virki.
+1149#£Hetta krevur WordMat+.
+1150#£Stillingarnar eru nullstillaar.
+1151#£Desimalar
+1152#£Skjal {1} Markdown
+1153#£Markdown {1} Word
+1154#£WordMat's tr’kantsloysari verur brœktur vi inntaki:
+1155#£T’ cosinus-relasj—nin, sum vit loystu omanfyri fyri
+1156#£Kvadratfull fullf¿rsla krevur eitt kvadratiska polynomi
+1157#£{1} m‡ hava tvey t¿l, t.d. binomial(7; 2)
+1158#£Ta mugu vera minst tveir javnir at strika œr, t.d. eliminate([x=2t+1; y=t^2]; t)
+1159#£eliminate krevur, at javnurnar og broyturnar vera tiknar burtur, t.d. eliminate([x=2t+1; y=t^2]; t)
+1160#£TestTF krevur eina javnu
+1161#£òttrykkini gerast ov st—r til at vera margfalda
+1162#£binomial (n; r) krevur n{1}0
+1163#£Ein fortreyt m‡ vera ein —javna, t.d. x>0: {1}
+1164#£Ein fortreyt m‡ vera ein —javna millum eitt brot og eitt tal, t.d. x>0
+1165#£Viri ’ fortreytini kann ikki roknast: {1}
+1166#£Ein beinleiis r—t av einum negativum tali er ikki ‡sett
+1167#£Veldi av einum negativum tali er ikki ‡sett fyri henda eksponent
+1168#£Tali er ov st—rt
+1169#£Ln og log eru bert ‡sett fyri positivar t¿l
+1170#£diff skal hava 1 til 3 argument: diff(œttrykk; x; n)
+1171#£Annar parameturin ’ diff m‡ vera variablurin, t.d. diff(x^2; x)
+1172#£Trii parameturin ’ diff m‡ vera eitt heiltal
+1173#£Trii parameturin ’ diff skal vera eitt tal fr‡ 0 til 100
+1174#£çset, hv¿rja variablu skal differensierast vi, t.d. diff(œttrykk; x)
+1175#£{1} kann ikki skiljast (enn)
+1176#£Skriva markviri sum l’m vi x{1}a nianfyri
+1177#£Eitt œtsj—nd manglar eftir l’mi
+1178#£Ein stykkiv’s funkti—n m‡ hava eitt œttrykk og eina treyt ’ hv¿rjari r¿
+1179#£Stykki-fyri-funkti—nin er ikki ‡sett her (eingin av treytunum er uppfylt)
+1180#£Polar notati—n r{1}v krevur, at kompleks t¿l vera tendra
+1181#£Skriva eitt komplekst tal ’ polarformi sum r{1}v
+1182#£{1} m‡ hava eitt argument, t.d. {1}(3+2i)
+1183#£Argumenti hj‡ 0 er ikki ‡sett
+1184#£Javnan kann ikki btast ’ ein veruligan og ein ’myndaan part
+1185#£¯ll kompleks t¿l eru loysnir
+1186#£Javnan hevur —endaliga n—gvar loysnir ({1} er ‡ eini kurvu)
+1187#£Kvadratr—tin av {1} kann ikki finnast
+1188#£Merki {1} er ikki kent
+1189#£çsetingin fyri {1} kann bert innihalda {2}: {3}
+1190#£çsetingin fyri {1} m‡ innihalda {2}: {3}
+1191#£çsetingin manglar javnleiksmerki: {1}
+1192#£Ta er ikki ein ‡seting: {1}
+1193#£çsetingin er ikki fullf’ggja: {1}
+1194#£{1} er ein bo og kann ikki definerast
+1195#£Parametrarnir ’ eini funkti—nsdefinisj—n mugu vera broytiligir, t.d. f(x)=2x+1: {1}
+1196#£Ein innbygd funkti—n kann ikki vera ‡sett: {1}
+1197#£{1} er ein konstantur og kann ikki ‡setast
+1198#£Vinstra s’a av eini ‡seting m‡ vera eitt navn ella ein funkti—n, t.d. a=5 ella f(x)=2x+1: {1}
+1199#£Indeksurin {1} er uttanfyri matriksin {2} ({3} rair)
+1200#£Indeksurin {1} er uttanfyri matriksin {2} ({3} strikur)
+1201#£Yvirliti {1} er uttanfyri {2} ({3} lutir)
+1202#£Ein ‡seting ntir seg sj‡lva (rekursiv ‡seting)
+1203#£Funkti—nin {1} m‡ hava {2} argument(ir)
+1204#£Bert ein funkti—n av einum variabla kann skiljast vi merki: {1}
+1205#£{1} er ikki ‡sett fyri {2} (‡setingarsetti er {3})
+1206#£{1} kann ikki ntast sum teljari, t’ {1} er ‡sett. Strika ‡setingina ella brœka eitt anna navn.
+1207#£Ein mark kann ikki finnast fyri {1} t’ {1} er ‡sett. Strika ‡setingina ella brœka eitt anna navn.
+1208#£At leggja inn eftir {1} kann ikki gerast, t’ {1} er definera. Strika ‡setingina ella brœka eitt anna navn.
+1209#£Differensiering vi {1} kann ikki skiljast, t’ {1} er ‡sett. Strika ‡setingina ella brœka eitt anna navn.
+1210#£Ov {1} kann ikki loysast, t’ {1} er ‡sett. Strika ‡setingina ella brœka eitt anna navn.
+1211#£òttrykkini kunnu ikki v’sast ’ GeoGebra: {1}
+1212#£GeoGebra kann ikki ntast til œttrykkini ’ WordMat+
+1213#£GeoGebra kann ikki setast ’ gongd (MiniBrowser hj‡ WordMat)
+1214#£GeoGebra kann ikki startast (WordMat's AppleScript)
+1215#£GeoGebra var stega, t’ œtreikningurin t—k meira enn {1} sekund
+1216#£GeoGebra er ikki installera (WordMat's geogebra-math appir)
+1217#£GeoGebra kann ikki startast (WordMat's WebViewWrap manglar)
+1218#£GeoGebra kann ikki setast ’ gongd
+1219#£GeoGebra kann ikki l’ta ‡ t—l
+1220#£GeoGebra kann ikki rokna ta: {1}
+1221#£GeoGebra kann ikki ntast til {1} her
+1222#£Roknijavnan krevur eina j¿vnu
+1223#£GeoGebra kann ikki ntast til hesa differentialjavnu
+1224#£GeoGebra kann ikki brœka treytina
+1225#£GeoGebra kann ikki brœka hesi hugt¿k
+1226#£GeoGebra kann ikki loysa differentialjavnuna
+1227#£GeoGebra kann ikki œtrma variablunum
+1228#£GeoGebra kann ikki loysa javnuna
+1229#£GeoGebra fann bert fl¿ktar loysnir
+1230#£GeoGebra kann ikki rokna ta
+1231#£GeoGebra fann bert eitt fl¿kt œrslit
+1232#£Grafurin kundi ikki v’sast: {1}
+1233#£Pivot-kroppurin kundi ikki v’sast: {1}
+1234#£Vel eina ella fleiri funkti—nir, t.d. f(x)=x^2 ella y={1}x. Eitt definisjonssett verur skriva eftir einum komma, t.d. f(x)=x^2, 0{2}x{2}2.
+1235#£{1} er ikki ein funkti—n av x og kann ikki v’sast sum eitt moment.
+1236#£Graph er ikki t¿kt til Mac.
+1237#£Grafurin kundi ikki v’sast ’ Graf: {1}
+1238#£Grafurin stular ikki funkti—num av fleiri variablum: {1}
+1239#£Grafurin kann ikki v’sa vektorar og kurvur: {1}
+1240#£Grafurin kann ikki v’sa vektorar og punkt ’ 3D:{1}
+1241#£Skriva inn viri fyri {1}\n\nTa kann stillast aftan‡ undir serligum funkti—num ’ Graph. Tœ kanst eisini gera eina animati—n, har viri broytist st¿ugt, undir Calculate/Animate.
+1242#£R¾ttingarstongin kundi ikki v’sast: {1}
+1243#£Sningargrafur
+1244#£Hon loysir fyri {1}, sum eisini er ein eind. T’ er {1} ikki ein eind ’ hesi javnu. Hugsa um at brœka eitt anna variablunavn ella sl¿kkja eindir.
+1245#£Merk j¿vnuna, sum skal loysast
+1246#£Vel differentialjavnuna at loysa
+1247#£Set funkti—nina fyri byrjanartreytirnar
+1248#£kundi ikki loysast
+1249#£Differentialjavnan verur loyst vi at brœka . WordMat ({1})
+1250#£vi byrjanartreytini {1}
+1251#£vi byrjanartreytunum {1}
+1252#£vi randtreytunum {1}
+1253#£Javnan {1} at brœka WordMat.
+1254#£òttrykkini {1} at brœka WordMat.
+1255#£minka
+1256#£Faktorisera
+1257#£Margfalda
+1258#£Umskriva vi ferkantaari fullf¿rslu
+1259#£Umskriva til brot
+1260#£Umskriva
+1261#£Broyturnar {1} vera strikaar vi WordMat.
+1262#£Broytan {1} vera tikin burtur vi WordMat.
+1263#£Vel j¿vnuna at royna
+1264#£Javnan er sann.
+1265#£Javnan er galdandi fyri ¿ll viri av {1}.
+1266#£Javnan er skeiv.
+1267#£Javnan er skeiv, t’ vinstra s’a er ikki ‡sett.
+1268#£Javnan er skeiv, t’ h¿gra s’ani er ikki ‡sett.
+1269#£Javnan er skeiv fyri ¿ll viri av {1}.
+1270#£Javnan er ikki sann fyri ¿ll viri av {1}. Til d¿mis er hon —sann fyri {2}
+1271#£, har vinstra s’a ikki er ‡sett.
+1272#£har h¿gra s’a ikki er ‡sett.
+1273#£Jeven er sannl’kt. Ta kundi ikki veri pr—gva n‡greiniliga, men b‡ar s’urnar hava sama talviri.
+1274#£Javnan er helst satt fyri ¿ll viri av {1}. Hon kundi ikki pr—gvast n‡greiniliga, men hon er sann ’ ¿llum {2} st¿um, har hon er roynd t¿lfr¿iliga.
+1275#£Javnan er ikki galdandi fyri ¿ll viri av {1}.
+1276#£Ta kundi ikki stafestast, um javnan var sann.
+1277#£Javnan verur roynd vi WordMat.
+1278#£Feilur ’ ‡setingini {1}: {2}
+1279#£Skattaskipanin verur loyst t¿lfr¿iliga fyri {1} vi WordMat.
+1280#£Skattaskipanin verur loyst fyri {1} vi WordMat.
+1281#£îjavnan verur loyst numeriskt fyri {1} vi WordMat.
+1282#£îjavnan verur loyst fyri {1} vi WordMat.
+1283#£Javnan verur loyst vi t¿lum fyri {1} ’ intervallinum {2} vi WordMat.
+1284#£Javnan verur loyst vi t¿lum fyri {1} vi WordMat.
+1285#£Javnan verur loyst fyri {1} vi WordMat.
+1286#£Rokningin var stega, ‡renn alt t’arskeii var leita. Ta kunnu vera fleiri umvegir.
+1287#£Rokningin var stega, ‡renn allar loysnir v—ru funnar. Ta kunnu vera fleiri loysnir.
+1288#£Javnuskipanin hevi ongar loysnir innan {2} fyri broyturnar {1}
+1289#£îjavnv‡g hevi ongar loysnir ’ ‡setingarsettinum {1}
+1290#£îjavnv‡g hevi ongar loysnir ’ {2} fyri variabla {1}
+1291#£Eingin loysn funnin
+1292#£Javnan hevi ongar loysnir ’ ‡setingarsettinum {1}
+1293#£Javnan hevi ongar loysnir ’ {2} fyri variabla {1}
+1294#£Skriva {1}x aftan ‡ œttrykkini ’ integralinum (t.d. {2}x^2 {1}x)
+1295#£Javnan inniheldur eina bygging, sum VBACAS enn ikki kann rokna: \n\n      {1}
+1296#£Skriva summuna vi k=a nianfyri og b omanfyri karakterin (t.d. k=1 og nou)
+1297#£Javnan inniheldur ein aksent, sum VBACAS enn ikki kann rokna: \n\n      {1}
+1298#£J¿vnan inniheldur eina bygging, sum VBACAS enn ikki kann rokna œt (ein fleirraa javnu-r¿): \n\n      {1}
+1299#£Javnan inniheldur eina bygging, sum VBACAS enn ikki kann rokna œt (t.d. summa, integral, limit, matriks ella aksent): \n\n      {1}
+1300#£Skriva {1}x {1}y aftan‡ œttrykkinum ’ tv’integralinum (t.d. {2}xáy {1}x {1}y)
+1301#£Integrali m‡ hava {1} differentialar (t.d. {2}x {2}y)
+1302#£Javnan tykist at fevna um:
+1303#£men Word hevur varveitt ta, so at funkti—nin heldur fram vi argumentinum eftir klombrum:
+1304#£Ta kann ikki s’ggjast ’ j¿vnu, men gevur eitt anna œrslit.
+1305#£Skal javnan r¾ttast, so hon verur rokna sum hon er? \n(Nei: rokna œt, t’ Word hevur bjarga t’)
+1306#£Tœ m‡st velja eina tabell
+1307#£Ta eru eingi galdandi talp¿r ’ talvuni
+1308#£integrate m‡ hava 1, 2 ella 4 argument: integrate(œttrykk; x) ella integrate(œttrykk; x; a; b)
+1309#£Annar parameturin ’ integrate m‡ vera variablan, t.d. integrate(x^2; x)
+1310#£çset, hv¿rja variablu skal integrerast aftan‡, t.d. integrate(œttrykk; x)
+1311#£Integrali kann ikki roknast: integrandurin er ikki defineraur ’ ¿llum intervallinum
+1312#£Integrali kundi ikki roknast n—g n‡greiniliga t¿lfr¿iliga (integrandurin sveiggjar ov n—gv)
+1313#£At finna javnuna
+1314#£At lesa javnuna
+1315#£At skifta javnuna œt
+1316#£Javnan kundi ikki umsetast til LaTeX ({1}): {2}
+1317#£LaTeX {1} javnan
+1318#£{1} {2} kundi ikki umsetast til j¿vnur og er ikki broytt: {3}
+1319#£LaTeX-k—in kundi ikki umsetast til eina j¿vnu: {1}
+1320#£K—in er t—mur.
+1321#£Henda funkti—nin er ikki stula ‡ Mac.
+1322#£Henda œtg‡van av WordMat+ kann ikki gera pdf-f’lur vi MikTex. Ger heldur eina tex-f’lu.
+1323#£MikTex er ikki installera. Tœ verur nœ sendur til miktex.org, har ta kann takast niur. Fyrsta fer umsetarin verur koyrdur, verur tœ eisini biin um at niurloada nakrar pakkar. Trst bara OK.
+1324#£Goym skjali ‡renn tœ umsetur ta til LaTeX. LaTeX-f’lurnar vera lagdar ’ eina mappu vi s’una av skjalinum.
+1325#£Dokumenti er ikki ‡ telduni (OneDrive). Goym ta ’ eini mappu ‡ telduni, ‡renn tœ umsetur ta.
+1326#£Umsetingarjavnir
+1327#£Umseting av formatering
+1328#£Umseting av myndum
+1329#£Umsetingart¿l
+1330#£Umseting av paragrafum
+1331#£At skriva f’luna
+1332#£{1} {2} kundi ikki goymast sum ein f’la og er skift œt vi eina rammu vi tekstinum "Image nou manglandi".
+1333#£Dokumenti kundi ikki umsetast til LaTeX: {1}
+1334#£WordMat+ fann onga mappu, sum ta hevur loyvi at skriva ’ ‡ hesum Mac.
+1335#£MikTex (pdflatex.exe) var ikki funnin.
+1336#£pdflatex koyrir {1}. t’
+1337#£Ein feilur hendi, t‡ pdflatex.exe var koyrdur.
+1338#£LaTeX-skjali kundi ikki umsetast. PDFLATEX gav villuna: \n\n{1}\n\nTrst ‡ OK fyri at opna tex-f’luna.
+1339#£PDF-f’lan er gj¿rd, men hesir pers—nar kann pdflatex ikki skriva. Teir eru skiftir œt vi eitt feitt ? ê PDF-f’luni: \n\n{1}
+1340#£PDF-f’lan kundi ikki finnast. Trst OK fyri at opna tex-f’luna, so feilurin kann finnast.
+1341#£Mappan til myndirnar
+1342#£mappan hj‡ skjalinum
+1343#£Umvendingarleinkjur og f—tnotur
+1344#£Kopiering til klippibor
+1345#£HTML-s’an verur goymd sum\n{1}
+1346#£HTML-k—in kundi ikki kopierast til klippibori.
+1347#£{1} {2} kundi ikki lesast og er skriva sum tekstur.
+1348#£{1} {2} kundi ikki goymast og er nœ skift œt vi tekstin "Image nou missing".
+1349#£Dokumenti kundi ikki umsetast til html ({1}): {2}
+1350#£(not used)
+1351#£Markdown-f’lan verur goymd sum\n{1}
+1352#£Markdown-teksturin verur kopieraur til klippibori.
+1353#£Markdown-teksturin kundi ikki kopierast til klippibori.
+1354#£Myndirnar vera goymdar sum f’lur ’ somu mappu.
+1355#£{1} {2} kundi ikki bjargast.
+1356#£Dokumenti kundi ikki umsetast til markdown ({1}): {2}
+1357#£*Mynd {1} manglar*
+1358#£Markdown kundi ikki umsetast: {1}
+1359#£{1} {2} var ikki funnin ‡ telduni og er ikki sett inn.
+1360#£{1} {2} kundi ikki umsetast til javningarfelt.
+1361#£LaTeX-mallurin (LatexWordTemplate.dotx) var ikki funnin. Hann verur installeraur saman vi WordMat.
+1362#£limit eigur at hava 3 ella 4 argument: limit(œttrykk; x; a) ella limit(œttrykk; x; a; plus)
+1363#£Fj—ri parameturin ’ markinum m‡ vera plus ella minus
+1364#£Takmarki finst ikki
+1365#£{1} m‡ hava 4 argument: {1}(œttrykk; k; a; b)
+1366#£Annar parameturin ’ {1} m‡ vera variablurin, t.d. {1}(k^2; k; 1; n)
+1367#£Nira marki kann ikki vera —endaligt
+1368#£Ov n—gv li (mesta {1})
+1369#£Termurin fyri {1}={2} hevur onga viri
+1370#£R¿in er divergent (summan finst ikki)
+1371#£Kraftsumman kann ikki roknast
+1372#£Nullmatriksin skal vera st¿dd 1 til 100
+1373#£Einingarmatriksin m‡ vera st¿dd 1 til 100
+1374#£Matriksprodukti krevur, at tann fyrri hevur l’ka n—gvar d‡lkar sum tann seinni hevur rair ({1} og {2})
+1375#£Ein fylki kann bert h¾kkast til eitt heiltal (ella T fyri transponera)
+1376#£Ein matriks kann bert h¾kkast til eitt heiltal
+1377#£Bert kvadratiska matriks kunnu h¾kkast til eina veldi (matriksin er {1})
+1378#£Eksponenturin er ov st—rur
+1379#£Determinanturin finst bert fyri kvadratiska matriksir (matriksurin er {1})
+1380#£Determinanturin av einum array av parametrum kann roknast fyri {1}{1} ’ mesta lagi
+1381#£Bert kvadratiska matriksir hava eina umvending (matriksin er {1})
+1382#£Matrisan hevur ongan inversan (determinanturin er 0)
+1383#£Umvendingin av einum array av parametrum kann roknast fyri {1}{1} ’ mesta lagi
+1384#£Maxima er ikki installera (WordMat)
+1385#£Maxima kann ikki startast (WordMat's MathMenu.dll mangla)
+1386#£Maxima kann ikki setast ’ gongd
+1387#£Maxima kann ikki startast (WordMat's AppleScript)
+1388#£Maxima spurdi eina spurning, sum WordMat+ ikki kann svara
+1389#£Maxima var stega, t’ œtreikningurin t—k meira enn {1} sekund
+1390#£Sambandi til Maxima gj¿gnum WSH krevur samstarv
+1391#£Maxima kundi ikki startast vi WSH: villa {1} {2}
+1392#£Villur ’ Maxima-k—anum (k—afelt ella k—af’l): {1}
+1393#£Maxima kann ikki rokna {1}
+1394#£Maxima kann ikki ntast til {1} ’ WordMat+
+1395#£Byrjanartreytir ’ tveimum ymiskum st¿um
+1396#£hesar treytir
+1397#£Maxima kann ikki loysa differentialjavnuna
+1398#£Maxima kann ikki rokna ta
+1399#£Maxima fann bert eitt fl¿kt œrslit
+1400#£Maxima kann ikki œtrma variablunum
+1401#£Maxima kunnu ikki loysa —javnv‡g
+1402#£Maxima kann ikki loysa j¿vnuna
+1403#£Maxima funnu bert fl¿ktar loysnir
+1404#£Gnuplot er ikki t¿kt til Mac. Brœka GeoGebra.
+1405#£Grafurin kundi ikki v’sast vi Gnuplot: {1}
+1406#£Villa ’ Maxima-k—anum
+1407#£K—afeltini ella k—af’lan hava ein feil: {1}
+1408#£Skriva eina Maxima-bo
+1409#£Feilur ’ Maxima-k—anum (k—afelt): {1}
+1410#£Ta eru ov n—gvar d‡lkar
+1411#£Rokningin var stega
+1412#£Freistin fyri part av œtreikninginum er farin
+1413#£Rokningin var stega, t’ hon t—k meira enn {1} sekund
+1414#£Faculty er definera bert fyri heilt¿l
+1415#£Faculty er bert ‡sett fyri t¿l >= 0
+1416#£Tali er ov st—rt fyri l¾rarar
+1417#£Tali er ov st—rt - VBACAS kann ikki rokna f¿rleikan av t¿lum yvir 170 sum desimalt¿l
+1418#£desolve m‡ hava eina differentialjavnu, t.d. desolve(y'=2y)
+1419#£Differentialjavnan m‡ vera ein javna, t.d. y'=2y
+1420#£Argumenti {1} ’ uppl¿sing verur ikki skilt
+1421#£Javnan inniheldur onga avleidda funkti—n (t.d. y')
+1422#£Javnan inniheldur onga derivati—n av {1}
+1423#£Ta er einki fr’tt navn fyri ta konstanta
+1424#£Rafylgjan av derivati—nini m‡ vera eitt tal
+1425#£Skriva treytir sum {1}(0)=2 eftir j¿vnuna: desolve(j¿vnu; {1} (0)=2)
+1426#£Differentialjavnur av h¾gri stigi enn 2 kunnu ikki loysast
+1427#£Differentialjavnan kundi ikki loysast ({1}{2} kann ikki einangrast)
+1428#£Differentialjavnan kundi ikki loysast (hon er hv¿rki linjulig ella separerbar)
+1429#£Differentialjavnan kundi ikki loysast ({1}{2}{2} kann ikki einangrast)
+1430#£Differentialjavnan kundi ikki loysast (2. stig kann loysast, t‡ hon er line¾r vi st¿ugum koeffisientum, ella {1}{3}{3}=f({2}))
+1431#£Differentialjavnan kundi ikki loysast (ein partikulloysn fyri {1} kann ikki finnast)
+1432#£Ein differentialjavna av 2. stigi kann hava ’ mesta lagi tvey treytir
+1433#£Treytirnar mugu vera javnir, t.d. {1}(0)=1 og {1}{2}(0)=2
+1434#£Treytirnar skulu skrivast sum {1}(0)=1 og {1}{2}(0)=2
+1435#£Eingin loysn lkur treytirnar
+1436#£Ein differentialjavna av 1. stigi m‡ hava eina treyt, t.d. {1}(0)=2
+1437#£Treytin m‡ vera ein javna, t.d. {1}(0)=2
+1438#£Treytin skal skrivast sum {1}(0)=2
+1439#£Eingin loysn lkur treytina {1}
+1440#£Differentialjavnan kundi ikki loysast (stammfunkti—nin hj‡ {1} kann ikki finnast)
+1441#£Stiglongdin m‡ vera positiv
+1442#£Endaviri m‡ vera st¿rri enn byrjanarviri
+1443#£Ov n—gv stig ({1}). Vel longri fetlongd
+1444#£Skriva bert h¿gru s’u av differentialjavnuni fyri {1}: {2}
+1445#£Definera {1} undir çsetingum
+1446#£Differentialjavnan fyri {1} kann ikki roknast vi {2}={3}
+1447#£Set kursorin ’ oringina, sum skal umorast.
+1448#£Maxima-boi krevur WordMat's Maxima, sum ikki er installera.
+1449#£Skriva eitt Maxima-bo, t.d. integrate(x^2,x) ella factor(x^2-1). òrsliti verur skriva sum ein nggj javna.
+1450#£Maxima bo
+1451#£Maxima-boi er ikki til staar ’ hesi œtg‡vuni av WordMat+.
+1452#£Set kursorin ’ eitt st¿ddfr¿iligt ¿ki.
+1453#£Set kursorin ’ j¿vnuna, sum skal loysast.
+1454#£Vel j¿vnirnar at strika variablar œr.
+1455#£Vel minst tv¾r javnur fyri at strika broytur (t.d. x=2t+1 og y=t^2).
+1456#£Set kursorin ’ differentialjavnuna, sum skal loysast.
+1457#£Ta er eingin virkin WordMat+ licens. \n\nWordMat+ kann framvegis ntast, men hesar funkti—nir eru ikki virknar: {1}WordMat+'s egna CAS (VBACAS). Maxima ella GeoGe{1}bra grafar vera taldir ’ GeoGebra-vindeyganum hj‡ WordMat. Teir vera v’stir ’ vafranum{1}Innseting av formulum œr formulusavninum{1}Sinus regressi—n{1}Tillaga valmyndina\n\nTrst OK fyri at fara til www.wordmat.dk
+1458#£Ta er eingin virkin WordMat+ licens, so WordMat+'s egna CAS (VBACAS) kann ikki ntast, og hv¿rki Maxima ella GeoGebra kunnu ntast ‡ hesi teldu. Vel eina av teimum undir Settings, installera WordMat vi Maxima, ella endurnggja licensina ‡ www.wordmat.dk.
+1459#£Maxima er ikki partur av hesi œtg‡vuni av WordMat+
+1460#£Javnan er longu nummara.
+1461#£Ein nummara javna kann ikki setast inn ’ eina talvu.
+1462#£Talsett javna
+1463#£Skriva eitt navn til j¿vnuna.
+1464#£Navni m‡ hava ’ mesta lagi 40 b—kstavir.
+1465#£Navni skal byrja vi einum b—kstavi.
+1466#£Navni kann bert innihalda b—kstavir, t¿l og _ (ikki bil).
+1467#£Navni finst longu.
+1468#£Ta eru ongar nevndar j¿vnur ’ skjalinum. Brœka 'Set inn nummaraa j¿vnu til vimerkingar' undir Nggj javna.
+1469#£J¿vnuv’sing
+1470#£Set kursorin ’ eina nummaraa j¿vnu.
+1471#£Hvat tal skal henda javnan setast til? \nT¾r eftirfylgjandi javnurnar f‡a s’ni t¿l dagf¿rd fyri at passa.
+1472#£Skriva heiltal, ella section.number (2.3) fyri t¿l vi section.
+1473#£Eitt javningar-seksj—narnummar verur sett inn. Vanliga verur ta sett inn sum kapittul ella seksj—narnummar. ’ einum yvirskrift. T— kann nummari eisini setast inn fult burtur. Skal nummari v’sast? (Svar nei fyri at goyma ta)
+1474#£Set inn j¿vnupart nr.
+1475#£J¿vnupartur
+1476#£Delete-definisj—nir kunnu ikki setast inn ’ eina talvu.
+1477#£çset, hv¿rjar eindir skulu vera ’ œttakinum, bttar vi kommum\nD¿mi: \n\ncm, kJ, t’mar\neV, nm, mV\naJ, AU, Bq\n\nUm einki verur ‡sett, vera allar eindir latnar aftur sum grund-SI-eindir ella avleiddar SI-eindir uttan forstav.
+1478#£Annar parameturin ’ solve m‡ vera variablan, t.d. solve(x^2=4; x)
+1479#£îjavnir kunnu ikki loysast, t‡ kompleks t¿l vera tendra
+1480#£J¿vnan kann ikki loysnast analytiskt. Rokna vi at loysa hana vi t¿lum.
+1481#£Javnan kann ikki loysast (enn): {1}=0
+1482#£çset, hv¿rja variablu skal loysast fyri, t.d. solve(j¿vnu; x)
+1483#£Javnan kann ikki loysast n‡greiniliga (stigi er ov h¿gt)
+1484#£Ov n—gvar loysnir ’ intervallinum
+1485#£Ov n—gvar loysnir
+1486#£T’arskeii kann ikki roknast
+1487#£Loysnirnar ’ intervallinum kunnu ikki roknast
+1488#£Javnan kann ikki loysnast n‡greiniliga (enn): {1}=0
+1489#£Javnan kann ikki loysast n‡greiniliga (enn)
+1490#£Vinkulin kann ikki roknast œt
+1491#£Javnan kann ikki loysast n‡greiniliga (enn): {1}={2}
+1492#£îjavnv‡g kann ikki loysnast (enn): {1}
+1493#£îjavnan kann ikki loysast (enn): {1}{2}0
+1494#£îjavnv‡g hevur —endaliga n—gvar loysnarintervall. çset eitt intervall fyri {1}, t.d. 0{2}{1}{2}{3}
+1495#£îjavnv‡g kann ikki loysast (enn)
+1496#£{1} m‡tti hava {2}{3}
+1497#£{1} (x) er ikki ‡sett fyri x=0, -1, -2, ...
+1498#£W_0(x) er bert ‡sett fyri x{1}-1/e
+1499#£acosh (x) er bert ‡sett fyri x{1}1
+1500#£{1} (x) er ov st—rur at rokna;
+1501#£{1} hevur onga viri her
+1502#£{1} kann ikki skiljast eftir {2} ({2} ’ fyrsta argumentinum)
+1503#£îkendu mugu vera broytilig, t.d. solve([x+y=5; x-y=1]; [x;y])
+1504#£Skipanir vi —javnum kunnu ikki loysast (enn)
+1505#£Ta eru ongar j¿vnur at loysa
+1506#£Javnuskipanin hevur ongar variablar at loysa fyri
+1507#£Javnuskipanin er yvirdeterminera: ta eru fleiri javnir ({1}) enn —kendar ({2}).
+1508#£Skattaskipanin kann ikki loysast n‡greiniliga (enn)
+1509#£Skattaskipanin kann ikki loysast (enn)
+1510#£çset variablar, sum skulu eliminerast, t.d. eliminate([x+y=a; x-y=b]; x)
+1511#£Broyturnar, sum skulu eliminerast, mugu vera broytur, t.d. eliminate([x+y=a; x-y=b; x*y=c]; [x;y])
+1512#£Broytur kunnu ikki takast burtur œr —javnum
+1513#£ê mesta lagi kunnu {1} broytur takast burtur œr {2} j¿vnum
+1514#£T‡ {1} vera tikin burtur, eru ongar j¿vnur eftir (t¾r eru alt’ uppfylltar)
+1515#£{1} kann ikki vera œtsligin (enn)
+1516#£{1} kann ikki takast burtur (stigini eru ov h¿g)
+1517#£T—lini passa ikki saman: {1}
+1518#£îkend eind: {1}
+1519#£Ein listi
+1520#£ein vektor
+1521#£ein matriks
+1522#£eitt tal
+1523#£{1} m‡ hava minst eitt element
+1524#£Allar rair ’ einum fylki skulu hava javnt tal av eindum
+1525#£Elementini ’ einum vektori mugu vera t¿l ella œttrykk
+1526#£Tœ kanst ikki seta {1} ‡ {2}{3}
+1527#£Tœ kanst ikki seta eitt tal ‡ {1}
+1528#£av ¿rum st¿dd
+1529#£Tœ kanst ikki margfalda {1} og {2} vi ymiskum t¿lum av elementum
+1530#£Vektorarnir mugu hava javnt tal av koordinatum
+1531#£Ein vektor kann bert lyftast ’ kvadrati (punktprodukti vi s¾r sj‡lvum)
+1532#£Tœ kanst ikki lyfta teg upp til {1}
+1533#£Funkti—nin kann ikki taka {1} sum argument
+1534#£hon m‡ hava eina r¿ ella tveir vektorar
+1535#£St¿ddin ‡ nullmatrisuni m‡ vera heilt¿l
+1536#£ident m‡ hava st¿ddina, t.d. ident(3)
+1537#£St¿ddin ‡ eindarmatrisuni m‡ vera eitt heiltal
+1538#£Hatturin m‡ hava ein vektor
+1539#£Krossvektorin finst bert fyri vektorar ’ planinum
+1540#£{1} m‡ hava tveir vektorar, t.d. {1}(a; b)
+1541#£{1} av einum fylki kann enn ikki roknast
+1542#£Krossprodukti finst bert fyri vektorar ’ rœminum (3 koordinatar)
+1543#£Determinanturin av tveimum vektorum finst bert fyri vektorar ’ planinum (2 koordinatar)
+1544#£{1} m‡ hava eina argumentati—n
+1545#£length m‡ hava ein lista, t.d. length(x)
+1546#£Eitt element hevur ’ mesta lagi tvey indeks, t.d. A[1; 2]
+1547#£Indeksurin skal vera eitt heiltal: {1}
+1548#£Indeksurin er ov st—rur: {1}
+1549#£Indeksurin {1} er uttanfyri matriksina ({2} rair)
+1550#£Indeksurin {1} er uttanfyri matriksin ({2} strikur)
+1551#£Ein listi hevur bert eitt indeks, t.d. x[2]
+1552#£Ein vektor hevur bert eina kolonnu: hin indeksurin m‡ vera 1
+1553#£Vektorarnir ‡ b‡um s’um av javna tekninum mugu hava l’ka n—gvar koordinatir
+1554#£Matrisurnar ‡ b‡um s’um av javntekninum mugu vera somu st¿dd
+1555#£Ein fylki kann bert vera j¿vn vi eina matriks
+1556#£Ein vektor kann ikki vera j¿vn vi eitt tal
+1557#£òtreikningar kunnu ikki gerast ‡ lsingarfeltum. Tœ kanst brœka t’na ‡seting nianfyri til eina œtreikning.
+1558#£og
+1559#£Automatiskur
+1560#£N‡kv¾tt
+1561#£T¿l
+1562#£Eindir ‡
+1563#£Eindir av
+1564#£LaTeX-k—i
+1565#£LaTeX-kodur
+1566#£J¿vnu
+1567#£J¿vnur
+1568#£Mynd
+1569#£Myndir
+1570#£Argumentati—n
+1571#£Argument
+1572#£Tdningarstig:
+1573#£Samlaa summan av ¿llum frumunum er minni enn 50. {1} bti er t’ ein v‡nalig meting ’ hesum f¿ri, og œrsliti —‡l’tandi.
+1574#£Fr¾lsisstig:
+1575#£Umlegging
+1576#£Tillaga matskr‡nna
+1577#£Vel hv¿rji valevni ‡ matskr‡nni eru sj—nlig
+1578#£T¿l og avrunding
+1579#£Umskriving...
+1580#£Loysa j¿vnu(r)
+1581#£Loysa koplaar differentialjavnir
+1582#£Sannl’kindi
+1583#£îb—lka
+1584#£B—lka
+1585#£Set inn talvu
+1586#£Sivenja
+1587#£t-œtbreisla
+1588#£Talsettar javnir
+1589#£V’s alt
+1590#£Goym alt
+1591#£Set eftir stigi
+1592#£Setur sj—nligar matskr‡arpunkt eftir st¿ddfr¿ist¿i, tœ l¾rir, samb¾rt
+1593#£Sinusfitting
+1594#£Henda funkti—nin krevur WordMat+
+1595#£Fyri at f‡a atgongd til WordMat+, kann t’n skœli/stovnur:\n gera eina samstarvsavtalu vi Eduap.
+1596#£Les meira um arar fyrimunir vi samstarvi her:
+1597#£Kanna um skœlin longu hevur undirskriva samstarv
+1598#£Formulusavningaruppseting
+1599#£Vel t’na œtbœgving
+1600#£Vel t’ni evnisstig
+1601#£Tœ kanst alt’ broyta t’nar valm¿guleikar seinni
+1602#£St¿ddfr¿i:
+1603#£Fysikkur:
+1604#£Evnafr¿i:
+1605#£N¾sti
+1606#£Sning ’ GnuPlot
+1607#£Funkti—nir f(x)=...
+1608#£Heiti ‡ x-‡sinum
+1609#£Heiti ‡ y-‡sinum
+1610#£Var
+1611#£St¿dd ‡ punktum:
+1612#£V’s ’ Excel
+1613#£Excel innbygt
+1614#£Grid
+1615#£Logaritmiskur X-‡s
+1616#£Logaritmiskur Y-‡s
+1617#£Pl‡tufel¿g
+1618#£Set inn merki
+1619#£Fr‡greiing um sendingina
+1620#£Stig 2
+1621#£Syntaks\nByrjanarstaur - Vektor\n(startx ; starty)-(dx ; dy)\n\nD¿mi: \n(1,1)-(1,2)     \n  Tekning av vektori (1.2) fr‡ punkti (1.1)\n\n(1,2)\n  Tekning av vektori (1.2) fr‡ punkti (0.0)\n\n(1,5 ; 4,5)\nUm desimalt¿l eru vi; brœkt sum skiljari
+1622#£Nggjur Vektor
+1623#£Javna 1
+1624#£Javna 2
+1625#£Javna 3
+1626#£Broyturnar skulu vera x og yo
+1627#£Rekvisitt
+1628#£Manu
+1629#£—heft. broytiligt
+1630#£Dep. Variabel
+1631#£Integralar kurvur (kœrvur)
+1632#£çseti punkt, har loysnarleiir skulu dragast.
+1633#£Opi
+1634#£Opnar eitt vindeyga, har tœ kanst trsta ‡ punkti, har Integral Curve skal vera, og har sl’arar kunnu vera, so tœ s¾rt, at k—sar¿ki broytist vi sl’aranum
+1635#£Interaktivt
+1636#£B’a!
+1637#£const
+1638#£fr‡
+1639#£at
+1640#£Sliders
+1641#£V’s bert kurvur
+1642#£Loyvi:
+1643#£Set steglongdina sj‡lvvirkandi
+1644#£Setur tali av stigum til 500
+1645#£Javnurnar vera loystar vi 4. stigs Runge-Kutta
+1646#£Innseting av roknaum punktum sum lista ’ Word-skjali
+1647#£Tœ kanst annahv¿rt skriva inn eina variablu ella eina funkti—n, alt eftir av t’, sum stendur ’ j¿vnuni. t.d. yo ella f(x), men ikki f.
+1648#£OK, nggj linja
+1649#£çsetingar ‡ hesum sta ’ skjalinum
+1650#£D¿mi: a=5, x>0
+1651#£D¿mi: g, min, cm
+1652#£Des.
+1653#£Koyrir ’ einum vafra, men ikki ‡ netinum
+1654#£Samband vi Maxima
+1655#£Kntir seg til Maxima vi eini .net dll-f’lu, sum handfer samskifti
+1656#£Maxima verur koyrt gj¿gnum eina shell vi wsh. Hv¿r œtreikningur er ein nggj instans av Maxima. Hon er eitt sindur seinni og v’sir stutt eitt svart cmd-vindeyga, men er ikki tengd at dll-f’luni.
+1657#£Krevur WordMat+
+1658#£Check-samstarv
+1659#£Flyt teg upp (royndi fyrr)
+1660#£Flyt niur (skal roynast seinni)
+1661#£Motorarnir vera royndir uppifr‡.  \nN¾sti verur brœktur, t‡ ein motorur ikki kann.
+1662#£îavmarka n‡greiniligheit
+1663#£Rokna vi —avmarkaari neyvleika (st—r t¿l)
+1664#£Maksimalt tal av t¿lum:
+1665#£Maksimalt tal av t¿lum ’ n‡greiniligum t¿lum
+1666#£T’aravmarking(ar):
+1667#£T’armark fyri œtreikning ’ sekundum (0 = eingin mark)
+1668#£V’sindalig notati—n, nou:
+1669#£V’sindalig notati—n fyri t¿l undir 10^-n (0 = ongant’)
+1670#£LaTeX, sum umfatar karakterar um eina j¿vnu
+1671#£ê tekstinum:
+1672#£Teksturin ‡renn LaTeX-k—an fyri eina j¿vnu inni ’ tekstinum, t.d. $
+1673#£Teksturin eftir LaTeX-k—an fyri eina javnu inni ’ tekstinum, t.d. $
+1674#£ç s’ni egnu linju:
+1675#£Teksturin ‡renn LaTeX-k—an fyri eina javnu ‡ einari linju fyri seg, t.d. \[ ella \begin{equation}
+1676#£Teksturin eftir LaTeX-k—an fyri eina j¿vnu ‡ einari linju fyri seg, t.d. \] ella \end{j¿vnu}
+1677#£Eindir vi uppr¾ttari skrift (\mathrm)
+1678#£Eindir vera ikki viurkendir og skrivair ’ kursiv (\mathrm{m})
+1679#£Tv’trst Alt+M
+1680#£Tœ m‡st skriva inn jœst 3 vinklar/s’ur, men ikki bara 3 vinklar. \nSo: \n1 s’a + 2 vinklar\n2 s’ur + 1 vinkul (kanska 2 loysnir)\n3 s’ur
+1681#£Har jœst svari er ynskt. Kann ‡virka œtreikningart’ina.
+1682#£Einki LaTeX-koda funnin. Vel k—an ella set kursorin ’ eina LaTeX-javnu (t.d. {1} ella {2}).
+1683#£{1} {2} kundi ikki lesast av VBACAS og er skriva sum tekstur ({3}) ’ LaTeX-skjalinum.
+1684#£Divergensurin {1} krevur eina vektorfunkti—n. Gradienturin hj‡ {2} verur skrivaur {3}
+1685#£Rotati—nin (curl) {1} krevur eina vektorfunkti—n vi 2 ella 3 koordinatum
+1686#£{1} krevur, at {2} hevur l’ka n—gvar koordinatar sum variablar
+1687#£Divergensurin {1} av einum œtskrivaum vektori krevur 2 ella 3 koordinatar (variablarnir x, y og z)
+1688#£"{1}" kemur skj—tt ’ WordMat+ til Office.
+1689#£Ein feilur hendi ’ "{1}".
+1690#£N¾rri upplsingar
+1691#£Avrita
+1692#£Eindir eru tendraar.
+1693#£Eindir eru sl¿ktar.
+1694#£V’s uppg‡vupaneli
+1695#£M‡li broytist, t‡ WordMat+ verur opna aftur.
+1696#£Stytsta formi, t.d. (x^2-1)/(x-1) til x+1 og sin(x)^2+cos(x)^2 til 1.
+1697#£Rokningin t—k ov langa t’ og var stega.
+1698#£WordMat+ fyri Word (Word desktop og Word Online)\nòtg‡va {1}\n\nMenningarœtg‡va: fleiri funkti—nir vera lagdar afturat so vi og vi.
+1699#£R¾tta l’kning
+1700#£/ brot, ^ potensur, _ indeks, sqrt kvadratr—t, p’larnir flyta kursorin. Enter: set inn. Ctrl+Enter: set inn og rokna. Esc: avls.
+1701#£Set inn og rokna
+1702#£Trst ‡ grafin fyri at tekna eina loysnarkurvu gj¿gnum punkti.
+1703#£Nullpunkt
+1704#£Ekstrema
+1705#£Skeringspunkt
+1706#£Punktr¿ {1}
+1707#£V’s koordinatir
+1708#£Velur grafgluggan soleiis, at ¿ll punkt, null, ekstrema og skurir kunnu s’ggjast, og ‡sarnir t‡ teir ikki eru langt burtur.
+1709#£Einki net
+1710#£St—rt net
+1711#£L’ti net
+1712#£Tangentur
+1713#£Teknar tangentin til grafin vi x-virunum, sum eru skriva her. Fleiri virir eru sundurbtt vi ;
+1714#£Byrjanarpunkt
+1715#£Uttan byrjanarpunkt verur vektorurin teknaur fr‡ (0;0).
+1716#£Drag niur fyri at halda fram vi t¿lunum: 1, 2 gevur 3, 4 ... Tv’klikk fyllir niur til seinastu r¿.
+1717#£Skriva eina formil vi x, t.d. 2*x, so verur y rokna fyri rairnar herfr‡ og niur.
+1718#£Skriva punktini ’ talvuni, ella l’ma tey inn œr Excel ella einum Word-talvu.\nDrag l’tla ferningin fyri at halda fram vi t¿lunum niureftir: 1, 2 gevur 3, 4 ...\nSkriva eina formil ’ y-kolonnuna, t.d. 2x ella =2x, so verur y rokna fyri rairnar herfr‡ og niur.\nVel fleiri sellur vi mœsini ella Shift, og trst ‡ Delete fyri at strika t¾r.\nKn¿tturin z gevur ein z-kolonnu fyri punkt ’ rœminum.
+1719#£Setur tangentin til eina funkti—n inn sum eina nggja funkti—n, og nertingarpunkti sum eitt punkt. Vel funkti—nina og skriva x, ella trst ‡ grafin.
+1720#£Drag ’ grafinum fyri at tekna ein vektor.
+1721#£Trst ‡ eitt merki ’ talvuni og s’ani ‡ grafin fyri at flyta ta.
+1722#£Eygleiing
+1723#£T’ni
+1724#£Relativ t’ni
+1725#£Kumulativ t’ni
+1726#£Fr‡
+1727#£Til
+1728#£Tal av eygleiingum
+1729#£Minsta viri
+1730#£Niara kvartil
+1731#£Median
+1732#£Ovara kvartil
+1733#£St¿rsta viri
+1734#£Mialviri
+1735#£Standardfr‡vik
+1736#£Standardfr‡vik fyri stakroynd
+1737#£Lsandi hagt¿l rokna vi WordMat:
+1738#£Talvan skal innihalda eygleiingarnar, ella eygleiingarnar ’ fyrstu kolonnu og teirra t’nir ’ aru kolonnu.
+1739#£Talvan skal hava tr’ggjar kolonnur: byrjanina ‡ intervallunum, endan ‡ intervallunum og t’nirnar.
+1740#£Byrjanin ‡ hv¿rjum intervalli m‡ vera minni enn endin, og intervallini mugu ikki skarast.
+1741#£T’nirnar mugu ikki vera negativar.
+1742#£Skriva tali av ymiskum eygleiingum, so verur ein talva gj¿rd, har tœ kanst skriva eygleiingarnar og teirra t’nir.\nT‡ tœ hevur fylt œt talvuna, vel {1} ella eitt diagramm œr valmyndini.
+1743#£Skriva tali av intervallum, so verur ein talva gj¿rd, har tœ kanst skriva intervallini og teirra t’nir.\nT‡ tœ hevur fylt œt talvuna, vel {1} ella eitt diagramm œr valmyndini.
+1744#£Diagramm
+1745#£Einki diagramm
+1746#£Relativ t’ni ’ prosentum
+1747#£V’s kvartilar
+1748#£Navn
+1749#£pr. eind
+1750#£Skriva eygleiingarnar og teirra t’nir ’ talvuna, ella l’ma t¾r inn œr Excel ella eini Word-talvu.
+1751#£Skriva intervallini og teirra t’nir ’ talvuna, ella l’ma tey inn œr Excel ella eini Word-talvu.
+1752#£Skriva kvartilarnar fyri hv¿rt boksplot: minsta viri, niara kvartil, median, ovara kvartil og st¿rsta viri.
+1753#£Kvartilarnir mugu standa ’ vaksandi rafylgju.
+1754#£R‡data
+1755#£îb—lka
+1756#£B—lka
+1757#£Kum. t’ni
+1758#£Flyt til —b—lka
+1759#£Flyt til b—lka
+1760#£Intervallbreidd
+1761#£Skriva eygleiingarnar ’ talvuna, ella l’ma t¾r inn œr Excel ella eini Word-talvu.
+1762#£Legg afturat boksploti
+1763#£Talvan verur sett inn ’ skjali, t‡ vindeyga verur lati aftur.
+1764#£{1} eygleiingar eru uttanfyri intervallini.
+1765#£Breiddin ‡ intervallinum m‡ vera st¿rri enn 0.
+1766#£Prikkadiagramm
+1767#£V’ddarfr‡greiing
+1768#£V’sir ’ ovara h¿gra horni ein teig vi somu breidd sum fyrsta intervalli, og hvussu n—gv prosent av eygleiingunum hann svarar til.
+1769#£Ein eygleiing ‡ markinum millum tvey intervall hoyrir til niara intervalli, ]a;b], sum er danski standardurin, ella til ovasta intervalli, [a;b[.
+1770#£Fr¾lsisstig
+1771#£V’s kumulativa fordeiling
+1772#£Vel eina fordeiling.
+1773#£Eitt t—mt felt merkir, at einki mark er til ta s’una.
+1774#£Skriva ein sannl’kindi, t.d. 0,95 ella 95 %, so verur samsvarandi viri funni.
+1775#£n m‡ vera eitt heiltal st¿rri enn 0.
+1776#£p m‡ vera millum 0 og 1.
+1777#£Standardfr‡viki m‡ vera st¿rri enn 0.
+1778#£Tali av fr¾lsisstigum m‡ vera st¿rri enn 0.
+1779#£Eygleitt
+1780#£Tv’s’a
+1781#£Vinstras’a
+1782#£H¿gras’a
+1783#£Kritiskt ¿ki
+1784#£P-viri
+1785#£Nullhypotesan verur vraka.
+1786#£Nullhypotesan kann ikki vrakast.
+1787#£çlitisinterval fyri p
+1788#£Eingin roynd
+1789#£V¾nta
+1790#£Kritiskt viri
+1791#£Roynsluviri
+1792#£Set inn œrslit
+1793#£Ta skulu vera minst tv¾r rair vi einum eygleiddum tali og einum v¾ntaum tali, sum er st¿rri enn 0.
+1794#£Ein goodness of fit-roynd verur gj¿rd vi WordMat
+1795#£ç signifikansstigi {1}% kann nullhypotesan, at eygleiingarnar fylgja v¾ntau fordeilingini, vrakast.
+1796#£ç signifikansstigi {1}% kann nullhypotesan ikki vrakast. T’ er einki pr—gv fyri, at eygleiingarnar v’kja fr‡ v¾ntau fordeilingini.
+1797#£V¾nta viri:
+1798#£Kanna, um tey b—lkau d‡tuni eru normalfordeild
+1799#£{1} og {2} fr‡ d‡tunum
+1800#£Tillaga
+1801#£Ta skulu vera minst {1} intervall, t‡ mialviri og spjaing eru mett œt fr‡ d‡tunum.
+1802#£Royndin brœkar b—lkau d‡turnar ‡ flipanum {1}. Skriva t¾r undir {2} og set flugubein vi {3}, so histogrammi kann samanberast vi normalbti.
+1803#£Gevur hv¿rjari kurvu eitt felt z(t), so at hon verur tekna ’ rœminum.
+1804#£Broyturnar skulu vera x og y, og z ’ rœminum
+1805#£L’kningar sum myndir
+1806#£Word Online tekur nakrar sekund at skriva eina l’kning. Vi hesi innstilling leggur WordMat+ inn nggjar l’kningar og gevur sm‡ar myndir, sum ta roknar œt ‡ sum ‡ l’kningum. Myndirnar kunnu gerast l’kningar aftur ’ valmyndini {1}.
+1807#£Ger l’kningar til myndir
+1808#£Ger l’kningarnar ’ valinum, ella ’ ¿llum dokumentinum t‡ einki er valt, um til myndir, sum Word Online v’sir og broytir n—gv skj—tari. WordMat+ roknar ‡ myndunum sum ‡ l’kningum.
+1809#£Ger myndir til l’kningar
+1810#£Ger myndirnar av l’kningum ’ valinum, ella ’ ¿llum skjalinum, t‡ einki er valt, aftur til veruligar l’kningar, til d¿mis ‡renn skjali verur lati inn.
+1811#£L’kningar gj¿rdar til myndir: {1}
+1812#£Myndir gj¿rdar til l’kningar: {1}
+1813#£Ikki broytt (—broytt): {1}
+1814#£Ta eru ongar l’kningar at umseta.
+1815#£Ta eru ongar myndir av l’kningum at umseta.
+1816#£L’kningar sum myndir vera bert brœktar ’ Word Online.
+1817#£L’kningarnar kundu ikki umsetast.
+1818#£St¿ddfr¿i
+1819#£Fysikkur
+1820#£Lat aftur, t‡ ein formœla verur vald
+1821#£Halt Ctrl niri, t‡ tœ trstir ‡ eina formulu, og formulusavni letur ikki aftur.
+1822#£Set inn 2
+1823#£Formœlan verur sett inn tv¾r ferir: eina fer til dokumentati—n og eina fer har tœ kanst seta t¿l inn.
+1824#£Set inn konstantar
+1825#£ê fysikki og evnafr¿i vera fysikalsku konstantarnir settir inn sum t¿l ’ aru formuluni.
+1826#£V’s ’ rœtanum
+1827#£Formœlusavni verur v’st ’ panelinum vi s’una av skjalinum ’ stain fyri ’ einum st—rum vindeyga. Ta er galdandi fr‡ n¾stu fer formulusavni verur opna.
+1828#£Leita:
+1829#£Vimerking: Kemiska formœlusavni er ikki liugt enn.
+1830#£Skriva ’ leitisfelti, ella trst ‡ eitt evni.
+1831#£Trst ‡ eina mynd fyri at seta hana inn ’ skjali.
+1832#£Word Online kann v’sa figurarnar, men kann ikki broyta t¾r. Opna skjali ’ Word til Windows ella Mac fyri at broyta t¾r.
+1833#£V’sir figurar ’ rœtinum: tr’kantar, eindarring, koordinatskipanir og monotoniskar linjur. Trst ‡ eina mynd fyri at seta hana inn ’ skjali.
+1834#£F’lan {1} er tikin niur. Hon er ’ niurhalunum ’ vafranum.
+1835#£Brœka Word sum LaTeX-ritstj—ra. \n\nTœ kanst skriva LaTeX-bo beinleiis ’ skjali fyri fulla string, ella brœka Word-funkti—nirnar og lata WordMat+ umseta til LaTeX. \n\nTex-f’lan verur niurlasta til telduna. Um skjali hevur myndir, verur ein zip-f’la vi tex-f’luni og mappumyndunum tikin niur.
+1836#£Ger LaTeX-k—an sum ein tex-f’lu, sum verur niurtikin til teldu, so k—in kann endurskoast og tillagast ’ einum LaTeX-forriti
+1837#£Goym
+1838#£Um x-‡sina
+1839#£Um y-‡sina
+1840#£Snarar grafarnar fyri t¾r funkti—nir, i eru merktar, 360 stig um x-‡sina ella y-‡sina, so at ein snœningslekamur kemur fram ’ 3D. Hv¿r grafur verur snaraur fr‡ s’num Xmin til s’n Xmax.
+1841#£L’kning
+1842#£Umbroyt
+1843#£S’urœtur
+1844#£V’sir s’urœtin vi stillingunum, ella letur hann aftur, t‡ i hann er opin.
+1845#£WordMat+ brœkar JSXGraph til grafar og MathLive til at skriva l’kningar. B¾i hava MIT-loyvi.
+1846#£Loyvi
+1847#£stykkiv’s
+1848#£ê einum parentesi: @ ella Alt+Enter gevur eina nggja r¿, & eina nggja kolonnu.
+1849#£n-ta r—t
+1850#£matrisa
+1851#£avmarka integral
+1852#£—avmarka integral
+1853#£ê einum parentesi: @ ella Alt+Enter gevur eina nggja koordinat.
+1854#£summur
+1855#£produkt
+1856#£WordMat+ ger ta m¿guligt at gera matematiskar œtreikningar ’ Word.\nWordMat er framleitt av Mikael Sams¿e S¿rensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Brœka JavaScript-CAS (skj—tari)
+1858#£CAS hj‡ WordMat+ verur koyrt av JavaScript-motorinum QuickJS. Uttan flugubeini roknar VBACAS.
+1859#£Innbygt CAS: {1}
+1860#£JavaScript-motorur: QuickJS, © Fabrice Bellard, Charlie Gordon o.o. (MIT-loyvi)
