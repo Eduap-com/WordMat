@@ -1859,3 +1859,4 @@
 1858#£Le CAS de WordMat+ est exécuté par le moteur JavaScript QuickJS. Sans la coche, VBACAS calcule.
 1859#£CAS intégré : {1}
 1860#£Moteur JavaScript : QuickJS, © Fabrice Bellard, Charlie Gordon et autres (licence MIT)
+1861#£Affiche des graphiques, des points, des vecteurs et des statistiques dans le programme graphique de WordMat+. Ne nécessite pas Internet.

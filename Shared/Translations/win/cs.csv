@@ -1859,3 +1859,4 @@
 1858#£CAS programu WordMat+ bezí v JavaScriptovém jádru QuickJS. Bez zaskrtnutí pocítá VBACAS.
 1859#£Vestavený CAS: {1}
 1860#£JavaScriptové jádro: QuickJS, © Fabrice Bellard, Charlie Gordon a dalsí (licence MIT)
+1861#£Zobrazí grafy, body, vektory a statistiku ve vlastním grafickém programu WordMat+. Nevyzaduje internet.

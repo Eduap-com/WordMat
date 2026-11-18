@@ -1859,3 +1859,4 @@
 1858#£Das CAS von WordMat+ wird von der JavaScript-Engine QuickJS ausgeführt. Ohne Häkchen rechnet VBACAS.
 1859#£Integriertes CAS: {1}
 1860#£JavaScript-Engine: QuickJS, © Fabrice Bellard, Charlie Gordon u. a. (MIT-Lizenz)
+1861#£Zeigt Graphen, Punkte, Vektoren und Statistik im eigenen Grafikprogramm von WordMat+. Benötigt kein Internet.

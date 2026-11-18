@@ -1859,3 +1859,4 @@
 1858#£CAS programu WordMat+ jest uruchamiany przez silnik JavaScript QuickJS. Bez zaznaczenia oblicza VBACAS.
 1859#£Wbudowany CAS: {1}
 1860#£Silnik JavaScript: QuickJS, © Fabrice Bellard, Charlie Gordon i inni (licencja MIT)
+1861#£Pokazuje wykresy, punkty, wektory i statystyke we wlasnym programie graficznym WordMat+. Nie wymaga internetu.

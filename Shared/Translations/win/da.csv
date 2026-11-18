@@ -1859,3 +1859,4 @@
 1858#£WordMat+'s CAS køres af JavaScript-motoren QuickJS. Uden fluebenet regner VBACAS.
 1859#£Indbygget CAS: {1}
 1860#£JavaScript-motor: QuickJS, © Fabrice Bellard, Charlie Gordon m.fl. (MIT-licens)
+1861#£Viser grafer, punkter, vektorer og statistik i WordMat+'s eget grafprogram. Kræver ikke internet.
