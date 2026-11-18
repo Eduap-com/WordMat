@@ -728,7 +728,7 @@
 727#£Eingebettete Excel-Tabelle einfügen
 728#£Die Funktion konnte nicht ausgeführt werden, da WordMat+ nicht installiert ist.
 729#£Geben Sie an, welche Einheiten in der Ausgabe durch Komma\nBeispiele getrennt sein sollen:\n\ncm , kJ, Timer\neV , nm, mV\naJ , AU, Bq\n\nWenn nichts angegeben ist, werden alle Einheiten als Basis-SI-Einheiten oder abgeleitete SI-Einheiten ohne Präfix zurückgegeben.
-730#£Beispiele für unterstützte Einheiten:\n(Weitere Informationen finden Sie im Handbuch)\n\nLänge: cm, AU, ly, pc\nMasse: u, G, mg\nZeit: min, Stunden, Tage, Jahre\nFrequenz: Hz, Bq\nEnergie: kWh, eV, aJ\nDruck: Bar, mmHg, atm, trocken
+730#£Beispiele für unterstützte Einheiten:\n(Weitere Informationen finden Sie im Handbuch)\n\nLänge: cm, AU, ly, pc\nMasse: u, G, mg\nZeit: min, s\nFrequenz: Hz, Bq\nEnergie: kWh, eV, aJ\nDruck: Bar, mmHg, atm, torr
 731#£Trignonometrische Gleichungen
 732#£Alle Lösungen
 733#£Nur 1 Lösung
@@ -933,3 +933,929 @@
 932#£Update zur neuesten Beta-Version
 933#£Du solltest wissen, dass es in den Beta-Versionen Bugs geben kann. Sie sind in erster Linie für Tests gedacht. Es wird empfohlen, diese Funktion hauptsächlich wie von Eduap angewiesen zu nutzen
 934#£Zeigt das Diagramm für die linke und rechte Seite der Gleichung im selben Koordinatensystem. Die Lösungen der Gleichung sind der x-Wert der Schnitte. Denken Sie daran, hereinzu- und rauszuzoomen.
+935#£Formelsammlung
+936#£Öffnet die Formelsammlung mit Formeln aus Mathematik, Physik und Chemie. Klickt auf eine Formel, um sie ins Dokument einzufügen.
+937#£Öffnet einen Dialog, in dem Sie wählen, wie der ausgewählte Ausdruck oder die Gleichung umgeschrieben wird: reduzieren, faktorisieren, erweitern, quadrische Vervollständigung oder Dezimalbrüche geben. Sie können auch temporäre Definitionen angeben und die Ausgabe auswählen. Das Ergebnis wird auf einer neuen Zeile geschrieben.
+938#£Reduziert den ausgewählten Ausdruck oder beide Seiten einer Gleichung auf die kürzeste Form, z. B. (x^2-1)/(x-1) auf x+1 und sin(x)^2+cos(x)^2 auf 1. Das Ergebnis wird auf einer neuen Zeile geschrieben.
+939#£Faktorisiert den ausgewählten Ausdruck, z. B. x^2-1=(x-1)(x+1). Das Ergebnis wird nach dem Ausdruck geschrieben, genau wie in Calculate.
+940#£Multipliziere Klammern im ausgewählten Ausdruck, z. B. (x+1)^2=x^2+2x+1. Das Ergebnis wird nach dem Ausdruck geschrieben, wie in Calculate.
+941#£Schreibt eine quadratische Polynom-Achse um^2+bx+c zu a(x+b/(2a))^2+c-b^2/(4a), z. B. x^2+6x+5 zu (x+3)^2-4. Die Koeffizienten können Buchstaben sein. Funktioniert auch an einer Gleichung, z. B. der Kreisgleichung x^2-4x+y^2+14y+53=25 zu (x-2)^2+(y+7)^2=25. Das Ergebnis wird auf einer neuen Gerade geschrieben.
+942#£Sendet den ausgewählten Ausdruck direkt an Maxima und fügt das Ergebnis als neue Gleichung ein. Der Ausdruck muss in Maximas Syntax geschrieben werden, z. B. integrate(x^2,x) oder factor(x^2-1). Wenn nichts ausgewählt ist, kann der Befehl in einem Feld geschrieben werden. Benötigt WordMats Maxima.
+943#£Testgleichung
+944#£Untersucht, ob die markierte Gleichung für alle Werte der Variablen wahr ist, z. B. sin(x)^2+cos(x)^2=1. Zuerst wird ein exakter Beweis versucht, ansonsten wird die Gleichung numerisch getestet. Die Antwort ist wahr, falsch (mit Gegenbeispiel), wahrscheinlich wahr oder unbekannt, und wird auf einer neuen Zeile geschrieben.
+945#£Entfernt man eine oder mehrere Variablen aus einem Gleichungssystem: Wählt man die Gleichungen aus und wählt die zu eliminierenden Variablen (weniger als die Anzahl der Gleichungen). Zum Beispiel ergibt x=2t+1 und y=t^2 mit t eliminiert, y=(x-1)^2/4.
+946#£Löst eine oder mehrere gekoppelte Differentialgleichungen numerisch, z. B. x'=y und y'=-x. Das Ergebnis kann als Graph in GeoGebra dargestellt, als Liste oder Tabelle eingefügt oder an Excel gesendet werden.
+947#£Definitiv.
+948#£Fügt 'Define:' am Anfang der Gleichung am Cursor oder eine neue Gleichung hinzu. Die Definitionen gelten in den unten aufgeführten Berechnungen im Dokument.
+949#£Fügt 'Definitionen löschen:' in eine neue Zeile ein. Die darüber genannten Definitionen werden in den darunterliegenden Berechnungen nicht verwendet.
+950#£Zeigt den Graphen für die ausgewählten Funktionen/Gleichungen und Punkte an. Das Diagrammprogramm wird in den Einstellungen oder durch Erweiterung dieses Buttons ausgewählt.
+951#£Graphen
+952#£Zeigt Diagramme und Punkte in GeoGebra an: im GeoGebra-Fenster von WordMat mit WordMat+, ansonsten im Browser. Kein Internet erforderlich.
+953#£Öffnet GeoGebra 5 und überträgt die ausgewählten Funktionen und Definitionen.
+954#£Öffnet (oder bettet) die Excel-Tabellen von WordMat für Graphen und Punkte mit den ausgewählten Funktionen und den Punkten in der Tabelle ein.
+955#£Zeigt den Körper der ausgewählten Funktionen in GeoGebra. Der Graph des Grundsatzes wird um 360 Grad um die x-Achse gedreht, um ein 3D-Objekt zu erzeugen. Eine Definitionsmenge wird nach einem Komma geschrieben, z. B. f(x)=x^2, 0<=x<=2.
+956#£Statistikdiagramme
+957#£Passt eine Funktion an, die du selbst schreibst, z. B. f(x)=a·e^(b·x)+c, an die Punkte in der Tabelle. Die Parameter sind die Variablen außer der unabhängigen Variablen.
+958#£Excel-Regression
+959#£Fügt ein neues mathematisches Feld ein. In einer nummerierten Gleichung: Machen Sie die Gleichung nummeriert.
+960#£Fügt ein neues Mathematikfeld ein, das automatisch nummeriert wird. Wenn der Cursor in einer Gleichung ist, ist er nummeriert. Position und Typ der Zahl werden unter Einstellungen ausgewählt.
+961#£Fügt eine Referenz auf eine benannte Gleichung ein: die Gleichungsnummer, die aktualisiert wird, wenn sich die Zahlen ändern.
+962#£Die nummerierte Gleichung, in der sich der Cursor befindet, erhält eine bestimmte Zahl. Die folgenden Gleichungen folgen.
+963#£Öffnet den LaTeX-Dialog, in dem das Dokument in eine .tex-Datei oder PDF-Datei umgewandelt werden kann (benötigt MikTex). Die umschließenden Zeichen für konvertierte Gleichungen werden unter Optionen, Notation ausgewählt.
+964#£Gleichung in LaTeX umwandeln
+965#£Ersetzt die Gleichung am Cursor durch ihren LaTeX-Code. Die umhüllenden Zeichen für Inline-Gleichungen und Gleichungen auf einer Geraden werden unter Einstellungen, Notation ausgewählt.
+966#£Konvertiere LaTeX in Gleichungen
+967#£Wandelt den LaTeX-Code in der Auswahl in Gleichungsfelder um. Wenn nichts ausgewählt ist, wird die LaTeX-Gleichung am Cursor umgewandelt. Der Code findet sich bei $...$, \(...\), $$...$$, \[...\], \begin{align} usw., und die umhüllenden Zeichen unter Einstellungen, Notation. Eine Auswahl ohne umhüllende Zeichen wird als eine Gleichung umgewandelt. Alt+T außerhalb einer Gleichung macht dasselbe.
+968#£Dokument
+969#£In LaTeX-PDF-Datei konvertieren
+970#£Konvertiert das gesamte Dokument in LaTeX, übersetzt es in eine PDF-Datei mit MikTex pdflatex und öffnet es in der Standard-PDF-Datei. MikTex muss installiert werden.
+971#£Konvertiere in LaTeX .tex Datei
+972#£Wandelt das gesamte Dokument in eine .tex-Datei um und öffnet es im Standard-.tex-Dateiprogramm (TexWorks, TexMaker, ...). Die Datei wird in einem Ordner neben dem Dokument gelegt.
+973#£In HTML konvertieren
+974#£Wandelt die Auswahl des gesamten Dokuments in eine HTML-Seite um, die im Browser geöffnet wird. Die Gleichungen werden als LaTeX geschrieben und mit MathJax angezeigt (erfordert Internet), die Bilder werden in die Seite eingebettet. Die Datei wird in einen Ordner neben dem Dokument gelegt, und der HTML-Code <head> ohne das Dokument wird in die Zwischenablage kopiert, sodass sie beispielsweise in einen benutzerdefinierten HTML-Block in WordPress eingefügt werden kann.
+975#£In Markdown umwandeln
+976#£Wandelt das Markup oder das gesamte Dokument in eine Markdown-Datei (.md) um: Überschriften, Listen, Zitate, fett, kursiv, durchgestrichen, Code, Links, Tabellen und Fußnoten sowie die Gleichungen als LaTeX ($...$ und $$...$$). Die Bilder werden als Dateien im selben Ordner gespeichert. Der Ordner wird neben das Dokument gelegt und geöffnet, und der Text wird auf die Zwischenablage kopiert.
+977#£Markdown in Word-Formatierung umwandeln
+978#£Verwandelt Markdown in der Auswahl oder im gesamten Dokument in Word-Formatierung: Überschriften (#), Listen (- und 1st), Zitate (>), Fettdruck (**), Kursiv (*), Durchgestrichen (~~), Code (' und '''), Links, Bilder, Tabellen, Fußnoten und horizontale Linien sowie LaTeX ($...$ und $$...$$) werden zu Gleichungsfeldern.
+979#£Wähle aus, welchen Befehl jede Tastenkombination ausführen soll (Alt+M, Alt+B, Alt+L...) und sieh dir die Word-Verknüpfungen für mathematische Felder an.
+980#£Über WordMat+
+981#£Ein Index fehlt in {1}
+982#£Die Funktion {1} fehlt ein Argument. Zum Beispiel kann man {1}(x) oder {1}^(-1)(x) mit der Funktionsvorlage von Word schreiben
+983#£Ein Punkt in der Liste fehlt
+984#£Die Grundzahl für einen Logarithmus muss positiv sein und sich von 1 unterscheiden
+985#£Eine Klammer fehlt für {1}\n\nDie Klammer, die keine Anfangsklammer hat, wird im untenstehenden Ausdruck mit zusätzlichen Leerzeichen um hervorgehoben: \n\n      {2}  )  {3}
+986#£Die Klammer{1} passt nicht zu {2}\n\nDie Klammern sind im Ausdruck mit zusätzlichen Leerzeichen hervorgehoben: \n\n      {3}  {1} {4}  )  {5}
+987#£Für {1} fehlt ein finales Bracket\n\nDie Klammer, die keine abschließende Klammer hat, wird im folgenden Ausdruck hervorgehoben, mit zusätzlichen Leerzeichen um: \n\n      {2}  {1} {3}
+988#£Syntaxfehler\n{1} Operator darf nicht am Anfang des Ausdrucks stehen.
+989#£Fehler der inversen trigonometrischen Funktion: {1}\nDas Argument muss zwischen -1 und 1 liegen
+990#£Syntaxfehler\n{1} Operator darf nicht am Ende des Ausdrucks platziert werden.
+991#£Die Zahl ist zu groß, um in eine Dezimalzahl umgewandelt zu werden
+992#£Division durch Null
+993#£Ein Fehler ist aufgetreten. Kann hier keine Formel einfügen. \nVersuche, alle Word-Dokumente zu schließen und Word neu zu starten. \n\nFehlerbeschreibung: \n{1}
+994#£Die Tabelle enthält keine Zahlen. Du musst eine Tabelle mit zwei Spalten erstellen: x-Werte in der linken Spalte und y-Werte in der rechten Spalte.
+995#£Du musst eine Tabelle mit zwei Spalten erstellen. X-Werte in der linken Spalte und Y-Werte in der rechten Spalte.
+996#£Lineare Regression mit WordMat durchgeführt. WordMat:
+997#£Exponentielle Regression durchgeführt mit WordMat. WordMat:
+998#£Potenzregression durchgeführt mit dem WordMat:
+999#£Spezifizieren Sie die Reihenfolge der Polynomregression (1-{1})\n\n(Die maximale Reihenfolge wird durch die Anzahl der Punkte bestimmt)
+1000#£Die Reihenfolge muss zwischen 1 und {1} liegen
+1001#£Polynomregression vom Grad {1} mit dem WordMat durchgeführt. WordMat:
+1002#£Die Kreuztabelle muss mindestens 2 Zeilen und 2 Zahlenspalten haben.
+1003#£{1} - ein Kohärenztest wird mit WordMat durchgeführt WordMat
+1004#£P-Wert: {1} = {2}%
+1005#£Auf dem Signifikanzniveau {1} % kann die 0-Hypothese, dass keine Korrelation besteht, abgelehnt werden. Das heißt, Es besteht eine Korrelation zwischen den beiden Variablen.
+1006#£Auf dem Signifikanzniveau {1} % kann die 0-Hypothese nicht abgelehnt werden. Daher gibt es keine Belege dafür, dass eine Korrelation zwischen den beiden Variablen besteht.
+1007#£Es gibt Erwartungswerte kleiner als 5 oder die Gesamtsumme aller Zellen ist weniger als 50. Die {1}-Verteilung ist daher in diesem Fall eine schlechte Näherung und das Ergebnis unzuverlässig. In einigen Fällen kann das Datenmaterial durch eine andere Gruppierung nutzbar gemacht werden.
+1008#£P-Wert:
+1009#£Q-Wert:
+1010#£Kritischer Q-Wert:
+1011#£Die Excel-Datei von WordMat {1} konnte nicht gefunden werden. Die Funktion erfordert, dass WordMat installiert wird.
+1012#£Verschachtelte Excel-Tabelle einfügen...
+1013#£Beim Versuch, Excel-Tabellen einzufügen, trat ein Fehler auf.
+1014#£Fehler beim Lesen der Datei: {1}
+1015#£GeoGebra 5 konnte nicht geöffnet werden: {1}
+1016#£GeoGebra 5 ist nicht auf deinem Computer installiert. \n\nMöchten Sie GeoGebra 5 herunterladen? (Nein: Das Diagramm wird in der GeoGebra Calculator Suite angezeigt.)
+1017#£GeoGebra wird in deinem Browser heruntergeladen. Gehe zu Downloads und starte den Installer.
+1018#£Beim Versuch des Öffnens trat ein Fehler auf: {1}
+1019#£Diese Version von WordMat+ prüft selbst keine neuen Versionen. Sie werden nun zur Download-Seite weitergeleitet.
+1020#£WordMat+ kann auf diesem Computer nicht nach einer neuen Version suchen (die MathMenu.dll von WordMat fehlt oder eine ältere Version). Sie werden nun zur Download-Seite weitergeleitet.
+1021#£Du hast bereits die neueste Version von WordMat+ v.{1}
+1022#£Es gibt eine neue Version von WordMat, die zum Download bereitsteht. \nNachrichten:  \n{1}\n\nKlicken Sie auf OK, um das Update zu starten.
+1023#£Neue Version {1}
+1024#£Es gibt eine neue Version von WordMat, die zum Download bereitsteht. \nNachrichten:  \n{1}\nSie werden nun auf die Download-Seite weitergeleitet
+1025#£Es gab einen Fehler im Zusammenhang mit der Überprüfung nach einem Update. Sie werden jetzt zur Website weitergeleitet, wo Sie sehen können, ob es ein neues Update gibt. Die aktuelle Version lautet: {1}
+1026#£Das Update kann auf diesem Computer nicht automatisch heruntergeladen werden (die MathMenu.dll von WordMat fehlt oder eine ältere Version). Sie werden nun auf die Download-Seite weitergeleitet.
+1027#£Herunterladen der Installationsdatei
+1028#£Die Installationsdatei hat keine gültige digitale Signatur von Eduap. Sie wurde erneut gelöscht.
+1029#£Die Installationsdatei wurde nicht korrekt heruntergeladen
+1030#£Die Installationsdatei wurde heruntergeladen. \nKlicken Sie auf OK, um das Update zu starten. Sie werden aufgefordert, Word zu speichern und zu schließen.
+1031#£Die Installation konnte nicht gestartet werden (Fehler {1}).
+1032#£Während des Updates trat ein Fehler auf (Fehler {1}).
+1033#£Diese Version von WordMat+ kann keine Updates herunterladen und installieren. Sie werden nun zur Download-Seite weitergeleitet.
+1034#£Ein Update auf die Beta-Version erfordert WordMat+.
+1035#£Möchten Sie mit der Installation der Beta-Version beginnen?
+1036#£Beta aktualisieren
+1037#£Ein Fehler trat bei der Installation der Beta-Version auf: {1}
+1038#£Die Kaufseite kann auf diesem Computer nicht geöffnet werden (die MathMenu.dll von WordMat fehlt oder eine ältere Version). Installiere WordMat erneut.
+1039#£Der Befehl ist in WordMat+ noch nicht verfügbar. Wähle unter Shortcuts einen anderen Befehl für den Schlüssel.
+1040#£Vorheriges Ergebnis
+1041#£WordMat+: Vor der Gleichung gibt es kein Ergebnis.
+1042#£WordMat+: Es gibt keine weiteren Ergebnisse. Tippe nochmal für die neuesten Informationen.
+1043#£Ein Fehler trat auf: {1}
+1044#£Das Ergebnis wurde nicht umgesetzt.
+1045#£Die Installationsdatei wurde heruntergeladen. \nKlicken Sie auf OK, um das Update zu starten
+1046#£Eduaps Server gab einen Fehler zurück. \nHoffentlich ist das ein vorübergehendes Problem. Wenn das Problem weiterhin besteht und du eine gültige WordMat+-Lizenz hast, kontaktiere bitte eduap@eduap.com\n\nFehler: wordmatlicense fehlgeschlagen
+1047#£Kein Internet
+1048#£WordMat+ kann die Lizenz nicht überprüfen, da die MathMenu.dll von WordMat auf diesem Computer nicht verwendet werden kann. \n\nDie Datei fehlt, es handelt sich um eine ältere Version oder sie wird durch Sicherheitseinstellungen (Antivirus, Endpoint Protection) blockiert. \n\nInstallieren Sie WordMat erneut oder kontaktieren Sie Ihre IT-Abteilung. Bis dahin funktioniert WordMat+ so, als wäre es lizenzfrei.
+1049#£Klicke zweimal auf Erlauben, nachdem du dieses Fenster geschlossen hast\nDu musst das nur einmal machen.
+1050#£Berechtigungen für WordMat
+1051#£GeoGebra Mathematik-Apps nicht gefunden
+1052#£Programmdateien nicht gefunden
+1053#£Für die Sinusregression ist eine aktive WordMat+-Lizenz erforderlich.
+1054#£Sinusregression durchgeführt mit WordMat (in {1}): WordMat (in ):
+1055#£Excel-Regression...
+1056#£Die Excel-Datei Graphs.xltm von WordMat konnte nicht gefunden werden. Die Excel-Regression erfordert die Installation von WordMat.
+1057#£Beim Versuch, Excel-Tabellen einzufügen, gab es einen Fehler. Das könnte daran liegen, dass Excel früher abgestürzt ist. Schließen Sie Excel-Tabellen und öffnen Sie Excel, bevor Sie es erneut mit WordMat versuchen.
+1058#£{1} hat mehrere undefinierte Variablen. Die unabhängige Variable kann nicht identifiziert werden. Verwenden Sie x oder t als unabhängige Variable.
+1059#£Es müssen mindestens drei Datenpunkte vorhanden sein.
+1060#£Sinusregression
+1061#£Ich konnte die Häufigkeit per FFT nicht schätzen.
+1062#£mit WordMat aufgeführt{1}:
+1063#£Das Modell enthält nicht die unabhängige Variable {1}
+1064#£Das Modell besitzt keine Parameter (Variablen außer {1})
+1065#£Es muss mindestens so viele Punkte wie Parameter ({1}) geben.
+1066#£Benutzerdefinierte Regression erfordert Maxima, wenn keine aktive WordMat+-Lizenz vorhanden ist.
+1067#£Die Regression konnte die Parameter nicht finden. Versuchen Sie es mit anderen Startschätzungen
+1068#£{1}-Verteilung
+1069#£Herzlichen Glückwunsch! \nDeine Schule hat eine Partnerschaft abgeschlossen und WordMat+ ist jetzt aktiviert.
+1070#£Erfolg
+1071#£Leider\nDeine Schule hat noch keine Partnerschaft unterschrieben.
+1072#£Keine Partnerschaft
+1073#£xmin muss >0 sein, um logarithmische x-Achse zu verwenden.
+1074#£YMIN muss >0 sein, um die logarithmische y-Achse zu verwenden.
+1075#£Der Graph konnte nicht eingefügt werden: {1}
+1076#£WordMat+ aktiviert für {1}
+1077#£Version: {1}
+1078#£WordMat+ ermöglicht es, mathematische Berechnungen in Word durchzuführen. Die Berechnungen werden von einem CAS durchgeführt, das Teil von WordMat+ ist, sodass keine weiteren Programme installiert werden müssen. \nWordMat wird von Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1} hergestellt.
+1079#£Erfolg!
+1080#£Daten fehlen
+1081#£Der Anfangswert von {1} ist keine Zahl
+1082#£Start, Ende und Schrittlänge sollten Zahlen sein
+1083#£Die Differentialgleichungen konnten nicht gelöst werden: {1}
+1084#£Wählen Sie mindestens eine Variable aus, die angezeigt werden soll
+1085#£Zu viele Punkte für GeoGebra. Wähle eine längere Schrittlänge.
+1086#£Excel konnte sich nicht öffnen: {1}
+1087#£Start ist keine Zahl
+1088#£Das Ende ist keine Zahl
+1089#£Die Schrittlänge ist keine Zahl
+1090#£Es gibt {1} Schritte. Wahrscheinlich funktioniert es in GeoGebra mit so vielen Schritten nicht.
+1091#£Man kann die Gleichung für {1} nicht gleichzeitig lösen und definieren.
+1092#£Differentialgleichung:
+1093#£Startzustand:
+1094#£Benannte Gleichungen
+1095#£Wählen Sie die zu referenzierende Gleichung aus und klicken Sie auf OK (oder doppelklicken). Die Referenz wird zur Gleichungsnummer und wird aktualisiert, wenn sich die Zahlen ändern.
+1096#£Um später eine Referenz auf die Gleichung einzufügen, wählen Sie unter "Neue Gleichung" "Referenz zur Gleichung einfügen".
+1097#£Maxima neu starten
+1098#£Verwende Word als LaTeX-Editor. \n\nDu kannst LaTeX-Befehle direkt ins Dokument eingeben, um volle Kontrolle zu erhalten, oder die Funktionen von Word nutzen und WordMat+ in LaTeX umwandeln lassen. \n\nMikTex muss installiert werden, um eine PDF-Datei zu erstellen. Du wirst zur Installation weitergeleitet, wenn es fehlt. \n\nNeben dem Dokument wird ein Ordner ("Dokumentname-Latex") mit der tex-Datei und den Bildern erstellt.
+1099#£Unterstützte Formatierung: \n- Überschriften (Stile) werden zu Abschnitten und Unterabschnitten: \n   Titel = Kapitel (Dokumentklasse, Buch oder Bericht; Artikel: Titel des Dokuments)\n   Überschrift 1 = Abschnitt, Überschrift 2 = Unterabschnitt, Überschrift 3 = Unterunterabschnitt\n- Fett, kursiv und unterstrichene Schrift\n- Seitenzahl an/aus wie im Dokument\n- Gleichungen: Inline, nummeriert und unnummeriert (umschließend Zeichen unter Einstellungen, Notation)\n- Aufzählungslisten (Stichpunkte und Zahlen)\n- Tabellen\n- Bilder, Formen und Diagramme\n- Bibliographie
+1100#£LaTeX-Einstellungen
+1101#£Dokumentenklasse:
+1102#£Schriftgröße:
+1103#£Verwenden Sie die Ränder von Word
+1104#£Verwenden Sie Dokumentmargen anstelle der Standardmargen von LaTeX (Paketgeometrie)
+1105#£Titelseite
+1106#£Eine separate Titelseite mit dem Titel des Dokuments und dem Verfasser des Dokuments
+1107#£Inhaltsverzeichnis
+1108#£Eine separate Inhaltsverzeichnisseite nach der Titelseite
+1109#£Nummerierte Abschnitte
+1110#£Die Überschriften sind nummeriert
+1111#£Die Schriftgröße für Klartext. Die Schriftgröße von Word wird nicht verwendet
+1112#£LaTeX-Präambel
+1113#£Automatisch generiert:
+1114#£Eigene:
+1115#£Das eigene Präambel löschen
+1116#£Erstellt den LaTeX-Code als Tex-Datei und öffnet ihn im Standardprogramm für Tex-Dateien (TexWorks, TexMaker ...), damit der Code überprüft und angepasst werden kann
+1117#£Erstellt ein LaTeX-Dokument als PDF-Datei mit MikTex. MikTex, das installiert werden muss. Sollte nur für einfache Dokumente verwendet werden
+1118#£Warte...
+1119#£{1}... (Ihre eigene Präambel) ... \n\n{2}
+1120#£Wähle, wie du die Phrase paraphrasierst.
+1121#£Ausgangseinheiten:
+1122#£Reduzieren
+1123#£Faktor
+1124#£Fügt außerhalb der Klammern ein, z. B. x^2-1 in (x-1)(x+1).
+1125#£Multiplizieren Sie die Klammern, z. B. (x+1)^2 mit x^2+2x+1.
+1126#£Zum Beispiel x^2+6x+5 bis (x+3)^2-4, ebenfalls die Gleichung eines Kreises.
+1127#£Alle Dezimalzahlen werden in Brüche umgerechnet, und das Ergebnis ist exakt.
+1128#£Auf dieselbe Zeile kleben
+1129#£Das Ergebnis wird nach dem Ausdruck mit einem Gleichheitszeichen geschrieben (nicht durch eine Gleichung)
+1130#£Logarithmusausgabe
+1131#£Auto
+1132#£Wählen Sie die zu entfernenden Variablen aus.
+1133#£Höchstens können {1} Variablen aus {2} Gleichungen eliminiert werden.
+1134#£Wählen Sie maximal {1} Variablen, da es {1} Gleichungen gibt.
+1135#£Eliminieren Sie maximal {1} Variablen
+1136#£Oder schreib sie selbst, getrennt durch Kommas
+1137#£Wähle bis zu {1} Variablen aus
+1138#£Oder schreibe sie durch Kommas getrennt (der Rest wird automatisch ausgewählt)
+1139#£Variablen eliminieren
+1140#£Gleichung lösen
+1141#£Gleichungen können im Grunde auf zwei verschiedene Arten gelöst werden. Wenn Sie Probleme mit einer Gleichung haben, könnte es eine gute Idee sein, eine andere Methode auszuprobieren.
+1142#£Die Lösungen werden durch das 'Raten' vieler verschiedener Lösungen gefunden. Die Methode funktioniert bei praktisch allen Gleichungen, aber Lösungen können übersehen und falsche Lösungen gefunden werden.
+1143#£Warnung: Die Geräte sind eingeschaltet. \nSeien Sie vorsichtig bei Variablen, die Einheiten sind, z. B. A, C, F, H, J, K, L, N, S, T, V, W, m, g, u, s
+1144#£Das Zeitlimit, die Anzahl der Ziffern und n für wissenschaftliche Notation müssen Zahlen sein.
+1145#£Die Zeitbegrenzung muss mindestens 0 betragen, die Anzahl der Ziffern mindestens 20 und n für wissenschaftliche Notation eine ganze Zahl von 0 bis 100.
+1146#£Wählen Sie mindestens eine CAS-Anwendung aus.
+1147#£Der Backup-Ordner lautet: {1}
+1148#£WordMat+ ist aktiviert.
+1149#£Dafür braucht man WordMat+.
+1150#£Die Einstellungen werden zurückgesetzt.
+1151#£Dezimalzahlen
+1152#£Dokument {1} Markdown
+1153#£Markdown {1} Word
+1154#£Der Dreieckslöser von WordMat wird mit Eingaben verwendet:
+1155#£Da wir die Kosinusrelation oben gelöst haben für
+1156#£Die quadratische Vervollständigung erfordert ein quadratisches Polynom
+1157#£{1} muss zwei Zahlen haben, z. B. binomial(7; 2)
+1158#£Es müssen mindestens zwei Gleichungen eliminiert werden müssen, z. B. eliminate([x=2t+1; y=t^2]; t)
+1159#£eliminate erfordert, dass die Gleichungen und Variablen eliminiert werden, z. B. eliminate([x=2t+1; y=t^2]; t)
+1160#£TestTF erfordert eine Gleichung
+1161#£Der Ausdruck wird zu groß, um multipliziert zu werden
+1162#£binomial (n; r) benötigt n{1}0
+1163#£Eine Annahme muss eine Ungleichung sein, z. B. x>0: {1}
+1164#£Eine Annahme muss eine Ungleichung zwischen einer Variablen und einer Zahl sein, z. B. x>0
+1165#£Der Wert in der Annahme kann nicht berechnet werden: {1}
+1166#£Eine gerade Null einer negativen Zahl ist nicht definiert
+1167#£Die Potenz einer negativen Zahl ist für diesen Exponenten nicht definiert
+1168#£Die Zahl ist zu groß
+1169#£Ln und log sind nur für positive Zahlen definiert
+1170#£diff sollte 1 bis 3 Argumente haben: diff(Ausdruck; x; n)
+1171#£Der zweite Parameter im Diff muss die Variable sein, z. B. diff(x^2; x)
+1172#£Der dritte Parameter im Differential muss eine ganze Zahl sein
+1173#£Der dritte Parameter im Differential sollte eine Zahl von 0 bis 100 sein
+1174#£Gib an, mit welcher Variable differenziert werden soll, z. B. diff(Ausdruck; x)
+1175#£{1} kann (noch) nicht unterschieden werden.
+1176#£Schreibe den Grenzwert unten als Kleber mit x{1}a
+1177#£Ein Look fehlt nach dem Kleber
+1178#£Eine stückweise Funktion muss in jeder Zeile einen Ausdruck und eine Bedingung haben
+1179#£Die stückweise Funktion ist hier nicht definiert (keine der Bedingungen ist erfüllt)
+1180#£Die Polarnotation r{1}v erfordert, dass komplexe Zahlen eingeschaltet werden
+1181#£Schreibe eine komplexe Zahl in Polarform wie r{1}v
+1182#£{1} muss ein Argument haben, z. B. {1}(3+2i)
+1183#£Das Argument von 0 ist nicht definiert
+1184#£Die Gleichung kann nicht in einen reellen und einen imaginären Teil unterteilt werden
+1185#£Alle komplexen Zahlen sind Lösungen
+1186#£Die Gleichung hat eine unendliche Anzahl von Lösungen ({1} liegt auf einer Kurve)
+1187#£Die Quadratwurzel von {1} kann nicht gefunden werden
+1188#£Das Zeichen {1} ist nicht bekannt
+1189#£Die Definition für {1} kann nur {2} enthalten: {3}
+1190#£Die Definition für {1} muss {2} enthalten: {3}
+1191#£Die Definition fehlt ein Gleichheitszeichen: {1}
+1192#£Es ist keine Definition: {1}
+1193#£Die Definition ist nicht vollständig: {1}
+1194#£{1} ist ein Befehl und kann nicht definiert werden
+1195#£Die Parameter in einer Funktionsdefinition müssen variabel sein, z. B. f(x)=2x+1: {1}
+1196#£Eine eingebaute Funktion kann nicht definiert werden: {1}
+1197#£{1} ist eine Konstante und kann nicht definiert werden
+1198#£Die linke Seite einer Definition muss ein Name oder eine Funktion sein, z. B. a=5 oder f(x)=2x+1: {1}
+1199#£Der Index {1} liegt außerhalb der Matrix {2} ({3} Zeilen)
+1200#£Der Index {1} liegt außerhalb der Matrix {2} ({3} Balken)
+1201#£Der Index {1} befindet sich außerhalb {2} ({3} Artikel)
+1202#£Eine Definition verwendet sich selbst (rekursive Definition)
+1203#£Die Funktion {1} muss {2} Argument(e) haben
+1204#£Nur eine Funktion einer Variablen kann durch Bezeichnung differenziert werden: {1}
+1205#£{1} ist für {2} nicht definiert (die Definitionsmenge ist {3})
+1206#£{1} kann nicht als Zähler verwendet werden, weil {1} definiert ist. Löschen Sie die Definition oder verwenden Sie einen anderen Namen.
+1207#£Eine Schwelle kann für {1} nicht gefunden werden, weil {1} definiert ist. Löschen Sie die Definition oder verwenden Sie einen anderen Namen.
+1208#£Das Einbetten nach {1} ist nicht möglich, weil {1} definiert ist. Lösche die Definition oder verwende einen anderen Namen.
+1209#£Differenzierung durch {1} kann nicht differenziert werden, weil {1} definiert ist. Löschen Sie die Definition oder verwenden Sie einen anderen Namen.
+1210#£Zu {1} kann nicht gelöst werden, weil {1} definiert ist. Lösche die Definition oder benutze einen anderen Namen.
+1211#£Der Ausdruck kann in GeoGebra: {1} nicht angezeigt werden
+1212#£GeoGebra kann für den Ausdruck in WordMat+ nicht verwendet werden
+1213#£GeoGebra kann nicht gestartet werden (WordMats MiniBrowser)
+1214#£GeoGebra kann nicht gestartet werden (AppleScript von WordMat)
+1215#£GeoGebra wurde gestoppt, weil die Berechnung mehr als {1} Sekunden dauerte
+1216#£GeoGebra ist nicht installiert (WordMats Geogebra-Mathematik-Apps)
+1217#£GeoGebra kann nicht gestartet werden (WordMats WebViewWrap fehlt)
+1218#£GeoGebra kann nicht gestartet werden
+1219#£GeoGebra kann sich nicht auf Geräte verlassen
+1220#£GeoGebra kann es nicht berechnen: {1}
+1221#£GeoGebra kann hier nicht für {1} verwendet werden
+1222#£Die Testgleichung erfordert eine Gleichung
+1223#£GeoGebra kann für diese Differentialgleichung nicht verwendet werden
+1224#£GeoGebra kann die Bedingung nicht verwenden
+1225#£GeoGebra kann die Begriffe nicht verwenden
+1226#£GeoGebra kann die Differentialgleichung nicht lösen
+1227#£GeoGebra kann die Variablen nicht eliminieren
+1228#£GeoGebra kann die Gleichung nicht lösen
+1229#£GeoGebra fand nur komplexe Lösungen
+1230#£GeoGebra kann es nicht berechnen
+1231#£GeoGebra fand nur ein komplexes Ergebnis
+1232#£Das Diagramm konnte nicht angezeigt werden: {1}
+1233#£Der Drehkörper konnte nicht angezeigt werden: {1}
+1234#£Wählen Sie eine oder mehrere Funktionen aus, z. B. f(x)=x^2 oder y={1}x. Eine Definitionsmenge wird nach einem Komma geschrieben, z. B. f(x)=x^2, 0{2}x{2}2.
+1235#£{1} ist keine Funktion von x und kann nicht als Drehmoment dargestellt werden.
+1236#£Graph ist für Mac nicht verfügbar.
+1237#£Der Graph konnte in Graph: {1} nicht angezeigt werden
+1238#£Graph unterstützt keine Funktionen mehrerer Variablen: {1}
+1239#£Graph kann keine Vektoren und Kurven anzeigen: {1}
+1240#£Der Graph kann keine Vektoren und Punkte in 3D anzeigen:{1}
+1241#£Geben Sie den Wert für {1}\n\nSie kann später unter benutzerdefinierten Funktionen in Graph angepasst werden. Man kann sogar eine Animation erstellen, bei der sich der Wert kontinuierlich ändert, unter Berechnen/Animieren.
+1242#£Die Richtungsleiste konnte nicht angezeigt werden: {1}
+1243#£Show-Graph
+1244#£Es löst für {1}, die ebenfalls eine Einheit ist. Daher ist {1} in dieser Gleichung keine Einheit. Betrachten Sie, einen anderen Variablennamen zu verwenden oder Einheiten auszuschalten.
+1245#£Markiere die zu lösende Gleichung
+1246#£Wählen Sie die zu lösende Differentialgleichung aus
+1247#£Setze die Funktion für die Anfangsbedingungen
+1248#£nicht gelöst werden konnte
+1249#£Die Differentialgleichung wird mit gelöst. WordMat ({1})
+1250#£mit der Startbedingung {1}
+1251#£mit den Anfangsbedingungen {1}
+1252#£mit den Randbedingungen {1}
+1253#£Die Gleichung {1} mit WordMat.
+1254#£Der Ausdruck {1} die Verwendung von WordMat.
+1255#£reduziert
+1256#£Faktorisiert
+1257#£multipliziert
+1258#£Umgeschrieben mit quadratischer Vervollständigung
+1259#£Umgeschrieben zu Brüchen
+1260#£Paraphrasiert
+1261#£Die Variablen {1} mit WordMat eliminiert werden.
+1262#£Die Variable {1} mit WordMat eliminiert werden.
+1263#£Wählen Sie die zu testende Gleichung aus
+1264#£Die Gleichung stimmt.
+1265#£Die Gleichung gilt für alle Werte von {1}.
+1266#£Die Gleichung ist falsch.
+1267#£Die Gleichung ist falsch, da die linke Seite nicht definiert ist.
+1268#£Die Gleichung ist falsch, da die rechte Seite nicht definiert ist.
+1269#£Die Gleichung ist für alle Werte von {1} falsch.
+1270#£Die Gleichung gilt nicht für alle Werte von {1}. Zum Beispiel gilt sie für {2}
+1271#£, wobei die linke Seite nicht definiert ist.
+1272#£wobei die rechte Seite nicht definiert ist.
+1273#£Die Gleichung ist wahrscheinlich wahr. Sie konnte nicht exakt bewiesen werden, aber beide Seiten haben denselben numerischen Wert.
+1274#£Die Gleichung gilt wahrscheinlich für alle Werte von {1}. Sie konnte nicht exakt bewiesen werden, aber sie ist in allen {2} Punkten wahr, an denen sie numerisch getestet wurde.
+1275#£Die Gleichung gilt nicht für alle Werte von {1}.
+1276#£Es konnte nicht festgestellt werden, ob die Gleichung wahr ist.
+1277#£Die Gleichung wird mit WordMat getestet.
+1278#£Fehler in der Definition {1}: {2}
+1279#£Das Steuersystem wird für {1} numerisch mit WordMat gelöst.
+1280#£Das Steuersystem ist für {1} mit WordMat gelöst.
+1281#£Die Ungleichung wird numerisch für {1} mit WordMat gelöst.
+1282#£Die Ungleichung wird für {1} mit WordMat gelöst.
+1283#£Die Gleichung wird numerisch für {1} im Intervall {2} mit WordMat gelöst.
+1284#£Die Gleichung wird numerisch für {1} mit WordMat gelöst.
+1285#£Die Gleichung wird für {1} mit WordMat gelöst.
+1286#£Die Berechnung wurde gestoppt, bevor das gesamte Intervall durchsucht wurde. Es kann mehrere Workarounds geben.
+1287#£Die Berechnung wurde gestoppt, bevor alle Lösungen gefunden waren. Es kann mehrere Lösungen geben.
+1288#£Das Gleichungssystem hatte keine Lösungen innerhalb {2} für die Variablen {1}
+1289#£Ungleichheit hatte keine Lösungen in der Definitionsmenge {1}
+1290#£Ungleichheit hatte in {2} keine Lösungen für variable {1}
+1291#£Keine Lösungen gefunden
+1292#£Die Gleichung hatte keine Lösungen in der Definitionsmenge {1}
+1293#£Die Gleichung hatte keine Lösungen in {2} für die Variable {1}
+1294#£Schreibe {1}x nach dem Ausdruck im Integral (z. B. {2}x^2 {1}x)
+1295#£Die Gleichung enthält eine Struktur, die VBACAS noch nicht berechnen kann: \n\n      {1}
+1296#£Schreiben Sie die Summe mit k=a unten und b über dem Charakter (z. B. k=1 und n)
+1297#£Die Gleichung enthält einen Akzent, den VBACAS noch nicht berechnen kann: \n\n      {1}
+1298#£Die Gleichung enthält eine Struktur, die VBACAS noch nicht berechnen kann (ein mehrzeiliges Gleichungsarray): \n\n      {1}
+1299#£Die Gleichung enthält eine Struktur, die VBACAS noch nicht berechnen kann (z. B. Summe, Integral, Grenzwert, Matrix oder Akzent): \n\n      {1}
+1300#£Schreibe {1}x {1}y nach dem Ausdruck im Doppelintegral (z. B. {2}x·y {1}x {1}y)
+1301#£Das Integral muss {1} Differentiale haben (z. B. {2}x {2}y)
+1302#£Die Gleichung scheint Folgendes zu umfassen:
+1303#£aber Word hat es gespeichert, sodass das Argument der Funktion nach der Klammern fortgesetzt wird:
+1304#£Sie ist in der Gleichung nicht sichtbar, liefert aber ein anderes Ergebnis.
+1305#£Sollte die Gleichung korrigiert werden, sodass sie so berechnet wird, wie sie ist? \n(Nein: berechne, da Word es gespeichert hat)
+1306#£Du musst eine Tabelle auswählen
+1307#£In der Tabelle gibt es keine gültigen Zahlenpaare
+1308#£integrate muss 1, 2 oder 4 Argumente haben: integrate(Ausdruck; x) oder integrate(Ausdruck; x; a; b)
+1309#£Der zweite Parameter in integrate muss die Variable sein, z. B. integrate(x^2; x)
+1310#£Gib an, nach welcher Variable integriert werden soll, z. B. integrate(Ausdruck; x)
+1311#£Das Integral kann nicht berechnet werden: Der Integrand ist nicht im gesamten Intervall definiert
+1312#£Das Integral konnte nicht numerisch genau genug berechnet werden (der Integrand schwankte zu stark)
+1313#£Gleichung finden
+1314#£Gleichung lesen
+1315#£Ersatz der Gleichung
+1316#£Die Gleichung konnte nicht in LaTeX ({1}) umgewandelt werden: {2}
+1317#£LaTeX-{1}-Gleichung
+1318#£{1} {2} konnte nicht in Gleichungen umgewandelt werden und wurde nicht geändert: {3}
+1319#£Der LaTeX-Code konnte nicht in eine Gleichung umgewandelt werden: {1}
+1320#£Der Code ist leer.
+1321#£Diese Funktion wird auf dem Mac nicht unterstützt.
+1322#£Diese Version von WordMat+ kann keine PDF-Dateien mit MikTex erstellen. Erstellen Sie stattdessen eine Tex-Datei.
+1323#£MikTex ist nicht installiert. Du wirst jetzt zu miktex.org geschickt, wo es heruntergeladen werden kann. Beim ersten Start des Konverters wirst du auch aufgefordert, einige Pakete herunterzuladen. Klicke einfach auf OK.
+1324#£Speichern Sie das Dokument, bevor Sie es in LaTeX konvertieren. Die LaTeX-Dateien werden in einem Ordner neben dem Dokument gelegt.
+1325#£Das Dokument befindet sich nicht auf deinem Computer (OneDrive). Speichere es in einem Ordner auf deinem Computer, bevor du es konvertierst.
+1326#£Umrechnung von Gleichungen
+1327#£Umwandlung der Formatierung
+1328#£Umwandlung von Bildern
+1329#£Umrechnungstabellen
+1330#£Absätze umwandeln
+1331#£Die Datei schreiben
+1332#£{1} {2} konnte nicht als Datei gespeichert werden und wurde durch einen Rahmen mit dem Text "Bild n fehlend" ersetzt.
+1333#£Das Dokument konnte nicht in LaTeX umgewandelt werden: {1}
+1334#£WordMat+ hat keinen Ordner gefunden, in den es auf diesem Mac schreiben darf.
+1335#£MikTex (pdflatex.exe) wurde nicht gefunden.
+1336#£pdflatex läuft {1}. Zeit
+1337#£Ein Fehler ereignete sich beim Fahren pdflatex.exe.
+1338#£Das LaTeX-Dokument konnte nicht übersetzt werden. pdflatex gab den Fehler an: \n\n{1}\n\nKlicken Sie auf OK, um die Tex-Datei zu öffnen.
+1339#£Die PDF-Datei wurde erstellt, aber diese Zeichen kann pdflatex nicht schreiben. Sie wurden durch ein fettes ? In der PDF-Datei ersetzt: \n\n{1}
+1340#£Die PDF-Datei konnte nicht gefunden werden. Klicken Sie auf OK, um die tex-Datei zu öffnen, damit der Fehler gefunden werden kann.
+1341#£Der Ordner für die Bilder
+1342#£Der Ordner des Dokuments
+1343#£Konvertierten, Links und Fußnoten
+1344#£Kopieren auf Zwischenablage
+1345#£Die HTML-Seite wird gespeichert als\n{1}
+1346#£Der HTML-Code konnte nicht in die Zwischenablage kopiert werden.
+1347#£{1} {2} konnte nicht gelesen werden und ist als Text geschrieben.
+1348#£{1} {2} konnte nicht gespeichert werden und wurde durch den Text "Bild n fehlt" ersetzt.
+1349#£Das Dokument konnte nicht in HTML umgewandelt werden ({1}): {2}
+1350#£(not used)
+1351#£Markdown-Datei wird gespeichert als\n{1}
+1352#£Der Markdown-Text wird auf das Zwischenbrett kopiert.
+1353#£Der Markdown-Text konnte nicht auf das Klemmbrett kopiert werden.
+1354#£Die Bilder werden als Dateien im selben Ordner gespeichert.
+1355#£{1} {2} konnte nicht gerettet werden.
+1356#£Das Dokument konnte nicht in Markdown ({1}) umgewandelt werden: {2}
+1357#£*Bild {1} fehlt*
+1358#£Markdown konnte nicht umgewandelt werden: {1}
+1359#£{1} {2} wurde nicht auf dem Computer gefunden und ist nicht eingefügt.
+1360#£{1} {2} konnte nicht in Gleichungsfelder umgewandelt werden.
+1361#£Die LaTeX-Vorlage (LatexWordTemplate.dotx) wurde nicht gefunden. Sie wird zusammen mit WordMat installiert.
+1362#£limit sollte 3 oder 4 Argumente haben: limit(Ausdruck; x; a) oder limit(Ausdruck; x; a; plus)
+1363#£Der vierte Parameter im Limit muss Plus oder Minus sein
+1364#£Die Grenze existiert nicht
+1365#£{1} muss 4 Argumente haben: {1}(Ausdruck; k; a; b)
+1366#£Der zweite Parameter in {1} muss die Variable sein, z. B. {1}(k^2; k; 1; n)
+1367#£Die untere Grenze kann nicht unendlich sein
+1368#£Zu viele Gelenke (maximal {1})
+1369#£Der Term für {1}={2} hat keinen Wert
+1370#£Die Reihe ist divergent (die Summe existiert nicht)
+1371#£Die Potenzsumme kann nicht berechnet werden
+1372#£Die Nullmatrix sollte Größe 1 bis 100 haben
+1373#£Die Einheitsmatrix muss Größe 1 bis 100 haben
+1374#£Das Matrixprodukt erfordert, dass die erste so viele Spalten hat wie die zweite Zeilen ({1} und {2})
+1375#£Ein Array kann nur auf eine ganze Zahl (oder T für das transponierte) erhöht werden.
+1376#£Eine Matrix kann nur auf eine ganze Zahl erhöht werden
+1377#£Nur quadratische Matrizen können auf eine Potenz erhöht werden (die Matrix ist {1})
+1378#£Der Exponent ist zu groß
+1379#£Die Determinante existiert nur für quadratische Matrizen (die Matrix ist {1})
+1380#£Die Determinante eines Arrays von Parametern kann höchstens {1}{1} berechnet werden
+1381#£Nur quadratische Matrizen haben ein Inverses (die Matrix ist {1})
+1382#£Die Matrix hat kein Inverses (die Determinante ist 0)
+1383#£Das Inverse eines Arrays von Parametern kann für {1}{1} höchstens berechnet werden
+1384#£Maxima ist nicht installiert (WordMat)
+1385#£Maxima kann nicht gestartet werden (die MathMenu.dll von WordMat fehlen)
+1386#£Maxima kann nicht gestartet werden
+1387#£Maxima kann nicht gestartet werden (WordMats AppleScript)
+1388#£Maxima stellte eine Frage, die WordMat+ nicht beantworten konnte
+1389#£Maxima wurde gestoppt, weil die Berechnung mehr als {1} Sekunden dauerte
+1390#£Die Verbindung zu Maxima über WSH erfordert eine Partnerschaft
+1391#£Maxima konnte nicht über WSH gestartet werden: Fehler {1} {2}
+1392#£Fehler im Maxima-Code (Codefelder oder Codedatei): {1}
+1393#£Maxima können {1}
+1394#£Maxima kann in WordMat+ nicht für {1} verwendet werden
+1395#£Anfangsbedingungen an zwei verschiedenen Punkten
+1396#£diese Bedingungen
+1397#£Maxima können die Differentialgleichung nicht lösen
+1398#£Maxima kann es nicht berechnen
+1399#£Maxima fand nur ein komplexes Ergebnis
+1400#£Maxima kann die Variablen nicht eliminieren
+1401#£Maxima können Ungleichheit nicht lösen
+1402#£Maxima können die Gleichung nicht lösen
+1403#£Maxima fanden nur komplexe Lösungen
+1404#£Gnuplot ist für Mac nicht verfügbar. Verwende GeoGebra.
+1405#£Der Graph konnte nicht mit Gnuplot dargestellt werden: {1}
+1406#£Fehler im Maxima-Code
+1407#£Die Codefelder oder die Codedatei haben einen Fehler: {1}
+1408#£Geben Sie einen Maxima-Befehl ein
+1409#£Fehler im Maxima-Code (Codefelder): {1}
+1410#£Es gibt zu viele Spalten
+1411#£Die Berechnung wurde gestoppt
+1412#£Die Frist für einen Teil der Berechnung wurde überschritten
+1413#£Die Berechnung wurde gestoppt, weil sie mehr als {1} Sekunden dauerte
+1414#£Fakultät ist nur für ganze Zahlen definiert
+1415#£Fakultät ist nur für Zahlen >= 0 definiert
+1416#£Die Zahl ist zu groß für Dozenten
+1417#£Die Zahl ist zu groß - VBACAS kann die Fakultät der Zahlen über 170 nicht als Dezimalzahlen berechnen
+1418#£desolve muss eine Differentialgleichung haben, z. B. desolve(y'=2y)
+1419#£Die Differentialgleichung muss eine Gleichung sein, z. B. y'=2y
+1420#£Das Argument {1} in der Auflösung wird nicht verstanden
+1421#£Die Gleichung enthält keine abgeleitete Funktion (z. B. y')
+1422#£Die Gleichung enthält keine Ableitung von {1}
+1423#£Es gibt keinen freien Namen für die Konstante
+1424#£Die Ordnung der Ableitung muss eine Zahl sein
+1425#£Schreibe die Bedingungen als {1}(0)=2 nach der Gleichung: desolve(Gleichung; {1} (0)=2)
+1426#£Differentialgleichungen höherer Ordnung als 2 können nicht gelöst werden
+1427#£Die Differentialgleichung konnte nicht gelöst werden ({1}{2} kann nicht isoliert werden)
+1428#£Die Differentialgleichung konnte nicht gelöst werden (sie ist weder linear noch separabel)
+1429#£Die Differentialgleichung konnte nicht gelöst werden ({1}{2}{2} kann nicht isoliert werden)
+1430#£Die Differentialgleichung könnte nicht gelöst werden (die zweite Ordnung kann gelöst werden, wenn sie linear mit konstanten Koeffizienten ist, oder {1}{3}{3}=f({2}))
+1431#£Die Differentialgleichung konnte nicht gelöst werden (eine Partikellösung für {1} kann nicht gefunden werden)
+1432#£Eine Differentialgleichung zweiter Ordnung kann höchstens zwei Bedingungen haben
+1433#£Die Bedingungen müssen Gleichungen sein, z. B. {1}(0)=1 und {1}{2}(0)=2
+1434#£Die Bedingungen sollten als {1}(0)=1 und {1}{2}(0)=2 geschrieben werden.
+1435#£Keine Lösung erfüllt die Bedingungen
+1436#£Eine Differentialgleichung erster Ordnung muss eine Bedingung haben, z. B. {1}(0)=2
+1437#£Die Bedingung muss eine Gleichung sein, z. B. {1}(0)=2
+1438#£Die Bedingung sollte als {1}(0)=2 geschrieben werden
+1439#£Keine Lösung erfüllt die Bedingung {1}
+1440#£Die Differentialgleichung konnte nicht gelöst werden (die Stammfunktion von {1} kann nicht gefunden werden)
+1441#£Die Schrittlänge muss positiv sein
+1442#£Der Endwert muss größer sein als der Anfangswert
+1443#£Zu viele Schritte ({1}). Wähle eine größere Schrittlänge
+1444#£Geben Sie nur die rechte Seite der Differentialgleichung für {1} ein: {2}
+1445#£Definiere {1} unter Definitionen
+1446#£Die Differentialgleichung für {1} kann nicht mit {2}={3} berechnet werden
+1447#£Setzen Sie den Cursor in den zu paraphrasierenden Ausdruck.
+1448#£Der Maxima-Befehl benötigt WordMats Maxima, das nicht installiert ist.
+1449#£Gib einen Maxima-Befehl ein, z. B. integrate(x^2,x) oder factor(x^2-1). Das Ergebnis wird als neue Gleichung geschrieben.
+1450#£Maxima-Befehl
+1451#£Der Maxima-Befehl ist in dieser Version von WordMat+ nicht vorhanden.
+1452#£Platziere den Cursor in ein Mathematikfeld.
+1453#£Setzen Sie den Cursor in die zu lösende Gleichung.
+1454#£Wähle die Gleichungen aus, aus denen Variablen ausgeschlossen werden sollen.
+1455#£Wählen Sie mindestens zwei Gleichungen aus, um Variablen zu eliminieren (z. B. x=2t+1 und y=t^2).
+1456#£Platziere den Cursor in die zu lösende Differentialgleichung.
+1457#£Es gibt keine aktive WordMat+-Lizenz. \n\nWordMat+ kann weiterhin verwendet werden, aber diese Funktionen sind nicht aktiv: {1}WordMat+s eigenes CAS (VBACAS). Maxima- oder GeoGe{1}bra-Graphen werden im GeoGebra-Fenster von WordMat gezählt. Sie werden im Browser angezeigt{1}Formeln aus der Formelsammlung einfügen{1}Sinusregression{1}Anpassen-Menü\n\nKlicken Sie auf OK, um zu www.wordmat.dk
+1458#£Es gibt keine aktive WordMat+-Lizenz, daher kann das eigene CAS (VBACAS) von WordMat+ nicht verwendet werden, und weder Maxima noch GeoGebra können auf diesem Computer verwendet werden. Wählen Sie eines davon unter Einstellungen, installieren Sie WordMat mit Maxima oder erneuern Sie die Lizenz auf www.wordmat.dk.
+1459#£Maxima ist nicht Teil dieser Version von WordMat+
+1460#£Die Gleichung ist bereits nummeriert.
+1461#£Eine nummerierte Gleichung kann nicht in eine Tabelle eingefügt werden.
+1462#£Nummerierte Gleichung
+1463#£Gib einen Namen für die Gleichung ein.
+1464#£Der Name muss maximal 40 Zeichen haben.
+1465#£Der Name sollte mit einem Buchstaben beginnen.
+1466#£Der Name darf nur Buchstaben, Zahlen und _ (keine Leerzeichen) enthalten.
+1467#£Der Name existiert bereits.
+1468#£Im Dokument gibt es keine benannten Gleichungen. Verwenden Sie unter 'Neue Gleichung zur Referenz nummerierte Gleichung einfügen'.
+1469#£Gleichungsreferenz
+1470#£Setze den Cursor in eine nummerierte Gleichung.
+1471#£Auf welche Zahl sollte diese Gleichung gestellt werden? \nDie nachfolgenden Gleichungen werden entsprechend angepasst.
+1472#£Gib eine ganze Zahl oder section.number (2.3) für Zahlen mit Section ein.
+1473#£Eine Gleichungs-Abschnittsnummer wird eingefügt. Typischerweise wird sie als Kapitel- oder Abschnittsnummer eingefügt. in einer Überschrift. Die Nummer kann jedoch auch versteckt eingefügt werden. Sollte die Nummer angezeigt werden? (Antworte nein, um sie auszublenden)
+1474#£Gleichungsabschnitt Nr. einfügen.
+1475#£Gleichungsabschnitt
+1476#£Löschdefinitionen können nicht in eine Tabelle eingefügt werden.
+1477#£Gib an, welche Einheiten im Ausgang sind, getrennt durch Kommas\nBeispiele: \n\ncm, kJ, Öffnungszeiten\neV, nm, mV\naJ, AU, Bq\n\nWenn nichts angegeben ist, werden alle Einheiten als Basis-SI-Einheiten oder abgeleitete SI-Einheiten ohne Präfix zurückgegeben.
+1478#£Der zweite Parameter in solve muss die Variable sein, z. B. solve(x^2=4; x)
+1479#£Ungleichungen können nicht gelöst werden, wenn komplexe Zahlen aktiviert werden
+1480#£Die Gleichung kann nicht analytisch gelöst werden. Versuchen Sie, sie numerisch zu lösen.
+1481#£Die Gleichung kann (noch nicht gelöst werden): {1}=0
+1482#£Spezifizieren Sie, für welche Variable gelöst werden soll, z. B. solve(Gleichung; x)
+1483#£Die Gleichung kann nicht exakt gelöst werden (der Grad ist zu hoch)
+1484#£Zu viele Lösungen im Intervall
+1485#£Zu viele Lösungen
+1486#£Der Zeitraum kann nicht berechnet werden
+1487#£Die Lösungen im Intervall können nicht berechnet werden
+1488#£Die Gleichung kann (noch) nicht exakt gelöst werden: {1}=0
+1489#£Die Gleichung kann (noch) nicht exakt gelöst werden
+1490#£Der Winkel kann nicht berechnet werden
+1491#£Die Gleichung kann (noch) nicht exakt gelöst werden: {1}={2}
+1492#£Ungleichung kann (noch) nicht gelöst werden): {1}
+1493#£Die Ungleichung kann (noch) nicht gelöst werden): {1}{2}0
+1494#£Ungleichung hat eine unendliche Anzahl von Lösungsintervallen. Geben Sie ein Intervall für {1} an, z. B. 0{2}{1}{2}{3}
+1495#£Ungleichung kann (noch) nicht gelöst werden.
+1496#£{1} muss {2}{3}
+1497#£{1} (x) ist nicht definiert für x=0, -1, -2, ...
+1498#£W_0(x) ist nur für x{1}-1/e definiert
+1499#£acosh (x) ist nur für x{1}1 definiert
+1500#£{1} (x) ist zu groß, um berechnet zu werden;
+1501#£{1} hat hier keinen Wert
+1502#£{1} kann nicht nach {2} ({2} im ersten Argument) nicht differenziert werden.
+1503#£Die Unbekannten müssen variabel sein, z. B. solve([x+y=5; x-y=1]; [x;y])
+1504#£Systeme mit Ungleichungen können (noch) nicht gelöst werden
+1505#£Es gibt keine Gleichungen zu lösen
+1506#£Das Gleichungssystem hat keine Variablen zum Lösen
+1507#£Das Gleichungssystem ist überbestimmt: Es gibt mehr Gleichungen ({1}) als unbekannte ({2}).
+1508#£Das Steuersystem kann (noch) nicht exakt gelöst werden
+1509#£Das Steuersystem kann (noch) nicht gelöst werden
+1510#£Spezifizieren Sie die zu eliminierenden Variablen, z. B. eliminate([x+y=a; x-y=b]; x)
+1511#£Die zu eliminierenden Variablen müssen Variablen sein, z. B. eliminate([x+y=a; x-y=b; x*y=c]; [x;y])
+1512#£Variablen können aus Ungleichungen nicht eliminiert werden
+1513#£Höchstens können {1} Variablen aus {2} Gleichungen eliminiert werden
+1514#£Wenn {1} eliminiert werden, sind keine Gleichungen mehr übrig (sie sind immer erfüllt)
+1515#£{1} kann (noch) nicht eliminiert werden.
+1516#£{1} kann nicht eliminiert werden (die Abschlüsse sind zu hoch)
+1517#£Geräte stimmen nicht überein: {1}
+1518#£Unbekannte Einheit: {1}
+1519#£Eine Liste
+1520#£ein Vektor
+1521#£eine Matrix
+1522#£Eine Zahl
+1523#£{1} muss mindestens ein Element enthalten
+1524#£Alle Zeilen in einem Array müssen eine gleiche Anzahl von Elementen haben
+1525#£Die Elemente eines Vektors müssen Zahlen oder Ausdrücke sein
+1526#£Man kann {1} nicht {2}{3}
+1527#£Man kann keine Zahl an {1}
+1528#£von anderer Größe
+1529#£Man kann {1} und {2} nicht mit unterschiedlich vielen Elementen multiplizieren
+1530#£Die Vektoren müssen eine gleiche Anzahl von Koordinaten haben
+1531#£Ein Vektor kann nur quadriert werden (das Skalarprodukt mit sich selbst)
+1532#£Du kannst nicht zu {1}
+1533#£Die Funktion kann {1} nicht als Argument nehmen
+1534#£es muss ein Array oder zwei Vektoren haben
+1535#£Die Größe der Nullmatrix muss ganze Zahlen sein
+1536#£ident muss die Größe haben, z. B. ident(3)
+1537#£Die Größe der Einheitsmatrix muss eine ganze Zahl sein
+1538#£Hat muss einen Vektor haben
+1539#£Der Kreuzvektor existiert nur für Vektoren in der Ebene
+1540#£{1} muss zwei Vektoren haben, z. B. {1}(a; b)
+1541#£{1} eines Arrays kann noch nicht berechnet werden
+1542#£Das Kreuzprodukt existiert nur für Vektoren im Raum (3 Koordinaten)
+1543#£Die Determinante von zwei Vektoren existiert nur für Vektoren in der Ebene (2 Koordinaten)
+1544#£{1} muss ein Argument führen
+1545#£length muss eine Liste haben, z. B. length(x)
+1546#£Ein Element hat maximal zwei Indizes, z. B. A[1; 2]
+1547#£Der Index sollte eine ganze Zahl sein: {1}
+1548#£Der Index ist zu groß: {1}
+1549#£Der Index {1} liegt außerhalb der Matrix ({2} Zeilen)
+1550#£Der Index {1} liegt außerhalb der Matrix ({2} Balken)
+1551#£Eine Liste hat nur einen Index, z. B. x[2]
+1552#£Ein Vektor hat nur eine Spalte: Der andere Index muss 1 sein
+1553#£Die Vektoren auf beiden Seiten des Gleichzeichens müssen eine gleiche Anzahl von Koordinaten haben
+1554#£Die Matrizen auf beiden Seiten des Gleichzeichens müssen die gleiche Größe haben
+1555#£Ein Array kann nur einer Matrix entsprechen
+1556#£Ein Vektor kann nicht gleich einer Zahl sein
+1557#£Berechnungen können nicht auf Definitionsfeldern durchgeführt werden. Sie können Ihre untenstehende Definition für eine Berechnung verwenden.
+1558#£und
+1559#£Automatik
+1560#£Genau
+1561#£Numerisch
+1562#£Einheiten auf
+1563#£Einheiten aus
+1564#£LaTeX-Code
+1565#£LaTeX-Codes
+1566#£Gleichung
+1567#£Gleichungen
+1568#£Bild
+1569#£Bilder
+1570#£Argument
+1571#£Argumente
+1572#£Bedeutungsgrad:
+1573#£Die Gesamtsumme aller Zellen ist weniger als 50. {1} Verteilung ist daher in diesem Fall eine schlechte Näherung und das Ergebnis unzuverlässig.
+1574#£Freiheitsgrade:
+1575#£Umwandlung
+1576#£Das Menü anpassen
+1577#£Wähle aus, welche Menüpunkte sichtbar sind
+1578#£Ziffern und Rundung
+1579#£Umschreiben...
+1580#£Gleichung(en) lösen
+1581#£Lösen gekoppelter Differentialgleichungen
+1582#£Wahrscheinlichkeit
+1583#£Ungruppiert
+1584#£Gruppiert
+1585#£Tabelle einfügen
+1586#£Gepflogenheit
+1587#£t-Verteilung
+1588#£Nummerierte Gleichungen
+1589#£Zeigen Sie alles
+1590#£Alles verstecken
+1591#£Nach Level festgelegt
+1592#£Setzt sichtbare Menüpunkte entsprechend dem Mathematikniveau, das du unterrichtet hast, entsprechend
+1593#£Sinus-Fitting
+1594#£Diese Funktion erfordert WordMat+
+1595#£Um auf WordMat+ zuzugreifen, kann Ihre Schule/Organisation:\n eine Partnerschaftsvereinbarung mit Eduap einzugehen.
+1596#£Lesen Sie hier mehr über die weiteren Vorteile einer Partnerschaft:
+1597#£Prüfen Sie, ob Ihre Hochschule bereits eine Partnerschaft abgeschlossen hat
+1598#£Formelsammlungs-Setup
+1599#£Wähle deine Ausbildung
+1600#£Wählen Sie Ihre Fachstufen
+1601#£Du kannst deine Auswahl später immer noch ändern
+1602#£Mathematik:
+1603#£Physik:
+1604#£Chemie:
+1605#£Als Nächstes
+1606#£Show in GnuPlot
+1607#£Funktionen f(x)=...
+1608#£Titel der x-Achse
+1609#£Titel der y-Achse
+1610#£Var
+1611#£Punktgröße:
+1612#£In Excel anzeigen
+1613#£Excel eingebettet
+1614#£Raster
+1615#£Logarithmische X-Achse
+1616#£Logarithmische Y-Achse
+1617#£Bezeichnungen
+1618#£Etikett einfügen
+1619#£Erklärung zur Serie
+1620#£Punkte 2
+1621#£Syntax\nStartpunkt - Vektor\n(startx ; starty)-(dx ; dy)\n\nBeispiele: \n(1,1)-(1,2)     \n  Vektor zeichnen (1.2) von Punkt (1.1)\n\n(1,2)\n  Vektor (1.2) vom Punkt (0.0) zeichnen\n\n(1,5 ; 4,5)\nWenn Dezimalzahlen enthalten sind; wird als Trenner verwendet
+1622#£Neuer Vektor
+1623#£Gleichung 1
+1624#£Gleichung 2
+1625#£Gleichung 3
+1626#£Die Variablen sollten x und y sein
+1627#£Prop
+1628#£Manu
+1629#£unveränderlich. variabel
+1630#£Dep. Variable
+1631#£Integralkurven (Kurven)
+1632#£Spezifizieren Sie Punkte, durch die Lösungspfade gezogen werden sollen.
+1633#£Offen
+1634#£Öffnet ein Fenster, in dem du auf den Punkt klicken kannst, an dem die Integralkurve sein sollte und wo Schieberegler vorhanden sein können, sodass du sehen kannst, wie sich das Richtungsfeld mit dem Schieber ändert
+1635#£Interaktiv
+1636#£Warte!
+1637#£const
+1638#£von
+1639#£zu
+1640#£Sliders
+1641#£Nur Kurven anzeigen
+1642#£Lizenz:
+1643#£Stellen Sie die Schrittlänge automatisch ein
+1644#£Setzt die Anzahl der Schritte auf 500
+1645#£Die Gleichungen werden mit der 4. Ordnung Runge-Kutta gelöst
+1646#£Einfügen berechneter Punkte als Liste im Word-Dokument
+1647#£Man kann entweder eine Variable oder eine Funktion eingeben, abhängig davon. von dem, was in der Gleichung geschrieben steht. d.h. z. Y oder F(X), aber nicht F.
+1648#£Okay, neue Zeile
+1649#£Definitionen an dieser Stelle im Dokument
+1650#£Beispiel: a=5, x>0
+1651#£Beispiel: g, min, cm
+1652#£Dez.
+1653#£Läuft im Browser, aber nicht online
+1654#£Verbindung zu Maxima
+1655#£Verbindet sich mit Maxima über eine .net-DLL-Datei, die die Kommunikation übernimmt
+1656#£Maxima wird durch eine Shell mit wsh ausgeführt. Jede Berechnung ist eine neue Instanz von Maxima. Sie ist etwas langsamer und zeigt kurz ein schwarzes cmd-Fenster an, hängt aber nicht von der DLL-Datei ab.
+1657#£Benötigt WordMat+
+1658#£Scheck-Partnerschaft
+1659#£Aufsteigen (habe es vorher versucht)
+1660#£Zieh nach unten (wird später versucht)
+1661#£Die Triebwerke werden von oben getestet.  \nDer nächste wird verwendet, wenn ein Motor nicht funktioniert.
+1662#£Unbegrenzte Präzision
+1663#£Verlassen Sie sich auf unbegrenzte Präzision (große Zahlen)
+1664#£Maximale Anzahl der Ziffern:
+1665#£Maximale Anzahl von Ziffern in exakten Zahlen
+1666#£Zeitbegrenzung(n):
+1667#£Zeitlimit für eine Berechnung in Sekunden (0 = kein Limit)
+1668#£Wissenschaftliche Notation, n:
+1669#£Wissenschaftliche Notation für Zahlen unter 10^-n (0 = nie)
+1670#£LaTeX-umhüllende Charaktere über eine Gleichung
+1671#£Im Text:
+1672#£Der Text vor dem LaTeX-Code für eine Gleichung im Text, z. B. $
+1673#£Der Text nach dem LaTeX-Code für eine Gleichung im Text, z. B. $
+1674#£Für sich genommen:
+1675#£Der Text vor dem LaTeX kodiert separat für eine Gleichung auf einer Zeile, z. B. \[ oder \begin{equation}
+1676#£Der Text nach dem LaTeX-Code für eine Gleichung auf einer Zeile separat, z. B. \] oder \end{gleichung}
+1677#£Einheiten mit aufrechter Schrift (\mathrm)
+1678#£Entitäten werden nicht erkannt und kursiv geschrieben (\mathrm{m})
+1679#£Doppeldruck Alt+M
+1680#£Du musst genau 3 Winkel/Seiten eingeben, aber nicht nur 3 Winkel. \nAlso: \n1 Seite + 2 Winkel\n2 Seiten + 1 Winkel (möglicherweise 2 Lösungen)\n3 Seiten
+1681#£Wo genau die Antwort gewünscht ist. Kann die Berechnungszeit beeinflussen.
+1682#£Kein LaTeX-Code gefunden. Wählen Sie den Code aus oder platzieren Sie den Cursor in einer LaTeX-Gleichung (z. B. {1} oder {2}).
+1683#£{1} {2} konnte von VBACAS nicht gelesen werden und ist als Text ({3}) im LaTeX-Dokument geschrieben.
+1684#£Die Divergenz {1} erfordert eine Vektorfunktion. Der Gradient von {2} wird {3} geschrieben
+1685#£Die Rotation {1} erfordert eine Vektorfunktion mit 2 oder 3 Koordinaten
+1686#£{1} erfordert, dass {2} ebenso viele Koordinaten wie Variablen hat
+1687#£Die Divergenz {1} eines ausgeschriebenen Vektors erfordert 2 oder 3 Koordinaten (die Variablen x, y und z)
+1688#£"{1}" erscheint bald in WordMat+ für Office.
+1689#£In "{1}" ist ein Fehler aufgetreten.
+1690#£Details
+1691#£Kopieren
+1692#£Einheiten sind eingeschaltet.
+1693#£Einheiten sind ausgeschaltet.
+1694#£Aufgabenbereich anzeigen
+1695#£Die Sprache ändert sich, wenn WordMat+ erneut geöffnet wird.
+1696#£Die kürzeste Form, z. B. (x^2-1)/(x-1) zu x+1 und sin(x)^2+cos(x)^2 zu 1.
+1697#£Die Berechnung dauerte zu lange und wurde gestoppt.
+1698#£WordMat+ für Word (Word desktop und Word Online)\nVersion {1}\n\nEntwicklungsversion: Weitere Funktionen werden kontinuierlich hinzugefügt.
+1699#£Gleichung bearbeiten
+1700#£/ Bruch, ^ Potenz, _ Index, sqrt Quadratwurzel, die Pfeiltasten bewegen den Cursor. Enter: Einfügen. Strg+Enter: Einfügen und berechnen. Esc: Abbrechen.
+1701#£Einfügen und berechnen
+1702#£Klicken Sie im Diagramm, um eine Lösungskurve durch den Punkt zu zeichnen.
+1703#£Nullstellen
+1704#£Extrema
+1705#£Schnittpunkte
+1706#£Punktreihe {1}
+1707#£Koordinaten anzeigen
+1708#£Wählt das Grafikfenster so, dass alle Punkte, Nullstellen, Extrema und Schnittpunkte sichtbar sind, sowie die Achsen, wenn sie nicht weit entfernt sind.
+1709#£Kein Raster
+1710#£Großes Raster
+1711#£Kleines Raster
+1712#£Tangente
+1713#£Zeichnet die Tangente an den Graphen bei den hier eingegebenen x-Werten. Mehrere Werte werden durch ; getrennt
+1714#£Startpunkt
+1715#£Ohne Startpunkt wird der Vektor von (0;0) aus gezeichnet.
+1716#£Nach unten ziehen, um die Zahlen fortzusetzen: 1, 2 ergibt 3, 4 ... Ein Doppelklick füllt bis zur letzten Zeile aus.
+1717#£Geben Sie eine Formel mit x ein, z. B. 2*x, und y wird für die Zeilen von hier nach unten berechnet.
+1718#£Gib die Punkte in der Tabelle ein oder füge sie aus Excel oder einer Word-Tabelle ein.\nZiehe das kleine Quadrat, um die Zahlen weiter nach unten zu führen: 1, 2 ergibt 3, 4 ...\nGeben Sie eine Formel in die y-Spalte, z. B. 2x oder =2x, und y wird für die Zeilen ab hier berechnet.\nMehrere Zellen mit der Maus oder Umschalt markieren und Entf drücken, um sie zu löschen.\nDie Schaltfläche z fügt eine z-Spalte für Punkte im Raum hinzu.
+1719#£Fügt die Tangente einer Funktion als neue Funktion und den Berührpunkt als Punkt ein. Funktion wählen und x eingeben oder auf den Graphen klicken.
+1720#£Im Graphen ziehen, um einen Vektor zu zeichnen.
+1721#£Auf eine Beschriftung in der Tabelle und dann auf den Graphen klicken, um sie zu verschieben.
+1722#£Beobachtung
+1723#£Häufigkeit
+1724#£Relative Häufigkeit
+1725#£Kumulierte Häufigkeit
+1726#£Von
+1727#£Bis
+1728#£Anzahl der Beobachtungen
+1729#£Kleinster Wert
+1730#£Unteres Quartil
+1731#£Median
+1732#£Oberes Quartil
+1733#£Größter Wert
+1734#£Mittelwert
+1735#£Standardabweichung
+1736#£Stichproben-Standardabweichung
+1737#£Beschreibende Statistiken, berechnet mit WordMat:
+1738#£Die Tabelle muss die Beobachtungen enthalten oder die Beobachtungen in der ersten Spalte und ihre Häufigkeiten in der zweiten Spalte.
+1739#£Die Tabelle muss drei Spalten haben: den Anfang der Intervalle, das Ende der Intervalle und die Häufigkeiten.
+1740#£Der Anfang jedes Intervalls muss kleiner sein als sein Ende, und die Intervalle dürfen sich nicht überlappen.
+1741#£Die Häufigkeiten dürfen nicht negativ sein.
+1742#£Geben Sie die Anzahl der verschiedenen Beobachtungen ein, und es wird eine Tabelle erstellt, in der Sie die Beobachtungen und ihre Häufigkeiten eingeben können.\nWenn Sie die Tabelle ausgefüllt haben, wählen Sie {1} oder ein Diagramm im Menü aus.
+1743#£Geben Sie die Anzahl der Intervalle ein, und es wird eine Tabelle erstellt, in der Sie die Intervalle und ihre Häufigkeiten eingeben können.\nWenn Sie die Tabelle ausgefüllt haben, wählen Sie {1} oder ein Diagramm im Menü aus.
+1744#£Diagramm
+1745#£Kein Diagramm
+1746#£Relative Häufigkeit in Prozent
+1747#£Quartile anzeigen
+1748#£Name
+1749#£pro Einheit
+1750#£Gib die Beobachtungen und ihre Häufigkeiten in die Tabelle ein oder füge sie aus Excel oder einer Word-Tabelle ein.
+1751#£Gib die Intervalle und ihre Häufigkeiten in die Tabelle ein oder füge sie aus Excel oder einer Word-Tabelle ein.
+1752#£Geben Sie die Quartile jedes Boxplots ein: kleinster Wert, unteres Quartil, Median, oberes Quartil und größter Wert.
+1753#£Die Quartile müssen in aufsteigender Reihenfolge stehen.
+1754#£Rohdaten
+1755#£Ungruppiert
+1756#£Gruppiert
+1757#£Kum. Häufigkeit
+1758#£In Ungruppiert übertragen
+1759#£In Gruppiert übertragen
+1760#£Intervallbreite
+1761#£Geben Sie die Beobachtungen in die Tabelle ein oder fügen Sie sie aus Excel oder einer Word-Tabelle ein.
+1762#£Zum Boxplot hinzufügen
+1763#£Die Tabelle wird ins Dokument eingefügt, wenn das Fenster geschlossen wird.
+1764#£{1} Beobachtungen liegen außerhalb der Intervalle.
+1765#£Die Intervallbreite muss größer als 0 sein.
+1766#£Punktdiagramm
+1767#£Flächenlegende
+1768#£Zeigt oben rechts ein Feld mit derselben Breite wie das erste Intervall und wie viel Prozent der Beobachtungen es entspricht.
+1769#£Eine Beobachtung auf der Grenze zwischen zwei Intervallen gehört zum unteren Intervall, ]a;b], was dänischer Standard ist, oder zum oberen Intervall, [a;b[.
+1770#£Freiheitsgrade
+1771#£Kumulative Verteilung anzeigen
+1772#£Wählen Sie eine Verteilung.
+1773#£Ein leeres Feld bedeutet keine Begrenzung auf dieser Seite.
+1774#£Geben Sie eine Wahrscheinlichkeit ein, z. B. 0,95 oder 95 %, und der entsprechende Wert wird gefunden.
+1775#£n muss eine ganze Zahl größer als 0 sein.
+1776#£p muss zwischen 0 und 1 liegen.
+1777#£Die Standardabweichung muss größer als 0 sein.
+1778#£Die Anzahl der Freiheitsgrade muss größer als 0 sein.
+1779#£Beobachtet
+1780#£Zweiseitig
+1781#£Linksseitig
+1782#£Rechtsseitig
+1783#£Kritischer Bereich
+1784#£P-Wert
+1785#£Die Nullhypothese wird verworfen.
+1786#£Die Nullhypothese kann nicht verworfen werden.
+1787#£Konfidenzintervall für p
+1788#£Kein Test
+1789#£Erwartet
+1790#£Kritischer Wert
+1791#£Prüfgröße
+1792#£Ergebnis einfügen
+1793#£Es muss mindestens zwei Zeilen mit einer beobachteten Anzahl und einer erwarteten Anzahl geben, die größer als 0 ist.
+1794#£Mit WordMat wird ein Goodness-of-Fit-Test durchgeführt
+1795#£Auf dem Signifikanzniveau {1}% kann die Nullhypothese, dass die Beobachtungen der erwarteten Verteilung folgen, verworfen werden.
+1796#£Auf dem Signifikanzniveau {1}% kann die Nullhypothese nicht verworfen werden. Es gibt daher keine Hinweise darauf, dass die Beobachtungen von der erwarteten Verteilung abweichen.
+1797#£Erwartete Werte:
+1798#£Testen, ob die gruppierten Daten normalverteilt sind
+1799#£{1} und {2} aus den Daten
+1800#£Anpassen
+1801#£Es muss mindestens {1} Intervalle geben, wenn Mittelwert und Standardabweichung aus den Daten geschätzt werden.
+1802#£Der Test verwendet die gruppierten Daten auf der Registerkarte {1}. Geben Sie sie unter {2} ein und setzen Sie ein Häkchen bei {3}, damit das Histogramm mit der Normalverteilung verglichen werden kann.
+1803#£Gibt jeder Kurve ein Feld z(t), sodass sie im Raum gezeichnet wird.
+1804#£Die Variablen müssen x und y sein, im Raum auch z
+1805#£Gleichungen als Bilder
+1806#£Word Online benötigt mehrere Sekunden, um eine Gleichung zu schreiben. Mit dieser Einstellung fügt WordMat+ neue Gleichungen und Ergebnisse als kleine Bilder ein, mit denen es wie mit Gleichungen rechnet. Die Bilder können im Menü {1} wieder in Gleichungen umgewandelt werden.
+1807#£Gleichungen in Bilder umwandeln
+1808#£Wandelt die Gleichungen der Auswahl, oder des ganzen Dokuments, wenn nichts ausgewählt ist, in Bilder um, die Word Online viel schneller anzeigt und ändert. WordMat+ rechnet mit den Bildern wie mit Gleichungen.
+1809#£Bilder in Gleichungen umwandeln
+1810#£Wandelt die Bilder von Gleichungen in der Auswahl, oder im ganzen Dokument, wenn nichts ausgewählt ist, wieder in echte Gleichungen um, zum Beispiel bevor das Dokument abgegeben wird.
+1811#£In Bilder umgewandelte Gleichungen: {1}
+1812#£In Gleichungen umgewandelte Bilder: {1}
+1813#£Nicht konvertiert (unverändert): {1}
+1814#£Es gibt keine Gleichungen zum Umwandeln.
+1815#£Es gibt keine Bilder von Gleichungen zum Umwandeln.
+1816#£Gleichungen als Bilder werden nur in Word Online verwendet.
+1817#£Die Gleichungen konnten nicht umgewandelt werden.
+1818#£Mathematik
+1819#£Physik
+1820#£Schließen, wenn eine Formel gewählt wird
+1821#£Halte Strg gedrückt, wenn du auf eine Formel klickst, und die Formelsammlung schließt sich nicht.
+1822#£2 einfügen
+1823#£Die Formel wird zweimal eingefügt: einmal für die Dokumentation und einmal, bei der man Zahlen eingeben kann.
+1824#£Konstanten einfügen
+1825#£In Physik und Chemie werden die physikalischen Konstanten als Zahlen in die zweite Formel eingefügt.
+1826#£Im Aufgabenbereich anzeigen
+1827#£Die Formelsammlung wird im Fenster neben dem Dokument angezeigt, statt in einem großen Fenster. Sie gilt ab dem nächsten Öffnen der Formelsammlung.
+1828#£Suche:
+1829#£Hinweis: Die Sammlung von Chemieformeln ist noch nicht vollständig.
+1830#£Geben Sie das Suchfeld ein oder klicken Sie auf ein Thema.
+1831#£Klicken Sie auf eine Abbildung, um sie ins Dokument einzufügen.
+1832#£Word Online kann die Abbildungen anzeigen, aber nicht bearbeiten. Öffne das Dokument in Word für Windows oder Mac, um sie zu ändern.
+1833#£Zeigt Figuren im Fenster: Dreiecke, Einheitskreis, Koordinatensysteme und Monotonielinien. Klicken Sie auf eine Abbildung, um sie ins Dokument einzufügen.
+1834#£Die Datei {1} wurde heruntergeladen. Sie befindet sich in den Downloads des Browsers.
+1835#£Verwende Word als LaTeX-Editor. \n\nDu kannst LaTeX-Befehle direkt ins Dokument eingeben, um volle Kontrolle zu erhalten, oder die Funktionen von Word nutzen und WordMat+ in LaTeX konvertieren lassen. \n\nDie tex-Datei wird auf den Computer heruntergeladen. Wenn das Dokument Bilder enthält, wird eine Zip-Datei mit der tex-Datei und den Ordnerbildern heruntergeladen.
+1836#£Erstellt den LaTeX-Code als Tex-Datei, die auf den Computer heruntergeladen wird, sodass der Code in einem LaTeX-Programm überprüft und angepasst werden kann
+1837#£Speichern
+1838#£Um die x-Achse
+1839#£Um die y-Achse
+1840#£Dreht die Graphen der angehakten Funktionen um 360 Grad um die x-Achse oder die y-Achse, sodass ein Rotationskörper in 3D entsteht. Jeder Graph wird von seinem Xmin bis zu seinem Xmax gedreht.
+1841#£Formel
+1842#£Konvertieren
+1843#£Seitenbereich
+1844#£Zeigt den Seitenbereich mit den Einstellungen an oder schließt ihn, wenn er geöffnet ist.
+1845#£WordMat+ verwendet JSXGraph für Graphen und MathLive für die Eingabe von Gleichungen. Beide haben die MIT-Lizenz.
+1846#£Lizenzen
+1847#£abschnittsweise
+1848#£In einer Klammer: @ oder Alt+Enter erzeugt eine neue Zeile, & eine neue Spalte.
+1849#£n-te Wurzel
+1850#£Matrix
+1851#£bestimmtes Integral
+1852#£unbestimmtes Integral
+1853#£In einer Klammer: @ oder Alt+Enter erzeugt eine neue Koordinate.
+1854#£Summe
+1855#£Produkt
+1856#£WordMat+ ermöglicht es, mathematische Berechnungen in Word durchzuführen.\nWordMat wird von Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1} hergestellt.
+1857#£JavaScript-CAS verwenden (schneller)
+1858#£Das CAS von WordMat+ wird von der JavaScript-Engine QuickJS ausgeführt. Ohne Häkchen rechnet VBACAS.
+1859#£Integriertes CAS: {1}
+1860#£JavaScript-Engine: QuickJS, © Fabrice Bellard, Charlie Gordon u. a. (MIT-Lizenz)

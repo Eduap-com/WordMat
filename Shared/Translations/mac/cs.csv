@@ -933,3 +933,929 @@
 932#£Aktualizace na nejnovejsí beta verzi
 933#£Meli byste si bt vedomi, ze v beta verzích mohou bt chyby. Jsou primárne urceny k testování. Doporucuje se pouzívat tuto funkci predevsím podle pokynu Eduap
 934#£Zobrazuje graf pro levou a pravou stranu rovnice ve stejném souradnicovém systému. Reseními rovnice jsou x-hodnoty prusecíku. Nezapomente priblízit a oddálit.
+935#£Sber vzorcu
+936#£Otevre sbírku vzorcu s vzorci z matematiky, fyziky a chemie. Kliknete na vzorec a vlozte ho do dokumentu.
+937#£Otevre se dialog, kde si vyberete, jak se vybran vraz nebo rovnice prepsá: redukce, faktorizace, rozvinutí, dokoncení na druhou moc nebo desetinné císlo. Muzete také poskytnout docasné definice a vybrat vstup. Vsledek je zapsán na nov rádek.
+938#£Redukuje vybran vraz nebo obe strany rovnice na nejkratsí formu, napr. (x^2-1)/(x-1) na x+1 a sin(x)^2+cos(x)^2 na 1. Vsledek je zapsán na nov rádek.
+939#£Faktorizuje vybran vraz, napr. x^2-1=(x-1)(x+1). Vsledek se zapisuje za vrazem stejne jako v Calculate.
+940#£Násobte závorky ve zvoleném vrazu, napr. (x+1)^2=x^2+2x+1. Vsledek se zapisuje za vrazem, jako v Calculate.
+941#£Prepíse kvadratickou polynomiální osu^2+bx+c na a(x+b/(2a))^2+c-b^2/(4a), napr. x^2+6x+5 na (x+3)^2-4. Koeficienty mohou bt písmena. Pracuje také na rovnici, napr. rovnice kruhu x^2-4x+y^2+14y+53=25 na (x-2)^2+(y+7)^2=25. Vsledek je zapsán na novou rádku.
+942#£Odesle vybran vraz prímo do Maxima a vlozí vsledek jako novou rovnici. Vraz musí bt zapsán v syntaxi Maximy, napr. integrate(x^2,x) nebo factor(x^2-1). Pokud není nic vybráno, príkaz lze zapsat do polícka. Vyzaduje WordMats Maxima.
+943#£Testovací rovnice
+944#£Zkoumá, zda je oznacená rovnice pravdivá pro vsechny hodnoty promennch, napr. sin(x)^2+cos(x)^2=1. Nejprve se pokusí o presn dukaz, jinak je rovnice testována numericky. Odpoved je pravda, nepravda (s protikladem), pravdepodobne pravdivá nebo neznámá, a je zapsána na nov rádek.
+945#£Odebráním jedné nebo více promennch ze soustavy rovnic: vyberte rovnice a vyberte promenné, které mají bt odstraneny (méne nez je pocet rovnic). Napríklad x=2t+1 a y=t^2 s odstranením t dává y=(x-1)^2/4.
+946#£Resí jednu nebo více svázanch diferenciálních rovnic numericky, napr. x'=y a y'=-x. Vsledek lze zobrazit jako graf v GeoGebre, vlozit jako seznam nebo tabulku, nebo odeslat do Excelu.
+947#£Rozhodne.
+948#£Vlozí 'Define:' na zacátek rovnice u kurzoru, nebo novou rovnici s ním. Definice platí ve vpoctech níze v dokumentu.
+949#£Na nov rádek vlozí 'Delete definitions:'. Vse uvedené definice se v nizsích vpoctech nepouzívají.
+950#£Zobrazuje graf vybranch funkcí/rovnic a bodu. Program grafu se vybírá v nastavení nebo rozbalením tohoto tlacítka.
+951#£Grafy
+952#£Zobrazuje grafy a body v GeoGebra: v okne WordMat GeoGebra s WordMat+, jinak v prohlízeci. Internet není potreba.
+953#£Otevre GeoGebra 5 a prenese vybrané funkce a definice.
+954#£Otevírá (nebo vkládá) WordMat Excel tabulky pro grafy a body s vybranmi funkcemi a body v tabulce.
+955#£Ukazuje telo vybranch funkcí v GeoGebra. Graf predpisu je otocen o 360 stupnu kolem osy x, aby vznikl 3D objekt. Mnozina definic se zapisuje za cárkou, napr. f(x)=x^2, 0<=x<=2.
+956#£Statistiky Tabulky
+957#£Prizpusobuje funkci, kterou si sami napísete, napr. f(x)=a·e^(b·x)+c, na body v tabulce. Parametry jsou promenné jiné nez nezávislá promenná.
+958#£Excel regrese
+959#£Vlozi nové matematické pole. V císlované rovnici: ocísluj rovnici.
+960#£Vlozi nové matematické pole, které je automaticky ocíslováno. Pokud je kurzor v rovnici, je ocíslován. Pozice a typ císla jsou vybrány v Nastavení.
+961#£Vlozí odkaz na pojmenovanou rovnici: císlo rovnice, které se aktualizuje, kdyz se císla zmení.
+962#£Císlovaná rovnice, ve které se kurzor nachází, má prirazeno konkrétní císlo. Následující rovnice následují.
+963#£Otevírá se dialog LaTeX, kde lze dokument prevést na .tex soubor nebo PDF (vyzaduje MikTex). Prikládací znaky pro prevedené rovnice jsou vybrány v Moznostech, Notace.
+964#£Prevést rovnici do LaTeX
+965#£Nahrazuje rovnici na kurzoru jejím LaTeX kódem. Obklopující znaky pro rovnice v rádku a rovnice na rádku jsou vybírány samostatne v Nastavení, Notace.
+966#£Prevod LaTeXu na rovnice
+967#£Prevádí LaTeX kód ve vberu na pole rovnic. Pokud není nic vybráno, LaTeX rovnice se prevede kurzorem. Kód se nachází na $...$, \(...\), $$...$$, \[...\], \begin{align} atd., a obklopující znaky pod Nastavení, Notace. Vber bez obalování znaku se prevede na jednu rovnici. Alt+T mimo rovnici delá totéz.
+968#£Dokument
+969#£Prevod do LaTeX pdf souboru
+970#£Prevede cel dokument do LaTeXu, prelozí ho do pdf souboru pomocí MikTex pdflatex a otevre ho ve vchozí PDF aplikaci. MikTex musí bt nainstalován.
+971#£Prevod do LaTeX .tex souboru
+972#£Prevede cel dokument na .tex soubor a otevre jej ve vchozím .tex souborovém programu (TexWorks, TexMaker, ...). Soubor je umísten do slozky vedle dokumentu.
+973#£Prevod do HTML
+974#£Prevede vber nebo cel dokument na html stránku, která se otevre v prohlízeci. Rovnice jsou napsány v LaTeXu a zobrazeny v MathJax (vyzaduje internet), obrázky jsou vlozeny do stránky. Soubor je umísten do slozky vedle dokumentu a html kód bez <head> nej je zkopírován do schránky, aby jej bylo mozné napríklad vlozit do vlastního HTML bloku ve WordPressu.
+975#£Prevod na Markdown
+976#£Prevádí znackování nebo cel dokument do souboru markdown (.md): nadpisy, seznamy, uvozovky, tucne, kurzíva, preskrtnutí, kód, odkazy, tabulky a poznámky pod carou a rovnice jako LaTeX ($...$ a $$...$$). Obrázky se ukládají jako soubory ve stejné slozce. Slozka se umístí vedle dokumentu a otevre, pricemz text se zkopíruje do schránky.
+977#£Prevést markdown do formátování Word
+978#£Promení markdown ve vberu nebo v celém dokumentu na formátování Wordu: nadpisy (#), seznamy (- a 1.), citace (>), tucné písmo (**), kurzíva (*), preskrtnutí (~~), kód (' a ''''), odkazy, obrázky, tabulky, poznámky pod carou a vodorovné cáry, a LaTeX ($...$ a $$...$) se mení v rovnice.
+979#£Vyberte si, jak príkaz by mela kazdá klávesová zkratka (Alt+M, Alt+B, Alt+L...) vykonávat, a podívejte se na zkratky ve Wordu pro matematická pole.
+980#£O WordMat+
+981#£Index v {1}
+982#£Funkce {1} postrádá argument. Napríklad zadejte {1}(x) nebo {1}^(-1)(x) pomocí sablony funkce ve Wordu
+983#£Chybí jedna polozka v seznamu
+984#£Základní císlo pro logaritmus musí bt kladné a lisit se od 1
+985#£Chybí závorka pro {1}\n\nZávorka, která nemá pocátecní závorku, je zvraznena v níze uvedeném vrazu s dalsími mezerami kolem: \n\n      {2}  )  {3}
+986#£Závorka {1} neodpovídá {2}\n\nZávorky jsou ve vrazu zvrazneny pomocí extra mezer: \n\n      {3}  {1} {4}  )  {5}
+987#£Chybí poslední pavouk pro {1}\n\nZávorka, která postrádá záverecnou závorku, je zvraznena v níze uvedeném vrazu s dalsími mezerami kolem: \n\n      {2}  {1} {3}
+988#£Syntaxické chyby\n{1} operátor nesmí bt umísten na zacátek vrazu.
+989#£Chyba inverzní trigonometrické funkce: {1}\nArgument musí bt mezi -1 a 1
+990#£Syntaxické chyby\n{1} operátor nesmí bt umísten na konec vrazu.
+991#£Císlo je prílis velké na to, aby bylo mozné prevést na desetinné císlo
+992#£Delení nulou
+993#£Doslo k chybe. Nemohu sem vlozit vzorec. \nZkuste zavrít vsechny Word dokumenty a restartovat Word. \n\nPopis chyby: \n{1}
+994#£Tabulka neobsahuje zádná císla. Musíte vytvorit tabulku se dvema sloupci: x-hodnoty v levém sloupci a y-hodnoty v pravém sloupci.
+995#£Musíte vytvorit tabulku se dvema sloupci. X hodnot v levém sloupci a hodnoty Y v pravém sloupci.
+996#£Lineární regrese provedená pomocí WordMatu. WordMat:
+997#£Exponenciální regrese provedená pomocí WordMatu. WordMat:
+998#£Regrese potencie provedená pomocí WordMat:
+999#£Specifikujte rád polynomiální regrese (1-{1})\n\n(Maximální poradí je urceno poctem bodu)
+1000#£Poradí musí bt mezi 1 a {1}
+1001#£Polynomiální regrese stupne {1} provádená pomocí WordMatu. WordMat:
+1002#£Krízová tabulka musí obsahovat alespon 2 rádky a 2 sloupce císel.
+1003#£{1} - test koherence se provádí pomocí WordMat WordMat
+1004#£P-hodnota: {1} = {2} %
+1005#£Na úrovni vznamnosti {1} % lze hypotézu 0, ze neexistuje korelace, odmítnout. Tj. Existuje korelace mezi temito dvema promennmi.
+1006#£Na úrovni vznamnosti {1} % nelze hypotézu 0 odmítnout. Proto neexistují dukazy, ze by mezi temito dvema promennmi existovala korelace.
+1007#£Existují ocekávané hodnoty mensí nez 5 nebo celkov soucet vsech bunek je mensí nez 50. Rozdelení {1} je proto v tomto prípade spatnou aproximací a vsledek je nespolehliv. V nekterch prípadech lze datov materiál ucinit pouzitelnm vytvorením jiného seskupení.
+1008#£P-hodnota:
+1009#£Q-hodnota:
+1010#£Kritická Q-hodnota:
+1011#£Excel soubor WordMat {1} nebyl nalezen. Funkce vyzaduje instalaci WordMatu.
+1012#£Vkládání vnoreného Excelu...
+1013#£Pri pokusu o vlození excelovch tabulek doslo k chybe.
+1014#£Chyba pri ctení souboru: {1}
+1015#£GeoGebra 5 nebylo mozné otevrít: {1}
+1016#£GeoGebra 5 není na vasem pocítaci nainstalována. \n\nChcete stáhnout GeoGebra 5? (Ne: graf je zobrazen v GeoGebra Calculator Suite)
+1017#£GeoGebra se stáhne do vaseho prohlízece. Jdete do Downloads a spustte instalátor.
+1018#£Pri pokusu o otevrení doslo k chybe: {1}
+1019#£Tato verze WordMat+ sama nekontroluje nové verze. Nyní budete presmerováni na stránku ke stazení.
+1020#£WordMat+ nemuze na tomto pocítaci zkontrolovat novou verzi (chybí MathMenu.dll WordMatu nebo starsí verzi). Nyní budete presmerováni na stránku ke stazení.
+1021#£Uz máte nejnovejsí verzi WordMat+ v.{1}
+1022#£Je pripravena nová verze WordMatu ke stazení. \nNovinky:  \n{1}\n\nKliknete na OK pro spustení aktualizace.
+1023#£Nová verze {1}
+1024#£Je pripravena nová verze WordMatu ke stazení. \nNovinky:  \n{1}\nNyní budete presmerováni na stránku ke stazení
+1025#£Pri kontrole aktualizace doslo k chybe. Nyní budete presmerováni na web, kde muzete zjistit, zda je k dispozici nová aktualizace. Aktuální verze je: {1}
+1026#£Aktualizace nelze na tomto pocítaci automaticky stáhnout (chybí MathMenu.dll WordMatu nebo je starsí verze). Nyní budete presmerováni na stránku ke stazení.
+1027#£Stahování instalacního souboru
+1028#£Instalacní soubor nemá platn digitální podpis od Eduap. Byl opet smazán.
+1029#£Instalacní soubor nebyl správne stazen
+1030#£Instalacní soubor byl stazen. \nKliknete na OK pro spustení aktualizace. Budete vyzváni k ulození a zavrení Wordu.
+1031#£Instalace nebyla zahájena (chyba {1}).
+1032#£Behem aktualizace doslo k chybe (chyba {1}).
+1033#£Tato verze WordMat+ nemuze stahovat ani instalovat aktualizace. Nyní budete presmerováni na stránku ke stazení.
+1034#£Aktualizace na beta verzi vyzaduje WordMat+.
+1035#£Chcete zacít instalovat beta verzi?
+1036#£Aktualizace beta
+1037#£Pri instalaci beta verze doslo k chybe: {1}
+1038#£Stránku nákupu nelze na tomto pocítaci otevrít (chybí MathMenu.dll WordMatu nebo je starsí verze). Znovu nainstalujte WordMat.
+1039#£Tento príkaz zatím není dostupn ve WordMat+. V sekci Zkratky vyberte jin príkaz pro dan klíc.
+1040#£Predchozí vsledek
+1041#£WordMat+: pred rovnicí není zádn vsledek.
+1042#£WordMat+: dalsí vsledky nejsou. Klepnete znovu pro nejblizsí údaje.
+1043#£Doslo k chybe: {1}
+1044#£Vsledek nebyl realizován.
+1045#£Instalacní soubor byl stazen. \nKliknete na OK pro spustení aktualizace
+1046#£Server Eduap vrátil chybu. \nDoufejme, ze je to jen docasn problém. Pokud problém pretrvává a máte platnou licenci WordMat+, kontaktujte prosím eduap@eduap.com\n\nChyba: wordmatlicense selhala
+1047#£Zádn internet
+1048#£WordMat+ nemuze licenci zkontrolovat, protoze MathMenu.dll WordMatu nelze na tomto pocítaci pouzít. \n\nSoubor chybí, jedná se o starsí verzi, nebo je blokován bezpecnostními nastaveními (antivir, Endpoint Protection). \n\nNainstalujte WordMat znovu nebo kontaktujte své IT oddelení. Do té doby bude WordMat+ fungovat, jako by nemel licenci.
+1049#£Kliknete dvakrát na Povolit po zavrení tohoto okna\nStací to udelat jen jednou.
+1050#£Oprávnení pro WordMat
+1051#£GeoGebra matematické aplikace nenalezeny
+1052#£Programové soubory nenalezeny
+1053#£Sine regrese vyzaduje aktivní licenci WordMat+.
+1054#£Sinusová regrese provedená pomocí WordMat (v {1}): WordMat (v ):
+1055#£Excel regrese...
+1056#£Excel soubor WordMat Graphs.xltm nebyl nalezen. Excelová regrace vyzaduje instalaci WordMatu.
+1057#£Pri pokusu o vlození Excel tabulek doslo k chybe. Muze to bt zpusobeno tím, ze Excel dríve spadl. Zavrete, otevrete Excel tabulky a pak otevrete Excel pred dalsím pokusem pres WordMat.
+1058#£{1} má nekolik nedefinovanch promennch. Nezávislou promennou nelze identifikovat. Pouzijte x nebo t jako nezávislou promennou.
+1059#£Musí existovat alespon 3 datové body.
+1060#£Sinová regrese
+1061#£Nepodarilo se odhadnout frekvenci pomocí FFT.
+1062#£vystupuje s WordMat{1}:
+1063#£Model nezahrnuje nezávislou promennou {1}
+1064#£Model nemá zádné parametry (promenné krome {1})
+1065#£Musí existovat alespon tolik bodu, kolik parametru ({1})
+1066#£Vlastní regrese vyzaduje Maxima, pokud není aktivní licence WordMat+.
+1067#£Regrese parametry nenasla. Zkuste s jinmi vchozími odhady
+1068#£Rozsírení {1}
+1069#£Gratuluji! \nVase skola se prihlásila do partnerství a WordMat+ je nyní aktivován.
+1070#£Úspech
+1071#£Bohuzel\nVase skola jeste nepodepsala partnerství.
+1072#£Zádné partnerství
+1073#£xmin musí bt >0, aby se pouzila logaritmická osa x.
+1074#£YMIN musí bt >0, aby se pouzívala logaritmická osa y.
+1075#£Graf nebylo mozné vlozit: {1}
+1076#£WordMat+ aktivován pro {1}
+1077#£Verze: {1}
+1078#£WordMat+ umoznuje provádet matematické vpocty ve Wordu. Vpocty provádí CAS, kter je soucástí WordMat+, takze není potreba instalovat zádné dalsí programy. \nWordMat vyrábí Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1079#£Úspech!
+1080#£Data chybí
+1081#£Pocátecní hodnota {1} není císlo
+1082#£Start, konec a délka kroku by mely bt císla
+1083#£Diferenciální rovnice nebylo mozné vyresit: {1}
+1084#£Vyberte alespon jednu promennou k zobrazení
+1085#£Prílis mnoho bodu pro GeoGebru. Zvolte delsí délku kroku.
+1086#£Excel se nepodarilo otevrít: {1}
+1087#£Start není císlo
+1088#£Konec není císlo
+1089#£Délka kroku není císlo
+1090#£Jsou {1} kroky. Pravdepodobne to v GeoGebre nefunguje s tolika kroky.
+1091#£Nemuzete rovnici vyresit pro {1} a zároven ji definovat.
+1092#£Diferenciální rovnice:
+1093#£Pocátecní podmínka:
+1094#£Pojmenované rovnice
+1095#£Vyberte rovnici, na kterou se chcete odvolat, a kliknete na OK (nebo dvojité kliknutí). Odkaz se stává císlem rovnice a aktualizuje se, kdyz se císla zmení.
+1096#£Pro pozdejsí vlození odkazu na rovnici vyberte 'Vlozit odkaz na rovnici' pod 'Nová rovnice'.
+1097#£Restart Maxima
+1098#£Pouzívejte Word jako LaTeX editor. \n\nMuzete zadat LaTeX príkazy prímo do dokumentu pro plnou kontrolu, nebo pouzít funkce Wordu a nechat WordMat+ prevést do LaTeXu. \n\nPro vytvorení pdf souboru je nutné nainstalovat MikTex. Pokud chybí, budete presmerováni na instalaci. \n\nVedle dokumentu se vytvorí slozka ('document name-Latex') s tex souborem a obrázky.
+1099#£Podporované formátování: \n- Nadpisy (styly) se stávají sekcemi a podsekcemi: \n   Název = kapitola (trída dokumentu, kniha nebo zpráva; clánek: název dokumentu)\n   Nadpis 1 = sekce, nadpis 2 = podsekce, nadpis 3 = podpodsekce\n- Tucné, kurzívní a podtrzené písmo\n- Císlo stránky zapnuto/vypnuto jako v dokumentu\n- Rovnice: inline, císlované a neocíslované (prikládající znaky pod Nastavení, Notace)\n- Odrázkové seznamy (odrázky a císla)\n- Tabulky\n- Obrázky, tvary a diagramy\n- Bibliografie
+1100#£Nastavení LaTeXu
+1101#£Trída dokumentu:
+1102#£Velikost písma:
+1103#£Pouzijte okraje Wordu
+1104#£Pouzijte okraje dokumentu místo vchozích okraju LaTeXu (geometrie balícku)
+1105#£Titulní stránka
+1106#£Samostatná titulní stránka s názvem dokumentu a autorem dokumentu
+1107#£Obsah
+1108#£Samostatná stránka obsahu za titulní stránkou
+1109#£Císlované úseky
+1110#£Nadpisy jsou ocíslovány
+1111#£Velikost písma pro prost text. Velikost písma ve Wordu není pouzita
+1112#£LaTeX Preambule
+1113#£Automaticky generované:
+1114#£Vlastní:
+1115#£Mazu vlastní preambuli
+1116#£Vytvárí LaTeX kód jako tex soubor a otevírá jej ve vchozím programu pro tex soubory (TexWorks, TexMaker...), aby bylo mozné kód zkontrolovat a upravit
+1117#£Vytvárí LaTeX dokument jako pdf soubor pomocí MikTex. MikTex, kter musí bt nainstalován. Mel by bt pouzíván pouze pro jednoduché dokumenty
+1118#£Pockej...
+1119#£{1}... (tvuj vlastní úvod) ... \n\n{2}
+1120#£Zvolte zpusob, jak frázi parafrázovat.
+1121#£Vstupní jednotky:
+1122#£Redukovat
+1123#£Faktor
+1124#£Vkládá mimo závorky, napr. x^2-1 az (x-1)(x+1).
+1125#£Vynásobte závorky, napr. (x+1)^2 na x^2+2x+1.
+1126#£Napr. x^2+6x+5 az (x+3)^2-4, také rovnice kruznice.
+1127#£Vsechna desetinná císla jsou prevedena na zlomky a vsledek je presn.
+1128#£Vlozte na stejn rádek
+1129#£Vsledek se zapisuje za vrazem se znaménkem rovnosti (ne rovnicí)
+1130#£Logaritmick vstup
+1131#£Auto
+1132#£Vyberte promenné, které chcete odstranit.
+1133#£Maximálne lze z {2} rovnic vyloucit {1} promennch.
+1134#£Vyberte maximálne {1} promennch, protoze existuje {1} rovnic.
+1135#£Odstrante maximálne {1} promennch
+1136#£Nebo je napiste sami oddelené cárkami
+1137#£Vyberte az {1} promennch
+1138#£Nebo je napiste oddelene cárkami (ostatní jsou automaticky vybrány)
+1139#£Odstrante promenné
+1140#£Vyresit rovnici
+1141#£Rovnice lze v podstate resit dvema ruznmi zpusoby. Pokud narazíte na problémy s rovnicí, muze bt dobr nápad zkusit jinou metodu.
+1142#£Resení se nacházejí "hádáním" mnoha ruznch resení. Metoda funguje prakticky na vsech rovnicích, ale resení lze prehlédnout a lze najít falesná resení.
+1143#£Varování: Zarízení jsou zapnutá. \nPozor na promenné, které jsou jednotkami, napr. A, C, F, H, J, K, L, N, S, T, V, W, m, g, u, s
+1144#£Casov limit, pocet císlic a n pro vedeckou notaci musí bt císla.
+1145#£Casov limit musí bt alespon 0, pocet císlic alespon 20 a n pro vedeckou notaci celé císlo od 0 do 100.
+1146#£Vyberte alespon jednu aplikaci CAS.
+1147#£Zálozní slozka je: {1}
+1148#£WordMat+ je zapnut.
+1149#£To vyzaduje WordMat+.
+1150#£Nastavení se resetuje.
+1151#£Desetinná císla
+1152#£Dokument {1} Markdown
+1153#£Markdown {1} Word
+1154#£WordMatuv trojúhelníkov resic se pouzívá se vstupem:
+1155#£Protoze kosinová relace je vse vyresena pro
+1156#£Kvadratické doplnení vyzaduje kvadratick polynom
+1157#£{1} musí mít dve císla, napr. binomial(7; 2)
+1158#£Musí existovat alespon dve rovnice, z nichz je treba vyloucit, napr. eliminate([x=2t+1; y=t^2]; t)
+1159#£eliminate vyzaduje vyloucení rovnic a promennch, napr. eliminate([x=2t+1; y=t^2]; t)
+1160#£TestTF vyzaduje rovnici
+1161#£Vraz se stává prílis velkm na násobení
+1162#£binomial (n; r) vyzaduje n{1}0
+1163#£Predpoklad musí bt nerovnost, napr. x>0: {1}
+1164#£Predpoklad musí bt nerovnost mezi promennou a císlem, napr. x>0
+1165#£Hodnota v predpokladu nelze vypocítat: {1}
+1166#£Prím odmocnina záporného císla není definována
+1167#£Mocnina záporného císla není pro tento exponent definována
+1168#£Císlo je prílis velké
+1169#£Ln a log jsou definovány pouze pro kladná císla
+1170#£diff by mely mít 1 az 3 argumenty: diff(vraz; x; n)
+1171#£Druhm parametrem v diff musí bt promenná, napr. diff(x^2; x)
+1172#£Tretí parametr v diff musí bt celé císlo
+1173#£Tretí parametr v diferenciálu by mel bt císlo od 0 do 100
+1174#£Urceme, podle které promenné rozlisovat, napr. diff(vraz; x)
+1175#£{1} zatím nelze rozlisit
+1176#£Zapiste limitní hodnotu jako lepidlo pomocí x{1}a níze
+1177#£Po lepidle chybí vzhled
+1178#£Kusová funkce musí mít v kazdém rádku vraz a podmínku
+1179#£Funkce po cástech zde není definována (zádná z podmínek není splnena)
+1180#£Polární notace r{1}v vyzaduje zapnutí komplexních císel
+1181#£Napiste komplexní císlo v polární forme, napríklad r{1}v
+1182#£{1} musí mít jeden argument, napr. {1}(3+2i)
+1183#£Argument 0 není definován
+1184#£Rovnice nelze rozdelit na reálnou a imaginární cást
+1185#£Vsechna komplexní císla jsou resení
+1186#£Rovnice má nekonecne mnoho resení ({1} je na krivce)
+1187#£Druhá odmocnina z {1} není nalezena
+1188#£Znám {1} není znám
+1189#£Mnozina definic pro {1} muze obsahovat pouze {2}: {3}
+1190#£Mnozina definic pro {1} musí obsahovat {2}: {3}
+1191#£Definice postrádá rovné znaménko: {1}
+1192#£Není to definice: {1}
+1193#£Definice není úplná: {1}
+1194#£{1} je príkaz a nelze jej definovat
+1195#£Parametry v definici funkce musí bt promenné, napr. f(x)=2x+1: {1}
+1196#£Vestavenou funkci nelze definovat: {1}
+1197#£{1} je konstanta a nelze ji definovat
+1198#£Levá strana definice musí bt jméno nebo funkce, napr. a=5 nebo f(x)=2x+1: {1}
+1199#£Indexová {1} je mimo matici {2} ({3} rádku)
+1200#£Indexová {1} je mimo maticovou {2} ({3} cárek)
+1201#£Indexová {1} je mimo {2} ({3} polozek)
+1202#£Definice pouzívá sama sebe (rekurzivní definici)
+1203#£Funkce {1} musí mít {2} argument(y)
+1204#£Pouze funkci jedné promenné lze rozlisit stítkem: {1}
+1205#£{1} není definována pro {2} (mnozina definic je {3})
+1206#£{1} nelze pouzít jako pocítadlo, protoze {1} je definováno. Smazte definici nebo pouzijte jin název.
+1207#£Pro {1} nelze najít práh, protoze {1} je definován. Smazte definici nebo pouzijte jin název.
+1208#£Vkládání po {1} nelze provést, protoze {1} je definováno. Smazte definici nebo pouzijte jin název.
+1209#£Derivace podle {1} nelze rozlisit, protoze {1} je definováno. Smazte definici nebo pouzijte jin název.
+1210#£Prílis {1} nelze vyresit, protoze {1} je definováno. Smazte definici nebo pouzijte jin název.
+1211#£Tento vraz nelze zobrazit v GeoGebra: {1}
+1212#£GeoGebra nelze pouzít pro vraz ve WordMat+
+1213#£GeoGebra nelze spustit (MiniBrowser WordMatu)
+1214#£GeoGebra nelze spustit (WordMatuv AppleScript)
+1215#£GeoGebra byla zastavena, protoze vpocet trval více nez {1} sekund
+1216#£GeoGebra není nainstalovaná (geogebra-math aplikace WordMatu)
+1217#£GeoGebra nelze spustit (chybí WebViewWrap ve WordMatu)
+1218#£GeoGebra nelze spustit
+1219#£GeoGebra se na zarízení nemuze spolehnout
+1220#£GeoGebra to neumí vypocítat: {1}
+1221#£GeoGebra zde nelze pouzít pro {1}
+1222#£Testovací rovnice vyzaduje rovnici
+1223#£GeoGebra nelze pouzít pro tuto diferenciální rovnici
+1224#£GeoGebra nemuze tuto podmínku pouzít
+1225#£GeoGebra tyto termíny pouzívat nemuze
+1226#£GeoGebra nemuze vyresit diferenciální rovnici
+1227#£GeoGebra nemuze tyto promenné eliminovat
+1228#£GeoGebra nedokáze rovnici vyresit
+1229#£GeoGebra nasla pouze komplexní resení
+1230#£GeoGebra to nedokáze spocítat
+1231#£GeoGebra zjistila pouze jeden komplexní vsledek
+1232#£Graf nemohl bt zobrazen: {1}
+1233#£Telo s otocnm tahem nebylo mozné zobrazit: {1}
+1234#£Vyberte jednu nebo více funkcí, napr. f(x)=x^2 nebo y={1}x. Mnozina definic se zapisuje za cárkou, napr. f(x)=x^2, 0{2}x{2}2.
+1235#£{1} není funkcí x a nelze jej zobrazit jako moment silného momentu.
+1236#£Graph není pro Mac dostupn.
+1237#£Graf nemohl bt zobrazen v Graph: {1}
+1238#£Graf nepodporuje funkce nekolika promennch: {1}
+1239#£Graf nedokáze zobrazit vektory a krivky: {1}
+1240#£Graf nedokáze zobrazit vektory a body ve 3D:{1}
+1241#£Zadejte hodnotu pro {1}\n\nLze ji pozdeji upravit v rámci vlastních funkcí v Graphu. Dokonce muzete vytvorit animaci, kde se hodnota neustále mení, v sekci Vypocítat/Animovat.
+1242#£Smerová lista nemohla bt zobrazena: {1}
+1243#£Zobrazit graf
+1244#£Resí {1}, která je také jednotkou. Proto {1} v této rovnici není jednotkou. Zvazte pouzití jiného názvu promenné nebo vypnutí jednotek.
+1245#£Oznacte rovnici k resení
+1246#£Vyberte diferenciální rovnici k resení
+1247#£Nastavte funkci pro pocátecní podmínky
+1248#£nebylo mozné vyresit
+1249#£Diferenciální rovnice se resí pomocí . WordMat ({1})
+1250#£S vchozí podmínkou {1}
+1251#£s pocátecními podmínkami {1}
+1252#£s okrajovmi podmínkami {1}
+1253#£Rovnice {1} pomocí WordMatu.
+1254#£Vraz {1} pouzití WordMatu.
+1255#£Zmensen
+1256#£Faktorizované
+1257#£násobené
+1258#£Prepsané s ctvercovm dokoncením
+1259#£Prepis na zlomky
+1260#£Parafrázováno
+1261#£Promenné {1} bt odstraneny pomocí WordMatu.
+1262#£Promenná {1} bt odstranena pomocí WordMatu.
+1263#£Vyberte rovnici k testování
+1264#£Rovnice je pravdivá.
+1265#£Rovnice platí pro vsechny hodnoty {1}.
+1266#£Rovnice je nepravdivá.
+1267#£Rovnice je nepravdivá, protoze levá strana není definována.
+1268#£Rovnice je nepravdivá, protoze pravá strana není definována.
+1269#£Rovnice je nepravdivá pro vsechny hodnoty {1}.
+1270#£Rovnice neplatí pro vsechny hodnoty {1}. Napríklad je nepravdivá pro {2}
+1271#£, kde levá strana není definována.
+1272#£kde pravá strana není definována.
+1273#£Rovnice je pravdepodobne pravdivá. Neslo ji presne dokázat, ale obe strany mají stejnou císelnou hodnotu.
+1274#£Rovnice pravdepodobne platí pro vsechny hodnoty {1}. Nelze ji presne dokázat, ale platí ve vsech {2} bodech, kde byla numericky testována.
+1275#£Rovnice neplatí pro vsechny hodnoty {1}.
+1276#£Nebylo mozné urcit, zda je rovnice pravdivá.
+1277#£Rovnice je testována pomocí WordMatu.
+1278#£Chyba v definici {1}: {2}
+1279#£Danov systém je pro {1} resen císelne pomocí WordMatu.
+1280#£Danov systém je pro {1} vyresen pomocí WordMatu.
+1281#£Nerovnost se císelne resí pro {1} pomocí WordMatu.
+1282#£Nerovnost je pro {1} vyresena pomocí WordMatu.
+1283#£Rovnice se císelne resí pro {1} v intervalu {2} pomocí WordMat.
+1284#£Rovnice je resena numericky pro {1} pomocí WordMat.
+1285#£Rovnice se resí pro {1} pomocí WordMatu.
+1286#£Vpocet byl zastaven dríve, nez byl prohledán cel interval. Muze existovat nekolik obcházek.
+1287#£Vpocet byl zastaven dríve, nez byla nalezena vsechna resení. Muze existovat nekolik resení.
+1288#£Systém rovnic nemel resení v rámci {2} promennch {1}
+1289#£Nerovnost nemela resení v definicové sade {1}
+1290#£Nerovnost nemela {2} resení pro variabilní {1}
+1291#£Zádná resení nenalezena
+1292#£Rovnice nemela zádná resení v mnozine definic {1}
+1293#£Rovnice neobsahovala resení {2} promennch {1}
+1294#£Za vrazem v integrálu (napr. {2}x^2 {1}x) zapisujeme {1}x)
+1295#£Rovnice obsahuje strukturu, kterou VBACAS zatím nedokáze vypocítat: \n\n      {1}
+1296#£Zápis je tak, ze k=a je pod znakem a b nad znakem (napr. k=1 a n)
+1297#£Rovnice obsahuje prízvuk, kter VBACAS zatím nedokáze vypocítat: \n\n      {1}
+1298#£Rovnice obsahuje strukturu, kterou VBACAS zatím nedokáze vypocítat (vícerádkové pole rovnic): \n\n      {1}
+1299#£Rovnice obsahuje strukturu, kterou VBACAS zatím nedokáze vypocítat (napr. soucet, integrál, limit, matice nebo akcent): \n\n      {1}
+1300#£Za vrazem v dvojnásobném integrálu (napr. {2}x·y {1}x {1}y) zapisujte {1}x {1}y)
+1301#£Integrál musí mít {1} diferenciálu (napr. {2}x {2}y)
+1302#£Rovnice se zdá zahrnovat:
+1303#£ale Word ji ulozil tak, aby argument funkce pokracoval po závorce:
+1304#£V rovnici to není videt, ale vsledek je jin.
+1305#£Mela by bt rovnice opravena tak, aby byla vypocítána tak, jak je? \n(Ne: pocítat podle ulozeného Wordu)
+1306#£Musíte vybrat tabulku
+1307#£V tabulce nejsou platné císelné páry
+1308#£integrate musí mít 1, 2 nebo 4 argumenty: integrate(vraz; x) nebo integrate(vraz; x; a; b)
+1309#£Druhm parametrem v integrate musí bt promenná, napr. integrate(x^2; x)
+1310#£Urceme, kterou promennou integrovat po nich, napr. integrate(vraz; x)
+1311#£Integrál nelze vypocítat: integrand není definován v celém intervalu
+1312#£Integrál nebylo mozné numericky vypocítat dostatecne presne (integrand kolísá prílis silne)
+1313#£nalezení rovnice
+1314#£ctení rovnice
+1315#£nahrazení rovnice
+1316#£Rovnice nemohla bt prevedena do LaTeX ({1}): {2}
+1317#£LaTeX {1} rovnice
+1318#£{1} {2} nebylo mozné prevést na rovnice a nebylo zmeneno: {3}
+1319#£LaTeX kód nebylo mozné prevést na rovnici: {1}
+1320#£Kód je prázdn.
+1321#£Tato funkce není na Macu podporována.
+1322#£Tato verze WordMat+ nemuze vytváret pdf soubory pomocí MikTexu. Místo toho vytvorte tex soubor.
+1323#£MikTex není nainstalovan. Nyní budete presmerováni na miktex.org, kde si ho muzete stáhnout. Pri prvním spustení konvertoru budete také vyzváni ke stazení nekolika balícku. Stací kliknout na OK.
+1324#£Ulozit dokument pred jeho prevodem do LaTeXu. LaTeX soubory jsou ulozeny ve slozce vedle dokumentu.
+1325#£Dokument není na vasem pocítaci (OneDrive). Ulozite ho do slozky na pocítaci pred prevodem.
+1326#£Prevod rovnic
+1327#£Prevod formátování
+1328#£Prevod obrázku
+1329#£Prevodní tabulky
+1330#£Prevádení odstavcu
+1331#£Zápis souboru
+1332#£{1} {2} neslo ulozit jako soubor a byl nahrazen rámcem s textem "Image n missing".
+1333#£Dokument nebylo mozné prevést do LaTeXu: {1}
+1334#£WordMat+ nenasel zádnou slozku, do které by mohl na tomto Macu psát.
+1335#£MikTex (pdflatex.exe) nebyl nalezen.
+1336#£PDFLATEX bezí {1}. cas
+1337#£Doslo k chybe, kdyz pdflatex.exe byl zatazen.
+1338#£Dokument LaTeX nebylo mozné prelozit. PDFLATEX uvedl chybu: \n\n{1}\n\nKliknete na OK pro otevrení tex souboru.
+1339#£PDF soubor byl vytvoren, ale tyto znaky pdflatex neumí psát. Byly nahrazeny tucnm písmem ? v PDF souboru: \n\n{1}
+1340#£PDF soubor nebyl nalezen. Kliknete na OK pro otevrení tex souboru, aby byla chyba nalezena.
+1341#£slozka s obrázky
+1342#£slozka dokumentu
+1343#£Prevádí odkazy a poznámky pod carou
+1344#£Kopírování do schránky
+1345#£HTML stránka je ulozena jako\n{1}
+1346#£HTML kód neslo zkopírovat do schránky.
+1347#£{1} {2} nelze císt a je zapsán jako text.
+1348#£{1} {2} nebylo mozné ulozit a bylo nahrazeno textem "Image n missing".
+1349#£Dokument nebylo mozné prevést do html ({1}): {2}
+1350#£(not used)
+1351#£Markdown soubor se ukládá jako\n{1}
+1352#£Markdown text se zkopíruje do schránky.
+1353#£Text markdown nebylo mozné zkopírovat do schránky.
+1354#£Obrázky jsou ulozeny jako soubory ve stejné slozce.
+1355#£{1} {2} nebylo mozné zachránit.
+1356#£Dokument neslo prevést na markdown ({1}): {2}
+1357#£*Obrázek {1} chybí*
+1358#£Markdown nebylo mozné prevést: {1}
+1359#£{1} {2} nebyl nalezen v pocítaci a není vlozen.
+1360#£{1} {2} nebylo mozné prevést na rovnicová pole.
+1361#£Sablona LaTeX (LatexWordTemplate.dotx) nebyla nalezena. Instaluje se spolecne s WordMatem.
+1362#£limit by mely mít 3 nebo 4 argumenty: limit(vraz; x; a) nebo limit(vraz; x; a; plus)
+1363#£Ctvrt parametr v limite musí bt plus nebo minus
+1364#£Limit neexistuje
+1365#£{1} musí mít 4 argumenty: {1}(vraz; k; a; b)
+1366#£Druhm parametrem v {1} musí bt promenná, napr. {1}(k^2; k; 1; n)
+1367#£Dolní hranice nemuze bt nekonecná
+1368#£Prílis mnoho kloubu (maximální {1})
+1369#£Termín pro {1}={2} nemá zádnou hodnotu
+1370#£Rada je divergentní (soucet neexistuje)
+1371#£Soucet mocnin nelze vypocítat
+1372#£Nulová matice by mela mít velikost 1 az 100
+1373#£Matice musí mít velikost 1 az 100
+1374#£Maticov soucin vyzaduje, aby první mel tolik sloupcu, kolik druh má rádku ({1} a {2})
+1375#£Pole lze zvsit pouze na celé císlo (nebo T pro transponované císlo)
+1376#£Matici lze zvsit pouze na celé císlo
+1377#£Pouze kvadratické matice lze zvsit na mocninu (matice je {1})
+1378#£Exponent je prílis velk
+1379#£Determinant existuje pouze pro kvadratické matice (matice je {1})
+1380#£Determinant pole parametru lze vypocítat nejvse {1}{1}
+1381#£Inverzní matici mají pouze kvadratické matice (matice je {1})
+1382#£Matice nemá inverzi (determinant je 0)
+1383#£Inverzi pole parametru lze vypocítat nejvse {1}{1}
+1384#£Maxima není nainstalována (WordMat)
+1385#£Maxima nelze spustit (chybí MathMenu.dll WordMatu)
+1386#£Maxima nelze spustit
+1387#£Maxima nelze spustit (WordMatuv AppleScript)
+1388#£Maxima polozila otázku, na kterou WordMat+ nedokáze odpovedet
+1389#£Maxima byla zastavena, protoze vpocet trval více nez {1} sekund
+1390#£Spojení s Maximou pres WSH vyzaduje partnerství
+1391#£Maxima nemohla bt nastartována pres WSH: chyba {1} {2}
+1392#£Chyby v kódu Maxima (kódová pole nebo kódov soubor): {1}
+1393#£Maxima nedokáze vypocítat {1}
+1394#£Maxima nelze pouzít pro {1} ve WordMat+
+1395#£Pocátecní podmínky ve dvou ruznch bodech
+1396#£Tyto podmínky
+1397#£Maxima nemohou vyresit diferenciální rovnici
+1398#£Maxima to nedokáze spocítat
+1399#£Maxima zjistila pouze jeden komplexní vsledek
+1400#£Maxima nemuze tyto promenné vyloucit
+1401#£Maxima nemohou vyresit nerovnost
+1402#£Maxima nedokáze rovnici vyresit
+1403#£Maxima nacházela pouze slozitá resení
+1404#£Gnuplot není dostupn pro Mac. Pouzijte GeoGebra.
+1405#£Graf nebylo mozné zobrazit pomocí Gnuplot: {1}
+1406#£Chyba v kódu Maxima
+1407#£Kódová pole nebo kódov soubor obsahují chybu: {1}
+1408#£Zadejte príkaz Maxima
+1409#£Chyba v kódu Maxima (kódová pole): {1}
+1410#£Je tu prílis mnoho sloupcu
+1411#£Vpocet byl zastaven
+1412#£Termín pro cást vpoctu byl prekrocen
+1413#£Vpocet byl zastaven, protoze trval více nez {1} sekund
+1414#£Fakulta je definována pouze pro celá císla
+1415#£Fakulta je definována pouze pro císla >= 0
+1416#£Pocet je prílis velk pro fakultu
+1417#£Císlo je prílis velké - VBACAS nemuze vypocítat schopnost císel nad 170 jako desetinná císla
+1418#£desolve musí mít diferenciální rovnici, napr. desolve(y'=2y)
+1419#£Diferenciální rovnice musí bt rovnice, napr. y'=2y
+1420#£Argument {1} v rozpustení není pochopen
+1421#£Rovnice neobsahuje zádnou odvozenou funkci (napr. y')
+1422#£Rovnice neobsahuje zádnou derivaci {1}
+1423#£Pro konstantu neexistuje volné jméno
+1424#£Rád derivace musí bt císlo
+1425#£Podmínky zapisujeme jako {1}(0)=2 po rovnici: desolve(rovnice; {1} (0)=2)
+1426#£Diferenciální rovnice vyssího rádu nez 2 nelze resit
+1427#£Diferenciální rovnice nebylo mozné vyresit ({1}{2} nelze ji izolovat)
+1428#£Diferenciální rovnice nebyla vyresena (není ani lineární, ani separovatelná)
+1429#£Diferenciální rovnice nebylo mozné vyresit ({1}{2}{2} nelze ji izolovat)
+1430#£Diferenciální rovnice nebylo mozné vyresit (druh rád lze vyresit, pokud je lineární s konstantními koeficienty, nebo {1}{3}{3}=f({2}))
+1431#£Diferenciální rovnice nebyla vyresena (pro {1} nelze najít cásticové resení)
+1432#£Diferenciální rovnice druhého rádu muze mít nejvse dve podmínky
+1433#£Podmínky musí bt rovnice, napr. {1}(0)=1 a {1}{2}(0)=2
+1434#£Podmínky by mely bt zapsány jako {1}(0)=1 a {1}{2}(0)=2
+1435#£Zádné resení nesplnuje podmínky
+1436#£Diferenciální rovnice 1. rádu musí mít jednu podmínku, napr. {1}(0)=2
+1437#£Podmínkou musí bt rovnice, napr. {1}(0)=2
+1438#£Podmínka by mela bt zapsána jako {1}(0)=2
+1439#£Zádné resení nesplnuje podmínku {1}
+1440#£Diferenciální rovnice nebyla vyresena (kmenová funkce {1} nelze najít)
+1441#£Délka kroku musí bt kladná
+1442#£Konecná hodnota musí bt vetsí nez pocátecní hodnota
+1443#£Prílis mnoho kroku ({1}). Zvolte delsí délku kroku
+1444#£Zadejte pouze pravou stranu diferenciální rovnice pro {1}: {2}
+1445#£Definujte {1} v Definicích
+1446#£Diferenciální rovnice pro {1} nelze vypocítat {2}={3}
+1447#£Vlozte kurzor do vrazu, kter má bt parafrázován.
+1448#£Príkaz Maxima vyzaduje Maxima ve WordMatu, která není nainstalována.
+1449#£Zadejte príkaz Maxima, napr. integrate(x^2,x) nebo factor(x^2-1). Vsledek se zapíse jako nová rovnice.
+1450#£Maxima command
+1451#£Príkaz Maxima není v této verzi WordMat+ prítomen.
+1452#£Umístete kurzor do matematického pole.
+1453#£Vlozte kurzor do rovnice, kterou máme resit.
+1454#£Vyberte rovnice, ze kterch se promenné vylucují.
+1455#£Vyberte alespon dve rovnice pro odstranení promennch (napr. x=2t+1 a y=t^2).
+1456#£Umístete kurzor do diferenciální rovnice, kterou máme resit.
+1457#£Neexistuje aktivní licence WordMat+. \n\nWordMat+ lze stále pouzívat, ale tyto funkce nejsou aktivní: {1}WordMat+ vlastní CAS (VBACAS). Maxima nebo GeoGe{1}bra grafy se pocítají v okne WordMat GeoGebra. Zobrazují se v prohlízeci{1} Vkládání vzorcu z kolekce vzorcu{1}Sinusová regrese{1}Customize menu\n\nKliknete na OK pro prechod na www.wordmat.dk
+1458#£Neexistuje aktivní licence WordMat+, takze nelze pouzít vlastní CAS (VBACAS) WordMat+ a ani Maxima, ani GeoGebra nelze na tomto pocítaci pouzít. Vyberte si jednu z nich v Nastavení, nainstalujte WordMat s Maximou nebo obnovte licenci na www.wordmat.dk.
+1459#£Maxima není soucástí této verze WordMat+
+1460#£Rovnice je uz ocíslovaná.
+1461#£Císlovaná rovnice nemuze bt vlozena do tabulky.
+1462#£Císlovaná rovnice
+1463#£Zadejte název rovnice.
+1464#£Název musí mít maximálne 40 znaku.
+1465#£Jméno by melo zacínat písmenem.
+1466#£Název muze obsahovat pouze písmena, císla a _ (ne mezery).
+1467#£Název uz existuje.
+1468#£V dokumentu nejsou zádné pojmenované rovnice. Pouzijte 'Vlozit císlovanou rovnici pro referenci' pod Novou rovnicí.
+1469#£Reference rovnic
+1470#£Vlozte kurzor do císlované rovnice.
+1471#£Na jaké císlo by mela bt tato rovnice nastavena? \nNásledující rovnice mají své císla aktualizována, aby sedela.
+1472#£Zadejte celé císlo, nebo section.number (2.3) pro císla s section.
+1473#£Bude vlozeno císlo rovnice sekce. Obvykle se vkládá jako císlo kapitoly nebo sekce. do nadpisu. Císlo vsak muze bt také vlozeno skryte. Melo by bt císlo zobrazeno? (Odpovez ne, aby se skrylo)
+1474#£Vlozte oddíl rovnice c.
+1475#£Sekce rovnic
+1476#£Definice mazání nelze vlozit do tabulky.
+1477#£Specifikujte, které jednotky by mely bt ve vstupu oddelené cárkami\nPríklady: \n\ncm, kJ, hodiny\neV, nm, mV\naJ, AU, Bq\n\nPokud není nic specifikováno, vsechny jednotky budou vráceny jako základní SI jednotky nebo odvozené SI jednotky bez predpony.
+1478#£Druhm parametrem v solve musí bt promenná, napr. solve(x^2=4; x)
+1479#£Nerovnosti nelze vyresit, kdyz jsou zapnuta komplexní císla
+1480#£Rovnici nelze vyresit analyticky. Zkuste ji vyresit císelne.
+1481#£Rovnice zatím nelze vyresit: {1}=0
+1482#£Urceme, pro kterou promennou se má resit, napr. solve(rovnice; x)
+1483#£Rovnice nelze presne vyresit (stupen je prílis vysok)
+1484#£Prílis mnoho resení v intervalu
+1485#£Prílis mnoho resení
+1486#£Období nelze vypocítat
+1487#£Resení v tomto intervalu nelze vypocítat
+1488#£Rovnice zatím nelze presne vyresit: {1}=0
+1489#£Rovnice zatím nelze presne vyresit
+1490#£Úhel nelze vypocítat
+1491#£Rovnice zatím nelze presne vyresit: {1}={2}
+1492#£Nerovnost zatím nelze vyresit: {1}
+1493#£Nerovnost zatím nelze vyresit: {1}{2}0
+1494#£Nerovnost má nekonecne mnoho intervalu resení. Specifikujme interval pro {1}, napr. 0{2}{1}{2}{3}
+1495#£Nerovnost nelze (zatím) vyresit
+1496#£{1} musí mít {2}{3}
+1497#£{1} (x) není definováno pro x=0, -1, -2, ...
+1498#£W_0(x) je definováno pouze pro x{1}-1/e
+1499#£acosh (x) je definováno pouze pro x{1}1
+1500#£{1} (x) je prílis velk na to, aby byl vypocítán;
+1501#£{1} zde nemá zádnou hodnotu
+1502#£{1} nelze rozlisit podle {2} ({2} v prvním argumentu)
+1503#£Neznámé musí bt promenné, napr. solve([x+y=5; x-y=1]; [x;y])
+1504#£Systémy s nerovnostmi nelze (zatím) vyresit
+1505#£Neexistují zádné rovnice k resení
+1506#£Soustava rovnic nemá zádné promenné, které by bylo treba resit
+1507#£Systém rovnic je predimenzovan: je více rovnic ({1}) nez neznámch ({2}).
+1508#£Danov systém zatím nelze presne vyresit
+1509#£Danov systém zatím nelze vyresit
+1510#£Specifikujte promenné, které mají bt odstraneny, napr. eliminate([x+y=a; x-y=b]; x)
+1511#£Promenné, které je treba eliminovat, musí bt promenné, napr. eliminate([x+y=a; x-y=b; x*y=c]; [x;y])
+1512#£Promenné nelze z nerovností odstranit
+1513#£Maximálne lze z {2} rovnic vyloucit {1} promennch
+1514#£Kdyz jsou {1} odstraneny, nezustávají zádné rovnice (vzdy jsou splneny)
+1515#£{1} nelze (zatím) odstranit
+1516#£{1} nelze eliminovat (tituly jsou prílis vysoké)
+1517#£Zarízení se neshodují: {1}
+1518#£Neznámá jednotka: {1}
+1519#£a seznam
+1520#£vektor
+1521#£matice
+1522#£A Number
+1523#£{1} musí mít alespon jeden prvek
+1524#£Vsechny rádky v poli musí mít stejn pocet prvku
+1525#£Prvky vektoru musí bt císla nebo vrazy
+1526#£Nemuzes {1} {2}{3}
+1527#£Nedá se to dát císlem {1}
+1528#£jiné velikosti
+1529#£Nemuzete násobit {1} a {2} ruznmi pocty prvku
+1530#£Vektory musí mít stejn pocet souradnic
+1531#£Vektor lze zvednout pouze na druhou stranu (skalární soucin se sebou samm)
+1532#£Nemuzes pozvednout k {1}
+1533#£Funkce nemuze {1} brát jako argument
+1534#£musí mít pole nebo dva vektory
+1535#£Velikost nulové matice musí bt celá císla
+1536#£ident musí mít velikost, napr. ident(3)
+1537#£Velikost jednotkové matice musí bt celé císlo
+1538#£klobouk musí mít jeden vektor
+1539#£Vektor krízového kríze existuje pouze pro vektory v rovine
+1540#£{1} musí mít dva vektory, napr. {1}(a; b)
+1541#£{1} pole zatím nelze vypocítat
+1542#£Vektorov soucin existuje pouze pro vektory v prostoru (3 souradnice)
+1543#£Determinant dvou vektoru existuje pouze pro vektory v rovine (2 souradnice)
+1544#£{1} musí mít hádku
+1545#£length musí mít jeden seznam, napr. length(x)
+1546#£Prvek má maximálne dva indexy, napr. A[1; 2]
+1547#£Index by mel bt celé císlo: {1}
+1548#£Index je prílis velk: {1}
+1549#£Indexová {1} je mimo matici ({2} rádku)
+1550#£Indexová {1} je mimo matici ({2} sloupcích)
+1551#£Seznam má pouze jeden index, napr. x[2]
+1552#£Vektor má pouze jeden sloupec: druh index musí bt 1
+1553#£Vektory na obou stranách rovného znaménka musí mít stejn pocet souradnic
+1554#£Matice na obou stranách rovného znaménka musí mít stejnou velikost
+1555#£Pole muze bt rovno pouze jedné matici
+1556#£Vektor nemuze bt roven císlu
+1557#£Vpocty nelze provádet na definacních polích. Níze uvedenou definici muzete pouzít pro vpoct.
+1558#£a
+1559#£Automatická
+1560#£presne
+1561#£Císelné
+1562#£Jednotky na
+1563#£Jednotky pryc
+1564#£LaTeX kód
+1565#£LaTeX kódy
+1566#£Rovnice
+1567#£Rovnice
+1568#£Obrázek
+1569#£Obrázky
+1570#£Argument
+1571#£Argumenty
+1572#£Úroven vznamu:
+1573#£Celkov soucet vsech bunek je mensí nez 50. {1} rozdelení je tedy v tomto prípade spatnou aproximací a vsledek nespolehliv.
+1574#£Stupne volnosti:
+1575#£Prestavba
+1576#£Prizpusobte menu
+1577#£Vyberte si, které polozky menu jsou viditelné
+1578#£Císlice a zaokrouhlování
+1579#£Prepis...
+1580#£Vyresit rovnice
+1581#£Resení vázanch diferenciálních rovnic
+1582#£Pravdepodobnost
+1583#£Nezarazeno
+1584#£Skupina
+1585#£Insert Table
+1586#£Zvyk
+1587#£t-distribuce
+1588#£Císlované rovnice
+1589#£Zobrazit vse
+1590#£Schovej vsechno
+1591#£Nastaveno podle úrovne
+1592#£Nastavuje viditelné polozky menu podle úrovne matematiky, kterou se ucíte podle
+1593#£Sinusové pripojení
+1594#£Tato funkce vyzaduje WordMat+
+1595#£Pro prístup k WordMat+ muze vase skola/organizace:\n uzavrete partnerskou smlouvu s Eduap.
+1596#£Více o dalsích vhodách partnerství si prectete zde:
+1597#£Zkontrolujte, jestli vase skola uz podepsala partnerství
+1598#£Nastavení sberu vzorcu
+1599#£Vyberte si vzdelání
+1600#£Vyberte si úrovne predmetu
+1601#£Vber muzete vzdy zmenit pozdeji
+1602#£Matematika:
+1603#£Fyzika:
+1604#£Chemie:
+1605#£Dalsí
+1606#£Porad v GnuPlot
+1607#£Funkce f(x)=...
+1608#£Název osy x
+1609#£Název osy y
+1610#£Var
+1611#£Velikost bodu:
+1612#£Zobrazit v Excelu
+1613#£Excel embedded
+1614#£Mrízka
+1615#£Logaritmická osa X
+1616#£Logaritmická Y-osa
+1617#£Vydavatelství
+1618#£Vlozit stítek
+1619#£Vysvetlení poradu
+1620#£Body 2
+1621#£Syntaxe\nVchozí bod - Vektor\n(startx ; starty)-(dx ; dy)\n\nPríklady: \n(1,1)-(1,2)     \n  Kreslení vektoru (1.2) z bodu (1.1)\n\n(1,2)\n  Kreslení vektoru (1.2) z bodu (0.0)\n\n(1,5 ; 4,5)\nPokud jsou zahrnuta desetinná císla; pouzívá se jako oddelovac
+1622#£Nov vektor
+1623#£Rovnice 1
+1624#£Rovnice 2
+1625#£Rovnice 3
+1626#£Promenné by mely bt x a y
+1627#£Rekvizita
+1628#£Manu
+1629#£nezávislé. promenné
+1630#£Promenná podle
+1631#£Integrální krivky (krivky)
+1632#£Urcete body, ktermi by mely bt nakresleny cesty resení.
+1633#£Otevreno
+1634#£Otevre se okno, kde muzete kliknout na místo, kde by mela bt Integral Curve a kde mohou bt posuvníky, takze muzete videt, jak se smerové pole pomocí posuvníku mení
+1635#£Interaktivní
+1636#£Pockej!
+1637#£Const
+1638#£od
+1639#£do
+1640#£Posuvníky
+1641#£Zobrazit pouze krivky
+1642#£Licence:
+1643#£Automaticky nastavte délku kroku
+1644#£Nastaví pocet kroku na 500
+1645#£Rovnice jsou reseny 4. rádem Runge-Kutta
+1646#£Vkládání vypocítanch odrázek jako seznamu do dokumentu Word
+1647#£Muzete zadat promennou nebo funkci v závislosti na tom, co je v rovnici napsáno. tj. napr. y nebo f(x), ale ne f.
+1648#£Dobre, nová linka
+1649#£Definice v této cásti dokumentu
+1650#£Príklad: a=5, x>0
+1651#£Príklad: g, min, cm
+1652#£Prosinec.
+1653#£Bezí v prohlízeci, ale ne online
+1654#£Spojení s Maximou
+1655#£Pripojuje se k Maxima pomocí .net dll souboru, kter zajistuje komunikaci
+1656#£Maxima se spoustí skrz shell pomocí wsh. Kazd vpocet je novou instancí Maximy. Je o neco pomalejsí a krátce zobrazí cerné okno cmd, ale nezávisí na souboru dll.
+1657#£Vyzaduje WordMat+
+1658#£Zkontrolujte partnerství
+1659#£Posunte se vs (zkousel jsem to uz dríve)
+1660#£Presunout se dolu (k pokusu pozdeji)
+1661#£Motory jsou testovány shora.  \nDalsí se pouzívá, kdyz jeden motor ne.
+1662#£Neomezená presnost
+1663#£Spolehnete se na neomezenou presnost (velká císla)
+1664#£Maximální pocet císlic:
+1665#£Maximální pocet císlic v presnch císlech
+1666#£Casov limit(y):
+1667#£Casov limit pro vpocet v sekundách (0 = bez limitu)
+1668#£Sci. notace, n:
+1669#£Vedecká notace pro císla mensí nez 10^-n (0 = nikdy)
+1670#£LaTeX obklopující postavy kolem rovnice
+1671#£V textu:
+1672#£Text pred LaTeX kódem pro rovnici uvnitr textu, napr. $
+1673#£Text po LaTeX kódu pro rovnici uvnitr textu, napr. $
+1674#£Na vlastní linii:
+1675#£Text pred LaTeX kódem pro rovnici na rádku je samostatne, napr. \[ nebo \begin{equation}
+1676#£Text po LaTeX kódu pro rovnici na rádku zvlást, napr. \] nebo \end{equation}
+1677#£Jednotky s psaním ve vzprímené poloze (\mathrm)
+1678#£Entity nejsou rozpoznávány a zapisovány kurzívou (\mathrm{m})
+1679#£Dvojité stisknutí Alt+M
+1680#£Musíte zadat presne 3 úhly/strany, ale ne jen 3. \nTakze: \n1 strana + 2 úhly\n2 strany + 1 úhel (mozná 2 resení)\n3 stránky
+1681#£Kde presne je odpoved zádoucí. Muze ovlivnit cas vpoctu.
+1682#£Zádn LaTeX kód nebyl nalezen. Vyberte kód nebo vlozte kurzor do LaTeX rovnice (napr. {1} nebo {2}).
+1683#£{1} {2} nebylo mozné precíst pomocí VBACAS a je zapsáno jako text ({3}) v dokumentu LaTeX.
+1684#£Divergence {1} vyzaduje vektorovou funkci. Gradient {2} se zapisuje {3}
+1685#£Rotace (curl) {1} vyzaduje vektorovou funkci se 2 nebo 3 souradnicemi
+1686#£{1} vyzaduje, aby {2} mela stejne souradnic jako promennch
+1687#£Divergence {1} vypsaného vektoru vyzaduje 2 nebo 3 souradnice (promenné x, y a z)
+1688#£"{1}" brzy vyjde ve WordMat+ pro Office.
+1689#£V "{1}" doslo k chybe.
+1690#£Podrobnosti
+1691#£Kopírovat
+1692#£Jednotky jsou zapnuté.
+1693#£Jednotky jsou vypnuté.
+1694#£Zobrazit podokno úloh
+1695#£Jazyk se zmení, kdyz se WordMat+ znovu otevre.
+1696#£Nejkratsí forma, napr. (x^2-1)/(x-1) na x+1 a sin(x)^2+cos(x)^2 na 1.
+1697#£Vpocet trval prílis dlouho a byl zastaven.
+1698#£WordMat+ pro Word (Word desktop a Word Online)\nVerze {1}\n\nVvojová verze: dalsí funkce jsou pridávány prubezne.
+1699#£Upravit rovnici
+1700#£/ zlomek, ^ mocnina, _ index, sqrt druhá odmocnina, sipky posouvají kurzor. Enter: vlozit. Ctrl+Enter: vlozit a vypocítat. Esc: zrusit.
+1701#£Vlozit a vypocítat
+1702#£Kliknete v grafu a nakreslíte krivku resení skrz tento bod.
+1703#£Nulové body
+1704#£Extrémy
+1705#£Prusecíky
+1706#£Rada bodu {1}
+1707#£Zobrazit souradnice
+1708#£Vybere okno grafu tak, aby byly videt vsechny body, nuly, extréma a pruniky, a osy, kdyz nejsou daleko.
+1709#£Bez mrízky
+1710#£Velká mrízka
+1711#£Malá mrízka
+1712#£Tecna
+1713#£Nakreslí tecnu ke grafu v hodnotách x zadanch zde. Více hodnot se oddeluje znakem ;
+1714#£Vchozí bod
+1715#£Bez vchozího bodu se vektor kreslí z (0;0).
+1716#£Tazením dolu pokracujte v císlech: 1, 2 dává 3, 4 ... Dvojité kliknutí vyplní az po poslední rádek.
+1717#£Zadejte vzorec s x, napr. 2*x, a y se pocítá pro rádky odtud dolu.
+1718#£Napiste body do tabulky, nebo je vlozte z Excelu ci tabulky Wordu.\nTazením malého ctverecku pokracujte v císlech smerem dolu: 1, 2 dává 3, 4 ...\nZadejte vzorec do sloupce y, napr. 2x nebo =2x, a y se vypocítá pro rádky od tohoto místa dolu.\nVyberte nekolik bunek mysí nebo Shiftem a stisknete Delete pro jejich smazání.\nTlacítko z dává sloupec z pro body v prostoru.
+1719#£Vlozí tecnu funkce jako novou funkci a bod dotyku jako bod. Vyberte funkci a zadejte x, nebo kliknete na graf.
+1720#£Tazením v grafu nakreslíte vektor.
+1721#£Kliknete na stítek v tabulce a pak na graf, abyste ho presunuli.
+1722#£Pozorování
+1723#£Cetnost
+1724#£Relativní cetnost
+1725#£Kumulativní cetnost
+1726#£Od
+1727#£Do
+1728#£Pocet pozorování
+1729#£Nejmensí hodnota
+1730#£Dolní kvartil
+1731#£Medián
+1732#£Horní kvartil
+1733#£Nejvetsí hodnota
+1734#£Prumer
+1735#£Smerodatná odchylka
+1736#£Vberová smerodatná odchylka
+1737#£Popisné statistiky vypocítané pomocí WordMat:
+1738#£Tabulka musí obsahovat pozorování, nebo pozorování v prvním sloupci a jejich cetnosti ve druhém sloupci.
+1739#£Tabulka musí mít tri sloupce: zacátek intervalu, konec intervalu a cetnosti.
+1740#£Zacátek kazdého intervalu musí bt mensí nez jeho konec a intervaly se nesmí prekrvat.
+1741#£Cetnosti nesmí bt záporné.
+1742#£Zadejte pocet ruznch pozorování a vytvorí se tabulka, do které muzete zadat pozorování a jejich cetnosti.\nKdyz tabulku vyplníte, vyberte {1} nebo diagram z menu.
+1743#£Zadejte pocet intervalu a vytvorí se tabulka, do které muzete zadat intervaly a jejich cetnosti.\nKdyz tabulku vyplníte, vyberte {1} nebo diagram z menu.
+1744#£Diagram
+1745#£Zádn diagram
+1746#£Relativní cetnost v procentech
+1747#£Zobrazit kvartily
+1748#£Název
+1749#£na jednotku
+1750#£Napiste pozorování a jejich cetnosti do tabulky, nebo je vlozte z Excelu ci tabulky Wordu.
+1751#£Zadejte intervaly a jejich cetnosti do tabulky, nebo je vlozte z Excelu ci tabulky Wordu.
+1752#£Zadejte kvartily kazdého boxového grafu: nejmensí hodnota, dolní kvartil, medián, horní kvartil a nejvetsí hodnota.
+1753#£Kvartily musí bt v rostoucím poradí.
+1754#£Surová data
+1755#£Neseskupené
+1756#£Seskupené
+1757#£Kum. cetnost
+1758#£Prevést do neseskupench
+1759#£Prevést do seskupench
+1760#£Sírka intervalu
+1761#£Napiste pozorování do tabulky, nebo je vlozte z Excelu ci Wordové tabulky.
+1762#£Pridat do krabicového grafu
+1763#£Tabulka se do dokumentu vlozí pri zavrení okna.
+1764#£{1} pozorování lezí mimo intervaly.
+1765#£Sírka intervalu musí bt vetsí nez 0.
+1766#£Teckov graf
+1767#£Legenda plochy
+1768#£V pravém horním rohu zobrazuje rámecek se stejnou sírkou jako první interval a kolika procentum pozorování odpovídá.
+1769#£Pozorování na hranici mezi dvema intervaly patrí do dolního intervalu, ]a;b], coz je dánsk standard, nebo do horního intervalu, [a;b[.
+1770#£Stupne volnosti
+1771#£Zobrazit kumulativní rozdelení
+1772#£Vyberte rozdelení.
+1773#£Prázdné pole znamená, ze na té strane není zádná mez.
+1774#£Zadejte pravdepodobnost, napr. 0,95 nebo 95 %, a najdete odpovídající hodnotu.
+1775#£n musí bt celé císlo vetsí nez 0.
+1776#£p musí bt mezi 0 a 1.
+1777#£Smerodatná odchylka musí bt vetsí nez 0.
+1778#£Pocet stupnu volnosti musí bt vetsí nez 0.
+1779#£Pozorováno
+1780#£Oboustrann
+1781#£Levostrann
+1782#£Pravostrann
+1783#£Kritická oblast
+1784#£P-hodnota
+1785#£Nulová hypotéza se zamítá.
+1786#£Nulovou hypotézu nelze zamítnout.
+1787#£Interval spolehlivosti pro p
+1788#£Zádn test
+1789#£Ocekávané
+1790#£Kritická hodnota
+1791#£Testová statistika
+1792#£Vlozit vsledek
+1793#£Musí existovat alespon dva rádky s pozorovanm poctem a ocekávanm poctem vetsím nez 0.
+1794#£Test dobré shody se provádí pomocí WordMatu
+1795#£Na hladine vznamnosti {1}% lze nulovou hypotézu, ze pozorování odpovídají ocekávanému rozdelení, zamítnout.
+1796#£Na hladine vznamnosti {1}% nelze nulovou hypotézu zamítnout. Neexistují tedy dukazy, ze by se pozorování odchylovala od ocekávaného rozdelení.
+1797#£Ocekávané hodnoty:
+1798#£Otestovat, zda mají seskupená data normální rozdelení
+1799#£{1} a {2} z dat
+1800#£Prolozit
+1801#£Musí bt alespon {1} intervalu, pokud jsou prumer a smerodatná odchylka odhadnuty z dat.
+1802#£Test vyuzívá seskupená data na zálozce {1}. Zadejte je pod {2} a zaskrtnete {3}, aby bylo mozné porovnat histogram s normálním rozdelením.
+1803#£Kazdé krivce dává pole z(t), takze je nakreslena v prostoru.
+1804#£Promenné musí bt x a y, v prostoru také z
+1805#£Rovnice jako obrázky
+1806#£Word Online zabere nekolik sekund na napsání rovnice. S tímto nastavením WordMat+ vkládá nové rovnice a vsledky jako malé obrázky, na kterch pocítá stejne jako na rovnice. Obrázky lze opet vytvorit jako rovnice v menu {1}.
+1807#£Prevést rovnice na obrázky
+1808#£Prevádí rovnice vberu nebo celého dokumentu, kdyz není nic vybráno, na obrázky, které Word Online zobrazuje a mení mnohem rychleji. WordMat+ pocítá z obrázku stejne jako z rovnic.
+1809#£Prevést obrázky na rovnice
+1810#£Obrázky rovnic ve vberu, nebo v celém dokumentu, kdyz není nic vybráno, se opet mení v reálné rovnice, napríklad pred odevzdáním dokumentu.
+1811#£Rovnice prevedené na obrázky: {1}
+1812#£Obrázky prevedené na rovnice: {1}
+1813#£Neprevedeno (beze zmeny): {1}
+1814#£Neexistují zádné rovnice, které by bylo treba prevádet.
+1815#£Nejsou zde zádné obrázky rovnic k prevodu.
+1816#£Rovnice ve forme obrázku se pouzívají pouze ve Word Online.
+1817#£Rovnice nebylo mozné prevést.
+1818#£Matematika
+1819#£Fyzika
+1820#£Zavrít, kdyz je zvolen vzorec
+1821#£Drzte Ctrl, kdyz kliknete na vzorec, a kolekce vzorcu se nezavre.
+1822#£Vlozit 2
+1823#£Vzorec se vlozí dvakrát: jednou pro dokumentaci a jednou pro císla.
+1824#£Vlozit konstanty
+1825#£Ve fyzice a chemii jsou fyzikální konstanty vlozeny jako císla do druhého vzorce.
+1826#£Zobrazit v podokne
+1827#£Kolekce vzorcu je zobrazena v panelu vedle dokumentu místo ve velkém okne. Platí od príste pri otevrení kolekce vzorcu.
+1828#£Hledat:
+1829#£Poznámka: Sbírka chemickch vzorcu jeste není dokoncena.
+1830#£Zadejte vyhledávací pole nebo kliknete na téma.
+1831#£Kliknete na obrázek, abyste ho vlozili do dokumentu.
+1832#£Word Online muze zobrazit obrázky, ale nemuze je upravovat. Otevrete dokument ve Wordu pro Windows nebo Mac, abyste je mohli zmenit.
+1833#£Zobrazuje obrázky v panelu: trojúhelníky, jednotkov kruh, souradnicové soustavy a monotónní cáry. Kliknete na obrázek pro vlození do dokumentu.
+1834#£Soubor {1} byl stazen. Je ve stazench stránkách prohlízece.
+1835#£Pouzívejte Word jako LaTeX editor. \n\nMuzete zadat LaTeX príkazy prímo do dokumentu pro plnou kontrolu, nebo pouzít funkce Wordu a nechat WordMat+ prevést do LaTeXu. \n\nTex soubor se stáhne do pocítace. Pokud dokument obsahuje obrázky, stáhne se zip soubor s tex souborem a obrázky slozek.
+1836#£Delá z LaTeX kód tex soubor, kter se stáhne do pocítace, takze kód lze v LaTeX programu zkontrolovat a upravit
+1837#£Ulozit
+1838#£Kolem osy x
+1839#£Kolem osy y
+1840#£Otocí grafy zaskrtnutch funkcí o 360 stupnu kolem osy x nebo osy y, takze vznikne rotacní teleso ve 3D. Kazd graf se otácí od svého Xmin do svého Xmax.
+1841#£Rovnice
+1842#£Prevést
+1843#£Bocní podokno
+1844#£Zobrazí bocní podokno s nastavením, nebo ho zavre, kdyz je otevrené.
+1845#£WordMat+ pouzívá JSXGraph pro grafy a MathLive pro zadávání rovnic. Oba mají licenci MIT.
+1846#£Licence
+1847#£po cástech
+1848#£V závorce: @ nebo Alt+Enter vytvorí nov rádek, & nov sloupec.
+1849#£n-tá odmocnina
+1850#£matice
+1851#£urcit integrál
+1852#£neurcit integrál
+1853#£V závorce: @ nebo Alt+Enter pridá novou souradnici.
+1854#£soucet
+1855#£soucin
+1856#£WordMat+ umoznuje provádet matematické vpocty ve Wordu.\nWordMat vyrábí Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1857#£Pouzít JavaScriptov CAS (rychlejsí)
+1858#£CAS programu WordMat+ bezí v JavaScriptovém jádru QuickJS. Bez zaskrtnutí pocítá VBACAS.
+1859#£Vestaven CAS: {1}
+1860#£JavaScriptové jádro: QuickJS, © Fabrice Bellard, Charlie Gordon a dalsí (licence MIT)
