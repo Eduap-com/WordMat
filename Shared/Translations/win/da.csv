@@ -1862,3 +1862,5 @@
 1861#£Viser grafer, punkter, vektorer og statistik i WordMat+'s eget grafprogram. Kræver ikke internet.
 1862#£Indsæt screenshot
 1863#£Åbn grafen i {1}
+1864#£GeoGebra CAS som reserve
+1865#£Når WordMat+ ikke selv kan beregne det, prøves GeoGebras CAS. Forklaringen viser da (GeoGebra).

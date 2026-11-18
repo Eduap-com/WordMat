@@ -1862,3 +1862,5 @@
 1861#£Muestra gráficas, puntos, vectores y estadística en el programa de gráficas propio de WordMat+. No requiere internet.
 1862#£Insertar captura de pantalla
 1863#£Abrir la gráfica en {1}
+1864#£GeoGebra CAS como reserva
+1865#£Cuando WordMat+ no puede calcularlo por sí mismo, se prueba el CAS de GeoGebra. La explicación muestra entonces (GeoGebra).

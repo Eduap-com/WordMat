@@ -1862,3 +1862,5 @@
 1861#£Toont grafieken, punten, vectoren en statistiek in het eigen grafiekprogramma van WordMat+. Vereist geen internet.
 1862#£Schermafbeelding invoegen
 1863#£Grafiek openen in {1}
+1864#£GeoGebra CAS als reserve
+1865#£Als WordMat+ het niet zelf kan berekenen, wordt het CAS van GeoGebra geprobeerd. De uitleg toont dan (GeoGebra).

@@ -1862,3 +1862,5 @@
 1861#£Pokazuje wykresy, punkty, wektory i statystyke we wlasnym programie graficznym WordMat+. Nie wymaga internetu.
 1862#£Wstaw zrzut ekranu
 1863#£Otwórz wykres w {1}
+1864#£GeoGebra CAS jako rezerwa
+1865#£Gdy WordMat+ nie potrafi tego sam obliczyc, próbowany jest CAS GeoGebry. Wyjasnienie pokazuje wtedy (GeoGebra).

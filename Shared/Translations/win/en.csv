@@ -1862,3 +1862,5 @@
 1861#£Shows graphs, points, vectors and statistics in WordMat+'s own graphing program. Does not require internet.
 1862#£Insert screenshot
 1863#£Open the graph in {1}
+1864#£GeoGebra CAS as fallback
+1865#£When WordMat+ cannot calculate it itself, GeoGebra's CAS is tried. The explanation then shows (GeoGebra).

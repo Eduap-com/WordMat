@@ -1862,3 +1862,5 @@
 1861#£Näitab graafikuid, punkte, vektoreid ja statistikat WordMat+ enda graafikuprogrammis. Ei vaja internetti.
 1862#£Lisa ekraanipilt
 1863#£Ava graafik programmis {1}
+1864#£GeoGebra CAS varuna
+1865#£Kui WordMat+ ei suuda seda ise arvutada, proovitakse GeoGebra CAS-i. Selgituses on siis (GeoGebra).

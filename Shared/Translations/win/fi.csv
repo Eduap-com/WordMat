@@ -1862,3 +1862,5 @@
 1861#£N‰ytt‰‰ kuvaajat, pisteet, vektorit ja tilastot WordMat+:n omassa kuvaajaohjelmassa. Ei vaadi internetyhteytt‰.
 1862#£Lis‰‰ kuvakaappaus
 1863#£Avaa kuvaaja ohjelmassa {1}
+1864#£GeoGebra CAS varalla
+1865#£Kun WordMat+ ei itse pysty laskemaan sit‰, kokeillaan GeoGebran CAS:ia. Selityksess‰ n‰kyy silloin (GeoGebra).

@@ -1862,3 +1862,5 @@
 1861#£Zobrazí grafy, body, vektory a statistiku ve vlastním grafickém programu WordMat+. Nevyzaduje internet.
 1862#£Vlozit snímek obrazovky
 1863#£Otevrít graf v {1}
+1864#£GeoGebra CAS jako záloha
+1865#£Kdyz to WordMat+ nedokáze spocítat sám, zkusí se CAS programu GeoGebra. Vysvetlení pak ukazuje (GeoGebra).
