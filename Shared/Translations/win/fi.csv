@@ -1864,3 +1864,15 @@
 1863#£Avaa kuvaaja ohjelmassa {1}
 1864#£GeoGebra CAS varalla
 1865#£Kun WordMat+ ei itse pysty laskemaan sitä, kokeillaan GeoGebran CAS:ia. Selityksessä näkyy silloin (GeoGebra).
+1866#£Graafista ratkaisua voi käyttää vain yhdelle yhtälölle tai epäyhtälölle, esim. x^2=2x+3.
+1867#£Yhtälöä ei voi ratkaista graafisesti muuttujan {1} suhteen GeoGebrassa, kun siinä on myös {2}.
+1868#£Alt+L ratkaisee heti yhtälön, jossa on yksi muuttuja. Painike ja Alt+Shift+L näyttävät aina valintaikkunan.
+1869#£Kohdistimen edellä ei ole yhtälöä, jolla on tulos.
+1870#£Lisää edellisen yhtälön tuloksen: kohdistimen kohdalla olevan yhtälön loppuun tai uutena yhtälönä. Paina heti uudelleen, niin saat sitä edeltävän tuloksen.
+1871#£Yhtälössä ei ole muuttujia, joiden suhteen se voitaisiin ratkaista.
+1872#£Aseta kohdistin johonkin sivun tekstiin.
+1873#£Näyttää aina valintaikkunan, jossa valitset muuttujan, väliaikaiset määritelmät ja ratkaisumenetelmän.
+1874#£Tiedostoa {1} ei löytynyt. Asenna WordMat uudelleen.
+1875#£WordMatin MathMenu.dll on vanhempi versio, jossa ei ole JavaScriptiä. Asenna WordMat uudelleen.
+1876#£Aktiivista WordMat+-lisenssiä ei ole.\n\nWordMat+ for OneNote laskee WordMat+:n omalla CAS-ohjelmalla, joka vaatii lisenssin. Katso www.wordmat.dk.
+1877#£GeoGebraa (kuvaajat ja CAS) käytetään Eduapin ja GeoGebran välisen sopimuksen mukaisesti.

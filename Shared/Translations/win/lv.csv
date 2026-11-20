@@ -1864,3 +1864,15 @@
 1863#£Atvert grafiku programma {1}
 1864#£GeoGebra CAS ka rezerve
 1865#£Ja WordMat+ pats to nevar aprekinat, tiek izmeginats GeoGebra CAS. Skaidrojuma tad redzams (GeoGebra).
+1866#£Grafisko risinajumu var izmantot tikai vienam vienadojumam vai nevienadibai, piem., x^2=2x+3.
+1867#£Vienadojumu nevar grafiski atrisinat attieciba pret {1} programma GeoGebra, ja taja ir ari {2}.
+1868#£Alt+L uzreiz atrisina vienadojumu ar vienu mainigo. Poga un Alt+Shift+L vienmer parada dialoglodzinu.
+1869#£Pirms kursora nav neviena vienadojuma ar rezultatu.
+1870#£Ievieto iepriekseja vienadojuma rezultatu: vienadojuma beigas pie kursora vai ka jaunu vienadojumu. Tulit nospiediet velreiz, lai iegutu rezultatu pirms ta.
+1871#£Vienadojumam nav mainigo, attieciba pret kuriem to atrisinat.
+1872#£Novietojiet kursoru kada lapas teksta.
+1873#£Vienmer parada dialoglodzinu, kura izvelaties mainigo, pagaidu definicijas un risinasanas metodi.
+1874#£{1} netika atrasts. Instalejiet WordMat velreiz.
+1875#£WordMat fails MathMenu.dll ir vecaka versija bez JavaScript. Instalejiet WordMat velreiz.
+1876#£Nav aktivas WordMat+ licences.\n\nWordMat+ for OneNote rekina ar pasa WordMat+ CAS, kam nepieciesama licence. Skatiet www.wordmat.dk.
+1877#£GeoGebra (grafiki un CAS) tiek izmantota saskana ar Eduap un GeoGebra vienosanos.

@@ -1864,3 +1864,15 @@
 1863#£Otwórz wykres w {1}
 1864#£GeoGebra CAS jako rezerwa
 1865#£Gdy WordMat+ nie potrafi tego sam obliczyc, próbowany jest CAS GeoGebry. Wyjasnienie pokazuje wtedy (GeoGebra).
+1866#£Rozwiazanie graficzne mozna zastosowac tylko do jednego równania lub nierównosci, np. x^2=2x+3.
+1867#£Równania nie mozna rozwiazac graficznie wzgledem {1} w GeoGebrze, gdy zawiera ono takze {2}.
+1868#£Alt+L od razu rozwiazuje równanie z jedna zmienna. Przycisk i Alt+Shift+L zawsze pokazuja okno dialogowe.
+1869#£Przed kursorem nie ma równania z wynikiem.
+1870#£Wstawia wynik poprzedniego równania: na koncu równania przy kursorze lub jako nowe równanie. Nacisnij ponownie zaraz potem, aby wstawic wczesniejszy wynik.
+1871#£Równanie nie ma zmiennych, wzgledem których mozna je rozwiazac.
+1872#£Umiesc kursor w tekscie na stronie.
+1873#£Zawsze pokazuje okno dialogowe, w którym wybierasz zmienna, tymczasowe definicje i metode rozwiazywania.
+1874#£Nie znaleziono pliku {1}. Zainstaluj WordMat ponownie.
+1875#£Plik MathMenu.dll programu WordMat jest starsza wersja bez JavaScriptu. Zainstaluj WordMat ponownie.
+1876#£Brak aktywnej licencji WordMat+.\n\nWordMat+ dla OneNote oblicza za pomoca wlasnego systemu CAS programu WordMat+, który wymaga licencji. Zobacz www.wordmat.dk.
+1877#£GeoGebra (wykresy i CAS) jest uzywana na podstawie umowy miedzy Eduap a GeoGebra.

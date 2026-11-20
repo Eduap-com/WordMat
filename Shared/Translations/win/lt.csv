@@ -1864,3 +1864,15 @@
 1863#£Atidaryti grafika programoje {1}
 1864#£GeoGebra CAS kaip atsargine
 1865#£Kai WordMat+ pati negali to apskaiciuoti, bandoma GeoGebra CAS. Paaiskinime tada rodoma (GeoGebra).
+1866#£Grafini sprendima galima naudoti tik vienai lygciai arba nelygybei, pvz., x^2=2x+3.
+1867#£Lygties negalima grafiskai isspresti {1} atzvilgiu programoje GeoGebra, kai joje yra ir {2}.
+1868#£Alt+L is karto issprendzia lygti su vienu kintamuoju. Mygtukas ir Alt+Shift+L visada parodo dialogo langa.
+1869#£Pries zymekli nera lygties su rezultatu.
+1870#£Iterpia ankstesnes lygties rezultata: lygties ties zymekliu pabaigoje arba kaip nauja lygti. Iskart paspauskite dar karta, kad gautumete pries tai buvusi rezultata.
+1871#£Lygtis neturi kintamuju, kuriu atzvilgiu ja butu galima spresti.
+1872#£Padekite zymekli puslapio tekste.
+1873#£Visada rodo dialogo langa, kuriame pasirenkate kintamaji, laikinus apibrezimus ir sprendimo metoda.
+1874#£{1} nerastas. Idiekite WordMat is naujo.
+1875#£WordMat failas MathMenu.dll yra senesne versija be JavaScript. Idiekite WordMat is naujo.
+1876#£Nera aktyvios WordMat+ licencijos.\n\nWordMat+ for OneNote skaiciuoja naudodama pacios WordMat+ CAS, kuriai reikia licencijos. Zr. www.wordmat.dk.
+1877#£GeoGebra (grafikai ir CAS) naudojama pagal Eduap ir GeoGebra susitarima.

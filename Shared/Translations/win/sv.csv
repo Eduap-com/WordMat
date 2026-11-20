@@ -1864,3 +1864,15 @@
 1863#£Öppna grafen i {1}
 1864#£GeoGebra CAS som reserv
 1865#£När WordMat+ inte själv kan beräkna det prövas GeoGebras CAS. Förklaringen visar då (GeoGebra).
+1866#£Grafisk lösning kan bara användas för en enda ekvation eller olikhet, t.ex. x^2=2x+3.
+1867#£Ekvationen kan inte lösas grafiskt för {1} i GeoGebra när den också innehåller {2}.
+1868#£Alt+L löser genast en ekvation med en variabel. Knappen och Alt+Shift+L visar alltid dialogrutan.
+1869#£Det finns ingen ekvation med ett resultat före markören.
+1870#£Infogar resultatet av den föregående ekvationen: sist i ekvationen vid markören, eller som en ny ekvation. Tryck igen direkt efteråt för resultatet före det.
+1871#£Ekvationen har inga variabler att lösa för.
+1872#£Placera markören i en text på sidan.
+1873#£Visar alltid dialogrutan där du väljer variabel, tillfälliga definitioner och lösningsmetod.
+1874#£{1} hittades inte. Installera WordMat igen.
+1875#£WordMats MathMenu.dll är en äldre version utan JavaScript. Installera WordMat igen.
+1876#£Det finns ingen aktiv WordMat+-licens.\n\nWordMat+ för OneNote räknar med WordMat+:s eget CAS, som kräver en licens. Se www.wordmat.dk.
+1877#£GeoGebra (grafer och CAS) används enligt avtal mellan Eduap och GeoGebra.

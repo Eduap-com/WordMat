@@ -1864,3 +1864,15 @@
 1863#£Lat grafin upp í {1}
 1864#£GeoGebra CAS sum eyka
 1865#£Tá WordMat+ ikki sjálvt kann rokna tað, verður CAS hjá GeoGebra roynt. Frágreiðingin vísir tá (GeoGebra).
+1866#£Grafisk loysn kann bert nýtast til eina einstaka líkning ella ólíkning, t.d. x^2=2x+3.
+1867#£Líkningin kann ikki loysast grafiskt fyri {1} í GeoGebra, tá hon eisini inniheldur {2}.
+1868#£Alt+L loysir beinanvegin eina líkning við einari variabul. Knappurin og Alt+Shift+L vísa altíð samskiftisrútin.
+1869#£Tað er eingin líkning við einum úrsliti framman fyri markørin.
+1870#£Setur úrslitið av undanfarnu líkningini inn: síðst í líkningini við markørin, ella sum eina nýggja líkning. Trýst aftur beint aftaná fyri úrslitið undan tí.
+1871#£Líkningin hevur ongar variablar at loysa fyri.
+1872#£Set markørin í ein tekst á síðuni.
+1873#£Vísir altíð samskiftisrútin, har tú velur variabul, fyribils allýsingar og loysnarhátt.
+1874#£{1} varð ikki funnin. Innlegg WordMat av nýggjum.
+1875#£MathMenu.dll hjá WordMat er ein eldri útgáva uttan JavaScript. Innlegg WordMat av nýggjum.
+1876#£Tað er einki virkið WordMat+ loyvi.\n\nWordMat+ til OneNote roknar við egna CAS hjá WordMat+, sum krevur eitt loyvi. Sí www.wordmat.dk.
+1877#£GeoGebra (grafar og CAS) verður brúkt eftir avtalu millum Eduap og GeoGebra.

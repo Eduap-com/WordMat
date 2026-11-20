@@ -1864,3 +1864,15 @@
 1863#£Apri il grafico in {1}
 1864#£GeoGebra CAS come riserva
 1865#£Quando WordMat+ non riesce a calcolarlo da solo, viene provato il CAS di GeoGebra. La spiegazione mostra allora (GeoGebra).
+1866#£La soluzione grafica può essere usata solo per una singola equazione o disequazione, ad es. x^2=2x+3.
+1867#£L'equazione non può essere risolta graficamente per {1} in GeoGebra quando contiene anche {2}.
+1868#£Alt+L risolve subito un'equazione con una variabile. Il pulsante e Alt+Shift+L mostrano sempre la finestra di dialogo.
+1869#£Non c'è nessuna equazione con un risultato prima del cursore.
+1870#£Inserisce il risultato dell'equazione precedente: alla fine dell'equazione al cursore, oppure come nuova equazione. Premi di nuovo subito dopo per il risultato precedente a quello.
+1871#£L'equazione non ha variabili rispetto a cui risolvere.
+1872#£Posiziona il cursore in un testo della pagina.
+1873#£Mostra sempre la finestra di dialogo in cui scegli la variabile, le definizioni temporanee e il metodo di risoluzione.
+1874#£{1} non è stato trovato. Installa di nuovo WordMat.
+1875#£MathMenu.dll di WordMat è una versione precedente senza JavaScript. Installa di nuovo WordMat.
+1876#£Non c'è una licenza WordMat+ attiva.\n\nWordMat+ per OneNote calcola con il CAS proprio di WordMat+, che richiede una licenza. Vedi www.wordmat.dk.
+1877#£GeoGebra (grafici e CAS) è utilizzato in base a un accordo tra Eduap e GeoGebra.

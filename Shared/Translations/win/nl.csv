@@ -1864,3 +1864,15 @@
 1863#£Grafiek openen in {1}
 1864#£GeoGebra CAS als reserve
 1865#£Als WordMat+ het niet zelf kan berekenen, wordt het CAS van GeoGebra geprobeerd. De uitleg toont dan (GeoGebra).
+1866#£Grafisch oplossen kan alleen worden gebruikt voor één vergelijking of ongelijkheid, bijv. x^2=2x+3.
+1867#£De vergelijking kan in GeoGebra niet grafisch worden opgelost naar {1} als ze ook {2} bevat.
+1868#£Alt+L lost een vergelijking met één variabele meteen op. De knop en Alt+Shift+L tonen altijd het dialoogvenster.
+1869#£Er is geen vergelijking met een resultaat vóór de cursor.
+1870#£Voegt het resultaat van de vorige vergelijking in: aan het einde van de vergelijking bij de cursor, of als een nieuwe vergelijking. Druk direct daarna opnieuw voor het resultaat daarvoor.
+1871#£De vergelijking heeft geen variabelen om naar op te lossen.
+1872#£Plaats de cursor in een tekst op de pagina.
+1873#£Toont altijd het dialoogvenster waarin je de variabele, tijdelijke definities en de oplosmethode kiest.
+1874#£{1} is niet gevonden. Installeer WordMat opnieuw.
+1875#£MathMenu.dll van WordMat is een oudere versie zonder JavaScript. Installeer WordMat opnieuw.
+1876#£Er is geen actieve WordMat+-licentie.\n\nWordMat+ voor OneNote rekent met het eigen CAS van WordMat+, waarvoor een licentie nodig is. Zie www.wordmat.dk.
+1877#£GeoGebra (grafieken en CAS) wordt gebruikt volgens een overeenkomst tussen Eduap en GeoGebra.

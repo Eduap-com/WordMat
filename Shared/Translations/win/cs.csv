@@ -1864,3 +1864,15 @@
 1863#£Otevrít graf v {1}
 1864#£GeoGebra CAS jako záloha
 1865#£Kdyz to WordMat+ nedokáze spocítat sám, zkusí se CAS programu GeoGebra. Vysvetlení pak ukazuje (GeoGebra).
+1866#£Grafické resení lze pouzít jen pro jednu rovnici nebo nerovnici, napr. x^2=2x+3.
+1867#£Rovnici nelze v GeoGebre graficky resit pro {1}, kdyz obsahuje také {2}.
+1868#£Alt+L ihned vyresí rovnici s jednou promennou. Tlacítko a Alt+Shift+L vzdy zobrazí dialog.
+1869#£Pred kurzorem není zádná rovnice s výsledkem.
+1870#£Vlozí výsledek predchozí rovnice: na konec rovnice u kurzoru, nebo jako novou rovnici. Stisknete hned znovu pro výsledek pred ním.
+1871#£Rovnice nemá zádné promenné, pro které by se dala resit.
+1872#£Umístete kurzor do textu na stránce.
+1873#£Vzdy zobrazí dialog, ve kterém zvolíte promennou, docasné definice a metodu resení.
+1874#£Soubor {1} nebyl nalezen. Nainstalujte WordMat znovu.
+1875#£Soubor MathMenu.dll programu WordMat je starsí verze bez JavaScriptu. Nainstalujte WordMat znovu.
+1876#£Není k dispozici aktivní licence WordMat+.\n\nWordMat+ pro OneNote pocítá s vlastním systémem CAS programu WordMat+, který vyzaduje licenci. Viz www.wordmat.dk.
+1877#£GeoGebra (grafy a CAS) se pouzívá na základe dohody mezi Eduap a GeoGebra.

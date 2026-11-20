@@ -1864,3 +1864,15 @@
 1863#£Ava graafik programmis {1}
 1864#£GeoGebra CAS varuna
 1865#£Kui WordMat+ ei suuda seda ise arvutada, proovitakse GeoGebra CAS-i. Selgituses on siis (GeoGebra).
+1866#£Graafilist lahendust saab kasutada ainult ühe võrrandi või võrratuse jaoks, nt x^2=2x+3.
+1867#£Võrrandit ei saa GeoGebras graafiliselt lahendada muutuja {1} suhtes, kui see sisaldab ka muutujat {2}.
+1868#£Alt+L lahendab ühe muutujaga võrrandi kohe. Nupp ja Alt+Shift+L näitavad alati dialoogi.
+1869#£Kursori ees pole ühtegi tulemusega võrrandit.
+1870#£Lisab eelmise võrrandi tulemuse: kursori juures oleva võrrandi lõppu või uue võrrandina. Vajuta kohe uuesti, et saada sellele eelnev tulemus.
+1871#£Võrrandis pole muutujaid, mille suhtes lahendada.
+1872#£Aseta kursor lehel olevasse teksti.
+1873#£Kuvab alati dialoogi, kus valid muutuja, ajutised definitsioonid ja lahendusmeetodi.
+1874#£Faili {1} ei leitud. Installi WordMat uuesti.
+1875#£WordMati MathMenu.dll on vanem versioon ilma JavaScriptita. Installi WordMat uuesti.
+1876#£Aktiivset WordMat+ litsentsi ei ole.\n\nWordMat+ for OneNote arvutab WordMat+ enda CAS-iga, mis nõuab litsentsi. Vaata www.wordmat.dk.
+1877#£GeoGebrat (graafikud ja CAS) kasutatakse Eduapi ja GeoGebra vahelise kokkuleppe alusel.
