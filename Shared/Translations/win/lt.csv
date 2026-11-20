@@ -1876,3 +1876,13 @@
 1875#£WordMat failas MathMenu.dll yra senesne versija be JavaScript. Idiekite WordMat is naujo.
 1876#£Nera aktyvios WordMat+ licencijos.\n\nWordMat+ for OneNote skaiciuoja naudodama pacios WordMat+ CAS, kuriai reikia licencijos. Zr. www.wordmat.dk.
 1877#£GeoGebra (grafikai ir CAS) naudojama pagal Eduap ir GeoGebra susitarima.
+1878#£WordMat+ licencija
+1879#£WordMat+ skirtai Office reikia licencijos: jusu mokyklos partnerystes su Eduap arba aktyvinimo kodo, kuri gaunate pirkdami WordMat+ svetaineje.
+1880#£Aktyvinimo kodas:
+1881#£Aktyvinti
+1882#£Aktyvinimo koda turi sudaryti 20 raidziu ir skaitmenu.
+1883#£Aktyvinimo kodas nebuvo priimtas. Galbut jis jau panaudotas kitame kompiuteryje arba baigesi licencijos laikotarpis.
+1884#£WordMat+ aktyvintas iki {1} imtinai.
+1885#£WordMat+ aktyvintas aktyvinimo kodu iki {1} imtinai
+1886#£WordMat+ licencija baigesi. WordMat+ vis dar galima naudoti, bet sios funkcijos neaktyvios:{1}WordMat+ nuosava CAS. Skaiciuojama su GeoGebra{1}WordMat+ grafikas. Grafikai rodomi GeoGebra{1}Formuliu iterpimas is formuliu rinkinio{1}Sinusine regresija
+1887#£WordMat+ nuosavai CAS reikia aktyvios licencijos, o GeoGebra negalejo to apskaiciuoti.

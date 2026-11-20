@@ -1876,3 +1876,13 @@
 1875#£Le fichier MathMenu.dll de WordMat est une ancienne version sans JavaScript. Installez WordMat à nouveau.
 1876#£Il n'y a pas de licence WordMat+ active.\n\nWordMat+ pour OneNote calcule avec le CAS propre à WordMat+, qui nécessite une licence. Voir www.wordmat.dk.
 1877#£GeoGebra (graphiques et CAS) est utilisé selon un accord entre Eduap et GeoGebra.
+1878#£Licence WordMat+
+1879#£WordMat+ pour Office nécessite une licence : le partenariat de votre école avec Eduap, ou un code d'activation, que vous recevez en achetant WordMat+ sur le site web.
+1880#£Code d'activation :
+1881#£Activer
+1882#£Le code d'activation doit comporter 20 lettres et chiffres.
+1883#£Le code d'activation n'a pas été accepté. Il a peut-être déjà été utilisé sur un autre ordinateur, ou la période de licence a expiré.
+1884#£WordMat+ est activé jusqu'au {1} inclus.
+1885#£WordMat+ activé avec un code d'activation jusqu'au {1} inclus
+1886#£La licence WordMat+ a expiré. WordMat+ peut toujours être utilisé, mais ces fonctions ne sont pas actives :{1}Le CAS de WordMat+. Les calculs sont faits avec GeoGebra{1}WordMat+ graphique. Les graphiques sont affichés dans GeoGebra{1}Insertion de formules depuis le formulaire{1}Régression sinusoïdale
+1887#£Le CAS de WordMat+ nécessite une licence active, et GeoGebra n'a pas pu le calculer.

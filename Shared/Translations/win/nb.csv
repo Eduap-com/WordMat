@@ -1876,3 +1876,13 @@
 1875#£WordMats MathMenu.dll er en eldre versjon uten JavaScript. Installer WordMat på nytt.
 1876#£Det finnes ingen aktiv WordMat+-lisens.\n\nWordMat+ for OneNote regner med WordMat+ sitt eget CAS, som krever en lisens. Se www.wordmat.dk.
 1877#£GeoGebra (grafer og CAS) brukes etter avtale mellom Eduap og GeoGebra.
+1878#£WordMat+-lisens
+1879#£WordMat+ for Office krever en lisens: skolens partnerskap med Eduap, eller en aktiveringskode som du får når du kjøper WordMat+ på nettsiden.
+1880#£Aktiveringskode:
+1881#£Aktiver
+1882#£Aktiveringskoden må være 20 bokstaver og tall.
+1883#£Aktiveringskoden ble ikke godtatt. Kanskje er den allerede brukt på en annen datamaskin, eller lisensperioden er utløpt.
+1884#£WordMat+ er aktivert til og med {1}.
+1885#£WordMat+ aktivert med aktiveringskode til og med {1}
+1886#£Lisensen for WordMat+ er utløpt. WordMat+ kan fortsatt brukes, men disse funksjonene er ikke aktive:{1}WordMat+ sitt eget CAS. Det regnes med GeoGebra{1}WordMat+ graf. Grafene vises i GeoGebra{1}Innsetting av formler fra formelsamlingen{1}Sinusregresjon
+1887#£WordMat+ sitt eget CAS krever en aktiv lisens, og GeoGebra kunne ikke regne det ut.

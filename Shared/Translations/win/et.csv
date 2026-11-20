@@ -1876,3 +1876,13 @@
 1875#£WordMati MathMenu.dll on vanem versioon ilma JavaScriptita. Installi WordMat uuesti.
 1876#£Aktiivset WordMat+ litsentsi ei ole.\n\nWordMat+ for OneNote arvutab WordMat+ enda CAS-iga, mis nõuab litsentsi. Vaata www.wordmat.dk.
 1877#£GeoGebrat (graafikud ja CAS) kasutatakse Eduapi ja GeoGebra vahelise kokkuleppe alusel.
+1878#£WordMat+ litsents
+1879#£WordMat+ Office'i jaoks vajab litsentsi: sinu kooli partnerlust Eduapiga või aktiveerimiskoodi, mille saad WordMat+ veebisaidilt ostes.
+1880#£Aktiveerimiskood:
+1881#£Aktiveeri
+1882#£Aktiveerimiskood peab koosnema 20 tähest ja numbrist.
+1883#£Aktiveerimiskoodi ei aktsepteeritud. Võib-olla on seda juba teises arvutis kasutatud või on litsentsiperiood lõppenud.
+1884#£WordMat+ on aktiveeritud kuni {1} (kaasa arvatud).
+1885#£WordMat+ aktiveeritud aktiveerimiskoodiga kuni {1}
+1886#£WordMat+ litsents on aegunud. WordMat+ saab endiselt kasutada, kuid need funktsioonid ei ole aktiivsed:{1}WordMat+ enda CAS. Arvutatakse GeoGebraga{1}WordMat+ graafik. Graafikud näidatakse GeoGebras{1}Valemite lisamine valemikogust{1}Siinusregressioon
+1887#£WordMat+ enda CAS vajab kehtivat litsentsi ja GeoGebra ei suutnud seda arvutada.

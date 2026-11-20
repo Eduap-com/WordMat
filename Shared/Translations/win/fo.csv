@@ -1876,3 +1876,13 @@
 1875#£MathMenu.dll hjá WordMat er ein eldri útgáva uttan JavaScript. Innlegg WordMat av nýggjum.
 1876#£Tað er einki virkið WordMat+ loyvi.\n\nWordMat+ til OneNote roknar við egna CAS hjá WordMat+, sum krevur eitt loyvi. Sí www.wordmat.dk.
 1877#£GeoGebra (grafar og CAS) verður brúkt eftir avtalu millum Eduap og GeoGebra.
+1878#£WordMat+ loyvi
+1879#£WordMat+ til Office krevur eitt loyvi: samstarv skúla tíns við Eduap, ella ein virkjanarkoda, sum tú fært, tá ið tú keypir WordMat+ á heimasíðuni.
+1880#£Virkjanarkoda:
+1881#£Virkja
+1882#£Virkjanarkodan skal vera 20 bókstavir og tøl.
+1883#£Virkjanarkodan varð ikki góðtikin. Kanska er hon longu brúkt á eini aðrari teldu, ella er loyvistíðarskeiðið útgingið.
+1884#£WordMat+ er virkjað til og við {1}.
+1885#£WordMat+ virkjað við virkjanarkodu til og við {1}
+1886#£Loyvið til WordMat+ er útgingið. WordMat+ kann framvegis brúkast, men hesar funktiónir eru ikki virknar:{1}WordMat+'s egna CAS. Roknað verður við GeoGebra{1}WordMat+ graf. Grafarnir verða vístir í GeoGebra{1}Innseting av formlum úr formilsavninum{1}Sinusregressión
+1887#£WordMat+'s egna CAS krevur eitt virkið loyvi, og GeoGebra kundi ikki rokna tað.

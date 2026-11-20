@@ -1876,3 +1876,13 @@
 1875#£WordMatin MathMenu.dll on vanhempi versio, jossa ei ole JavaScripti‰. Asenna WordMat uudelleen.
 1876#£Aktiivista WordMat+-lisenssi‰ ei ole.\n\nWordMat+ for OneNote laskee WordMat+:n omalla CAS-ohjelmalla, joka vaatii lisenssin. Katso www.wordmat.dk.
 1877#£GeoGebraa (kuvaajat ja CAS) k‰ytet‰‰n Eduapin ja GeoGebran v‰lisen sopimuksen mukaisesti.
+1878#£WordMat+-lisenssi
+1879#£WordMat+ for Office vaatii lisenssin: koulusi kumppanuuden Eduapin kanssa tai aktivointikoodin, jonka saat ostaessasi WordMat+:n verkkosivulta.
+1880#£Aktivointikoodi:
+1881#£Aktivoi
+1882#£Aktivointikoodissa on oltava 20 kirjainta ja numeroa.
+1883#£Aktivointikoodia ei hyv‰ksytty. Se on ehk‰ jo k‰ytetty toisella tietokoneella, tai lisenssikausi on p‰‰ttynyt.
+1884#£WordMat+ on aktivoitu {1} asti.
+1885#£WordMat+ aktivoitu aktivointikoodilla {1} asti
+1886#£WordMat+-lisenssi on p‰‰ttynyt. WordMat+:aa voi edelleen k‰ytt‰‰, mutta n‰m‰ toiminnot eiv‰t ole k‰ytˆss‰:{1}WordMat+:n oma CAS. Laskut tehd‰‰n GeoGebralla{1}WordMat+ kuvaaja. Kuvaajat n‰ytet‰‰n GeoGebrassa{1}Kaavojen lis‰‰minen kaavakokoelmasta{1}Sinisregressio
+1887#£WordMat+:n oma CAS vaatii voimassa olevan lisenssin, eik‰ GeoGebra pystynyt laskemaan sit‰.

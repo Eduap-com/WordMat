@@ -1876,3 +1876,13 @@
 1875#£Soubor MathMenu.dll programu WordMat je starsí verze bez JavaScriptu. Nainstalujte WordMat znovu.
 1876#£Není k dispozici aktivní licence WordMat+.\n\nWordMat+ pro OneNote pocítá s vlastním systémem CAS programu WordMat+, který vyzaduje licenci. Viz www.wordmat.dk.
 1877#£GeoGebra (grafy a CAS) se pouzívá na základe dohody mezi Eduap a GeoGebra.
+1878#£Licence WordMat+
+1879#£WordMat+ pro Office vyzaduje licenci: partnerství vasí skoly s Eduap, nebo aktivacní kód, který získáte pri nákupu WordMat+ na webu.
+1880#£Aktivacní kód:
+1881#£Aktivovat
+1882#£Aktivacní kód musí mít 20 písmen a císlic.
+1883#£Aktivacní kód nebyl prijat. Mozná uz byl pouzit na jiném pocítaci, nebo vyprsela doba licence.
+1884#£WordMat+ je aktivován do {1} vcetne.
+1885#£WordMat+ aktivován aktivacním kódem do {1} vcetne
+1886#£Licence WordMat+ vyprsela. WordMat+ lze stále pouzívat, ale tyto funkce nejsou aktivní:{1}Vlastní CAS WordMat+. Pocítá se v GeoGebre{1}WordMat+ graf. Grafy se zobrazují v GeoGebre{1}Vkládání vzorcu ze sbírky vzorcu{1}Sinusová regrese
+1887#£Vlastní CAS WordMat+ vyzaduje aktivní licenci a GeoGebra to nedokázala spocítat.
