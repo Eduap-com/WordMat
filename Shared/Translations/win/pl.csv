@@ -1293,11 +1293,11 @@
 1292#£Równanie nie zawieralo rozwiazan w zbiorze definicyjnym {1}
 1293#£Równanie nie zawieralo rozwiazan {2} dla zmiennych {1}
 1294#£Zapisz {1}x po wyrazeniu w calce (np. {2}x^2 {1}x)
-1295#£Równanie zawiera strukture, której VBACAS jeszcze nie potrafi obliczyc: \n\n      {1}
+1295#£Równanie zawiera strukture, której WordMat+ CAS jeszcze nie potrafi obliczyc: \n\n      {1}
 1296#£Sume zapisz z k=a ponizej i b nad znakiem (np. k=1 i n)
-1297#£Równanie zawiera akcent, którego VBACAS nie potrafi jeszcze obliczyc: \n\n      {1}
-1298#£Równanie zawiera strukture, której VBACAS jeszcze nie potrafi obliczyc (wielowierszowa tablica równan): \n\n      {1}
-1299#£Równanie zawiera strukture, której VBACAS nie potrafi jeszcze obliczyc (np. suma, calka, granica, macierz lub akcent): \n\n      {1}
+1297#£Równanie zawiera akcent, którego WordMat+ CAS nie potrafi jeszcze obliczyc: \n\n      {1}
+1298#£Równanie zawiera strukture, której WordMat+ CAS jeszcze nie potrafi obliczyc (wielowierszowa tablica równan): \n\n      {1}
+1299#£Równanie zawiera strukture, której WordMat+ CAS nie potrafi jeszcze obliczyc (np. suma, calka, granica, macierz lub akcent): \n\n      {1}
 1300#£Zapisz {1}x {1}y po wyrazeniu w podwójnej calce (np. {2}x·y {1}x {1}y)
 1301#£Calka musi miec {1} rózniczki (np. {2}x {2}y)
 1302#£Równanie wydaje sie obejmowac:
@@ -1415,7 +1415,7 @@
 1414#£Kadry sa definiowane wylacznie dla liczb calkowitych
 1415#£Kadry sa definiowane tylko dla liczb >= 0
 1416#£Liczba ta jest zbyt duza dla kadry
-1417#£Liczba ta jest zbyt duza - VBACAS nie potrafi obliczyc liczby powyzej 170 jako liczby dziesietne
+1417#£Liczba ta jest zbyt duza - WordMat+ CAS nie potrafi obliczyc liczby powyzej 170 jako liczby dziesietne
 1418#£desolve musi miec równanie rózniczkowe, np. desolve(y'=2y)
 1419#£Równanie rózniczkowe musi byc równaniem, np. y'=2y
 1420#£Argument {1} w desolve nie jest rozumiany
@@ -1455,8 +1455,8 @@
 1454#£Wybierz równania, z których eliminujesz zmienne.
 1455#£Wybierz co najmniej dwa równania, aby wyeliminowac zmienne (np. x=2t+1 i y=t^2).
 1456#£Umiesc kursor w równaniu rózniczkowym, które ma byc rozwiazane.
-1457#£Nie ma aktywnej licencji WordMat+. \n\nWordMat+ nadal moze byc uzywany, ale te funkcje nie sa aktywne: {1}WordMat+ wlasny CAS (VBACAS). Grafy Maxima lub GeoGe{1}bra sa liczone w oknie GeoGebra WordMat. Sa wyswietlane w przegladarce{1} Wstawianie wzorów z kolekcji wzorów{1}Regresja sinusowa{1}Menu personalizacji\n\nKliknij OK, aby przejsc do www.wordmat.dk
-1458#£Nie ma aktywnej licencji WordMat+, wiec nie mozna uzywac wlasnego CAS (VBACAS) WordMat+, ani Maxima, ani GeoGebra na tym komputerze. Wybierz jedna z nich w Ustawieniach, zainstaluj WordMat z Maxima lub odnow licencje na www.wordmat.dk.
+1457#£Nie ma aktywnej licencji WordMat+. \n\nWordMat+ nadal moze byc uzywany, ale te funkcje nie sa aktywne: {1}WordMat+ wlasny CAS (WordMat+ CAS). Grafy Maxima lub GeoGe{1}bra sa liczone w oknie GeoGebra WordMat. Sa wyswietlane w przegladarce{1} Wstawianie wzorów z kolekcji wzorów{1}Regresja sinusowa{1}Menu personalizacji\n\nKliknij OK, aby przejsc do www.wordmat.dk
+1458#£Nie ma aktywnej licencji WordMat+, wiec nie mozna uzywac wlasnego CAS (WordMat+ CAS) WordMat+, ani Maxima, ani GeoGebra na tym komputerze. Wybierz jedna z nich w Ustawieniach, zainstaluj WordMat z Maxima lub odnow licencje na www.wordmat.dk.
 1459#£Maxima nie jest czescia tej wersji WordMat+
 1460#£Równanie jest juz ponumerowane.
 1461#£Równania numerowanego nie mozna wstawic do tabeli.
@@ -1681,7 +1681,7 @@
 1680#£Musisz wpisac dokladnie 3 katy/boki, ale nie tylko 3. \nWiec: \n1 bok + 2 katy\n2 boki + 1 kat (mozliwe 2 rozwiazania)\n3 strony
 1681#£Dokladnie tam, gdzie odpowiedz jest pozadana. Moze wplywac na czas obliczen.
 1682#£Nie znaleziono kodu LaTeX. Wybierz kod lub umiesc kursor w równaniu LaTeX (np. {1} lub {2}).
-1683#£{1} {2} nie moze byc odczytany przez VBACAS i jest zapisywany jako tekst ({3}) w dokumencie LaTeX.
+1683#£{1} {2} nie moze byc odczytany przez WordMat+ CAS i jest zapisywany jako tekst ({3}) w dokumencie LaTeX.
 1684#£Dywergencja {1} wymaga funkcji wektorowej. Gradient {2} zapisuje sie jako {3}
 1685#£Rotacja {1} wymaga funkcji wektorowej o 2 lub 3 wspólrzednych
 1686#£{1} wymaga, aby {2} miala tyle samo wspólrzednych co zmiennych
@@ -1856,7 +1856,7 @@
 1855#£iloczyn
 1856#£WordMat+ umozliwia wykonywanie obliczen matematycznych w Wordzie.\nWordMat zostal stworzony przez Mikaela Samsøe Sørensena, Nyborg Gymnasium, EDUAP 2009-{1}.
 1857#£Uzyj CAS w JavaScript (szybszy)
-1858#£CAS programu WordMat+ jest uruchamiany przez silnik JavaScript QuickJS. Bez zaznaczenia oblicza VBACAS.
+1858#£CAS programu WordMat+ jest uruchamiany przez silnik JavaScript QuickJS. Bez zaznaczenia oblicza WordMat+ CAS (VBA).
 1859#£Wbudowany CAS: {1}
 1860#£Silnik JavaScript: QuickJS, © Fabrice Bellard, Charlie Gordon i inni (licencja MIT)
 1861#£Pokazuje wykresy, punkty, wektory i statystyke we wlasnym programie graficznym WordMat+. Nie wymaga internetu.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ aktywowany kodem aktywacyjnym do {1} wlacznie
 1886#£Licencja WordMat+ wygasla. WordMat+ nadal mozna uzywac, ale te funkcje nie sa aktywne:{1}Wlasny CAS WordMat+. Obliczenia wykonuje GeoGebra{1}WordMat+ wykres. Wykresy sa pokazywane w GeoGebrze{1}Wstawianie wzorów ze zbioru wzorów{1}Regresja sinusoidalna
 1887#£Wlasny CAS WordMat+ wymaga aktywnej licencji, a GeoGebra nie mogla tego obliczyc.
+1888#£Klawiatura ekranowa
+1889#£WordMat+ nalezy do Eduap. © Eduap 2009-{1}. Wszelkie prawa zastrzezone.
+1890#£Wykresy: JSXGraph, © Matthias Ehmann, Alfred Wassermann i inni (licencja MIT)
+1891#£WordMat+ umozliwia wykonywanie obliczen matematycznych w Wordzie.\nWordMat+ zostal stworzony przez Mikaela Samsøe Sørensena, Nyborg Gymnasium, EDUAP 2009-{1}.
+1892#£GeoGebra (wykresy i CAS) jest uzywana na podstawie umowy licencyjnej i umowy o wspólpracy miedzy Eduap a GeoGebra GmbH, www.geogebra.org.
+1893#£Maly tekst
+1894#£Sredni tekst
+1895#£Duzy tekst

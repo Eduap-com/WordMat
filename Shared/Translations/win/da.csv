@@ -1293,11 +1293,11 @@
 1292#£Ligningen havde ingen løsninger i definitionsmængden {1}
 1293#£Ligningen havde ingen løsninger indenfor {2} for variabel {1}
 1294#£Skriv {1}x efter udtrykket i integralet (fx {2}x^2 {1}x)
-1295#£Ligningen indeholder en struktur som VBACAS ikke kan beregne endnu:\n\n      {1}
+1295#£Ligningen indeholder en struktur som WordMat+ CAS ikke kan beregne endnu:\n\n      {1}
 1296#£Skriv summen med k=a under og b over tegnet (fx k=1 og n)
-1297#£Ligningen indeholder en accent som VBACAS ikke kan beregne endnu:\n\n      {1}
-1298#£Ligningen indeholder en struktur som VBACAS ikke kan beregne endnu (et ligningsarray med flere rækker):\n\n      {1}
-1299#£Ligningen indeholder en struktur som VBACAS ikke kan beregne endnu (fx sum, integral, grænseværdi, matrix eller accent):\n\n      {1}
+1297#£Ligningen indeholder en accent som WordMat+ CAS ikke kan beregne endnu:\n\n      {1}
+1298#£Ligningen indeholder en struktur som WordMat+ CAS ikke kan beregne endnu (et ligningsarray med flere rækker):\n\n      {1}
+1299#£Ligningen indeholder en struktur som WordMat+ CAS ikke kan beregne endnu (fx sum, integral, grænseværdi, matrix eller accent):\n\n      {1}
 1300#£Skriv {1}x {1}y efter udtrykket i dobbeltintegralet (fx {2}x·y {1}x {1}y)
 1301#£Integralet skal have {1} differentialer (fx {2}x {2}y)
 1302#£Ligningen ser ud til at indeholde:
@@ -1415,7 +1415,7 @@
 1414#£Fakultet er kun defineret for hele tal
 1415#£Fakultet er kun defineret for tal >= 0
 1416#£Tallet er for stort til fakultet
-1417#£Tallet er for stort - VBACAS kan ikke beregne fakultet af tal over 170 som decimaltal
+1417#£Tallet er for stort - WordMat+ CAS kan ikke beregne fakultet af tal over 170 som decimaltal
 1418#£desolve skal have en differentialligning, fx desolve(y'=2y)
 1419#£Differentialligningen skal være en ligning, fx y'=2y
 1420#£Argumentet {1} i desolve forstås ikke
@@ -1455,8 +1455,8 @@
 1454#£Markér de ligninger der skal elimineres variable fra.
 1455#£Markér mindst to ligninger for at eliminere variable (fx x=2t+1 og y=t^2).
 1456#£Placer cursoren i den differentialligning der skal løses.
-1457#£Der er ikke en aktiv WordMat+ licens.\n\nWordMat+ kan stadig bruges, men disse funktioner er ikke aktive:{1}WordMat+'s eget CAS (VBACAS). Der regnes med Maxima eller GeoGebra{1}Grafer i WordMat's GeoGebra-vindue. De vises i browseren{1}Indsættelse af formler fra formelsamlingen{1}Sinusregression{1}Tilpas menu\n\nKlik OK for at gå til www.wordmat.dk
-1458#£Der er ikke en aktiv WordMat+ licens, så WordMat+'s eget CAS (VBACAS) kan ikke bruges, og hverken Maxima eller GeoGebra kan bruges på denne computer. Vælg et af dem under Indstillinger, installer WordMat med Maxima, eller forny licensen på www.wordmat.dk.
+1457#£Der er ikke en aktiv WordMat+ licens.\n\nWordMat+ kan stadig bruges, men disse funktioner er ikke aktive:{1}WordMat+ CAS. Der regnes med Maxima eller GeoGebra{1}Grafer i WordMat's GeoGebra-vindue. De vises i browseren{1}Indsættelse af formler fra formelsamlingen{1}Sinusregression{1}Tilpas menu\n\nKlik OK for at gå til www.wordmat.dk
+1458#£Der er ikke en aktiv WordMat+ licens, så WordMat+ CAS kan ikke bruges, og hverken Maxima eller GeoGebra kan bruges på denne computer. Vælg et af dem under Indstillinger, installer WordMat med Maxima, eller forny licensen på www.wordmat.dk.
 1459#£Maxima er ikke en del af denne version af WordMat+
 1460#£Ligningen er allerede nummereret.
 1461#£Der kan ikke indsættes en nummereret ligning i en tabel.
@@ -1681,7 +1681,7 @@
 1680#£Du skal indtaste præcis 3 vinkler/sider, men ikke kun 3 vinkler.\nAltså:\n1 side + 2 vinkler\n2 sider + 1 vinkel  (muligvis 2 løsninger)\n3 sider
 1681#£Hvor præcis svaret ønskes. Kan påvirke beregningstid.
 1682#£Der blev ikke fundet nogen LaTeX-kode. Markér koden, eller placer cursoren i en LaTeX-ligning (fx {1} eller {2}).
-1683#£{1}{2} kunne ikke læses af VBACAS og er skrevet som tekst ({3}) i LaTeX-dokumentet.
+1683#£{1}{2} kunne ikke læses af WordMat+ CAS og er skrevet som tekst ({3}) i LaTeX-dokumentet.
 1684#£Divergensen {1} kræver en vektorfunktion. Gradienten af {2} skrives {3}
 1685#£Rotationen (curl) {1} kræver en vektorfunktion med 2 eller 3 koordinater
 1686#£{1} kræver, at {2} har lige så mange koordinater som variable
@@ -1856,7 +1856,7 @@
 1855#£produkt
 1856#£WordMat+ gør det muligt at foretage matematiske beregninger i Word.\nWordMat er lavet af Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
 1857#£Brug JavaScript-CAS (hurtigere)
-1858#£WordMat+'s CAS køres af JavaScript-motoren QuickJS. Uden fluebenet regner VBACAS.
+1858#£WordMat+'s CAS køres af JavaScript-motoren QuickJS. Uden fluebenet regner WordMat+ CAS (VBA).
 1859#£Indbygget CAS: {1}
 1860#£JavaScript-motor: QuickJS, © Fabrice Bellard, Charlie Gordon m.fl. (MIT-licens)
 1861#£Viser grafer, punkter, vektorer og statistik i WordMat+'s eget grafprogram. Kræver ikke internet.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ aktiveret med aktiveringskode til og med {1}
 1886#£Licensen til WordMat+ er udløbet. WordMat+ kan stadig bruges, men disse funktioner er ikke aktive:{1}WordMat+'s eget CAS. Der regnes med GeoGebra{1}WordMat+ graf. Graferne vises i GeoGebra{1}Indsættelse af formler fra formelsamlingen{1}Sinusregression
 1887#£WordMat+'s eget CAS kræver en aktiv licens, og GeoGebra kunne ikke regne det.
+1888#£Skærmtastatur
+1889#£WordMat+ tilhører Eduap. © Eduap 2009-{1}. Alle rettigheder forbeholdes.
+1890#£Graftegning: JSXGraph, © Matthias Ehmann, Alfred Wassermann m.fl. (MIT-licens)
+1891#£WordMat+ gør det muligt at foretage matematiske beregninger i Word.\nWordMat+ er lavet af Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1892#£GeoGebra (grafer og CAS) bruges efter licens- og samarbejdsaftale mellem Eduap og GeoGebra GmbH, www.geogebra.org.
+1893#£Lille skrift
+1894#£Mellem skrift
+1895#£Stor skrift

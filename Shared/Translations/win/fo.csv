@@ -1293,11 +1293,11 @@
 1292#£Javnan hevði ongar loysnir í ásetingarsettinum {1}
 1293#£Javnan hevði ongar loysnir í {2} fyri variabla {1}
 1294#£Skriva {1}x aftan á úttrykkini í integralinum (t.d. {2}x^2 {1}x)
-1295#£Javnan inniheldur eina bygging, sum VBACAS enn ikki kann rokna: \n\n      {1}
+1295#£Javnan inniheldur eina bygging, sum WordMat+ CAS enn ikki kann rokna: \n\n      {1}
 1296#£Skriva summuna við k=a niðanfyri og b omanfyri karakterin (t.d. k=1 og nou)
-1297#£Javnan inniheldur ein aksent, sum VBACAS enn ikki kann rokna: \n\n      {1}
-1298#£Jøvnan inniheldur eina bygging, sum VBACAS enn ikki kann rokna út (ein fleirraða javnu-røð): \n\n      {1}
-1299#£Javnan inniheldur eina bygging, sum VBACAS enn ikki kann rokna út (t.d. summa, integral, limit, matriks ella aksent): \n\n      {1}
+1297#£Javnan inniheldur ein aksent, sum WordMat+ CAS enn ikki kann rokna: \n\n      {1}
+1298#£Jøvnan inniheldur eina bygging, sum WordMat+ CAS enn ikki kann rokna út (ein fleirraða javnu-røð): \n\n      {1}
+1299#£Javnan inniheldur eina bygging, sum WordMat+ CAS enn ikki kann rokna út (t.d. summa, integral, limit, matriks ella aksent): \n\n      {1}
 1300#£Skriva {1}x {1}y aftaná úttrykkinum í tvíintegralinum (t.d. {2}x·y {1}x {1}y)
 1301#£Integralið má hava {1} differentialar (t.d. {2}x {2}y)
 1302#£Javnan tykist at fevna um:
@@ -1415,7 +1415,7 @@
 1414#£Faculty er definerað bert fyri heiltøl
 1415#£Faculty er bert ásett fyri tøl >= 0
 1416#£Talið er ov stórt fyri lærarar
-1417#£Talið er ov stórt - VBACAS kann ikki rokna førleikan av tølum yvir 170 sum desimaltøl
+1417#£Talið er ov stórt - WordMat+ CAS kann ikki rokna førleikan av tølum yvir 170 sum desimaltøl
 1418#£desolve má hava eina differentialjavnu, t.d. desolve(y'=2y)
 1419#£Differentialjavnan má vera ein javna, t.d. y'=2y
 1420#£Argumentið {1} í uppløsing verður ikki skilt
@@ -1455,8 +1455,8 @@
 1454#£Vel jøvnirnar at strika variablar úr.
 1455#£Vel minst tvær javnur fyri at strika broytur (t.d. x=2t+1 og y=t^2).
 1456#£Set kursorin í differentialjavnuna, sum skal loysast.
-1457#£Tað er eingin virkin WordMat+ licens. \n\nWordMat+ kann framvegis nýtast, men hesar funktiónir eru ikki virknar: {1}WordMat+'s egna CAS (VBACAS). Maxima ella GeoGe{1}bra grafar verða taldir í GeoGebra-vindeyganum hjá WordMat. Teir verða vístir í vafranum{1}Innseting av formulum úr formulusavninum{1}Sinus regressión{1}Tillaga valmyndina\n\nTrýst OK fyri at fara til www.wordmat.dk
-1458#£Tað er eingin virkin WordMat+ licens, so WordMat+'s egna CAS (VBACAS) kann ikki nýtast, og hvørki Maxima ella GeoGebra kunnu nýtast á hesi teldu. Vel eina av teimum undir Settings, installera WordMat við Maxima, ella endurnýggja licensina á www.wordmat.dk.
+1457#£Tað er eingin virkin WordMat+ licens. \n\nWordMat+ kann framvegis nýtast, men hesar funktiónir eru ikki virknar: {1}WordMat+'s egna CAS (WordMat+ CAS). Maxima ella GeoGe{1}bra grafar verða taldir í GeoGebra-vindeyganum hjá WordMat. Teir verða vístir í vafranum{1}Innseting av formulum úr formulusavninum{1}Sinus regressión{1}Tillaga valmyndina\n\nTrýst OK fyri at fara til www.wordmat.dk
+1458#£Tað er eingin virkin WordMat+ licens, so WordMat+'s egna CAS (WordMat+ CAS) kann ikki nýtast, og hvørki Maxima ella GeoGebra kunnu nýtast á hesi teldu. Vel eina av teimum undir Settings, installera WordMat við Maxima, ella endurnýggja licensina á www.wordmat.dk.
 1459#£Maxima er ikki partur av hesi útgávuni av WordMat+
 1460#£Javnan er longu nummarað.
 1461#£Ein nummarað javna kann ikki setast inn í eina talvu.
@@ -1681,7 +1681,7 @@
 1680#£Tú mást skriva inn júst 3 vinklar/síður, men ikki bara 3 vinklar. \nSo: \n1 síða + 2 vinklar\n2 síður + 1 vinkul (kanska 2 loysnir)\n3 síður
 1681#£Har júst svarið er ynskt. Kann ávirka útreikningartíðina.
 1682#£Einki LaTeX-koda funnin. Vel kóðan ella set kursorin í eina LaTeX-javnu (t.d. {1} ella {2}).
-1683#£{1} {2} kundi ikki lesast av VBACAS og er skrivað sum tekstur ({3}) í LaTeX-skjalinum.
+1683#£{1} {2} kundi ikki lesast av WordMat+ CAS og er skrivað sum tekstur ({3}) í LaTeX-skjalinum.
 1684#£Divergensurin {1} krevur eina vektorfunktión. Gradienturin hjá {2} verður skrivaður {3}
 1685#£Rotatiónin (curl) {1} krevur eina vektorfunktión við 2 ella 3 koordinatum
 1686#£{1} krevur, at {2} hevur líka nógvar koordinatar sum variablar
@@ -1856,7 +1856,7 @@
 1855#£produkt
 1856#£WordMat+ ger tað møguligt at gera matematiskar útreikningar í Word.\nWordMat er framleitt av Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
 1857#£Brúka JavaScript-CAS (skjótari)
-1858#£CAS hjá WordMat+ verður koyrt av JavaScript-motorinum QuickJS. Uttan flugubeinið roknar VBACAS.
+1858#£CAS hjá WordMat+ verður koyrt av JavaScript-motorinum QuickJS. Uttan flugubeinið roknar WordMat+ CAS (VBA).
 1859#£Innbygt CAS: {1}
 1860#£JavaScript-motorur: QuickJS, © Fabrice Bellard, Charlie Gordon o.o. (MIT-loyvi)
 1861#£Vísir grafar, punkt, vektorar og hagfrøði í egna grafforritinum hjá WordMat+. Krevur ikki internet.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ virkjað við virkjanarkodu til og við {1}
 1886#£Loyvið til WordMat+ er útgingið. WordMat+ kann framvegis brúkast, men hesar funktiónir eru ikki virknar:{1}WordMat+'s egna CAS. Roknað verður við GeoGebra{1}WordMat+ graf. Grafarnir verða vístir í GeoGebra{1}Innseting av formlum úr formilsavninum{1}Sinusregressión
 1887#£WordMat+'s egna CAS krevur eitt virkið loyvi, og GeoGebra kundi ikki rokna tað.
+1888#£Skíggjaknappaborð
+1889#£WordMat+ er ogn hjá Eduap. © Eduap 2009-{1}. Øll rættindi tilskilað.
+1890#£Grafar: JSXGraph, © Matthias Ehmann, Alfred Wassermann o.o. (MIT-loyvi)
+1891#£WordMat+ ger tað møguligt at gera matematiskar útreikningar í Word.\nWordMat+ er gjørt av Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1892#£GeoGebra (grafar og CAS) verður brúkt eftir loyvis- og samstarvsavtalu millum Eduap og GeoGebra GmbH, www.geogebra.org.
+1893#£Lítil skrift
+1894#£Miðal skrift
+1895#£Stór skrift

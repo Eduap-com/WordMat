@@ -1293,11 +1293,11 @@
 1292#£The equation had no solutions in the domain {1}
 1293#£The equation had no solutions in the domain {2} for variable {1}
 1294#£Write {1}x after the expression in the integral (e.g. {2}x^2 {1}x)
-1295#£The equation contains a structure that VBACAS cannot calculate yet: \n\n      {1}
+1295#£The equation contains a structure that WordMat+ CAS cannot calculate yet: \n\n      {1}
 1296#£Write the sum with k=a below and b above the character (e.g. k=1 and n)
-1297#£The equation contains an accent that VBACAS cannot calculate yet: \n\n      {1}
-1298#£The equation contains a structure that VBACAS cannot calculate yet (a multi-row equation array): \n\n      {1}
-1299#£The equation contains a structure that VBACAS cannot calculate yet (e.g. sum, integral, limit, matrix or accent): \n\n      {1}
+1297#£The equation contains an accent that WordMat+ CAS cannot calculate yet: \n\n      {1}
+1298#£The equation contains a structure that WordMat+ CAS cannot calculate yet (a multi-row equation array): \n\n      {1}
+1299#£The equation contains a structure that WordMat+ CAS cannot calculate yet (e.g. sum, integral, limit, matrix or accent): \n\n      {1}
 1300#£Write {1}x {1}y after the expression in the double integral (e.g. {2}x·y {1}x {1}y)
 1301#£The integral must have {1} differentials (e.g. {2}x {2}y)
 1302#£The equation seems to include:
@@ -1415,7 +1415,7 @@
 1414#£Faculty is defined for whole numbers only
 1415#£Faculty is defined only for numbers >= 0
 1416#£The number is too large for faculty
-1417#£The number is too large - VBACAS cannot calculate the faculty of numbers over 170 as decimal numbers
+1417#£The number is too large - WordMat+ CAS cannot calculate the faculty of numbers over 170 as decimal numbers
 1418#£desolve must have a differential equation, e.g. desolve(y'=2y)
 1419#£The differential equation must be an equation, e.g. y'=2y
 1420#£The argument {1} in desolve is not understood
@@ -1455,8 +1455,8 @@
 1454#£Select the equations to eliminate variables from.
 1455#£Select at least two equations to eliminate variables (e.g., x=2t+1 and y=t^2).
 1456#£Place the cursor in the differential equation to be solved.
-1457#£There is no active WordMat+ license.\n\nWordMat+ can still be used, but these functions are not active:{1}WordMat+'s own CAS (VBACAS). Calculations use Maxima or GeoGebra{1}Graphs in WordMat's GeoGebra window. They are shown in the browser{1}Inserting formulas from the formula collection{1}Sine regression{1}Customize menu\n\nClick OK to go to www.wordmat.dk
-1458#£There is not an active WordMat+ license, so WordMat+'s own CAS (VBACAS) cannot be used, and neither Maxima nor GeoGebra can be used on this computer. Choose one of them under Settings, install WordMat with Maxima, or renew the license on www.wordmat.dk.
+1457#£There is no active WordMat+ license.\n\nWordMat+ can still be used, but these functions are not active:{1}WordMat+ CAS. Calculations use Maxima or GeoGebra{1}Graphs in WordMat's GeoGebra window. They are shown in the browser{1}Inserting formulas from the formula collection{1}Sine regression{1}Customize menu\n\nClick OK to go to www.wordmat.dk
+1458#£There is not an active WordMat+ license, so WordMat+ CAS cannot be used, and neither Maxima nor GeoGebra can be used on this computer. Choose one of them under Settings, install WordMat with Maxima, or renew the license on www.wordmat.dk.
 1459#£Maxima is not part of this version of WordMat+
 1460#£The equation is already numbered.
 1461#£A numbered equation cannot be inserted into a table.
@@ -1681,7 +1681,7 @@
 1680#£You need to enter exactly 3 angles/sides, but not just 3 angles. \nSo: \n1 side + 2 angles\n2 sides + 1 angle (possibly 2 solutions)\n3 pages
 1681#£Where exactly the answer is desired. May affect calculation time.
 1682#£No LaTeX code found. Select the code or place the cursor in a LaTeX equation (e.g. {1} or {2}).
-1683#£{1} {2} could not be read by VBACAS and is written as text ({3}) in the LaTeX document.
+1683#£{1} {2} could not be read by WordMat+ CAS and is written as text ({3}) in the LaTeX document.
 1684#£The divergence {1} requires a vector function. The gradient of {2} is written {3}
 1685#£The curl {1} requires a vector function with 2 or 3 coordinates
 1686#£{1} requires {2} to have as many coordinates as variables
@@ -1856,7 +1856,7 @@
 1855#£product
 1856#£WordMat+ makes it possible to make mathematical calculations in Word.\nWordMat is made by Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
 1857#£Use the JavaScript CAS (faster)
-1858#£The CAS of WordMat+ is run by the JavaScript engine QuickJS. Without the check mark, VBACAS calculates.
+1858#£The CAS of WordMat+ is run by the JavaScript engine QuickJS. Without the check mark, WordMat+ CAS (VBA) calculates.
 1859#£Built-in CAS: {1}
 1860#£JavaScript engine: QuickJS, © Fabrice Bellard, Charlie Gordon and others (MIT license)
 1861#£Shows graphs, points, vectors and statistics in WordMat+'s own graphing program. Does not require internet.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ activated with an activation code until {1}
 1886#£The WordMat+ license has expired. WordMat+ can still be used, but these features are not active:{1}WordMat+'s own CAS. GeoGebra calculates instead{1}WordMat+ graph. The graphs are shown in GeoGebra{1}Inserting formulas from the formula collection{1}Sine regression
 1887#£WordMat+'s own CAS requires an active license, and GeoGebra could not calculate it.
+1888#£On-screen keyboard
+1889#£WordMat+ belongs to Eduap. © Eduap 2009-{1}. All rights reserved.
+1890#£Graphs: JSXGraph, © Matthias Ehmann, Alfred Wassermann and others (MIT license)
+1891#£WordMat+ makes it possible to make mathematical calculations in Word.\nWordMat+ is made by Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1892#£GeoGebra (graphs and CAS) is used under a license and collaboration agreement between Eduap and GeoGebra GmbH, www.geogebra.org.
+1893#£Small text
+1894#£Medium text
+1895#£Large text

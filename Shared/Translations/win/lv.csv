@@ -1293,11 +1293,11 @@
 1292#£Vienadojumam definicijas kopa nebija risinajumu {1}
 1293#£Vienadojumam nebija risinajumu {2} mainigajiem {1}
 1294#£Pieraksti {1}x pec izteiksmes integrali (piemeram, {2}x^2 {1}x)
-1295#£Vienadojuma ir struktura, ko VBACAS vel nevar aprekinat: \n\n      {1}
+1295#£Vienadojuma ir struktura, ko WordMat+ CAS vel nevar aprekinat: \n\n      {1}
 1296#£Uzrakstit summu ar k=a zem rakstzimes un b virs rakstzimes (piemeram, k=1 un n)
-1297#£Vienadojuma ir akcents, ko VBACAS vel nevar aprekinat: \n\n      {1}
-1298#£Vienadojuma ir struktura, ko VBACAS vel nevar aprekinat (daudzrindu vienadojumu masivs): \n\n      {1}
-1299#£Vienadojuma ir struktura, ko VBACAS vel nevar aprekinat (piemeram, summa, integralis, robeza, matrica vai akcents): \n\n      {1}
+1297#£Vienadojuma ir akcents, ko WordMat+ CAS vel nevar aprekinat: \n\n      {1}
+1298#£Vienadojuma ir struktura, ko WordMat+ CAS vel nevar aprekinat (daudzrindu vienadojumu masivs): \n\n      {1}
+1299#£Vienadojuma ir struktura, ko WordMat+ CAS vel nevar aprekinat (piemeram, summa, integralis, robeza, matrica vai akcents): \n\n      {1}
 1300#£Pieraksti {1}x {1}y pec izteiksmes dubultintegrali (piemeram, {2}x·y {1}x {1}y)
 1301#£Integralim jabut {1} diferencialiem (piemeram, {2}x {2}y)
 1302#£Vienadojums skiet ietver:
@@ -1415,7 +1415,7 @@
 1414#£Fakultate tiek defineta tikai veseliem skaitliem
 1415#£Fakultate tiek defineta tikai skaitliem >= 0
 1416#£Sis skaits ir parak liels macibspekiem
-1417#£Skaitlis ir parak liels - VBACAS nevar aprekinat skaitli virs 170 ka decimaldalu
+1417#£Skaitlis ir parak liels - WordMat+ CAS nevar aprekinat skaitli virs 170 ka decimaldalu
 1418#£desolve jabut diferencialvienadojumam, piemeram, desolve(y'=2y)
 1419#£Diferencialvienadojumam jabut vienadojumam, piemeram, y'=2y
 1420#£Arguments, kas {1} izskiduma, nav saprotams
@@ -1455,8 +1455,8 @@
 1454#£Izvelieties vienadojumus, no kuriem izslegt mainigos.
 1455#£Izvelieties vismaz divus vienadojumus, lai izslegtu mainigos (piemeram, x=2t+1 un y=t^2).
 1456#£Novietojiet kursoru atrisinamaja diferencialvienadojuma.
-1457#£Nav aktivas WordMat+ licences. \n\nWordMat+ joprojam var izmantot, tacu sis funkcijas nav aktivas: {1}WordMat+ pasa CAS (VBACAS). Maxima vai GeoGe{1}bra grafiki tiek skaititi WordMat GeoGebra loga. Tie tiek atteloti parlukprogramma{1}Formulu ievietosana no formulu kolekcijas{1}Sinusa regresija{1}Pielagot izvelni\n\nNoklikskiniet uz OK, lai dotos uz www.wordmat.dk
-1458#£Nav aktivas WordMat+ licences, tapec WordMat+ pasa CAS (VBACAS) nevar izmantot, un ne Maxima, ne GeoGebra nevar izmantot saja datora. Izvelieties vienu no tiem iestatijumos, instalejiet WordMat ar Maxima vai atjaunojiet licenci www.wordmat.dk.
+1457#£Nav aktivas WordMat+ licences. \n\nWordMat+ joprojam var izmantot, tacu sis funkcijas nav aktivas: {1}WordMat+ pasa CAS (WordMat+ CAS). Maxima vai GeoGe{1}bra grafiki tiek skaititi WordMat GeoGebra loga. Tie tiek atteloti parlukprogramma{1}Formulu ievietosana no formulu kolekcijas{1}Sinusa regresija{1}Pielagot izvelni\n\nNoklikskiniet uz OK, lai dotos uz www.wordmat.dk
+1458#£Nav aktivas WordMat+ licences, tapec WordMat+ pasa CAS (WordMat+ CAS) nevar izmantot, un ne Maxima, ne GeoGebra nevar izmantot saja datora. Izvelieties vienu no tiem iestatijumos, instalejiet WordMat ar Maxima vai atjaunojiet licenci www.wordmat.dk.
 1459#£Maxima nav dala no sis WordMat+ versijas
 1460#£Vienadojums jau ir numurets.
 1461#£Numuretu vienadojumu tabula nevar ievietot.
@@ -1681,7 +1681,7 @@
 1680#£Jaievada tiesi 3 lenki/malas, bet ne tikai 3 lenki. \nTatad: \n1 mala + 2 lenki\n2 malas + 1 lenkis (iespejams, 2 risinajumi)\n3 lapas
 1681#£Kur tiesi tiek prasita atbilde. Var ietekmet aprekina laiku.
 1682#£LaTeX kods nav atrasts. Izvelieties kodu vai novietojiet kursoru LaTeX vienadojuma (piemeram, {1} vai {2}).
-1683#£{1} {2} VBACAS nevareja nolasit, un LaTeX dokumenta ta ir rakstita ka teksts ({3}).
+1683#£{1} {2} WordMat+ CAS nevareja nolasit, un LaTeX dokumenta ta ir rakstita ka teksts ({3}).
 1684#£Divergencei {1} nepieciesama vektorfunkcija. Funkcijas {2} gradientu raksta {3}
 1685#£Rotoram (curl) {1} nepieciesama vektorfunkcija ar 2 vai 3 koordinatam
 1686#£{1} prasa, lai {2} butu tikpat daudz koordinatu, cik mainigo
@@ -1856,7 +1856,7 @@
 1855#£reizinajums
 1856#£WordMat+ lauj veikt matematiskos aprekinus Word vide.\nWordMat razo Mikael Samsøe Sørensen, Nyborg gimnazija, EDUAP 2009-{1}.
 1857#£Izmantot JavaScript CAS (atraks)
-1858#£WordMat+ CAS darbina JavaScript dzinejs QuickJS. Bez atzimes rekina VBACAS.
+1858#£WordMat+ CAS darbina JavaScript dzinejs QuickJS. Bez atzimes rekina WordMat+ CAS (VBA).
 1859#£Iebuvetais CAS: {1}
 1860#£JavaScript dzinejs: QuickJS, © Fabrice Bellard, Charlie Gordon u. c. (MIT licence)
 1861#£Rada grafikus, punktus, vektorus un statistiku WordMat+ pasa grafiku programma. Internets nav nepieciesams.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ aktivizets ar aktivizacijas kodu lidz {1} ieskaitot
 1886#£WordMat+ licence ir beigusies. WordMat+ joprojam var izmantot, bet sis funkcijas nav aktivas:{1}WordMat+ pasu CAS. Aprekinus veic GeoGebra{1}WordMat+ grafiks. Grafiki tiek raditi GeoGebra{1}Formulu ievietosana no formulu krajuma{1}Sinusa regresija
 1887#£WordMat+ pasu CAS ir nepieciesama aktiva licence, un GeoGebra to nevareja aprekinat.
+1888#£Ekrana tastatura
+1889#£WordMat+ pieder Eduap. © Eduap 2009-{1}. Visas tiesibas aizsargatas.
+1890#£Grafiki: JSXGraph, © Matthias Ehmann, Alfred Wassermann u. c. (MIT licence)
+1891#£WordMat+ lauj veikt matematiskos aprekinus Word vide.\nWordMat+ veido Mikael Samsøe Sørensen, Nyborg gimnazija, EDUAP 2009-{1}.
+1892#£GeoGebra (grafiki un CAS) tiek izmantota saskana ar Eduap un GeoGebra GmbH licences un sadarbibas ligumu, www.geogebra.org.
+1893#£Mazs teksts
+1894#£Videjs teksts
+1895#£Liels teksts

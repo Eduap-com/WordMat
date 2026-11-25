@@ -1293,11 +1293,11 @@
 1292#£La ecuación no tenía soluciones en el conjunto de definiciones {1}
 1293#£La ecuación no tenía soluciones en {2} para la variable {1}
 1294#£Escribe {1}x después de la expresión en la integral (por ejemplo, {2}x^2 {1}x)
-1295#£La ecuación contiene una estructura que VBACAS aún no puede calcular: \n\n      {1}
+1295#£La ecuación contiene una estructura que WordMat+ CAS aún no puede calcular: \n\n      {1}
 1296#£Escribe la suma con k=a debajo y b encima del carácter (por ejemplo, k=1 y n)
-1297#£La ecuación contiene un acento que VBACAS aún no puede calcular: \n\n      {1}
-1298#£La ecuación contiene una estructura que VBACAS aún no puede calcular (un arreglo de ecuaciones de varias filas): \n\n      {1}
-1299#£La ecuación contiene una estructura que VBACAS aún no puede calcular (por ejemplo, suma, integral, límite, matriz o acento): \n\n      {1}
+1297#£La ecuación contiene un acento que WordMat+ CAS aún no puede calcular: \n\n      {1}
+1298#£La ecuación contiene una estructura que WordMat+ CAS aún no puede calcular (un arreglo de ecuaciones de varias filas): \n\n      {1}
+1299#£La ecuación contiene una estructura que WordMat+ CAS aún no puede calcular (por ejemplo, suma, integral, límite, matriz o acento): \n\n      {1}
 1300#£Escribe {1}x {1}y después de la expresión en la doble integral (por ejemplo, {2}x·y {1}x {1}y)
 1301#£La integral debe tener {1} diferenciales (por ejemplo, {2}x {2}y)
 1302#£La ecuación parece incluir:
@@ -1415,7 +1415,7 @@
 1414#£La facultad se define solo para números enteros
 1415#£La facultad se define solo para números >= 0
 1416#£El número es demasiado grande para el profesorado
-1417#£El número es demasiado grande: VBACAS no puede calcular la facultad de números superiores a 170 como números decimales
+1417#£El número es demasiado grande: WordMat+ CAS no puede calcular la facultad de números superiores a 170 como números decimales
 1418#£desolve debe tener una ecuación diferencial, por ejemplo, desolve(y'=2y)
 1419#£La ecuación diferencial debe ser una ecuación, por ejemplo, y'=2y
 1420#£El argumento {1} en desolving no se entiende
@@ -1455,8 +1455,8 @@
 1454#£Selecciona las ecuaciones para eliminar variables de .
 1455#£Selecciona al menos dos ecuaciones para eliminar variables (por ejemplo, x=2t+1 y y=t^2).
 1456#£Coloca el cursor en la ecuación diferencial a resolver.
-1457#£No existe una licencia activa de WordMat+. \n\nWordMat+ aún puede usarse, pero estas funciones no están activas: el CAS propio de {1}WordMat+ (VBACAS). Los gráficos Maxima o GeoGe{1}bra se cuentan en la ventana GeoGebra de WordMat. Se muestran en el navegador{1} Insertar fórmulas de la colección de fórmulas{1}Regresión seno{1} Menú de personalización\n\nHaz clic en OK para ir a www.wordmat.dk
-1458#£No existe una licencia activa de WordMat+, por lo que no se puede usar el propio CAS de WordMat+ (VBACAS), y ni Maxima ni GeoGebra pueden usarse en este ordenador. Elige una de ellas en Configuración, instala WordMat con Maxima o renueva la licencia en www.wordmat.dk.
+1457#£No existe una licencia activa de WordMat+. \n\nWordMat+ aún puede usarse, pero estas funciones no están activas: el CAS propio de {1}WordMat+ (WordMat+ CAS). Los gráficos Maxima o GeoGe{1}bra se cuentan en la ventana GeoGebra de WordMat. Se muestran en el navegador{1} Insertar fórmulas de la colección de fórmulas{1}Regresión seno{1} Menú de personalización\n\nHaz clic en OK para ir a www.wordmat.dk
+1458#£No existe una licencia activa de WordMat+, por lo que no se puede usar el propio CAS de WordMat+ (WordMat+ CAS), y ni Maxima ni GeoGebra pueden usarse en este ordenador. Elige una de ellas en Configuración, instala WordMat con Maxima o renueva la licencia en www.wordmat.dk.
 1459#£Maxima no forma parte de esta versión de WordMat+
 1460#£La ecuación ya está numerada.
 1461#£No se puede insertar una ecuación numerada en una tabla.
@@ -1681,7 +1681,7 @@
 1680#£Tienes que introducir exactamente 3 ángulos/lados, pero no solo 3 ángulos. \nAsí que: \n1 lado + 2 ángulos\n2 lados + 1 ángulo (posiblemente 2 soluciones)\n3 páginas
 1681#£Dónde exactamente se desea la respuesta. Puede afectar al tiempo de cálculo.
 1682#£No se ha encontrado código LaTeX. Selecciona el código o coloca el cursor en una ecuación LaTeX (por ejemplo, {1} o {2}).
-1683#£{1} {2} no podía ser leído por VBACAS y está escrito como texto ({3}) en el documento LaTeX.
+1683#£{1} {2} no podía ser leído por WordMat+ CAS y está escrito como texto ({3}) en el documento LaTeX.
 1684#£La divergencia {1} requiere una función vectorial. El gradiente de {2} se escribe {3}
 1685#£El rotacional {1} requiere una función vectorial con 2 o 3 coordenadas
 1686#£{1} requiere que {2} tenga tantas coordenadas como variables
@@ -1856,7 +1856,7 @@
 1855#£producto
 1856#£WordMat+ permite realizar cálculos matemáticos en Word.\nWordMat está fabricado por Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
 1857#£Usar el CAS de JavaScript (más rápido)
-1858#£El CAS de WordMat+ se ejecuta con el motor de JavaScript QuickJS. Sin la marca, calcula VBACAS.
+1858#£El CAS de WordMat+ se ejecuta con el motor de JavaScript QuickJS. Sin la marca, calcula WordMat+ CAS (VBA).
 1859#£CAS integrado: {1}
 1860#£Motor de JavaScript: QuickJS, © Fabrice Bellard, Charlie Gordon y otros (licencia MIT)
 1861#£Muestra gráficas, puntos, vectores y estadística en el programa de gráficas propio de WordMat+. No requiere internet.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ activado con código de activación hasta el {1}
 1886#£La licencia de WordMat+ ha caducado. WordMat+ se puede seguir usando, pero estas funciones no están activas:{1}El CAS propio de WordMat+. Se calcula con GeoGebra{1}WordMat+ gráfica. Las gráficas se muestran en GeoGebra{1}Insertar fórmulas de la colección de fórmulas{1}Regresión sinusoidal
 1887#£El CAS propio de WordMat+ requiere una licencia activa, y GeoGebra no pudo calcularlo.
+1888#£Teclado en pantalla
+1889#£WordMat+ pertenece a Eduap. © Eduap 2009-{1}. Todos los derechos reservados.
+1890#£Gráficos: JSXGraph, © Matthias Ehmann, Alfred Wassermann y otros (licencia MIT)
+1891#£WordMat+ permite realizar cálculos matemáticos en Word.\nWordMat+ está hecho por Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1892#£GeoGebra (gráficas y CAS) se utiliza en virtud de un acuerdo de licencia y colaboración entre Eduap y GeoGebra GmbH, www.geogebra.org.
+1893#£Texto pequeño
+1894#£Texto mediano
+1895#£Texto grande

@@ -1293,11 +1293,11 @@
 1292#£Võrrandil polnud definitsioonide hulgas lahendusi {1}
 1293#£Võrrandil polnud muutujatele {2} lahendusi {1}
 1294#£Kirjuta {1}x pärast avaldist integraalis (nt {2}x^2 {1}x)
-1295#£Võrrand sisaldab struktuuri, mida VBACAS veel arvutada ei suuda: \n\n      {1}
+1295#£Võrrand sisaldab struktuuri, mida WordMat+ CAS veel arvutada ei suuda: \n\n      {1}
 1296#£Kirjuta summa nii, et k=a on all ja b tähemärgi kohal (nt k=1 ja n)
-1297#£Võrrandis on aktsent, mida VBACAS veel arvutada ei suuda: \n\n      {1}
-1298#£Võrrand sisaldab struktuuri, mida VBACAS veel arvutada ei suuda (mitmerealine võrrandimassiivi): \n\n      {1}
-1299#£Võrrand sisaldab struktuuri, mida VBACAS veel arvutada ei suuda (nt summa, integraal, piirväärtus, maatriks või aktsent): \n\n      {1}
+1297#£Võrrandis on aktsent, mida WordMat+ CAS veel arvutada ei suuda: \n\n      {1}
+1298#£Võrrand sisaldab struktuuri, mida WordMat+ CAS veel arvutada ei suuda (mitmerealine võrrandimassiivi): \n\n      {1}
+1299#£Võrrand sisaldab struktuuri, mida WordMat+ CAS veel arvutada ei suuda (nt summa, integraal, piirväärtus, maatriks või aktsent): \n\n      {1}
 1300#£Kirjuta {1}x {1}y pärast avaldist topeltintegraalis (nt {2}x·y {1}x {1}y)
 1301#£Integraalil peab olema {1} diferentsiaali (nt {2}x {2}y)
 1302#£Võrrand näib sisaldavat:
@@ -1415,7 +1415,7 @@
 1414#£Fakultet on määratletud ainult täisarvude jaoks
 1415#£Fakultet on defineeritud ainult arvude >= 0 korral
 1416#£See arv on õppejõududele liiga suur
-1417#£See arv on liiga suur - VBACAS ei suuda arvutada üle 170 kümnendarvude arvu
+1417#£See arv on liiga suur - WordMat+ CAS ei suuda arvutada üle 170 kümnendarvude arvu
 1418#£desolve peab sisaldama diferentsiaalvõrrandit, nt desolve(y'=2y)
 1419#£Diferentsiaalvõrrand peab olema võrrand, nt y'=2y
 1420#£Argument {1} desolvatsioonis ei ole arusaadav
@@ -1455,8 +1455,8 @@
 1454#£Vali võrrandid, millest muutujad välja jätta.
 1455#£Vali vähemalt kaks võrrandit, et välistada muutujad (nt x=2t+1 ja y=t^2).
 1456#£Aseta kursor lahendatavasse diferentsiaalvõrrandisse.
-1457#£Aktiivne WordMat+ litsentsi ei ole. \n\nWordMat+ saab endiselt kasutada, kuid need funktsioonid ei ole aktiivsed: {1}WordMat+ enda CAS (VBACAS). Maxima või GeoGe{1}bra graafikud loetakse WordMati GeoGebra aknas. Need kuvatakse brauseris{1} Valemite lisamine valemikogust{1}Siinuse regressioon{1}Kohanda menüü\n\nKlõpsa OK, et minna www.wordmat.dk
-1458#£Aktiivne WordMat+ litsentsi ei ole, seega ei saa WordMat+ enda CAS-i (VBACAS) kasutada ning ei Maxima ega GeoGebra ei saa selles arvutis kasutada. Vali üks neist seadete alt, paigalda WordMat koos Maximaga või uuenda litsents www.wordmat.dk.
+1457#£Aktiivne WordMat+ litsentsi ei ole. \n\nWordMat+ saab endiselt kasutada, kuid need funktsioonid ei ole aktiivsed: {1}WordMat+ enda CAS (WordMat+ CAS). Maxima või GeoGe{1}bra graafikud loetakse WordMati GeoGebra aknas. Need kuvatakse brauseris{1} Valemite lisamine valemikogust{1}Siinuse regressioon{1}Kohanda menüü\n\nKlõpsa OK, et minna www.wordmat.dk
+1458#£Aktiivne WordMat+ litsentsi ei ole, seega ei saa WordMat+ enda CAS-i (WordMat+ CAS) kasutada ning ei Maxima ega GeoGebra ei saa selles arvutis kasutada. Vali üks neist seadete alt, paigalda WordMat koos Maximaga või uuenda litsents www.wordmat.dk.
 1459#£Maxima ei kuulu sellesse WordMat+ versiooni
 1460#£Võrrand on juba nummerdatud.
 1461#£Nummerdatud võrrandit ei saa tabelisse lisada.
@@ -1681,7 +1681,7 @@
 1680#£Pead sisestama täpselt 3 nurka/külge, aga mitte ainult 3 nurka. \nNii et: \n1 külg + 2 nurka\n2 külge + 1 nurk (võimalik, et 2 lahendust)\n3 lehekülge
 1681#£Kus täpselt soovitud vastus on. Võib mõjutada arvutusaega.
 1682#£LaTeX koodi ei leitud. Vali kood või aseta kursor LaTeX-võrrandisse (nt {1} või {2}).
-1683#£{1} {2} ei saanud VBACAS lugeda ja on LaTeX dokumendis kirjutatud tekstina ({3}).
+1683#£{1} {2} ei saanud WordMat+ CAS lugeda ja on LaTeX dokumendis kirjutatud tekstina ({3}).
 1684#£Divergents {1} nõuab vektorfunktsiooni. Funktsiooni {2} gradient kirjutatakse {3}
 1685#£Rootor (curl) {1} nõuab 2 või 3 koordinaadiga vektorfunktsiooni
 1686#£{1} nõuab, et funktsioonil {2} oleks sama palju koordinaate kui muutujaid
@@ -1856,7 +1856,7 @@
 1855#£korrutis
 1856#£WordMat+ võimaldab teha matemaatilisi arvutusi Wordis.\nWordMati valmistab Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
 1857#£Kasuta JavaScripti CAS-i (kiirem)
-1858#£WordMat+ CAS-i käitab JavaScripti mootor QuickJS. Ilma linnukeseta arvutab VBACAS.
+1858#£WordMat+ CAS-i käitab JavaScripti mootor QuickJS. Ilma linnukeseta arvutab WordMat+ CAS (VBA).
 1859#£Sisseehitatud CAS: {1}
 1860#£JavaScripti mootor: QuickJS, © Fabrice Bellard, Charlie Gordon jt (MIT-litsents)
 1861#£Näitab graafikuid, punkte, vektoreid ja statistikat WordMat+ enda graafikuprogrammis. Ei vaja internetti.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ aktiveeritud aktiveerimiskoodiga kuni {1}
 1886#£WordMat+ litsents on aegunud. WordMat+ saab endiselt kasutada, kuid need funktsioonid ei ole aktiivsed:{1}WordMat+ enda CAS. Arvutatakse GeoGebraga{1}WordMat+ graafik. Graafikud näidatakse GeoGebras{1}Valemite lisamine valemikogust{1}Siinusregressioon
 1887#£WordMat+ enda CAS vajab kehtivat litsentsi ja GeoGebra ei suutnud seda arvutada.
+1888#£Ekraaniklaviatuur
+1889#£WordMat+ kuulub Eduapile. © Eduap 2009-{1}. Kõik õigused kaitstud.
+1890#£Graafikud: JSXGraph, © Matthias Ehmann, Alfred Wassermann jt (MIT-litsents)
+1891#£WordMat+ võimaldab teha matemaatilisi arvutusi Wordis.\nWordMat+-i on teinud Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1892#£GeoGebrat (graafikud ja CAS) kasutatakse Eduapi ja GeoGebra GmbH vahelise litsentsi- ja koostöölepingu alusel, www.geogebra.org.
+1893#£Väike tekst
+1894#£Keskmine tekst
+1895#£Suur tekst

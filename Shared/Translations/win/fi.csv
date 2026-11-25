@@ -1293,11 +1293,11 @@
 1292#£Yhtälöllä ei ollut ratkaisuja määritelmäjoukossa {1}
 1293#£Yhtälöllä ei ollut ratkaisuja {2} muuttujalle {1}
 1294#£Kirjoita {1}x integraalin lausekkeen jälkeen (esim. {2}x^2 {1}x)
-1295#£Yhtälö sisältää rakenteen, jota VBACAS ei vielä pysty laskemaan: \n\n      {1}
+1295#£Yhtälö sisältää rakenteen, jota WordMat+ CAS ei vielä pysty laskemaan: \n\n      {1}
 1296#£Kirjoita summa siten, että k=a on merkin alapuolella ja b merkin yläpuolella (esim. k=1 ja n)
-1297#£Yhtälössä on aksentti, jota VBACAS ei vielä pysty laskemaan: \n\n      {1}
-1298#£Yhtälö sisältää rakenteen, jota VBACAS ei vielä pysty laskemaan (monirivinen yhtälötaulukko): \n\n      {1}
-1299#£Yhtälö sisältää rakenteen, jota VBACAS ei vielä pysty laskemaan (esim. summa, integraali, raja-arvo, matriisi tai aksentti): \n\n      {1}
+1297#£Yhtälössä on aksentti, jota WordMat+ CAS ei vielä pysty laskemaan: \n\n      {1}
+1298#£Yhtälö sisältää rakenteen, jota WordMat+ CAS ei vielä pysty laskemaan (monirivinen yhtälötaulukko): \n\n      {1}
+1299#£Yhtälö sisältää rakenteen, jota WordMat+ CAS ei vielä pysty laskemaan (esim. summa, integraali, raja-arvo, matriisi tai aksentti): \n\n      {1}
 1300#£Kirjoitetaan {1}x {1}y kaksoisintegraalin lausekkeen jälkeen (esim. {2}x·y {1}x {1}y)
 1301#£Integraalilla täytyy olla {1} differentiaalia (esim. {2}x {2}y)
 1302#£Yhtälö näyttää sisältävän:
@@ -1415,7 +1415,7 @@
 1414#£Faculty määritellään vain kokonaisluvuille
 1415#£Tiedekunta määritellään vain luvuille >= 0
 1416#£Luku on liian suuri henkilökunnalle
-1417#£Luku on liian suuri - VBACAS ei voi laskea yli 170 luvun arvoa desimaalilukuina
+1417#£Luku on liian suuri - WordMat+ CAS ei voi laskea yli 170 luvun arvoa desimaalilukuina
 1418#£desolve täytyy olla differentiaaliyhtälö, esim. desolve(y'=2y)
 1419#£Differentiaaliyhtälön täytyy olla yhtälö, esim. y'=2y
 1420#£Argumenttia, {1} desoluutissa ei ole ymmärretty
@@ -1455,8 +1455,8 @@
 1454#£Valitse yhtälöt, joista poistetaan muuttujat.
 1455#£Valitse vähintään kaksi yhtälöä muuttujien poistamiseksi (esim. x=2t+1 ja y=t^2).
 1456#£Aseta kursori ratkaistavaan differentiaaliyhtälöön.
-1457#£Voimassa olevaa WordMat+-lisenssiä ei ole. \n\nWordMat+ on edelleen käytettävissä, mutta nämä toiminnot eivät ole aktiivisia: {1}WordMat+:n oma CAS (VBACAS). Maxima- tai GeoGe{1}bra-graafit lasketaan WordMatin GeoGebra-ikkunassa. Ne näytetään selaimessa{1} Kaavojen lisääminen kaavakokoelmasta{1}Siniregressio{1} Räätälöi valikko\n\nKlikkaa OK siirtyäksesi www.wordmat.dk
-1458#£Aktiivista WordMat+-lisenssiä ei ole, joten WordMat+:n omaa CAS:a (VBACAS) ei voi käyttää, eikä Maximaa tai GeoGebraa voi käyttää tällä koneella. Valitse jompikumpi asetuksista, asenna WordMat Maximan kanssa tai uusita lisenssi www.wordmat.dk.
+1457#£Voimassa olevaa WordMat+-lisenssiä ei ole. \n\nWordMat+ on edelleen käytettävissä, mutta nämä toiminnot eivät ole aktiivisia: {1}WordMat+:n oma CAS (WordMat+ CAS). Maxima- tai GeoGe{1}bra-graafit lasketaan WordMatin GeoGebra-ikkunassa. Ne näytetään selaimessa{1} Kaavojen lisääminen kaavakokoelmasta{1}Siniregressio{1} Räätälöi valikko\n\nKlikkaa OK siirtyäksesi www.wordmat.dk
+1458#£Aktiivista WordMat+-lisenssiä ei ole, joten WordMat+:n omaa CAS:a (WordMat+ CAS) ei voi käyttää, eikä Maximaa tai GeoGebraa voi käyttää tällä koneella. Valitse jompikumpi asetuksista, asenna WordMat Maximan kanssa tai uusita lisenssi www.wordmat.dk.
 1459#£Maxima ei kuulu tähän WordMat+-versioon
 1460#£Yhtälö on jo numeroitu.
 1461#£Numeroitua yhtälöä ei voi lisätä taulukkoon.
@@ -1681,7 +1681,7 @@
 1680#£Sinun täytyy syöttää täsmälleen 3 kulmaa/sivua, mutta ei vain kolmea kulmaa. \nJoten: \n1 sivu + 2 kulmaa\n2 sivua + 1 kulma (mahdollisesti 2 ratkaisua)\n3 sivua
 1681#£Missä tarkalleen halutaan vastaus. Voi vaikuttaa laskenta-aikaan.
 1682#£LaTeX-koodia ei löytynyt. Valitse koodi tai aseta kursori LaTeX-yhtälöön (esim. {1} tai {2}).
-1683#£{1} {2} VBACAS ei voinut lukea ja se on kirjoitettu tekstinä ({3}) LaTeX-dokumentissa.
+1683#£{1} {2} WordMat+ CAS ei voinut lukea ja se on kirjoitettu tekstinä ({3}) LaTeX-dokumentissa.
 1684#£Divergenssi {1} vaatii vektorifunktion. Funktion {2} gradientti kirjoitetaan {3}
 1685#£Roottori (curl) {1} vaatii vektorifunktion, jossa on 2 tai 3 koordinaattia
 1686#£{1} vaatii, että funktiolla {2} on yhtä monta koordinaattia kuin muuttujaa
@@ -1856,7 +1856,7 @@
 1855#£tulo
 1856#£WordMat+ mahdollistaa matemaattisten laskutoimitusten tekemisen Wordissa.\nWordMatin valmistaa Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
 1857#£Käytä JavaScript-CAS:ia (nopeampi)
-1858#£WordMat+:n CAS toimii QuickJS-JavaScript-moottorilla. Ilman valintamerkkiä laskee VBACAS.
+1858#£WordMat+:n CAS toimii QuickJS-JavaScript-moottorilla. Ilman valintamerkkiä laskee WordMat+ CAS (VBA).
 1859#£Sisäänrakennettu CAS: {1}
 1860#£JavaScript-moottori: QuickJS, © Fabrice Bellard, Charlie Gordon ym. (MIT-lisenssi)
 1861#£Näyttää kuvaajat, pisteet, vektorit ja tilastot WordMat+:n omassa kuvaajaohjelmassa. Ei vaadi internetyhteyttä.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ aktivoitu aktivointikoodilla {1} asti
 1886#£WordMat+-lisenssi on päättynyt. WordMat+:aa voi edelleen käyttää, mutta nämä toiminnot eivät ole käytössä:{1}WordMat+:n oma CAS. Laskut tehdään GeoGebralla{1}WordMat+ kuvaaja. Kuvaajat näytetään GeoGebrassa{1}Kaavojen lisääminen kaavakokoelmasta{1}Sinisregressio
 1887#£WordMat+:n oma CAS vaatii voimassa olevan lisenssin, eikä GeoGebra pystynyt laskemaan sitä.
+1888#£Näyttönäppäimistö
+1889#£WordMat+ on Eduapin omaisuutta. © Eduap 2009-{1}. Kaikki oikeudet pidätetään.
+1890#£Kuvaajat: JSXGraph, © Matthias Ehmann, Alfred Wassermann ym. (MIT-lisenssi)
+1891#£WordMat+ mahdollistaa matemaattisten laskutoimitusten tekemisen Wordissa.\nWordMat+:n on tehnyt Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1892#£GeoGebraa (kuvaajat ja CAS) käytetään Eduapin ja GeoGebra GmbH:n välisen lisenssi- ja yhteistyösopimuksen mukaisesti, www.geogebra.org.
+1893#£Pieni teksti
+1894#£Keskikokoinen teksti
+1895#£Suuri teksti

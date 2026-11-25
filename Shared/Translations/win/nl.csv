@@ -1293,11 +1293,11 @@
 1292#£De vergelijking had geen oplossingen in de definitieverzameling {1}
 1293#£De vergelijking had geen oplossingen in {2} voor variabele {1}
 1294#£Schrijf {1}x na de uitdrukking in de integraal (bijv. {2}x^2 {1}x)
-1295#£De vergelijking bevat een structuur die VBACAS nog niet kan berekenen: \n\n      {1}
+1295#£De vergelijking bevat een structuur die WordMat+ CAS nog niet kan berekenen: \n\n      {1}
 1296#£Schrijf de som met k=a onder en b boven het karakter (bijv. k=1 en n)
-1297#£De vergelijking bevat een accent dat VBACAS nog niet kan berekenen: \n\n      {1}
-1298#£De vergelijking bevat een structuur die VBACAS nog niet kan berekenen (een meerrijige vergelijkingsarray): \n\n      {1}
-1299#£De vergelijking bevat een structuur die VBACAS nog niet kan berekenen (bijv. som, integraal, limiet, matrix of accent): \n\n      {1}
+1297#£De vergelijking bevat een accent dat WordMat+ CAS nog niet kan berekenen: \n\n      {1}
+1298#£De vergelijking bevat een structuur die WordMat+ CAS nog niet kan berekenen (een meerrijige vergelijkingsarray): \n\n      {1}
+1299#£De vergelijking bevat een structuur die WordMat+ CAS nog niet kan berekenen (bijv. som, integraal, limiet, matrix of accent): \n\n      {1}
 1300#£Schrijf {1}x {1}y na de uitdrukking in de dubbele integraal (bijv. {2}x·y {1}x {1}y)
 1301#£De integraal moet {1} differentiëlen hebben (bijvoorbeeld {2}x {2}y)
 1302#£De vergelijking lijkt te bevatten:
@@ -1415,7 +1415,7 @@
 1414#£Faculteit wordt alleen gedefinieerd voor hele getallen
 1415#£Faculteit wordt alleen gedefinieerd voor getallen >= 0
 1416#£Het aantal is te groot voor docenten
-1417#£Het getal is te groot - VBACAS kan de faculteit van getallen boven 170 niet als decimale getallen berekenen
+1417#£Het getal is te groot - WordMat+ CAS kan de faculteit van getallen boven 170 niet als decimale getallen berekenen
 1418#£desolve moet een differentiaalvergelijking hebben, bijvoorbeeld desolve(y'=2y)
 1419#£De differentiaalvergelijking moet een vergelijking zijn, bijvoorbeeld y'=2y
 1420#£Het argument {1} in desolve wordt niet begrepen
@@ -1455,8 +1455,8 @@
 1454#£Selecteer de vergelijkingen waaruit variabelen worden verwijderd.
 1455#£Selecteer ten minste twee vergelijkingen om variabelen te elimineren (bijv. x=2t+1 en y=t^2).
 1456#£Plaats de cursor in de differentiaalvergelijking die opgelost moet worden.
-1457#£Er is geen actieve WordMat+-licentie. \n\nWordMat+ kan nog steeds worden gebruikt, maar deze functies zijn niet actief: {1}WordMat+'s eigen CAS (VBACAS). Maxima- of GeoGe{1}bra-grafieken worden geteld in het GeoGebra-venster van WordMat. Ze worden weergegeven in de browser{1}Formules invoegen uit de formulecollectie{1}Sinusregressie{1}Menu aanpassen\n\nKlik op OK om naar www.wordmat.dk te gaan
-1458#£Er is geen actieve WordMat+-licentie, dus WordMat+'s eigen CAS (VBACAS) kan niet worden gebruikt, en noch Maxima noch GeoGebra kunnen op deze computer worden gebruikt. Kies er één onder Instellingen, installeer WordMat met Maxima, of verleng de licentie op www.wordmat.dk.
+1457#£Er is geen actieve WordMat+-licentie. \n\nWordMat+ kan nog steeds worden gebruikt, maar deze functies zijn niet actief: {1}WordMat+'s eigen CAS (WordMat+ CAS). Maxima- of GeoGe{1}bra-grafieken worden geteld in het GeoGebra-venster van WordMat. Ze worden weergegeven in de browser{1}Formules invoegen uit de formulecollectie{1}Sinusregressie{1}Menu aanpassen\n\nKlik op OK om naar www.wordmat.dk te gaan
+1458#£Er is geen actieve WordMat+-licentie, dus WordMat+'s eigen CAS (WordMat+ CAS) kan niet worden gebruikt, en noch Maxima noch GeoGebra kunnen op deze computer worden gebruikt. Kies er één onder Instellingen, installeer WordMat met Maxima, of verleng de licentie op www.wordmat.dk.
 1459#£Maxima maakt geen deel uit van deze versie van WordMat+
 1460#£De vergelijking is al genummerd.
 1461#£Een genummerde vergelijking kan niet in een tabel worden ingevoegd.
@@ -1681,7 +1681,7 @@
 1680#£Je moet precies 3 hoeken/zijden invoeren, maar niet slechts 3 hoeken. \nDus: \n1 zijde + 2 hoeken\n2 zijden + 1 hoek (mogelijk 2 oplossingen)\n3 pagina's
 1681#£Waar precies het antwoord gewenst is. Kan de rekentijd beïnvloeden.
 1682#£Geen LaTeX-code gevonden. Selecteer de code of plaats de cursor in een LaTeX-vergelijking (bijvoorbeeld {1} of {2}).
-1683#£{1} {2} kon niet door VBACAS worden gelezen en is als tekst ({3}) geschreven in het LaTeX-document.
+1683#£{1} {2} kon niet door WordMat+ CAS worden gelezen en is als tekst ({3}) geschreven in het LaTeX-document.
 1684#£De divergentie {1} vereist een vectorfunctie. De gradiënt van {2} wordt geschreven als {3}
 1685#£De rotatie (curl) {1} vereist een vectorfunctie met 2 of 3 coördinaten
 1686#£{1} vereist dat {2} evenveel coördinaten als variabelen heeft
@@ -1856,7 +1856,7 @@
 1855#£product
 1856#£WordMat+ maakt het mogelijk om wiskundige berekeningen in Word uit te voeren.\nWordMat is gemaakt door Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
 1857#£JavaScript-CAS gebruiken (sneller)
-1858#£Het CAS van WordMat+ wordt uitgevoerd door de JavaScript-engine QuickJS. Zonder het vinkje rekent VBACAS.
+1858#£Het CAS van WordMat+ wordt uitgevoerd door de JavaScript-engine QuickJS. Zonder het vinkje rekent WordMat+ CAS (VBA).
 1859#£Ingebouwd CAS: {1}
 1860#£JavaScript-engine: QuickJS, © Fabrice Bellard, Charlie Gordon e.a. (MIT-licentie)
 1861#£Toont grafieken, punten, vectoren en statistiek in het eigen grafiekprogramma van WordMat+. Vereist geen internet.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ geactiveerd met activeringscode tot en met {1}
 1886#£De licentie van WordMat+ is verlopen. WordMat+ kan nog steeds worden gebruikt, maar deze functies zijn niet actief:{1}Het eigen CAS van WordMat+. Er wordt gerekend met GeoGebra{1}WordMat+ grafiek. De grafieken worden in GeoGebra getoond{1}Formules invoegen uit de formuleverzameling{1}Sinusregressie
 1887#£Het eigen CAS van WordMat+ vereist een actieve licentie, en GeoGebra kon het niet berekenen.
+1888#£Schermtoetsenbord
+1889#£WordMat+ is eigendom van Eduap. © Eduap 2009-{1}. Alle rechten voorbehouden.
+1890#£Grafieken: JSXGraph, © Matthias Ehmann, Alfred Wassermann e.a. (MIT-licentie)
+1891#£WordMat+ maakt het mogelijk om wiskundige berekeningen in Word uit te voeren.\nWordMat+ is gemaakt door Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1892#£GeoGebra (grafieken en CAS) wordt gebruikt op grond van een licentie- en samenwerkingsovereenkomst tussen Eduap en GeoGebra GmbH, www.geogebra.org.
+1893#£Kleine tekst
+1894#£Middelgrote tekst
+1895#£Grote tekst

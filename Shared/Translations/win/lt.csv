@@ -1293,11 +1293,11 @@
 1292#£Lygtis neturejo sprendiniu apibrezimu aibeje {1}
 1293#£Lygtis neturejo sprendiniu {2} kintamiesiems {1}
 1294#£Po integralo israiskos {1}x rasykite (pvz., {2}x^2 {1}x)
-1295#£Lygtis turi struktura, kurios VBACAS dar negali apskaiciuoti: \n\n      {1}
+1295#£Lygtis turi struktura, kurios WordMat+ CAS dar negali apskaiciuoti: \n\n      {1}
 1296#£Parasykite suma, kur k=a zemiau ir b virs simbolio (pvz., k=1 ir n)
-1297#£Lygtyje yra akcentas, kurio VBACAS dar negali apskaiciuoti: \n\n      {1}
-1298#£Lygtyje yra struktura, kurios VBACAS dar negali apskaiciuoti (daugiaeile lygciu matrica): \n\n      {1}
-1299#£Lygtyje yra struktura, kurios VBACAS dar negali apskaiciuoti (pvz., sumavimas, integralas, riba, matrica ar akcentas): \n\n      {1}
+1297#£Lygtyje yra akcentas, kurio WordMat+ CAS dar negali apskaiciuoti: \n\n      {1}
+1298#£Lygtyje yra struktura, kurios WordMat+ CAS dar negali apskaiciuoti (daugiaeile lygciu matrica): \n\n      {1}
+1299#£Lygtyje yra struktura, kurios WordMat+ CAS dar negali apskaiciuoti (pvz., sumavimas, integralas, riba, matrica ar akcentas): \n\n      {1}
 1300#£Rasykite {1}x {1}y po israiskos dvigubame integrale (pvz., {2}x·y {1}x {1}y)
 1301#£Integralas turi tureti {1} diferencialus (pvz., {2}x {2}y)
 1302#£Lygtis, atrodo, apima:
@@ -1415,7 +1415,7 @@
 1414#£Fakultetas apibreziamas tik sveikiesiems skaiciams
 1415#£Fakultetas apibreziamas tik skaiciams >= 0
 1416#£Ju skaicius per didelis destytojams
-1417#£Skaicius per didelis - VBACAS negali skaiciuoti skaiciu virs 170 kaip desimtainiu skaiciu
+1417#£Skaicius per didelis - WordMat+ CAS negali skaiciuoti skaiciu virs 170 kaip desimtainiu skaiciu
 1418#£desolve turi tureti diferencialine lygti, pvz., desolve(y'=2y)
 1419#£Diferencialine lygtis turi buti lygtis, pvz., y'=2y
 1420#£Argumentas, {1} "desolve", nera suprantamas
@@ -1455,8 +1455,8 @@
 1454#£Pasirinkite lygtis, is kuriu pasalinsite kintamuosius.
 1455#£Pasirinkite bent dvi lygtis, kad pasalintumete kintamuosius (pvz., x=2t+1 ir y=t^2).
 1456#£Padekite zymekli i sprendziama diferencialine lygti.
-1457#£Nera aktyvios WordMat+ licencijos. \n\nWordMat+ vis dar galima naudoti, taciau sios funkcijos nera aktyvios: {1}WordMat+ CAS (VBACAS). Maxima arba GeoGe{1}bra grafai skaiciuojami WordMat GeoGebra lange. Jie rodomi narsykleje{1} Formuliu kolekcijos iterpimas{1}Sinusine regresija{1} Customize meniu\n\nSpustelekite OK, kad eitumete i www.wordmat.dk
-1458#£Nera aktyvios WordMat+ licencijos, todel WordMat+ CAS (VBACAS) negali buti naudojama, o nei Maxima, nei GeoGebra negali buti naudojami siame kompiuteryje. Pasirinkite viena is ju nustatymuose, idiekite WordMat su Maxima arba atnaujinkite licencija www.wordmat.dk.
+1457#£Nera aktyvios WordMat+ licencijos. \n\nWordMat+ vis dar galima naudoti, taciau sios funkcijos nera aktyvios: {1}WordMat+ CAS (WordMat+ CAS). Maxima arba GeoGe{1}bra grafai skaiciuojami WordMat GeoGebra lange. Jie rodomi narsykleje{1} Formuliu kolekcijos iterpimas{1}Sinusine regresija{1} Customize meniu\n\nSpustelekite OK, kad eitumete i www.wordmat.dk
+1458#£Nera aktyvios WordMat+ licencijos, todel WordMat+ CAS (WordMat+ CAS) negali buti naudojama, o nei Maxima, nei GeoGebra negali buti naudojami siame kompiuteryje. Pasirinkite viena is ju nustatymuose, idiekite WordMat su Maxima arba atnaujinkite licencija www.wordmat.dk.
 1459#£Maxima nera sios WordMat+ versijos dalis
 1460#£Lygtis jau yra sunumeruota.
 1461#£Numeruota lygtis negali buti iterpta i lentele.
@@ -1681,7 +1681,7 @@
 1680#£Reikia ivesti tiksliai 3 kampus/sonus, bet ne tik 3 kampus. \nTaigi: \n1 krastine + 2 kampai\n2 krastines + 1 kampas (galbut 2 sprendiniai)\n3 puslapiai
 1681#£Kur tiksliai pageidaujamas atsakymas. Gali paveikti skaiciavimo laika.
 1682#£LaTeX kodo nerasta. Pasirinkite koda arba padekite zymekli LaTeX lygtyje (pvz., {1} arba {2}).
-1683#£{1} {2} negalejo buti skaitoma VBACAS ir LaTeX dokumente rasoma kaip tekstas ({3}).
+1683#£{1} {2} negalejo buti skaitoma WordMat+ CAS ir LaTeX dokumente rasoma kaip tekstas ({3}).
 1684#£Divergencijai {1} reikia vektorines funkcijos. Funkcijos {2} gradientas rasomas {3}
 1685#£Rotoriui (curl) {1} reikia vektorines funkcijos su 2 arba 3 koordinatemis
 1686#£{1} reikalauja, kad {2} turetu tiek pat koordinaciu, kiek kintamuju
@@ -1856,7 +1856,7 @@
 1855#£sandauga
 1856#£WordMat+ leidzia atlikti matematinius skaiciavimus Word programoje.\nWordMat sukure Mikael Samsøe Sørensen, Nyborg gimnazija, EDUAP 2009-{1}.
 1857#£Naudoti JavaScript CAS (greitesnis)
-1858#£WordMat+ CAS vykdo JavaScript variklis QuickJS. Be varneles skaiciuoja VBACAS.
+1858#£WordMat+ CAS vykdo JavaScript variklis QuickJS. Be varneles skaiciuoja WordMat+ CAS (VBA).
 1859#£Integruotas CAS: {1}
 1860#£JavaScript variklis: QuickJS, © Fabrice Bellard, Charlie Gordon ir kt. (MIT licencija)
 1861#£Rodo grafikus, taskus, vektorius ir statistika pacios WordMat+ grafiku programoje. Interneto nereikia.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ aktyvintas aktyvinimo kodu iki {1} imtinai
 1886#£WordMat+ licencija baigesi. WordMat+ vis dar galima naudoti, bet sios funkcijos neaktyvios:{1}WordMat+ nuosava CAS. Skaiciuojama su GeoGebra{1}WordMat+ grafikas. Grafikai rodomi GeoGebra{1}Formuliu iterpimas is formuliu rinkinio{1}Sinusine regresija
 1887#£WordMat+ nuosavai CAS reikia aktyvios licencijos, o GeoGebra negalejo to apskaiciuoti.
+1888#£Ekrano klaviatura
+1889#£WordMat+ priklauso Eduap. © Eduap 2009-{1}. Visos teises saugomos.
+1890#£Grafikai: JSXGraph, © Matthias Ehmann, Alfred Wassermann ir kt. (MIT licencija)
+1891#£WordMat+ leidzia atlikti matematinius skaiciavimus Word programoje.\nWordMat+ sukure Mikael Samsøe Sørensen, Nyborg gimnazija, EDUAP 2009-{1}.
+1892#£GeoGebra (grafikai ir CAS) naudojama pagal Eduap ir GeoGebra GmbH licencijos ir bendradarbiavimo sutarti, www.geogebra.org.
+1893#£Mazas tekstas
+1894#£Vidutinis tekstas
+1895#£Didelis tekstas

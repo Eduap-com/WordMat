@@ -1293,11 +1293,11 @@
 1292#£Rovnice nemela zádná resení v mnozine definic {1}
 1293#£Rovnice neobsahovala resení {2} promenných {1}
 1294#£Za výrazem v integrálu (napr. {2}x^2 {1}x) zapisujeme {1}x)
-1295#£Rovnice obsahuje strukturu, kterou VBACAS zatím nedokáze vypocítat: \n\n      {1}
+1295#£Rovnice obsahuje strukturu, kterou WordMat+ CAS zatím nedokáze vypocítat: \n\n      {1}
 1296#£Zápis je tak, ze k=a je pod znakem a b nad znakem (napr. k=1 a n)
-1297#£Rovnice obsahuje prízvuk, který VBACAS zatím nedokáze vypocítat: \n\n      {1}
-1298#£Rovnice obsahuje strukturu, kterou VBACAS zatím nedokáze vypocítat (vícerádkové pole rovnic): \n\n      {1}
-1299#£Rovnice obsahuje strukturu, kterou VBACAS zatím nedokáze vypocítat (napr. soucet, integrál, limit, matice nebo akcent): \n\n      {1}
+1297#£Rovnice obsahuje prízvuk, který WordMat+ CAS zatím nedokáze vypocítat: \n\n      {1}
+1298#£Rovnice obsahuje strukturu, kterou WordMat+ CAS zatím nedokáze vypocítat (vícerádkové pole rovnic): \n\n      {1}
+1299#£Rovnice obsahuje strukturu, kterou WordMat+ CAS zatím nedokáze vypocítat (napr. soucet, integrál, limit, matice nebo akcent): \n\n      {1}
 1300#£Za výrazem v dvojnásobném integrálu (napr. {2}x·y {1}x {1}y) zapisujte {1}x {1}y)
 1301#£Integrál musí mít {1} diferenciálu (napr. {2}x {2}y)
 1302#£Rovnice se zdá zahrnovat:
@@ -1415,7 +1415,7 @@
 1414#£Fakulta je definována pouze pro celá císla
 1415#£Fakulta je definována pouze pro císla >= 0
 1416#£Pocet je prílis velký pro fakultu
-1417#£Císlo je prílis velké - VBACAS nemuze vypocítat schopnost císel nad 170 jako desetinná císla
+1417#£Císlo je prílis velké - WordMat+ CAS nemuze vypocítat schopnost císel nad 170 jako desetinná císla
 1418#£desolve musí mít diferenciální rovnici, napr. desolve(y'=2y)
 1419#£Diferenciální rovnice musí být rovnice, napr. y'=2y
 1420#£Argument {1} v rozpustení není pochopen
@@ -1455,8 +1455,8 @@
 1454#£Vyberte rovnice, ze kterých se promenné vylucují.
 1455#£Vyberte alespon dve rovnice pro odstranení promenných (napr. x=2t+1 a y=t^2).
 1456#£Umístete kurzor do diferenciální rovnice, kterou máme resit.
-1457#£Neexistuje aktivní licence WordMat+. \n\nWordMat+ lze stále pouzívat, ale tyto funkce nejsou aktivní: {1}WordMat+ vlastní CAS (VBACAS). Maxima nebo GeoGe{1}bra grafy se pocítají v okne WordMat GeoGebra. Zobrazují se v prohlízeci{1} Vkládání vzorcu z kolekce vzorcu{1}Sinusová regrese{1}Customize menu\n\nKliknete na OK pro prechod na www.wordmat.dk
-1458#£Neexistuje aktivní licence WordMat+, takze nelze pouzít vlastní CAS (VBACAS) WordMat+ a ani Maxima, ani GeoGebra nelze na tomto pocítaci pouzít. Vyberte si jednu z nich v Nastavení, nainstalujte WordMat s Maximou nebo obnovte licenci na www.wordmat.dk.
+1457#£Neexistuje aktivní licence WordMat+. \n\nWordMat+ lze stále pouzívat, ale tyto funkce nejsou aktivní: {1}WordMat+ vlastní CAS (WordMat+ CAS). Maxima nebo GeoGe{1}bra grafy se pocítají v okne WordMat GeoGebra. Zobrazují se v prohlízeci{1} Vkládání vzorcu z kolekce vzorcu{1}Sinusová regrese{1}Customize menu\n\nKliknete na OK pro prechod na www.wordmat.dk
+1458#£Neexistuje aktivní licence WordMat+, takze nelze pouzít vlastní CAS (WordMat+ CAS) WordMat+ a ani Maxima, ani GeoGebra nelze na tomto pocítaci pouzít. Vyberte si jednu z nich v Nastavení, nainstalujte WordMat s Maximou nebo obnovte licenci na www.wordmat.dk.
 1459#£Maxima není soucástí této verze WordMat+
 1460#£Rovnice je uz ocíslovaná.
 1461#£Císlovaná rovnice nemuze být vlozena do tabulky.
@@ -1681,7 +1681,7 @@
 1680#£Musíte zadat presne 3 úhly/strany, ale ne jen 3. \nTakze: \n1 strana + 2 úhly\n2 strany + 1 úhel (mozná 2 resení)\n3 stránky
 1681#£Kde presne je odpoved zádoucí. Muze ovlivnit cas výpoctu.
 1682#£Zádný LaTeX kód nebyl nalezen. Vyberte kód nebo vlozte kurzor do LaTeX rovnice (napr. {1} nebo {2}).
-1683#£{1} {2} nebylo mozné precíst pomocí VBACAS a je zapsáno jako text ({3}) v dokumentu LaTeX.
+1683#£{1} {2} nebylo mozné precíst pomocí WordMat+ CAS a je zapsáno jako text ({3}) v dokumentu LaTeX.
 1684#£Divergence {1} vyzaduje vektorovou funkci. Gradient {2} se zapisuje {3}
 1685#£Rotace (curl) {1} vyzaduje vektorovou funkci se 2 nebo 3 souradnicemi
 1686#£{1} vyzaduje, aby {2} mela stejne souradnic jako promenných
@@ -1856,7 +1856,7 @@
 1855#£soucin
 1856#£WordMat+ umoznuje provádet matematické výpocty ve Wordu.\nWordMat vyrábí Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
 1857#£Pouzít JavaScriptový CAS (rychlejsí)
-1858#£CAS programu WordMat+ bezí v JavaScriptovém jádru QuickJS. Bez zaskrtnutí pocítá VBACAS.
+1858#£CAS programu WordMat+ bezí v JavaScriptovém jádru QuickJS. Bez zaskrtnutí pocítá WordMat+ CAS (VBA).
 1859#£Vestavený CAS: {1}
 1860#£JavaScriptové jádro: QuickJS, © Fabrice Bellard, Charlie Gordon a dalsí (licence MIT)
 1861#£Zobrazí grafy, body, vektory a statistiku ve vlastním grafickém programu WordMat+. Nevyzaduje internet.
@@ -1886,3 +1886,11 @@
 1885#£WordMat+ aktivován aktivacním kódem do {1} vcetne
 1886#£Licence WordMat+ vyprsela. WordMat+ lze stále pouzívat, ale tyto funkce nejsou aktivní:{1}Vlastní CAS WordMat+. Pocítá se v GeoGebre{1}WordMat+ graf. Grafy se zobrazují v GeoGebre{1}Vkládání vzorcu ze sbírky vzorcu{1}Sinusová regrese
 1887#£Vlastní CAS WordMat+ vyzaduje aktivní licenci a GeoGebra to nedokázala spocítat.
+1888#£Klávesnice na obrazovce
+1889#£WordMat+ patrí spolecnosti Eduap. © Eduap 2009-{1}. Vsechna práva vyhrazena.
+1890#£Grafy: JSXGraph, © Matthias Ehmann, Alfred Wassermann a dalsí (licence MIT)
+1891#£WordMat+ umoznuje provádet matematické výpocty ve Wordu.\nWordMat+ vytvárí Mikael Samsøe Sørensen, Nyborg Gymnasium, EDUAP 2009-{1}.
+1892#£GeoGebra (grafy a CAS) se pouzívá na základe licencní smlouvy a smlouvy o spolupráci mezi Eduap a GeoGebra GmbH, www.geogebra.org.
+1893#£Malé písmo
+1894#£Strední písmo
+1895#£Velké písmo
