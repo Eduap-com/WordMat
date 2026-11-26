@@ -26,7 +26,9 @@ WMFolder=${MacFolder%/*}
 # Copy WordMat.dotm from Windows to Mac
 cp $WMFolder/Windows/WordMat.dotm $WMFolder/Mac
 cp $WMFolder/Windows/WordMatP.dotm $WMFolder/Mac
-cp $WMFolder/Windows/WordMatP2.dotm $WMFolder/Mac
+# WordMatP2.dotm is not copied: the Windows version has no Mac code. Mac/WordMatP2.dotm is the Mac version
+# (WordMatP: CleanProtectCopyWordMatP2.bat copies it there)
+#cp $WMFolder/Windows/WordMatP2.dotm $WMFolder/Mac
 
 #cp Windows/WordMat.dotm /Library/Application Support/Microsoft/Office365/User Content.localized/Startup.localized/Word/WordMat.dotm
 #sudo cp $MacFolder/Windows/WordMatP.dotm /Library/Application\ Support/Microsoft/Office365/User\ Content.localized/Startup.localized/Word

@@ -205,6 +205,12 @@ public interface IMaximaConn
     // The caller gives no address and no file name: WordMat's installer is downloaded from WordMat's release page
     // (UpdateUrl) to the user's Downloads folder as WordMatU.exe, and it is only kept, and only started, when it has
     // a valid digital signature of UpdateSigner. The download runs on its own thread, so Word can show its progress:
+    // Since 2026-11-12 there is one installer for both ways of installing (WordMat-InnoScript-Plus.iss): it is always
+    // WordMat.exe (WordMatb.exe for beta) that is downloaded from the release page, never the NonAdmin installer
+    // WordMatNA.exe. WordMat.exe on the release page is the installer WordMatP.exe, renamed. nonAdmin
+    // (WordMat is installed for only this user, without administrator rights) is now a parameter to the installer:
+    // /CURRENTUSER, so it installs for this user without asking for an administrator. Without it the installer uses
+    // the way of the installation that is there, and for all users when there is none.
     //   UpdateDownloadStart(beta, nonAdmin)   0 = started, -4 = a download is already running
     //   UpdateDownloadProgress()              0-99 = percent downloaded, 100 = downloaded and its signature is valid,
     //                                         -1 = could not be downloaded, -2 = no valid signature of UpdateSigner (the
@@ -222,13 +228,27 @@ public interface IMaximaConn
     private volatile bool updateCancel;
     private string updateFile;                   // the downloaded installer, when updateState is 100
     private Thread updateThread;
+    private bool updateNonAdmin;                 // the installation is for only this user: UpdateInstall's parameter
+
+    // The installer's file name on the release page: the same for both ways of installing. WordMat.exe is the
+    // installer WordMatP.exe, renamed; WordMatb.exe is the beta version (Opdater beta)
+    private static string UpdateFileName(bool beta)
+    {
+        return "WordMat" + (beta ? "b" : "") + ".exe";
+    }
+
+    // The installer's parameters: silent, and for only this user when WordMat is installed that way
+    private static string UpdateArguments(bool nonAdmin)
+    {
+        return (nonAdmin ? "/CURRENTUSER " : "") + "/SILENT /SUPPRESSMSGBOXES";
+    }
 
     public int UpdateDownloadStart(bool beta, bool nonAdmin)
     {
         if (updateThread != null && updateThread.IsAlive) return -4;
-        string name = (nonAdmin ? "WordMatNA" : "WordMat") + (beta ? "b" : "") + ".exe";
-        string url = UpdateUrl + name;
+        string url = UpdateUrl + UpdateFileName(beta);
         string file = Path.Combine(UpdateDownloadsFolder(), "WordMatU.exe");
+        updateNonAdmin = nonAdmin;
         updateFile = null;
         updateCancel = false;
         updateState = 0;
@@ -258,7 +278,7 @@ public interface IMaximaConn
             Process.Start(new ProcessStartInfo
             {
                 FileName = file,
-                Arguments = "/SILENT /SUPPRESSMSGBOXES",
+                Arguments = UpdateArguments(updateNonAdmin),
                 UseShellExecute = true // the installer may ask for administrator rights
             });
             return 0;
